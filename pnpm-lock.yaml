@@ -215,6 +215,9 @@ importers:
       shiki-transformer-color-highlight:
         specifier: ^0.2.0
         version: 0.2.0
+      superstruct:
+        specifier: ^2.0.2
+        version: 2.0.2
       ufo:
         specifier: ^1.5.4
         version: 1.5.4

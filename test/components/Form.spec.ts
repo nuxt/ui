@@ -28,11 +28,6 @@ describe('Form', () => {
     expect(html).toMatchSnapshot()
   })
 
-  const PasswordMinLength = refine(string(), 'Password', (value) => {
-    if (value.length >= 8) return true
-    return 'Must be at least 8 characters'
-  })
-
   it.each([
     ['zod', {
       schema: z.object({
@@ -74,7 +69,10 @@ describe('Form', () => {
     ['superstruct', {
       schema: object({
         email: nonempty(string()),
-        password: PasswordMinLength
+        password: refine(string(), 'Password', (value) => {
+          if (value.length >= 8) return true
+          return 'Must be at least 8 characters'
+        })
       })
     }],
     ['custom', {

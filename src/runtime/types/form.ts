@@ -5,7 +5,7 @@ import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
 import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
 import type { GetObjectField } from './utils'
-import type { Struct } from 'superstruct'
+import type { Struct as SuperstructSchema } from 'superstruct'
 
 export interface Form<T> {
   validate (opts?: { name: string | string[], silent?: false, nested?: boolean }): Promise<T | false>
@@ -25,7 +25,7 @@ export type FormSchema<T extends Record<string, any>> =
   | ValibotSafeParser<any, any>
   | ValibotSafeParserAsync<any, any>
   | JoiSchema<T>
-  | Struct<any, any>
+  | SuperstructSchema<any, any>
   | StandardSchema
 
 export type FormInputEvents = 'input' | 'blur' | 'change'

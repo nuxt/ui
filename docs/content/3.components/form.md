@@ -57,8 +57,8 @@ It requires two props:
 
   ::component-example{label="Superstruct"}
   ---
-  component: 'form-example-superstruct'
-  componentProps:
+  name: 'form-example-superstruct'
+  props:
     class: 'w-60'
   ---
   ::
