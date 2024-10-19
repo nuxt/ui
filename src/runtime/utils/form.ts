@@ -3,6 +3,7 @@ import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
 import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
+import type { Struct } from 'superstruct'
 import type { FormError } from '../types/form'
 
 export function isYupSchema(schema: any): schema is YupObjectSchema<any> {
@@ -27,6 +28,15 @@ export async function getYupErrors(state: any, schema: YupObjectSchema<any>): Pr
       throw error
     }
   }
+}
+
+export function isSuperStructSchema(schema: any): schema is Struct<any, any> {
+  return (
+    'schema' in schema
+    && typeof schema.coercer === 'function'
+    && typeof schema.validator === 'function'
+    && typeof schema.refiner === 'function'
+  )
 }
 
 export function isZodSchema(schema: any): schema is ZodSchema {
@@ -97,4 +107,16 @@ export async function getStandardErrors(
     name: issue.path?.map(item => typeof item === 'object' ? item.key : item).join('.') || '',
     message: issue.message
   })) || []
+}
+
+export async function getSuperStructErrors(state: any, schema: Struct<any, any>): Promise<FormError[]> {
+  const [err] = schema.validate(state)
+  if (err) {
+    const errors = err.failures()
+    return errors.map(error => ({
+      message: error.message,
+      name: error.path.join('.')
+    }))
+  }
+  return []
 }
