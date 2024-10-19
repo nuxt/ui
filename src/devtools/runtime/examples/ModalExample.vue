@@ -2,7 +2,7 @@
   <UModal>
     <UButton label="Open Modal" />
     <template #content>
-      <Placeholder class="h-72 w-full" />
+      <div class="h-72" />
     </template>
   </UModal>
 </template>

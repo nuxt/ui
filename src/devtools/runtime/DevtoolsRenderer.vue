@@ -6,7 +6,7 @@ import { useColorMode, useRoute } from '#imports'
 const route = useRoute()
 const component = route.query?.example
   ? defineAsyncComponent(() => import(`./examples/${route.query.example}.vue`))
-  : route.params?.slug && defineAsyncComponent(() => import(`../runtime/components/${pascalCase(route.params.slug as string)}.vue`))
+  : route.params?.slug && defineAsyncComponent(() => import(`../../runtime/components/${pascalCase(route.params.slug as string)}.vue`))
 
 const state = reactive<{ slots?: any, props?: any }>({})
 

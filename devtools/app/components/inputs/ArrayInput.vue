@@ -40,15 +40,14 @@ function addArrayItem() {
 
 <template>
   <div>
-    <div v-for="value, index in modelValue" :key="index" class="relative border border-[var(--ui-border)] rounded-md mt-4">
+    <div v-for="value, index in modelValue" :key="index" class="relative">
       <ComponentPropInput
         :model-value="value"
         :meta="{ schema: itemSchema }"
-        class="border-b last:border-b-0 border-[var(--ui-border)]"
       />
 
       <UPopover>
-        <UButton variant="ghost" color="neutral" icon="i-heroicons-ellipsis-vertical" class="absolute top-1 right-1" />
+        <UButton variant="ghost" color="neutral" icon="i-heroicons-ellipsis-vertical" class="absolute top-4 right-1" />
         <template #content>
           <UButton
             variant="ghost"

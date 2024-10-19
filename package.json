@@ -40,7 +40,7 @@
     "docs:prepare": "nuxt-component-meta docs",
     "docs:typecheck": "nuxi typecheck docs",
     "devtools": "NUXT_UI_DEVTOOLS_LOCAL=true nuxi dev playground",
-    "devtools:build": "nuxi generate devtools && cp -r src/devtools dist/devtools",
+    "devtools:build": "nuxi generate devtools",
     "devtools:prepare": "nuxt-component-meta playground --outputDir ../src/devtools/.component-meta/",
     "devtools:typecheck": "nuxi typecheck devtools",
     "lint": "eslint .",

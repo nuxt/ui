@@ -16,11 +16,12 @@ const code = computed(() => {
   if (!props.component) return
 
   const propsTemplate = Object.entries(props.props ?? {})?.map(([key, value]: [string, any]) => {
+    const defaultValue: any = props.component?.meta?.props.find(prop => prop.name === key)?.default
+    if (defaultValue === value) return
     if (value === true) return kebabCase(key)
-    if (value === false) return
+    if (value === false && defaultValue === true) return `:${kebabCase(key)}="false"`
     if (!value) return
     if (props.component?.defaultVariants?.[key] === value) return
-    if (props.component?.meta?.props.find(prop => prop.name === key && prop.default === value)) return
     if (typeof value === 'number') return `:${kebabCase(key)}="${value}"`
     if (Array.isArray(value)) return value.length ? `:${kebabCase(key)}="${genArrayFromRaw(value, undefined, { preserveTypes: true })}"` : undefined
     if (typeof value === 'object') return `:${kebabCase(key)}="${genObjectFromValues(value)}"`

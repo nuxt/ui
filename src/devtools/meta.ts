@@ -57,7 +57,7 @@ export function devtoolsMetaPlugin({ resolve }: { resolve: Resolver['resolve'] }
       server.middlewares.use('/__nuxt_ui__/devtools/api/component-meta', async (_req, res) => {
         res.setHeader('Content-Type', 'application/json')
         try {
-          const componentMeta = await import(resolve('./devtools/.component-meta/component-meta.mjs'))
+          const componentMeta = await import('./.component-meta/component-meta')
           const meta = defu(
             Object.entries(componentMeta.default).reduce((acc, [key, value]: [string, any]) => {
               if (!key.startsWith('U')) return acc

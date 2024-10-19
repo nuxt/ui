@@ -2,9 +2,16 @@ import module from '../src/module'
 import { resolve } from 'node:path'
 
 export default defineNuxtConfig({
-  ssr: false,
+  compatibilityDate: '2024-04-03',
+  future: {
+    compatibilityVersion: 4
+  },
 
   devtools: { enabled: false },
+
+  ssr: false,
+
+  modules: [module, '@nuxtjs/mdc', '@nuxt/test-utils/module'],
 
   nitro: {
     hooks: {
@@ -17,14 +24,8 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: [module, '@nuxtjs/mdc', '@nuxt/test-utils/module'],
-
   app: {
     baseURL: '/__nuxt_ui__/devtools'
-  },
-
-  future: {
-    compatibilityVersion: 4
   },
 
   vite: {
@@ -35,12 +36,10 @@ export default defineNuxtConfig({
     }
   },
 
-  compatibilityDate: '2024-04-03',
-
   mdc: {
     highlight: {
       theme: {
-        light: 'material-theme-lighter',
+        light: 'material-theme',
         default: 'material-theme',
         dark: 'material-theme-palenight'
       }

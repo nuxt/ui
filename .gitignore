@@ -1,4 +1,5 @@
-src/devtools/.component-meta/
+.component-meta/
+component-meta.*
 
 # Nuxt dev/build outputs
 .output

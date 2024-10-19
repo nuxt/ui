@@ -7,7 +7,7 @@ import sirv from 'sirv'
 import { setupDevtoolsClient } from './devtools/rpc'
 import { getPort } from 'get-port-please'
 import { pick } from './runtime/utils'
-import { devtoolsMetaPlugin } from './devtools/devtoolsMetaPlugin'
+import { devtoolsMetaPlugin } from './devtools/meta'
 
 export type * from './runtime/types'
 
@@ -187,7 +187,7 @@ export default defineNuxtModule<ModuleOptions>({
         pages.unshift({
           name: 'ui-devtools',
           path: '/__nuxt_ui__/components/:slug',
-          file: resolve('./devtools/DevtoolsRenderer.vue')
+          file: resolve('./devtools/runtime/DevtoolsRenderer.vue')
           // https://github.com/nuxt/nuxt/pull/29366
           // meta: {
           //   isolate: true
