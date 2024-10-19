@@ -7,7 +7,7 @@
         :variant="open ? 'soft' : 'ghost'"
         square
         aria-label="Color picker"
-        :ui="{ leadingIcon: 'text-[--ui-primary]' }"
+        :ui="{ leadingIcon: 'text-[var(--ui-primary)]' }"
       />
     </template>
 
@@ -24,7 +24,7 @@
             :label="color"
             :chip="color"
             :selected="primary === color"
-            @select="primary = color"
+            @click="primary = color"
           />
         </div>
       </fieldset>
@@ -41,7 +41,7 @@
             :label="color"
             :chip="color"
             :selected="neutral === color"
-            @select="neutral = color"
+            @click="neutral = color"
           />
         </div>
       </fieldset>
@@ -58,7 +58,7 @@
             :label="String(r)"
             class="justify-center px-0"
             :selected="radius === r"
-            @select="radius = r"
+            @click="radius = r"
           />
         </div>
       </fieldset>
@@ -74,7 +74,7 @@
             :key="m.label"
             v-bind="m"
             :selected="mode === m.label"
-            @select="mode = m.label"
+            @click="mode = m.label"
           />
         </div>
       </fieldset>

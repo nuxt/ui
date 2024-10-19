@@ -3,9 +3,29 @@ import { upperFirst, camelCase } from 'scule'
 import type { ComponentMeta } from 'vue-component-meta'
 import * as theme from '#build/ui'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   ignore?: string[]
-}>()
+}>(), {
+  ignore: () => [
+    'activeClass',
+    'inactiveClass',
+    'exactActiveClass',
+    'ariaCurrentValue',
+    'href',
+    'rel',
+    'noRel',
+    'prefetch',
+    'prefetchOn',
+    'noPrefetch',
+    'prefetchedClass',
+    'replace',
+    'exact',
+    'exactQuery',
+    'exactHash',
+    'external',
+    'onClick'
+  ]
+})
 
 const route = useRoute()
 
@@ -77,7 +97,7 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
         <ProseTd>
           <HighlightInlineType v-if="prop.type" :type="prop.type" />
 
-          <MDC v-if="prop.description" :value="prop.description" class="text-[--ui-text-toned] mt-1" />
+          <MDC v-if="prop.description" :value="prop.description" class="text-[var(--ui-text-toned)] mt-1" />
 
           <ComponentPropsSchema v-if="prop.schema" :prop="prop" :ignore="ignore" />
         </ProseTd>

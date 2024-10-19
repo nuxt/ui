@@ -7,6 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
+    leadingAvatarSize: '',
     trailingIcon: 'shrink-0'
   },
   variants: {
@@ -27,32 +28,38 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         base: 'px-2 py-1 text-xs gap-1',
         leadingIcon: 'size-4',
+        leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       sm: {
         base: 'px-2.5 py-1.5 text-xs gap-1.5',
         leadingIcon: 'size-4',
+        leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       md: {
         base: 'px-2.5 py-1.5 text-sm gap-1.5',
         leadingIcon: 'size-5',
+        leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       lg: {
         base: 'px-3 py-2 text-sm gap-2',
         leadingIcon: 'size-5',
+        leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       xl: {
         base: 'px-3 py-2 text-base gap-2',
         leadingIcon: 'size-6',
+        leadingAvatarSize: 'xs',
         trailingIcon: 'size-6'
       }
     },
     block: {
       true: {
         base: 'w-full justify-center',
+        leadingAvatarSize: 'xs',
         trailingIcon: 'ms-auto'
       }
     },
@@ -72,51 +79,51 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `text-[--ui-bg] bg-[--ui-${color}] hover:bg-[--ui-${color}]/75 disabled:bg-[--ui-${color}] aria-disabled:bg-[--ui-${color}] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-${color}]`
+    class: `text-[var(--ui-bg)] bg-[var(--ui-${color})] hover:bg-[var(--ui-${color})]/75 disabled:bg-[var(--ui-${color})] aria-disabled:bg-[var(--ui-${color})] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-${color})]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
-    class: `ring ring-inset ring-[--ui-${color}]/50 text-[--ui-${color}] hover:bg-[--ui-${color}]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-[--ui-${color}]`
+    class: `ring ring-inset ring-[var(--ui-${color})]/50 text-[var(--ui-${color})] hover:bg-[var(--ui-${color})]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-[var(--ui-${color})]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
-    class: `text-[--ui-${color}] bg-[--ui-${color}]/10 hover:bg-[--ui-${color}]/15 focus-visible:bg-[--ui-${color}]/15 disabled:bg-[--ui-${color}]/10 aria-disabled:bg-[--ui-${color}]/10`
+    class: `text-[var(--ui-${color})] bg-[var(--ui-${color})]/10 hover:bg-[var(--ui-${color})]/15 focus-visible:bg-[var(--ui-${color})]/15 disabled:bg-[var(--ui-${color})]/10 aria-disabled:bg-[var(--ui-${color})]/10`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
-    class: `text-[--ui-${color}] ring ring-inset ring-[--ui-${color}]/25 bg-[--ui-${color}]/10 hover:bg-[--ui-${color}]/15 disabled:bg-[--ui-${color}]/10 aria-disabled:bg-[--ui-${color}]/10 focus-visible:ring-2 focus-visible:ring-[--ui-${color}]`
+    class: `text-[var(--ui-${color})] ring ring-inset ring-[var(--ui-${color})]/25 bg-[var(--ui-${color})]/10 hover:bg-[var(--ui-${color})]/15 disabled:bg-[var(--ui-${color})]/10 aria-disabled:bg-[var(--ui-${color})]/10 focus-visible:ring-2 focus-visible:ring-[var(--ui-${color})]`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'ghost',
-    class: `text-[--ui-${color}] hover:bg-[--ui-${color}]/10 focus-visible:bg-[--ui-${color}]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`
+    class: `text-[var(--ui-${color})] hover:bg-[var(--ui-${color})]/10 focus-visible:bg-[var(--ui-${color})]/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
-    class: `text-[--ui-${color}] hover:text-[--ui-${color}] disabled:text-[--ui-${color}] aria-disabled:text-[--ui-${color}] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[--ui-${color}]`
+    class: `text-[var(--ui-${color})] hover:text-[var(--ui-${color})]/75 disabled:text-[var(--ui-${color})] aria-disabled:text-[var(--ui-${color})] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-${color})]`
   })), {
     color: 'neutral',
     variant: 'solid',
-    class: 'text-[--ui-bg] bg-[--ui-bg-inverted] hover:bg-[--ui-bg-inverted]/80 disabled:bg-[--ui-bg-inverted] aria-disabled:bg-[--ui-bg-inverted] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[--ui-border-inverted]'
+    class: 'text-[var(--ui-bg)] bg-[var(--ui-bg-inverted)] hover:bg-[var(--ui-bg-inverted)]/80 disabled:bg-[var(--ui-bg-inverted)] aria-disabled:bg-[var(--ui-bg-inverted)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-border-inverted)]'
   }, {
     color: 'neutral',
     variant: 'outline',
-    class: 'ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg] hover:bg-[--ui-bg-elevated] disabled:bg-[--ui-bg] aria-disabled:bg-[--ui-bg] focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]'
+    class: 'ring ring-inset ring-[var(--ui-border-accented)] text-[var(--ui-text)] bg-[var(--ui-bg)] hover:bg-[var(--ui-bg-elevated)] disabled:bg-[var(--ui-bg)] aria-disabled:bg-[var(--ui-bg)] focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)]'
   }, {
     color: 'neutral',
     variant: 'soft',
-    class: 'text-[--ui-text] bg-[--ui-bg-elevated] hover:bg-[--ui-bg-accented]/75 focus-visible:bg-[--ui-bg-accented]/75 disabled:bg-[--ui-bg-elevated] aria-disabled:bg-[--ui-bg-elevated]'
+    class: 'text-[var(--ui-text)] bg-[var(--ui-bg-elevated)] hover:bg-[var(--ui-bg-accented)]/75 focus-visible:bg-[var(--ui-bg-accented)]/75 disabled:bg-[var(--ui-bg-elevated)] aria-disabled:bg-[var(--ui-bg-elevated)]'
   }, {
     color: 'neutral',
     variant: 'subtle',
-    class: 'ring ring-inset ring-[--ui-border-accented] text-[--ui-text] bg-[--ui-bg-elevated] hover:bg-[--ui-bg-accented]/75 disabled:bg-[--ui-bg-elevated] aria-disabled:bg-[--ui-bg-elevated] focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]'
+    class: 'ring ring-inset ring-[var(--ui-border-accented)] text-[var(--ui-text)] bg-[var(--ui-bg-elevated)] hover:bg-[var(--ui-bg-accented)]/75 disabled:bg-[var(--ui-bg-elevated)] aria-disabled:bg-[var(--ui-bg-elevated)] focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)]'
   }, {
     color: 'neutral',
     variant: 'ghost',
-    class: 'text-[--ui-text] hover:bg-[--ui-bg-elevated] focus-visible:bg-[--ui-bg-elevated] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent'
+    class: 'text-[var(--ui-text)] hover:bg-[var(--ui-bg-elevated)] focus-visible:bg-[var(--ui-bg-elevated)] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent'
   }, {
     color: 'neutral',
     variant: 'link',
-    class: 'text-[--ui-text-muted] hover:text-[--ui-text] disabled:text-[--ui-text-muted] aria-disabled:text-[--ui-text-muted] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[--ui-border-inverted]'
+    class: 'text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)]'
   }, {
     size: 'xs',
     square: true,

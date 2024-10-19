@@ -1,6 +1,8 @@
 ---
 title: CommandPalette
-description: A command palette to search and execute commands with full-text search.
+description: A command palette with full-text search powered by [Fuse.js](https://fusejs.io/) for efficient fuzzy matching.
+seo:
+  description: A command palette with full-text search powered by Fuse.js for efficient fuzzy matching.
 links:
   - label: Combobox
     icon: i-custom-radix-vue
@@ -12,11 +14,15 @@ links:
 
 ## Usage
 
-The CommandPalette component leverages [Fuse.js](https://fusejs.io/) to provide robust and efficient fuzzy search functionality.
+Use the `v-model` directive to control the value of the CommandPalette or the `default-value` prop to set the initial value when you do not need to control its state.
+
+::tip{to="#control-selected-items"}
+You can also use the `@update:model-value` event to listen to the selected item(s).
+::
 
 ### Groups
 
-When searching for a command, the groups are filtered and the matching commands are presented in order of relevance. Use the `groups` prop as an array of objects with the following properties:
+The CommandPalette component filters groups and ranks matching commands by relevance as users type. It provides dynamic, instant search results for efficient command discovery. Use the `groups` prop as an array of objects with the following properties:
 
 - `id: string`{lang="ts-type"}
 - `label?: string`{lang="ts-type"}
@@ -35,62 +41,121 @@ Each group takes some `items` as an array of objects with the following properti
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `chip?: ChipProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
+- `loading?: boolean`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `select?(e?: Event): void`{lang="ts-type"}
+- `onSelect?(e?: Event): void`{lang="ts-type"}
 
 ::component-code
 ---
 collapse: true
 ignore:
   - groups
+  - modelValue
   - class
 external:
   - groups
+  - modelValue
 class: '!p-0'
 props:
+  modelValue: {}
   groups:
-    - id: 'suggestions'
-      label: 'Suggestions'
+    - id: 'users'
+      label: 'Users'
       items:
-        - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
-        - label: 'Music'
-          icon: 'i-heroicons-musical-note'
-        - label: 'Maps'
-          icon: 'i-heroicons-map'
-    - id: 'actions'
-      items:
-        - label: 'Add new file'
-          suffix: 'Create a new file in the current directory or workspace.'
-          icon: 'i-heroicons-document-plus'
-          kbds:
-            - meta
-            - N
-        - label: 'Add new folder'
-          suffix: 'Create a new folder in the current directory or workspace.'
-          icon: 'i-heroicons-folder-plus'
-          kbds:
-            - meta
-            - F
-        - label: 'Add hashtag'
-          suffix: 'Add a hashtag to the current item.'
-          icon: 'i-heroicons-hashtag'
-          kbds:
-            - meta
-            - H
-        - label: 'Add label'
-          suffix: 'Add a label to the current item.'
-          icon: 'i-heroicons-tag'
-          kbds:
-            - meta
-            - L
-  class: 'flex-1 max-h-80'
+        - label: 'Benjamin Canac'
+          suffix: 'benjamincanac'
+          avatar:
+            src: 'https://github.com/benjamincanac.png'
+        - label: 'Sylvain Marroufin'
+          suffix: 'smarroufin'
+          avatar:
+            src: 'https://github.com/smarroufin.png'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
+          avatar:
+            src: 'https://github.com/atinux.png'
+        - label: 'Romain Hamel'
+          suffix: 'romhml'
+          avatar:
+            src: 'https://github.com/romhml.png'
+        - label: 'Haytham A. Salama'
+          suffix: 'Haythamasalama'
+          avatar:
+            src: 'https://github.com/Haythamasalama.png'
+        - label: 'Daniel Roe'
+          suffix: 'danielroe'
+          avatar:
+            src: 'https://github.com/danielroe.png'
+        - label: 'Neil Richter'
+          suffix: 'noook'
+          avatar:
+            src: 'https://github.com/noook.png'
+  class: 'flex-1'
 ---
 ::
 
 ::caution
 You must provide an `id` for each group otherwise the group will be ignored.
+::
+
+### Multiple
+
+Use the `multiple` prop to allow multiple selections.
+
+::component-code
+---
+collapse: true
+ignore:
+  - groups
+  - modelValue
+  - multiple
+  - class
+external:
+  - groups
+  - modelValue
+class: '!p-0'
+props:
+  multiple: true
+  modelValue: []
+  groups:
+    - id: 'users'
+      label: 'Users'
+      items:
+        - label: 'Benjamin Canac'
+          suffix: 'benjamincanac'
+          avatar:
+            src: 'https://github.com/benjamincanac.png'
+        - label: 'Sylvain Marroufin'
+          suffix: 'smarroufin'
+          avatar:
+            src: 'https://github.com/smarroufin.png'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
+          avatar:
+            src: 'https://github.com/atinux.png'
+        - label: 'Romain Hamel'
+          suffix: 'romhml'
+          avatar:
+            src: 'https://github.com/romhml.png'
+        - label: 'Haytham A. Salama'
+          suffix: 'Haythamasalama'
+          avatar:
+            src: 'https://github.com/Haythamasalama.png'
+        - label: 'Daniel Roe'
+          suffix: 'danielroe'
+          avatar:
+            src: 'https://github.com/danielroe.png'
+        - label: 'Neil Richter'
+          suffix: 'noook'
+          avatar:
+            src: 'https://github.com/noook.png'
+  class: 'flex-1'
+---
+::
+
+::caution
+Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::
 
 ### Placeholder
@@ -345,32 +410,18 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.clo
 
 ### Control selected item(s)
 
-You can control the selected item by using the `default-value` prop or the `v-model` directive.
+You can control the selected item by using the `default-value` prop or the `v-model` directive, by using the `select` field on each item or by using the `@update:model-value` event.
 
 ::component-example
 ---
 collapse: true
-name: 'command-palette-model-value-example'
+name: 'command-palette-select-example'
 class: '!p-0'
 ---
 ::
 
-::tip
-You can also use the `select` field on each item and/or the `@update:model-value` event.
-::
-
-Use the `multiple` prop to allow multiple selections.
-
-::component-example
----
-collapse: true
-name: 'command-palette-model-value-multiple-example'
-class: '!p-0'
----
-::
-
-::caution
-Ensure to pass an array to the `default-value` prop or the `v-model` directive.
+::note
+This example demonstrates how to use the `@update:model-value` event to handle different selection scenarios.
 ::
 
 ### Control search term
@@ -383,6 +434,10 @@ collapse: true
 name: 'command-palette-search-term-example'
 class: '!p-0'
 ---
+::
+
+::note
+This example uses the `@update:model-value` event to reset the search term when an item is selected.
 ::
 
 ### With fetched items
@@ -459,7 +514,7 @@ class: '!p-0'
 ---
 ::
 
-### Within a popover
+### Within a Popover
 
 You can use the CommandPalette component inside a [Popover](/components/popover)'s content.
 
@@ -470,7 +525,7 @@ name: 'popover-command-palette-example'
 ---
 ::
 
-### Within a modal
+### Within a Modal
 
 You can use the CommandPalette component inside a [Modal](/components/modal)'s content.
 
@@ -481,7 +536,7 @@ name: 'modal-command-palette-example'
 ---
 ::
 
-### Within a drawer
+### Within a Drawer
 
 You can use the CommandPalette component inside a [Drawer](/components/drawer)'s content.
 
@@ -538,32 +593,7 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 
 ### Props
 
-::component-props
----
-ignore:
-  - as
-  - to
-  - target
-  - active
-  - activeClass
-  - inactiveClass
-  - exactActiveClass
-  - ariaCurrentValue
-  - href
-  - rel
-  - noRel
-  - prefetch
-  - prefetchOn
-  - noPrefetch
-  - prefetchedClass
-  - replace
-  - exact
-  - exactQuery
-  - exactHash
-  - external
-  - onClick
----
-::
+:component-props
 
 ### Slots
 

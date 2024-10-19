@@ -14,7 +14,7 @@ const size = ref('md' as const)
 const items = [{
   label: 'Tab1',
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    src: 'https://github.com/benjamincanac.png'
   },
   content: 'This is the content shown for Tab1'
 }, {
@@ -57,7 +57,7 @@ const items = [{
         class="w-96"
       >
         <template #custom="{ item }">
-          <span class="text-[--ui-text-muted]">Custom: {{ item.content }}</span>
+          <span class="text-[var(--ui-text-muted)]">Custom: {{ item.content }}</span>
         </template>
       </UTabs>
     </div>

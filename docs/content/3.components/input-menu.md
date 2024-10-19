@@ -53,7 +53,7 @@ You can also pass an array of objects with the following properties:
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
 - `disabled?: boolean`{lang="ts-type"}
-- `select?(e: Event): void`{lang="ts-type"}
+- `onSelect?(e: Event): void`{lang="ts-type"}
 
 ::component-code
 ---
@@ -413,6 +413,32 @@ props:
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
 ::
 
+### Avatar
+
+Use the `avatar` prop to show an [Avatar](/components/avatar) inside the InputMenu.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Nuxt'
+  avatar:
+    src: 'https://github.com/nuxt.png'
+  items:
+    - Nuxt
+    - NuxtHub
+    - NuxtLabs
+    - Nuxt Modules
+    - Nuxt Community
+---
+::
+
 ### Loading
 
 Use the `loading` prop to show a loading icon on the InputMenu.
@@ -538,7 +564,7 @@ name: 'input-menu-items-icon-example'
 ::
 
 ::tip
-You can also use the `#leading` slot to display the selected icon, like in the next example.
+You can also use the `#leading` slot to display the selected icon.
 ::
 
 ### With avatar in items
@@ -552,8 +578,8 @@ name: 'input-menu-items-avatar-example'
 ---
 ::
 
-::note
-In this example, the `#leading` slot is used to display the selected avatar.
+::tip
+You can also use the `#leading` slot to display the selected avatar.
 ::
 
 ### With chip in items
@@ -583,6 +609,16 @@ name: 'input-menu-open-example'
 
 ::note
 In this example, press :kbd{value="O"} to toggle the InputMenu.
+::
+
+### Control open state on focus
+
+You can also use the `@focus` directive to control the open state.
+
+::component-example
+---
+name: 'input-menu-open-focus-example'
+---
 ::
 
 ### Control search term

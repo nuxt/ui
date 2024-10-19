@@ -22,7 +22,7 @@ const items = [
 <template>
   <UAccordion :items="items">
     <template #colors="{ item }">
-      <p class="text-sm pb-3.5 text-[--ui-primary]">
+      <p class="text-sm pb-3.5 text-[var(--ui-primary)]">
         {{ item.content }}
       </p>
     </template>

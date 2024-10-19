@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import theme from '#build/ui/dropdown-menu'
 
-const items = [
+const loading = ref(false)
+
+const items = computed(() => [
   [{
     label: 'My account',
     avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+      src: 'https://github.com/benjamincanac.png'
     },
     type: 'label' as const
   }],
@@ -13,7 +15,7 @@ const items = [
     label: 'Profile',
     icon: 'i-heroicons-user',
     slot: 'custom' as const,
-    select(e: Event) {
+    onSelect(e: Event) {
       e.preventDefault()
       console.log('Profile clicked')
     }
@@ -21,14 +23,14 @@ const items = [
     label: 'Billing',
     icon: 'i-heroicons-credit-card',
     kbds: ['meta', 'b'],
-    select() {
+    onSelect() {
       console.log('Billing clicked')
     }
   }, {
     label: 'Settings',
     icon: 'i-heroicons-cog',
     kbds: ['?'],
-    select() {
+    onSelect() {
       console.log('Settings clicked')
     }
   }], [{
@@ -44,8 +46,8 @@ const items = [
       label: 'Invite by link',
       icon: 'i-heroicons-link',
       kbds: ['meta', 'i'],
-      select(e: Event) {
-        e?.preventDefault()
+      onSelect(e: Event) {
+        e.preventDefault()
         console.log('Invite by link clicked')
       }
     }], [{
@@ -56,21 +58,21 @@ const items = [
         icon: 'i-simple-icons-slack',
         to: 'https://slack.com',
         target: '_blank',
-        select(e: Event) {
+        onSelect(e: Event) {
           e.preventDefault()
           console.log('Import from Slack clicked')
         }
       }, {
         label: 'Import from Trello',
         icon: 'i-simple-icons-trello',
-        select(e: Event) {
+        onSelect(e: Event) {
           e.preventDefault()
           console.log('Import from Trello clicked')
         }
       }, {
         label: 'Import from Asana',
         icon: 'i-simple-icons-asana',
-        select(e: Event) {
+        onSelect(e: Event) {
           e.preventDefault()
           console.log('Import from Asana clicked')
         }
@@ -80,15 +82,21 @@ const items = [
     label: 'New team',
     icon: 'i-heroicons-plus',
     kbds: ['meta', 'n'],
-    select() {
-      console.log('New team clicked')
+    loading: loading.value,
+    onSelect(e: Event) {
+      e.preventDefault()
+
+      loading.value = true
+      setTimeout(() => {
+        loading.value = false
+      }, 2000)
     }
   }], [{
     label: 'GitHub',
     icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui',
     target: '_blank',
-    select(e: Event) {
+    onSelect(e: Event) {
       e.preventDefault()
     }
   }, {
@@ -108,17 +116,17 @@ const items = [
     label: 'Logout',
     icon: 'i-heroicons-arrow-right-start-on-rectangle',
     kbds: ['shift', 'meta', 'q'],
-    select() {
+    onSelect() {
       console.log('Logout clicked')
     }
   }]
-]
+])
 
 const sizes = Object.keys(theme.variants.size)
 
 const size = ref('md' as const)
 
-defineShortcuts(extractShortcuts(items))
+defineShortcuts(extractShortcuts(items.value))
 </script>
 
 <template>
@@ -130,7 +138,7 @@ defineShortcuts(extractShortcuts(items))
         <UButton label="Open" color="neutral" variant="outline" icon="i-heroicons-bars-3" />
 
         <template #custom-trailing>
-          <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-[--ui-primary]" />
+          <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-[var(--ui-primary)]" />
         </template>
       </UDropdownMenu>
     </div>

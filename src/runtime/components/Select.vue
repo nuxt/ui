@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps, SelectItemProps } from 'radix-vue'
+import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
@@ -12,7 +12,7 @@ const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme
 
 const select = tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })
 
-export interface SelectItem extends Pick<SelectItemProps, 'disabled' | 'value'> {
+export interface SelectItem {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -22,6 +22,8 @@ export interface SelectItem extends Pick<SelectItemProps, 'disabled' | 'value'> 
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
+  value?: string
+  disabled?: boolean
 }
 
 type SelectVariants = VariantProps<typeof select>
@@ -131,7 +133,7 @@ const ui = computed(() => select({
   size: selectSize?.value,
   loading: props.loading,
   highlight: highlight.value,
-  leading: isLeading.value || !!slots.leading,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   buttonGroup: orientation.value
 }))
@@ -169,9 +171,10 @@ function onUpdateOpen(value: boolean) {
     @update:open="onUpdateOpen"
   >
     <SelectTrigger :class="ui.base({ class: [props.class, props.ui?.base] })">
-      <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+      <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="modelValue" :open="open" :ui="ui">
-          <UIcon v-if="leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
@@ -203,8 +206,8 @@ function onUpdateOpen(value: boolean) {
               >
                 <slot name="item" :item="(item as T)" :index="index">
                   <slot name="item-leading" :item="(item as T)" :index="index">
-                    <UAvatar v-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
-                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
+                    <UIcon v-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
+                    <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
                     <UChip
                       v-else-if="item.chip"
                       :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"

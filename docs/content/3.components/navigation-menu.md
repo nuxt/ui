@@ -25,7 +25,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `select?(e: Event): void`{lang="ts-type"}
+- `onSelect?(e: Event): void`{lang="ts-type"}
 
 You can also pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -130,7 +130,7 @@ Each item can take a `children` array of objects with the following properties t
 - `description?: string`
 - `icon?: string`
 - `class?: any`
-- `select?(e: Event): void`
+- `onSelect?(e: Event): void`
 ::
 
 ### Orientation
@@ -203,7 +203,7 @@ props:
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
-  class: 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[--ui-border]'
+  class: 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[var(--ui-border)]'
 ---
 ::
 

@@ -31,7 +31,7 @@ const items = [{
 
     <div class="flex items-center gap-2">
       <UChip v-for="size in sizes" :key="size" :size="size" inset text="1">
-        <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" />
+        <UAvatar src="https://github.com/benjamincanac.png" />
       </UChip>
     </div>
   </div>

@@ -22,11 +22,13 @@ Use the `items` prop as an array of objects with the following properties:
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
-- `type?: "link" | "label" | "separator"`{lang="ts-type"}
+- [`type?: "link" | "label" | "separator" | "checkbox"`{lang="ts-type"}](#with-checkbox-items)
+- [`checked?: boolean`{lang="ts-type"}](#with-checkbox-items)
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `select?(e: Event): void`{lang="ts-type"}
+- `onSelect?(e: Event): void`{lang="ts-type"}
+- [`onUpdateChecked?(checked: boolean): void`{lang="ts-type"}](#with-checkbox-items)
 
 You can also pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -256,6 +258,21 @@ slots:
 
 ## Examples
 
+### With checkbox items
+
+You can use the `type` property with `checkbox` and use the `checked` / `onUpdateChecked` properties to control the checked state of the item.
+
+::component-example
+---
+collapse: true
+name: 'dropdown-menu-checkbox-items-example'
+---
+::
+
+::note
+To ensure reactivity for the `checked` state of items, it's recommended to wrap your `items` array inside a `computed`.
+::
+
 ### Control open state
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
@@ -306,14 +323,14 @@ const items = [{
     label: 'Invite by email',
     icon: 'i-heroicons-paper-airplane',
     kbds: ['meta', 'e'],
-    select() {
+    onSelect() {
       console.log('Invite by email clicked')
     }
   }, {
     label: 'Invite by link',
     icon: 'i-heroicons-link',
     kbds: ['meta', 'i'],
-    select() {
+    onSelect() {
       console.log('Invite by link clicked')
     }
   }]
@@ -321,7 +338,7 @@ const items = [{
   label: 'New team',
   icon: 'i-heroicons-plus',
   kbds: ['meta', 'n'],
-  select() {
+  onSelect() {
     console.log('New team clicked')
   }
 }]
@@ -338,32 +355,7 @@ In this example, :kbd{value="meta"} :kbd{value="E"}, :kbd{value="meta"} :kbd{val
 
 ### Props
 
-::component-props
----
-ignore:
-  - as
-  - to
-  - target
-  - active
-  - activeClass
-  - inactiveClass
-  - exactActiveClass
-  - ariaCurrentValue
-  - href
-  - rel
-  - noRel
-  - prefetch
-  - prefetchOn
-  - noPrefetch
-  - prefetchedClass
-  - replace
-  - exact
-  - exactQuery
-  - exactHash
-  - external
-  - onClick
----
-::
+:component-props
 
 ### Slots
 

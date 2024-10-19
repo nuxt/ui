@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxItemProps } from 'radix-vue'
+import type { ComboboxRootProps, ComboboxRootEmits } from 'radix-vue'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -15,7 +15,7 @@ const appConfig = _appConfig as AppConfig & { ui: { commandPalette: Partial<type
 
 const commandPalette = tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })
 
-export interface CommandPaletteItem extends Pick<ComboboxItemProps, 'disabled'> {
+export interface CommandPaletteItem {
   prefix?: string
   label?: string
   suffix?: string
@@ -23,8 +23,10 @@ export interface CommandPaletteItem extends Pick<ComboboxItemProps, 'disabled'> 
   avatar?: AvatarProps
   chip?: ChipProps
   kbds?: KbdProps['value'][] | KbdProps[]
+  loading?: boolean
+  disabled?: boolean
   slot?: string
-  select?(e?: Event): void
+  onSelect?(e?: Event): void
 }
 
 export interface CommandPaletteGroup<T> {
@@ -268,15 +270,16 @@ const groups = computed(() => {
             <ComboboxItem
               v-for="(item, index) in group.items"
               :key="`group-${groupIndex}-${index}`"
-              :value="omit(item, ['matches' as any, 'group' as any, 'select', 'labelHtml', 'suffixHtml'])"
+              :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml'])"
               :disabled="item.disabled"
               :class="ui.item({ class: props.ui?.item })"
-              @select="item.select"
+              @select="item.onSelect"
             >
               <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
                 <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="item" :index="index">
-                  <UAvatar v-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+                  <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, loading: true })" />
                   <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
+                  <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
                   <UChip
                     v-else-if="item.chip"
                     :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"

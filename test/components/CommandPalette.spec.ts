@@ -52,7 +52,7 @@ describe('CommandPalette', () => {
     items: [{
       label: 'benjamincanac',
       avatar: {
-        src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+        src: 'https://github.com/benjamincanac.png'
       }
     }]
   }]
@@ -74,7 +74,7 @@ describe('CommandPalette', () => {
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-heroicons-trash' } }],
     ['with as', { props: { ...props, as: 'section' } }],
-    ['with class', { props: { ...props, class: 'divide-[--ui-border-accented]' } }],
+    ['with class', { props: { ...props, class: 'divide-[var(--ui-border-accented)]' } }],
     ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],
     // Slots
     ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],

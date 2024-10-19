@@ -10,7 +10,7 @@ describe('Tabs', () => {
   const items = [{
     label: 'Tab1',
     avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+      src: 'https://github.com/benjamincanac.png'
     },
     content: 'This is the content shown for Tab1'
   }, {
@@ -38,7 +38,7 @@ describe('Tabs', () => {
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['without content', { props: { ...props, content: false } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
-    ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-[--ui-border]' } } }],
+    ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-[var(--ui-border)]' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],

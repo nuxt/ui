@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   app: {
     rootAttrs: {
       'vaul-drawer-wrapper': '',
-      'class': 'bg-[--ui-bg]'
+      'class': 'bg-[var(--ui-bg)]'
     }
   },
 

@@ -224,32 +224,7 @@ class: 'p-8 px-16'
 
 ### Props
 
-::component-props
----
-ignore:
-  - as
-  - to
-  - target
-  - active
-  - activeClass
-  - inactiveClass
-  - exactActiveClass
-  - ariaCurrentValue
-  - href
-  - rel
-  - noRel
-  - prefetch
-  - prefetchOn
-  - noPrefetch
-  - prefetchedClass
-  - replace
-  - exact
-  - exactQuery
-  - exactHash
-  - external
-  - onClick
----
-::
+:component-props
 
 ### Slots
 
@@ -257,12 +232,28 @@ ignore:
 
 ### Expose
 
-When accessing the component via a template ref, you can use the following:
+You can access the typed component instance using [`useTemplateRef`](https://vuejs.org/api/composition-api-helpers.html#usetemplateref).
+
+```vue
+<script setup lang="ts">
+const carousel = useTemplateRef('carousel')
+</script>
+
+<template>
+  <UCarousel ref="carousel" />
+</template>
+```
+
+This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |
 | `emblaRef`{lang="ts-type"} | `Ref<HTMLElement \| null>`{lang="ts-type"} |
 | `emblaApi`{lang="ts-type"} | [`Ref<EmblaCarouselType \| null>`{lang="ts-type"}](https://www.embla-carousel.com/api/methods/#typescript) |
+
+::note{to="https://vuejs.org/api/composition-api-helpers.html#usetemplateref" target="_blank"}
+You can use `useTemplateRef` to get the component instance.
+::
 
 ## Theme
 

@@ -5,13 +5,12 @@
     :icon="icon"
     :label="label"
     :variant="selected ? 'soft' : 'outline'"
-    class="capitalize ring-[--ui-border] rounded-[--ui-radius] text-[11px]"
-    @click.stop.prevent="$emit('select')"
+    class="capitalize ring-[var(--ui-border)] rounded-[var(--ui-radius)] text-[11px]"
   >
     <template v-if="chip" #leading>
       <span
         class="inline-block w-2 h-2 rounded-full"
-        :class="`bg-[--color-light] dark:bg-[--color-dark]`"
+        :class="`bg-[var(--color-light)] dark:bg-[var(--color-dark)]`"
         :style="{
           '--color-light': `var(--color-${chip}-500)`,
           '--color-dark': `var(--color-${chip}-400)`
@@ -28,5 +27,4 @@ defineProps<{
   chip?: string
   selected?: boolean
 }>()
-defineEmits(['select'])
 </script>

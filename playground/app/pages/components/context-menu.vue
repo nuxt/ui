@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import theme from '#build/ui/context-menu'
 
-const items = [
+const loading = ref(false)
+
+const items = computed(() => [
   [{
     label: 'My account',
+    type: 'label' as const,
     avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+      src: 'https://github.com/benjamincanac.png'
     }
   }],
   [{
@@ -24,20 +27,29 @@ const items = [
   [{
     label: 'Show Sidebar',
     kbds: ['meta', 'S'],
-    select() {
+    onSelect() {
       console.log('Show Sidebar clicked')
     }
   }, {
     label: 'Show Toolbar',
     kbds: ['shift', 'meta', 'D'],
-    select() {
+    onSelect() {
       console.log('Show Toolbar clicked')
     }
   }, {
     label: 'Collapse Pinned Tabs',
     disabled: true
   }], [{
-    label: 'Refresh the Page'
+    label: 'Refresh the Page',
+    loading: loading.value,
+    onSelect(e: Event) {
+      e.preventDefault()
+
+      loading.value = true
+      setTimeout(() => {
+        loading.value = false
+      }, 2000)
+    }
   }, {
     label: 'Clear Cookies and Refresh'
   }, {
@@ -49,36 +61,36 @@ const items = [
     children: [[{
       label: 'View Source',
       kbds: ['option', 'meta', 'U'],
-      select() {
+      onSelect() {
         console.log('View Source clicked')
       }
     }, {
       label: 'Developer Tools',
       kbds: ['option', 'meta', 'I'],
-      select() {
+      onSelect() {
         console.log('Developer Tools clicked')
       }
     }], [{
       label: 'Inspect Elements',
       kbds: ['option', 'meta', 'C'],
-      select() {
+      onSelect() {
         console.log('Inspect Elements clicked')
       }
     }], [{
       label: 'JavaScript Console',
       kbds: ['option', 'meta', 'J'],
-      select() {
+      onSelect() {
         console.log('JavaScript Console clicked')
       }
     }]]
   }]
-]
+])
 
 const sizes = Object.keys(theme.variants.size)
 
 const size = ref('md' as const)
 
-defineShortcuts(extractShortcuts(items))
+defineShortcuts(extractShortcuts(items.value))
 </script>
 
 <template>
@@ -88,7 +100,7 @@ defineShortcuts(extractShortcuts(items))
     </div>
 
     <UContextMenu :items="items" class="min-w-48" :size="size">
-      <div class="flex items-center justify-center rounded-md border border-dashed border-[--ui-border-accented] text-sm aspect-video w-72">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
         Right click here
       </div>
     </UContextMenu>

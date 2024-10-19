@@ -31,13 +31,14 @@ useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
   title: page.value.navigation?.title || page.value.title,
   ogTitle: `${page.value.navigation?.title || page.value.title} - Nuxt UI v3`,
-  description: page.value.description,
-  ogDescription: page.value.description
+  description: page.value.seo?.description || page.value.description,
+  ogDescription: page.value.seo?.description || page.value.description
 })
 
 defineOgImageComponent('Docs', {
   headline: headline.value,
-  title: page.value.title
+  title: page.value.title,
+  description: page.value.seo?.description || page.value.description
 })
 
 const communityLinks = computed(() => [{
