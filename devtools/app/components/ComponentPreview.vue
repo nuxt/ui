@@ -6,7 +6,7 @@ import { genObjectFromValues, genArrayFromRaw } from 'knitwork'
 
 const props = defineProps<{ component?: Component, props?: object, themeSlots?: Record<string, any> }>()
 
-const { data: componentExample } = await useAsyncData('__ui_devtools_component-source', async () => {
+const { data: componentExample } = useAsyncData('__ui_devtools_component-source', async () => {
   const example = props.component?.meta?.devtools?.example
   if (!example) return false
   return await $fetch<{ source: string }>(`/api/component-example`, { params: { component: example } })
@@ -52,7 +52,7 @@ ${componentExample.value?.source
 \`\`\``
 })
 
-const { data: ast } = await useAsyncData('component-code', async () => {
+const { data: ast } = useAsyncData('component-code', async () => {
   if (!code.value) return
 
   const { $prettier } = useNuxtApp()
