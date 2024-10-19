@@ -117,7 +117,7 @@ export function devtoolsMetaPlugin({ resolve }: { resolve: Resolver['resolve'] }
         }
 
         try {
-          const path = resolve(`./devtools/examples/${name}.vue`)
+          const path = resolve(`./devtools/runtime/examples/${name}.vue`)
           const source = fs.readFileSync(path, 'utf-8')
 
           res.setHeader('Content-Type', 'application/json')
