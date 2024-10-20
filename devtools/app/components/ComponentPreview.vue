@@ -88,8 +88,8 @@ const rendererVisible = ref(true)
 const renderer = ref()
 const rendererReady = ref(false)
 function onRendererReady() {
-  // rendererVisible.value = !!renderer.value.contentWindow.document.getElementById('ui-devtools-renderer')
   rendererReady.value = true
+  setTimeout(() => rendererVisible.value = !!renderer.value.contentWindow.document.getElementById('ui-devtools-renderer'), 500)
 }
 
 watch(() => props.component, () => rendererReady.value = false)
