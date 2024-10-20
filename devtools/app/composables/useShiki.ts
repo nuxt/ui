@@ -2,7 +2,7 @@ import { createHighlighterCore } from 'shiki/core'
 import type { BuiltinLanguage, HighlighterCore } from 'shiki'
 import loadWasm from 'shiki/wasm'
 
-import MaterialTheme from 'shiki/themes/material-theme.mjs'
+import MaterialThemeLighter from 'shiki/themes/material-theme-lighter.mjs'
 import MaterialThemePalenight from 'shiki/themes/material-theme-palenight.mjs'
 import VueLang from 'shiki/langs/vue.mjs'
 import MarkdownLang from 'shiki/langs/markdown.mjs'
@@ -15,7 +15,7 @@ export function useShiki() {
   async function codeToHtml(code: string, lang: BuiltinLanguage | 'text' = 'text') {
     if (!highlighter.value) {
       highlighter.value = await createHighlighterCore({
-        themes: [MaterialTheme, MaterialThemePalenight],
+        themes: [MaterialThemeLighter, MaterialThemePalenight],
         langs: [VueLang, MarkdownLang],
         loadWasm
       })
@@ -25,8 +25,8 @@ export function useShiki() {
       lang,
       themes: {
         dark: 'material-theme-palenight',
-        default: 'material-theme',
-        light: 'material-theme'
+        default: 'material-theme-lighter',
+        light: 'material-theme-lighter'
       },
       colorReplacements: {
         // Override background color
