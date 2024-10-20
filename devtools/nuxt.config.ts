@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 
   ssr: false,
 
-  modules: [module, '@nuxtjs/mdc', '@nuxt/test-utils/module'],
+  modules: [module, '@nuxt/test-utils/module'],
 
   nitro: {
     hooks: {
@@ -32,18 +32,6 @@ export default defineNuxtConfig({
     server: {
       hmr: {
         clientPort: process.env.PORT ? +process.env.PORT : undefined
-      }
-    }
-  },
-
-  mdc: {
-    highlight: {
-      noApiRoute: true,
-      langs: ['vue'],
-      theme: {
-        light: 'material-theme',
-        default: 'material-theme',
-        dark: 'material-theme-palenight'
       }
     }
   }

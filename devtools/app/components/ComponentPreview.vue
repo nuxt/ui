@@ -87,7 +87,7 @@ const rendererVisible = ref(true)
 const renderer = ref()
 const rendererReady = ref(false)
 function onRendererReady() {
-  rendererVisible.value = !!renderer.value.contentWindow.document.getElementById('ui-devtools-renderer')
+  // rendererVisible.value = !!renderer.value.contentWindow.document.getElementById('ui-devtools-renderer')
   rendererReady.value = true
 }
 
@@ -119,7 +119,7 @@ const previewUrl = computed(() => {
     <div v-if="!rendererVisible" class="grow w-full flex justify-center items-center px-8">
       <UAlert color="error" variant="subtle" title="Component preview not found" icon="i-heroicons-exclamation-circle">
         <template #description>
-          <MDC value="Ensure your `app.vue` file includes a `<NuxtPage />` component, as the component preview is mounted as a page." />
+          <p>Ensure your <code>app.vue</code> file includes a <code>&lt;NuxtPage /&gt;</code> component, as the component preview is mounted as a page. </p>
         </template>
       </UAlert>
     </div>

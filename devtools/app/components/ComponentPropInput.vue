@@ -15,6 +15,10 @@ watchEffect(() => {
   parsedSchema.value = result?.schema
   matchedInput.value = result?.input
 })
+
+const description = computed(() => {
+  return props.meta.description?.replace(/`([^`]+)`/g, '<code class="font-medium bg-[var(--ui-bg-elevated)] px-1 py-0.5 rounded">$1</code>')
+})
 </script>
 
 <template>
@@ -26,7 +30,8 @@ watchEffect(() => {
     </template>
 
     <template #description>
-      <MDC v-if="meta.description" :value="meta.description" class="text-neutral-600 dark:text-neutral-400 mt-1" />
+      <!-- eslint-disable vue/no-v-html -->
+      <p v-if="meta.description" class="text-neutral-600 dark:text-neutral-400 mt-1" v-html="description" />
     </template>
 
     <component :is="matchedInput.component" v-if="!ignore && matchedInput" v-model="modelValue" :schema="parsedSchema" />
