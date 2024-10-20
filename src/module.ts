@@ -192,7 +192,8 @@ export default defineNuxtModule<ModuleOptions>({
       } else {
         nuxt.hook('vite:serverCreated', async (server) => {
           server.middlewares.use('/__nuxt_ui__/devtools', sirv(resolve('../dist/client/devtools'), {
-            single: true
+            single: true,
+            dev: true
           }))
         })
       }
