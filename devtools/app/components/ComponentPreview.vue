@@ -2,7 +2,7 @@
 import type { Component } from '../../../src/devtools/rpc'
 import { useClipboard } from '@vueuse/core'
 import { kebabCase } from 'scule'
-import { genObjectFromValues, genArrayFromRaw } from 'knitwork'
+import { escapeString } from 'knitwork'
 
 const props = defineProps<{ component?: Component, props?: object, themeSlots?: Record<string, any> }>()
 
@@ -11,6 +11,21 @@ const { data: componentExample } = useAsyncData('__ui_devtools_component-source'
   if (!example) return false
   return await $fetch<{ source: string }>(`/api/component-example`, { params: { component: example } })
 }, { watch: [() => props.component?.slug] })
+
+function genPropValue(value: any, indent: number = 2): string {
+  const indentStr = ' '.repeat(indent)
+  if (typeof value === 'string') {
+    return `'${escapeString(value).replace(/'/g, '&apos;').replace(/"/g, '&quot;')}'`
+  }
+  if (Array.isArray(value)) {
+    return `[\n${value.map(item => `${genPropValue(item, indent + 2)}`).join(',\n')}\n${indentStr}]`
+  }
+  if (typeof value === 'object' && value !== null) {
+    const entries = Object.entries(value).map(([key, val]) => `${indentStr}  ${key}: ${genPropValue(val, indent + 2)}`)
+    return `${indentStr}{\n${entries.join(',\n')}\n${indentStr}}`
+  }
+  return value
+}
 
 const code = computed(() => {
   if (!props.component) return
@@ -22,48 +37,49 @@ const code = computed(() => {
     if (value === false && defaultValue === true) return `:${kebabCase(key)}="false"`
     if (!value) return
     if (props.component?.defaultVariants?.[key] === value) return
-    if (typeof value === 'number') return `:${kebabCase(key)}="${value}"`
-    if (Array.isArray(value)) return value.length ? `:${kebabCase(key)}="${genArrayFromRaw(value, undefined, { preserveTypes: true })}"` : undefined
-    if (typeof value === 'object') return `:${kebabCase(key)}="${genObjectFromValues(value)}"`
-    return `${kebabCase(key)}="${value}"`
+    if (typeof value === 'string') return `${kebabCase(key)}=${genPropValue(value)}`
+    return `:${kebabCase(key)}="${genPropValue(value)}"`
   }).filter(Boolean).join('\n')
 
   const slotsTemplate = props.themeSlots
-    ? genObjectFromValues(Object.keys(props.themeSlots).filter(key => key !== 'base').reduce((acc, key) => {
-      acc[key] = props.themeSlots?.[key]
+    ? genPropValue(Object.keys(props.themeSlots).filter(key => key !== 'base').reduce((acc, key) => {
+      acc[key] = genPropValue(props.themeSlots?.[key])
       return acc
     }, {} as Record<string, string>))
     : undefined
 
-  const extraTemplate = [propsTemplate, props.themeSlots?.base ? `class="${props.themeSlots.base}"` : null, slotsTemplate && slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : null].filter(Boolean).join(' ')
+  const extraTemplate = [
+    propsTemplate,
+    props.themeSlots?.base ? `class="${genPropValue(props.themeSlots.base)}"` : null,
+    slotsTemplate && slotsTemplate !== '{}' ? `:ui="${slotsTemplate}"` : null
+  ].filter(Boolean).join(' ')
 
   if (componentExample.value) {
     const componentRegexp = new RegExp(`<${props.component.label}(\\s|\\r|>)`)
 
-    return `\`\`\`vue
-${componentExample.value?.source
-  .replace(componentRegexp, `<${props.component.label} ${extraTemplate}$1`)
-  .replace('v-bind="$attrs"', '')}
-\`\`\``
+    return componentExample.value?.source
+      .replace(componentRegexp, `<${props.component.label} ${extraTemplate}$1`)
+      .replace('v-bind="$attrs"', '')
   }
-
-  return `\`\`\`vue
-<${props.component.label} ${extraTemplate} />
-\`\`\``
+  return `<${props.component.label} ${extraTemplate} />`
 })
 
-const { data: ast } = useAsyncData('component-code', async () => {
+const { $prettier } = useNuxtApp()
+const { data: formattedCode } = useAsyncData('__ui-devtools-component-formatted-code', async () => {
   if (!code.value) return
-
-  const { $prettier } = useNuxtApp()
-  const formatted = await $prettier.format(code.value, {
-    trailingComma: 'none',
+  return await $prettier.format(code.value, {
     semi: false,
-    singleQuote: true
+    singleQuote: true,
+    printWidth: 80
   })
-
-  return await parseMarkdown(formatted)
 }, { watch: [code] })
+
+const { codeToHtml } = useShiki()
+const { data: highlightedCode } = useAsyncData('__ui-devtools-component-highlighted-code', async () => {
+  return formattedCode.value
+    ? codeToHtml(formattedCode.value, 'vue')
+    : undefined
+}, { watch: [formattedCode] })
 
 const { copy, copied } = useClipboard()
 
@@ -107,14 +123,15 @@ const previewUrl = computed(() => {
         </template>
       </UAlert>
     </div>
-    <div v-if="ast" v-show="rendererReady" class="relative w-full p-3">
-      <MDCRenderer :body="ast.body" :data="ast.data" class="p-4 min-h-40 max-h-72 text-sm overflow-y-auto rounded-lg border border-[var(--ui-border)] bg-neutral-50 dark:bg-neutral-800" />
+    <div v-if="highlightedCode && formattedCode" v-show="rendererReady" class="relative w-full p-3">
+      <!-- eslint-disable vue/no-v-html -->
+      <pre class="p-4 min-h-40 max-h-72 text-sm overflow-y-auto rounded-lg border border-[var(--ui-border)] bg-neutral-50 dark:bg-neutral-800" v-html="highlightedCode" />
       <UButton
         color="neutral"
         variant="link"
         :icon="copied ? 'i-heroicons-clipboard-document-check' : 'i-heroicons-clipboard-document'"
         class="absolute top-6 right-6"
-        @click="copy((ast?.body?.children?.[0] as any)?.props.code)"
+        @click="copy(formattedCode)"
       />
     </div>
   </div>

@@ -38,6 +38,8 @@ export default defineNuxtConfig({
 
   mdc: {
     highlight: {
+      noApiRoute: true,
+      langs: ['vue'],
       theme: {
         light: 'material-theme',
         default: 'material-theme',
