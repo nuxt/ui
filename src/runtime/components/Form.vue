@@ -39,7 +39,7 @@ extendDevtoolsMeta({
 <script lang="ts" setup generic="T extends object">
 import { useEventBus } from '@vueuse/core'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
-import { getYupErrors, isYupSchema, getValibotErrors, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema, getStandardErrors, isStandardSchema } from '../utils/form'
+import { getYupErrors, isYupSchema, getValibotErrors, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema, getStandardErrors, isStandardSchema, getSuperStructErrors, isSuperStructSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 
@@ -118,6 +118,8 @@ async function getErrors(): Promise<FormErrorWithId[]> {
       errs = errs.concat(await getJoiErrors(props.state, props.schema))
     } else if (isValibotSchema(props.schema)) {
       errs = errs.concat(await getValibotErrors(props.state, props.schema))
+    } else if (isSuperStructSchema(props.schema)) {
+      errs = errs.concat(await getSuperStructErrors(props.state, props.schema))
     } else if (isStandardSchema(props.schema)) {
       errs = errs.concat(await getStandardErrors(props.state, props.schema))
     } else {
