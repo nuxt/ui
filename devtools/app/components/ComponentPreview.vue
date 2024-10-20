@@ -58,6 +58,7 @@ const code = computed(() => {
     const componentRegexp = new RegExp(`<${props.component.label}(\\s|\\r|>)`)
 
     return componentExample.value?.source
+      .replace(/import .* from ['"]#.*['"];?\n+/, '')
       .replace(componentRegexp, `<${props.component.label} ${extraTemplate}$1`)
       .replace('v-bind="$attrs"', '')
   }
