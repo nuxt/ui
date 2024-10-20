@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUnmounted, onMounted, reactive, defineAsyncComponent } from 'vue'
+import { onUnmounted, onMounted, reactive } from 'vue'
 import { pascalCase } from 'scule'
 import { useColorMode, useRoute } from '#imports'
 
