@@ -18,10 +18,14 @@ async function handleFormatMessage(message) {
     await Promise.all([
       import('https://unpkg.com/prettier@3.3.3/standalone.js'),
       import('https://unpkg.com/prettier@3.3.3/plugins/html.js'),
+      import('https://unpkg.com/prettier@3.3.3/plugins/postcss.js'),
+      import('https://unpkg.com/prettier@3.3.3/plugins/babel.js'),
+      import('https://unpkg.com/prettier@3.3.3/plugins/estree.js'),
       import('https://unpkg.com/prettier@3.3.3/plugins/typescript.js')
     ])
   }
 
+  console.log('message', message)
   const { options, source } = message
   const formatted = await prettier.format(source, {
     parser: 'vue',
@@ -29,5 +33,6 @@ async function handleFormatMessage(message) {
     ...options
   })
 
+  console.log('formatted', formatted)
   return formatted
 }

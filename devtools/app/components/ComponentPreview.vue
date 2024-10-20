@@ -12,18 +12,18 @@ const { data: componentExample } = useAsyncData('__ui_devtools_component-source'
   return await $fetch<{ source: string }>(`/api/component-example`, { params: { component: example } })
 }, { watch: [() => props.component?.slug] })
 
-function genPropValue(value: any, indent: number = 2): string {
-  const indentStr = ' '.repeat(indent)
+function genPropValue(value: any): string {
   if (typeof value === 'string') {
     return `'${escapeString(value).replace(/'/g, '&apos;').replace(/"/g, '&quot;')}'`
   }
   if (Array.isArray(value)) {
-    return `[\n${value.map(item => `${genPropValue(item, indent + 2)}`).join(',\n')}\n${indentStr}]`
+    return `[ ${value.map(item => `${genPropValue(item)}`).join(',')} ]`
   }
   if (typeof value === 'object' && value !== null) {
-    const entries = Object.entries(value).map(([key, val]) => `${indentStr}  ${key}: ${genPropValue(val, indent + 2)}`)
-    return `${indentStr}{\n${entries.join(',\n')}\n${indentStr}}`
+    const entries = Object.entries(value).map(([key, val]) => `${key}: ${genPropValue(val)}`)
+    return `{ ${entries.join(`,`)} }`
   }
+
   return value
 }
 
