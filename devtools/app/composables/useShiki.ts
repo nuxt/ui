@@ -1,7 +1,6 @@
 import { createHighlighterCore } from 'shiki/core'
 import type { BuiltinLanguage, HighlighterCore } from 'shiki'
 import loadWasm from 'shiki/wasm'
-
 import MaterialThemeLighter from 'shiki/themes/material-theme-lighter.mjs'
 import MaterialThemePalenight from 'shiki/themes/material-theme-palenight.mjs'
 import VueLang from 'shiki/langs/vue.mjs'
@@ -27,10 +26,6 @@ export function useShiki() {
         dark: 'material-theme-palenight',
         default: 'material-theme-lighter',
         light: 'material-theme-lighter'
-      },
-      colorReplacements: {
-        // Override background color
-        '#263238': 'transparent'
       }
     })
   }

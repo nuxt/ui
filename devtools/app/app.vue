@@ -226,4 +226,19 @@ const isDark = computed({
   --ui-border: var(--ui-color-neutral-800);
   --ui-bg: var(--ui-color-neutral-900);
 }
+
+.shiki
+.shiki span {
+  background-color: transparent !important;
+}
+
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
+  /* Optional, if you also want font styles */
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
 </style>
