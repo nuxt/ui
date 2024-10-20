@@ -1,6 +1,6 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, extendPages, hasNuxtModule } from '@nuxt/kit'
-import { addTemplates } from './templates'
+import { addTemplates, buildTemplates } from './templates'
 import icons from './theme/icons'
 import { addCustomTab, startSubprocess } from '@nuxt/devtools-kit'
 import sirv from 'sirv'
@@ -151,7 +151,8 @@ export default defineNuxtModule<ModuleOptions>({
     addTemplates(options, nuxt)
 
     if (nuxt.options.dev && nuxt.options.devtools.enabled && options.devtools.enabled) {
-      nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin({ resolve })] })
+      const templates = buildTemplates(options)
+      nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin({ resolve, templates })] })
 
       setupDevtoolsClient(options)
 

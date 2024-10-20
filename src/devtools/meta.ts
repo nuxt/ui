@@ -1,5 +1,5 @@
 import type { ViteDevServer } from 'vite'
-import { kebabCase } from 'scule'
+import { kebabCase, camelCase } from 'scule'
 import defu from 'defu'
 import fs from 'node:fs'
 import type { Resolver } from '@nuxt/kit'
@@ -29,7 +29,7 @@ function extractDevtoolsMeta(code: string): string | null {
 }
 
 // A Plugin to parse additional metadata for the Nuxt UI Devtools.
-export function devtoolsMetaPlugin({ resolve }: { resolve: Resolver['resolve'] }) {
+export function devtoolsMetaPlugin({ resolve, templates }: { resolve: Resolver['resolve'], templates: Record<string, any> }) {
   return {
     name: 'ui-devtools-component-meta',
     enforce: 'pre' as const,
@@ -63,6 +63,7 @@ export function devtoolsMetaPlugin({ resolve }: { resolve: Resolver['resolve'] }
               if (!key.startsWith('U')) return acc
               const name = key.substring(1)
               const slug = kebabCase(name)
+              const template = templates?.[camelCase(name)]
 
               if (devtoolsComponentMeta[slug] === undefined) {
                 const path = resolve(`./runtime/components/${name}.vue`)
@@ -82,6 +83,7 @@ export function devtoolsMetaPlugin({ resolve }: { resolve: Resolver['resolve'] }
                   : prop?.tags?.find((tag: any) =>
                     tag.name === 'defaultValue'
                     && !tag.text?.includes('appConfig'))?.text
+                    ?? template?.defaultVariants?.[prop.name]
 
                 if (typeof defaultValue === 'string') defaultValue = defaultValue?.replaceAll(/["'`]/g, '')
                 if (defaultValue === 'true') defaultValue = true
