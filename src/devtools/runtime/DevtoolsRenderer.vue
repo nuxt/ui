@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { onUnmounted, onMounted, reactive } from 'vue'
 import { pascalCase } from 'scule'
-import { useColorMode, useRoute } from '#imports'
+import { defineAsyncComponent, useColorMode, useRoute } from '#imports'
 
 const route = useRoute()
 const component = route.query?.example
-  ? await import(`./examples/${route.query.example}.vue`).then(c => c.default)
-  : route.params?.slug && await import(`../../runtime/components/${pascalCase(route.params.slug as string)}.vue`).then(c => c.default)
+  ? defineAsyncComponent(() => import(`./examples/${route.query.example}.vue`))
+  : route.params?.slug && defineAsyncComponent(() => import(`../../runtime/components/${pascalCase(route.params.slug as string)}.vue`))
 
 const state = reactive<{ slots?: any, props?: any }>({})
 
