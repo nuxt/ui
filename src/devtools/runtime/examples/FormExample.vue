@@ -1,3 +1,16 @@
+<script setup lang="ts">
+import { reactive } from 'vue'
+
+const state = reactive({ email: undefined, password: undefined })
+
+function validate(data: Partial<typeof state>) {
+  const errors: Array<{ name: string, message: string }> = []
+  if (!data.email) errors.push({ name: 'email', message: 'Required' })
+  if (!data.password) errors.push({ name: 'password', message: 'Required' })
+  return errors
+}
+</script>
+
 <template>
   <UForm
     :validate="validate"
@@ -15,16 +28,3 @@
     </UButton>
   </UForm>
 </template>
-
-<script setup lang="ts">
-import { reactive } from 'vue'
-
-const state = reactive({ email: undefined, password: undefined })
-
-function validate(data: Partial<typeof state>) {
-  const errors: Array<{ name: string, message: string }> = []
-  if (!data.email) errors.push({ name: 'email', message: 'Required' })
-  if (!data.password) errors.push({ name: 'password', message: 'Required' })
-  return errors
-}
-</script>

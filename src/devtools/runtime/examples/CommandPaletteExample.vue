@@ -1,7 +1,3 @@
-<template>
-  <UCommandPalette :groups="groups" />
-</template>
-
 <script setup lang="ts">
 const groups = [{
   id: 'actions',
@@ -27,3 +23,7 @@ const groups = [{
   }]
 }]
 </script>
+
+<template>
+  <UCommandPalette :groups="groups" />
+</template>
