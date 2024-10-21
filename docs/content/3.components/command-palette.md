@@ -514,7 +514,7 @@ class: '!p-0'
 ---
 ::
 
-### Within a popover
+### Within a Popover
 
 You can use the CommandPalette component inside a [Popover](/components/popover)'s content.
 
@@ -525,7 +525,7 @@ name: 'popover-command-palette-example'
 ---
 ::
 
-### Within a modal
+### Within a Modal
 
 You can use the CommandPalette component inside a [Modal](/components/modal)'s content.
 
@@ -536,7 +536,7 @@ name: 'modal-command-palette-example'
 ---
 ::
 
-### Within a drawer
+### Within a Drawer
 
 You can use the CommandPalette component inside a [Drawer](/components/drawer)'s content.
 
