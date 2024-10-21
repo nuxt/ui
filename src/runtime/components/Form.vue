@@ -37,11 +37,11 @@ extendDevtoolsMeta({
 </script>
 
 <script lang="ts" setup generic="T extends object">
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
 import { getYupErrors, isYupSchema, getValibotErrors, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema, getStandardErrors, isStandardSchema, getSuperStructErrors, isSuperStructSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
   validateOn() {
