@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { withoutTrailingSlash } from 'ufo'
+import colors from 'tailwindcss/colors'
 import type { NuxtError } from '#app'
-// import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 useSeoMeta({
   title: 'Page not found',
@@ -12,17 +13,11 @@ defineProps<{
 }>()
 
 const route = useRoute()
-// const colorMode = useColorMode()
-// const { branch } = useContentSource()
-const runtimeConfig = useRuntimeConfig()
-const { integrity, api } = runtimeConfig.public.content
+const appConfig = useAppConfig()
+const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<any[]>(`${api.baseURL}/search${integrity ? '.' + integrity : ''}`, { default: () => [] })
-
-// Computed
-
-// const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: files } = await useAsyncData('files', () => queryCollectionSearchSections('content', { ignoredTags: ['style'] }))
 
 const links = computed(() => {
   return [{
@@ -30,7 +25,7 @@ const links = computed(() => {
     icon: 'i-heroicons-book-open',
     to: '/getting-started',
     active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro')
+  }, ...(navigation.value?.find(item => item.path === '/pro')
     ? [{
         label: 'Pro',
         icon: 'i-heroicons-square-3-stack-3d',
@@ -52,30 +47,39 @@ const links = computed(() => {
   }].filter(Boolean)
 })
 
-// Head
+const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
+const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 
 useHead({
   meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
-    // { key: 'theme-color', name: 'theme-color', content: color }
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
+  ],
+  style: [
+    { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 }
   ],
   htmlAttrs: {
     lang: 'en'
   }
 })
 
-// Provide
+useServerSeoMeta({
+  ogSiteName: 'Nuxt UI',
+  twitterCard: 'summary_large_image'
+})
 
 provide('navigation', navigation)
-provide('files', files)
 </script>
 
 <template>
   <UApp>
-    <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator color="#FFF" />
+
+    <Banner />
 
     <Header :links="links" />
 
@@ -89,6 +93,8 @@ provide('files', files)
 
     <Footer />
 
-    <LazyUContentSearch :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+    <ClientOnly>
+      <LazyUContentSearch :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+    </ClientOnly>
   </UApp>
 </template>

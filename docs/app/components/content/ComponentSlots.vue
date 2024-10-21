@@ -24,9 +24,9 @@ const meta = await fetchComponentMeta(name as any)
     <ProseTbody>
       <ProseTr v-for="slot in (meta?.meta?.slots || [])" :key="slot.name">
         <ProseTd>
-          <ProseCodeInline>
+          <ProseCode>
             {{ slot.name }}
-          </ProseCodeInline>
+          </ProseCode>
         </ProseTd>
         <ProseTd>
           <HighlightInlineType v-if="slot.type" :type="slot.type" />

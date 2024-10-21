@@ -87,9 +87,9 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
     <ProseTbody>
       <ProseTr v-for="prop in metaProps" :key="prop.name">
         <ProseTd>
-          <ProseCodeInline>
+          <ProseCode>
             {{ prop.name }}
-          </ProseCodeInline>
+          </ProseCode>
         </ProseTd>
         <ProseTd>
           <HighlightInlineType v-if="prop.default" :type="prop.default" />
