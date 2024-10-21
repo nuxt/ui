@@ -3,8 +3,8 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
-import type { AvatarProps, ButtonProps } from '../types'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import type { AvatarProps, ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { alert: Partial<typeof theme> } }
 

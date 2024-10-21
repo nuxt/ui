@@ -5,9 +5,9 @@ import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuCo
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
-import { extendDevtoolsMeta } from '#imports'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 

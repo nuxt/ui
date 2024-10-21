@@ -4,8 +4,8 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
-import type { ButtonProps } from '../types'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import type { ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
 

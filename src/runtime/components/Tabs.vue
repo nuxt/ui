@@ -5,9 +5,9 @@ import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 

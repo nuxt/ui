@@ -4,9 +4,9 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 

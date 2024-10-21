@@ -2,9 +2,9 @@
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AvatarFallbackProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { avatar: Partial<typeof theme> } }
 

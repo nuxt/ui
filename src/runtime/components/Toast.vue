@@ -4,8 +4,8 @@ import type { ToastRootProps, ToastRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
-import type { AvatarProps, ButtonProps } from '../types'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import type { AvatarProps, ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { toast: Partial<typeof theme> } }
 

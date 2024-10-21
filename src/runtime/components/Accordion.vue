@@ -5,8 +5,8 @@ import type { AccordionRootProps, AccordionRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
-import type { DynamicSlots } from '../types/utils'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import type { DynamicSlots } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
 

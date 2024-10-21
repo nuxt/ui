@@ -5,9 +5,9 @@ import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentP
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
-import type { ToasterProps } from '../types'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import type { ToasterProps } from '../types'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
   tooltip?: TooltipProviderProps

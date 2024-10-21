@@ -6,9 +6,9 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString } from '../types/utils'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
