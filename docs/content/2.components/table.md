@@ -285,6 +285,22 @@ componentProps:
 ---
 ::
 
+### Contextmenu
+
+Use the `contextmenu` listener on your Table to make the rows righ-clickable. The function will receive the original event as the first argument and the row as the second argument.
+
+You can use this to open a [ContextMenu](/components/context-menu) for that row.
+
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-contextmenu'
+componentProps:
+  class: 'flex-1 flex-col overflow-hidden'
+---
+::
+
 ### Searchable
 
 You can easily use the [Input](/components/input) component to filter the rows.
