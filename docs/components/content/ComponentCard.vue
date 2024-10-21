@@ -51,7 +51,6 @@
 </template>
 
 <script setup lang="ts">
-import { transformContent } from '@nuxt/content/transformers'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
@@ -270,27 +269,27 @@ function renderObject (obj: any) {
   return obj
 }
 
-const { data: ast } = await useAsyncData(
-  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
-  async () => {
-    let formatted = ''
-    try {
-      formatted = await $prettier.format(code.value) || code.value
-    } catch (error) {
-      formatted = code.value
-    }
-
-    return transformContent('content:_markdown.md', formatted, {
-      markdown: {
-        highlight: {
-          highlighter,
-          theme: {
-            light: 'material-theme-lighter',
-            default: 'material-theme',
-            dark: 'material-theme-palenight'
-          }
-        }
-      }
+const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`, async () => {
+  let formatted = ''
+  try {
+    formatted = await $prettier.format(code.value, {
+      trailingComma: 'none',
+      semi: false,
+      singleQuote: true
     })
-  }, { watch: [code] })
+  } catch {
+    formatted = code.value
+  }
+
+  return parseMarkdown(formatted, {
+    highlight: {
+      highlighter,
+      theme: {
+        light: 'material-theme-lighter',
+        default: 'material-theme',
+        dark: 'material-theme-palenight'
+      }
+    }
+  })
+}, { watch: [code] })
 </script>
