@@ -56,7 +56,7 @@ export interface ModuleOptions {
   /**
    * Configuration for the Nuxt UI devtools.
    */
-  devtools: {
+  devtools?: {
     /**
      * Enable or disable Nuxt UI devtools.
      * @defaultValue `true`
