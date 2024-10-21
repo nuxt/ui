@@ -57,7 +57,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
         }
       }
     },
-    ComponentImportPlugin(meta.framework, options),
+    ...ComponentImportPlugin(meta.framework, options),
     AutoImport[meta.framework]({ dirs: [join(runtimeDir, 'composables')] }),
     tailwind(),
     PluginsPlugin(options),
