@@ -82,7 +82,7 @@
   "devDependencies": {
     "@nuxt/eslint-config": "^0.5.7",
     "@nuxt/module-builder": "^0.8.4",
-    "@nuxt/test-utils": "^3.14.3",
+    "@nuxt/test-utils": "^3.14.4",
     "@release-it/conventional-changelog": "^9.0.0",
     "@standard-schema/spec": "1.0.0-beta.1",
     "@vue/test-utils": "^2.4.6",
