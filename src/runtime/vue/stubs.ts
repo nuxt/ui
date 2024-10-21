@@ -21,7 +21,6 @@ export const useState = <T>(key: string, init: () => T): Ref<T> => {
 }
 
 export function useNuxtApp() {
-  import.meta.client = true
   return {
     isHydrating: true,
     payload: { serverRendered: false }

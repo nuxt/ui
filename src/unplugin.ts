@@ -5,7 +5,6 @@ import { createUnplugin } from 'unplugin'
 import AutoImport from 'unplugin-auto-import'
 import { defu } from 'defu'
 import tailwind from '@tailwindcss/vite'
-import { resolvePathSync } from 'mlly'
 import type colors from 'tailwindcss/colors'
 
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
@@ -16,6 +15,7 @@ import TemplatePlugin from './plugins/templates'
 import PluginsPlugin from './plugins/plugins'
 import AppConfigPlugin from './plugins/app-config'
 import ComponentImportPlugin from './plugins/components'
+import NuxtEnvironmentPlugin from './plugins/nuxt-environment'
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
@@ -46,17 +46,8 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
 
   const appConfig = defu({ ui: options.ui }, { ui: getDefaultUiConfig(options.theme.colors) })
 
-  const stubPath = resolvePathSync(join(runtimeDir, 'vue/stubs'), { extensions: ['.ts', '.mjs', '.js'] })
   return [
-    {
-      name: 'nuxt:ui',
-      resolveId(id) {
-        // this is implemented here rather than in a vite `config` hook for cross-builder support
-        if (id === '#imports') {
-          return stubPath
-        }
-      }
-    },
+    NuxtEnvironmentPlugin(),
     ...ComponentImportPlugin(meta.framework, options),
     AutoImport[meta.framework]({ dirs: [join(runtimeDir, 'composables')] }),
     tailwind(),
