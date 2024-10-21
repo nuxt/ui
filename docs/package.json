@@ -20,6 +20,7 @@
     "nuxt-og-image": "^3.0.6",
     "prettier": "^3.3.3",
     "shiki-transformer-color-highlight": "^0.2.0",
+    "superstruct": "^2.0.2",
     "ufo": "^1.5.4",
     "valibot": "^0.42.1",
     "yup": "^1.4.0",
