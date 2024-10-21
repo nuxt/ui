@@ -25,7 +25,6 @@ async function handleFormatMessage(message) {
     ])
   }
 
-  console.log('message', message)
   const { options, source } = message
   const formatted = await prettier.format(source, {
     parser: 'vue',
@@ -33,6 +32,5 @@ async function handleFormatMessage(message) {
     ...options
   })
 
-  console.log('formatted', formatted)
   return formatted
 }
