@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import theme from '#build/ui/toaster'
+import { useAppConfig } from '#imports'
 
 const positions = Object.keys(theme.variants.position)
 

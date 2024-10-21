@@ -4,15 +4,16 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/link'
-import type { NuxtLinkProps } from '#app'
+import type { RouterLinkProps } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
 const appConfig = _appConfig as AppConfig & { ui: { link: Partial<typeof theme> } }
 
 const link = tv({ extend: tv(theme), ...(appConfig.ui?.link || {}) })
 
-export interface LinkProps extends NuxtLinkProps {
+export interface LinkProps extends Omit<RouterLinkProps, 'to'> {
   /** Ensures we are accepting an undefined `to` when running without Nuxt context */
-  to?: NuxtLinkProps['to']
+  to?: RouterLinkProps['to']
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
@@ -64,7 +65,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
 defineSlots<LinkSlots>()
 
 const route = useRoute()
-const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass'))
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to'))
 
 const ui = computed(() => tv({
   extend: link,
@@ -111,7 +112,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
 </script>
 
 <template>
-  <NuxtLink v-slot="{ href, navigate, route: linkRoute, rel, target, isExternal, isActive, isExactActive }" v-bind="nuxtLinkProps" custom>
+  <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to || '#'" custom>
     <template v-if="custom">
       <slot
         v-bind="{
@@ -121,9 +122,6 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
           disabled,
           href,
           navigate,
-          rel,
-          target,
-          isExternal,
           active: isLinkActive({ route: linkRoute, isActive, isExactActive })
         }"
       />
@@ -136,14 +134,11 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
         type,
         disabled,
         href,
-        navigate,
-        rel,
-        target,
-        isExternal
+        navigate
       }"
       :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
     >
       <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
     </ULinkBase>
-  </NuxtLink>
+  </RouterLink>
 </template>
