@@ -3,6 +3,7 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
@@ -29,6 +30,8 @@ export interface FormEmits<T extends object> {
 export interface FormSlots {
   default(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'FormExample' })
 </script>
 
 <script lang="ts" setup generic="T extends object">

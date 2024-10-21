@@ -2,6 +2,7 @@
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AvatarFallbackProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
 
@@ -25,6 +26,8 @@ export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
   class?: any
   ui?: Partial<typeof avatar.slots>
 }
+
+extendDevtoolsMeta<AvatarProps>({ defaultProps: { src: 'https://avatars.githubusercontent.com/u/739984?v=4', alt: 'Benjamin Canac' } })
 </script>
 
 <script setup lang="ts">
