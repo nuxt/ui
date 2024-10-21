@@ -17,40 +17,40 @@ export default (options: Required<ModuleOptions>) => ({
     size: {
       xs: {
         base: 'px-2 py-1 text-xs gap-1',
-        leading: 'pl-2',
-        trailing: 'pr-2',
+        leading: '!ps-2',
+        trailing: '!pe-2',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       sm: {
         base: 'px-2.5 py-1.5 text-xs gap-1.5',
-        leading: 'pl-2.5',
-        trailing: 'pr-2.5',
+        leading: '!ps-2.5',
+        trailing: '!pe-2.5',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       md: {
         base: 'px-2.5 py-1.5 text-sm gap-1.5',
-        leading: 'pl-2.5',
-        trailing: 'pr-2.5',
+        leading: '!ps-2.5',
+        trailing: '!pe-2.5',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       lg: {
         base: 'px-3 py-2 text-sm gap-2',
-        leading: 'pl-3',
-        trailing: 'pr-3',
+        leading: '!ps-3',
+        trailing: '!pe-3',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       xl: {
         base: 'px-3 py-2 text-base gap-2',
-        leading: 'pl-3',
-        trailing: 'pr-3',
+        leading: '!ps-3',
+        trailing: '!pe-3',
         leadingIcon: 'size-6',
         leadingAvatarSize: 'xs',
         trailingIcon: 'size-6'
@@ -80,7 +80,7 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     },
     type: {
-      file: 'file:mr-1.5 file:font-medium file:text-[var(--ui-text-muted)] file:outline-none'
+      file: 'file:me-1.5 file:font-medium file:text-[var(--ui-text-muted)] file:outline-none'
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
@@ -102,43 +102,43 @@ export default (options: Required<ModuleOptions>) => ({
   }, {
     leading: true,
     size: 'xs',
-    class: 'pl-7'
+    class: '!ps-7'
   }, {
     leading: true,
     size: 'sm',
-    class: 'pl-8'
+    class: '!ps-8'
   }, {
     leading: true,
     size: 'md',
-    class: 'pl-9'
+    class: '!ps-9'
   }, {
     leading: true,
     size: 'lg',
-    class: 'pl-10'
+    class: '!ps-10'
   }, {
     leading: true,
     size: 'xl',
-    class: 'pl-11'
+    class: '!ps-11'
   }, {
     trailing: true,
     size: 'xs',
-    class: 'pr-7'
+    class: '!pe-7'
   }, {
     trailing: true,
     size: 'sm',
-    class: 'pr-8'
+    class: '!pe-8'
   }, {
     trailing: true,
     size: 'md',
-    class: 'pr-9'
+    class: '!pe-9'
   }, {
     trailing: true,
     size: 'lg',
-    class: 'pr-10'
+    class: '!pe-10'
   }, {
     trailing: true,
     size: 'xl',
-    class: 'pr-11'
+    class: '!pe-11'
   }, {
     loading: true,
     leading: true,
