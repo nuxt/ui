@@ -78,9 +78,10 @@ defineShortcuts({
 </script>
 
 <template>
-  <UApp :toaster="appConfig.toaster as any">
+  <UApp :toaster="(appConfig.toaster as any)">
     <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-[var(--ui-bg)]" vaul-drawer-wrapper>
-      <UNavigationMenu :items="items" orientation="vertical" class="border-r border-[var(--ui-border)] overflow-y-auto w-48 p-4" />
+      <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-r border-[var(--ui-border)] overflow-y-auto w-48 p-4" />
+      <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-[var(--ui-border)] overflow-x-auto" />
 
       <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-12 px-4">
         <Suspense>
