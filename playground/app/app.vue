@@ -42,6 +42,7 @@ const components = [
   'slider',
   'switch',
   'tabs',
+  'table',
   'textarea',
   'toast',
   'tooltip'
