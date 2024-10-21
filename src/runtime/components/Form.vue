@@ -31,9 +31,7 @@ export interface FormSlots {
   default(props?: {}): any
 }
 
-extendDevtoolsMeta({
-  example: 'FormExample'
-})
+extendDevtoolsMeta({ example: 'FormExample' })
 </script>
 
 <script lang="ts" setup generic="T extends object">

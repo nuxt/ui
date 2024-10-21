@@ -30,9 +30,7 @@ export interface ButtonGroupSlots {
   default(props?: {}): any
 }
 
-extendDevtoolsMeta({
-  example: 'ButtonGroupExample'
-})
+extendDevtoolsMeta({ example: 'ButtonGroupExample' })
 </script>
 
 <script setup lang="ts">

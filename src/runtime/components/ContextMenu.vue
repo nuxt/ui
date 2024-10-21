@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps } from 'radix-vue'
@@ -82,60 +81,62 @@ export type ContextMenuSlots<T extends { slot?: string }> = {
 extendDevtoolsMeta({
   example: 'ContextMenuExample',
   ignoreProps: ['items'],
-  defaultProps: { items: [
-    [{
-      label: 'My account',
-      avatar: {
-        src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-      }
-    }],
-    [{
-      label: 'Appearance',
-      children: [{
-        label: 'System',
-        icon: 'i-heroicons-computer-desktop'
+  defaultProps: {
+    items: [
+      [{
+        label: 'My account',
+        avatar: {
+          src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+        }
+      }],
+      [{
+        label: 'Appearance',
+        children: [{
+          label: 'System',
+          icon: 'i-heroicons-computer-desktop'
+        }, {
+          label: 'Light',
+          icon: 'i-heroicons-sun'
+        }, {
+          label: 'Dark',
+          icon: 'i-heroicons-moon'
+        }]
+      }],
+      [{
+        label: 'Show Sidebar',
+        kbds: ['meta', 'S']
       }, {
-        label: 'Light',
-        icon: 'i-heroicons-sun'
+        label: 'Show Toolbar',
+        kbds: ['shift', 'meta', 'D']
       }, {
-        label: 'Dark',
-        icon: 'i-heroicons-moon'
+        label: 'Collapse Pinned Tabs',
+        disabled: true
+      }], [{
+        label: 'Refresh the Page'
+      }, {
+        label: 'Clear Cookies and Refresh'
+      }, {
+        label: 'Clear Cache and Refresh'
+      }, {
+        type: 'separator'
+      }, {
+        label: 'Developer',
+        children: [[{
+          label: 'View Source',
+          kbds: ['option', 'meta', 'U']
+        }, {
+          label: 'Developer Tools',
+          kbds: ['option', 'meta', 'I']
+        }], [{
+          label: 'Inspect Elements',
+          kbds: ['option', 'meta', 'C']
+        }], [{
+          label: 'JavaScript Console',
+          kbds: ['option', 'meta', 'J']
+        }]]
       }]
-    }],
-    [{
-      label: 'Show Sidebar',
-      kbds: ['meta', 'S']
-    }, {
-      label: 'Show Toolbar',
-      kbds: ['shift', 'meta', 'D']
-    }, {
-      label: 'Collapse Pinned Tabs',
-      disabled: true
-    }], [{
-      label: 'Refresh the Page'
-    }, {
-      label: 'Clear Cookies and Refresh'
-    }, {
-      label: 'Clear Cache and Refresh'
-    }, {
-      type: 'separator'
-    }, {
-      label: 'Developer',
-      children: [[{
-        label: 'View Source',
-        kbds: ['option', 'meta', 'U']
-      }, {
-        label: 'Developer Tools',
-        kbds: ['option', 'meta', 'I']
-      }], [{
-        label: 'Inspect Elements',
-        kbds: ['option', 'meta', 'C']
-      }], [{
-        label: 'JavaScript Console',
-        kbds: ['option', 'meta', 'J']
-      }]]
-    }]
-  ] }
+    ]
+  }
 })
 </script>
 

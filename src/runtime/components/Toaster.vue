@@ -31,9 +31,7 @@ export default {
   name: 'Toaster'
 }
 
-extendDevtoolsMeta({
-  example: 'ToasterExample'
-})
+extendDevtoolsMeta({ example: 'ToasterExample' })
 </script>
 
 <script setup lang="ts">
@@ -94,8 +92,6 @@ const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 
 function getOffset(index: number) {
   return refs.value.slice(index + 1).reduce((acc, { height }) => acc + height + 16, 0)
 }
-
-extendDevtoolsMeta({ ignore: true })
 </script>
 
 <template>

@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'radix-vue'

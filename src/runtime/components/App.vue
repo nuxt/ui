@@ -16,9 +16,7 @@ export default {
   name: 'App'
 }
 
-extendDevtoolsMeta({
-  ignore: true
-})
+extendDevtoolsMeta({ ignore: true })
 </script>
 
 <script setup lang="ts">
@@ -35,8 +33,6 @@ defineSlots<AppSlots>()
 const configProviderProps = useForwardProps(reactivePick(props, 'dir', 'scrollBody'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
-
-extendDevtoolsMeta({ ignore: true })
 </script>
 
 <template>

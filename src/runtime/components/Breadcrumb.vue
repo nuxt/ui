@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'

@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps } from 'radix-vue'
@@ -85,39 +84,42 @@ export type NavigationMenuSlots<T extends { slot?: string }> = {
 
 extendDevtoolsMeta({
   ignoreProps: ['items'],
-  defaultProps: { items: [
-    [{
-      label: 'Documentation',
-      icon: 'i-heroicons-book-open',
-      badge: 10,
-      children: [{
-        label: 'Introduction',
-        description: 'Fully styled and customizable components for Nuxt.',
-        icon: 'i-heroicons-home'
+  defaultProps: {
+    items: [
+      [{
+        label: 'Documentation',
+        icon: 'i-heroicons-book-open',
+        badge: 10,
+        children: [{
+          label: 'Introduction',
+          description: 'Fully styled and customizable components for Nuxt.',
+          icon: 'i-heroicons-home'
+        }, {
+          label: 'Installation',
+          description: 'Learn how to install and configure Nuxt UI in your application.',
+          icon: 'i-heroicons-cloud-arrow-down'
+        }, {
+          label: 'Theming',
+          description: 'Learn how to customize the look and feel of the components.',
+          icon: 'i-heroicons-swatch'
+        }, {
+          label: 'Shortcuts',
+          description: 'Learn how to display and define keyboard shortcuts in your app.',
+          icon: 'i-heroicons-computer-desktop'
+        }]
       }, {
-        label: 'Installation',
-        description: 'Learn how to install and configure Nuxt UI in your application.',
-        icon: 'i-heroicons-cloud-arrow-down'
+        label: 'GitHub',
+        icon: 'i-simple-icons-github',
+        to: 'https://github.com/nuxt/ui',
+        target: '_blank'
       }, {
-        label: 'Theming',
-        description: 'Learn how to customize the look and feel of the components.',
-        icon: 'i-heroicons-swatch'
-      }, {
-        label: 'Shortcuts',
-        description: 'Learn how to display and define keyboard shortcuts in your app.',
-        icon: 'i-heroicons-computer-desktop'
+        label: 'Help',
+        icon: 'i-heroicons-question-mark-circle',
+        disabled: true
       }]
-    }, {
-      label: 'GitHub',
-      icon: 'i-simple-icons-github',
-      to: 'https://github.com/nuxt/ui',
-      target: '_blank'
-    }, {
-      label: 'Help',
-      icon: 'i-heroicons-question-mark-circle',
-      disabled: true
-    }]
-  ] } })
+    ]
+  }
+})
 </script>
 
 <script setup lang="ts" generic="T extends NavigationMenuItem">

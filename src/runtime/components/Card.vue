@@ -25,9 +25,7 @@ export interface CardSlots {
   footer(props?: {}): any
 }
 
-extendDevtoolsMeta({
-  example: 'CardExample'
-})
+extendDevtoolsMeta({ example: 'CardExample' })
 </script>
 
 <script setup lang="ts">
