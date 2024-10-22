@@ -654,7 +654,7 @@ name: 'select-menu-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the SelectMenu.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the SelectMenu by pressing :kbd{value="O"}.
 ::
 
 ### Control search term

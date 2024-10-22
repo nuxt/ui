@@ -287,7 +287,7 @@ name: 'modal-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the Modal.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Modal by pressing :kbd{value="O"}.
 ::
 
 ::tip

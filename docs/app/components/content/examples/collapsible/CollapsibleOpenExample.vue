@@ -7,7 +7,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <UCollapsible v-model:open="open" class="w-48">
+  <UCollapsible v-model:open="open" class="flex flex-col gap-2 w-48">
     <UButton
       label="Open"
       color="neutral"
