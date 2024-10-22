@@ -17,10 +17,10 @@ export default (options: Required<ModuleOptions>) => ({
     linkLabelExternalIcon: 'size-3 align-top text-[var(--ui-text-dimmed)]',
     childList: 'gap-2 p-2',
     childItem: '',
-    childLink: 'group size-full px-3 py-2 rounded-[calc(var(--ui-radius)*1.5)] flex items-start gap-2 text-left',
+    childLink: 'group size-full px-3 rounded-[calc(var(--ui-radius)*1.5)] flex items-start gap-2 text-left',
     childLinkWrapper: 'flex flex-col items-start',
     childLinkIcon: 'size-5 shrink-0',
-    childLinkLabel: 'font-semibold text-sm relative inline-flex',
+    childLinkLabel: 'text-sm relative inline-flex',
     childLinkLabelExternalIcon: 'size-3 align-top text-[var(--ui-text-dimmed)]',
     childLinkDescription: 'text-sm text-[var(--ui-text-muted)]',
     separator: 'px-2 h-px bg-[var(--ui-border)]',
@@ -57,12 +57,16 @@ export default (options: Required<ModuleOptions>) => ({
         item: 'py-2',
         link: 'px-2.5 py-1.5 before:inset-x-px before:inset-y-0',
         childList: 'grid grid-cols-2',
+        childLink: 'py-2',
+        childLinkLabel: 'font-semibold',
         content: 'absolute top-0 left-0'
       },
       vertical: {
         root: 'flex-col',
         link: 'flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0',
-        childList: 'flex flex-col'
+        childList: 'flex flex-col ml-5 border-l border-[var(--ui-border)]',
+        childLink: 'py-1',
+        childLinkLabel: 'text-[var(--ui-text-muted)]'
       }
     },
     active: {
