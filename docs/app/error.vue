@@ -3,12 +3,7 @@ import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
 import type { NuxtError } from '#app'
 
-useSeoMeta({
-  title: 'Page not found',
-  description: 'We are sorry but this page could not be found.'
-})
-
-defineProps<{
+const props = defineProps<{
   error: NuxtError
 }>()
 
@@ -67,6 +62,11 @@ useHead({
   }
 })
 
+useSeoMeta({
+  titleTemplate: '%s - Nuxt UI v3',
+  title: String(props.error.statusCode)
+})
+
 useServerSeoMeta({
   ogSiteName: 'Nuxt UI',
   twitterCard: 'summary_large_image'
@@ -83,13 +83,7 @@ provide('navigation', navigation)
 
     <Header :links="links" />
 
-    <UContainer>
-      <UMain>
-        <UPage>
-          <!-- <UPageError :error="error" /> -->
-        </UPage>
-      </UMain>
-    </UContainer>
+    <UError :error="error" />
 
     <Footer />
 
