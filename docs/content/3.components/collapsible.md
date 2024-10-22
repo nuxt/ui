@@ -79,7 +79,7 @@ name: 'collapsible-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the Collapsible.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Collapsible by pressing :kbd{value="O"}.
 ::
 
 ::tip

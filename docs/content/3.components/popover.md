@@ -174,7 +174,7 @@ name: 'popover-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the Popover.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Popover by pressing :kbd{value="O"}.
 ::
 
 ### With command palette

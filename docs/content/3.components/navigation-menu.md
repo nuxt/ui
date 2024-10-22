@@ -63,19 +63,19 @@ props:
       to: /composables
       children:
         - label: defineShortcuts
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
         - label: useModal
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a modal within your application.
           to: /composables/use-modal
         - label: useSlideover
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a slideover within your application.
           to: /composables/use-slideover
         - label: useToast
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a toast within your application.
           to: /composables/use-toast
     - label: Components
@@ -84,27 +84,27 @@ props:
       active: true
       children:
         - label: Link
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Use NuxtLink with superpowers.
           to: /components/link
         - label: Modal
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a modal within your application.
           to: /components/modal
         - label: NavigationMenu
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a list of links.
           to: /components/navigation-menu
         - label: Pagination
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a list of pages.
           to: /components/pagination
         - label: Popover
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /components/popover
         - label: Progress
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
     - label: GitHub
@@ -137,8 +137,11 @@ Each item can take a `children` array of objects with the following properties t
 
 Use the `orientation` prop to change the orientation of the NavigationMenu.
 
+When orientation is `vertical`, a [Collapsible](/components/collapsible) component is used to display children.
+
 ::component-code
 ---
+collapse: true
 ignore:
   - items
   - class
@@ -169,19 +172,19 @@ props:
         icon: i-heroicons-circle-stack
         children:
           - label: defineShortcuts
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
           - label: useModal
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Display a modal within your application.
             to: /composables/use-modal
           - label: useSlideover
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Display a slideover within your application.
             to: /composables/use-slideover
           - label: useToast
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Display a toast within your application.
             to: /composables/use-toast
       - label: Components
@@ -189,27 +192,27 @@ props:
         active: true
         children:
           - label: Link
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Use NuxtLink with superpowers.
             to: /components/link
           - label: Modal
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Display a modal within your application.
             to: /components/modal
           - label: NavigationMenu
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Display a list of links.
             to: /components/navigation-menu
           - label: Pagination
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Display a list of pages.
             to: /components/pagination
           - label: Popover
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Display a non-modal dialog that floats around a trigger element.
             to: /components/popover
           - label: Progress
-            icon: i-heroicons-document-text-20-solid
+            icon: i-heroicons-document-text
             description: Show a horizontal bar to indicate task progression.
             to: /components/progress
     - - label: GitHub
@@ -220,7 +223,7 @@ props:
       - label: Help
         icon: i-heroicons-question-mark-circle
         disabled: true
-  class: 'w-48'
+  class: 'data-[orientation=vertical]:w-48'
 ---
 ::
 
@@ -382,19 +385,19 @@ props:
       to: /composables
       children:
         - label: defineShortcuts
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
         - label: useModal
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a modal within your application.
           to: /composables/use-modal
         - label: useSlideover
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a slideover within your application.
           to: /composables/use-slideover
         - label: useToast
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a toast within your application.
           to: /composables/use-toast
     - label: Components
@@ -403,27 +406,27 @@ props:
       active: true
       children:
         - label: Link
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Use NuxtLink with superpowers.
           to: /components/link
         - label: Modal
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a modal within your application.
           to: /components/modal
         - label: NavigationMenu
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a list of links.
           to: /components/navigation-menu
         - label: Pagination
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a list of pages.
           to: /components/pagination
         - label: Popover
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /components/popover
         - label: Progress
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
   class: 'justify-center'
@@ -474,19 +477,19 @@ props:
       to: /composables
       children:
         - label: defineShortcuts
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
         - label: useModal
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a modal within your application.
           to: /composables/use-modal
         - label: useSlideover
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a slideover within your application.
           to: /composables/use-slideover
         - label: useToast
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a toast within your application.
           to: /composables/use-toast
     - label: Components
@@ -495,27 +498,27 @@ props:
       active: true
       children:
         - label: Link
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Use NuxtLink with superpowers.
           to: /components/link
         - label: Modal
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a modal within your application.
           to: /components/modal
         - label: NavigationMenu
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a list of links.
           to: /components/navigation-menu
         - label: Pagination
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a list of pages.
           to: /components/pagination
         - label: Popover
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /components/popover
         - label: Progress
-          icon: i-heroicons-document-text-20-solid
+          icon: i-heroicons-document-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
   class: 'justify-center'
@@ -537,6 +540,10 @@ You can control the active item by using the `default-value` prop or the `v-mode
 collapse: true
 name: 'navigation-menu-model-value-example'
 ---
+::
+
+::note
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can switch the active item by pressing :kbd{value="1"}, :kbd{value="2"}, or :kbd{value="3"}.
 ::
 
 ::tip
