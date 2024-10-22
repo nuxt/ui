@@ -183,9 +183,6 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
 
                               <UIcon v-if="childItem.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ class: props.ui?.childLinkLabelExternalIcon, active: childActive })" />
                             </p>
-                            <p v-if="childItem.description" :class="ui.childLinkDescription({ class: props.ui?.childLinkDescription, active: childActive })">
-                              {{ childItem.description }}
-                            </p>
                           </div>
                         </ULinkBase>
                       </NavigationMenuLink>
