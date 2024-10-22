@@ -49,37 +49,37 @@ export interface TableProps<T> {
   loadingColor?: TableVariants['loadingColor']
   loadingAnimation?: TableVariants['loadingAnimation']
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/global-filtering)
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
    */
   globalFilterOptions?: Omit<GlobalFilterOptions<T>, 'onGlobalFilterChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-filtering)
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-filtering#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-filtering)
    */
   columnFiltersOptions?: Omit<ColumnFiltersOptions<T>, 'getFilteredRowModel' | 'onColumnFiltersChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-pinning#enablecolumnpinning)
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-pinning#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-pinning)
    */
   columnPinningOptions?: Omit<ColumnPinningOptions, 'onColumnPinningChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-visibility#enablehiding)
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-visibility#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-visibility)
    */
   visibilityOptions?: Omit<VisibilityOptions, 'onColumnVisibilityChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/sorting#enablemultiremove)
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/sorting#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/sorting)
    */
   sortingOptions?: Omit<SortingOptions<T>, 'getSortedRowModel' | 'onSortingChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/expanding#autoresetexpanded)
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/expanding#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/expanding)
    */
   expandedOptions?: Omit<ExpandedOptions<T>, 'getExpandedRowModel' | 'onExpandedChange'>
   /**
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/row-selection#enablemultirowselection)
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/row-selection#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/row-selection)
    */
   rowSelectionOptions?: Omit<RowSelectionOptions<T>, 'onRowSelectionChange'>

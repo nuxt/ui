@@ -5,9 +5,7 @@ const props = defineProps<{
   prop: PropertyMeta
 }>()
 
-const links = computed(() => {
-  return props.prop.tags?.filter((tag: any) => tag.name === 'link')
-})
+const links = computed(() => props.prop.tags?.filter((tag: any) => tag.name === 'link'))
 </script>
 
 <template>
