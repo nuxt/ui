@@ -149,6 +149,7 @@ describe('Table', () => {
   it.each([
     // Props
     ['with data', { props }],
+    ['without results', {}],
     ['with columns', { props: { ...props, columns } }],
     ['with sticky', { props: { ...props, sticky: true } }],
     ['with loading', { props: { ...props, loading: true } }],

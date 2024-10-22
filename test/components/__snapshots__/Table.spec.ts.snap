@@ -969,3 +969,18 @@ exports[`Table > renders with ui correctly 1`] = `
   </table>
 </div>"
 `;
+
+exports[`Table > renders without results correctly 1`] = `
+"<div class="relative overflow-auto">
+  <table class="min-w-full overflow-clip">
+    <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)]">
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50"></tr>
+    </thead>
+    <tbody class="divide-y divide-[var(--ui-border)]">
+      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+        <td colspan="0" class="py-6 text-center text-sm text-[var(--ui-text-muted)]"> No results </td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;

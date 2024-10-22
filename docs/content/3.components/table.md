@@ -12,6 +12,8 @@ links:
 
 ## Usage
 
+The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API.
+
 ### Data
 
 Use the `data` prop as an array of objects, the columns will be generated based on the keys of the objects.
@@ -58,22 +60,72 @@ props:
 
 ### Columns
 
-Use the `columns` prop as an array of objects with the following properties:
+Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/latest/docs/api/core/column-def) objects with properties like:
 
-- `accessorKey`: The key of the column.
-- `header`: The header of the column.
-- `footer`: The footer of the column.
+- `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-[var(--ui-text-muted)]"}
+- `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-[var(--ui-text-muted)]"}
+- `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-[var(--ui-text-muted)]"}
+
+You can take advantage of the Vue [`h` function](https://vuejs.org/api/render-function.html#h) to render components or other HTML elements.
 
 ::component-example
 ---
+prettier: true
 collapse: true
 class: '!p-0'
 name: 'table-columns-example'
 ---
 ::
 
-::note{to="https://tanstack.com/table/latest/docs/guide/column-defs" target="_blank"}
-For more information on columns, see the [TanStack Table documentation](https://tanstack.com/table/latest/docs/guide/column-defs).
+::warning
+Make sure to use `resolveComponent` when rendering components using the `h` function.
+::
+
+### Loading
+
+Use the `loading` prop to display a loading state, the `loading-color` prop to change its color and the `loading-animation` prop to change its animation.
+
+::component-code
+---
+collapse: true
+class: '!p-0'
+ignore:
+  - data
+  - class
+external:
+  - data
+props:
+  loading: true
+  loadingColor: primary
+  loadingAnimation: carousel
+  data:
+    - id: '4600'
+      date: '2024-03-11T15:30:00'
+      status: 'paid'
+      email: 'james.anderson@example.com'
+      amount: 594
+    - id: '4599'
+      date: '2024-03-11T10:10:00'
+      status: 'failed'
+      email: 'mia.white@example.com'
+      amount: 276
+    - id: '4598'
+      date: '2024-03-11T08:50:00'
+      status: 'refunded'
+      email: 'william.brown@example.com'
+      amount: 315
+    - id: '4597'
+      date: '2024-03-10T19:45:00'
+      status: 'paid'
+      email: 'emma.davis@example.com'
+      amount: 529
+    - id: '4596'
+      date: '2024-03-10T15:55:00'
+      status: 'paid'
+      email: 'ethan.harris@example.com'
+      amount: 639
+  class: 'flex-1'
+---
 ::
 
 ### Sticky
@@ -131,54 +183,25 @@ props:
 ---
 ::
 
-### Loading
-
-Use the `loading` prop to display a loading state, the `loading-color` prop to change its color and the `loading-animation` prop to change its animation.
-
-::component-code
----
-collapse: true
-class: '!p-0'
-ignore:
-  - data
-  - class
-external:
-  - data
-props:
-  loading: true
-  loadingColor: primary
-  loadingAnimation: carousel
-  data:
-    - id: '4600'
-      date: '2024-03-11T15:30:00'
-      status: 'paid'
-      email: 'james.anderson@example.com'
-      amount: 594
-    - id: '4599'
-      date: '2024-03-11T10:10:00'
-      status: 'failed'
-      email: 'mia.white@example.com'
-      amount: 276
-    - id: '4598'
-      date: '2024-03-11T08:50:00'
-      status: 'refunded'
-      email: 'william.brown@example.com'
-      amount: 315
-    - id: '4597'
-      date: '2024-03-10T19:45:00'
-      status: 'paid'
-      email: 'emma.davis@example.com'
-      amount: 529
-    - id: '4596'
-      date: '2024-03-10T15:55:00'
-      status: 'paid'
-      email: 'ethan.harris@example.com'
-      amount: 639
-  class: 'flex-1'
----
-::
-
 ## Examples
+
+### With row actions
+
+### With row selection
+
+### With expandable rows
+
+### With column pinning
+
+### With column visibility
+
+### With column sorting
+
+### With column filtering
+
+### With global filtering
+
+### With fetched data
 
 ## API
 

@@ -3,7 +3,24 @@
 import type { Ref } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import type { Row, ColumnDef, ColumnFiltersState, ColumnPinningState, RowSelectionState, SortingState, ExpandedState, VisibilityState, Updater } from '@tanstack/vue-table'
+import type {
+  Row,
+  ColumnDef,
+  ColumnFiltersState,
+  ColumnPinningState,
+  RowSelectionState,
+  SortingState,
+  ExpandedState,
+  VisibilityState,
+  GlobalFilterOptions,
+  ColumnFiltersOptions,
+  ColumnPinningOptions,
+  VisibilityOptions,
+  ExpandedOptions,
+  SortingOptions,
+  RowSelectionOptions,
+  Updater
+} from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
 
@@ -31,6 +48,41 @@ export interface TableProps<T> {
   loading?: boolean
   loadingColor?: TableVariants['loadingColor']
   loadingAnimation?: TableVariants['loadingAnimation']
+  /**
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/global-filtering)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
+   */
+  globalFilterOptions?: Omit<GlobalFilterOptions<T>, 'onGlobalFilterChange'>
+  /**
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-filtering)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-filtering)
+   */
+  columnFiltersOptions?: Omit<ColumnFiltersOptions<T>, 'getFilteredRowModel' | 'onColumnFiltersChange'>
+  /**
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-pinning#enablecolumnpinning)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-pinning)
+   */
+  columnPinningOptions?: Omit<ColumnPinningOptions, 'onColumnPinningChange'>
+  /**
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-visibility#enablehiding)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-visibility)
+   */
+  visibilityOptions?: Omit<VisibilityOptions, 'onColumnVisibilityChange'>
+  /**
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/sorting#enablemultiremove)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/sorting)
+   */
+  sortingOptions?: Omit<SortingOptions<T>, 'getSortedRowModel' | 'onSortingChange'>
+  /**
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/expanding#autoresetexpanded)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/expanding)
+   */
+  expandedOptions?: Omit<ExpandedOptions<T>, 'getExpandedRowModel' | 'onExpandedChange'>
+  /**
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/row-selection#enablemultirowselection)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/row-selection)
+   */
+  rowSelectionOptions?: Omit<RowSelectionOptions<T>, 'onRowSelectionChange'>
   class?: any
   ui?: Partial<typeof table.slots>
 }
@@ -44,7 +96,14 @@ export interface TableSlots<T> {
 
 <script setup lang="ts" generic="T extends TableData">
 import { computed } from 'vue'
-import { FlexRender, getCoreRowModel, getExpandedRowModel, getFilteredRowModel, getSortedRowModel, useVueTable } from '@tanstack/vue-table'
+import {
+  FlexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  getExpandedRowModel,
+  useVueTable
+} from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 
 const props = defineProps<TableProps<T>>()
@@ -72,15 +131,22 @@ const tableApi = useVueTable({
   data,
   columns: columns.value,
   getCoreRowModel: getCoreRowModel(),
-  getFilteredRowModel: getFilteredRowModel(),
-  getSortedRowModel: getSortedRowModel(),
-  getExpandedRowModel: getExpandedRowModel(),
+  ...(props.globalFilterOptions || {}),
   onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
+  ...(props.columnFiltersOptions || {}),
+  getFilteredRowModel: getFilteredRowModel(),
   onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFiltersState),
+  ...(props.visibilityOptions || {}),
   onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibilityState),
+  ...(props.columnPinningOptions || {}),
   onColumnPinningChange: updaterOrValue => valueUpdater(updaterOrValue, columnPinningState),
+  ...(props.rowSelectionOptions || {}),
   onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelectionState),
+  ...(props.sortingOptions || {}),
+  getSortedRowModel: getSortedRowModel(),
   onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sortingState),
+  ...(props.expandedOptions || {}),
+  getExpandedRowModel: getExpandedRowModel(),
   onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
   state: {
     get globalFilter() {

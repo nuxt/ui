@@ -10,40 +10,40 @@ export interface ModuleOptions {
   /**
    * Prefix for components
    * @defaultValue `U`
-   * @see https://ui3.nuxt.dev/getting-started/installation#prefix
+   * @link https://ui3.nuxt.dev/getting-started/installation#prefix
    */
   prefix?: string
 
   /**
    * Enable or disable `@nuxt/fonts` module
    * @defaultValue `true`
-   * @see https://ui3.nuxt.dev/getting-started/installation#fonts
+   * @link https://ui3.nuxt.dev/getting-started/installation#fonts
    */
   fonts?: boolean
 
   /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
-   * @see https://ui3.nuxt.dev/getting-started/installation#colormode
+   * @link https://ui3.nuxt.dev/getting-started/installation#colormode
    */
   colorMode?: boolean
 
   /**
    * Customize how the theme is generated
-   * @see https://ui3.nuxt.dev/getting-started/theme
+   * @link https://ui3.nuxt.dev/getting-started/theme
    */
   theme?: {
     /**
      * Define the color aliases available for components
      * @defaultValue `['primary', 'secondary', 'success', 'info', 'warning', 'error']`
-     * @see https://ui3.nuxt.dev/getting-started/installation#themecolors
+     * @link https://ui3.nuxt.dev/getting-started/installation#themecolors
      */
     colors?: string[]
 
     /**
      * Enable or disable transitions on components
      * @defaultValue `true`
-     * @see https://ui3.nuxt.dev/getting-started/installation#themetransitions
+     * @link https://ui3.nuxt.dev/getting-started/installation#themetransitions
      */
     transitions?: boolean
   }
