@@ -16,6 +16,7 @@ export interface NavigationMenuChildItem extends Omit<LinkProps, 'raw' | 'custom
   label: string
   description?: string
   icon?: string
+  badge?: string | number | BadgeProps
   select?(e: Event): void
 }
 
@@ -177,13 +178,20 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                         <ULinkBase v-bind="childSlotProps" :class="ui.childLink({ class: [props.ui?.childLink, childItem.class], active: childActive })">
                           <UIcon v-if="childItem.icon" :name="childItem.icon" :class="ui.childLinkIcon({ class: props.ui?.childLinkIcon, active: childActive })" />
 
-                          <div :class="ui.childLinkWrapper({ class: props.ui?.childLinkWrapper })">
-                            <p :class="ui.childLinkLabel({ class: props.ui?.childLinkLabel, active: childActive })">
-                              {{ get(childItem, props.labelKey as string) }}
+                          <p :class="ui.childLinkLabel({ class: props.ui?.childLinkLabel, active: childActive })">
+                            {{ get(childItem, props.labelKey as string) }}
 
-                              <UIcon v-if="childItem.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ class: props.ui?.childLinkLabelExternalIcon, active: childActive })" />
-                            </p>
-                          </div>
+                            <UIcon v-if="childItem.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ class: props.ui?.childLinkLabelExternalIcon, active: childActive })" />
+                          </p>
+
+                          <UBadge
+                            v-if="childItem.badge"
+                            color="neutral"
+                            variant="outline"
+                            :size="((props.ui?.childLinkTrailingBadgeSize || ui.childLinkTrailingBadgeSize()) as BadgeProps['size'])"
+                            v-bind="(typeof childItem.badge === 'string' || typeof childItem.badge === 'number') ? { label: childItem.badge } : childItem.badge"
+                            :class="ui.childLinkTrailingBadge({ class: props.ui?.childLinkTrailingBadge })"
+                          />
                         </ULinkBase>
                       </NavigationMenuLink>
                     </ULink>

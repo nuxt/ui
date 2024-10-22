@@ -22,6 +22,8 @@ export default (options: Required<ModuleOptions>) => ({
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'text-sm relative inline-flex',
     childLinkLabelExternalIcon: 'size-3 align-top text-[var(--ui-text-dimmed)]',
+    childLinkTrailingBadge: 'ms-auto shrink-0 rounded',
+    childLinkTrailingBadgeSize: 'sm',
     childLinkDescription: 'text-sm text-[var(--ui-text-muted)]',
     separator: 'px-2 h-px bg-[var(--ui-border)]',
     viewportWrapper: 'absolute top-full inset-x-0 flex w-full',
