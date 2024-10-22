@@ -1,5 +1,5 @@
 <template>
-  <UCollapsible class="w-48">
+  <UCollapsible class="flex flex-col gap-2 w-48">
     <UButton
       class="group"
       label="Open"

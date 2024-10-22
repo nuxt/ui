@@ -286,7 +286,7 @@ name: 'slideover-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the Slideover.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Slideover by pressing :kbd{value="O"}.
 ::
 
 ::tip

@@ -8,7 +8,7 @@ describe('Collapsible', () => {
   it.each([
     // Props
     ['with open', { props }],
-    ['with class', { props: { ...props, class: 'gap-4' } }],
+    ['with class', { props: { ...props, class: 'flex flex-col gap-2 w-48' } }],
     ['with ui', { props: { ...props, ui: { content: 'bg-[var(--ui-bg-elevated)]' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
