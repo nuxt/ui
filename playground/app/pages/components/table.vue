@@ -20,7 +20,7 @@ type Payment = {
 
 const table = useTemplateRef('table')
 
-const data: Payment[] = [{
+const data = ref<Payment[]>([{
   id: '4600',
   date: '2024-03-11T15:30:00',
   status: 'paid',
@@ -140,7 +140,7 @@ const data: Payment[] = [{
   status: 'paid',
   email: 'logan.baker@example.com',
   amount: 567
-}]
+}])
 
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
@@ -258,9 +258,20 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
+const loading = ref(true)
 const columnPinning = ref({
   left: ['id'],
   right: ['actions']
+})
+
+function randomize() {
+  data.value = [...data.value].sort(() => Math.random() - 0.5)
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false
+  }, 1300)
 })
 </script>
 
@@ -273,6 +284,8 @@ const columnPinning = ref({
         placeholder="Filter emails..."
         @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
       />
+
+      <UButton color="neutral" variant="outline" label="Randomize" @click="randomize" />
 
       <UDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
@@ -303,7 +316,9 @@ const columnPinning = ref({
       :data="data"
       :columns="columns"
       :column-pinning="columnPinning"
-      class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1 overflow-y-auto"
+      loading
+      sticky
+      class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
     >
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>

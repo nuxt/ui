@@ -1,19 +1,9 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { Ref } from 'vue'
-import { tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import type {
-  Row,
-  ColumnDef,
-  ColumnFiltersState,
-  ColumnPinningState,
-  RowSelectionState,
-  SortingState,
-  ExpandedState,
-  VisibilityState,
-  Updater
-} from '@tanstack/vue-table'
+import type { Row, ColumnDef, ColumnFiltersState, ColumnPinningState, RowSelectionState, SortingState, ExpandedState, VisibilityState, Updater } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
 
@@ -21,14 +11,26 @@ const appConfig = _appConfig as AppConfig & { ui: { table: Partial<typeof theme>
 
 const table = tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })
 
+type TableVariants = VariantProps<typeof table>
+
 export type TableColumn<T> = ColumnDef<T>
+
 export interface TableData {
   [key: string]: any
 }
 
 export interface TableProps<T> {
+  data?: T[]
   columns?: TableColumn<T>[]
-  data: T[]
+  /**
+   * Whether the table should have a sticky header.
+   * @defaultValue false
+   */
+  sticky?: boolean
+  /** Whether the table should be in loading state. */
+  loading?: boolean
+  loadingColor?: TableVariants['loadingColor']
+  loadingAnimation?: TableVariants['loadingAnimation']
   class?: any
   ui?: Partial<typeof table.slots>
 }
@@ -42,21 +44,21 @@ export interface TableSlots<T> {
 
 <script setup lang="ts" generic="T extends TableData">
 import { computed } from 'vue'
-import {
-  FlexRender,
-  getCoreRowModel,
-  getExpandedRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  useVueTable
-} from '@tanstack/vue-table'
+import { FlexRender, getCoreRowModel, getExpandedRowModel, getFilteredRowModel, getSortedRowModel, useVueTable } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 
 const props = defineProps<TableProps<T>>()
 defineSlots<TableSlots<T>>()
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = table()
+const data = computed(() => props.data ?? [])
+const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
+
+const ui = computed(() => table({
+  sticky: props.sticky,
+  loading: props.loading,
+  loadingColor: props.loadingColor,
+  loadingAnimation: props.loadingAnimation
+}))
 
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
@@ -66,11 +68,9 @@ const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { defau
 const sortingState = defineModel<SortingState>('sorting', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 
-const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(props.data[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
-
 const tableApi = useVueTable({
-  get data() { return props.data },
-  get columns() { return columns.value },
+  data,
+  columns: columns.value,
   getCoreRowModel: getCoreRowModel(),
   getFilteredRowModel: getFilteredRowModel(),
   getSortedRowModel: getSortedRowModel(),

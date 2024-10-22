@@ -2,8 +2,12 @@ import { h, resolveComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
 import Table, { type TableProps, type TableSlots, type TableColumn } from '../../src/runtime/components/Table.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/table'
 
 describe('Table', () => {
+  const loadingColors = Object.keys(theme.variants.loadingColor) as any
+  const loadingAnimations = Object.keys(theme.variants.loadingAnimation) as any
+
   const UButton = resolveComponent('UButton')
   const UCheckbox = resolveComponent('UCheckbox')
   const UBadge = resolveComponent('UBadge')
@@ -146,6 +150,10 @@ describe('Table', () => {
     // Props
     ['with data', { props }],
     ['with columns', { props: { ...props, columns } }],
+    ['with sticky', { props: { ...props, sticky: true } }],
+    ['with loading', { props: { ...props, loading: true } }],
+    ...loadingColors.map((loadingColor: string) => [`with loading color ${loadingColor}`, { props: { ...props, loading: true, loadingColor } }]),
+    ...loadingAnimations.map((loadingAnimation: string) => [`with loading animation ${loadingAnimation}`, { props: { ...props, loading: true, loadingAnimation } }]),
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<typeof data[number]>, slots?: Partial<TableSlots<typeof data[number]>> }) => {
