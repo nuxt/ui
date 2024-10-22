@@ -105,8 +105,25 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     variant: 'pill',
     class: {
-      link: ['hover:text-[var(--ui-text-highlighted)] hover:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:text-[var(--ui-text-highlighted)] data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50', options.theme.transitions && 'transition-colors before:transition-colors'],
+      link: ['hover:text-[var(--ui-text-highlighted)] hover:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:text-[var(--ui-text-highlighted)]', options.theme.transitions && 'transition-colors before:transition-colors'],
       linkLeadingIcon: ['group-hover:text-[var(--ui-text)] group-data-[state=open]:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
+    }
+  }, {
+    disabled: false,
+    variant: 'pill',
+    highlight: true,
+    orientation: 'horizontal',
+    class: {
+      link: 'data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50'
+    }
+  }, {
+    disabled: false,
+    variant: 'pill',
+    highlight: false,
+    active: false,
+    orientation: 'horizontal',
+    class: {
+      link: 'data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
