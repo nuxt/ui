@@ -3,9 +3,29 @@ import { upperFirst, camelCase } from 'scule'
 import type { ComponentMeta } from 'vue-component-meta'
 import * as theme from '#build/ui'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   ignore?: string[]
-}>()
+}>(), {
+  ignore: () => [
+    'activeClass',
+    'inactiveClass',
+    'exactActiveClass',
+    'ariaCurrentValue',
+    'href',
+    'rel',
+    'noRel',
+    'prefetch',
+    'prefetchOn',
+    'noPrefetch',
+    'prefetchedClass',
+    'replace',
+    'exact',
+    'exactQuery',
+    'exactHash',
+    'external',
+    'onClick'
+  ]
+})
 
 const route = useRoute()
 

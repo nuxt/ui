@@ -11,6 +11,8 @@ interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 
   portal?: boolean
   sub?: boolean
   labelKey: string
+  checkedIcon?: string
+  loadingIcon?: string
   class?: any
   ui: typeof _contextMenu
   uiOverride?: any
@@ -50,8 +52,9 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
   <DefineItemTemplate v-slot="{ item, active, index }">
     <slot :name="item.slot || 'item'" :item="(item as T)" :index="index">
       <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="(item as T)" :active="active" :index="index">
-        <UAvatar v-if="item.avatar" :size="((props.uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: uiOverride?.itemLeadingAvatar, active })" />
+        <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, loading: true })" />
         <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, active })" />
+        <UAvatar v-else-if="item.avatar" :size="((props.uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: uiOverride?.itemLeadingAvatar, active })" />
       </slot>
 
       <span v-if="get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel({ class: uiOverride?.itemLabel, active })">
@@ -62,13 +65,17 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
         <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, active })" />
       </span>
 
-      <span v-if="item.children?.length || item.kbds?.length || !!slots[item.slot ? `${item.slot}-trailing`: 'item-trailing']" :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
+      <span :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
         <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="(item as T)" :active="active" :index="index">
           <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon({ class: uiOverride?.itemTrailingIcon, active })" />
           <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: uiOverride?.itemTrailingKbds })">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.uiOverride?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
         </slot>
+
+        <ContextMenu.ItemIndicator as-child>
+          <UIcon :name="checkedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: uiOverride?.itemTrailingIcon })" />
+        </ContextMenu.ItemIndicator>
       </span>
     </slot>
   </DefineItemTemplate>
@@ -101,6 +108,8 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               :items="item.children"
               :align-offset="-4"
               :label-key="labelKey"
+              :checked-icon="checkedIcon"
+              :loading-icon="loadingIcon"
               v-bind="item.content"
             >
               <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
@@ -108,7 +117,24 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               </template>
             </UContextMenuContent>
           </ContextMenu.Sub>
-          <ContextMenu.Item v-else as-child :disabled="item.disabled" :text-value="get(item, props.labelKey as string)" @select="item.select">
+          <ContextMenu.CheckboxItem
+            v-else-if="item.type === 'checkbox'"
+            :checked="item.checked"
+            :disabled="item.disabled"
+            :text-value="get(item, props.labelKey as string)"
+            :class="ui.item({ class: [uiOverride?.item, item.class] })"
+            @update:checked="item.onUpdateChecked"
+            @select="item.onSelect"
+          >
+            <ReuseItemTemplate :item="item" :index="index" />
+          </ContextMenu.CheckboxItem>
+          <ContextMenu.Item
+            v-else
+            as-child
+            :disabled="item.disabled"
+            :text-value="get(item, props.labelKey as string)"
+            @select="item.onSelect"
+          >
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<ContextMenuItem, 'type'>)" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.class], active })">
                 <ReuseItemTemplate :item="item" :active="active" :index="index" />

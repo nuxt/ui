@@ -12,13 +12,13 @@ export default {
   variants: {
     side: {
       top: {
-        content: 'inset-x-0 top-0'
+        content: 'inset-x-0 top-0 max-h-full'
       },
       right: {
         content: 'right-0 inset-y-0 w-full max-w-md'
       },
       bottom: {
-        content: 'inset-x-0 bottom-0'
+        content: 'inset-x-0 bottom-0 max-h-full'
       },
       left: {
         content: 'left-0 inset-y-0 w-full max-w-md'

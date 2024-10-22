@@ -30,7 +30,6 @@ function removeItem() {
     state.items.pop()
   }
 }
-const formItemRef = ref()
 
 function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log('Success', event.data)
@@ -43,7 +42,6 @@ function onError(event: any) {
 
 <template>
   <UForm
-    ref="formItemRef"
     :state="state"
     :schema="schema"
     class="gap-4 flex flex-col w-60"

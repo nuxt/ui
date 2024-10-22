@@ -25,18 +25,9 @@ const items = ref([
     }
   }
 ])
-const selected = ref(items.value[0])
+const value = ref(items.value[0])
 </script>
 
 <template>
-  <USelectMenu v-model="selected" :items="items" class="w-48">
-    <template #leading="{ modelValue, ui }">
-      <UAvatar
-        v-if="modelValue"
-        v-bind="modelValue.avatar"
-        :size="ui.itemLeadingAvatarSize()"
-        :class="ui.itemLeadingAvatar()"
-      />
-    </template>
-  </USelectMenu>
+  <USelectMenu v-model="value" :avatar="value?.avatar" :items="items" class="w-48" />
 </template>

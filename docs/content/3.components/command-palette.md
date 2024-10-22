@@ -41,9 +41,10 @@ Each group takes some `items` as an array of objects with the following properti
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `chip?: ChipProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
+- `loading?: boolean`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `select?(e?: Event): void`{lang="ts-type"}
+- `onSelect?(e?: Event): void`{lang="ts-type"}
 
 ::component-code
 ---
@@ -513,7 +514,7 @@ class: '!p-0'
 ---
 ::
 
-### Within a popover
+### Within a Popover
 
 You can use the CommandPalette component inside a [Popover](/components/popover)'s content.
 
@@ -524,7 +525,7 @@ name: 'popover-command-palette-example'
 ---
 ::
 
-### Within a modal
+### Within a Modal
 
 You can use the CommandPalette component inside a [Modal](/components/modal)'s content.
 
@@ -535,7 +536,7 @@ name: 'modal-command-palette-example'
 ---
 ::
 
-### Within a drawer
+### Within a Drawer
 
 You can use the CommandPalette component inside a [Drawer](/components/drawer)'s content.
 
@@ -592,32 +593,7 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 
 ### Props
 
-::component-props
----
-ignore:
-  - as
-  - to
-  - target
-  - active
-  - activeClass
-  - inactiveClass
-  - exactActiveClass
-  - ariaCurrentValue
-  - href
-  - rel
-  - noRel
-  - prefetch
-  - prefetchOn
-  - noPrefetch
-  - prefetchedClass
-  - replace
-  - exact
-  - exactQuery
-  - exactHash
-  - external
-  - onClick
----
-::
+:component-props
 
 ### Slots
 

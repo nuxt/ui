@@ -3,7 +3,7 @@ const title = 'Roadmap'
 const description = 'Discover our Volta board for @nuxt/ui development status.'
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt UI',
+  titleTemplate: '%s - Nuxt UI v3',
   title,
   ogTitle: 'Nuxt UI Roadmap',
   description

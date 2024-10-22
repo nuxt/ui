@@ -12,7 +12,7 @@ describe('Separator', () => {
     ['with as', { props: { as: 'span' } }],
     ['with label', { props: { label: '+1' } }],
     ['with icon', { props: { icon: 'i-heroicons-photo' } }],
-    ['with avatar', { props: { avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' } } }],
+    ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with orientation vertical', { props: { orientation: 'vertical' as const } }],
     ['with decorative', { props: { decorative: true } }],
     ...types.map((type: string) => [`with type ${type}`, { props: { type } }]),

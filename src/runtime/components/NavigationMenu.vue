@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuItemProps, NavigationMenuContentProps } from 'radix-vue'
+import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
@@ -17,18 +17,19 @@ export interface NavigationMenuChildItem extends Omit<LinkProps, 'raw' | 'custom
   description?: string
   icon?: string
   badge?: string | number | BadgeProps
-  select?(e: Event): void
+  onSelect?(e: Event): void
 }
 
-export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, Pick<NavigationMenuItemProps, 'value'> {
+export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
   badge?: string | number | BadgeProps
   trailingIcon?: string
   slot?: string
+  value?: string
   children?: NavigationMenuChildItem[]
-  select?(e: Event): void
+  onSelect?(e: Event): void
 }
 
 type NavigationMenuVariants = VariantProps<typeof navigationMenu>
@@ -137,13 +138,13 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               :ui="item.children?.length && orientation === 'vertical'
                 ? { content: ui.content({ class: props.ui?.content }) }
                 : undefined"
-              @select="item.select"
+              @select="item.onSelect"
             >
               <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active, disabled: !!item.disabled })">
                 <slot :name="item.slot || 'item'" :item="item" :index="index">
                   <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="active" :index="index">
-                    <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
-                    <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active, disabled: !!item.disabled })" />
+                    <UIcon v-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active, disabled: !!item.disabled })" />
+                    <UAvatar v-else-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
                   </slot>
 
                   <span v-if="get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
@@ -174,7 +175,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                 <ul :class="ui.childList({ class: props.ui?.childList })">
                   <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                     <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
-                      <NavigationMenuLink as-child :active="childActive" @select="childItem.select">
+                      <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
                         <ULinkBase v-bind="childSlotProps" :class="ui.childLink({ class: [props.ui?.childLink, childItem.class], active: childActive })">
                           <UIcon v-if="childItem.icon" :name="childItem.icon" :class="ui.childLinkIcon({ class: props.ui?.childLinkIcon, active: childActive })" />
 
@@ -204,7 +205,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               <ul :class="ui.childList({ class: props.ui?.childList })">
                 <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                   <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
-                    <NavigationMenuLink as-child :active="childActive" @select="childItem.select">
+                    <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
                       <ULinkBase v-bind="childSlotProps" :class="ui.childLink({ class: [props.ui?.childLink, childItem.class], active: childActive })">
                         <UIcon v-if="childItem.icon" :name="childItem.icon" :class="ui.childLinkIcon({ class: props.ui?.childLinkIcon, active: childActive })" />
 

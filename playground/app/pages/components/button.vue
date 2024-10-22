@@ -32,8 +32,13 @@ function onClick() {
       </UButton>
     </div>
     <div class="flex items-center gap-2">
-      <UButton loading-auto @click="onClick">
+      <UButton loading>
         Loading
+      </UButton>
+    </div>
+    <div class="flex items-center gap-2">
+      <UButton loading-auto @click="onClick">
+        Loading auto
       </UButton>
     </div>
     <div class="flex items-center gap-2">
@@ -54,11 +59,24 @@ function onClick() {
         color="neutral"
       />
     </div>
+    <div class="flex items-center gap-2">
+      <UButton
+        v-for="variant in variants"
+        :key="variant"
+        :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+        :label="upperFirst(variant)"
+        color="neutral"
+        :variant="variant"
+      />
+    </div>
     <div class="flex items-center gap-2 ml-[-129px]">
       <UButton v-for="size in sizes" :key="size" label="Button" :size="size" />
     </div>
     <div class="flex items-center gap-2 ml-[-171px]">
       <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" label="Button" :size="size" />
+    </div>
+    <div class="flex items-center gap-2 ml-[-171px]">
+      <UButton v-for="size in sizes" :key="size" :avatar="{ src: 'https://github.com/benjamincanac.png' }" label="Button" :size="size" />
     </div>
     <div class="flex items-center gap-2 ml-[-159px]">
       <UButton
@@ -70,8 +88,28 @@ function onClick() {
         :size="size"
       />
     </div>
+    <div class="flex items-center gap-2 ml-[-159px]">
+      <UButton
+        v-for="size in sizes"
+        :key="size"
+        :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+        label="Square"
+        square
+        :size="size"
+      />
+    </div>
     <div class="flex items-center gap-2 ml-[-68px]">
       <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" :size="size" />
+    </div>
+    <div class="flex items-center gap-2 ml-[-68px]">
+      <UButton
+        v-for="size in sizes"
+        :key="size"
+        :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+        :size="size"
+        color="neutral"
+        variant="outline"
+      />
     </div>
     <div class="flex items-center gap-2">
       <UButton icon="i-heroicons-rocket-launch" trailing-icon="i-heroicons-chevron-down-20-solid" label="Block" block />

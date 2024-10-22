@@ -7,7 +7,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
 <template>
   <div class="flex flex-col gap-2 items-center">
     <div class="flex items-center gap-1.5">
-      <UAvatar v-for="size in sizes" :key="size" src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" :size="size" />
+      <UAvatar v-for="size in sizes" :key="size" src="https://github.com/benjamincanac.png" alt="Benjamin Canac" :size="size" />
     </div>
     <div class="flex items-center gap-1.5">
       <UAvatar v-for="size in sizes" :key="size" icon="i-heroicons-photo" :size="size" />
@@ -22,17 +22,17 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
     <div class="flex items-center gap-1.5">
       <UAvatarGroup v-for="size in sizes" :key="size" :size="size" :max="2">
         <UChip inset text="1">
-          <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" />
+          <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
         </UChip>
-        <UAvatar src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel" />
-        <UAvatar src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter" />
+        <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+        <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
       </UAvatarGroup>
     </div>
     <div class="flex items-center gap-1.5">
       <UAvatarGroup v-for="size in sizes" :key="size" :size="size" :max="4">
-        <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" />
-        <UAvatar src="https://avatars.githubusercontent.com/u/25613751?v=4" alt="Romain Hamel" />
-        <UAvatar src="https://avatars.githubusercontent.com/u/19751938?v=4" alt="Neil Richter" />
+        <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+        <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+        <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
       </UAvatarGroup>
     </div>
   </div>
