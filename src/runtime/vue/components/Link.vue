@@ -133,7 +133,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
         as,
         type,
         disabled,
-        href,
+        href: to ? href : undefined,
         navigate
       }"
       :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"

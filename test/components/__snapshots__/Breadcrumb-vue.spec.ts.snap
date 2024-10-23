@@ -1,0 +1,146 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Breadcrumb > renders with class correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0 w-48">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Components</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with custom slot correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Components</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold">Custom slot</a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with item slot correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors">Item slot</a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75">Item slot</a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with item-label slot correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span><span class="truncate">Item label slot</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Item label slot</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with item-leading slot correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors">Item leading slot<span class="truncate">Home</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75">Item leading slot<span class="truncate">Components</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with item-trailing slot correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span><span class="truncate">Home</span>Item trailing slot</a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Components</span>Item trailing slot</a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with items correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Components</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with labelKey correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
+        <!--v-if-->
+      </a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">i-heroicons-cube-transparent</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">i-heroicons-link</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with separator slot correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" class="flex">/</li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Components</span></a></li>
+    <li role="presentation" class="flex">/</li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with separatorIcon correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium hover:text-[var(--ui-text)] transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] font-medium cursor-not-allowed opacity-75"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Components</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-semibold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`Breadcrumb > renders with ui correctly 1`] = `
+"<div aria-label="breadcrumb" class="relative min-w-0">
+  <ol class="flex items-center gap-1.5">
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] transition-colors font-bold"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a aria-disabled="true" role="link" tabindex="-1" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] cursor-not-allowed opacity-75 font-bold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Components</span></a></li>
+    <li role="presentation" class="flex"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-[var(--ui-text-muted)]" width="1em" height="1em" viewBox="0 0 16 16"></svg></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-[var(--ui-primary)] text-[var(--ui-primary)] font-bold"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;

@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Kbd > renders with as correctly 1`] = `"<span class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">K</span>"`;
+
+exports[`Kbd > renders with class correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px] font-bold">K</kbd>"`;
+
+exports[`Kbd > renders with default slot correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">Default slot</kbd>"`;
+
+exports[`Kbd > renders with size lg correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-6 min-w-[24px] text-[12px]">K</kbd>"`;
+
+exports[`Kbd > renders with size md correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+
+exports[`Kbd > renders with size sm correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">K</kbd>"`;
+
+exports[`Kbd > renders with value correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+
+exports[`Kbd > renders with variant outline correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+
+exports[`Kbd > renders with variant solid correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg-inverted)] text-[var(--ui-bg)] h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+
+exports[`Kbd > renders with variant subtle correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg-elevated)] text-[var(--ui-text)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">K</kbd>"`;

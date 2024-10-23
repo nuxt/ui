@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Link > renders with activeClass correctly 1`] = `"<button custom=""></button>"`;
+
+exports[`Link > renders with as correctly 1`] = `"<button custom=""></button>"`;
+
+exports[`Link > renders with class correctly 1`] = `"<button class="font-medium" custom=""></button>"`;
+
+exports[`Link > renders with default slot correctly 1`] = `"<button custom=""></button>"`;
+
+exports[`Link > renders with disabled correctly 1`] = `"<button custom=""></button>"`;
+
+exports[`Link > renders with inactiveClass correctly 1`] = `"<button custom=""></button>"`;
+
+exports[`Link > renders with raw correctly 1`] = `"<button raw="true" custom=""></button>"`;
+
+exports[`Link > renders with to correctly 1`] = `"<button to="/" custom=""></button>"`;
+
+exports[`Link > renders with type correctly 1`] = `"<button custom=""></button>"`;
