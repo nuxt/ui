@@ -182,7 +182,7 @@ name: 'tooltip-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the Tooltip.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Tooltip by pressing :kbd{value="O"}.
 ::
 
 ## API

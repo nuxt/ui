@@ -15,7 +15,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',
     linkLabel: 'truncate',
     linkLabelExternalIcon: 'size-3 align-top text-[var(--ui-text-dimmed)]',
-    childList: 'grid grid-cols-2 gap-2 p-2',
+    childList: '',
     childItem: '',
     childLink: 'group size-full px-3 py-2 rounded-[calc(var(--ui-radius)*1.5)] flex items-start gap-2 text-left',
     childLinkWrapper: 'flex flex-col items-start',
@@ -55,11 +55,14 @@ export default (options: Required<ModuleOptions>) => ({
         root: 'w-full items-center justify-between',
         list: 'flex items-center',
         item: 'py-2',
-        link: 'px-2.5 py-1.5 before:inset-x-px before:inset-y-0'
+        link: 'px-2.5 py-1.5 before:inset-x-px before:inset-y-0',
+        childList: 'grid grid-cols-2 gap-2 p-2'
       },
       vertical: {
         root: 'flex-col',
-        link: 'px-2.5 py-1.5 before:inset-y-px before:inset-x-0'
+        link: 'flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0',
+        childList: 'ml-5 border-l border-[var(--ui-border)]',
+        childItem: 'pl-1.5 -ml-px'
       }
     },
     active: {
@@ -102,8 +105,25 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     variant: 'pill',
     class: {
-      link: ['hover:text-[var(--ui-text-highlighted)] hover:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:text-[var(--ui-text-highlighted)] data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50', options.theme.transitions && 'transition-colors before:transition-colors'],
+      link: ['hover:text-[var(--ui-text-highlighted)] hover:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:text-[var(--ui-text-highlighted)]', options.theme.transitions && 'transition-colors before:transition-colors'],
       linkLeadingIcon: ['group-hover:text-[var(--ui-text)] group-data-[state=open]:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
+    }
+  }, {
+    disabled: false,
+    variant: 'pill',
+    highlight: true,
+    orientation: 'horizontal',
+    class: {
+      link: 'data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50'
+    }
+  }, {
+    disabled: false,
+    variant: 'pill',
+    highlight: false,
+    active: false,
+    orientation: 'horizontal',
+    class: {
+      link: 'data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
