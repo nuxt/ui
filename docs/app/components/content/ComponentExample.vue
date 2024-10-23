@@ -22,13 +22,11 @@ const props = withDefaults(defineProps<{
    * @defaultValue true
    */
   preview?: boolean
-
   /**
    * Whether to show the source code
    * @defaultValue true
    */
   source?: boolean
-
   /**
    * A list of variable props to link to the component.
    */
@@ -40,6 +38,10 @@ const props = withDefaults(defineProps<{
     default: any
     multiple?: boolean
   }>
+  /**
+   * A list of line numbers to highlight in the code block
+   */
+  highlights?: number[]
 }>(), {
   preview: true,
   source: true
@@ -65,7 +67,7 @@ const code = computed(() => {
 `
   }
 
-  code += `\`\`\`vue${props.preview ? '' : ` [${data.pascalName}.vue]`}
+  code += `\`\`\`vue ${props.preview ? '' : ` [${data.pascalName}.vue]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
 ${data?.code ?? ''}
 \`\`\``
 
@@ -87,7 +89,8 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}`, async
     formatted = await $prettier.format(code.value, {
       trailingComma: 'none',
       semi: false,
-      singleQuote: true
+      singleQuote: true,
+      printWidth: 100
     })
   } catch {
     formatted = code.value
