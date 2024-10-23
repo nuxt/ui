@@ -4,7 +4,7 @@ exports[`Table > renders with class correctly 1`] = `
 "<div class="overflow-auto absolute">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -12,35 +12,35 @@ exports[`Table > renders with class correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -56,7 +56,7 @@ exports[`Table > renders with columns correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">
           <ucheckbox modelvalue="false" indeterminate="false" arialabel="Select all"></ucheckbox>
         </th>
@@ -75,7 +75,7 @@ exports[`Table > renders with columns correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
           <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
         </td>
@@ -97,7 +97,7 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
           <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
         </td>
@@ -119,7 +119,7 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
           <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
         </td>
@@ -141,7 +141,7 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
           <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
         </td>
@@ -163,7 +163,7 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">
           <ucheckbox modelvalue="false" arialabel="Select row"></ucheckbox>
         </td>
@@ -194,7 +194,7 @@ exports[`Table > renders with data correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -202,35 +202,35 @@ exports[`Table > renders with data correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -246,7 +246,7 @@ exports[`Table > renders with loading animation carousel correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-primary)] after:animate-[carousel_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -254,35 +254,35 @@ exports[`Table > renders with loading animation carousel correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -298,7 +298,7 @@ exports[`Table > renders with loading animation carousel-inverse correctly 1`] =
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-primary)] after:animate-[carousel-inverse_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -306,35 +306,35 @@ exports[`Table > renders with loading animation carousel-inverse correctly 1`] =
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -350,7 +350,7 @@ exports[`Table > renders with loading animation elastic correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-primary)] after:animate-[elastic_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -358,35 +358,35 @@ exports[`Table > renders with loading animation elastic correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -402,7 +402,7 @@ exports[`Table > renders with loading animation swing correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-primary)] after:animate-[swing_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -410,35 +410,35 @@ exports[`Table > renders with loading animation swing correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -454,7 +454,7 @@ exports[`Table > renders with loading color error correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-error)] after:animate-[carousel_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -462,35 +462,35 @@ exports[`Table > renders with loading color error correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -506,7 +506,7 @@ exports[`Table > renders with loading color info correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-info)] after:animate-[carousel_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -514,35 +514,35 @@ exports[`Table > renders with loading color info correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -558,7 +558,7 @@ exports[`Table > renders with loading color neutral correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-bg-inverted)] after:animate-[carousel_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -566,35 +566,35 @@ exports[`Table > renders with loading color neutral correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -610,7 +610,7 @@ exports[`Table > renders with loading color primary correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-primary)] after:animate-[carousel_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -618,35 +618,35 @@ exports[`Table > renders with loading color primary correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -662,7 +662,7 @@ exports[`Table > renders with loading color secondary correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-secondary)] after:animate-[carousel_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -670,35 +670,35 @@ exports[`Table > renders with loading color secondary correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -714,7 +714,7 @@ exports[`Table > renders with loading color success correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-success)] after:animate-[carousel_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -722,35 +722,35 @@ exports[`Table > renders with loading color success correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -766,7 +766,7 @@ exports[`Table > renders with loading color warning correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-warning)] after:animate-[carousel_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -774,35 +774,35 @@ exports[`Table > renders with loading color warning correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -818,7 +818,7 @@ exports[`Table > renders with loading correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-[var(--ui-primary)] after:animate-[carousel_2s_ease-in-out_infinite]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -826,35 +826,35 @@ exports[`Table > renders with loading correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -870,7 +870,7 @@ exports[`Table > renders with sticky correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="[&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)] sticky top-0 inset-x-0 bg-[var(--ui-bg)]/75 z-[1] backdrop-blur">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -878,35 +878,35 @@ exports[`Table > renders with sticky correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -922,7 +922,7 @@ exports[`Table > renders with ui correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip table-auto">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Status</th>
@@ -930,35 +930,35 @@ exports[`Table > renders with ui correctly 1`] = `
       </tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">316</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">ken99@yahoo.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">242</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Abe45@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">837</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">processing</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Monserrat44@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">874</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">success</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">Silas22@gmail.com</td>
       </tr>
       <!--v-if-->
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">721</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pr-0">failed</td>
@@ -974,10 +974,10 @@ exports[`Table > renders without results correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50"></tr>
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50"></tr>
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
-      <tr class="data-[state=selected]:bg-[var(--ui-bg-elevated)]/50">
+      <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <td colspan="0" class="py-6 text-center text-sm text-[var(--ui-text-muted)]"> No results </td>
       </tr>
     </tbody>
