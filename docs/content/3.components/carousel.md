@@ -251,10 +251,6 @@ This will give you access to the following:
 | `emblaRef`{lang="ts-type"} | `Ref<HTMLElement \| null>`{lang="ts-type"} |
 | `emblaApi`{lang="ts-type"} | [`Ref<EmblaCarouselType \| null>`{lang="ts-type"}](https://www.embla-carousel.com/api/methods/#typescript) |
 
-::note{to="https://vuejs.org/api/composition-api-helpers.html#usetemplateref" target="_blank"}
-You can use `useTemplateRef` to get the component instance.
-::
-
 ## Theme
 
 :component-theme

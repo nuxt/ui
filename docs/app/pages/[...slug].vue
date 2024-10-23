@@ -36,9 +36,7 @@ useSeoMeta({
 })
 
 defineOgImageComponent('Docs', {
-  headline: headline.value,
-  title: page.value.title,
-  description: page.value.seo?.description || page.value.description
+  headline: headline.value
 })
 
 const communityLinks = computed(() => [{
@@ -77,9 +75,23 @@ const communityLinks = computed(() => [{
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title" :links="page.links" :headline="headline">
+    <UPageHeader :title="page.title" :headline="headline">
       <template #description>
         <MDC v-if="page.description" :value="page.description" unwrap="p" />
+      </template>
+
+      <template #links>
+        <UButton
+          v-for="link in page.links"
+          :key="link.label"
+          color="neutral"
+          variant="outline"
+          v-bind="link"
+        >
+          <template v-if="link.avatar" #leading>
+            <UAvatar v-bind="link.avatar" size="2xs" />
+          </template>
+        </UButton>
       </template>
     </UPageHeader>
 

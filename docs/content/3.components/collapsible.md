@@ -21,7 +21,7 @@ prettier: true
 ignore:
   - class
 props:
-  class: 'w-48'
+  class: 'flex flex-col gap-2 w-48'
 slots:
   default: |
 
@@ -48,7 +48,7 @@ prettier: true
 ignore:
   - class
 props:
-  class: 'w-48'
+  class: 'flex flex-col gap-2 w-48'
   disabled: true
 slots:
   default: |
@@ -79,7 +79,7 @@ name: 'collapsible-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the Collapsible.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Collapsible by pressing :kbd{value="O"}.
 ::
 
 ::tip
