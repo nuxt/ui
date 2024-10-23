@@ -4,6 +4,7 @@ import type { SwitchRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
@@ -48,6 +49,8 @@ export interface SwitchSlots {
   label(props: { label?: string }): any
   description(props: { description?: string }): any
 }
+
+extendDevtoolsMeta({ defaultProps: { label: 'Switch me!' } })
 </script>
 
 <script setup lang="ts">

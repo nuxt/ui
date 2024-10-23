@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits } from 'radix-vue'
@@ -8,6 +7,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
@@ -114,6 +114,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
   'item-trailing': SlotProps<T>
 } & DynamicSlots<G, SlotProps<T>> & DynamicSlots<T, SlotProps<T>>
 
+extendDevtoolsMeta({ example: 'CommandPaletteExample', ignoreProps: ['groups'] })
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
