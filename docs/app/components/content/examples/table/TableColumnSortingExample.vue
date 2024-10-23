@@ -2,8 +2,8 @@
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 
-const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
+const UButton = resolveComponent('UButton')
 
 type Payment = {
   id: string
@@ -46,18 +46,6 @@ const data = ref<Payment[]>([{
 }])
 
 const columns: TableColumn<Payment>[] = [{
-  id: 'expand',
-  cell: ({ row }) => h(UButton, {
-    color: 'neutral',
-    variant: 'ghost',
-    icon: 'i-heroicons-chevron-down-20-solid',
-    square: true,
-    ui: {
-      leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
-    },
-    onClick: () => row.toggleExpanded()
-  })
-}, {
   accessorKey: 'id',
   header: '#',
   cell: ({ row }) => `#${row.getValue('id')}`
@@ -87,7 +75,18 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: ({ column }) => {
+    const isSorted = column.getIsSorted()
+
+    return h(UButton, {
+      color: 'neutral',
+      variant: 'ghost',
+      label: 'Email',
+      icon: isSorted ? (isSorted === 'asc' ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid') : 'i-heroicons-arrows-up-down-20-solid',
+      class: '-mx-2.5',
+      onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
+    })
+  }
 }, {
   accessorKey: 'amount',
   header: () => h('div', { class: 'text-right' }, 'Amount'),
@@ -103,19 +102,17 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const expanded = ref({ 1: true })
+const sorting = ref([{
+  id: 'email',
+  desc: false
+}])
 </script>
 
 <template>
   <UTable
-    v-model:expanded="expanded"
+    v-model:sorting="sorting"
     :data="data"
     :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-[var(--ui-bg-elevated)]/50' }"
     class="flex-1"
-  >
-    <template #expanded="{ row }">
-      <pre>{{ row.original }}</pre>
-    </template>
-  </UTable>
+  />
 </template>

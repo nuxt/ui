@@ -2,7 +2,6 @@
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 
-const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
 
 type Payment = {
@@ -46,18 +45,6 @@ const data = ref<Payment[]>([{
 }])
 
 const columns: TableColumn<Payment>[] = [{
-  id: 'expand',
-  cell: ({ row }) => h(UButton, {
-    color: 'neutral',
-    variant: 'ghost',
-    icon: 'i-heroicons-chevron-down-20-solid',
-    square: true,
-    ui: {
-      leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
-    },
-    onClick: () => row.toggleExpanded()
-  })
-}, {
   accessorKey: 'id',
   header: '#',
   cell: ({ row }) => `#${row.getValue('id')}`
@@ -103,19 +90,30 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const expanded = ref({ 1: true })
+const table = useTemplateRef('table')
+
+const columnFilters = ref([{
+  id: 'email',
+  value: 'james'
+}])
 </script>
 
 <template>
-  <UTable
-    v-model:expanded="expanded"
-    :data="data"
-    :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-[var(--ui-bg-elevated)]/50' }"
-    class="flex-1"
-  >
-    <template #expanded="{ row }">
-      <pre>{{ row.original }}</pre>
-    </template>
-  </UTable>
+  <div class="flex flex-col flex-1">
+    <div class="flex px-4 py-3.5 border-b border-[var(--ui-border-accented)]">
+      <UInput
+        :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
+        class="max-w-sm"
+        placeholder="Filter emails..."
+        @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
+      />
+    </div>
+
+    <UTable
+      ref="table"
+      v-model:column-filters="columnFilters"
+      :data="data"
+      :columns="columns"
+    />
+  </div>
 </template>

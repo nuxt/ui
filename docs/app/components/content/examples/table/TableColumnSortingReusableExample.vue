@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
+import type { Column } from '@tanstack/vue-table'
 
-const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
+const UButton = resolveComponent('UButton')
+const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 type Payment = {
   id: string
@@ -46,24 +48,12 @@ const data = ref<Payment[]>([{
 }])
 
 const columns: TableColumn<Payment>[] = [{
-  id: 'expand',
-  cell: ({ row }) => h(UButton, {
-    color: 'neutral',
-    variant: 'ghost',
-    icon: 'i-heroicons-chevron-down-20-solid',
-    square: true,
-    ui: {
-      leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
-    },
-    onClick: () => row.toggleExpanded()
-  })
-}, {
   accessorKey: 'id',
-  header: '#',
+  header: ({ column }) => getHeader(column, 'ID'),
   cell: ({ row }) => `#${row.getValue('id')}`
 }, {
   accessorKey: 'date',
-  header: 'Date',
+  header: ({ column }) => getHeader(column, 'Date'),
   cell: ({ row }) => {
     return new Date(row.getValue('date')).toLocaleString('en-US', {
       day: 'numeric',
@@ -75,7 +65,7 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'status',
-  header: 'Status',
+  header: ({ column }) => getHeader(column, 'Status'),
   cell: ({ row }) => {
     const color = ({
       paid: 'success' as const,
@@ -87,10 +77,10 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: ({ column }) => getHeader(column, 'Email')
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: ({ column }) => h('div', { class: 'text-right' }, getHeader(column, 'Amount')),
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
 
@@ -103,19 +93,58 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const expanded = ref({ 1: true })
+function getHeader(column: Column<Payment>, label: string) {
+  const isSorted = column.getIsSorted()
+
+  return h(UDropdownMenu, {
+    content: {
+      align: 'start'
+    },
+    items: [{
+      label: 'Asc',
+      type: 'checkbox',
+      icon: 'i-heroicons-bars-arrow-up-20-solid',
+      checked: isSorted === 'asc',
+      onSelect: () => {
+        if (isSorted === 'asc') {
+          column.clearSorting()
+        } else {
+          column.toggleSorting(false)
+        }
+      }
+    }, {
+      label: 'Desc',
+      icon: 'i-heroicons-bars-arrow-down-20-solid',
+      type: 'checkbox',
+      checked: isSorted === 'desc',
+      onSelect: () => {
+        if (isSorted === 'desc') {
+          column.clearSorting()
+        } else {
+          column.toggleSorting(true)
+        }
+      }
+    }]
+  }, () => h(UButton, {
+    color: 'neutral',
+    variant: 'ghost',
+    label,
+    icon: isSorted ? (isSorted === 'asc' ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid') : 'i-heroicons-arrows-up-down-20-solid',
+    class: '-mx-2.5 data-[state=open]:bg-[var(--ui-bg-elevated)]'
+  }))
+}
+
+const sorting = ref([{
+  id: 'id',
+  desc: false
+}])
 </script>
 
 <template>
   <UTable
-    v-model:expanded="expanded"
+    v-model:sorting="sorting"
     :data="data"
     :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-[var(--ui-bg-elevated)]/50' }"
     class="flex-1"
-  >
-    <template #expanded="{ row }">
-      <pre>{{ row.original }}</pre>
-    </template>
-  </UTable>
+  />
 </template>

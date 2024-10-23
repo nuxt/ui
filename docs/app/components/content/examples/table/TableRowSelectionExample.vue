@@ -99,8 +99,24 @@ const columns: TableColumn<Payment>[] = [{
     return h('div', { class: 'text-right font-medium' }, formatted)
   }
 }]
+
+const table = useTemplateRef('table')
+
+const rowSelection = ref({ 1: true })
 </script>
 
 <template>
-  <UTable :data="data" :columns="columns" class="flex-1" />
+  <div class="flex-1">
+    <UTable
+      ref="table"
+      v-model:row-selection="rowSelection"
+      :data="data"
+      :columns="columns"
+    />
+
+    <div class="px-4 py-3.5 border-t border-[var(--ui-border-accented)] text-sm text-[var(--ui-text-muted)]">
+      {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
+      {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
+    </div>
+  </div>
 </template>

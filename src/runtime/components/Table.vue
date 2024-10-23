@@ -31,7 +31,6 @@ const table = tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })
 type TableVariants = VariantProps<typeof table>
 
 export type TableColumn<T> = ColumnDef<T>
-export type TableRow<T> = Row<T>
 
 export interface TableData {
   [key: string]: any
@@ -202,7 +201,7 @@ defineExpose({
       <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
         <template v-if="tableApi.getRowModel().rows?.length">
           <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
-            <tr :data-state="row.getIsSelected() ? 'selected' : undefined" :class="ui.tr({ class: [props.ui?.tr] })">
+            <tr :data-selected="row.getIsSelected()" :data-expanded="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
               <td
                 v-for="cell in row.getVisibleCells()"
                 :key="cell.id"

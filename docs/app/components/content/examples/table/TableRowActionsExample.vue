@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import type { TableColumn, TableRow } from '@nuxt/ui'
+import type { TableColumn } from '@nuxt/ui'
+import type { Row } from '@tanstack/vue-table'
 
 const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
@@ -109,7 +110,7 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-function getRowItems(row: TableRow<Payment>) {
+function getRowItems(row: Row<Payment>) {
   return [{
     type: 'label',
     label: 'Actions'

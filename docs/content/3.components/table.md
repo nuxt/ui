@@ -14,6 +14,22 @@ links:
 
 The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API.
 
+::note
+Some features of **TanStack Table** are not supported yet, we'll add more over time.
+::
+
+::component-example
+---
+source: false
+name: 'table-example'
+class: '!p-0'
+---
+::
+
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/tree/v3/docs/app/components/content/examples/table/TableExample.vue"}
+This example demonstrates the most common use case of the `Table` component. Check out the source code on GitHub.
+::
+
 ### Data
 
 Use the `data` prop as an array of objects, the columns will be generated based on the keys of the objects.
@@ -188,9 +204,53 @@ props:
 
 ## Examples
 
+### With row actions
+
+You can add a new column that renders a [DropdownMenu](/components/dropdown-menu) component inside the `cell` to render row actions.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-actions-example'
+highlights:
+  - 110
+  - 134
+class: '!p-0'
+---
+::
+
+### With expandable rows
+
+You can add a new column that renders a [Button](/components/button) component inside the `cell` to toggle the expandable state of a row using the TanStack Table [Expanding APIs](https://tanstack.com/table/latest/docs/api/features/expanding).
+
+::caution
+You need to define the `#expanded` slot to render the expanded content which will receive the row as a parameter.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-expandable-example'
+highlights:
+  - 55
+  - 71
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `expanded` prop to control the expandable state of the rows (can be binded with `v-model`).
+::
+
+::note
+You could also add this action to the [DropdownMenu](/components/dropdown-menu) component inside the `actions` column.
+::
+
 ### With row selection
 
-You can add a new column that renders a [Checkbox](/components/checkbox) component inside the `header` and `cell` to select rows.
+You can add a new column that renders a [Checkbox](/components/checkbox) component inside the `header` and `cell` to select rows using the TanStack Table [Row Selection APIs](https://tanstack.com/table/latest/docs/api/features/row-selection).
 
 ::component-example
 ---
@@ -204,43 +264,81 @@ class: '!p-0'
 ---
 ::
 
-::note{to="https://tanstack.com/table/latest/docs/api/features/row-selection" target="_blank"}
-This example uses the Row Selection APIs from TanStack Table:
-
-- `table.getIsAllPageRowsSelected()`
-- `table.getIsSomePageRowsSelected()`
-- `table.toggleAllPageRowsSelected()`
-- `row.getIsSelected()`
-- `row.toggleSelected()`
+::tip
+You can use the `row-selection` prop to control the selection state of the rows (can be binded with `v-model`).
 ::
 
-### With row actions
+### With column sorting
 
-You can add a new column that renders a [DropdownMenu](/components/dropdown-menu) component inside the `cell` to render row actions.
+You can update a column `header` to render a [Button](/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/latest/docs/api/features/sorting).
 
 ::component-example
 ---
 prettier: true
 collapse: true
-name: 'table-row-actions-example'
+name: 'table-column-sorting-example'
 highlights:
-  - 109
-  - 133
+  - 90
+  - 105
 class: '!p-0'
 ---
 ::
 
-### With expandable rows
+::tip
+You can use the `sorting` prop to control the sorting state of the columns (can be binded with `v-model`).
+::
 
-You can control the expandable state of a row using the `row.getIsExpanded()`{lang="ts-type"} and `row.toggleExpanded()`{lang="ts-type"} methods using the TanStack Table [Expanding APIs](https://tanstack.com/table/latest/docs/api/features/expanding).
-
-You need to define the `#expanded` slot to render the expanded content which will receive the row as a parameter.
+You can also create a reusable component to make any column header sortable.
 
 ::component-example
 ---
 prettier: true
 collapse: true
-name: 'table-row-expandable-example'
+name: 'table-column-sorting-reusable-example'
+highlights:
+  - 110
+  - 161
+class: '!p-0'
+---
+::
+
+::note
+In this example, we use a function to define the column header but you can also create an actual component.
+::
+
+### With column pinning
+
+You can update a column `header` to render a [Button](/components/button) component inside the `header` to toggle the pinning state using the TanStack Table [Pinning APIs](https://tanstack.com/table/latest/docs/api/features/row-pinning).
+
+::note
+A pinned column will become sticky on the left or right side of the table.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-pinning-example'
+highlights:
+  - 100
+  - 113
+class: '!p-0 overflow-clip'
+---
+::
+
+::tip
+You can use the `column-pinning` prop to control the pinning state of the columns (can be binded with `v-model`).
+::
+
+### With column visibility
+
+You can add use [DropdownMenu](/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-visibility-example'
 highlights:
   - 135
   - 142
@@ -248,19 +346,46 @@ class: '!p-0'
 ---
 ::
 
-::note
-In this example, the `Expand/Collapse` action is added to the [DropdownMenu](/components/dropdown-menu) component inside the `actions` column.
+::tip
+You can use the `column-visibility` prop to control the visibility state of the columns (can be binded with `v-model`).
 ::
 
-### With column sorting
+### With column filters
 
-### With column visibility
+You can use an [Input](/components/input) component to filter per column the rows using the TanStack Table [Column Filtering APIs](https://tanstack.com/table/latest/docs/api/features/column-filtering).
 
-### With column pinning
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-filters-example'
+highlights:
+  - 135
+  - 142
+class: '!p-0'
+---
+::
 
-### With column filtering
+::tip
+You can use the `column-filters` prop to control the filters state of the columns (can be binded with `v-model`).
+::
 
-### With global filtering
+### With global filter
+
+You can use an [Input](/components/input) component to filter the rows using the TanStack Table [Global Filtering APIs](https://tanstack.com/table/latest/docs/api/features/global-filtering).
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-global-filter-example'
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `global-filter` prop to control the global filter state (can be binded with `v-model`).
+::
 
 ### With fetched data
 

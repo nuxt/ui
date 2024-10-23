@@ -18,8 +18,6 @@ type Payment = {
   amount: number
 }
 
-const table = useTemplateRef('table')
-
 const data = ref<Payment[]>([{
   id: '4600',
   date: '2024-03-11T15:30:00',
@@ -258,26 +256,16 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const loading = ref(true)
-const columnPinning = ref({
-  left: ['id'],
-  right: ['actions']
-})
+const table = useTemplateRef('table')
 
 function randomize() {
   data.value = [...data.value].sort(() => Math.random() - 0.5)
 }
-
-onMounted(() => {
-  setTimeout(() => {
-    loading.value = false
-  }, 1300)
-})
 </script>
 
 <template>
-  <div class="h-full flex flex-col flex-1 gap-4 w-full -my-8">
-    <div class="flex gap-2 items-center">
+  <div class="flex-1 divide-y divide-[var(--ui-border-accented)]">
+    <div class="flex items-center gap-2 px-4 py-3.5">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
         class="max-w-sm"
@@ -315,40 +303,17 @@ onMounted(() => {
       ref="table"
       :data="data"
       :columns="columns"
-      :column-pinning="columnPinning"
-      :loading="loading"
       sticky
-      class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
+      class="h-96"
     >
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>
       </template>
     </UTable>
 
-    <div class="flex items-center justify-between gap-3">
-      <div class="text-sm text-[var(--ui-text-muted)]">
-        {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
-        {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
-      </div>
-
-      <!-- <div class="flex items-center gap-1.5">
-        <UButton
-          color="neutral"
-          variant="outline"
-          :disabled="!table?.tableApi?.getCanPreviousPage()"
-          @click="table?.tableApi?.previousPage()"
-        >
-          Prev
-        </UButton>
-        <UButton
-          color="neutral"
-          variant="outline"
-          :disabled="!table?.tableApi?.getCanNextPage()"
-          @click="table?.tableApi?.nextPage()"
-        >
-          Next
-        </UButton>
-      </div> -->
+    <div class="px-4 py-3.5 text-sm text-[var(--ui-text-muted)]">
+      {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
+      {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
     </div>
   </div>
 </template>

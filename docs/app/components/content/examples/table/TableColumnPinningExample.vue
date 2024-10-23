@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
+import type { Column } from '@tanstack/vue-table'
 
-const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
+const UButton = resolveComponent('UButton')
 
 type Payment = {
   id: string
@@ -14,68 +15,47 @@ type Payment = {
 }
 
 const data = ref<Payment[]>([{
-  id: '4600',
+  id: '46000000000000000000000000000000000000000',
   date: '2024-03-11T15:30:00',
   status: 'paid',
   email: 'james.anderson@example.com',
-  amount: 594
+  amount: 594000
 }, {
-  id: '4599',
+  id: '45990000000000000000000000000000000000000',
   date: '2024-03-11T10:10:00',
   status: 'failed',
   email: 'mia.white@example.com',
-  amount: 276
+  amount: 276000
 }, {
-  id: '4598',
+  id: '45980000000000000000000000000000000000000',
   date: '2024-03-11T08:50:00',
   status: 'refunded',
   email: 'william.brown@example.com',
-  amount: 315
+  amount: 315000
 }, {
-  id: '4597',
+  id: '45970000000000000000000000000000000000000',
   date: '2024-03-10T19:45:00',
   status: 'paid',
   email: 'emma.davis@example.com',
-  amount: 529
+  amount: 5290000
 }, {
-  id: '4596',
+  id: '45960000000000000000000000000000000000000',
   date: '2024-03-10T15:55:00',
   status: 'paid',
   email: 'ethan.harris@example.com',
-  amount: 639
+  amount: 639000
 }])
 
 const columns: TableColumn<Payment>[] = [{
-  id: 'expand',
-  cell: ({ row }) => h(UButton, {
-    color: 'neutral',
-    variant: 'ghost',
-    icon: 'i-heroicons-chevron-down-20-solid',
-    square: true,
-    ui: {
-      leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
-    },
-    onClick: () => row.toggleExpanded()
-  })
-}, {
   accessorKey: 'id',
-  header: '#',
+  header: ({ column }) => getHeader(column, 'ID', 'left'),
   cell: ({ row }) => `#${row.getValue('id')}`
 }, {
   accessorKey: 'date',
-  header: 'Date',
-  cell: ({ row }) => {
-    return new Date(row.getValue('date')).toLocaleString('en-US', {
-      day: 'numeric',
-      month: 'short',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    })
-  }
+  header: ({ column }) => getHeader(column, 'Date', 'left')
 }, {
   accessorKey: 'status',
-  header: 'Status',
+  header: ({ column }) => getHeader(column, 'Status', 'left'),
   cell: ({ row }) => {
     const color = ({
       paid: 'success' as const,
@@ -87,10 +67,10 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: ({ column }) => getHeader(column, 'Email', 'left')
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: ({ column }) => h('div', { class: 'text-right' }, getHeader(column, 'Amount', 'right')),
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
 
@@ -103,19 +83,32 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const expanded = ref({ 1: true })
+function getHeader(column: Column<Payment>, label: string, position: 'left' | 'right') {
+  const isPinned = column.getIsPinned()
+
+  return h(UButton, {
+    color: 'neutral',
+    variant: 'ghost',
+    label,
+    icon: isPinned ? 'i-heroicons-star-20-solid' : 'i-heroicons-star',
+    class: '-mx-2.5',
+    onClick() {
+      column.pin(isPinned === position ? false : position)
+    }
+  })
+}
+
+const columnPinning = ref({
+  left: [],
+  right: ['amount']
+})
 </script>
 
 <template>
   <UTable
-    v-model:expanded="expanded"
+    v-model:column-pinning="columnPinning"
     :data="data"
     :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-[var(--ui-bg-elevated)]/50' }"
     class="flex-1"
-  >
-    <template #expanded="{ row }">
-      <pre>{{ row.original }}</pre>
-    </template>
-  </UTable>
+  />
 </template>

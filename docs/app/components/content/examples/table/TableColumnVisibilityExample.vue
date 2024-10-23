@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
+import { upperFirst } from 'scule'
 import type { TableColumn } from '@nuxt/ui'
 
-const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
 
 type Payment = {
@@ -46,18 +46,6 @@ const data = ref<Payment[]>([{
 }])
 
 const columns: TableColumn<Payment>[] = [{
-  id: 'expand',
-  cell: ({ row }) => h(UButton, {
-    color: 'neutral',
-    variant: 'ghost',
-    icon: 'i-heroicons-chevron-down-20-solid',
-    square: true,
-    ui: {
-      leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
-    },
-    onClick: () => row.toggleExpanded()
-  })
-}, {
   accessorKey: 'id',
   header: '#',
   cell: ({ row }) => `#${row.getValue('id')}`
@@ -103,19 +91,44 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const expanded = ref({ 1: true })
+const table = useTemplateRef('table')
+
+const columnVisibility = ref({
+  id: false
+})
 </script>
 
 <template>
-  <UTable
-    v-model:expanded="expanded"
-    :data="data"
-    :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-[var(--ui-bg-elevated)]/50' }"
-    class="flex-1"
-  >
-    <template #expanded="{ row }">
-      <pre>{{ row.original }}</pre>
-    </template>
-  </UTable>
+  <div class="flex flex-col flex-1">
+    <div class="flex justify-end px-4 py-3.5 border-b  border-[var(--ui-border-accented)]">
+      <UDropdownMenu
+        :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
+          label: upperFirst(column.id),
+          type: 'checkbox' as const,
+          checked: column.getIsVisible(),
+          onUpdateChecked(checked: boolean) {
+            table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
+          },
+          onSelect(e?: Event) {
+            e?.preventDefault()
+          }
+        }))"
+        :content="{ align: 'end' }"
+      >
+        <UButton
+          label="Columns"
+          color="neutral"
+          variant="outline"
+          trailing-icon="i-heroicons-chevron-down-20-solid"
+        />
+      </UDropdownMenu>
+    </div>
+
+    <UTable
+      ref="table"
+      v-model:column-visibility="columnVisibility"
+      :data="data"
+      :columns="columns"
+    />
+  </div>
 </template>
