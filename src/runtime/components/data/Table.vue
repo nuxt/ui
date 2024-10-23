@@ -10,7 +10,7 @@
         <tr :class="ui.tr.base">
           <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
             <UCheckbox
-              :model-value="indeterminate || selected.length === rows.length"
+              :model-value="isAllRowChecked"
               :indeterminate="indeterminate"
               v-bind="ui.default.checkbox"
               aria-label="Select all"
@@ -276,7 +276,24 @@ export default defineComponent({
       }
     })
 
-    const indeterminate = computed(() => selected.value && selected.value.length > 0 && selected.value.length < props.rows.length)
+
+    const getStringifiedSet = <T extends unknown>(arr: T[]) => new Set(arr.map(item => JSON.stringify(item)))
+
+    const countCheckedRow = computed(() => {
+      const selectedData = getStringifiedSet(selected.value)
+      const rowsData = getStringifiedSet(props.rows)
+
+      return Array.from(selectedData).filter(item => rowsData.has(item)).length
+    })
+
+    const indeterminate = computed(() => {
+      if (!selected.value || !props.rows) return false
+      const totalRows = props.rows.length
+      return countCheckedRow.value > 0 && countCheckedRow.value < totalRows
+    })
+
+    const isAllRowChecked = computed(() => countCheckedRow.value === props.rows.length)
+
 
     const emptyState = computed(() => {
       if (props.emptyState === null) return null
@@ -411,6 +428,7 @@ export default defineComponent({
       emptyState,
       // eslint-disable-next-line vue/no-dupe-keys
       loadingState,
+      isAllRowChecked,
       onChangeCheckbox,
       openedRows,
       isSelected,
