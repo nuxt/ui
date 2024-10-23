@@ -5,6 +5,7 @@ import { glob } from 'tinyglobby'
 import { resolve } from 'pathe'
 
 const components = await glob('./src/runtime/components/*.vue', { absolute: true })
+const vueComponents = await glob('./src/runtime/vue/components/*.vue', { absolute: true })
 
 export default defineConfig({
   test: {
@@ -37,7 +38,16 @@ export default defineConfig({
       },
       load(id) {
         if (id === '#components' || id === '?#components') {
-          return components.map(component => `export { default as U${component.split('/').pop()?.replace('.vue', '')} } from '${component}'`).join('\n')
+          const resolvedComponents = [...vueComponents, ...components]
+          const renderedComponents = new Set<string>()
+          return resolvedComponents.map((file) => {
+            const componentName = file.split('/').pop()!.replace('.vue', '')
+            if (renderedComponents.has(componentName)) {
+              return ''
+            }
+            renderedComponents.add(componentName)
+            return `export { default as U${componentName} } from '${file}'`
+          }).join('\n')
         }
       }
     }

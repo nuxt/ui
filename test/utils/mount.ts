@@ -22,7 +22,6 @@ export function mountSuspended(...args: Parameters<typeof mount>) {
   const wrapper = mount(args[0], defu({}, args[1], {
     global: {
       stubs: {
-        NuxtLink: { setup: (props: { to?: string }) => () => props.to ? h('a') : h('button') },
         ClientOnly: { template: '<slot />' }
       },
       plugins: [router]
