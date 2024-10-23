@@ -85,6 +85,10 @@ function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
     return props.active
   }
 
+  if (!props.to) {
+    return false
+  }
+
   if (props.exactQuery && !isEqual(linkRoute.query, route.query)) {
     return false
   }
@@ -125,7 +129,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
           disabled,
           href: to ? (isExternal ? to as string : href) : undefined,
           navigate,
-          active: to ? isLinkActive({ route: linkRoute, isActive, isExactActive }) : false
+          active: isLinkActive({ route: linkRoute, isActive, isExactActive })
         }"
       />
     </template>
@@ -139,9 +143,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
         href: to ? (isExternal ? to as string : href) : undefined,
         navigate
       }"
-      :class="resolveLinkClass({ route: linkRoute, isActive: to ? isActive : false, isExactActive: to ? isExactActive : false })"
+      :class="resolveLinkClass({ route: linkRoute, isActive: isActive, isExactActive: isExactActive })"
     >
-      <slot :active="to ? isLinkActive({ route: linkRoute, isActive, isExactActive }) : false" />
+      <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
     </ULinkBase>
   </RouterLink>
 </template>
