@@ -7,6 +7,8 @@ import { defu } from 'defu'
 import tailwind from '@tailwindcss/vite'
 import type colors from 'tailwindcss/colors'
 
+import type * as ui from '#build/ui'
+
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 import type { ModuleOptions } from './module'
 import type icons from './theme/icons'
@@ -17,15 +19,16 @@ import AppConfigPlugin from './plugins/app-config'
 import ComponentImportPlugin from './plugins/components'
 import NuxtEnvironmentPlugin from './plugins/nuxt-environment'
 
+import type { DeepPartial } from './runtime/types/utils'
+
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
-interface AppConfigUI {
+type AppConfigUI = {
   // TODO: add type hinting for colors from `options.theme.colors`
   colors?: Record<string, Color> & { neutral?: NeutralColor }
   icons?: Partial<typeof icons>
-  [key: string]: unknown
-}
+} & DeepPartial<typeof ui, string>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
   ui?: AppConfigUI

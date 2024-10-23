@@ -32,6 +32,9 @@
     },
     "./runtime/*": "./dist/runtime/*"
   },
+  "imports": {
+    "#build/ui/*": "./.nuxt/ui/*.ts"
+  },
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
   },
@@ -39,6 +42,7 @@
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
+    ".nuxt/ui",
     "dist",
     "cli",
     "vue-plugin.d.ts"
