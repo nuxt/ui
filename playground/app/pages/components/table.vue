@@ -316,7 +316,7 @@ onMounted(() => {
       :data="data"
       :columns="columns"
       :column-pinning="columnPinning"
-      loading
+      :loading="loading"
       sticky
       class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
     >

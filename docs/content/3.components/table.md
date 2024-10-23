@@ -203,6 +203,16 @@ props:
 
 ### With fetched data
 
+You can fetch data from an API and use them in the Table.
+
+::component-example
+---
+collapse: true
+name: 'table-fetch-example'
+class: '!p-0'
+---
+::
+
 ## API
 
 ### Props
