@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import { defu } from 'defu'
-import { h } from 'vue'
 import type { SetupContext } from 'vue'
 
 const router = createRouter({
