@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import type { TableColumn, TableRow } from '@nuxt/ui'
+import type { TableColumn } from '@nuxt/ui'
 
-const UButton = resolveComponent('UButton')
+const UCheckbox = resolveComponent('UCheckbox')
 const UBadge = resolveComponent('UBadge')
-const UDropdownMenu = resolveComponent('UDropdownMenu')
-
-const toast = useToast()
 
 type Payment = {
   id: string
@@ -49,9 +46,18 @@ const data = ref<Payment[]>([{
 }])
 
 const columns: TableColumn<Payment>[] = [{
-  accessorKey: 'id',
-  header: '#',
-  cell: ({ row }) => `#${row.getValue('id')}`
+  id: 'select',
+  header: ({ table }) => h(UCheckbox, {
+    'modelValue': table.getIsAllPageRowsSelected(),
+    'indeterminate': table.getIsSomePageRowsSelected(),
+    'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value),
+    'ariaLabel': 'Select all'
+  }),
+  cell: ({ row }) => h(UCheckbox, {
+    'modelValue': row.getIsSelected(),
+    'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value),
+    'ariaLabel': 'Select row'
+  })
 }, {
   accessorKey: 'date',
   header: 'Date',
@@ -92,46 +98,7 @@ const columns: TableColumn<Payment>[] = [{
 
     return h('div', { class: 'text-right font-medium' }, formatted)
   }
-}, {
-  id: 'actions',
-  cell: ({ row }) => {
-    return h('div', { class: 'text-right' }, h(UDropdownMenu, {
-      content: {
-        align: 'end'
-      },
-      items: getRowItems(row)
-    }, () => h(UButton, {
-      icon: 'i-heroicons-ellipsis-vertical-20-solid',
-      color: 'neutral',
-      variant: 'ghost',
-      class: 'ml-auto'
-    })))
-  }
 }]
-
-function getRowItems(row: TableRow<Payment>) {
-  return [{
-    type: 'label',
-    label: 'Actions'
-  }, {
-    label: 'Copy payment ID',
-    onSelect() {
-      navigator.clipboard.writeText(row.original.id)
-
-      toast.add({
-        title: 'Payment ID copied to clipboard!',
-        color: 'success',
-        icon: 'i-heroicons-check-circle'
-      })
-    }
-  }, {
-    type: 'separator'
-  }, {
-    label: 'View customer'
-  }, {
-    label: 'View payment details'
-  }]
-}
 </script>
 
 <template>

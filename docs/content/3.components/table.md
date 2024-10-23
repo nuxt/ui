@@ -66,7 +66,7 @@ Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/lat
 - `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-[var(--ui-text-muted)]"}
 - `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-[var(--ui-text-muted)]"}
 
-You can take advantage of the Vue [`h` function](https://vuejs.org/api/render-function.html#h) to render components or other HTML elements.
+In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
 ::component-example
 ---
@@ -74,11 +74,14 @@ prettier: true
 collapse: true
 class: '!p-0'
 name: 'table-columns-example'
+highlights:
+  - 53
+  - 105
 ---
 ::
 
-::warning
-Make sure to use `resolveComponent` when rendering components using the `h` function.
+::tip
+When rendering components with the `h` function, you can utilize the `resolveComponent` function to dynamically resolve and reference components.
 ::
 
 ### Loading
@@ -185,17 +188,75 @@ props:
 
 ## Examples
 
+### With row selection
+
+You can add a new column that renders a [Checkbox](/components/checkbox) component inside the `header` and `cell` to select rows.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-selection-example'
+highlights:
+  - 55
+  - 70
+class: '!p-0'
+---
+::
+
+::note{to="https://tanstack.com/table/latest/docs/api/features/row-selection" target="_blank"}
+This example uses the Row Selection APIs from TanStack Table:
+
+- `table.getIsAllPageRowsSelected()`
+- `table.getIsSomePageRowsSelected()`
+- `table.toggleAllPageRowsSelected()`
+- `row.getIsSelected()`
+- `row.toggleSelected()`
+::
+
 ### With row actions
 
-### With row selection
+You can add a new column that renders a [DropdownMenu](/components/dropdown-menu) component inside the `cell` to render row actions.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-actions-example'
+highlights:
+  - 109
+  - 133
+class: '!p-0'
+---
+::
 
 ### With expandable rows
 
-### With column pinning
+You can control the expandable state of a row using the `row.getIsExpanded()`{lang="ts-type"} and `row.toggleExpanded()`{lang="ts-type"} methods using the TanStack Table [Expanding APIs](https://tanstack.com/table/latest/docs/api/features/expanding).
+
+You need to define the `#expanded` slot to render the expanded content which will receive the row as a parameter.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-expandable-example'
+highlights:
+  - 135
+  - 142
+class: '!p-0'
+---
+::
+
+::note
+In this example, the `Expand/Collapse` action is added to the [DropdownMenu](/components/dropdown-menu) component inside the `actions` column.
+::
+
+### With column sorting
 
 ### With column visibility
 
-### With column sorting
+### With column pinning
 
 ### With column filtering
 
@@ -207,6 +268,7 @@ You can fetch data from an API and use them in the Table.
 
 ::component-example
 ---
+prettier: true
 collapse: true
 name: 'table-fetch-example'
 class: '!p-0'

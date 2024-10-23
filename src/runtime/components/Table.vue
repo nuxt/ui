@@ -31,6 +31,7 @@ const table = tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })
 type TableVariants = VariantProps<typeof table>
 
 export type TableColumn<T> = ColumnDef<T>
+export type TableRow<T> = Row<T>
 
 export interface TableData {
   [key: string]: any

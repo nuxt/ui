@@ -6,8 +6,6 @@ const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
-const toast = useToast()
-
 type Payment = {
   id: string
   date: string
@@ -111,29 +109,18 @@ const columns: TableColumn<Payment>[] = [{
 
 function getRowItems(row: TableRow<Payment>) {
   return [{
-    type: 'label',
-    label: 'Actions'
-  }, {
-    label: 'Copy payment ID',
+    label: row.getIsExpanded() ? 'Collapse' : 'Expand',
     onSelect() {
-      navigator.clipboard.writeText(row.original.id)
-
-      toast.add({
-        title: 'Payment ID copied to clipboard!',
-        color: 'success',
-        icon: 'i-heroicons-check-circle'
-      })
+      row.toggleExpanded()
     }
-  }, {
-    type: 'separator'
-  }, {
-    label: 'View customer'
-  }, {
-    label: 'View payment details'
   }]
 }
 </script>
 
 <template>
-  <UTable :data="data" :columns="columns" class="flex-1" />
+  <UTable :data="data" :columns="columns" class="flex-1">
+    <template #expanded="{ row }">
+      <pre>{{ row.original }}</pre>
+    </template>
+  </UTable>
 </template>
