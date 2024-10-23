@@ -1,7 +1,7 @@
 {
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
-  "version": "3.0.0-alpha.6",
+  "version": "3.0.0-alpha.7",
   "packageManager": "pnpm@9.12.2",
   "repository": {
     "type": "git",
@@ -46,7 +46,7 @@
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },
   "dependencies": {
-    "@nuxt/fonts": "^0.10.0",
+    "@nuxt/fonts": "^0.10.2",
     "@nuxt/icon": "^1.5.6",
     "@nuxt/kit": "^3.13.2",
     "@nuxt/schema": "^3.13.2",
@@ -73,14 +73,14 @@
     "vaul-vue": "^0.2.0"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.5.7",
+    "@nuxt/eslint-config": "^0.6.0",
     "@nuxt/module-builder": "^0.8.4",
     "@nuxt/test-utils": "^3.14.4",
-    "@release-it/conventional-changelog": "^9.0.0",
+    "@release-it/conventional-changelog": "^9.0.1",
     "@standard-schema/spec": "1.0.0-beta.1",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.3.0",
-    "eslint": "^9.11.1",
+    "eslint": "^9.13.0",
     "happy-dom": "^15.7.4",
     "joi": "^17.13.3",
     "nuxt": "^3.13.2",

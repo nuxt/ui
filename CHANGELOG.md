@@ -1,5 +1,40 @@
 # Changelog
 
+## [3.0.0-alpha.7](https://github.com/nuxt/ui/compare/v3.0.0-alpha.6...v3.0.0-alpha.7) (2024-10-23)
+
+### ⚠ BREAKING CHANGES
+
+* **components:** rename `select` to `onSelect` on items
+
+### Features
+
+* **Accordion/Breadcrumb/CommandPalette/ContextMenu/DropdownMenu/NavigationMenu/Tabs:** add `labelKey` prop ([acfc6ce](https://github.com/nuxt/ui/commit/acfc6cef2db88774749d38a98416fdd85922d513))
+* **Button:** handle `avatar` prop ([a54c3e4](https://github.com/nuxt/ui/commit/a54c3e49fe782e329f9245e496c336143e3e4b23))
+* **CommandPalette:** handle `loading` field in items ([49abad2](https://github.com/nuxt/ui/commit/49abad243cee97b99753e2500c4bdaa0efe5eb75))
+* **ContextMenu/DropdownMenu:** handle `checkbox` items type ([8ef6e71](https://github.com/nuxt/ui/commit/8ef6e712acbb2fc026eb35cefa8e29fc0b59d70f)), closes [#2144](https://github.com/nuxt/ui/issues/2144)
+* **ContextMenu/DropdownMenu:** handle `loading` field in items ([b975235](https://github.com/nuxt/ui/commit/b975235c8b8e693a32efd3fd5381eed88fa3db4d))
+* **Form:** add `superstruct` validation ([#2363](https://github.com/nuxt/ui/issues/2363)) ([5385944](https://github.com/nuxt/ui/commit/53859443593b584f7cd44106021e80f441e9ca06))
+* **Input/InputMenu/Select/SelectMenu:** handle `avatar` prop ([53a3796](https://github.com/nuxt/ui/commit/53a3796d1b08717a589028f99fc01084df661708))
+* **InputMenu/RadioGroup/Select/SelectMenu:** handle `labelKey` and use `get` to support dot notation ([f6f9823](https://github.com/nuxt/ui/commit/f6f9823b15d84362d093703cb15ecba64c73c2c2))
+* **NavigationMenu:** handle children on `vertical` orientation ([#2384](https://github.com/nuxt/ui/issues/2384)) ([34bddd4](https://github.com/nuxt/ui/commit/34bddd45be2ba1d51ddb9b6b40860f2414f63180))
+* **Table:** implement component ([#2364](https://github.com/nuxt/ui/issues/2364)) ([b54950e](https://github.com/nuxt/ui/commit/b54950e3ed77a466eb048788757a76018638eafa))
+
+### Bug Fixes
+
+* **AvatarGroup:** wrong ring on big sizes ([61b2323](https://github.com/nuxt/ui/commit/61b232377b4b1fb41de30fd33e690a36b36ba575))
+* **Button:** invalid hover on `link` variant ([df2013c](https://github.com/nuxt/ui/commit/df2013ca92a49b5947e2fbc2641fd92860c32042))
+* **Checkbox:** `indeterminate` prop not working ([f6631ff](https://github.com/nuxt/ui/commit/f6631ff7bc607e140e9db2c7335c409a811820e4))
+* **components:** rename `select` to `onSelect` on items ([b39c4d1](https://github.com/nuxt/ui/commit/b39c4d127e0ddf7607e868ecc83930ca49436bad))
+* **css:** `font-sans` already applied on <html> ([9e03da4](https://github.com/nuxt/ui/commit/9e03da41b3537236864ae2a533c47e99a6270b77))
+* **css:** make `[@theme](https://github.com/theme)` default ([a2bad2e](https://github.com/nuxt/ui/commit/a2bad2eee2d2a9255152692898078d26e9ecad98))
+* **Drawer/Modal/Slideover:** no need for `z-index` since its isolated ([bcfa4b7](https://github.com/nuxt/ui/commit/bcfa4b74a9713be764ecb6db93d60d1360e52f07)), closes [nuxt/ui#2347](https://github.com/nuxt/ui/issues/2347)
+* **Input/InputMenu/Select/SelectMenu:** uniformize placeholder color ([f59844b](https://github.com/nuxt/ui/commit/f59844bb617f50ef78ae5abe250b0744d7341a2f))
+* **InputMenu/SelectMenu:** escape regexp before search ([7c21dde](https://github.com/nuxt/ui/commit/7c21ddefa87bf3d9999c0e790b48c004c078304d))
+* **InputMenu/SelectMenu:** improve displayed value ([0f9ac87](https://github.com/nuxt/ui/commit/0f9ac8733e402d1f22a3eb6c1e24a8d5607b3572)), closes [nuxt/ui#2353](https://github.com/nuxt/ui/issues/2353)
+* **InputMenu:** emit `focus` event ([#2386](https://github.com/nuxt/ui/issues/2386)) ([7802aac](https://github.com/nuxt/ui/commit/7802aacf3f5be572dd64c3288196432a41f06b0e))
+* **module:** stop using tailwind's shorthand arbitrary variable syntax ([#2366](https://github.com/nuxt/ui/issues/2366)) ([dcce571](https://github.com/nuxt/ui/commit/dcce571cdab08de8408c8ba6b236b051eec3a603))
+* **Slideover:** set max height on `top` / `bottom` positions ([a68016e](https://github.com/nuxt/ui/commit/a68016ec5d6859e892c90333d35fd7db09fdcf10)), closes [nuxt/ui#2388](https://github.com/nuxt/ui/issues/2388)
+
 ## [3.0.0-alpha.6](https://github.com/nuxt/ui/compare/v3.0.0-alpha.5...v3.0.0-alpha.6) (2024-10-09)
 
 
