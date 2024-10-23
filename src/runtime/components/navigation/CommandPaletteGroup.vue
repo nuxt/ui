@@ -77,7 +77,7 @@ import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UKbd from '../elements/Kbd.vue'
 import type { Command, Group } from '../../types/index'
-import { commandPalette } from '#ui/ui.config'
+import type { commandPalette } from '#ui/ui.config'
 import { useId } from '#imports'
 
 export default defineComponent({
@@ -113,14 +113,14 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const label = computed(() => {
       const label = props.group[props.groupAttribute]
 
       return typeof label === 'function' ? label(props.query) : label
     })
 
-    function highlight (text: string, { indices, value }: Command['matches'][number]): string {
+    function highlight(text: string, { indices, value }: Command['matches'][number]): string {
       if (text === value) {
         return ''
       }

@@ -71,7 +71,7 @@ const ui = {
     :autoselect="false"
     command-attribute="title"
     :fuse="{
-      fuseOptions: { keys: ['title', 'category'] },
+      fuseOptions: { keys: ['title', 'category'] }
     }"
     placeholder="Search docs"
   />

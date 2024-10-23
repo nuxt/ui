@@ -31,8 +31,8 @@ const people = [{
   role: 'Owner'
 }]
 
-function select (row) {
-  const index = selected.value.findIndex((item) => item.id === row.id)
+function select(row) {
+  const index = selected.value.findIndex(item => item.id === row.id)
   if (index === -1) {
     selected.value.push(row)
   } else {

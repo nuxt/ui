@@ -18,7 +18,7 @@ import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEve
 import { useId } from '#imports'
 
 class FormException extends Error {
-  constructor (message: string) {
+  constructor(message: string) {
     super(message)
     this.message = message
     Object.setPrototypeOf(this, FormException.prototype)
@@ -29,14 +29,14 @@ export default defineComponent({
   props: {
     schema: {
       type: [Object, Function] as
-        | PropType<ZodSchema>
-        | PropType<YupObjectSchema<any>>
-        | PropType<JoiSchema>
-        | PropType<ValibotSchema30 | ValibotSchemaAsync30>
-        | PropType<ValibotSchema31 | ValibotSchemaAsync31>
-        | PropType<ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any>>
-        | PropType<ValibotSchema | ValibotSchemaAsync>
-        | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>> | PropType<Struct<any, any>>,
+      | PropType<ZodSchema>
+      | PropType<YupObjectSchema<any>>
+      | PropType<JoiSchema>
+      | PropType<ValibotSchema30 | ValibotSchemaAsync30>
+      | PropType<ValibotSchema31 | ValibotSchemaAsync31>
+      | PropType<ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any>>
+      | PropType<ValibotSchema | ValibotSchemaAsync>
+      | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>> | PropType<Struct<any, any>>,
       default: undefined
     },
     state: {
@@ -45,8 +45,8 @@ export default defineComponent({
     },
     validate: {
       type: Function as
-        | PropType<(state: any) => Promise<FormError[]>>
-        | PropType<(state: any) => FormError[]>,
+      | PropType<(state: any) => Promise<FormError[]>>
+      | PropType<(state: any) => FormError[]>,
       default: () => []
     },
     validateOn: {
@@ -55,7 +55,7 @@ export default defineComponent({
     }
   },
   emits: ['submit', 'error'],
-  setup (props, { expose, emit }) {
+  setup(props, { expose, emit }) {
     const formId = useId()
     const bus = useEventBus<FormEvent>(`form-${formId}`)
 
@@ -77,7 +77,7 @@ export default defineComponent({
     const inputs = ref({})
     provide('form-inputs', inputs)
 
-    async function getErrors (): Promise<FormError[]> {
+    async function getErrors(): Promise<FormError[]> {
       let errs = await props.validate(props.state)
 
       if (props.schema) {
@@ -99,7 +99,7 @@ export default defineComponent({
       return errs
     }
 
-    async function validate (path?: string | string[], opts: { silent?: boolean } = { silent: false }) {
+    async function validate(path?: string | string[], opts: { silent?: boolean } = { silent: false }) {
       let paths = path
 
       if (path && !Array.isArray(path)) {
@@ -108,10 +108,10 @@ export default defineComponent({
 
       if (paths) {
         const otherErrors = errors.value.filter(
-          (error) => !paths.includes(error.path)
+          error => !paths.includes(error.path)
         )
         const pathErrors = (await getErrors()).filter(
-          (error) => paths.includes(error.path)
+          error => paths.includes(error.path)
         )
         errors.value = otherErrors.concat(pathErrors)
       } else {
@@ -129,7 +129,7 @@ export default defineComponent({
       return props.state
     }
 
-    async function onSubmit (payload: Event) {
+    async function onSubmit(payload: Event) {
       const event = payload as FormSubmitEvent<any>
       try {
         if (props.validateOn?.includes('submit')) {
@@ -144,7 +144,7 @@ export default defineComponent({
 
         const errorEvent: FormErrorEvent = {
           ...event,
-          errors: errors.value.map((err) => ({
+          errors: errors.value.map(err => ({
             ...err,
             id: inputs.value[err.path]
           }))
@@ -156,27 +156,27 @@ export default defineComponent({
     expose({
       validate,
       errors,
-      setErrors (errs: FormError[], path?: string) {
+      setErrors(errs: FormError[], path?: string) {
         if (path) {
           errors.value = errors.value.filter(
-            (error) => error.path !== path
+            error => error.path !== path
           ).concat(errs)
         } else {
           errors.value = errs
         }
       },
-      async submit () {
+      async submit() {
         await onSubmit(new Event('submit'))
       },
-      getErrors (path?: string) {
+      getErrors(path?: string) {
         if (path) {
-          return errors.value.filter((err) => err.path === path)
+          return errors.value.filter(err => err.path === path)
         }
         return errors.value
       },
-      clear (path?: string) {
+      clear(path?: string) {
         if (path) {
-          errors.value = errors.value.filter((err) => err.path !== path)
+          errors.value = errors.value.filter(err => err.path !== path)
         } else {
           errors.value = []
         }
@@ -190,24 +190,24 @@ export default defineComponent({
   }
 })
 
-function isYupSchema (schema: any): schema is YupObjectSchema<any> {
+function isYupSchema(schema: any): schema is YupObjectSchema<any> {
   return schema.validate && schema.__isYupSchema__
 }
 
-function isYupError (error: any): error is YupError {
+function isYupError(error: any): error is YupError {
   return error.inner !== undefined
 }
 
-function isSuperStructSchema (schema: any): schema is Struct<any, any> {
+function isSuperStructSchema(schema: any): schema is Struct<any, any> {
   return (
-    'schema' in schema &&
-    typeof schema.coercer === 'function' &&
-    typeof schema.validator === 'function' &&
-    typeof schema.refiner === 'function'
+    'schema' in schema
+    && typeof schema.coercer === 'function'
+    && typeof schema.validator === 'function'
+    && typeof schema.refiner === 'function'
   )
 }
 
-async function getYupErrors (
+async function getYupErrors(
   state: any,
   schema: YupObjectSchema<any>
 ): Promise<FormError[]> {
@@ -216,7 +216,7 @@ async function getYupErrors (
     return []
   } catch (error) {
     if (isYupError(error)) {
-      return error.inner.map((issue) => ({
+      return error.inner.map(issue => ({
         path: issue.path ?? '',
         message: issue.message
       }))
@@ -226,15 +226,15 @@ async function getYupErrors (
   }
 }
 
-function isZodSchema (schema: any): schema is ZodSchema {
+function isZodSchema(schema: any): schema is ZodSchema {
   return schema.parse !== undefined
 }
 
-async function getSuperStructErrors (state: any, schema: Struct<any, any>): Promise<FormError[]> {
+async function getSuperStructErrors(state: any, schema: Struct<any, any>): Promise<FormError[]> {
   const [err] = schema.validate(state)
   if (err) {
     const errors = err.failures()
-    return errors.map((error) => ({
+    return errors.map(error => ({
       message: error.message,
       path: error.path.join('.')
     }))
@@ -242,13 +242,13 @@ async function getSuperStructErrors (state: any, schema: Struct<any, any>): Prom
   return []
 }
 
-async function getZodErrors (
+async function getZodErrors(
   state: any,
   schema: ZodSchema
 ): Promise<FormError[]> {
   const result = await schema.safeParseAsync(state)
   if (result.success === false) {
-    return result.error.issues.map((issue) => ({
+    return result.error.issues.map(issue => ({
       path: issue.path.join('.'),
       message: issue.message
     }))
@@ -256,15 +256,15 @@ async function getZodErrors (
   return []
 }
 
-function isJoiSchema (schema: any): schema is JoiSchema {
+function isJoiSchema(schema: any): schema is JoiSchema {
   return schema.validateAsync !== undefined && schema.id !== undefined
 }
 
-function isJoiError (error: any): error is JoiError {
+function isJoiError(error: any): error is JoiError {
   return error.isJoi === true
 }
 
-async function getJoiErrors (
+async function getJoiErrors(
   state: any,
   schema: JoiSchema
 ): Promise<FormError[]> {
@@ -273,7 +273,7 @@ async function getJoiErrors (
     return []
   } catch (error) {
     if (isJoiError(error)) {
-      return error.details.map((detail) => ({
+      return error.details.map(detail => ({
         path: detail.path.join('.'),
         message: detail.message
       }))
@@ -283,19 +283,18 @@ async function getJoiErrors (
   }
 }
 
-
-function isValibotSchema (schema: any): schema is ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any> {
+function isValibotSchema(schema: any): schema is ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any> {
   return '_parse' in schema || '_run' in schema || (typeof schema === 'function' && 'schema' in schema)
 }
 
-async function getValibotError (
+async function getValibotError(
   state: any,
   schema: ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
 ): Promise<FormError[]> {
   const result = await ('_parse' in schema ? schema._parse(state) : '_run' in schema ? schema._run({ typed: false, value: state }, {}) : schema(state))
-  return result.issues?.map((issue) => ({
+  return result.issues?.map(issue => ({
     // We know that the key for a form schema is always a string or a number
-    path: issue.path?.map((item) => item.key).join('.') || '',
+    path: issue.path?.map(item => item.key).join('.') || '',
     message: issue.message
   })) || []
 }

@@ -90,7 +90,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('horizontalNavigation', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const sections = computed(() => (Array.isArray(props.links[0]) ? props.links : [props.links]) as HorizontalNavigationLink[][])

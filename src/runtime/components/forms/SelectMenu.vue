@@ -280,21 +280,21 @@ export default defineComponent({
     size: {
       type: String as PropType<SelectSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<SelectColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<SelectVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -335,7 +335,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
-  setup (props, { emit, slots }) {
+  setup(props, { emit, slots }) {
     if (import.meta.dev && props.multiple && !Array.isArray(props.modelValue)) {
       console.warn(`[@nuxt/ui] The USelectMenu components needs to have a modelValue of type Array when using the multiple prop. Got '${typeof props.modelValue}' instead.`, props.modelValue)
     }
@@ -354,10 +354,10 @@ export default defineComponent({
 
     const internalQuery = ref('')
     const query = computed({
-      get () {
+      get() {
         return props.query ?? internalQuery.value
       },
-      set (value) {
+      set(value) {
         internalQuery.value = value
         emit('update:query', value)
       }
@@ -485,7 +485,7 @@ export default defineComponent({
       lazy: props.searchableLazy
     })
 
-    function escapeRegExp (string: string) {
+    function escapeRegExp(string: string) {
       return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     }
 
@@ -530,7 +530,7 @@ export default defineComponent({
       return ['string', 'number'].includes(typeof props.modelValue) ? query.value : { [props.optionAttribute]: query.value }
     })
 
-    function clearOnClose () {
+    function clearOnClose() {
       if (props.clearSearchOnClose) {
         query.value = ''
       }
@@ -546,13 +546,13 @@ export default defineComponent({
       }
     })
 
-    function onUpdate (value: any) {
+    function onUpdate(value: any) {
       emit('update:modelValue', value)
       emit('change', value)
       emitFormChange()
     }
 
-    function onQueryChange (event: any) {
+    function onQueryChange(event: any) {
       query.value = event.target.value
     }
 

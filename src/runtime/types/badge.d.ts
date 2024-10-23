@@ -1,7 +1,7 @@
-import { badge } from '../ui.config'
-import type { NestedKeyOf, ExtractDeepKey, ExtractDeepObject } from '.'
-import colors from '#ui-colors'
 import type { AppConfig } from 'nuxt/schema'
+import type { badge } from '../ui.config'
+import type { NestedKeyOf, ExtractDeepKey, ExtractDeepObject } from '.'
+import type colors from '#ui-colors'
 
 export type BadgeSize = keyof typeof badge.size | ExtractDeepKey<AppConfig, ['ui', 'badge', 'size']>
 export type BadgeColor = keyof typeof badge.color | ExtractDeepKey<AppConfig, ['ui', 'badge', 'color']> | typeof colors[number]

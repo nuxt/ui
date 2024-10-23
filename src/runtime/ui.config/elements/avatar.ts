@@ -7,11 +7,11 @@ export default {
   size: {
     '3xs': 'h-4 w-4 text-[8px]',
     '2xs': 'h-5 w-5 text-[10px]',
-    xs: 'h-6 w-6 text-xs',
-    sm: 'h-8 w-8 text-sm',
-    md: 'h-10 w-10 text-base',
-    lg: 'h-12 w-12 text-lg',
-    xl: 'h-14 w-14 text-xl',
+    'xs': 'h-6 w-6 text-xs',
+    'sm': 'h-8 w-8 text-sm',
+    'md': 'h-10 w-10 text-base',
+    'lg': 'h-12 w-12 text-lg',
+    'xl': 'h-14 w-14 text-xl',
     '2xl': 'h-16 w-16 text-2xl',
     '3xl': 'h-20 w-20 text-3xl'
   },
@@ -27,11 +27,11 @@ export default {
     size: {
       '3xs': 'h-[4px] min-w-[4px] text-[4px] p-px',
       '2xs': 'h-[5px] min-w-[5px] text-[5px] p-px',
-      xs: 'h-1.5 min-w-[0.375rem] text-[6px] p-px',
-      sm: 'h-2 min-w-[0.5rem] text-[7px] p-0.5',
-      md: 'h-2.5 min-w-[0.625rem] text-[8px] p-0.5',
-      lg: 'h-3 min-w-[0.75rem] text-[10px] p-0.5',
-      xl: 'h-3.5 min-w-[0.875rem] text-[11px] p-1',
+      'xs': 'h-1.5 min-w-[0.375rem] text-[6px] p-px',
+      'sm': 'h-2 min-w-[0.5rem] text-[7px] p-0.5',
+      'md': 'h-2.5 min-w-[0.625rem] text-[8px] p-0.5',
+      'lg': 'h-3 min-w-[0.75rem] text-[10px] p-0.5',
+      'xl': 'h-3.5 min-w-[0.875rem] text-[11px] p-1',
       '2xl': 'h-4 min-w-[1rem] text-[12px] p-1',
       '3xl': 'h-5 min-w-[1.25rem] text-[14px] p-1'
     }
@@ -41,11 +41,11 @@ export default {
     size: {
       '3xs': 'h-2 w-2',
       '2xs': 'h-2.5 w-2.5',
-      xs: 'h-3 w-3',
-      sm: 'h-4 w-4',
-      md: 'h-5 w-5',
-      lg: 'h-6 w-6',
-      xl: 'h-7 w-7',
+      'xs': 'h-3 w-3',
+      'sm': 'h-4 w-4',
+      'md': 'h-5 w-5',
+      'lg': 'h-6 w-6',
+      'xl': 'h-7 w-7',
       '2xl': 'h-8 w-8',
       '3xl': 'h-10 w-10'
     }

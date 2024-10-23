@@ -48,8 +48,8 @@
 
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content'
-import type { HeaderLink } from '#ui-pro/types'
 import pkg from '@nuxt/ui-pro/package.json'
+import type { HeaderLink } from '#ui-pro/types'
 
 defineProps<{
   links: HeaderLink[]

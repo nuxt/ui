@@ -212,21 +212,21 @@ export default defineComponent({
     size: {
       type: String as PropType<InputSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<InputColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<InputVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -279,7 +279,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
-  setup (props, { emit, slots }) {
+  setup(props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
     const { ui: uiMenu } = useUI('inputMenu', toRef(props, 'uiMenu'), configMenu)
 
@@ -294,10 +294,10 @@ export default defineComponent({
 
     const internalQuery = ref('')
     const query = computed({
-      get () {
+      get() {
         return props.query ?? internalQuery.value
       },
-      set (value) {
+      set(value) {
         internalQuery.value = value
         emit('update:query', value)
       }
@@ -401,7 +401,7 @@ export default defineComponent({
       lazy: props.searchLazy
     })
 
-    function escapeRegExp (string: string) {
+    function escapeRegExp(string: string) {
       return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     }
 
@@ -434,7 +434,7 @@ export default defineComponent({
       }
     })
 
-    function onUpdate (value: any) {
+    function onUpdate(value: any) {
       query.value = ''
       emit('update:modelValue', value)
       emit('change', value)
@@ -442,7 +442,7 @@ export default defineComponent({
       emitFormChange()
     }
 
-    function onQueryChange (event: any) {
+    function onQueryChange(event: any) {
       query.value = event.target.value
     }
 

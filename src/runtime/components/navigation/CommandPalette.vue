@@ -72,10 +72,10 @@ import { twJoin } from 'tailwind-merge'
 import { defu } from 'defu'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
-import CommandPaletteGroup from './CommandPaletteGroup.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import type { Group, Command, Button, Strategy, DeepPartial } from '../../types/index'
+import CommandPaletteGroup from './CommandPaletteGroup.vue'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { commandPalette } from '#ui/ui.config'
@@ -180,7 +180,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { emit, expose }) {
+  setup(props, { emit, expose }) {
     const { ui, attrs } = useUI('commandPalette', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const query = ref('')
@@ -228,7 +228,7 @@ export default defineComponent({
 
     const { results } = useFuse(query, commands, options)
 
-    function getGroupWithCommands (group: Group, commands: Command[]) {
+    function getGroupWithCommands(group: Group, commands: Command[]) {
       if (!group) {
         return
       }
@@ -269,13 +269,13 @@ export default defineComponent({
         return getGroupWithCommands(group, commands)
       }).filter(Boolean)
 
-      const searchGroups = props.groups.filter(group => !!group.search && searchResults.value[group.key]?.length).map(group => {
+      const searchGroups = props.groups.filter(group => !!group.search && searchResults.value[group.key]?.length).map((group) => {
         const commands = (searchResults.value[group.key] || [])
 
         return getGroupWithCommands(group, [...commands])
       })
 
-      const staticGroups: Group[] = props.groups.filter((group) => group.static && group.commands?.length).map((group) => {
+      const staticGroups: Group[] = props.groups.filter(group => group.static && group.commands?.length).map((group) => {
         return getGroupWithCommands(group, group.commands)
       })
 
@@ -333,21 +333,21 @@ export default defineComponent({
 
     // Methods
 
-    function activateFirstOption () {
+    function activateFirstOption() {
       setTimeout(() => {
         // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L804
         comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }))
       }, 0)
     }
 
-    function activateNextOption () {
+    function activateNextOption() {
       setTimeout(() => {
         // https://github.com/tailwindlabs/headlessui/blob/6fa6074cd5d3a96f78a2d965392aa44101f5eede/packages/%40headlessui-vue/src/components/combobox/combobox.ts#L769
         comboboxInput.value?.$el.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
       }, 0)
     }
 
-    function onSelect (option: Command | Command[]) {
+    function onSelect(option: Command | Command[]) {
       emit('update:modelValue', option, { query: query.value })
 
       // Clear input after selection
@@ -358,7 +358,7 @@ export default defineComponent({
       }
     }
 
-    function onClear () {
+    function onClear() {
       if (query.value) {
         query.value = ''
       } else {

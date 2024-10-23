@@ -137,21 +137,21 @@ export default defineComponent({
     size: {
       type: String as PropType<SelectSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<SelectColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<SelectVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -180,7 +180,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit, slots }) {
+  setup(props, { emit, slots }) {
     const { ui, attrs } = useUI('select', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })

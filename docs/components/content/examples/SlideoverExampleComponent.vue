@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 const props = defineProps({
   count: {
     type: Number,
@@ -8,7 +7,7 @@ const props = defineProps({
 })
 
 const emits = defineEmits<{
-  close: [];
+  close: []
 }>()
 </script>
 

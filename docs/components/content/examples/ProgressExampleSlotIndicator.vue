@@ -3,10 +3,10 @@ const temp = ref(35)
 
 const color = computed(() => {
   switch (true) {
-  case temp.value < 10: return 'blue'
-  case temp.value < 20: return 'amber'
-  case temp.value < 30: return 'orange'
-  default: return 'red'
+    case temp.value < 10: return 'blue'
+    case temp.value < 20: return 'amber'
+    case temp.value < 30: return 'orange'
+    default: return 'red'
   }
 })
 </script>

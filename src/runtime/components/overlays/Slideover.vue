@@ -72,14 +72,14 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'close', 'close-prevented', 'after-leave'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('slideover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const isOpen: WritableComputedRef<boolean> = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })
@@ -96,25 +96,25 @@ export default defineComponent({
 
       let enterFrom, leaveTo
       switch (props.side) {
-      case 'left':
-        enterFrom = ui.value.translate.left
-        leaveTo = ui.value.translate.left
-        break
-      case 'right':
-        enterFrom = ui.value.translate.right
-        leaveTo = ui.value.translate.right
-        break
-      case 'top':
-        enterFrom = ui.value.translate.top
-        leaveTo = ui.value.translate.top
-        break
-      case 'bottom':
-        enterFrom = ui.value.translate.bottom
-        leaveTo = ui.value.translate.bottom
-        break
-      default:
-        enterFrom = ui.value.translate.right
-        leaveTo = ui.value.translate.right
+        case 'left':
+          enterFrom = ui.value.translate.left
+          leaveTo = ui.value.translate.left
+          break
+        case 'right':
+          enterFrom = ui.value.translate.right
+          leaveTo = ui.value.translate.right
+          break
+        case 'top':
+          enterFrom = ui.value.translate.top
+          leaveTo = ui.value.translate.top
+          break
+        case 'bottom':
+          enterFrom = ui.value.translate.bottom
+          leaveTo = ui.value.translate.bottom
+          break
+        default:
+          enterFrom = ui.value.translate.right
+          leaveTo = ui.value.translate.right
       }
 
       return {
@@ -128,21 +128,20 @@ export default defineComponent({
 
     const sideType = computed(() => {
       switch (props.side) {
-      case 'left':
-        return 'horizontal'
-      case 'right':
-        return 'horizontal'
-      case 'top':
-        return 'vertical'
-      case 'bottom':
-        return 'vertical'
-      default:
-        return 'right'
+        case 'left':
+          return 'horizontal'
+        case 'right':
+          return 'horizontal'
+        case 'top':
+          return 'vertical'
+        case 'bottom':
+          return 'vertical'
+        default:
+          return 'right'
       }
     })
 
-
-    function close (value: boolean) {
+    function close(value: boolean) {
       if (props.preventClose) {
         emit('close-prevented')
 

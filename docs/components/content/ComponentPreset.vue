@@ -18,7 +18,6 @@ const props = defineProps({
 const route = useRoute()
 const highlighter = useShikiHighlighter()
 
-// eslint-disable-next-line vue/no-dupe-keys
 const slug = props.slug || route.params.slug[route.params.slug.length - 1]
 const camelName = camelCase(slug)
 const name = `U${upperFirst(camelName)}`

@@ -14,7 +14,7 @@ const state = reactive({
 
 type Schema = Infer<typeof schema>
 
-async function onSubmit (event: FormSubmitEvent<Schema>) {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
 </script>

@@ -45,7 +45,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('card', toRef(props, 'ui'), config)
 
     const cardClass = computed(() => {

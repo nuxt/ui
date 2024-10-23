@@ -13,12 +13,12 @@ const validate = (state: any): FormError[] => {
   return errors
 }
 
-async function onSubmit (event: FormSubmitEvent<any>) {
+async function onSubmit(event: FormSubmitEvent<any>) {
   // Do something with data
   console.log(event.data)
 }
 
-async function onError (event: FormErrorEvent) {
+async function onError(event: FormErrorEvent) {
   const element = document.getElementById(event.errors[0].id)
   element?.focus()
   element?.scrollIntoView({ behavior: 'smooth', block: 'center' })

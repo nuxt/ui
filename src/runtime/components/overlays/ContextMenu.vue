@@ -54,16 +54,16 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('contextMenu', toRef(props, 'ui'), config)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
     const isOpen = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })

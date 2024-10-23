@@ -73,8 +73,8 @@ export default defineComponent({
       default: undefined
     }
   },
-  setup (props) {
-    function resolveLinkClass (route, $route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
+  setup(props) {
+    function resolveLinkClass(route, $route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {
       if (props.exactQuery && !isEqual(route.query, $route.query)) {
         return props.inactiveClass
       }
