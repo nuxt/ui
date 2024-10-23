@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import AutoImports from 'unplugin-auto-import/vite'
 import VueComponents from 'unplugin-vue-components'
 
-import { NuxtUIPlugin } from '../src/unplugin'
+import ui from '../src/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,7 +14,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    NuxtUIPlugin.vite({
+    ui({
       ui: {
         colors: {
           primary: 'green',

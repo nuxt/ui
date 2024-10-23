@@ -20,8 +20,12 @@
     "./unplugin": {
       "types": "./dist/unplugin.d.ts",
       "import": "./dist/unplugin.mjs",
-      "require": "./dist/unplugin.cjs",
-      "style": "./dist/runtime/index.css"
+      "require": "./dist/unplugin.cjs"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.mjs",
+      "require": "./dist/vite.cjs"
     },
     "./vue-plugin": {
       "types": "./vue-plugin.d.ts"
