@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     content: 'relative overflow-hidden',
     viewport: 'divide-y divide-[var(--ui-border)] scroll-py-1',
     group: 'p-1 isolate',
-    empty: 'py-6 text-center text-sm',
+    empty: 'py-6 text-center text-sm text-[var(--ui-text-muted)]',
     label: 'px-2 py-1.5 text-xs font-semibold text-[var(--ui-text-highlighted)]',
     item: ['group relative w-full flex items-center gap-2 px-2 py-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50', options.theme.transitions && 'transition-colors before:transition-colors'],
     itemLeadingIcon: ['shrink-0 size-5 text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors'],

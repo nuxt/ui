@@ -32,6 +32,10 @@ const props = defineProps<{
    * @defaultValue false
    */
   collapse?: boolean
+  /**
+   * A list of line numbers to highlight in the code block
+   */
+  highlights?: number[]
 }>()
 
 const route = useRoute()
@@ -105,7 +109,7 @@ const code = computed(() => {
 `
   }
 
-  code += `\`\`\`vue`
+  code += `\`\`\`vue${props.highlights?.length ? ` {${props.highlights.join('-')}}` : ''}`
 
   if (props.external?.length) {
     code += `
@@ -201,7 +205,8 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
     formatted = await $prettier.format(code.value, {
       trailingComma: 'none',
       semi: false,
-      singleQuote: true
+      singleQuote: true,
+      printWidth: 100
     })
   } catch {
     formatted = code.value
