@@ -53,6 +53,7 @@
     "@nuxtjs/color-mode": "^3.5.1",
     "@tailwindcss/postcss": "4.0.0-alpha.28",
     "@tailwindcss/vite": "4.0.0-alpha.28",
+    "@tanstack/vue-table": "^8.20.5",
     "@vueuse/core": "^11.1.0",
     "@vueuse/integrations": "^11.1.0",
     "defu": "^6.1.4",

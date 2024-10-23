@@ -28,6 +28,14 @@ function stripCompoundVariants(component?: any) {
         }
       }
 
+      if (compoundVariant.loadingColor) {
+        if (!['primary', 'neutral'].includes(compoundVariant.loadingColor)) {
+          strippedCompoundVariants.value = true
+
+          return false
+        }
+      }
+
       return true
     })
   }

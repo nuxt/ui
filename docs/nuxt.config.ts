@@ -179,6 +179,7 @@ export default defineNuxtConfig({
         'USlider',
         'USlideover',
         'USwitch',
+        'UTable',
         'UTabs',
         'UTextarea',
         'UTooltip'
