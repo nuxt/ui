@@ -42,7 +42,7 @@ export default function ComponentImportPlugin(framework: UnpluginContextMeta['fr
       }
     },
     AutoImportComponents[framework]({
-      dts: true,
+      dts: options.dts ?? true,
       exclude: [/[\\/]node_modules[\\/](?!\.pnpm|@nuxt\/ui)/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
       resolvers: [
         (componentName) => {

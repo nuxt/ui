@@ -31,6 +31,8 @@ type AppConfigUI = {
 } & DeepPartial<typeof ui, string>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
+  /** Whether to generate declaration files for auto-imported components. */
+  dts?: boolean
   ui?: AppConfigUI
   /**
    * Enable or disable `@vueuse/core` color-mode integration
@@ -52,7 +54,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
   return [
     NuxtEnvironmentPlugin(),
     ...ComponentImportPlugin(meta.framework, options),
-    AutoImport[meta.framework]({ dirs: [join(runtimeDir, 'composables')] }),
+    AutoImport[meta.framework]({ dts: options.dts ?? true, dirs: [join(runtimeDir, 'composables')] }),
     tailwind(),
     PluginsPlugin(options),
     TemplatePlugin(options, appConfig),
