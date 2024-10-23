@@ -46,7 +46,7 @@
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },
   "dependencies": {
-    "@nuxt/fonts": "^0.10.0",
+    "@nuxt/fonts": "^0.10.2",
     "@nuxt/icon": "^1.5.6",
     "@nuxt/kit": "^3.13.2",
     "@nuxt/schema": "^3.13.2",
@@ -76,7 +76,7 @@
     "@nuxt/eslint-config": "^0.5.7",
     "@nuxt/module-builder": "^0.8.4",
     "@nuxt/test-utils": "^3.14.4",
-    "@release-it/conventional-changelog": "^9.0.0",
+    "@release-it/conventional-changelog": "^9.0.1",
     "@standard-schema/spec": "1.0.0-beta.1",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.3.0",
