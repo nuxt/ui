@@ -15,5 +15,6 @@ export default defineBuildConfig({
     'mkdist:entry:options'(ctx, entry, options) {
       options.addRelativeDeclarationExtensions = false
     }
-  }
+  },
+  externals: ['#build/ui']
 })
