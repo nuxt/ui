@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ButtonHTMLAttributes } from 'vue'
+import { hasProtocol } from 'ufo'
 import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -77,6 +78,8 @@ const ui = computed(() => tv({
   }
 }))
 
+const isExternal = computed(() => typeof props.to === 'string' && hasProtocol(props.to, { acceptRelative: true }))
+
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
   if (props.active !== undefined) {
     return props.active
@@ -120,9 +123,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
           as,
           type,
           disabled,
-          href,
+          href: to ? (isExternal ? to as string : href) : undefined,
           navigate,
-          active: isLinkActive({ route: linkRoute, isActive, isExactActive })
+          active: to ? isLinkActive({ route: linkRoute, isActive, isExactActive }) : false
         }"
       />
     </template>
@@ -133,12 +136,12 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
         as,
         type,
         disabled,
-        href: to ? href : undefined,
+        href: to ? (isExternal ? to as string : href) : undefined,
         navigate
       }"
-      :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
+      :class="resolveLinkClass({ route: linkRoute, isActive: to ? isActive : false, isExactActive: to ? isExactActive : false })"
     >
-      <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
+      <slot :active="to ? isLinkActive({ route: linkRoute, isActive, isExactActive }) : false" />
     </ULinkBase>
   </RouterLink>
 </template>
