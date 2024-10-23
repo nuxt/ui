@@ -12,7 +12,7 @@ links:
 
 ## Usage
 
-The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API.
+The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API. *Some features of TanStack Table are not supported yet, we'll add more over time.*
 
 ::component-example
 ---
@@ -24,10 +24,6 @@ class: '!p-0'
 
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/tree/v3/docs/app/components/content/examples/table/TableExample.vue"}
 This example demonstrates the most common use case of the `Table` component. Check out the source code on GitHub.
-::
-
-::note
-Some features of **TanStack Table** are not supported yet, we'll add more over time.
 ::
 
 ### Data
