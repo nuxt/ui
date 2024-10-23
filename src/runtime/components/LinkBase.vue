@@ -3,7 +3,7 @@ export interface LinkBaseProps {
   as?: string
   type?: string
   disabled?: boolean
-  onClick?: (e: MouseEvent) => void | Promise<void>
+  onClick?: ((e: MouseEvent) => void | Promise<void>) | Array<((e: MouseEvent) => void | Promise<void>)>
   href?: string
   navigate?: (e: MouseEvent) => void
   rel?: string
@@ -28,7 +28,9 @@ function onClickWrapper(e: MouseEvent) {
   }
 
   if (props.onClick) {
-    props.onClick(e)
+    for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
+      onClick(e)
+    }
   }
 
   if (props.href && props.navigate && !props.isExternal) {

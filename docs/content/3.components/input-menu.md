@@ -608,7 +608,7 @@ name: 'input-menu-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the InputMenu.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the InputMenu by pressing :kbd{value="O"}.
 ::
 
 ### Control open state on focus
