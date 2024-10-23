@@ -13,6 +13,7 @@ export default function NuxtEnvironmentPlugin() {
 
   return {
     name: 'nuxt:ui',
+    enforce: 'pre',
     resolveId(id) {
       // this is implemented here rather than in a vite `config` hook for cross-builder support
       if (id === '#imports') {

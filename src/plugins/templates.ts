@@ -13,6 +13,7 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
 
   return {
     name: 'nuxt:ui:templates',
+    enforce: 'pre',
     resolveId(id) {
       if (templateKeys.has(id + '.ts')) {
         return id.replace('#build/', 'virtual:nuxt-ui-templates/') + '.ts'

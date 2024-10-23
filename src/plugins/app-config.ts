@@ -9,6 +9,7 @@ import type { NuxtUIOptions } from '../unplugin'
 export default function AppConfigPlugin(options: NuxtUIOptions & { theme: NonNullable<NuxtUIOptions['theme']> }, appConfig: Record<string, any>) {
   return {
     name: 'nuxt:ui:app-config',
+    enforce: 'pre',
     resolveId(id) {
       if (id === '#build/app.config') {
         return 'virtual:nuxt-ui-app-config'
