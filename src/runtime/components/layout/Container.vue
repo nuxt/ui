@@ -33,7 +33,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('container', toRef(props, 'ui'), config)
 
     const containerClass = computed(() => {

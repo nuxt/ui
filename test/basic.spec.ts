@@ -4,10 +4,11 @@ import { join } from 'pathe'
 import { loadNuxt } from '@nuxt/kit'
 import type { NuxtConfig } from '@nuxt/schema'
 import type * as tailwindcss from 'tailwindcss'
-type TWConfig = tailwindcss.Config;
 import type resolveConfig from 'tailwindcss/resolveConfig'
 
-async function getTailwindCSSConfig (overrides: Partial<NuxtConfig> = {}) {
+type TWConfig = tailwindcss.Config
+
+async function getTailwindCSSConfig(overrides: Partial<NuxtConfig> = {}) {
   let tailwindConfig: ReturnType<typeof resolveConfig<TWConfig>>
   const nuxt = await loadNuxt({
     ready: true,
@@ -17,7 +18,7 @@ async function getTailwindCSSConfig (overrides: Partial<NuxtConfig> = {}) {
       ssr: false,
       modules: ['../../src/module'],
       hooks: {
-        'tailwindcss:resolvedConfig' (config) {
+        'tailwindcss:resolvedConfig'(config) {
           tailwindConfig = config
         }
       }

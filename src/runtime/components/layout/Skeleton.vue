@@ -31,7 +31,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('skeleton', toRef(props, 'ui'), config)
 
     const skeletonClass = computed(() => {

@@ -29,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import type { NuxtError } from '#app'
 import type { ParsedContent } from '@nuxt/content'
+import type { NuxtError } from '#app'
 
 useSeoMeta({
   title: 'Page not found',
@@ -57,20 +57,22 @@ const links = computed(() => {
     icon: 'i-heroicons-book-open',
     to: '/getting-started',
     active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro') ? [{
-    label: 'Pro',
-    icon: 'i-heroicons-square-3-stack-3d',
-    to: '/pro',
-    active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
-  }, {
-    label: 'Pricing',
-    icon: 'i-heroicons-ticket',
-    to: '/pro/pricing'
-  }, {
-    label: 'Templates',
-    icon: 'i-heroicons-computer-desktop',
-    to: '/pro/templates'
-  }] : []), {
+  }, ...(navigation.value.find(item => item._path === '/pro')
+    ? [{
+        label: 'Pro',
+        icon: 'i-heroicons-square-3-stack-3d',
+        to: '/pro',
+        active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
+      }, {
+        label: 'Pricing',
+        icon: 'i-heroicons-ticket',
+        to: '/pro/pricing'
+      }, {
+        label: 'Templates',
+        icon: 'i-heroicons-computer-desktop',
+        to: '/pro/templates'
+      }]
+    : []), {
     label: 'Releases',
     icon: 'i-heroicons-rocket-launch',
     to: '/releases'

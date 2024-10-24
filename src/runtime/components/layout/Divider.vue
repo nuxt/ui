@@ -55,7 +55,7 @@ export default defineComponent({
     size: {
       type: String as PropType<DividerSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.border.size.horizontal).includes(value) || Object.keys(config.border.size.vertical).includes(value)
       }
     },
@@ -78,7 +78,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('divider', toRef(props, 'ui'), config)
 
     const wrapperClass = computed(() => {

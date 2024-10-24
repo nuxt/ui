@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const toast = useToast()
 
-function onCallback () {
+function onCallback() {
   alert('Notification expired!')
 }
 </script>

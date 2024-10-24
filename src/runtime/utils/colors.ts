@@ -1,7 +1,7 @@
-import { omit } from './lodash'
 import { kebabCase, camelCase, upperFirst } from 'scule'
 import type { Config as TWConfig } from 'tailwindcss'
 import defaultColors from 'tailwindcss/colors.js'
+import { omit } from './lodash'
 
 const colorsToExclude = [
   'inherit',
@@ -18,7 +18,7 @@ const colorsToExclude = [
 ]
 
 const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist']> = {
-  alert: (colorsAsRegex) => [{
+  alert: colorsAsRegex => [{
     pattern: RegExp(`^bg-(${colorsAsRegex})-50$`)
   }, {
     pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
@@ -36,13 +36,13 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
   }, {
     pattern: RegExp(`^ring-(${colorsAsRegex})-500$`)
   }],
-  avatar: (colorsAsRegex) => [{
+  avatar: colorsAsRegex => [{
     pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
     pattern: RegExp(`^bg-(${colorsAsRegex})-500$`)
   }],
-  badge: (colorsAsRegex) => [{
+  badge: colorsAsRegex => [{
     pattern: RegExp(`^bg-(${colorsAsRegex})-50$`)
   }, {
     pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
@@ -60,7 +60,7 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
   }, {
     pattern: RegExp(`^ring-(${colorsAsRegex})-500$`)
   }],
-  button: (colorsAsRegex) => [{
+  button: colorsAsRegex => [{
     pattern: RegExp(`^bg-(${colorsAsRegex})-50$`),
     variants: ['hover', 'disabled']
   }, {
@@ -103,7 +103,7 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
     pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
-  input: (colorsAsRegex) => [{
+  input: colorsAsRegex => [{
     pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
@@ -115,7 +115,7 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
     pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus']
   }],
-  radio: (colorsAsRegex) => [{
+  radio: colorsAsRegex => [{
     pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
@@ -127,7 +127,7 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
     pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
-  checkbox: (colorsAsRegex) => [{
+  checkbox: colorsAsRegex => [{
     pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
@@ -139,7 +139,7 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
     pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
-  toggle: (colorsAsRegex) => [{
+  toggle: colorsAsRegex => [{
     pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
@@ -156,7 +156,7 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
     pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
-  range: (colorsAsRegex) => [{
+  range: colorsAsRegex => [{
     pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
@@ -173,13 +173,13 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
     pattern: RegExp(`^ring-(${colorsAsRegex})-500$`),
     variants: ['focus-visible']
   }],
-  progress: (colorsAsRegex) => [{
+  progress: colorsAsRegex => [{
     pattern: RegExp(`^text-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
     pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }],
-  meter: (colorsAsRegex) => [{
+  meter: colorsAsRegex => [{
     pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
@@ -190,7 +190,7 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
   }, {
     pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }],
-  notification: (colorsAsRegex) => [{
+  notification: colorsAsRegex => [{
     pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
@@ -201,7 +201,7 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
   }, {
     pattern: RegExp(`^text-(${colorsAsRegex})-500$`)
   }],
-  chip: (colorsAsRegex) => [{
+  chip: colorsAsRegex => [{
     pattern: RegExp(`^bg-(${colorsAsRegex})-400$`),
     variants: ['dark']
   }, {
@@ -210,11 +210,11 @@ const safelistByComponent: Record<string, (colors: string) => TWConfig['safelist
 }
 
 const safelistComponentAliasesMap = {
-  'USelect': 'UInput',
-  'USelectMenu': 'UInput',
-  'UTextarea': 'UInput',
-  'URadioGroup': 'URadio',
-  'UMeterGroup': 'UMeter'
+  USelect: 'UInput',
+  USelectMenu: 'UInput',
+  UTextarea: 'UInput',
+  URadioGroup: 'URadio',
+  UMeterGroup: 'UMeter'
 }
 
 const colorsAsRegex = (colors: string[]): string => colors.join('|')
@@ -251,8 +251,7 @@ export const setGlobalColors = (theme: TWConfig['theme']) => {
 
   if (globalColors.gray) {
     // @ts-ignore
-    globalColors.cool = theme.extend.colors.cool =
-      defaultColors.gray
+    globalColors.cool = theme.extend.colors.cool = defaultColors.gray
   }
 
   // @ts-ignore
@@ -295,7 +294,8 @@ export const generateSafelist = (colors: string[], globalColors: string[]) => {
 type SafelistFn = Exclude<NonNullable<Extract<TWConfig['content'], { extract?: unknown }>['extract']>, Record<string, unknown>>
 export const customSafelistExtractor = (prefix: string, content: string, colors: string[], safelistColors: string[]): ReturnType<SafelistFn> => {
   const classes: string[] = []
-  const regex = /<([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z][A-Za-z0-9]*)*)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/gs
+  // eslint-disable-next-line regexp/no-super-linear-backtracking
+  const regex = /<([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z][A-Za-z0-9]*)*)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/g
 
   const matches = content.matchAll(regex)
 
@@ -318,23 +318,25 @@ export const customSafelistExtractor = (prefix: string, content: string, colors:
 
     name = name.replace(prefix, '').toLowerCase()
 
-    const matchClasses = safelistByComponent[name](color).flatMap(group => {
-      return typeof group === 'string' ? '' : ['', ...(group.variants || [])].flatMap(variant => {
-        const matches = group.pattern.source.match(/\(([^)]+)\)/g)
+    const matchClasses = safelistByComponent[name](color).flatMap((group) => {
+      return typeof group === 'string'
+        ? ''
+        : ['', ...(group.variants || [])].flatMap((variant) => {
+            const matches = group.pattern.source.match(/\(([^)]+)\)/g)
 
-        return matches.map(match => {
-          const colorOptions = match.substring(1, match.length - 1).split('|')
-          return colorOptions.map(
-            color => {
-              const classesExtracted = group.pattern.source.replace(match, color).replace('^', '').replace('$', '')
-              if (variant) {
-                return `${variant}:${classesExtracted}`
-              }
-              return classesExtracted
-            }
-          )
-        }).flat()
-      })
+            return matches.map((match) => {
+              const colorOptions = match.substring(1, match.length - 1).split('|')
+              return colorOptions.map(
+                (color) => {
+                  const classesExtracted = group.pattern.source.replace(match, color).replace('^', '').replace('$', '')
+                  if (variant) {
+                    return `${variant}:${classesExtracted}`
+                  }
+                  return classesExtracted
+                }
+              )
+            }).flat()
+          })
     })
 
     classes.push(...matchClasses)

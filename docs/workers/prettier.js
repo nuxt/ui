@@ -6,14 +6,14 @@ self.onmessage = async function (event) {
   })
 }
 
-function handleMessage (message) {
+function handleMessage(message) {
   switch (message.type) {
     case 'format':
       return handleFormatMessage(message)
   }
 }
 
-async function handleFormatMessage (message) {
+async function handleFormatMessage(message) {
   if (!globalThis.prettier) {
     await Promise.all([
       import('https://unpkg.com/prettier@3.3.3/standalone.js'),

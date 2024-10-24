@@ -98,7 +98,7 @@ export default defineComponent({
     }
   },
   emits: ['update:open'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('popover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
@@ -154,7 +154,7 @@ export default defineComponent({
       }
     })
 
-    function onTouchStart (event: TouchEvent) {
+    function onTouchStart(event: TouchEvent) {
       if (!event.cancelable || !popoverApi.value || props.mode === 'click') {
         return
       }
@@ -166,7 +166,7 @@ export default defineComponent({
       }
     }
 
-    function onMouseEnter () {
+    function onMouseEnter() {
       if (props.mode !== 'hover' || !popoverApi.value) {
         return
       }
@@ -181,12 +181,14 @@ export default defineComponent({
         return
       }
       openTimeout = openTimeout || setTimeout(() => {
-        popoverApi.value.togglePopover && popoverApi.value.togglePopover()
+        if (popoverApi.value.togglePopover) {
+          popoverApi.value.togglePopover()
+        }
         openTimeout = null
       }, props.openDelay)
     }
 
-    function onMouseLeave () {
+    function onMouseLeave() {
       if (props.mode !== 'hover' || !popoverApi.value) {
         return
       }
@@ -201,7 +203,9 @@ export default defineComponent({
         return
       }
       closeTimeout = closeTimeout || setTimeout(() => {
-        popoverApi.value.closePopover && popoverApi.value.closePopover()
+        if (popoverApi.value.closePopover) {
+          popoverApi.value.closePopover()
+        }
         closeTimeout = null
       }, props.closeDelay)
     }

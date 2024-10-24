@@ -1,10 +1,10 @@
 import type { Notification } from '../types/notification'
 import { useState } from '#imports'
 
-export function useToast () {
+export function useToast() {
   const notifications = useState<Notification[]>('notifications', () => [])
 
-  function add (notification: Partial<Notification>) {
+  function add(notification: Partial<Notification>) {
     const body = {
       id: new Date().getTime().toString(),
       ...notification
@@ -18,11 +18,11 @@ export function useToast () {
     return body
   }
 
-  function remove (id: string) {
+  function remove(id: string) {
     notifications.value = notifications.value.filter((n: Notification) => n.id !== id)
   }
 
-  function update (id: string, notification: Partial<Notification>) {
+  function update(id: string, notification: Partial<Notification>) {
     const index = notifications.value.findIndex((n: Notification) => n.id === id)
     if (index !== -1) {
       const previous = notifications.value[index]
@@ -30,7 +30,7 @@ export function useToast () {
     }
   }
 
-  function clear () {
+  function clear() {
     notifications.value = []
   }
 

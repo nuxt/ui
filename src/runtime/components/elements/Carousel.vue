@@ -59,12 +59,12 @@
 import { ref, toRef, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge } from 'tailwind-merge'
+import { useScroll, useResizeObserver, useElementSize } from '@vueuse/core'
 import { mergeConfig } from '../../utils'
 import UButton from '../elements/Button.vue'
 import type { Strategy, Button, DeepPartial } from '../../types/index'
 import { useUI } from '../../composables/useUI'
 import { useCarouselScroll } from '../../composables/useCarouselScroll'
-import { useScroll, useResizeObserver, useElementSize } from '@vueuse/core'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { carousel } from '#ui/ui.config'
@@ -110,7 +110,7 @@ export default defineComponent({
       default: undefined
     }
   },
-  setup (props, { expose }) {
+  setup(props, { expose }) {
     const { ui, attrs } = useUI('carousel', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const carouselRef = ref<HTMLElement>()
@@ -157,15 +157,15 @@ export default defineComponent({
     const isFirst = computed(() => currentPage.value <= 1)
     const isLast = computed(() => currentPage.value === pages.value)
 
-    function onClickNext () {
+    function onClickNext() {
       x.value += isRtl.value ? -itemWidth.value : itemWidth.value
     }
 
-    function onClickPrev () {
+    function onClickPrev() {
       x.value -= isRtl.value ? -itemWidth.value : itemWidth.value
     }
 
-    function onClick (page: number) {
+    function onClick(page: number) {
       x.value = (page - 1) * itemWidth.value * (isRtl.value ? -1 : 1)
     }
 

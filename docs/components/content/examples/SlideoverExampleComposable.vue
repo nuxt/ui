@@ -3,7 +3,7 @@ import { SlideoverExampleComponent } from '#components'
 
 const slideover = useSlideover()
 const count = ref(0)
-function openSlideover () {
+function openSlideover() {
   count.value += 1
   slideover.open(SlideoverExampleComponent, {
     count: count.value,

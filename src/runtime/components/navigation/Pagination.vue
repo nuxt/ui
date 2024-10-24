@@ -74,11 +74,11 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import type { RouteLocationRaw } from '#vue-router'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import type { Button, ButtonSize, DeepPartial, Strategy } from '../../types/index'
+import type { RouteLocationRaw } from '#vue-router'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { pagination, button } from '#ui/ui.config'
@@ -108,7 +108,7 @@ export default defineComponent({
     max: {
       type: Number,
       default: 7,
-      validate (value) {
+      validate(value) {
         return value >= 5 && value < Number.MAX_VALUE
       }
     },
@@ -119,7 +119,7 @@ export default defineComponent({
     size: {
       type: String as PropType<ButtonSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(buttonConfig.size).includes(value)
       }
     },
@@ -173,14 +173,14 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('pagination', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const currentPage = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })
@@ -252,7 +252,7 @@ export default defineComponent({
     const canGoFirstOrPrev = computed(() => currentPage.value > 1)
     const canGoLastOrNext = computed(() => currentPage.value < pages.value.length)
 
-    function onClickFirst () {
+    function onClickFirst() {
       if (!canGoFirstOrPrev.value) {
         return
       }
@@ -260,7 +260,7 @@ export default defineComponent({
       currentPage.value = 1
     }
 
-    function onClickLast () {
+    function onClickLast() {
       if (!canGoLastOrNext.value) {
         return
       }
@@ -268,7 +268,7 @@ export default defineComponent({
       currentPage.value = pages.value.length
     }
 
-    function onClickPage (page: number | string) {
+    function onClickPage(page: number | string) {
       if (typeof page === 'string') {
         return
       }
@@ -276,7 +276,7 @@ export default defineComponent({
       currentPage.value = page
     }
 
-    function onClickPrev () {
+    function onClickPrev() {
       if (!canGoFirstOrPrev.value) {
         return
       }
@@ -284,7 +284,7 @@ export default defineComponent({
       currentPage.value--
     }
 
-    function onClickNext () {
+    function onClickNext() {
       if (!canGoLastOrNext.value) {
         return
       }

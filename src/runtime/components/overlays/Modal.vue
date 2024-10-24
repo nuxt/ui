@@ -14,7 +14,7 @@
                 ui.background,
                 ui.ring,
                 ui.shadow,
-                fullscreen ? ui.fullscreen : [ui.width, ui.height, ui.rounded, ui.margin],
+                fullscreen ? ui.fullscreen : [ui.width, ui.height, ui.rounded, ui.margin]
               ]"
             >
               <slot />
@@ -83,14 +83,14 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'close', 'close-prevented', 'after-leave'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('modal', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const isOpen = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })
@@ -105,7 +105,7 @@ export default defineComponent({
       }
     })
 
-    function close (value: boolean) {
+    function close(value: boolean) {
       if (props.preventClose) {
         emit('close-prevented')
 

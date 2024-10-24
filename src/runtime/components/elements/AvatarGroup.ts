@@ -1,10 +1,10 @@
 import { h, cloneVNode, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UAvatar from './Avatar.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
 import type { AvatarSize, Strategy } from '../../types/index'
+import UAvatar from './Avatar.vue'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { avatar, avatarGroup } from '#ui/ui.config'
@@ -19,7 +19,7 @@ export default defineComponent({
     size: {
       type: String as PropType<AvatarSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(avatarConfig.size).includes(value)
       }
     },
@@ -36,12 +36,12 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { ui, attrs } = useUI('avatarGroup', toRef(props, 'ui'), avatarGroupConfig, toRef(props, 'class'))
 
     const children = computed(() => getSlotsChildren(slots))
 
-    const max = computed(() => typeof props.max === 'string' ? parseInt(props.max, 10) : props.max)
+    const max = computed(() => typeof props.max === 'string' ? Number.parseInt(props.max, 10) : props.max)
 
     const clones = computed(() => children.value.map((node, index) => {
       const vProps: any = {}

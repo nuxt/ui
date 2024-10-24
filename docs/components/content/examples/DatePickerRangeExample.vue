@@ -11,11 +11,11 @@ const ranges = [
 ]
 const selected = ref({ start: sub(new Date(), { days: 14 }), end: new Date() })
 
-function isRangeSelected (duration: Duration) {
+function isRangeSelected(duration: Duration) {
   return isSameDay(selected.value.start, sub(new Date(), duration)) && isSameDay(selected.value.end, new Date())
 }
 
-function selectRange (duration: Duration) {
+function selectRange(duration: Duration) {
   selected.value = { start: sub(new Date(), duration), end: new Date() }
 }
 </script>

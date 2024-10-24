@@ -19,14 +19,14 @@ export default defineComponent({
     size: {
       type: String as PropType<ButtonSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(buttonConfig.size).includes(value)
       }
     },
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
-      validator (value: string) {
+      validator(value: string) {
         return ['horizontal', 'vertical'].includes(value)
       }
     },
@@ -39,7 +39,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { ui, attrs } = useUI('buttonGroup', toRef(props, 'ui'), buttonGroupConfig)
 
     const children = computed(() => getSlotsChildren(slots))

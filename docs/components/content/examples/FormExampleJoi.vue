@@ -14,7 +14,7 @@ const state = reactive({
   password: undefined
 })
 
-async function onSubmit (event: FormSubmitEvent<any>) {
+async function onSubmit(event: FormSubmitEvent<any>) {
   // Do something with event.data
   console.log(event.data)
 }
