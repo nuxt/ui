@@ -10,6 +10,7 @@ const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
 const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]]
+const selectedItems = ref([fruits[0], vegetables[0]])
 
 const statuses = [{
   label: 'Backlog',
@@ -52,7 +53,7 @@ function getUserAvatar(value: string) {
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-48">
-      <USelect :items="items" placeholder="Search..." />
+      <USelect :items="items" placeholder="Search..." default-value="Apple" />
     </div>
     <div class="flex items-center gap-2">
       <USelect
@@ -90,6 +91,7 @@ function getUserAvatar(value: string) {
     <div class="flex flex-col gap-4 w-48">
       <USelect :items="items" placeholder="Disabled" disabled />
       <USelect :items="items" placeholder="Required" required />
+      <USelect v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
       <USelect :items="items" loading placeholder="Search..." />
     </div>
     <div class="flex items-center gap-4">

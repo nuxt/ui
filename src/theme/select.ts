@@ -7,8 +7,9 @@ export default (options: Required<ModuleOptions>) => {
   return defuFn({
     slots: {
       root: () => undefined,
-      base: () => ['relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
-      value: 'truncate group-data-placeholder:text-[var(--ui-text-dimmed)]',
+      base: () => ['relative rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      value: 'truncate pointer-events-none',
+      placeholder: 'truncate text-[var(--ui-text-dimmed)]',
       arrow: 'fill-[var(--ui-border)]',
       content: 'max-h-60 w-[var(--reka-popper-anchor-width)] bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
       viewport: 'divide-y divide-[var(--ui-border)] scroll-py-1',

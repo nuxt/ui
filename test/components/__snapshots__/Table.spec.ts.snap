@@ -58,7 +58,7 @@ exports[`Table > renders with columns correctly 1`] = `
     <thead class="relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)]">
       <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">
-          <ucheckbox modelvalue="false" indeterminate="false" arialabel="Select all"></ucheckbox>
+          <ucheckbox modelvalue="false" arialabel="Select all"></ucheckbox>
         </th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">#</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-[var(--ui-text-highlighted)] text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pr-0">Date</th>

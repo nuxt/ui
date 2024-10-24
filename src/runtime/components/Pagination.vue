@@ -11,7 +11,7 @@ const appConfig = _appConfig as AppConfig & { ui: { pagination: Partial<typeof t
 
 const pagination = tv({ extend: tv(theme), ...(appConfig.ui?.pagination || {}) })
 
-export interface PaginationProps extends Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'> {
+export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
   /**
    * The element or component this component should render as.
    * @defaultValue `div`

@@ -28,7 +28,7 @@ export interface SelectItem {
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T> extends Omit<SelectRootProps<T>, 'dir' | 'multiple'>, UseComponentIconsProps {
+export interface SelectProps<T> extends Omit<SelectRootProps<T>, 'dir'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -87,6 +87,7 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export interface SelectSlots<T> {
   'leading'(props: { modelValue?: AcceptableValue | AcceptableValue[], open: boolean, ui: any }): any
+  'default'(props: { modelValue?: AcceptableValue | AcceptableValue[], open: boolean }): any
   'trailing'(props: { modelValue?: AcceptableValue | AcceptableValue[], open: boolean, ui: any }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -99,6 +100,7 @@ export interface SelectSlots<T> {
 import { computed, toRef } from 'vue'
 import { SelectRoot, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
+import isEqual from 'fast-deep-equal'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
@@ -118,7 +120,7 @@ const emits = defineEmits<SelectEmits>()
 const slots = defineSlots<SelectSlots<T>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
@@ -139,6 +141,22 @@ const ui = computed(() => select({
 }))
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectItem[][] : [])
+// eslint-disable-next-line vue/no-dupe-keys
+const items = computed(() => groups.value.flatMap(group => group) as T[])
+
+function displayValue(value?: AcceptableValue | AcceptableValue[]): string | undefined {
+  if (!value) {
+    return
+  }
+
+  if (props.multiple && Array.isArray(value)) {
+    return value.map(v => displayValue(v)).join(', ')
+  }
+
+  const item = items.value.find(item => props.valueKey && typeof item === 'object' ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
+
+  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
+}
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -178,7 +196,16 @@ function onUpdateOpen(value: boolean) {
         </slot>
       </span>
 
-      <SelectValue :placeholder="placeholder ?? '&nbsp;'" :class="ui.value({ class: props.ui?.value })" />
+      <SelectValue as-child>
+        <template v-for="displayedModelValue in [displayValue(modelValue)]" :key="displayedModelValue">
+          <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+            {{ displayedModelValue }}
+          </span>
+          <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
+            {{ placeholder ?? '&nbsp;' }}
+          </span>
+        </template>
+      </SelectValue>
 
       <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="modelValue" :open="open" :ui="ui">

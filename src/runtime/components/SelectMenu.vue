@@ -163,7 +163,7 @@ function displayValue(value: T | T[]): string {
     return value.map(v => displayValue(v)).join(', ')
   }
 
-  const item = items.value.find(item => props.valueKey ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
+  const item = items.value.find(item => props.valueKey && typeof item === 'object' ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
@@ -221,7 +221,6 @@ function onUpdateOpen(value: boolean) {
     as-child
     :name="name"
     :disabled="disabled"
-    :display-value="() => searchTerm"
     :filter-function="filterFunction"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
