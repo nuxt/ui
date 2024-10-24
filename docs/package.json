@@ -10,7 +10,7 @@
     "@nuxt/fonts": "^0.10.2",
     "@nuxt/image": "^1.8.1",
     "@nuxt/ui": "latest",
-    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@1.4.4-28825459.e00b753",
+    "@nuxt/ui-pro": "npm:@nuxt/ui-pro-edge@1.4.4-28829363.bb3c738",
     "@nuxtjs/plausible": "^1.0.3",
     "@octokit/rest": "^21.0.2",
     "@vueuse/nuxt": "^11.1.0",
