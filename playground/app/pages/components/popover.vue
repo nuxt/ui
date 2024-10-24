@@ -25,7 +25,7 @@ function send() {
 
       <div class="flex items-center gap-2 my-2">
         <UPopover arrow :content="{ side: 'left' }">
-          <UButton label="Click me top" color="neutral" variant="outline" />
+          <UButton label="Click me left" color="neutral" variant="outline" />
 
           <template #content>
             <div class="w-48 h-16" />
@@ -33,7 +33,7 @@ function send() {
         </UPopover>
 
         <UPopover arrow :content="{ side: 'right' }">
-          <UButton label="Click me top" color="neutral" variant="outline" />
+          <UButton label="Click me right" color="neutral" variant="outline" />
 
           <template #content>
             <div class="w-48 h-16" />
