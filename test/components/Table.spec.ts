@@ -1,5 +1,6 @@
-import { h, resolveComponent } from 'vue'
+import { h } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table, { type TableProps, type TableSlots, type TableColumn } from '../../src/runtime/components/Table.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/table'
@@ -7,11 +8,6 @@ import theme from '#build/ui/table'
 describe('Table', () => {
   const loadingColors = Object.keys(theme.variants.loadingColor) as any
   const loadingAnimations = Object.keys(theme.variants.loadingAnimation) as any
-
-  const UButton = resolveComponent('UButton')
-  const UCheckbox = resolveComponent('UCheckbox')
-  const UBadge = resolveComponent('UBadge')
-  const UDropdownMenu = resolveComponent('UDropdownMenu')
 
   const data = [{
     id: 'm5gr84i9',
@@ -129,7 +125,7 @@ describe('Table', () => {
         label: 'View payment details'
       }]
 
-      return h('div', { class: 'text-right' }, h(UDropdownMenu, {
+      return h('div', { class: 'text-right' }, h<any>(UDropdownMenu, {
         content: {
           align: 'end'
         },
