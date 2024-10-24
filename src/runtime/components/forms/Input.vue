@@ -34,8 +34,8 @@
 import { ref, computed, toRef, onMounted, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UIcon from '../elements/Icon.vue'
 import { defu } from 'defu'
+import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, looseToNumber } from '../../utils'
@@ -124,21 +124,21 @@ export default defineComponent({
     size: {
       type: String as PropType<InputSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<InputColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<InputVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -163,7 +163,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'blur', 'change'],
-  setup (props, { emit, slots }) {
+  setup(props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
@@ -184,7 +184,6 @@ export default defineComponent({
 
     // Custom function to handle the v-model properties
     const updateInput = (value: string) => {
-
       if (modelModifiers.value.trim) {
         value = value.trim()
       }

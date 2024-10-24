@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { excludeColors, generateSafelist, setGlobalColors } from '../src/runtime/utils/colors'
 import defaultColors from 'tailwindcss/colors'
 import type { Config as TWConfig } from 'tailwindcss'
+import { excludeColors, generateSafelist, setGlobalColors } from '../src/runtime/utils/colors'
 
 describe('excludeColors', () => {
   it('should exclude colors from the list', () => {
@@ -40,8 +40,8 @@ describe('generateSafelist', () => {
     safelistColors.push('primary')
     tailwindConfig.theme = tailwindConfig.theme || {}
     tailwindConfig.theme.extend = tailwindConfig.theme.extend || {}
-    tailwindConfig.theme.extend.colors =
-      tailwindConfig.theme.extend.colors || {}
+    tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
+
     const safelistConfig = generateSafelist(safelistColors, setGlobalColors(tailwindConfig.theme))
 
     expect.extend({
@@ -64,7 +64,7 @@ describe('generateSafelist', () => {
       }
     })
 
-    safelistPatterns = safelistPatterns instanceof Array ? safelistPatterns : [safelistPatterns]
+    safelistPatterns = Array.isArray(safelistPatterns) ? safelistPatterns : [safelistPatterns]
 
     let negate = false
     for (const safelistPattern of safelistPatterns) {

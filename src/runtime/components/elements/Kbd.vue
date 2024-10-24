@@ -27,7 +27,7 @@ export default defineComponent({
     size: {
       type: String as PropType<KbdSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
@@ -40,7 +40,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('kbd', toRef(props, 'ui'), config)
 
     const kbdClass = computed(() => {

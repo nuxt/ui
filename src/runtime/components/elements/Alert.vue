@@ -90,14 +90,14 @@ export default defineComponent({
     color: {
       type: String as PropType<AlertColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<AlertVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -114,7 +114,7 @@ export default defineComponent({
     }
   },
   emits: ['close'],
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('alert', toRef(props, 'ui'), config)
 
     const alertClass = computed(() => {
@@ -129,7 +129,7 @@ export default defineComponent({
       ), props.class)
     })
 
-    function onAction (action: AlertAction) {
+    function onAction(action: AlertAction) {
       if (action.click) {
         action.click()
       }

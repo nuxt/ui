@@ -1,8 +1,8 @@
 import { computed, toValue, useAttrs } from 'vue'
 import type { Ref } from 'vue'
-import { useAppConfig } from '#imports'
 import { mergeConfig, omit, get } from '../utils'
 import type { DeepPartial, Strategy } from '../types/index'
+import { useAppConfig } from '#imports'
 
 export const useUI = <T>(key, $ui?: Ref<DeepPartial<T> & { strategy?: Strategy } | undefined>, $config?: Ref<T> | T, $wrapperClass?: Ref<string>, withAppConfig: boolean = false) => {
   const $attrs = useAttrs()

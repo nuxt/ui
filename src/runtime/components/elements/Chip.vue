@@ -29,21 +29,21 @@ export default defineComponent({
     size: {
       type: String as PropType<ChipSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<ChipColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
       }
     },
     position: {
       type: String as PropType<ChipPosition>,
       default: () => config.default.position,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.position).includes(value)
       }
     },
@@ -68,7 +68,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('chip', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const chipClass = computed(() => {

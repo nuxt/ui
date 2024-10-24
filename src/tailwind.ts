@@ -4,7 +4,7 @@ import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit'
 import { setGlobalColors } from './runtime/utils/colors'
 import type { ModuleOptions } from './module'
 
-export default function installTailwind (
+export default function installTailwind(
   moduleOptions: ModuleOptions,
   nuxt = useNuxt(),
   resolve = createResolver(import.meta.url).resolve

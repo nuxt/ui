@@ -140,11 +140,11 @@ import { table } from '#ui/ui.config'
 
 const config = mergeConfig<typeof table>(appConfig.ui.strategy, appConfig.ui.table, table)
 
-function defaultComparator<T> (a: T, z: T): boolean {
+function defaultComparator<T>(a: T, z: T): boolean {
   return JSON.stringify(a) === JSON.stringify(z)
 }
 
-function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
+function defaultSort(a: any, b: any, direction: 'asc' | 'desc') {
   if (a === b) {
     return 0
   }
@@ -239,10 +239,10 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'update:sort'],
-  setup (props, { emit, attrs: $attrs }) {
+  setup(props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as TableColumn))
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map(key => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as TableColumn))
 
     const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
 
@@ -261,17 +261,17 @@ export default defineComponent({
         const aValue = get(a, column)
         const bValue = get(b, column)
 
-        const sort = columns.value.find((col) => col.key === column)?.sort ?? defaultSort
+        const sort = columns.value.find(col => col.key === column)?.sort ?? defaultSort
 
         return sort(aValue, bValue, direction)
       })
     })
 
     const selected = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })
@@ -288,7 +288,7 @@ export default defineComponent({
       return { ...ui.value.default.loadingState, ...props.loadingState }
     })
 
-    function compare (a: any, z: any) {
+    function compare(a: any, z: any) {
       if (typeof props.by === 'string') {
         const accesorFn = accessor(props.by)
         return accesorFn(a) === accesorFn(z)
@@ -296,19 +296,19 @@ export default defineComponent({
       return props.by(a, z)
     }
 
-    function accessor <T extends Record<string, any>> (key: string) {
+    function accessor<T extends Record<string, any>>(key: string) {
       return (obj: T) => get(obj, key)
     }
 
-    function isSelected (row: TableRow) {
+    function isSelected(row: TableRow) {
       if (!props.modelValue) {
         return false
       }
 
-      return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
+      return selected.value.some(item => compare(toRaw(item), toRaw(row)))
     }
 
-    function onSort (column: { key: string, direction?: 'asc' | 'desc' }) {
+    function onSort(column: { key: string, direction?: 'asc' | 'desc' }) {
       if (sort.value.column === column.key) {
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
@@ -322,7 +322,7 @@ export default defineComponent({
       }
     }
 
-    function onSelect (row: TableRow) {
+    function onSelect(row: TableRow) {
       if (!$attrs.onSelect) {
         return
       }
@@ -331,7 +331,7 @@ export default defineComponent({
       $attrs.onSelect(row)
     }
 
-    function selectAllRows () {
+    function selectAllRows() {
       // Create a new array to ensure reactivity
       const newSelected = [...selected.value]
 
@@ -346,7 +346,7 @@ export default defineComponent({
       selected.value = newSelected
     }
 
-    function onChange (checked: boolean) {
+    function onChange(checked: boolean) {
       if (checked) {
         selectAllRows()
       } else {
@@ -354,28 +354,28 @@ export default defineComponent({
       }
     }
 
-    function onChangeCheckbox (checked: boolean, row: TableRow) {
+    function onChangeCheckbox(checked: boolean, row: TableRow) {
       if (checked) {
         selected.value.push(row)
       } else {
-        const index = selected.value.findIndex((item) => compare(item, row))
+        const index = selected.value.findIndex(item => compare(item, row))
         selected.value.splice(index, 1)
       }
     }
 
-    function getRowData (row: TableRow, rowKey: string | string[], defaultValue: any = '') {
+    function getRowData(row: TableRow, rowKey: string | string[], defaultValue: any = '') {
       return get(row, rowKey, defaultValue)
     }
 
-    function toggleOpened (index: number) {
+    function toggleOpened(index: number) {
       if (openedRows.value.includes(index)) {
-        openedRows.value = openedRows.value.filter((i) => i !== index)
+        openedRows.value = openedRows.value.filter(i => i !== index)
       } else {
         openedRows.value.push(index)
       }
     }
 
-    function getAriaSort (column: TableColumn): AriaAttributes['aria-sort'] {
+    function getAriaSort(column: TableColumn): AriaAttributes['aria-sort'] {
       if (!column.sortable) {
         return undefined
       }

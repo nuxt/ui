@@ -5,7 +5,7 @@ import type { Strategy } from '../types/index'
 const customTwMerge = extendTailwindMerge<string, string>({
   extend: {
     classGroups: {
-      icons: [(classPart: string) => /^i-/.test(classPart)]
+      icons: [(classPart: string) => classPart.startsWith('i-')]
     }
   }
 })
@@ -23,7 +23,7 @@ const defuTwMerge = createDefu((obj, key, value, namespace) => {
   if (namespace.endsWith('chip') && key === 'size') {
     return false
   }
-  if (namespace.endsWith('badge') && key === 'size' || key === 'color' || key === 'variant') {
+  if ((namespace.endsWith('badge') && key === 'size') || key === 'color' || key === 'variant') {
     return false
   }
   if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
@@ -33,7 +33,7 @@ const defuTwMerge = createDefu((obj, key, value, namespace) => {
   }
 })
 
-export function mergeConfig<T> (strategy: Strategy, ...configs): T {
+export function mergeConfig<T>(strategy: Strategy, ...configs): T {
   if (strategy === 'override') {
     return defu({}, ...configs) as T
   }
@@ -43,13 +43,13 @@ export function mergeConfig<T> (strategy: Strategy, ...configs): T {
 
 const rxHex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i
 
-export function parseConfigValue (value: string) {
+export function parseConfigValue(value: string) {
   return rxHex.test(value)
     ? hexToRgb(value)
     : value
 }
 
-export function hexToRgb (hex: string) {
+export function hexToRgb(hex: string) {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
   hex = hex.replace(shorthandRegex, function (_, r, g, b) {
@@ -58,14 +58,14 @@ export function hexToRgb (hex: string) {
 
   const result = rxHex.exec(hex)
   return result
-    ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}`
+    ? `${Number.parseInt(result[1], 16)} ${Number.parseInt(result[2], 16)} ${Number.parseInt(result[3], 16)}`
     : null
 }
 
-export function getSlotsChildren (slots: any) {
+export function getSlotsChildren(slots: any) {
   let children = slots.default?.()
   if (children?.length) {
-    children = children.flatMap(c => {
+    children = children.flatMap((c) => {
       if (typeof c.type === 'symbol') {
         if (typeof c.children === 'string') {
           // `v-if="false"` or commented node
@@ -85,9 +85,9 @@ export function getSlotsChildren (slots: any) {
  * "123-foo" will be parsed to 123
  * This is used for the .number modifier in v-model
  */
-export function looseToNumber (val: any): any {
-  const n = parseFloat(val)
-  return isNaN(n) ? val : n
+export function looseToNumber(val: any): any {
+  const n = Number.parseFloat(val)
+  return Number.isNaN(n) ? val : n
 }
 
 export * from './lodash'

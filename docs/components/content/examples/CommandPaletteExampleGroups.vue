@@ -18,19 +18,21 @@ const actions = [
 ]
 
 const groups = computed(() =>
-  [commandPaletteRef.value?.query ? {
-    key: 'users',
-    commands: users
-  } : {
-    key: 'recent',
-    label: 'Recent searches',
-    commands: users.slice(0, 1)
-  }, {
+  [commandPaletteRef.value?.query
+    ? {
+        key: 'users',
+        commands: users
+      }
+    : {
+        key: 'recent',
+        label: 'Recent searches',
+        commands: users.slice(0, 1)
+      }, {
     key: 'actions',
     commands: actions
   }].filter(Boolean))
 
-function onSelect (option) {
+function onSelect(option) {
   if (option.click) {
     option.click()
   } else if (option.to) {

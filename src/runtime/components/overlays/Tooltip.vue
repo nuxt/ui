@@ -40,8 +40,6 @@ import type { DeepPartial, PopperOptions, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { tooltip } from '#ui/ui.config'
-// import useslots
-
 
 const config = mergeConfig<typeof tooltip>(appConfig.ui.strategy, appConfig.ui.tooltip, tooltip)
 
@@ -84,7 +82,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('tooltip', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
@@ -100,7 +98,7 @@ export default defineComponent({
 
     // Methods
 
-    function onMouseEnter () {
+    function onMouseEnter() {
       // cancel programmed closing
       if (closeTimeout) {
         clearTimeout(closeTimeout)
@@ -116,7 +114,7 @@ export default defineComponent({
       }, props.openDelay)
     }
 
-    function onMouseLeave () {
+    function onMouseLeave() {
       // cancel programmed opening
       if (openTimeout) {
         clearTimeout(openTimeout)
