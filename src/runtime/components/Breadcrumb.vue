@@ -52,7 +52,7 @@ export type BreadcrumbSlots<T extends { slot?: string }> = {
 </script>
 
 <script setup lang="ts" generic="T extends BreadcrumbItem">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
 import { pickLinkProps } from '../utils/link'

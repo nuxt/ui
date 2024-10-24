@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
+import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
@@ -70,7 +70,7 @@ export type TabsSlots<T extends { slot?: string }> = {
 <script setup lang="ts" generic="T extends TabsItem">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
+import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { get } from '../utils'
 

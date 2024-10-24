@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { PaginationRootProps, PaginationRootEmits } from 'radix-vue'
+import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { RouteLocationRaw } from '#vue-router'
 import _appConfig from '#build/app.config'
@@ -11,7 +11,7 @@ const appConfig = _appConfig as AppConfig & { ui: { pagination: Partial<typeof t
 
 const pagination = tv({ extend: tv(theme), ...(appConfig.ui?.pagination || {}) })
 
-export interface PaginationProps extends Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'> {
+export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
   /**
    * The element or component this component should render as.
    * @defaultValue `div`
@@ -100,7 +100,7 @@ export interface PaginationSlots {
 </script>
 
 <script setup lang="ts">
-import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast, useForwardPropsEmits } from 'radix-vue'
+import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 
@@ -120,9 +120,9 @@ const emits = defineEmits<PaginationEmits>()
 const slots = defineSlots<PaginationSlots>()
 
 const appConfig = useAppConfig()
-
+console.log(props)
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
-
+console.log(rootProps)
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = pagination()
 </script>

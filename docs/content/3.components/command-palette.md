@@ -5,8 +5,8 @@ seo:
   description: A command palette with full-text search powered by Fuse.js for efficient fuzzy matching.
 links:
   - label: Combobox
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/combobox.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/CommandPalette.vue

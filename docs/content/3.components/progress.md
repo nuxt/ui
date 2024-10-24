@@ -2,8 +2,8 @@
 description: An indicator showing the progress of a task.
 links:
   - label: Progress
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/progress.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/progress
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Progress.vue

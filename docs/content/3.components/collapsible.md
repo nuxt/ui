@@ -2,8 +2,8 @@
 description: A collapsible element to toggle visibility of its content.
 links:
   - label: Collapsible
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/collapsible.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/collapsible
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Collapsible.vue

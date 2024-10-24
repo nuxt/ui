@@ -3,8 +3,8 @@ title: SelectMenu
 description: An advanced searchable select element.
 links:
   - label: Combobox
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/combobox.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/SelectMenu.vue
@@ -15,7 +15,7 @@ links:
 Use the `v-model` directive to control the value of the SelectMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::tip
-Use this over a [Select](/components/select) to take advantage of Radix Vue's [Combobox](https://www.radix-vue.com/components/combobox.html) component that offers search capabilities and multiple selection.
+Use this over a [Select](/components/select) to take advantage of Radix Vue's [Combobox](https://reka-ui.com/docs/components/combobox) component that offers search capabilities and multiple selection.
 ::
 
 ::note

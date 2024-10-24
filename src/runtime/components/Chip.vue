@@ -41,7 +41,7 @@ export interface ChipSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 
 const props = withDefaults(defineProps<ChipProps>(), {

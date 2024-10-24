@@ -2,8 +2,8 @@
 description: A popup that reveals information when hovering over an element.
 links:
   - label: Tooltip
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/tooltip.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/tooltip
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Tooltip.vue
@@ -14,7 +14,7 @@ links:
 Use a [Button](/components/button) or any other component in the default slot of the Tooltip.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses the [TooltipProvider](https://www.radix-vue.com/components/tooltip.html#provider) component from Radix Vue.
+Make sure to wrap your app with the [App](/components/app) component which uses the [TooltipProvider](https://reka-ui.com/docs/components/tooltip#provider) component from Radix Vue.
 ::
 
 ::tip{to="/components/app#props"}

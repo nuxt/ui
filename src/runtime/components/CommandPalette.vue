@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits } from 'radix-vue'
+import type { ComboboxRootProps, ComboboxRootEmits } from 'reka-ui'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -46,7 +46,7 @@ export interface CommandPaletteGroup<T> {
   highlightedIcon?: string
 }
 
-export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'selectedValue' | 'resetSearchTermOnBlur'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'resetSearchTermOnBlur' | 'highlightOnHover' | 'ignoreFilter' | 'by'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -118,7 +118,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
 import { computed } from 'vue'
-import { ComboboxRoot, ComboboxInput, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxViewport, ComboboxGroup, ComboboxLabel, ComboboxItem, ComboboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'radix-vue'
+import { ComboboxRoot, ComboboxInput, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxViewport, ComboboxGroup, ComboboxLabel, ComboboxItem, ComboboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
@@ -142,7 +142,7 @@ const slots = defineSlots<CommandPaletteSlots<G, T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'selectedValue', 'resetSearchTermOnBlur'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter', 'by'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon', 'placeholder'))
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -225,8 +225,8 @@ const groups = computed(() => {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ComboboxRoot v-bind="rootProps" v-model:search-term="searchTerm" open :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <ComboboxInput as-child>
+  <ComboboxRoot v-bind="rootProps" open :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <ComboboxInput v-model="searchTerm" as-child>
       <UInput
         variant="none"
         autofocus

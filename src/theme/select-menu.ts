@@ -5,8 +5,6 @@ import select from './select'
 export default (options: Required<ModuleOptions>) => {
   return defu({
     slots: {
-      value: 'truncate',
-      placeholder: 'truncate text-[var(--ui-text-dimmed)]',
       input: 'placeholder:text-[var(--ui-text-dimmed)] border-0 border-b border-[var(--ui-border)] focus:outline-none'
     },
     variants: {

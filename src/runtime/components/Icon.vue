@@ -13,7 +13,7 @@ export interface IconProps {
 </script>
 
 <script setup lang="ts">
-import { useForwardProps } from 'radix-vue'
+import { useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 
 const props = defineProps<IconProps>()

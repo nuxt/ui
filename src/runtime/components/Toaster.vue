@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ToastProviderProps } from 'radix-vue'
+import type { ToastProviderProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toaster'
@@ -29,7 +29,7 @@ export interface ToasterSlots {
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { ToastProvider, ToastViewport, useForwardProps } from 'radix-vue'
+import { ToastProvider, ToastViewport, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useToast } from '../composables/useToast'
 import { omit } from '../utils'

@@ -2,8 +2,8 @@
 description: A stacked set of collapsible panels.
 links:
   - label: Accordion
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/accordion.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/accordion
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Accordion.vue

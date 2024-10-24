@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { CollapsibleRootProps, CollapsibleRootEmits } from 'radix-vue'
+import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/collapsible'
@@ -28,7 +28,7 @@ export interface CollapsibleSlots {
 </script>
 
 <script setup lang="ts">
-import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'radix-vue'
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 
 const props = defineProps<CollapsibleProps>()

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverArrowProps } from 'radix-vue'
+import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/popover'
@@ -45,8 +45,8 @@ export interface PopoverSlots {
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { useForwardPropsEmits } from 'radix-vue'
-import { Popover, HoverCard } from 'radix-vue/namespaced'
+import { useForwardPropsEmits } from 'reka-ui'
+import { Popover, HoverCard } from 'reka-ui/namespaced'
 import { reactivePick } from '@vueuse/core'
 
 const props = withDefaults(defineProps<PopoverProps>(), {

@@ -2,8 +2,8 @@
 description: A succinct message to provide information or feedback to the user.
 links:
   - label: Toast
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/toast.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/toast
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Toast.vue
@@ -14,7 +14,7 @@ links:
 Use the [useToast](/composables/use-toast) composable to display a toast in your application.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses our [Toaster](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [ToastProvider](https://www.radix-vue.com/components/toast.html#provider) component from Radix Vue.
+Make sure to wrap your app with the [App](/components/app) component which uses our [Toaster](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [ToastProvider](https://reka-ui.com/docs/components/toast#provider) component from Radix Vue.
 ::
 
 ::tip{to="/components/app#props"}

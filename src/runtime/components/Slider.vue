@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SliderRootProps } from 'radix-vue'
+import type { SliderRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slider'
@@ -38,7 +38,7 @@ export interface SliderEmits {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'radix-vue'
+import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 

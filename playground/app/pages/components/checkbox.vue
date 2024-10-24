@@ -14,7 +14,7 @@ const checked = ref(true)
       <UCheckbox label="Error" color="error" :model-value="true" />
       <UCheckbox label="Icon" icon="i-heroicons-heart-solid" :model-value="true" />
       <UCheckbox label="Default value" :default-value="true" />
-      <UCheckbox label="Indeterminate" indeterminate />
+      <UCheckbox label="Indeterminate" default-value="indeterminate" />
       <UCheckbox label="Required" required />
       <UCheckbox label="Disabled" disabled />
     </div>

@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { InputHTMLAttributes } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps } from 'radix-vue'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrWrapped, PartialString } from '../types/utils'
+import type { ArrayOrWrapped, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
@@ -29,7 +29,7 @@ export interface InputMenuItem {
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
-export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValue' | 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'multiple' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
+export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValue' | 'defaultValue' | 'open' | 'defaultOpen' | 'multiple' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover' | 'ignoreFilter' | 'by'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -108,8 +108,8 @@ export type InputMenuEmits<T> = ComboboxRootEmits<T> & {
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export interface InputMenuSlots<T> {
-  'leading'(props: { modelValue: T, open: boolean, ui: any }): any
-  'trailing'(props: { modelValue: T, open: boolean, ui: any }): any
+  'leading'(props: { modelValue: T | T[], open: boolean, ui: any }): any
+  'trailing'(props: { modelValue: T | T[], open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -122,7 +122,7 @@ export interface InputMenuSlots<T> {
 
 <script setup lang="ts" generic="T extends InputMenuItem | AcceptableValue">
 import { computed, ref, toRef, onMounted } from 'vue'
-import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
+import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import isEqual from 'fast-deep-equal'
 import { reactivePick } from '@vueuse/core'
@@ -150,7 +150,7 @@ const slots = defineSlots<InputMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter', 'by'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const { emitFormBlur, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -171,7 +171,7 @@ const ui = computed(() => inputMenu({
 }))
 
 function displayValue(value: AcceptableValue): string {
-  const item = items.value.find(item => props.valueKey ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
+  const item = items.value.find(item => props.valueKey && typeof item === 'object' ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
@@ -253,10 +253,8 @@ defineExpose({
     :id="id"
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
-    v-model:search-term="searchTerm"
     :name="name"
     :disabled="disabled"
-    :display-value="displayValue"
     :filter-function="filterFunction"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     :as-child="!!multiple"
@@ -289,7 +287,7 @@ defineExpose({
           </TagsInputItemDelete>
         </TagsInputItem>
 
-        <ComboboxInput as-child>
+        <ComboboxInput v-model="searchTerm" as-child>
           <TagsInputInput
             ref="inputRef"
             v-bind="$attrs"
@@ -304,6 +302,8 @@ defineExpose({
       <ComboboxInput
         v-else
         ref="inputRef"
+        v-model="searchTerm"
+        :display-value="displayValue"
         v-bind="$attrs"
         :type="type"
         :placeholder="placeholder"
@@ -314,14 +314,14 @@ defineExpose({
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="(modelValue as T)" :open="open" :ui="ui">
+        <slot name="leading" :model-value="modelValue" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
       <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="(modelValue as T)" :open="open" :ui="ui">
+        <slot name="trailing" :model-value="modelValue" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </ComboboxTrigger>

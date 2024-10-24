@@ -7,7 +7,7 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-We're thrilled to introduce Nuxt UI v3, a significant upgrade to our UI library that delivers extensive improvements and robust new capabilities. This major update harnesses the combined strengths of [Radix Vue](https://www.radix-vue.com/), [Tailwind CSS v4](https://tailwindcss.com/blog/tailwindcss-v4-alpha), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
+We're thrilled to introduce Nuxt UI v3, a significant upgrade to our UI library that delivers extensive improvements and robust new capabilities. This major update harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS v4](https://tailwindcss.com/blog/tailwindcss-v4-alpha), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 ## Installation
 
@@ -59,7 +59,7 @@ Visit https://ui3.nuxt.dev to explore the documentation.
 - [nuxt/icon](https://github.com/nuxt/icon)
 - [nuxt/fonts](https://github.com/nuxt/fonts)
 - [nuxt-modules/color-mode](https://github.com/nuxt-modules/color-mode)
-- [radix-vue/radix-vue](https://github.com/radix-vue/radix-vue)
+- [unovue/reka-ui](https://github.com/unovue/reka-ui)
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss)
 - [vueuse/vueuse](https://github.com/vueuse/vueuse)
 
