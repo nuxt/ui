@@ -62,6 +62,7 @@ describe('CommandPalette', () => {
   it.each([
     // Props
     ['with groups', { props }],
+    ['without results', {}],
     ['with modelValue', { props: { ...props, modelValue: groups[2].items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: groups[2].items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
@@ -69,7 +70,7 @@ describe('CommandPalette', () => {
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with icon', { props: { ...props, icon: 'i-heroicons-command-line' } }],
     ['with loading', { props: { ...props, loading: true } }],
-    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
+    ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-heroicons-check-badge', modelValue: groups[2].items[0] } }],
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-heroicons-trash' } }],

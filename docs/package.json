@@ -4,13 +4,13 @@
   "type": "module",
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.1",
-    "@iconify-json/simple-icons": "^1.2.8",
+    "@iconify-json/simple-icons": "^1.2.9",
     "@iconify-json/vscode-icons": "^1.2.2",
     "@nuxt/content": "3.0.0-alpha.1",
     "@nuxt/image": "^1.8.1",
     "@nuxt/ui": "latest",
-    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@545",
-    "@nuxthub/core": "^0.7.33",
+    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@983e8c8",
+    "@nuxthub/core": "^0.7.36",
     "@nuxtjs/plausible": "^1.0.3",
     "@octokit/rest": "^21.0.2",
     "@vueuse/nuxt": "^11.1.0",
@@ -27,6 +27,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "wrangler": "^3.81.0"
+    "wrangler": "^3.82.0"
   }
 }
