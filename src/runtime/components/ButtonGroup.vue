@@ -32,7 +32,7 @@ export interface ButtonGroupSlots {
 
 <script setup lang="ts">
 import { provide, computed } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { buttonGroupInjectionKey } from '../composables/useButtonGroup'
 
 const props = withDefaults(defineProps<ButtonGroupProps>(), {

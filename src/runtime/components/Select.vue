@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps } from 'radix-vue'
+import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
@@ -97,7 +97,7 @@ export interface SelectSlots<T> {
 
 <script setup lang="ts" generic="T extends SelectItem | AcceptableValue">
 import { computed, toRef } from 'vue'
-import { SelectRoot, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'radix-vue'
+import { SelectRoot, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'

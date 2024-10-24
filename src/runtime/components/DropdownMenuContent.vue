@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { DropdownMenuContentProps as RadixDropdownMenuContentProps, DropdownMenuContentEmits as RadixDropdownMenuContentEmits } from 'radix-vue'
+import type { DropdownMenuContentProps as RadixDropdownMenuContentProps, DropdownMenuContentEmits as RadixDropdownMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/dropdown-menu'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
 
@@ -29,8 +29,8 @@ type DropdownMenuContentSlots<T extends { slot?: string }> = Omit<DropdownMenuSl
 
 <script setup lang="ts" generic="T extends DropdownMenuItem">
 import { computed } from 'vue'
-import { DropdownMenu } from 'radix-vue/namespaced'
-import { useForwardPropsEmits } from 'radix-vue'
+import { DropdownMenu } from 'reka-ui/namespaced'
+import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { omit, get } from '../utils'

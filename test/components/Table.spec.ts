@@ -43,8 +43,7 @@ describe('Table', () => {
   const columns: TableColumn<typeof data[number]>[] = [{
     id: 'select',
     header: ({ table }) => h(UCheckbox, {
-      'modelValue': table.getIsAllPageRowsSelected(),
-      'indeterminate': table.getIsSomePageRowsSelected(),
+      'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
       'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value),
       'ariaLabel': 'Select all'
     }),

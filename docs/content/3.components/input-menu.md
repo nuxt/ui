@@ -3,8 +3,8 @@ title: InputMenu
 description: An autocomplete input with real-time suggestions.
 links:
   - label: Combobox
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/combobox.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/InputMenu.vue
@@ -15,7 +15,7 @@ links:
 Use the `v-model` directive to control the value of the InputMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::tip
-Use this over an [Input](/components/input) to take advantage of Radix Vue's [Combobox](https://www.radix-vue.com/components/combobox.html) component that offers autocomplete capabilities.
+Use this over an [Input](/components/input) to take advantage of Radix Vue's [Combobox](https://reka-ui.com/docs/components/combobox) component that offers autocomplete capabilities.
 ::
 
 ::note

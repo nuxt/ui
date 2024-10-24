@@ -3,8 +3,8 @@ title: NavigationMenu
 description: A list of links that can be displayed horizontally or vertically.
 links:
   - label: NavigationMenu
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/navigation-menu.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/navigation-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/NavigationMenu.vue

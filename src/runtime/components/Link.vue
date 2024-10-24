@@ -46,7 +46,7 @@ export interface LinkSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { isEqual } from 'ohash'
-import { useForwardProps } from 'radix-vue'
+import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute } from '#imports'
 

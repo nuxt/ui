@@ -3,8 +3,8 @@ title: ContextMenu
 description: A menu to display actions when right-clicking on an element.
 links:
   - label: ContextMenu
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/context-menu.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/context-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/ContextMenu.vue

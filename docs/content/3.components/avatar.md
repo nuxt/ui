@@ -2,8 +2,8 @@
 description: An image element with fallback.
 links:
   - label: Avatar
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/avatar.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/avatar
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Avatar.vue

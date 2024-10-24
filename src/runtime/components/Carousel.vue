@@ -96,7 +96,7 @@ export type CarouselSlots<T> = {
 <script setup lang="ts" generic="T extends AcceptableValue">
 import { computed, ref, watch, onMounted } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
-import { useForwardProps } from 'radix-vue'
+import { useForwardProps } from 'reka-ui'
 import { reactivePick, computedAsync } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import UButton from './Button.vue'

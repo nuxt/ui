@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { ContextMenuContentProps as RadixContextMenuContentProps, ContextMenuContentEmits as RadixContextMenuContentEmits } from 'radix-vue'
+import type { ContextMenuContentProps as RadixContextMenuContentProps, ContextMenuContentEmits as RadixContextMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/context-menu'
 import type { KbdProps, AvatarProps, ContextMenuItem, ContextMenuSlots } from '../types'
 
@@ -23,8 +23,8 @@ interface ContextMenuContentEmits extends RadixContextMenuContentEmits {}
 
 <script setup lang="ts" generic="T extends ContextMenuItem">
 import { computed } from 'vue'
-import { ContextMenu } from 'radix-vue/namespaced'
-import { useForwardPropsEmits } from 'radix-vue'
+import { ContextMenu } from 'reka-ui/namespaced'
+import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { omit, get } from '../utils'

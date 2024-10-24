@@ -2,8 +2,8 @@
 description: A dialog window that can be used to display a message or request user input.
 links:
   - label: Dialog
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/dialog.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Modal.vue

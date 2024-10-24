@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ProgressRootProps, ProgressRootEmits } from 'radix-vue'
+import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/progress'
@@ -48,7 +48,7 @@ export type ProgressSlots = {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ProgressIndicator, ProgressRoot, useForwardPropsEmits } from 'radix-vue'
+import { ProgressIndicator, ProgressRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 
 const props = withDefaults(defineProps<ProgressProps>(), {

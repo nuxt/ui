@@ -2,8 +2,8 @@
 description: A select element to choose from a list of options.
 links:
   - label: Select
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/select.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/select
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Select.vue
@@ -205,8 +205,8 @@ props:
 ---
 ::
 
-::note{to="https://www.radix-vue.com/components/select.html#change-the-positioning-mode"}
-Read more about the `content.position` prop in the [Radix Vue documentation](https://www.radix-vue.com/components/select.html#change-the-positioning-mode).
+::note{to="https://reka-ui.com/docs/components/select#change-the-positioning-mode"}
+Read more about the `content.position` prop in the [Radix Vue documentation](https://reka-ui.com/docs/components/select#change-the-positioning-mode).
 ::
 
 ### Color

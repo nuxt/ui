@@ -21,6 +21,13 @@ export default defineNuxtConfig({
     'nuxt-og-image'
   ],
 
+  $production: {
+    routeRules: {
+      '/api/_mdc/highlight': { cache: { group: 'mdc', name: 'highlight', maxAge: 60 * 60 } },
+      '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
+    }
+  },
+
   app: {
     rootAttrs: {
       'vaul-drawer-wrapper': '',
@@ -66,13 +73,6 @@ export default defineNuxtConfig({
     '/': { redirect: '/getting-started', prerender: false },
     '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
     '/components': { redirect: '/components/app', prerender: false }
-  },
-
-  $production: {
-    routeRules: {
-      '/api/_mdc/highlight': { cache: { group: 'mdc', name: 'highlight', maxAge: 60 * 60 } },
-      '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
-    }
   },
 
   future: {

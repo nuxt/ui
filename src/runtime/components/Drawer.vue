@@ -1,7 +1,7 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
-import type { DialogContentProps } from 'radix-vue'
+import type { DialogContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/drawer'
@@ -55,7 +55,7 @@ export interface DrawerSlots {
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { useForwardPropsEmits } from 'radix-vue'
+import { useForwardPropsEmits } from 'reka-ui'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
 

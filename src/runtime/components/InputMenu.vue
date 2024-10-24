@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { InputHTMLAttributes } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps } from 'radix-vue'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
@@ -29,7 +29,7 @@ export interface InputMenuItem {
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
-export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValue' | 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'multiple' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
+export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValue' | 'defaultValue' | 'open' | 'defaultOpen' | 'multiple' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover' | 'ignoreFilter' | 'by'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -122,7 +122,7 @@ export interface InputMenuSlots<T> {
 
 <script setup lang="ts" generic="T extends InputMenuItem | AcceptableValue">
 import { computed, ref, toRef, onMounted } from 'vue'
-import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
+import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import isEqual from 'fast-deep-equal'
 import { reactivePick } from '@vueuse/core'
@@ -150,7 +150,7 @@ const slots = defineSlots<InputMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter', 'by'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const { emitFormBlur, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -253,7 +253,6 @@ defineExpose({
     :id="id"
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
-    v-model:search-term="searchTerm"
     :name="name"
     :disabled="disabled"
     :display-value="displayValue"
@@ -289,7 +288,7 @@ defineExpose({
           </TagsInputItemDelete>
         </TagsInputItem>
 
-        <ComboboxInput as-child>
+        <ComboboxInput v-model="searchTerm" as-child>
           <TagsInputInput
             ref="inputRef"
             v-bind="$attrs"
@@ -304,6 +303,7 @@ defineExpose({
       <ComboboxInput
         v-else
         ref="inputRef"
+        v-model="searchTerm"
         v-bind="$attrs"
         :type="type"
         :placeholder="placeholder"
