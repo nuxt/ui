@@ -276,10 +276,9 @@ export default defineComponent({
       }
     })
 
+    const getStringifiedSet = (arr: TableRow[]) => new Set(arr.map(item => JSON.stringify(item)))
 
-    const getStringifiedSet = <T extends unknown>(arr: T[]) => new Set(arr.map(item => JSON.stringify(item)))
-
-    const totalRows = props.rows.length
+    const totalRows = computed(() => props.rows.length)
 
     const countCheckedRow = computed(() => {
       const selectedData = getStringifiedSet(selected.value)
@@ -290,11 +289,10 @@ export default defineComponent({
 
     const indeterminate = computed(() => {
       if (!selected.value || !props.rows) return false
-      return countCheckedRow.value > 0 && countCheckedRow.value < totalRows
+      return countCheckedRow.value > 0 && countCheckedRow.value < totalRows.value
     })
 
-    const isAllRowChecked = computed(() => countCheckedRow.value === totalRows)
-
+    const isAllRowChecked = computed(() => countCheckedRow.value === totalRows.value)
 
     const emptyState = computed(() => {
       if (props.emptyState === null) return null
