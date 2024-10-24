@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
-import { findPageHeadline } from '#ui-pro/utils/content'
+import type { NavItem } from '@nuxt/content'
+import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
 const route = useRoute()
 
@@ -25,7 +26,9 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
     .findSurround(withoutTrailingSlash(route.path))
 }, { default: () => [] })
 
-const headline = computed(() => findPageHeadline(page.value))
+const navigation = inject<Ref<NavItem[]>>('navigation')
+
+const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)))
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
@@ -36,7 +39,7 @@ useSeoMeta({
 })
 
 defineOgImageComponent('Docs', {
-  headline: headline.value
+  headline: breadcrumb.value.map(item => item.label).join(' > ')
 })
 
 const communityLinks = computed(() => [{
@@ -75,12 +78,31 @@ const communityLinks = computed(() => [{
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title" :headline="headline">
+    <UPageHeader :title="page.title">
+      <template #headline>
+        <UBreadcrumb :items="breadcrumb" />
+      </template>
+
       <template #description>
         <MDC v-if="page.description" :value="page.description" unwrap="p" />
       </template>
 
       <template #links>
+        <UDropdownMenu v-if="page.select" v-slot="{ open }" :items="page.select.items" :content="{ align: 'end' }">
+          <UButton
+            color="neutral"
+            variant="subtle"
+            v-bind="page.select.items.find((item: any) => item.to === route.path)"
+            block
+            trailing-icon="i-heroicons-chevron-down-20-solid"
+            :class="[open && 'bg-[var(--ui-bg-accented)]/75']"
+            :ui="{
+              trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : '']
+            }"
+            class="w-[128px]"
+          />
+        </UDropdownMenu>
+
         <UButton
           v-for="link in page.links"
           :key="link.label"
