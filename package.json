@@ -50,7 +50,7 @@
     "@nuxt/icon": "^1.5.6",
     "@nuxt/kit": "^3.13.2",
     "@nuxt/schema": "^3.13.2",
-    "@nuxtjs/color-mode": "^3.5.1",
+    "@nuxtjs/color-mode": "^3.5.2",
     "@tailwindcss/postcss": "4.0.0-alpha.30",
     "@tailwindcss/vite": "4.0.0-alpha.30",
     "@tanstack/vue-table": "^8.20.5",
