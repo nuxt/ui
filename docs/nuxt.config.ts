@@ -5,7 +5,6 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-
   // extends: [
   //   process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
   // ],
@@ -28,6 +27,7 @@ export default defineNuxtConfig({
       '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
     }
   },
+
   app: {
     rootAttrs: {
       'vaul-drawer-wrapper': '',
