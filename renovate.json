@@ -23,5 +23,8 @@
       "@tailwindcss/postcss",
       "@tailwindcss/vite"
     ]
+  }, {
+    "matchDepTypes": ["resolutions"],
+    "enabled": false
   }]
 }
