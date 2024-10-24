@@ -17,8 +17,6 @@ export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extend
   ? MaybeObject[Key]
   : never
 
-export type AcceptableValue = string | number | boolean | Record<string, any>
-
 export type ArrayOrWrapped<T> = T extends any[] ? T : Array<T>
 
 export type PartialString<T> = {

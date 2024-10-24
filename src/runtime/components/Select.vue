@@ -1,12 +1,12 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps } from 'reka-ui'
+import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, PartialString } from '../types/utils'
+import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
@@ -28,7 +28,7 @@ export interface SelectItem {
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T> extends Omit<SelectRootProps, 'dir'>, UseComponentIconsProps {
+export interface SelectProps<T> extends Omit<SelectRootProps<T>, 'dir' | 'multiple'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -86,8 +86,8 @@ export type SelectEmits = SelectRootEmits & {
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export interface SelectSlots<T> {
-  'leading'(props: { modelValue: string, open: boolean, ui: any }): any
-  'trailing'(props: { modelValue: string, open: boolean, ui: any }): any
+  'leading'(props: { modelValue?: AcceptableValue | AcceptableValue[], open: boolean, ui: any }): any
+  'trailing'(props: { modelValue?: AcceptableValue | AcceptableValue[], open: boolean, ui: any }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>

@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { InputHTMLAttributes } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps } from 'reka-ui'
+import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrWrapped, PartialString } from '../types/utils'
+import type { ArrayOrWrapped, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
@@ -108,8 +108,8 @@ export type InputMenuEmits<T> = ComboboxRootEmits<T> & {
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export interface InputMenuSlots<T> {
-  'leading'(props: { modelValue: T, open: boolean, ui: any }): any
-  'trailing'(props: { modelValue: T, open: boolean, ui: any }): any
+  'leading'(props: { modelValue: T | T[], open: boolean, ui: any }): any
+  'trailing'(props: { modelValue: T | T[], open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -314,14 +314,14 @@ defineExpose({
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="(modelValue as T)" :open="open" :ui="ui">
+        <slot name="leading" :model-value="modelValue" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
       <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="(modelValue as T)" :open="open" :ui="ui">
+        <slot name="trailing" :model-value="modelValue" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </ComboboxTrigger>

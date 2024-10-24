@@ -2,6 +2,7 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
+import type { AcceptableValue } from 'reka-ui'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
 import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll'
@@ -12,7 +13,7 @@ import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/carousel'
 import type { ButtonProps } from '../types'
-import type { AcceptableValue, PartialString } from '../types/utils'
+import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { carousel: Partial<typeof theme> } }
 
