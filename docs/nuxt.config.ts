@@ -5,13 +5,6 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  app: {
-    rootAttrs: {
-      'vaul-drawer-wrapper': '',
-      'class': 'bg-[var(--ui-bg)]'
-    }
-  },
-
   // extends: [
   //   process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
   // ],
@@ -28,30 +21,22 @@ export default defineNuxtConfig({
     'nuxt-og-image'
   ],
 
-  hub: {
-    cache: true
-  },
-
-  future: {
-    compatibilityVersion: 4
-  },
-
-  runtimeConfig: {
-    public: {
-      version: pkg.version
+  $production: {
+    routeRules: {
+      '/api/_mdc/highlight': { cache: { group: 'mdc', name: 'highlight', maxAge: 60 * 60 } },
+      '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
     }
   },
 
-  icon: {
-    customCollections: [{
-      prefix: 'custom',
-      dir: resolve('./app/assets/icons')
-    }],
-    clientBundle: {
-      scan: true,
-      includeCustomCollections: true
-    },
-    provider: 'iconify'
+  app: {
+    rootAttrs: {
+      'vaul-drawer-wrapper': '',
+      'class': 'bg-[var(--ui-bg)]'
+    }
+  },
+
+  site: {
+    url: 'https://ui3.nuxt.dev'
   },
 
   content: {
@@ -78,9 +63,23 @@ export default defineNuxtConfig({
     }
   },
 
-  image: {
-    provider: 'ipx'
+  runtimeConfig: {
+    public: {
+      version: pkg.version
+    }
   },
+
+  routeRules: {
+    '/': { redirect: '/getting-started', prerender: false },
+    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
+    '/components': { redirect: '/components/app', prerender: false }
+  },
+
+  future: {
+    compatibilityVersion: 4
+  },
+
+  compatibilityDate: '2024-07-09',
 
   nitro: {
     prerender: {
@@ -107,40 +106,8 @@ export default defineNuxtConfig({
     }
   },
 
-  routeRules: {
-    '/': { redirect: '/getting-started', prerender: false },
-    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
-    '/components': { redirect: '/components/app', prerender: false }
-  },
-
-  $production: {
-    routeRules: {
-      '/api/_mdc/highlight': { cache: { group: 'mdc', name: 'highlight', maxAge: 60 * 60 } },
-      '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
-    }
-  },
-
-  componentMeta: {
-    exclude: [
-      '@nuxt/content',
-      '@nuxt/icon',
-      '@nuxt/image',
-      '@nuxt/ui-pro',
-      '@nuxtjs/color-mode',
-      '@nuxtjs/mdc',
-      '@nuxtjs/plausible',
-      'nuxt/dist',
-      'nuxt-og-image',
-      resolve('./app/components')
-      // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
-    ],
-    metaFields: {
-      type: false,
-      props: true,
-      slots: true,
-      events: true,
-      exposed: false
-    }
+  hub: {
+    cache: true
   },
 
   hooks: {
@@ -189,9 +156,42 @@ export default defineNuxtConfig({
     }
   },
 
-  site: {
-    url: 'https://ui3.nuxt.dev'
+  componentMeta: {
+    exclude: [
+      '@nuxt/content',
+      '@nuxt/icon',
+      '@nuxt/image',
+      '@nuxt/ui-pro',
+      '@nuxtjs/color-mode',
+      '@nuxtjs/mdc',
+      '@nuxtjs/plausible',
+      'nuxt/dist',
+      'nuxt-og-image',
+      resolve('./app/components')
+      // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
+    ],
+    metaFields: {
+      type: false,
+      props: true,
+      slots: true,
+      events: true,
+      exposed: false
+    }
   },
 
-  compatibilityDate: '2024-07-09'
+  icon: {
+    customCollections: [{
+      prefix: 'custom',
+      dir: resolve('./app/assets/icons')
+    }],
+    clientBundle: {
+      scan: true,
+      includeCustomCollections: true
+    },
+    provider: 'iconify'
+  },
+
+  image: {
+    provider: 'ipx'
+  }
 })
