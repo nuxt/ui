@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Link, { type LinkProps, type LinkSlots } from '../../src/runtime/components/Link.vue'
+import { ULink as Link } from '#components'
+import type { LinkProps, LinkSlots } from '../../src/runtime/components/Link.vue'
 import ComponentRender from '../component-render'
 
 describe('Link', () => {

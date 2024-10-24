@@ -1,0 +1,24 @@
+{
+  "name": "playground-vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@nuxt/ui": "latest",
+    "vue": "^3.5.10",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.4",
+    "typescript": "^5.5.3",
+    "unplugin-auto-import": "^0.18.3",
+    "unplugin-vue-components": "^0.27.4",
+    "vite": "^5.4.8",
+    "vue-tsc": "^2.1.6"
+  }
+}

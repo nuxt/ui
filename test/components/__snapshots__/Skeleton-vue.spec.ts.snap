@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Skeleton > renders with as correctly 1`] = `"<span class="animate-pulse rounded-[calc(var(--ui-radius)*1.5)] bg-[var(--ui-bg-elevated)]"></span>"`;
+
+exports[`Skeleton > renders with class correctly 1`] = `"<div class="animate-pulse bg-[var(--ui-bg-elevated)] rounded-full size-12"></div>"`;

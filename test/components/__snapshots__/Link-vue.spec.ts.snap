@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Link > renders with activeClass correctly 1`] = `"<button type="button" class="focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-highlighted)]"></button>"`;
+
+exports[`Link > renders with as correctly 1`] = `"<div class="focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] transition-colors"></div>"`;
+
+exports[`Link > renders with class correctly 1`] = `"<button type="button" class="focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] transition-colors font-medium"></button>"`;
+
+exports[`Link > renders with default slot correctly 1`] = `"<button type="button" class="focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] transition-colors">Default slot</button>"`;
+
+exports[`Link > renders with disabled correctly 1`] = `"<button type="button" disabled="" class="focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] transition-colors cursor-not-allowed opacity-75"></button>"`;
+
+exports[`Link > renders with inactiveClass correctly 1`] = `"<button type="button" class="focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] transition-colors hover:text-[var(--ui-primary)]"></button>"`;
+
+exports[`Link > renders with raw correctly 1`] = `"<button type="button" class=""></button>"`;
+
+exports[`Link > renders with to correctly 1`] = `"<a href="/" class="focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] transition-colors"></a>"`;
+
+exports[`Link > renders with type correctly 1`] = `"<button type="submit" class="focus-visible:outline-[var(--ui-primary)] text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] transition-colors"></button>"`;

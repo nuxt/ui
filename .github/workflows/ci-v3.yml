@@ -56,6 +56,9 @@ jobs:
       - name: Test
         run: pnpm run test
 
+      - name: Test (vue)
+        run: pnpm run test:vue
+
       - name: Build
         run: pnpm run build
 

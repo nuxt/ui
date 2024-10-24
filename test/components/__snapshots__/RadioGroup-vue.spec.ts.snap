@@ -1,0 +1,673 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RadioGroup > renders with class correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="absolute" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with color neutral correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with defaultValue correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="true" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" aria-label="1" value="1"><span data-state="checked" class="flex items-center justify-center size-full rounded-full after:bg-[var(--ui-bg)] after:rounded-full bg-[var(--ui-primary)] after:size-1.5"></span>
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with description correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <p class="text-[var(--ui-text-muted)]">Description 0</p>
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <p class="text-[var(--ui-text-muted)]">Description 1</p>
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <p class="text-[var(--ui-text-muted)]">Description 2</p>
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with description slot correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Description slot</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Description slot</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Description slot</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <p class="text-[var(--ui-text-muted)]">1</p>
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <p class="text-[var(--ui-text-muted)]">2</p>
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <p class="text-[var(--ui-text-muted)]">3</p>
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with disabled correctly 1`] = `
+"<div role="radiogroup" data-disabled="" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4 cursor-not-allowed opacity-75" tabindex="-1" data-orientation="vertical" data-active="false" data-disabled="" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)] cursor-not-allowed opacity-75">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4 cursor-not-allowed opacity-75" tabindex="-1" data-orientation="vertical" data-active="false" data-disabled="" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)] cursor-not-allowed opacity-75">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4 cursor-not-allowed opacity-75" tabindex="-1" data-orientation="vertical" data-active="false" data-disabled="" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)] cursor-not-allowed opacity-75">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with items correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with label slot correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Label slot</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Label slot</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Label slot</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with labelKey correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with legend slot correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Legend slot</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Legend slot</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Legend slot</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with orientation correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="horizontal" aria-required="false" dir="ltr" data-orientation="horizontal" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-row gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="horizontal" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2 me-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="horizontal" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2 me-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="horizontal" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2 me-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with required correctly 1`] = `
+"<div role="radiogroup" required="true" aria-orientation="vertical" aria-required="true" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <legend class="mb-1 block font-medium text-[var(--ui-text)] text-sm after:content-['*'] after:ms-0.5 after:text-[var(--ui-error)]">Legend</legend>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with size lg correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4.5" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4.5" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4.5" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with size md correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with size sm correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-0.5">
+    <!--v-if-->
+    <div class="flex items-start text-xs">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-3.5" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-xs">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-3.5" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-xs">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-3.5" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with size xl correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1.5">
+    <!--v-if-->
+    <div class="flex items-start text-base">
+      <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-5" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-base">
+      <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-5" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-base">
+      <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-5" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with size xs correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-0.5">
+    <!--v-if-->
+    <div class="flex items-start text-xs">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-3" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-xs">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-3" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-xs">
+      <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-3" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with ui correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="1" value="1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-4"><label for="v-0:1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="2" value="2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-4"><label for="v-0:2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="3" value="3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-4"><label for="v-0:3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;
+
+exports[`RadioGroup > renders with valueKey correctly 1`] = `
+"<div role="radiogroup" required="false" aria-orientation="vertical" aria-required="false" dir="ltr" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" tabindex="0">
+  <fieldset class="flex flex-col gap-1">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:Option 1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="Option 1" value="Option 1">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:Option 1" class="block font-medium text-[var(--ui-text)]">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:Option 2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="Option 2" value="Option 2">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:Option 2" class="block font-medium text-[var(--ui-text)]">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div class="flex items-start text-sm">
+      <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-[var(--ui-bg)] focus-visible:outline-[var(--ui-primary)] size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-radix-vue-collection-item="" id="v-0:Option 3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" aria-label="Option 3" value="Option 3">
+          <!---->
+          <!---->
+        </button></div>
+      <div class="ms-2"><label for="v-0:Option 3" class="block font-medium text-[var(--ui-text)]">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+</div>"
+`;

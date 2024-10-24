@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Collapsible > renders with class correctly 1`] = `
+"<div data-state="open" class="flex flex-col gap-2 w-48">
+  <!--v-if-->
+  <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="radix-vue-collapsible-content-v-0" data-state="open" style="--radix-collapsible-content-height: 0px; --radix-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
+exports[`Collapsible > renders with content slot correctly 1`] = `
+"<div data-state="open">
+  <!--v-if-->
+  <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="radix-vue-collapsible-content-v-0" data-state="open" style="--radix-collapsible-content-height: 0px; --radix-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">Content slot</div>
+</div>"
+`;
+
+exports[`Collapsible > renders with default slot correctly 1`] = `
+"<div data-state="open">Default slot<div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="radix-vue-collapsible-content-v-0" data-state="open" style="--radix-collapsible-content-height: 0px; --radix-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
+exports[`Collapsible > renders with open correctly 1`] = `
+"<div data-state="open">
+  <!--v-if-->
+  <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="radix-vue-collapsible-content-v-0" data-state="open" style="--radix-collapsible-content-height: 0px; --radix-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
+exports[`Collapsible > renders with ui correctly 1`] = `
+"<div data-state="open">
+  <!--v-if-->
+  <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden bg-[var(--ui-bg-elevated)]" id="radix-vue-collapsible-content-v-0" data-state="open" style="--radix-collapsible-content-height: 0px; --radix-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;

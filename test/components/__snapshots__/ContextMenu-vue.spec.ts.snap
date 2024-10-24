@@ -1,0 +1,209 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ContextMenu > renders with class correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with custom slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with default slot correctly 1`] = `
+"Default slot
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with disabled correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with item slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with item-label slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with item-leading slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with item-trailing slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with items correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with labelKey correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with size lg correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with size md correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with size sm correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with size xl correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with size xs correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`ContextMenu > renders with ui correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<!---->
+
+
+
+<!--teleport end-->"
+`;
