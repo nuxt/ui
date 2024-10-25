@@ -35,7 +35,7 @@ type Schema = PropType<ZodSchema>
   | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>> | PropType<Struct<any, any>>
 
 type Maybe<T> = T | null
-type AsyncReturn<R, E> = [Maybe<R>, Maybe<E>]
+type AsyncReturn<E, R> = [Maybe<E>, Maybe<R>]
 
 export default defineComponent({
   props: {
