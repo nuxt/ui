@@ -1,20 +1,62 @@
 <script lang="ts">
 import type { ButtonHTMLAttributes } from 'vue'
-import { hasProtocol } from 'ufo'
 import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
+import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
 import theme from '#build/ui/link'
-import type { RouterLinkProps } from 'vue-router'
-import { RouterLink } from 'vue-router'
+
+interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
+  /**
+   * Route Location the link should navigate to when clicked on.
+   */
+  to?: RouteLocationRaw // need to manually type to avoid breaking typedPages
+  /**
+   * An alias for `to`. If used with `to`, `href` will be ignored
+   */
+  href?: NuxtLinkProps['to']
+  /**
+   * Forces the link to be considered as external (true) or internal (false). This is helpful to handle edge-cases
+   */
+  external?: boolean
+  /**
+   * Where to display the linked URL, as the name for a browsing context.
+   */
+  target?: '_blank' | '_parent' | '_self' | '_top' | (string & {}) | null
+  /**
+   * A rel attribute value to apply on the link. Defaults to "noopener noreferrer" for external links.
+   */
+  rel?: 'noopener' | 'noreferrer' | 'nofollow' | 'sponsored' | 'ugc' | (string & {}) | null
+  /**
+   * If set to true, no rel attribute will be added to the link
+   */
+  noRel?: boolean
+  /**
+   * A class to apply to links that have been prefetched.
+   */
+  prefetchedClass?: string
+  /**
+   * When enabled will prefetch middleware, layouts and payloads of links in the viewport.
+   */
+  prefetch?: boolean
+  /**
+   * Allows controlling when to prefetch links. By default, prefetch is triggered only on visibility.
+   */
+  prefetchOn?: 'visibility' | 'interaction' | Partial<{
+    visibility: boolean
+    interaction: boolean
+  }>
+  /**
+   * Escape hatch to disable `prefetch` attribute.
+   */
+  noPrefetch?: boolean
+}
 
 const appConfig = _appConfig as AppConfig & { ui: { link: Partial<typeof theme> } }
 
 const link = tv({ extend: tv(theme), ...(appConfig.ui?.link || {}) })
 
-export interface LinkProps extends Omit<RouterLinkProps, 'to'> {
-  /** Ensures we are accepting an undefined `to` when running without Nuxt context */
-  to?: RouterLinkProps['to']
+export interface LinkProps extends NuxtLinkProps {
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
@@ -52,7 +94,9 @@ import { computed } from 'vue'
 import { isEqual } from 'ohash'
 import { useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
+import { hasProtocol } from 'ufo'
 import { useRoute } from '#imports'
+import { RouterLink } from 'vue-router'
 
 defineOptions({ inheritAttrs: false })
 
