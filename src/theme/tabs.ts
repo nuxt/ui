@@ -92,8 +92,8 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'vertical',
     variant: 'link',
     class: {
-      list: 'border-l',
-      indicator: '-left-px w-px'
+      list: 'border-s',
+      indicator: '-start-px w-px'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
