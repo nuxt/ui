@@ -396,6 +396,19 @@ class: '!p-0'
 ---
 ::
 
+### With custom slot
+
+Use the `<column>-data` property to customize a specific row.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-custom-slot-example'
+class: '!p-0'
+---
+::
+
 ## API
 
 ### Props
@@ -405,6 +418,12 @@ class: '!p-0'
 ### Slots
 
 :component-slots
+
+You can use slots to customize the header and data cells of the table.
+
+Use the `#<column>-header` slot to customize the header cell of a column. You will have access to the `column`, `header` and `table` properties in the slot scope.
+
+Use the `#<column>-data` slot to customize the data cell of a column. You will have access to the `cell`, `column`, `getValue`, `renderValue`, `row`, and `table` properties in the slot scope.
 
 ### Expose
 
