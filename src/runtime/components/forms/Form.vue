@@ -4,7 +4,7 @@
   </form>
 </template>
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly, computed } from 'vue'
+import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
@@ -256,7 +256,9 @@ function parseSchema(state: any) {
       const result = await ('_parse' in schema ? schema._parse(state) : '_run' in schema ? schema._run({ typed: false, value: state }, {}) : schema(state))
 
       if (!result.issues || result.issues.length === 0) {
+        // TODO: Improve type in valibot
         // @ts-ignore
+        // i dont know why output does not include in result
         return [null, result.output]
       }
 
