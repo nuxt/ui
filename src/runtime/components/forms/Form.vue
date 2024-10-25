@@ -3,6 +3,7 @@
     <slot v-bind="{ errors }" />
   </form>
 </template>
+
 <script lang="ts">
 import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
@@ -88,10 +89,9 @@ export default defineComponent({
       if (props.schema) {
         const schema = parseSchema(props.state)
         const [errors, result] = await schema(props.schema as unknown as Schema)
-        if(errors) {
+        if (errors) {
           errs = errs.concat(errors)
-          
-        }else {
+        } else {
           form.value = result
         }
       }
