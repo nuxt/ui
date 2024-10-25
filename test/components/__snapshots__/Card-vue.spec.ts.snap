@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card > renders with as correctly 1`] = `
+"<section class="bg-[var(--ui-bg)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] rounded-[calc(var(--ui-radius)*2)] shadow">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</section>"
+`;
+
+exports[`Card > renders with class correctly 1`] = `
+"<div class="bg-[var(--ui-bg)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] shadow rounded-xl">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with default slot correctly 1`] = `
+"<div class="bg-[var(--ui-bg)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] rounded-[calc(var(--ui-radius)*2)] shadow">
+  <!--v-if-->
+  <div class="p-4 sm:p-6">Default slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with footer slot correctly 1`] = `
+"<div class="bg-[var(--ui-bg)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] rounded-[calc(var(--ui-radius)*2)] shadow">
+  <!--v-if-->
+  <!--v-if-->
+  <div class="p-4 sm:px-6">Footer slot</div>
+</div>"
+`;
+
+exports[`Card > renders with header slot correctly 1`] = `
+"<div class="bg-[var(--ui-bg)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] rounded-[calc(var(--ui-radius)*2)] shadow">
+  <div class="p-4 sm:px-6">Header slot</div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with ui correctly 1`] = `
+"<div class="bg-[var(--ui-bg)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] rounded-[calc(var(--ui-radius)*2)] shadow">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;

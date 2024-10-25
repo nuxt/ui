@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { LazySlideoverExample } from '#components'
+import { defineAsyncComponent } from 'vue'
+
+const LazySlideoverExample = defineAsyncComponent(() => import('../../components/SlideoverExample.vue'))
 
 const open = ref(false)
 const count = ref(0)
