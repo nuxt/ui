@@ -73,9 +73,9 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const updatedNavigation = computed(() => navigation.value.map(item => ({
+const updatedNavigation = computed(() => navigation.value?.map(item => ({
   ...item,
-  children: item.children?.map(child => ({
+  children: item.children?.map((child: typeof item) => ({
     ...child,
     active: child.title === 'Installation' ? route.path.startsWith('/getting-started/installation') : undefined,
     children: child.title === 'Installation' ? [] : child.children

@@ -23,8 +23,8 @@ const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(naviga
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
-  title: page.value.navigation?.title || page.value.title,
-  ogTitle: `${page.value.navigation?.title || page.value.title} - Nuxt UI v3`,
+  title: typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title,
+  ogTitle: `${typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title} - Nuxt UI v3`,
   description: page.value.seo?.description || page.value.description,
   ogDescription: page.value.seo?.description || page.value.description
 })
@@ -88,7 +88,7 @@ const communityLinks = computed(() => [{
             trailing-icon="i-heroicons-chevron-down-20-solid"
             :class="[open && 'bg-[var(--ui-bg-accented)]/75']"
             :ui="{
-              trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : '']
+              trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
             }"
             class="w-[128px]"
           />
