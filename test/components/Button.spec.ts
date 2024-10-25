@@ -65,7 +65,6 @@ describe('Button', () => {
     })
 
     const button = wrapper.find('button')
-    console.log(wrapper.html())
     button.trigger('click')
     await flushPromises()
 
