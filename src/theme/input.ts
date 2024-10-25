@@ -17,40 +17,40 @@ export default (options: Required<ModuleOptions>) => ({
     size: {
       xs: {
         base: 'px-2 py-1 text-xs gap-1',
-        leading: '!ps-2',
-        trailing: '!pe-2',
+        leading: 'ps-2',
+        trailing: 'pe-2',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       sm: {
         base: 'px-2.5 py-1.5 text-xs gap-1.5',
-        leading: '!ps-2.5',
-        trailing: '!pe-2.5',
+        leading: 'ps-2.5',
+        trailing: 'pe-2.5',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       md: {
         base: 'px-2.5 py-1.5 text-sm gap-1.5',
-        leading: '!ps-2.5',
-        trailing: '!pe-2.5',
+        leading: 'ps-2.5',
+        trailing: 'pe-2.5',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       lg: {
         base: 'px-3 py-2 text-sm gap-2',
-        leading: '!ps-3',
-        trailing: '!pe-3',
+        leading: 'ps-3',
+        trailing: 'pe-3',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
       xl: {
         base: 'px-3 py-2 text-base gap-2',
-        leading: '!ps-3',
-        trailing: '!pe-3',
+        leading: 'ps-3',
+        trailing: 'pe-3',
         leadingIcon: 'size-6',
         leadingAvatarSize: 'xs',
         trailingIcon: 'size-6'
@@ -102,43 +102,43 @@ export default (options: Required<ModuleOptions>) => ({
   }, {
     leading: true,
     size: 'xs',
-    class: '!ps-7'
+    class: 'ps-7'
   }, {
     leading: true,
     size: 'sm',
-    class: '!ps-8'
+    class: 'ps-8'
   }, {
     leading: true,
     size: 'md',
-    class: '!ps-9'
+    class: 'ps-9'
   }, {
     leading: true,
     size: 'lg',
-    class: '!ps-10'
+    class: 'ps-10'
   }, {
     leading: true,
     size: 'xl',
-    class: '!ps-11'
+    class: 'ps-11'
   }, {
     trailing: true,
     size: 'xs',
-    class: '!pe-7'
+    class: 'pe-7'
   }, {
     trailing: true,
     size: 'sm',
-    class: '!pe-8'
+    class: 'pe-8'
   }, {
     trailing: true,
     size: 'md',
-    class: '!pe-9'
+    class: 'pe-9'
   }, {
     trailing: true,
     size: 'lg',
-    class: '!pe-10'
+    class: 'pe-10'
   }, {
     trailing: true,
     size: 'xl',
-    class: '!pe-11'
+    class: 'pe-11'
   }, {
     loading: true,
     leading: true,
