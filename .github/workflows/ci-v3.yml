@@ -49,12 +49,11 @@ jobs:
       - name: Typecheck
         run: pnpm run typecheck
 
-      - name: Docs typecheck
-        run: pnpm run docs:typecheck
-        continue-on-error: true
-
       - name: Test
         run: pnpm run test
+
+      - name: Test (vue)
+        run: pnpm run test:vue
 
       - name: Build
         run: pnpm run build

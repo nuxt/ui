@@ -15,7 +15,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemTrailingKbdsSize: '',
     itemLabel: 'truncate',
-    itemLabelExternalIcon: 'size-3 align-top text-[var(--ui-text-dimmed)]'
+    itemLabelExternalIcon: 'inline-block size-3 align-top text-[var(--ui-text-dimmed)]'
   },
   variants: {
     active: {
