@@ -11,5 +11,5 @@ defineProps<IconProps>()
 </script>
 
 <template>
-  <Icon :icon="name.replace(/^i-/, '')" />
+  <Icon :icon="name.replace(/^i-/, '')" class="inline-block" />
 </template>
