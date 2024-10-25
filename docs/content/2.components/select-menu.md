@@ -40,7 +40,7 @@ componentProps:
 
 ### Objects
 
-You can pass an array of objects to `options` and either compare on the whole object or use the `by` prop to compare on a specific key. You can configure which field will be used to display the label through the `option-attribute` prop that defaults to `label`.
+You can pass an array of objects to `options` and either compare on the whole object or use the `by` prop to compare on a specific key. You can configure which field will be used to display the label through the `option-attribute` prop that defaults to `label`. Additionally, you can use dot notation (e.g., `user.name`) to access nested object properties.
 
 ::component-example
 ---
