@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Chip > renders with as correctly 1`] = `"<span class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></span>"`;
+
+exports[`Chip > renders with class correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0 mx-auto"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with color neutral correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-text-muted)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with content slot correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform">Content slot</span></div>"`;
+
+exports[`Chip > renders with default slot correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0">Default slot<span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with inset correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute"></span></div>"`;
+
+exports[`Chip > renders with position bottom-left correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] bottom-0 left-0 absolute translate-y-1/2 -translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with position bottom-right correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] bottom-0 right-0 absolute translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with position top-left correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 left-0 absolute -translate-y-1/2 -translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with position top-right correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with size 2xl correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[11px] min-w-[11px] text-[11px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with size 2xs correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[5px] min-w-[5px] text-[5px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with size 3xl correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[12px] min-w-[12px] text-[12px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with size 3xs correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[4px] min-w-[4px] text-[4px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with size lg correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[9px] min-w-[9px] text-[9px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with size md correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with size sm correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[7px] min-w-[7px] text-[7px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with size xl correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[10px] min-w-[10px] text-[10px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with size xs correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[6px] min-w-[6px] text-[6px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform"></span></div>"`;
+
+exports[`Chip > renders with text correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center text-[var(--ui-bg)] font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform">Text</span></div>"`;
+
+exports[`Chip > renders with ui correctly 1`] = `"<div class="relative inline-flex items-center justify-center shrink-0"><span class="rounded-full ring ring-[var(--ui-bg)] flex items-center justify-center font-medium whitespace-nowrap bg-[var(--ui-primary)] h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute -translate-y-1/2 translate-x-1/2 transform text-[var(--ui-text-muted)]"></span></div>"`;
+
+exports[`Chip > renders without show correctly 1`] = `
+"<div class="relative inline-flex items-center justify-center shrink-0">
+  <!--v-if-->
+</div>"
+`;

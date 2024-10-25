@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { LazyModalExample } from '#components'
+import { defineAsyncComponent } from 'vue'
+
+const LazyModalExample = defineAsyncComponent(() => import('../../components/ModalExample.vue'))
 
 const open = ref(false)
 const count = ref(0)

@@ -52,7 +52,7 @@ describe('Button', () => {
     let resolve: any | null = null
     const wrapper = await mountSuspended({
       components: { Button },
-      async setup() {
+      setup() {
         function onClick() {
           return new Promise(res => resolve = res)
         }
@@ -80,7 +80,7 @@ describe('Button', () => {
     let resolve: any | null = null
     const wrapper = await mountSuspended({
       components: { Button, UForm },
-      async setup() {
+      setup() {
         function onSubmit() {
           return new Promise(res => resolve = res)
         }
