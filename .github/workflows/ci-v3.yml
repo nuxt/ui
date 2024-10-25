@@ -49,10 +49,6 @@ jobs:
       - name: Typecheck
         run: pnpm run typecheck
 
-      - name: Docs typecheck
-        run: pnpm run docs:typecheck
-        continue-on-error: true
-
       - name: Test
         run: pnpm run test
 
