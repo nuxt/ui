@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar > renders with alt correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-8 text-base"><!--v-if--><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate">BC</span></span>"`;
+
+exports[`Avatar > renders with class correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle size-8 text-base bg-[var(--ui-bg)]"><!--v-if--><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with icon correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-8 text-base"><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="text-[var(--ui-text-muted)] shrink-0" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>"`;
+
+exports[`Avatar > renders with size 2xl correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-11 text-[22px]"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with size 2xs correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px]"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with size 3xl correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-12 text-2xl"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with size 3xs correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-4 text-[8px]"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with size lg correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-9 text-lg"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with size md correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-8 text-base"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with size sm correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-7 text-sm"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with size xl correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-10 text-xl"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with size xs correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-6 text-xs"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with src correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-8 text-base"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
+
+exports[`Avatar > renders with text correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-8 text-base"><!--v-if--><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate">+1</span></span>"`;
+
+exports[`Avatar > renders with ui correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-8 text-base"><!--v-if--><span class="leading-none text-[var(--ui-text-muted)] truncate font-bold"></span></span>"`;
