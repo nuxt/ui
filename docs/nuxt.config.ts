@@ -21,13 +21,6 @@ export default defineNuxtConfig({
     'nuxt-og-image'
   ],
 
-  $production: {
-    routeRules: {
-      '/api/_mdc/highlight': { cache: { group: 'mdc', name: 'highlight', maxAge: 60 * 60 } },
-      '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
-    }
-  },
-
   app: {
     rootAttrs: {
       'vaul-drawer-wrapper': '',
@@ -40,24 +33,6 @@ export default defineNuxtConfig({
   },
 
   content: {
-    // sources: {
-    //   pro: process.env.NUXT_UI_PRO_PATH
-    //     ? {
-    //         prefix: '/pro',
-    //         driver: 'fs',
-    //         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
-    //       }
-    //     : process.env.NUXT_GITHUB_TOKEN
-    //       ? {
-    //           prefix: '/pro',
-    //           driver: 'github',
-    //           repo: 'nuxt/ui-pro',
-    //           branch: 'dev',
-    //           dir: 'docs/app/content/pro',
-    //           token: process.env.NUXT_GITHUB_TOKEN || ''
-    //         }
-    //       : undefined
-    // },
     build: {
       markdown: {
         highlight: {
