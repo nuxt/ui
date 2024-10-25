@@ -3,9 +3,8 @@
     <slot v-bind="{ errors }" />
   </form>
 </template>
-
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly } from 'vue'
+import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly, computed } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
@@ -25,18 +24,22 @@ class FormException extends Error {
   }
 }
 
+type Schema = PropType<ZodSchema>
+  | PropType<YupObjectSchema<any>>
+  | PropType<JoiSchema>
+  | PropType<ValibotSchema30 | ValibotSchemaAsync30>
+  | PropType<ValibotSchema31 | ValibotSchemaAsync31>
+  | PropType<ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any>>
+  | PropType<ValibotSchema | ValibotSchemaAsync>
+  | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>> | PropType<Struct<any, any>>
+
+type Maybe<T> = T | null
+type AsyncReturn<R, E> = [Maybe<R>, Maybe<E>]
+
 export default defineComponent({
   props: {
     schema: {
-      type: [Object, Function] as
-      | PropType<ZodSchema>
-      | PropType<YupObjectSchema<any>>
-      | PropType<JoiSchema>
-      | PropType<ValibotSchema30 | ValibotSchemaAsync30>
-      | PropType<ValibotSchema31 | ValibotSchemaAsync31>
-      | PropType<ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any>>
-      | PropType<ValibotSchema | ValibotSchemaAsync>
-      | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>> | PropType<Struct<any, any>>,
+      type: [Object, Function] as Schema,
       default: undefined
     },
     state: {
@@ -72,6 +75,8 @@ export default defineComponent({
     })
 
     const errors = ref<FormError[]>([])
+
+    const form = ref(props.state)
     provide('form-errors', errors)
     provide('form-events', bus)
     const inputs = ref({})
@@ -81,18 +86,13 @@ export default defineComponent({
       let errs = await props.validate(props.state)
 
       if (props.schema) {
-        if (isZodSchema(props.schema)) {
-          errs = errs.concat(await getZodErrors(props.state, props.schema))
-        } else if (isYupSchema(props.schema)) {
-          errs = errs.concat(await getYupErrors(props.state, props.schema))
-        } else if (isJoiSchema(props.schema)) {
-          errs = errs.concat(await getJoiErrors(props.state, props.schema))
-        } else if (isValibotSchema(props.schema)) {
-          errs = errs.concat(await getValibotError(props.state, props.schema))
-        } else if (isSuperStructSchema(props.schema)) {
-          errs = errs.concat(await getSuperStructErrors(props.state, props.schema))
-        } else {
-          throw new Error('Form validation failed: Unsupported form schema')
+        const schema = parseSchema(props.state)
+        const [errors, result] = await schema(props.schema as unknown as Schema)
+        if(errors) {
+          errs = errs.concat(errors)
+          
+        }else {
+          form.value = result
         }
       }
 
@@ -135,7 +135,7 @@ export default defineComponent({
         if (props.validateOn?.includes('submit')) {
           await validate()
         }
-        event.data = props.state
+        event.data = form.value
         emit('submit', event)
       } catch (error) {
         if (!(error instanceof FormException)) {
@@ -207,55 +207,6 @@ function isSuperStructSchema(schema: any): schema is Struct<any, any> {
   )
 }
 
-async function getYupErrors(
-  state: any,
-  schema: YupObjectSchema<any>
-): Promise<FormError[]> {
-  try {
-    await schema.validate(state, { abortEarly: false })
-    return []
-  } catch (error) {
-    if (isYupError(error)) {
-      return error.inner.map(issue => ({
-        path: issue.path ?? '',
-        message: issue.message
-      }))
-    } else {
-      throw error
-    }
-  }
-}
-
-function isZodSchema(schema: any): schema is ZodSchema {
-  return schema.parse !== undefined
-}
-
-async function getSuperStructErrors(state: any, schema: Struct<any, any>): Promise<FormError[]> {
-  const [err] = schema.validate(state)
-  if (err) {
-    const errors = err.failures()
-    return errors.map(error => ({
-      message: error.message,
-      path: error.path.join('.')
-    }))
-  }
-  return []
-}
-
-async function getZodErrors(
-  state: any,
-  schema: ZodSchema
-): Promise<FormError[]> {
-  const result = await schema.safeParseAsync(state)
-  if (result.success === false) {
-    return result.error.issues.map(issue => ({
-      path: issue.path.join('.'),
-      message: issue.message
-    }))
-  }
-  return []
-}
-
 function isJoiSchema(schema: any): schema is JoiSchema {
   return schema.validateAsync !== undefined && schema.id !== undefined
 }
@@ -264,38 +215,88 @@ function isJoiError(error: any): error is JoiError {
   return error.isJoi === true
 }
 
-async function getJoiErrors(
-  state: any,
-  schema: JoiSchema
-): Promise<FormError[]> {
-  try {
-    await schema.validateAsync(state, { abortEarly: false })
-    return []
-  } catch (error) {
-    if (isJoiError(error)) {
-      return error.details.map(detail => ({
-        path: detail.path.join('.'),
-        message: detail.message
-      }))
-    } else {
-      throw error
-    }
-  }
-}
-
 function isValibotSchema(schema: any): schema is ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any> {
   return '_parse' in schema || '_run' in schema || (typeof schema === 'function' && 'schema' in schema)
 }
 
-async function getValibotError(
-  state: any,
-  schema: ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
-): Promise<FormError[]> {
-  const result = await ('_parse' in schema ? schema._parse(state) : '_run' in schema ? schema._run({ typed: false, value: state }, {}) : schema(state))
-  return result.issues?.map(issue => ({
-    // We know that the key for a form schema is always a string or a number
-    path: issue.path?.map(item => item.key).join('.') || '',
-    message: issue.message
-  })) || []
+function isZodSchema(schema: any): schema is ZodSchema {
+  return schema.parse !== undefined
+}
+
+function parseSchema(state: any) {
+  return async (schema: Schema): Promise<AsyncReturn<FormError<string>[], typeof state>> => {
+    if (isZodSchema(schema)) {
+      const result = await schema.safeParseAsync(state)
+      if (result.success === false) {
+        const errors = result.error.issues.map(issue => ({
+          path: issue.path.join('.'),
+          message: issue.message
+        }))
+
+        return [errors, null]
+      }
+      return [null, result.data]
+    } else if (isJoiSchema(schema)) {
+      try {
+        await schema.validateAsync(state, { abortEarly: false })
+        return [null, state]
+      } catch (error) {
+        if (isJoiError(error)) {
+          const errors = error.details.map(issue => ({
+            path: issue.path.join('.'),
+            message: issue.message
+          }))
+
+          return [errors, null]
+        } else {
+          throw error
+        }
+      }
+    } else if (isValibotSchema(schema)) {
+      const result = await ('_parse' in schema ? schema._parse(state) : '_run' in schema ? schema._run({ typed: false, value: state }, {}) : schema(state))
+
+      if (!result.issues || result.issues.length === 0) {
+        // @ts-ignore
+        return [null, result.output]
+      }
+
+      const errors = result.issues.map(issue => ({
+        path: issue.path?.map(item => item.key).join('.') || '',
+        message: issue.message
+      }))
+
+      return [errors, null]
+    } else if (isYupSchema(schema)) {
+      try {
+        const result = schema.validateSync(state, { abortEarly: false })
+        return [null, result]
+      } catch (error) {
+        if (isYupError(error)) {
+          const errors = error.inner.map(issue => ({
+            path: issue.path ?? '',
+            message: issue.message
+          }))
+
+          return [errors, null]
+        } else {
+          throw error
+        }
+      }
+    } else if (isSuperStructSchema(schema)) {
+      const [err, result] = schema.validate(state)
+      if (err) {
+        const errors = err.failures().map(error => ({
+          message: error.message,
+          path: error.path.join('.')
+        }))
+
+        return [errors, null]
+      }
+
+      return [null, result]
+    } else {
+      throw new Error('Form validation failed: Unsupported form schema')
+    }
+  }
 }
 </script>
