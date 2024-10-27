@@ -52,7 +52,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     orientation: {
       horizontal: {
-        root: 'w-full items-center justify-between overflow-x-auto',
+        root: 'w-full items-center justify-between',
         list: 'flex items-center',
         item: 'py-2',
         link: 'px-2.5 py-1.5 before:inset-x-px before:inset-y-0',
@@ -90,7 +90,6 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     orientation: 'horizontal',
     class: {
-      root: 'pb-px',
       item: '-mb-px',
       link: 'after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full'
     }
