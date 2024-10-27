@@ -34,7 +34,6 @@ You can also pass any property from the [Link](/components/link#props) component
 collapse: true
 ignore:
   - items
-  - class
 external:
   - items
 props:
@@ -358,7 +357,6 @@ You can also set an icon for a specific item by using the `trailingIcon` propert
 collapse: true
 ignore:
   - items
-  - class
 external:
   - items
 props:
@@ -432,7 +430,6 @@ props:
           icon: i-heroicons-document-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
-  class: 'justify-center'
 ---
 ::
 
@@ -450,7 +447,6 @@ collapse: true
 ignore:
   - items
   - arrow
-  - class
 external:
   - items
 props:
@@ -524,7 +520,6 @@ props:
           icon: i-heroicons-document-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
-  class: 'justify-center'
 ---
 ::
 
