@@ -2,7 +2,8 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative flex gap-1.5',
+    root: 'relative max-w-full',
+    base: 'flex gap-1.5',
     list: 'isolate min-w-0',
     item: 'min-w-0',
     link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
@@ -52,14 +53,14 @@ export default (options: Required<ModuleOptions>) => ({
     },
     orientation: {
       horizontal: {
-        root: 'w-full items-center justify-between',
+        base: 'w-full items-center justify-between overflow-x-auto overflow-y-hidden',
         list: 'flex items-center',
         item: 'py-2',
         link: 'px-2.5 py-1.5 before:inset-x-px before:inset-y-0',
         childList: 'grid grid-cols-2 gap-2 p-2'
       },
       vertical: {
-        root: 'flex-col',
+        base: 'flex-col',
         link: 'flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0',
         childList: 'ml-5 border-l border-[var(--ui-border)]',
         childItem: 'pl-1.5 -ml-px'
@@ -91,7 +92,8 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     class: {
       item: '-mb-px',
-      link: 'after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full'
+      link: 'after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full',
+      viewportWrapper: '-mt-px'
     }
   }, {
     highlight: true,
