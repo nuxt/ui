@@ -115,7 +115,6 @@ props:
     - label: Help
       icon: i-heroicons-question-mark-circle
       disabled: true
-  class: 'justify-center'
 ---
 ::
 
@@ -266,7 +265,7 @@ props:
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
-  class: 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[var(--ui-border)]'
+  class: 'w-full data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[var(--ui-border)]'
 ---
 ::
 
@@ -282,6 +281,7 @@ Use the `color` prop to change the color of the NavigationMenu.
 ---
 ignore:
   - items
+  - class
 external:
   - items
 props:
@@ -302,6 +302,7 @@ props:
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
+  class: 'w-full'
 ---
 ::
 
@@ -313,6 +314,7 @@ Use the `variant` prop to change the variant of the NavigationMenu.
 ---
 ignore:
   - items
+  - class
 external:
   - items
 props:
@@ -335,6 +337,7 @@ props:
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
+  class: 'w-full'
 ---
 ::
 
