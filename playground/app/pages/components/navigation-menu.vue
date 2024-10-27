@@ -99,7 +99,9 @@ const items = [
       :orientation="orientation"
       :highlight="highlight"
       :highlight-color="highlightColor"
-      :class="highlight && 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[var(--ui-border)]'"
+      :ui="{
+        base: highlight ? 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[var(--ui-border)]' : ''
+      }"
     />
   </div>
 </template>

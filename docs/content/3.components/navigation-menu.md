@@ -143,6 +143,7 @@ collapse: true
 ignore:
   - items
   - class
+  - ui
 external:
   - items
 props:
@@ -264,7 +265,9 @@ props:
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
-  class: 'w-full data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[var(--ui-border)]'
+  ui:
+    root: 'w-full'
+    base: 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-l border-[var(--ui-border)]'
 ---
 ::
 
