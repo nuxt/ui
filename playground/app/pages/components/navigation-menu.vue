@@ -82,8 +82,8 @@ const items = [
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-12">
-    <div class="flex items-center gap-2">
+  <div class="flex flex-col items-center gap-12 max-w-full">
+    <div class="flex flex-wrap items-center gap-2">
       <USelect v-model="color" :items="colors" placeholder="Color" />
       <USelect v-model="variant" :items="variants" placeholder="Variant" />
       <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
