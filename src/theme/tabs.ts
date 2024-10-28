@@ -20,7 +20,7 @@ export default (options: Required<ModuleOptions>) => ({
     variant: {
       pill: {
         list: 'bg-[var(--ui-bg-elevated)] rounded-[calc(var(--ui-radius)*2)]',
-        trigger: 'flex-1',
+        trigger: 'flex-1 w-full',
         indicator: 'rounded-[calc(var(--ui-radius)*1.5)] shadow-sm'
       },
       link: {
@@ -78,7 +78,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     variant: 'link',
     class: {
-      list: 'border-b',
+      list: 'border-b -mb-px',
       indicator: '-bottom-px h-px'
     }
   }, {
@@ -92,7 +92,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'vertical',
     variant: 'link',
     class: {
-      list: 'border-s',
+      list: 'border-s -ms-px',
       indicator: '-start-px w-px'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
