@@ -97,12 +97,9 @@ export interface InputMenuProps<T extends SelectItemType<I>, I extends SelectIte
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof inputMenu.slots>
-  /** Model value of the input. */
+  /** The controlled value of the Combobox. Can be binded-with with `v-model`. */
   modelValue?: SelectModelValue<T, V, M>
-  /**
-   * Whether the model value should expect an array or not.
-   * @defaultValue false
-   */
+  /** Whether multiple options can be selected or not. */
   multiple?: M
 }
 
