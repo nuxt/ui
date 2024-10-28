@@ -6,7 +6,7 @@
     "@iconify-json/heroicons": "^1.2.1",
     "@iconify-json/simple-icons": "^1.2.9",
     "@iconify-json/vscode-icons": "^1.2.2",
-    "@nuxt/content": "3.0.0-alpha.2",
+    "@nuxt/content": "3.0.0-alpha.4",
     "@nuxt/image": "^1.8.1",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@8d73f7a",
