@@ -23,20 +23,20 @@ const itemsWithDescription = [
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ml-[100px]">
+    <div class="flex flex-col gap-4 ms-[100px]">
       <URadioGroup :items="items" default-value="1" />
       <URadioGroup :items="items" color="neutral" default-value="1" />
       <URadioGroup :items="items" color="error" default-value="2" />
       <URadioGroup :items="literalOptions" />
       <URadioGroup :items="items" label="Disabled" disabled />
-      <URadioGroup :items="items" orientation="horizontal" class="ml-[-91px]" />
+      <URadioGroup :items="items" orientation="horizontal" class="ms-[-91px]" />
     </div>
 
-    <div class="flex items-center gap-4 ml-[34px]">
+    <div class="flex items-center gap-4 ms-[34px]">
       <URadioGroup v-for="size in sizes" :key="size" :size="size" :items="items" />
     </div>
 
-    <div class="flex items-center gap-4 ml-[74px]">
+    <div class="flex items-center gap-4 ms-[74px]">
       <URadioGroup v-for="size in sizes" :key="size" :size="size" :items="itemsWithDescription" />
     </div>
 

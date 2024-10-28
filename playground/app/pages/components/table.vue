@@ -253,7 +253,7 @@ const columns: TableColumn<Payment>[] = [{
       icon: 'i-heroicons-ellipsis-vertical-20-solid',
       color: 'neutral',
       variant: 'ghost',
-      class: 'ml-auto'
+      class: 'ms-auto'
     })))
   }
 }]
@@ -306,7 +306,7 @@ onMounted(() => {
           color="neutral"
           variant="outline"
           trailing-icon="i-heroicons-chevron-down-20-solid"
-          class="ml-auto"
+          class="ms-auto"
         />
       </UDropdownMenu>
     </div>

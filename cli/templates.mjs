@@ -42,7 +42,7 @@ const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'pr
 export interface ${upperName}Props {
   /**
    * The element or component this component should render as.
-   * @defaultValue \`div\`
+   * @defaultValue 'div'
    */
   as?: any
   class?: any

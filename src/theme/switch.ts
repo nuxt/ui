@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative flex items-start',
     base: ['inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ui-bg)] data-[state=unchecked]:bg-[var(--ui-bg-accented)]', options.theme.transitions && 'transition-colors duration-200'],
     container: 'flex items-center',
-    thumb: 'group pointer-events-none block rounded-full bg-[var(--ui-bg)] shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 flex items-center justify-center',
+    thumb: 'group pointer-events-none block rounded-full bg-[var(--ui-bg)] shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center',
     icon: ['absolute shrink-0 group-data-[state=unchecked]:text-[var(--ui-text-dimmed)] opacity-0 size-10/12', options.theme.transitions && 'transition-[color,opacity] duration-200'],
     wrapper: 'ms-2',
     label: 'block font-medium text-[var(--ui-text)]',
@@ -26,31 +26,31 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         base: 'w-7',
         container: 'h-4',
-        thumb: 'size-3 data-[state=checked]:translate-x-3',
+        thumb: 'size-3 data-[state=checked]:translate-x-3 data-[state=checked]:rtl:-translate-x-3',
         wrapper: 'text-xs'
       },
       sm: {
         base: 'w-8',
         container: 'h-4',
-        thumb: 'size-3.5 data-[state=checked]:translate-x-3.5',
+        thumb: 'size-3.5 data-[state=checked]:translate-x-3.5 data-[state=checked]:rtl:-translate-x-3.5',
         wrapper: 'text-xs'
       },
       md: {
         base: 'w-9',
         container: 'h-5',
-        thumb: 'size-4 data-[state=checked]:translate-x-4',
+        thumb: 'size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4',
         wrapper: 'text-sm'
       },
       lg: {
         base: 'w-10',
         container: 'h-5',
-        thumb: 'size-4.5 data-[state=checked]:translate-x-4.5',
+        thumb: 'size-4.5 data-[state=checked]:translate-x-4.5 data-[state=checked]:rtl:-translate-x-4.5',
         wrapper: 'text-sm'
       },
       xl: {
         base: 'w-11',
         container: 'h-6',
-        thumb: 'size-5 data-[state=checked]:translate-x-5',
+        thumb: 'size-5 data-[state=checked]:translate-x-5 data-[state=checked]:rtl:-translate-x-5',
         wrapper: 'text-base'
       }
     },
