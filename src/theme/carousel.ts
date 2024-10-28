@@ -22,10 +22,10 @@ export default (options: Required<ModuleOptions>) => ({
         next: '-bottom-12 left-1/2 -translate-x-1/2 rotate-90'
       },
       horizontal: {
-        container: 'flex-row -ml-4',
-        item: 'pl-4',
-        prev: '-left-12 top-1/2 -translate-y-1/2',
-        next: '-right-12 top-1/2 -translate-y-1/2'
+        container: 'flex-row -ms-4',
+        item: 'ps-4',
+        prev: '-start-12 top-1/2 -translate-y-1/2',
+        next: '-end-12 top-1/2 -translate-y-1/2'
       }
     },
     active: {

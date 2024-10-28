@@ -21,7 +21,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailingHighlightedIcon: 'shrink-0 size-5 text-[var(--ui-text-dimmed)] hidden group-data-highlighted:inline-flex',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',
     itemTrailingKbdsSize: 'md',
-    itemLabel: 'truncate space-x-1',
+    itemLabel: 'truncate space-x-1 rtl:space-x-reverse',
     itemLabelBase: 'text-[var(--ui-text-highlighted)] [&>mark]:text-[var(--ui-bg)] [&>mark]:bg-[var(--ui-primary)]',
     itemLabelPrefix: 'text-[var(--ui-text)]',
     itemLabelSuffix: 'text-[var(--ui-text-dimmed)] [&>mark]:text-[var(--ui-bg)] [&>mark]:bg-[var(--ui-primary)]'
