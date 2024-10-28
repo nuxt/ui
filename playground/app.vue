@@ -5,6 +5,10 @@
         Welcome to the playground!
       </template>
     </UCard>
+
+    <p class="text-gray-500 dark:text-gray-400">
+      Try your components here!
+    </p>
   </UContainer>
 </template>
 
