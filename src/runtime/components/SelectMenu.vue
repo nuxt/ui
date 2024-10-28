@@ -6,7 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrWrapped, PartialString, SelectItems, SelectItemType, SelectModelValue, SelectModelValueEmits, SelectValueKey } from '../types/utils'
+import type { AcceptableValue, ArrayOrWrapped, PartialString, SelectItems, SelectItemType, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
 
@@ -28,7 +28,7 @@ export interface SelectMenuItem {
 
 type SelectMenuVariants = VariantProps<typeof selectMenu>
 
-export interface SelectMenuProps<T extends SelectItemType<I>, I extends SelectItems<SelectMenuItem | AcceptableValue> = SelectItems<SelectMenuItem | AcceptableValue>, V extends SelectValueKey<T> = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
+export interface SelectMenuProps<T extends SelectItemType<I>, I extends SelectItems<SelectMenuItem | AcceptableValue> = SelectItems<SelectMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -82,7 +82,7 @@ export interface SelectMenuProps<T extends SelectItemType<I>, I extends SelectIt
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof T
+  labelKey?: SelectItemKey<T>
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -114,7 +114,7 @@ export interface SelectMenuSlots<T> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends SelectItemType<I>, I extends SelectItems<SelectMenuItem | AcceptableValue> = SelectItems<SelectMenuItem | AcceptableValue>, V extends SelectValueKey<T> = undefined, M extends boolean = false">
+<script setup lang="ts" generic="T extends SelectItemType<I>, I extends SelectItems<SelectMenuItem | AcceptableValue> = SelectItems<SelectMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
 import { computed, toRef } from 'vue'
 import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
@@ -135,7 +135,7 @@ const props = withDefaults(defineProps<SelectMenuProps<T, I, V, M>>(), {
   autofocusDelay: 0,
   searchInput: () => ({ placeholder: 'Search...' }),
   filter: () => ['label'],
-  labelKey: 'label' as keyof T
+  labelKey: 'label' as never
 })
 
 const emits = defineEmits<SelectMenuEmits<T, V, M>>()

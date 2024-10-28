@@ -6,7 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, PartialString, SelectItems, SelectItemType, SelectModelValue, SelectModelValueEmits, SelectValueKey } from '../types/utils'
+import type { AcceptableValue, PartialString, SelectItems, SelectItemType, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
@@ -28,7 +28,7 @@ export interface SelectItem {
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T extends SelectItemType<I>, I extends SelectItems<SelectItem | AcceptableValue> = SelectItems<SelectItem | AcceptableValue>, V extends SelectValueKey<T, 'value'> = 'value'> extends Omit<SelectRootProps, 'dir' | 'modelValue'>, UseComponentIconsProps {
+export interface SelectProps<T extends SelectItemType<I>, I extends SelectItems<SelectItem | AcceptableValue> = SelectItems<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined> extends Omit<SelectRootProps, 'dir' | 'modelValue'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -69,21 +69,21 @@ export interface SelectProps<T extends SelectItemType<I>, I extends SelectItems<
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof T
+  labelKey?: SelectItemKey<T>
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof select.slots>
   /** The controlled value of the Select. Can be bind as `v-model`. */
-  modelValue?: SelectModelValue<T, V>
+  modelValue?: SelectModelValue<T, V, false, T extends { value: infer U } ? U : never>
 }
 
 export type SelectEmits<T, V> = Omit<SelectRootEmits, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-} & SelectModelValueEmits<T, V>
+} & SelectModelValueEmits<T, V, false, T extends { value: infer U } ? U : never>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -97,7 +97,7 @@ export interface SelectSlots<T> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends SelectItemType<I>, I extends SelectItems<SelectItem | AcceptableValue> = SelectItems<SelectItem | AcceptableValue>, V extends SelectValueKey<T, 'value'> = 'value'">
+<script setup lang="ts" generic="T extends SelectItemType<I>, I extends SelectItems<SelectItem | AcceptableValue> = SelectItems<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined">
 import { computed, toRef } from 'vue'
 import { SelectRoot, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
@@ -113,7 +113,7 @@ import UChip from './Chip.vue'
 
 const props = withDefaults(defineProps<SelectProps<T, I, V>>(), {
   valueKey: 'value' as never,
-  labelKey: 'label',
+  labelKey: 'label' as never,
   portal: true
 })
 const emits = defineEmits<SelectEmits<T, V>>()
