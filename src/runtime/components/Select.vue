@@ -6,7 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, PartialString } from '../types/utils'
+import type { AcceptableValue, PartialString, SelectItems, SelectItemType, SelectModelValue, SelectModelValueEmits, SelectValueKey } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
@@ -28,7 +28,7 @@ export interface SelectItem {
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T> extends Omit<SelectRootProps, 'dir'>, UseComponentIconsProps {
+export interface SelectProps<T extends SelectItemType<I>, I extends SelectItems<SelectItem | AcceptableValue> = SelectItems<SelectItem | AcceptableValue>, V extends SelectValueKey<T, 'value'> = 'value'> extends Omit<SelectRootProps, 'dir' | 'modelValue'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -64,24 +64,25 @@ export interface SelectProps<T> extends Omit<SelectRootProps, 'dir'>, UseCompone
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
    */
-  valueKey?: string
+  valueKey?: V
   /**
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
   labelKey?: string
-  items?: T[] | T[][]
+  items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof select.slots>
+  modelValue?: SelectModelValue<T, V>
 }
 
-export type SelectEmits = SelectRootEmits & {
+export type SelectEmits<T, V> = Omit<SelectRootEmits, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-}
+} & SelectModelValueEmits<T, V>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -95,7 +96,7 @@ export interface SelectSlots<T> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends SelectItem | AcceptableValue">
+<script setup lang="ts" generic="T extends SelectItemType<I>, I extends SelectItems<SelectItem | AcceptableValue> = SelectItems<SelectItem | AcceptableValue>, V extends SelectValueKey<T, 'value'> = 'value'">
 import { computed, toRef } from 'vue'
 import { SelectRoot, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
@@ -109,12 +110,12 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 
-const props = withDefaults(defineProps<SelectProps<T>>(), {
-  valueKey: 'value',
+const props = withDefaults(defineProps<SelectProps<T, I, V>>(), {
+  valueKey: 'value' as never,
   labelKey: 'label',
   portal: true
 })
-const emits = defineEmits<SelectEmits>()
+const emits = defineEmits<SelectEmits<T, V>>()
 const slots = defineSlots<SelectSlots<T>>()
 
 const appConfig = useAppConfig()
@@ -166,6 +167,9 @@ function onUpdateOpen(value: boolean) {
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
     :name="name"
+    :default-value="(defaultValue as string)"
+    :model-value="(modelValue as string)"
+    :autocomplete="autocomplete"
     :disabled="disabled"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"

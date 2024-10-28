@@ -7,7 +7,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrWrapped, PartialString } from '../types/utils'
+import type { AcceptableValue, ArrayOrWrapped, PartialString, SelectItems, SelectItemType, SelectModelValue, SelectModelValueEmits, SelectValueKey } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
@@ -29,7 +29,7 @@ export interface InputMenuItem {
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
-export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValue' | 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'multiple' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
+export interface InputMenuProps<T extends SelectItemType<I>, I extends SelectItems<InputMenuItem | AcceptableValue> = SelectItems<InputMenuItem | AcceptableValue>, V extends SelectValueKey<T> = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -86,24 +86,26 @@ export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValu
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
    */
-  valueKey?: keyof T
+  valueKey?: V
   /**
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
   labelKey?: keyof T
-  items?: T[] | T[][]
+  items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof inputMenu.slots>
+  modelValue?: SelectModelValue<T, V, M>
+  multiple?: M
 }
 
-export type InputMenuEmits<T> = ComboboxRootEmits<T> & {
+export type InputMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-}
+} & SelectModelValueEmits<T, V, M>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -120,7 +122,7 @@ export interface InputMenuSlots<T> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends InputMenuItem | AcceptableValue">
+<script setup lang="ts" generic="T extends SelectItemType<I>, I extends SelectItems<InputMenuItem | AcceptableValue> = SelectItems<InputMenuItem | AcceptableValue>, V extends SelectValueKey<T> = undefined, M extends boolean = false">
 import { computed, ref, toRef, onMounted } from 'vue'
 import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
@@ -137,14 +139,14 @@ import UChip from './Chip.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputMenuProps<T>>(), {
+const props = withDefaults(defineProps<InputMenuProps<T, I, V, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
   filter: () => ['label'],
   labelKey: 'label' as keyof T
 })
-const emits = defineEmits<InputMenuEmits<T>>()
+const emits = defineEmits<InputMenuEmits<T, V, M>>()
 const slots = defineSlots<InputMenuSlots<T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })

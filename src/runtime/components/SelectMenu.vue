@@ -6,7 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrWrapped, PartialString } from '../types/utils'
+import type { AcceptableValue, ArrayOrWrapped, PartialString, SelectItems, SelectItemType, SelectModelValue, SelectModelValueEmits, SelectValueKey } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
 
@@ -28,7 +28,7 @@ export interface SelectMenuItem {
 
 type SelectMenuVariants = VariantProps<typeof selectMenu>
 
-export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValue' | 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'multiple' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
+export interface SelectMenuProps<T extends SelectItemType<I>, I extends SelectItems<SelectMenuItem | AcceptableValue> = SelectItems<SelectMenuItem | AcceptableValue>, V extends SelectValueKey<T> = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -77,24 +77,26 @@ export interface SelectMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelVal
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
    */
-  valueKey?: keyof T
+  valueKey?: V
   /**
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
   labelKey?: keyof T
-  items?: T[] | T[][]
+  items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof selectMenu.slots>
+  modelValue?: SelectModelValue<T, V, M>
+  multiple?: M
 }
 
-export type SelectMenuEmits<T> = ComboboxRootEmits<T> & {
+export type SelectMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-}
+} & SelectModelValueEmits<T, V, M>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -110,7 +112,7 @@ export interface SelectMenuSlots<T> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends SelectMenuItem | AcceptableValue">
+<script setup lang="ts" generic="T extends SelectItemType<I>, I extends SelectItems<SelectMenuItem | AcceptableValue> = SelectItems<SelectMenuItem | AcceptableValue>, V extends SelectValueKey<T> = undefined, M extends boolean = false">
 import { computed, toRef } from 'vue'
 import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
@@ -125,7 +127,7 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 
-const props = withDefaults(defineProps<SelectMenuProps<T>>(), {
+const props = withDefaults(defineProps<SelectMenuProps<T, I, V, M>>(), {
   search: true,
   portal: true,
   autofocusDelay: 0,
@@ -133,7 +135,8 @@ const props = withDefaults(defineProps<SelectMenuProps<T>>(), {
   filter: () => ['label'],
   labelKey: 'label' as keyof T
 })
-const emits = defineEmits<SelectMenuEmits<T>>()
+
+const emits = defineEmits<SelectMenuEmits<T, V, M>>()
 const slots = defineSlots<SelectMenuSlots<T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
@@ -158,7 +161,7 @@ const ui = computed(() => selectMenu({
   buttonGroup: orientation.value
 }))
 
-function displayValue(value: T): string {
+function displayValue(value: T | T[]): string {
   if (props.multiple && Array.isArray(value)) {
     return value.map(v => displayValue(v)).join(', ')
   }
@@ -168,7 +171,7 @@ function displayValue(value: T): string {
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
-function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: string): ArrayOrWrapped<AcceptableValue> {
+function filterFunction(items: ArrayOrWrapped<T>, searchTerm: string): ArrayOrWrapped<T> {
   if (props.filter === false) {
     return items
   }
@@ -176,7 +179,7 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
   const fields = Array.isArray(props.filter) ? props.filter : [props.labelKey]
   const escapedSearchTerm = escapeRegExp(searchTerm)
 
-  return items.filter((item) => {
+  return items.filter((item: T) => {
     if (typeof item !== 'object') {
       return String(item).search(new RegExp(escapedSearchTerm, 'i')) !== -1
     }

@@ -24,3 +24,11 @@ export type ArrayOrWrapped<T> = T extends any[] ? T : Array<T>
 export type PartialString<T> = {
   [K in keyof T]?: string
 }
+
+export type SelectItems<T> = T[] | T[][]
+export type SelectItemType<I extends SelectItems<unknown>> = I extends (infer U)[][] ? U : I extends (infer U)[] ? U : never
+export type SelectModelValue<T, V, M extends boolean = false> = (T extends Record<string, any> ? V extends keyof T ? T[V] : T : T) extends infer U ? M extends true ? U[] : U : never
+export type SelectValueKey<T, D = undefined> = D | (T extends Record<string, any> ? keyof T : D extends undefined ? string : D)
+export type SelectModelValueEmits<T, V, M extends boolean = false> = {
+  'update:modelValue': [payload: SelectModelValue<T, V, M>]
+}

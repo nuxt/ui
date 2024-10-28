@@ -5,6 +5,7 @@ import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
 import type { FormInputEvents } from '~/src/module'
+import { expectEmitPayloadType } from '../utils/types'
 
 describe('SelectMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -160,6 +161,67 @@ describe('SelectMenu', () => {
       input.setValue('Option 2')
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('should have the correct types', () => {
+      // with object item
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: [{ label: 'foo', value: 'bar' }]
+      })).toEqualTypeOf<[{ label: string, value: string }]>()
+
+      // with object item and multiple
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: [{ label: 'foo', value: 1 }],
+        multiple: true
+      })).toEqualTypeOf<[{ label: string, value: number }[]]>()
+
+      // with object item and valueKey
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: [{ label: 'foo', value: 'bar' }],
+        valueKey: 'value'
+      })).toEqualTypeOf<[string]>()
+
+      // with object item and multiple and valueKey
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: [{ label: 'foo', value: 1 }],
+        multiple: true,
+        valueKey: 'value'
+      })).toEqualTypeOf<[number[]]>()
+
+      // with string item
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: ['foo']
+      })).toEqualTypeOf<[string]>()
+
+      // with string item and multiple
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: ['foo'],
+        multiple: true
+      })).toEqualTypeOf<[string[]]>()
+
+      // with groups
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: [['foo']]
+      })).toEqualTypeOf<[string]>()
+
+      // with groups and multiple
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: [['foo']],
+        multiple: true
+      })).toEqualTypeOf<[string[]]>()
+
+      // with groups, multiple and mixed types
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
+        multiple: true
+      })).toEqualTypeOf<[(string | number | { value: string } | { value: number })[]]>()
+
+      // with groups, multiple, mixed types and valueKey
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
+        multiple: true,
+        valueKey: 'value'
+      })).toEqualTypeOf<[(string | number)[]]>()
     })
   })
 })
