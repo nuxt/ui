@@ -69,7 +69,7 @@ export interface SelectProps<T extends SelectItemType<I>, I extends SelectItems<
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: keyof T
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
