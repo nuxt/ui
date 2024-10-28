@@ -7,7 +7,6 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
 import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
-import type { UnionToIntersection } from '@tanstack/vue-table'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 

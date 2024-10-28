@@ -28,8 +28,6 @@ export type PartialString<T> = {
 export type MaybeArrayOfArray<T> = T[] | T[][]
 export type MaybeArrayOfArrayItem<I> = I extends Array<infer T> ? T extends Array<infer U> ? U : T : never
 
-export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
-
 export type SelectModelValue<T, V, M extends boolean = false, DV = T> = (T extends Record<string, any> ? V extends keyof T ? T[V] : DV : T) extends infer U ? M extends true ? U[] : U : never
 
 export type SelectItemKey<T> = T extends Record<string, any> ? keyof T : string
