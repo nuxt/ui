@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import NavigationMenu, { type NavigationMenuProps, type NavigationMenuSlots } from '../../src/runtime/components/NavigationMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/navigation-menu'
+import { expectSlotProps } from '../utils/types'
 
 describe('NavigationMenu', () => {
   const variants = Object.keys(theme.variants.variant) as any
@@ -96,8 +97,30 @@ describe('NavigationMenu', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps<typeof items[number][number]>, slots?: Partial<NavigationMenuSlots<any>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps<typeof items>, slots?: Partial<NavigationMenuSlots<any>> }) => {
     const html = await ComponentRender(nameOrHtml, options, NavigationMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  test('should have the correct types', () => {
+    // normal
+    expectSlotProps('item', () => NavigationMenu({
+      items: [{ label: 'foo', value: 'bar' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // groups
+    expectSlotProps('item', () => NavigationMenu({
+      items: [[{ label: 'foo', value: 'bar' }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // custom
+    expectSlotProps('item', () => NavigationMenu({
+      items: [{ label: 'foo', value: 'bar', custom: 'nice' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+
+    // custom + groups
+    expectSlotProps('item', () => NavigationMenu({
+      items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
   })
 })
