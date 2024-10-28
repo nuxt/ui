@@ -33,7 +33,7 @@ export interface SelectMenuProps<T extends SelectItemType<I>, I extends SelectIt
   /** The placeholder text when the select is empty. */
   placeholder?: string
   /**
-   * Wether to display the search input or not.
+   * Whether to display the search input or not.
    * Can be an object to pass additional props to the input.
    * @defaultValue { placeholder: 'Search...' }
    */
@@ -86,6 +86,11 @@ export interface SelectMenuProps<T extends SelectItemType<I>, I extends SelectIt
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /**
+   * Determines if custom user input that does not exist in options can be added.
+   * @defaultValue false
+   */
+  creatable?: boolean | 'always' | { placement?: 'top' | 'bottom', when?: 'empty' | 'always' }
   class?: any
   ui?: PartialString<typeof selectMenu.slots>
   /** The controlled value of the Combobox. Can be binded-with with `v-model`. */
@@ -98,6 +103,7 @@ export type SelectMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
+  create: [value: T]
 } & SelectModelValueEmits<T, V, M>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
@@ -111,6 +117,7 @@ export interface SelectMenuSlots<T> {
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
+  'create-item-label'(props: { item: T }): any
 }
 </script>
 
@@ -198,6 +205,24 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
+const creatable = computed(() => {
+  if (!props.creatable) {
+    return false
+  }
+
+  const filteredItems = filterFunction(items.value as ArrayOrWrapped<T>, searchTerm.value)
+  const newValue = {
+    value: props.valueKey ? { [props.valueKey]: searchTerm.value, [props.labelKey as string]: searchTerm.value } : searchTerm.value,
+    position: ((typeof props.creatable === 'object' && props.creatable.placement) || 'bottom') as 'top' | 'bottom'
+  }
+
+  if ((typeof props.creatable === 'object' && props.creatable.when === 'always') || props.creatable === 'always') {
+    return (filteredItems.length === 1 && displayValue(filteredItems[0]) === searchTerm.value) ? false : newValue
+  }
+
+  return filteredItems.length > 0 ? false : newValue
+})
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -277,6 +302,20 @@ function onUpdateOpen(value: boolean) {
         </ComboboxEmpty>
 
         <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
+          <ComboboxGroup v-if="creatable && creatable.position === 'top'">
+            <ComboboxItem
+              :class="ui.item({ class: props.ui?.item })"
+              :value="valueKey && typeof creatable.value === 'object' ? get(creatable.value, props.valueKey as string) : creatable.value"
+              @select="(v) => emits('create', v as T)"
+            >
+              <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+                <slot name="create-item-label" :item="(creatable.value as T)">
+                  Add "{{ typeof creatable.value === 'object' ? get(creatable.value, props.labelKey as string) : creatable.value }}"
+                </slot>
+              </span>
+            </ComboboxItem>
+          </ComboboxGroup>
+
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
@@ -322,6 +361,20 @@ function onUpdateOpen(value: boolean) {
                 </slot>
               </ComboboxItem>
             </template>
+          </ComboboxGroup>
+
+          <ComboboxGroup v-if="creatable && creatable.position === 'bottom'">
+            <ComboboxItem
+              :class="ui.item({ class: props.ui?.item })"
+              :value="valueKey && typeof creatable.value === 'object' ? get(creatable.value, props.valueKey as string) : creatable.value"
+              @select="(v) => emits('create', v as T)"
+            >
+              <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+                <slot name="create-item-label" :item="(creatable.value as T)">
+                  Add "{{ typeof creatable.value === 'object' ? get(creatable.value, props.labelKey as string) : creatable.value }}"
+                </slot>
+              </span>
+            </ComboboxItem>
           </ComboboxGroup>
         </ComboboxViewport>
       </ComboboxContent>

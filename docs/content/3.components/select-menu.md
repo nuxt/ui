@@ -236,6 +236,32 @@ props:
 You can set the `search-input` prop to `false` to hide the search input.
 ::
 
+### Creatable
+
+Use the `creatable` prop to allow user input.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+  - class
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  creatable: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
 ### Content
 
 Use the `content` prop to control how the SelectMenu content is rendered, like its `align` or `side` for example.
