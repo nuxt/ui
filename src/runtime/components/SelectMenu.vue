@@ -88,7 +88,12 @@ export interface SelectMenuProps<T extends SelectItemType<I>, I extends SelectIt
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof selectMenu.slots>
+  /** Model value of the input. */
   modelValue?: SelectModelValue<T, V, M>
+  /**
+   * Whether the model value should expect an array or not.
+   * @defaultValue false
+   */
   multiple?: M
 }
 

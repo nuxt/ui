@@ -75,6 +75,7 @@ export interface SelectProps<T extends SelectItemType<I>, I extends SelectItems<
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof select.slots>
+  /** Model value of the input. */
   modelValue?: SelectModelValue<T, V>
 }
 
