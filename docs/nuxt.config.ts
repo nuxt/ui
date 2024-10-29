@@ -48,6 +48,12 @@ export default defineNuxtConfig({
     }
   },
 
+  mdc: {
+    highlight: {
+      noApiRoute: false
+    }
+  },
+
   routeRules: {
     '/': { redirect: '/getting-started', prerender: false },
     '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
