@@ -367,8 +367,6 @@ Controls whether multiple rows can be expanded simultaneously in the table.
 
 You can disable the expansion functionality for specific rows in the UTable component by adding the `disabledExpand` property to your row data.
 
-To disable expansion for specific rows, add the `disabledExpand` boolean property to your row data:
-
 > Important: When using `disabledExpand`, you must define the `columns` prop for the UTable component. Otherwise, the table will render all properties as columns, including the `disabledExpand` property.
 
 ::component-example{class="grid"}
