@@ -369,9 +369,7 @@ const data = [
 ]
 ```
 
-::alert{type="warning"}
-Important: When using `disabledExpand`, you must define the `columns` prop for the UTable component. Otherwise, the table will render all properties as columns, including the `disabledExpand` property.
-::
+> Important: When using `disabledExpand`, you must define the `columns` prop for the UTable component. Otherwise, the table will render all properties as columns, including the `disabledExpand` property.
 
 ::component-example{class="grid"}
 ---
