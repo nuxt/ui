@@ -389,12 +389,12 @@ export default defineComponent({
     }
 
     function showOpenedRow(row: TableRow) {
-      return openedRows.value.some(openedRow => defaultComparator(openedRow, row))
+      return openedRows.value.some(openedRow => compare(openedRow, row))
     }
 
     function toggleOpened(row: TableRow) {
       if (showOpenedRow(row)) {
-        openedRows.value = openedRows.value.filter(v => !defaultComparator(v, row))
+        openedRows.value = openedRows.value.filter(v => !compare(v, row))
       } else {
         openedRows.value = props.multipleExpand ? [...openedRows.value, row] : [row]
       }
