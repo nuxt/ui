@@ -89,12 +89,13 @@ export interface TableProps<T> {
   ui?: Partial<typeof table.slots>
 }
 
-export interface TableSlots<T> {
-  [key: `${string}-header`]: (props: HeaderContext<T, unknown>) => any
-  [key: `${string}-data`]: (props: CellContext<T, unknown>) => any
+type DynamicHeaderSlots<T, K = keyof T> = Record<string, T> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
+type DynamicCellSlots<T, K = keyof T> = Record<string, T> & Record<`${K extends string ? K : never}-data`, (props: CellContext<T, unknown>) => any>
+
+export type TableSlots<T> = {
   expanded: (props: { row: Row<T> }) => any
   empty: (props?: {}) => any
-}
+} & DynamicHeaderSlots<T> & DynamicCellSlots<T>
 
 </script>
 
