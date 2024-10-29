@@ -175,7 +175,7 @@ const ui = computed(() => inputMenu({
 }))
 
 function displayValue(value: AcceptableValue): string {
-  const item = items.value.find(item => props.valueKey ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
+  const item = items.value.find(item => props.valueKey ? isEqual.default(get(item as Record<string, any>, props.valueKey as string), value) : isEqual.default(item, value))
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
