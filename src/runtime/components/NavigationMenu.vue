@@ -86,7 +86,7 @@ export type NavigationMenuSlots<T extends { slot?: string }> = {
 </script>
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<NavigationMenuItem>">
-import { computed, toRef } from 'vue'
+import { computed, reactive, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, useForwardPropsEmits } from 'radix-vue'
 import { createReusableTemplate } from '@vueuse/core'
 import { get } from '../utils'
@@ -103,6 +103,7 @@ const props = withDefaults(defineProps<NavigationMenuProps<I>>(), {
   delayDuration: 0,
   labelKey: 'label'
 })
+
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
 
