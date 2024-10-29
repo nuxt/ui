@@ -29,7 +29,7 @@ const columns = [
 
 <template>
   <div>
-    <UTable v-model="selected" :rows="data" :columns="columns">
+    <UTable :rows="data" :columns="columns">
       <template #expand="{ row }">
         <div class="p-4">
           <pre>{{ row }}</pre>

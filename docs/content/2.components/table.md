@@ -369,21 +369,6 @@ You can disable the expansion functionality for specific rows in the UTable comp
 
 To disable expansion for specific rows, add the `disabledExpand` boolean property to your row data:
 
-```js
-const data = [
-  {
-    name: 'John Doe',
-    email: 'john@example.com',
-    disabledExpand: true // This row cannot be expanded
-  },
-  {
-    name: 'Jane Smith',
-    email: 'jane@example.com',
-    disabledExpand: false // This row can be expanded
-  }
-]
-```
-
 > Important: When using `disabledExpand`, you must define the `columns` prop for the UTable component. Otherwise, the table will render all properties as columns, including the `disabledExpand` property.
 
 ::component-example{class="grid"}
