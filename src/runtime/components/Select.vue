@@ -6,7 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, PartialString, SelectItems, SelectItemType, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
+import type { AcceptableValue, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
@@ -28,7 +28,7 @@ export interface SelectItem {
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T extends SelectItemType<I>, I extends SelectItems<SelectItem | AcceptableValue> = SelectItems<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined> extends Omit<SelectRootProps, 'dir' | 'modelValue'>, UseComponentIconsProps {
+export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue> = MaybeArrayOfArray<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined> extends Omit<SelectRootProps, 'dir' | 'modelValue'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -97,7 +97,7 @@ export interface SelectSlots<T> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends SelectItemType<I>, I extends SelectItems<SelectItem | AcceptableValue> = SelectItems<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined">
+<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue> = MaybeArrayOfArray<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined">
 import { computed, toRef } from 'vue'
 import { SelectRoot, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
