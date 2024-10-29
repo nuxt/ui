@@ -116,7 +116,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
 
 </script>
 
-<script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
+<script setup lang="ts" generic="G extends CommandPaletteGroup<CommandPaletteItem>">
 import { computed } from 'vue'
 import { ComboboxRoot, ComboboxInput, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxViewport, ComboboxGroup, ComboboxLabel, ComboboxItem, ComboboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
@@ -130,6 +130,8 @@ import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 import UKbd from './Kbd.vue'
 import UInput from './Input.vue'
+
+type T = G extends CommandPaletteGroup<infer T> ? T : never
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
@@ -173,7 +175,7 @@ const items = computed(() => props.groups?.filter((group) => {
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
-function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
+function getGroupWithItems(group: G, items: (CommandPaletteItem & { matches?: FuseResult<T>['matches'] })[]) {
   if (group?.postFilter && typeof group.postFilter === 'function') {
     items = group.postFilter(searchTerm.value, items)
   }
@@ -183,8 +185,8 @@ function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matc
     items: items.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
-        labelHtml: highlight<T>(item, searchTerm.value, props.labelKey),
-        suffixHtml: highlight<T>(item, searchTerm.value, undefined, [props.labelKey])
+        labelHtml: highlight(item, searchTerm.value, props.labelKey),
+        suffixHtml: highlight(item, searchTerm.value, undefined, [props.labelKey])
       }
     })
   }
@@ -201,7 +203,7 @@ const groups = computed(() => {
     acc[item.group]?.push({ ...item, matches })
 
     return acc
-  }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
+  }, {} as Record<string, (CommandPaletteItem & { matches?: FuseResult<T>['matches'] })[]>)
 
   const fuseGroups = Object.entries(groupsById).map(([id, items]) => {
     const group = props.groups?.find(group => group.id === id)
@@ -275,8 +277,8 @@ const groups = computed(() => {
               :class="ui.item({ class: props.ui?.item })"
               @select="item.onSelect"
             >
-              <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
-                <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="item" :index="index">
+              <slot :name="item.slot || group.slot || 'item'" :item="(item as T)" :index="index">
+                <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="(item as T)" :index="index">
                   <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, loading: true })" />
                   <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
                   <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
@@ -291,7 +293,7 @@ const groups = computed(() => {
                 </slot>
 
                 <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
-                  <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="item" :index="index">
+                  <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="(item as T)" :index="index">
                     <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: props.ui?.itemLabelPrefix })">{{ item.prefix }}</span>
 
                     <span :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
@@ -301,7 +303,7 @@ const groups = computed(() => {
                 </span>
 
                 <span :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
-                  <slot :name="item.slot ? `${item.slot}-trailing` : group.slot ? `${group.slot}-trailing` : `item-trailing`" :item="item" :index="index">
+                  <slot :name="item.slot ? `${item.slot}-trailing` : group.slot ? `${group.slot}-trailing` : `item-trailing`" :item="(item as T)" :index="index">
                     <span v-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: props.ui?.itemTrailingKbds })">
                       <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
                     </span>

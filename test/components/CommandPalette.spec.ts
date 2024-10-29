@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import CommandPalette, { type CommandPaletteProps } from '../../src/runtime/components/CommandPalette.vue'
 import ComponentRender from '../component-render'
+import { expectSlotProps } from '../utils/types'
 
 describe('CommandPalette', () => {
   const groups = [{
@@ -88,5 +89,27 @@ describe('CommandPalette', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps<typeof groups[number], typeof groups[number]['items'][number]>, slots?: Partial<any> }) => {
     const html = await ComponentRender(nameOrHtml, options, CommandPalette)
     expect(html).toMatchSnapshot()
+  })
+
+  test('should have the correct types', () => {
+    // normal
+    expectSlotProps('item', () => CommandPalette({
+      groups: [{ id: 'foo', items: [{ label: 'foo', value: 'bar' }] }]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number }>()
+
+    // groups
+    expectSlotProps('item', () => CommandPalette({
+      groups: [{ id: 'foo', items: [{ label: 'foo', value: 'bar' }] }, { id: 'bar', items: [{ label: 'foo', value: 'bar' }] }]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number }>()
+
+    // custom
+    expectSlotProps('item', () => CommandPalette({
+      groups: [{ id: 'foo', items: [{ label: 'foo', value: 'bar', custom: 'nice' }] }]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number }>()
+
+    // custom + groups
+    expectSlotProps('item', () => CommandPalette({
+      groups: [{ id: 'foo', items: [{ label: 'foo', value: 'bar', custom1: 1 }] }, { id: 'bar', items: [{ label: 'foo', value: 'bar', custom2: 2 }] }]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom1: number } | { label: string, value: string, custom2: number }, index: number }>()
   })
 })
