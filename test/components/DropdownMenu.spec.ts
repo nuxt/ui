@@ -131,7 +131,7 @@ describe('DropdownMenu', () => {
 
     // custom + groups + mixed
     expectSlotProps('item', () => DropdownMenu({
-      items: [[{ label: 'foo', value: 'bar', custom1: 'nice' }], [{ label: 'foo', value: 'bar', custom2: 2 }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom1: string } & { label: string, value: string, custom2: number }, index: number, active?: boolean }>()
+      items: [[{ label: 'foo', value: 'bar', custom1: 'nice', super: '' }], [{ super: 2, label: 'foo', value: 'bar', custom2: 2 }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string, super: string | number, custom1?: string, custom2?: number }, index: number, active?: boolean }>()
   })
 })

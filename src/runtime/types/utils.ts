@@ -37,4 +37,10 @@ export type SelectModelValueEmits<T, V, M extends boolean = false, DV = T> = {
   'update:modelValue': [payload: SelectModelValue<T, V, M, DV>]
 }
 
-export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+export type UnionToIntersection<U> = (U extends any ? (x: U) => any : never) extends (x: infer I) => any ? I : never
+
+export type UnionToOptionalIntersection<U> = UnionToIntersection<U> extends infer I
+  ? { [K in keyof I as K extends keyof U ? K : never]: K extends keyof U ? U[K] : never }
+  & Partial<Omit<I, keyof U>> extends infer O ? { [K in keyof O]: O[K] }
+    : never
+  : never
