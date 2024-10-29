@@ -93,9 +93,10 @@
                 :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
               >
                 <UButton
+                  :disabled="row.disabledExpand"
                   v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
-                  :ui="{ icon: { base: [ui.expand.icon, openedRows.includes(index) && 'rotate-180'].join(' ') } }"
-                  @click="toggleOpened(index)"
+                  :ui="{ icon: { base: [ui.expand.icon, showOpenedRow(row) && 'rotate-180'].join(' ') } }"
+                  @click="toggleOpened(row)"
                 />
               </td>
 
@@ -105,7 +106,7 @@
                 </slot>
               </td>
             </tr>
-            <tr v-if="openedRows.includes(index)">
+            <tr v-if="showOpenedRow(row)">
               <td colspan="100%">
                 <slot
                   name="expand"
@@ -236,9 +237,13 @@ export default defineComponent({
     ui: {
       type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
+    },
+    multipleExpand: {
+      type: Boolean,
+      default: true
     }
   },
-  emits: ['update:modelValue', 'update:sort'],
+  emits: ['update:modelValue', 'update:sort', 'update:expand'],
   setup(props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -383,12 +388,20 @@ export default defineComponent({
       return get(row, rowKey, defaultValue)
     }
 
-    function toggleOpened(index: number) {
-      if (openedRows.value.includes(index)) {
-        openedRows.value = openedRows.value.filter(i => i !== index)
+    function showOpenedRow(row: TableRow) {
+      return openedRows.value.some(openedRow => defaultComparator(openedRow, row))
+    }
+
+    function toggleOpened(row: TableRow) {
+      if (showOpenedRow(row)) {
+        openedRows.value = openedRows.value.filter(v => !defaultComparator(v, row))
       } else {
-        openedRows.value.push(index)
+        openedRows.value = props.multipleExpand ? [...openedRows.value, row] : [row]
       }
+      emit('update:expand', {
+        expandedRows: props.multipleExpand ? openedRows.value : openedRows.value[0],
+        row
+      })
     }
 
     function getAriaSort(column: TableColumn): AriaAttributes['aria-sort'] {
@@ -436,7 +449,8 @@ export default defineComponent({
       onChange,
       getRowData,
       toggleOpened,
-      getAriaSort
+      getAriaSort,
+      showOpenedRow
     }
   }
 })

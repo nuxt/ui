@@ -326,6 +326,109 @@ componentProps:
 ---
 ::
 
+#### Reactive expand
+
+The `@update:expand` event is emitted when a row is expanded. This event provides the current state of expanded rows and the data of the row that triggered the event.
+
+To use the `@update:expand` event, add it to your `UTable` component. The event handler will receive an object with the following properties:
+- `expandedRows`: An array of indices of the currently expanded rows.
+- `row`: The row data that triggered the expand/collapse action.
+
+```vue
+<script setup lang="ts">
+const { data, pending } = await useLazyFetch(() => `/api/users?orderBy=${sort.value.column}&order=${sort.value.direction}`)
+
+const handleExpand = ({ expandedRows, row }) => {
+  console.log('Expanded Rows:', expandedRows);
+  console.log('Row Data:', row);
+};
+
+</script>
+<template>
+  <UTable :loading="pending" :rows="data" @update:expand="handleExpand" />
+</template>
+```
+#### Disable Row Expansion
+
+You can disable the expansion functionality for specific rows in the UTable component by adding the `disabledExpand` property to your row data.
+
+To disable expansion for specific rows, add the `disabledExpand` boolean property to your row data:
+
+```js
+const data = [
+  {
+    name: 'John Doe',
+    email: 'john@example.com',
+    disabledExpand: true // This row cannot be expanded
+  },
+  {
+    name: 'Jane Smith',
+    email: 'jane@example.com',
+    disabledExpand: false // This row can be expanded
+  }
+]
+```
+
+::alert{type="warning"}
+Important: When using `disabledExpand`, you must define the `columns` prop for the UTable component. Otherwise, the table will render all properties as columns, including the `disabledExpand` property.
+::
+
+::component-example{class="grid"}
+---
+padding: false
+component: 'table-example-disabled-expand'
+componentProps:
+  class: 'flex-1'
+---
+::
+## Example
+
+```vue
+<script setup>
+const page = ref(1)
+
+const { data } = useLazyFetch(() => `https://jsonplaceholder.typicode.com/users?_start=${page.value}&_limit=10`, {
+  transform: (v) => {
+    return v.map((v, index) => ({
+      ...v,
+      // just for example don`t do this at home
+      disabledExpand: (index + 1) % 2 === 0
+    }))
+  }
+})
+
+const columns = [
+  {
+    label: 'Name',
+    key: 'name'
+  },
+  {
+    label: 'Email',
+    key: 'email'
+  },
+  {
+    label: 'Address',
+    key: 'address.street'
+  }
+]
+</script>
+
+<template>
+  <div>
+    <UTable v-model="selected" :rows="data" :columns="columns">
+      <template #expand="{ row }">
+        <div class="p-4">
+          <pre>{{ row }}</pre>
+        </div>
+      </template>
+    </UTable>
+    <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
+      <UPagination v-model="page" :page-count="10" :total="20" />
+    </div>
+  </div>
+</template>
+```
+
 ### Loading
 
 Use the `loading` prop to indicate that data is currently loading with an indeterminate [Progress](/components/progress#indeterminate) bar.
