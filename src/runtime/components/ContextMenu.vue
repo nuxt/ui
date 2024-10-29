@@ -68,7 +68,7 @@ export interface ContextMenuProps<I> extends Omit<ContextMenuRootProps, 'dir'> {
 
 export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
-type SlotProps<T> = (props: { item: UnionToOptionalIntersection<T>, active?: boolean, index: number }) => any
+type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
 export type ContextMenuSlots<T extends { slot?: string }> = {
   'default'(props?: {}): any
@@ -93,7 +93,7 @@ const props = withDefaults(defineProps<ContextMenuProps<I>>(), {
   labelKey: 'label'
 })
 const emits = defineEmits<ContextMenuEmits>()
-const slots = defineSlots<ContextMenuSlots<T>>()
+const slots = defineSlots<ContextMenuSlots<UnionToOptionalIntersection<T>>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content as ContextMenuContentProps)

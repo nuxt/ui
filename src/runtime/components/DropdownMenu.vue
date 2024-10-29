@@ -76,7 +76,7 @@ export interface DropdownMenuProps<I> extends Omit<DropdownMenuRootProps, 'dir'>
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T> = (props: { item: UnionToOptionalIntersection<T>, active?: boolean, index: number }) => any
+type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
 export type DropdownMenuSlots<T extends { slot?: string }> = {
   'default'(props: { open: boolean }): any
@@ -102,7 +102,7 @@ const props = withDefaults(defineProps<DropdownMenuProps<I>>(), {
   labelKey: 'label'
 })
 const emits = defineEmits<DropdownMenuEmits>()
-const slots = defineSlots<DropdownMenuSlots<T>>()
+const slots = defineSlots<DropdownMenuSlots<UnionToOptionalIntersection<T>>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as DropdownMenuContentProps)
