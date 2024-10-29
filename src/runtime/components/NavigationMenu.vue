@@ -103,7 +103,6 @@ const props = withDefaults(defineProps<NavigationMenuProps<I>>(), {
   delayDuration: 0,
   labelKey: 'label'
 })
-
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
 
