@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
+import type { UnionToIntersection, DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -76,7 +76,7 @@ export interface DropdownMenuProps<I> extends Omit<DropdownMenuRootProps, 'dir'>
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T> = (props: { item: UnionToIntersection<T>, active?: boolean, index: number }) => any
 
 export type DropdownMenuSlots<T extends { slot?: string }> = {
   'default'(props: { open: boolean }): any
