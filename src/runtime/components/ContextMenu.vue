@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
 
@@ -36,9 +36,9 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
 
 type ContextMenuVariants = VariantProps<typeof contextMenu>
 
-export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
+export interface ContextMenuProps<I> extends Omit<ContextMenuRootProps, 'dir'> {
   size?: ContextMenuVariants['size']
-  items?: T[] | T[][]
+  items?: I
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
@@ -80,14 +80,14 @@ export type ContextMenuSlots<T extends { slot?: string }> = {
 
 </script>
 
-<script setup lang="ts" generic="T extends ContextMenuItem">
+<script setup lang="ts"  generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<ContextMenuItem>">
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UContextMenuContent from './ContextMenuContent.vue'
 
-const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
+const props = withDefaults(defineProps<ContextMenuProps<I>>(), {
   portal: true,
   modal: true,
   labelKey: 'label'
