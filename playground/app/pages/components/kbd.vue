@@ -18,10 +18,10 @@ const kbdKeys = Object.keys(kbdKeysMap)
     <div class="flex items-center gap-1">
       <UKbd value="meta" variant="solid" />
     </div>
-    <div class="flex items-center gap-1 ml-[-216px]">
+    <div class="flex items-center gap-1 ms-[-216px]">
       <UKbd v-for="(kdbKey, index) in kbdKeys" :key="index" :value="kdbKey" />
     </div>
-    <div class="flex items-center gap-1 ml-[-22px]">
+    <div class="flex items-center gap-1 ms-[-22px]">
       <UKbd v-for="size in sizes" :key="size" value="meta" :size="size" />
     </div>
   </div>

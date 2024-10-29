@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative flex gap-1.5',
+    root: 'relative flex gap-1.5 [&>div]:min-w-0',
     list: 'isolate min-w-0',
     item: 'min-w-0',
     link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
@@ -17,7 +17,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkLabelExternalIcon: 'inline-block size-3 align-top text-[var(--ui-text-dimmed)]',
     childList: '',
     childItem: '',
-    childLink: 'group size-full px-3 py-2 rounded-[calc(var(--ui-radius)*1.5)] flex items-start gap-2 text-left',
+    childLink: 'group size-full px-3 py-2 rounded-[calc(var(--ui-radius)*1.5)] flex items-start gap-2 text-start',
     childLinkWrapper: 'flex flex-col items-start',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'font-semibold text-sm relative inline-flex',
@@ -61,8 +61,8 @@ export default (options: Required<ModuleOptions>) => ({
       vertical: {
         root: 'flex-col',
         link: 'flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0',
-        childList: 'ml-5 border-l border-[var(--ui-border)]',
-        childItem: 'pl-1.5 -ml-px'
+        childList: 'ms-5 border-s border-[var(--ui-border)]',
+        childItem: 'ps-1.5 -ms-px'
       }
     },
     active: {
@@ -97,8 +97,8 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     orientation: 'vertical',
     class: {
-      item: 'px-1.5 -ml-px',
-      link: 'after:absolute after:-left-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full'
+      item: 'px-1.5 -ms-px',
+      link: 'after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full'
     }
   }, {
     disabled: false,

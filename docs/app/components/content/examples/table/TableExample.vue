@@ -264,11 +264,11 @@ function randomize() {
 </script>
 
 <template>
-  <div class="flex-1 divide-y divide-[var(--ui-border-accented)]">
-    <div class="flex items-center gap-2 px-4 py-3.5">
+  <div class="flex-1 divide-y divide-[var(--ui-border-accented)] w-full">
+    <div class="flex items-center gap-2 px-4 py-3.5 overflow-x-auto">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
-        class="max-w-sm"
+        class="max-w-sm min-w-[12ch]"
         placeholder="Filter emails..."
         @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
       />

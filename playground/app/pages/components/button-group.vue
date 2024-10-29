@@ -6,7 +6,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
 
 <template>
   <div class="flex flex-col gap-4 items-center">
-    <div class="flex flex-col gap-4 -ml-[110px]">
+    <div class="flex flex-col gap-4 -ms-[110px]">
       <UButtonGroup>
         <UButton>Button</UButton>
       </UButtonGroup>
