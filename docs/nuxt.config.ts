@@ -42,15 +42,15 @@ export default defineNuxtConfig({
     }
   },
 
-  runtimeConfig: {
-    public: {
-      version: pkg.version
-    }
-  },
-
   mdc: {
     highlight: {
       noApiRoute: false
+    }
+  },
+
+  runtimeConfig: {
+    public: {
+      version: pkg.version
     }
   },
 
