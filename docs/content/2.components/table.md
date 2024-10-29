@@ -348,6 +348,21 @@ const handleExpand = ({ expandedRows, row }) => {
   <UTable :loading="pending" :rows="data" @update:expand="handleExpand" />
 </template>
 ```
+
+#### Multiple expand
+Controls whether multiple rows can be expanded simultaneously in the table.
+
+```vue
+<!-- Allow only one row to be expanded at a time -->
+<UTable :multiple-expand="false" />
+
+<!-- Default behavior: Allow multiple rows to be expanded simultaneously -->
+<UTable :multiple-expand="true" />
+
+<!-- Or simply -->
+<UTable />
+```
+
 #### Disable Row Expansion
 
 You can disable the expansion functionality for specific rows in the UTable component by adding the `disabledExpand` property to your row data.
