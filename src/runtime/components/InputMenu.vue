@@ -95,6 +95,11 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /**
+   * Determines if custom user input that does not exist in options can be added.
+   * @defaultValue false
+   */
+  creatable?: boolean | 'always' | { placement?: 'top' | 'bottom', when?: 'empty' | 'always' }
   class?: any
   ui?: PartialString<typeof inputMenu.slots>
   /** The controlled value of the Combobox. Can be binded-with with `v-model`. */
@@ -107,6 +112,7 @@ export type InputMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>,
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
+  create: [value: T]
 } & SelectModelValueEmits<T, V, M>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
@@ -121,6 +127,7 @@ export interface InputMenuSlots<T> {
   'item-trailing': SlotProps<T>
   'tags-item-text': SlotProps<T>
   'tags-item-delete': SlotProps<T>
+  'create-item-label'(props: { item: T }): any
 }
 </script>
 
@@ -180,23 +187,27 @@ function displayValue(value: AcceptableValue): string {
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
-function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: string): ArrayOrWrapped<AcceptableValue> {
+function filterFunction(
+  inputItems: ArrayOrWrapped<AcceptableValue> = items.value as ArrayOrWrapped<AcceptableValue>,
+  filterSearchTerm: string = searchTerm.value,
+  comparator = (item: any, term: string) => String(item).search(new RegExp(term, 'i')) !== -1
+): ArrayOrWrapped<AcceptableValue> {
   if (props.filter === false) {
-    return items
+    return inputItems
   }
 
   const fields = Array.isArray(props.filter) ? props.filter : [props.labelKey]
-  const escapedSearchTerm = escapeRegExp(searchTerm)
+  const escapedSearchTerm = escapeRegExp(filterSearchTerm ?? '')
 
-  return items.filter((item) => {
+  return inputItems.filter((item) => {
     if (typeof item !== 'object') {
-      return String(item).search(new RegExp(escapedSearchTerm, 'i')) !== -1
+      return comparator(item, escapedSearchTerm)
     }
 
     return fields.some((field) => {
       const child = get(item, field as string)
 
-      return child !== null && child !== undefined && String(child).search(new RegExp(escapedSearchTerm, 'i')) !== -1
+      return child !== null && child !== undefined && comparator(child, escapedSearchTerm)
     })
   }) as ArrayOrWrapped<T>
 }
@@ -204,6 +215,30 @@ function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: stri
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as InputMenuItem[][] : [])
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
+
+const creatable = computed(() => {
+  if (!props.creatable) {
+    return false
+  }
+
+  const filteredItems = filterFunction()
+  const newItem = searchTerm.value && {
+    item: props.valueKey ? { [props.valueKey]: searchTerm.value, [props.labelKey ?? 'label']: searchTerm.value } : searchTerm.value,
+    position: ((typeof props.creatable === 'object' && props.creatable.placement) || 'bottom') as 'top' | 'bottom'
+  }
+
+  if ((typeof props.creatable === 'object' && props.creatable.when === 'always') || props.creatable === 'always') {
+    return (filteredItems.length === 1 && filterFunction(filteredItems, searchTerm.value, (item, term) => String(item) === term).length === 1) ? false : newItem
+  }
+
+  return filteredItems.length > 0 ? false : newItem
+})
+
+const rootItems = computed(() => [
+  ...(creatable.value && creatable.value.position === 'top' ? [creatable.value.item] : []),
+  ...filterFunction(),
+  ...(creatable.value && creatable.value.position === 'bottom' ? [creatable.value.item] : [])
+] as ArrayOrWrapped<AcceptableValue>)
 
 const inputRef = ref<InstanceType<typeof ComboboxInput> | null>(null)
 
@@ -261,7 +296,7 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     :display-value="displayValue"
-    :filter-function="filterFunction"
+    :filter-function="() => rootItems"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     :as-child="!!multiple"
     @update:model-value="onUpdate"
@@ -340,6 +375,20 @@ defineExpose({
         </ComboboxEmpty>
 
         <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
+          <ComboboxGroup v-if="creatable && creatable.position === 'top'" :class="ui.group({ class: props.ui?.group })">
+            <ComboboxItem
+              :class="ui.item({ class: props.ui?.item })"
+              :value="valueKey && typeof creatable.item === 'object' ? get(creatable.item, props.valueKey as string) : creatable.item"
+              @select="(v) => emits('create', v as T)"
+            >
+              <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+                <slot name="create-item-label" :item="(creatable.item as T)">
+                  Add "{{ typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }}"
+                </slot>
+              </span>
+            </ComboboxItem>
+          </ComboboxGroup>
+
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
@@ -385,6 +434,20 @@ defineExpose({
                 </slot>
               </ComboboxItem>
             </template>
+          </ComboboxGroup>
+
+          <ComboboxGroup v-if="creatable && creatable.position === 'bottom'" :class="ui.group({ class: props.ui?.group })">
+            <ComboboxItem
+              :class="ui.item({ class: props.ui?.item })"
+              :value="valueKey && typeof creatable.item === 'object' ? get(creatable.item, props.valueKey as string) : creatable.item"
+              @select="(v) => emits('create', v as T)"
+            >
+              <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+                <slot name="create-item-label" :item="(creatable.item as T)">
+                  Add "{{ typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }}"
+                </slot>
+              </span>
+            </ComboboxItem>
           </ComboboxGroup>
         </ComboboxViewport>
       </ComboboxContent>

@@ -214,6 +214,30 @@ props:
 ---
 ::
 
+### Creatable
+
+Use the `creatable` prop to allow user input.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  creatable: true
+---
+::
+
 ### Content
 
 Use the `content` prop to control how the InputMenu content is rendered, like its `align` or `side` for example.
