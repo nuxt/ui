@@ -19,7 +19,9 @@ import type {
   ExpandedOptions,
   SortingOptions,
   RowSelectionOptions,
-  Updater
+  Updater,
+  CellContext,
+  HeaderContext
 } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
@@ -87,10 +89,13 @@ export interface TableProps<T> {
   ui?: Partial<typeof table.slots>
 }
 
-export interface TableSlots<T> {
-  expanded(props: { row: Row<T> }): any
-  empty(props?: {}): any
-}
+type DynamicHeaderSlots<T, K = keyof T> = Record<string, T> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
+type DynamicCellSlots<T, K = keyof T> = Record<string, T> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
+
+export type TableSlots<T> = {
+  expanded: (props: { row: Row<T> }) => any
+  empty: (props?: {}) => any
+} & DynamicHeaderSlots<T> & DynamicCellSlots<T>
 
 </script>
 
@@ -193,7 +198,9 @@ defineExpose({
             :data-pinned="header.column.getIsPinned()"
             :class="ui.th({ class: [props.ui?.th], pinned: !!header.column.getIsPinned() })"
           >
-            <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
+            <slot :name="`${header.id}-header`" v-bind="header.getContext()">
+              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
+            </slot>
           </th>
         </tr>
       </thead>
@@ -208,7 +215,9 @@ defineExpose({
                 :data-pinned="cell.column.getIsPinned()"
                 :class="ui.td({ class: [props.ui?.td], pinned: !!cell.column.getIsPinned() })"
               >
-                <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
+                  <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                </slot>
               </td>
             </tr>
             <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">

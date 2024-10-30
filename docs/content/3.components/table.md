@@ -80,6 +80,10 @@ Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/lat
 
 In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
+::tip{to="#with-slots"}
+You can also use slots to customize the header and data cells of the table.
+::
+
 ::component-example
 ---
 prettier: true
@@ -92,8 +96,8 @@ highlights:
 ---
 ::
 
-::tip
-When rendering components with the `h` function, you can utilize the `resolveComponent` function to dynamically resolve and reference components.
+::note
+When rendering components with `h`, you can either use the `resolveComponent` function or import from `#components`.
 ::
 
 ### Loading
@@ -392,6 +396,23 @@ You can fetch data from an API and use them in the Table.
 prettier: true
 collapse: true
 name: 'table-fetch-example'
+class: '!p-0'
+---
+::
+
+### With slots
+
+You can use slots to customize the header and data cells of the table.
+
+Use the `#<column>-header` slot to customize the header of a column. You will have access to the `column`, `header` and `table` properties in the slot scope.
+
+Use the `#<column>-cell` slot to customize the cell of a column. You will have access to the `cell`, `column`, `getValue`, `renderValue`, `row`, and `table` properties in the slot scope.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-slots-example'
 class: '!p-0'
 ---
 ::
