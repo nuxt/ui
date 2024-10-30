@@ -96,7 +96,7 @@
                   :disabled="row.disabledExpand"
                   v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
                   :ui="{ icon: { base: [ui.expand.icon, showOpenedRow(row) && 'rotate-180'].join(' ') } }"
-                  @click="toggleOpened(row)"
+                  @click.capture.stop="toggleOpened(row)"
                 />
               </td>
 
