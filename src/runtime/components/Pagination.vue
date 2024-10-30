@@ -14,7 +14,7 @@ const pagination = tv({ extend: tv(theme), ...(appConfig.ui?.pagination || {}) }
 export interface PaginationProps extends Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
   /**
