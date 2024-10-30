@@ -217,19 +217,34 @@ const creatable = computed(() => {
   }
 
   const filteredItems = filterFunction()
-  const newItem = {
-    item: props.valueKey ? { [props.valueKey]: searchTerm.value, [props.labelKey ?? 'label']: searchTerm.value } : searchTerm.value,
-    position: ((typeof props.creatable === 'object' && props.creatable.placement) || 'bottom') as 'top' | 'bottom'
-  }
+  const newItem = searchTerm.value
+    ? {
+        item: props.valueKey ? { [props.valueKey]: searchTerm.value, [props.labelKey ?? 'label']: searchTerm.value } : searchTerm.value,
+        position: ((typeof props.creatable === 'object' && props.creatable.placement) || 'bottom') as 'top' | 'bottom'
+      }
+    : false
 
   if ((typeof props.creatable === 'object' && props.creatable.when === 'always') || props.creatable === 'always') {
-    return (filteredItems.length === 1 && filterFunction(filteredItems, searchTerm.value, (item, term) => String(item) === term)) ? false : newItem
+    return (filteredItems.length === 1 && filterFunction(filteredItems, searchTerm.value, (item, term) => String(item) === term).length === 1) ? false : newItem
   }
 
   return filteredItems.length > 0 ? false : newItem
 })
 
-const rootItems = computed(() => (creatable.value ? [...(creatable.value.position === 'top' ? [creatable.value.item] : []), ...items.value, ...(creatable.value.position === 'bottom' ? [creatable.value.item] : [])] : items.value) as ArrayOrWrapped<T>)
+const rootItems = computed(() => {
+  const itemValues = items.value.map(item => props.valueKey && typeof item === 'object' ? get(item, props.valueKey as string) : item) as ArrayOrWrapped<T>
+  if (!creatable.value) {
+    return itemValues
+  }
+
+  const creatableValue = props.valueKey && typeof creatable.value.item === 'object' ? get(creatable.value.item, props.valueKey as string) : creatable.value.item
+
+  return [
+    ...(creatable.value.position === 'top' ? [creatableValue] : []),
+    ...itemValues,
+    ...(creatable.value.position === 'bottom' ? [creatableValue] : [])
+  ]
+})
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
