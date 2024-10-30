@@ -12,12 +12,9 @@ const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<type
 
 const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })
 
-export interface NavigationMenuChildItem extends Omit<LinkProps, 'raw' | 'custom'> {
-  label: string
+export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'children'> {
+  /** Description is only used when `orientation` is `horizontal`. */
   description?: string
-  icon?: string
-  badge?: string | number | BadgeProps
-  onSelect?(e: Event): void
 }
 
 export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'> {
@@ -188,7 +185,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
 
             <NavigationMenuContent v-if="item.children?.length && orientation === 'horizontal'" v-bind="contentProps" :class="ui.content({ class: props.ui?.content })">
               <ul :class="ui.childList({ class: props.ui?.childList })">
-                <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
+                <li v-for="(childItem, childIndex) in (item as T).children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                   <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
                     <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
                       <ULinkBase v-bind="childSlotProps" :class="ui.childLink({ class: [props.ui?.childLink, childItem.class], active: childActive })">
@@ -214,7 +211,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
 
           <template v-if="item.children?.length && orientation === 'vertical'" #content>
             <ul :class="ui.childList({ class: props.ui?.childList })">
-              <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
+              <li v-for="(childItem, childIndex) in (item as T).children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
                   <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
                     <ULinkBase v-bind="childSlotProps" :class="ui.link({ class: [props.ui?.link, childItem.class], active: childActive, disabled: !!childItem.disabled })">

@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { Reactive } from 'vue'
 import { tv } from 'tailwind-variants'
 import type { AccordionRootProps, AccordionRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
@@ -45,7 +46,7 @@ export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible
 
 export interface AccordionEmits extends AccordionRootEmits {}
 
-type SlotProps<T> = (props: { item: T, index: number, open: boolean }) => any
+type SlotProps<T> = (props: { item: Reactive<T>, index: number, open: boolean }) => any
 
 export type AccordionSlots<T extends { slot?: string }> = {
   leading: SlotProps<T>

@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref } from 'vue'
+import type { Ref, Reactive } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type {
@@ -88,7 +88,7 @@ export interface TableProps<T> {
 }
 
 export interface TableSlots<T> {
-  expanded(props: { row: Row<T> }): any
+  expanded(props: { row: Reactive<Row<T>> }): any
   empty(props?: {}): any
 }
 
