@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Reactive } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
@@ -57,7 +56,7 @@ export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defa
 
 export interface TabsEmits extends TabsRootEmits<string | number> {}
 
-type SlotProps<T> = (props: { item: Reactive<T>, index: number }) => any
+type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type TabsSlots<T extends { slot?: string }> = {
   leading: SlotProps<T>

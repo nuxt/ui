@@ -129,6 +129,9 @@
   "resolutions": {
     "@nuxt/ui": "workspace:*",
     "happy-dom": "14.12.3",
-    "rollup": "^4.24.0"
+    "rollup": "^4.24.0",
+    "vue-tsc": "2.1.6",
+    "vue-component-meta": "2.1.6",
+    "vue-component-type-helpers": "2.1.6"
   }
 }

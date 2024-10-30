@@ -1,6 +1,5 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Reactive } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
@@ -89,7 +88,7 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
 }
 
 export type CarouselSlots<T> = {
-  default(props: { item: Reactive<T>, index: number }): any
+  default(props: { item: T, index: number }): any
 }
 
 </script>
