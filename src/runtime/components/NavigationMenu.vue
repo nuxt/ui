@@ -6,18 +6,15 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
 const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })
 
-export interface NavigationMenuChildItem extends Omit<LinkProps, 'raw' | 'custom'> {
-  label: string
+export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'children'> {
+  /** Description is only used when `orientation` is `horizontal`. */
   description?: string
-  icon?: string
-  badge?: string | number | BadgeProps
-  onSelect?(e: Event): void
 }
 
 export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'> {
@@ -37,7 +34,7 @@ type NavigationMenuVariants = VariantProps<typeof navigationMenu>
 export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'modelValue' | 'skipDelayDuration'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
   /**
@@ -45,7 +42,7 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'd
    * @defaultValue appConfig.ui.icons.chevronDown
    */
   trailingIcon?: string
-  items?: T[] | T[][]
+  items?: T
   color?: NavigationMenuVariants['color']
   variant?: NavigationMenuVariants['variant']
   /**
@@ -85,10 +82,10 @@ export type NavigationMenuSlots<T extends { slot?: string }> = {
 
 </script>
 
-<script setup lang="ts" generic="T extends NavigationMenuItem">
-import { computed, toRef } from 'vue'
+<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<NavigationMenuItem>">
+import { computed, reactive, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, useForwardPropsEmits } from 'radix-vue'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate } from '@vueuse/core'
 import { get } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
@@ -98,7 +95,7 @@ import UIcon from './Icon.vue'
 import UBadge from './Badge.vue'
 import UCollapsible from './Collapsible.vue'
 
-const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
+const props = withDefaults(defineProps<NavigationMenuProps<I>>(), {
   orientation: 'horizontal',
   delayDuration: 0,
   labelKey: 'label'
@@ -106,7 +103,15 @@ const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'delayDuration', 'skipDelayDuration', 'orientation'), emits)
+const rootProps = useForwardPropsEmits(reactive({
+  as: props.as,
+  modelValue: props.modelValue,
+  defaultValue: props.defaultValue,
+  delayDuration: props.delayDuration,
+  skipDelayDuration: props.skipDelayDuration,
+  orientation: props.orientation
+}), emits)
+
 const contentProps = toRef(() => props.content)
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, active?: boolean, index: number }>()
@@ -174,7 +179,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               @select="item.onSelect"
             >
               <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active, disabled: !!item.disabled })">
-                <ReuseItemTemplate :item="item" :active="active" :index="index" />
+                <ReuseItemTemplate :item="(item as T)" :active="active" :index="index" />
               </ULinkBase>
             </component>
 
@@ -210,7 +215,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
                   <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
                     <ULinkBase v-bind="childSlotProps" :class="ui.link({ class: [props.ui?.link, childItem.class], active: childActive, disabled: !!childItem.disabled })">
-                      <ReuseItemTemplate :item="childItem" :active="childActive" :index="childIndex" />
+                      <ReuseItemTemplate :item="(childItem as T)" :active="childActive" :index="childIndex" />
                     </ULinkBase>
                   </NavigationMenuLink>
                 </ULink>
