@@ -17,11 +17,11 @@
         :ui="uiRadio"
         @change="onUpdate(option.value)"
       >
-        <template #label>
+        <template v-if="$slots.label" #label>
           <slot name="label" v-bind="{ option, selected: option.selected }" />
         </template>
 
-        <template #help>
+        <template v-if="$slots.help" #help>
           <slot name="help" v-bind="{ option, selected: option.selected }" />
         </template>
       </URadio>
