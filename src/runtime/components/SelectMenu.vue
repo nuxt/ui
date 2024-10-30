@@ -181,7 +181,7 @@ function displayValue(value: T | T[]): string {
 }
 
 function filterFunction(
-  inputItems: ArrayOrWrapped<T> = groups.value.flatMap(group => group) as ArrayOrWrapped<T>,
+  inputItems: ArrayOrWrapped<T> = items.value as ArrayOrWrapped<T>,
   filterSearchTerm: string = searchTerm.value,
   comparator = (item: any, term: string) => String(item).search(new RegExp(term, 'i')) !== -1
 ): ArrayOrWrapped<T> {
@@ -209,20 +209,16 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-const filteredGroups = computed(() => groups.value.map(group => filterFunction(group as ArrayOrWrapped<T>)) as SelectMenuItem[][])
-
 const creatable = computed(() => {
   if (!props.creatable) {
     return false
   }
 
   const filteredItems = filterFunction()
-  const newItem = searchTerm.value
-    ? {
-        item: props.valueKey ? { [props.valueKey]: searchTerm.value, [props.labelKey ?? 'label']: searchTerm.value } : searchTerm.value,
-        position: ((typeof props.creatable === 'object' && props.creatable.placement) || 'bottom') as 'top' | 'bottom'
-      }
-    : false
+  const newItem = searchTerm.value && {
+    item: props.valueKey ? { [props.valueKey]: searchTerm.value, [props.labelKey ?? 'label']: searchTerm.value } : searchTerm.value,
+    position: ((typeof props.creatable === 'object' && props.creatable.placement) || 'bottom') as 'top' | 'bottom'
+  }
 
   if ((typeof props.creatable === 'object' && props.creatable.when === 'always') || props.creatable === 'always') {
     return (filteredItems.length === 1 && filterFunction(filteredItems, searchTerm.value, (item, term) => String(item) === term).length === 1) ? false : newItem
@@ -231,20 +227,11 @@ const creatable = computed(() => {
   return filteredItems.length > 0 ? false : newItem
 })
 
-const rootItems = computed(() => {
-  const itemValues = items.value.map(item => props.valueKey && typeof item === 'object' ? get(item, props.valueKey as string) : item) as ArrayOrWrapped<T>
-  if (!creatable.value) {
-    return itemValues
-  }
-
-  const creatableValue = props.valueKey && typeof creatable.value.item === 'object' ? get(creatable.value.item, props.valueKey as string) : creatable.value.item
-
-  return [
-    ...(creatable.value.position === 'top' ? [creatableValue] : []),
-    ...itemValues,
-    ...(creatable.value.position === 'bottom' ? [creatableValue] : [])
-  ]
-})
+const rootItems = computed(() => [
+  ...(creatable.value && creatable.value.position === 'top' ? [creatable.value.item] : []),
+  ...filterFunction(),
+  ...(creatable.value && creatable.value.position === 'bottom' ? [creatable.value.item] : [])
+] as ArrayOrWrapped<T>)
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -339,7 +326,7 @@ function onUpdateOpen(value: boolean) {
             </ComboboxItem>
           </ComboboxGroup>
 
-          <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
+          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
                 {{ get(item, props.labelKey as string) }}
