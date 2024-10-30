@@ -1,7 +1,7 @@
 <script setup>
 const page = ref(1)
 
-const { data } = useLazyFetch(() => `https://jsonplaceholder.typicode.com/users?_start=${page.value}&_limit=10`, {
+const { data, status } = useLazyFetch(() => `https://jsonplaceholder.typicode.com/users?_start=${page.value}&_limit=10`, {
   transform: (v) => {
     return v.map((v, index) => ({
       ...v,
@@ -29,7 +29,7 @@ const columns = [
 
 <template>
   <div>
-    <UTable :rows="data" :columns="columns">
+    <UTable :rows="data" :columns="columns" :loading="status === 'pending'">
       <template #expand="{ row }">
         <div class="p-4">
           <pre>{{ row }}</pre>
