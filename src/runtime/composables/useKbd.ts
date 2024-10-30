@@ -31,7 +31,7 @@ export const kbdKeysMap = {
   end: '↘'
 }
 
-export const kbdKeysSpecificMap: Record<string, KbdSpecificMap> = {
+export const kbdKeysSpecificMap: Record<'macOS' | 'other', KbdSpecificMap> = {
   macOS: {
     meta: kbdKeysMap.command,
     alt: kbdKeysMap.option,
