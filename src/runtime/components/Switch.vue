@@ -15,7 +15,7 @@ type SwitchVariants = VariantProps<typeof switchTv>
 export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
   color?: SwitchVariants['color']

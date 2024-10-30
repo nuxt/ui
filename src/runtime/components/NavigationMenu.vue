@@ -12,12 +12,9 @@ const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<type
 
 const navigationMenu = tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })
 
-export interface NavigationMenuChildItem extends Omit<LinkProps, 'raw' | 'custom'> {
-  label: string
+export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'children'> {
+  /** Description is only used when `orientation` is `horizontal`. */
   description?: string
-  icon?: string
-  badge?: string | number | BadgeProps
-  onSelect?(e: Event): void
 }
 
 export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'> {
@@ -37,7 +34,7 @@ type NavigationMenuVariants = VariantProps<typeof navigationMenu>
 export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'modelValue' | 'skipDelayDuration'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
   /**
