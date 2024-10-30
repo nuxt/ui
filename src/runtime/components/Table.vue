@@ -90,7 +90,7 @@ export interface TableProps<T> {
 }
 
 type DynamicHeaderSlots<T, K = keyof T> = Record<string, T> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
-type DynamicCellSlots<T, K = keyof T> = Record<string, T> & Record<`${K extends string ? K : never}-data`, (props: CellContext<T, unknown>) => any>
+type DynamicCellSlots<T, K = keyof T> = Record<string, T> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
 
 export type TableSlots<T> = {
   expanded: (props: { row: Row<T> }) => any
@@ -215,7 +215,7 @@ defineExpose({
                 :data-pinned="cell.column.getIsPinned()"
                 :class="ui.td({ class: [props.ui?.td], pinned: !!cell.column.getIsPinned() })"
               >
-                <slot :name="`${cell.column.id}-data`" v-bind="cell.getContext()">
+                <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
                   <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
                 </slot>
               </td>

@@ -404,9 +404,9 @@ class: '!p-0'
 
 You can use slots to customize the header and data cells of the table.
 
-Use the `#<column>-header` slot to customize the header cell of a column. You will have access to the `column`, `header` and `table` properties in the slot scope.
+Use the `#<column>-header` slot to customize the header of a column. You will have access to the `column`, `header` and `table` properties in the slot scope.
 
-Use the `#<column>-data` slot to customize the data cell of a column. You will have access to the `cell`, `column`, `getValue`, `renderValue`, `row`, and `table` properties in the slot scope.
+Use the `#<column>-cell` slot to customize the cell of a column. You will have access to the `cell`, `column`, `getValue`, `renderValue`, `row`, and `table` properties in the slot scope.
 
 ::component-example
 ---
