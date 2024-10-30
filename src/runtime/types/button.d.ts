@@ -24,8 +24,6 @@ export interface Button extends Link {
   trailingIcon?: string
   trailing?: boolean
   leading?: boolean
-  to?: string | object
-  target?: string
   square?: boolean
   truncate?: boolean
 }
