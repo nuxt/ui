@@ -63,7 +63,7 @@
                     />
                     <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
 
-                    <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option :  accessor(option, optionAttribute) }}</span>
+                    <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : accessor(option, optionAttribute) }}</span>
                   </slot>
                 </div>
 
@@ -312,7 +312,7 @@ export default defineComponent({
         const option = options.value.find(option => option[props.valueAttribute] === props.modelValue)
         return option ? accessor(option, props.optionAttribute) : null
       } else {
-        return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue :  accessor(props.modelValue as Record<string, any>, props.optionAttribute)
+        return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(props.modelValue as Record<string, any>, props.optionAttribute)
       }
     })
 
@@ -445,7 +445,6 @@ export default defineComponent({
     function accessor<T extends Record<string, any>>(obj: T, key: string) {
       return get(obj, key)
     }
-
 
     function onQueryChange(event: any) {
       query.value = event.target.value
