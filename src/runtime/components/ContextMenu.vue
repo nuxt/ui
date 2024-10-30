@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { MaybeArrayOfArray, MaybeArrayOfArrayItem, Mutable, PartialString, SlotsFromItems, SuffixSlot } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
 
@@ -36,9 +36,9 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
 
 type ContextMenuVariants = VariantProps<typeof contextMenu>
 
-export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
+export interface ContextMenuProps<I> extends Omit<ContextMenuRootProps, 'dir'> {
   size?: ContextMenuVariants['size']
-  items?: T[] | T[][]
+  items?: I
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
@@ -70,28 +70,28 @@ export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type ContextMenuSlots<T extends { slot?: string }> = {
-  'default'(props?: {}): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+export type ContextMenuSlots<T extends ContextMenuItem> = { default(props: { }): any } & SuffixSlot<
+  'trailing' | 'leading' | 'label',
+  { item: SlotProps<Mutable<T>> } & (SlotsFromItems<T, 'slot'> extends infer S ? { [K in keyof S]: SlotProps<Mutable<S[K]>> } : never)
+>
 
 </script>
 
-<script setup lang="ts" generic="T extends ContextMenuItem">
+<script setup lang="ts" generic="I extends MaybeArrayOfArray<ContextMenuItem>">
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UContextMenuContent from './ContextMenuContent.vue'
 
-const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
+const props = withDefaults(defineProps<ContextMenuProps<I>>(), {
   portal: true,
   modal: true,
   labelKey: 'label'
 })
+
+type T = MaybeArrayOfArrayItem<I>
+
 const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 

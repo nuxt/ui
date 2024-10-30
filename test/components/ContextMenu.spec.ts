@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import ContextMenu, { type ContextMenuProps, type ContextMenuSlots } from '../../src/runtime/components/ContextMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/context-menu'
+import { expectSlotProps } from '../utils/types'
 
 // FIXME: Can't force open state
 describe('ContextMenu', () => {
@@ -77,5 +78,37 @@ describe('ContextMenu', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContextMenuProps<typeof items[number][number]>, slots?: Partial<ContextMenuSlots<any>> }) => {
     const html = await ComponentRender(nameOrHtml, options, ContextMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  test('should have the correct types', () => {
+    // normal
+    expectSlotProps('item', () => ContextMenu({
+      items: [{ label: 'foo', value: 'bar' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // groups
+    expectSlotProps('item', () => ContextMenu({
+      items: [[{ label: 'foo', value: 'bar' }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // custom
+    expectSlotProps('item', () => ContextMenu({
+      items: [{ label: 'foo', value: 'bar', custom: 'nice' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+
+    // custom + groups
+    expectSlotProps('item', () => ContextMenu({
+      items: [[{ label: 'foo', value: 'bar', custom: 'nice' }], [{ label: 'foo', value: 'bar', custom: 1 }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string | number }, index: number, active?: boolean }>()
+
+    // custom + groups
+    expectSlotProps('foo', () => ContextMenu({
+      items: [[{ slot: 'foo', label: 'foo', value: 'bar' }] as const]
+    })).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number, active?: boolean }>()
+
+    // custom + groups
+    expectSlotProps('foo', () => ContextMenu({
+      items: [[{ slot: 'foo', label: 'foo', value: 'bar' }]] as const
+    })).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number, active?: boolean }>()
   })
 })

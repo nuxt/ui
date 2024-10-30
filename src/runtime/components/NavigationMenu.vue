@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
+import type { MaybeArrayOfArrayItem, MaybeArrayOfArray, PartialString, SlotsFromItems, Mutable, SuffixSlot } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -34,7 +34,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'> {
 
 type NavigationMenuVariants = VariantProps<typeof navigationMenu>
 
-export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'modelValue' | 'skipDelayDuration'> {
+export interface NavigationMenuProps<I> extends Pick<NavigationMenuRootProps, 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'modelValue' | 'skipDelayDuration'> {
   /**
    * The element or component this component should render as.
    * @defaultValue `div`
@@ -45,7 +45,7 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'd
    * @defaultValue appConfig.ui.icons.chevronDown
    */
   trailingIcon?: string
-  items?: T
+  items?: I
   color?: NavigationMenuVariants['color']
   variant?: NavigationMenuVariants['variant']
   /**
@@ -76,16 +76,14 @@ export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
 
-export type NavigationMenuSlots<T extends { slot?: string }> = {
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+export type NavigationMenuSlots<T extends NavigationMenuItem> = SuffixSlot<
+  'trailing' | 'leading',
+  { item: SlotProps<Mutable<T>> } & (SlotsFromItems<T, 'slot'> extends infer S ? { [K in keyof S]: SlotProps<Mutable<S[K]>> } : never)
+>
 
 </script>
 
-<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<NavigationMenuItem>">
+<script setup lang="ts" generic="I extends MaybeArrayOfArray<NavigationMenuItem>">
 import { computed, reactive, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, useForwardPropsEmits } from 'radix-vue'
 import { createReusableTemplate } from '@vueuse/core'
@@ -103,6 +101,9 @@ const props = withDefaults(defineProps<NavigationMenuProps<I>>(), {
   delayDuration: 0,
   labelKey: 'label'
 })
+
+type T = MaybeArrayOfArrayItem<I>
+
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
 
@@ -127,19 +128,19 @@ const ui = computed(() => navigationMenu({
   highlightColor: props.highlightColor || props.color
 }))
 
-const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as T[][] : [])
+const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as NavigationMenuItem[][] : [])
 </script>
 
 <template>
   <DefineItemTemplate v-slot="{ item, active, index }">
-    <slot :name="item.slot || 'item'" :item="(item as T)" :index="index">
-      <slot :name="item.slot ? `${item.slot}-leading` : 'item-leading'" :item="(item as T)" :active="active" :index="index">
+    <slot :name="item.slot || 'item'" :item="item" :index="index">
+      <slot :name="item.slot ? `${item.slot}-leading` : 'item-leading'" :item="item" :active="active" :index="index">
         <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
         <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active, disabled: !!item.disabled })" />
       </slot>
 
       <span v-if="get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label` : 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
-        <slot :name="item.slot ? `${item.slot}-label` : 'item-label'" :item="(item as T)" :active="active" :index="index">
+        <slot :name="item.slot ? `${item.slot}-label` : 'item-label'" :item="item" :active="active" :index="index">
           {{ get(item, props.labelKey as string) }}
         </slot>
 
@@ -147,7 +148,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
       </span>
 
       <span v-if="item.badge || item.children?.length || !!slots[item.slot ? `${item.slot}-trailing` : 'item-trailing']" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
-        <slot :name="item.slot ? `${item.slot}-trailing` : 'item-trailing'" :item="(item as T)" :active="active" :index="index">
+        <slot :name="item.slot ? `${item.slot}-trailing` : 'item-trailing'" :item="item" :active="active" :index="index">
           <UBadge
             v-if="item.badge"
             color="neutral"
@@ -182,7 +183,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               @select="item.onSelect"
             >
               <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active, disabled: !!item.disabled })">
-                <ReuseItemTemplate :item="(item as T)" :active="active" :index="index" />
+                <ReuseItemTemplate :item="item" :active="active" :index="index" />
               </ULinkBase>
             </component>
 
@@ -218,7 +219,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
                   <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
                     <ULinkBase v-bind="childSlotProps" :class="ui.link({ class: [props.ui?.link, childItem.class], active: childActive, disabled: !!childItem.disabled })">
-                      <ReuseItemTemplate :item="(childItem as T)" :active="childActive" :index="childIndex" />
+                      <ReuseItemTemplate :item="childItem" :active="childActive" :index="childIndex" />
                     </ULinkBase>
                   </NavigationMenuLink>
                 </ULink>

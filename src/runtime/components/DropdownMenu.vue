@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString, SuffixSlot, SlotsFromItems } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -36,9 +36,9 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
-export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
+export interface DropdownMenuProps<I> extends Omit<DropdownMenuRootProps, 'dir'> {
   size?: DropdownMenuVariants['size']
-  items?: T[] | T[][]
+  items?: I
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
@@ -78,29 +78,29 @@ export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<T extends { slot?: string }> = {
-  'default'(props: { open: boolean }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+export type DropdownMenuSlots<T extends DropdownMenuItem> = { default(props: { open: boolean }): any } & SuffixSlot<
+  'trailing' | 'leading' | 'label',
+  { item: SlotProps<Mutable<T>> } & (SlotsFromItems<T, 'slot'> extends infer S ? { [K in keyof S]: SlotProps<Mutable<S[K]>> } : never)
+>
 
 </script>
 
-<script setup lang="ts" generic="T extends DropdownMenuItem">
+<script setup lang="ts" generic="I extends MaybeArrayOfArray<DropdownMenuItem>">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'radix-vue'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, type Mutable } from '@vueuse/core'
 import { omit } from '../utils'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
-const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
+const props = withDefaults(defineProps<DropdownMenuProps<I>>(), {
   portal: true,
   modal: true,
   labelKey: 'label'
 })
+
+type T = MaybeArrayOfArrayItem<I>
+
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 

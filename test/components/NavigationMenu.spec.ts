@@ -120,7 +120,17 @@ describe('NavigationMenu', () => {
 
     // custom + groups
     expectSlotProps('item', () => NavigationMenu({
-      items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+      items: [[{ label: 'foo', value: 'bar', custom: 'nice' }], [{ label: 'foo', value: 'bar', custom: 1 }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string | number }, index: number, active?: boolean }>()
+
+    // custom + groups
+    expectSlotProps('foo', () => NavigationMenu({
+      items: [[{ slot: 'foo', label: 'foo', value: 'bar' }] as const]
+    })).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number, active?: boolean }>()
+
+    // custom + groups
+    expectSlotProps('foo', () => NavigationMenu({
+      items: [[{ slot: 'foo', label: 'foo', value: 'bar' }]] as const
+    })).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number, active?: boolean }>()
   })
 })

@@ -3,11 +3,12 @@ import { tv } from 'tailwind-variants'
 import type { ContextMenuContentProps as RadixContextMenuContentProps, ContextMenuContentEmits as RadixContextMenuContentEmits } from 'radix-vue'
 import theme from '#build/ui/context-menu'
 import type { KbdProps, AvatarProps, ContextMenuItem, ContextMenuSlots } from '../types'
+import type { MaybeArrayOfArray, MaybeArrayOfArrayItem } from '../types/utils'
 
 const _contextMenu = tv(theme)()
 
-interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
-  items?: T[] | T[][]
+interface ContextMenuContentProps<I> extends Omit<RadixContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+  items?: I
   portal?: boolean
   sub?: boolean
   labelKey: string
@@ -21,7 +22,7 @@ interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 
 interface ContextMenuContentEmits extends RadixContextMenuContentEmits {}
 </script>
 
-<script setup lang="ts" generic="T extends ContextMenuItem">
+<script setup lang="ts" generic="I extends MaybeArrayOfArray<ContextMenuItem>">
 import { computed } from 'vue'
 import { ContextMenu } from 'radix-vue/namespaced'
 import { useForwardPropsEmits } from 'radix-vue'
@@ -35,7 +36,9 @@ import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
 
-const props = defineProps<ContextMenuContentProps<T>>()
+type T = MaybeArrayOfArrayItem<I>
+
+const props = defineProps<ContextMenuContentProps<I>>()
 const emits = defineEmits<ContextMenuContentEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
@@ -45,20 +48,20 @@ const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem, active?: boolean, index: number }>()
 
-const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as T[][] : [])
+const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as ContextMenuItem[][] : [])
 </script>
 
 <template>
   <DefineItemTemplate v-slot="{ item, active, index }">
-    <slot :name="item.slot || 'item'" :item="(item as T)" :index="index">
-      <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="(item as T)" :active="active" :index="index">
+    <slot :name="item.slot || 'item'" :item="item" :index="index">
+      <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="active" :index="index">
         <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, loading: true })" />
         <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, active })" />
         <UAvatar v-else-if="item.avatar" :size="((props.uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: uiOverride?.itemLeadingAvatar, active })" />
       </slot>
 
       <span v-if="get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.itemLabel({ class: uiOverride?.itemLabel, active })">
-        <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="(item as T)" :active="active" :index="index">
+        <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" :item="item" :active="active" :index="index">
           {{ get(item, props.labelKey as string) }}
         </slot>
 
@@ -66,7 +69,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
       </span>
 
       <span :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
-        <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="(item as T)" :active="active" :index="index">
+        <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" :item="item" :active="active" :index="index">
           <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon({ class: uiOverride?.itemTrailingIcon, active })" />
           <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: uiOverride?.itemTrailingKbds })">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.uiOverride?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
