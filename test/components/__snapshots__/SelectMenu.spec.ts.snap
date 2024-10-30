@@ -103,7 +103,7 @@ exports[`SelectMenu > renders with class correctly 1`] = `
 <!---->"
 `;
 
-exports[`SelectMenu > renders with creatable correctly 1`] = `
+exports[`SelectMenu > renders with create-item-label slot correctly 1`] = `
 "<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] pe-9" style="pointer-events: auto;" dir="ltr">
   <!--v-if--><span class="truncate text-[var(--ui-text-dimmed)]"> </span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-heroicons:chevron-down-20-solid shrink-0 text-[var(--ui-text-dimmed)] size-5" aria-hidden="true"></span></span>
 </button>
@@ -122,7 +122,9 @@ exports[`SelectMenu > renders with creatable correctly 1`] = `
         <div id="radix-vue-combobox-option-v-0-0-9" role="option" tabindex="-1" aria-labelledby="radix-vue-combobox-item-v-0-0-8" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-radix-vue-combobox-item=""><span class="iconify i-heroicons:check-circle shrink-0 text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] transition-colors size-5" aria-hidden="true"></span><span class="truncate">Done</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
         <div id="radix-vue-combobox-option-v-0-0-11" role="option" tabindex="-1" aria-labelledby="radix-vue-combobox-item-v-0-0-10" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-radix-vue-combobox-item=""><span class="iconify i-heroicons:x-circle shrink-0 text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] transition-colors size-5" aria-hidden="true"></span><span class="truncate">Canceled</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
       </div>
-      <!--v-if-->
+      <div role="group" aria-labelledby="radix-vue-combobox-group-v-0-0-12" class="p-1 isolate">
+        <div id="radix-vue-combobox-option-v-0-0-14" role="option" tabindex="-1" aria-labelledby="radix-vue-combobox-item-v-0-0-13" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-radix-vue-combobox-item=""><span class="truncate">Create item slot</span></div>
+      </div>
     </div>
     <style>
       /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
