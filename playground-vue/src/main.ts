@@ -1,4 +1,4 @@
-import { createApp, ref } from 'vue'
+import { createApp, defineAsyncComponent, ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import uiPlugin from '@nuxt/ui/vue-plugin'
 
