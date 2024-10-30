@@ -53,7 +53,6 @@ const ui = computed(() => badge({
 defineSlots<BadgeSlots>()
 </script>
 
-
 <template>
   <Primitive :as="as" :class="ui.base({ class: [props.class, props.ui?.base] })">
     <slot name="leading">
@@ -62,7 +61,7 @@ defineSlots<BadgeSlots>()
     </slot>
 
     <slot>
-       <span v-if="label" :class="ui.label({ class: props.ui?.label })">
+      <span v-if="label" :class="ui.label({ class: props.ui?.label })">
         {{ label }}
       </span>
     </slot>
