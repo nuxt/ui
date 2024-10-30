@@ -104,8 +104,8 @@ exports[`SelectMenu > renders with class correctly 1`] = `
 `;
 
 exports[`SelectMenu > renders with creatable correctly 1`] = `
-"<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] pr-9" style="pointer-events: auto;" dir="ltr">
-  <!--v-if--><span class="truncate text-[var(--ui-text-dimmed)]"> </span><span class="absolute inset-y-0 end-0 flex items-center pr-2.5"><span class="iconify i-heroicons:chevron-down-20-solid shrink-0 text-[var(--ui-text-dimmed)] size-5" aria-hidden="true"></span></span>
+"<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] pe-9" style="pointer-events: auto;" dir="ltr">
+  <!--v-if--><span class="truncate text-[var(--ui-text-dimmed)]"> </span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-heroicons:chevron-down-20-solid shrink-0 text-[var(--ui-text-dimmed)] size-5" aria-hidden="true"></span></span>
 </button>
 <!--teleport start-->
 
