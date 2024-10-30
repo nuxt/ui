@@ -31,7 +31,7 @@ export interface BadgeSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import UIcon from './Icon.vue'
