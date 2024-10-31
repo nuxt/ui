@@ -122,6 +122,7 @@ const slots = defineSlots<SelectSlots<T>>()
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
+const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -241,7 +242,8 @@ function onUpdateOpen(value: boolean) {
             </template>
           </SelectGroup>
         </SelectViewport>
-        <SelectArrow v-if="props.arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
+
+        <SelectArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </SelectContent>
     </SelectPortal>
   </SelectRoot>
