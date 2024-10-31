@@ -79,7 +79,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'mult
    * @defaultValue appConfig.ui.icons.close
    */
   closeIcon?: string
-  groups?: G
+  groups?: MaybeReadonlyArray<G>
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
    * @defaultValue {
@@ -106,19 +106,22 @@ export type CommandPaletteEmits<T> = ComboboxRootEmits<T>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type CommandPaletteSlots<Groups extends MaybeReadonlyArray<CommandPaletteGroup<T>>, T extends CommandPaletteItem> = {
+type CommandPaletteDynamicSlots<G extends CommandPaletteGroup<T>, T extends CommandPaletteItem> =
+  (DynamicSlots<MaybeReadonlyArray<G>, 'leading' | 'label' | 'trailing', null> extends infer S ? {
+    [K in keyof S]: SlotProps<S[K] extends CommandPaletteGroup<infer U> ? Mutable<U> : never>
+  } : never)
+  & (DynamicSlots<MaybeReadonlyArray<G>[number]['items'], 'leading' | 'label' | 'trailing'> extends infer S ? {
+    [K in keyof S]: SlotProps<S[K]>
+  } : never)
+
+export type CommandPaletteSlots<G extends CommandPaletteGroup<T>, T extends CommandPaletteItem> = {
   empty(props: { searchTerm?: string }): any
   close(props: { ui: any }): any
-} & (DynamicSlots<Groups, 'leading' | 'label' | 'trailing', null> extends infer S ? {
-  [K in keyof S]: SlotProps<S[K] extends CommandPaletteGroup<infer U> ? Mutable<U> : never>
-} : never)
-& (DynamicSlots<Groups[number]['items'], 'leading' | 'label' | 'trailing'> extends infer S ? {
-  [K in keyof S]: SlotProps<S[K]>
-} : never) & Record<string, any>
+} & CommandPaletteDynamicSlots<G, T> & Record<string, any>
 
 </script>
 
-<script setup lang="ts" generic="GT extends CommandPaletteGroup<T>, G extends MaybeReadonlyArray<GT>, T extends CommandPaletteItem">
+<script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
 import { computed, reactive } from 'vue'
 import { ComboboxRoot, ComboboxInput, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxViewport, ComboboxGroup, ComboboxLabel, ComboboxItem, ComboboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
@@ -187,9 +190,9 @@ const items = computed(() => props.groups?.filter((group) => {
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
-function getGroupWithItems<G extends CommandPaletteGroup<T>>(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
+function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
   if (group?.postFilter && typeof group.postFilter === 'function') {
-    items = group.postFilter(searchTerm.value, items) as (T & { matches?: FuseResult<T>['matches'] })[]
+    items = group.postFilter(searchTerm.value, items)
   }
 
   return {
