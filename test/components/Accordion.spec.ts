@@ -67,9 +67,10 @@ describe('Accordion', () => {
       items: [{ label: 'foo', value: 'bar' }]
     })
 
-    expectSlotProps('content', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, open: boolean }>()
     expectSlotProps('leading', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, open: boolean }>()
+    expectSlotProps('default', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, open: boolean }>()
     expectSlotProps('trailing', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, open: boolean }>()
+    expectSlotProps('content', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, open: boolean }>()
     expectSlotProps('body', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, open: boolean }>()
 
     // custom + mixed
@@ -77,9 +78,10 @@ describe('Accordion', () => {
       items: [{ label: 'foo', value: 'bar', custom: 'nice' }, { label: 'baz' }, { label: 'foo', value: 'bar', custom: 1 }]
     })
 
-    expectSlotProps('content', test2).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, open: boolean }>()
     expectSlotProps('leading', test2).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, open: boolean }>()
+    expectSlotProps('default', test2).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, open: boolean }>()
     expectSlotProps('trailing', test2).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, open: boolean }>()
+    expectSlotProps('content', test2).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, open: boolean }>()
     expectSlotProps('body', test2).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, open: boolean }>()
 
     // custom  + internal const

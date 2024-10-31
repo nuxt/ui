@@ -48,7 +48,7 @@ export interface AccordionEmits extends AccordionRootEmits {}
 type SlotProps<T> = (props: { item: T, index: number, open: boolean }) => any
 
 export type AccordionSlots<Items> =
-  (DynamicSlots<Items, null, 'trailing' | 'leading' | 'body' | 'content'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never) & (DynamicSlots<Items, 'body', null> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never)
+  (DynamicSlots<Items, null, 'default' | 'trailing' | 'leading' | 'body' | 'content'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never) & (DynamicSlots<Items, 'body', null> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never)
 
 </script>
 
