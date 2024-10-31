@@ -30,7 +30,7 @@ export interface CommandPaletteItem {
   onSelect?(e?: Event): void
 }
 
-export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPaletteItem> {
+export interface CommandPaletteGroup<T> {
   id: string
   label?: string
   slot?: string
