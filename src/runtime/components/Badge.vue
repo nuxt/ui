@@ -12,7 +12,7 @@ const badge = tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })
 
 type BadgeVariants = VariantProps<typeof badge>
 
-export interface BadgeProps extends UseComponentIconsProps {
+export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
@@ -23,10 +23,13 @@ export interface BadgeProps extends UseComponentIconsProps {
   variant?: BadgeVariants['variant']
   size?: BadgeVariants['size']
   class?: any
+  ui?: Partial<typeof badge.slots>
 }
 
 export interface BadgeSlots {
+  leading(props?: {}): any
   default(props?: {}): any
+  trailing(props?: {}): any
 }
 </script>
 
@@ -39,18 +42,15 @@ import UIcon from './Icon.vue'
 const props = withDefaults(defineProps<BadgeProps>(), {
   as: 'span'
 })
+defineSlots<BadgeSlots>()
 
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const ui = computed(() => badge({
   color: props.color,
   variant: props.variant,
-  size: props.size,
-  leading: isLeading.value,
-  trailing: isTrailing.value
+  size: props.size
 }))
-
-defineSlots<BadgeSlots>()
 </script>
 
 <template>
