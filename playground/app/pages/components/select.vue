@@ -52,7 +52,7 @@ function getUserAvatar(value: string) {
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-48">
-      <USelect :items="items" placeholder="Search..." />
+      <USelect :items="items" placeholder="Search..." arrow />
     </div>
     <div class="flex items-center gap-2">
       <USelect

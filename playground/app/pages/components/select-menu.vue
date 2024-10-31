@@ -50,7 +50,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-48">
-      <USelectMenu :items="items" placeholder="Search..." />
+      <USelectMenu :items="items" placeholder="Search..." arrow />
     </div>
     <div class="flex items-center gap-2">
       <USelectMenu
