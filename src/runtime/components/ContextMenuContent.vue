@@ -136,8 +136,8 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
             @select="item.onSelect"
           >
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<ContextMenuItem, 'type'>)" custom>
-              <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.class], active })">
-                <ReuseItemTemplate :item="item" :active="active" :index="index" />
+              <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.class], active, color: item.color })">
+                <ReuseItemTemplate :item="item" :active="active" :color="item.color" :index="index" />
               </ULinkBase>
             </ULink>
           </ContextMenu.Item>

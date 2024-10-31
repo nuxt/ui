@@ -12,9 +12,12 @@ const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof
 
 const dropdownMenu = tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })
 
+type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
+
 export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
   icon?: string
+  color?: DropdownMenuVariants['color']
   avatar?: AvatarProps
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   kbds?: KbdProps['value'][] | KbdProps[]
@@ -33,8 +36,6 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   onSelect?(e: Event): void
   onUpdateChecked?(checked: boolean): void
 }
-
-type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
 export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
   size?: DropdownMenuVariants['size']
