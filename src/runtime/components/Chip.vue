@@ -41,8 +41,10 @@ export interface ChipSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive, Slot } from 'radix-vue'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ChipProps>(), {
   inset: false,
@@ -65,7 +67,9 @@ const ui = computed(() => chip({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <slot />
+    <Slot v-bind="$attrs">
+      <slot />
+    </Slot>
 
     <span v-if="show" :class="ui.base({ class: props.ui?.base })">
       <slot name="content">
