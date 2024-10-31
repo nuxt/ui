@@ -47,7 +47,7 @@ provide(buttonGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :class="buttonGroup({ orientation })">
+  <Primitive :as="as" :class="buttonGroup({ orientation, class: props.class })">
     <slot />
   </Primitive>
 </template>
