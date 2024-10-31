@@ -9,7 +9,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
-import type { DynamicSlotWithItems, MaybeReadonlyArray, PartialString } from '../types/utils'
+import type { DynamicSlots, MaybeReadonlyArray, PartialString } from '../types/utils'
 import type { Mutable } from '@vueuse/core'
 
 const appConfig = _appConfig as AppConfig & { ui: { commandPalette: Partial<typeof theme> } }
@@ -109,10 +109,10 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 export type CommandPaletteSlots<Groups extends MaybeReadonlyArray<CommandPaletteGroup<T>>, T extends CommandPaletteItem> = {
   empty(props: { searchTerm?: string }): any
   close(props: { ui: any }): any
-} & (DynamicSlotWithItems<Groups, 'leading' | 'label' | 'trailing', null> extends infer S ? {
+} & (DynamicSlots<Groups, 'leading' | 'label' | 'trailing', null> extends infer S ? {
   [K in keyof S]: SlotProps<S[K] extends CommandPaletteGroup<infer U> ? Mutable<U> : never>
 } : never)
-& (DynamicSlotWithItems<Groups[number]['items'], 'leading' | 'label' | 'trailing'> extends infer S ? {
+& (DynamicSlots<Groups[number]['items'], 'leading' | 'label' | 'trailing'> extends infer S ? {
   [K in keyof S]: SlotProps<S[K]>
 } : never) & Record<string, any>
 

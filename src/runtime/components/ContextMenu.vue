@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlotWithItems, MaybeArrayOfArray, PartialString } from '../types/utils'
+import type { DynamicSlots, MaybeArrayOfArray, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
 
@@ -70,7 +70,7 @@ export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type ContextMenuSlots<Items> = { default(props: { }): any } & DynamicSlotWithItems<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
+export type ContextMenuSlots<Items> = { default(props: { }): any } & DynamicSlots<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
 

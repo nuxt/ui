@@ -10,9 +10,6 @@ export type DeepPartial<T, O = any> = {
   [key: string]: O | TightMap<O>
 }
 
-export type DynamicSlots<T extends { slot?: string }, SlotProps, Slot = T['slot']> =
-  Record<string, SlotProps> & (Slot extends string ? Record<Slot, SlotProps> : Record<string, never>)
-
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>
   ? MaybeObject[Key]
   : never
@@ -58,7 +55,7 @@ export type MaybeArrayOfArray<T> = MaybeReadonlyArray<MaybeReadonlyArray<T>> | M
 export type MaybeArrayOfArrayItem<I> = I extends (infer U)[] ? U extends (infer V)[] ? V : U :
   I extends readonly (infer U)[] ? U extends readonly (infer V)[] ? V : U : never
 
-export type DynamicSlotWithItems<
+export type DynamicSlots<
   Items,
   Suffix extends string | null = '',
   I extends string | null = 'item',

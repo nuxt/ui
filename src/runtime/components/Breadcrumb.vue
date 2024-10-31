@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
 import type { AvatarProps, LinkProps } from '../types'
-import type { DynamicSlotWithItems, MaybeReadonlyArray, PartialString } from '../types/utils'
+import type { DynamicSlots, MaybeReadonlyArray, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 
@@ -41,7 +41,7 @@ export interface BreadcrumbProps<I> {
 
 type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
 
-export type BreadcrumbSlots<Items> = { separator(props?: {}): any } & DynamicSlotWithItems<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
+export type BreadcrumbSlots<Items> = { separator(props?: {}): any } & DynamicSlots<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
 

@@ -5,7 +5,7 @@ import type { AccordionRootProps, AccordionRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
-import type { DynamicSlotWithItems, MaybeReadonlyArray } from '../types/utils'
+import type { DynamicSlots, MaybeReadonlyArray } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
 
@@ -48,7 +48,7 @@ export interface AccordionEmits extends AccordionRootEmits {}
 type SlotProps<T> = (props: { item: T, index: number, open: boolean }) => any
 
 export type AccordionSlots<Items> =
-  (DynamicSlotWithItems<Items, null, 'trailing' | 'leading' | 'body' | 'content'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never) & (DynamicSlotWithItems<Items, 'body', null> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never)
+  (DynamicSlots<Items, null, 'trailing' | 'leading' | 'body' | 'content'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never) & (DynamicSlots<Items, 'body', null> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never)
 
 </script>
 

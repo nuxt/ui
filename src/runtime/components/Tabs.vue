@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
 import type { AvatarProps } from '../types'
-import type { DynamicSlotWithItems, MaybeReadonlyArray, PartialString } from '../types/utils'
+import type { DynamicSlots, MaybeReadonlyArray, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 
@@ -58,7 +58,7 @@ export interface TabsEmits extends TabsRootEmits<string | number> {}
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type TabsSlots<Items> = DynamicSlotWithItems<Items, null, 'leading' | 'trailing' | 'content' | 'default'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
+export type TabsSlots<Items> = DynamicSlots<Items, null, 'leading' | 'trailing' | 'content' | 'default'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
 

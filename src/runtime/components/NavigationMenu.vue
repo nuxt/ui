@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { MaybeArrayOfArray, PartialString, DynamicSlotWithItems } from '../types/utils'
+import type { MaybeArrayOfArray, PartialString, DynamicSlots } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -76,7 +76,7 @@ export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
 
-export type NavigationMenuSlots<Items> = DynamicSlotWithItems<Items, 'leading' | 'trailing'> extends infer S ?
+export type NavigationMenuSlots<Items> = DynamicSlots<Items, 'leading' | 'trailing'> extends infer S ?
     { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
