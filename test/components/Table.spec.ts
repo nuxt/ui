@@ -152,7 +152,12 @@ describe('Table', () => {
     ...loadingColors.map((loadingColor: string) => [`with loading color ${loadingColor}`, { props: { ...props, loading: true, loadingColor } }]),
     ...loadingAnimations.map((loadingAnimation: string) => [`with loading animation ${loadingAnimation}`, { props: { ...props, loading: true, loadingAnimation } }]),
     ['with class', { props: { ...props, class: 'absolute' } }],
-    ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }]
+    ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }],
+    // Slots
+    ['with header slot', { props, slots: { 'id-header': () => 'ID Header slot' } }],
+    ['with cell slot', { props, slots: { 'id-cell': () => 'ID Cell slot' } }],
+    ['with expanded slot', { props, slots: { expanded: () => 'Expanded slot' } }],
+    ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<typeof data[number]>, slots?: Partial<TableSlots<typeof data[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()
