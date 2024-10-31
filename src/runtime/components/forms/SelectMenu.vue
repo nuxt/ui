@@ -86,7 +86,7 @@
                     />
                     <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
 
-                    <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
+                    <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : accessor(option, optionAttribute) }}</span>
                   </slot>
                 </div>
 
@@ -100,7 +100,7 @@
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
                   <slot name="option-create" :option="createOption" :active="active" :selected="optionSelected">
-                    <span :class="uiMenu.option.create">Create "{{ createOption[optionAttribute] }}"</span>
+                    <span :class="uiMenu.option.create">Create "{{ typeof createOption === 'string' ? createOption : accessor(createOption, optionAttribute) }}"</span>
                   </slot>
                 </div>
               </li>
@@ -390,9 +390,9 @@ export default defineComponent({
         }
       } else if (props.modelValue !== undefined && props.modelValue !== null) {
         if (props.valueAttribute) {
-          return selected.value?.[props.optionAttribute] ?? null
+          return accessor(selected.value, props.optionAttribute) ?? null
         } else {
-          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
+          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(props.modelValue as Record<string, any>, props.optionAttribute)
         }
       }
 
@@ -489,6 +489,10 @@ export default defineComponent({
       return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     }
 
+    function accessor<T extends Record<string, any>>(obj: T, key: string) {
+      return get(obj, key)
+    }
+
     const filteredOptions = computed(() => {
       if (!query.value || debouncedSearch) {
         return options.value
@@ -517,7 +521,7 @@ export default defineComponent({
         return null
       }
       if (props.showCreateOptionWhen === 'always') {
-        const existingOption = filteredOptions.value.find(option => ['string', 'number'].includes(typeof option) ? option === query.value : option[props.optionAttribute] === query.value)
+        const existingOption = filteredOptions.value.find(option => ['string', 'number'].includes(typeof option) ? option === query.value : accessor(option, props.optionAttribute) === query.value)
         if (existingOption) {
           return null
         }
@@ -573,6 +577,7 @@ export default defineComponent({
       container,
       selected,
       label,
+      accessor,
       isLeading,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys
