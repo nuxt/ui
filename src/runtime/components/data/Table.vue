@@ -18,7 +18,7 @@
             />
           </th>
 
-          <th v-if="expand || expand" scope="col" :class="ui.tr.base">
+          <th v-if="expand" scope="col" :class="ui.tr.base">
             <span class="sr-only">Expand</span>
           </th>
 
