@@ -3,7 +3,6 @@
 import { ref, computed, toValue } from 'vue'
 import type { MaybeRef } from 'vue'
 import { useEventListener, useActiveElement, useDebounceFn } from '@vueuse/core'
-import { useKbd } from '../composables/useKbd'
 
 type Handler = (e?: any) => void
 
@@ -67,7 +66,6 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
   }
   const debouncedClearChainedInput = useDebounceFn(clearChainedInput, options.chainDelay ?? 800)
 
-  const { macOS } = useKbd()
   const activeElement = useActiveElement()
 
   const onKeyDown = (e: KeyboardEvent) => {
@@ -179,12 +177,6 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
         }
       }
       shortcut.chained = chained
-
-      // Convert Meta to Ctrl for non-MacOS
-      if (!macOS.value && shortcut.metaKey && !shortcut.ctrlKey) {
-        shortcut.metaKey = false
-        shortcut.ctrlKey = true
-      }
 
       // Retrieve handler function
       if (typeof shortcutConfig === 'function') {
