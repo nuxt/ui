@@ -315,7 +315,7 @@ componentProps:
 
 ### Expandable :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
 
-You can use the `v-model:expand` to enables row expansion functionality in the table component. It maintains an object containing an `openedRows` array, which tracks the indices of currently expanded rows.
+You can use the `v-model:expand` to enables row expansion functionality in the table component. It maintains an object containing an `openedRows` an array and `row` an object, which tracks the indices of currently expanded rows.
 
 When using the expand slot, you have access to the `row` property in the slot scope, which contains the data of the row that triggered the expand/collapse action. This allows you to customize the expanded content based on the row's data.
 
