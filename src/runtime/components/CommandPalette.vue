@@ -9,7 +9,8 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlotWithItems, MaybeReadonlyArray, PartialString } from '../types/utils'
+import type { Mutable } from '@vueuse/core'
 
 const appConfig = _appConfig as AppConfig & { ui: { commandPalette: Partial<typeof theme> } }
 
@@ -29,11 +30,11 @@ export interface CommandPaletteItem {
   onSelect?(e?: Event): void
 }
 
-export interface CommandPaletteGroup<T> {
+export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPaletteItem> {
   id: string
   label?: string
   slot?: string
-  items?: T[]
+  items?: MaybeReadonlyArray<T>
   /**
    * Wether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
    * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
@@ -78,7 +79,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'mult
    * @defaultValue appConfig.ui.icons.close
    */
   closeIcon?: string
-  groups?: G[]
+  groups?: G
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
    * @defaultValue {
@@ -105,22 +106,22 @@ export type CommandPaletteEmits<T> = ComboboxRootEmits<T>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: string }> = {
-  'empty'(props: { searchTerm?: string }): any
-  'close'(props: { ui: any }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-} & DynamicSlots<G, SlotProps<T>> & DynamicSlots<T, SlotProps<T>>
+export type CommandPaletteSlots<Groups extends MaybeReadonlyArray<CommandPaletteGroup<T>>, T extends CommandPaletteItem> = {
+  empty(props: { searchTerm?: string }): any
+  close(props: { ui: any }): any
+} & (DynamicSlotWithItems<Groups, 'leading' | 'label' | 'trailing', null> extends infer S ? {
+  [K in keyof S]: SlotProps<S[K] extends CommandPaletteGroup<infer U> ? Mutable<U> : never>
+} : never)
+& (DynamicSlotWithItems<Groups[number]['items'], 'leading' | 'label' | 'trailing'> extends infer S ? {
+  [K in keyof S]: SlotProps<S[K]>
+} : never) & Record<string, any>
 
 </script>
 
-<script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
-import { computed } from 'vue'
+<script setup lang="ts" generic="G extends MaybeReadonlyArray<CommandPaletteGroup<T>>, T extends CommandPaletteItem">
+import { computed, reactive } from 'vue'
 import { ComboboxRoot, ComboboxInput, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxViewport, ComboboxGroup, ComboboxLabel, ComboboxItem, ComboboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
-import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { omit, get } from '../utils'
@@ -142,8 +143,21 @@ const slots = defineSlots<CommandPaletteSlots<G, T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'selectedValue', 'resetSearchTermOnBlur'), emits)
-const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon', 'placeholder'))
+const rootProps = useForwardPropsEmits(reactive({
+  as: props.as,
+  multiple: props.multiple,
+  disabled: props.disabled,
+  modelValue: props.modelValue,
+  defaultValue: props.defaultValue,
+  selectedValue: props.selectedValue,
+  resetSearchTermOnBlur: props.resetSearchTermOnBlur
+}), emits)
+
+const inputProps = useForwardProps(reactive({
+  loading: props.loading,
+  loadingIcon: props.loadingIcon,
+  placeholder: props.placeholder
+}))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = commandPalette()
@@ -173,9 +187,9 @@ const items = computed(() => props.groups?.filter((group) => {
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
-function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
+function getGroupWithItems<G extends CommandPaletteGroup<T>>(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
   if (group?.postFilter && typeof group.postFilter === 'function') {
-    items = group.postFilter(searchTerm.value, items)
+    items = group.postFilter(searchTerm.value, items) as (T & { matches?: FuseResult<T>['matches'] })[]
   }
 
   return {
@@ -213,7 +227,7 @@ const groups = computed(() => {
   }).filter(group => !!group)
 
   const nonFuseGroups = props.groups?.filter(group => group.filter === false && group.items?.length).map((group) => {
-    return getGroupWithItems(group, group.items || [])
+    return getGroupWithItems(group, (group.items || []) as (T & { matches?: FuseResult<T>['matches'] })[])
   }) || []
 
   return [

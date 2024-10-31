@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
 import type { AvatarProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlotWithItems, MaybeReadonlyArray, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 
@@ -25,13 +25,13 @@ export interface TabsItem {
 
 type TabsVariants = VariantProps<typeof tabs>
 
-export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode'> {
+export interface TabsProps<I> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
-  items?: T[]
+  items?: I
   color?: TabsVariants['color']
   variant?: TabsVariants['variant']
   size?: TabsVariants['size']
@@ -58,32 +58,33 @@ export interface TabsEmits extends TabsRootEmits<string | number> {}
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type TabsSlots<T extends { slot?: string }> = {
-  leading: SlotProps<T>
-  default: SlotProps<T>
-  trailing: SlotProps<T>
-  content: SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+export type TabsSlots<Items> = DynamicSlotWithItems<Items, null, 'leading' | 'trailing' | 'content' | 'default'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
 
-<script setup lang="ts" generic="T extends TabsItem">
-import { computed, toRef } from 'vue'
+<script setup lang="ts" generic="I extends MaybeReadonlyArray<TabsItem>">
+import { computed, reactive, toRef } from 'vue'
 import { defu } from 'defu'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
-import { reactivePick } from '@vueuse/core'
 import { get } from '../utils'
 
-const props = withDefaults(defineProps<TabsProps<T>>(), {
+const props = withDefaults(defineProps<TabsProps<I>>(), {
   content: true,
   defaultValue: '0',
   orientation: 'horizontal',
   labelKey: 'label'
 })
 const emits = defineEmits<TabsEmits>()
-const slots = defineSlots<TabsSlots<T>>()
+const slots = defineSlots<TabsSlots<I>>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
+const rootProps = useForwardPropsEmits(reactive({
+  as: props.as,
+  defaultValue: props.defaultValue,
+  orientation: props.orientation,
+  activationMode: props.activationMode,
+  modelValue: props.modelValue
+}), emits)
+
 const contentProps = toRef(() => defu(props.content || {}, { forceMount: true }) as TabsContentProps)
 
 const ui = computed(() => tabs({

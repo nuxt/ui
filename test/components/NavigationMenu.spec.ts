@@ -104,33 +104,55 @@ describe('NavigationMenu', () => {
 
   test('should have the correct types', () => {
     // normal
-    expectSlotProps('item', () => NavigationMenu({
+    const test1 = () => NavigationMenu({
       items: [{ label: 'foo', value: 'bar' }]
-    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    })
+
+    expectSlotProps('item', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    expectSlotProps('item-leading', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    expectSlotProps('item-trailing', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
 
     // groups
-    expectSlotProps('item', () => NavigationMenu({
+    const test2 = () => NavigationMenu({
       items: [[{ label: 'foo', value: 'bar' }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    })
 
-    // custom
-    expectSlotProps('item', () => NavigationMenu({
-      items: [{ label: 'foo', value: 'bar', custom: 'nice' }]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+    expectSlotProps('item', test2).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    expectSlotProps('item-leading', test2).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    expectSlotProps('item-trailing', test2).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
 
-    // custom + groups
-    expectSlotProps('item', () => NavigationMenu({
-      items: [[{ label: 'foo', value: 'bar', custom: 'nice' }], [{ label: 'foo', value: 'bar', custom: 1 }]]
-    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string | number }, index: number, active?: boolean }>()
+    // custom + mixed
+    const test3 = () => NavigationMenu({
+      items: [{ label: 'foo', value: 'bar', custom: 'nice' }, { label: 'baz' }, { label: 'foo', value: 'bar', custom: 1 }]
+    })
 
-    // custom + groups
-    expectSlotProps('foo', () => NavigationMenu({
-      items: [[{ slot: 'foo', label: 'foo', value: 'bar' }] as const]
-    })).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number, active?: boolean }>()
+    expectSlotProps('item', test3).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, active?: boolean }>()
+    expectSlotProps('item-leading', test3).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, active?: boolean }>()
+    expectSlotProps('item-trailing', test3).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, active?: boolean }>()
 
-    // custom + groups
-    expectSlotProps('foo', () => NavigationMenu({
-      items: [[{ slot: 'foo', label: 'foo', value: 'bar' }]] as const
-    })).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number, active?: boolean }>()
+    // custom + groups + mixed
+    const test4 = () => NavigationMenu({
+      items: [[{ label: 'foo', value: 'bar' }], [{ label: 'foo', value: 'bar', custom: 1 }], [{ custom: 'a', label: 'foo', value: 'bar' }]]
+    })
+
+    expectSlotProps('item', test4).toEqualTypeOf<{ item: { label: string, value: string, custom?: string | number }, index: number, active?: boolean }>()
+
+    // custom + groups + internal const
+    const test5 = () => NavigationMenu({
+      items: [[{ slot: 'foo', label: 'foo', value: 'bar' }] as const, [{ slot: 'baz' }] as const]
+    })
+
+    expectSlotProps('item', test5).toEqualTypeOf<{ item: { slot: 'foo' | 'baz', label?: 'foo', value?: 'bar' }, index: number, active?: boolean }>()
+    expectSlotProps('foo', test5).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number, active?: boolean }>()
+    expectSlotProps('baz', test5).toEqualTypeOf<{ item: { slot: 'baz' }, index: number, active?: boolean }>()
+
+    // custom + groups + external const
+    const test6 = () => NavigationMenu({
+      items: [[{ slot: 'foo', label: 'foo', value: 'bar' }], [{ slot: 'salut', value: '' }]] as const
+    })
+
+    expectSlotProps('item', test6).toEqualTypeOf<{ item: { slot: 'salut' | 'foo', value: '' | 'bar', label?: 'foo' }, index: number, active?: boolean }>()
+    expectSlotProps('foo', test6).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number, active?: boolean }>()
+    expectSlotProps('salut', test6).toEqualTypeOf<{ item: { slot: 'salut', value: '' }, index: number, active?: boolean }>()
   })
 })

@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { MaybeArrayOfArrayItem, MaybeArrayOfArray, PartialString, SlotsFromItems, Mutable, SuffixSlot } from '../types/utils'
+import type { MaybeArrayOfArray, PartialString, DynamicSlotWithItems } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -76,10 +76,8 @@ export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
 
-export type NavigationMenuSlots<T extends NavigationMenuItem> = SuffixSlot<
-  'trailing' | 'leading',
-  { item: SlotProps<Mutable<T>> } & (SlotsFromItems<T, 'slot'> extends infer S ? { [K in keyof S]: SlotProps<Mutable<S[K]>> } : never)
->
+export type NavigationMenuSlots<Items> = DynamicSlotWithItems<Items, 'leading' | 'trailing'> extends infer S ?
+    { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
 
@@ -102,10 +100,8 @@ const props = withDefaults(defineProps<NavigationMenuProps<I>>(), {
   labelKey: 'label'
 })
 
-type T = MaybeArrayOfArrayItem<I>
-
 const emits = defineEmits<NavigationMenuEmits>()
-const slots = defineSlots<NavigationMenuSlots<T>>()
+const slots = defineSlots<NavigationMenuSlots<I>>()
 
 const rootProps = useForwardPropsEmits(reactive({
   as: props.as,

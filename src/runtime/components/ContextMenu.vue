@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { MaybeArrayOfArray, MaybeArrayOfArrayItem, Mutable, PartialString, SlotsFromItems, SuffixSlot } from '../types/utils'
+import type { DynamicSlotWithItems, MaybeArrayOfArray, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
 
@@ -70,10 +70,7 @@ export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type ContextMenuSlots<T extends ContextMenuItem> = { default(props: { }): any } & SuffixSlot<
-  'trailing' | 'leading' | 'label',
-  { item: SlotProps<Mutable<T>> } & (SlotsFromItems<T, 'slot'> extends infer S ? { [K in keyof S]: SlotProps<Mutable<S[K]>> } : never)
->
+export type ContextMenuSlots<Items> = { default(props: { }): any } & DynamicSlotWithItems<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
 
@@ -90,14 +87,12 @@ const props = withDefaults(defineProps<ContextMenuProps<I>>(), {
   labelKey: 'label'
 })
 
-type T = MaybeArrayOfArrayItem<I>
-
 const emits = defineEmits<ContextMenuEmits>()
-const slots = defineSlots<ContextMenuSlots<T>>()
+const slots = defineSlots<ContextMenuSlots<I>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content as ContextMenuContentProps)
-const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<ContextMenuItem>[string]>
 
 const ui = computed(() => contextMenu({
   size: props.size

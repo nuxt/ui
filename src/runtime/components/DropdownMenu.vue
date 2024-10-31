@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString, SuffixSlot, SlotsFromItems } from '../types/utils'
+import type { MaybeArrayOfArray, PartialString, DynamicSlotWithItems } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -78,10 +78,7 @@ export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<T extends DropdownMenuItem> = { default(props: { open: boolean }): any } & SuffixSlot<
-  'trailing' | 'leading' | 'label',
-  { item: SlotProps<Mutable<T>> } & (SlotsFromItems<T, 'slot'> extends infer S ? { [K in keyof S]: SlotProps<Mutable<S[K]>> } : never)
->
+export type DropdownMenuSlots<Items> = { default(props: { open: boolean }): any } & DynamicSlotWithItems<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
 
@@ -89,7 +86,7 @@ export type DropdownMenuSlots<T extends DropdownMenuItem> = { default(props: { o
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'radix-vue'
-import { reactivePick, type Mutable } from '@vueuse/core'
+import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
@@ -99,15 +96,13 @@ const props = withDefaults(defineProps<DropdownMenuProps<I>>(), {
   labelKey: 'label'
 })
 
-type T = MaybeArrayOfArrayItem<I>
-
 const emits = defineEmits<DropdownMenuEmits>()
-const slots = defineSlots<DropdownMenuSlots<T>>()
+const slots = defineSlots<DropdownMenuSlots<I>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
-const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<DropdownMenuItem>[string]>
 
 const ui = computed(() => dropdownMenu({
   size: props.size

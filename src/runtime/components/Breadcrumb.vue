@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
 import type { AvatarProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlotWithItems, MaybeReadonlyArray, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 
@@ -18,13 +18,13 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   slot?: string
 }
 
-export interface BreadcrumbProps<T> {
+export interface BreadcrumbProps<I> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
-  items?: T[]
+  items?: I
   /**
    * The icon to use as a separator.
    * @defaultValue appConfig.ui.icons.chevronRight
@@ -41,17 +41,11 @@ export interface BreadcrumbProps<T> {
 
 type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
 
-export type BreadcrumbSlots<T extends { slot?: string }> = {
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-  'separator'(props?: {}): any
-} & DynamicSlots<T, SlotProps<T>>
+export type BreadcrumbSlots<Items> = { separator(props?: {}): any } & DynamicSlotWithItems<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
 
-<script setup lang="ts" generic="T extends BreadcrumbItem">
+<script setup lang="ts" generic="I extends MaybeReadonlyArray<BreadcrumbItem>">
 import { Primitive } from 'radix-vue'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
@@ -61,10 +55,10 @@ import UAvatar from './Avatar.vue'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 
-const props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
+const props = withDefaults(defineProps<BreadcrumbProps<I>>(), {
   labelKey: 'label'
 })
-const slots = defineSlots<BreadcrumbSlots<T>>()
+const slots = defineSlots<BreadcrumbSlots<I>>()
 
 const appConfig = useAppConfig()
 

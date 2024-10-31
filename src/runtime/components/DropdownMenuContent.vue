@@ -4,7 +4,7 @@ import { tv } from 'tailwind-variants'
 import type { DropdownMenuContentProps as RadixDropdownMenuContentProps, DropdownMenuContentEmits as RadixDropdownMenuContentEmits } from 'radix-vue'
 import theme from '#build/ui/dropdown-menu'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
-import type { MaybeArrayOfArray, MaybeArrayOfArrayItem } from '../types/utils'
+import type { MaybeArrayOfArray } from '../types/utils'
 
 const _dropdownMenu = tv(theme)()
 
@@ -22,7 +22,7 @@ interface DropdownMenuContentProps<I> extends Omit<RadixDropdownMenuContentProps
 
 interface DropdownMenuContentEmits extends RadixDropdownMenuContentEmits {}
 
-type DropdownMenuContentSlots<T extends { slot?: string }> = Omit<DropdownMenuSlots<T>, 'default'> & {
+type DropdownMenuContentSlots<Items> = Omit<DropdownMenuSlots<Items>, 'default'> & {
   default(props?: {}): any
 }
 
@@ -42,15 +42,13 @@ import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
 
-type T = MaybeArrayOfArrayItem<I>
-
 const props = defineProps<DropdownMenuContentProps<I>>()
 const emits = defineEmits<DropdownMenuContentEmits>()
-const slots = defineSlots<DropdownMenuContentSlots<T>>()
+const slots = defineSlots<DropdownMenuContentSlots<I>>()
 
 const appConfig = useAppConfig()
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'class', 'ui'), emits)
-const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuContentSlots<T>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuContentSlots<DropdownMenuItem>[string]>
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
 

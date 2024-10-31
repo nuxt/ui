@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 import type { ContextMenuContentProps as RadixContextMenuContentProps, ContextMenuContentEmits as RadixContextMenuContentEmits } from 'radix-vue'
 import theme from '#build/ui/context-menu'
 import type { KbdProps, AvatarProps, ContextMenuItem, ContextMenuSlots } from '../types'
-import type { MaybeArrayOfArray, MaybeArrayOfArrayItem } from '../types/utils'
+import type { MaybeArrayOfArray } from '../types/utils'
 
 const _contextMenu = tv(theme)()
 
@@ -36,15 +36,13 @@ import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
 
-type T = MaybeArrayOfArrayItem<I>
-
 const props = defineProps<ContextMenuContentProps<I>>()
 const emits = defineEmits<ContextMenuContentEmits>()
-const slots = defineSlots<ContextMenuSlots<T>>()
+const slots = defineSlots<ContextMenuSlots<I>>()
 
 const appConfig = useAppConfig()
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'class', 'ui'), emits)
-const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<ContextMenuItem>[string]>
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem, active?: boolean, index: number }>()
 
