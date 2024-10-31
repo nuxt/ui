@@ -123,7 +123,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, watch, defineComponent } from 'vue'
+import { ref, computed, toRef, watch, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
 import {
   Combobox as HCombobox,
@@ -551,6 +551,10 @@ export default defineComponent({
     })
 
     function onUpdate(value: any) {
+      if (toRaw(props.modelValue) === value) {
+        return
+      }
+
       emit('update:modelValue', value)
       emit('change', value)
       emitFormChange()
