@@ -18,7 +18,7 @@
             />
           </th>
 
-          <th v-if="$slots.expand" scope="col" :class="ui.tr.base">
+          <th v-if="expand || expand" scope="col" :class="ui.tr.base">
             <span class="sr-only">Expand</span>
           </th>
 
@@ -50,7 +50,7 @@
       </thead>
       <tbody :class="ui.tbody">
         <tr v-if="loadingState && loading && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + (expand ? 1 : 0)">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
                 <UIcon v-if="loadingState.icon" :name="loadingState.icon" :class="ui.loadingState.icon" aria-hidden="true" />
@@ -63,7 +63,7 @@
         </tr>
 
         <tr v-else-if="emptyState && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + (expand ? 1 : 0)">
             <slot name="empty-state">
               <div :class="ui.emptyState.wrapper">
                 <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
@@ -77,7 +77,7 @@
 
         <template v-else>
           <template v-for="(row, index) in rows" :key="index">
-            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
+            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
               <td v-if="modelValue" :class="ui.checkbox.padding">
                 <UCheckbox
                   :model-value="isSelected(row)"
@@ -89,13 +89,13 @@
               </td>
 
               <td
-                v-if="$slots.expand"
+                v-if="expand"
                 :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
               >
                 <UButton
                   :disabled="row.disabledExpand"
                   v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
-                  :ui="{ icon: { base: [ui.expand.icon, showOpenedRow(row) && 'rotate-180'].join(' ') } }"
+                  :ui="{ icon: { base: [ui.expand.icon, isExpanded(row) && 'rotate-180'].join(' ') } }"
                   @click.capture.stop="toggleOpened(row)"
                 />
               </td>
@@ -106,7 +106,7 @@
                 </slot>
               </td>
             </tr>
-            <tr v-if="showOpenedRow(row)">
+            <tr v-if="isExpanded(row)">
               <td colspan="100%">
                 <slot
                   name="expand"
@@ -123,7 +123,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
+import { computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType, AriaAttributes } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -134,7 +134,7 @@ import UProgress from '../elements/Progress.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, get } from '../../utils'
-import type { TableRow, TableColumn, Strategy, Button, ProgressColor, ProgressAnimation, DeepPartial } from '../../types/index'
+import type { TableRow, TableColumn, Strategy, Button, ProgressColor, ProgressAnimation, DeepPartial, Expanded } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { table } from '#ui/ui.config'
@@ -210,6 +210,10 @@ export default defineComponent({
       type: Object as PropType<Button>,
       default: () => config.default.expandButton as Button
     },
+    expand: {
+      type: Object as PropType<Expanded<TableRow>>,
+      default: () => null
+    },
     loading: {
       type: Boolean,
       default: false
@@ -250,8 +254,13 @@ export default defineComponent({
     const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map(key => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as TableColumn))
 
     const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
-
-    const openedRows = ref([])
+    const expand = useVModel(props, 'expand', emit, {
+      passive: true,
+      defaultValue: defu({}, props.expand, {
+        openedRows: [],
+        row: null
+      })
+    })
 
     const savedSort = { column: sort.value.column, direction: null }
 
@@ -388,20 +397,16 @@ export default defineComponent({
       return get(row, rowKey, defaultValue)
     }
 
-    function showOpenedRow(row: TableRow) {
-      return openedRows.value.some(openedRow => compare(openedRow, row))
+    function isExpanded(row: TableRow) {
+      return expand.value?.openedRows ? expand.value.openedRows.some(openedRow => compare(openedRow, row)) : false
     }
 
     function toggleOpened(row: TableRow) {
-      if (showOpenedRow(row)) {
-        openedRows.value = openedRows.value.filter(v => !compare(v, row))
-      } else {
-        openedRows.value = props.multipleExpand ? [...openedRows.value, row] : [row]
-      }
-      emit('update:expand', {
-        expandedRows: props.multipleExpand ? openedRows.value : openedRows.value[0],
+      expand.value = {
+        openedRows: isExpanded(row) ? expand.value.openedRows.filter(v => !compare(v, row)) : props.multipleExpand ? [...expand.value.openedRows, row] : [row],
         row
-      })
+      }
+      emit('update:expand', expand.value)
     }
 
     function getAriaSort(column: TableColumn): AriaAttributes['aria-sort'] {
@@ -442,7 +447,6 @@ export default defineComponent({
       loadingState,
       isAllRowChecked,
       onChangeCheckbox,
-      openedRows,
       isSelected,
       onSort,
       onSelect,
@@ -450,7 +454,7 @@ export default defineComponent({
       getRowData,
       toggleOpened,
       getAriaSort,
-      showOpenedRow
+      isExpanded
     }
   }
 })

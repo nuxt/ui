@@ -1,23 +1,48 @@
-<template>
-  <UContainer class="min-h-screen flex items-center">
-    <UCard class="flex-1" :ui="{ background: 'bg-gray-50 dark:bg-gray-800/50', ring: 'ring-1 ring-gray-300 dark:ring-gray-700', divide: 'divide-y divide-gray-300 dark:divide-gray-700', header: { base: 'font-bold' } }">
-      <template #header>
-        Welcome to the playground!
-      </template>
+<script setup lang='ts'>
+const page = ref(1)
 
-      <p class="text-gray-500 dark:text-gray-400">
-        Try your components here!
-      </p>
-    </UCard>
-  </UContainer>
-</template>
+const { data, status } = await useLazyFetch(() => `https://jsonplaceholder.typicode.com/users?_start=${page.value}&_limit=10`, {
+  transform: (v: any[]) => {
+    return v.map((v: any, index: number) => ({
+      ...v,
+      // just for example don`t do this at home
+      disabledExpand: (index + 1) % 2 === 0
+    }))
+  }
+})
 
-<script setup>
+const columns = [
+  {
+    label: 'Name',
+    key: 'name'
+  },
+  {
+    label: 'Email',
+    key: 'email'
+  },
+  {
+    label: 'Address',
+    key: 'address.street'
+  }
+]
 
+const expand = ref({
+  openedRows: [data.value?.[0]],
+  row: {}
+})
 </script>
 
-<style>
-body {
-  @apply antialiased font-sans text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900;
-}
-</style>
+<template>
+  <div>
+    <UTable v-model:expand="expand" :rows="data!" :columns="columns" :loading="status === 'pending'">
+      <template #expand="{ row }">
+        <div class="p-4">
+          <pre>{{ row }}</pre>
+        </div>
+      </template>
+    </UTable>
+    <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
+      <UPagination v-model="page" :page-count="10" :total="20" />
+    </div>
+  </div>
+</template>

@@ -8,6 +8,7 @@ export default {
   tr: {
     base: '',
     selected: 'bg-gray-50 dark:bg-gray-800/50',
+    expanded: 'bg-gray-50 dark:bg-gray-800/50',
     active: 'hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer'
   },
   th: {

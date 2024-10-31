@@ -36,10 +36,15 @@ const people = [{
   email: 'floyd.miles@example.com',
   role: 'Member'
 }]
+
+const expand = ref({
+  openedRows: [],
+  row: null
+})
 </script>
 
 <template>
-  <UTable :rows="people">
+  <UTable v-model:expand="expand" :rows="people">
     <template #expand="{ row }">
       <div class="p-4">
         <pre>{{ row }}</pre>

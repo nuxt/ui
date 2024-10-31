@@ -25,11 +25,16 @@ const columns = [
     key: 'address.street'
   }
 ]
+
+const expand = ref({
+  openedRows: [],
+  row: null
+})
 </script>
 
 <template>
   <div>
-    <UTable :rows="data" :columns="columns" :loading="status === 'pending'">
+    <UTable v-model:expand="expand" :rows="data" :columns="columns" :loading="status === 'pending'">
       <template #expand="{ row }">
         <div class="p-4">
           <pre>{{ row }}</pre>

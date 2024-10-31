@@ -315,7 +315,9 @@ componentProps:
 
 ### Expandable :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
 
-You can use the `expand` slot to display extra information about a row. You will have access to the `row` property in the slot scope.
+You can use the `v-model:expand` to enables row expansion functionality in the table component. It maintains an object containing an `openedRows` array, which tracks the indices of currently expanded rows.
+
+When using the expand slot, you have access to the `row` property in the slot scope, which contains the data of the row that triggered the expand/collapse action. This allows you to customize the expanded content based on the row's data.
 
 ::component-example{class="grid"}
 ---
@@ -326,26 +328,37 @@ componentProps:
 ---
 ::
 
-#### Reactive expand
+#### Event expand
 
 The `@update:expand` event is emitted when a row is expanded. This event provides the current state of expanded rows and the data of the row that triggered the event.
 
 To use the `@update:expand` event, add it to your `UTable` component. The event handler will receive an object with the following properties:
-- `expandedRows`: An array of indices of the currently expanded rows.
+- `openedRows`: An array of indices of the currently expanded rows.
 - `row`: The row data that triggered the expand/collapse action.
 
 ```vue
 <script setup lang="ts">
-const { data, pending } = await useLazyFetch(() => `/api/users?orderBy=${sort.value.column}&order=${sort.value.direction}`)
+const { data, pending } = await useLazyFetch(() => `/api/users`)
 
-const handleExpand = ({ expandedRows, row }) => {
-  console.log('Expanded Rows:', expandedRows);
+const handleExpand = ({ openedRows, row }) => {
+  console.log('opened Rows:', openedRows);
   console.log('Row Data:', row);
 };
 
+const expand = ref({
+  openedRows: [],
+  row: null
+})
+
 </script>
 <template>
-  <UTable :loading="pending" :rows="data" @update:expand="handleExpand" />
+  <UTable v-model="expand" :loading="pending" :rows="data" @update:expand="handleExpand">
+    <template #expand="{ row }">
+        <div class="p-4">
+          <pre>{{ row }}</pre>
+        </div>
+      </template>
+  </UTable>
 </template>
 ```
 
@@ -372,7 +385,7 @@ You can disable the expansion functionality for specific rows in the UTable comp
 ::component-example{class="grid"}
 ---
 padding: false
-component: 'table-example-disabled-expand'
+component: 'table-example-disabled-expandable'
 componentProps:
   class: 'flex-1'
 ---
