@@ -118,7 +118,7 @@ export type CommandPaletteSlots<Groups extends MaybeReadonlyArray<CommandPalette
 
 </script>
 
-<script setup lang="ts" generic="G extends MaybeReadonlyArray<CommandPaletteGroup<T>>, T extends CommandPaletteItem">
+<script setup lang="ts" generic="GT extends CommandPaletteGroup<T>, G extends MaybeReadonlyArray<GT>, T extends CommandPaletteItem">
 import { computed, reactive } from 'vue'
 import { ComboboxRoot, ComboboxInput, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxViewport, ComboboxGroup, ComboboxLabel, ComboboxItem, ComboboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
