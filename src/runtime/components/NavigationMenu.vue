@@ -182,7 +182,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
             </component>
 
             <NavigationMenuContent v-if="orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])" v-bind="contentProps" :class="ui.content({ class: props.ui?.content })">
-              <slot :name="item.slot ? `${item.slot}-content` : 'item-content'" :item="(item as T)" :active="active" :index="index">
+              <slot :name="item.slot ? `${item.slot}-content` : 'item-content'" :item="item" :active="active" :index="index">
                 <ul :class="ui.childList({ class: props.ui?.childList })">
                   <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                     <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
