@@ -14,7 +14,7 @@ exports[`ButtonGroup > renders orientation vertical with default slot correctly 
 
 exports[`ButtonGroup > renders with as correctly 1`] = `"<section class="relative inline-flex -space-x-px"></section>"`;
 
-exports[`ButtonGroup > renders with class correctly 1`] = `"<div class="relative inline-flex -space-x-px"></div>"`;
+exports[`ButtonGroup > renders with class correctly 1`] = `"<div class="inline-flex -space-x-px absolute"></div>"`;
 
 exports[`ButtonGroup > renders with default slot correctly 1`] = `
 "<div class="relative inline-flex -space-x-px">

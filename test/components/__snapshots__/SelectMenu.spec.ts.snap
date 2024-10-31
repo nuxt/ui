@@ -30,7 +30,7 @@ exports[`SelectMenu > renders with arrow correctly 1`] = `
       [data-radix-combobox-viewport]::-webkit-scrollbar {
         display: none;
       }
-    </style>
+    </style><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" viewBox="0 0 30 10" preserveAspectRatio="none" class="fill-[var(--ui-border)]" style="display: block;"><polygon points="0,0 30,0 15,10"></polygon></svg></span>
   </div>
 </div>
 
@@ -91,6 +91,7 @@ exports[`SelectMenu > renders with class correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -130,6 +131,7 @@ exports[`SelectMenu > renders with default slot correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -169,6 +171,7 @@ exports[`SelectMenu > renders with defaultValue correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -208,6 +211,7 @@ exports[`SelectMenu > renders with disabled correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -254,6 +258,7 @@ exports[`SelectMenu > renders with id correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -293,6 +298,7 @@ exports[`SelectMenu > renders with item slot correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -332,6 +338,7 @@ exports[`SelectMenu > renders with item-label slot correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -371,6 +378,7 @@ exports[`SelectMenu > renders with item-leading slot correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -410,6 +418,7 @@ exports[`SelectMenu > renders with item-trailing slot correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -449,6 +458,7 @@ exports[`SelectMenu > renders with items correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -488,6 +498,7 @@ exports[`SelectMenu > renders with labelKey correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -532,6 +543,7 @@ exports[`SelectMenu > renders with leading slot correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -615,6 +627,7 @@ exports[`SelectMenu > renders with modelValue correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -654,6 +667,7 @@ exports[`SelectMenu > renders with multiple and modelValue correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -693,6 +707,7 @@ exports[`SelectMenu > renders with multiple correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -732,6 +747,7 @@ exports[`SelectMenu > renders with name correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -771,6 +787,7 @@ exports[`SelectMenu > renders with neutral variant ghost correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -810,6 +827,7 @@ exports[`SelectMenu > renders with neutral variant none correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -849,6 +867,7 @@ exports[`SelectMenu > renders with neutral variant outline correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -888,6 +907,7 @@ exports[`SelectMenu > renders with neutral variant soft correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -927,6 +947,7 @@ exports[`SelectMenu > renders with neutral variant subtle correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -966,6 +987,7 @@ exports[`SelectMenu > renders with placeholder correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1005,6 +1027,7 @@ exports[`SelectMenu > renders with primary variant ghost correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1044,6 +1067,7 @@ exports[`SelectMenu > renders with primary variant none correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1083,6 +1107,7 @@ exports[`SelectMenu > renders with primary variant outline correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1122,6 +1147,7 @@ exports[`SelectMenu > renders with primary variant soft correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1161,6 +1187,7 @@ exports[`SelectMenu > renders with primary variant subtle correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1200,6 +1227,7 @@ exports[`SelectMenu > renders with required correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1239,6 +1267,7 @@ exports[`SelectMenu > renders with searchInput placeholder correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1278,6 +1307,7 @@ exports[`SelectMenu > renders with selectedIcon correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1317,6 +1347,7 @@ exports[`SelectMenu > renders with size lg correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1356,6 +1387,7 @@ exports[`SelectMenu > renders with size md correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1395,6 +1427,7 @@ exports[`SelectMenu > renders with size sm correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1434,6 +1467,7 @@ exports[`SelectMenu > renders with size xl correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1473,6 +1507,7 @@ exports[`SelectMenu > renders with size xs correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1521,6 +1556,7 @@ exports[`SelectMenu > renders with trailing slot correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1569,6 +1605,7 @@ exports[`SelectMenu > renders with trailingIcon correctly 2`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1608,6 +1645,7 @@ exports[`SelectMenu > renders with ui correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1647,6 +1685,7 @@ exports[`SelectMenu > renders with valueKey correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
@@ -1687,6 +1726,7 @@ exports[`SelectMenu > renders without searchInput correctly 1`] = `
         display: none;
       }
     </style>
+    <!--v-if-->
   </div>
 </div>
 
