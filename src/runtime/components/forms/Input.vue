@@ -5,6 +5,8 @@
       ref="input"
       :name="name"
       :type="type"
+      :min="inputNumberMin"
+      :max="inputNumberMax"
       :required="required"
       :placeholder="placeholder"
       :disabled="disabled"
@@ -120,6 +122,14 @@ export default defineComponent({
     padded: {
       type: Boolean,
       default: true
+    },
+    inputNumberMin: {
+      type: Number,
+      default: null
+    },
+    inputNumberMax: {
+      type: Number,
+      default: null
     },
     size: {
       type: String as PropType<InputSize>,
