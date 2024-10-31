@@ -110,7 +110,9 @@ describe('NavigationMenu', () => {
 
     expectSlotProps('item', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
     expectSlotProps('item-leading', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    expectSlotProps('item-label', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
     expectSlotProps('item-trailing', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    expectSlotProps('item-content', test1).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
 
     // groups
     const test2 = () => NavigationMenu({
@@ -119,7 +121,9 @@ describe('NavigationMenu', () => {
 
     expectSlotProps('item', test2).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
     expectSlotProps('item-leading', test2).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    expectSlotProps('item-label', test2).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
     expectSlotProps('item-trailing', test2).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+    expectSlotProps('item-content', test2).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
 
     // custom + mixed
     const test3 = () => NavigationMenu({
@@ -128,7 +132,9 @@ describe('NavigationMenu', () => {
 
     expectSlotProps('item', test3).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, active?: boolean }>()
     expectSlotProps('item-leading', test3).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, active?: boolean }>()
+    expectSlotProps('item-label', test3).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, active?: boolean }>()
     expectSlotProps('item-trailing', test3).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, active?: boolean }>()
+    expectSlotProps('item-content', test3).toEqualTypeOf<{ item: { label: string, value?: string, custom?: string | number }, index: number, active?: boolean }>()
 
     // custom + groups + mixed
     const test4 = () => NavigationMenu({
