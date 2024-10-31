@@ -560,6 +560,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-leading`{lang="ts-type"}
 - `#{{ item.slot }}-label`{lang="ts-type"}
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
+- `#{{ item.slot }}-content`{lang="ts-type"}
 
 ::component-example
 ---
@@ -568,7 +569,21 @@ name: 'navigation-menu-custom-slot-example'
 ::
 
 ::tip{to="#slots"}
-You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
+You can also use the `#item`, `#item-leading`, `#item-label`, `#item-trailing` and `#item-content` slots to customize all items.
+::
+
+### With content slot
+
+Use the `#item-content` slot or the `slot` property (`#{{ item.slot }}-content`) to customize the content of a specific item.
+
+::component-example
+---
+name: 'navigation-menu-content-slot-example'
+---
+::
+
+::note
+In this example, we add the `sm:w-[var(--radix-navigation-menu-viewport-width)]` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
 ::
 
 ## API
