@@ -44,9 +44,9 @@
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
-    "@vueuse/core": "^11.1.0",
-    "@vueuse/integrations": "^11.1.0",
-    "@vueuse/math": "^11.1.0",
+    "@vueuse/core": "^11.2.0",
+    "@vueuse/integrations": "^11.2.0",
+    "@vueuse/math": "^11.2.0",
     "defu": "^6.1.4",
     "fuse.js": "^7.0.0",
     "ohash": "^1.1.4",
@@ -73,16 +73,13 @@
     "valibot31": "npm:valibot@0.31.0",
     "vitest": "^2.1.4",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^2.1.8",
+    "vue-tsc": "^2.1.10",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
     "@nuxt/content": "2.13.2",
-    "@nuxtjs/mdc": "0.9.0",
-    "vue-tsc": "2.1.6",
-    "vue-component-meta": "2.1.6",
-    "vue-component-type-helpers": "2.1.6"
+    "@nuxtjs/mdc": "0.9.0"
   }
 }
