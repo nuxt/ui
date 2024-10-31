@@ -78,7 +78,7 @@ export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<Items> = { default(props: { open: boolean }): any } & DynamicSlots<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
+export type DropdownMenuSlots<Items> = { default(props: { open: boolean }): any } & (DynamicSlots<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never)
 
 </script>
 
