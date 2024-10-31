@@ -406,7 +406,6 @@ export default defineComponent({
         openedRows: isExpanded(row) ? expand.value.openedRows.filter(v => !compare(v, row)) : props.multipleExpand ? [...expand.value.openedRows, row] : [row],
         row
       }
-      emit('update:expand', expand.value)
     }
 
     function getAriaSort(column: TableColumn): AriaAttributes['aria-sort'] {
