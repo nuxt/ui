@@ -23,6 +23,7 @@ describe('ContextMenu', () => {
     }],
     [{
       label: 'Show Sidebar',
+      color: 'primary',
       kbds: ['meta', 'S']
     }, {
       label: 'Show Toolbar',
