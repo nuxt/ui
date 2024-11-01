@@ -160,7 +160,7 @@ props:
 
 ### Content
 
-Use the `content` prop to control how the Select content is rendered, like its its `align`, `side` or `position` for example. Defaults to `popper` to match other components.
+Use the `content` prop to control how the Select content is rendered, like its `align`, `side` or `position` for example.
 
 ::warning
 The `content.align`, `content.side`, etc. properties only apply when `content.position` is set to `popper`.
@@ -208,6 +208,36 @@ props:
 ::note{to="https://www.radix-vue.com/components/select.html#change-the-positioning-mode"}
 Read more about the `content.position` prop in the [Radix Vue documentation](https://www.radix-vue.com/components/select.html#change-the-positioning-mode).
 ::
+
+<!--
+### Arrow
+
+Use the `arrow` prop to display an arrow on the Select.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+  - arrow
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Todo'
+  arrow: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+-->
 
 ### Color
 
@@ -596,7 +626,7 @@ name: 'select-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the Select.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Select by pressing :kbd{value="O"}.
 ::
 
 ### With rotating icon

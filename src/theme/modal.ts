@@ -7,7 +7,7 @@ export default {
     footer: 'flex items-center gap-1.5 p-4 sm:px-6',
     title: 'text-[var(--ui-text-highlighted)] font-semibold',
     description: 'mt-1 text-[var(--ui-text-muted)] text-sm',
-    close: 'absolute top-4 right-4'
+    close: 'absolute top-4 end-4'
   },
   variants: {
     transition: {

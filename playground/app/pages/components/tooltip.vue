@@ -4,7 +4,7 @@
       <UAvatar text="T" />
     </UTooltip>
 
-    <div class="flex items-center gap-2 ml-[-20px]">
+    <div class="flex items-center gap-2 ms-[-20px]">
       <UTooltip text="Left" :kbds="['meta', 'L']" :content="{ side: 'left' }" arrow>
         <UAvatar text="L" />
       </UTooltip>

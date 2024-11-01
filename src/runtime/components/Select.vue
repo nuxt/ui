@@ -7,7 +7,7 @@ import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, PartialString } from '../types/utils'
+import type { AcceptableValue, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
@@ -29,7 +29,7 @@ export interface SelectItem {
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T> extends Omit<SelectRootProps, 'dir'>, UseComponentIconsProps {
+export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue> = MaybeArrayOfArray<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined> extends Omit<SelectRootProps, 'dir' | 'modelValue'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -65,24 +65,26 @@ export interface SelectProps<T> extends Omit<SelectRootProps, 'dir'>, UseCompone
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
    */
-  valueKey?: string
+  valueKey?: V
   /**
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: string
-  items?: T[] | T[][]
+  labelKey?: SelectItemKey<T>
+  items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof select.slots>
+  /** The controlled value of the Select. Can be bind as `v-model`. */
+  modelValue?: SelectModelValue<T, V, false, T extends { value: infer U } ? U : never>
 }
 
-export type SelectEmits = SelectRootEmits & {
+export type SelectEmits<T, V> = Omit<SelectRootEmits, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-}
+} & SelectModelValueEmits<T, V, false, T extends { value: infer U } ? U : never>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -98,9 +100,9 @@ export interface SelectSlots<T> {
 extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
-<script setup lang="ts" generic="T extends SelectItem | AcceptableValue">
+<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue> = MaybeArrayOfArray<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined">
 import { computed, toRef } from 'vue'
-import { SelectRoot, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'radix-vue'
+import { SelectRoot, SelectArrow, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -112,17 +114,18 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 
-const props = withDefaults(defineProps<SelectProps<T>>(), {
-  valueKey: 'value',
-  labelKey: 'label',
+const props = withDefaults(defineProps<SelectProps<T, I, V>>(), {
+  valueKey: 'value' as never,
+  labelKey: 'label' as never,
   portal: true
 })
-const emits = defineEmits<SelectEmits>()
+const emits = defineEmits<SelectEmits<T, V>>()
 const slots = defineSlots<SelectSlots<T>>()
 
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
+const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -169,6 +172,9 @@ function onUpdateOpen(value: boolean) {
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
     :name="name"
+    :default-value="(defaultValue as string)"
+    :model-value="(modelValue as string)"
+    :autocomplete="autocomplete"
     :disabled="disabled"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
@@ -239,6 +245,8 @@ function onUpdateOpen(value: boolean) {
             </template>
           </SelectGroup>
         </SelectViewport>
+
+        <SelectArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </SelectContent>
     </SelectPortal>
   </SelectRoot>

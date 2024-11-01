@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 defineProps<{
@@ -8,7 +8,7 @@ defineProps<{
 
 const config = useRuntimeConfig().public
 
-const navigation = inject<Ref<NavItem[]>>('navigation')
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 // const items = computed(() => props.links.map(({ icon, ...link }) => link))
 
@@ -55,7 +55,7 @@ defineShortcuts({
 
       <USeparator type="dashed" class="my-4" /> -->
 
-      <UContentNavigation :navigation="navigation" />
+      <UContentNavigation :navigation="navigation" highlight />
     </template>
   </UHeader>
 </template>

@@ -251,6 +251,31 @@ props:
 ---
 ::
 
+### Arrow
+
+Use the `arrow` prop to display an arrow on the InputMenu.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - arrow
+external:
+  - items
+  - modelValue
+props:
+  modelValue: Backlog
+  arrow: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
 ### Color
 
 Use the `color` prop to change the ring color when the InputMenu is focused.
@@ -608,7 +633,7 @@ name: 'input-menu-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the InputMenu.
+In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the InputMenu by pressing :kbd{value="O"}.
 ::
 
 ### Control open state on focus

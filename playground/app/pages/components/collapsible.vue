@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { useAppConfig } from '#imports'
+
 const appConfig = useAppConfig()
 </script>
 
 <template>
   <div class="flex-1">
-    <UCollapsible class="w-48">
+    <UCollapsible class="flex flex-col gap-2 w-48">
       <UButton
         class="group"
         icon="i-heroicons-light-bulb"

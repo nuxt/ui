@@ -1,18 +1,21 @@
-import module from '../src/module'
 import { resolve } from 'node:path'
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+
+  modules: ['../src/module', '@nuxt/test-utils/module'],
+
+  ssr: false,
+
+  devtools: { enabled: false },
+
+  app: {
+    baseURL: '/__nuxt_ui__/devtools'
+  },
 
   future: {
     compatibilityVersion: 4
   },
-
-  devtools: { enabled: false },
-
-  ssr: false,
-
-  modules: [module, '@nuxt/test-utils/module'],
+  compatibilityDate: '2024-04-03',
 
   nitro: {
     hooks: {
@@ -23,10 +26,6 @@ export default defineNuxtConfig({
     output: {
       publicDir: resolve(__dirname, '../dist/client/devtools')
     }
-  },
-
-  app: {
-    baseURL: '/__nuxt_ui__/devtools'
   },
 
   vite: {

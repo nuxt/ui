@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type { NavItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content'
 
-const nav = inject<Ref<NavItem[]>>('navigation')
-
-const navigation = computed(() => nav?.value.filter(item => !item._path.startsWith('/pro')))
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 </script>
 
 <template>

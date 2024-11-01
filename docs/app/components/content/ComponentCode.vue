@@ -32,6 +32,10 @@ const props = defineProps<{
    * @defaultValue false
    */
   collapse?: boolean
+  /**
+   * A list of line numbers to highlight in the code block
+   */
+  highlights?: number[]
 }>()
 
 const route = useRoute()
@@ -39,6 +43,7 @@ const { $prettier } = useNuxtApp()
 
 const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
+const component = defineAsyncComponent(() => import(`#ui/components/${upperFirst(camelName)}.vue`))
 
 const componentProps = reactive({ ...(props.props || {}) })
 const componentEvents = reactive({
@@ -105,7 +110,7 @@ const code = computed(() => {
 `
   }
 
-  code += `\`\`\`vue`
+  code += `\`\`\`vue${props.highlights?.length ? ` {${props.highlights.join('-')}}` : ''}`
 
   if (props.external?.length) {
     code += `
@@ -201,7 +206,8 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
     formatted = await $prettier.format(code.value, {
       trailingComma: 'none',
       semi: false,
-      singleQuote: true
+      singleQuote: true,
+      printWidth: 100
     })
   } catch {
     formatted = code.value
@@ -263,12 +269,12 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div class="flex justify-center border border-b-0 border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
-        <component :is="name" v-bind="{ ...componentProps, ...componentEvents }">
+      <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
+        <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
-            <ContentSlot :name="slot" unwrap="p">
+            <MDCSlot :name="slot" unwrap="p">
               {{ slots?.[slot] }}
-            </ContentSlot>
+            </MDCSlot>
           </template>
         </component>
       </div>

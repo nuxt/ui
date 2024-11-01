@@ -2,16 +2,13 @@
 import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
 // import { debounce } from 'perfect-debounce'
-import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
-const runtimeConfig = useRuntimeConfig()
-const { integrity, api } = runtimeConfig.public.content
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '-' + integrity : ''}`, { default: () => [] })
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: files } = await useAsyncData('files', () => queryCollectionSearchSections('content', { ignoredTags: ['style'] }))
 
 const searchTerm = ref('')
 
@@ -29,7 +26,7 @@ const links = computed(() => {
     icon: 'i-heroicons-book-open',
     to: '/getting-started',
     active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro')
+  }, ...(navigation.value?.find(item => item.path === '/pro')
     ? [{
         label: 'Pro',
         icon: 'i-heroicons-square-3-stack-3d',
@@ -76,7 +73,19 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-provide('navigation', navigation)
+const updatedNavigation = computed(() => navigation.value?.map(item => ({
+  ...item,
+  children: item.children?.map((child: typeof item) => ({
+    ...child,
+    ...(child.path === '/getting-started/installation' && {
+      title: 'Installation',
+      active: route.path.startsWith('/getting-started/installation'),
+      children: []
+    })
+  })) || []
+})))
+
+provide('navigation', updatedNavigation)
 </script>
 
 <template>

@@ -5,6 +5,7 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '~/src/module'
+import { expectEmitPayloadType } from '../utils/types'
 
 describe('Select', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -165,6 +166,34 @@ describe('Select', () => {
       input.setValue('Option 2')
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('should have the correct types', () => {
+      // with object item
+      expectEmitPayloadType('update:modelValue', () => Select({
+        items: [{ label: 'foo', value: 'bar' }]
+      })).toEqualTypeOf<[string]>()
+
+      // with string item
+      expectEmitPayloadType('update:modelValue', () => Select({
+        items: ['foo']
+      })).toEqualTypeOf<[string]>()
+
+      // with groups
+      expectEmitPayloadType('update:modelValue', () => Select({
+        items: [['foo']]
+      })).toEqualTypeOf<[string]>()
+
+      // with groups and mixed types
+      expectEmitPayloadType('update:modelValue', () => Select({
+        items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]]
+      })).toEqualTypeOf<[string | number]>()
+
+      // with groups, mixed types and valueKey = undefined
+      expectEmitPayloadType('update:modelValue', () => Select({
+        items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
+        valueKey: undefined
+      })).toEqualTypeOf<[string | number]>()
     })
   })
 })

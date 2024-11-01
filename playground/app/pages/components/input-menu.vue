@@ -11,7 +11,7 @@ const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
 const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]]
-const selectedItems = ref([fruits[0], vegetables[0]])
+const selectedItems = ref([fruits[0]!, vegetables[0]!])
 
 const statuses = [{
   label: 'Backlog',
@@ -135,7 +135,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         v-for="size in sizes"
         :key="size"
         :items="items"
-        :model-value="[fruits[0]]"
+        :model-value="[fruits[0]!]"
         multiple
         icon="i-heroicons-magnifying-glass"
         placeholder="Search..."

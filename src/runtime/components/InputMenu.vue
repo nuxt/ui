@@ -8,7 +8,7 @@ import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrWrapped, PartialString } from '../types/utils'
+import type { AcceptableValue, ArrayOrWrapped, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
@@ -30,7 +30,7 @@ export interface InputMenuItem {
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
-export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValue' | 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'multiple' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
+export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<InputMenuItem | AcceptableValue> = MaybeArrayOfArray<InputMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'defaultValue' | 'selectedValue' | 'open' | 'defaultOpen' | 'searchTerm' | 'disabled' | 'name' | 'resetSearchTermOnBlur'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -87,24 +87,28 @@ export interface InputMenuProps<T> extends Pick<ComboboxRootProps<T>, 'modelValu
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
    */
-  valueKey?: keyof T
+  valueKey?: V
   /**
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
   labelKey?: keyof T
-  items?: T[] | T[][]
+  items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof inputMenu.slots>
+  /** The controlled value of the Combobox. Can be binded-with with `v-model`. */
+  modelValue?: SelectModelValue<T, V, M>
+  /** Whether multiple options can be selected or not. */
+  multiple?: M
 }
 
-export type InputMenuEmits<T> = ComboboxRootEmits<T> & {
+export type InputMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-}
+} & SelectModelValueEmits<T, V, M>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -123,11 +127,11 @@ export interface InputMenuSlots<T> {
 extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
-<script setup lang="ts" generic="T extends InputMenuItem | AcceptableValue">
+<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<InputMenuItem | AcceptableValue> = MaybeArrayOfArray<InputMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
 import { computed, ref, toRef, onMounted } from 'vue'
-import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
+import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
-import { deepEqual as isEqual } from 'fast-equals'
+import * as isEqual from 'fast-deep-equal'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
@@ -140,14 +144,14 @@ import UChip from './Chip.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputMenuProps<T>>(), {
+const props = withDefaults(defineProps<InputMenuProps<T, I, V, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
   filter: () => ['label'],
   labelKey: 'label' as keyof T
 })
-const emits = defineEmits<InputMenuEmits<T>>()
+const emits = defineEmits<InputMenuEmits<T, V, M>>()
 const slots = defineSlots<InputMenuSlots<T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
@@ -155,6 +159,8 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
+const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+
 const { emitFormBlur, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
@@ -174,7 +180,7 @@ const ui = computed(() => inputMenu({
 }))
 
 function displayValue(value: AcceptableValue): string {
-  const item = items.value.find(item => props.valueKey ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
+  const item = items.value.find(item => props.valueKey ? isEqual.default(get(item as Record<string, any>, props.valueKey as string), value) : isEqual.default(item, value))
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
@@ -386,6 +392,8 @@ defineExpose({
             </template>
           </ComboboxGroup>
         </ComboboxViewport>
+
+        <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </ComboboxContent>
     </ComboboxPortal>
   </ComboboxRoot>

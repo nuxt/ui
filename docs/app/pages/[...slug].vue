@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
-import { findPageHeadline } from '#ui-pro/utils/content'
+import type { ContentNavigationItem } from '@nuxt/content'
+import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
 const route = useRoute()
 
@@ -8,43 +8,35 @@ definePageMeta({
   layout: 'docs'
 })
 
-const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+const { data: page } = await useAsyncData(route.path, () => queryCollection('content').path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryContent()
-    .where({
-      _extension: 'md',
-      navigation: {
-        $ne: false
-      }
-    })
-    .only(['title', 'description', '_path'])
-    .findSurround(withoutTrailingSlash(route.path))
-}, { default: () => [] })
+const { data: surround } = await useAsyncData(`${route.path}-surround`, () => queryCollectionItemSurroundings('content', route.path, {
+  fields: ['description']
+}))
 
-const headline = computed(() => findPageHeadline(page.value))
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+
+const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)))
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
-  title: page.value.navigation?.title || page.value.title,
-  ogTitle: `${page.value.navigation?.title || page.value.title} - Nuxt UI v3`,
+  title: typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title,
+  ogTitle: `${typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title} - Nuxt UI v3`,
   description: page.value.seo?.description || page.value.description,
   ogDescription: page.value.seo?.description || page.value.description
 })
 
 defineOgImageComponent('Docs', {
-  headline: headline.value,
-  title: page.value.title,
-  description: page.value.seo?.description || page.value.description
+  headline: breadcrumb.value.map(item => item.label).join(' > ')
 })
 
 const communityLinks = computed(() => [{
   icon: 'i-heroicons-pencil-square',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?._file}`,
+  to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
   icon: 'i-heroicons-star',
@@ -77,9 +69,42 @@ const communityLinks = computed(() => [{
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title" :links="page.links" :headline="headline">
+    <UPageHeader :title="page.title">
+      <template #headline>
+        <UBreadcrumb :items="breadcrumb" />
+      </template>
+
       <template #description>
         <MDC v-if="page.description" :value="page.description" unwrap="p" />
+      </template>
+
+      <template #links>
+        <UDropdownMenu v-if="page.select" v-slot="{ open }" :items="page.select.items" :content="{ align: 'end' }">
+          <UButton
+            color="neutral"
+            variant="subtle"
+            v-bind="page.select.items.find((item: any) => item.to === route.path)"
+            block
+            trailing-icon="i-heroicons-chevron-down-20-solid"
+            :class="[open && 'bg-[var(--ui-bg-accented)]/75']"
+            :ui="{
+              trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
+            }"
+            class="w-[128px]"
+          />
+        </UDropdownMenu>
+
+        <UButton
+          v-for="link in page.links"
+          :key="link.label"
+          color="neutral"
+          variant="outline"
+          v-bind="link"
+        >
+          <template v-if="link.avatar" #leading>
+            <UAvatar v-bind="link.avatar" size="2xs" />
+          </template>
+        </UButton>
       </template>
     </UPageHeader>
 

@@ -5,13 +5,6 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  app: {
-    rootAttrs: {
-      'vaul-drawer-wrapper': '',
-      'class': 'bg-[var(--ui-bg)]'
-    }
-  },
-
   // extends: [
   //   process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
   // ],
@@ -28,12 +21,31 @@ export default defineNuxtConfig({
     'nuxt-og-image'
   ],
 
-  hub: {
-    cache: true
+  app: {
+    rootAttrs: {
+      'vaul-drawer-wrapper': '',
+      'class': 'bg-[var(--ui-bg)]'
+    }
   },
 
-  future: {
-    compatibilityVersion: 4
+  site: {
+    url: 'https://ui3.nuxt.dev'
+  },
+
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+        }
+      }
+    }
+  },
+
+  mdc: {
+    highlight: {
+      noApiRoute: false
+    }
   },
 
   runtimeConfig: {
@@ -42,45 +54,18 @@ export default defineNuxtConfig({
     }
   },
 
-  icon: {
-    customCollections: [{
-      prefix: 'custom',
-      dir: resolve('./app/assets/icons')
-    }],
-    clientBundle: {
-      scan: true,
-      includeCustomCollections: true
-    },
-    provider: 'iconify'
+  routeRules: {
+    '/': { redirect: '/getting-started', prerender: false },
+    '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
+    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
+    '/components': { redirect: '/components/app', prerender: false }
   },
 
-  content: {
-    // sources: {
-    //   pro: process.env.NUXT_UI_PRO_PATH
-    //     ? {
-    //         prefix: '/pro',
-    //         driver: 'fs',
-    //         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
-    //       }
-    //     : process.env.NUXT_GITHUB_TOKEN
-    //       ? {
-    //           prefix: '/pro',
-    //           driver: 'github',
-    //           repo: 'nuxt/ui-pro',
-    //           branch: 'dev',
-    //           dir: 'docs/app/content/pro',
-    //           token: process.env.NUXT_GITHUB_TOKEN || ''
-    //         }
-    //       : undefined
-    // },
-    highlight: {
-      langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
-    }
+  future: {
+    compatibilityVersion: 4
   },
 
-  image: {
-    provider: 'ipx'
-  },
+  compatibilityDate: '2024-07-09',
 
   nitro: {
     prerender: {
@@ -107,17 +92,8 @@ export default defineNuxtConfig({
     }
   },
 
-  routeRules: {
-    '/': { redirect: '/getting-started', prerender: false },
-    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
-    '/components': { redirect: '/components/app', prerender: false }
-  },
-
-  $production: {
-    routeRules: {
-      '/api/_mdc/highlight': { cache: { group: 'mdc', name: 'highlight', maxAge: 60 * 60 } },
-      '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
-    }
+  hub: {
+    cache: true
   },
 
   componentMeta: {
@@ -143,54 +119,19 @@ export default defineNuxtConfig({
     }
   },
 
-  hooks: {
-    'components:extend': (components) => {
-      const globals = components.filter(c => [
-        'UAccordion',
-        'UAlert',
-        'UAvatar',
-        'UAvatarGroup',
-        'UBadge',
-        'UBreadcrumb',
-        'UButton',
-        'UButtonGroup',
-        'UCheckbox',
-        'UChip',
-        'UCollapsible',
-        'UCommandPalette',
-        'UContextMenu',
-        'UDrawer',
-        'UDropdownMenu',
-        'UFormField',
-        'UIcon',
-        'UInput',
-        'UInputMenu',
-        'UKbd',
-        'ULink',
-        'UModal',
-        'UNavigationMenu',
-        'UPagination',
-        'UPopover',
-        'UProgress',
-        'URadioGroup',
-        'USelect',
-        'USelectMenu',
-        'USeparator',
-        'USlider',
-        'USlideover',
-        'USwitch',
-        'UTabs',
-        'UTextarea',
-        'UTooltip'
-      ].includes(c.pascalName))
-
-      globals.forEach(c => c.global = 'sync')
-    }
+  icon: {
+    customCollections: [{
+      prefix: 'custom',
+      dir: resolve('./app/assets/icons')
+    }],
+    clientBundle: {
+      scan: true,
+      includeCustomCollections: true
+    },
+    provider: 'iconify'
   },
 
-  site: {
-    url: 'https://ui3.nuxt.dev'
-  },
-
-  compatibilityDate: '2024-07-09'
+  image: {
+    provider: 'ipx'
+  }
 })

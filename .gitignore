@@ -25,3 +25,6 @@ logs
 .env
 .env.*
 !.env.example
+
+playground-vue/auto-imports.d.ts
+playground-vue/components.d.ts

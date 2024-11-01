@@ -17,6 +17,10 @@ const toast = useToast()
 - A maximum of 5 toasts are displayed at a time. When adding a new toast that would exceed this limit, the oldest toast is automatically removed.
 - When removing a toast, there's a 200ms delay before it's actually removed from the state, allowing for exit animations.
 
+::warning
+Make sure to wrap your app with the [App](/components/app) component which uses our [Toaster](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [ToastProvider](https://www.radix-vue.com/components/toast.html#provider) component from Radix Vue.
+::
+
 ::tip{to="/components/toast"}
 Learn how to customize the appearance and behavior of toasts in the **Toast** component documentation.
 ::

@@ -1,12 +1,11 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, extendPages, hasNuxtModule } from '@nuxt/kit'
 import { addTemplates, buildTemplates } from './templates'
-import icons from './theme/icons'
 import { addCustomTab, startSubprocess } from '@nuxt/devtools-kit'
 import sirv from 'sirv'
 import { getPort } from 'get-port-please'
-import { pick } from './runtime/utils'
 import { devtoolsMetaPlugin } from './devtools/meta'
+import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 
 export type * from './runtime/types'
 
@@ -14,40 +13,40 @@ export interface ModuleOptions {
   /**
    * Prefix for components
    * @defaultValue `U`
-   * @see https://ui3.nuxt.dev/getting-started/installation#prefix
+   * @link https://ui3.nuxt.dev/getting-started/installation#prefix
    */
   prefix?: string
 
   /**
    * Enable or disable `@nuxt/fonts` module
    * @defaultValue `true`
-   * @see https://ui3.nuxt.dev/getting-started/installation#fonts
+   * @link https://ui3.nuxt.dev/getting-started/installation#fonts
    */
   fonts?: boolean
 
   /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
-   * @see https://ui3.nuxt.dev/getting-started/installation#colormode
+   * @link https://ui3.nuxt.dev/getting-started/installation#colormode
    */
   colorMode?: boolean
 
   /**
    * Customize how the theme is generated
-   * @see https://ui3.nuxt.dev/getting-started/theme
+   * @link https://ui3.nuxt.dev/getting-started/theme
    */
   theme?: {
     /**
      * Define the color aliases available for components
      * @defaultValue `['primary', 'secondary', 'success', 'info', 'warning', 'error']`
-     * @see https://ui3.nuxt.dev/getting-started/installation#themecolors
+     * @link https://ui3.nuxt.dev/getting-started/installation#themecolors
      */
     colors?: string[]
 
     /**
      * Enable or disable transitions on components
      * @defaultValue `true`
-     * @see https://ui3.nuxt.dev/getting-started/installation#themetransitions
+     * @link https://ui3.nuxt.dev/getting-started/installation#themetransitions
      */
     transitions?: boolean
   }
@@ -73,40 +72,19 @@ export default defineNuxtModule<ModuleOptions>({
     },
     docs: 'https://ui3.nuxt.dev/getting-started/installation'
   },
-  defaults: {
-    prefix: 'U',
-    fonts: true,
-    colorMode: true,
-    theme: {
-      colors: undefined,
-      transitions: true
-    },
-    devtools: {
-      enabled: true
-    }
-  },
+  defaults: defaultOptions,
+
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
     options.theme = options.theme || {}
-    options.theme.colors = options.theme.colors?.length ? [...new Set(['primary', ...options.theme.colors])] : ['primary', 'secondary', 'success', 'info', 'warning', 'error']
+    options.theme.colors = resolveColors(options.theme.colors)
 
     nuxt.options.ui = options
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
-      colors: pick({
-        primary: 'green',
-        secondary: 'blue',
-        success: 'green',
-        info: 'blue',
-        warning: 'yellow',
-        error: 'red',
-        neutral: 'slate'
-      }, [...(options.theme?.colors || []), 'neutral' as any]),
-      icons
-    })
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultUiConfig(options.theme.colors))
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
