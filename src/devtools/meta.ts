@@ -108,7 +108,7 @@ export function devtoolsMetaPlugin({ resolve, options, templates }: { resolve: R
                 }
               })
 
-              const label = kebabCase(key.replace(/^U/, options.prefix ?? 'U'))
+              const label = key.replace(/^U/, options.prefix ?? 'U')
               acc[kebabCase(key.replace(/^U/, ''))] = { ...value, label, slug }
               return acc
             }, {} as Record<string, any>),
