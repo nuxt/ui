@@ -7,6 +7,10 @@ export default defineNuxtConfig({
   modules: ['../src/module'],
   devtools: { enabled: true },
 
+  ui: {
+    fonts: false
+  },
+
   future: {
     compatibilityVersion: 4
   },
