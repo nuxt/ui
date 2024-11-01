@@ -107,12 +107,12 @@
             </component>
             <p v-else-if="searchable && query && !filteredOptions?.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
-                No results for "{{ query }}".
+                {{ uiMenu.default.optionEmpty.label.replace('{query}', query) }}
               </slot>
             </p>
             <p v-else-if="!filteredOptions?.length" :class="uiMenu.empty">
               <slot name="empty" :query="query">
-                No options.
+                {{ uiMenu.default.empty.label }}
               </slot>
             </p>
           </component>
@@ -247,7 +247,7 @@ export default defineComponent({
     },
     searchablePlaceholder: {
       type: String,
-      default: 'Search...'
+      default: () => configMenu.default.searchablePlaceholder.label
     },
     searchableLazy: {
       type: Boolean,
