@@ -23,11 +23,6 @@ export default (options: Required<ModuleOptions>) => ({
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
       neutral: ''
     },
-    loading: {
-      true: {
-        itemLeadingIcon: 'animate-spin'
-      }
-    },
     active: {
       true: {
         item: 'text-[var(--ui-text-highlighted)] before:bg-[var(--ui-bg-elevated)]',
@@ -36,6 +31,11 @@ export default (options: Required<ModuleOptions>) => ({
       false: {
         item: ['text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50', options.theme.transitions && 'transition-colors before:transition-colors'],
         itemLeadingIcon: ['text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] group-data-[state=open]:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
+      }
+    },
+    loading: {
+      true: {
+        itemLeadingIcon: 'animate-spin'
       }
     },
     size: {
