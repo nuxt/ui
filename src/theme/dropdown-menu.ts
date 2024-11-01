@@ -19,6 +19,15 @@ export default (options: Required<ModuleOptions>) => ({
     itemLabelExternalIcon: 'inline-block size-3 align-top text-[var(--ui-text-dimmed)]'
   },
   variants: {
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
+      neutral: ''
+    },
+    loading: {
+      true: {
+        itemLeadingIcon: 'animate-spin'
+      }
+    },
     active: {
       true: {
         item: 'text-[var(--ui-text-highlighted)] before:bg-[var(--ui-bg-elevated)]',
@@ -27,11 +36,6 @@ export default (options: Required<ModuleOptions>) => ({
       false: {
         item: ['text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50', options.theme.transitions && 'transition-colors before:transition-colors'],
         itemLeadingIcon: ['text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] group-data-[state=open]:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
-      }
-    },
-    loading: {
-      true: {
-        itemLeadingIcon: 'animate-spin'
       }
     },
     size: {
@@ -82,6 +86,20 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
+  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
+    color,
+    class: {
+      item: `text-[var(--ui-${color})] data-highlighted:text-[var(--ui-${color})] data-highlighted:before:bg-[var(--ui-${color})]/10 data-[state=open]:before:bg-[var(--ui-${color})]/10`,
+      itemLeadingIcon: `text-[var(--ui-${color})]/50 group-data-highlighted:text-[var(--ui-${color})] group-data-[state=open]:text-[var(--ui-${color})]`
+    }
+  })), ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    active: true,
+    class: {
+      item: `text-[var(--ui-${color})] before:bg-[var(--ui-${color})]/10`,
+      itemLeadingIcon: `text-[var(--ui-${color})]`
+    }
+  }))],
   defaultVariants: {
     size: 'md'
   }
