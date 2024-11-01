@@ -17,7 +17,7 @@ const items = [
   [
     {
       label: 'Delete',
-      color: 'error',
+      color: 'error' as const,
       icon: 'i-heroicons-trash'
     }
   ]
