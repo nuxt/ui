@@ -274,6 +274,16 @@ name: 'dropdown-menu-checkbox-items-example'
 To ensure reactivity for the `checked` state of items, it's recommended to wrap your `items` array inside a `computed`.
 ::
 
+### With color items
+
+You can use the `color` property to highlight certain items with a color.
+
+::component-example
+---
+name: 'dropdown-menu-color-items-example'
+---
+::
+
 ### Control open state
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
@@ -307,16 +317,6 @@ name: 'dropdown-menu-custom-slot-example'
 
 ::tip{to="#slots"}
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
-::
-
-### With color items
-
-You can use the `color` property to highlight certain items with a color.
-
-::component-example
----
-name: 'dropdown-menu-color-items-example'
----
 ::
 
 ### Extract shortcuts
