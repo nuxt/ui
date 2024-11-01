@@ -88,6 +88,7 @@ const items = computed(() => [
 
 const itemsWithColor = computed(() => Object.keys(theme.variants.color).map(color => ({
   color,
+  icon: 'i-heroicons-swatch',
   label: color
 })))
 
