@@ -122,6 +122,11 @@ const items = computed(() => [
   }]
 ])
 
+const itemsWithColor = computed(() => Object.keys(theme.variants.color).map(color => ({
+  color,
+  label: color
+})))
+
 const sizes = Object.keys(theme.variants.size)
 
 const size = ref('md' as const)
@@ -136,6 +141,14 @@ defineShortcuts(extractShortcuts(items.value))
 
       <UDropdownMenu :items="items" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
         <UButton label="Open" color="neutral" variant="outline" icon="i-heroicons-bars-3" />
+
+        <template #custom-trailing>
+          <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-[var(--ui-primary)]" />
+        </template>
+      </UDropdownMenu>
+
+      <UDropdownMenu :items="itemsWithColor" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
+        <UButton label="Color" color="neutral" variant="outline" icon="i-heroicons-bars-3" />
 
         <template #custom-trailing>
           <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-[var(--ui-primary)]" />
