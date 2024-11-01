@@ -1,59 +1,37 @@
 <script setup lang="ts">
-import { onDevtoolsClientConnected } from '@nuxt/devtools-kit/iframe-client'
-import type { ClientFunctions, ServerFunctions, Component } from '../../src/devtools/rpc'
+import type { Component } from '../../src/devtools/meta'
 import { watchDebounced } from '@vueuse/core'
-import type { DevtoolsMeta } from '../../src/runtime/composables/extendDevtoolsMeta'
-import type { ComponentMeta } from 'vue-component-meta'
 
 // Disable devtools in component renderer iframe
 // @ts-expect-error - Nuxt Devtools internal value
 window.__NUXT_DEVTOOLS_DISABLE__ = true
 
-const components = useState<Array<Component & { value: string }>>('__ui-devtools-components')
 const component = useState<Component | undefined>('__ui-devtools-component')
 const state = useState<Record<string, any>>('__ui-devtools-state', () => ({}))
 
-const loading = ref(true)
-const error = ref<any | null>(null)
+const { data: components, status, error } = useAsyncData<Array<Component>>('__ui-devtools-components', async () => {
+  const componentMeta = await $fetch<Record<string, Component>>('/api/component-meta')
 
-onDevtoolsClientConnected(async (client) => {
-  const rpc = client.devtools.extendClientRpc<ServerFunctions, ClientFunctions>('nuxt/ui/devtools', { })
+  if (!component.value || !componentMeta[component.value.slug]) {
+    component.value = componentMeta['button']
+  }
 
-  try {
-    const componentMeta = await $fetch<Record<string, { meta: ComponentMeta & { devtools: DevtoolsMeta<any> } }>>('/api/component-meta')
-    components.value = (await rpc.getComponents()).flatMap((component) => {
-      if (componentMeta[component.slug]?.meta.devtools?.ignore) return []
-
-      return [{
-        ...component,
-        value: component.slug,
-        meta: componentMeta[component.slug]?.meta
-      }]
-    })
-
-    if (!component.value || !components.value.find(c => c.slug === component.value?.slug)) {
-      component.value = components.value.find(comp => comp.slug === 'button')
-    }
-
-    state.value.props = components.value?.reduce((acc, comp) => {
-      const componentDefaultProps = comp.meta?.props.reduce((acc, prop) => {
-        if (prop.default) acc[prop.name] = prop.default
-        return acc
-      }, {} as Record<string, any>)
-
-      acc[comp.slug] = {
-        ...comp.defaultVariants, // Default values from the theme template
-        ...componentDefaultProps, // Default values from vue props
-        ...componentMeta[comp.slug]?.meta?.devtools?.defaultProps // Default values from devtools extended meta
-      }
-
+  state.value.props = Object.values(componentMeta).reduce((acc, comp) => {
+    const componentDefaultProps = comp.meta?.props.reduce((acc, prop) => {
+      if (prop.default) acc[prop.name] = prop.default
       return acc
     }, {} as Record<string, any>)
-  } catch (e) {
-    error.value = e
-  } finally {
-    loading.value = false
-  }
+
+    acc[comp.slug] = {
+      ...comp.defaultVariants, // Default values from the theme template
+      ...componentDefaultProps, // Default values from vue props
+      ...componentMeta[comp.slug]?.meta?.devtools?.defaultProps // Default values from devtools extended meta
+    }
+
+    return acc
+  }, {} as Record<string, any>)
+
+  return Object.values(componentMeta)
 })
 
 const componentProps = computed(() => {
@@ -112,12 +90,12 @@ const isDark = computed({
 
 <template>
   <UApp class="flex justify-center items-center h-screen w-full relative font-sans">
-    <div v-if="loading || error || !component">
+    <div v-if="status === 'pending' || error || !component || !components?.length">
       <div v-if="error" class="flex flex-col justify-center items-center h-screen w-screen text-center text-[var(--ui-color-error-500)]">
         <UILogo class="h-8" />
         <UIcon name="i-heroicons-exclamation-circle" size="20" class="mt-2" />
         <p>
-          {{ error.data?.error ?? 'Unexpected error' }}
+          {{ (error.data as any)?.error ?? 'Unexpected error' }}
         </p>
       </div>
     </div>

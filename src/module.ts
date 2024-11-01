@@ -4,7 +4,6 @@ import { addTemplates, buildTemplates } from './templates'
 import icons from './theme/icons'
 import { addCustomTab, startSubprocess } from '@nuxt/devtools-kit'
 import sirv from 'sirv'
-import { setupDevtoolsClient } from './devtools/rpc'
 import { getPort } from 'get-port-please'
 import { pick } from './runtime/utils'
 import { devtoolsMetaPlugin } from './devtools/meta'
@@ -152,9 +151,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     if (nuxt.options.dev && nuxt.options.devtools.enabled && options.devtools?.enabled) {
       const templates = buildTemplates(options)
-      nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin({ resolve, templates })] })
-
-      setupDevtoolsClient(options)
+      nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin({ resolve, templates, options })] })
 
       // Runs UI devtools in a subprocess for local development
       if (process.env.NUXT_UI_DEVTOOLS_LOCAL) {

@@ -3,6 +3,16 @@ import { kebabCase, camelCase } from 'scule'
 import defu from 'defu'
 import fs from 'node:fs'
 import type { Resolver } from '@nuxt/kit'
+import type { ComponentMeta } from 'vue-component-meta'
+import type { DevtoolsMeta } from '../runtime/composables/extendDevtoolsMeta'
+import type { ModuleOptions } from '../module'
+
+export type Component = {
+  slug: string
+  label: string
+  meta?: ComponentMeta & { devtools: DevtoolsMeta<any> }
+  defaultVariants: Record<string, any>
+}
 
 const devtoolsComponentMeta: Record<string, any> = {}
 
@@ -29,7 +39,7 @@ function extractDevtoolsMeta(code: string): string | null {
 }
 
 // A Plugin to parse additional metadata for the Nuxt UI Devtools.
-export function devtoolsMetaPlugin({ resolve, templates }: { resolve: Resolver['resolve'], templates: Record<string, any> }) {
+export function devtoolsMetaPlugin({ resolve, options, templates }: { resolve: Resolver['resolve'], options: ModuleOptions, templates: Record<string, any> }) {
   return {
     name: 'ui-devtools-component-meta',
     enforce: 'pre' as const,
@@ -58,9 +68,11 @@ export function devtoolsMetaPlugin({ resolve, templates }: { resolve: Resolver['
         res.setHeader('Content-Type', 'application/json')
         try {
           const componentMeta = await import('./.component-meta/component-meta')
+
           const meta = defu(
             Object.entries(componentMeta.default).reduce((acc, [key, value]: [string, any]) => {
               if (!key.startsWith('U')) return acc
+
               const name = key.substring(1)
               const slug = kebabCase(name)
               const template = templates?.[camelCase(name)]
@@ -96,7 +108,8 @@ export function devtoolsMetaPlugin({ resolve, templates }: { resolve: Resolver['
                 }
               })
 
-              acc[kebabCase(key.replace(/^U/, ''))] = value
+              const label = kebabCase(key.replace(/^U/, options.prefix ?? 'U'))
+              acc[kebabCase(key.replace(/^U/, ''))] = { ...value, label, slug }
               return acc
             }, {} as Record<string, any>),
             devtoolsComponentMeta

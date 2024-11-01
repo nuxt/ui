@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Component } from '../../../src/devtools/rpc'
+import type { Component } from '../../../src/devtools/meta'
 import { useClipboard } from '@vueuse/core'
 import { kebabCase } from 'scule'
 import { escapeString } from 'knitwork'
