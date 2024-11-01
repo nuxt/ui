@@ -20,6 +20,7 @@ Use the `items` prop as an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
+- `color?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
 - [`type?: "link" | "label" | "separator" | "checkbox"`{lang="ts-type"}](#with-checkbox-items)
@@ -210,6 +211,16 @@ name: 'context-menu-custom-slot-example'
 
 ::tip{to="#slots"}
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
+::
+
+### With color items
+
+You can use the `color` property to highlight certain items with a color.
+
+::component-example
+---
+name: 'context-menu-color-items-example'
+---
 ::
 
 ### Extract shortcuts
