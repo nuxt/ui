@@ -56,6 +56,7 @@ import { SwitchRoot, SwitchThumb, useForwardProps, Label } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import UIcon from './Icon.vue'
 
 const props = defineProps<SwitchProps>()
 const slots = defineSlots<SwitchSlots>()

@@ -50,6 +50,7 @@ import { CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'radix-v
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import UIcon from './Icon.vue'
 
 const props = defineProps<CheckboxProps>()
 const slots = defineSlots<CheckboxSlots>()

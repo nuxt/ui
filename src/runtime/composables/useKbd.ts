@@ -1,7 +1,7 @@
+import { reactive, computed, onMounted } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
-import { ref, computed, onMounted } from 'vue'
 
-type KbdSpecificMap = {
+type KbdKeysSpecificMap = {
   meta: string
   alt: string
   ctrl: string
@@ -31,29 +31,22 @@ export const kbdKeysMap = {
   end: '↘'
 }
 
-export const kbdKeysSpecificMap: Record<'macOS' | 'other', KbdSpecificMap> = {
-  macOS: {
-    meta: kbdKeysMap.command,
-    alt: kbdKeysMap.option,
-    ctrl: '⌃'
-  },
-  other: {
-    meta: kbdKeysMap.win,
-    alt: 'alt',
-    ctrl: 'ctrl'
-  }
-}
-
 export type KbdKey = keyof typeof kbdKeysMap
-export type KbdKeySpecific = keyof KbdSpecificMap
+export type KbdKeySpecific = keyof KbdKeysSpecificMap
 
 const _useKbd = () => {
   const macOS = computed(() => import.meta.client && navigator && navigator.userAgent && navigator.userAgent.match(/Macintosh;/))
 
-  const metaSymbol = ref(' ')
+  const kbdKeysSpecificMap = reactive({
+    meta: ' ',
+    alt: ' ',
+    ctrl: ' '
+  })
 
   onMounted(() => {
-    metaSymbol.value = getKbdKey('meta')!
+    kbdKeysSpecificMap.meta = macOS.value ? kbdKeysMap.command : kbdKeysMap.win
+    kbdKeysSpecificMap.alt = macOS.value ? kbdKeysMap.option : 'alt'
+    kbdKeysSpecificMap.ctrl = macOS.value ? '⌃' : 'ctrl'
   })
 
   function getKbdKey(value?: KbdKey | string) {
@@ -62,7 +55,7 @@ const _useKbd = () => {
     }
 
     if (['meta', 'alt', 'ctrl'].includes(value)) {
-      return kbdKeysSpecificMap[macOS.value ? 'macOS' : 'other'][value as KbdKeySpecific]
+      return kbdKeysSpecificMap[value as KbdKeySpecific]
     }
 
     return kbdKeysMap[value as KbdKey] || value.toUpperCase()
@@ -70,7 +63,6 @@ const _useKbd = () => {
 
   return {
     macOS,
-    metaSymbol,
     getKbdKey
   }
 }
