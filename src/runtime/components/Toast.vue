@@ -62,6 +62,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<ToastProps>(), {
   close: true
