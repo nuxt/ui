@@ -83,8 +83,7 @@ export default defineComponent({
       let errs = await props.validate(props.state)
 
       if (props.schema) {
-        const schema = parseSchema(props.state)
-        const { errors, result } = await schema(props.schema as unknown as Schema)
+        const { errors, result } = await parseSchema(props.state, props.schema as unknown as Schema)
         if (errors) {
           errs = errs.concat(errors)
         } else {
@@ -344,21 +343,19 @@ async function validateYupSchema(
   }
 }
 
-function parseSchema(state: any) {
-  return async (schema: Schema): Promise<ValidateReturnSchema<typeof state>> => {
-    if (isZodSchema(schema)) {
-      return validateZodSchema(state, schema)
-    } else if (isJoiSchema(schema)) {
-      return validateJoiSchema(state, schema)
-    } else if (isValibotSchema(schema)) {
-      return validateValibotSchema(state, schema)
-    } else if (isYupSchema(schema)) {
-      return validateYupSchema(state, schema)
-    } else if (isSuperStructSchema(schema)) {
-      return validateSuperstructSchema(state, schema)
-    } else {
-      throw new Error('Form validation failed: Unsupported form schema')
-    }
+function parseSchema(state: any, schema: Schema): Promise<ValidateReturnSchema<typeof state>> {
+  if (isZodSchema(schema)) {
+    return validateZodSchema(state, schema)
+  } else if (isJoiSchema(schema)) {
+    return validateJoiSchema(state, schema)
+  } else if (isValibotSchema(schema)) {
+    return validateValibotSchema(state, schema)
+  } else if (isYupSchema(schema)) {
+    return validateYupSchema(state, schema)
+  } else if (isSuperStructSchema(schema)) {
+    return validateSuperstructSchema(state, schema)
+  } else {
+    throw new Error('Form validation failed: Unsupported form schema')
   }
 }
 </script>
