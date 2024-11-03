@@ -21,13 +21,6 @@ export default defineNuxtConfig({
     'nuxt-og-image'
   ],
 
-  $production: {
-    routeRules: {
-      '/api/_mdc/highlight': { cache: { group: 'mdc', name: 'highlight', maxAge: 60 * 60 } },
-      '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
-    }
-  },
-
   app: {
     rootAttrs: {
       'vaul-drawer-wrapper': '',
@@ -40,26 +33,18 @@ export default defineNuxtConfig({
   },
 
   content: {
-    // sources: {
-    //   pro: process.env.NUXT_UI_PRO_PATH
-    //     ? {
-    //         prefix: '/pro',
-    //         driver: 'fs',
-    //         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
-    //       }
-    //     : process.env.NUXT_GITHUB_TOKEN
-    //       ? {
-    //           prefix: '/pro',
-    //           driver: 'github',
-    //           repo: 'nuxt/ui-pro',
-    //           branch: 'dev',
-    //           dir: 'docs/app/content/pro',
-    //           token: process.env.NUXT_GITHUB_TOKEN || ''
-    //         }
-    //       : undefined
-    // },
+    build: {
+      markdown: {
+        highlight: {
+          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+        }
+      }
+    }
+  },
+
+  mdc: {
     highlight: {
-      langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+      noApiRoute: false
     }
   },
 
@@ -109,52 +94,6 @@ export default defineNuxtConfig({
 
   hub: {
     cache: true
-  },
-
-  hooks: {
-    'components:extend': (components) => {
-      const globals = components.filter(c => [
-        'UAccordion',
-        'UAlert',
-        'UAvatar',
-        'UAvatarGroup',
-        'UBadge',
-        'UBreadcrumb',
-        'UButton',
-        'UButtonGroup',
-        'UCheckbox',
-        'UChip',
-        'UCollapsible',
-        'UCommandPalette',
-        'UContextMenu',
-        'UDrawer',
-        'UDropdownMenu',
-        'UFormField',
-        'UIcon',
-        'UInput',
-        'UInputMenu',
-        'UKbd',
-        'ULink',
-        'UModal',
-        'UNavigationMenu',
-        'UPagination',
-        'UPopover',
-        'UProgress',
-        'URadioGroup',
-        'USelect',
-        'USelectMenu',
-        'USeparator',
-        'USlider',
-        'USlideover',
-        'USwitch',
-        'UTable',
-        'UTabs',
-        'UTextarea',
-        'UTooltip'
-      ].includes(c.pascalName))
-
-      globals.forEach(c => c.global = 'sync')
-    }
   },
 
   componentMeta: {

@@ -123,7 +123,7 @@ export interface SelectMenuSlots<T> {
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectMenuItem | AcceptableValue> = MaybeArrayOfArray<SelectMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
 import { computed, toRef } from 'vue'
-import { ComboboxRoot, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
+import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import * as isEqual from 'fast-deep-equal'
 import { reactivePick } from '@vueuse/core'
@@ -153,6 +153,8 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
+const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
@@ -387,6 +389,8 @@ function onUpdateOpen(value: boolean) {
             </ComboboxItem>
           </ComboboxGroup>
         </ComboboxViewport>
+
+        <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </ComboboxContent>
     </ComboboxPortal>
   </ComboboxRoot>

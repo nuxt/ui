@@ -301,6 +301,33 @@ props:
 ---
 ::
 
+### Arrow
+
+Use the `arrow` prop to display an arrow on the SelectMenu.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+  - arrow
+external:
+  - items
+  - modelValue
+props:
+  modelValue: Backlog
+  arrow: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
 ### Color
 
 Use the `color` prop to change the ring color when the SelectMenu is focused.
