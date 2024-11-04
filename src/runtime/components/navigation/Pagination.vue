@@ -1,6 +1,6 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
-    <slot name="first" :on-click="onClickFirst">
+    <slot name="first" :on-click="onClickFirst" :can-go-first="canGoFirstOrPrev">
       <UButton
         v-if="firstButton && showFirst"
         :size="size"
@@ -14,7 +14,7 @@
       />
     </slot>
 
-    <slot name="prev" :on-click="onClickPrev">
+    <slot name="prev" :on-click="onClickPrev" :can-go-prev="canGoFirstOrPrev">
       <UButton
         v-if="prevButton"
         :size="size"
@@ -41,7 +41,7 @@
       @click="() => onClickPage(page)"
     />
 
-    <slot name="next" :on-click="onClickNext">
+    <slot name="next" :on-click="onClickNext" :can-go-next="canGoLastOrNext">
       <UButton
         v-if="nextButton"
         :size="size"
@@ -55,7 +55,7 @@
       />
     </slot>
 
-    <slot name="last" :on-click="onClickLast">
+    <slot name="last" :on-click="onClickLast" :can-go-last="canGoLastOrNext">
       <UButton
         v-if="lastButton && showLast"
         :size="size"
