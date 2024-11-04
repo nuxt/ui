@@ -366,14 +366,17 @@ const expand = ref({
 Controls whether multiple rows can be expanded simultaneously in the table.
 
 ```vue
-<!-- Allow only one row to be expanded at a time -->
-<UTable :multiple-expand="false" />
+<template>
+  <!-- Allow only one row to be expanded at a time -->
+  <UTable :multiple-expand="false" />
 
-<!-- Default behavior: Allow multiple rows to be expanded simultaneously -->
-<UTable :multiple-expand="true" />
+  <!-- Default behavior: Allow multiple rows to be expanded simultaneously -->
+  <UTable :multiple-expand="true" />
 
-<!-- Or simply -->
-<UTable />
+  <!-- Or simply -->
+  <UTable />
+</template>
+
 ```
 
 #### Disable Row Expansion
