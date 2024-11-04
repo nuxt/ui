@@ -87,19 +87,21 @@
                   @click.capture.stop="() => onSelect(row)"
                 />
               </td>
-
               <td
                 v-if="expand"
                 :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
               >
+                <template v-if="$slots['expand-action']">
+                  <slot name="expand-action" :row="row" :is-expanded="isExpanded(row)" :toggle="() => toggleOpened(row)" />
+                </template>
                 <UButton
+                  v-else
                   :disabled="row.disabledExpand"
                   v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
                   :ui="{ icon: { base: [ui.expand.icon, isExpanded(row) && 'rotate-180'].join(' ') } }"
                   @click.capture.stop="toggleOpened(row)"
                 />
               </td>
-
               <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, column?.rowClass, row[column.key]?.class]">
                 <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
                   {{ getRowData(row, column.key) }}

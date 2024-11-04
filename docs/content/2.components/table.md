@@ -513,6 +513,43 @@ componentProps:
 ---
 ::
 
+### `expand-action`
+
+The `#expand-action` slot allows you to customize the expansion control interface for expandable table rows. This feature provides a flexible way to implement custom expand/collapse functionality while maintaining access to essential row data and state.
+
+#### Usage
+
+```vue
+<template>
+  <UTable>
+    <template #expand-action="{ row, toggle, isExpanded }">
+    <!-- Your custom expand action content -->
+    </template>
+  </UTable>
+</template>
+```
+
+#### Slot Props
+
+The slot provides three key props:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `row` | `Object` | Contains the current row's data |
+| `toggle` | `Function` | Function to toggle the expanded state |
+| `isExpanded` | `Boolean` | Current expansion state of the row |
+
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-expand-action-slot'
+componentProps:
+  class: 'flex-1'
+---
+::
+
+
 ### `loading-state`
 
 Use the `#loading-state` slot to customize the loading state.
