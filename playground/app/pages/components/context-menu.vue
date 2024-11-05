@@ -86,6 +86,12 @@ const items = computed(() => [
   }]
 ])
 
+const itemsWithColor = computed(() => Object.keys(theme.variants.color).map(color => ({
+  color: (color as keyof typeof theme.variants.color),
+  icon: 'i-heroicons-swatch',
+  label: color
+})))
+
 const sizes = Object.keys(theme.variants.size)
 
 const size = ref('md' as const)
@@ -102,6 +108,12 @@ defineShortcuts(extractShortcuts(items.value))
     <UContextMenu :items="items" class="min-w-48" :size="size">
       <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
         Right click here
+      </div>
+    </UContextMenu>
+
+    <UContextMenu :items="itemsWithColor" class="min-w-48" :size="size">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+        Color right click here
       </div>
     </UContextMenu>
   </div>
