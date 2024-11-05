@@ -5,6 +5,11 @@ export interface FormError<T extends string = string> {
   message: string
 }
 
+export interface ValidateReturnSchema<T> {
+  result: T
+  errors: FormError[]
+}
+
 export interface FormErrorWithId extends FormError {
   id: string
 }
