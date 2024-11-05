@@ -79,6 +79,7 @@ describe('DropdownMenu', () => {
       disabled: true
     }], [{
       label: 'Logout',
+      color: 'error',
       icon: 'i-heroicons-arrow-right-start-on-rectangle',
       kbds: ['shift', 'meta', 'q']
     }]
