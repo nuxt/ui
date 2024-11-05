@@ -93,6 +93,7 @@ import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, Accord
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
+import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<AccordionProps<T>>(), {
   type: 'single',

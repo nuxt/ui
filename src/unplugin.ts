@@ -28,7 +28,7 @@ type AppConfigUI = {
   // TODO: add type hinting for colors from `options.theme.colors`
   colors?: Record<string, Color> & { neutral?: NeutralColor }
   icons?: Partial<typeof icons>
-} & DeepPartial<typeof ui, string>
+} & DeepPartial<typeof ui>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
   /** Whether to generate declaration files for auto-imported components. */

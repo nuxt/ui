@@ -12,9 +12,12 @@ const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof 
 
 const contextMenu = tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })
 
+type ContextMenuVariants = VariantProps<typeof contextMenu>
+
 export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
   icon?: string
+  color?: ContextMenuVariants['color']
   avatar?: AvatarProps
   content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   kbds?: KbdProps['value'][] | KbdProps[]
@@ -33,8 +36,6 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   onSelect?(e: Event): void
   onUpdateChecked?(checked: boolean): void
 }
-
-type ContextMenuVariants = VariantProps<typeof contextMenu>
 
 export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
   size?: ContextMenuVariants['size']

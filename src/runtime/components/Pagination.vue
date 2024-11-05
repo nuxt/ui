@@ -106,6 +106,7 @@ extendDevtoolsMeta({ defaultProps: { total: 50 } })
 import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   size: 'md',

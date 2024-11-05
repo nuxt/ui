@@ -67,6 +67,7 @@ import { Primitive } from 'radix-vue'
 import { useAppConfig } from '#imports'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import UButton from './Button.vue'
 
 const props = defineProps<AlertProps>()
 const emits = defineEmits<AlertEmits>()
