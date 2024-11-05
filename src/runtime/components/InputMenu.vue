@@ -132,7 +132,7 @@ export interface InputMenuSlots<T> {
 </script>
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<InputMenuItem | AcceptableValue> = MaybeArrayOfArray<InputMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
-import { computed, ref, toRef, onMounted } from 'vue'
+import { computed, ref, toRef, onMounted, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import * as isEqual from 'fast-deep-equal'
@@ -184,7 +184,7 @@ const ui = computed(() => inputMenu({
 }))
 
 function displayValue(value: AcceptableValue): string {
-  const item = items.value.find(item => props.valueKey ? isEqual.default(get(item as Record<string, any>, props.valueKey as string), value) : isEqual.default(item, value))
+  const item = items.value.find(item => props.valueKey ? isEqual.default(get(item as Record<string, any>, props.valueKey as string), value) : isEqual.default(item, value)) ?? (props.createItem && value)
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
@@ -257,6 +257,9 @@ onMounted(() => {
 })
 
 function onUpdate(value: any) {
+  if (toRaw(props.modelValue) === value) {
+    return
+  }
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)

@@ -122,7 +122,7 @@ export interface SelectMenuSlots<T> {
 </script>
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectMenuItem | AcceptableValue> = MaybeArrayOfArray<SelectMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
-import { computed, toRef } from 'vue'
+import { computed, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import * as isEqual from 'fast-deep-equal'
@@ -177,7 +177,7 @@ function displayValue(value: T | T[]): string {
     return value.map(v => displayValue(v)).join(', ')
   }
 
-  const item = items.value.find(item => props.valueKey ? isEqual.default(get(item as Record<string, any>, props.valueKey as string), value) : isEqual.default(item, value))
+  const item = items.value.find(item => props.valueKey ? isEqual.default(get(item as Record<string, any>, props.valueKey as string), value) : isEqual.default(item, value)) ?? (props.createItem && value)
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
@@ -236,6 +236,9 @@ const rootItems = computed(() => [
 ] as ArrayOrWrapped<T>)
 
 function onUpdate(value: any) {
+  if (toRaw(props.modelValue) === value) {
+    return
+  }
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
