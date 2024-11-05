@@ -17,11 +17,11 @@
         :ui="uiRadio"
         @change="onUpdate(option.value)"
       >
-        <template #label>
+        <template v-if="$slots.label" #label>
           <slot name="label" v-bind="{ option, selected: option.selected }" />
         </template>
 
-        <template #help>
+        <template v-if="$slots.help" #help>
           <slot name="help" v-bind="{ option, selected: option.selected }" />
         </template>
       </URadio>
@@ -30,17 +30,17 @@
 </template>
 
 <script lang="ts">
-import URadio from './Radio.vue'
 import { computed, defineComponent, provide, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig, get } from '../../utils'
 import type { DeepPartial, Strategy } from '../../types/index'
+import URadio from './Radio.vue'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { radioGroup, radio } from '#ui/ui.config'
-import colors from '#ui-colors'
+import type colors from '#ui-colors'
 
 const config = mergeConfig<typeof radioGroup>(appConfig.ui.strategy, appConfig.ui.radioGroup, radioGroup)
 const configRadio = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
@@ -52,7 +52,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number, Object, Boolean],
+      type: [String, Number, Object, Boolean] as PropType<string | number | boolean | object | null>,
       default: ''
     },
     name: {
@@ -82,7 +82,7 @@ export default defineComponent({
     color: {
       type: String as PropType<typeof colors[number]>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
@@ -100,7 +100,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('radioGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
     const { ui: uiRadio } = useUI('radio', toRef(props, 'uiRadio'), configRadio)
 
@@ -152,7 +152,7 @@ export default defineComponent({
       uiRadio,
       attrs,
       normalizedOptions,
-      // eslint-disable-next-line vue/no-dupe-keys
+
       onUpdate
     }
   }

@@ -106,7 +106,7 @@ export default defineComponent({
     color: {
       type: String as PropType<NotificationColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
       }
     },
@@ -120,7 +120,7 @@ export default defineComponent({
     }
   },
   emits: ['close'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('notification', toRef(props, 'ui'), config)
 
     let timer: null | ReturnType<typeof useTimer> = null
@@ -156,19 +156,19 @@ export default defineComponent({
       )
     })
 
-    function onMouseover () {
+    function onMouseover() {
       if (timer) {
         timer.pause()
       }
     }
 
-    function onMouseleave () {
+    function onMouseleave() {
       if (timer) {
         timer.resume()
       }
     }
 
-    function onClose () {
+    function onClose() {
       if (timer) {
         timer.stop()
       }
@@ -180,7 +180,7 @@ export default defineComponent({
       emit('close')
     }
 
-    function onAction (action: NotificationAction) {
+    function onAction(action: NotificationAction) {
       if (timer) {
         timer.stop()
       }
@@ -192,7 +192,7 @@ export default defineComponent({
       emit('close')
     }
 
-    function initTimer () {
+    function initTimer() {
       if (timer) {
         timer.stop()
       }

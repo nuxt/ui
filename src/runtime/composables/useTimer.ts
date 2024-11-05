@@ -2,7 +2,7 @@ import { ref, computed } from 'vue-demi'
 import { useTimestamp } from '@vueuse/core'
 import type { UseTimestampOptions } from '@vueuse/core'
 
-export function useTimer (cb: (...args: unknown[]) => any, interval: number, options?: UseTimestampOptions<true>) {
+export function useTimer(cb: (...args: unknown[]) => any, interval: number, options?: UseTimestampOptions<true>) {
   let timer: number | null = null
   const { pause: tPause, resume: tResume, timestamp } = useTimestamp({ ...(options || {}), controls: true })
   const startTime = ref<number | null>(null)
@@ -14,7 +14,7 @@ export function useTimer (cb: (...args: unknown[]) => any, interval: number, opt
     return interval - (timestamp.value - startTime.value)
   })
 
-  function set (...args: unknown[]) {
+  function set(...args: unknown[]) {
     timer = setTimeout(() => {
       timer = null
       startTime.value = null
@@ -22,30 +22,30 @@ export function useTimer (cb: (...args: unknown[]) => any, interval: number, opt
     }, remaining.value) as unknown as number
   }
 
-  function clear () {
+  function clear() {
     if (timer) {
       clearTimeout(timer)
       timer = null
     }
   }
 
-  function start () {
+  function start() {
     startTime.value = Date.now()
 
     set()
   }
 
-  function stop () {
+  function stop() {
     clear()
     tPause()
   }
 
-  function pause () {
+  function pause() {
     clear()
     tPause()
   }
 
-  function resume () {
+  function resume() {
     set()
     tResume()
     startTime.value = (startTime.value || 0) + (Date.now() - timestamp.value)

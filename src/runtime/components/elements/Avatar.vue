@@ -63,21 +63,21 @@ export default defineComponent({
     size: {
       type: String as PropType<AvatarSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     chipColor: {
       type: String as PropType<AvatarChipColor>,
       default: () => config.default.chipColor,
-      validator (value: string) {
+      validator(value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
       }
     },
     chipPosition: {
       type: String as PropType<AvatarChipPosition>,
       default: () => config.default.chipPosition,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.chip.position).includes(value)
       }
     },
@@ -98,7 +98,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('avatar', toRef(props, 'ui'), config)
 
     const url = computed(() => {
@@ -152,7 +152,7 @@ export default defineComponent({
       }
     })
 
-    function onError () {
+    function onError() {
       error.value = true
     }
 

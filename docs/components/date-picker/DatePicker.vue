@@ -31,9 +31,9 @@ const breakpoints = useBreakpoints(breakpointsTailwind)
 const smallerThanSm = breakpoints.smaller('sm')
 
 const attrs = {
-  transparent: true,
-  borderless: true,
-  color: 'primary',
+  'transparent': true,
+  'borderless': true,
+  'color': 'primary',
   'is-dark': { selector: 'html', darkClass: 'dark' },
   'first-day-of-week': 2
 }

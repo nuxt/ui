@@ -62,7 +62,7 @@ export default defineComponent({
       default: null
     },
     modelValue: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | null>,
       default: false
     },
     disabled: {
@@ -88,14 +88,14 @@ export default defineComponent({
     color: {
       type: String as PropType<ToggleColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
     size: {
       type: String as PropType<ToggleSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
@@ -109,16 +109,16 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('toggle', toRef(props, 'ui'), config)
 
     const { emitFormChange, color, inputId, name } = useFormGroup(props)
 
     const active = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
         emit('change', value)
 

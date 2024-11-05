@@ -1,5 +1,51 @@
 # Changelog
 
+## [2.19.0](https://github.com/nuxt/ui/compare/v2.18.7...v2.19.0) (2024-11-05)
+
+### Features
+
+* **Form:** add `superstruct` validation ([#2357](https://github.com/nuxt/ui/issues/2357)) ([3cda6c6](https://github.com/nuxt/ui/commit/3cda6c6478d5284a3ffcb973270831601e8e5657))
+* **Form:** apply transformations ([#2460](https://github.com/nuxt/ui/issues/2460)) ([ceecb60](https://github.com/nuxt/ui/commit/ceecb60c3bbd5507b1f54faed001818639d9269c))
+* **Input/Textarea:** nullify model modifier ([#2309](https://github.com/nuxt/ui/issues/2309)) ([9dd7e61](https://github.com/nuxt/ui/commit/9dd7e615e97b6bf3c4c4096edd35a86ca3cfd53c))
+* **InputMenu:** allows to customize labels ([#2295](https://github.com/nuxt/ui/issues/2295)) ([ddf67a0](https://github.com/nuxt/ui/commit/ddf67a060ba659f102673eff31eb2e30231c2d93))
+* **Pagination:** improve slot props ([#2522](https://github.com/nuxt/ui/issues/2522)) ([c71fdc8](https://github.com/nuxt/ui/commit/c71fdc8795812bed779ab247451efd3db031e4cd))
+* **SelectMenu:** allows to customize labels ([#2266](https://github.com/nuxt/ui/issues/2266)) ([54e713d](https://github.com/nuxt/ui/commit/54e713d31ae0b80b0f69dd507f71387100204ac3))
+* **Table:** improve `expanded` row ([#2485](https://github.com/nuxt/ui/issues/2485)) ([1acd01a](https://github.com/nuxt/ui/commit/1acd01a440db7a7fa765189d8bde424ade9074e9))
+
+### Bug Fixes
+
+* **Accordion:** improve `items` type ([#2487](https://github.com/nuxt/ui/issues/2487)) ([25378df](https://github.com/nuxt/ui/commit/25378df1d894546c4b08eb43a58b02b40ab9649b))
+* **Button:** wrong `to` type ([8ab4a14](https://github.com/nuxt/ui/commit/8ab4a14394e0890b33a610e6491d891e89386959)), closes [#1253](https://github.com/nuxt/ui/issues/1253)
+* **Divider:** default `type` from app config ([7846ca3](https://github.com/nuxt/ui/commit/7846ca35b5332a9e70f9990059f6041d60770e79)), closes [nuxt/ui#2398](https://github.com/nuxt/ui/issues/2398)
+* **HorizontalNavigation/VerticalNavigation:** handle `badge` in RTL mode ([#2420](https://github.com/nuxt/ui/issues/2420)) ([4bf81be](https://github.com/nuxt/ui/commit/4bf81be36463bf280f31099c97a751e65240dcf5))
+* **InputMenu/SelectMenu:** allow access nested object in `option-attribute` ([#2465](https://github.com/nuxt/ui/issues/2465)) ([ff18061](https://github.com/nuxt/ui/commit/ff1806143c45a7d83b00e78bec979a8f412a2827))
+* **InputMenu/SelectMenu:** escape regexp before search ([c68ba76](https://github.com/nuxt/ui/commit/c68ba76fd0eebf411ccd5f047ee9a01b8ec5f5de)), closes [nuxt/ui#2308](https://github.com/nuxt/ui/issues/2308)
+* **InputMenu/SelectMenu:** prevent unnecessary updates when modelValue is unchanged ([#2507](https://github.com/nuxt/ui/issues/2507)) ([1a94b55](https://github.com/nuxt/ui/commit/1a94b55caac91685f518ae4c24ca8dcbee827f86))
+* **module:** missing types in `ui` config ([#2467](https://github.com/nuxt/ui/issues/2467)) ([23971ef](https://github.com/nuxt/ui/commit/23971efdb007701352ce58412db597cd95b9996b))
+* **Progress:** handle `carousel` and `carousel-inverse` animations in RTL mode ([#2400](https://github.com/nuxt/ui/issues/2400)) ([20fb46a](https://github.com/nuxt/ui/commit/20fb46a3ba8d74fcaa1407b23d65b117cc9d6802))
+* **RadioGroup:** rendering empty slots ([#2456](https://github.com/nuxt/ui/issues/2456)) ([b6ed1c5](https://github.com/nuxt/ui/commit/b6ed1c59ffe8c8aaac78a34d8559ca793bb92eaa))
+* **Table:**  `checkbox` not checked while using props by ([#2401](https://github.com/nuxt/ui/issues/2401)) ([1b7e36c](https://github.com/nuxt/ui/commit/1b7e36cf70a7252915c58657bc878cb29c719a7f))
+* **Table:**  `indeterminate` checkbox with pagination ([#2439](https://github.com/nuxt/ui/issues/2439)) ([070d2f8](https://github.com/nuxt/ui/commit/070d2f89b6d1cb9c236eeb779cb3918ed5770434))
+* **Table:** export `TableRow` and `TableColumn` types ([c36964b](https://github.com/nuxt/ui/commit/c36964b5eacbd61a661f02953f0297a390fd1d34)), closes [nuxt/ui#2373](https://github.com/nuxt/ui/issues/2373)
+* **Table:** handle dot nation with `by` prop ([#2413](https://github.com/nuxt/ui/issues/2413)) ([b72d343](https://github.com/nuxt/ui/commit/b72d3434e9ab024e8622611d32b5a4467c8364b9))
+* **Tabs:** allow `aria-label` on items ([3cf19ea](https://github.com/nuxt/ui/commit/3cf19ea5afcf97ef226d8be231d3b297c5f23b9f)), closes [nuxt/ui#1934](https://github.com/nuxt/ui/issues/1934)
+
+## [2.18.7](https://github.com/nuxt/ui/compare/v2.18.6...v2.18.7) (2024-10-09)
+
+
+### Features
+
+* **forms:** allow `null` as initial value ([#2275](https://github.com/nuxt/ui/issues/2275)) ([474accb](https://github.com/nuxt/ui/commit/474accbefb36ead3b54406ee4ae0fdd2387fab61))
+
+
+### Bug Fixes
+
+* **Carousel:** arrows & indicators are broken in RTL ([#2251](https://github.com/nuxt/ui/issues/2251)) ([db5e5c4](https://github.com/nuxt/ui/commit/db5e5c49078a4faac3fb0c41b23b0dbd64efdd77))
+* **Carousel:** pages calculation ([#2345](https://github.com/nuxt/ui/issues/2345)) ([5cf24fa](https://github.com/nuxt/ui/commit/5cf24fa6e7ba1508458dd5bc1319ac431d908cb0))
+* **Dropdown/Popover:** conflict in toggle for touch devices ([#2272](https://github.com/nuxt/ui/issues/2272)) ([4ae9654](https://github.com/nuxt/ui/commit/4ae96540629faff1c3b5046cf7ce6a9315bb9bf4))
+* **Link:** allow `title` field ([0aa3909](https://github.com/nuxt/ui/commit/0aa3909e715e34ac80565c0111d4378c828fb566)), closes [#1439](https://github.com/nuxt/ui/issues/1439)
+* **Tooltip:** hide when `text` prop & slot are empty ([#2232](https://github.com/nuxt/ui/issues/2232)) ([5ed5c57](https://github.com/nuxt/ui/commit/5ed5c57d0d09ae39d623c963270bb0a894a97d29))
+
 ## [2.18.6](https://github.com/nuxt/ui/compare/v2.18.5...v2.18.6) (2024-09-23)
 
 

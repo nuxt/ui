@@ -40,7 +40,7 @@ import type { DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { checkbox } from '#ui/ui.config'
-import colors from '#ui-colors'
+import type colors from '#ui-colors'
 import { useId } from '#app'
 
 const config = mergeConfig<typeof checkbox>(appConfig.ui.strategy, appConfig.ui.checkbox, checkbox)
@@ -57,7 +57,7 @@ export default defineComponent({
       default: null
     },
     modelValue: {
-      type: [Boolean, Array],
+      type: [Boolean, Array] as PropType<boolean | Array<any> | null>,
       default: null
     },
     name: {
@@ -87,7 +87,7 @@ export default defineComponent({
     color: {
       type: String as PropType<typeof colors[number]>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
@@ -105,17 +105,17 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('checkbox', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const { emitFormChange, color, name, inputId: _inputId } = useFormGroup(props)
     const inputId = _inputId.value ?? useId()
 
     const toggle = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })

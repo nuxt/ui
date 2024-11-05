@@ -1,5 +1,5 @@
-import { chip } from '../ui.config'
-import colors from '#ui-colors'
+import type { chip } from '../ui.config'
+import type colors from '#ui-colors'
 
 export type ChipSize = keyof typeof chip.size
 export type ChipColor = 'gray' | typeof colors[number]

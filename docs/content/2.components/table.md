@@ -30,7 +30,7 @@ Use the `columns` prop to configure which columns to display. It's an array of o
 - `direction` - The sort direction to use on first click. Defaults to `asc`.
 - `class` - The class to apply to the column cells.
 - `rowClass` - The class to apply to the data column cells. :u-badge{label="New" class="!rounded-full" variant="subtle"}
-- `sort` - Pass your own `sort` function. Defaults to a simple _greater than_ / _less than_ comparison. 
+- `sort` - Pass your own `sort` function. Defaults to a simple _greater than_ / _less than_ comparison.
 
 Arguments for the `sort` function are: Value A, Value B, Direction - 'asc' or 'desc'
 
@@ -331,12 +331,82 @@ componentProps:
 
 ### Expandable :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
 
-You can use the `expand` slot to display extra information about a row. You will have access to the `row` property in the slot scope.
+You can use the `v-model:expand` to enables row expansion functionality in the table component. It maintains an object containing an `openedRows` an array and `row` an object, which tracks the indices of currently expanded rows.
+
+When using the expand slot, you have access to the `row` property in the slot scope, which contains the data of the row that triggered the expand/collapse action. This allows you to customize the expanded content based on the row's data.
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-expandable'
+componentProps:
+  class: 'flex-1'
+---
+::
+
+#### Event expand
+
+The `@update:expand` event is emitted when a row is expanded. This event provides the current state of expanded rows and the data of the row that triggered the event.
+
+To use the `@update:expand` event, add it to your `UTable` component. The event handler will receive an object with the following properties:
+- `openedRows`: An array of indices of the currently expanded rows.
+- `row`: The row data that triggered the expand/collapse action.
+
+```vue
+<script setup lang="ts">
+const { data, pending } = await useLazyFetch(() => `/api/users`)
+
+const handleExpand = ({ openedRows, row }) => {
+  console.log('opened Rows:', openedRows);
+  console.log('Row Data:', row);
+};
+
+const expand = ref({
+  openedRows: [],
+  row: null
+})
+
+</script>
+<template>
+  <UTable v-model="expand" :loading="pending" :rows="data" @update:expand="handleExpand">
+    <template #expand="{ row }">
+        <div class="p-4">
+          <pre>{{ row }}</pre>
+        </div>
+      </template>
+  </UTable>
+</template>
+```
+
+#### Multiple expand
+Controls whether multiple rows can be expanded simultaneously in the table.
+
+```vue
+<template>
+  <!-- Allow only one row to be expanded at a time -->
+  <UTable :multiple-expand="false" />
+
+  <!-- Default behavior: Allow multiple rows to be expanded simultaneously -->
+  <UTable :multiple-expand="true" />
+
+  <!-- Or simply -->
+  <UTable />
+</template>
+
+```
+
+#### Disable Row Expansion
+
+You can disable the expansion functionality for specific rows in the UTable component by adding the `disabledExpand` property to your row data.
+
+> Important: When using `disabledExpand`, you must define the `columns` prop for the UTable component. Otherwise, the table will render all properties as columns, including the `disabledExpand` property.
+
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-disabled-expandable'
 componentProps:
   class: 'flex-1'
 ---
@@ -463,6 +533,43 @@ componentProps:
   class: 'flex-1'
 ---
 ::
+
+### `expand-action`
+
+The `#expand-action` slot allows you to customize the expansion control interface for expandable table rows. This feature provides a flexible way to implement custom expand/collapse functionality while maintaining access to essential row data and state.
+
+#### Usage
+
+```vue
+<template>
+  <UTable>
+    <template #expand-action="{ row, toggle, isExpanded }">
+    <!-- Your custom expand action content -->
+    </template>
+  </UTable>
+</template>
+```
+
+#### Slot Props
+
+The slot provides three key props:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `row` | `Object` | Contains the current row's data |
+| `toggle` | `Function` | Function to toggle the expanded state |
+| `isExpanded` | `Boolean` | Current expansion state of the row |
+
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-expand-action-slot'
+componentProps:
+  class: 'flex-1'
+---
+::
+
 
 ### `loading-state`
 

@@ -20,12 +20,12 @@ const items = [
     :prev-button="{
       color: 'gray',
       icon: 'i-heroicons-arrow-left-20-solid',
-      class: '-left-12'
+      class: '-start-12'
     }"
     :next-button="{
       color: 'gray',
       icon: 'i-heroicons-arrow-right-20-solid',
-      class: '-right-12'
+      class: '-end-12'
     }"
     arrows
     class="w-64 mx-auto"

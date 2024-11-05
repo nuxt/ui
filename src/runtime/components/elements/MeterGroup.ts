@@ -2,10 +2,10 @@ import { h, cloneVNode, computed, toRef, defineComponent } from 'vue'
 import type { ComputedRef, VNode, SlotsType, PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
-import Meter from './Meter.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
 import type { Strategy, MeterSize } from '../../types/index'
+import type Meter from './Meter.vue'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter, meterGroup } from '#ui/ui.config'
@@ -19,8 +19,8 @@ export default defineComponent({
   },
   inheritAttrs: false,
   slots: Object as SlotsType<{
-    default?: typeof Meter[],
-    indicator?: { percent: number },
+    default?: typeof Meter[]
+    indicator?: { percent: number }
   }>,
   props: {
     min: {
@@ -34,7 +34,7 @@ export default defineComponent({
     size: {
       type: String as PropType<MeterSize>,
       default: () => meterConfig.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(meterConfig.meter.bar.size).includes(value)
       }
     },
@@ -55,7 +55,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { ui, attrs } = useUI('meterGroup', toRef(props, 'ui'), meterGroupConfig)
     const { ui: uiMeter } = useUI('meter', undefined, meterConfig)
 
@@ -72,7 +72,7 @@ export default defineComponent({
 
     const rounded = computed(() => ui.value.orientation[ui.value.rounded])
 
-    function clampPercent (value: number, min: number, max: number): number {
+    function clampPercent(value: number, min: number, max: number): number {
       if (min == max) {
         return value < min ? 0 : 100
       }
@@ -138,9 +138,9 @@ export default defineComponent({
       const clone = cloneVNode(node, vProps)
 
       // @ts-expect-error
-      delete(clone.children?.label)
-      delete(clone.props?.indicator)
-      delete(clone.props?.label)
+      delete (clone.children?.label)
+      delete (clone.props?.indicator)
+      delete (clone.props?.label)
 
       return clone
     }))
@@ -196,7 +196,7 @@ export default defineComponent({
 
         return h('li', { class: labelClass.value }, [
           h(UIcon, { name: clones.value[key]?.props.icon ?? props.icon }),
-          `${label} (${ Math.round(percents.value[key]) }%)`
+          `${label} (${Math.round(percents.value[key])}%)`
         ])
       }))
 

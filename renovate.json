@@ -6,8 +6,6 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "@nuxt/eslint-config",
-    "eslint",
     "happy-dom",
     "valibot30",
     "valibot31"
@@ -23,5 +21,8 @@
       "@tailwindcss/postcss",
       "@tailwindcss/vite"
     ]
+  }, {
+    "matchDepTypes": ["resolutions"],
+    "enabled": false
   }]
 }

@@ -63,7 +63,7 @@
                     />
                     <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
 
-                    <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
+                    <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : accessor(option, optionAttribute) }}</span>
                   </slot>
                 </div>
 
@@ -75,12 +75,12 @@
 
             <p v-if="query && !filteredOptions.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
-                No results for "{{ query }}".
+                {{ uiMenu.default.optionEmpty.label.replace('{query}', query) }}
               </slot>
             </p>
             <p v-else-if="!filteredOptions.length" :class="uiMenu.empty">
               <slot name="empty" :query="query">
-                No options.
+                {{ uiMenu.default.empty.label }}
               </slot>
             </p>
           </HComboboxOptions>
@@ -91,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, watch, defineComponent } from 'vue'
+import { ref, computed, toRef, watch, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
 import {
   Combobox as HCombobox,
@@ -134,7 +134,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number, Object, Array],
+      type: [String, Number, Object, Array] as PropType<string | number | object | Array<any> | null>,
       default: ''
     },
     query: {
@@ -212,21 +212,21 @@ export default defineComponent({
     size: {
       type: String as PropType<InputSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<InputColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<InputVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -279,7 +279,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
-  setup (props, { emit, slots }) {
+  setup(props, { emit, slots }) {
     const { ui, attrs } = useUI('input', toRef(props, 'ui'), config, toRef(props, 'class'))
     const { ui: uiMenu } = useUI('inputMenu', toRef(props, 'uiMenu'), configMenu)
 
@@ -294,10 +294,10 @@ export default defineComponent({
 
     const internalQuery = ref('')
     const query = computed({
-      get () {
+      get() {
         return props.query ?? internalQuery.value
       },
-      set (value) {
+      set(value) {
         internalQuery.value = value
         emit('update:query', value)
       }
@@ -310,9 +310,9 @@ export default defineComponent({
 
       if (props.valueAttribute) {
         const option = options.value.find(option => option[props.valueAttribute] === props.modelValue)
-        return option ? option[props.optionAttribute] : null
+        return option ? accessor(option, props.optionAttribute) : null
       } else {
-        return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
+        return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(props.modelValue as Record<string, any>, props.optionAttribute)
       }
     })
 
@@ -401,20 +401,26 @@ export default defineComponent({
       lazy: props.searchLazy
     })
 
+    function escapeRegExp(string: string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    }
+
     const filteredOptions = computed(() => {
       if (!query.value || debouncedSearch) {
         return options.value
       }
 
+      const escapedQuery = escapeRegExp(query.value)
+
       return options.value.filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
           if (['string', 'number'].includes(typeof option)) {
-            return String(option).search(new RegExp(query.value, 'i')) !== -1
+            return String(option).search(new RegExp(escapedQuery, 'i')) !== -1
           }
 
           const child = get(option, searchAttribute)
 
-          return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
+          return child !== null && child !== undefined && String(child).search(new RegExp(escapedQuery, 'i')) !== -1
         })
       })
     })
@@ -428,15 +434,24 @@ export default defineComponent({
       }
     })
 
-    function onUpdate (value: any) {
+    function onUpdate(value: any) {
       query.value = ''
+
+      if (toRaw(props.modelValue) === toRaw(value)) {
+        return
+      }
+
       emit('update:modelValue', value)
       emit('change', value)
 
       emitFormChange()
     }
 
-    function onQueryChange (event: any) {
+    function accessor<T extends Record<string, any>>(obj: T, key: string) {
+      return get(obj, key)
+    }
+
+    function onQueryChange(event: any) {
       query.value = event.target.value
     }
 
@@ -469,6 +484,7 @@ export default defineComponent({
       filteredOptions,
       // eslint-disable-next-line vue/no-dupe-keys
       query,
+      accessor,
       onUpdate,
       onQueryChange
     }

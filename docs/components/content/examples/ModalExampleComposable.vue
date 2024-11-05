@@ -5,11 +5,11 @@ const toast = useToast()
 const modal = useModal()
 const count = ref(0)
 
-function openModal () {
+function openModal() {
   count.value += 1
   modal.open(ModalExampleComponent, {
     count: count.value,
-    onSuccess () {
+    onSuccess() {
       toast.add({
         title: 'Success !',
         id: 'modal-success'

@@ -39,7 +39,7 @@ import type { DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { radio } from '#ui/ui.config'
-import colors from '#ui-colors'
+import type colors from '#ui-colors'
 import { useId } from '#imports'
 
 const config = mergeConfig<typeof radio>(appConfig.ui.strategy, appConfig.ui.radio, radio)
@@ -56,7 +56,7 @@ export default defineComponent({
       default: null
     },
     modelValue: {
-      type: [String, Number, Boolean, Object],
+      type: [String, Number, Boolean, Object] as PropType<string | number | boolean | object | null>,
       default: null
     },
     name: {
@@ -82,7 +82,7 @@ export default defineComponent({
     color: {
       type: String as PropType<typeof colors[number]>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
@@ -100,7 +100,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('radio', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const inputId = props.id ?? useId()
@@ -109,10 +109,10 @@ export default defineComponent({
     const { emitFormChange, color, name } = radioGroup ?? useFormGroup(props, config)
 
     const pick = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
         if (!radioGroup) {
           emitFormChange()
@@ -120,7 +120,7 @@ export default defineComponent({
       }
     })
 
-    function onChange (event: Event) {
+    function onChange(event: Event) {
       emit('change', (event.target as HTMLInputElement).value)
     }
 

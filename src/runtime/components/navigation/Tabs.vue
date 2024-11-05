@@ -24,7 +24,7 @@
         :disabled="item.disabled"
         as="template"
       >
-        <button :class="[ui.list.tab.base, ui.list.tab.background, ui.list.tab.height, ui.list.tab.padding, ui.list.tab.size, ui.list.tab.font, ui.list.tab.rounded, ui.list.tab.shadow, selected ? ui.list.tab.active : ui.list.tab.inactive]">
+        <button :aria-label="item.ariaLabel" :class="[ui.list.tab.base, ui.list.tab.background, ui.list.tab.height, ui.list.tab.padding, ui.list.tab.size, ui.list.tab.font, ui.list.tab.rounded, ui.list.tab.shadow, selected ? ui.list.tab.active : ui.list.tab.inactive]">
           <slot
             name="icon"
             :item="item"
@@ -114,7 +114,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('tabs', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const listRef = ref<HTMLElement>()
@@ -125,7 +125,7 @@ export default defineComponent({
 
     // Methods
 
-    function calcMarkerSize (index: number | undefined) {
+    function calcMarkerSize(index: number | undefined) {
       // @ts-ignore
       const tab = itemRefs.value[index]?.$el
       if (!tab) {
@@ -142,7 +142,7 @@ export default defineComponent({
       markerRef.value.style.height = `${tab.offsetHeight}px`
     }
 
-    function onChange (index: number) {
+    function onChange(index: number) {
       selectedIndex.value = index
 
       emit('change', index)

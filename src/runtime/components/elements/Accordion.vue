@@ -127,7 +127,7 @@ export default defineComponent({
     }
   },
   emits: ['open'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const uiButton = computed<typeof configButton>(() => configButton)
@@ -146,7 +146,7 @@ export default defineComponent({
       }
     }, { immediate: true })
 
-    function closeOthers (currentIndex: number, e: Event) {
+    function closeOthers(currentIndex: number, e: Event) {
       if (!props.items[currentIndex].closeOthers && props.multiple) {
         return
       }
@@ -158,27 +158,29 @@ export default defineComponent({
       })
     }
 
-    function onEnter (_el: Element, done: () => void) {
+    function onEnter(_el: Element, done: () => void) {
       const el = _el as HTMLElement
       el.style.height = '0'
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       el.offsetHeight // Trigger a reflow, flushing the CSS changes
       el.style.height = el.scrollHeight + 'px'
 
       el.addEventListener('transitionend', done, { once: true })
     }
 
-    function onBeforeLeave (_el: Element) {
+    function onBeforeLeave(_el: Element) {
       const el = _el as HTMLElement
       el.style.height = el.scrollHeight + 'px'
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       el.offsetHeight // Trigger a reflow, flushing the CSS changes
     }
 
-    function onAfterEnter (_el: Element) {
+    function onAfterEnter(_el: Element) {
       const el = _el as HTMLElement
       el.style.height = 'auto'
     }
 
-    function onLeave (_el: Element, done: () => void) {
+    function onLeave(_el: Element, done: () => void) {
       const el = _el as HTMLElement
       el.style.height = '0'
 

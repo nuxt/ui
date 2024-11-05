@@ -1,8 +1,8 @@
-import type { Link } from './link'
-import { button } from '../ui.config'
-import type { NestedKeyOf, ExtractDeepKey, ExtractDeepObject } from '.'
-import colors from '#ui-colors'
 import type { AppConfig } from 'nuxt/schema'
+import type { button } from '../ui.config'
+import type { Link } from './link'
+import type { NestedKeyOf, ExtractDeepKey, ExtractDeepObject } from '.'
+import type colors from '#ui-colors'
 
 export type ButtonSize = keyof typeof button.size | ExtractDeepKey<AppConfig, ['ui', 'button', 'size']>
 export type ButtonColor = keyof typeof button.color | ExtractDeepKey<AppConfig, ['ui', 'button', 'color']> | typeof colors[number]
@@ -24,8 +24,6 @@ export interface Button extends Link {
   trailingIcon?: string
   trailing?: boolean
   leading?: boolean
-  to?: string | object
-  target?: string
   square?: boolean
   truncate?: boolean
 }

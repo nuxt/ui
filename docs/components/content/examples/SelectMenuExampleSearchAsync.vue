@@ -2,7 +2,7 @@
 const loading = ref(false)
 const selected = ref([])
 
-async function search (q: string) {
+async function search(q: string) {
   loading.value = true
 
   const users: any[] = await $fetch('https://jsonplaceholder.typicode.com/users', { params: { q } })

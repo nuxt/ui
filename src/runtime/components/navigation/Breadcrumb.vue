@@ -72,7 +72,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('breadcrumb', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     return {

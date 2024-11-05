@@ -1,6 +1,6 @@
 import type { Avatar } from './avatar'
 import type { Button } from './button'
-import colors from '#ui-colors'
+import type colors from '#ui-colors'
 
 export type NotificationColor = 'gray' | typeof colors[number]
 

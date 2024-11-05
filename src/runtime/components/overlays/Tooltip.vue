@@ -4,7 +4,7 @@
       Hover
     </slot>
 
-    <div v-if="open && !prevent" ref="container" :class="[ui.container, ui.width]">
+    <div v-if="open && !prevent && isVisible" ref="container" :class="[ui.container, ui.width]">
       <Transition appear v-bind="ui.transition">
         <div>
           <div v-if="popper.arrow" data-popper-arrow :class="Object.values(ui.arrow)" />
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, toRef, defineComponent } from 'vue'
+import { computed, ref, toRef, defineComponent, useSlots } from 'vue'
 import type { PropType } from 'vue'
 import { defu } from 'defu'
 import UKbd from '../elements/Kbd.vue'
@@ -82,7 +82,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('tooltip', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
@@ -94,9 +94,11 @@ export default defineComponent({
     let openTimeout: NodeJS.Timeout | null = null
     let closeTimeout: NodeJS.Timeout | null = null
 
+    const isVisible = computed<boolean>(() => !!(useSlots().text || props.text))
+
     // Methods
 
-    function onMouseEnter () {
+    function onMouseEnter() {
       // cancel programmed closing
       if (closeTimeout) {
         clearTimeout(closeTimeout)
@@ -112,7 +114,7 @@ export default defineComponent({
       }, props.openDelay)
     }
 
-    function onMouseLeave () {
+    function onMouseLeave() {
       // cancel programmed opening
       if (openTimeout) {
         clearTimeout(openTimeout)
@@ -138,7 +140,8 @@ export default defineComponent({
       container,
       open,
       onMouseEnter,
-      onMouseLeave
+      onMouseLeave,
+      isVisible
     }
   }
 })
