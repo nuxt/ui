@@ -34,7 +34,7 @@ const people = [{
 const virtualElement = ref({ getBoundingClientRect: () => ({}) })
 const contextMenuRow = ref()
 
-function contextmenu (event: MouseEvent, row: any) {
+function contextmenu(event: MouseEvent, row: any) {
   // Prevent the default context menu
   event.preventDefault()
 
@@ -47,7 +47,6 @@ function contextmenu (event: MouseEvent, row: any) {
 
   contextMenuRow.value = row
 }
-
 </script>
 
 <template>

@@ -363,7 +363,7 @@ export default defineComponent({
       $attrs.onSelect(row)
     }
 
-    function onContextmenu (event, row) {
+    function onContextmenu(event, row) {
       if (!$attrs.onContextmenu) {
         return
       }
@@ -372,7 +372,7 @@ export default defineComponent({
       $attrs.onContextmenu(event, row)
     }
 
-    function selectAllRows () {
+    function selectAllRows() {
       // Create a new array to ensure reactivity
       const newSelected = [...selected.value]
 
