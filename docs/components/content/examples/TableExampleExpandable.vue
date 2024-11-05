@@ -10,7 +10,7 @@ const people = [{
   name: 'Courtney Henry',
   title: 'Designer',
   email: 'courtney.henry@example.com',
-  role: 'Admin',
+  role: 'Admin'
 }, {
   id: 3,
   name: 'Tom Cook',
@@ -22,7 +22,7 @@ const people = [{
   name: 'Whitney Francis',
   title: 'Copywriter',
   email: 'whitney.francis@example.com',
-  role: 'Admin',
+  role: 'Admin'
 }, {
   id: 5,
   name: 'Leonard Krasner',
@@ -34,9 +34,8 @@ const people = [{
   name: 'Floyd Miles',
   title: 'Principal Designer',
   email: 'floyd.miles@example.com',
-  role: 'Member',
+  role: 'Member'
 }]
-
 
 const expand = ref({
   openedRows: [people[0]],
@@ -45,11 +44,11 @@ const expand = ref({
 </script>
 
 <template>
-    <UTable v-model:expand="expand" :rows="people">
-      <template #expand="{ row }">
-        <div class="p-4">
-          <pre>{{ row }}</pre>
-        </div>
-      </template>
-    </UTable>   
+  <UTable v-model:expand="expand" :rows="people">
+    <template #expand="{ row }">
+      <div class="p-4">
+        <pre>{{ row }}</pre>
+      </div>
+    </template>
+  </UTable>
 </template>
