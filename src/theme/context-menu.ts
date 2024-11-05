@@ -90,7 +90,7 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     class: {
       item: `text-[var(--ui-${color})] data-highlighted:text-[var(--ui-${color})] data-highlighted:before:bg-[var(--ui-${color})]/10 data-[state=open]:before:bg-[var(--ui-${color})]/10`,
-      itemLeadingIcon: `text-[var(--ui-${color})]/50 group-data-highlighted:text-[var(--ui-${color})] group-data-[state=open]:text-[var(--ui-${color})]`
+      itemLeadingIcon: `text-[var(--ui-${color})]/75 group-data-highlighted:text-[var(--ui-${color})] group-data-[state=open]:text-[var(--ui-${color})]`
     }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
