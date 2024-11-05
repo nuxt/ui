@@ -227,6 +227,10 @@ ignore:
 external:
   - items
   - modelValue
+items:
+  createItem:
+    - true
+    - 'always'
 props:
   modelValue: 'Backlog'
   items:
@@ -236,6 +240,10 @@ props:
     - Done
   createItem: true
 ---
+::
+
+::tip
+By default, the create option only shows on empty, but if you want the create option despite non-exact values available, set it to `always`.
 ::
 
 ### Content
