@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.19.1](https://github.com/nuxt/ui/compare/v2.19.0...v2.19.1) (2024-11-05)
+
+### Bug Fixes
+
+* **InputMenu/SelectMenu:** regex breaks build ([cb6f5f2](https://github.com/nuxt/ui/commit/cb6f5f2d71ea8bb526a8f958daec8e9871469b63))
+
 ## [2.19.0](https://github.com/nuxt/ui/compare/v2.18.7...v2.19.0) (2024-11-05)
 
 ### Features

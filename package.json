@@ -1,7 +1,7 @@
 {
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
-  "version": "2.19.0",
+  "version": "2.19.1",
   "packageManager": "pnpm@9.12.3",
   "repository": "nuxt/ui",
   "homepage": "https://ui.nuxt.com",
