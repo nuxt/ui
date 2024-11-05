@@ -29,7 +29,7 @@ Use the `columns` prop to configure which columns to display. It's an array of o
 - `sortable` - Whether the column is sortable. Defaults to `false`.
 - `direction` - The sort direction to use on first click. Defaults to `asc`.
 - `class` - The class to apply to the column cells.
-- `rowClass` - The class to apply to the data column cells. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+- `rowClass` - The class to apply to the data column cells.
 - `sort` - Pass your own `sort` function. Defaults to a simple _greater than_ / _less than_ comparison.
 
 Arguments for the `sort` function are: Value A, Value B, Direction - 'asc' or 'desc'
@@ -313,7 +313,7 @@ componentProps:
 ---
 ::
 
-### Expandable :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Expandable
 
 You can use the `v-model:expand` to enables row expansion functionality in the table component. It maintains an object containing an `openedRows` an array and `row` an object, which tracks the indices of currently expanded rows.
 
