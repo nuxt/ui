@@ -18,7 +18,7 @@
             />
           </th>
 
-          <th v-if="$slots.expand" scope="col" :class="ui.tr.base">
+          <th v-if="expand" scope="col" :class="ui.tr.base">
             <span class="sr-only">Expand</span>
           </th>
 
@@ -50,7 +50,7 @@
       </thead>
       <tbody :class="ui.tbody">
         <tr v-if="loadingState && loading && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + (expand ? 1 : 0)">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
                 <UIcon v-if="loadingState.icon" :name="loadingState.icon" :class="ui.loadingState.icon" aria-hidden="true" />
@@ -63,7 +63,7 @@
         </tr>
 
         <tr v-else-if="emptyState && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + (expand ? 1 : 0)">
             <slot name="empty-state">
               <div :class="ui.emptyState.wrapper">
                 <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
@@ -77,7 +77,7 @@
 
         <template v-else>
           <template v-for="(row, index) in rows" :key="index">
-            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
+            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
               <td v-if="modelValue" :class="ui.checkbox.padding">
                 <UCheckbox
                   :model-value="isSelected(row)"
@@ -87,25 +87,28 @@
                   @click.capture.stop="() => onSelect(row)"
                 />
               </td>
-
               <td
-                v-if="$slots.expand"
+                v-if="expand"
                 :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
               >
+                <template v-if="$slots['expand-action']">
+                  <slot name="expand-action" :row="row" :is-expanded="isExpanded(row)" :toggle="() => toggleOpened(row)" />
+                </template>
                 <UButton
+                  v-else
+                  :disabled="row.disabledExpand"
                   v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
-                  :ui="{ icon: { base: [ui.expand.icon, openedRows.includes(index) && 'rotate-180'].join(' ') } }"
-                  @click="toggleOpened(index)"
+                  :ui="{ icon: { base: [ui.expand.icon, isExpanded(row) && 'rotate-180'].join(' ') } }"
+                  @click.capture.stop="toggleOpened(row)"
                 />
               </td>
-
               <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, column?.rowClass, row[column.key]?.class]">
                 <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
                   {{ getRowData(row, column.key) }}
                 </slot>
               </td>
             </tr>
-            <tr v-if="openedRows.includes(index)">
+            <tr v-if="isExpanded(row)">
               <td colspan="100%">
                 <slot
                   name="expand"
@@ -122,7 +125,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
+import { computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType, AriaAttributes } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -133,7 +136,7 @@ import UProgress from '../elements/Progress.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, get } from '../../utils'
-import type { TableRow, TableColumn, Strategy, Button, ProgressColor, ProgressAnimation, DeepPartial } from '../../types/index'
+import type { TableRow, TableColumn, Strategy, Button, ProgressColor, ProgressAnimation, DeepPartial, Expanded } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { table } from '#ui/ui.config'
@@ -209,6 +212,10 @@ export default defineComponent({
       type: Object as PropType<Button>,
       default: () => config.default.expandButton as Button
     },
+    expand: {
+      type: Object as PropType<Expanded<TableRow>>,
+      default: () => null
+    },
     loading: {
       type: Boolean,
       default: false
@@ -236,17 +243,26 @@ export default defineComponent({
     ui: {
       type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
+    },
+    multipleExpand: {
+      type: Boolean,
+      default: true
     }
   },
-  emits: ['update:modelValue', 'update:sort'],
+  emits: ['update:modelValue', 'update:sort', 'update:expand'],
   setup(props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map(key => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as TableColumn))
 
     const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
-
-    const openedRows = ref([])
+    const expand = useVModel(props, 'expand', emit, {
+      passive: true,
+      defaultValue: defu({}, props.expand, {
+        openedRows: [],
+        row: null
+      })
+    })
 
     const savedSort = { column: sort.value.column, direction: null }
 
@@ -383,11 +399,14 @@ export default defineComponent({
       return get(row, rowKey, defaultValue)
     }
 
-    function toggleOpened(index: number) {
-      if (openedRows.value.includes(index)) {
-        openedRows.value = openedRows.value.filter(i => i !== index)
-      } else {
-        openedRows.value.push(index)
+    function isExpanded(row: TableRow) {
+      return expand.value?.openedRows ? expand.value.openedRows.some(openedRow => compare(openedRow, row)) : false
+    }
+
+    function toggleOpened(row: TableRow) {
+      expand.value = {
+        openedRows: isExpanded(row) ? expand.value.openedRows.filter(v => !compare(v, row)) : props.multipleExpand ? [...expand.value.openedRows, row] : [row],
+        row
       }
     }
 
@@ -429,14 +448,14 @@ export default defineComponent({
       loadingState,
       isAllRowChecked,
       onChangeCheckbox,
-      openedRows,
       isSelected,
       onSort,
       onSelect,
       onChange,
       getRowData,
       toggleOpened,
-      getAriaSort
+      getAriaSort,
+      isExpanded
     }
   }
 })

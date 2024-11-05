@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 const people = [{
   id: 1,
   name: 'Lindsay Walton',
@@ -36,10 +36,15 @@ const people = [{
   email: 'floyd.miles@example.com',
   role: 'Member'
 }]
+
+const expand = ref({
+  openedRows: [people[0]],
+  row: {}
+})
 </script>
 
 <template>
-  <UTable :rows="people">
+  <UTable v-model:expand="expand" :rows="people">
     <template #expand="{ row }">
       <div class="p-4">
         <pre>{{ row }}</pre>
