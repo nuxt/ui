@@ -15,8 +15,18 @@ describe('Badge', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Badge', size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { label: 'Badge', variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { label: 'Badge', variant, color: 'neutral' } }]),
+    ['with icon', { props: { icon: 'i-heroicons-rocket-launch' } }],
+    ['with leading and icon', { props: { leading: true, icon: 'i-heroicons-arrow-left' } }],
+    ['with leadingIcon', { props: { leadingIcon: 'i-heroicons-arrow-left' } }],
+    ['with trailing and icon', { props: { trailing: true, icon: 'i-heroicons-arrow-right' } }],
+    ['with trailingIcon', { props: { trailingIcon: 'i-heroicons-arrow-right' } }],
+    ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
+    ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-heroicons-arrow-left' } }],
+    ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-heroicons-arrow-right' } }],
     // Slots
-    ['with default slot', { slots: { default: () => 'Default slot' } }]
+    ['with default slot', { slots: { default: () => 'Default slot' } }],
+    ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
+    ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BadgeProps, slots?: Partial<BadgeSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Badge)
     expect(html).toMatchSnapshot()
