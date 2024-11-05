@@ -77,7 +77,7 @@
 
         <template v-else>
           <template v-for="(row, index) in rows" :key="index">
-            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, ($attrs.onSelect || $attrs.onContextmenu) && ui.tr.active, row?.class]" @click="() => onSelect(row)">
+            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, ($attrs.onSelect || $attrs.onContextmenu) && ui.tr.active, row?.class]" @click="() => onSelect(row)" @contextmenu="(event) => onContextmenu(event, row)">
               <td v-if="modelValue" :class="ui.checkbox.padding">
                 <UCheckbox
                   :model-value="isSelected(row)"
