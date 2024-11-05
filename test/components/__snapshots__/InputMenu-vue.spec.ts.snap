@@ -129,6 +129,7 @@ exports[`InputMenu > renders with class correctly 1`] = `
           display: none;
         }
       </style>
+      <!--v-if-->
     </div>
   </div>
   <!--teleport end-->
