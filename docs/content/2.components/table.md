@@ -321,6 +321,7 @@ When using the expand slot, you have access to the `row` property in the slot sc
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-expandable'
 componentProps:
@@ -387,6 +388,7 @@ You can disable the expansion functionality for specific rows in the UTable comp
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-disabled-expandable'
 componentProps:

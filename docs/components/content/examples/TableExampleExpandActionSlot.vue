@@ -1,15 +1,47 @@
 <script setup lang='ts'>
-const page = ref(1)
-
-const { data, status } = await useLazyFetch(() => `https://jsonplaceholder.typicode.com/users?_start=${page.value}&_limit=10`, {
-  transform: (v: any[]) => {
-    return v.map((v: any, index: number) => ({
-      ...v,
-      // just for example don`t do this at home
-      disabledExpand: (index + 1) % 2 === 0
-    }))
-  }
-})
+const people = [{
+  id: 1,
+  name: 'Lindsay Walton',
+  title: 'Front-end Developer',
+  email: 'lindsay.walton@example.com',
+  role: 'Member',
+  hasExpand: false,
+}, {
+  id: 2,
+  name: 'Courtney Henry',
+  title: 'Designer',
+  email: 'courtney.henry@example.com',
+  role: 'Admin',
+  hasExpand: true,
+}, {
+  id: 3,
+  name: 'Tom Cook',
+  title: 'Director of Product',
+  email: 'tom.cook@example.com',
+  role: 'Member',
+  hasExpand: false,
+}, {
+  id: 4,
+  name: 'Whitney Francis',
+  title: 'Copywriter',
+  email: 'whitney.francis@example.com',
+  role: 'Admin',
+  hasExpand: true,
+}, {
+  id: 5,
+  name: 'Leonard Krasner',
+  title: 'Senior Designer',
+  email: 'leonard.krasner@example.com',
+  role: 'Owner',
+  hasExpand: false,
+}, {
+  id: 6,
+  name: 'Floyd Miles',
+  title: 'Principal Designer',
+  email: 'floyd.miles@example.com',
+  role: 'Member',
+  hasExpand: true,
+}]
 
 const columns = [
   {
@@ -27,27 +59,22 @@ const columns = [
 ]
 
 const expand = ref({
-  openedRows: [data.value?.[0]],
+  openedRows: [people.find((v) => v.hasExpand)],
   row: {}
 })
 </script>
 
 <template>
-  <div>
-    <UTable v-model:expand="expand" :rows="data!" :columns="columns" :loading="status === 'pending'">
+    <UTable v-model:expand="expand" :rows="people">
       <template #expand="{ row }">
         <div class="p-4">
           <pre>{{ row }}</pre>
         </div>
       </template>
       <template #expand-action="{ row, isExpanded, toggle }">
-        <UButton v-if="!row.disabledExpand" @click="toggle">
+        <UButton v-if="row.hasExpand" @click="toggle">
           {{ isExpanded ? 'collapse' : 'expand' }}
         </UButton>
       </template>
-    </UTable>
-    <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
-      <UPagination v-model="page" :page-count="10" :total="20" />
-    </div>
-  </div>
+    </UTable>   
 </template>
