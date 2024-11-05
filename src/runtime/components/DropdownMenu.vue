@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { MaybeArrayOfArray, PartialString, DynamicSlots } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -36,9 +36,9 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
-export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
+export interface DropdownMenuProps<I> extends Omit<DropdownMenuRootProps, 'dir'> {
   size?: DropdownMenuVariants['size']
-  items?: T[] | T[][]
+  items?: I
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
@@ -78,17 +78,11 @@ export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<T extends { slot?: string }> = {
-  'default'(props: { open: boolean }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+export type DropdownMenuSlots<Items> = { default(props: { open: boolean }): any } & (DynamicSlots<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never)
 
 </script>
 
-<script setup lang="ts" generic="T extends DropdownMenuItem">
+<script setup lang="ts" generic="I extends MaybeArrayOfArray<DropdownMenuItem>">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'radix-vue'
@@ -96,18 +90,19 @@ import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
-const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
+const props = withDefaults(defineProps<DropdownMenuProps<I>>(), {
   portal: true,
   modal: true,
   labelKey: 'label'
 })
+
 const emits = defineEmits<DropdownMenuEmits>()
-const slots = defineSlots<DropdownMenuSlots<T>>()
+const slots = defineSlots<DropdownMenuSlots<I>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
-const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<DropdownMenuItem>[string]>
 
 const ui = computed(() => dropdownMenu({
   size: props.size

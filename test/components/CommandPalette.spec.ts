@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import CommandPalette, { type CommandPaletteProps } from '../../src/runtime/components/CommandPalette.vue'
 import ComponentRender from '../component-render'
+import { expectSlotProps } from '../utils/types'
 
 describe('CommandPalette', () => {
   const groups = [{
@@ -88,5 +89,54 @@ describe('CommandPalette', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps<typeof groups[number], typeof groups[number]['items'][number]>, slots?: Partial<any> }) => {
     const html = await ComponentRender(nameOrHtml, options, CommandPalette)
     expect(html).toMatchSnapshot()
+  })
+
+  test('should have the correct types', () => {
+    // normal
+    const test1 = () => CommandPalette({
+      groups: [{ id: 'group-1', items: [{ label: 'foo' }] }]
+    })
+
+    expectSlotProps('item', test1).toEqualTypeOf<{ item: { label: string }, index: number }>()
+    expectSlotProps('item-leading', test1).toEqualTypeOf<{ item: { label: string }, index: number }>()
+    expectSlotProps('item-trailing', test1).toEqualTypeOf<{ item: { label: string }, index: number }>()
+
+    // normal + mixed
+    const test2 = () => CommandPalette({
+      groups: [{ id: 'group-1', items: [{ label: 'foo' }, { label: 'bar', icon: 'a' }] }]
+    })
+
+    expectSlotProps('item', test2).toEqualTypeOf<{ item: { label: string, icon?: string }, index: number }>()
+    expectSlotProps('item-leading', test2).toEqualTypeOf<{ item: { label: string, icon?: string }, index: number }>()
+    expectSlotProps('item-trailing', test2).toEqualTypeOf<{ item: { label: string, icon?: string }, index: number }>()
+
+    // custom + groups + internal const
+    const test5 = () => CommandPalette({
+      groups: [{ id: 'group-1', slot: 'group-1', items: [{ slot: 'foo', label: 'foo', value: 'bar' }] } as const, { id: 'group-2', slot: 'group-2', items: [{ slot: 'baz' }] } as const]
+    })
+
+    expectSlotProps('item', test5).toEqualTypeOf<{ item: { slot: 'foo' | 'baz', label?: 'foo', value?: 'bar' }, index: number }>()
+    expectSlotProps('item-leading', test5).toEqualTypeOf<{ item: { slot: 'foo' | 'baz', label?: 'foo', value?: 'bar' }, index: number }>()
+    expectSlotProps('item-trailing', test5).toEqualTypeOf<{ item: { slot: 'foo' | 'baz', label?: 'foo', value?: 'bar' }, index: number }>()
+
+    expectSlotProps('group-1', test5).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number }>()
+    expectSlotProps('group-1-label', test5).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number }>()
+    expectSlotProps('group-1-leading', test5).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number }>()
+    expectSlotProps('group-1-trailing', test5).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number }>()
+
+    expectSlotProps('foo', test5).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number }>()
+    expectSlotProps('foo-label', test5).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number }>()
+    expectSlotProps('foo-leading', test5).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number }>()
+    expectSlotProps('foo-trailing', test5).toEqualTypeOf<{ item: { slot: 'foo', label: 'foo', value: 'bar' }, index: number }>()
+
+    expectSlotProps('group-2', test5).toEqualTypeOf<{ item: { slot: 'baz' }, index: number }>()
+    expectSlotProps('group-2-label', test5).toEqualTypeOf<{ item: { slot: 'baz' }, index: number }>()
+    expectSlotProps('group-2-leading', test5).toEqualTypeOf<{ item: { slot: 'baz' }, index: number }>()
+    expectSlotProps('group-2-trailing', test5).toEqualTypeOf<{ item: { slot: 'baz' }, index: number }>()
+
+    expectSlotProps('baz', test5).toEqualTypeOf<{ item: { slot: 'baz' }, index: number }>()
+    expectSlotProps('baz-label', test5).toEqualTypeOf<{ item: { slot: 'baz' }, index: number }>()
+    expectSlotProps('baz-leading', test5).toEqualTypeOf<{ item: { slot: 'baz' }, index: number }>()
+    expectSlotProps('baz-trailing', test5).toEqualTypeOf<{ item: { slot: 'baz' }, index: number }>()
   })
 })

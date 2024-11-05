@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlots, MaybeArrayOfArray, PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
 
@@ -36,9 +36,9 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
 
 type ContextMenuVariants = VariantProps<typeof contextMenu>
 
-export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
+export interface ContextMenuProps<I> extends Omit<ContextMenuRootProps, 'dir'> {
   size?: ContextMenuVariants['size']
-  items?: T[] | T[][]
+  items?: I
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
@@ -70,34 +70,29 @@ export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
 type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type ContextMenuSlots<T extends { slot?: string }> = {
-  'default'(props?: {}): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+export type ContextMenuSlots<Items> = { default(props: { }): any } & DynamicSlots<Items, 'leading' | 'trailing' | 'label'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never
 
 </script>
 
-<script setup lang="ts" generic="T extends ContextMenuItem">
+<script setup lang="ts" generic="I extends MaybeArrayOfArray<ContextMenuItem>">
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UContextMenuContent from './ContextMenuContent.vue'
 
-const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
+const props = withDefaults(defineProps<ContextMenuProps<I>>(), {
   portal: true,
   modal: true,
   labelKey: 'label'
 })
+
 const emits = defineEmits<ContextMenuEmits>()
-const slots = defineSlots<ContextMenuSlots<T>>()
+const slots = defineSlots<ContextMenuSlots<I>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content as ContextMenuContentProps)
-const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<ContextMenuItem>[string]>
 
 const ui = computed(() => contextMenu({
   size: props.size

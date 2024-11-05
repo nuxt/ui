@@ -5,7 +5,7 @@ import type { AccordionRootProps, AccordionRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, MaybeReadonlyArray } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
 
@@ -22,13 +22,13 @@ export interface AccordionItem {
   disabled?: boolean
 }
 
-export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled'> {
+export interface AccordionProps<I> extends Pick<AccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
-  items?: T[]
+  items?: I
   /**
    * The icon displayed on the right side of the trigger.
    * @defaultValue appConfig.ui.icons.chevronDown
@@ -47,34 +47,35 @@ export interface AccordionEmits extends AccordionRootEmits {}
 
 type SlotProps<T> = (props: { item: T, index: number, open: boolean }) => any
 
-export type AccordionSlots<T extends { slot?: string }> = {
-  leading: SlotProps<T>
-  default: SlotProps<T>
-  trailing: SlotProps<T>
-  content: SlotProps<T>
-  body: SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+export type AccordionSlots<Items> =
+  (DynamicSlots<Items, null, 'default' | 'trailing' | 'leading' | 'body' | 'content'> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never) & (DynamicSlots<Items, 'body', null> extends infer S ? { [K in keyof S]: SlotProps<S[K]> } & Record<string, any> : never)
 
 </script>
 
-<script setup lang="ts" generic="T extends AccordionItem">
-import { computed } from 'vue'
+<script setup lang="ts" generic="I extends MaybeReadonlyArray<AccordionItem>">
+import { computed, reactive } from 'vue'
 import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent, useForwardPropsEmits } from 'radix-vue'
-import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
 import UIcon from './Icon.vue'
 
-const props = withDefaults(defineProps<AccordionProps<T>>(), {
+const props = withDefaults(defineProps<AccordionProps<I>>(), {
   type: 'single',
   collapsible: true,
   labelKey: 'label'
 })
 const emits = defineEmits<AccordionEmits>()
-const slots = defineSlots<AccordionSlots<T>>()
+const slots = defineSlots<AccordionSlots<I>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'type'), emits)
+const rootProps = useForwardPropsEmits(reactive({
+  as: props.as,
+  collapsible: props.collapsible,
+  defaultValue: props.defaultValue,
+  disabled: props.disabled,
+  modelValue: props.modelValue,
+  type: props.type
+}), emits)
 
 const ui = computed(() => accordion({
   disabled: props.disabled

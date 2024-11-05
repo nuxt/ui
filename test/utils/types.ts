@@ -11,9 +11,11 @@ export function expectEmitPayloadType<T extends VNode, E extends keyof Events<T>
 /**
  * Expect the type of a slot props.
  */
-export function expectSlotProps<T extends VNode, S extends keyof Slots<T>>(_name: S, _cb: () => T) {
+export function expectSlotProps<T extends VNode, S extends KnownKeys<Slots<T>>>(_name: S, _cb: () => T) {
   return expectTypeOf<Slots<T>[S]>()
 }
+
+type KnownKeys<T> = keyof { [K in keyof T as (string extends K ? never : K)]: T[K] }
 
 type Ctx<V extends VNode> = V extends { __ctx?: infer C } ? NonNullable<C> : never
 
