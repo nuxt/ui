@@ -61,5 +61,5 @@ export function looseToNumber(val: any): any {
 }
 
 export function escapeRegExp(string: string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return string.replace(/[.*+?^${}()|[\]\\]/g, match => `\\${match}`)
 }
