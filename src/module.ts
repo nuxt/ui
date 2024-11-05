@@ -21,7 +21,7 @@ type UI = {
   colors?: string[]
   strategy?: Strategy
   [key: string]: any
-} & DeepPartial<typeof config, string>
+} & DeepPartial<typeof config, string | number | boolean>
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {
