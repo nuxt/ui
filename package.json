@@ -99,7 +99,7 @@
     "pathe": "^1.1.2",
     "radix-vue": "^1.9.8",
     "scule": "^1.3.0",
-    "sirv": "^2.0.4",
+    "sirv": "^3.0.0",
     "tailwind-variants": "^0.2.1",
     "tailwindcss": "4.0.0-alpha.30",
     "tinyglobby": "^0.2.10",
