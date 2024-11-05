@@ -147,7 +147,7 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">#m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">Invalid Date</td>
-        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 bg-[var(--ui-primary)]/10 text-[var(--ui-primary)] ring ring-inset ring-[var(--ui-primary)]/25 capitalize">success</span></td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)]/10 text-[var(--ui-primary)] ring ring-inset ring-[var(--ui-primary)]/25 capitalize"><!--v-if-->success<!--v-if--></span></td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">
           <div class="lowercase">ken99@yahoo.com</div>
         </td>
@@ -179,7 +179,7 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">#3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">Invalid Date</td>
-        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 bg-[var(--ui-primary)]/10 text-[var(--ui-primary)] ring ring-inset ring-[var(--ui-primary)]/25 capitalize">success</span></td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)]/10 text-[var(--ui-primary)] ring ring-inset ring-[var(--ui-primary)]/25 capitalize"><!--v-if-->success<!--v-if--></span></td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">
           <div class="lowercase">Abe45@gmail.com</div>
         </td>
@@ -211,7 +211,7 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">#derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">Invalid Date</td>
-        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 bg-[var(--ui-primary)]/10 text-[var(--ui-primary)] ring ring-inset ring-[var(--ui-primary)]/25 capitalize">processing</span></td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)]/10 text-[var(--ui-primary)] ring ring-inset ring-[var(--ui-primary)]/25 capitalize"><!--v-if-->processing<!--v-if--></span></td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">
           <div class="lowercase">Monserrat44@gmail.com</div>
         </td>
@@ -243,7 +243,7 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">#5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">Invalid Date</td>
-        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 bg-[var(--ui-primary)]/10 text-[var(--ui-primary)] ring ring-inset ring-[var(--ui-primary)]/25 capitalize">success</span></td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)]/10 text-[var(--ui-primary)] ring ring-inset ring-[var(--ui-primary)]/25 capitalize"><!--v-if-->success<!--v-if--></span></td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">
           <div class="lowercase">Silas22@gmail.com</div>
         </td>
@@ -275,7 +275,7 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">#bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">Invalid Date</td>
-        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 bg-[var(--ui-error)]/10 text-[var(--ui-error)] ring ring-inset ring-[var(--ui-error)]/25 capitalize">failed</span></td>
+        <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0"><span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-error)]/10 text-[var(--ui-error)] ring ring-inset ring-[var(--ui-error)]/25 capitalize"><!--v-if-->failed<!--v-if--></span></td>
         <td data-pinned="false" class="p-4 text-sm text-[var(--ui-text-muted)] whitespace-nowrap [&:has([role=checkbox])]:pe-0">
           <div class="lowercase">carmella@hotmail.com</div>
         </td>
