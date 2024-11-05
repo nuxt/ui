@@ -214,9 +214,9 @@ props:
 ---
 ::
 
-### Creatable
+### Create Item
 
-Use the `creatable` prop to allow user input.
+Use the `create-item` prop to allow user input.
 
 ::component-code
 ---
@@ -234,7 +234,7 @@ props:
     - Todo
     - In Progress
     - Done
-  creatable: true
+  createItem: true
 ---
 ::
 

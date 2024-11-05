@@ -90,7 +90,7 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
    * Determines if custom user input that does not exist in options can be added.
    * @defaultValue false
    */
-  creatable?: boolean | 'always' | { placement?: 'top' | 'bottom', when?: 'empty' | 'always' }
+  createItem?: boolean | 'always' | { placement?: 'top' | 'bottom', when?: 'empty' | 'always' }
   class?: any
   ui?: PartialString<typeof selectMenu.slots>
   /** The controlled value of the Combobox. Can be binded-with with `v-model`. */
@@ -212,17 +212,17 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 const creatable = computed(() => {
-  if (!props.creatable) {
+  if (!props.createItem) {
     return false
   }
 
   const filteredItems = filterFunction()
   const newItem = searchTerm.value && {
     item: props.valueKey ? { [props.valueKey]: searchTerm.value, [props.labelKey ?? 'label']: searchTerm.value } : searchTerm.value,
-    position: ((typeof props.creatable === 'object' && props.creatable.placement) || 'bottom') as 'top' | 'bottom'
+    position: ((typeof props.createItem === 'object' && props.createItem.placement) || 'bottom') as 'top' | 'bottom'
   }
 
-  if ((typeof props.creatable === 'object' && props.creatable.when === 'always') || props.creatable === 'always') {
+  if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
     return (filteredItems.length === 1 && filterFunction(filteredItems, searchTerm.value, (item, term) => String(item) === term).length === 1) ? false : newItem
   }
 

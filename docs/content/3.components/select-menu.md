@@ -236,9 +236,9 @@ props:
 You can set the `search-input` prop to `false` to hide the search input.
 ::
 
-### Creatable
+### Create Item
 
-Use the `creatable` prop to allow user input.
+Use the `create-item` prop to allow user input.
 
 ::component-code
 ---
@@ -252,7 +252,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  creatable: true
+  createItem: true
   items:
     - Backlog
     - Todo
