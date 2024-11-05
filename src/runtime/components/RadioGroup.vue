@@ -4,6 +4,7 @@ import type { RadioGroupRootProps, RadioGroupRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AcceptableValue } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
@@ -64,6 +65,8 @@ export interface RadioGroupSlots<T> {
   label: SlotProps<T>
   description: SlotProps<T>
 }
+
+extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends RadioGroupItem | AcceptableValue">

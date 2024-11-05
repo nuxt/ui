@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ToasterProps } from '../types'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
@@ -10,6 +11,12 @@ export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
 export interface AppSlots {
   default(props?: {}): any
 }
+
+export default {
+  name: 'App'
+}
+
+extendDevtoolsMeta({ ignore: true })
 </script>
 
 <script setup lang="ts">
@@ -34,6 +41,7 @@ const toasterProps = toRef(() => props.toaster)
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />
       </UToaster>
+      <slot v-else />
     </TooltipProvider>
 
     <UModalProvider />

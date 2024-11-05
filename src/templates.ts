@@ -5,6 +5,13 @@ import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 
+export function buildTemplates(options: ModuleOptions) {
+  return Object.entries(theme).reduce((acc, [key, component]) => {
+    acc[key] = typeof component === 'function' ? component(options as Required<ModuleOptions>) : component
+    return acc
+  }, {} as Record<string, any>)
+}
+
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>) {
   const templates: NuxtTemplate[] = []
 

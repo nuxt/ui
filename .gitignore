@@ -1,3 +1,6 @@
+.component-meta/
+component-meta.*
+
 # Nuxt dev/build outputs
 .output
 .data

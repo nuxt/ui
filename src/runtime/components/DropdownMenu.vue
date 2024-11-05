@@ -1,10 +1,10 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
@@ -87,6 +87,54 @@ export type DropdownMenuSlots<T extends { slot?: string }> = {
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
+extendDevtoolsMeta({
+  example: 'DropdownMenuExample',
+  ignoreProps: ['items'],
+  defaultProps: {
+    items: [
+      [{
+        label: 'My account',
+        avatar: {
+          src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+        },
+        type: 'label'
+      }], [{
+        label: 'Profile',
+        icon: 'i-heroicons-user',
+        slot: 'custom'
+      }, {
+        label: 'Billing',
+        icon: 'i-heroicons-credit-card',
+        kbds: ['meta', 'b']
+      }, {
+        label: 'Settings',
+        icon: 'i-heroicons-cog',
+        kbds: ['?']
+      }], [{
+        label: 'Invite users',
+        icon: 'i-heroicons-user-plus',
+        children: [[{
+          label: 'Invite by email',
+          icon: 'i-heroicons-paper-airplane'
+        }, {
+          label: 'Invite by link',
+          icon: 'i-heroicons-link',
+          kbds: ['meta', 'i']
+        }]]
+      }],
+      [{
+        label: 'GitHub',
+        icon: 'i-simple-icons-github',
+        to: 'https://github.com/nuxt/ui',
+        target: '_blank'
+      }, {
+        label: 'Support',
+        icon: 'i-heroicons-lifebuoy',
+        to: '/components/dropdown-menu'
+      }]
+    ]
+  }
+})
 </script>
 
 <script setup lang="ts" generic="T extends DropdownMenuItem">

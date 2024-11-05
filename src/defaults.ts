@@ -22,6 +22,9 @@ export const defaultOptions = {
   theme: {
     colors: undefined,
     transitions: true
+  },
+  devtools: {
+    enabled: true
   }
 }
 

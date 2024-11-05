@@ -66,22 +66,27 @@ defineShortcuts({
 </script>
 
 <template>
-  <UApp :toaster="appConfig.toaster">
-    <div class="h-screen w-screen overflow-hidden flex flex-col lg:flex-row min-h-0 bg-[var(--ui-bg)]" vaul-drawer-wrapper>
-      <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-e border-[var(--ui-border)] overflow-y-auto w-48 p-4" />
-      <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-[var(--ui-border)] overflow-x-auto" />
+  <template v-if="!$route.path.startsWith('/__nuxt_ui__')">
+    <UApp :toaster="appConfig.toaster">
+      <div class="h-screen w-screen overflow-hidden flex flex-col lg:flex-row min-h-0 bg-[var(--ui-bg)]" vaul-drawer-wrapper>
+        <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-e border-[var(--ui-border)] overflow-y-auto w-48 p-4" />
+        <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-[var(--ui-border)] overflow-x-auto" />
 
-      <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-12 px-4">
-        <NuxtPage />
+        <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-12 px-4">
+          <NuxtPage />
+        </div>
+
+        <UModal v-model:open="isCommandPaletteOpen" class="sm:h-96">
+          <template #content>
+            <UCommandPalette placeholder="Search a component..." :groups="[{ id: 'items', items }]" :fuse="{ resultLimit: 100 }" @update:model-value="onSelect" @update:open="value => isCommandPaletteOpen = value" />
+          </template>
+        </UModal>
       </div>
-    </div>
-
-    <UModal v-model:open="isCommandPaletteOpen" class="sm:h-96">
-      <template #content>
-        <UCommandPalette placeholder="Search a component..." :groups="[{ id: 'items', items }]" :fuse="{ resultLimit: 100 }" @update:model-value="onSelect" @update:open="value => isCommandPaletteOpen = value" />
-      </template>
-    </UModal>
-  </UApp>
+    </UApp>
+  </template>
+  <template v-else>
+    <NuxtPage />
+  </template>
 </template>
 
 <style>
