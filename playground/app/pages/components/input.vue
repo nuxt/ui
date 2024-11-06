@@ -38,13 +38,13 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
     <div class="flex flex-col gap-4 w-48">
       <UInput placeholder="Disabled" disabled />
       <UInput placeholder="Required" required />
-      <UInput file="i-heroicons-calculator" type="number" :model-value="10" />
-      <UInput icon="i-heroicons-folder" type="file" />
-      <UInput icon="i-heroicons-calendar" type="date" :model-value="new Date().toISOString().substring(0, 10)" />
-      <UInput icon="i-heroicons-lock-closed" type="password" model-value="password" />
+      <UInput file="i-lucide-calculator" type="number" :model-value="10" />
+      <UInput icon="i-lucide-folder" type="file" />
+      <UInput icon="i-lucide-calendar" type="date" :model-value="new Date().toISOString().substring(0, 10)" />
+      <UInput icon="i-lucide-lock" type="password" model-value="password" />
       <UInput loading placeholder="Search..." />
       <UInput loading trailing placeholder="Search..." />
-      <UInput loading icon="i-heroicons-magnifying-glass" trailing-icon="i-heroicons-chevron-down" placeholder="Search..." />
+      <UInput loading icon="i-lucide-search" trailing-icon="i-lucide-chevron-down" placeholder="Search..." />
     </div>
     <div class="flex items-center gap-4">
       <UInput
@@ -59,7 +59,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
       <UInput
         v-for="size in sizes"
         :key="size"
-        icon="i-heroicons-magnifying-glass"
+        icon="i-lucide-search"
         placeholder="Search..."
         :size="size"
         class="w-48"
@@ -69,7 +69,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
       <UInput
         v-for="size in sizes"
         :key="size"
-        icon="i-heroicons-magnifying-glass"
+        icon="i-lucide-search"
         trailing
         placeholder="Search..."
         :size="size"
@@ -81,7 +81,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
         v-for="size in sizes"
         :key="size"
         :avatar="{ src: 'https://github.com/benjamincanac.png' }"
-        icon="i-heroicons-magnifying-glass"
+        icon="i-lucide-search"
         trailing
         placeholder="Search..."
         :size="size"

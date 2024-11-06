@@ -34,18 +34,18 @@ defineOgImageComponent('Docs', {
 })
 
 const communityLinks = computed(() => [{
-  icon: 'i-heroicons-pencil-square',
+  icon: 'i-lucide-square-pen',
   label: 'Edit this page',
   to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
-  icon: 'i-heroicons-star',
+  icon: 'i-lucide-star',
   label: 'Star on GitHub',
   to: 'https://github.com/nuxt/ui',
   target: '_blank'
 }, {
   label: 'Roadmap',
-  icon: 'i-heroicons-map',
+  icon: 'i-lucide-map',
   to: '/roadmap'
 }])
 
@@ -85,7 +85,7 @@ const communityLinks = computed(() => [{
             variant="subtle"
             v-bind="page.select.items.find((item: any) => item.to === route.path)"
             block
-            trailing-icon="i-heroicons-chevron-down-20-solid"
+            trailing-icon="i-lucide-chevron-down"
             :class="[open && 'bg-[var(--ui-bg-accented)]/75']"
             :ui="{
               trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')

@@ -192,7 +192,7 @@ const columns: TableColumn<Payment>[] = [{
       color: 'neutral',
       variant: 'ghost',
       label: 'Email',
-      icon: isSorted ? (isSorted === 'asc' ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid') : 'i-heroicons-arrows-up-down-20-solid',
+      icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
       class: '-mx-2.5',
       onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
     })
@@ -226,7 +226,7 @@ const columns: TableColumn<Payment>[] = [{
         toast.add({
           title: 'Payment ID copied to clipboard!',
           color: 'success',
-          icon: 'i-heroicons-check-circle'
+          icon: 'i-lucide-circle-check'
         })
       }
     }, {
@@ -248,7 +248,7 @@ const columns: TableColumn<Payment>[] = [{
       },
       items
     }, () => h(UButton, {
-      icon: 'i-heroicons-ellipsis-vertical-20-solid',
+      icon: 'i-lucide-ellipsis-vertical',
       color: 'neutral',
       variant: 'ghost',
       class: 'ml-auto'
@@ -293,7 +293,7 @@ function randomize() {
           label="Columns"
           color="neutral"
           variant="outline"
-          trailing-icon="i-heroicons-chevron-down-20-solid"
+          trailing-icon="i-lucide-chevron-down"
           class="ml-auto"
         />
       </UDropdownMenu>

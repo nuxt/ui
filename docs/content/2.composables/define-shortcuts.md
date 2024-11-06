@@ -121,14 +121,14 @@ The `extractShortcuts` utility can be used to automatically define shortcuts fro
 <script setup lang="ts">
 const items = [{
   label: 'Save',
-  icon: 'i-heroicons-document-arrow-down',
+  icon: 'i-lucide-file-down',
   kbds: ['meta', 'S'],
   onSelect() {
     save()
   }
 }, {
   label: 'Copy',
-  icon: 'i-heroicons-document-duplicate',
+  icon: 'i-lucide-copy',
   kbds: ['meta', 'C'],
   onSelect() {
     copy()

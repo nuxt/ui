@@ -4,22 +4,22 @@ const groups = [{
   items: [
     {
       label: 'Profile',
-      icon: 'i-heroicons-user',
+      icon: 'i-lucide-user',
       kbds: ['meta', 'P']
     },
     {
       label: 'Billing',
-      icon: 'i-heroicons-credit-card',
+      icon: 'i-lucide-credit-card',
       kbds: ['meta', 'B'],
       slot: 'billing'
     },
     {
       label: 'Notifications',
-      icon: 'i-heroicons-bell'
+      icon: 'i-lucide-bell'
     },
     {
       label: 'Security',
-      icon: 'i-heroicons-lock-closed'
+      icon: 'i-lucide-lock'
     }
   ]
 }, {

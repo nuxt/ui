@@ -78,7 +78,7 @@ class: 'p-8'
 
 ### Prev Icon / Next Icon
 
-Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/components/icon). Defaults to `i-heroicons-arrow-left-20-solid` / `i-heroicons-arrow-right-20-solid`.
+Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/components/icon). Defaults to `i-lucide-arrow-left` / `i-lucide-arrow-right`.
 
 ::component-example
 ---
@@ -87,10 +87,10 @@ class: 'p-8'
 options:
   - name: 'prevIcon'
     label: 'prevIcon'
-    default: 'i-heroicons-chevron-left'
+    default: 'i-lucide-chevron-left'
   - name: 'nextIcon'
     label: 'nextIcon'
-    default: 'i-heroicons-chevron-right'
+    default: 'i-lucide-chevron-right'
 ---
 ::
 

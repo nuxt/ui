@@ -50,7 +50,7 @@ const text = computed(() => {
             color="neutral"
             variant="link"
             size="sm"
-            :icon="show ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
+            :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
             aria-label="show ? 'Hide password' : 'Show password'"
             :aria-pressed="show"
             aria-controls="password"
@@ -79,7 +79,7 @@ const text = computed(() => {
         class="flex items-center gap-0.5"
         :class="req.met ? 'text-[var(--ui-success)]' : 'text-[var(--ui-text-muted)]'"
       >
-        <UIcon :name="req.met ? 'i-heroicons-check-circle' : 'i-heroicons-x-circle'" class="size-4 shrink-0" />
+        <UIcon :name="req.met ? 'i-lucide-circle-check' : 'i-lucide-circle-x'" class="size-4 shrink-0" />
 
         <span class="text-xs font-light">
           {{ req.text }}

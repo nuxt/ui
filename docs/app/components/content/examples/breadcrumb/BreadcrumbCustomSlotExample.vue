@@ -4,7 +4,7 @@ const items = [{
   to: '/'
 }, {
   slot: 'dropdown',
-  icon: 'i-heroicons-ellipsis-horizontal',
+  icon: 'i-lucide-ellipsis',
   children: [{
     label: 'Documentation'
   }, {

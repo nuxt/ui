@@ -43,7 +43,7 @@ Use the `icon` prop to display a fallback [Icon](/components/icon).
 ::component-code
 ---
 props:
-  icon: 'i-heroicons-photo'
+  icon: 'i-lucide-image'
   size: md
 ---
 ::

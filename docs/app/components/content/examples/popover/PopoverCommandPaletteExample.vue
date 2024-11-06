@@ -28,7 +28,7 @@ const label = ref([])
 <template>
   <UPopover :content="{ side: 'right', align: 'start' }">
     <UButton
-      icon="i-heroicons-tag"
+      icon="i-lucide-tag"
       label="Select labels"
       color="neutral"
       variant="subtle"

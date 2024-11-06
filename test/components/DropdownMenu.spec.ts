@@ -16,32 +16,32 @@ describe('DropdownMenu', () => {
     }],
     [{
       label: 'Profile',
-      icon: 'i-heroicons-user',
+      icon: 'i-lucide-user',
       slot: 'custom'
     }, {
       label: 'Billing',
-      icon: 'i-heroicons-credit-card',
+      icon: 'i-lucide-credit-card',
       kbds: ['meta', 'b']
     }, {
       label: 'Settings',
-      icon: 'i-heroicons-cog',
+      icon: 'i-lucide-cog',
       kbds: ['?']
     }], [{
       label: 'Team',
-      icon: 'i-heroicons-users'
+      icon: 'i-lucide-users'
     }, {
       label: 'Invite users',
-      icon: 'i-heroicons-user-plus',
+      icon: 'i-lucide-user-plus',
       children: [[{
         label: 'Invite by email',
-        icon: 'i-heroicons-paper-airplane'
+        icon: 'i-lucide-send-horizontal'
       }, {
         label: 'Invite by link',
-        icon: 'i-heroicons-link',
+        icon: 'i-lucide-link',
         kbds: ['meta', 'i']
       }], [{
         label: 'More',
-        icon: 'i-heroicons-plus-circle',
+        icon: 'i-lucide-circle-plus',
         children: [{
           label: 'Import from Slack',
           icon: 'i-simple-icons-slack',
@@ -57,7 +57,7 @@ describe('DropdownMenu', () => {
       }]]
     }, {
       label: 'New team',
-      icon: 'i-heroicons-plus',
+      icon: 'i-lucide-plus',
       kbds: ['meta', 'n']
     }], [{
       label: 'GitHub',
@@ -66,21 +66,21 @@ describe('DropdownMenu', () => {
       target: '_blank'
     }, {
       label: 'Support',
-      icon: 'i-heroicons-lifebuoy',
+      icon: 'i-lucide-life-buoy',
       to: '/components/dropdown-menu'
     }, {
       type: 'separator'
     }, {
       label: 'Keyboard Shortcuts',
-      icon: 'i-heroicons-key'
+      icon: 'i-lucide-key-round'
     }, {
       label: 'API',
-      icon: 'i-heroicons-cube',
+      icon: 'i-lucide-box',
       disabled: true
     }], [{
       label: 'Logout',
       color: 'error',
-      icon: 'i-heroicons-arrow-right-start-on-rectangle',
+      icon: 'i-lucide-log-out',
       kbds: ['shift', 'meta', 'q']
     }]
   ]

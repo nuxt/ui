@@ -14,23 +14,23 @@ const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Veget
 const statuses = [{
   label: 'Backlog',
   value: 'backlog',
-  icon: 'i-heroicons-question-mark-circle'
+  icon: 'i-lucide-circle-help'
 }, {
   label: 'Todo',
   value: 'todo',
-  icon: 'i-heroicons-plus-circle'
+  icon: 'i-lucide-circle-plus'
 }, {
   label: 'In Progress',
   value: 'in_progress',
-  icon: 'i-heroicons-arrow-up-circle'
+  icon: 'i-lucide-circle-arrow-up'
 }, {
   label: 'Done',
   value: 'done',
-  icon: 'i-heroicons-check-circle'
+  icon: 'i-lucide-circle-check'
 }, {
   label: 'Canceled',
   value: 'canceled',
-  icon: 'i-heroicons-x-circle'
+  icon: 'i-lucide-circle-x'
 }]
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
@@ -41,7 +41,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 })
 
 function getStatusIcon(value: string): string {
-  return statuses.find(status => status.value === value)?.icon || 'i-heroicons-user'
+  return statuses.find(status => status.value === value)?.icon || 'i-lucide-user'
 }
 
 function getUserAvatar(value: string) {
@@ -108,8 +108,8 @@ function getUserAvatar(value: string) {
         :key="size"
         :items="statuses"
         placeholder="Search status..."
-        icon="i-heroicons-magnifying-glass"
-        trailing-icon="i-heroicons-chevron-up-down-20-solid"
+        icon="i-lucide-search"
+        trailing-icon="i-lucide-chevrons-up-down"
         :size="size"
         class="w-48"
       >
@@ -124,7 +124,7 @@ function getUserAvatar(value: string) {
         :key="size"
         :items="users || []"
         :loading="status === 'pending'"
-        icon="i-heroicons-user"
+        icon="i-lucide-user"
         placeholder="Search users..."
         :size="size"
         class="w-48"

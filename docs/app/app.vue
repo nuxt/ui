@@ -23,27 +23,27 @@ const searchTerm = ref('')
 const links = computed(() => {
   return [{
     label: 'Docs',
-    icon: 'i-heroicons-book-open',
+    icon: 'i-lucide-book-open',
     to: '/getting-started',
     active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
   }, ...(navigation.value?.find(item => item.path === '/pro')
     ? [{
         label: 'Pro',
-        icon: 'i-heroicons-square-3-stack-3d',
+        icon: 'i-lucide-layers-3',
         to: '/pro',
         active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
       }, {
         label: 'Pricing',
-        icon: 'i-heroicons-credit-card',
+        icon: 'i-lucide-credit-card',
         to: '/pro/pricing'
       }, {
         label: 'Templates',
-        icon: 'i-heroicons-computer-desktop',
+        icon: 'i-lucide-monitor',
         to: '/pro/templates'
       }]
     : []), {
     label: 'Releases',
-    icon: 'i-heroicons-rocket-launch',
+    icon: 'i-lucide-rocket',
     to: '/releases'
   }].filter(Boolean)
 })

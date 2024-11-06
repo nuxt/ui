@@ -48,11 +48,11 @@ props:
     - - label: Appearance
         children:
           - label: System
-            icon: i-heroicons-computer-desktop
+            icon: i-lucide-monitor
           - label: Light
-            icon: i-heroicons-sun
+            icon: i-lucide-sun
           - label: Dark
-            icon: i-heroicons-moon
+            icon: i-lucide-moon
     - - label: Show Sidebar
         kbds:
           - meta
@@ -126,11 +126,11 @@ props:
   size: xl
   items:
     - label: System
-      icon: i-heroicons-computer-desktop
+      icon: i-lucide-monitor
     - label: Light
-      icon: i-heroicons-sun
+      icon: i-lucide-sun
     - label: Dark
-      icon: i-heroicons-moon
+      icon: i-lucide-moon
   class: 'w-48'
 slots:
   default: |
@@ -159,11 +159,11 @@ props:
   disabled: true
   items:
     - label: System
-      icon: i-heroicons-computer-desktop
+      icon: i-lucide-monitor
     - label: Light
-      icon: i-heroicons-sun
+      icon: i-lucide-sun
     - label: Dark
-      icon: i-heroicons-moon
+      icon: i-lucide-moon
   class: 'w-48'
 slots:
   default: |

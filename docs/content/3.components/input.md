@@ -115,7 +115,7 @@ prettier: true
 ignore:
   - placeholder
 props:
-  icon: 'i-heroicons-magnifying-glass'
+  icon: 'i-lucide-search'
   size: md
   variant: outline
   placeholder: 'Search...'
@@ -130,7 +130,7 @@ prettier: true
 ignore:
   - placeholder
 props:
-  trailingIcon: i-heroicons-at-symbol
+  trailingIcon: i-lucide-at-sign
   placeholder: 'Enter your email'
   size: md
 ---
@@ -171,7 +171,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
 
 ::component-code
 ---
@@ -179,7 +179,7 @@ ignore:
   - placeholder
 props:
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   placeholder: 'Search...'
 ---
 ::

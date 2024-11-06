@@ -48,13 +48,13 @@ props:
 
 ### Indeterminate Icon
 
-Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults to `i-heroicons-minus-20-solid`.
+Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults to `i-lucide-minus`.
 
 ::component-code
 ---
 props:
   indeterminate: true
-  indeterminateIcon: 'i-heroicons-plus-20-solid'
+  indeterminateIcon: 'i-lucide-plus'
 ---
 ::
 
@@ -101,7 +101,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to set the icon of the Checkbox when it is checked. Defaults to `i-heroicons-check-20-solid`.
+Use the `icon` prop to set the icon of the Checkbox when it is checked. Defaults to `i-lucide-check`.
 
 ::component-code
 ---
@@ -109,7 +109,7 @@ ignore:
   - label
   - defaultValue
 props:
-  icon: 'i-heroicons-heart'
+  icon: 'i-lucide-heart'
   defaultValue: true
   label: Check me
 ---

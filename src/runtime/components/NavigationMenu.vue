@@ -87,24 +87,24 @@ extendDevtoolsMeta({
     items: [
       [{
         label: 'Documentation',
-        icon: 'i-heroicons-book-open',
+        icon: 'i-lucide-book-open',
         badge: 10,
         children: [{
           label: 'Introduction',
           description: 'Fully styled and customizable components for Nuxt.',
-          icon: 'i-heroicons-home'
+          icon: 'i-lucide-house'
         }, {
           label: 'Installation',
           description: 'Learn how to install and configure Nuxt UI in your application.',
-          icon: 'i-heroicons-cloud-arrow-down'
+          icon: 'i-lucide-cloud-download'
         }, {
           label: 'Theming',
           description: 'Learn how to customize the look and feel of the components.',
-          icon: 'i-heroicons-swatch'
+          icon: 'i-lucide-swatch-book'
         }, {
           label: 'Shortcuts',
           description: 'Learn how to display and define keyboard shortcuts in your app.',
-          icon: 'i-heroicons-computer-desktop'
+          icon: 'i-lucide-monitor'
         }]
       }, {
         label: 'GitHub',
@@ -113,7 +113,7 @@ extendDevtoolsMeta({
         target: '_blank'
       }, {
         label: 'Help',
-        icon: 'i-heroicons-question-mark-circle',
+        icon: 'i-lucide-circle-help',
         disabled: true
       }]
     ]

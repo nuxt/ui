@@ -33,7 +33,7 @@
           <h3 class="font-bold">
             Logs
           </h3>
-          <UButton icon="i-heroicons-trash" size="sm" color="neutral" class="-my-1" @click="logs = []" />
+          <UButton icon="i-lucide-trash" size="sm" color="neutral" class="-my-1" @click="logs = []" />
         </div>
       </template>
 
