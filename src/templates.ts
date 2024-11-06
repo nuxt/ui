@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { kebabCase } from 'scule'
-import { addTemplate, addTypeTemplate } from '@nuxt/kit'
+import { addTemplate, addTypeTemplate, createResolver } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
@@ -98,4 +98,10 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       addTemplate(template)
     }
   }
+
+  const { resolve } = createResolver(import.meta.url)
+
+  nuxt.hook('prepare:types', ({ references }) => {
+    references.push({ path: resolve('./runtime/types/app.config.d.ts') })
+  })
 }
