@@ -216,6 +216,12 @@ const creatable = computed(() => {
     return false
   }
 
+  const isModelValueCustom = props.modelValue && filterFunction((props.multiple && Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue]) as ArrayOrWrapped<T>, searchTerm.value, (item, term) => String(item) === term).length === 1
+
+  if (isModelValueCustom) {
+    return false
+  }
+
   const filteredItems = filterFunction()
   const newItem = searchTerm.value && {
     item: props.valueKey ? { [props.valueKey]: searchTerm.value, [props.labelKey ?? 'label']: searchTerm.value } : searchTerm.value,
