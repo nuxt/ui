@@ -3,7 +3,7 @@ import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
-import type { AvatarSize, Strategy } from '../../types/index'
+import type { AvatarSize, DeepPartial, Strategy } from '../../types/index'
 import UAvatar from './Avatar.vue'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -32,7 +32,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof avatarGroupConfig> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof avatarGroupConfig> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
