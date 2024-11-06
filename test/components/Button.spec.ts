@@ -71,7 +71,7 @@ describe('Button', () => {
     const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
-    expect(icon?.vm?.name).toBe('i-heroicons-arrow-path-20-solid')
+    expect(icon?.vm?.name).toBe('i-lucide-refresh-ccw')
 
     resolve?.(null)
   })
@@ -102,7 +102,7 @@ describe('Button', () => {
     const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
-    expect(icon?.vm?.name).toBe('i-heroicons-arrow-path-20-solid')
+    expect(icon?.vm?.name).toBe('i-lucide-refresh-ccw')
 
     resolve?.(null)
   })
