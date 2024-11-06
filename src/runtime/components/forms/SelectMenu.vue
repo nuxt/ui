@@ -376,8 +376,8 @@ export default defineComponent({
             return options.value.filter(
               option => typeof option === 'object' && option !== null
                 && typeof option[props.valueAttribute] === 'object' && option[props.valueAttribute] !== null && modelValue.some(
-                  (value: any) => typeof value === 'object' && value !== null && value[props.by] === option[props.valueAttribute][props.by]
-                )
+                (value: any) => typeof value === 'object' && value !== null && value[props.by] === option[props.valueAttribute][props.by]
+              )
             )
           }
 
