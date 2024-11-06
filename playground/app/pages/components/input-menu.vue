@@ -102,7 +102,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :key="size"
         :items="statuses"
         placeholder="Search status..."
-        icon="i-lucide-file-search-2"
+        icon="i-lucide-search"
         trailing-icon="i-lucide-chevrons-up-down"
         :size="size"
         class="w-48"
@@ -137,7 +137,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :items="items"
         :model-value="[fruits[0]!]"
         multiple
-        icon="i-lucide-file-search-2"
+        icon="i-lucide-search"
         placeholder="Search..."
         :size="size"
         class="w-48"

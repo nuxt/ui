@@ -188,7 +188,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to customize the input [Icon](/components/icon). Defaults to `i-lucide-file-search-2-20-solid`.
+Use the `icon` prop to customize the input [Icon](/components/icon). Defaults to `i-lucide-search`.
 
 ::component-code
 ---

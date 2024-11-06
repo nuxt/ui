@@ -78,7 +78,7 @@ class: 'p-8'
 
 ### Prev Icon / Next Icon
 
-Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/components/icon). Defaults to `i-lucide-arrow-left-20-solid` / `i-lucide-arrow-right`.
+Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/components/icon). Defaults to `i-lucide-arrow-left` / `i-lucide-arrow-right`.
 
 ::component-example
 ---

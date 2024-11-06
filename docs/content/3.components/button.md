@@ -118,7 +118,7 @@ The `label` as prop or slot is optional so you can use the Button as an icon-onl
 ::component-code
 ---
 props:
-  icon: i-lucide-file-search-2
+  icon: i-lucide-search
   size: md
   color: primary
   variant: solid

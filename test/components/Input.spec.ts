@@ -20,7 +20,7 @@ describe('Input', () => {
     ['with disabled', { props: { disabled: true } }],
     ['with required', { props: { required: true } }],
     ['with file type', { props: { type: 'file' } }],
-    ['with icon', { props: { icon: 'i-lucide-file-search-2' } }],
+    ['with icon', { props: { icon: 'i-lucide-search' } }],
     ['with leading and icon', { props: { leading: true, icon: 'i-lucide-arrow-left' } }],
     ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
     ['with trailing and icon', { props: { trailing: true, icon: 'i-lucide-arrow-right' } }],

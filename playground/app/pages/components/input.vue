@@ -44,7 +44,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
       <UInput icon="i-lucide-lock" type="password" model-value="password" />
       <UInput loading placeholder="Search..." />
       <UInput loading trailing placeholder="Search..." />
-      <UInput loading icon="i-lucide-file-search-2" trailing-icon="i-lucide-chevron-down" placeholder="Search..." />
+      <UInput loading icon="i-lucide-search" trailing-icon="i-lucide-chevron-down" placeholder="Search..." />
     </div>
     <div class="flex items-center gap-4">
       <UInput
@@ -59,7 +59,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
       <UInput
         v-for="size in sizes"
         :key="size"
-        icon="i-lucide-file-search-2"
+        icon="i-lucide-search"
         placeholder="Search..."
         :size="size"
         class="w-48"
@@ -69,7 +69,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
       <UInput
         v-for="size in sizes"
         :key="size"
-        icon="i-lucide-file-search-2"
+        icon="i-lucide-search"
         trailing
         placeholder="Search..."
         :size="size"
@@ -81,7 +81,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
         v-for="size in sizes"
         :key="size"
         :avatar="{ src: 'https://github.com/benjamincanac.png' }"
-        icon="i-lucide-file-search-2"
+        icon="i-lucide-search"
         trailing
         placeholder="Search..."
         :size="size"

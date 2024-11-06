@@ -111,7 +111,7 @@ const isDark = computed({
           :items="components"
           placeholder="Search component..."
           class="top-0 translate-y-0 w-full mx-2"
-          icon="i-lucide-file-search-2"
+          icon="i-lucide-search"
         />
 
         <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4 bg-[var(--ui-bg)]">

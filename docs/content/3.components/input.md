@@ -115,7 +115,7 @@ prettier: true
 ignore:
   - placeholder
 props:
-  icon: 'i-lucide-file-search-2'
+  icon: 'i-lucide-search'
   size: md
   variant: outline
   placeholder: 'Search...'

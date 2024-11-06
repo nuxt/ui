@@ -403,7 +403,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  icon: 'i-lucide-file-search-2'
+  icon: 'i-lucide-search'
   size: md
   items:
     - Backlog
