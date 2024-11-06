@@ -77,7 +77,7 @@
 
         <template v-else>
           <template v-for="(row, index) in rows" :key="index">
-            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
+            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, ($attrs.onSelect || $attrs.onContextmenu) && ui.tr.active, row?.class]" @click="() => onSelect(row)" @contextmenu="(event) => onContextmenu(event, row)">
               <td v-if="modelValue" :class="ui.checkbox.padding">
                 <UCheckbox
                   :model-value="isSelected(row)"
@@ -363,6 +363,15 @@ export default defineComponent({
       $attrs.onSelect(row)
     }
 
+    function onContextmenu(event, row) {
+      if (!$attrs.onContextmenu) {
+        return
+      }
+
+      // @ts-ignore
+      $attrs.onContextmenu(event, row)
+    }
+
     function selectAllRows() {
       // Create a new array to ensure reactivity
       const newSelected = [...selected.value]
@@ -451,6 +460,7 @@ export default defineComponent({
       isSelected,
       onSort,
       onSelect,
+      onContextmenu,
       onChange,
       getRowData,
       toggleOpened,
