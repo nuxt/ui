@@ -334,7 +334,7 @@ function onUpdateOpen(value: boolean) {
             >
               <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                 <slot name="create-item-label" :item="(creatable.item as T)">
-                  Add "{{ typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }}"
+                  Create "{{ typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }}"
                 </slot>
               </span>
             </ComboboxItem>
@@ -395,7 +395,7 @@ function onUpdateOpen(value: boolean) {
             >
               <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                 <slot name="create-item-label" :item="(creatable.item as T)">
-                  Add "{{ typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }}"
+                  Create "{{ typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }}"
                 </slot>
               </span>
             </ComboboxItem>
