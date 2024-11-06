@@ -17,7 +17,7 @@ export const createPopper = popperGenerator({
   defaultModifiers: [...defaultModifiers, offset, flip, preventOverflow, computeStyles, eventListeners, arrowModifier]
 })
 
-export function usePopper ({
+export function usePopper({
   locked = false,
   overflowPadding = 8,
   offsetDistance = 8,
@@ -36,15 +36,23 @@ export function usePopper ({
 
   onMounted(() => {
     watchEffect((onInvalidate) => {
-      if (!popper.value) { return }
-      if (!reference.value && !virtualReference?.value) { return }
+      if (!popper.value) {
+        return
+      }
+      if (!reference.value && !virtualReference?.value) {
+        return
+      }
 
       const popperEl = unrefElement(popper)
       const referenceEl = virtualReference?.value || unrefElement(reference)
 
       // if (!(referenceEl instanceof HTMLElement)) { return }
-      if (!(popperEl instanceof HTMLElement)) { return }
-      if (!referenceEl) { return }
+      if (!(popperEl instanceof HTMLElement)) {
+        return
+      }
+      if (!referenceEl) {
+        return
+      }
 
       const config: Record<string, any> = {
         modifiers: [

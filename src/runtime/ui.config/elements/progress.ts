@@ -11,11 +11,11 @@ export default {
     color: 'text-gray-400 dark:text-gray-500',
     size: {
       '2xs': 'text-xs',
-      xs: 'text-xs',
-      sm: 'text-sm',
-      md: 'text-sm',
-      lg: 'text-sm',
-      xl: 'text-base',
+      'xs': 'text-xs',
+      'sm': 'text-sm',
+      'md': 'text-sm',
+      'lg': 'text-sm',
+      'xl': 'text-base',
       '2xl': 'text-base'
     }
   },
@@ -24,11 +24,11 @@ export default {
     width: 'w-full [&::-webkit-progress-bar]:w-full',
     size: {
       '2xs': 'h-px',
-      xs: 'h-0.5',
-      sm: 'h-1',
-      md: 'h-2',
-      lg: 'h-3',
-      xl: 'h-4',
+      'xs': 'h-0.5',
+      'sm': 'h-1',
+      'md': 'h-2',
+      'lg': 'h-3',
+      'xl': 'h-4',
       '2xl': 'h-5'
     },
     rounded: 'rounded-full [&::-webkit-progress-bar]:rounded-full',
@@ -46,11 +46,11 @@ export default {
     color: 'text-{color}-500 dark:text-{color}-400',
     size: {
       '2xs': 'text-xs',
-      xs: 'text-xs',
-      sm: 'text-sm',
-      md: 'text-sm',
-      lg: 'text-sm',
-      xl: 'text-base',
+      'xs': 'text-xs',
+      'sm': 'text-sm',
+      'md': 'text-sm',
+      'lg': 'text-sm',
+      'xl': 'text-base',
       '2xl': 'text-base'
     }
   },
@@ -61,10 +61,10 @@ export default {
     first: 'text-gray-500 dark:text-gray-400'
   },
   animation: {
-    carousel: 'bar-animation-carousel',
+    'carousel': 'bar-animation-carousel',
     'carousel-inverse': 'bar-animation-carousel-inverse',
-    swing: 'bar-animation-swing',
-    elastic: 'bar-animation-elastic'
+    'swing': 'bar-animation-swing',
+    'elastic': 'bar-animation-elastic'
   },
   default: {
     color: 'primary',

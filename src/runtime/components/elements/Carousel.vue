@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.wrapper" v-bind="attrs">
+  <div :class="ui.wrapper" v-bind="attrs" :dir="dir">
     <div ref="carouselRef" :class="ui.container" class="no-scrollbar">
       <div
         v-for="(item, index) in items"
@@ -59,12 +59,12 @@
 import { ref, toRef, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge } from 'tailwind-merge'
+import { useScroll, useResizeObserver, useElementSize } from '@vueuse/core'
 import { mergeConfig } from '../../utils'
 import UButton from '../elements/Button.vue'
-import type { Strategy, Button } from '../../types/index'
+import type { Strategy, Button, DeepPartial } from '../../types/index'
 import { useUI } from '../../composables/useUI'
 import { useCarouselScroll } from '../../composables/useCarouselScroll'
-import { useScroll, useResizeObserver, useElementSize } from '@vueuse/core'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { carousel } from '#ui/ui.config'
@@ -89,6 +89,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    dir: {
+      type: String as PropType<'ltr' | 'rtl'>,
+      default: 'ltr'
+    },
     prevButton: {
       type: Object as PropType<Button & { class?: string }>,
       default: () => config.default.prevButton as Button & { class?: string }
@@ -102,11 +106,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
+      type: Object as PropType<DeepPartial<typeof config & { strategy?: Strategy }>>,
       default: undefined
     }
   },
-  setup (props, { expose }) {
+  setup(props, { expose }) {
     const { ui, attrs } = useUI('carousel', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const carouselRef = ref<HTMLElement>()
@@ -124,12 +128,16 @@ export default defineComponent({
       itemWidth.value = entry?.target?.firstElementChild?.clientWidth || 0
     })
 
+    const isRtl = computed(() => props.dir === 'rtl')
+
     const currentPage = computed(() => {
       if (!itemWidth.value) {
         return 0
       }
 
-      return Math.round(x.value / itemWidth.value) + 1
+      return isRtl.value
+        ? Math.round(-x.value / itemWidth.value) + 1
+        : Math.round(x.value / itemWidth.value) + 1
     })
 
     const pages = computed(() => {
@@ -137,22 +145,28 @@ export default defineComponent({
         return 0
       }
 
-      return props.items.length - Math.round(carouselWidth.value / itemWidth.value) + 1
+      const itemDivisions = Math.round(carouselWidth.value / itemWidth.value)
+
+      if (props.items.length <= itemDivisions) {
+        return 0
+      }
+
+      return props.items.length - itemDivisions + 1
     })
 
     const isFirst = computed(() => currentPage.value <= 1)
     const isLast = computed(() => currentPage.value === pages.value)
 
-    function onClickNext () {
-      x.value += itemWidth.value
+    function onClickNext() {
+      x.value += isRtl.value ? -itemWidth.value : itemWidth.value
     }
 
-    function onClickPrev () {
-      x.value -= itemWidth.value
+    function onClickPrev() {
+      x.value -= isRtl.value ? -itemWidth.value : itemWidth.value
     }
 
-    function onClick (page: number) {
-      x.value = (page - 1) * itemWidth.value
+    function onClick(page: number) {
+      x.value = (page - 1) * itemWidth.value * (isRtl.value ? -1 : 1)
     }
 
     expose({

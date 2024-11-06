@@ -44,7 +44,7 @@ import { computed, defineComponent, provide, inject, ref, toRef } from 'vue'
 import type { Ref, PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { FormError, InjectedFormGroupValue, FormGroupSize, Strategy } from '../../types/index'
+import type { FormError, InjectedFormGroupValue, FormGroupSize, Strategy, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { formGroup } from '#ui/ui.config'
@@ -62,7 +62,7 @@ export default defineComponent({
     size: {
       type: String as PropType<FormGroupSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
@@ -95,7 +95,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     },
     eagerValidation: {
@@ -103,7 +103,7 @@ export default defineComponent({
       default: false
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('formGroup', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
@@ -111,7 +111,7 @@ export default defineComponent({
     const error = computed(() => {
       return (props.error && typeof props.error === 'string') || typeof props.error === 'boolean'
         ? props.error
-        : formErrors?.value?.find((error) => error.path === props.name)?.message
+        : formErrors?.value?.find(error => error.path === props.name)?.message
     })
 
     const size = computed(() => ui.value.size[props.size ?? config.default.size])

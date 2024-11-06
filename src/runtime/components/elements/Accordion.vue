@@ -73,7 +73,7 @@ import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, omit } from '../../utils'
-import type { AccordionItem, Strategy } from '../../types/index'
+import type { AccordionItem, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { accordion, button } from '#ui/ui.config'
@@ -122,12 +122,12 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['open'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const uiButton = computed<typeof configButton>(() => configButton)
@@ -146,7 +146,7 @@ export default defineComponent({
       }
     }, { immediate: true })
 
-    function closeOthers (currentIndex: number, e: Event) {
+    function closeOthers(currentIndex: number, e: Event) {
       if (!props.items[currentIndex].closeOthers && props.multiple) {
         return
       }
@@ -158,27 +158,29 @@ export default defineComponent({
       })
     }
 
-    function onEnter (_el: Element, done: () => void) {
+    function onEnter(_el: Element, done: () => void) {
       const el = _el as HTMLElement
       el.style.height = '0'
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       el.offsetHeight // Trigger a reflow, flushing the CSS changes
       el.style.height = el.scrollHeight + 'px'
 
       el.addEventListener('transitionend', done, { once: true })
     }
 
-    function onBeforeLeave (_el: Element) {
+    function onBeforeLeave(_el: Element) {
       const el = _el as HTMLElement
       el.style.height = el.scrollHeight + 'px'
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       el.offsetHeight // Trigger a reflow, flushing the CSS changes
     }
 
-    function onAfterEnter (_el: Element) {
+    function onAfterEnter(_el: Element) {
       const el = _el as HTMLElement
       el.style.height = 'auto'
     }
 
-    function onLeave (_el: Element, done: () => void) {
+    function onLeave(_el: Element, done: () => void) {
       const el = _el as HTMLElement
       el.style.height = '0'
 

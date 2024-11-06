@@ -9,10 +9,16 @@
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
           <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
-            <UCheckbox :model-value="indeterminate || selected.length === rows.length" :indeterminate="indeterminate" v-bind="ui.default.checkbox" aria-label="Select all" @change="onChange" />
+            <UCheckbox
+              :model-value="isAllRowChecked"
+              :indeterminate="indeterminate"
+              v-bind="ui.default.checkbox"
+              aria-label="Select all"
+              @change="onChange"
+            />
           </th>
 
-          <th v-if="$slots.expand" scope="col" :class="ui.tr.base">
+          <th v-if="expand" scope="col" :class="ui.tr.base">
             <span class="sr-only">Expand</span>
           </th>
 
@@ -44,7 +50,7 @@
       </thead>
       <tbody :class="ui.tbody">
         <tr v-if="loadingState && loading && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + (expand ? 1 : 0)">
             <slot name="loading-state">
               <div :class="ui.loadingState.wrapper">
                 <UIcon v-if="loadingState.icon" :name="loadingState.icon" :class="ui.loadingState.icon" aria-hidden="true" />
@@ -57,7 +63,7 @@
         </tr>
 
         <tr v-else-if="emptyState && !rows.length">
-          <td :colspan="columns.length + (modelValue ? 1 : 0) + ($slots.expand ? 1 : 0)">
+          <td :colspan="columns.length + (modelValue ? 1 : 0) + (expand ? 1 : 0)">
             <slot name="empty-state">
               <div :class="ui.emptyState.wrapper">
                 <UIcon v-if="emptyState.icon" :name="emptyState.icon" :class="ui.emptyState.icon" aria-hidden="true" />
@@ -71,29 +77,38 @@
 
         <template v-else>
           <template v-for="(row, index) in rows" :key="index">
-            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
+            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
               <td v-if="modelValue" :class="ui.checkbox.padding">
-                <UCheckbox v-model="selected" :value="row" v-bind="ui.default.checkbox" aria-label="Select row" @click.capture.stop="() => onSelect(row)" />
-              </td>
-
-              <td
-                v-if="$slots.expand"
-                :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
-              >
-                <UButton
-                  v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
-                  :ui="{ icon: { base: [ui.expand.icon, openedRows.includes(index) && 'rotate-180'] } }"
-                  @click="toggleOpened(index)"
+                <UCheckbox
+                  :model-value="isSelected(row)"
+                  v-bind="ui.default.checkbox"
+                  aria-label="Select row"
+                  @change="onChangeCheckbox($event, row)"
+                  @click.capture.stop="() => onSelect(row)"
                 />
               </td>
-
+              <td
+                v-if="expand"
+                :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
+              >
+                <template v-if="$slots['expand-action']">
+                  <slot name="expand-action" :row="row" :is-expanded="isExpanded(row)" :toggle="() => toggleOpened(row)" />
+                </template>
+                <UButton
+                  v-else
+                  :disabled="row.disabledExpand"
+                  v-bind="{ ...(ui.default.expandButton || {}), ...expandButton }"
+                  :ui="{ icon: { base: [ui.expand.icon, isExpanded(row) && 'rotate-180'].join(' ') } }"
+                  @click.capture.stop="toggleOpened(row)"
+                />
+              </td>
               <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, column?.rowClass, row[column.key]?.class]">
                 <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
                   {{ getRowData(row, column.key) }}
                 </slot>
               </td>
             </tr>
-            <tr v-if="openedRows.includes(index)">
+            <tr v-if="isExpanded(row)">
               <td colspan="100%">
                 <slot
                   name="expand"
@@ -110,7 +125,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, toRaw, toRef } from 'vue'
+import { computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType, AriaAttributes } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -121,18 +136,18 @@ import UProgress from '../elements/Progress.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, get } from '../../utils'
-import type { Strategy, Button, ProgressColor, ProgressAnimation } from '../../types/index'
+import type { TableRow, TableColumn, Strategy, Button, ProgressColor, ProgressAnimation, DeepPartial, Expanded } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { table } from '#ui/ui.config'
 
 const config = mergeConfig<typeof table>(appConfig.ui.strategy, appConfig.ui.table, table)
 
-function defaultComparator<T> (a: T, z: T): boolean {
-  return a === z
+function defaultComparator<T>(a: T, z: T): boolean {
+  return JSON.stringify(a) === JSON.stringify(z)
 }
 
-function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
+function defaultSort(a: any, b: any, direction: 'asc' | 'desc') {
   if (a === b) {
     return 0
   }
@@ -142,16 +157,6 @@ function defaultSort (a: any, b: any, direction: 'asc' | 'desc') {
   } else {
     return a > b ? -1 : 1
   }
-}
-
-interface Column {
-  key: string
-  sortable?: boolean
-  sort?: (a: any, b: any, direction: 'asc' | 'desc') => number
-  direction?: 'asc' | 'desc'
-  class?: string
-  rowClass?: string
-  [key: string]: any
 }
 
 export default defineComponent({
@@ -172,11 +177,11 @@ export default defineComponent({
       default: () => defaultComparator
     },
     rows: {
-      type: Array as PropType<{ [key: string]: any }[]>,
+      type: Array as PropType<TableRow[]>,
       default: () => []
     },
     columns: {
-      type: Array as PropType<Column[]>,
+      type: Array as PropType<TableColumn[]>,
       default: null
     },
     columnAttribute: {
@@ -207,6 +212,10 @@ export default defineComponent({
       type: Object as PropType<Button>,
       default: () => config.default.expandButton as Button
     },
+    expand: {
+      type: Object as PropType<Expanded<TableRow>>,
+      default: () => null
+    },
     loading: {
       type: Boolean,
       default: false
@@ -232,19 +241,28 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
+    },
+    multipleExpand: {
+      type: Boolean,
+      default: true
     }
   },
-  emits: ['update:modelValue', 'update:sort'],
-  setup (props, { emit, attrs: $attrs }) {
+  emits: ['update:modelValue', 'update:sort', 'update:expand'],
+  setup(props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map((key) => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as Column))
+    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map(key => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as TableColumn))
 
     const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
-
-    const openedRows = ref([])
+    const expand = useVModel(props, 'expand', emit, {
+      passive: true,
+      defaultValue: defu({}, props.expand, {
+        openedRows: [],
+        row: null
+      })
+    })
 
     const savedSort = { column: sort.value.column, direction: null }
 
@@ -259,22 +277,38 @@ export default defineComponent({
         const aValue = get(a, column)
         const bValue = get(b, column)
 
-        const sort = columns.value.find((col) => col.key === column)?.sort ?? defaultSort
+        const sort = columns.value.find(col => col.key === column)?.sort ?? defaultSort
 
         return sort(aValue, bValue, direction)
       })
     })
 
     const selected = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })
 
-    const indeterminate = computed(() => selected.value && selected.value.length > 0 && selected.value.length < props.rows.length)
+    const getStringifiedSet = (arr: TableRow[]) => new Set(arr.map(item => JSON.stringify(item)))
+
+    const totalRows = computed(() => props.rows.length)
+
+    const countCheckedRow = computed(() => {
+      const selectedData = getStringifiedSet(selected.value)
+      const rowsData = getStringifiedSet(props.rows)
+
+      return Array.from(selectedData).filter(item => rowsData.has(item)).length
+    })
+
+    const indeterminate = computed(() => {
+      if (!selected.value || !props.rows) return false
+      return countCheckedRow.value > 0 && countCheckedRow.value < totalRows.value
+    })
+
+    const isAllRowChecked = computed(() => countCheckedRow.value === totalRows.value)
 
     const emptyState = computed(() => {
       if (props.emptyState === null) return null
@@ -286,23 +320,27 @@ export default defineComponent({
       return { ...ui.value.default.loadingState, ...props.loadingState }
     })
 
-    function compare (a: any, z: any) {
+    function compare(a: any, z: any) {
       if (typeof props.by === 'string') {
-        const property = props.by as unknown as any
-        return a?.[property] === z?.[property]
+        const accesorFn = accessor(props.by)
+        return accesorFn(a) === accesorFn(z)
       }
       return props.by(a, z)
     }
 
-    function isSelected (row) {
+    function accessor<T extends Record<string, any>>(key: string) {
+      return (obj: T) => get(obj, key)
+    }
+
+    function isSelected(row: TableRow) {
       if (!props.modelValue) {
         return false
       }
 
-      return selected.value.some((item) => compare(toRaw(item), toRaw(row)))
+      return selected.value.some(item => compare(toRaw(item), toRaw(row)))
     }
 
-    function onSort (column: { key: string, direction?: 'asc' | 'desc' }) {
+    function onSort(column: { key: string, direction?: 'asc' | 'desc' }) {
       if (sort.value.column === column.key) {
         const direction = !column.direction || column.direction === 'asc' ? 'desc' : 'asc'
 
@@ -316,7 +354,7 @@ export default defineComponent({
       }
     }
 
-    function onSelect (row) {
+    function onSelect(row: TableRow) {
       if (!$attrs.onSelect) {
         return
       }
@@ -325,7 +363,7 @@ export default defineComponent({
       $attrs.onSelect(row)
     }
 
-    function selectAllRows () {
+    function selectAllRows() {
       // Create a new array to ensure reactivity
       const newSelected = [...selected.value]
 
@@ -340,7 +378,7 @@ export default defineComponent({
       selected.value = newSelected
     }
 
-    function onChange (checked: boolean) {
+    function onChange(checked: boolean) {
       if (checked) {
         selectAllRows()
       } else {
@@ -348,19 +386,31 @@ export default defineComponent({
       }
     }
 
-    function getRowData (row: Object, rowKey: string | string[], defaultValue: any = '') {
-      return get(row, rowKey, defaultValue)
-    }
-
-    function toggleOpened (index: number) {
-      if (openedRows.value.includes(index)) {
-        openedRows.value = openedRows.value.filter((i) => i !== index)
+    function onChangeCheckbox(checked: boolean, row: TableRow) {
+      if (checked) {
+        selected.value.push(row)
       } else {
-        openedRows.value.push(index)
+        const index = selected.value.findIndex(item => compare(item, row))
+        selected.value.splice(index, 1)
       }
     }
 
-    function getAriaSort (column: Column): AriaAttributes['aria-sort'] {
+    function getRowData(row: TableRow, rowKey: string | string[], defaultValue: any = '') {
+      return get(row, rowKey, defaultValue)
+    }
+
+    function isExpanded(row: TableRow) {
+      return expand.value?.openedRows ? expand.value.openedRows.some(openedRow => compare(openedRow, row)) : false
+    }
+
+    function toggleOpened(row: TableRow) {
+      expand.value = {
+        openedRows: isExpanded(row) ? expand.value.openedRows.filter(v => !compare(v, row)) : props.multipleExpand ? [...expand.value.openedRows, row] : [row],
+        row
+      }
+    }
+
+    function getAriaSort(column: TableColumn): AriaAttributes['aria-sort'] {
       if (!column.sortable) {
         return undefined
       }
@@ -396,14 +446,16 @@ export default defineComponent({
       emptyState,
       // eslint-disable-next-line vue/no-dupe-keys
       loadingState,
-      openedRows,
+      isAllRowChecked,
+      onChangeCheckbox,
       isSelected,
       onSort,
       onSelect,
       onChange,
       getRowData,
       toggleOpened,
-      getAriaSort
+      getAriaSort,
+      isExpanded
     }
   }
 })

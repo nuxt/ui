@@ -8,7 +8,7 @@ export default {
   orientation: {
     'rounded-none': { horizontal: { start: 'rounded-s-none', end: 'rounded-e-none' }, vertical: { start: 'rounded-t-none', end: 'rounded-b-none' } },
     'rounded-sm': { horizontal: { start: 'rounded-s-sm', end: 'rounded-e-sm' }, vertical: { start: 'rounded-t-sm', end: 'rounded-b-sm' } },
-    rounded: { horizontal: { start: 'rounded-s', end: 'rounded-e' }, vertical: { start: 'rounded-t', end: 'rounded-b' } },
+    'rounded': { horizontal: { start: 'rounded-s', end: 'rounded-e' }, vertical: { start: 'rounded-t', end: 'rounded-b' } },
     'rounded-md': { horizontal: { start: 'rounded-s-md', end: 'rounded-e-md' }, vertical: { start: 'rounded-t-md', end: 'rounded-b-md' } },
     'rounded-lg': { horizontal: { start: 'rounded-s-lg', end: 'rounded-e-lg' }, vertical: { start: 'rounded-t-lg', end: 'rounded-b-lg' } },
     'rounded-xl': { horizontal: { start: 'rounded-s-xl', end: 'rounded-e-xl' }, vertical: { start: 'rounded-t-xl', end: 'rounded-b-xl' } },

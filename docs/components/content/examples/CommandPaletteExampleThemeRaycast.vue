@@ -45,7 +45,7 @@ const ui = {
         inactive: 'text-gray-400 dark:text-gray-500'
       },
       avatar: {
-        size: '2xs'
+        size: '2xs' as const
       }
     }
   }

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const route = useRoute()
-
 const links = [
   [{
     label: 'Installation',
@@ -9,7 +7,7 @@ const links = [
   }, {
     label: 'Horizontal Navigation',
     icon: 'i-heroicons-chart-bar',
-    to: `${route.path.startsWith('/dev') ? '/dev' : ''}/components/horizontal-navigation`
+    to: '/components/horizontal-navigation'
   }, {
     label: 'Command Palette',
     icon: 'i-heroicons-command-line',

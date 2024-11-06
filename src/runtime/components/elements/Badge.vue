@@ -11,7 +11,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { BadgeColor, BadgeSize, BadgeVariant, Strategy } from '../../types/index'
+import type { BadgeColor, BadgeSize, BadgeVariant, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { badge } from '#ui/ui.config'
@@ -24,21 +24,21 @@ export default defineComponent({
     size: {
       type: String as PropType<BadgeSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<BadgeColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<BadgeVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -54,11 +54,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('badge', toRef(props, 'ui'), config)
 
     const { size, rounded } = useInjectButtonGroup({ ui, props })

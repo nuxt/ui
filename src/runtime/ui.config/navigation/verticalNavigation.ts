@@ -20,7 +20,7 @@ export default {
     size: '2xs' as const
   },
   badge: {
-    base: 'flex-shrink-0 ml-auto relative rounded',
+    base: 'flex-shrink-0 ms-auto relative rounded',
     color: 'gray' as const,
     variant: 'solid' as const,
     size: 'xs' as const

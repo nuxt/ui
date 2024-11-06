@@ -5,13 +5,16 @@
       'border-primary-200/75 dark:border-primary-900/50': $route.path === '/',
       'border-gray-200 dark:border-gray-800': $route.path !== '/'
     }"
+    :ui="{
+      left: 'min-w-0'
+    }"
   >
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white" aria-label="Nuxt UI">
-        <Logo class="w-auto h-6" />
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white min-w-0" aria-label="Nuxt UI">
+        <LogoPro v-if="$route.path.startsWith('/pro')" class="w-auto h-6 shrink-0" />
+        <Logo v-else class="w-auto h-6 shrink-0" />
 
-        <UBadge v-if="$route.path.startsWith('/pro')" label="Pro" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold" />
-        <UBadge v-if="$route.path.startsWith('/dev')" label="Edge" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold" />
+        <UBadge :label="$route.path.startsWith('/pro') ? `v${pkg.version.split('-')[0]}` : `v${config.version}`" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold truncate hidden sm:inline-flex" />
       </NuxtLink>
     </template>
 
@@ -38,8 +41,6 @@
 
       <UDivider type="dashed" class="my-4" />
 
-      <BranchSelect />
-
       <UNavigationTree :links="mapContentNavigation(navigation)" :multiple="false" default-open />
     </template>
   </UHeader>
@@ -47,6 +48,7 @@
 
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content'
+import pkg from '@nuxt/ui-pro/package.json'
 import type { HeaderLink } from '#ui-pro/types'
 
 defineProps<{
@@ -56,6 +58,7 @@ defineProps<{
 const route = useRoute()
 const { $ui } = useNuxtApp()
 const { metaSymbol } = useShortcuts()
+const config = useRuntimeConfig().public
 
 const nav = inject<Ref<NavItem[]>>('navigation')
 

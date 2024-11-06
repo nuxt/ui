@@ -34,7 +34,7 @@ import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy, MeterColor, MeterSize } from '../../types/index'
+import type { Strategy, MeterColor, MeterSize, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { meter } from '#ui/ui.config'
@@ -47,8 +47,8 @@ export default defineComponent({
   },
   inheritAttrs: false,
   slots: Object as SlotsType<{
-    indicator?: { percent: number, value: number },
-    label?: { percent: number, value: number },
+    indicator?: { percent: number, value: number }
+    label?: { percent: number, value: number }
   }>,
   props: {
     value: {
@@ -74,14 +74,14 @@ export default defineComponent({
     size: {
       type: String as PropType<MeterSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.meter.size).includes(value)
       }
     },
     color: {
       type: String as PropType<MeterColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
@@ -94,14 +94,14 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('meter', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    function clampPercent (value: number, min: number, max: number): number {
+    function clampPercent(value: number, min: number, max: number): number {
       if (min == max) {
         return value < min ? 0 : 100
       }

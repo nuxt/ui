@@ -5,11 +5,11 @@ export default {
     text: 'text-gray-400 dark:text-gray-500 text-end',
     size: {
       '2xs': 'text-xs',
-      xs: 'text-xs',
-      sm: 'text-sm',
-      md: 'text-sm',
-      lg: 'text-sm',
-      xl: 'text-base',
+      'xs': 'text-xs',
+      'sm': 'text-sm',
+      'md': 'text-sm',
+      'lg': 'text-sm',
+      'xl': 'text-base',
       '2xl': 'text-base'
     }
   },
@@ -22,11 +22,11 @@ export default {
     shadow: '',
     size: {
       '2xs': 'h-px',
-      xs: 'h-0.5',
-      sm: 'h-1',
-      md: 'h-2',
-      lg: 'h-3',
-      xl: 'h-4',
+      'xs': 'h-0.5',
+      'sm': 'h-1',
+      'md': 'h-2',
+      'lg': 'h-3',
+      'xl': 'h-4',
       '2xl': 'h-5'
     },
     appearance: {
@@ -41,11 +41,11 @@ export default {
       rounded: '[&::-webkit-meter-optimum-value]:rounded-full [&::-moz-meter-bar]:rounded-full',
       size: {
         '2xs': '[&::-webkit-meter-optimum-value]:h-px [&::-moz-meter-bar]:h-px',
-        xs: '[&::-webkit-meter-optimum-value]:h-0.5 [&::-moz-meter-bar]:h-0.5',
-        sm: '[&::-webkit-meter-optimum-value]:h-1 [&::-moz-meter-bar]:h-1',
-        md: '[&::-webkit-meter-optimum-value]:h-2 [&::-moz-meter-bar]:h-2',
-        lg: '[&::-webkit-meter-optimum-value]:h-3 [&::-moz-meter-bar]:h-3',
-        xl: '[&::-webkit-meter-optimum-value]:h-4 [&::-moz-meter-bar]:h-4',
+        'xs': '[&::-webkit-meter-optimum-value]:h-0.5 [&::-moz-meter-bar]:h-0.5',
+        'sm': '[&::-webkit-meter-optimum-value]:h-1 [&::-moz-meter-bar]:h-1',
+        'md': '[&::-webkit-meter-optimum-value]:h-2 [&::-moz-meter-bar]:h-2',
+        'lg': '[&::-webkit-meter-optimum-value]:h-3 [&::-moz-meter-bar]:h-3',
+        'xl': '[&::-webkit-meter-optimum-value]:h-4 [&::-moz-meter-bar]:h-4',
         '2xl': '[&::-webkit-meter-optimum-value]:h-5 [&::-moz-meter-bar]:h-5'
       }
     }
@@ -56,11 +56,11 @@ export default {
     color: 'text-{color}-500 dark:text-{color}-400',
     size: {
       '2xs': 'text-xs',
-      xs: 'text-xs',
-      sm: 'text-sm',
-      md: 'text-sm',
-      lg: 'text-sm',
-      xl: 'text-base',
+      'xs': 'text-xs',
+      'sm': 'text-sm',
+      'md': 'text-sm',
+      'lg': 'text-sm',
+      'xl': 'text-base',
       '2xl': 'text-base'
     }
   },

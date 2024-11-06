@@ -29,11 +29,15 @@ export default defineAppConfig({
   ui: {
     notifications: {
       // Show toasts at the top right of the screen
-      position: 'top-0 right-0'
+      position: 'top-0 bottom-[unset]'
     }
   }
 })
 ```
+
+::callout{icon="i-heroicons-light-bulb"}
+The `position` defaults to `bottom-0 end-0`, the `bottom-[unset]` class overrides `bottom-0` so the result is `top-0 end-0`.
+::
 
 Then, you can use the `useToast` composable to add notifications to your app:
 

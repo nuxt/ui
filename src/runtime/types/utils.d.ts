@@ -14,8 +14,8 @@ export type DeepPartial<T, O = any> = {
 
 export type NestedKeyOf<ObjectType extends Record<string, any>> = {
   [Key in keyof ObjectType]: ObjectType[Key] extends Record<string, any>
-  ? NestedKeyOf<ObjectType[Key]>
-  : Key
+    ? NestedKeyOf<ObjectType[Key]>
+    : Key
 }[keyof ObjectType]
 
 type DeepKey<T, Keys extends string[]> =

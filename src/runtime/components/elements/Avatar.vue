@@ -27,7 +27,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { AvatarSize, AvatarChipColor, AvatarChipPosition, Strategy } from '../../types/index'
+import type { AvatarSize, AvatarChipColor, AvatarChipPosition, Strategy, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { avatar } from '#ui/ui.config'
@@ -63,21 +63,21 @@ export default defineComponent({
     size: {
       type: String as PropType<AvatarSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     chipColor: {
       type: String as PropType<AvatarChipColor>,
       default: () => config.default.chipColor,
-      validator (value: string) {
+      validator(value: string) {
         return ['gray', ...appConfig.ui.colors].includes(value)
       }
     },
     chipPosition: {
       type: String as PropType<AvatarChipPosition>,
       default: () => config.default.chipPosition,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.chip.position).includes(value)
       }
     },
@@ -94,11 +94,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('avatar', toRef(props, 'ui'), config)
 
     const url = computed(() => {
@@ -152,7 +152,7 @@ export default defineComponent({
       }
     })
 
-    function onError () {
+    function onError() {
       error.value = true
     }
 

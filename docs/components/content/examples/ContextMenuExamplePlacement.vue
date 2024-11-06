@@ -7,7 +7,7 @@ const { y: windowY } = useWindowScroll()
 const isOpen = ref(false)
 const virtualElement = ref({ getBoundingClientRect: () => ({}) })
 
-function onContextMenu () {
+function onContextMenu() {
   const top = unref(y) - unref(windowY)
   const left = unref(x)
 

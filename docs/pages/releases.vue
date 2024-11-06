@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { eachDayOfInterval, isSameDay, isToday } from 'date-fns'
 
-const { data: page } = await useAsyncData('releases', () => queryContent('/dev/releases').findOne())
+const { data: page } = await useAsyncData('releases', () => queryContent('/releases').findOne())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
@@ -50,7 +50,7 @@ const dates = computed(() => {
 
   const days = eachDayOfInterval({ start: new Date(first.published_at), end: new Date() })
 
-  return days.reverse().map(day => {
+  return days.reverse().map((day) => {
     return {
       day,
       release: releases.value.find(release => isSameDay(new Date(release.published_at), day)),

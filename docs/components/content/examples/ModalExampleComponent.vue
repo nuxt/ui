@@ -8,7 +8,7 @@ defineProps({
 
 const emit = defineEmits(['success'])
 
-function onSuccess () {
+function onSuccess() {
   emit('success')
 }
 </script>

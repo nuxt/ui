@@ -20,7 +20,7 @@ import type { WritableComputedRef, PropType } from 'vue'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild, provideUseId } from '@headlessui/vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types/index'
+import type { DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { slideover } from '#ui/ui.config'
@@ -67,19 +67,19 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close', 'close-prevented', 'after-leave'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('slideover', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const isOpen: WritableComputedRef<boolean> = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })
@@ -96,25 +96,25 @@ export default defineComponent({
 
       let enterFrom, leaveTo
       switch (props.side) {
-      case 'left':
-        enterFrom = ui.value.translate.left
-        leaveTo = ui.value.translate.left
-        break
-      case 'right':
-        enterFrom = ui.value.translate.right
-        leaveTo = ui.value.translate.right
-        break
-      case 'top':
-        enterFrom = ui.value.translate.top
-        leaveTo = ui.value.translate.top
-        break
-      case 'bottom':
-        enterFrom = ui.value.translate.bottom
-        leaveTo = ui.value.translate.bottom
-        break
-      default:
-        enterFrom = ui.value.translate.right
-        leaveTo = ui.value.translate.right
+        case 'left':
+          enterFrom = ui.value.translate.left
+          leaveTo = ui.value.translate.left
+          break
+        case 'right':
+          enterFrom = ui.value.translate.right
+          leaveTo = ui.value.translate.right
+          break
+        case 'top':
+          enterFrom = ui.value.translate.top
+          leaveTo = ui.value.translate.top
+          break
+        case 'bottom':
+          enterFrom = ui.value.translate.bottom
+          leaveTo = ui.value.translate.bottom
+          break
+        default:
+          enterFrom = ui.value.translate.right
+          leaveTo = ui.value.translate.right
       }
 
       return {
@@ -128,21 +128,20 @@ export default defineComponent({
 
     const sideType = computed(() => {
       switch (props.side) {
-      case 'left':
-        return 'horizontal'
-      case 'right':
-        return 'horizontal'
-      case 'top':
-        return 'vertical'
-      case 'bottom':
-        return 'vertical'
-      default:
-        return 'right'
+        case 'left':
+          return 'horizontal'
+        case 'right':
+          return 'horizontal'
+        case 'top':
+          return 'vertical'
+        case 'bottom':
+          return 'vertical'
+        default:
+          return 'right'
       }
     })
 
-
-    function close (value: boolean) {
+    function close(value: boolean) {
       if (props.preventClose) {
         emit('close-prevented')
 

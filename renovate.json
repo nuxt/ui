@@ -6,8 +6,6 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "@nuxt/eslint-config",
-    "eslint",
     "happy-dom",
     "valibot30",
     "valibot31"
@@ -16,5 +14,15 @@
   "packageRules": [{
     "matchBaseBranches": ["v3"],
     "labels": ["v3"]
+  }, {
+    "groupName": "tailwindcss",
+    "matchPackageNames": [
+      "tailwindcss",
+      "@tailwindcss/postcss",
+      "@tailwindcss/vite"
+    ]
+  }, {
+    "matchDepTypes": ["resolutions"],
+    "enabled": false
   }]
 }

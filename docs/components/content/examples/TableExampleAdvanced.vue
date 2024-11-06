@@ -19,13 +19,13 @@ const columns = [{
 }]
 
 const selectedColumns = ref(columns)
-const columnsTable = computed(() => columns.filter((column) => selectedColumns.value.includes(column)))
+const columnsTable = computed(() => columns.filter(column => selectedColumns.value.includes(column)))
 
 // Selected Rows
 const selectedRows = ref([])
 
-function select (row) {
-  const index = selectedRows.value.findIndex((item) => item.id === row.id)
+function select(row) {
+  const index = selectedRows.value.findIndex(item => item.id === row.id)
   if (index === -1) {
     selectedRows.value.push(row)
   } else {
@@ -92,10 +92,10 @@ const { data: todos, status } = await useLazyAsyncData<{
 }[]>('todos', () => ($fetch as any)(`https://jsonplaceholder.typicode.com/todos${searchStatus.value}`, {
   query: {
     q: search.value,
-    '_page': page.value,
-    '_limit': pageCount.value,
-    '_sort': sort.value.column,
-    '_order': sort.value.direction
+    _page: page.value,
+    _limit: pageCount.value,
+    _sort: sort.value.column,
+    _order: sort.value.direction
   }
 }), {
   default: () => [],
@@ -186,7 +186,7 @@ const { data: todos, status } = await useLazyAsyncData<{
       sort-desc-icon="i-heroicons-arrow-down"
       sort-mode="manual"
       class="w-full"
-      :ui="{ td: { base: 'max-w-[0] truncate' }, default: { checkbox: { color: 'gray' } } }"
+      :ui="{ td: { base: 'max-w-[0] truncate' }, default: { checkbox: { color: 'gray' as any } } }"
       @select="select"
     >
       <template #completed-data="{ row }">
