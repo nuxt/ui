@@ -8,28 +8,27 @@
       </slot>
       <thead :class="ui.thead">
         <tr :class="ui.tr.base">
-          <th v-if="modelValue" scope="col" :class="ui.checkbox.padding">
-            <UCheckbox
-              :model-value="isAllRowChecked"
-              :indeterminate="indeterminate"
-              v-bind="ui.default.checkbox"
-              aria-label="Select all"
-              @change="onChange"
-            />
-          </th>
-
           <th v-if="expand" scope="col" :class="ui.tr.base">
             <span class="sr-only">Expand</span>
           </th>
-
           <th
             v-for="(column, index) in columns"
             :key="index"
             scope="col"
-            :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.class]"
+            :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.key === 'select' && ui.checkbox.padding, column.class]"
             :aria-sort="getAriaSort(column)"
           >
-            <slot :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
+            <slot v-if="column.key === 'select' || shouldRenderColumnInFirstPlace(modelValue, index, 'select')" name="select-header" :indeterminate="indeterminate" :checked="isAllRowChecked" :change="onChange">
+              <UCheckbox
+                :model-value="isAllRowChecked"
+                :indeterminate="indeterminate"
+                v-bind="ui.default.checkbox"
+                aria-label="Select all"
+                @change="onChange"
+              />
+            </slot>
+
+            <slot v-else :name="`${column.key}-header`" :column="column" :sort="sort" :on-sort="onSort">
               <UButton
                 v-if="column.sortable"
                 v-bind="{ ...(ui.default.sortButton || {}), ...sortButton }"
@@ -78,15 +77,6 @@
         <template v-else>
           <template v-for="(row, index) in rows" :key="index">
             <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
-              <td v-if="modelValue" :class="ui.checkbox.padding">
-                <UCheckbox
-                  :model-value="isSelected(row)"
-                  v-bind="ui.default.checkbox"
-                  aria-label="Select row"
-                  @change="onChangeCheckbox($event, row)"
-                  @click.capture.stop="() => onSelect(row)"
-                />
-              </td>
               <td
                 v-if="expand"
                 :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
@@ -103,7 +93,24 @@
                 />
               </td>
               <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, column?.rowClass, row[column.key]?.class]">
-                <slot :name="`${column.key}-data`" :column="column" :row="row" :index="index" :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)">
+                <slot v-if="column.key === 'select' || shouldRenderColumnInFirstPlace(modelValue, subIndex, 'select') " name="select-data" :checked="isSelected(row)" :change="(ev: boolean) => onChangeCheckbox(ev, row)">
+                  <UCheckbox
+                    :model-value="isSelected(row)"
+                    v-bind="ui.default.checkbox"
+                    aria-label="Select row"
+                    @change="onChangeCheckbox($event, row)"
+                    @click.capture.stop="() => onSelect(row)"
+                  />
+                </slot>
+
+                <slot
+                  v-else
+                  :name="`${column.key}-data`"
+                  :column="column"
+                  :row="row"
+                  :index="index"
+                  :get-row-data="(defaultValue) => getRowData(row, column.key, defaultValue)"
+                >
                   {{ getRowData(row, column.key) }}
                 </slot>
               </td>
@@ -403,6 +410,13 @@ export default defineComponent({
       return expand.value?.openedRows ? expand.value.openedRows.some(openedRow => compare(openedRow, row)) : false
     }
 
+    function shouldRenderColumnInFirstPlace(modelValue: any, index: number, key: string) {
+      if (!props.columns && modelValue) {
+        return index === 0
+      }
+      return modelValue && index === 0 && !props.columns.find(col => col.key === key)
+    }
+
     function toggleOpened(row: TableRow) {
       expand.value = {
         openedRows: isExpanded(row) ? expand.value.openedRows.filter(v => !compare(v, row)) : props.multipleExpand ? [...expand.value.openedRows, row] : [row],
@@ -455,7 +469,8 @@ export default defineComponent({
       getRowData,
       toggleOpened,
       getAriaSort,
-      isExpanded
+      isExpanded,
+      shouldRenderColumnInFirstPlace
     }
   }
 })
