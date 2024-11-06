@@ -84,6 +84,11 @@ export interface FormFieldInjectedOptions<T> {
   validateOnInputDelay?: number
 }
 
+export interface ValidateReturnSchema<T> {
+  result: T
+  errors: FormError[] | null
+}
+
 export class FormValidationException extends Error {
   formId: string | number
   errors: FormErrorWithId[]
