@@ -104,7 +104,7 @@ export type SelectMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-  create: [value: T]
+  create: [payload: Event]
 } & SelectModelValueEmits<T, V, M>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
@@ -330,7 +330,7 @@ function onUpdateOpen(value: boolean) {
             <ComboboxItem
               :class="ui.item({ class: props.ui?.item })"
               :value="valueKey && typeof creatable.item === 'object' ? get(creatable.item, props.valueKey as string) : creatable.item"
-              @select="(v) => emits('create', v as T)"
+              @select="(v) => emits('create', v)"
             >
               <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                 <slot name="create-item-label" :item="(creatable.item as T)">
@@ -391,7 +391,7 @@ function onUpdateOpen(value: boolean) {
             <ComboboxItem
               :class="ui.item({ class: props.ui?.item })"
               :value="valueKey && typeof creatable.item === 'object' ? get(creatable.item, props.valueKey as string) : creatable.item"
-              @select="(v) => emits('create', v as T)"
+              @select="(v) => emits('create', v)"
             >
               <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
                 <slot name="create-item-label" :item="(creatable.item as T)">
