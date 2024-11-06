@@ -252,8 +252,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/@nuxt/ui-pro@f8e24cf
-        version: https://pkg.pr.new/@nuxt/ui-pro@f8e24cf(magicast@0.3.5)(rollup@4.24.4)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@62862c8
+        version: https://pkg.pr.new/@nuxt/ui-pro@62862c8(magicast@0.3.5)(rollup@4.24.4)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))
       '@nuxthub/core':
         specifier: ^0.8.5
         version: 0.8.5(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))
@@ -1438,8 +1438,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@f8e24cf':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@f8e24cf}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@62862c8':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@62862c8}
     version: 3.0.0-alpha.7
     peerDependencies:
       typescript: ^5.6.3
@@ -8119,7 +8119,7 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@f8e24cf(magicast@0.3.5)(rollup@4.24.4)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@62862c8(magicast@0.3.5)(rollup@4.24.4)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))':
     dependencies:
       '@nuxt/kit': 3.14.0(magicast@0.3.5)(rollup@4.24.4)
       '@nuxt/schema': 3.14.0(magicast@0.3.5)(rollup@4.24.4)
