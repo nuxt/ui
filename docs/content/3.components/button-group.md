@@ -18,10 +18,10 @@ slots:
   default: |
 
     <UButton color="neutral" variant="subtle" label="Button" />
-    <UButton color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid" />
+    <UButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
 ---
 :u-button{color="neutral" variant="subtle" label="Button"}
-:u-button{color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid"}
+:u-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
 ::
 
 ### Size
@@ -37,10 +37,10 @@ slots:
   default: |
 
     <UButton color="neutral" variant="subtle" label="Button" />
-    <UButton color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid" />
+    <UButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
 ---
 :u-button{color="neutral" variant="subtle" label="Button"}
-:u-button{color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid"}
+:u-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
 ::
 
 ### Orientation
@@ -76,10 +76,10 @@ slots:
 
     <UInput color="neutral" variant="outline" placeholder="Enter token" />
 
-    <UButton color="neutral" variant="subtle" icon="i-heroicons-clipboard-document" />
+    <UButton color="neutral" variant="subtle" icon="i-lucide-clipboard" />
 ---
 :u-input{color="neutral" variant="outline" placeholder="Enter token"}
-:u-button{color="neutral" variant="subtle" icon="i-heroicons-clipboard-document"}
+:u-button{color="neutral" variant="subtle" icon="i-lucide-clipboard"}
 ::
 
 ### With tooltip

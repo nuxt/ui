@@ -4,6 +4,7 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slideover'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { slideover: Partial<typeof theme> } }
@@ -65,6 +66,8 @@ export interface SlideoverSlots {
   body(props?: {}): any
   footer(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'SlideoverExample' })
 </script>
 
 <script setup lang="ts">

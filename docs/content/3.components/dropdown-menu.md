@@ -50,28 +50,28 @@ props:
           src: 'https://github.com/benjamincanac.png'
         type: label
     - - label: Profile
-        icon: i-heroicons-user
+        icon: i-lucide-user
       - label: Billing
-        icon: i-heroicons-credit-card
+        icon: i-lucide-credit-card
       - label: Settings
-        icon: i-heroicons-cog
+        icon: i-lucide-cog
         kbds:
           - ','
       - label: Keyboard shortcuts
-        icon: i-heroicons-computer-desktop
+        icon: i-lucide-monitor
     - - label: Team
-        icon: i-heroicons-users
+        icon: i-lucide-users
       - label: Invite users
-        icon: i-heroicons-user-plus
+        icon: i-lucide-user-plus
         children:
           - - label: Email
-              icon: i-heroicons-envelope
+              icon: i-lucide-mail
             - label: Message
-              icon: i-heroicons-chat-bubble-left
+              icon: i-lucide-message-square
           - - label: More
-              icon: i-heroicons-plus-circle
+              icon: i-lucide-circle-plus
       - label: New team
-        icon: i-heroicons-plus
+        icon: i-lucide-plus
         kbds:
           - meta
           - n
@@ -80,13 +80,13 @@ props:
         to: 'https://github.com/nuxt/ui'
         target: _blank
       - label: Support
-        icon: i-heroicons-lifebuoy
+        icon: i-lucide-life-buoy
         to: '/components/dropdown-menu'
       - label: API
-        icon: i-heroicons-cloud
+        icon: i-lucide-cloud
         disabled: true
     - - label: Logout
-        icon: i-heroicons-arrow-right-on-rectangle
+        icon: i-lucide-log-out
         kbds:
           - shift
           - meta
@@ -95,10 +95,10 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-heroicons-bars-3" color="neutral" variant="outline" />
+    <UButton icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{icon="i-heroicons-bars-3" color="neutral" variant="outline"}
+:u-button{icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ::note
@@ -134,11 +134,11 @@ items:
 props:
   items:
     - label: Profile
-      icon: i-heroicons-user
+      icon: i-lucide-user
     - label: Billing
-      icon: i-heroicons-credit-card
+      icon: i-lucide-credit-card
     - label: Settings
-      icon: i-heroicons-cog
+      icon: i-lucide-cog
   content:
     align: start
     side: bottom
@@ -147,10 +147,10 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline" />
+    <UButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline"}
+:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ### Arrow
@@ -170,19 +170,19 @@ props:
   arrow: true
   items:
     - label: Profile
-      icon: i-heroicons-user
+      icon: i-lucide-user
     - label: Billing
-      icon: i-heroicons-credit-card
+      icon: i-lucide-credit-card
     - label: Settings
-      icon: i-heroicons-cog
+      icon: i-lucide-cog
   class: 'w-48'
 slots:
   default: |
 
-    <UButton label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline" />
+    <UButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline"}
+:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ### Size
@@ -202,21 +202,21 @@ props:
   size: xl
   items:
     - label: Profile
-      icon: i-heroicons-user
+      icon: i-lucide-user
     - label: Billing
-      icon: i-heroicons-credit-card
+      icon: i-lucide-credit-card
     - label: Settings
-      icon: i-heroicons-cog
+      icon: i-lucide-cog
   content:
     align: start
   class: 'w-48'
 slots:
   default: |
 
-    <UButton size="xl" label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline" />
+    <UButton size="xl" label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{size="xl" label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline"}
+:u-button{size="xl" label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ::warning
@@ -243,19 +243,19 @@ props:
   disabled: true
   items:
     - label: Profile
-      icon: i-heroicons-user
+      icon: i-lucide-user
     - label: Billing
-      icon: i-heroicons-credit-card
+      icon: i-lucide-credit-card
     - label: Settings
-      icon: i-heroicons-cog
+      icon: i-lucide-cog
   class: 'w-48'
 slots:
   default: |
 
-    <UButton label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline" />
+    <UButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{label="Open" icon="i-heroicons-bars-3" color="neutral" variant="outline"}
+:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ## Examples
@@ -330,17 +330,17 @@ Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility 
 <script setup lang="ts">
 const items = [{
   label: 'Invite users',
-  icon: 'i-heroicons-user-plus',
+  icon: 'i-lucide-user-plus',
   children: [{
     label: 'Invite by email',
-    icon: 'i-heroicons-paper-airplane',
+    icon: 'i-lucide-send-horizontal',
     kbds: ['meta', 'e'],
     onSelect() {
       console.log('Invite by email clicked')
     }
   }, {
     label: 'Invite by link',
-    icon: 'i-heroicons-link',
+    icon: 'i-lucide-link',
     kbds: ['meta', 'i'],
     onSelect() {
       console.log('Invite by link clicked')
@@ -348,7 +348,7 @@ const items = [{
   }]
 }, {
   label: 'New team',
-  icon: 'i-heroicons-plus',
+  icon: 'i-lucide-plus',
   kbds: ['meta', 'n'],
   onSelect() {
     console.log('New team clicked')

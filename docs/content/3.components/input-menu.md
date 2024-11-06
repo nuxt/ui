@@ -163,7 +163,7 @@ Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 
 ### Delete Icon
 
-With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/components/icon) in the badges. Defaults to `i-heroicons-x-mark-20-solid`.
+With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/components/icon) in the badges. Defaults to `i-lucide-x`.
 
 ::component-code
 ---
@@ -180,7 +180,7 @@ props:
     - Backlog
     - Todo
   multiple: true
-  deleteIcon: 'i-heroicons-trash'
+  deleteIcon: 'i-lucide-trash'
   items:
     - Backlog
     - Todo
@@ -402,7 +402,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  icon: 'i-heroicons-magnifying-glass'
+  icon: 'i-lucide-search'
   size: md
   items:
     - Backlog
@@ -414,7 +414,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-lucide-chevron-down`.
 
 ::component-code
 ---
@@ -427,7 +427,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
+  trailingIcon: 'i-lucide-arrow-down'
   size: md
   items:
     - Backlog
@@ -443,7 +443,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.che
 
 ### Selected Icon
 
-Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-heroicons-check-20-solid`.
+Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
 ::component-code
 ---
@@ -456,7 +456,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  selectedIcon: 'i-heroicons-fire'
+  selectedIcon: 'i-lucide-flame'
   size: md
   items:
     - Backlog
@@ -523,7 +523,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
 
 ::component-code
 ---
@@ -537,7 +537,7 @@ external:
 props:
   modelValue: 'Backlog'
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   items:
     - Backlog
     - Todo

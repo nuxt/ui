@@ -23,7 +23,7 @@ const groups = computed(() => [{
       label="Search users..."
       color="neutral"
       variant="subtle"
-      icon="i-heroicons-magnifying-glass"
+      icon="i-lucide-search"
     />
 
     <template #content>

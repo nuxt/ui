@@ -3,22 +3,22 @@ const items = [
   [
     {
       label: 'View',
-      icon: 'i-heroicons-eye'
+      icon: 'i-lucide-eye'
     },
     {
       label: 'Copy',
-      icon: 'i-heroicons-document-duplicate'
+      icon: 'i-lucide-copy'
     },
     {
       label: 'Edit',
-      icon: 'i-heroicons-pencil'
+      icon: 'i-lucide-pencil'
     }
   ],
   [
     {
       label: 'Delete',
       color: 'error' as const,
-      icon: 'i-heroicons-trash'
+      icon: 'i-lucide-trash'
     }
   ]
 ]

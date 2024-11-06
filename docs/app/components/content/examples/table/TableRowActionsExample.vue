@@ -102,7 +102,7 @@ const columns: TableColumn<Payment>[] = [{
       },
       items: getRowItems(row)
     }, () => h(UButton, {
-      icon: 'i-heroicons-ellipsis-vertical-20-solid',
+      icon: 'i-lucide-ellipsis-vertical',
       color: 'neutral',
       variant: 'ghost',
       class: 'ml-auto'
@@ -122,7 +122,7 @@ function getRowItems(row: Row<Payment>) {
       toast.add({
         title: 'Payment ID copied to clipboard!',
         color: 'success',
-        icon: 'i-heroicons-check-circle'
+        icon: 'i-lucide-circle-check'
       })
     }
   }, {

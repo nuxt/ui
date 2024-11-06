@@ -20,13 +20,13 @@ const templates = (id: number) => [{
 }, {
   title: 'Toast',
   description: `This is the toast ${id}`,
-  icon: 'i-heroicons-rocket-launch'
+  icon: 'i-lucide-rocket'
 }, {
   title: `Toast ${id}`,
-  icon: 'i-heroicons-rocket-launch'
+  icon: 'i-lucide-rocket'
 }, {
   description: `This is the toast ${id}`,
-  icon: 'i-heroicons-rocket-launch'
+  icon: 'i-lucide-rocket'
 }, {
   title: 'Toast',
   description: `This is the toast ${id}`,
@@ -47,7 +47,7 @@ const templates = (id: number) => [{
   }]
 }, {
   title: `Toast ${id}`,
-  icon: 'i-heroicons-rocket-launch',
+  icon: 'i-lucide-rocket',
   actions: [{
     label: 'Action 1',
     color: 'neutral' as const,
@@ -64,7 +64,7 @@ const templates = (id: number) => [{
   }]
 }, {
   description: `This is the toast ${id}`,
-  icon: 'i-heroicons-rocket-launch',
+  icon: 'i-lucide-rocket',
   actions: [{
     label: 'Action',
     variant: 'outline' as const,

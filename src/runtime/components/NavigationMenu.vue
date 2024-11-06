@@ -1,10 +1,10 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
 import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
 
@@ -81,6 +81,44 @@ export type NavigationMenuSlots<T extends { slot?: string }> = {
   'item-content': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
+extendDevtoolsMeta({
+  ignoreProps: ['items'],
+  defaultProps: {
+    items: [
+      [{
+        label: 'Documentation',
+        icon: 'i-lucide-book-open',
+        badge: 10,
+        children: [{
+          label: 'Introduction',
+          description: 'Fully styled and customizable components for Nuxt.',
+          icon: 'i-lucide-house'
+        }, {
+          label: 'Installation',
+          description: 'Learn how to install and configure Nuxt UI in your application.',
+          icon: 'i-lucide-cloud-download'
+        }, {
+          label: 'Theming',
+          description: 'Learn how to customize the look and feel of the components.',
+          icon: 'i-lucide-swatch-book'
+        }, {
+          label: 'Shortcuts',
+          description: 'Learn how to display and define keyboard shortcuts in your app.',
+          icon: 'i-lucide-monitor'
+        }]
+      }, {
+        label: 'GitHub',
+        icon: 'i-simple-icons-github',
+        to: 'https://github.com/nuxt/ui',
+        target: '_blank'
+      }, {
+        label: 'Help',
+        icon: 'i-lucide-circle-help',
+        disabled: true
+      }]
+    ]
+  }
+})
 </script>
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<NavigationMenuItem>">
@@ -161,7 +199,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
     </slot>
   </DefineItemTemplate>
 
-  <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <NavigationMenuRoot v-bind="rootProps" :data-orientation="orientation" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list({ class: props.ui?.list })">
         <component

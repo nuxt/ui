@@ -2,15 +2,15 @@
 const items = [
   {
     label: 'Icons',
-    icon: 'i-heroicons-face-smile'
+    icon: 'i-lucide-smile'
   },
   {
     label: 'Colors',
-    icon: 'i-heroicons-swatch'
+    icon: 'i-lucide-swatch-book'
   },
   {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent'
+    icon: 'i-lucide-box'
   }
 ]
 </script>

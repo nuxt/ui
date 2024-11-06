@@ -11,7 +11,7 @@ describe('Separator', () => {
     // Props
     ['with as', { props: { as: 'span' } }],
     ['with label', { props: { label: '+1' } }],
-    ['with icon', { props: { icon: 'i-heroicons-photo' } }],
+    ['with icon', { props: { icon: 'i-lucide-image' } }],
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with orientation vertical', { props: { orientation: 'vertical' as const } }],
     ['with decorative', { props: { decorative: true } }],

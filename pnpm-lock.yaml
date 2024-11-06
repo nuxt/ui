@@ -16,6 +16,9 @@ importers:
       '@iconify/vue':
         specifier: ^4.1.2
         version: 4.1.2(vue@3.5.12(typescript@5.6.3))
+      '@nuxt/devtools-kit':
+        specifier: ^1.6.0
+        version: 1.6.0(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))
       '@nuxt/fonts':
         specifier: ^0.10.2
         version: 0.10.2(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))
@@ -82,6 +85,9 @@ importers:
       fuse.js:
         specifier: ^7.0.0
         version: 7.0.0
+      get-port-please:
+        specifier: ^3.1.2
+        version: 3.1.2
       knitwork:
         specifier: ^1.1.0
         version: 1.1.0
@@ -103,6 +109,9 @@ importers:
       scule:
         specifier: ^1.3.0
         version: 1.3.0
+      sirv:
+        specifier: ^3.0.0
+        version: 3.0.0
       tailwind-variants:
         specifier: ^0.2.1
         version: 0.2.1(tailwindcss@4.0.0-alpha.30)
@@ -161,6 +170,9 @@ importers:
       nuxt:
         specifier: ^3.14.0
         version: 3.14.0(@parcel/watcher@2.5.0)(@types/node@22.8.7)(better-sqlite3@11.5.0)(eslint@9.14.0(jiti@2.4.0))(ioredis@5.4.1)(lightningcss@1.28.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.24.4)(terser@5.36.0)(typescript@5.6.3)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))(vue-tsc@2.1.10(typescript@5.6.3))
+      nuxt-component-meta:
+        specifier: ^0.9.0
+        version: 0.9.0(magicast@0.3.5)(rollup@4.24.4)
       release-it:
         specifier: ^17.10.0
         version: 17.10.0(typescript@5.6.3)
@@ -201,11 +213,29 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0
 
+  devtools:
+    dependencies:
+      '@nuxt/ui':
+        specifier: workspace:*
+        version: link:..
+      knitwork:
+        specifier: ^1.1.0
+        version: 1.1.0
+      nuxt:
+        specifier: ^3.14.0
+        version: 3.14.0(@parcel/watcher@2.5.0)(@types/node@22.8.7)(better-sqlite3@11.5.0)(eslint@9.14.0(jiti@2.4.0))(ioredis@5.4.1)(lightningcss@1.28.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.24.4)(terser@5.36.0)(typescript@5.6.3)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))(vue-tsc@2.1.10(typescript@5.6.3))
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+
   docs:
     dependencies:
-      '@iconify-json/heroicons':
-        specifier: ^1.2.1
-        version: 1.2.1
+      '@iconify-json/lucide':
+        specifier: ^1.2.11
+        version: 1.2.11
       '@iconify-json/simple-icons':
         specifier: ^1.2.10
         version: 1.2.10
@@ -222,8 +252,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/@nuxt/ui-pro@f8e24cf
-        version: https://pkg.pr.new/@nuxt/ui-pro@f8e24cf(magicast@0.3.5)(rollup@4.24.4)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@62862c8
+        version: https://pkg.pr.new/@nuxt/ui-pro@62862c8(magicast@0.3.5)(rollup@4.24.4)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))
       '@nuxthub/core':
         specifier: ^0.8.5
         version: 0.8.5(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))
@@ -1198,8 +1228,8 @@ packages:
   '@iarna/toml@2.2.5':
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
 
-  '@iconify-json/heroicons@1.2.1':
-    resolution: {integrity: sha512-TkKfS5U27kE5MXmSGLzPoz95BP5VA9xEJXwJFwmPMVLX+xyWq0OkoiWTUXB0uAoQODpb8BaRpzSydItrq9fIRA==}
+  '@iconify-json/lucide@1.2.11':
+    resolution: {integrity: sha512-dqpbV7+g1qqxtZOHCZKwdKhtYYqEUjFhYiOg/+PcADbjtapoL+bwa1Brn12gAHq5r2K7Mf29xRHOTmZ3UHHOrw==}
 
   '@iconify-json/simple-icons@1.2.10':
     resolution: {integrity: sha512-9OK1dsSjXlH36lhu5n+BlSoXuqFjHUErGLtNdzHpq0vHq4YFBuGYWtZ+vZTHLreRQ8ijPRv/6EsgkV+nf6AReQ==}
@@ -1408,8 +1438,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@f8e24cf':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@f8e24cf}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@62862c8':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@62862c8}
     version: 3.0.0-alpha.7
     peerDependencies:
       typescript: ^5.6.3
@@ -7562,7 +7592,7 @@ snapshots:
 
   '@iarna/toml@2.2.5': {}
 
-  '@iconify-json/heroicons@1.2.1':
+  '@iconify-json/lucide@1.2.11':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -8089,7 +8119,7 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@f8e24cf(magicast@0.3.5)(rollup@4.24.4)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@62862c8(magicast@0.3.5)(rollup@4.24.4)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))':
     dependencies:
       '@nuxt/kit': 3.14.0(magicast@0.3.5)(rollup@4.24.4)
       '@nuxt/schema': 3.14.0(magicast@0.3.5)(rollup@4.24.4)

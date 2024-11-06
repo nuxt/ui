@@ -14,23 +14,23 @@ describe('Select', () => {
   const items = [{
     label: 'Backlog',
     value: 'backlog',
-    icon: 'i-heroicons-question-mark-circle'
+    icon: 'i-lucide-circle-help'
   }, {
     label: 'Todo',
     value: 'todo',
-    icon: 'i-heroicons-plus-circle'
+    icon: 'i-lucide-circle-plus'
   }, {
     label: 'In Progress',
     value: 'in_progress',
-    icon: 'i-heroicons-arrow-up-circle'
+    icon: 'i-lucide-circle-arrow-up'
   }, {
     label: 'Done',
     value: 'done',
-    icon: 'i-heroicons-check-circle'
+    icon: 'i-lucide-circle-check'
   }, {
     label: 'Canceled',
     value: 'canceled',
-    icon: 'i-heroicons-x-circle'
+    icon: 'i-lucide-circle-x'
   }]
 
   const props = { open: true, portal: false, items }
@@ -47,21 +47,21 @@ describe('Select', () => {
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with required', { props: { ...props, required: true } }],
-    ['with icon', { props: { icon: 'i-heroicons-magnifying-glass' } }],
-    ['with leading and icon', { props: { leading: true, icon: 'i-heroicons-arrow-left' } }],
-    ['with leadingIcon', { props: { leadingIcon: 'i-heroicons-arrow-left' } }],
-    ['with trailing and icon', { props: { trailing: true, icon: 'i-heroicons-arrow-right' } }],
-    ['with trailingIcon', { props: { trailingIcon: 'i-heroicons-arrow-right' } }],
+    ['with icon', { props: { icon: 'i-lucide-search' } }],
+    ['with leading and icon', { props: { leading: true, icon: 'i-lucide-arrow-left' } }],
+    ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
+    ['with trailing and icon', { props: { trailing: true, icon: 'i-lucide-arrow-right' } }],
+    ['with trailingIcon', { props: { trailingIcon: 'i-lucide-arrow-right' } }],
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
-    ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-heroicons-arrow-left' } }],
-    ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-heroicons-arrow-right' } }],
+    ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-lucide-arrow-left' } }],
+    ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-lucide-arrow-right' } }],
     ['with loading', { props: { loading: true } }],
     ['with loading and avatar', { props: { loading: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with loading trailing', { props: { loading: true, trailing: true } }],
     ['with loading trailing and avatar', { props: { loading: true, trailing: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
-    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
-    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-chevron-down' } }],
-    ['with selectedIcon', { props: { ...props, selectedIcon: 'i-heroicons-check' } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-sparkles' } }],
+    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-down' } }],
+    ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),

@@ -21,7 +21,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     :items="users || []"
     :loading="status === 'pending'"
     :filter="false"
-    icon="i-heroicons-user"
+    icon="i-lucide-user"
     placeholder="Select user"
   >
     <template #leading="{ modelValue, ui }">

@@ -3,6 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/badge'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
 
@@ -51,6 +52,8 @@ const ui = computed(() => badge({
   variant: props.variant,
   size: props.size
 }))
+
+extendDevtoolsMeta({ defaultProps: { label: 'Badge' } })
 </script>
 
 <template>

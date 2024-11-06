@@ -1,10 +1,10 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { AccordionRootProps, AccordionRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { DynamicSlots } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
@@ -55,6 +55,36 @@ export type AccordionSlots<T extends { slot?: string }> = {
   body: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
+extendDevtoolsMeta({
+  defaultProps: {
+    items: [{
+      label: 'Getting Started',
+      icon: 'i-lucide-info',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+    }, {
+      label: 'Installation',
+      icon: 'i-lucide-download',
+      disabled: true,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+    }, {
+      label: 'Theming',
+      icon: 'i-lucide-pipette',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+    }, {
+      label: 'Layouts',
+      icon: 'i-lucide-layout-dashboard',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+    }, {
+      label: 'Components',
+      icon: 'i-lucide-layers-3',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+    }, {
+      label: 'Utilities',
+      icon: 'i-lucide-wrench',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
+    }]
+  }
+})
 </script>
 
 <script setup lang="ts" generic="T extends AccordionItem">
