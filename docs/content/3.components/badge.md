@@ -75,7 +75,7 @@ Use the `icon` prop to show an [Icon](/components/icon) inside the Badge.
 ::component-code
 ---
 props:
-  icon: i-heroicons-rocket-launch
+  icon: i-lucide-rocket
   size: md
   color: primary
   variant: solid
@@ -89,7 +89,7 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 ::component-code
 ---
 props:
-  trailingIcon: i-heroicons-arrow-right
+  trailingIcon: i-lucide-arrow-right
   size: md
 slots:
   default: Badge

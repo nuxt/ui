@@ -216,18 +216,18 @@ external:
 props:
   modelValue:
     label: 'Backlog'
-    icon: 'i-heroicons-question-mark-circle'
+    icon: 'i-lucide-circle-help'
   searchInput:
     placeholder: 'Filter...'
   items:
     - label: Backlog
-      icon: 'i-heroicons-question-mark-circle'
+      icon: 'i-lucide-circle-help'
     - label: Todo
-      icon: 'i-heroicons-plus-circle'
+      icon: 'i-lucide-circle-plus'
     - label: In Progress
-      icon: 'i-heroicons-arrow-up-circle'
+      icon: 'i-lucide-circle-arrow-up'
     - label: Done
-      icon: 'i-heroicons-check-circle'
+      icon: 'i-lucide-circle-check'
   class: 'w-48'
 ---
 ::
@@ -403,7 +403,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  icon: 'i-heroicons-magnifying-glass'
+  icon: 'i-lucide-search'
   size: md
   items:
     - Backlog
@@ -416,7 +416,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-lucide-chevron-down`.
 
 ::component-code
 ---
@@ -430,7 +430,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
+  trailingIcon: 'i-lucide-arrow-down'
   size: md
   items:
     - Backlog
@@ -447,7 +447,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.che
 
 ### Selected Icon
 
-Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-heroicons-check-20-solid`.
+Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
 ::component-code
 ---
@@ -461,7 +461,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  selectedIcon: 'i-heroicons-fire'
+  selectedIcon: 'i-lucide-flame'
   size: md
   items:
     - Backlog
@@ -533,7 +533,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
 
 ::component-code
 ---
@@ -548,7 +548,7 @@ external:
 props:
   modelValue: 'Backlog'
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   items:
     - Backlog
     - Todo

@@ -29,12 +29,12 @@ external:
 props:
   items:
     - label: 'Home'
-      icon: 'i-heroicons-home'
+      icon: 'i-lucide-house'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       to: '/components'
     - label: 'Breadcrumb'
-      icon: 'i-heroicons-link'
+      icon: 'i-lucide-link'
       to: '/components/breadcrumb'
 ---
 ::
@@ -45,7 +45,7 @@ A `span` is rendered instead of a link when the `to` property is not defined.
 
 ### Separator Icon
 
-Use the `separator-icon` prop to customize the [Icon](/components/icon) between each item. Defaults to `i-heroicons-chevron-right-20-solid`.
+Use the `separator-icon` prop to customize the [Icon](/components/icon) between each item. Defaults to `i-lucide-chevron-right`.
 
 ::component-code
 ---
@@ -54,15 +54,15 @@ ignore:
 external:
   - items
 props:
-  separatorIcon: 'i-heroicons-arrow-right-20-solid'
+  separatorIcon: 'i-lucide-arrow-right'
   items:
     - label: 'Home'
-      icon: 'i-heroicons-home'
+      icon: 'i-lucide-house'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       to: '/components'
     - label: 'Breadcrumb'
-      icon: 'i-heroicons-link'
+      icon: 'i-lucide-link'
       to: '/components/breadcrumb'
 ---
 ::

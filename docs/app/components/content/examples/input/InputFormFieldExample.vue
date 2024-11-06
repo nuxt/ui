@@ -4,6 +4,6 @@ const email = ref('')
 
 <template>
   <UFormField label="Email" help="We won't share your email." required>
-    <UInput v-model="email" placeholder="Enter your email" icon="i-heroicons-at-symbol" />
+    <UInput v-model="email" placeholder="Enter your email" icon="i-lucide-at-sign" />
   </UFormField>
 </template>

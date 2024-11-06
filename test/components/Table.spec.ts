@@ -88,7 +88,7 @@ describe('Table', () => {
         color: 'neutral',
         variant: 'ghost',
         label: 'Email',
-        icon: isSorted ? (isSorted === 'asc' ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid') : 'i-heroicons-arrows-up-down-20-solid',
+        icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
         class: '-mx-2.5',
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
       })
@@ -132,7 +132,7 @@ describe('Table', () => {
         },
         items
       }, () => h(UButton, {
-        icon: 'i-heroicons-ellipsis-vertical-20-solid',
+        icon: 'i-lucide-ellipsis-vertical',
         color: 'neutral',
         variant: 'ghost',
         class: 'ml-auto'

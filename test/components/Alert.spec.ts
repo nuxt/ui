@@ -12,10 +12,10 @@ describe('Alert', () => {
     // Props
     ['with title', { props }],
     ['with description', { props: { ...props, description: 'Description' } }],
-    ['with icon', { props: { ...props, icon: 'i-heroicons-light-bulb' } }],
+    ['with icon', { props: { ...props, icon: 'i-lucide-lightbulb' } }],
     ['with avatar', { props: { ...props, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with close', { props: { ...props, close: true } }],
-    ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-heroicons-trash' } }],
+    ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-lucide-trash' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['with as', { props: { ...props, as: 'article' } }],

@@ -10,7 +10,7 @@ function showToast() {
     title: 'Uh oh! Something went wrong.',
     description: props.description,
     actions: [{
-      icon: 'i-heroicons-arrow-path-20-solid',
+      icon: 'i-lucide-refresh-ccw',
       label: 'Retry',
       color: 'neutral',
       variant: 'outline',

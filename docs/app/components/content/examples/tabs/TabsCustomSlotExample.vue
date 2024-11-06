@@ -3,13 +3,13 @@ const items = [
   {
     label: 'Account',
     description: 'Make changes to your account here. Click save when you\'re done.',
-    icon: 'i-heroicons-user',
+    icon: 'i-lucide-user',
     slot: 'account'
   },
   {
     label: 'Password',
     description: 'Change your password here. After saving, you\'ll be logged out.',
-    icon: 'i-heroicons-lock-closed',
+    icon: 'i-lucide-lock',
     slot: 'password'
   }
 ]

@@ -16,23 +16,23 @@ const selectedItems = ref([fruits[0]!, vegetables[0]!])
 const statuses = [{
   label: 'Backlog',
   value: 'backlog',
-  icon: 'i-heroicons-question-mark-circle'
+  icon: 'i-lucide-circle-help'
 }, {
   label: 'Todo',
   value: 'todo',
-  icon: 'i-heroicons-plus-circle'
+  icon: 'i-lucide-circle-plus'
 }, {
   label: 'In Progress',
   value: 'in_progress',
-  icon: 'i-heroicons-arrow-up-circle'
+  icon: 'i-lucide-circle-arrow-up'
 }, {
   label: 'Done',
   value: 'done',
-  icon: 'i-heroicons-check-circle'
+  icon: 'i-lucide-circle-check'
 }, {
   label: 'Canceled',
   value: 'canceled',
-  icon: 'i-heroicons-x-circle'
+  icon: 'i-lucide-circle-x'
 }]
 
 const searchTerm = ref('')
@@ -107,8 +107,8 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :key="size"
         :items="statuses"
         placeholder="Search status..."
-        icon="i-heroicons-magnifying-glass"
-        trailing-icon="i-heroicons-chevron-up-down-20-solid"
+        icon="i-lucide-search"
+        trailing-icon="i-lucide-chevrons-up-down"
         :size="size"
         class="w-48"
       >
@@ -125,7 +125,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :items="users || []"
         :loading="status === 'pending'"
         :filter="false"
-        icon="i-heroicons-user"
+        icon="i-lucide-user"
         placeholder="Search users..."
         :size="size"
         class="w-48"

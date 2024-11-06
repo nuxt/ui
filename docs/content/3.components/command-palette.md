@@ -177,18 +177,18 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
 ### Icon
 
-Use the `icon` prop to customize the input [Icon](/components/icon). Defaults to `i-heroicons-magnifying-glass-20-solid`.
+Use the `icon` prop to customize the input [Icon](/components/icon). Defaults to `i-lucide-search`.
 
 ::component-code
 ---
@@ -200,16 +200,16 @@ external:
   - groups
 class: '!p-0'
 props:
-  icon: 'i-heroicons-cube'
+  icon: 'i-lucide-box'
   groups:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
@@ -237,18 +237,18 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
 
 ::component-code
 ---
@@ -261,16 +261,16 @@ external:
 class: '!p-0'
 props:
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   groups:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
@@ -298,11 +298,11 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
@@ -331,11 +331,11 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
@@ -363,18 +363,18 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
+Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-lucide-x`.
 
 ::component-code
 ---
@@ -388,16 +388,16 @@ external:
 class: '!p-0'
 props:
   close: true
-  closeIcon: 'i-heroicons-arrow-right'
+  closeIcon: 'i-lucide-arrow-right'
   groups:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::

@@ -8,14 +8,14 @@ exports[`Badge > renders with as correctly 1`] = `
 `;
 
 exports[`Badge > renders with avatar and leadingIcon correctly 1`] = `
-"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="iconify i-heroicons:arrow-left shrink-0 size-4" aria-hidden="true"></span>
+"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="iconify i-lucide:arrow-left shrink-0 size-4" aria-hidden="true"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
 
 exports[`Badge > renders with avatar and trailingIcon correctly 1`] = `
 "<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
-<!--v-if--><span class="iconify i-heroicons:arrow-right shrink-0 size-4" aria-hidden="true"></span></span>"
+<!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true"></span></span>"
 `;
 
 exports[`Badge > renders with avatar correctly 1`] = `
@@ -32,7 +32,7 @@ exports[`Badge > renders with class correctly 1`] = `
 exports[`Badge > renders with default slot correctly 1`] = `"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if-->Default slot<!--v-if--></span>"`;
 
 exports[`Badge > renders with icon correctly 1`] = `
-"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="iconify i-heroicons:rocket-launch shrink-0 size-4" aria-hidden="true"></span>
+"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="iconify i-lucide:rocket shrink-0 size-4" aria-hidden="true"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
@@ -43,7 +43,7 @@ exports[`Badge > renders with label correctly 1`] = `
 `;
 
 exports[`Badge > renders with leading and icon correctly 1`] = `
-"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="iconify i-heroicons:arrow-left shrink-0 size-4" aria-hidden="true"></span>
+"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="iconify i-lucide:arrow-left shrink-0 size-4" aria-hidden="true"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
@@ -51,7 +51,7 @@ exports[`Badge > renders with leading and icon correctly 1`] = `
 exports[`Badge > renders with leading slot correctly 1`] = `"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]">Leading slot<!--v-if--><!--v-if--></span>"`;
 
 exports[`Badge > renders with leadingIcon correctly 1`] = `
-"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="iconify i-heroicons:arrow-left shrink-0 size-4" aria-hidden="true"></span>
+"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="iconify i-lucide:arrow-left shrink-0 size-4" aria-hidden="true"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
@@ -111,8 +111,8 @@ exports[`Badge > renders with size sm correctly 1`] = `
 <!--v-if--></span>"
 `;
 
-exports[`Badge > renders with trailing and icon correctly 1`] = `"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><!--v-if--><span class="iconify i-heroicons:arrow-right shrink-0 size-4" aria-hidden="true"></span></span>"`;
+exports[`Badge > renders with trailing and icon correctly 1`] = `"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true"></span></span>"`;
 
 exports[`Badge > renders with trailing slot correctly 1`] = `"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><!--v-if-->Trailing slot</span>"`;
 
-exports[`Badge > renders with trailingIcon correctly 1`] = `"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><!--v-if--><span class="iconify i-heroicons:arrow-right shrink-0 size-4" aria-hidden="true"></span></span>"`;
+exports[`Badge > renders with trailingIcon correctly 1`] = `"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true"></span></span>"`;

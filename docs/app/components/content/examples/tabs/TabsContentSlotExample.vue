@@ -2,11 +2,11 @@
 const items = [
   {
     label: 'Account',
-    icon: 'i-heroicons-user'
+    icon: 'i-lucide-user'
   },
   {
     label: 'Password',
-    icon: 'i-heroicons-lock-closed'
+    icon: 'i-lucide-lock'
   }
 ]
 </script>

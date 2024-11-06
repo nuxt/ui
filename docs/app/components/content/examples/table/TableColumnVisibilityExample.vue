@@ -119,7 +119,7 @@ const columnVisibility = ref({
           label="Columns"
           color="neutral"
           variant="outline"
-          trailing-icon="i-heroicons-chevron-down-20-solid"
+          trailing-icon="i-lucide-chevron-down"
         />
       </UDropdownMenu>
     </div>

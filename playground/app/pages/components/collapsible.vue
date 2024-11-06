@@ -9,7 +9,7 @@ const appConfig = useAppConfig()
     <UCollapsible class="flex flex-col gap-2 w-48">
       <UButton
         class="group"
-        icon="i-heroicons-light-bulb"
+        icon="i-lucide-lightbulb"
         :trailing-icon="appConfig.ui.icons.chevronDown"
         color="neutral"
         variant="outline"
