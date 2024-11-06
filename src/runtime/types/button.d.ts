@@ -26,4 +26,5 @@ export interface Button extends Link {
   leading?: boolean
   square?: boolean
   truncate?: boolean
+  target?: string
 }

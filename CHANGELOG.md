@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.19.2](https://github.com/nuxt/ui/compare/v2.19.1...v2.19.2) (2024-11-05)
+
+### Bug Fixes
+
+* **Button:** put back `target` override ([212f7df](https://github.com/nuxt/ui/commit/212f7df35b9f81d189e1ee3e34f6fd2234cf52fe))
+
+## [2.19.1](https://github.com/nuxt/ui/compare/v2.19.0...v2.19.1) (2024-11-05)
+
+### Bug Fixes
+
+* **InputMenu/SelectMenu:** regex breaks build ([cb6f5f2](https://github.com/nuxt/ui/commit/cb6f5f2d71ea8bb526a8f958daec8e9871469b63))
+
 ## [2.19.0](https://github.com/nuxt/ui/compare/v2.18.7...v2.19.0) (2024-11-05)
 
 ### Features

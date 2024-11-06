@@ -486,7 +486,7 @@ export default defineComponent({
     })
 
     function escapeRegExp(string: string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      return string.replace(/[.*+?^${}()|[\]\\]/g, match => `\\${match}`)
     }
 
     function accessor<T extends Record<string, any>>(obj: T, key: string) {
