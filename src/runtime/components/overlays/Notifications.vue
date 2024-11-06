@@ -23,11 +23,11 @@
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
-import UNotification from './Notification.vue'
 import { useUI } from '../../composables/useUI'
 import { useToast } from '../../composables/useToast'
 import { mergeConfig } from '../../utils'
-import type { Notification, Strategy } from '../../types/index'
+import type { DeepPartial, Notification, Strategy } from '../../types/index'
+import UNotification from './Notification.vue'
 import { useState } from '#imports'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -46,11 +46,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('notifications', toRef(props, 'ui'), config)
 
     const toast = useToast()

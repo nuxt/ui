@@ -22,7 +22,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { mergeConfig } from '../../utils'
-import type { PopperOptions, Strategy } from '../../types/index'
+import type { DeepPartial, PopperOptions, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { contextMenu } from '#ui/ui.config'
@@ -49,21 +49,21 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('contextMenu', toRef(props, 'ui'), config)
 
     const popper = computed<PopperOptions>(() => defu({}, props.popper, ui.value.popper as PopperOptions))
 
     const isOpen = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })

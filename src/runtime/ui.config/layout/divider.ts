@@ -16,19 +16,19 @@ export default {
     size: {
       horizontal: {
         '2xs': 'border-t',
-        xs: 'border-t-[2px]',
-        sm: 'border-t-[3px]',
-        md: 'border-t-[4px]',
-        lg: 'border-t-[5px]',
-        xl: 'border-t-[6px]'
+        'xs': 'border-t-[2px]',
+        'sm': 'border-t-[3px]',
+        'md': 'border-t-[4px]',
+        'lg': 'border-t-[5px]',
+        'xl': 'border-t-[6px]'
       },
       vertical: {
         '2xs': 'border-s',
-        xs: 'border-s-[2px]',
-        sm: 'border-s-[3px]',
-        md: 'border-s-[4px]',
-        lg: 'border-s-[5px]',
-        xl: 'border-s-[6px]'
+        'xs': 'border-s-[2px]',
+        'sm': 'border-s-[3px]',
+        'md': 'border-s-[4px]',
+        'lg': 'border-s-[5px]',
+        'xl': 'border-s-[6px]'
       }
     },
     type: {
@@ -46,6 +46,7 @@ export default {
   },
   label: 'text-sm',
   default: {
-    size: '2xs' as const
+    size: '2xs' as const,
+    type: 'solid' as const
   }
 }

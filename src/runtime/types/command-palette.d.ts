@@ -1,4 +1,4 @@
-import { FuseResultMatch } from 'fuse.js'
+import type { FuseResultMatch } from 'fuse.js'
 import type { Avatar } from './avatar'
 
 export interface Command {
@@ -24,6 +24,6 @@ export interface Group {
   commands?: Command[]
   search?: (...args: any[]) => any[] | Promise<any[]>
   filter?: (...args: any[]) => Command[]
-  static?: Boolean
+  static?: boolean
   [key: string]: any
 }

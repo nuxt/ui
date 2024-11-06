@@ -8,13 +8,13 @@ links:
 
 ## Usage
 
-Use the Form component to validate form data using schema libraries such as [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot), or your own validation logic.
+Use the Form component to validate form data using schema libraries such as [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot), [Superstruct](https://github.com/ianstormtaylor/superstruct), or your own validation logic.
 
 It works with the [FormGroup](/components/form-group) component to display error messages around form elements automatically.
 
 The form component requires two props:
 - `state` - a reactive object holding the form's state.
-- `schema` - a schema object from a validation library like [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi) or [Valibot](https://github.com/fabian-hiller/valibot).
+- `schema` - a schema object from a validation library like [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot) or [Superstruct](https://github.com/ianstormtaylor/superstruct).
 
 ::callout{icon="i-heroicons-light-bulb"}
 Note that **no validation library is included** by default, so ensure you **install the one you need**.
@@ -48,6 +48,13 @@ Note that **no validation library is included** by default, so ensure you **inst
   ::component-example{label="Valibot"}
   ---
   component: 'form-example-valibot'
+  componentProps:
+    class: 'w-60'
+  ---
+  ::
+  ::component-example{label="Superstruct"}
+  ---
+  component: 'form-example-superstruct'
   componentProps:
     class: 'w-60'
   ---
@@ -117,23 +124,28 @@ You can manually set errors after form submission if required. To do this, simpl
 
 ```vue
 <script setup lang="ts">
-import type { FormError, FormSubmitEvent } from '#ui/types'
+import type { Form, FormSubmitEvent } from '#ui/types'
 
-const state = reactive({
+interface Schema {
+  email?: string
+  password?: string
+}
+
+const state = reactive<Schema>({
   email: undefined,
   password: undefined
 })
 
-const form = ref()
+const form = ref<Form<Schema>>()
 
-async function onSubmit (event: FormSubmitEvent<any>) {
-  form.value.clear()
+async function onSubmit (event: FormSubmitEvent<Schema>) {
+  form.value!.clear()
   try {
     const response = await $fetch('...')
     // ...
   } catch (err) {
     if (err.statusCode === 422) {
-      form.value.setErrors(err.data.errors.map((err) => ({
+      form.value!.setErrors(err.data.errors.map((err) => ({
         // Map validation errors to { path: string, message: string }
         message: err.message,
         path: err.path,

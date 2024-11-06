@@ -2,11 +2,11 @@ import { useClipboard } from '@vueuse/core'
 import type { Notification } from '../types/notification'
 import { useToast } from './useToast'
 
-export function useCopyToClipboard (options: Partial<Notification> = {}) {
+export function useCopyToClipboard(options: Partial<Notification> = {}) {
   const { copy: copyToClipboard, isSupported } = useClipboard()
   const toast = useToast()
 
-  function copy (text: string, success: { title?: string, description?: string } = {}, failure: { title?: string, description?: string } = {}) {
+  function copy(text: string, success: { title?: string, description?: string } = {}, failure: { title?: string, description?: string } = {}) {
     if (!isSupported) {
       return
     }

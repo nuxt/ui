@@ -86,7 +86,7 @@
                     />
                     <span v-else-if="option.chip" :class="uiMenu.option.chip.base" :style="{ background: `#${option.chip}` }" />
 
-                    <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : option[optionAttribute] }}</span>
+                    <span class="truncate">{{ ['string', 'number'].includes(typeof option) ? option : accessor(option, optionAttribute) }}</span>
                   </slot>
                 </div>
 
@@ -100,19 +100,19 @@
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive]">
                 <div :class="uiMenu.option.container">
                   <slot name="option-create" :option="createOption" :active="active" :selected="optionSelected">
-                    <span :class="uiMenu.option.create">Create "{{ createOption[optionAttribute] }}"</span>
+                    <span :class="uiMenu.option.create">Create "{{ typeof createOption === 'string' ? createOption : accessor(createOption, optionAttribute) }}"</span>
                   </slot>
                 </div>
               </li>
             </component>
             <p v-else-if="searchable && query && !filteredOptions?.length" :class="uiMenu.option.empty">
               <slot name="option-empty" :query="query">
-                No results for "{{ query }}".
+                {{ uiMenu.default.optionEmpty.label.replace('{query}', query) }}
               </slot>
             </p>
             <p v-else-if="!filteredOptions?.length" :class="uiMenu.empty">
               <slot name="empty" :query="query">
-                No options.
+                {{ uiMenu.default.empty.label }}
               </slot>
             </p>
           </component>
@@ -123,7 +123,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, watch, defineComponent } from 'vue'
+import { ref, computed, toRef, watch, defineComponent, toRaw } from 'vue'
 import type { PropType } from 'vue'
 import {
   Combobox as HCombobox,
@@ -147,7 +147,7 @@ import { usePopper } from '../../composables/usePopper'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { get, mergeConfig } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy } from '../../types/index'
+import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select, selectMenu } from '#ui/ui.config'
@@ -174,7 +174,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number, Object, Array, Boolean],
+      type: [String, Number, Object, Array, Boolean] as PropType<string | number | object | Array<any> | boolean | null>,
       default: ''
     },
     query: {
@@ -247,7 +247,7 @@ export default defineComponent({
     },
     searchablePlaceholder: {
       type: String,
-      default: 'Search...'
+      default: () => configMenu.default.searchablePlaceholder.label
     },
     searchableLazy: {
       type: Boolean,
@@ -280,21 +280,21 @@ export default defineComponent({
     size: {
       type: String as PropType<SelectSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<SelectColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<SelectVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -326,16 +326,16 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     },
     uiMenu: {
-      type: Object as PropType<Partial<typeof configMenu> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof configMenu> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
-  setup (props, { emit, slots }) {
+  setup(props, { emit, slots }) {
     if (import.meta.dev && props.multiple && !Array.isArray(props.modelValue)) {
       console.warn(`[@nuxt/ui] The USelectMenu components needs to have a modelValue of type Array when using the multiple prop. Got '${typeof props.modelValue}' instead.`, props.modelValue)
     }
@@ -354,10 +354,10 @@ export default defineComponent({
 
     const internalQuery = ref('')
     const query = computed({
-      get () {
+      get() {
         return props.query ?? internalQuery.value
       },
-      set (value) {
+      set(value) {
         internalQuery.value = value
         emit('update:query', value)
       }
@@ -411,9 +411,9 @@ export default defineComponent({
         }
       } else if (props.modelValue !== undefined && props.modelValue !== null) {
         if (props.valueAttribute) {
-          return selected.value?.[props.optionAttribute] ?? null
+          return accessor(selected.value, props.optionAttribute) ?? null
         } else {
-          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : props.modelValue[props.optionAttribute]
+          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(props.modelValue as Record<string, any>, props.optionAttribute)
         }
       }
 
@@ -506,20 +506,30 @@ export default defineComponent({
       lazy: props.searchableLazy
     })
 
+    function escapeRegExp(string: string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, match => `\\${match}`)
+    }
+
+    function accessor<T extends Record<string, any>>(obj: T, key: string) {
+      return get(obj, key)
+    }
+
     const filteredOptions = computed(() => {
       if (!query.value || debouncedSearch) {
         return options.value
       }
 
+      const escapedQuery = escapeRegExp(query.value)
+
       return options.value.filter((option: any) => {
         return (props.searchAttributes?.length ? props.searchAttributes : [props.optionAttribute]).some((searchAttribute: any) => {
           if (['string', 'number'].includes(typeof option)) {
-            return String(option).search(new RegExp(query.value, 'i')) !== -1
+            return String(option).search(new RegExp(escapedQuery, 'i')) !== -1
           }
 
           const child = get(option, searchAttribute)
 
-          return child !== null && child !== undefined && String(child).search(new RegExp(query.value, 'i')) !== -1
+          return child !== null && child !== undefined && String(child).search(new RegExp(escapedQuery, 'i')) !== -1
         })
       })
     })
@@ -532,7 +542,7 @@ export default defineComponent({
         return null
       }
       if (props.showCreateOptionWhen === 'always') {
-        const existingOption = filteredOptions.value.find(option => ['string', 'number'].includes(typeof option) ? option === query.value : option[props.optionAttribute] === query.value)
+        const existingOption = filteredOptions.value.find(option => ['string', 'number'].includes(typeof option) ? option === query.value : accessor(option, props.optionAttribute) === query.value)
         if (existingOption) {
           return null
         }
@@ -545,7 +555,7 @@ export default defineComponent({
       return ['string', 'number'].includes(typeof props.modelValue) ? query.value : { [props.optionAttribute]: query.value }
     })
 
-    function clearOnClose () {
+    function clearOnClose() {
       if (props.clearSearchOnClose) {
         query.value = ''
       }
@@ -561,13 +571,17 @@ export default defineComponent({
       }
     })
 
-    function onUpdate (value: any) {
+    function onUpdate(value: any) {
+      if (toRaw(props.modelValue) === value) {
+        return
+      }
+
       emit('update:modelValue', value)
       emit('change', value)
       emitFormChange()
     }
 
-    function onQueryChange (event: any) {
+    function onQueryChange(event: any) {
       query.value = event.target.value
     }
 
@@ -588,6 +602,7 @@ export default defineComponent({
       container,
       selected,
       label,
+      accessor,
       isLeading,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys

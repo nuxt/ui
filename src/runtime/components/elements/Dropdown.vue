@@ -67,7 +67,7 @@ import UKbd from '../elements/Kbd.vue'
 import { useUI } from '../../composables/useUI'
 import { usePopper } from '../../composables/usePopper'
 import { mergeConfig, getNuxtLinkProps } from '../../utils'
-import type { DropdownItem, PopperOptions, Strategy } from '../../types/index'
+import type { DeepPartial, DropdownItem, PopperOptions, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { dropdown } from '#ui/ui.config'
@@ -121,12 +121,12 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['update:open'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('dropdown', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const popper = computed<PopperOptions>(() => defu(props.mode === 'hover' ? { offsetDistance: 0 } : {}, props.popper, ui.value.popper as PopperOptions))
@@ -182,8 +182,8 @@ export default defineComponent({
       }
     })
 
-    function onTouchStart (event: TouchEvent) {
-      if (!event.cancelable || !menuApi.value) {
+    function onTouchStart(event: TouchEvent) {
+      if (!event.cancelable || !menuApi.value || props.mode === 'click') {
         return
       }
 
@@ -194,7 +194,7 @@ export default defineComponent({
       }
     }
 
-    function onMouseEnter () {
+    function onMouseEnter() {
       if (props.mode !== 'hover' || !menuApi.value) {
         return
       }
@@ -209,12 +209,14 @@ export default defineComponent({
         return
       }
       openTimeout = openTimeout || setTimeout(() => {
-        menuApi.value.openMenu && menuApi.value.openMenu()
+        if (menuApi.value.openMenu) {
+          menuApi.value.openMenu()
+        }
         openTimeout = null
       }, props.openDelay)
     }
 
-    function onMouseLeave () {
+    function onMouseLeave() {
       if (props.mode !== 'hover' || !menuApi.value) {
         return
       }
@@ -229,12 +231,14 @@ export default defineComponent({
         return
       }
       closeTimeout = closeTimeout || setTimeout(() => {
-        menuApi.value.closeMenu && menuApi.value.closeMenu()
+        if (menuApi.value.closeMenu) {
+          menuApi.value.closeMenu()
+        }
         closeTimeout = null
       }, props.closeDelay)
     }
 
-    function onClick (e, item, { href, navigate, close, isExternal }) {
+    function onClick(e, item, { href, navigate, close, isExternal }) {
       if (item.click) {
         item.click(e)
       }

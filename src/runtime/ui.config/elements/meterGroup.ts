@@ -9,7 +9,7 @@ export default {
   orientation: {
     'rounded-none': { left: 'rounded-s-none', right: 'rounded-e-none' },
     'rounded-sm': { left: 'rounded-s-sm', right: 'rounded-e-sm' },
-    rounded: { left: 'rounded-s', right: 'rounded-e' },
+    'rounded': { left: 'rounded-s', right: 'rounded-e' },
     'rounded-md': { left: 'rounded-s-md', right: 'rounded-e-md' },
     'rounded-lg': { left: 'rounded-s-lg', right: 'rounded-e-lg' },
     'rounded-xl': { left: 'rounded-s-xl', right: 'rounded-e-xl' },

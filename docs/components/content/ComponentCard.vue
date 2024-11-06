@@ -51,11 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import { transformContent } from '@nuxt/content/transformers'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { useShikiHighlighter } from '~/composables/useShikiHighlighter'
 
-// eslint-disable-next-line vue/no-dupe-keys
 const props = defineProps({
   slug: {
     type: String,
@@ -90,7 +88,7 @@ const props = defineProps({
     default: () => []
   },
   options: {
-    type: Array as PropType<{ name: string; values: string[]; restriction: 'expected' | 'included' | 'excluded' | 'only' }[]>,
+    type: Array as PropType<{ name: string, values: string[], restriction: 'expected' | 'included' | 'excluded' | 'only' }[]>,
     default: () => []
   },
   backgroundClass: {
@@ -115,7 +113,6 @@ const props = defineProps({
   }
 })
 
-// eslint-disable-next-line vue/no-dupe-keys
 const baseProps = reactive({ ...props.baseProps })
 const componentProps = reactive({ ...props.props })
 
@@ -159,13 +156,13 @@ const generateOptions = (key: string, schema: { kind: string, schema: [], type: 
   const schemaOptions = Object.values(schema?.schema || {})
 
   if (key.toLowerCase() === 'size' && schemaOptions?.length > 0) {
-    const baseSizeOrder = { 'xs': 1, 'sm': 2, 'md': 3, 'lg': 4, 'xl': 5 }
+    const baseSizeOrder = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }
     schemaOptions.sort((a: string, b: string) => {
-      const aBase = a.match(/[a-zA-Z]+/)[0].toLowerCase()
-      const bBase = b.match(/[a-zA-Z]+/)[0].toLowerCase()
+      const aBase = a.match(/[a-z]+/i)[0].toLowerCase()
+      const bBase = b.match(/[a-z]+/i)[0].toLowerCase()
 
-      const aNum = parseInt(a.match(/\d+/)?.[0]) || 1
-      const bNum = parseInt(b.match(/\d+/)?.[0]) || 1
+      const aNum = Number.parseInt(a.match(/\d+/)?.[0]) || 1
+      const bNum = Number.parseInt(b.match(/\d+/)?.[0]) || 1
 
       if (aBase === bBase) {
         return aBase === 'xs' ? bNum - aNum : aNum - bNum
@@ -215,7 +212,6 @@ const propsToSelect = computed(() => Object.keys(componentProps).map((key) => {
   }
 }).filter(Boolean))
 
-// eslint-disable-next-line vue/no-dupe-keys
 const code = computed(() => {
   let code = `\`\`\`html
 <template>
@@ -254,7 +250,7 @@ const code = computed(() => {
   return code
 })
 
-function renderObject (obj: any) {
+function renderObject(obj: any) {
   if (Array.isArray(obj)) {
     return `[${obj.map(renderObject).join(', ')}]`
   }
@@ -270,27 +266,28 @@ function renderObject (obj: any) {
   return obj
 }
 
-const { data: ast } = await useAsyncData(
-  `${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`,
-  async () => {
-    let formatted = ''
-    try {
-      formatted = await $prettier.format(code.value) || code.value
-    } catch (error) {
-      formatted = code.value
-    }
-
-    return transformContent('content:_markdown.md', formatted, {
-      markdown: {
-        highlight: {
-          highlighter,
-          theme: {
-            light: 'material-theme-lighter',
-            default: 'material-theme',
-            dark: 'material-theme-palenight'
-          }
-        }
-      }
+const { data: ast } = await useAsyncData(`${name}-ast-${JSON.stringify({ props: componentProps, slots: props.slots, code: props.code })}`, async () => {
+  let formatted = ''
+  try {
+    // @ts-ignore
+    formatted = await $prettier.format(code.value, {
+      trailingComma: 'none',
+      semi: false,
+      singleQuote: true
     })
-  }, { watch: [code] })
+  } catch {
+    formatted = code.value
+  }
+
+  return parseMarkdown(formatted, {
+    highlight: {
+      highlighter,
+      theme: {
+        light: 'material-theme-lighter',
+        default: 'material-theme',
+        dark: 'material-theme-palenight'
+      }
+    }
+  })
+}, { watch: [code] })
 </script>

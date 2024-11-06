@@ -36,7 +36,7 @@ defineProps({
   }
 })
 
-function startsWithCapital (word) {
+function startsWithCapital(word) {
   if (word.charAt(0).startsWith('"')) {
     return false
   }

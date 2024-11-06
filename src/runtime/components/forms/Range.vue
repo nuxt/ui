@@ -26,7 +26,7 @@ import { twMerge, twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
 import { mergeConfig } from '../../utils'
-import type { RangeSize, RangeColor, Strategy } from '../../types/index'
+import type { RangeSize, RangeColor, Strategy, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { range } from '#ui/ui.config'
@@ -37,7 +37,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: Number,
+      type: Number as PropType<number | null>,
       default: 0
     },
     id: {
@@ -67,14 +67,14 @@ export default defineComponent({
     size: {
       type: String as PropType<RangeSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<RangeColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
@@ -87,21 +87,21 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('range', toRef(props, 'ui'), config)
 
     const { emitFormChange, inputId, color, size, name } = useFormGroup(props, config)
 
     const value = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })

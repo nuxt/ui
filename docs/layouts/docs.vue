@@ -4,8 +4,6 @@
       <UPage>
         <template #left>
           <UAside>
-            <BranchSelect />
-
             <UNavigationTree :links="mapContentNavigation(navigation)" />
           </UAside>
         </template>

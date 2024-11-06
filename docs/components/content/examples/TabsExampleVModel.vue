@@ -17,15 +17,15 @@ const route = useRoute()
 const router = useRouter()
 
 const selected = computed({
-  get () {
-    const index = items.findIndex((item) => item.label === route.query.tab)
+  get() {
+    const index = items.findIndex(item => item.label === route.query.tab)
     if (index === -1) {
       return 0
     }
 
     return index
   },
-  set (value) {
+  set(value) {
     // Hash is specified here to prevent the page from scrolling to the top
     router.replace({ query: { tab: items[value].label }, hash: '#control-the-selected-index' })
   }

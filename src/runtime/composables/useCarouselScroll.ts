@@ -3,7 +3,7 @@ import { ref, type Ref, onMounted, onUnmounted } from 'vue'
 export const useCarouselScroll = (el: Ref<HTMLElement>) => {
   const x = ref<number>(0)
 
-  function onMouseDown (e) {
+  function onMouseDown(e) {
     el.value.style.scrollSnapType = 'none'
     el.value.style.scrollBehavior = 'auto'
 
@@ -13,7 +13,7 @@ export const useCarouselScroll = (el: Ref<HTMLElement>) => {
     window.addEventListener('mouseup', onMouseUp)
   }
 
-  function onMouseUp () {
+  function onMouseUp() {
     el.value.style.removeProperty('scroll-behavior')
     el.value.style.removeProperty('scroll-snap-type')
     el.value.style.removeProperty('pointer-events')
@@ -22,7 +22,7 @@ export const useCarouselScroll = (el: Ref<HTMLElement>) => {
     window.removeEventListener('mouseup', onMouseUp)
   }
 
-  function onMouseMove (e) {
+  function onMouseMove(e) {
     e.preventDefault()
 
     el.value.style.pointerEvents = 'none'

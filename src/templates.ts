@@ -1,6 +1,6 @@
 import { useNuxt, addTemplate } from '@nuxt/kit'
 
-export default function createTemplates (nuxt = useNuxt()) {
+export default function createTemplates(nuxt = useNuxt()) {
   const template = addTemplate({
     filename: 'ui.colors.mjs',
     getContents: () => `export default ${JSON.stringify(nuxt.options.appConfig.ui.colors)};`,
