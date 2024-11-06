@@ -2,17 +2,17 @@
 const items = [
   {
     label: 'Guide',
-    icon: 'i-heroicons-book-open'
+    icon: 'i-lucide-book-open'
 
   },
   {
     label: 'Composables',
-    icon: 'i-heroicons-circle-stack'
+    icon: 'i-lucide-database'
 
   },
   {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent',
+    icon: 'i-lucide-box',
     slot: 'components'
   }
 ]

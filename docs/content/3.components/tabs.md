@@ -33,10 +33,10 @@ external:
 props:
   items:
     - label: Account
-      icon: 'i-heroicons-user'
+      icon: 'i-lucide-user'
       content: 'This is the account content.'
     - label: Password
-      icon: 'i-heroicons-lock-closed'
+      icon: 'i-lucide-lock'
       content: 'This is the password content.'
   class: 'w-full'
 ---
@@ -60,10 +60,10 @@ props:
   content: false
   items:
     - label: Account
-      icon: 'i-heroicons-user'
+      icon: 'i-lucide-user'
       content: 'This is the account content.'
     - label: Password
-      icon: 'i-heroicons-lock-closed'
+      icon: 'i-lucide-lock'
       content: 'This is the password content.'
   class: 'w-full'
 ---
@@ -85,10 +85,10 @@ props:
     forceMount: false
   items:
     - label: Account
-      icon: 'i-heroicons-user'
+      icon: 'i-lucide-user'
       content: 'This is the account content.'
     - label: Password
-      icon: 'i-heroicons-lock-closed'
+      icon: 'i-lucide-lock'
       content: 'This is the password content.'
   class: 'w-full'
 ---

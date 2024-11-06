@@ -2,7 +2,7 @@
 const items = [
   {
     label: 'Docs',
-    icon: 'i-heroicons-book-open',
+    icon: 'i-lucide-book-open',
     slot: 'docs',
     children: [
       {
@@ -21,7 +21,7 @@ const items = [
   },
   {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent',
+    icon: 'i-lucide-box',
     slot: 'components',
     children: [
       {

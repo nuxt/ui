@@ -32,7 +32,7 @@ onMounted(() => {
       class="bg-[var(--ui-bg)] group w-full flex justify-center my-1 border-t border-[var(--ui-border)] rounded-t-none"
       variant="link"
       color="neutral"
-      trailing-icon="i-heroicons-chevron-down"
+      trailing-icon="i-lucide-chevron-down"
       :data-state="collapsed ? 'closed' : 'open'"
       :ui="{ trailingIcon: 'transition group-data-[state=open]:rotate-180' }"
       @click="collapsed = !collapsed"

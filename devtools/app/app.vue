@@ -64,7 +64,7 @@ function onComponentLoaded() {
 const tabs = computed(() => {
   if (!component.value) return
   return [
-    { label: 'Props', slot: 'props', icon: 'i-heroicons-cog-6-tooth', disabled: !component.value.meta?.props?.length }
+    { label: 'Props', slot: 'props', icon: 'i-lucide-settings', disabled: !component.value.meta?.props?.length }
   ]
 })
 
@@ -93,7 +93,7 @@ const isDark = computed({
     <div v-if="status === 'pending' || error || !component || !components?.length">
       <div v-if="error" class="flex flex-col justify-center items-center h-screen w-screen text-center text-[var(--ui-color-error-500)]">
         <UILogo class="h-8" />
-        <UIcon name="i-heroicons-exclamation-circle" size="20" class="mt-2" />
+        <UIcon name="i-lucide-circle-alert" size="20" class="mt-2" />
         <p>
           {{ (error.data as any)?.error ?? 'Unexpected error' }}
         </p>
@@ -111,7 +111,7 @@ const isDark = computed({
           :items="components"
           placeholder="Search component..."
           class="top-0 translate-y-0 w-full mx-2"
-          icon="i-heroicons-magnifying-glass"
+          icon="i-lucide-file-search-2"
         />
 
         <div class="absolute top-[49px] bottom-0 inset-x-0 grid xl:grid-cols-8 grid-cols-4 bg-[var(--ui-bg)]">
@@ -127,7 +127,7 @@ const isDark = computed({
             <ComponentPreview :component="component" :props="componentProps" class="h-full" />
             <div class="flex gap-2 absolute top-1 right-2">
               <UButton
-                :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+                :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
                 variant="ghost"
                 color="neutral"
                 @click="isDark = !isDark"
@@ -136,7 +136,7 @@ const isDark = computed({
                 v-if="component"
                 variant="ghost"
                 color="neutral"
-                icon="i-heroicons-arrow-top-right-on-square"
+                icon="i-lucide-external-link"
                 @click="openDocs()"
               >
                 Open docs

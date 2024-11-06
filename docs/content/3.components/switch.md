@@ -83,8 +83,8 @@ ignore:
   - label
   - defaultValue
 props:
-  uncheckedIcon: 'i-heroicons-x-mark'
-  checkedIcon: 'i-heroicons-check'
+  uncheckedIcon: 'i-lucide-x'
+  checkedIcon: 'i-lucide-check'
   defaultValue: true
   label: Check me
 ---
@@ -108,7 +108,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
 
 ::component-code
 ---
@@ -117,7 +117,7 @@ ignore:
   - defaultValue
 props:
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   defaultValue: true
   label: Check me
 ---

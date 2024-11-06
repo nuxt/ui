@@ -100,25 +100,25 @@ extendDevtoolsMeta({
         type: 'label'
       }], [{
         label: 'Profile',
-        icon: 'i-heroicons-user',
+        icon: 'i-lucide-user',
         slot: 'custom'
       }, {
         label: 'Billing',
-        icon: 'i-heroicons-credit-card',
+        icon: 'i-lucide-credit-card',
         kbds: ['meta', 'b']
       }, {
         label: 'Settings',
-        icon: 'i-heroicons-cog',
+        icon: 'i-lucide-cog',
         kbds: ['?']
       }], [{
         label: 'Invite users',
-        icon: 'i-heroicons-user-plus',
+        icon: 'i-lucide-user-plus',
         children: [[{
           label: 'Invite by email',
-          icon: 'i-heroicons-paper-airplane'
+          icon: 'i-lucide-send-horizontal'
         }, {
           label: 'Invite by link',
-          icon: 'i-heroicons-link',
+          icon: 'i-lucide-link',
           kbds: ['meta', 'i']
         }]]
       }],
@@ -129,7 +129,7 @@ extendDevtoolsMeta({
         target: '_blank'
       }, {
         label: 'Support',
-        icon: 'i-heroicons-lifebuoy',
+        icon: 'i-lucide-life-buoy',
         to: '/components/dropdown-menu'
       }]
     ]

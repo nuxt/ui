@@ -61,7 +61,7 @@ Pass an `icon` field to the `toast.add` method to display an [Icon](/components/
 options:
   - name: 'icon'
     label: 'icon'
-    default: 'i-heroicons-wifi'
+    default: 'i-lucide-wifi'
 name: 'toast-icon-example'
 ---
 ::
@@ -116,14 +116,14 @@ name: 'toast-close-example'
 
 ### Close Icon
 
-Pass a `closeIcon` field to customize the close button [Icon](/components/icon). Default to `i-heroicons-x-mark-20-solid`.
+Pass a `closeIcon` field to customize the close button [Icon](/components/icon). Default to `i-lucide-x`.
 
 ::component-example
 ---
 options:
   - name: 'closeIcon'
     label: 'closeIcon'
-    default: 'i-heroicons-arrow-right'
+    default: 'i-lucide-arrow-right'
 name: 'toast-close-icon-example'
 ---
 ::

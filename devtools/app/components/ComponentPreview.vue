@@ -118,7 +118,7 @@ const previewUrl = computed(() => {
       @load="onRendererReady"
     />
     <div v-if="!rendererVisible" class="grow w-full flex justify-center items-center px-8">
-      <UAlert color="error" variant="subtle" title="Component preview not found" icon="i-heroicons-exclamation-circle">
+      <UAlert color="error" variant="subtle" title="Component preview not found" icon="i-lucide-circle-alert">
         <template #description>
           <p>Ensure your <code>app.vue</code> file includes a <code>&lt;NuxtPage /&gt;</code> component, as the component preview is mounted as a page. </p>
         </template>
@@ -130,7 +130,7 @@ const previewUrl = computed(() => {
       <UButton
         color="neutral"
         variant="link"
-        :icon="copied ? 'i-heroicons-clipboard-document-check' : 'i-heroicons-clipboard-document'"
+        :icon="copied ? 'i-lucide-clipboard-check' : 'i-lucide-clipboard'"
         class="absolute top-6 right-6"
         @click="copy(formattedCode)"
       />

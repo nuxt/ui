@@ -47,12 +47,12 @@ function addArrayItem() {
       />
 
       <UPopover>
-        <UButton variant="ghost" color="neutral" icon="i-heroicons-ellipsis-vertical" class="absolute top-4 right-1" />
+        <UButton variant="ghost" color="neutral" icon="i-lucide-ellipsis-vertical" class="absolute top-4 right-1" />
         <template #content>
           <UButton
             variant="ghost"
             color="error"
-            icon="i-heroicons-trash"
+            icon="i-lucide-trash"
             block
             @click="removeArrayItem(index)"
           >
@@ -63,7 +63,7 @@ function addArrayItem() {
     </div>
 
     <UButton
-      icon="i-heroicons-plus"
+      icon="i-lucide-plus"
       color="neutral"
       variant="ghost"
       block

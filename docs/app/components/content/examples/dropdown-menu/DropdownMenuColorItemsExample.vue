@@ -3,22 +3,22 @@ const items = [
   [
     {
       label: 'View',
-      icon: 'i-heroicons-eye'
+      icon: 'i-lucide-eye'
     },
     {
       label: 'Copy',
-      icon: 'i-heroicons-document-duplicate'
+      icon: 'i-lucide-copy'
     },
     {
       label: 'Edit',
-      icon: 'i-heroicons-pencil'
+      icon: 'i-lucide-pencil'
     }
   ],
   [
     {
       label: 'Delete',
       color: 'error' as const,
-      icon: 'i-heroicons-trash'
+      icon: 'i-lucide-trash'
     }
   ]
 ]
@@ -26,10 +26,10 @@ const items = [
 
 <template>
   <UDropdownMenu :items="items" class="w-48">
-    <UButton label="Open" color="neutral" variant="outline" icon="i-heroicons-bars-3" />
+    <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
     <template #profile-trailing>
-      <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-[var(--ui-primary)]" />
+      <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-[var(--ui-primary)]" />
     </template>
   </UDropdownMenu>
 </template>

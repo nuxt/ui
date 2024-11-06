@@ -92,7 +92,7 @@ Use the `icon` prop to show an [Icon](/components/icon) inside the Button.
 ::component-code
 ---
 props:
-  icon: i-heroicons-rocket-launch
+  icon: i-lucide-rocket
   size: md
   color: primary
   variant: solid
@@ -106,7 +106,7 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 ::component-code
 ---
 props:
-  trailingIcon: i-heroicons-arrow-right
+  trailingIcon: i-lucide-arrow-right
   size: md
 slots:
   default: Button
@@ -118,7 +118,7 @@ The `label` as prop or slot is optional so you can use the Button as an icon-onl
 ::component-code
 ---
 props:
-  icon: i-heroicons-magnifying-glass
+  icon: i-lucide-file-search-2
   size: md
   color: primary
   variant: solid
@@ -184,13 +184,13 @@ This also works with the [Form](/components/form) component.
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
 
 ::component-code
 ---
 props:
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
 slots:
   default: Button
 ---
@@ -244,7 +244,7 @@ ignore:
   - variant
   - icon
 props:
-  icon: i-heroicons-rocket-launch
+  icon: i-lucide-rocket
   color: neutral
   variant: outline
   ui:

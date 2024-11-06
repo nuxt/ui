@@ -60,7 +60,7 @@ const users = [
       label="Search users..."
       color="neutral"
       variant="subtle"
-      icon="i-heroicons-magnifying-glass"
+      icon="i-lucide-file-search-2"
     />
 
     <template #content>

@@ -130,7 +130,7 @@ The close button is not displayed if the `#content` slot is used as it's a part 
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
+Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-lucide-x`.
 
 ::component-code
 ---
@@ -139,7 +139,7 @@ ignore:
   - title
 props:
   title: 'Modal with close button'
-  closeIcon: 'i-heroicons-arrow-right'
+  closeIcon: 'i-lucide-arrow-right'
 slots:
   default: |
 
