@@ -89,7 +89,6 @@
     "embla-carousel-fade": "^8.3.1",
     "embla-carousel-vue": "^8.3.1",
     "embla-carousel-wheel-gestures": "^8.0.1",
-    "fast-deep-equal": "^3.1.3",
     "fuse.js": "^7.0.0",
     "get-port-please": "^3.1.2",
     "knitwork": "^1.1.0",
