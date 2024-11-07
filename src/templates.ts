@@ -87,6 +87,16 @@ export {}
 `
   })
 
+  templates.push({
+    filename: 'ui-image-component.ts',
+    write: true,
+    getContents: ({ app }) => {
+      const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !c.filePath.includes('nuxt/dist/app'))
+
+      return image ? `export { default } from "${image.filePath}"` : 'export default "img"'
+    }
+  })
+
   return templates
 }
 
