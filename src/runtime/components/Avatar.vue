@@ -52,6 +52,18 @@ const { size } = useAvatarGroup(props)
 const ui = computed(() => avatar({
   size: size.value
 }))
+
+const sizePx = computed(() => ({
+  '3xs': 16,
+  '2xs': 20,
+  'xs': 24,
+  'sm': 28,
+  'md': 32,
+  'lg': 36,
+  'xl': 40,
+  '2xl': 44,
+  '3xl': 48
+})[props.size || 'md'])
 </script>
 
 <template>
@@ -61,6 +73,8 @@ const ui = computed(() => avatar({
       :as="ImageComponent"
       :src="src"
       :alt="alt"
+      :width="sizePx"
+      :height="sizePx"
       v-bind="$attrs"
       :class="ui.image({ class: props.ui?.image })"
     />

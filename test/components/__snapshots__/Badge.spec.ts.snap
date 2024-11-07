@@ -14,12 +14,12 @@ exports[`Badge > renders with avatar and leadingIcon correctly 1`] = `
 `;
 
 exports[`Badge > renders with avatar and trailingIcon correctly 1`] = `
-"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
+"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
 <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true"></span></span>"
 `;
 
 exports[`Badge > renders with avatar correctly 1`] = `
-"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
+"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
