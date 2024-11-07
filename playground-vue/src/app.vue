@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { splitByCase, upperFirst } from 'scule'
-import { useRouter } from 'vue-router'
 import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore included for compatibility with Nuxt playground
@@ -43,6 +43,7 @@ const components = [
   'modal',
   'navigation-menu',
   'pagination',
+  'pininput',
   'popover',
   'progress',
   'radio-group',
