@@ -1284,7 +1284,7 @@ exports[`CommandPalette > renders without results correctly 1`] = `
   </div>
   <!--teleport start-->
   <div id="radix-vue-combobox-content-v-0-0-0" role="listbox" data-state="open" style="display: flex; flex-direction: column; outline-color: none; outline-style: none; outline-width: initial;" class="relative overflow-hidden">
-    <div class="py-6 text-center text-sm text-[var(--ui-text-muted)]">No results</div>
+    <div class="py-6 text-center text-sm text-[var(--ui-text-muted)]">No data</div>
     <div class="divide-y divide-[var(--ui-border)] scroll-py-1" data-radix-combobox-viewport="" role="presentation" style="position: relative; flex-grow: 1; flex-shrink: 1; flex-basis: 0%; overflow: auto;"></div>
     <style>
       /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
