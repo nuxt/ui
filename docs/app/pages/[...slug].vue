@@ -25,8 +25,8 @@ useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
   title: typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title,
   ogTitle: `${typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title} - Nuxt UI v3`,
-  description: page.value.seo?.description || page.value.description,
-  ogDescription: page.value.seo?.description || page.value.description
+  description: page.value.description,
+  ogDescription: page.value.description
 })
 
 defineOgImageComponent('Docs', {
