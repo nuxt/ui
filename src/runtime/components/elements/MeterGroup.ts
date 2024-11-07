@@ -4,7 +4,7 @@ import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig, getSlotsChildren } from '../../utils'
-import type { Strategy, MeterSize } from '../../types/index'
+import type { DeepPartial, Strategy, MeterSize } from '../../types/index'
 import type Meter from './Meter.vue'
 // @ts-expect-error
 import appConfig from '#build/app.config'
@@ -51,7 +51,7 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof meterGroupConfig> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof meterGroupConfig> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
