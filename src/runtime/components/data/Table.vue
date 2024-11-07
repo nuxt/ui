@@ -18,7 +18,7 @@
             :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.key === 'select' && ui.checkbox.padding, column.class]"
             :aria-sort="getAriaSort(column)"
           >
-            <slot v-if="column.key === 'select' || shouldRenderColumnInFirstPlace(modelValue, index, 'select')" name="select-header" :indeterminate="indeterminate" :checked="isAllRowChecked" :change="onChange">
+            <slot v-if="!singleSelect && modelValue && (column.key === 'select' || shouldRenderColumnInFirstPlace(index, 'select'))" name="select-header" :indeterminate="indeterminate" :checked="isAllRowChecked" :change="onChange">
               <UCheckbox
                 :model-value="isAllRowChecked"
                 :indeterminate="indeterminate"
@@ -93,7 +93,7 @@
                 />
               </td>
               <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, column?.rowClass, row[column.key]?.class, column.key === 'select' && ui.checkbox.padding]">
-                <slot v-if="column.key === 'select' || shouldRenderColumnInFirstPlace(modelValue, subIndex, 'select') " name="select-data" :checked="isSelected(row)" :change="(ev: boolean) => onChangeCheckbox(ev, row)">
+                <slot v-if="modelValue && (column.key === 'select' || shouldRenderColumnInFirstPlace(subIndex, 'select')) " name="select-data" :checked="isSelected(row)" :change="(ev: boolean) => onChangeCheckbox(ev, row)">
                   <UCheckbox
                     :model-value="isSelected(row)"
                     v-bind="ui.default.checkbox"
@@ -254,6 +254,10 @@ export default defineComponent({
     multipleExpand: {
       type: Boolean,
       default: true
+    },
+    singleSelect: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:modelValue', 'update:sort', 'update:expand'],
@@ -404,7 +408,7 @@ export default defineComponent({
 
     function onChangeCheckbox(checked: boolean, row: TableRow) {
       if (checked) {
-        selected.value.push(row)
+        selected.value = props.singleSelect ? [row] : [...selected.value, row]
       } else {
         const index = selected.value.findIndex(item => compare(item, row))
         selected.value.splice(index, 1)
@@ -419,11 +423,11 @@ export default defineComponent({
       return expand.value?.openedRows ? expand.value.openedRows.some(openedRow => compare(openedRow, row)) : false
     }
 
-    function shouldRenderColumnInFirstPlace(modelValue: any, index: number, key: string) {
-      if (!props.columns && modelValue) {
+    function shouldRenderColumnInFirstPlace(index: number, key: string) {
+      if (!props.columns) {
         return index === 0
       }
-      return modelValue && index === 0 && !props.columns.find(col => col.key === key)
+      return index === 0 && !props.columns.find(col => col.key === key)
     }
 
     function toggleOpened(row: TableRow) {
