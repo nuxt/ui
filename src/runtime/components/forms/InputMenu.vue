@@ -48,7 +48,7 @@
               v-slot="{ active, selected, disabled: optionDisabled }"
               :key="index"
               as="template"
-              :value="valueAttribute ? option[valueAttribute] : option"
+              :value="valueAttribute ? accessor(option, valueAttribute) : option"
               :disabled="option.disabled"
             >
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, selected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
@@ -305,12 +305,12 @@ export default defineComponent({
 
     const label = computed(() => {
       if (!props.modelValue) {
-        return
+        return null
       }
 
       if (props.valueAttribute) {
-        const option = options.value.find(option => option[props.valueAttribute] === props.modelValue)
-        return option ? accessor(option, props.optionAttribute) : null
+        const option = props.options.find(option => (typeof option === 'object' && option !== null ? accessor(option, props.valueAttribute) : option) === toRaw(props.modelValue))
+        return typeof option === 'object' && option !== null ? accessor(option, props.optionAttribute) : null
       } else {
         return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(props.modelValue as Record<string, any>, props.optionAttribute)
       }
@@ -397,7 +397,7 @@ export default defineComponent({
       }
 
       return props.options || []
-    }, [], {
+    }, props.options || [], {
       lazy: props.searchLazy
     })
 
