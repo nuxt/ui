@@ -19,7 +19,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => qu
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)))
+const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)).map(({ icon, ...link }) => link))
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
