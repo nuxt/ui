@@ -125,7 +125,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addImportsDir(resolve('./runtime/composables'))
 
-    addTemplates(options, nuxt)
+    addTemplates(options, nuxt, resolve)
 
     if (nuxt.options.dev && nuxt.options.devtools.enabled && options.devtools?.enabled) {
       const templates = buildTemplates(options)
