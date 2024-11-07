@@ -30,6 +30,9 @@ export default {
     },
     alert: {
       close: 'Schließen'
+    },
+    table: {
+      noData: 'Keine Daten'
     }
   }
 }
