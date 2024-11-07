@@ -20,6 +20,7 @@
           >
             <slot v-if="!singleSelect && modelValue && (column.key === 'select' || shouldRenderColumnInFirstPlace(index, 'select'))" name="select-header" :indeterminate="indeterminate" :checked="isAllRowChecked" :change="onChange">
               <UCheckbox
+                v-if="!$slots['select-header']"
                 :model-value="isAllRowChecked"
                 :indeterminate="indeterminate"
                 v-bind="ui.default.checkbox"
