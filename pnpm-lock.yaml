@@ -234,17 +234,17 @@ importers:
   docs:
     dependencies:
       '@iconify-json/lucide':
+        specifier: ^1.2.12
+        version: 1.2.12
+      '@iconify-json/simple-icons':
         specifier: ^1.2.11
         version: 1.2.11
-      '@iconify-json/simple-icons':
-        specifier: ^1.2.10
-        version: 1.2.10
       '@iconify-json/vscode-icons':
         specifier: ^1.2.2
         version: 1.2.2
       '@nuxt/content':
-        specifier: 3.0.0-alpha.5
-        version: 3.0.0-alpha.5(magicast@0.3.5)(pg@8.13.1)(rollup@4.24.4)
+        specifier: 3.0.0-alpha.6
+        version: 3.0.0-alpha.6(magicast@0.3.5)(pg@8.13.1)(rollup@4.24.4)
       '@nuxt/image':
         specifier: ^1.8.1
         version: 1.8.1(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)
@@ -255,8 +255,8 @@ importers:
         specifier: https://pkg.pr.new/@nuxt/ui-pro@62862c8
         version: https://pkg.pr.new/@nuxt/ui-pro@62862c8(magicast@0.3.5)(rollup@4.24.4)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3))
       '@nuxthub/core':
-        specifier: ^0.8.5
-        version: 0.8.5(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))
+        specifier: ^0.8.6
+        version: 0.8.6(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))
       '@nuxtjs/plausible':
         specifier: ^1.0.3
         version: 1.0.3(magicast@0.3.5)(rollup@4.24.4)
@@ -301,8 +301,8 @@ importers:
         version: 3.23.8
     devDependencies:
       wrangler:
-        specifier: ^3.84.1
-        version: 3.84.1(@cloudflare/workers-types@4.20241022.0)
+        specifier: ^3.85.0
+        version: 3.85.0(@cloudflare/workers-types@4.20241022.0)
 
   playground:
     dependencies:
@@ -1228,11 +1228,11 @@ packages:
   '@iarna/toml@2.2.5':
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
 
-  '@iconify-json/lucide@1.2.11':
-    resolution: {integrity: sha512-dqpbV7+g1qqxtZOHCZKwdKhtYYqEUjFhYiOg/+PcADbjtapoL+bwa1Brn12gAHq5r2K7Mf29xRHOTmZ3UHHOrw==}
+  '@iconify-json/lucide@1.2.12':
+    resolution: {integrity: sha512-pzcEQx7LuDoBZWHS1PSdCUBGcUU7/zpu3LINNiEixMz8i1zTWoxnvA2mQMciIn+yTRk4FsjRn/tGC69Rs9mbaA==}
 
-  '@iconify-json/simple-icons@1.2.10':
-    resolution: {integrity: sha512-9OK1dsSjXlH36lhu5n+BlSoXuqFjHUErGLtNdzHpq0vHq4YFBuGYWtZ+vZTHLreRQ8ijPRv/6EsgkV+nf6AReQ==}
+  '@iconify-json/simple-icons@1.2.11':
+    resolution: {integrity: sha512-AHCGDtBRqP+JzAbBzgO8uN/08CXxEmuaC6lQQZ3b5burKhRU12AJnJczwbUw2K5Mb/U85EpSUNhYMG3F28b8NA==}
 
   '@iconify-json/vscode-icons@1.2.2':
     resolution: {integrity: sha512-bTpT0HJDRqGkxQv8oiETNHLEnBZpnA1QaRD35CQyO7M7qgWVLx2xwn/lK6e4waojmlPC3ckMBx3WFIUUn0/Jdg==}
@@ -1335,8 +1335,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nuxt/content@3.0.0-alpha.5':
-    resolution: {integrity: sha512-q1eNWF+nTVqDzdMZjwBmq2IQTGf2ycf1wcBTZg3jEBlPm0B4T8CP4p3lt3QNZUZpmihmdFbW3aggdZX07WnkGw==}
+  '@nuxt/content@3.0.0-alpha.6':
+    resolution: {integrity: sha512-vxn1iMa3YrrnYs3f9DNx9/R/AncK87kFbysNmjH634JBcLC1yCMWqCq4VvasdFx4ko3x5ip+9m9J3z3SjUaPZQ==}
     peerDependencies:
       pg: '*'
 
@@ -1458,8 +1458,8 @@ packages:
     peerDependencies:
       vue: ^3.3.4
 
-  '@nuxthub/core@0.8.5':
-    resolution: {integrity: sha512-4tKFOtsaGVonp3zLd6eeNf3acH5YmFJEEJtqRZT4WMzjkAimGQ2SNie0m86FMyRdhettVYG81X7NhgKrLtOAOw==}
+  '@nuxthub/core@0.8.6':
+    resolution: {integrity: sha512-MP/nvSCY7dHkrmnJj3LEKxBvXocw6MDwGM8nzv4iD9ZKHosex/VuY9g+TCv97PguRbE0wdlCdM+iap8Y6UAf7A==}
 
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
@@ -5139,9 +5139,6 @@ packages:
   pako@0.2.9:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
 
-  pako@2.1.0:
-    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
-
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -6824,8 +6821,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@3.84.1:
-    resolution: {integrity: sha512-w27/QpIk2qz6aMIVi9T8cDcXMvh/RXjcL+vf4o5J2GpQAE4U7wTCNHyaY9H3oTJWRN97KqCAEbiHBNtTKoUJEw==}
+  wrangler@3.85.0:
+    resolution: {integrity: sha512-r5YCWUaF4ApLnloNE6jHHgRYdFzYHoajTlC1tns42UzQ2Ls63VAqD3b0cxOqzDUfmlSb3skpmu0B0Ssi3QWPAg==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -7600,11 +7597,11 @@ snapshots:
 
   '@iarna/toml@2.2.5': {}
 
-  '@iconify-json/lucide@1.2.11':
+  '@iconify-json/lucide@1.2.12':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.10':
+  '@iconify-json/simple-icons@1.2.11':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -7738,12 +7735,13 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@nuxt/content@3.0.0-alpha.5(magicast@0.3.5)(pg@8.13.1)(rollup@4.24.4)':
+  '@nuxt/content@3.0.0-alpha.6(magicast@0.3.5)(pg@8.13.1)(rollup@4.24.4)':
     dependencies:
-      '@nuxt/kit': 3.14.0(magicast@0.3.5)(rollup@4.24.4)
+      '@nuxt/kit': 3.14.159(magicast@0.3.5)(rollup@4.24.4)
       '@nuxtjs/mdc': 0.9.2(magicast@0.3.5)(rollup@4.24.4)
       '@sqlite.org/sqlite-wasm': 3.47.0-build1
       better-sqlite3: 11.5.0
+      c12: 2.0.1(magicast@0.3.5)
       chokidar: 4.0.1
       consola: 3.2.3
       defu: 6.1.4
@@ -7761,7 +7759,6 @@ snapshots:
       micromark-util-sanitize-uri: 2.0.0
       micromatch: 4.0.8
       ohash: 1.1.4
-      pako: 2.1.0
       pathe: 1.1.2
       pg: 8.13.1
       remark-mdc: 3.2.1
@@ -8258,11 +8255,11 @@ snapshots:
       - vue-tsc
       - webpack-sources
 
-  '@nuxthub/core@0.8.5(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))':
+  '@nuxthub/core@0.8.6(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))':
     dependencies:
       '@cloudflare/workers-types': 4.20241022.0
       '@nuxt/devtools-kit': 1.6.0(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.10(@types/node@22.8.7)(lightningcss@1.28.1)(terser@5.36.0))
-      '@nuxt/kit': 3.14.0(magicast@0.3.5)(rollup@4.24.4)
+      '@nuxt/kit': 3.14.159(magicast@0.3.5)(rollup@4.24.4)
       '@uploadthing/mime-types': 0.3.1
       citty: 0.1.6
       confbox: 0.1.8
@@ -12765,8 +12762,6 @@ snapshots:
 
   pako@0.2.9: {}
 
-  pako@2.1.0: {}
-
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -14672,7 +14667,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20241022.0
       '@cloudflare/workerd-windows-64': 1.20241022.0
 
-  wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0):
+  wrangler@3.85.0(@cloudflare/workers-types@4.20241022.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@cloudflare/workers-shared': 0.7.0
