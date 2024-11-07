@@ -147,6 +147,7 @@ const slots = defineSlots<SelectMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
@@ -277,7 +278,7 @@ function onUpdateOpen(value: boolean) {
 
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
+            {{ searchTerm ? t('ui.selectMenu.noMatch') : t('ui.selectMenu.noData') }}
           </slot>
         </ComboboxEmpty>
 
