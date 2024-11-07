@@ -565,7 +565,6 @@ This slot allows you to customize the checkbox appearance in the table header fo
   <UTable v-model="selectable"> 
     <template #select-header="{ checked, change, indeterminate }">
       <!-- Place your custom component here -->
-      <!-- Example: Custom checkbox for header -->
     </template>
   </UTable>
 </template>
