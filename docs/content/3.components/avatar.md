@@ -1,5 +1,5 @@
 ---
-description: An image element with fallback.
+description: An img element with fallback and Nuxt Image support.
 links:
   - label: Avatar
     icon: i-custom-radix-vue
@@ -12,7 +12,7 @@ links:
 ## Usage
 
 ::tip
-The Avatar uses the `NuxtImg` component when `@nuxt/image` is installed, falling back to `img` otherwise.
+The Avatar uses the `NuxtImg` component when [`@nuxt/image`](https://github.com/nuxt/image) is installed, falling back to `img` otherwise.
 ::
 
 ### Src
@@ -38,6 +38,10 @@ props:
   src: 'https://github.com/benjamincanac.png'
   size: xl
 ---
+::
+
+::note
+The `<img>` element's `width` and `height` are automatically set based on the `size` prop.
 ::
 
 ### Icon
