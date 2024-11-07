@@ -76,7 +76,7 @@
 
         <template v-else>
           <template v-for="(row, index) in rows" :key="index">
-            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)">
+            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)" @contextmenu="(event) => onContextmenu(event, row)">
               <td
                 v-if="expand"
                 :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
@@ -370,6 +370,15 @@ export default defineComponent({
       $attrs.onSelect(row)
     }
 
+    function onContextmenu(event, row) {
+      if (!$attrs.onContextmenu) {
+        return
+      }
+
+      // @ts-ignore
+      $attrs.onContextmenu(event, row)
+    }
+
     function selectAllRows() {
       // Create a new array to ensure reactivity
       const newSelected = [...selected.value]
@@ -465,6 +474,7 @@ export default defineComponent({
       isSelected,
       onSort,
       onSelect,
+      onContextmenu,
       onChange,
       getRowData,
       toggleOpened,
