@@ -43,7 +43,7 @@ export function isStandardSchema(schema: any): schema is StandardSchema {
   return '~standard' in schema
 }
 
-export async function getStandardErrors(
+export async function validateStandarSchema(
   state: any,
   schema: StandardSchema
 ): Promise<ValidateReturnSchema<typeof state>> {
@@ -203,6 +203,8 @@ export function parseSchema<T extends object>(state: T, schema: FormSchema<T>): 
     return validateYupSchema(state, schema)
   } else if (isSuperStructSchema(schema)) {
     return validateSuperstructSchema(state, schema)
+  } else if (isStandardSchema(schema)) {
+    return validateStandarSchema(state, schema)
   } else {
     throw new Error('Form validation failed: Unsupported form schema')
   }
