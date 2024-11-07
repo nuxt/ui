@@ -10,6 +10,7 @@ const vueComponents = await glob('./src/runtime/vue/components/*.vue', { absolut
 export default defineConfig({
   test: {
     environment: 'happy-dom',
+    silent: true,
     include: ['./test/components/**.spec.ts'],
     setupFiles: ['./test/utils/setup.ts'],
     resolveSnapshotPath(path, extension) {
