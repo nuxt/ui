@@ -77,7 +77,7 @@ export default {
     },
     leading: {
       wrapper: 'absolute inset-y-0 start-0 flex items-center',
-      pointer: 'pointer-events-none',
+      pointer: 'pointer-events-auto',
       padding: {
         '2xs': 'px-2',
         'xs': 'px-2.5',
@@ -89,7 +89,7 @@ export default {
     },
     trailing: {
       wrapper: 'absolute inset-y-0 end-0 flex items-center',
-      pointer: 'pointer-events-none',
+      pointer: 'pointer-events-auto',
       padding: {
         '2xs': 'px-2',
         'xs': 'px-2.5',
