@@ -306,6 +306,9 @@ importers:
 
   playground:
     dependencies:
+      '@iconify-json/lucide':
+        specifier: ^1.2.11
+        version: 1.2.12
       '@nuxt/ui':
         specifier: workspace:*
         version: link:..
