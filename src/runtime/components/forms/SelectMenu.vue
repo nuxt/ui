@@ -440,11 +440,9 @@ export default defineComponent({
           return null
         }
       } else if (props.modelValue !== undefined && props.modelValue !== null) {
-        if (props.optionAttribute) {
-          return typeof selected.value === 'object' && selected.value !== null ? accessor(selected.value, props.optionAttribute) ?? null : selected.value ?? null
-        } else {
-          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(toRaw(props.modelValue) as Record<string, any>, props.optionAttribute)
-        }
+        return typeof selected.value === 'object' && selected.value !== null && props.optionAttribute
+          ? accessor(selected.value, props.optionAttribute) ?? null
+          : selected.value
       }
 
       return null
