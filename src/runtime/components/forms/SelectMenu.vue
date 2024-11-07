@@ -71,7 +71,7 @@
               v-slot="{ active, selected: optionSelected, disabled: optionDisabled }"
               :key="index"
               as="template"
-              :value="valueAttribute ? option[valueAttribute] : option"
+              :value="valueAttribute ? accessor(option, valueAttribute) : option"
               :disabled="option.disabled"
             >
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, optionSelected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
@@ -364,6 +364,9 @@ export default defineComponent({
     })
 
     const selected = computed(() => {
+      const options = props.options || []
+
+      // handle multiple modelValue options
       if (props.multiple) {
         const modelValue = props.modelValue
         if (!Array.isArray(modelValue) || !modelValue.length) {
@@ -372,34 +375,61 @@ export default defineComponent({
 
         if (props.valueAttribute) {
           if (props.by) {
-            // handle the case when the valueAttribute is an object, and we need to compare by a specific key
-            return options.value.filter(
-              option => typeof option === 'object' && option !== null
-                && typeof option[props.valueAttribute] === 'object' && option[props.valueAttribute] !== null && modelValue.some(
-                (value: any) => typeof value === 'object' && value !== null && value[props.by] === option[props.valueAttribute][props.by]
-              )
+            // array of objects compared based on the attribute provided by the `by` prop
+            return options.filter(
+              (_option) => {
+                const option = typeof _option === 'object' && _option !== null ? accessor(_option, props.valueAttribute) : null
+                return typeof option === 'object' && option !== null && modelValue.some(
+                  (value: any) => typeof value === 'object' && value !== null && value[props.by] === option[props.by]
+                )
+              }
             )
           }
 
-          // compute selected items by the valueAttribute form the options
-          return options.value.filter(option => modelValue.includes(option[props.valueAttribute]))
+          // array of items compared based on their value (or reference, in case of objects)
+          return options.filter(option =>
+            modelValue.includes(typeof option === 'object' && option !== null ? accessor(option, props.valueAttribute) : option)
+          )
         }
 
         if (props.by) {
-          return options.value.filter(
+          return options.filter(
             option => typeof option === 'object' && option !== null && modelValue.some(
               (value: any) => typeof value === 'object' && value !== null && value[props.by] === option[props.by]
             )
           )
         }
 
-        return options.value.filter(option => modelValue.includes(option))
+        return options.filter(option => modelValue.includes(option))
+      } // end of multiple modelValue options handling
+
+      // handle single modelValue option of an `object` type
+      if (typeof props.modelValue === 'object' && props.modelValue !== null) {
+        if (props.valueAttribute) {
+          if (props.by) {
+            return options.find(
+              (_option) => {
+                const option = typeof _option === 'object' && _option !== null ? accessor(_option, props.valueAttribute) : null
+                return typeof option === 'object' && option !== null && option[props.by] === props.modelValue[props.by]
+              }
+            )
+          }
+
+          return options.find(option => (typeof option === 'object' && option !== null ? accessor(option, props.valueAttribute) : option) === toRaw(props.modelValue))
+        }
+
+        if (props.by) {
+          return options.find(option => (typeof option === 'object' && option !== null ? option[props.by] : option) === props.modelValue[props.by])
+        }
       }
 
-      if (props.valueAttribute) {
-        return options.value.find(option => option[props.valueAttribute] === props.modelValue)
-      }
-      return options.value.find(option => option === props.modelValue)
+      // handle single modelValue option of a primitive type
+      return options.find(option =>
+        (typeof option === 'object' && option !== null && props.valueAttribute
+          ? accessor(option, props.valueAttribute)
+          : option
+        ) === toRaw(props.modelValue)
+      )
     })
 
     const label = computed(() => {
@@ -410,10 +440,10 @@ export default defineComponent({
           return null
         }
       } else if (props.modelValue !== undefined && props.modelValue !== null) {
-        if (props.valueAttribute) {
-          return accessor(selected.value, props.optionAttribute) ?? null
+        if (props.optionAttribute) {
+          return typeof selected.value === 'object' && selected.value !== null ? accessor(selected.value, props.optionAttribute) ?? null : selected.value ?? null
         } else {
-          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(props.modelValue as Record<string, any>, props.optionAttribute)
+          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(toRaw(props.modelValue) as Record<string, any>, props.optionAttribute)
         }
       }
 
