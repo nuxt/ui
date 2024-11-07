@@ -51,9 +51,9 @@ defineShortcuts({
     </template>
 
     <template #content>
-      <!-- <UNavigationMenu orientation="vertical" :items="items" class="-ml-2.5" />
+      <UNavigationMenu orientation="vertical" :items="links" class="-ml-2.5" />
 
-      <USeparator type="dashed" class="my-4" /> -->
+      <USeparator type="dashed" class="my-4" />
 
       <UContentNavigation :navigation="navigation" highlight />
     </template>

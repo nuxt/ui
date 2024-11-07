@@ -15,18 +15,23 @@ const { data: files } = await useAsyncData('files', () => queryCollectionSearchS
 
 const links = computed(() => [{
   label: 'Docs',
-  icon: 'i-lucide-book-open',
+  icon: 'i-lucide-square-play',
   to: '/getting-started',
   active: route.path.startsWith('/getting-started')
 }, {
   label: 'Components',
-  icon: 'i-lucide-box',
+  icon: 'i-lucide-square-code',
   to: '/components',
   active: route.path.startsWith('/components')
 }, {
   label: 'Roadmap',
   icon: 'i-lucide-map',
   to: '/roadmap'
+}, {
+  label: 'Figma',
+  icon: 'i-lucide-figma',
+  to: 'https://www.figma.com/community/file/1288455405058138934',
+  target: '_blank'
 }, {
   label: 'Releases',
   icon: 'i-lucide-rocket',
