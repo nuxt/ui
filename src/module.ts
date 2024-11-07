@@ -127,6 +127,8 @@ export default defineNuxtModule<ModuleOptions>({
 
     addTemplates(options, nuxt, resolve)
 
+    nuxt.options.vite = defu(nuxt.options?.vite, { optimizeDeps: { include: ['fast-deep-equal'] } })
+
     if (nuxt.options.dev && nuxt.options.devtools.enabled && options.devtools?.enabled) {
       const templates = buildTemplates(options)
       nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin({ resolve, templates, options })] })
