@@ -1,22 +1,27 @@
 <script lang="ts" setup>
 // Columns
-const columns = [{
-  key: 'id',
-  label: '#',
-  sortable: true
-}, {
-  key: 'title',
-  label: 'Title',
-  sortable: true
-}, {
-  key: 'completed',
-  label: 'Status',
-  sortable: true
-}, {
-  key: 'actions',
-  label: 'Actions',
-  sortable: false
-}]
+const columns = [
+  {
+    key: 'select',
+    class: 'w-2'
+  },
+  {
+    key: 'id',
+    label: '#',
+    sortable: true
+  }, {
+    key: 'title',
+    label: 'Title',
+    sortable: true
+  }, {
+    key: 'completed',
+    label: 'Status',
+    sortable: true
+  }, {
+    key: 'actions',
+    label: 'Actions',
+    sortable: false
+  }]
 
 const selectedColumns = ref(columns)
 const columnsTable = computed(() => columns.filter(column => selectedColumns.value.includes(column)))
