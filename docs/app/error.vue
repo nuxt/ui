@@ -13,33 +13,26 @@ const colorMode = useColorMode()
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
 const { data: files } = await useAsyncData('files', () => queryCollectionSearchSections('content', { ignoredTags: ['style'] }))
 
-const links = computed(() => {
-  return [{
-    label: 'Docs',
-    icon: 'i-lucide-book-open',
-    to: '/getting-started',
-    active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value?.find(item => item.path === '/pro')
-    ? [{
-        label: 'Pro',
-        icon: 'i-lucide-layers-3',
-        to: '/pro',
-        active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
-      }, {
-        label: 'Pricing',
-        icon: 'i-lucide-credit-card',
-        to: '/pro/pricing'
-      }, {
-        label: 'Templates',
-        icon: 'i-lucide-monitor',
-        to: '/pro/templates'
-      }]
-    : []), {
-    label: 'Releases',
-    icon: 'i-lucide-rocket',
-    to: '/releases'
-  }].filter(Boolean)
-})
+const links = computed(() => [{
+  label: 'Docs',
+  icon: 'i-lucide-book-open',
+  to: '/getting-started',
+  active: route.path.startsWith('/getting-started')
+}, {
+  label: 'Components',
+  icon: 'i-lucide-box',
+  to: '/components',
+  active: route.path.startsWith('/components')
+}, {
+  label: 'Roadmap',
+  icon: 'i-lucide-map',
+  to: '/roadmap'
+}, {
+  label: 'Releases',
+  icon: 'i-lucide-rocket',
+  to: 'https://github.com/nuxt/ui/releases',
+  target: '_blank'
+}].filter(Boolean))
 
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)

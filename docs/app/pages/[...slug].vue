@@ -34,7 +34,7 @@ defineOgImageComponent('Docs', {
 })
 
 const communityLinks = computed(() => [{
-  icon: 'i-lucide-square-pen',
+  icon: 'i-lucide-file-pen',
   label: 'Edit this page',
   to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
@@ -43,10 +43,6 @@ const communityLinks = computed(() => [{
   label: 'Star on GitHub',
   to: 'https://github.com/nuxt/ui',
   target: '_blank'
-}, {
-  label: 'Roadmap',
-  icon: 'i-lucide-map',
-  to: '/roadmap'
 }])
 
 // const resourcesLinks = [{
