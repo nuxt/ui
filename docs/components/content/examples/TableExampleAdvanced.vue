@@ -2,7 +2,6 @@
 // Columns
 const columns = [{
   key: 'select',
-  label: 'select',
   class: 'w-2'
 }, {
   key: 'id',
