@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import PinInput, { type PinInputProps, type PinInputSlots } from '../../src/runtime/components/PinInput.vue'
+import PinInput, { type PinInputProps } from '../../src/runtime/components/PinInput.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/pin-input'
 
@@ -27,7 +27,7 @@ describe('PinInput', () => {
     ['with defaultValue', { props: { defaultValue: ['1'] } }],
     ['with id', { props: { id: 'pin-input-id' } }],
     ['with name', { props: { name: 'pin-input' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PinInputProps, slots?: Partial<PinInputSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PinInputProps }) => {
     const html = await ComponentRender(nameOrHtml, options, PinInput)
     expect(html).toMatchSnapshot()
   })
