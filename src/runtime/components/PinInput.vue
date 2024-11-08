@@ -21,6 +21,8 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'as' | 'asChild' 
   class?: any
   ui?: PartialString<typeof pininput.slots>
 }
+
+export interface PinInputEmits extends PinInputRootEmits {}
 </script>
 
 <script setup lang="ts">
@@ -35,7 +37,7 @@ const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
   length: 5
 })
-const emits = defineEmits<PinInputRootEmits>()
+const emits = defineEmits<PinInputEmits>()
 
 const [modelValue] = defineModel<string[]>()
 
