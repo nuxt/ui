@@ -96,6 +96,7 @@
               <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, column?.rowClass, row[column.key]?.class, column.key === 'select' && ui.checkbox.padding]">
                 <slot v-if="modelValue && (column.key === 'select' || shouldRenderColumnInFirstPlace(subIndex, 'select')) " name="select-data" :checked="isSelected(row)" :change="(ev: boolean) => onChangeCheckbox(ev, row)">
                   <UCheckbox
+                    v-if="!$slots['select-data']"
                     :model-value="isSelected(row)"
                     v-bind="ui.default.checkbox"
                     aria-label="Select row"
