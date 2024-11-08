@@ -20,7 +20,7 @@ Its goal is to provide everything related to UI when building a Nuxt app. This i
 - Keyboard shortcuts
 - Bundled icons
 - Fully typed
-- [Figma Kit](https://www.figma.com/community/file/1288455405058138934)
+- [Figma Kit](https://www.figma.com/community/file/1436401057300493073)
 
 Read more on [ui.nuxt.com](https://ui.nuxt.com)
 
