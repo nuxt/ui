@@ -176,16 +176,18 @@ export default defineNuxtModule<ModuleOptions>({
 
       nuxt.options.routeRules = defu(nuxt.options.routeRules, { '/__nuxt_ui__/**': { ssr: false } })
       extendPages((pages) => {
-        pages.unshift({
-          name: 'ui-devtools',
-          path: '/__nuxt_ui__/components/:slug',
-          file: resolve('./devtools/runtime/DevtoolsRenderer.vue'),
-          meta: {
-            // https://github.com/nuxt/nuxt/pull/29366
-            //   isolate: true
-            layout: false
-          }
-        })
+        if (pages.length) {
+          pages.unshift({
+            name: 'ui-devtools',
+            path: '/__nuxt_ui__/components/:slug',
+            file: resolve('./devtools/runtime/DevtoolsRenderer.vue'),
+            meta: {
+              // https://github.com/nuxt/nuxt/pull/29366
+              // isolate: true
+              layout: false
+            }
+          })
+        }
       })
 
       addCustomTab({
