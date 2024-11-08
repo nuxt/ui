@@ -16,7 +16,7 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'as' | 'asChild' 
   color?: InputVariants['color']
   variant?: InputVariants['variant']
   size?: InputVariants['size']
-  length?: number
+  length?: number | string
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof pininput.slots>
@@ -27,13 +27,13 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'as' | 'asChild' 
 import { PinInputInput, PinInputRoot } from 'radix-vue'
 import { computed, ref } from 'vue'
 import { useFormField } from '../composables/useFormField'
+import { looseToNumber } from '../utils'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
-  autocomplete: 'off',
-  autofocusDelay: 0
+  length: 5
 })
 const emits = defineEmits<PinInputRootEmits>()
 
@@ -65,43 +65,24 @@ defineExpose({
 </script>
 
 <template>
-  <div>
-    <!-- <input
-      :id="id"
-      ref="inputRef"
-      :type="type"
-      :value="modelValue"
-      :name="name"
-      :placeholder="placeholder"
+  <PinInputRoot
+    :id="id"
+    ref="inputRef"
+    :type="type"
+    :value="modelValue"
+    :name="name"
+    :placeholder="placeholder"
+    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :disabled="disabled"
+    :required="required"
+    v-bind="$attrs"
+    @complete="onComplete"
+  >
+    <PinInputInput
+      v-for="(ids, index) in looseToNumber(props.length)"
+      :key="ids"
+      :index="index"
       :class="ui.base({ class: props.ui?.base })"
-      :disabled="disabled"
-      :required="required"
-      :autocomplete="autocomplete"
-      v-bind="$attrs"
-      @input="onInput"
-      @blur="onBlur"
-      @change="onChange"
-    > -->
-    <PinInputRoot
-      :id="id"
-      ref="inputRef"
-      :type="type"
-      :value="modelValue"
-      :name="name"
-      :placeholder="placeholder"
-      :class="ui.root({ class: [props.class, props.ui?.root] })"
-      :disabled="disabled"
-      :required="required"
-      v-bind="$attrs"
-      @complete="onComplete"
-    >
-      <PinInputInput
-        v-for="(ids, index) in 5"
-        :key="ids"
-        :index="index"
-        :class="ui.base({ class: props.ui?.base })"
-      />
-    </PinInputRoot>
-    <slot />
-  </div>
+    />
+  </PinInputRoot>
 </template>
