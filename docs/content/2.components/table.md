@@ -578,7 +578,7 @@ This slot allows you to customize the checkbox appearance in the table header fo
 | `change` | `Function` | Function to handle selection state changes. Must receive a boolean value (true/false) |
 | `indeterminate` | `Boolean` | Indicates partial selection (when some rows are selected) |
 
-#### Implementation Example
+#### Example
 ```vue
 <template>
   <UTable>
@@ -616,7 +616,7 @@ This slot allows you to customize the checkbox appearance for each row in the ta
 | `checked` | `Boolean` | Indicates if the current row is selected |
 | `change` | `Function` | Function to handle selection state changes. Must receive a boolean value (true/false) |
 
-#### Implementation Example
+#### Example
 ```vue
 <template>
   <UTable>
