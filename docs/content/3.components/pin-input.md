@@ -3,7 +3,7 @@ description: An input element to enter a pin.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Pininput.vue
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/PinInput.vue
 ---
 
 ## Usage
@@ -32,7 +32,7 @@ items:
     - text
     - number
 props:
-  type: 'number'
+  type: 'text'
 ---
 ::
 
@@ -119,9 +119,11 @@ Use the `mask` prop to treat the input like a password.
 ---
 ignore:
   - placeholder
+  - defaultValue
 props:
   mask: true
   placeholder: '0'
+  defaultValue: ['1','2','3','4','5']
 ---
 ::
 
@@ -133,6 +135,19 @@ Use the `length` prop to change the amount of inputs.
 ---
 props:
   length: 6
+---
+::
+
+### Default Value
+
+Use the `defaultValue` prop to set the default value when the inputs are rendered. The array should be the same length as the `length` prop.
+
+::component-code
+---
+ignore:
+  - defaultValue
+props:
+  defaultValue: ['1','2','3','4','5']
 ---
 ::
 
