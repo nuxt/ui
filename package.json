@@ -30,7 +30,11 @@
     "./vue-plugin": {
       "types": "./vue-plugin.d.ts"
     },
-    "./runtime/*": "./dist/runtime/*"
+    "./runtime/*": "./dist/runtime/*",
+    "./locale": {
+      "types": "./dist/runtime/locale/index.d.ts",
+      "import": "./dist/runtime/locale/index.js"
+    }
   },
   "imports": {
     "#build/ui/*": "./.nuxt/ui/*.ts"

@@ -103,6 +103,7 @@ const contentEvents = computed(() => {
 })
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 
 const ui = computed(() => modal({
   transition: props.transition,
@@ -143,7 +144,7 @@ const ui = computed(() => modal({
                     size="md"
                     color="neutral"
                     variant="ghost"
-                    aria-label="Close"
+                    :aria-label="t('ui.modal.close')"
                     v-bind="typeof close === 'object' ? close : undefined"
                     :class="ui.close({ class: props.ui?.close })"
                   />

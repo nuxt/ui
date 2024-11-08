@@ -102,6 +102,7 @@ const contentEvents = computed(() => {
 })
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 
 const ui = computed(() => slideover({
   transition: props.transition,
@@ -142,7 +143,7 @@ const ui = computed(() => slideover({
                     size="md"
                     color="neutral"
                     variant="ghost"
-                    aria-label="Close"
+                    :aria-label="t('ui.slideover.close')"
                     v-bind="typeof close === 'object' ? close : undefined"
                     :class="ui.close({ class: props.ui?.close })"
                   />

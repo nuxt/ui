@@ -144,6 +144,7 @@ const slots = defineSlots<CommandPaletteSlots<G, T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'selectedValue', 'resetSearchTermOnBlur'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon', 'placeholder'))
 
@@ -245,7 +246,7 @@ const groups = computed(() => {
               size="md"
               color="neutral"
               variant="ghost"
-              aria-label="Close"
+              :aria-label="t('ui.commandPalette.close')"
               v-bind="typeof close === 'object' ? close : undefined"
               :class="ui.close({ class: props.ui?.close })"
               @click="emits('update:open', false)"
@@ -259,7 +260,7 @@ const groups = computed(() => {
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" :dismissable="false">
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
+            {{ searchTerm ? t('ui.commandPalette.noMatch', { searchTerm }) : t('ui.commandPalette.noData') }}
           </slot>
         </ComboboxEmpty>
 
