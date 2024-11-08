@@ -2,6 +2,7 @@
 // Columns
 const columns = [{
   key: 'select',
+  label: 'select',
   class: 'w-2'
 }, {
   key: 'id',
@@ -23,6 +24,7 @@ const columns = [{
 
 const selectedColumns = ref(columns)
 const columnsTable = computed(() => columns.filter(column => selectedColumns.value.includes(column)))
+const excludeSelectColumn = computed(() => columns.filter(v => v.key !== 'select'))
 
 // Selected Rows
 const selectedRows = ref([])
@@ -156,7 +158,7 @@ const { data: todos, status } = await useLazyAsyncData<{
           </UButton>
         </UDropdown>
 
-        <USelectMenu v-model="selectedColumns" :options="columns" multiple>
+        <USelectMenu v-model="selectedColumns" :options="excludeSelectColumn" multiple>
           <UButton
             icon="i-heroicons-view-columns"
             color="gray"
