@@ -1,5 +1,4 @@
 import type { ModuleOptions } from '../module'
-import { buttonGroupVariantWithRoot } from './button-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
@@ -7,7 +6,6 @@ export default (options: Required<ModuleOptions>) => ({
     base: 'w-10 h-10 rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] text-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
   },
   variants: {
-    ...buttonGroupVariantWithRoot,
     size: {
       '2xs': {
         base: 'h-6 w-6 text-xs'
