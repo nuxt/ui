@@ -135,6 +135,7 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
+    "@nuxt/content": "3.0.0-alpha.5",
     "happy-dom": "14.12.3",
     "rollup": "^4.24.0"
   }
