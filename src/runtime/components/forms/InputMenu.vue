@@ -335,7 +335,7 @@ export default defineComponent({
         const option = options.value.find((option) => {
           const optionValue = getValue(option)
 
-          return compareValues(optionValue, toRaw(props.modelValue))
+          return compareValues(optionValue, getValue(props.modelValue))
         })
 
         return option ? accessor(option, props.optionAttribute) : null
