@@ -48,7 +48,7 @@
               v-slot="{ active, selected, disabled: optionDisabled }"
               :key="index"
               as="template"
-              :value="valueAttribute ? option[valueAttribute] : option"
+              :value="valueAttribute ? accessor(option, valueAttribute) : option"
               :disabled="option.disabled"
             >
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, selected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
@@ -104,6 +104,7 @@ import {
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
+import { isEqual } from 'ohash'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
@@ -308,8 +309,35 @@ export default defineComponent({
         return
       }
 
+      function getValue(value: any) {
+        if (typeof value !== 'object' || value === null) {
+          return value
+        }
+        if (props.valueAttribute) {
+          return accessor(value, props.valueAttribute)
+        }
+
+        if (props.by) {
+          return value[props.by]
+        }
+
+        return value
+      }
+
+      function compareValues(value1: any, value2: any) {
+        if (props.by && typeof value1 === 'object' && typeof value2 === 'object') {
+          return isEqual(value1[props.by], value2[props.by])
+        }
+        return isEqual(value1, value2)
+      }
+
       if (props.valueAttribute) {
-        const option = options.value.find(option => option[props.valueAttribute] === props.modelValue)
+        const option = options.value.find((option) => {
+          const optionValue = getValue(option)
+
+          return compareValues(optionValue, toRaw(props.modelValue))
+        })
+
         return option ? accessor(option, props.optionAttribute) : null
       } else {
         return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(props.modelValue as Record<string, any>, props.optionAttribute)

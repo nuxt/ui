@@ -367,14 +367,19 @@ export default defineComponent({
     const selected = computed(() => {
       const options = props.options || []
 
+      function compareValues(value1: any, value2: any) {
+        if (props.by && typeof value1 === 'object' && typeof value2 === 'object') {
+          return isEqual(value1[props.by], value2[props.by])
+        }
+        return isEqual(value1, value2)
+      }
+
       function getValue(value: any) {
         if (typeof value !== 'object' || value === null) {
           return value
         }
+
         if (props.valueAttribute) {
-          if (props.by) {
-            return accessor(value, props.valueAttribute)[props.by]
-          }
           return accessor(value, props.valueAttribute)
         }
 
@@ -385,13 +390,6 @@ export default defineComponent({
         return value
       }
 
-      function compareValues(value1: any, value2: any) {
-        if (props.by && typeof value1 === 'object' && typeof value2 === 'object') {
-          return isEqual(value1[props.by], value2[props.by])
-        }
-        return isEqual(value1, value2)
-      }
-
       if (props.multiple) {
         const modelValue = props.modelValue
         if (!Array.isArray(modelValue) || !modelValue.length) {
@@ -400,14 +398,13 @@ export default defineComponent({
 
         return options.filter((option) => {
           const optionValue = getValue(option)
-          return modelValue.some(value => compareValues(getValue(value), optionValue))
+          return modelValue.some(value => compareValues(toRaw(value), optionValue))
         })
       }
 
       return options.find((option) => {
         const optionValue = getValue(option)
-        const getModelValue = getValue(toRaw(props.modelValue))
-        return compareValues(optionValue, getModelValue)
+        return compareValues(optionValue, toRaw(props.modelValue))
       })
     })
 
@@ -509,7 +506,7 @@ export default defineComponent({
       }
 
       return props.options || []
-    }, props.options || [], {
+    }, [], {
       lazy: props.searchableLazy
     })
 
