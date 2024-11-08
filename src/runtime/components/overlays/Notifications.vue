@@ -1,6 +1,6 @@
 <template>
-  <Teleport v-if="notifications.length" to="body">
-    <div :class="wrapperClass" role="region" v-bind="attrs">
+  <Teleport to="body">
+    <div v-if="notifications.length" :class="wrapperClass" role="region" v-bind="attrs">
       <div :class="ui.container">
         <div v-for="notification of notifications" :key="notification.id">
           <UNotification
