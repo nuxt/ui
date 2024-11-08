@@ -30,7 +30,7 @@ const components = [
   'modal',
   'navigation-menu',
   'pagination',
-  'pin-input',
+  'pininput',
   'popover',
   'progress',
   'radio-group',

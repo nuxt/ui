@@ -4,7 +4,7 @@ import { buttonGroupVariantWithRoot } from './button-group'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex gap-2 items-center mt-1',
-    base: ['w-10 h-10 rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] text-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors']
+    base: 'w-10 h-10 rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] text-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
   },
   variants: {
     ...buttonGroupVariantWithRoot,
@@ -28,7 +28,7 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'h-11 w-11 text-base'
       },
       '2xl': {
-        base: 'h-12 w-12 text-base'
+        base: 'h-12 w-12 text-lg'
       }
     },
     variant: {
