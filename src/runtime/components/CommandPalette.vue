@@ -260,7 +260,7 @@ const groups = computed(() => {
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" :dismissable="false">
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? t('ui.commandPalette.noMatch') : t('ui.commandPalette.noData') }}
+            {{ searchTerm ? t('ui.commandPalette.noMatch', { search: searchTerm }) : t('ui.commandPalette.noData') }}
           </slot>
         </ComboboxEmpty>
 

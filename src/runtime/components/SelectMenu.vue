@@ -286,7 +286,7 @@ function onUpdateOpen(value: boolean) {
 
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? t('ui.selectMenu.noMatch') : t('ui.selectMenu.noData') }}
+            {{ searchTerm ? t('ui.selectMenu.noMatch', { search: searchTerm }) : t('ui.selectMenu.noData') }}
           </slot>
         </ComboboxEmpty>
 
