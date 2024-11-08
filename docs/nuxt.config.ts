@@ -57,6 +57,7 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { redirect: '/getting-started', prerender: false },
     '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
+    '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
     '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
     '/components': { redirect: '/components/app', prerender: false }
   },

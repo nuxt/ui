@@ -1,4 +1,4 @@
-import type { StandardSchema } from '@standard-schema/spec'
+import type { v1 } from '@standard-schema/spec'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
@@ -94,15 +94,15 @@ export async function getValibotErrors(
   })) || []
 }
 
-export function isStandardSchema(schema: any): schema is StandardSchema {
+export function isStandardSchema(schema: any): schema is v1.StandardSchema {
   return '~standard' in schema
 }
 
 export async function getStandardErrors(
   state: any,
-  schema: StandardSchema
+  schema: v1.StandardSchema
 ): Promise<FormError[]> {
-  const result = await schema['~validate']({ value: state })
+  const result = await schema['~standard'].validate(state)
   return result.issues?.map(issue => ({
     name: issue.path?.map(item => typeof item === 'object' ? item.key : item).join('.') || '',
     message: issue.message

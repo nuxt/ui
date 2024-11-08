@@ -141,6 +141,7 @@ import { get, escapeRegExp } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
+import { useLocale } from '../composables/useLocale'
 
 defineOptions({ inheritAttrs: false })
 
@@ -157,6 +158,7 @@ const slots = defineSlots<InputMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
@@ -347,7 +349,7 @@ defineExpose({
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
+            {{ searchTerm ? t('ui.inputMenu.noMatch', { searchTerm }) : t('ui.inputMenu.noData') }}
           </slot>
         </ComboboxEmpty>
 
