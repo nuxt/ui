@@ -157,9 +157,11 @@ const slots = defineSlots<InputMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+// This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
+const multiple = toRef(() => typeof props.multiple === 'string' ? true : props.multiple)
 
 const { emitFormBlur, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -175,7 +177,7 @@ const ui = computed(() => inputMenu({
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  multiple: props.multiple,
+  multiple: multiple.value,
   buttonGroup: orientation.value
 }))
 
@@ -269,6 +271,7 @@ defineExpose({
     v-model:search-term="searchTerm"
     :name="name"
     :disabled="disabled"
+    :multiple="multiple"
     :display-value="displayValue"
     :filter-function="filterFunction"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
