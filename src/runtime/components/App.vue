@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
-import type { ToasterProps, Language } from '../types'
+import type { ToasterProps, Locale } from '../types'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
-  locale?: Language
+  locale?: Locale
 }
 
 export interface AppSlots {

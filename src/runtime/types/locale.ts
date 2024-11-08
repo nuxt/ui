@@ -1,8 +1,40 @@
-export type TranslatePair = {
-  [key: string]: string | string[] | TranslatePair
+export type LocalePair = {
+  inputMenu: {
+    noMatch: string
+    noData: string
+  }
+  commandPalette: {
+    noMatch: string
+    noData: string
+    close: string
+  }
+  selectMenu: {
+    noMatch: string
+    noData: string
+  }
+  toast: {
+    close: string
+  }
+  carousel: {
+    prev: string
+    next: string
+    goto: string
+  }
+  modal: {
+    close: string
+  }
+  slideover: {
+    close: string
+  }
+  alert: {
+    close: string
+  }
+  table: {
+    noData: string
+  }
 }
 
-export type Language = {
+export type Locale = {
   name: string
-  ui: TranslatePair
+  ui: LocalePair
 }
