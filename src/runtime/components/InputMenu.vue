@@ -92,7 +92,7 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof T
+  labelKey?: V
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -149,7 +149,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, I, V, M>>(), {
   autofocusDelay: 0,
   portal: true,
   filter: () => ['label'],
-  labelKey: 'label' as keyof T
+  labelKey: 'label' as never
 })
 const emits = defineEmits<InputMenuEmits<T, V, M>>()
 const slots = defineSlots<InputMenuSlots<T>>()

@@ -70,7 +70,7 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: SelectItemKey<T>
+  labelKey?: V
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
