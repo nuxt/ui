@@ -19,14 +19,14 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => qu
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)))
+const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)).map(({ icon, ...link }) => link))
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
   title: typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title,
   ogTitle: `${typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title} - Nuxt UI v3`,
-  description: page.value.seo?.description || page.value.description,
-  ogDescription: page.value.seo?.description || page.value.description
+  description: page.value.description,
+  ogDescription: page.value.description
 })
 
 defineOgImageComponent('Docs', {
@@ -34,7 +34,7 @@ defineOgImageComponent('Docs', {
 })
 
 const communityLinks = computed(() => [{
-  icon: 'i-lucide-square-pen',
+  icon: 'i-lucide-file-pen',
   label: 'Edit this page',
   to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
@@ -43,10 +43,6 @@ const communityLinks = computed(() => [{
   label: 'Star on GitHub',
   to: 'https://github.com/nuxt/ui',
   target: '_blank'
-}, {
-  label: 'Roadmap',
-  icon: 'i-lucide-map',
-  to: '/roadmap'
 }])
 
 // const resourcesLinks = [{

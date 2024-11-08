@@ -2,7 +2,7 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
-defineProps<{
+const props = defineProps<{
   links: NavigationMenuItem[]
 }>()
 
@@ -10,7 +10,7 @@ const config = useRuntimeConfig().public
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-// const items = computed(() => props.links.map(({ icon, ...link }) => link))
+const items = computed(() => props.links.map(({ icon, ...link }) => link))
 
 defineShortcuts({
   meta_g: () => {
@@ -29,7 +29,7 @@ defineShortcuts({
       </NuxtLink>
     </template>
 
-    <!-- <UNavigationMenu :items="items" variant="link" /> -->
+    <UNavigationMenu :items="items" variant="link" />
 
     <template #right>
       <ThemePicker />
@@ -51,9 +51,9 @@ defineShortcuts({
     </template>
 
     <template #content>
-      <!-- <UNavigationMenu orientation="vertical" :items="items" class="-ml-2.5" />
+      <UNavigationMenu orientation="vertical" :items="links" class="-ml-2.5" />
 
-      <USeparator type="dashed" class="my-4" /> -->
+      <USeparator type="dashed" class="my-4" />
 
       <UContentNavigation :navigation="navigation" highlight />
     </template>
