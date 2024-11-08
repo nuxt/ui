@@ -1,5 +1,6 @@
 import { arrow } from '../popper'
 import inputMenu from './inputMenu'
+import input from './input'
 
 export default {
   ...inputMenu,
@@ -19,6 +20,18 @@ export default {
   },
   popper: {
     placement: 'bottom-end'
+  },
+  icon: {
+    ...input.icon,
+    leading: {
+      ...input.icon.leading,
+      pointer: 'pointer-events-auto'
+    },
+    trailing: {
+      ...input.icon.trailing,
+      pointer: 'pointer-events-auto'
+    }
+
   },
   default: {
     selectedIcon: 'i-heroicons-check-20-solid',

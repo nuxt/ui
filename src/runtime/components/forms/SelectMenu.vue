@@ -441,9 +441,9 @@ export default defineComponent({
 
     const leadingWrapperIconClass = computed(() => {
       return twJoin(
-        ui.value.icon.leading.wrapper,
-        ui.value.icon.leading.pointer,
-        ui.value.icon.leading.padding[size.value]
+        uiMenu.value.icon.leading.wrapper,
+        uiMenu.value.icon.leading.pointer,
+        uiMenu.value.icon.leading.padding[size.value]
       )
     })
 
@@ -458,9 +458,9 @@ export default defineComponent({
 
     const trailingWrapperIconClass = computed(() => {
       return twJoin(
-        ui.value.icon.trailing.wrapper,
-        ui.value.icon.trailing.pointer,
-        ui.value.icon.trailing.padding[size.value]
+        uiMenu.value.icon.trailing.wrapper,
+        uiMenu.value.icon.trailing.pointer,
+        uiMenu.value.icon.trailing.padding[size.value]
       )
     })
 
