@@ -138,6 +138,7 @@ import type { PropType, AriaAttributes } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { useVModel } from '@vueuse/core'
+import { isEqual } from 'ohash'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import UProgress from '../elements/Progress.vue'
@@ -152,7 +153,7 @@ import { table } from '#ui/ui.config'
 const config = mergeConfig<typeof table>(appConfig.ui.strategy, appConfig.ui.table, table)
 
 function defaultComparator<T>(a: T, z: T): boolean {
-  return JSON.stringify(a) === JSON.stringify(z)
+  return isEqual(a, z)
 }
 
 function defaultSort(a: any, b: any, direction: 'asc' | 'desc') {
@@ -165,6 +166,14 @@ function defaultSort(a: any, b: any, direction: 'asc' | 'desc') {
   } else {
     return a > b ? -1 : 1
   }
+}
+
+function getStringifiedSet(arr: TableRow[]) {
+  return new Set(arr.map(item => JSON.stringify(item)))
+}
+
+function accessor<T extends Record<string, any>>(key: string) {
+  return (obj: T) => get(obj, key)
 }
 
 export default defineComponent({
@@ -304,8 +313,6 @@ export default defineComponent({
       }
     })
 
-    const getStringifiedSet = (arr: TableRow[]) => new Set(arr.map(item => JSON.stringify(item)))
-
     const totalRows = computed(() => props.rows.length)
 
     const countCheckedRow = computed(() => {
@@ -338,10 +345,6 @@ export default defineComponent({
         return accesorFn(a) === accesorFn(z)
       }
       return props.by(a, z)
-    }
-
-    function accessor<T extends Record<string, any>>(key: string) {
-      return (obj: T) => get(obj, key)
     }
 
     function isSelected(row: TableRow) {
