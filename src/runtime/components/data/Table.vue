@@ -221,7 +221,7 @@ export default defineComponent({
       default: false
     },
     loadingState: {
-      type: Object as PropType<{ icon: string, label: string }>,
+      type: Object as PropType<{ icon: string, label: string } | null>,
       default: () => config.default.loadingState
     },
     emptyState: {
