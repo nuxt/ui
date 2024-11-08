@@ -1,4 +1,4 @@
-import { defineLocale } from '../utils/locale'
+import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale('English', {
   inputMenu: {

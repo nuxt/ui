@@ -1,5 +1,5 @@
 import type { Ref } from 'vue'
-import type { Locale, LocalePair } from '../types/locale'
+import type { Locale } from '../types/locale'
 import type { MaybeRef } from '@vueuse/core'
 import { computed, isRef, ref, unref } from 'vue'
 import { get } from './index'
@@ -33,12 +33,5 @@ export function buildLocaleContext(locale: MaybeRef<Locale>): LocaleContext {
     lang,
     locale: localeRef,
     t: buildTranslator(locale)
-  }
-}
-
-export function defineLocale(name: string, pair: LocalePair): Locale {
-  return {
-    name,
-    ui: pair
   }
 }
