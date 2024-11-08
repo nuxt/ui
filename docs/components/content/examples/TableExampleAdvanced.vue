@@ -1,11 +1,9 @@
 <script lang="ts" setup>
 // Columns
-const columns = [
-  {
+const columns = [{
     key: 'select',
     class: 'w-2'
-  },
-  {
+  }, {
     key: 'id',
     label: '#',
     sortable: true
