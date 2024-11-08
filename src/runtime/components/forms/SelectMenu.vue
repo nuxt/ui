@@ -41,8 +41,11 @@
           </slot>
 
           <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
-            <slot name="trailing" :selected="selected" :disabled="disabled" :loading="loading">
-              <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
+            <slot
+              name="trailing"
+              v-bind="trailingSlotProps()"
+            >
+              <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" @click="onClear" />
             </slot>
           </span>
         </button>
@@ -332,9 +335,21 @@ export default defineComponent({
     uiMenu: {
       type: Object as PropType<DeepPartial<typeof configMenu> & { strategy?: Strategy }>,
       default: () => ({})
+    },
+    clearable: {
+      type: Boolean,
+      default: false
+    },
+    clearableIcon: {
+      type: String,
+      default: () => config.default.clerableIcon
+    },
+    closeOnClear: {
+      type: Boolean,
+      default: () => configMenu.default.closeOnClear
     }
   },
-  emits: ['update:modelValue', 'update:query', 'open', 'close', 'change'],
+  emits: ['update:modelValue', 'update:query', 'open', 'close', 'change', 'clear'],
   setup(props, { emit, slots }) {
     if (import.meta.dev && props.multiple && !Array.isArray(props.modelValue)) {
       console.warn(`[@nuxt/ui] The USelectMenu components needs to have a modelValue of type Array when using the multiple prop. Got '${typeof props.modelValue}' instead.`, props.modelValue)
@@ -431,7 +446,12 @@ export default defineComponent({
       return props.leadingIcon || props.icon
     })
 
+    const canClearValue = computed(() => props.clearable && (Array.isArray(selected.value) ? selected.value.length > 0 : !!selected.value))
+
     const trailingIconName = computed(() => {
+      if (canClearValue.value) {
+        return props.clearableIcon
+      }
       if (props.loading && !isLeading.value) {
         return props.loadingIcon
       }
@@ -534,7 +554,7 @@ export default defineComponent({
       return ['string', 'number'].includes(typeof props.modelValue) ? query.value : { [props.optionAttribute]: query.value }
     })
 
-    function clearOnClose() {
+    function handleClearSearchOnClose() {
       if (props.clearSearchOnClose) {
         query.value = ''
       }
@@ -544,7 +564,7 @@ export default defineComponent({
       if (value) {
         emit('open')
       } else {
-        clearOnClose()
+        handleClearSearchOnClose()
         emit('close')
         emitFormBlur()
       }
@@ -562,6 +582,31 @@ export default defineComponent({
 
     function onQueryChange(event: any) {
       query.value = event.target.value
+    }
+
+    function onClear(e: Event) {
+      if (canClearValue.value) {
+        if (!props.closeOnClear) {
+          e.stopPropagation()
+        }
+        emit('update:modelValue', props.multiple ? [] : null)
+        emit('clear')
+        emitFormChange()
+      }
+    }
+
+    function trailingSlotProps() {
+      const slotProps: Record<string, any> = {
+        selected: selected.value,
+        loading: props.loading,
+        disabled: props.disabled
+      }
+
+      if (props.clearable) {
+        slotProps.onClear = onClear
+      }
+
+      return slotProps
     }
 
     provideUseId(() => useId())
@@ -583,6 +628,7 @@ export default defineComponent({
       label,
       accessor,
       isLeading,
+      onClear,
       isTrailing,
       // eslint-disable-next-line vue/no-dupe-keys
       selectClass,
@@ -597,7 +643,8 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       query,
       onUpdate,
-      onQueryChange
+      onQueryChange,
+      trailingSlotProps
     }
   }
 })
