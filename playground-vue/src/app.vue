@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { splitByCase, upperFirst } from 'scule'
-import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { reactive, ref } from 'vue'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore included for compatibility with Nuxt playground
