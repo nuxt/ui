@@ -479,7 +479,6 @@ export default defineComponent({
     const trailingWrapperIconClass = computed(() => {
       return twJoin(
         ui.value.icon.trailing.wrapper,
-        ui.value.icon.trailing.pointer,
         ui.value.icon.trailing.padding[size.value]
       )
     })
@@ -586,7 +585,7 @@ export default defineComponent({
 
     function onClear(e: Event) {
       if (canClearValue.value) {
-        if (!props.closeOnClear) {
+        if (container.value && !props.closeOnClear) {
           e.stopPropagation()
         }
         emit('update:modelValue', props.multiple ? [] : null)
