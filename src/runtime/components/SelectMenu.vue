@@ -170,10 +170,14 @@ const ui = computed(() => selectMenu({
 
 function displayValue(value: T | T[]): string {
   if (props.multiple && Array.isArray(value)) {
-    return value.map(v => displayValue(v)).join(', ')
+    return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
 
-  const item = items.value.find(item => props.valueKey ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
+  if (!props.valueKey) {
+    return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
+  }
+
+  const item = items.value.find(item => isEqual(get(item as Record<string, any>, props.valueKey as string), value))
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }

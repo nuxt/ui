@@ -179,13 +179,17 @@ const ui = computed(() => inputMenu({
   buttonGroup: orientation.value
 }))
 
-function displayValue(value: AcceptableValue): string {
-  const item = items.value.find(item => props.valueKey ? isEqual(get(item as Record<string, any>, props.valueKey as string), value) : isEqual(item, value))
+function displayValue(value: T): string {
+  if (!props.valueKey) {
+    return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
+  }
+
+  const item = items.value.find(item => isEqual(get(item as Record<string, any>, props.valueKey as string), value))
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
-function filterFunction(items: ArrayOrWrapped<AcceptableValue>, searchTerm: string): ArrayOrWrapped<AcceptableValue> {
+function filterFunction(items: ArrayOrWrapped<T>, searchTerm: string): ArrayOrWrapped<T> {
   if (props.filter === false) {
     return items
   }
