@@ -196,7 +196,7 @@ provide(formOptionsInjectionKey, computed(() => ({
   validateOnInputDelay: props.validateOnInputDelay
 })))
 
-defineExpose<Form<T>>({
+defineExpose<{ $el: HTMLFormElement | HTMLDivElement } & Form<T>>({
   validate: _validate,
   errors,
 
@@ -230,7 +230,7 @@ defineExpose<Form<T>>({
   },
 
   disabled
-})
+} as { $el: HTMLFormElement | HTMLDivElement } & Form<T>)
 </script>
 
 <template>
