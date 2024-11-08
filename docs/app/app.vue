@@ -81,6 +81,11 @@ const updatedNavigation = computed(() => navigation.value?.map(item => ({
       title: 'Installation',
       active: route.path.startsWith('/getting-started/installation'),
       children: []
+    }),
+    ...(child.path === '/getting-started/i18n' && {
+      title: 'I18n',
+      active: route.path.startsWith('/getting-started/i18n'),
+      children: []
     })
   })) || []
 })))
