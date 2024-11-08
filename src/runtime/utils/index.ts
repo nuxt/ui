@@ -55,34 +55,6 @@ export function set(object: Record<string, any>, path: (string | number)[] | str
   }, object)
 }
 
-export function isEqual(a: any, b: any): boolean {
-  // Handle primitive types and referential equality
-  if (a === b) return true
-
-  // Handle null/undefined cases
-  if (a == null || b == null) return a === b
-
-  // Handle different types
-  if (typeof a !== typeof b) return false
-
-  // Handle arrays
-  if (Array.isArray(a) && Array.isArray(b)) {
-    if (a.length !== b.length) return false
-    return a.every((item, index) => isEqual(item, b[index]))
-  }
-
-  // Handle objects
-  if (typeof a === 'object') {
-    const keysA = Object.keys(a)
-    const keysB = Object.keys(b)
-
-    if (keysA.length !== keysB.length) return false
-    return keysA.every(key => key in b && isEqual(a[key], b[key]))
-  }
-
-  return false
-}
-
 export function looseToNumber(val: any): any {
   const n = Number.parseFloat(val)
   return Number.isNaN(n) ? val : n
