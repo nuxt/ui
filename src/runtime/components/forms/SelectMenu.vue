@@ -398,7 +398,7 @@ export default defineComponent({
 
         return options.filter((option) => {
           const optionValue = getValue(option)
-          return modelValue.some(value => compareValues(getValue(value), optionValue))
+          return modelValue.some(value => compareValues(value, optionValue))
         })
       }
 
