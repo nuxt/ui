@@ -10,12 +10,12 @@ const appConfig = _appConfig as AppConfig & { ui: { pininput: Partial<typeof the
 
 const pininput = tv({ extend: tv(theme), ...(appConfig.ui?.pininput || {}) })
 
-type InputVariants = VariantProps<typeof pininput>
+type PinInputVariants = VariantProps<typeof pininput>
 
 export interface PinInputProps extends Pick<PinInputRootProps, 'as' | 'asChild' | 'defaultValue' | 'dir' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
-  color?: InputVariants['color']
-  variant?: InputVariants['variant']
-  size?: InputVariants['size']
+  color?: PinInputVariants['color']
+  variant?: PinInputVariants['variant']
+  size?: PinInputVariants['size']
   length?: number | string
   highlight?: boolean
   class?: any
@@ -25,7 +25,7 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'as' | 'asChild' 
 
 <script setup lang="ts">
 import { PinInputInput, PinInputRoot } from 'radix-vue'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 
@@ -44,37 +44,36 @@ const { emitFormChange, size: formGroupSize, color, id, name, highlight, disable
 const inputSize = computed(() => formGroupSize.value)
 
 const ui = computed(() => pininput({
-  type: props.type as InputVariants['type'],
+  type: props.type as PinInputVariants['type'],
   color: color.value,
   variant: props.variant,
   size: inputSize?.value,
   highlight: highlight.value
 }))
 
-const inputRef = ref<HTMLInputElement | null>(null)
-
-// Custom function to handle the v-model properties
 function onComplete(value: string[]) {
   modelValue.value = value
   emitFormChange()
   emits('complete', modelValue.value)
 }
-defineExpose({
-  inputRef
-})
 </script>
 
 <template>
   <PinInputRoot
     :id="id"
-    ref="inputRef"
-    :type="type"
+    :as="as"
+    :as-child="asChild"
+    :default-value="defaultValue"
+    :dir="dir"
+    :disabled="disabled"
+    :mask="mask"
     :value="modelValue"
     :name="name"
+    :otp="otp"
     :placeholder="placeholder"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
-    :disabled="disabled"
     :required="required"
+    :type="type"
+    :class="ui.root({ class: [props.class, props.ui?.root] })"
     v-bind="$attrs"
     @complete="onComplete"
   >
