@@ -114,6 +114,7 @@ import { upperFirst } from 'scule'
 const props = defineProps<TableProps<T>>()
 defineSlots<TableSlots<T>>()
 
+const { t } = useLocale()
 const data = computed(() => props.data ?? [])
 const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 
@@ -231,7 +232,7 @@ defineExpose({
         <tr v-else :class="ui.tr({ class: [props.ui?.tr] })">
           <td :colspan="columns?.length" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
-              No results
+              {{ t('ui.table.noData') }}
             </slot>
           </td>
         </tr>

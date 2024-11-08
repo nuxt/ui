@@ -8,7 +8,9 @@ const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
-const { data: files } = await useAsyncData('files', () => queryCollectionSearchSections('content', { ignoredTags: ['style'] }))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+  server: false
+})
 
 const searchTerm = ref('')
 
@@ -78,6 +80,11 @@ const updatedNavigation = computed(() => navigation.value?.map(item => ({
     ...(child.path === '/getting-started/installation' && {
       title: 'Installation',
       active: route.path.startsWith('/getting-started/installation'),
+      children: []
+    }),
+    ...(child.path === '/getting-started/i18n' && {
+      title: 'I18n',
+      active: route.path.startsWith('/getting-started/i18n'),
       children: []
     })
   })) || []
