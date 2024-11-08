@@ -2,16 +2,16 @@ export default {
   name: 'Deutsch',
   ui: {
     inputMenu: {
-      noMatch: 'Nichts gefunden.',
+      noMatch: 'Nichts gefunden',
       noData: 'Keine Daten'
     },
     commandPalette: {
-      noMatch: 'Nichts gefunden.',
+      noMatch: 'Nichts gefunden',
       noData: 'Keine Daten',
       close: 'Schließen'
     },
     selectMenu: {
-      noMatch: 'Nichts gefunden.',
+      noMatch: 'Nichts gefunden',
       noData: 'Keine Daten'
     },
     toast: {
