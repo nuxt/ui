@@ -23,7 +23,6 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'as' | 'asChild' 
 }
 
 export interface PinInputEmits extends PinInputRootEmits {}
-export interface PinInputSlots {}
 </script>
 
 <script setup lang="ts">
@@ -38,7 +37,7 @@ const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
   length: 5
 })
-// const slots = defineSlots<PinInputSlots>()
+
 const emits = defineEmits<PinInputEmits>()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'asChild', 'defaultValue', 'dir', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'placeholder', 'required', 'type'), emits)
 

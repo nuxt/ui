@@ -21,6 +21,17 @@ props:
 ---
 ::
 
+Use the `defaultValue` prop to set the initial value when you do not need to control its state. The array should be the same length as the `length` prop.
+
+::component-code
+---
+ignore:
+  - defaultValue
+props:
+  defaultValue: ['1','2','3','4','5']
+---
+::
+
 ### Type
 
 Use the `type` prop to change the input type. Defaults to `text`.
@@ -135,19 +146,6 @@ Use the `length` prop to change the amount of inputs.
 ---
 props:
   length: 6
----
-::
-
-### Default Value
-
-Use the `defaultValue` prop to set the default value when the inputs are rendered. The array should be the same length as the `length` prop.
-
-::component-code
----
-ignore:
-  - defaultValue
-props:
-  defaultValue: ['1','2','3','4','5']
 ---
 ::
 
