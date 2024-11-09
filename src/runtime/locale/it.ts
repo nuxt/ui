@@ -19,7 +19,7 @@ export default defineLocale('Italiano', {
   },
   carousel: {
     prev: 'Precedente',
-    next: 'Successivo',
+    next: 'Successiva',
     goto: 'Vai alla slide {slide}'
   },
   modal: {
