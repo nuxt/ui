@@ -164,7 +164,7 @@ const code = computed(() => {
         continue
       }
 
-      code += ` ${prop?.type.includes('number') ? ':' : ''}${name}="${value}"`
+      code += ` ${typeof value === 'number' ? ':' : ''}${name}="${value}"`
     }
   }
 
