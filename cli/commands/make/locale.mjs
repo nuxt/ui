@@ -26,11 +26,12 @@ export default defineCommand({
     const originLocaleFilePath = resolve(localePath, 'en.ts')
     const newLocaleFilePath = resolve(localePath, `${args.code}.ts`)
 
+    // Validate locale code
     if (existsSync(newLocaleFilePath)) {
-      throw new Error(`🚨 ${args.code} already exists!`)
+      consola.error(`🚨 ${args.code} already exists!`)
+      process.exit(1)
     }
 
-    // Validate locale code
     if (!args.code.match(/^[a-z]{2}(?:_[a-z]{2,4})?$/)) {
       consola.error(`🚨 ${args.code} is not a valid locale code!\nExample: en or en_us`)
       process.exit(1)
