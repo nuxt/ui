@@ -11,40 +11,40 @@ const onComplete = (e: string[]) => {
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4">
-      <UPinInput type="number" placeholder="0" @complete="onComplete" />
+    <div class="flex gap-4">
+      <UPinInput placeholder="○" autofocus @complete="onComplete" />
     </div>
-    <div class="flex items-center gap-12">
-      <UPinInput v-for="variant in variants" :key="variant" placeholder="0" :variant="variant" />
+    <div class="flex items-center gap-4">
+      <UPinInput v-for="variant in variants" :key="variant" placeholder="○" :variant="variant" />
     </div>
-    <div class="flex items-center gap-12">
+    <div class="flex items-center gap-4">
       <UPinInput
         v-for="variant in variants"
         :key="variant"
-        placeholder="0"
+        placeholder="○"
         :variant="variant"
         color="neutral"
       />
     </div>
-    <div class="flex items-center gap-12">
+    <div class="flex items-center gap-4">
       <UPinInput
         v-for="variant in variants"
         :key="variant"
-        placeholder="0"
+        placeholder="○"
         :variant="variant"
         color="error"
         highlight
       />
     </div>
     <div class="flex flex-col gap-4">
-      <UPinInput placeholder="0" disabled />
-      <UPinInput placeholder="0" required />
+      <UPinInput placeholder="○" disabled />
+      <UPinInput placeholder="○" required />
     </div>
     <div class="flex items-center gap-4">
       <UPinInput
         v-for="size in sizes"
         :key="size"
-        placeholder="0"
+        placeholder="○"
         :size="size"
       />
     </div>
