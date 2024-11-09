@@ -31,7 +31,7 @@ export default defineCommand({
     }
 
     // Validate locale code
-    if (!args.code.match(/^[a-z]{2}(?:-[a-z]{2})?$/)) {
+    if (!args.code.match(/^[a-z]{2}(?:-[a-z]{2,4})?$/)) {
       consola.error(`🚨 ${args.code} is not a valid locale code!\nExample: en or en-us`)
       process.exit(1)
     }
