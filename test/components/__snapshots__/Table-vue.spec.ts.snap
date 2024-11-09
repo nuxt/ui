@@ -1243,7 +1243,7 @@ exports[`Table > renders without results correctly 1`] = `
     </thead>
     <tbody class="divide-y divide-[var(--ui-border)]">
       <tr class="data-[selected=true]:bg-[var(--ui-bg-elevated)]/50">
-        <td colspan="0" class="py-6 text-center text-sm text-[var(--ui-text-muted)]"> No results </td>
+        <td colspan="0" class="py-6 text-center text-sm text-[var(--ui-text-muted)]">No data</td>
       </tr>
     </tbody>
   </table>

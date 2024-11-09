@@ -1,9 +1,10 @@
 ---
 title: CommandPalette
-description: A command palette with full-text search powered by [Fuse.js](https://fusejs.io/) for efficient fuzzy matching.
-seo:
-  description: A command palette with full-text search powered by Fuse.js for efficient fuzzy matching.
+description: A command palette with full-text search powered by Fuse.js for efficient fuzzy matching.
 links:
+  - label: Fuse.js
+    to: https://fusejs.io/
+    target: _blank
   - label: Combobox
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/combobox.html

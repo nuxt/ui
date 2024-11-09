@@ -1,5 +1,45 @@
 # Changelog
 
+## [3.0.0-alpha.8](https://github.com/nuxt/ui/compare/v3.0.0-alpha.7...v3.0.0-alpha.8) (2024-11-07)
+
+### ⚠ BREAKING CHANGES
+
+* **theme:** migrate from `heroicons` to `lucide` (#2540)
+
+### Features
+
+* **Avatar:** infer `width` / `height` on `<img>` based on `size` prop ([c9adf33](https://github.com/nuxt/ui/commit/c9adf333be3e489b91fd044189809c28c62e7951))
+* **Avatar:** use `NuxtImg` component when available ([f1a14dd](https://github.com/nuxt/ui/commit/f1a14dd87c3e250a7eaa6729f68201201a476f9f)), closes [nuxt/ui#2078](https://github.com/nuxt/ui/issues/2078)
+* **Badge:** handle `icon` and `avatar` props ([#2497](https://github.com/nuxt/ui/issues/2497)) ([2d52834](https://github.com/nuxt/ui/commit/2d52834529e00a43b1a9b3015d073500b4208981))
+* **components:** improve RTL support ([#2433](https://github.com/nuxt/ui/issues/2433)) ([94c4918](https://github.com/nuxt/ui/commit/94c49186e16d84d77a637bbdfe00e7cb880204fe))
+* **DropdownMenu/ContextMenu:** handle `color` field in items ([#2510](https://github.com/nuxt/ui/issues/2510)) ([f66c96e](https://github.com/nuxt/ui/commit/f66c96e277970f80c905a8936c73b1d37479a940))
+* **InputMenu/Select/SelectMenu:** `arrow` prop implementation ([#2503](https://github.com/nuxt/ui/issues/2503)) ([f26f6c8](https://github.com/nuxt/ui/commit/f26f6c8168ad5e44e47ab770cee10035257841a2))
+* **Kbd:** special keys for macOS and other systems ([#2494](https://github.com/nuxt/ui/issues/2494)) ([332c6c0](https://github.com/nuxt/ui/commit/332c6c08d73ebdbffc18e1f196962eaa76e7a8dc))
+* **module:** add support for `vue` using `unplugin` ([#2416](https://github.com/nuxt/ui/issues/2416)) ([d4a943e](https://github.com/nuxt/ui/commit/d4a943e631b5e16dc7863395f1dd906087228e1c))
+* **module:** devtools integration ([#2196](https://github.com/nuxt/ui/issues/2196)) ([701c75a](https://github.com/nuxt/ui/commit/701c75a2a88a29be2fce193f75e1484799a5539c))
+* **NavigationMenu:** add `item-content` slot ([b5ca0d9](https://github.com/nuxt/ui/commit/b5ca0d96f1de049dde698e57a340fc8ee54dd2e7))
+* **Table:** customize `header` and `cell` through slots ([#2457](https://github.com/nuxt/ui/issues/2457)) ([ef561e7](https://github.com/nuxt/ui/commit/ef561e7cba172b61f296d4ff11815ec31902fb4a))
+* **theme:** migrate from `heroicons` to `lucide` ([#2540](https://github.com/nuxt/ui/issues/2540)) ([a6c1a6c](https://github.com/nuxt/ui/commit/a6c1a6c587ca35439852ce93cd4edc5041c6a9bf))
+
+### Bug Fixes
+
+* **ButtonGroup:** merge class with theme ([d980115](https://github.com/nuxt/ui/commit/d9801154088ec7a20901b805f5d21e485e481d98)), closes [nuxt/ui#2498](https://github.com/nuxt/ui/issues/2498)
+* **Carousel:** add missing `aria-label` on dots ([#2489](https://github.com/nuxt/ui/issues/2489)) ([03dd1eb](https://github.com/nuxt/ui/commit/03dd1eba7ece4c48393960dc6c725be3a1eec776))
+* **Chip:** proxy attrs to slot ([8669553](https://github.com/nuxt/ui/commit/8669553ea415cc969b2066a78830d03e8dfc811b)), closes [nuxt/ui#2484](https://github.com/nuxt/ui/issues/2484)
+* **components:** missing relative imports ([1a93d13](https://github.com/nuxt/ui/commit/1a93d13a1609d8b90783f20b330738cd7456503e)), closes [nuxt/ui#2515](https://github.com/nuxt/ui/issues/2515)
+* **InputMenu/Select/SelectMenu:** improve types ([#2471](https://github.com/nuxt/ui/issues/2471)) ([db8111d](https://github.com/nuxt/ui/commit/db8111d7835d030ced79899e826ff1eb74cf1cf4))
+* **InputMenu/SelectMenu:** `fast-deep-equal` import ([309e52f](https://github.com/nuxt/ui/commit/309e52faa76fc0a135dbc0d9543380ffd9066bda)), closes [nuxt/ui#2488](https://github.com/nuxt/ui/issues/2488)
+* **module:** add `fast-deep-equal` in `optimizeDeps` ([0bfe2b6](https://github.com/nuxt/ui/commit/0bfe2b60b3eb06ec30c80505f10380bab4f7ad4c))
+* **module:** define `[#build](https://github.com/nuxt/ui/issues/build)/app.config` ([12ae20d](https://github.com/nuxt/ui/commit/12ae20df20db18d233a185c59ede7dcaeca93071)), closes [nuxt/ui#2532](https://github.com/nuxt/ui/issues/2532)
+* **NavigationMenu:** add missing `min-w-0` to make truncate work ([#2476](https://github.com/nuxt/ui/issues/2476)) ([1402436](https://github.com/nuxt/ui/commit/1402436c2b0262edada04273b60c3b2914df2895))
+* **NavigationMenu:** enforce `data-orientation` ([64ad4b6](https://github.com/nuxt/ui/commit/64ad4b6892d827df921550bf7ae31048d8d6cc50))
+* **NavigationMenu:** improve generic types ([#2482](https://github.com/nuxt/ui/issues/2482)) ([fc2015b](https://github.com/nuxt/ui/commit/fc2015bb0e9ccb017a91ba1ee839cd84cf740cf3))
+* **Table:** types in undeclared slots ([#2544](https://github.com/nuxt/ui/issues/2544)) ([f821e66](https://github.com/nuxt/ui/commit/f821e6681bfc5d1515fe7158fe3fda639a897ac8))
+* **Tabs:** same behaviour between `pill` and `link` variants ([e592da2](https://github.com/nuxt/ui/commit/e592da2fcb9deb5ad5f2ffb442ff07d86923bab6)), closes [#2338](https://github.com/nuxt/ui/issues/2338)
+* **templates:** type error in app config ([77d18d8](https://github.com/nuxt/ui/commit/77d18d8ab7bf28aee316a443d52b852dfc5fd1ca)), closes [nuxt/ui#2481](https://github.com/nuxt/ui/issues/2481)
+* **useKbd:** hydration issue ([845f85a](https://github.com/nuxt/ui/commit/845f85a072598f47c7afe10c4e5ebcc480450113)), closes [#2494](https://github.com/nuxt/ui/issues/2494)
+* **utils:** improve `escapeRegExp` function ([a97c511](https://github.com/nuxt/ui/commit/a97c511279d32747b487ab5de32677e36a884e53))
+
 ## [3.0.0-alpha.7](https://github.com/nuxt/ui/compare/v3.0.0-alpha.6...v3.0.0-alpha.7) (2024-10-23)
 
 ### ⚠ BREAKING CHANGES
