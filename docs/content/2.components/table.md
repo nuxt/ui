@@ -285,6 +285,42 @@ componentProps:
 ---
 ::
 
+
+#### Event Selectable
+The `UTable` component provides two key events for handling row selection:
+
+##### ***@select:all***
+The `@select:all` event is emitted when the header checkbox in a selectable table is toggled. This event returns a boolean value indicating whether all rows are selected (true) or deselected (false).
+
+##### ***@update:modelValue***
+The `@update:modelValue` event is emitted whenever the selection state changes, including both individual row selection and bulk selection. This event returns an array containing the currently selected rows.
+
+Here's how to implement both events:
+
+```vue
+<script setup lang="ts">
+const selected = ref([])
+
+const onHandleSelectAll = (isSelected: boolean) => {
+  console.log('All rows selected:', isSelected)
+}
+
+const onUpdateSelection = (selectedRows: any[]) => {
+  console.log('Currently selected rows:', selectedRows)
+}
+</script>
+
+<template>
+  <UTable 
+    v-model="selected" 
+    :rows="people" 
+    @select:all="onHandleSelectAll"
+    @update:modelValue="onUpdateSelection"
+  />
+</template>
+```
+
+
 #### Single Select Mode
 Control how the select function allows only one row to be selected at a time.
 

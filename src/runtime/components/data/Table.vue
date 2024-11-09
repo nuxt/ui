@@ -269,7 +269,7 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['update:modelValue', 'update:sort', 'update:expand'],
+  emits: ['update:modelValue', 'update:sort', 'update:expand', 'select:all'],
   setup(props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -407,6 +407,7 @@ export default defineComponent({
       } else {
         selected.value = []
       }
+      emit('select:all', checked)
     }
 
     function onChangeCheckbox(checked: boolean, row: TableRow) {
