@@ -2,31 +2,25 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'flex gap-2 items-center',
-    base: 'w-10 h-10 rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] text-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+    root: 'relative inline-flex items-center gap-1.5',
+    base: ['rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] text-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors']
   },
   variants: {
     size: {
-      '2xs': {
-        base: 'h-6 w-6 text-xs'
+      xs: {
+        base: 'size-6 text-xs'
       },
-      'xs': {
-        base: 'h-7 w-7 text-xs'
+      sm: {
+        base: 'size-7 text-xs'
       },
-      'sm': {
-        base: 'h-8 w-8 text-xs'
+      md: {
+        base: 'size-8 text-sm'
       },
-      'md': {
-        base: 'h-9 w-9 text-sm'
+      lg: {
+        base: 'size-9 text-sm'
       },
-      'lg': {
-        base: 'h-10 w-10 text-sm'
-      },
-      'xl': {
-        base: 'h-11 w-11 text-base'
-      },
-      '2xl': {
-        base: 'h-12 w-12 text-lg'
+      xl: {
+        base: 'size-10 text-base'
       }
     },
     variant: {
