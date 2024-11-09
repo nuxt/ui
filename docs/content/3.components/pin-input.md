@@ -1,4 +1,5 @@
 ---
+title: PinInput
 description: An input element to enter a pin.
 links:
   - label: GitHub
@@ -12,6 +13,7 @@ Use the `v-model` directive to control the value of the PinInput.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - modelValue
 external:
@@ -21,14 +23,15 @@ props:
 ---
 ::
 
-Use the `defaultValue` prop to set the initial value when you do not need to control its state. The array should be the same length as the `length` prop.
+Use the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::component-code
 ---
+prettier: true
 ignore:
   - defaultValue
 props:
-  defaultValue: ['1','2','3','4','5']
+  defaultValue: ['1','2','3']
 ---
 ::
 
@@ -43,7 +46,49 @@ items:
     - text
     - number
 props:
-  type: 'text'
+  type: 'number'
+---
+::
+
+::note
+When `type` is set to `number`, it will only accept numeric characters.
+::
+
+### Mask
+
+Use the `mask` prop to treat the input like a password.
+
+::component-code
+---
+prettier: true
+ignore:
+  - placeholder
+  - defaultValue
+props:
+  mask: true
+  defaultValue: ['1','2','3','4','5']
+---
+::
+
+### OTP
+
+Use the `otp` prop to enable One-Time Password functionality. When enabled, mobile devices can automatically detect and fill OTP codes from SMS messages or clipboard content, with autocomplete support.
+
+::component-code
+---
+props:
+  otp: true
+---
+::
+
+### Length
+
+Use the `length` prop to change the amount of inputs.
+
+::component-code
+---
+props:
+  length: 6
 ---
 ::
 
@@ -54,7 +99,7 @@ Use the `placeholder` prop to set a placeholder text.
 ::component-code
 ---
 props:
-  placeholder: '0'
+  placeholder: '○'
 ---
 ::
 
@@ -69,7 +114,7 @@ ignore:
 props:
   color: neutral
   highlight: true
-  placeholder: '0'
+  placeholder: '○'
 ---
 ::
 
@@ -89,7 +134,7 @@ props:
   color: neutral
   variant: subtle
   highlight: false
-  placeholder: '0'
+  placeholder: '○'
 ---
 ::
 
@@ -103,10 +148,9 @@ ignore:
   - placeholder
 props:
   size: xl
-  placeholder: '0'
+  placeholder: '○'
 ---
 ::
-
 
 ### Disabled
 
@@ -118,34 +162,7 @@ ignore:
   - placeholder
 props:
   disabled: true
-  placeholder: '0'
----
-::
-
-### Mask
-
-Use the `mask` prop to treat the input like a password.
-
-::component-code
----
-ignore:
-  - placeholder
-  - defaultValue
-props:
-  mask: true
-  placeholder: '0'
-  defaultValue: ['1','2','3','4','5']
----
-::
-
-### Length
-
-Use the `length` prop to change the amount of inputs.
-
-::component-code
----
-props:
-  length: 6
+  placeholder: '○'
 ---
 ::
 
