@@ -12,7 +12,12 @@ const pinInput = tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || {}) })
 
 type PinInputVariants = VariantProps<typeof pinInput>
 
-export interface PinInputProps extends Pick<PinInputRootProps, 'as' | 'asChild' | 'defaultValue' | 'dir' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
+export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   color?: PinInputVariants['color']
   variant?: PinInputVariants['variant']
   size?: PinInputVariants['size']
@@ -37,9 +42,9 @@ const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
   length: 5
 })
-
 const emits = defineEmits<PinInputEmits>()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'asChild', 'defaultValue', 'dir', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'placeholder', 'required', 'type'), emits)
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'placeholder', 'required', 'type'), emits)
 
 const ui = computed(() => pinInput({
   color: props.color,
@@ -59,6 +64,7 @@ const ui = computed(() => pinInput({
       :key="ids"
       :index="index"
       :class="ui.base({ class: props.ui?.base })"
+      v-bind="$attrs"
     />
   </PinInputRoot>
 </template>
