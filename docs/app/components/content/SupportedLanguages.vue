@@ -31,5 +31,11 @@ const localesList = getLocaleKeys().map(locale => [locale, locales[locale].name]
         here
       </ProseA>
     </ProseP>
+    <Tip>
+      Use CLI command <ProseCode>nuxt-ui make locale</ProseCode> to create a new locale
+      <ProsePre language="bash">
+        nuxt-ui make locale --code "en" --name "English"
+      </ProsePre>
+    </Tip>
   </div>
 </template>
