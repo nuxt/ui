@@ -1,5 +1,4 @@
 import { createResolver } from '@nuxt/kit'
-import module from '../src/module'
 import pkg from '../package.json'
 
 const { resolve } = createResolver(import.meta.url)
@@ -10,7 +9,7 @@ export default defineNuxtConfig({
   // ],
 
   modules: [
-    module,
+    '../src/module',
     '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/image',
