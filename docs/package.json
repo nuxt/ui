@@ -3,14 +3,14 @@
   "name": "@nuxt/ui-docs",
   "type": "module",
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.11",
-    "@iconify-json/simple-icons": "^1.2.10",
+    "@iconify-json/lucide": "^1.2.12",
+    "@iconify-json/simple-icons": "^1.2.11",
     "@iconify-json/vscode-icons": "^1.2.2",
-    "@nuxt/content": "3.0.0-alpha.5",
+    "@nuxt/content": "3.0.0-alpha.6",
     "@nuxt/image": "^1.8.1",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@62862c8",
-    "@nuxthub/core": "^0.8.5",
+    "@nuxthub/core": "^0.8.6",
     "@nuxtjs/plausible": "^1.0.3",
     "@octokit/rest": "^21.0.2",
     "@vueuse/nuxt": "^11.2.0",
@@ -27,6 +27,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "wrangler": "^3.84.1"
+    "wrangler": "^3.86.0"
   }
 }

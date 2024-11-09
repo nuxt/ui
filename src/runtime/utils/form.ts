@@ -1,4 +1,4 @@
-import type { StandardSchema } from '@standard-schema/spec'
+import type { v1 } from '@standard-schema/spec'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
@@ -161,7 +161,6 @@ async function validateJoiSchema(
       throw error
     }
   }
-}
 
 async function validateValibotSchema(
   state: any,
@@ -191,6 +190,7 @@ async function validateValibotSchema(
     result: null
   }
 }
+
 
 export function parseSchema<T extends object>(state: T, schema: FormSchema<T>): Promise<ValidateReturnSchema<typeof state>> {
   if (isZodSchema(schema)) {
