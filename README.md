@@ -1,6 +1,6 @@
 [![nuxt-ui.png](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
 
-# Nuxt UI v3
+# Nuxt UI
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -51,7 +51,7 @@ export default defineNuxtConfig({
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation).
+Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation/nuxt).
 
 ### Vue
 
@@ -91,7 +91,7 @@ app.mount('#app')
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation).
+Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation/vue).
 
 ## Credits
 
