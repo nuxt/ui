@@ -76,7 +76,11 @@
 
         <template v-else>
           <template v-for="(row, index) in rows" :key="index">
-            <tr :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, $attrs.onSelect && ui.tr.active, row?.class]" @click="() => onSelect(row)" @contextmenu="(event) => onContextmenu(event, row)">
+            <tr
+              :class="[ui.tr.base, isSelected(row) && ui.tr.selected, isExpanded(row) && ui.tr.expanded, $attrs.onSelect && ui.tr.active, row?.class]"
+              @click="() => onSelect(row)"
+              @contextmenu="(event) => onContextmenu(event, row)"
+            >
               <td
                 v-if="expand"
                 :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size]"
@@ -369,6 +373,11 @@ export default defineComponent({
     }
 
     function onSelect(row: TableRow) {
+      const selection = window.getSelection()
+      if (selection && selection.toString().length > 0) {
+        return
+      }
+
       if (!$attrs.onSelect) {
         return
       }
