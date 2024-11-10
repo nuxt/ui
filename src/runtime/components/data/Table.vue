@@ -369,6 +369,11 @@ export default defineComponent({
     }
 
     function onSelect(row: TableRow) {
+      const selection = window.getSelection()
+      if (selection && selection.toString().length > 0) {
+        return
+      }
+
       if (!$attrs.onSelect) {
         return
       }
