@@ -375,10 +375,6 @@ export default defineComponent({
       }
 
       function getValue(value: any) {
-        if (typeof value !== 'object' || value === null) {
-          return value
-        }
-
         if (props.valueAttribute) {
           return accessor(value, props.valueAttribute)
         }
