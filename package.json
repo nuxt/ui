@@ -80,6 +80,8 @@
   "resolutions": {
     "@nuxt/ui": "workspace:*",
     "@nuxt/content": "2.13.2",
-    "@nuxtjs/mdc": "0.9.0"
+    "@nuxtjs/mdc": "0.9.0",
+    "nuxt": "3.13.2",
+    "@nuxt/kit": "3.13.2"
   }
 }
