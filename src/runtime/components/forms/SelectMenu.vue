@@ -365,8 +365,6 @@ export default defineComponent({
     })
 
     const selected = computed(() => {
-      const options = props.options || []
-
       function compareValues(value1: any, value2: any) {
         if (props.by && typeof value1 === 'object' && typeof value2 === 'object') {
           return isEqual(value1[props.by], value2[props.by])
@@ -388,13 +386,13 @@ export default defineComponent({
           return []
         }
 
-        return options.filter((option) => {
+        return options.value.filter((option) => {
           const optionValue = getValue(option)
           return modelValue.some(value => compareValues(value, optionValue))
         })
       }
 
-      return options.find((option) => {
+      return options.value.find((option) => {
         const optionValue = getValue(option)
         return compareValues(optionValue, toRaw(props.modelValue))
       })
