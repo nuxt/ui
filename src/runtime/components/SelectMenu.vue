@@ -70,9 +70,10 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
    */
   portal?: boolean
   /**
-   * Whether to filter items or not, can be an array of fields to filter.
+   * Whether to filter items or not, can be an array of fields to filter. Defaults to `[labelKey]`.
    * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
-   * @defaultValue ['label']
+   * `['label']`{lang="ts-type"}
+   * @defaultValue true
    */
   filter?: boolean | string[]
   /**
@@ -139,7 +140,7 @@ const props = withDefaults(defineProps<SelectMenuProps<T, I, V, M>>(), {
   portal: true,
   autofocusDelay: 0,
   searchInput: true,
-  filter: () => ['label'],
+  filter: true,
   labelKey: 'label' as never
 })
 

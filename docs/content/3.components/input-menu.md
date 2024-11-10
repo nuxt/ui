@@ -694,7 +694,7 @@ This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebo
 
 ### With custom search
 
-Use the `filter` prop with an array of fields to filter on.
+Use the `filter` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
 ::component-example
 ---

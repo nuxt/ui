@@ -19,7 +19,6 @@ function onOpen() {
     :items="countries || []"
     :loading="status === 'pending'"
     label-key="name"
-    :filter="['name']"
     :search-input="{ icon: 'i-lucide-search' }"
     placeholder="Select country"
     class="w-48"

@@ -4,7 +4,8 @@ const { data: countries, status, execute } = await useLazyFetch<{
   code: string
   emoji: string
 }[]>('/api/countries.json', {
-  immediate: false
+  immediate: false,
+  default: () => []
 })
 
 function onOpen() {
@@ -16,10 +17,9 @@ function onOpen() {
 
 <template>
   <USelectMenu
-    :items="countries || []"
+    :items="countries"
     :loading="status === 'pending'"
     label-key="name"
-    :filter="['name']"
     :search-input="{ icon: 'i-lucide-search' }"
     placeholder="Select country"
     class="w-48"
