@@ -200,7 +200,9 @@ props:
 
 ### Search Input
 
-Use the `search-input` prop to customize the search input. Defaults to `{ placeholder: 'Search...' }`{lang="ts-type"}.
+Use the `search-input` prop to customize or hide the search input (with `false` value).
+
+You can pass all the props of the [Input](/components/input) component to customize it.
 
 ::component-code
 ---
@@ -219,6 +221,7 @@ props:
     icon: 'i-lucide-circle-help'
   searchInput:
     placeholder: 'Filter...'
+    icon: 'i-lucide-search'
   items:
     - label: Backlog
       icon: 'i-lucide-circle-help'
@@ -230,10 +233,6 @@ props:
       icon: 'i-lucide-circle-check'
   class: 'w-48'
 ---
-::
-
-::tip
-You can set the `search-input` prop to `false` to hide the search input.
 ::
 
 ### Content
