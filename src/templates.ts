@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url'
 import { kebabCase } from 'scule'
 import { addTemplate, addTypeTemplate } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
+import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 
@@ -87,17 +88,6 @@ export {}
   })
 
   templates.push({
-    filename: 'types/ui.app.config.d.ts',
-    getContents: () => `declare module '#build/app.config' {
-  import type { AppConfig } from '@nuxt/schema'
-
-  const _default: AppConfig
-  export default _default
-}
-`
-  })
-
-  templates.push({
     filename: 'ui-image-component.ts',
     write: true,
     getContents: ({ app }) => {
@@ -110,7 +100,7 @@ export {}
   return templates
 }
 
-export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
+export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolver['resolve']) {
   const templates = getTemplates(options, nuxt.options.appConfig.ui)
   for (const template of templates) {
     if (template.filename!.endsWith('.d.ts')) {
@@ -119,4 +109,8 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
       addTemplate(template)
     }
   }
+
+  nuxt.hook('prepare:types', ({ references }) => {
+    references.push({ path: resolve('./runtime/types/app.config.d.ts') })
+  })
 }
