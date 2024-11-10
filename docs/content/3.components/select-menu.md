@@ -740,6 +740,17 @@ name: 'select-menu-filter-fields-example'
 ---
 ::
 
+### As a country picker
+
+This example demonstrates using the SelectMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
+
+::component-example
+---
+collapse: true
+name: 'select-menu-countries-example'
+---
+::
+
 ## API
 
 ### Props
