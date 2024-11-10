@@ -74,7 +74,7 @@
     "@iconify/vue": "^4.1.2",
     "@nuxt/devtools-kit": "^1.6.0",
     "@nuxt/fonts": "^0.10.2",
-    "@nuxt/icon": "^1.7.0",
+    "@nuxt/icon": "^1.7.2",
     "@nuxt/kit": "^3.14.159",
     "@nuxt/schema": "^3.14.159",
     "@nuxtjs/color-mode": "^3.5.2",

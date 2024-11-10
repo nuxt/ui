@@ -3,7 +3,7 @@
   "name": "@nuxt/ui-docs",
   "type": "module",
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.12",
+    "@iconify-json/lucide": "^1.2.13",
     "@iconify-json/simple-icons": "^1.2.11",
     "@iconify-json/vscode-icons": "^1.2.2",
     "@nuxt/content": "3.0.0-alpha.6",
