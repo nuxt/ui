@@ -383,10 +383,6 @@ export default defineComponent({
           return accessor(value, props.valueAttribute)
         }
 
-        if (props.by) {
-          return value[props.by]
-        }
-
         return value
       }
 
