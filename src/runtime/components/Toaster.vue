@@ -19,6 +19,11 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
    * @defaultValue true
    */
   expand?: boolean
+  /**
+   * Render the toaster in a portal.
+   * @defaultValue true
+   */
+  portal?: boolean
   class?: any
   ui?: Partial<typeof toaster.slots>
 }
@@ -44,6 +49,7 @@ import UToast from './Toast.vue'
 
 const props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,
+  portal: true,
   duration: 5000
 })
 defineSlots<ToasterSlots>()
@@ -120,18 +126,20 @@ function getOffset(index: number) {
       @click="toast.click && toast.click(toast)"
     />
 
-    <ToastViewport
-      :data-expanded="expanded"
-      :class="ui.viewport({ class: [props.class, props.ui?.viewport] })"
-      :style="{
-        '--scale-factor': '0.05',
-        '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',
-        '--gap': position?.startsWith('top') ? '16px' : '-16px',
-        '--front-height': `${frontHeight}px`,
-        '--height': `${height}px`
-      }"
-      @mouseenter="hovered = true"
-      @mouseleave="hovered = false"
-    />
+    <Teleport to="body" :disabled="!portal">
+      <ToastViewport
+        :data-expanded="expanded"
+        :class="ui.viewport({ class: [props.class, props.ui?.viewport] })"
+        :style="{
+          '--scale-factor': '0.05',
+          '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',
+          '--gap': position?.startsWith('top') ? '16px' : '-16px',
+          '--front-height': `${frontHeight}px`,
+          '--height': `${height}px`
+        }"
+        @mouseenter="hovered = true"
+        @mouseleave="hovered = false"
+      />
+    </Teleport>
   </ToastProvider>
 </template>
