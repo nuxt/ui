@@ -407,7 +407,7 @@ export default defineComponent({
         return `${props.modelValue.length} selected`
       }
 
-      return props.optionAttribute ? accessor(selected.value, props.optionAttribute) : selected.value
+      return props.optionAttribute ? accessor(props.modelValue as Record<string, any>, props.optionAttribute) : props.modelValue
     })
 
     const selectClass = computed(() => {
