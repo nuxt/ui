@@ -386,18 +386,16 @@ export default defineComponent({
           return []
         }
 
-        const getFilteredValue = options.value.filter((option) => {
+        return options.value.filter((option) => {
           const optionValue = getValue(option)
           return modelValue.some(value => compareValues(value, optionValue))
         })
-
-        return getFilteredValue.length > 0 ? getFilteredValue : props.modelValue
       }
 
       return options.value.find((option) => {
         const optionValue = getValue(option)
         return compareValues(optionValue, toRaw(props.modelValue))
-      }) ?? props.modelValue
+      })
     })
 
     const label = computed(() => {
