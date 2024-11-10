@@ -399,10 +399,12 @@ export default defineComponent({
     })
 
     const label = computed(() => {
-      if (!selected.value) return null
+      if (!props.modelValue) return null
 
-      if (Array.isArray(props.modelValue) && props.modelValue.length > 0) {
-        return `${props.modelValue.length} selected`
+      if (Array.isArray(props.modelValue) && props.modelValue.length) {
+        return `${props.modelValue} selected`
+      } else if (['string', 'number'].includes(typeof props.modelValue)) {
+        return props.modelValue
       }
 
       return props.optionAttribute ? accessor(props.modelValue as Record<string, any>, props.optionAttribute) : props.modelValue
