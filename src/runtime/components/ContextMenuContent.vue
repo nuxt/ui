@@ -34,6 +34,8 @@ import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
+// eslint-disable-next-line import/no-self-import
+import UContextMenuContent from './ContextMenuContent.vue'
 
 const props = defineProps<ContextMenuContentProps<T>>()
 const emits = defineEmits<ContextMenuContentEmits>()
