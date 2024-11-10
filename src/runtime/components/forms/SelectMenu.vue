@@ -71,7 +71,7 @@
               v-slot="{ active, selected: optionSelected, disabled: optionDisabled }"
               :key="index"
               as="template"
-              :value="valueAttribute ? option[valueAttribute] : option"
+              :value="valueAttribute ? accessor(option, valueAttribute) : option"
               :disabled="option.disabled"
             >
               <li :class="[uiMenu.option.base, uiMenu.option.rounded, uiMenu.option.padding, uiMenu.option.size, uiMenu.option.color, active ? uiMenu.option.active : uiMenu.option.inactive, optionSelected && uiMenu.option.selected, optionDisabled && uiMenu.option.disabled]">
@@ -140,6 +140,7 @@ import {
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twMerge, twJoin } from 'tailwind-merge'
+import { isEqual } from 'ohash'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
@@ -364,39 +365,53 @@ export default defineComponent({
     })
 
     const selected = computed(() => {
+      function compareValues(value1: any, value2: any) {
+        if (props.by && typeof value1 === 'object' && typeof value2 === 'object') {
+          return isEqual(value1[props.by], value2[props.by])
+        }
+        return isEqual(value1, value2)
+      }
+
+      function getValue(value: any) {
+        if (props.valueAttribute) {
+          return accessor(value, props.valueAttribute)
+        }
+
+        return value
+      }
+
       if (props.multiple) {
-        if (!Array.isArray(props.modelValue) || !props.modelValue.length) {
+        const modelValue = props.modelValue
+        if (!Array.isArray(modelValue) || !modelValue.length) {
           return []
         }
 
-        if (props.valueAttribute) {
-          return options.value.filter(option => (props.modelValue as any[]).includes(option[props.valueAttribute]))
-        }
-        return options.value.filter(option => (props.modelValue as any[]).includes(option))
+        return options.value.filter((option) => {
+          const optionValue = getValue(option)
+          return modelValue.some(value => compareValues(value, optionValue))
+        })
       }
 
-      if (props.valueAttribute) {
-        return options.value.find(option => option[props.valueAttribute] === props.modelValue)
-      }
-      return options.value.find(option => option === props.modelValue)
+      return options.value.find((option) => {
+        const optionValue = getValue(option)
+        return compareValues(optionValue, toRaw(props.modelValue))
+      }) ?? props.modelValue
     })
 
     const label = computed(() => {
-      if (props.multiple) {
-        if (Array.isArray(props.modelValue) && props.modelValue.length) {
-          return `${selected.value.length} selected`
-        } else {
-          return null
-        }
-      } else if (props.modelValue !== undefined && props.modelValue !== null) {
-        if (props.valueAttribute) {
-          return accessor(selected.value, props.optionAttribute) ?? null
-        } else {
-          return ['string', 'number'].includes(typeof props.modelValue) ? props.modelValue : accessor(props.modelValue as Record<string, any>, props.optionAttribute)
-        }
+      if (!selected.value) return null
+
+      if (props.valueAttribute) {
+        return accessor(selected.value as Record<string, any>, props.optionAttribute)
       }
 
-      return null
+      if (Array.isArray(props.modelValue) && props.modelValue.length) {
+        return `${props.modelValue.length} selected`
+      } else if (['string', 'number'].includes(typeof props.modelValue)) {
+        return props.modelValue
+      }
+
+      return accessor(props.modelValue as Record<string, any>, props.optionAttribute)
     })
 
     const selectClass = computed(() => {
