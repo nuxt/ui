@@ -3,22 +3,16 @@ export default {
   rounded: 'rounded-md',
   font: 'font-medium',
   size: {
-    xs: 'text-xs',
-    sm: 'text-xs',
-    md: 'text-sm',
-    lg: 'text-sm'
+    xs: 'text-xs px-1.5 py-0.5',
+    sm: 'text-xs px-2 py-1',
+    md: 'text-sm px-2 py-1',
+    lg: 'text-sm px-2.5 py-1.5'
   },
   gap: {
     xs: 'gap-0.5',
     sm: 'gap-1',
     md: 'gap-1',
     lg: 'gap-1.5'
-  },
-  padding: {
-    xs: 'px-1.5 py-0.5',
-    sm: 'px-2 py-1',
-    md: 'px-2 py-1',
-    lg: 'px-2.5 py-1.5'
   },
   color: {
     white: {

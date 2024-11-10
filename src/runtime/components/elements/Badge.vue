@@ -116,7 +116,6 @@ export default defineComponent({
         rounded.value,
         ui.value.size[size.value],
         ui.value.gap[size.value],
-        ui.value.padding[size.value],
         variant?.replaceAll('{color}', props.color)
       ), props.class)
     })
