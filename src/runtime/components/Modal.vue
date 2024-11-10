@@ -95,7 +95,8 @@ const contentEvents = computed(() => {
   if (props.preventClose) {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
-      interactOutside: (e: Event) => e.preventDefault()
+      interactOutside: (e: Event) => e.preventDefault(),
+      escapeKeyDown: (e: Event) => e.preventDefault()
     }
   }
 
