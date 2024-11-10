@@ -3,10 +3,22 @@ export default {
   rounded: 'rounded-md',
   font: 'font-medium',
   size: {
-    xs: 'text-xs px-1.5 py-0.5',
-    sm: 'text-xs px-2 py-1',
-    md: 'text-sm px-2 py-1',
-    lg: 'text-sm px-2.5 py-1.5'
+    xs: 'text-xs',
+    sm: 'text-xs',
+    md: 'text-sm',
+    lg: 'text-sm'
+  },
+  gap: {
+    xs: 'gap-0.5',
+    sm: 'gap-1',
+    md: 'gap-1',
+    lg: 'gap-1.5'
+  },
+  padding: {
+    xs: 'px-1.5 py-0.5',
+    sm: 'px-2 py-1',
+    md: 'px-2 py-1',
+    lg: 'px-2.5 py-1.5'
   },
   color: {
     white: {
@@ -24,6 +36,15 @@ export default {
     outline: 'text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400',
     soft: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400',
     subtle: 'bg-{color}-50 dark:bg-{color}-400 dark:bg-opacity-10 text-{color}-500 dark:text-{color}-400 ring-1 ring-inset ring-{color}-500 dark:ring-{color}-400 ring-opacity-25 dark:ring-opacity-25'
+  },
+  icon: {
+    base: 'flex-shrink-0',
+    size: {
+      xs: 'h-4 w-4',
+      sm: 'h-4 w-4',
+      md: 'h-5 w-5',
+      lg: 'h-5 w-5'
+    }
   },
   default: {
     size: 'sm',

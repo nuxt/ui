@@ -141,6 +141,74 @@ Badge
 You can customize the whole [preset](#preset) by using the `ui` prop.
 ::
 
+### Icon
+
+Use any icon from [Iconify](https://icones.js.org) by setting the `icon` prop by using this pattern: `i-{collection_name}-{icon_name}`.
+
+Use the `leading` and `trailing` props to set the icon position or the `leading-icon` and `trailing-icon` props to set a different icon for each position.
+
+::component-card
+---
+props:
+  icon: 'i-heroicons-pencil-square'
+  size: 'sm'
+  color: 'primary'
+  variant: 'solid'
+  label: Badge
+  trailing: false
+options:
+  - name: variant
+    restriction: only
+    values:
+      - solid
+excludedProps:
+  - icon
+  - label
+---
+::
+
+## Slots
+
+### `leading`
+
+Use the `#leading` slot to set the content of the leading icon.
+
+::component-card
+---
+slots:
+  leading: <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs" />
+baseProps:
+  color: 'gray'
+props:
+  label: Badge
+  color: 'gray'
+excludedProps:
+  - color
+---
+
+#leading
+  :u-avatar{src="https://avatars.githubusercontent.com/u/739984?v=4" size="3xs"}
+::
+
+### `trailing`
+
+Use the `#trailing` slot to set the content of the trailing icon.
+
+::component-card
+---
+slots:
+  trailing: <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4" />
+props:
+  label: Badge
+  color: 'gray'
+excludedProps:
+  - color
+---
+
+#trailing
+  :u-icon{name="i-heroicons-arrow-right-20-solid" class="w-4 h-4"}
+::
+
 ## Props
 
 :component-props
