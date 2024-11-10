@@ -395,11 +395,15 @@ export default defineComponent({
       return options.value.find((option) => {
         const optionValue = getValue(option)
         return compareValues(optionValue, toRaw(props.modelValue))
-      })
+      }) ?? props.modelValue
     })
 
     const label = computed(() => {
-      if (!props.modelValue) return null
+      if (!selected.value) return null
+
+      if (props.valueAttribute) {
+        return accessor(selected.value as Record<string, any>, props.optionAttribute)
+      }
 
       if (Array.isArray(props.modelValue) && props.modelValue.length) {
         return `${props.modelValue.length} selected`
@@ -407,7 +411,7 @@ export default defineComponent({
         return props.modelValue
       }
 
-      return props.optionAttribute ? accessor(props.modelValue as Record<string, any>, props.optionAttribute) : props.modelValue
+      return accessor(props.modelValue as Record<string, any>, props.optionAttribute)
     })
 
     const selectClass = computed(() => {
