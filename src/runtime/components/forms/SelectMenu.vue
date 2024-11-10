@@ -401,19 +401,13 @@ export default defineComponent({
     })
 
     const label = computed(() => {
-      if (props.multiple) {
-        if (Array.isArray(props.modelValue) && props.modelValue.length) {
-          return `${selected.value.length} selected`
-        } else {
-          return null
-        }
-      } else if (props.modelValue !== undefined && props.modelValue !== null) {
-        return typeof selected.value === 'object' && selected.value !== null && props.optionAttribute
-          ? accessor(selected.value, props.optionAttribute) ?? null
-          : selected.value
+      if (!selected.value) return null
+
+      if (Array.isArray(props.modelValue) && props.modelValue.length > 0) {
+        return `${props.modelValue.length} selected`
       }
 
-      return null
+      return props.optionAttribute ? accessor(selected.value, props.optionAttribute) : selected.value
     })
 
     const selectClass = computed(() => {
