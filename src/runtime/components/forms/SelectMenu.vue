@@ -402,7 +402,7 @@ export default defineComponent({
       if (!props.modelValue) return null
 
       if (Array.isArray(props.modelValue) && props.modelValue.length) {
-        return `${props.modelValue} selected`
+        return `${props.modelValue.length} selected`
       } else if (['string', 'number'].includes(typeof props.modelValue)) {
         return props.modelValue
       }
