@@ -105,6 +105,7 @@
 
                 <slot
                   v-else
+                  :key="retriggetSlot"
                   :name="`${column.key}-data`"
                   :column="column"
                   :row="row"
@@ -132,7 +133,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, toRaw, toRef } from 'vue'
+import { computed, defineComponent, ref, toRaw, toRef, watch } from 'vue'
 import type { PropType, AriaAttributes } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -283,6 +284,8 @@ export default defineComponent({
         row: null
       })
     })
+
+    const retriggetSlot = ref(null)
 
     const savedSort = { column: sort.value.column, direction: null }
 
@@ -466,6 +469,12 @@ export default defineComponent({
       return undefined
     }
 
+    watch(rows, () => {
+      retriggetSlot.value = new Date()
+    }, {
+      deep: true
+    })
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -493,7 +502,8 @@ export default defineComponent({
       toggleOpened,
       getAriaSort,
       isExpanded,
-      shouldRenderColumnInFirstPlace
+      shouldRenderColumnInFirstPlace,
+      shouldRetriggetSlot
     }
   }
 })
