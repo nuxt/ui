@@ -6,6 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
@@ -78,9 +79,10 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
    */
   portal?: boolean
   /**
-   * Whether to filter items or not, can be an array of fields to filter.
-   * When `false`, items will not be filtered which is useful for custom filtering.
-   * @defaultValue ['label']
+   * Whether to filter items or not, can be an array of fields to filter. Defaults to `[labelKey]`.
+   * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
+   * `['label']`{lang="ts-type"}
+   * @defaultValue true
    */
   filter?: boolean | string[]
   /**
@@ -92,7 +94,7 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: keyof T
+  labelKey?: V
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -138,7 +140,7 @@ extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3']
 import { computed, ref, toRef, onMounted, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
-import * as isEqual from 'fast-deep-equal'
+import { isEqual } from 'ohash'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
@@ -155,8 +157,8 @@ const props = withDefaults(defineProps<InputMenuProps<T, I, V, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  filter: () => ['label'],
-  labelKey: 'label' as keyof T
+  filter: true,
+  labelKey: 'label' as never
 })
 const emits = defineEmits<InputMenuEmits<T, V, M>>()
 const slots = defineSlots<InputMenuSlots<T>>()
@@ -164,9 +166,12 @@ const slots = defineSlots<InputMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
+const { t } = useLocale()
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+// This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
+const multiple = toRef(() => typeof props.multiple === 'string' ? true : props.multiple)
 
 const { emitFormBlur, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -182,18 +187,22 @@ const ui = computed(() => inputMenu({
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  multiple: props.multiple,
+  multiple: multiple.value,
   buttonGroup: orientation.value
 }))
 
-function displayValue(value: AcceptableValue): string {
-  const item = items.value.find(item => props.valueKey ? isEqual.default(get(item as Record<string, any>, props.valueKey as string), value) : isEqual.default(item, value)) ?? (props.createItem && value)
+function displayValue(value: T): string {
+  if (!props.valueKey) {
+    return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
+  }
+
+  const item = items.value.find(item => isEqual(get(item as Record<string, any>, props.valueKey as string), value))
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
 function filterFunction(
-  inputItems: ArrayOrWrapped<AcceptableValue> = items.value as ArrayOrWrapped<AcceptableValue>,
+  inputItems: ArrayOrWrapped<T> = items.value as ArrayOrWrapped<T>,
   filterSearchTerm: string = searchTerm.value,
   comparator = (item: any, term: string) => String(item).search(new RegExp(term, 'i')) !== -1
 ): ArrayOrWrapped<AcceptableValue> {
@@ -309,6 +318,7 @@ defineExpose({
     v-model:search-term="searchTerm"
     :name="name"
     :disabled="disabled"
+    :multiple="multiple"
     :display-value="displayValue"
     :filter-function="() => rootItems"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
@@ -384,7 +394,7 @@ defineExpose({
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
+            {{ searchTerm ? t('ui.inputMenu.noMatch', { searchTerm }) : t('ui.inputMenu.noData') }}
           </slot>
         </ComboboxEmpty>
 

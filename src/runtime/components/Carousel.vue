@@ -10,6 +10,7 @@ import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/carousel'
+import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
 import type { AcceptableValue, PartialString } from '../types/utils'
@@ -134,6 +135,7 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
 defineSlots<CarouselSlots<T>>()
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))
 
 const ui = computed(() => carousel({
@@ -279,7 +281,7 @@ defineExpose({
           size="md"
           color="neutral"
           variant="outline"
-          aria-label="Prev"
+          :aria-label="t('ui.carousel.prev')"
           v-bind="typeof prev === 'object' ? prev : undefined"
           :class="ui.prev({ class: props.ui?.prev })"
           @click="scrollPrev"
@@ -290,7 +292,7 @@ defineExpose({
           size="md"
           color="neutral"
           variant="outline"
-          aria-label="Next"
+          :aria-label="t('ui.carousel.next')"
           v-bind="typeof next === 'object' ? next : undefined"
           :class="ui.next({ class: props.ui?.next })"
           @click="scrollNext"
@@ -300,7 +302,7 @@ defineExpose({
       <div v-if="dots" :class="ui.dots({ class: props.ui?.dots })">
         <template v-for="(_, index) in scrollSnaps" :key="index">
           <button
-            :aria-label="`Go to slide ${index + 1}`"
+            :aria-label="t('ui.carousel.goto', { slide: index + 1 })"
             :class="ui.dot({ class: props.ui?.dot, active: selectedIndex === index })"
             @click="scrollTo(index)"
           />

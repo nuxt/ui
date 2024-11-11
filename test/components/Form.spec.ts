@@ -363,4 +363,34 @@ describe('Form', () => {
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(0)
     })
   })
+
+  test('form field errorPattern works', async () => {
+    const wrapper = await mountSuspended({
+      components: {
+        UFormField,
+        UForm,
+        UInput
+      },
+      setup() {
+        const form = ref()
+        const state = reactive({})
+        function validate() {
+          return [{ name: 'email.1', message: 'Error message' }]
+        }
+        return { state, validate, form }
+      },
+      template: `
+          <UForm ref="form" :state="state" :validate="validate">
+            <UFormField id="emailField" :error-pattern="/(email)\\..*/">
+              <UInput id="emailInput" v-model="state.email" />
+            </UFormField>
+          </UForm>
+        `
+    })
+
+    const form = wrapper.setupState.form
+    form.value.submit()
+    await flushPromises()
+    expect(wrapper.html()).toContain('Error message')
+  })
 })

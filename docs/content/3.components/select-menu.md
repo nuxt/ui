@@ -200,7 +200,9 @@ props:
 
 ### Search Input
 
-Use the `search-input` prop to customize the search input. Defaults to `{ placeholder: 'Search...' }`{lang="ts-type"}.
+Use the `search-input` prop to customize or hide the search input (with `false` value).
+
+You can pass all the props of the [Input](/components/input) component to customize it.
 
 ::component-code
 ---
@@ -219,6 +221,7 @@ props:
     icon: 'i-lucide-circle-help'
   searchInput:
     placeholder: 'Filter...'
+    icon: 'i-lucide-search'
   items:
     - label: Backlog
       icon: 'i-lucide-circle-help'
@@ -766,12 +769,23 @@ This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebo
 
 ### With custom search
 
-Use the `filter` prop with an array of fields to filter on.
+Use the `filter` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
 ::component-example
 ---
 collapse: true
 name: 'select-menu-filter-fields-example'
+---
+::
+
+### As a country picker
+
+This example demonstrates using the SelectMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
+
+::component-example
+---
+collapse: true
+name: 'select-menu-countries-example'
 ---
 ::
 

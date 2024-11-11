@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
@@ -36,9 +37,10 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
   /**
    * Whether to display the search input or not.
    * Can be an object to pass additional props to the input.
-   * @defaultValue { placeholder: 'Search...' }
+   * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
+   * @defaultValue true
    */
-  searchInput?: boolean | { placeholder?: string }
+  searchInput?: boolean | InputProps
   color?: SelectMenuVariants['color']
   variant?: SelectMenuVariants['variant']
   size?: SelectMenuVariants['size']
@@ -69,9 +71,10 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
    */
   portal?: boolean
   /**
-   * Whether to filter items or not, can be an array of fields to filter.
+   * Whether to filter items or not, can be an array of fields to filter. Defaults to `[labelKey]`.
    * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
-   * @defaultValue ['label']
+   * `['label']`{lang="ts-type"}
+   * @defaultValue true
    */
   filter?: boolean | string[]
   /**
@@ -83,7 +86,7 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: SelectItemKey<T>
+  labelKey?: V
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
@@ -128,7 +131,7 @@ extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3']
 import { computed, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
-import * as isEqual from 'fast-deep-equal'
+import { isEqual } from 'ohash'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
@@ -138,13 +141,14 @@ import { get, escapeRegExp } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
+import UInput from './Input.vue'
 
 const props = withDefaults(defineProps<SelectMenuProps<T, I, V, M>>(), {
   search: true,
   portal: true,
   autofocusDelay: 0,
-  searchInput: () => ({ placeholder: 'Search...' }),
-  filter: () => ['label'],
+  searchInput: true,
+  filter: true,
   labelKey: 'label' as never
 })
 
@@ -154,9 +158,14 @@ const slots = defineSlots<SelectMenuSlots<T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur'), emits)
+
+const { t } = useLocale()
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: 'Search...', variant: 'none' }) as InputProps)
+// This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
+const multiple = toRef(() => typeof props.multiple === 'string' ? true : props.multiple)
 
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -176,11 +185,15 @@ const ui = computed(() => selectMenu({
 }))
 
 function displayValue(value: T | T[]): string {
-  if (props.multiple && Array.isArray(value)) {
-    return value.map(v => displayValue(v)).join(', ')
+  if (multiple.value && Array.isArray(value)) {
+    return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
 
-  const item = items.value.find(item => props.valueKey ? isEqual.default(get(item as Record<string, any>, props.valueKey as string), value) : isEqual.default(item, value)) ?? (props.createItem && value)
+  if (!props.valueKey) {
+    return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
+  }
+
+  const item = items.value.find(item => isEqual(get(item as Record<string, any>, props.valueKey as string), value)) ?? (props.createItem && value)
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
@@ -276,6 +289,7 @@ function onUpdateOpen(value: boolean) {
     as-child
     :name="name"
     :disabled="disabled"
+    :multiple="multiple"
     :display-value="() => searchTerm"
     :filter-function="() => rootItems"
     @update:model-value="onUpdate"
@@ -311,17 +325,13 @@ function onUpdateOpen(value: boolean) {
 
     <ComboboxPortal :disabled="!portal">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-        <ComboboxInput
-          v-if="!!searchInput"
-          autofocus
-          autocomplete="off"
-          v-bind="typeof searchInput === 'object' ? searchInput : {}"
-          :class="ui.input({ class: props.ui?.input })"
-        />
+        <ComboboxInput v-if="!!searchInput" as-child>
+          <UInput autofocus autocomplete="off" v-bind="searchInputProps" :class="ui.input({ class: props.ui?.input })" />
+        </ComboboxInput>
 
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
+            {{ searchTerm ? t('ui.selectMenu.noMatch', { searchTerm }) : t('ui.selectMenu.noData') }}
           </slot>
         </ComboboxEmpty>
 

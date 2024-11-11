@@ -4,6 +4,7 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slideover'
+import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
 
@@ -94,7 +95,8 @@ const contentEvents = computed(() => {
   if (props.preventClose) {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
-      interactOutside: (e: Event) => e.preventDefault()
+      interactOutside: (e: Event) => e.preventDefault(),
+      escapeKeyDown: (e: Event) => e.preventDefault()
     }
   }
 
@@ -102,6 +104,7 @@ const contentEvents = computed(() => {
 })
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 
 const ui = computed(() => slideover({
   transition: props.transition,
@@ -142,7 +145,7 @@ const ui = computed(() => slideover({
                     size="md"
                     color="neutral"
                     variant="ghost"
-                    aria-label="Close"
+                    :aria-label="t('ui.slideover.close')"
                     v-bind="typeof close === 'object' ? close : undefined"
                     :class="ui.close({ class: props.ui?.close })"
                   />

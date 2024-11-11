@@ -145,7 +145,8 @@ describe('Table', () => {
   it.each([
     // Props
     ['with data', { props }],
-    ['without results', {}],
+    ['without data', {}],
+    ['with caption', { props: { ...props, caption: 'Table caption' } }],
     ['with columns', { props: { ...props, columns } }],
     ['with sticky', { props: { ...props, sticky: true } }],
     ['with loading', { props: { ...props, loading: true } }],
@@ -157,7 +158,8 @@ describe('Table', () => {
     ['with header slot', { props, slots: { 'id-header': () => 'ID Header slot' } }],
     ['with cell slot', { props, slots: { 'id-cell': () => 'ID Cell slot' } }],
     ['with expanded slot', { props, slots: { expanded: () => 'Expanded slot' } }],
-    ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }]
+    ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],
+    ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<typeof data[number]>, slots?: Partial<TableSlots<typeof data[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()

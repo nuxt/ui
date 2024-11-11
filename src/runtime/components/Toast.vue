@@ -4,6 +4,7 @@ import type { ToastRootProps, ToastRootEmits } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
+import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ButtonProps } from '../types'
 
@@ -74,6 +75,7 @@ const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
 const multiline = computed(() => !!props.title && !!props.description)
@@ -151,7 +153,7 @@ defineExpose({
             size="md"
             color="neutral"
             variant="link"
-            aria-label="Close"
+            :aria-label="t('ui.toast.close')"
             v-bind="typeof close === 'object' ? close : undefined"
             :class="ui.close({ class: props.ui?.close })"
             @click.stop

@@ -726,12 +726,23 @@ This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebo
 
 ### With custom search
 
-Use the `filter` prop with an array of fields to filter on.
+Use the `filter` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
 ::component-example
 ---
 collapse: true
 name: 'input-menu-filter-fields-example'
+---
+::
+
+### As a country picker
+
+This example demonstrates using the InputMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
+
+::component-example
+---
+collapse: true
+name: 'input-menu-countries-example'
 ---
 ::
 

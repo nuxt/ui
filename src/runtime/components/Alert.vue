@@ -3,6 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
+import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ButtonProps } from '../types'
 
@@ -74,6 +75,7 @@ const emits = defineEmits<AlertEmits>()
 const slots = defineSlots<AlertSlots>()
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 
 const multiline = computed(() => !!props.title && !!props.description)
 
@@ -123,7 +125,7 @@ const ui = computed(() => alert({
           size="md"
           color="neutral"
           variant="link"
-          aria-label="Close"
+          :aria-label="t('ui.alert.close')"
           v-bind="typeof close === 'object' ? close : undefined"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"

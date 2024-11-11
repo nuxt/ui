@@ -1,11 +1,13 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
+import { localeContextInjectionKey } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
-import type { ToasterProps } from '../types'
+import type { ToasterProps, Locale } from '../types'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
+  locale?: Locale
 }
 
 export interface AppSlots {
@@ -20,7 +22,7 @@ extendDevtoolsMeta({ ignore: true })
 </script>
 
 <script setup lang="ts">
-import { toRef, useId } from 'vue'
+import { toRef, useId, provide, computed } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import UToaster from './Toaster.vue'
@@ -33,6 +35,8 @@ defineSlots<AppSlots>()
 const configProviderProps = useForwardProps(reactivePick(props, 'dir', 'scrollBody'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
+
+provide(localeContextInjectionKey, computed(() => props.locale))
 </script>
 
 <template>
