@@ -12,7 +12,8 @@ import {
   USelectMenu,
   UInputMenu,
   USwitch,
-  USlider
+  USlider,
+  UPinInput
 } from '#components'
 
 export async function renderForm(options: {
@@ -45,7 +46,8 @@ export async function renderForm(options: {
           USelectMenu,
           UInputMenu,
           USwitch,
-          USlider
+          USlider,
+          UPinInput
         },
         template: options.slotTemplate
       }

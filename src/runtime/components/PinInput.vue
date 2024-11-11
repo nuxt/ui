@@ -27,7 +27,9 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
   ui?: PartialString<typeof pinInput.slots>
 }
 
-export interface PinInputEmits extends PinInputRootEmits {}
+export type PinInputEmits = PinInputRootEmits & {
+  change: [payload: Event]
+}
 </script>
 
 <script setup lang="ts">
@@ -45,19 +47,31 @@ const props = withDefaults(defineProps<PinInputProps>(), {
 const emits = defineEmits<PinInputEmits>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'placeholder', 'required', 'type'), emits)
+const { emitFormInput, emitFormChange, size, color, id, name, highlight, disabled } = useFormField<PinInputProps>(props)
 
 const ui = computed(() => pinInput({
-  color: props.color,
+  color: color.value,
   variant: props.variant,
-  size: props.size,
-  highlight: props.highlight
+  size: size.value,
+  highlight: highlight.value
 }))
+
+function onComplete(value: string[]) {
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
+  const event = new Event('change', { target: { value } })
+  emits('change', event)
+  emitFormChange()
+}
 </script>
 
 <template>
   <PinInputRoot
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
     v-bind="rootProps"
+    :id="id"
+    :name="name"
+    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    @update:model-value="emitFormInput()"
+    @complete="onComplete"
   >
     <PinInputInput
       v-for="(ids, index) in looseToNumber(props.length)"
@@ -65,6 +79,7 @@ const ui = computed(() => pinInput({
       :index="index"
       :class="ui.base({ class: props.ui?.base })"
       v-bind="$attrs"
+      :disabled="disabled"
     />
   </PinInputRoot>
 </template>

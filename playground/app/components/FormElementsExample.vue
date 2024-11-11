@@ -29,7 +29,8 @@ const schema = z.object({
   radioGroup: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
-  slider: z.number().max(20, { message: 'Must be less than 20' })
+  slider: z.number().max(20, { message: 'Must be less than 20' }),
+  pin: z.array(z.string().regex(/^[1-9]$/)).length(4)
 })
 
 type Schema = z.output<typeof schema>
@@ -93,6 +94,10 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
 
     <UFormField name="slider" label="Slider">
       <USlider v-model="state.slider" />
+    </UFormField>
+
+    <UFormField name="pin" label="Pin Input">
+      <UPinInput v-model="state.pin" />
     </UFormField>
 
     <div class="flex gap-2">
