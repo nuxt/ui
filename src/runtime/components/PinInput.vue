@@ -29,6 +29,7 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
 
 export type PinInputEmits = PinInputRootEmits & {
   change: [payload: Event]
+  blur: [payload: Event]
 }
 </script>
 
@@ -56,6 +57,7 @@ const ui = computed(() => pinInput({
   highlight: highlight.value
 }))
 
+const completed = ref(false)
 function onComplete(value: string[]) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -63,8 +65,9 @@ function onComplete(value: string[]) {
   emitFormChange()
 }
 
-function onBlur(e: FocusEvent) {
-  if (!e.relatedTarget) {
+function onBlur(event: FocusEvent) {
+  if (!event.relatedTarget || completed.value) {
+    emits('blur', event)
     emitFormBlur()
   }
 }

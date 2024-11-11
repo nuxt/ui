@@ -50,6 +50,15 @@ describe('PinInput', () => {
       await flushPromises()
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
+
+    test('blur event', async () => {
+      const wrapper = mount(PinInput)
+      const lastPin = wrapper.find('input[aria-label="pin input 5 of 0"]')
+      lastPin.trigger('blur')
+      await flushPromises()
+
+      expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
   })
 
   describe('form integration', async () => {
@@ -85,6 +94,21 @@ describe('PinInput', () => {
       expect(wrapper.text()).toContain('Error message')
 
       await input.vm.$emit('update:modelValue', ['1', '2', '3', '4', '5'])
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on blur works', async () => {
+      const { input, wrapper } = await createForm(['blur'])
+      const lastPin = wrapper.find('input[aria-label="pin input 5 of 5"]')
+
+      await input.vm.$emit('update:modelValue', ['1', '2', '3', '4'])
+      lastPin.trigger('blur')
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.vm.$emit('update:modelValue', ['1', '2', '3', '4', '5'])
+      lastPin.trigger('blur')
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })

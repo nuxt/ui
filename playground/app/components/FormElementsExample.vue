@@ -30,10 +30,10 @@ const schema = z.object({
     message: 'Select Option 2'
   }),
   slider: z.number().max(20, { message: 'Must be less than 20' }),
-  pin: z.array(z.string().regex(/^[1-9]$/)).length(4)
+  pin: z.string().regex(/^\d$/).array().length(5)
 })
 
-type Schema = z.output<typeof schema>
+type Schema = z.input<typeof schema>
 
 const state = reactive<Partial<Schema>>({})
 

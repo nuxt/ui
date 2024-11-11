@@ -32,7 +32,7 @@ const schema = z.object({
   slider: z.number().max(20, { message: 'Must be less than 20' })
 })
 
-type Schema = z.output<typeof schema>
+type Schema = z.input<typeof schema>
 
 const state = reactive<Partial<Schema>>({})
 
