@@ -105,7 +105,7 @@
 
                 <slot
                   v-else
-                  :key="retriggetSlot"
+                  :key="retriggerSlot"
                   :name="`${column.key}-data`"
                   :column="column"
                   :row="row"
@@ -285,7 +285,7 @@ export default defineComponent({
       })
     })
 
-    const retriggetSlot = ref(null)
+    const retriggerSlot = ref(null)
 
     const savedSort = { column: sort.value.column, direction: null }
 
@@ -470,7 +470,7 @@ export default defineComponent({
     }
 
     watch(rows, () => {
-      retriggetSlot.value = new Date()
+      retriggerSlot.value = new Date()
     }, {
       deep: true
     })
@@ -503,7 +503,7 @@ export default defineComponent({
       getAriaSort,
       isExpanded,
       shouldRenderColumnInFirstPlace,
-      shouldRetriggetSlot
+      retriggerSlot
     }
   }
 })
