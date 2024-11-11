@@ -21,37 +21,27 @@ export default (options: Required<ModuleOptions>) => {
       size: {
         xs: {
           base: 'px-2 py-1 text-xs gap-1',
-          increment: '',
           incrementIcon: 'size-4',
-          decrement: '',
           decrementIcon: 'size-4'
         },
         sm: {
           base: 'px-2.5 py-1.5 text-xs gap-1.5',
-          increment: '',
           incrementIcon: 'size-4',
-          decrement: '',
           decrementIcon: 'size-4'
         },
         md: {
           base: 'px-2.5 py-1.5 text-sm gap-1.5',
-          increment: '',
           incrementIcon: 'size-5',
-          decrement: '',
           decrementIcon: 'size-5'
         },
         lg: {
           base: 'px-3 py-2 text-sm gap-2',
-          increment: '',
           incrementIcon: 'size-5',
-          decrement: '',
           decrementIcon: 'size-5'
         },
         xl: {
           base: 'px-3 py-2 text-base gap-2',
-          increment: '',
           incrementIcon: 'size-6',
-          decrement: '',
           decrementIcon: 'size-6'
         }
       },
