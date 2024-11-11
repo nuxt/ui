@@ -18,6 +18,7 @@ export interface InputNumberProps extends NumberFieldRootProps {
   color?: InputNumberVariants['color']
   variant?: InputNumberVariants['variant']
   size?: InputNumberVariants['size']
+  orientation?: 'vertical' | 'horizontal'
 }
 
 export interface InputNumberEmits {
@@ -41,7 +42,9 @@ import { useFormField } from '../composables/useFormField'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<InputNumberProps>()
+const props = withDefaults(defineProps<InputNumberProps>(), {
+  orientation: 'vertical'
+})
 const emits = defineEmits<InputNumberEmits>()
 const _slots = defineSlots<InputNumberSlots>()
 

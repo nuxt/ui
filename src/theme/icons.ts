@@ -13,5 +13,7 @@ export default {
   loading: 'i-lucide-refresh-ccw',
   plus: 'i-lucide-plus',
   minus: 'i-lucide-minus',
+  increment: 'i-lucide-chevron-up',
+  decrement: 'i-lucide-chevron-down',
   search: 'i-lucide-search'
 }
