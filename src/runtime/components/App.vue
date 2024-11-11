@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
+import { localeContextInjectionKey } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ToasterProps, Locale } from '../types'
 
@@ -27,7 +28,6 @@ import { reactivePick } from '@vueuse/core'
 import UToaster from './Toaster.vue'
 import UModalProvider from './ModalProvider.vue'
 import USlideoverProvider from './SlideoverProvider.vue'
-import { localeContextInjectionKey } from '../composables/useLocale'
 
 const props = defineProps<AppProps>()
 defineSlots<AppSlots>()
