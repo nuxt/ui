@@ -5,14 +5,10 @@ const retries = ref(0)
 <template>
   <UInputNumber v-model="retries">
     <template #decrement>
-      <UButton size="xs">
-        -
-      </UButton>
+      <UButton as="span" size="xs" icon="i-lucide-minus" />
     </template>
     <template #increment>
-      <UButton size="xs">
-        +
-      </UButton>
+      <UButton as="span" size="xs" icon="i-lucide-plus" />
     </template>
   </UInputNumber>
 </template>
