@@ -11,7 +11,7 @@ const inputNumber = tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {})
 
 type InputNumberVariants = VariantProps<typeof inputNumber>
 
-export interface InputNumberProps extends NumberFieldRootProps {
+export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'disabled' | 'required' | 'id'> {
   class?: any
   /** The placeholder text when the input is empty. */
   placeholder?: string
