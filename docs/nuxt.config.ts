@@ -70,7 +70,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/getting-started'
+        '/getting-started',
+        '/api/countries.json'
         // '/api/releases.json',
         // '/api/pulls.json'
       ],

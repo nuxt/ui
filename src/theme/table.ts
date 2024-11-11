@@ -4,6 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative overflow-auto',
     base: 'min-w-full overflow-clip',
+    caption: 'sr-only',
     thead: 'relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)]',
     tbody: 'divide-y divide-[var(--ui-border)]',
     tr: 'data-[selected=true]:bg-[var(--ui-bg-elevated)]/50',

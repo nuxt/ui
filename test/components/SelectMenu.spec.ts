@@ -49,6 +49,7 @@ describe('SelectMenu', () => {
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['without searchInput', { props: { ...props, searchInput: false } }],
     ['with searchInput placeholder', { props: { ...props, searchInput: { placeholder: 'Filter items...' } } }],
+    ['with searchInput icon', { props: { ...props, searchInput: { icon: 'i-lucide-search' } } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with required', { props: { ...props, required: true } }],
     ['with icon', { props: { icon: 'i-lucide-search' } }],

@@ -40,6 +40,8 @@ import ULink from './Link.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UKbd from './Kbd.vue'
+// eslint-disable-next-line import/no-self-import
+import UDropdownMenuContent from './DropdownMenuContent.vue'
 
 const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()

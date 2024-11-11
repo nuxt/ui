@@ -78,9 +78,10 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
    */
   portal?: boolean
   /**
-   * Whether to filter items or not, can be an array of fields to filter.
-   * When `false`, items will not be filtered which is useful for custom filtering.
-   * @defaultValue ['label']
+   * Whether to filter items or not, can be an array of fields to filter. Defaults to `[labelKey]`.
+   * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
+   * `['label']`{lang="ts-type"}
+   * @defaultValue true
    */
   filter?: boolean | string[]
   /**
@@ -149,7 +150,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, I, V, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  filter: () => ['label'],
+  filter: true,
   labelKey: 'label' as never
 })
 const emits = defineEmits<InputMenuEmits<T, V, M>>()
