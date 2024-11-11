@@ -14,7 +14,7 @@
             {{ title }}
           </slot>
         </p>
-        <div v-if="description || $slots.description" :class="twMerge(ui.description, !title && !$slots.title && 'mt-0 leading-5')">
+        <div v-if="description || $slots.description" :class="twMerge(ui.default.description, !title && !$slots.title && ui.description)">
           <slot name="description" :description="description">
             {{ description }}
           </slot>
