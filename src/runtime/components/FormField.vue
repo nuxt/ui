@@ -68,7 +68,8 @@ provide(formFieldInjectionKey, computed(() => ({
   name: props.name,
   size: props.size,
   eagerValidation: props.eagerValidation,
-  validateOnInputDelay: props.validateOnInputDelay
+  validateOnInputDelay: props.validateOnInputDelay,
+  errorPattern: props.errorPattern
 }) as FormFieldInjectedOptions<FormFieldProps>))
 </script>
 
