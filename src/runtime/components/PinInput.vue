@@ -62,6 +62,12 @@ function onComplete(value: string[]) {
   emits('change', event)
   emitFormChange()
 }
+
+function onBlur(e: FocusEvent) {
+  if (!e.relatedTarget) {
+    emitFormBlur()
+  }
+}
 </script>
 
 <template>
@@ -80,6 +86,7 @@ function onComplete(value: string[]) {
       :class="ui.base({ class: props.ui?.base })"
       v-bind="$attrs"
       :disabled="disabled"
+      @blur="onBlur"
     />
   </PinInputRoot>
 </template>
