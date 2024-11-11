@@ -8,6 +8,7 @@ import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
+import { useLocale } from '../composables/useLocale'
 
 const appConfig = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
 

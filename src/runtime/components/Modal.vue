@@ -6,6 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
+import { useLocale } from '../composables/useLocale'
 
 const appConfig = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
 

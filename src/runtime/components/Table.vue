@@ -25,6 +25,7 @@ import type {
 } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
+import { useLocale } from '../composables/useLocale'
 
 const appConfig = _appConfig as AppConfig & { ui: { table: Partial<typeof theme> } }
 

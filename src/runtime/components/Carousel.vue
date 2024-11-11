@@ -13,6 +13,7 @@ import theme from '#build/ui/carousel'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
 import type { AcceptableValue, PartialString } from '../types/utils'
+import { useLocale } from '../composables/useLocale'
 
 const appConfig = _appConfig as AppConfig & { ui: { carousel: Partial<typeof theme> } }
 

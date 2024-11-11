@@ -5,6 +5,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ButtonProps } from '../types'
+import { useLocale } from '../composables/useLocale'
 
 const appConfig = _appConfig as AppConfig & { ui: { alert: Partial<typeof theme> } }
 
