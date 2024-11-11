@@ -94,13 +94,13 @@ onUnmounted(() => {
 const errors = ref<FormErrorWithId[]>([])
 provide('form-errors', errors)
 
-const inputs = ref<Record<string, string>>({})
+const inputs = ref<Record<string, { id?: string, pattern?: RegExp }>>({})
 provide(formInputsInjectionKey, inputs)
 
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
     ...err,
-    id: inputs.value[err.name]
+    id: inputs.value[err.name]?.id
   }))
 }
 
@@ -129,7 +129,7 @@ async function getErrors(): Promise<FormErrorWithId[]> {
 }
 
 async function _validate(opts: { name?: string | string[], silent?: boolean, nested?: boolean } = { silent: false, nested: true }): Promise<T | false> {
-  const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name
+  const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as string[]
 
   const nestedValidatePromises = !names && opts.nested
     ? Array.from(nestedForms.value.values()).map(
@@ -143,9 +143,16 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
     : []
 
   if (names) {
-    const otherErrors = errors.value.filter(error => !names!.includes(error.name))
-    const pathErrors = (await getErrors()).filter(error => names!.includes(error.name)
-    )
+    const otherErrors = errors.value.filter(error => !names.some((name) => {
+      const pattern = inputs.value?.[name]?.pattern
+      return name === error.name || (pattern && error.name.match(pattern))
+    }))
+
+    const pathErrors = (await getErrors()).filter(error => names.some((name) => {
+      const pattern = inputs.value?.[name]?.pattern
+      return name === error.name || (pattern && error.name.match(pattern))
+    }))
+
     errors.value = otherErrors.concat(pathErrors)
   } else {
     errors.value = await getErrors()

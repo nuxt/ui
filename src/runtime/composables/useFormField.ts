@@ -19,7 +19,7 @@ export const formOptionsInjectionKey: InjectionKey<ComputedRef<FormInjectedOptio
 export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent, string>> = Symbol('nuxt-ui.form-events')
 export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<FormFieldProps>>> = Symbol('nuxt-ui.form-field')
 export const inputIdInjectionKey: InjectionKey<Ref<string | undefined>> = Symbol('nuxt-ui.input-id')
-export const formInputsInjectionKey: InjectionKey<Ref<Record<string, string>>> = Symbol('nuxt-ui.form-inputs')
+export const formInputsInjectionKey: InjectionKey<Ref<Record<string, { id?: string, pattern?: RegExp }>>> = Symbol('nuxt-ui.form-inputs')
 export const formLoadingInjectionKey: InjectionKey<Readonly<Ref<boolean>>> = Symbol('nuxt-ui.form-loading')
 
 export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean }) {
@@ -38,7 +38,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean }) {
       inputId.value = props?.id
     }
     if (formInputs && formField.value.name && inputId.value) {
-      formInputs.value[formField.value.name] = inputId.value
+      formInputs.value[formField.value.name] = { id: inputId.value, pattern: formField.value.errorPattern }
     }
   }
 
