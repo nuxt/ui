@@ -252,7 +252,7 @@ async function validateJoiSchema(
   schema: JoiSchema
 ): Promise<ValidateReturnSchema<typeof state>> {
   try {
-    const result = schema.validateAsync(state, { abortEarly: false })
+    const result = await schema.validateAsync(state, { abortEarly: false })
     return {
       errors: null,
       result
