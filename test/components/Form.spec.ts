@@ -16,7 +16,6 @@ import {
   UFormField
 } from '#components'
 import { flushPromises } from '@vue/test-utils'
-import { parseSchema } from '../../src/runtime/utils/form'
 
 describe('Form', () => {
   it.each([
@@ -402,8 +401,39 @@ describe('Form', () => {
     ])(
       '%s schema transform works',
       async (_name: string, schema: any, input: any, expected: any) => {
-        const { result } = await parseSchema(input, schema)
-        expect(result).toEqual(expected)
+        const wrapper = await mountSuspended({
+          components: {
+            UFormField,
+            UForm,
+            UInput
+          },
+          setup() {
+            const form = ref()
+            const state = reactive({})
+            const onSubmit = vi.fn()
+            return { state, schema, form, onSubmit }
+          },
+          template: `
+          <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit">
+            <UFormField name="value">
+              <UInput id="input" v-model="state.value" />
+            </UFormField>
+          </UForm>
+        `
+        })
+        const form = wrapper.setupState.form
+        const state = wrapper.setupState.state
+
+        const inputEl = wrapper.find('#input')
+        inputEl.setValue(input.value)
+
+        form.value.submit()
+        await flushPromises()
+
+        expect(state.value).toEqual(expected.value)
+        expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+          data: expected
+        }))
       }
     )
   })
