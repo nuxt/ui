@@ -11,7 +11,7 @@ const inputNumber = tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {})
 
 type InputNumberVariants = VariantProps<typeof inputNumber>
 
-export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'disabled' | 'required' | 'id'> {
+export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'disabled' | 'required' | 'id' | 'name'> {
   class?: any
   /** The placeholder text when the input is empty. */
   placeholder?: string
@@ -133,7 +133,7 @@ defineExpose({
     :default-value="defaultValue"
     :name="name"
     :disabled="disabled"
-    @input="onInput"
+    @update:model-value="onInput"
   >
     <NumberFieldInput
       v-bind="$attrs"
