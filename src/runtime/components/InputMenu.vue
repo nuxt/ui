@@ -205,7 +205,7 @@ function filterFunction(
   inputItems: ArrayOrWrapped<T> = items.value as ArrayOrWrapped<T>,
   filterSearchTerm: string = searchTerm.value,
   comparator = (item: any, term: string) => String(item).search(new RegExp(term, 'i')) !== -1
-): ArrayOrWrapped<AcceptableValue> {
+): ArrayOrWrapped<T> {
   if (props.filter === false) {
     return inputItems
   }
@@ -235,7 +235,7 @@ const creatable = computed(() => {
     return false
   }
 
-  const isModelValueCustom = props.modelValue && filterFunction((props.multiple && Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue]) as ArrayOrWrapped<AcceptableValue>, searchTerm.value, (item, term) => String(item) === term).length === 1
+  const isModelValueCustom = props.modelValue && filterFunction((props.multiple && Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue]) as ArrayOrWrapped<T>, searchTerm.value, (item, term) => String(item) === term).length === 1
 
   if (isModelValueCustom) {
     return false
@@ -258,7 +258,7 @@ const rootItems = computed(() => [
   ...(creatable.value && creatable.value.position === 'top' ? [creatable.value.item] : []),
   ...filterFunction(),
   ...(creatable.value && creatable.value.position === 'bottom' ? [creatable.value.item] : [])
-] as ArrayOrWrapped<AcceptableValue>)
+] as ArrayOrWrapped<T>)
 
 const inputRef = ref<InstanceType<typeof ComboboxInput> | null>(null)
 
