@@ -42,6 +42,7 @@
         v-for="size in sizes"
         :key="size"
         :size="size"
+        :placeholder="`Horizontal ${size}`"
         class="w-48"
       />
     </div>
@@ -51,7 +52,8 @@
         :key="size"
         :size="size"
         class="w-48"
-        orientation="horizontal"
+        :placeholder="`Vertical ${size}`"
+        orientation="vertical"
       />
     </div>
   </div>
