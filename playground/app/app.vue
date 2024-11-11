@@ -25,6 +25,7 @@ const components = [
   'form-field',
   'input',
   'input-menu',
+  'input-number',
   'kbd',
   'link',
   'modal',
