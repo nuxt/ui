@@ -1,7 +1,7 @@
 import { existsSync, promises as fsp } from 'node:fs'
 import { resolve } from 'pathe'
 import { consola } from 'consola'
-import { appendFile, sortFile } from '../../utils.mjs'
+import { appendFile, sortFile, normalizeLocale } from '../../utils.mjs'
 import { defineCommand } from 'citty'
 
 export default defineCommand({
@@ -45,7 +45,7 @@ export default defineCommand({
     // Create new locale file
     await fsp.copyFile(originLocaleFilePath, newLocaleFilePath)
     const localeFile = await fsp.readFile(newLocaleFilePath, 'utf-8')
-    const rewrittenLocaleFile = localeFile.replace(/defineLocale\('(.*)'/, `defineLocale('${args.name}'`)
+    const rewrittenLocaleFile = localeFile.replace(/defineLocale\('(.*)'/, `defineLocale('${args.name}', '${normalizeLocale(args.code)}'`)
     await fsp.writeFile(newLocaleFilePath, rewrittenLocaleFile)
 
     consola.success(`🪄 Generated ${newLocaleFilePath}`)

@@ -1,6 +1,6 @@
 import { defineLocale } from '../composables/defineLocale'
 
-export default defineLocale('Русский', {
+export default defineLocale('Русский', 'ru', {
   inputMenu: {
     noMatch: 'Совпадений не найдено',
     noData: 'Нет данных'

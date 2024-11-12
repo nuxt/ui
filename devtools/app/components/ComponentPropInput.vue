@@ -17,14 +17,14 @@ watchEffect(() => {
 })
 
 const description = computed(() => {
-  return props.meta.description?.replace(/`([^`]+)`/g, '<code class="font-medium bg-[var(--ui-bg-elevated)] px-1 py-0.5 rounded">$1</code>')
+  return props.meta.description?.replace(/`([^`]+)`/g, '<code class="font-medium bg-[var(--ui-bg-elevated)] px-1 py-0.5 rounded-[var(--ui-radius)]">$1</code>')
 })
 </script>
 
 <template>
   <UFormField :name="meta?.name" class="" :ui="{ wrapper: 'mb-2' }" :class="{ 'opacity-70 cursor-not-allowed': !matchedInput || ignore }">
     <template #label>
-      <p v-if="meta?.name" class="font-mono font-bold px-1.5 py-0.5 border border-[var(--ui-border-accented)] border-dashed rounded bg-[var(--ui-bg-elevated)]">
+      <p v-if="meta?.name" class="font-mono font-bold px-1.5 py-0.5 border border-[var(--ui-border-accented)] border-dashed rounded-[var(--ui-radius)] bg-[var(--ui-bg-elevated)]">
         {{ meta?.name }}
       </p>
     </template>

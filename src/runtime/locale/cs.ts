@@ -1,6 +1,6 @@
 import { defineLocale } from '../composables/defineLocale'
 
-export default defineLocale('Čeština', {
+export default defineLocale('Čeština', 'cs', {
   inputMenu: {
     noMatch: 'Žádná shoda',
     noData: 'Žádná data'

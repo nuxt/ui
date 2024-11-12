@@ -1,6 +1,6 @@
 import { defineLocale } from '../composables/defineLocale'
 
-export default defineLocale('العربية', {
+export default defineLocale('العربية', 'ar', {
   inputMenu: {
     noMatch: 'لا توجد نتائج مطابقة',
     noData: 'لا توجد بيانات'
