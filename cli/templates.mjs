@@ -171,13 +171,14 @@ const doc = ({ name, pro }) => {
     filename: `docs/content/${pro ? 'pro' : '3.components'}/${kebabName}.md`,
     contents: `---
 description:
-links:
-  - label: ${upperName}
+links: ${pro
+  ? ''
+  : `- label: ${upperName}
     icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/${kebabName}.html
+    to: https://www.radix-vue.com/components/${kebabName}.html`}
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/${upperName}.vue
+    to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v3/src/runtime/components/${upperName}.vue
 ---
 
 ## Usage
