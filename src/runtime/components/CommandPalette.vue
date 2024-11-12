@@ -35,7 +35,7 @@ export interface CommandPaletteGroup<T> {
   slot?: string
   items?: T[]
   /**
-   * Wether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
+   * Whether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
    * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
    * @defaultValue true
    */
