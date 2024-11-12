@@ -13,21 +13,23 @@ describe('PinInput', () => {
 
   it.each([
     // Props
-    ['with as', { props: { as: 'div' } }],
-    ['with modelValue', { props: { modelValue: [] } }],
+    ['with as', { props: { as: 'span' } }],
+    ['with modelValue', { props: { modelValue: ['1'] } }],
     ['with defaultValue', { props: { defaultValue: ['1'] } }],
-    ['with type', { props: { type: 'text' } }],
+    ['with id', { props: { id: 'pin-input-id' } }],
+    ['with name', { props: { name: 'pin-input-name' } }],
+    ['with type', { props: { type: 'number' } }],
     ['with placeholder', { props: { placeholder: '*' } }],
     ['with length', { props: { length: 6 } }],
     ['with disabled', { props: { disabled: true } }],
     ['with required', { props: { required: true } }],
+    ['with mask', { props: { mask: true } }],
     ['with otp', { props: { otp: true } }],
-    ['with id', { props: { id: 'pin-input-id' } }],
-    ['with name', { props: { name: 'pin-input' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
-    ['with highlight', { props: { highlight: true } }],
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { variant, color: 'neutral', highlight: true } }]),
     ['with class', { props: { class: '' } }],
     ['with ui', { props: { ui: {} } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PinInputProps }) => {
