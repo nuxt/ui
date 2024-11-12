@@ -81,7 +81,7 @@ describe('InputNumber', () => {
   })
 
   describe('form integration', async () => {
-    async function _createForm(validateOn?: FormInputEvents[]) {
+    async function createForm(validateOn?: FormInputEvents[]) {
       const wrapper = await renderForm({
         props: {
           validateOn,
@@ -106,11 +106,36 @@ describe('InputNumber', () => {
     }
 
     test.todo('validate on blur works', async () => {
+      const { input, wrapper } = await createForm(['blur'])
 
+      await input.trigger('blur')
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.setValue(1)
+      await wrapper.trigger('blur')
+      expect(wrapper.html()).not.toContain('Error message')
     })
 
     test.todo('validate on change works', async () => {
+      const { input, wrapper } = await createForm(['change'])
 
+      await input.setValue(2)
+      await flushPromises()
+      expect(input.text()).toContain('Error message')
+
+      await input.setValue(1)
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test.todo('validate on input works', async () => {
+      const { input, wrapper } = await createForm(['input'])
+
+      await input.setValue(2)
+      expect(input.text()).toContain('Error message')
+
+      await input.setValue(1)
+      expect(wrapper.text()).not.toContain('Error message')
     })
   })
 })

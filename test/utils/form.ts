@@ -11,6 +11,7 @@ import {
   USelect,
   USelectMenu,
   UInputMenu,
+  UInputNumber,
   USwitch,
   USlider
 } from '#components'
@@ -44,6 +45,7 @@ export async function renderForm(options: {
           USelect,
           USelectMenu,
           UInputMenu,
+          UInputNumber,
           USwitch,
           USlider
         },

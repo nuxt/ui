@@ -74,7 +74,7 @@ defineSlots<InputNumberSlots>()
 
 const modelValue = defineModel<number>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'min', 'max', 'step'), emits)
 
 const { emitFormBlur, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled } = useFormField<InputNumberProps>(props)
 
