@@ -35,8 +35,9 @@ describe('InputNumber', () => {
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(InputNumber)
-      await wrapper.setValue(1)
-      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] })
+      const input = wrapper.findComponent({ name: 'NumberFieldRoot' })
+      await input.setValue(1)
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': 1 })
     })
 
     test('change event', async () => {
