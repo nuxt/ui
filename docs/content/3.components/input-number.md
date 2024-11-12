@@ -25,6 +25,39 @@ props:
 ---
 ::
 
+### Min and Max
+
+Use the `min` and `max` props to set the minimum and maximum value of the InputNumber.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+props:
+  modelValue: 0
+  min: 0
+  max: 10
+---
+::
+
+### Step
+
+Use the `step` prop to set the step value of the InputNumber.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+props:
+  modelValue: 0 
+  step: 2
+---
+::
+
 ### Orientation
 
 Use the `orientation` prop to change the orientation of the InputNumber.
