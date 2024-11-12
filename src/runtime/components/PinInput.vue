@@ -34,8 +34,8 @@ export type PinInputEmits = PinInputRootEmits & {
 </script>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'radix-vue'
-import { computed } from 'vue'
 import { reactivePick } from '@vueuse/core'
 import { looseToNumber } from '../utils'
 
