@@ -150,7 +150,7 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 ::component-card
 ---
 props:
-  icon: 'i-heroicons-pencil-square'
+  icon: 'i-heroicons-rocket-launch'
   size: 'sm'
   color: 'primary'
   variant: 'solid'
@@ -197,7 +197,7 @@ Use the `#trailing` slot to set the content of the trailing icon.
 ::component-card
 ---
 slots:
-  trailing: <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4" />
+  trailing: <UIcon name="i-heroicons-rocket-launch" class="w-4 h-4" />
 props:
   label: Badge
   color: 'gray'
@@ -206,7 +206,7 @@ excludedProps:
 ---
 
 #trailing
-  :u-icon{name="i-heroicons-arrow-right-20-solid" class="w-4 h-4"}
+  :u-icon{name="i-heroicons-rocket-launch" class="w-4 h-4"}
 ::
 
 ## Props
