@@ -36,8 +36,11 @@ export type LocalePair = {
   }
 }
 
+export type Direction = 'ltr' | 'rtl'
+
 export type Locale = {
   name: string
   code: string
+  dir: Direction
   ui: LocalePair
 }
