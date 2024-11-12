@@ -214,6 +214,42 @@ props:
 ---
 ::
 
+### Create Item
+
+Use the `create-item` prop to allow user input.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+external:
+  - items
+  - modelValue
+items:
+  createItem:
+    - true
+    - 'always'
+props:
+  modelValue: 'Backlog'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  createItem: true
+---
+::
+
+::note
+The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
+::
+
+::tip{to="#emits"}
+Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
+::
+
 ### Content
 
 Use the `content` prop to control how the InputMenu content is rendered, like its `align` or `side` for example.

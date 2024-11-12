@@ -3,7 +3,8 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale('简体中文', 'zh-Hans', {
   inputMenu: {
     noMatch: '没有匹配的数据',
-    noData: '没有数据'
+    noData: '没有数据',
+    create: '创建 "{label}"'
   },
   commandPalette: {
     noMatch: '没有匹配的数据',
@@ -12,7 +13,8 @@ export default defineLocale('简体中文', 'zh-Hans', {
   },
   selectMenu: {
     noMatch: '没有匹配的数据',
-    noData: '没有数据'
+    noData: '没有数据',
+    create: '创建 "{label}"'
   },
   toast: {
     close: '关闭'

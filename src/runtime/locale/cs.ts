@@ -3,7 +3,8 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale('Čeština', 'cs', {
   inputMenu: {
     noMatch: 'Žádná shoda',
-    noData: 'Žádná data'
+    noData: 'Žádná data',
+    create: 'Vytvořit "{label}"'
   },
   commandPalette: {
     noMatch: 'Žádná shoda',
@@ -12,7 +13,8 @@ export default defineLocale('Čeština', 'cs', {
   },
   selectMenu: {
     noMatch: 'Žádná shoda',
-    noData: 'Žádná data'
+    noData: 'Žádná data',
+    create: 'Vytvořit "{label}"'
   },
   toast: {
     close: 'Zavřít'
