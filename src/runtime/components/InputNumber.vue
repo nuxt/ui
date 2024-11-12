@@ -38,6 +38,11 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   decrementIcon?: string
   autofocus?: boolean
   autofocusDelay?: number
+  /**
+   * The locale to use for formatting and parsing numbers.
+   * @defaultValue UApp.locale.code
+   */
+  locale?: string
 }
 
 export interface InputNumberEmits {
@@ -62,6 +67,7 @@ import {
 } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
+import { useLocale } from '../composables/useLocale'
 import { onMounted, ref, computed } from 'vue'
 
 defineOptions({ inheritAttrs: false })
@@ -77,6 +83,9 @@ const modelValue = defineModel<number>()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'min', 'max', 'step'), emits)
 
 const { emitFormBlur, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled } = useFormField<InputNumberProps>(props)
+
+const { code: codeLocale } = useLocale()
+const locale = computed(() => props.locale || codeLocale.value)
 
 const ui = computed(() => inputNumber({
   color: color.value,
@@ -131,6 +140,7 @@ defineExpose({
     :default-value="defaultValue"
     :name="name"
     :disabled="disabled"
+    :locale="locale"
     @update:model-value="onUpdate"
   >
     <NumberFieldInput
