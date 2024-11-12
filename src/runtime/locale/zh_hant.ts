@@ -3,7 +3,7 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale({
   name: '繁体中文',
   code: 'zh-Hant',
-  messages: {
+  ui: {
     inputMenu: {
       noMatch: '沒有匹配的資料',
       noData: '沒有資料',
