@@ -4,6 +4,7 @@ import type { NumberFieldRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-number'
+import type { ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputNumber: Partial<typeof theme> } }
 
@@ -12,6 +13,11 @@ const inputNumber = tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {})
 type InputNumberVariants = VariantProps<typeof inputNumber>
 
 export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   class?: any
   /** The placeholder text when the input is empty. */
   placeholder?: string
@@ -27,10 +33,20 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    */
   orientation?: 'vertical' | 'horizontal'
   /**
+   * Configure the increment button. The `color` and `size` are inherited.
+   * @defaultValue { variant: 'link' }
+   */
+  increment?: ButtonProps
+  /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.ui.icons.plus
    */
   incrementIcon?: string
+  /**
+   * Configure the decrement button. The `color` and `size` are inherited.
+   * @defaultValue { variant: 'link' }
+   */
+  decrement?: ButtonProps
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.ui.icons.minus
@@ -58,17 +74,12 @@ export interface InputNumberSlots {
 </script>
 
 <script setup lang="ts">
-import {
-  NumberFieldRoot,
-  NumberFieldInput,
-  NumberFieldDecrement,
-  NumberFieldIncrement,
-  useForwardPropsEmits
-} from 'radix-vue'
+import { onMounted, ref, computed } from 'vue'
+import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
-import { onMounted, ref, computed } from 'vue'
+import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -78,13 +89,11 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()
 
-const modelValue = defineModel<number>()
-
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'min', 'max', 'step'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'formatOptions'), emits)
 
 const { emitFormBlur, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled } = useFormField<InputNumberProps>(props)
 
-const { code: codeLocale } = useLocale()
+const { t, code: codeLocale } = useLocale()
 const locale = computed(() => props.locale || codeLocale.value)
 
 const ui = computed(() => inputNumber({
@@ -95,8 +104,8 @@ const ui = computed(() => inputNumber({
   orientation: props.orientation
 }))
 
-const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.plus : appConfig.ui.icons.increment))
-const decrementIcon = computed(() => props.decrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.minus : appConfig.ui.icons.decrement))
+const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.plus : appConfig.ui.icons.chevronUp))
+const decrementIcon = computed(() => props.decrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.minus : appConfig.ui.icons.chevronDown))
 
 const inputRef = ref<InstanceType<typeof NumberFieldInput> | null>(null)
 
@@ -135,9 +144,7 @@ defineExpose({
   <NumberFieldRoot
     v-bind="rootProps"
     :id="id"
-    v-model="modelValue"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
-    :default-value="defaultValue"
     :name="name"
     :disabled="disabled"
     :locale="locale"
@@ -151,15 +158,35 @@ defineExpose({
       :class="ui.base({ class: props.ui?.base })"
       @blur="onBlur"
     />
-    <NumberFieldIncrement :class="ui.increment({ class: props.ui?.increment })" :disabled="disabled">
-      <slot name="increment">
-        <UIcon :name="incrementIcon" :class="ui.incrementIcon({ class: props.ui?.incrementIcon })" />
-      </slot>
-    </NumberFieldIncrement>
-    <NumberFieldDecrement :class="ui.decrement({ class: props.ui?.decrement })" :disabled="disabled">
-      <slot name="decrement">
-        <UIcon :name="decrementIcon" :class="ui.decrementIcon({ class: props.ui?.decrementIcon })" />
-      </slot>
-    </NumberFieldDecrement>
+
+    <div :class="ui.increment({ class: props.ui?.increment })">
+      <NumberFieldIncrement as-child :disabled="disabled">
+        <slot name="increment">
+          <UButton
+            :icon="incrementIcon"
+            :color="color"
+            :size="size"
+            variant="link"
+            :aria-label="t('ui.inputNumber.increment')"
+            v-bind="typeof increment === 'object' ? increment : undefined"
+          />
+        </slot>
+      </NumberFieldIncrement>
+    </div>
+
+    <div :class="ui.decrement({ class: props.ui?.decrement })">
+      <NumberFieldDecrement as-child :disabled="disabled">
+        <slot name="decrement">
+          <UButton
+            :icon="decrementIcon"
+            :color="color"
+            :size="size"
+            variant="link"
+            :aria-label="t('ui.inputNumber.decrement')"
+            v-bind="typeof decrement === 'object' ? decrement : undefined"
+          />
+        </slot>
+      </NumberFieldDecrement>
+    </div>
   </NumberFieldRoot>
 </template>
