@@ -163,9 +163,54 @@ describe('${upperName}', () => {
   }
 }
 
+const doc = ({ name }) => {
+  const kebabName = kebabCase(name)
+  const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
+
+  return {
+    // TODO: change the path after adding PRO components
+    filename: `docs/content/3.components/${kebabName}.md`,
+    contents: `
+---
+description:
+links:
+  - label: ${upperName}
+    icon: i-custom-radix-vue
+    to: https://www.radix-vue.com/components/${kebabName}.html
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/${upperName}.vue
+---
+
+## Usage
+
+## Examples
+
+## API
+
+### Props
+
+:component-props
+
+### Slots
+
+:component-slots
+
+### Emits
+
+:component-emits
+
+## Theme
+
+:component-theme
+`
+  }
+}
+
 export default {
   playground,
   component,
   theme,
-  test
+  test,
+  doc
 }
