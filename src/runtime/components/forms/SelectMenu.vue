@@ -350,7 +350,12 @@ export default defineComponent({
 
     const by = computed(() => {
       if (!props.by) return undefined
-      const key = props.by as string
+
+      if (typeof props.by === 'function') {
+        return props.by
+      }
+
+      const key = props.by
       const hasDot = key.indexOf('.')
       if (hasDot > 0) {
         return (a: any, z: any) => {
