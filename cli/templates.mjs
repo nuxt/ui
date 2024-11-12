@@ -163,13 +163,12 @@ describe('${upperName}', () => {
   }
 }
 
-const doc = ({ name }) => {
+const doc = ({ name, pro }) => {
   const kebabName = kebabCase(name)
   const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
 
   return {
-    // TODO: change the path after adding PRO components
-    filename: `docs/content/3.components/${kebabName}.md`,
+    filename: `docs/content/${pro ? 'pro' : '3.components'}/${kebabName}.md`,
     contents: `---
 description:
 links:
