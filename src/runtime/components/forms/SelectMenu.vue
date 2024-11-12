@@ -348,6 +348,19 @@ export default defineComponent({
 
     const [trigger, container] = usePopper(popper.value)
 
+    const by = computed(() => {
+      if (!props.by) return undefined
+      const key = props.by as string
+      const hasDot = key.indexOf('.')
+      if (hasDot > 0) {
+        return (a: any, z: any) => {
+          return accessor(a, key) === accessor(z, key)
+        }
+      }
+
+      return key
+    })
+
     const { size: sizeButtonGroup, rounded } = useInjectButtonGroup({ ui, props })
     const { emitFormBlur, emitFormChange, inputId, color, size: sizeFormGroup, name } = useFormGroup(props, config)
 
@@ -366,8 +379,8 @@ export default defineComponent({
 
     const selected = computed(() => {
       function compareValues(value1: any, value2: any) {
-        if (props.by && typeof value1 === 'object' && typeof value2 === 'object') {
-          return isEqual(value1[props.by], value2[props.by])
+        if (by.value && typeof by.value !== 'function' && typeof value1 === 'object' && typeof value2 === 'object') {
+          return isEqual(value1[by.value], value2[by.value])
         }
         return isEqual(value1, value2)
       }
@@ -399,16 +412,12 @@ export default defineComponent({
     })
 
     const label = computed(() => {
-      if (!selected.value) return null
-
-      if (props.valueAttribute) {
-        return accessor(selected.value as Record<string, any>, props.optionAttribute)
-      }
+      if (!props.modelValue) return null
 
       if (Array.isArray(props.modelValue) && props.modelValue.length) {
         return `${props.modelValue.length} selected`
       } else if (['string', 'number'].includes(typeof props.modelValue)) {
-        return props.modelValue
+        return props.valueAttribute ? accessor(selected.value, props.optionAttribute) : props.modelValue
       }
 
       return accessor(props.modelValue as Record<string, any>, props.optionAttribute)
@@ -612,7 +621,9 @@ export default defineComponent({
       // eslint-disable-next-line vue/no-dupe-keys
       query,
       onUpdate,
-      onQueryChange
+      onQueryChange,
+      // eslint-disable-next-line vue/no-dupe-keys
+      by
     }
   }
 })

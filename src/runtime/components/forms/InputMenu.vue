@@ -293,6 +293,19 @@ export default defineComponent({
 
     const size = computed(() => sizeButtonGroup.value ?? sizeFormGroup.value)
 
+    const by = computed(() => {
+      if (!props.by) return undefined
+      const key = props.by as string
+      const hasDot = key.indexOf('.')
+      if (hasDot > 0) {
+        return (a: any, z: any) => {
+          return accessor(a, key) === accessor(z, key)
+        }
+      }
+
+      return key
+    })
+
     const internalQuery = ref('')
     const query = computed({
       get() {
@@ -305,9 +318,7 @@ export default defineComponent({
     })
 
     const label = computed(() => {
-      if (!props.modelValue) {
-        return
-      }
+      if (!props.modelValue) return null
 
       function getValue(value: any) {
         if (props.valueAttribute) {
@@ -318,7 +329,7 @@ export default defineComponent({
       }
 
       function compareValues(value1: any, value2: any) {
-        if (props.by && typeof value1 === 'object' && typeof value2 === 'object') {
+        if (by.value && typeof by.value !== 'function' && typeof value1 === 'object' && typeof value2 === 'object') {
           return isEqual(value1[props.by], value2[props.by])
         }
         return isEqual(value1, value2)
@@ -507,7 +518,9 @@ export default defineComponent({
       query,
       accessor,
       onUpdate,
-      onQueryChange
+      onQueryChange,
+      // eslint-disable-next-line vue/no-dupe-keys
+      by
     }
   }
 })
