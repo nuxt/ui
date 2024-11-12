@@ -6,6 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
@@ -78,9 +79,10 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
    */
   portal?: boolean
   /**
-   * Whether to filter items or not, can be an array of fields to filter.
-   * When `false`, items will not be filtered which is useful for custom filtering.
-   * @defaultValue ['label']
+   * Whether to filter items or not, can be an array of fields to filter. Defaults to `[labelKey]`.
+   * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
+   * `['label']`{lang="ts-type"}
+   * @defaultValue true
    */
   filter?: boolean | string[]
   /**
@@ -141,7 +143,6 @@ import { get, escapeRegExp } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
-import { useLocale } from '../composables/useLocale'
 
 defineOptions({ inheritAttrs: false })
 
@@ -149,7 +150,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, I, V, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  filter: () => ['label'],
+  filter: true,
   labelKey: 'label' as never
 })
 const emits = defineEmits<InputMenuEmits<T, V, M>>()

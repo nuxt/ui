@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
@@ -36,9 +37,10 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
   /**
    * Wether to display the search input or not.
    * Can be an object to pass additional props to the input.
-   * @defaultValue { placeholder: 'Search...' }
+   * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
+   * @defaultValue true
    */
-  searchInput?: boolean | { placeholder?: string }
+  searchInput?: boolean | InputProps
   color?: SelectMenuVariants['color']
   variant?: SelectMenuVariants['variant']
   size?: SelectMenuVariants['size']
@@ -69,9 +71,10 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
    */
   portal?: boolean
   /**
-   * Whether to filter items or not, can be an array of fields to filter.
+   * Whether to filter items or not, can be an array of fields to filter. Defaults to `[labelKey]`.
    * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
-   * @defaultValue ['label']
+   * `['label']`{lang="ts-type"}
+   * @defaultValue true
    */
   filter?: boolean | string[]
   /**
@@ -131,13 +134,14 @@ import { get, escapeRegExp } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
+import UInput from './Input.vue'
 
 const props = withDefaults(defineProps<SelectMenuProps<T, I, V, M>>(), {
   search: true,
   portal: true,
   autofocusDelay: 0,
-  searchInput: () => ({ placeholder: 'Search...' }),
-  filter: () => ['label'],
+  searchInput: true,
+  filter: true,
   labelKey: 'label' as never
 })
 
@@ -152,6 +156,7 @@ const { t } = useLocale()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'selectedValue', 'open', 'defaultOpen', 'resetSearchTermOnBlur'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: 'Search...', variant: 'none' }) as InputProps)
 // This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
 const multiple = toRef(() => typeof props.multiple === 'string' ? true : props.multiple)
 
@@ -276,13 +281,9 @@ function onUpdateOpen(value: boolean) {
 
     <ComboboxPortal :disabled="!portal">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-        <ComboboxInput
-          v-if="!!searchInput"
-          autofocus
-          autocomplete="off"
-          v-bind="typeof searchInput === 'object' ? searchInput : {}"
-          :class="ui.input({ class: props.ui?.input })"
-        />
+        <ComboboxInput v-if="!!searchInput" as-child>
+          <UInput autofocus autocomplete="off" v-bind="searchInputProps" :class="ui.input({ class: props.ui?.input })" />
+        </ComboboxInput>
 
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">

@@ -16,7 +16,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   <USelectMenu
     :items="users || []"
     :loading="status === 'pending'"
-    :filter="['name', 'email']"
+    :filter="['label', 'email']"
     icon="i-lucide-user"
     placeholder="Select user"
     class="w-80"

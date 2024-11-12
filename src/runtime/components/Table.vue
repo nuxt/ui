@@ -25,6 +25,7 @@ import type {
 } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
+import { useLocale } from '../composables/useLocale'
 
 const appConfig = _appConfig as AppConfig & { ui: { table: Partial<typeof theme> } }
 
@@ -41,6 +42,7 @@ export interface TableData {
 export interface TableProps<T> {
   data?: T[]
   columns?: TableColumn<T>[]
+  caption?: string
   /**
    * Whether the table should have a sticky header.
    * @defaultValue false
@@ -95,6 +97,7 @@ type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, un
 export type TableSlots<T> = {
   expanded: (props: { row: Row<T> }) => any
   empty: (props?: {}) => any
+  caption: (props?: {}) => any
 } & DynamicHeaderSlots<T> & DynamicCellSlots<T>
 
 </script>
@@ -191,6 +194,12 @@ defineExpose({
 <template>
   <div :class="ui.root({ class: [props.class, props.ui?.root] })">
     <table :class="ui.base({ class: [props.ui?.base] })">
+      <caption v-if="caption" :class="ui.caption({ class: [props.ui?.caption] })">
+        <slot name="caption">
+          {{ caption }}
+        </slot>
+      </caption>
+
       <thead :class="ui.thead({ class: [props.ui?.thead] })">
         <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
           <th

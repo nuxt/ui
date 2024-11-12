@@ -3,13 +3,13 @@ import { resolve } from 'pathe'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
 import { splitByCase, upperFirst, camelCase, kebabCase } from 'scule'
-import { appendFile, sortFile } from '../utils.mjs'
-import templates from '../templates.mjs'
+import { appendFile, sortFile } from '../../utils.mjs'
+import templates from '../../templates.mjs'
 
 export default defineCommand({
   meta: {
-    name: 'init',
-    description: 'Init a new component.'
+    name: 'component',
+    description: 'Make a new component.'
   },
   args: {
     name: {

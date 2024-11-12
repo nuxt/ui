@@ -1,5 +1,4 @@
 import { createResolver } from '@nuxt/kit'
-import module from '../src/module'
 import pkg from '../package.json'
 
 const { resolve } = createResolver(import.meta.url)
@@ -10,7 +9,7 @@ export default defineNuxtConfig({
   // ],
 
   modules: [
-    module,
+    '../src/module',
     '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/image',
@@ -71,7 +70,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/getting-started'
+        '/getting-started',
+        '/api/countries.json'
         // '/api/releases.json',
         // '/api/pulls.json'
       ],

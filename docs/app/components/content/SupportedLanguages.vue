@@ -11,6 +11,7 @@ const getLocaleKeys = () => Object.keys(locales) as Array<keyof typeof locales>
 const localesList = getLocaleKeys().map(locale => [locale, locales[locale].name])
 </script>
 
+<!-- eslint-disable vue/singleline-html-element-content-newline -->
 <template>
   <div>
     <ProseUl>
@@ -21,15 +22,13 @@ const localesList = getLocaleKeys().map(locale => [locale, locales[locale].name]
         </template>
       </ProseLi>
     </ProseUl>
-    <ProseP>
-      If you need any other languages, a
-      <ProseA href="https://github.com/nuxt/ui/pulls" target="_blank">
-        PR
-      </ProseA>
-      is always welcome, you only need to add a language file
-      <ProseA href="https://github.com/nuxt/ui/tree/v3/src/runtime/locale" target="_blank">
-        here
-      </ProseA>
-    </ProseP>
+    <Note to="https://github.com/nuxt/ui/tree/v3/src/runtime/locale" target="_blank">
+      If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>src/runtime/locale/</ProseCode>.
+    </Note>
+    <Tip>
+      You can use the <ProseCode>nuxt-ui</ProseCode> CLI to create a new locale:
+
+      <ProsePre language="bash">nuxt-ui make locale --code "en" --name "English"</ProsePre>
+    </Tip>
   </div>
 </template>
