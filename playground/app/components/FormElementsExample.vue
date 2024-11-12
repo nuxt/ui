@@ -96,7 +96,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
       <USlider v-model="state.slider" />
     </UFormField>
 
-    <UFormField name="pin" label="Pin Input">
+    <UFormField name="pin" label="Pin Input" :error-pattern="/(pin)\..*/">
       <UPinInput v-model="state.pin" />
     </UFormField>
 
