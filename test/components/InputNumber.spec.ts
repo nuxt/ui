@@ -55,7 +55,7 @@ describe('InputNumber', () => {
   })
 
   describe('controls', async () => {
-    test.todo('increment', async () => {
+    test('increment', async () => {
       const wrapper = mount(InputNumber, { props: {
         'modelValue': 100,
         'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e })
@@ -67,7 +67,7 @@ describe('InputNumber', () => {
       expect(wrapper.props('modelValue')).toBe(101)
     })
 
-    test.todo('decrement', async () => {
+    test('decrement', async () => {
       const wrapper = mount(InputNumber, { props: {
         'modelValue': 100,
         'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e })
@@ -105,7 +105,7 @@ describe('InputNumber', () => {
       }
     }
 
-    test.todo('validate on blur works', async () => {
+    test('validate on blur works', async () => {
       const { input, wrapper } = await createForm(['blur'])
 
       await input.trigger('blur')
@@ -116,7 +116,7 @@ describe('InputNumber', () => {
       expect(wrapper.html()).not.toContain('Error message')
     })
 
-    test.todo('validate on change works', async () => {
+    test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
 
       await input.setValue(2)
@@ -128,7 +128,7 @@ describe('InputNumber', () => {
       expect(wrapper.text()).not.toContain('Error message')
     })
 
-    test.todo('validate on input works', async () => {
+    test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'])
 
       await input.setValue(2)
