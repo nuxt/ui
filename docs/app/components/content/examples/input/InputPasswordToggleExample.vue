@@ -8,7 +8,7 @@ const password = ref('password')
     v-model="password"
     placeholder="Password"
     :type="show ? 'text' : 'password'"
-    :ui="{ trailing: 'pr-0.5' }"
+    :ui="{ trailing: 'pe-1' }"
   >
     <template #trailing>
       <UButton
