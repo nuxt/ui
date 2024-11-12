@@ -42,7 +42,7 @@ provide(localeContextInjectionKey, locale)
 </script>
 
 <template>
-  <ConfigProvider :use-id="() => (useId() as string)" :dir="locale.dir" v-bind="configProviderProps">
+  <ConfigProvider :use-id="() => (useId() as string)" :dir="dir || locale.dir" v-bind="configProviderProps">
     <TooltipProvider v-bind="tooltipProps">
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />
