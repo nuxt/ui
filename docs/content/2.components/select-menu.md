@@ -156,7 +156,38 @@ Use the `searchableLazy` prop to control the immediacy of data requests.
 ---
 component: 'select-menu-example-search-async'
 componentProps:
-  class: 'w-full lg:w-48'
+   class: 'w-full lg:w-48'
+---
+::
+
+## Clearable
+The `clearable` prop allows users to easily remove their selected option(s) with a clear button.
+
+::component-example
+---
+component: 'select-menu-example-clearable'
+componentProps:
+  class: 'w-full lg:w-52'
+---
+::
+
+
+### Customization
+#### Slot Props
+The slot provides four key props:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `selected` | `Object` | The currently selected value/item in the component |
+| `disabled` | `Boolean` | Whether the component is in a disabled state |
+| `loading` | `Boolean` | Whether the component is in a loading state |
+| `onClear` | `Function` | Callback function to clear the selected value when the clear button is clicked |
+
+::component-example
+---
+component: 'select-menu-example-clearable-customization'
+componentProps:
+  class: 'w-full lg:w-52'
 ---
 ::
 
