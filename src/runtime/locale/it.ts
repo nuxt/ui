@@ -7,8 +7,8 @@ export default defineLocale('Italiano', 'it', {
     create: 'Creare "{label}"'
   },
   inputNumber: {
-    increment: 'Aumentare',
-    decrement: 'Diminuire'
+    increment: 'Aumenta',
+    decrement: 'Diminuisci'
   },
   commandPalette: {
     noMatch: 'Nessun dato corrispondente',
