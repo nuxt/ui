@@ -285,6 +285,65 @@ componentProps:
 ---
 ::
 
+
+#### Event Selectable
+The `UTable` component provides two key events for handling row selection:
+
+##### ***@select:all***
+The `@select:all` event is emitted when the header checkbox in a selectable table is toggled. This event returns a boolean value indicating whether all rows are selected (true) or deselected (false).
+
+##### ***@update:modelValue***
+The `@update:modelValue` event is emitted whenever the selection state changes, including both individual row selection and bulk selection. This event returns an array containing the currently selected rows.
+
+Here's how to implement both events:
+
+```vue
+<script setup lang="ts">
+const selected = ref([])
+
+const onHandleSelectAll = (isSelected: boolean) => {
+  console.log('All rows selected:', isSelected)
+}
+
+const onUpdateSelection = (selectedRows: any[]) => {
+  console.log('Currently selected rows:', selectedRows)
+}
+</script>
+
+<template>
+  <UTable 
+    v-model="selected" 
+    :rows="people" 
+    @select:all="onHandleSelectAll"
+    @update:modelValue="onUpdateSelection"
+  />
+</template>
+```
+
+
+#### Single Select Mode
+Control how the select function allows only one row to be selected at a time.
+
+```vue
+<template>
+  <!-- Allow only one row to be selectable at a time -->
+  <UTable :single-select="true" />
+</template>
+```
+
+#### Checkbox Placement
+You can customize the checkbox column position by using the `select` key in the `columns` configuration.
+
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-dynamically-render-selectable'
+componentProps:
+  class: 'flex-1'
+---
+::
+
 ### Contextmenu
 
 Use the `contextmenu` listener on your Table to make the rows righ-clickable. The function will receive the original event as the first argument and the row as the second argument.
@@ -393,7 +452,6 @@ Controls whether multiple rows can be expanded simultaneously in the table.
   <!-- Or simply -->
   <UTable />
 </template>
-
 ```
 
 #### Disable Row Expansion
@@ -533,6 +591,82 @@ componentProps:
   class: 'flex-1'
 ---
 ::
+
+### `select-header`
+This slot allows you to customize the checkbox appearance in the table header for selecting all rows at once while using feature [Selectable](#selectable).
+
+#### Usage
+```vue
+<template>
+  <UTable v-model="selectable"> 
+    <template #select-header="{ checked, change, indeterminate }">
+      <!-- Place your custom component here -->
+    </template>
+  </UTable>
+</template>
+```
+
+#### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `checked` | `Boolean` | Indicates if all rows are selected |
+| `change` | `Function` | Function to handle selection state changes. Must receive a boolean value (true/false) |
+| `indeterminate` | `Boolean` | Indicates partial selection (when some rows are selected) |
+
+#### Example
+```vue
+<template>
+  <UTable>
+    <!-- Header checkbox customization -->
+    <template #select-header="{ indeterminate, checked, change }">
+      <input 
+        type="checkbox"
+        :indeterminate="indeterminate"
+        :checked="checked"
+        @change="e => change(e.target.checked)"
+      />
+    </template>
+  </UTable>
+</template>
+```
+
+### `select-data`
+This slot allows you to customize the checkbox appearance for each row in the table while using feature [Selectable](#selectable).
+
+#### Usage
+```vue
+<template>
+  <UTable v-model="selectable">
+    <template #select-data="{ checked, change }">
+      <!-- Place your custom component here -->
+    </template>
+  </UTable>
+</template>
+```
+
+#### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `checked` | `Boolean` | Indicates if the current row is selected |
+| `change` | `Function` | Function to handle selection state changes. Must receive a boolean value (true/false) |
+
+#### Example
+```vue
+<template>
+  <UTable>
+    <!-- Row checkbox customization -->
+    <template #select-data="{ checked, change }">
+      <input 
+        type="checkbox"
+        :checked="checked"
+        @change="e => change(e.target.checked)"
+      />
+    </template>
+  </UTable>
+</template>
+```
 
 ### `expand-action`
 
