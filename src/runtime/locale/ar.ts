@@ -3,7 +3,8 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale('العربية', 'ar', {
   inputMenu: {
     noMatch: 'لا توجد نتائج مطابقة',
-    noData: 'لا توجد بيانات'
+    noData: 'لا توجد بيانات',
+    create: 'إنشاء "{label}"'
   },
   commandPalette: {
     noMatch: 'لا توجد نتائج مطابقة',
@@ -12,7 +13,8 @@ export default defineLocale('العربية', 'ar', {
   },
   selectMenu: {
     noMatch: 'لا توجد نتائج مطابقة',
-    noData: 'لا توجد بيانات'
+    noData: 'لا توجد بيانات',
+    create: 'إنشاء "{label}"'
   },
   toast: {
     close: 'إغلاق'

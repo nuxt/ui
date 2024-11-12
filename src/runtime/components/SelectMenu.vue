@@ -5,7 +5,6 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
@@ -132,11 +131,12 @@ import { computed, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import { isEqual } from 'ohash'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { useLocale } from '../composables/useLocale'
 import { get, escapeRegExp } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -166,6 +166,8 @@ const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: 'Search...', variant: 'none' }) as InputProps)
 // This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
 const multiple = toRef(() => typeof props.multiple === 'string' ? true : props.multiple)
+
+const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -281,6 +283,22 @@ function onUpdateOpen(value: boolean) {
 </script>
 
 <template>
+  <DefineCreateItemTemplate>
+    <ComboboxGroup v-if="creatable" :class="ui.group({ class: props.ui?.group })">
+      <ComboboxItem
+        :class="ui.item({ class: props.ui?.item })"
+        :value="valueKey && typeof creatable.item === 'object' ? get(creatable.item, props.valueKey as string) : creatable.item"
+        @select="(v) => emits('create', v)"
+      >
+        <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+          <slot name="create-item-label" :item="(creatable.item as T)">
+            {{ t('ui.selectMenu.create', { label: typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }) }}
+          </slot>
+        </span>
+      </ComboboxItem>
+    </ComboboxGroup>
+  </DefineCreateItemTemplate>
+
   <ComboboxRoot
     :id="id"
     v-slot="{ modelValue, open }"
@@ -336,19 +354,7 @@ function onUpdateOpen(value: boolean) {
         </ComboboxEmpty>
 
         <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
-          <ComboboxGroup v-if="creatable && creatable.position === 'top'" :class="ui.group({ class: props.ui?.group })">
-            <ComboboxItem
-              :class="ui.item({ class: props.ui?.item })"
-              :value="valueKey && typeof creatable.item === 'object' ? get(creatable.item, props.valueKey as string) : creatable.item"
-              @select="(v) => emits('create', v)"
-            >
-              <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
-                <slot name="create-item-label" :item="(creatable.item as T)">
-                  Create "{{ typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }}"
-                </slot>
-              </span>
-            </ComboboxItem>
-          </ComboboxGroup>
+          <ReuseCreateItemTemplate v-if="creatable && creatable.position === 'top'" />
 
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
@@ -397,19 +403,7 @@ function onUpdateOpen(value: boolean) {
             </template>
           </ComboboxGroup>
 
-          <ComboboxGroup v-if="creatable && creatable.position === 'bottom'" :class="ui.group({ class: props.ui?.group })">
-            <ComboboxItem
-              :class="ui.item({ class: props.ui?.item })"
-              :value="valueKey && typeof creatable.item === 'object' ? get(creatable.item, props.valueKey as string) : creatable.item"
-              @select="(v) => emits('create', v)"
-            >
-              <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
-                <slot name="create-item-label" :item="(creatable.item as T)">
-                  Create "{{ typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }}"
-                </slot>
-              </span>
-            </ComboboxItem>
-          </ComboboxGroup>
+          <ReuseCreateItemTemplate v-if="creatable && creatable.position === 'bottom'" />
         </ComboboxViewport>
 
         <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
