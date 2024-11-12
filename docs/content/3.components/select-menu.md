@@ -269,8 +269,12 @@ props:
 ---
 ::
 
-::tip
-By default, the create option only shows on empty, but if you want the create option despite non-exact values available, set it to `always`.
+::note
+The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
+::
+
+::tip{to="#emits"}
+Use the `@create` event to handle the creation of the item.
 ::
 
 ### Content
