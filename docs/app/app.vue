@@ -124,6 +124,8 @@ provide('navigation', updatedNavigation)
 @source "../content/**/*.md";
 
 @theme {
+  --container-8xl: 90rem;
+
   --font-family-sans: 'Public Sans', sans-serif;
 
   --color-green-50: #EFFDF5;
@@ -140,6 +142,6 @@ provide('navigation', updatedNavigation)
 }
 
 :root {
-  --ui-container-width: 90rem;
+  --ui-container: var(--container-8xl);
 }
 </style>
