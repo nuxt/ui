@@ -6,6 +6,10 @@ export default defineLocale('Čeština', 'cs', {
     noData: 'Žádná data',
     create: 'Vytvořit "{label}"'
   },
+  inputNumber: {
+    increment: 'Zvýšit',
+    decrement: 'Snížit'
+  },
   commandPalette: {
     noMatch: 'Žádná shoda',
     noData: 'Žádná data',

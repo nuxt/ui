@@ -6,6 +6,10 @@ export default defineLocale('Français', 'fr', {
     noData: 'Aucune donnée',
     create: 'Créer "{label}"'
   },
+  inputNumber: {
+    increment: 'Augmenter',
+    decrement: 'Diminuer'
+  },
   commandPalette: {
     noMatch: 'Aucune donnée correspondante',
     noData: 'Aucune donnée',

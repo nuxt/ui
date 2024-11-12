@@ -6,6 +6,10 @@ export default defineLocale('简体中文', 'zh-Hans', {
     noData: '没有数据',
     create: '创建 "{label}"'
   },
+  inputNumber: {
+    increment: '增加',
+    decrement: '减少'
+  },
   commandPalette: {
     noMatch: '没有匹配的数据',
     noData: '没有数据',

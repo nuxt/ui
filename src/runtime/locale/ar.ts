@@ -6,6 +6,10 @@ export default defineLocale('العربية', 'ar', {
     noData: 'لا توجد بيانات',
     create: 'إنشاء "{label}"'
   },
+  inputNumber: {
+    increment: 'زيادة',
+    decrement: 'تقليل'
+  },
   commandPalette: {
     noMatch: 'لا توجد نتائج مطابقة',
     noData: 'لا توجد بيانات',
