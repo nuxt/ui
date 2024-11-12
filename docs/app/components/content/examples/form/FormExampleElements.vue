@@ -4,6 +4,7 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
   input: z.string().min(10),
+  inputNumber: z.number().min(10),
   inputMenu: z.any().refine(option => option?.value === 'option-2', {
     message: 'Select Option 2'
   }),
@@ -56,7 +57,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
   <UForm ref="form" :state="state" :schema="schema" class="w-full" @submit="onSubmit">
     <div class="grid grid-cols-3 gap-4">
       <UFormField label="Input" name="input">
-        <UInput v-model="state.input" placeholder="john@lennon.com" class="w-40" />
+        <UInput v-model="state.input" placeholder="john@lennon.com" class="w-full" />
       </UFormField>
 
       <div class="flex flex-col gap-4">
@@ -74,36 +75,36 @@ async function onSubmit(event: FormSubmitEvent<any>) {
       </UFormField>
 
       <UFormField name="select" label="Select">
-        <USelect v-model="state.select" :items="items" class="w-48" />
+        <USelect v-model="state.select" :items="items" class="w-full" />
       </UFormField>
 
       <UFormField name="selectMenu" label="Select Menu">
-        <USelectMenu v-model="state.selectMenu" :items="items" class="w-48" />
+        <USelectMenu v-model="state.selectMenu" :items="items" class="w-full" />
       </UFormField>
 
       <UFormField name="selectMenuMultiple" label="Select Menu (Multiple)">
-        <USelectMenu v-model="state.selectMenuMultiple" multiple :items="items" class="w-48" />
+        <USelectMenu v-model="state.selectMenuMultiple" multiple :items="items" class="w-full" />
       </UFormField>
 
       <UFormField name="inputMenu" label="Input Menu">
-        <UInputMenu v-model="state.inputMenu" :items="items" />
+        <UInputMenu v-model="state.inputMenu" :items="items" class="w-full" />
       </UFormField>
 
       <UFormField name="inputMenuMultiple" label="Input Menu (Multiple)">
-        <UInputMenu v-model="state.inputMenuMultiple" multiple :items="items" />
+        <UInputMenu v-model="state.inputMenuMultiple" multiple :items="items" class="w-full" />
       </UFormField>
 
-      <span />
+      <UFormField name="inputNumber" label="Input Number">
+        <UInputNumber v-model="state.inputNumber" class="w-full" />
+      </UFormField>
 
       <UFormField label="Textarea" name="textarea">
-        <UTextarea v-model="state.textarea" />
+        <UTextarea v-model="state.textarea" class="w-full" />
       </UFormField>
 
       <UFormField name="radioGroup">
         <URadioGroup v-model="state.radioGroup" legend="Radio group" :items="items" />
       </UFormField>
-
-      <span />
 
       <UFormField name="pin" label="Pin Input" :error-pattern="/(pin)\..*/">
         <UPinInput v-model="state.pin" />
