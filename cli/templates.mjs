@@ -170,8 +170,7 @@ const doc = ({ name }) => {
   return {
     // TODO: change the path after adding PRO components
     filename: `docs/content/3.components/${kebabName}.md`,
-    contents: `
----
+    contents: `---
 description:
 links:
   - label: ${upperName}
