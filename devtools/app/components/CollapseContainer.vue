@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="border rounded border-[var(--ui-border)]">
+  <div class="border rounded-[var(--ui-radius)] border-[var(--ui-border)]">
     <div
       ref="wrapper"
       :class="['overflow-hidden', collapsed && overflow ? 'max-h-48' : 'max-h-none']"
