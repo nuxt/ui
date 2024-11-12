@@ -4,7 +4,7 @@ export default defineLocale({
   name: 'العربية',
   code: 'ar',
   dir: 'rtl',
-  ui: {
+  messages: {
     inputMenu: {
       noMatch: 'لا توجد نتائج مطابقة',
       noData: 'لا توجد بيانات',

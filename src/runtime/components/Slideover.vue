@@ -145,7 +145,7 @@ const ui = computed(() => slideover({
                     size="md"
                     color="neutral"
                     variant="ghost"
-                    :aria-label="t('ui.slideover.close')"
+                    :aria-label="t('slideover.close')"
                     v-bind="typeof close === 'object' ? close : undefined"
                     :class="ui.close({ class: props.ui?.close })"
                   />

@@ -3,7 +3,7 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale({
   name: 'Čeština',
   code: 'cs',
-  ui: {
+  messages: {
     inputMenu: {
       noMatch: 'Žádná shoda',
       noData: 'Žádná data',

@@ -19,7 +19,7 @@ export function buildTranslator(locale: MaybeRef<Locale>): Translator {
 }
 
 export function translate(path: string, option: undefined | TranslatorOption, locale: Locale): string {
-  const prop: string = get(locale, path, path)
+  const prop: string = get(locale, `messages.${path}`, path)
 
   return prop.replace(
     /\{(\w+)\}/g,

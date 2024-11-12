@@ -1,4 +1,4 @@
-export type LocalePair = {
+export type Messages = {
   inputMenu: {
     noMatch: string
     noData: string
@@ -42,5 +42,5 @@ export type Locale = {
   name: string
   code: string
   dir: Direction
-  ui: LocalePair
+  messages: Messages
 }

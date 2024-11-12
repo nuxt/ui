@@ -3,7 +3,7 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale({
   name: 'English',
   code: 'en',
-  ui: {
+  messages: {
     inputMenu: {
       noMatch: 'No matching data',
       noData: 'No data',
