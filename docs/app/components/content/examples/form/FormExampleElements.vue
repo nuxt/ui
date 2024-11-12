@@ -73,15 +73,15 @@ async function onSubmit(event: FormSubmitEvent<any>) {
       </UFormField>
 
       <UFormField name="select" label="Select">
-        <USelect v-model="state.select" :items="items" />
+        <USelect v-model="state.select" :items="items" class="w-48" />
       </UFormField>
 
       <UFormField name="selectMenu" label="Select Menu">
-        <USelectMenu v-model="state.selectMenu" :items="items" />
+        <USelectMenu v-model="state.selectMenu" :items="items" class="w-48" />
       </UFormField>
 
       <UFormField name="selectMenuMultiple" label="Select Menu (Multiple)">
-        <USelectMenu v-model="state.selectMenuMultiple" multiple :items="items" />
+        <USelectMenu v-model="state.selectMenuMultiple" multiple :items="items" class="w-48" />
       </UFormField>
 
       <UFormField name="inputMenu" label="Input Menu">
@@ -104,11 +104,11 @@ async function onSubmit(event: FormSubmitEvent<any>) {
     </div>
 
     <div class="flex gap-2 mt-8">
-      <UButton color="neutral" type="submit">
+      <UButton type="submit">
         Submit
       </UButton>
 
-      <UButton color="neutral" variant="outline" @click="form?.clear()">
+      <UButton variant="outline" @click="form?.clear()">
         Clear
       </UButton>
     </div>
