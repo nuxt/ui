@@ -32,6 +32,7 @@
     --ui-border-inverted: var(--ui-color-neutral-900);
 
     --ui-radius: var(--radius-sm);
+    --ui-container: var(--container-7xl);
   }
 
   .dark {
