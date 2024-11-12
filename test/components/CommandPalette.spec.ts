@@ -62,7 +62,7 @@ describe('CommandPalette', () => {
   it.each([
     // Props
     ['with groups', { props }],
-    ['without results', {}],
+    ['without data', {}],
     ['with modelValue', { props: { ...props, modelValue: groups[2].items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: groups[2].items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],

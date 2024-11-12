@@ -8,7 +8,7 @@
     "generate": "nuxi generate"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.12",
+    "@iconify-json/lucide": "^1.2.13",
     "@nuxt/ui": "latest",
     "nuxt": "^3.14.159"
   }

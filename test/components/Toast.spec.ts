@@ -12,7 +12,7 @@ const ToastWrapper = defineComponent({
     ClientOnly
   },
   inheritAttrs: false,
-  template: `<UToaster>
+  template: `<UToaster :portal="false">
   <ClientOnly>
     <UToast v-bind="$attrs">
       <template v-for="(_, name) in $slots" #[name]="slotData">

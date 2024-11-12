@@ -82,6 +82,7 @@ export interface FormFieldInjectedOptions<T> {
   error?: string | boolean
   eagerValidation?: boolean
   validateOnInputDelay?: number
+  errorPattern?: RegExp
 }
 
 export interface ValidateReturnSchema<T> {

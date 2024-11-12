@@ -1277,7 +1277,7 @@ exports[`CommandPalette > renders with ui correctly 1`] = `
 </div>"
 `;
 
-exports[`CommandPalette > renders without results correctly 1`] = `
+exports[`CommandPalette > renders without data correctly 1`] = `
 "<div style="pointer-events: auto;" dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-[var(--ui-border)]">
   <div class="relative inline-flex items-center [&>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-[var(--ui-text-highlighted)] ps-10" autocomplete="false" aria-expanded="true" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" value=""><span class="absolute inset-y-0 start-0 flex items-center ps-3"><span class="iconify i-lucide:search shrink-0 text-[var(--ui-text-dimmed)] size-5" aria-hidden="true"></span></span>
     <!--v-if-->

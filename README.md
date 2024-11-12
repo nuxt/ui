@@ -1,6 +1,6 @@
 [![nuxt-ui.png](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
 
-# Nuxt UI v3
+# Nuxt UI
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -9,9 +9,14 @@
 
 We're thrilled to introduce Nuxt UI v3, a significant upgrade to our UI library that delivers extensive improvements and robust new capabilities. This major update harnesses the combined strengths of [Radix Vue](https://www.radix-vue.com/), [Tailwind CSS v4](https://tailwindcss.com/blog/tailwindcss-v4-alpha), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
-## Installation
+> [!NOTE]
+> You are on the `v3` development branch, check out the [dev branch](https://github.com/nuxt/ui) for Nuxt UI v2.
 
-1. Install the Nuxt UI v3 alpha package:
+## Documentation
+
+Visit https://ui3.nuxt.dev to explore the documentation.
+
+## Installation
 
 ```bash [pnpm]
 pnpm add @nuxt/ui@next
@@ -29,10 +34,9 @@ npm install @nuxt/ui@next
 bun add @nuxt/ui@next
 ```
 
-> [!WARNING]
-> Make sure you have `typescript` installed in your dev dependencies.
+### Nuxt
 
-2. Register the Nuxt UI module in your `nuxt.config.ts`:
+1. Add the Nuxt UI module in your `nuxt.config.ts`:
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
@@ -40,18 +44,54 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Import Tailwind CSS and Nuxt UI in your `app.vue` or [CSS](https://nuxt.com/docs/getting-started/styling#the-css-property):
+2. Import Tailwind CSS and Nuxt UI in your CSS:
 
-```vue [app.vue]
-<style>
+```css [assets/css/main.css]
 @import "tailwindcss";
 @import "@nuxt/ui";
-</style>
 ```
 
-## Documentation
+Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation/nuxt).
 
-Visit https://ui3.nuxt.dev to explore the documentation.
+### Vue
+
+1. Add the Nuxt UI Vite plugin in your `vite.config.ts`:
+
+```ts [vite.config.ts]
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import ui from '@nuxt/ui/vite'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    ui()
+  ]
+})
+```
+
+2. Use the Nuxt UI Vue plugin in your `main.ts`:
+
+```ts [main.ts]
+import { createApp } from 'vue'
+import ui from '@nuxt/ui/vue-plugin'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.use(ui)
+
+app.mount('#app')
+```
+
+3. Import Tailwind CSS and Nuxt UI in your CSS:
+
+```css [assets/main.css]
+@import "tailwindcss";
+@import "@nuxt/ui";
+```
+
+Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation/vue).
 
 ## Credits
 

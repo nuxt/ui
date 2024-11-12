@@ -12,7 +12,10 @@ const formField = tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })
 type FormFieldVariants = VariantProps<typeof formField>
 
 export interface FormFieldProps {
+  /** The name of the FormField. Also used to match form errors. */
   name?: string
+  /** A regular expression to match form error names. */
+  errorPattern?: RegExp
   label?: string
   description?: string
   help?: string
@@ -54,7 +57,7 @@ const ui = computed(() => formField({
 
 const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name)?.message)
+const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern)))?.message)
 
 const id = ref(useId())
 
@@ -65,7 +68,8 @@ provide(formFieldInjectionKey, computed(() => ({
   name: props.name,
   size: props.size,
   eagerValidation: props.eagerValidation,
-  validateOnInputDelay: props.validateOnInputDelay
+  validateOnInputDelay: props.validateOnInputDelay,
+  errorPattern: props.errorPattern
 }) as FormFieldInjectedOptions<FormFieldProps>))
 </script>
 
