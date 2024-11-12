@@ -21,7 +21,7 @@ export default (options: Required<ModuleOptions>) => ({
       pill: {
         list: 'bg-[var(--ui-bg-elevated)] rounded-[calc(var(--ui-radius)*2)]',
         trigger: 'flex-1 w-full',
-        indicator: 'rounded-[calc(var(--ui-radius)*1.5)] shadow-sm'
+        indicator: 'rounded-[calc(var(--ui-radius)*1.5)] shadow-xs'
       },
       link: {
         list: 'border-[var(--ui-border)]',

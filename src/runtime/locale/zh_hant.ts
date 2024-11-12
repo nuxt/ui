@@ -1,6 +1,6 @@
 import { defineLocale } from '../composables/defineLocale'
 
-export default defineLocale('繁体中文', {
+export default defineLocale('繁体中文', 'zh-Hant', {
   inputMenu: {
     noMatch: '沒有匹配的資料',
     noData: '沒有資料'

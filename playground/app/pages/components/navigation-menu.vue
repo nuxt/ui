@@ -8,7 +8,7 @@ const orientations = Object.keys(theme.variants.orientation)
 const color = ref(theme.defaultVariants.color)
 const highlightColor = ref()
 const variant = ref(theme.defaultVariants.variant)
-const orientation = ref('horizontal' as const)
+const orientation = ref('vertical' as const)
 const highlight = ref(true)
 
 const items = [
@@ -16,6 +16,7 @@ const items = [
     label: 'Documentation',
     icon: 'i-lucide-book-open',
     badge: 10,
+    defaultOpen: true,
     children: [{
       label: 'Introduction',
       description: 'Fully styled and customizable components for Nuxt.',

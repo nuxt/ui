@@ -126,7 +126,7 @@ const previewUrl = computed(() => {
     </div>
     <div v-if="highlightedCode && formattedCode" v-show="rendererReady" class="relative w-full p-3">
       <!-- eslint-disable vue/no-v-html -->
-      <pre class="p-4 min-h-40 max-h-72 text-sm overflow-y-auto rounded-lg border border-[var(--ui-border)] bg-neutral-50 dark:bg-neutral-800" v-html="highlightedCode" />
+      <pre class="p-4 min-h-40 max-h-72 text-sm overflow-y-auto rounded-[calc(var(--ui-radius)*1.5)] border border-[var(--ui-border)] bg-neutral-50 dark:bg-neutral-800" v-html="highlightedCode" />
       <UButton
         color="neutral"
         variant="link"

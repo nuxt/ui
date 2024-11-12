@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps } from 'radix-vue'
+import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, CollapsibleRootProps } from 'radix-vue'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
@@ -17,7 +17,7 @@ export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'child
   description?: string
 }
 
-export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'> {
+export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -208,6 +208,8 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
           :key="`list-${listIndex}-${index}`"
           as="li"
           :value="item.value || String(index)"
+          :default-open="item.defaultOpen"
+          :open="item.open"
           :class="ui.item({ class: props.ui?.item })"
         >
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>

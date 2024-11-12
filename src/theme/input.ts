@@ -16,7 +16,7 @@ export default (options: Required<ModuleOptions>) => ({
     ...buttonGroupVariantWithRoot,
     size: {
       xs: {
-        base: 'px-2 py-1 text-xs gap-1',
+        base: 'px-2 py-1 text-xs',
         leading: 'ps-2',
         trailing: 'pe-2',
         leadingIcon: 'size-4',
@@ -24,7 +24,7 @@ export default (options: Required<ModuleOptions>) => ({
         trailingIcon: 'size-4'
       },
       sm: {
-        base: 'px-2.5 py-1.5 text-xs gap-1.5',
+        base: 'px-2.5 py-1.5 text-xs',
         leading: 'ps-2.5',
         trailing: 'pe-2.5',
         leadingIcon: 'size-4',
@@ -32,7 +32,7 @@ export default (options: Required<ModuleOptions>) => ({
         trailingIcon: 'size-4'
       },
       md: {
-        base: 'px-2.5 py-1.5 text-sm gap-1.5',
+        base: 'px-2.5 py-1.5 text-sm',
         leading: 'ps-2.5',
         trailing: 'pe-2.5',
         leadingIcon: 'size-5',
@@ -40,7 +40,7 @@ export default (options: Required<ModuleOptions>) => ({
         trailingIcon: 'size-5'
       },
       lg: {
-        base: 'px-3 py-2 text-sm gap-2',
+        base: 'px-3 py-2 text-sm',
         leading: 'ps-3',
         trailing: 'pe-3',
         leadingIcon: 'size-5',
@@ -48,7 +48,7 @@ export default (options: Required<ModuleOptions>) => ({
         trailingIcon: 'size-5'
       },
       xl: {
-        base: 'px-3 py-2 text-base gap-2',
+        base: 'px-3 py-2 text-base',
         leading: 'ps-3',
         trailing: 'pe-3',
         leadingIcon: 'size-6',
@@ -60,8 +60,8 @@ export default (options: Required<ModuleOptions>) => ({
       outline: 'text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)]',
       soft: 'text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)]/50 hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-[var(--ui-bg-elevated)]/50',
       subtle: 'text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)] ring ring-inset ring-[var(--ui-border-accented)]',
-      ghost: 'text-[var(--ui-text-highlighted)] hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent',
-      none: 'text-[var(--ui-text-highlighted)]'
+      ghost: 'text-[var(--ui-text-highlighted)] bg-transparent hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent',
+      none: 'text-[var(--ui-text-highlighted)] bg-transparent'
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),

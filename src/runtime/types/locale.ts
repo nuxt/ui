@@ -36,5 +36,6 @@ export type LocalePair = {
 
 export type Locale = {
   name: string
+  code: string
   ui: LocalePair
 }

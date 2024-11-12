@@ -137,7 +137,7 @@ Each item can take a `children` array of objects with the following properties t
 
 Use the `orientation` prop to change the orientation of the NavigationMenu.
 
-When orientation is `vertical`, a [Collapsible](/components/collapsible) component is used to display children.
+When orientation is `vertical`, a [Collapsible](/components/collapsible) component is used to display children. You can control the open state of each item using the `open` and `defaultOpen` properties.
 
 ::component-code
 ---
@@ -152,6 +152,7 @@ props:
   items:
     - - label: Guide
         icon: i-lucide-book-open
+        defaultOpen: true
         children:
           - label: Introduction
             description: Fully styled and customizable components for Nuxt.
