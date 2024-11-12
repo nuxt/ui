@@ -3,6 +3,7 @@ import type { ConfigProviderProps, TooltipProviderProps } from 'radix-vue'
 import { localeContextInjectionKey } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ToasterProps, Locale } from '../types'
+import { en } from '../locale'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
   tooltip?: TooltipProviderProps
@@ -32,15 +33,16 @@ import USlideoverProvider from './SlideoverProvider.vue'
 const props = defineProps<AppProps>()
 defineSlots<AppSlots>()
 
-const configProviderProps = useForwardProps(reactivePick(props, 'dir', 'scrollBody'))
+const configProviderProps = useForwardProps(reactivePick(props, 'scrollBody'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
 
-provide(localeContextInjectionKey, computed(() => props.locale))
+const locale = computed(() => props.locale || en)
+provide(localeContextInjectionKey, locale)
 </script>
 
 <template>
-  <ConfigProvider :use-id="() => (useId() as string)" v-bind="configProviderProps">
+  <ConfigProvider :use-id="() => (useId() as string)" :dir="locale.dir" v-bind="configProviderProps">
     <TooltipProvider v-bind="tooltipProps">
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />
