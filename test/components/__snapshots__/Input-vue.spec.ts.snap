@@ -107,14 +107,14 @@ exports[`Input > renders with name correctly 1`] = `
 `;
 
 exports[`Input > renders with neutral variant ghost correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with neutral variant none correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)]" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
@@ -149,14 +149,14 @@ exports[`Input > renders with placeholder correctly 1`] = `
 `;
 
 exports[`Input > renders with primary variant ghost correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
 exports[`Input > renders with primary variant none correctly 1`] = `
-"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)]" autocomplete="off">
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent" autocomplete="off">
   <!--v-if-->
   <!--v-if-->
 </div>"

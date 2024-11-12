@@ -844,7 +844,7 @@ exports[`Select > renders with name correctly 1`] = `
 `;
 
 exports[`Select > renders with neutral variant ghost correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="radix-vue-select-content-v-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent pe-9">
+"<button role="combobox" type="button" aria-controls="radix-vue-select-content-v-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent pe-9">
   <!--v-if--><span style="pointer-events: none;" class="truncate group-data-placeholder:text-[var(--ui-text-dimmed)]"> </span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
 </button>
 <!--teleport start-->
@@ -900,7 +900,7 @@ exports[`Select > renders with neutral variant ghost correctly 1`] = `
 `;
 
 exports[`Select > renders with neutral variant none correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="radix-vue-select-content-v-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] pe-9">
+"<button role="combobox" type="button" aria-controls="radix-vue-select-content-v-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent pe-9">
   <!--v-if--><span style="pointer-events: none;" class="truncate group-data-placeholder:text-[var(--ui-text-dimmed)]"> </span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
 </button>
 <!--teleport start-->
@@ -1180,7 +1180,7 @@ exports[`Select > renders with placeholder correctly 1`] = `
 `;
 
 exports[`Select > renders with primary variant ghost correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="radix-vue-select-content-v-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent pe-9">
+"<button role="combobox" type="button" aria-controls="radix-vue-select-content-v-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent pe-9">
   <!--v-if--><span style="pointer-events: none;" class="truncate group-data-placeholder:text-[var(--ui-text-dimmed)]"> </span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
 </button>
 <!--teleport start-->
@@ -1236,7 +1236,7 @@ exports[`Select > renders with primary variant ghost correctly 1`] = `
 `;
 
 exports[`Select > renders with primary variant none correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="radix-vue-select-content-v-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] pe-9">
+"<button role="combobox" type="button" aria-controls="radix-vue-select-content-v-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent pe-9">
   <!--v-if--><span style="pointer-events: none;" class="truncate group-data-placeholder:text-[var(--ui-text-dimmed)]"> </span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
 </button>
 <!--teleport start-->
