@@ -3,7 +3,8 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale('Русский', 'ru', {
   inputMenu: {
     noMatch: 'Совпадений не найдено',
-    noData: 'Нет данных'
+    noData: 'Нет данных',
+    create: 'Создать "{label}"'
   },
   commandPalette: {
     noMatch: 'Совпадений не найдено',
@@ -12,7 +13,8 @@ export default defineLocale('Русский', 'ru', {
   },
   selectMenu: {
     noMatch: 'Совпадений не найдено',
-    noData: 'Нет данных'
+    noData: 'Нет данных',
+    create: 'Создать "{label}"'
   },
   toast: {
     close: 'Закрыть'

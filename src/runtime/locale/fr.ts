@@ -3,7 +3,8 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale('Français', 'fr', {
   inputMenu: {
     noMatch: 'Aucune donnée correspondante',
-    noData: 'Aucune donnée'
+    noData: 'Aucune donnée',
+    create: 'Créer "{label}"'
   },
   commandPalette: {
     noMatch: 'Aucune donnée correspondante',
@@ -12,7 +13,8 @@ export default defineLocale('Français', 'fr', {
   },
   selectMenu: {
     noMatch: 'Aucune donnée correspondante',
-    noData: 'Aucune donnée'
+    noData: 'Aucune donnée',
+    create: 'Créer "{label}"'
   },
   toast: {
     close: 'Fermer'

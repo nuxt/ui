@@ -3,7 +3,8 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale('繁体中文', 'zh-Hant', {
   inputMenu: {
     noMatch: '沒有匹配的資料',
-    noData: '沒有資料'
+    noData: '沒有資料',
+    create: '創建 "{label}"'
   },
   commandPalette: {
     noMatch: '沒有匹配的資料',
@@ -12,7 +13,8 @@ export default defineLocale('繁体中文', 'zh-Hant', {
   },
   selectMenu: {
     noMatch: '沒有匹配的資料',
-    noData: '沒有資料'
+    noData: '沒有資料',
+    create: '創建 "{label}"'
   },
   toast: {
     close: '關閉'

@@ -5,7 +5,6 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { AcceptableValue, ArrayOrWrapped, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
@@ -35,7 +34,7 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
   /** The placeholder text when the select is empty. */
   placeholder?: string
   /**
-   * Wether to display the search input or not.
+   * Whether to display the search input or not.
    * Can be an object to pass additional props to the input.
    * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
    * @defaultValue true
@@ -90,6 +89,11 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
   items?: I
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /**
+   * Determines if custom user input that does not exist in options can be added.
+   * @defaultValue false
+   */
+  createItem?: boolean | 'always' | { placement?: 'top' | 'bottom', when?: 'empty' | 'always' }
   class?: any
   ui?: PartialString<typeof selectMenu.slots>
   /** The controlled value of the Combobox. Can be binded-with with `v-model`. */
@@ -102,6 +106,7 @@ export type SelectMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
+  create: [payload: Event, item: T]
 } & SelectModelValueEmits<T, V, M>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
@@ -115,21 +120,23 @@ export interface SelectMenuSlots<T> {
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
+  'create-item-label'(props: { item: T }): any
 }
 
 extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectMenuItem | AcceptableValue> = MaybeArrayOfArray<SelectMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
-import { computed, toRef } from 'vue'
+import { computed, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'radix-vue'
 import { defu } from 'defu'
 import { isEqual } from 'ohash'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { useLocale } from '../composables/useLocale'
 import { get, escapeRegExp } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -160,6 +167,8 @@ const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: 'Sea
 // This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
 const multiple = toRef(() => typeof props.multiple === 'string' ? true : props.multiple)
 
+const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
+
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
@@ -186,28 +195,32 @@ function displayValue(value: T | T[]): string {
     return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
   }
 
-  const item = items.value.find(item => isEqual(get(item as Record<string, any>, props.valueKey as string), value))
+  const item = items.value.find(item => isEqual(get(item as Record<string, any>, props.valueKey as string), value)) ?? (props.createItem && value)
 
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
-function filterFunction(items: ArrayOrWrapped<T>, searchTerm: string): ArrayOrWrapped<T> {
+function filterFunction(
+  inputItems: ArrayOrWrapped<T> = items.value as ArrayOrWrapped<T>,
+  filterSearchTerm: string = searchTerm.value,
+  comparator = (item: any, term: string) => String(item).search(new RegExp(term, 'i')) !== -1
+): ArrayOrWrapped<T> {
   if (props.filter === false) {
-    return items
+    return inputItems
   }
 
   const fields = Array.isArray(props.filter) ? props.filter : [props.labelKey]
-  const escapedSearchTerm = escapeRegExp(searchTerm)
+  const escapedSearchTerm = escapeRegExp(filterSearchTerm)
 
-  return items.filter((item: T) => {
+  return inputItems.filter((item: T) => {
     if (typeof item !== 'object') {
-      return String(item).search(new RegExp(escapedSearchTerm, 'i')) !== -1
+      return comparator(item, escapedSearchTerm)
     }
 
     return fields.some((field) => {
       const child = get(item, field as string)
 
-      return child !== null && child !== undefined && String(child).search(new RegExp(escapedSearchTerm, 'i')) !== -1
+      return child !== null && child !== undefined && comparator(child, escapedSearchTerm)
     })
   }) as ArrayOrWrapped<T>
 }
@@ -216,7 +229,40 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
+const creatable = computed(() => {
+  if (!props.createItem) {
+    return false
+  }
+
+  const isModelValueCustom = props.modelValue && filterFunction((props.multiple && Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue]) as ArrayOrWrapped<T>, searchTerm.value, (item, term) => String(item) === term).length === 1
+
+  if (isModelValueCustom) {
+    return false
+  }
+
+  const filteredItems = filterFunction()
+  const newItem = searchTerm.value && {
+    item: props.valueKey ? { [props.valueKey]: searchTerm.value, [props.labelKey ?? 'label']: searchTerm.value } : searchTerm.value,
+    position: ((typeof props.createItem === 'object' && props.createItem.placement) || 'bottom') as 'top' | 'bottom'
+  }
+
+  if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
+    return (filteredItems.length === 1 && filterFunction(filteredItems, searchTerm.value, (item, term) => String(item) === term).length === 1) ? false : newItem
+  }
+
+  return filteredItems.length > 0 ? false : newItem
+})
+
+const rootItems = computed(() => [
+  ...(creatable.value && creatable.value.position === 'top' ? [creatable.value.item] : []),
+  ...filterFunction(),
+  ...(creatable.value && creatable.value.position === 'bottom' ? [creatable.value.item] : [])
+] as ArrayOrWrapped<T>)
+
 function onUpdate(value: any) {
+  if (toRaw(props.modelValue) === value) {
+    return
+  }
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
@@ -237,6 +283,22 @@ function onUpdateOpen(value: boolean) {
 </script>
 
 <template>
+  <DefineCreateItemTemplate>
+    <ComboboxGroup v-if="creatable" :class="ui.group({ class: props.ui?.group })">
+      <ComboboxItem
+        :class="ui.item({ class: props.ui?.item })"
+        :value="valueKey && typeof creatable.item === 'object' ? get(creatable.item, props.valueKey as string) : creatable.item"
+        @select="e => emits('create', e, (creatable as any).item as T)"
+      >
+        <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+          <slot name="create-item-label" :item="(creatable.item as T)">
+            {{ t('ui.selectMenu.create', { label: typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }) }}
+          </slot>
+        </span>
+      </ComboboxItem>
+    </ComboboxGroup>
+  </DefineCreateItemTemplate>
+
   <ComboboxRoot
     :id="id"
     v-slot="{ modelValue, open }"
@@ -247,7 +309,7 @@ function onUpdateOpen(value: boolean) {
     :disabled="disabled"
     :multiple="multiple"
     :display-value="() => searchTerm"
-    :filter-function="filterFunction"
+    :filter-function="() => rootItems"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
@@ -292,6 +354,8 @@ function onUpdateOpen(value: boolean) {
         </ComboboxEmpty>
 
         <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
+          <ReuseCreateItemTemplate v-if="creatable && creatable.position === 'top'" />
+
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
@@ -338,6 +402,8 @@ function onUpdateOpen(value: boolean) {
               </ComboboxItem>
             </template>
           </ComboboxGroup>
+
+          <ReuseCreateItemTemplate v-if="creatable && creatable.position === 'bottom'" />
         </ComboboxViewport>
 
         <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
