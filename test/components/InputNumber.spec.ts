@@ -1,8 +1,10 @@
 import { describe, it, expect, test } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import InputNumber, { type InputNumberProps, type InputNumberSlots } from '../../src/runtime/components/InputNumber.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input-number'
+import type { FormInputEvents } from '~/src/module'
+import { renderForm } from '../utils/form'
 
 describe('InputNumber', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -31,30 +33,78 @@ describe('InputNumber', () => {
   })
 
   describe('emits', () => {
-    test.todo('update:modelValue event', async () => {
-      const _wrapper = mount(InputNumber)
+    test('update:modelValue event', async () => {
+      const wrapper = mount(InputNumber)
+      await wrapper.setValue(1)
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] })
     })
 
-    test.todo('change event', async () => {
-      const _wrapper = mount(InputNumber)
+    test('change event', async () => {
+      const wrapper = mount(InputNumber)
+      const input = wrapper.findComponent({ name: 'NumberFieldRoot' })
+      await input.setValue(1)
+      expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
 
-    test.todo('blur event', async () => {
-      const _wrapper = mount(InputNumber)
+    test('blur event', async () => {
+      const wrapper = mount(InputNumber)
+      const input = wrapper.findComponent({ name: 'NumberFieldInput' })
+      await input.trigger('blur')
+      expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
     })
   })
 
   describe('controls', async () => {
     test.todo('increment', async () => {
-      const _wrapper = mount(InputNumber)
+      const wrapper = mount(InputNumber, { props: {
+        'modelValue': 100,
+        'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e })
+      } })
+      const increment = wrapper.findComponent({ name: 'NumberFieldIncrement' })
+      await increment.find('button').trigger('click')
+
+      await flushPromises()
+      expect(wrapper.props('modelValue')).toBe(101)
     })
 
     test.todo('decrement', async () => {
-      const _wrapper = mount(InputNumber)
+      const wrapper = mount(InputNumber, { props: {
+        'modelValue': 100,
+        'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e })
+      } })
+      const increment = wrapper.findComponent({ name: 'NumberFieldIncrement' })
+      await increment.find('button').trigger('click')
+
+      await flushPromises()
+      expect(wrapper.props('modelValue')).toBe(99)
     })
   })
 
   describe('form integration', async () => {
+    async function _createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (state.value !== 1)
+              return [{ name: 'value', message: 'Error message' }]
+            return []
+          }
+        },
+        slotTemplate: `
+        <UFormField name="value">
+          <UInputNumber id="input" v-model="state.value" />
+        </UFormField>
+        `
+      })
+      const input = wrapper.findComponent({ name: 'NumberFieldInput' })
+      return {
+        wrapper,
+        input
+      }
+    }
+
     test.todo('validate on blur works', async () => {
 
     })

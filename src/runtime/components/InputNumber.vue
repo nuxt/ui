@@ -103,9 +103,7 @@ onMounted(() => {
   }, props.autofocusDelay)
 })
 
-function onInput(value: number) {
-  modelValue.value = value
-
+function onUpdate(value: number) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
@@ -133,7 +131,7 @@ defineExpose({
     :default-value="defaultValue"
     :name="name"
     :disabled="disabled"
-    @update:model-value="onInput"
+    @update:model-value="onUpdate"
   >
     <NumberFieldInput
       v-bind="$attrs"
