@@ -23,7 +23,6 @@ export default {
   default: {
     selectedIcon: 'i-heroicons-check-20-solid',
     clearSearchOnClose: false,
-    closeOnClear: true,
     showCreateOptionWhen: 'empty',
     searchablePlaceholder: {
       label: 'Search...'

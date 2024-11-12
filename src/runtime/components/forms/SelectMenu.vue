@@ -39,13 +39,22 @@
             <span v-if="label" :class="uiMenu.label">{{ label }}</span>
             <span v-else :class="uiMenu.label">{{ placeholder || '&nbsp;' }}</span>
           </slot>
+          <span v-if="canClearValue" :class="clearableWrapperClass">
+            <slot name="clearable" :selected="selected" :disabled="disabled" :loading="loading" @clear="onClear">
+              <UButton
+                :icon="clearableIcon"
+                size="xs"
+                class="p-0"
+                :class="clearableButtonClass"
+                variant="ghost"
+                @click.capture.stop="onClear"
+              />
+            </slot>
+          </span>
 
           <span v-if="(isTrailing && trailingIconName) || $slots.trailing" :class="trailingWrapperIconClass">
-            <slot
-              name="trailing"
-              v-bind="trailingSlotProps()"
-            >
-              <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" @click="onClear" />
+            <slot name="trailing" :selected="selected" :disabled="disabled" :loading="loading">
+              <UIcon :name="trailingIconName" :class="trailingIconClass" aria-hidden="true" />
             </slot>
           </span>
         </button>
@@ -152,6 +161,7 @@ import { useFormGroup } from '../../composables/useFormGroup'
 import { get, mergeConfig } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { SelectSize, SelectColor, SelectVariant, PopperOptions, Strategy, DeepPartial } from '../../types/index'
+import type { Button } from '../../types/button'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { select, selectMenu } from '#ui/ui.config'
@@ -344,11 +354,8 @@ export default defineComponent({
     clearableIcon: {
       type: String,
       default: () => config.default.clerableIcon
-    },
-    closeOnClear: {
-      type: Boolean,
-      default: () => configMenu.default.closeOnClear
     }
+
   },
   emits: ['update:modelValue', 'update:query', 'open', 'close', 'change', 'clear'],
   setup(props, { emit, slots }) {
@@ -463,10 +470,22 @@ export default defineComponent({
 
     const canClearValue = computed(() => props.clearable && (Array.isArray(selected.value) ? selected.value.length > 0 : !!selected.value))
 
+    const clearableWrapperClass = computed(() => {
+      return twJoin(
+        ui.value.icon.clearable.wrapper,
+        ui.value.icon.clearable.padding[size.value]
+      )
+    })
+
+    const clearableButtonClass = computed(() => {
+      return twJoin(
+        ui.value.icon.base,
+        color.value && appConfig.ui.colors.includes(color.value) && ui.value.icon.color.replaceAll('{color}', color.value),
+        props.loading && ui.value.icon.loading
+      )
+    })
+
     const trailingIconName = computed(() => {
-      if (canClearValue.value) {
-        return props.clearableIcon
-      }
       if (props.loading && !isLeading.value) {
         return props.loadingIcon
       }
@@ -598,11 +617,8 @@ export default defineComponent({
       query.value = event.target.value
     }
 
-    function onClear(e: Event) {
+    function onClear() {
       if (canClearValue.value) {
-        if (container.value && !props.closeOnClear) {
-          e.stopPropagation()
-        }
         emit('update:modelValue', props.multiple ? [] : null)
         emit('clear')
         emitFormChange()
@@ -658,7 +674,10 @@ export default defineComponent({
       query,
       onUpdate,
       onQueryChange,
-      trailingSlotProps
+      trailingSlotProps,
+      canClearValue,
+      clearableWrapperClass,
+      clearableButtonClass
     }
   }
 })

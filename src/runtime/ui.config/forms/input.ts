@@ -98,6 +98,18 @@ export default {
         'lg': 'px-3.5',
         'xl': 'px-3.5'
       }
+    },
+    clearable: {
+      wrapper: 'absolute inset-y-0 end-6 flex items-center',
+      pointer: 'pointer-events-auto',
+      padding: {
+        '2xs': 'px-2',
+        'xs': 'px-2.5',
+        'sm': 'px-2.5',
+        'md': 'px-3',
+        'lg': 'px-3.5',
+        'xl': 'px-3.5'
+      }
     }
   },
   default: {

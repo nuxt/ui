@@ -156,7 +156,18 @@ Use the `searchableLazy` prop to control the immediacy of data requests.
 ---
 component: 'select-menu-example-search-async'
 componentProps:
-  class: 'w-full lg:w-48'
+   class: 'w-full lg:w-48'
+---
+::
+
+## Clearable
+Use the `clearable` prop to enable the remove selected option.
+
+::component-example
+---
+component: 'select-menu-example-clearable'
+componentProps:
+  class: 'w-full lg:w-52'
 ---
 ::
 
