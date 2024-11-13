@@ -1,7 +1,8 @@
-export type LocalePair = {
+export type Messages = {
   inputMenu: {
     noMatch: string
     noData: string
+    create: string
   }
   commandPalette: {
     noMatch: string
@@ -11,6 +12,7 @@ export type LocalePair = {
   selectMenu: {
     noMatch: string
     noData: string
+    create: string
   }
   toast: {
     close: string
@@ -34,8 +36,11 @@ export type LocalePair = {
   }
 }
 
+export type Direction = 'ltr' | 'rtl'
+
 export type Locale = {
   name: string
   code: string
-  ui: LocalePair
+  dir: Direction
+  messages: Messages
 }

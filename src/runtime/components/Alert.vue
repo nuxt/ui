@@ -3,7 +3,6 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
-import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ButtonProps } from '../types'
 
@@ -66,6 +65,7 @@ extendDevtoolsMeta<AlertProps>({ defaultProps: { title: 'Heads up!' } })
 import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
@@ -125,7 +125,7 @@ const ui = computed(() => alert({
           size="md"
           color="neutral"
           variant="link"
-          :aria-label="t('ui.alert.close')"
+          :aria-label="t('alert.close')"
           v-bind="typeof close === 'object' ? close : undefined"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"

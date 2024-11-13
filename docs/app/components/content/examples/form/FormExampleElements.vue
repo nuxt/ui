@@ -29,10 +29,11 @@ const schema = z.object({
   radioGroup: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
-  slider: z.number().max(20, { message: 'Must be less than 20' })
+  slider: z.number().max(20, { message: 'Must be less than 20' }),
+  pin: z.string().regex(/^\d$/).array().length(5)
 })
 
-type Schema = z.output<typeof schema>
+type Schema = z.input<typeof schema>
 
 const state = reactive<Partial<Schema>>({})
 
@@ -52,7 +53,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
 </script>
 
 <template>
-  <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit">
+  <UForm ref="form" :state="state" :schema="schema" class="w-full" @submit="onSubmit">
     <div class="grid grid-cols-3 gap-4">
       <UFormField label="Input" name="input">
         <UInput v-model="state.input" placeholder="john@lennon.com" class="w-40" />
@@ -100,6 +101,12 @@ async function onSubmit(event: FormSubmitEvent<any>) {
 
       <UFormField name="radioGroup">
         <URadioGroup v-model="state.radioGroup" legend="Radio group" :items="items" />
+      </UFormField>
+
+      <span />
+
+      <UFormField name="pin" label="Pin Input" :error-pattern="/(pin)\..*/">
+        <UPinInput v-model="state.pin" />
       </UFormField>
     </div>
 

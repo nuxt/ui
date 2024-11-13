@@ -61,5 +61,8 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      - name: Build vue fixture
+        run: pnpm run test:vue:build
+
       - name: Publish
         run: pnpx pkg-pr-new publish --compact --no-template --pnpm

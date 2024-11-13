@@ -10,7 +10,6 @@ import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/carousel'
-import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
 import type { AcceptableValue, PartialString } from '../types/utils'
@@ -101,6 +100,7 @@ import useEmblaCarousel from 'embla-carousel-vue'
 import { useForwardProps } from 'radix-vue'
 import { reactivePick, computedAsync } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<CarouselProps<T>>(), {
@@ -281,7 +281,7 @@ defineExpose({
           size="md"
           color="neutral"
           variant="outline"
-          :aria-label="t('ui.carousel.prev')"
+          :aria-label="t('carousel.prev')"
           v-bind="typeof prev === 'object' ? prev : undefined"
           :class="ui.prev({ class: props.ui?.prev })"
           @click="scrollPrev"
@@ -292,7 +292,7 @@ defineExpose({
           size="md"
           color="neutral"
           variant="outline"
-          :aria-label="t('ui.carousel.next')"
+          :aria-label="t('carousel.next')"
           v-bind="typeof next === 'object' ? next : undefined"
           :class="ui.next({ class: props.ui?.next })"
           @click="scrollNext"
@@ -302,7 +302,7 @@ defineExpose({
       <div v-if="dots" :class="ui.dots({ class: props.ui?.dots })">
         <template v-for="(_, index) in scrollSnaps" :key="index">
           <button
-            :aria-label="t('ui.carousel.goto', { slide: index + 1 })"
+            :aria-label="t('carousel.goto', { slide: index + 1 })"
             :class="ui.dot({ class: props.ui?.dot, active: selectedIndex === index })"
             @click="scrollTo(index)"
           />

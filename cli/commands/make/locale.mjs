@@ -17,6 +17,10 @@ export default defineCommand({
     name: {
       description: 'Locale name to create. For example: English.',
       required: true
+    },
+    dir: {
+      description: 'Locale direction. For example: rtl.',
+      default: 'ltr'
     }
   },
   async setup({ args }) {
@@ -29,6 +33,11 @@ export default defineCommand({
     // Validate locale code
     if (existsSync(newLocaleFilePath)) {
       consola.error(`🚨 ${args.code} already exists!`)
+      process.exit(1)
+    }
+
+    if (!['ltr', 'rtl'].includes(args.dir)) {
+      consola.error(`🚨 Direction ${args.dir} not supported!`)
       process.exit(1)
     }
 
@@ -45,7 +54,9 @@ export default defineCommand({
     // Create new locale file
     await fsp.copyFile(originLocaleFilePath, newLocaleFilePath)
     const localeFile = await fsp.readFile(newLocaleFilePath, 'utf-8')
-    const rewrittenLocaleFile = localeFile.replace(/defineLocale\('(.*)'/, `defineLocale('${args.name}', '${normalizeLocale(args.code)}'`)
+    const rewrittenLocaleFile = localeFile
+      .replace(/name: '(.*)',/, `name: '${args.name}',`)
+      .replace(/code: '(.*)',/, `code: '${normalizeLocale(args.code)}',${(args.dir && args.dir !== 'ltr') ? `\n  dir: '${args.dir}',` : ''}`)
     await fsp.writeFile(newLocaleFilePath, rewrittenLocaleFile)
 
     consola.success(`🪄 Generated ${newLocaleFilePath}`)

@@ -34,7 +34,7 @@ export default (options: Required<ModuleOptions>) => {
         true: {
           root: 'flex-wrap',
           base: '',
-          tagsInput: 'border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+          tagsInput: 'border-0 bg-transparent placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
         },
         false: {
           base: 'w-full border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'

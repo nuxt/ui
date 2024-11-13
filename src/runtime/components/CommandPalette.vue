@@ -7,7 +7,6 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
@@ -36,7 +35,7 @@ export interface CommandPaletteGroup<T> {
   slot?: string
   items?: T[]
   /**
-   * Wether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
+   * Whether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
    * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
    * @defaultValue true
    */
@@ -125,6 +124,7 @@ import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { highlight } from '../utils/fuse'
 import UIcon from './Icon.vue'
@@ -247,7 +247,7 @@ const groups = computed(() => {
               size="md"
               color="neutral"
               variant="ghost"
-              :aria-label="t('ui.commandPalette.close')"
+              :aria-label="t('commandPalette.close')"
               v-bind="typeof close === 'object' ? close : undefined"
               :class="ui.close({ class: props.ui?.close })"
               @click="emits('update:open', false)"
@@ -261,7 +261,7 @@ const groups = computed(() => {
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" :dismissable="false">
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? t('ui.commandPalette.noMatch', { searchTerm }) : t('ui.commandPalette.noData') }}
+            {{ searchTerm ? t('commandPalette.noMatch', { searchTerm }) : t('commandPalette.noData') }}
           </slot>
         </ComboboxEmpty>
 

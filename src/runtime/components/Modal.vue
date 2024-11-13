@@ -4,7 +4,6 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
-import { useLocale } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
 
@@ -78,6 +77,7 @@ import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<ModalProps>(), {
@@ -146,7 +146,7 @@ const ui = computed(() => modal({
                     size="md"
                     color="neutral"
                     variant="ghost"
-                    :aria-label="t('ui.modal.close')"
+                    :aria-label="t('modal.close')"
                     v-bind="typeof close === 'object' ? close : undefined"
                     :class="ui.close({ class: props.ui?.close })"
                   />
