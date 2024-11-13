@@ -1,9 +1,13 @@
-import type { Locale, LocalePair } from '../types/locale'
+import type { Locale, Direction, Messages } from '../types/locale'
+import { defu } from 'defu'
 
-export function defineLocale(name: string, code: string, pair: LocalePair): Locale {
-  return {
-    name,
-    code,
-    ui: pair
-  }
+interface DefineLocaleOptions {
+  name: string
+  code: string
+  dir?: Direction
+  messages: Messages
+}
+
+export function defineLocale(options: DefineLocaleOptions): Locale {
+  return defu<DefineLocaleOptions, [{ dir: Direction }]>(options, { dir: 'ltr' })
 }

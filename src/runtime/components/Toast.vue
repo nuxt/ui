@@ -153,7 +153,7 @@ defineExpose({
             size="md"
             color="neutral"
             variant="link"
-            :aria-label="t('ui.toast.close')"
+            :aria-label="t('toast.close')"
             v-bind="typeof close === 'object' ? close : undefined"
             :class="ui.close({ class: props.ui?.close })"
             @click.stop

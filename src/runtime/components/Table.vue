@@ -241,7 +241,7 @@ defineExpose({
         <tr v-else :class="ui.tr({ class: [props.ui?.tr] })">
           <td :colspan="columns?.length" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
-              {{ t('ui.table.noData') }}
+              {{ t('table.noData') }}
             </slot>
           </td>
         </tr>

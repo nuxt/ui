@@ -125,7 +125,7 @@ const ui = computed(() => alert({
           size="md"
           color="neutral"
           variant="link"
-          :aria-label="t('ui.alert.close')"
+          :aria-label="t('alert.close')"
           v-bind="typeof close === 'object' ? close : undefined"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"

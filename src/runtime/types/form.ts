@@ -85,6 +85,11 @@ export interface FormFieldInjectedOptions<T> {
   errorPattern?: RegExp
 }
 
+export interface ValidateReturnSchema<T> {
+  result: T
+  errors: FormError[] | null
+}
+
 export class FormValidationException extends Error {
   formId: string | number
   errors: FormErrorWithId[]

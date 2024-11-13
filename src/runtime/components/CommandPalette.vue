@@ -247,7 +247,7 @@ const groups = computed(() => {
               size="md"
               color="neutral"
               variant="ghost"
-              :aria-label="t('ui.commandPalette.close')"
+              :aria-label="t('commandPalette.close')"
               v-bind="typeof close === 'object' ? close : undefined"
               :class="ui.close({ class: props.ui?.close })"
               @click="emits('update:open', false)"
@@ -261,7 +261,7 @@ const groups = computed(() => {
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" :dismissable="false">
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? t('ui.commandPalette.noMatch', { searchTerm }) : t('ui.commandPalette.noData') }}
+            {{ searchTerm ? t('commandPalette.noMatch', { searchTerm }) : t('commandPalette.noData') }}
           </slot>
         </ComboboxEmpty>
 

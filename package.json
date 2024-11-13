@@ -68,6 +68,7 @@
     "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs && nuxi typecheck devtools && cd playground-vue && vue-tsc --noEmit",
     "test": "vitest",
     "test:vue": "vitest -c vitest.vue.config.ts",
+    "test:vue:build": "vite build playground-vue",
     "release": "release-it --preRelease=alpha --npm.tag=next"
   },
   "dependencies": {

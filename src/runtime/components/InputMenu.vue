@@ -322,7 +322,7 @@ defineExpose({
       >
         <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
           <slot name="create-item-label" :item="(creatable.item as T)">
-            {{ t('ui.inputMenu.create', { label: typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }) }}
+            {{ t('inputMenu.create', { label: typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }) }}
           </slot>
         </span>
       </ComboboxItem>
@@ -412,7 +412,7 @@ defineExpose({
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? t('ui.inputMenu.noMatch', { searchTerm }) : t('ui.inputMenu.noData') }}
+            {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
           </slot>
         </ComboboxEmpty>
 
