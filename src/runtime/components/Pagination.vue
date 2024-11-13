@@ -126,13 +126,13 @@ const emits = defineEmits<PaginationEmits>()
 const slots = defineSlots<PaginationSlots>()
 
 const appConfig = useAppConfig()
-const { isRTL } = useLocale()
+const { dir } = useLocale()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
 
-const firstIcon = computed(() => props.firstIcon || (isRTL.value ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
-const prevIcon = computed(() => props.prevIcon || (isRTL.value ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
-const nextIcon = computed(() => props.nextIcon || (isRTL.value ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
-const lastIcon = computed(() => props.lastIcon || (isRTL.value ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
+const firstIcon = computed(() => props.firstIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
+const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
+const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
+const lastIcon = computed(() => props.lastIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = pagination()

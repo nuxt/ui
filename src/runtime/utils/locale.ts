@@ -11,7 +11,6 @@ export type LocaleContext = {
   lang: Ref<string>
   dir: Ref<string>
   code: Ref<string>
-  isRTL: Ref<boolean>
   t: Translator
 }
 
@@ -32,14 +31,12 @@ export function buildLocaleContext(locale: MaybeRef<Locale>): LocaleContext {
   const lang = computed(() => unref(locale).name)
   const code = computed(() => unref(locale).code)
   const dir = computed(() => unref(locale).dir.toLowerCase())
-  const isRTL = computed(() => unref(dir.value === 'rtl'))
   const localeRef = isRef(locale) ? locale : ref(locale)
 
   return {
     lang,
     code,
     dir,
-    isRTL,
     locale: localeRef,
     t: buildTranslator(locale)
   }

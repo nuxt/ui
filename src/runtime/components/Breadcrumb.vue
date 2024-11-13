@@ -91,10 +91,10 @@ const props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
   labelKey: 'label'
 })
 const slots = defineSlots<BreadcrumbSlots<T>>()
-const { isRTL } = useLocale()
+const { dir } = useLocale()
 const appConfig = useAppConfig()
 
-const separatorIcon = computed(() => props.separatorIcon || (isRTL.value ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
+const separatorIcon = computed(() => props.separatorIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = breadcrumb()
