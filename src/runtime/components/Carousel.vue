@@ -135,8 +135,11 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
 defineSlots<CarouselSlots<T>>()
 
 const appConfig = useAppConfig()
-const { t } = useLocale()
+const { isRTL, t } = useLocale()
 const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))
+
+const prevIcon = computed(() => props.prevIcon || (isRTL.value ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))
+const nextIcon = computed(() => props.nextIcon || (isRTL.value ? appConfig.ui.icons.arrowLeft : appConfig.ui.icons.arrowRight))
 
 const ui = computed(() => carousel({
   orientation: props.orientation
@@ -277,7 +280,7 @@ defineExpose({
       <div v-if="arrows" :class="ui.arrows({ class: props.ui?.arrows })">
         <UButton
           :disabled="!canScrollPrev"
-          :icon="prevIcon || appConfig.ui.icons.arrowLeft"
+          :icon="prevIcon"
           size="md"
           color="neutral"
           variant="outline"
@@ -288,7 +291,7 @@ defineExpose({
         />
         <UButton
           :disabled="!canScrollNext"
-          :icon="nextIcon || appConfig.ui.icons.arrowRight"
+          :icon="nextIcon"
           size="md"
           color="neutral"
           variant="outline"
