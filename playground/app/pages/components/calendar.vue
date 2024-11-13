@@ -7,8 +7,8 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
 
 const singleValue = ref(new Date())
 const multipleValue = ref([
-  startOfWeek(now(getLocalTimeZone()), 'en').toDate(),
-  endOfWeek(now(getLocalTimeZone()), 'en').toDate()
+  startOfWeek(now(getLocalTimeZone()), 'en').add({ weeks: 1 }).toDate(),
+  endOfWeek(now(getLocalTimeZone()), 'en').add({ weeks: 1 }).toDate()
 ])
 </script>
 
