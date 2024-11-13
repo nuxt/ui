@@ -31,7 +31,8 @@ export interface CalendarSlots {
 <script setup lang="ts">
 import { useForwardPropsEmits, CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
-import UIcon from './Icon.vue'
+import UButton from './Button.vue'
+// import { useLocale } from '../composables/useLocale'
 
 const props = withDefaults(defineProps<CalendarProps>(), {
   fixedWeeks: true
@@ -39,6 +40,7 @@ const props = withDefaults(defineProps<CalendarProps>(), {
 const emits = defineEmits<CalendarEmits>()
 defineSlots<CalendarSlots>()
 
+// const { locale, dir } = useLocale()
 const _rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'modelValue'), emits)
 
 const ui = computed(() => calendar({
@@ -54,16 +56,16 @@ const ui = computed(() => calendar({
     fixed-weeks
   >
     <CalendarHeader :class="ui.header({ class: props.ui?.header })">
-      <CalendarPrev :class="ui.paginationButton({ class: props.ui?.paginationButton })">
-        <UIcon :name="appConfig.ui.icons.chevronLeft" :class="ui.paginationIcon({ class: props.ui?.paginationIcon })" />
+      <CalendarPrev as-child>
+        <UButton :icon="appConfig.ui.icons.chevronLeft" :size="props.size" color="neutral" variant="ghost" />
       </CalendarPrev>
       <CalendarHeading v-slot="{ headingValue }" :class="ui.heading({ class: props.ui?.heading })">
         <slot name="heading" :value="headingValue">
           {{ headingValue }}
         </slot>
       </CalendarHeading>
-      <CalendarNext :class="ui.paginationButton({ class: props.ui?.paginationButton })">
-        <UIcon :name="appConfig.ui.icons.chevronRight" :class="ui.paginationIcon({ class: props.ui?.paginationIcon })" />
+      <CalendarNext as-child>
+        <UButton :icon="appConfig.ui.icons.chevronRight" :size="props.size" color="neutral" variant="ghost" />
       </CalendarNext>
     </CalendarHeader>
     <div :class="ui.body({ class: props.ui?.body })">

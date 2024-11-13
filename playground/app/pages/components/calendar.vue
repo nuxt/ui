@@ -8,11 +8,11 @@ const value = ref<Date>(new Date())
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-4">
     <div class="flex justify-center gap-2">
       <UCalendar v-model="value" />
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-4">
       <UCalendar
         v-for="color in colors"
         :key="color"
@@ -20,7 +20,7 @@ const value = ref<Date>(new Date())
         :color="color"
       />
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-4">
       <UCalendar
         v-for="size in sizes"
         :key="size"
