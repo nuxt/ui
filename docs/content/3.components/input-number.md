@@ -21,13 +21,24 @@ ignore:
 external:
   - modelValue
 props:
-  modelValue: 0
+  modelValue: 5
 ---
 ::
 
-### Min and Max
+Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-Use the `min` and `max` props to set the minimum and maximum value of the InputNumber.
+::component-code
+---
+ignore:
+  - defaultValue
+props:
+  defaultValue: 5
+---
+::
+
+### Min / Max
+
+Use the `min` and `max` props to set the minimum and maximum values of the InputNumber.
 
 ::component-code
 ---
@@ -36,7 +47,7 @@ ignore:
 external:
   - modelValue
 props:
-  modelValue: 0
+  modelValue: 5
   min: 0
   max: 10
 ---
@@ -53,7 +64,7 @@ ignore:
 external:
   - modelValue
 props:
-  modelValue: 0 
+  modelValue: 5
   step: 2
 ---
 ::
@@ -69,7 +80,7 @@ ignore:
 external:
   - modelValue
 props:
-  modelValue: 0
+  modelValue: 5
   orientation: vertical
 ---
 ::
@@ -96,7 +107,7 @@ ignore:
 external:
   - modelValue
 props:
-  modelValue: 0
+  modelValue: 5
   color: neutral
   highlight: true
 ---
@@ -113,7 +124,7 @@ ignore:
 external:
   - modelValue
 props:
-  modelValue: 0
+  modelValue: 5
   variant: subtle
   color: neutral
   highlight: false
@@ -131,14 +142,14 @@ ignore:
 external:
   - modelValue
 props:
-  modelValue: 0
+  modelValue: 5
   size: xl
 ---
 ::
 
-### Icon
+### Disabled
 
-Use the `icon` prop to show an [Icon](/components/icon) inside the InputNumber.
+Use the `disabled` prop to disable the InputNumber.
 
 ::component-code
 ---
@@ -147,7 +158,54 @@ ignore:
 external:
   - modelValue
 props:
-  modelValue: 0
+  modelValue: 5
+  disabled: true
+---
+::
+
+### Increment / Decrement
+
+Use the `increment` and `decrement` props to customize the increment and decrement buttons with any [Button](/components/button) props. Defaults to `{ variant: 'link' }`{lang="ts-type"}.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - increment.size
+  - increment.color
+  - increment.variant
+  - decrement.size
+  - decrement.color
+  - decrement.variant
+external:
+  - modelValue
+props:
+  modelValue: 5
+  increment:
+    color: neutral
+    variant: solid
+    size: xs
+  decrement:
+    color: neutral
+    variant: solid
+    size: xs
+---
+::
+
+### Increment / Decrement Icons
+
+Use the `increment-icon` and `decrement-icon` props to customize the buttons [Icon](/components/icon). Defaults to `i-lucide-plus` / `i-lucide-minus`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+external:
+  - modelValue
+props:
+  modelValue: 5
   incrementIcon: 'i-lucide-arrow-right'
   decrementIcon: 'i-lucide-arrow-left'
 ---
@@ -155,22 +213,52 @@ props:
 
 ## Examples
 
-### Within a FormField
+### With decimal format
 
-You can use the Input within a [FormField](/components/form-field) component to display a label, help text, required indicator, etc.
+Use the `format-options` prop to customize the format of the value.
 
 ::component-example
 ---
-collapse: true
+name: 'input-number-decimal-example'
+---
+::
+
+### With percentage format
+
+Use the `format-options` prop with `style: 'percent'` to customize the format of the value.
+
+::component-example
+---
+name: 'input-number-percentage-example'
+---
+::
+
+### With currency format
+
+Use the `format-options` prop with `style: 'currency'` to customize the format of the value.
+
+::component-example
+---
+name: 'input-number-currency-example'
+---
+::
+
+### Within a FormField
+
+You can use the InputNumber within a [FormField](/components/form-field) component to display a label, help text, required indicator, etc.
+
+::component-example
+---
 name: 'input-number-form-field-example'
 ---
 ::
 
-### With custom slot
+### With slots
+
+Use the `#increment` and `#decrement` slots to customize the buttons.
 
 ::component-example
 ---
-collapse: true
 name: 'input-number-slots-example'
 ---
 ::

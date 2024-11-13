@@ -1,14 +1,15 @@
 <script setup lang="ts">
-const retries = ref(0)
+const value = ref(5)
 </script>
 
 <template>
-  <UInputNumber v-model="retries">
+  <UInputNumber v-model="value">
     <template #decrement>
-      <UButton as="span" size="xs" icon="i-lucide-minus" />
+      <UButton size="xs" icon="i-lucide-minus" />
     </template>
+
     <template #increment>
-      <UButton as="span" size="xs" icon="i-lucide-plus" />
+      <UButton size="xs" icon="i-lucide-plus" />
     </template>
   </UInputNumber>
 </template>
