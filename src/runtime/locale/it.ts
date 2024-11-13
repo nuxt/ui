@@ -7,7 +7,7 @@ export default defineLocale({
     inputMenu: {
       noMatch: 'Nessun dato corrispondente',
       noData: 'Nessun dato',
-      create: 'Creare "{label}"'
+      create: 'Crea "{label}"'
     },
     commandPalette: {
       noMatch: 'Nessun dato corrispondente',
@@ -17,7 +17,7 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Nessun dato corrispondente',
       noData: 'Nessun dato',
-      create: 'Creare "{label}"'
+      create: 'Crea "{label}"'
     },
     toast: {
       close: 'Chiudi'
@@ -37,7 +37,7 @@ export default defineLocale({
       close: 'Chiudi'
     },
     table: {
-      noData: 'Nessuno dato'
+      noData: 'Nessun dato'
     }
   }
 })
