@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { CalendarRootProps, CalendarRootEmits, CalendarCellTriggerProps } from 'radix-vue'
+import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
@@ -12,12 +13,32 @@ const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-export type CalendarProps = CalendarRootProps & {
+interface BaseCalendarProps extends Pick<CalendarRootProps, 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'maxValue' | 'minValue' | 'numberOfMonths' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable' | 'dir'> {
   color?: CalendarVariants['color']
   size?: CalendarVariants['size']
   class?: any
   ui?: Partial<typeof calendar.slots>
+  /**
+   * The locale to use for formatting and parsing numbers.
+   * @defaultValue UApp.locale.code
+   */
+  locale?: string
+  type?: 'multiple' | 'single'
 }
+
+export interface CalendarMultipleProps extends BaseCalendarProps {
+  modelValue?: [DateValue, DateValue]
+  defaultValue?: [DateValue, DateValue]
+  type?: 'multiple'
+}
+
+export interface CalendarSingleProps extends BaseCalendarProps {
+  modelValue?: DateValue
+  defaultValue?: DateValue
+  type?: 'single'
+}
+
+export type CalendarProps = CalendarMultipleProps | CalendarSingleProps
 
 export interface CalendarEmits extends CalendarRootEmits {}
 
@@ -32,15 +53,20 @@ export interface CalendarSlots {
 import { useForwardPropsEmits, CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import UButton from './Button.vue'
-// import { useLocale } from '../composables/useLocale'
+import { useLocale } from '../composables/useLocale'
+import type { Direction } from '../types'
 
 const props = withDefaults(defineProps<CalendarProps>(), {
-  fixedWeeks: true
+  fixedWeeks: true,
+  type: 'single'
 })
 const emits = defineEmits<CalendarEmits>()
 defineSlots<CalendarSlots>()
 
-// const { locale, dir } = useLocale()
+const { code: codeLocale, dir: dirLocale } = useLocale()
+const locale = computed(() => props.locale || codeLocale.value)
+const dir = computed(() => (props.dir || dirLocale.value) as Direction)
+
 const _rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'modelValue'), emits)
 
 const ui = computed(() => calendar({
@@ -53,6 +79,8 @@ const ui = computed(() => calendar({
   <CalendarRoot
     v-slot="{ weekDays, grid }"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :locale="locale"
+    :dir="dir"
     fixed-weeks
   >
     <CalendarHeader :class="ui.header({ class: props.ui?.header })">
