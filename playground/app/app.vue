@@ -13,6 +13,7 @@ const components = [
   'button',
   'button-group',
   'card',
+  'calendar',
   'carousel',
   'checkbox',
   'chip',
