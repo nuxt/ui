@@ -5,7 +5,7 @@ import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ToasterProps, Locale } from '../types'
 import { en } from '../locale'
 
-export interface AppProps extends Omit<ConfigProviderProps, 'useId'> {
+export interface AppProps extends Omit<ConfigProviderProps, 'useId' | 'dir'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
   locale?: Locale
@@ -42,7 +42,7 @@ provide(localeContextInjectionKey, locale)
 </script>
 
 <template>
-  <ConfigProvider :use-id="() => (useId() as string)" :dir="dir || locale.dir" v-bind="configProviderProps">
+  <ConfigProvider :use-id="() => (useId() as string)" :dir="locale.dir" v-bind="configProviderProps">
     <TooltipProvider v-bind="tooltipProps">
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />
