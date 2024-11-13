@@ -1,6 +1,16 @@
 import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => {
+  console.log(JSON.stringify({
+    ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
+      headCell: `text-[var(--ui-${color})]`,
+      cellTrigger: `focus-visible:ring-[var(--ui-${color})] data-[selected]:!bg-[var(--ui-error)] data-[today]:bg-[var(--ui-error)]/10`
+    }])),
+    neutral: {
+      cellTrigger: ''
+    }
+  }, null, 2))
+
   return {
     slots: {
       root: 'rounded-[calc(var(--ui-radius)*1.5)]',
@@ -13,16 +23,37 @@ export default (options: Required<ModuleOptions>) => {
       gridBody: 'grid',
       headCell: 'rounded-md text-xs',
       cell: 'relative text-center text-sm',
-      cellTrigger: ['relative flex items-center justify-center rounded-full whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-inset data-[disabled]:text-[var(--ui-text)]/30 data-[selected]:text-[var(--ui-bg)] hover:bg-[var(--ui-bg-elevated)]', options.theme.transitions && 'transition-[color,opacity] duration-200']
+      cellTrigger: ['relative flex items-center justify-center rounded-full whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-inset data-[disabled]:text-[var(--ui-text)]/30 data-[selected]:text-[var(--ui-bg)]', options.theme.transitions && 'transition-[color,opacity] duration-200']
     },
     variants: {
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-          headCell: `text-[var(--ui-${color})]`,
-          cellTrigger: `focus-visible:ring-[var(--ui-${color})] data-[selected]:!bg-[var(--ui-${color})] data-[today]:bg-[var(--ui-${color})]/10`
-        }])),
+        primary: {
+          headCell: 'text-[var(--ui-primary)]',
+          cellTrigger: 'focus-visible:ring-[var(--ui-primary)] data-[selected]:!bg-[var(--ui-primary)] data-[today]:bg-[var(--ui-primary)]/20 hover:bg-[var(--ui-primary)]/10'
+        },
+        secondary: {
+          headCell: 'text-[var(--ui-secondary)]',
+          cellTrigger: 'focus-visible:ring-[var(--ui-secondary)] data-[selected]:!bg-[var(--ui-secondary)] data-[today]:bg-[var(--ui-secondary)]/20 hover:bg-[var(--ui-secondary)]/10'
+        },
+        success: {
+          headCell: 'text-[var(--ui-success)]',
+          cellTrigger: 'focus-visible:ring-[var(--ui-success)] data-[selected]:!bg-[var(--ui-success)] data-[today]:bg-[var(--ui-success)]/20 hover:bg-[var(--ui-success)]/10'
+        },
+        info: {
+          headCell: 'text-[var(--ui-info)]',
+          cellTrigger: 'focus-visible:ring-[var(--ui-info)] data-[selected]:!bg-[var(--ui-info)] data-[today]:bg-[var(--ui-info)]/20 hover:bg-[var(--ui-info)]/10'
+        },
+        warning: {
+          headCell: 'text-[var(--ui-warning)]',
+          cellTrigger: 'focus-visible:ring-[var(--ui-warning)] data-[selected]:!bg-[var(--ui-warning)] data-[today]:bg-[var(--ui-warning)]/20 hover:bg-[var(--ui-warning)]/10'
+        },
+        error: {
+          headCell: 'text-[var(--ui-error)]',
+          cellTrigger: 'focus-visible:ring-[var(--ui-error)] data-[selected]:!bg-[var(--ui-error)] data-[today]:bg-[var(--ui-error)]/20 hover:bg-[var(--ui-error)]/10'
+        },
         neutral: {
-          cellTrigger: ''
+          headCell: 'text-[var(--ui-error)]',
+          cellTrigger: 'focus-visible:ring-[var(--ui-border-inverted)] data-[selected]:!bg-[var(--ui-bg-inverted)] data-[today]:bg-[var(--ui-bg-inverted)]/20 hover:bg-[var(--ui-bg-inverted)]/10'
         }
       },
       size: {
