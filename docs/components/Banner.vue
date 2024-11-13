@@ -30,7 +30,7 @@ if (import.meta.server) {
         :to="to"
         target="_blank"
         class="focus:outline-none"
-        aria-label="Nuxt UI Pro pricing"
+        aria-label="Nuxt UI v3-alpha has been released!"
         tabindex="-1"
       >
         <span class="absolute inset-0 " aria-hidden="true" />
@@ -45,7 +45,7 @@ if (import.meta.server) {
         </p>
 
         <UButton
-          to="https://ui3.nuxt.dev"
+          :to="to"
           target="_blank"
           label="Try it out"
           color="black"
