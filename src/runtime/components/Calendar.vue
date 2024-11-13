@@ -1,7 +1,7 @@
 <script lang="ts">
 import { computed } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { CalendarRootProps, CalendarRootEmits, CalendarCellTriggerProps } from 'radix-vue'
+import type { CalendarRootProps, CalendarRootEmits, CalendarCellTriggerProps, DateRange } from 'radix-vue'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -33,8 +33,8 @@ export interface CalendarSingleProps extends BaseCalendarProps {
 }
 
 export interface CalendarRangeProps extends BaseCalendarProps {
-  modelValue?: [DateValue, DateValue]
-  defaultValue?: [DateValue, DateValue]
+  modelValue?: DateRange
+  defaultValue?: DateRange
   range: true
 }
 
@@ -50,7 +50,10 @@ export interface CalendarSlots {
 </script>
 
 <script setup lang="ts">
-import { useForwardPropsEmits, CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from 'radix-vue'
+import {
+  useForwardPropsEmits, CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot,
+  RangeCalendarCell, RangeCalendarCellTrigger, RangeCalendarGrid, RangeCalendarGridBody, RangeCalendarGridHead, RangeCalendarGridRow, RangeCalendarHeadCell, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarNext, RangeCalendarPrev, RangeCalendarRoot
+} from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import UButton from './Button.vue'
 import { useLocale } from '../composables/useLocale'
@@ -67,7 +70,7 @@ const { code: codeLocale, dir: dirLocale } = useLocale()
 const locale = computed(() => props.locale || codeLocale.value)
 const dir = computed(() => (props.dir || dirLocale.value) as Direction)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'modelValue', 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'maxValue', 'minValue', 'numberOfMonths', 'weekdayFormat', 'weekStartsOn'), emits)
+const baseRootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'maxValue', 'minValue', 'numberOfMonths', 'weekdayFormat', 'weekStartsOn'), emits)
 
 const ui = computed(() => calendar({
   color: props.color,
@@ -76,13 +79,77 @@ const ui = computed(() => calendar({
 </script>
 
 <template>
-  <div v-if="props.range">
-    todo
-  </div>
+  <RangeCalendarRoot
+    v-if="props.range"
+    v-slot="{ weekDays, grid }"
+    v-bind="baseRootProps"
+    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :locale="locale"
+    :dir="dir"
+  >
+    <RangeCalendarHeader :class="ui.header({ class: props.ui?.header })">
+      <RangeCalendarPrev as-child>
+        <UButton :icon="appConfig.ui.icons.chevronLeft" :size="props.size" color="neutral" variant="ghost" />
+      </RangeCalendarPrev>
+      <RangeCalendarHeading v-slot="{ headingValue }" :class="ui.heading({ class: props.ui?.heading })">
+        <slot name="heading" :value="headingValue">
+          {{ headingValue }}
+        </slot>
+      </RangeCalendarHeading>
+      <RangeCalendarNext as-child>
+        <UButton :icon="appConfig.ui.icons.chevronRight" :size="props.size" color="neutral" variant="ghost" />
+      </RangeCalendarNext>
+    </RangeCalendarHeader>
+    <div :class="ui.body({ class: props.ui?.body })">
+      <RangeCalendarGrid
+        v-for="month in grid"
+        :key="month.value.toString()"
+        :class="ui.grid({ class: props.ui?.grid })"
+      >
+        <RangeCalendarGridHead>
+          <RangeCalendarGridRow :class="ui.gridWeekDaysRow({ class: props.ui?.gridWeekDaysRow })">
+            <RangeCalendarHeadCell
+              v-for="day in weekDays"
+              :key="day"
+              :class="ui.headCell({ class: props.ui?.headCell })"
+            >
+              <slot name="week-day" :day="day">
+                {{ day }}
+              </slot>
+            </RangeCalendarHeadCell>
+          </RangeCalendarGridRow>
+        </RangeCalendarGridHead>
+        <RangeCalendarGridBody :class="ui.gridBody({ class: props.ui?.gridBody })">
+          <RangeCalendarGridRow
+            v-for="(weekDates, index) in month.rows"
+            :key="`weekDate-${index}`"
+            :class="ui.gridRow({ class: props.ui?.gridRow })"
+          >
+            <RangeCalendarCell
+              v-for="weekDate in weekDates"
+              :key="weekDate.toString()"
+              :date="weekDate"
+              :class="ui.cell({ class: props.ui?.cell })"
+            >
+              <RangeCalendarCellTrigger
+                :day="weekDate"
+                :month="month.value"
+                :class="ui.cellTrigger({ class: props.ui?.cellTrigger })"
+              >
+                <slot name="day" :day="weekDate">
+                  {{ weekDate.day }}
+                </slot>
+              </RangeCalendarCellTrigger>
+            </RangeCalendarCell>
+          </RangeCalendarGridRow>
+        </RangeCalendarGridBody>
+      </RangeCalendarGrid>
+    </div>
+  </RangeCalendarRoot>
   <CalendarRoot
     v-else
-    v-bind="rootProps"
     v-slot="{ weekDays, grid }"
+    v-bind="baseRootProps"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     :locale="locale"
     :dir="dir"

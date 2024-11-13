@@ -6,10 +6,10 @@ const colors = Object.keys(theme.variants.color) as Array<keyof typeof theme.var
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
 const singleValue = ref(now(getLocalTimeZone()).add({ days: -2 }))
-const multipleValue = ref([
-  startOfWeek(now(getLocalTimeZone()), 'en').add({ days: -2 }),
-  endOfWeek(now(getLocalTimeZone()), 'en').add({ days: -2 })
-])
+const multipleValue = reactive({
+  start: startOfWeek(now(getLocalTimeZone()), 'en').add({ weeks: 1 }),
+  end: endOfWeek(now(getLocalTimeZone()), 'en').add({ weeks: 1 })
+})
 </script>
 
 <template>
