@@ -11,7 +11,7 @@ export type LocaleContext = {
   lang: Ref<string>
   dir: Ref<string>
   code: Ref<string>
-  isRTL: Ref<string>
+  isRTL: Ref<boolean>
   t: Translator
 }
 
