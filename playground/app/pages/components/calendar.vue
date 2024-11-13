@@ -5,10 +5,10 @@ import theme from '#build/ui/calendar'
 const colors = Object.keys(theme.variants.color) as Array<keyof typeof theme.variants.color>
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
-const singleValue = ref(new Date())
+const singleValue = ref(now(getLocalTimeZone()).add({ days: -2 }))
 const multipleValue = ref([
-  startOfWeek(now(getLocalTimeZone()), 'en').add({ weeks: 1 }).toDate(),
-  endOfWeek(now(getLocalTimeZone()), 'en').add({ weeks: 1 }).toDate()
+  startOfWeek(now(getLocalTimeZone()), 'en').add({ days: -2 }),
+  endOfWeek(now(getLocalTimeZone()), 'en').add({ days: -2 })
 ])
 </script>
 
@@ -30,8 +30,8 @@ const multipleValue = ref([
         v-for="color in colors"
         :key="color"
         v-model="multipleValue"
-        type="multiple"
         :color="color"
+        range
       />
     </div>
     <div class="flex items-center gap-4">

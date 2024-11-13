@@ -23,22 +23,22 @@ interface BaseCalendarProps extends Pick<CalendarRootProps, 'weekStartsOn' | 'we
    * @defaultValue UApp.locale.code
    */
   locale?: string
-  type?: 'multiple' | 'single'
-}
-
-export interface CalendarMultipleProps extends BaseCalendarProps {
-  modelValue?: [DateValue, DateValue]
-  defaultValue?: [DateValue, DateValue]
-  type?: 'multiple'
+  range: boolean
 }
 
 export interface CalendarSingleProps extends BaseCalendarProps {
   modelValue?: DateValue
   defaultValue?: DateValue
-  type?: 'single'
+  range: false
 }
 
-export type CalendarProps = CalendarMultipleProps | CalendarSingleProps
+export interface CalendarRangeProps extends BaseCalendarProps {
+  modelValue?: [DateValue, DateValue]
+  defaultValue?: [DateValue, DateValue]
+  range: true
+}
+
+export type CalendarProps = CalendarSingleProps | CalendarRangeProps
 
 export interface CalendarEmits extends CalendarRootEmits {}
 
@@ -57,8 +57,8 @@ import { useLocale } from '../composables/useLocale'
 import type { Direction } from '../types'
 
 const props = withDefaults(defineProps<CalendarProps>(), {
-  fixedWeeks: true,
-  type: 'single'
+  range: false,
+  fixedWeeks: true
 })
 const emits = defineEmits<CalendarEmits>()
 defineSlots<CalendarSlots>()
@@ -67,7 +67,7 @@ const { code: codeLocale, dir: dirLocale } = useLocale()
 const locale = computed(() => props.locale || codeLocale.value)
 const dir = computed(() => (props.dir || dirLocale.value) as Direction)
 
-const _rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'modelValue'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'modelValue', 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'maxValue', 'minValue', 'numberOfMonths', 'weekdayFormat', 'weekStartsOn'), emits)
 
 const ui = computed(() => calendar({
   color: props.color,
@@ -76,12 +76,16 @@ const ui = computed(() => calendar({
 </script>
 
 <template>
+  <div v-if="props.range">
+    todo
+  </div>
   <CalendarRoot
+    v-else
+    v-bind="rootProps"
     v-slot="{ weekDays, grid }"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     :locale="locale"
     :dir="dir"
-    fixed-weeks
   >
     <CalendarHeader :class="ui.header({ class: props.ui?.header })">
       <CalendarPrev as-child>
