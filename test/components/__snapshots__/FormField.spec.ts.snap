@@ -30,7 +30,7 @@ exports[`FormField > renders with description slot correctly 1`] = `
     <!--v-if-->
     <p class="text-[var(--ui-text-muted)]">Description slot</p>
   </div>
-  <div class="">
+  <div class="mt-1 relative">
     <!--v-if-->
   </div>
 </div>"
@@ -130,7 +130,7 @@ exports[`FormField > renders with label slot correctly 1`] = `
     </div>
     <!--v-if-->
   </div>
-  <div class="">
+  <div class="mt-1 relative">
     <!--v-if-->
   </div>
 </div>"
