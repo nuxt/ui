@@ -52,7 +52,7 @@ export default (options: Required<ModuleOptions>) => {
           cellTrigger: 'focus-visible:ring-[var(--ui-error)] data-[selected]:!bg-[var(--ui-error)] data-[today]:bg-[var(--ui-error)]/20 hover:bg-[var(--ui-error)]/10'
         },
         neutral: {
-          headCell: 'text-[var(--ui-error)]',
+          headCell: 'text-[var(--ui-bg-inverted)]',
           cellTrigger: 'focus-visible:ring-[var(--ui-border-inverted)] data-[selected]:!bg-[var(--ui-bg-inverted)] data-[today]:bg-[var(--ui-bg-inverted)]/20 hover:bg-[var(--ui-bg-inverted)]/10'
         }
       },
