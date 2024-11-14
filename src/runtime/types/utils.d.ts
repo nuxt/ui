@@ -7,7 +7,7 @@ export interface TightMap<O = any> {
 export type DeepPartial<T, O = any> = {
   [P in keyof T]?: T[P] extends object
     ? DeepPartial<T[P], O>
-    : T[P];
+    : T[P] extends string ? string : T[P];
 } & {
   [key: string]: O | TightMap<O>
 }
