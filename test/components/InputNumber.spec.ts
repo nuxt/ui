@@ -100,7 +100,7 @@ describe('InputNumber', () => {
         </UFormField>
         `
       })
-      const input = wrapper.findComponent({ name: 'NumberFieldInput' })
+      const input = wrapper.findComponent({ name: 'NumberFieldRoot' })
       return {
         wrapper,
         input
@@ -109,12 +109,15 @@ describe('InputNumber', () => {
 
     test('validate on blur works', async () => {
       const { input, wrapper } = await createForm(['blur'])
+      const inputDom = wrapper.find('#input')
 
-      await input.trigger('blur')
+      await inputDom.trigger('blur')
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue(1)
-      await input.trigger('blur')
+      await inputDom.trigger('blur')
+      await flushPromises()
       expect(wrapper.html()).not.toContain('Error message')
     })
 
@@ -122,20 +125,24 @@ describe('InputNumber', () => {
       const { input, wrapper } = await createForm(['change'])
 
       await input.setValue(2)
+      await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue(1)
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'])
 
-      await input.setValue(2)
-      expect(wrapper.text()).toContain('Error message')
+      await input.setValue(10)
+      await flushPromises()
+      expect(wrapper.html()).toContain('Error message')
 
       await input.setValue(1)
-      expect(wrapper.text()).not.toContain('Error message')
+      await flushPromises()
+      expect(wrapper.html()).not.toContain('Error message')
     })
   })
 })
