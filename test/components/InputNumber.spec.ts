@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
+import { reactive } from 'vue'
 import InputNumber, { type InputNumberProps, type InputNumberSlots } from '../../src/runtime/components/InputNumber.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input-number'
