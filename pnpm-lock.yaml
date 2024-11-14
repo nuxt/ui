@@ -24,8 +24,8 @@ importers:
         specifier: ^0.10.2
         version: 0.10.2(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.25.0)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))
       '@nuxt/icon':
-        specifier: ^1.7.4
-        version: 1.7.4(magicast@0.3.5)(rollup@4.25.0)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))
+        specifier: ^1.7.5
+        version: 1.7.5(magicast@0.3.5)(rollup@4.25.0)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))
       '@nuxt/kit':
         specifier: ^3.14.159
         version: 3.14.159(magicast@0.3.5)(rollup@4.25.0)
@@ -1372,8 +1372,8 @@ packages:
   '@nuxt/fonts@0.10.2':
     resolution: {integrity: sha512-WYsrKBv9tPEgEntNwe4Zov2taKO/cnct+tR/g5EQ1jgADkFeEGkfCsUDwTG/pZFkW0FlKSR/KRLMB3U6O+C6Ow==}
 
-  '@nuxt/icon@1.7.4':
-    resolution: {integrity: sha512-oUzCc/6nsS1K50xEg1C/eW3m9Mk6Jhrumm89srd35enkUiuKTZUjENbouV0ghrmLbn3ACghojGNHeqlWDffi7g==}
+  '@nuxt/icon@1.7.5':
+    resolution: {integrity: sha512-9zpcjtCQHY1SanYAXLuErDy30aOJZhhHQ+ctigRcGEdOVLvaHJna8ahN/LWrvlwBv+/s/KKKb6Ycch6hxo7Ljw==}
 
   '@nuxt/image@1.8.1':
     resolution: {integrity: sha512-qNj7OCNsoGcutGOo1R2PYp4tQ/6uD77aSakyDoVAmLSRJBmhFTnT2+gIqVD95JMmkSHgYhmSX4gGxnaQK/t1cw==}
@@ -7991,7 +7991,7 @@ snapshots:
   '@nuxt/fonts@0.10.2(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.25.0)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))':
     dependencies:
       '@nuxt/devtools-kit': 1.6.0(magicast@0.3.5)(rollup@4.25.0)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))
-      '@nuxt/kit': 3.14.159(magicast@0.3.5)(rollup@4.25.0)
+      '@nuxt/kit': 3.13.2(magicast@0.3.5)(rollup@4.25.0)
       chalk: 5.3.0
       css-tree: 3.0.1
       defu: 6.1.4
@@ -8030,7 +8030,7 @@ snapshots:
       - supports-color
       - vite
 
-  '@nuxt/icon@1.7.4(magicast@0.3.5)(rollup@4.25.0)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))':
+  '@nuxt/icon@1.7.5(magicast@0.3.5)(rollup@4.25.0)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))':
     dependencies:
       '@iconify/collections': 1.0.483
       '@iconify/types': 2.0.0
@@ -8435,7 +8435,7 @@ snapshots:
   '@nuxtjs/plausible@1.0.3(magicast@0.3.5)(rollup@4.25.0)':
     dependencies:
       '@barbapapazes/plausible-tracker': 0.5.3
-      '@nuxt/kit': 3.14.159(magicast@0.3.5)(rollup@4.25.0)
+      '@nuxt/kit': 3.13.2(magicast@0.3.5)(rollup@4.25.0)
       defu: 6.1.4
     transitivePeerDependencies:
       - magicast
