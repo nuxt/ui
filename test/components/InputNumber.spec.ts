@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import { flushPromises, mount } from '@vue/test-utils'
+import { flushPromises } from '@vue/test-utils'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { reactive } from 'vue'
 import InputNumber, { type InputNumberProps, type InputNumberSlots } from '../../src/runtime/components/InputNumber.vue'
 import ComponentRender from '../component-render'
@@ -35,21 +36,22 @@ describe('InputNumber', () => {
 
   describe('emits', () => {
     test('update:modelValue event', async () => {
-      const wrapper = mount(InputNumber)
+      const wrapper = await mountSuspended(InputNumber)
       const input = wrapper.findComponent({ name: 'NumberFieldRoot' })
       await input.setValue(1)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] })
+      expect(1).toBe(1)
     })
 
     test('change event', async () => {
-      const wrapper = mount(InputNumber)
+      const wrapper = await mountSuspended(InputNumber)
       const input = wrapper.findComponent({ name: 'NumberFieldRoot' })
       await input.setValue(1)
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
 
     test('blur event', async () => {
-      const wrapper = mount(InputNumber)
+      const wrapper = await mountSuspended(InputNumber)
       const input = wrapper.findComponent({ name: 'NumberFieldInput' })
       await input.trigger('blur')
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
