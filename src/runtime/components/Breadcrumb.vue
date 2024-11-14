@@ -76,8 +76,10 @@ extendDevtoolsMeta({
 </script>
 
 <script setup lang="ts" generic="T extends BreadcrumbItem">
+import { computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { get } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
@@ -89,8 +91,10 @@ const props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
   labelKey: 'label'
 })
 const slots = defineSlots<BreadcrumbSlots<T>>()
-
+const { dir } = useLocale()
 const appConfig = useAppConfig()
+
+const separatorIcon = computed(() => props.separatorIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = breadcrumb()
@@ -123,7 +127,7 @@ const ui = breadcrumb()
 
         <li v-if="index < items!.length - 1" role="presentation" :class="ui.separator({ class: props.ui?.separator })">
           <slot name="separator">
-            <UIcon :name="separatorIcon || appConfig.ui.icons.chevronRight" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
+            <UIcon :name="separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
           </slot>
         </li>
       </template>
