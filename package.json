@@ -76,7 +76,7 @@
     "@internationalized/number": "^3.5.4",
     "@nuxt/devtools-kit": "^1.6.0",
     "@nuxt/fonts": "^0.10.2",
-    "@nuxt/icon": "^1.7.4",
+    "@nuxt/icon": "^1.7.5",
     "@nuxt/kit": "^3.14.159",
     "@nuxt/schema": "^3.14.159",
     "@nuxtjs/color-mode": "^3.5.2",
