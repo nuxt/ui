@@ -16,13 +16,15 @@ import {
   USlider,
   UPinInput
 } from '#components'
+import type { Reactive } from '@vue/reactivity'
 
 export async function renderForm(options: {
+  state?: Reactive<any>
   props: Partial<FormProps<any>>
   slotVars?: object
   slotTemplate: string
 }) {
-  const state = reactive({})
+  const state = options.state ?? reactive({})
 
   return await mountSuspended(UForm, {
     props: {
