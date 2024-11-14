@@ -30,7 +30,7 @@ export function translate(path: string, option: undefined | TranslatorOption, lo
 export function buildLocaleContext(locale: MaybeRef<Locale>): LocaleContext {
   const lang = computed(() => unref(locale).name)
   const code = computed(() => unref(locale).code)
-  const dir = computed(() => unref(locale).dir)
+  const dir = computed(() => unref(locale).dir.toLowerCase())
   const localeRef = isRef(locale) ? locale : ref(locale)
 
   return {

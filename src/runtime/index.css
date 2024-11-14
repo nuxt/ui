@@ -1,9 +1,5 @@
 @import './keyframes.css';
 
-@theme default {
-  --spacing-4_5: 1.125rem;
-}
-
 @variant dark (&:where(.dark, .dark *));
 
 @layer base {
