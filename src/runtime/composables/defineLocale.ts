@@ -1,5 +1,5 @@
-import type { Locale, Direction, Messages } from '../types/locale'
 import { defu } from 'defu'
+import type { Locale, Direction, Messages } from '../types/locale'
 
 interface DefineLocaleOptions {
   name: string

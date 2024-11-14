@@ -214,6 +214,16 @@ name: 'input-clear-button-example'
 ---
 ::
 
+### With copy button
+
+You can put a [Button](/components/button) inside the `#trailing` slot to copy the value to the clipboard.
+
+::component-example
+---
+name: 'input-copy-button-example'
+---
+::
+
 ### With password toggle
 
 You can put a [Button](/components/button) inside the `#trailing` slot to toggle the password visibility.
@@ -243,6 +253,20 @@ You can use the `#trailing` slot to add a character limit to the Input.
 ---
 name: 'input-character-limit-example'
 ---
+::
+
+### With keyboard shortcut
+
+You can use the [Kbd](/components/kbd) component inside the `#trailing` slot to add a keyboard shortcut to the Input.
+
+::component-example
+---
+name: 'input-kbd-example'
+---
+::
+
+::note{to="/composables/define-shortcuts"}
+This example uses the `defineShortcuts` composable to focus the Input when the :kbd{value="/"} key is pressed.
 ::
 
 ### With floating label
