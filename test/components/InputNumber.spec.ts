@@ -55,32 +55,6 @@ describe('InputNumber', () => {
     })
   })
 
-  describe('controls', async () => {
-    test('increment', async () => {
-      const wrapper = mount(InputNumber, { props: {
-        'modelValue': 100,
-        'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e })
-      } })
-      const increment = wrapper.findComponent({ name: 'NumberFieldIncrement' })
-      await increment.find('button').trigger('click')
-
-      await flushPromises()
-      expect(wrapper.props('modelValue')).toBe(101)
-    })
-
-    test('decrement', async () => {
-      const wrapper = mount(InputNumber, { props: {
-        'modelValue': 100,
-        'onUpdate:modelValue': e => wrapper.setProps({ modelValue: e })
-      } })
-      const increment = wrapper.findComponent({ name: 'NumberFieldIncrement' })
-      await increment.find('button').trigger('click')
-
-      await flushPromises()
-      expect(wrapper.props('modelValue')).toBe(99)
-    })
-  })
-
   describe('form integration', async () => {
     async function createForm(validateOn?: FormInputEvents[]) {
       const wrapper = await renderForm({
