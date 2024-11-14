@@ -307,6 +307,9 @@ importers:
       '@iconify-json/lucide':
         specifier: ^1.2.14
         version: 1.2.14
+      '@iconify-json/simple-icons':
+        specifier: ^1.2.11
+        version: 1.2.11
       '@nuxt/ui':
         specifier: workspace:*
         version: link:..
@@ -2468,7 +2471,7 @@ packages:
   '@vueuse/nuxt@11.2.0':
     resolution: {integrity: sha512-4Mp1SXpXy8KRKY7lJqN4AuiMkun9IUVGt02t2SBk1hf/RVe4U6AIR2ukmHws0uYvjIGIhlGNv4o6ayTK/7ELWQ==}
     peerDependencies:
-      nuxt: 3.13.2
+      nuxt: ^3.0.0
 
   '@vueuse/shared@10.11.1':
     resolution: {integrity: sha512-LHpC8711VFZlDaYUXEBbFBCQ7GS3dVU9mjOhhMhXP6txTV4EhYQg/KGnQuvt/sPAtoUKq7VVUnL6mVtFoL42sA==}
