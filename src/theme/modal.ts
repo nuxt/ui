@@ -21,7 +21,7 @@ export default {
         content: 'inset-0'
       },
       false: {
-        content: 'top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-lg sm:h-auto sm:my-8 sm:rounded-[calc(var(--ui-radius)*2)] sm:shadow-lg sm:ring ring-[var(--ui-border)]'
+        content: 'top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-lg w-[90vw] h-auto my-4 sm:my-8 rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-[var(--ui-border)]'
       }
     }
   }
