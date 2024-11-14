@@ -167,7 +167,7 @@ defineExpose({
             :color="color"
             :size="size"
             variant="link"
-            :aria-label="t('ui.inputNumber.increment')"
+            :aria-label="t('inputNumber.increment')"
             v-bind="typeof increment === 'object' ? increment : undefined"
           />
         </slot>
@@ -182,7 +182,7 @@ defineExpose({
             :color="color"
             :size="size"
             variant="link"
-            :aria-label="t('ui.inputNumber.decrement')"
+            :aria-label="t('inputNumber.decrement')"
             v-bind="typeof decrement === 'object' ? decrement : undefined"
           />
         </slot>
