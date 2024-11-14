@@ -37,7 +37,7 @@ describe('InputNumber', () => {
       const wrapper = mount(InputNumber)
       const input = wrapper.findComponent({ name: 'NumberFieldRoot' })
       await input.setValue(1)
-      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': 1 })
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] })
     })
 
     test('change event', async () => {
@@ -84,6 +84,7 @@ describe('InputNumber', () => {
   describe('form integration', async () => {
     async function createForm(validateOn?: FormInputEvents[]) {
       const wrapper = await renderForm({
+        state: reactive({ value: 0 }),
         props: {
           validateOn,
           validateOnInputDelay: 0,
@@ -113,7 +114,7 @@ describe('InputNumber', () => {
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue(1)
-      await wrapper.trigger('blur')
+      await input.trigger('blur')
       expect(wrapper.html()).not.toContain('Error message')
     })
 
@@ -121,11 +122,9 @@ describe('InputNumber', () => {
       const { input, wrapper } = await createForm(['change'])
 
       await input.setValue(2)
-      await flushPromises()
-      expect(input.text()).toContain('Error message')
+      expect(wrapper.text()).toContain('Error message')
 
       await input.setValue(1)
-      await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
@@ -133,7 +132,7 @@ describe('InputNumber', () => {
       const { input, wrapper } = await createForm(['input'])
 
       await input.setValue(2)
-      expect(input.text()).toContain('Error message')
+      expect(wrapper.text()).toContain('Error message')
 
       await input.setValue(1)
       expect(wrapper.text()).not.toContain('Error message')
