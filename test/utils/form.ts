@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import type { Reactive } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import type { FormProps } from '../../src/runtime/components/Form.vue'
 import {
@@ -16,7 +17,6 @@ import {
   USlider,
   UPinInput
 } from '#components'
-import type { Reactive } from '@vue/reactivity'
 
 export async function renderForm(options: {
   state?: Reactive<any>
