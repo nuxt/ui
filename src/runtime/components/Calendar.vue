@@ -19,6 +19,7 @@ interface BaseCalendarProps extends Pick<CalendarRootProps, 'weekStartsOn' | 'we
   class?: any
   ui?: Partial<typeof calendar.slots>
   range: boolean
+  yearControls?: boolean
 }
 
 export interface CalendarSingleProps extends BaseCalendarProps {
@@ -53,7 +54,8 @@ import { useLocale } from '../composables/useLocale'
 
 const props = withDefaults(defineProps<CalendarProps>(), {
   range: false,
-  fixedWeeks: true
+  fixedWeeks: true,
+  yearControls: true
 })
 const emits = defineEmits<CalendarEmits>()
 defineSlots<CalendarSlots>()
@@ -67,6 +69,14 @@ const ui = computed(() => calendar({
   size: props.size
 }))
 
+function paginateYear(date: DateValue, sign: -1 | 1) {
+  if (sign === -1) {
+    return date.subtract({ years: 1 })
+  }
+
+  return date.add({ years: 1 })
+}
+
 const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
 </script>
 
@@ -79,6 +89,9 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     :dir="dir"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
+      <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" as-child>
+        <UButton :icon="appConfig.ui.icons.chevronDoubleLeft" :size="props.size" color="neutral" variant="ghost" />
+      </Calendar.Prev>
       <Calendar.Prev as-child>
         <UButton :icon="appConfig.ui.icons.chevronLeft" :size="props.size" color="neutral" variant="ghost" />
       </Calendar.Prev>
@@ -89,6 +102,9 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
       </Calendar.Heading>
       <Calendar.Next as-child>
         <UButton :icon="appConfig.ui.icons.chevronRight" :size="props.size" color="neutral" variant="ghost" />
+      </Calendar.Next>
+      <Calendar.Next v-if="props.yearControls" :next-page="(date: DateValue) => paginateYear(date, 1)" as-child>
+        <UButton :icon="appConfig.ui.icons.chevronDoubleRight" :size="props.size" color="neutral" variant="ghost" />
       </Calendar.Next>
     </Calendar.Header>
     <div :class="ui.body({ class: props.ui?.body })">

@@ -6,24 +6,24 @@ export default (options: Required<ModuleOptions>) => {
       root: 'rounded-[calc(var(--ui-radius)*1.5)]',
       header: 'flex items-center justify-between',
       body: 'flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0',
-      heading: 'text-sm font-medium',
+      heading: 'text-center text-sm font-medium truncate',
       grid: 'w-full border-collapse select-none space-y-1',
       gridRow: 'grid grid-cols-7',
       gridWeekDaysRow: 'mb-1 grid w-full grid-cols-7',
       gridBody: 'grid',
       headCell: 'rounded-md text-xs',
       cell: 'relative text-center text-sm',
-      cellTrigger: ['relative flex items-center justify-center rounded-full whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-inset data-[disabled]:text-[var(--ui-text)]/30 data-[selected]:text-[var(--ui-bg)]', options.theme.transitions && 'transition-[color,opacity] duration-200']
+      cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-inset data-[disabled]:text-[var(--ui-text)]/30 data-[selected]:!text-[var(--ui-bg)] data-[today]:font-semibold data-[unavailable]:pointer-events-none data-[unavailable]:!text-[var(--ui-text)]/50 data-[unavailable]:line-through', options.theme.transitions && 'transition-[color,opacity] duration-200']
     },
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
           headCell: `text-[var(--ui-${color})]`,
-          cellTrigger: `focus-visible:ring-[var(--ui-${color})] data-[selected]:!bg-[var(--ui-${color})] data-[today]:bg-[var(--ui-${color})]/10`
+          cellTrigger: `focus-visible:ring-[var(--ui-${color})] data-[selected]:!bg-[var(--ui-${color})] data-[today]:text-[var(--ui-${color})] data-[highlighted]:bg-[var(--ui-${color})]/20 hover:bg-[var(--ui-${color})]/20`
         }])),
         neutral: {
           headCell: 'text-[var(--ui-bg-inverted)]',
-          cellTrigger: 'focus-visible:ring-[var(--ui-border-inverted)] data-[selected]:!bg-[var(--ui-bg-inverted)] data-[today]:bg-[var(--ui-bg-inverted)]/20 hover:bg-[var(--ui-bg-inverted)]/10'
+          cellTrigger: 'focus-visible:ring-[var(--ui-border-inverted)] data-[selected]:!bg-[var(--ui-bg-inverted)] data-[today]:text-[var(--ui-bg-inverted)] data-[highlighted]:bg-[var(--ui-bg-inverted)]/20 hover:bg-[var(--ui-bg-inverted)]/10'
         }
       },
       size: {
