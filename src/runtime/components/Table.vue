@@ -104,6 +104,7 @@ export type TableSlots<T> = {
   expanded: (props: { row: Row<T> }) => any
   empty: (props?: {}) => any
   caption: (props?: {}) => any
+  pagination: (props?: {}) => any
 } & DynamicHeaderSlots<T> & DynamicCellSlots<T>
 
 </script>
@@ -278,8 +279,10 @@ defineExpose({
         </tr>
       </tbody>
     </table>
-    <div :class="ui.pagination({ class: [props.ui?.pagination] })">
-      <UPagination v-if="tableApi.getPageCount() > 1" v-model:page="page" :items-per-page="1" :total="tableApi.getPageCount()" />
-    </div>
+    <slot name="pagination">
+      <div :class="ui.pagination({ class: [props.ui?.pagination] })">
+        <UPagination v-if="tableApi.getPageCount() > 1" v-model:page="page" :items-per-page="1" :total="tableApi.getPageCount()" />
+      </div>
+    </slot>
   </div>
 </template>
