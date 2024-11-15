@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { CalendarRootProps, CalendarCellTriggerProps } from 'radix-vue'
 import type { DateValue } from '@internationalized/date'
+import { fromDate, getLocalTimeZone } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
@@ -72,11 +73,13 @@ defineSlots<CalendarSlots>()
 
 const { code: locale, dir } = useLocale()
 
+// TODO: numberOfMonths, weekStartsOn understand why types break
 const baseRootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'weekdayFormat'), emits)
 
-// TODO: transform modelValue, defaultValue to new Date
-// TODO: transform maxValue, minValue to new Date
-// TODO: numberOfMonths, weekStartsOn understand why types break
+const minValue = computed(() => props.minValue ? fromDate(props.minValue, getLocalTimeZone()) : undefined)
+const maxValue = computed(() => props.maxValue ? fromDate(props.maxValue, getLocalTimeZone()) : undefined)
+
+// TODO: transform modelValue, defaultValue to new Date <-> DateValue
 
 const ui = computed(() => calendar({
   color: props.color,
@@ -103,6 +106,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     :dir="dir"
     :number-of-months="props.numberOfMonths"
     :week-starts-on="props.weekStartsOn"
+    :min-value="minValue"
+    :max-value="maxValue"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" as-child>
