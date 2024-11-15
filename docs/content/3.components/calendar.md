@@ -15,6 +15,8 @@ Use the `v-model` directive to control the selected date.
 
 ::component-code
 ---
+ignore:
+  - modelValue
 external:
   - modelValue
 props:
@@ -30,11 +32,15 @@ Use the `range` prop to select a range of dates.
 ---
 ignore:
   - range
+  - modelValue.start
+  - modelValue.end
 external:
   - modelValue
 props:
   range: true
-  modelValue: { start: new Date('2025-01-01'), end: new Date('2025-01-02') }
+  modelValue:
+    start: new Date('2025-01-01')
+    end: new Date('2025-01-02')
 ---
 ::
 
