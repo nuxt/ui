@@ -277,13 +277,9 @@ defineExpose({
           </td>
         </tr>
       </tbody>
-      <tfoot v-if="tableApi.getPageCount() > 1">
-        <tr>
-          <td :colspan="columns?.length">
-            <UPagination v-model:page="page" :items-per-page="1" :total="tableApi.getPageCount()" />
-          </td>
-        </tr>
-      </tfoot>
     </table>
+    <div :class="ui.pagination({ class: [props.ui?.pagination] })">
+      <UPagination v-if="tableApi.getPageCount() > 1" v-model:page="page" :items-per-page="1" :total="tableApi.getPageCount()" />
+    </div>
   </div>
 </template>
