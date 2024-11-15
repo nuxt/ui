@@ -14,7 +14,7 @@ const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-interface BaseCalendarProps extends Pick<CalendarRootProps, 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'numberOfMonths' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
+interface BaseCalendarProps<Range extends boolean = false, Value = Range extends true ? DateRange : Date> extends Pick<CalendarRootProps, 'numberOfMonths' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
   /**
    * The color of the calendar
    */
@@ -26,7 +26,7 @@ interface BaseCalendarProps extends Pick<CalendarRootProps, 'weekStartsOn' | 'we
   /**
    * Is this a range calendar
    */
-  range: boolean
+  range?: Range
   /**
    * Show year controls
    */
@@ -39,23 +39,11 @@ interface BaseCalendarProps extends Pick<CalendarRootProps, 'weekStartsOn' | 'we
    * The minimum date that can be selected
    */
   minValue?: Date
+  modelValue?: Value
+  defaultValue?: Value
   class?: any
   ui?: Partial<typeof calendar.slots>
 }
-
-export interface CalendarSingleProps extends BaseCalendarProps {
-  modelValue?: Date
-  defaultValue?: Date
-  range: false
-}
-
-export interface CalendarRangeProps extends BaseCalendarProps {
-  modelValue?: DateRange
-  defaultValue?: DateRange
-  range: true
-}
-
-export type CalendarProps = CalendarSingleProps | CalendarRangeProps
 
 export interface CalendarEmits {
   (e: 'update:modelValue', value: Date | DateRange): void
@@ -68,15 +56,14 @@ export interface CalendarSlots {
 }
 </script>
 
-<script setup lang="ts" generic="T extends boolean">
+<script setup lang="ts" generic="Range extends boolean = false">
 import { useForwardPropsEmits } from 'radix-vue'
 import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
 import { reactivePick } from '@vueuse/core'
 import UButton from './Button.vue'
 import { useLocale } from '../composables/useLocale'
 
-const props = withDefaults(defineProps<CalendarProps>(), {
-  range: false,
+const props = withDefaults(defineProps<BaseCalendarProps<Range>>(), {
   fixedWeeks: true,
   yearControls: true
 })
@@ -85,7 +72,11 @@ defineSlots<CalendarSlots>()
 
 const { code: locale, dir } = useLocale()
 
-const baseRootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'maxValue', 'minValue', 'numberOfMonths', 'weekdayFormat', 'weekStartsOn'), emits)
+const baseRootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'weekdayFormat'), emits)
+
+// TODO: transform modelValue, defaultValue to new Date
+// TODO: transform maxValue, minValue to new Date
+// TODO: numberOfMonths, weekStartsOn understand why types break
 
 const ui = computed(() => calendar({
   color: props.color,
@@ -110,6 +101,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     :locale="locale"
     :dir="dir"
+    :number-of-months="props.numberOfMonths"
+    :week-starts-on="props.weekStartsOn"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" as-child>
