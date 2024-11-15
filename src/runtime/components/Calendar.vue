@@ -1,11 +1,12 @@
 <script lang="ts">
 import { computed } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { CalendarRootProps, CalendarRootEmits, CalendarCellTriggerProps, DateRange } from 'radix-vue'
+import type { CalendarRootProps, CalendarCellTriggerProps } from 'radix-vue'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
+import type { DateRange } from '../types/date'
 
 const appConfig = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
 
@@ -13,18 +14,38 @@ const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-interface BaseCalendarProps extends Pick<CalendarRootProps, 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'maxValue' | 'minValue' | 'numberOfMonths' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
+interface BaseCalendarProps extends Pick<CalendarRootProps, 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'numberOfMonths' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
+  /**
+   * The color of the calendar
+   */
   color?: CalendarVariants['color']
+  /**
+   * The size of the calendar
+   */
   size?: CalendarVariants['size']
+  /**
+   * Is this a range calendar
+   */
+  range: boolean
+  /**
+   * Show year controls
+   */
+  yearControls?: boolean
+  /**
+   * The maximum date that can be selected
+   */
+  maxValue?: Date
+  /**
+   * The minimum date that can be selected
+   */
+  minValue?: Date
   class?: any
   ui?: Partial<typeof calendar.slots>
-  range: boolean
-  yearControls?: boolean
 }
 
 export interface CalendarSingleProps extends BaseCalendarProps {
-  modelValue?: DateValue
-  defaultValue?: DateValue
+  modelValue?: Date
+  defaultValue?: Date
   range: false
 }
 
@@ -36,7 +57,9 @@ export interface CalendarRangeProps extends BaseCalendarProps {
 
 export type CalendarProps = CalendarSingleProps | CalendarRangeProps
 
-export interface CalendarEmits extends CalendarRootEmits {}
+export interface CalendarEmits {
+  (e: 'update:modelValue', value: Date | DateRange): void
+}
 
 export interface CalendarSlots {
   'heading': (props: { value: string }) => any
@@ -62,7 +85,7 @@ defineSlots<CalendarSlots>()
 
 const { code: locale, dir } = useLocale()
 
-const baseRootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'maxValue', 'minValue', 'numberOfMonths', 'weekdayFormat', 'weekStartsOn'), emits)
+const baseRootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'maxValue', 'minValue', 'numberOfMonths', 'weekdayFormat', 'weekStartsOn'), emits)
 
 const ui = computed(() => calendar({
   color: props.color,

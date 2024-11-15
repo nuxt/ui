@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { startOfWeek, endOfWeek, now, getLocalTimeZone } from '@internationalized/date'
-
-const singleValue = ref(now(getLocalTimeZone()).add({ days: -2 }))
+const singleValue = ref(new Date('2023-09-01'))
 const multipleValue = reactive({
-  start: startOfWeek(now(getLocalTimeZone()), 'en').add({ weeks: 1 }),
-  end: endOfWeek(now(getLocalTimeZone()), 'en').add({ weeks: 1 })
+  start: new Date('2023-09-01'),
+  end: new Date('2023-09-07')
 })
 </script>
 
@@ -14,10 +12,7 @@ const multipleValue = reactive({
       <UCalendar v-model="singleValue" />
     </div>
     <div class="flex justify-center gap-2">
-      <UCalendar
-        v-model="multipleValue"
-        range
-      />
+      <UCalendar v-model="multipleValue" range />
     </div>
   </div>
 </template>
