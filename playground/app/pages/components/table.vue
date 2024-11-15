@@ -317,6 +317,7 @@ onMounted(() => {
       :columns="columns"
       :column-pinning="columnPinning"
       :loading="loading"
+      :pagination="{ pageSize: 10, pageIndex: 0 }"
       sticky
       class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
     >
