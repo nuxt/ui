@@ -3,7 +3,6 @@ import { computed } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { CalendarRootProps, CalendarCellTriggerProps } from 'radix-vue'
 import type { DateValue } from '@internationalized/date'
-import { fromDate, getLocalTimeZone } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
@@ -46,8 +45,8 @@ interface BaseCalendarProps<Range extends boolean, Value = Range extends true ? 
   ui?: Partial<typeof calendar.slots>
 }
 
-export interface CalendarEmits {
-  (e: 'update:modelValue', value: Date | DateRange): void
+export interface CalendarEmits<Range extends boolean, Value = Range extends true ? DateRange : Date> {
+  (e: 'update:modelValue', value: Value): void
 }
 
 export interface CalendarSlots {
@@ -63,35 +62,36 @@ import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
 import { reactivePick } from '@vueuse/core'
 import UButton from './Button.vue'
 import { useLocale } from '../composables/useLocale'
+import { toZonedDateTime } from '../utils/date'
 
 const props = withDefaults(defineProps<BaseCalendarProps<Range>>(), {
   fixedWeeks: true,
   yearControls: true
 })
-const emits = defineEmits<CalendarEmits>()
+const emits = defineEmits<CalendarEmits<Range>>()
 defineSlots<CalendarSlots>()
 
 const { code: locale, dir } = useLocale()
 
-// TODO: numberOfMonths, weekStartsOn understand why types break
 const baseRootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'weekdayFormat'), emits)
 
-const minValue = computed(() => props.minValue ? fromDate(props.minValue, getLocalTimeZone()) : undefined)
-const maxValue = computed(() => props.maxValue ? fromDate(props.maxValue, getLocalTimeZone()) : undefined)
+const minValue = computed(() => props.minValue ? toZonedDateTime(props.minValue) : undefined)
+const maxValue = computed(() => props.maxValue ? toZonedDateTime(props.maxValue) : undefined)
 
 // TODO: transform modelValue, defaultValue to new Date <-> DateValue
 const defaultValue = computed(() => {
   if (props.defaultValue) {
     return props.range
       ? {
-          start: props.defaultValue.start ? fromDate(props.defaultValue.start, getLocalTimeZone()) : undefined,
-          end: props.defaultValue.end ? fromDate(props.defaultValue.end, getLocalTimeZone()) : undefined
+          start: props.defaultValue.start ? toZonedDateTime(props.defaultValue.start) : undefined,
+          end: props.defaultValue.end ? toZonedDateTime(props.defaultValue.end) : undefined
         }
-      : fromDate(props.defaultValue, getLocalTimeZone())
+      : toZonedDateTime(props.defaultValue)
   }
 
   return undefined
 })
+
 
 const ui = computed(() => calendar({
   color: props.color,

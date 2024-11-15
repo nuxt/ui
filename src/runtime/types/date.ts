@@ -1,3 +1,5 @@
+import type { ZonedDateTime } from '@internationalized/date'
+
 export interface DateRange {
   /**
    * The start of the range
@@ -7,4 +9,9 @@ export interface DateRange {
    * The end of the range
    */
   end: Date
+}
+
+export interface ZonedDateRange {
+  start: ZonedDateTime
+  end: ZonedDateTime
 }
