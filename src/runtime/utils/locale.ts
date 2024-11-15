@@ -1,5 +1,5 @@
 import type { Ref } from 'vue'
-import type { Locale } from '../types/locale'
+import type { Locale, Direction } from '../types/locale'
 import type { MaybeRef } from '@vueuse/core'
 import { computed, isRef, ref, unref } from 'vue'
 import { get } from './index'
@@ -9,7 +9,7 @@ export type Translator = (path: string, option?: TranslatorOption) => string
 export type LocaleContext = {
   locale: Ref<Locale>
   lang: Ref<string>
-  dir: Ref<string>
+  dir: Ref<Direction>
   code: Ref<string>
   t: Translator
 }
@@ -30,7 +30,7 @@ export function translate(path: string, option: undefined | TranslatorOption, lo
 export function buildLocaleContext(locale: MaybeRef<Locale>): LocaleContext {
   const lang = computed(() => unref(locale).name)
   const code = computed(() => unref(locale).code)
-  const dir = computed(() => unref(locale).dir.toLowerCase())
+  const dir = computed(() => unref(locale).dir)
   const localeRef = isRef(locale) ? locale : ref(locale)
 
   return {
