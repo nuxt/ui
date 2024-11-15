@@ -15,7 +15,7 @@ const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-interface BaseCalendarProps<Range extends boolean = false, Value = Range extends true ? DateRange : Date> extends Pick<CalendarRootProps, 'numberOfMonths' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
+interface BaseCalendarProps<Range extends boolean, Value = Range extends true ? DateRange : Date> extends Pick<CalendarRootProps, 'numberOfMonths' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
   /**
    * The color of the calendar
    */
@@ -41,7 +41,7 @@ interface BaseCalendarProps<Range extends boolean = false, Value = Range extends
    */
   minValue?: Date
   modelValue?: Value
-  defaultValue?: Value
+  defaultValue?: Partial<Value>
   class?: any
   ui?: Partial<typeof calendar.slots>
 }
@@ -80,6 +80,18 @@ const minValue = computed(() => props.minValue ? fromDate(props.minValue, getLoc
 const maxValue = computed(() => props.maxValue ? fromDate(props.maxValue, getLocalTimeZone()) : undefined)
 
 // TODO: transform modelValue, defaultValue to new Date <-> DateValue
+const defaultValue = computed(() => {
+  if (props.defaultValue) {
+    return props.range
+      ? {
+          start: props.defaultValue.start ? fromDate(props.defaultValue.start, getLocalTimeZone()) : undefined,
+          end: props.defaultValue.end ? fromDate(props.defaultValue.end, getLocalTimeZone()) : undefined
+        }
+      : fromDate(props.defaultValue, getLocalTimeZone())
+  }
+
+  return undefined
+})
 
 const ui = computed(() => calendar({
   color: props.color,
@@ -108,6 +120,7 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     :week-starts-on="props.weekStartsOn"
     :min-value="minValue"
     :max-value="maxValue"
+    :default-value="defaultValue"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" as-child>
