@@ -100,7 +100,13 @@ const contentEvents = computed(() => {
     }
   }
 
-  return {}
+  return {
+    interactOutside: (e: Event) => {
+      if (e.target instanceof Element && e.target.closest('[data-sonner-toaster]')) {
+        return e.preventDefault()
+      }
+    }
+  }
 })
 
 const appConfig = useAppConfig()
