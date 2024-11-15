@@ -55,6 +55,7 @@
     "build": "nuxt-module-build build && pnpm devtools:build",
     "prepack": "pnpm build",
     "dev": "DEV=true nuxi dev playground",
+    "dev:vue": "DEV=true vite playground-vue",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && nuxi prepare docs && nuxi prepare devtools && vite build playground-vue",
     "devtools": "NUXT_UI_DEVTOOLS_LOCAL=true nuxi dev playground",
