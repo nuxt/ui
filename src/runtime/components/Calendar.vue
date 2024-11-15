@@ -13,7 +13,7 @@ const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-interface CalendarProps extends Pick<CalendarRootProps, 'numberOfMonths' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
+export interface CalendarProps extends Pick<CalendarRootProps, 'numberOfMonths' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
   /**
    * The color of the calendar
    */
