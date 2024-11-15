@@ -1,4 +1,4 @@
-import type { ButtonColor } from "../../types";
+import type { ButtonColor } from '../../types'
 
 export default {
   wrapper: 'relative',
