@@ -18,8 +18,8 @@ export default (options: Required<ModuleOptions>) => ({
       vertical: {
         container: 'flex-col -mt-4',
         item: 'pt-4',
-        prev: '-top-12 left-1/2 -translate-x-1/2 rotate-90',
-        next: '-bottom-12 left-1/2 -translate-x-1/2 rotate-90'
+        prev: '-top-12 left-1/2 -translate-x-1/2 rotate-90 rtl:-rotate-90',
+        next: '-bottom-12 left-1/2 -translate-x-1/2 rotate-90 rtl:-rotate-90'
       },
       horizontal: {
         container: 'flex-row -ms-4',

@@ -149,8 +149,7 @@ const options = computed<EmblaOptionsType>(() => ({
   ...(props.fade ? { align: 'center', containScroll: false } : {}),
   ...rootProps.value,
   axis: props.orientation === 'horizontal' ? 'x' : 'y',
-  // TODO: Get from ConfigProvider
-  direction: 'ltr'
+  direction: dir.value === 'rtl' ? 'rtl' : 'ltr'
 }))
 
 const plugins = computedAsync<EmblaPluginType[]>(async () => {
