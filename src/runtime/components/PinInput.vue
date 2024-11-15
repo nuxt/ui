@@ -37,6 +37,7 @@ export type PinInputEmits = PinInputRootEmits & {
 import { ref, computed } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
+import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 
 defineOptions({ inheritAttrs: false })
