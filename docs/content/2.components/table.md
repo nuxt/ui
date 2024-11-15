@@ -346,7 +346,7 @@ componentProps:
 
 ### Contextmenu
 
-Use the `contextmenu` listener on your Table to make the rows righ-clickable. The function will receive the original event as the first argument and the row as the second argument.
+Use the `contextmenu` listener on your Table to make the rows right-clickable. The function will receive the original event as the first argument and the row as the second argument.
 
 You can use this to open a [ContextMenu](/components/context-menu) for that row.
 
