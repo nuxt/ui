@@ -77,7 +77,11 @@ const slots = defineSlots<ToastSlots>()
 
 const appConfig = useAppConfig()
 const { t } = useLocale()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'type'), emits)
+const durationProp = computed(() => {
+  if (props.duration && props.duration <= 0) return Number.POSITIVE_INFINITY
+  return props.duration
+})
 
 const multiline = computed(() => !!props.title && !!props.description)
 
@@ -107,7 +111,10 @@ defineExpose({
   <ToastRoot
     ref="el"
     v-slot="{ remaining, duration }"
-    v-bind="rootProps"
+    v-bind="{
+      ...rootProps,
+      duration: durationProp
+    }"
     :class="ui.root({ class: [props.class, props.ui?.root], multiline })"
     :style="{ '--height': height }"
   >
