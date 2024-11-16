@@ -137,9 +137,9 @@ excludedProps:
 
 ### Timeout
 
-Use the `timeout` prop to configure how long the Notification will remain. The default value is  `5000`, set it to `0` to disable the timeout.
+Use the `timeout` prop to configure how long the Notification will remain. The default value is  `5000`, set it to `0` to disable the timeout. The `pauseTimeoutOnHover` prop (`true` by default) controls whether hovering the notification should pause the timeout.
 
-You will see a progress bar at the bottom of the Notification which will indicate the remaining time. When hovering the Notification, the progress bar will be paused.
+You will see a progress bar at the bottom of the Notification which will indicate the remaining time. When hovering the Notification, the progress bar will be paused if `pauseTimeoutOnHover` is enabled; otherwise, it won't stop.
 
 ::component-card
 ---
@@ -149,6 +149,7 @@ baseProps:
   description: 'This is a notification.'
 props:
   timeout: 60000
+  pauseTimeoutOnHover: true
 ---
 ::
 
