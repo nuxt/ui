@@ -73,7 +73,7 @@ export interface LinkProps extends NuxtLinkProps {
   active?: boolean
   /** Will only be active if the current route is an exact match. */
   exact?: boolean
-  /** ALlows controlling how the current route query sets the link as active. */
+  /** Allows controlling how the current route query sets the link as active. */
   exactQuery?: boolean | 'partial'
   /** Will only be active if the current route hash is an exact match. */
   exactHash?: boolean
