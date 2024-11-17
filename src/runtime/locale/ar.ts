@@ -10,6 +10,12 @@ export default defineLocale({
       noData: 'لا توجد بيانات',
       create: 'إنشاء "{label}"'
     },
+    calendar: {
+      prevYear: 'السنة السابقة',
+      nextYear: 'السنة المقبلة',
+      prevMonth: 'الشهر السابق',
+      nextMonth: 'الشهر المقبل'
+    },
     commandPalette: {
       noMatch: 'لا توجد نتائج مطابقة',
       noData: 'لا توجد بيانات',

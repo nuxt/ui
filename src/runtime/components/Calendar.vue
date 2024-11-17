@@ -70,7 +70,7 @@ const modelValue = defineModel<any>()
 const emits = defineEmits<CalendarEmits>()
 defineSlots<CalendarSlots>()
 
-const { code: locale, dir } = useLocale()
+const { code: locale, dir, t } = useLocale()
 
 const baseRootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'weekdayFormat'), emits)
 
@@ -139,10 +139,10 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     :default-value="defaultCalendarValue"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
-      <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" as-child>
+      <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
         <UButton :icon="appConfig.ui.icons.chevronDoubleLeft" :size="props.size" color="neutral" variant="ghost" />
       </Calendar.Prev>
-      <Calendar.Prev as-child>
+      <Calendar.Prev :aria-label="t('calendar.prevMonth')" as-child>
         <UButton :icon="appConfig.ui.icons.chevronLeft" :size="props.size" color="neutral" variant="ghost" />
       </Calendar.Prev>
       <Calendar.Heading v-slot="{ headingValue }" :class="ui.heading({ class: props.ui?.heading })">
@@ -150,10 +150,10 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
           {{ headingValue }}
         </slot>
       </Calendar.Heading>
-      <Calendar.Next as-child>
+      <Calendar.Next :aria-label="t('calendar.nextMonth')" as-child>
         <UButton :icon="appConfig.ui.icons.chevronRight" :size="props.size" color="neutral" variant="ghost" />
       </Calendar.Next>
-      <Calendar.Next v-if="props.yearControls" :next-page="(date: DateValue) => paginateYear(date, 1)" as-child>
+      <Calendar.Next v-if="props.yearControls" :next-page="(date: DateValue) => paginateYear(date, 1)" :aria-label="t('calendar.nextYear')" as-child>
         <UButton :icon="appConfig.ui.icons.chevronDoubleRight" :size="props.size" color="neutral" variant="ghost" />
       </Calendar.Next>
     </Calendar.Header>

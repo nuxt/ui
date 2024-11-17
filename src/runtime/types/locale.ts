@@ -4,6 +4,12 @@ export type Messages = {
     noData: string
     create: string
   }
+  calendar: {
+    prevYear: string
+    nextYear: string
+    prevMonth: string
+    nextMonth: string
+  }
   commandPalette: {
     noMatch: string
     noData: string

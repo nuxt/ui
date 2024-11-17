@@ -9,6 +9,12 @@ export default defineLocale({
       noData: 'Нет данных',
       create: 'Создать "{label}"'
     },
+    calendar: {
+      prevYear: 'Предыдущий год',
+      nextYear: 'Следующий год',
+      prevMonth: 'Предыдущий месяц',
+      nextMonth: 'Следующий месяц'
+    },
     commandPalette: {
       noMatch: 'Совпадений не найдено',
       noData: 'Нет данных',

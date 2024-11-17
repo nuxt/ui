@@ -9,6 +9,12 @@ export default defineLocale({
       noData: '沒有資料',
       create: '創建 "{label}"'
     },
+    calendar: {
+      prevYear: '去年',
+      nextYear: '明年',
+      prevMonth: '上个月',
+      nextMonth: '下个月'
+    },
     commandPalette: {
       noMatch: '沒有匹配的資料',
       noData: '沒有資料',
