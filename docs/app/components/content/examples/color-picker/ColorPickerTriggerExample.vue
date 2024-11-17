@@ -1,0 +1,3 @@
+<template>
+  <UColorPicker />
+</template>
