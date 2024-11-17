@@ -14,6 +14,7 @@ The Link component is a wrapper around [`<NuxtLink>`](https://nuxt.com/docs/api/
 - `inactive-class` prop to set a class when the link is inactive, `active-class` is used when active.
 - `exact` prop to style with `active-class` when the link is active and the route is exactly the same as the current route.
 - `exact-query` and `exact-hash` props to style with `active-class` when the link is active and the query or hash is exactly the same as the current query or hash.
+  - use `exact-query="partial"` to style with `active-class` when the link is active and the query partially match the current query. 
 
 The incentive behind this is to provide the same API as NuxtLink back in Nuxt 2 / Vue 2. You can read more about it in the Vue Router [migration from Vue 2](https://router.vuejs.org/guide/migration/#removal-of-the-exact-prop-in-router-link) guide.
 
