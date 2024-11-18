@@ -16,17 +16,6 @@ props:
 ---
 ::
 
-### Color
-
-Use the `color` prop to set the focused ring of the ColorPicker.
-
-::component-code
----
-props:
-  color: neutral
----
-::
-
 ### Size
 
 Use the `size` prop to set the size of the ColorPicker.
