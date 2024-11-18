@@ -7,6 +7,10 @@ const multipleValue = ref({
 </script>
 
 <template>
+  <UButton @click="() => singleValue = new Date()">
+    new Date
+  </UButton>
+
   <div class="flex flex-col gap-4">
     <div class="flex justify-center gap-2">
       <UCalendar v-model="singleValue" />

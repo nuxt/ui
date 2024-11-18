@@ -1,4 +1,4 @@
-import type {DateValue, ZonedDateTime} from '@internationalized/date'
+import type { DateValue, ZonedDateTime } from '@internationalized/date'
 
 export interface DateRange {
   /**

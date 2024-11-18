@@ -1,11 +1,11 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { CalendarRootProps, CalendarCellTriggerProps } from 'radix-vue'
-import type { DateValue, ZonedDateTime } from '@internationalized/date'
+import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
-import type { DateRange, DateRangeRadix } from '../types/date'
+import type { DateRange, DateRangeRadix, ZonedDateRange } from '../types/date'
 import type { Grid } from 'radix-vue/date'
 
 const appConfig = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
@@ -55,11 +55,10 @@ export interface CalendarSlots {
 <script setup lang="ts" generic="T extends boolean">
 import { toRef, computed } from 'vue'
 import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate, objectOmit } from '@vueuse/core'
 import UButton from './Button.vue'
 import { useLocale } from '../composables/useLocale'
 import { toRangeDate, toRangeZonedDateTime, toZonedDateTime } from '../utils/date'
-import type { ZonedDateRange } from '#ui/types/date'
 
 const props = withDefaults(defineProps<CalendarProps<T>>(), {
   fixedWeeks: true,
@@ -68,13 +67,10 @@ const props = withDefaults(defineProps<CalendarProps<T>>(), {
 
 // This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
 const range = toRef(() => typeof props.range === 'string' ? true : props.range)
-
 const modelValue = defineModel<ModelValue<T>>(undefined)
 defineSlots<CalendarSlots>()
 
 const { code: locale, dir, t } = useLocale()
-
-const baseRootProps = reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'weekdayFormat')
 
 function isRange(value: DateRangeRadix | DateValue | undefined): value is DateRangeRadix
 function isRange(value: ModelValue<boolean>): value is ModelValue<true>
@@ -82,17 +78,15 @@ function isRange(value: ModelValue<boolean> | DateRangeRadix | DateValue | undef
   return !!range.value
 }
 
-function transformModel(value: ModelValue<boolean>) {
-  if (!value) {
-    return undefined
-  }
-
-  return isRange(value) ? toRangeZonedDateTime(value) : toZonedDateTime(value)
-}
-
 const calendarValue = computed({
   get() {
-    return transformModel(modelValue.value)
+    const value = modelValue.value
+
+    if (!value) {
+      return undefined
+    }
+
+    return isRange(value) ? toRangeZonedDateTime(value) : toZonedDateTime(value)
   },
   set(value) {
     if (!value) {
@@ -100,7 +94,7 @@ const calendarValue = computed({
       return
     }
 
-    modelValue.value = (range.value ? toRangeDate(value as ZonedDateRange) : (value as ZonedDateTime).toDate()) as ModelValue<T>
+    modelValue.value = (isRange(value) ? toRangeDate(value) : value.toDate()) as ModelValue<T>
   }
 })
 
@@ -108,9 +102,6 @@ const ui = computed(() => calendar({
   color: props.color,
   size: props.size
 }))
-
-const minValue = computed(() => toZonedDateTime(props.minValue))
-const maxValue = computed(() => toZonedDateTime(props.maxValue))
 
 function paginateYear(date: DateValue, sign: -1 | 1) {
   if (sign === -1) {
@@ -125,11 +116,11 @@ const [DefineCalendarBody, CalendarBody] = createReusableTemplate<{ grid: Grid<D
 
 const calendarProps = computed(() => {
   return {
-    ...baseRootProps,
-    minValue: minValue.value,
-    maxValue: maxValue.value,
+    ...objectOmit(props, ['color', 'size', 'range', 'yearControls', 'modelValue' as any]),
     locale: locale.value,
     dir: dir.value,
+    minValue: toZonedDateTime(props.minValue),
+    maxValue: toZonedDateTime(props.maxValue),
     class: ui.value.root({ class: [props.class, props.ui?.root] })
   }
 })
@@ -206,7 +197,7 @@ const calendarProps = computed(() => {
   <RangeCalendar.Root
     v-if="isRange(calendarValue)"
     v-slot="{ weekDays, grid }"
-    v-model="calendarValue"
+    v-model="calendarValue as DateRangeRadix & DateValue"
     v-bind="calendarProps"
   >
     <CalendarBody v-bind="{ weekDays, grid }" />
