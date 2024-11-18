@@ -1,5 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Collapsible > renders with as correctly 1`] = `
+"<section data-state="open">
+  <!--v-if-->
+  <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</section>"
+`;
+
 exports[`Collapsible > renders with class correctly 1`] = `
 "<div data-state="open" class="flex flex-col gap-2 w-48">
   <!--v-if-->

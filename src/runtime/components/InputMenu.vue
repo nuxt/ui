@@ -119,9 +119,9 @@ export type InputMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>,
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export interface InputMenuSlots<T> {
-  'leading'(props: { modelValue: T | T[], open: boolean, ui: any }): any
-  'trailing'(props: { modelValue: T | T[], open: boolean, ui: any }): any
+export interface InputMenuSlots<T, M extends boolean> {
+  'leading'(props: { modelValue: M extends true ? T[] : T, open: boolean, ui: any }): any
+  'trailing'(props: { modelValue: M extends true ? T[] : T, open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -161,7 +161,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, I, V, M>>(), {
   labelKey: 'label' as never
 })
 const emits = defineEmits<InputMenuEmits<T, V, M>>()
-const slots = defineSlots<InputMenuSlots<T>>()
+const slots = defineSlots<InputMenuSlots<T, M>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -345,7 +345,7 @@ defineExpose({
     <ComboboxAnchor :as-child="!multiple" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
         v-if="multiple"
-        v-slot="{ modelValue: tags }: { modelValue: AcceptableValue[] }"
+        v-slot="{ modelValue: tags }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"
         delimiter=""
@@ -394,14 +394,14 @@ defineExpose({
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="modelValue" :open="open" :ui="ui">
+        <slot name="leading" :model-value="(modelValue as M extends true ? T[] : T)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
       <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="modelValue" :open="open" :ui="ui">
+        <slot name="trailing" :model-value="(modelValue as M extends true ? T[] : T)" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </ComboboxTrigger>

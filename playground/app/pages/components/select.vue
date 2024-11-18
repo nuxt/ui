@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
+import type { AcceptableValue } from 'reka-ui'
 import theme from '#build/ui/select'
 import type { User } from '~/types'
 
@@ -10,7 +11,7 @@ const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
 const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]]
-const selectedItems = ref([fruits[0], vegetables[0]])
+const selectedItems = ref([fruits[0]!, vegetables[0]!])
 
 const statuses = [{
   label: 'Backlog',
@@ -41,11 +42,11 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   lazy: true
 })
 
-function getStatusIcon(value: string): string {
+function getStatusIcon(value: AcceptableValue): string {
   return statuses.find(status => status.value === value)?.icon || 'i-lucide-user'
 }
 
-function getUserAvatar(value: string) {
+function getUserAvatar(value: AcceptableValue) {
   return users.value?.find(user => user.value === value)?.avatar || {}
 }
 </script>

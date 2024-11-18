@@ -111,10 +111,10 @@ export type SelectMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export interface SelectMenuSlots<T> {
-  'leading'(props: { modelValue: T | T[], open: boolean, ui: any }): any
-  'default'(props: { modelValue: T | T[], open: boolean }): any
-  'trailing'(props: { modelValue: T | T[], open: boolean, ui: any }): any
+export interface SelectMenuSlots<T, M extends boolean> {
+  'leading'(props: { modelValue: M extends true ? T[] : T, open: boolean, ui: any }): any
+  'default'(props: { modelValue: M extends true ? T[] : T, open: boolean }): any
+  'trailing'(props: { modelValue: M extends true ? T[] : T, open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -153,7 +153,7 @@ const props = withDefaults(defineProps<SelectMenuProps<T, I, V, M>>(), {
 })
 
 const emits = defineEmits<SelectMenuEmits<T, V, M>>()
-const slots = defineSlots<SelectMenuSlots<T>>()
+const slots = defineSlots<SelectMenuSlots<T, M>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -313,13 +313,13 @@ function onUpdateOpen(value: boolean) {
     <ComboboxAnchor as-child>
       <ComboboxTrigger :class="ui.base({ class: [props.class, props.ui?.base] })" tabindex="0">
         <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-          <slot name="leading" :model-value="modelValue" :open="open" :ui="ui">
+          <slot name="leading" :model-value="(modelValue as M extends true ? T[] : T)" :open="open" :ui="ui">
             <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
             <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
           </slot>
         </span>
 
-        <slot :model-value="modelValue" :open="open">
+        <slot :model-value="(modelValue as M extends true ? T[] : T)" :open="open">
           <template v-for="displayedModelValue in [displayValue(modelValue)]" :key="displayedModelValue">
             <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
               {{ displayedModelValue }}
@@ -331,7 +331,7 @@ function onUpdateOpen(value: boolean) {
         </slot>
 
         <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-          <slot name="trailing" :model-value="modelValue" :open="open" :ui="ui">
+          <slot name="trailing" :model-value="(modelValue as M extends true ? T[] : T)" :open="open" :ui="ui">
             <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
           </slot>
         </span>

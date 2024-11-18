@@ -28,6 +28,31 @@ exports[`Toast > renders with actions correctly 1`] = `
 <!--teleport end-->"
 `;
 
+exports[`Toast > renders with as correctly 1`] = `
+"<!---->
+<!--teleport start-->
+<!--teleport end-->
+<!--teleport start-->
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;"></span>
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
+    <section role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
+      <!--v-if-->
+      <div class="w-0 flex-1 flex flex-col gap-1">
+        <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
+        <!--v-if-->
+        <!--v-if-->
+      </div>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button></div>
+      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
+    </section>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+<!--teleport end-->"
+`;
+
 exports[`Toast > renders with avatar correctly 1`] = `
 "<!---->
 <!--teleport start-->

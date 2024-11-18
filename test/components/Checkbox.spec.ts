@@ -11,6 +11,7 @@ describe('Checkbox', () => {
 
   it.each([
     // Props
+    ['with modelValue', { props: { modelValue: true } }],
     ['with defaultValue', { props: { defaultValue: true } }],
     ['with id', { props: { id: 'id' } }],
     ['with name', { props: { name: 'name' } }],
@@ -24,6 +25,7 @@ describe('Checkbox', () => {
     ['with description', { props: { label: 'Label', description: 'Description' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: true } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'inline-flex' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots
@@ -38,14 +40,14 @@ describe('Checkbox', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(Checkbox)
       const input = wrapper.findComponent({ name: 'CheckboxRoot' })
-      await input.vm.$emit('update:checked', true)
+      await input.vm.$emit('update:modelValue', true)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[true]] })
     })
 
     test('change event', async () => {
       const wrapper = mount(Checkbox)
       const input = wrapper.findComponent({ name: 'CheckboxRoot' })
-      await input.vm.$emit('update:checked', false)
+      await input.vm.$emit('update:modelValue', false)
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
   })
@@ -77,24 +79,24 @@ describe('Checkbox', () => {
 
     test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
-      await input.vm.$emit('update:checked', false)
+      await input.vm.$emit('update:modelValue', false)
       await flushPromises()
 
       expect(wrapper.text()).toContain('Error message')
 
-      await input.vm.$emit('update:checked', true)
+      await input.vm.$emit('update:modelValue', true)
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'])
-      await input.vm.$emit('update:checked', false)
+      await input.vm.$emit('update:modelValue', false)
       await flushPromises()
 
       expect(wrapper.text()).toContain('Error message')
 
-      await input.vm.$emit('update:checked', true)
+      await input.vm.$emit('update:modelValue', true)
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })

@@ -127,6 +127,15 @@ exports[`Switch > renders with loadingIcon correctly 1`] = `
 </div>"
 `;
 
+exports[`Switch > renders with modelValue correctly 1`] = `
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ui-bg)] data-[state=unchecked]:bg-[var(--ui-bg-accented)] transition-colors duration-200 data-[state=checked]:bg-[var(--ui-primary)] focus-visible:ring-[var(--ui-primary)] w-9" id="v-0" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-[var(--ui-bg)] shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
+      <!---->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Switch > renders with name correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ui-bg)] data-[state=unchecked]:bg-[var(--ui-bg-accented)] transition-colors duration-200 data-[state=checked]:bg-[var(--ui-primary)] focus-visible:ring-[var(--ui-primary)] w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-[var(--ui-bg)] shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>

@@ -149,7 +149,7 @@ import ComponentRender from '../${content ? '../' : ''}component-render'
 describe('${upperName}', () => {
   it.each([
     // Props
-    ['with as', { props: { as: 'div' } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: '' } }],
     ['with ui', { props: { ui: {} } }],
     // Slots

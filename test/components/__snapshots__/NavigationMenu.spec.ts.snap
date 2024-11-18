@@ -43,6 +43,47 @@ exports[`NavigationMenu > renders with arrow correctly 1`] = `
 </nav>"
 `;
 
+exports[`NavigationMenu > renders with as correctly 1`] = `
+"<section aria-label="Main" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="" class="relative flex gap-1.5 [&>div]:min-w-0 w-full items-center justify-between">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-[var(--ui-primary)] px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-[var(--ui-text-muted)] hover:text-[var(--ui-text-highlighted)] hover:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50" data-state="closed" aria-expanded="false" active="false" data-reka-collection-item="" id="reka-navigation-menu-v-0-0-0-trigger-0" aria-controls="reka-navigation-menu-v-0-0-0-content-0"><span class="iconify i-lucide:book-open shrink-0 size-5 text-[var(--ui-text-dimmed)] group-hover:text-[var(--ui-text)] group-data-[state=open]:text-[var(--ui-text)] transition-colors" aria-hidden="true"></span><span class="truncate">Documentation<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-[var(--ui-primary)] px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-[var(--ui-primary)] before:bg-[var(--ui-bg-elevated)]" data-state="closed" aria-expanded="false" active="true" data-reka-collection-item="" id="reka-navigation-menu-v-0-0-0-trigger-1" aria-controls="reka-navigation-menu-v-0-0-0-content-1"><span class="iconify i-lucide:box shrink-0 size-5 text-[var(--ui-primary)]" aria-hidden="true"></span><span class="truncate">Components<!--v-if--></span><span class="ms-auto inline-flex"><!--v-if--><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true"></span></span></button>
+        <!---->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-[var(--ui-primary)] px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-[var(--ui-text-muted)] hover:text-[var(--ui-text-highlighted)] hover:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50" data-reka-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-[var(--ui-text-dimmed)] group-hover:text-[var(--ui-text)] group-data-[state=open]:text-[var(--ui-text)] transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-[var(--ui-text-dimmed)]" aria-hidden="true"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-[var(--ui-primary)] px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-[var(--ui-text-muted)] cursor-not-allowed opacity-75" data-reka-collection-item=""><span class="iconify i-lucide:circle-help shrink-0 size-5 text-[var(--ui-text-dimmed)]" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="absolute top-full left-0 flex w-full justify-center">
+    <!--v-if-->
+    <!---->
+  </div>
+</section>"
+`;
+
 exports[`NavigationMenu > renders with class correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="" class="relative flex gap-1.5 [&>div]:min-w-0 items-center justify-between w-48">
   <div style="position: relative;">
