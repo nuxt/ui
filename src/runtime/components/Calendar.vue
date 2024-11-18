@@ -55,7 +55,7 @@ export interface CalendarSlots {
 <script setup lang="ts" generic="T extends boolean">
 import { toRef, computed } from 'vue'
 import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
-import { createReusableTemplate, objectOmit } from '@vueuse/core'
+import { objectOmit } from '@vueuse/core'
 import UButton from './Button.vue'
 import { useLocale } from '../composables/useLocale'
 import { toRangeDate, toRangeZonedDateTime, toZonedDateTime } from '../utils/date'
@@ -112,7 +112,6 @@ function paginateYear(date: DateValue, sign: -1 | 1) {
 }
 
 const Calendar = computed(() => range.value ? RangeCalendar : SingleCalendar)
-const [DefineCalendarBody, CalendarBody] = createReusableTemplate<{ grid: Grid<DateValue>[], weekDays: string[] }>()
 
 const calendarProps = computed(() => {
   return {
@@ -127,7 +126,11 @@ const calendarProps = computed(() => {
 </script>
 
 <template>
-  <DefineCalendarBody v-slot="{ weekDays, grid }">
+  <Calendar.Root
+    v-slot="{ weekDays, grid }"
+    v-model="calendarValue as DateRangeRadix & DateValue"
+    v-bind="calendarProps"
+  >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
         <UButton :icon="appConfig.ui.icons.chevronDoubleLeft" :size="props.size" color="neutral" variant="ghost" />
@@ -192,22 +195,5 @@ const calendarProps = computed(() => {
         </Calendar.GridBody>
       </Calendar.Grid>
     </div>
-  </DefineCalendarBody>
-
-  <RangeCalendar.Root
-    v-if="isRange(calendarValue)"
-    v-slot="{ weekDays, grid }"
-    v-model="calendarValue as DateRangeRadix & DateValue"
-    v-bind="calendarProps"
-  >
-    <CalendarBody v-bind="{ weekDays, grid }" />
-  </RangeCalendar.Root>
-  <SingleCalendar.Root
-    v-else
-    v-slot="{ weekDays, grid }"
-    v-model="calendarValue"
-    v-bind="calendarProps"
-  >
-    <CalendarBody v-bind="{ weekDays, grid }" />
-  </SingleCalendar.Root>
+  </Calendar.Root>
 </template>
