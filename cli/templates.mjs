@@ -174,8 +174,8 @@ description:
 links: ${pro
   ? ''
   : `- label: ${upperName}
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/${kebabName}.html`}
+    icon: i-custom-reka-ui
+    to: https://www.reka-ui.com/components/${kebabName}.html`}
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v3/src/runtime/components/${upperName}.vue

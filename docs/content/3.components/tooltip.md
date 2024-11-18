@@ -14,7 +14,7 @@ links:
 Use a [Button](/components/button) or any other component in the default slot of the Tooltip.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses the [TooltipProvider](https://reka-ui.com/docs/components/tooltip#provider) component from Radix Vue.
+Make sure to wrap your app with the [App](/components/app) component which uses the [TooltipProvider](https://reka-ui.com/docs/components/tooltip#provider) component from Reka UI.
 ::
 
 ::tip{to="/components/app#props"}

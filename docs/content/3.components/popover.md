@@ -67,7 +67,7 @@ slots:
 ::
 
 ::note
-When using the `hover` mode, the Radix Vue [HoverCard](https://reka-ui.com/docs/components/hover-card) component is used instead of the [Popover](https://reka-ui.com/docs/components/popover).
+When using the `hover` mode, the Reka UI [HoverCard](https://reka-ui.com/docs/components/hover-card) component is used instead of the [Popover](https://reka-ui.com/docs/components/popover).
 ::
 
 ### Delay
