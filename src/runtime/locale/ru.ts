@@ -9,6 +9,10 @@ export default defineLocale({
       noData: 'Нет данных',
       create: 'Создать "{label}"'
     },
+    inputNumber: {
+      increment: 'Увеличить',
+      decrement: 'Уменьшить'
+    },
     commandPalette: {
       noMatch: 'Совпадений не найдено',
       noData: 'Нет данных',

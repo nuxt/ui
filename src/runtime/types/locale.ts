@@ -4,6 +4,10 @@ export type Messages = {
     noData: string
     create: string
   }
+  inputNumber: {
+    increment: string
+    decrement: string
+  }
   commandPalette: {
     noMatch: string
     noData: string

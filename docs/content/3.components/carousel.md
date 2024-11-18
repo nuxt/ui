@@ -67,7 +67,7 @@ class: 'p-8'
 
 ### Prev / Next
 
-Use the `prev` and `next` props to customize the prev and next buttons.
+Use the `prev` and `next` props to customize the prev and next buttons with any [Button](/components/button) props.
 
 ::component-example
 ---
@@ -76,7 +76,7 @@ class: 'p-8'
 ---
 ::
 
-### Prev Icon / Next Icon
+### Prev / Next Icons
 
 Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/components/icon). Defaults to `i-lucide-arrow-left` / `i-lucide-arrow-right`.
 
