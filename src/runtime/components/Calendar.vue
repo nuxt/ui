@@ -5,8 +5,7 @@ import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
-import type { DateRange, DateRangeRadix, ZonedDateRange } from '../types/date'
-import type { Grid } from 'radix-vue/date'
+import type { DateRange, DateRangeRadix } from '../types/date'
 
 const appConfig = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
 
@@ -115,12 +114,11 @@ const Calendar = computed(() => range.value ? RangeCalendar : SingleCalendar)
 
 const calendarProps = computed(() => {
   return {
-    ...objectOmit(props, ['color', 'size', 'range', 'yearControls', 'modelValue' as any]),
+    ...objectOmit(props, ['color', 'size', 'range', 'yearControls', 'class', 'ui', 'modelValue' as any]),
     locale: locale.value,
     dir: dir.value,
     minValue: toZonedDateTime(props.minValue),
-    maxValue: toZonedDateTime(props.maxValue),
-    class: ui.value.root({ class: [props.class, props.ui?.root] })
+    maxValue: toZonedDateTime(props.maxValue)
   }
 })
 </script>
@@ -130,6 +128,7 @@ const calendarProps = computed(() => {
     v-slot="{ weekDays, grid }"
     v-model="calendarValue as DateRangeRadix & DateValue"
     v-bind="calendarProps"
+    :class="ui.root({ class: [props.class, props.ui?.root] })"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
