@@ -56,10 +56,108 @@ const backgroundThumbRef = ref<HTMLDivElement | null>(null)
 const trackRef = ref<HTMLDivElement | null>(null)
 const trackThumbRef = ref<HTMLDivElement | null>(null)
 
+const colorDragging = ref<boolean>(false)
+const trackDragging = ref<boolean>(false)
+
 const selectorColor = ref<string>('#f00000')
 const backgroundColor = ref<string>('#ffffff')
 const trackColor = ref<string>('#f00000')
 const pickedColor = ref<string>('#f00000')
+
+function pickSelectorColor(e: Event) {
+  const rect = selectorRef.value?.getBoundingClientRect()
+  if (!rect) {
+    return
+  }
+
+  const top = rect.top + (document.documentElement?.scrollTop || document.body.scrollTop || 0)
+  const left = rect.left + (document.documentElement?.scrollLeft || document.body.scrollLeft || 0)
+  const saturation = Math.floor((100 * Math.max(0, Math.min(150, (e.pageX || e.changedTouches[0].pageX) - left))) / 150)
+  const brightness = Math.floor((100 * (150 - Math.max(0, Math.min(150, (e.pageY || e.changedTouches[0].pageY) - top)))) / 150)
+
+  const _hsb = {
+    h: 0,
+    s: saturation,
+    b: brightness
+  }
+
+  console.log(_hsb)
+}
+
+// pickHue
+function pickTrackColor(e: Event) {
+  const rect = trackRef.value?.getBoundingClientRect()
+  if (!rect) {
+    return
+  }
+
+  const top = rect.top + (document.documentElement?.scrollTop || document.body.scrollTop || 0)
+  const hue = Math.floor((360 * (150 - Math.max(0, Math.min(150, (e.pageY || e.changedTouches[0].pageY) - top)))) / 150)
+  const _hsb = {
+    h: hue,
+    s: 100,
+    b: 100
+  }
+
+  console.log(_hsb)
+}
+
+function onColorMousedown(e: Event) {
+  if (props.disabled) {
+    return
+  }
+
+  // bindDragListeners();
+  onColorDragStart(e)
+}
+
+function onColorDragStart(e: Event) {
+  if (props.disabled) {
+    return
+  }
+
+  colorDragging.value = true
+  pickSelectorColor(e)
+  e.preventDefault()
+}
+
+function onDrag(e: Event) {
+  if (colorDragging.value) {
+    pickSelectorColor(e)
+    e.preventDefault()
+  }
+
+  if (trackDragging.value) {
+    pickTrackColor(e)
+    e.preventDefault()
+  }
+}
+
+function onDragEnd() {
+  colorDragging.value = false
+  trackDragging.value = false
+  // unbindDragListeners
+}
+
+// onHueMousedown
+function onTrackMousedown(e: Event) {
+  if (props.disabled) {
+    return
+  }
+
+  // bindDragListeners
+  onTrackDragStart(e)
+}
+
+// onHueDragStart
+function onTrackDragStart(e: Event) {
+  if (props.disabled) {
+    return
+  }
+
+  trackDragging.value = true
+  pickTrackColor(e)
+}
 
 const [DefinePickerTemplate, PickerTemplate] = createReusableTemplate()
 
@@ -70,13 +168,29 @@ const ui = colorPicker({
 
 <template>
   <DefinePickerTemplate>
-    <div :class="ui.picker({ class: props.ui?.picker })" :data-disabled="disabled ? true : undefined">
-      <div ref="selectorRef" :class="ui.selector({ class: props.ui?.selector })" :style="{ backgroundColor: selectorColor }">
+    <div :class="ui.picker({ class: props.ui?.picker })" :data-disabled="disabled ? true : undefined" :data-dragging="(colorDragging || trackDragging) ? true : undefined">
+      <div
+        ref="selectorRef"
+        :class="ui.selector({ class: props.ui?.selector })"
+        :style="{ backgroundColor: selectorColor }"
+        @mousedown="onColorMousedown($event)"
+        @touchstart="onColorDragStart($event)"
+        @touchmove="onDrag($event)"
+        @touchend="onDragEnd()"
+      >
         <div :class="ui.background({ class: props.ui?.background })" data-color-picker-background>
           <div ref="backgroundThumbRef" :class="ui.backgroundThumb({ class: props.ui?.backgroundThumb })" :style="{ backgroundColor }" />
         </div>
       </div>
-      <div ref="trackRef" :class="ui.track({ class: props.ui?.track })" data-color-picker-track>
+      <div
+        ref="trackRef"
+        :class="ui.track({ class: props.ui?.track })"
+        data-color-picker-track
+        @mousedown="onTrackMousedown($event)"
+        @touchstart="onTrackDragStart($event)"
+        @touchmove="onDrag($event)"
+        @touchend="onDragEnd()"
+      >
         <div ref="trackThumbRef" :class="ui.trackThumb({ class: props.ui?.trackThumb })" :style="{ backgroundColor: trackColor }" />
       </div>
     </div>
