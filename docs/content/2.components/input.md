@@ -142,7 +142,7 @@ props:
 
 ### Loading
 
-Use the `loading` prop to show a loading icon and disable the Input.
+Use the `loading` prop to show a loading icon in the Input.
 
 Use the `loading-icon` prop to set a different icon or change it globally in `ui.input.default.loadingIcon`. Defaults to `i-heroicons-arrow-path-20-solid`.
 
