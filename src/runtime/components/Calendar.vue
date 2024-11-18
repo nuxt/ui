@@ -5,12 +5,8 @@ import type { DateValue, ZonedDateTime } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
-import type { DateRange } from '../types/date'
-
-export type DateRangeRadix = {
-  start: DateValue | undefined
-  end: DateValue | undefined
-}
+import type { DateRange, DateRangeRadix } from '../types/date'
+import type { Grid } from 'radix-vue/date'
 
 const appConfig = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
 
@@ -45,7 +41,6 @@ export interface CalendarProps<T extends boolean> extends Pick<CalendarRootProps
    * The minimum date that can be selected
    */
   minValue?: Date
-  defaultValue?: ModelValue<T>
   class?: any
   ui?: Partial<typeof calendar.slots>
 }
@@ -59,9 +54,8 @@ export interface CalendarSlots {
 
 <script setup lang="ts" generic="T extends boolean">
 import { toRef, computed } from 'vue'
-import { useForwardPropsEmits } from 'radix-vue'
 import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import UButton from './Button.vue'
 import { useLocale } from '../composables/useLocale'
 import { toRangeDate, toRangeZonedDateTime, toZonedDateTime } from '../utils/date'
@@ -80,9 +74,11 @@ defineSlots<CalendarSlots>()
 
 const { code: locale, dir, t } = useLocale()
 
-const baseRootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'weekdayFormat'), emits)
+const baseRootProps = reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'weekdayFormat')
 
-function isRange(value: ModelValue<boolean>): value is ModelValue<true> {
+function isRange(value: DateRangeRadix | DateValue | undefined): value is DateRangeRadix
+function isRange(value: ModelValue<boolean>): value is ModelValue<true>
+function isRange(value: ModelValue<boolean> | DateRangeRadix | DateValue | undefined) {
   return !!range.value
 }
 
@@ -94,11 +90,9 @@ function transformModel(value: ModelValue<boolean>) {
   return isRange(value) ? toRangeZonedDateTime(value) : toZonedDateTime(value)
 }
 
-const defaultCalendarValue = computed(() => transformModel(props.defaultValue))
-
 const calendarValue = computed({
   get() {
-    return transformModel(modelValue.value) ?? defaultCalendarValue.value
+    return transformModel(modelValue.value)
   },
   set(value) {
     if (!value) {
@@ -127,22 +121,22 @@ function paginateYear(date: DateValue, sign: -1 | 1) {
 }
 
 const Calendar = computed(() => range.value ? RangeCalendar : SingleCalendar)
+const [DefineCalendarBody, CalendarBody] = createReusableTemplate<{ grid: Grid<DateValue>[], weekDays: string[] }>()
+
+const calendarProps = computed(() => {
+  return {
+    ...baseRootProps,
+    minValue: minValue.value,
+    maxValue: maxValue.value,
+    locale: locale.value,
+    dir: dir.value,
+    class: ui.value.root({ class: [props.class, props.ui?.root] })
+  }
+})
 </script>
 
 <template>
-  <Calendar.Root
-    v-slot="{ weekDays, grid }"
-    v-bind="baseRootProps"
-    v-model="calendarValue as (DateRangeRadix & DateValue)"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
-    :locale="locale"
-    :dir="dir"
-    :number-of-months="props.numberOfMonths"
-    :week-starts-on="props.weekStartsOn"
-    :min-value="minValue"
-    :max-value="maxValue"
-    :default-value="defaultCalendarValue as (DateRangeRadix & DateValue)"
-  >
+  <DefineCalendarBody v-slot="{ weekDays, grid }">
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
         <UButton :icon="appConfig.ui.icons.chevronDoubleLeft" :size="props.size" color="neutral" variant="ghost" />
@@ -207,5 +201,22 @@ const Calendar = computed(() => range.value ? RangeCalendar : SingleCalendar)
         </Calendar.GridBody>
       </Calendar.Grid>
     </div>
-  </Calendar.Root>
+  </DefineCalendarBody>
+
+  <RangeCalendar.Root
+    v-if="isRange(calendarValue)"
+    v-slot="{ weekDays, grid }"
+    v-model="calendarValue"
+    v-bind="calendarProps"
+  >
+    <CalendarBody v-bind="{ weekDays, grid }" />
+  </RangeCalendar.Root>
+  <SingleCalendar.Root
+    v-else
+    v-slot="{ weekDays, grid }"
+    v-model="calendarValue"
+    v-bind="calendarProps"
+  >
+    <CalendarBody v-bind="{ weekDays, grid }" />
+  </SingleCalendar.Root>
 </template>

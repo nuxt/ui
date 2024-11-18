@@ -1,4 +1,4 @@
-import type { ZonedDateTime } from '@internationalized/date'
+import type {DateValue, ZonedDateTime} from '@internationalized/date'
 
 export interface DateRange {
   /**
@@ -14,4 +14,9 @@ export interface DateRange {
 export interface ZonedDateRange {
   start: ZonedDateTime | undefined
   end: ZonedDateTime | undefined
+}
+
+export type DateRangeRadix = {
+  start: DateValue | undefined
+  end: DateValue | undefined
 }
