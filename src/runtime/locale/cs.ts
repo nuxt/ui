@@ -15,6 +15,10 @@ export default defineLocale({
       prevMonth: 'Předchozí měsíc',
       nextMonth: 'Další měsíc'
     },
+    inputNumber: {
+      increment: 'Zvýšit',
+      decrement: 'Snížit'
+    },
     commandPalette: {
       noMatch: 'Žádná shoda',
       noData: 'Žádná data',

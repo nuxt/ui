@@ -16,6 +16,10 @@ export default defineLocale({
       prevMonth: 'الشهر السابق',
       nextMonth: 'الشهر المقبل'
     },
+    inputNumber: {
+      increment: 'زيادة',
+      decrement: 'تقليل'
+    },
     commandPalette: {
       noMatch: 'لا توجد نتائج مطابقة',
       noData: 'لا توجد بيانات',

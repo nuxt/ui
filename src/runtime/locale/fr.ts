@@ -15,6 +15,10 @@ export default defineLocale({
       prevMonth: 'Mois précédent',
       nextMonth: 'Mois suivant'
     },
+    inputNumber: {
+      increment: 'Augmenter',
+      decrement: 'Diminuer'
+    },
     commandPalette: {
       noMatch: 'Aucune donnée correspondante',
       noData: 'Aucune donnée',

@@ -1,8 +1,21 @@
 <script setup lang="ts">
 import { splitByCase, upperFirst } from 'scule'
+import { useColorMode } from '#imports'
 
-const appConfig = useAppConfig()
 const router = useRouter()
+const appConfig = useAppConfig()
+const colorMode = useColorMode()
+
+defineOptions({ inheritAttrs: false })
+
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+})
 
 const components = [
   'accordion',
@@ -26,6 +39,7 @@ const components = [
   'form-field',
   'input',
   'input-menu',
+  'input-number',
   'kbd',
   'link',
   'modal',
@@ -73,6 +87,22 @@ defineShortcuts({
       <div class="h-screen w-screen overflow-hidden flex flex-col lg:flex-row min-h-0 bg-[var(--ui-bg)]" vaul-drawer-wrapper>
         <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-e border-[var(--ui-border)] overflow-y-auto w-48 p-4" />
         <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-[var(--ui-border)] overflow-x-auto" />
+
+        <div class="fixed top-4 right-4 flex items-center gap-2">
+          <ClientOnly v-if="!colorMode?.forced">
+            <UButton
+              :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
+              color="neutral"
+              variant="ghost"
+              :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
+              @click="isDark = !isDark"
+            />
+
+            <template #fallback>
+              <div class="size-8" />
+            </template>
+          </ClientOnly>
+        </div>
 
         <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-12 px-4">
           <NuxtPage />

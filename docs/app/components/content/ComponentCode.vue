@@ -222,7 +222,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 <template>
   <div class="my-5">
     <div>
-      <div v-if="options.length" class="flex items-center gap-2.5 border border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)] border-b-0 relative rounded-t-[calc(var(--ui-radius)*1.5)] px-4 py-2.5 overflow-x-auto">
+      <div v-if="options.length" class="flex items-center gap-2.5 border border-[var(--ui-border-muted)] border-b-0 relative rounded-t-[calc(var(--ui-radius)*1.5)] px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
             :label="option.label"
@@ -271,7 +271,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
+      <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-border-muted)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <MDCSlot :name="slot" unwrap="p">

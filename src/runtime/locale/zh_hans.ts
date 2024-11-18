@@ -15,6 +15,10 @@ export default defineLocale({
       prevMonth: '上个月',
       nextMonth: '下个月'
     },
+    inputNumber: {
+      increment: '增加',
+      decrement: '减少'
+    },
     commandPalette: {
       noMatch: '没有匹配的数据',
       noData: '没有数据',

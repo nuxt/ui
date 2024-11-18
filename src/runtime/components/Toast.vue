@@ -28,6 +28,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * Display a list of actions:
    * - under the title and description if multiline
    * - next to the close button if not multiline
+   * `{ size: 'xs' }`{lang="ts-type"}
    */
   actions?: ButtonProps[]
   /**

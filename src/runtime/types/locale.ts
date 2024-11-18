@@ -9,6 +9,10 @@ export type Messages = {
     nextYear: string
     prevMonth: string
     nextMonth: string
+  },
+  inputNumber: {
+    increment: string
+    decrement: string
   }
   commandPalette: {
     noMatch: string

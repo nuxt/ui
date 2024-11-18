@@ -21,7 +21,7 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
 export interface BreadcrumbProps<T> {
   /**
    * The element or component this component should render as.
-   * @defaultValue 'div'
+   * @defaultValue 'nav'
    */
   as?: any
   items?: T[]
@@ -88,6 +88,7 @@ import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 
 const props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
+  as: 'nav',
   labelKey: 'label'
 })
 const slots = defineSlots<BreadcrumbSlots<T>>()
