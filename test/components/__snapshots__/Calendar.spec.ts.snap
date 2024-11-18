@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Calendar > renders with class correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr" class="rounded-[calc(var(--ui-radius)*1.5)]">
+"<div role="application" aria-label="Event Date, January 2025" dir="ltr" class="rounded-[calc(var(--ui-radius)*1.5)] custom-class">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text)] hover:bg-[var(--ui-bg-elevated)] focus-visible:bg-[var(--ui-bg-elevated)] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
@@ -2646,7 +2646,7 @@ exports[`Calendar > renders with size xs correctly 1`] = `
 `;
 
 exports[`Calendar > renders with ui correctly 1`] = `
-"<div role="application" aria-label="Event Date, January 2025" dir="ltr" class="rounded-[calc(var(--ui-radius)*1.5)]">
+"<div role="application" aria-label="Event Date, January 2025" dir="ltr" class="rounded-[calc(var(--ui-radius)*1.5)] w-96">
   <div class="flex items-center justify-between"><button type="button" aria-label="Previous year" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text)] hover:bg-[var(--ui-bg-elevated)] focus-visible:bg-[var(--ui-bg-elevated)] hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->

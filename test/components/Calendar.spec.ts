@@ -16,8 +16,8 @@ describe('Calendar', () => {
 
   it.each([
     // Props
-    ['with class', { props: { class: '' } }],
-    ['with ui', { props: { ui: {} } }],
+    ['with class', { props: { class: 'custom-class' } }],
+    ['with ui', { props: { ui: { root: 'w-96' } } }],
     ['with range', { props: { range: true } }],
     ['with disabled', { props: { range: true } }],
     ['with readonly', { props: { range: true } }],

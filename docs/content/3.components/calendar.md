@@ -1,4 +1,5 @@
 ---
+title: Calendar
 description: A calendar to select a date.
 links: 
   - label: Calendar
@@ -7,6 +8,7 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Calendar.vue
+navigation.badge: New
 ---
 
 ## Usage
@@ -15,12 +17,6 @@ Use the `v-model` directive to control the selected date.
 
 ::component-code
 ---
-ignore:
-  - modelValue
-external:
-  - modelValue
-props:
-  modelValue: new Date('2025-01-01')
 ---
 ::
 
@@ -32,15 +28,8 @@ Use the `range` prop to select a range of dates.
 ---
 ignore:
   - range
-  - modelValue.start
-  - modelValue.end
-external:
-  - modelValue
 props:
   range: true
-  modelValue:
-    start: new Date('2025-01-01')
-    end: new Date('2025-01-02')
 ---
 ::
 
@@ -92,6 +81,8 @@ props:
 
 ### Events Calendar
 
+Add a different color to each day.
+
 ::component-example
 ---
 name: 'calendar-events-example'
@@ -99,6 +90,8 @@ name: 'calendar-events-example'
 ::
 
 ### Disabled Dates
+
+Mark the interval between `10` and `16` as disabled
 
 ::component-example
 ---
@@ -108,6 +101,8 @@ name: 'calendar-disabled-dates-example'
 
 ### Unavailable Dates
 
+Mark the interval between `10` and `16` as unavailable
+
 ::component-example
 ---
 name: 'calendar-unavailable-dates-example'
@@ -115,6 +110,8 @@ name: 'calendar-unavailable-dates-example'
 ::
 
 ### Min/Max Dates
+
+Limit the dates between `2023-09-01` and `2023-09-30`
 
 ::component-example
 ---

@@ -12,13 +12,7 @@ const multipleValue = ref({
       <UCalendar v-model="singleValue" />
     </div>
     <div class="flex justify-center gap-2">
-      <UCalendar v-model="singleValue" :range="false" />
-    </div>
-    <div class="flex justify-center gap-2">
       <UCalendar v-model="multipleValue" range />
-    </div>
-    <div class="flex justify-center gap-2">
-      <UCalendar v-model="multipleValue" :range="true" />
     </div>
   </div>
 </template>

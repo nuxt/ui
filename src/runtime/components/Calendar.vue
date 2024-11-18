@@ -7,6 +7,8 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
 import type { DateRange, DateRangeRadix } from '../types/date'
 
+export type { Matcher } from 'radix-vue/date'
+
 const appConfig = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
 
 const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
