@@ -24,7 +24,6 @@ export type ColorPickerProps = {
   modelValue?: any
   defaultValue?: any
   format?: ColorPickerFormat
-  color?: ColorPickerVariants['color']
   size?: ColorPickerVariants['size']
   popover?: PopoverProps
   class?: any
@@ -65,7 +64,6 @@ const pickedColor = ref<string>('#f00000')
 const [DefinePickerTemplate, PickerTemplate] = createReusableTemplate()
 
 const ui = colorPicker({
-  color: props.color,
   size: props.size
 })
 </script>

@@ -4,7 +4,6 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/color-picker'
 
 describe('ColorPicker', () => {
-  const colors = Object.keys(theme.variants.color) as any
   const sizes = Object.keys(theme.variants.size) as any
 
   it.each([
@@ -12,10 +11,9 @@ describe('ColorPicker', () => {
     ['with inline', { props: { inline: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with as', { props: { as: 'div' } }],
-    ['with class', { props: { class: '' } }],
-    ['with ui', { props: { ui: {} } }],
+    ['with class', { props: { class: 'w-96' } }],
+    ['with ui', { props: { ui: { root: 'w-96' } } }],
     ...sizes.map((size: string) => [`with size ${size}`]),
-    ...colors.map((color: string) => [`with color ${color}`]),
     // Slots
     ['with trigger slot', { slots: { trigger: () => 'Trigger' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ColorPickerProps, slots?: Partial<ColorPickerSlots> }) => {

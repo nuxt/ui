@@ -1,35 +1,21 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ColorPicker > renders with as correctly 1`] = `
-"<div class=""><button class="rounded-[calc(var(--ui-radius)*1.5)] p-1.5 inline-flex ring ring-inset ring-[var(--ui-border-accented)] disabled:cursor-not-allowed focus:outline-none aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 focus-visible:ring-2 focus-visible:ring-inset hover:bg-[var(--ui-bg-elevated)] transition-colors focus-visible:ring-[var(--ui-primary)]" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed"><span class="rounded-[var(--ui-radius)] w-5 h-5" style="background-color: #f00000;"></span></button>
+"<div class=""><button class="rounded-[calc(var(--ui-radius)*1.5)] inline-flex p-1.5 ring ring-inset ring-[var(--ui-border-accented)] disabled:cursor-not-allowed focus:outline-none aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] hover:bg-[var(--ui-bg-elevated)] transition-colors" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed"><span class="rounded-[var(--ui-radius)] w-5 h-5" style="background-color: #f00000;"></span></button>
   <!--teleport start-->
   <!--teleport end-->
 </div>"
 `;
 
 exports[`ColorPicker > renders with class correctly 1`] = `
-"<div class=""><button class="rounded-[calc(var(--ui-radius)*1.5)] p-1.5 inline-flex ring ring-inset ring-[var(--ui-border-accented)] disabled:cursor-not-allowed focus:outline-none aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 focus-visible:ring-2 focus-visible:ring-inset hover:bg-[var(--ui-bg-elevated)] transition-colors focus-visible:ring-[var(--ui-primary)]" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed"><span class="rounded-[var(--ui-radius)] w-5 h-5" style="background-color: #f00000;"></span></button>
+"<div class="w-96"><button class="rounded-[calc(var(--ui-radius)*1.5)] inline-flex p-1.5 ring ring-inset ring-[var(--ui-border-accented)] disabled:cursor-not-allowed focus:outline-none aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] hover:bg-[var(--ui-bg-elevated)] transition-colors" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed"><span class="rounded-[var(--ui-radius)] w-5 h-5" style="background-color: #f00000;"></span></button>
   <!--teleport start-->
   <!--teleport end-->
 </div>"
 `;
 
-exports[`ColorPicker > renders with color error correctly 1`] = `"with color error"`;
-
-exports[`ColorPicker > renders with color info correctly 1`] = `"with color info"`;
-
-exports[`ColorPicker > renders with color neutral correctly 1`] = `"with color neutral"`;
-
-exports[`ColorPicker > renders with color primary correctly 1`] = `"with color primary"`;
-
-exports[`ColorPicker > renders with color secondary correctly 1`] = `"with color secondary"`;
-
-exports[`ColorPicker > renders with color success correctly 1`] = `"with color success"`;
-
-exports[`ColorPicker > renders with color warning correctly 1`] = `"with color warning"`;
-
 exports[`ColorPicker > renders with disabled correctly 1`] = `
-"<div class=""><button class="rounded-[calc(var(--ui-radius)*1.5)] p-1.5 inline-flex ring ring-inset ring-[var(--ui-border-accented)] disabled:cursor-not-allowed focus:outline-none aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 focus-visible:ring-2 focus-visible:ring-inset hover:bg-[var(--ui-bg-elevated)] transition-colors focus-visible:ring-[var(--ui-primary)]" disabled="" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed"><span class="rounded-[var(--ui-radius)] w-5 h-5" style="background-color: #f00000;"></span></button>
+"<div class=""><button class="rounded-[calc(var(--ui-radius)*1.5)] inline-flex p-1.5 ring ring-inset ring-[var(--ui-border-accented)] disabled:cursor-not-allowed focus:outline-none aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] hover:bg-[var(--ui-bg-elevated)] transition-colors" disabled="" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed"><span class="rounded-[var(--ui-radius)] w-5 h-5" style="background-color: #f00000;"></span></button>
   <!--teleport start-->
   <!--teleport end-->
 </div>"
@@ -38,12 +24,12 @@ exports[`ColorPicker > renders with disabled correctly 1`] = `
 exports[`ColorPicker > renders with inline correctly 1`] = `
 "<div class="">
   <div class="flex gap-4">
-    <div class="w-40 h-40 rounded" style="background-color: #f00000;">
+    <div class="rounded w-42 h-42" style="background-color: #f00000;">
       <div class="w-full h-full relative rounded" data-color-picker-background="">
         <div class="absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer" style="background-color: #ffffff;"></div>
       </div>
     </div>
-    <div class="w-[8px] h-40 rounded relative" data-color-picker-track="">
+    <div class="w-[8px] rounded relative h-42" data-color-picker-track="">
       <div class="absolute transform -translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer" style="background-color: #f00000;"></div>
     </div>
   </div>
@@ -68,7 +54,7 @@ exports[`ColorPicker > renders with trigger slot correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with ui correctly 1`] = `
-"<div class=""><button class="rounded-[calc(var(--ui-radius)*1.5)] p-1.5 inline-flex ring ring-inset ring-[var(--ui-border-accented)] disabled:cursor-not-allowed focus:outline-none aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 focus-visible:ring-2 focus-visible:ring-inset hover:bg-[var(--ui-bg-elevated)] transition-colors focus-visible:ring-[var(--ui-primary)]" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed"><span class="rounded-[var(--ui-radius)] w-5 h-5" style="background-color: #f00000;"></span></button>
+"<div class="w-96"><button class="rounded-[calc(var(--ui-radius)*1.5)] inline-flex p-1.5 ring ring-inset ring-[var(--ui-border-accented)] disabled:cursor-not-allowed focus:outline-none aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] hover:bg-[var(--ui-bg-elevated)] transition-colors" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed"><span class="rounded-[var(--ui-radius)] w-5 h-5" style="background-color: #f00000;"></span></button>
   <!--teleport start-->
   <!--teleport end-->
 </div>"
