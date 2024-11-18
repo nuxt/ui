@@ -163,8 +163,7 @@ function displayValue(value?: AcceptableValue | AcceptableValue[]): string | und
     return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
 
-  const item = items.value.find(item => isEqual(get(item as Record<string, any>, props.valueKey as string), value))
-
+  const item = items.value.find(item => isEqual(typeof item === 'object' ? get(item, props.valueKey as string) : item, value))
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 

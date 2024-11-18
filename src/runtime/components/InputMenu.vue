@@ -198,8 +198,7 @@ function displayValue(value: T): string {
     return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
   }
 
-  const item = items.value.find(item => isEqual(get(item as Record<string, any>, props.valueKey as string), value))
-
+  const item = items.value.find(item => isEqual(typeof item === 'object' ? get(item, props.valueKey as string) : item, value))
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
