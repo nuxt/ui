@@ -4,14 +4,14 @@ export interface DateRange {
   /**
    * The start of the range
    */
-  start: Date
+  start: Date | undefined
   /**
    * The end of the range
    */
-  end: Date
+  end: Date | undefined
 }
 
 export interface ZonedDateRange {
-  start: ZonedDateTime
-  end: ZonedDateTime
+  start: ZonedDateTime | undefined
+  end: ZonedDateTime | undefined
 }

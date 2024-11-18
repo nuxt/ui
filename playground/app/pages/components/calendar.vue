@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const singleValue = ref(new Date('2023-09-01'))
-const multipleValue = reactive({
+const multipleValue = ref({
   start: new Date('2023-09-01'),
   end: new Date('2023-09-07')
 })
@@ -12,7 +12,13 @@ const multipleValue = reactive({
       <UCalendar v-model="singleValue" />
     </div>
     <div class="flex justify-center gap-2">
+      <UCalendar v-model="singleValue" :range="false" />
+    </div>
+    <div class="flex justify-center gap-2">
       <UCalendar v-model="multipleValue" range />
+    </div>
+    <div class="flex justify-center gap-2">
+      <UCalendar v-model="multipleValue" :range="true" />
     </div>
   </div>
 </template>

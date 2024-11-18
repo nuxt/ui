@@ -1,11 +1,16 @@
 <script lang="ts">
-import { computed } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { CalendarRootProps, CalendarCellTriggerProps } from 'radix-vue'
-import type { DateValue } from '@internationalized/date'
+import type { DateValue, ZonedDateTime } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
+import type { DateRange } from '../types/date'
+
+export type DateRangeRadix = {
+  start: DateValue | undefined
+  end: DateValue | undefined
+}
 
 const appConfig = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
 
@@ -13,7 +18,9 @@ const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-export interface CalendarProps extends Pick<CalendarRootProps, 'numberOfMonths' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
+type ModelValue<T extends boolean> = (T extends true ? DateRange : Date) | undefined
+
+export interface CalendarProps<T extends boolean> extends Pick<CalendarRootProps, 'numberOfMonths' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
   /**
    * The color of the calendar
    */
@@ -25,7 +32,7 @@ export interface CalendarProps extends Pick<CalendarRootProps, 'numberOfMonths' 
   /**
    * Is this a range calendar
    */
-  range?: boolean
+  range?: T
   /**
    * Show year controls
    */
@@ -38,13 +45,9 @@ export interface CalendarProps extends Pick<CalendarRootProps, 'numberOfMonths' 
    * The minimum date that can be selected
    */
   minValue?: Date
-  defaultValue?: Partial<any>
+  defaultValue?: ModelValue<T>
   class?: any
   ui?: Partial<typeof calendar.slots>
-}
-
-export interface CalendarEmits {
-  (e: 'update:modelValue', value: any): void
 }
 
 export interface CalendarSlots {
@@ -54,54 +57,56 @@ export interface CalendarSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends boolean">
+import { toRef, computed } from 'vue'
 import { useForwardPropsEmits } from 'radix-vue'
 import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
 import { reactivePick } from '@vueuse/core'
 import UButton from './Button.vue'
 import { useLocale } from '../composables/useLocale'
 import { toRangeDate, toRangeZonedDateTime, toZonedDateTime } from '../utils/date'
+import type { ZonedDateRange } from '#ui/types/date'
 
-const props = withDefaults(defineProps<CalendarProps>(), {
+const props = withDefaults(defineProps<CalendarProps<T>>(), {
   fixedWeeks: true,
   yearControls: true
 })
-const modelValue = defineModel<any>()
-const emits = defineEmits<CalendarEmits>()
+
+// This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
+const range = toRef(() => typeof props.range === 'string' ? true : props.range)
+
+const modelValue = defineModel<ModelValue<T>>(undefined)
 defineSlots<CalendarSlots>()
 
 const { code: locale, dir, t } = useLocale()
 
 const baseRootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'readonly', 'fixedWeeks', 'initialFocus', 'isDateDisabled', 'isDateUnavailable', 'weekdayFormat'), emits)
 
-const defaultCalendarValue = computed(() => {
-  if (props.defaultValue) {
-    return props.range ? toRangeZonedDateTime(props.defaultValue) : toZonedDateTime(props.defaultValue)
+function isRange(value: ModelValue<boolean>): value is ModelValue<true> {
+  return !!range.value
+}
+
+function transformModel(value: ModelValue<boolean>) {
+  if (!value) {
+    return undefined
   }
 
-  return undefined
-})
+  return isRange(value) ? toRangeZonedDateTime(value) : toZonedDateTime(value)
+}
+
+const defaultCalendarValue = computed(() => transformModel(props.defaultValue))
 
 const calendarValue = computed({
   get() {
-    if (modelValue.value) {
-      return props.range ? toRangeZonedDateTime(modelValue.value) : toZonedDateTime(modelValue.value)
-    }
-
-    return defaultCalendarValue.value
+    return transformModel(modelValue.value) ?? defaultCalendarValue.value
   },
   set(value) {
-    if (!value) return
-
-    if (props.range) {
-      if (value.start && value.end) {
-        modelValue.value = toRangeDate(value)
-      }
-
+    if (!value) {
+      modelValue.value = value
       return
     }
 
-    modelValue.value = value.toDate()
+    modelValue.value = (range.value ? toRangeDate(value as ZonedDateRange) : (value as ZonedDateTime).toDate()) as ModelValue<T>
   }
 })
 
@@ -121,14 +126,14 @@ function paginateYear(date: DateValue, sign: -1 | 1) {
   return date.add({ years: 1 })
 }
 
-const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
+const Calendar = computed(() => range.value ? RangeCalendar : SingleCalendar)
 </script>
 
 <template>
   <Calendar.Root
     v-slot="{ weekDays, grid }"
     v-bind="baseRootProps"
-    v-model="calendarValue"
+    v-model="calendarValue as (DateRangeRadix & DateValue)"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     :locale="locale"
     :dir="dir"
@@ -136,7 +141,7 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     :week-starts-on="props.weekStartsOn"
     :min-value="minValue"
     :max-value="maxValue"
-    :default-value="defaultCalendarValue"
+    :default-value="defaultCalendarValue as (DateRangeRadix & DateValue)"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>

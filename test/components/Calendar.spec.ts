@@ -33,7 +33,7 @@ describe('Calendar', () => {
     ['with heading slot', { slots: { heading: () => 'Heading' } }],
     ['with day slot', { slots: { day: ({ day }: Parameters<CalendarSlots['day']>[0]) => day.day } }],
     ['with week-day slot', { slots: { 'week-day': ({ day }: Parameters<CalendarSlots['week-day']>[0]) => day } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CalendarProps, slots?: Partial<CalendarSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CalendarProps<false>, slots?: Partial<CalendarSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Calendar)
     expect(html).toMatchSnapshot()
   })
