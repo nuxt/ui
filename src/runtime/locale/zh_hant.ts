@@ -9,6 +9,10 @@ export default defineLocale({
       noData: '沒有資料',
       create: '創建 "{label}"'
     },
+    inputNumber: {
+      increment: '增加',
+      decrement: '减少'
+    },
     commandPalette: {
       noMatch: '沒有匹配的資料',
       noData: '沒有資料',

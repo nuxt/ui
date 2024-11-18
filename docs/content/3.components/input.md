@@ -25,15 +25,15 @@ props:
 
 Use the `type` prop to change the input type. Defaults to `text`.
 
-Some types have been implemented in their own components such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), etc. and others have been styled like `file` for example.
+Some types have been implemented in their own components such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), [InputNumber](/components/input-number) etc. and others have been styled like `file` for example.
 
 ::component-code
 ---
 items:
   type:
     - text
-    - password
     - number
+    - password
     - search
     - file
 props:

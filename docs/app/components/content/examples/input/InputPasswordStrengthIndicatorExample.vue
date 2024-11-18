@@ -40,7 +40,7 @@ const text = computed(() => {
         placeholder="Password"
         :color="color"
         :type="show ? 'text' : 'password'"
-        :ui="{ trailing: 'pr-0.5' }"
+        :ui="{ trailing: 'pe-1' }"
         :aria-invalid="score < 4"
         aria-describedby="password-strength"
         class="w-full"
