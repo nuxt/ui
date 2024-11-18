@@ -42,7 +42,7 @@ const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'pr
 export interface ${upperName}Props {
   /**
    * The element or component this component should render as.
-   * @defaultValue \`div\`
+   * @defaultValue 'div'
    */
   as?: any
   class?: any
@@ -163,9 +163,53 @@ describe('${upperName}', () => {
   }
 }
 
+const doc = ({ name, pro }) => {
+  const kebabName = kebabCase(name)
+  const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
+
+  return {
+    filename: `docs/content/${pro ? 'pro' : '3.components'}/${kebabName}.md`,
+    contents: `---
+description:
+links: ${pro
+  ? ''
+  : `- label: ${upperName}
+    icon: i-custom-radix-vue
+    to: https://www.radix-vue.com/components/${kebabName}.html`}
+  - label: GitHub
+    icon: i-simple-icons-github
+    to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v3/src/runtime/components/${upperName}.vue
+---
+
+## Usage
+
+## Examples
+
+## API
+
+### Props
+
+:component-props
+
+### Slots
+
+:component-slots
+
+### Emits
+
+:component-emits
+
+## Theme
+
+:component-theme
+`
+  }
+}
+
 export default {
   playground,
   component,
   theme,
-  test
+  test,
+  doc
 }

@@ -12,17 +12,18 @@ describe('ContextMenu', () => {
       label: 'Appearance',
       children: [{
         label: 'System',
-        icon: 'i-heroicons-computer-desktop'
+        icon: 'i-lucide-monitor'
       }, {
         label: 'Light',
-        icon: 'i-heroicons-sun'
+        icon: 'i-lucide-sun'
       }, {
         label: 'Dark',
-        icon: 'i-heroicons-moon'
+        icon: 'i-lucide-moon'
       }]
     }],
     [{
       label: 'Show Sidebar',
+      color: 'primary',
       kbds: ['meta', 'S']
     }, {
       label: 'Show Toolbar',

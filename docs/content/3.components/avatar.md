@@ -1,5 +1,5 @@
 ---
-description: An image element with fallback.
+description: An img element with fallback and Nuxt Image support.
 links:
   - label: Avatar
     icon: i-custom-reka-ui
@@ -10,6 +10,10 @@ links:
 ---
 
 ## Usage
+
+::tip
+The Avatar uses the `NuxtImg` component when [`@nuxt/image`](https://github.com/nuxt/image) is installed, falling back to `img` otherwise.
+::
 
 ### Src
 
@@ -36,6 +40,10 @@ props:
 ---
 ::
 
+::note
+The `<img>` element's `width` and `height` are automatically set based on the `size` prop.
+::
+
 ### Icon
 
 Use the `icon` prop to display a fallback [Icon](/components/icon).
@@ -43,7 +51,7 @@ Use the `icon` prop to display a fallback [Icon](/components/icon).
 ::component-code
 ---
 props:
-  icon: 'i-heroicons-photo'
+  icon: 'i-lucide-image'
   size: md
 ---
 ::

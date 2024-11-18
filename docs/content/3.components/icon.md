@@ -13,7 +13,7 @@ You can use any name from the https://icones.js.org collection:
 ::component-code
 ---
 props:
-  name: 'i-heroicons-light-bulb'
+  name: 'i-lucide-lightbulb'
   class: 'size-5'
 ---
 ::

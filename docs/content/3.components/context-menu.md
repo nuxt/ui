@@ -20,9 +20,11 @@ Use the `items` prop as an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
+- `color?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
 - [`type?: "link" | "label" | "separator" | "checkbox"`{lang="ts-type"}](#with-checkbox-items)
+- [`color?: "error" | "primary" | "secondary" | "success" | "info" | "warning" | "neutral"`{lang="ts-type"}](#with-color-items)
 - [`checked?: boolean`{lang="ts-type"}](#with-checkbox-items)
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
@@ -46,11 +48,11 @@ props:
     - - label: Appearance
         children:
           - label: System
-            icon: i-heroicons-computer-desktop
+            icon: i-lucide-monitor
           - label: Light
-            icon: i-heroicons-sun
+            icon: i-lucide-sun
           - label: Dark
-            icon: i-heroicons-moon
+            icon: i-lucide-moon
     - - label: Show Sidebar
         kbds:
           - meta
@@ -124,11 +126,11 @@ props:
   size: xl
   items:
     - label: System
-      icon: i-heroicons-computer-desktop
+      icon: i-lucide-monitor
     - label: Light
-      icon: i-heroicons-sun
+      icon: i-lucide-sun
     - label: Dark
-      icon: i-heroicons-moon
+      icon: i-lucide-moon
   class: 'w-48'
 slots:
   default: |
@@ -157,11 +159,11 @@ props:
   disabled: true
   items:
     - label: System
-      icon: i-heroicons-computer-desktop
+      icon: i-lucide-monitor
     - label: Light
-      icon: i-heroicons-sun
+      icon: i-lucide-sun
     - label: Dark
-      icon: i-heroicons-moon
+      icon: i-lucide-moon
   class: 'w-48'
 slots:
   default: |
@@ -189,6 +191,16 @@ name: 'context-menu-checkbox-items-example'
 
 ::note
 To ensure reactivity for the `checked` state of items, it's recommended to wrap your `items` array inside a `computed`.
+::
+
+### With color items
+
+You can use the `color` property to highlight certain items with a color.
+
+::component-example
+---
+name: 'context-menu-color-items-example'
+---
 ::
 
 ### With custom slot

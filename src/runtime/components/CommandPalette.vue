@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits } from 'reka-ui'
@@ -8,6 +7,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
@@ -35,7 +35,7 @@ export interface CommandPaletteGroup<T> {
   slot?: string
   items?: T[]
   /**
-   * Wether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
+   * Whether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
    * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
    * @defaultValue true
    */
@@ -114,6 +114,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
   'item-trailing': SlotProps<T>
 } & DynamicSlots<G, SlotProps<T>> & DynamicSlots<T, SlotProps<T>>
 
+extendDevtoolsMeta({ example: 'CommandPaletteExample', ignoreProps: ['groups'] })
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
@@ -123,10 +124,12 @@ import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { highlight } from '../utils/fuse'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import UButton from './Button.vue'
 import UChip from './Chip.vue'
 import UKbd from './Kbd.vue'
 import UInput from './Input.vue'
@@ -141,6 +144,7 @@ const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
+const { t } = useLocale()
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter', 'by'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon', 'placeholder'))
@@ -243,7 +247,7 @@ const groups = computed(() => {
               size="md"
               color="neutral"
               variant="ghost"
-              aria-label="Close"
+              :aria-label="t('commandPalette.close')"
               v-bind="typeof close === 'object' ? close : undefined"
               :class="ui.close({ class: props.ui?.close })"
               @click="emits('update:open', false)"
@@ -257,7 +261,7 @@ const groups = computed(() => {
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" :dismissable="false">
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? `No results for ${searchTerm}` : 'No results' }}
+            {{ searchTerm ? t('commandPalette.noMatch', { searchTerm }) : t('commandPalette.noData') }}
           </slot>
         </ComboboxEmpty>
 

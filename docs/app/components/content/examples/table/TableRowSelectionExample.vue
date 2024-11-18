@@ -105,7 +105,7 @@ const rowSelection = ref({ 1: true })
 </script>
 
 <template>
-  <div class="flex-1">
+  <div class="flex-1 w-full">
     <UTable
       ref="table"
       v-model:row-selection="rowSelection"

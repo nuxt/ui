@@ -4,6 +4,7 @@ import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverCon
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/popover'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { popover: Partial<typeof theme> } }
 
@@ -30,6 +31,11 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
    * @defaultValue true
    */
   portal?: boolean
+  /**
+   * When `true`, the popover will not close when clicking outside.
+   * @defaultValue false
+   */
+  preventClose?: boolean
   class?: any
   ui?: Partial<typeof popover.slots>
 }
@@ -40,6 +46,8 @@ export interface PopoverSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'PopoverExample' })
 </script>
 
 <script setup lang="ts">
@@ -61,6 +69,17 @@ const slots = defineSlots<PopoverSlots>()
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardPropsEmits(pick, emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as PopoverContentProps)
+const contentEvents = computed(() => {
+  if (props.preventClose) {
+    return {
+      pointerDownOutside: (e: Event) => e.preventDefault(),
+      interactOutside: (e: Event) => e.preventDefault(),
+      escapeKeyDown: (e: Event) => e.preventDefault()
+    }
+  }
+
+  return {}
+})
 const arrowProps = toRef(() => props.arrow as PopoverArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -78,7 +97,7 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
     </Component.Trigger>
 
     <Component.Portal :disabled="!portal">
-      <Component.Content v-bind="contentProps" :class="ui.content({ class: [props.class, props.ui?.content] })">
+      <Component.Content v-bind="contentProps" :class="ui.content({ class: [props.class, props.ui?.content] })" v-on="contentEvents">
         <slot name="content" />
 
         <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />

@@ -40,71 +40,71 @@ external:
 props:
   items:
     - label: Guide
-      icon: i-heroicons-book-open
+      icon: i-lucide-book-open
       to: /getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
-          icon: i-heroicons-home
+          icon: i-lucide-house
         - label: Installation
           description: Learn how to install and configure Nuxt UI in your application.
-          icon: i-heroicons-cloud-arrow-down
+          icon: i-lucide-cloud-download
         - label: 'Icons'
-          icon: 'i-heroicons-face-smile'
+          icon: 'i-lucide-smile'
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
-          icon: 'i-heroicons-swatch'
+          icon: 'i-lucide-swatch-book'
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
-          icon: 'i-heroicons-cog'
+          icon: 'i-lucide-cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
-      icon: i-heroicons-circle-stack
+      icon: i-lucide-database
       to: /composables
       children:
         - label: defineShortcuts
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
         - label: useModal
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a modal within your application.
           to: /composables/use-modal
         - label: useSlideover
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a slideover within your application.
           to: /composables/use-slideover
         - label: useToast
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a toast within your application.
           to: /composables/use-toast
     - label: Components
-      icon: i-heroicons-cube-transparent
+      icon: i-lucide-box
       to: /components
       active: true
       children:
         - label: Link
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
           to: /components/link
         - label: Modal
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a modal within your application.
           to: /components/modal
         - label: NavigationMenu
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a list of links.
           to: /components/navigation-menu
         - label: Pagination
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a list of pages.
           to: /components/pagination
         - label: Popover
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /components/popover
         - label: Progress
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
     - label: GitHub
@@ -113,7 +113,7 @@ props:
       to: https://github.com/nuxt/ui
       target: _blank
     - label: Help
-      icon: i-heroicons-question-mark-circle
+      icon: i-lucide-circle-help
       disabled: true
   class: 'justify-center'
 ---
@@ -137,7 +137,7 @@ Each item can take a `children` array of objects with the following properties t
 
 Use the `orientation` prop to change the orientation of the NavigationMenu.
 
-When orientation is `vertical`, a [Collapsible](/components/collapsible) component is used to display children.
+When orientation is `vertical`, a [Collapsible](/components/collapsible) component is used to display children. You can control the open state of each item using the `open` and `defaultOpen` properties.
 
 ::component-code
 ---
@@ -151,68 +151,69 @@ props:
   orientation: 'vertical'
   items:
     - - label: Guide
-        icon: i-heroicons-book-open
+        icon: i-lucide-book-open
+        defaultOpen: true
         children:
           - label: Introduction
             description: Fully styled and customizable components for Nuxt.
-            icon: i-heroicons-home
+            icon: i-lucide-house
           - label: Installation
             description: Learn how to install and configure Nuxt UI in your application.
-            icon: i-heroicons-cloud-arrow-down
+            icon: i-lucide-cloud-download
           - label: 'Icons'
-            icon: 'i-heroicons-face-smile'
+            icon: 'i-lucide-smile'
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
-            icon: 'i-heroicons-swatch'
+            icon: 'i-lucide-swatch-book'
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
-            icon: 'i-heroicons-cog'
+            icon: 'i-lucide-cog'
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       - label: Composables
-        icon: i-heroicons-circle-stack
+        icon: i-lucide-database
         children:
           - label: defineShortcuts
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
           - label: useModal
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Display a modal within your application.
             to: /composables/use-modal
           - label: useSlideover
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Display a slideover within your application.
             to: /composables/use-slideover
           - label: useToast
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Display a toast within your application.
             to: /composables/use-toast
       - label: Components
-        icon: i-heroicons-cube-transparent
+        icon: i-lucide-box
         active: true
         children:
           - label: Link
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
             to: /components/link
           - label: Modal
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Display a modal within your application.
             to: /components/modal
           - label: NavigationMenu
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Display a list of links.
             to: /components/navigation-menu
           - label: Pagination
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Display a list of pages.
             to: /components/pagination
           - label: Popover
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
             to: /components/popover
           - label: Progress
-            icon: i-heroicons-document-text
+            icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
             to: /components/progress
     - - label: GitHub
@@ -221,7 +222,7 @@ props:
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
-        icon: i-heroicons-question-mark-circle
+        icon: i-lucide-circle-help
         disabled: true
   class: 'data-[orientation=vertical]:w-48'
 ---
@@ -252,13 +253,13 @@ props:
   orientation: 'horizontal'
   items:
     - - label: Guide
-        icon: i-heroicons-book-open
+        icon: i-lucide-book-open
         to: /getting-started
       - label: Composables
-        icon: i-heroicons-circle-stack
+        icon: i-lucide-database
         to: /composables
       - label: Components
-        icon: i-heroicons-cube-transparent
+        icon: i-lucide-box
         to: /components
         active: true
     - - label: GitHub
@@ -288,13 +289,13 @@ props:
   color: neutral
   items:
     - - label: Guide
-        icon: i-heroicons-book-open
+        icon: i-lucide-book-open
         to: /getting-started
       - label: Composables
-        icon: i-heroicons-circle-stack
+        icon: i-lucide-database
         to: /composables
       - label: Components
-        icon: i-heroicons-cube-transparent
+        icon: i-lucide-box
         to: /components
         active: true
     - - label: GitHub
@@ -321,13 +322,13 @@ props:
   highlight: false
   items:
     - - label: Guide
-        icon: i-heroicons-book-open
+        icon: i-lucide-book-open
         to: /getting-started
       - label: Composables
-        icon: i-heroicons-circle-stack
+        icon: i-lucide-database
         to: /composables
       - label: Components
-        icon: i-heroicons-cube-transparent
+        icon: i-lucide-box
         to: /components
         active: true
     - - label: GitHub
@@ -344,7 +345,7 @@ The `highlight` prop changes the `pill` variant active item style. Try it out to
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`. This icon is only displayed when an item has children.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-lucide-chevron-down`. This icon is only displayed when an item has children.
 
 ::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
@@ -359,74 +360,74 @@ ignore:
 external:
   - items
 props:
-  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
+  trailingIcon: 'i-lucide-arrow-down'
   items:
     - label: Guide
-      icon: i-heroicons-book-open
+      icon: i-lucide-book-open
       to: /getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
-          icon: i-heroicons-home
+          icon: i-lucide-house
         - label: Installation
           description: Learn how to install and configure Nuxt UI in your application.
-          icon: i-heroicons-cloud-arrow-down
+          icon: i-lucide-cloud-download
         - label: 'Icons'
-          icon: 'i-heroicons-face-smile'
+          icon: 'i-lucide-smile'
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
-          icon: 'i-heroicons-swatch'
+          icon: 'i-lucide-swatch-book'
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
-          icon: 'i-heroicons-cog'
+          icon: 'i-lucide-cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
-      icon: i-heroicons-circle-stack
+      icon: i-lucide-database
       to: /composables
       children:
         - label: defineShortcuts
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
         - label: useModal
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a modal within your application.
           to: /composables/use-modal
         - label: useSlideover
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a slideover within your application.
           to: /composables/use-slideover
         - label: useToast
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a toast within your application.
           to: /composables/use-toast
     - label: Components
-      icon: i-heroicons-cube-transparent
+      icon: i-lucide-box
       to: /components
       active: true
       children:
         - label: Link
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
           to: /components/link
         - label: Modal
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a modal within your application.
           to: /components/modal
         - label: NavigationMenu
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a list of links.
           to: /components/navigation-menu
         - label: Pagination
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a list of pages.
           to: /components/pagination
         - label: Popover
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /components/popover
         - label: Progress
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
   class: 'justify-center'
@@ -454,71 +455,71 @@ props:
   arrow: true
   items:
     - label: Guide
-      icon: i-heroicons-book-open
+      icon: i-lucide-book-open
       to: /getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
-          icon: i-heroicons-home
+          icon: i-lucide-house
         - label: Installation
           description: Learn how to install and configure Nuxt UI in your application.
-          icon: i-heroicons-cloud-arrow-down
+          icon: i-lucide-cloud-download
         - label: 'Icons'
-          icon: 'i-heroicons-face-smile'
+          icon: 'i-lucide-smile'
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
-          icon: 'i-heroicons-swatch'
+          icon: 'i-lucide-swatch-book'
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
-          icon: 'i-heroicons-cog'
+          icon: 'i-lucide-cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
-      icon: i-heroicons-circle-stack
+      icon: i-lucide-database
       to: /composables
       children:
         - label: defineShortcuts
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
         - label: useModal
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a modal within your application.
           to: /composables/use-modal
         - label: useSlideover
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a slideover within your application.
           to: /composables/use-slideover
         - label: useToast
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a toast within your application.
           to: /composables/use-toast
     - label: Components
-      icon: i-heroicons-cube-transparent
+      icon: i-lucide-box
       to: /components
       active: true
       children:
         - label: Link
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
           to: /components/link
         - label: Modal
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a modal within your application.
           to: /components/modal
         - label: NavigationMenu
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a list of links.
           to: /components/navigation-menu
         - label: Pagination
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a list of pages.
           to: /components/pagination
         - label: Popover
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /components/popover
         - label: Progress
-          icon: i-heroicons-document-text
+          icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
   class: 'justify-center'
@@ -560,6 +561,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-leading`{lang="ts-type"}
 - `#{{ item.slot }}-label`{lang="ts-type"}
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
+- `#{{ item.slot }}-content`{lang="ts-type"}
 
 ::component-example
 ---
@@ -568,7 +570,21 @@ name: 'navigation-menu-custom-slot-example'
 ::
 
 ::tip{to="#slots"}
-You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
+You can also use the `#item`, `#item-leading`, `#item-label`, `#item-trailing` and `#item-content` slots to customize all items.
+::
+
+### With content slot
+
+Use the `#item-content` slot or the `slot` property (`#{{ item.slot }}-content`) to customize the content of a specific item.
+
+::component-example
+---
+name: 'navigation-menu-content-slot-example'
+---
+::
+
+::note
+In this example, we add the `sm:w-[var(--radix-navigation-menu-viewport-width)]` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
 ::
 
 ## API

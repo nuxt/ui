@@ -2,16 +2,15 @@
 import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
 // import { debounce } from 'perfect-debounce'
-import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
-const runtimeConfig = useRuntimeConfig()
-const { integrity, api } = runtimeConfig.public.content
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '-' + integrity : ''}`, { default: () => [] })
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+  server: false
+})
 
 const searchTerm = ref('')
 
@@ -23,33 +22,31 @@ const searchTerm = ref('')
 //   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
 // }, 500))
 
-const links = computed(() => {
-  return [{
-    label: 'Docs',
-    icon: 'i-heroicons-book-open',
-    to: '/getting-started',
-    active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro')
-    ? [{
-        label: 'Pro',
-        icon: 'i-heroicons-square-3-stack-3d',
-        to: '/pro',
-        active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
-      }, {
-        label: 'Pricing',
-        icon: 'i-heroicons-credit-card',
-        to: '/pro/pricing'
-      }, {
-        label: 'Templates',
-        icon: 'i-heroicons-computer-desktop',
-        to: '/pro/templates'
-      }]
-    : []), {
-    label: 'Releases',
-    icon: 'i-heroicons-rocket-launch',
-    to: '/releases'
-  }].filter(Boolean)
-})
+const links = computed(() => [{
+  label: 'Docs',
+  icon: 'i-lucide-square-play',
+  to: '/getting-started',
+  active: route.path.startsWith('/getting-started')
+}, {
+  label: 'Components',
+  icon: 'i-lucide-square-code',
+  to: '/components',
+  active: route.path.startsWith('/components')
+}, {
+  label: 'Roadmap',
+  icon: 'i-lucide-map',
+  to: '/roadmap'
+}, {
+  label: 'Figma',
+  icon: 'i-lucide-figma',
+  to: 'https://www.figma.com/community/file/1288455405058138934',
+  target: '_blank'
+}, {
+  label: 'Releases',
+  icon: 'i-lucide-rocket',
+  to: 'https://github.com/nuxt/ui/releases',
+  target: '_blank'
+}].filter(Boolean))
 
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
@@ -76,7 +73,24 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-provide('navigation', navigation)
+const updatedNavigation = computed(() => navigation.value?.map(item => ({
+  ...item,
+  children: item.children?.map((child: typeof item) => ({
+    ...child,
+    ...(child.path === '/getting-started/installation' && {
+      title: 'Installation',
+      active: route.path.startsWith('/getting-started/installation'),
+      children: []
+    }),
+    ...(child.path === '/getting-started/i18n' && {
+      title: 'I18n',
+      active: route.path.startsWith('/getting-started/i18n'),
+      children: []
+    })
+  })) || []
+})))
+
+provide('navigation', updatedNavigation)
 </script>
 
 <template>
@@ -110,6 +124,8 @@ provide('navigation', navigation)
 @source "../content/**/*.md";
 
 @theme {
+  --container-8xl: 90rem;
+
   --font-family-sans: 'Public Sans', sans-serif;
 
   --color-green-50: #EFFDF5;
@@ -126,6 +142,6 @@ provide('navigation', navigation)
 }
 
 :root {
-  --ui-container-width: 90rem;
+  --ui-container: var(--container-8xl);
 }
 </style>

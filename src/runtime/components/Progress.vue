@@ -15,7 +15,7 @@ type ProgressVariants = VariantProps<typeof progress>
 export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' | 'modelValue'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
   /** The maximum progress value. */

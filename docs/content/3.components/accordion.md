@@ -35,13 +35,13 @@ props:
   class: 'px-4'
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
 ::
@@ -64,13 +64,13 @@ props:
   type: 'multiple'
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
 ::
@@ -93,13 +93,13 @@ props:
   collapsible: false
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
 ::
@@ -123,21 +123,21 @@ props:
   disabled: true
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
       disabled: true
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
 ::
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-lucide-chevron-down`.
 
 ::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
@@ -153,17 +153,17 @@ hide:
   - class
 props:
   class: 'px-4'
-  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
+  trailingIcon: 'i-lucide-arrow-down'
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-      trailingIcon: 'i-heroicons-plus-20-solid'
+      trailingIcon: 'i-lucide-plus'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
 ::

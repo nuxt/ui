@@ -19,11 +19,11 @@ const items = [{
   content: 'This is the content shown for Tab1'
 }, {
   label: 'Tab2',
-  icon: 'i-heroicons-user',
+  icon: 'i-lucide-user',
   content: 'And, this is the content for Tab2'
 }, {
   label: 'Tab3',
-  icon: 'i-heroicons-bell',
+  icon: 'i-lucide-bell',
   content: 'Finally, this is the content for Tab3',
   slot: 'custom' as const
 }]

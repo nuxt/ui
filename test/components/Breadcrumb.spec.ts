@@ -11,12 +11,12 @@ describe('Breadcrumb', () => {
     to: '/'
   }, {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent',
+    icon: 'i-lucide-box',
     disabled: true
   }, {
     label: 'Breadcrumb',
     to: '/components/breadcrumb',
-    icon: 'i-heroicons-link',
+    icon: 'i-lucide-link',
     slot: 'custom'
   }]
 
@@ -25,8 +25,9 @@ describe('Breadcrumb', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with as', { props: { ...props, as: 'div' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
-    ['with separatorIcon', { props: { ...props, separatorIcon: 'i-heroicons-minus' } }],
+    ['with separatorIcon', { props: { ...props, separatorIcon: 'i-lucide-minus' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
     // Slots

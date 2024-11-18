@@ -4,6 +4,7 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'reka-
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
@@ -67,6 +68,8 @@ export interface ModalSlots {
   body(props?: {}): any
   footer(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'ModalExample' })
 </script>
 
 <script setup lang="ts">
@@ -74,6 +77,7 @@ import { computed, toRef } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<ModalProps>(), {
@@ -92,14 +96,22 @@ const contentEvents = computed(() => {
   if (props.preventClose) {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
-      interactOutside: (e: Event) => e.preventDefault()
+      interactOutside: (e: Event) => e.preventDefault(),
+      escapeKeyDown: (e: Event) => e.preventDefault()
     }
   }
 
-  return {}
+  return {
+    interactOutside: (e: Event) => {
+      if (e.target instanceof Element && e.target.closest('[data-sonner-toaster]')) {
+        return e.preventDefault()
+      }
+    }
+  }
 })
 
 const appConfig = useAppConfig()
+const { t } = useLocale()
 
 const ui = computed(() => modal({
   transition: props.transition,
@@ -140,7 +152,7 @@ const ui = computed(() => modal({
                     size="md"
                     color="neutral"
                     variant="ghost"
-                    aria-label="Close"
+                    :aria-label="t('modal.close')"
                     v-bind="typeof close === 'object' ? close : undefined"
                     :class="ui.close({ class: props.ui?.close })"
                   />

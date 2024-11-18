@@ -163,7 +163,7 @@ Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 
 ### Delete Icon
 
-With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/components/icon) in the badges. Defaults to `i-heroicons-x-mark-20-solid`.
+With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/components/icon) in the badges. Defaults to `i-lucide-x`.
 
 ::component-code
 ---
@@ -180,7 +180,7 @@ props:
     - Backlog
     - Todo
   multiple: true
-  deleteIcon: 'i-heroicons-trash'
+  deleteIcon: 'i-lucide-trash'
   items:
     - Backlog
     - Todo
@@ -214,6 +214,42 @@ props:
 ---
 ::
 
+### Create Item
+
+Use the `create-item` prop to allow user input.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+external:
+  - items
+  - modelValue
+items:
+  createItem:
+    - true
+    - 'always'
+props:
+  modelValue: 'Backlog'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  createItem: true
+---
+::
+
+::note
+The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
+::
+
+::tip{to="#emits"}
+Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
+::
+
 ### Content
 
 Use the `content` prop to control how the InputMenu content is rendered, like its `align` or `side` for example.
@@ -243,6 +279,31 @@ props:
     align: center
     side: bottom
     sideOffset: 8
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+### Arrow
+
+Use the `arrow` prop to display an arrow on the InputMenu.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - arrow
+external:
+  - items
+  - modelValue
+props:
+  modelValue: Backlog
+  arrow: true
   items:
     - Backlog
     - Todo
@@ -345,7 +406,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  icon: 'i-heroicons-magnifying-glass'
+  icon: 'i-lucide-search'
   size: md
   items:
     - Backlog
@@ -357,7 +418,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-lucide-chevron-down`.
 
 ::component-code
 ---
@@ -370,7 +431,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
+  trailingIcon: 'i-lucide-arrow-down'
   size: md
   items:
     - Backlog
@@ -386,7 +447,7 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.che
 
 ### Selected Icon
 
-Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-heroicons-check-20-solid`.
+Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
 ::component-code
 ---
@@ -399,7 +460,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  selectedIcon: 'i-heroicons-fire'
+  selectedIcon: 'i-lucide-flame'
   size: md
   items:
     - Backlog
@@ -466,7 +527,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
 
 ::component-code
 ---
@@ -480,7 +541,7 @@ external:
 props:
   modelValue: 'Backlog'
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   items:
     - Backlog
     - Todo
@@ -669,12 +730,23 @@ This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebo
 
 ### With custom search
 
-Use the `filter` prop with an array of fields to filter on.
+Use the `filter` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
 ::component-example
 ---
 collapse: true
 name: 'input-menu-filter-fields-example'
+---
+::
+
+### As a country picker
+
+This example demonstrates using the InputMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
+
+::component-example
+---
+collapse: true
+name: 'input-menu-countries-example'
 ---
 ::
 

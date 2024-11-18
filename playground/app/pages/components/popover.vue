@@ -47,7 +47,7 @@ function send() {
         <template #content>
           <div class="flex justify-center gap-2 p-4 w-48">
             <UButton label="Close" color="neutral" @click="open = false" />
-            <UButton label="Send" color="neutral" trailing-icon="i-heroicons-paper-airplane" :loading="loading" @click="send" />
+            <UButton label="Send" color="neutral" trailing-icon="i-lucide-send-horizontal" :loading="loading" @click="send" />
           </div>
         </template>
       </UPopover>

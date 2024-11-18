@@ -4,6 +4,7 @@ import type { SwitchRootProps, SwitchRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
@@ -15,7 +16,7 @@ type SwitchVariants = VariantProps<typeof switchTv>
 export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue' | 'modelValue'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
   color?: SwitchVariants['color']
@@ -45,6 +46,8 @@ export interface SwitchSlots {
   label(props: { label?: string }): any
   description(props: { description?: string }): any
 }
+
+extendDevtoolsMeta({ defaultProps: { label: 'Switch me!' } })
 </script>
 
 <script setup lang="ts">
@@ -53,6 +56,7 @@ import { SwitchRoot, SwitchThumb, useForwardProps, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import UIcon from './Icon.vue'
 
 const props = defineProps<SwitchProps>()
 const slots = defineSlots<SwitchSlots>()

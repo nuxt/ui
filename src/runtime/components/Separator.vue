@@ -15,7 +15,7 @@ type SeparatorVariants = VariantProps<typeof separator>
 export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
   /** Display a label in the middle. */

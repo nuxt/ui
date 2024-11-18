@@ -3,6 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/chip'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { chip: Partial<typeof theme> } }
 
@@ -37,12 +38,16 @@ export interface ChipSlots {
   default(props?: {}): any
   content(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'ChipExample' })
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Primitive } from 'reka-ui'
+import { Primitive, Slot } from 'reka-ui'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ChipProps>(), {
   inset: false,
@@ -65,7 +70,9 @@ const ui = computed(() => chip({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <slot />
+    <Slot v-bind="$attrs">
+      <slot />
+    </Slot>
 
     <span v-if="show" :class="ui.base({ class: props.ui?.base })">
       <slot name="content">

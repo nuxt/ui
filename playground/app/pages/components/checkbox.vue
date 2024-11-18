@@ -12,16 +12,16 @@ const checked = ref(true)
       <UCheckbox v-model="checked" label="Primary" />
       <UCheckbox label="Neutral" color="neutral" :default-value="true" />
       <UCheckbox label="Error" color="error" :model-value="true" />
-      <UCheckbox label="Icon" icon="i-heroicons-heart-solid" :model-value="true" />
+      <UCheckbox label="Icon" icon="i-lucide-heart" :model-value="true" />
       <UCheckbox label="Default value" :default-value="true" />
       <UCheckbox label="Indeterminate" default-value="indeterminate" />
       <UCheckbox label="Required" required />
       <UCheckbox label="Disabled" disabled />
     </div>
-    <div class="flex items-center gap-4 mr-[-11px]">
+    <div class="flex items-center gap-4 me-[-11px]">
       <UCheckbox v-for="size in sizes" :key="size" label="Check me" :size="size" />
     </div>
-    <div class="flex items-center gap-4 mr-[-96px]">
+    <div class="flex items-center gap-4 me-[-96px]">
       <UCheckbox v-for="size in sizes" :key="size" label="Check me" description="This is a description" :size="size" />
     </div>
   </div>

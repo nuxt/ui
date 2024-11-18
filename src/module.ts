@@ -1,8 +1,11 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
-import { addTemplates } from './templates'
-import icons from './theme/icons'
-import { pick } from './runtime/utils'
+import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, extendPages, hasNuxtModule } from '@nuxt/kit'
+import { addTemplates, buildTemplates } from './templates'
+import { addCustomTab, startSubprocess } from '@nuxt/devtools-kit'
+import sirv from 'sirv'
+import { getPort } from 'get-port-please'
+import { devtoolsMetaPlugin } from './devtools/meta'
+import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 
 export type * from './runtime/types'
 
@@ -47,6 +50,17 @@ export interface ModuleOptions {
      */
     transitions?: boolean
   }
+
+  /**
+   * Configuration for the Nuxt UI devtools.
+   */
+  devtools?: {
+    /**
+     * Enable or disable Nuxt UI devtools.
+     * @defaultValue `true`
+     */
+    enabled?: boolean
+  }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -58,37 +72,19 @@ export default defineNuxtModule<ModuleOptions>({
     },
     docs: 'https://ui3.nuxt.dev/getting-started/installation'
   },
-  defaults: {
-    prefix: 'U',
-    fonts: true,
-    colorMode: true,
-    theme: {
-      colors: undefined,
-      transitions: true
-    }
-  },
+  defaults: defaultOptions,
+
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
     options.theme = options.theme || {}
-    options.theme.colors = options.theme.colors?.length ? [...new Set(['primary', ...options.theme.colors])] : ['primary', 'secondary', 'success', 'info', 'warning', 'error']
+    options.theme.colors = resolveColors(options.theme.colors)
 
     nuxt.options.ui = options
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, {
-      colors: pick({
-        primary: 'green',
-        secondary: 'blue',
-        success: 'green',
-        info: 'blue',
-        warning: 'yellow',
-        error: 'red',
-        neutral: 'slate'
-      }, [...(options.theme?.colors || []), 'neutral' as any]),
-      icons
-    })
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultUiConfig(options.theme.colors))
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
@@ -129,6 +125,80 @@ export default defineNuxtModule<ModuleOptions>({
 
     addImportsDir(resolve('./runtime/composables'))
 
-    addTemplates(options, nuxt)
+    addTemplates(options, nuxt, resolve)
+
+    if (nuxt.options.dev && nuxt.options.devtools.enabled && options.devtools?.enabled) {
+      const templates = buildTemplates(options)
+      nuxt.options.vite = defu(nuxt.options?.vite, { plugins: [devtoolsMetaPlugin({ resolve, templates, options })] })
+
+      // Runs UI devtools in a subprocess for local development
+      if (process.env.NUXT_UI_DEVTOOLS_LOCAL) {
+        const PORT = await getPort({ port: 42124 })
+        nuxt.hook('app:resolve', () => {
+          startSubprocess(
+            {
+              command: 'pnpm',
+              args: ['nuxi', 'dev'],
+              cwd: './devtools',
+              stdio: 'pipe',
+              env: {
+                PORT: PORT.toString()
+              }
+            },
+            {
+              id: 'ui:devtools:local',
+              name: 'Nuxt UI DevTools Local',
+              icon: 'logos-nuxt-icon'
+            },
+            nuxt
+          )
+        })
+
+        nuxt.hook('vite:extendConfig', (config) => {
+          config.server ||= {}
+          config.server.proxy ||= {}
+          config.server.proxy['/__nuxt_ui__/devtools'] = {
+            target: `http://localhost:${PORT}`,
+            changeOrigin: true,
+            followRedirects: true,
+            ws: true,
+            rewriteWsOrigin: true
+          }
+        })
+      } else {
+        nuxt.hook('vite:serverCreated', async (server) => {
+          server.middlewares.use('/__nuxt_ui__/devtools', sirv(resolve('../dist/client/devtools'), {
+            single: true,
+            dev: true
+          }))
+        })
+      }
+
+      nuxt.options.routeRules = defu(nuxt.options.routeRules, { '/__nuxt_ui__/**': { ssr: false } })
+      extendPages((pages) => {
+        if (pages.length) {
+          pages.unshift({
+            name: 'ui-devtools',
+            path: '/__nuxt_ui__/components/:slug',
+            file: resolve('./devtools/runtime/DevtoolsRenderer.vue'),
+            meta: {
+              // https://github.com/nuxt/nuxt/pull/29366
+              // isolate: true
+              layout: false
+            }
+          })
+        }
+      })
+
+      addCustomTab({
+        name: 'nuxt-ui',
+        title: 'Nuxt UI',
+        icon: '/__nuxt_ui__/devtools/favicon.svg',
+        view: {
+          type: 'iframe',
+          src: '/__nuxt_ui__/devtools'
+        }
+      })
+    }
   }
 })

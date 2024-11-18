@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import type { Reactive } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import type { FormProps } from '../../src/runtime/components/Form.vue'
 import {
@@ -11,16 +12,19 @@ import {
   USelect,
   USelectMenu,
   UInputMenu,
+  UInputNumber,
   USwitch,
-  USlider
+  USlider,
+  UPinInput
 } from '#components'
 
 export async function renderForm(options: {
+  state?: Reactive<any>
   props: Partial<FormProps<any>>
   slotVars?: object
   slotTemplate: string
 }) {
-  const state = reactive({})
+  const state = options.state ?? reactive({})
 
   return await mountSuspended(UForm, {
     props: {
@@ -44,8 +48,10 @@ export async function renderForm(options: {
           USelect,
           USelectMenu,
           UInputMenu,
+          UInputNumber,
           USwitch,
-          USlider
+          USlider,
+          UPinInput
         },
         template: options.slotTemplate
       }

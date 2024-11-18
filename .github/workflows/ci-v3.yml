@@ -43,21 +43,26 @@ jobs:
       - name: Prepare
         run: pnpm run dev:prepare
 
+      - name: Devtools prepare
+        run: pnpm run devtools:prepare
+
       - name: Lint
         run: pnpm run lint
 
       - name: Typecheck
         run: pnpm run typecheck
 
-      - name: Docs typecheck
-        run: pnpm run docs:typecheck
-        continue-on-error: true
-
       - name: Test
         run: pnpm run test
 
+      - name: Test (vue)
+        run: pnpm run test:vue
+
       - name: Build
         run: pnpm run build
+
+      - name: Build vue fixture
+        run: pnpm run test:vue:build
 
       - name: Publish
         run: pnpx pkg-pr-new publish --compact --no-template --pnpm

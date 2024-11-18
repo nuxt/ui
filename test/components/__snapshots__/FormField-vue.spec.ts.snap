@@ -1,0 +1,233 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FormField > renders with class correctly 1`] = `
+"<div class="text-sm relative">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with default slot correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">Default slot
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with description slot correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <p class="text-[var(--ui-text-muted)]">Description slot</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with error correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <p class="mt-2 text-[var(--ui-error)]">Username is already taken</p>
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with error slot correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <p class="mt-2 text-[var(--ui-error)]">Error slot</p>
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with help correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <p class="mt-2 text-[var(--ui-text-muted)]">Username must be unique</p>
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with help slot correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <p class="mt-2 text-[var(--ui-text-muted)]">Help slot</p>
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with hint correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with hint slot correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with label and description correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="v-0" class="block font-medium text-[var(--ui-text)]">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with label slot correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="v-0" class="block font-medium text-[var(--ui-text)]">Label slot</label>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with required correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="v-0" class="block font-medium text-[var(--ui-text)] after:content-['*'] after:ms-0.5 after:text-[var(--ui-error)]">Username</label>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with size lg correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="v-0" class="block font-medium text-[var(--ui-text)]">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with size md correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="v-0" class="block font-medium text-[var(--ui-text)]">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with size sm correctly 1`] = `
+"<div class="text-xs">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="v-0" class="block font-medium text-[var(--ui-text)]">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with size xl correctly 1`] = `
+"<div class="text-base">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="v-0" class="block font-medium text-[var(--ui-text)]">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with size xs correctly 1`] = `
+"<div class="text-xs">
+  <div class="">
+    <div class="flex content-center items-center justify-between"><label for="v-0" class="block font-medium text-[var(--ui-text)]">Username</label>
+      <!--v-if-->
+    </div>
+    <p class="text-[var(--ui-text-muted)]">Enter your username</p>
+  </div>
+  <div class="mt-1 relative">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with ui correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <!--v-if-->
+  </div>
+</div>"
+`;

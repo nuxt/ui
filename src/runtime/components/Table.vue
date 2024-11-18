@@ -19,7 +19,9 @@ import type {
   ExpandedOptions,
   SortingOptions,
   RowSelectionOptions,
-  Updater
+  Updater,
+  CellContext,
+  HeaderContext
 } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
@@ -39,6 +41,7 @@ export interface TableData {
 export interface TableProps<T> {
   data?: T[]
   columns?: TableColumn<T>[]
+  caption?: string
   /**
    * Whether the table should have a sticky header.
    * @defaultValue false
@@ -87,10 +90,14 @@ export interface TableProps<T> {
   ui?: Partial<typeof table.slots>
 }
 
-export interface TableSlots<T> {
-  expanded(props: { row: Row<T> }): any
-  empty(props?: {}): any
-}
+type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
+type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
+
+export type TableSlots<T> = {
+  expanded: (props: { row: Row<T> }) => any
+  empty: (props?: {}) => any
+  caption: (props?: {}) => any
+} & DynamicHeaderSlots<T> & DynamicCellSlots<T>
 
 </script>
 
@@ -105,10 +112,12 @@ import {
   useVueTable
 } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
+import { useLocale } from '../composables/useLocale'
 
 const props = defineProps<TableProps<T>>()
 defineSlots<TableSlots<T>>()
 
+const { t } = useLocale()
 const data = computed(() => props.data ?? [])
 const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 
@@ -185,6 +194,12 @@ defineExpose({
 <template>
   <div :class="ui.root({ class: [props.class, props.ui?.root] })">
     <table :class="ui.base({ class: [props.ui?.base] })">
+      <caption v-if="caption" :class="ui.caption({ class: [props.ui?.caption] })">
+        <slot name="caption">
+          {{ caption }}
+        </slot>
+      </caption>
+
       <thead :class="ui.thead({ class: [props.ui?.thead] })">
         <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
@@ -193,7 +208,9 @@ defineExpose({
             :data-pinned="header.column.getIsPinned()"
             :class="ui.th({ class: [props.ui?.th], pinned: !!header.column.getIsPinned() })"
           >
-            <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
+            <slot :name="`${header.id}-header`" v-bind="header.getContext()">
+              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
+            </slot>
           </th>
         </tr>
       </thead>
@@ -208,7 +225,9 @@ defineExpose({
                 :data-pinned="cell.column.getIsPinned()"
                 :class="ui.td({ class: [props.ui?.td], pinned: !!cell.column.getIsPinned() })"
               >
-                <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
+                  <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                </slot>
               </td>
             </tr>
             <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
@@ -222,7 +241,7 @@ defineExpose({
         <tr v-else :class="ui.tr({ class: [props.ui?.tr] })">
           <td :colspan="columns?.length" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
-              No results
+              {{ t('table.noData') }}
             </slot>
           </td>
         </tr>

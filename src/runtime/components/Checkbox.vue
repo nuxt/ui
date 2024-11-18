@@ -4,6 +4,7 @@ import type { CheckboxRootProps, CheckboxRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/checkbox'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { checkbox: Partial<typeof theme> } }
 
@@ -38,6 +39,8 @@ export interface CheckboxSlots {
   label(props: { label?: string }): any
   description(props: { description?: string }): any
 }
+
+extendDevtoolsMeta({ defaultProps: { label: 'Check me!' } })
 </script>
 
 <script setup lang="ts">
@@ -46,6 +49,7 @@ import { CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import UIcon from './Icon.vue'
 
 const props = defineProps<CheckboxProps>()
 const slots = defineSlots<CheckboxSlots>()

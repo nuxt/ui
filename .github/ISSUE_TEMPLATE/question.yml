@@ -12,7 +12,7 @@ body:
       label: For what version of Nuxt UI are you asking this question?
       options:
         - v2.x
-        - v3-alpha
+        - v3.0.0-alpha.x
     validations:
       required: true
   - type: textarea

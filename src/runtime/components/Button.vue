@@ -5,9 +5,9 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/button'
 import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
-import { formLoadingInjectionKey } from '../composables/useFormField'
 
 const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
@@ -31,6 +31,9 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   ui?: PartialString<typeof button.slots>
 }
 
+// Injects props to use as default in the devtools playground.
+extendDevtoolsMeta<ButtonProps>({ defaultProps: { label: 'Click me!' } })
+
 export interface ButtonSlots {
   leading(props?: {}): any
   default(props?: {}): any
@@ -43,9 +46,11 @@ import { type Ref, computed, ref, inject } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useButtonGroup } from '../composables/useButtonGroup'
+import { formLoadingInjectionKey } from '../composables/useFormField'
 import { omit } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 
 const props = defineProps<ButtonProps>()

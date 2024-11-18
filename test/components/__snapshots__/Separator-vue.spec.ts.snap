@@ -1,0 +1,118 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Separator > renders with as correctly 1`] = `"<span data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row"><div class="border-[var(--ui-border)] w-full border-solid border-t"></div><!--v-if--></span>"`;
+
+exports[`Separator > renders with avatar correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+  <div class="font-medium text-[var(--ui-text)] flex mx-3 whitespace-nowrap"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span></div>
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+</div>"
+`;
+
+exports[`Separator > renders with class correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row-reverse">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with color primary correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-primary)] w-full border-solid border-t"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with decorative correctly 1`] = `
+"<div data-orientation="horizontal" role="none" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with icon correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+  <div class="font-medium text-[var(--ui-text)] flex mx-3 whitespace-nowrap"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+</div>"
+`;
+
+exports[`Separator > renders with label correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+  <div class="font-medium text-[var(--ui-text)] flex mx-3 whitespace-nowrap"><span class="text-sm">+1</span></div>
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+</div>"
+`;
+
+exports[`Separator > renders with orientation vertical correctly 1`] = `
+"<div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex items-center align-center text-center h-full flex-col">
+  <div class="border-[var(--ui-border)] h-full border-solid border-s"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with size lg correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t-[4px]"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with size md correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t-[3px]"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with size sm correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t-[2px]"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with size xl correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t-[5px]"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with size xs correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with type dashed correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-dashed border-t"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with type dotted correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-dotted border-t"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with type solid correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Separator > renders with ui correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+  <div class="border-[var(--ui-border)] w-full border-solid border-t"></div>
+  <!--v-if-->
+</div>"
+`;

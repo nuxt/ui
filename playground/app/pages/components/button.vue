@@ -47,13 +47,13 @@ function onClick() {
       </UButton>
     </div>
     <div class="flex items-center gap-2">
-      <UButton v-for="variant in variants" :key="variant" icon="i-heroicons-rocket-launch" :label="upperFirst(variant)" :variant="variant" />
+      <UButton v-for="variant in variants" :key="variant" icon="i-lucide-rocket" :label="upperFirst(variant)" :variant="variant" />
     </div>
     <div class="flex items-center gap-2">
       <UButton
         v-for="variant in variants"
         :key="variant"
-        icon="i-heroicons-rocket-launch"
+        icon="i-lucide-rocket"
         :label="upperFirst(variant)"
         :variant="variant"
         color="neutral"
@@ -69,26 +69,26 @@ function onClick() {
         :variant="variant"
       />
     </div>
-    <div class="flex items-center gap-2 ml-[-129px]">
+    <div class="flex items-center gap-2 ms-[-129px]">
       <UButton v-for="size in sizes" :key="size" label="Button" :size="size" />
     </div>
-    <div class="flex items-center gap-2 ml-[-171px]">
-      <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" label="Button" :size="size" />
+    <div class="flex items-center gap-2 ms-[-171px]">
+      <UButton v-for="size in sizes" :key="size" icon="i-lucide-rocket" label="Button" :size="size" />
     </div>
-    <div class="flex items-center gap-2 ml-[-171px]">
+    <div class="flex items-center gap-2 ms-[-171px]">
       <UButton v-for="size in sizes" :key="size" :avatar="{ src: 'https://github.com/benjamincanac.png' }" label="Button" :size="size" />
     </div>
-    <div class="flex items-center gap-2 ml-[-159px]">
+    <div class="flex items-center gap-2 ms-[-159px]">
       <UButton
         v-for="size in sizes"
         :key="size"
-        icon="i-heroicons-rocket-launch"
+        icon="i-lucide-rocket"
         label="Square"
         square
         :size="size"
       />
     </div>
-    <div class="flex items-center gap-2 ml-[-159px]">
+    <div class="flex items-center gap-2 ms-[-159px]">
       <UButton
         v-for="size in sizes"
         :key="size"
@@ -98,10 +98,10 @@ function onClick() {
         :size="size"
       />
     </div>
-    <div class="flex items-center gap-2 ml-[-68px]">
-      <UButton v-for="size in sizes" :key="size" icon="i-heroicons-rocket-launch" :size="size" />
+    <div class="flex items-center gap-2 ms-[-68px]">
+      <UButton v-for="size in sizes" :key="size" icon="i-lucide-rocket" :size="size" />
     </div>
-    <div class="flex items-center gap-2 ml-[-68px]">
+    <div class="flex items-center gap-2 ms-[-68px]">
       <UButton
         v-for="size in sizes"
         :key="size"
@@ -112,10 +112,10 @@ function onClick() {
       />
     </div>
     <div class="flex items-center gap-2">
-      <UButton icon="i-heroicons-rocket-launch" trailing-icon="i-heroicons-chevron-down-20-solid" label="Block" block />
+      <UButton icon="i-lucide-rocket" trailing-icon="i-lucide-chevron-down" label="Block" block />
     </div>
     <div class="flex items-center gap-2">
-      <UButton icon="i-heroicons-cloud-arrow-down" label="Button" class="group" :ui="{ leadingIcon: 'group-hover:animate-pulse' }" />
+      <UButton icon="i-lucide-cloud-download" label="Button" class="group" :ui="{ leadingIcon: 'group-hover:animate-pulse' }" />
     </div>
   </div>
 </template>

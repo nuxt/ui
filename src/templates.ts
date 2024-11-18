@@ -1,13 +1,23 @@
 import { fileURLToPath } from 'node:url'
 import { kebabCase } from 'scule'
 import { addTemplate, addTypeTemplate } from '@nuxt/kit'
-import type { Nuxt } from '@nuxt/schema'
+import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
+import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 
-export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
+export function buildTemplates(options: ModuleOptions) {
+  return Object.entries(theme).reduce((acc, [key, component]) => {
+    acc[key] = typeof component === 'function' ? component(options as Required<ModuleOptions>) : component
+    return acc
+  }, {} as Record<string, any>)
+}
+
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>) {
+  const templates: NuxtTemplate[] = []
+
   for (const component in theme) {
-    addTemplate({
+    templates.push({
       filename: `ui/${kebabCase(component)}.ts`,
       write: true,
       getContents: async () => {
@@ -41,20 +51,20 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt) {
     })
   }
 
-  addTemplate({
+  templates.push({
     filename: 'ui/index.ts',
     write: true,
     getContents: () => Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
   })
 
   // FIXME: `typeof colors[number]` should include all colors from the theme
-  addTypeTemplate({
+  templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
 import type { DeepPartial } from '#ui/types/utils'
 import colors from 'tailwindcss/colors'
 
-const icons = ${JSON.stringify(nuxt.options.appConfig.ui.icons)};
+const icons = ${JSON.stringify(uiConfig.icons)};
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor>
@@ -65,7 +75,7 @@ type AppConfigUI = {
     neutral?: NeutralColor
   }
   icons?: Partial<typeof icons>
-} & DeepPartial<typeof ui, string>
+} & DeepPartial<typeof ui>
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {
@@ -75,5 +85,32 @@ declare module '@nuxt/schema' {
 
 export {}
 `
+  })
+
+  templates.push({
+    filename: 'ui-image-component.ts',
+    write: true,
+    getContents: ({ app }) => {
+      const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !c.filePath.includes('nuxt/dist/app'))
+
+      return image ? `export { default } from "${image.filePath}"` : 'export default "img"'
+    }
+  })
+
+  return templates
+}
+
+export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolver['resolve']) {
+  const templates = getTemplates(options, nuxt.options.appConfig.ui)
+  for (const template of templates) {
+    if (template.filename!.endsWith('.d.ts')) {
+      addTypeTemplate(template as NuxtTypeTemplate)
+    } else {
+      addTemplate(template)
+    }
+  }
+
+  nuxt.hook('prepare:types', ({ references }) => {
+    references.push({ path: resolve('./runtime/types/app.config.d.ts') })
   })
 }

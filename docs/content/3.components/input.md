@@ -25,15 +25,15 @@ props:
 
 Use the `type` prop to change the input type. Defaults to `text`.
 
-Some types have been implemented in their own components such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), etc. and others have been styled like `file` for example.
+Some types have been implemented in their own components such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), [InputNumber](/components/input-number) etc. and others have been styled like `file` for example.
 
 ::component-code
 ---
 items:
   type:
     - text
-    - password
     - number
+    - password
     - search
     - file
 props:
@@ -115,7 +115,7 @@ prettier: true
 ignore:
   - placeholder
 props:
-  icon: 'i-heroicons-magnifying-glass'
+  icon: 'i-lucide-search'
   size: md
   variant: outline
   placeholder: 'Search...'
@@ -130,7 +130,7 @@ prettier: true
 ignore:
   - placeholder
 props:
-  trailingIcon: i-heroicons-at-symbol
+  trailingIcon: i-lucide-at-sign
   placeholder: 'Enter your email'
   size: md
 ---
@@ -171,7 +171,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
 
 ::component-code
 ---
@@ -179,7 +179,7 @@ ignore:
   - placeholder
 props:
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   placeholder: 'Search...'
 ---
 ::
@@ -214,6 +214,16 @@ name: 'input-clear-button-example'
 ---
 ::
 
+### With copy button
+
+You can put a [Button](/components/button) inside the `#trailing` slot to copy the value to the clipboard.
+
+::component-example
+---
+name: 'input-copy-button-example'
+---
+::
+
 ### With password toggle
 
 You can put a [Button](/components/button) inside the `#trailing` slot to toggle the password visibility.
@@ -243,6 +253,20 @@ You can use the `#trailing` slot to add a character limit to the Input.
 ---
 name: 'input-character-limit-example'
 ---
+::
+
+### With keyboard shortcut
+
+You can use the [Kbd](/components/kbd) component inside the `#trailing` slot to add a keyboard shortcut to the Input.
+
+::component-example
+---
+name: 'input-kbd-example'
+---
+::
+
+::note{to="/composables/define-shortcuts"}
+This example uses the `defineShortcuts` composable to focus the Input when the :kbd{value="/"} key is pressed.
 ::
 
 ### With floating label
