@@ -2,7 +2,8 @@ import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale({
   name: 'فارسی',
-  code: 'fa-ir',
+  code: 'fa-IR',
+  dir: 'rtl',
   messages: {
     inputMenu: {
       noMatch: 'داده‌ای یافت نشد',
