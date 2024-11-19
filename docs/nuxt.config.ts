@@ -17,7 +17,12 @@ export default defineNuxtConfig({
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
-    'nuxt-og-image'
+    'nuxt-og-image',
+    (_, nuxt) => {
+      nuxt.hook('components:dirs', (dirs) => {
+        dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
+      })
+    }
   ],
 
   app: {
@@ -36,6 +41,15 @@ export default defineNuxtConfig({
       markdown: {
         highlight: {
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+        },
+        remarkPlugins: {
+          'remark-mdc': {
+            options: {
+              experimental: {
+                autoUnwrap: false
+              }
+            }
+          }
         }
       }
     }
