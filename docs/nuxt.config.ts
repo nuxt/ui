@@ -4,9 +4,9 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  // extends: [
-  //   process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
-  // ],
+  extends: [
+    process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#v3', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
+  ],
 
   modules: [
     '../src/module',
@@ -76,8 +76,8 @@ export default defineNuxtConfig({
         // '/api/pulls.json'
       ],
       crawlLinks: true,
-      autoSubfolderIndex: false
-      // ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
+      autoSubfolderIndex: false,
+      ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     },
     cloudflare: {
       pages: {
