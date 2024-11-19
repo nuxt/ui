@@ -7,7 +7,7 @@ export default defineLocale({
     inputMenu: {
       noMatch: 'Nichts gefunden',
       noData: 'Keine Daten',
-      create: 'Erstellen "{label}"'
+      create: '"{label}" erstellen'
     },
     calendar: {
       prevYear: 'Vorheriges Jahr',
@@ -27,7 +27,7 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Nichts gefunden',
       noData: 'Keine Daten',
-      create: 'Erstellen "{label}"'
+      create: '"{label}" erstellen'
     },
     toast: {
       close: 'Schließen'
