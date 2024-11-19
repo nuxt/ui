@@ -70,12 +70,12 @@ const ui = computed(() => tooltip({
 
 <template>
   <TooltipRoot v-slot="{ open }" v-bind="rootProps">
-    <TooltipTrigger v-if="!!slots.default" as-child>
+    <TooltipTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot :open="open" />
     </TooltipTrigger>
 
     <TooltipPortal :disabled="!portal">
-      <TooltipContent v-bind="contentProps" :class="ui.content({ class: [props.class, props.ui?.content] })">
+      <TooltipContent v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
         <slot name="content">
           <span v-if="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
 

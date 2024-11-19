@@ -165,12 +165,12 @@ const ui = computed(() => dropdownMenu({
 
 <template>
   <DropdownMenuRoot v-slot="{ open }" v-bind="rootProps">
-    <DropdownMenuTrigger v-if="!!slots.default" as-child :disabled="disabled">
+    <DropdownMenuTrigger v-if="!!slots.default" as-child :class="props.class" :disabled="disabled">
       <slot :open="open" />
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
-      :class="ui.content({ class: [props.class, props.ui?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"

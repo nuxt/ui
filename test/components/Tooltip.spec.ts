@@ -27,6 +27,8 @@ describe('Tooltip', () => {
     ['with text', { props }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ['with kbds', { props: { ...props, kbds: ['meta', 'K'] } }],
+    ['with class', { props: { ...props, class: 'text-sm' } }],
+    ['with ui', { props: { ...props, ui: { content: 'text-sm' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]
