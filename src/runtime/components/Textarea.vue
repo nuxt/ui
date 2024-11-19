@@ -157,7 +157,7 @@ function autoResize() {
   }
 }
 
-watch(() => modelValue, () => {
+watch(modelValue, () => {
   nextTick(autoResize)
 })
 
