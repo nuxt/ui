@@ -13,7 +13,7 @@ const switchTv = tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })
 
 type SwitchVariants = VariantProps<typeof switchTv>
 
-export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue' | 'modelValue'> {
+export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -62,8 +62,10 @@ const props = defineProps<SwitchProps>()
 const slots = defineSlots<SwitchSlots>()
 const emits = defineEmits<SwitchEmits>()
 
+const modelValue = defineModel<boolean>({ default: undefined })
+
 const appConfig = useAppConfig()
-const rootProps = useForwardProps(reactivePick(props, 'as', 'required', 'value', 'defaultValue', 'modelValue'))
+const rootProps = useForwardProps(reactivePick(props, 'as', 'required', 'value', 'defaultValue'))
 
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<SwitchProps>(props)
 const id = _id.value ?? useId()
@@ -91,6 +93,7 @@ function onUpdate(value: any) {
       <SwitchRoot
         :id="id"
         v-bind="rootProps"
+        v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"
         :class="ui.base({ class: props.ui?.base })"

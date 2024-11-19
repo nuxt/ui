@@ -12,7 +12,7 @@ const checkbox = tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || {}) })
 
 type CheckboxVariants = VariantProps<typeof checkbox>
 
-export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue' | 'modelValue'> {
+export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'> {
   label?: string
   description?: string
   color?: CheckboxVariants['color']
@@ -55,7 +55,9 @@ const props = defineProps<CheckboxProps>()
 const slots = defineSlots<CheckboxSlots>()
 const emits = defineEmits<CheckboxEmits>()
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue'))
+const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined })
+
+const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
 const appConfig = useAppConfig()
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<CheckboxProps>(props)
@@ -66,7 +68,7 @@ const ui = computed(() => checkbox({
   color: color.value,
   required: props.required,
   disabled: disabled.value,
-  checked: !!(props.modelValue || props.defaultValue)
+  checked: !!(modelValue.value || props.defaultValue)
 }))
 
 function onUpdate(value: any) {
@@ -78,22 +80,25 @@ function onUpdate(value: any) {
 }
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <div :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
         v-bind="rootProps"
-        v-slot="{ modelValue }"
+        v-model="modelValue"
         :name="name"
         :disabled="disabled"
         :class="ui.base({ class: props.ui?.base })"
         @update:model-value="onUpdate"
       >
-        <CheckboxIndicator as-child>
-          <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon({ class: props.ui?.icon })" />
-          <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon({ class: props.ui?.icon })" />
-        </CheckboxIndicator>
+        <template #default="{ modelValue }">
+          <CheckboxIndicator as-child>
+            <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon({ class: props.ui?.icon })" />
+            <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon({ class: props.ui?.icon })" />
+          </CheckboxIndicator>
+        </template>
       </CheckboxRoot>
     </div>
 
