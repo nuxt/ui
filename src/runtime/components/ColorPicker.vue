@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/color-picker'
 import type { PopoverProps } from './Popover.vue'
+import type { HSBColor } from '../types/color'
 
 const appConfig = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
 
@@ -42,7 +43,7 @@ export interface ColorPickerSlots {
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Primitive } from 'radix-vue'
-import { createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate, useDraggable } from '@vueuse/core'
 import UPopover from './Popover.vue'
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {
@@ -56,108 +57,38 @@ const backgroundThumbRef = ref<HTMLDivElement | null>(null)
 const trackRef = ref<HTMLDivElement | null>(null)
 const trackThumbRef = ref<HTMLDivElement | null>(null)
 
-const colorDragging = ref<boolean>(false)
-const trackDragging = ref<boolean>(false)
+const selectorColor = ref<string>('#f00000') // circle main
+const backgroundColor = ref<string>('#ffffff') // bg gradient
+const trackColor = ref<string>('#f00000') // circle left
+const pickedColor = ref<string>('#f00000') // model
 
-const selectorColor = ref<string>('#f00000')
-const backgroundColor = ref<string>('#ffffff')
-const trackColor = ref<string>('#f00000')
-const pickedColor = ref<string>('#f00000')
+const { x: backgroundThumbX, y: backgroundThumbY } = useDraggable(backgroundThumbRef, {
+  containerElement: selectorRef,
+  handle: selectorRef
+})
 
-function pickSelectorColor(e: Event) {
-  const rect = selectorRef.value?.getBoundingClientRect()
-  if (!rect) {
-    return
+const { y: trackThumbY } = useDraggable(trackThumbRef, {
+  axis: 'y',
+  containerElement: trackRef,
+  handle: trackRef,
+  onStart: (_, event) => {
+    if (event.target !== trackThumbRef.value) {
+      trackThumbY.value = event.offsetY - 8
+      return false
+    }
   }
+})
 
-  const top = rect.top + (document.documentElement?.scrollTop || document.body.scrollTop || 0)
-  const left = rect.left + (document.documentElement?.scrollLeft || document.body.scrollLeft || 0)
-  const saturation = Math.floor((100 * Math.max(0, Math.min(150, (e.pageX || e.changedTouches[0].pageX) - left))) / 150)
-  const brightness = Math.floor((100 * (150 - Math.max(0, Math.min(150, (e.pageY || e.changedTouches[0].pageY) - top)))) / 150)
+const backgroundThumbStyle = computed(() => ({
+  backgroundColor: backgroundColor.value,
+  top: `${backgroundThumbY.value}px`,
+  left: `${backgroundThumbX.value}px`
+}))
 
-  const _hsb = {
-    h: 0,
-    s: saturation,
-    b: brightness
-  }
-
-  console.log(_hsb)
-}
-
-// pickHue
-function pickTrackColor(e: Event) {
-  const rect = trackRef.value?.getBoundingClientRect()
-  if (!rect) {
-    return
-  }
-
-  const top = rect.top + (document.documentElement?.scrollTop || document.body.scrollTop || 0)
-  const hue = Math.floor((360 * (150 - Math.max(0, Math.min(150, (e.pageY || e.changedTouches[0].pageY) - top)))) / 150)
-  const _hsb = {
-    h: hue,
-    s: 100,
-    b: 100
-  }
-
-  console.log(_hsb)
-}
-
-function onColorMousedown(e: Event) {
-  if (props.disabled) {
-    return
-  }
-
-  // bindDragListeners();
-  onColorDragStart(e)
-}
-
-function onColorDragStart(e: Event) {
-  if (props.disabled) {
-    return
-  }
-
-  colorDragging.value = true
-  pickSelectorColor(e)
-  e.preventDefault()
-}
-
-function onDrag(e: Event) {
-  if (colorDragging.value) {
-    pickSelectorColor(e)
-    e.preventDefault()
-  }
-
-  if (trackDragging.value) {
-    pickTrackColor(e)
-    e.preventDefault()
-  }
-}
-
-function onDragEnd() {
-  colorDragging.value = false
-  trackDragging.value = false
-  // unbindDragListeners
-}
-
-// onHueMousedown
-function onTrackMousedown(e: Event) {
-  if (props.disabled) {
-    return
-  }
-
-  // bindDragListeners
-  onTrackDragStart(e)
-}
-
-// onHueDragStart
-function onTrackDragStart(e: Event) {
-  if (props.disabled) {
-    return
-  }
-
-  trackDragging.value = true
-  pickTrackColor(e)
-}
+const trackThumbStyle = computed(() => ({
+  backgroundColor: trackColor.value,
+  top: `${trackThumbY.value}px`
+}))
 
 const [DefinePickerTemplate, PickerTemplate] = createReusableTemplate()
 
@@ -168,30 +99,22 @@ const ui = colorPicker({
 
 <template>
   <DefinePickerTemplate>
-    <div :class="ui.picker({ class: props.ui?.picker })" :data-disabled="disabled ? true : undefined" :data-dragging="(colorDragging || trackDragging) ? true : undefined">
+    <div :class="ui.picker({ class: props.ui?.picker })" :data-disabled="disabled ? true : undefined">
       <div
         ref="selectorRef"
         :class="ui.selector({ class: props.ui?.selector })"
         :style="{ backgroundColor: selectorColor }"
-        @mousedown="onColorMousedown($event)"
-        @touchstart="onColorDragStart($event)"
-        @touchmove="onDrag($event)"
-        @touchend="onDragEnd()"
       >
         <div :class="ui.background({ class: props.ui?.background })" data-color-picker-background>
-          <div ref="backgroundThumbRef" :class="ui.backgroundThumb({ class: props.ui?.backgroundThumb })" :style="{ backgroundColor }" />
+          <div ref="backgroundThumbRef" :class="ui.backgroundThumb({ class: props.ui?.backgroundThumb })" :style="backgroundThumbStyle" />
         </div>
       </div>
       <div
         ref="trackRef"
         :class="ui.track({ class: props.ui?.track })"
         data-color-picker-track
-        @mousedown="onTrackMousedown($event)"
-        @touchstart="onTrackDragStart($event)"
-        @touchmove="onDrag($event)"
-        @touchend="onDragEnd()"
       >
-        <div ref="trackThumbRef" :class="ui.trackThumb({ class: props.ui?.trackThumb })" :style="{ backgroundColor: trackColor }" />
+        <div ref="trackThumbRef" :class="ui.trackThumb({ class: props.ui?.trackThumb })" :style="trackThumbStyle" />
       </div>
     </div>
   </DefinePickerTemplate>
