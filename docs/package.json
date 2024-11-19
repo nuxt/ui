@@ -11,7 +11,7 @@
     "@nuxt/image": "^1.8.1",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "^1.5.0",
-    "@nuxtjs/plausible": "^1.0.3",
+    "@nuxtjs/plausible": "^1.1.1",
     "@octokit/rest": "^21.0.2",
     "@vueuse/nuxt": "^11.2.0",
     "date-fns": "^4.1.0",
