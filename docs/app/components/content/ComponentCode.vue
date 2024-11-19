@@ -43,8 +43,7 @@ const { $prettier } = useNuxtApp()
 
 const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
-
-const component = defineAsyncComponent(() => import(`../../../../src/runtime/components/${upperFirst(camelName)}.vue`))
+const component = defineAsyncComponent(() => import(`#ui/components/${upperFirst(camelName)}.vue`))
 
 const componentProps = reactive({ ...(props.props || {}) })
 const componentEvents = reactive({

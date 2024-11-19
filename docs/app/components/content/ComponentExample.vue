@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { upperFirst, camelCase } from 'scule'
+import { camelCase } from 'scule'
 import { get, set } from '#ui/utils'
 
 const props = withDefaults(defineProps<{
@@ -52,15 +52,10 @@ const slots = defineSlots<{
 }>()
 
 const { $prettier } = useNuxtApp()
-const route = useRoute()
 
 const camelName = camelCase(props.name)
 
 const data = await fetchComponentExample(camelName)
-
-const dir = route.params.slug?.[route.params.slug.length - 1]
-
-const component = defineAsyncComponent(() => import(`./examples/${dir}/${upperFirst(camelName)}.vue`))
 
 const componentProps = reactive({ ...(props.props || {}) })
 
@@ -175,7 +170,7 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
         </div>
 
         <div class="flex justify-center p-4" :class="props.class">
-          <component :is="component" v-bind="{ ...componentProps, ...optionsValues }" />
+          <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
         </div>
       </div>
     </template>
