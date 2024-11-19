@@ -168,7 +168,7 @@ const isDark = computed({
 @import '@nuxt/ui';
 
 @theme {
-  --font-family-sans: 'DM Sans', sans-serif;
+  --font-sans: 'DM Sans', sans-serif;
 
   --color-primary-50: var(--ui-color-primary-50);
   --color-primary-100: var(--ui-color-primary-100);
