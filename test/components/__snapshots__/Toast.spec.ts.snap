@@ -5,6 +5,8 @@ exports[`Toast > renders with actions correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -25,6 +27,8 @@ exports[`Toast > renders with actions correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -33,6 +37,8 @@ exports[`Toast > renders with as correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <section role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -50,6 +56,8 @@ exports[`Toast > renders with as correctly 1`] = `
     </section>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -58,6 +66,8 @@ exports[`Toast > renders with avatar correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-11 text-[22px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="44" height="44" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
@@ -74,6 +84,8 @@ exports[`Toast > renders with avatar correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -82,6 +94,8 @@ exports[`Toast > renders with class correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center bg-[var(--ui-bg-elevated)]/50" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -99,6 +113,8 @@ exports[`Toast > renders with class correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -107,6 +123,8 @@ exports[`Toast > renders with close slot correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -121,6 +139,8 @@ exports[`Toast > renders with close slot correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -129,6 +149,8 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -146,6 +168,8 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -154,6 +178,8 @@ exports[`Toast > renders with color neutral correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-border-inverted)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -171,6 +197,8 @@ exports[`Toast > renders with color neutral correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -179,6 +207,8 @@ exports[`Toast > renders with description actions correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -201,6 +231,8 @@ exports[`Toast > renders with description actions correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -209,6 +241,8 @@ exports[`Toast > renders with description correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -228,6 +262,8 @@ exports[`Toast > renders with description correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -236,6 +272,8 @@ exports[`Toast > renders with description slot correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -253,6 +291,8 @@ exports[`Toast > renders with description slot correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -261,6 +301,8 @@ exports[`Toast > renders with icon correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><span class="iconify i-lucide:rocket shrink-0 size-5 text-[var(--ui-primary)]" aria-hidden="true"></span>
@@ -277,6 +319,8 @@ exports[`Toast > renders with icon correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -285,6 +329,8 @@ exports[`Toast > renders with leading slot correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">Leading slot<div class="w-0 flex-1 flex flex-col gap-1">
@@ -300,6 +346,8 @@ exports[`Toast > renders with leading slot correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -308,6 +356,8 @@ exports[`Toast > renders with title correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -325,6 +375,8 @@ exports[`Toast > renders with title correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -333,6 +385,8 @@ exports[`Toast > renders with title slot correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -350,6 +404,8 @@ exports[`Toast > renders with title slot correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -358,6 +414,8 @@ exports[`Toast > renders with type correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -375,6 +433,8 @@ exports[`Toast > renders with type correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -383,6 +443,8 @@ exports[`Toast > renders with ui correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -400,6 +462,8 @@ exports[`Toast > renders with ui correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;
 
@@ -408,6 +472,8 @@ exports[`Toast > renders without close correctly 1`] = `
 <!--teleport start-->
 <!--teleport end-->
 <!--teleport start-->
+
+
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
     <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
@@ -422,5 +488,7 @@ exports[`Toast > renders without close correctly 1`] = `
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
+
+
 <!--teleport end-->"
 `;

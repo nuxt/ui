@@ -173,7 +173,8 @@ const doc = ({ name, pro }) => {
 description:
 links: ${pro
   ? ''
-  : `- label: ${upperName}
+  : `
+  - label: ${upperName}
     icon: i-custom-reka-ui
     to: https://www.reka-ui.com/components/${kebabName}.html`}
   - label: GitHub
