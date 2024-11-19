@@ -18,7 +18,7 @@ const localesList = getLocaleKeys.map<[LocaleKey, Locale]>(locale => [locale, lo
 <template>
   <div>
     <ProseP>
-      By default, the <ProseCode>{{ props.default }}</ProseCode> locale is used
+      By default, the <ProseCode>{{ props.default }}</ProseCode> locale is used.
     </ProseP>
     <ProseTable>
       <ProseThead>
