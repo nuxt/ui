@@ -1,6 +1,5 @@
 import { h } from 'vue'
 import { describe, it, expect } from 'vitest'
-import type { AcceptableValue } from 'reka-ui'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table, { type TableProps, type TableSlots, type TableColumn } from '../../src/runtime/components/Table.vue'
 import ComponentRender from '../component-render'
@@ -41,12 +40,12 @@ describe('Table', () => {
     id: 'select',
     header: ({ table }) => h(UCheckbox, {
       'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
-      'onUpdate:modelValue': (value: AcceptableValue) => table.toggleAllPageRowsSelected(!!value),
+      'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
       'ariaLabel': 'Select all'
     }),
     cell: ({ row }) => h(UCheckbox, {
       'modelValue': row.getIsSelected(),
-      'onUpdate:modelValue': (value: AcceptableValue) => row.toggleSelected(!!value),
+      'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
       'ariaLabel': 'Select row'
     }),
     enableSorting: false,

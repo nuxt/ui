@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SwitchRootProps, SwitchRootEmits } from 'reka-ui'
+import type { SwitchRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
@@ -38,7 +38,7 @@ export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | '
   ui?: PartialString<typeof switchTv.slots>
 }
 
-export type SwitchEmits = SwitchRootEmits & {
+export type SwitchEmits = {
   change: [payload: Event]
 }
 

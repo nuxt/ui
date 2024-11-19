@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { CheckboxRootProps, CheckboxRootEmits } from 'reka-ui'
+import type { CheckboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/checkbox'
@@ -31,7 +31,7 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
   ui?: Partial<typeof checkbox.slots>
 }
 
-export type CheckboxEmits = CheckboxRootEmits & {
+export type CheckboxEmits = {
   change: [payload: Event]
 }
 
