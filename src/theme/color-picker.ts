@@ -8,8 +8,8 @@ export default (options: Required<ModuleOptions>) => ({
     triggerContent: 'p-2 pr-4',
     picker: 'flex gap-4',
     selector: 'rounded',
-    background: 'w-full h-full relative rounded',
-    backgroundThumb: 'absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer',
+    selectorBackground: 'w-full h-full relative rounded',
+    selectorThumb: 'absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer',
     track: 'w-[8px] rounded relative',
     trackThumb: 'absolute transform -translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer'
   },

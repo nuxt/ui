@@ -1,10 +1,11 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
+import type { MaybeRefOrGetter } from '@vueuse/shared'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/color-picker'
 import type { PopoverProps } from './Popover.vue'
-import type { HSBColor } from '../types/color'
+// import type { HSBColor } from '../types/color'
 
 const appConfig = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
 
@@ -22,17 +23,12 @@ export type ColorPickerProps = {
   as?: any
   inline?: boolean
   disabled?: boolean
-  modelValue?: any
   defaultValue?: any
   format?: ColorPickerFormat
   size?: ColorPickerVariants['size']
   popover?: PopoverProps
   class?: any
   ui?: Partial<typeof colorPicker.slots>
-}
-
-export interface ColorPickerEmits {
-  (e: 'update:modelValue', value: any): void
 }
 
 export interface ColorPickerSlots {
@@ -43,51 +39,117 @@ export interface ColorPickerSlots {
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Primitive } from 'radix-vue'
-import { createReusableTemplate, useDraggable } from '@vueuse/core'
+import { createReusableTemplate, useEventListener, useElementBounding } from '@vueuse/core'
+import { isClient } from '@vueuse/shared'
 import UPopover from './Popover.vue'
+import { transformHEXtoHSB, transformHSBtoHEX } from '../utils/color'
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {
   format: 'hex'
 })
-defineEmits<ColorPickerEmits>()
 defineSlots<ColorPickerSlots>()
+const modelValue = defineModel(undefined)
 
-const selectorRef = ref<HTMLDivElement | null>(null)
-const backgroundThumbRef = ref<HTMLDivElement | null>(null)
-const trackRef = ref<HTMLDivElement | null>(null)
-const trackThumbRef = ref<HTMLDivElement | null>(null)
+function useColorDraggable(
+  targetElement: MaybeRefOrGetter<HTMLElement | null>,
+  containerElement: MaybeRefOrGetter<HTMLElement | null>,
+  axis: 'x' | 'y' | 'both' = 'both'
+) {
+  const position = ref({ x: 0, y: 0 })
+  const percentage = ref({ x: 0, y: 0 })
+  const pressedDelta = ref()
 
-const selectorColor = ref<string>('#f00000') // circle main
-const backgroundColor = ref<string>('#ffffff') // bg gradient
-const trackColor = ref<string>('#f00000') // circle left
-const pickedColor = ref<string>('#f00000') // model
+  const targetRect = useElementBounding(targetElement)
+  const containerRect = useElementBounding(containerElement)
 
-const { x: backgroundThumbX, y: backgroundThumbY } = useDraggable(backgroundThumbRef, {
-  containerElement: selectorRef,
-  handle: selectorRef
-})
+  function start(event: PointerEvent) {
+    const container = toValue(containerElement)
 
-const { y: trackThumbY } = useDraggable(trackThumbRef, {
-  axis: 'y',
-  containerElement: trackRef,
-  handle: trackRef,
-  onStart: (_, event) => {
-    if (event.target !== trackThumbRef.value) {
-      trackThumbY.value = event.offsetY - 8
-      return false
+    pressedDelta.value = {
+      x: event.clientX - (container ? event.clientX - containerRect.left.value + container.scrollLeft : targetRect.left.value) + targetRect.width.value / 2,
+      y: event.clientY - (container ? event.clientY - containerRect.top.value + container.scrollTop : targetRect.top.value) + targetRect.width.value / 2
     }
+
+    move(event)
+  }
+
+  function move(event: PointerEvent) {
+    if (!pressedDelta.value) return
+
+    const container = toValue(containerElement)
+    let { x, y } = position.value
+
+    if (container && (axis === 'x' || axis === 'both')) {
+      x = Math.min(Math.max(0, event.clientX - pressedDelta.value.x), container.scrollWidth - targetRect.width.value - 1)
+    }
+
+    if (container && (axis === 'y' || axis === 'both')) {
+      y = Math.min(Math.max(0, event.clientY - pressedDelta.value.y), container.scrollHeight - targetRect.height.value - 1)
+    }
+
+    position.value = { x, y }
+    percentage.value = {
+      x: (x / (container ? container.scrollWidth - targetRect.width.value : targetRect.width.value)) * 100,
+      y: (y / (container ? container.scrollHeight - targetRect.height.value : targetRect.height.value)) * 100
+    }
+  }
+
+  function end() {
+    if (!pressedDelta.value) {
+      return
+    }
+
+    pressedDelta.value = undefined
+  }
+
+  if (isClient) {
+    useEventListener(containerElement, 'pointerdown', start)
+    useEventListener(window, 'pointermove', move)
+    useEventListener(window, 'pointerup', end)
+  }
+
+  return {
+    position,
+    percentage: computed(() => percentage.value)
+  }
+}
+
+const pickedValue = computed({
+  get() {
+    return transformHEXtoHSB(modelValue.value)
+  },
+  set(value) {
+    modelValue.value = transformHSBtoHEX(value)
   }
 })
 
-const backgroundThumbStyle = computed(() => ({
-  backgroundColor: backgroundColor.value,
-  top: `${backgroundThumbY.value}px`,
-  left: `${backgroundThumbX.value}px`
+const selectorRef = ref<HTMLDivElement | null>(null)
+const selectorThumbRef = ref<HTMLDivElement | null>(null)
+const trackRef = ref<HTMLDivElement | null>(null)
+const trackThumbRef = ref<HTMLDivElement | null>(null)
+
+const { position: selectorThumbPosition, percentage: selectorPercentage } = useColorDraggable(selectorThumbRef, selectorRef)
+const { position: trackThumbPosition, percentage: trackPercentage } = useColorDraggable(trackThumbRef, trackRef, 'y')
+
+const trackThumbColor = computed(() => transformHSBtoHEX({ h: pickedValue.value.h, b: 100, s: 100 }))
+const pickedColor = computed(() => transformHSBtoHEX(pickedValue.value))
+
+watchEffect(() => {
+  pickedValue.value = {
+    h: (trackPercentage.value.y / 100) * 360,
+    s: selectorPercentage.value.x,
+    b: 100 - selectorPercentage.value.y
+  }
+})
+
+const selectorThumbStyle = computed(() => ({
+  left: `${selectorThumbPosition.value.x}px`,
+  top: `${selectorThumbPosition.value.y}px`
 }))
 
 const trackThumbStyle = computed(() => ({
-  backgroundColor: trackColor.value,
-  top: `${trackThumbY.value}px`
+  backgroundColor: trackThumbColor.value,
+  top: `${trackThumbPosition.value.y}px`
 }))
 
 const [DefinePickerTemplate, PickerTemplate] = createReusableTemplate()
@@ -103,10 +165,10 @@ const ui = colorPicker({
       <div
         ref="selectorRef"
         :class="ui.selector({ class: props.ui?.selector })"
-        :style="{ backgroundColor: selectorColor }"
+        :style="{ backgroundColor: trackThumbColor }"
       >
-        <div :class="ui.background({ class: props.ui?.background })" data-color-picker-background>
-          <div ref="backgroundThumbRef" :class="ui.backgroundThumb({ class: props.ui?.backgroundThumb })" :style="backgroundThumbStyle" />
+        <div :class="ui.selectorBackground({ class: props.ui?.selectorBackground })" data-color-picker-background>
+          <div ref="selectorThumbRef" :class="ui.selectorThumb({ class: props.ui?.selectorThumb })" :style="selectorThumbStyle" />
         </div>
       </div>
       <div
@@ -142,6 +204,6 @@ const ui = colorPicker({
 }
 
 [data-color-picker-track] {
-  background-image: linear-gradient(0deg, red 0, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, red);
+  background-image: linear-gradient(0deg, red 0, #f0f 17%, #00f 33%, #0ff 50%, #0f0 67%, #ff0 83%, red);
 }
 </style>
