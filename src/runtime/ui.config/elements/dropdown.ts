@@ -1,3 +1,4 @@
+import type { AvatarSize } from '../../types'
 import { arrow } from '../popper'
 
 export default {
@@ -28,7 +29,7 @@ export default {
     },
     avatar: {
       base: 'flex-shrink-0',
-      size: '2xs' as const
+      size: '2xs' as AvatarSize
     },
     label: 'truncate',
     shortcuts: 'hidden md:inline-flex flex-shrink-0 gap-0.5 ms-auto'
