@@ -309,7 +309,7 @@ function onUpdateOpen(value: boolean) {
 
     <ComboboxPortal :disabled="!portal">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-        <ComboboxInput v-if="!!searchInput" v-model="searchTerm" auto-focus :display-value="() => searchTerm" as-child>
+        <ComboboxInput v-if="!!searchInput" v-model="searchTerm" as-child>
           <UInput autofocus autocomplete="off" v-bind="searchInputProps" :class="ui.input({ class: props.ui?.input })" />
         </ComboboxInput>
 
