@@ -29,7 +29,7 @@ export interface SelectItem {
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue> = MaybeArrayOfArray<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Omit<SelectRootProps, 'dir' | 'multiple' | 'modelValue'>, UseComponentIconsProps {
+export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue> = MaybeArrayOfArray<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Omit<SelectRootProps, 'dir' | 'multiple' | 'modelValue' | 'by'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string

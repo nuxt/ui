@@ -15,7 +15,7 @@ links:
 Use the `v-model` directive to control the value of the SelectMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::tip
-Use this over a [Select](/components/select) to take advantage of Reka UI's [Combobox](https://reka-ui.com/docs/components/combobox) component that offers search capabilities and multiple selection.
+Use this over a [Select](/components/select) to take advantage of Reka UI's [Combobox](https://reka-ui.com/docs/components/combobox) component that offers search capabilities.
 ::
 
 ::note
@@ -302,7 +302,7 @@ items:
     - top
     - bottom
 props:
-  modelValue: Backlog
+  modelValue: 'Backlog'
   content:
     align: center
     side: bottom
@@ -332,7 +332,7 @@ external:
   - items
   - modelValue
 props:
-  modelValue: Backlog
+  modelValue: 'Backlog'
   arrow: true
   items:
     - Backlog
@@ -756,30 +756,19 @@ name: 'select-menu-fetch-example'
 ---
 ::
 
-### Without internal search
+### With ignore filter
 
-Set the `filter` prop to `false` to disable the internal search and use your own search logic.
+Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
 
 ::component-example
 ---
 collapse: true
-name: 'select-menu-filter-example'
+name: 'select-menu-ignore-filter-example'
 ---
 ::
 
 ::note
 This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
-::
-
-### With custom search
-
-Use the `filter` prop with an array of fields to filter on. Defaults to `[labelKey]`.
-
-::component-example
----
-collapse: true
-name: 'select-menu-filter-fields-example'
----
 ::
 
 ### As a country picker

@@ -20,7 +20,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     v-model:search-term="searchTerm"
     :items="users || []"
     :loading="status === 'pending'"
-    :filter="false"
+    ignore-filter
     icon="i-lucide-user"
     placeholder="Select user"
     class="w-48"

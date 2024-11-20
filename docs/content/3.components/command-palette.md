@@ -453,14 +453,14 @@ class: '!p-0'
 ---
 ::
 
-### Without internal search
+### With ignore filter
 
-You can set the `filter` field to `false` on a group to disable the internal search and use your own search logic.
+You can set the `ignoreFilter` field to `true` on a group to disable the internal search and use your own search logic.
 
 ::component-example
 ---
 collapse: true
-name: 'command-palette-filter-example'
+name: 'command-palette-ignore-filter-example'
 class: '!p-0'
 ---
 ::

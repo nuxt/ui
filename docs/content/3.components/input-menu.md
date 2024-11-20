@@ -274,7 +274,7 @@ items:
     - top
     - bottom
 props:
-  modelValue: Backlog
+  modelValue: 'Backlog'
   content:
     align: center
     side: bottom
@@ -302,7 +302,7 @@ external:
   - items
   - modelValue
 props:
-  modelValue: Backlog
+  modelValue: 'Backlog'
   arrow: true
   items:
     - Backlog
@@ -713,30 +713,19 @@ name: 'input-menu-fetch-example'
 ---
 ::
 
-### Without internal search
+### With ignore filter
 
-Set the `filter` prop to `false` to disable the internal search and use your own search logic.
+Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
 
 ::component-example
 ---
 collapse: true
-name: 'input-menu-filter-example'
+name: 'input-menu-ignore-filter-example'
 ---
 ::
 
 ::note
 This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
-::
-
-### With custom search
-
-Use the `filter` prop with an array of fields to filter on. Defaults to `[labelKey]`.
-
-::component-example
----
-collapse: true
-name: 'input-menu-filter-fields-example'
----
 ::
 
 ### As a country picker

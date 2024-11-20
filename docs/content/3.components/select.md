@@ -135,6 +135,39 @@ props:
 ---
 ::
 
+### Multiple
+
+Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+  - multiple
+  - class
+external:
+  - items
+  - modelValue
+props:
+  modelValue:
+    - Backlog
+    - Todo
+  multiple: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+::caution
+Ensure to pass an array to the `default-value` prop or the `v-model` directive.
+::
+
 ### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
@@ -160,11 +193,7 @@ props:
 
 ### Content
 
-Use the `content` prop to control how the Select content is rendered, like its `align`, `side` or `position` for example.
-
-::warning
-The `content.align`, `content.side`, etc. properties only apply when `content.position` is set to `popper`.
-::
+Use the `content` prop to control how the Select content is rendered, like its `align` or `side` for example.
 
 ::component-code
 ---
@@ -177,9 +206,6 @@ external:
   - items
   - modelValue
 items:
-  content.position:
-    - 'item-aligned'
-    - 'popper'
   content.align:
     - start
     - center
@@ -190,9 +216,8 @@ items:
     - top
     - bottom
 props:
-  modelValue: 'Todo'
+  modelValue: 'Backlog'
   content:
-    position: 'item-aligned'
     align: center
     side: bottom
     sideOffset: 8
@@ -205,11 +230,6 @@ props:
 ---
 ::
 
-::note{to="https://reka-ui.com/docs/components/select#change-the-positioning-mode"}
-Read more about the `content.position` prop in the [Reka UI documentation](https://reka-ui.com/docs/components/select#change-the-positioning-mode).
-::
-
-<!--
 ### Arrow
 
 Use the `arrow` prop to display an arrow on the Select.
@@ -226,7 +246,7 @@ external:
   - items
   - modelValue
 props:
-  modelValue: 'Todo'
+  modelValue: 'Backlog'
   arrow: true
   items:
     - Backlog
@@ -236,8 +256,6 @@ props:
   class: 'w-48'
 ---
 ::
-
--->
 
 ### Color
 

@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => {
   return defuFn({
     slots: {
       root: () => undefined,
-      base: () => ['relative rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      base: () => ['relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
       value: 'truncate pointer-events-none',
       placeholder: 'truncate text-[var(--ui-text-dimmed)]',
       arrow: 'fill-[var(--ui-border)]',

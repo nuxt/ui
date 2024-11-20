@@ -36,10 +36,10 @@ export interface CommandPaletteGroup<T> {
   items?: T[]
   /**
    * Whether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
-   * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
-   * @defaultValue true
+   * When `true`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
+   * @defaultValue false
    */
-  filter?: boolean
+  ignoreFilter?: boolean
   /** Filter group items after the search happened. */
   postFilter?: (searchTerm: string, items: T[]) => T[]
   /** The icon displayed when an item is highlighted. */
@@ -168,7 +168,7 @@ const items = computed(() => props.groups?.filter((group) => {
     return false
   }
 
-  if (group.filter === false) {
+  if (group.ignoreFilter) {
     return false
   }
 
@@ -216,7 +216,7 @@ const groups = computed(() => {
     return getGroupWithItems(group, items)
   }).filter(group => !!group)
 
-  const nonFuseGroups = props.groups?.filter(group => group.filter === false && group.items?.length).map((group) => {
+  const nonFuseGroups = props.groups?.filter(group => group.ignoreFilter && group.items?.length).map((group) => {
     return getGroupWithItems(group, group.items || [])
   }) || []
 

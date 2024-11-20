@@ -1,9 +1,12 @@
 <script setup lang="ts">
+const searchTerm = ref('')
+const searchTermDebounced = refDebounced(searchTerm, 200)
+
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
-  transform: (data: { id: number, name: string, email: string }[]) => {
+  params: { q: searchTermDebounced },
+  transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
       label: user.name,
-      email: user.email,
       value: String(user.id),
       avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
     })) || []
@@ -13,13 +16,13 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 </script>
 
 <template>
-  <USelectMenu
+  <UInputMenu
+    v-model:search-term="searchTerm"
     :items="users || []"
     :loading="status === 'pending'"
-    :filter="['label', 'email']"
+    ignore-filter
     icon="i-lucide-user"
     placeholder="Select user"
-    class="w-80"
   >
     <template #leading="{ modelValue, ui }">
       <UAvatar
@@ -29,13 +32,5 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :class="ui.leadingAvatar()"
       />
     </template>
-
-    <template #item-label="{ item }">
-      {{ item.label }}
-
-      <span class="text-[var(--ui-text-muted)]">
-        {{ item.email }}
-      </span>
-    </template>
-  </USelectMenu>
+  </UInputMenu>
 </template>
