@@ -40,7 +40,7 @@ prettier: true
 collapse: true
 ignore:
   - items
-  - class
+  - ui.content
 external:
   - items
 props:
@@ -91,7 +91,8 @@ props:
           - shift
           - meta
           - q
-  class: 'w-48'
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
@@ -118,7 +119,7 @@ Use the `content` prop to control how the DropdownMenu content is rendered, like
 prettier: true
 ignore:
   - items
-  - class
+  - ui.content
 external:
   - items
 items:
@@ -143,7 +144,8 @@ props:
     align: start
     side: bottom
     sideOffset: 8
-  class: 'w-48'
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
@@ -163,7 +165,7 @@ prettier: true
 ignore:
   - arrow
   - items
-  - class
+  - ui.content
 external:
   - items
 props:
@@ -175,7 +177,8 @@ props:
       icon: i-lucide-credit-card
     - label: Settings
       icon: i-lucide-cog
-  class: 'w-48'
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
@@ -194,8 +197,8 @@ Use the `size` prop to control the size of the DropdownMenu.
 prettier: true
 ignore:
   - items
-  - class
   - content.align
+  - ui.content
 external:
   - items
 props:
@@ -209,7 +212,8 @@ props:
       icon: i-lucide-cog
   content:
     align: start
-  class: 'w-48'
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
@@ -236,7 +240,7 @@ Use the `disabled` prop to disable the DropdownMenu.
 prettier: true
 ignore:
   - items
-  - class
+  - ui.content
 external:
   - items
 props:
@@ -248,7 +252,8 @@ props:
       icon: i-lucide-credit-card
     - label: Settings
       icon: i-lucide-cog
-  class: 'w-48'
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
