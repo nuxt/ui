@@ -246,8 +246,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       '@nuxt/content':
-        specifier: https://pkg.pr.new/@nuxt/content@cb33501
-        version: https://pkg.pr.new/@nuxt/content@cb33501(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)
+        specifier: 3.0.0-alpha.7
+        version: 3.0.0-alpha.7(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)
       '@nuxt/image':
         specifier: ^1.8.1
         version: 1.8.1(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.27.3)
@@ -255,8 +255,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/@nuxt/ui-pro@41845ed
-        version: https://pkg.pr.new/@nuxt/ui-pro@41845ed(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@7318863
+        version: https://pkg.pr.new/@nuxt/ui-pro@7318863(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
       '@nuxthub/core':
         specifier: ^0.8.7
         version: 0.8.7(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.27.3)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))
@@ -1409,9 +1409,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@cb33501':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/content@cb33501}
-    version: 3.0.0-alpha.6
+  '@nuxt/content@3.0.0-alpha.7':
+    resolution: {integrity: sha512-weDrE+Q9R05oPHb37LbV+BRnk/7KPI1glpqvhrrBhOWDloM4PkSFKlZcvD8HA3OCN8AjYLqmd6fX/c/nh0LEyA==}
     peerDependencies:
       '@libsql/client': '*'
       pg: '*'
@@ -1526,8 +1525,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@41845ed':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@41845ed}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@7318863':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@7318863}
     version: 3.0.0-alpha.9
     peerDependencies:
       typescript: ^5.6.3
@@ -1544,8 +1543,8 @@ packages:
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
 
-  '@nuxtjs/mdc-edge@0.9.6-28868634.9b24930':
-    resolution: {integrity: sha512-YmLY0rfa491EECzBLrVVCs0c9W+fX542AkuuYdNO9Mr7JxYtPSImrnR6FmS9XUy3Ty2f77sYjCuH5JHw3wrf3g==}
+  '@nuxtjs/mdc@0.9.5':
+    resolution: {integrity: sha512-bTnlY+oiW8QsmrLoiYN+rkSYxl7asELlwYeU9QPSkun5BVx7Yd8RajH8I+0QJZiMZzIHaO3LEgf3lzp5Lg6E0A==}
 
   '@nuxtjs/plausible@1.1.1':
     resolution: {integrity: sha512-vjpMg84+oQ5zte+XeDMMwXIa4lIkS19i8CfOBNjqoX9zZWmWNsL6zIzPn4zdg9puzapKQYw1IBCki1E0PG11mA==}
@@ -8033,11 +8032,11 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@cb33501(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)':
+  '@nuxt/content@3.0.0-alpha.7(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)':
     dependencies:
       '@libsql/client': 0.14.0
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
-      '@nuxtjs/mdc': '@nuxtjs/mdc-edge@0.9.6-28868634.9b24930(magicast@0.3.5)(rollup@4.27.3)'
+      '@nuxtjs/mdc': 0.9.5(magicast@0.3.5)(rollup@4.27.3)
       '@sqlite.org/sqlite-wasm': 3.47.0-build1
       better-sqlite3: 11.5.0
       c12: 2.0.1(magicast@0.3.5)
@@ -8465,7 +8464,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@41845ed(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@7318863(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
       '@nuxt/schema': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
@@ -8596,7 +8595,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxtjs/mdc-edge@0.9.6-28868634.9b24930(magicast@0.3.5)(rollup@4.27.3)':
+  '@nuxtjs/mdc@0.9.5(magicast@0.3.5)(rollup@4.27.3)':
     dependencies:
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
       '@shikijs/transformers': 1.23.1
