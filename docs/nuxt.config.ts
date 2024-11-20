@@ -27,8 +27,7 @@ export default defineNuxtConfig({
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
-    'nuxt-cloudflare-analytics',
-    'modules/content-examples-code'
+    'nuxt-cloudflare-analytics'
   ],
 
   site: {
