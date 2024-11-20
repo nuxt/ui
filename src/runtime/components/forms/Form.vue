@@ -132,7 +132,7 @@ export default defineComponent({
         if (props.validateOn?.includes('submit')) {
           await validate()
         }
-        event.data = parsedValue.value
+        event.data = props.schema ? parsedValue.value : props.state
         emit('submit', event)
       } catch (error) {
         if (!(error instanceof FormException)) {
