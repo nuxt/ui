@@ -1,4 +1,4 @@
-import type { ButtonColor, ButtonSize, ButtonVariant, ProgressAnimation, ProgressColor } from '../../types'
+import type { ButtonColor, ButtonSize, ButtonVariant, CheckboxColor, ProgressAnimation, ProgressColor } from '../../types'
 
 export default {
   wrapper: 'relative overflow-x-auto',
@@ -65,7 +65,7 @@ export default {
       class: '-my-1.5 align-middle'
     },
     checkbox: {
-      color: 'primary'
+      color: 'primary' as CheckboxColor
     },
     progress: {
       color: 'primary' as ProgressColor,
