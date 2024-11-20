@@ -81,14 +81,14 @@ const ui = computed(() => drawer({
 
 <template>
   <DrawerRoot v-bind="rootProps">
-    <DrawerTrigger v-if="!!slots.default" as-child>
+    <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>
 
     <DrawerPortal :disabled="!portal">
       <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DrawerContent :class="ui.content({ class: [props.class, props.ui?.content] })" v-bind="contentProps">
+      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps">
         <slot name="handle">
           <div v-if="handle" :class="ui.handle({ class: props.ui?.handle })" />
         </slot>

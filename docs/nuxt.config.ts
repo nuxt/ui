@@ -41,15 +41,6 @@ export default defineNuxtConfig({
       markdown: {
         highlight: {
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
-        },
-        remarkPlugins: {
-          'remark-mdc': {
-            options: {
-              experimental: {
-                autoUnwrap: false
-              }
-            }
-          }
         }
       }
     }

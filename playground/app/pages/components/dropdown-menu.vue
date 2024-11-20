@@ -140,7 +140,7 @@ defineShortcuts(extractShortcuts(items.value))
     <div class="flex flex-col items-center gap-8">
       <USelectMenu v-model="size" :items="sizes" placeholder="Size" />
 
-      <UDropdownMenu :items="items" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
+      <UDropdownMenu :items="items" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" :ui="{ content: 'w-48' }">
         <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
         <template #custom-trailing>
@@ -148,7 +148,7 @@ defineShortcuts(extractShortcuts(items.value))
         </template>
       </UDropdownMenu>
 
-      <UDropdownMenu :items="itemsWithColor" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" class="min-w-48">
+      <UDropdownMenu :items="itemsWithColor" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" :ui="{ content: 'w-48' }">
         <UButton label="Color" color="neutral" variant="outline" icon="i-lucide-menu" />
 
         <template #custom-trailing>
