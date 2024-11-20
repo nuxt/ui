@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "2.19.2",
-  "packageManager": "pnpm@9.13.0",
+  "packageManager": "pnpm@9.14.1",
   "repository": "nuxt/ui",
   "homepage": "https://ui.nuxt.com",
   "type": "module",
@@ -35,8 +35,8 @@
     "@headlessui/tailwindcss": "^0.2.1",
     "@headlessui/vue": "^1.7.23",
     "@iconify-json/heroicons": "^1.2.1",
-    "@nuxt/icon": "^1.7.5",
-    "@nuxt/kit": "^3.14.159",
+    "@nuxt/icon": "^1.8.1",
+    "@nuxt/kit": "^3.14.1592",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@popperjs/core": "^2.11.8",
@@ -56,15 +56,15 @@
     "tailwindcss": "^3.4.15"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.6.1",
+    "@nuxt/eslint-config": "^0.7.1",
     "@nuxt/module-builder": "^0.8.4",
     "@nuxt/test-utils": "^3.14.4",
     "@release-it/conventional-changelog": "^9.0.3",
     "@vue/test-utils": "^2.4.6",
-    "eslint": "^9.14.0",
+    "eslint": "^9.15.0",
     "happy-dom": "^14.12.3",
     "joi": "^17.13.3",
-    "nuxt": "^3.14.159",
+    "nuxt": "^3.14.1592",
     "release-it": "^17.10.0",
     "superstruct": "^2.0.2",
     "unbuild": "^2.0.0",
@@ -81,7 +81,6 @@
     "@nuxt/ui": "workspace:*",
     "@nuxt/content": "2.13.2",
     "@nuxtjs/mdc": "0.9.0",
-    "nuxt": "3.13.2",
-    "@nuxt/kit": "3.13.2"
+    "chokidar": "3.6.0"
   }
 }
