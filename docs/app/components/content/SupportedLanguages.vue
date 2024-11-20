@@ -52,13 +52,13 @@ const localesList = getLocaleKeys.map<[LocaleKey, Locale]>(locale => [locale, lo
         </ProseTr>
       </ProseTbody>
     </ProseTable>
-    <Note to="https://github.com/nuxt/ui/tree/v3/src/runtime/locale" target="_blank">
+    <ProseNote to="https://github.com/nuxt/ui/tree/v3/src/runtime/locale" target="_blank">
       If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>src/runtime/locale/</ProseCode>.
-    </Note>
-    <Tip>
+    </ProseNote>
+    <ProseTip>
       You can use the <ProseCode>nuxt-ui</ProseCode> CLI to create a new locale:
 
       <ProsePre language="bash">nuxt-ui make locale --code "en" --name "English"</ProsePre>
-    </Tip>
+    </ProseTip>
   </div>
 </template>
