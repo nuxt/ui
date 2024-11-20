@@ -30,7 +30,6 @@ const localesList = getLocaleKeys.map<LocaleComputed>((code) => {
     <ProseP>
       By default, the <ProseCode>{{ props.default }}</ProseCode> locale is used.
     </ProseP>
-
     <div class="grid gap-6 grid-cols-2 md:grid-cols-3">
       <div v-for="locale in localesList" :key="locale.code">
         <div class="flex gap-3 items-center">
@@ -42,14 +41,13 @@ const localesList = getLocaleKeys.map<LocaleComputed>((code) => {
         </div>
       </div>
     </div>
-
-    <Note to="https://github.com/nuxt/ui/tree/v3/src/runtime/locale" target="_blank">
+    <ProseNote to="https://github.com/nuxt/ui/tree/v3/src/runtime/locale" target="_blank">
       If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>src/runtime/locale/</ProseCode>.
-    </Note>
-    <Tip>
+    </ProseNote>
+    <ProseTip>
       You can use the <ProseCode>nuxt-ui</ProseCode> CLI to create a new locale:
 
       <ProsePre language="bash">nuxt-ui make locale --code "en" --name "English"</ProsePre>
-    </Tip>
+    </ProseTip>
   </div>
 </template>
