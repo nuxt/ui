@@ -5,7 +5,7 @@
   "dependencies": {
     "@iconify-json/logos": "^1.2.3",
     "@iconify-json/lucide": "^1.2.15",
-    "@iconify-json/simple-icons": "^1.2.11",
+    "@iconify-json/simple-icons": "^1.2.12",
     "@iconify-json/vscode-icons": "^1.2.2",
     "@nuxt/content": "https://pkg.pr.new/@nuxt/content@8f8b373",
     "@nuxt/image": "^1.8.1",
@@ -28,6 +28,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "wrangler": "^3.87.0"
+    "wrangler": "^3.88.0"
   }
 }
