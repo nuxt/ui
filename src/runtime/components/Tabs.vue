@@ -86,7 +86,6 @@ extendDevtoolsMeta({
 
 <script setup lang="ts" generic="T extends TabsItem">
 import { computed, toRef } from 'vue'
-import { defu } from 'defu'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { get } from '../utils'
@@ -103,7 +102,7 @@ const emits = defineEmits<TabsEmits>()
 const slots = defineSlots<TabsSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
-const contentProps = toRef(() => defu(props.content || {}, { forceMount: true }) as TabsContentProps)
+const contentProps = toRef(() => props.content as TabsContentProps)
 
 const ui = computed(() => tabs({
   color: props.color,

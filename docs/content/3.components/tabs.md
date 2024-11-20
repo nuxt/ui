@@ -69,35 +69,6 @@ props:
 ---
 ::
 
-You can also choose to only render the content of the active tab by setting `content.forceMount` to `false`.
-
-::component-code
----
-prettier: true
-ignore:
-  - content.forceMount
-  - items
-  - class
-external:
-  - items
-props:
-  content:
-    forceMount: false
-  items:
-    - label: Account
-      icon: 'i-lucide-user'
-      content: 'This is the account content.'
-    - label: Password
-      icon: 'i-lucide-lock'
-      content: 'This is the password content.'
-  class: 'w-full'
----
-::
-
-::note
-You can inspect the DOM to see that the content of the inactive tab is not rendered.
-::
-
 ### Color
 
 Use the `color` prop to change the color of the Tabs.

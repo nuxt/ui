@@ -46,7 +46,7 @@ export interface CommandPaletteGroup<T> {
   highlightedIcon?: string
 }
 
-export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'resetSearchTermOnBlur' | 'highlightOnHover' | 'ignoreFilter' | 'by'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'resetSearchTermOnBlur' | 'highlightOnHover'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -146,7 +146,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter', 'by'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'resetSearchTermOnBlur', 'highlightOnHover'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon', 'placeholder'))
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -229,7 +229,7 @@ const groups = computed(() => {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ComboboxRoot v-bind="rootProps" open :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <ComboboxRoot v-bind="rootProps" open ignore-filter :class="ui.root({ class: [props.class, props.ui?.root] })">
     <ComboboxInput v-model="searchTerm" as-child>
       <UInput
         variant="none"
