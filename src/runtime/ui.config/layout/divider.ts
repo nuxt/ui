@@ -1,4 +1,4 @@
-import type { AvatarSize, DividerSize } from '../../types'
+import type { AvatarSize } from '../../types'
 
 export default {
   wrapper: {
@@ -48,7 +48,7 @@ export default {
   },
   label: 'text-sm',
   default: {
-    size: '2xs' as DividerSize,
+    size: '2xs',
     type: 'solid'
   }
 }
