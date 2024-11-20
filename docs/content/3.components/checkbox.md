@@ -41,6 +41,8 @@ Use the `indeterminate` value in the `v-model` directive or `default-value` prop
 
 ::component-code
 ---
+ignore:
+  - defaultValue
 props:
   defaultValue: 'indeterminate'
 ---
@@ -52,6 +54,8 @@ Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults 
 
 ::component-code
 ---
+ignore:
+  - defaultValue
 props:
   defaultValue: 'indeterminate'
   indeterminateIcon: 'i-lucide-plus'

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
-import type { AcceptableValue } from 'reka-ui'
 import theme from '#build/ui/select'
 import type { User } from '~/types'
 
@@ -42,11 +41,11 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   lazy: true
 })
 
-function getStatusIcon(value: AcceptableValue): string {
+function getStatusIcon(value: string) {
   return statuses.find(status => status.value === value)?.icon || 'i-lucide-user'
 }
 
-function getUserAvatar(value: AcceptableValue) {
+function getUserAvatar(value: string) {
   return users.value?.find(user => user.value === value)?.avatar || {}
 }
 </script>
@@ -117,7 +116,7 @@ function getUserAvatar(value: AcceptableValue) {
         class="w-48"
       >
         <template #leading="{ modelValue, ui }">
-          <UIcon v-if="modelValue" :name="getStatusIcon(modelValue)" :class="ui.leadingIcon()" />
+          <UIcon v-if="modelValue" :name="getStatusIcon(modelValue as string)" :class="ui.leadingIcon()" />
         </template>
       </USelect>
     </div>
@@ -133,7 +132,7 @@ function getUserAvatar(value: AcceptableValue) {
         class="w-48"
       >
         <template #leading="{ modelValue, ui }">
-          <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue)" />
+          <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue as string)" />
         </template>
       </USelect>
     </div>

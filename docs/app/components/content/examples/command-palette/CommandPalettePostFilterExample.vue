@@ -11,7 +11,7 @@ const items = [
     level: 2
   },
   {
-    id: '/getting-started#reka-ui',
+    id: '/getting-started#reka-ui-radix-vue',
     label: 'Reka UI',
     level: 3
   },

@@ -68,7 +68,7 @@ const ui = computed(() => checkbox({
   color: color.value,
   required: props.required,
   disabled: disabled.value,
-  checked: !!(modelValue.value || props.defaultValue)
+  checked: Boolean(modelValue.value ?? props.defaultValue)
 }))
 
 function onUpdate(value: any) {
