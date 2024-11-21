@@ -17,7 +17,7 @@ type CalendarVariants = VariantProps<typeof calendar>
 
 type ModelValue<T extends boolean> = (T extends true ? DateRange : Date) | undefined
 
-export interface CalendarProps<T extends boolean> extends Pick<CalendarRootProps, 'numberOfMonths' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
+export interface CalendarProps<T extends boolean> extends Pick<CalendarRootProps, 'numberOfMonths' | 'preventDeselect' | 'pagedNavigation' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

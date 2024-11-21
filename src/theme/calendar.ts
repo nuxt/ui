@@ -6,13 +6,13 @@ export default (options: Required<ModuleOptions>) => {
       root: '',
       header: 'flex items-center justify-between',
       body: 'pt-4',
-      heading: 'text-center text-sm font-medium truncate',
+      heading: 'text-center font-medium truncate',
       grid: 'w-full border-collapse select-none space-y-1',
       gridRow: 'grid grid-cols-7',
       gridWeekDaysRow: 'mb-1 grid w-full grid-cols-7',
       gridBody: 'grid',
-      headCell: 'rounded-md text-xs',
-      cell: 'relative text-center text-sm',
+      headCell: 'rounded-md',
+      cell: 'relative text-center',
       cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-inset data-[disabled]:cursor-not-allowed data-[disabled]:opacity-75 data-[selected]:!text-[var(--ui-bg)] data-[today]:font-semibold data-[unavailable]:pointer-events-none data-[unavailable]:!text-[var(--ui-text)]/50 data-[unavailable]:line-through', options.theme.transitions && 'transition-[color,opacity] duration-200']
     },
     variants: {
@@ -36,10 +36,14 @@ export default (options: Required<ModuleOptions>) => {
         },
         sm: {
           heading: 'text-xs',
+          headCell: 'text-xs',
           cell: 'text-xs',
           cellTrigger: 'w-7 h-7'
         },
         md: {
+          heading: 'text-sm',
+          headCell: 'text-xs',
+          cell: 'text-sm',
           cellTrigger: 'w-8 h-8'
         },
         lg: {
