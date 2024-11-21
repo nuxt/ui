@@ -6,8 +6,6 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
 
-export type { Matcher } from 'radix-vue/date'
-
 const appConfig = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
 
 const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
@@ -73,7 +71,7 @@ const range = toRef(() => typeof props.range === 'string' ? true : props.range)
 
 const { code: locale, dir, t } = useLocale()
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'color', 'size', 'range', 'yearControls', 'class', 'ui', 'modelValue' as any), emits) // Vue: Argument of type unknown is not assignable to parameter of type
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'color', 'size', 'range', 'yearControls', 'class', 'ui', 'modelValue' as any), emits)
 
 const ui = computed(() => calendar({
   color: props.color,
