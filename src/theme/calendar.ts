@@ -13,7 +13,7 @@ export default (options: Required<ModuleOptions>) => {
       gridBody: 'grid',
       headCell: 'rounded-md text-xs',
       cell: 'relative text-center text-sm',
-      cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-inset data-[disabled]:text-[var(--ui-text)]/30 data-[selected]:!text-[var(--ui-bg)] data-[today]:font-semibold data-[unavailable]:pointer-events-none data-[unavailable]:!text-[var(--ui-text)]/50 data-[unavailable]:line-through', options.theme.transitions && 'transition-[color,opacity] duration-200']
+      cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-inset data-[disabled]:cursor-not-allowed data-[disabled]:opacity-75 data-[selected]:!text-[var(--ui-bg)] data-[today]:font-semibold data-[unavailable]:pointer-events-none data-[unavailable]:!text-[var(--ui-text)]/50 data-[unavailable]:line-through', options.theme.transitions && 'transition-[color,opacity] duration-200']
     },
     variants: {
       color: {
