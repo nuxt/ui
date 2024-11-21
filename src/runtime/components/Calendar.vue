@@ -1,11 +1,10 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { CalendarRootProps, CalendarCellTriggerProps } from 'radix-vue'
+import type { CalendarRootProps, RangeCalendarRootProps, CalendarCellTriggerProps, CalendarRootEmits, RangeCalendarRootEmits } from 'radix-vue'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
-import type { DateRange, DateRangeRadix } from '../types/date'
 
 export type { Matcher } from 'radix-vue/date'
 
@@ -15,9 +14,9 @@ const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-type ModelValue<T extends boolean> = (T extends true ? DateRange : Date) | undefined
+export type ModelValue<T extends boolean> = (T extends true ? RangeCalendarRootProps['modelValue'] : CalendarRootProps['modelValue']) | undefined
 
-export interface CalendarProps<T extends boolean> extends Pick<CalendarRootProps, 'numberOfMonths' | 'preventDeselect' | 'pagedNavigation' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
+export interface CalendarProps<T extends boolean> extends Omit<CalendarRootProps & RangeCalendarRootProps, 'modelValue' | 'defaultValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -39,17 +38,12 @@ export interface CalendarProps<T extends boolean> extends Pick<CalendarRootProps
    * Show year controls
    */
   yearControls?: boolean
-  /**
-   * The maximum date that can be selected
-   */
-  maxValue?: Date
-  /**
-   * The minimum date that can be selected
-   */
-  minValue?: Date
+  defaultValue?: ModelValue<T>
   class?: any
   ui?: Partial<typeof calendar.slots>
 }
+
+export interface CalendarEmits extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {}
 
 export interface CalendarSlots {
   'heading': (props: { value: string }) => any
@@ -58,18 +52,19 @@ export interface CalendarSlots {
 }
 </script>
 
-<script setup lang="ts" generic="T extends boolean">
+<script setup lang="ts" generic="T extends boolean = false">
 import { toRef, computed } from 'vue'
+import { useForwardPropsEmits } from 'radix-vue'
 import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
-import { objectOmit } from '@vueuse/core'
+import { reactiveOmit } from '@vueuse/core'
 import UButton from './Button.vue'
 import { useLocale } from '../composables/useLocale'
-import { toRangeDate, toRangeZonedDateTime, toZonedDateTime } from '../utils/date'
 
 const props = withDefaults(defineProps<CalendarProps<T>>(), {
   fixedWeeks: true,
   yearControls: true
 })
+const emits = defineEmits<CalendarEmits>()
 defineSlots<CalendarSlots>()
 
 const modelValue = defineModel<ModelValue<T>>(undefined)
@@ -78,31 +73,7 @@ const range = toRef(() => typeof props.range === 'string' ? true : props.range)
 
 const { code: locale, dir, t } = useLocale()
 
-function isRange(value: DateRangeRadix | DateValue | undefined): value is DateRangeRadix
-function isRange(value: ModelValue<boolean>): value is ModelValue<true>
-function isRange(value: ModelValue<boolean> | DateRangeRadix | DateValue | undefined) {
-  return !!range.value
-}
-
-const calendarValue = computed({
-  get() {
-    const value = modelValue.value
-
-    if (!value) {
-      return undefined
-    }
-
-    return isRange(value) ? toRangeZonedDateTime(value) : toZonedDateTime(value)
-  },
-  set(value) {
-    if (!value) {
-      modelValue.value = value
-      return
-    }
-
-    modelValue.value = (isRange(value) ? toRangeDate(value) : value.toDate()) as ModelValue<T>
-  }
-})
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'color', 'size', 'range', 'yearControls', 'class', 'ui', 'modelValue' as any), emits) // Vue: Argument of type unknown is not assignable to parameter of type
 
 const ui = computed(() => calendar({
   color: props.color,
@@ -118,23 +89,16 @@ function paginateYear(date: DateValue, sign: -1 | 1) {
 }
 
 const Calendar = computed(() => range.value ? RangeCalendar : SingleCalendar)
-
-const calendarProps = computed(() => {
-  return {
-    ...objectOmit(props, ['color', 'size', 'range', 'yearControls', 'class', 'ui', 'modelValue' as any]),
-    locale: locale.value,
-    dir: dir.value,
-    minValue: toZonedDateTime(props.minValue),
-    maxValue: toZonedDateTime(props.maxValue)
-  }
-})
 </script>
 
 <template>
   <Calendar.Root
     v-slot="{ weekDays, grid }"
-    v-model="calendarValue as DateRangeRadix & DateValue"
-    v-bind="calendarProps"
+    v-model="modelValue as ModelValue<true & false>"
+    v-bind="rootProps"
+    :locale="locale"
+    :dir="dir"
+    :default-value="defaultValue as ModelValue<true & false>"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">

@@ -1,8 +1,10 @@
 <script setup lang="ts">
-const singleValue = ref(new Date('2023-09-01'))
-const multipleValue = ref({
-  start: new Date('2023-09-01'),
-  end: new Date('2023-09-07')
+import { CalendarDate } from '@internationalized/date'
+
+const singleValue = shallowRef(new CalendarDate(2022, 1, 10))
+const multipleValue = shallowRef({
+  start: new CalendarDate(2022, 1, 10),
+  end: new CalendarDate(2022, 1, 20)
 })
 </script>
 

@@ -3,6 +3,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Calendar, { type CalendarProps, type CalendarSlots } from '../../src/runtime/components/Calendar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/calendar'
+import { CalendarDate } from '@internationalized/date'
 
 describe('Calendar', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -16,7 +17,7 @@ describe('Calendar', () => {
 
   it.each([
     // Props
-    ['with modelValue', { props: { modelValue: new Date('2025-01-01') } }],
+    ['with modelValue', { props: { modelValue: new CalendarDate(2025, 1, 1) } }],
     ['with range', { props: { range: true } }],
     ['with disabled', { props: { range: true } }],
     ['with readonly', { props: { range: true } }],
@@ -44,7 +45,7 @@ describe('Calendar', () => {
   describe('emits', () => {
     test('update:modelValue event single', async () => {
       const wrapper = await mountSuspended(Calendar)
-      const date = new Date('2025-01-01')
+      const date = new CalendarDate(2025, 1, 1)
 
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })
@@ -52,7 +53,7 @@ describe('Calendar', () => {
 
     test('update:modelValue event range', async () => {
       const wrapper = await mountSuspended(Calendar, { props: { range: true } })
-      const date = [new Date('2025-01-01'), new Date('2025-01-02')]
+      const date = [new CalendarDate(2025, 1, 1), new CalendarDate(2025, 1, 2)]
 
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })

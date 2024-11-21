@@ -1,10 +1,12 @@
 <script setup lang="ts">
-const modelValue = ref(new Date('2023-09-08'))
+import { CalendarDate } from '@internationalized/date'
+
+const modelValue = shallowRef(new CalendarDate(2022, 1, 10))
 </script>
 
 <template>
   <UPopover>
-    <UButton :label="modelValue.toLocaleDateString()" color="neutral" variant="subtle" icon="i-lucide-calendar" />
+    <UButton :label="modelValue.toString()" color="neutral" variant="subtle" icon="i-lucide-calendar" />
 
     <template #content>
       <UCalendar v-model="modelValue" class="p-2" />

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { Matcher } from '#ui/components/Calendar.vue'
+import { CalendarDate } from '@internationalized/date'
+import type { Matcher } from 'radix-vue/date'
 
-const modelValue = ref({
-  start: new Date('2023-09-08'),
-  end: new Date('2023-09-09')
+const modelValue = shallowRef({
+  start: new CalendarDate(2022, 1, 1),
+  end: new CalendarDate(2022, 1, 9)
 })
 
 const isDateUnavailable: Matcher = (date) => {

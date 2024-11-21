@@ -1,14 +1,16 @@
 <script setup lang="ts">
-const modelValue = ref({
-  start: new Date('2023-09-08'),
-  end: new Date('2023-09-09')
+import { CalendarDate } from '@internationalized/date'
+
+const modelValue = shallowRef({
+  start: new CalendarDate(2022, 1, 10),
+  end: new CalendarDate(2022, 1, 20)
 })
 </script>
 
 <template>
   <UPopover>
     <UButton color="neutral" variant="subtle" icon="i-lucide-calendar">
-      {{ modelValue.start?.toLocaleDateString() }} - {{ modelValue.end?.toLocaleDateString() }}
+      {{ modelValue.start?.toString() || 'None' }} - {{ modelValue.end?.toString() || 'None' }}
     </UButton>
 
     <template #content>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const modelValue = ref(new Date('2023-09-08'))
+import { CalendarDate } from '@internationalized/date'
+
+const modelValue = shallowRef(new CalendarDate(2022, 1, 10))
 
 function getColorByDate(date: Date) {
   const isWeekend = date.getDay() % 6 == 0
@@ -20,7 +22,7 @@ function getColorByDate(date: Date) {
 <template>
   <UCalendar v-model="modelValue">
     <template #day="{ day }">
-      <UChip :color="getColorByDate(day.toDate(''))">
+      <UChip :color="getColorByDate(day.toDate('UTC'))">
         {{ day.day }}
       </UChip>
     </template>
