@@ -96,20 +96,18 @@ const indicatorStyle = computed(() => {
     return
   }
 
-  if(props.orientation === 'vertical') {
+  if (props.orientation === 'vertical') {
     return {
       transform: `translateY(${props.inverted ? '' : '-'}${100 - percent.value}%)`
     }
   } else {
-    if(dir.value === 'rtl') {
+    if (dir.value === 'rtl') {
       return {
         transform: `translateX(${props.inverted ? '-' : ''}${100 - percent.value}%)`
       }
-
     } else {
       return {
         transform: `translateX(${props.inverted ? '' : '-'}${100 - percent.value}%)`
-
       }
     }
   }
