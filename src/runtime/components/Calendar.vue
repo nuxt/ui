@@ -19,6 +19,11 @@ type ModelValue<T extends boolean> = (T extends true ? DateRange : Date) | undef
 
 export interface CalendarProps<T extends boolean> extends Pick<CalendarRootProps, 'numberOfMonths' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'disabled' | 'readonly' | 'initialFocus' | 'isDateDisabled' | 'isDateUnavailable'> {
   /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
+  /**
    * The color of the calendar
    */
   color?: CalendarVariants['color']
@@ -65,11 +70,11 @@ const props = withDefaults(defineProps<CalendarProps<T>>(), {
   fixedWeeks: true,
   yearControls: true
 })
+defineSlots<CalendarSlots>()
 
+const modelValue = defineModel<ModelValue<T>>(undefined)
 // This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
 const range = toRef(() => typeof props.range === 'string' ? true : props.range)
-const modelValue = defineModel<ModelValue<T>>(undefined)
-defineSlots<CalendarSlots>()
 
 const { code: locale, dir, t } = useLocale()
 
