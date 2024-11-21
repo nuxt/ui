@@ -58,11 +58,10 @@ You can easily use the [SelectMenu](/components/select-menu) component to change
 
 ::component-example{class="grid"}
 ---
-extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-columns-selectable'
 componentProps:
-  class: 'flex-1 flex-col overflow-hidden'
+  class: 'flex-1 flex-col'
 ---
 ::
 
