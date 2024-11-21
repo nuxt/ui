@@ -121,7 +121,7 @@ provide('navigation', updatedNavigation)
 @import "tailwindcss";
 @import "@nuxt/ui-pro";
 
-@source "../content/**/*.md";
+@source "../content";
 
 @theme {
   --container-8xl: 90rem;
