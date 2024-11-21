@@ -76,7 +76,8 @@ export default defineNuxtConfig({
     prerender: {
       routes: [
         '/getting-started',
-        '/api/countries.json'
+        '/api/countries.json',
+        '/api/locales.json'
         // '/api/releases.json',
         // '/api/pulls.json'
       ],
