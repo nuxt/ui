@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.1",
-    "@iconify-json/simple-icons": "^1.2.11",
+    "@iconify-json/simple-icons": "^1.2.12",
     "@iconify-json/vscode-icons": "^1.2.2",
     "@nuxt/content": "^2.13.4",
     "@nuxt/fonts": "^0.10.2",
@@ -16,7 +16,7 @@
     "@vueuse/nuxt": "^11.2.0",
     "date-fns": "^4.1.0",
     "joi": "^17.13.3",
-    "nuxt": "^3.14.159",
+    "nuxt": "^3.14.1592",
     "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-component-meta": "^0.9.0",
     "nuxt-og-image": "^3.0.8",

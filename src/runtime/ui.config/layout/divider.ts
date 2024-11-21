@@ -1,3 +1,5 @@
+import type { AvatarSize } from '../../types'
+
 export default {
   wrapper: {
     base: 'flex items-center align-center text-center',
@@ -42,11 +44,11 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0',
-    size: '2xs' as const
+    size: '2xs' as AvatarSize
   },
   label: 'text-sm',
   default: {
-    size: '2xs' as const,
-    type: 'solid' as const
+    size: '2xs',
+    type: 'solid'
   }
 }

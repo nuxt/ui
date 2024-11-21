@@ -16,7 +16,7 @@ export default {
     openIcon: 'i-heroicons-chevron-down-20-solid',
     closeIcon: '',
     class: 'mb-1.5 w-full',
-    variant: 'soft' as const,
+    variant: 'soft',
     truncate: true
   }
 }
