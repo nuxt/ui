@@ -1,9 +1,9 @@
-import { fromDate, getLocalTimeZone } from '@internationalized/date'
+import { fromDate } from '@internationalized/date'
 import type { ZonedDateTime } from '@internationalized/date'
 import type { DateRange, ZonedDateRange } from '../types/date'
 
 export function toZonedDateTime(date?: Date | undefined): undefined | ZonedDateTime {
-  return date ? fromDate(date, getLocalTimeZone()) : undefined
+  return date ? fromDate(date, 'UTC') : undefined
 }
 
 export function toRangeZonedDateTime(range: DateRange): ZonedDateRange {
