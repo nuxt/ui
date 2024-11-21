@@ -16,8 +16,7 @@ describe('Calendar', () => {
 
   it.each([
     // Props
-    ['with class', { props: { class: 'custom-class' } }],
-    ['with ui', { props: { ui: { root: 'w-96' } } }],
+    ['with modelValue', { props: { modelValue: new Date('2025-01-01') } }],
     ['with range', { props: { range: true } }],
     ['with disabled', { props: { range: true } }],
     ['with readonly', { props: { range: true } }],
@@ -29,6 +28,10 @@ describe('Calendar', () => {
     ['without fixed weeks', { props: { fixedWeeks: false } }],
     ['without year controls', { props: { yearControls: false } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
+    ['with color neutral', { props: { color: 'neutral' } }],
+    ['with as', { props: { as: 'section' } }],
+    ['with class', { props: { class: 'max-w-sm' } }],
+    ['with ui', { props: { ui: { header: 'gap-4' } } }],
     // Slots
     ['with heading slot', { slots: { heading: () => 'Heading' } }],
     ['with day slot', { slots: { day: ({ day }: Parameters<CalendarSlots['day']>[0]) => day.day } }],
