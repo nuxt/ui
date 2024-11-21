@@ -52,9 +52,9 @@ export interface CalendarSlots {
 
 <script setup lang="ts" generic="T extends boolean = false">
 import { toRef, computed } from 'vue'
-import { useForwardPropsEmits } from 'radix-vue'
+import { useForwardProps, useEmitAsProps } from 'radix-vue'
 import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
-import { reactiveOmit } from '@vueuse/core'
+import { objectOmit, reactiveOmit } from '@vueuse/core'
 import UButton from './Button.vue'
 import { useLocale } from '../composables/useLocale'
 
@@ -71,7 +71,9 @@ const range = toRef(() => typeof props.range === 'string' ? true : props.range)
 
 const { code: locale, dir, t } = useLocale()
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'color', 'size', 'range', 'yearControls', 'class', 'ui', 'modelValue' as any), emits)
+const parsedProps = useForwardProps(reactiveOmit(props, 'color', 'size', 'range', 'yearControls', 'class', 'ui', 'modelValue' as any))
+const emitsAsProps = objectOmit(useEmitAsProps(emits), ['update:modelValue'])
+const rootProps = computed(() => ({ ...parsedProps.value, ...emitsAsProps }))
 
 const ui = computed(() => calendar({
   color: props.color,
