@@ -5,8 +5,8 @@ export default (options: Required<ModuleOptions>) => {
     slots: {
       root: '',
       header: 'flex items-center justify-between',
-      body: 'pt-4',
-      heading: 'text-center font-medium truncate',
+      body: 'flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0',
+      heading: 'text-center font-medium truncate mx-auto',
       grid: 'w-full border-collapse select-none space-y-1',
       gridRow: 'grid grid-cols-7',
       gridWeekDaysRow: 'mb-1 grid w-full grid-cols-7',

@@ -17,7 +17,7 @@ exports[`Calendar > renders with as correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -195,7 +195,7 @@ exports[`Calendar > renders with class correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -373,7 +373,7 @@ exports[`Calendar > renders with color neutral correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -551,7 +551,7 @@ exports[`Calendar > renders with day slot correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -732,7 +732,7 @@ exports[`Calendar > renders with disabled correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -907,7 +907,7 @@ exports[`Calendar > renders with heading slot correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -1085,7 +1085,7 @@ exports[`Calendar > renders with is date disabled correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -1263,7 +1263,7 @@ exports[`Calendar > renders with is date unavailable correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -1441,7 +1441,7 @@ exports[`Calendar > renders with modelValue correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -1619,7 +1619,7 @@ exports[`Calendar > renders with number of months correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -1953,7 +1953,7 @@ exports[`Calendar > renders with range correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -2131,7 +2131,7 @@ exports[`Calendar > renders with readonly correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -2306,7 +2306,7 @@ exports[`Calendar > renders with size lg correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -2484,7 +2484,7 @@ exports[`Calendar > renders with size md correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -2662,7 +2662,7 @@ exports[`Calendar > renders with size sm correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -2840,7 +2840,7 @@ exports[`Calendar > renders with size xl correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -3018,7 +3018,7 @@ exports[`Calendar > renders with size xs correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="space-y-2 pt-2">
+  <div class="flex flex-col sm:flex-row sm:space-x-4 sm:space-y-0 space-y-2 pt-2">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -3196,7 +3196,7 @@ exports[`Calendar > renders with ui correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -3374,7 +3374,7 @@ exports[`Calendar > renders with week starts on correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -3552,7 +3552,7 @@ exports[`Calendar > renders with week-day slot correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -3730,7 +3730,7 @@ exports[`Calendar > renders with weekday format correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -3908,7 +3908,7 @@ exports[`Calendar > renders without fixed weeks correctly 1`] = `
       <!--v-if-->
     </button>
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">
@@ -4059,7 +4059,7 @@ exports[`Calendar > renders without year controls correctly 1`] = `
     </button>
     <!--v-if-->
   </div>
-  <div class="pt-4">
+  <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
     <table tabindex="-1" role="grid" class="w-full border-collapse select-none space-y-1">
       <thead aria-hidden="true">
         <tr class="mb-1 grid w-full grid-cols-7">

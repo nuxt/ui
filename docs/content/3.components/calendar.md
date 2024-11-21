@@ -129,6 +129,16 @@ name: 'calendar-date-picker-example'
 ---
 ::
 
+### Range Date Picker
+
+Combined [Button](/components/button) and [Popover](/components/popover) components to create a range date picker.
+
+::component-example
+---
+name: 'calendar-range-date-picker-example'
+---
+::
+
 ## API
 
 ### Props
