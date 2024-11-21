@@ -73,24 +73,33 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const updatedNavigation = computed(() => navigation.value?.map(item => ({
-  ...item,
-  children: item.children?.map((child: typeof item) => ({
-    ...child,
-    ...(child.path === '/getting-started/installation' && {
-      title: 'Installation',
-      active: route.path.startsWith('/getting-started/installation'),
-      children: []
-    }),
-    ...(child.path === '/getting-started/i18n' && {
-      title: 'I18n',
-      active: route.path.startsWith('/getting-started/i18n'),
-      children: []
-    })
-  })) || []
-})))
+const { framework } = useSharedData()
 
-provide('navigation', updatedNavigation)
+function filterFrameworkItems(items: any[]) {
+  return items?.filter(item => !item.framework || item.framework === framework.value)
+}
+
+function processNavigationItem(item: any): any {
+  if (item.shadow) {
+    const matchingChild = filterFrameworkItems(item.children)?.[0]
+    return matchingChild
+      ? {
+          ...matchingChild,
+          title: item.title,
+          children: matchingChild.children ? processNavigationItem(matchingChild) : undefined
+        }
+      : item
+  }
+
+  return {
+    ...item,
+    children: item.children?.length ? filterFrameworkItems(item.children)?.map(processNavigationItem) : undefined
+  }
+}
+
+const filteredNavigation = computed(() => navigation.value?.map(processNavigationItem))
+
+provide('navigation', filteredNavigation)
 </script>
 
 <template>

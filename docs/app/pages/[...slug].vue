@@ -21,6 +21,22 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)).map(({ icon, ...link }) => link))
 
+const { framework } = useSharedData()
+
+// Redirect to the correct framework version if the page is not the current framework
+watch(framework, () => {
+  if (page.value?.meta?.framework && page.value?.meta?.framework !== framework.value) {
+    navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
+  }
+})
+
+// Update the framework cookie if the page has a different framework
+onMounted(() => {
+  if (page.value?.meta?.framework && page.value?.meta?.framework !== framework.value) {
+    framework.value = page.value?.meta?.framework as string
+  }
+})
+
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
   title: typeof page.value.navigation === 'object' && page.value.navigation.title ? page.value.navigation.title : page.value.title,
@@ -75,21 +91,6 @@ const communityLinks = computed(() => [{
       </template>
 
       <template #links>
-        <UDropdownMenu v-if="page.select" v-slot="{ open }" :items="page.select.items" :content="{ align: 'end' }">
-          <UButton
-            color="neutral"
-            variant="subtle"
-            v-bind="page.select.items.find((item: any) => item.to === route.path)"
-            block
-            trailing-icon="i-lucide-chevron-down"
-            :class="[open && 'bg-[var(--ui-bg-accented)]/75']"
-            :ui="{
-              trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
-            }"
-            class="w-[128px]"
-          />
-        </UDropdownMenu>
-
         <UButton
           v-for="link in page.links"
           :key="link.label"
