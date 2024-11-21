@@ -119,6 +119,16 @@ name: 'calendar-min-max-dates-example'
 ---
 ::
 
+### Date Picker
+
+Combined [Button](/components/button) and [Popover](/components/popover) components to create a date picker.
+
+::component-example
+---
+name: 'calendar-date-picker-example'
+---
+::
+
 ## API
 
 ### Props
