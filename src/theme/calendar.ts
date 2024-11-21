@@ -3,9 +3,9 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => {
   return {
     slots: {
-      root: 'rounded-[calc(var(--ui-radius)*1.5)]',
+      root: '',
       header: 'flex items-center justify-between',
-      body: 'flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0',
+      body: 'pt-4',
       heading: 'text-center text-sm font-medium truncate',
       grid: 'w-full border-collapse select-none space-y-1',
       gridRow: 'grid grid-cols-7',
