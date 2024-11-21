@@ -3,8 +3,8 @@ import { CalendarDate } from '@internationalized/date'
 import type { Matcher } from 'radix-vue/date'
 
 const modelValue = shallowRef({
-  start: new CalendarDate(2022, 1, 10),
-  end: new CalendarDate(2022, 1, 20)
+  start: new CalendarDate(2022, 1, 1),
+  end: new CalendarDate(2022, 1, 9)
 })
 
 const isDateDisabled: Matcher = (date) => {
