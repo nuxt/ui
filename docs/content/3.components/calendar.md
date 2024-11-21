@@ -1,7 +1,7 @@
 ---
 title: Calendar
 description: A calendar to select a date.
-links: 
+links:
   - label: Calendar
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/calendar.html
@@ -57,23 +57,23 @@ props:
 
 ### Year Controls
 
-Use the `year-controls` prop to show the year controls.
+Use the `year-controls` prop to show the year controls. Defaults to `true`.
 
 ::component-code
 ---
 props:
-  yearControls: true
+  yearControls: false
 ---
 ::
 
 ### Fixed Weeks
 
-Use the `fixedWeeks` prop to display the calendar with fixed weeks.
+Use the `fixed-weeks` prop to display the calendar with fixed weeks. Defaults to `true`.
 
 ::component-code
 ---
 props:
-  fixedWeeks: true
+  fixedWeeks: false
 ---
 ::
 
@@ -91,7 +91,7 @@ name: 'calendar-events-example'
 
 ### Disabled Dates
 
-Mark the interval between `10` and `16` as disabled
+Mark the interval between `10` and `16` as disabled.
 
 ::component-example
 ---
@@ -101,7 +101,7 @@ name: 'calendar-disabled-dates-example'
 
 ### Unavailable Dates
 
-Mark the interval between `10` and `16` as unavailable
+Mark the interval between `10` and `16` as unavailable.
 
 ::component-example
 ---
@@ -111,7 +111,7 @@ name: 'calendar-unavailable-dates-example'
 
 ### Min/Max Dates
 
-Limit the dates between `2023-09-01` and `2023-09-30`
+Limit the dates between `2023-09-01` and `2023-09-30`.
 
 ::component-example
 ---
