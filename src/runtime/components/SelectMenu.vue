@@ -187,6 +187,10 @@ const ui = computed(() => selectMenu({
   buttonGroup: orientation.value
 }))
 
+function by(a: T, b: T) {
+  return isEqual(a, b)
+}
+
 function displayValue(value: T | T[]): string {
   if (multiple.value && Array.isArray(value)) {
     return value.map(v => displayValue(v)).filter(Boolean).join(', ')
@@ -276,6 +280,7 @@ function onUpdateOpen(value: boolean) {
     :name="name"
     :disabled="disabled"
     :multiple="multiple"
+    :by="by"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
@@ -309,7 +314,7 @@ function onUpdateOpen(value: boolean) {
 
     <ComboboxPortal :disabled="!portal">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-        <ComboboxInput v-if="!!searchInput" v-model="searchTerm" as-child>
+        <ComboboxInput v-if="!!searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
           <UInput autofocus autocomplete="off" v-bind="searchInputProps" :class="ui.input({ class: props.ui?.input })" />
         </ComboboxInput>
 

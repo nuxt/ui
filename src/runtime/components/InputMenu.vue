@@ -187,6 +187,10 @@ const ui = computed(() => inputMenu({
   buttonGroup: orientation.value
 }))
 
+function by(a: T, b: T) {
+  return isEqual(a, b)
+}
+
 function displayValue(value: T): string {
   if (!props.valueKey) {
     return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
@@ -298,6 +302,7 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     :multiple="multiple"
+    :by="by"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     :as-child="!!multiple"
     @update:model-value="onUpdate"

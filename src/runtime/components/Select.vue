@@ -127,7 +127,7 @@ const emits = defineEmits<SelectEmits<T, V, M>>()
 const slots = defineSlots<SelectSlots<T, M>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
@@ -153,6 +153,10 @@ const ui = computed(() => select({
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectItem[][] : [])
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
+
+function by(a: AcceptableValue, b: AcceptableValue) {
+  return isEqual(a, b)
+}
 
 function displayValue(value?: AcceptableValue | AcceptableValue[]): string | undefined {
   if (!value) {
@@ -195,6 +199,8 @@ function onUpdateOpen(value: boolean) {
     :name="name"
     :autocomplete="autocomplete"
     :disabled="disabled"
+    :multiple="multiple"
+    :by="by"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
