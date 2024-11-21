@@ -17,7 +17,12 @@ export default defineNuxtConfig({
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
-    'nuxt-og-image'
+    'nuxt-og-image',
+    (_, nuxt) => {
+      nuxt.hook('components:dirs', (dirs) => {
+        dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
+      })
+    }
   ],
 
   app: {
@@ -71,7 +76,8 @@ export default defineNuxtConfig({
     prerender: {
       routes: [
         '/getting-started',
-        '/api/countries.json'
+        '/api/countries.json',
+        '/api/locales.json'
         // '/api/releases.json',
         // '/api/pulls.json'
       ],

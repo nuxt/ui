@@ -12,7 +12,7 @@
   "dependencies": {
     "@nuxt/ui": "latest",
     "knitwork": "^1.1.0",
-    "nuxt": "^3.14.159",
+    "nuxt": "^3.14.1592",
     "prettier": "^3.3.3",
     "zod": "^3.23.8"
   }

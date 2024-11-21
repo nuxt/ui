@@ -73,7 +73,6 @@ export default defineNuxtModule<ModuleOptions>({
     docs: 'https://ui3.nuxt.dev/getting-started/installation'
   },
   defaults: defaultOptions,
-
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 

@@ -92,12 +92,12 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 
 <template>
   <Component.Root v-slot="{ open }" v-bind="rootProps">
-    <Component.Trigger v-if="!!slots.default" as-child>
+    <Component.Trigger v-if="!!slots.default" as-child :class="props.class">
       <slot :open="open" />
     </Component.Trigger>
 
     <Component.Portal :disabled="!portal">
-      <Component.Content v-bind="contentProps" :class="ui.content({ class: [props.class, props.ui?.content] })" v-on="contentEvents">
+      <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
         <slot name="content" />
 
         <Component.Arrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />

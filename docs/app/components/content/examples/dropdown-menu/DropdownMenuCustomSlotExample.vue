@@ -13,7 +13,7 @@ const items = [{
 </script>
 
 <template>
-  <UDropdownMenu :items="items" class="w-48">
+  <UDropdownMenu :items="items" :ui="{ content: 'w-48' }">
     <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
     <template #profile-trailing>
