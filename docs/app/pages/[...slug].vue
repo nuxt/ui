@@ -31,11 +31,11 @@ watch(framework, () => {
 })
 
 // Update the framework cookie if the page has a different framework
-onMounted(() => {
+watch(page, () => {
   if (page.value?.meta?.framework && page.value?.meta?.framework !== framework.value) {
     framework.value = page.value?.meta?.framework as string
   }
-})
+}, { immediate: true })
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
