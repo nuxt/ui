@@ -3,10 +3,7 @@
 @variant dark (&:where(.dark, .dark *));
 
 @layer base {
-  input,
-  textarea,
-  select,
-  button {
+  input, textarea, select, button {
     border: 0px solid;
     border-radius: 0;
     padding: 0;
