@@ -25,6 +25,7 @@ const { framework } = useSharedData()
 
 // Redirect to the correct framework version if the page is not the current framework
 watch(framework, () => {
+  console.log('framework', framework.value)
   if (page.value?.meta?.framework && page.value?.meta?.framework !== framework.value) {
     navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
   }
@@ -32,6 +33,7 @@ watch(framework, () => {
 
 // Update the framework cookie if the page has a different framework
 watch(page, () => {
+  console.log('page', page.value)
   if (page.value?.meta?.framework && page.value?.meta?.framework !== framework.value) {
     framework.value = page.value?.meta?.framework as string
   }
