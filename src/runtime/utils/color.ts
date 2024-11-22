@@ -133,7 +133,7 @@ export function transformRGBtoHEX(rgb: RGBColor): string {
     }
   }
 
-  return hex.join('').toUpperCase()
+  return hex.join('')
 }
 
 export function transformHEXtoRGB(hex: string): RGBColor {
