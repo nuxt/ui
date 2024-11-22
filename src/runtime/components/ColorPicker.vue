@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/color-picker'
 import type { PopoverProps } from './Popover.vue'
-// import type { HSBColor } from '../types/color'
+import type { HSBColor } from '../types/color'
 
 const appConfig = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
 
@@ -15,7 +15,7 @@ type ColorPickerVariants = VariantProps<typeof colorPicker>
 
 export type ColorPickerFormat = 'hex' | 'rgb'
 
-export type ColorPickerProps = {
+export type ColorPickerProps<F> = {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -24,7 +24,7 @@ export type ColorPickerProps = {
   inline?: boolean
   disabled?: boolean
   defaultValue?: any
-  format?: ColorPickerFormat
+  format?: F
   size?: ColorPickerVariants['size']
   popover?: PopoverProps
   class?: any
@@ -36,27 +36,34 @@ export interface ColorPickerSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="F extends ColorPickerFormat">
 import { ref } from 'vue'
 import { Primitive } from 'radix-vue'
-import { createReusableTemplate, useEventListener, useElementBounding } from '@vueuse/core'
+import { createReusableTemplate, useEventListener, useElementBounding, watchPausable } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
 import UPopover from './Popover.vue'
-import { transformHEXtoHSB, transformHSBtoHEX } from '../utils/color'
+import { normalizeHSB, transformHEXtoHSB, transformHSBtoHEX } from '../utils/color'
 
-const props = withDefaults(defineProps<ColorPickerProps>(), {
+const props = withDefaults(defineProps<ColorPickerProps<F>>(), {
   format: 'hex'
 })
 defineSlots<ColorPickerSlots>()
-const modelValue = defineModel(undefined)
+const modelValue = defineModel<any>({
+  get: (value) => {
+    return transformHEXtoHSB(value)
+  },
+  set: (value) => {
+    return transformHSBtoHEX(value)
+  }
+})
 
 function useColorDraggable(
   targetElement: MaybeRefOrGetter<HTMLElement | null>,
   containerElement: MaybeRefOrGetter<HTMLElement | null>,
-  axis: 'x' | 'y' | 'both' = 'both'
+  axis: 'x' | 'y' | 'both' = 'both',
+  initialPosition: { x: number, y: number } = { x: 0, y: 0 }
 ) {
-  const position = ref({ x: 0, y: 0 })
-  const percentage = ref({ x: 0, y: 0 })
+  const position = ref(initialPosition)
   const pressedDelta = ref()
 
   const targetRect = useElementBounding(targetElement)
@@ -66,8 +73,8 @@ function useColorDraggable(
     const container = toValue(containerElement)
 
     pressedDelta.value = {
-      x: event.clientX - (container ? event.clientX - containerRect.left.value + container.scrollLeft : targetRect.left.value) + targetRect.width.value / 2,
-      y: event.clientY - (container ? event.clientY - containerRect.top.value + container.scrollTop : targetRect.top.value) + targetRect.width.value / 2
+      x: event.clientX - (container ? event.clientX - containerRect.left.value + container.scrollLeft : targetRect.left.value),
+      y: event.clientY - (container ? event.clientY - containerRect.top.value + container.scrollTop : targetRect.top.value)
     }
 
     move(event)
@@ -80,18 +87,14 @@ function useColorDraggable(
     let { x, y } = position.value
 
     if (container && (axis === 'x' || axis === 'both')) {
-      x = Math.min(Math.max(0, event.clientX - pressedDelta.value.x), container.scrollWidth - targetRect.width.value - 1)
+      x = Math.min(Math.max(0, (event.clientX - pressedDelta.value.x) / container.scrollWidth * 100), 100)
     }
 
     if (container && (axis === 'y' || axis === 'both')) {
-      y = Math.min(Math.max(0, event.clientY - pressedDelta.value.y), container.scrollHeight - targetRect.height.value - 1)
+      y = Math.min(Math.max(0, (event.clientY - pressedDelta.value.y) / container.scrollHeight * 100), 100)
     }
 
     position.value = { x, y }
-    percentage.value = {
-      x: (x / (container ? container.scrollWidth - targetRect.width.value : targetRect.width.value)) * 100,
-      y: (y / (container ? container.scrollHeight - targetRect.height.value : targetRect.height.value)) * 100
-    }
   }
 
   function end() {
@@ -109,47 +112,63 @@ function useColorDraggable(
   }
 
   return {
-    position,
-    percentage: computed(() => percentage.value)
+    position
   }
 }
-
-const pickedValue = computed({
-  get() {
-    return transformHEXtoHSB(modelValue.value)
-  },
-  set(value) {
-    modelValue.value = transformHSBtoHEX(value)
-  }
-})
 
 const selectorRef = ref<HTMLDivElement | null>(null)
 const selectorThumbRef = ref<HTMLDivElement | null>(null)
 const trackRef = ref<HTMLDivElement | null>(null)
 const trackThumbRef = ref<HTMLDivElement | null>(null)
 
-const { position: selectorThumbPosition, percentage: selectorPercentage } = useColorDraggable(selectorThumbRef, selectorRef)
-const { position: trackThumbPosition, percentage: trackPercentage } = useColorDraggable(trackThumbRef, trackRef, 'y')
+const { position: selectorThumbPosition } = useColorDraggable(selectorThumbRef, selectorRef, 'both', {
+  x: modelValue.value.s,
+  y: 100 - modelValue.value.b
+})
+const { position: trackThumbPosition } = useColorDraggable(trackThumbRef, trackRef, 'y', {
+  x: 0,
+  y: (modelValue.value.h * 100) / 360
+})
 
-const trackThumbColor = computed(() => transformHSBtoHEX({ h: pickedValue.value.h, b: 100, s: 100 }))
-const pickedColor = computed(() => transformHSBtoHEX(pickedValue.value))
+const trackThumbColor = computed(() => transformHSBtoHEX({ h: modelValue.value.h, b: 100, s: 100 }))
+const pickedColor = computed(() => transformHSBtoHEX(modelValue.value))
 
-watchEffect(() => {
-  pickedValue.value = {
-    h: (trackPercentage.value.y / 100) * 360,
-    s: selectorPercentage.value.x,
-    b: 100 - selectorPercentage.value.y
+watch([selectorThumbPosition, trackThumbPosition], () => {
+  pause()
+
+  modelValue.value = normalizeHSB({
+    h: (trackThumbPosition.value.y / 100) * 360,
+    s: selectorThumbPosition.value.x,
+    b: 100 - selectorThumbPosition.value.y
+  })
+
+  nextTick(resume)
+})
+
+const { resume, pause } = watchPausable(modelValue, (hsb) => {
+  selectorThumbPosition.value = {
+    x: hsb.s,
+    y: 100 - hsb.b
+  }
+
+  trackThumbPosition.value = {
+    x: 0,
+    y: (hsb.h * 100) / 360
   }
 })
 
+const selectorStyle = computed(() => ({
+  backgroundColor: `#${trackThumbColor.value}`
+}))
+
 const selectorThumbStyle = computed(() => ({
-  left: `${selectorThumbPosition.value.x}px`,
-  top: `${selectorThumbPosition.value.y}px`
+  left: `${selectorThumbPosition.value.x}%`,
+  top: `${selectorThumbPosition.value.y}%`
 }))
 
 const trackThumbStyle = computed(() => ({
-  backgroundColor: trackThumbColor.value,
-  top: `${trackThumbPosition.value.y}px`
+  backgroundColor: `#${trackThumbColor.value}`,
+  top: `${trackThumbPosition.value.y}%`
 }))
 
 const [DefinePickerTemplate, PickerTemplate] = createReusableTemplate()
@@ -161,11 +180,14 @@ const ui = colorPicker({
 
 <template>
   <DefinePickerTemplate>
+    <div class="absolute -mt-6">
+      {{ modelValue }}
+    </div>
     <div :class="ui.picker({ class: props.ui?.picker })" :data-disabled="disabled ? true : undefined">
       <div
         ref="selectorRef"
         :class="ui.selector({ class: props.ui?.selector })"
-        :style="{ backgroundColor: trackThumbColor }"
+        :style="selectorStyle"
       >
         <div :class="ui.selectorBackground({ class: props.ui?.selectorBackground })" data-color-picker-background>
           <div ref="selectorThumbRef" :class="ui.selectorThumb({ class: props.ui?.selectorThumb })" :style="selectorThumbStyle" />
@@ -187,7 +209,7 @@ const ui = colorPicker({
       <template #default="{ open }">
         <slot name="trigger" :open="open">
           <button :class="ui.trigger({ class: props.ui?.trigger })" :disabled="props.disabled" type="button">
-            <span :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" :style="{ backgroundColor: pickedColor }" />
+            <span :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" :style="{ backgroundColor: `#${pickedColor}` }" />
           </button>
         </slot>
       </template>

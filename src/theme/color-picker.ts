@@ -9,9 +9,9 @@ export default (options: Required<ModuleOptions>) => ({
     picker: 'flex gap-4',
     selector: 'rounded',
     selectorBackground: 'w-full h-full relative rounded',
-    selectorThumb: 'absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer',
+    selectorThumb: '-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer',
     track: 'w-[8px] rounded relative',
-    trackThumb: 'absolute transform -translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer'
+    trackThumb: 'absolute transform -translate-y-1/2 -translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer'
   },
   variants: {
     size: {
