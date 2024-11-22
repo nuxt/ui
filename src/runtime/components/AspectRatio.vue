@@ -33,6 +33,7 @@ defineSlots<AspectRatioSlots>()
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'asChild', 'ratio'))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = aspectRatio()
 </script>
 
