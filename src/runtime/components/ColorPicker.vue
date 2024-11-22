@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/color-picker'
 import type { PopoverProps } from './Popover.vue'
-import type { HSBColor } from '../types/color'
+import type { HSBColor, RGBColor, HEXColor } from '../types/color'
 
 const appConfig = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
 
@@ -15,16 +15,19 @@ type ColorPickerVariants = VariantProps<typeof colorPicker>
 
 export type ColorPickerFormat = 'hex' | 'rgb'
 
-export type ColorPickerProps<F> = {
+export type ColorPickerProps<Format> = {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
-  inline?: boolean
+  /**
+   * Throttle time in ms for the color picker
+   */
+  throttle?: number
   disabled?: boolean
   defaultValue?: any
-  format?: F
+  format?: Format
   size?: ColorPickerVariants['size']
   popover?: PopoverProps
   class?: any
@@ -34,38 +37,53 @@ export type ColorPickerProps<F> = {
 export interface ColorPickerSlots {
   trigger(props: { open: boolean }): any
 }
+
+export type ModelValues = {
+  hex: HEXColor
+  rgb: RGBColor
+}
 </script>
 
-<script setup lang="ts" generic="F extends ColorPickerFormat">
+<script setup lang="ts" generic="Format extends ColorPickerFormat = 'hex'">
 import { ref } from 'vue'
 import { Primitive } from 'radix-vue'
-import { createReusableTemplate, useEventListener, useElementBounding, watchPausable } from '@vueuse/core'
+import { useEventListener, useElementBounding, watchThrottled } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
-import UPopover from './Popover.vue'
-import { normalizeHSB, transformHEXtoHSB, transformHSBtoHEX } from '../utils/color'
+import { normalizeHSB, normalizeBrightness, normalizeHue, transformHEXtoHSB, transformHSBtoHEX, transformHSBtoRGB, transformRGBtoHSB } from '../utils/color'
 
-const props = withDefaults(defineProps<ColorPickerProps<F>>(), {
-  format: 'hex'
+const props = withDefaults(defineProps<ColorPickerProps<Format>>(), {
+  throttle: 50
 })
-defineSlots<ColorPickerSlots>()
-const modelValue = defineModel<any>({
+const modelValue = defineModel<ModelValues[Format], string, HSBColor, HSBColor>({
+  required: true,
   get: (value) => {
-    return transformHEXtoHSB(value)
+    switch (props.format) {
+      case 'rgb':
+        return transformRGBtoHSB(value as RGBColor)
+      case 'hex':
+      default:
+        return transformHEXtoHSB(value as HEXColor)
+    }
   },
   set: (value) => {
-    return transformHSBtoHEX(value)
+    switch (props.format) {
+      case 'rgb':
+        return transformHSBtoRGB(value)
+      case 'hex':
+      default:
+        return transformHSBtoHEX(value)
+    }
   }
 })
+defineSlots<ColorPickerSlots>()
 
-function useColorDraggable(
-  targetElement: MaybeRefOrGetter<HTMLElement | null>,
+function useColorDraggable(targetElement: MaybeRefOrGetter<HTMLElement | null>,
   containerElement: MaybeRefOrGetter<HTMLElement | null>,
   axis: 'x' | 'y' | 'both' = 'both',
-  initialPosition: { x: number, y: number } = { x: 0, y: 0 }
+  initialPosition = { x: 0, y: 0 }
 ) {
-  const position = ref(initialPosition)
-  const pressedDelta = ref()
-
+  const position = ref<{ x: number, y: number }>(initialPosition)
+  const pressedDelta = ref<{ x: number, y: number }>()
   const targetRect = useElementBounding(targetElement)
   const containerRect = useElementBounding(containerElement)
 
@@ -123,39 +141,39 @@ const trackThumbRef = ref<HTMLDivElement | null>(null)
 
 const { position: selectorThumbPosition } = useColorDraggable(selectorThumbRef, selectorRef, 'both', {
   x: modelValue.value.s,
-  y: 100 - modelValue.value.b
+  y: normalizeBrightness(modelValue.value.b)
 })
+
 const { position: trackThumbPosition } = useColorDraggable(trackThumbRef, trackRef, 'y', {
   x: 0,
-  y: (modelValue.value.h * 100) / 360
+  y: normalizeHue(modelValue.value.h, 'right')
 })
 
-const trackThumbColor = computed(() => transformHSBtoHEX({ h: modelValue.value.h, b: 100, s: 100 }))
-const pickedColor = computed(() => transformHSBtoHEX(modelValue.value))
-
-watch([selectorThumbPosition, trackThumbPosition], () => {
-  pause()
-
+watchThrottled([selectorThumbPosition, trackThumbPosition], () => {
   modelValue.value = normalizeHSB({
-    h: (trackThumbPosition.value.y / 100) * 360,
+    h: normalizeHue(trackThumbPosition.value.y),
     s: selectorThumbPosition.value.x,
-    b: 100 - selectorThumbPosition.value.y
+    b: normalizeBrightness(selectorThumbPosition.value.y)
   })
+}, { throttle: props.throttle })
 
-  nextTick(resume)
-})
-
-const { resume, pause } = watchPausable(modelValue, (hsb) => {
-  selectorThumbPosition.value = {
-    x: hsb.s,
-    y: 100 - hsb.b
+watch(modelValue, (hsb) => {
+  const newPosSelector = { x: hsb.s, y: normalizeBrightness(hsb.b) }
+  if (selectorThumbPosition.value.x !== newPosSelector.x && selectorThumbPosition.value.y !== newPosSelector.y) {
+    selectorThumbPosition.value = newPosSelector
   }
 
-  trackThumbPosition.value = {
-    x: 0,
-    y: (hsb.h * 100) / 360
+  const newPosTrack = { x: 0, y: normalizeHue(hsb.h, 'right') }
+  if (trackThumbPosition.value.x !== newPosTrack.x && trackThumbPosition.value.y !== newPosTrack.y) {
+    trackThumbPosition.value = newPosTrack
   }
 })
+
+const trackThumbColor = computed(() => transformHSBtoHEX({
+  h: normalizeHue(trackThumbPosition.value.y),
+  b: 100,
+  s: 100
+}))
 
 const selectorStyle = computed(() => ({
   backgroundColor: `#${trackThumbColor.value}`
@@ -171,18 +189,13 @@ const trackThumbStyle = computed(() => ({
   top: `${trackThumbPosition.value.y}%`
 }))
 
-const [DefinePickerTemplate, PickerTemplate] = createReusableTemplate()
-
 const ui = colorPicker({
   size: props.size
 })
 </script>
 
 <template>
-  <DefinePickerTemplate>
-    <div class="absolute -mt-6">
-      {{ modelValue }}
-    </div>
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.picker({ class: props.ui?.picker })" :data-disabled="disabled ? true : undefined">
       <div
         ref="selectorRef"
@@ -201,22 +214,6 @@ const ui = colorPicker({
         <div ref="trackThumbRef" :class="ui.trackThumb({ class: props.ui?.trackThumb })" :style="trackThumbStyle" />
       </div>
     </div>
-  </DefinePickerTemplate>
-
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <PickerTemplate v-if="props.inline" />
-    <UPopover v-else v-bind="props.popover">
-      <template #default="{ open }">
-        <slot name="trigger" :open="open">
-          <button :class="ui.trigger({ class: props.ui?.trigger })" :disabled="props.disabled" type="button">
-            <span :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" :style="{ backgroundColor: `#${pickedColor}` }" />
-          </button>
-        </slot>
-      </template>
-      <template #content>
-        <PickerTemplate :class="ui.triggerContent({ class: props.ui?.triggerContent })" />
-      </template>
-    </UPopover>
   </Primitive>
 </template>
 

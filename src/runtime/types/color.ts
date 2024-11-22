@@ -9,3 +9,5 @@ export interface RGBColor {
   g: number
   b: number
 }
+
+export type HEXColor = string
