@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AspectRatio > renders with as correctly 1`] = `
+"<div style="position: relative; width: 100%; padding-bottom: 100%;" data-radix-aspect-ratio-wrapper="">
+  <div style="position: absolute;"></div>
+</div>"
+`;
+
+exports[`AspectRatio > renders with aspect 4/3 correctly 1`] = `
+"<div style="position: relative; width: 100%; padding-bottom: 75%;" data-radix-aspect-ratio-wrapper="">
+  <div style="position: absolute;"></div>
+</div>"
+`;
+
+exports[`AspectRatio > renders with aspect 16/9 correctly 1`] = `
+"<div style="position: relative; width: 100%; padding-bottom: 56.25%;" data-radix-aspect-ratio-wrapper="">
+  <div style="position: absolute;"></div>
+</div>"
+`;
+
+exports[`AspectRatio > renders with class correctly 1`] = `
+"<div style="position: relative; width: 100%; padding-bottom: 100%;" data-radix-aspect-ratio-wrapper="">
+  <div style="position: absolute;" class="block"></div>
+</div>"
+`;
+
+exports[`AspectRatio > renders with default slot correctly 1`] = `
+"<div style="position: relative; width: 100%; padding-bottom: 100%;" data-radix-aspect-ratio-wrapper="">
+  <div style="position: absolute;">default slot</div>
+</div>"
+`;
+
+exports[`AspectRatio > renders with ui correctly 1`] = `
+"<div style="position: relative; width: 100%; padding-bottom: 100%;" data-radix-aspect-ratio-wrapper="">
+  <div style="position: absolute;" class="block"></div>
+</div>"
+`;
