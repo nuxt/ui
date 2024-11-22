@@ -167,12 +167,12 @@ const ui = computed(() => contextMenu({
 
 <template>
   <ContextMenuRoot v-bind="rootProps">
-    <ContextMenuTrigger v-if="!!slots.default" as-child :disabled="disabled">
+    <ContextMenuTrigger v-if="!!slots.default" as-child :disabled="disabled" :class="props.class">
       <slot />
     </ContextMenuTrigger>
 
     <UContextMenuContent
-      :class="ui.content({ class: [props.class, props.ui?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"

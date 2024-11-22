@@ -173,7 +173,8 @@ const doc = ({ name, pro }) => {
 description:
 links: ${pro
   ? ''
-  : `- label: ${upperName}
+  : `
+  - label: ${upperName}
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/${kebabName}.html`}
   - label: GitHub

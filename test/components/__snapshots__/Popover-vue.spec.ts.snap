@@ -13,6 +13,19 @@ exports[`Popover > renders with arrow correctly 1`] = `
 <!--teleport end-->"
 `;
 
+exports[`Popover > renders with class correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-radix-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div trapfocus="false" disableoutsidepointerevents="false" id="radix-vue-popover-content-v-0" data-state="open" role="dialog" style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height); animation: none;" data-dismissable-layer="" tabindex="-1" class="bg-[var(--ui-bg)] rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] focus:outline-none shadow-xl" data-side="bottom" data-align="center"></div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
 exports[`Popover > renders with content slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
@@ -48,6 +61,19 @@ exports[`Popover > renders with open correctly 1`] = `
 
 <div data-radix-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div trapfocus="false" disableoutsidepointerevents="false" id="radix-vue-popover-content-v-0" data-state="open" role="dialog" style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height); animation: none;" data-dismissable-layer="" tabindex="-1" class="bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] focus:outline-none" data-side="bottom" data-align="center"></div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Popover > renders with ui correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-radix-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div trapfocus="false" disableoutsidepointerevents="false" id="radix-vue-popover-content-v-0" data-state="open" role="dialog" style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height); animation: none;" data-dismissable-layer="" tabindex="-1" class="bg-[var(--ui-bg)] rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] focus:outline-none shadow-xl" data-side="bottom" data-align="center"></div>
 </div>
 
 
