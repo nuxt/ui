@@ -8,16 +8,14 @@ describe('ColorPicker', () => {
 
   it.each([
     // Props
-    ['with inline', { props: { inline: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with as', { props: { as: 'div' } }],
     ['with class', { props: { class: 'w-96' } }],
     ['with ui', { props: { ui: { root: 'w-96' } } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...sizes.map((size: string) => [`with size ${size} inline`, { props: { size, inline: true } }]),
     // Slots
     ['with trigger slot', { slots: { trigger: () => 'Trigger' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ColorPickerProps, slots?: Partial<ColorPickerSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ColorPickerProps<'hex'>, slots?: Partial<ColorPickerSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, ColorPicker)
     expect(html).toMatchSnapshot()
   })

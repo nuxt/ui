@@ -4,7 +4,6 @@ import type { MaybeRefOrGetter } from '@vueuse/shared'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/color-picker'
-import type { PopoverProps } from './Popover.vue'
 import type { HSBColor, RGBColor, HEXColor } from '../types/color'
 
 const appConfig = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
@@ -29,7 +28,6 @@ export type ColorPickerProps<Format> = {
   defaultValue?: any
   format?: Format
   size?: ColorPickerVariants['size']
-  popover?: PopoverProps
   class?: any
   ui?: Partial<typeof colorPicker.slots>
 }
