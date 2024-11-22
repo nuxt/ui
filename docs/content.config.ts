@@ -5,6 +5,10 @@ export const collections = {
     type: 'page',
     source: '**/*',
     schema: z.object({
+      navigation: z.object({
+        title: z.string().optional(),
+        framework: z.string().optional()
+      }),
       links: z.array(z.object({
         label: z.string(),
         icon: z.string(),

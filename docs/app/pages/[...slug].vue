@@ -25,17 +25,19 @@ const { framework } = useSharedData()
 
 // Redirect to the correct framework version if the page is not the current framework
 watch(framework, () => {
-  console.log('framework', framework.value)
-  if (page.value?.meta?.framework && page.value?.meta?.framework !== framework.value) {
-    navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
+  if (page.value?.navigation?.framework && page.value?.navigation?.framework !== framework.value) {
+    if (route.path.endsWith(`/${page.value?.navigation?.framework}`)) {
+      navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
+    } else {
+      navigateTo(`/getting-started`)
+    }
   }
 })
 
-// Update the framework cookie if the page has a different framework
+// Update the framework if the page has a different framework
 watch(page, () => {
-  console.log('page', page.value)
-  if (page.value?.meta?.framework && page.value?.meta?.framework !== framework.value) {
-    framework.value = page.value?.meta?.framework as string
+  if (page.value?.navigation?.framework && page.value?.navigation?.framework !== framework.value) {
+    framework.value = page.value?.navigation?.framework as string
   }
 }, { immediate: true })
 

@@ -3,5 +3,5 @@ const { framework } = useSharedData()
 </script>
 
 <template>
-  <MDCSlot :name="framework" />
+  <slot :name="framework" />
 </template>

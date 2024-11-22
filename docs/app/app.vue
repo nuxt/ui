@@ -120,7 +120,7 @@ provide('navigation', filteredNavigation)
       <Footer />
 
       <ClientOnly>
-        <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+        <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="filteredNavigation" :fuse="{ resultLimit: 42 }" />
       </ClientOnly>
     </template>
   </UApp>
