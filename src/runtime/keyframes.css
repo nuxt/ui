@@ -362,6 +362,24 @@
   }
 }
 
+
+@keyframes carousel-rtl {
+
+  0%,
+  100% {
+    width: 50%
+  }
+
+  0% {
+    transform: translateX(100%)
+  }
+
+  100% {
+    transform: translateX(-200%)
+  }
+}
+
+
 @keyframes carousel-vertical {
 
   0%,
@@ -391,6 +409,22 @@
 
   100% {
     transform: translateX(-100%)
+  }
+}
+
+@keyframes carousel-inverse-rtl {
+
+  0%,
+  100% {
+    width: 50%
+  }
+
+  0% {
+    transform: translateX(-200%)
+  }
+
+  100% {
+    transform: translateX(100%)
   }
 }
 

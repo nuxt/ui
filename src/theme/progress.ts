@@ -162,7 +162,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     animation: 'carousel',
     class: {
-      indicator: 'data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite]'
+      indicator: 'data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     orientation: 'vertical',
@@ -174,7 +174,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     animation: 'carousel-inverse',
     class: {
-      indicator: 'data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite]'
+      indicator: 'data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     orientation: 'vertical',
