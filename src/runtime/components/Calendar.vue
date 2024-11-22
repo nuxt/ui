@@ -14,7 +14,7 @@ type CalendarVariants = VariantProps<typeof calendar>
 
 export type ModelValue<T extends boolean> = (T extends true ? RangeCalendarRootProps['modelValue'] : CalendarRootProps['modelValue']) | undefined
 
-export interface CalendarProps<T extends boolean> extends Omit<CalendarRootProps & RangeCalendarRootProps, 'modelValue' | 'defaultValue' | 'dir' | 'locale'> {
+export interface CalendarProps<T extends boolean> extends Omit<CalendarRootProps & RangeCalendarRootProps, 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

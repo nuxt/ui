@@ -1,16 +1,31 @@
 <script setup lang="ts">
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate, DateFormatter, getLocalTimeZone } from '@internationalized/date'
+
+const df = new DateFormatter('en-US', {
+  dateStyle: 'medium'
+})
 
 const modelValue = shallowRef({
-  start: new CalendarDate(2022, 1, 10),
-  end: new CalendarDate(2022, 1, 20)
+  start: new CalendarDate(2022, 1, 20),
+  end: new CalendarDate(2022, 2, 10)
 })
 </script>
 
 <template>
   <UPopover>
     <UButton color="neutral" variant="subtle" icon="i-lucide-calendar">
-      {{ modelValue.start?.toString() || 'None' }} - {{ modelValue.end?.toString() || 'None' }}
+      <template v-if="modelValue.start">
+        <template v-if="modelValue.end">
+          {{ df.format(modelValue.start.toDate(getLocalTimeZone())) }} - {{ df.format(modelValue.end.toDate(getLocalTimeZone())) }}
+        </template>
+
+        <template v-else>
+          {{ df.format(modelValue.start.toDate(getLocalTimeZone())) }}
+        </template>
+      </template>
+      <template v-else>
+        Pick a date
+      </template>
     </UButton>
 
     <template #content>

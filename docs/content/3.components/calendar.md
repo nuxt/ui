@@ -5,11 +5,18 @@ links:
   - label: Calendar
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/calendar.html
+  - label: Range Calendar
+    icon: i-custom-radix-vue
+    to: https://www.radix-vue.com/components/range-calendar.html
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Calendar.vue
 navigation.badge: New
 ---
+
+## Preface
+
+The component depends on the [@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) package, which solves a lot of the problems that come with working with dates and times in JavaScript.
 
 ## Usage
 
@@ -17,6 +24,20 @@ Use the `v-model` directive to control the selected date.
 
 ::component-code
 ---
+---
+::
+
+
+### Multiple Dates
+
+Use the `multiple` prop to allow multiple selections.
+
+::component-code
+---
+ignore:
+  - multiple
+props:
+  multiple: true
 ---
 ::
 
@@ -55,9 +76,31 @@ props:
 ---
 ::
 
+### Disabled
+
+Use the `disabled` prop to disable the calendar.
+
+::component-code
+---
+props:
+  disabled: true
+---
+::
+
+### Number Of Months
+
+Use the `numberOfMonths` prop to change the number of months in the calendar.
+
+::component-code
+---
+props:
+  numberOfMonths: 2
+---
+::
+
 ### Year Controls
 
-Use the `year-controls` prop to show the year controls. Defaults to `true`.
+Use the `year-controls` prop to show the year controls.
 
 ::component-code
 ---
@@ -68,7 +111,7 @@ props:
 
 ### Fixed Weeks
 
-Use the `fixed-weeks` prop to display the calendar with fixed weeks. Defaults to `true`.
+Use the `fixed-weeks` prop to display the calendar with fixed weeks.
 
 ::component-code
 ---
@@ -111,7 +154,7 @@ name: 'calendar-unavailable-dates-example'
 
 ### Min/Max Dates
 
-Limit the dates between `2023-09-01` and `2023-09-30`.
+Limit the dates between `Sep 1, 2023` and `Sep 30, 2023`.
 
 ::component-example
 ---
