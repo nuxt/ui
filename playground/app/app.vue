@@ -55,6 +55,7 @@ const components = [
   'skeleton',
   'slideover',
   'slider',
+  'stepper',
   'switch',
   'tabs',
   'table',
