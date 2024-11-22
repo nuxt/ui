@@ -206,7 +206,7 @@ props:
 ::
 
 ::note{to="https://www.radix-vue.com/components/select.html#change-the-positioning-mode"}
-Read more about the `content.position` prop in the [Radix Vue documentation](https://www.radix-vue.com/components/select.html#change-the-positioning-mode).
+Read more about the `content.position` prop in the **Radix Vue** documentation.
 ::
 
 <!--

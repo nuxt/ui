@@ -298,7 +298,7 @@ name: 'input-form-field-example'
 ::
 
 ::tip{to="/components/form"}
-It also provides validation and error handling when used within a [Form](/components/form) component.
+It also provides validation and error handling when used within a **Form** component.
 ::
 
 ### Within a ButtonGroup
