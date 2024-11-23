@@ -60,6 +60,8 @@ export default defineComponent({
     const formId = useId()
     const bus = useEventBus<FormEvent>(`form-${formId}`)
 
+    const parsedValue = ref(null)
+
     onMounted(() => {
       bus.on(async (event) => {
         if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
@@ -87,7 +89,7 @@ export default defineComponent({
         if (errors) {
           errs = errs.concat(errors)
         } else {
-          Object.assign(props.state, result)
+          parsedValue.value = result
         }
       }
 
@@ -130,7 +132,7 @@ export default defineComponent({
         if (props.validateOn?.includes('submit')) {
           await validate()
         }
-        event.data = props.state
+        event.data = props.schema ? parsedValue.value : props.state
         emit('submit', event)
       } catch (error) {
         if (!(error instanceof FormException)) {
@@ -321,7 +323,7 @@ async function validateYupSchema(
   schema: YupObjectSchema<any>
 ): Promise<ValidateReturnSchema<typeof state>> {
   try {
-    const result = schema.validateSync(state, { abortEarly: false })
+    const result = await schema.validate(state, { abortEarly: false })
     return {
       errors: null,
       result
