@@ -104,6 +104,7 @@ function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   }))
 }
 
+const parsedValue = ref<T | null>(null)
 async function getErrors(): Promise<FormErrorWithId[]> {
   let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
 
@@ -112,7 +113,7 @@ async function getErrors(): Promise<FormErrorWithId[]> {
     if (errors) {
       errs = errs.concat(errors)
     } else {
-      Object.assign(props.state, result)
+      parsedValue.value = result
     }
   }
 
@@ -169,7 +170,7 @@ async function onSubmitWrapper(payload: Event) {
 
   try {
     await _validate({ nested: true })
-    event.data = props.state
+    event.data = props.schema ? parsedValue.value : props.state
     await props.onSubmit?.(event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
