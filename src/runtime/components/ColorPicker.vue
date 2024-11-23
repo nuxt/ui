@@ -47,15 +47,15 @@ export type ColorPickerProps = {
 </script>
 
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, nextTick, computed } from 'vue'
 import { Primitive } from 'radix-vue'
-import { useEventListener, useElementBounding, watchThrottled } from '@vueuse/core'
+import { useEventListener, useElementBounding, watchThrottled, watchPausable } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
 import Color from 'color'
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {
   format: 'hex',
-  throttle: 16,
+  throttle: 50,
   defaultValue: '#FFFFFF'
 })
 const modelValue = defineModel<string>(undefined)
@@ -178,25 +178,28 @@ const { position: trackThumbPosition } = useColorDraggable(trackThumbRef, trackR
   y: normalizeHue(pickedColor.value.h, 'right')
 }, disabled)
 
+const { pause: pauseWatchColor, resume: resumeWatchColor } = watchPausable(pickedColor, (hsb) => {
+  selectorThumbPosition.value = {
+    x: hsb.s,
+    y: normalizeBrightness(hsb.v)
+  }
+  trackThumbPosition.value = {
+    x: 0,
+    y: normalizeHue(hsb.h, 'right')
+  }
+})
+
 watchThrottled([selectorThumbPosition, trackThumbPosition], () => {
+  pauseWatchColor()
+
   pickedColor.value = {
     h: normalizeHue(trackThumbPosition.value.y),
     s: selectorThumbPosition.value.x,
     v: normalizeBrightness(selectorThumbPosition.value.y)
   }
+
+  nextTick(resumeWatchColor)
 }, { throttle: () => props.throttle })
-
-watch(pickedColor, (hsb) => {
-  const newPosSelector = { x: hsb.s, y: normalizeBrightness(hsb.v) }
-  if (selectorThumbPosition.value.x !== newPosSelector.x && selectorThumbPosition.value.y !== newPosSelector.y) {
-    selectorThumbPosition.value = newPosSelector
-  }
-
-  const newPosTrack = { x: 0, y: normalizeHue(hsb.h, 'right') }
-  if (trackThumbPosition.value.x !== newPosTrack.x && trackThumbPosition.value.y !== newPosTrack.y) {
-    trackThumbPosition.value = newPosTrack
-  }
-})
 
 const trackThumbColor = computed(() => Color({
   h: normalizeHue(trackThumbPosition.value.y),
@@ -209,6 +212,7 @@ const selectorStyle = computed(() => ({
 }))
 
 const selectorThumbStyle = computed(() => ({
+  backgroundColor: Color(modelValue.value || props.defaultValue).hex(),
   left: `${selectorThumbPosition.value.x}%`,
   top: `${selectorThumbPosition.value.y}%`
 }))
@@ -224,7 +228,7 @@ const ui = colorPicker({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })" :data-disabled="disabled ? true : undefined">
     <div :class="ui.picker({ class: props.ui?.picker })">
       <div
         ref="selectorRef"

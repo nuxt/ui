@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ColorPicker, { type ColorPickerProps } from '../../src/runtime/components/ColorPicker.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/color-picker'
@@ -23,5 +24,14 @@ describe('ColorPicker', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ColorPickerProps }) => {
     const html = await ComponentRender(nameOrHtml, options, ColorPicker)
     expect(html).toMatchSnapshot()
+  })
+
+  describe('emits', () => {
+    test('update:modelValue event', async () => {
+      const wrapper = await mountSuspended(ColorPicker)
+      await wrapper.setValue('#00C16A')
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['#00C16A']] })
+    })
   })
 })

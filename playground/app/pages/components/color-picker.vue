@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const colorHex = ref('#9c27b0')
+const colorHex = ref('#9C27B0')
 </script>
 
 <template>
@@ -10,13 +10,13 @@ const colorHex = ref('#9c27b0')
     </div>
     <USeparator />
     <div class="flex justify-between gap-2">
-      <UButton @click="colorHex = '#9c27B0'">
+      <UButton @click="colorHex = '#9C27B0'">
         Purple
       </UButton>
-      <UButton @click="colorHex = '#8bc34a'">
+      <UButton @click="colorHex = '#8BC34A'">
         Lime
       </UButton>
-      <UButton @click="colorHex = '#ff6347'">
+      <UButton @click="colorHex = '#FF6347'">
         Tomato
       </UButton>
     </div>
