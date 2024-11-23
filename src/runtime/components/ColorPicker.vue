@@ -12,9 +12,15 @@ const colorPicker = tv({ extend: tv(theme), ...(appConfig.ui?.colorPicker || {})
 
 type ColorPickerVariants = VariantProps<typeof colorPicker>
 
-export type ColorPickerFormat = 'hex' | 'rgb'
+export type ColorPickerFormat = 'hex' | 'rgb' | 'hsb'
 
-export type ColorPickerProps<Format> = {
+export type ColorPickerModelValues = {
+  hex: HEXColor
+  rgb: RGBColor
+  hsb: HSBColor
+}
+
+export type ColorPickerProps<Format extends ColorPickerFormat> = {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -25,20 +31,15 @@ export type ColorPickerProps<Format> = {
    */
   throttle?: number
   disabled?: boolean
-  defaultValue?: any
+  defaultValue?: ColorPickerModelValues[Format]
+  /**
+   * Format of the color
+   * @defaultValue 'hex'
+   */
   format?: Format
   size?: ColorPickerVariants['size']
   class?: any
   ui?: Partial<typeof colorPicker.slots>
-}
-
-export interface ColorPickerSlots {
-  trigger(props: { open: boolean }): any
-}
-
-export type ModelValues = {
-  hex: HEXColor
-  rgb: RGBColor
 }
 </script>
 
@@ -52,19 +53,22 @@ import { normalizeHSB, normalizeBrightness, normalizeHue, transformHEXtoHSB, tra
 const props = withDefaults(defineProps<ColorPickerProps<Format>>(), {
   throttle: 50
 })
-const modelValue = defineModel<ModelValues[Format], string, HSBColor, HSBColor>({
-  required: true,
+const modelValue = defineModel<ColorPickerModelValues[Format], string, HSBColor, HSBColor>({
   get: (value) => {
     switch (props.format) {
+      case 'hsb':
+        return value
       case 'rgb':
         return transformRGBtoHSB(value as RGBColor)
       case 'hex':
       default:
-        return transformHEXtoHSB(value as HEXColor)
+        return transformHEXtoHSB((value || 'ffffff') as HEXColor)
     }
   },
   set: (value) => {
     switch (props.format) {
+      case 'hsb':
+        return value
       case 'rgb':
         return transformHSBtoRGB(value)
       case 'hex':
@@ -73,7 +77,6 @@ const modelValue = defineModel<ModelValues[Format], string, HSBColor, HSBColor>(
     }
   }
 })
-defineSlots<ColorPickerSlots>()
 
 function useColorDraggable(targetElement: MaybeRefOrGetter<HTMLElement | null>,
   containerElement: MaybeRefOrGetter<HTMLElement | null>,

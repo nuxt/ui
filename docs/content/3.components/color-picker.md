@@ -12,7 +12,83 @@ Use the `v-model` directive to control the value of the ColorPicker.
 
 ::component-code
 ---
+ignore:
+  - modelValue
+external:
+  - modelValue
 props:
+  modelValue: '00C16A'
+---
+::
+
+Use the `default-value` prop to set the initial value when you do not need to control its state.
+
+::component-code
+---
+ignore:
+  - defaultValue
+props:
+  defaultValue: '00BCD4'
+---
+::
+
+### RGB
+
+Use the `format` prop to set `rgb` value of the ColorPicker.
+
+::component-code
+---
+ignore:
+  - modelValue.r
+  - modelValue.g
+  - modelValue.b
+  - format
+external:
+  - modelValue
+props:
+  format: rgb
+  modelValue:
+    r: 0
+    g: 193
+    b: 106
+---
+::
+
+### HSB
+
+Use the `format` prop to set `hsb` value of the ColorPicker.
+
+::component-code
+---
+ignore:
+  - modelValue.h
+  - modelValue.s
+  - modelValue.b
+  - format
+external:
+  - modelValue
+props:
+  format: hsb
+  modelValue:
+    h: 152.95
+    s: 100
+    b: 75.69
+---
+::
+
+### Throttle
+
+Use the `throttle` prop to set the throttle value of the ColorPicker.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+props:
+  throttle: 100
+  modelValue: '00C16A'
 ---
 ::
 
@@ -38,36 +114,15 @@ props:
 ---
 ::
 
-### Inline
-
-Use the `inline` prop to display the ColorPicker inline.
-
-::component-code
----
-props:
-  inline: true
----
-::
-
 ## Examples
 
-### With RGB value
+### Color chooser
 
-Default color format to use in value binding is `hex` and other possible values can be `rgb` using the format property.
-
-::component-example
----
-name: 'color-picker-rgb-example'
----
-::
-
-### With input control
-
-You can use the `#trigger` slot to display a custom trigger.
+Combined [Button](/components/button) and [Popover](/components/popover) components to create a color chooser.
 
 ::component-example
 ---
-name: 'color-picker-trigger-example'
+name: 'color-picker-chooser-example'
 ---
 ::
 
@@ -76,10 +131,6 @@ name: 'color-picker-trigger-example'
 ### Props
 
 :component-props
-
-### Slots
-
-:component-slots
 
 ### Emits
 
