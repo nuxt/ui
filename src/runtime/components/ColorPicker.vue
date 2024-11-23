@@ -4,7 +4,6 @@ import type { MaybeRefOrGetter } from '@vueuse/shared'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/color-picker'
-import type { HSBColor, RGBColor, HEXColor } from '../types/color'
 
 const appConfig = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
 
@@ -12,15 +11,13 @@ const colorPicker = tv({ extend: tv(theme), ...(appConfig.ui?.colorPicker || {})
 
 type ColorPickerVariants = VariantProps<typeof colorPicker>
 
-export type ColorPickerFormat = 'hex' | 'rgb' | 'hsb'
-
-export type ColorPickerModelValues = {
-  hex: HEXColor
-  rgb: RGBColor
-  hsb: HSBColor
+type HSVColor = {
+  h: number
+  s: number
+  v: number
 }
 
-export type ColorPickerProps<Format extends ColorPickerFormat> = {
+export type ColorPickerProps = {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -30,50 +27,56 @@ export type ColorPickerProps<Format extends ColorPickerFormat> = {
    * Throttle time in ms for the color picker
    */
   throttle?: number
+  /**
+   * Disable the color picker
+   */
   disabled?: boolean
-  defaultValue?: ColorPickerModelValues[Format]
+  defaultValue?: string
   /**
    * Format of the color
    * @defaultValue 'hex'
    */
-  format?: Format
+  format?: 'hex' | 'rgb' | 'hsl' | 'hwb'
   size?: ColorPickerVariants['size']
   class?: any
   ui?: Partial<typeof colorPicker.slots>
 }
 </script>
 
-<script setup lang="ts" generic="Format extends ColorPickerFormat = 'hex'">
-import { ref } from 'vue'
+<script setup lang="ts">
+import { ref, watch, computed } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useEventListener, useElementBounding, watchThrottled } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
-import { normalizeHSB, normalizeBrightness, normalizeHue, transformHEXtoHSB, transformHSBtoHEX, transformHSBtoRGB, transformRGBtoHSB } from '../utils/color'
+import Color from 'color'
 
-const props = withDefaults(defineProps<ColorPickerProps<Format>>(), {
-  throttle: 50
+const props = withDefaults(defineProps<ColorPickerProps>(), {
+  format: 'hex',
+  throttle: 16,
+  defaultValue: '#FFF'
 })
-const modelValue = defineModel<ColorPickerModelValues[Format], string, HSBColor, HSBColor>({
+const modelValue = defineModel<string, string, HSVColor, HSVColor>({
   get: (value) => {
-    switch (props.format) {
-      case 'hsb':
-        return value
-      case 'rgb':
-        return transformRGBtoHSB(value as RGBColor)
-      case 'hex':
-      default:
-        return transformHEXtoHSB((value || 'ffffff') as HEXColor)
+    try {
+      const color = Color(value || props.defaultValue)
+      return color.hsv().object()
+    } catch (_) {
+      return { h: 0, s: 0, v: 0 }
     }
   },
   set: (value) => {
+    const color = Color.hsv(value.h ?? 0, value.s ?? 0, value.v ?? 0)
+
     switch (props.format) {
-      case 'hsb':
-        return value
       case 'rgb':
-        return transformHSBtoRGB(value)
+        return color.rgb().string()
+      case 'hsl':
+        return color.hsl().string()
+      case 'hwb':
+        return color.hwb().string()
       case 'hex':
       default:
-        return transformHSBtoHEX(value)
+        return color.hex()
     }
   }
 })
@@ -135,6 +138,18 @@ function useColorDraggable(targetElement: MaybeRefOrGetter<HTMLElement | null>,
   }
 }
 
+function normalizeHue(hue: number, dir: 'left' | 'right' = 'left'): number {
+  if (dir === 'right') {
+    return (hue * 100) / 360
+  }
+
+  return (hue / 100) * 360
+}
+
+function normalizeBrightness(brightness: number): number {
+  return 100 - brightness
+}
+
 const selectorRef = ref<HTMLDivElement | null>(null)
 const selectorThumbRef = ref<HTMLDivElement | null>(null)
 const trackRef = ref<HTMLDivElement | null>(null)
@@ -142,7 +157,7 @@ const trackThumbRef = ref<HTMLDivElement | null>(null)
 
 const { position: selectorThumbPosition } = useColorDraggable(selectorThumbRef, selectorRef, 'both', {
   x: modelValue.value.s,
-  y: normalizeBrightness(modelValue.value.b)
+  y: normalizeBrightness(modelValue.value.v)
 })
 
 const { position: trackThumbPosition } = useColorDraggable(trackThumbRef, trackRef, 'y', {
@@ -151,15 +166,15 @@ const { position: trackThumbPosition } = useColorDraggable(trackThumbRef, trackR
 })
 
 watchThrottled([selectorThumbPosition, trackThumbPosition], () => {
-  modelValue.value = normalizeHSB({
+  modelValue.value = {
     h: normalizeHue(trackThumbPosition.value.y),
     s: selectorThumbPosition.value.x,
-    b: normalizeBrightness(selectorThumbPosition.value.y)
-  })
-}, { throttle: props.throttle })
+    v: normalizeBrightness(selectorThumbPosition.value.y)
+  }
+}, { throttle: () => props.throttle })
 
 watch(modelValue, (hsb) => {
-  const newPosSelector = { x: hsb.s, y: normalizeBrightness(hsb.b) }
+  const newPosSelector = { x: hsb.s, y: normalizeBrightness(hsb.v) }
   if (selectorThumbPosition.value.x !== newPosSelector.x && selectorThumbPosition.value.y !== newPosSelector.y) {
     selectorThumbPosition.value = newPosSelector
   }
@@ -170,14 +185,14 @@ watch(modelValue, (hsb) => {
   }
 })
 
-const trackThumbColor = computed(() => transformHSBtoHEX({
+const trackThumbColor = computed(() => Color({
   h: normalizeHue(trackThumbPosition.value.y),
-  b: 100,
-  s: 100
-}))
+  s: 100,
+  v: 100
+}).hex())
 
 const selectorStyle = computed(() => ({
-  backgroundColor: `#${trackThumbColor.value}`
+  backgroundColor: trackThumbColor.value
 }))
 
 const selectorThumbStyle = computed(() => ({
@@ -186,7 +201,7 @@ const selectorThumbStyle = computed(() => ({
 }))
 
 const trackThumbStyle = computed(() => ({
-  backgroundColor: `#${trackThumbColor.value}`,
+  backgroundColor: trackThumbColor.value,
   top: `${trackThumbPosition.value.y}%`
 }))
 

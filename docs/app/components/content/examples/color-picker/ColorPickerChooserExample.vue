@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const color = ref('00C16A')
-const iconStyle = computed(() => ({ backgroundColor: `#${color.value}` }))
+const color = ref('#00C16A')
+const iconStyle = computed(() => ({ backgroundColor: color.value }))
 </script>
 
 <template>

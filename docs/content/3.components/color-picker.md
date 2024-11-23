@@ -17,7 +17,7 @@ ignore:
 external:
   - modelValue
 props:
-  modelValue: '00C16A'
+  modelValue: '#00C16A'
 ---
 ::
 
@@ -28,51 +28,58 @@ Use the `default-value` prop to set the initial value when you do not need to co
 ignore:
   - defaultValue
 props:
-  defaultValue: '00BCD4'
+  defaultValue: '#00BCD4'
 ---
 ::
 
-### RGB
+### RGB Format
 
 Use the `format` prop to set `rgb` value of the ColorPicker.
 
 ::component-code
 ---
 ignore:
-  - modelValue.r
-  - modelValue.g
-  - modelValue.b
+  - modelValue
   - format
 external:
   - modelValue
 props:
   format: rgb
-  modelValue:
-    r: 0
-    g: 193
-    b: 106
+  modelValue: 'rgb(0, 193, 106)'
 ---
 ::
 
-### HSB
+### HSL Format
 
-Use the `format` prop to set `hsb` value of the ColorPicker.
+Use the `format` prop to set `hsl` value of the ColorPicker.
 
 ::component-code
 ---
 ignore:
-  - modelValue.h
-  - modelValue.s
-  - modelValue.b
+  - modelValue
   - format
 external:
   - modelValue
 props:
-  format: hsb
-  modelValue:
-    h: 152.95
-    s: 100
-    b: 75.69
+  format: hsl
+  modelValue: 'hsl(153, 100%, 37.8%)'
+---
+::
+
+### HWB Format
+
+Use the `format` prop to set `hwb` value of the ColorPicker.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - format
+external:
+  - modelValue
+props:
+  format: hwb
+  modelValue: 'hwb(150, 0%, 24%)'
 ---
 ::
 
@@ -88,7 +95,7 @@ external:
   - modelValue
 props:
   throttle: 100
-  modelValue: '00C16A'
+  modelValue: '#00C16A'
 ---
 ::
 
