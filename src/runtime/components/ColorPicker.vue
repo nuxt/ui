@@ -31,6 +31,9 @@ export type ColorPickerProps = {
    * Disable the color picker
    */
   disabled?: boolean
+  /**
+   * The default value of the color picker
+   */
   defaultValue?: string
   /**
    * Format of the color
@@ -53,30 +56,35 @@ import Color from 'color'
 const props = withDefaults(defineProps<ColorPickerProps>(), {
   format: 'hex',
   throttle: 16,
-  defaultValue: '#FFF'
+  defaultValue: '#FFFFFF'
 })
-const modelValue = defineModel<string, string, HSVColor, HSVColor>({
-  get: (value) => {
+const modelValue = defineModel<string>(undefined)
+
+const pickedColor = computed<HSVColor>({
+  get() {
     try {
-      const color = Color(value || props.defaultValue)
-      return color.hsv().object()
+      const color = Color(modelValue.value || props.defaultValue)
+      return color.hsv().object() as HSVColor
     } catch (_) {
-      return { h: 0, s: 0, v: 0 }
+      return { h: 0, s: 0, v: 100 }
     }
   },
-  set: (value) => {
-    const color = Color.hsv(value.h ?? 0, value.s ?? 0, value.v ?? 0)
+  set(value) {
+    const color = Color.hsv(value.h, value.s, value.v)
 
     switch (props.format) {
       case 'rgb':
-        return color.rgb().string()
+        modelValue.value = color.rgb().string()
+        break
       case 'hsl':
-        return color.hsl().string()
+        modelValue.value = color.hsl().string()
+        break
       case 'hwb':
-        return color.hwb().string()
+        modelValue.value = color.hwb().string()
+        break
       case 'hex':
       default:
-        return color.hex()
+        modelValue.value = color.hex()
     }
   }
 })
@@ -84,7 +92,8 @@ const modelValue = defineModel<string, string, HSVColor, HSVColor>({
 function useColorDraggable(targetElement: MaybeRefOrGetter<HTMLElement | null>,
   containerElement: MaybeRefOrGetter<HTMLElement | null>,
   axis: 'x' | 'y' | 'both' = 'both',
-  initialPosition = { x: 0, y: 0 }
+  initialPosition = { x: 0, y: 0 },
+  disabled?: MaybeRefOrGetter<boolean | undefined>
 ) {
   const position = ref<{ x: number, y: number }>(initialPosition)
   const pressedDelta = ref<{ x: number, y: number }>()
@@ -92,6 +101,8 @@ function useColorDraggable(targetElement: MaybeRefOrGetter<HTMLElement | null>,
   const containerRect = useElementBounding(containerElement)
 
   function start(event: PointerEvent) {
+    if (toValue(disabled)) return event.preventDefault()
+
     const container = toValue(containerElement)
 
     pressedDelta.value = {
@@ -155,25 +166,27 @@ const selectorThumbRef = ref<HTMLDivElement | null>(null)
 const trackRef = ref<HTMLDivElement | null>(null)
 const trackThumbRef = ref<HTMLDivElement | null>(null)
 
+const disabled = computed(() => props.disabled)
+
 const { position: selectorThumbPosition } = useColorDraggable(selectorThumbRef, selectorRef, 'both', {
-  x: modelValue.value.s,
-  y: normalizeBrightness(modelValue.value.v)
-})
+  x: pickedColor.value.s,
+  y: normalizeBrightness(pickedColor.value.v)
+}, disabled)
 
 const { position: trackThumbPosition } = useColorDraggable(trackThumbRef, trackRef, 'y', {
   x: 0,
-  y: normalizeHue(modelValue.value.h, 'right')
-})
+  y: normalizeHue(pickedColor.value.h, 'right')
+}, disabled)
 
 watchThrottled([selectorThumbPosition, trackThumbPosition], () => {
-  modelValue.value = {
+  pickedColor.value = {
     h: normalizeHue(trackThumbPosition.value.y),
     s: selectorThumbPosition.value.x,
     v: normalizeBrightness(selectorThumbPosition.value.y)
   }
 }, { throttle: () => props.throttle })
 
-watch(modelValue, (hsb) => {
+watch(pickedColor, (hsb) => {
   const newPosSelector = { x: hsb.s, y: normalizeBrightness(hsb.v) }
   if (selectorThumbPosition.value.x !== newPosSelector.x && selectorThumbPosition.value.y !== newPosSelector.y) {
     selectorThumbPosition.value = newPosSelector
@@ -212,14 +225,19 @@ const ui = colorPicker({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <div :class="ui.picker({ class: props.ui?.picker })" :data-disabled="disabled ? true : undefined">
+    <div :class="ui.picker({ class: props.ui?.picker })">
       <div
         ref="selectorRef"
         :class="ui.selector({ class: props.ui?.selector })"
         :style="selectorStyle"
       >
         <div :class="ui.selectorBackground({ class: props.ui?.selectorBackground })" data-color-picker-background>
-          <div ref="selectorThumbRef" :class="ui.selectorThumb({ class: props.ui?.selectorThumb })" :style="selectorThumbStyle" />
+          <div
+            ref="selectorThumbRef"
+            :class="ui.selectorThumb({ class: props.ui?.selectorThumb })"
+            :style="selectorThumbStyle"
+            :data-disabled="disabled ? true : undefined"
+          />
         </div>
       </div>
       <div
@@ -227,7 +245,12 @@ const ui = colorPicker({
         :class="ui.track({ class: props.ui?.track })"
         data-color-picker-track
       >
-        <div ref="trackThumbRef" :class="ui.trackThumb({ class: props.ui?.trackThumb })" :style="trackThumbStyle" />
+        <div
+          ref="trackThumbRef"
+          :class="ui.trackThumb({ class: props.ui?.trackThumb })"
+          :style="trackThumbStyle"
+          :data-disabled="disabled ? true : undefined"
+        />
       </div>
     </div>
   </Primitive>
