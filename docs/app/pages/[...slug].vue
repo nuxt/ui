@@ -24,15 +24,17 @@ const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(naviga
 const { framework } = useSharedData()
 
 // Redirect to the correct framework version if the page is not the current framework
-watch(framework, () => {
-  if (page.value?.navigation?.framework && page.value?.navigation?.framework !== framework.value) {
-    if (route.path.endsWith(`/${page.value?.navigation?.framework}`)) {
-      navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
-    } else {
-      navigateTo(`/getting-started`)
+if (!import.meta.prerender) {
+  watch(framework, () => {
+    if (page.value?.navigation?.framework && page.value?.navigation?.framework !== framework.value) {
+      if (route.path.endsWith(`/${page.value?.navigation?.framework}`)) {
+        navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
+      } else {
+        navigateTo(`/getting-started`)
+      }
     }
-  }
-})
+  })
+}
 
 // Update the framework if the page has a different framework
 watch(page, () => {
