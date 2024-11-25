@@ -23,6 +23,7 @@ export interface CommandPaletteItem {
   avatar?: AvatarProps
   chip?: ChipProps
   kbds?: KbdProps['value'][] | KbdProps[]
+  active?: boolean
   loading?: boolean
   disabled?: boolean
   slot?: string
@@ -276,7 +277,7 @@ const groups = computed(() => {
               :key="`group-${groupIndex}-${index}`"
               :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml'])"
               :disabled="item.disabled"
-              :class="ui.item({ class: props.ui?.item })"
+              :class="ui.item({ class: props.ui?.item, active: item.active })"
               @select="item.onSelect"
             >
               <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
