@@ -1,22 +1,19 @@
 ---
 title: Calendar
-description: A calendar to select a date.
+description: A calendar component for selecting single dates, multiple dates or date ranges.
 links:
   - label: Calendar
     icon: i-custom-radix-vue
     to: https://www.radix-vue.com/components/calendar.html
-  - label: Range Calendar
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/range-calendar.html
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Calendar.vue
 navigation.badge: New
 ---
 
-## Preface
-
-The component depends on the [@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) package, which solves a lot of the problems that come with working with dates and times in JavaScript.
+::note
+This component relies on the [@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner.
+::
 
 ## Usage
 
@@ -27,8 +24,9 @@ Use the `v-model` directive to control the selected date.
 ---
 ::
 
+<!-- TODO: Add example with default value -->
 
-### Multiple Dates
+### Multiple
 
 Use the `multiple` prop to allow multiple selections.
 
@@ -94,13 +92,24 @@ Use the `numberOfMonths` prop to change the number of months in the calendar.
 ::component-code
 ---
 props:
-  numberOfMonths: 2
+  numberOfMonths: 3
+---
+::
+
+### Month Controls
+
+Use the `month-controls` prop to show the month controls. Defaults to `true`.
+
+::component-code
+---
+props:
+  monthControls: false
 ---
 ::
 
 ### Year Controls
 
-Use the `year-controls` prop to show the year controls.
+Use the `year-controls` prop to show the year controls. Defaults to `true`.
 
 ::component-code
 ---
@@ -122,9 +131,9 @@ props:
 
 ## Examples
 
-### Events Calendar
+### With chip events
 
-Add a different color to each day.
+Use the [Chip](/components/chip) component to add events to specific days.
 
 ::component-example
 ---
@@ -132,9 +141,9 @@ name: 'calendar-events-example'
 ---
 ::
 
-### Disabled Dates
+### With disabled dates
 
-Mark the interval between `10` and `16` as disabled.
+Use the `is-date-disabled` prop with a function to mark specific dates as disabled.
 
 ::component-example
 ---
@@ -142,9 +151,9 @@ name: 'calendar-disabled-dates-example'
 ---
 ::
 
-### Unavailable Dates
+### With unavailable dates
 
-Mark the interval between `10` and `16` as unavailable.
+Use the `is-date-unavailable` prop with a function to mark specific dates as unavailable.
 
 ::component-example
 ---
@@ -152,9 +161,9 @@ name: 'calendar-unavailable-dates-example'
 ---
 ::
 
-### Min/Max Dates
+### With min/max dates
 
-Limit the dates between `Sep 1, 2023` and `Sep 30, 2023`.
+Use the `min-value` and `max-value` props to limit the dates.
 
 ::component-example
 ---
@@ -162,9 +171,9 @@ name: 'calendar-min-max-dates-example'
 ---
 ::
 
-### Date Picker
+### As a DatePicker
 
-Combined [Button](/components/button) and [Popover](/components/popover) components to create a date picker.
+Use a [Button](/components/button) and a [Popover](/components/popover) component to create a date picker.
 
 ::component-example
 ---
@@ -172,13 +181,13 @@ name: 'calendar-date-picker-example'
 ---
 ::
 
-### Range Date Picker
+### As a DateRangePicker
 
-Combined [Button](/components/button) and [Popover](/components/popover) components to create a range date picker.
+Use a [Button](/components/button) and a [Popover](/components/popover) component to create a date range picker.
 
 ::component-example
 ---
-name: 'calendar-range-date-picker-example'
+name: 'calendar-date-range-picker-example'
 ---
 ::
 

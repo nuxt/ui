@@ -33,6 +33,10 @@ export interface CalendarProps<T extends boolean> extends Omit<CalendarRootProps
    */
   range?: T
   /**
+   * Show month controls
+   */
+  monthControls?: boolean
+  /**
    * Show year controls
    */
   yearControls?: boolean
@@ -60,6 +64,7 @@ import { useLocale } from '../composables/useLocale'
 
 const props = withDefaults(defineProps<CalendarProps<T>>(), {
   fixedWeeks: true,
+  monthControls: true,
   yearControls: true
 })
 const emits = defineEmits<CalendarEmits>()
@@ -71,7 +76,7 @@ const range = toRef(() => typeof props.range === 'string' ? true : props.range)
 
 const { code: locale, dir, t } = useLocale()
 
-const parsedProps = useForwardProps(reactiveOmit(props, 'color', 'size', 'range', 'yearControls', 'class', 'ui', 'modelValue' as any))
+const parsedProps = useForwardProps(reactiveOmit(props, 'color', 'size', 'range', 'monthControls', 'yearControls', 'class', 'ui', 'modelValue' as any))
 const emitsAsProps = objectOmit(useEmitAsProps(emits), ['update:modelValue'])
 const rootProps = computed(() => ({ ...parsedProps.value, ...emitsAsProps }))
 
@@ -94,18 +99,18 @@ const Calendar = computed(() => range.value ? RangeCalendar : SingleCalendar)
 <template>
   <Calendar.Root
     v-slot="{ weekDays, grid }"
-    v-model="modelValue as ModelValue<true & false>"
+    v-model="(modelValue as ModelValue<true & false>)"
     v-bind="rootProps"
     :locale="locale"
     :dir="dir"
-    :default-value="defaultValue as ModelValue<true & false>"
+    :default-value="(defaultValue as ModelValue<true & false>)"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
         <UButton :icon="appConfig.ui.icons.chevronDoubleLeft" :size="props.size" color="neutral" variant="ghost" />
       </Calendar.Prev>
-      <Calendar.Prev :aria-label="t('calendar.prevMonth')" as-child>
+      <Calendar.Prev v-if="props.monthControls" :aria-label="t('calendar.prevMonth')" as-child>
         <UButton :icon="appConfig.ui.icons.chevronLeft" :size="props.size" color="neutral" variant="ghost" />
       </Calendar.Prev>
       <Calendar.Heading v-slot="{ headingValue }" :class="ui.heading({ class: props.ui?.heading })">
@@ -113,7 +118,7 @@ const Calendar = computed(() => range.value ? RangeCalendar : SingleCalendar)
           {{ headingValue }}
         </slot>
       </Calendar.Heading>
-      <Calendar.Next :aria-label="t('calendar.nextMonth')" as-child>
+      <Calendar.Next v-if="props.monthControls" :aria-label="t('calendar.nextMonth')" as-child>
         <UButton :icon="appConfig.ui.icons.chevronRight" :size="props.size" color="neutral" variant="ghost" />
       </Calendar.Next>
       <Calendar.Next v-if="props.yearControls" :next-page="(date: DateValue) => paginateYear(date, 1)" :aria-label="t('calendar.nextYear')" as-child>

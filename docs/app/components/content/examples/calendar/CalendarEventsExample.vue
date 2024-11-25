@@ -12,17 +12,17 @@ function getColorByDate(date: Date) {
   }
 
   if (isDayMeeting) {
-    return 'warning'
+    return 'error'
   }
 
-  return 'info'
+  return 'success'
 }
 </script>
 
 <template>
   <UCalendar v-model="modelValue">
     <template #day="{ day }">
-      <UChip :color="getColorByDate(day.toDate('UTC'))">
+      <UChip :show="!!getColorByDate(day.toDate('UTC'))" :color="getColorByDate(day.toDate('UTC'))" size="2xs">
         {{ day.day }}
       </UChip>
     </template>
