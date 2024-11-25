@@ -117,6 +117,10 @@ export default defineComponent({
     ui: {
       type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
+    },
+    pauseTimeoutOnHover: {
+      type: Boolean,
+      default: true
     }
   },
   emits: ['close'],
@@ -157,13 +161,13 @@ export default defineComponent({
     })
 
     function onMouseover() {
-      if (timer) {
+      if (props.pauseTimeoutOnHover && timer) {
         timer.pause()
       }
     }
 
     function onMouseleave() {
-      if (timer) {
+      if (props.pauseTimeoutOnHover && timer) {
         timer.resume()
       }
     }
