@@ -19,7 +19,8 @@ describe('CommandPalette', () => {
       label: 'Add hashtag',
       suffix: 'Add a hashtag to the current item.',
       icon: 'i-lucide-hash',
-      kbds: ['meta', 'H']
+      kbds: ['meta', 'H'],
+      disabled: true
     }, {
       label: 'Add label',
       suffix: 'Add a label to the current item.',
@@ -53,7 +54,8 @@ describe('CommandPalette', () => {
       label: 'benjamincanac',
       avatar: {
         src: 'https://github.com/benjamincanac.png'
-      }
+      },
+      active: true
     }]
   }]
 
