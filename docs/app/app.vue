@@ -73,7 +73,15 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const { framework } = useSharedData()
+const { framework, frameworks } = useSharedData()
+
+const groups = computed(() => {
+  return [{
+    id: 'framework',
+    label: 'Framework',
+    items: frameworks.value
+  }]
+})
 
 function filterFrameworkItems(items: any[]) {
   return items?.filter(item => !item.framework || item.framework === framework.value)
@@ -120,7 +128,13 @@ provide('navigation', filteredNavigation)
       <Footer />
 
       <ClientOnly>
-        <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="filteredNavigation" :fuse="{ resultLimit: 42 }" />
+        <LazyUContentSearch
+          v-model:search-term="searchTerm"
+          :files="files"
+          :groups="groups"
+          :navigation="filteredNavigation"
+          :fuse="{ resultLimit: 42 }"
+        />
       </ClientOnly>
     </template>
   </UApp>
