@@ -9,7 +9,8 @@ describe('CommandPalette', () => {
       label: 'Add new file',
       suffix: 'Create a new file in the current directory or workspace.',
       icon: 'i-lucide-file-plus',
-      kbds: ['meta', 'N']
+      kbds: ['meta', 'N'],
+      active: true
     }, {
       label: 'Add new folder',
       suffix: 'Create a new folder in the current directory or workspace.',
@@ -54,8 +55,7 @@ describe('CommandPalette', () => {
       label: 'benjamincanac',
       avatar: {
         src: 'https://github.com/benjamincanac.png'
-      },
-      active: true
+      }
     }]
   }]
 
