@@ -72,7 +72,7 @@ async function validateYupSchema(
   schema: YupObjectSchema<any>
 ): Promise<ValidateReturnSchema<typeof state>> {
   try {
-    const result = schema.validateSync(state, { abortEarly: false })
+    const result = await schema.validate(state, { abortEarly: false })
     return {
       errors: null,
       result
