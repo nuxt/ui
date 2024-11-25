@@ -41,6 +41,15 @@ export default defineNuxtConfig({
       markdown: {
         highlight: {
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+        },
+        remarkPlugins: {
+          'remark-mdc': {
+            options: {
+              experimental: {
+                autoUnwrap: false
+              }
+            }
+          }
         }
       }
     }
@@ -61,6 +70,8 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { redirect: '/getting-started', prerender: false },
     '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
+    '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
+    '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
     '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
     '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
     '/components': { redirect: '/components/app', prerender: false }
