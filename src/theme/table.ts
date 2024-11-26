@@ -56,13 +56,13 @@ export default (options: Required<ModuleOptions>) => ({
     loading: true,
     loadingAnimation: 'carousel',
     class: {
-      thead: 'after:animate-[carousel_2s_ease-in-out_infinite]'
+      thead: 'after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     loading: true,
     loadingAnimation: 'carousel-inverse',
     class: {
-      thead: 'after:animate-[carousel-inverse_2s_ease-in-out_infinite]'
+      thead: 'after:animate-[carousel-inverse_2s_ease-in-out_infinite] rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     loading: true,
