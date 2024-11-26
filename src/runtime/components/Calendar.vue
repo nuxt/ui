@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { CalendarRootProps, RangeCalendarRootProps, CalendarCellTriggerProps, CalendarRootEmits, RangeCalendarRootEmits } from 'radix-vue'
+import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'radix-vue'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -12,40 +12,37 @@ const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-export type ModelValue<T extends boolean> = (T extends true ? RangeCalendarRootProps['modelValue'] : CalendarRootProps['modelValue']) | undefined
+type ModelValue<R extends boolean = false, M extends boolean = false> = R extends true
+  ? DateRange
+  : M extends true
+    ? DateValue[]
+    : DateValue
 
-export interface CalendarProps<T extends boolean> extends Omit<CalendarRootProps & RangeCalendarRootProps, 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel'> {
+export interface CalendarProps<R extends boolean, M extends boolean> extends Omit<CalendarRootProps, 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
-  /**
-   * The color of the calendar
-   */
   color?: CalendarVariants['color']
-  /**
-   * The size of the calendar
-   */
   size?: CalendarVariants['size']
-  /**
-   * Is this a range calendar
-   */
-  range?: T
-  /**
-   * Show month controls
-   */
+  /** Whether or not a range of dates can be selected */
+  range?: R & boolean
+  /** Whether or not multiple dates can be selected */
+  multiple?: M & boolean
+  /** Show month controls */
   monthControls?: boolean
-  /**
-   * Show year controls
-   */
+  /** Show year controls */
   yearControls?: boolean
-  defaultValue?: ModelValue<T>
+  defaultValue?: ModelValue<R, M>
+  modelValue?: ModelValue<R, M>
   class?: any
   ui?: Partial<typeof calendar.slots>
 }
 
-export interface CalendarEmits extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {}
+export interface CalendarEmits<R extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
+  'update:modelValue'?: [date: R extends true ? DateRange : DateValue]
+}
 
 export interface CalendarSlots {
   'heading': (props: { value: string }) => any
@@ -54,31 +51,25 @@ export interface CalendarSlots {
 }
 </script>
 
-<script setup lang="ts" generic="T extends boolean = false">
-import { toRef, computed } from 'vue'
-import { useForwardProps, useEmitAsProps } from 'radix-vue'
+<script setup lang="ts" generic="R extends boolean = false, M extends boolean = false">
+import { computed } from 'vue'
+import { useForwardPropsEmits } from 'radix-vue'
 import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
-import { objectOmit, reactiveOmit } from '@vueuse/core'
-import UButton from './Button.vue'
+import { reactiveOmit } from '@vueuse/core'
 import { useLocale } from '../composables/useLocale'
+import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<CalendarProps<T>>(), {
+const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
   fixedWeeks: true,
   monthControls: true,
   yearControls: true
 })
-const emits = defineEmits<CalendarEmits>()
+const emits = defineEmits<CalendarEmits<R>>()
 defineSlots<CalendarSlots>()
-
-const modelValue = defineModel<ModelValue<T>>(undefined)
-// This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
-const range = toRef(() => typeof props.range === 'string' ? true : props.range)
 
 const { code: locale, dir, t } = useLocale()
 
-const parsedProps = useForwardProps(reactiveOmit(props, 'color', 'size', 'range', 'monthControls', 'yearControls', 'class', 'ui', 'modelValue' as any))
-const emitsAsProps = objectOmit(useEmitAsProps(emits), ['update:modelValue'])
-const rootProps = computed(() => ({ ...parsedProps.value, ...emitsAsProps }))
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
 const ui = computed(() => calendar({
   color: props.color,
@@ -93,17 +84,17 @@ function paginateYear(date: DateValue, sign: -1 | 1) {
   return date.add({ years: 1 })
 }
 
-const Calendar = computed(() => range.value ? RangeCalendar : SingleCalendar)
+const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
 </script>
 
 <template>
   <Calendar.Root
     v-slot="{ weekDays, grid }"
-    v-model="(modelValue as ModelValue<true & false>)"
     v-bind="rootProps"
+    :model-value="(modelValue as ModelValue<true & false>)"
+    :default-value="(defaultValue as ModelValue<true & false>)"
     :locale="locale"
     :dir="dir"
-    :default-value="(defaultValue as ModelValue<true & false>)"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">

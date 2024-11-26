@@ -20,6 +20,7 @@ describe('Calendar', () => {
     ['with modelValue', { props: { modelValue: new CalendarDate(2025, 1, 1) } }],
     ['with default value', { props: { defaultValue: new CalendarDate(2025, 1, 1) } }],
     ['with range', { props: { range: true } }],
+    ['with multiple', { props: { multiple: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with readonly', { props: { readonly: true } }],
     ['with isDateDisabled', { props: { isDateDisabled: () => true } }],
@@ -39,7 +40,7 @@ describe('Calendar', () => {
     ['with heading slot', { slots: { heading: () => 'Heading' } }],
     ['with day slot', { slots: { day: ({ day }: Parameters<CalendarSlots['day']>[0]) => day.day } }],
     ['with week-day slot', { slots: { 'week-day': ({ day }: Parameters<CalendarSlots['week-day']>[0]) => day } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CalendarProps<false>, slots?: Partial<CalendarSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CalendarProps<false, false>, slots?: Partial<CalendarSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Calendar)
     expect(html).toMatchSnapshot()
   })
