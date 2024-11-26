@@ -32,6 +32,21 @@ props:
 ---
 ::
 
+Use the `default-value` prop to set the initial value when you do not need to control its state.
+
+::component-code
+---
+cast:
+  defaultValue: DateValue
+ignore:
+  - defaultValue
+external:
+  - defaultValue
+props:
+  defaultValue: [2022, 2, 6]
+---
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections.
