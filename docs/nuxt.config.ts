@@ -104,11 +104,7 @@ export default defineNuxtConfig({
     cloudflare: {
       pages: {
         routes: {
-          exclude: [
-            '/components/*',
-            '/getting-started/*',
-            '/composables/*'
-          ]
+          exclude: []
         }
       }
     }
