@@ -11,6 +11,7 @@ describe('NavigationMenu', () => {
     [{
       label: 'Documentation',
       icon: 'i-lucide-book-open',
+      badge: 10,
       children: [{
         label: 'Introduction',
         description: 'Fully styled and customizable components for Nuxt.',
