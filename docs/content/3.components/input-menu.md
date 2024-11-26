@@ -222,6 +222,7 @@ props:
 ---
 ::
 
+<!--
 ### Create Item
 
 Use the `create-item` prop to allow user input.
@@ -257,6 +258,7 @@ The create option shows when no match is found by default. Set it to `always` to
 ::tip{to="#emits"}
 Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
 ::
+-->
 
 ### Content
 

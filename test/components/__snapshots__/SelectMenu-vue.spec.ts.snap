@@ -185,66 +185,6 @@ exports[`SelectMenu > renders with class correctly 1`] = `
 <!---->"
 `;
 
-exports[`SelectMenu > renders with create-item-label slot correctly 1`] = `
-"<!-- <DefineCreateItemTemplate>
-    <ComboboxGroup v-if="creatable" :class="ui.group({ class: props.ui?.group })">
-      <ComboboxItem
-        :class="ui.item({ class: props.ui?.item })"
-        :value="valueKey && typeof creatable.item === 'object' ? get(creatable.item, props.valueKey as string) : creatable.item"
-        @select="e => emits('create', e, (creatable as any).item as T)"
-      >
-        <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
-          <slot name="create-item-label" :item="(creatable.item as T)">
-            {{ t('selectMenu.create', { label: typeof creatable.item === 'object' ? get(creatable.item, props.labelKey as string) : creatable.item }) }}
-          </slot>
-        </span>
-      </ComboboxItem>
-    </ComboboxGroup>
-  </DefineCreateItemTemplate> -->
-<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="relative group rounded-[calc(var(--ui-radius)*1.5)] inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] pe-9" dir="ltr" style="pointer-events: auto;">
-  <!--v-if--><span class="truncate text-[var(--ui-text-dimmed)]"> </span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
-</button>
-<!--teleport start-->
-
-
-<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div position="popper" dismissable="true" id="reka-combobox-content-v-0" data-state="open" style="display: flex; flex-direction: column; outline-color: none; outline-style: none; outline-width: initial; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" class="max-h-60 w-[var(--reka-popper-anchor-width)] bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" data-side="bottom" data-align="center">
-    <div class="relative inline-flex items-center border-b border-[var(--ui-border)]"><input type="text" placeholder="Search..." class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="New value">
-      <!--v-if-->
-      <!--v-if-->
-    </div>
-    <!---->
-    <div class="divide-y divide-[var(--ui-border)] scroll-py-1" data-reka-combobox-viewport="" role="presentation" style="position: relative; flex-grow: 1; flex-shrink: 1; flex-basis: 0%; overflow: auto;">
-      <!-- <ReuseCreateItemTemplate v-if="creatable && creatable.position === 'top'" /> -->
-      <div role="group" aria-labelledby="" id="reka-combobox-group-v-1" class="p-1 isolate">
-        <div id="reka-combobox-item-v-3" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] transition-colors size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Backlog</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
-        <div id="reka-combobox-item-v-5" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] transition-colors size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Todo</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
-        <div id="reka-combobox-item-v-7" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] transition-colors size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">In Progress</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
-        <div id="reka-combobox-item-v-9" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] transition-colors size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Done</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
-        <div id="reka-combobox-item-v-11" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-[var(--ui-text-dimmed)] group-data-highlighted:text-[var(--ui-text)] transition-colors size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg><span class="truncate">Canceled</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
-      </div><!-- <ReuseCreateItemTemplate v-if="creatable && creatable.position === 'bottom'" /> -->
-    </div>
-    <style>
-      /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
-      [data-reka-combobox-viewport] {
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      [data-reka-combobox-viewport]::-webkit-scrollbar {
-        display: none;
-      }
-    </style>
-    <!--v-if-->
-  </div>
-</div>
-
-
-<!--teleport end-->
-<!---->"
-`;
-
 exports[`SelectMenu > renders with default slot correctly 1`] = `
 "<!-- <DefineCreateItemTemplate>
     <ComboboxGroup v-if="creatable" :class="ui.group({ class: props.ui?.group })">
