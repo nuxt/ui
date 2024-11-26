@@ -56,16 +56,18 @@ const component = computed(() => {
   }
 })
 
-const { data: ast } = await useAsyncData(`component-theme-${name}-${framework.value}`, async () => {
+const { data: ast } = await useAsyncData(`component-theme-${name}`, async () => {
   const md = `
-::code-collapse
-${framework.value === 'nuxt'
-  ? `
+::code-collapse{class="nuxt-only"}
+
 \`\`\`ts [app.config.ts]
 export default defineAppConfig(${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
 \`\`\`\
-`
-  : `
+
+::
+
+::code-collapse{class="vue-only"}
+
 \`\`\`ts [vite.config.ts]
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -81,7 +83,7 @@ export default defineConfig({
   ]
 })
 \`\`\`
-`}
+
 ::
 
 ${strippedCompoundVariants.value
