@@ -86,14 +86,14 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/getting-started',
+        // '/getting-started',
         '/api/countries.json',
         '/api/locales.json'
         // '/api/releases.json',
         // '/api/pulls.json'
-      ],
-      crawlLinks: true,
-      autoSubfolderIndex: false
+      ]
+      // crawlLinks: true,
+      // autoSubfolderIndex: false
       // ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     },
     cloudflare: {
