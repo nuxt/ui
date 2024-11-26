@@ -40,8 +40,8 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   ui?: Partial<typeof calendar.slots>
 }
 
-export interface CalendarEmits<R extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
-  'update:modelValue': [date: CalendarModelValue<R, false>]
+export interface CalendarEmits<R extends boolean, M extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
+  'update:modelValue': [date: CalendarModelValue<R, M>]
 }
 
 export interface CalendarSlots {
@@ -64,7 +64,7 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
   monthControls: true,
   yearControls: true
 })
-const emits = defineEmits<CalendarEmits<R>>()
+const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
 const { code: locale, dir, t } = useLocale()
