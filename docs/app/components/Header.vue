@@ -42,7 +42,7 @@ defineShortcuts({
         <UButton
           color="neutral"
           variant="ghost"
-          to="https://github.com/nuxt/ui/tree/v3"
+          to="https://github.com/nuxt/ui"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
