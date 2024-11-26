@@ -13,21 +13,21 @@ export interface ModuleOptions {
   /**
    * Prefix for components
    * @defaultValue `U`
-   * @link https://ui3.nuxt.dev/getting-started/installation#prefix
+   * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#prefix
    */
   prefix?: string
 
   /**
    * Enable or disable `@nuxt/fonts` module
    * @defaultValue `true`
-   * @link https://ui3.nuxt.dev/getting-started/installation#fonts
+   * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#fonts
    */
   fonts?: boolean
 
   /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
-   * @link https://ui3.nuxt.dev/getting-started/installation#colormode
+   * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#colormode
    */
   colorMode?: boolean
 
@@ -39,14 +39,14 @@ export interface ModuleOptions {
     /**
      * Define the color aliases available for components
      * @defaultValue `['primary', 'secondary', 'success', 'info', 'warning', 'error']`
-     * @link https://ui3.nuxt.dev/getting-started/installation#themecolors
+     * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#themecolors
      */
     colors?: string[]
 
     /**
      * Enable or disable transitions on components
      * @defaultValue `true`
-     * @link https://ui3.nuxt.dev/getting-started/installation#themetransitions
+     * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#themetransitions
      */
     transitions?: boolean
   }
@@ -70,10 +70,9 @@ export default defineNuxtModule<ModuleOptions>({
     compatibility: {
       nuxt: '>=3.13.1'
     },
-    docs: 'https://ui3.nuxt.dev/getting-started/installation'
+    docs: 'https://ui3.nuxt.dev/getting-started/installation/nuxt'
   },
   defaults: defaultOptions,
-
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 

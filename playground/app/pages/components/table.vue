@@ -276,7 +276,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full flex flex-col flex-1 gap-4 w-full -my-8">
+  <div class="h-full flex flex-col flex-1 gap-4 w-full">
     <div class="flex gap-2 items-center">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"

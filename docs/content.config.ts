@@ -1,6 +1,10 @@
 import { defineCollection, z } from '@nuxt/content'
 
 const schema = z.object({
+  navigation: z.object({
+    title: z.string().optional(),
+    framework: z.string().optional()
+  }),
   links: z.array(z.object({
     label: z.string(),
     icon: z.string(),
@@ -10,14 +14,7 @@ const schema = z.object({
     }).optional(),
     to: z.string(),
     target: z.string().optional()
-  })),
-  select: z.object({
-    items: z.array(z.object({
-      label: z.string(),
-      icon: z.string(),
-      to: z.string()
-    }))
-  })
+  }))
 })
 
 const source = process.env.NUXT_UI_PRO_PATH

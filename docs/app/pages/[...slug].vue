@@ -21,10 +21,32 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)).map(({ icon, ...link }) => link))
 
+const { framework } = useSharedData()
+
+// Redirect to the correct framework version if the page is not the current framework
+if (!import.meta.prerender) {
+  watch(framework, () => {
+    if (page.value?.navigation?.framework && page.value?.navigation?.framework !== framework.value) {
+      if (route.path.endsWith(`/${page.value?.navigation?.framework}`)) {
+        navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
+      } else {
+        navigateTo(`/getting-started`)
+      }
+    }
+  })
+}
+
+// Update the framework if the page has a different framework
+watch(page, () => {
+  if (page.value?.navigation?.framework && page.value?.navigation?.framework !== framework.value) {
+    framework.value = page.value?.navigation?.framework as string
+  }
+}, { immediate: true })
+
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI v3',
-  title: typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title,
-  ogTitle: `${typeof page.value.navigation === 'object' ? page.value.navigation.title : page.value.title} - Nuxt UI v3`,
+  title: typeof page.value.navigation === 'object' && page.value.navigation.title ? page.value.navigation.title : page.value.title,
+  ogTitle: `${typeof page.value.navigation === 'object' && page.value.navigation.title ? page.value.navigation.title : page.value.title} - Nuxt UI v3`,
   description: page.value.description,
   ogDescription: page.value.description
 })
@@ -75,21 +97,6 @@ const communityLinks = computed(() => [{
       </template>
 
       <template #links>
-        <UDropdownMenu v-if="page.select" v-slot="{ open }" :items="page.select.items" :content="{ align: 'end' }">
-          <UButton
-            color="neutral"
-            variant="subtle"
-            v-bind="page.select.items.find((item: any) => item.to === route.path)"
-            block
-            trailing-icon="i-lucide-chevron-down"
-            :class="[open && 'bg-[var(--ui-bg-accented)]/75']"
-            :ui="{
-              trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
-            }"
-            class="w-[128px]"
-          />
-        </UDropdownMenu>
-
         <UButton
           v-for="link in page.links"
           :key="link.label"

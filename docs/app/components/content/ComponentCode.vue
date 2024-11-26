@@ -93,6 +93,8 @@ const options = computed(() => {
           chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
         }))
 
+    // TODO: process "undefined | Date | DateRange", https://github.com/nuxt/ui/issues/2651
+
     return {
       name: key,
       label: key,

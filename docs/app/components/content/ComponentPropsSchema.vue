@@ -35,7 +35,7 @@ const schemaProps = computed(() => {
 </script>
 
 <template>
-  <Collapsible v-if="schemaProps?.length" class="mt-1">
+  <ProseCollapsible v-if="schemaProps?.length" class="mt-1">
     <ProseUl>
       <ProseLi v-for="schemaProp in schemaProps" :key="schemaProp.name">
         <HighlightInlineType :type="`${schemaProp.name}${schemaProp.required === false ? '?' : ''}: ${schemaProp.type}`" />
@@ -43,5 +43,5 @@ const schemaProps = computed(() => {
         <MDC v-if="schemaProp.description" :value="schemaProp.description" class="text-[var(--ui-text-muted)] my-1" />
       </ProseLi>
     </ProseUl>
-  </Collapsible>
+  </ProseCollapsible>
 </template>

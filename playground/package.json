@@ -8,9 +8,9 @@
     "generate": "nuxi generate"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.14",
-    "@iconify-json/simple-icons": "^1.2.11",
+    "@iconify-json/lucide": "^1.2.16",
+    "@iconify-json/simple-icons": "^1.2.13",
     "@nuxt/ui": "latest",
-    "nuxt": "^3.14.159"
+    "nuxt": "^3.14.1592"
   }
 }

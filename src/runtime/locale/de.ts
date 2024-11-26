@@ -7,7 +7,13 @@ export default defineLocale({
     inputMenu: {
       noMatch: 'Nichts gefunden',
       noData: 'Keine Daten',
-      create: 'Erstellen "{label}"'
+      create: '"{label}" erstellen'
+    },
+    calendar: {
+      prevYear: 'Vorheriges Jahr',
+      nextYear: 'Nächstes Jahr',
+      prevMonth: 'Vorheriger Monat',
+      nextMonth: 'Nächster Monat'
     },
     inputNumber: {
       increment: 'Erhöhen',
@@ -21,7 +27,7 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Nichts gefunden',
       noData: 'Keine Daten',
-      create: 'Erstellen "{label}"'
+      create: '"{label}" erstellen'
     },
     toast: {
       close: 'Schließen'

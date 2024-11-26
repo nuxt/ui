@@ -41,7 +41,7 @@ extendDevtoolsMeta({ example: 'ToasterExample' })
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { ToastProvider, ToastViewport, useForwardProps } from 'radix-vue'
+import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'radix-vue'
 import { reactivePick } from '@vueuse/core'
 import { useToast } from '../composables/useToast'
 import { omit } from '../utils'
@@ -126,7 +126,7 @@ function getOffset(index: number) {
       @click="toast.click && toast.click(toast)"
     />
 
-    <Teleport to="body" :disabled="!portal">
+    <ToastPortal :disabled="!portal">
       <ToastViewport
         :data-expanded="expanded"
         :class="ui.viewport({ class: [props.class, props.ui?.viewport] })"
@@ -140,6 +140,6 @@ function getOffset(index: number) {
         @mouseenter="hovered = true"
         @mouseleave="hovered = false"
       />
-    </Teleport>
+    </ToastPortal>
   </ToastProvider>
 </template>
