@@ -105,7 +105,7 @@ Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/inst
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v3/LICENSE.md).
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/next.svg?style=flat&colorA=18181B&colorB=28CF8D
@@ -115,7 +115,7 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md)
 [npm-downloads-href]: https://npm.chart.dev/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxt/ui/blob/main/LICENSE.md
+[license-href]: https://github.com/nuxt/ui/blob/v3/LICENSE.md
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
