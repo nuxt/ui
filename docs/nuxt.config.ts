@@ -37,6 +37,11 @@ export default defineNuxtConfig({
   },
 
   content: {
+    database: {
+      type: 'd1',
+      binding: 'DB'
+    },
+
     build: {
       markdown: {
         highlight: {
@@ -111,7 +116,8 @@ export default defineNuxtConfig({
   },
 
   hub: {
-    cache: true
+    cache: true,
+    database: true
   },
 
   componentMeta: {
