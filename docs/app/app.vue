@@ -167,4 +167,11 @@ provide('navigation', filteredNavigation)
 :root {
   --ui-container: var(--container-8xl);
 }
+
+html[data-framework="nuxt"] .vue-only {
+  display: none;
+}
+html[data-framework="vue"] .nuxt-only {
+  display: none;
+}
 </style>
