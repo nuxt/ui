@@ -4,11 +4,10 @@ import icons from '../../../../src/theme/icons'
 
 const { framework } = useSharedData()
 
-const { data: ast } = await useAsyncData(`icons-theme-${framework.value}`, async () => {
+const { data: ast } = await useAsyncData(`icons-theme`, async () => {
   const md = `
-::code-collapse
-${framework.value === 'nuxt'
-  ? `
+::code-collapse{class="nuxt-only"}
+
 \`\`\`ts [app.config.ts]
 export default defineAppConfig(${json5.stringify({
   ui: {
@@ -16,8 +15,11 @@ export default defineAppConfig(${json5.stringify({
   }
 }, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
 \`\`\`\
-`
-  : `
+
+::
+
+::code-collapse{class="vue-only"}
+
 \`\`\`ts [vite.config.ts]
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -37,7 +39,7 @@ export default defineConfig({
   ]
 })
 \`\`\`
-`}
+
 ::
 `
 
