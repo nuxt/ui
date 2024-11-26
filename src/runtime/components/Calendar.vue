@@ -12,7 +12,7 @@ const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-type ModelValue<R extends boolean = false, M extends boolean = false> = R extends true
+type CalendarModelValue<R extends boolean = false, M extends boolean = false> = R extends true
   ? DateRange
   : M extends true
     ? DateValue[]
@@ -34,14 +34,14 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   monthControls?: boolean
   /** Show year controls */
   yearControls?: boolean
-  defaultValue?: ModelValue<R, M>
-  modelValue?: ModelValue<R, M>
+  defaultValue?: CalendarModelValue<R, M>
+  modelValue?: CalendarModelValue<R, M>
   class?: any
   ui?: Partial<typeof calendar.slots>
 }
 
-export interface CalendarEmits<R extends boolean, M extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
-  'update:modelValue': [ModelValue<R, M>]
+export interface CalendarEmits<R extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
+  'update:modelValue': [date: CalendarModelValue<R, false>]
 }
 
 export interface CalendarSlots {
@@ -64,7 +64,7 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
   monthControls: true,
   yearControls: true
 })
-const emits = defineEmits<CalendarEmits<R, M>>()
+const emits = defineEmits<CalendarEmits<R>>()
 defineSlots<CalendarSlots>()
 
 const { code: locale, dir, t } = useLocale()
@@ -91,8 +91,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
   <Calendar.Root
     v-slot="{ weekDays, grid }"
     v-bind="rootProps"
-    :model-value="(modelValue as ModelValue<true & false>)"
-    :default-value="(defaultValue as ModelValue<true & false>)"
+    :model-value="(modelValue as CalendarModelValue<true & false>)"
+    :default-value="(defaultValue as CalendarModelValue<true & false>)"
     :locale="locale"
     :dir="dir"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
