@@ -7,7 +7,7 @@ const { framework, frameworks } = useSharedData()
     v-slot="{ open }"
     :modal="false"
     :items="frameworks"
-    :ui="{ content: 'w-(--radix-dropdown-menu-trigger-width)' }"
+    :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
   >
     <UButton
       color="neutral"

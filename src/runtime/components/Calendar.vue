@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'radix-vue'
+import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -53,8 +53,8 @@ export interface CalendarSlots {
 
 <script setup lang="ts" generic="R extends boolean = false, M extends boolean = false">
 import { computed } from 'vue'
-import { useForwardPropsEmits } from 'radix-vue'
-import { Calendar as SingleCalendar, RangeCalendar } from 'radix-vue/namespaced'
+import { useForwardPropsEmits } from 'reka-ui'
+import { Calendar as SingleCalendar, RangeCalendar } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
 import { useLocale } from '../composables/useLocale'
 import UButton from './Button.vue'

@@ -3,8 +3,8 @@ title: Calendar
 description: A calendar component for selecting single dates, multiple dates or date ranges.
 links:
   - label: Calendar
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/calendar.html
+    icon: i-custom-reka-ui
+    to: https://www.reka-ui.com/components/calendar.html
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Calendar.vue
