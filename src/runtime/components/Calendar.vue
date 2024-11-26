@@ -18,7 +18,7 @@ type CalendarModelValue<R extends boolean = false, M extends boolean = false> = 
     ? DateValue[]
     : DateValue
 
-export interface CalendarProps<R extends boolean, M extends boolean> extends Omit<CalendarRootProps, 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'> {
+export interface CalendarProps<R extends boolean, M extends boolean> extends Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
