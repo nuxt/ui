@@ -99,7 +99,7 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
   /** The controlled value of the Combobox. Can be binded-with with `v-model`. */
   modelValue?: SelectModelValue<T, V, M>
   /** Whether multiple options can be selected or not. */
-  multiple?: M
+  multiple?: M & boolean
 }
 
 export type SelectMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>, 'update:modelValue'> & {
@@ -165,8 +165,6 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaul
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: 'Search...', variant: 'none' }) as InputProps)
-// This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
-const multiple = toRef(() => typeof props.multiple === 'string' ? true : props.multiple)
 
 // const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 
@@ -192,7 +190,7 @@ function by(a: T, b: T) {
 }
 
 function displayValue(value: T | T[]): string {
-  if (multiple.value && Array.isArray(value)) {
+  if (props.multiple && Array.isArray(value)) {
     return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
 
@@ -279,7 +277,6 @@ function onUpdateOpen(value: boolean) {
     as-child
     :name="name"
     :disabled="disabled"
-    :multiple="multiple"
     :by="by"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"

@@ -9,6 +9,12 @@ export default defineLocale({
       noData: '没有数据',
       create: '创建 "{label}"'
     },
+    calendar: {
+      prevYear: '去年',
+      nextYear: '明年',
+      prevMonth: '上个月',
+      nextMonth: '下个月'
+    },
     inputNumber: {
       increment: '增加',
       decrement: '减少'

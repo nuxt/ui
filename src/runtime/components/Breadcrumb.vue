@@ -126,7 +126,7 @@ const ui = breadcrumb()
           </ULink>
         </li>
 
-        <li v-if="index < items!.length - 1" role="presentation" :class="ui.separator({ class: props.ui?.separator })">
+        <li v-if="index < items!.length - 1" role="presentation" aria-hidden="true" :class="ui.separator({ class: props.ui?.separator })">
           <slot name="separator">
             <UIcon :name="separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
           </slot>

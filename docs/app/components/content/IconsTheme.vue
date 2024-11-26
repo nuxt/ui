@@ -2,8 +2,13 @@
 import json5 from 'json5'
 import icons from '../../../../src/theme/icons'
 
-const { data: ast } = await useAsyncData(`icons-theme`, async () => {
+const { framework } = useSharedData()
+
+const { data: ast } = await useAsyncData(`icons-theme-${framework.value}`, async () => {
   const md = `
+::code-collapse
+${framework.value === 'nuxt'
+  ? `
 \`\`\`ts [app.config.ts]
 export default defineAppConfig(${json5.stringify({
   ui: {
@@ -12,9 +17,32 @@ export default defineAppConfig(${json5.stringify({
 }, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
 \`\`\`\
 `
+  : `
+\`\`\`ts [vite.config.ts]
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import ui from '@nuxt/ui/vite'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    ui(${json5.stringify({
+      ui: {
+        icons
+      }
+    }, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')
+      .split('\n')
+      .map((line, i) => i === 0 ? line : `    ${line}`)
+      .join('\n')})
+  ]
+})
+\`\`\`
+`}
+::
+`
 
   return parseMarkdown(md)
-})
+}, { watch: [framework] })
 </script>
 
 <template>
