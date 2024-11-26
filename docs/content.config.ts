@@ -17,26 +17,26 @@ const schema = z.object({
   }))
 })
 
-const source = process.env.NUXT_UI_PRO_PATH
-  ? {
-      cwd: process.env.NUXT_UI_PRO_PATH,
-      path: 'docs'
-    }
-  : process.env.NUXT_GITHUB_TOKEN
-    ? {
-        repository: 'nuxt/ui-pro',
-        branch: 'v3',
-        dir: 'docs',
-        token: process.env.NUXT_GITHUB_TOKEN
-      }
-    : undefined
+// const source = process.env.NUXT_UI_PRO_PATH
+//   ? {
+//       cwd: process.env.NUXT_UI_PRO_PATH,
+//       path: 'docs'
+//     }
+//   : process.env.NUXT_GITHUB_TOKEN
+//     ? {
+//         repository: 'nuxt/ui-pro',
+//         branch: 'v3',
+//         dir: 'docs',
+//         token: process.env.NUXT_GITHUB_TOKEN
+//       }
+//     : undefined
 
 export const collections = {
-  pro: source && defineCollection({
-    type: 'page',
-    source,
-    schema
-  }),
+  // pro: source && defineCollection({
+  //   type: 'page',
+  //   source,
+  //   schema
+  // }),
   content: defineCollection({
     type: 'page',
     source: '**/*',

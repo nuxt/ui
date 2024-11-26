@@ -26,6 +26,17 @@ export default defineNuxtConfig({
   ],
 
   app: {
+    head: {
+      // LemonSqueezy affiliate
+      script: [{
+        key: 'lmsqueezy-config',
+        innerHTML: 'window.lemonSqueezyAffiliateConfig = { store: "nuxt" };'
+      }, {
+        key: 'lmsqueezy',
+        src: 'https://lmsqueezy.com/affiliate.js',
+        defer: true
+      }]
+    },
     rootAttrs: {
       'vaul-drawer-wrapper': '',
       'class': 'bg-[var(--ui-bg)]'
