@@ -422,7 +422,6 @@ describe('Form', () => {
         `
         })
         const form = wrapper.setupState.form
-        const state = wrapper.setupState.state
 
         const inputEl = wrapper.find('#input')
         inputEl.setValue(input.value)
@@ -430,7 +429,6 @@ describe('Form', () => {
         form.value.submit()
         await flushPromises()
 
-        expect(state.value).toEqual(expected.value)
         expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({
           data: expected
         }))

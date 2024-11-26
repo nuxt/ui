@@ -1,4 +1,4 @@
-[![nuxt-ui.png](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
+[![nuxt-ui.png](https://volta.s3.fr-par.scw.cloud/nuxt_ui_social_card_531d133fa2.png)](https://ui.nuxt.com)
 
 # Nuxt UI
 
@@ -7,7 +7,7 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-We're thrilled to introduce Nuxt UI v3, a significant upgrade to our UI library that delivers extensive improvements and robust new capabilities. This major update harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS v4](https://tailwindcss.com/blog/tailwindcss-v4-alpha), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
+We're thrilled to introduce Nuxt UI v3, a significant upgrade to our UI library that delivers extensive improvements and robust new capabilities. This major update harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS v4](https://tailwindcss.com/docs/v4-beta), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 > [!NOTE]
 > You are on the `v3` development branch, check out the [dev branch](https://github.com/nuxt/ui) for Nuxt UI v2.
@@ -105,7 +105,7 @@ Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/inst
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v3/LICENSE.md).
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/next.svg?style=flat&colorA=18181B&colorB=28CF8D
@@ -115,7 +115,7 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md)
 [npm-downloads-href]: https://npm.chart.dev/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxt/ui/blob/main/LICENSE.md
+[license-href]: https://github.com/nuxt/ui/blob/v3/LICENSE.md
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com

@@ -23,6 +23,7 @@ export interface CommandPaletteItem {
   avatar?: AvatarProps
   chip?: ChipProps
   kbds?: KbdProps['value'][] | KbdProps[]
+  active?: boolean
   loading?: boolean
   disabled?: boolean
   slot?: string
@@ -276,31 +277,31 @@ const groups = computed(() => {
               :key="`group-${groupIndex}-${index}`"
               :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml'])"
               :disabled="item.disabled"
-              :class="ui.item({ class: props.ui?.item })"
+              :class="ui.item({ class: props.ui?.item, active: item.active })"
               @select="item.onSelect"
             >
               <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
                 <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="item" :index="index">
                   <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, loading: true })" />
-                  <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
-                  <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+                  <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, active: item.active })" />
+                  <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar, active: item.active })" />
                   <UChip
                     v-else-if="item.chip"
                     :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
                     inset
                     standalone
                     v-bind="item.chip"
-                    :class="ui.itemLeadingChip({ class: props.ui?.itemLeadingChip })"
+                    :class="ui.itemLeadingChip({ class: props.ui?.itemLeadingChip, active: item.active })"
                   />
                 </slot>
 
-                <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+                <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel({ class: props.ui?.itemLabel, active: item.active })">
                   <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="item" :index="index">
                     <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: props.ui?.itemLabelPrefix })">{{ item.prefix }}</span>
 
-                    <span :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
+                    <span :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase, active: item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
 
-                    <span :class="ui.itemLabelSuffix({ class: props.ui?.itemLabelSuffix })" v-html="item.suffixHtml || item.suffix" />
+                    <span :class="ui.itemLabelSuffix({ class: props.ui?.itemLabelSuffix, active: item.active })" v-html="item.suffixHtml || item.suffix" />
                   </slot>
                 </span>
 

@@ -9,6 +9,12 @@ export default defineLocale({
       noData: 'Žádná data',
       create: 'Vytvořit "{label}"'
     },
+    calendar: {
+      prevYear: 'Předchozí rok',
+      nextYear: 'Další rok',
+      prevMonth: 'Předchozí měsíc',
+      nextMonth: 'Další měsíc'
+    },
     inputNumber: {
       increment: 'Zvýšit',
       decrement: 'Snížit'

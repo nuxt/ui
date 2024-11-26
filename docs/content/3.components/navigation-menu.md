@@ -434,8 +434,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
+:::
 ::
 
 ### Arrow
@@ -584,7 +592,7 @@ name: 'navigation-menu-content-slot-example'
 ::
 
 ::note
-In this example, we add the `sm:w-[var(--radix-navigation-menu-viewport-width)]` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
+In this example, we add the `sm:w-[var(--reka-navigation-menu-viewport-width)]` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
 ::
 
 ## API

@@ -93,6 +93,8 @@ const options = computed(() => {
           chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
         }))
 
+    // TODO: process "undefined | Date | DateRange", https://github.com/nuxt/ui/issues/2651
+
     return {
       name: key,
       label: key,
@@ -272,9 +274,9 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
       <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-border-muted)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
-            <slot :name="slot">
+            <MDCSlot :name="slot" unwrap="p">
               {{ slots?.[slot] }}
-            </slot>
+            </MDCSlot>
           </template>
         </component>
       </div>

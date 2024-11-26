@@ -50,6 +50,7 @@ export type ProgressSlots = {
 import { computed } from 'vue'
 import { ProgressIndicator, ProgressRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useLocale } from '../composables/useLocale'
 
 const props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
@@ -58,6 +59,8 @@ const props = withDefaults(defineProps<ProgressProps>(), {
 })
 const emits = defineEmits<ProgressEmits>()
 defineSlots<ProgressSlots>()
+
+const { dir } = useLocale()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'getValueLabel', 'modelValue'), emits)
 
@@ -93,8 +96,20 @@ const indicatorStyle = computed(() => {
     return
   }
 
-  return {
-    transform: `translate${props.orientation === 'vertical' ? 'Y' : 'X'}(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+  if (props.orientation === 'vertical') {
+    return {
+      transform: `translateY(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+    }
+  } else {
+    if (dir.value === 'rtl') {
+      return {
+        transform: `translateX(${props.inverted ? '-' : ''}${100 - percent.value}%)`
+      }
+    } else {
+      return {
+        transform: `translateX(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+      }
+    }
   }
 })
 

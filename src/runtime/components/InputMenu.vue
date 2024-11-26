@@ -30,7 +30,7 @@ export interface InputMenuItem {
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
-export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<InputMenuItem | AcceptableValue> = MaybeArrayOfArray<InputMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'defaultValue' | 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover' | 'ignoreFilter'>, UseComponentIconsProps {
+export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<InputMenuItem | AcceptableValue | boolean> = MaybeArrayOfArray<InputMenuItem | AcceptableValue | boolean>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'defaultValue' | 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover' | 'ignoreFilter'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -94,20 +94,20 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
    * Determines if custom user input that does not exist in options can be added.
    * @defaultValue false
    */
-  createItem?: boolean | 'always' | { placement?: 'top' | 'bottom', when?: 'empty' | 'always' }
+  // createItem?: boolean | 'always' | { placement?: 'top' | 'bottom', when?: 'empty' | 'always' }
   class?: any
   ui?: PartialString<typeof inputMenu.slots>
   /** The controlled value of the Combobox. Can be binded-with with `v-model`. */
   modelValue?: SelectModelValue<T, V, M>
   /** Whether multiple options can be selected or not. */
-  multiple?: M
+  multiple?: M & boolean
 }
 
 export type InputMenuEmits<T, V, M extends boolean> = Omit<ComboboxRootEmits<T>, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-  create: [payload: Event, item: T]
+  // create: [payload: Event, item: T]
 } & SelectModelValueEmits<T, V, M>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
@@ -122,13 +122,13 @@ export interface InputMenuSlots<T, M extends boolean> {
   'item-trailing': SlotProps<T>
   'tags-item-text': SlotProps<T>
   'tags-item-delete': SlotProps<T>
-  'create-item-label'(props: { item: T }): any
+  // 'create-item-label'(props: { item: T }): any
 }
 
 extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
-<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<InputMenuItem | AcceptableValue> = MaybeArrayOfArray<InputMenuItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
+<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<InputMenuItem | AcceptableValue | boolean> = MaybeArrayOfArray<InputMenuItem | AcceptableValue | boolean>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
 import { computed, ref, toRef, onMounted, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
@@ -164,8 +164,6 @@ const { t } = useLocale()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
-// This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
-const multiple = toRef(() => typeof props.multiple === 'string' ? true : props.multiple)
 
 const { emitFormBlur, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -183,7 +181,7 @@ const ui = computed(() => inputMenu({
   highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  multiple: multiple.value,
+  multiple: props.multiple,
   buttonGroup: orientation.value
 }))
 
@@ -301,7 +299,6 @@ defineExpose({
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    :multiple="multiple"
     :by="by"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     :as-child="!!multiple"

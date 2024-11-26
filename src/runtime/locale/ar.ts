@@ -10,6 +10,12 @@ export default defineLocale({
       noData: 'لا توجد بيانات',
       create: 'إنشاء "{label}"'
     },
+    calendar: {
+      prevYear: 'السنة السابقة',
+      nextYear: 'السنة المقبلة',
+      prevMonth: 'الشهر السابق',
+      nextMonth: 'الشهر المقبل'
+    },
     inputNumber: {
       increment: 'زيادة',
       decrement: 'تقليل'
