@@ -771,7 +771,7 @@ name: 'input-menu-filter-fields-example'
 ---
 ::
 
-### As a country picker
+### As a CountryPicker
 
 This example demonstrates using the InputMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
 

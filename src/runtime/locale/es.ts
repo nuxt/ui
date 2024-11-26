@@ -9,6 +9,12 @@ export default defineLocale({
       noData: 'Sin datos',
       create: 'Crear "{label}"'
     },
+    calendar: {
+      prevYear: 'A o anterior',
+      nextYear: 'A o siguiente',
+      prevMonth: 'Mes anterior',
+      nextMonth: 'Mes siguiente'
+    },
     inputNumber: {
       increment: 'Incremento',
       decrement: 'Decremento'

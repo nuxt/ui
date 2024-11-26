@@ -9,6 +9,12 @@ export default defineLocale({
       noData: 'Veri yok',
       create: '"{label}" oluştur'
     },
+    calendar: {
+      prevYear: 'Önceki yıl',
+      nextYear: 'Sonraki yıl',
+      prevMonth: 'Önceki ay',
+      nextMonth: 'Sonraki ay'
+    },
     inputNumber: {
       increment: 'Arttır',
       decrement: 'Azalt'
