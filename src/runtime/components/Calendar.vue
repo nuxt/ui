@@ -24,6 +24,26 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * The icon to use for the next year control.
+   * @defaultValue appConfig.ui.icons.chevronDoubleRight
+   */
+  nextYearIcon?: string
+  /**
+   * The icon to use for the next month control.
+   * @defaultValue appConfig.ui.icons.chevronRight
+   */
+  nextMonthIcon?: string
+  /**
+   * The icon to use for the previous year control.
+   * @defaultValue appConfig.ui.icons.chevronDoubleLeft
+   */
+  prevYearIcon?: string
+  /**
+   * The icon to use for the previous month control.
+   * @defaultValue appConfig.ui.icons.chevronLeft
+   */
+  prevMonthIcon?: string
   color?: CalendarVariants['color']
   size?: CalendarVariants['size']
   /** Whether or not a range of dates can be selected */
@@ -71,10 +91,10 @@ const { code: locale, dir, t } = useLocale()
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
-const prevYearIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft)
-const prevMonthIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft)
-const nextYearIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight)
-const nextMonthIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight)
+const nextYearIcon = computed(() => props.nextYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
+const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
+const prevYearIcon = computed(() => props.prevYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
+const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
 
 const ui = computed(() => calendar({
   color: props.color,

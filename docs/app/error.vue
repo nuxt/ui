@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
 // import { debounce } from 'perfect-debounce'
 import type { NuxtError } from '#app'
@@ -13,7 +12,19 @@ const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
-const { data: files } = await useAsyncData('files', () => queryCollectionSearchSections('content', { ignoredTags: ['style'] }))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+  server: false
+})
+
+const searchTerm = ref('')
+
+// watch(searchTerm, debounce((query: string) => {
+//   if (!query) {
+//     return
+//   }
+
+//   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
+// }, 500))
 
 const searchTerm = ref('')
 
@@ -60,8 +71,7 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
   ],
   style: [
     { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 }

@@ -14,7 +14,7 @@ links:
 Use a [Button](/components/button) or any other component in the default slot of the Tooltip.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses the [TooltipProvider](https://reka-ui.com/docs/components/tooltip#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/components/app) component which uses the [`TooltipProvider`](https://reka-ui.com/docs/components/tooltip#provider) component from Reka UI.
 ::
 
 ::tip{to="/components/app#props"}
@@ -89,7 +89,7 @@ slots:
 ::
 
 ::tip
-This can be configured globally through the `tooltip.delayDuration` option in the [App](/components/app) component.
+This can be configured globally through the `tooltip.delayDuration` option in the [`App`](/components/app) component.
 ::
 
 ### Content
@@ -182,7 +182,7 @@ name: 'tooltip-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Tooltip by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Tooltip by pressing :kbd{value="O"}.
 ::
 
 ## API
