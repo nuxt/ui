@@ -64,7 +64,7 @@ slots:
 ::
 
 ::note
-When using the `hover` mode, the Radix Vue [HoverCard](https://www.radix-vue.com/components/hover-card.html) component is used instead of the [Popover](https://www.radix-vue.com/components/popover.html).
+When using the `hover` mode, the Radix Vue [`HoverCard`](https://www.radix-vue.com/components/hover-card.html) component is used instead of the [`Popover`](https://www.radix-vue.com/components/popover.html).
 ::
 
 ### Delay
@@ -174,7 +174,7 @@ name: 'popover-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Popover by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Popover by pressing :kbd{value="O"}.
 ::
 
 ### With command palette

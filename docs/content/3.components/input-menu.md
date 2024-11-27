@@ -15,11 +15,11 @@ links:
 Use the `v-model` directive to control the value of the InputMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::tip
-Use this over an [Input](/components/input) to take advantage of Radix Vue's [Combobox](https://www.radix-vue.com/components/combobox.html) component that offers autocomplete capabilities.
+Use this over an [`Input`](/components/input) to take advantage of Radix Vue's [`Combobox`](https://www.radix-vue.com/components/combobox.html) component that offers autocomplete capabilities.
 ::
 
 ::note
-This component is similar to the [SelectMenu](/components/select-menu) but it's using an Input instead of a Select.
+This component is similar to the [`SelectMenu`](/components/select-menu) but it's using an Input instead of a Select.
 ::
 
 ### Items
@@ -701,7 +701,7 @@ name: 'input-menu-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the InputMenu by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the InputMenu by pressing :kbd{value="O"}.
 ::
 
 ### Control open state on focus
@@ -757,7 +757,7 @@ name: 'input-menu-filter-example'
 ::
 
 ::note
-This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
 ::
 
 ### With custom search
