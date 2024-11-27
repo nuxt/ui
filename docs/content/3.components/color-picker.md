@@ -126,7 +126,7 @@ props:
 
 ### Color chooser
 
-Combined [Button](/components/button) and [Popover](/components/popover) components to create a color chooser.
+Use [Button](/components/button) and a [Popover](/components/popover) components to create a color chooser.
 
 ::component-example
 ---
