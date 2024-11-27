@@ -3,9 +3,11 @@
 import type { Ref } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
+import type { RowData } from '@tanstack/table-core'
 
 declare module '@tanstack/table-core' {
-  interface ColumnMeta<TData extends RowData, TValue> {
+
+  interface ColumnMeta<_TData extends RowData, _TValue> {
     class?: string
   }
 }
@@ -29,6 +31,7 @@ import type {
   CellContext,
   HeaderContext
 } from '@tanstack/vue-table'
+
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
 
