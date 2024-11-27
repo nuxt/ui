@@ -11,11 +11,11 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
         <template #left>
           <UPageAside>
             <template #top>
-              <UButtonGroup class="-mx-2 w-[calc(100%+1rem)]">
+              <div class="flex flex-col gap-2 w-[calc(100%+1rem)] -mx-2">
                 <FrameworkSelect />
 
                 <ModuleSelect />
-              </UButtonGroup>
+              </div>
             </template>
 
             <UContentNavigation :navigation="navigation" highlight />

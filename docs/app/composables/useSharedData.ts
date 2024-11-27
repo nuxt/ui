@@ -17,13 +17,13 @@ function _useSharedData() {
   const module = useCookie('nuxt-ui-module', { default: () => 'ui' })
   const modules = computed(() => [{
     label: 'nuxt/ui',
+    icon: 'i-lucide-box',
     value: 'ui',
-    suffix: '@nuxt/ui',
     onSelect: () => module.value = 'ui'
   }, {
     label: 'nuxt/ui-pro',
+    icon: 'i-lucide-boxes',
     value: 'ui-pro',
-    suffix: '@nuxt/ui-pro',
     onSelect: () => module.value = 'ui-pro'
   }].map(m => ({ ...m, active: module.value === m.value })))
 
