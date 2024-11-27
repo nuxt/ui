@@ -184,8 +184,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
 ::
 
 ### Disabled
@@ -290,7 +298,7 @@ name: 'input-form-field-example'
 ::
 
 ::tip{to="/components/form"}
-It also provides validation and error handling when used within a [Form](/components/form) component.
+It also provides validation and error handling when used within a **Form** component.
 ::
 
 ### Within a ButtonGroup

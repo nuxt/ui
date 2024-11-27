@@ -9,6 +9,12 @@ export default defineLocale({
       noData: '데이터가 없습니다.',
       create: '"{label}" 생성'
     },
+    calendar: {
+      prevYear: '이전 해',
+      nextYear: '다음 해',
+      prevMonth: '이전 달',
+      nextMonth: '다음 달'
+    },
     inputNumber: {
       increment: '증가',
       decrement: '감소'
