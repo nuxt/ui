@@ -73,7 +73,7 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const { framework, frameworks } = useSharedData()
+const { framework, frameworks, modules } = useSharedData()
 
 function filterFrameworkItems(items: any[]) {
   return items?.filter(item => !item.framework || item.framework === framework.value)
@@ -127,6 +127,10 @@ provide('navigation', filteredNavigation)
             id: 'framework',
             label: 'Framework',
             items: frameworks
+          }, {
+            id: 'module',
+            label: 'Module',
+            items: modules
           }]"
           :navigation="filteredNavigation"
           :fuse="{ resultLimit: 42 }"
@@ -164,10 +168,10 @@ provide('navigation', filteredNavigation)
   --ui-container: var(--container-8xl);
 }
 
-html[data-framework="nuxt"] .vue-only {
-  display: none;
-}
-html[data-framework="vue"] .nuxt-only {
+html[data-framework="nuxt"] .vue-only,
+html[data-framework="vue"] .nuxt-only,
+html[data-module="ui-pro"] .ui-only,
+html[data-module="ui"] .ui-pro-only {
   display: none;
 }
 </style>

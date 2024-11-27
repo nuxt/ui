@@ -55,7 +55,11 @@ defineShortcuts({
 
       <USeparator type="dashed" class="my-4" />
 
-      <FrameworkSelect class="mb-4" />
+      <div class="flex flex-col gap-2 w-[calc(100%+1rem)] mb-4 -mx-2">
+        <FrameworkSelect />
+
+        <ModuleSelect />
+      </div>
 
       <UContentNavigation :navigation="navigation" highlight />
     </template>
