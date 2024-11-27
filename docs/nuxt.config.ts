@@ -104,8 +104,7 @@ export default defineNuxtConfig({
         // '/api/pulls.json'
       ],
       crawlLinks: true,
-      autoSubfolderIndex: false,
-      ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
+      autoSubfolderIndex: false
     },
     cloudflare: {
       pages: {
@@ -135,8 +134,8 @@ export default defineNuxtConfig({
       '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
-      resolve('./app/components')
-      // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
+      resolve('./app/components'),
+      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
     ],
     metaFields: {
       type: false,
