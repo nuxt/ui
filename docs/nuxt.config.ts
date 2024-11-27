@@ -102,8 +102,7 @@ export default defineNuxtConfig({
           exclude: [
             '/components/*',
             '/getting-started/*',
-            '/composables/*',
-            '/api/*'
+            '/composables/*'
           ]
         }
       }
