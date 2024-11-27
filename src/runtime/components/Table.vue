@@ -3,6 +3,12 @@
 import type { Ref } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
+
+declare module '@tanstack/table-core' {
+  interface ColumnMeta<TData extends RowData, TValue> {
+    className?: string
+  }
+}
 import type {
   Row,
   ColumnDef,
@@ -206,7 +212,7 @@ defineExpose({
             v-for="header in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
-            :class="ui.th({ class: [props.ui?.th], pinned: !!header.column.getIsPinned() })"
+            :class="ui.th({ class: [props.ui?.th, header.column.columnDef.meta?.className], pinned: !!header.column.getIsPinned() })"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
