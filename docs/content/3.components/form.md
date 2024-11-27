@@ -117,7 +117,7 @@ options:
 ::
 
 ::tip
-You can use the [useFormField](/composables/use-form-field) composable to implement this inside your own components.
+You can use the [`useFormField`](/composables/use-form-field) composable to implement this inside your own components.
 ::
 
 ### Error Event
