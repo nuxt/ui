@@ -12,7 +12,7 @@ navigation.badge: New
 ---
 
 ::note
-This component relies on the [@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner.
+This component relies on the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) package which provides objects and functions for representing and manipulating dates and times in a locale-aware manner.
 ::
 
 ## Usage

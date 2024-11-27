@@ -295,7 +295,7 @@ name: 'modal-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Modal by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Modal by pressing :kbd{value="O"}.
 ::
 
 ::tip
@@ -307,7 +307,7 @@ This allows you to move the trigger outside of the Modal or remove it entirely.
 You can use the [`useModal`](/composables/use-modal) composable to open a Modal programatically.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses the [ModalProvider](https://github.com/nuxt/ui/blob/v3/src/runtime/components/ModalProvider.vue) component.
+Make sure to wrap your app with the [`App`](/components/app) component which uses the [`ModalProvider`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/ModalProvider.vue) component.
 ::
 
 First, create a modal component that will be opened programatically:
