@@ -6,7 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 
 declare module '@tanstack/table-core' {
   interface ColumnMeta<TData extends RowData, TValue> {
-    className?: string
+    class?: string
   }
 }
 import type {
@@ -212,7 +212,7 @@ defineExpose({
             v-for="header in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
-            :class="ui.th({ class: [props.ui?.th, header.column.columnDef.meta?.className], pinned: !!header.column.getIsPinned() })"
+            :class="ui.th({ class: [props.ui?.th, header.column.columnDef.meta?.class], pinned: !!header.column.getIsPinned() })"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
