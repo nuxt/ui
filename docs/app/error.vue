@@ -26,16 +26,6 @@ const searchTerm = ref('')
 //   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
 // }, 500))
 
-const searchTerm = ref('')
-
-// watch(searchTerm, debounce((query: string) => {
-//   if (!query) {
-//     return
-//   }
-
-//   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
-// }, 500))
-
 const links = computed(() => [{
   label: 'Docs',
   icon: 'i-lucide-square-play',
