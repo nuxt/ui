@@ -75,14 +75,6 @@ useServerSeoMeta({
 
 const { framework, frameworks } = useSharedData()
 
-const groups = computed(() => {
-  return [{
-    id: 'framework',
-    label: 'Framework',
-    items: frameworks.value
-  }]
-})
-
 function filterFrameworkItems(items: any[]) {
   return items?.filter(item => !item.framework || item.framework === framework.value)
 }
@@ -131,7 +123,11 @@ provide('navigation', filteredNavigation)
         <LazyUContentSearch
           v-model:search-term="searchTerm"
           :files="files"
-          :groups="groups"
+          :groups="[{
+            id: 'framework',
+            label: 'Framework',
+            items: frameworks
+          }]"
           :navigation="filteredNavigation"
           :fuse="{ resultLimit: 42 }"
         />

@@ -10,9 +10,6 @@ export const localeContextInjectionKey: InjectionKey<Ref<Locale | undefined>> = 
 const _useLocale = (localeOverrides?: Ref<Locale | undefined>) => {
   const locale = localeOverrides || inject(localeContextInjectionKey, ref())!
 
-  /**
-   * If for some reason the developer does not use `UApp`, we get the language back just in case.
-   */
   return buildLocaleContext(computed(() => locale.value || en))
 }
 
