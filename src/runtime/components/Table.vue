@@ -5,12 +5,6 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type { RowData } from '@tanstack/table-core'
 
-declare module '@tanstack/table-core' {
-
-  interface ColumnMeta<_TData extends RowData, _TValue> {
-    class?: string
-  }
-}
 import type {
   Row,
   ColumnDef,
@@ -32,6 +26,15 @@ import type {
   HeaderContext
 } from '@tanstack/vue-table'
 
+declare module '@tanstack/table-core' {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    class?: {
+      th?: string
+      td?: string
+    }
+  }
+}
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
 
@@ -215,7 +218,7 @@ defineExpose({
             v-for="header in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
-            :class="ui.th({ class: [props.ui?.th, header.column.columnDef.meta?.class], pinned: !!header.column.getIsPinned() })"
+            :class="ui.th({ class: [props.ui?.th, header.column.columnDef.meta?.class?.th], pinned: !!header.column.getIsPinned() })"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
@@ -232,7 +235,7 @@ defineExpose({
                 v-for="cell in row.getVisibleCells()"
                 :key="cell.id"
                 :data-pinned="cell.column.getIsPinned()"
-                :class="ui.td({ class: [props.ui?.td], pinned: !!cell.column.getIsPinned() })"
+                :class="ui.td({ class: [props.ui?.td, cell.column.columnDef.meta?.class?.td], pinned: !!cell.column.getIsPinned() })"
               >
                 <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
                   <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />

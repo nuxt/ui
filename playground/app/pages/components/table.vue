@@ -165,7 +165,10 @@ const columns: TableColumn<Payment>[] = [{
   accessorKey: 'date',
   header: 'Date',
   meta: {
-    class: 'w-48 text-green-500'
+    class: {
+      td: 'text-center font-semibold',
+      th: 'text-right text-green-500 w-48'
+    }
   },
   cell: ({ row }) => {
     return new Date(row.getValue('date')).toLocaleString('en-US', {
