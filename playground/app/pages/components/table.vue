@@ -279,6 +279,16 @@ onMounted(() => {
     loading.value = false
   }, 1300)
 })
+function onSelect(e: Event, row: Payment) {
+  console.log(e, row)
+}
+const selectedRowsIndex = ref()
+const selectedRows = computed(() => {
+  if (!selectedRowsIndex.value) return []
+  const indexes = Object.keys(selectedRowsIndex.value)?.map(Number) || []
+  if (indexes.length === 0) return []
+  return data.value.filter((_, index) => indexes.includes(index))
+})
 </script>
 
 <template>
@@ -288,6 +298,7 @@ onMounted(() => {
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
         class="max-w-sm"
         placeholder="Filter emails..."
+
         @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
       />
 
@@ -317,22 +328,42 @@ onMounted(() => {
       </UDropdownMenu>
     </div>
 
-    <UTable
-      ref="table"
-      :data="data"
-      :columns="columns"
-      :column-pinning="columnPinning"
-      :loading="loading"
-      sticky
-      :ui="{
-        tr: 'divide-x divide-[var(--ui-border)]'
-      }"
-      class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
-    >
-      <template #expanded="{ row }">
-        <pre>{{ row.original }}</pre>
-      </template>
-    </UTable>
+    <div class="flex flex-1  overflow-auto">
+      <UTable
+        ref="table"
+        v-model:row-selection="selectedRowsIndex"
+        :data="data"
+        :columns="columns"
+        :column-pinning="columnPinning"
+        :loading="loading"
+        sticky
+        :ui="{
+          tr: 'divide-x divide-[var(--ui-border)]'
+        }"
+        class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
+        @select="onSelect"
+      >
+        <template #expanded="{ row }">
+          <pre>{{ row.original }}</pre>
+        </template>
+      </UTable>
+      <UTable
+        v-if="selectedRows.length>0"
+        :data="selectedRows"
+        :columns="[
+          { accessorKey: 'id', header: 'ID' },
+          { accessorKey: 'email', header: 'email' }
+        ]"
+        class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] "
+      >
+        <template #id-cell="{ row }">
+          {{ row.original.id }}
+        </template>
+        <template #email-cell="{ row }">
+          {{ row.original.email }}
+        </template>
+      </utable>
+    </div>
 
     <div class="flex items-center justify-between gap-3">
       <div class="text-sm text-[var(--ui-text-muted)]">
