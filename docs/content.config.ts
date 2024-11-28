@@ -1,4 +1,5 @@
 import { defineCollection, z } from '@nuxt/content'
+import { resolve } from 'node:path'
 
 const schema = z.object({
   navigation: z.object({
@@ -17,29 +18,27 @@ const schema = z.object({
   }))
 })
 
-// const source = process.env.NUXT_UI_PRO_PATH
-//   ? {
-//       cwd: process.env.NUXT_UI_PRO_PATH,
-//       path: 'docs'
-//     }
-//   : process.env.NUXT_GITHUB_TOKEN
-//     ? {
-//         repository: 'nuxt/ui-pro',
-//         branch: 'v3',
-//         dir: 'docs',
-//         token: process.env.NUXT_GITHUB_TOKEN
-//       }
-//     : undefined
+const pro = process.env.NUXT_UI_PRO_PATH
+  ? {
+      cwd: resolve(__dirname, process.env.NUXT_UI_PRO_PATH, 'docs'),
+      include: 'content/**',
+      prefix: '/'
+    }
+  : process.env.NUXT_GITHUB_TOKEN
+    ? {
+        repository: 'https://github.com/nuxt/ui-pro/tree/v3',
+        include: 'docs/content/**',
+        prefix: '/',
+        authToken: process.env.NUXT_GITHUB_TOKEN
+      }
+    : undefined
 
 export const collections = {
-  // pro: source && defineCollection({
-  //   type: 'page',
-  //   source,
-  //   schema
-  // }),
   content: defineCollection({
     type: 'page',
-    source: '**/*',
+    source: [{
+      include: '**/*'
+    }, pro!],
     schema
   })
 }
