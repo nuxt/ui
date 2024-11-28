@@ -67,7 +67,7 @@ slots:
 ::
 
 ::note
-When using the `hover` mode, the Reka UI [HoverCard](https://reka-ui.com/docs/components/hover-card) component is used instead of the [Popover](https://reka-ui.com/docs/components/popover).
+When using the `hover` mode, the Reka UI [`HoverCard`](https://reka-ui.com/docs/components/hover-card) component is used instead of the [`Popover`](https://reka-ui.com/docs/components/popover).
 ::
 
 ### Delay
@@ -177,7 +177,7 @@ name: 'popover-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Popover by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Popover by pressing :kbd{value="O"}.
 ::
 
 ### With command palette

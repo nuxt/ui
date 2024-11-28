@@ -73,41 +73,10 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const { framework, frameworks } = useSharedData()
+const { frameworks } = useSharedData()
+const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
 
-const groups = computed(() => {
-  return [{
-    id: 'framework',
-    label: 'Framework',
-    items: frameworks.value
-  }]
-})
-
-function filterFrameworkItems(items: any[]) {
-  return items?.filter(item => !item.framework || item.framework === framework.value)
-}
-
-function processNavigationItem(item: any): any {
-  if (item.shadow) {
-    const matchingChild = filterFrameworkItems(item.children)?.[0]
-    return matchingChild
-      ? {
-          ...matchingChild,
-          title: item.title,
-          children: matchingChild.children ? processNavigationItem(matchingChild) : undefined
-        }
-      : item
-  }
-
-  return {
-    ...item,
-    children: item.children?.length ? filterFrameworkItems(item.children)?.map(processNavigationItem) : undefined
-  }
-}
-
-const filteredNavigation = computed(() => navigation.value?.map(processNavigationItem))
-
-provide('navigation', filteredNavigation)
+provide('navigation', mappedNavigation)
 </script>
 
 <template>
@@ -131,7 +100,11 @@ provide('navigation', filteredNavigation)
         <LazyUContentSearch
           v-model:search-term="searchTerm"
           :files="files"
-          :groups="groups"
+          :groups="[{
+            id: 'framework',
+            label: 'Framework',
+            items: frameworks
+          }]"
           :navigation="filteredNavigation"
           :fuse="{ resultLimit: 42 }"
         />
@@ -166,5 +139,12 @@ provide('navigation', filteredNavigation)
 
 :root {
   --ui-container: var(--container-8xl);
+}
+
+html[data-framework="nuxt"] .vue-only {
+  display: none;
+}
+html[data-framework="vue"] .nuxt-only {
+  display: none;
 }
 </style>

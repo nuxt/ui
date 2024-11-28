@@ -96,7 +96,7 @@ const communityLinks = computed(() => [{
         <MDC v-if="page.description" :value="page.description" unwrap="p" />
       </template>
 
-      <template #links>
+      <template v-if="page.links?.length" #links>
         <UButton
           v-for="link in page.links"
           :key="link.label"

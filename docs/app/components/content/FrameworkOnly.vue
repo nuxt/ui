@@ -1,7 +1,12 @@
 <script setup lang="ts">
-const { framework } = useSharedData()
+import { Slot } from 'reka-ui'
 </script>
 
 <template>
-  <slot :name="framework" />
+  <Slot class="nuxt-only">
+    <slot name="nuxt" />
+  </Slot>
+  <Slot class="vue-only">
+    <slot name="vue" />
+  </Slot>
 </template>

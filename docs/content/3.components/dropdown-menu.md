@@ -301,7 +301,7 @@ name: 'dropdown-menu-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the DropdownMenu by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the DropdownMenu by pressing :kbd{value="O"}.
 ::
 
 ### With custom slot

@@ -668,7 +668,7 @@ name: 'select-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Select by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Select by pressing :kbd{value="O"}.
 ::
 
 ### With rotating icon

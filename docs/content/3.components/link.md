@@ -18,7 +18,7 @@ The Link component is a wrapper around [`<NuxtLink>`](https://nuxt.com/docs/api/
 The incentive behind this is to provide the same API as NuxtLink back in Nuxt 2 / Vue 2. You can read more about it in the Vue Router [migration from Vue 2](https://router.vuejs.org/guide/migration/#removal-of-the-exact-prop-in-router-link) guide.
 
 ::note
-It is used by the [Breadcrumb](/components/breadcrumb), [Button](/components/button), [ContextMenu](/components/context-menu), [DropdownMenu](/components/dropdown-menu) and [NavigationMenu](/components/navigation-menu) components.
+It is used by the [`Breadcrumb`](/components/breadcrumb), [`Button`](/components/button), [`ContextMenu`](/components/context-menu), [`DropdownMenu`](/components/dropdown-menu) and [`NavigationMenu`](/components/navigation-menu) components.
 ::
 
 ### Tag

@@ -15,11 +15,11 @@ links:
 Use the `v-model` directive to control the value of the SelectMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::tip
-Use this over a [Select](/components/select) to take advantage of Reka UI's [Combobox](https://reka-ui.com/docs/components/combobox) component that offers search capabilities.
+Use this over a [`Select`](/components/select) to take advantage of Reka UI's [`Combobox`](https://reka-ui.com/docs/components/combobox) component that offers search capabilities and multiple selection.
 ::
 
 ::note
-This component is similar to the [InputMenu](/components/input-menu) but it's using a Select instead of an Input with the search inside the menu.
+This component is similar to the [`InputMenu`](/components/input-menu) but it's using a Select instead of an Input with the search inside the menu.
 ::
 
 ### Items
@@ -748,7 +748,7 @@ name: 'select-menu-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the SelectMenu by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the SelectMenu by pressing :kbd{value="O"}.
 ::
 
 ### Control search term
@@ -794,7 +794,7 @@ name: 'select-menu-ignore-filter-example'
 ::
 
 ::note
-This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
 ::
 
 ### As a CountryPicker

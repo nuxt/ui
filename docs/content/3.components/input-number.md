@@ -12,7 +12,7 @@ navigation.badge: New
 ---
 
 ::note
-This component relies on the [@internationalized/number](https://react-spectrum.adobe.com/internationalized/number/index.html) package which provides utilities for formatting and parsing numbers across locales and numbering systems.
+This component relies on the [`@internationalized/number`](https://react-spectrum.adobe.com/internationalized/number/index.html) package which provides utilities for formatting and parsing numbers across locales and numbering systems.
 ::
 
 ## Usage

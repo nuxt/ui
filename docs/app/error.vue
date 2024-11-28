@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import colors from 'tailwindcss/colors'
+// import { debounce } from 'perfect-debounce'
 import type { NuxtError } from '#app'
 
 const props = defineProps<{
@@ -11,7 +12,19 @@ const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
-const { data: files } = await useAsyncData('files', () => queryCollectionSearchSections('content', { ignoredTags: ['style'] }))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+  server: false
+})
+
+const searchTerm = ref('')
+
+// watch(searchTerm, debounce((query: string) => {
+//   if (!query) {
+//     return
+//   }
+
+//   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
+// }, 500))
 
 const links = computed(() => [{
   label: 'Docs',
@@ -68,7 +81,10 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-provide('navigation', navigation)
+const { frameworks } = useSharedData()
+const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
+
+provide('navigation', mappedNavigation)
 </script>
 
 <template>
@@ -84,7 +100,17 @@ provide('navigation', navigation)
     <Footer />
 
     <ClientOnly>
-      <LazyUContentSearch :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+      <LazyUContentSearch
+        v-model:search-term="searchTerm"
+        :files="files"
+        :groups="[{
+          id: 'framework',
+          label: 'Framework',
+          items: frameworks
+        }]"
+        :navigation="filteredNavigation"
+        :fuse="{ resultLimit: 42 }"
+      />
     </ClientOnly>
   </UApp>
 </template>

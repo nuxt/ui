@@ -73,7 +73,7 @@ export interface LinkProps extends NuxtLinkProps {
   /** Will only be active if the current route is an exact match. */
   exact?: boolean
   /** Will only be active if the current route query is an exact match. */
-  exactQuery?: boolean
+  exactQuery?: boolean | 'partial'
   /** Will only be active if the current route hash is an exact match. */
   exactHash?: boolean
   /** The class to apply when the link is inactive. */
@@ -91,7 +91,7 @@ export interface LinkSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { isEqual } from 'ohash'
+import { isEqual, diff } from 'ohash'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
@@ -122,6 +122,16 @@ const ui = computed(() => tv({
   }
 }))
 
+function isPartiallyEqual(item1: any, item2: any) {
+  const diffedKeys = diff(item1, item2).reduce((filtered, q) => {
+    if (q.type === 'added') {
+      filtered.push(q.key)
+    }
+    return filtered
+  }, [] as string[])
+  return isEqual(item1, item2, { excludeKeys: key => diffedKeys.includes(key) })
+}
+
 const isExternal = computed(() => typeof props.to === 'string' && hasProtocol(props.to, { acceptRelative: true }))
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
@@ -133,9 +143,12 @@ function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
     return false
   }
 
-  if (props.exactQuery && !isEqual(linkRoute.query, route.query)) {
-    return false
+  if (props.exactQuery === 'partial') {
+    if (!isPartiallyEqual(linkRoute.query, route.query)) return false
+  } else if (props.exactQuery === true) {
+    if (!isEqual(linkRoute.query, route.query)) return false
   }
+
   if (props.exactHash && linkRoute.hash !== route.hash) {
     return false
   }
