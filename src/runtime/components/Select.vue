@@ -191,6 +191,7 @@ function onUpdateOpen(value: boolean) {
 }
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <SelectRoot
     :id="id"
