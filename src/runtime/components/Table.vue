@@ -110,7 +110,7 @@ export type TableSlots<T> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 import {
   FlexRender,
   getCoreRowModel,
@@ -122,7 +122,6 @@ import {
 } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { useLocale } from '../composables/useLocale'
-import UPagination from './Pagination.vue'
 
 const props = defineProps<TableProps<T>>()
 defineSlots<TableSlots<T>>()
@@ -208,12 +207,6 @@ const tableApi = useVueTable({
   }
 })
 
-const page = ref(1)
-
-watch(page, () => {
-  tableApi.setPageIndex(page.value - 1)
-})
-
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
 }
@@ -279,10 +272,5 @@ defineExpose({
         </tr>
       </tbody>
     </table>
-    <slot name="pagination">
-      <div :class="ui.pagination({ class: [props.ui?.pagination] })">
-        <UPagination v-if="tableApi.getPageCount() > 1" v-model:page="page" :items-per-page="1" :total="tableApi.getPageCount()" />
-      </div>
-    </slot>
   </div>
 </template>

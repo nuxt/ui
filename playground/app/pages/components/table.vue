@@ -264,6 +264,12 @@ const columnPinning = ref({
   right: ['actions']
 })
 
+const page = ref(1)
+
+watch(page, () => {
+  tableApi.setPageIndex(page.value - 1)
+})
+
 function randomize() {
   data.value = [...data.value].sort(() => Math.random() - 0.5)
 }
@@ -325,6 +331,7 @@ onMounted(() => {
         <pre>{{ row.original }}</pre>
       </template>
     </UTable>
+    <UPagination v-if="table?.tableApi?.getPageCount() > 1" v-model:page="page" :items-per-page="1" :total="table?.tableApi?.getPageCount()" />
 
     <div class="flex items-center justify-between gap-3">
       <div class="text-sm text-[var(--ui-text-muted)]">
