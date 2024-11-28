@@ -159,10 +159,6 @@ function by(a: AcceptableValue, b: AcceptableValue) {
 }
 
 function displayValue(value?: AcceptableValue | AcceptableValue[]): string | undefined {
-  if (!value) {
-    return
-  }
-
   if (multiple.value && Array.isArray(value)) {
     return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
