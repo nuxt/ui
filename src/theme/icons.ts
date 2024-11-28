@@ -11,7 +11,7 @@ export default {
   close: 'i-lucide-x',
   ellipsis: 'i-lucide-ellipsis',
   external: 'i-lucide-arrow-up-right',
-  loading: 'i-lucide-refresh-ccw',
+  loading: 'i-lucide-refresh-cw',
   minus: 'i-lucide-minus',
   plus: 'i-lucide-plus',
   search: 'i-lucide-search'
