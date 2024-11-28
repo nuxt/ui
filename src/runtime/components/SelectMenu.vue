@@ -70,13 +70,6 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
    */
   portal?: boolean
   /**
-   * Whether to filter items or not, can be an array of fields to filter. Defaults to `[labelKey]`.
-   * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
-   * `['label']`{lang="ts-type"}
-   * @defaultValue true
-   */
-  filter?: boolean | string[]
-  /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
    */
@@ -145,11 +138,8 @@ import UChip from './Chip.vue'
 import UInput from './Input.vue'
 
 const props = withDefaults(defineProps<SelectMenuProps<T, I, V, M>>(), {
-  search: true,
   portal: true,
-  autofocusDelay: 0,
   searchInput: true,
-  filter: true,
   labelKey: 'label' as never
 })
 

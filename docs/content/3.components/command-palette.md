@@ -29,7 +29,7 @@ The CommandPalette component filters groups and ranks matching commands by relev
 - `label?: string`{lang="ts-type"}
 - `slot?: string`{lang="ts-type"}
 - `items?: CommandPaletteItem[]`{lang="ts-type"}
-- [`filter?: boolean`{lang="ts-type"}](#without-internal-search)
+- [`ignoreFilter?: boolean`{lang="ts-type"}](#with-ignore-filter)
 - [`postFilter?: (searchTerm: string, items: T[]) => T[]`{lang="ts-type"}](#with-post-filtered-items)
 - `highlightedIcon?: string`{lang="ts-type"}
 

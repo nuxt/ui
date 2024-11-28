@@ -151,7 +151,6 @@ const props = withDefaults(defineProps<InputMenuProps<T, I, V, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  filter: true,
   labelKey: 'label' as never
 })
 const emits = defineEmits<InputMenuEmits<T, V, M>>()
