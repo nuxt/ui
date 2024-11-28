@@ -243,6 +243,7 @@ function onUpdateOpen(value: boolean) {
 }
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <!-- <DefineCreateItemTemplate>
     <ComboboxGroup v-if="creatable" :class="ui.group({ class: props.ui?.group })">
