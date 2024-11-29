@@ -79,7 +79,7 @@ props:
 ::
 
 ::caution
-Unlike the [Select](/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
+Unlike the [`Select`](/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
 ::
 
 You can also pass an array of arrays to the `items` prop to display separated groups of items.

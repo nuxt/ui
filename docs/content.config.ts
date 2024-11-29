@@ -2,9 +2,10 @@ import { defineCollection, z } from '@nuxt/content'
 import { resolve } from 'node:path'
 
 const schema = z.object({
+  framework: z.string().optional(),
+  module: z.string().optional(),
   navigation: z.object({
-    title: z.string().optional(),
-    framework: z.string().optional()
+    title: z.string().optional()
   }),
   links: z.array(z.object({
     label: z.string(),
