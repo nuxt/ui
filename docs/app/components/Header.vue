@@ -25,7 +25,25 @@ defineShortcuts({
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[var(--ui-text-highlighted)] min-w-0 focus-visible:outline-[var(--ui-primary)]" aria-label="Nuxt UI">
         <Logo class="w-auto h-6 shrink-0" />
 
-        <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded-[var(--ui-radius)] font-semibold inline-block truncate" />
+        <UDropdownMenu
+          v-slot="{ open }"
+          :modal="false"
+          :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: 'v2.19', to: 'https://ui.nuxt.com' }]"
+          :ui="{ content: 'w-(--radix-dropdown-menu-trigger-width) min-w-0' }"
+          size="xs"
+        >
+          <UButton
+            :label="`v${config.version}`"
+            variant="subtle"
+            trailing-icon="i-lucide-chevron-down"
+            size="xs"
+            class="-mb-[3px] font-semibold rounded-full truncate"
+            :class="[open && 'bg-[var(--ui-primary)]/15 ']"
+            :ui="{
+              trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
+            }"
+          />
+        </UDropdownMenu>
       </NuxtLink>
     </template>
 
