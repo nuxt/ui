@@ -250,8 +250,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       '@nuxt/content':
-        specifier: https://pkg.pr.new/@nuxt/content@7f8f128
-        version: https://pkg.pr.new/@nuxt/content@7f8f128(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)
+        specifier: https://pkg.pr.new/@nuxt/content@c5b1a4f
+        version: https://pkg.pr.new/@nuxt/content@c5b1a4f(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)
       '@nuxt/image':
         specifier: ^1.8.1
         version: 1.8.1(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.27.3)
@@ -259,8 +259,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/@nuxt/ui-pro@2aca661
-        version: https://pkg.pr.new/@nuxt/ui-pro@2aca661(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@9d59efe
+        version: https://pkg.pr.new/@nuxt/ui-pro@9d59efe(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)
       '@nuxthub/core':
         specifier: ^0.8.7
         version: 0.8.7(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.27.3)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))
@@ -1413,8 +1413,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@7f8f128':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/content@7f8f128}
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@c5b1a4f':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/content@c5b1a4f}
     version: 3.0.0-alpha.7
     peerDependencies:
       '@libsql/client': '*'
@@ -1527,8 +1527,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@2aca661':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@2aca661}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@9d59efe':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@9d59efe}
     version: 3.0.0-alpha.9
     peerDependencies:
       typescript: 5.6.3
@@ -8098,7 +8098,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@7f8f128(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)':
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@c5b1a4f(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)':
     dependencies:
       '@libsql/client': 0.14.0
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
@@ -8547,7 +8547,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@2aca661(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@9d59efe(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)':
     dependencies:
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
       '@nuxt/schema': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)

@@ -11,7 +11,7 @@ const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework']))
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
   server: false
 })

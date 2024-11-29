@@ -56,7 +56,7 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
   selectedIcon?: string
   /**
    * The content of the menu.
-   * @defaultValue { side: 'bottom', sideOffset: 8, position: 'popper' }
+   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
   content?: Omit<ComboboxContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -152,7 +152,7 @@ const appConfig = useAppConfig()
 
 const { t } = useLocale()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter'), emits)
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as ComboboxContentProps)
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: 'Search...', variant: 'none' }) as InputProps)
 
