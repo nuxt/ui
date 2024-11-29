@@ -5,9 +5,9 @@ export const collections = {
     type: 'page',
     source: '**/*',
     schema: z.object({
+      framework: z.string().optional(),
       navigation: z.object({
-        title: z.string().optional(),
-        framework: z.string().optional()
+        title: z.string().optional()
       }),
       links: z.array(z.object({
         label: z.string(),
