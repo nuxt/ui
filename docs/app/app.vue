@@ -7,7 +7,7 @@ const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework']))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
   server: false
 })
@@ -73,7 +73,7 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const { frameworks } = useSharedData()
+const { frameworks, modules } = useSharedData()
 const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
 
 provide('navigation', mappedNavigation)
