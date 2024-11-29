@@ -18,7 +18,7 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
   mode?: 'click' | 'hover'
   /**
    * The content of the popover.
-   * @defaultValue { side: 'bottom', sideOffset: 8 }
+   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
   content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -68,7 +68,7 @@ const slots = defineSlots<PopoverSlots>()
 
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardPropsEmits(pick, emits)
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as PopoverContentProps)
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {
   if (props.preventClose) {
     return {

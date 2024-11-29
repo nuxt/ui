@@ -48,7 +48,7 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
   selectedIcon?: string
   /**
    * The content of the menu.
-   * @defaultValue { side: 'bottom', sideOffset: 8, position: 'popper' }
+   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
   content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -124,7 +124,7 @@ const slots = defineSlots<SelectSlots<T>>()
 
 const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
