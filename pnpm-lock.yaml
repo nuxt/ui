@@ -9,6 +9,7 @@ overrides:
   happy-dom: 14.12.3
   rollup: ^4.24.0
   typescript: 5.6.3
+  chokidar: 3.6.0
 
 importers:
 
@@ -250,8 +251,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       '@nuxt/content':
-        specifier: https://pkg.pr.new/@nuxt/content@5810fc6
-        version: https://pkg.pr.new/@nuxt/content@5810fc6(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)
+        specifier: https://pkg.pr.new/@nuxt/content@c5b1a4f
+        version: https://pkg.pr.new/@nuxt/content@c5b1a4f(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)
       '@nuxt/image':
         specifier: ^1.8.1
         version: 1.8.1(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.27.3)
@@ -1413,8 +1414,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@5810fc6':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/content@5810fc6}
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@c5b1a4f':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/content@c5b1a4f}
     version: 3.0.0-alpha.7
     peerDependencies:
       '@libsql/client': '*'
@@ -2923,10 +2924,6 @@ packages:
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
-
-  chokidar@4.0.1:
-    resolution: {integrity: sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==}
-    engines: {node: '>= 14.16.0'}
 
   chownr@1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
@@ -5818,10 +5815,6 @@ packages:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
 
-  readdirp@4.0.2:
-    resolution: {integrity: sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA==}
-    engines: {node: '>= 14.16.0'}
-
   rechoir@0.6.2:
     resolution: {integrity: sha512-HFM8rkZ+i3zrV+4LQjwQ0W+ez98pApMGM3HUrN04j3CqzPOzl9nmP15Y8YXNm8QHGv/eacOVEjqhmWpkRV0NAw==}
     engines: {node: '>= 0.10'}
@@ -8092,7 +8085,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@5810fc6(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)':
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@c5b1a4f(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.27.3)':
     dependencies:
       '@libsql/client': 0.14.0
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
@@ -8100,7 +8093,7 @@ snapshots:
       '@sqlite.org/sqlite-wasm': 3.47.0-build1
       better-sqlite3: 11.5.0
       c12: 2.0.1(magicast@0.3.5)
-      chokidar: 4.0.1
+      chokidar: 3.6.0
       consola: 3.2.3
       defu: 6.1.4
       destr: 2.0.3
@@ -10240,7 +10233,7 @@ snapshots:
 
   c12@2.0.1(magicast@0.3.5):
     dependencies:
-      chokidar: 4.0.1
+      chokidar: 3.6.0
       confbox: 0.1.8
       defu: 6.1.4
       dotenv: 16.4.5
@@ -10323,10 +10316,6 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
-
-  chokidar@4.0.1:
-    dependencies:
-      readdirp: 4.0.2
 
   chownr@1.1.4: {}
 
@@ -13219,7 +13208,7 @@ snapshots:
       '@vue/shared': 3.5.13
       acorn: 8.14.0
       c12: 2.0.1(magicast@0.3.5)
-      chokidar: 4.0.1
+      chokidar: 3.6.0
       compatx: 0.1.8
       consola: 3.2.3
       cookie-es: 1.2.2
@@ -13332,7 +13321,7 @@ snapshots:
       '@vue/shared': 3.5.13
       acorn: 8.14.0
       c12: 2.0.1(magicast@0.3.5)
-      chokidar: 4.0.1
+      chokidar: 3.6.0
       compatx: 0.1.8
       consola: 3.2.3
       cookie-es: 1.2.2
@@ -14097,8 +14086,6 @@ snapshots:
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.1
-
-  readdirp@4.0.2: {}
 
   rechoir@0.6.2:
     dependencies:
@@ -15636,7 +15623,7 @@ snapshots:
       '@esbuild-plugins/node-globals-polyfill': 0.2.3(esbuild@0.17.19)
       '@esbuild-plugins/node-modules-polyfill': 0.2.2(esbuild@0.17.19)
       blake3-wasm: 2.1.5
-      chokidar: 4.0.1
+      chokidar: 3.6.0
       date-fns: 4.1.0
       esbuild: 0.17.19
       itty-time: 1.0.6
