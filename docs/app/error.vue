@@ -11,7 +11,7 @@ const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework']))
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
   server: false
 })
@@ -81,33 +81,10 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const { framework, frameworks } = useSharedData()
+const { frameworks } = useSharedData()
+const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
 
-function filterFrameworkItems(items: any[]) {
-  return items?.filter(item => !item.framework || item.framework === framework.value)
-}
-
-function processNavigationItem(item: any): any {
-  if (item.shadow) {
-    const matchingChild = filterFrameworkItems(item.children)?.[0]
-    return matchingChild
-      ? {
-          ...matchingChild,
-          title: item.title,
-          children: matchingChild.children ? processNavigationItem(matchingChild) : undefined
-        }
-      : item
-  }
-
-  return {
-    ...item,
-    children: item.children?.length ? filterFrameworkItems(item.children)?.map(processNavigationItem) : undefined
-  }
-}
-
-const filteredNavigation = computed(() => navigation.value?.map(processNavigationItem))
-
-provide('navigation', filteredNavigation)
+provide('navigation', mappedNavigation)
 </script>
 
 <template>
