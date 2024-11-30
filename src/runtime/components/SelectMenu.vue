@@ -306,7 +306,7 @@ function onUpdateOpen(value: boolean) {
     :name="name"
     :disabled="disabled"
     :display-value="() => searchTerm"
-    :filter-function="() => rootItems"
+    :filter-function="a => a"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
@@ -354,7 +354,7 @@ function onUpdateOpen(value: boolean) {
           <ReuseCreateItemTemplate v-if="creatable && creatable.position === 'top'" />
 
           <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
-            <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
+            <template v-for="(item, index) in filterFunction(group as ArrayOrWrapped<T>)" :key="`group-${groupIndex}-${index}`">
               <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
                 {{ get(item, props.labelKey as string) }}
               </ComboboxLabel>
