@@ -10,11 +10,32 @@
     }"
   >
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-gray-900 dark:text-white min-w-0" aria-label="Nuxt UI">
+      <NuxtLink to="/" class="flex items-end gap-2 text-xl text-gray-900 dark:text-white min-w-0" aria-label="Nuxt UI">
         <LogoPro v-if="$route.path.startsWith('/pro')" class="w-auto h-6 shrink-0" />
         <Logo v-else class="w-auto h-6 shrink-0" />
 
-        <UBadge :label="$route.path.startsWith('/pro') ? `v${pkg.version.split('-')[0]}` : `v${config.version}`" variant="subtle" size="xs" class="-mb-[2px] rounded font-semibold truncate hidden sm:inline-flex" />
+        <UDropdown
+          :items="[[{ label: $route.path.startsWith('/pro') ? `v${pkg.version.split('-')[0]}` : `v${config.version}`, to: '/', class: 'text-primary-500 dark:text-primary-400' }, { label: 'v3.0.0-alpha.x', href: 'https://ui3.nuxt.dev' }]]"
+          :popper="{ strategy: 'absolute', offsetDistance: 11, placement: 'bottom-start' }"
+          :ui="{
+            background: 'dark:bg-gray-900',
+            ring: 'dark:ring-gray-800',
+            width: 'w-auto',
+            item: {
+              padding: 'p-1',
+              size: 'text-xs',
+              active: 'dark:bg-gray-800/50'
+            }
+          }"
+        >
+          <UButton
+            :label="$route.path.startsWith('/pro') ? `v${pkg.version.split('-')[0]}` : `v${config.version}`"
+            trailing-icon="i-lucide-chevron-down"
+            variant="outline"
+            size="2xs"
+            class="-mb-[3px] font-semibold rounded-full truncate ring-primary-500/25 dark:ring-primary-400/25 bg-primary-500/10 dark:bg-primary-400/10 hover:bg-primary-500/15 dark:hover:bg-primary-400/15 transition-colors"
+          />
+        </UDropdown>
       </NuxtLink>
     </template>
 
