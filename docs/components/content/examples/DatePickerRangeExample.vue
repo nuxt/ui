@@ -42,7 +42,7 @@ function selectRange(duration: Duration) {
           />
         </div>
 
-        <DatePicker v-model="selected" @close="close" />
+        <DatePicker v-model.range="selected" @close="close" />
       </div>
     </template>
   </UPopover>
