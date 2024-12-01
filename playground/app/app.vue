@@ -23,6 +23,7 @@ const components = [
   'dropdown-menu',
   'form',
   'form-field',
+  'file-upload',
   'input',
   'input-menu',
   'kbd',
@@ -46,8 +47,7 @@ const components = [
   'table',
   'textarea',
   'toast',
-  'tooltip',
-  'file-upload'
+  'tooltip'
 ]
 
 const items = components.map(component => ({ label: upperName(component), to: `/components/${component}` }))

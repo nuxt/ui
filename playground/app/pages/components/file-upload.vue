@@ -1,9 +1,9 @@
-<script setup lang="ts">
-import FileUpload from '#ui/components/FileUpload.vue'
+<script lang="ts" setup>
+const files = ref()
 </script>
 
 <template>
-  <div>
-    <FileUpload />
+  <div class="w-full max-w-96">
+    <UFileUpload v-model="files" />
   </div>
 </template>
