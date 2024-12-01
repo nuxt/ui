@@ -95,14 +95,14 @@ export default (options: Required<ModuleOptions>) => ({
     size: 'xs',
     class: {
       separator: 'top-[30px]',
-      title: 'mt-1'
+      title: 'mt-0.5'
     }
   }, {
     orientation: 'vertical',
     size: 'sm',
     class: {
       separator: 'top-[38px]',
-      title: 'mt-1.5'
+      title: 'mt-1'
     }
   }, {
     orientation: 'vertical',

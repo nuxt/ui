@@ -1,0 +1,617 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Stepper > renders with as correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-1">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-1">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-1">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with class correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-1">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-1">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-1">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with default slot correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-1">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-1">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-1">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size lg correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-12 p-2 text-lg group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-6" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+32px)] right-[calc(-50%+32px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-1 text-lg">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-md">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-12 p-2 text-lg group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-6" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+32px)] right-[calc(-50%+32px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-1 text-lg">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-md">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-12 p-2 text-lg group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-1 text-lg">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-md">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size lg correctly 2`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-12 p-2 text-lg group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-6" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[54px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium text-lg mt-2.5">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-md">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-12 p-2 text-lg group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-6" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[54px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium text-lg mt-2.5">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-md">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-12 p-2 text-lg group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium text-lg mt-2.5">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-md">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size md correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-1">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-1">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-1">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size md correctly 2`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[46px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-2">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[46px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-2">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-2">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size sm correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-8 p-1.5 text-sm group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-4" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+20px)] right-[calc(-50%+20px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-1 text-sm">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-xs">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-8 p-1.5 text-sm group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-4" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+20px)] right-[calc(-50%+20px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-1 text-sm">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-xs">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-8 p-1.5 text-sm group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-1 text-sm">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-xs">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size sm correctly 2`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-8 p-1.5 text-sm group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-4" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[38px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium text-sm mt-1">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-xs">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-8 p-1.5 text-sm group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-4" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[38px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium text-sm mt-1">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-xs">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-8 p-1.5 text-sm group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium text-sm mt-1">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-xs">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size xl correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-14 p-2 text-xl group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-7" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+36px)] right-[calc(-50%+36px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-1 text-lg">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-md">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-14 p-2 text-xl group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-7" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+36px)] right-[calc(-50%+36px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-1 text-lg">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-md">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-14 p-2 text-xl group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-1 text-lg">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-md">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size xl correctly 2`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-14 p-2 text-xl group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-7" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[62px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium text-lg mt-3.5">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-md">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-14 p-2 text-xl group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-7" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[62px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium text-lg mt-3.5">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-md">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-14 p-2 text-xl group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium text-lg mt-3.5">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-md">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size xs correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-6 p-1 text-xs group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-3" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+16px)] right-[calc(-50%+16px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-1 text-sm">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-xs">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-6 p-1 text-xs group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-3" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+16px)] right-[calc(-50%+16px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-1 text-sm">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-xs">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-6 p-1 text-xs group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-1 text-sm">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-xs">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size xs correctly 2`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-6 p-1 text-xs group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-3" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[30px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium text-sm mt-0.5">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-xs">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-6 p-1 text-xs group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-3" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] left-[calc(50%-2px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[30px]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium text-sm mt-0.5">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-xs">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group relative w-full flex text-left gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-6 p-1 text-xs group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium text-sm mt-0.5">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-xs">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with ui correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" items="[object Object],[object Object],[object Object]" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-1" aria-labelledby="radix-vue-stepper-item-title-v-0-0-0" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:house size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-0" class="font-medium mt-1">Address</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-1" class="text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-3" aria-labelledby="radix-vue-stepper-item-title-v-0-0-2" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]"><span class="iconify i-lucide:truck size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] left-[calc(50%+28px)] right-[calc(-50%+28px)]"></div>
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-2" class="font-medium mt-1">Shipping</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-3" class="text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="radix-vue-stepper-item-description-v-0-0-5" aria-labelledby="radix-vue-stepper-item-title-v-0-0-4" class="">
+          <div class="rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)] size-10 text-md group-data-[state=completed]:bg-[var(--ui-primary)]">
+            <p>3</p>
+          </div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div>
+        <h4 id="radix-vue-stepper-item-title-v-0-0-4" class="font-medium mt-1">Checkout</h4>
+        <p id="radix-vue-stepper-item-description-v-0-0-5" class="text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full"></div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
