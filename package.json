@@ -139,12 +139,12 @@
     "zod": "^3.23.8"
   },
   "peerDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.6.3"
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
     "happy-dom": "14.12.3",
     "rollup": "^4.24.0",
-    "typescript": "^5.7.2"
+    "typescript": "5.6.3"
   }
 }
