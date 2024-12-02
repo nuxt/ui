@@ -239,46 +239,6 @@ props:
 You can set the `search-input` prop to `false` to hide the search input.
 ::
 
-<!--
-### Create Item
-
-Use the `create-item` prop to allow user input.
-
-::component-code
----
-prettier: true
-ignore:
-  - modelValue
-  - items
-  - class
-external:
-  - items
-  - modelValue
-items:
-  createItem:
-    - true
-    - 'always'
-props:
-  modelValue: 'Backlog'
-  createItem: true
-  items:
-    - Backlog
-    - Todo
-    - In Progress
-    - Done
-  class: 'w-48'
----
-::
-
-::note
-The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
-::
-
-::tip{to="#emits"}
-Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
-::
--->
-
 ### Content
 
 Use the `content` prop to control how the SelectMenu content is rendered, like its `align` or `side` for example.
@@ -771,6 +731,25 @@ name: 'select-menu-icon-example'
 ---
 ::
 
+### With create item
+
+Use the `create-item` prop to enable users to add custom values that aren't in the predefined options.
+
+::component-example
+---
+collapse: true
+name: 'select-menu-create-item-example'
+---
+::
+
+::note
+The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
+::
+
+::tip{to="#emits"}
+Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
+::
+
 ### With fetched items
 
 You can fetch items from an API and use them in the SelectMenu.
@@ -795,6 +774,17 @@ name: 'select-menu-ignore-filter-example'
 
 ::note
 This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+::
+
+### With filter fields
+
+Use the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
+
+::component-example
+---
+collapse: true
+name: 'select-menu-filter-fields-example'
+---
 ::
 
 ### As a CountryPicker

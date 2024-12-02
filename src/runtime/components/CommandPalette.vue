@@ -149,6 +149,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig()
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon', 'placeholder'))
 

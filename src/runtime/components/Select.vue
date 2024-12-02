@@ -29,7 +29,7 @@ export interface SelectItem {
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue | boolean> = MaybeArrayOfArray<SelectItem | AcceptableValue | boolean>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Omit<SelectRootProps, 'dir' | 'multiple' | 'modelValue' | 'by'>, UseComponentIconsProps {
+export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue | boolean> = MaybeArrayOfArray<SelectItem | AcceptableValue | boolean>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -72,6 +72,8 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
    */
   labelKey?: V
   items?: I
+  /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
+  defaultValue?: SelectModelValue<T, V, M, T extends { value: infer U } ? U : never>
   /** The controlled value of the Select. Can be bind as `v-model`. */
   modelValue?: SelectModelValue<T, V, M, T extends { value: infer U } ? U : never>
   /** Whether multiple options can be selected or not. */

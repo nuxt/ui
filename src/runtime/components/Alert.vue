@@ -75,8 +75,8 @@ const props = defineProps<AlertProps>()
 const emits = defineEmits<AlertEmits>()
 const slots = defineSlots<AlertSlots>()
 
-const appConfig = useAppConfig()
 const { t } = useLocale()
+const appConfig = useAppConfig()
 
 const multiline = computed(() => !!props.title && !!props.description)
 

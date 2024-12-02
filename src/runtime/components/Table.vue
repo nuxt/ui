@@ -117,6 +117,7 @@ const props = defineProps<TableProps<T>>()
 defineSlots<TableSlots<T>>()
 
 const { t } = useLocale()
+
 const data = computed(() => props.data ?? [])
 const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 

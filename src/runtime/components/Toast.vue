@@ -75,8 +75,9 @@ const props = withDefaults(defineProps<ToastProps>(), {
 const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
-const appConfig = useAppConfig()
 const { t } = useLocale()
+const appConfig = useAppConfig()
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
 const multiline = computed(() => !!props.title && !!props.description)

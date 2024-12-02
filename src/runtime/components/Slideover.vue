@@ -89,6 +89,9 @@ const props = withDefaults(defineProps<SlideoverProps>(), {
 const emits = defineEmits<SlideoverEmits>()
 const slots = defineSlots<SlideoverSlots>()
 
+const { t } = useLocale()
+const appConfig = useAppConfig()
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
@@ -108,9 +111,6 @@ const contentEvents = computed(() => {
     }
   }
 })
-
-const appConfig = useAppConfig()
-const { t } = useLocale()
 
 const ui = computed(() => slideover({
   transition: props.transition,

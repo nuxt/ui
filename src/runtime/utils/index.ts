@@ -1,3 +1,5 @@
+import { isEqual } from 'ohash'
+
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
   const result = {} as Pick<Data, Keys>
 
@@ -58,4 +60,24 @@ export function set(object: Record<string, any>, path: (string | number)[] | str
 export function looseToNumber(val: any): any {
   const n = Number.parseFloat(val)
   return Number.isNaN(n) ? val : n
+}
+
+export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((a: T, b: T) => boolean)) {
+  if (value === undefined || currentValue === undefined) {
+    return false
+  }
+
+  if (typeof value === 'string') {
+    return value === currentValue
+  }
+
+  if (typeof comparator === 'function') {
+    return comparator(value, currentValue)
+  }
+
+  if (typeof comparator === 'string') {
+    return get(value!, comparator) === get(currentValue!, comparator)
+  }
+
+  return isEqual(value, currentValue)
 }

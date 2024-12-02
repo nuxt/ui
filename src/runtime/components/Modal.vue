@@ -90,6 +90,9 @@ const props = withDefaults(defineProps<ModalProps>(), {
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
 
+const { t } = useLocale()
+const appConfig = useAppConfig()
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
@@ -109,9 +112,6 @@ const contentEvents = computed(() => {
     }
   }
 })
-
-const appConfig = useAppConfig()
-const { t } = useLocale()
 
 const ui = computed(() => modal({
   transition: props.transition,
