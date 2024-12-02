@@ -67,7 +67,7 @@
     "nuxt": "^3.14.1592",
     "release-it": "^17.10.0",
     "superstruct": "^2.0.2",
-    "typescript": "^5.7.2",
+    "typescript": "^5.6.3",
     "unbuild": "^2.0.0",
     "valibot": "^0.42.1",
     "valibot30": "npm:valibot@0.30.0",
@@ -83,6 +83,6 @@
     "@nuxt/content": "2.13.2",
     "@nuxtjs/mdc": "0.9.0",
     "chokidar": "3.6.0",
-    "typescript": "^5.7.2"
+    "typescript": "5.6.3"
   }
 }
