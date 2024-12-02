@@ -164,6 +164,12 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   accessorKey: 'date',
   header: 'Date',
+  meta: {
+    class: {
+      td: 'text-center font-semibold',
+      th: 'text-right text-green-500 w-48'
+    }
+  },
   cell: ({ row }) => {
     return new Date(row.getValue('date')).toLocaleString('en-US', {
       day: 'numeric',
@@ -318,6 +324,9 @@ onMounted(() => {
       :column-pinning="columnPinning"
       :loading="loading"
       sticky
+      :ui="{
+        tr: 'divide-x divide-[var(--ui-border)]'
+      }"
       class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
     >
       <template #expanded="{ row }">
