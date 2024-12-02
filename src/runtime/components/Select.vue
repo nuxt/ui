@@ -72,14 +72,14 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
    */
   labelKey?: V
   items?: I
+  /** The controlled value of the Select. Can be bind as `v-model`. */
+  modelValue?: SelectModelValue<T, V, M, T extends { value: infer U } ? U : never>
+  /** Whether multiple options can be selected or not. */
+  multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof select.slots>
-  /** The controlled value of the Select. Can be bind as `v-model`. */
-  modelValue?: SelectModelValue<T, V, M, T extends { value: infer U } ? U : never>
-  /** Whether multiple options can be selected or not. */
-  multiple?: M
 }
 
 export type SelectEmits<T, V, M extends boolean> = Omit<SelectRootEmits<T>, 'update:modelValue'> & {
@@ -107,13 +107,12 @@ extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3']
 import { computed, toRef } from 'vue'
 import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
-import { isEqual } from 'ohash'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
-import { get } from '../utils'
+import { get, compare } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
@@ -127,15 +126,13 @@ const emits = defineEmits<SelectEmits<T, V, M>>()
 const slots = defineSlots<SelectSlots<T, M>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
-// This is a hack due to generic boolean casting (see https://github.com/nuxt/ui/issues/2541)
-const multiple = toRef(() => typeof props.multiple === 'string' ? true : props.multiple)
 
 const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
@@ -154,16 +151,12 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-function by(a: AcceptableValue, b: AcceptableValue) {
-  return isEqual(a, b)
-}
-
 function displayValue(value?: AcceptableValue | AcceptableValue[]): string | undefined {
-  if (multiple.value && Array.isArray(value)) {
+  if (props.multiple && Array.isArray(value)) {
     return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
 
-  const item = items.value.find(item => isEqual(typeof item === 'object' ? get(item, props.valueKey as string) : item, value))
+  const item = items.value.find(item => compare(typeof item === 'object' ? get(item, props.valueKey as string) : item, value))
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
@@ -196,8 +189,6 @@ function onUpdateOpen(value: boolean) {
     :name="name"
     :autocomplete="autocomplete"
     :disabled="disabled"
-    :multiple="multiple"
-    :by="by"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
