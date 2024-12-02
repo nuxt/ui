@@ -23,6 +23,11 @@ type CarouselVariants = VariantProps<typeof carousel>
 
 export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
+  /**
    * Configure the prev button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
@@ -98,7 +103,7 @@ extendDevtoolsMeta({ example: 'CarouselExample' })
 <script setup lang="ts" generic="T extends AcceptableValue">
 import { computed, ref, watch, onMounted } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
-import { useForwardProps } from 'reka-ui'
+import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick, computedAsync } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -255,7 +260,8 @@ defineExpose({
 </script>
 
 <template>
-  <div
+  <Primitive
+    :as="as"
     role="region"
     aria-roledescription="carousel"
     tabindex="0"
@@ -312,5 +318,5 @@ defineExpose({
         </template>
       </div>
     </div>
-  </div>
+  </Primitive>
 </template>

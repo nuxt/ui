@@ -26,7 +26,7 @@ exports[`Carousel > renders with arrows correctly 1`] = `
 `;
 
 exports[`Carousel > renders with as correctly 1`] = `
-"<div role="region" aria-roledescription="carousel" tabindex="0" class="relative focus:outline-none" as="nav">
+"<nav role="region" aria-roledescription="carousel" tabindex="0" class="relative focus:outline-none">
   <div class="overflow-hidden">
     <div class="flex items-start flex-row -ms-4" style="transform: translate3d(NaNpx,0px,0px);">
       <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 basis-full ps-4"><img src="https://picsum.photos/600/600?random=1" width="300" height="300" class="rounded-lg"></div>
@@ -38,7 +38,7 @@ exports[`Carousel > renders with as correctly 1`] = `
     </div>
   </div>
   <!--v-if-->
-</div>"
+</nav>"
 `;
 
 exports[`Carousel > renders with class correctly 1`] = `

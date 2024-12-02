@@ -11,7 +11,6 @@ describe('Switch', () => {
 
   it.each([
     // Props
-    ['with as', { props: { as: 'section' } }],
     ['with modelValue', { props: { modelValue: true } }],
     ['with defaultValue', { props: { defaultValue: true } }],
     ['with id', { props: { id: 'id' } }],
@@ -27,6 +26,7 @@ describe('Switch', () => {
     ['with description', { props: { label: 'Label', description: 'Description' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: true } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'inline-flex' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots

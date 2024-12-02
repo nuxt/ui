@@ -52,7 +52,7 @@ extendDevtoolsMeta({ defaultProps: { label: 'Switch me!' } })
 
 <script setup lang="ts">
 import { computed, useId } from 'vue'
-import { SwitchRoot, SwitchThumb, useForwardProps, Label } from 'reka-ui'
+import { Primitive, SwitchRoot, SwitchThumb, useForwardProps, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
@@ -65,7 +65,7 @@ const emits = defineEmits<SwitchEmits>()
 const modelValue = defineModel<boolean>({ default: undefined })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardProps(reactivePick(props, 'as', 'required', 'value', 'defaultValue'))
+const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<SwitchProps>(props)
 const id = _id.value ?? useId()
@@ -88,7 +88,7 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.container({ class: props.ui?.container })">
       <SwitchRoot
         :id="id"
@@ -120,5 +120,5 @@ function onUpdate(value: any) {
         </slot>
       </p>
     </div>
-  </div>
+  </Primitive>
 </template>

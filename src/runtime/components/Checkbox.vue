@@ -13,6 +13,11 @@ const checkbox = tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || {}) })
 type CheckboxVariants = VariantProps<typeof checkbox>
 
 export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   label?: string
   description?: string
   color?: CheckboxVariants['color']
@@ -45,7 +50,7 @@ extendDevtoolsMeta({ defaultProps: { label: 'Check me!' } })
 
 <script setup lang="ts">
 import { computed, useId } from 'vue'
-import { CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
+import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
@@ -82,7 +87,7 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
@@ -114,5 +119,5 @@ function onUpdate(value: any) {
         </slot>
       </p>
     </div>
-  </div>
+  </Primitive>
 </template>
