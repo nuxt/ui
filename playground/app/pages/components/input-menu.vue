@@ -83,7 +83,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     <div class="flex flex-col gap-4 w-48">
       <UInputMenu :items="items" placeholder="Disabled" disabled />
       <UInputMenu :items="items" placeholder="Required" required />
-      <UInputMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple color="neutral" />
+      <UInputMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
       <UInputMenu :items="items" loading placeholder="Search..." />
     </div>
     <div class="flex items-center gap-4">
