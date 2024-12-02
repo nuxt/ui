@@ -4,7 +4,6 @@ import type { Ref } from 'vue'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type { RowData } from '@tanstack/table-core'
-
 import type {
   Row,
   ColumnDef,
@@ -25,6 +24,8 @@ import type {
   CellContext,
   HeaderContext
 } from '@tanstack/vue-table'
+import _appConfig from '#build/app.config'
+import theme from '#build/ui/table'
 
 declare module '@tanstack/table-core' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -35,8 +36,6 @@ declare module '@tanstack/table-core' {
     }
   }
 }
-import _appConfig from '#build/app.config'
-import theme from '#build/ui/table'
 
 const appConfig = _appConfig as AppConfig & { ui: { table: Partial<typeof theme> } }
 
