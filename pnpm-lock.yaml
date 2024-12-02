@@ -108,8 +108,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2
       reka-ui:
-        specifier: https://pkg.pr.new/reka-ui@c8c60a6
-        version: https://pkg.pr.new/reka-ui@c8c60a6(vue@3.5.13(typescript@5.6.3))
+        specifier: https://pkg.pr.new/reka-ui@8238615
+        version: https://pkg.pr.new/reka-ui@8238615(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
       scule:
         specifier: ^1.3.0
         version: 1.3.0
@@ -2556,9 +2556,6 @@ packages:
   '@vueuse/core@10.11.1':
     resolution: {integrity: sha512-guoy26JQktXPcz+0n3GukWIy/JDNKti9v6VEMu6kV2sYBsWuGiTU8OWdg+ADfUbHg3/3DlqySDe7JmdHrktiww==}
 
-  '@vueuse/core@11.3.0':
-    resolution: {integrity: sha512-7OC4Rl1f9G8IT6rUfi9JrKiXy4bfmHhZ5x2Ceojy0jnd3mHNEvV4JaRygH362ror6/NZ+Nl+n13LPzGiPN8cKA==}
-
   '@vueuse/core@12.0.0':
     resolution: {integrity: sha512-C12RukhXiJCbx4MGhjmd/gH52TjJsc3G0E0kQj/kb19H3Nt6n1CA4DRWuTdWWcaFRdlTe0npWDS942mvacvNBw==}
 
@@ -2606,9 +2603,6 @@ packages:
   '@vueuse/metadata@10.11.1':
     resolution: {integrity: sha512-IGa5FXd003Ug1qAZmyE8wF3sJ81xGLSqTqtQ6jaVfkeZ4i5kS2mwQF61yhVqojRnenVew5PldLyRgvdl4YYuSw==}
 
-  '@vueuse/metadata@11.3.0':
-    resolution: {integrity: sha512-pwDnDspTqtTo2HwfLw4Rp6yywuuBdYnPYDq+mO38ZYKGebCUQC/nVj/PXSiK9HX5otxLz8Fn7ECPbjiRz2CC3g==}
-
   '@vueuse/metadata@12.0.0':
     resolution: {integrity: sha512-Yzimd1D3sjxTDOlF05HekU5aSGdKjxhuhRFHA7gDWLn57PRbBIh+SF5NmjhJ0WRgF3my7T8LBucyxdFJjIfRJQ==}
 
@@ -2619,9 +2613,6 @@ packages:
 
   '@vueuse/shared@10.11.1':
     resolution: {integrity: sha512-LHpC8711VFZlDaYUXEBbFBCQ7GS3dVU9mjOhhMhXP6txTV4EhYQg/KGnQuvt/sPAtoUKq7VVUnL6mVtFoL42sA==}
-
-  '@vueuse/shared@11.3.0':
-    resolution: {integrity: sha512-P8gSSWQeucH5821ek2mn/ciCk+MS/zoRKqdQIM3bHq6p7GXDAJLmnRRKmF5F65sAVJIfzQlwR3aDzwCn10s8hA==}
 
   '@vueuse/shared@12.0.0':
     resolution: {integrity: sha512-3i6qtcq2PIio5i/vVYidkkcgvmTjCqrf26u+Fd4LhnbBmIT6FN8y6q/GJERp8lfcB9zVEfjdV0Br0443qZuJpw==}
@@ -5932,8 +5923,8 @@ packages:
   rehype-sort-attributes@5.0.1:
     resolution: {integrity: sha512-Bxo+AKUIELcnnAZwJDt5zUDDRpt4uzhfz9d0PVGhcxYWsbFj5Cv35xuWxu5r1LeYNFNhgGqsr9Q2QiIOM/Qctg==}
 
-  reka-ui@https://pkg.pr.new/reka-ui@c8c60a6:
-    resolution: {tarball: https://pkg.pr.new/reka-ui@c8c60a6}
+  reka-ui@https://pkg.pr.new/reka-ui@8238615:
+    resolution: {tarball: https://pkg.pr.new/reka-ui@8238615}
     version: 1.0.0-alpha.5
     peerDependencies:
       vue: '>= 3.2.0'
@@ -10026,16 +10017,6 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/core@11.3.0(vue@3.5.13(typescript@5.6.3))':
-    dependencies:
-      '@types/web-bluetooth': 0.0.20
-      '@vueuse/metadata': 11.3.0
-      '@vueuse/shared': 11.3.0(vue@3.5.13(typescript@5.6.3))
-      vue-demi: 0.14.10(vue@3.5.13(typescript@5.6.3))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-
   '@vueuse/core@12.0.0(typescript@5.6.3)':
     dependencies:
       '@types/web-bluetooth': 0.0.20
@@ -10058,8 +10039,6 @@ snapshots:
 
   '@vueuse/metadata@10.11.1': {}
 
-  '@vueuse/metadata@11.3.0': {}
-
   '@vueuse/metadata@12.0.0': {}
 
   '@vueuse/nuxt@12.0.0(magicast@0.3.5)(nuxt@3.14.1592(@libsql/client@0.14.0)(@parcel/watcher@2.5.0)(@types/node@22.9.0)(better-sqlite3@11.5.0)(eslint@9.16.0(jiti@2.4.0))(ioredis@5.4.1)(lightningcss@1.28.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.27.3)(terser@5.36.0)(typescript@5.6.3)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))(vue-tsc@2.1.10(typescript@5.6.3)))(rollup@4.27.3)(typescript@5.6.3)':
@@ -10077,13 +10056,6 @@ snapshots:
       - typescript
 
   '@vueuse/shared@10.11.1(vue@3.5.13(typescript@5.6.3))':
-    dependencies:
-      vue-demi: 0.14.10(vue@3.5.13(typescript@5.6.3))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-
-  '@vueuse/shared@11.3.0(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       vue-demi: 0.14.10(vue@3.5.13(typescript@5.6.3))
     transitivePeerDependencies:
@@ -14316,15 +14288,15 @@ snapshots:
       '@types/hast': 3.0.4
       unist-util-visit: 5.0.0
 
-  reka-ui@https://pkg.pr.new/reka-ui@c8c60a6(vue@3.5.13(typescript@5.6.3)):
+  reka-ui@https://pkg.pr.new/reka-ui@8238615(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3)):
     dependencies:
       '@floating-ui/dom': 1.6.12
       '@floating-ui/vue': 1.1.5(vue@3.5.13(typescript@5.6.3))
       '@internationalized/date': 3.6.0
       '@internationalized/number': 3.6.0
       '@tanstack/vue-virtual': 3.10.9(vue@3.5.13(typescript@5.6.3))
-      '@vueuse/core': 11.3.0(vue@3.5.13(typescript@5.6.3))
-      '@vueuse/shared': 11.3.0(vue@3.5.13(typescript@5.6.3))
+      '@vueuse/core': 12.0.0(typescript@5.6.3)
+      '@vueuse/shared': 12.0.0(typescript@5.6.3)
       aria-hidden: 1.2.4
       defu: 6.1.4
       ohash: 1.1.4
@@ -14332,6 +14304,7 @@ snapshots:
       vue: 3.5.13(typescript@5.6.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
+      - typescript
 
   release-it@17.10.0(typescript@5.6.3):
     dependencies:
