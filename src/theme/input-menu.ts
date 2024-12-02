@@ -33,7 +33,6 @@ export default (options: Required<ModuleOptions>) => {
       multiple: {
         true: {
           root: 'flex-wrap',
-          base: '',
           tagsInput: 'border-0 bg-transparent placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
         },
         false: {
@@ -102,7 +101,7 @@ export default (options: Required<ModuleOptions>) => {
       color,
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: `has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--${color})]`
+      class: `has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--ui-${color})]`
     })), {
       color: 'neutral',
       multiple: true,

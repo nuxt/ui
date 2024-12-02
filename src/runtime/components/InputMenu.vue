@@ -372,7 +372,6 @@ defineExpose({
         :type="type"
         :placeholder="placeholder"
         :required="required"
-        :class="ui.base({ class: props.ui?.base })"
         @blur="onBlur"
         @focus="onFocus"
       />
