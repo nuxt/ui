@@ -101,12 +101,12 @@ export default (options: Required<ModuleOptions>) => {
       color,
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: `has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--ui-${color})]`
+      class: `has-focus-visible:ring-2 has-focus-visible:ring-[var(--ui-${color})]`
     })), {
       color: 'neutral',
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: 'has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--ui-border-inverted)]'
+      class: 'has-focus-visible:ring-2 has-focus-visible:ring-[var(--ui-border-inverted)]'
     }]
   }, input(options))
 }
