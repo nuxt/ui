@@ -47,7 +47,7 @@
         <UContentSearchButton :label="null" />
       </UTooltip>
 
-      <UColorModeButton />
+      <UColorModeButton class="hidden lg:inline-flex" />
 
       <UButton
         to="https://github.com/nuxt/ui/tree/dev"
