@@ -1,12 +1,12 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { ContextMenuContentProps as RadixContextMenuContentProps, ContextMenuContentEmits as RadixContextMenuContentEmits } from 'reka-ui'
+import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/context-menu'
 import type { KbdProps, AvatarProps, ContextMenuItem, ContextMenuSlots } from '../types'
 
 const _contextMenu = tv(theme)()
 
-interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+interface ContextMenuContentProps<T> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
@@ -18,7 +18,7 @@ interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 
   uiOverride?: any
 }
 
-interface ContextMenuContentEmits extends RadixContextMenuContentEmits {}
+interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
 </script>
 
 <script setup lang="ts" generic="T extends ContextMenuItem">

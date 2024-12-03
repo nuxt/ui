@@ -1,13 +1,13 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { DropdownMenuContentProps as RadixDropdownMenuContentProps, DropdownMenuContentEmits as RadixDropdownMenuContentEmits } from 'reka-ui'
+import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/dropdown-menu'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
 
 const _dropdownMenu = tv(theme)()
 
-interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+interface DropdownMenuContentProps<T> extends Omit<RekaDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
@@ -19,7 +19,7 @@ interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps
   uiOverride?: any
 }
 
-interface DropdownMenuContentEmits extends RadixDropdownMenuContentEmits {}
+interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
 
 type DropdownMenuContentSlots<T extends { slot?: string }> = Omit<DropdownMenuSlots<T>, 'default'> & {
   default(props?: {}): any
