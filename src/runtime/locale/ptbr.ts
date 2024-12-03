@@ -10,7 +10,7 @@ export default defineLocale({
       create: 'Criar "{label}"'
     },
     calendar: {
-      prevYear: 'Previous year',
+      prevYear: 'Ano anterior',
       nextYear: 'Próximo ano',
       prevMonth: 'Mês anterior',
       nextMonth: 'Próximo mês'
