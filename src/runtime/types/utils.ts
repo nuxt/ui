@@ -17,8 +17,6 @@ export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extend
   ? MaybeObject[Key]
   : never
 
-export type ArrayOrWrapped<T> = T extends any[] ? T : Array<T>
-
 export type PartialString<T> = {
   [K in keyof T]?: string
 }
