@@ -13,6 +13,7 @@ describe('Avatar', () => {
     ['with text', { props: { text: '+1' } }],
     ['with icon', { props: { icon: 'i-lucide-image' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { src: 'https://github.com/benjamincanac.png', size } }]),
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'bg-[var(--ui-bg)]' } }],
     ['with ui', { props: { ui: { fallback: 'font-bold' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarProps }) => {

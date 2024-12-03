@@ -12,6 +12,11 @@ const formField = tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })
 type FormFieldVariants = VariantProps<typeof formField>
 
 export interface FormFieldProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   /** The name of the FormField. Also used to match form errors. */
   name?: string
   /** A regular expression to match form error names. */
@@ -43,7 +48,7 @@ extendDevtoolsMeta({ example: 'FormFieldExample', defaultProps: { label: 'Label'
 
 <script setup lang="ts">
 import { computed, ref, inject, provide, type Ref, useId } from 'vue'
-import { Label } from 'radix-vue'
+import { Primitive, Label } from 'reka-ui'
 import { formFieldInjectionKey, inputIdInjectionKey } from '../composables/useFormField'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
@@ -74,7 +79,7 @@ provide(formFieldInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.wrapper({ class: props.ui?.wrapper })">
       <div v-if="label || !!slots.label" :class="ui.labelWrapper({ class: props.ui?.labelWrapper })">
         <Label :for="id" :class="ui.label({ class: props.ui?.label })">
@@ -110,5 +115,5 @@ provide(formFieldInjectionKey, computed(() => ({
         </slot>
       </p>
     </div>
-  </div>
+  </Primitive>
 </template>

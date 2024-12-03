@@ -16,11 +16,11 @@ describe('Progress', () => {
     ['with status inverted', { props: { modelValue: 50, status: true, inverted: true } }],
     ['with max', { props: { modelValue: 2, status: true, max } }],
     ['with max inverted', { props: { modelValue: 2, status: true, inverted: true, max } }],
-    ['with as', { props: { as: 'span' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { orientation } }]),
     ...animations.map((animation: string) => [`with animation ${animation}`, { props: { animation } }]),
     ['with color neutral', { props: { color: 'neutral', modelValue: 50 } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { base: 'bg-[var(--ui-bg)]' } } }],
     // Slots

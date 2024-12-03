@@ -84,7 +84,7 @@ provide('navigation', mappedNavigation)
     <NuxtLoadingIndicator color="#FFF" />
 
     <template v-if="!route.path.startsWith('/examples')">
-      <Banner />
+      <!-- <Banner /> -->
 
       <Header :links="links" />
     </template>

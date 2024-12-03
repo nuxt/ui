@@ -8,6 +8,9 @@ describe('Collapsible', () => {
   it.each([
     // Props
     ['with open', { props }],
+    ['with as', { props: { ...props, as: 'section' } }],
+    ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
+    ['with disabled', { props: { ...props, disabled: true } }],
     ['with class', { props: { ...props, class: 'flex flex-col gap-2 w-48' } }],
     ['with ui', { props: { ...props, ui: { content: 'bg-[var(--ui-bg-elevated)]' } } }],
     // Slots

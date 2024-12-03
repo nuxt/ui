@@ -30,7 +30,7 @@ defineShortcuts({
         v-slot="{ open }"
         :modal="false"
         :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: 'v2.19', to: 'https://ui.nuxt.com' }]"
-        :ui="{ content: 'w-(--radix-dropdown-menu-trigger-width) min-w-0' }"
+        :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }"
         size="xs"
       >
         <UButton

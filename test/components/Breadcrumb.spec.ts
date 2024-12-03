@@ -25,9 +25,9 @@ describe('Breadcrumb', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with as', { props: { ...props, as: 'div' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with separatorIcon', { props: { ...props, separatorIcon: 'i-lucide-minus' } }],
+    ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
     // Slots

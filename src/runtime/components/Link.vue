@@ -95,7 +95,7 @@ extendDevtoolsMeta({ example: 'LinkExample' })
 <script setup lang="ts">
 import { computed } from 'vue'
 import { isEqual, diff } from 'ohash'
-import { useForwardProps } from 'radix-vue'
+import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute } from '#imports'
 import ULinkBase from './LinkBase.vue'

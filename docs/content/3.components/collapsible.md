@@ -2,8 +2,8 @@
 description: A collapsible element to toggle visibility of its content.
 links:
   - label: Collapsible
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/collapsible.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/collapsible
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Collapsible.vue
@@ -36,6 +36,38 @@ slots:
 
 #content
 :placeholder{class="h-48"}
+::
+
+### Unmount
+
+Use the `unmount-on-hide` prop to prevent the content from being unmounted when the Collapsible is collapsed. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - class
+props:
+  unmountOnHide: false
+  class: 'flex flex-col gap-2 w-48'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block />
+
+  content: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block}
+
+#content
+:placeholder{class="h-48"}
+::
+
+::note
+You can inspect the DOM to see the content being rendered.
 ::
 
 ### Disabled

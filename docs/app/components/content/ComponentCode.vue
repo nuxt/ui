@@ -280,7 +280,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               container: 'mt-0'
             }"
           >
-            <USelectMenu
+            <USelect
               v-if="option.items?.length"
               :model-value="getComponentProp(option.name)"
               :items="option.items"
@@ -288,7 +288,6 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               color="neutral"
               variant="soft"
               class="rounded-[var(--ui-radius)] rounded-l-none min-w-12"
-              :search-input="false"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
@@ -303,7 +302,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
                   class="size-2"
                 />
               </template>
-            </USelectMenu>
+            </USelect>
             <UInput
               v-else
               :type="option.type?.includes('number') ? 'number' : 'text'"

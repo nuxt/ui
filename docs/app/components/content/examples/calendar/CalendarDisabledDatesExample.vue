@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CalendarDate } from '@internationalized/date'
-import type { Matcher } from 'radix-vue/date'
+import type { Matcher } from 'reka-ui/date'
 
 const modelValue = shallowRef({
   start: new CalendarDate(2022, 1, 1),

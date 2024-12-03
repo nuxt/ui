@@ -3,8 +3,8 @@ title: InputNumber
 description: Input numerical values with a customizable range.
 links:
   - label: Number Field
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/number-field
+    icon: i-custom-reka-ui
+    to: https://www.reka-ui.com/components/input-number
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/InputNumber.vue
