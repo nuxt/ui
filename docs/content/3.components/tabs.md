@@ -44,9 +44,7 @@ props:
 
 ### Content
 
-Use the `content` prop to control how the Tabs are rendered.
-
-You can set it to `false` to prevent the Tabs from rendering any content and act as a toggle.
+Set the `content` prop to `false` to turn the Tabs into a toggle-only control without displaying any content. Defaults to `true`.
 
 ::component-code
 ---
@@ -67,6 +65,35 @@ props:
       content: 'This is the password content.'
   class: 'w-full'
 ---
+::
+
+### Unmount
+
+Use the `unmount-on-hide` prop to prevent the content from being unmounted when the Tabs is collapsed. Defaults to `true`.
+
+::component-code
+---
+ignore:
+  - content
+  - items
+  - class
+external:
+  - items
+props:
+  unmountOnHide: false
+  items:
+    - label: Account
+      icon: 'i-lucide-user'
+      content: 'This is the account content.'
+    - label: Password
+      icon: 'i-lucide-lock'
+      content: 'This is the password content.'
+  class: 'w-full'
+---
+::
+
+::note
+You can inspect the DOM to see each item's content being rendered.
 ::
 
 ### Color

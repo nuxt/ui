@@ -26,6 +26,13 @@ exports[`Collapsible > renders with default slot correctly 1`] = `
 </div>"
 `;
 
+exports[`Collapsible > renders with disabled correctly 1`] = `
+"<div data-state="open" data-disabled="">
+  <!--v-if-->
+  <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" data-disabled="" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
 exports[`Collapsible > renders with open correctly 1`] = `
 "<div data-state="open">
   <!--v-if-->
@@ -37,5 +44,12 @@ exports[`Collapsible > renders with ui correctly 1`] = `
 "<div data-state="open">
   <!--v-if-->
   <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden bg-[var(--ui-bg-elevated)]" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
+exports[`Collapsible > renders with unmountOnHide correctly 1`] = `
+"<div data-state="open">
+  <!--v-if-->
+  <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
 </div>"
 `;

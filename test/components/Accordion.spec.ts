@@ -44,6 +44,7 @@ describe('Accordion', () => {
     ['with type', { props: { ...props, type: 'multiple' as const } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with collapsible', { props: { ...props, collapsible: false } }],
+    ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-plus' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-96' } }],

@@ -10,7 +10,7 @@ const appConfig = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof 
 
 const collapsible = tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })
 
-export interface CollapsibleProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled'> {
+export interface CollapsibleProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -38,7 +38,7 @@ const props = defineProps<CollapsibleProps>()
 const emits = defineEmits<CollapsibleEmits>()
 const slots = defineSlots<CollapsibleSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = collapsible()

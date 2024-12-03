@@ -104,6 +104,38 @@ props:
 ---
 ::
 
+### Unmount
+
+Use the `unmount-on-hide` prop to prevent the content from being unmounted when the accordion is collapsed. Defaults to `true`.
+
+::component-code
+---
+ignore:
+  - items
+external:
+  - items
+hide:
+  - class
+props:
+  class: 'px-4'
+  unmountOnHide: false
+  items:
+    - label: 'Icons'
+      icon: 'i-lucide-smile'
+      content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+    - label: 'Colors'
+      icon: 'i-lucide-swatch-book'
+      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+    - label: 'Components'
+      icon: 'i-lucide-box'
+      content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+---
+::
+
+::note
+You can inspect the DOM to see each item's content being rendered.
+::
+
 ### Disabled
 
 Use the `disabled` property to disable the Accordion.

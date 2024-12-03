@@ -38,6 +38,38 @@ slots:
 :placeholder{class="h-48"}
 ::
 
+### Unmount
+
+Use the `unmount-on-hide` prop to prevent the content from being unmounted when the Collapsible is collapsed. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - class
+props:
+  unmountOnHide: false
+  class: 'flex flex-col gap-2 w-48'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block />
+
+  content: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block}
+
+#content
+:placeholder{class="h-48"}
+::
+
+::note
+You can inspect the DOM to see the content being rendered.
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the Collapsible.

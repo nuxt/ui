@@ -199,7 +199,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
     </slot>
   </DefineItemTemplate>
 
-  <NavigationMenuRoot v-bind="rootProps" :data-orientation="orientation" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <NavigationMenuRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list({ class: props.ui?.list })">
         <component
