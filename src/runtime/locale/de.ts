@@ -33,8 +33,8 @@ export default defineLocale({
       close: 'Schließen'
     },
     carousel: {
-      prev: 'Weiter',
-      next: 'Zurück',
+      prev: 'Zurück',
+      next: 'Weiter',
       goto: 'Gehe zu {slide}'
     },
     modal: {
