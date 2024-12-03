@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     input: '[&>input]:h-12',
     close: '',
     content: 'relative overflow-hidden flex flex-col',
-    viewport: 'relative divide-y divide-[var(--ui-border)] scroll-py-1 overflow-y-auto flex-1',
+    viewport: 'relative divide-y divide-[var(--ui-border)] scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
     group: 'p-1 isolate',
     empty: 'py-6 text-center text-sm text-[var(--ui-text-muted)]',
     label: 'px-2 py-1.5 text-xs font-semibold text-[var(--ui-text-highlighted)]',
