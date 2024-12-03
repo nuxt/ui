@@ -31,7 +31,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, P
 
 type NavigationMenuVariants = VariantProps<typeof navigationMenu>
 
-export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'modelValue' | 'skipDelayDuration'> {
+export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'modelValue' | 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -122,7 +122,7 @@ extendDevtoolsMeta({
 </script>
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<NavigationMenuItem>">
-import { computed, reactive, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, useForwardPropsEmits } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { get } from '../utils'
@@ -137,19 +137,24 @@ import UCollapsible from './Collapsible.vue'
 const props = withDefaults(defineProps<NavigationMenuProps<I>>(), {
   orientation: 'horizontal',
   delayDuration: 0,
-  labelKey: 'label'
+  labelKey: 'label',
+  unmountOnHide: true
 })
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
 
-const rootProps = useForwardPropsEmits(reactive({
+const rootProps = useForwardPropsEmits(computed(() => ({
   as: props.as,
   modelValue: props.modelValue,
   defaultValue: props.defaultValue,
   delayDuration: props.delayDuration,
   skipDelayDuration: props.skipDelayDuration,
-  orientation: props.orientation
-}), emits)
+  orientation: props.orientation,
+  disableClickTrigger: props.disableClickTrigger,
+  disableHoverTrigger: props.disableHoverTrigger,
+  disablePointerLeaveClose: props.disablePointerLeaveClose,
+  unmountOnHide: props.unmountOnHide
+})), emits)
 
 const contentProps = toRef(() => props.content)
 
@@ -209,6 +214,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
           as="li"
           :value="item.value || String(index)"
           :default-open="item.defaultOpen"
+          :unmount-on-hide="(item.children?.length && orientation === 'vertical') ? unmountOnHide : undefined"
           :open="item.open"
           :class="ui.item({ class: props.ui?.item })"
         >
