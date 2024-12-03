@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Slot } from 'radix-vue'
+import { Slot } from 'reka-ui'
 </script>
 
 <template>

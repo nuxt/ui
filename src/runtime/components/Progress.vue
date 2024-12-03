@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ProgressRootProps, ProgressRootEmits } from 'radix-vue'
+import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/progress'
@@ -48,7 +48,7 @@ export type ProgressSlots = {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ProgressIndicator, ProgressRoot, useForwardPropsEmits } from 'radix-vue'
+import { Primitive, ProgressRoot, ProgressIndicator, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useLocale } from '../composables/useLocale'
 
@@ -62,7 +62,7 @@ defineSlots<ProgressSlots>()
 
 const { dir } = useLocale()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'getValueLabel', 'modelValue'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'modelValue'), emits)
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)
 const hasSteps = computed(() => Array.isArray(props.max))
@@ -159,7 +159,7 @@ const ui = computed(() => progress({
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div v-if="!isIndeterminate && (status || $slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
@@ -177,5 +177,5 @@ const ui = computed(() => progress({
         </slot>
       </div>
     </div>
-  </div>
+  </Primitive>
 </template>

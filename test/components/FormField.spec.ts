@@ -28,6 +28,7 @@ describe('FormField', () => {
     ['with error', { props: { error: 'Username is already taken' } }],
     ['with hint', { props: { hint: 'Use letters, numbers, and special characters' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Username', description: 'Enter your username', size } }]),
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'relative' } }],
     ['with ui', { props: { ui: { label: 'text-[var(--ui-text-highlighted)]' } } }],
     // Slots

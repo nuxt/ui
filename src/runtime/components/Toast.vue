@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ToastRootProps, ToastRootEmits } from 'radix-vue'
+import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
@@ -61,7 +61,7 @@ extendDevtoolsMeta<ToastProps>({ ignore: true })
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'radix-vue'
+import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -75,8 +75,9 @@ const props = withDefaults(defineProps<ToastProps>(), {
 const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
-const appConfig = useAppConfig()
 const { t } = useLocale()
+const appConfig = useAppConfig()
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
 const multiline = computed(() => !!props.title && !!props.description)

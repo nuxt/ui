@@ -2,7 +2,7 @@
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pin-input'
 import type { AppConfig } from '@nuxt/schema'
-import type { PinInputRootEmits, PinInputRootProps } from 'radix-vue'
+import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import { tv, type VariantProps } from 'tailwind-variants'
 import type { PartialString } from '../types/utils'
 
@@ -35,7 +35,7 @@ export type PinInputEmits = PinInputRootEmits & {
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'radix-vue'
+import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'

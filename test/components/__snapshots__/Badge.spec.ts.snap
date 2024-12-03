@@ -116,3 +116,8 @@ exports[`Badge > renders with trailing and icon correctly 1`] = `"<span class="r
 exports[`Badge > renders with trailing slot correctly 1`] = `"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><!--v-if-->Trailing slot</span>"`;
 
 exports[`Badge > renders with trailingIcon correctly 1`] = `"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true"></span></span>"`;
+
+exports[`Badge > renders with ui correctly 1`] = `
+"<span class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center text-xs px-2 py-1 gap-1 bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><span class="truncate font-bold">Badge</span>
+<!--v-if--></span>"
+`;

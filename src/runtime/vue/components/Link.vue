@@ -92,7 +92,7 @@ export interface LinkSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { isEqual, diff } from 'ohash'
-import { useForwardProps } from 'radix-vue'
+import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
 import { useRoute } from '#imports'
@@ -110,7 +110,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
 defineSlots<LinkSlots>()
 
 const route = useRoute()
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to'))
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'raw', 'class'))
 
 const ui = computed(() => tv({
   extend: link,

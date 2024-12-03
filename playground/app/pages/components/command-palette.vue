@@ -130,7 +130,7 @@ defineShortcuts({
         <UButton label="Open modal" color="neutral" variant="outline" />
 
         <template #content>
-          <ReuseTemplate :close="true" @close="open = false" />
+          <ReuseTemplate :close="true" @update:open="open = $event" />
         </template>
       </UModal>
 
@@ -138,7 +138,7 @@ defineShortcuts({
         <UButton label="Open drawer" color="neutral" variant="outline" />
 
         <template #content>
-          <ReuseTemplate class="border-t border-[var(--ui-border)]" />
+          <ReuseTemplate class="border-t border-[var(--ui-border)] mt-4" />
         </template>
       </UDrawer>
 

@@ -16,14 +16,13 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 </script>
 
 <template>
-  <USelectMenu
+  <UInputMenu
     v-model:search-term="searchTerm"
     :items="users || []"
     :loading="status === 'pending'"
-    :filter="false"
+    ignore-filter
     icon="i-lucide-user"
     placeholder="Select user"
-    class="w-48"
   >
     <template #leading="{ modelValue, ui }">
       <UAvatar
@@ -33,5 +32,5 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :class="ui.leadingAvatar()"
       />
     </template>
-  </USelectMenu>
+  </UInputMenu>
 </template>

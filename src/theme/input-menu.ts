@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => {
       base: () => ['rounded-[calc(var(--ui-radius)*1.5)]', options.theme.transitions && 'transition-colors'],
       trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75',
       arrow: 'fill-[var(--ui-border)]',
-      content: 'max-h-60 w-[var(--radix-popper-anchor-width)] bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
+      content: 'max-h-60 w-[var(--reka-popper-anchor-width)] bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
       viewport: 'divide-y divide-[var(--ui-border)] scroll-py-1',
       group: 'p-1 isolate',
       empty: 'py-2 text-center text-sm text-[var(--ui-text-muted)]',
@@ -33,7 +33,6 @@ export default (options: Required<ModuleOptions>) => {
       multiple: {
         true: {
           root: 'flex-wrap',
-          base: '',
           tagsInput: 'border-0 bg-transparent placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
         },
         false: {
@@ -102,12 +101,12 @@ export default (options: Required<ModuleOptions>) => {
       color,
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: `has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--${color})]`
+      class: `has-focus-visible:ring-2 has-focus-visible:ring-[var(--ui-${color})]`
     })), {
       color: 'neutral',
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: 'has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--ui-border-inverted)]'
+      class: 'has-focus-visible:ring-2 has-focus-visible:ring-[var(--ui-border-inverted)]'
     }]
   }, input(options))
 }

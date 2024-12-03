@@ -2,8 +2,8 @@
 description: A control that toggles between two states.
 links:
   - label: Switch
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/switch.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/switch
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Switch.vue
