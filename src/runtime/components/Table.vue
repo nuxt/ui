@@ -20,9 +20,11 @@ import type {
   ExpandedOptions,
   SortingOptions,
   RowSelectionOptions,
+  PaginationOptions,
   Updater,
   CellContext,
-  HeaderContext
+  HeaderContext,
+  PaginationState
 } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
@@ -97,6 +99,11 @@ export interface TableProps<T> {
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/row-selection)
    */
   rowSelectionOptions?: Omit<RowSelectionOptions<T>, 'onRowSelectionChange'>
+  /**
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/pagination#table-options)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/pagination)
+   */
+  paginationOptions?: Omit<PaginationOptions, 'onPaginationChange'>
   class?: any
   ui?: Partial<typeof table.slots>
 }
@@ -108,6 +115,7 @@ export type TableSlots<T> = {
   expanded: (props: { row: Row<T> }) => any
   empty: (props?: {}) => any
   caption: (props?: {}) => any
+  pagination: (props?: {}) => any
 } & DynamicHeaderSlots<T> & DynamicCellSlots<T>
 
 </script>
@@ -120,7 +128,8 @@ import {
   getFilteredRowModel,
   getSortedRowModel,
   getExpandedRowModel,
-  useVueTable
+  useVueTable,
+  getPaginationRowModel
 } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { useLocale } from '../composables/useLocale'
@@ -139,6 +148,15 @@ const ui = computed(() => table({
   loadingAnimation: props.loadingAnimation
 }))
 
+// workaround to disable pagination when no pagination options are provided because passing
+// getPaginationRowModel to useVueTable will automatically enable pagination
+const paginationStateOverride = computed(() => !paginationState.value && !props.paginationOptions
+  ? {
+      pageSize: data.value.length,
+      pageIndex: 0
+    }
+  : paginationState.value)
+
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
 const columnVisibilityState = defineModel<VisibilityState>('columnVisibility', { default: {} })
@@ -146,6 +164,7 @@ const columnPinningState = defineModel<ColumnPinningState>('columnPinning', { de
 const rowSelectionState = defineModel<RowSelectionState>('rowSelection', { default: {} })
 const sortingState = defineModel<SortingState>('sorting', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
+const paginationState = defineModel<PaginationState>('pagination', { default: undefined })
 
 const tableApi = useVueTable({
   data,
@@ -168,6 +187,9 @@ const tableApi = useVueTable({
   ...(props.expandedOptions || {}),
   getExpandedRowModel: getExpandedRowModel(),
   onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
+  getPaginationRowModel: getPaginationRowModel(),
+  ...(props.paginationOptions || {}),
+  onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, paginationState),
   state: {
     get globalFilter() {
       return globalFilterState.value
@@ -189,6 +211,9 @@ const tableApi = useVueTable({
     },
     get sorting() {
       return sortingState.value
+    },
+    get pagination() {
+      return paginationStateOverride.value
     }
   }
 })
