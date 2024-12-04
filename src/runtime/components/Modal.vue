@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix-vue'
+import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
@@ -74,7 +74,7 @@ extendDevtoolsMeta({ example: 'ModalExample' })
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'radix-vue'
+import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -89,6 +89,9 @@ const props = withDefaults(defineProps<ModalProps>(), {
 })
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
+
+const { t } = useLocale()
+const appConfig = useAppConfig()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
@@ -109,9 +112,6 @@ const contentEvents = computed(() => {
     }
   }
 })
-
-const appConfig = useAppConfig()
-const { t } = useLocale()
 
 const ui = computed(() => modal({
   transition: props.transition,

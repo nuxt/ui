@@ -3,13 +3,17 @@ title: InputNumber
 description: Input numerical values with a customizable range.
 links:
   - label: Number Field
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/number-field
+    icon: i-custom-reka-ui
+    to: https://www.reka-ui.com/components/input-number
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/InputNumber.vue
 navigation.badge: New
 ---
+
+::note
+This component relies on the [`@internationalized/number`](https://react-spectrum.adobe.com/internationalized/number/index.html) package which provides utilities for formatting and parsing numbers across locales and numbering systems.
+::
 
 ## Usage
 

@@ -1,4 +1,4 @@
-import type { v1 } from '@standard-schema/spec'
+import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
@@ -39,13 +39,13 @@ export function isValibotSchema(schema: any): schema is ValibotSchema | ValibotS
   return '_run' in schema || (typeof schema === 'function' && 'schema' in schema)
 }
 
-export function isStandardSchema(schema: any): schema is v1.StandardSchema {
+export function isStandardSchema(schema: any): schema is StandardSchemaV1 {
   return '~standard' in schema
 }
 
 export async function validateStandarSchema(
   state: any,
-  schema: v1.StandardSchema
+  schema: StandardSchemaV1
 ): Promise<ValidateReturnSchema<typeof state>> {
   const result = await schema['~standard'].validate({
     value: state
@@ -72,7 +72,7 @@ async function validateYupSchema(
   schema: YupObjectSchema<any>
 ): Promise<ValidateReturnSchema<typeof state>> {
   try {
-    const result = schema.validateSync(state, { abortEarly: false })
+    const result = await schema.validate(state, { abortEarly: false })
     return {
       errors: null,
       result

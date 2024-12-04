@@ -3,8 +3,41 @@
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
+import { CalendarDate } from '@internationalized/date'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
+
+interface Cast {
+  get: (args: any) => any
+  template: (args: any) => string
+}
+
+type CastDateValue = [number, number, number]
+
+const castMap: Record<string, Cast> = {
+  'DateValue': {
+    get: (args: CastDateValue) => new CalendarDate(...args),
+    template: (value: CalendarDate) => {
+      return value ? `new CalendarDate(${value.year}, ${value.month}, ${value.day})` : 'null'
+    }
+  },
+  'DateValue[]': {
+    get: (args: CastDateValue[]) => args.map(date => new CalendarDate(...date)),
+    template: (value: CalendarDate[]) => {
+      return value ? `[${value.map(date => `new CalendarDate(${date.year}, ${date.month}, ${date.day})`).join(', ')}]` : '[]'
+    }
+  },
+  'DateRange': {
+    get: (args: { start: CastDateValue, end: CastDateValue }) => ({ start: new CalendarDate(...args.start), end: new CalendarDate(...args.end) }),
+    template: (value: { start: CalendarDate, end: CalendarDate }) => {
+      if (!value.start || !value.end) {
+        return `{ start: null, end: null }`
+      }
+
+      return `{ start: new CalendarDate(${value.start.year}, ${value.start.month}, ${value.start.day}), end: new CalendarDate(${value.end.year}, ${value.end.month}, ${value.end.day}) }`
+    }
+  }
+}
 
 const props = defineProps<{
   /** Override the slug taken from the route */
@@ -18,6 +51,8 @@ const props = defineProps<{
   external?: string[]
   /** List of props to use with `v-model` */
   model?: string[]
+  /** List of props to cast from code and selection */
+  cast?: { [key: string]: string }
   /** List of items for each prop */
   items?: { [key: string]: string[] }
   props?: { [key: string]: any }
@@ -45,7 +80,17 @@ const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.
 const name = `U${upperFirst(camelName)}`
 const component = defineAsyncComponent(() => import(`#ui/components/${upperFirst(camelName)}.vue`))
 
-const componentProps = reactive({ ...(props.props || {}) })
+const componentProps = reactive({
+  ...Object.fromEntries(Object.entries(props.props || {}).map(([key, value]) => {
+    const cast = props.cast?.[key]
+
+    if (cast && !castMap[cast]) {
+      throw new Error(`Unknown cast: ${cast}`)
+    }
+
+    return [key, cast ? castMap[cast]!.get(value) : value]
+  }))
+})
 const componentEvents = reactive({
   ...Object.fromEntries((props.model || []).map(key => [`onUpdate:${key}`, (e: any) => setComponentProp(key, e)])),
   ...(componentProps.modelValue ? { [`onUpdate:modelValue`]: (e: any) => setComponentProp('modelValue', e) } : {})
@@ -96,7 +141,7 @@ const options = computed(() => {
     return {
       name: key,
       label: key,
-      type: prop?.type,
+      type: props?.cast?.[key] ?? prop?.type,
       items
     }
   })
@@ -117,7 +162,10 @@ const code = computed(() => {
 <script setup lang="ts">
 `
     for (const key of props.external) {
-      code += `const ${key === 'modelValue' ? 'value' : key} = ref(${json5.stringify(componentProps[key], null, 2).replace(/,([ |\t\n]+[}|\]])/g, '$1')})
+      const cast = props.cast?.[key]
+      const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2).replace(/,([ |\t\n]+[}|\]])/g, '$1')
+
+      code += `const ${key === 'modelValue' ? 'value' : key} = ref(${value})
 `
     }
     code += `<\/script>
@@ -232,7 +280,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               container: 'mt-0'
             }"
           >
-            <USelectMenu
+            <USelect
               v-if="option.items?.length"
               :model-value="getComponentProp(option.name)"
               :items="option.items"
@@ -240,7 +288,6 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               color="neutral"
               variant="soft"
               class="rounded-[var(--ui-radius)] rounded-l-none min-w-12"
-              :search-input="false"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
@@ -255,7 +302,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
                   class="size-2"
                 />
               </template>
-            </USelectMenu>
+            </USelect>
             <UInput
               v-else
               :type="option.type?.includes('number') ? 'number' : 'text'"
@@ -272,7 +319,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
       <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-border-muted)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
-            <slot :name="slot">
+            <slot :name="slot" mdc-unwrap="p">
               {{ slots?.[slot] }}
             </slot>
           </template>

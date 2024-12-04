@@ -18,7 +18,7 @@ const toast = useToast()
 - When removing a toast, there's a 200ms delay before it's actually removed from the state, allowing for exit animations.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses our [Toaster](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [ToastProvider](https://www.radix-vue.com/components/toast.html#provider) component from Radix Vue.
+Make sure to wrap your app with the [`App`](/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://reka-ui.com/docs/components/toast#provider) component from Reka UI.
 ::
 
 ::tip{to="/components/toast"}

@@ -95,7 +95,7 @@ extendDevtoolsMeta({ example: 'LinkExample' })
 <script setup lang="ts">
 import { computed } from 'vue'
 import { isEqual, diff } from 'ohash'
-import { useForwardProps } from 'radix-vue'
+import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute } from '#imports'
 import ULinkBase from './LinkBase.vue'
@@ -112,7 +112,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
 defineSlots<LinkSlots>()
 
 const route = useRoute()
-const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass'))
+const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'raw', 'class'))
 
 const ui = computed(() => tv({
   extend: link,

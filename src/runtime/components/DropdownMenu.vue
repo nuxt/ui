@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'radix-vue'
+import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
@@ -52,7 +52,7 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
   loadingIcon?: string
   /**
    * The content of the menu.
-   * @defaultValue { side: 'bottom', sideOffset: 8 }
+   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -140,7 +140,7 @@ extendDevtoolsMeta({
 <script setup lang="ts" generic="T extends DropdownMenuItem">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'radix-vue'
+import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
@@ -154,7 +154,7 @@ const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as DropdownMenuContentProps)
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
 const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
 

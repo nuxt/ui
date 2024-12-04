@@ -61,7 +61,7 @@ const items = [
     :items="items"
     class="justify-center"
     :ui="{
-      viewport: 'sm:w-[var(--radix-navigation-menu-viewport-width)]',
+      viewport: 'sm:w-[var(--reka-navigation-menu-viewport-width)]',
       childList: 'sm:w-96',
       childLinkDescription: 'text-balance line-clamp-2'
     }"

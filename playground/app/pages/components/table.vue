@@ -145,14 +145,13 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsAllPageRowsSelected(),
-    'indeterminate': table.getIsSomePageRowsSelected(),
-    'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value),
+    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'ariaLabel': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
-    'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
     'ariaLabel': 'Select row'
   }),
   enableSorting: false,
@@ -164,6 +163,12 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   accessorKey: 'date',
   header: 'Date',
+  meta: {
+    class: {
+      td: 'text-center font-semibold',
+      th: 'text-right text-green-500 w-48'
+    }
+  },
   cell: ({ row }) => {
     return new Date(row.getValue('date')).toLocaleString('en-US', {
       day: 'numeric',
@@ -318,6 +323,9 @@ onMounted(() => {
       :column-pinning="columnPinning"
       :loading="loading"
       sticky
+      :ui="{
+        tr: 'divide-x divide-[var(--ui-border)]'
+      }"
       class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
     >
       <template #expanded="{ row }">
