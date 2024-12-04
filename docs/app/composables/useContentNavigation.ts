@@ -22,11 +22,11 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
     return {
       ...item,
       children: item.children?.filter((child: any) => {
-        if (child.framework) {
-          return child.framework === framework.value
+        if (child.framework && child.framework !== framework.value) {
+          return false
         }
-        if (child.module) {
-          return child.module === module.value
+        if (child.module && child.module !== module.value) {
+          return false
         }
         return true
       })
