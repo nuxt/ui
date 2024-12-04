@@ -15,13 +15,21 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
 }
 
 export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
-  const { framework } = useSharedData()
+  const { framework, module } = useSharedData()
 
   const mappedNavigation = computed(() => navigation.value?.map(item => processNavigationItem(item)))
   const filteredNavigation = computed(() => mappedNavigation.value?.map((item) => {
     return {
       ...item,
-      children: item.children?.filter((child: any) => !child.framework || child.framework === framework.value)
+      children: item.children?.filter((child: any) => {
+        if (child.framework) {
+          return child.framework === framework.value
+        }
+        if (child.module) {
+          return child.module === module.value
+        }
+        return true
+      })
     }
   }))
 

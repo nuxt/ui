@@ -62,9 +62,9 @@ watch(page, () => {
 }, { immediate: true })
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt UI v3',
+  titleTemplate: `%s - Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
   title: page.value.navigation?.title ? page.value.navigation.title : page.value.title,
-  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} - Nuxt UI v3`,
+  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} - Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
   description: page.value.description,
   ogDescription: page.value.description
 })

@@ -7,6 +7,7 @@ const props = defineProps<{
 }>()
 
 const config = useRuntimeConfig().public
+const { module } = useSharedData()
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
@@ -23,13 +24,14 @@ defineShortcuts({
   <UHeader :ui="{ left: 'min-w-0' }">
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[var(--ui-text-highlighted)] min-w-0 focus-visible:outline-[var(--ui-primary)] shrink-0" aria-label="Nuxt UI">
-        <Logo class="w-auto h-6 shrink-0" />
+        <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
+        <Logo class="w-auto h-6 shrink-0 ui-only" />
       </NuxtLink>
 
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"
-        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: 'v2.19', to: 'https://ui.nuxt.com' }]"
+        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.5' : 'v2.19', to: module === 'ui-pro' ? 'https://ui.nuxt.com/pro' : 'https://ui.nuxt.com' }]"
         :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }"
         size="xs"
       >
@@ -74,9 +76,8 @@ defineShortcuts({
       <USeparator type="dashed" class="my-4" />
 
       <div class="flex flex-col gap-2 w-[calc(100%+1rem)] mb-4 -mx-2">
-        <FrameworkSelect />
-
         <ModuleSelect />
+        <FrameworkSelect />
       </div>
 
       <UContentNavigation :navigation="navigation" highlight />

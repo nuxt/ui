@@ -7,7 +7,7 @@ const { modules } = useSharedData()
     v-slot="{ open }"
     :modal="false"
     :items="modules"
-    :ui="{ content: 'w-(--radix-dropdown-menu-trigger-width)' }"
+    :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
   >
     <UButton
       color="neutral"
