@@ -94,7 +94,7 @@ provide('navigation', mappedNavigation)
     </NuxtLayout>
 
     <template v-if="!route.path.startsWith('/examples')">
-      <Footer />
+      <!-- <Footer /> -->
 
       <ClientOnly>
         <LazyUContentSearch

@@ -4,7 +4,6 @@ import icons from '../../../../src/theme/icons'
 
 const appConfig = useAppConfig()
 const { framework, module } = useSharedData()
-console.log('module.value', module.value)
 
 const { data: ast } = await useAsyncData(`icons-theme`, async () => {
   const md = `

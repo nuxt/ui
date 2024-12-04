@@ -97,7 +97,7 @@ provide('navigation', mappedNavigation)
 
     <UError :error="error" />
 
-    <Footer />
+    <!-- <Footer /> -->
 
     <ClientOnly>
       <LazyUContentSearch
