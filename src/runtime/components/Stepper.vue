@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { StepperRootProps, StepperRootEmits } from 'radix-vue'
+import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/stepper'
@@ -49,7 +49,7 @@ extendDevtoolsMeta({ example: 'StepperExample' })
 
 <script setup lang="ts" generic="T extends StepperItem">
 import { computed } from 'vue'
-import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription } from 'radix-vue'
+import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import UIcon from './Icon.vue'
 

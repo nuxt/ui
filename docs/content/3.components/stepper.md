@@ -1,9 +1,9 @@
 ---
-description: A set of steps that are used to indicate progress through a multi-step process. 
-links: 
+description: A set of steps that are used to indicate progress through a multi-step process.
+links:
   - label: Stepper
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/stepper.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/stepper
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Stepper.vue
@@ -58,7 +58,7 @@ ignore:
 external:
   - items
 props:
-  color: info 
+  color: info
   items:
     - title: 'Address'
       description: 'Add your address here'
@@ -128,7 +128,7 @@ props:
 
 ## Examples
 
-### With controls 
+### With controls
 
 You can add additional controls for the stepper using buttons
 
