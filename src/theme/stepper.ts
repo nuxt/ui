@@ -7,11 +7,12 @@ export default (options: Required<ModuleOptions>) => ({
     item: 'group text-center relative w-full',
     content: 'size-full',
     trigger: '',
-    indicator: 'rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-accented)] bg-[var(--ui-bg-accented)]',
-    icon: '',
+    wrapper: '',
+    indicator: 'rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)]',
+    icon: 'shrink-0',
     separator: 'absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)]',
-    title: 'font-medium',
-    description: 'text-wrap'
+    title: 'font-medium text-[var(--ui-text)]',
+    description: 'text-[var(--ui-text-muted)] text-wrap'
   },
 
   variants: {
@@ -42,7 +43,7 @@ export default (options: Required<ModuleOptions>) => ({
         description: 'text-xs'
       },
       md: {
-        indicator: 'size-10 text-md',
+        indicator: 'size-10 text-base',
         icon: 'size-5',
         description: 'text-sm'
       },
@@ -50,13 +51,13 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'size-12 p-2 text-lg',
         icon: 'size-6',
         title: 'text-lg',
-        description: 'text-md'
+        description: 'text-base'
       },
       xl: {
         indicator: 'size-14 p-2 text-xl',
         icon: 'size-7',
         title: 'text-lg',
-        description: 'text-md'
+        description: 'text-base'
       }
     },
 
@@ -64,16 +65,18 @@ export default (options: Required<ModuleOptions>) => ({
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         indicator: `group-data-[state=completed]:bg-[var(--ui-${color})]`,
         separator: `group-data-[state=completed]:bg-[var(--ui-${color})]`
-      }]))
+      }])),
+      neutral: {
+        indicator: `group-data-[state=completed]:bg-[var(--ui-bg-inverted)]`,
+        separator: `group-data-[state=completed]:bg-[var(--ui-bg-inverted)]`
+      }
     }
   },
 
   compoundVariants: [{
     orientation: 'horizontal',
     size: 'xs',
-    class: {
-      separator: 'left-[calc(50%+16px)] right-[calc(-50%+16px)]'
-    }
+    class: { separator: 'left-[calc(50%+16px)] right-[calc(-50%+16px)]' }
   }, {
     orientation: 'horizontal',
     size: 'sm',

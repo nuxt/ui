@@ -3,36 +3,46 @@ import Stepper, { type StepperProps, type StepperSlots } from '../../src/runtime
 import ComponentRender from '../component-render'
 import theme from '#build/ui/stepper'
 
-const items = [
-  {
-    slot: 'address',
-    title: 'Address',
-    description: 'Add your address here',
-    icon: 'i-lucide-house'
-  }, {
-    slot: 'shipping',
-    title: 'Shipping',
-    description: 'Set your preferred shipping method',
-    icon: 'i-lucide-truck'
-  }, {
-    slot: 'checkout',
-    title: 'Checkout',
-    description: 'Confirm your order'
-  }
-]
-
 describe('Stepper', () => {
   const sizes = Object.keys(theme.variants.size) as any
 
+  const items = [
+    {
+      title: 'Address',
+      description: 'Add your address here',
+      icon: 'i-lucide-house'
+    }, {
+      title: 'Shipping',
+      description: 'Set your preferred shipping method',
+      icon: 'i-lucide-truck'
+    }, {
+      slot: 'custom',
+      title: 'Checkout',
+      description: 'Confirm your order'
+    }
+  ]
+
+  const props = { items }
+
   it.each([
     // Props
-    ['with as', { props: { as: 'div', items } }],
-    ['with class', { props: { class: '', items } }],
-    ['with ui', { props: { ui: {}, items } }],
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { size, items } }]),
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { size, items, orientation: 'vertical' } }]),
+    ['with items', { props }],
+    ['with linear', { props: { ...props, linear: true } }],
+    ['with defaultValue', { props: { ...props, defaultValue: 1 } }],
+    ['with modelValue', { props: { ...props, modelValue: 1 } }],
+    ['with neutral color', { props: { ...props, color: 'neutral' } }],
+    ...sizes.map((size: string) => [`with size ${size} horizontal`, { props: { ...props, size } }]),
+    ...sizes.map((size: string) => [`with size ${size} vertical`, { props: { ...props, size, orientation: 'vertical' } }]),
+    ['with as', { props: { ...props, as: 'section' } }],
+    ['with class', { props: { ...props, class: 'gap-8' } }],
+    ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
     // Slots
-    ['with default slot', { props: { items }, slots: { default: () => 'Default slot' } }]
+    ['with default slot', { props, slots: { default: () => 'Default slot' } }],
+    ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }],
+    ['with title slot', { props, slots: { title: () => 'Title slot' } }],
+    ['with description slot', { props, slots: { description: () => 'Description slot' } }],
+    ['with content slot', { props, slots: { content: () => 'Content slot' } }],
+    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: StepperProps<any>, slots?: Partial<StepperSlots<any>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Stepper)
     expect(html).toMatchSnapshot()

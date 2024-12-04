@@ -12,6 +12,12 @@ navigation.badge: New
 
 ## Usage
 
+Use the `v-model` directive to control the value of the Stepper or the `default-value` prop to set the initial value when you do not need to control its state.
+
+::tip{to="#control-active-item"}
+You can also use the `@update:model-value` event to listen to the active item.
+::
+
 ### Items
 
 Use the `items` prop as an array of objects with the following properties:
@@ -22,7 +28,6 @@ Use the `items` prop as an array of objects with the following properties:
 - `icon?: string`{lang="ts-type"}
 - `value?: string | number`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-
 
 ::component-code
 ---
@@ -58,7 +63,7 @@ ignore:
 external:
   - items
 props:
-  color: info
+  color: neutral
   items:
     - title: 'Address'
       description: 'Add your address here'
@@ -85,7 +90,7 @@ ignore:
 external:
   - items
 props:
-  size: md
+  size: xl
   items:
   - title: 'Address'
     description: 'Add your address here'

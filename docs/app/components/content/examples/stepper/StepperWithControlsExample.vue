@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 const items = [
   {
     slot: 'address',
@@ -19,7 +17,7 @@ const items = [
   }
 ]
 
-const stepper = ref()
+const stepper = useTemplateRef('stepper')
 </script>
 
 <template>
@@ -36,10 +34,10 @@ const stepper = ref()
     </UStepper>
 
     <div class="flex gap-2 justify-between mt-4">
-      <UButton variant="outline" :disabled="!stepper?.hasPrevious" leading-icon="i-lucide-arrow-left" @click="stepper.previous()">
+      <UButton variant="outline" :disabled="!stepper?.hasPrevious" leading-icon="i-lucide-arrow-left" @click="stepper?.previous()">
         Back
       </UButton>
-      <UButton :disabled="!stepper?.hasNext" trailing-icon="i-lucide-arrow-right" @click="stepper.next()">
+      <UButton :disabled="!stepper?.hasNext" trailing-icon="i-lucide-arrow-right" @click="stepper?.next()">
         Next
       </UButton>
     </div>

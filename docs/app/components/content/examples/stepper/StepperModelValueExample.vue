@@ -21,9 +21,8 @@ const active = ref(0)
 // Note: This is for demonstration purposes only. Don't do this at home.
 onMounted(() => {
   setInterval(() => {
-    console.log('hey', active.value)
     active.value = (active.value + 1) % items.length
-  }, 1000)
+  }, 2000)
 })
 </script>
 
