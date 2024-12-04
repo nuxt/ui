@@ -145,6 +145,7 @@
     "@nuxt/ui": "workspace:*",
     "happy-dom": "14.12.3",
     "rollup": "^4.24.0",
-    "typescript": "5.6.3"
+    "typescript": "5.6.3",
+    "chokidar": "3.6.0"
   }
 }

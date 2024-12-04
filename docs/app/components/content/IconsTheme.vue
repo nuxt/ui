@@ -2,11 +2,12 @@
 import json5 from 'json5'
 import icons from '../../../../src/theme/icons'
 
-const { framework } = useSharedData()
+const appConfig = useAppConfig()
+const { framework, module } = useSharedData()
 
 const { data: ast } = await useAsyncData(`icons-theme`, async () => {
   const md = `
-::code-collapse{class="nuxt-only"}
+::code-collapse{class="ui-only nuxt-only"}
 
 \`\`\`ts [app.config.ts]
 export default defineAppConfig(${json5.stringify({
@@ -16,6 +17,22 @@ export default defineAppConfig(${json5.stringify({
 }, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
 \`\`\`\
 
+::
+
+::code-collapse{class="ui-pro-only nuxt-only"}
+
+\`\`\`ts [app.config.ts]
+export default defineAppConfig(${json5.stringify({
+  ui: {
+    icons: appConfig.ui.icons
+  }
+}, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')})
+\`\`\`\
+
+::
+
+::caution{class="ui-pro-only vue-only"}
+Nuxt UI Pro v3 does not support Vue yet.
 ::
 
 ::code-collapse{class="vue-only"}
@@ -44,7 +61,7 @@ export default defineConfig({
 `
 
   return parseMarkdown(md)
-}, { watch: [framework] })
+}, { watch: [framework, module] })
 </script>
 
 <template>

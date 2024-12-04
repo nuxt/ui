@@ -3,7 +3,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
 const route = useRoute()
-const { framework } = useSharedData()
+const { framework, module } = useSharedData()
 
 definePageMeta({
   layout: 'docs'
@@ -18,16 +18,17 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
   return queryCollectionItemSurroundings('content', route.path, {
     fields: ['description']
   }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
+    .orWhere(group => group.where('module', '=', module.value).where('module', 'IS NULL'))
 }, {
-  watch: [framework]
+  watch: [framework, module]
 })
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)).map(({ icon, ...link }) => link))
 
-// Redirect to the correct framework version if the page is not the current framework
 if (!import.meta.prerender) {
+  // Redirect to the correct framework version if the page is not the current framework
   watch(framework, () => {
     if (page.value?.framework && page.value?.framework !== framework.value) {
       if (route.path.endsWith(`/${page.value?.framework}`)) {
@@ -37,19 +38,33 @@ if (!import.meta.prerender) {
       }
     }
   })
+
+  // Redirect to the correct module version if the page is not the current module
+  watch(module, () => {
+    if (page.value?.module && page.value?.module !== module.value) {
+      if (page.value?.module === 'ui-pro' && route.path.includes('/pro')) {
+        navigateTo(`${route.path.replace('/pro', '')}`)
+      } else if (page.value?.module === 'ui' && !route.path.includes('/pro')) {
+        navigateTo(`${route.path.replace(`/${framework.value}`, '')}/pro/${framework.value}`)
+      }
+    }
+  })
 }
 
-// Update the framework if the page has a different framework
+// Update the framework/module if the page has different ones
 watch(page, () => {
   if (page.value?.framework && page.value?.framework !== framework.value) {
     framework.value = page.value?.framework as string
   }
+  if (page.value?.module && page.value?.module !== module.value) {
+    module.value = page.value?.module as string
+  }
 }, { immediate: true })
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt UI v3',
+  titleTemplate: `%s - Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
   title: page.value.navigation?.title ? page.value.navigation.title : page.value.title,
-  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} - Nuxt UI v3`,
+  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} - Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
   description: page.value.description,
   ogDescription: page.value.description
 })
