@@ -260,8 +260,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/@nuxt/ui-pro@8ff6790
-        version: https://pkg.pr.new/@nuxt/ui-pro@8ff6790(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@69c8478
+        version: https://pkg.pr.new/@nuxt/ui-pro@69c8478(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)
       '@nuxthub/core':
         specifier: ^0.8.7
         version: 0.8.7(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.27.3)(vite@5.4.11(@types/node@22.9.0)(lightningcss@1.28.1)(terser@5.36.0))
@@ -1530,8 +1530,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@8ff6790':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@8ff6790}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@69c8478':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@69c8478}
     version: 3.0.0-alpha.9
     peerDependencies:
       typescript: 5.6.3
@@ -1548,8 +1548,8 @@ packages:
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
 
-  '@nuxtjs/mdc-edge@0.10.1-28888809.ca38899':
-    resolution: {integrity: sha512-PyYfMkHTaI1htvn9kIqBL9FEo0GIkbYDen5te3LGsyTBuVEErHgaMuELpUY0FfR3OB9wVn9H1wgfuON6mw9CvQ==}
+  '@nuxtjs/mdc-edge@0.10.1-28888910.a0601df':
+    resolution: {integrity: sha512-I1LG9vqlw6J1rVoQci4E8Q/mjUXrmQ/gjdqc/Y2ywsY0uneEAjPou0hwhQMOKR9K3VamhQM/SVuJe6EEQITpVA==}
 
   '@nuxtjs/plausible@1.2.0':
     resolution: {integrity: sha512-pjfps32fFN77BhjqHmq2Jx4XCNso9TcYnB+S4IR2qH/c26WDfYB5mQxN5pOEiWRlMkiKq+Y45mBBFtSOVKClCA==}
@@ -8219,7 +8219,7 @@ snapshots:
     dependencies:
       '@libsql/client': 0.14.0
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
-      '@nuxtjs/mdc': '@nuxtjs/mdc-edge@0.10.1-28888809.ca38899(magicast@0.3.5)(rollup@4.27.3)'
+      '@nuxtjs/mdc': '@nuxtjs/mdc-edge@0.10.1-28888910.a0601df(magicast@0.3.5)(rollup@4.27.3)'
       '@sqlite.org/sqlite-wasm': 3.47.0-build1
       better-sqlite3: 11.5.0
       c12: 2.0.1(magicast@0.3.5)
@@ -8664,7 +8664,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@8ff6790(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@69c8478(magicast@0.3.5)(rollup@4.27.3)(typescript@5.6.3)':
     dependencies:
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
       '@nuxt/schema': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
@@ -8852,7 +8852,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxtjs/mdc-edge@0.10.1-28888809.ca38899(magicast@0.3.5)(rollup@4.27.3)':
+  '@nuxtjs/mdc-edge@0.10.1-28888910.a0601df(magicast@0.3.5)(rollup@4.27.3)':
     dependencies:
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.27.3)
       '@shikijs/transformers': 1.24.0
@@ -8866,6 +8866,7 @@ snapshots:
       detab: 3.0.2
       github-slugger: 2.0.0
       hast-util-format: 1.1.0
+      hast-util-to-mdast: 10.1.1
       hast-util-to-string: 3.0.1
       mdast-util-to-hast: 13.2.0
       micromark-util-sanitize-uri: 2.0.1
@@ -8885,6 +8886,7 @@ snapshots:
       remark-mdc: 3.5.0
       remark-parse: 11.0.0
       remark-rehype: 11.1.1
+      remark-stringify: 11.0.0
       scule: 1.3.0
       shiki: 1.24.0
       ufo: 1.5.4
