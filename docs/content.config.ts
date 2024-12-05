@@ -39,7 +39,7 @@ export const collections = {
     type: 'page',
     source: [{
       include: '**/*'
-    }, pro!],
+    }, pro!].filter(Boolean),
     schema
   })
 }

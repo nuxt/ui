@@ -1,6 +1,7 @@
 ---
+title: ColorPicker
 description: A component to select a color.
-links: 
+links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/ColorPicker.vue
@@ -107,7 +108,7 @@ Use the `size` prop to set the size of the ColorPicker.
 ::component-code
 ---
 props:
-  size: md
+  size: xl
 ---
 ::
 
@@ -124,9 +125,9 @@ props:
 
 ## Examples
 
-### Color chooser
+### As a Color chooser
 
-Use [Button](/components/button) and a [Popover](/components/popover) components to create a color chooser.
+Use a [Button](/components/button) and a [Popover](/components/popover) component to create a color chooser.
 
 ::component-example
 ---

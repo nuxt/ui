@@ -1,13 +1,14 @@
 <script setup lang="ts">
 const color = ref('#00C16A')
-const iconStyle = computed(() => ({ backgroundColor: color.value }))
+
+const chip = computed(() => ({ backgroundColor: color.value }))
 </script>
 
 <template>
   <UPopover>
-    <UButton label="Choose color" color="neutral" variant="subtle">
+    <UButton label="Choose color" color="neutral" variant="outline">
       <template #leading>
-        <span :style="iconStyle" class="w-3 h-3 rounded-full" />
+        <span :style="chip" class="size-3 rounded-full" />
       </template>
     </UButton>
 
