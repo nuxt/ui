@@ -260,7 +260,7 @@ const ui = computed(() => colorPicker({
   </Primitive>
 </template>
 
-<style>
+<style scoped>
 [data-color-picker-background] {
   background-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(to right, #fff 0%, rgba(255, 255, 255, 0) 100%);
 }
