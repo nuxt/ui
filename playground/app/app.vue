@@ -29,6 +29,7 @@ const components = [
   'checkbox',
   'chip',
   'collapsible',
+  'color-picker',
   'context-menu',
   'command-palette',
   'drawer',
