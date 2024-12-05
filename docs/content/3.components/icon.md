@@ -1,14 +1,15 @@
 ---
-description: A wrapper around Nuxt Icon component to display icons.
+description: A component to display any icon from Iconify.
 links:
-  - label: Nuxt Icon
-    icon: i-simple-icons-github
-    to: https://github.com/nuxt/icon
+  - label: Icônes
+    to: https://icones.js.org/
+    target: _blank
+    icon: i-custom-icones-js
 ---
 
 ## Usage
 
-You can use any name from the https://icones.js.org collection:
+Use the `name` prop to display an icon:
 
 ::component-code
 ---
@@ -18,8 +19,11 @@ props:
 ---
 ::
 
-::tip
-It's highly recommended to install the icons collections you need, read more about this in [Icons](/getting-started/icons#collections).
+::framework-only
+#nuxt
+:::caution{to="/getting-started/icons/nuxt#collections"}
+It's highly recommended to install the icons collections you need, read more about this.
+:::
 ::
 
 ## API

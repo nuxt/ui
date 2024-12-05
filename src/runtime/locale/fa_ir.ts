@@ -10,6 +10,12 @@ export default defineLocale({
       noData: 'داده‌ای موجود نیست',
       create: 'ایجاد "{label}"'
     },
+    calendar: {
+      prevYear: 'سال گذشته',
+      nextYear: 'سال آینده',
+      prevMonth: 'ماه گذشته',
+      nextMonth: 'ماه آینده'
+    },
     inputNumber: {
       increment: 'افزایش',
       decrement: 'کاهش'

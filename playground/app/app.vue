@@ -6,8 +6,6 @@ const router = useRouter()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-defineOptions({ inheritAttrs: false })
-
 const isDark = computed({
   get() {
     return colorMode.value === 'dark'
@@ -26,10 +24,12 @@ const components = [
   'button',
   'button-group',
   'card',
+  'calendar',
   'carousel',
   'checkbox',
   'chip',
   'collapsible',
+  'color-picker',
   'context-menu',
   'command-palette',
   'drawer',
@@ -55,6 +55,7 @@ const components = [
   'skeleton',
   'slideover',
   'slider',
+  'stepper',
   'switch',
   'tabs',
   'table',

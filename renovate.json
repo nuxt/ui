@@ -6,7 +6,10 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "happy-dom"
+    "happy-dom",
+    "valibot30",
+    "valibot31",
+    "typescript"
   ],
   "baseBranches": ["dev", "v3"],
   "packageRules": [{

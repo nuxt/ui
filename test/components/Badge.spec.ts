@@ -10,8 +10,6 @@ describe('Badge', () => {
   it.each([
     // Props
     ['with label', { props: { label: 'Badge' } }],
-    ['with as', { props: { label: 'Badge', as: 'div' } }],
-    ['with class', { props: { label: 'Badge', class: 'rounded-full font-bold' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Badge', size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { label: 'Badge', variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { label: 'Badge', variant, color: 'neutral' } }]),
@@ -23,6 +21,9 @@ describe('Badge', () => {
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-lucide-arrow-left' } }],
     ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-lucide-arrow-right' } }],
+    ['with as', { props: { label: 'Badge', as: 'div' } }],
+    ['with class', { props: { label: 'Badge', class: 'rounded-full font-bold' } }],
+    ['with ui', { props: { label: 'Badge', ui: { label: 'font-bold' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],

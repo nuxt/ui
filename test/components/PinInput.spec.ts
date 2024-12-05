@@ -13,7 +13,6 @@ describe('PinInput', () => {
 
   it.each([
     // Props
-    ['with as', { props: { as: 'span' } }],
     ['with modelValue', { props: { modelValue: ['1'] } }],
     ['with defaultValue', { props: { defaultValue: ['1'] } }],
     ['with id', { props: { id: 'pin-input-id' } }],
@@ -30,8 +29,9 @@ describe('PinInput', () => {
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { variant, color: 'neutral', highlight: true } }]),
-    ['with class', { props: { class: '' } }],
-    ['with ui', { props: { ui: {} } }]
+    ['with as', { props: { as: 'span' } }],
+    ['with class', { props: { class: 'absolute' } }],
+    ['with ui', { props: { ui: { base: 'rounded-full' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PinInputProps }) => {
     const html = await ComponentRender(nameOrHtml, options, PinInput)
     expect(html).toMatchSnapshot()

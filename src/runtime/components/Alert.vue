@@ -64,7 +64,7 @@ extendDevtoolsMeta<AlertProps>({ defaultProps: { title: 'Heads up!' } })
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import UIcon from './Icon.vue'
@@ -75,8 +75,8 @@ const props = defineProps<AlertProps>()
 const emits = defineEmits<AlertEmits>()
 const slots = defineSlots<AlertSlots>()
 
-const appConfig = useAppConfig()
 const { t } = useLocale()
+const appConfig = useAppConfig()
 
 const multiline = computed(() => !!props.title && !!props.description)
 

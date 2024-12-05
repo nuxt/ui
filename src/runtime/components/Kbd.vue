@@ -31,7 +31,7 @@ extendDevtoolsMeta({ defaultProps: { value: 'K' } })
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { useKbd } from '../composables/useKbd'
 
 const props = withDefaults(defineProps<KbdProps>(), {

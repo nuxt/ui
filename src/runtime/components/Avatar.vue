@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { AvatarFallbackProps } from 'radix-vue'
+import type { AvatarFallbackProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import _appConfig from '#build/app.config'
@@ -32,7 +32,7 @@ extendDevtoolsMeta<AvatarProps>({ defaultProps: { src: 'https://avatars.githubus
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { AvatarRoot, AvatarImage, AvatarFallback, useForwardProps } from 'radix-vue'
+import { AvatarRoot, AvatarImage, AvatarFallback, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import UIcon from './Icon.vue'

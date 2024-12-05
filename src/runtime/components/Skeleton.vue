@@ -22,7 +22,7 @@ extendDevtoolsMeta({ example: 'SkeletonExample' })
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 
 const props = defineProps<SkeletonProps>()
 </script>

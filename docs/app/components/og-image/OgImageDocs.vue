@@ -56,7 +56,7 @@ defineProps({
       <h1 class="m-0 text-[75px] font-semibold mb-2 text-white flex items-center">
         <span>{{ title }}</span>
       </h1>
-      <p v-if="description" class="text-[32px] text-[#94a3b8] leading-tight">
+      <p v-if="description" class="text-[32px] text-[#94a3b8] leading-tight text-balance">
         {{ description.slice(0, 200) }}
       </p>
     </div>

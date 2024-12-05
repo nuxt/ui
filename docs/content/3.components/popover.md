@@ -1,9 +1,12 @@
 ---
 description: A non-modal dialog that floats around a trigger element.
 links:
+  - label: HoverCard
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/hover-card
   - label: Popover
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/popover.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/popover
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Popover.vue
@@ -64,7 +67,7 @@ slots:
 ::
 
 ::note
-When using the `hover` mode, the Radix Vue [HoverCard](https://www.radix-vue.com/components/hover-card.html) component is used instead of the [Popover](https://www.radix-vue.com/components/popover.html).
+When using the `hover` mode, the Reka UI [`HoverCard`](https://reka-ui.com/docs/components/hover-card) component is used instead of the [`Popover`](https://reka-ui.com/docs/components/popover).
 ::
 
 ### Delay
@@ -174,7 +177,7 @@ name: 'popover-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Popover by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Popover by pressing :kbd{value="O"}.
 ::
 
 ### With command palette

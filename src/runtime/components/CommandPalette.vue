@@ -1,6 +1,6 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { ComboboxRootProps, ComboboxRootEmits } from 'radix-vue'
+import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -23,6 +23,7 @@ export interface CommandPaletteItem {
   avatar?: AvatarProps
   chip?: ChipProps
   kbds?: KbdProps['value'][] | KbdProps[]
+  active?: boolean
   loading?: boolean
   disabled?: boolean
   slot?: string
@@ -36,17 +37,17 @@ export interface CommandPaletteGroup<T> {
   items?: T[]
   /**
    * Whether to filter group items with [useFuse](https://vueuse.org/integrations/useFuse).
-   * When `false`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
-   * @defaultValue true
+   * When `true`, items will not be filtered which is useful for custom filtering (useAsyncData, useFetch, etc.).
+   * @defaultValue false
    */
-  filter?: boolean
+  ignoreFilter?: boolean
   /** Filter group items after the search happened. */
   postFilter?: (searchTerm: string, items: T[]) => T[]
   /** The icon displayed when an item is highlighted. */
   highlightedIcon?: string
 }
 
-export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'selectedValue' | 'resetSearchTermOnBlur'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -101,7 +102,9 @@ export interface CommandPaletteProps<G, T> extends Pick<ComboboxRootProps, 'mult
   ui?: PartialString<typeof commandPalette.slots>
 }
 
-export type CommandPaletteEmits<T> = ComboboxRootEmits<T>
+export type CommandPaletteEmits<T> = ListboxRootEmits<T> & {
+  'update:open': [value: boolean]
+}
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
@@ -119,7 +122,7 @@ extendDevtoolsMeta({ example: 'CommandPaletteExample', ignoreProps: ['groups'] }
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
 import { computed } from 'vue'
-import { ComboboxRoot, ComboboxInput, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxViewport, ComboboxGroup, ComboboxLabel, ComboboxItem, ComboboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'radix-vue'
+import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
@@ -144,9 +147,10 @@ const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
-const appConfig = useAppConfig()
 const { t } = useLocale()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'selectedValue', 'resetSearchTermOnBlur'), emits)
+const appConfig = useAppConfig()
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon', 'placeholder'))
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -168,7 +172,7 @@ const items = computed(() => props.groups?.filter((group) => {
     return false
   }
 
-  if (group.filter === false) {
+  if (group.ignoreFilter) {
     return false
   }
 
@@ -216,7 +220,7 @@ const groups = computed(() => {
     return getGroupWithItems(group, items)
   }).filter(group => !!group)
 
-  const nonFuseGroups = props.groups?.filter(group => group.filter === false && group.items?.length).map((group) => {
+  const nonFuseGroups = props.groups?.filter(group => group.ignoreFilter && group.items?.length).map((group) => {
     return getGroupWithItems(group, group.items || [])
   }) || []
 
@@ -229,8 +233,8 @@ const groups = computed(() => {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ComboboxRoot v-bind="rootProps" v-model:search-term="searchTerm" open :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <ComboboxInput as-child>
+  <ListboxRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         variant="none"
         autofocus
@@ -255,72 +259,70 @@ const groups = computed(() => {
           </slot>
         </template>
       </UInput>
-    </ComboboxInput>
+    </ListboxFilter>
 
-    <ComboboxPortal disabled>
-      <ComboboxContent :class="ui.content({ class: props.ui?.content })" :dismissable="false">
-        <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
-          <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? t('commandPalette.noMatch', { searchTerm }) : t('commandPalette.noData') }}
-          </slot>
-        </ComboboxEmpty>
+    <ListboxContent :class="ui.content({ class: props.ui?.content })">
+      <div v-if="groups?.length" :class="ui.viewport({ class: props.ui?.viewport })">
+        <ListboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
+          <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
+            {{ get(group, props.labelKey as string) }}
+          </ListboxGroupLabel>
 
-        <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
-          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
-            <ComboboxLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
-              {{ get(group, props.labelKey as string) }}
-            </ComboboxLabel>
+          <ListboxItem
+            v-for="(item, index) in group.items"
+            :key="`group-${groupIndex}-${index}`"
+            :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml'])"
+            :disabled="item.disabled"
+            :class="ui.item({ class: props.ui?.item, active: item.active })"
+            @select="item.onSelect"
+          >
+            <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
+              <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="item" :index="index">
+                <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, loading: true })" />
+                <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, active: item.active })" />
+                <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar, active: item.active })" />
+                <UChip
+                  v-else-if="item.chip"
+                  :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+                  inset
+                  standalone
+                  v-bind="item.chip"
+                  :class="ui.itemLeadingChip({ class: props.ui?.itemLeadingChip, active: item.active })"
+                />
+              </slot>
 
-            <ComboboxItem
-              v-for="(item, index) in group.items"
-              :key="`group-${groupIndex}-${index}`"
-              :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml'])"
-              :disabled="item.disabled"
-              :class="ui.item({ class: props.ui?.item })"
-              @select="item.onSelect"
-            >
-              <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
-                <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="item" :index="index">
-                  <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, loading: true })" />
-                  <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
-                  <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
-                  <UChip
-                    v-else-if="item.chip"
-                    :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
-                    inset
-                    standalone
-                    v-bind="item.chip"
-                    :class="ui.itemLeadingChip({ class: props.ui?.itemLeadingChip })"
-                  />
+              <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel({ class: props.ui?.itemLabel, active: item.active })">
+                <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="item" :index="index">
+                  <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: props.ui?.itemLabelPrefix })">{{ item.prefix }}</span>
+
+                  <span :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase, active: item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
+
+                  <span :class="ui.itemLabelSuffix({ class: props.ui?.itemLabelSuffix, active: item.active })" v-html="item.suffixHtml || item.suffix" />
+                </slot>
+              </span>
+
+              <span :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
+                <slot :name="item.slot ? `${item.slot}-trailing` : group.slot ? `${group.slot}-trailing` : `item-trailing`" :item="item" :index="index">
+                  <span v-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: props.ui?.itemTrailingKbds })">
+                    <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+                  </span>
+                  <UIcon v-else-if="group.highlightedIcon" :name="group.highlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: props.ui?.itemTrailingHighlightedIcon })" />
                 </slot>
 
-                <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel({ class: props.ui?.itemLabel })">
-                  <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="item" :index="index">
-                    <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: props.ui?.itemLabelPrefix })">{{ item.prefix }}</span>
+                <ListboxItemIndicator as-child>
+                  <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: props.ui?.itemTrailingIcon })" />
+                </ListboxItemIndicator>
+              </span>
+            </slot>
+          </ListboxItem>
+        </ListboxGroup>
+      </div>
 
-                    <span :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
-
-                    <span :class="ui.itemLabelSuffix({ class: props.ui?.itemLabelSuffix })" v-html="item.suffixHtml || item.suffix" />
-                  </slot>
-                </span>
-
-                <span :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
-                  <slot :name="item.slot ? `${item.slot}-trailing` : group.slot ? `${group.slot}-trailing` : `item-trailing`" :item="item" :index="index">
-                    <span v-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: props.ui?.itemTrailingKbds })">
-                      <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
-                    </span>
-                    <UIcon v-else-if="group.highlightedIcon" :name="group.highlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: props.ui?.itemTrailingHighlightedIcon })" />
-                  </slot>
-
-                  <ComboboxItemIndicator as-child>
-                    <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: props.ui?.itemTrailingIcon })" />
-                  </ComboboxItemIndicator>
-                </span>
-              </slot>
-            </ComboboxItem>
-          </ComboboxGroup>
-        </ComboboxViewport>
-      </ComboboxContent>
-    </ComboboxPortal>
-  </ComboboxRoot>
+      <div v-else :class="ui.empty({ class: props.ui?.empty })">
+        <slot name="empty" :search-term="searchTerm">
+          {{ searchTerm ? t('commandPalette.noMatch', { searchTerm }) : t('commandPalette.noData') }}
+        </slot>
+      </div>
+    </ListboxContent>
+  </ListboxRoot>
 </template>

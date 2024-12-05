@@ -11,6 +11,7 @@ describe('Slider', () => {
 
   it.each([
     // Props
+    ['with modelValue', { props: { modelValue: 10 } }],
     ['with defaultValue', { props: { defaultValue: 10 } }],
     ['with multiple thumbs', { props: { defaultValue: [0, 10] } }],
     ['with name', { props: { name: 'custom-name' } }],
@@ -21,6 +22,7 @@ describe('Slider', () => {
     ['with min steps between thumbs', { props: { defaultValue: [0, 30], minStepsBetweenThumbs: 30 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: 10 } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { track: 'bg-[var(--ui-bg-elevated)]' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {

@@ -3,8 +3,8 @@ title: DropdownMenu
 description: A menu to display actions when clicking on an element.
 links:
   - label: DropdownMenu
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/dropdown-menu.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/dropdown-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/DropdownMenu.vue
@@ -301,7 +301,7 @@ name: 'dropdown-menu-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the DropdownMenu by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the DropdownMenu by pressing :kbd{value="O"}.
 ::
 
 ### With custom slot
