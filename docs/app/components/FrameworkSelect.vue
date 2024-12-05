@@ -14,7 +14,10 @@ onMounted(() => {
     :items="frameworks"
     :content="false"
     color="neutral"
-    :ui="{ leadingIcon: 'group-data-[state=inactive]:grayscale' }"
+    :ui="{
+      indicator: 'bg-[var(--ui-bg)]',
+      trigger: 'px-1 data-[state=active]:text-[var(--ui-text-highlighted)]'
+    }"
     @update:model-value="(framework = $event as string)"
   />
 </template>

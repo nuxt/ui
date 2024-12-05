@@ -2,12 +2,12 @@ export function useSharedData() {
   const framework = useCookie('nuxt-ui-framework', { default: () => 'nuxt' })
   const frameworks = computed(() => [{
     label: 'Nuxt',
-    icon: 'i-logos-nuxt-icon',
+    icon: 'i-simple-icons-nuxtdotjs',
     value: 'nuxt',
     onSelect: () => framework.value = 'nuxt'
   }, {
     label: 'Vue',
-    icon: 'i-logos-vue',
+    icon: 'i-simple-icons-vuedotjs',
     value: 'vue',
     disabled: module.value === 'ui-pro',
     onSelect: () => framework.value = 'vue'
