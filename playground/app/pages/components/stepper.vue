@@ -32,7 +32,7 @@ const items = [
   }
 ]
 
-const stepper = ref()
+const stepper = useTemplateRef('stepper')
 </script>
 
 <template>
@@ -46,7 +46,6 @@ const stepper = ref()
     <UStepper
       ref="stepper"
       :items="items"
-      :default-value="1"
       :color="color"
       :orientation="orientation"
       :size="size"
@@ -77,10 +76,19 @@ const stepper = ref()
     </UStepper>
 
     <div class="flex gap-2 justify-between">
-      <UButton variant="outline" :disabled="!stepper?.hasPrevious" leading-icon="i-lucide-arrow-left" @click="stepper.previous()">
-        Back
+      <UButton
+        leading-icon="i-lucide-arrow-left"
+        :disabled="!stepper?.hasPrev"
+        @click="stepper?.prev()"
+      >
+        Prev
       </UButton>
-      <UButton :disabled="!stepper?.hasNext" trailing-icon="i-lucide-arrow-right" @click="stepper.next()">
+
+      <UButton
+        trailing-icon="i-lucide-arrow-right"
+        :disabled="!stepper?.hasNext"
+        @click="stepper?.next()"
+      >
         Next
       </UButton>
     </div>

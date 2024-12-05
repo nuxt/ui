@@ -22,10 +22,7 @@ const stepper = useTemplateRef('stepper')
 
 <template>
   <div class="w-full">
-    <UStepper
-      ref="stepper"
-      :items="items"
-    >
+    <UStepper ref="stepper" :items="items">
       <template #content="{ item }">
         <Placeholder class="aspect-video">
           {{ item.title }}
@@ -34,10 +31,19 @@ const stepper = useTemplateRef('stepper')
     </UStepper>
 
     <div class="flex gap-2 justify-between mt-4">
-      <UButton variant="outline" :disabled="!stepper?.hasPrevious" leading-icon="i-lucide-arrow-left" @click="stepper?.previous()">
-        Back
+      <UButton
+        leading-icon="i-lucide-arrow-left"
+        :disabled="!stepper?.hasPrev"
+        @click="stepper?.prev()"
+      >
+        Prev
       </UButton>
-      <UButton :disabled="!stepper?.hasNext" trailing-icon="i-lucide-arrow-right" @click="stepper?.next()">
+
+      <UButton
+        trailing-icon="i-lucide-arrow-right"
+        :disabled="!stepper?.hasNext"
+        @click="stepper?.next()"
+      >
         Next
       </UButton>
     </div>

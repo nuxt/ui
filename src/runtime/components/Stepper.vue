@@ -19,6 +19,7 @@ export interface StepperItem {
   description?: string
   icon?: string
   content?: string
+  disabled?: boolean
 }
 
 export interface StepperProps<T extends StepperItem> extends Pick<StepperRootProps, 'linear'> {
@@ -35,13 +36,14 @@ export interface StepperProps<T extends StepperItem> extends Pick<StepperRootPro
    * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.
    */
   defaultValue?: string | number
+  disabled?: boolean
   ui?: Partial<typeof stepper.slots>
   class?: any
 }
 
 export type StepperEmits<T> = Omit<StepperRootEmits, 'update:modelValue'> & {
   next: [payload: T]
-  previous: [payload: T]
+  prev: [payload: T]
 }
 
 type SlotProps<T extends StepperItem> = (props: { item: T }) => any
@@ -62,7 +64,9 @@ import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSepa
 import { reactivePick } from '@vueuse/core'
 import UIcon from './Icon.vue'
 
-const props = defineProps<StepperProps<T>>()
+const props = withDefaults(defineProps<StepperProps<T>>(), {
+  linear: true
+})
 const emits = defineEmits<StepperEmits<T>>()
 const slots = defineSlots<StepperSlots<T>>()
 
@@ -91,7 +95,7 @@ const currentStepIndex = computed({
 
 const currentStep = computed(() => props.items?.[currentStepIndex.value] as T)
 const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1)
-const hasPrevious = computed(() => currentStepIndex.value > 0)
+const hasPrev = computed(() => currentStepIndex.value > 0)
 
 defineExpose({
   next() {
@@ -100,21 +104,27 @@ defineExpose({
       emits('next', currentStep.value)
     }
   },
-  previous() {
-    if (hasPrevious.value) {
+  prev() {
+    if (hasPrev.value) {
       currentStepIndex.value -= 1
-      emits('previous', currentStep.value)
+      emits('prev', currentStep.value)
     }
   },
   hasNext,
-  hasPrevious
+  hasPrev
 })
 </script>
 
 <template>
   <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.header({ class: props.ui?.header })">
-      <StepperItem v-for="(item, count) in items" :key="item.value ?? count" :step="count" :class="ui.item({ class: props.ui?.item })">
+      <StepperItem
+        v-for="(item, count) in items"
+        :key="item.value ?? count"
+        :step="count"
+        :disabled="item.disabled || props.disabled"
+        :class="ui.item({ class: props.ui?.item })"
+      >
         <div :class="ui.container({ class: props.ui?.container })">
           <StepperTrigger :class="ui.trigger({ class: props.ui?.trigger })">
             <StepperIndicator :class="ui.indicator({ class: props.ui?.indicator })">

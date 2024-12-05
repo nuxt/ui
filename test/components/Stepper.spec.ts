@@ -27,12 +27,12 @@ describe('Stepper', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with linear', { props: { ...props, linear: true } }],
     ['with defaultValue', { props: { ...props, defaultValue: 1 } }],
     ['with modelValue', { props: { ...props, modelValue: 1 } }],
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
     ...sizes.map((size: string) => [`with size ${size} horizontal`, { props: { ...props, size } }]),
     ...sizes.map((size: string) => [`with size ${size} vertical`, { props: { ...props, size, orientation: 'vertical' } }]),
+    ['without linear', { props: { ...props, linear: false } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'gap-8' } }],
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
