@@ -58,7 +58,7 @@ defineShortcuts({
         <UContentSearchButton />
       </UTooltip>
 
-      <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
+      <UTooltip text="Open on GitHub" :kbds="['meta', 'G']" class="hidden lg:flex">
         <UButton
           color="neutral"
           variant="ghost"
