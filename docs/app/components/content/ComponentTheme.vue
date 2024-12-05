@@ -2,6 +2,11 @@
 import json5 from 'json5'
 import { camelCase } from 'scule'
 import * as theme from '#build/ui'
+import * as themePro from '#build/ui-pro'
+
+const props = defineProps<{
+  pro?: boolean
+}>()
 
 const route = useRoute()
 const { framework } = useSharedData()
@@ -12,7 +17,7 @@ const strippedCompoundVariants = ref(false)
 
 const strippedTheme = computed(() => {
   const strippedTheme = {
-    ...(theme as any)[name]
+    ...((props.pro ? themePro : theme) as any)[name]
   }
 
   if (strippedTheme?.compoundVariants) {
@@ -50,7 +55,7 @@ const strippedTheme = computed(() => {
 
 const component = computed(() => {
   return {
-    ui: {
+    [props.pro ? 'uiPro' : 'ui']: {
       [name]: strippedTheme.value
     }
   }

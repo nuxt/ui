@@ -2,9 +2,11 @@
 import { upperFirst, camelCase } from 'scule'
 import type { ComponentMeta } from 'vue-component-meta'
 import * as theme from '#build/ui'
+import * as themePro from '#build/ui-pro'
 
 const props = withDefaults(defineProps<{
   ignore?: string[]
+  pro?: boolean
 }>(), {
   ignore: () => [
     'activeClass',
@@ -32,7 +34,7 @@ const route = useRoute()
 const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
 
-const componentTheme = (theme as any)[camelName]
+const componentTheme = ((props.pro ? themePro : theme) as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
 
 const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {

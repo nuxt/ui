@@ -119,7 +119,6 @@ export default defineNuxtConfig({
       '@nuxt/content',
       '@nuxt/icon',
       '@nuxt/image',
-      '@nuxt/ui-pro',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
       '@nuxtjs/plausible',
