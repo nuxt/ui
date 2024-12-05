@@ -9,7 +9,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
-    linkTrailing: 'ms-auto inline-flex',
+    linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0 rounded-[var(--ui-radius)]',
     linkTrailingBadgeSize: 'sm',
     linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',

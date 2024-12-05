@@ -10,7 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemLeadingIcon: 'shrink-0',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingAvatarSize: '',
-    itemTrailing: 'ms-auto inline-flex',
+    itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     itemTrailingIcon: 'shrink-0',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemTrailingKbdsSize: '',
