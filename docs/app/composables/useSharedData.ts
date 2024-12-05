@@ -14,7 +14,6 @@ export function useSharedData() {
   }].map(f => ({ ...f, active: framework.value === f.value })))
 
   const module = useCookie('nuxt-ui-module', { default: () => 'ui' })
-
   const modules = computed(() => [{
     label: 'nuxt/ui',
     icon: 'i-lucide-box',
