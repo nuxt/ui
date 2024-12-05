@@ -71,11 +71,11 @@ defineShortcuts({
     </template>
 
     <template #content>
-      <UNavigationMenu orientation="vertical" :items="links" class="-ml-2.5" />
+      <UNavigationMenu orientation="vertical" :items="links" class="-mx-2.5" />
 
       <USeparator type="dashed" class="my-4" />
 
-      <div class="flex flex-col gap-2 w-[calc(100%+1rem)] mb-4 -mx-2">
+      <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] mb-4 -mx-2.5">
         <ModuleSelect />
         <FrameworkSelect />
       </div>

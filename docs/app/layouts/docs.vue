@@ -11,7 +11,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
         <template #left>
           <UPageAside>
             <template #top>
-              <div class="flex flex-col gap-2 w-[calc(100%+1rem)] -mx-2">
+              <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] -mx-2.5">
                 <ModuleSelect />
                 <FrameworkSelect />
               </div>
