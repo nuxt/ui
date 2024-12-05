@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Avatar, { type AvatarProps } from '../../src/runtime/components/Avatar.vue'
+import Avatar, { type AvatarProps, type AvatarSlots } from '../../src/runtime/components/Avatar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar'
 
@@ -15,8 +15,10 @@ describe('Avatar', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { src: 'https://github.com/benjamincanac.png', size } }]),
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'bg-[var(--ui-bg)]' } }],
-    ['with ui', { props: { ui: { fallback: 'font-bold' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarProps }) => {
+    ['with ui', { props: { ui: { fallback: 'font-bold' } } }],
+    // Slots
+    ['with default slot', { slots: { default: '🇫🇷' } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AvatarProps, slots?: AvatarSlots }) => {
     const html = await ComponentRender(nameOrHtml, options, Avatar)
     expect(html).toMatchSnapshot()
   })

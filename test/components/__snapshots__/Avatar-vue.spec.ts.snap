@@ -10,6 +10,8 @@ exports[`Avatar > renders with as correctly 1`] = `
 
 exports[`Avatar > renders with class correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle size-8 text-base bg-[var(--ui-bg)]"><!--v-if--><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;
 
+exports[`Avatar > renders with default slot correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-8 text-base"><!--v-if-->🇫🇷</span>"`;
+
 exports[`Avatar > renders with icon correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-8 text-base"><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="text-[var(--ui-text-muted)] shrink-0" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>"`;
 
 exports[`Avatar > renders with size 2xl correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-11 text-[22px]"><img role="img" src="https://github.com/benjamincanac.png" width="44" height="44" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>"`;

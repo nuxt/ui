@@ -27,6 +27,10 @@ export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
   ui?: Partial<typeof avatar.slots>
 }
 
+export interface AvatarSlots {
+  default(props?: {}): any
+}
+
 extendDevtoolsMeta<AvatarProps>({ defaultProps: { src: 'https://avatars.githubusercontent.com/u/739984?v=4', alt: 'Benjamin Canac' } })
 </script>
 
@@ -80,8 +84,10 @@ const sizePx = computed(() => ({
     />
 
     <AvatarFallback as-child v-bind="fallbackProps">
-      <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-      <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback }}</span>
+      <slot>
+        <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
+        <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback }}</span>
+      </slot>
     </AvatarFallback>
   </AvatarRoot>
 </template>
