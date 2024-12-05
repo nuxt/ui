@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     content: 'size-full',
     trigger: '',
     wrapper: '',
-    indicator: 'rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)]',
+    indicator: 'rounded-full font-medium text-center align-middle flex items-center justify-center group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)]',
     icon: 'shrink-0',
     separator: 'absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)]',
     title: 'font-medium text-[var(--ui-text)]',
@@ -63,11 +63,11 @@ export default (options: Required<ModuleOptions>) => ({
 
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `group-data-[state=completed]:bg-[var(--ui-${color})]`,
+        indicator: `group-data-[state=completed]:bg-[var(--ui-${color})] group-data-[state=active]:bg-[var(--ui-${color})]`,
         separator: `group-data-[state=completed]:bg-[var(--ui-${color})]`
       }])),
       neutral: {
-        indicator: `group-data-[state=completed]:bg-[var(--ui-bg-inverted)]`,
+        indicator: `group-data-[state=completed]:bg-[var(--ui-bg-inverted)] group-data-[state=active]:bg-[var(--ui-bg-inverted)]`,
         separator: `group-data-[state=completed]:bg-[var(--ui-bg-inverted)]`
       }
     }
