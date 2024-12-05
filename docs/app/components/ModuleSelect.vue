@@ -14,6 +14,7 @@ onMounted(() => {
     :items="modules"
     :content="false"
     color="neutral"
+    :ui="{ trigger: 'px-1' }"
     @update:model-value="(module = $event as string)"
   />
 </template>
