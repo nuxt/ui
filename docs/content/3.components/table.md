@@ -245,7 +245,7 @@ You can use the `expanded` prop to control the expandable state of the rows (can
 ::
 
 ::note
-You could also add this action to the [DropdownMenu](/components/dropdown-menu) component inside the `actions` column.
+You could also add this action to the [`DropdownMenu`](/components/dropdown-menu) component inside the `actions` column.
 ::
 
 ### With row selection

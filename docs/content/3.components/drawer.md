@@ -2,8 +2,8 @@
 description: A drawer that smoothly slides in & out of the screen.
 links:
   - label: Drawer
-    icon: i-custom-radix-vue
-    to: https://github.com/radix-vue/vaul-vue
+    icon: i-custom-reka-ui
+    to: https://github.com/unovue/vaul-vue
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Drawer.vue
@@ -259,7 +259,7 @@ name: 'drawer-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Drawer by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Drawer by pressing :kbd{value="O"}.
 ::
 
 ::tip

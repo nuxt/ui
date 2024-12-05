@@ -1,5 +1,17 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`FormField > renders with as correctly 1`] = `
+"<section class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <!--v-if-->
+  </div>
+</section>"
+`;
+
 exports[`FormField > renders with class correctly 1`] = `
 "<div class="text-sm relative">
   <div class="">

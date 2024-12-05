@@ -6,8 +6,8 @@ links:
     to: https://fusejs.io/
     target: _blank
   - label: Combobox
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/combobox.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/CommandPalette.vue
@@ -29,7 +29,7 @@ The CommandPalette component filters groups and ranks matching commands by relev
 - `label?: string`{lang="ts-type"}
 - `slot?: string`{lang="ts-type"}
 - `items?: CommandPaletteItem[]`{lang="ts-type"}
-- [`filter?: boolean`{lang="ts-type"}](#without-internal-search)
+- [`ignoreFilter?: boolean`{lang="ts-type"}](#with-ignore-filter)
 - [`postFilter?: (searchTerm: string, items: T[]) => T[]`{lang="ts-type"}](#with-post-filtered-items)
 - `highlightedIcon?: string`{lang="ts-type"}
 
@@ -258,7 +258,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 
 ::component-code
 ---
@@ -478,20 +478,20 @@ class: '!p-0'
 ---
 ::
 
-### Without internal search
+### With ignore filter
 
-You can set the `filter` field to `false` on a group to disable the internal search and use your own search logic.
+You can set the `ignoreFilter` field to `true` on a group to disable the internal search and use your own search logic.
 
 ::component-example
 ---
 collapse: true
-name: 'command-palette-filter-example'
+name: 'command-palette-ignore-filter-example'
 class: '!p-0'
 ---
 ::
 
 ::note
-This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
 ::
 
 ### With post-filtered items
@@ -585,7 +585,7 @@ name: 'command-palette-open-example'
 ::
 
 ::note
-This can be useful when using the CommandPalette inside a [Modal](/components/modal) for example.
+This can be useful when using the CommandPalette inside a [`Modal`](/components/modal) for example.
 ::
 
 ### With custom slot

@@ -44,7 +44,7 @@ extendDevtoolsMeta({ example: 'ChipExample' })
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Primitive, Slot } from 'radix-vue'
+import { Primitive, Slot } from 'reka-ui'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 
 defineOptions({ inheritAttrs: false })

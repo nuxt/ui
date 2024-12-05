@@ -72,7 +72,7 @@ const users = [
   }
 ]
 
-const searchTerm = ref('')
+const searchTerm = ref('B')
 
 function onSelect() {
   searchTerm.value = ''

@@ -3,8 +3,8 @@ title: InputMenu
 description: An autocomplete input with real-time suggestions.
 links:
   - label: Combobox
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/combobox.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/InputMenu.vue
@@ -15,11 +15,11 @@ links:
 Use the `v-model` directive to control the value of the InputMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::tip
-Use this over an [Input](/components/input) to take advantage of Radix Vue's [Combobox](https://www.radix-vue.com/components/combobox.html) component that offers autocomplete capabilities.
+Use this over an [`Input`](/components/input) to take advantage of Reka UI's [`Combobox`](https://reka-ui.com/docs/components/combobox) component that offers autocomplete capabilities.
 ::
 
 ::note
-This component is similar to the [SelectMenu](/components/select-menu) but it's using an Input instead of a Select.
+This component is similar to the [`SelectMenu`](/components/select-menu) but it's using an Input instead of a Select.
 ::
 
 ### Items
@@ -222,42 +222,6 @@ props:
 ---
 ::
 
-### Create Item
-
-Use the `create-item` prop to allow user input.
-
-::component-code
----
-prettier: true
-ignore:
-  - modelValue
-  - items
-external:
-  - items
-  - modelValue
-items:
-  createItem:
-    - true
-    - 'always'
-props:
-  modelValue: 'Backlog'
-  items:
-    - Backlog
-    - Todo
-    - In Progress
-    - Done
-  createItem: true
----
-::
-
-::note
-The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
-::
-
-::tip{to="#emits"}
-Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
-::
-
 ### Content
 
 Use the `content` prop to control how the InputMenu content is rendered, like its `align` or `side` for example.
@@ -282,7 +246,7 @@ items:
     - top
     - bottom
 props:
-  modelValue: Backlog
+  modelValue: 'Backlog'
   content:
     align: center
     side: bottom
@@ -310,7 +274,7 @@ external:
   - items
   - modelValue
 props:
-  modelValue: Backlog
+  modelValue: 'Backlog'
   arrow: true
   items:
     - Backlog
@@ -551,7 +515,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 
 ::component-code
 ---
@@ -701,7 +665,7 @@ name: 'input-menu-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the InputMenu by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the InputMenu by pressing :kbd{value="O"}.
 ::
 
 ### Control open state on focus
@@ -734,6 +698,25 @@ name: 'input-menu-icon-example'
 ---
 ::
 
+### With create item
+
+Use the `create-item` prop to enable users to add custom values that aren't in the predefined options.
+
+::component-example
+---
+collapse: true
+name: 'input-menu-create-item-example'
+---
+::
+
+::note
+The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
+::
+
+::tip{to="#emits"}
+Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
+::
+
 ### With fetched items
 
 You can fetch items from an API and use them in the InputMenu.
@@ -745,24 +728,24 @@ name: 'input-menu-fetch-example'
 ---
 ::
 
-### Without internal search
+### With ignore filter
 
-Set the `filter` prop to `false` to disable the internal search and use your own search logic.
+Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
 
 ::component-example
 ---
 collapse: true
-name: 'input-menu-filter-example'
+name: 'input-menu-ignore-filter-example'
 ---
 ::
 
 ::note
-This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
 ::
 
-### With custom search
+### With filter fields
 
-Use the `filter` prop with an array of fields to filter on. Defaults to `[labelKey]`.
+Use the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
 ::component-example
 ---

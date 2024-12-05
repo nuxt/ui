@@ -2,8 +2,8 @@
 description: A dialog that slides in from any side of the screen.
 links:
   - label: Dialog
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/dialog.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Slideover.vue
@@ -294,7 +294,7 @@ name: 'slideover-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Slideover by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Slideover by pressing :kbd{value="O"}.
 ::
 
 ::tip
@@ -306,7 +306,7 @@ This allows you to move the trigger outside of the Slideover or remove it entire
 You can use the [`useSlideover`](/composables/use-slideover) composable to open a Slideover programatically.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses the [SlideoverProvider](https://github.com/nuxt/ui/blob/v3/src/runtime/components/SlideoverProvider.vue) component.
+Make sure to wrap your app with the [`App`](/components/app) component which uses the [`SlideoverProvider`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/SlideoverProvider.vue) component.
 ::
 
 First, create a slideover component that will be opened programatically:

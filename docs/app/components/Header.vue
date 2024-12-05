@@ -7,6 +7,7 @@ const props = defineProps<{
 }>()
 
 const config = useRuntimeConfig().public
+const { module } = useSharedData()
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
@@ -20,13 +21,32 @@ defineShortcuts({
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0' }">
+  <UHeader :ui="{ left: 'min-w-0', toggle: '-mr-1.5' }">
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[var(--ui-text-highlighted)] min-w-0 focus-visible:outline-[var(--ui-primary)]" aria-label="Nuxt UI">
-        <Logo class="w-auto h-6 shrink-0" />
-
-        <UBadge :label="`v${config.version}`" variant="subtle" size="sm" class="-mb-[2px] rounded-[var(--ui-radius)] font-semibold inline-block truncate" />
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[var(--ui-text-highlighted)] min-w-0 focus-visible:outline-[var(--ui-primary)] shrink-0" aria-label="Nuxt UI">
+        <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
+        <Logo class="w-auto h-6 shrink-0 ui-only" />
       </NuxtLink>
+
+      <UDropdownMenu
+        v-slot="{ open }"
+        :modal="false"
+        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.5' : 'v2.19', to: module === 'ui-pro' ? 'https://ui.nuxt.com/pro' : 'https://ui.nuxt.com' }]"
+        :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }"
+        size="xs"
+      >
+        <UButton
+          :label="`v${config.version}`"
+          variant="subtle"
+          trailing-icon="i-lucide-chevron-down"
+          size="xs"
+          class="-mb-[6px] font-semibold rounded-full truncate"
+          :class="[open && 'bg-[var(--ui-primary)]/15 ']"
+          :ui="{
+            trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
+          }"
+        />
+      </UDropdownMenu>
     </template>
 
     <UNavigationMenu :items="items" variant="link" />
@@ -55,7 +75,10 @@ defineShortcuts({
 
       <USeparator type="dashed" class="my-4" />
 
-      <FrameworkSelect class="mb-4" />
+      <div class="flex flex-col gap-2 w-[calc(100%+1rem)] mb-4 -mx-2">
+        <ModuleSelect />
+        <FrameworkSelect />
+      </div>
 
       <UContentNavigation :navigation="navigation" highlight />
     </template>

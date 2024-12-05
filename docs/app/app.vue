@@ -7,7 +7,7 @@ const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
   server: false
 })
@@ -73,33 +73,10 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const { framework, frameworks } = useSharedData()
+const { frameworks, modules } = useSharedData()
+const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
 
-function filterFrameworkItems(items: any[]) {
-  return items?.filter(item => !item.framework || item.framework === framework.value)
-}
-
-function processNavigationItem(item: any): any {
-  if (item.shadow) {
-    const matchingChild = filterFrameworkItems(item.children)?.[0]
-    return matchingChild
-      ? {
-          ...matchingChild,
-          title: item.title,
-          children: matchingChild.children ? processNavigationItem(matchingChild) : undefined
-        }
-      : item
-  }
-
-  return {
-    ...item,
-    children: item.children?.length ? filterFrameworkItems(item.children)?.map(processNavigationItem) : undefined
-  }
-}
-
-const filteredNavigation = computed(() => navigation.value?.map(processNavigationItem))
-
-provide('navigation', filteredNavigation)
+provide('navigation', mappedNavigation)
 </script>
 
 <template>
@@ -107,7 +84,7 @@ provide('navigation', filteredNavigation)
     <NuxtLoadingIndicator color="#FFF" />
 
     <template v-if="!route.path.startsWith('/examples')">
-      <Banner />
+      <!-- <Banner /> -->
 
       <Header :links="links" />
     </template>
@@ -117,7 +94,7 @@ provide('navigation', filteredNavigation)
     </NuxtLayout>
 
     <template v-if="!route.path.startsWith('/examples')">
-      <Footer />
+      <!-- <Footer /> -->
 
       <ClientOnly>
         <LazyUContentSearch
@@ -127,6 +104,10 @@ provide('navigation', filteredNavigation)
             id: 'framework',
             label: 'Framework',
             items: frameworks
+          }, {
+            id: 'module',
+            label: 'Module',
+            items: modules
           }]"
           :navigation="filteredNavigation"
           :fuse="{ resultLimit: 42 }"
@@ -164,10 +145,10 @@ provide('navigation', filteredNavigation)
   --ui-container: var(--container-8xl);
 }
 
-html[data-framework="nuxt"] .vue-only {
-  display: none;
-}
-html[data-framework="vue"] .nuxt-only {
+html[data-framework="nuxt"] .vue-only,
+html[data-framework="vue"] .nuxt-only,
+html[data-module="ui-pro"] .ui-only,
+html[data-module="ui"] .ui-pro-only {
   display: none;
 }
 </style>

@@ -4,9 +4,9 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  // extends: [
-  //   process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
-  // ],
+  extends: [
+    process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#v3', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
+  ],
 
   modules: [
     '../src/module',
@@ -26,6 +26,17 @@ export default defineNuxtConfig({
   ],
 
   app: {
+    head: {
+      // LemonSqueezy affiliate
+      script: [{
+        key: 'lmsqueezy-config',
+        innerHTML: 'window.lemonSqueezyAffiliateConfig = { store: "nuxt" };'
+      }, {
+        key: 'lmsqueezy',
+        src: 'https://lmsqueezy.com/affiliate.js',
+        defer: true
+      }]
+    },
     rootAttrs: {
       'vaul-drawer-wrapper': '',
       'class': 'bg-[var(--ui-bg)]'
@@ -41,15 +52,6 @@ export default defineNuxtConfig({
       markdown: {
         highlight: {
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
-        },
-        remarkPlugins: {
-          'remark-mdc': {
-            options: {
-              experimental: {
-                autoUnwrap: false
-              }
-            }
-          }
         }
       }
     }
@@ -94,7 +96,6 @@ export default defineNuxtConfig({
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
-      // ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     },
     cloudflare: {
       pages: {
@@ -124,8 +125,8 @@ export default defineNuxtConfig({
       '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
-      resolve('./app/components')
-      // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
+      resolve('./app/components'),
+      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
     ],
     metaFields: {
       type: false,

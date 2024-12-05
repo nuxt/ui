@@ -3,8 +3,8 @@ title: SelectMenu
 description: An advanced searchable select element.
 links:
   - label: Combobox
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/combobox.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/SelectMenu.vue
@@ -15,11 +15,11 @@ links:
 Use the `v-model` directive to control the value of the SelectMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::tip
-Use this over a [Select](/components/select) to take advantage of Radix Vue's [Combobox](https://www.radix-vue.com/components/combobox.html) component that offers search capabilities and multiple selection.
+Use this over a [`Select`](/components/select) to take advantage of Reka UI's [`Combobox`](https://reka-ui.com/docs/components/combobox) component that offers search capabilities and multiple selection.
 ::
 
 ::note
-This component is similar to the [InputMenu](/components/input-menu) but it's using a Select instead of an Input with the search inside the menu.
+This component is similar to the [`InputMenu`](/components/input-menu) but it's using a Select instead of an Input with the search inside the menu.
 ::
 
 ### Items
@@ -79,7 +79,7 @@ props:
 ::
 
 ::caution
-Unlike the [Select](/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
+Unlike the [`Select`](/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
 ::
 
 You can also pass an array of arrays to the `items` prop to display separated groups of items.
@@ -239,44 +239,6 @@ props:
 You can set the `search-input` prop to `false` to hide the search input.
 ::
 
-### Create Item
-
-Use the `create-item` prop to allow user input.
-
-::component-code
----
-prettier: true
-ignore:
-  - modelValue
-  - items
-  - class
-external:
-  - items
-  - modelValue
-items:
-  createItem:
-    - true
-    - 'always'
-props:
-  modelValue: 'Backlog'
-  createItem: true
-  items:
-    - Backlog
-    - Todo
-    - In Progress
-    - Done
-  class: 'w-48'
----
-::
-
-::note
-The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
-::
-
-::tip{to="#emits"}
-Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
-::
-
 ### Content
 
 Use the `content` prop to control how the SelectMenu content is rendered, like its `align` or `side` for example.
@@ -302,7 +264,7 @@ items:
     - top
     - bottom
 props:
-  modelValue: Backlog
+  modelValue: 'Backlog'
   content:
     align: center
     side: bottom
@@ -332,7 +294,7 @@ external:
   - items
   - modelValue
 props:
-  modelValue: Backlog
+  modelValue: 'Backlog'
   arrow: true
   items:
     - Backlog
@@ -590,7 +552,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 
 ::component-code
 ---
@@ -746,7 +708,7 @@ name: 'select-menu-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the SelectMenu by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the SelectMenu by pressing :kbd{value="O"}.
 ::
 
 ### Control search term
@@ -769,6 +731,25 @@ name: 'select-menu-icon-example'
 ---
 ::
 
+### With create item
+
+Use the `create-item` prop to enable users to add custom values that aren't in the predefined options.
+
+::component-example
+---
+collapse: true
+name: 'select-menu-create-item-example'
+---
+::
+
+::note
+The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
+::
+
+::tip{to="#emits"}
+Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
+::
+
 ### With fetched items
 
 You can fetch items from an API and use them in the SelectMenu.
@@ -780,24 +761,24 @@ name: 'select-menu-fetch-example'
 ---
 ::
 
-### Without internal search
+### With ignore filter
 
-Set the `filter` prop to `false` to disable the internal search and use your own search logic.
+Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
 
 ::component-example
 ---
 collapse: true
-name: 'select-menu-filter-example'
+name: 'select-menu-ignore-filter-example'
 ---
 ::
 
 ::note
-This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
 ::
 
-### With custom search
+### With filter fields
 
-Use the `filter` prop with an array of fields to filter on. Defaults to `[labelKey]`.
+Use the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
 ::component-example
 ---

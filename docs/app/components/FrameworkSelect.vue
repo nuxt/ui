@@ -7,7 +7,7 @@ const { frameworks } = useSharedData()
     v-slot="{ open }"
     :modal="false"
     :items="frameworks"
-    :ui="{ content: 'w-(--radix-dropdown-menu-trigger-width)' }"
+    :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
   >
     <UButton
       color="neutral"
@@ -18,7 +18,6 @@ const { frameworks } = useSharedData()
       :ui="{
         trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
       }"
-      class="-mx-2 w-[calc(100%+1rem)]"
     >
       <template #leading>
         <UIcon v-for="framework in frameworks" :key="framework.value" :name="framework.icon" :class="`${framework.value}-only`" class="shrink-0 size-5" />
