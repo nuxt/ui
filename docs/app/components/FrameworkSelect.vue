@@ -1,31 +1,20 @@
 <script setup lang="ts">
-const { frameworks } = useSharedData()
+const { framework, frameworks } = useSharedData()
+
+const value = ref<string | undefined>(undefined)
+
+onMounted(() => {
+  value.value = framework.value
+})
 </script>
 
 <template>
-  <UDropdownMenu
-    v-slot="{ open }"
-    :modal="false"
+  <UTabs
+    v-model="value"
     :items="frameworks"
-    :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
-  >
-    <UButton
-      color="neutral"
-      variant="outline"
-      block
-      trailing-icon="i-lucide-chevron-down"
-      :class="[open && 'bg-[var(--ui-bg-elevated)]']"
-      :ui="{
-        trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
-      }"
-    >
-      <template #leading>
-        <UIcon v-for="framework in frameworks" :key="framework.value" :name="framework.icon" :class="`${framework.value}-only`" class="shrink-0 size-5" />
-      </template>
-
-      <span v-for="framework in frameworks" :key="framework.value" :class="`${framework.value}-only`">
-        {{ framework.label }}
-      </span>
-    </UButton>
-  </UDropdownMenu>
+    :content="false"
+    color="neutral"
+    :ui="{ leadingIcon: 'group-data-[state=inactive]:grayscale' }"
+    @update:model-value="(framework = $event as string)"
+  />
 </template>

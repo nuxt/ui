@@ -1,32 +1,19 @@
 <script setup lang="ts">
-const { modules } = useSharedData()
+const { module, modules } = useSharedData()
+
+const value = ref<string | undefined>(undefined)
+
+onMounted(() => {
+  value.value = module.value
+})
 </script>
 
 <template>
-  <UDropdownMenu
-    v-slot="{ open }"
-    :modal="false"
+  <UTabs
+    v-model="value"
     :items="modules"
-    :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
-  >
-    <UButton
-      color="neutral"
-      variant="outline"
-      block
-      trailing-icon="i-lucide-chevron-down"
-      class="min-w-0"
-      :class="[open && 'bg-[var(--ui-bg-elevated)]']"
-      :ui="{
-        trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
-      }"
-    >
-      <template #leading>
-        <UIcon v-for="module in modules" :key="module.value" :name="module.icon" :class="`${module.value}-only`" class="shrink-0 size-5" />
-      </template>
-
-      <span v-for="module in modules" :key="module.value" :class="`${module.value}-only`" class="truncate">
-        {{ module.label }}
-      </span>
-    </UButton>
-  </UDropdownMenu>
+    :content="false"
+    color="neutral"
+    @update:model-value="(module = $event as string)"
+  />
 </template>

@@ -1,6 +1,4 @@
-import { createSharedComposable } from '@vueuse/core'
-
-function _useSharedData() {
+export function useSharedData() {
   const framework = useCookie('nuxt-ui-framework', { default: () => 'nuxt' })
   const frameworks = computed(() => [{
     label: 'Nuxt',
@@ -36,5 +34,3 @@ function _useSharedData() {
     modules
   }
 }
-
-export const useSharedData = createSharedComposable(_useSharedData)
