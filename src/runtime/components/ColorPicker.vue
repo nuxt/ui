@@ -47,7 +47,7 @@ export type ColorPickerProps = {
 </script>
 
 <script setup lang="ts">
-import { ref, nextTick, computed } from 'vue'
+import { ref, nextTick, computed, toValue } from 'vue'
 import { Primitive } from 'radix-vue'
 import { useEventListener, useElementBounding, watchThrottled, watchPausable } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
@@ -222,9 +222,9 @@ const trackThumbStyle = computed(() => ({
   top: `${trackThumbPosition.value.y}%`
 }))
 
-const ui = colorPicker({
+const ui = computed(() => colorPicker({
   size: props.size
-})
+}))
 </script>
 
 <template>

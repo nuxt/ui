@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ColorPicker > renders with as correctly 1`] = `
-"<div class="data-[disabled]:opacity-75">
+"<section class="data-[disabled]:opacity-75">
   <div class="flex gap-4">
     <div class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #FF0000;">
       <div class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
@@ -12,7 +12,7 @@ exports[`ColorPicker > renders with as correctly 1`] = `
       <div class="absolute transform -translate-y-1/2 -translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
     </div>
   </div>
-</div>"
+</section>"
 `;
 
 exports[`ColorPicker > renders with class correctly 1`] = `
@@ -181,8 +181,8 @@ exports[`ColorPicker > renders with size xs correctly 1`] = `
 `;
 
 exports[`ColorPicker > renders with ui correctly 1`] = `
-"<div class="data-[disabled]:opacity-75 w-96">
-  <div class="flex gap-4">
+"<div class="data-[disabled]:opacity-75">
+  <div class="flex gap-8">
     <div class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #FF0000;">
       <div class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
         <div class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>

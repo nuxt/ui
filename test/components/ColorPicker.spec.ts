@@ -16,11 +16,11 @@ describe('ColorPicker', () => {
   it.each([
     // Props
     ['with disabled', { props: { disabled: true } }],
-    ['with as', { props: { as: 'div' } }],
-    ['with class', { props: { class: 'w-96' } }],
-    ['with ui', { props: { ui: { root: 'w-96' } } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ...formats.map(format => [`with format ${format[0]}`, { props: { format: format[0], defaultValue: format[1] } }])
+    ...formats.map(format => [`with format ${format[0]}`, { props: { format: format[0], defaultValue: format[1] } }]),
+    ['with as', { props: { as: 'section' } }],
+    ['with class', { props: { class: 'w-96' } }],
+    ['with ui', { props: { ui: { picker: 'gap-8' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ColorPickerProps }) => {
     const html = await ComponentRender(nameOrHtml, options, ColorPicker)
     expect(html).toMatchSnapshot()
