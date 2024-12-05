@@ -52,7 +52,8 @@ const items = [
       label: 'NavigationMenu',
       icon: 'i-lucide-file',
       description: 'Display a list of links.',
-      to: '/components/navigation-menu'
+      to: '/components/navigation-menu',
+      trailingIcon: 'i-lucide-check'
     }, {
       label: 'Pagination',
       icon: 'i-lucide-file',

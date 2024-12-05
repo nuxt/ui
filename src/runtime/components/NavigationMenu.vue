@@ -187,7 +187,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
         <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.linkLabelExternalIcon({ class: props.ui?.linkLabelExternalIcon, active })" />
       </span>
 
-      <span v-if="item.badge || item.children?.length || !!slots[item.slot ? `${item.slot}-trailing` : 'item-trailing']" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
+      <span v-if="item.badge || (orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[item.slot ? `${item.slot}-trailing` : 'item-trailing']" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
         <slot :name="item.slot ? `${item.slot}-trailing` : 'item-trailing'" :item="(item as T)" :active="active" :index="index">
           <UBadge
             v-if="item.badge"
@@ -199,6 +199,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
           />
 
           <UIcon v-if="(orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])) || (orientation === 'vertical' && item.children?.length)" :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon, active })" />
+          <UIcon v-else-if="item.trailingIcon" :name="item.trailingIcon" :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon, active })" />
         </slot>
       </span>
     </slot>
