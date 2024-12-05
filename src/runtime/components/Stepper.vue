@@ -115,7 +115,7 @@ defineExpose({
   <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.header({ class: props.ui?.header })">
       <StepperItem v-for="(item, count) in items" :key="item.value ?? count" :step="count" :class="ui.item({ class: props.ui?.item })">
-        <div class="relative">
+        <div :class="ui.container({ class: props.ui?.container })">
           <StepperTrigger :class="ui.trigger({ class: props.ui?.trigger })">
             <StepperIndicator :class="ui.indicator({ class: props.ui?.indicator })">
               <slot name="indicator" :item="item">

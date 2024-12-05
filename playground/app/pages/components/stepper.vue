@@ -21,6 +21,11 @@ const items = [
     description: 'Set your preferred shipping method',
     icon: 'i-lucide-truck'
   }, {
+    slot: 'payment',
+    title: 'Payment',
+    description: 'Select your payment method',
+    icon: 'i-lucide-credit-card'
+  }, {
     slot: 'checkout',
     title: 'Checkout',
     description: 'Confirm your order'
@@ -37,10 +42,11 @@ const stepper = ref()
       <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
       <USelect v-model="size" :items="sizes" placeholder="Size" />
     </div>
+
     <UStepper
       ref="stepper"
       :items="items"
-      default-value="shipping"
+      :default-value="1"
       :color="color"
       :orientation="orientation"
       :size="size"
@@ -57,12 +63,19 @@ const stepper = ref()
         </Placeholder>
       </template>
 
+      <template #payment>
+        <Placeholder class="size-full min-h-60 min-w-60">
+          Payment
+        </Placeholder>
+      </template>
+
       <template #checkout>
         <Placeholder class="size-full min-h-60 min-w-60">
           Checkout
         </Placeholder>
       </template>
     </UStepper>
+
     <div class="flex gap-2 justify-between">
       <UButton variant="outline" :disabled="!stepper?.hasPrevious" leading-icon="i-lucide-arrow-left" @click="stepper.previous()">
         Back
