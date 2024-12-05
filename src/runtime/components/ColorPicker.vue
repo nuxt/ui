@@ -48,7 +48,7 @@ export type ColorPickerProps = {
 
 <script setup lang="ts">
 import { ref, nextTick, computed, toValue } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { useEventListener, useElementBounding, watchThrottled, watchPausable } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
 import Color from 'color'
