@@ -46,6 +46,8 @@ if (!import.meta.prerender) {
         navigateTo(`${route.path.replace('/pro', '')}`)
       } else if (page.value?.module === 'ui' && !route.path.includes('/pro')) {
         navigateTo(`${route.path.replace(`/${framework.value}`, '')}/pro/${framework.value}`)
+      } else {
+        navigateTo(`/getting-started`)
       }
     }
   })
