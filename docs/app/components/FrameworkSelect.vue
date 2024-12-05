@@ -1,13 +1,10 @@
 <script setup lang="ts">
 const { framework, frameworks } = useSharedData()
 
-const value = computed({
-  get() {
-    return import.meta.prerender ? undefined : framework.value
-  },
-  set(value: string) {
-    framework.value = value
-  }
+const value = ref<string | undefined>(undefined)
+
+onMounted(() => {
+  value.value = framework.value
 })
 </script>
 
@@ -18,5 +15,6 @@ const value = computed({
     :content="false"
     color="neutral"
     :ui="{ leadingIcon: 'group-data-[state=inactive]:grayscale' }"
+    @update:model-value="(framework = $event as string)"
   />
 </template>

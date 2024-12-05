@@ -1,13 +1,10 @@
 <script setup lang="ts">
 const { module, modules } = useSharedData()
 
-const value = computed({
-  get() {
-    return import.meta.prerender ? undefined : module.value
-  },
-  set(value: string) {
-    module.value = value
-  }
+const value = ref<string | undefined>(undefined)
+
+onMounted(() => {
+  value.value = module.value
 })
 </script>
 
@@ -17,5 +14,6 @@ const value = computed({
     :items="modules"
     :content="false"
     color="neutral"
+    @update:model-value="(module = $event as string)"
   />
 </template>
