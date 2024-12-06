@@ -26,8 +26,8 @@ export default defineNuxtPlugin(() => {
     for (const key of allColors) {
       utilities[utilIndex++] = generateShades(key, appConfig.ui.colors[key])
       if (key !== "neutral") {
-        lightColors[index] = generateColor(key, 500)
-        darkColors[index++] = generateColor(key, 400)
+        lightColors[colorIndex] = generateColor(key, 500)
+        darkColors[colorIndex++] = generateColor(key, 400)
       }
     }
     return `:root {
