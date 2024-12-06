@@ -21,7 +21,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0', toggle: '-mr-1.5' }">
+  <UHeader :ui="{ left: 'min-w-0', toggle: '-mr-1.5' }" mode="drawer" :menu="{ shouldScaleBackground: true }">
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[var(--ui-text-highlighted)] min-w-0 focus-visible:outline-[var(--ui-primary)] shrink-0" aria-label="Nuxt UI">
         <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
@@ -73,9 +73,9 @@ defineShortcuts({
     <template #content>
       <UNavigationMenu orientation="vertical" :items="links" class="-mx-2.5" />
 
-      <USeparator type="dashed" class="my-4" />
+      <USeparator type="dashed" class="mt-4 mb-6" />
 
-      <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] mb-4 -mx-2.5">
+      <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] mb-5.5 -mx-2.5">
         <ModuleSelect />
         <FrameworkSelect />
       </div>
