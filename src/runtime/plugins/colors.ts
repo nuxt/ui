@@ -23,7 +23,7 @@ export default defineNuxtPlugin(() => {
     const utilities = new Array(allColors.length)
     let colorIndex = 0
     let utilIndex = 0
-    for (const key in appConfig.ui.colors) {
+    for (const key of allColors) {
       utilities[utilIndex++] = generateShades(key, appConfig.ui.colors[key])
       if (key !== "neutral") {
         lightColors[index] = generateColor(key, 500)
@@ -31,7 +31,7 @@ export default defineNuxtPlugin(() => {
       }
     }
     return `:root {
-  ${utilities).join('\n  ')}
+  ${utilities.join('\n  ')}
 
   ${lightColors.join('\n  ')}
 }
