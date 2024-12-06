@@ -16,17 +16,21 @@ export default defineNuxtPlugin(() => {
     return `--ui-${key}: var(--ui-color-${key}-${shade});`
   }
   const root = computed(() => {
-    const { neutral, ...colors } = appConfig.ui.colors
-    const allColors = Object.keys(colors)
-    const lightColors = new Array(allColors.length)
-    const darkColors = new Array(allColors.length)
-    let index = 0
-    for (const key of allColors) {
-      lightColors[index] = generateColor(key, 500)
-      darkColors[index++] = generateColor(key, 400)
+    const allColors = Object.keys(appConfig.ui.colors)
+    const lightColors = new Array(allColors.length - 1)
+    const darkColors = new Array(allColors.length - 1)
+    const utilities = new Array(allColors.length)
+    let colorIndex = 0
+    let utilIndex = 0
+    for (const key in appConfig.ui.colors) {
+      utilities[utilIndex++] = generateShades(key, appConfig.ui.colors[key])
+      if (key !== "neutral") {
+        lightColors[index] = generateColor(key, 500)
+        darkColors[index++] = generateColor(key, 400)
+      }
     }
     return `:root {
-  ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateShades(key, value)).join('\n  ')}
+  ${utilities).join('\n  ')}
 
   ${lightColors.join('\n  ')}
 }
