@@ -23,6 +23,14 @@ It requires two props:
 ::
 
 ::tabs
+  ::component-example{label="Valibot"}
+  ---
+  name: 'form-example-valibot'
+  props:
+    class: 'w-60'
+  ---
+  ::
+  
   ::component-example{label="Zod"}
   ---
   name: 'form-example-zod'
@@ -42,14 +50,6 @@ It requires two props:
   ::component-example{label="Joi"}
   ---
   name: 'form-example-joi'
-  props:
-    class: 'w-60'
-  ---
-  ::
-
-  ::component-example{label="Valibot"}
-  ---
-  name: 'form-example-valibot'
   props:
     class: 'w-60'
   ---
