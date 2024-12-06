@@ -202,5 +202,5 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
     }).filter(Boolean) as Shortcut[]
   })
 
-  useEventListener('keydown', onKeyDown)
+  return useEventListener('keydown', onKeyDown)
 }
