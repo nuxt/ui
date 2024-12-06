@@ -17,7 +17,7 @@ export default defineWorkspace([
       testTimeout: 1000,
       globals: true,
       silent: true,
-      exclude: [...defaultExclude, './test/vue/**.spec.ts'],
+      exclude: [...defaultExclude, './test/components/**.spec.ts'],
       environment: 'nuxt',
       environmentOptions: {
         nuxt: {
