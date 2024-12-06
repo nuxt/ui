@@ -1,3 +1,6 @@
+import { fileURLToPath } from 'node:url'
+import { defineVitestConfig } from '@nuxt/test-utils/config'
+import { defaultExclude,  defineWorkspace} from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 import ui from './src/vite'
 import { defineConfig } from 'vitest/config'
@@ -7,8 +10,26 @@ import { resolve } from 'pathe'
 const components = await glob('./src/runtime/components/*.vue', { absolute: true })
 const vueComponents = await glob('./src/runtime/vue/components/*.vue', { absolute: true })
 
-export default defineConfig({
+export default defineWorkspace([
+  defineVitestConfig({
+    test: {
+      name: 'nuxt',
+      testTimeout: 1000,
+      globals: true,
+      silent: true,
+      exclude: [...defaultExclude, './test/vue/**.spec.ts'],
+      environment: 'nuxt',
+      environmentOptions: {
+        nuxt: {
+          rootDir: fileURLToPath(new URL('test/nuxt/', import.meta.url))
+        }
+      },
+      setupFiles: fileURLToPath(new URL('test/nuxt/setup.ts', import.meta.url))
+    }
+  }),
+  defineConfig({
   test: {
+    name: 'vue',
     environment: 'happy-dom',
     silent: true,
     include: ['./test/components/**.spec.ts'],
@@ -54,3 +75,6 @@ export default defineConfig({
     }
   ]
 })
+
+])
+
