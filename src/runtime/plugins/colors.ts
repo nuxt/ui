@@ -15,7 +15,6 @@ export default defineNuxtPlugin(() => {
   function generateColor(key: string, shade: number) {
     return `--ui-${key}: var(--ui-color-${key}-${shade});`
   }
-  
   const root = computed(() => {
     const { neutral, ...colors } = appConfig.ui.colors
     const allColors = Object.keys(colors)
