@@ -4,8 +4,8 @@
   "type": "module",
   "dependencies": {
     "@iconify-json/logos": "^1.2.3",
-    "@iconify-json/lucide": "^1.2.17",
-    "@iconify-json/simple-icons": "^1.2.13",
+    "@iconify-json/lucide": "^1.2.18",
+    "@iconify-json/simple-icons": "^1.2.14",
     "@iconify-json/vscode-icons": "^1.2.3",
     "@nuxt/content": "https://pkg.pr.new/@nuxt/content@c5b1a4f",
     "@nuxt/image": "^1.8.1",
@@ -19,15 +19,15 @@
     "nuxt": "^3.14.1592",
     "nuxt-component-meta": "^0.9.0",
     "nuxt-og-image": "^3.1.1",
-    "prettier": "^3.4.1",
+    "prettier": "^3.4.2",
     "shiki-transformer-color-highlight": "^0.2.0",
     "superstruct": "^2.0.2",
     "ufo": "^1.5.4",
     "valibot": "^0.42.1",
-    "yup": "^1.4.0",
+    "yup": "^1.5.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "wrangler": "^3.91.0"
+    "wrangler": "^3.92.0"
   }
 }
