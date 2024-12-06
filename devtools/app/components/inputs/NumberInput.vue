@@ -1,5 +1,5 @@
 <script lang="ts">
-import { z } from 'zod'
+import * as z from 'zod'
 
 export const numberInputSchema = z.literal('number')
 export type NumberInputSchema = z.infer<typeof numberInputSchema>
