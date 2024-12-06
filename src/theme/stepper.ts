@@ -26,8 +26,8 @@ export default (options: Required<ModuleOptions>) => ({
       },
       vertical: {
         header: 'flex-col gap-4',
-        item: 'flex text-left',
-        separator: 'left-[calc(50%-1px)] -bottom-[10px] w-0.5'
+        item: 'flex text-start',
+        separator: 'start-[calc(50%-1px)] -bottom-[10px] w-0.5'
       }
     },
 
@@ -84,23 +84,23 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [{
     orientation: 'horizontal',
     size: 'xs',
-    class: { separator: 'left-[calc(50%+16px)] right-[calc(-50%+16px)]' }
+    class: { separator: 'start-[calc(50%+16px)] end-[calc(-50%+16px)]' }
   }, {
     orientation: 'horizontal',
     size: 'sm',
-    class: { separator: 'left-[calc(50%+20px)] right-[calc(-50%+20px)]' }
+    class: { separator: 'start-[calc(50%+20px)] end-[calc(-50%+20px)]' }
   }, {
     orientation: 'horizontal',
     size: 'md',
-    class: { separator: 'left-[calc(50%+28px)] right-[calc(-50%+28px)]' }
+    class: { separator: 'start-[calc(50%+28px)] end-[calc(-50%+28px)]' }
   }, {
     orientation: 'horizontal',
     size: 'lg',
-    class: { separator: 'left-[calc(50%+32px)] right-[calc(-50%+32px)]' }
+    class: { separator: 'start-[calc(50%+32px)] end-[calc(-50%+32px)]' }
   }, {
     orientation: 'horizontal',
     size: 'xl',
-    class: { separator: 'left-[calc(50%+36px)] right-[calc(-50%+36px)]' }
+    class: { separator: 'start-[calc(50%+36px)] end-[calc(-50%+36px)]' }
   }, {
     orientation: 'vertical',
     size: 'xs',
