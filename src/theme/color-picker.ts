@@ -6,7 +6,7 @@ export default {
     selectorBackground: 'w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]',
     selectorThumb: '-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed',
     track: 'w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)]',
-    trackThumb: 'absolute transform -translate-y-1/2 -translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed'
+    trackThumb: 'absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed'
   },
   variants: {
     size: {
