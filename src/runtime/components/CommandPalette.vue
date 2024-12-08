@@ -220,14 +220,15 @@ const groups = computed(() => {
     return getGroupWithItems(group, items)
   }).filter(group => !!group)
 
-  const nonFuseGroups = props.groups?.filter(group => group.ignoreFilter && group.items?.length).map((group) => {
-    return getGroupWithItems(group, group.items || [])
-  }) || []
+  const nonFuseGroups = props.groups
+    ?.map((group, index) => ({ ...group, index }))
+    ?.filter(group => group.ignoreFilter && group.items?.length)
+    ?.map(group => ({ ...getGroupWithItems(group, group.items || []), index: group.index })) || []
 
-  return [
-    ...fuseGroups,
-    ...nonFuseGroups
-  ]
+  return nonFuseGroups.reduce((acc, group) => {
+    acc.splice(group.index, 0, group)
+    return acc
+  }, [...fuseGroups])
 })
 </script>
 
