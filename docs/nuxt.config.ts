@@ -125,7 +125,7 @@ export default defineNuxtConfig({
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components'),
-      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
+      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'app', 'components') : '.c12'
     ],
     metaFields: {
       type: false,
