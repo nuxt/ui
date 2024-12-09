@@ -17,7 +17,15 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
               </div>
             </template>
 
-            <UContentNavigation :navigation="navigation" highlight />
+            <UContentNavigation :navigation="navigation" highlight>
+              <template #link-title="{ link }">
+                {{ link.title }}
+
+                <UTooltip v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" text="Only available in nuxt/ui-pro" :content="{ side: 'right' }">
+                  <UIcon name="i-lucide-boxes" class="size-3 align-middle mb-[3px] text-(--ui-text-dimmed) hover:text-(--ui-text-muted) transition-colors" />
+                </UTooltip>
+              </template>
+            </UContentNavigation>
           </UPageAside>
         </template>
 

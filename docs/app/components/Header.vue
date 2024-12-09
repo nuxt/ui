@@ -80,7 +80,13 @@ defineShortcuts({
         <FrameworkSelect />
       </div>
 
-      <UContentNavigation :navigation="navigation" highlight />
+      <UContentNavigation :navigation="navigation" highlight>
+        <template #link-title="{ link }">
+          {{ link.title }}
+
+          <UIcon v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" name="i-lucide-boxes" class="size-3 align-middle mb-[3px] text-(--ui-text-dimmed)" />
+        </template>
+      </UContentNavigation>
     </template>
   </UHeader>
 </template>
