@@ -145,7 +145,6 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
-    "@nuxtjs/mdc": "npm:@nuxtjs/mdc-edge@0.10.1-28891389.27d904e",
     "happy-dom": "14.12.3",
     "rollup": "^4.24.0",
     "typescript": "5.6.3",
