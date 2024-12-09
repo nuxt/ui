@@ -40,6 +40,8 @@ const castMap: Record<string, Cast> = {
 }
 
 const props = defineProps<{
+  pro?: boolean
+  prefix?: string
   /** Override the slug taken from the route */
   slug?: string
   class?: any
@@ -78,7 +80,17 @@ const { $prettier } = useNuxtApp()
 
 const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
 const name = `U${upperFirst(camelName)}`
-const component = defineAsyncComponent(() => import(`#ui/components/${upperFirst(camelName)}.vue`))
+const component = defineAsyncComponent(() => {
+  if (props.pro) {
+    if (props.prefix) {
+      return import(`#ui-pro/components/${props.prefix}/${upperFirst(camelName)}.vue`)
+    }
+
+    return import(`#ui-pro/components/${upperFirst(camelName)}.vue`)
+  }
+
+  return import(`#ui/components/${upperFirst(camelName)}.vue`)
+})
 
 const componentProps = reactive({
   ...Object.fromEntries(Object.entries(props.props || {}).map(([key, value]) => {
