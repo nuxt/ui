@@ -5,6 +5,7 @@ import * as theme from '#build/ui'
 import * as themePro from '#build/ui-pro'
 
 const props = withDefaults(defineProps<{
+  name?: string
   ignore?: string[]
   pro?: boolean
 }>(), {
@@ -31,11 +32,11 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 
-const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
-const name = `U${upperFirst(camelName)}`
+const camelName = camelCase(props.name ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
+const componentName = `U${upperFirst(camelName)}`
 
 const componentTheme = ((props.pro ? themePro : theme) as any)[camelName]
-const meta = await fetchComponentMeta(name as any)
+const meta = await fetchComponentMeta(componentName as any)
 
 const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
   if (!meta?.meta?.props?.length) {
