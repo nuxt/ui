@@ -1,5 +1,5 @@
 <script lang="ts">
-import { z } from 'zod'
+import * as z from 'zod'
 
 export const arrayInputSchema = z.object({
   kind: z.literal('array'),
