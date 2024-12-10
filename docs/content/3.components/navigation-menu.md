@@ -27,7 +27,7 @@ Use the `items` prop as an array of objects with the following properties:
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `onSelect?(e: Event): void`{lang="ts-type"}
 
-You can also pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
 ::component-code
 ---
@@ -120,7 +120,7 @@ props:
 ::
 
 ::note
-You can pass an array of arrays to the `items` prop to display groups of items.
+You can also pass an array of arrays to the `items` prop to display groups of items.
 ::
 
 ::tip

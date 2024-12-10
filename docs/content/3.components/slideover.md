@@ -93,7 +93,7 @@ slots:
 
 Use the `close` prop to customize or hide the close button (with `false` value) displayed in the Slideover's header.
 
-You can pass all the props of the [Button](/components/button) component to customize it.
+You can pass any property from the [Button](/components/button) component to customize it.
 
 ::component-code
 ---

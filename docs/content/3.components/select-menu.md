@@ -202,7 +202,7 @@ props:
 
 Use the `search-input` prop to customize or hide the search input (with `false` value).
 
-You can pass all the props of the [Input](/components/input) component to customize it.
+You can pass any property from the [Input](/components/input) component to customize it.
 
 ::component-code
 ---

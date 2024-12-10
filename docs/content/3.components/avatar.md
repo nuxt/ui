@@ -17,7 +17,11 @@ The Avatar uses the `NuxtImg` component when [`@nuxt/image`](https://github.com/
 
 ### Src
 
-Use the `src` prop to set the image URL. You can pass any property from HTML `<img>` element such as `alt`, `loading`, etc.
+Use the `src` prop to set the image URL.
+
+::note
+You can pass any property from the HTML `<img>` element such as `alt`, `loading`, etc.
+::
 
 ::component-code
 ---
