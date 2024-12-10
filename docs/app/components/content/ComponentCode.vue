@@ -237,7 +237,7 @@ const code = computed(() => {
         code += `
   <template #${key}>
     ${value}
-  </template>`
+  </template>\n`
       }
     }
     code += (Object.keys(props.slots).length > 1 ? '\n' : '') + `</${name}>`
