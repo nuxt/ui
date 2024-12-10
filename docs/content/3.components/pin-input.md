@@ -5,7 +5,7 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/PinInput.vue
-navigation.badge: New
+navigation.new: true
 ---
 
 ## Usage

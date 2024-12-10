@@ -12,18 +12,21 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
           <UPageAside>
             <template #top>
               <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] -mx-2.5">
-                <ModuleSelect />
                 <FrameworkSelect />
+                <ModuleSelect />
               </div>
             </template>
 
             <UContentNavigation :navigation="navigation" highlight>
               <template #link-title="{ link }">
-                {{ link.title }}
+                <span class="inline-flex items-center gap-0.5">
+                  {{ link.title }}
 
-                <UTooltip v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" text="Only available in nuxt/ui-pro" :content="{ side: 'right' }">
-                  <UIcon name="i-lucide-codesandbox" class="size-[14px] ml-0.5 align-middle mb-[3px] text-(--ui-text-dimmed) hover:text-(--ui-text-muted) transition-colors" />
-                </UTooltip>
+                  <sup v-if="link.new" class="text-[8px] font-medium text-(--ui-primary)">NEW</sup>
+                  <UBadge v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" color="neutral" variant="subtle" size="sm" class="ml-1">
+                    <span class="text-[8px] font-semibold">PRO</span>
+                  </UBadge>
+                </span>
               </template>
             </UContentNavigation>
           </UPageAside>
