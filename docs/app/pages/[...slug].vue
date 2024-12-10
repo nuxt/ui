@@ -122,7 +122,7 @@ const communityLinks = computed(() => [{
           :key="link.label"
           color="neutral"
           variant="outline"
-          target="_blank"
+          :target="link.to.startsWith('http') ? '_blank' : undefined"
           v-bind="link"
         >
           <template v-if="link.avatar" #leading>
