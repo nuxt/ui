@@ -22,11 +22,13 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
                 <span class="inline-flex items-center gap-0.5">
                   {{ link.title }}
 
-                  <sup v-if="link.new" class="text-[8px] font-medium text-(--ui-primary)">NEW</sup>
-                  <UBadge v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" color="neutral" variant="subtle" size="sm" class="ml-1">
-                    <span class="text-[8px] font-semibold">PRO</span>
-                  </UBadge>
+                  <sup v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
                 </span>
+              </template>
+              <template #link-trailing="{ link }">
+                <UBadge v-if="link.badge" variant="subtle" size="sm" color="neutral" class="rounded-[var(--ui-radius)] text-[9px] font-semibold uppercase">
+                  {{ link.badge }}
+                </UBadge>
               </template>
             </UContentNavigation>
           </UPageAside>

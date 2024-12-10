@@ -8,7 +8,7 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/InputNumber.vue
-navigation.new: true
+navigation.badge: New
 ---
 
 ::note

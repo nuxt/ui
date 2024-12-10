@@ -82,9 +82,16 @@ defineShortcuts({
 
       <UContentNavigation :navigation="navigation" highlight>
         <template #link-title="{ link }">
-          {{ link.title }}
+          <span class="inline-flex items-center gap-0.5">
+            {{ link.title }}
 
-          <UIcon v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" name="i-lucide-codesandbox" class="size-[14px] ml-0.5 align-middle mb-[3px] text-(--ui-text-dimmed)" />
+            <sup v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
+          </span>
+        </template>
+        <template #link-trailing="{ link }">
+          <UBadge v-if="link.badge" variant="subtle" size="sm" color="neutral" class="rounded-[var(--ui-radius)] text-[9px] font-semibold uppercase">
+            {{ link.badge }}
+          </UBadge>
         </template>
       </UContentNavigation>
     </template>
