@@ -22,7 +22,7 @@ export interface ChipProps {
   color?: ChipVariants['color']
   size?: ChipVariants['size']
   position?: ChipVariants['position']
-  /** When `true`, translate the chip at the edge for non rounded elements. */
+  /** When `true`, keep the chip inside the component for rounded elements. */
   inset?: boolean
   /** When `true`, render the chip relatively to the parent. */
   standalone?: boolean
