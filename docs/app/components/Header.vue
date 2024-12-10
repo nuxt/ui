@@ -84,7 +84,7 @@ defineShortcuts({
         <template #link-title="{ link }">
           {{ link.title }}
 
-          <UIcon v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" name="i-lucide-boxes" class="size-3 align-middle mb-[3px] text-(--ui-text-dimmed)" />
+          <UIcon v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" name="i-lucide-codesandbox" class="size-[14px] ml-0.5 align-middle mb-[3px] text-(--ui-text-dimmed)" />
         </template>
       </UContentNavigation>
     </template>

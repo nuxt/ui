@@ -21,7 +21,7 @@ export function useSharedData() {
     onSelect: () => module.value = 'ui'
   }, {
     label: 'nuxt/ui-pro',
-    icon: 'i-lucide-boxes',
+    icon: 'i-lucide-codesandbox',
     value: 'ui-pro',
     disabled: framework.value === 'vue',
     onSelect: () => module.value = 'ui-pro'
