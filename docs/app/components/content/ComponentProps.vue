@@ -26,7 +26,8 @@ const props = withDefaults(defineProps<{
     'exactQuery',
     'exactHash',
     'external',
-    'onClick'
+    'onClick',
+    'viewTransition'
   ]
 })
 
