@@ -5,6 +5,7 @@ import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
 import { CalendarDate } from '@internationalized/date'
 import * as theme from '#build/ui'
+import * as themePro from '#build/ui-pro'
 import { get, set } from '#ui/utils'
 
 interface Cast {
@@ -116,7 +117,7 @@ function setComponentProp(name: string, value: any) {
   set(componentProps, name, value)
 }
 
-const componentTheme = (theme as any)[camelName]
+const componentTheme = ((props.pro ? themePro : theme) as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
 
 function mapKeys(obj: object, parentKey = ''): any {
