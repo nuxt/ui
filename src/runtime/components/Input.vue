@@ -142,7 +142,7 @@ function onBlur(event: FocusEvent) {
 }
 
 defineExpose({
-  inputRef
+  inputRef: inputRef
 })
 
 onMounted(() => {
