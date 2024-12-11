@@ -163,15 +163,18 @@ describe('${upperName}', () => {
   }
 }
 
-const doc = ({ name, pro }) => {
+const docs = ({ name, pro, primitive }) => {
   const kebabName = kebabCase(name)
   const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
 
   return {
-    filename: `docs/content/${pro ? 'pro' : '3.components'}/${kebabName}.md`,
+    filename: `docs/content/3.components/${kebabName}.md`,
     contents: `---
-description:
-links: ${pro
+description: ''${pro
+  ? `
+module: ui-pro`
+  : ''}
+links: ${primitive
   ? ''
   : `
   - label: ${upperName}
@@ -190,19 +193,19 @@ links: ${pro
 
 ### Props
 
-:component-props
+:component-props${pro ? '{pro}' : ''}
 
 ### Slots
 
-:component-slots
+:component-slots${pro ? '{pro}' : ''}
 
 ### Emits
 
-:component-emits
+:component-emits${pro ? '{pro}' : ''}
 
 ## Theme
 
-:component-theme
+:component-theme${pro ? '{pro}' : ''}
 `
   }
 }
@@ -212,5 +215,5 @@ export default {
   component,
   theme,
   test,
-  doc
+  docs
 }
