@@ -5,6 +5,11 @@ import { get, set } from '#ui/utils'
 const props = withDefaults(defineProps<{
   name: string
   class?: any
+  /**
+   * Whether to render the component in an iframe
+   * @defaultValue false
+   */
+  iframe?: boolean | { [key: string]: any }
   props?: { [key: string]: any }
   /**
    * Whether to format the code with Prettier
@@ -112,6 +117,8 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
   }
   return acc
 }, {} as Record<string, any>) || {})
+
+const urlSearchParams = computed(() => new URLSearchParams(optionsValues.value).toString())
 </script>
 
 <template>
@@ -170,7 +177,8 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
         </div>
 
         <div class="flex justify-center p-4" :class="props.class">
-          <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
+          <iframe v-if="iframe" v-bind="typeof iframe === 'object' ? iframe : {}" :src="`/examples/${name}?${urlSearchParams}`" class="w-full" />
+          <component :is="camelName" v-else v-bind="{ ...componentProps, ...optionsValues }" />
         </div>
       </div>
     </template>
