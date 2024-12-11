@@ -74,6 +74,10 @@ const props = defineProps<{
    * A list of line numbers to highlight in the code block
    */
   highlights?: number[]
+  /**
+   * Whether to add overflow-hidden to wrapper
+   */
+  overflowHidden?: boolean
 }>()
 
 const route = useRoute()
@@ -329,7 +333,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-border-muted)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
+      <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-border-muted)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class, { 'overflow-hidden': props.overflowHidden }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">
