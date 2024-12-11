@@ -181,9 +181,16 @@ const urlSearchParams = computed(() => new URLSearchParams({ ...optionsValues.va
           </UFormField>
         </div>
 
-        <div class="flex justify-center p-4" :class="props.class">
-          <iframe v-if="iframe" v-bind="typeof iframe === 'object' ? iframe : {}" :src="`/examples/${name}?${urlSearchParams}`" class="w-full" />
-          <component :is="camelName" v-else v-bind="{ ...componentProps, ...optionsValues }" />
+        <iframe
+          v-if="iframe"
+          v-bind="typeof iframe === 'object' ? iframe : {}"
+          :src="`/examples/${name}?${urlSearchParams}`"
+          width="1024"
+          class="relative left-1/2 -translate-x-1/2"
+          :class="props.class"
+        />
+        <div v-else class="flex justify-center p-4" :class="props.class">
+          <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
         </div>
       </div>
     </template>
