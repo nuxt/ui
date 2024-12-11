@@ -47,6 +47,10 @@ const props = withDefaults(defineProps<{
    * A list of line numbers to highlight in the code block
    */
   highlights?: number[]
+  /**
+   * Whether to add overflow-hidden to wrapper
+   */
+  overflowHidden?: boolean
 }>(), {
   preview: true,
   source: true
@@ -119,13 +123,13 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
   return acc
 }, {} as Record<string, any>) || {})
 
-const urlSearchParams = computed(() => new URLSearchParams(optionsValues.value).toString())
+const urlSearchParams = computed(() => new URLSearchParams({ ...optionsValues.value, ...componentProps }).toString())
 </script>
 
 <template>
   <div class="my-5">
     <template v-if="preview">
-      <div class="border border-[var(--ui-border-muted)] relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source }]">
+      <div class="border border-[var(--ui-border-muted)] relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source, 'overflow-hidden': props.overflowHidden }]">
         <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-[var(--ui-border-muted)]">
           <slot name="options" />
 
