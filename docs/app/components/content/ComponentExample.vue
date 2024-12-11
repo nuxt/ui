@@ -54,6 +54,7 @@ const props = withDefaults(defineProps<{
 
 const slots = defineSlots<{
   options(props?: {}): any
+  code(props?: {}): any
 }>()
 
 const { $prettier } = useNuxtApp()
@@ -183,6 +184,11 @@ const urlSearchParams = computed(() => new URLSearchParams(optionsValues.value).
       </div>
     </template>
 
-    <MDCRenderer v-if="ast && props.source" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    <template v-if="props.source">
+      <div v-if="!!slots.code" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0">
+        <slot name="code" />
+      </div>
+      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    </template>
   </div>
 </template>
