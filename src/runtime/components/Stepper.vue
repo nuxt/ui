@@ -146,12 +146,12 @@ defineExpose({
 
         <div :class="ui.wrapper({ class: props.ui?.wrapper })">
           <StepperTitle :class="ui.title({ class: props.ui?.title })">
-            <slot name="title" :item="currentStep">
+            <slot name="title" :item="item">
               {{ item.title }}
             </slot>
           </StepperTitle>
           <StepperDescription :class="ui.description({ class: props.ui?.description })">
-            <slot name="description" :item="currentStep">
+            <slot name="description" :item="item">
               {{ item.description }}
             </slot>
           </StepperDescription>
