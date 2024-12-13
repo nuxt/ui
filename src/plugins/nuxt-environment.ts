@@ -1,5 +1,5 @@
 import type { UnpluginOptions } from 'unplugin'
-import { join, normalize } from 'pathe'
+import { normalize } from 'pathe'
 import { resolvePathSync } from 'mlly'
 import MagicString from 'magic-string'
 
@@ -9,7 +9,7 @@ import { runtimeDir } from '../unplugin'
  * This plugin normalises Nuxt environment (#imports) and `import.meta.client` within the Nuxt UI components.
  */
 export default function NuxtEnvironmentPlugin() {
-  const stubPath = resolvePathSync(join(runtimeDir, 'vue/stubs'), { extensions: ['.ts', '.mjs', '.js'] })
+  const stubPath = resolvePathSync('../runtime/vue/stubs', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
 
   return {
     name: 'nuxt:ui',

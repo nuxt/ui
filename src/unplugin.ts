@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 
-import { join } from 'pathe'
+import { join, normalize } from 'pathe'
 import { createUnplugin } from 'unplugin'
 import AutoImport from 'unplugin-auto-import'
 import { defu } from 'defu'
@@ -41,7 +41,7 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
   colorMode?: boolean
 }
 
-export const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
+export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.meta.url)))
 
 export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options = {}, meta) => {
   const options = defu(_options, { fonts: false, devtools: { enabled: false } }, defaultOptions)
