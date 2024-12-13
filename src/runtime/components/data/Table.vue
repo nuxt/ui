@@ -458,13 +458,6 @@ export default defineComponent({
       return expand.value?.openedRows ? expand.value.openedRows.some(openedRow => compare(openedRow, row)) : false
     }
 
-    function shouldRenderColumnInFirstPlace(index: number, key: string) {
-      if (!props.columns) {
-        return index === 0
-      }
-      return index === 0 && !props.columns.find(col => col.key === key)
-    }
-
     function toggleOpened(row: TableRow) {
       expand.value = {
         openedRows: isExpanded(row) ? expand.value.openedRows.filter(v => !compare(v, row)) : props.multipleExpand ? [...expand.value.openedRows, row] : [row],
