@@ -107,7 +107,17 @@ exports[`Badge > renders with size md correctly 1`] = `
 `;
 
 exports[`Badge > renders with size sm correctly 1`] = `
-"<span class="font-medium inline-flex items-center text-xs px-1.5 py-0.5 gap-1 rounded-[calc(var(--ui-radius))] bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><span class="truncate">Badge</span>
+"<span class="font-medium inline-flex items-center text-[10px]/3 px-1.5 py-1 gap-1 rounded-[calc(var(--ui-radius))] bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><span class="truncate">Badge</span>
+<!--v-if--></span>"
+`;
+
+exports[`Badge > renders with size xl correctly 1`] = `
+"<span class="font-medium inline-flex items-center text-base px-2.5 py-1 gap-1.5 rounded-[calc(var(--ui-radius)*1.5)] bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><span class="truncate">Badge</span>
+<!--v-if--></span>"
+`;
+
+exports[`Badge > renders with size xs correctly 1`] = `
+"<span class="font-medium inline-flex items-center text-[8px]/3 px-1 py-0.5 gap-1 rounded-[calc(var(--ui-radius))] bg-[var(--ui-primary)] text-[var(--ui-bg)]"><!--v-if--><span class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 

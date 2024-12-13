@@ -21,11 +21,17 @@ export default (options: Required<ModuleOptions>) => ({
       subtle: ''
     },
     size: {
-      sm: {
-        base: 'text-xs px-1.5 py-0.5 gap-1 rounded-[calc(var(--ui-radius))]',
-        leadingIcon: 'size-4',
+      xs: {
+        base: 'text-[8px]/3 px-1 py-0.5 gap-1 rounded-[calc(var(--ui-radius))]',
+        leadingIcon: 'size-3',
         leadingAvatarSize: '3xs',
-        trailingIcon: 'size-4'
+        trailingIcon: 'size-3'
+      },
+      sm: {
+        base: 'text-[10px]/3 px-1.5 py-1 gap-1 rounded-[calc(var(--ui-radius))]',
+        leadingIcon: 'size-3',
+        leadingAvatarSize: '3xs',
+        trailingIcon: 'size-3'
       },
       md: {
         base: 'text-xs px-2 py-1 gap-1 rounded-[calc(var(--ui-radius)*1.5)]',
@@ -38,6 +44,12 @@ export default (options: Required<ModuleOptions>) => ({
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
+      },
+      xl: {
+        base: 'text-base px-2.5 py-1 gap-1.5 rounded-[calc(var(--ui-radius)*1.5)]',
+        leadingIcon: 'size-6',
+        leadingAvatarSize: '2xs',
+        trailingIcon: 'size-6'
       }
     }
   },
