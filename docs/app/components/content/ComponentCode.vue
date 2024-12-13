@@ -144,18 +144,18 @@ const options = computed(() => {
     const propItems = get(props.items, key, [])
     const items = propItems.length
       ? propItems.map((item: any) => ({
-        value: item,
-        label: String(item)
-      }))
+          value: item,
+          label: String(item)
+        }))
       : prop?.type === 'boolean' || prop?.type === 'boolean | undefined'
         ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]
         : Object.keys(componentTheme?.variants?.[key] || {}).filter((variant) => {
-          return variant !== 'true' && variant !== 'false'
-        }).map(variant => ({
-          value: variant,
-          label: variant,
-          chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
-        }))
+            return variant !== 'true' && variant !== 'false'
+          }).map(variant => ({
+            value: variant,
+            label: variant,
+            chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
+          }))
 
     return {
       name: key,

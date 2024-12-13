@@ -125,13 +125,13 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
 
   const nestedValidatePromises = !names && opts.nested
     ? Array.from(nestedForms.value.values()).map(
-      ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
-        if (!(error instanceof FormValidationException)) {
-          throw error
-        }
-        return error
-      })
-    )
+        ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
+          if (!(error instanceof FormValidationException)) {
+            throw error
+          }
+          return error
+        })
+      )
     : []
 
   if (names) {

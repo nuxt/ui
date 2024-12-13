@@ -43,9 +43,9 @@ const code = computed(() => {
 
   const slotsTemplate = props.themeSlots
     ? genPropValue(Object.keys(props.themeSlots).filter(key => key !== 'base').reduce((acc, key) => {
-      acc[key] = genPropValue(props.themeSlots?.[key])
-      return acc
-    }, {} as Record<string, string>))
+        acc[key] = genPropValue(props.themeSlots?.[key])
+        return acc
+      }, {} as Record<string, string>))
     : undefined
 
   const extraTemplate = [
