@@ -18,7 +18,7 @@
             :class="[ui.th.base, ui.th.padding, ui.th.color, ui.th.font, ui.th.size, column.key === 'select' && ui.checkbox.padding, column.class]"
             :aria-sort="getAriaSort(column)"
           >
-            <slot v-if="!singleSelect && modelValue && (column.key === 'select' || shouldRenderColumnInFirstPlace(index, 'select'))" name="select-header" :indeterminate="indeterminate" :checked="isAllRowChecked" :change="onChange">
+            <slot v-if="!singleSelect && modelValue && column.key === 'select'" name="select-header" :indeterminate="indeterminate" :checked="isAllRowChecked" :change="onChange">
               <UCheckbox
                 :model-value="isAllRowChecked"
                 :indeterminate="indeterminate"
@@ -93,7 +93,7 @@
                 />
               </td>
               <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, column?.rowClass, row[column.key]?.class, column.key === 'select' && ui.checkbox.padding]">
-                <slot v-if="modelValue && (column.key === 'select' || shouldRenderColumnInFirstPlace(subIndex, 'select')) " name="select-data" :checked="isSelected(row)" :change="(ev: boolean) => onChangeCheckbox(ev, row)">
+                <slot v-if="modelValue && column.key === 'select' " name="select-data" :checked="isSelected(row)" :change="(ev: boolean) => onChangeCheckbox(ev, row)">
                   <UCheckbox
                     :model-value="isSelected(row)"
                     v-bind="ui.default.checkbox"
@@ -274,7 +274,30 @@ export default defineComponent({
   setup(props, { emit, attrs: $attrs }) {
     const { ui, attrs } = useUI('table', toRef(props, 'ui'), config, toRef(props, 'class'))
 
-    const columns = computed(() => props.columns ?? Object.keys(props.rows[0] ?? {}).map(key => ({ key, label: upperFirst(key), sortable: false, class: undefined, sort: defaultSort }) as TableColumn))
+    const columns = computed(() => {
+      const defaultColumns = props.columns ?? (
+        Object.keys(props.rows[0]).map(key => ({
+          key,
+          label: upperFirst(key),
+          sortable: false,
+          class: undefined,
+          sort: defaultSort
+        }))
+      ) as TableColumn[]
+
+      const hasColumnSelect = defaultColumns.find(v => v.key === 'select')
+
+      if (hasColumnSelect) {
+        return defaultColumns
+      }
+
+      return [{
+        key: 'select',
+        sortable: false,
+        class: undefined,
+        sort: defaultSort
+      }, ...defaultColumns]
+    })
 
     const sort = useVModel(props, 'sort', emit, { passive: true, defaultValue: defu({}, props.sort, { column: null, direction: 'asc' }) })
     const expand = useVModel(props, 'expand', emit, {
