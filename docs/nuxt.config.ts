@@ -49,7 +49,6 @@ export default defineNuxtConfig({
 
   content: {
     build: {
-      pathMeta: {},
       markdown: {
         highlight: {
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
