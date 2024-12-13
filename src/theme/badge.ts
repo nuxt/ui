@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    base: 'rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center',
+    base: 'font-medium inline-flex items-center',
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -22,19 +22,19 @@ export default (options: Required<ModuleOptions>) => ({
     },
     size: {
       sm: {
-        base: 'text-xs px-1.5 py-0.5 gap-1',
+        base: 'text-xs px-1.5 py-0.5 gap-1 rounded-[calc(var(--ui-radius))]',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       md: {
-        base: 'text-xs px-2 py-1 gap-1',
+        base: 'text-xs px-2 py-1 gap-1 rounded-[calc(var(--ui-radius)*1.5)]',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
       lg: {
-        base: 'text-sm px-2 py-1 gap-1.5',
+        base: 'text-sm px-2 py-1 gap-1.5 rounded-[calc(var(--ui-radius)*1.5)]',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
