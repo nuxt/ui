@@ -287,7 +287,7 @@ export default defineComponent({
 
       const hasColumnSelect = defaultColumns.find(v => v.key === 'select')
 
-      if (hasColumnSelect) {
+      if (hasColumnSelect || !props.modelValue) {
         return defaultColumns
       }
 
@@ -518,7 +518,6 @@ export default defineComponent({
       toggleOpened,
       getAriaSort,
       isExpanded,
-      shouldRenderColumnInFirstPlace,
       retriggerSlot
     }
   }
