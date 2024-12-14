@@ -19,11 +19,11 @@
 <script lang="ts">
 import { computed, defineComponent, toRef } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, nuxtLinkProps, getNuxtLinkProps } from '../../utils'
+import { getNuxtLinkProps, mergeConfig, nuxtLinkProps, twMerge } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { ButtonColor, ButtonSize, ButtonVariant, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error

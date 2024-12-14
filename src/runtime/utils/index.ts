@@ -1,14 +1,16 @@
 import { defu, createDefu } from 'defu'
 import { extendTailwindMerge } from 'tailwind-merge'
 import type { Strategy } from '../types/index'
+// @ts-ignore
+import appConfig from '#build/app.config'
 
-const customTwMerge = extendTailwindMerge<string, string>({
+export const twMerge = extendTailwindMerge<string, string>(defu({
   extend: {
     classGroups: {
       icons: [(classPart: string) => classPart.startsWith('i-')]
     }
   }
-})
+}, appConfig.ui?.tailwindMerge))
 
 const defuTwMerge = createDefu((obj, key, value, namespace) => {
   if (namespace === 'default' || namespace.startsWith('default.')) {
@@ -28,7 +30,7 @@ const defuTwMerge = createDefu((obj, key, value, namespace) => {
   }
   if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
     // @ts-ignore
-    obj[key] = customTwMerge(obj[key], value)
+    obj[key] = twMerge(obj[key], value)
     return true
   }
 })

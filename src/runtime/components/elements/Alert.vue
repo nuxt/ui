@@ -42,13 +42,13 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy, DeepPartial } from '../../types/index'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, twMerge } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { alert } from '#ui/ui.config'

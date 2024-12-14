@@ -58,9 +58,8 @@
 <script lang="ts">
 import { ref, toRef, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge } from 'tailwind-merge'
 import { useScroll, useResizeObserver, useElementSize } from '@vueuse/core'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, twMerge } from '../../utils'
 import UButton from '../elements/Button.vue'
 import type { Strategy, Button, DeepPartial } from '../../types/index'
 import { useUI } from '../../composables/useUI'
