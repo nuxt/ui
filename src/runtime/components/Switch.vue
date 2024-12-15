@@ -1,9 +1,10 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SwitchRootProps } from 'radix-vue'
+import type { SwitchRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
@@ -12,7 +13,7 @@ const switchTv = tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })
 
 type SwitchVariants = VariantProps<typeof switchTv>
 
-export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value'> {
+export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -33,38 +34,38 @@ export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | '
   uncheckedIcon?: string
   label?: string
   description?: string
-  /** The state of the switch when it is initially rendered. Use when you do not need to control its state. */
-  defaultValue?: boolean
   class?: any
   ui?: PartialString<typeof switchTv.slots>
 }
 
-export interface SwitchEmits {
-  (e: 'update:modelValue', payload: boolean): void
-  (e: 'change', payload: Event): void
+export type SwitchEmits = {
+  change: [payload: Event]
 }
 
 export interface SwitchSlots {
   label(props: { label?: string }): any
   description(props: { description?: string }): any
 }
+
+extendDevtoolsMeta({ defaultProps: { label: 'Switch me!' } })
 </script>
 
 <script setup lang="ts">
 import { computed, useId } from 'vue'
-import { SwitchRoot, SwitchThumb, useForwardProps, Label } from 'radix-vue'
+import { Primitive, SwitchRoot, SwitchThumb, useForwardProps, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import UIcon from './Icon.vue'
 
 const props = defineProps<SwitchProps>()
 const slots = defineSlots<SwitchSlots>()
 const emits = defineEmits<SwitchEmits>()
 
-const modelValue = defineModel<boolean | undefined>({ default: undefined })
+const modelValue = defineModel<boolean>({ default: undefined })
 
 const appConfig = useAppConfig()
-const rootProps = useForwardProps(reactivePick(props, 'as', 'required', 'value'))
+const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<SwitchProps>(props)
 const id = _id.value ?? useId()
@@ -87,17 +88,16 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.container({ class: props.ui?.container })">
       <SwitchRoot
         :id="id"
-        v-model:checked="modelValue"
-        :default-checked="defaultValue"
         v-bind="rootProps"
+        v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"
         :class="ui.base({ class: props.ui?.base })"
-        @update:checked="onUpdate"
+        @update:model-value="onUpdate"
       >
         <SwitchThumb :class="ui.thumb({ class: props.ui?.thumb })">
           <UIcon v-if="loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.icon({ class: props.ui?.icon, checked: true, unchecked: true })" />
@@ -120,5 +120,5 @@ function onUpdate(value: any) {
         </slot>
       </p>
     </div>
-  </div>
+  </Primitive>
 </template>

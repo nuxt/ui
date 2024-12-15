@@ -363,4 +363,105 @@ describe('Form', () => {
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(0)
     })
   })
+
+  describe('apply transform', async () => {
+    it.each([
+      [
+        'zod',
+        z.object({
+          value: z.string().transform(value => value.toUpperCase())
+        }),
+        { value: 'test' },
+        { value: 'TEST' }
+      ],
+      [
+        'yup',
+        yup.object({
+          value: yup.string().transform(value => value.toUpperCase())
+        }),
+        { value: 'test' },
+        { value: 'TEST' }
+      ],
+      [
+        'joi',
+        Joi.object({
+          value: Joi.string().custom(value => value.toUpperCase())
+        }),
+        { value: 'test' },
+        { value: 'TEST' }
+      ],
+      [
+        'valibot',
+        valibot.object({
+          value: valibot.pipe(valibot.string(), valibot.transform(v => v.toUpperCase()))
+        }),
+        { value: 'test' },
+        { value: 'TEST' }
+      ]
+    ])(
+      '%s schema transform works',
+      async (_name: string, schema: any, input: any, expected: any) => {
+        const wrapper = await mountSuspended({
+          components: {
+            UFormField,
+            UForm,
+            UInput
+          },
+          setup() {
+            const form = ref()
+            const state = reactive({})
+            const onSubmit = vi.fn()
+            return { state, schema, form, onSubmit }
+          },
+          template: `
+          <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit">
+            <UFormField name="value">
+              <UInput id="input" v-model="state.value" />
+            </UFormField>
+          </UForm>
+        `
+        })
+        const form = wrapper.setupState.form
+
+        const inputEl = wrapper.find('#input')
+        inputEl.setValue(input.value)
+
+        form.value.submit()
+        await flushPromises()
+
+        expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+          data: expected
+        }))
+      }
+    )
+  })
+  test('form field errorPattern works', async () => {
+    const wrapper = await mountSuspended({
+      components: {
+        UFormField,
+        UForm,
+        UInput
+      },
+      setup() {
+        const form = ref()
+        const state = reactive({})
+        function validate() {
+          return [{ name: 'email.1', message: 'Error message' }]
+        }
+        return { state, validate, form }
+      },
+      template: `
+          <UForm ref="form" :state="state" :validate="validate">
+            <UFormField id="emailField" :error-pattern="/(email)\\..*/">
+              <UInput id="emailInput" v-model="state.email" />
+            </UFormField>
+          </UForm>
+        `
+    })
+
+    const form = wrapper.setupState.form
+    form.value.submit()
+    await flushPromises()
+    expect(wrapper.html()).toContain('Error message')
+  })
 })

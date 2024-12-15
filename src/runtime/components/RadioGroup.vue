@@ -1,10 +1,10 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { RadioGroupRootProps, RadioGroupRootEmits } from 'radix-vue'
+import type { RadioGroupRootProps, RadioGroupRootEmits, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
-import type { AcceptableValue } from '../types/utils'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
 
@@ -57,18 +57,20 @@ export type RadioGroupEmits = RadioGroupRootEmits & {
   change: [payload: Event]
 }
 
-type SlotProps<T> = (props: { item: T, modelValue?: string }) => any
+type SlotProps<T> = (props: { item: T, modelValue?: AcceptableValue }) => any
 
 export interface RadioGroupSlots<T> {
   legend(props?: {}): any
   label: SlotProps<T>
   description: SlotProps<T>
 }
+
+extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends RadioGroupItem | AcceptableValue">
 import { computed, useId } from 'vue'
-import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'radix-vue'
+import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'

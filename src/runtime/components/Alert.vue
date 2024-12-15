@@ -3,6 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { alert: Partial<typeof theme> } }
@@ -27,12 +28,13 @@ export interface AlertProps {
    * Display a list of actions:
    * - under the title and description if multiline
    * - next to the close button if not multiline
+   * `{ size: 'xs' }`{lang="ts-type"}
    */
   actions?: ButtonProps[]
   /**
    * Display a close button to dismiss the alert.
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
-   * @emits `close`
+   * @emits 'update:open'
    * @defaultValue false
    */
   close?: ButtonProps | boolean
@@ -56,19 +58,24 @@ export interface AlertSlots {
   actions(props?: {}): any
   close(props: { ui: any }): any
 }
+
+extendDevtoolsMeta<AlertProps>({ defaultProps: { title: 'Heads up!' } })
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import UButton from './Button.vue'
 
 const props = defineProps<AlertProps>()
 const emits = defineEmits<AlertEmits>()
 const slots = defineSlots<AlertSlots>()
 
+const { t } = useLocale()
 const appConfig = useAppConfig()
 
 const multiline = computed(() => !!props.title && !!props.description)
@@ -119,7 +126,7 @@ const ui = computed(() => alert({
           size="md"
           color="neutral"
           variant="link"
-          aria-label="Close"
+          :aria-label="t('alert.close')"
           v-bind="typeof close === 'object' ? close : undefined"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"

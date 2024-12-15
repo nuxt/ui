@@ -64,7 +64,7 @@ It requires two props:
   ::
 ::
 
-Errors are reported directly to the [FormField](/components/form-field) component based on the `name` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
+Errors are reported directly to the [FormField](/components/form-field) component based on the `name` or `error-pattern` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
 
 Nested validation rules are handled using dot notation. For example, a rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
 
@@ -117,7 +117,7 @@ options:
 ::
 
 ::tip
-You can use the [useFormField](/composables/use-form-field) composable to implement this inside your own components.
+You can use the [`useFormField`](/composables/use-form-field) composable to implement this inside your own components.
 ::
 
 ### Error Event

@@ -2,8 +2,8 @@
 description: A stacked set of collapsible panels.
 links:
   - label: Accordion
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/accordion.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/accordion
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Accordion.vue
@@ -35,13 +35,13 @@ props:
   class: 'px-4'
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
 ::
@@ -64,13 +64,13 @@ props:
   type: 'multiple'
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
 ::
@@ -93,15 +93,47 @@ props:
   collapsible: false
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
+::
+
+### Unmount
+
+Use the `unmount-on-hide` prop to prevent the content from being unmounted when the accordion is collapsed. Defaults to `true`.
+
+::component-code
+---
+ignore:
+  - items
+external:
+  - items
+hide:
+  - class
+props:
+  class: 'px-4'
+  unmountOnHide: false
+  items:
+    - label: 'Icons'
+      icon: 'i-lucide-smile'
+      content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+    - label: 'Colors'
+      icon: 'i-lucide-swatch-book'
+      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+    - label: 'Components'
+      icon: 'i-lucide-box'
+      content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+---
+::
+
+::note
+You can inspect the DOM to see each item's content being rendered.
 ::
 
 ### Disabled
@@ -123,21 +155,21 @@ props:
   disabled: true
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
       disabled: true
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
 ::
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) of each item. Defaults to `i-lucide-chevron-down`.
 
 ::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
@@ -153,23 +185,31 @@ hide:
   - class
 props:
   class: 'px-4'
-  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
+  trailingIcon: 'i-lucide-arrow-down'
   items:
     - label: 'Icons'
-      icon: 'i-heroicons-face-smile'
+      icon: 'i-lucide-smile'
       content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-      trailingIcon: 'i-heroicons-plus-20-solid'
+      trailingIcon: 'i-lucide-plus'
     - label: 'Colors'
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
       content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
+:::
 ::
 
 ## Examples

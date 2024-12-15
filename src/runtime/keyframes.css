@@ -1,6 +1,6 @@
 @keyframes accordion-up {
   from {
-    height: var(--radix-accordion-content-height);
+    height: var(--reka-accordion-content-height);
   }
 
   to {
@@ -14,13 +14,13 @@
   }
 
   to {
-    height: var(--radix-accordion-content-height);
+    height: var(--reka-accordion-content-height);
   }
 }
 
 @keyframes collapsible-up {
   from {
-    height: var(--radix-collapsible-content-height);
+    height: var(--reka-collapsible-content-height);
   }
 
   to {
@@ -34,7 +34,7 @@
   }
 
   to {
-    height: var(--radix-collapsible-content-height);
+    height: var(--reka-collapsible-content-height);
   }
 }
 
@@ -362,6 +362,24 @@
   }
 }
 
+
+@keyframes carousel-rtl {
+
+  0%,
+  100% {
+    width: 50%
+  }
+
+  0% {
+    transform: translateX(100%)
+  }
+
+  100% {
+    transform: translateX(-200%)
+  }
+}
+
+
 @keyframes carousel-vertical {
 
   0%,
@@ -391,6 +409,22 @@
 
   100% {
     transform: translateX(-100%)
+  }
+}
+
+@keyframes carousel-inverse-rtl {
+
+  0%,
+  100% {
+    width: 50%
+  }
+
+  0% {
+    transform: translateX(-200%)
+  }
+
+  100% {
+    transform: translateX(100%)
   }
 }
 

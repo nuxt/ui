@@ -1,9 +1,10 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ToastProviderProps } from 'radix-vue'
+import type { ToastProviderProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toaster'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { toaster: Partial<typeof theme> } }
 
@@ -18,6 +19,11 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
    * @defaultValue true
    */
   expand?: boolean
+  /**
+   * Render the toaster in a portal.
+   * @defaultValue true
+   */
+  portal?: boolean
   class?: any
   ui?: Partial<typeof toaster.slots>
 }
@@ -25,11 +31,17 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
 export interface ToasterSlots {
   default(props?: {}): any
 }
+
+export default {
+  name: 'Toaster'
+}
+
+extendDevtoolsMeta({ example: 'ToasterExample' })
 </script>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { ToastProvider, ToastViewport, useForwardProps } from 'radix-vue'
+import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useToast } from '../composables/useToast'
 import { omit } from '../utils'
@@ -37,6 +49,7 @@ import UToast from './Toast.vue'
 
 const props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,
+  portal: true,
   duration: 5000
 })
 defineSlots<ToasterSlots>()
@@ -113,18 +126,20 @@ function getOffset(index: number) {
       @click="toast.click && toast.click(toast)"
     />
 
-    <ToastViewport
-      :data-expanded="expanded"
-      :class="ui.viewport({ class: [props.class, props.ui?.viewport] })"
-      :style="{
-        '--scale-factor': '0.05',
-        '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',
-        '--gap': position?.startsWith('top') ? '16px' : '-16px',
-        '--front-height': `${frontHeight}px`,
-        '--height': `${height}px`
-      }"
-      @mouseenter="hovered = true"
-      @mouseleave="hovered = false"
-    />
+    <ToastPortal :disabled="!portal">
+      <ToastViewport
+        :data-expanded="expanded"
+        :class="ui.viewport({ class: [props.class, props.ui?.viewport] })"
+        :style="{
+          '--scale-factor': '0.05',
+          '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',
+          '--gap': position?.startsWith('top') ? '16px' : '-16px',
+          '--front-height': `${frontHeight}px`,
+          '--height': `${height}px`
+        }"
+        @mouseenter="hovered = true"
+        @mouseleave="hovered = false"
+      />
+    </ToastPortal>
   </ToastProvider>
 </template>

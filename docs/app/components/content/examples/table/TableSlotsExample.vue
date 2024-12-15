@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, DropdownMenuItem } from '@nuxt/ui'
 
-type User = {
+interface User {
   id: number
   name: string
   position: string
   email: string
   role: string
 }
+
+const toast = useToast()
 
 const data = ref<User[]>([{
   id: 1,
@@ -59,7 +61,34 @@ const columns: TableColumn<User>[] = [{
 }, {
   accessorKey: 'role',
   header: 'Role'
+}, {
+  id: 'action'
 }]
+
+function getDropdownActions(user: User): DropdownMenuItem[][] {
+  return [
+    [{
+      label: 'Copy user Id',
+      icon: 'i-lucide-copy',
+      onSelect: () => {
+        navigator.clipboard.writeText(user.id.toString())
+        toast.add({
+          title: 'User ID copied to clipboard!',
+          color: 'success',
+          icon: 'i-lucide-circle-check'
+        })
+      }
+    }],
+    [{
+      label: 'Edit',
+      icon: 'i-lucide-edit'
+    }, {
+      label: 'Delete',
+      icon: 'i-lucide-trash',
+      color: 'error'
+    }]
+  ]
+}
 </script>
 
 <template>
@@ -76,6 +105,11 @@ const columns: TableColumn<User>[] = [{
           </p>
         </div>
       </div>
+    </template>
+    <template #action-cell="{ row }">
+      <UDropdownMenu :items="getDropdownActions(row.original)">
+        <UButton icon="i-lucide-ellipsis-vertical" color="neutral" variant="ghost" />
+      </UDropdownMenu>
     </template>
   </UTable>
 </template>

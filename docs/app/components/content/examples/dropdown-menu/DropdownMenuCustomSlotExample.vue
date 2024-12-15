@@ -1,23 +1,23 @@
 <script setup lang="ts">
 const items = [{
   label: 'Profile',
-  icon: 'i-heroicons-user',
+  icon: 'i-lucide-user',
   slot: 'profile'
 }, {
   label: 'Billing',
-  icon: 'i-heroicons-credit-card'
+  icon: 'i-lucide-credit-card'
 }, {
   label: 'Settings',
-  icon: 'i-heroicons-cog'
+  icon: 'i-lucide-cog'
 }]
 </script>
 
 <template>
-  <UDropdownMenu :items="items" class="w-48">
-    <UButton label="Open" color="neutral" variant="outline" icon="i-heroicons-bars-3" />
+  <UDropdownMenu :items="items" :ui="{ content: 'w-48' }">
+    <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
     <template #profile-trailing>
-      <UIcon name="i-heroicons-check-badge" class="shrink-0 size-5 text-[var(--ui-primary)]" />
+      <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-[var(--ui-primary)]" />
     </template>
   </UDropdownMenu>
 </template>

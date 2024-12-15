@@ -1,3 +1,6 @@
+.component-meta/
+component-meta.*
+
 # Nuxt dev/build outputs
 .output
 .data
@@ -25,3 +28,5 @@ logs
 
 playground-vue/auto-imports.d.ts
 playground-vue/components.d.ts
+playground-vue/tsconfig.app.tsbuildinfo
+playground-vue/tsconfig.node.tsbuildinfo

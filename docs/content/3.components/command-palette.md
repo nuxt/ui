@@ -1,12 +1,13 @@
 ---
 title: CommandPalette
-description: A command palette with full-text search powered by [Fuse.js](https://fusejs.io/) for efficient fuzzy matching.
-seo:
-  description: A command palette with full-text search powered by Fuse.js for efficient fuzzy matching.
+description: A command palette with full-text search powered by Fuse.js for efficient fuzzy matching.
 links:
+  - label: Fuse.js
+    to: https://fusejs.io/
+    target: _blank
   - label: Combobox
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/combobox.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/CommandPalette.vue
@@ -28,7 +29,7 @@ The CommandPalette component filters groups and ranks matching commands by relev
 - `label?: string`{lang="ts-type"}
 - `slot?: string`{lang="ts-type"}
 - `items?: CommandPaletteItem[]`{lang="ts-type"}
-- [`filter?: boolean`{lang="ts-type"}](#without-internal-search)
+- [`ignoreFilter?: boolean`{lang="ts-type"}](#with-ignore-filter)
 - [`postFilter?: (searchTerm: string, items: T[]) => T[]`{lang="ts-type"}](#with-post-filtered-items)
 - `highlightedIcon?: string`{lang="ts-type"}
 
@@ -41,6 +42,7 @@ Each group takes some `items` as an array of objects with the following properti
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `chip?: ChipProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
+- `active?: boolean`{lang="ts-type"}
 - `loading?: boolean`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
@@ -177,18 +179,18 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
 ### Icon
 
-Use the `icon` prop to customize the input [Icon](/components/icon). Defaults to `i-heroicons-magnifying-glass-20-solid`.
+Use the `icon` prop to customize the input [Icon](/components/icon). Defaults to `i-lucide-search`.
 
 ::component-code
 ---
@@ -200,22 +202,30 @@ external:
   - groups
 class: '!p-0'
 props:
-  icon: 'i-heroicons-cube'
+  icon: 'i-lucide-box'
   groups:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.search` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.search` key.
+:::
 ::
 
 ### Loading
@@ -237,18 +247,18 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 
 ::component-code
 ---
@@ -261,22 +271,30 @@ external:
 class: '!p-0'
 props:
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   groups:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
 ::
 
 ### Disabled
@@ -298,11 +316,11 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
@@ -331,16 +349,16 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
-You can also pass all the props of the [Button](/components/button) component to customize it.
+You can pass any property from the [Button](/components/button) component to customize it.
 
 ::component-code
 ---
@@ -363,18 +381,18 @@ props:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
+Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-lucide-x`.
 
 ::component-code
 ---
@@ -388,22 +406,30 @@ external:
 class: '!p-0'
 props:
   close: true
-  closeIcon: 'i-heroicons-arrow-right'
+  closeIcon: 'i-lucide-arrow-right'
   groups:
     - id: 'apps'
       items:
         - label: 'Calendar'
-          icon: 'i-heroicons-calendar'
+          icon: 'i-lucide-calendar'
         - label: 'Music'
-          icon: 'i-heroicons-musical-note'
+          icon: 'i-lucide-music'
         - label: 'Maps'
-          icon: 'i-heroicons-map'
+          icon: 'i-lucide-map'
   class: 'flex-1'
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
 ::
 
 ## Examples
@@ -452,20 +478,20 @@ class: '!p-0'
 ---
 ::
 
-### Without internal search
+### With ignore filter
 
-You can set the `filter` field to `false` on a group to disable the internal search and use your own search logic.
+You can set the `ignoreFilter` field to `true` on a group to disable the internal search and use your own search logic.
 
 ::component-example
 ---
 collapse: true
-name: 'command-palette-filter-example'
+name: 'command-palette-ignore-filter-example'
 class: '!p-0'
 ---
 ::
 
 ::note
-This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
 ::
 
 ### With post-filtered items
@@ -559,7 +585,7 @@ name: 'command-palette-open-example'
 ::
 
 ::note
-This can be useful when using the CommandPalette inside a [Modal](/components/modal) for example.
+This can be useful when using the CommandPalette inside a [`Modal`](/components/modal) for example.
 ::
 
 ### With custom slot

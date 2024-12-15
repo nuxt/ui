@@ -45,7 +45,7 @@ ignore:
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  icon: 'i-heroicons-command-line'
+  icon: 'i-lucide-terminal'
 ---
 ::
 
@@ -81,7 +81,7 @@ props:
   color: neutral
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  icon: 'i-heroicons-command-line'
+  icon: 'i-lucide-terminal'
 ---
 ::
 
@@ -101,7 +101,7 @@ props:
   variant: subtle
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  icon: 'i-heroicons-command-line'
+  icon: 'i-lucide-terminal'
 ---
 ::
 
@@ -131,7 +131,7 @@ props:
 ---
 ::
 
-You can also pass all the props of the [Button](/components/button) component to customize it.
+You can pass any property from the [Button](/components/button) component to customize it.
 
 ::component-code
 ---
@@ -157,7 +157,7 @@ props:
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
+Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-lucide-x`.
 
 ::component-code
 ---
@@ -174,12 +174,20 @@ props:
   color: neutral
   variant: outline
   close: true
-  closeIcon: 'i-heroicons-arrow-right'
+  closeIcon: 'i-lucide-arrow-right'
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
 ::
 
 ### Actions
@@ -245,7 +253,7 @@ ignore:
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  icon: i-heroicons-rocket-launch
+  icon: i-lucide-rocket
   ui:
     icon: 'size-11'
 ---

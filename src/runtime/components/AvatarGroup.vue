@@ -3,6 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar-group'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { avatarGroup: Partial<typeof theme> } }
 
@@ -28,11 +29,13 @@ export interface AvatarGroupProps {
 export interface AvatarGroupSlots {
   default(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'AvatarGroupExample' })
 </script>
 
 <script setup lang="ts">
 import { computed, provide } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
 import UAvatar from './Avatar.vue'
 

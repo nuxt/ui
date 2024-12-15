@@ -1,41 +1,74 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
-import type { NavItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
 const route = useRoute()
+const { framework, module } = useSharedData()
 
 definePageMeta({
   layout: 'docs'
 })
 
-const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+const { data: page } = await useAsyncData(route.path, () => queryCollection('content').path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryContent()
-    .where({
-      _extension: 'md',
-      navigation: {
-        $ne: false
+  return queryCollectionItemSurroundings('content', route.path, {
+    fields: ['description']
+  }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
+    .orWhere(group => group.where('module', '=', module.value).where('module', 'IS NULL'))
+}, {
+  watch: [framework, module]
+})
+
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+
+const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)).map(({ icon, ...link }) => link))
+
+if (!import.meta.prerender) {
+  // Redirect to the correct framework version if the page is not the current framework
+  watch(framework, () => {
+    if (page.value?.framework && page.value?.framework !== framework.value) {
+      if (route.path.endsWith(`/${page.value?.framework}`)) {
+        navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
+      } else {
+        navigateTo(`/getting-started`)
       }
-    })
-    .only(['title', 'description', '_path'])
-    .findSurround(withoutTrailingSlash(route.path))
-}, { default: () => [] })
+    }
+  })
 
-const navigation = inject<Ref<NavItem[]>>('navigation')
+  // Redirect to the correct module version if the page is not the current module
+  watch(module, () => {
+    if (page.value?.module && page.value?.module !== module.value) {
+      if (page.value?.module === 'ui-pro' && route.path.includes('/pro')) {
+        navigateTo(`${route.path.replace('/pro', '')}`)
+      } else if (page.value?.module === 'ui' && !route.path.includes('/pro')) {
+        navigateTo(`${route.path.replace(`/${framework.value}`, '')}/pro/${framework.value}`)
+      } else {
+        navigateTo(`/getting-started`)
+      }
+    }
+  })
+}
 
-const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)))
+// Update the framework/module if the page has different ones
+watch(page, () => {
+  if (page.value?.framework && page.value?.framework !== framework.value) {
+    framework.value = page.value?.framework as string
+  }
+  if (page.value?.module && page.value?.module !== module.value) {
+    module.value = page.value?.module as string
+  }
+}, { immediate: true })
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt UI v3',
-  title: page.value.navigation?.title || page.value.title,
-  ogTitle: `${page.value.navigation?.title || page.value.title} - Nuxt UI v3`,
-  description: page.value.seo?.description || page.value.description,
-  ogDescription: page.value.seo?.description || page.value.description
+  titleTemplate: `%s - Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
+  title: page.value.navigation?.title ? page.value.navigation.title : page.value.title,
+  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} - Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
+  description: page.value.description,
+  ogDescription: page.value.description
 })
 
 defineOgImageComponent('Docs', {
@@ -43,19 +76,15 @@ defineOgImageComponent('Docs', {
 })
 
 const communityLinks = computed(() => [{
-  icon: 'i-heroicons-pencil-square',
+  icon: 'i-lucide-file-pen',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?._file}`,
+  to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
-  icon: 'i-heroicons-star',
+  icon: 'i-lucide-star',
   label: 'Star on GitHub',
   to: 'https://github.com/nuxt/ui',
   target: '_blank'
-}, {
-  label: 'Roadmap',
-  icon: 'i-heroicons-map',
-  to: '/roadmap'
 }])
 
 // const resourcesLinks = [{
@@ -87,27 +116,13 @@ const communityLinks = computed(() => [{
         <MDC v-if="page.description" :value="page.description" unwrap="p" />
       </template>
 
-      <template #links>
-        <UDropdownMenu v-if="page.select" v-slot="{ open }" :items="page.select.items" :content="{ align: 'end' }">
-          <UButton
-            color="neutral"
-            variant="subtle"
-            v-bind="page.select.items.find((item: any) => item.to === route.path)"
-            block
-            trailing-icon="i-heroicons-chevron-down-20-solid"
-            :class="[open && 'bg-[var(--ui-bg-accented)]/75']"
-            :ui="{
-              trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : '']
-            }"
-            class="w-[128px]"
-          />
-        </UDropdownMenu>
-
+      <template v-if="page.links?.length" #links>
         <UButton
           v-for="link in page.links"
           :key="link.label"
           color="neutral"
           variant="outline"
+          :target="link.to.startsWith('http') ? '_blank' : undefined"
           v-bind="link"
         >
           <template v-if="link.avatar" #leading>

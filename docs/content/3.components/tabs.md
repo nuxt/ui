@@ -2,8 +2,8 @@
 description: A set of tab panels that are displayed one at a time.
 links:
   - label: Tabs
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/tabs.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/tabs
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Tabs.vue
@@ -33,10 +33,10 @@ external:
 props:
   items:
     - label: Account
-      icon: 'i-heroicons-user'
+      icon: 'i-lucide-user'
       content: 'This is the account content.'
     - label: Password
-      icon: 'i-heroicons-lock-closed'
+      icon: 'i-lucide-lock'
       content: 'This is the password content.'
   class: 'w-full'
 ---
@@ -44,9 +44,7 @@ props:
 
 ### Content
 
-Use the `content` prop to control how the Tabs are rendered.
-
-You can set it to `false` to prevent the Tabs from rendering any content and act as a toggle.
+Set the `content` prop to `false` to turn the Tabs into a toggle-only control without displaying any content. Defaults to `true`.
 
 ::component-code
 ---
@@ -60,42 +58,42 @@ props:
   content: false
   items:
     - label: Account
-      icon: 'i-heroicons-user'
+      icon: 'i-lucide-user'
       content: 'This is the account content.'
     - label: Password
-      icon: 'i-heroicons-lock-closed'
+      icon: 'i-lucide-lock'
       content: 'This is the password content.'
   class: 'w-full'
 ---
 ::
 
-You can also choose to only render the content of the active tab by setting `content.forceMount` to `false`.
+### Unmount
+
+Use the `unmount-on-hide` prop to prevent the content from being unmounted when the Tabs is collapsed. Defaults to `true`.
 
 ::component-code
 ---
-prettier: true
 ignore:
-  - content.forceMount
+  - content
   - items
   - class
 external:
   - items
 props:
-  content:
-    forceMount: false
+  unmountOnHide: false
   items:
     - label: Account
-      icon: 'i-heroicons-user'
+      icon: 'i-lucide-user'
       content: 'This is the account content.'
     - label: Password
-      icon: 'i-heroicons-lock-closed'
+      icon: 'i-lucide-lock'
       content: 'This is the password content.'
   class: 'w-full'
 ---
 ::
 
 ::note
-You can inspect the DOM to see that the content of the inactive tab is not rendered.
+You can inspect the DOM to see each item's content being rendered.
 ::
 
 ### Color

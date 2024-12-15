@@ -39,14 +39,13 @@ describe('Table', () => {
   const columns: TableColumn<typeof data[number]>[] = [{
     id: 'select',
     header: ({ table }) => h(UCheckbox, {
-      'modelValue': table.getIsAllPageRowsSelected(),
-      'indeterminate': table.getIsSomePageRowsSelected(),
-      'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value),
+      'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+      'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
       'ariaLabel': 'Select all'
     }),
     cell: ({ row }) => h(UCheckbox, {
       'modelValue': row.getIsSelected(),
-      'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value),
+      'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
       'ariaLabel': 'Select row'
     }),
     enableSorting: false,
@@ -88,7 +87,7 @@ describe('Table', () => {
         color: 'neutral',
         variant: 'ghost',
         label: 'Email',
-        icon: isSorted ? (isSorted === 'asc' ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid') : 'i-heroicons-arrows-up-down-20-solid',
+        icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
         class: '-mx-2.5',
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
       })
@@ -132,7 +131,7 @@ describe('Table', () => {
         },
         items
       }, () => h(UButton, {
-        icon: 'i-heroicons-ellipsis-vertical-20-solid',
+        icon: 'i-lucide-ellipsis-vertical',
         color: 'neutral',
         variant: 'ghost',
         class: 'ml-auto'
@@ -145,19 +144,22 @@ describe('Table', () => {
   it.each([
     // Props
     ['with data', { props }],
-    ['without results', {}],
+    ['without data', {}],
+    ['with caption', { props: { ...props, caption: 'Table caption' } }],
     ['with columns', { props: { ...props, columns } }],
     ['with sticky', { props: { ...props, sticky: true } }],
     ['with loading', { props: { ...props, loading: true } }],
     ...loadingColors.map((loadingColor: string) => [`with loading color ${loadingColor}`, { props: { ...props, loading: true, loadingColor } }]),
     ...loadingAnimations.map((loadingAnimation: string) => [`with loading animation ${loadingAnimation}`, { props: { ...props, loading: true, loadingAnimation } }]),
+    ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }],
     // Slots
     ['with header slot', { props, slots: { 'id-header': () => 'ID Header slot' } }],
     ['with cell slot', { props, slots: { 'id-cell': () => 'ID Cell slot' } }],
     ['with expanded slot', { props, slots: { expanded: () => 'Expanded slot' } }],
-    ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }]
+    ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],
+    ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<typeof data[number]>, slots?: Partial<TableSlots<typeof data[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()

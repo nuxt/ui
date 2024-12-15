@@ -2,9 +2,12 @@
 import { upperFirst, camelCase } from 'scule'
 import type { ComponentMeta } from 'vue-component-meta'
 import * as theme from '#build/ui'
+import * as themePro from '#build/ui-pro'
 
 const props = withDefaults(defineProps<{
+  name?: string
   ignore?: string[]
+  pro?: boolean
 }>(), {
   ignore: () => [
     'activeClass',
@@ -23,17 +26,18 @@ const props = withDefaults(defineProps<{
     'exactQuery',
     'exactHash',
     'external',
-    'onClick'
+    'onClick',
+    'viewTransition'
   ]
 })
 
 const route = useRoute()
 
-const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
-const name = `U${upperFirst(camelName)}`
+const camelName = camelCase(props.name ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
+const componentName = `U${upperFirst(camelName)}`
 
-const componentTheme = (theme as any)[camelName]
-const meta = await fetchComponentMeta(name as any)
+const componentTheme = ((props.pro ? themePro : theme) as any)[camelName]
+const meta = await fetchComponentMeta(componentName as any)
 
 const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
   if (!meta?.meta?.props?.length) {
@@ -43,7 +47,17 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
   return meta.meta.props.filter((prop) => {
     return !props.ignore?.includes(prop.name)
   }).map((prop) => {
-    prop.default = prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name]
+    if (prop.default) {
+      prop.default = prop.default.replace(' as never', '').replace(/^"(.*)"$/, '\'$1\'')
+    } else {
+      const tag = prop.tags?.find(tag => tag.name === 'defaultValue')?.text
+      if (tag) {
+        prop.default = tag
+      } else if (componentTheme?.defaultVariants?.[prop.name]) {
+        prop.default = typeof componentTheme?.defaultVariants?.[prop.name] === 'string' ? `'${componentTheme?.defaultVariants?.[prop.name]}'` : componentTheme?.defaultVariants?.[prop.name]
+      }
+    }
+
     // @ts-expect-error - Type is not correct
     prop.type = !prop.type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema)?.length ? Object.values(prop.schema.schema).map(schema => schema?.type ? schema.type : schema).join(' | ') : prop.type
     return prop
@@ -87,9 +101,9 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
     <ProseTbody>
       <ProseTr v-for="prop in metaProps" :key="prop.name">
         <ProseTd>
-          <ProseCodeInline>
+          <ProseCode>
             {{ prop.name }}
-          </ProseCodeInline>
+          </ProseCode>
         </ProseTd>
         <ProseTd>
           <HighlightInlineType v-if="prop.default" :type="prop.default" />

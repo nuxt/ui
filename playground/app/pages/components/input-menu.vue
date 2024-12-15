@@ -15,19 +15,19 @@ const selectedItems = ref([fruits[0]!, vegetables[0]!])
 
 const statuses = [{
   label: 'Backlog',
-  icon: 'i-heroicons-question-mark-circle'
+  icon: 'i-lucide-circle-help'
 }, {
   label: 'Todo',
-  icon: 'i-heroicons-plus-circle'
+  icon: 'i-lucide-circle-plus'
 }, {
   label: 'In Progress',
-  icon: 'i-heroicons-arrow-up-circle'
+  icon: 'i-lucide-circle-arrow-up'
 }, {
   label: 'Done',
-  icon: 'i-heroicons-check-circle'
+  icon: 'i-lucide-circle-check'
 }, {
   label: 'Canceled',
-  icon: 'i-heroicons-x-circle'
+  icon: 'i-lucide-circle-x'
 }]
 
 const searchTerm = ref('')
@@ -83,7 +83,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     <div class="flex flex-col gap-4 w-48">
       <UInputMenu :items="items" placeholder="Disabled" disabled />
       <UInputMenu :items="items" placeholder="Required" required />
-      <UInputMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple color="neutral" />
+      <UInputMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
       <UInputMenu :items="items" loading placeholder="Search..." />
     </div>
     <div class="flex items-center gap-4">
@@ -102,8 +102,8 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :key="size"
         :items="statuses"
         placeholder="Search status..."
-        icon="i-heroicons-magnifying-glass"
-        trailing-icon="i-heroicons-chevron-up-down-20-solid"
+        icon="i-lucide-search"
+        trailing-icon="i-lucide-chevrons-up-down"
         :size="size"
         class="w-48"
       >
@@ -119,8 +119,8 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         v-model:search-term="searchTerm"
         :items="users || []"
         :loading="status === 'pending'"
-        :filter="false"
-        icon="i-heroicons-user"
+        ignore-filter
+        icon="i-lucide-user"
         placeholder="Search users..."
         :size="size"
         class="w-48"
@@ -137,7 +137,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :items="items"
         :model-value="[fruits[0]!]"
         multiple
-        icon="i-heroicons-magnifying-glass"
+        icon="i-lucide-search"
         placeholder="Search..."
         :size="size"
         class="w-48"

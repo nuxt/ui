@@ -15,13 +15,13 @@ const items = computed(() => [
     label: 'Appearance',
     children: [{
       label: 'System',
-      icon: 'i-heroicons-computer-desktop'
+      icon: 'i-lucide-monitor'
     }, {
       label: 'Light',
-      icon: 'i-heroicons-sun'
+      icon: 'i-lucide-sun'
     }, {
       label: 'Dark',
-      icon: 'i-heroicons-moon'
+      icon: 'i-lucide-moon'
     }]
   }],
   [{
@@ -86,6 +86,12 @@ const items = computed(() => [
   }]
 ])
 
+const itemsWithColor = computed(() => Object.keys(theme.variants.color).map(color => ({
+  color: (color as keyof typeof theme.variants.color),
+  icon: 'i-lucide-swatch-book',
+  label: color
+})))
+
 const sizes = Object.keys(theme.variants.size)
 
 const size = ref('md' as const)
@@ -99,9 +105,15 @@ defineShortcuts(extractShortcuts(items.value))
       <USelect v-model="size" :items="sizes" placeholder="Size" />
     </div>
 
-    <UContextMenu :items="items" class="min-w-48" :size="size">
+    <UContextMenu :items="items" :ui="{ content: 'w-48' }" :size="size">
       <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
         Right click here
+      </div>
+    </UContextMenu>
+
+    <UContextMenu :items="itemsWithColor" :ui="{ content: 'w-48' }" :size="size">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+        Color right click here
       </div>
     </UContextMenu>
   </div>

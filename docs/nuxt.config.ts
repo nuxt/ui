@@ -1,16 +1,15 @@
 import { createResolver } from '@nuxt/kit'
-import module from '../src/module'
 import pkg from '../package.json'
 
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  // extends: [
-  //   process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
-  // ],
+  extends: [
+    process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#v3', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
+  ],
 
   modules: [
-    module,
+    '../src/module',
     '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/image',
@@ -18,17 +17,26 @@ export default defineNuxtConfig({
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
-    'nuxt-og-image'
+    'nuxt-og-image',
+    (_, nuxt) => {
+      nuxt.hook('components:dirs', (dirs) => {
+        dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
+      })
+    }
   ],
 
-  $production: {
-    routeRules: {
-      '/api/_mdc/highlight': { cache: { group: 'mdc', name: 'highlight', maxAge: 60 * 60 } },
-      '/api/_content/query/**': { cache: { group: 'content', name: 'query', maxAge: 60 * 60 } }
-    }
-  },
-
   app: {
+    head: {
+      // LemonSqueezy affiliate
+      script: [{
+        key: 'lmsqueezy-config',
+        innerHTML: 'window.lemonSqueezyAffiliateConfig = { store: "nuxt" };'
+      }, {
+        key: 'lmsqueezy',
+        src: 'https://lmsqueezy.com/affiliate.js',
+        defer: true
+      }]
+    },
     rootAttrs: {
       'vaul-drawer-wrapper': '',
       'class': 'bg-[var(--ui-bg)]'
@@ -40,26 +48,18 @@ export default defineNuxtConfig({
   },
 
   content: {
-    // sources: {
-    //   pro: process.env.NUXT_UI_PRO_PATH
-    //     ? {
-    //         prefix: '/pro',
-    //         driver: 'fs',
-    //         base: resolve(process.env.NUXT_UI_PRO_PATH, 'docs/app/content/pro')
-    //       }
-    //     : process.env.NUXT_GITHUB_TOKEN
-    //       ? {
-    //           prefix: '/pro',
-    //           driver: 'github',
-    //           repo: 'nuxt/ui-pro',
-    //           branch: 'dev',
-    //           dir: 'docs/app/content/pro',
-    //           token: process.env.NUXT_GITHUB_TOKEN || ''
-    //         }
-    //       : undefined
-    // },
+    build: {
+      markdown: {
+        highlight: {
+          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+        }
+      }
+    }
+  },
+
+  mdc: {
     highlight: {
-      langs: ['bash', 'ts', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+      noApiRoute: false
     }
   },
 
@@ -72,6 +72,9 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { redirect: '/getting-started', prerender: false },
     '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
+    '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
+    '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
+    '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
     '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
     '/components': { redirect: '/components/app', prerender: false }
   },
@@ -85,13 +88,14 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/getting-started'
+        '/getting-started',
+        '/api/countries.json',
+        '/api/locales.json'
         // '/api/releases.json',
         // '/api/pulls.json'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
-      // ignore: !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     },
     cloudflare: {
       pages: {
@@ -99,8 +103,7 @@ export default defineNuxtConfig({
           exclude: [
             '/components/*',
             '/getting-started/*',
-            '/composables/*',
-            '/api/*'
+            '/composables/*'
           ]
         }
       }
@@ -111,65 +114,18 @@ export default defineNuxtConfig({
     cache: true
   },
 
-  hooks: {
-    'components:extend': (components) => {
-      const globals = components.filter(c => [
-        'UAccordion',
-        'UAlert',
-        'UAvatar',
-        'UAvatarGroup',
-        'UBadge',
-        'UBreadcrumb',
-        'UButton',
-        'UButtonGroup',
-        'UCheckbox',
-        'UChip',
-        'UCollapsible',
-        'UCommandPalette',
-        'UContextMenu',
-        'UDrawer',
-        'UDropdownMenu',
-        'UFormField',
-        'UIcon',
-        'UInput',
-        'UInputMenu',
-        'UKbd',
-        'ULink',
-        'UModal',
-        'UNavigationMenu',
-        'UPagination',
-        'UPopover',
-        'UProgress',
-        'URadioGroup',
-        'USelect',
-        'USelectMenu',
-        'USeparator',
-        'USlider',
-        'USlideover',
-        'USwitch',
-        'UTable',
-        'UTabs',
-        'UTextarea',
-        'UTooltip'
-      ].includes(c.pascalName))
-
-      globals.forEach(c => c.global = 'sync')
-    }
-  },
-
   componentMeta: {
     exclude: [
       '@nuxt/content',
       '@nuxt/icon',
       '@nuxt/image',
-      '@nuxt/ui-pro',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
       '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
-      resolve('./app/components')
-      // process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'components') : '.c12'
+      resolve('./app/components'),
+      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'app', 'components') : '.c12'
     ],
     metaFields: {
       type: false,

@@ -3,6 +3,7 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
@@ -29,13 +30,15 @@ export interface FormEmits<T extends object> {
 export interface FormSlots {
   default(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'FormExample' })
 </script>
 
 <script lang="ts" setup generic="T extends object">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
-import { getYupErrors, isYupSchema, getValibotErrors, isValibotSchema, getZodErrors, isZodSchema, getJoiErrors, isJoiSchema, getStandardErrors, isStandardSchema, getSuperStructErrors, isSuperStructSchema } from '../utils/form'
+import { parseSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
@@ -91,34 +94,26 @@ onUnmounted(() => {
 const errors = ref<FormErrorWithId[]>([])
 provide('form-errors', errors)
 
-const inputs = ref<Record<string, string>>({})
+const inputs = ref<Record<string, { id?: string, pattern?: RegExp }>>({})
 provide(formInputsInjectionKey, inputs)
 
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
     ...err,
-    id: inputs.value[err.name]
+    id: inputs.value[err.name]?.id
   }))
 }
 
+const parsedValue = ref<T | null>(null)
 async function getErrors(): Promise<FormErrorWithId[]> {
   let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
 
   if (props.schema) {
-    if (isZodSchema(props.schema)) {
-      errs = errs.concat(await getZodErrors(props.state, props.schema))
-    } else if (isYupSchema(props.schema)) {
-      errs = errs.concat(await getYupErrors(props.state, props.schema))
-    } else if (isJoiSchema(props.schema)) {
-      errs = errs.concat(await getJoiErrors(props.state, props.schema))
-    } else if (isValibotSchema(props.schema)) {
-      errs = errs.concat(await getValibotErrors(props.state, props.schema))
-    } else if (isSuperStructSchema(props.schema)) {
-      errs = errs.concat(await getSuperStructErrors(props.state, props.schema))
-    } else if (isStandardSchema(props.schema)) {
-      errs = errs.concat(await getStandardErrors(props.state, props.schema))
+    const { errors, result } = await parseSchema(props.state, props.schema as FormSchema<typeof props.state>)
+    if (errors) {
+      errs = errs.concat(errors)
     } else {
-      throw new Error('Form validation failed: Unsupported form schema')
+      parsedValue.value = result
     }
   }
 
@@ -126,23 +121,30 @@ async function getErrors(): Promise<FormErrorWithId[]> {
 }
 
 async function _validate(opts: { name?: string | string[], silent?: boolean, nested?: boolean } = { silent: false, nested: true }): Promise<T | false> {
-  const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name
+  const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as string[]
 
   const nestedValidatePromises = !names && opts.nested
     ? Array.from(nestedForms.value.values()).map(
-      ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
-        if (!(error instanceof FormValidationException)) {
-          throw error
-        }
-        return error
-      })
-    )
+        ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
+          if (!(error instanceof FormValidationException)) {
+            throw error
+          }
+          return error
+        })
+      )
     : []
 
   if (names) {
-    const otherErrors = errors.value.filter(error => !names!.includes(error.name))
-    const pathErrors = (await getErrors()).filter(error => names!.includes(error.name)
-    )
+    const otherErrors = errors.value.filter(error => !names.some((name) => {
+      const pattern = inputs.value?.[name]?.pattern
+      return name === error.name || (pattern && error.name.match(pattern))
+    }))
+
+    const pathErrors = (await getErrors()).filter(error => names.some((name) => {
+      const pattern = inputs.value?.[name]?.pattern
+      return name === error.name || (pattern && error.name.match(pattern))
+    }))
+
     errors.value = otherErrors.concat(pathErrors)
   } else {
     errors.value = await getErrors()
@@ -168,7 +170,7 @@ async function onSubmitWrapper(payload: Event) {
 
   try {
     await _validate({ nested: true })
-    event.data = props.state
+    event.data = props.schema ? parsedValue.value : props.state
     await props.onSubmit?.(event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {

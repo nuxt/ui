@@ -1,17 +1,18 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { PaginationRootProps, PaginationRootEmits } from 'radix-vue'
+import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { RouteLocationRaw } from '#vue-router'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pagination'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { pagination: Partial<typeof theme> } }
 
 const pagination = tv({ extend: tv(theme), ...(appConfig.ui?.pagination || {}) })
 
-export interface PaginationProps extends Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'> {
+export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -97,12 +98,17 @@ export interface PaginationSlots {
     index: number
   }): any
 }
+
+extendDevtoolsMeta({ defaultProps: { total: 50 } })
 </script>
 
 <script setup lang="ts">
-import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast, useForwardPropsEmits } from 'radix-vue'
+import { computed } from 'vue'
+import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
+import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   size: 'md',
@@ -120,8 +126,13 @@ const emits = defineEmits<PaginationEmits>()
 const slots = defineSlots<PaginationSlots>()
 
 const appConfig = useAppConfig()
-
+const { dir } = useLocale()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
+
+const firstIcon = computed(() => props.firstIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
+const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
+const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
+const lastIcon = computed(() => props.lastIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = pagination()
@@ -132,12 +143,12 @@ const ui = pagination()
     <PaginationList v-slot="{ items }" :class="ui.list({ class: props.ui?.list })">
       <PaginationFirst v-if="showControls || !!slots.first" as-child>
         <slot name="first">
-          <UButton :color="color" :variant="variant" :size="size" :icon="firstIcon || appConfig.ui.icons.chevronDoubleLeft" :to="to?.(1)" />
+          <UButton :color="color" :variant="variant" :size="size" :icon="firstIcon" :to="to?.(1)" />
         </slot>
       </PaginationFirst>
       <PaginationPrev v-if="showControls || !!slots.prev" as-child>
         <slot name="prev">
-          <UButton :color="color" :variant="variant" :size="size" :icon="prevIcon || appConfig.ui.icons.chevronLeft" :to="page > 1 ? to?.(page - 1) : undefined" />
+          <UButton :color="color" :variant="variant" :size="size" :icon="prevIcon" :to="page > 1 ? to?.(page - 1) : undefined" />
         </slot>
       </PaginationPrev>
 
@@ -165,12 +176,12 @@ const ui = pagination()
 
       <PaginationNext v-if="showControls || !!slots.next" as-child>
         <slot name="next">
-          <UButton :color="color" :variant="variant" :size="size" :icon="nextIcon || appConfig.ui.icons.chevronRight" :to="page < pageCount ? to?.(pageCount) : undefined" />
+          <UButton :color="color" :variant="variant" :size="size" :icon="nextIcon" :to="page < pageCount ? to?.(pageCount) : undefined" />
         </slot>
       </PaginationNext>
       <PaginationLast v-if="showControls || !!slots.last" as-child>
         <slot name="last">
-          <UButton :color="color" :variant="variant" :size="size" :icon="lastIcon || appConfig.ui.icons.chevronDoubleRight" :to=" to?.(pageCount)" />
+          <UButton :color="color" :variant="variant" :size="size" :icon="lastIcon" :to=" to?.(pageCount)" />
         </slot>
       </PaginationLast>
     </PaginationList>

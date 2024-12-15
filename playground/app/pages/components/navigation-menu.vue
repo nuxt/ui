@@ -8,63 +8,65 @@ const orientations = Object.keys(theme.variants.orientation)
 const color = ref(theme.defaultVariants.color)
 const highlightColor = ref()
 const variant = ref(theme.defaultVariants.variant)
-const orientation = ref('horizontal' as const)
+const orientation = ref('vertical' as const)
 const highlight = ref(true)
 
 const items = [
   [{
     label: 'Documentation',
-    icon: 'i-heroicons-book-open',
+    icon: 'i-lucide-book-open',
     badge: 10,
+    defaultOpen: true,
     children: [{
       label: 'Introduction',
       description: 'Fully styled and customizable components for Nuxt.',
-      icon: 'i-heroicons-home'
+      icon: 'i-lucide-house'
     }, {
       label: 'Installation',
       description: 'Learn how to install and configure Nuxt UI in your application.',
-      icon: 'i-heroicons-cloud-arrow-down'
+      icon: 'i-lucide-cloud-download'
     }, {
       label: 'Theming',
       description: 'Learn how to customize the look and feel of the components.',
-      icon: 'i-heroicons-swatch'
+      icon: 'i-lucide-swatch-book'
     }, {
       label: 'Shortcuts',
       description: 'Learn how to display and define keyboard shortcuts in your app.',
-      icon: 'i-heroicons-computer-desktop'
+      icon: 'i-lucide-monitor'
     }]
   }, {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent',
+    icon: 'i-lucide-box',
     active: true,
     children: [{
       label: 'Link',
-      icon: 'i-heroicons-document',
+      icon: 'i-lucide-file',
       description: 'Use NuxtLink with superpowers.',
       to: '/components/link'
     }, {
       label: 'Modal',
-      icon: 'i-heroicons-document',
+      icon: 'i-lucide-file',
       description: 'Display a modal within your application.',
       to: '/components/modal'
     }, {
       label: 'NavigationMenu',
-      icon: 'i-heroicons-document',
+      icon: 'i-lucide-file',
       description: 'Display a list of links.',
-      to: '/components/navigation-menu'
+      to: '/components/navigation-menu',
+      trailingIcon: 'i-lucide-check'
     }, {
       label: 'Pagination',
-      icon: 'i-heroicons-document',
+      icon: 'i-lucide-file',
       description: 'Display a list of pages.',
       to: '/components/pagination'
     }, {
       label: 'Popover',
-      icon: 'i-heroicons-document',
+      icon: 'i-lucide-file',
       description: 'Display a non-modal dialog that floats around a trigger element.',
       to: '/components/popover'
     }, {
       label: 'Progress',
-      icon: 'i-heroicons-document',
+      icon: 'i-lucide-file',
       description: 'Show a horizontal bar to indicate task progression.',
       to: '/components/progress'
     }]
@@ -75,7 +77,7 @@ const items = [
     target: '_blank'
   }, {
     label: 'Help',
-    icon: 'i-heroicons-question-mark-circle',
+    icon: 'i-lucide-circle-help',
     disabled: true
   }]
 ]

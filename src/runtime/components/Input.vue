@@ -15,6 +15,11 @@ const input = tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })
 type InputVariants = VariantProps<typeof input>
 
 export interface InputProps extends UseComponentIconsProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   id?: string
   name?: string
   type?: InputHTMLAttributes['type']
@@ -49,11 +54,13 @@ export interface InputSlots {
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { Primitive } from 'reka-ui'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -146,7 +153,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <input
       :id="id"
       ref="inputRef"
@@ -178,5 +185,5 @@ onMounted(() => {
         <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
-  </div>
+  </Primitive>
 </template>

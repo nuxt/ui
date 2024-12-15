@@ -5,13 +5,13 @@ const showDownloads = ref(false)
 
 const items = computed(() => [{
   label: 'Interface',
-  icon: 'i-heroicons-window',
+  icon: 'i-lucide-app-window',
   type: 'label' as const
 }, {
   type: 'separator' as const
 }, {
   label: 'Show Bookmarks',
-  icon: 'i-heroicons-bookmark',
+  icon: 'i-lucide-bookmark',
   type: 'checkbox' as const,
   checked: showBookmarks.value,
   onUpdateChecked(checked: boolean) {
@@ -22,7 +22,7 @@ const items = computed(() => [{
   }
 }, {
   label: 'Show History',
-  icon: 'i-heroicons-clock',
+  icon: 'i-lucide-clock',
   type: 'checkbox' as const,
   checked: showHistory.value,
   onUpdateChecked(checked: boolean) {
@@ -30,7 +30,7 @@ const items = computed(() => [{
   }
 }, {
   label: 'Show Downloads',
-  icon: 'i-heroicons-arrow-down-on-square',
+  icon: 'i-lucide-download',
   type: 'checkbox' as const,
   checked: showDownloads.value,
   onUpdateChecked(checked: boolean) {
@@ -40,7 +40,7 @@ const items = computed(() => [{
 </script>
 
 <template>
-  <UDropdownMenu :items="items" :content="{ align: 'start' }" class="w-48">
-    <UButton label="Open" color="neutral" variant="outline" icon="i-heroicons-bars-3" />
+  <UDropdownMenu :items="items" :content="{ align: 'start' }" :ui="{ content: 'w-48' }">
+    <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
   </UDropdownMenu>
 </template>

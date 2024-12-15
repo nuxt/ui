@@ -5,29 +5,29 @@ import ComponentRender from '../component-render'
 describe('Accordion', () => {
   const items = [{
     label: 'Getting Started',
-    icon: 'i-heroicons-information-circle',
+    icon: 'i-lucide-info',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
   }, {
     label: 'Installation',
-    icon: 'i-heroicons-arrow-down-tray',
+    icon: 'i-lucide-download',
     disabled: true,
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
   }, {
     label: 'Theming',
-    icon: 'i-heroicons-eye-dropper',
+    icon: 'i-lucide-pipette',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
   }, {
     label: 'Layouts',
-    icon: 'i-heroicons-rectangle-group',
+    icon: 'i-lucide-layout-dashboard',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
   }, {
     label: 'Components',
-    icon: 'i-heroicons-square-3-stack-3d',
+    icon: 'i-lucide-layers-3',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
   }, {
     label: 'Utilities',
-    icon: 'i-heroicons-wrench-screwdriver',
-    trailingIcon: 'i-heroicons-sun',
+    icon: 'i-lucide-wrench',
+    trailingIcon: 'i-lucide-sun',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.',
     slot: 'custom'
   }]
@@ -44,7 +44,9 @@ describe('Accordion', () => {
     ['with type', { props: { ...props, type: 'multiple' as const } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with collapsible', { props: { ...props, collapsible: false } }],
-    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-plus' } }],
+    ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
+    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-plus' } }],
+    ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
     ['with ui', { props: { ...props, ui: { item: 'border-[var(--ui-border-accented)]' } } }],
     // Slots

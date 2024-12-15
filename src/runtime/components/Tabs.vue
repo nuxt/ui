@@ -1,10 +1,10 @@
-<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { TabsRootProps, TabsRootEmits, TabsContentProps } from 'radix-vue'
+import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
@@ -25,7 +25,7 @@ export interface TabsItem {
 
 type TabsVariants = VariantProps<typeof tabs>
 
-export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode'> {
+export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -44,7 +44,7 @@ export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defa
    * The content of the tabs, can be disabled to prevent rendering the content.
    * @defaultValue true
    */
-  content?: boolean | Omit<TabsContentProps, 'as' | 'asChild' | 'value'>
+  content?: boolean
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -65,14 +65,32 @@ export type TabsSlots<T extends { slot?: string }> = {
   content: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
+extendDevtoolsMeta({
+  defaultProps: {
+    items: [{
+      label: 'Tab1',
+      avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' },
+      content: 'This is the content shown for Tab1'
+    }, {
+      label: 'Tab2',
+      icon: 'i-lucide-user',
+      content: 'And, this is the content for Tab2'
+    }, {
+      label: 'Tab3',
+      icon: 'i-lucide-bell',
+      content: 'Finally, this is the content for Tab3'
+    }]
+  }
+})
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">
-import { computed, toRef } from 'vue'
-import { defu } from 'defu'
-import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'radix-vue'
+import { computed } from 'vue'
+import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { get } from '../utils'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 const props = withDefaults(defineProps<TabsProps<T>>(), {
   content: true,
@@ -83,8 +101,7 @@ const props = withDefaults(defineProps<TabsProps<T>>(), {
 const emits = defineEmits<TabsEmits>()
 const slots = defineSlots<TabsSlots<T>>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'activationMode', 'modelValue'), emits)
-const contentProps = toRef(() => defu(props.content || {}, { forceMount: true }) as TabsContentProps)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'activationMode', 'unmountOnHide'), emits)
 
 const ui = computed(() => tabs({
   color: props.color,
@@ -114,7 +131,7 @@ const ui = computed(() => tabs({
     </TabsList>
 
     <template v-if="!!content">
-      <TabsContent v-for="(item, index) of items" :key="index" v-bind="contentProps" :value="item.value || String(index)" :class="ui.content({ class: props.ui?.content })">
+      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :class="ui.content({ class: props.ui?.content })">
         <slot :name="item.slot || 'content'" :item="item" :index="index">
           {{ item.content }}
         </slot>

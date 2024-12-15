@@ -15,11 +15,11 @@ describe('Tabs', () => {
     content: 'This is the content shown for Tab1'
   }, {
     label: 'Tab2',
-    icon: 'i-heroicons-user',
+    icon: 'i-lucide-user',
     content: 'And, this is the content for Tab2'
   }, {
     label: 'Tab3',
-    icon: 'i-heroicons-bell',
+    icon: 'i-lucide-bell',
     content: 'Finally, this is the content for Tab3',
     slot: 'custom'
   }]
@@ -37,6 +37,8 @@ describe('Tabs', () => {
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['without content', { props: { ...props, content: false } }],
+    ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
+    ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
     ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-[var(--ui-border)]' } } }],
     // Slots

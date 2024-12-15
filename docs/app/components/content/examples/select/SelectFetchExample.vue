@@ -19,14 +19,14 @@ function getUserAvatar(value: string) {
   <USelect
     :items="users || []"
     :loading="status === 'pending'"
-    icon="i-heroicons-user"
+    icon="i-lucide-user"
     placeholder="Select user"
     class="w-48"
   >
     <template #leading="{ modelValue, ui }">
       <UAvatar
         v-if="modelValue"
-        v-bind="getUserAvatar(modelValue)"
+        v-bind="getUserAvatar(modelValue as string)"
         :size="ui.leadingAvatarSize()"
         :class="ui.leadingAvatar()"
       />

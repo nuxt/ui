@@ -18,7 +18,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 
-You can also pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
 ::component-code
 ---
@@ -29,12 +29,12 @@ external:
 props:
   items:
     - label: 'Home'
-      icon: 'i-heroicons-home'
+      icon: 'i-lucide-house'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       to: '/components'
     - label: 'Breadcrumb'
-      icon: 'i-heroicons-link'
+      icon: 'i-lucide-link'
       to: '/components/breadcrumb'
 ---
 ::
@@ -45,7 +45,7 @@ A `span` is rendered instead of a link when the `to` property is not defined.
 
 ### Separator Icon
 
-Use the `separator-icon` prop to customize the [Icon](/components/icon) between each item. Defaults to `i-heroicons-chevron-right-20-solid`.
+Use the `separator-icon` prop to customize the [Icon](/components/icon) between each item. Defaults to `i-lucide-chevron-right`.
 
 ::component-code
 ---
@@ -54,21 +54,29 @@ ignore:
 external:
   - items
 props:
-  separatorIcon: 'i-heroicons-arrow-right-20-solid'
+  separatorIcon: 'i-lucide-arrow-right'
   items:
     - label: 'Home'
-      icon: 'i-heroicons-home'
+      icon: 'i-lucide-house'
     - label: 'Components'
-      icon: 'i-heroicons-cube-transparent'
+      icon: 'i-lucide-box'
       to: '/components'
     - label: 'Breadcrumb'
-      icon: 'i-heroicons-link'
+      icon: 'i-lucide-link'
       to: '/components/breadcrumb'
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronRight` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronRight` key.
+:::
 ::
 
 ## Examples

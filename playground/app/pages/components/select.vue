@@ -10,27 +10,28 @@ const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
 const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]]
+const selectedItems = ref([fruits[0]!, vegetables[0]!])
 
 const statuses = [{
   label: 'Backlog',
   value: 'backlog',
-  icon: 'i-heroicons-question-mark-circle'
+  icon: 'i-lucide-circle-help'
 }, {
   label: 'Todo',
   value: 'todo',
-  icon: 'i-heroicons-plus-circle'
+  icon: 'i-lucide-circle-plus'
 }, {
   label: 'In Progress',
   value: 'in_progress',
-  icon: 'i-heroicons-arrow-up-circle'
+  icon: 'i-lucide-circle-arrow-up'
 }, {
   label: 'Done',
   value: 'done',
-  icon: 'i-heroicons-check-circle'
+  icon: 'i-lucide-circle-check'
 }, {
   label: 'Canceled',
   value: 'canceled',
-  icon: 'i-heroicons-x-circle'
+  icon: 'i-lucide-circle-x'
 }]
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
@@ -40,8 +41,8 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   lazy: true
 })
 
-function getStatusIcon(value: string): string {
-  return statuses.find(status => status.value === value)?.icon || 'i-heroicons-user'
+function getStatusIcon(value: string) {
+  return statuses.find(status => status.value === value)?.icon || 'i-lucide-user'
 }
 
 function getUserAvatar(value: string) {
@@ -52,7 +53,7 @@ function getUserAvatar(value: string) {
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-48">
-      <USelect :items="items" placeholder="Search..." />
+      <USelect :items="items" placeholder="Search..." default-value="Apple" />
     </div>
     <div class="flex items-center gap-2">
       <USelect
@@ -90,6 +91,7 @@ function getUserAvatar(value: string) {
     <div class="flex flex-col gap-4 w-48">
       <USelect :items="items" placeholder="Disabled" disabled />
       <USelect :items="items" placeholder="Required" required />
+      <USelect v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
       <USelect :items="items" loading placeholder="Search..." />
     </div>
     <div class="flex items-center gap-4">
@@ -108,13 +110,13 @@ function getUserAvatar(value: string) {
         :key="size"
         :items="statuses"
         placeholder="Search status..."
-        icon="i-heroicons-magnifying-glass"
-        trailing-icon="i-heroicons-chevron-up-down-20-solid"
+        icon="i-lucide-search"
+        trailing-icon="i-lucide-chevrons-up-down"
         :size="size"
         class="w-48"
       >
         <template #leading="{ modelValue, ui }">
-          <UIcon v-if="modelValue" :name="getStatusIcon(modelValue)" :class="ui.leadingIcon()" />
+          <UIcon v-if="modelValue" :name="getStatusIcon(modelValue as string)" :class="ui.leadingIcon()" />
         </template>
       </USelect>
     </div>
@@ -124,13 +126,13 @@ function getUserAvatar(value: string) {
         :key="size"
         :items="users || []"
         :loading="status === 'pending'"
-        icon="i-heroicons-user"
+        icon="i-lucide-user"
         placeholder="Search users..."
         :size="size"
         class="w-48"
       >
         <template #leading="{ modelValue, ui }">
-          <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue)" />
+          <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue as string)" />
         </template>
       </USelect>
     </div>

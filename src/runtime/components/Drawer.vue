@@ -1,10 +1,11 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
 import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
-import type { DialogContentProps } from 'radix-vue'
+import type { DialogContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/drawer'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme> } }
 
@@ -51,11 +52,13 @@ export interface DrawerSlots {
   body(props?: {}): any
   footer(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'DrawerExample' })
 </script>
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { useForwardPropsEmits } from 'radix-vue'
+import { useForwardPropsEmits } from 'reka-ui'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
 
@@ -78,14 +81,14 @@ const ui = computed(() => drawer({
 
 <template>
   <DrawerRoot v-bind="rootProps">
-    <DrawerTrigger v-if="!!slots.default" as-child>
+    <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>
 
     <DrawerPortal :disabled="!portal">
       <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DrawerContent :class="ui.content({ class: [props.class, props.ui?.content] })" v-bind="contentProps">
+      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps">
         <slot name="handle">
           <div v-if="handle" :class="ui.handle({ class: props.ui?.handle })" />
         </slot>

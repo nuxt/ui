@@ -1,12 +1,13 @@
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps } from 'radix-vue'
+import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
+import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
@@ -28,7 +29,7 @@ export interface SelectItem {
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue> = MaybeArrayOfArray<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined> extends Omit<SelectRootProps, 'dir' | 'modelValue'>, UseComponentIconsProps {
+export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue | boolean> = MaybeArrayOfArray<SelectItem | AcceptableValue | boolean>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -47,7 +48,7 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
   selectedIcon?: string
   /**
    * The content of the menu.
-   * @defaultValue { side: 'bottom', sideOffset: 8, position: 'popper' }
+   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
   content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -69,59 +70,67 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: SelectItemKey<T>
+  labelKey?: V
   items?: I
+  /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
+  defaultValue?: SelectModelValue<T, V, M, T extends { value: infer U } ? U : never>
+  /** The controlled value of the Select. Can be bind as `v-model`. */
+  modelValue?: SelectModelValue<T, V, M, T extends { value: infer U } ? U : never>
+  /** Whether multiple options can be selected or not. */
+  multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof select.slots>
-  /** The controlled value of the Select. Can be bind as `v-model`. */
-  modelValue?: SelectModelValue<T, V, false, T extends { value: infer U } ? U : never>
 }
 
-export type SelectEmits<T, V> = Omit<SelectRootEmits, 'update:modelValue'> & {
+export type SelectEmits<T, V, M extends boolean> = Omit<SelectRootEmits<T>, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-} & SelectModelValueEmits<T, V, false, T extends { value: infer U } ? U : never>
+} & SelectModelValueEmits<T, V, M, T extends { value: infer U } ? U : never>
 
 type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export interface SelectSlots<T> {
-  'leading'(props: { modelValue: string, open: boolean, ui: any }): any
-  'trailing'(props: { modelValue: string, open: boolean, ui: any }): any
+export interface SelectSlots<T, M extends boolean> {
+  'leading'(props: { modelValue?: M extends true ? AcceptableValue[] : AcceptableValue, open: boolean, ui: any }): any
+  'default'(props: { modelValue?: M extends true ? AcceptableValue[] : AcceptableValue, open: boolean }): any
+  'trailing'(props: { modelValue?: M extends true ? AcceptableValue[] : AcceptableValue, open: boolean, ui: any }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 }
+
+extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
-<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue> = MaybeArrayOfArray<SelectItem | AcceptableValue>, V extends SelectItemKey<T> | undefined = undefined">
+<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue | boolean> = MaybeArrayOfArray<SelectItem | AcceptableValue | boolean>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
 import { computed, toRef } from 'vue'
-import { SelectRoot, SelectTrigger, SelectValue, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'radix-vue'
+import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
-import { get } from '../utils'
+import { get, compare } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 
-const props = withDefaults(defineProps<SelectProps<T, I, V>>(), {
+const props = withDefaults(defineProps<SelectProps<T, I, V, M>>(), {
   valueKey: 'value' as never,
   labelKey: 'label' as never,
   portal: true
 })
-const emits = defineEmits<SelectEmits<T, V>>()
-const slots = defineSlots<SelectSlots<T>>()
+const emits = defineEmits<SelectEmits<T, V, M>>()
+const slots = defineSlots<SelectSlots<T, M>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required'), emits)
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, position: 'popper' }) as SelectContentProps)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
+const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
 const { emitFormChange, emitFormInput, emitFormBlur, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -141,6 +150,17 @@ const ui = computed(() => select({
 }))
 
 const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as SelectItem[][] : [])
+// eslint-disable-next-line vue/no-dupe-keys
+const items = computed(() => groups.value.flatMap(group => group) as T[])
+
+function displayValue(value?: AcceptableValue | AcceptableValue[]): string | undefined {
+  if (props.multiple && Array.isArray(value)) {
+    return value.map(v => displayValue(v)).filter(Boolean).join(', ')
+  }
+
+  const item = items.value.find(item => compare(typeof item === 'object' ? get(item, props.valueKey as string) : item, value))
+  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
+}
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -162,14 +182,13 @@ function onUpdateOpen(value: boolean) {
 }
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <SelectRoot
     :id="id"
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
     :name="name"
-    :default-value="(defaultValue as string)"
-    :model-value="(modelValue as string)"
     :autocomplete="autocomplete"
     :disabled="disabled"
     @update:model-value="onUpdate"
@@ -177,16 +196,25 @@ function onUpdateOpen(value: boolean) {
   >
     <SelectTrigger :class="ui.base({ class: [props.class, props.ui?.base] })">
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="modelValue" :open="open" :ui="ui">
+        <slot name="leading" :model-value="(modelValue as M extends true ? AcceptableValue[] : AcceptableValue)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
-      <SelectValue :placeholder="placeholder ?? '&nbsp;'" :class="ui.value({ class: props.ui?.value })" />
+      <slot :model-value="(modelValue as M extends true ? AcceptableValue[] : AcceptableValue)" :open="open">
+        <template v-for="displayedModelValue in [displayValue(modelValue)]" :key="displayedModelValue">
+          <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+            {{ displayedModelValue }}
+          </span>
+          <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
+            {{ placeholder ?? '&nbsp;' }}
+          </span>
+        </template>
+      </slot>
 
       <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="modelValue" :open="open" :ui="ui">
+        <slot name="trailing" :model-value="(modelValue as M extends true ? AcceptableValue[] : AcceptableValue)" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </span>
@@ -241,6 +269,8 @@ function onUpdateOpen(value: boolean) {
             </template>
           </SelectGroup>
         </SelectViewport>
+
+        <SelectArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </SelectContent>
     </SelectPortal>
   </SelectRoot>

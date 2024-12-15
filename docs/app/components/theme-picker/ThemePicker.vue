@@ -2,7 +2,7 @@
   <UPopover :ui="{ content: 'w-72 px-6 py-4 flex flex-col gap-4' }">
     <template #default="{ open }">
       <UButton
-        icon="i-heroicons-swatch"
+        icon="i-lucide-swatch-book"
         color="neutral"
         :variant="open ? 'soft' : 'ghost'"
         square

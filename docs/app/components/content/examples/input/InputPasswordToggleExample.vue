@@ -8,14 +8,14 @@ const password = ref('password')
     v-model="password"
     placeholder="Password"
     :type="show ? 'text' : 'password'"
-    :ui="{ trailing: 'pr-0.5' }"
+    :ui="{ trailing: 'pe-1' }"
   >
     <template #trailing>
       <UButton
         color="neutral"
         variant="link"
         size="sm"
-        :icon="show ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
+        :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
         aria-label="show ? 'Hide password' : 'Show password'"
         :aria-pressed="show"
         aria-controls="password"

@@ -1,20 +1,20 @@
 <script setup lang="ts">
 const items = [{
   label: 'Team',
-  icon: 'i-heroicons-users'
+  icon: 'i-lucide-users'
 }, {
   label: 'Invite users',
-  icon: 'i-heroicons-user-plus',
+  icon: 'i-lucide-user-plus',
   children: [{
     label: 'Invite by email',
-    icon: 'i-heroicons-paper-airplane'
+    icon: 'i-lucide-send-horizontal'
   }, {
     label: 'Invite by link',
-    icon: 'i-heroicons-link'
+    icon: 'i-lucide-link'
   }]
 }, {
   label: 'New team',
-  icon: 'i-heroicons-plus'
+  icon: 'i-lucide-plus'
 }]
 </script>
 
@@ -26,7 +26,7 @@ const items = [{
       <UButton
         color="neutral"
         variant="outline"
-        icon="i-heroicons-chevron-down-20-solid"
+        icon="i-lucide-chevron-down"
       />
     </UDropdownMenu>
   </UButtonGroup>

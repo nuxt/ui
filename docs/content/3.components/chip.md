@@ -16,9 +16,9 @@ prettier: true
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
+    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
+:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Color
@@ -33,9 +33,9 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
+    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
+:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Size
@@ -50,9 +50,9 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
+    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
+:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Text
@@ -68,9 +68,9 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
+    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
+:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Position
@@ -85,9 +85,9 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-heroicons-envelope" color="neutral" variant="subtle" />
+    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-heroicons-envelope" color="neutral" variant="subtle"}
+:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Inset
@@ -120,7 +120,7 @@ props:
 ::
 
 ::note
-It's used this way in the [CommandPalette](/components/command-palette), [InputMenu](/components/input-menu), [Select](/components/select) or [SelectMenu](/components/select-menu) components for example.
+It's used this way in the [`CommandPalette`](/components/command-palette), [`InputMenu`](/components/input-menu), [`Select`](/components/select) or [`SelectMenu`](/components/select-menu) components for example.
 ::
 
 ## Examples

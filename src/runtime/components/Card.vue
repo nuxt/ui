@@ -3,6 +3,7 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/card'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { card: Partial<typeof theme> } }
 
@@ -23,10 +24,12 @@ export interface CardSlots {
   default(props?: {}): any
   footer(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'CardExample' })
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 
 const props = defineProps<CardProps>()
 const slots = defineSlots<CardSlots>()

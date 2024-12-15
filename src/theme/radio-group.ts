@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     fieldset: 'flex',
     legend: 'mb-1 block font-medium text-[var(--ui-text)]',
     item: 'flex items-start',
-    base: 'rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-offset-[var(--ui-bg)]',
+    base: 'rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-2',
     indicator: 'flex items-center justify-center size-full rounded-full after:bg-[var(--ui-bg)] after:rounded-full',
     container: 'flex items-center',
     wrapper: 'ms-2',

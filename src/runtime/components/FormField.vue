@@ -3,6 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form-field'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { formField: Partial<typeof theme> } }
 
@@ -11,7 +12,15 @@ const formField = tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })
 type FormFieldVariants = VariantProps<typeof formField>
 
 export interface FormFieldProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
+  /** The name of the FormField. Also used to match form errors. */
   name?: string
+  /** A regular expression to match form error names. */
+  errorPattern?: RegExp
   label?: string
   description?: string
   help?: string
@@ -33,11 +42,13 @@ export interface FormFieldSlots {
   error(props: { error?: string | boolean }): any
   default(props: { error?: string | boolean }): any
 }
+
+extendDevtoolsMeta({ example: 'FormFieldExample', defaultProps: { label: 'Label' } })
 </script>
 
 <script setup lang="ts">
 import { computed, ref, inject, provide, type Ref, useId } from 'vue'
-import { Label } from 'radix-vue'
+import { Primitive, Label } from 'reka-ui'
 import { formFieldInjectionKey, inputIdInjectionKey } from '../composables/useFormField'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
@@ -51,7 +62,7 @@ const ui = computed(() => formField({
 
 const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name)?.message)
+const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern)))?.message)
 
 const id = ref(useId())
 
@@ -62,12 +73,13 @@ provide(formFieldInjectionKey, computed(() => ({
   name: props.name,
   size: props.size,
   eagerValidation: props.eagerValidation,
-  validateOnInputDelay: props.validateOnInputDelay
+  validateOnInputDelay: props.validateOnInputDelay,
+  errorPattern: props.errorPattern
 }) as FormFieldInjectedOptions<FormFieldProps>))
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div :class="ui.wrapper({ class: props.ui?.wrapper })">
       <div v-if="label || !!slots.label" :class="ui.labelWrapper({ class: props.ui?.labelWrapper })">
         <Label :for="id" :class="ui.label({ class: props.ui?.label })">
@@ -89,7 +101,7 @@ provide(formFieldInjectionKey, computed(() => ({
       </p>
     </div>
 
-    <div :class="[label && ui.container({ class: props.ui?.container })]">
+    <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
 
       <p v-if="(typeof error === 'string' && error) || !!slots.error" :class="ui.error({ class: props.ui?.error })">
@@ -103,5 +115,5 @@ provide(formFieldInjectionKey, computed(() => ({
         </slot>
       </p>
     </div>
-  </div>
+  </Primitive>
 </template>

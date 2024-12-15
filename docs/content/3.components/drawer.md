@@ -2,8 +2,8 @@
 description: A drawer that smoothly slides in & out of the screen.
 links:
   - label: Drawer
-    icon: i-custom-radix-vue
-    to: https://github.com/radix-vue/vaul-vue
+    icon: i-custom-reka-ui
+    to: https://github.com/unovue/vaul-vue
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Drawer.vue
@@ -21,14 +21,14 @@ prettier: true
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -48,14 +48,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #body
 :placeholder{class="h-48"}
@@ -76,14 +76,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #body
 :placeholder{class="h-48"}
@@ -105,14 +105,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="h-96 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="h-96 m-4"}
@@ -130,14 +130,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="w-96 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="w-96 m-4"}
@@ -155,14 +155,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -180,14 +180,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -205,14 +205,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="h-screen m-4"}
@@ -259,7 +259,7 @@ name: 'drawer-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Drawer by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Drawer by pressing :kbd{value="O"}.
 ::
 
 ::tip

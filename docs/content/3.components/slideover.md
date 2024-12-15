@@ -2,8 +2,8 @@
 description: A dialog that slides in from any side of the screen.
 links:
   - label: Dialog
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/dialog.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Slideover.vue
@@ -93,7 +93,7 @@ slots:
 
 Use the `close` prop to customize or hide the close button (with `false` value) displayed in the Slideover's header.
 
-You can pass all the props of the [Button](/components/button) component to customize it.
+You can pass any property from the [Button](/components/button) component to customize it.
 
 ::component-code
 ---
@@ -130,7 +130,7 @@ The close button is not displayed if the `#content` slot is used as it's a part 
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-heroicons-x-mark-20-solid`.
+Use the `close-icon` prop to customize the close button [Icon](/components/icon). Defaults to `i-lucide-x`.
 
 ::component-code
 ---
@@ -139,7 +139,7 @@ ignore:
   - title
 props:
   title: 'Slideover with close button'
-  closeIcon: 'i-heroicons-arrow-right'
+  closeIcon: 'i-lucide-arrow-right'
 slots:
   default: |
 
@@ -156,8 +156,16 @@ slots:
 :placeholder{class="h-full"}
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
 ::
 
 ### Side
@@ -286,7 +294,7 @@ name: 'slideover-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Slideover by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Slideover by pressing :kbd{value="O"}.
 ::
 
 ::tip
@@ -298,7 +306,7 @@ This allows you to move the trigger outside of the Slideover or remove it entire
 You can use the [`useSlideover`](/composables/use-slideover) composable to open a Slideover programatically.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses the [SlideoverProvider](https://github.com/nuxt/ui/blob/v3/src/runtime/components/SlideoverProvider.vue) component.
+Make sure to wrap your app with the [`App`](/components/app) component which uses the [`SlideoverProvider`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/SlideoverProvider.vue) component.
 ::
 
 First, create a slideover component that will be opened programatically:

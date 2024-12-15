@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute transition-[translate,width] duration-200',
-    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-[var(--ui-text-muted)] hover:data-[state=inactive]:text-[var(--ui-text)] font-medium rounded-[calc(var(--ui-radius)*1.5)] disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme.transitions && 'transition-colors'],
+    trigger: ['group relative inline-flex items-center shrink-0 min-w-0 data-[state=inactive]:text-[var(--ui-text-muted)] hover:data-[state=inactive]:not-disabled:text-[var(--ui-text)] font-medium rounded-[calc(var(--ui-radius)*1.5)] disabled:cursor-not-allowed disabled:opacity-75 focus:outline-hidden', options.theme.transitions && 'transition-colors'],
     content: 'focus:outline-none w-full',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -21,7 +21,7 @@ export default (options: Required<ModuleOptions>) => ({
       pill: {
         list: 'bg-[var(--ui-bg-elevated)] rounded-[calc(var(--ui-radius)*2)]',
         trigger: 'flex-1 w-full',
-        indicator: 'rounded-[calc(var(--ui-radius)*1.5)] shadow-sm'
+        indicator: 'rounded-[calc(var(--ui-radius)*1.5)] shadow-xs'
       },
       link: {
         list: 'border-[var(--ui-border)]',
@@ -32,12 +32,12 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'flex-col',
         list: 'w-full',
-        indicator: 'left-0 w-[var(--radix-tabs-indicator-size)] translate-x-[var(--radix-tabs-indicator-position)]',
+        indicator: 'left-0 w-[var(--reka-tabs-indicator-size)] translate-x-[var(--reka-tabs-indicator-position)]',
         trigger: 'justify-center'
       },
       vertical: {
         list: 'flex-col',
-        indicator: 'top-0 h-[var(--radix-tabs-indicator-size)] translate-y-[var(--radix-tabs-indicator-position)]'
+        indicator: 'top-0 h-[var(--reka-tabs-indicator-size)] translate-y-[var(--reka-tabs-indicator-position)]'
       }
     },
     size: {

@@ -5,6 +5,11 @@ import { get, set } from '#ui/utils'
 const props = withDefaults(defineProps<{
   name: string
   class?: any
+  /**
+   * Whether to render the component in an iframe
+   * @defaultValue false
+   */
+  iframe?: boolean | { [key: string]: any }
   props?: { [key: string]: any }
   /**
    * Whether to format the code with Prettier
@@ -42,6 +47,10 @@ const props = withDefaults(defineProps<{
    * A list of line numbers to highlight in the code block
    */
   highlights?: number[]
+  /**
+   * Whether to add overflow-hidden to wrapper
+   */
+  overflowHidden?: boolean
 }>(), {
   preview: true,
   source: true
@@ -49,6 +58,7 @@ const props = withDefaults(defineProps<{
 
 const slots = defineSlots<{
   options(props?: {}): any
+  code(props?: {}): any
 }>()
 
 const { $prettier } = useNuxtApp()
@@ -112,13 +122,15 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
   }
   return acc
 }, {} as Record<string, any>) || {})
+
+const urlSearchParams = computed(() => new URLSearchParams({ ...optionsValues.value, ...componentProps }).toString())
 </script>
 
 <template>
   <div class="my-5">
     <template v-if="preview">
-      <div class="border border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)] relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source }]">
-        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)]">
+      <div class="border border-[var(--ui-border-muted)] relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source, 'overflow-hidden': props.overflowHidden }]">
+        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-[var(--ui-border-muted)]">
           <slot name="options" />
 
           <UFormField
@@ -169,12 +181,25 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
           </UFormField>
         </div>
 
-        <div class="flex justify-center p-4" :class="props.class">
+        <iframe
+          v-if="iframe"
+          v-bind="typeof iframe === 'object' ? iframe : {}"
+          :src="`/examples/${name}?${urlSearchParams}`"
+          width="1024"
+          class="relative left-1/2 -translate-x-1/2"
+          :class="props.class"
+        />
+        <div v-else class="flex justify-center p-4" :class="props.class">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
         </div>
       </div>
     </template>
 
-    <MDCRenderer v-if="ast && props.source" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    <template v-if="props.source">
+      <div v-if="!!slots.code" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0">
+        <slot name="code" />
+      </div>
+      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    </template>
   </div>
 </template>

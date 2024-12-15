@@ -2,8 +2,8 @@
 description: A control that toggles between two states.
 links:
   - label: Switch
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/switch.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/switch
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Switch.vue
@@ -83,8 +83,8 @@ ignore:
   - label
   - defaultValue
 props:
-  uncheckedIcon: 'i-heroicons-x-mark'
-  checkedIcon: 'i-heroicons-check'
+  uncheckedIcon: 'i-lucide-x'
+  checkedIcon: 'i-lucide-check'
   defaultValue: true
   label: Check me
 ---
@@ -108,7 +108,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 
 ::component-code
 ---
@@ -117,14 +117,22 @@ ignore:
   - defaultValue
 props:
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   defaultValue: true
   label: Check me
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
 ::
 
 ### Color

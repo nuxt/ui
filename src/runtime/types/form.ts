@@ -1,4 +1,4 @@
-import type { StandardSchema } from '@standard-schema/spec'
+import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { ComputedRef, Ref } from 'vue'
 import type { ZodSchema } from 'zod'
 import type { Schema as JoiSchema } from 'joi'
@@ -26,7 +26,7 @@ export type FormSchema<T extends Record<string, any>> =
   | ValibotSafeParserAsync<any, any>
   | JoiSchema<T>
   | SuperstructSchema<any, any>
-  | StandardSchema
+  | StandardSchemaV1
 
 export type FormInputEvents = 'input' | 'blur' | 'change'
 
@@ -82,6 +82,12 @@ export interface FormFieldInjectedOptions<T> {
   error?: string | boolean
   eagerValidation?: boolean
   validateOnInputDelay?: number
+  errorPattern?: RegExp
+}
+
+export interface ValidateReturnSchema<T> {
+  result: T
+  errors: FormError[] | null
 }
 
 export class FormValidationException extends Error {

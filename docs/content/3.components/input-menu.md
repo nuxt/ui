@@ -3,8 +3,8 @@ title: InputMenu
 description: An autocomplete input with real-time suggestions.
 links:
   - label: Combobox
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/combobox.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/InputMenu.vue
@@ -15,11 +15,11 @@ links:
 Use the `v-model` directive to control the value of the InputMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
 ::tip
-Use this over an [Input](/components/input) to take advantage of Radix Vue's [Combobox](https://www.radix-vue.com/components/combobox.html) component that offers autocomplete capabilities.
+Use this over an [`Input`](/components/input) to take advantage of Reka UI's [`Combobox`](https://reka-ui.com/docs/components/combobox) component that offers autocomplete capabilities.
 ::
 
 ::note
-This component is similar to the [SelectMenu](/components/select-menu) but it's using an Input instead of a Select.
+This component is similar to the [`SelectMenu`](/components/select-menu) but it's using an Input instead of a Select.
 ::
 
 ### Items
@@ -163,7 +163,7 @@ Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 
 ### Delete Icon
 
-With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/components/icon) in the badges. Defaults to `i-heroicons-x-mark-20-solid`.
+With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/components/icon) in the badges. Defaults to `i-lucide-x`.
 
 ::component-code
 ---
@@ -180,7 +180,7 @@ props:
     - Backlog
     - Todo
   multiple: true
-  deleteIcon: 'i-heroicons-trash'
+  deleteIcon: 'i-lucide-trash'
   items:
     - Backlog
     - Todo
@@ -189,8 +189,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
 ::
 
 ### Placeholder
@@ -238,11 +246,36 @@ items:
     - top
     - bottom
 props:
-  modelValue: Backlog
+  modelValue: 'Backlog'
   content:
     align: center
     side: bottom
     sideOffset: 8
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+### Arrow
+
+Use the `arrow` prop to display an arrow on the InputMenu.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - arrow
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  arrow: true
   items:
     - Backlog
     - Todo
@@ -345,7 +378,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  icon: 'i-heroicons-magnifying-glass'
+  icon: 'i-lucide-search'
   size: md
   items:
     - Backlog
@@ -357,7 +390,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-lucide-chevron-down`.
 
 ::component-code
 ---
@@ -370,7 +403,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
+  trailingIcon: 'i-lucide-arrow-down'
   size: md
   items:
     - Backlog
@@ -380,13 +413,21 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
+:::
 ::
 
 ### Selected Icon
 
-Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-heroicons-check-20-solid`.
+Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
 ::component-code
 ---
@@ -399,7 +440,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  selectedIcon: 'i-heroicons-fire'
+  selectedIcon: 'i-lucide-flame'
   size: md
   items:
     - Backlog
@@ -409,8 +450,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
+:::
 ::
 
 ### Avatar
@@ -466,7 +515,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 
 ::component-code
 ---
@@ -480,7 +529,7 @@ external:
 props:
   modelValue: 'Backlog'
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   items:
     - Backlog
     - Todo
@@ -489,8 +538,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
 ::
 
 ### Disabled
@@ -608,7 +665,7 @@ name: 'input-menu-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the InputMenu by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the InputMenu by pressing :kbd{value="O"}.
 ::
 
 ### Control open state on focus
@@ -641,6 +698,25 @@ name: 'input-menu-icon-example'
 ---
 ::
 
+### With create item
+
+Use the `create-item` prop to enable users to add custom values that aren't in the predefined options.
+
+::component-example
+---
+collapse: true
+name: 'input-menu-create-item-example'
+---
+::
+
+::note
+The create option shows when no match is found by default. Set it to `always` to show it even when similar values exist.
+::
+
+::tip{to="#emits"}
+Use the `@create` event to handle the creation of the item. You will receive the event and the item as arguments.
+::
+
 ### With fetched items
 
 You can fetch items from an API and use them in the InputMenu.
@@ -652,29 +728,40 @@ name: 'input-menu-fetch-example'
 ---
 ::
 
-### Without internal search
+### With ignore filter
 
-Set the `filter` prop to `false` to disable the internal search and use your own search logic.
+Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
 
 ::component-example
 ---
 collapse: true
-name: 'input-menu-filter-example'
+name: 'input-menu-ignore-filter-example'
 ---
 ::
 
 ::note
-This example uses [refDebounced](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
+This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to debounce the API calls.
 ::
 
-### With custom search
+### With filter fields
 
-Use the `filter` prop with an array of fields to filter on.
+Use the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
 ::component-example
 ---
 collapse: true
 name: 'input-menu-filter-fields-example'
+---
+::
+
+### As a CountryPicker
+
+This example demonstrates using the InputMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
+
+::component-example
+---
+collapse: true
+name: 'input-menu-countries-example'
 ---
 ::
 

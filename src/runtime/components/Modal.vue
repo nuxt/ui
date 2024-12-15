@@ -1,9 +1,10 @@
 <script lang="ts">
 import { tv } from 'tailwind-variants'
-import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'radix-vue'
+import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
@@ -67,13 +68,16 @@ export interface ModalSlots {
   body(props?: {}): any
   footer(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'ModalExample' })
 </script>
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'radix-vue'
+import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<ModalProps>(), {
@@ -86,20 +90,28 @@ const props = withDefaults(defineProps<ModalProps>(), {
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
 
+const { t } = useLocale()
+const appConfig = useAppConfig()
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
   if (props.preventClose) {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
-      interactOutside: (e: Event) => e.preventDefault()
+      interactOutside: (e: Event) => e.preventDefault(),
+      escapeKeyDown: (e: Event) => e.preventDefault()
     }
   }
 
-  return {}
+  return {
+    interactOutside: (e: Event) => {
+      if (e.target instanceof Element && e.target.closest('[data-sonner-toaster]')) {
+        return e.preventDefault()
+      }
+    }
+  }
 })
-
-const appConfig = useAppConfig()
 
 const ui = computed(() => modal({
   transition: props.transition,
@@ -109,14 +121,14 @@ const ui = computed(() => modal({
 
 <template>
   <DialogRoot v-slot="{ open }" v-bind="rootProps">
-    <DialogTrigger v-if="!!slots.default" as-child>
+    <DialogTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot :open="open" />
     </DialogTrigger>
 
     <DialogPortal :disabled="!portal">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :class="ui.content({ class: [props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
         <slot name="content">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
             <slot name="header">
@@ -140,7 +152,7 @@ const ui = computed(() => modal({
                     size="md"
                     color="neutral"
                     variant="ghost"
-                    aria-label="Close"
+                    :aria-label="t('modal.close')"
                     v-bind="typeof close === 'object' ? close : undefined"
                     :class="ui.close({ class: props.ui?.close })"
                   />

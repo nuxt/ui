@@ -28,7 +28,7 @@ type AppConfigUI = {
   // TODO: add type hinting for colors from `options.theme.colors`
   colors?: Record<string, Color> & { neutral?: NeutralColor }
   icons?: Partial<typeof icons>
-} & DeepPartial<typeof ui, string>
+} & DeepPartial<typeof ui>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
   /** Whether to generate declaration files for auto-imported components. */
@@ -44,7 +44,7 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
 export const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
 
 export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options = {}, meta) => {
-  const options = defu(_options, { fonts: false }, defaultOptions)
+  const options = defu(_options, { fonts: false, devtools: { enabled: false } }, defaultOptions)
 
   options.theme = options.theme || {}
   options.theme.colors = resolveColors(options.theme.colors)

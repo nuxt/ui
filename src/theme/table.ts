@@ -4,6 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative overflow-auto',
     base: 'min-w-full overflow-clip',
+    caption: 'sr-only',
     thead: 'relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-[var(--ui-border-accented)]',
     tbody: 'divide-y divide-[var(--ui-border)]',
     tr: 'data-[selected=true]:bg-[var(--ui-bg-elevated)]/50',
@@ -55,13 +56,13 @@ export default (options: Required<ModuleOptions>) => ({
     loading: true,
     loadingAnimation: 'carousel',
     class: {
-      thead: 'after:animate-[carousel_2s_ease-in-out_infinite]'
+      thead: 'after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     loading: true,
     loadingAnimation: 'carousel-inverse',
     class: {
-      thead: 'after:animate-[carousel-inverse_2s_ease-in-out_infinite]'
+      thead: 'after:animate-[carousel-inverse_2s_ease-in-out_infinite] rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     loading: true,

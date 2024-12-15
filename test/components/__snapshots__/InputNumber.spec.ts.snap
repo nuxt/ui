@@ -1,0 +1,373 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`InputNumber > renders with as correctly 1`] = `
+"<section class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</section>"
+`;
+
+exports[`InputNumber > renders with class correctly 1`] = `
+"<div class="inline-flex items-center absolute" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with decrement slot correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1">-</div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with decrementIcon correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with disabled correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group" data-disabled=""><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" disabled="" data-disabled="" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" disabled="" aria-label="Increment" tabindex="-1" data-disabled="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" disabled="" aria-label="Decrement" tabindex="-1" data-disabled="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with increment slot correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1">+</div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with incrementIcon correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:arrow-left shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with name correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with neutral variant ghost correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent text-center px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with neutral variant none correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent text-center px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with neutral variant outline correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-border-inverted)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with neutral variant soft correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)]/50 hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-[var(--ui-bg-elevated)]/50 text-center px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with neutral variant subtle correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-border-inverted)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with orientation vertical correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] pe-9" value="">
+  <div class="absolute flex items-center top-0 end-0 pe-1 [&>button]:py-0 scale-80"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:chevron-up shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center bottom-0 end-0 pe-1 [&>button]:py-0 scale-80"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:chevron-down shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with placeholder correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" placeholder="Number..." class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with primary variant ghost correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-transparent dark:disabled:bg-transparent text-center px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with primary variant none correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-transparent text-center px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with primary variant outline correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with primary variant soft correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)]/50 hover:bg-[var(--ui-bg-elevated)] focus:bg-[var(--ui-bg-elevated)] disabled:bg-[var(--ui-bg-elevated)]/50 text-center px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with primary variant subtle correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg-elevated)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with required correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" required="" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with size lg correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-2 text-sm gap-2 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-10" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-2"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-2"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with size md correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with size sm correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-xs gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-8" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-4" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with size xl correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-2 text-base gap-2 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-11" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-2"><span class="iconify i-lucide:plus shrink-0 size-6" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-2"><span class="iconify i-lucide:minus shrink-0 size-6" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with size xs correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1 text-xs gap-1 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-7" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1"><span class="iconify i-lucide:minus shrink-0 size-4" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;
+
+exports[`InputNumber > renders with ui correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full border-0 placeholder:text-[var(--ui-text-dimmed)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-[var(--ui-text-highlighted)] bg-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] px-9 rounded-full" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" aria-label="Increment" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" aria-label="Decrement" tabindex="-1" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-primary)] hover:text-[var(--ui-primary)]/75 disabled:text-[var(--ui-primary)] aria-disabled:text-[var(--ui-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!---->
+</div>"
+`;

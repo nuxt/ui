@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { NuxtError } from '#app'
 import colors from 'tailwindcss/colors'
-import type { ContentSearchFile } from '@nuxt/ui-pro'
+// import { debounce } from 'perfect-debounce'
+import type { NuxtError } from '#app'
 
 const props = defineProps<{
   error: NuxtError
@@ -10,39 +10,47 @@ const props = defineProps<{
 const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
-const runtimeConfig = useRuntimeConfig()
-const { integrity, api } = runtimeConfig.public.content
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '-' + integrity : ''}`, { default: () => [] })
-
-const links = computed(() => {
-  return [{
-    label: 'Docs',
-    icon: 'i-heroicons-book-open',
-    to: '/getting-started',
-    active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro')
-    ? [{
-        label: 'Pro',
-        icon: 'i-heroicons-square-3-stack-3d',
-        to: '/pro',
-        active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
-      }, {
-        label: 'Pricing',
-        icon: 'i-heroicons-credit-card',
-        to: '/pro/pricing'
-      }, {
-        label: 'Templates',
-        icon: 'i-heroicons-computer-desktop',
-        to: '/pro/templates'
-      }]
-    : []), {
-    label: 'Releases',
-    icon: 'i-heroicons-rocket-launch',
-    to: '/releases'
-  }].filter(Boolean)
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+  server: false
 })
+
+const searchTerm = ref('')
+
+// watch(searchTerm, debounce((query: string) => {
+//   if (!query) {
+//     return
+//   }
+
+//   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
+// }, 500))
+
+const links = computed(() => [{
+  label: 'Docs',
+  icon: 'i-lucide-square-play',
+  to: '/getting-started',
+  active: route.path.startsWith('/getting-started')
+}, {
+  label: 'Components',
+  icon: 'i-lucide-square-code',
+  to: '/components',
+  active: route.path.startsWith('/components')
+}, {
+  label: 'Roadmap',
+  icon: 'i-lucide-map',
+  to: '/roadmap'
+}, {
+  label: 'Figma',
+  icon: 'i-lucide-figma',
+  to: 'https://www.figma.com/community/file/1288455405058138934',
+  target: '_blank'
+}, {
+  label: 'Releases',
+  icon: 'i-lucide-rocket',
+  to: 'https://github.com/nuxt/ui/releases',
+  target: '_blank'
+}].filter(Boolean))
 
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
@@ -73,23 +81,40 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-provide('navigation', navigation)
+const { frameworks, modules } = useSharedData()
+const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
+
+provide('navigation', mappedNavigation)
 </script>
 
 <template>
   <UApp>
     <NuxtLoadingIndicator color="#FFF" />
 
-    <Banner />
+    <!-- <Banner /> -->
 
     <Header :links="links" />
 
     <UError :error="error" />
 
-    <Footer />
+    <!-- <Footer /> -->
 
     <ClientOnly>
-      <LazyUContentSearch :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+      <LazyUContentSearch
+        v-model:search-term="searchTerm"
+        :files="files"
+        :groups="[{
+          id: 'framework',
+          label: 'Framework',
+          items: frameworks
+        }, {
+          id: 'module',
+          label: 'Module',
+          items: modules
+        }]"
+        :navigation="filteredNavigation"
+        :fuse="{ resultLimit: 42 }"
+      />
     </ClientOnly>
   </UApp>
 </template>

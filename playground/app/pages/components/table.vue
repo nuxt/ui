@@ -145,14 +145,13 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsAllPageRowsSelected(),
-    'indeterminate': table.getIsSomePageRowsSelected(),
-    'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value),
+    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'ariaLabel': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
-    'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
     'ariaLabel': 'Select row'
   }),
   enableSorting: false,
@@ -164,6 +163,12 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   accessorKey: 'date',
   header: 'Date',
+  meta: {
+    class: {
+      td: 'text-center font-semibold',
+      th: 'text-right text-green-500 w-48'
+    }
+  },
   cell: ({ row }) => {
     return new Date(row.getValue('date')).toLocaleString('en-US', {
       day: 'numeric',
@@ -194,7 +199,7 @@ const columns: TableColumn<Payment>[] = [{
       color: 'neutral',
       variant: 'ghost',
       label: 'Email',
-      icon: isSorted ? (isSorted === 'asc' ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid') : 'i-heroicons-arrows-up-down-20-solid',
+      icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
       class: '-mx-2.5',
       onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
     })
@@ -228,7 +233,7 @@ const columns: TableColumn<Payment>[] = [{
         toast.add({
           title: 'Payment ID copied to clipboard!',
           color: 'success',
-          icon: 'i-heroicons-check-circle'
+          icon: 'i-lucide-circle-check'
         })
       }
     }, {
@@ -250,7 +255,7 @@ const columns: TableColumn<Payment>[] = [{
       },
       items
     }, () => h(UButton, {
-      icon: 'i-heroicons-ellipsis-vertical-20-solid',
+      icon: 'i-lucide-ellipsis-vertical',
       color: 'neutral',
       variant: 'ghost',
       class: 'ms-auto'
@@ -276,7 +281,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full flex flex-col flex-1 gap-4 w-full -my-8">
+  <div class="h-full flex flex-col flex-1 gap-4 w-full">
     <div class="flex gap-2 items-center">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
@@ -305,7 +310,7 @@ onMounted(() => {
           label="Columns"
           color="neutral"
           variant="outline"
-          trailing-icon="i-heroicons-chevron-down-20-solid"
+          trailing-icon="i-lucide-chevron-down"
           class="ms-auto"
         />
       </UDropdownMenu>
@@ -318,6 +323,9 @@ onMounted(() => {
       :column-pinning="columnPinning"
       :loading="loading"
       sticky
+      :ui="{
+        tr: 'divide-x divide-[var(--ui-border)]'
+      }"
       class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
     >
       <template #expanded="{ row }">

@@ -30,7 +30,7 @@ const groups = computed(() => [{
   items: [{
     label: 'Add new file',
     suffix: 'Create a new file in the current directory or workspace.',
-    icon: 'i-heroicons-document-plus',
+    icon: 'i-lucide-file-plus',
     loading: loading.value,
     onSelect(e: Event) {
       e.preventDefault()
@@ -47,7 +47,7 @@ const groups = computed(() => [{
   }, {
     label: 'Add new folder',
     suffix: 'Create a new folder in the current directory or workspace.',
-    icon: 'i-heroicons-folder-plus',
+    icon: 'i-lucide-folder-plus',
     onSelect(e: Event) {
       e.preventDefault()
 
@@ -57,7 +57,7 @@ const groups = computed(() => [{
   }, {
     label: 'Add hashtag',
     suffix: 'Add a hashtag to the current item.',
-    icon: 'i-heroicons-hashtag',
+    icon: 'i-lucide-hash',
     onSelect(e: Event) {
       e.preventDefault()
 
@@ -67,7 +67,7 @@ const groups = computed(() => [{
   }, {
     label: 'Add label',
     suffix: 'Add a label to the current item.',
-    icon: 'i-heroicons-tag',
+    icon: 'i-lucide-tag',
     onSelect(e: Event) {
       e.preventDefault()
 
@@ -130,7 +130,7 @@ defineShortcuts({
         <UButton label="Open modal" color="neutral" variant="outline" />
 
         <template #content>
-          <ReuseTemplate :close="true" @close="open = false" />
+          <ReuseTemplate :close="true" @update:open="open = $event" />
         </template>
       </UModal>
 
@@ -138,7 +138,7 @@ defineShortcuts({
         <UButton label="Open drawer" color="neutral" variant="outline" />
 
         <template #content>
-          <ReuseTemplate class="border-t border-[var(--ui-border)]" />
+          <ReuseTemplate class="border-t border-[var(--ui-border)] mt-4" />
         </template>
       </UDrawer>
 

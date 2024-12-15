@@ -3,7 +3,7 @@ import { buttonGroupVariant } from './button-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    base: ['rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    base: ['rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -103,7 +103,7 @@ export default (options: Required<ModuleOptions>) => ({
   })), {
     color: 'neutral',
     variant: 'solid',
-    class: 'text-[var(--ui-bg)] bg-[var(--ui-bg-inverted)] hover:bg-[var(--ui-bg-inverted)]/80 disabled:bg-[var(--ui-bg-inverted)] aria-disabled:bg-[var(--ui-bg-inverted)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-border-inverted)]'
+    class: 'text-[var(--ui-bg)] bg-[var(--ui-bg-inverted)] hover:bg-[var(--ui-bg-inverted)]/90 disabled:bg-[var(--ui-bg-inverted)] aria-disabled:bg-[var(--ui-bg-inverted)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-border-inverted)]'
   }, {
     color: 'neutral',
     variant: 'outline',

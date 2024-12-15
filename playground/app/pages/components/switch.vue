@@ -25,8 +25,8 @@ const checked = ref(true)
         :key="size"
         :size="size"
         label="Switch me"
-        unchecked-icon="i-heroicons-x-mark-20-solid"
-        checked-icon="i-heroicons-check-20-solid"
+        unchecked-icon="i-lucide-x"
+        checked-icon="i-lucide-check"
       />
     </div>
     <div class="flex items-center gap-4 ms-[-82px]">
@@ -35,8 +35,8 @@ const checked = ref(true)
         :key="size"
         :size="size"
         label="Switch me"
-        unchecked-icon="i-heroicons-x-mark-20-solid"
-        checked-icon="i-heroicons-check-20-solid"
+        unchecked-icon="i-lucide-x"
+        checked-icon="i-lucide-check"
         loading
       />
     </div>
@@ -56,8 +56,8 @@ const checked = ref(true)
         :size="size"
         label="Switch me"
         description="This is a description"
-        unchecked-icon="i-heroicons-x-mark-20-solid"
-        checked-icon="i-heroicons-check-20-solid"
+        unchecked-icon="i-lucide-x"
+        checked-icon="i-lucide-check"
       />
     </div>
   </div>

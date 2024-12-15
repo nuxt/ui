@@ -1,0 +1,1009 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Stepper > renders with as correctly 1`] = `
+"<section role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</section>"
+`;
+
+exports[`Stepper > renders with class correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex flex-col gap-8">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with content slot correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <div class="size-full">Content slot</div>
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with custom slot correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with default slot correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with defaultValue correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div data-state="completed" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="completed" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="completed" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with description slot correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Description slot</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Description slot</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Description slot</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with indicator slot correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">Indicator slot</div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">Indicator slot</div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">Indicator slot</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with items correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with modelValue correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div data-state="completed" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="completed" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="completed" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 1 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with neutral color correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-bg-inverted)] group-data-[state=active]:bg-[var(--ui-bg-inverted)] focus-visible:outline-[var(--ui-border-inverted)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-bg-inverted)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-bg-inverted)] group-data-[state=active]:bg-[var(--ui-bg-inverted)] focus-visible:outline-[var(--ui-border-inverted)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-bg-inverted)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-bg-inverted)] group-data-[state=active]:bg-[var(--ui-bg-inverted)] focus-visible:outline-[var(--ui-border-inverted)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size lg horizontal correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-6" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+32px)] end-[calc(-50%+32px)]"></div>
+      </div>
+      <div class="mt-3">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-base">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-base">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-6" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+32px)] end-[calc(-50%+32px)]"></div>
+      </div>
+      <div class="mt-3">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-base">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-base">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-3">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-base">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-base">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size lg vertical correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="vertical" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-3">
+      <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-6" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[54px]"></div>
+      </div>
+      <div class="mt-3">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-base">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-base">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-3">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-6" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[54px]"></div>
+      </div>
+      <div class="mt-3">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-base">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-base">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-3">
+      <div class="relative"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-3">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-base">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-base">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size md horizontal correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size md vertical correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="vertical" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[46px]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[46px]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size sm horizontal correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-4" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+20px)] end-[calc(-50%+20px)]"></div>
+      </div>
+      <div class="mt-2">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-xs">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-xs">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-4" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+20px)] end-[calc(-50%+20px)]"></div>
+      </div>
+      <div class="mt-2">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-xs">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-xs">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-xs">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-xs">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size sm vertical correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="vertical" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-2">
+      <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-4" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[38px]"></div>
+      </div>
+      <div class="mt-2">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-xs">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-xs">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-2">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-4" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[38px]"></div>
+      </div>
+      <div class="mt-2">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-xs">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-xs">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-2">
+      <div class="relative"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-xs">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-xs">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size xl horizontal correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-7" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+36px)] end-[calc(-50%+36px)]"></div>
+      </div>
+      <div class="mt-3.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-lg">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-lg">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-7" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+36px)] end-[calc(-50%+36px)]"></div>
+      </div>
+      <div class="mt-3.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-lg">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-lg">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-3.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-lg">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-lg">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size xl vertical correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="vertical" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-7" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[62px]"></div>
+      </div>
+      <div class="mt-3.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-lg">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-lg">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-7" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[62px]"></div>
+      </div>
+      <div class="mt-3.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-lg">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-lg">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-3.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-lg">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-lg">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size xs horizontal correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-3" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+16px)] end-[calc(-50%+16px)]"></div>
+      </div>
+      <div class="mt-1.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-xs">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-xs">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-3" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+16px)] end-[calc(-50%+16px)]"></div>
+      </div>
+      <div class="mt-1.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-xs">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-xs">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-1.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-xs">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-xs">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with size xs vertical correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="vertical" class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-3" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[30px]"></div>
+      </div>
+      <div class="mt-1.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-xs">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-xs">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-3" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] top-[30px]"></div>
+      </div>
+      <div class="mt-1.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-xs">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-xs">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-1.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-xs">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-xs">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with title slot correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Title slot</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Title slot</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Title slot</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders with ui correctly 1`] = `
+"<div role="group" aria-label="progress" data-linear="" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="text-[var(--ui-text)] text-sm font-bold">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="text-[var(--ui-text)] text-sm font-bold">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" tabindex="-1" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="text-[var(--ui-text)] text-sm font-bold">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;
+
+exports[`Stepper > renders without linear correctly 1`] = `
+"<div role="group" aria-label="progress" data-orientation="horizontal" class="flex gap-4 flex-col">
+  <div class="flex">
+    <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-1" aria-labelledby="reka-stepper-item-title-v-0-0-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:house shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-[var(--ui-text)] text-sm">Address</h4>
+        <p id="reka-stepper-item-description-v-0-0-1" class="text-[var(--ui-text-muted)] text-wrap text-sm">Add your address here</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-3" aria-labelledby="reka-stepper-item-title-v-0-0-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:truck shrink-0 size-5" aria-hidden="true"></span></div>
+        </button>
+        <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-[var(--ui-border-accented)] top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-[var(--ui-primary)] start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-[var(--ui-text)] text-sm">Shipping</h4>
+        <p id="reka-stepper-item-description-v-0-0-3" class="text-[var(--ui-text-muted)] text-wrap text-sm">Set your preferred shipping method</p>
+      </div>
+    </div>
+    <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
+      <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-0-0-5" aria-labelledby="reka-stepper-item-title-v-0-0-4" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-[var(--ui-bg)] group-data-[state=active]:text-[var(--ui-bg)] text-[var(--ui-text-muted)] bg-[var(--ui-bg-elevated)] focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-[var(--ui-primary)] group-data-[state=active]:bg-[var(--ui-primary)] focus-visible:outline-[var(--ui-primary)]">
+          <div class="flex items-center justify-center size-full">3</div>
+        </button>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-[var(--ui-text)] text-sm">Checkout</h4>
+        <p id="reka-stepper-item-description-v-0-0-5" class="text-[var(--ui-text-muted)] text-wrap text-sm">Confirm your order</p>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+  <div aria-live="polite" aria-atomic="true" role="status" style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px;"> Step 0 of 3</div>
+</div>"
+`;

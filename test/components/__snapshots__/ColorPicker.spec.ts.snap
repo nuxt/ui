@@ -1,0 +1,196 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ColorPicker > renders with as correctly 1`] = `
+"<section data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #FF0000;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    </div>
+  </div>
+</section>"
+`;
+
+exports[`ColorPicker > renders with class correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75 w-96">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #FF0000;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with disabled correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75" data-disabled="true">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #FF0000;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;" data-disabled="true"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;" data-disabled="true"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with format hex correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #00FF8C;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313725490196077%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704663212436%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with format hsl correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #00FF8C;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.400000000000006%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.5%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with format hwb correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #00FF80;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C261; left: 100%; top: 24%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF80; top: 41.666666666666664%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with format rgb correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #00FF8C;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313725490196077%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704663212436%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with size lg correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-44 h-44" style="background-color: #FF0000;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-44" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with size md correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #FF0000;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with size sm correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-40 h-40" style="background-color: #FF0000;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-40" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with size xl correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-46 h-46" style="background-color: #FF0000;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-46" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with size xs correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-38 h-38" style="background-color: #FF0000;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-38" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`ColorPicker > renders with ui correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-8">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #FF0000;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FFFFFF; left: 0%; top: 0%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #FF0000; top: 0%;"></div>
+    </div>
+  </div>
+</div>"
+`;

@@ -2,8 +2,8 @@
 description: A select element to choose from a list of options.
 links:
   - label: Select
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/select.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/select
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Select.vue
@@ -135,6 +135,39 @@ props:
 ---
 ::
 
+### Multiple
+
+Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+  - multiple
+  - class
+external:
+  - items
+  - modelValue
+props:
+  modelValue:
+    - Backlog
+    - Todo
+  multiple: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+::caution
+Ensure to pass an array to the `default-value` prop or the `v-model` directive.
+::
+
 ### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
@@ -160,11 +193,7 @@ props:
 
 ### Content
 
-Use the `content` prop to control how the Select content is rendered, like its its `align`, `side` or `position` for example. Defaults to `popper` to match other components.
-
-::warning
-The `content.align`, `content.side`, etc. properties only apply when `content.position` is set to `popper`.
-::
+Use the `content` prop to control how the Select content is rendered, like its `align` or `side` for example.
 
 ::component-code
 ---
@@ -177,9 +206,6 @@ external:
   - items
   - modelValue
 items:
-  content.position:
-    - 'item-aligned'
-    - 'popper'
   content.align:
     - start
     - center
@@ -190,9 +216,8 @@ items:
     - top
     - bottom
 props:
-  modelValue: 'Todo'
+  modelValue: 'Backlog'
   content:
-    position: 'item-aligned'
     align: center
     side: bottom
     sideOffset: 8
@@ -205,8 +230,31 @@ props:
 ---
 ::
 
-::note{to="https://www.radix-vue.com/components/select.html#change-the-positioning-mode"}
-Read more about the `content.position` prop in the [Radix Vue documentation](https://www.radix-vue.com/components/select.html#change-the-positioning-mode).
+### Arrow
+
+Use the `arrow` prop to display an arrow on the Select.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+  - arrow
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  arrow: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
 ::
 
 ### Color
@@ -310,7 +358,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  icon: 'i-heroicons-magnifying-glass'
+  icon: 'i-lucide-search'
   size: md
   items:
     - Backlog
@@ -323,7 +371,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-heroicons-chevron-down-20-solid`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon). Defaults to `i-lucide-chevron-down`.
 
 ::component-code
 ---
@@ -337,7 +385,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  trailingIcon: 'i-heroicons-arrow-small-down-20-solid'
+  trailingIcon: 'i-lucide-arrow-down'
   size: md
   items:
     - Backlog
@@ -348,13 +396,21 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
+:::
 ::
 
 ### Selected Icon
 
-Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-heroicons-check-20-solid`.
+Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
 ::component-code
 ---
@@ -368,7 +424,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  selectedIcon: 'i-heroicons-fire'
+  selectedIcon: 'i-lucide-flame'
   size: md
   items:
     - Backlog
@@ -379,8 +435,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
+:::
 ::
 
 ### Avatar
@@ -440,7 +504,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 
 ::component-code
 ---
@@ -455,7 +519,7 @@ external:
 props:
   modelValue: 'Backlog'
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
   items:
     - Backlog
     - Todo
@@ -465,8 +529,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
 ::
 
 ### Disabled
@@ -596,7 +668,7 @@ name: 'select-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Select by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Select by pressing :kbd{value="O"}.
 ::
 
 ### With rotating icon

@@ -10,7 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemLeadingIcon: 'shrink-0',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingAvatarSize: '',
-    itemTrailing: 'ms-auto inline-flex',
+    itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     itemTrailingIcon: 'shrink-0',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',
     itemTrailingKbdsSize: '',
@@ -18,6 +18,10 @@ export default (options: Required<ModuleOptions>) => ({
     itemLabelExternalIcon: 'inline-block size-3 align-top text-[var(--ui-text-dimmed)]'
   },
   variants: {
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
+      neutral: ''
+    },
     active: {
       true: {
         item: 'text-[var(--ui-text-highlighted)] before:bg-[var(--ui-bg-elevated)]',
@@ -81,6 +85,21 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
+  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
+    color,
+    active: false,
+    class: {
+      item: `text-[var(--ui-${color})] data-highlighted:text-[var(--ui-${color})] data-highlighted:before:bg-[var(--ui-${color})]/10 data-[state=open]:before:bg-[var(--ui-${color})]/10`,
+      itemLeadingIcon: `text-[var(--ui-${color})]/75 group-data-highlighted:text-[var(--ui-${color})] group-data-[state=open]:text-[var(--ui-${color})]`
+    }
+  })), ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    active: true,
+    class: {
+      item: `text-[var(--ui-${color})] before:bg-[var(--ui-${color})]/10`,
+      itemLeadingIcon: `text-[var(--ui-${color})]`
+    }
+  }))],
   defaultVariants: {
     size: 'md'
   }

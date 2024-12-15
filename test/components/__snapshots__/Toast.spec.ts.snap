@@ -4,80 +4,130 @@ exports[`Toast > renders with actions correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" data-radix-toast-announce-exclude="" data-radix-toast-announce-alt="Action" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-[var(--ui-bg)] bg-[var(--ui-primary)] hover:bg-[var(--ui-primary)]/75 disabled:bg-[var(--ui-primary)] aria-disabled:bg-[var(--ui-primary)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-primary)]">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-[var(--ui-bg)] bg-[var(--ui-primary)] hover:bg-[var(--ui-primary)]/75 disabled:bg-[var(--ui-primary)] aria-disabled:bg-[var(--ui-primary)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-primary)]">
           <!--v-if--><span class="truncate">Action</span>
           <!--v-if-->
-        </button><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+        </button><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`Toast > renders with as correctly 1`] = `
+"<!---->
+<!--teleport start-->
+<!--teleport end-->
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+  <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
+    <section role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
+      <!--v-if-->
+      <div class="w-0 flex-1 flex flex-col gap-1">
+        <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
+        <!--v-if-->
+        <!--v-if-->
+      </div>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button></div>
+      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
+    </section>
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with avatar correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-11 text-[22px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-[var(--ui-bg-elevated)] size-11 text-[22px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="44" height="44" class="h-full w-full rounded-[inherit] object-cover" style="display: none;"><span class="font-medium leading-none text-[var(--ui-text-muted)] truncate"></span></span>
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with class correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center bg-[var(--ui-bg-elevated)]/50" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center bg-[var(--ui-bg-elevated)]/50" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with close slot correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
@@ -87,91 +137,115 @@ exports[`Toast > renders with close slot correctly 1`] = `
       <div class="flex gap-1.5 shrink-0 items-center">Close slot</div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with closeIcon correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:trash shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with color neutral correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-border-inverted)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-border-inverted)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-bg-inverted)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with description actions correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <div class="text-sm text-[var(--ui-text-muted)]">This is a toast</div>
-        <div class="flex gap-1.5 shrink-0 items-start mt-1"><button type="button" data-radix-toast-announce-exclude="" data-radix-toast-announce-alt="Action" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-[var(--ui-bg)] bg-[var(--ui-primary)] hover:bg-[var(--ui-primary)]/75 disabled:bg-[var(--ui-primary)] aria-disabled:bg-[var(--ui-primary)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-primary)]">
+        <div class="flex gap-1.5 shrink-0 items-start mt-1"><button type="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-[var(--ui-bg)] bg-[var(--ui-primary)] hover:bg-[var(--ui-primary)]/75 disabled:bg-[var(--ui-primary)] aria-disabled:bg-[var(--ui-primary)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-primary)]">
             <!--v-if--><span class="truncate">Action</span>
             <!--v-if-->
           </button></div>
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with description correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
@@ -179,182 +253,230 @@ exports[`Toast > renders with description correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with description slot correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <div class="text-sm text-[var(--ui-text-muted)]">Description slot</div>
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with icon correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right"><span class="iconify i-heroicons:rocket-launch shrink-0 size-5 text-[var(--ui-primary)]" aria-hidden="true"></span>
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><span class="iconify i-lucide:rocket shrink-0 size-5 text-[var(--ui-primary)]" aria-hidden="true"></span>
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with leading slot correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">Leading slot<div class="w-0 flex-1 flex flex-col gap-1">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">Leading slot<div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with title correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with title slot correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Title slot</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with type correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders with ui correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm text-[var(--ui-text-highlighted)] font-bold">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-radix-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-none disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-heroicons:x-mark-20-solid shrink-0 size-5" aria-hidden="true"></span>
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-[var(--ui-text-muted)] hover:text-[var(--ui-text)] disabled:text-[var(--ui-text-muted)] aria-disabled:text-[var(--ui-text-muted)] focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[var(--ui-border-inverted)] p-0.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;
 
 exports[`Toast > renders without close correctly 1`] = `
 "<!---->
 <!--teleport start-->
 <!--teleport end-->
-<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
+<!--teleport start-->
+
+
+<div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-[var(--height)] focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="status" aria-live="off" aria-atomic="" tabindex="0" data-radix-vue-collection-item="" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right">
+    <li role="status" aria-live="off" aria-atomic="" tabindex="0" class="relative group overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-[var(--ui-border)] p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-primary)] items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item="">
       <!--v-if-->
       <div class="w-0 flex-1 flex flex-col gap-1">
         <div class="text-sm font-medium text-[var(--ui-text-highlighted)]">Toast</div>
@@ -364,6 +486,9 @@ exports[`Toast > renders without close correctly 1`] = `
       <div class="flex gap-1.5 shrink-0 items-center"></div>
       <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-[var(--ui-primary)]" style="width: 100%;"></div>
     </li>
-  </ol><span style="position: fixed; border: 0px; width: 1px; display: inline-block; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; word-wrap: normal;" aria-hidden="true" tabindex="0"></span>
-</div>"
+  </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
+</div>
+
+
+<!--teleport end-->"
 `;

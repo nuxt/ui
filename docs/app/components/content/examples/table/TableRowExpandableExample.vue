@@ -50,7 +50,7 @@ const columns: TableColumn<Payment>[] = [{
   cell: ({ row }) => h(UButton, {
     color: 'neutral',
     variant: 'ghost',
-    icon: 'i-heroicons-chevron-down-20-solid',
+    icon: 'i-lucide-chevron-down',
     square: true,
     ui: {
       leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']

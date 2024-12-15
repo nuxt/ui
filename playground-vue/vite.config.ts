@@ -30,6 +30,6 @@ export default defineConfig({
   ],
   optimizeDeps: {
     // prevents reloading page when navigating between components
-    include: ['radix-vue/namespaced', 'vaul-vue', 'fast-deep-equal', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures']
+    include: ['reka-ui/namespaced', 'vaul-vue', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures']
   }
 })

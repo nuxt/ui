@@ -3,6 +3,7 @@ import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/container'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { container: Partial<typeof theme> } }
 
@@ -20,10 +21,12 @@ export interface ContainerProps {
 export interface ContainerSlots {
   default(props?: {}): any
 }
+
+extendDevtoolsMeta({ example: 'ContainerExample' })
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 
 const props = defineProps<ContainerProps>()
 defineSlots<ContainerSlots>()

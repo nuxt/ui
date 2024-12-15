@@ -3,8 +3,8 @@ title: ContextMenu
 description: A menu to display actions when right-clicking on an element.
 links:
   - label: ContextMenu
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/context-menu.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/context-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/ContextMenu.vue
@@ -20,9 +20,11 @@ Use the `items` prop as an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
+- `color?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
 - [`type?: "link" | "label" | "separator" | "checkbox"`{lang="ts-type"}](#with-checkbox-items)
+- [`color?: "error" | "primary" | "secondary" | "success" | "info" | "warning" | "neutral"`{lang="ts-type"}](#with-color-items)
 - [`checked?: boolean`{lang="ts-type"}](#with-checkbox-items)
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
@@ -30,7 +32,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?(e: Event): void`{lang="ts-type"}
 - [`onUpdateChecked?(checked: boolean): void`{lang="ts-type"}](#with-checkbox-items)
 
-You can also pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
 ::component-code
 ---
@@ -38,7 +40,7 @@ prettier: true
 collapse: true
 ignore:
   - items
-  - class
+  - ui.content
 external:
   - items
 props:
@@ -46,11 +48,11 @@ props:
     - - label: Appearance
         children:
           - label: System
-            icon: i-heroicons-computer-desktop
+            icon: i-lucide-monitor
           - label: Light
-            icon: i-heroicons-sun
+            icon: i-lucide-sun
           - label: Dark
-            icon: i-heroicons-moon
+            icon: i-lucide-moon
     - - label: Show Sidebar
         kbds:
           - meta
@@ -88,7 +90,8 @@ props:
                 - option
                 - meta
                 - j
-  class: 'w-48'
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
@@ -101,7 +104,7 @@ slots:
 ::
 
 ::note
-You can pass an array of arrays to the `items` prop to create separated groups of items.
+You can also pass an array of arrays to the `items` prop to create separated groups of items.
 ::
 
 ::tip
@@ -117,19 +120,20 @@ Use the `size` prop to change the size of the ContextMenu.
 prettier: true
 ignore:
   - items
-  - class
+  - ui.content
 external:
   - items
 props:
   size: xl
   items:
     - label: System
-      icon: i-heroicons-computer-desktop
+      icon: i-lucide-monitor
     - label: Light
-      icon: i-heroicons-sun
+      icon: i-lucide-sun
     - label: Dark
-      icon: i-heroicons-moon
-  class: 'w-48'
+      icon: i-lucide-moon
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
@@ -150,19 +154,20 @@ Use the `disabled` prop to disable the ContextMenu.
 prettier: true
 ignore:
   - items
-  - class
+  - ui.content
 external:
   - items
 props:
   disabled: true
   items:
     - label: System
-      icon: i-heroicons-computer-desktop
+      icon: i-lucide-monitor
     - label: Light
-      icon: i-heroicons-sun
+      icon: i-lucide-sun
     - label: Dark
-      icon: i-heroicons-moon
-  class: 'w-48'
+      icon: i-lucide-moon
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
@@ -189,6 +194,16 @@ name: 'context-menu-checkbox-items-example'
 
 ::note
 To ensure reactivity for the `checked` state of items, it's recommended to wrap your `items` array inside a `computed`.
+::
+
+### With color items
+
+You can use the `color` property to highlight certain items with a color.
+
+::component-example
+---
+name: 'context-menu-color-items-example'
+---
 ::
 
 ### With custom slot
