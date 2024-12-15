@@ -52,7 +52,6 @@ import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
-import UAvatar from './Avatar.vue'
 
 const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
