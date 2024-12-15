@@ -95,6 +95,7 @@ import { isEqual } from 'ohash'
 import { useForwardProps } from 'radix-vue'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute } from '#imports'
+import ULinkBase from './LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
 
