@@ -11,6 +11,11 @@ const textarea = tv({ extend: tv(theme), ...(appConfig.ui?.textarea || {}) })
 type TextareaVariants = VariantProps<typeof textarea>
 
 export interface TextareaProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   id?: string
   name?: string
   /** The placeholder text when the textarea is empty. */
@@ -44,6 +49,7 @@ export interface TextareaSlots {
 
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
+import { Primitive } from 'reka-ui'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 
@@ -167,7 +173,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <textarea
       :id="id"
       ref="textareaRef"
@@ -185,5 +191,5 @@ onMounted(() => {
     />
 
     <slot />
-  </div>
+  </Primitive>
 </template>

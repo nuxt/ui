@@ -9,6 +9,12 @@ export default defineLocale({
       noData: 'Keine Daten',
       create: '"{label}" erstellen'
     },
+    calendar: {
+      prevYear: 'Vorheriges Jahr',
+      nextYear: 'Nächstes Jahr',
+      prevMonth: 'Vorheriger Monat',
+      nextMonth: 'Nächster Monat'
+    },
     inputNumber: {
       increment: 'Erhöhen',
       decrement: 'Verringern'
@@ -27,8 +33,8 @@ export default defineLocale({
       close: 'Schließen'
     },
     carousel: {
-      prev: 'Weiter',
-      next: 'Zurück',
+      prev: 'Zurück',
+      next: 'Weiter',
       goto: 'Gehe zu {slide}'
     },
     modal: {

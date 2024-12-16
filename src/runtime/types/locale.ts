@@ -4,6 +4,12 @@ export type Messages = {
     noData: string
     create: string
   }
+  calendar: {
+    prevYear: string
+    nextYear: string
+    prevMonth: string
+    nextMonth: string
+  }
   inputNumber: {
     increment: string
     decrement: string

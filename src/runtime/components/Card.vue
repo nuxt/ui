@@ -29,7 +29,7 @@ extendDevtoolsMeta({ example: 'CardExample' })
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 
 const props = defineProps<CardProps>()
 const slots = defineSlots<CardSlots>()

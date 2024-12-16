@@ -7,7 +7,7 @@ const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
   server: false
 })
@@ -73,24 +73,10 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const updatedNavigation = computed(() => navigation.value?.map(item => ({
-  ...item,
-  children: item.children?.map((child: typeof item) => ({
-    ...child,
-    ...(child.path === '/getting-started/installation' && {
-      title: 'Installation',
-      active: route.path.startsWith('/getting-started/installation'),
-      children: []
-    }),
-    ...(child.path === '/getting-started/i18n' && {
-      title: 'I18n',
-      active: route.path.startsWith('/getting-started/i18n'),
-      children: []
-    })
-  })) || []
-})))
+const { frameworks, modules } = useSharedData()
+const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
 
-provide('navigation', updatedNavigation)
+provide('navigation', mappedNavigation)
 </script>
 
 <template>
@@ -98,7 +84,7 @@ provide('navigation', updatedNavigation)
     <NuxtLoadingIndicator color="#FFF" />
 
     <template v-if="!route.path.startsWith('/examples')">
-      <Banner />
+      <!-- <Banner /> -->
 
       <Header :links="links" />
     </template>
@@ -108,10 +94,24 @@ provide('navigation', updatedNavigation)
     </NuxtLayout>
 
     <template v-if="!route.path.startsWith('/examples')">
-      <Footer />
+      <!-- <Footer /> -->
 
       <ClientOnly>
-        <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+        <LazyUContentSearch
+          v-model:search-term="searchTerm"
+          :files="files"
+          :groups="[{
+            id: 'framework',
+            label: 'Framework',
+            items: frameworks
+          }, {
+            id: 'module',
+            label: 'Module',
+            items: modules
+          }]"
+          :navigation="filteredNavigation"
+          :fuse="{ resultLimit: 42 }"
+        />
       </ClientOnly>
     </template>
   </UApp>
@@ -143,5 +143,12 @@ provide('navigation', updatedNavigation)
 
 :root {
   --ui-container: var(--container-8xl);
+}
+
+html[data-framework="nuxt"] .vue-only,
+html[data-framework="vue"] .nuxt-only,
+html[data-module="ui-pro"] .ui-only,
+html[data-module="ui"] .ui-pro-only {
+  display: none;
 }
 </style>

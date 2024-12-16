@@ -77,7 +77,7 @@ extendDevtoolsMeta({
 
 <script setup lang="ts" generic="T extends BreadcrumbItem">
 import { computed } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { get } from '../utils'

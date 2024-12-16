@@ -55,7 +55,7 @@ export interface ${upperName}Slots {
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 
 const props = withDefaults(defineProps<${upperName}Props>(), { as: 'div' })
 defineSlots<${upperName}Slots>()
@@ -72,7 +72,7 @@ const ui = ${camelName}()
       : `
 <script lang="ts">
 import { tv, type VariantProps } from 'tailwind-variants'
-import type { ${upperName}RootProps, ${upperName}RootEmits } from 'radix-vue'
+import type { ${upperName}RootProps, ${upperName}RootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
@@ -94,7 +94,7 @@ export interface ${upperName}Slots {}
 </script>
 
 <script setup lang="ts">
-import { ${upperName}Root, useForwardPropsEmits } from 'radix-vue'
+import { ${upperName}Root, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 
 const props = defineProps<${upperName}Props>()
@@ -149,7 +149,7 @@ import ComponentRender from '../${content ? '../' : ''}component-render'
 describe('${upperName}', () => {
   it.each([
     // Props
-    ['with as', { props: { as: 'div' } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: '' } }],
     ['with ui', { props: { ui: {} } }],
     // Slots
@@ -175,8 +175,8 @@ links: ${pro
   ? ''
   : `
   - label: ${upperName}
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/${kebabName}.html`}
+    icon: i-custom-reka-ui
+    to: https://www.reka-ui.com/components/${kebabName}.html`}
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v3/src/runtime/components/${upperName}.vue

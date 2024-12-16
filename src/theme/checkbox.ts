@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
-    base: 'shrink-0 flex items-center justify-center rounded-[var(--ui-radius)] text-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
+    base: 'shrink-0 flex items-center justify-center rounded-[var(--ui-radius)] text-[var(--ui-bg)] ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-2',
     container: 'flex items-center',
     wrapper: 'ms-2',
     icon: 'shrink-0 size-full',

@@ -9,7 +9,8 @@ describe('CommandPalette', () => {
       label: 'Add new file',
       suffix: 'Create a new file in the current directory or workspace.',
       icon: 'i-lucide-file-plus',
-      kbds: ['meta', 'N']
+      kbds: ['meta', 'N'],
+      active: true
     }, {
       label: 'Add new folder',
       suffix: 'Create a new folder in the current directory or workspace.',
@@ -19,7 +20,8 @@ describe('CommandPalette', () => {
       label: 'Add hashtag',
       suffix: 'Add a hashtag to the current item.',
       icon: 'i-lucide-hash',
-      kbds: ['meta', 'H']
+      kbds: ['meta', 'H'],
+      disabled: true
     }, {
       label: 'Add label',
       suffix: 'Add a label to the current item.',

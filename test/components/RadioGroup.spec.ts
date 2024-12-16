@@ -19,6 +19,7 @@ describe('RadioGroup', () => {
 
   it.each([
     ['with items', { props }],
+    ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
     ['with valueKey', { props: { ...props, valueKey: 'label' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
@@ -28,9 +29,10 @@ describe('RadioGroup', () => {
     ['with required', { props: { ...props, legend: 'Legend', required: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: '1' } }],
+    ['with orientation', { props: { ...props, orientation: 'horizontal' } }],
+    ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { wrapper: 'ms-4' } } }],
-    ['with orientation', { props: { ...props, orientation: 'horizontal' } }],
     // Slots
     ['with legend slot', { props, slots: { label: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
