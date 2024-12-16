@@ -32,10 +32,10 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
    */
   portal?: boolean
   /**
-   * When `true`, the popover will not close when clicking outside.
-   * @defaultValue false
+   * When `false`, the popover will not close when clicking outside or pressing escape.
+   * @defaultValue true
    */
-  preventClose?: boolean
+  dismissible?: boolean
   class?: any
   ui?: Partial<typeof popover.slots>
 }
@@ -61,7 +61,8 @@ const props = withDefaults(defineProps<PopoverProps>(), {
   portal: true,
   mode: 'click',
   openDelay: 0,
-  closeDelay: 0
+  closeDelay: 0,
+  dismissible: true
 })
 const emits = defineEmits<PopoverEmits>()
 const slots = defineSlots<PopoverSlots>()
@@ -70,7 +71,7 @@ const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open',
 const rootProps = useForwardPropsEmits(pick, emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {
-  if (props.preventClose) {
+  if (!props.dismissible) {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
       interactOutside: (e: Event) => e.preventDefault(),

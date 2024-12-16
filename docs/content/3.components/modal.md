@@ -253,35 +253,6 @@ slots:
 :placeholder{class="h-full"}
 ::
 
-### Prevent close
-
-Use the `prevent-close` prop to prevent the Modal from being closed when clicking outside of it.
-
-::component-code
----
-prettier: true
-ignore:
-  - title
-  - preventClose
-props:
-  preventClose: true
-  title: 'Modal prevent close'
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" />
-
-  body: |
-
-    <Placeholder class="h-48" />
----
-
-:u-button{label="Open" color="neutral" variant="subtle"}
-
-#body
-:placeholder{class="h-48"}
-::
-
 ## Examples
 
 ### Control open state
@@ -300,6 +271,35 @@ In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), 
 
 ::tip
 This allows you to move the trigger outside of the Modal or remove it entirely.
+::
+
+### Prevent closing
+
+Set the `dismissible` prop to `false` to prevent the Modal from being closed when clicking outside of it or pressing escape.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - dismissible
+props:
+  dismissible: false
+  title: 'Modal non-dismissible'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-48"}
 ::
 
 ### Programmatic usage
