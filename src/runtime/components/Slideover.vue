@@ -103,13 +103,7 @@ const contentEvents = computed(() => {
     }
   }
 
-  return {
-    interactOutside: (e: Event) => {
-      if (e.target instanceof Element && e.target.closest('[data-sonner-toaster]')) {
-        return e.preventDefault()
-      }
-    }
-  }
+  return {}
 })
 
 const ui = computed(() => slideover({
