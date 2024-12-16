@@ -259,8 +259,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.5
       '@nuxt/content':
-        specifier: https://pkg.pr.new/@nuxt/content@8ea4de1
-        version: https://pkg.pr.new/@nuxt/content@8ea4de1(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.28.1)
+        specifier: https://pkg.pr.new/@nuxt/content@f124c95
+        version: https://pkg.pr.new/@nuxt/content@f124c95(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.28.1)
       '@nuxt/image':
         specifier: ^1.8.1
         version: 1.8.1(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.28.1)
@@ -1419,8 +1419,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@8ea4de1':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/content@8ea4de1}
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@f124c95':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/content@f124c95}
     version: 3.0.0-alpha.8
     peerDependencies:
       '@libsql/client': '*'
@@ -7961,7 +7961,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@8ea4de1(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.28.1)':
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@f124c95(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.28.1)':
     dependencies:
       '@libsql/client': 0.14.0
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.28.1)
