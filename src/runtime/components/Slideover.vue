@@ -46,10 +46,10 @@ export interface SlideoverProps extends DialogRootProps {
    */
   closeIcon?: string
   /**
-   * When `true`, the slideover will not close when clicking outside.
-   * @defaultValue false
+   * When `false`, the slideover will not close when clicking outside or pressing escape.
+   * @defaultValue true
    */
-  preventClose?: boolean
+  dismissible?: boolean
   class?: any
   ui?: Partial<typeof slideover.slots>
 }
@@ -84,6 +84,7 @@ const props = withDefaults(defineProps<SlideoverProps>(), {
   overlay: true,
   transition: true,
   modal: true,
+  dismissible: true,
   side: 'right'
 })
 const emits = defineEmits<SlideoverEmits>()
@@ -95,7 +96,7 @@ const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
-  if (props.preventClose) {
+  if (!props.dismissible) {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
       interactOutside: (e: Event) => e.preventDefault(),
@@ -103,13 +104,7 @@ const contentEvents = computed(() => {
     }
   }
 
-  return {
-    interactOutside: (e: Event) => {
-      if (e.target instanceof Element && e.target.closest('[data-sonner-toaster]')) {
-        return e.preventDefault()
-      }
-    }
-  }
+  return {}
 })
 
 const ui = computed(() => slideover({
