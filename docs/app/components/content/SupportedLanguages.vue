@@ -15,7 +15,8 @@ function getEmojiFlag(locale: string): string {
     cs: 'cz',
     zh: 'cn',
     ja: 'jp',
-    ko: 'kr'
+    ko: 'kr',
+    uk: 'ua'
   }
 
   // Get base language code before any region specifier
