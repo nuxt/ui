@@ -83,21 +83,24 @@ export default (options: Required<ModuleOptions>) => ({
     },
     highlight: {
       true: ''
+    },
+    level: {
+      true: ''
     }
   },
   compoundVariants: [{
-    highlight: true,
     orientation: 'horizontal',
+    highlight: true,
     class: {
       item: '-mb-px',
-      link: 'after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full'
+      link: ['after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full', options.theme.transitions && 'after:transition-colors']
     }
   }, {
-    highlight: true,
     orientation: 'vertical',
+    highlight: true,
+    level: true,
     class: {
-      item: 'px-1.5 -ms-px',
-      link: 'after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full'
+      link: ['after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full', options.theme.transitions && 'after:transition-colors']
     }
   }, {
     disabled: false,
@@ -130,7 +133,7 @@ export default (options: Required<ModuleOptions>) => ({
     active: true,
     class: {
       link: `text-[var(--ui-${color})]`,
-      linkLeadingIcon: `text-[var(--ui-${color})]`
+      linkLeadingIcon: `text-[var(--ui-${color})] group-data-[state=open]:text-[var(--ui-${color})]`
     }
   })), {
     color: 'neutral',
@@ -138,7 +141,7 @@ export default (options: Required<ModuleOptions>) => ({
     active: true,
     class: {
       link: 'text-[var(--ui-text-highlighted)]',
-      linkLeadingIcon: 'text-[var(--ui-text-highlighted)]'
+      linkLeadingIcon: 'text-[var(--ui-text-highlighted)] group-data-[state=open]:text-[var(--ui-text-highlighted)]'
     }
   }, {
     variant: 'pill',
@@ -168,7 +171,7 @@ export default (options: Required<ModuleOptions>) => ({
     active: true,
     class: {
       link: `text-[var(--ui-${color})]`,
-      linkLeadingIcon: `text-[var(--ui-${color})]`
+      linkLeadingIcon: `text-[var(--ui-${color})] group-data-[state=open]:text-[var(--ui-${color})]`
     }
   })), {
     color: 'neutral',
@@ -176,11 +179,12 @@ export default (options: Required<ModuleOptions>) => ({
     active: true,
     class: {
       link: 'text-[var(--ui-text-highlighted)]',
-      linkLeadingIcon: 'text-[var(--ui-text-highlighted)]'
+      linkLeadingIcon: 'text-[var(--ui-text-highlighted)] group-data-[state=open]:text-[var(--ui-text-highlighted)]'
     }
   }, ...(options.theme.colors || []).map((highlightColor: string) => ({
     highlightColor,
     highlight: true,
+    level: true,
     active: true,
     class: {
       link: `after:bg-[var(--ui-${highlightColor})]`
@@ -188,6 +192,7 @@ export default (options: Required<ModuleOptions>) => ({
   })), {
     highlightColor: 'neutral',
     highlight: true,
+    level: true,
     active: true,
     class: {
       link: 'after:bg-[var(--ui-bg-inverted)]'

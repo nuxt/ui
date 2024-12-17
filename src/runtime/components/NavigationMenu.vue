@@ -231,8 +231,8 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               :disabled="item.disabled"
               @select="item.onSelect"
             >
-              <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active, disabled: !!item.disabled })">
-                <ReuseItemTemplate :item="(item as T)" :active="active" :index="index" />
+              <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: !(orientation === 'vertical' && item.children?.length) })">
+                <ReuseItemTemplate :item="(item as T)" :active="active || item.active" :index="index" />
               </ULinkBase>
             </component>
 
@@ -269,7 +269,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
                   <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
-                    <ULinkBase v-bind="childSlotProps" :class="ui.link({ class: [props.ui?.link, childItem.class], active: childActive, disabled: !!childItem.disabled })">
+                    <ULinkBase v-bind="childSlotProps" :class="ui.link({ class: [props.ui?.link, childItem.class], active: childActive, disabled: !!childItem.disabled, level: true })">
                       <ReuseItemTemplate :item="(childItem as T)" :active="childActive" :index="childIndex" />
                     </ULinkBase>
                   </NavigationMenuLink>

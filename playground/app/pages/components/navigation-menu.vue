@@ -16,7 +16,6 @@ const items = [
     label: 'Documentation',
     icon: 'i-lucide-book-open',
     badge: 10,
-    defaultOpen: true,
     children: [{
       label: 'Introduction',
       description: 'Fully styled and customizable components for Nuxt.',
@@ -38,6 +37,7 @@ const items = [
     label: 'Components',
     icon: 'i-lucide-box',
     active: true,
+    defaultOpen: true,
     children: [{
       label: 'Link',
       icon: 'i-lucide-file',
@@ -101,7 +101,8 @@ const items = [
       :orientation="orientation"
       :highlight="highlight"
       :highlight-color="highlightColor"
-      :class="highlight && 'data-[orientation=horizontal]:border-b data-[orientation=vertical]:border-s border-[var(--ui-border)]'"
+      :class="highlight && 'data-[orientation=horizontal]:border-b border-[var(--ui-border)]'"
+      class="data-[orientation=vertical]:w-48"
     />
   </div>
 </template>
