@@ -213,17 +213,17 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list({ class: props.ui?.list })">
         <component
-          :is="(item.children?.length && orientation === 'vertical') ? UCollapsible : NavigationMenuItem"
+          :is="(orientation === 'vertical' && item.children?.length) ? UCollapsible : NavigationMenuItem"
           v-for="(item, index) in list"
           :key="`list-${listIndex}-${index}`"
           as="li"
           :value="item.value || String(index)"
           :default-open="item.defaultOpen"
-          :unmount-on-hide="(item.children?.length && orientation === 'vertical') ? unmountOnHide : undefined"
+          :unmount-on-hide="(orientation === 'vertical' && item.children?.length) ? unmountOnHide : undefined"
           :open="item.open"
           :class="ui.item({ class: props.ui?.item })"
         >
-          <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
+          <ULink v-slot="{ active, ...slotProps }" v-bind="(orientation === 'vertical' && item.children?.length) ? {} : pickLinkProps(item)" custom>
             <component
               :is="(orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])) ? NavigationMenuTrigger : NavigationMenuLink"
               as-child
