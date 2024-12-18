@@ -68,7 +68,6 @@
     "release-it": "^17.10.0",
     "superstruct": "^2.0.2",
     "typescript": "^5.6.3",
-    "unbuild": "^2.0.0",
     "valibot": "^0.42.1",
     "valibot30": "npm:valibot@0.30.0",
     "valibot31": "npm:valibot@0.31.0",
