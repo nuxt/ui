@@ -23,10 +23,10 @@ importers:
         specifier: ^1.7.23
         version: 1.7.23(vue@3.5.13(typescript@5.6.3))
       '@iconify-json/heroicons':
-        specifier: ^1.2.1
-        version: 1.2.1
+        specifier: ^1.2.2
+        version: 1.2.2
       '@nuxt/icon':
-        specifier: ^1.10.1
+        specifier: ^1.10.2
         version: 1.10.2(magicast@0.3.5)(rollup@3.29.5)(vite@5.4.11(@types/node@22.10.2)(terser@5.37.0))(vue@3.5.13(typescript@5.6.3))
       '@nuxt/kit':
         specifier: ^3.14.1592
@@ -138,8 +138,8 @@ importers:
         specifier: ^2.1.10
         version: 2.1.10(typescript@5.6.3)
       yup:
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: ^1.6.1
+        version: 1.6.1
       zod:
         specifier: ^3.24.1
         version: 3.24.1
@@ -147,14 +147,14 @@ importers:
   docs:
     dependencies:
       '@iconify-json/heroicons':
-        specifier: ^1.2.1
-        version: 1.2.1
+        specifier: ^1.2.2
+        version: 1.2.2
       '@iconify-json/simple-icons':
-        specifier: ^1.2.15
+        specifier: ^1.2.16
         version: 1.2.16
       '@iconify-json/vscode-icons':
-        specifier: ^1.2.4
-        version: 1.2.5
+        specifier: ^1.2.6
+        version: 1.2.6
       '@nuxt/content':
         specifier: 2.13.2
         version: 2.13.2(ioredis@5.4.1)(magicast@0.3.5)(nuxt@3.14.1592(@parcel/watcher@2.5.0)(@types/node@22.10.2)(eslint@9.17.0(jiti@2.4.1))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.28.1)(terser@5.37.0)(typescript@5.6.3)(vite@5.4.11(@types/node@22.10.2)(terser@5.37.0))(vue-tsc@2.1.10(typescript@5.6.3)))(rollup@4.28.1)(vue@3.5.13(typescript@5.6.3))
@@ -210,8 +210,8 @@ importers:
         specifier: ^0.42.1
         version: 0.42.1(typescript@5.6.3)
       yup:
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: ^1.6.1
+        version: 1.6.1
       zod:
         specifier: ^3.24.1
         version: 3.24.1
@@ -947,14 +947,14 @@ packages:
   '@iarna/toml@2.2.5':
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
 
-  '@iconify-json/heroicons@1.2.1':
-    resolution: {integrity: sha512-TkKfS5U27kE5MXmSGLzPoz95BP5VA9xEJXwJFwmPMVLX+xyWq0OkoiWTUXB0uAoQODpb8BaRpzSydItrq9fIRA==}
+  '@iconify-json/heroicons@1.2.2':
+    resolution: {integrity: sha512-qoW4pXr5kTTL6juEjgTs83OJIwpePu7q1tdtKVEdj+i0zyyVHgg/dd9grsXJQnpTpBt6/VwNjrXBvFjRsKPENg==}
 
   '@iconify-json/simple-icons@1.2.16':
     resolution: {integrity: sha512-mnQ0Ih8CDIgOqbi0qz01AJNOeFVuGFRimelg3JmJtD0y5EpZVw+enPPcpcxJKipsRZ/oqhcP3AhYkF1kM7yomg==}
 
-  '@iconify-json/vscode-icons@1.2.5':
-    resolution: {integrity: sha512-VgDWPmgfNxgzkz8/NWLI6+42DDh3VuntXgrYZLmjkzFH8rosyGFz5SkGT7S6sNy+bIu67MCJOK62k1/r19twBw==}
+  '@iconify-json/vscode-icons@1.2.6':
+    resolution: {integrity: sha512-uYlPqhIs2IyPL9J7KnX8tvWp9eU1jiv8DLzoLICzuG3UKYj921VmvnA1bicAAD24QYIjS/YSgavMwFFLrF2mKg==}
 
   '@iconify/collections@1.0.494':
     resolution: {integrity: sha512-XGLyl6LVKUNKKBa4VH+kWiYVv2qQxORLPeAP32cct/shwPca46Jiurk1OV38aIz2fxUGTDNn+Q7jvrApW3qM3Q==}
@@ -6549,8 +6549,8 @@ packages:
   yoga-wasm-web@0.3.3:
     resolution: {integrity: sha512-N+d4UJSJbt/R3wqY7Coqs5pcV0aUj2j9IaQ3rNj9bVCLld8tTGKRa2USARjnvZJWVx1NDmQev8EknoczaOQDOA==}
 
-  yup@1.5.0:
-    resolution: {integrity: sha512-NJfBIHnp1QbqZwxcgl6irnDMIsb/7d1prNhFx02f1kp8h+orpi4xs3w90szNpOh68a/iHPdMsYvhZWoDmUvXBQ==}
+  yup@1.6.1:
+    resolution: {integrity: sha512-JED8pB50qbA4FOkDol0bYF/p60qSEDQqBD0/qeIrUCG1KbPBIQ776fCUNb9ldbPcSTxA69g/47XTo4TqWiuXOA==}
 
   zhead@2.2.4:
     resolution: {integrity: sha512-8F0OI5dpWIA5IGG5NHUg9staDwz/ZPxZtvGVf01j7vHqSyZ0raHY+78atOVxRqb73AotX22uV1pXt3gYSstGag==}
@@ -7120,7 +7120,7 @@ snapshots:
 
   '@iarna/toml@2.2.5': {}
 
-  '@iconify-json/heroicons@1.2.1':
+  '@iconify-json/heroicons@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -7128,7 +7128,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/vscode-icons@1.2.5':
+  '@iconify-json/vscode-icons@1.2.6':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -7777,7 +7777,7 @@ snapshots:
 
   '@nuxt/ui-pro@1.6.0(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))':
     dependencies:
-      '@iconify-json/vscode-icons': 1.2.5
+      '@iconify-json/vscode-icons': 1.2.6
       '@nuxt/ui': 'link:'
       '@vueuse/core': 12.0.0(typescript@5.6.3)
       defu: 6.1.4
@@ -14599,7 +14599,7 @@ snapshots:
 
   yoga-wasm-web@0.3.3: {}
 
-  yup@1.5.0:
+  yup@1.6.1:
     dependencies:
       property-expr: 2.0.6
       tiny-case: 1.0.3
