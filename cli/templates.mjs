@@ -170,6 +170,7 @@ const docs = ({ name, pro, primitive }) => {
   return {
     filename: `docs/content/3.components/${kebabName}.md`,
     contents: `---
+title: ${upperName}
 description: ''${pro
   ? `
 module: ui-pro`

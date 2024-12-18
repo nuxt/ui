@@ -266,6 +266,21 @@ In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), 
 This allows you to move the trigger outside of the Drawer or remove it entirely.
 ::
 
+### Prevent closing
+
+Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape.
+
+::component-example
+---
+prettier: true
+name: 'drawer-dismissible-example'
+---
+::
+
+::note
+In this example, the `header` slot is used to add a close button which is not done by default.
+::
+
 ### With footer slot
 
 Use the `#footer` slot to add content after the Drawer's body.

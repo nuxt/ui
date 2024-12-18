@@ -21,7 +21,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0', toggle: '-mr-1.5' }" mode="drawer" :menu="{ shouldScaleBackground: true }">
+  <UHeader :ui="{ left: 'min-w-0' }" mode="drawer" :menu="{ shouldScaleBackground: true }">
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[var(--ui-text-highlighted)] min-w-0 focus-visible:outline-[var(--ui-primary)] shrink-0" aria-label="Nuxt UI">
         <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
@@ -80,18 +80,13 @@ defineShortcuts({
         <ModuleSelect />
       </div>
 
-      <UContentNavigation :navigation="navigation" highlight>
+      <UContentNavigation :navigation="navigation" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }">
         <template #link-title="{ link }">
           <span class="inline-flex items-center gap-0.5">
             {{ link.title }}
 
             <sup v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
           </span>
-        </template>
-        <template #link-trailing="{ link }">
-          <UBadge v-if="link.badge" variant="subtle" size="sm" color="neutral" class="rounded-[var(--ui-radius)] text-[9px] font-semibold uppercase">
-            {{ link.badge }}
-          </UBadge>
         </template>
       </UContentNavigation>
     </template>

@@ -47,7 +47,17 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
   return meta.meta.props.filter((prop) => {
     return !props.ignore?.includes(prop.name)
   }).map((prop) => {
-    prop.default = prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name]
+    if (prop.default) {
+      prop.default = prop.default.replace(' as never', '').replace(/^"(.*)"$/, '\'$1\'')
+    } else {
+      const tag = prop.tags?.find(tag => tag.name === 'defaultValue')?.text
+      if (tag) {
+        prop.default = tag
+      } else if (componentTheme?.defaultVariants?.[prop.name]) {
+        prop.default = typeof componentTheme?.defaultVariants?.[prop.name] === 'string' ? `'${componentTheme?.defaultVariants?.[prop.name]}'` : componentTheme?.defaultVariants?.[prop.name]
+      }
+    }
+
     // @ts-expect-error - Type is not correct
     prop.type = !prop.type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema)?.length ? Object.values(prop.schema.schema).map(schema => schema?.type ? schema.type : schema).join(' | ') : prop.type
     return prop
