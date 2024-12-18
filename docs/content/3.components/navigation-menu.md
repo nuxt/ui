@@ -131,6 +131,7 @@ Each item can take a `children` array of objects with the following properties t
 - `icon?: string`
 - `class?: any`
 - `onSelect?(e: Event): void`
+
 ::
 
 ### Orientation
