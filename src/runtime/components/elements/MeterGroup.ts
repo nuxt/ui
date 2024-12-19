@@ -3,7 +3,7 @@ import type { ComputedRef, VNode, SlotsType, PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, getSlotsChildren } from '../../utils'
+import { getSlotsChildren, mergeConfig } from '../../utils'
 import type { DeepPartial, Strategy, MeterSize } from '../../types/index'
 import type Meter from './Meter.vue'
 // @ts-expect-error

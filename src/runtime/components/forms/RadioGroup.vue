@@ -34,7 +34,7 @@ import { computed, defineComponent, provide, toRef } from 'vue'
 import type { PropType } from 'vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig, get } from '../../utils'
+import { get, mergeConfig } from '../../utils'
 import type { DeepPartial, Strategy } from '../../types/index'
 import URadio from './Radio.vue'
 // @ts-expect-error
