@@ -1,6 +1,7 @@
 import { createRequire } from 'node:module'
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
 import type { extendTailwindMerge } from 'tailwind-merge'
+import type { extendTailwindMerge } from 'tailwind-merge'
 import { name, version } from '../package.json'
 import createTemplates from './templates'
 import type * as config from './runtime/ui.config'
