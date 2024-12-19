@@ -69,6 +69,11 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    */
   placeholder?: InputProps['placeholder']
   /**
+   * Automatically focus the input when component is mounted.
+   * @defaultValue true
+   */
+  autofocus?: boolean
+  /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @emits 'update:open'
@@ -141,7 +146,8 @@ import UInput from './Input.vue'
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
   placeholder: 'Type a command or search...',
-  labelKey: 'label'
+  labelKey: 'label',
+  autofocus: true
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
@@ -239,7 +245,7 @@ const groups = computed(() => {
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         variant="none"
-        autofocus
+        :autofocus="autofocus"
         size="lg"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
