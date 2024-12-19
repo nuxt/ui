@@ -24,7 +24,7 @@ import type { DeepPartial } from './runtime/types/utils'
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
-type AppConfigUI = {
+export type AppConfigUI = {
   // TODO: add type hinting for colors from `options.theme.colors`
   colors?: Record<string, Color> & { neutral?: NeutralColor }
   icons?: Partial<typeof icons>
