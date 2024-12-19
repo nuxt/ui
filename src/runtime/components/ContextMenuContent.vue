@@ -1,7 +1,7 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/context-menu'
+import { tv } from '../utils/tv'
 import type { KbdProps, AvatarProps, ContextMenuItem, ContextMenuSlots } from '../types'
 
 const _contextMenu = tv(theme)()

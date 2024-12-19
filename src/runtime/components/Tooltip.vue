@@ -1,10 +1,10 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { KbdProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
