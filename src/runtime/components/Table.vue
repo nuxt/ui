@@ -44,6 +44,7 @@ const table = tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })
 type TableVariants = VariantProps<typeof table>
 
 export type TableColumn<T> = ColumnDef<T>
+export type TableRow<T> = Row<T>
 
 export interface TableData {
   [key: string]: any
@@ -63,6 +64,7 @@ export interface TableProps<T> {
    * @defaultValue false
    */
   sticky?: boolean
+  onSelect?: (row: TableRow<T>, e?: Event) => void
   /** Whether the table should be in loading state. */
   loading?: boolean
   loadingColor?: TableVariants['loadingColor']
@@ -197,6 +199,13 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
 }
 
+function handleRowSelect(row: TableRow<T>, e: Event) {
+  if (!props.onSelect)
+    return
+  e.preventDefault()
+  e.stopPropagation()
+  props.onSelect(row, e)
+}
 defineExpose({
   tableApi
 })
@@ -229,7 +238,7 @@ defineExpose({
       <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
         <template v-if="tableApi.getRowModel().rows?.length">
           <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
-            <tr :data-selected="row.getIsSelected()" :data-expanded="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
+            <tr :data-selected="row.getIsSelected()" :data-can-select="!!props.onSelect" :data-expanded="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })" @click="handleRowSelect(row, $event)">
               <td
                 v-for="cell in row.getVisibleCells()"
                 :key="cell.id"
