@@ -1,11 +1,11 @@
 import { createRequire } from 'node:module'
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
+import type { extendTailwindMerge } from 'tailwind-merge'
 import { name, version } from '../package.json'
 import createTemplates from './templates'
 import type * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types'
 import installTailwind from './tailwind'
-import { extendTailwindMerge } from 'tailwind-merge'
 
 const _require = createRequire(import.meta.url)
 const defaultColors = _require('tailwindcss/colors.js')
@@ -16,7 +16,7 @@ delete defaultColors.trueGray
 delete defaultColors.coolGray
 delete defaultColors.blueGray
 
-type TailwindMergeConfig = Parameters<typeof extendTailwindMerge>[0];
+type TailwindMergeConfig = Parameters<typeof extendTailwindMerge>[0]
 type UI = {
   primary?: string
   gray?: string
