@@ -1,7 +1,7 @@
 import { reactive, ref, nextTick } from 'vue'
 import { describe, it, expect, test, beforeEach, vi } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { z } from 'zod'
+import * as z from 'zod'
 import * as yup from 'yup'
 import Joi from 'joi'
 import * as valibot from 'valibot'
