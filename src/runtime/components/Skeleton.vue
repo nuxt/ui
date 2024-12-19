@@ -1,8 +1,8 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/skeleton'
+import { tv } from '../utils/tv'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfig = _appConfig as AppConfig & { ui: { skeleton: Partial<typeof theme> } }

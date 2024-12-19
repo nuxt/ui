@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { Ref } from 'vue'
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type { RowData } from '@tanstack/table-core'
 import type {
@@ -26,6 +26,7 @@ import type {
 } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
+import { tv } from '../utils/tv'
 
 declare module '@tanstack/table-core' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

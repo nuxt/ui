@@ -1,10 +1,11 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
 
