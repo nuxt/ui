@@ -17,8 +17,6 @@ delete defaultColors.coolGray
 delete defaultColors.blueGray
 
 type TailwindMergeConfig = Parameters<typeof extendTailwindMerge>[0];
-
-
 type UI = {
   primary?: string
   gray?: string
