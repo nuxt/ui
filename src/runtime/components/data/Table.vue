@@ -144,7 +144,7 @@ import UButton from '../elements/Button.vue'
 import UProgress from '../elements/Progress.vue'
 import UCheckbox from '../forms/Checkbox.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, get } from '../../utils'
+import { get, mergeConfig } from '../../utils'
 import type { TableRow, TableColumn, Strategy, Button, ProgressColor, ProgressAnimation, DeepPartial, Expanded } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
