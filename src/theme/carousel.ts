@@ -33,8 +33,5 @@ export default (options: Required<ModuleOptions>) => ({
         dot: 'bg-[var(--ui-border-inverted)]'
       }
     }
-  },
-  defaultVariants: {
-    orientation: 'horizontal'
   }
 })

@@ -66,6 +66,7 @@ import { reactivePick } from '@vueuse/core'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps<T>>(), {
+  orientation: 'horizontal',
   linear: true
 })
 const emits = defineEmits<StepperEmits<T>>()
