@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { z } from 'zod'
+import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import FormExampleElements from '../../../../docs/app/components/content/examples/form/FormExampleElements.vue'
 import FormExampleNestedList from '../../../../docs/app/components/content/examples/form/FormExampleNestedList.vue'
