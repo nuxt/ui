@@ -1,5 +1,4 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
@@ -8,6 +7,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 

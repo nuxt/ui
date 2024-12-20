@@ -1,12 +1,13 @@
 <script lang="ts">
 import type { InputHTMLAttributes } from 'vue'
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
