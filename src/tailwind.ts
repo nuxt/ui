@@ -35,16 +35,21 @@ export default function installTailwind(
     getContents: ({ nuxt }) => `
       import { defaultExtractor as createDefaultExtractor } from "tailwindcss/lib/lib/defaultExtractor.js";
       import { customSafelistExtractor, generateSafelist } from ${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))};
+      import formsPlugin from "@tailwindcss/forms";
+      import aspectRatio from "@tailwindcss/aspect-ratio";
+      import typography from "@tailwindcss/typography";
+      import containerQueries from "@tailwindcss/container-queries";
+      import headlessUi from "@headlessui/tailwindcss";
 
-      const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
+      const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } });
 
       export default {
         plugins: [
-          require('@tailwindcss/forms')({ strategy: 'class' }),
-          require('@tailwindcss/aspect-ratio'),
-          require('@tailwindcss/typography'),
-          require('@tailwindcss/container-queries'),
-          require('@headlessui/tailwindcss')
+          formsPlugin({ strategy: 'class' }),
+          aspectRatio,
+          typography,
+          containerQueries,
+          headlessUi
         ],
         content: {
           files: [
