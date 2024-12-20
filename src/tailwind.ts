@@ -30,15 +30,15 @@ export default function installTailwind(
 
   // 2. add config template
   const configTemplate = addTemplate({
-    filename: 'nuxtui-tailwind.config.cjs',
+    filename: 'nuxtui-tailwind.config.mjs',
     write: true,
     getContents: ({ nuxt }) => `
-      const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
-      const { customSafelistExtractor, generateSafelist } = require(${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))})
+      import { defaultExtractor as createDefaultExtractor } from "tailwindcss/lib/lib/defaultExtractor.js";
+      import { customSafelistExtractor, generateSafelist } from ${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))};
 
       const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
-      module.exports = {
+      export default {
         plugins: [
           require('@tailwindcss/forms')({ strategy: 'class' }),
           require('@tailwindcss/aspect-ratio'),
