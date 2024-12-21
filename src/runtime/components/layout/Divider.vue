@@ -21,11 +21,11 @@
 <script lang="ts">
 import { toRef, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, twMerge } from '../../utils'
 import type { Avatar, DeepPartial, DividerSize, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
