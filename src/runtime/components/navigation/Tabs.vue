@@ -38,6 +38,19 @@
           <slot :item="item" :index="index" :selected="selected" :disabled="disabled">
             <span class="truncate">{{ item.label }}</span>
           </slot>
+
+          <slot name="badge" :item="item" :index="index" :selected="selected" :disabled="disabled">
+            <UBadge
+              v-if="item.badge"
+              v-bind="{
+                size: ui.list.tab.badge.size,
+                color: ui.list.tab.badge.color,
+                variant: ui.list.tab.badge.variant,
+                ...((typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge)
+              }"
+              :class="ui.list.tab.badge.base"
+            />
+          </slot>
         </button>
       </HTab>
     </HTabList>
@@ -58,6 +71,7 @@ import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel, provideUseId } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
 import UIcon from '../elements/Icon.vue'
+import UBadge from '../elements/Badge.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
 import type { TabItem, Strategy, DeepPartial } from '../../types/index'
@@ -75,7 +89,8 @@ export default defineComponent({
     HTabList,
     HTab,
     HTabPanels,
-    HTabPanel
+    HTabPanel,
+    UBadge
   },
   inheritAttrs: false,
   props: {
