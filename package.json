@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "2.20.0",
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@9.15.1",
   "repository": "nuxt/ui",
   "homepage": "https://ui.nuxt.com",
   "type": "module",
@@ -34,8 +34,8 @@
   "dependencies": {
     "@headlessui/tailwindcss": "^0.2.1",
     "@headlessui/vue": "^1.7.23",
-    "@iconify-json/heroicons": "^1.2.1",
-    "@nuxt/icon": "^1.10.1",
+    "@iconify-json/heroicons": "^1.2.2",
+    "@nuxt/icon": "^1.10.3",
     "@nuxt/kit": "^3.14.1592",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.12.2",
@@ -44,9 +44,9 @@
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
-    "@vueuse/core": "^12.0.0",
-    "@vueuse/integrations": "^12.0.0",
-    "@vueuse/math": "^12.0.0",
+    "@vueuse/core": "^12.1.0",
+    "@vueuse/integrations": "^12.1.0",
+    "@vueuse/math": "^12.1.0",
     "defu": "^6.1.4",
     "fuse.js": "^7.0.0",
     "ohash": "^1.1.4",
@@ -56,7 +56,7 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.7.3",
+    "@nuxt/eslint-config": "^0.7.4",
     "@nuxt/module-builder": "^0.8.4",
     "@nuxt/test-utils": "^3.15.1",
     "@release-it/conventional-changelog": "^9.0.3",
@@ -74,7 +74,7 @@
     "vitest": "^2.1.8",
     "vitest-environment-nuxt": "^1.0.1",
     "vue-tsc": "^2.1.10",
-    "yup": "^1.5.0",
+    "yup": "^1.6.1",
     "zod": "^3.24.1"
   },
   "resolutions": {
