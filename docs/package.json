@@ -18,7 +18,7 @@
     "joi": "^17.13.3",
     "nuxt": "^3.14.1592",
     "nuxt-component-meta": "^0.9.0",
-    "nuxt-og-image": "^3.1.1",
+    "nuxt-og-image": "^4.0.2",
     "prettier": "^3.4.2",
     "shiki-transformer-color-highlight": "^0.2.0",
     "superstruct": "^2.0.2",
