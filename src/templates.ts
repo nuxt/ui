@@ -70,6 +70,15 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   }
 
   templates.push({
+    filename: 'ui.css',
+    write: true,
+    getContents: () => `@theme default {
+  ${[...(options.theme?.colors || []), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
+}
+`
+  })
+
+  templates.push({
     filename: 'ui/index.ts',
     write: true,
     getContents: () => Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
