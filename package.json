@@ -149,6 +149,7 @@
     "debug": "4.3.7",
     "happy-dom": "14.12.3",
     "rollup": "^4.24.0",
-    "unimport": "3.14.5"
+    "unimport": "3.14.5",
+    "vue-tsc": "^2.2.0"
   }
 }
