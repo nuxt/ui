@@ -84,8 +84,8 @@ import colors from 'tailwindcss/colors'
 
 const icons = ${JSON.stringify(uiConfig.icons)};
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
-type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor>
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | (string & {})
+type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {
   colors?: {
