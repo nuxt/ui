@@ -66,7 +66,7 @@
     "docs:prepare": "nuxt-component-meta docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck devtools && cd playground-vue && vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs && nuxi typecheck devtools && cd playground-vue && vue-tsc --noEmit",
     "test": "vitest",
     "test:vue": "vitest -c vitest.vue.config.ts",
     "test:vue:build": "vite build playground-vue",
@@ -141,7 +141,7 @@
     "zod": "^3.24.1"
   },
   "peerDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.6.3"
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
@@ -149,6 +149,7 @@
     "debug": "4.3.7",
     "happy-dom": "14.12.3",
     "rollup": "^4.24.0",
+    "typescript": "5.6.3",
     "unimport": "3.14.5",
     "vue-tsc": "^2.2.0"
   }
