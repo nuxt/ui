@@ -17,6 +17,7 @@ function getEmojiFlag(locale: string): string {
     ja: 'jp',
     ko: 'kr',
     uk: 'ua',
+    vn: 'vi',
     zh: 'cn'
   }
 
