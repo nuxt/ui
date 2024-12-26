@@ -36,11 +36,11 @@
 <script lang="ts">
 import { defineComponent, toRef } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, getULinkProps } from '../../utils'
+import { getULinkProps, mergeConfig, twMerge } from '../../utils'
 import type { BreadcrumbLink, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
