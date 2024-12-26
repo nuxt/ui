@@ -63,11 +63,10 @@ Note that **no validation library is included** by default, so ensure you **inst
 
 ## Custom validation
 
-Use the `validate` prop to apply your own validation logic.
+Use the `validate` prop to apply your own validation logic. The validation function must return a list of errors with the following attributes:
 
-The validation function must return a list of errors with the following attributes:
 - `message` - Error message for display.
-- `path` - Path to the form element corresponding to the `name` attribute.
+- `path` - Path to the form element corresponding to the `name` attribute. To address multiple paths, join the path names with a period (`.`).
 
 ::callout{icon="i-heroicons-light-bulb"}
 Note that it can be used alongside the `schema` prop to handle complex use cases.
