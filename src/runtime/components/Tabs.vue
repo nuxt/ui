@@ -116,7 +116,7 @@ const ui = computed(() => tabs({
     <TabsList :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 
-      <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger({ class: props.ui?.trigger })">
+      <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value ?? String(index)" :disabled="item.disabled" :class="ui.trigger({ class: props.ui?.trigger })">
         <slot name="leading" :item="item" :index="index">
           <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="item.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
@@ -131,7 +131,7 @@ const ui = computed(() => tabs({
     </TabsList>
 
     <template v-if="!!content">
-      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :class="ui.content({ class: props.ui?.content })">
+      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value ?? String(index)" :class="ui.content({ class: props.ui?.content })">
         <slot :name="item.slot || 'content'" :item="item" :index="index">
           {{ item.content }}
         </slot>
