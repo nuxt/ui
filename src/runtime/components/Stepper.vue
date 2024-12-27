@@ -15,7 +15,7 @@ type StepperVariants = VariantProps<typeof stepper>
 
 export interface StepperItem {
   slot?: string
-  value?: string
+  value?: string | number
   title?: string
   description?: string
   icon?: string
