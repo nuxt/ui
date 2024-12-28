@@ -126,7 +126,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['open'],
+  emits: ['open', 'close'],
   setup(props, { emit }) {
     const { ui, attrs } = useUI('accordion', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -142,6 +142,8 @@ export default defineComponent({
 
         if (!isOpenBefore && isOpenAfter) {
           emit('open', index)
+        } else if (isOpenBefore && !isOpenAfter) {
+          emit('close', index)
         }
       }
     }, { immediate: true })

@@ -1,5 +1,38 @@
 # Changelog
 
+## [2.20.0](https://github.com/nuxt/ui/compare/v2.19.2...v2.20.0) (2024-12-09)
+
+### ⚠ BREAKING CHANGES
+
+* **Form:** resolve async validation in yup & issue directly mutate state (#2701)
+
+### Features
+
+* **Accordion:** add `close` event ([#2750](https://github.com/nuxt/ui/issues/2750)) ([419a24f](https://github.com/nuxt/ui/commit/419a24f7034cefda2c6669f3c26742552e500f63))
+* **Badge:** handle `icon` prop ([#2594](https://github.com/nuxt/ui/issues/2594)) ([0d1a76e](https://github.com/nuxt/ui/commit/0d1a76e3c69e08534abb295b96548e67cfbea00c))
+* **InputMenu/SelectMenu:** add support for `dot notation` in `by` prop ([#2607](https://github.com/nuxt/ui/issues/2607)) ([53df9d9](https://github.com/nuxt/ui/commit/53df9d9a8cd6850803bdafc7ef6efe4e7404d334))
+* **Link:** allow partial query match for `activeClass` ([#2663](https://github.com/nuxt/ui/issues/2663)) ([03e24f4](https://github.com/nuxt/ui/commit/03e24f45836bdddd94b30cbaecc2288a78b56b0b))
+* **Notification:** add `pauseTimeoutOnHover` prop ([#2661](https://github.com/nuxt/ui/issues/2661)) ([11b8c3d](https://github.com/nuxt/ui/commit/11b8c3d9db1ec62b1c3557703c7ab5c99cb42df5))
+* **Table:** add contextmenu handling to table rows ([#2283](https://github.com/nuxt/ui/issues/2283)) ([c9e6256](https://github.com/nuxt/ui/commit/c9e6256e7f2c06da8bfda13700f56f6994e76eab))
+* **Table:** add custom `[@select](https://github.com/select):all` event ([#2581](https://github.com/nuxt/ui/issues/2581)) ([ac323c4](https://github.com/nuxt/ui/commit/ac323c4cccd930f2cd8c1f54b325bd509acd40bf))
+* **Table:** allow dynamically render `checkbox` ([#2549](https://github.com/nuxt/ui/issues/2549)) ([d6daf46](https://github.com/nuxt/ui/commit/d6daf466ace42b828151c45b18cd47179e85d66d))
+
+### Bug Fixes
+
+* **AvatarGroup/ButtonGroup/MeterGroup:** allow deeply partial `ui` config ([#2542](https://github.com/nuxt/ui/issues/2542)) ([bf58086](https://github.com/nuxt/ui/commit/bf580863af11d6a1a4c6c6774b44ec37b082e933))
+* **Carousel:** wrong `ui` type with `strategy` ([07ef771](https://github.com/nuxt/ui/commit/07ef771b17c72e275508a273371454a5e8a62257))
+* **components:** replace `as const` with correct type in config ([#2652](https://github.com/nuxt/ui/issues/2652)) ([51c8b8e](https://github.com/nuxt/ui/commit/51c8b8e3e59d7eceff72625650a199fcf7c6feca))
+* **date-picker:** undefined `dayIndex` ([#2545](https://github.com/nuxt/ui/issues/2545)) ([ce955d2](https://github.com/nuxt/ui/commit/ce955d24f1dfd222e87ce88428c0612c3f13cd50))
+* **Form:** resolve async validation in yup & issue directly mutate state ([#2701](https://github.com/nuxt/ui/issues/2701)) ([f3632dd](https://github.com/nuxt/ui/commit/f3632ddee511f0fccb24d4fc37403421e84ffdae))
+* **Form:** use parsed value from `joi` instead of original state ([#2587](https://github.com/nuxt/ui/issues/2587)) ([acecff4](https://github.com/nuxt/ui/commit/acecff40ec0156e45b4934c5d10c4dfa7c135f8e))
+* **InputMenu/SelectMenu:** use `by` prop to compare objects & support dot notation in `value-attribute` ([#2566](https://github.com/nuxt/ui/issues/2566)) ([7154254](https://github.com/nuxt/ui/commit/7154254ac22830f651ec200f7f3af2f5577f2de0))
+* **Link:** `exactQuery` prop type ([#2781](https://github.com/nuxt/ui/issues/2781)) ([4cde571](https://github.com/nuxt/ui/commit/4cde571e387775a9b12759f6f8c99117c84cbcff))
+* **Notification:** element renders even when no `notification` is present ([#2561](https://github.com/nuxt/ui/issues/2561)) ([d4e408c](https://github.com/nuxt/ui/commit/d4e408cfd8e2ef26021519f2f30f57e9120e1939))
+* **Table:** data outdated when rows change ([#2600](https://github.com/nuxt/ui/issues/2600)) ([b23f2de](https://github.com/nuxt/ui/commit/b23f2decfc9607555a315d0d087d0a042f03a938))
+* **Table:** missing type on props `loadingState` ([#2551](https://github.com/nuxt/ui/issues/2551)) ([6e66990](https://github.com/nuxt/ui/commit/6e66990372ef6bd7c109a64c753d9b50e96a450b))
+* **Table:** prevent `onClick` while blocking element ([#2592](https://github.com/nuxt/ui/issues/2592)) ([9703786](https://github.com/nuxt/ui/commit/97037864b39749db228fa5f51981f19e4a9c29dd))
+* **types:** improve `DeepPartial` type for App Config ([#2621](https://github.com/nuxt/ui/issues/2621)) ([976b03f](https://github.com/nuxt/ui/commit/976b03f241ef9626a6338685e43c844a8b3953fd))
+
 ## [2.19.2](https://github.com/nuxt/ui/compare/v2.19.1...v2.19.2) (2024-11-05)
 
 ### Bug Fixes

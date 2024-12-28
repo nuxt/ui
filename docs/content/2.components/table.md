@@ -62,7 +62,7 @@ extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-columns-selectable'
 componentProps:
-  class: 'flex-1 flex-col overflow-hidden'
+  class: 'flex-1 flex-col overflow-hidden min-h-[230px]'
 ---
 ::
 

@@ -6,7 +6,7 @@ export interface Link extends NuxtLinkProps {
   disabled?: boolean
   active?: boolean
   exact?: boolean
-  exactQuery?: boolean
+  exactQuery?: boolean | 'partial'
   exactHash?: boolean
   inactiveClass?: string
 }
