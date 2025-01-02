@@ -1,4 +1,63 @@
 /**
+ * Get a range of items from an array with flexible boundary inclusion
+ *
+ * @example
+ * // Include both boundaries
+ * getArrayRange({
+ *   source: [1, 2, 3, 4, 5],
+ *   range: [2, 4],
+ *   include: true
+ * }) // => [2, 3, 4]
+ *
+ */
+export function getRange<T>({
+  target,
+  range: [start, end],
+  include = true
+}: GetRangeOptions<T>): T[] {
+  const startIndex = target.indexOf(start)
+  const endIndex = target.indexOf(end)
+
+  if (startIndex === -1 || endIndex === -1) {
+    throw new Error('Boundary items not found in target array')
+  }
+
+  const fromIndex = Math.min(startIndex, endIndex)
+  const toIndex = Math.max(startIndex, endIndex)
+
+  if (include === true || include === 'start_end') {
+    return target.slice(fromIndex, toIndex + 1)
+  }
+  if (include === false) {
+    return target.slice(fromIndex + 1, toIndex)
+  }
+  if (include === 'start') {
+    return target.slice(fromIndex, toIndex)
+  }
+  if (include === 'end') {
+    return target.slice(fromIndex + 1, toIndex + 1)
+  }
+
+  return target.slice(fromIndex, toIndex + 1)
+}
+/** Options for getting array range */
+interface GetRangeOptions<T> {
+  /** Source array to extract range from */
+  target: readonly T[]
+  /** Range boundaries [startItem, endItem] */
+  range: [T, T]
+  /**
+   * Control how to include boundaries in the result
+   *
+   * - `true` (default): Include both boundaries
+   * - `false`: Exclude both boundaries
+   *
+   * @default true
+   */
+  include?: 'start' | 'end' | 'start_end' | boolean
+}
+
+/**
  * Add a tailwind prefix to the theme object that will be used for tainwind-variants
  * @see https://tailwindcss.com/docs/v4-beta#using-a-prefix
  * @see https://github.com/nextui-org/tailwind-variants

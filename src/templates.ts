@@ -6,6 +6,7 @@ import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 import { addTailwindPrefix } from './utils'
+import { getTailwindPrefix } from './defaults'
 
 export function buildTemplates(options: ModuleOptions) {
   return Object.entries(theme).reduce((acc, [key, component]) => {
@@ -16,7 +17,7 @@ export function buildTemplates(options: ModuleOptions) {
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>) {
   const templates: NuxtTemplate[] = []
-  const twPrefix = uiConfig.tailwind?.prefix ? uiConfig.tailwind.prefix + ':' : ''
+  const twPrefix = getTailwindPrefix(uiConfig.tailwind?.prefix)
 
   for (const component in theme) {
     templates.push({
@@ -26,8 +27,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         const template = (theme as any)[component]
         let result = typeof template === 'function' ? template(options) : template
 
-        if (twPrefix) {
-          result = addTailwindPrefix(result, twPrefix)
+        if (twPrefix.utilitie) {
+          result = addTailwindPrefix(result, twPrefix.utilitie)
         }
 
         const variants = Object.entries(result.variants || {})
@@ -63,7 +64,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
             `import { addTailwindPrefix } from ${JSON.stringify(utilsPath)}`,
             ...generateVariantDeclarations(variants),
             `let result = typeof template === 'function' ? template(${JSON.stringify(options, null, 2)}) : template`,
-            twPrefix ? `result = addTailwindPrefix(result, ${JSON.stringify(twPrefix)})` : '',
+            twPrefix.utilitie ? `result = addTailwindPrefix(result, ${JSON.stringify(twPrefix.utilitie)})` : '',
             `const theme = ${json}`,
             `export default result as typeof theme`
           ].join('\n\n')
