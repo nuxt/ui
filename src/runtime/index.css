@@ -4,6 +4,7 @@
 
 @layer base {
   body {
+    /* TODO support tailwindcss prefix */
     @apply antialiased text-[var(--ui-text)] bg-[var(--ui-bg)] scheme-light dark:scheme-dark;
   }
 
@@ -14,6 +15,7 @@
     --ui-text: var(--ui-color-neutral-700);
     --ui-text-highlighted: var(--ui-color-neutral-900);
 
+    /* TODO denamic prefix */
     --ui-bg: var(--color-white);
     --ui-bg-muted: var(--ui-color-neutral-50);
     --ui-bg-elevated: var(--ui-color-neutral-100);
@@ -25,6 +27,7 @@
     --ui-border-accented: var(--ui-color-neutral-300);
     --ui-border-inverted: var(--ui-color-neutral-900);
 
+    /* TODO denamic prefix */
     --ui-radius: var(--radius-sm);
     --ui-container: var(--container-7xl);
   }
@@ -34,17 +37,20 @@
     --ui-text-muted: var(--ui-color-neutral-400);
     --ui-text-toned: var(--ui-color-neutral-300);
     --ui-text: var(--ui-color-neutral-200);
+    /* TODO support tailwindcss prefix */
     --ui-text-highlighted: var(--color-white);
 
     --ui-bg: var(--ui-color-neutral-900);
     --ui-bg-muted: var(--ui-color-neutral-800);
     --ui-bg-elevated: var(--ui-color-neutral-800);
     --ui-bg-accented: var(--ui-color-neutral-700);
+    /* TODO support tailwindcss prefix */
     --ui-bg-inverted: var(--color-white);
 
     --ui-border: var(--ui-color-neutral-800);
     --ui-border-muted: var(--ui-color-neutral-700);
     --ui-border-accented: var(--ui-color-neutral-700);
+    /* TODO support tailwindcss prefix */
     --ui-border-inverted: var(--color-white);
   }
 }
