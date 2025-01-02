@@ -1,16 +1,14 @@
 @import './keyframes.css';
 
-/*
-TODO
-Placing variants here would cause a nesting error
-(e.g.: @import "@nuxt/ui" layer(tailwindcss);)
-*/
-@variant dark (&:where(.dark, .dark *));
-
 @layer base {
   body {
-    /* TODO support tailwindcss prefix */
-    @apply antialiased text-[var(--ui-text)] bg-[var(--ui-bg)] scheme-light dark:scheme-dark;
+    color: var(--ui-text);
+    background-color: var(--ui-bg);
+    color-scheme: light;
+  }
+
+  body:where(.dark, .dark *) {
+    color-scheme: dark;
   }
 
   :root {
