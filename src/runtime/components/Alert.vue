@@ -89,7 +89,7 @@ const ui = computed(() => alert({
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root], multiline })">
     <slot name="leading">
-      <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+      <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize().split(' ').pop()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>
 
