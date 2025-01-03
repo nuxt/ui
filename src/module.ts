@@ -1,13 +1,12 @@
-import { createRequire } from 'node:module'
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
 import { name, version } from '../package.json'
 import createTemplates from './templates'
 import type * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types'
 import installTailwind from './tailwind'
+import colors from 'tailwindcss/colors.js'
 
-const _require = createRequire(import.meta.url)
-const defaultColors = _require('tailwindcss/colors.js')
+const defaultColors = { ...colors })
 
 delete defaultColors.lightBlue
 delete defaultColors.warmGray
