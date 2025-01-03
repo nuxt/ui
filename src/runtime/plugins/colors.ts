@@ -45,7 +45,7 @@ export default defineNuxtPlugin(() => {
       ...getRange({
         target: sizes,
         range: ['3xs', '7xl']
-      }).map(size => `--ui-container-${size}: var(--${twPrefix.variable}shadow-${size});`)
+      }).map(size => `--ui-container-${size}: var(--${twPrefix.variable}container-${size});`)
     ].join('\n  ')
   }
 
