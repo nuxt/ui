@@ -104,18 +104,12 @@ export default defineNuxtModule<ModuleOptions>({
       }
     }
 
-    /**
-     * TODO
-     * inlineOptions can only be covered by locally option while this module is also installing locally,
-     * and once the same module is installed locally, the inlineOptions here will be overwritten
-     * when the module has corresponding default values
-     */
-    await registerModule('@nuxt/icon', { cssLayer: 'components' })
+    await registerModule('@nuxt/icon', defu(nuxt.options.icon, { cssLayer: 'components' }))
     if (options.fonts) {
-      await registerModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
+      await registerModule('@nuxt/fonts', defu(nuxt.options.fonts, { experimental: { processCSSVariables: true } }))
     }
     if (options.colorMode) {
-      await registerModule('@nuxtjs/color-mode', { classSuffix: '', disableTransition: true })
+      await registerModule('@nuxtjs/color-mode', defu(nuxt.options.colorMode, { classSuffix: '', disableTransition: true }))
     }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
