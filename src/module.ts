@@ -110,12 +110,12 @@ export default defineNuxtModule<ModuleOptions>({
       }
     }
 
-    await registerModule('@nuxt/icon', defu({ cssLayer: 'components' }))
+    await registerModule('@nuxt/icon', { cssLayer: 'components' })
     if (options.fonts) {
-      await registerModule('@nuxt/fonts', defu({ experimental: { processCSSVariables: true } }))
+      await registerModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
     }
     if (options.colorMode) {
-      await registerModule('@nuxtjs/color-mode', defu({ classSuffix: '', disableTransition: true }))
+      await registerModule('@nuxtjs/color-mode', { classSuffix: '', disableTransition: true })
     }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
