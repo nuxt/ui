@@ -97,19 +97,25 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     async function registerModule(name: string, options: Record<string, any>) {
+      const configKeyMap: Record<string, string> = {
+        '@nuxt/icon': 'icon',
+        '@nuxt/fonts': 'fonts',
+        '@nuxtjs/color-mode': 'colorMode'
+      }
+      const key = configKeyMap[name]
       if (!hasNuxtModule(name)) {
-        await installModule(name, options)
+        await installModule(name, defu((nuxt.options as any)[key], options))
       } else {
-        (nuxt.options as any)[name] = defu((nuxt.options as any)[name], options)
+        (nuxt.options as any)[key] = defu((nuxt.options as any)[key], options)
       }
     }
 
-    await registerModule('@nuxt/icon', defu(nuxt.options.icon, { cssLayer: 'components' }))
+    await registerModule('@nuxt/icon', defu({ cssLayer: 'components' }))
     if (options.fonts) {
-      await registerModule('@nuxt/fonts', defu(nuxt.options.fonts, { experimental: { processCSSVariables: true } }))
+      await registerModule('@nuxt/fonts', defu({ experimental: { processCSSVariables: true } }))
     }
     if (options.colorMode) {
-      await registerModule('@nuxtjs/color-mode', defu(nuxt.options.colorMode, { classSuffix: '', disableTransition: true }))
+      await registerModule('@nuxtjs/color-mode', defu({ classSuffix: '', disableTransition: true }))
     }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
