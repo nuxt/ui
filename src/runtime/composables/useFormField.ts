@@ -9,7 +9,6 @@ type Props<T> = {
   name?: string
   size?: GetObjectField<T, 'size'>
   color?: GetObjectField<T, 'color'>
-  eagerValidation?: boolean
   legend?: string
   highlight?: boolean
   disabled?: boolean
@@ -22,7 +21,7 @@ export const inputIdInjectionKey: InjectionKey<Ref<string | undefined>> = Symbol
 export const formInputsInjectionKey: InjectionKey<Ref<Record<string, { id?: string, pattern?: RegExp }>>> = Symbol('nuxt-ui.form-inputs')
 export const formLoadingInjectionKey: InjectionKey<Readonly<Ref<boolean>>> = Symbol('nuxt-ui.form-loading')
 
-export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean }) {
+export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, deferInputValidation?: boolean }) {
   const formOptions = inject(formOptionsInjectionKey, undefined)
   const formBus = inject(formBusInjectionKey, undefined)
   const formField = inject(formFieldInjectionKey, undefined)
@@ -42,7 +41,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean }) {
     }
   }
 
-  const blurred = ref(false)
+  const touched = ref(false)
 
   function emitFormEvent(type: FormInputEvents, name?: string) {
     if (formBus && formField && name) {
@@ -51,17 +50,20 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean }) {
   }
 
   function emitFormBlur() {
+    touched.value = true
     emitFormEvent('blur', formField?.value.name)
-    blurred.value = true
   }
 
   function emitFormChange() {
+    touched.value = true
     emitFormEvent('change', formField?.value.name)
   }
 
   const emitFormInput = useDebounceFn(
     () => {
-      emitFormEvent('input', formField?.value.name)
+      if (!opts?.deferInputValidation || touched.value || formField?.value.eagerValidation) {
+        emitFormEvent('input', formField?.value.name)
+      }
     },
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   )
