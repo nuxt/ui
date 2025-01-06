@@ -12,23 +12,23 @@
   "license": "MIT",
   "exports": {
     ".": {
-      "types": "./dist/module.d.ts",
+      "style": "./dist/runtime/index.css",
+      "types": "./dist/module.d.mts",
       "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs",
-      "style": "./dist/runtime/index.css"
+      "require": "./dist/module.cjs"
     },
     "./unplugin": {
-      "types": "./dist/unplugin.d.ts",
+      "types": "./dist/unplugin.d.mts",
       "import": "./dist/unplugin.mjs",
       "require": "./dist/unplugin.cjs"
     },
     "./vite": {
-      "types": "./dist/vite.d.ts",
+      "types": "./dist/vite.d.mts",
       "import": "./dist/vite.mjs",
       "require": "./dist/vite.cjs"
     },
     "./vue-plugin": {
-      "types": "./vue-plugin.d.ts"
+      "types": "./vue-plugin.d.mts"
     },
     "./runtime/*": "./dist/runtime/*",
     "./locale": {
@@ -44,12 +44,11 @@
   },
   "style": "./dist/runtime/index.css",
   "main": "./dist/module.cjs",
-  "types": "./dist/types.d.ts",
   "files": [
     ".nuxt/ui",
     "dist",
     "cli",
-    "vue-plugin.d.ts"
+    "vue-plugin.d.mts"
   ],
   "scripts": {
     "build": "nuxt-module-build build && pnpm devtools:build",
@@ -119,7 +118,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.7.4",
-    "@nuxt/module-builder": "^0.8.4",
+    "@nuxt/module-builder": "1.0.0-alpha.1",
     "@nuxt/test-utils": "^3.15.1",
     "@release-it/conventional-changelog": "^9.0.4",
     "@standard-schema/spec": "1.0.0-beta.4",
