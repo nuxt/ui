@@ -8,6 +8,7 @@ const props = withDefaults(defineProps<{
   name?: string
   ignore?: string[]
   pro?: boolean
+  prose?: boolean
 }>(), {
   ignore: () => [
     'activeClass',
@@ -34,9 +35,9 @@ const props = withDefaults(defineProps<{
 const route = useRoute()
 
 const camelName = camelCase(props.name ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
-const componentName = `U${upperFirst(camelName)}`
+const componentName = !props.prose ? `U${upperFirst(camelName)}` : `Prose${upperFirst(camelName)}`
 
-const componentTheme = ((props.pro ? themePro : theme) as any)[camelName]
+const componentTheme = ((props.pro ? !props.prose ? themePro : themePro.prose : theme) as any)[camelName]
 const meta = await fetchComponentMeta(componentName as any)
 
 const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {

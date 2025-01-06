@@ -6,6 +6,7 @@ import * as themePro from '#build/ui-pro'
 
 const props = defineProps<{
   pro?: boolean
+  prose?: boolean
 }>()
 
 const route = useRoute()
@@ -17,7 +18,7 @@ const strippedCompoundVariants = ref(false)
 
 const strippedTheme = computed(() => {
   const strippedTheme = {
-    ...((props.pro ? themePro : theme) as any)[name]
+    ...((props.pro ? !props.prose ? themePro : themePro.prose : theme) as any)[name]
   }
 
   if (strippedTheme?.compoundVariants) {
