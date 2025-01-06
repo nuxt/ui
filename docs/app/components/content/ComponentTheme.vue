@@ -7,12 +7,13 @@ import * as themePro from '#build/ui-pro'
 const props = defineProps<{
   pro?: boolean
   prose?: boolean
+  slug?: string
 }>()
 
 const route = useRoute()
 const { framework } = useSharedData()
 
-const name = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
+const name = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
 
 const strippedCompoundVariants = ref(false)
 
