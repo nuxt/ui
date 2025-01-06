@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "2.20.0",
-  "packageManager": "pnpm@9.15.1",
+  "packageManager": "pnpm@9.15.3",
   "repository": "nuxt/ui",
   "homepage": "https://ui.nuxt.com",
   "type": "module",
@@ -44,9 +44,9 @@
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
-    "@vueuse/core": "^12.2.0",
-    "@vueuse/integrations": "^12.2.0",
-    "@vueuse/math": "^12.2.0",
+    "@vueuse/core": "^12.3.0",
+    "@vueuse/integrations": "^12.3.0",
+    "@vueuse/math": "^12.3.0",
     "defu": "^6.1.4",
     "fuse.js": "^7.0.0",
     "ohash": "^1.1.4",
@@ -81,6 +81,7 @@
     "@nuxt/ui": "workspace:*",
     "@nuxt/content": "2.13.2",
     "@nuxtjs/mdc": "0.9.0",
-    "chokidar": "3.6.0"
+    "chokidar": "3.6.0",
+    "vue-tsc": "2.1.10"
   }
 }
