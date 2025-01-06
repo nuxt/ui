@@ -158,6 +158,8 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
     throw new FormValidationException(formId, errors.value, childErrors)
   }
 
+  Object.assign(props.state, transformedState.value)
+
   return props.state as T
 }
 
@@ -170,8 +172,7 @@ async function onSubmitWrapper(payload: Event) {
   const event = payload as FormSubmitEvent<any>
 
   try {
-    await _validate({ nested: true })
-    event.data = props.schema ? transformedState.value : props.state
+    event.data = await _validate({ nested: true })
     await props.onSubmit?.(event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
