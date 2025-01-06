@@ -175,7 +175,7 @@ description: ''${pro
   ? `
 module: ui-pro`
   : ''}
-links: ${primitive
+links:${primitive
   ? ''
   : `
   - label: ${upperName}
