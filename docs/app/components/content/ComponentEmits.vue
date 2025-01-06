@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { upperFirst, camelCase } from 'scule'
 
+const props = defineProps<{
+  prose?: boolean
+}>()
+
 const route = useRoute()
 
 const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
-const name = `U${upperFirst(camelName)}`
+const name = !props.prose ? `U${upperFirst(camelName)}` : `Prose${upperFirst(camelName)}`
 
 const meta = await fetchComponentMeta(name as any)
 </script>
