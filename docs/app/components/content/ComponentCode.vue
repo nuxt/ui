@@ -42,6 +42,7 @@ const castMap: Record<string, Cast> = {
 
 const props = defineProps<{
   pro?: boolean
+  prose?: boolean
   prefix?: string
   /** Override the slug taken from the route */
   slug?: string
@@ -89,6 +90,10 @@ const component = defineAsyncComponent(() => {
   if (props.pro) {
     if (props.prefix) {
       return import(`#ui-pro/components/${props.prefix}/${upperFirst(camelName)}.vue`)
+    }
+
+    if (props.prose) {
+      return import(`#ui-pro/components/prose/${upperFirst(camelName)}.vue`)
     }
 
     return import(`#ui-pro/components/${upperFirst(camelName)}.vue`)
