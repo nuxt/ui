@@ -8,7 +8,7 @@ import type { GetObjectField } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
 
 export interface Form<T> {
-  validate (opts?: { name: string | string[], silent?: false, nested?: boolean }): Promise<T | false>
+  validate (opts?: { name?: string | string[], silent?: boolean, nested?: boolean, transform?: boolean }): Promise<T | false>
   clear (path?: string): void
   errors: Ref<FormError[]>
   setErrors (errs: FormError[], path?: string): void
@@ -95,7 +95,7 @@ export class FormValidationException extends Error {
   errors: FormErrorWithId[]
   children?: FormValidationException[]
 
-  constructor(formId: string | number, errors: FormErrorWithId[], childErrors: FormValidationException[]) {
+  constructor(formId: string | number, errors: FormErrorWithId[], childErrors?: FormValidationException[]) {
     super('Form validation exception')
     this.formId = formId
     this.errors = errors

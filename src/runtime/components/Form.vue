@@ -60,7 +60,7 @@ const parentBus = inject(
 
 provide(formBusInjectionKey, bus)
 
-const nestedForms = ref<Map<string | number, { validate: () => any }>>(new Map())
+const nestedForms = ref<Map<string | number, { validate: typeof _validate }>>(new Map())
 
 onMounted(async () => {
   bus.on(async (event) => {
@@ -121,12 +121,12 @@ async function getErrors(): Promise<FormErrorWithId[]> {
   return resolveErrorIds(errs)
 }
 
-async function _validate(opts: { name?: string | string[], silent?: boolean, nested?: boolean } = { silent: false, nested: true }): Promise<T | false> {
+async function _validate(opts: { name?: string | string[], silent?: boolean, nested?: boolean, transform?: boolean } = { silent: false, nested: true, transform: false }): Promise<T | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as string[]
 
   const nestedValidatePromises = !names && opts.nested
     ? Array.from(nestedForms.value.values()).map(
-        ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
+        ({ validate }) => validate(opts).then(() => undefined).catch((error: Error) => {
           if (!(error instanceof FormValidationException)) {
             throw error
           }
@@ -151,14 +151,16 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
     errors.value = await getErrors()
   }
 
-  const childErrors = (await Promise.all(nestedValidatePromises)).filter(val => val)
+  const childErrors = (await Promise.all(nestedValidatePromises)).filter(val => val !== undefined)
 
   if (errors.value.length + childErrors.length > 0) {
     if (opts.silent) return false
     throw new FormValidationException(formId, errors.value, childErrors)
   }
 
-  Object.assign(props.state, transformedState.value)
+  if (opts.transform) {
+    Object.assign(props.state, transformedState.value)
+  }
 
   return props.state as T
 }
@@ -172,7 +174,7 @@ async function onSubmitWrapper(payload: Event) {
   const event = payload as FormSubmitEvent<any>
 
   try {
-    event.data = await _validate({ nested: true })
+    event.data = await _validate({ nested: true, transform: true })
     await props.onSubmit?.(event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
