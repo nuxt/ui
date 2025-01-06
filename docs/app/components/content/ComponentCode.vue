@@ -174,6 +174,30 @@ const options = computed(() => {
 const code = computed(() => {
   let code = ''
 
+  if (props.prose) {
+    code += `\`\`\`mdc
+::${camelName}`
+
+    const proseProps = Object.entries(componentProps).map(([key, value]) => {
+      if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
+        return
+      }
+
+      return `${key}="${value}"`
+    }).filter(Boolean).join(' ')
+
+    if (proseProps.length) {
+      code += `{${proseProps}}`
+    }
+
+    code += `
+${props.slots?.default}
+::
+\`\`\``
+
+    return code
+  }
+
   if (props.collapse) {
     code += `::code-collapse
 `
