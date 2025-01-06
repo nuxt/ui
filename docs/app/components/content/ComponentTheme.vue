@@ -56,10 +56,13 @@ const strippedTheme = computed(() => {
 })
 
 const component = computed(() => {
+  const baseKey = props.pro ? 'uiPro' : 'ui'
+  const content = props.prose
+    ? { prose: { [name]: strippedTheme.value } }
+    : { [name]: strippedTheme.value }
+
   return {
-    [props.pro ? 'uiPro' : 'ui']: {
-      [name]: strippedTheme.value
-    }
+    [baseKey]: content
   }
 })
 
