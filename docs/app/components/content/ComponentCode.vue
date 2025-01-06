@@ -376,5 +376,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
     </div>
 
     <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+
+    <!-- Safelist (do not remove): [&>div]:*:my-0 -->
   </div>
 </template>
