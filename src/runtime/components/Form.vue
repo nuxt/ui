@@ -181,7 +181,7 @@ async function onSubmitWrapper(payload: Event) {
     const errorEvent: FormErrorEvent = {
       ...event,
       errors: error.errors,
-      childrens: error.childrens
+      children: error.children
     }
     emits('error', errorEvent)
   }

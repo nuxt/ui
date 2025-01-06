@@ -337,7 +337,7 @@ describe('Form', () => {
       expect(wrapper.setupState.onSubmit).not.toHaveBeenCalled()
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
       const onErrorCallArgs = wrapper.setupState.onError.mock.lastCall[0]
-      expect(onErrorCallArgs.childrens[0].errors).toMatchObject([{ id: 'nestedInput', name: 'field', message: 'Required' }])
+      expect(onErrorCallArgs.children[0].errors).toMatchObject([{ id: 'nestedInput', name: 'field', message: 'Required' }])
       expect(onErrorCallArgs.errors).toMatchObject([
         { id: 'emailInput', name: 'email', message: 'Required' },
         { id: 'passwordInput', name: 'password', message: 'Required' }
