@@ -65,7 +65,7 @@
     "happy-dom": "^14.12.3",
     "joi": "^17.13.3",
     "nuxt": "^3.15.1",
-    "release-it": "^17.11.0",
+    "release-it": "^18.0.0",
     "superstruct": "^2.0.2",
     "typescript": "^5.6.3",
     "valibot": "^0.42.1",
