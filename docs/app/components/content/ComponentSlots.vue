@@ -8,7 +8,7 @@ const props = defineProps<{
 const route = useRoute()
 
 const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
-const name = !props.prose ? `U${upperFirst(camelName)}` : `Prose${upperFirst(camelName)}`
+const name = props.prose ? `Prose${upperFirst(camelName)}` : `U${upperFirst(camelName)}`
 
 const meta = await fetchComponentMeta(name as any)
 </script>

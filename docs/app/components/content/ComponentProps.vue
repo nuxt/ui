@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<{
 const route = useRoute()
 
 const camelName = camelCase(props.name ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
-const componentName = !props.prose ? `U${upperFirst(camelName)}` : `Prose${upperFirst(camelName)}`
+const componentName = props.prose ? `Prose${upperFirst(camelName)}` : `U${upperFirst(camelName)}`
 
 const componentTheme = ((props.pro ? !props.prose ? themePro : themePro.prose : theme) as any)[camelName]
 const meta = await fetchComponentMeta(componentName as any)

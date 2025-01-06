@@ -19,7 +19,7 @@ const strippedCompoundVariants = ref(false)
 
 const strippedTheme = computed(() => {
   const strippedTheme = {
-    ...((props.pro ? !props.prose ? themePro : themePro.prose : theme) as any)[name]
+    ...((props.pro ? props.prose ? themePro.prose : themePro : theme) as any)[name]
   }
 
   if (strippedTheme?.compoundVariants) {
