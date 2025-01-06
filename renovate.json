@@ -8,8 +8,7 @@
   "ignoreDeps": [
     "happy-dom",
     "valibot30",
-    "valibot31",
-    "typescript"
+    "valibot31"
   ],
   "baseBranches": ["dev", "v3"],
   "packageRules": [{
