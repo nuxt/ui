@@ -350,7 +350,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^5.2.1
-        version: 5.2.1(vite@5.4.11(@types/node@22.10.2)(lightningcss@1.28.2)(terser@5.37.0))(vue@3.5.13(typescript@5.6.3))
+        version: 5.2.1(vite@6.0.7(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.28.2)(terser@5.37.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.3))
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -361,8 +361,8 @@ importers:
         specifier: ^0.28.0
         version: 0.28.0(@babel/parser@7.26.3)(@nuxt/kit@3.15.1(magicast@0.3.5)(rollup@4.28.1))(rollup@4.28.1)(vue@3.5.13(typescript@5.6.3))
       vite:
-        specifier: ^5.4.11
-        version: 5.4.11(@types/node@22.10.2)(lightningcss@1.28.2)(terser@5.37.0)
+        specifier: ^6.0.7
+        version: 6.0.7(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.28.2)(terser@5.37.0)(yaml@2.6.1)
       vue-tsc:
         specifier: ^2.2.0
         version: 2.2.0(typescript@5.6.3)
@@ -9158,7 +9158,7 @@ snapshots:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       '@vue/compiler-core': 3.5.13
-      consola: 3.3.1
+      consola: 3.3.3
       debug: 4.3.7(supports-color@9.4.0)
       defu: 6.1.4
       destr: 2.0.3
@@ -10044,11 +10044,6 @@ snapshots:
       vue: 3.5.13(typescript@5.7.2)
     transitivePeerDependencies:
       - supports-color
-
-  '@vitejs/plugin-vue@5.2.1(vite@5.4.11(@types/node@22.10.2)(lightningcss@1.28.2)(terser@5.37.0))(vue@3.5.13(typescript@5.6.3))':
-    dependencies:
-      vite: 5.4.11(@types/node@22.10.2)(lightningcss@1.28.2)(terser@5.37.0)
-      vue: 3.5.13(typescript@5.6.3)
 
   '@vitejs/plugin-vue@5.2.1(vite@6.0.7(@types/node@22.10.2)(jiti@2.4.2)(lightningcss@1.28.2)(terser@5.37.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.3))':
     dependencies:
@@ -13228,7 +13223,7 @@ snapshots:
       citty: 0.1.6
       cssnano: 7.0.6(postcss@8.4.49)
       defu: 6.1.4
-      esbuild: 0.24.0
+      esbuild: 0.24.2
       jiti: 1.21.6
       mlly: 1.7.3
       pathe: 1.1.2
