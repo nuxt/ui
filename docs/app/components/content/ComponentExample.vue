@@ -132,7 +132,11 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
   return acc
 }, {} as Record<string, any>) || {})
 
-const urlSearchParams = computed(() => new URLSearchParams({ ...optionsValues.value, ...componentProps, width: width.value.toString() }).toString())
+const urlSearchParams = computed(() => new URLSearchParams({
+  ...optionsValues.value,
+  ...componentProps,
+  width: Math.round(width.value).toString()
+}).toString())
 </script>
 
 <template>
