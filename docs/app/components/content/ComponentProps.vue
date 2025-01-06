@@ -37,7 +37,7 @@ const route = useRoute()
 const camelName = camelCase(props.name ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
 const componentName = props.prose ? `Prose${upperFirst(camelName)}` : `U${upperFirst(camelName)}`
 
-const componentTheme = ((props.pro ? !props.prose ? themePro : themePro.prose : theme) as any)[camelName]
+const componentTheme = ((props.pro ? props.prose ? themePro.prose : themePro : theme) as any)[camelName]
 const meta = await fetchComponentMeta(componentName as any)
 
 const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
