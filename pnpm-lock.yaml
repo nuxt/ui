@@ -9,7 +9,6 @@ overrides:
   '@nuxt/content': 2.13.2
   '@nuxtjs/mdc': 0.9.0
   chokidar: 3.6.0
-  unimport: 3.14.5
 
 importers:
 
