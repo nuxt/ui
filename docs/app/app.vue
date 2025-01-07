@@ -151,4 +151,6 @@ html[data-module="ui-pro"] .ui-only,
 html[data-module="ui"] .ui-pro-only {
   display: none;
 }
+
+/* Safelist (do not remove): [&>div]:*:my-0 [&>div]:*:w-full */
 </style>
