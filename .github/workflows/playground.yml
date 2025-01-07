@@ -47,6 +47,8 @@ jobs:
 
       - name: Build application
         run: pnpm run dev:build
+        env:
+          NITRO_PRESET: cloudflare-pages
 
       - name: Deploy to NuxtHub
         uses: nuxt-hub/action@v1
