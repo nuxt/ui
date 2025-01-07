@@ -1,4 +1,4 @@
-name: ci-v3
+name: build
 
 on:
   push:
@@ -9,7 +9,9 @@ on:
       - v3
 
 jobs:
-  ci:
+  build:
+    name: "Build module"
+
     runs-on: ${{ matrix.os }}
 
     permissions:

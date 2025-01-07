@@ -10,8 +10,13 @@ on:
 
 jobs:
   docs:
-    name: "NuxtHub"
+    name: "Deploy to NuxtHub"
+
     runs-on: ${{ matrix.os }}
+
+    environment:
+      name: ${{ github.ref == 'refs/heads/v3' && 'production' || 'preview' }}
+      url: ${{ steps.deploy.outputs.deployment-url }}
 
     permissions:
       contents: read
@@ -21,10 +26,6 @@ jobs:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
         node: [22]
-
-    environment:
-      name: ${{ github.ref == 'refs/heads/v3' && 'production' || 'preview' }}
-      url: ${{ steps.deploy.outputs.deployment-url }}
 
     env:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
