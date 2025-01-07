@@ -110,10 +110,6 @@ export default defineNuxtConfig({
     }
   },
 
-  hub: {
-    cache: true
-  },
-
   componentMeta: {
     exclude: [
       '@nuxt/content',
