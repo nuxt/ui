@@ -8,6 +8,7 @@ const props = defineProps<{
   pro?: boolean
   prose?: boolean
   slug?: string
+  extra?: string[]
 }>()
 
 const route = useRoute()
@@ -17,9 +18,11 @@ const name = camelCase(props.slug ?? route.params.slug?.[route.params.slug.lengt
 
 const strippedCompoundVariants = ref(false)
 
+const computedTheme = computed(() => props.pro ? props.prose ? themePro.prose : themePro : theme)
+
 const strippedTheme = computed(() => {
   const strippedTheme = {
-    ...((props.pro ? props.prose ? themePro.prose : themePro : theme) as any)[name]
+    ...(computedTheme.value as any)[name]
   }
 
   if (strippedTheme?.compoundVariants) {
@@ -57,9 +60,17 @@ const strippedTheme = computed(() => {
 
 const component = computed(() => {
   const baseKey = props.pro ? 'uiPro' : 'ui'
+
   const content = props.prose
     ? { prose: { [name]: strippedTheme.value } }
     : { [name]: strippedTheme.value }
+
+  if (props.extra?.length) {
+    props.extra.forEach((extra) => {
+      const target = props.prose ? content.prose! : content
+      target[extra as keyof typeof target] = computedTheme.value[extra as keyof typeof computedTheme.value]
+    })
+  }
 
   return {
     [baseKey]: content
