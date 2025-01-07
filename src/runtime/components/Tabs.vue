@@ -96,6 +96,7 @@ const props = withDefaults(defineProps<TabsProps<T>>(), {
   content: true,
   defaultValue: '0',
   orientation: 'horizontal',
+  unmountOnHide: true,
   labelKey: 'label'
 })
 const emits = defineEmits<TabsEmits>()

@@ -141,8 +141,8 @@ import UCollapsible from './Collapsible.vue'
 const props = withDefaults(defineProps<NavigationMenuProps<I>>(), {
   orientation: 'horizontal',
   delayDuration: 0,
-  labelKey: 'label',
-  unmountOnHide: true
+  unmountOnHide: true,
+  labelKey: 'label'
 })
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()

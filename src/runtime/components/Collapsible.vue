@@ -34,7 +34,9 @@ extendDevtoolsMeta({ example: 'CollapsibleExample' })
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 
-const props = defineProps<CollapsibleProps>()
+const props = withDefaults(defineProps<CollapsibleProps>(), {
+  unmountOnHide: true
+})
 const emits = defineEmits<CollapsibleEmits>()
 const slots = defineSlots<CollapsibleSlots>()
 
