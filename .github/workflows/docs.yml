@@ -1,9 +1,16 @@
-name: Deploy to NuxtHub
-on: push
+name: docs
+
+on:
+  push:
+    branches:
+      - v3
+  pull_request:
+    branches:
+      - v3
 
 jobs:
   deploy:
-    name: "Deploy to NuxtHub"
+    name: "Deploy docs to NuxtHub"
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref == 'refs/heads/v3' && 'production' || 'preview' }}
@@ -27,11 +34,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Prepare build
+        run: pnpm dev:prepare
+
       - name: Build application
-        run: pnpm build
+        run: pnpm docs:build
 
       - name: Deploy to NuxtHub
         uses: nuxt-hub/action@v1
         id: deploy
         with:
           project-key: ui-7eg3
+          directory: docs/dist
