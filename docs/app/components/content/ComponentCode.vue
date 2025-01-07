@@ -210,23 +210,23 @@ const code = computed(() => {
     }
 
     const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
     const name = kebabCase(key)
 
     if (typeof value === 'boolean') {
-      if (value && prop?.default === 'true') {
+      if (value && (propDefault === 'true' || propDefault === '`true`' || propDefault === true)) {
         continue
       }
-      if (!value && (!prop?.default || prop.default === 'false')) {
+      if (!value && (!propDefault || propDefault === 'false' || propDefault === '`false`' || propDefault === false)) {
         continue
       }
 
-      code += value ? ` ${name}` : ` :${key}="false"`
+      code += value ? ` ${name}` : ` :${name}="false"`
     } else if (typeof value === 'object') {
       const parsedValue = !props.external?.includes(key) ? json5.stringify(value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1') : key
 
       code += ` :${name}="${parsedValue}"`
     } else {
-      const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
       if (propDefault === value) {
         continue
       }
