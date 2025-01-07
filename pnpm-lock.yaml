@@ -334,6 +334,9 @@ importers:
       '@nuxt/ui':
         specifier: workspace:*
         version: link:..
+      '@nuxthub/core':
+        specifier: ^0.8.10
+        version: 0.8.10(db0@0.2.1(@libsql/client@0.14.0)(better-sqlite3@11.7.2))(ioredis@5.4.2)(magicast@0.3.5)(rollup@4.30.0)(vite@6.0.7(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.28.2)(terser@5.37.0)(yaml@2.7.0))
       nuxt:
         specifier: ^3.15.1
         version: 3.15.1(@libsql/client@0.14.0)(@parcel/watcher@2.5.0)(@types/node@22.10.5)(better-sqlite3@11.7.2)(db0@0.2.1(@libsql/client@0.14.0)(better-sqlite3@11.7.2))(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.2)(lightningcss@1.28.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.30.0)(terser@5.37.0)(typescript@5.7.2)(vite@6.0.7(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.28.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.7.0)
@@ -5485,8 +5488,8 @@ packages:
   remark-mdc-edge@3.5.0-28900048.8ed9bd2:
     resolution: {integrity: sha512-jQ7Tug2jXTgt6hanKM1872IgPti4vV0QySdKJN+hO2cPrjemJvkoRphMZWRwxDRbXh2Om8bOCvqUzdLZt8nUjg==}
 
-  remark-mdc@3.5.1:
-    resolution: {integrity: sha512-5eWB7CL2cFzJ0RYk/EsktRKo4cyE7gxxXcVXA4TVQYRd962cE9HW902zfdVZOBYKYlJqB2XEeC9dtAEzdg3RaA==}
+  remark-mdc@3.5.2:
+    resolution: {integrity: sha512-DMNyAwWfVtFIHP80IngiLhN4xXRGKO8OpvWYhsT468dXsjc4tvrENjQwZABPwgKXcFpHwwIZL2i/Wq/IDGF8VQ==}
 
   remark-parse@11.0.0:
     resolution: {integrity: sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA==}
@@ -7630,7 +7633,7 @@ snapshots:
       pathe: 1.1.2
       pg: 8.13.1
       pkg-types: 1.3.0
-      remark-mdc: 3.5.1
+      remark-mdc: 3.5.2
       scule: 1.3.0
       shiki: 1.26.1
       slugify: 1.6.6
@@ -13146,7 +13149,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  remark-mdc@3.5.1:
+  remark-mdc@3.5.2:
     dependencies:
       '@types/mdast': 4.0.4
       '@types/unist': 3.0.3
