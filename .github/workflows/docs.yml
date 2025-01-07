@@ -9,7 +9,7 @@ on:
       - v3
 
 jobs:
-  docs:
+  deploy:
     name: "Deploy to NuxtHub"
 
     runs-on: ${{ matrix.os }}
