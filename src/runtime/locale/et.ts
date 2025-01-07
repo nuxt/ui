@@ -1,4 +1,4 @@
-import { defineLocale } from '../composables/defineLocale';
+import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale({
   name: 'Eesti',
@@ -7,47 +7,47 @@ export default defineLocale({
     inputMenu: {
       noMatch: 'Pole vastavaid andmeid',
       noData: 'Pole andmeid',
-      create: 'Loo "{label}"',
+      create: 'Loo "{label}"'
     },
     calendar: {
       prevYear: 'Eelmine aasta',
       nextYear: 'Järgmine aasta',
       prevMonth: 'Eelmine kuu',
-      nextMonth: 'Järgmine kuu',
+      nextMonth: 'Järgmine kuu'
     },
     inputNumber: {
       increment: 'Suurenda',
-      decrement: 'Vähenda',
+      decrement: 'Vähenda'
     },
     commandPalette: {
       noMatch: 'Pole vastavaid andmeid',
       noData: 'Pole andmeid',
-      close: 'Sulge',
+      close: 'Sulge'
     },
     selectMenu: {
       noMatch: 'Pole vastavaid andmeid',
       noData: 'Pole andmeid',
-      create: 'Loo "{label}"',
+      create: 'Loo "{label}"'
     },
     toast: {
-      close: 'Sulge',
+      close: 'Sulge'
     },
     carousel: {
       prev: 'Eel',
       next: 'Järg',
-      goto: 'Mine slaidile {slide}',
+      goto: 'Mine slaidile {slide}'
     },
     modal: {
-      close: 'Sulge',
+      close: 'Sulge'
     },
     slideover: {
-      close: 'Sulge',
+      close: 'Sulge'
     },
     alert: {
-      close: 'Sulge',
+      close: 'Sulge'
     },
     table: {
-      noData: 'Pole andmeid',
-    },
-  },
+      noData: 'Pole andmeid'
+    }
+  }
 });
