@@ -9,15 +9,26 @@ on:
       - v3
 
 jobs:
-  deploy:
-    name: "Deploy docs to NuxtHub"
-    runs-on: ubuntu-latest
+  docs:
+    name: "NuxtHub"
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: read
+      pull-requests: read
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # macos-latest, windows-latest
+        node: [22]
+
     environment:
       name: ${{ github.ref == 'refs/heads/v3' && 'production' || 'preview' }}
       url: ${{ steps.deploy.outputs.deployment-url }}
-    permissions:
-      contents: read
-      id-token: write
+
+    env:
+      NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
+      NUXT_UI_PRO_LICENSE: ${{ secrets.NUXT_UI_PRO_LICENSE }}
 
     steps:
       - uses: actions/checkout@v4
@@ -25,20 +36,20 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Install Node.js
+      - name: Install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: 'pnpm'
+          node-version: ${{ matrix.node }}
+          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Prepare build
-        run: pnpm dev:prepare
+        run: pnpm run dev:prepare
 
       - name: Build application
-        run: pnpm docs:build
+        run: pnpm run docs:build
 
       - name: Deploy to NuxtHub
         uses: nuxt-hub/action@v1
