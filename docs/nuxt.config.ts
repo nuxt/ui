@@ -146,5 +146,9 @@ export default defineNuxtConfig({
 
   image: {
     provider: 'ipx'
+  },
+
+  uiPro: {
+    license: 'oss'
   }
 })
