@@ -42,6 +42,7 @@ const castMap: Record<string, Cast> = {
 
 const props = defineProps<{
   pro?: boolean
+  prose?: boolean
   prefix?: string
   /** Override the slug taken from the route */
   slug?: string
@@ -91,6 +92,10 @@ const component = defineAsyncComponent(() => {
       return import(`#ui-pro/components/${props.prefix}/${upperFirst(camelName)}.vue`)
     }
 
+    if (props.prose) {
+      return import(`#ui-pro/components/prose/${upperFirst(camelName)}.vue`)
+    }
+
     return import(`#ui-pro/components/${upperFirst(camelName)}.vue`)
   }
 
@@ -121,7 +126,7 @@ function setComponentProp(name: string, value: any) {
   set(componentProps, name, value)
 }
 
-const componentTheme = ((props.pro ? themePro : theme) as any)[camelName]
+const componentTheme = ((props.pro ? props.prose ? themePro.prose : themePro : theme) as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
 
 function mapKeys(obj: object, parentKey = ''): any {
@@ -168,6 +173,30 @@ const options = computed(() => {
 
 const code = computed(() => {
   let code = ''
+
+  if (props.prose) {
+    code += `\`\`\`mdc
+::${camelName}`
+
+    const proseProps = Object.entries(componentProps).map(([key, value]) => {
+      if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
+        return
+      }
+
+      return `${key}="${value}"`
+    }).filter(Boolean).join(' ')
+
+    if (proseProps.length) {
+      code += `{${proseProps}}`
+    }
+
+    code += `
+${props.slots?.default}
+::
+\`\`\``
+
+    return code
+  }
 
   if (props.collapse) {
     code += `::code-collapse
