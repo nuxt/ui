@@ -33,3 +33,10 @@ export const resolveColors = (colors?: string[]) => {
     ? [...new Set(['primary', ...colors])]
     : ['primary', 'secondary', 'success', 'info', 'warning', 'error']
 }
+
+export const getTailwindPrefix = (prefix?: string) => {
+  return {
+    variable: prefix ? prefix + '-' : '',
+    utilitie: prefix ? prefix + ':' : ''
+  }
+}

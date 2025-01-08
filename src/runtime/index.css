@@ -1,10 +1,14 @@
 @import './keyframes.css';
 
-@variant dark (&:where(.dark, .dark *));
-
 @layer base {
   body {
-    @apply antialiased text-[var(--ui-text)] bg-[var(--ui-bg)] scheme-light dark:scheme-dark;
+    color: var(--ui-text);
+    background-color: var(--ui-bg);
+    color-scheme: light;
+  }
+
+  body:where(.dark, .dark *) {
+    color-scheme: dark;
   }
 
   :root {
@@ -14,7 +18,7 @@
     --ui-text: var(--ui-color-neutral-700);
     --ui-text-highlighted: var(--ui-color-neutral-900);
 
-    --ui-bg: var(--color-white);
+    --ui-bg: var(--ui-color-white);
     --ui-bg-muted: var(--ui-color-neutral-50);
     --ui-bg-elevated: var(--ui-color-neutral-100);
     --ui-bg-accented: var(--ui-color-neutral-200);
@@ -25,8 +29,8 @@
     --ui-border-accented: var(--ui-color-neutral-300);
     --ui-border-inverted: var(--ui-color-neutral-900);
 
-    --ui-radius: var(--radius-sm);
-    --ui-container: var(--container-7xl);
+    --ui-radius: var(--ui-radius-sm);
+    --ui-container: var(--ui-container-7xl);
   }
 
   .dark {
@@ -34,17 +38,17 @@
     --ui-text-muted: var(--ui-color-neutral-400);
     --ui-text-toned: var(--ui-color-neutral-300);
     --ui-text: var(--ui-color-neutral-200);
-    --ui-text-highlighted: var(--color-white);
+    --ui-text-highlighted: var(--ui-color-white);
 
     --ui-bg: var(--ui-color-neutral-900);
     --ui-bg-muted: var(--ui-color-neutral-800);
     --ui-bg-elevated: var(--ui-color-neutral-800);
     --ui-bg-accented: var(--ui-color-neutral-700);
-    --ui-bg-inverted: var(--color-white);
+    --ui-bg-inverted: var(--ui-color-white);
 
     --ui-border: var(--ui-color-neutral-800);
     --ui-border-muted: var(--ui-color-neutral-700);
     --ui-border-accented: var(--ui-color-neutral-700);
-    --ui-border-inverted: var(--color-white);
+    --ui-border-inverted: var(--ui-color-white);
   }
 }

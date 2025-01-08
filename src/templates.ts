@@ -5,6 +5,8 @@ import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
+import { addTailwindPrefix } from './utils'
+import { getTailwindPrefix } from './defaults'
 
 export function buildTemplates(options: ModuleOptions) {
   return Object.entries(theme).reduce((acc, [key, component]) => {
@@ -15,6 +17,7 @@ export function buildTemplates(options: ModuleOptions) {
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>) {
   const templates: NuxtTemplate[] = []
+  const twPrefix = getTailwindPrefix(uiConfig.tailwind?.prefix)
 
   for (const component in theme) {
     templates.push({
@@ -22,7 +25,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       write: true,
       getContents: async () => {
         const template = (theme as any)[component]
-        const result = typeof template === 'function' ? template(options) : template
+        let result = typeof template === 'function' ? template(options) : template
+
+        if (twPrefix.utilitie) {
+          result = addTailwindPrefix(result, twPrefix.utilitie)
+        }
 
         const variants = Object.entries(result.variants || {})
           .filter(([_, values]) => {
@@ -51,10 +58,13 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         // For local development, import directly from theme
         if (process.env.DEV) {
           const templatePath = fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url))
+          const utilsPath = fileURLToPath(new URL('./utils', import.meta.url))
           return [
             `import template from ${JSON.stringify(templatePath)}`,
+            `import { addTailwindPrefix } from ${JSON.stringify(utilsPath)}`,
             ...generateVariantDeclarations(variants),
-            `const result = typeof template === 'function' ? template(${JSON.stringify(options, null, 2)}) : template`,
+            `let result = typeof template === 'function' ? template(${JSON.stringify(options, null, 2)}) : template`,
+            twPrefix.utilitie ? `result = addTailwindPrefix(result, ${JSON.stringify(twPrefix.utilitie)})` : '',
             `const theme = ${json}`,
             `export default result as typeof theme`
           ].join('\n\n')
@@ -93,6 +103,7 @@ type AppConfigUI = {
     neutral?: NeutralColor
   }
   icons?: Partial<typeof icons>
+  tailwind?: { prefix?: string }
 } & DeepPartial<typeof ui>
 
 declare module '@nuxt/schema' {

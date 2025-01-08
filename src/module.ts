@@ -97,10 +97,16 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     async function registerModule(name: string, options: Record<string, any>) {
+      const configKeyMap: Record<string, string> = {
+        '@nuxt/icon': 'icon',
+        '@nuxt/fonts': 'fonts',
+        '@nuxtjs/color-mode': 'colorMode'
+      }
+      const key = configKeyMap[name]
       if (!hasNuxtModule(name)) {
-        await installModule(name, options)
+        await installModule(name, defu((nuxt.options as any)[key], options))
       } else {
-        (nuxt.options as any)[name] = defu((nuxt.options as any)[name], options)
+        (nuxt.options as any)[key] = defu((nuxt.options as any)[key], options)
       }
     }
 
