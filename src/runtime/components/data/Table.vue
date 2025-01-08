@@ -444,7 +444,7 @@ export default defineComponent({
       if (checked) {
         selected.value = props.singleSelect ? [row] : [...selected.value, row]
       } else {
-        selected.value = selected.value.filter(value => !compare(toRaw(value), row))
+        selected.value = selected.value.filter(value => !compare(toRaw(value), toRaw(row)))
       }
     }
 
