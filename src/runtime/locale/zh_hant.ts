@@ -1,33 +1,33 @@
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale({
-  name: '繁体中文',
+  name: '繁體中文',
   code: 'zh-Hant',
   messages: {
     inputMenu: {
-      noMatch: '沒有匹配的資料',
+      noMatch: '沒有相符的資料',
       noData: '沒有資料',
-      create: '創建 "{label}"'
+      create: '建立「{label}」'
     },
     calendar: {
       prevYear: '去年',
       nextYear: '明年',
-      prevMonth: '上个月',
-      nextMonth: '下个月'
+      prevMonth: '上個月',
+      nextMonth: '下個月'
     },
     inputNumber: {
       increment: '增加',
-      decrement: '减少'
+      decrement: '減少'
     },
     commandPalette: {
-      noMatch: '沒有匹配的資料',
+      noMatch: '沒有相符的資料',
       noData: '沒有資料',
       close: '關閉'
     },
     selectMenu: {
-      noMatch: '沒有匹配的資料',
+      noMatch: '沒有相符的資料',
       noData: '沒有資料',
-      create: '創建 "{label}"'
+      create: '建立「{label}」'
     },
     toast: {
       close: '關閉'
