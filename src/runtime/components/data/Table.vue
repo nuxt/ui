@@ -99,7 +99,6 @@
                     v-bind="ui.default.checkbox"
                     aria-label="Select row"
                     @change="onChangeCheckbox($event, row)"
-                    @click.capture.stop="() => onSelect(row)"
                   />
                 </slot>
 
@@ -445,8 +444,7 @@ export default defineComponent({
       if (checked) {
         selected.value = props.singleSelect ? [row] : [...selected.value, row]
       } else {
-        const index = selected.value.findIndex(item => compare(item, row))
-        selected.value.splice(index, 1)
+        selected.value = selected.value.filter(value => !compare(toRaw(value), toRaw(row)))
       }
     }
 
