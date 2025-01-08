@@ -19,10 +19,10 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, twMerge } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
 import type { BadgeColor, BadgeSize, BadgeVariant, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error

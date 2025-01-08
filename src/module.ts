@@ -1,5 +1,6 @@
 import { createRequire } from 'node:module'
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
+import type { ConfigExtension, DefaultClassGroupIds, DefaultThemeGroupIds } from 'tailwind-merge'
 import { name, version } from '../package.json'
 import createTemplates from './templates'
 import type * as config from './runtime/ui.config'
@@ -20,6 +21,7 @@ type UI = {
   gray?: string
   colors?: string[]
   strategy?: Strategy
+  tailwindMerge?: ConfigExtension<DefaultClassGroupIds, DefaultThemeGroupIds>
   [key: string]: any
 } & DeepPartial<typeof config, string | number | boolean>
 

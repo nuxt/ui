@@ -22,10 +22,10 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { useToast } from '../../composables/useToast'
-import { mergeConfig } from '../../utils'
+import { mergeConfig, twMerge } from '../../utils'
 import type { DeepPartial, Notification, Strategy } from '../../types/index'
 import UNotification from './Notification.vue'
 import { useState } from '#imports'
