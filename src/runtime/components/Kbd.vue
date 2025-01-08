@@ -1,10 +1,11 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { kbd: Partial<typeof theme> } }
 

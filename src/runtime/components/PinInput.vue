@@ -1,9 +1,10 @@
 <script lang="ts">
+import type { VariantProps } from 'tailwind-variants'
+import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
+import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pin-input'
-import type { AppConfig } from '@nuxt/schema'
-import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
-import { tv, type VariantProps } from 'tailwind-variants'
+import { tv } from '../utils/tv'
 import type { PartialString } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { pinInput: Partial<typeof theme> } }
