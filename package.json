@@ -67,7 +67,7 @@
     "nuxt": "^3.15.1",
     "release-it": "^18.0.0",
     "superstruct": "^2.0.2",
-    "typescript": "^5.7.2",
+    "typescript": "^5.6.3",
     "valibot": "^0.42.1",
     "valibot30": "npm:valibot@0.30.0",
     "valibot31": "npm:valibot@0.31.0",
@@ -82,6 +82,7 @@
     "@nuxt/content": "2.13.2",
     "@nuxtjs/mdc": "0.9.0",
     "chokidar": "3.6.0",
-    "vue-tsc": "2.1.10"
+    "vue-tsc": "2.1.10",
+    "typescript": "5.6.3"
   }
 }
