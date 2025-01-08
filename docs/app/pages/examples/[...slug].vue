@@ -7,7 +7,7 @@ const width = computed(() => route.query.width && Number.parseInt(route.query.wi
 </script>
 
 <template>
-  <div class="example flex flex-col justify-center items-center h-screen">
+  <div class="example flex flex-col items-center h-screen">
     <component :is="name" v-bind="route.query" />
   </div>
 </template>

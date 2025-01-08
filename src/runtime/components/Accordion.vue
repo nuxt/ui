@@ -98,6 +98,7 @@ import UIcon from './Icon.vue'
 const props = withDefaults(defineProps<AccordionProps<T>>(), {
   type: 'single',
   collapsible: true,
+  unmountOnHide: true,
   labelKey: 'label'
 })
 const emits = defineEmits<AccordionEmits>()

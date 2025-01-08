@@ -66,7 +66,7 @@ const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled } = useFormField<TextareaProps>(props)
+const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled } = useFormField<TextareaProps>(props, { deferInputValidation: true })
 
 const ui = computed(() => textarea({
   color: color.value,

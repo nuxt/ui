@@ -8,29 +8,26 @@ const props = withDefaults(defineProps<{
 })
 
 function getEmojiFlag(locale: string): string {
-  // Map language codes to default country codes
   const languageToCountry: Record<string, string> = {
-    en: 'gb',
     ar: 'sa',
     cs: 'cz',
-    zh: 'cn',
+    da: 'dk',
+    el: 'gr',
+    en: 'gb',
     ja: 'jp',
     ko: 'kr',
-    uk: 'ua'
+    sv: 'se',
+    uk: 'ua',
+    vi: 'vn',
+    zh: 'cn'
   }
 
-  // Get base language code before any region specifier
   const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale
-
-  // Use mapped country code or extract from locale if it contains a region
   const countryCode = languageToCountry[baseLanguage] || locale.replace(/^.*-/, '').slice(0, 2)
 
-  return countryCode
+  return countryCode.toUpperCase()
     .split('')
-    .map((char: string) => {
-      const codePoint = char.toUpperCase().codePointAt(0)
-      return codePoint ? String.fromCodePoint(0x1F1A5 + codePoint) : ''
-    })
+    .map(char => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
     .join('')
 }
 </script>

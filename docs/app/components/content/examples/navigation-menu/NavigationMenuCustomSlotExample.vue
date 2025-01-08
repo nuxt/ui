@@ -19,7 +19,7 @@ const items = [
 </script>
 
 <template>
-  <UNavigationMenu :items="items" class="justify-center">
+  <UNavigationMenu :items="items" class="w-full justify-center">
     <template #components-trailing>
       <UBadge label="44" variant="subtle" size="sm" />
     </template>

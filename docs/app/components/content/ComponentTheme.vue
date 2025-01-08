@@ -6,18 +6,23 @@ import * as themePro from '#build/ui-pro'
 
 const props = defineProps<{
   pro?: boolean
+  prose?: boolean
+  slug?: string
+  extra?: string[]
 }>()
 
 const route = useRoute()
 const { framework } = useSharedData()
 
-const name = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
+const name = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
 
 const strippedCompoundVariants = ref(false)
 
+const computedTheme = computed(() => props.pro ? props.prose ? themePro.prose : themePro : theme)
+
 const strippedTheme = computed(() => {
   const strippedTheme = {
-    ...((props.pro ? themePro : theme) as any)[name]
+    ...(computedTheme.value as any)[name]
   }
 
   if (strippedTheme?.compoundVariants) {
@@ -54,10 +59,21 @@ const strippedTheme = computed(() => {
 })
 
 const component = computed(() => {
+  const baseKey = props.pro ? 'uiPro' : 'ui'
+
+  const content = props.prose
+    ? { prose: { [name]: strippedTheme.value } }
+    : { [name]: strippedTheme.value }
+
+  if (props.extra?.length) {
+    props.extra.forEach((extra) => {
+      const target = props.prose ? content.prose! : content
+      target[extra as keyof typeof target] = computedTheme.value[extra as keyof typeof computedTheme.value]
+    })
+  }
+
   return {
-    [props.pro ? 'uiPro' : 'ui']: {
-      [name]: strippedTheme.value
-    }
+    [baseKey]: content
   }
 })
 

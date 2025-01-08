@@ -57,7 +57,7 @@ export interface ${upperName}Slots {
 <script setup lang="ts">
 import { Primitive } from 'reka-ui'
 
-const props = withDefaults(defineProps<${upperName}Props>(), { as: 'div' })
+const props = defineProps<${upperName}Props>()
 defineSlots<${upperName}Slots>()
 
 const ui = ${camelName}()
@@ -175,7 +175,7 @@ description: ''${pro
   ? `
 module: ui-pro`
   : ''}
-links: ${primitive
+links:${primitive
   ? ''
   : `
   - label: ${upperName}

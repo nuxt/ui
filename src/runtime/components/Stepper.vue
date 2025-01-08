@@ -16,7 +16,7 @@ type StepperVariants = VariantProps<typeof stepper>
 
 export interface StepperItem {
   slot?: string
-  value?: string
+  value?: string | number
   title?: string
   description?: string
   icon?: string
@@ -67,6 +67,7 @@ import { reactivePick } from '@vueuse/core'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps<T>>(), {
+  orientation: 'horizontal',
   linear: true
 })
 const emits = defineEmits<StepperEmits<T>>()

@@ -110,10 +110,6 @@ export default defineNuxtConfig({
     }
   },
 
-  hub: {
-    cache: true
-  },
-
   componentMeta: {
     exclude: [
       '@nuxt/content',
@@ -150,5 +146,9 @@ export default defineNuxtConfig({
 
   image: {
     provider: 'ipx'
+  },
+
+  uiPro: {
+    license: 'oss'
   }
 })

@@ -195,7 +195,7 @@ function displayValue(value: T | T[]): string {
     return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
   }
 
-  const item = items.value.find(item => compare(typeof item === 'object' ? get(item, props.valueKey as string) : item, value))
+  const item = items.value.find(item => compare(typeof item === 'object' ? get(item as Record<string, any>, props.valueKey as string) : item, value))
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
