@@ -1,0 +1,10 @@
+diff --git a/dist/runtime/internal/dump.js b/dist/runtime/internal/dump.js
+index 1eea93c9f73fa5c167ac2b669760b0f4b03febe2..de734c30161ee92e253209042ae2b9ae66a6dec0 100644
+--- a/dist/runtime/internal/dump.js
++++ b/dist/runtime/internal/dump.js
+@@ -1,4 +1,5 @@
+ export async function decompressSQLDump(base64Str, compressionType = "gzip") {
++  console.log(String(base64Str).substring(0, 100))
+   const binaryData = Uint8Array.from(atob(base64Str), (c) => c.charCodeAt(0));
+   const response = new Response(new Blob([binaryData]));
+   const decompressedStream = response.body?.pipeThrough(new DecompressionStream(compressionType));
