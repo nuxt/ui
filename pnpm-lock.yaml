@@ -18,7 +18,7 @@ overrides:
 
 patchedDependencies:
   '@nuxt/content':
-    hash: nkxykygcq633blqljnyefs4xy4
+    hash: wqfnmb7tkysqnfwqcajxogev7e
     path: patches/@nuxt__content.patch
 
 importers:
@@ -268,7 +268,7 @@ importers:
         version: 1.2.9
       '@nuxt/content':
         specifier: https://pkg.pr.new/@nuxt/content@f124c95
-        version: https://pkg.pr.new/@nuxt/content@f124c95(patch_hash=nkxykygcq633blqljnyefs4xy4)(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.30.0)
+        version: https://pkg.pr.new/@nuxt/content@f124c95(patch_hash=wqfnmb7tkysqnfwqcajxogev7e)(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.30.0)
       '@nuxt/image':
         specifier: ^1.9.0
         version: 1.9.0(db0@0.2.1(@libsql/client@0.14.0)(better-sqlite3@11.7.2))(ioredis@5.4.2)(magicast@0.3.5)(rollup@4.30.0)
@@ -7919,7 +7919,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.18.0
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@f124c95(patch_hash=nkxykygcq633blqljnyefs4xy4)(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.30.0)':
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@f124c95(patch_hash=wqfnmb7tkysqnfwqcajxogev7e)(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.30.0)':
     dependencies:
       '@libsql/client': 0.14.0
       '@nuxt/kit': 3.15.1(magicast@0.3.5)(rollup@4.30.0)

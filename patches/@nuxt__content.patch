@@ -1,10 +1,42 @@
+diff --git a/dist/runtime/internal/api.js b/dist/runtime/internal/api.js
+index 1f7dd8f6d45bda1903aa89d89f54d03d6ba8ca3d..fdc1d29abd1c534304a3ec627f71428f64ba18ab 100644
+--- a/dist/runtime/internal/api.js
++++ b/dist/runtime/internal/api.js
+@@ -1,11 +1,13 @@
+ import { checksums } from "#content/manifest";
+ export async function fetchDatabase(event, collection) {
+-  return await $fetch(`/api/content/${collection}/database.sql`, {
++  const res = await $fetch(`/api/content/${collection}/database.sql`, {
+     context: event ? { cloudflare: event.context.cloudflare } : {},
+     responseType: "text",
+     headers: { "content-type": "text/plain" },
+     query: { v: checksums[String(collection)], t: import.meta.dev ? Date.now() : void 0 }
+   });
++console.log(`~~> ${collection} -- ${String(res)} -- cf: ${!!event.context.cloudflare}`)
++  return res
+ }
+ export async function fetchQuery(event, collection, sql) {
+   return await $fetch(`/api/content/${collection}/query`, {
+diff --git a/dist/runtime/internal/database.server.js b/dist/runtime/internal/database.server.js
+index 3934e4b18beee127547125f82248514341eba245..347f8e5149128ad3db61a909f6e21e8321069fe5 100644
+--- a/dist/runtime/internal/database.server.js
++++ b/dist/runtime/internal/database.server.js
+@@ -56,6 +56,8 @@ async function _checkAndImportDatabaseIntegrity(event, collection, integrityVers
+     }
+     await db.exec(`DELETE FROM ${tables.info} WHERE id = 'checksum_${collection}'`);
+   }
++  console.log("collection", collection);
++  
+   const dump = await loadDatabaseDump(event, collection).then(decompressSQLDump);
+   await dump.reduce(async (prev, sql) => {
+     await prev;
 diff --git a/dist/runtime/internal/dump.js b/dist/runtime/internal/dump.js
-index 1eea93c9f73fa5c167ac2b669760b0f4b03febe2..de734c30161ee92e253209042ae2b9ae66a6dec0 100644
+index 1eea93c9f73fa5c167ac2b669760b0f4b03febe2..357263cc6e26fec58dfd212ab4f79945ff2226fa 100644
 --- a/dist/runtime/internal/dump.js
 +++ b/dist/runtime/internal/dump.js
 @@ -1,4 +1,5 @@
  export async function decompressSQLDump(base64Str, compressionType = "gzip") {
-+  console.log(String(base64Str).substring(0, 100))
++  console.log("base64Str", String(base64Str).substring(0, 100))
    const binaryData = Uint8Array.from(atob(base64Str), (c) => c.charCodeAt(0));
    const response = new Response(new Blob([binaryData]));
    const decompressedStream = response.body?.pipeThrough(new DecompressionStream(compressionType));
