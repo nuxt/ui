@@ -1,6 +1,6 @@
+import { h, defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
 import ContextMenu, { type ContextMenuProps, type ContextMenuSlots } from '../../src/runtime/components/ContextMenu.vue'
-import { defineComponent } from 'vue'
 import theme from '#build/ui/context-menu'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 
