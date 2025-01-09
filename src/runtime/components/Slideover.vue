@@ -1,10 +1,11 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slideover'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { slideover: Partial<typeof theme> } }
@@ -46,10 +47,10 @@ export interface SlideoverProps extends DialogRootProps {
    */
   closeIcon?: string
   /**
-   * When `true`, the slideover will not close when clicking outside.
-   * @defaultValue false
+   * When `false`, the slideover will not close when clicking outside or pressing escape.
+   * @defaultValue true
    */
-  preventClose?: boolean
+  dismissible?: boolean
   class?: any
   ui?: Partial<typeof slideover.slots>
 }
@@ -84,6 +85,7 @@ const props = withDefaults(defineProps<SlideoverProps>(), {
   overlay: true,
   transition: true,
   modal: true,
+  dismissible: true,
   side: 'right'
 })
 const emits = defineEmits<SlideoverEmits>()
@@ -95,7 +97,7 @@ const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
-  if (props.preventClose) {
+  if (!props.dismissible) {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
       interactOutside: (e: Event) => e.preventDefault(),
@@ -103,13 +105,7 @@ const contentEvents = computed(() => {
     }
   }
 
-  return {
-    interactOutside: (e: Event) => {
-      if (e.target instanceof Element && e.target.closest('[data-sonner-toaster]')) {
-        return e.preventDefault()
-      }
-    }
-  }
+  return {}
 })
 
 const ui = computed(() => slideover({

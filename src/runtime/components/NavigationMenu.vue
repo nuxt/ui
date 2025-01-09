@@ -1,10 +1,11 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, CollapsibleRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
 import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
 
@@ -21,6 +22,10 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, P
   label?: string
   icon?: string
   avatar?: AvatarProps
+  /**
+   * Display a badge on the item.
+   * `{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
+   */
   badge?: string | number | BadgeProps
   trailingIcon?: string
   slot?: string
@@ -137,8 +142,8 @@ import UCollapsible from './Collapsible.vue'
 const props = withDefaults(defineProps<NavigationMenuProps<I>>(), {
   orientation: 'horizontal',
   delayDuration: 0,
-  labelKey: 'label',
-  unmountOnHide: true
+  unmountOnHide: true,
+  labelKey: 'label'
 })
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
@@ -209,17 +214,17 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list({ class: props.ui?.list })">
         <component
-          :is="(item.children?.length && orientation === 'vertical') ? UCollapsible : NavigationMenuItem"
+          :is="(orientation === 'vertical' && item.children?.length) ? UCollapsible : NavigationMenuItem"
           v-for="(item, index) in list"
           :key="`list-${listIndex}-${index}`"
           as="li"
           :value="item.value || String(index)"
           :default-open="item.defaultOpen"
-          :unmount-on-hide="(item.children?.length && orientation === 'vertical') ? unmountOnHide : undefined"
+          :unmount-on-hide="(orientation === 'vertical' && item.children?.length) ? unmountOnHide : undefined"
           :open="item.open"
           :class="ui.item({ class: props.ui?.item })"
         >
-          <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
+          <ULink v-slot="{ active, ...slotProps }" v-bind="(orientation === 'vertical' && item.children?.length) ? {} : pickLinkProps(item)" custom>
             <component
               :is="(orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])) ? NavigationMenuTrigger : NavigationMenuLink"
               as-child
@@ -227,8 +232,8 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               :disabled="item.disabled"
               @select="item.onSelect"
             >
-              <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active, disabled: !!item.disabled })">
-                <ReuseItemTemplate :item="(item as T)" :active="active" :index="index" />
+              <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: !(orientation === 'vertical' && item.children?.length) })">
+                <ReuseItemTemplate :item="(item as T)" :active="active || item.active" :index="index" />
               </ULinkBase>
             </component>
 
@@ -265,7 +270,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
               <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
                   <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
-                    <ULinkBase v-bind="childSlotProps" :class="ui.link({ class: [props.ui?.link, childItem.class], active: childActive, disabled: !!childItem.disabled })">
+                    <ULinkBase v-bind="childSlotProps" :class="ui.link({ class: [props.ui?.link, childItem.class], active: childActive, disabled: !!childItem.disabled, level: true })">
                       <ReuseItemTemplate :item="(childItem as T)" :active="childActive" :index="childIndex" />
                     </ULinkBase>
                   </NavigationMenuLink>

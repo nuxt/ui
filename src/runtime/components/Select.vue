@@ -1,11 +1,12 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
@@ -158,7 +159,7 @@ function displayValue(value?: AcceptableValue | AcceptableValue[]): string | und
     return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
 
-  const item = items.value.find(item => compare(typeof item === 'object' ? get(item, props.valueKey as string) : item, value))
+  const item = items.value.find(item => compare(typeof item === 'object' ? get(item as Record<string, any>, props.valueKey as string) : item, value))
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 

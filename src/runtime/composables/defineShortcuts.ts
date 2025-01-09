@@ -41,7 +41,7 @@ export function extractShortcuts(items: any[] | any[][]) {
 
   function traverse(items: any[]) {
     items.forEach((item) => {
-      if (item.kbds?.length && (item.select || item.click)) {
+      if (item.kbds?.length && (item.onSelect || item.onClick)) {
         const shortcutKey = item.kbds.join('_')
         shortcuts[shortcutKey] = item.onSelect || item.onClick
       }

@@ -1,10 +1,10 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/collapsible'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof theme> } }
 
@@ -34,7 +34,9 @@ extendDevtoolsMeta({ example: 'CollapsibleExample' })
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 
-const props = defineProps<CollapsibleProps>()
+const props = withDefaults(defineProps<CollapsibleProps>(), {
+  unmountOnHide: true
+})
 const emits = defineEmits<CollapsibleEmits>()
 const slots = defineSlots<CollapsibleSlots>()
 

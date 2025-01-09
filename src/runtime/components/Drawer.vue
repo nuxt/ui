@@ -1,17 +1,17 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
 import type { DialogContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/drawer'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme> } }
 
 const drawer = tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })
 
-export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'defaultOpen' | 'direction' | 'dismissible' | 'fadeFromIndex' | 'fixed' | 'modal' | 'nested' | 'direction' | 'open' | 'scrollLockTimeout' | 'shouldScaleBackground' | 'snapPoints'> {
+export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'defaultOpen' | 'direction' | 'fadeFromIndex' | 'fixed' | 'modal' | 'nested' | 'direction' | 'open' | 'scrollLockTimeout' | 'shouldScaleBackground' | 'snapPoints'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -36,6 +36,11 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @defaultValue true
    */
   portal?: boolean
+  /**
+   * When `false`, the drawer will not close when clicking outside or pressing escape.
+   * @defaultValue true
+   */
+  dismissible?: boolean
   class?: any
   ui?: Partial<typeof drawer.slots>
 }

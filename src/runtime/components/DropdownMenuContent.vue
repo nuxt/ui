@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/dropdown-menu'
+import { tv } from '../utils/tv'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
 
 const _dropdownMenu = tv(theme)()
@@ -130,11 +130,11 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           </DropdownMenu.Sub>
           <DropdownMenu.CheckboxItem
             v-else-if="item.type === 'checkbox'"
-            :checked="item.checked"
+            :model-value="item.checked"
             :disabled="item.disabled"
             :text-value="get(item, props.labelKey as string)"
             :class="ui.item({ class: [uiOverride?.item, item.class], color: item?.color })"
-            @update:checked="item.onUpdateChecked"
+            @update:model-value="item.onUpdateChecked"
             @select="item.onSelect"
           >
             <ReuseItemTemplate :item="item" :index="index" />

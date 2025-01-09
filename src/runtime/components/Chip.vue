@@ -1,9 +1,10 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/chip'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { chip: Partial<typeof theme> } }
 
@@ -22,7 +23,7 @@ export interface ChipProps {
   color?: ChipVariants['color']
   size?: ChipVariants['size']
   position?: ChipVariants['position']
-  /** When `true`, translate the chip at the edge for non rounded elements. */
+  /** When `true`, keep the chip inside the component for rounded elements. */
   inset?: boolean
   /** When `true`, render the chip relatively to the parent. */
   standalone?: boolean

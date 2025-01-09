@@ -32,6 +32,10 @@ export default defineCommand({
     content: {
       type: 'boolean',
       description: 'Create a content component (with --pro).'
+    },
+    template: {
+      type: 'string',
+      description: 'Only generate template.'
     }
   },
   async setup({ args }) {
@@ -53,6 +57,10 @@ export default defineCommand({
     const path = resolve('.')
 
     for (const template of Object.keys(templates)) {
+      if (args.template && template !== args.template) {
+        continue
+      }
+
       const { filename, contents } = templates[template](args)
       if (!contents) {
         continue
@@ -68,6 +76,10 @@ export default defineCommand({
       await fsp.writeFile(filePath, contents.trim() + '\n')
 
       consola.success(`🪄 Generated ${filePath}!`)
+    }
+
+    if (args.template) {
+      return
     }
 
     const themePath = resolve(path, `src/theme/${args.prose ? 'prose/' : ''}${args.content ? 'content/' : ''}index.ts`)

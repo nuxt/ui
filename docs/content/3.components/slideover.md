@@ -93,7 +93,7 @@ slots:
 
 Use the `close` prop to customize or hide the close button (with `false` value) displayed in the Slideover's header.
 
-You can pass all the props of the [Button](/components/button) component to customize it.
+You can pass any property from the [Button](/components/button) component to customize it.
 
 ::component-code
 ---
@@ -252,35 +252,6 @@ slots:
 :placeholder{class="h-full"}
 ::
 
-### Prevent close
-
-Use the `prevent-close` prop to prevent the Slideover from being closed when clicking outside of it.
-
-::component-code
----
-prettier: true
-ignore:
-  - title
-  - preventClose
-props:
-  preventClose: true
-  title: 'Slideover prevent close'
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" />
-
-  body: |
-
-    <Placeholder class="h-full" />
----
-
-:u-button{label="Open" color="neutral" variant="subtle"}
-
-#body
-:placeholder{class="h-full"}
-::
-
 ## Examples
 
 ### Control open state
@@ -299,6 +270,35 @@ In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), 
 
 ::tip
 This allows you to move the trigger outside of the Slideover or remove it entirely.
+::
+
+### Prevent closing
+
+Set the `dismissible` prop to `false` to prevent the Slideover from being closed when clicking outside of it or pressing escape.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - dismissible
+props:
+  dismissible: false
+  title: 'Slideover non-dismissible'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-full" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-full"}
 ::
 
 ### Programmatic usage

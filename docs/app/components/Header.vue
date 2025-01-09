@@ -21,7 +21,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0', toggle: '-mr-1.5' }" mode="drawer" :menu="{ shouldScaleBackground: true }">
+  <UHeader :ui="{ left: 'min-w-0' }" mode="drawer" :menu="{ shouldScaleBackground: true }">
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[var(--ui-text-highlighted)] min-w-0 focus-visible:outline-[var(--ui-primary)] shrink-0" aria-label="Nuxt UI">
         <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
@@ -76,15 +76,17 @@ defineShortcuts({
       <USeparator type="dashed" class="mt-4 mb-6" />
 
       <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] mb-5.5 -mx-2.5">
-        <ModuleSelect />
         <FrameworkSelect />
+        <ModuleSelect />
       </div>
 
-      <UContentNavigation :navigation="navigation" highlight>
+      <UContentNavigation :navigation="navigation" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }">
         <template #link-title="{ link }">
-          {{ link.title }}
+          <span class="inline-flex items-center gap-0.5">
+            {{ link.title }}
 
-          <UIcon v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" name="i-lucide-boxes" class="size-3 align-middle mb-[3px] text-(--ui-text-dimmed)" />
+            <sup v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
+          </span>
         </template>
       </UContentNavigation>
     </template>

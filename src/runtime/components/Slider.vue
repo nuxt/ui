@@ -1,9 +1,10 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { SliderRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slider'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { slider: Partial<typeof theme> } }
 

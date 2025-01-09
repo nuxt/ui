@@ -1,11 +1,11 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { RouteLocationRaw } from '#vue-router'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pagination'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
 
 const appConfig = _appConfig as AppConfig & { ui: { pagination: Partial<typeof theme> } }

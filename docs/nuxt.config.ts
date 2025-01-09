@@ -49,7 +49,6 @@ export default defineNuxtConfig({
 
   content: {
     build: {
-      pathMeta: {},
       markdown: {
         highlight: {
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
@@ -111,10 +110,6 @@ export default defineNuxtConfig({
     }
   },
 
-  hub: {
-    cache: true
-  },
-
   componentMeta: {
     exclude: [
       '@nuxt/content',
@@ -151,5 +146,9 @@ export default defineNuxtConfig({
 
   image: {
     provider: 'ipx'
+  },
+
+  uiPro: {
+    license: 'oss'
   }
 })

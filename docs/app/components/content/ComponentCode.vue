@@ -5,6 +5,7 @@ import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
 import { CalendarDate } from '@internationalized/date'
 import * as theme from '#build/ui'
+import * as themePro from '#build/ui-pro'
 import { get, set } from '#ui/utils'
 
 interface Cast {
@@ -41,6 +42,7 @@ const castMap: Record<string, Cast> = {
 
 const props = defineProps<{
   pro?: boolean
+  prose?: boolean
   prefix?: string
   /** Override the slug taken from the route */
   slug?: string
@@ -73,6 +75,10 @@ const props = defineProps<{
    * A list of line numbers to highlight in the code block
    */
   highlights?: number[]
+  /**
+   * Whether to add overflow-hidden to wrapper
+   */
+  overflowHidden?: boolean
 }>()
 
 const route = useRoute()
@@ -84,6 +90,10 @@ const component = defineAsyncComponent(() => {
   if (props.pro) {
     if (props.prefix) {
       return import(`#ui-pro/components/${props.prefix}/${upperFirst(camelName)}.vue`)
+    }
+
+    if (props.prose) {
+      return import(`#ui-pro/components/prose/${upperFirst(camelName)}.vue`)
     }
 
     return import(`#ui-pro/components/${upperFirst(camelName)}.vue`)
@@ -116,7 +126,7 @@ function setComponentProp(name: string, value: any) {
   set(componentProps, name, value)
 }
 
-const componentTheme = (theme as any)[camelName]
+const componentTheme = ((props.pro ? props.prose ? themePro.prose : themePro : theme) as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
 
 function mapKeys(obj: object, parentKey = ''): any {
@@ -139,16 +149,18 @@ const options = computed(() => {
     const propItems = get(props.items, key, [])
     const items = propItems.length
       ? propItems.map((item: any) => ({
-        value: item,
-        label: item
-      }))
+          value: item,
+          label: String(item)
+        }))
       : prop?.type === 'boolean' || prop?.type === 'boolean | undefined'
         ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]
-        : Object.keys(componentTheme?.variants?.[key] || {}).map(variant => ({
-          value: variant,
-          label: variant,
-          chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
-        }))
+        : Object.keys(componentTheme?.variants?.[key] || {}).filter((variant) => {
+            return variant !== 'true' && variant !== 'false'
+          }).map(variant => ({
+            value: variant,
+            label: variant,
+            chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
+          }))
 
     return {
       name: key,
@@ -161,6 +173,30 @@ const options = computed(() => {
 
 const code = computed(() => {
   let code = ''
+
+  if (props.prose) {
+    code += `\`\`\`mdc
+::${camelName}`
+
+    const proseProps = Object.entries(componentProps).map(([key, value]) => {
+      if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
+        return
+      }
+
+      return `${key}="${value}"`
+    }).filter(Boolean).join(' ')
+
+    if (proseProps.length) {
+      code += `{${proseProps}}`
+    }
+
+    code += `
+${props.slots?.default}
+::
+\`\`\``
+
+    return code
+  }
 
   if (props.collapse) {
     code += `::code-collapse
@@ -203,23 +239,23 @@ const code = computed(() => {
     }
 
     const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
     const name = kebabCase(key)
 
     if (typeof value === 'boolean') {
-      if (value && prop?.default === 'true') {
+      if (value && (propDefault === 'true' || propDefault === '`true`' || propDefault === true)) {
         continue
       }
-      if (!value && (!prop?.default || prop.default === 'false')) {
+      if (!value && (!propDefault || propDefault === 'false' || propDefault === '`false`' || propDefault === false)) {
         continue
       }
 
-      code += value ? ` ${name}` : ` :${key}="false"`
+      code += value ? ` ${name}` : ` :${name}="false"`
     } else if (typeof value === 'object') {
       const parsedValue = !props.external?.includes(key) ? json5.stringify(value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1') : key
 
       code += ` :${name}="${parsedValue}"`
     } else {
-      const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
       if (propDefault === value) {
         continue
       }
@@ -237,7 +273,7 @@ const code = computed(() => {
         code += `
   <template #${key}>
     ${value}
-  </template>`
+  </template>\n`
       }
     }
     code += (Object.keys(props.slots).length > 1 ? '\n' : '') + `</${name}>`
@@ -317,7 +353,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
             </USelect>
             <UInput
               v-else
-              :type="option.type?.includes('number') ? 'number' : 'text'"
+              :type="option.type?.includes('number') && typeof getComponentProp(option.name) === 'number' ? 'number' : 'text'"
               :model-value="getComponentProp(option.name)"
               color="neutral"
               variant="soft"
@@ -328,7 +364,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-border-muted)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class]">
+      <div v-if="component" class="flex justify-center border border-b-0 border-[var(--ui-border-muted)] relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class, { 'overflow-hidden': props.overflowHidden }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">

@@ -1,9 +1,9 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
@@ -125,13 +125,13 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
 
   const nestedValidatePromises = !names && opts.nested
     ? Array.from(nestedForms.value.values()).map(
-      ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
-        if (!(error instanceof FormValidationException)) {
-          throw error
-        }
-        return error
-      })
-    )
+        ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
+          if (!(error instanceof FormValidationException)) {
+            throw error
+          }
+          return error
+        })
+      )
     : []
 
   if (names) {
