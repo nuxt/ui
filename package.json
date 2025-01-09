@@ -14,15 +14,18 @@
     ".": {
       "style": "./dist/runtime/index.css",
       "types": "./dist/module.d.mts",
-      "import": "./dist/module.mjs"
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
     },
     "./unplugin": {
       "types": "./dist/unplugin.d.mts",
-      "import": "./dist/unplugin.mjs"
+      "import": "./dist/unplugin.mjs",
+      "require": "./dist/unplugin.cjs"
     },
     "./vite": {
       "types": "./dist/vite.d.mts",
-      "import": "./dist/vite.mjs"
+      "import": "./dist/vite.mjs",
+      "require": "./dist/vite.cjs"
     },
     "./vue-plugin": {
       "types": "./vue-plugin.d.mts"
@@ -39,6 +42,8 @@
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
   },
+  "style": "./dist/runtime/index.css",
+  "main": "./dist/module.cjs",
   "files": [
     ".nuxt/ui",
     "dist",
