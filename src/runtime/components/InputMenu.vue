@@ -10,6 +10,7 @@ import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
+import { isEqual } from 'ohash'
 
 const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
@@ -291,6 +292,12 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
+function onRemoveTag(ev: any) {
+  const modelValue = props.modelValue as SelectModelValue<T, V, M>[]
+  const filteredValue = modelValue.filter(value => !isEqual(value, ev))
+  emits('update:modelValue', filteredValue)
+}
+
 defineExpose({
   inputRef
 })
@@ -337,6 +344,7 @@ defineExpose({
         as-child
         @blur="onBlur"
         @focus="onFocus"
+        @remove-tag="onRemoveTag"
       >
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem({ class: props.ui?.tagsItem })">
           <TagsInputItemText :class="ui.tagsItemText({ class: props.ui?.tagsItemText })">
