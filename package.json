@@ -13,9 +13,9 @@
   "exports": {
     ".": {
       "types": "./dist/module.d.ts",
+      "style": "./dist/runtime/index.css",
       "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs",
-      "style": "./dist/runtime/index.css"
+      "require": "./dist/module.cjs"
     },
     "./unplugin": {
       "types": "./dist/unplugin.d.ts",
