@@ -12,20 +12,23 @@
   "license": "MIT",
   "exports": {
     ".": {
+      "types": "./dist/module.d.ts",
       "style": "./dist/runtime/index.css",
-      "types": "./dist/module.d.mts",
-      "import": "./dist/module.mjs"
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
     },
     "./unplugin": {
-      "types": "./dist/unplugin.d.mts",
-      "import": "./dist/unplugin.mjs"
+      "types": "./dist/unplugin.d.ts",
+      "import": "./dist/unplugin.mjs",
+      "require": "./dist/unplugin.cjs"
     },
     "./vite": {
-      "types": "./dist/vite.d.mts",
-      "import": "./dist/vite.mjs"
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.mjs",
+      "require": "./dist/vite.cjs"
     },
     "./vue-plugin": {
-      "types": "./vue-plugin.d.mts"
+      "types": "./vue-plugin.d.ts"
     },
     "./runtime/*": "./dist/runtime/*",
     "./locale": {
@@ -39,11 +42,14 @@
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
   },
+  "style": "./dist/runtime/index.css",
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
   "files": [
     ".nuxt/ui",
     "dist",
     "cli",
-    "vue-plugin.d.mts"
+    "vue-plugin.d.ts"
   ],
   "scripts": {
     "build": "nuxt-module-build build && pnpm devtools:build",
@@ -113,9 +119,9 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.7.4",
-    "@nuxt/module-builder": "1.0.0-alpha.1",
+    "@nuxt/module-builder": "^0.8.4",
     "@nuxt/test-utils": "^3.15.1",
-    "@release-it/conventional-changelog": "^9.0.4",
+    "@release-it/conventional-changelog": "^10.0.0",
     "@standard-schema/spec": "1.0.0-beta.4",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.5.1",
@@ -135,7 +141,7 @@
     "zod": "^3.24.1"
   },
   "peerDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.6.3"
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
@@ -143,7 +149,7 @@
     "debug": "4.3.7",
     "happy-dom": "14.12.3",
     "rollup": "^4.24.0",
-    "typescript": "5.7.2",
+    "typescript": "5.6.3",
     "unimport": "3.14.5",
     "unplugin": "^2.1.2",
     "vite": "^6.0.7",
