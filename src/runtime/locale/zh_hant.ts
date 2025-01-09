@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: '减少'
     },
     commandPalette: {
+      placeholder: '輸入命令或搜尋...',
       noMatch: '沒有匹配的資料',
       noData: '沒有資料',
       close: '關閉'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: '沒有匹配的資料',
       noData: '沒有資料',
-      create: '創建 "{label}"'
+      create: '創建 "{label}"',
+      search: '搜尋...'
     },
     toast: {
       close: '關閉'

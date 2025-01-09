@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Minska'
     },
     commandPalette: {
+      placeholder: 'Skriv ett kommando eller sök...',
       noMatch: 'Inga matchande data',
       noData: 'Inga data',
       close: 'Stäng'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Inga matchande data',
       noData: 'Inga data',
-      create: 'Skapa "{label}"'
+      create: 'Skapa "{label}"',
+      search: 'Sök...'
     },
     toast: {
       close: 'Stäng'

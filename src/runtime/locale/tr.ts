@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Azalt'
     },
     commandPalette: {
+      placeholder: 'Bir komut yazın veya arama yapın...',
       noMatch: 'Eşleşen veri yok',
       noData: 'Veri yok',
       close: 'Kapat'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Eşleşen veri yok',
       noData: 'Veri yok',
-      create: '"{label}" oluştur'
+      create: '"{label}" oluştur',
+      search: 'Ara...'
     },
     toast: {
       close: 'Kapat'

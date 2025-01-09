@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Kurangi'
     },
     commandPalette: {
+      placeholder: 'Ketik perintah atau cari...',
       noMatch: 'Tidak ada data yang cocok',
       noData: 'Tidak ada data',
       close: 'Tutup'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Tidak ada data yang cocok',
       noData: 'Tidak ada data',
-      create: 'Buat "{label}"'
+      create: 'Buat "{label}"',
+      search: 'Cari...'
     },
     toast: {
       close: 'Tutup'

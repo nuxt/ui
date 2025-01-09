@@ -145,7 +145,6 @@ import UInput from './Input.vue'
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
-  placeholder: 'Type a command or search...',
   labelKey: 'label',
   autofocus: true
 })
@@ -244,6 +243,7 @@ const groups = computed(() => {
   <ListboxRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
+        :placeholder="placeholder || t('commandPalette.placeholder')"
         variant="none"
         :autofocus="autofocus"
         size="lg"
