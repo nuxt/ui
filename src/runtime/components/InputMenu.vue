@@ -294,7 +294,7 @@ function onUpdateOpen(value: boolean) {
 
 function onRemoveTag(event: any) {
   const modelValue = props.modelValue as SelectModelValue<T, V, M>[]
-  const filteredValue = modelValue.filter(value => !isEqual(value, ev))
+  const filteredValue = modelValue.filter(value => !isEqual(value, event))
   emits('update:modelValue', filteredValue)
 }
 
