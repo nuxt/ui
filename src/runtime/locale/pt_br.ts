@@ -29,7 +29,7 @@ export default defineLocale({
       noMatch: 'Nenhum dado correspondente',
       noData: 'Nenhum dado',
       create: 'Criar "{label}"',
-      search: 'Buscar...'
+      search: 'Pesquisar...'
     },
     toast: {
       close: 'Fechar'
