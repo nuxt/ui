@@ -157,7 +157,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
-const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon', 'placeholder'))
+const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon'))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = commandPalette()
