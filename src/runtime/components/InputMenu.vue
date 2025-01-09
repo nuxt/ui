@@ -145,6 +145,7 @@ extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3']
 import { computed, ref, toRef, onMounted, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
+import { isEqual } from 'ohash'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
@@ -291,6 +292,14 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
+function onRemoveTag(event: any) {
+  if (props.multiple) {
+    const modelValue = props.modelValue as SelectModelValue<T, V, true>
+    const filteredValue = modelValue.filter(value => !isEqual(value, event))
+    emits('update:modelValue', filteredValue as SelectModelValue<T, V, M>)
+  }
+}
+
 defineExpose({
   inputRef
 })
@@ -337,6 +346,7 @@ defineExpose({
         as-child
         @blur="onBlur"
         @focus="onFocus"
+        @remove-tag="onRemoveTag"
       >
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="(item as string)" :class="ui.tagsItem({ class: props.ui?.tagsItem })">
           <TagsInputItemText :class="ui.tagsItemText({ class: props.ui?.tagsItemText })">
