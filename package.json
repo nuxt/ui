@@ -141,7 +141,7 @@
     "zod": "^3.24.1"
   },
   "peerDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.6.3"
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
@@ -149,7 +149,7 @@
     "debug": "4.3.7",
     "happy-dom": "14.12.3",
     "rollup": "^4.24.0",
-    "typescript": "5.7.2",
+    "typescript": "5.6.3",
     "unimport": "3.14.5",
     "unplugin": "^2.1.2",
     "vite": "^6.0.7",
