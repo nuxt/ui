@@ -42,21 +42,21 @@
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",
-    "@tailwindcss/forms": "^0.5.9",
-    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
     "@vueuse/core": "^12.3.0",
     "@vueuse/integrations": "^12.3.0",
     "@vueuse/math": "^12.3.0",
     "defu": "^6.1.4",
     "fuse.js": "^7.0.0",
     "ohash": "^1.1.4",
-    "pathe": "^2.0.0",
+    "pathe": "^2.0.1",
     "scule": "^1.3.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.7.4",
+    "@nuxt/eslint-config": "^0.7.5",
     "@nuxt/module-builder": "^0.8.4",
     "@nuxt/test-utils": "^3.15.1",
     "@release-it/conventional-changelog": "^10.0.0",
@@ -65,7 +65,7 @@
     "happy-dom": "^14.12.3",
     "joi": "^17.13.3",
     "nuxt": "^3.15.1",
-    "release-it": "^18.0.0",
+    "release-it": "^18.1.1",
     "superstruct": "^2.0.2",
     "typescript": "^5.6.3",
     "valibot": "^0.42.1",
@@ -73,7 +73,7 @@
     "valibot31": "npm:valibot@0.31.0",
     "vitest": "^2.1.8",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^2.1.10",
+    "vue-tsc": "^2.2.0",
     "yup": "^1.6.1",
     "zod": "^3.24.1"
   },
@@ -82,7 +82,7 @@
     "@nuxt/content": "2.13.2",
     "@nuxtjs/mdc": "0.9.0",
     "chokidar": "3.6.0",
-    "vue-tsc": "2.1.10",
+    "vue-tsc": "^2.2.0",
     "typescript": "5.6.3"
   }
 }
