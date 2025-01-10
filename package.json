@@ -154,10 +154,5 @@
     "unplugin": "^2.1.2",
     "vite": "^6.0.7",
     "vue-tsc": "^2.2.0"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "@nuxt/content": "patches/@nuxt__content.patch"
-    }
   }
 }

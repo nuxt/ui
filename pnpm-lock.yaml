@@ -16,11 +16,6 @@ overrides:
   vite: ^6.0.7
   vue-tsc: ^2.2.0
 
-patchedDependencies:
-  '@nuxt/content':
-    hash: ill3dugddc67krwwzh752crzii
-    path: patches/@nuxt__content.patch
-
 importers:
 
   .:
@@ -267,8 +262,8 @@ importers:
         specifier: ^1.2.9
         version: 1.2.9
       '@nuxt/content':
-        specifier: https://pkg.pr.new/@nuxt/content@c81d1c4
-        version: https://pkg.pr.new/@nuxt/content@c81d1c4(patch_hash=ill3dugddc67krwwzh752crzii)(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.30.0)
+        specifier: https://pkg.pr.new/@nuxt/content@2962
+        version: https://pkg.pr.new/@nuxt/content@2962(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.30.0)
       '@nuxt/image':
         specifier: ^1.9.0
         version: 1.9.0(db0@0.2.1(@libsql/client@0.14.0)(better-sqlite3@11.7.2))(ioredis@5.4.2)(magicast@0.3.5)(rollup@4.30.0)
@@ -1370,8 +1365,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@c81d1c4':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/content@c81d1c4}
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@2962':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/content@2962}
     version: 3.0.0-alpha.8
     peerDependencies:
       '@libsql/client': '*'
@@ -7916,7 +7911,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.18.0
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@c81d1c4(patch_hash=ill3dugddc67krwwzh752crzii)(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.30.0)':
+  '@nuxt/content@https://pkg.pr.new/@nuxt/content@2962(@libsql/client@0.14.0)(magicast@0.3.5)(pg@8.13.1)(rollup@4.30.0)':
     dependencies:
       '@libsql/client': 0.14.0
       '@nuxtjs/mdc': 0.12.1(magicast@0.3.5)(rollup@4.30.0)
