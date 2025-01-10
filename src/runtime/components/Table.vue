@@ -121,7 +121,7 @@ export type TableSlots<T> = {
 <script setup lang="ts" generic="T extends TableData">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
+import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable, getPaginationRowModel } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { useLocale } from '../composables/useLocale'
 
@@ -169,6 +169,7 @@ const tableApi = useVueTable({
   ...(props.expandedOptions || {}),
   getExpandedRowModel: getExpandedRowModel(),
   onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
+  getPaginationRowModel: getPaginationRowModel(),
   state: {
     get globalFilter() {
       return globalFilterState.value
