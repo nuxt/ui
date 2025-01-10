@@ -1,87 +1,3417 @@
+diff --git a/dist/module.cjs b/dist/module.cjs
+index e805fe41f7767f210157ac3f2e80c2e6eeca243f..7bd7b43ddd49ceddbd445393fc31e768ea0f872a 100644
+--- a/dist/module.cjs
++++ b/dist/module.cjs
+@@ -6,24 +6,26 @@ const promises = require('node:fs/promises');
+ const kit = require('@nuxt/kit');
+ const ohash = require('ohash');
+ const pathe = require('pathe');
+-const fastGlob = require('fast-glob');
+ const htmlTags = require('@nuxtjs/mdc/runtime/parser/utils/html-tags-list');
+ const scule = require('scule');
+ const schema_js = require('../dist/runtime/internal/schema.js');
+ const ufo = require('ufo');
++const FastGlob = require('fast-glob');
+ const node_fs = require('node:fs');
+ const node_stream = require('node:stream');
+ const node_util = require('node:util');
+ const tar = require('tar');
+ const pkgTypes = require('pkg-types');
+ const gitUrlParse = require('git-url-parse');
+-const zod = require('zod');
++const z$1 = require('zod');
+ const crypto = require('node:crypto');
+-const Database = require('better-sqlite3');
+ const chokidar = require('chokidar');
+ const micromatch = require('micromatch');
+ const ws = require('ws');
+ const listhen = require('listhen');
++const bunsqlite_js = require('../dist/runtime/internal/bunsqlite.js');
++const sqlite_js = require('../dist/runtime/internal/sqlite.js');
++const node_path = require('node:path');
+ const runtime = require('@nuxtjs/mdc/runtime');
+ const defu = require('defu');
+ const oniguruma = require('shiki/engine/oniguruma');
+@@ -50,11 +52,23 @@ const jiti = require('jiti');
+ var _documentCurrentScript = typeof document !== 'undefined' ? document.currentScript : null;
+ function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e.default : e; }
+ 
+-const fastGlob__default = /*#__PURE__*/_interopDefaultCompat(fastGlob);
++function _interopNamespaceCompat(e) {
++  if (e && typeof e === 'object' && 'default' in e) return e;
++  const n = Object.create(null);
++  if (e) {
++    for (const k in e) {
++      n[k] = e[k];
++    }
++  }
++  n.default = e;
++  return n;
++}
++
+ const htmlTags__default = /*#__PURE__*/_interopDefaultCompat(htmlTags);
++const FastGlob__default = /*#__PURE__*/_interopDefaultCompat(FastGlob);
+ const gitUrlParse__default = /*#__PURE__*/_interopDefaultCompat(gitUrlParse);
++const z__namespace = /*#__PURE__*/_interopNamespaceCompat(z$1);
+ const crypto__default = /*#__PURE__*/_interopDefaultCompat(crypto);
+-const Database__default = /*#__PURE__*/_interopDefaultCompat(Database);
+ const chokidar__default = /*#__PURE__*/_interopDefaultCompat(chokidar);
+ const micromatch__default = /*#__PURE__*/_interopDefaultCompat(micromatch);
+ const defu__default = /*#__PURE__*/_interopDefaultCompat(defu);
+@@ -179,32 +193,37 @@ function defineLocalSource(source) {
+   const resolvedSource = {
+     _resolved: true,
+     prefix: ufo.withoutTrailingSlash(ufo.withLeadingSlash(fixed)),
++    prepare: async ({ rootDir }) => {
++      resolvedSource.cwd = source.cwd ? String(source.cwd).replace(/^~~\//, rootDir) : pathe.join(rootDir, "content");
++    },
++    getKeys: async () => {
++      const _keys = await FastGlob__default(source.include, { cwd: resolvedSource.cwd, ignore: source.exclude || [], dot: true }).catch(() => []);
++      return _keys.map((key) => key.substring(fixed.length));
++    },
++    getItem: async (key) => {
++      const fullPath = pathe.join(resolvedSource.cwd, fixed, key);
++      const content = await promises.readFile(fullPath, "utf8");
++      return content;
++    },
+     ...source,
+     include: source.include,
+-    cwd: "",
+-    prepare: async (nuxt) => {
+-      resolvedSource.cwd = source.cwd ? String(source.cwd).replace(/^~~\//, nuxt.options.rootDir) : pathe.join(nuxt.options.rootDir, "content");
+-    }
++    cwd: ""
+   };
+   return resolvedSource;
+ }
+ function defineGitHubSource(source) {
+-  const resolvedSource = {
+-    _resolved: true,
+-    ...source,
+-    cwd: "",
+-    prepare: async (nuxt) => {
+-      const repository = source?.repository && parseGitHubUrl(source.repository);
+-      if (repository) {
+-        const { org, repo, branch } = repository;
+-        resolvedSource.cwd = pathe.join(nuxt.options.rootDir, ".data", "content", `github-${org}-${repo}-${branch}`);
+-        let headers = {};
+-        if (resolvedSource.authToken) {
+-          headers = { Authorization: `Bearer ${resolvedSource.authToken}` };
+-        }
+-        const url = headers.Authorization ? `https://api.github.com/repos/${org}/${repo}/tarball/${branch}` : `https://github.com/${org}/${repo}/archive/refs/heads/${branch}.tar.gz`;
+-        await downloadRepository(url, resolvedSource.cwd, { headers });
++  const resolvedSource = defineLocalSource(source);
++  resolvedSource.prepare = async ({ rootDir }) => {
++    const repository = source?.repository && parseGitHubUrl(source.repository);
++    if (repository) {
++      const { org, repo, branch } = repository;
++      resolvedSource.cwd = pathe.join(rootDir, ".data", "content", `github-${org}-${repo}-${branch}`);
++      let headers = {};
++      if (resolvedSource.authToken) {
++        headers = { Authorization: `Bearer ${resolvedSource.authToken}` };
+       }
++      const url = headers.Authorization ? `https://api.github.com/repos/${org}/${repo}/tarball/${branch}` : `https://github.com/${org}/${repo}/archive/refs/heads/${branch}.tar.gz`;
++      await downloadRepository(url, resolvedSource.cwd, { headers });
+     }
+   };
+   return resolvedSource;
+@@ -226,7 +245,7 @@ const ContentFileExtension = {
+   Xml: "xml"
+ };
+ 
+-const z = zod.z;
++const z = z$1.z;
+ const ZodToSqlFieldTypes = {
+   ZodString: "VARCHAR",
+   ZodNumber: "INT",
+@@ -247,38 +266,90 @@ function getUnderlyingTypeName(zodType) {
+   return getUnderlyingType(zodType).constructor.name;
+ }
+ 
+-const metaSchema = zod.z.object({
+-  id: zod.z.string(),
+-  stem: zod.z.string(),
+-  extension: zod.z.enum(getEnumValues(ContentFileExtension)),
+-  meta: zod.z.record(zod.z.string(), zod.z.any())
++const metaSchema = z__namespace.object({
++  id: z__namespace.string(),
++  stem: z__namespace.string(),
++  extension: z__namespace.enum(getEnumValues(ContentFileExtension)),
++  meta: z__namespace.record(z__namespace.string(), z__namespace.any())
+ });
+-const pageSchema = zod.z.object({
+-  path: zod.z.string(),
+-  title: zod.z.string(),
+-  description: zod.z.string(),
+-  seo: zod.z.intersection(
+-    zod.z.object({
+-      title: zod.z.string().optional(),
+-      description: zod.z.string().optional()
++const pageSchema = z__namespace.object({
++  path: z__namespace.string(),
++  title: z__namespace.string(),
++  description: z__namespace.string(),
++  seo: z__namespace.intersection(
++    z__namespace.object({
++      title: z__namespace.string().optional(),
++      description: z__namespace.string().optional()
+     }),
+-    zod.z.record(zod.z.string(), zod.z.any())
++    z__namespace.record(z__namespace.string(), z__namespace.any())
+   ).optional().default({}),
+-  body: zod.z.object({
+-    type: zod.z.string(),
+-    children: zod.z.any(),
+-    toc: zod.z.any()
++  body: z__namespace.object({
++    type: z__namespace.string(),
++    children: z__namespace.any(),
++    toc: z__namespace.any()
+   }),
+-  navigation: zod.z.union([
+-    zod.z.boolean(),
+-    zod.z.object({
+-      title: zod.z.string(),
+-      description: zod.z.string(),
+-      icon: zod.z.string()
++  navigation: z__namespace.union([
++    z__namespace.boolean(),
++    z__namespace.object({
++      title: z__namespace.string(),
++      description: z__namespace.string(),
++      icon: z__namespace.string()
+     })
+   ]).optional().default(true)
+ });
+ 
++function getDefaultSqliteAdapter() {
++  return process.versions.bun ? "bunsqlite" : "sqlite";
++}
++async function getDatabase(filename) {
++  const type = getDefaultSqliteAdapter();
++  if (type === "bunsqlite") {
++    return bunsqlite_js.getBunSqliteDatabaseAdapter({ filename });
++  } else {
++    return sqlite_js.getBetter3DatabaseAdapter({ filename });
++  }
++}
++const _localDatabase = {};
++async function getLocalDatabase(databaseLocation) {
++  const db = _localDatabase[databaseLocation] || await getDatabase(databaseLocation);
++  _localDatabase[databaseLocation] = db;
++  await db.exec("CREATE TABLE IF NOT EXISTS _development_cache (id TEXT PRIMARY KEY, checksum TEXT, parsedContent TEXT)");
++  const fetchDevelopmentCache = async () => {
++    const result = await db.all("SELECT * FROM _development_cache");
++    return result.reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {});
++  };
++  const fetchDevelopmentCacheForKey = async (key) => {
++    return await db.first("SELECT * FROM _development_cache WHERE id = ?", [key]);
++  };
++  const insertDevelopmentCache = async (id, checksum, parsedContent) => {
++    deleteDevelopmentCache(id);
++    db.exec(`INSERT INTO _development_cache (id, checksum, parsedContent) VALUES ('${id}', '${checksum}', '${parsedContent.replace(/'/g, "''")}')`);
++  };
++  const deleteDevelopmentCache = async (id) => {
++    db.exec(`DELETE FROM _development_cache WHERE id = '${id}'`);
++  };
++  const dropContentTables = async () => {
++    const tables = await db.all(`SELECT name FROM sqlite_master WHERE type = 'table' AND name LIKE '_content_%'`);
++    for (const { name } of tables) {
++      db.exec(`DROP TABLE ${name}`);
++    }
++  };
++  return {
++    database: db,
++    async exec(sql) {
++      db.exec(sql);
++    },
++    close() {
++      _localDatabase[databaseLocation] = void 0;
++    },
++    fetchDevelopmentCache,
++    fetchDevelopmentCacheForKey,
++    insertDevelopmentCache,
++    deleteDevelopmentCache,
++    dropContentTables
++  };
++}
++
+ const defineTransformer = (transformer) => {
+   return transformer;
+ };
+@@ -976,15 +1047,15 @@ function csvParse(options) {
+ const csv = defineTransformer({
+   name: "csv",
+   extensions: [".csv"],
+-  parse: async (id, content, options = {}) => {
++  parse: async (file, options = {}) => {
+     const stream = unified.unified().use(csvParse, {
+       delimiter: ",",
+       json: true,
+       ...options
+     });
+-    const { result } = await stream.process(content);
++    const { result } = await stream.process(file.body);
+     return {
+-      id,
++      id: file.id,
+       body: result
+     };
+   }
+@@ -1042,7 +1113,7 @@ const describeId = (id) => {
+ const markdown = defineTransformer({
+   name: "markdown",
+   extensions: [".md"],
+-  parse: async (id, content, options = {}) => {
++  parse: async (file, options = {}) => {
+     const config = { ...options };
+     config.rehypePlugins = await importPlugins(config.rehypePlugins);
+     config.remarkPlugins = await importPlugins(config.remarkPlugins);
+@@ -1051,7 +1122,7 @@ const markdown = defineTransformer({
+       // Pass only when it's an function. String values are handled by `@nuxtjs/mdc`
+       highlighter: typeof options.highlight?.highlighter === "function" ? options.highlight.highlighter : void 0
+     } : void 0;
+-    const parsed = await runtime.parseMarkdown(content, {
++    const parsed = await runtime.parseMarkdown(file.body, {
+       ...config,
+       highlight,
+       toc: config.toc,
+@@ -1060,6 +1131,8 @@ const markdown = defineTransformer({
+         plugins: config.rehypePlugins,
+         options: { handlers: { link } }
+       }
++    }, {
++      fileOptions: file
+     });
+     if (options.compress) {
+       return {
+@@ -1069,7 +1142,7 @@ const markdown = defineTransformer({
+           ...abstractTree_js.compressTree(parsed.body),
+           toc: parsed.toc
+         },
+-        id
++        id: file.id
+       };
+     }
+     return {
+@@ -1079,7 +1152,7 @@ const markdown = defineTransformer({
+         ...parsed.body,
+         toc: parsed.toc
+       },
+-      id
++      id: file.id
+     };
+   }
+ });
+@@ -1130,9 +1203,10 @@ function normaliseLink(link2) {
+ const yaml = defineTransformer({
+   name: "Yaml",
+   extensions: [".yml", ".yaml"],
+-  parse: (id, content) => {
++  parse: (file) => {
++    const { id, body } = file;
+     const { data } = remarkMdc.parseFrontMatter(`---
+-${content}
++${body}
+ ---`);
+     let parsed = data;
+     if (Array.isArray(data)) {
+@@ -1150,12 +1224,13 @@ ${content}
+ const json = defineTransformer({
+   name: "Json",
+   extensions: [".json"],
+-  parse: async (id, content) => {
++  parse: async (file) => {
++    const { id, body } = file;
+     let parsed;
+-    if (typeof content === "string") {
+-      parsed = destr.destr(content);
++    if (typeof body === "string") {
++      parsed = destr.destr(body);
+     } else {
+-      parsed = content;
++      parsed = body;
+     }
+     if (Array.isArray(parsed)) {
+       console.warn(`JSON array is not supported in ${id}, moving the array into the \`body\` key`);
+@@ -1191,17 +1266,16 @@ function getTransformers(ext, additionalTransformers = []) {
+     ...TRANSFORMERS.filter((p) => ext.match(new RegExp(p.extensions.join("|"), "i")) && p.transform)
+   ];
+ }
+-async function transformContent(id, content, options = {}) {
++async function transformContent(file, options = {}) {
+   const { transformers = [] } = options;
+-  const file = { id, body: content };
+-  const ext = pathe.extname(id);
++  const ext = file.extension || pathe.extname(file.id);
+   const parser = getParser(ext, transformers);
+   if (!parser) {
+-    console.warn(`${ext} files are not supported, "${id}" falling back to raw content`);
++    console.warn(`${ext} files are not supported, "${file.id}" falling back to raw content`);
+     return file;
+   }
+   const parserOptions = options[scule.camelCase(parser.name)] || {};
+-  const parsed = await parser.parse(file.id, file.body, parserOptions);
++  const parsed = await parser.parse(file, parserOptions);
+   const matchedTransformers = getTransformers(ext, transformers);
+   const result = await matchedTransformers.reduce(async (prev, cur) => {
+     const next = await prev || parsed;
+@@ -1240,7 +1314,7 @@ async function _getHighlightPlugin(options) {
+     ]));
+     const bundledLangs = await Promise.all(langs.map(async (lang) => [
+       lang,
+-      await import(`shiki/langs/${lang}.mjs`).then((m) => m.default || m)
++      await import(`@shikijs/langs/${lang}`).then((m) => m.default || m)
+     ]));
+     const highlighter = runtime.createShikiHighlighter({
+       bundledThemes: Object.fromEntries(bundledThemes),
+@@ -1273,7 +1347,7 @@ async function _getHighlightPlugin(options) {
+                 node.properties.style = void 0;
+               }
+             );
+-            result.style = Object.entries(stylesMap).map(([style, cls]) => `.${cls}{${style}}`).join("") + result.style;
++            result.style = Object.entries(stylesMap).map(([style, cls]) => `html pre.shiki code .${cls}, html code.shiki .${cls}{${style}}`).join("") + result.style;
+           }
+           return result;
+         },
+@@ -1283,11 +1357,11 @@ async function _getHighlightPlugin(options) {
+   }
+   return highlightPlugin;
+ }
+-async function parseContent(key, content, collection, nuxt) {
++async function createParser(collection, nuxt) {
+   const mdcOptions = nuxt?.options?.mdc || {};
+   const { pathMeta = {}, markdown = {} } = nuxt?.options?.content?.build || {};
+   const rehypeHighlightPlugin = markdown.highlight !== false ? await getHighlightPluginInstance(defu.defu(markdown.highlight, mdcOptions.highlight, { compress: true })) : void 0;
+-  const parsedContent = await transformContent(key, content, {
++  const parserOptions2 = {
+     pathMeta,
+     markdown: {
+       compress: true,
+@@ -1305,28 +1379,39 @@ async function parseContent(key, content, collection, nuxt) {
+       },
+       highlight: void 0
+     }
+-  });
+-  const { id, ...parsedContentFields } = parsedContent;
+-  const result = { id };
+-  const meta = {};
+-  const collectionKeys = Object.keys(collection.extendedSchema.shape);
+-  for (const key2 of Object.keys(parsedContentFields)) {
+-    if (collectionKeys.includes(key2)) {
+-      result[key2] = parsedContent[key2];
+-    } else {
+-      meta[key2] = parsedContent[key2];
++  };
++  return async function parse(file) {
++    if (file.path && !file.dirname) {
++      file.dirname = node_path.dirname(file.path);
++    }
++    const beforeParseCtx = { file, collection, parserOptions: parserOptions2 };
++    await nuxt?.callHook?.("content:file:beforeParse", beforeParseCtx);
++    const { file: hookedFile } = beforeParseCtx;
++    const parsedContent = await transformContent(hookedFile, beforeParseCtx.parserOptions);
++    const { id, ...parsedContentFields } = parsedContent;
++    const result = { id };
++    const meta = {};
++    const collectionKeys = Object.keys(collection.extendedSchema.shape);
++    for (const key of Object.keys(parsedContentFields)) {
++      if (collectionKeys.includes(key)) {
++        result[key] = parsedContent[key];
++      } else {
++        meta[key] = parsedContent[key];
++      }
+     }
+-  }
+-  result.meta = meta;
+-  if (collectionKeys.includes("rawbody")) {
+-    result.rawbody = result.rawbody ?? content;
+-  }
+-  if (collectionKeys.includes("seo")) {
+-    result.seo = result.seo || {};
+-    result.seo.title = result.seo.title || result.title;
+-    result.seo.description = result.seo.description || result.description;
+-  }
+-  return result;
++    result.meta = meta;
++    if (collectionKeys.includes("rawbody")) {
++      result.rawbody = result.rawbody ?? file.body;
++    }
++    if (collectionKeys.includes("seo")) {
++      result.seo = result.seo || {};
++      result.seo.title = result.seo.title || result.title;
++      result.seo.description = result.seo.description || result.description;
++    }
++    const afterParseCtx = { file: hookedFile, content: result, collection };
++    await nuxt?.callHook?.("content:file:afterParse", afterParseCtx);
++    return afterParseCtx.content;
++  };
+ }
+ 
+ const compress = (text) => {
+@@ -1449,7 +1534,7 @@ const manifestTemplate = (manifest) => ({
+   getContents: ({ options }) => {
+     const collectionsMeta = options.manifest.collections.reduce((acc, collection) => {
+       acc[collection.name] = {
+-        jsonFields: collection.jsonFields
++        fields: collection.fields
+       };
+       return acc;
+     }, {});
+@@ -1481,7 +1566,7 @@ const studioTemplate = (collections, gitInfo, schema) => ({
+         // Remove source from collection meta if it's a remote collection
+         source: collection.source?.filter((source) => source.repository ? void 0 : collection.source),
+         type: collection.type,
+-        jsonFields: collection.jsonFields,
++        fields: collection.fields,
+         schema: zodToJsonSchema.zodToJsonSchema(collection.extendedSchema, collection.name),
+         tableDefinition: generateCollectionTableDefinition(collection)
+       };
+@@ -1506,7 +1591,7 @@ const studioTemplate = (collections, gitInfo, schema) => ({
+ 
+ const logger = kit.useLogger("@nuxt/content");
+ async function startSocketServer(nuxt, options, manifest) {
+-  const db = localDatabase(options._localDatabase.filename);
++  const db = await getLocalDatabase(options._localDatabase.filename);
+   let websocket;
+   let listener;
+   const websocketOptions = options.watch || {};
+@@ -1519,26 +1604,27 @@ async function startSocketServer(nuxt, options, manifest) {
+     });
+   }
+   async function broadcast(collection, key, insertQuery) {
+-    const removeQuery = `DELETE FROM ${collection.tableName} WHERE id = '${key}'`;
++    const removeQuery = `DELETE FROM ${collection.tableName} WHERE id = '${key}';`;
+     await db.exec(removeQuery);
+     if (insertQuery) {
+-      await db.exec(insertQuery);
+-    }
+-    const index = manifest.dump[collection.name]?.findIndex((item) => item.includes(`'${key}'`));
+-    if (index && index !== -1) {
+-      if (insertQuery) {
+-        manifest.dump[collection.name]?.splice(index, 1, insertQuery);
+-      } else {
+-        manifest.dump[collection.name]?.splice(index, 1);
+-      }
+-      kit.updateTemplates({
+-        filter: (template) => [
+-          moduleTemplates.manifest,
+-          moduleTemplates.fullCompressedDump
+-          // moduleTemplates.raw,
+-        ].includes(template.filename)
+-      });
++      await Promise.all(insertQuery.map((query) => db.exec(query)));
+     }
++    const collectionDump = manifest.dump[collection.name];
++    const keyIndex = collectionDump?.findIndex((item) => item.includes(`'${key}'`));
++    const indexToUpdate = keyIndex !== -1 ? keyIndex : collectionDump?.length;
++    const itemsToRemove = keyIndex === -1 ? 0 : 1;
++    if (insertQuery) {
++      collectionDump?.splice(indexToUpdate, itemsToRemove, ...insertQuery);
++    } else {
++      collectionDump?.splice(indexToUpdate, itemsToRemove);
++    }
++    kit.updateTemplates({
++      filter: (template) => [
++        moduleTemplates.manifest,
++        moduleTemplates.fullCompressedDump
++        // moduleTemplates.raw,
++      ].includes(template.filename)
++    });
+     websocket?.broadcast({
+       key,
+       collection: collection.name,
+@@ -1554,17 +1640,22 @@ async function startSocketServer(nuxt, options, manifest) {
+   };
+ }
+ async function watchContents(nuxt, options, manifest, socket) {
+-  const db = localDatabase(options._localDatabase.filename);
++  const collectionParsers = {};
++  const db = await getLocalDatabase(options._localDatabase.filename);
+   const collections = manifest.collections;
+   const sourceMap = collections.flatMap((c) => {
+     return c.source ? c.source.filter((s) => !s.repository).map((s) => ({ collection: c, source: s, cwd: ufo.withTrailingSlash(s.cwd) })) : [];
+   });
+-  const dirsToWatch = Array.from(new Set(sourceMap.map(({ source }) => source.cwd)));
++  const dirsToWatch = Array.from(new Set(sourceMap.map(({ source }) => source.cwd))).filter(Boolean);
+   const watcher = chokidar__default.watch(dirsToWatch, { ignoreInitial: true });
+   watcher.on("add", onChange);
+   watcher.on("change", onChange);
+   watcher.on("unlink", onRemove);
+-  async function onChange(path) {
++  async function onChange(pathOrError) {
++    if (pathOrError instanceof Error) {
++      return;
++    }
++    let path = pathOrError;
+     const match = sourceMap.find(({ source, cwd }) => path.startsWith(cwd) && micromatch__default.isMatch(path.substring(cwd.length), source.include, { ignore: source.exclude || [], dot: true }));
+     if (match) {
+       const { collection, source, cwd } = match;
+@@ -1573,21 +1664,35 @@ async function watchContents(nuxt, options, manifest, socket) {
+       const { fixed } = parseSourceBase(source);
+       const filePath = path.substring(fixed.length);
+       const keyInCollection = pathe.join(collection.name, source?.prefix || "", filePath);
+-      const content = await promises.readFile(pathe.join(cwd, path), "utf8");
++      const fullPath = pathe.join(cwd, path);
++      const content = await promises.readFile(fullPath, "utf8");
+       const checksum = getContentChecksum(content);
+-      const localCache = db.fetchDevelopmentCacheForKey(keyInCollection);
++      const localCache = await db.fetchDevelopmentCacheForKey(keyInCollection);
+       if (localCache && localCache.checksum === checksum) {
+         db.exec(`DELETE FROM ${collection.tableName} WHERE id = '${keyInCollection}'`);
+-        db.exec(generateCollectionInsert(collection, JSON.parse(localCache.parsedContent)));
++        const insertQuery2 = generateCollectionInsert(collection, JSON.parse(localCache.parsedContent));
++        await Promise.all(insertQuery2.map((query) => db.exec(query)));
+         return;
+       }
+-      const parsedContent = await parseContent(keyInCollection, content, collection, nuxt);
++      if (!collectionParsers[collection.name]) {
++        collectionParsers[collection.name] = await createParser(collection, nuxt);
++      }
++      const parser = collectionParsers[collection.name];
++      const parsedContent = await parser({
++        id: keyInCollection,
++        body: content,
++        path: fullPath
++      });
+       db.insertDevelopmentCache(keyInCollection, checksum, JSON.stringify(parsedContent));
+       const insertQuery = generateCollectionInsert(collection, parsedContent);
+       await socket.broadcast(collection, keyInCollection, insertQuery);
+     }
+   }
+-  async function onRemove(path) {
++  async function onRemove(pathOrError) {
++    if (pathOrError instanceof Error) {
++      return;
++    }
++    let path = pathOrError;
+     const match = sourceMap.find(({ source, cwd }) => path.startsWith(cwd) && micromatch__default.isMatch(path.substring(cwd.length), source.include, { ignore: source.exclude || [], dot: true }));
+     if (match) {
+       const { collection, source, cwd } = match;
+@@ -1644,16 +1749,6 @@ function watchComponents(nuxt) {
+     }
+   });
+ }
+-function watchConfig(nuxt) {
+-  nuxt.hook("nitro:init", async (nitro) => {
+-    nitro.storage.watch(async (_event, key) => {
+-      if ("root:content.config.ts" === key) {
+-        logger.info(`\`${key.split(":").pop()}\` updated, restarting the Nuxt server...`);
+-        nuxt.hooks.callHook("restart", { hard: true });
+-      }
+-    });
+-  });
+-}
+ function createWebSocket() {
+   const wss = new ws.WebSocketServer({ noServer: true });
+   const serve = (req, socket = req.socket, head) => wss.handleUpgrade(req, socket, head, (client) => {
+@@ -1681,38 +1776,6 @@ function createWebSocket() {
+ function getContentChecksum(content) {
+   return crypto__default.createHash("md5").update(content, "utf8").digest("hex");
+ }
+-const _localDatabase = {};
+-function localDatabase(databaseLocation) {
+-  if (!_localDatabase[databaseLocation]) {
+-    _localDatabase[databaseLocation] = Database__default(databaseLocation);
+-    _localDatabase[databaseLocation].exec("CREATE TABLE IF NOT EXISTS _development_cache (id TEXT PRIMARY KEY, checksum TEXT, parsedContent TEXT)");
+-  }
+-  return {
+-    fetchDevelopmentCache() {
+-      return _localDatabase[databaseLocation].prepare("SELECT * FROM _development_cache").all().reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {});
+-    },
+-    fetchDevelopmentCacheForKey(key) {
+-      return _localDatabase[databaseLocation].prepare("SELECT * FROM _development_cache WHERE id = ?").get(key);
+-    },
+-    insertDevelopmentCache(id, checksum, parsedContent) {
+-      this.deleteDevelopmentCache(id);
+-      _localDatabase[databaseLocation].exec(`INSERT INTO _development_cache (id, checksum, parsedContent) VALUES ('${id}', '${checksum}', '${parsedContent.replace(/'/g, "''")}')`);
+-    },
+-    deleteDevelopmentCache(id) {
+-      _localDatabase[databaseLocation].exec(`DELETE FROM _development_cache WHERE id = '${id}'`);
+-    },
+-    dropContentTables() {
+-      _localDatabase[databaseLocation].prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name LIKE '_content_%'`).all().map(({ name }) => _localDatabase[databaseLocation].exec(`DROP TABLE IF EXISTS ${name}`));
+-    },
+-    exec: (sql) => {
+-      _localDatabase[databaseLocation].exec(sql);
+-    },
+-    close: () => {
+-      _localDatabase[databaseLocation].close();
+-      _localDatabase[databaseLocation] = void 0;
+-    }
+-  };
+-}
+ function* chunks(arr, size) {
+   for (let i = 0; i < arr.length; i += size) {
+     yield arr.slice(i, i + size);
+@@ -1734,7 +1797,29 @@ function defineCollection(collection) {
+     source: resolveSource(collection.source),
+     schema: collection.schema || z.object({}),
+     extendedSchema: schema,
+-    jsonFields: Object.keys(schema.shape).filter((key) => JSON_FIELDS_TYPES.includes(getUnderlyingTypeName(schema.shape[key])))
++    fields: Object.keys(schema.shape).reduce((acc, key) => {
++      const underlyingType = getUnderlyingTypeName(schema.shape[key]);
++      if (JSON_FIELDS_TYPES.includes(underlyingType)) {
++        acc[key] = "json";
++      } else if (["ZodString"].includes(underlyingType)) {
++        acc[key] = "string";
++      } else if (["ZodDate"].includes(underlyingType)) {
++        acc[key] = "date";
++      } else if (underlyingType === "ZodBoolean") {
++        acc[key] = "boolean";
++      } else if (underlyingType === "ZodNumber") {
++        acc[key] = "number";
++      } else {
++        acc[key] = "string";
++      }
++      return acc;
++    }, {})
++  };
++}
++function defineCollectionSource(source) {
++  return {
++    _custom: true,
++    ...resolveSource({ ...source, cwd: "", include: "" })?.[0]
+   };
+ }
+ function resolveCollection(name, collection) {
+@@ -1764,7 +1849,7 @@ function resolveCollections(collections) {
+       id: z.string(),
+       version: z.string()
+     }),
+-    jsonFields: []
++    fields: {}
+   };
+   return Object.entries(collections).map(([name, collection]) => resolveCollection(name, collection)).filter(Boolean);
+ }
+@@ -1787,6 +1872,7 @@ function resolveSource(source) {
+   });
+ }
+ function generateCollectionInsert(collection, data) {
++  const fields = [];
+   const values = [];
+   const sortedKeys = schema_js.getOrderedSchemaKeys(collection.extendedSchema.shape);
+   sortedKeys.forEach((key) => {
+@@ -1797,24 +1883,48 @@ function generateCollectionInsert(collection, data) {
+       defaultValue = JSON.stringify(defaultValue);
+     }
+     const valueToInsert = typeof data[key] === "undefined" || String(data[key]) === "null" ? defaultValue : data[key];
++    fields.push(key);
+     if (valueToInsert === "NULL") {
+       values.push(valueToInsert);
+       return;
+     }
+-    if ((collection.jsonFields || []).includes(key)) {
++    if (collection.fields[key] === "json") {
+       values.push(`'${JSON.stringify(valueToInsert).replace(/'/g, "''")}'`);
+     } else if (["ZodString", "ZodEnum"].includes(underlyingType.constructor.name)) {
+       values.push(`'${String(valueToInsert).replace(/\n/g, "\\n").replace(/'/g, "''")}'`);
+-    } else if (["ZodDate"].includes(underlyingType.constructor.name)) {
++    } else if (collection.fields[key] === "date") {
+       values.push(`'${new Date(valueToInsert).toISOString()}'`);
+-    } else if (underlyingType.constructor.name === "ZodBoolean") {
++    } else if (collection.fields[key] === "boolean") {
+       values.push(!!valueToInsert);
+     } else {
+       values.push(valueToInsert);
+     }
+   });
+   let index = 0;
+-  return `INSERT INTO ${collection.tableName} VALUES (${"?, ".repeat(values.length).slice(0, -2)})`.replace(/\?/g, () => values[index++]);
++  const sql = `INSERT INTO ${collection.tableName} VALUES (${"?, ".repeat(values.length).slice(0, -2)});`.replace(/\?/g, () => values[index++]);
++  if (sql.length < 1e5) {
++    return [sql];
++  }
++  const bigColumn = [...values].sort((a, b) => String(b).length - String(a).length)[0];
++  const bigColumnIndex = values.indexOf(bigColumn);
++  const bigColumnName = fields[bigColumnIndex];
++  if (typeof bigColumn === "string") {
++    let splitIndex = Math.floor(bigColumn.length / 2);
++    while (["'", '"', "\\"].includes(bigColumn[splitIndex])) {
++      splitIndex -= 1;
++    }
++    const part1 = bigColumn.slice(0, splitIndex) + "'";
++    const part2 = "'" + bigColumn.slice(splitIndex);
++    values[bigColumnIndex] = part1;
++    index = 0;
++    return [
++      `INSERT INTO ${collection.tableName} VALUES (${"?, ".repeat(values.length).slice(0, -2)});`.replace(/\?/g, () => values[index++]),
++      `UPDATE ${collection.tableName} SET ${bigColumnName} = ${part2} WHERE id = ${values[0]};`
++    ];
++  }
++  return [
++    sql
++  ];
+ }
+ function generateCollectionTableDefinition(collection, opts = {}) {
+   const sortedKeys = schema_js.getOrderedSchemaKeys(collection.extendedSchema.shape);
+@@ -1864,42 +1974,32 @@ const defaultConfig = {
+   }
+ };
+ const defineContentConfig = c12.createDefineConfig();
+-async function loadContentConfig(rootDir, opts = {}) {
++async function loadContentConfig(nuxt, options = {}) {
++  const loader = nuxt.options.dev ? (opts) => c12.watchConfig({
++    ...opts,
++    onWatch: (e) => {
++      logger.info(pathe.relative(nuxt.options.rootDir, e.path) + " " + e.type + ", restarting the Nuxt server...");
++      nuxt.hooks.callHook("restart", { hard: true });
++    }
++  }) : c12.loadConfig;
+   globalThis.defineContentConfig = (c) => c;
+-  const { config, configFile } = await c12.loadConfig({ name: "content", cwd: rootDir });
++  const contentConfigs = await Promise.all(
++    nuxt.options._layers.reverse().map(
++      (layer) => loader({ name: "content", cwd: layer.config.rootDir, defaultConfig: options.defaultFallback ? defaultConfig : void 0 })
++    )
++  );
+   delete globalThis.defineContentConfig;
+-  if ((!configFile || configFile === "content.config") && opts.defaultFallback) {
+-    logger.warn("`content.config.ts` is not found, falling back to default collection. In order to have full control over your collections, create the config file in project root. See: https://content.nuxt.com/getting-started/installation");
+-    return {
+-      collections: resolveCollections(defaultConfig.collections)
+-    };
+-  }
+-  return {
+-    collections: resolveCollections(config.collections || {})
+-  };
+-}
+-async function loadLayersConfig(nuxt) {
+-  const collectionMap = {};
+-  const _layers = [...nuxt.options._layers].reverse();
+-  for (const layer of _layers) {
+-    const rootDir = layer.config.rootDir;
+-    const configStat = await promises.stat(pathe.join(rootDir, "content.config.ts")).catch(() => null);
+-    if (configStat && configStat.isFile()) {
+-      const { collections } = await loadContentConfig(rootDir, { defaultFallback: false });
+-      for (const collection of collections) {
+-        collectionMap[collection.name] = collection;
+-      }
+-    }
++  if (nuxt.options.dev) {
++    nuxt.hook("close", () => Promise.all(contentConfigs.map((c) => c.unwatch())).then(() => {
++    }));
+   }
+-  if (Object.keys(collectionMap).length === 0) {
+-    const collections = resolveCollections(defaultConfig.collections);
+-    for (const collection of collections) {
+-      collectionMap[collection.name] = collection;
+-    }
++  const collectionsConfig = contentConfigs.reduce((acc, curr) => ({ ...acc, ...curr.config?.collections }), {});
++  const hasNoCollections = Object.keys(collectionsConfig || {}).length === 0;
++  if (hasNoCollections) {
++    logger.warn("No content configuration found, falling back to default collection. In order to have full control over your collections, create the config file in project root. See: https://content.nuxt.com/getting-started/installation");
+   }
+-  return {
+-    collections: Object.values(collectionMap)
+-  };
++  const collections = resolveCollections(hasNoCollections ? defaultConfig.collections : collectionsConfig);
++  return { collections };
+ }
+ 
+ async function installMDCModule(contentOptions, nuxt) {
+@@ -2088,7 +2188,7 @@ const module$1 = kit.defineNuxtModule({
+       await promises.mkdir(pathe.dirname(options.database.filename), { recursive: true }).catch(() => {
+       });
+     }
+-    const { collections } = await loadLayersConfig(nuxt);
++    const { collections } = await loadContentConfig(nuxt);
+     manifest.collections = collections;
+     nuxt.options.runtimeConfig.public.content = {
+       wsUrl: ""
+@@ -2172,7 +2272,6 @@ const module$1 = kit.defineNuxtModule({
+     if (nuxt.options.dev) {
+       kit.addPlugin({ src: resolver.resolve("./runtime/plugins/websocket.dev"), mode: "client" });
+       await watchComponents(nuxt);
+-      await watchConfig(nuxt);
+       const socket = await startSocketServer(nuxt, options, manifest);
+       dumpGeneratePromise.then(async () => {
+         await watchContents(nuxt, options, manifest, socket);
+@@ -2189,8 +2288,8 @@ const module$1 = kit.defineNuxtModule({
+ async function processCollectionItems(nuxt, collections, options) {
+   const collectionDump = {};
+   const collectionChecksum = {};
+-  const db = localDatabase(options._localDatabase.filename);
+-  const databaseContents = db.fetchDevelopmentCache();
++  const db = await getLocalDatabase(options._localDatabase.filename);
++  const databaseContents = await db.fetchDevelopmentCache();
+   const configHash = ohash.hash({
+     mdcHighlight: nuxt.options.mdc?.highlight,
+     contentBuild: options.build?.markdown
+@@ -2213,20 +2312,21 @@ async function processCollectionItems(nuxt, collections, options) {
+     if (!collection.source) {
+       continue;
+     }
++    const parse = await createParser(collection, nuxt);
+     for await (const source of collection.source) {
+       if (source.prepare) {
+-        await source.prepare(nuxt);
++        await source.prepare({ rootDir: nuxt.options.rootDir });
+       }
+       const { fixed } = parseSourceBase(source);
+       const cwd = source.cwd;
+-      const _keys = await fastGlob__default(source.include, { cwd, ignore: source.exclude || [], dot: true }).catch(() => []);
++      const _keys = await source.getKeys();
+       filesCount += _keys.length;
+       const list = [];
+       for await (const chunk of chunks(_keys, 25)) {
+         await Promise.all(chunk.map(async (key) => {
+-          key = key.substring(fixed.length);
+           const keyInCollection = pathe.join(collection.name, source?.prefix || "", key);
+-          const content = await promises.readFile(pathe.join(cwd, fixed, key), "utf8");
++          const fullPath = pathe.join(cwd, fixed, key);
++          const content = await source.getItem(key);
+           const checksum = getContentChecksum(configHash + collectionHash + content);
+           const cache = databaseContents[keyInCollection];
+           let parsedContent;
+@@ -2235,19 +2335,23 @@ async function processCollectionItems(nuxt, collections, options) {
+             parsedContent = JSON.parse(cache.parsedContent);
+           } else {
+             parsedFilesCount += 1;
+-            parsedContent = await parseContent(keyInCollection, content, collection, nuxt);
++            parsedContent = await parse({
++              id: keyInCollection,
++              body: content,
++              path: fullPath
++            });
+             db.insertDevelopmentCache(keyInCollection, checksum, JSON.stringify(parsedContent));
+           }
+           list.push([key, generateCollectionInsert(collection, parsedContent)]);
+         }));
+       }
+       list.sort((a, b) => String(a[0]).localeCompare(String(b[0])));
+-      collectionDump[collection.name].push(...list.map(([, sql]) => sql));
++      collectionDump[collection.name].push(...list.flatMap(([, sql]) => sql));
+       collectionChecksum[collection.name] = ohash.hash(collectionDump[collection.name]);
+       collectionDump[collection.name].push(
+         generateCollectionTableDefinition(infoCollection, { drop: false }),
+-        `DELETE FROM ${infoCollection.tableName} WHERE id = 'checksum_${collection.name}'`,
+-        generateCollectionInsert(infoCollection, { id: `checksum_${collection.name}`, version: collectionChecksum[collection.name] })
++        `DELETE FROM ${infoCollection.tableName} WHERE id = 'checksum_${collection.name}';`,
++        ...generateCollectionInsert(infoCollection, { id: `checksum_${collection.name}`, version: collectionChecksum[collection.name] })
+       );
+     }
+   }
+@@ -2279,6 +2383,7 @@ function getMappedTag(tag, additionalTags = {}) {
+ 
+ exports.default = module$1;
+ exports.defineCollection = defineCollection;
++exports.defineCollectionSource = defineCollectionSource;
+ exports.defineContentConfig = defineContentConfig;
+ exports.metaSchema = metaSchema;
+ exports.pageSchema = pageSchema;
+diff --git a/dist/module.d.cts b/dist/module.d.cts
+index b9bc717099aed13a874aae3c60443e89e9a45cf1..657992b60999b974b32dabec8ed30d4c519ebe88 100644
+--- a/dist/module.d.cts
++++ b/dist/module.d.cts
+@@ -1,10 +1,10 @@
+ import * as _nuxt_schema from '@nuxt/schema';
+-import { Nuxt } from '@nuxt/schema';
+ import { BuiltinTheme, ThemeRegistrationRaw, BuiltinLanguage, LanguageRegistration, ThemeRegistrationAny } from 'shiki';
+ import { ListenOptions } from 'listhen';
+ import { Highlighter, MDCRoot, Toc } from '@nuxtjs/mdc';
+ export { Toc, TocLink } from '@nuxtjs/mdc';
+-import { z as z$1, ZodRawShape, ZodObject } from 'zod';
++import * as z$1 from 'zod';
++import { ZodRawShape, ZodObject, z as z$2 } from 'zod';
+ import { JsonSchema7Type } from 'zod-to-json-schema';
+ import * as c12 from 'c12';
+ 
+@@ -14,6 +14,13 @@ interface GitInfo {
+     url: string;
+ }
+ 
++interface ContentFile extends Record<string, unknown> {
++    id: string;
++    body: string;
++    path: string;
++    dirname?: string;
++    extension?: string;
++}
+ interface TransformedContent {
+     id: string;
+     [key: string]: unknown;
+@@ -25,12 +32,12 @@ interface TransformContentOptions {
+ type ContentTransformer = {
+     name: string;
+     extensions: string[];
+-    parse(id: string, content: string, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
++    parse(file: ContentFile, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+     transform?(content: TransformedContent, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+ } | {
+     name: string;
+     extensions: string[];
+-    parse?(id: string, content: string, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
++    parse?(file: ContentFile, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+     transform(content: TransformedContent, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+ };
+ interface MarkdownPlugin extends Record<string, unknown> {
+@@ -109,6 +116,110 @@ interface PathMetaOptions {
+     slugifyOptions?: SlugifyOptions;
+ }
+ 
++interface PageCollections {
++}
++interface Collections {
++}
++type CollectionType = 'page' | 'data';
++type CollectionSource = {
++    include: string;
++    prefix?: string;
++    exclude?: string[];
++    repository?: string;
++    authToken?: string;
++    cwd?: string;
++};
++interface ResolvedCollectionSource extends CollectionSource {
++    _resolved: true;
++    prepare?: (opts: {
++        rootDir: string;
++    }) => Promise<void>;
++    getKeys?: () => Promise<string[]>;
++    getItem?: (path: string) => Promise<string>;
++    cwd: string;
++}
++interface CustomCollectionSource {
++    prepare?: (opts: {
++        rootDir: string;
++    }) => Promise<void>;
++    getKeys: () => Promise<string[]>;
++    getItem: (path: string) => Promise<string>;
++}
++interface ResolvedCustomCollectionSource extends ResolvedCollectionSource {
++    _custom: true;
++}
++interface PageCollection<T extends ZodRawShape = ZodRawShape> {
++    type: 'page';
++    source?: string | CollectionSource | CollectionSource[] | ResolvedCustomCollectionSource;
++    schema?: ZodObject<T>;
++}
++interface DataCollection<T extends ZodRawShape = ZodRawShape> {
++    type: 'data';
++    source?: string | CollectionSource | CollectionSource[] | ResolvedCustomCollectionSource;
++    schema: ZodObject<T>;
++}
++type Collection<T extends ZodRawShape = ZodRawShape> = PageCollection<T> | DataCollection<T>;
++interface DefinedCollection<T extends ZodRawShape = ZodRawShape> {
++    type: CollectionType;
++    source: ResolvedCollectionSource[] | undefined;
++    schema: ZodObject<T>;
++    extendedSchema: ZodObject<T>;
++    fields: Record<string, 'string' | 'number' | 'boolean' | 'date' | 'json'>;
++}
++interface ResolvedCollection<T extends ZodRawShape = ZodRawShape> {
++    name: string;
++    tableName: string;
++    type: CollectionType;
++    source: ResolvedCollectionSource[] | undefined;
++    schema: ZodObject<T>;
++    extendedSchema: ZodObject<T>;
++    fields: Record<string, 'string' | 'number' | 'boolean' | 'date' | 'json'>;
++    /**
++     * Whether the collection is private or not.
++     * Private collections will not be available in the runtime.
++     */
++    private: boolean;
++}
++interface CollectionInfo {
++    name: string;
++    pascalName: string;
++    tableName: string;
++    source: ResolvedCollectionSource[];
++    type: CollectionType;
++    schema: JsonSchema7Type & {
++        $schema?: string;
++        definitions?: {
++            [key: string]: JsonSchema7Type;
++        };
++    };
++    fields: Record<string, 'string' | 'number' | 'boolean' | 'date' | 'json'>;
++    tableDefinition: string;
++}
++interface CollectionItemBase {
++    id: string;
++    stem: string;
++    extension: string;
++    meta: Record<string, unknown>;
++}
++interface PageCollectionItemBase extends CollectionItemBase {
++    path: string;
++    title: string;
++    description: string;
++    seo: {
++        title?: string;
++        description?: string;
++        [key: string]: unknown;
++    };
++    body: MarkdownRoot;
++    navigation?: boolean | {
++        title: string;
++        description: string;
++        icon: string;
++    };
++}
++interface DataCollectionItemBase extends CollectionItemBase {
++}
++
+ interface D1DatabaseConfig {
+     type: 'd1';
+     binding: string;
+@@ -251,7 +362,7 @@ interface ModuleOptions {
+                 themes?: (BuiltinTheme | ThemeRegistrationAny)[];
+             };
+         };
+-        pathMeta: PathMetaOptions;
++        pathMeta?: PathMetaOptions;
+         /**
+          * Options for yaml parser.
+          *
+@@ -282,6 +393,21 @@ interface PublicRuntimeConfig {
+         iframeMessagingAllowedOrigins?: string;
+     };
+ }
++type ParsedContentFile = Record<string, unknown>;
++interface FileBeforeParseHook {
++    collection: Readonly<ResolvedCollection>;
++    file: ContentFile;
++    parserOptions: TransformContentOptions;
++}
++interface FileAfterParseHook {
++    collection: Readonly<ResolvedCollection>;
++    file: ContentFile;
++    content: ParsedContentFile;
++}
++interface ModuleHooks {
++    'content:file:beforeParse': (hook: FileBeforeParseHook) => void | Promise<void>;
++    'content:file:afterParse': (hook: FileAfterParseHook) => void | Promise<void>;
++}
+ 
+ declare const metaSchema: z$1.ZodObject<{
+     id: z$1.ZodString;
+@@ -291,13 +417,13 @@ declare const metaSchema: z$1.ZodObject<{
+ }, "strip", z$1.ZodTypeAny, {
+     meta?: Record<string, any>;
+     id?: string;
+-    stem?: string;
+     extension?: "json" | "md" | "yaml" | "yml" | "csv" | "xml";
++    stem?: string;
+ }, {
+     meta?: Record<string, any>;
+     id?: string;
+-    stem?: string;
+     extension?: "json" | "md" | "yaml" | "yml" | "csv" | "xml";
++    stem?: string;
+ }>;
+ declare const pageSchema: z$1.ZodObject<{
+     path: z$1.ZodString;
+@@ -342,16 +468,16 @@ declare const pageSchema: z$1.ZodObject<{
+ }, "strip", z$1.ZodTypeAny, {
+     title?: string;
+     path?: string;
+-    description?: string;
+-    seo?: {
+-        title?: string;
+-        description?: string;
+-    } & Record<string, any>;
+     body?: {
+         type?: string;
+         children?: any;
+         toc?: any;
+     };
++    description?: string;
++    seo?: {
++        title?: string;
++        description?: string;
++    } & Record<string, any>;
+     navigation?: boolean | {
+         title?: string;
+         description?: string;
+@@ -360,16 +486,16 @@ declare const pageSchema: z$1.ZodObject<{
+ }, {
+     title?: string;
+     path?: string;
+-    description?: string;
+-    seo?: {
+-        title?: string;
+-        description?: string;
+-    } & Record<string, any>;
+     body?: {
+         type?: string;
+         children?: any;
+         toc?: any;
+     };
++    description?: string;
++    seo?: {
++        title?: string;
++        description?: string;
++    } & Record<string, any>;
+     navigation?: boolean | {
+         title?: string;
+         description?: string;
+@@ -377,100 +503,6 @@ declare const pageSchema: z$1.ZodObject<{
+     };
+ }>;
+ 
+-interface PageCollections {
+-}
+-interface Collections {
+-}
+-type CollectionType = 'page' | 'data';
+-type CollectionSource = {
+-    include: string;
+-    prefix?: string;
+-    exclude?: string[];
+-    repository?: string;
+-    authToken?: string;
+-    cwd?: string;
+-};
+-interface ResolvedCollectionSource extends CollectionSource {
+-    _resolved: true;
+-    prepare?: (nuxt: Nuxt) => Promise<void>;
+-    cwd: string;
+-}
+-interface PageCollection<T extends ZodRawShape = ZodRawShape> {
+-    type: 'page';
+-    source?: string | CollectionSource | CollectionSource[];
+-    schema?: ZodObject<T>;
+-}
+-interface DataCollection<T extends ZodRawShape = ZodRawShape> {
+-    type: 'data';
+-    source?: string | CollectionSource | CollectionSource[];
+-    schema: ZodObject<T>;
+-}
+-type Collection<T extends ZodRawShape = ZodRawShape> = PageCollection<T> | DataCollection<T>;
+-interface DefinedCollection<T extends ZodRawShape = ZodRawShape> {
+-    type: CollectionType;
+-    source: ResolvedCollectionSource[] | undefined;
+-    schema: ZodObject<T>;
+-    extendedSchema: ZodObject<T>;
+-    jsonFields: string[];
+-}
+-interface ResolvedCollection<T extends ZodRawShape = ZodRawShape> {
+-    name: string;
+-    tableName: string;
+-    type: CollectionType;
+-    source: ResolvedCollectionSource[] | undefined;
+-    schema: ZodObject<T>;
+-    extendedSchema: ZodObject<T>;
+-    jsonFields: string[];
+-    /**
+-     * Whether the collection is private or not.
+-     * Private collections will not be available in the runtime.
+-     */
+-    private: boolean;
+-}
+-interface CollectionInfo {
+-    name: string;
+-    pascalName: string;
+-    tableName: string;
+-    source: ResolvedCollectionSource[];
+-    type: CollectionType;
+-    schema: JsonSchema7Type & {
+-        $schema?: string;
+-        definitions?: {
+-            [key: string]: JsonSchema7Type;
+-        };
+-    };
+-    jsonFields: string[];
+-    tableDefinition: string;
+-}
+-interface CollectionItemBase {
+-    id: string;
+-    stem: string;
+-    extension: string;
+-    meta: Record<string, unknown>;
+-}
+-interface PageCollectionItemBase extends CollectionItemBase {
+-    path: string;
+-    title: string;
+-    description: string;
+-    seo: {
+-        title?: string;
+-        description?: string;
+-        meta?: Array<Partial<Record<'id' | 'name' | 'property' | 'content', string>>>;
+-        link?: Array<Partial<Record<'color' | 'rel' | 'href' | 'hreflang' | 'imagesizes' | 'imagesrcset' | 'integrity' | 'media' | 'sizes' | 'id', string>>>;
+-        [key: string]: unknown;
+-    };
+-    body: MarkdownRoot;
+-    navigation?: boolean | {
+-        title: string;
+-        description: string;
+-        icon: string;
+-    };
+-}
+-interface DataCollectionItemBase extends CollectionItemBase {
+-}
+-
+-declare function defineCollection<T extends ZodRawShape>(collection: Collection<T>): DefinedCollection;
+-
+ interface ContentNavigationItem {
+     title: string;
+     path: string;
+@@ -520,9 +552,26 @@ type DatabaseBindable = number | string | boolean | null | undefined;
+ interface DatabaseAdapter {
+     first<T>(sql: string, params?: DatabaseBindParams): Promise<T | null | undefined>;
+     all<T>(sql: string, params?: DatabaseBindParams): Promise<T[]>;
+-    exec(sql: string): Promise<void>;
++    exec(sql: string): Promise<unknown>;
+ }
+ type DatabaseAdapterFactory<Options> = (otps?: Options) => DatabaseAdapter;
++interface LocalDevelopmentDatabase {
++    fetchDevelopmentCache(): Promise<Record<string, {
++        checksum: string;
++        parsedContent: string;
++    }>>;
++    fetchDevelopmentCacheForKey(key: string): Promise<{
++        id: string;
++        checksum: string;
++        parsedContent: string;
++    } | undefined>;
++    insertDevelopmentCache(id: string, checksum: string, parsedContent: string): void;
++    deleteDevelopmentCache(id: string): void;
++    dropContentTables(): void;
++    exec(sql: string): void;
++    close(): void;
++    database?: DatabaseAdapter;
++}
+ 
+ interface ParsedContentv2 {
+     _id: string;
+@@ -587,13 +636,16 @@ interface FileMessageData {
+     navigate: boolean;
+ }
+ 
++declare function defineCollection<T extends ZodRawShape>(collection: Collection<T>): DefinedCollection;
++declare function defineCollectionSource(source: CustomCollectionSource): ResolvedCustomCollectionSource;
++
+ type NuxtContentConfig = {
+     collections: Record<string, DefinedCollection>;
+ };
+ declare const defineContentConfig: c12.DefineConfig<NuxtContentConfig, c12.ConfigLayerMeta>;
+ 
+-declare const z: typeof z$1;
++declare const z: typeof z$2;
+ 
+ declare const _default: _nuxt_schema.NuxtModule<ModuleOptions, ModuleOptions, false>;
+ 
+-export { type Collection, type CollectionInfo, type CollectionItemBase, type CollectionQueryBuilder, type CollectionQueryGroup, type CollectionSource, type CollectionType, type Collections, ContentFileExtension, ContentFileType, type ContentNavigationItem, type ContentTransformer, type D1DatabaseConfig, type DataCollection, type DataCollectionItemBase, type DatabaseAdapter, type DatabaseAdapterFactory, type DatabaseBindParams, type DatabaseBindable, type DefinedCollection, type DraftFile, type DraftSyncData, type DraftSyncFile, type FileChangeMessagePayload, type FileMessageData, type FileMessageType, type FileSelectMessagePayload, type FileStatus, type LibSQLDatabaseConfig, type MarkdownOptions, type MarkdownPlugin, type MarkdownRoot, type MinimalElement, type MinimalNode, type MinimalText, type MinimalTree, type ModuleOptions, type PageCollection, type PageCollectionItemBase, type PageCollections, type ParsedContentv2, type PostgreSQLDatabaseConfig, type PreviewFile, type PublicRuntimeConfig, type QueryGroupFunction, type ResolvedCollection, type ResolvedCollectionSource, type RuntimeConfig, type SQLOperator, type SqliteDatabaseConfig, type StudioOptions, type SurroundOptions, type TransformContentOptions, type TransformedContent, _default as default, defineCollection, defineContentConfig, metaSchema, pageSchema, z };
++export { type Collection, type CollectionInfo, type CollectionItemBase, type CollectionQueryBuilder, type CollectionQueryGroup, type CollectionSource, type CollectionType, type Collections, type ContentFile, ContentFileExtension, ContentFileType, type ContentNavigationItem, type ContentTransformer, type CustomCollectionSource, type D1DatabaseConfig, type DataCollection, type DataCollectionItemBase, type DatabaseAdapter, type DatabaseAdapterFactory, type DatabaseBindParams, type DatabaseBindable, type DefinedCollection, type DraftFile, type DraftSyncData, type DraftSyncFile, type FileAfterParseHook, type FileBeforeParseHook, type FileChangeMessagePayload, type FileMessageData, type FileMessageType, type FileSelectMessagePayload, type FileStatus, type LibSQLDatabaseConfig, type LocalDevelopmentDatabase, type MarkdownOptions, type MarkdownPlugin, type MarkdownRoot, type MinimalElement, type MinimalNode, type MinimalText, type MinimalTree, type ModuleHooks, type ModuleOptions, type PageCollection, type PageCollectionItemBase, type PageCollections, type ParsedContentFile, type ParsedContentv2, type PostgreSQLDatabaseConfig, type PreviewFile, type PublicRuntimeConfig, type QueryGroupFunction, type ResolvedCollection, type ResolvedCollectionSource, type ResolvedCustomCollectionSource, type RuntimeConfig, type SQLOperator, type SqliteDatabaseConfig, type StudioOptions, type SurroundOptions, type TransformContentOptions, type TransformedContent, _default as default, defineCollection, defineCollectionSource, defineContentConfig, metaSchema, pageSchema, z };
+diff --git a/dist/module.d.mts b/dist/module.d.mts
+index b9bc717099aed13a874aae3c60443e89e9a45cf1..657992b60999b974b32dabec8ed30d4c519ebe88 100644
+--- a/dist/module.d.mts
++++ b/dist/module.d.mts
+@@ -1,10 +1,10 @@
+ import * as _nuxt_schema from '@nuxt/schema';
+-import { Nuxt } from '@nuxt/schema';
+ import { BuiltinTheme, ThemeRegistrationRaw, BuiltinLanguage, LanguageRegistration, ThemeRegistrationAny } from 'shiki';
+ import { ListenOptions } from 'listhen';
+ import { Highlighter, MDCRoot, Toc } from '@nuxtjs/mdc';
+ export { Toc, TocLink } from '@nuxtjs/mdc';
+-import { z as z$1, ZodRawShape, ZodObject } from 'zod';
++import * as z$1 from 'zod';
++import { ZodRawShape, ZodObject, z as z$2 } from 'zod';
+ import { JsonSchema7Type } from 'zod-to-json-schema';
+ import * as c12 from 'c12';
+ 
+@@ -14,6 +14,13 @@ interface GitInfo {
+     url: string;
+ }
+ 
++interface ContentFile extends Record<string, unknown> {
++    id: string;
++    body: string;
++    path: string;
++    dirname?: string;
++    extension?: string;
++}
+ interface TransformedContent {
+     id: string;
+     [key: string]: unknown;
+@@ -25,12 +32,12 @@ interface TransformContentOptions {
+ type ContentTransformer = {
+     name: string;
+     extensions: string[];
+-    parse(id: string, content: string, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
++    parse(file: ContentFile, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+     transform?(content: TransformedContent, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+ } | {
+     name: string;
+     extensions: string[];
+-    parse?(id: string, content: string, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
++    parse?(file: ContentFile, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+     transform(content: TransformedContent, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+ };
+ interface MarkdownPlugin extends Record<string, unknown> {
+@@ -109,6 +116,110 @@ interface PathMetaOptions {
+     slugifyOptions?: SlugifyOptions;
+ }
+ 
++interface PageCollections {
++}
++interface Collections {
++}
++type CollectionType = 'page' | 'data';
++type CollectionSource = {
++    include: string;
++    prefix?: string;
++    exclude?: string[];
++    repository?: string;
++    authToken?: string;
++    cwd?: string;
++};
++interface ResolvedCollectionSource extends CollectionSource {
++    _resolved: true;
++    prepare?: (opts: {
++        rootDir: string;
++    }) => Promise<void>;
++    getKeys?: () => Promise<string[]>;
++    getItem?: (path: string) => Promise<string>;
++    cwd: string;
++}
++interface CustomCollectionSource {
++    prepare?: (opts: {
++        rootDir: string;
++    }) => Promise<void>;
++    getKeys: () => Promise<string[]>;
++    getItem: (path: string) => Promise<string>;
++}
++interface ResolvedCustomCollectionSource extends ResolvedCollectionSource {
++    _custom: true;
++}
++interface PageCollection<T extends ZodRawShape = ZodRawShape> {
++    type: 'page';
++    source?: string | CollectionSource | CollectionSource[] | ResolvedCustomCollectionSource;
++    schema?: ZodObject<T>;
++}
++interface DataCollection<T extends ZodRawShape = ZodRawShape> {
++    type: 'data';
++    source?: string | CollectionSource | CollectionSource[] | ResolvedCustomCollectionSource;
++    schema: ZodObject<T>;
++}
++type Collection<T extends ZodRawShape = ZodRawShape> = PageCollection<T> | DataCollection<T>;
++interface DefinedCollection<T extends ZodRawShape = ZodRawShape> {
++    type: CollectionType;
++    source: ResolvedCollectionSource[] | undefined;
++    schema: ZodObject<T>;
++    extendedSchema: ZodObject<T>;
++    fields: Record<string, 'string' | 'number' | 'boolean' | 'date' | 'json'>;
++}
++interface ResolvedCollection<T extends ZodRawShape = ZodRawShape> {
++    name: string;
++    tableName: string;
++    type: CollectionType;
++    source: ResolvedCollectionSource[] | undefined;
++    schema: ZodObject<T>;
++    extendedSchema: ZodObject<T>;
++    fields: Record<string, 'string' | 'number' | 'boolean' | 'date' | 'json'>;
++    /**
++     * Whether the collection is private or not.
++     * Private collections will not be available in the runtime.
++     */
++    private: boolean;
++}
++interface CollectionInfo {
++    name: string;
++    pascalName: string;
++    tableName: string;
++    source: ResolvedCollectionSource[];
++    type: CollectionType;
++    schema: JsonSchema7Type & {
++        $schema?: string;
++        definitions?: {
++            [key: string]: JsonSchema7Type;
++        };
++    };
++    fields: Record<string, 'string' | 'number' | 'boolean' | 'date' | 'json'>;
++    tableDefinition: string;
++}
++interface CollectionItemBase {
++    id: string;
++    stem: string;
++    extension: string;
++    meta: Record<string, unknown>;
++}
++interface PageCollectionItemBase extends CollectionItemBase {
++    path: string;
++    title: string;
++    description: string;
++    seo: {
++        title?: string;
++        description?: string;
++        [key: string]: unknown;
++    };
++    body: MarkdownRoot;
++    navigation?: boolean | {
++        title: string;
++        description: string;
++        icon: string;
++    };
++}
++interface DataCollectionItemBase extends CollectionItemBase {
++}
++
+ interface D1DatabaseConfig {
+     type: 'd1';
+     binding: string;
+@@ -251,7 +362,7 @@ interface ModuleOptions {
+                 themes?: (BuiltinTheme | ThemeRegistrationAny)[];
+             };
+         };
+-        pathMeta: PathMetaOptions;
++        pathMeta?: PathMetaOptions;
+         /**
+          * Options for yaml parser.
+          *
+@@ -282,6 +393,21 @@ interface PublicRuntimeConfig {
+         iframeMessagingAllowedOrigins?: string;
+     };
+ }
++type ParsedContentFile = Record<string, unknown>;
++interface FileBeforeParseHook {
++    collection: Readonly<ResolvedCollection>;
++    file: ContentFile;
++    parserOptions: TransformContentOptions;
++}
++interface FileAfterParseHook {
++    collection: Readonly<ResolvedCollection>;
++    file: ContentFile;
++    content: ParsedContentFile;
++}
++interface ModuleHooks {
++    'content:file:beforeParse': (hook: FileBeforeParseHook) => void | Promise<void>;
++    'content:file:afterParse': (hook: FileAfterParseHook) => void | Promise<void>;
++}
+ 
+ declare const metaSchema: z$1.ZodObject<{
+     id: z$1.ZodString;
+@@ -291,13 +417,13 @@ declare const metaSchema: z$1.ZodObject<{
+ }, "strip", z$1.ZodTypeAny, {
+     meta?: Record<string, any>;
+     id?: string;
+-    stem?: string;
+     extension?: "json" | "md" | "yaml" | "yml" | "csv" | "xml";
++    stem?: string;
+ }, {
+     meta?: Record<string, any>;
+     id?: string;
+-    stem?: string;
+     extension?: "json" | "md" | "yaml" | "yml" | "csv" | "xml";
++    stem?: string;
+ }>;
+ declare const pageSchema: z$1.ZodObject<{
+     path: z$1.ZodString;
+@@ -342,16 +468,16 @@ declare const pageSchema: z$1.ZodObject<{
+ }, "strip", z$1.ZodTypeAny, {
+     title?: string;
+     path?: string;
+-    description?: string;
+-    seo?: {
+-        title?: string;
+-        description?: string;
+-    } & Record<string, any>;
+     body?: {
+         type?: string;
+         children?: any;
+         toc?: any;
+     };
++    description?: string;
++    seo?: {
++        title?: string;
++        description?: string;
++    } & Record<string, any>;
+     navigation?: boolean | {
+         title?: string;
+         description?: string;
+@@ -360,16 +486,16 @@ declare const pageSchema: z$1.ZodObject<{
+ }, {
+     title?: string;
+     path?: string;
+-    description?: string;
+-    seo?: {
+-        title?: string;
+-        description?: string;
+-    } & Record<string, any>;
+     body?: {
+         type?: string;
+         children?: any;
+         toc?: any;
+     };
++    description?: string;
++    seo?: {
++        title?: string;
++        description?: string;
++    } & Record<string, any>;
+     navigation?: boolean | {
+         title?: string;
+         description?: string;
+@@ -377,100 +503,6 @@ declare const pageSchema: z$1.ZodObject<{
+     };
+ }>;
+ 
+-interface PageCollections {
+-}
+-interface Collections {
+-}
+-type CollectionType = 'page' | 'data';
+-type CollectionSource = {
+-    include: string;
+-    prefix?: string;
+-    exclude?: string[];
+-    repository?: string;
+-    authToken?: string;
+-    cwd?: string;
+-};
+-interface ResolvedCollectionSource extends CollectionSource {
+-    _resolved: true;
+-    prepare?: (nuxt: Nuxt) => Promise<void>;
+-    cwd: string;
+-}
+-interface PageCollection<T extends ZodRawShape = ZodRawShape> {
+-    type: 'page';
+-    source?: string | CollectionSource | CollectionSource[];
+-    schema?: ZodObject<T>;
+-}
+-interface DataCollection<T extends ZodRawShape = ZodRawShape> {
+-    type: 'data';
+-    source?: string | CollectionSource | CollectionSource[];
+-    schema: ZodObject<T>;
+-}
+-type Collection<T extends ZodRawShape = ZodRawShape> = PageCollection<T> | DataCollection<T>;
+-interface DefinedCollection<T extends ZodRawShape = ZodRawShape> {
+-    type: CollectionType;
+-    source: ResolvedCollectionSource[] | undefined;
+-    schema: ZodObject<T>;
+-    extendedSchema: ZodObject<T>;
+-    jsonFields: string[];
+-}
+-interface ResolvedCollection<T extends ZodRawShape = ZodRawShape> {
+-    name: string;
+-    tableName: string;
+-    type: CollectionType;
+-    source: ResolvedCollectionSource[] | undefined;
+-    schema: ZodObject<T>;
+-    extendedSchema: ZodObject<T>;
+-    jsonFields: string[];
+-    /**
+-     * Whether the collection is private or not.
+-     * Private collections will not be available in the runtime.
+-     */
+-    private: boolean;
+-}
+-interface CollectionInfo {
+-    name: string;
+-    pascalName: string;
+-    tableName: string;
+-    source: ResolvedCollectionSource[];
+-    type: CollectionType;
+-    schema: JsonSchema7Type & {
+-        $schema?: string;
+-        definitions?: {
+-            [key: string]: JsonSchema7Type;
+-        };
+-    };
+-    jsonFields: string[];
+-    tableDefinition: string;
+-}
+-interface CollectionItemBase {
+-    id: string;
+-    stem: string;
+-    extension: string;
+-    meta: Record<string, unknown>;
+-}
+-interface PageCollectionItemBase extends CollectionItemBase {
+-    path: string;
+-    title: string;
+-    description: string;
+-    seo: {
+-        title?: string;
+-        description?: string;
+-        meta?: Array<Partial<Record<'id' | 'name' | 'property' | 'content', string>>>;
+-        link?: Array<Partial<Record<'color' | 'rel' | 'href' | 'hreflang' | 'imagesizes' | 'imagesrcset' | 'integrity' | 'media' | 'sizes' | 'id', string>>>;
+-        [key: string]: unknown;
+-    };
+-    body: MarkdownRoot;
+-    navigation?: boolean | {
+-        title: string;
+-        description: string;
+-        icon: string;
+-    };
+-}
+-interface DataCollectionItemBase extends CollectionItemBase {
+-}
+-
+-declare function defineCollection<T extends ZodRawShape>(collection: Collection<T>): DefinedCollection;
+-
+ interface ContentNavigationItem {
+     title: string;
+     path: string;
+@@ -520,9 +552,26 @@ type DatabaseBindable = number | string | boolean | null | undefined;
+ interface DatabaseAdapter {
+     first<T>(sql: string, params?: DatabaseBindParams): Promise<T | null | undefined>;
+     all<T>(sql: string, params?: DatabaseBindParams): Promise<T[]>;
+-    exec(sql: string): Promise<void>;
++    exec(sql: string): Promise<unknown>;
+ }
+ type DatabaseAdapterFactory<Options> = (otps?: Options) => DatabaseAdapter;
++interface LocalDevelopmentDatabase {
++    fetchDevelopmentCache(): Promise<Record<string, {
++        checksum: string;
++        parsedContent: string;
++    }>>;
++    fetchDevelopmentCacheForKey(key: string): Promise<{
++        id: string;
++        checksum: string;
++        parsedContent: string;
++    } | undefined>;
++    insertDevelopmentCache(id: string, checksum: string, parsedContent: string): void;
++    deleteDevelopmentCache(id: string): void;
++    dropContentTables(): void;
++    exec(sql: string): void;
++    close(): void;
++    database?: DatabaseAdapter;
++}
+ 
+ interface ParsedContentv2 {
+     _id: string;
+@@ -587,13 +636,16 @@ interface FileMessageData {
+     navigate: boolean;
+ }
+ 
++declare function defineCollection<T extends ZodRawShape>(collection: Collection<T>): DefinedCollection;
++declare function defineCollectionSource(source: CustomCollectionSource): ResolvedCustomCollectionSource;
++
+ type NuxtContentConfig = {
+     collections: Record<string, DefinedCollection>;
+ };
+ declare const defineContentConfig: c12.DefineConfig<NuxtContentConfig, c12.ConfigLayerMeta>;
+ 
+-declare const z: typeof z$1;
++declare const z: typeof z$2;
+ 
+ declare const _default: _nuxt_schema.NuxtModule<ModuleOptions, ModuleOptions, false>;
+ 
+-export { type Collection, type CollectionInfo, type CollectionItemBase, type CollectionQueryBuilder, type CollectionQueryGroup, type CollectionSource, type CollectionType, type Collections, ContentFileExtension, ContentFileType, type ContentNavigationItem, type ContentTransformer, type D1DatabaseConfig, type DataCollection, type DataCollectionItemBase, type DatabaseAdapter, type DatabaseAdapterFactory, type DatabaseBindParams, type DatabaseBindable, type DefinedCollection, type DraftFile, type DraftSyncData, type DraftSyncFile, type FileChangeMessagePayload, type FileMessageData, type FileMessageType, type FileSelectMessagePayload, type FileStatus, type LibSQLDatabaseConfig, type MarkdownOptions, type MarkdownPlugin, type MarkdownRoot, type MinimalElement, type MinimalNode, type MinimalText, type MinimalTree, type ModuleOptions, type PageCollection, type PageCollectionItemBase, type PageCollections, type ParsedContentv2, type PostgreSQLDatabaseConfig, type PreviewFile, type PublicRuntimeConfig, type QueryGroupFunction, type ResolvedCollection, type ResolvedCollectionSource, type RuntimeConfig, type SQLOperator, type SqliteDatabaseConfig, type StudioOptions, type SurroundOptions, type TransformContentOptions, type TransformedContent, _default as default, defineCollection, defineContentConfig, metaSchema, pageSchema, z };
++export { type Collection, type CollectionInfo, type CollectionItemBase, type CollectionQueryBuilder, type CollectionQueryGroup, type CollectionSource, type CollectionType, type Collections, type ContentFile, ContentFileExtension, ContentFileType, type ContentNavigationItem, type ContentTransformer, type CustomCollectionSource, type D1DatabaseConfig, type DataCollection, type DataCollectionItemBase, type DatabaseAdapter, type DatabaseAdapterFactory, type DatabaseBindParams, type DatabaseBindable, type DefinedCollection, type DraftFile, type DraftSyncData, type DraftSyncFile, type FileAfterParseHook, type FileBeforeParseHook, type FileChangeMessagePayload, type FileMessageData, type FileMessageType, type FileSelectMessagePayload, type FileStatus, type LibSQLDatabaseConfig, type LocalDevelopmentDatabase, type MarkdownOptions, type MarkdownPlugin, type MarkdownRoot, type MinimalElement, type MinimalNode, type MinimalText, type MinimalTree, type ModuleHooks, type ModuleOptions, type PageCollection, type PageCollectionItemBase, type PageCollections, type ParsedContentFile, type ParsedContentv2, type PostgreSQLDatabaseConfig, type PreviewFile, type PublicRuntimeConfig, type QueryGroupFunction, type ResolvedCollection, type ResolvedCollectionSource, type ResolvedCustomCollectionSource, type RuntimeConfig, type SQLOperator, type SqliteDatabaseConfig, type StudioOptions, type SurroundOptions, type TransformContentOptions, type TransformedContent, _default as default, defineCollection, defineCollectionSource, defineContentConfig, metaSchema, pageSchema, z };
+diff --git a/dist/module.d.ts b/dist/module.d.ts
+index b9bc717099aed13a874aae3c60443e89e9a45cf1..657992b60999b974b32dabec8ed30d4c519ebe88 100644
+--- a/dist/module.d.ts
++++ b/dist/module.d.ts
+@@ -1,10 +1,10 @@
+ import * as _nuxt_schema from '@nuxt/schema';
+-import { Nuxt } from '@nuxt/schema';
+ import { BuiltinTheme, ThemeRegistrationRaw, BuiltinLanguage, LanguageRegistration, ThemeRegistrationAny } from 'shiki';
+ import { ListenOptions } from 'listhen';
+ import { Highlighter, MDCRoot, Toc } from '@nuxtjs/mdc';
+ export { Toc, TocLink } from '@nuxtjs/mdc';
+-import { z as z$1, ZodRawShape, ZodObject } from 'zod';
++import * as z$1 from 'zod';
++import { ZodRawShape, ZodObject, z as z$2 } from 'zod';
+ import { JsonSchema7Type } from 'zod-to-json-schema';
+ import * as c12 from 'c12';
+ 
+@@ -14,6 +14,13 @@ interface GitInfo {
+     url: string;
+ }
+ 
++interface ContentFile extends Record<string, unknown> {
++    id: string;
++    body: string;
++    path: string;
++    dirname?: string;
++    extension?: string;
++}
+ interface TransformedContent {
+     id: string;
+     [key: string]: unknown;
+@@ -25,12 +32,12 @@ interface TransformContentOptions {
+ type ContentTransformer = {
+     name: string;
+     extensions: string[];
+-    parse(id: string, content: string, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
++    parse(file: ContentFile, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+     transform?(content: TransformedContent, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+ } | {
+     name: string;
+     extensions: string[];
+-    parse?(id: string, content: string, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
++    parse?(file: ContentFile, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+     transform(content: TransformedContent, options: Record<string, unknown>): Promise<TransformedContent> | TransformedContent;
+ };
+ interface MarkdownPlugin extends Record<string, unknown> {
+@@ -109,6 +116,110 @@ interface PathMetaOptions {
+     slugifyOptions?: SlugifyOptions;
+ }
+ 
++interface PageCollections {
++}
++interface Collections {
++}
++type CollectionType = 'page' | 'data';
++type CollectionSource = {
++    include: string;
++    prefix?: string;
++    exclude?: string[];
++    repository?: string;
++    authToken?: string;
++    cwd?: string;
++};
++interface ResolvedCollectionSource extends CollectionSource {
++    _resolved: true;
++    prepare?: (opts: {
++        rootDir: string;
++    }) => Promise<void>;
++    getKeys?: () => Promise<string[]>;
++    getItem?: (path: string) => Promise<string>;
++    cwd: string;
++}
++interface CustomCollectionSource {
++    prepare?: (opts: {
++        rootDir: string;
++    }) => Promise<void>;
++    getKeys: () => Promise<string[]>;
++    getItem: (path: string) => Promise<string>;
++}
++interface ResolvedCustomCollectionSource extends ResolvedCollectionSource {
++    _custom: true;
++}
++interface PageCollection<T extends ZodRawShape = ZodRawShape> {
++    type: 'page';
++    source?: string | CollectionSource | CollectionSource[] | ResolvedCustomCollectionSource;
++    schema?: ZodObject<T>;
++}
++interface DataCollection<T extends ZodRawShape = ZodRawShape> {
++    type: 'data';
++    source?: string | CollectionSource | CollectionSource[] | ResolvedCustomCollectionSource;
++    schema: ZodObject<T>;
++}
++type Collection<T extends ZodRawShape = ZodRawShape> = PageCollection<T> | DataCollection<T>;
++interface DefinedCollection<T extends ZodRawShape = ZodRawShape> {
++    type: CollectionType;
++    source: ResolvedCollectionSource[] | undefined;
++    schema: ZodObject<T>;
++    extendedSchema: ZodObject<T>;
++    fields: Record<string, 'string' | 'number' | 'boolean' | 'date' | 'json'>;
++}
++interface ResolvedCollection<T extends ZodRawShape = ZodRawShape> {
++    name: string;
++    tableName: string;
++    type: CollectionType;
++    source: ResolvedCollectionSource[] | undefined;
++    schema: ZodObject<T>;
++    extendedSchema: ZodObject<T>;
++    fields: Record<string, 'string' | 'number' | 'boolean' | 'date' | 'json'>;
++    /**
++     * Whether the collection is private or not.
++     * Private collections will not be available in the runtime.
++     */
++    private: boolean;
++}
++interface CollectionInfo {
++    name: string;
++    pascalName: string;
++    tableName: string;
++    source: ResolvedCollectionSource[];
++    type: CollectionType;
++    schema: JsonSchema7Type & {
++        $schema?: string;
++        definitions?: {
++            [key: string]: JsonSchema7Type;
++        };
++    };
++    fields: Record<string, 'string' | 'number' | 'boolean' | 'date' | 'json'>;
++    tableDefinition: string;
++}
++interface CollectionItemBase {
++    id: string;
++    stem: string;
++    extension: string;
++    meta: Record<string, unknown>;
++}
++interface PageCollectionItemBase extends CollectionItemBase {
++    path: string;
++    title: string;
++    description: string;
++    seo: {
++        title?: string;
++        description?: string;
++        [key: string]: unknown;
++    };
++    body: MarkdownRoot;
++    navigation?: boolean | {
++        title: string;
++        description: string;
++        icon: string;
++    };
++}
++interface DataCollectionItemBase extends CollectionItemBase {
++}
++
+ interface D1DatabaseConfig {
+     type: 'd1';
+     binding: string;
+@@ -251,7 +362,7 @@ interface ModuleOptions {
+                 themes?: (BuiltinTheme | ThemeRegistrationAny)[];
+             };
+         };
+-        pathMeta: PathMetaOptions;
++        pathMeta?: PathMetaOptions;
+         /**
+          * Options for yaml parser.
+          *
+@@ -282,6 +393,21 @@ interface PublicRuntimeConfig {
+         iframeMessagingAllowedOrigins?: string;
+     };
+ }
++type ParsedContentFile = Record<string, unknown>;
++interface FileBeforeParseHook {
++    collection: Readonly<ResolvedCollection>;
++    file: ContentFile;
++    parserOptions: TransformContentOptions;
++}
++interface FileAfterParseHook {
++    collection: Readonly<ResolvedCollection>;
++    file: ContentFile;
++    content: ParsedContentFile;
++}
++interface ModuleHooks {
++    'content:file:beforeParse': (hook: FileBeforeParseHook) => void | Promise<void>;
++    'content:file:afterParse': (hook: FileAfterParseHook) => void | Promise<void>;
++}
+ 
+ declare const metaSchema: z$1.ZodObject<{
+     id: z$1.ZodString;
+@@ -291,13 +417,13 @@ declare const metaSchema: z$1.ZodObject<{
+ }, "strip", z$1.ZodTypeAny, {
+     meta?: Record<string, any>;
+     id?: string;
+-    stem?: string;
+     extension?: "json" | "md" | "yaml" | "yml" | "csv" | "xml";
++    stem?: string;
+ }, {
+     meta?: Record<string, any>;
+     id?: string;
+-    stem?: string;
+     extension?: "json" | "md" | "yaml" | "yml" | "csv" | "xml";
++    stem?: string;
+ }>;
+ declare const pageSchema: z$1.ZodObject<{
+     path: z$1.ZodString;
+@@ -342,16 +468,16 @@ declare const pageSchema: z$1.ZodObject<{
+ }, "strip", z$1.ZodTypeAny, {
+     title?: string;
+     path?: string;
+-    description?: string;
+-    seo?: {
+-        title?: string;
+-        description?: string;
+-    } & Record<string, any>;
+     body?: {
+         type?: string;
+         children?: any;
+         toc?: any;
+     };
++    description?: string;
++    seo?: {
++        title?: string;
++        description?: string;
++    } & Record<string, any>;
+     navigation?: boolean | {
+         title?: string;
+         description?: string;
+@@ -360,16 +486,16 @@ declare const pageSchema: z$1.ZodObject<{
+ }, {
+     title?: string;
+     path?: string;
+-    description?: string;
+-    seo?: {
+-        title?: string;
+-        description?: string;
+-    } & Record<string, any>;
+     body?: {
+         type?: string;
+         children?: any;
+         toc?: any;
+     };
++    description?: string;
++    seo?: {
++        title?: string;
++        description?: string;
++    } & Record<string, any>;
+     navigation?: boolean | {
+         title?: string;
+         description?: string;
+@@ -377,100 +503,6 @@ declare const pageSchema: z$1.ZodObject<{
+     };
+ }>;
+ 
+-interface PageCollections {
+-}
+-interface Collections {
+-}
+-type CollectionType = 'page' | 'data';
+-type CollectionSource = {
+-    include: string;
+-    prefix?: string;
+-    exclude?: string[];
+-    repository?: string;
+-    authToken?: string;
+-    cwd?: string;
+-};
+-interface ResolvedCollectionSource extends CollectionSource {
+-    _resolved: true;
+-    prepare?: (nuxt: Nuxt) => Promise<void>;
+-    cwd: string;
+-}
+-interface PageCollection<T extends ZodRawShape = ZodRawShape> {
+-    type: 'page';
+-    source?: string | CollectionSource | CollectionSource[];
+-    schema?: ZodObject<T>;
+-}
+-interface DataCollection<T extends ZodRawShape = ZodRawShape> {
+-    type: 'data';
+-    source?: string | CollectionSource | CollectionSource[];
+-    schema: ZodObject<T>;
+-}
+-type Collection<T extends ZodRawShape = ZodRawShape> = PageCollection<T> | DataCollection<T>;
+-interface DefinedCollection<T extends ZodRawShape = ZodRawShape> {
+-    type: CollectionType;
+-    source: ResolvedCollectionSource[] | undefined;
+-    schema: ZodObject<T>;
+-    extendedSchema: ZodObject<T>;
+-    jsonFields: string[];
+-}
+-interface ResolvedCollection<T extends ZodRawShape = ZodRawShape> {
+-    name: string;
+-    tableName: string;
+-    type: CollectionType;
+-    source: ResolvedCollectionSource[] | undefined;
+-    schema: ZodObject<T>;
+-    extendedSchema: ZodObject<T>;
+-    jsonFields: string[];
+-    /**
+-     * Whether the collection is private or not.
+-     * Private collections will not be available in the runtime.
+-     */
+-    private: boolean;
+-}
+-interface CollectionInfo {
+-    name: string;
+-    pascalName: string;
+-    tableName: string;
+-    source: ResolvedCollectionSource[];
+-    type: CollectionType;
+-    schema: JsonSchema7Type & {
+-        $schema?: string;
+-        definitions?: {
+-            [key: string]: JsonSchema7Type;
+-        };
+-    };
+-    jsonFields: string[];
+-    tableDefinition: string;
+-}
+-interface CollectionItemBase {
+-    id: string;
+-    stem: string;
+-    extension: string;
+-    meta: Record<string, unknown>;
+-}
+-interface PageCollectionItemBase extends CollectionItemBase {
+-    path: string;
+-    title: string;
+-    description: string;
+-    seo: {
+-        title?: string;
+-        description?: string;
+-        meta?: Array<Partial<Record<'id' | 'name' | 'property' | 'content', string>>>;
+-        link?: Array<Partial<Record<'color' | 'rel' | 'href' | 'hreflang' | 'imagesizes' | 'imagesrcset' | 'integrity' | 'media' | 'sizes' | 'id', string>>>;
+-        [key: string]: unknown;
+-    };
+-    body: MarkdownRoot;
+-    navigation?: boolean | {
+-        title: string;
+-        description: string;
+-        icon: string;
+-    };
+-}
+-interface DataCollectionItemBase extends CollectionItemBase {
+-}
+-
+-declare function defineCollection<T extends ZodRawShape>(collection: Collection<T>): DefinedCollection;
+-
+ interface ContentNavigationItem {
+     title: string;
+     path: string;
+@@ -520,9 +552,26 @@ type DatabaseBindable = number | string | boolean | null | undefined;
+ interface DatabaseAdapter {
+     first<T>(sql: string, params?: DatabaseBindParams): Promise<T | null | undefined>;
+     all<T>(sql: string, params?: DatabaseBindParams): Promise<T[]>;
+-    exec(sql: string): Promise<void>;
++    exec(sql: string): Promise<unknown>;
+ }
+ type DatabaseAdapterFactory<Options> = (otps?: Options) => DatabaseAdapter;
++interface LocalDevelopmentDatabase {
++    fetchDevelopmentCache(): Promise<Record<string, {
++        checksum: string;
++        parsedContent: string;
++    }>>;
++    fetchDevelopmentCacheForKey(key: string): Promise<{
++        id: string;
++        checksum: string;
++        parsedContent: string;
++    } | undefined>;
++    insertDevelopmentCache(id: string, checksum: string, parsedContent: string): void;
++    deleteDevelopmentCache(id: string): void;
++    dropContentTables(): void;
++    exec(sql: string): void;
++    close(): void;
++    database?: DatabaseAdapter;
++}
+ 
+ interface ParsedContentv2 {
+     _id: string;
+@@ -587,13 +636,16 @@ interface FileMessageData {
+     navigate: boolean;
+ }
+ 
++declare function defineCollection<T extends ZodRawShape>(collection: Collection<T>): DefinedCollection;
++declare function defineCollectionSource(source: CustomCollectionSource): ResolvedCustomCollectionSource;
++
+ type NuxtContentConfig = {
+     collections: Record<string, DefinedCollection>;
+ };
+ declare const defineContentConfig: c12.DefineConfig<NuxtContentConfig, c12.ConfigLayerMeta>;
+ 
+-declare const z: typeof z$1;
++declare const z: typeof z$2;
+ 
+ declare const _default: _nuxt_schema.NuxtModule<ModuleOptions, ModuleOptions, false>;
+ 
+-export { type Collection, type CollectionInfo, type CollectionItemBase, type CollectionQueryBuilder, type CollectionQueryGroup, type CollectionSource, type CollectionType, type Collections, ContentFileExtension, ContentFileType, type ContentNavigationItem, type ContentTransformer, type D1DatabaseConfig, type DataCollection, type DataCollectionItemBase, type DatabaseAdapter, type DatabaseAdapterFactory, type DatabaseBindParams, type DatabaseBindable, type DefinedCollection, type DraftFile, type DraftSyncData, type DraftSyncFile, type FileChangeMessagePayload, type FileMessageData, type FileMessageType, type FileSelectMessagePayload, type FileStatus, type LibSQLDatabaseConfig, type MarkdownOptions, type MarkdownPlugin, type MarkdownRoot, type MinimalElement, type MinimalNode, type MinimalText, type MinimalTree, type ModuleOptions, type PageCollection, type PageCollectionItemBase, type PageCollections, type ParsedContentv2, type PostgreSQLDatabaseConfig, type PreviewFile, type PublicRuntimeConfig, type QueryGroupFunction, type ResolvedCollection, type ResolvedCollectionSource, type RuntimeConfig, type SQLOperator, type SqliteDatabaseConfig, type StudioOptions, type SurroundOptions, type TransformContentOptions, type TransformedContent, _default as default, defineCollection, defineContentConfig, metaSchema, pageSchema, z };
++export { type Collection, type CollectionInfo, type CollectionItemBase, type CollectionQueryBuilder, type CollectionQueryGroup, type CollectionSource, type CollectionType, type Collections, type ContentFile, ContentFileExtension, ContentFileType, type ContentNavigationItem, type ContentTransformer, type CustomCollectionSource, type D1DatabaseConfig, type DataCollection, type DataCollectionItemBase, type DatabaseAdapter, type DatabaseAdapterFactory, type DatabaseBindParams, type DatabaseBindable, type DefinedCollection, type DraftFile, type DraftSyncData, type DraftSyncFile, type FileAfterParseHook, type FileBeforeParseHook, type FileChangeMessagePayload, type FileMessageData, type FileMessageType, type FileSelectMessagePayload, type FileStatus, type LibSQLDatabaseConfig, type LocalDevelopmentDatabase, type MarkdownOptions, type MarkdownPlugin, type MarkdownRoot, type MinimalElement, type MinimalNode, type MinimalText, type MinimalTree, type ModuleHooks, type ModuleOptions, type PageCollection, type PageCollectionItemBase, type PageCollections, type ParsedContentFile, type ParsedContentv2, type PostgreSQLDatabaseConfig, type PreviewFile, type PublicRuntimeConfig, type QueryGroupFunction, type ResolvedCollection, type ResolvedCollectionSource, type ResolvedCustomCollectionSource, type RuntimeConfig, type SQLOperator, type SqliteDatabaseConfig, type StudioOptions, type SurroundOptions, type TransformContentOptions, type TransformedContent, _default as default, defineCollection, defineCollectionSource, defineContentConfig, metaSchema, pageSchema, z };
+diff --git a/dist/module.mjs b/dist/module.mjs
+index 211a48bd1718c4c55ed2e9f600ef51c525e4cb01..44340d5b56e477013736e835c004c228e694b335 100644
+--- a/dist/module.mjs
++++ b/dist/module.mjs
+@@ -1,25 +1,28 @@
+ import { readFile, writeFile, mkdir, rm, stat } from 'node:fs/promises';
+ import { useLogger, isIgnored, updateTemplates, addVitePlugin, installModule, extendViteConfig, addTemplate, addPlugin, addComponent, addServerHandler, addPrerenderRoutes, defineNuxtModule, createResolver, addImports, addServerImports, addTypeTemplate } from '@nuxt/kit';
+ import { hash } from 'ohash';
+-import { join, extname, isAbsolute, relative, resolve, dirname } from 'pathe';
+-import fastGlob from 'fast-glob';
++import { join, extname, isAbsolute, relative, resolve, dirname as dirname$1 } from 'pathe';
+ import htmlTags from '@nuxtjs/mdc/runtime/parser/utils/html-tags-list';
+ import { pascalCase, camelCase, kebabCase } from 'scule';
+ import { getOrderedSchemaKeys } from '../dist/runtime/internal/schema.js';
+ import { withoutTrailingSlash, withLeadingSlash, isRelative, withTrailingSlash } from 'ufo';
++import FastGlob from 'fast-glob';
+ import { createWriteStream } from 'node:fs';
+ import { pipeline } from 'node:stream';
+ import { promisify } from 'node:util';
+ import { extract } from 'tar';
+ import { findNearestFile } from 'pkg-types';
+ import gitUrlParse from 'git-url-parse';
+-import { z as z$1 } from 'zod';
++import * as z$1 from 'zod';
++import { z as z$2 } from 'zod';
+ import crypto from 'node:crypto';
+-import Database from 'better-sqlite3';
+ import chokidar from 'chokidar';
+ import micromatch from 'micromatch';
+ import { WebSocketServer } from 'ws';
+ import { listen } from 'listhen';
++import { getBunSqliteDatabaseAdapter } from '../dist/runtime/internal/bunsqlite.js';
++import { getBetter3DatabaseAdapter } from '../dist/runtime/internal/sqlite.js';
++import { dirname } from 'node:path';
+ import { parseMarkdown, createShikiHighlighter, rehypeHighlight } from '@nuxtjs/mdc/runtime';
+ import defu, { defu as defu$1 } from 'defu';
+ import { createOnigurumaEngine } from 'shiki/engine/oniguruma';
+@@ -40,7 +43,7 @@ import { gzip } from 'node:zlib';
+ import { printNode, zodToTs } from 'zod-to-ts';
+ import { zodToJsonSchema } from 'zod-to-json-schema';
+ import { genDynamicImport } from 'knitwork';
+-import { createDefineConfig, loadConfig } from 'c12';
++import { createDefineConfig, watchConfig, loadConfig } from 'c12';
+ import { createJiti } from 'jiti';
+ 
+ const version = "3.0.0-alpha.8";
+@@ -162,32 +165,37 @@ function defineLocalSource(source) {
+   const resolvedSource = {
+     _resolved: true,
+     prefix: withoutTrailingSlash(withLeadingSlash(fixed)),
++    prepare: async ({ rootDir }) => {
++      resolvedSource.cwd = source.cwd ? String(source.cwd).replace(/^~~\//, rootDir) : join(rootDir, "content");
++    },
++    getKeys: async () => {
++      const _keys = await FastGlob(source.include, { cwd: resolvedSource.cwd, ignore: source.exclude || [], dot: true }).catch(() => []);
++      return _keys.map((key) => key.substring(fixed.length));
++    },
++    getItem: async (key) => {
++      const fullPath = join(resolvedSource.cwd, fixed, key);
++      const content = await readFile(fullPath, "utf8");
++      return content;
++    },
+     ...source,
+     include: source.include,
+-    cwd: "",
+-    prepare: async (nuxt) => {
+-      resolvedSource.cwd = source.cwd ? String(source.cwd).replace(/^~~\//, nuxt.options.rootDir) : join(nuxt.options.rootDir, "content");
+-    }
++    cwd: ""
+   };
+   return resolvedSource;
+ }
+ function defineGitHubSource(source) {
+-  const resolvedSource = {
+-    _resolved: true,
+-    ...source,
+-    cwd: "",
+-    prepare: async (nuxt) => {
+-      const repository = source?.repository && parseGitHubUrl(source.repository);
+-      if (repository) {
+-        const { org, repo, branch } = repository;
+-        resolvedSource.cwd = join(nuxt.options.rootDir, ".data", "content", `github-${org}-${repo}-${branch}`);
+-        let headers = {};
+-        if (resolvedSource.authToken) {
+-          headers = { Authorization: `Bearer ${resolvedSource.authToken}` };
+-        }
+-        const url = headers.Authorization ? `https://api.github.com/repos/${org}/${repo}/tarball/${branch}` : `https://github.com/${org}/${repo}/archive/refs/heads/${branch}.tar.gz`;
+-        await downloadRepository(url, resolvedSource.cwd, { headers });
++  const resolvedSource = defineLocalSource(source);
++  resolvedSource.prepare = async ({ rootDir }) => {
++    const repository = source?.repository && parseGitHubUrl(source.repository);
++    if (repository) {
++      const { org, repo, branch } = repository;
++      resolvedSource.cwd = join(rootDir, ".data", "content", `github-${org}-${repo}-${branch}`);
++      let headers = {};
++      if (resolvedSource.authToken) {
++        headers = { Authorization: `Bearer ${resolvedSource.authToken}` };
+       }
++      const url = headers.Authorization ? `https://api.github.com/repos/${org}/${repo}/tarball/${branch}` : `https://github.com/${org}/${repo}/archive/refs/heads/${branch}.tar.gz`;
++      await downloadRepository(url, resolvedSource.cwd, { headers });
+     }
+   };
+   return resolvedSource;
+@@ -209,7 +217,7 @@ const ContentFileExtension = {
+   Xml: "xml"
+ };
+ 
+-const z = z$1;
++const z = z$2;
+ const ZodToSqlFieldTypes = {
+   ZodString: "VARCHAR",
+   ZodNumber: "INT",
+@@ -262,6 +270,58 @@ const pageSchema = z$1.object({
+   ]).optional().default(true)
+ });
+ 
++function getDefaultSqliteAdapter() {
++  return process.versions.bun ? "bunsqlite" : "sqlite";
++}
++async function getDatabase(filename) {
++  const type = getDefaultSqliteAdapter();
++  if (type === "bunsqlite") {
++    return getBunSqliteDatabaseAdapter({ filename });
++  } else {
++    return getBetter3DatabaseAdapter({ filename });
++  }
++}
++const _localDatabase = {};
++async function getLocalDatabase(databaseLocation) {
++  const db = _localDatabase[databaseLocation] || await getDatabase(databaseLocation);
++  _localDatabase[databaseLocation] = db;
++  await db.exec("CREATE TABLE IF NOT EXISTS _development_cache (id TEXT PRIMARY KEY, checksum TEXT, parsedContent TEXT)");
++  const fetchDevelopmentCache = async () => {
++    const result = await db.all("SELECT * FROM _development_cache");
++    return result.reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {});
++  };
++  const fetchDevelopmentCacheForKey = async (key) => {
++    return await db.first("SELECT * FROM _development_cache WHERE id = ?", [key]);
++  };
++  const insertDevelopmentCache = async (id, checksum, parsedContent) => {
++    deleteDevelopmentCache(id);
++    db.exec(`INSERT INTO _development_cache (id, checksum, parsedContent) VALUES ('${id}', '${checksum}', '${parsedContent.replace(/'/g, "''")}')`);
++  };
++  const deleteDevelopmentCache = async (id) => {
++    db.exec(`DELETE FROM _development_cache WHERE id = '${id}'`);
++  };
++  const dropContentTables = async () => {
++    const tables = await db.all(`SELECT name FROM sqlite_master WHERE type = 'table' AND name LIKE '_content_%'`);
++    for (const { name } of tables) {
++      db.exec(`DROP TABLE ${name}`);
++    }
++  };
++  return {
++    database: db,
++    async exec(sql) {
++      db.exec(sql);
++    },
++    close() {
++      _localDatabase[databaseLocation] = void 0;
++    },
++    fetchDevelopmentCache,
++    fetchDevelopmentCacheForKey,
++    insertDevelopmentCache,
++    deleteDevelopmentCache,
++    dropContentTables
++  };
++}
++
+ const defineTransformer = (transformer) => {
+   return transformer;
+ };
+@@ -959,15 +1019,15 @@ function csvParse(options) {
+ const csv = defineTransformer({
+   name: "csv",
+   extensions: [".csv"],
+-  parse: async (id, content, options = {}) => {
++  parse: async (file, options = {}) => {
+     const stream = unified().use(csvParse, {
+       delimiter: ",",
+       json: true,
+       ...options
+     });
+-    const { result } = await stream.process(content);
++    const { result } = await stream.process(file.body);
+     return {
+-      id,
++      id: file.id,
+       body: result
+     };
+   }
+@@ -1025,7 +1085,7 @@ const describeId = (id) => {
+ const markdown = defineTransformer({
+   name: "markdown",
+   extensions: [".md"],
+-  parse: async (id, content, options = {}) => {
++  parse: async (file, options = {}) => {
+     const config = { ...options };
+     config.rehypePlugins = await importPlugins(config.rehypePlugins);
+     config.remarkPlugins = await importPlugins(config.remarkPlugins);
+@@ -1034,7 +1094,7 @@ const markdown = defineTransformer({
+       // Pass only when it's an function. String values are handled by `@nuxtjs/mdc`
+       highlighter: typeof options.highlight?.highlighter === "function" ? options.highlight.highlighter : void 0
+     } : void 0;
+-    const parsed = await parseMarkdown(content, {
++    const parsed = await parseMarkdown(file.body, {
+       ...config,
+       highlight,
+       toc: config.toc,
+@@ -1043,6 +1103,8 @@ const markdown = defineTransformer({
+         plugins: config.rehypePlugins,
+         options: { handlers: { link } }
+       }
++    }, {
++      fileOptions: file
+     });
+     if (options.compress) {
+       return {
+@@ -1052,7 +1114,7 @@ const markdown = defineTransformer({
+           ...compressTree(parsed.body),
+           toc: parsed.toc
+         },
+-        id
++        id: file.id
+       };
+     }
+     return {
+@@ -1062,7 +1124,7 @@ const markdown = defineTransformer({
+         ...parsed.body,
+         toc: parsed.toc
+       },
+-      id
++      id: file.id
+     };
+   }
+ });
+@@ -1113,9 +1175,10 @@ function normaliseLink(link2) {
+ const yaml = defineTransformer({
+   name: "Yaml",
+   extensions: [".yml", ".yaml"],
+-  parse: (id, content) => {
++  parse: (file) => {
++    const { id, body } = file;
+     const { data } = parseFrontMatter(`---
+-${content}
++${body}
+ ---`);
+     let parsed = data;
+     if (Array.isArray(data)) {
+@@ -1133,12 +1196,13 @@ ${content}
+ const json = defineTransformer({
+   name: "Json",
+   extensions: [".json"],
+-  parse: async (id, content) => {
++  parse: async (file) => {
++    const { id, body } = file;
+     let parsed;
+-    if (typeof content === "string") {
+-      parsed = destr(content);
++    if (typeof body === "string") {
++      parsed = destr(body);
+     } else {
+-      parsed = content;
++      parsed = body;
+     }
+     if (Array.isArray(parsed)) {
+       console.warn(`JSON array is not supported in ${id}, moving the array into the \`body\` key`);
+@@ -1174,17 +1238,16 @@ function getTransformers(ext, additionalTransformers = []) {
+     ...TRANSFORMERS.filter((p) => ext.match(new RegExp(p.extensions.join("|"), "i")) && p.transform)
+   ];
+ }
+-async function transformContent(id, content, options = {}) {
++async function transformContent(file, options = {}) {
+   const { transformers = [] } = options;
+-  const file = { id, body: content };
+-  const ext = extname(id);
++  const ext = file.extension || extname(file.id);
+   const parser = getParser(ext, transformers);
+   if (!parser) {
+-    console.warn(`${ext} files are not supported, "${id}" falling back to raw content`);
++    console.warn(`${ext} files are not supported, "${file.id}" falling back to raw content`);
+     return file;
+   }
+   const parserOptions = options[camelCase(parser.name)] || {};
+-  const parsed = await parser.parse(file.id, file.body, parserOptions);
++  const parsed = await parser.parse(file, parserOptions);
+   const matchedTransformers = getTransformers(ext, transformers);
+   const result = await matchedTransformers.reduce(async (prev, cur) => {
+     const next = await prev || parsed;
+@@ -1223,7 +1286,7 @@ async function _getHighlightPlugin(options) {
+     ]));
+     const bundledLangs = await Promise.all(langs.map(async (lang) => [
+       lang,
+-      await import(`shiki/langs/${lang}.mjs`).then((m) => m.default || m)
++      await import(`@shikijs/langs/${lang}`).then((m) => m.default || m)
+     ]));
+     const highlighter = createShikiHighlighter({
+       bundledThemes: Object.fromEntries(bundledThemes),
+@@ -1256,7 +1319,7 @@ async function _getHighlightPlugin(options) {
+                 node.properties.style = void 0;
+               }
+             );
+-            result.style = Object.entries(stylesMap).map(([style, cls]) => `.${cls}{${style}}`).join("") + result.style;
++            result.style = Object.entries(stylesMap).map(([style, cls]) => `html pre.shiki code .${cls}, html code.shiki .${cls}{${style}}`).join("") + result.style;
+           }
+           return result;
+         },
+@@ -1266,11 +1329,11 @@ async function _getHighlightPlugin(options) {
+   }
+   return highlightPlugin;
+ }
+-async function parseContent(key, content, collection, nuxt) {
++async function createParser(collection, nuxt) {
+   const mdcOptions = nuxt?.options?.mdc || {};
+   const { pathMeta = {}, markdown = {} } = nuxt?.options?.content?.build || {};
+   const rehypeHighlightPlugin = markdown.highlight !== false ? await getHighlightPluginInstance(defu$1(markdown.highlight, mdcOptions.highlight, { compress: true })) : void 0;
+-  const parsedContent = await transformContent(key, content, {
++  const parserOptions2 = {
+     pathMeta,
+     markdown: {
+       compress: true,
+@@ -1288,28 +1351,39 @@ async function parseContent(key, content, collection, nuxt) {
+       },
+       highlight: void 0
+     }
+-  });
+-  const { id, ...parsedContentFields } = parsedContent;
+-  const result = { id };
+-  const meta = {};
+-  const collectionKeys = Object.keys(collection.extendedSchema.shape);
+-  for (const key2 of Object.keys(parsedContentFields)) {
+-    if (collectionKeys.includes(key2)) {
+-      result[key2] = parsedContent[key2];
+-    } else {
+-      meta[key2] = parsedContent[key2];
++  };
++  return async function parse(file) {
++    if (file.path && !file.dirname) {
++      file.dirname = dirname(file.path);
++    }
++    const beforeParseCtx = { file, collection, parserOptions: parserOptions2 };
++    await nuxt?.callHook?.("content:file:beforeParse", beforeParseCtx);
++    const { file: hookedFile } = beforeParseCtx;
++    const parsedContent = await transformContent(hookedFile, beforeParseCtx.parserOptions);
++    const { id, ...parsedContentFields } = parsedContent;
++    const result = { id };
++    const meta = {};
++    const collectionKeys = Object.keys(collection.extendedSchema.shape);
++    for (const key of Object.keys(parsedContentFields)) {
++      if (collectionKeys.includes(key)) {
++        result[key] = parsedContent[key];
++      } else {
++        meta[key] = parsedContent[key];
++      }
+     }
+-  }
+-  result.meta = meta;
+-  if (collectionKeys.includes("rawbody")) {
+-    result.rawbody = result.rawbody ?? content;
+-  }
+-  if (collectionKeys.includes("seo")) {
+-    result.seo = result.seo || {};
+-    result.seo.title = result.seo.title || result.title;
+-    result.seo.description = result.seo.description || result.description;
+-  }
+-  return result;
++    result.meta = meta;
++    if (collectionKeys.includes("rawbody")) {
++      result.rawbody = result.rawbody ?? file.body;
++    }
++    if (collectionKeys.includes("seo")) {
++      result.seo = result.seo || {};
++      result.seo.title = result.seo.title || result.title;
++      result.seo.description = result.seo.description || result.description;
++    }
++    const afterParseCtx = { file: hookedFile, content: result, collection };
++    await nuxt?.callHook?.("content:file:afterParse", afterParseCtx);
++    return afterParseCtx.content;
++  };
+ }
+ 
+ const compress = (text) => {
+@@ -1432,7 +1506,7 @@ const manifestTemplate = (manifest) => ({
+   getContents: ({ options }) => {
+     const collectionsMeta = options.manifest.collections.reduce((acc, collection) => {
+       acc[collection.name] = {
+-        jsonFields: collection.jsonFields
++        fields: collection.fields
+       };
+       return acc;
+     }, {});
+@@ -1464,7 +1538,7 @@ const studioTemplate = (collections, gitInfo, schema) => ({
+         // Remove source from collection meta if it's a remote collection
+         source: collection.source?.filter((source) => source.repository ? void 0 : collection.source),
+         type: collection.type,
+-        jsonFields: collection.jsonFields,
++        fields: collection.fields,
+         schema: zodToJsonSchema(collection.extendedSchema, collection.name),
+         tableDefinition: generateCollectionTableDefinition(collection)
+       };
+@@ -1489,7 +1563,7 @@ const studioTemplate = (collections, gitInfo, schema) => ({
+ 
+ const logger = useLogger("@nuxt/content");
+ async function startSocketServer(nuxt, options, manifest) {
+-  const db = localDatabase(options._localDatabase.filename);
++  const db = await getLocalDatabase(options._localDatabase.filename);
+   let websocket;
+   let listener;
+   const websocketOptions = options.watch || {};
+@@ -1502,26 +1576,27 @@ async function startSocketServer(nuxt, options, manifest) {
+     });
+   }
+   async function broadcast(collection, key, insertQuery) {
+-    const removeQuery = `DELETE FROM ${collection.tableName} WHERE id = '${key}'`;
++    const removeQuery = `DELETE FROM ${collection.tableName} WHERE id = '${key}';`;
+     await db.exec(removeQuery);
+     if (insertQuery) {
+-      await db.exec(insertQuery);
+-    }
+-    const index = manifest.dump[collection.name]?.findIndex((item) => item.includes(`'${key}'`));
+-    if (index && index !== -1) {
+-      if (insertQuery) {
+-        manifest.dump[collection.name]?.splice(index, 1, insertQuery);
+-      } else {
+-        manifest.dump[collection.name]?.splice(index, 1);
+-      }
+-      updateTemplates({
+-        filter: (template) => [
+-          moduleTemplates.manifest,
+-          moduleTemplates.fullCompressedDump
+-          // moduleTemplates.raw,
+-        ].includes(template.filename)
+-      });
++      await Promise.all(insertQuery.map((query) => db.exec(query)));
+     }
++    const collectionDump = manifest.dump[collection.name];
++    const keyIndex = collectionDump?.findIndex((item) => item.includes(`'${key}'`));
++    const indexToUpdate = keyIndex !== -1 ? keyIndex : collectionDump?.length;
++    const itemsToRemove = keyIndex === -1 ? 0 : 1;
++    if (insertQuery) {
++      collectionDump?.splice(indexToUpdate, itemsToRemove, ...insertQuery);
++    } else {
++      collectionDump?.splice(indexToUpdate, itemsToRemove);
++    }
++    updateTemplates({
++      filter: (template) => [
++        moduleTemplates.manifest,
++        moduleTemplates.fullCompressedDump
++        // moduleTemplates.raw,
++      ].includes(template.filename)
++    });
+     websocket?.broadcast({
+       key,
+       collection: collection.name,
+@@ -1537,17 +1612,22 @@ async function startSocketServer(nuxt, options, manifest) {
+   };
+ }
+ async function watchContents(nuxt, options, manifest, socket) {
+-  const db = localDatabase(options._localDatabase.filename);
++  const collectionParsers = {};
++  const db = await getLocalDatabase(options._localDatabase.filename);
+   const collections = manifest.collections;
+   const sourceMap = collections.flatMap((c) => {
+     return c.source ? c.source.filter((s) => !s.repository).map((s) => ({ collection: c, source: s, cwd: withTrailingSlash(s.cwd) })) : [];
+   });
+-  const dirsToWatch = Array.from(new Set(sourceMap.map(({ source }) => source.cwd)));
++  const dirsToWatch = Array.from(new Set(sourceMap.map(({ source }) => source.cwd))).filter(Boolean);
+   const watcher = chokidar.watch(dirsToWatch, { ignoreInitial: true });
+   watcher.on("add", onChange);
+   watcher.on("change", onChange);
+   watcher.on("unlink", onRemove);
+-  async function onChange(path) {
++  async function onChange(pathOrError) {
++    if (pathOrError instanceof Error) {
++      return;
++    }
++    let path = pathOrError;
+     const match = sourceMap.find(({ source, cwd }) => path.startsWith(cwd) && micromatch.isMatch(path.substring(cwd.length), source.include, { ignore: source.exclude || [], dot: true }));
+     if (match) {
+       const { collection, source, cwd } = match;
+@@ -1556,21 +1636,35 @@ async function watchContents(nuxt, options, manifest, socket) {
+       const { fixed } = parseSourceBase(source);
+       const filePath = path.substring(fixed.length);
+       const keyInCollection = join(collection.name, source?.prefix || "", filePath);
+-      const content = await readFile(join(cwd, path), "utf8");
++      const fullPath = join(cwd, path);
++      const content = await readFile(fullPath, "utf8");
+       const checksum = getContentChecksum(content);
+-      const localCache = db.fetchDevelopmentCacheForKey(keyInCollection);
++      const localCache = await db.fetchDevelopmentCacheForKey(keyInCollection);
+       if (localCache && localCache.checksum === checksum) {
+         db.exec(`DELETE FROM ${collection.tableName} WHERE id = '${keyInCollection}'`);
+-        db.exec(generateCollectionInsert(collection, JSON.parse(localCache.parsedContent)));
++        const insertQuery2 = generateCollectionInsert(collection, JSON.parse(localCache.parsedContent));
++        await Promise.all(insertQuery2.map((query) => db.exec(query)));
+         return;
+       }
+-      const parsedContent = await parseContent(keyInCollection, content, collection, nuxt);
++      if (!collectionParsers[collection.name]) {
++        collectionParsers[collection.name] = await createParser(collection, nuxt);
++      }
++      const parser = collectionParsers[collection.name];
++      const parsedContent = await parser({
++        id: keyInCollection,
++        body: content,
++        path: fullPath
++      });
+       db.insertDevelopmentCache(keyInCollection, checksum, JSON.stringify(parsedContent));
+       const insertQuery = generateCollectionInsert(collection, parsedContent);
+       await socket.broadcast(collection, keyInCollection, insertQuery);
+     }
+   }
+-  async function onRemove(path) {
++  async function onRemove(pathOrError) {
++    if (pathOrError instanceof Error) {
++      return;
++    }
++    let path = pathOrError;
+     const match = sourceMap.find(({ source, cwd }) => path.startsWith(cwd) && micromatch.isMatch(path.substring(cwd.length), source.include, { ignore: source.exclude || [], dot: true }));
+     if (match) {
+       const { collection, source, cwd } = match;
+@@ -1627,16 +1721,6 @@ function watchComponents(nuxt) {
+     }
+   });
+ }
+-function watchConfig(nuxt) {
+-  nuxt.hook("nitro:init", async (nitro) => {
+-    nitro.storage.watch(async (_event, key) => {
+-      if ("root:content.config.ts" === key) {
+-        logger.info(`\`${key.split(":").pop()}\` updated, restarting the Nuxt server...`);
+-        nuxt.hooks.callHook("restart", { hard: true });
+-      }
+-    });
+-  });
+-}
+ function createWebSocket() {
+   const wss = new WebSocketServer({ noServer: true });
+   const serve = (req, socket = req.socket, head) => wss.handleUpgrade(req, socket, head, (client) => {
+@@ -1664,38 +1748,6 @@ function createWebSocket() {
+ function getContentChecksum(content) {
+   return crypto.createHash("md5").update(content, "utf8").digest("hex");
+ }
+-const _localDatabase = {};
+-function localDatabase(databaseLocation) {
+-  if (!_localDatabase[databaseLocation]) {
+-    _localDatabase[databaseLocation] = Database(databaseLocation);
+-    _localDatabase[databaseLocation].exec("CREATE TABLE IF NOT EXISTS _development_cache (id TEXT PRIMARY KEY, checksum TEXT, parsedContent TEXT)");
+-  }
+-  return {
+-    fetchDevelopmentCache() {
+-      return _localDatabase[databaseLocation].prepare("SELECT * FROM _development_cache").all().reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {});
+-    },
+-    fetchDevelopmentCacheForKey(key) {
+-      return _localDatabase[databaseLocation].prepare("SELECT * FROM _development_cache WHERE id = ?").get(key);
+-    },
+-    insertDevelopmentCache(id, checksum, parsedContent) {
+-      this.deleteDevelopmentCache(id);
+-      _localDatabase[databaseLocation].exec(`INSERT INTO _development_cache (id, checksum, parsedContent) VALUES ('${id}', '${checksum}', '${parsedContent.replace(/'/g, "''")}')`);
+-    },
+-    deleteDevelopmentCache(id) {
+-      _localDatabase[databaseLocation].exec(`DELETE FROM _development_cache WHERE id = '${id}'`);
+-    },
+-    dropContentTables() {
+-      _localDatabase[databaseLocation].prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name LIKE '_content_%'`).all().map(({ name }) => _localDatabase[databaseLocation].exec(`DROP TABLE IF EXISTS ${name}`));
+-    },
+-    exec: (sql) => {
+-      _localDatabase[databaseLocation].exec(sql);
+-    },
+-    close: () => {
+-      _localDatabase[databaseLocation].close();
+-      _localDatabase[databaseLocation] = void 0;
+-    }
+-  };
+-}
+ function* chunks(arr, size) {
+   for (let i = 0; i < arr.length; i += size) {
+     yield arr.slice(i, i + size);
+@@ -1717,7 +1769,29 @@ function defineCollection(collection) {
+     source: resolveSource(collection.source),
+     schema: collection.schema || z.object({}),
+     extendedSchema: schema,
+-    jsonFields: Object.keys(schema.shape).filter((key) => JSON_FIELDS_TYPES.includes(getUnderlyingTypeName(schema.shape[key])))
++    fields: Object.keys(schema.shape).reduce((acc, key) => {
++      const underlyingType = getUnderlyingTypeName(schema.shape[key]);
++      if (JSON_FIELDS_TYPES.includes(underlyingType)) {
++        acc[key] = "json";
++      } else if (["ZodString"].includes(underlyingType)) {
++        acc[key] = "string";
++      } else if (["ZodDate"].includes(underlyingType)) {
++        acc[key] = "date";
++      } else if (underlyingType === "ZodBoolean") {
++        acc[key] = "boolean";
++      } else if (underlyingType === "ZodNumber") {
++        acc[key] = "number";
++      } else {
++        acc[key] = "string";
++      }
++      return acc;
++    }, {})
++  };
++}
++function defineCollectionSource(source) {
++  return {
++    _custom: true,
++    ...resolveSource({ ...source, cwd: "", include: "" })?.[0]
+   };
+ }
+ function resolveCollection(name, collection) {
+@@ -1747,7 +1821,7 @@ function resolveCollections(collections) {
+       id: z.string(),
+       version: z.string()
+     }),
+-    jsonFields: []
++    fields: {}
+   };
+   return Object.entries(collections).map(([name, collection]) => resolveCollection(name, collection)).filter(Boolean);
+ }
+@@ -1770,6 +1844,7 @@ function resolveSource(source) {
+   });
+ }
+ function generateCollectionInsert(collection, data) {
++  const fields = [];
+   const values = [];
+   const sortedKeys = getOrderedSchemaKeys(collection.extendedSchema.shape);
+   sortedKeys.forEach((key) => {
+@@ -1780,24 +1855,48 @@ function generateCollectionInsert(collection, data) {
+       defaultValue = JSON.stringify(defaultValue);
+     }
+     const valueToInsert = typeof data[key] === "undefined" || String(data[key]) === "null" ? defaultValue : data[key];
++    fields.push(key);
+     if (valueToInsert === "NULL") {
+       values.push(valueToInsert);
+       return;
+     }
+-    if ((collection.jsonFields || []).includes(key)) {
++    if (collection.fields[key] === "json") {
+       values.push(`'${JSON.stringify(valueToInsert).replace(/'/g, "''")}'`);
+     } else if (["ZodString", "ZodEnum"].includes(underlyingType.constructor.name)) {
+       values.push(`'${String(valueToInsert).replace(/\n/g, "\\n").replace(/'/g, "''")}'`);
+-    } else if (["ZodDate"].includes(underlyingType.constructor.name)) {
++    } else if (collection.fields[key] === "date") {
+       values.push(`'${new Date(valueToInsert).toISOString()}'`);
+-    } else if (underlyingType.constructor.name === "ZodBoolean") {
++    } else if (collection.fields[key] === "boolean") {
+       values.push(!!valueToInsert);
+     } else {
+       values.push(valueToInsert);
+     }
+   });
+   let index = 0;
+-  return `INSERT INTO ${collection.tableName} VALUES (${"?, ".repeat(values.length).slice(0, -2)})`.replace(/\?/g, () => values[index++]);
++  const sql = `INSERT INTO ${collection.tableName} VALUES (${"?, ".repeat(values.length).slice(0, -2)});`.replace(/\?/g, () => values[index++]);
++  if (sql.length < 1e5) {
++    return [sql];
++  }
++  const bigColumn = [...values].sort((a, b) => String(b).length - String(a).length)[0];
++  const bigColumnIndex = values.indexOf(bigColumn);
++  const bigColumnName = fields[bigColumnIndex];
++  if (typeof bigColumn === "string") {
++    let splitIndex = Math.floor(bigColumn.length / 2);
++    while (["'", '"', "\\"].includes(bigColumn[splitIndex])) {
++      splitIndex -= 1;
++    }
++    const part1 = bigColumn.slice(0, splitIndex) + "'";
++    const part2 = "'" + bigColumn.slice(splitIndex);
++    values[bigColumnIndex] = part1;
++    index = 0;
++    return [
++      `INSERT INTO ${collection.tableName} VALUES (${"?, ".repeat(values.length).slice(0, -2)});`.replace(/\?/g, () => values[index++]),
++      `UPDATE ${collection.tableName} SET ${bigColumnName} = ${part2} WHERE id = ${values[0]};`
++    ];
++  }
++  return [
++    sql
++  ];
+ }
+ function generateCollectionTableDefinition(collection, opts = {}) {
+   const sortedKeys = getOrderedSchemaKeys(collection.extendedSchema.shape);
+@@ -1847,42 +1946,32 @@ const defaultConfig = {
+   }
+ };
+ const defineContentConfig = createDefineConfig();
+-async function loadContentConfig(rootDir, opts = {}) {
++async function loadContentConfig(nuxt, options = {}) {
++  const loader = nuxt.options.dev ? (opts) => watchConfig({
++    ...opts,
++    onWatch: (e) => {
++      logger.info(relative(nuxt.options.rootDir, e.path) + " " + e.type + ", restarting the Nuxt server...");
++      nuxt.hooks.callHook("restart", { hard: true });
++    }
++  }) : loadConfig;
+   globalThis.defineContentConfig = (c) => c;
+-  const { config, configFile } = await loadConfig({ name: "content", cwd: rootDir });
++  const contentConfigs = await Promise.all(
++    nuxt.options._layers.reverse().map(
++      (layer) => loader({ name: "content", cwd: layer.config.rootDir, defaultConfig: options.defaultFallback ? defaultConfig : void 0 })
++    )
++  );
+   delete globalThis.defineContentConfig;
+-  if ((!configFile || configFile === "content.config") && opts.defaultFallback) {
+-    logger.warn("`content.config.ts` is not found, falling back to default collection. In order to have full control over your collections, create the config file in project root. See: https://content.nuxt.com/getting-started/installation");
+-    return {
+-      collections: resolveCollections(defaultConfig.collections)
+-    };
+-  }
+-  return {
+-    collections: resolveCollections(config.collections || {})
+-  };
+-}
+-async function loadLayersConfig(nuxt) {
+-  const collectionMap = {};
+-  const _layers = [...nuxt.options._layers].reverse();
+-  for (const layer of _layers) {
+-    const rootDir = layer.config.rootDir;
+-    const configStat = await stat(join(rootDir, "content.config.ts")).catch(() => null);
+-    if (configStat && configStat.isFile()) {
+-      const { collections } = await loadContentConfig(rootDir, { defaultFallback: false });
+-      for (const collection of collections) {
+-        collectionMap[collection.name] = collection;
+-      }
+-    }
++  if (nuxt.options.dev) {
++    nuxt.hook("close", () => Promise.all(contentConfigs.map((c) => c.unwatch())).then(() => {
++    }));
+   }
+-  if (Object.keys(collectionMap).length === 0) {
+-    const collections = resolveCollections(defaultConfig.collections);
+-    for (const collection of collections) {
+-      collectionMap[collection.name] = collection;
+-    }
++  const collectionsConfig = contentConfigs.reduce((acc, curr) => ({ ...acc, ...curr.config?.collections }), {});
++  const hasNoCollections = Object.keys(collectionsConfig || {}).length === 0;
++  if (hasNoCollections) {
++    logger.warn("No content configuration found, falling back to default collection. In order to have full control over your collections, create the config file in project root. See: https://content.nuxt.com/getting-started/installation");
+   }
+-  return {
+-    collections: Object.values(collectionMap)
+-  };
++  const collections = resolveCollections(hasNoCollections ? defaultConfig.collections : collectionsConfig);
++  return { collections };
+ }
+ 
+ async function installMDCModule(contentOptions, nuxt) {
+@@ -2064,14 +2153,14 @@ const module = defineNuxtModule({
+       collections: []
+     };
+     options._localDatabase.filename = isAbsolute(options._localDatabase.filename) ? options._localDatabase.filename : join(nuxt.options.rootDir, options._localDatabase.filename);
+-    await mkdir(dirname(options._localDatabase.filename), { recursive: true }).catch(() => {
++    await mkdir(dirname$1(options._localDatabase.filename), { recursive: true }).catch(() => {
+     });
+     if (options.database.filename) {
+       options.database.filename = options.database.filename;
+-      await mkdir(dirname(options.database.filename), { recursive: true }).catch(() => {
++      await mkdir(dirname$1(options.database.filename), { recursive: true }).catch(() => {
+       });
+     }
+-    const { collections } = await loadLayersConfig(nuxt);
++    const { collections } = await loadContentConfig(nuxt);
+     manifest.collections = collections;
+     nuxt.options.runtimeConfig.public.content = {
+       wsUrl: ""
+@@ -2155,7 +2244,6 @@ const module = defineNuxtModule({
+     if (nuxt.options.dev) {
+       addPlugin({ src: resolver.resolve("./runtime/plugins/websocket.dev"), mode: "client" });
+       await watchComponents(nuxt);
+-      await watchConfig(nuxt);
+       const socket = await startSocketServer(nuxt, options, manifest);
+       dumpGeneratePromise.then(async () => {
+         await watchContents(nuxt, options, manifest, socket);
+@@ -2172,8 +2260,8 @@ const module = defineNuxtModule({
+ async function processCollectionItems(nuxt, collections, options) {
+   const collectionDump = {};
+   const collectionChecksum = {};
+-  const db = localDatabase(options._localDatabase.filename);
+-  const databaseContents = db.fetchDevelopmentCache();
++  const db = await getLocalDatabase(options._localDatabase.filename);
++  const databaseContents = await db.fetchDevelopmentCache();
+   const configHash = hash({
+     mdcHighlight: nuxt.options.mdc?.highlight,
+     contentBuild: options.build?.markdown
+@@ -2196,20 +2284,21 @@ async function processCollectionItems(nuxt, collections, options) {
+     if (!collection.source) {
+       continue;
+     }
++    const parse = await createParser(collection, nuxt);
+     for await (const source of collection.source) {
+       if (source.prepare) {
+-        await source.prepare(nuxt);
++        await source.prepare({ rootDir: nuxt.options.rootDir });
+       }
+       const { fixed } = parseSourceBase(source);
+       const cwd = source.cwd;
+-      const _keys = await fastGlob(source.include, { cwd, ignore: source.exclude || [], dot: true }).catch(() => []);
++      const _keys = await source.getKeys();
+       filesCount += _keys.length;
+       const list = [];
+       for await (const chunk of chunks(_keys, 25)) {
+         await Promise.all(chunk.map(async (key) => {
+-          key = key.substring(fixed.length);
+           const keyInCollection = join(collection.name, source?.prefix || "", key);
+-          const content = await readFile(join(cwd, fixed, key), "utf8");
++          const fullPath = join(cwd, fixed, key);
++          const content = await source.getItem(key);
+           const checksum = getContentChecksum(configHash + collectionHash + content);
+           const cache = databaseContents[keyInCollection];
+           let parsedContent;
+@@ -2218,19 +2307,23 @@ async function processCollectionItems(nuxt, collections, options) {
+             parsedContent = JSON.parse(cache.parsedContent);
+           } else {
+             parsedFilesCount += 1;
+-            parsedContent = await parseContent(keyInCollection, content, collection, nuxt);
++            parsedContent = await parse({
++              id: keyInCollection,
++              body: content,
++              path: fullPath
++            });
+             db.insertDevelopmentCache(keyInCollection, checksum, JSON.stringify(parsedContent));
+           }
+           list.push([key, generateCollectionInsert(collection, parsedContent)]);
+         }));
+       }
+       list.sort((a, b) => String(a[0]).localeCompare(String(b[0])));
+-      collectionDump[collection.name].push(...list.map(([, sql]) => sql));
++      collectionDump[collection.name].push(...list.flatMap(([, sql]) => sql));
+       collectionChecksum[collection.name] = hash(collectionDump[collection.name]);
+       collectionDump[collection.name].push(
+         generateCollectionTableDefinition(infoCollection, { drop: false }),
+-        `DELETE FROM ${infoCollection.tableName} WHERE id = 'checksum_${collection.name}'`,
+-        generateCollectionInsert(infoCollection, { id: `checksum_${collection.name}`, version: collectionChecksum[collection.name] })
++        `DELETE FROM ${infoCollection.tableName} WHERE id = 'checksum_${collection.name}';`,
++        ...generateCollectionInsert(infoCollection, { id: `checksum_${collection.name}`, version: collectionChecksum[collection.name] })
+       );
+     }
+   }
+@@ -2260,4 +2353,4 @@ function getMappedTag(tag, additionalTags = {}) {
+   return additionalTags[tag] || tag;
+ }
+ 
+-export { module as default, defineCollection, defineContentConfig, metaSchema, pageSchema, z };
++export { module as default, defineCollection, defineCollectionSource, defineContentConfig, metaSchema, pageSchema, z };
+diff --git a/dist/runtime/adapters/sqlite.js b/dist/runtime/adapters/sqlite.js
+index 955f89de77a4f0960b56b34f283b23c5ea80c25c..6fdc72f0dbedcc2413c1004f1e4d4782442c5414 100644
+--- a/dist/runtime/adapters/sqlite.js
++++ b/dist/runtime/adapters/sqlite.js
+@@ -1,21 +1,9 @@
+-import Database from "better-sqlite3";
+-import { isAbsolute } from "pathe";
+ import { createDatabaseAdapter } from "../internal/database-adapter.js";
+-let db;
++import { getBetter3DatabaseAdapter } from "../internal/sqlite.js";
++import { getBunSqliteDatabaseAdapter } from "../internal/bunsqlite.js";
+ export default createDatabaseAdapter((opts) => {
+-  if (!db) {
+-    const filename = !opts || isAbsolute(opts?.filename || "") ? opts?.filename : new URL(opts.filename, globalThis._importMeta_.url).pathname;
+-    db = new Database(filename);
++  if (process.versions.bun) {
++    return getBunSqliteDatabaseAdapter(opts);
+   }
+-  return {
+-    async all(sql, params) {
+-      return params ? db.prepare(sql).all(params) : db.prepare(sql).all();
+-    },
+-    async first(sql, params) {
+-      return params ? db.prepare(sql).get(params) : db.prepare(sql).get();
+-    },
+-    async exec(sql) {
+-      await db.exec(sql);
+-    }
+-  };
++  return getBetter3DatabaseAdapter(opts);
+ });
+diff --git a/dist/runtime/api/query.post.js b/dist/runtime/api/query.post.js
+index 8fe593fe7145bf7f21c6bac6ec8ba6d5dbc128d7..f1eb469bb8797bac6af789944689a8f1c1f0a952 100644
+--- a/dist/runtime/api/query.post.js
++++ b/dist/runtime/api/query.post.js
+@@ -1,5 +1,5 @@
+ import { eventHandler, getRouterParam, readValidatedBody } from "h3";
+-import { z } from "zod";
++import * as z from "zod";
+ import loadDatabaseAdapter, { checkAndImportDatabaseIntegrity } from "../internal/database.server.js";
+ import { useRuntimeConfig } from "#imports";
+ export default eventHandler(async (event) => {
 diff --git a/dist/runtime/app.js b/dist/runtime/app.js
-index 0357150244d7af7d8a64f75ec126416c6743b11a..c3512905834d99d18586df435f9f96f58bbb22af 100644
+index 0357150244d7af7d8a64f75ec126416c6743b11a..99c9a76f8bcf6cfddbaed01c50b57c3bf5b39e09 100644
 --- a/dist/runtime/app.js
 +++ b/dist/runtime/app.js
-@@ -5,10 +5,16 @@ import { generateItemSurround } from "./internal/surround.js";
+@@ -1,12 +1,12 @@
+-import { collectionQureyBuilder } from "./internal/query.js";
+-import { measurePerformance } from "./internal/performance.js";
++import { collectionQueryBuilder } from "./internal/query.js";
+ import { generateNavigationTree } from "./internal/navigation.js";
+ import { generateItemSurround } from "./internal/surround.js";
  import { generateSearchSections } from "./internal/search.js";
  import { fetchQuery } from "./internal/api.js";
  import { tryUseNuxtApp } from "#imports";
-+const _queryCollection = (event, collection) => {
-+  return collectionQureyBuilder(collection, (collection2, sql) => executeContentQuery(event, collection2, sql));
-+}
  export const queryCollection = (collection) => {
 -  return collectionQureyBuilder(collection, (collection2, sql) => executeContentQuery(collection2, sql));
-+  const event = tryUseNuxtApp()?.ssrContext?.event
-+  console.log("Event on queryCollection", !!event)
-+  return collectionQureyBuilder(collection, (collection2, sql) => executeContentQuery(event, collection2, sql));
++  const event = tryUseNuxtApp()?.ssrContext?.event;
++  return collectionQueryBuilder(collection, (collection2, sql) => executeContentQuery(event, collection2, sql));
  };
  export function queryCollectionNavigation(collection, fields) {
-+  console.log("Event on queryCollectionNavigation", !!tryUseNuxtApp()?.ssrContext?.event)
    return chainablePromise(collection, (qb) => generateNavigationTree(qb, fields));
- }
- export function queryCollectionItemSurroundings(collection, path, opts) {
-@@ -17,11 +23,12 @@ export function queryCollectionItemSurroundings(collection, path, opts) {
+@@ -17,18 +17,16 @@ export function queryCollectionItemSurroundings(collection, path, opts) {
  export async function queryCollectionSearchSections(collection, opts) {
    return generateSearchSections(queryCollection(collection), opts);
  }
 -async function executeContentQuery(collection, sql) {
 +async function executeContentQuery(event, collection, sql) {
-+  console.log("Event on executeContentQuery", !!(event || tryUseNuxtApp()?.ssrContext?.event))
++  console.log("event", !!event, event ? event?.context?.cloudflare : false);
    if (import.meta.client) {
      return queryContentSqlClientWasm(collection, sql);
    } else {
 -    return fetchQuery(tryUseNuxtApp()?.ssrContext?.event, String(collection), sql);
-+    return fetchQuery(event || tryUseNuxtApp()?.ssrContext?.event, String(collection), sql);
++    return fetchQuery(event, String(collection), sql);
    }
  }
  async function queryContentSqlClientWasm(collection, sql) {
-@@ -32,6 +39,7 @@ async function queryContentSqlClientWasm(collection, sql) {
+-  const perf = measurePerformance();
+   const rows = await import("./internal/database.client.js").then((m) => m.loadDatabaseAdapter(collection)).then((db) => db.all(sql));
+-  perf.tick("Execute Query");
+-  console.log(perf.end("Run with Compressed Dump"));
    return rows;
  }
  function chainablePromise(collection, fn) {
-+  console.log("Event on chaninablePromise", !!tryUseNuxtApp()?.ssrContext?.event)
-   const queryBuilder = queryCollection(collection);
-   const chainable = {
-     where(field, operator, value) {
-diff --git a/dist/runtime/internal/api.js b/dist/runtime/internal/api.js
-index 1f7dd8f6d45bda1903aa89d89f54d03d6ba8ca3d..fdc1d29abd1c534304a3ec627f71428f64ba18ab 100644
---- a/dist/runtime/internal/api.js
-+++ b/dist/runtime/internal/api.js
-@@ -1,11 +1,13 @@
- import { checksums } from "#content/manifest";
- export async function fetchDatabase(event, collection) {
--  return await $fetch(`/api/content/${collection}/database.sql`, {
-+  const res = await $fetch(`/api/content/${collection}/database.sql`, {
-     context: event ? { cloudflare: event.context.cloudflare } : {},
-     responseType: "text",
-     headers: { "content-type": "text/plain" },
-     query: { v: checksums[String(collection)], t: import.meta.dev ? Date.now() : void 0 }
-   });
-+console.log(`~~> ${collection} -- ${String(res)} -- cf: ${!!event.context.cloudflare}`)
-+  return res
- }
- export async function fetchQuery(event, collection, sql) {
-   return await $fetch(`/api/content/${collection}/query`, {
-diff --git a/dist/runtime/internal/database.server.js b/dist/runtime/internal/database.server.js
-index 3934e4b18beee127547125f82248514341eba245..347f8e5149128ad3db61a909f6e21e8321069fe5 100644
---- a/dist/runtime/internal/database.server.js
-+++ b/dist/runtime/internal/database.server.js
-@@ -56,6 +56,8 @@ async function _checkAndImportDatabaseIntegrity(event, collection, integrityVers
+diff --git a/dist/runtime/internal/bunsqlite.d.ts b/dist/runtime/internal/bunsqlite.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..9c962d9f13eb43c4d4a2524cc23c8c8f02250ec5
+--- /dev/null
++++ b/dist/runtime/internal/bunsqlite.d.ts
+@@ -0,0 +1,7 @@
++export declare const getBunSqliteDatabaseAdapter: (opts: {
++    filename: string;
++}) => {
++    all<T>(sql: string, params?: Array<number | string | boolean>): Promise<T[]>;
++    first<T>(sql: string, params?: Array<number | string | boolean>): Promise<T | null>;
++    exec(sql: string): Promise<unknown>;
++};
+diff --git a/dist/runtime/internal/bunsqlite.js b/dist/runtime/internal/bunsqlite.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..43f64969aed1a49c1186013b1170efa8d7e50858
+--- /dev/null
++++ b/dist/runtime/internal/bunsqlite.js
+@@ -0,0 +1,49 @@
++import * as zlib from "node:zlib";
++import { isAbsolute } from "pathe";
++if (!globalThis.CompressionStream) {
++  const make = (ctx, handle) => Object.assign(ctx, {
++    writable: new WritableStream({
++      write: (chunk) => handle.write(chunk),
++      close: () => handle.end()
++    }),
++    readable: new ReadableStream({
++      type: "bytes",
++      start(ctrl) {
++        handle.on("data", (chunk) => ctrl.enqueue(chunk));
++        handle.once("end", () => ctrl.close());
++      }
++    })
++  });
++  globalThis.CompressionStream = class CompressionStream {
++    constructor(format) {
++      make(this, format === "deflate" ? zlib.createDeflate() : format === "gzip" ? zlib.createGzip() : zlib.createDeflateRaw());
++    }
++  };
++  globalThis.DecompressionStream = class DecompressionStream {
++    constructor(format) {
++      make(this, format === "deflate" ? zlib.createInflate() : format === "gzip" ? zlib.createGunzip() : zlib.createInflateRaw());
++    }
++  };
++}
++function getBunDatabaseSync() {
++  return require("bun:sqlite").Database;
++}
++let db;
++export const getBunSqliteDatabaseAdapter = (opts) => {
++  const Database = getBunDatabaseSync();
++  if (!db) {
++    const filename = !opts || isAbsolute(opts?.filename || "") || opts?.filename === ":memory:" ? opts?.filename : new URL(opts.filename, globalThis._importMeta_.url).pathname;
++    db = new Database(process.platform === "win32" && filename.startsWith("/") ? filename.slice(1) : filename, { create: true });
++  }
++  return {
++    async all(sql, params) {
++      return params ? db.prepare(sql).all(...params) : db.prepare(sql).all();
++    },
++    async first(sql, params) {
++      return params ? db.prepare(sql).get(...params) : db.prepare(sql).get();
++    },
++    async exec(sql) {
++      return db.prepare(sql).run();
++    }
++  };
++};
+diff --git a/dist/runtime/internal/collection.d.ts b/dist/runtime/internal/collection.d.ts
+index 5d3630f3874340ce4eb21eb33d69ba6325ae4af2..e94c4c46d377f7fd33a2763149fc2ba13c7d7b19 100644
+--- a/dist/runtime/internal/collection.d.ts
++++ b/dist/runtime/internal/collection.d.ts
+@@ -1 +1 @@
+-export declare function parseJsonFields<T>(sql: string, doc: T): T;
++export declare function refineContentFields<T>(sql: string, doc: T): T;
+diff --git a/dist/runtime/internal/collection.js b/dist/runtime/internal/collection.js
+index 8bbb318000bb4dbae32f106c5ed89071070a2cee..7ca81207d2bbd22fd9793d3e9e46a01e0a4bbe1c 100644
+--- a/dist/runtime/internal/collection.js
++++ b/dist/runtime/internal/collection.js
+@@ -1,11 +1,14 @@
+ import contentManifest from "#content/manifest";
+-export function parseJsonFields(sql, doc) {
+-  const jsonFields = findJsonFields(sql);
++export function refineContentFields(sql, doc) {
++  const fields = findCollectionFields(sql);
+   const item = { ...doc };
+-  for (const key of jsonFields) {
+-    if (item[key] && item[key] !== "undefined") {
++  for (const key in item) {
++    if (fields[key] === "json" && item[key] && item[key] !== "undefined") {
+       item[key] = JSON.parse(item[key]);
      }
-     await db.exec(`DELETE FROM ${tables.info} WHERE id = 'checksum_${collection}'`);
++    if (fields[key] === "boolean" && item[key] !== "undefined") {
++      item[key] = Boolean(item[key]);
++    }
    }
-+  console.log("collection", collection);
-+  
-   const dump = await loadDatabaseDump(event, collection).then(decompressSQLDump);
-   await dump.reduce(async (prev, sql) => {
-     await prev;
-diff --git a/dist/runtime/internal/dump.js b/dist/runtime/internal/dump.js
-index 1eea93c9f73fa5c167ac2b669760b0f4b03febe2..357263cc6e26fec58dfd212ab4f79945ff2226fa 100644
---- a/dist/runtime/internal/dump.js
-+++ b/dist/runtime/internal/dump.js
-@@ -1,4 +1,5 @@
- export async function decompressSQLDump(base64Str, compressionType = "gzip") {
-+  console.log("base64Str", String(base64Str).substring(0, 100))
-   const binaryData = Uint8Array.from(atob(base64Str), (c) => c.charCodeAt(0));
-   const response = new Response(new Blob([binaryData]));
-   const decompressedStream = response.body?.pipeThrough(new DecompressionStream(compressionType));
+   for (const key in item) {
+     if (item[key] === "NULL") {
+@@ -14,13 +17,13 @@ export function parseJsonFields(sql, doc) {
+   }
+   return item;
+ }
+-function findJsonFields(sql) {
++function findCollectionFields(sql) {
+   const table = sql.match(/FROM\s+(\w+)/);
+   if (!table) {
+-    return [];
++    return {};
+   }
+   const info = contentManifest[getCollectionName(table[1])];
+-  return info?.jsonFields || [];
++  return info?.fields || {};
+ }
+ function getCollectionName(table) {
+   return table.replace(/^_content_/, "");
+diff --git a/dist/runtime/internal/database-adapter.js b/dist/runtime/internal/database-adapter.js
+index 1913883bd413f2cdb1b7b6f83a19923b0e4d61ec..cd58651dbd7627e8410fc443d4de5520b1968121 100644
+--- a/dist/runtime/internal/database-adapter.js
++++ b/dist/runtime/internal/database-adapter.js
+@@ -1,4 +1,4 @@
+-import { parseJsonFields } from "./collection.js";
++import { refineContentFields } from "./collection.js";
+ export function createDatabaseAdapter(factory) {
+   return (opts) => {
+     const adapter = factory(opts);
+@@ -8,14 +8,14 @@ export function createDatabaseAdapter(factory) {
+         if (!result) {
+           return [];
+         }
+-        return result.map((item) => parseJsonFields(sql, item));
++        return result.map((item) => refineContentFields(sql, item));
+       },
+       first: async (sql, params) => {
+         const item = await adapter.first(sql, params);
+         if (!item) {
+           return item;
+         }
+-        return parseJsonFields(sql, item);
++        return refineContentFields(sql, item);
+       },
+       exec: async (sql) => {
+         return adapter.exec(sql);
+diff --git a/dist/runtime/internal/database.client.js b/dist/runtime/internal/database.client.js
+index c12a793fa4ed6e56eb8f7683cfe1d12c90f10c7a..0143ae9dd352c6fc6192d1a422c03535622b0e38 100644
+--- a/dist/runtime/internal/database.client.js
++++ b/dist/runtime/internal/database.client.js
+@@ -1,6 +1,5 @@
+-import { measurePerformance } from "./performance.js";
+ import { decompressSQLDump } from "./dump.js";
+-import { parseJsonFields } from "./collection.js";
++import { refineContentFields } from "./collection.js";
+ import { fetchDatabase } from "./api.js";
+ import { checksums, tables } from "#content/manifest";
+ let db;
+@@ -8,11 +7,11 @@ export function loadDatabaseAdapter(collection) {
+   return {
+     all: async (sql, params) => {
+       await loadAdapter(collection);
+-      return db.exec({ sql, bind: params, rowMode: "object", returnValue: "resultRows" }).map((row) => parseJsonFields(sql, row));
++      return db.exec({ sql, bind: params, rowMode: "object", returnValue: "resultRows" }).map((row) => refineContentFields(sql, row));
+     },
+     first: async (sql, params) => {
+       await loadAdapter(collection);
+-      return parseJsonFields(
++      return refineContentFields(
+         sql,
+         db.exec({ sql, bind: params, rowMode: "object", returnValue: "resultRows" }).shift()
+       );
+@@ -24,11 +23,9 @@ export function loadDatabaseAdapter(collection) {
+   };
+ }
+ async function loadAdapter(collection) {
+-  const perf = measurePerformance();
+   if (!db) {
+     const sqlite3InitModule = await import("@sqlite.org/sqlite-wasm").then((m) => m.default);
+     const sqlite3 = await sqlite3InitModule();
+-    perf.tick("Import SQLite Module");
+     db = new sqlite3.oo1.DB();
+   }
+   if (window.sessionStorage.getItem("previewToken")) {
+@@ -53,10 +50,8 @@ async function loadAdapter(collection) {
+         compressedDump = window.localStorage.getItem(`content_${dumpId}`);
+       }
+     }
+-    perf.tick("Get Local Cache");
+     if (!compressedDump) {
+       compressedDump = await fetchDatabase(void 0, String(collection));
+-      perf.tick("Download Database");
+       if (!import.meta.dev) {
+         try {
+           window.localStorage.setItem(`content_${checksumId}`, checksums[String(collection)]);
+@@ -64,11 +59,9 @@ async function loadAdapter(collection) {
+         } catch (error) {
+           console.error("Database integrity check failed, rebuilding database", error);
+         }
+-        perf.tick("Store Database");
+       }
+     }
+     const dump = await decompressSQLDump(compressedDump);
+-    perf.tick("Decompress Database");
+     await db.exec({ sql: `DROP TABLE IF EXISTS ${tables[String(collection)]}` });
+     if (checksumState === "mismatch") {
+       await db.exec({ sql: `DELETE FROM ${tables.info} WHERE id = '${checksumId}'` });
+@@ -80,8 +73,6 @@ async function loadAdapter(collection) {
+         console.error("Error executing command", error);
+       }
+     }
+-    perf.tick("Restore Dump");
+   }
+-  perf.end("Database Loaded");
+   return db;
+ }
+diff --git a/dist/runtime/internal/performance.d.ts b/dist/runtime/internal/performance.d.ts
+deleted file mode 100644
+index d45fbfb6663ace806b601329fbda6bfe83551094..0000000000000000000000000000000000000000
+diff --git a/dist/runtime/internal/performance.js b/dist/runtime/internal/performance.js
+deleted file mode 100644
+index 0a009f8ea9a1e143163b76d8080de9ad6ab39d08..0000000000000000000000000000000000000000
+diff --git a/dist/runtime/internal/query.d.ts b/dist/runtime/internal/query.d.ts
+index 2d262407e723159291be7148b35a62ff6ea5e260..597edf60735cf8e12e83a0d8369f5dc76a13fe58 100644
+--- a/dist/runtime/internal/query.d.ts
++++ b/dist/runtime/internal/query.d.ts
+@@ -1,3 +1,3 @@
+ import type { Collections, CollectionQueryBuilder, CollectionQueryGroup } from '@nuxt/content';
+-export declare const collectionQureyGroup: <T extends keyof Collections>(collection: T) => CollectionQueryGroup<Collections[T]>;
+-export declare const collectionQureyBuilder: <T extends keyof Collections>(collection: T, fetch: (collection: T, sql: string) => Promise<Collections[T][]>) => CollectionQueryBuilder<Collections[T]>;
++export declare const collectionQueryGroup: <T extends keyof Collections>(collection: T) => CollectionQueryGroup<Collections[T]>;
++export declare const collectionQueryBuilder: <T extends keyof Collections>(collection: T, fetch: (collection: T, sql: string) => Promise<Collections[T][]>) => CollectionQueryBuilder<Collections[T]>;
+diff --git a/dist/runtime/internal/query.js b/dist/runtime/internal/query.js
+index 1b40ee535d85479d693ce80b856583fb2d87a3ca..48b7807a674daebae17028fe3ea1feadf5b97e05 100644
+--- a/dist/runtime/internal/query.js
++++ b/dist/runtime/internal/query.js
+@@ -4,7 +4,7 @@ const buildGroup = (group, type) => {
+   const conditions = group._conditions;
+   return conditions.length > 0 ? `(${conditions.join(` ${type} `)})` : "";
+ };
+-export const collectionQureyGroup = (collection) => {
++export const collectionQueryGroup = (collection) => {
+   const conditions = [];
+   const query = {
+     // @ts-expect-error -- internal
+@@ -44,19 +44,19 @@ export const collectionQureyGroup = (collection) => {
+       return query;
+     },
+     andWhere(groupFactory) {
+-      const group = groupFactory(collectionQureyGroup(collection));
++      const group = groupFactory(collectionQueryGroup(collection));
+       conditions.push(buildGroup(group, "AND"));
+       return query;
+     },
+     orWhere(groupFactory) {
+-      const group = groupFactory(collectionQureyGroup(collection));
++      const group = groupFactory(collectionQueryGroup(collection));
+       conditions.push(buildGroup(group, "OR"));
+       return query;
+     }
+   };
+   return query;
+ };
+-export const collectionQureyBuilder = (collection, fetch) => {
++export const collectionQueryBuilder = (collection, fetch) => {
+   const params = {
+     conditions: [],
+     selectedFields: [],
+@@ -71,12 +71,12 @@ export const collectionQureyBuilder = (collection, fetch) => {
+   };
+   const query = {
+     andWhere(groupFactory) {
+-      const group = groupFactory(collectionQureyGroup(collection));
++      const group = groupFactory(collectionQueryGroup(collection));
+       params.conditions.push(buildGroup(group, "AND"));
+       return query;
+     },
+     orWhere(groupFactory) {
+-      const group = groupFactory(collectionQureyGroup(collection));
++      const group = groupFactory(collectionQueryGroup(collection));
+       params.conditions.push(buildGroup(group, "OR"));
+       return query;
+     },
+diff --git a/dist/runtime/internal/sqlite.d.ts b/dist/runtime/internal/sqlite.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..82c4b5996972480ccfc675797fb0a2cfe223c0f2
+--- /dev/null
++++ b/dist/runtime/internal/sqlite.d.ts
+@@ -0,0 +1,7 @@
++export declare const getBetter3DatabaseAdapter: (opts: {
++    filename: string;
++}) => {
++    all<T>(sql: string, params?: Array<number | string | boolean>): Promise<T[]>;
++    first<T>(sql: string, params?: Array<number | string | boolean>): Promise<T>;
++    exec(sql: string): Promise<void>;
++};
+diff --git a/dist/runtime/internal/sqlite.js b/dist/runtime/internal/sqlite.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..e3afcedaf1586c3ea8080fa3365297a57ea58bf3
+--- /dev/null
++++ b/dist/runtime/internal/sqlite.js
+@@ -0,0 +1,20 @@
++import { isAbsolute } from "pathe";
++import Database from "better-sqlite3";
++let db;
++export const getBetter3DatabaseAdapter = (opts) => {
++  if (!db) {
++    const filename = !opts || isAbsolute(opts?.filename || "") ? opts?.filename : new URL(opts.filename, globalThis._importMeta_.url).pathname;
++    db = new Database(process.platform === "win32" && filename.startsWith("/") ? filename.slice(1) : filename);
++  }
++  return {
++    async all(sql, params) {
++      return params ? db.prepare(sql).all(params) : db.prepare(sql).all();
++    },
++    async first(sql, params) {
++      return params ? db.prepare(sql).get(params) : db.prepare(sql).get();
++    },
++    async exec(sql) {
++      await db.exec(sql);
++    }
++  };
++};
+diff --git a/dist/runtime/internal/studio/collection.js b/dist/runtime/internal/studio/collection.js
+index 7deb7e46a43886ec5cf2267931293d84ab1c89bc..8087cc2bd31fa99251c54d9ae47fd3ff21d333fb 100644
+--- a/dist/runtime/internal/studio/collection.js
++++ b/dist/runtime/internal/studio/collection.js
+@@ -59,10 +59,10 @@ export function generateRecordUpdate(collection, stem, data) {
+   return `${deleteQuery}; ${insertQuery}`;
+ }
+ export function generateRecordDeletion(collection, stem) {
+-  return `DELETE FROM ${collection.tableName} WHERE stem = '${stem}'`;
++  return `DELETE FROM ${collection.tableName} WHERE stem = '${stem}';`;
+ }
+ export function generateRecordSelectByColumn(collection, column, value) {
+-  return `SELECT * FROM ${collection.tableName} WHERE ${column} = '${value}'`;
++  return `SELECT * FROM ${collection.tableName} WHERE ${column} = '${value}';`;
+ }
+ function computeValuesBasedOnCollectionSchema(collection, data) {
+   const fields = [];
+@@ -75,7 +75,7 @@ function computeValuesBasedOnCollectionSchema(collection, data) {
+     const defaultValue = value.default ? value.default : "NULL";
+     const valueToInsert = typeof data[key] !== "undefined" ? data[key] : defaultValue;
+     fields.push(key);
+-    if ((collection.jsonFields || []).includes(key)) {
++    if (collection.fields[key] === "json") {
+       values.push(`'${JSON.stringify(valueToInsert).replace(/'/g, "''")}'`);
+     } else if (["string", "enum"].includes(underlyingType)) {
+       values.push(`'${String(valueToInsert).replace(/\n/g, "\\n").replace(/'/g, "''")}'`);
+diff --git a/dist/runtime/nitro.js b/dist/runtime/nitro.js
+index 1212dcdac64abc14c7846626d0ae44f3058a4539..8e3b4019f6c8b65c910c700ad9ef28db3adf3ceb 100644
+--- a/dist/runtime/nitro.js
++++ b/dist/runtime/nitro.js
+@@ -1,10 +1,10 @@
+-import { collectionQureyBuilder } from "./internal/query.js";
++import { collectionQueryBuilder } from "./internal/query.js";
+ import { generateNavigationTree } from "./internal/navigation.js";
+ import { generateItemSurround } from "./internal/surround.js";
+ import { generateSearchSections } from "./internal/search.js";
+ import { fetchQuery } from "./internal/api.js";
+ export const queryCollectionWithEvent = (event, collection) => {
+-  return collectionQureyBuilder(collection, (collection2, sql) => fetchQuery(event, collection2, sql));
++  return collectionQueryBuilder(collection, (collection2, sql) => fetchQuery(event, collection2, sql));
+ };
+ export async function queryCollectionNavigationWithEvent(event, collection, fields) {
+   return chainablePromise(event, collection, (qb) => generateNavigationTree(qb, fields));
+diff --git a/dist/runtime/presets/node/database-handler.js b/dist/runtime/presets/node/database-handler.js
+index 811ff2a9bf8b9e0faf9d005dfdf238a047592f11..36232f7eb1c61e7a473f20533ef9fb4f725f91b7 100644
+--- a/dist/runtime/presets/node/database-handler.js
++++ b/dist/runtime/presets/node/database-handler.js
+@@ -1,5 +1,14 @@
+ import { eventHandler, getRouterParam } from "h3";
++import { useStorage } from "nitropack/runtime";
+ export default eventHandler(async (event) => {
+   const collection = getRouterParam(event, "collection");
++  const data = await useStorage().getItem(`build:content:database.compressed.mjs`) || "";
++  if (data) {
++    const lineStart = `export const ${collection} = "`;
++    const content = String(data).split("\n").find((line) => line.startsWith(lineStart));
++    if (content) {
++      return content.substring(lineStart.length, content.length - 1);
++    }
++  }
+   return await import("#content/dump").then((m) => m[collection]);
+ });
+diff --git a/dist/types.d.mts b/dist/types.d.mts
+index cf09bd5c045ff8032e43799d3c58d0e0c972b958..2bd2afc5eabf1db778dfafebacfceb22e1367d22 100644
+--- a/dist/types.d.mts
++++ b/dist/types.d.mts
+@@ -1 +1,7 @@
++import type { ModuleHooks } from './module.js'
++
++declare module '@nuxt/schema' {
++  interface NuxtHooks extends ModuleHooks {}
++}
++
+ export { type Toc, type TocLink } from './module.js'
+diff --git a/dist/types.d.ts b/dist/types.d.ts
+index b29e111c5afad9d986591b5616adef86cc935fd7..5ec90e54a9e621a28f47b1e6b0fe7fa3d2197c7e 100644
+--- a/dist/types.d.ts
++++ b/dist/types.d.ts
+@@ -1 +1,7 @@
++import type { ModuleHooks } from './module'
++
++declare module '@nuxt/schema' {
++  interface NuxtHooks extends ModuleHooks {}
++}
++
+ export { type Toc, type TocLink } from './module'
