@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Μείωση'
     },
     commandPalette: {
+      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
       noData: 'Δεν υπάρχουν δεδομένα',
       close: 'Κλείσιμο'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Δεν βρέθηκαν δεδομένα',
       noData: 'Δεν υπάρχουν δεδομένα',
-      create: 'Δημιουργία "{label}"'
+      create: 'Δημιουργία "{label}"',
+      search: 'Αναζήτηση...'
     },
     toast: {
       close: 'Κλείσιμο'
