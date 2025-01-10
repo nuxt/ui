@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Зменшити'
     },
     commandPalette: {
+      placeholder: 'Введіть команду або шукайте...',
       noMatch: 'Збігів не знайдено',
       noData: 'Немає даних',
       close: 'Закрити'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Збігів не знайдено',
       noData: 'Немає даних',
-      create: 'Створити "{label}"'
+      create: 'Створити "{label}"',
+      search: 'Пошук...'
     },
     toast: {
       close: 'Закрити'
