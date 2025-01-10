@@ -400,6 +400,19 @@ class: '!p-0'
 ---
 ::
 
+### With pagination
+
+You can use a [Pagination](/components/pagination) component to paginate the rows using the TanStack Table [Pagination APIs](https://tanstack.com/table/latest/docs/api/features/pagination). You can also set the default page size by passing [initialState](https://tanstack.com/table/latest/docs/api/core/table#initialstate) to the `initial-state` prop.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-pagination-example'
+class: '!p-0'
+---
+::
+
 ### With slots
 
 You can use slots to customize the header and data cells of the table.
