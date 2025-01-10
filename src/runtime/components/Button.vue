@@ -96,7 +96,8 @@ const ui = computed(() => button({
 </script>
 
 <template>
-  <ULink
+  <component
+    :is="!!to ? ULink : 'button'"
     :type="type"
     :disabled="disabled || isLoading"
     :class="ui.base({ class: [props.class, props.ui?.base] })"
@@ -118,5 +119,5 @@ const ui = computed(() => button({
     <slot name="trailing">
       <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
     </slot>
-  </ULink>
+  </component>
 </template>
