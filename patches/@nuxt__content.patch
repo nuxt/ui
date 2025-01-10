@@ -1,3 +1,15 @@
+diff --git a/dist/runtime/app.js b/dist/runtime/app.js
+index 0357150244d7af7d8a64f75ec126416c6743b11a..230a668165f3c49cd9f986de3265b0a4f232ce2b 100644
+--- a/dist/runtime/app.js
++++ b/dist/runtime/app.js
+@@ -18,6 +18,7 @@ export async function queryCollectionSearchSections(collection, opts) {
+   return generateSearchSections(queryCollection(collection), opts);
+ }
+ async function executeContentQuery(collection, sql) {
++  console.log("dsdsd", tryUseNuxtApp()?.ssrContext?.event)
+   if (import.meta.client) {
+     return queryContentSqlClientWasm(collection, sql);
+   } else {
 diff --git a/dist/runtime/internal/api.js b/dist/runtime/internal/api.js
 index 1f7dd8f6d45bda1903aa89d89f54d03d6ba8ca3d..fdc1d29abd1c534304a3ec627f71428f64ba18ab 100644
 --- a/dist/runtime/internal/api.js
