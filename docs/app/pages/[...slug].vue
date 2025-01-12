@@ -86,6 +86,14 @@ const communityLinks = computed(() => [{
   label: 'Star on GitHub',
   to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}`,
   target: '_blank'
+}, {
+  icon: 'i-heroicons-lifebuoy',
+  label: 'Contributing',
+  to: '/getting-started/contributing'
+}, {
+  label: 'Roadmap',
+  icon: 'i-heroicons-map',
+  to: '/roadmap'
 }])
 
 // const resourcesLinks = [{
