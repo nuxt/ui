@@ -114,7 +114,7 @@
     "tinyglobby": "^0.2.10",
     "unplugin": "^2.1.2",
     "unplugin-auto-import": "^19.0.0",
-    "unplugin-vue-components": "^0.28.0",
+    "unplugin-vue-components": "^28.0.0",
     "vaul-vue": "^0.2.0"
   },
   "devDependencies": {
