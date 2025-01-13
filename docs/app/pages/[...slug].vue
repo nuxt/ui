@@ -16,8 +16,7 @@ if (!page.value) {
 }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  const event = tryUseNuxtApp()?.ssrContext?.event
-  console.log('surround', !!event, event ? event?.context?.cloudflare : false)
+  console.log('surround', framework.value, module.value)
   return queryCollectionItemSurroundings('content', route.path, {
     fields: ['description']
   }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
