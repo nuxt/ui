@@ -153,13 +153,50 @@ In this project, you'll find a variety of folders and files that serve different
 
 The documentation can be found in the `docs` folder. It's a Nuxt app that utilizes the `@nuxt/content` module in its v3 version, check the [Nuxt Content v3 Docs](https://content3.nuxt.dev/docs/getting-started) for more information on how it generates the documentation pages from Markdown files. Here's a breakdown of its structure:
 
-TODO
+```
+├── app
+│   ├── assets
+│   ├── components
+│   │   └─── content
+│   │        └─── examples     # Components used in documentation as examples
+│   ├── composables
+│   └── ... etc/
+├── content
+│   ├── 1.getting-started
+│   ├── 2.composables
+│   └── 3.components    # Components documentation
+```
 
 - **Components - `src`** :
 
 The components are located in the `src` folder. It's separated into categories according to component types. Here's a breakdown of its structure:
 
-TODO
+```
+├── defaults.ts
+├── devtools
+│   ├── meta.ts
+│   └── runtime
+│       ├── DevtoolsRenderer.vue
+│       └── examples
+├── module.ts
+├── plugins
+├── runtime
+│   ├── components          # Where all the components are located
+│   │   ├── Accordion.vue
+│   │   ├── Alert.vue
+│   ├── composables
+│   ├── locale
+│   ├── plugins
+│   ├── types
+│   ├── utils
+│   └── vue
+│       ├── components
+│       └── plugins
+└── theme                  # This where the theme for each component is located
+    ├── accordion.ts       # Theme for Accordion component
+    ├── alert.ts
+    └── ... etc/
+```
 
 ## Thanks
 
