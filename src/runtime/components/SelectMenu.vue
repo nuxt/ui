@@ -262,11 +262,11 @@ function onUpdateOpen(value: boolean) {
 
     // Since anatomy is diffrent from reka UI where <ComboboxInput /> is render inside <ComboboxAnchor /> we need to manually reset `searchTerm`
     if (props.resetSearchTermOnBlur) {
-      const STATE_ANIMATION_MS = 100
+      const STATE_ANIMATION_DELAY_MS = 100
 
       timeoutId = setTimeout(() => {
         searchTerm.value = ''
-      }, STATE_ANIMATION_MS)
+      }, STATE_ANIMATION_DELAY_MS)
     }
   } else {
     const event = new FocusEvent('focus')
