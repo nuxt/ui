@@ -2970,10 +2970,10 @@ index 8fe593fe7145bf7f21c6bac6ec8ba6d5dbc128d7..f1eb469bb8797bac6af789944689a8f1
  import { useRuntimeConfig } from "#imports";
  export default eventHandler(async (event) => {
 diff --git a/dist/runtime/app.js b/dist/runtime/app.js
-index 0357150244d7af7d8a64f75ec126416c6743b11a..499946f50b1d00af5827e7eba154f39a47e6409f 100644
+index 0357150244d7af7d8a64f75ec126416c6743b11a..2de70f24378599ed3ac41f70f6565eade20a019b 100644
 --- a/dist/runtime/app.js
 +++ b/dist/runtime/app.js
-@@ -1,12 +1,13 @@
+@@ -1,12 +1,12 @@
 -import { collectionQureyBuilder } from "./internal/query.js";
 -import { measurePerformance } from "./internal/performance.js";
 +import { collectionQueryBuilder } from "./internal/query.js";
@@ -2985,17 +2985,12 @@ index 0357150244d7af7d8a64f75ec126416c6743b11a..499946f50b1d00af5827e7eba154f39a
  export const queryCollection = (collection) => {
 -  return collectionQureyBuilder(collection, (collection2, sql) => executeContentQuery(collection2, sql));
 +  const event = tryUseNuxtApp()?.ssrContext?.event;
-+  console.log("event", !!event, event ? event?.context?.cloudflare : false);
 +  return collectionQueryBuilder(collection, (collection2, sql) => executeContentQuery(event, collection2, sql));
  };
  export function queryCollectionNavigation(collection, fields) {
    return chainablePromise(collection, (qb) => generateNavigationTree(qb, fields));
-@@ -15,20 +16,19 @@ export function queryCollectionItemSurroundings(collection, path, opts) {
-   return chainablePromise(collection, (qb) => generateItemSurround(qb, path, opts));
- }
+@@ -17,18 +17,15 @@ export function queryCollectionItemSurroundings(collection, path, opts) {
  export async function queryCollectionSearchSections(collection, opts) {
-+  const event = tryUseNuxtApp()?.ssrContext?.event;
-+  console.log("queryCollectionSearchSections", !!event, event ? event?.context?.cloudflare : false);
    return generateSearchSections(queryCollection(collection), opts);
  }
 -async function executeContentQuery(collection, sql) {
