@@ -98,6 +98,22 @@ We use TypeScript for type checking. You can use the `typecheck` command to chec
 pnpm run typecheck
 ```
 
+#### Testing
+
+Before submitting a PR, ensure that you run the tests for both `nuxt` and `vue`:
+
+For `nuxt`:
+```sh
+pnpm run test
+```
+
+For `vue`:
+```sh
+pnpm run test:vue
+```
+
+If you have to update the snapshots, press `u` when running the tests.
+
 ### 3. Commit Conventions
 
 We use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages, which allows a changelog to be auto-generated based on the commits. Please read the [guide](https://www.conventionalcommits.org/en/v1.0.0/#summary) through if you aren't familiar with it already.

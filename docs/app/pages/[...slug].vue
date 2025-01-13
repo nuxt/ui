@@ -88,8 +88,8 @@ const communityLinks = computed(() => [{
   target: '_blank'
 }, {
   icon: 'i-heroicons-lifebuoy',
-  label: 'Contributing',
-  to: '/getting-started/contributing'
+  label: 'Contribution',
+  to: '/getting-started/contribution'
 }, {
   label: 'Roadmap',
   icon: 'i-heroicons-map',
