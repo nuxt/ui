@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { tryUseNuxtApp } from '#imports'
 import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
@@ -15,6 +16,8 @@ if (!page.value) {
 }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
+  const event = tryUseNuxtApp()?.ssrContext?.event
+  console.log('surround', !!event, event ? event?.context?.cloudflare : false)
   return queryCollectionItemSurroundings('content', route.path, {
     fields: ['description']
   }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
