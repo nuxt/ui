@@ -15,6 +15,16 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+// Update the framework/module if the page has different ones
+watch(page, () => {
+  if (page.value?.framework && page.value?.framework !== framework.value) {
+    framework.value = page.value?.framework as string
+  }
+  if (page.value?.module && page.value?.module !== module.value) {
+    module.value = page.value?.module as string
+  }
+}, { immediate: true })
+
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
   console.log('surround', route.path, framework.value, module.value)
   return queryCollectionItemSurroundings('content', route.path, {
@@ -54,16 +64,6 @@ if (!import.meta.prerender) {
     }
   })
 }
-
-// Update the framework/module if the page has different ones
-watch(page, () => {
-  if (page.value?.framework && page.value?.framework !== framework.value) {
-    framework.value = page.value?.framework as string
-  }
-  if (page.value?.module && page.value?.module !== module.value) {
-    module.value = page.value?.module as string
-  }
-}, { immediate: true })
 
 const type = page.value?.path.includes('components') ? 'Vue Component ' : page.value?.path.includes('composables') ? 'Vue Composable ' : ''
 useSeoMeta({
