@@ -1,5 +1,5 @@
 diff --git a/dist/module.cjs b/dist/module.cjs
-index e805fe41f7767f210157ac3f2e80c2e6eeca243f..7bd7b43ddd49ceddbd445393fc31e768ea0f872a 100644
+index e805fe41f7767f210157ac3f2e80c2e6eeca243f..cc40c8d7e04c240c5ebb2d0d74add53a96214ed5 100644
 --- a/dist/module.cjs
 +++ b/dist/module.cjs
 @@ -6,24 +6,26 @@ const promises = require('node:fs/promises');
@@ -736,7 +736,7 @@ index e805fe41f7767f210157ac3f2e80c2e6eeca243f..7bd7b43ddd49ceddbd445393fc31e768
 +    index = 0;
 +    return [
 +      `INSERT INTO ${collection.tableName} VALUES (${"?, ".repeat(values.length).slice(0, -2)});`.replace(/\?/g, () => values[index++]),
-+      `UPDATE ${collection.tableName} SET ${bigColumnName} = ${part2} WHERE id = ${values[0]};`
++      `UPDATE ${collection.tableName} SET ${bigColumnName} = CONCAT(${bigColumnName}, ${part2}) WHERE id = ${values[0]};`
 +    ];
 +  }
 +  return [
@@ -2970,10 +2970,10 @@ index 8fe593fe7145bf7f21c6bac6ec8ba6d5dbc128d7..f1eb469bb8797bac6af789944689a8f1
  import { useRuntimeConfig } from "#imports";
  export default eventHandler(async (event) => {
 diff --git a/dist/runtime/app.js b/dist/runtime/app.js
-index 0357150244d7af7d8a64f75ec126416c6743b11a..366e937ce72a470b130774a2f3540eb3577206b1 100644
+index 0357150244d7af7d8a64f75ec126416c6743b11a..499946f50b1d00af5827e7eba154f39a47e6409f 100644
 --- a/dist/runtime/app.js
 +++ b/dist/runtime/app.js
-@@ -1,34 +1,34 @@
+@@ -1,12 +1,13 @@
 -import { collectionQureyBuilder } from "./internal/query.js";
 -import { measurePerformance } from "./internal/performance.js";
 +import { collectionQueryBuilder } from "./internal/query.js";
@@ -2985,22 +2985,21 @@ index 0357150244d7af7d8a64f75ec126416c6743b11a..366e937ce72a470b130774a2f3540eb3
  export const queryCollection = (collection) => {
 -  return collectionQureyBuilder(collection, (collection2, sql) => executeContentQuery(collection2, sql));
 +  const event = tryUseNuxtApp()?.ssrContext?.event;
++  console.log("event", !!event, event ? event?.context?.cloudflare : false);
 +  return collectionQueryBuilder(collection, (collection2, sql) => executeContentQuery(event, collection2, sql));
  };
  export function queryCollectionNavigation(collection, fields) {
    return chainablePromise(collection, (qb) => generateNavigationTree(qb, fields));
- }
- export function queryCollectionItemSurroundings(collection, path, opts) {
-+  const event = tryUseNuxtApp()?.ssrContext?.event;
-+  console.log("queryCollectionItemSurroundings event", !!event, event ? event?.context?.cloudflare : false);
+@@ -15,20 +16,19 @@ export function queryCollectionItemSurroundings(collection, path, opts) {
    return chainablePromise(collection, (qb) => generateItemSurround(qb, path, opts));
  }
  export async function queryCollectionSearchSections(collection, opts) {
++  const event = tryUseNuxtApp()?.ssrContext?.event;
++  console.log("queryCollectionSearchSections", !!event, event ? event?.context?.cloudflare : false);
    return generateSearchSections(queryCollection(collection), opts);
  }
 -async function executeContentQuery(collection, sql) {
 +async function executeContentQuery(event, collection, sql) {
-+  console.log("event", !!event, event ? event?.context?.cloudflare : false);
    if (import.meta.client) {
      return queryContentSqlClientWasm(collection, sql);
    } else {
@@ -3228,6 +3227,60 @@ index c12a793fa4ed6e56eb8f7683cfe1d12c90f10c7a..0143ae9dd352c6fc6192d1a422c03535
 -  perf.end("Database Loaded");
    return db;
  }
+diff --git a/dist/runtime/internal/navigation.js b/dist/runtime/internal/navigation.js
+index 86d62345a6501a3113d5c0be789927d5c0fa643c..16adc0833b73e2a5d9bd8dacc9260d09e730556d 100644
+--- a/dist/runtime/internal/navigation.js
++++ b/dist/runtime/internal/navigation.js
+@@ -54,7 +54,18 @@ export async function generateNavigationTree(queryBuilder, extraFields = []) {
+       }
+     }
+     if (parts.length === 1) {
+-      nav2.push(navItem);
++      const existed2 = nav2.find((item) => item.path === navItem.path && item.page === false);
++      if (isIndex && existed2) {
++        Object.assign(existed2, {
++          page: void 0,
++          children: [
++            ...navItem.children,
++            ...existed2.children
++          ]
++        });
++      } else {
++        nav2.push(navItem);
++      }
+       return nav2;
+     }
+     const siblings = parts.slice(0, -1).reduce((nodes, part, i) => {
+@@ -70,7 +81,7 @@ export async function generateNavigationTree(queryBuilder, extraFields = []) {
+           ...navigationConfig,
+           title: navigationConfig.title || generateTitle(part),
+           path: currentPathPart,
+-          stem: idParts.join("/"),
++          stem: idParts.slice(0, i + 1).join("/"),
+           children: [],
+           page: false
+         };
+@@ -78,7 +89,19 @@ export async function generateNavigationTree(queryBuilder, extraFields = []) {
+       }
+       return parent.children;
+     }, nav2);
+-    siblings.push(navItem);
++    const existed = siblings.find((item) => item.path === navItem.path && item.page === false);
++    if (existed) {
++      Object.assign(existed, {
++        ...navItem,
++        page: void 0,
++        children: [
++          ...navItem.children,
++          ...existed.children
++        ]
++      });
++    } else {
++      siblings.push(navItem);
++    }
+     return nav2;
+   }, []);
+   return sortAndClear(nav);
 diff --git a/dist/runtime/internal/performance.d.ts b/dist/runtime/internal/performance.d.ts
 deleted file mode 100644
 index d45fbfb6663ace806b601329fbda6bfe83551094..0000000000000000000000000000000000000000
