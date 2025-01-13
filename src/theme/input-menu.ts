@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => {
       base: () => ['rounded-[calc(var(--ui-radius)*1.5)]', options.theme.transitions && 'transition-colors'],
       trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75',
       arrow: 'fill-[var(--ui-border)]',
-      content: 'max-h-60 w-[var(--reka-popper-anchor-width)] bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
+      content: 'max-h-60 w-[var(--reka-popper-anchor-width)] bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto',
       viewport: 'divide-y divide-[var(--ui-border)] scroll-py-1',
       group: 'p-1 isolate',
       empty: 'py-2 text-center text-sm text-[var(--ui-text-muted)]',
