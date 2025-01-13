@@ -11,7 +11,7 @@ export default (options: Required<ModuleOptions>) => {
       value: 'truncate pointer-events-none',
       placeholder: 'truncate text-[var(--ui-text-dimmed)]',
       arrow: 'fill-[var(--ui-border)]',
-      content: 'max-h-60 w-[var(--reka-popper-anchor-width)] bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
+      content: 'max-h-60 w-[var(--reka-popper-anchor-width)] bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto',
       viewport: 'divide-y divide-[var(--ui-border)] scroll-py-1',
       group: 'p-1 isolate',
       empty: 'py-2 text-center text-sm text-[var(--ui-text-muted)]',
