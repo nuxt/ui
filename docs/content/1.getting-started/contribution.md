@@ -1,5 +1,5 @@
 ---
-title: Contributing
+title: Contribution
 description: Learn how to contribute to Nuxt UI v3.
 navigation: false
 ---
