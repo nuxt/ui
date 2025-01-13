@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: '減らす'
     },
     commandPalette: {
+      placeholder: 'コマンドを入力するか検索...',
       noMatch: '一致するデータがありません',
       noData: 'データがありません',
       close: '閉じる'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: '一致するデータがありません',
       noData: 'データがありません',
-      create: '"{label}"を作成'
+      create: '"{label}"を作成',
+      search: '検索...'
     },
     toast: {
       close: '閉じる'

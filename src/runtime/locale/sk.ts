@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Znížiť'
     },
     commandPalette: {
+      placeholder: 'Zadajte príkaz alebo vyhľadajte...',
       noMatch: 'Žiadna zhoda',
       noData: 'Žiadne dáta',
       close: 'Zatvoriť'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Žiadna zhoda',
       noData: 'Žiadne dáta',
-      create: 'Vytvoriť "{label}"'
+      create: 'Vytvoriť "{label}"',
+      search: 'Hľadať...'
     },
     toast: {
       close: 'Zatvoriť'

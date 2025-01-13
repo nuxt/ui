@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: '减少'
     },
     commandPalette: {
+      placeholder: '输入命令或搜索...',
       noMatch: '没有匹配的数据',
       noData: '没有数据',
       close: '关闭'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: '没有匹配的数据',
       noData: '没有数据',
-      create: '创建 "{label}"'
+      create: '创建 "{label}"',
+      search: '搜索...'
     },
     toast: {
       close: '关闭'

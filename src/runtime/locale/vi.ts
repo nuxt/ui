@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Giảm'
     },
     commandPalette: {
+      placeholder: 'Nhập lệnh hoặc tìm kiếm...',
       noMatch: 'Không có kết quả phù hợp',
       noData: 'Không có dữ liệu',
       close: 'Đóng'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Không có kết quả phù hợp',
       noData: 'Không có dữ liệu',
-      create: 'Tạo "{label}"'
+      create: 'Tạo "{label}"',
+      search: 'Tìm kiếm...'
     },
     toast: {
       close: 'Đóng'

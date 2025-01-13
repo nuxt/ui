@@ -38,7 +38,7 @@ extendDevtoolsMeta({ example: 'FormExample' })
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
-import { parseSchema } from '../utils/form'
+import { validateSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
@@ -104,16 +104,17 @@ function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   }))
 }
 
-const parsedValue = ref<T | null>(null)
+const transformedState = ref<T | null>(null)
+
 async function getErrors(): Promise<FormErrorWithId[]> {
   let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
 
   if (props.schema) {
-    const { errors, result } = await parseSchema(props.state, props.schema as FormSchema<typeof props.state>)
+    const { errors, result } = await validateSchema(props.state, props.schema as FormSchema<typeof props.state>)
     if (errors) {
       errs = errs.concat(errors)
     } else {
-      parsedValue.value = result
+      transformedState.value = result
     }
   }
 
@@ -170,7 +171,7 @@ async function onSubmitWrapper(payload: Event) {
 
   try {
     await _validate({ nested: true })
-    event.data = props.schema ? parsedValue.value : props.state
+    event.data = props.schema ? transformedState.value : props.state
     await props.onSubmit?.(event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
@@ -180,7 +181,7 @@ async function onSubmitWrapper(payload: Event) {
     const errorEvent: FormErrorEvent = {
       ...event,
       errors: error.errors,
-      childrens: error.childrens
+      children: error.children
     }
     emits('error', errorEvent)
   }

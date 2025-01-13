@@ -12,12 +12,6 @@ const { module } = useSharedData()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const items = computed(() => props.links.map(({ icon, ...link }) => link))
-
-defineShortcuts({
-  meta_g: () => {
-    window.open('https://github.com/nuxt/ui/tree/v3', '_blank')
-  }
-})
 </script>
 
 <template>
@@ -62,7 +56,7 @@ defineShortcuts({
         <UButton
           color="neutral"
           variant="ghost"
-          to="https://github.com/nuxt/ui"
+          :to="`https://github.com/nuxt/${module}`"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
