@@ -11,6 +11,46 @@ const actions = (color: string) => [{
   }
 }]
 
+const multipleActions = (color: string) => [
+  {
+    label: 'Action',
+    color: color as any,
+    click() {
+      console.log('Action clicked')
+    }
+  },
+  {
+    label: 'Another action',
+    color: color as any,
+    click() {
+      console.log('Another action clicked')
+    }
+  },
+  {
+    label: 'One more action',
+    color: color as any,
+    click() {
+      console.log('One more action clicked')
+    }
+  },
+  {
+    label: 'And one more',
+    color: color as any,
+    icon: 'i-lucide-info',
+    click() {
+      console.log('And one more clicked')
+    }
+  },
+  {
+    label: 'Last one',
+    color: color as any,
+    icon: 'i-lucide-info',
+    click() {
+      console.log('Last one clicked')
+    }
+  }
+]
+
 const data = {
   title: 'Heads up!',
   description: 'You can change the primary color in your app config.',
@@ -28,6 +68,7 @@ const data = {
       <UAlert :title="data.title" :icon="data.icon" :close="data.close" :actions="actions('neutral')" />
       <UAlert :title="data.title" :icon="data.icon" :close="data.close" :description="data.description" />
       <UAlert :title="data.title" :avatar="{ src: 'https://github.com/benjamincanac.png' }" :close="data.close" :description="data.description" />
+      <UAlert :title="data.title" :icon="data.icon" description="example with multiple actions." :actions="multipleActions('neutral')" />
     </div>
 
     <div class="flex items-center gap-2">
