@@ -141,6 +141,28 @@ chore(Table): improve accessibility
 
 - Ensure linting and make tests manually before submitting the PR. Avoid making unrelated changes.
 
+::note
+The PR template will prompt you to update the documentation if you're introducing a new component or feature. If you do add a new component, please make sure to include the component's meta by adding:
+
+```mdc
+## API
+
+### Props
+
+:component-props
+
+### Slots
+
+:component-slots
+
+## Theme
+
+:component-theme
+```
+
+This will automatically display the component's API and theme in the documentation.
+::
+
 ### 5. After You've Made a Pull Request
 
 We'll review it promptly. If assigned to a maintainer, they'll review it carefully. Ignore the red text; it's for tracking purposes.
