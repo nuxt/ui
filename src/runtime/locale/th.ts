@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'ลด'
     },
     commandPalette: {
+      placeholder: 'พิมพ์คำสั่งหรือค้นหา...',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       noData: 'ไม่มีข้อมูล',
       close: 'ปิด'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       noData: 'ไม่มีข้อมูล',
-      create: 'สร้าง "{label}"'
+      create: 'สร้าง "{label}"',
+      search: 'ค้นหา...'
     },
     toast: {
       close: 'ปิด'
