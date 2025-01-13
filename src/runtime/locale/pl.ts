@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Zmniejsz'
     },
     commandPalette: {
+      placeholder: 'Wpisz polecenie lub wyszukaj...',
       noMatch: 'Brak pasujących danych',
       noData: 'Brak danych',
       close: 'Zamknij'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Brak pasujących danych',
       noData: 'Brak danych',
-      create: 'Utwórz "{label}"'
+      create: 'Utwórz "{label}"',
+      search: 'Szukaj...'
     },
     toast: {
       close: 'Zamknij'

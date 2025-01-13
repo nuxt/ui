@@ -79,12 +79,12 @@ defineOgImageComponent('Docs', {
 const communityLinks = computed(() => [{
   icon: 'i-lucide-file-pen',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/v3/docs/content/${page?.value?.stem}.md`,
+  to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}/edit/v3/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
   icon: 'i-lucide-star',
   label: 'Star on GitHub',
-  to: 'https://github.com/nuxt/ui',
+  to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}`,
   target: '_blank'
 }])
 

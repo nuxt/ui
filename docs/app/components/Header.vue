@@ -12,12 +12,6 @@ const { module } = useSharedData()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const items = computed(() => props.links.map(({ icon, ...link }) => link))
-
-defineShortcuts({
-  meta_g: () => {
-    window.open(`https://github.com/nuxt/${module}/tree/v3`, '_blank')
-  }
-})
 </script>
 
 <template>
