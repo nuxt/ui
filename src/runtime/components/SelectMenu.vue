@@ -260,8 +260,8 @@ function onUpdateOpen(value: boolean) {
     emits('blur', event)
     emitFormBlur()
 
-    // Since anatomy is diffrent from reka UI where <ComboboxInput /> is render inside <ComboboxAnchor /> we need to manually reset `searchTerm`
-    // https://reka-ui.com/docs/components/combobox#anatomy
+    // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
+    // https://reka-ui.com/docs/components/combobox#api-reference
     if (props.resetSearchTermOnBlur) {
       const STATE_ANIMATION_DELAY_MS = 100
 
