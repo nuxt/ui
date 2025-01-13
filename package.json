@@ -7,25 +7,28 @@
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
   },
-  "homepage": "https://ui.nuxt.com",
+  "homepage": "https://ui3.nuxt.dev",
   "type": "module",
   "license": "MIT",
   "exports": {
     ".": {
+      "types": "./dist/module.d.ts",
       "style": "./dist/runtime/index.css",
-      "types": "./dist/module.d.mts",
-      "import": "./dist/module.mjs"
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
     },
     "./unplugin": {
-      "types": "./dist/unplugin.d.mts",
-      "import": "./dist/unplugin.mjs"
+      "types": "./dist/unplugin.d.ts",
+      "import": "./dist/unplugin.mjs",
+      "require": "./dist/unplugin.cjs"
     },
     "./vite": {
-      "types": "./dist/vite.d.mts",
-      "import": "./dist/vite.mjs"
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.mjs",
+      "require": "./dist/vite.cjs"
     },
     "./vue-plugin": {
-      "types": "./vue-plugin.d.mts"
+      "types": "./vue-plugin.d.ts"
     },
     "./runtime/*": "./dist/runtime/*",
     "./locale": {
@@ -39,11 +42,14 @@
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
   },
+  "style": "./dist/runtime/index.css",
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
   "files": [
     ".nuxt/ui",
     "dist",
     "cli",
-    "vue-plugin.d.mts"
+    "vue-plugin.d.ts"
   ],
   "scripts": {
     "build": "nuxt-module-build build && pnpm devtools:build",
@@ -76,22 +82,22 @@
     "@nuxt/kit": "^3.15.1",
     "@nuxt/schema": "^3.15.1",
     "@nuxtjs/color-mode": "^3.5.2",
-    "@tailwindcss/postcss": "4.0.0-beta.8",
-    "@tailwindcss/vite": "4.0.0-beta.8",
+    "@tailwindcss/postcss": "4.0.0-beta.9",
+    "@tailwindcss/vite": "4.0.0-beta.9",
     "@tanstack/vue-table": "^8.20.5",
     "@types/color": "^4.2.0",
-    "@unhead/vue": "^1.11.14",
+    "@unhead/vue": "^1.11.15",
     "@vueuse/core": "^12.3.0",
     "@vueuse/integrations": "^12.3.0",
     "color": "^4.2.3",
     "consola": "^3.3.3",
     "defu": "^6.1.4",
-    "embla-carousel-auto-height": "^8.5.1",
-    "embla-carousel-auto-scroll": "^8.5.1",
-    "embla-carousel-autoplay": "^8.5.1",
-    "embla-carousel-class-names": "^8.5.1",
-    "embla-carousel-fade": "^8.5.1",
-    "embla-carousel-vue": "^8.5.1",
+    "embla-carousel-auto-height": "^8.5.2",
+    "embla-carousel-auto-scroll": "^8.5.2",
+    "embla-carousel-autoplay": "^8.5.2",
+    "embla-carousel-class-names": "^8.5.2",
+    "embla-carousel-fade": "^8.5.2",
+    "embla-carousel-vue": "^8.5.2",
     "embla-carousel-wheel-gestures": "^8.0.1",
     "fuse.js": "^7.0.0",
     "get-port-please": "^3.1.2",
@@ -100,32 +106,32 @@
     "mlly": "^1.7.3",
     "ohash": "^1.1.4",
     "reka-ui": "1.0.0-alpha.8",
-    "pathe": "^2.0.0",
+    "pathe": "^2.0.1",
     "scule": "^1.3.0",
     "sirv": "^3.0.0",
     "tailwind-variants": "^0.3.0",
-    "tailwindcss": "4.0.0-beta.8",
+    "tailwindcss": "4.0.0-beta.9",
     "tinyglobby": "^0.2.10",
     "unplugin": "^2.1.2",
-    "unplugin-auto-import": "^0.19.0",
-    "unplugin-vue-components": "^0.28.0",
+    "unplugin-auto-import": "^19.0.0",
+    "unplugin-vue-components": "^28.0.0",
     "vaul-vue": "^0.2.0"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.7.4",
-    "@nuxt/module-builder": "1.0.0-alpha.1",
+    "@nuxt/eslint-config": "^0.7.5",
+    "@nuxt/module-builder": "^0.8.4",
     "@nuxt/test-utils": "^3.15.1",
     "@release-it/conventional-changelog": "^10.0.0",
     "@standard-schema/spec": "1.0.0-beta.4",
     "@vue/test-utils": "^2.4.6",
-    "embla-carousel": "^8.5.1",
+    "embla-carousel": "^8.5.2",
     "eslint": "^9.17.0",
     "happy-dom": "^15.7.4",
     "joi": "^17.13.3",
     "knitwork": "^1.2.0",
     "nuxt": "^3.15.1",
     "nuxt-component-meta": "^0.9.0",
-    "release-it": "^18.0.0",
+    "release-it": "^18.1.1",
     "superstruct": "^2.0.2",
     "valibot": "^0.42.1",
     "vitest": "^2.1.8",
@@ -135,7 +141,7 @@
     "zod": "^3.24.1"
   },
   "peerDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.6.3"
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
@@ -143,7 +149,7 @@
     "debug": "4.3.7",
     "happy-dom": "14.12.3",
     "rollup": "^4.24.0",
-    "typescript": "5.7.2",
+    "typescript": "5.6.3",
     "unimport": "3.14.5",
     "unplugin": "^2.1.2",
     "vite": "^6.0.7",

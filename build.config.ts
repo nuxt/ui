@@ -8,6 +8,9 @@ export default defineBuildConfig({
     './src/unplugin',
     './src/vite'
   ],
+  rollup: {
+    emitCJS: true
+  },
   replace: {
     'process.env.DEV': 'false',
     'process.env.NUXT_UI_DEVTOOLS_LOCAL': 'false'
