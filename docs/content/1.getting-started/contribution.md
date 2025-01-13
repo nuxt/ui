@@ -65,6 +65,12 @@ The components are located in the `src` folder. It's separated into categories a
 
 To make development easier, we've added a CLI that you can use to generate components and locales. You can access it using the `nuxt-ui make` command.
 
+First, you need to link the CLI to your global environment:
+
+```sh
+npm link
+```
+
 ### Creating Components
 
 You can create new components using the following command:
