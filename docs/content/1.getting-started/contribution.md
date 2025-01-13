@@ -64,6 +64,10 @@ or for test the components using **Vue**, run:
 pnpm run dev:vue
 ```
 
+::note{to="#cli"}
+If you're working on implementing a new component, check the [CLI](#cli) section to kickstart the process.
+::
+
 #### IDE Setup
 
 We recommend using VS Code along with the ESLint extension. You can enable auto-fix and formatting when saving your code. Here's how:
@@ -219,6 +223,48 @@ The components are located in the `src` folder. It's separated into categories a
     ├── alert.ts
     └── ... etc/
 ```
+
+## CLI
+
+To make development easier, we've added a CLI that you can use to generate components and locales. You can access it using the `nuxt-ui make` command.
+
+### Creating Components
+
+You can create new components using the following command:
+
+```sh
+nuxt-ui make component <name> [options]
+```
+
+Available options:
+- `--primitive` Create a primitive component
+- `--pro` Create a pro component
+- `--prose` Create a prose component (requires `--pro`)
+- `--content` Create a content component (requires `--pro`)
+- `--template` Only generate specific template (available templates: `playground`, `docs`, `test`, `theme`, `component`)
+
+Example:
+
+```sh
+# Create a basic component
+nuxt-ui make component my-component
+
+# Create a pro component
+nuxt-ui make component page-section --pro
+
+# Create a pro prose component
+nuxt-ui make component heading --pro --prose
+
+# Create a pro content component
+nuxt-ui make component block --pro --content
+
+# Generate only documentation template
+nuxt-ui make component my-component --template=docs
+```
+
+::note
+When creating a new component, the CLI will automatically generate all the necessary files like the component itself, theme, tests, and documentation.
+::
 
 ## Thanks
 
