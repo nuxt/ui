@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Vähennä'
     },
     commandPalette: {
+      placeholder: 'Kirjoita komento tai hae...',
       noMatch: 'Ei vastaavia tietoja',
       noData: 'Ei tietoja',
       close: 'Sulje'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Ei vastaavia tietoja',
       noData: 'Ei tietoja',
-      create: 'Luo "{label}"'
+      create: 'Luo "{label}"',
+      search: 'Hae...'
     },
     toast: {
       close: 'Sulje'

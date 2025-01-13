@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Verlagen'
     },
     commandPalette: {
+      placeholder: 'Typ een commando of zoek...',
       noMatch: 'Geen overeenkomende gegevens',
       noData: 'Geen gegevens',
       close: 'Sluiten'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Geen overeenkomende gegevens',
       noData: 'Geen gegevens',
-      create: '"{label}" creëren'
+      create: '"{label}" creëren',
+      search: 'Zoeken...'
     },
     toast: {
       close: 'Sluiten'

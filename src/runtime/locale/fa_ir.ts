@@ -21,6 +21,7 @@ export default defineLocale({
       decrement: 'کاهش'
     },
     commandPalette: {
+      placeholder: 'یک دستور وارد کنید یا جستجو کنید...',
       noMatch: 'داده‌ای یافت نشد',
       noData: 'داده‌ای موجود نیست',
       close: 'بستن'
@@ -28,7 +29,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'داده‌ای یافت نشد',
       noData: 'داده‌ای موجود نیست',
-      create: 'ایجاد "{label}"'
+      create: 'ایجاد "{label}"',
+      search: 'جستجو...'
     },
     toast: {
       close: 'بستن'

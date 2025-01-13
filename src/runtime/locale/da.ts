@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Reducer'
     },
     commandPalette: {
+      placeholder: 'Skriv en kommando eller søg...',
       noMatch: 'Ingen matchende data',
       noData: 'Ingen data',
       close: 'Luk'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Ingen matchende data',
       noData: 'Ingen data',
-      create: 'Opret "{label}"'
+      create: 'Opret "{label}"',
+      search: 'Søg...'
     },
     toast: {
       close: 'Luk'

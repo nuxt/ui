@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: 'Vähenda'
     },
     commandPalette: {
+      placeholder: 'Sisesta käsk või otsi...',
       noMatch: 'Pole vastavaid andmeid',
       noData: 'Pole andmeid',
       close: 'Sulge'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Pole vastavaid andmeid',
       noData: 'Pole andmeid',
-      create: 'Loo "{label}"'
+      create: 'Loo "{label}"',
+      search: 'Otsi...'
     },
     toast: {
       close: 'Sulge'
