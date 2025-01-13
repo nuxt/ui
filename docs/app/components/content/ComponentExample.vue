@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { camelCase } from 'scule'
+import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
 
 const props = withDefaults(defineProps<{
@@ -10,6 +11,11 @@ const props = withDefaults(defineProps<{
    * @defaultValue false
    */
   iframe?: boolean | { [key: string]: any }
+  /**
+   * Whether to display the component in a mobile-sized iframe viewport
+   * @defaultValue false
+   */
+  iframeMobile?: boolean
   props?: { [key: string]: any }
   /**
    * Whether to format the code with Prettier
@@ -61,7 +67,10 @@ const slots = defineSlots<{
   code(props?: {}): any
 }>()
 
+const el = ref<HTMLElement | null>(null)
+
 const { $prettier } = useNuxtApp()
+const { width } = useElementSize(el)
 
 const camelName = camelCase(props.name)
 
@@ -123,11 +132,15 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
   return acc
 }, {} as Record<string, any>) || {})
 
-const urlSearchParams = computed(() => new URLSearchParams({ ...optionsValues.value, ...componentProps }).toString())
+const urlSearchParams = computed(() => new URLSearchParams({
+  ...optionsValues.value,
+  ...componentProps,
+  width: Math.round(width.value).toString()
+}).toString())
 </script>
 
 <template>
-  <div class="my-5">
+  <div ref="el" class="my-5">
     <template v-if="preview">
       <div class="border border-[var(--ui-border-muted)] relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source, 'overflow-hidden': props.overflowHidden }]">
         <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-[var(--ui-border-muted)]">
@@ -185,9 +198,8 @@ const urlSearchParams = computed(() => new URLSearchParams({ ...optionsValues.va
           v-if="iframe"
           v-bind="typeof iframe === 'object' ? iframe : {}"
           :src="`/examples/${name}?${urlSearchParams}`"
-          width="1024"
-          class="relative left-1/2 -translate-x-1/2"
-          :class="props.class"
+          class="relative w-full"
+          :class="[props.class, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
         />
         <div v-else class="flex justify-center p-4" :class="props.class">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />

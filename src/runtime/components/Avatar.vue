@@ -1,10 +1,11 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AvatarFallbackProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
+import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { avatar: Partial<typeof theme> } }
 
@@ -83,10 +84,10 @@ const sizePx = computed(() => ({
       :class="ui.image({ class: props.ui?.image })"
     />
 
-    <AvatarFallback as-child v-bind="fallbackProps">
+    <AvatarFallback as-child v-bind="{ ...fallbackProps, ...$attrs }">
       <slot>
         <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback }}</span>
+        <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
       </slot>
     </AvatarFallback>
   </AvatarRoot>

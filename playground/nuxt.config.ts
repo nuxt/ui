@@ -3,9 +3,14 @@ import { createResolver } from '@nuxt/kit'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  modules: ['../src/module'],
+  modules: [
+    '../src/module',
+    '@nuxthub/core'
+  ],
 
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true
+  },
 
   ui: {
     fonts: false

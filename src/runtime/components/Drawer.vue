@@ -1,11 +1,11 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
 import type { DialogContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/drawer'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme> } }
 

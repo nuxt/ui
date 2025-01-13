@@ -9,7 +9,8 @@
     "happy-dom",
     "valibot30",
     "valibot31",
-    "typescript"
+    "typescript",
+    "vue-tsc"
   ],
   "baseBranches": ["dev", "v3"],
   "packageRules": [{

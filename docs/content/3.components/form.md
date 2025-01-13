@@ -8,21 +8,30 @@ links:
 
 ## Usage
 
-Use the Form component to validate form data using schema libraries such as [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot), [Superstruct](https://github.com/ianstormtaylor/superstruct) or your own validation logic.
+Use the Form component to validate form data using schema libraries such as [Valibot](https://github.com/fabian-hiller/valibot), [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi), [Superstruct](https://github.com/ianstormtaylor/superstruct) or your own validation logic.
 
 It works with the [FormField](/components/form-field) component to display error messages around form elements automatically.
 
 ### Schema Validation
 
 It requires two props:
+
 - `state` - a reactive object holding the form's state.
-- `schema` - a schema object from a validation library like [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot) or [Superstruct](https://github.com/ianstormtaylor/superstruct).
+- `schema` - a schema object from a validation library like [Valibot](https://github.com/fabian-hiller/valibot), [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Superstruct](https://github.com/ianstormtaylor/superstruct).
 
 ::warning
 **No validation library is included** by default, ensure you **install the one you need**.
 ::
 
 ::tabs
+  ::component-example{label="Valibot"}
+  ---
+  name: 'form-example-valibot'
+  props:
+    class: 'w-60'
+  ---
+  ::
+  
   ::component-example{label="Zod"}
   ---
   name: 'form-example-zod'
@@ -47,14 +56,6 @@ It requires two props:
   ---
   ::
 
-  ::component-example{label="Valibot"}
-  ---
-  name: 'form-example-valibot'
-  props:
-    class: 'w-60'
-  ---
-  ::
-
   ::component-example{label="Superstruct"}
   ---
   name: 'form-example-superstruct'
@@ -73,6 +74,7 @@ Nested validation rules are handled using dot notation. For example, a rule like
 Use the `validate` prop to apply your own validation logic.
 
 The validation function must return a list of errors with the following attributes:
+
 - `message` - the error message to display.
 - `name` - the `name` of the `FormField` to send the error to.
 
@@ -91,6 +93,7 @@ props:
 ### Input Events
 
 The Form component automatically triggers validation when an input emits an `input`, `change`, or `blur` event.
+
 - Validation on `input` occurs **as you type**.
 - Validation on `change` occurs when you **commit to a value**.
 - Validation on `blur` happens when an input **loses focus**.

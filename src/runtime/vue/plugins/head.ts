@@ -1,8 +1,8 @@
-import { createHead } from '@unhead/vue'
+import { createHead, setHeadInjectionHandler } from '@unhead/vue'
 import type { Plugin } from 'vue'
 
 export default {
-  install(app) {
-    app.use(createHead())
+  install() {
+    setHeadInjectionHandler(() => createHead())
   }
 } satisfies Plugin

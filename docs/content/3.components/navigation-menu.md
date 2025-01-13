@@ -115,7 +115,7 @@ props:
     - label: Help
       icon: i-lucide-circle-help
       disabled: true
-  class: 'justify-center'
+  class: 'w-full justify-center'
 ---
 ::
 
@@ -131,6 +131,7 @@ Each item can take a `children` array of objects with the following properties t
 - `icon?: string`
 - `class?: any`
 - `onSelect?(e: Event): void`
+
 ::
 
 ### Orientation
@@ -328,7 +329,7 @@ props:
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
-  class: 'data-[orientation=horizontal]:border-b border-[var(--ui-border)] data-[orientation=vertical]:w-48'
+  class: 'data-[orientation=horizontal]:border-b border-[var(--ui-border)] data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
 ---
 ::
 
@@ -348,6 +349,7 @@ Use the `color` prop to change the color of the NavigationMenu.
 ---
 ignore:
   - items
+  - class
 external:
   - items
 props:
@@ -368,6 +370,7 @@ props:
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
+  class: 'w-full'
 ---
 ::
 
@@ -379,6 +382,7 @@ Use the `variant` prop to change the variant of the NavigationMenu.
 ---
 ignore:
   - items
+  - class
 external:
   - items
 props:
@@ -401,6 +405,7 @@ props:
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
+  class: 'w-full'
 ---
 ::
 
@@ -495,7 +500,7 @@ props:
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
-  class: 'justify-center'
+  class: 'w-full justify-center'
 ---
 ::
 
@@ -595,7 +600,7 @@ props:
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
-  class: 'justify-center'
+  class: 'w-full justify-center'
 ---
 ::
 
@@ -687,7 +692,7 @@ props:
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
           to: /components/progress
-  class: 'justify-center'
+  class: 'w-full justify-center'
 ---
 ::
 

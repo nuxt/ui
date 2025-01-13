@@ -1,4 +1,4 @@
-name: ci-v3
+name: module
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - v3
 
 jobs:
-  ci:
+  build:
     runs-on: ${{ matrix.os }}
 
     permissions:
@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [20]
+        node: [22]
 
     env:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}

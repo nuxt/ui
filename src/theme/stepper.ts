@@ -124,7 +124,6 @@ export default (options: Required<ModuleOptions>) => ({
   }],
 
   defaultVariants: {
-    orientation: 'horizontal',
     size: 'md',
     color: 'primary'
   }

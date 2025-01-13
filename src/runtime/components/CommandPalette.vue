@@ -1,5 +1,4 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
@@ -8,6 +7,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
@@ -68,6 +68,11 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    * @defaultValue 'Type a command or search...'
    */
   placeholder?: InputProps['placeholder']
+  /**
+   * Automatically focus the input when component is mounted.
+   * @defaultValue true
+   */
+  autofocus?: boolean
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -140,8 +145,8 @@ import UInput from './Input.vue'
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
-  placeholder: 'Type a command or search...',
-  labelKey: 'label'
+  labelKey: 'label',
+  autofocus: true
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
@@ -152,7 +157,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
-const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon', 'placeholder'))
+const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon'))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = commandPalette()
@@ -238,8 +243,9 @@ const groups = computed(() => {
   <ListboxRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
+        :placeholder="placeholder || t('commandPalette.placeholder')"
         variant="none"
-        autofocus
+        :autofocus="autofocus"
         size="lg"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"

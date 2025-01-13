@@ -1,10 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/progress'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { progress: Partial<typeof theme> } }
 
@@ -58,7 +59,7 @@ const props = withDefaults(defineProps<ProgressProps>(), {
   orientation: 'horizontal'
 })
 const emits = defineEmits<ProgressEmits>()
-defineSlots<ProgressSlots>()
+const slots = defineSlots<ProgressSlots>()
 
 const { dir } = useLocale()
 
@@ -160,7 +161,7 @@ const ui = computed(() => progress({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <div v-if="!isIndeterminate && (status || $slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+    <div v-if="!isIndeterminate && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
