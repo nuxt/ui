@@ -8,6 +8,101 @@ Nuxt UI thrives thanks to its fantastic community ❤️, which contributes by s
 
 Before reporting a bug or reporting a feature, please make sure that you have read through our documentation and existing [issues](https://github.com/nuxt/ui/issues).
 
+## Project Structure
+
+In this project, you'll find a variety of folders and files that serve different purposes. Here's an overview of the main ones:
+
+- **Documentation - `docs`** :
+
+The documentation can be found in the `docs` folder. It's a Nuxt app that utilizes the `@nuxt/content` module in its v3 version, check the [Nuxt Content v3 Docs](https://content3.nuxt.dev/docs/getting-started) for more information on how it generates the documentation pages from Markdown files. Here's a breakdown of its structure:
+
+```
+├── app
+│   ├── assets
+│   ├── components
+│   │   └─── content
+│   │        └─── examples     # Components used in documentation as examples
+│   ├── composables
+│   └── ... etc/
+├── content
+│   ├── 1.getting-started
+│   ├── 2.composables
+│   └── 3.components    # Components documentation
+```
+
+- **Components - `src`** :
+
+The components are located in the `src` folder. It's separated into categories according to component types. Here's a breakdown of its structure:
+
+```
+├── defaults.ts
+├── devtools
+│   ├── meta.ts
+│   └── runtime
+│       ├── DevtoolsRenderer.vue
+│       └── examples
+├── module.ts
+├── plugins
+├── runtime
+│   ├── components          # Where all the components are located
+│   │   ├── Accordion.vue
+│   │   ├── Alert.vue
+│   ├── composables
+│   ├── locale
+│   ├── plugins
+│   ├── types
+│   ├── utils
+│   └── vue
+│       ├── components
+│       └── plugins
+└── theme                  # This where the theme for each component is located
+    ├── accordion.ts       # Theme for Accordion component
+    ├── alert.ts
+    └── ... etc/
+```
+
+## CLI
+
+To make development easier, we've added a CLI that you can use to generate components and locales. You can access it using the `nuxt-ui make` command.
+
+### Creating Components
+
+You can create new components using the following command:
+
+```sh
+nuxt-ui make component <name> [options]
+```
+
+Available options:
+- `--primitive` Create a primitive component
+- `--pro` Create a pro component
+- `--prose` Create a prose component (requires `--pro`)
+- `--content` Create a content component (requires `--pro`)
+- `--template` Only generate specific template (available templates: `playground`, `docs`, `test`, `theme`, `component`)
+
+Example:
+
+```sh
+# Create a basic component
+nuxt-ui make component my-component
+
+# Create a pro component
+nuxt-ui make component page-section --pro
+
+# Create a pro prose component
+nuxt-ui make component heading --pro --prose
+
+# Create a pro content component
+nuxt-ui make component block --pro --content
+
+# Generate only documentation template
+nuxt-ui make component my-component --template=docs
+```
+
+::note
+When creating a new component, the CLI will automatically generate all the necessary files like the component itself, theme, tests, and documentation.
+::
+
 ## Submitting a Pull Request (PR)
 
 ### 1. Before You Start
@@ -170,101 +265,6 @@ This will automatically display the component's API and theme in the documentati
 ### 5. After You've Made a Pull Request
 
 We'll review it promptly. If assigned to a maintainer, they'll review it carefully. Ignore the red text; it's for tracking purposes.
-
-## Project Structure
-
-In this project, you'll find a variety of folders and files that serve different purposes. Here's an overview of the main ones:
-
-- **Documentation - `docs`** :
-
-The documentation can be found in the `docs` folder. It's a Nuxt app that utilizes the `@nuxt/content` module in its v3 version, check the [Nuxt Content v3 Docs](https://content3.nuxt.dev/docs/getting-started) for more information on how it generates the documentation pages from Markdown files. Here's a breakdown of its structure:
-
-```
-├── app
-│   ├── assets
-│   ├── components
-│   │   └─── content
-│   │        └─── examples     # Components used in documentation as examples
-│   ├── composables
-│   └── ... etc/
-├── content
-│   ├── 1.getting-started
-│   ├── 2.composables
-│   └── 3.components    # Components documentation
-```
-
-- **Components - `src`** :
-
-The components are located in the `src` folder. It's separated into categories according to component types. Here's a breakdown of its structure:
-
-```
-├── defaults.ts
-├── devtools
-│   ├── meta.ts
-│   └── runtime
-│       ├── DevtoolsRenderer.vue
-│       └── examples
-├── module.ts
-├── plugins
-├── runtime
-│   ├── components          # Where all the components are located
-│   │   ├── Accordion.vue
-│   │   ├── Alert.vue
-│   ├── composables
-│   ├── locale
-│   ├── plugins
-│   ├── types
-│   ├── utils
-│   └── vue
-│       ├── components
-│       └── plugins
-└── theme                  # This where the theme for each component is located
-    ├── accordion.ts       # Theme for Accordion component
-    ├── alert.ts
-    └── ... etc/
-```
-
-## CLI
-
-To make development easier, we've added a CLI that you can use to generate components and locales. You can access it using the `nuxt-ui make` command.
-
-### Creating Components
-
-You can create new components using the following command:
-
-```sh
-nuxt-ui make component <name> [options]
-```
-
-Available options:
-- `--primitive` Create a primitive component
-- `--pro` Create a pro component
-- `--prose` Create a prose component (requires `--pro`)
-- `--content` Create a content component (requires `--pro`)
-- `--template` Only generate specific template (available templates: `playground`, `docs`, `test`, `theme`, `component`)
-
-Example:
-
-```sh
-# Create a basic component
-nuxt-ui make component my-component
-
-# Create a pro component
-nuxt-ui make component page-section --pro
-
-# Create a pro prose component
-nuxt-ui make component heading --pro --prose
-
-# Create a pro content component
-nuxt-ui make component block --pro --content
-
-# Generate only documentation template
-nuxt-ui make component my-component --template=docs
-```
-
-::note
-When creating a new component, the CLI will automatically generate all the necessary files like the component itself, theme, tests, and documentation.
-::
 
 ## Thanks
 
