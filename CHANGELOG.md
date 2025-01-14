@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.21.0](https://github.com/nuxt/ui/compare/v2.20.0...v2.21.0) (2025-01-14)
+
+### Features
+
+* **module:** handle `tailwindMerge` config from `app.config` ([#2902](https://github.com/nuxt/ui/issues/2902)) ([ea15e21](https://github.com/nuxt/ui/commit/ea15e21cdcba00e21302415829113e8c6def8a6e))
+
+### Bug Fixes
+
+* **Table:** `v-model` causing first column missing ([#2890](https://github.com/nuxt/ui/issues/2890)) ([d573fb6](https://github.com/nuxt/ui/commit/d573fb636f7f749ce95b93c5fb1ae2a053eeeeb0))
+* **Table:** remove `[@select](https://github.com/select)` event on checkbox ([#3042](https://github.com/nuxt/ui/issues/3042)) ([d9d4f19](https://github.com/nuxt/ui/commit/d9d4f1915aac586ae1abf3ebe67ca9aff65b9be0))
+* **tailwind:** use mjs template ([#2945](https://github.com/nuxt/ui/issues/2945)) ([8cf9f27](https://github.com/nuxt/ui/commit/8cf9f27d537bad5ffe4e136f52ff71548a451c5f))
+
 ## [2.20.0](https://github.com/nuxt/ui/compare/v2.19.2...v2.20.0) (2024-12-09)
 
 ### ⚠ BREAKING CHANGES
