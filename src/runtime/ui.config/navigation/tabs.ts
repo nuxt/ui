@@ -28,7 +28,13 @@ export default {
       font: 'font-medium',
       rounded: 'rounded-md',
       shadow: '',
-      icon: 'w-4 h-4 flex-shrink-0 me-2'
+      icon: 'w-4 h-4 flex-shrink-0 me-2',
+      badge: {
+        base: 'flex-shrink-0 ms-1.5 relative rounded',
+        color: 'gray',
+        variant: 'solid',
+        size: 'xs'
+      }
     }
   }
 }
