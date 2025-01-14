@@ -11,6 +11,11 @@ const props = withDefaults(defineProps<{
    * @defaultValue false
    */
   iframe?: boolean | { [key: string]: any }
+  /**
+   * Whether to display the component in a mobile-sized iframe viewport
+   * @defaultValue false
+   */
+  iframeMobile?: boolean
   props?: { [key: string]: any }
   /**
    * Whether to format the code with Prettier
@@ -127,7 +132,11 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
   return acc
 }, {} as Record<string, any>) || {})
 
-const urlSearchParams = computed(() => new URLSearchParams({ ...optionsValues.value, ...componentProps, width: width.value.toString() }).toString())
+const urlSearchParams = computed(() => new URLSearchParams({
+  ...optionsValues.value,
+  ...componentProps,
+  width: Math.round(width.value).toString()
+}).toString())
 </script>
 
 <template>
@@ -189,8 +198,8 @@ const urlSearchParams = computed(() => new URLSearchParams({ ...optionsValues.va
           v-if="iframe"
           v-bind="typeof iframe === 'object' ? iframe : {}"
           :src="`/examples/${name}?${urlSearchParams}`"
-          class="relative w-full lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]"
-          :class="props.class"
+          class="relative w-full"
+          :class="[props.class, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
         />
         <div v-else class="flex justify-center p-4" :class="props.class">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />

@@ -1,12 +1,49 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ContextMenu > renders with class correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="min-w-96" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -14,12 +51,49 @@ exports[`ContextMenu > renders with class correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with custom slot correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -27,12 +101,49 @@ exports[`ContextMenu > renders with custom slot correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with default slot correctly 1`] = `
-"Default slot
+"<span style="pointer-events: auto;" class="" data-state="open">Default slot</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -40,7 +151,7 @@ exports[`ContextMenu > renders with default slot correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with disabled correctly 1`] = `
-"<!--v-if-->
+"<span data-state="closed" data-disabled="" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->
 
 
@@ -53,12 +164,29 @@ exports[`ContextMenu > renders with disabled correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with item slot correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">Item slot</button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">Item slot</button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item slot</button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item slot</button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item slot</button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item slot</button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item slot</button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">Item slot</button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -66,12 +194,49 @@ exports[`ContextMenu > renders with item slot correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with item-label slot correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Item label slot<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -79,12 +244,37 @@ exports[`ContextMenu > renders with item-label slot correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with item-leading slot correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">Item leading slot<span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">Item leading slot<span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item leading slot<span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item leading slot<span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span></button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item leading slot<span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span></button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item leading slot<span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span></button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">Item leading slot<span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span></button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">Item leading slot<span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -92,12 +282,45 @@ exports[`ContextMenu > renders with item-leading slot correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with item-trailing slot correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center">Item trailing slot<!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center">Item trailing slot<!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center">Item trailing slot<!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center">Item trailing slot<!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center">Item trailing slot<!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center">Item trailing slot<!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center">Item trailing slot<!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center">Item trailing slot<!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -105,12 +328,49 @@ exports[`ContextMenu > renders with item-trailing slot correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with items correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; pointer-events: auto;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -118,12 +378,57 @@ exports[`ContextMenu > renders with items correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with labelKey correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="icon" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -131,12 +436,49 @@ exports[`ContextMenu > renders with labelKey correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with size lg correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-sm gap-2" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-2 text-sm gap-2 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-1"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-sm gap-2">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-1"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-sm gap-2">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-sm gap-2">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-sm gap-2">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-sm gap-2">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-sm gap-2" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -144,12 +486,49 @@ exports[`ContextMenu > renders with size lg correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with size md correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -157,12 +536,49 @@ exports[`ContextMenu > renders with size md correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with size sm correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-xs gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-4" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-xs gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-xs gap-1.5">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-xs gap-1.5">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-xs gap-1.5">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-xs gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-xs gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-xs gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-4" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -170,12 +586,49 @@ exports[`ContextMenu > renders with size sm correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with size xl correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-base gap-2" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-6" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-2 text-base gap-2 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-1"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-6 min-w-[24px] text-[12px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-6 min-w-[24px] text-[12px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-base gap-2">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-1"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-6 min-w-[24px] text-[12px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-6 min-w-[24px] text-[12px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-6 min-w-[24px] text-[12px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-base gap-2">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-base gap-2">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-base gap-2">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-base gap-2">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-2 text-base gap-2" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-6" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -183,12 +636,49 @@ exports[`ContextMenu > renders with size xl correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with size xs correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1 text-xs gap-1" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-4" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1 text-xs gap-1 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1 text-xs gap-1">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-4 min-w-[16px] text-[10px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1 text-xs gap-1">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1 text-xs gap-1">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1 text-xs gap-1">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1 text-xs gap-1">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1 text-xs gap-1" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-4" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 
@@ -196,12 +686,49 @@ exports[`ContextMenu > renders with size xs correctly 1`] = `
 `;
 
 exports[`ContextMenu > renders with ui correctly 1`] = `
-"<!--v-if-->
+"<span style="pointer-events: auto;" class="" data-state="open">Right Click</span>
 <!--teleport start-->
 
 
 
-<!---->
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial; pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none;" data-dismissable-layer="" class="min-w-32 bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] divide-y divide-[var(--ui-border)] overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto" uioverride="[object Object]" labelkey="label" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-0" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Appearance<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 data-[state=open]:text-[var(--ui-text-highlighted)] transition-colors before:transition-colors p-1.5 text-sm gap-1.5 text-[var(--ui-primary)] data-highlighted:text-[var(--ui-primary)] data-highlighted:before:bg-[var(--ui-primary)]/10 data-[state=open]:before:bg-[var(--ui-primary)]/10">
+        <!--v-if--><span class="truncate">Show Sidebar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">S</kbd></span>
+        <!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Show Toolbar<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⇧</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">⊞</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-[var(--ui-radius)] font-medium font-sans bg-[var(--ui-bg)] text-[var(--ui-text-highlighted)] ring ring-inset ring-[var(--ui-border-accented)] h-5 min-w-[20px] text-[11px]">D</kbd></span>
+        <!----></span>
+      </button><button type="button" disabled="" role="menuitem" tabindex="-1" aria-disabled="true" data-disabled="" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Collapse Pinned Tabs<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Refresh the Page<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cookies and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5">
+        <!--v-if--><span class="truncate">Clear Cache and Refresh<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button>
+      <div role="separator" aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-[var(--ui-border)]"></div><button role="menuitem" tabindex="-1" id="reka-menu-sub-trigger-v-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-[var(--ui-text)] data-highlighted:text-[var(--ui-text-highlighted)] data-[state=open]:text-[var(--ui-text-highlighted)] data-highlighted:before:bg-[var(--ui-bg-elevated)]/50 data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item="">
+        <!--v-if--><span class="truncate">Developer<!--v-if--></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true"></span>
+        <!----></span>
+      </button>
+      <!---->
+      <!--teleport start-->
+      <!---->
+      <!--teleport end-->
+    </div>
+  </div>
+</div>
 
 
 

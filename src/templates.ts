@@ -89,6 +89,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
 import type { DeepPartial } from '#ui/types/utils'
+import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
 const icons = ${JSON.stringify(uiConfig.icons)};
@@ -102,6 +103,7 @@ type AppConfigUI = {
     neutral?: NeutralColor
   }
   icons?: Partial<typeof icons>
+  tv?: typeof defaultConfig
 } & DeepPartial<typeof ui>
 
 declare module '@nuxt/schema' {

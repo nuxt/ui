@@ -20,6 +20,7 @@ export default defineLocale({
       decrement: '감소'
     },
     commandPalette: {
+      placeholder: '명령을 입력하거나 검색...',
       noMatch: '일치하는 데이터가 없습니다.',
       noData: '데이터가 없습니다.',
       close: '닫기'
@@ -27,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: '일치하는 데이터가 없습니다.',
       noData: '데이터가 없습니다.',
-      create: '"{label}" 생성'
+      create: '"{label}" 생성',
+      search: '검색...'
     },
     toast: {
       close: '닫기'

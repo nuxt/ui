@@ -1,9 +1,9 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 

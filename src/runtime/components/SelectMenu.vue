@@ -1,11 +1,12 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxArrowProps, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
@@ -150,7 +151,8 @@ import UInput from './Input.vue'
 const props = withDefaults(defineProps<SelectMenuProps<T, I, V, M>>(), {
   portal: true,
   searchInput: true,
-  labelKey: 'label' as never
+  labelKey: 'label' as never,
+  resetSearchTermOnBlur: true
 })
 const emits = defineEmits<SelectMenuEmits<T, V, M>>()
 const slots = defineSlots<SelectMenuSlots<T, M>>()
@@ -164,7 +166,7 @@ const { contains } = useFilter({ sensitivity: 'base' })
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
-const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: 'Search...', variant: 'none' }) as InputProps)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps)
 
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -194,7 +196,7 @@ function displayValue(value: T | T[]): string {
     return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
   }
 
-  const item = items.value.find(item => compare(typeof item === 'object' ? get(item, props.valueKey as string) : item, value))
+  const item = items.value.find(item => compare(typeof item === 'object' ? get(item as Record<string, any>, props.valueKey as string) : item, value))
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
@@ -250,13 +252,27 @@ function onUpdate(value: any) {
 }
 
 function onUpdateOpen(value: boolean) {
+  let timeoutId
+
   if (!value) {
     const event = new FocusEvent('blur')
+
     emits('blur', event)
     emitFormBlur()
+
+    // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
+    // https://reka-ui.com/docs/components/combobox#api-reference
+    if (props.resetSearchTermOnBlur) {
+      const STATE_ANIMATION_DELAY_MS = 100
+
+      timeoutId = setTimeout(() => {
+        searchTerm.value = ''
+      }, STATE_ANIMATION_DELAY_MS)
+    }
   } else {
     const event = new FocusEvent('focus')
     emits('focus', event)
+    clearTimeout(timeoutId)
   }
 }
 </script>

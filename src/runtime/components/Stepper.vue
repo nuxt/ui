@@ -1,10 +1,11 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/stepper'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { DynamicSlots } from '../types/utils'
 
 const appConfig = _appConfig as AppConfig & { ui: { stepper: Partial<typeof theme> } }
@@ -15,7 +16,7 @@ type StepperVariants = VariantProps<typeof stepper>
 
 export interface StepperItem {
   slot?: string
-  value?: string
+  value?: string | number
   title?: string
   description?: string
   icon?: string

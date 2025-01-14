@@ -42,6 +42,7 @@ const castMap: Record<string, Cast> = {
 
 const props = defineProps<{
   pro?: boolean
+  prose?: boolean
   prefix?: string
   /** Override the slug taken from the route */
   slug?: string
@@ -84,11 +85,15 @@ const route = useRoute()
 const { $prettier } = useNuxtApp()
 
 const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
-const name = `U${upperFirst(camelName)}`
+const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
 const component = defineAsyncComponent(() => {
   if (props.pro) {
     if (props.prefix) {
       return import(`#ui-pro/components/${props.prefix}/${upperFirst(camelName)}.vue`)
+    }
+
+    if (props.prose) {
+      return import(`#ui-pro/components/prose/${upperFirst(camelName)}.vue`)
     }
 
     return import(`#ui-pro/components/${upperFirst(camelName)}.vue`)
@@ -121,7 +126,7 @@ function setComponentProp(name: string, value: any) {
   set(componentProps, name, value)
 }
 
-const componentTheme = ((props.pro ? themePro : theme) as any)[camelName]
+const componentTheme = ((props.pro ? props.prose ? themePro.prose : themePro : theme) as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
 
 function mapKeys(obj: object, parentKey = ''): any {
@@ -169,6 +174,30 @@ const options = computed(() => {
 const code = computed(() => {
   let code = ''
 
+  if (props.prose) {
+    code += `\`\`\`mdc
+::${camelName}`
+
+    const proseProps = Object.entries(componentProps).map(([key, value]) => {
+      if (value === undefined || value === null || value === '' || props.hide?.includes(key)) {
+        return
+      }
+
+      return `${key}="${value}"`
+    }).filter(Boolean).join(' ')
+
+    if (proseProps.length) {
+      code += `{${proseProps}}`
+    }
+
+    code += `
+${props.slots?.default}
+::
+\`\`\``
+
+    return code
+  }
+
   if (props.collapse) {
     code += `::code-collapse
 `
@@ -210,23 +239,23 @@ const code = computed(() => {
     }
 
     const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
     const name = kebabCase(key)
 
     if (typeof value === 'boolean') {
-      if (value && prop?.default === 'true') {
+      if (value && (propDefault === 'true' || propDefault === '`true`' || propDefault === true)) {
         continue
       }
-      if (!value && (!prop?.default || prop.default === 'false')) {
+      if (!value && (!propDefault || propDefault === 'false' || propDefault === '`false`' || propDefault === false)) {
         continue
       }
 
-      code += value ? ` ${name}` : ` :${key}="false"`
+      code += value ? ` ${name}` : ` :${name}="false"`
     } else if (typeof value === 'object') {
       const parsedValue = !props.external?.includes(key) ? json5.stringify(value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1') : key
 
       code += ` :${name}="${parsedValue}"`
     } else {
-      const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
       if (propDefault === value) {
         continue
       }

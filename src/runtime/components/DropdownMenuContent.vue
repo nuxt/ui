@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/dropdown-menu'
+import { tv } from '../utils/tv'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
 
 const _dropdownMenu = tv(theme)()

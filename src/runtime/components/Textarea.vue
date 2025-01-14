@@ -1,8 +1,9 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/textarea'
+import { tv } from '../utils/tv'
 
 const appConfig = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
 
@@ -65,7 +66,7 @@ const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled } = useFormField<TextareaProps>(props)
+const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled } = useFormField<TextareaProps>(props, { deferInputValidation: true })
 
 const ui = computed(() => textarea({
   color: color.value,

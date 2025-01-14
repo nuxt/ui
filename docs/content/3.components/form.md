@@ -195,7 +195,7 @@ This will give you access to the following:
 | Name | Type |
 | ---- | ---- |
 | `submit()`{lang="ts-type"} | `Promise<void>`{lang="ts-type"} <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Triggers form submission.</p> |
-| `validate(path?: string \| string[], opts: { silent?: boolean })`{lang="ts-type"} | `Promise<T>`{lang="ts-type"} <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Triggers form validation. Will raise any errors unless `opts.silent` is set to true.</p> |
+| `validate(opts: { name?: string \| string[], silent?: boolean, nested?: boolean, transform?: boolean })`{lang="ts-type"} | `Promise<T>`{lang="ts-type"} <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Triggers form validation. Will raise any errors unless `opts.silent` is set to true.</p> |
 | `clear(path?: string)`{lang="ts-type"} | `void` <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Clears form errors associated with a specific path. If no path is provided, clears all form errors.</p> |
 | `getErrors(path?: string)`{lang="ts-type"} | `FormError[]`{lang="ts-type"} <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Retrieves form errors associated with a specific path. If no path is provided, returns all form errors.</p></div> |
 | `setErrors(errors: FormError[], path?: string)`{lang="ts-type"} | `void` <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Sets form errors for a given path. If no path is provided, overrides all errors.</p> |

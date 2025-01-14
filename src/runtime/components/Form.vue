@@ -1,9 +1,9 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
 
 const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
@@ -38,7 +38,7 @@ extendDevtoolsMeta({ example: 'FormExample' })
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
-import { parseSchema } from '../utils/form'
+import { validateSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 const props = withDefaults(defineProps<FormProps<T>>(), {
@@ -60,7 +60,7 @@ const parentBus = inject(
 
 provide(formBusInjectionKey, bus)
 
-const nestedForms = ref<Map<string | number, { validate: () => any }>>(new Map())
+const nestedForms = ref<Map<string | number, { validate: typeof _validate }>>(new Map())
 
 onMounted(async () => {
   bus.on(async (event) => {
@@ -104,28 +104,29 @@ function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   }))
 }
 
-const parsedValue = ref<T | null>(null)
+const transformedState = ref<T | null>(null)
+
 async function getErrors(): Promise<FormErrorWithId[]> {
   let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
 
   if (props.schema) {
-    const { errors, result } = await parseSchema(props.state, props.schema as FormSchema<typeof props.state>)
+    const { errors, result } = await validateSchema(props.state, props.schema as FormSchema<typeof props.state>)
     if (errors) {
       errs = errs.concat(errors)
     } else {
-      parsedValue.value = result
+      transformedState.value = result
     }
   }
 
   return resolveErrorIds(errs)
 }
 
-async function _validate(opts: { name?: string | string[], silent?: boolean, nested?: boolean } = { silent: false, nested: true }): Promise<T | false> {
+async function _validate(opts: { name?: string | string[], silent?: boolean, nested?: boolean, transform?: boolean } = { silent: false, nested: true, transform: false }): Promise<T | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as string[]
 
   const nestedValidatePromises = !names && opts.nested
     ? Array.from(nestedForms.value.values()).map(
-        ({ validate }) => validate().then(() => undefined).catch((error: Error) => {
+        ({ validate }) => validate(opts).then(() => undefined).catch((error: Error) => {
           if (!(error instanceof FormValidationException)) {
             throw error
           }
@@ -150,11 +151,15 @@ async function _validate(opts: { name?: string | string[], silent?: boolean, nes
     errors.value = await getErrors()
   }
 
-  const childErrors = (await Promise.all(nestedValidatePromises)).filter(val => val)
+  const childErrors = (await Promise.all(nestedValidatePromises)).filter(val => val !== undefined)
 
   if (errors.value.length + childErrors.length > 0) {
     if (opts.silent) return false
     throw new FormValidationException(formId, errors.value, childErrors)
+  }
+
+  if (opts.transform) {
+    Object.assign(props.state, transformedState.value)
   }
 
   return props.state as T
@@ -169,8 +174,7 @@ async function onSubmitWrapper(payload: Event) {
   const event = payload as FormSubmitEvent<any>
 
   try {
-    await _validate({ nested: true })
-    event.data = props.schema ? parsedValue.value : props.state
+    event.data = await _validate({ nested: true, transform: true })
     await props.onSubmit?.(event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
@@ -180,7 +184,7 @@ async function onSubmitWrapper(payload: Event) {
     const errorEvent: FormErrorEvent = {
       ...event,
       errors: error.errors,
-      childrens: error.childrens
+      children: error.children
     }
     emits('error', errorEvent)
   }
