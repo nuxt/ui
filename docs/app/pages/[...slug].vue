@@ -144,7 +144,7 @@ const communityLinks = computed(() => [{
     <UPageBody>
       <ContentRenderer v-if="page.body" :value="page" />
 
-      <USeparator />
+      <USeparator v-if="surround?.filter(Boolean).length" />
 
       <UContentSurround :surround="(surround as any)" />
     </UPageBody>
