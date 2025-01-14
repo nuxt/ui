@@ -176,10 +176,10 @@ pnpm run dev
 pnpm run dev:vue
 ```
 
-::note{to="#cli"}
-If you're working on implementing a new component, check the **CLI** section to kickstart the process.
 ::
 
+::note{to="#cli"}
+If you're working on implementing a new component, check the **CLI** section to kickstart the process.
 ::
 
 ### IDE Setup
