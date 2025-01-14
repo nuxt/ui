@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/color-picker'
 import { tv } from '../utils/tv'
+import type { HSLObject } from 'colortranslator'
 
 const appConfig = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
 
@@ -16,6 +17,27 @@ type HSVColor = {
   h: number
   s: number
   v: number
+}
+
+function HSLtoHSV(hsl: HSLObject): HSVColor {
+  const x = hsl.S * (hsl.L < 50 ? hsl.L : 100 - hsl.L)
+  const v = hsl.L + (x / 100)
+
+  return {
+    h: hsl.H,
+    s: hsl.L === 0 ? hsl.S : 2 * x / v,
+    v
+  }
+}
+
+function HSVtoHSL(hsv: HSVColor): HSLObject {
+  const x = (200 - hsv.s) * hsv.v / 100
+
+  return {
+    H: hsv.h,
+    S: x === 0 || x === 200 ? 0 : Math.round(hsv.s * hsv.v / (x <= 100 ? x : 200 - x)),
+    L: Math.round(x / 2)
+  }
 }
 
 export type ColorPickerProps = {
@@ -40,7 +62,7 @@ export type ColorPickerProps = {
    * Format of the color
    * @defaultValue 'hex'
    */
-  format?: 'hex' | 'rgb' | 'hsl' | 'hwb'
+  format?: 'hex' | 'rgb' | 'hsl' | 'cmyk' | 'lab'
   size?: ColorPickerVariants['size']
   class?: any
   ui?: Partial<typeof colorPicker.slots>
@@ -52,7 +74,7 @@ import { ref, nextTick, computed, toValue } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useEventListener, useElementBounding, watchThrottled, watchPausable } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
-import Color from 'color'
+import { ColorTranslator } from 'colortranslator'
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {
   format: 'hex',
@@ -64,28 +86,37 @@ const modelValue = defineModel<string>(undefined)
 const pickedColor = computed<HSVColor>({
   get() {
     try {
-      const color = Color(modelValue.value || props.defaultValue)
-      return color.hsv().object() as HSVColor
+      const color = new ColorTranslator(modelValue.value || props.defaultValue)
+
+      return HSLtoHSV(color.HSLObject)
     } catch (_) {
       return { h: 0, s: 0, v: 100 }
     }
   },
   set(value) {
-    const color = Color.hsv(value.h, value.s, value.v)
+    const color = new ColorTranslator(HSVtoHSL(value), {
+      decimals: 2,
+      labUnit: 'percent',
+      cmykUnit: 'percent',
+      cmykFunction: 'cmyk'
+    })
 
     switch (props.format) {
       case 'rgb':
-        modelValue.value = color.rgb().string()
+        modelValue.value = color.RGB
         break
       case 'hsl':
-        modelValue.value = color.hsl().string()
+        modelValue.value = color.HSL
         break
-      case 'hwb':
-        modelValue.value = color.hwb().string()
+      case 'cmyk':
+        modelValue.value = color.CMYK
+        break
+      case 'lab':
+        modelValue.value = color.CIELab
         break
       case 'hex':
       default:
-        modelValue.value = color.hex()
+        modelValue.value = color.HEX
     }
   }
 })
@@ -202,18 +233,18 @@ watchThrottled([selectorThumbPosition, trackThumbPosition], () => {
   nextTick(resumeWatchColor)
 }, { throttle: () => props.throttle })
 
-const trackThumbColor = computed(() => Color({
+const trackThumbColor = computed(() => new ColorTranslator(HSVtoHSL({
   h: normalizeHue(trackThumbPosition.value.y),
   s: 100,
   v: 100
-}).hex())
+})).HEX)
 
 const selectorStyle = computed(() => ({
   backgroundColor: trackThumbColor.value
 }))
 
 const selectorThumbStyle = computed(() => ({
-  backgroundColor: Color(modelValue.value || props.defaultValue).hex(),
+  backgroundColor: new ColorTranslator(modelValue.value || props.defaultValue).HEX,
   left: `${selectorThumbPosition.value.x}%`,
   top: `${selectorThumbPosition.value.y}%`
 }))
