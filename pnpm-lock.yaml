@@ -171,8 +171,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: ^1.6.0
-        version: 1.6.0(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
+        specifier: ^1.7.0
+        version: 1.7.0(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
       '@nuxtjs/plausible':
         specifier: ^1.2.0
         version: 1.2.0(magicast@0.3.5)(rollup@4.30.1)
@@ -1234,8 +1234,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@1.6.0':
-    resolution: {integrity: sha512-+5xF90x6hAgUowYmXQtDX1mIabk+G5qSzA3TsO5w/yo4LotUXA6SYxqSK/LqyfXWh2WNGvEdlHM6/UARbCcK0Q==}
+  '@nuxt/ui-pro@1.7.0':
+    resolution: {integrity: sha512-a7Vqi75wzxgyx5CI5vKyUEv3pewZUBWuO8Pw1J6U9teyeJ+apKHYfZvRWi0qvoUPSf19y1bin+puCD4vseeTlg==}
 
   '@nuxt/vite-builder@3.15.1':
     resolution: {integrity: sha512-b9uvLuRSgZy+pvU0rwHOpYo9XmAPibNGFEn0MeG6rUWVee9didV0Q5voAr+/1kq9bIbf6V0QFh9TE+4pCxZuMQ==}
@@ -8018,7 +8018,7 @@ snapshots:
       - typescript
       - yaml
 
-  '@nuxt/ui-pro@1.6.0(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))':
+  '@nuxt/ui-pro@1.7.0(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       '@iconify-json/vscode-icons': 1.2.10
       '@nuxt/ui': 'link:'
@@ -8027,7 +8027,7 @@ snapshots:
       git-url-parse: 16.0.0
       ofetch: 1.4.1
       parse-git-config: 3.0.0
-      pathe: 1.1.2
+      pathe: 2.0.1
       pkg-types: 1.3.0
       tailwind-merge: 2.6.0
       vue3-smooth-dnd: 0.0.6(vue@3.5.13(typescript@5.6.3))
