@@ -347,6 +347,15 @@ describe('Form', () => {
       expect(nestedField.text()).toBe('Required')
     })
 
+    test('submit event contains nested attributes', async () => {
+      state.email = 'bob@dylan.com'
+      state.password = 'strongpassword'
+      state.nested.field = 'nested'
+
+      await form.value.submit()
+      expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({ data: { email: 'bob@dylan.com', password: 'strongpassword', nested: { field: 'nested' } } }))
+    })
+
     test('submit works when child is disabled', async () => {
       await form.value.submit()
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
