@@ -47,9 +47,7 @@ export async function validateStandardSchema(
   state: any,
   schema: StandardSchemaV1
 ): Promise<ValidateReturnSchema<typeof state>> {
-  const result = await schema['~standard'].validate({
-    value: state
-  })
+  const result = await schema['~standard'].validate(state)
 
   if (result.issues) {
     return {
@@ -63,7 +61,7 @@ export async function validateStandardSchema(
 
   return {
     errors: null,
-    result: result.value
+    result
   }
 }
 
