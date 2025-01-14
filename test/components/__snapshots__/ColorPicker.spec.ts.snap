@@ -45,16 +45,31 @@ exports[`ColorPicker > renders with disabled correctly 1`] = `
 </div>"
 `;
 
+exports[`ColorPicker > renders with format cmyk correctly 1`] = `
+"<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
+  <div data-v-d6f23756="" class="flex gap-4">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #00FF8C;">
+      <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.310000000000002%;"></div>
+      </div>
+    </div>
+    <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48666666666667%;"></div>
+    </div>
+  </div>
+</div>"
+`;
+
 exports[`ColorPicker > renders with format hex correctly 1`] = `
 "<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
   <div data-v-d6f23756="" class="flex gap-4">
     <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #00FF8C;">
       <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
-        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313725490196077%;"></div>
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313726000000003%;"></div>
       </div>
     </div>
     <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
-      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704663212436%;"></div>
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704666666667%;"></div>
     </div>
   </div>
 </div>"
@@ -75,16 +90,16 @@ exports[`ColorPicker > renders with format hsl correctly 1`] = `
 </div>"
 `;
 
-exports[`ColorPicker > renders with format hwb correctly 1`] = `
+exports[`ColorPicker > renders with format lab correctly 1`] = `
 "<div data-v-d6f23756="" class="data-[disabled]:opacity-75">
   <div data-v-d6f23756="" class="flex gap-4">
-    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #00FF80;">
+    <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #00FF6F;">
       <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
-        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C261; left: 100%; top: 24%;"></div>
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C757; left: 100%; top: 22.031043999999994%;"></div>
       </div>
     </div>
     <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
-      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF80; top: 41.666666666666664%;"></div>
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF6F; top: 40.609066111111105%;"></div>
     </div>
   </div>
 </div>"
@@ -95,11 +110,11 @@ exports[`ColorPicker > renders with format rgb correctly 1`] = `
   <div data-v-d6f23756="" class="flex gap-4">
     <div data-v-d6f23756="" class="rounded-[calc(var(--ui-radius)*1.5)] w-42 h-42" style="background-color: #00FF8C;">
       <div data-v-d6f23756="" class="w-full h-full relative rounded-[calc(var(--ui-radius)*1.2)]" data-color-picker-background="">
-        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313725490196077%;"></div>
+        <div data-v-d6f23756="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-[var(--color-white)] rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313726000000003%;"></div>
       </div>
     </div>
     <div data-v-d6f23756="" class="w-[8px] relative rounded-[calc(var(--ui-radius)*1.5)] h-42" data-color-picker-track="">
-      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704663212436%;"></div>
+      <div data-v-d6f23756="" class="absolute transform -translate-y-1/2 -translate-x-[4px] rtl:translate-x-[4px] size-4 rounded-full ring-2 ring-[var(--color-white)] cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00FF8C; top: 42.48704666666667%;"></div>
     </div>
   </div>
 </div>"

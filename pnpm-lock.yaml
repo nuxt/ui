@@ -56,9 +56,6 @@ importers:
       '@tanstack/vue-table':
         specifier: ^8.20.5
         version: 8.20.5(vue@3.5.13(typescript@5.6.3))
-      '@types/color':
-        specifier: ^4.2.0
-        version: 4.2.0
       '@unhead/vue':
         specifier: ^1.11.16
         version: 1.11.16(vue@3.5.13(typescript@5.6.3))
@@ -68,9 +65,9 @@ importers:
       '@vueuse/integrations':
         specifier: ^12.4.0
         version: 12.4.0(change-case@5.4.4)(fuse.js@7.0.0)(typescript@5.6.3)
-      color:
-        specifier: ^4.2.3
-        version: 4.2.3
+      colortranslator:
+        specifier: ^4.1.0
+        version: 4.1.0
       consola:
         specifier: ^3.3.3
         version: 3.3.3
@@ -2498,15 +2495,6 @@ packages:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
 
-  '@types/color-convert@2.0.4':
-    resolution: {integrity: sha512-Ub1MmDdyZ7mX//g25uBAoH/mWGd9swVbt8BseymnaE18SU4po/PjmCrHxqIIRjBo3hV/vh1KGr0eMxUhp+t+dQ==}
-
-  '@types/color-name@1.1.5':
-    resolution: {integrity: sha512-j2K5UJqGTxeesj6oQuGpMgifpT5k9HprgQd8D1Y0lOFqKHl3PJu5GMeS4Y5EgjS55AE6OQxf8mPED9uaGbf4Cg==}
-
-  '@types/color@4.2.0':
-    resolution: {integrity: sha512-6+xrIRImMtGAL2X3qYkd02Mgs+gFGs+WsK0b7VVMaO4mYRISwyTjcqNrO0mNSmYEoq++rSLDB2F5HDNmqfOe+A==}
-
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
 
@@ -3248,6 +3236,9 @@ packages:
 
   colorjs.io@0.5.2:
     resolution: {integrity: sha512-twmVoizEW7ylZSN32OgKdXRmo1qg+wT5/6C3xu5b9QsWzSFAhHLn2xd8ro0diCsKfCj1RdaTP/nrcW+vAoQPIw==}
+
+  colortranslator@4.1.0:
+    resolution: {integrity: sha512-bwa5awaMnQ6dpm9D3nbsFwUr6x6FrTKmxPdolNtSYfxCNR7ZM93GG1OF5Y3Sy1LvYdalb3riKC9uTn0X5NB36g==}
 
   comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
@@ -10215,16 +10206,6 @@ snapshots:
 
   '@trysound/sax@0.2.0': {}
 
-  '@types/color-convert@2.0.4':
-    dependencies:
-      '@types/color-name': 1.1.5
-
-  '@types/color-name@1.1.5': {}
-
-  '@types/color@4.2.0':
-    dependencies:
-      '@types/color-convert': 2.0.4
-
   '@types/debug@4.1.12':
     dependencies:
       '@types/ms': 0.7.34
@@ -11099,17 +11080,21 @@ snapshots:
     dependencies:
       color-name: 1.1.4
       simple-swizzle: 0.2.2
+    optional: true
 
   color@4.2.3:
     dependencies:
       color-convert: 2.0.1
       color-string: 1.9.1
+    optional: true
 
   colord@2.9.3: {}
 
   colorette@1.4.0: {}
 
   colorjs.io@0.5.2: {}
+
+  colortranslator@4.1.0: {}
 
   comma-separated-tokens@2.0.3: {}
 
@@ -12628,7 +12613,8 @@ snapshots:
 
   is-arrayish@0.2.1: {}
 
-  is-arrayish@0.3.2: {}
+  is-arrayish@0.3.2:
+    optional: true
 
   is-binary-path@2.1.0:
     dependencies:
@@ -14968,6 +14954,7 @@ snapshots:
   simple-swizzle@0.2.2:
     dependencies:
       is-arrayish: 0.3.2
+    optional: true
 
   sirv@3.0.0:
     dependencies:

@@ -68,9 +68,9 @@ props:
 ---
 ::
 
-### HWB Format
+### CMYK Format
 
-Use the `format` prop to set `hwb` value of the ColorPicker.
+Use the `format` prop to set `cmyk` value of the ColorPicker.
 
 ::component-code
 ---
@@ -80,8 +80,25 @@ ignore:
 external:
   - modelValue
 props:
-  format: hwb
-  modelValue: 'hwb(150, 0%, 24%)'
+  format: cmyk
+  modelValue: 'cmyk(100%, 0%, 45.08%, 24.31%)'
+---
+::
+
+### CIELab Format
+
+Use the `format` prop to set `lab` value of the ColorPicker.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - format
+external:
+  - modelValue
+props:
+  format: lab
+  modelValue: 'lab(68.88% -60.41% 32.55%)'
 ---
 ::
 
