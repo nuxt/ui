@@ -13,6 +13,7 @@ function getEmojiFlag(locale: string): string {
     cs: 'cz',
     da: 'dk',
     el: 'gr',
+    et: 'ee',
     en: 'gb',
     ja: 'jp',
     ko: 'kr',
