@@ -16,6 +16,7 @@
       :value="modelValue"
       :required="required"
       :class="uiMenu.required"
+      :form="inputTargetForm"
       tabindex="-1"
       aria-hidden="true"
     >
@@ -312,6 +313,10 @@ export default defineComponent({
     },
     searchAttributes: {
       type: Array,
+      default: null
+    },
+    inputTargetForm: {
+      type: String,
       default: null
     },
     popper: {
