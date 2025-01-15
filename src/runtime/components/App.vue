@@ -2,12 +2,12 @@
 import type { ConfigProviderProps, TooltipProviderProps } from 'reka-ui'
 import { localeContextInjectionKey } from '../composables/useLocale'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
-import type { ToasterProps, Locale } from '../types'
+import type { ToasterProps, Locale, Messages } from '../types'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId' | 'dir' | 'locale'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
-  locale?: Locale
+  locale?: Locale<Messages>
 }
 
 export interface AppSlots {
