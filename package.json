@@ -37,7 +37,8 @@
     }
   },
   "imports": {
-    "#build/ui/*": "./.nuxt/ui/*.ts"
+    "#build/ui/*": "./.nuxt/ui/*.ts",
+    "#build/app-config": "./app-config.d.ts"
   },
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
@@ -47,6 +48,7 @@
   "types": "./dist/types.d.ts",
   "files": [
     ".nuxt/ui",
+    "app-config.d.ts",
     "dist",
     "cli",
     "vue-plugin.d.ts"
