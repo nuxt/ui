@@ -76,6 +76,12 @@ const items = [
     to: 'https://github.com/nuxt/ui',
     target: '_blank'
   }, {
+    label: 'GitHub Hidden Ext Icon',
+    icon: 'i-simple-icons-github',
+    to: 'https://github.com/nuxt/ui',
+    target: '_blank',
+    hideExternalIcon: true
+  }, {
     label: 'Help',
     icon: 'i-lucide-circle-help',
     disabled: true

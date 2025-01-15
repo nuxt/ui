@@ -28,6 +28,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'raw' | 'custom'>, P
    */
   badge?: string | number | BadgeProps
   trailingIcon?: string
+  hideExternalIcon?: boolean
   slot?: string
   value?: string
   children?: NavigationMenuChildItem[]
@@ -188,8 +189,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
         <slot :name="item.slot ? `${item.slot}-label` : 'item-label'" :item="(item as T)" :active="active" :index="index">
           {{ get(item, props.labelKey as string) }}
         </slot>
-
-        <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.linkLabelExternalIcon({ class: props.ui?.linkLabelExternalIcon, active })" />
+        <UIcon v-if="item.target === '_blank' && !item.hideExternalIcon" :name="appConfig.ui.icons.external" :class="ui.linkLabelExternalIcon({ class: props.ui?.linkLabelExternalIcon, active })" />
       </span>
 
       <span v-if="item.badge || (orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[item.slot ? `${item.slot}-trailing` : 'item-trailing']" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
@@ -249,8 +249,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
                           <div :class="ui.childLinkWrapper({ class: props.ui?.childLinkWrapper })">
                             <p :class="ui.childLinkLabel({ class: props.ui?.childLinkLabel, active: childActive })">
                               {{ get(childItem, props.labelKey as string) }}
-
-                              <UIcon v-if="childItem.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ class: props.ui?.childLinkLabelExternalIcon, active: childActive })" />
+                              <UIcon v-if="childItem.target === '_blank' && !childItem.hideExternalIcon" :name="appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ class: props.ui?.childLinkLabelExternalIcon, active: childActive })" />
                             </p>
                             <p v-if="childItem.description" :class="ui.childLinkDescription({ class: props.ui?.childLinkDescription, active: childActive })">
                               {{ childItem.description }}

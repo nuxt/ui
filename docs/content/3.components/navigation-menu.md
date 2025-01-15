@@ -21,6 +21,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `badge?: string | number | BadgeProps`{lang="ts-type"}
 - `trailingIcon?: string`{lang="ts-type"}
+- `hideExternalIcon?: boolean`{lang="ts-type"}
 - `value?: string`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
