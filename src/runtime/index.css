@@ -1,5 +1,6 @@
 @import './keyframes.css';
 
+@variant light (&:where(.light, .light *));
 @variant dark (&:where(.dark, .dark *));
 
 @layer base {
@@ -7,7 +8,7 @@
     @apply antialiased text-[var(--ui-text)] bg-[var(--ui-bg)] scheme-light dark:scheme-dark;
   }
 
-  :root {
+  :root, .light {
     --ui-text-dimmed: var(--ui-color-neutral-400);
     --ui-text-muted: var(--ui-color-neutral-500);
     --ui-text-toned: var(--ui-color-neutral-600);
