@@ -321,6 +321,7 @@ onMounted(() => {
       :data="data"
       :columns="columns"
       :column-pinning="columnPinning"
+      :initial-state="{ pagination: { pageSize: 10 } }"
       :loading="loading"
       sticky
       :ui="{
@@ -338,6 +339,16 @@ onMounted(() => {
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>
+
+      <UPagination
+        :default-page="
+          (table?.tableApi.getState().pagination.pageIndex || 0) + 1
+        "
+        :items-per-page="table?.tableApi.getState().pagination.pageSize"
+        :total="table?.tableApi.getFilteredRowModel().rows.length"
+        @update:page="(p) => table?.tableApi.setPageIndex(p - 1)
+        "
+      />
 
       <!-- <div class="flex items-center gap-1.5">
         <UButton

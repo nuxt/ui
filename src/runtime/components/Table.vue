@@ -22,7 +22,8 @@ import type {
   RowSelectionOptions,
   Updater,
   CellContext,
-  HeaderContext
+  HeaderContext,
+  InitialTableState
 } from '@tanstack/vue-table'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
@@ -103,6 +104,11 @@ export interface TableProps<T> {
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/row-selection)
    */
   rowSelectionOptions?: Omit<RowSelectionOptions<T>, 'onRowSelectionChange'>
+  /**
+   * @link [API Docs](https://tanstack.com/table/latest/docs/api/core/table#initialstate)
+   * @link [Guide](https://tanstack.com/table/latest/docs/framework/vue/guide/table-state#custom-initial-state)
+   */
+  initialState?: InitialTableState
   class?: any
   ui?: Partial<typeof table.slots>
 }
@@ -121,7 +127,7 @@ export type TableSlots<T> = {
 <script setup lang="ts" generic="T extends TableData">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
+import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable, getPaginationRowModel } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { useLocale } from '../composables/useLocale'
 
@@ -169,6 +175,8 @@ const tableApi = useVueTable({
   ...(props.expandedOptions || {}),
   getExpandedRowModel: getExpandedRowModel(),
   onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expandedState),
+  getPaginationRowModel: getPaginationRowModel(),
+  ...(props.initialState ? { initialState: props.initialState } : {}),
   state: {
     get globalFilter() {
       return globalFilterState.value
