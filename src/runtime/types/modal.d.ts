@@ -6,7 +6,7 @@ export interface Modal {
   transition?: boolean
   preventClose?: boolean
   fullscreen?: boolean
-  class?: string | Object | string[]
+  class?: string | object | string[]
   ui?: any
   onClose?: () => void
   onClosePrevented?: () => void

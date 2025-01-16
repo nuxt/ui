@@ -19,13 +19,13 @@
 <script lang="ts">
 import { computed, defineComponent, toRef } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import ULink from '../elements/Link.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, nuxtLinkProps, getNuxtLinkProps } from '../../utils'
+import { getNuxtLinkProps, mergeConfig, nuxtLinkProps, twMerge } from '../../utils'
 import { useInjectButtonGroup } from '../../composables/useButtonGroup'
-import type { ButtonColor, ButtonSize, ButtonVariant, Strategy } from '../../types/index'
+import type { ButtonColor, ButtonSize, ButtonVariant, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { button } from '#ui/ui.config'
@@ -67,21 +67,21 @@ export default defineComponent({
     size: {
       type: String as PropType<ButtonSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<ButtonColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<ButtonVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -125,11 +125,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { ui, attrs } = useUI('button', toRef(props, 'ui'), config)
 
     const { size, rounded } = useInjectButtonGroup({ ui, props })

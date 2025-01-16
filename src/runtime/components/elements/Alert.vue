@@ -42,13 +42,13 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
-import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy } from '../../types/index'
-import { mergeConfig } from '../../utils'
+import type { Avatar, Button, AlertColor, AlertVariant, AlertAction, Strategy, DeepPartial } from '../../types/index'
+import { mergeConfig, twMerge } from '../../utils'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { alert } from '#ui/ui.config'
@@ -90,14 +90,14 @@ export default defineComponent({
     color: {
       type: String as PropType<AlertColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<AlertVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -109,12 +109,12 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['close'],
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('alert', toRef(props, 'ui'), config)
 
     const alertClass = computed(() => {
@@ -129,7 +129,7 @@ export default defineComponent({
       ), props.class)
     })
 
-    function onAction (action: AlertAction) {
+    function onAction(action: AlertAction) {
       if (action.click) {
         action.click()
       }

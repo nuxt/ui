@@ -1,21 +1,22 @@
-export function omit<T extends Record<string, any>, K extends keyof T> (
+export function omit<T extends Record<string, any>, K extends keyof T>(
   object: T,
   keysToOmit: K[] | any[]
 ): Pick<T, Exclude<keyof T, K>> {
   const result = { ...object }
 
   for (const key of keysToOmit) {
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     delete result[key]
   }
 
   return result
 }
 
-export function get (object: Record<string, any>, path: (string | number)[] | string, defaultValue?: any): any {
+export function get(object: Record<string, any>, path: (string | number)[] | string, defaultValue?: any): any {
   if (typeof path === 'string') {
-    path = path.split('.').map(key => {
+    path = path.split('.').map((key) => {
       const numKey = Number(key)
-      return isNaN(numKey) ? key : numKey
+      return Number.isNaN(numKey) ? key : numKey
     })
   }
 

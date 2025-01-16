@@ -1,3 +1,5 @@
+import type { AvatarSize, BadgeColor, BadgeSize, BadgeVariant } from '../../types'
+
 export default {
   wrapper: 'relative',
   base: 'group relative flex items-center gap-1.5 focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-1 focus-visible:before:ring-primary-500 dark:focus-visible:before:ring-primary-400 before:absolute before:inset-px before:rounded-md disabled:cursor-not-allowed disabled:opacity-75',
@@ -17,13 +19,13 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0',
-    size: '2xs' as const
+    size: '2xs' as AvatarSize
   },
   badge: {
-    base: 'flex-shrink-0 ml-auto relative rounded',
-    color: 'gray' as const,
-    variant: 'solid' as const,
-    size: 'xs' as const
+    base: 'flex-shrink-0 ms-auto relative rounded',
+    color: 'gray' as BadgeColor,
+    variant: 'solid' as BadgeVariant,
+    size: 'xs' as BadgeSize
   },
   divider: {
     wrapper: {

@@ -33,12 +33,12 @@
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { Switch as HSwitch, provideUseId } from '@headlessui/vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig } from '../../utils'
-import type { ToggleSize, ToggleColor, Strategy } from '../../types/index'
+import { mergeConfig, twMerge } from '../../utils'
+import type { ToggleSize, ToggleColor, Strategy, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { toggle } from '#ui/ui.config'
@@ -62,7 +62,7 @@ export default defineComponent({
       default: null
     },
     modelValue: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | null>,
       default: false
     },
     disabled: {
@@ -88,14 +88,14 @@ export default defineComponent({
     color: {
       type: String as PropType<ToggleColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
     size: {
       type: String as PropType<ToggleSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
@@ -104,21 +104,21 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('toggle', toRef(props, 'ui'), config)
 
     const { emitFormChange, color, inputId, name } = useFormGroup(props)
 
     const active = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
         emit('change', value)
 

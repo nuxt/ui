@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 // Columns
 const columns = [{
+  key: 'select',
+  class: 'w-2'
+}, {
   key: 'id',
   label: '#',
   sortable: true
@@ -19,13 +22,14 @@ const columns = [{
 }]
 
 const selectedColumns = ref(columns)
-const columnsTable = computed(() => columns.filter((column) => selectedColumns.value.includes(column)))
+const columnsTable = computed(() => columns.filter(column => selectedColumns.value.includes(column)))
+const excludeSelectColumn = computed(() => columns.filter(v => v.key !== 'select'))
 
 // Selected Rows
 const selectedRows = ref([])
 
-function select (row) {
-  const index = selectedRows.value.findIndex((item) => item.id === row.id)
+function select(row) {
+  const index = selectedRows.value.findIndex(item => item.id === row.id)
   if (index === -1) {
     selectedRows.value.push(row)
   } else {
@@ -92,10 +96,10 @@ const { data: todos, status } = await useLazyAsyncData<{
 }[]>('todos', () => ($fetch as any)(`https://jsonplaceholder.typicode.com/todos${searchStatus.value}`, {
   query: {
     q: search.value,
-    '_page': page.value,
-    '_limit': pageCount.value,
-    '_sort': sort.value.column,
-    '_order': sort.value.direction
+    _page: page.value,
+    _limit: pageCount.value,
+    _sort: sort.value.column,
+    _order: sort.value.direction
   }
 }), {
   default: () => [],
@@ -153,7 +157,7 @@ const { data: todos, status } = await useLazyAsyncData<{
           </UButton>
         </UDropdown>
 
-        <USelectMenu v-model="selectedColumns" :options="columns" multiple>
+        <USelectMenu v-model="selectedColumns" :options="excludeSelectColumn" multiple>
           <UButton
             icon="i-heroicons-view-columns"
             color="gray"
@@ -186,7 +190,7 @@ const { data: todos, status } = await useLazyAsyncData<{
       sort-desc-icon="i-heroicons-arrow-down"
       sort-mode="manual"
       class="w-full"
-      :ui="{ td: { base: 'max-w-[0] truncate' }, default: { checkbox: { color: 'gray' } } }"
+      :ui="{ td: { base: 'max-w-[0] truncate' }, default: { checkbox: { color: 'gray' as any } } }"
       @select="select"
     >
       <template #completed-data="{ row }">

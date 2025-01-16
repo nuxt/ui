@@ -1,7 +1,7 @@
-import { avatar } from '../ui.config'
-import type { ExtractDeepKey } from '.'
-import colors from '#ui-colors'
 import type { AppConfig } from 'nuxt/schema'
+import type { avatar } from '../ui.config'
+import type { ExtractDeepKey } from '.'
+import type colors from '#ui-colors'
 
 export type AvatarSize = keyof typeof avatar.size | ExtractDeepKey<AppConfig, ['ui', 'avatar', 'size']>
 export type AvatarChipColor = 'gray' | typeof colors[number]

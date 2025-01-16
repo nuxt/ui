@@ -29,8 +29,20 @@ Use the `columns` prop to configure which columns to display. It's an array of o
 - `sortable` - Whether the column is sortable. Defaults to `false`.
 - `direction` - The sort direction to use on first click. Defaults to `asc`.
 - `class` - The class to apply to the column cells.
-- `rowClass` - The class to apply to the data column cells. :u-badge{label="New" class="!rounded-full" variant="subtle"}
+- `rowClass` - The class to apply to the data column cells.
 - `sort` - Pass your own `sort` function. Defaults to a simple _greater than_ / _less than_ comparison.
+
+Arguments for the `sort` function are: Value A, Value B, Direction - 'asc' or 'desc'
+
+Example `sort` function:
+```
+(a, b, direction) => {
+  if (!a || !b) return 0
+  const aPrice = parseInt(a.replace(/[,$]/g, ""))
+  const bPrice = parseInt(b.replace(/[,$]/g, ""))
+  return direction === "asc" ? aPrice - bPrice : bPrice - aPrice
+}
+```
 
 ::component-example{class="grid"}
 ---
@@ -50,7 +62,7 @@ extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-columns-selectable'
 componentProps:
-  class: 'flex-1 flex-col overflow-hidden'
+  class: 'flex-1 flex-col overflow-hidden min-h-[230px]'
 ---
 ::
 
@@ -273,6 +285,81 @@ componentProps:
 ---
 ::
 
+
+#### Event Selectable
+The `UTable` component provides two key events for handling row selection:
+
+##### ***@select:all***
+The `@select:all` event is emitted when the header checkbox in a selectable table is toggled. This event returns a boolean value indicating whether all rows are selected (true) or deselected (false).
+
+##### ***@update:modelValue***
+The `@update:modelValue` event is emitted whenever the selection state changes, including both individual row selection and bulk selection. This event returns an array containing the currently selected rows.
+
+Here's how to implement both events:
+
+```vue
+<script setup lang="ts">
+const selected = ref([])
+
+const onHandleSelectAll = (isSelected: boolean) => {
+  console.log('All rows selected:', isSelected)
+}
+
+const onUpdateSelection = (selectedRows: any[]) => {
+  console.log('Currently selected rows:', selectedRows)
+}
+</script>
+
+<template>
+  <UTable 
+    v-model="selected" 
+    :rows="people" 
+    @select:all="onHandleSelectAll"
+    @update:modelValue="onUpdateSelection"
+  />
+</template>
+```
+
+
+#### Single Select Mode
+Control how the select function allows only one row to be selected at a time.
+
+```vue
+<template>
+  <!-- Allow only one row to be selectable at a time -->
+  <UTable :single-select="true" />
+</template>
+```
+
+#### Checkbox Placement
+You can customize the checkbox column position by using the `select` key in the `columns` configuration.
+
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-dynamically-render-selectable'
+componentProps:
+  class: 'flex-1'
+---
+::
+
+### Contextmenu
+
+Use the `contextmenu` listener on your Table to make the rows right-clickable. The function will receive the original event as the first argument and the row as the second argument.
+
+You can use this to open a [ContextMenu](/components/context-menu) for that row.
+
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-contextmenu'
+componentProps:
+  class: 'flex-1 flex-col overflow-hidden'
+---
+::
+
 ### Searchable
 
 You can easily use the [Input](/components/input) component to filter the rows.
@@ -301,14 +388,83 @@ componentProps:
 ---
 ::
 
-### Expandable :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### Expandable
 
-You can use the `expand` slot to display extra information about a row. You will have access to the `row` property in the slot scope.
+You can use the `v-model:expand` to enables row expansion functionality in the table component. It maintains an object containing an `openedRows` an array and `row` an object, which tracks the indices of currently expanded rows.
+
+When using the expand slot, you have access to the `row` property in the slot scope, which contains the data of the row that triggered the expand/collapse action. This allows you to customize the expanded content based on the row's data.
 
 ::component-example{class="grid"}
 ---
+extraClass: 'overflow-hidden'
 padding: false
 component: 'table-example-expandable'
+componentProps:
+  class: 'flex-1'
+---
+::
+
+#### Event expand
+
+The `@update:expand` event is emitted when a row is expanded. This event provides the current state of expanded rows and the data of the row that triggered the event.
+
+To use the `@update:expand` event, add it to your `UTable` component. The event handler will receive an object with the following properties:
+- `openedRows`: An array of indices of the currently expanded rows.
+- `row`: The row data that triggered the expand/collapse action.
+
+```vue
+<script setup lang="ts">
+const { data, pending } = await useLazyFetch(() => `/api/users`)
+
+const handleExpand = ({ openedRows, row }) => {
+  console.log('opened Rows:', openedRows);
+  console.log('Row Data:', row);
+};
+
+const expand = ref({
+  openedRows: [],
+  row: null
+})
+
+</script>
+<template>
+  <UTable v-model="expand" :loading="pending" :rows="data" @update:expand="handleExpand">
+    <template #expand="{ row }">
+        <div class="p-4">
+          <pre>{{ row }}</pre>
+        </div>
+      </template>
+  </UTable>
+</template>
+```
+
+#### Multiple expand
+Controls whether multiple rows can be expanded simultaneously in the table.
+
+```vue
+<template>
+  <!-- Allow only one row to be expanded at a time -->
+  <UTable :multiple-expand="false" />
+
+  <!-- Default behavior: Allow multiple rows to be expanded simultaneously -->
+  <UTable :multiple-expand="true" />
+
+  <!-- Or simply -->
+  <UTable />
+</template>
+```
+
+#### Disable Row Expansion
+
+You can disable the expansion functionality for specific rows in the UTable component by adding the `disabledExpand` property to your row data.
+
+> Important: When using `disabledExpand`, you must define the `columns` prop for the UTable component. Otherwise, the table will render all properties as columns, including the `disabledExpand` property.
+
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-disabled-expandable'
 componentProps:
   class: 'flex-1'
 ---
@@ -435,6 +591,119 @@ componentProps:
   class: 'flex-1'
 ---
 ::
+
+### `select-header`
+This slot allows you to customize the checkbox appearance in the table header for selecting all rows at once while using feature [Selectable](#selectable).
+
+#### Usage
+```vue
+<template>
+  <UTable v-model="selectable"> 
+    <template #select-header="{ checked, change, indeterminate }">
+      <!-- Place your custom component here -->
+    </template>
+  </UTable>
+</template>
+```
+
+#### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `checked` | `Boolean` | Indicates if all rows are selected |
+| `change` | `Function` | Function to handle selection state changes. Must receive a boolean value (true/false) |
+| `indeterminate` | `Boolean` | Indicates partial selection (when some rows are selected) |
+
+#### Example
+```vue
+<template>
+  <UTable>
+    <!-- Header checkbox customization -->
+    <template #select-header="{ indeterminate, checked, change }">
+      <input 
+        type="checkbox"
+        :indeterminate="indeterminate"
+        :checked="checked"
+        @change="e => change(e.target.checked)"
+      />
+    </template>
+  </UTable>
+</template>
+```
+
+### `select-data`
+This slot allows you to customize the checkbox appearance for each row in the table while using feature [Selectable](#selectable).
+
+#### Usage
+```vue
+<template>
+  <UTable v-model="selectable">
+    <template #select-data="{ checked, change }">
+      <!-- Place your custom component here -->
+    </template>
+  </UTable>
+</template>
+```
+
+#### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `checked` | `Boolean` | Indicates if the current row is selected |
+| `change` | `Function` | Function to handle selection state changes. Must receive a boolean value (true/false) |
+
+#### Example
+```vue
+<template>
+  <UTable>
+    <!-- Row checkbox customization -->
+    <template #select-data="{ checked, change }">
+      <input 
+        type="checkbox"
+        :checked="checked"
+        @change="e => change(e.target.checked)"
+      />
+    </template>
+  </UTable>
+</template>
+```
+
+### `expand-action`
+
+The `#expand-action` slot allows you to customize the expansion control interface for expandable table rows. This feature provides a flexible way to implement custom expand/collapse functionality while maintaining access to essential row data and state.
+
+#### Usage
+
+```vue
+<template>
+  <UTable>
+    <template #expand-action="{ row, toggle, isExpanded }">
+    <!-- Your custom expand action content -->
+    </template>
+  </UTable>
+</template>
+```
+
+#### Slot Props
+
+The slot provides three key props:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `row` | `Object` | Contains the current row's data |
+| `toggle` | `Function` | Function to toggle the expanded state |
+| `isExpanded` | `Boolean` | Current expansion state of the row |
+
+::component-example{class="grid"}
+---
+extraClass: 'overflow-hidden'
+padding: false
+component: 'table-example-expand-action-slot'
+componentProps:
+  class: 'flex-1'
+---
+::
+
 
 ### `loading-state`
 

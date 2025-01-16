@@ -1,9 +1,10 @@
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
-    <slot name="first" :on-click="onClickFirst">
+    <slot name="first" :on-click="onClickFirst" :can-go-first="canGoFirstOrPrev">
       <UButton
         v-if="firstButton && showFirst"
         :size="size"
+        :to="to?.(1)"
         :disabled="!canGoFirstOrPrev || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.firstButton || {}), ...firstButton }"
@@ -13,10 +14,11 @@
       />
     </slot>
 
-    <slot name="prev" :on-click="onClickPrev">
+    <slot name="prev" :on-click="onClickPrev" :can-go-prev="canGoFirstOrPrev">
       <UButton
         v-if="prevButton"
         :size="size"
+        :to="to?.(currentPage - 1)"
         :disabled="!canGoFirstOrPrev || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.prevButton || {}), ...prevButton }"
@@ -39,10 +41,11 @@
       @click="() => onClickPage(page)"
     />
 
-    <slot name="next" :on-click="onClickNext">
+    <slot name="next" :on-click="onClickNext" :can-go-next="canGoLastOrNext">
       <UButton
         v-if="nextButton"
         :size="size"
+        :to="to?.(currentPage + 1)"
         :disabled="!canGoLastOrNext || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.nextButton || {}), ...nextButton }"
@@ -52,10 +55,11 @@
       />
     </slot>
 
-    <slot name="last" :on-click="onClickLast">
+    <slot name="last" :on-click="onClickLast" :can-go-last="canGoLastOrNext">
       <UButton
         v-if="lastButton && showLast"
         :size="size"
+        :to="to?.(pages.length)"
         :disabled="!canGoLastOrNext || disabled"
         :class="[ui.base, ui.rounded]"
         v-bind="{ ...(ui.default.lastButton || {}), ...lastButton }"
@@ -70,11 +74,11 @@
 <script lang="ts">
 import { computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import type { RouteLocationRaw } from '#vue-router'
 import UButton from '../elements/Button.vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Button, ButtonSize, Strategy } from '../../types/index'
+import type { Button, ButtonSize, DeepPartial, Strategy } from '../../types/index'
+import type { RouteLocationRaw } from '#vue-router'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { pagination, button } from '#ui/ui.config'
@@ -104,7 +108,7 @@ export default defineComponent({
     max: {
       type: Number,
       default: 7,
-      validate (value) {
+      validate(value) {
         return value >= 5 && value < Number.MAX_VALUE
       }
     },
@@ -115,7 +119,7 @@ export default defineComponent({
     size: {
       type: String as PropType<ButtonSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(buttonConfig.size).includes(value)
       }
     },
@@ -164,19 +168,19 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('pagination', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const currentPage = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })
@@ -248,7 +252,7 @@ export default defineComponent({
     const canGoFirstOrPrev = computed(() => currentPage.value > 1)
     const canGoLastOrNext = computed(() => currentPage.value < pages.value.length)
 
-    function onClickFirst () {
+    function onClickFirst() {
       if (!canGoFirstOrPrev.value) {
         return
       }
@@ -256,7 +260,7 @@ export default defineComponent({
       currentPage.value = 1
     }
 
-    function onClickLast () {
+    function onClickLast() {
       if (!canGoLastOrNext.value) {
         return
       }
@@ -264,7 +268,7 @@ export default defineComponent({
       currentPage.value = pages.value.length
     }
 
-    function onClickPage (page: number | string) {
+    function onClickPage(page: number | string) {
       if (typeof page === 'string') {
         return
       }
@@ -272,7 +276,7 @@ export default defineComponent({
       currentPage.value = page
     }
 
-    function onClickPrev () {
+    function onClickPrev() {
       if (!canGoFirstOrPrev.value) {
         return
       }
@@ -280,7 +284,7 @@ export default defineComponent({
       currentPage.value--
     }
 
-    function onClickNext () {
+    function onClickNext() {
       if (!canGoLastOrNext.value) {
         return
       }

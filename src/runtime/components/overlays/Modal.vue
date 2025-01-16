@@ -1,20 +1,20 @@
 <template>
   <TransitionRoot :appear="appear" :show="isOpen" as="template" @after-leave="onAfterLeave">
     <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
-      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
+      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition" :class="ui.overlay.transition.enterFrom">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
       <div :class="ui.inner">
         <div :class="[ui.container, !fullscreen && ui.padding]">
-          <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
+          <TransitionChild as="template" :appear="appear" v-bind="transitionClass" :class="transitionClass.enterFrom">
             <HDialogPanel
               :class="[
                 ui.base,
                 ui.background,
                 ui.ring,
                 ui.shadow,
-                fullscreen ? ui.fullscreen : [ui.width, ui.height, ui.rounded, ui.margin],
+                fullscreen ? ui.fullscreen : [ui.width, ui.height, ui.rounded, ui.margin]
               ]"
             >
               <slot />
@@ -32,7 +32,7 @@ import type { PropType } from 'vue'
 import { Dialog as HDialog, DialogPanel as HDialogPanel, TransitionRoot, TransitionChild, provideUseId } from '@headlessui/vue'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy } from '../../types/index'
+import type { DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { modal } from '#ui/ui.config'
@@ -78,26 +78,26 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'close', 'close-prevented', 'after-leave'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('modal', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const isOpen = computed({
-      get () {
+      get() {
         return props.modelValue
       },
-      set (value) {
+      set(value) {
         emit('update:modelValue', value)
       }
     })
 
     const transitionClass = computed(() => {
       if (!props.transition) {
-        return {}
+        return {} as typeof ui.value.transition
       }
 
       return {
@@ -105,7 +105,7 @@ export default defineComponent({
       }
     })
 
-    function close (value: boolean) {
+    function close(value: boolean) {
       if (props.preventClose) {
         emit('close-prevented')
 

@@ -3,7 +3,7 @@ import colors from '#tailwind-config/theme/colors'
 
 export default defineNuxtPlugin({
   enforce: 'post',
-  setup () {
+  setup() {
     const appConfig = useAppConfig()
 
     const root = computed(() => {

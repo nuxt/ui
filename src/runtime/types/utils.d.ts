@@ -7,15 +7,15 @@ export interface TightMap<O = any> {
 export type DeepPartial<T, O = any> = {
   [P in keyof T]?: T[P] extends object
     ? DeepPartial<T[P], O>
-    : T[P];
+    : T[P] extends string ? string : T[P];
 } & {
   [key: string]: O | TightMap<O>
 }
 
 export type NestedKeyOf<ObjectType extends Record<string, any>> = {
   [Key in keyof ObjectType]: ObjectType[Key] extends Record<string, any>
-  ? NestedKeyOf<ObjectType[Key]>
-  : Key
+    ? NestedKeyOf<ObjectType[Key]>
+    : Key
 }[keyof ObjectType]
 
 type DeepKey<T, Keys extends string[]> =

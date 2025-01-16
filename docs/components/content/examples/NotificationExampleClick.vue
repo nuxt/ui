@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const toast = useToast()
 
-function onClick () {
+function onClick() {
   alert('Clicked!')
 }
 </script>

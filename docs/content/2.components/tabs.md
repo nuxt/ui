@@ -92,7 +92,7 @@ Use the `#default` slot to customize the content of the trigger buttons. You wil
 
 :component-example{component="tabs-example-default-slot"}
 
-### `icon` :u-badge{label="New" class="align-middle ml-2 !rounded-full" variant="subtle"}
+### `icon`
 
 Use the `#icon` slot to customize the icon of the trigger buttons. You will have access to the `item`, `index`, `selected` and `disabled` in the slot scope.
 

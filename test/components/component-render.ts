@@ -1,5 +1,5 @@
+import path from 'node:path'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import path from 'path'
 
 export default async function (nameOrHtml: string, options: any, component: any) {
   let html: string

@@ -11,14 +11,15 @@ type InputProps = {
   legend?: string | null
 }
 
-
-export const useFormGroup = (inputProps?: InputProps, config?: any) => {
+export const useFormGroup = (inputProps?: InputProps, config?: any, bind: boolean = true) => {
   const formBus = inject<UseEventBusReturn<FormEvent, string> | undefined>('form-events', undefined)
   const formGroup = inject<InjectedFormGroupValue | undefined>('form-group', undefined)
   const formInputs = inject<any>('form-inputs', undefined)
 
   if (formGroup) {
-    if (inputProps?.id) {
+    if (!bind || inputProps?.legend) {
+      formGroup.inputId.value = undefined
+    } else if (inputProps?.id) {
       // Updates for="..." attribute on label if inputProps.id is provided
       formGroup.inputId.value = inputProps?.id
     }
@@ -30,18 +31,18 @@ export const useFormGroup = (inputProps?: InputProps, config?: any) => {
 
   const blurred = ref(false)
 
-  function emitFormEvent (type: FormEventType, path: string) {
+  function emitFormEvent(type: FormEventType, path: string) {
     if (formBus) {
       formBus.emit({ type, path })
     }
   }
 
-  function emitFormBlur () {
+  function emitFormBlur() {
     emitFormEvent('blur', formGroup?.name.value as string)
     blurred.value = true
   }
 
-  function emitFormChange () {
+  function emitFormChange() {
     emitFormEvent('change', formGroup?.name.value as string)
   }
 

@@ -32,10 +32,10 @@ const colorMode = useColorMode()
 
 const primaryColors = computed(() => appConfig.ui.colors.filter(color => color !== 'primary').map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const primary = computed({
-  get () {
+  get() {
     return primaryColors.value.find(option => option.value === appConfig.ui.primary)
   },
-  set (option) {
+  set(option) {
     appConfig.ui.primary = option.value
 
     window.localStorage.setItem('nuxt-ui-primary', appConfig.ui.primary)
@@ -44,10 +44,10 @@ const primary = computed({
 
 const grayColors = computed(() => ['slate', 'cool', 'zinc', 'neutral', 'stone'].map(color => ({ value: color, text: color, hex: colors[color][colorMode.value === 'dark' ? 400 : 500] })))
 const gray = computed({
-  get () {
+  get() {
     return grayColors.value.find(option => option.value === appConfig.ui.gray)
   },
-  set (option) {
+  set(option) {
     appConfig.ui.gray = option.value
 
     window.localStorage.setItem('nuxt-ui-gray', appConfig.ui.gray)

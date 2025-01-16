@@ -21,12 +21,12 @@
 <script lang="ts">
 import { toRef, computed, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig } from '../../utils'
-import type { Avatar, DividerSize, Strategy } from '../../types/index'
+import { mergeConfig, twMerge } from '../../utils'
+import type { Avatar, DeepPartial, DividerSize, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { divider } from '#ui/ui.config'
@@ -55,7 +55,7 @@ export default defineComponent({
     size: {
       type: String as PropType<DividerSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.border.size.horizontal).includes(value) || Object.keys(config.border.size.vertical).includes(value)
       }
     },
@@ -66,7 +66,7 @@ export default defineComponent({
     },
     type: {
       type: String as PropType<'solid' | 'dotted' | 'dashed'>,
-      default: 'solid',
+      default: () => config.default.type,
       validator: (value: string) => ['solid', 'dotted', 'dashed'].includes(value)
     },
     class: {
@@ -74,11 +74,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('divider', toRef(props, 'ui'), config)
 
     const wrapperClass = computed(() => {
