@@ -173,6 +173,13 @@ baseProps:
 ---
 ::
 
+### Limit
+
+Use the `maxlength` prop to limit the length of the Input.
+
+:component-example{component="input-example-max-length"}
+
+
 ## Slots
 
 ### `leading`
