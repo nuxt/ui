@@ -19,13 +19,16 @@ export default defineNuxtPlugin(() => {
   const root = computed(() => {
     const { neutral, ...colors } = appConfig.ui.colors
 
-    return `:root {
+    return `@layer base {
+  :root {
   ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateShades(key, value)).join('\n  ')}
-
+  }
+  :root, .light {
   ${Object.keys(colors).map(key => generateColor(key, 500)).join('\n  ')}
-}
-.dark {
+  }
+  .dark {
   ${Object.keys(colors).map(key => generateColor(key, 400)).join('\n  ')}
+  }
 }`
   })
 
