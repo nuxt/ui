@@ -9,7 +9,7 @@
   </UInput>
 </template>
 
-  <script setup lang="ts">
+<script setup lang="ts">
 const name = ref('')
 const maxLength = 10
-  </script>
+</script>
