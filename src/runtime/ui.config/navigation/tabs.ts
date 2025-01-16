@@ -28,7 +28,7 @@ export default {
       font: 'font-medium',
       rounded: 'rounded-md',
       shadow: '',
-      icon: 'w-4 h-4 flex-shrink-0 mr-2'
+      icon: 'w-4 h-4 flex-shrink-0 me-2'
     }
   }
 }

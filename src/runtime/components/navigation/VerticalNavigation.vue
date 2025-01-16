@@ -55,15 +55,15 @@
 <script lang="ts">
 import { toRef, defineComponent, computed } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import UBadge from '../elements/Badge.vue'
 import ULink from '../elements/Link.vue'
 import UDivider from '../layout/Divider.vue'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, getULinkProps } from '../../utils'
-import type { VerticalNavigationLink, Strategy } from '../../types/index'
+import { getULinkProps, mergeConfig, twMerge } from '../../utils'
+import type { VerticalNavigationLink, Strategy, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { verticalNavigation } from '#ui/ui.config'
@@ -89,11 +89,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('verticalNavigation', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const sections = computed(() => (Array.isArray(props.links[0]) ? props.links : [props.links]) as VerticalNavigationLink[][])

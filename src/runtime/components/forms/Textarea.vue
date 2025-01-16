@@ -23,12 +23,12 @@
 <script lang="ts">
 import { ref, computed, toRef, watch, onMounted, nextTick, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import { defu } from 'defu'
 import { useUI } from '../../composables/useUI'
 import { useFormGroup } from '../../composables/useFormGroup'
-import { mergeConfig, looseToNumber } from '../../utils'
-import type { TextareaSize, TextareaColor, TextareaVariant, Strategy } from '../../types/index'
+import { looseToNumber, mergeConfig, twMerge } from '../../utils'
+import type { TextareaSize, TextareaColor, TextareaVariant, Strategy, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { textarea } from '#ui/ui.config'
@@ -39,7 +39,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: [String, Number],
+      type: [String, Number] as PropType<string | number | null>,
       default: ''
     },
     id: {
@@ -93,21 +93,21 @@ export default defineComponent({
     size: {
       type: String as PropType<TextareaSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.size).includes(value)
       }
     },
     color: {
       type: String as PropType<TextareaColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return [...appConfig.ui.colors, ...Object.keys(config.color)].includes(value)
       }
     },
     variant: {
       type: String as PropType<TextareaVariant>,
       default: () => config.default.variant,
-      validator (value: string) {
+      validator(value: string) {
         return [
           ...Object.keys(config.variant),
           ...Object.values(config.color).flatMap(value => Object.keys(value))
@@ -123,21 +123,21 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     },
     modelModifiers: {
-      type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean }>,
+      type: Object as PropType<{ trim?: boolean, lazy?: boolean, number?: boolean, nullify?: boolean }>,
       default: () => ({})
     }
   },
   emits: ['update:modelValue', 'blur', 'change'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const { ui, attrs } = useUI('textarea', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const { emitFormBlur, emitFormInput, inputId, color, size, name } = useFormGroup(props, config)
 
-    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false }))
+    const modelModifiers = ref(defu({}, props.modelModifiers, { trim: false, lazy: false, number: false, nullify: false }))
 
     const textarea = ref<HTMLTextAreaElement | null>(null)
 
@@ -154,18 +154,22 @@ export default defineComponent({
         }
 
         textarea.value.rows = props.rows
+        const overflow = textarea.value.style.overflow
+        textarea.value.style.overflow = 'hidden'
 
         const styles = window.getComputedStyle(textarea.value)
-        const paddingTop = parseInt(styles.paddingTop)
-        const paddingBottom = parseInt(styles.paddingBottom)
+        const paddingTop = Number.parseInt(styles.paddingTop)
+        const paddingBottom = Number.parseInt(styles.paddingBottom)
         const padding = paddingTop + paddingBottom
-        const lineHeight = parseInt(styles.lineHeight)
+        const lineHeight = Number.parseInt(styles.lineHeight)
         const { scrollHeight } = textarea.value
         const newRows = (scrollHeight - padding) / lineHeight
 
         if (newRows > props.rows) {
           textarea.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
         }
+
+        textarea.value.style.overflow = overflow
       }
     }
 
@@ -177,6 +181,10 @@ export default defineComponent({
 
       if (modelModifiers.value.number) {
         value = looseToNumber(value)
+      }
+
+      if (modelModifiers.value.nullify) {
+        value ||= null
       }
 
       emit('update:modelValue', value)

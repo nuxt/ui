@@ -13,7 +13,7 @@ const items = [{
   content: 'Finally, this is the content for Tab3'
 }]
 
-function onChange (index) {
+function onChange(index) {
   const item = items[index]
 
   alert(`${item.label} was clicked!`)

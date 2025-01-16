@@ -37,7 +37,7 @@ const labels = computed({
   }
 })
 
-function hashCode (str) {
+function hashCode(str) {
   let hash = 0
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash)
@@ -45,7 +45,7 @@ function hashCode (str) {
   return hash
 }
 
-function intToRGB (i) {
+function intToRGB(i) {
   const c = (i & 0x00FFFFFF)
     .toString(16)
     .toUpperCase()
@@ -53,7 +53,7 @@ function intToRGB (i) {
   return '00000'.substring(0, 6 - c.length) + c
 }
 
-function generateColorFromString (str) {
+function generateColorFromString(str) {
   return intToRGB(hashCode(str))
 }
 </script>

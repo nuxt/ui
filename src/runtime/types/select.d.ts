@@ -1,7 +1,7 @@
-import { select } from '../ui.config'
-import type { NestedKeyOf, ExtractDeepKey, ExtractDeepObject } from '.'
-import colors from '#ui-colors'
 import type { AppConfig } from 'nuxt/schema'
+import type { select } from '../ui.config'
+import type { NestedKeyOf, ExtractDeepKey, ExtractDeepObject } from '.'
+import type colors from '#ui-colors'
 
 export type SelectSize = keyof typeof select.size | ExtractDeepKey<AppConfig, ['ui', 'select', 'size']>
 export type SelectColor = keyof typeof select.color | ExtractDeepKey<AppConfig, ['ui', 'select', 'color']> | typeof colors[number]

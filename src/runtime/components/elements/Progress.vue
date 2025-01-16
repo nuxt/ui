@@ -33,7 +33,7 @@ import type { PropType } from 'vue'
 import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
 import { mergeConfig } from '../../utils'
-import type { Strategy, ProgressSize, ProgressAnimation, ProgressColor } from '../../types/index'
+import type { Strategy, ProgressSize, ProgressAnimation, ProgressColor, DeepPartial } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { progress } from '#ui/ui.config'
@@ -58,21 +58,21 @@ export default defineComponent({
     animation: {
       type: String as PropType<ProgressAnimation>,
       default: () => config.default.animation,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.animation).includes(value)
       }
     },
     size: {
       type: String as PropType<ProgressSize>,
       default: () => config.default.size,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(config.progress.size).includes(value)
       }
     },
     color: {
       type: String as PropType<ProgressColor>,
       default: () => config.default.color,
-      validator (value: string) {
+      validator(value: string) {
         return appConfig.ui.colors.includes(value)
       }
     },
@@ -81,11 +81,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
-  setup (props) {
+  setup(props) {
     const { ui, attrs } = useUI('progress', toRef(props, 'ui'), config, toRef(props, 'class'))
 
     const indicatorContainerClass = computed(() => {
@@ -154,15 +154,15 @@ export default defineComponent({
       )
     })
 
-    function isActive (index: number) {
+    function isActive(index: number) {
       return index === Number(props.value)
     }
 
-    function isFirst (index: number) {
+    function isFirst(index: number) {
       return index === 0
     }
 
-    function stepClasses (index: string | number) {
+    function stepClasses(index: string | number) {
       index = Number(index)
 
       const classes = [stepClass.value]
@@ -199,9 +199,9 @@ export default defineComponent({
       }
 
       switch (true) {
-      case props.value < 0: return 0
-      case props.value > (realMax.value as number): return 100
-      default: return (props.value / (realMax.value as number)) * 100
+        case props.value < 0: return 0
+        case props.value > (realMax.value as number): return 100
+        default: return (props.value / (realMax.value as number)) * 100
       }
     })
 
@@ -256,6 +256,20 @@ progress:indeterminate {
     }
   }
 
+  [dir=rtl] &.bar-animation-carousel {
+    &:after {
+      animation: carousel-rtl 2s ease-in-out infinite;
+    }
+
+    &::-webkit-progress-value {
+      animation: carousel-rtl 2s ease-in-out infinite;
+    }
+
+    &::-moz-progress-bar {
+      animation: carousel-rtl 2s ease-in-out infinite;
+    }
+  }
+
   &.bar-animation-carousel-inverse {
     &:after {
       animation: carousel-inverse 2s ease-in-out infinite;
@@ -267,6 +281,20 @@ progress:indeterminate {
 
     &::-moz-progress-bar {
       animation: carousel-inverse 2s ease-in-out infinite;
+    }
+  }
+
+  [dir=rtl] &.bar-animation-carousel-inverse {
+    &:after {
+      animation: carousel-inverse-rtl 2s ease-in-out infinite;
+    }
+
+    &::-webkit-progress-value {
+      animation: carousel-inverse-rtl 2s ease-in-out infinite;
+    }
+
+    &::-moz-progress-bar {
+      animation: carousel-inverse-rtl 2s ease-in-out infinite;
     }
   }
 
@@ -315,6 +343,22 @@ progress:indeterminate {
   }
 }
 
+@keyframes carousel-rtl {
+
+  0%,
+  100% {
+    width: 50%
+  }
+
+  0% {
+    transform: translateX(100%)
+  }
+
+  100% {
+    transform: translateX(-200%)
+  }
+}
+
 @keyframes carousel-inverse {
 
   0%,
@@ -328,6 +372,22 @@ progress:indeterminate {
 
   100% {
     transform: translateX(-100%)
+  }
+}
+
+@keyframes carousel-inverse-rtl {
+
+  0%,
+  100% {
+    width: 50%
+  }
+
+  0% {
+    transform: translateX(-200%)
+  }
+
+  100% {
+    transform: translateX(100%)
   }
 }
 
@@ -361,4 +421,5 @@ progress:indeterminate {
     width: 90%;
     margin-left: 5%
   }
-}</style>
+}
+</style>

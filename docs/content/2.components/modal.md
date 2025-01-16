@@ -61,7 +61,7 @@ Set the `fullscreen` prop to `true` to enable it.
 
 ### Control programmatically
 
-First of all, add the `Modals` component to your app, preferably inside `app.vue`.
+First of all, add the `Modals` component to your app, preferably inside `app.vue`. This component provides your application a place to render programmatically created modals.
 
 ```vue [app.vue]
 <template>
@@ -81,8 +81,8 @@ Then, you can use the `useModal` composable to control your modals within your a
 :component-example{component="modal-example-component" hiddenCode hiddenPreview }
 
 ::code-group{class="[&>div:last-child>div:first-child]:!rounded-t-none"}
-  :component-example{component="modal-example-composable" label="app.vue" }
-  :component-example{component="modal-example-component" hiddenPreview label="modal.vue" }
+  :component-example{component="modal-example-composable" label="index.vue" }
+  :component-example{component="modal-example-component" hiddenPreview label="components/ModalExampleComponent.vue" }
 ::
 
 Additionally, you can close the modal within the modal component by calling `modal.close()`.

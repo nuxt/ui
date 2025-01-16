@@ -5,13 +5,18 @@ export interface FormError<T extends string = string> {
   message: string
 }
 
+export interface ValidateReturnSchema<T> {
+  result: T
+  errors: FormError[]
+}
+
 export interface FormErrorWithId extends FormError {
   id: string
 }
 
 export interface Form<T> {
-  validate(path?: string | string[], opts?: { silent?: true }): Promise<T | false>;
-  validate(path?: string | string[], opts?: { silent?: false }): Promise<T>;
+  validate(path?: string | string[], opts?: { silent?: true }): Promise<T | false>
+  validate(path?: string | string[], opts?: { silent?: false }): Promise<T>
   clear(path?: string): void
   errors: Ref<FormError[]>
   setErrors(errs: FormError[], path?: string): void

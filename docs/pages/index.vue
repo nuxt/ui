@@ -295,7 +295,7 @@
                     wrapper: 'px-4 py-2.5 border-gray-800/10 dark:border-gray-200/10 cursor-pointer',
                     icon: {
                       wrapper: 'mb-2 p-1',
-                      base: 'h-4 w-4',
+                      base: 'h-4 w-4'
                     },
                     title: 'text-sm',
                     description: 'text-xs'
@@ -413,7 +413,7 @@ import type { ParsedContent, NavItem } from '@nuxt/content'
 import { useElementBounding, useWindowScroll, useElementSize, breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { HomeProBlock } from '~/types'
 
-const { data: page } = await useAsyncData('index', () => queryContent('/dev').findOne())
+const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
 const { data: module } = await useFetch<{
   stats: {
     downloads: number
@@ -466,188 +466,212 @@ const steps = {
 
 const inc = computed(() => (height.value - 32 - 64 - 32 - 32) / 4)
 
-const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(steps.docs) ? [{
-  class: 'inset-x-0 top-20 bottom-20 overflow-hidden',
-  inactive: true,
-  children: [{
-    name: 'ULandingHero',
-    to: '/pro/components/landing-hero',
-    class: [
-      'inset-4',
-      isAfterStep(steps.landing + 2) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
-    ].filter(Boolean).join(' '),
-    style: {
-      '--step-y': `${getStepY(steps.landing + 2)}px`
-    },
-    inactive: isAfterStep(steps.landing + 1),
-    children: [{
-      slot: 'landing-hero',
-      class: 'inset-4'
-    }]
-  }, isAfterStep(steps.landing + 2) && {
-    name: 'ULandingSection',
-    to: '/pro/components/landing-section',
-    class: [
-      'inset-4',
-      isBeforeStep(steps.landing + 6) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]',
-      isAfterStep(steps.landing + 10) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
-    ].filter(Boolean).join(' '),
-    style: {
-      '--height': (inc.value * 4) + 'px',
-      '--step-y': `${getStepY(steps.landing + 10)}px`,
-      '--prev-step-y': `${getStepY(steps.landing + 2)}px`
-    },
-    inactive: isAfterStep(steps.landing + 7),
-    children: [{
-      slot: 'landing-section',
-      class: 'inset-x-4 top-16'
-    }, {
-      name: 'ULandingGrid',
-      to: '/pro/components/landing-grid',
-      class: ['inset-x-4 bottom-4 top-48', isAfterStep(steps.landing + 8) && 'grid grid-cols-4 gap-4 p-4'].filter(Boolean).join(' '),
-      inactive: isAfterStep(steps.landing + 8),
-      children: [isAfterStep(steps.landing + 9) ? {
-        slot: 'landing-card-1',
-        class: '!relative'
-      } : {
-        name: 'ULandingCard',
-        to: '/pro/components/landing-card',
-        class: '!relative h-full',
-        inactive: false
-      }, isAfterStep(steps.landing + 9) ? {
-        slot: 'landing-card-2',
-        class: '!relative h-full'
-      } : {
-        name: 'ULandingCard',
-        to: '/pro/components/landing-card',
-        class: '!relative h-full',
-        inactive: false
-      }, isAfterStep(steps.landing + 9) ? {
-        slot: 'landing-card-3',
-        class: '!relative h-full'
-      } : {
-        name: 'ULandingCard',
-        to: '/pro/components/landing-card',
-        class: '!relative h-full',
-        inactive: false
-      }, isAfterStep(steps.landing + 9) ? {
-        slot: 'landing-card-4',
-        class: '!relative h-full'
-      } : {
-        name: 'ULandingCard',
-        to: '/pro/components/landing-card',
-        class: '!relative h-full',
-        inactive: false
-      }]
-    }]
-  }, isAfterStep(steps.landing + 10) && {
-    name: 'ULandingSection',
-    to: '/pro/components/landing-section',
-    class: [
-      'inset-4',
-      isBeforeStep(steps.landing + 14) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]'
-    ].filter(Boolean).join(' '),
-    style: {
-      '--height': (inc.value * 4) + 'px',
-      '--step-y': `${getStepY(steps.landing + 18)}px`,
-      '--prev-step-y': `${getStepY(steps.landing + 10)}px`
-    },
-    inactive: isAfterStep(steps.landing + 15),
-    children: [{
-      name: 'ULandingCTA',
-      class: 'inset-4',
-      inactive: isAfterStep(steps.landing + 16),
+const landingBlocks = computed(() => isAfterStep(steps.landing) && isBeforeStep(steps.docs)
+  ? [{
+      class: 'inset-x-0 top-20 bottom-20 overflow-hidden',
+      inactive: true,
       children: [{
-        slot: 'landing-cta',
-        class: 'inset-0'
-      }]
+        name: 'ULandingHero',
+        to: '/pro/components/landing-hero',
+        class: [
+          'inset-4',
+          isAfterStep(steps.landing + 2) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
+        ].filter(Boolean).join(' '),
+        style: {
+          '--step-y': `${getStepY(steps.landing + 2)}px`
+        },
+        inactive: isAfterStep(steps.landing + 1),
+        children: [{
+          slot: 'landing-hero',
+          class: 'inset-4'
+        }]
+      }, isAfterStep(steps.landing + 2) && {
+        name: 'ULandingSection',
+        to: '/pro/components/landing-section',
+        class: [
+          'inset-4',
+          isBeforeStep(steps.landing + 6) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]',
+          isAfterStep(steps.landing + 10) && '-top-[calc(var(--y)-var(--step-y)-1rem)] bottom-[calc(var(--y)-var(--step-y)+1rem)]'
+        ].filter(Boolean).join(' '),
+        style: {
+          '--height': (inc.value * 4) + 'px',
+          '--step-y': `${getStepY(steps.landing + 10)}px`,
+          '--prev-step-y': `${getStepY(steps.landing + 2)}px`
+        },
+        inactive: isAfterStep(steps.landing + 7),
+        children: [{
+          slot: 'landing-section',
+          class: 'inset-x-4 top-16'
+        }, {
+          name: 'ULandingGrid',
+          to: '/pro/components/landing-grid',
+          class: ['inset-x-4 bottom-4 top-48', isAfterStep(steps.landing + 8) && 'grid grid-cols-4 gap-4 p-4'].filter(Boolean).join(' '),
+          inactive: isAfterStep(steps.landing + 8),
+          children: [isAfterStep(steps.landing + 9)
+            ? {
+                slot: 'landing-card-1',
+                class: '!relative'
+              }
+            : {
+                name: 'ULandingCard',
+                to: '/pro/components/landing-card',
+                class: '!relative h-full',
+                inactive: false
+              }, isAfterStep(steps.landing + 9)
+            ? {
+                slot: 'landing-card-2',
+                class: '!relative h-full'
+              }
+            : {
+                name: 'ULandingCard',
+                to: '/pro/components/landing-card',
+                class: '!relative h-full',
+                inactive: false
+              }, isAfterStep(steps.landing + 9)
+            ? {
+                slot: 'landing-card-3',
+                class: '!relative h-full'
+              }
+            : {
+                name: 'ULandingCard',
+                to: '/pro/components/landing-card',
+                class: '!relative h-full',
+                inactive: false
+              }, isAfterStep(steps.landing + 9)
+            ? {
+                slot: 'landing-card-4',
+                class: '!relative h-full'
+              }
+            : {
+                name: 'ULandingCard',
+                to: '/pro/components/landing-card',
+                class: '!relative h-full',
+                inactive: false
+              }]
+        }]
+      }, isAfterStep(steps.landing + 10) && {
+        name: 'ULandingSection',
+        to: '/pro/components/landing-section',
+        class: [
+          'inset-4',
+          isBeforeStep(steps.landing + 14) && '-top-[calc(var(--y)-var(--prev-step-y)-var(--height)-1rem)] bottom-[calc(var(--y)-var(--prev-step-y)-var(--height)+1rem)]'
+        ].filter(Boolean).join(' '),
+        style: {
+          '--height': (inc.value * 4) + 'px',
+          '--step-y': `${getStepY(steps.landing + 18)}px`,
+          '--prev-step-y': `${getStepY(steps.landing + 10)}px`
+        },
+        inactive: isAfterStep(steps.landing + 15),
+        children: [{
+          name: 'ULandingCTA',
+          class: 'inset-4',
+          inactive: isAfterStep(steps.landing + 16),
+          children: [{
+            slot: 'landing-cta',
+            class: 'inset-0'
+          }]
+        }]
+      }].filter(Boolean)
     }]
-  }].filter(Boolean)
-}] : [])
+  : [])
 
 const docsBlocks = computed(() => [isAfterStep(steps.docs) && {
   name: 'UPage',
   to: '/pro/components/page',
   class: 'inset-x-0 top-20 bottom-20',
   inactive: isAfterStep(steps.docs + 1),
-  children: [isAfterStep(steps.docs + 2) ? {
-    name: 'UAside',
-    to: '/pro/components/aside',
-    class: 'left-4 inset-y-4 w-64',
-    inactive: isAfterStep(steps.docs + 3),
-    children: [isAfterStep(steps.docs + 4) ? {
-      slot: 'aside-top',
-      class: 'inset-x-4 top-4'
-    } : {
-      name: '#top',
-      class: 'inset-x-4 top-4 h-9'
-    }, isAfterStep(steps.docs + 5) ? {
-      name: 'UNavigationTree',
-      to: '/pro/components/navigation-tree',
-      class: ['inset-x-4 top-[4.25rem] bottom-4', isAfterStep(steps.docs + 6) && '!bg-transparent !border-0'].join(' '),
-      inactive: isAfterStep(steps.docs + 6),
-      children: [{
-        slot: 'aside-default',
-        class: 'inset-0'
+  children: [isAfterStep(steps.docs + 2)
+    ? {
+        name: 'UAside',
+        to: '/pro/components/aside',
+        class: 'left-4 inset-y-4 w-64',
+        inactive: isAfterStep(steps.docs + 3),
+        children: [isAfterStep(steps.docs + 4)
+          ? {
+              slot: 'aside-top',
+              class: 'inset-x-4 top-4'
+            }
+          : {
+              name: '#top',
+              class: 'inset-x-4 top-4 h-9'
+            }, isAfterStep(steps.docs + 5)
+          ? {
+              name: 'UNavigationTree',
+              to: '/pro/components/navigation-tree',
+              class: ['inset-x-4 top-[4.25rem] bottom-4', isAfterStep(steps.docs + 6) && '!bg-transparent !border-0'].join(' '),
+              inactive: isAfterStep(steps.docs + 6),
+              children: [{
+                slot: 'aside-default',
+                class: 'inset-0'
+              }]
+            }
+          : {
+              name: '#default',
+              class: 'inset-x-4 top-[4.25rem] bottom-4'
+            }]
+      }
+    : {
+        name: '#left',
+        class: 'left-4 inset-y-4 w-64'
+      }, isAfterStep(steps.docs + 7)
+    ? {
+        name: 'UPage',
+        to: '/pro/components/page',
+        class: 'left-72 right-4 inset-y-4',
+        inactive: isAfterStep(steps.docs + 8),
+        children: [...(isAfterStep(steps.docs + 9)
+          ? [{
+              name: 'UPageHeader',
+              to: '/pro/components/page-header',
+              class: 'top-4 left-4 right-72 h-32',
+              inactive: isAfterStep(steps.docs + 10),
+              children: [{
+                slot: 'page-header',
+                class: 'inset-4 justify-start'
+              }]
+            }, {
+              name: 'UPageBody',
+              to: '/pro/components/page-body',
+              class: 'top-40 left-4 right-72 bottom-4 overflow-y-auto',
+              inactive: isAfterStep(steps.docs + 11),
+              children: [{
+                slot: 'page-body',
+                class: 'inset-x-4 top-4 justify-start'
+              }, isAfterStep(steps.docs + 12)
+                ? {
+                    slot: 'content-surround',
+                    class: 'bottom-4 inset-x-4 h-28'
+                  }
+                : {
+                    name: 'UContentSurround',
+                    to: '/pro/components/content-surround',
+                    class: 'bottom-4 inset-x-4 h-28',
+                    inactive: false
+                  }]
+            }]
+          : [{
+              name: '#default',
+              class: 'left-4 right-72 inset-y-4'
+            }]), isAfterStep(steps.docs + 13)
+          ? {
+              name: 'UContentToc',
+              to: '/pro/components/content-toc',
+              class: 'right-4 inset-y-4 w-64',
+              inactive: isAfterStep(steps.docs + 14),
+              children: [{
+                slot: 'content-toc',
+                class: 'inset-4 overflow-y-auto'
+              }]
+            }
+          : {
+              name: '#right',
+              class: 'right-4 inset-y-4 w-64'
+            }]
+      }
+    : {
+        name: '#default',
+        class: 'left-72 right-4 inset-y-4'
       }]
-    } : {
-      name: '#default',
-      class: 'inset-x-4 top-[4.25rem] bottom-4'
-    }]
-  } : {
-    name: '#left',
-    class: 'left-4 inset-y-4 w-64'
-  }, isAfterStep(steps.docs + 7) ? {
-    name: 'UPage',
-    to: '/pro/components/page',
-    class: 'left-72 right-4 inset-y-4',
-    inactive: isAfterStep(steps.docs + 8),
-    children: [...(isAfterStep(steps.docs + 9) ? [{
-      name: 'UPageHeader',
-      to: '/pro/components/page-header',
-      class: 'top-4 left-4 right-72 h-32',
-      inactive: isAfterStep(steps.docs + 10),
-      children: [{
-        slot: 'page-header',
-        class: 'inset-4 justify-start'
-      }]
-    }, {
-      name: 'UPageBody',
-      to: '/pro/components/page-body',
-      class: 'top-40 left-4 right-72 bottom-4 overflow-y-auto',
-      inactive: isAfterStep(steps.docs + 11),
-      children: [{
-        slot: 'page-body',
-        class: 'inset-x-4 top-4 justify-start'
-      }, isAfterStep(steps.docs + 12) ? {
-        slot: 'content-surround',
-        class: 'bottom-4 inset-x-4 h-28'
-      } : {
-        name: 'UContentSurround',
-        to: '/pro/components/content-surround',
-        class: 'bottom-4 inset-x-4 h-28',
-        inactive: false
-      }]
-    }] : [{
-      name: '#default',
-      class: 'left-4 right-72 inset-y-4'
-    }]), isAfterStep(steps.docs + 13) ? {
-      name: 'UContentToc',
-      to: '/pro/components/content-toc',
-      class: 'right-4 inset-y-4 w-64',
-      inactive: isAfterStep(steps.docs + 14),
-      children: [{
-        slot: 'content-toc',
-        class: 'inset-4 overflow-y-auto'
-      }]
-    } : {
-      name: '#right',
-      class: 'right-4 inset-y-4 w-64'
-    }]
-  } : {
-    name: '#default',
-    class: 'left-72 right-4 inset-y-4'
-  }]
 }].filter(Boolean))
 
 const blocks = computed(() => [isAfterStep(steps.header) && {
@@ -655,62 +679,74 @@ const blocks = computed(() => [isAfterStep(steps.header) && {
   to: '/pro/components/header',
   class: 'h-16 inset-x-0 top-0',
   inactive: isAfterStep(steps.header + 1),
-  children: [isAfterStep(steps.header + 2) ? {
-    slot: 'header-left',
-    class: 'left-4 top-4'
-  } : {
-    name: '#left',
-    class: 'left-4 inset-y-4 w-64'
-  }, isAfterStep(steps.header + 3) ? {
-    slot: 'header-center',
-    class: 'inset-x-72 top-5'
-  } : {
-    name: '#center',
-    class: 'inset-x-72 inset-y-4'
-  }, isAfterStep(steps.header + 4) ? {
-    slot: 'header-right',
-    class: 'right-4 top-4'
-  } : {
-    name: '#right',
-    class: 'right-4 inset-y-4 w-64'
-  }]
+  children: [isAfterStep(steps.header + 2)
+    ? {
+        slot: 'header-left',
+        class: 'left-4 top-4'
+      }
+    : {
+        name: '#left',
+        class: 'left-4 inset-y-4 w-64'
+      }, isAfterStep(steps.header + 3)
+    ? {
+        slot: 'header-center',
+        class: 'inset-x-72 top-5'
+      }
+    : {
+        name: '#center',
+        class: 'inset-x-72 inset-y-4'
+      }, isAfterStep(steps.header + 4)
+    ? {
+        slot: 'header-right',
+        class: 'right-4 top-4'
+      }
+    : {
+        name: '#right',
+        class: 'right-4 inset-y-4 w-64'
+      }]
 }, isAfterStep(steps.footer) && {
   name: 'UFooter',
   to: '/pro/components/footer',
   class: 'h-16 inset-x-0 bottom-0',
   inactive: isAfterStep(steps.footer + 1),
-  children: [isAfterStep(steps.footer + 2) ? {
-    slot: 'footer-left',
-    class: 'left-4 bottom-5'
-  } : {
-    name: '#left',
-    class: 'left-4 inset-y-4 w-64'
-  }, isAfterStep(steps.footer + 3) ? {
-    slot: 'footer-center',
-    class: 'inset-x-72 bottom-5'
-  } : {
-    name: '#center',
-    class: 'inset-x-72 inset-y-4'
-  }, isAfterStep(steps.footer + 4) ? {
-    slot: 'footer-right',
-    class: 'right-4 bottom-4'
-  } : {
-    name: '#right',
-    class: 'right-4 inset-y-4 w-64'
-  }]
+  children: [isAfterStep(steps.footer + 2)
+    ? {
+        slot: 'footer-left',
+        class: 'left-4 bottom-5'
+      }
+    : {
+        name: '#left',
+        class: 'left-4 inset-y-4 w-64'
+      }, isAfterStep(steps.footer + 3)
+    ? {
+        slot: 'footer-center',
+        class: 'inset-x-72 bottom-5'
+      }
+    : {
+        name: '#center',
+        class: 'inset-x-72 inset-y-4'
+      }, isAfterStep(steps.footer + 4)
+    ? {
+        slot: 'footer-right',
+        class: 'right-4 bottom-4'
+      }
+    : {
+        name: '#right',
+        class: 'right-4 inset-y-4 w-64'
+      }]
 }, ...landingBlocks.value, ...docsBlocks.value].filter(Boolean))
 
 // Methods
 
-function isBeforeStep (i = 0) {
+function isBeforeStep(i = 0) {
   return y.value < (start.value + (i * inc.value))
 }
 
-function isAfterStep (i = 0) {
+function isAfterStep(i = 0) {
   return y.value >= (start.value + (i * inc.value))
 }
 
-function getStepY (step: number) {
+function getStepY(step: number) {
   return start.value + (step * inc.value)
 }
 

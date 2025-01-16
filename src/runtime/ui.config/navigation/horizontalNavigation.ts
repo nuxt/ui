@@ -1,3 +1,5 @@
+import type { AvatarSize, BadgeColor, BadgeSize, BadgeVariant } from '../../types'
+
 export default {
   wrapper: 'relative w-full flex items-center justify-between',
   container: 'flex items-center min-w-0',
@@ -15,12 +17,12 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0',
-    size: '2xs' as const
+    size: '2xs' as AvatarSize
   },
   badge: {
-    base: 'flex-shrink-0 ml-auto relative rounded',
-    color: 'gray' as const,
-    variant: 'solid' as const,
-    size: 'xs' as const
+    base: 'flex-shrink-0 ms-auto relative rounded',
+    color: 'gray' as BadgeColor,
+    variant: 'solid' as BadgeVariant,
+    size: 'xs' as BadgeSize
   }
 }

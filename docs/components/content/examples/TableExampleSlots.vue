@@ -53,7 +53,7 @@ const people = [{
   role: 'Member'
 }]
 
-const items = (row) => [
+const items = row => [
   [{
     label: 'Edit',
     icon: 'i-heroicons-pencil-square-20-solid',

@@ -69,6 +69,11 @@
       "permanent": true
     },
     {
+      "source": "/dev/components/:path(.*)",
+      "destination": "/components/:path",
+      "permanent": true
+    },
+    {
       "source": "/pro/guide",
       "destination": "/pro/getting-started",
       "permanent": true

@@ -39,7 +39,6 @@
 import { withoutTrailingSlash } from 'ufo'
 
 const route = useRoute()
-const { branch } = useContentSource()
 
 definePageMeta({
   layout: 'docs'
@@ -54,9 +53,6 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
   return queryContent()
     .where({
       _extension: 'md',
-      _path: {
-        [branch.value?.name === 'dev' ? '$eq' : '$ne']: new RegExp('^/dev')
-      },
       navigation: {
         $ne: false
       }
@@ -82,7 +78,7 @@ defineOgImageComponent('Docs', {
 const communityLinks = computed(() => [{
   icon: 'i-heroicons-pencil-square',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/dev/docs/content/${branch.value?.name === 'dev' ? page?.value?._file.split('/').slice(1).join('/') : page?.value?._file}`,
+  to: `https://github.com/nuxt/ui/edit/dev/docs/content/${page?.value?._file}`,
   target: '_blank'
 }, {
   icon: 'i-heroicons-star',
@@ -102,7 +98,7 @@ const communityLinks = computed(() => [{
 const resourcesLinks = [{
   icon: 'i-simple-icons-figma',
   label: 'Figma Kit',
-  to: 'https://www.figma.com/community/file/1288455405058138934',
+  to: 'https://www.figma.com/community/file/1436401057300493073',
   target: '_blank'
 }, {
   label: 'Playground',

@@ -29,7 +29,7 @@
       v-else
       class="font-semibold flex flex-col gap-1 text-center"
       :class="[
-        !block.slot && (block.inactive || block.inactive === undefined ? 'text-gray-900 dark:text-white' : 'text-white dark:text-gray-900'),
+        !block.slot && (block.inactive || block.inactive === undefined ? 'text-gray-900 dark:text-white' : 'text-white dark:text-gray-900')
       ]"
     >
       {{ block.name }}

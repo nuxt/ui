@@ -1,24 +1,21 @@
 import { join } from 'pathe'
 import { defu } from 'defu'
 import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit'
-
 import { setGlobalColors } from './runtime/utils/colors'
 import type { ModuleOptions } from './module'
 
-export default async function installTailwind (
+export default function installTailwind(
   moduleOptions: ModuleOptions,
   nuxt = useNuxt(),
   resolve = createResolver(import.meta.url).resolve
-) {
+): Promise<void> {
   const runtimeDir = resolve('./runtime')
 
   // 1. register hook
-  // @ts-ignore
   nuxt.hook('tailwindcss:config', function (tailwindConfig) {
     tailwindConfig.theme = tailwindConfig.theme || {}
     tailwindConfig.theme.extend = tailwindConfig.theme.extend || {}
-    tailwindConfig.theme.extend.colors =
-      tailwindConfig.theme.extend.colors || {}
+    tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {}
 
     const colors = setGlobalColors(tailwindConfig.theme)
 
@@ -33,21 +30,26 @@ export default async function installTailwind (
 
   // 2. add config template
   const configTemplate = addTemplate({
-    filename: 'nuxtui-tailwind.config.cjs',
+    filename: 'nuxtui-tailwind.config.mjs',
     write: true,
     getContents: ({ nuxt }) => `
-      const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
-      const { customSafelistExtractor, generateSafelist } = require(${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))})
+      import { defaultExtractor as createDefaultExtractor } from "tailwindcss/lib/lib/defaultExtractor.js";
+      import { customSafelistExtractor, generateSafelist } from ${JSON.stringify(resolve(runtimeDir, 'utils', 'colors'))};
+      import formsPlugin from "@tailwindcss/forms";
+      import aspectRatio from "@tailwindcss/aspect-ratio";
+      import typography from "@tailwindcss/typography";
+      import containerQueries from "@tailwindcss/container-queries";
+      import headlessUi from "@headlessui/tailwindcss";
 
-      const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
+      const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } });
 
-      module.exports = {
+      export default {
         plugins: [
-          require('@tailwindcss/forms')({ strategy: 'class' }),
-          require('@tailwindcss/aspect-ratio'),
-          require('@tailwindcss/typography'),
-          require('@tailwindcss/container-queries'),
-          require('@headlessui/tailwindcss')
+          formsPlugin({ strategy: 'class' }),
+          aspectRatio,
+          typography,
+          containerQueries,
+          headlessUi
         ],
         content: {
           files: [
@@ -73,7 +75,6 @@ export default async function installTailwind (
     `
   })
 
-  // @ts-expect-error - `@nuxtjs/tailwindcss` not installed yet
   const { configPath: userTwConfigPath = [], ...twModuleConfig } = nuxt.options.tailwindcss ?? {}
 
   const twConfigPaths = [
@@ -88,9 +89,11 @@ export default async function installTailwind (
   }
 
   // 3. install module
-  await installModule('@nuxtjs/tailwindcss', defu({
+  return installModule('@nuxtjs/tailwindcss', defu({
     exposeConfig: true,
-    config: { darkMode: 'class' },
+    config: {
+      darkMode: 'class' as const
+    },
     configPath: twConfigPaths
   }, twModuleConfig))
 }

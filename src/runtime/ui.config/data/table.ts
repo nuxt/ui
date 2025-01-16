@@ -1,3 +1,5 @@
+import type { ButtonColor, ButtonSize, ButtonVariant, CheckboxColor, ProgressAnimation, ProgressColor } from '../../types'
+
 export default {
   wrapper: 'relative overflow-x-auto',
   base: 'min-w-full table-fixed',
@@ -8,6 +10,7 @@ export default {
   tr: {
     base: '',
     selected: 'bg-gray-50 dark:bg-gray-800/50',
+    expanded: 'bg-gray-50 dark:bg-gray-800/50',
     active: 'hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer'
   },
   th: {
@@ -50,23 +53,23 @@ export default {
       icon: 'i-heroicons-arrows-up-down-20-solid',
       trailing: true,
       square: true,
-      color: 'gray' as const,
-      variant: 'ghost' as const,
+      color: 'gray' as ButtonColor,
+      variant: 'ghost' as ButtonVariant,
       class: '-m-1.5'
     },
     expandButton: {
       icon: 'i-heroicons-chevron-down',
-      color: 'gray' as const,
-      variant: 'ghost' as const,
-      size: 'xs' as const,
+      color: 'gray' as ButtonColor,
+      variant: 'ghost' as ButtonVariant,
+      size: 'xs' as ButtonSize,
       class: '-my-1.5 align-middle'
     },
     checkbox: {
-      color: 'primary' as const
+      color: 'primary' as CheckboxColor
     },
     progress: {
-      color: 'primary' as const,
-      animation: 'carousel' as const
+      color: 'primary' as ProgressColor,
+      animation: 'carousel' as ProgressAnimation
     },
     loadingState: {
       icon: 'i-heroicons-arrow-path-20-solid',

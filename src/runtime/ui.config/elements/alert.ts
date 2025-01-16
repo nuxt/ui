@@ -1,3 +1,5 @@
+import type { AvatarSize, ButtonColor, ButtonSize, ButtonVariant } from '../../types'
+
 export default {
   wrapper: 'w-full relative overflow-hidden',
   inner: 'w-0 flex-1',
@@ -13,7 +15,7 @@ export default {
   },
   avatar: {
     base: 'flex-shrink-0 self-center',
-    size: 'md' as const
+    size: 'md' as AvatarSize
   },
   color: {
     white: {
@@ -32,9 +34,9 @@ export default {
     icon: null,
     closeButton: null,
     actionButton: {
-      size: 'xs' as const,
-      color: 'primary' as const,
-      variant: 'link' as const
+      size: 'xs' as ButtonSize,
+      color: 'primary' as ButtonColor,
+      variant: 'link' as ButtonVariant
     }
   }
 }

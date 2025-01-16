@@ -1,10 +1,10 @@
 import { h, computed, toRef, defineComponent } from 'vue'
 import type { PropType } from 'vue'
-import { twMerge, twJoin } from 'tailwind-merge'
+import { twJoin } from 'tailwind-merge'
 import { useUI } from '../../composables/useUI'
-import { mergeConfig, getSlotsChildren } from '../../utils'
+import { getSlotsChildren, mergeConfig, twMerge } from '../../utils'
 import { useProvideButtonGroup } from '../../composables/useButtonGroup'
-import type { ButtonSize, Strategy } from '../../types/index'
+import type { ButtonSize, DeepPartial, Strategy } from '../../types/index'
 // @ts-expect-error
 import appConfig from '#build/app.config'
 import { button, buttonGroup } from '#ui/ui.config'
@@ -19,14 +19,14 @@ export default defineComponent({
     size: {
       type: String as PropType<ButtonSize>,
       default: null,
-      validator (value: string) {
+      validator(value: string) {
         return Object.keys(buttonConfig.size).includes(value)
       }
     },
     orientation: {
       type: String as PropType<'horizontal' | 'vertical'>,
       default: 'horizontal',
-      validator (value: string) {
+      validator(value: string) {
         return ['horizontal', 'vertical'].includes(value)
       }
     },
@@ -35,11 +35,11 @@ export default defineComponent({
       default: () => ''
     },
     ui: {
-      type: Object as PropType<Partial<typeof buttonGroupConfig> & { strategy?: Strategy }>,
+      type: Object as PropType<DeepPartial<typeof buttonGroupConfig> & { strategy?: Strategy }>,
       default: () => ({})
     }
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { ui, attrs } = useUI('buttonGroup', toRef(props, 'ui'), buttonGroupConfig)
 
     const children = computed(() => getSlotsChildren(slots))

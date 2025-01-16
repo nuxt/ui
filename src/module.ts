@@ -1,8 +1,9 @@
 import { createRequire } from 'node:module'
 import { defineNuxtModule, installModule, addComponentsDir, addImportsDir, createResolver, addPlugin } from '@nuxt/kit'
+import type { ConfigExtension, DefaultClassGroupIds, DefaultThemeGroupIds } from 'tailwind-merge'
 import { name, version } from '../package.json'
 import createTemplates from './templates'
-import * as config from './runtime/ui.config'
+import type * as config from './runtime/ui.config'
 import type { DeepPartial, Strategy } from './runtime/types'
 import installTailwind from './tailwind'
 
@@ -20,15 +21,10 @@ type UI = {
   gray?: string
   colors?: string[]
   strategy?: Strategy
+  tailwindMerge?: ConfigExtension<DefaultClassGroupIds, DefaultThemeGroupIds>
   [key: string]: any
-} & DeepPartial<typeof config, string>
+} & DeepPartial<typeof config, string | number | boolean>
 
-declare module 'nuxt/schema' {
-  interface AppConfigInput {
-    // @ts-ignore
-    ui?: UI
-  }
-}
 declare module '@nuxt/schema' {
   interface AppConfigInput {
     // @ts-ignore
@@ -68,7 +64,7 @@ export default defineNuxtModule<ModuleOptions>({
     safelistColors: ['primary'],
     disableGlobalStyles: false
   },
-  async setup (options, nuxt) {
+  async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
     // Transpile runtime

@@ -1,4 +1,4 @@
-[![nuxt-ui.png](https://repository-images.githubusercontent.com/428329515/43fec891-9030-4601-8233-5d45ba5c6013)](https://ui.nuxt.com)
+[![nuxt-ui.png](https://volta.s3.fr-par.scw.cloud/nuxt_ui_social_card_531d133fa2.png)](https://ui.nuxt.com)
 
 # Nuxt UI
 
@@ -20,7 +20,7 @@ Its goal is to provide everything related to UI when building a Nuxt app. This i
 - Keyboard shortcuts
 - Bundled icons
 - Fully typed
-- [Figma Kit](https://www.figma.com/community/file/1288455405058138934)
+- [Figma Kit](https://www.figma.com/community/file/1436401057300493073)
 
 Read more on [ui.nuxt.com](https://ui.nuxt.com)
 
@@ -77,7 +77,7 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md)
 [npm-downloads-href]: https://npmjs.com/package/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxt/ui/blob/main/LICENSE
+[license-href]: https://github.com/nuxt/ui/blob/main/LICENSE.md
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com

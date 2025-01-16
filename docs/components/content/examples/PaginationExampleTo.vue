@@ -11,7 +11,7 @@ const items = ref(Array(50))
     :to="(page: number) => ({
       query: { page },
       // Hash is specified here to prevent the page from scrolling to the top
-      hash: '#links',
+      hash: '#links'
     })"
   />
 </template>

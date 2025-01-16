@@ -1,7 +1,7 @@
-import { input } from '../ui.config'
-import type { NestedKeyOf, ExtractDeepKey, ExtractDeepObject } from '.'
-import colors from '#ui-colors'
 import type { AppConfig } from 'nuxt/schema'
+import type { input } from '../ui.config'
+import type { NestedKeyOf, ExtractDeepKey, ExtractDeepObject } from '.'
+import type colors from '#ui-colors'
 
 export type InputSize = keyof typeof input.size | ExtractDeepKey<AppConfig, ['ui', 'input', 'size']>
 export type InputColor = keyof typeof input.color | ExtractDeepKey<AppConfig, ['ui', 'input', 'color']> | typeof colors[number]
