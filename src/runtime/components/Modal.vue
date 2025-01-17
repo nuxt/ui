@@ -98,7 +98,7 @@ const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
   const defaultEvents = {
     closeAutoFocus: (e: Event) => e.preventDefault()
-  }
+  } as const
 
   if (!props.dismissible) {
     const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown', 'closeAutoFocus'] as const
