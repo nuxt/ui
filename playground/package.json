@@ -12,6 +12,6 @@
     "@iconify-json/simple-icons": "^1.2.22",
     "@nuxt/ui": "latest",
     "@nuxthub/core": "^0.8.14",
-    "nuxt": "^3.15.3"
+    "nuxt": "^3.15.4"
   }
 }

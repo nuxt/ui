@@ -16,7 +16,7 @@
     "@octokit/rest": "^21.1.0",
     "@vueuse/nuxt": "^12.5.0",
     "joi": "^17.13.3",
-    "nuxt": "^3.15.3",
+    "nuxt": "^3.15.4",
     "nuxt-component-meta": "^0.10.0",
     "nuxt-og-image": "^4.1.2",
     "prettier": "^3.4.2",
