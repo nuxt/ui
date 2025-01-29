@@ -118,7 +118,6 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     highlight: true,
     class: {
-      item: '-mb-px',
       link: ['after:absolute after:-bottom-2 after:inset-x-2.5 after:block after:h-px after:rounded-full', options.theme.transitions && 'after:transition-colors']
     }
   }, {
