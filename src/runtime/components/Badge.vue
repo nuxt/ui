@@ -40,6 +40,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 const props = withDefaults(defineProps<BadgeProps>(), {
   as: 'span'
