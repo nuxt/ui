@@ -185,7 +185,7 @@ const contentProps = toRef(() => props.content)
 
 const appConfig = useAppConfig()
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number }>()
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>()
 
 const ui = computed(() => navigationMenu({
   orientation: props.orientation,
@@ -237,7 +237,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
     </slot>
   </DefineLinkTemplate>
 
-  <DefineItemTemplate v-slot="{ item, index }">
+  <DefineItemTemplate v-slot="{ item, index, level = 0 }">
     <component
       :is="(orientation === 'vertical' && item.children?.length) ? UCollapsible : NavigationMenuItem"
       as="li"
@@ -253,11 +253,11 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
         <component
           :is="(orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])) ? NavigationMenuTrigger : NavigationMenuLink"
           as-child
-          :active="active"
+          :active="active || item.active"
           :disabled="item.disabled"
           @select="item.onSelect"
         >
-          <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: !(orientation === 'vertical' && item.children?.length) })">
+          <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
             <ReuseLinkTemplate :item="(item as T)" :active="active || item.active" :index="index" />
           </ULinkBase>
         </component>
@@ -292,7 +292,14 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
 
       <template v-if="orientation === 'vertical' && item.children?.length" #content>
         <ul :class="ui.childList({ class: props.ui?.childList })">
-          <ReuseItemTemplate v-for="(childItem, childIndex) in item.children" :key="childIndex" :item="childItem" :index="childIndex" :class="ui.childItem({ class: props.ui?.childItem })" />
+          <ReuseItemTemplate
+            v-for="(childItem, childIndex) in item.children"
+            :key="childIndex"
+            :item="childItem"
+            :index="childIndex"
+            :level="level + 1"
+            :class="ui.childItem({ class: props.ui?.childItem })"
+          />
         </ul>
       </template>
     </component>
