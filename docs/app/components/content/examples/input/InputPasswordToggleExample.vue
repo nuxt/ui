@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const show = ref(false)
-const password = ref('password')
+const password = ref('')
 </script>
 
 <template>
