@@ -1,8 +1,10 @@
 import { fileURLToPath } from 'node:url'
 
-import { join, normalize } from 'pathe'
+import { normalize } from 'pathe'
+import type { UnpluginOptions } from 'unplugin'
 import { createUnplugin } from 'unplugin'
-import AutoImport from 'unplugin-auto-import'
+import type { Options as AutoImportOptions } from 'unplugin-auto-import/types'
+import type { Options as ComponentsOptions } from 'unplugin-vue-components/types'
 import { defu } from 'defu'
 import tailwind from '@tailwindcss/vite'
 import type colors from 'tailwindcss/colors'
@@ -20,6 +22,7 @@ import ComponentImportPlugin from './plugins/components'
 import NuxtEnvironmentPlugin from './plugins/nuxt-environment'
 
 import type { DeepPartial } from './runtime/types/utils'
+import AutoImportPlugin from './plugins/auto-import'
 
 type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
@@ -39,6 +42,14 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    * @defaultValue `true`
    */
   colorMode?: boolean
+  /**
+   * Override options for `unplugin-auto-import`
+   */
+  autoImport?: Partial<AutoImportOptions>
+  /**
+   * Override options for `unplugin-vue-components`
+   */
+  components?: Partial<ComponentsOptions>
 }
 
 export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.meta.url)))
@@ -53,11 +64,26 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
 
   return [
     NuxtEnvironmentPlugin(),
-    ...ComponentImportPlugin(meta.framework, options),
-    AutoImport[meta.framework]({ dts: options.dts ?? true, dirs: [join(runtimeDir, 'composables')] }),
+    ComponentImportPlugin(options, meta),
+    AutoImportPlugin(options, meta),
     tailwind(),
     PluginsPlugin(options),
     TemplatePlugin(options, appConfig),
-    AppConfigPlugin(options, appConfig)
-  ]
+    AppConfigPlugin(options, appConfig),
+    <UnpluginOptions>{
+      name: 'nuxt:ui:plugins-duplication-detection',
+      vite: {
+        configResolved(config) {
+          const plugins = config.plugins || []
+
+          if (plugins.filter(i => i.name === 'unplugin-auto-import').length > 1) {
+            throw new Error('[Nuxt UI] Multiple instances of `unplugin-auto-import` detected. Nuxt UI includes `unplugin-auto-import` already, and you can configure it using `autoImport` option in Nuxt UI module options.')
+          }
+          if (plugins.filter(i => i.name === 'unplugin-vue-components').length > 1) {
+            throw new Error('[Nuxt UI] Multiple instances of `unplugin-vue-components` detected. Nuxt UI includes `unplugin-vue-components` already, and you can configure it using `components` option in Nuxt UI module options.')
+          }
+        }
+      }
+    }
+  ].flat(1) as UnpluginOptions[]
 })

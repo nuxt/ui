@@ -1,7 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import AutoImports from 'unplugin-auto-import/vite'
-import VueComponents from 'unplugin-vue-components'
 
 import ui from '../src/vite'
 
@@ -20,12 +18,13 @@ export default defineConfig({
           primary: 'green',
           neutral: 'slate'
         }
+      },
+      autoImport: {
+        imports: ['vue']
+      },
+      components: {
+        dirs: ['../playground/app/components']
       }
-    }),
-    // these are required as we share the component pages with the Nuxt playground
-    AutoImports({ imports: ['vue'] }),
-    VueComponents.vite({
-      dirs: ['../playground/app/components']
     })
   ],
   optimizeDeps: {
