@@ -239,17 +239,17 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
 
   <DefineItemTemplate v-slot="{ item, index, level = 0 }">
     <component
-      :is="(orientation === 'vertical' && item.children?.length) ? UCollapsible : NavigationMenuItem"
+      :is="(orientation === 'vertical' && item.children?.length && !collapsed) ? UCollapsible : NavigationMenuItem"
       as="li"
       :value="item.value || String(index)"
       :default-open="item.defaultOpen"
-      :unmount-on-hide="(orientation === 'vertical' && item.children?.length) ? unmountOnHide : undefined"
+      :unmount-on-hide="(orientation === 'vertical' && item.children?.length && !collapsed) ? unmountOnHide : undefined"
       :open="item.open"
     >
       <div v-if="orientation === 'vertical' && item.type === 'label'" :class="ui.label({ class: props.ui?.label })">
         <ReuseLinkTemplate :item="(item as T)" :index="index" />
       </div>
-      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(orientation === 'vertical' && item.children?.length) ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
+      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(orientation === 'vertical' && item.children?.length && !collapsed) ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
         <component
           :is="(orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])) ? NavigationMenuTrigger : NavigationMenuLink"
           as-child
@@ -290,7 +290,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
         </NavigationMenuContent>
       </ULink>
 
-      <template v-if="orientation === 'vertical' && item.children?.length" #content>
+      <template v-if="orientation === 'vertical' && item.children?.length && !collapsed" #content>
         <ul :class="ui.childList({ class: props.ui?.childList })">
           <ReuseItemTemplate
             v-for="(childItem, childIndex) in item.children"

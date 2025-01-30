@@ -88,6 +88,7 @@ describe('NavigationMenu', () => {
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with arrow', { props: { ...props, arrow: true, modelValue: '0' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const, modelValue: '0' } }],
+    ['with orientation vertical and collapsed', { props: { ...props, orientation: 'vertical' as const, modelValue: '0', collapsed: true } }],
     ['with content orientation vertical', { props: { ...props, contentOrientation: 'vertical' as const, modelValue: '0' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),

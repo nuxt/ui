@@ -785,6 +785,53 @@ exports[`NavigationMenu > renders with neutral variant pill highlight neutral co
 </nav>"
 `;
 
+exports[`NavigationMenu > renders with orientation vertical and collapsed correctly 1`] = `
+"<nav aria-label="Main" data-orientation="vertical" dir="ltr" data-reka-navigation-menu="" data-collapsed="true" class="relative flex gap-1.5 [&>div]:min-w-0 flex-col">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0" data-orientation="vertical">
+      <li data-menu-item="" item="[object Object]" index="0" class="min-w-0">
+        <div class="w-full flex items-center gap-1.5 font-semibold text-xs/5 text-[var(--ui-text-highlighted)] px-2.5 py-1.5">
+          <!--v-if-->
+          <!--v-if-->
+          <!--v-if-->
+        </div>
+      </li>
+      <li data-menu-item="" item="[object Object]" index="1" class="min-w-0"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-[var(--ui-primary)] flex-row py-1.5 before:inset-y-px before:inset-x-0 text-[var(--ui-text-muted)] hover:text-[var(--ui-text-highlighted)] hover:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors px-1.5" data-reka-collection-item=""><span class="iconify i-lucide:book-open shrink-0 size-5 text-[var(--ui-text-dimmed)] group-hover:text-[var(--ui-text)] transition-colors" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" item="[object Object]" index="2" class="min-w-0"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-[var(--ui-primary)] flex-row py-1.5 before:inset-y-px before:inset-x-0 text-[var(--ui-primary)] before:bg-[var(--ui-bg-elevated)] px-1.5" data-active="" aria-current="page" data-reka-collection-item=""><span class="iconify i-lucide:box shrink-0 size-5 text-[var(--ui-primary)] group-data-[state=open]:text-[var(--ui-primary)]" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <div class="px-2 h-px bg-[var(--ui-border)]"></div>
+  <div style="position: relative;">
+    <ul class="isolate min-w-0" data-orientation="vertical">
+      <li data-menu-item="" item="[object Object]" index="0" class="min-w-0"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-[var(--ui-primary)] flex-row py-1.5 before:inset-y-px before:inset-x-0 text-[var(--ui-text-muted)] hover:text-[var(--ui-text-highlighted)] hover:before:bg-[var(--ui-bg-elevated)]/50 transition-colors before:transition-colors px-1.5" data-reka-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-[var(--ui-text-dimmed)] group-hover:text-[var(--ui-text)] transition-colors" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" item="[object Object]" index="1" class="min-w-0"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-[var(--ui-primary)] flex-row py-1.5 before:inset-y-px before:inset-x-0 text-[var(--ui-text-muted)] cursor-not-allowed opacity-75 px-1.5" data-reka-collection-item=""><span class="iconify i-lucide:circle-help shrink-0 size-5 text-[var(--ui-text-dimmed)]" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</nav>"
+`;
+
 exports[`NavigationMenu > renders with orientation vertical correctly 1`] = `
 "<nav aria-label="Main" data-orientation="vertical" dir="ltr" data-reka-navigation-menu="" data-collapsed="false" class="relative flex gap-1.5 [&>div]:min-w-0 flex-col">
   <div style="position: relative;">

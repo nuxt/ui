@@ -42,6 +42,7 @@ const items = [
   }, {
     label: 'Components',
     icon: 'i-lucide-box',
+    to: '/components',
     active: true,
     defaultOpen: true,
     children: [{
@@ -108,7 +109,7 @@ const items = [
       :color="color"
       :variant="variant"
       :orientation="orientation"
-      :viewport-orientation="contentOrientation"
+      :content-orientation="contentOrientation"
       :highlight="highlight"
       :highlight-color="highlightColor"
       :class="highlight && 'data-[orientation=horizontal]:border-b border-[var(--ui-border)]'"
