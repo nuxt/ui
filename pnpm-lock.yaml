@@ -163,7 +163,7 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.0.0)(release-it@18.1.2(@types/node@22.10.10)(typescript@5.6.3))
       '@standard-schema/spec':
-        specifier: 1.0.0
+        specifier: ^1.0.0
         version: 1.0.0
       '@vue/test-utils':
         specifier: ^2.4.6
