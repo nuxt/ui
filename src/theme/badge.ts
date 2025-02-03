@@ -1,4 +1,5 @@
 import type { ModuleOptions } from '../module'
+import { buttonGroupVariant } from './button-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
@@ -10,6 +11,7 @@ export default (options: Required<ModuleOptions>) => ({
     trailingIcon: 'shrink-0'
   },
   variants: {
+    ...buttonGroupVariant,
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
       neutral: ''
