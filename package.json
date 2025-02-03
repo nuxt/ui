@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "3.0.0-alpha.12",
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@9.15.5",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -98,7 +98,7 @@
     "embla-carousel-fade": "^8.5.2",
     "embla-carousel-vue": "^8.5.2",
     "embla-carousel-wheel-gestures": "^8.0.1",
-    "fuse.js": "^7.0.0",
+    "fuse.js": "^7.1.0",
     "get-port-please": "^3.1.2",
     "knitwork": "^1.2.0",
     "magic-string": "^0.30.17",
@@ -114,7 +114,7 @@
     "unplugin": "^2.1.2",
     "unplugin-auto-import": "^19.0.0",
     "unplugin-vue-components": "^28.0.0",
-    "vaul-vue": "^0.2.0"
+    "vaul-vue": "^0.2.1"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.0.0",

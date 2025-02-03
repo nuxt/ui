@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.25",
-    "@iconify-json/simple-icons": "^1.2.22",
+    "@iconify-json/simple-icons": "^1.2.23",
     "@nuxt/ui": "latest",
     "@nuxthub/core": "^0.8.15",
     "nuxt": "^3.15.4"
