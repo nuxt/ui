@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Joi from 'joi'
-import type { FormSubmitEvent } from '#ui/types'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = Joi.object({
   email: Joi.string().required(),

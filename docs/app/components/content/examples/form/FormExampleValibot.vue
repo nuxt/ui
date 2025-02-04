@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as v from 'valibot'
-import type { FormSubmitEvent } from '#ui/types'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = v.object({
   email: v.pipe(v.string(), v.email('Invalid email')),
