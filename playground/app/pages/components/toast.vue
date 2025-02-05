@@ -98,7 +98,7 @@ function addToast() {
   add({
     id,
     ...template,
-    click(toast) {
+    onClick(toast) {
       console.log(`Toast ${toast.id} clicked`)
     }
   })

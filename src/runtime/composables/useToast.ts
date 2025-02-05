@@ -4,7 +4,7 @@ import type { ToastProps } from '../types'
 
 export interface Toast extends Omit<ToastProps, 'defaultOpen'> {
   id: string | number
-  click?: (toast: Toast) => void
+  onClick?: (toast: Toast) => void
 }
 
 export function useToast() {
