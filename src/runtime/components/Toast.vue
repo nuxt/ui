@@ -7,6 +7,7 @@ import theme from '#build/ui/toast'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps } from '../types'
+import type { StringOrVNode } from '../types/utils'
 
 const appConfigToast = _appConfig as AppConfig & { ui: { toast: Partial<typeof theme> } }
 
@@ -20,8 +21,8 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * @defaultValue 'li'
    */
   as?: any
-  title?: string
-  description?: string
+  title?: StringOrVNode
+  description?: StringOrVNode
   icon?: string
   avatar?: AvatarProps
   color?: ToastVariants['color']
@@ -124,12 +125,20 @@ defineExpose({
     <div :class="ui.wrapper({ class: props.ui?.wrapper })">
       <ToastTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
         <slot name="title">
-          {{ title }}
+          <component :is="title()" v-if="typeof title === 'function'" />
+          <component :is="title" v-else-if="typeof title === 'object'" />
+          <template v-else>
+            {{ title }}
+          </template>
         </slot>
       </ToastTitle>
       <ToastDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description">
-          {{ description }}
+          <component :is="description()" v-if="typeof description === 'function'" />
+          <component :is="description" v-else-if="typeof description === 'object'" />
+          <template v-else>
+            {{ description }}
+          </template>
         </slot>
       </ToastDescription>
 

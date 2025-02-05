@@ -33,3 +33,8 @@ export type SelectItemKey<T> = T extends Record<string, any> ? keyof T : string
 export type SelectModelValueEmits<T, V, M extends boolean = false, DV = T> = {
   'update:modelValue': [payload: SelectModelValue<T, V, M, DV>]
 }
+
+export type StringOrVNode =
+  | string
+  | VNode
+  | (() => VNode)
