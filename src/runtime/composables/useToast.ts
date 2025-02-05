@@ -1,8 +1,9 @@
 import { ref, nextTick } from 'vue'
 import { useState } from '#imports'
-import type { ToastProps } from '../types'
+import type { ToastProps, ToastEmits } from '../types'
+import type { EmitsToProps } from '../types/utils'
 
-export interface Toast extends Omit<ToastProps, 'defaultOpen'> {
+export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<ToastEmits> {
   id: string | number
   onClick?: (toast: Toast) => void
 }
@@ -38,7 +39,7 @@ export function useToast() {
       id: generateId(),
       open: true,
       ...toast
-    }
+    } as Toast
 
     queue.push(body)
 
