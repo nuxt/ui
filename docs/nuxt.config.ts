@@ -22,7 +22,8 @@ export default defineNuxtConfig({
       nuxt.hook('components:dirs', (dirs) => {
         dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
       })
-    }
+    },
+    '~~/modules/llms/module'
   ],
 
   app: {
@@ -146,6 +147,50 @@ export default defineNuxtConfig({
 
   image: {
     provider: 'ipx'
+  },
+  llms: {
+    domain: 'https://ui3.nuxt.dev',
+    title: 'Nuxt UI v3',
+    description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
+    sections: [
+      {
+        title: 'Getting Started',
+        collection: 'content',
+        filters: [
+          {
+            field: 'path',
+            operator: 'LIKE',
+            value: '/getting-started%'
+          }
+        ]
+      },
+      {
+        title: 'Components',
+        collection: 'content',
+        filters: [
+          {
+            field: 'path',
+            operator: 'LIKE',
+            value: '/components/%'
+          }
+        ]
+      },
+      {
+        title: 'Composables',
+        collection: 'content',
+        filters: [
+          {
+            field: 'path',
+            operator: 'LIKE',
+            value: '/composables/%'
+          }
+        ]
+      }
+    ],
+    notes: [
+      'The documentation excludes Nuxt UI v2 content.',
+      'The content is automatically generated from the same source as the official documentation.'
+    ]
   },
 
   uiPro: {
