@@ -1,3 +1,5 @@
+import type { VNode } from 'vue'
+
 export interface TightMap<O = any> {
   [key: string]: TightMap | O
 }
