@@ -336,7 +336,7 @@ You can use the `column-pinning` prop to control the pinning state of the column
 
 ### With column visibility
 
-You can add use [DropdownMenu](/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
+You can use a [DropdownMenu](/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
 
 ::component-example
 ---
@@ -389,6 +389,25 @@ class: '!p-0'
 
 ::tip
 You can use the `global-filter` prop to control the global filter state (can be binded with `v-model`).
+::
+
+### With pagination
+
+You can use a [Pagination](/components/pagination) component to control the pagination state using the [Pagination APIs](https://tanstack.com/table/latest/docs/api/features/pagination).
+
+There are different pagination approaches as explained in [Pagination Guide](https://tanstack.com/table/latest/docs/guide/pagination#pagination-guide). In this example, we use client-side pagination so we need to manually pass `getPaginationRowModel()`{lang="ts-type"} function.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-pagination-example'
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `pagination` prop to control the pagination state (can be binded with `v-model`).
 ::
 
 ### With fetched data

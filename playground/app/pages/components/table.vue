@@ -2,6 +2,7 @@
 import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
 import type { TableColumn } from '@nuxt/ui'
+import { getPaginationRowModel } from '@tanstack/vue-table'
 
 const UButton = resolveComponent('UButton')
 const UCheckbox = resolveComponent('UCheckbox')
@@ -269,6 +270,11 @@ const columnPinning = ref({
   right: ['actions']
 })
 
+const pagination = ref({
+  pageIndex: 0,
+  pageSize: 10
+})
+
 function randomize() {
   data.value = [...data.value].sort(() => Math.random() - 0.5)
 }
@@ -322,11 +328,15 @@ onMounted(() => {
       :columns="columns"
       :column-pinning="columnPinning"
       :loading="loading"
-      sticky
+      :pagination="pagination"
+      :pagination-options="{
+        getPaginationRowModel: getPaginationRowModel()
+      }"
       :ui="{
         tr: 'divide-x divide-[var(--ui-border)]'
       }"
-      class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
+      sticky
+      class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)]"
     >
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>
@@ -339,7 +349,7 @@ onMounted(() => {
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>
 
-      <!-- <div class="flex items-center gap-1.5">
+      <div class="flex items-center gap-1.5">
         <UButton
           color="neutral"
           variant="outline"
@@ -356,7 +366,7 @@ onMounted(() => {
         >
           Next
         </UButton>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>

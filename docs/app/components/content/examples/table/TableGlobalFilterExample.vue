@@ -90,8 +90,6 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const table = useTemplateRef('table')
-
 const globalFilter = ref('45')
 </script>
 
