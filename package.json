@@ -157,5 +157,21 @@
     "unplugin": "^2.1.2",
     "vite": "^6.0.7",
     "vue-tsc": "^2.2.0"
-  }
+  },
+  "keywords": [
+    "nuxt-ui",
+    "nuxt",
+    "vue3",
+    "tailwindcss",
+    "component library",
+    "vue",
+    "vuejs",
+    "vue.js",
+    "typescript",
+    "vue-components",
+    "ui",
+    "tailwind",
+    "framework",
+    "ui-framework"
+  ]
 }
