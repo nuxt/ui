@@ -3,14 +3,14 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5',
-    wrapper: 'min-w-0 flex-1 flex flex-col gap-1',
+    wrapper: 'min-w-0 flex-1 flex flex-col',
     title: 'text-sm font-medium',
     description: 'text-sm opacity-90',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     avatarSize: '2xl',
     actions: 'flex flex-wrap gap-1.5 shrink-0',
-    close: 'p-0.5'
+    close: 'p-0'
   },
   variants: {
     color: {
@@ -23,14 +23,19 @@ export default (options: Required<ModuleOptions>) => ({
       soft: '',
       subtle: ''
     },
-    multiline: {
-      true: {
-        root: 'items-start',
-        actions: 'items-start mt-1'
-      },
-      false: {
+    orientation: {
+      horizontal: {
         root: 'items-center',
         actions: 'items-center'
+      },
+      vertical: {
+        root: 'items-start',
+        actions: 'items-start mt-2.5'
+      }
+    },
+    title: {
+      true: {
+        description: 'mt-1'
       }
     }
   },

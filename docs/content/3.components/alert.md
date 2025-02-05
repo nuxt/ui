@@ -215,8 +215,30 @@ props:
 ---
 ::
 
-::note
-Actions renders differently when the description is not set. You can try to remove it.
+### Orientation
+
+Use the `orientation` prop to change the orientation of the Alert.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - actions
+  - color
+  - variant
+props:
+  title: 'Heads up!'
+  description: 'You can change the primary color in your app config.'
+  color: neutral
+  variant: outline
+  orientation: horizontal
+  actions:
+    - label: Action 1
+    - label: Action 2
+      color: neutral
+      variant: subtle
+---
 ::
 
 ## Examples
