@@ -1,3 +1,64 @@
+<script setup lang="ts">
+import colors from 'tailwindcss/colors'
+import { omit } from '#ui/utils'
+
+const appConfig = useAppConfig()
+const colorMode = useColorMode()
+
+const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone']
+const neutral = computed({
+  get() {
+    return appConfig.ui.colors.neutral
+  },
+  set(option) {
+    appConfig.ui.colors.neutral = option
+    window.localStorage.setItem('nuxt-ui-neutral', appConfig.ui.colors.neutral)
+  }
+})
+
+const colorsToOmit = ['inherit', 'current', 'transparent', 'black', 'white', ...neutralColors]
+const primaryColors = Object.keys(omit(colors, colorsToOmit as any))
+const primary = computed({
+  get() {
+    return appConfig.ui.colors.primary
+  },
+  set(option) {
+    appConfig.ui.colors.primary = option
+    window.localStorage.setItem('nuxt-ui-primary', appConfig.ui.colors.primary)
+    setBlackAsPrimary(false)
+  }
+})
+
+const radiuses = [0, 0.125, 0.25, 0.375, 0.5]
+const radius = computed({
+  get() {
+    return appConfig.theme.radius
+  },
+  set(option) {
+    appConfig.theme.radius = option
+    window.localStorage.setItem('nuxt-ui-radius', String(appConfig.theme.radius))
+  }
+})
+
+const modes = [
+  { label: 'light', icon: appConfig.ui.icons.light },
+  { label: 'dark', icon: appConfig.ui.icons.dark }
+]
+const mode = computed({
+  get() {
+    return colorMode.value
+  },
+  set(option) {
+    colorMode.preference = option
+  }
+})
+
+function setBlackAsPrimary(value: boolean) {
+  appConfig.theme.blackAsPrimary = value
+  window.localStorage.setItem('nuxt-ui-black-as-primary', String(value))
+}
+</script>
+
 <template>
   <UPopover :ui="{ content: 'w-72 px-6 py-4 flex flex-col gap-4' }">
     <template #default="{ open }">
@@ -19,11 +80,21 @@
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
           <ThemePickerButton
+            chip="primary"
+            label="Black"
+            :selected="appConfig.theme.blackAsPrimary"
+            @click="setBlackAsPrimary(true)"
+          >
+            <template #leading>
+              <span class="inline-block w-2 h-2 rounded-full bg-black dark:bg-white" />
+            </template>
+          </ThemePickerButton>
+          <ThemePickerButton
             v-for="color in primaryColors"
             :key="color"
             :label="color"
             :chip="color"
-            :selected="primary === color"
+            :selected="!appConfig.theme.blackAsPrimary && primary === color"
             @click="primary = color"
           />
         </div>
@@ -81,60 +152,3 @@
     </template>
   </UPopover>
 </template>
-
-<script setup lang="ts">
-import colors from 'tailwindcss/colors'
-import { omit } from '#ui/utils'
-
-const appConfig = useAppConfig()
-const colorMode = useColorMode()
-
-// Computed
-
-const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone']
-const neutral = computed({
-  get() {
-    return appConfig.ui.colors.neutral
-  },
-  set(option) {
-    appConfig.ui.colors.neutral = option
-    window.localStorage.setItem('nuxt-ui-neutral', appConfig.ui.colors.neutral)
-  }
-})
-
-const colorsToOmit = ['inherit', 'current', 'transparent', 'black', 'white', ...neutralColors]
-const primaryColors = Object.keys(omit(colors, colorsToOmit as any))
-const primary = computed({
-  get() {
-    return appConfig.ui.colors.primary
-  },
-  set(option) {
-    appConfig.ui.colors.primary = option
-    window.localStorage.setItem('nuxt-ui-primary', appConfig.ui.colors.primary)
-  }
-})
-
-const radiuses = [0, 0.125, 0.25, 0.375, 0.5]
-const radius = computed({
-  get() {
-    return appConfig.theme.radius
-  },
-  set(option) {
-    appConfig.theme.radius = option
-    window.localStorage.setItem('nuxt-ui-radius', String(appConfig.theme.radius))
-  }
-})
-
-const modes = [
-  { label: 'light', icon: appConfig.ui.icons.light },
-  { label: 'dark', icon: appConfig.ui.icons.dark }
-]
-const mode = computed({
-  get() {
-    return colorMode.value
-  },
-  set(option) {
-    colorMode.preference = option
-  }
-})
-</script>
