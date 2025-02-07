@@ -91,7 +91,7 @@ const isDark = computed({
 <template>
   <UApp>
     <div v-if="status === 'pending' || error || !component || !components?.length">
-      <div v-if="error" class="flex flex-col justify-center items-center h-screen w-screen text-center text-(--ui-color-error-500)">
+      <div v-if="error" class="flex flex-col justify-center items-center h-screen w-screen text-center text-(--ui-error)">
         <UILogo class="h-8" />
         <UIcon name="i-lucide-circle-alert" size="20" class="mt-2" />
         <p>
