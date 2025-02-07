@@ -75,7 +75,7 @@ extendDevtoolsMeta({ example: 'SlideoverExample' })
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'reka-ui'
+import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -130,6 +130,20 @@ const ui = computed(() => slideover({
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
       <DialogContent :data-side="side" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+        <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
+          <DialogTitle v-if="title || !!slots.title">
+            <slot name="title">
+              {{ title }}
+            </slot>
+          </DialogTitle>
+
+          <DialogDescription v-if="description || !!slots.description">
+            <slot name="description">
+              {{ description }}
+            </slot>
+          </DialogDescription>
+        </VisuallyHidden>
+
         <slot name="content">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
             <slot name="header">
