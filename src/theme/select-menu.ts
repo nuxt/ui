@@ -5,7 +5,7 @@ import select from './select'
 export default (options: Required<ModuleOptions>) => {
   return defu({
     slots: {
-      input: 'border-b border-[var(--ui-border)]'
+      input: 'border-b border-(--ui-border)'
     }
   }, select(options))
 }

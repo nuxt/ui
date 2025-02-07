@@ -14,13 +14,13 @@ defineProps<{
     :icon="icon"
     :label="label"
     :variant="selected ? 'soft' : 'outline'"
-    class="capitalize ring-[var(--ui-border)] rounded-[var(--ui-radius)] text-[11px]"
+    class="capitalize ring-(--ui-border) rounded-(--ui-radius) text-[11px]"
   >
     <template v-if="chip" #leading>
       <slot name="leading">
         <span
           class="inline-block w-2 h-2 rounded-full"
-          :class="`bg-[var(--color-light)] dark:bg-[var(--color-dark)]`"
+          :class="`bg-(--color-light) dark:bg-(--color-dark)`"
           :style="{
             '--color-light': `var(--color-${chip}-500)`,
             '--color-dark': `var(--color-${chip}-400)`

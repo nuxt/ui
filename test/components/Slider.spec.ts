@@ -24,7 +24,7 @@ describe('Slider', () => {
     ['with color neutral', { props: { color: 'neutral', defaultValue: 10 } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { ui: { track: 'bg-[var(--ui-bg-elevated)]' } } }]
+    ['with ui', { props: { ui: { track: 'bg-(--ui-bg-elevated)' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {
     const html = await ComponentRender(nameOrHtml, options, Slider)
     expect(html).toMatchSnapshot()

@@ -112,7 +112,7 @@ const items = [
       :content-orientation="contentOrientation"
       :highlight="highlight"
       :highlight-color="highlightColor"
-      :class="highlight && 'data-[orientation=horizontal]:border-b border-[var(--ui-border)]'"
+      :class="highlight && 'data-[orientation=horizontal]:border-b border-(--ui-border)'"
       class="data-[orientation=vertical]:data-[collapsed=false]:w-48"
     />
   </div>

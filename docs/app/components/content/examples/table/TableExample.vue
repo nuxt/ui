@@ -263,7 +263,7 @@ function randomize() {
 </script>
 
 <template>
-  <div class="flex-1 divide-y divide-[var(--ui-border-accented)] w-full">
+  <div class="flex-1 divide-y divide-(--ui-border-accented) w-full">
     <div class="flex items-center gap-2 px-4 py-3.5 overflow-x-auto">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
@@ -310,7 +310,7 @@ function randomize() {
       </template>
     </UTable>
 
-    <div class="px-4 py-3.5 text-sm text-[var(--ui-text-muted)]">
+    <div class="px-4 py-3.5 text-sm text-(--ui-text-muted)">
       {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
       {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
     </div>

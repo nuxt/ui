@@ -333,10 +333,10 @@ onMounted(() => {
         getPaginationRowModel: getPaginationRowModel()
       }"
       :ui="{
-        tr: 'divide-x divide-[var(--ui-border)]'
+        tr: 'divide-x divide-(--ui-border)'
       }"
       sticky
-      class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)]"
+      class="border border-(--ui-border-accented) rounded-(--ui-radius)"
     >
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>
@@ -344,7 +344,7 @@ onMounted(() => {
     </UTable>
 
     <div class="flex items-center justify-between gap-3">
-      <div class="text-sm text-[var(--ui-text-muted)]">
+      <div class="text-sm text-(--ui-text-muted)">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>

@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="border rounded-[var(--ui-radius)] border-[var(--ui-border)]">
+  <div class="border rounded-(--ui-radius) border-(--ui-border)">
     <div
       ref="wrapper"
       :class="['overflow-hidden', collapsed && overflow ? 'max-h-48' : 'max-h-none']"
@@ -29,7 +29,7 @@ onMounted(() => {
     </div>
     <UButton
       v-if="overflow"
-      class="bg-[var(--ui-bg)] group w-full flex justify-center my-1 border-t border-[var(--ui-border)] rounded-t-none"
+      class="bg-(--ui-bg) group w-full flex justify-center my-1 border-t border-(--ui-border) rounded-t-none"
       variant="link"
       color="neutral"
       trailing-icon="i-lucide-chevron-down"

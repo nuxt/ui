@@ -27,7 +27,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
 <template>
   <UHeader :ui="{ left: 'min-w-0' }" mode="drawer" :menu="{ shouldScaleBackground: true }">
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[var(--ui-text-highlighted)] min-w-0 focus-visible:outline-[var(--ui-primary)] shrink-0" aria-label="Nuxt UI">
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0" aria-label="Nuxt UI">
         <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
         <Logo class="w-auto h-6 shrink-0 ui-only" />
       </NuxtLink>
@@ -45,7 +45,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
           trailing-icon="i-lucide-chevron-down"
           size="xs"
           class="-mb-[6px] font-semibold rounded-full truncate"
-          :class="[open && 'bg-[var(--ui-primary)]/15 ']"
+          :class="[open && 'bg-(--ui-primary)/15 ']"
           :ui="{
             trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
           }"
