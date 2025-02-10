@@ -11,7 +11,7 @@ const modelValue = shallowRef(new CalendarDate(2022, 1, 10))
 <template>
   <UPopover>
     <UButton color="neutral" variant="subtle" icon="i-lucide-calendar">
-      {{ df.format(modelValue.toDate(getLocalTimeZone())) }}
+      {{ modelValue ? df.format(modelValue.toDate(getLocalTimeZone())) : 'Select a date' }}
     </UButton>
 
     <template #content>
