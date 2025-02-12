@@ -16,12 +16,12 @@ function handleMessage(message) {
 async function handleFormatMessage(message) {
   if (!globalThis.prettier) {
     await Promise.all([
-      import('https://unpkg.com/prettier@3.3.3/standalone.js'),
-      import('https://unpkg.com/prettier@3.3.3/plugins/html.js'),
-      import('https://unpkg.com/prettier@3.3.3/plugins/postcss.js'),
-      import('https://unpkg.com/prettier@3.3.3/plugins/babel.js'),
-      import('https://unpkg.com/prettier@3.3.3/plugins/estree.js'),
-      import('https://unpkg.com/prettier@3.3.3/plugins/typescript.js')
+      import('https://unpkg.com/prettier@3.5.0/standalone.js'),
+      import('https://unpkg.com/prettier@3.5.0/plugins/html.js'),
+      import('https://unpkg.com/prettier@3.5.0/plugins/postcss.js'),
+      import('https://unpkg.com/prettier@3.5.0/plugins/babel.js'),
+      import('https://unpkg.com/prettier@3.5.0/plugins/estree.js'),
+      import('https://unpkg.com/prettier@3.5.0/plugins/typescript.js')
     ])
   }
 
