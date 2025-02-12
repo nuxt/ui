@@ -74,7 +74,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
       </UTooltip>
     </template>
 
-    <template #content>
+    <template #body>
       <UNavigationMenu orientation="vertical" :items="links" class="-mx-2.5" />
 
       <USeparator type="dashed" class="mt-4 mb-6" />
