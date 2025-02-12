@@ -6,6 +6,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
 import { tv } from '../utils/tv'
+import type { PartialString } from '../types/utils'
 
 const appConfigCalendar = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
 
@@ -58,7 +59,7 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   defaultValue?: CalendarModelValue<R, M>
   modelValue?: CalendarModelValue<R, M>
   class?: any
-  ui?: Partial<typeof calendar.slots>
+  ui?: PartialString<typeof calendar.slots>
 }
 
 export interface CalendarEmits<R extends boolean, M extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
