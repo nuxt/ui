@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
+// import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
 // import { debounce } from 'perfect-debounce'
 
@@ -22,32 +22,7 @@ const searchTerm = ref('')
 //   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
 // }, 500))
 
-const links = computed(() => [{
-  label: 'Docs',
-  icon: 'i-lucide-square-play',
-  to: '/getting-started',
-  active: route.path.startsWith('/getting-started')
-}, {
-  label: 'Components',
-  icon: 'i-lucide-square-code',
-  to: '/components',
-  active: route.path.startsWith('/components')
-}, {
-  label: 'Roadmap',
-  icon: 'i-lucide-map',
-  to: '/roadmap'
-}, {
-  label: 'Figma',
-  icon: 'i-lucide-figma',
-  to: 'https://www.figma.com/community/file/1288455405058138934',
-  target: '_blank'
-}, {
-  label: 'Releases',
-  icon: 'i-lucide-rocket',
-  to: 'https://github.com/nuxt/ui/releases',
-  target: '_blank'
-}].filter(Boolean))
-
+const links = useLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
@@ -58,8 +33,8 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
+    // { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
   ],
   style: [
     { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
@@ -83,7 +58,7 @@ provide('navigation', mappedNavigation)
 
 <template>
   <UApp :toaster="appConfig.toaster">
-    <NuxtLoadingIndicator color="#FFF" />
+    <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
     <template v-if="!route.path.startsWith('/examples')">
       <!-- <Banner /> -->
@@ -96,7 +71,7 @@ provide('navigation', mappedNavigation)
     </NuxtLayout>
 
     <template v-if="!route.path.startsWith('/examples')">
-      <!-- <Footer /> -->
+      <Footer />
 
       <ClientOnly>
         <LazyUContentSearch

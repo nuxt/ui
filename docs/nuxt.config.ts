@@ -1,5 +1,6 @@
 import { createResolver } from '@nuxt/kit'
 import pkg from '../package.json'
+import yaml from '@rollup/plugin-yaml'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -109,6 +110,12 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+
+  vite: {
+    plugins: [
+      yaml()
+    ]
   },
 
   componentMeta: {

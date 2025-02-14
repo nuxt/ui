@@ -42,7 +42,8 @@ const radius = computed({
 
 const modes = [
   { label: 'light', icon: appConfig.ui.icons.light },
-  { label: 'dark', icon: appConfig.ui.icons.dark }
+  { label: 'dark', icon: appConfig.ui.icons.dark },
+  { label: 'system', icon: appConfig.ui.icons.system }
 ]
 const mode = computed({
   get() {
@@ -144,7 +145,7 @@ function setBlackAsPrimary(value: boolean) {
             v-for="m in modes"
             :key="m.label"
             v-bind="m"
-            :selected="mode === m.label"
+            :selected="colorMode.preference === m.label"
             @click="mode = m.label"
           />
         </div>
