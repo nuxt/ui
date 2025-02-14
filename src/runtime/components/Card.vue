@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/card'
@@ -9,12 +10,15 @@ const appConfigCard = _appConfig as AppConfig & { ui: { card: Partial<typeof the
 
 const card = tv({ extend: tv(theme), ...(appConfigCard.ui?.card || {}) })
 
+type CardVariants = VariantProps<typeof card>
+
 export interface CardProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
+  variant?: CardVariants['variant']
   class?: any
   ui?: Partial<typeof card.slots>
 }
@@ -29,13 +33,13 @@ extendDevtoolsMeta({ example: 'CardExample' })
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 
 const props = defineProps<CardProps>()
 const slots = defineSlots<CardSlots>()
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = card()
+const ui = computed(() => card({ variant: props.variant }))
 </script>
 
 <template>

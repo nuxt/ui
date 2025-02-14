@@ -1,11 +1,15 @@
 import { describe, it, expect } from 'vitest'
 import Card, { type CardProps, type CardSlots } from '../../src/runtime/components/Card.vue'
 import ComponentRender from '../component-render'
+import theme from '#build/ui/card'
 
 describe('Card', () => {
+  const variants = Object.keys(theme.variants.variant) as any
+
   it.each([
     // Props
     ['with as', { props: { as: 'section' } }],
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
     ['with class', { props: { class: 'rounded-xl' } }],
     ['with ui', { props: { ui: { body: 'font-bold' } } }],
     // Slots
