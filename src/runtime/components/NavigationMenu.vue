@@ -185,7 +185,13 @@ const contentProps = toRef(() => props.content)
 
 const appConfig = useAppConfig()
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>()
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>({
+  props: {
+    item: Object,
+    index: Number,
+    level: Number
+  }
+})
 
 const ui = computed(() => navigationMenu({
   orientation: props.orientation,
