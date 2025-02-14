@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "3.0.0-alpha.12",
-  "packageManager": "pnpm@9.15.5",
+  "packageManager": "pnpm@10.4.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -158,6 +158,9 @@
     "unplugin": "^2.2.0",
     "vite": "6.0.11",
     "vue-tsc": "^2.2.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["better-sqlite3"]
   },
   "keywords": [
     "nuxt-ui",
