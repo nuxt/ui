@@ -52,6 +52,7 @@
   "types": "./dist/types.d.ts",
   "files": [
     ".nuxt/ui",
+    ".nuxt/ui.css",
     "dist",
     "cli",
     "vue-plugin.d.ts"
