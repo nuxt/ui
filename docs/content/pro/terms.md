@@ -1,6 +1,5 @@
 ---
 title: 'Conditions Générales de Vente de Nuxt UI Pro'
-head.title: 'Conditions Générales de Vente'
 description: 'Dernière mise à jour : 20 août 2024'
 navigation: false
 ---
