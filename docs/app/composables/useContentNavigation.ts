@@ -14,10 +14,25 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
   }
 }
 
+function processNavigationItemIcon(item: ContentNavigationItem) {
+  let icon = item.icon
+  if (item.path.startsWith('/components')) {
+    icon = item.module === 'ui-pro' ? 'i-lucide-panels-top-left' : 'i-lucide-box'
+  }
+  if (item.path.startsWith('/composables')) {
+    icon = 'i-lucide-square-function'
+  }
+  return {
+    ...item,
+    icon
+  }
+}
+
 export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
   const { framework, module } = useSharedData()
 
   const mappedNavigation = computed(() => navigation.value?.map(item => processNavigationItem(item)))
+
   const filteredNavigation = computed(() => mappedNavigation.value?.map((item) => {
     return {
       ...item,
@@ -29,7 +44,7 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
           return false
         }
         return true
-      })
+      })?.map(processNavigationItemIcon)
     }
   }))
 
