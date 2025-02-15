@@ -140,7 +140,7 @@ function setBlackAsPrimary(value: boolean) {
           Theme
         </legend>
 
-        <div class="flex gap-1 -mx-2">
+        <div class="grid grid-cols-3 gap-1 -mx-2">
           <ThemePickerButton
             v-for="m in modes"
             :key="m.label"
