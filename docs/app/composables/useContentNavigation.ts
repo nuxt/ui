@@ -49,7 +49,10 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
   }))
 
   return {
-    mappedNavigation,
+    mappedNavigation: computed(() => mappedNavigation.value?.map(item => ({
+      ...item,
+      children: item.children?.map((child: any) => ({ ...child, icon: undefined }))
+    }))),
     filteredNavigation
   }
 }
