@@ -97,7 +97,8 @@ export default defineNuxtConfig({
         // '/api/pulls.json'
       ],
       crawlLinks: true,
-      autoSubfolderIndex: false
+      autoSubfolderIndex: false,
+      failOnError: false
     },
     cloudflare: {
       pages: {
@@ -155,6 +156,7 @@ export default defineNuxtConfig({
   image: {
     provider: 'ipx'
   },
+
   llms: {
     domain: 'https://ui3.nuxt.dev',
     title: 'Nuxt UI v3',
