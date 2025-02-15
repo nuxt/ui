@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<{
 function getEmojiFlag(locale: string): string {
   const languageToCountry: Record<string, string> = {
     ar: 'sa',
+    bn: 'bd',
     cs: 'cz',
     da: 'dk',
     el: 'gr',
