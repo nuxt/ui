@@ -1,10 +1,13 @@
 <script setup lang="ts">
 const open = ref(false)
+const inset = ref(false)
 </script>
 
 <template>
   <div class="flex flex-col gap-2">
-    <UDrawer v-model:open="open" title="Drawer with v-model" description="This is useful to control the state yourself.">
+    <USwitch v-model="inset" label="Inset" class="mb-4" />
+
+    <UDrawer v-model:open="open" title="Drawer with v-model" description="This is useful to control the state yourself." :inset="inset">
       <UButton color="neutral" variant="outline" label="Open with v-model" />
 
       <template #body>
@@ -17,7 +20,7 @@ const open = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `vaul-drawer-wrapper` directive to your content to make it work.">
+    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `vaul-drawer-wrapper` directive to your content to make it work." :inset="inset">
       <UButton color="neutral" variant="outline" label="Open with scale" />
 
       <template #body>
@@ -25,7 +28,7 @@ const open = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with bottom direction" direction="bottom" :handle="false">
+    <UDrawer title="Drawer with bottom direction" direction="bottom" :handle="false" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on bottom" />
 
       <template #body>
@@ -33,7 +36,7 @@ const open = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with left direction" direction="left" :handle="false">
+    <UDrawer title="Drawer with left direction" direction="left" :handle="false" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on left" />
 
       <template #body>
@@ -41,7 +44,7 @@ const open = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with top direction" direction="top" :handle="false">
+    <UDrawer title="Drawer with top direction" direction="top" :handle="false" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on top" />
 
       <template #body>
@@ -49,7 +52,7 @@ const open = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with right direction" direction="right" :handle="false">
+    <UDrawer title="Drawer with right direction" direction="right" :handle="false" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on right" />
 
       <template #body>

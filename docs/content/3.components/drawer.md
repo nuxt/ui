@@ -96,35 +96,6 @@ Use the `direction` prop to control the direction of the Drawer. Defaults to `bo
 ::component-code
 ---
 prettier: true
-items:
-  direction:
-    - top
-    - bottom
-props:
-  direction: 'top'
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
-
-  content: |
-
-    <Placeholder class="h-96 m-4" />
----
-
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
-
-#content
-:placeholder{class="h-96 m-4"}
-::
-
-::component-code
----
-prettier: true
-items:
-  direction:
-    - right
-    - left
 props:
   direction: 'right'
 slots:
@@ -134,13 +105,39 @@ slots:
 
   content: |
 
-    <Placeholder class="w-96 m-4" />
+    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="w-96 m-4"}
+:placeholder{class="min-w-96 min-h-96 size-full m-4"}
+::
+
+### Inset
+
+Use the `inset` prop to inset the Drawer from the edges.
+
+::component-code
+---
+prettier: true
+props:
+  direction: 'right'
+  inset: true
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  content: |
+
+    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#content
+:placeholder{class="min-w-96 min-h-96 size-full m-4"}
 ::
 
 ### Handle

@@ -19,6 +19,11 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   as?: any
   title?: string
   description?: string
+  /**
+   * Whether to inset the drawer from the edges.
+   * @defaultValue false
+   */
+  inset?: boolean
   /** The content of the drawer. */
   content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -80,7 +85,8 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'c
 const contentProps = toRef(() => props.content)
 
 const ui = computed(() => drawer({
-  direction: props.direction
+  direction: props.direction,
+  inset: props.inset
 }))
 </script>
 
