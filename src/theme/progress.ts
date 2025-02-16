@@ -3,9 +3,9 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'gap-2',
-    base: 'relative overflow-hidden rounded-full bg-[var(--ui-bg-accented)]',
+    base: 'relative overflow-hidden rounded-full bg-(--ui-bg-accented)',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out',
-    status: 'flex justify-end text-[var(--ui-text-dimmed)] transition-[width] duration-200',
+    status: 'flex justify-end text-(--ui-text-dimmed) transition-[width] duration-200',
     steps: 'grid items-end',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity'
   },
@@ -18,12 +18,12 @@ export default (options: Required<ModuleOptions>) => ({
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `bg-[var(--ui-${color})]`,
-        steps: `text-[var(--ui-${color})]`
+        indicator: `bg-(--ui-${color})`,
+        steps: `text-(--ui-${color})`
       }])),
       neutral: {
-        indicator: 'bg-[var(--ui-bg-inverted)]',
-        steps: 'text-[var(--ui-bg)]'
+        indicator: 'bg-(--ui-bg-inverted)',
+        steps: 'text-(--ui-bg)'
       }
     },
     size: {
@@ -61,7 +61,7 @@ export default (options: Required<ModuleOptions>) => ({
         step: 'opacity-100'
       },
       first: {
-        step: 'opacity-100 text-[var(--ui-text-muted)]'
+        step: 'opacity-100 text-(--ui-text-muted)'
       },
       other: {
         step: 'opacity-0'
@@ -162,7 +162,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     animation: 'carousel',
     class: {
-      indicator: 'data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite]'
+      indicator: 'data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     orientation: 'vertical',
@@ -174,7 +174,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     animation: 'carousel-inverse',
     class: {
-      indicator: 'data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite]'
+      indicator: 'data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     orientation: 'vertical',

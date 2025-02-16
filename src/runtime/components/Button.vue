@@ -1,17 +1,18 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/button'
 import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
+const appConfigButton = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
-const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
+const button = tv({ extend: tv(theme), ...(appConfigButton.ui?.button || {}) })
 
 type ButtonVariants = VariantProps<typeof button>
 
@@ -43,7 +44,7 @@ export interface ButtonSlots {
 
 <script setup lang="ts">
 import { type Ref, computed, ref, inject } from 'vue'
-import { useForwardProps } from 'radix-vue'
+import { useForwardProps } from 'reka-ui'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'

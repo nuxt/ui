@@ -1,16 +1,17 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps } from 'radix-vue'
+import type { VariantProps } from 'tailwind-variants'
+import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
+const appConfigContextMenu = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
 
-const contextMenu = tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })
+const contextMenu = tv({ extend: tv(theme), ...(appConfigContextMenu.ui?.contextMenu || {}) })
 
 type ContextMenuVariants = VariantProps<typeof contextMenu>
 
@@ -50,6 +51,12 @@ export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
    * @defaultValue appConfig.ui.icons.loading
    */
   loadingIcon?: string
+  /**
+   * The icon displayed when the item is an external link.
+   * Set to `false` to hide the external icon.
+   * @defaultValue appConfig.ui.icons.external
+   */
+  externalIcon?: boolean | string
   /** The content of the menu. */
   content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -143,7 +150,7 @@ extendDevtoolsMeta({
 
 <script setup lang="ts" generic="T extends ContextMenuItem">
 import { computed, toRef } from 'vue'
-import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'radix-vue'
+import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UContextMenuContent from './ContextMenuContent.vue'
@@ -151,6 +158,7 @@ import UContextMenuContent from './ContextMenuContent.vue'
 const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
   portal: true,
   modal: true,
+  externalIcon: true,
   labelKey: 'label'
 })
 const emits = defineEmits<ContextMenuEmits>()
@@ -167,12 +175,12 @@ const ui = computed(() => contextMenu({
 
 <template>
   <ContextMenuRoot v-bind="rootProps">
-    <ContextMenuTrigger v-if="!!slots.default" as-child :disabled="disabled">
+    <ContextMenuTrigger v-if="!!slots.default" as-child :disabled="disabled" :class="props.class">
       <slot />
     </ContextMenuTrigger>
 
     <UContextMenuContent
-      :class="ui.content({ class: [props.class, props.ui?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"
@@ -181,6 +189,7 @@ const ui = computed(() => contextMenu({
       :label-key="labelKey"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
+      :external-icon="externalIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />

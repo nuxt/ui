@@ -120,7 +120,7 @@ props:
 ::
 
 ::note
-It's used this way in the [CommandPalette](/components/command-palette), [InputMenu](/components/input-menu), [Select](/components/select) or [SelectMenu](/components/select-menu) components for example.
+It's used this way in the [`CommandPalette`](/components/command-palette), [`InputMenu`](/components/input-menu), [`Select`](/components/select) or [`SelectMenu`](/components/select-menu) components for example.
 ::
 
 ## Examples

@@ -143,14 +143,13 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsAllPageRowsSelected(),
-    'indeterminate': table.getIsSomePageRowsSelected(),
-    'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value),
+    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'ariaLabel': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
-    'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
     'ariaLabel': 'Select row'
   }),
   enableSorting: false,
@@ -264,7 +263,7 @@ function randomize() {
 </script>
 
 <template>
-  <div class="flex-1 divide-y divide-[var(--ui-border-accented)] w-full">
+  <div class="flex-1 divide-y divide-(--ui-border-accented) w-full">
     <div class="flex items-center gap-2 px-4 py-3.5 overflow-x-auto">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
@@ -311,7 +310,7 @@ function randomize() {
       </template>
     </UTable>
 
-    <div class="px-4 py-3.5 text-sm text-[var(--ui-text-muted)]">
+    <div class="px-4 py-3.5 text-sm text-(--ui-text-muted)">
       {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
       {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
     </div>

@@ -1,14 +1,15 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { SeparatorProps as _SeparatorProps } from 'radix-vue'
+import type { VariantProps } from 'tailwind-variants'
+import type { SeparatorProps as _SeparatorProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/separator'
+import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 
-const appConfig = _appConfig as AppConfig & { ui: { separator: Partial<typeof theme> } }
+const appConfigSeparator = _appConfig as AppConfig & { ui: { separator: Partial<typeof theme> } }
 
-const separator = tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })
+const separator = tv({ extend: tv(theme), ...(appConfigSeparator.ui?.separator || {}) })
 
 type SeparatorVariants = VariantProps<typeof separator>
 
@@ -43,7 +44,7 @@ export interface SeparatorSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Separator, useForwardProps } from 'radix-vue'
+import { Separator, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'

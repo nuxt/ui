@@ -1,13 +1,13 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/skeleton'
+import { tv } from '../utils/tv'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
-const appConfig = _appConfig as AppConfig & { ui: { skeleton: Partial<typeof theme> } }
+const appConfigSkeleton = _appConfig as AppConfig & { ui: { skeleton: Partial<typeof theme> } }
 
-const skeleton = tv({ extend: tv(theme), ...(appConfig.ui?.skeleton || {}) })
+const skeleton = tv({ extend: tv(theme), ...(appConfigSkeleton.ui?.skeleton || {}) })
 
 export interface SkeletonProps {
   /**
@@ -22,7 +22,7 @@ extendDevtoolsMeta({ example: 'SkeletonExample' })
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 
 const props = defineProps<SkeletonProps>()
 </script>

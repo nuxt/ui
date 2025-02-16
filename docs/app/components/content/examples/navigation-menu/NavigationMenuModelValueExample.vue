@@ -111,5 +111,5 @@ defineShortcuts({
 </script>
 
 <template>
-  <UNavigationMenu v-model="active" :items="items" class="justify-center" />
+  <UNavigationMenu v-model="active" :items="items" class="w-full justify-center" />
 </template>

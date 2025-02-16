@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onUnmounted, onMounted, reactive } from 'vue'
 import { pascalCase } from 'scule'
-import { defineAsyncComponent, useColorMode, useRoute } from '#imports'
+import { defineAsyncComponent, useRoute } from '#imports'
+import { useColorMode } from '@vueuse/core'
 
 const route = useRoute()
 const component = route.query?.example
@@ -15,9 +16,9 @@ function onUpdateRenderer(event: Event & { data?: any }) {
   state.slots = { ...event.data.slots }
 }
 
-const colorMode = useColorMode()
+const mode = useColorMode()
 function setColorMode(event: Event & { isDark?: boolean }) {
-  colorMode.preference = event.isDark ? 'dark' : 'light'
+  mode.value = event.isDark ? 'dark' : 'light'
 }
 
 onMounted(() => {

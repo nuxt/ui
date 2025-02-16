@@ -16,7 +16,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   <UInputMenu
     :items="users || []"
     :loading="status === 'pending'"
-    :filter="['label', 'email']"
+    :filter-fields="['label', 'email']"
     icon="i-lucide-user"
     placeholder="Select user"
     class="w-80"
@@ -33,7 +33,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     <template #item-label="{ item }">
       {{ item.label }}
 
-      <span class="text-[var(--ui-text-muted)]">
+      <span class="text-(--ui-text-muted)">
         {{ item.email }}
       </span>
     </template>

@@ -40,7 +40,7 @@ const items = computed(() => [{
 </script>
 
 <template>
-  <UDropdownMenu :items="items" :content="{ align: 'start' }" class="w-48">
+  <UDropdownMenu :items="items" :content="{ align: 'start' }" :ui="{ content: 'w-48' }">
     <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
   </UDropdownMenu>
 </template>

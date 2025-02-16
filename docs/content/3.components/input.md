@@ -25,15 +25,15 @@ props:
 
 Use the `type` prop to change the input type. Defaults to `text`.
 
-Some types have been implemented in their own components such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), etc. and others have been styled like `file` for example.
+Some types have been implemented in their own components such as [Checkbox](/components/checkbox), [Radio](/components/radio-group), [InputNumber](/components/input-number) etc. and others have been styled like `file` for example.
 
 ::component-code
 ---
 items:
   type:
     - text
-    - password
     - number
+    - password
     - search
     - file
 props:
@@ -171,7 +171,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-ccw`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 
 ::component-code
 ---
@@ -184,8 +184,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
 ::
 
 ### Disabled
@@ -290,7 +298,7 @@ name: 'input-form-field-example'
 ::
 
 ::tip{to="/components/form"}
-It also provides validation and error handling when used within a [Form](/components/form) component.
+It also provides validation and error handling when used within a **Form** component.
 ::
 
 ### Within a ButtonGroup

@@ -2,8 +2,8 @@
 description: A list of buttons or links to navigate through pages.
 links:
   - label: Pagination
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/pagination.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/pagination
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Pagination.vue
@@ -14,7 +14,7 @@ links:
 Use the `default-page` prop or the `v-model:page` directive to control the current page.
 
 ::note
-The Pagination component uses some [Button](/components/button) to display the pages, use [`color`](#color), [`variant`](#variant) and [`size`](#size) props to style them.
+The Pagination component uses some [`Button`](/components/button) to display the pages, use [`color`](#color), [`variant`](#variant) and [`size`](#size) props to style them.
 ::
 
 ### Total

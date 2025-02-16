@@ -3,6 +3,7 @@ import { LazyModalExample } from '#components'
 
 const count = ref(0)
 
+const toast = useToast()
 const modal = useModal()
 
 function open() {
@@ -10,7 +11,13 @@ function open() {
 
   modal.open(LazyModalExample, {
     description: 'And you can even provide a description!',
-    count: count.value
+    count: count.value,
+    onSuccess() {
+      toast.add({
+        title: 'Success !',
+        id: 'modal-success'
+      })
+    }
   })
 }
 </script>

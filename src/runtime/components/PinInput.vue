@@ -1,14 +1,15 @@
 <script lang="ts">
+import type { VariantProps } from 'tailwind-variants'
+import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
+import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pin-input'
-import type { AppConfig } from '@nuxt/schema'
-import type { PinInputRootEmits, PinInputRootProps } from 'radix-vue'
-import { tv, type VariantProps } from 'tailwind-variants'
+import { tv } from '../utils/tv'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { pinInput: Partial<typeof theme> } }
+const appConfigPinInput = _appConfig as AppConfig & { ui: { pinInput: Partial<typeof theme> } }
 
-const pinInput = tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || {}) })
+const pinInput = tv({ extend: tv(theme), ...(appConfigPinInput.ui?.pinInput || {}) })
 
 type PinInputVariants = VariantProps<typeof pinInput>
 
@@ -35,8 +36,9 @@ export type PinInputEmits = PinInputRootEmits & {
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'radix-vue'
+import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 
 defineOptions({ inheritAttrs: false })
@@ -48,7 +50,7 @@ const props = withDefaults(defineProps<PinInputProps>(), {
 const emits = defineEmits<PinInputEmits>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'placeholder', 'required', 'type'), emits)
-const { emitFormInput, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled } = useFormField<PinInputProps>(props)
+const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(props)
 
 const ui = computed(() => pinInput({
   color: color.value,
@@ -75,7 +77,7 @@ function onBlur(event: FocusEvent) {
 
 <template>
   <PinInputRoot
-    v-bind="rootProps"
+    v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     :name="name"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
@@ -90,6 +92,7 @@ function onBlur(event: FocusEvent) {
       v-bind="$attrs"
       :disabled="disabled"
       @blur="onBlur"
+      @focus="emitFormFocus"
     />
   </PinInputRoot>
 </template>

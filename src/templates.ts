@@ -5,6 +5,7 @@ import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
+import colors from 'tailwindcss/colors'
 
 export function buildTemplates(options: ModuleOptions) {
   return Object.entries(theme).reduce((acc, [key, component]) => {
@@ -24,32 +25,70 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         const template = (theme as any)[component]
         const result = typeof template === 'function' ? template(options) : template
 
-        const variants = Object.keys(result.variants || {})
+        const variants = Object.entries(result.variants || {})
+          .filter(([_, values]) => {
+            const keys = Object.keys(values as Record<string, unknown>)
+            return keys.some(key => key !== 'true' && key !== 'false')
+          })
+          .map(([key]) => key)
 
         let json = JSON.stringify(result, null, 2)
 
         for (const variant of variants) {
-          json = json.replace(new RegExp(`("${variant}": "[^"]+")`, 'g'), '$1 as const')
+          json = json.replace(new RegExp(`("${variant}": "[^"]+")`, 'g'), `$1 as typeof ${variant}[number]`)
           json = json.replace(new RegExp(`("${variant}": \\[\\s*)((?:"[^"]+",?\\s*)+)(\\])`, 'g'), (_, before, match, after) => {
-            const replaced = match.replace(/("[^"]+")/g, '$1 as const')
+            const replaced = match.replace(/("[^"]+")/g, `$1 as typeof ${variant}[number]`)
             return `${before}${replaced}${after}`
           })
         }
 
-        // For local development, directly import from theme
-        if (process.env.DEV) {
-          return [
-            `import template from ${JSON.stringify(fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url)))}`,
-            `const result = typeof template === 'function' ? template(${JSON.stringify(options)}) : template`,
-            `const json = ${json}`,
-            `export default result as typeof json`
-          ].join('\n')
+        function generateVariantDeclarations(variants: string[]) {
+          return variants.map((variant) => {
+            const keys = Object.keys(result.variants[variant])
+            return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`
+          })
         }
 
-        return `export default ${json}`
+        // For local development, import directly from theme
+        if (process.env.DEV) {
+          const templatePath = fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url))
+          return [
+            `import template from ${JSON.stringify(templatePath)}`,
+            ...generateVariantDeclarations(variants),
+            `const result = typeof template === 'function' ? template(${JSON.stringify(options, null, 2)}) : template`,
+            `const theme = ${json}`,
+            `export default result as typeof theme`
+          ].join('\n\n')
+        }
+
+        // For production build
+        return [
+          ...generateVariantDeclarations(variants),
+          `export default ${json}`
+        ].join('\n\n')
       }
     })
   }
+
+  templates.push({
+    filename: 'ui.css',
+    write: true,
+    getContents: () => `@theme default {
+  --color-old-neutral-50: ${colors.neutral[50]};
+  --color-old-neutral-100: ${colors.neutral[100]};
+  --color-old-neutral-200: ${colors.neutral[200]};
+  --color-old-neutral-300: ${colors.neutral[300]};
+  --color-old-neutral-400: ${colors.neutral[400]};
+  --color-old-neutral-500: ${colors.neutral[500]};
+  --color-old-neutral-600: ${colors.neutral[600]};
+  --color-old-neutral-700: ${colors.neutral[700]};
+  --color-old-neutral-800: ${colors.neutral[800]};
+  --color-old-neutral-900: ${colors.neutral[900]};
+  --color-old-neutral-950: ${colors.neutral[950]};
+  ${[...(options.theme?.colors || []), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
+}
+`
+  })
 
   templates.push({
     filename: 'ui/index.ts',
@@ -61,13 +100,14 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
-import type { DeepPartial } from '#ui/types/utils'
+import type { DeepPartial } from '@nuxt/ui'
+import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
 const icons = ${JSON.stringify(uiConfig.icons)};
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
-type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor>
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | (string & {})
+type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {
   colors?: {
@@ -75,6 +115,7 @@ type AppConfigUI = {
     neutral?: NeutralColor
   }
   icons?: Partial<typeof icons>
+  tv?: typeof defaultConfig
 } & DeepPartial<typeof ui>
 
 declare module '@nuxt/schema' {

@@ -2,8 +2,8 @@
 description: A dialog window that can be used to display a message or request user input.
 links:
   - label: Dialog
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/dialog.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Modal.vue
@@ -93,7 +93,7 @@ slots:
 
 Use the `close` prop to customize or hide the close button (with `false` value) displayed in the Modal's header.
 
-You can pass all the props of the [Button](/components/button) component to customize it.
+You can pass any property from the [Button](/components/button) component to customize it.
 
 ::component-code
 ---
@@ -156,8 +156,16 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
 ::
 
 ### Overlay
@@ -245,19 +253,39 @@ slots:
 :placeholder{class="h-full"}
 ::
 
-### Prevent close
+## Examples
 
-Use the `prevent-close` prop to prevent the Modal from being closed when clicking outside of it.
+### Control open state
+
+You can control the open state by using the `default-open` prop or the `v-model:open` directive.
+
+::component-example
+---
+name: 'modal-open-example'
+---
+::
+
+::note
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Modal by pressing :kbd{value="O"}.
+::
+
+::tip
+This allows you to move the trigger outside of the Modal or remove it entirely.
+::
+
+### Prevent closing
+
+Set the `dismissible` prop to `false` to prevent the Modal from being closed when clicking outside of it or pressing escape.
 
 ::component-code
 ---
 prettier: true
 ignore:
   - title
-  - preventClose
+  - dismissible
 props:
-  preventClose: true
-  title: 'Modal prevent close'
+  dismissible: false
+  title: 'Modal non-dismissible'
 slots:
   default: |
 
@@ -274,32 +302,12 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-## Examples
-
-### Control open state
-
-You can control the open state by using the `default-open` prop or the `v-model:open` directive.
-
-::component-example
----
-name: 'modal-open-example'
----
-::
-
-::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Modal by pressing :kbd{value="O"}.
-::
-
-::tip
-This allows you to move the trigger outside of the Modal or remove it entirely.
-::
-
 ### Programmatic usage
 
 You can use the [`useModal`](/composables/use-modal) composable to open a Modal programatically.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses the [ModalProvider](https://github.com/nuxt/ui/blob/v3/src/runtime/components/ModalProvider.vue) component.
+Make sure to wrap your app with the [`App`](/components/app) component which uses the [`ModalProvider`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/ModalProvider.vue) component.
 ::
 
 First, create a modal component that will be opened programatically:

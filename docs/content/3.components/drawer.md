@@ -2,8 +2,8 @@
 description: A drawer that smoothly slides in & out of the screen.
 links:
   - label: Drawer
-    icon: i-custom-radix-vue
-    to: https://github.com/radix-vue/vaul-vue
+    icon: i-custom-reka-ui
+    to: https://github.com/unovue/vaul-vue
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Drawer.vue
@@ -96,35 +96,6 @@ Use the `direction` prop to control the direction of the Drawer. Defaults to `bo
 ::component-code
 ---
 prettier: true
-items:
-  direction:
-    - top
-    - bottom
-props:
-  direction: 'top'
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
-
-  content: |
-
-    <Placeholder class="h-96 m-4" />
----
-
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
-
-#content
-:placeholder{class="h-96 m-4"}
-::
-
-::component-code
----
-prettier: true
-items:
-  direction:
-    - right
-    - left
 props:
   direction: 'right'
 slots:
@@ -134,13 +105,39 @@ slots:
 
   content: |
 
-    <Placeholder class="w-96 m-4" />
+    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="w-96 m-4"}
+:placeholder{class="min-w-96 min-h-96 size-full m-4"}
+::
+
+### Inset
+
+Use the `inset` prop to inset the Drawer from the edges.
+
+::component-code
+---
+prettier: true
+props:
+  direction: 'right'
+  inset: true
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  content: |
+
+    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#content
+:placeholder{class="min-w-96 min-h-96 size-full m-4"}
 ::
 
 ### Handle
@@ -224,7 +221,7 @@ Make sure to add the `vaul-drawer-wrapper` directive to a parent element of your
 ```vue [app.vue]
 <template>
   <UApp>
-    <div class="bg-[var(--ui-bg)]" vaul-drawer-wrapper>
+    <div class="bg-(--ui-bg)" vaul-drawer-wrapper>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -238,11 +235,12 @@ export default defineNuxtConfig({
   app: {
     rootAttrs: {
       'vaul-drawer-wrapper': '',
-      'class': 'bg-[var(--ui-bg)]'
+      'class': 'bg-(--ui-bg)'
     }
   }
 })
 ```
+
 ::
 
 ## Examples
@@ -259,11 +257,26 @@ name: 'drawer-open-example'
 ::
 
 ::note
-In this example, leveraging [defineShortcuts](/composables/define-shortcuts), you can toggle the Drawer by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Drawer by pressing :kbd{value="O"}.
 ::
 
 ::tip
 This allows you to move the trigger outside of the Drawer or remove it entirely.
+::
+
+### Prevent closing
+
+Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape.
+
+::component-example
+---
+prettier: true
+name: 'drawer-dismissible-example'
+---
+::
+
+::note
+In this example, the `header` slot is used to add a close button which is not done by default.
 ::
 
 ### With footer slot

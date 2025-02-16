@@ -36,6 +36,7 @@ describe('Input', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { base: 'rounded-full' } } }],
     // Slots
@@ -101,7 +102,7 @@ describe('Input', () => {
   })
 
   describe('form integration', async () => {
-    async function createForm(validateOn?: FormInputEvents[]) {
+    async function createForm(validateOn?: FormInputEvents[], eagerValidation?: boolean) {
       const wrapper = await renderForm({
         props: {
           validateOn,
@@ -113,10 +114,13 @@ describe('Input', () => {
           }
         },
         slotTemplate: `
-        <UFormField name="value">
+        <UFormField name="value" :eager-validation="eagerValidation">
           <UInput id="input" v-model="state.value" />
         </UFormField>
-        `
+        `,
+        slotVars: {
+          eagerValidation
+        }
       })
       const input = wrapper.find('#input')
       return {
@@ -146,7 +150,22 @@ describe('Input', () => {
     })
 
     test('validate on input works', async () => {
+      const { input, wrapper } = await createForm(['input'], true)
+      await input.setValue('value')
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.setValue('valid')
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on input without eager validation works', async () => {
       const { input, wrapper } = await createForm(['input'])
+
+      await input.setValue('value')
+      expect(wrapper.text()).not.toContain('Error message')
+
+      await input.trigger('blur')
+
       await input.setValue('value')
       expect(wrapper.text()).toContain('Error message')
 

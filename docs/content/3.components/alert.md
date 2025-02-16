@@ -131,7 +131,7 @@ props:
 ---
 ::
 
-You can also pass all the props of the [Button](/components/button) component to customize it.
+You can pass any property from the [Button](/components/button) component to customize it.
 
 ::component-code
 ---
@@ -178,8 +178,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
 ::
 
 ### Actions
@@ -207,8 +215,30 @@ props:
 ---
 ::
 
-::note
-Actions renders differently when the description is not set. You can try to remove it.
+### Orientation
+
+Use the `orientation` prop to change the orientation of the Alert.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - actions
+  - color
+  - variant
+props:
+  title: 'Heads up!'
+  description: 'You can change the primary color in your app config.'
+  color: neutral
+  variant: outline
+  orientation: horizontal
+  actions:
+    - label: Action 1
+    - label: Action 2
+      color: neutral
+      variant: subtle
+---
 ::
 
 ## Examples

@@ -74,9 +74,13 @@ props:
 
 Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/latest/docs/api/core/column-def) objects with properties like:
 
-- `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-[var(--ui-text-muted)]"}
-- `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-[var(--ui-text-muted)]"}
-- `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-[var(--ui-text-muted)]"}
+- `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-(--ui-text-muted)"}
+- `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-(--ui-text-muted)"}
+- `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-(--ui-text-muted)"}
+- `meta`: [Extra properties for the column.]{class="text-(--ui-text-muted)"}
+  - `class`:
+    - `td`: [The classes to apply to the `td` element.]{class="text-(--ui-text-muted)"}
+    - `th`: [The classes to apply to the `th` element.]{class="text-(--ui-text-muted)"}
 
 In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
@@ -245,7 +249,7 @@ You can use the `expanded` prop to control the expandable state of the rows (can
 ::
 
 ::note
-You could also add this action to the [DropdownMenu](/components/dropdown-menu) component inside the `actions` column.
+You could also add this action to the [`DropdownMenu`](/components/dropdown-menu) component inside the `actions` column.
 ::
 
 ### With row selection
@@ -332,7 +336,7 @@ You can use the `column-pinning` prop to control the pinning state of the column
 
 ### With column visibility
 
-You can add use [DropdownMenu](/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
+You can use a [DropdownMenu](/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
 
 ::component-example
 ---
@@ -385,6 +389,25 @@ class: '!p-0'
 
 ::tip
 You can use the `global-filter` prop to control the global filter state (can be binded with `v-model`).
+::
+
+### With pagination
+
+You can use a [Pagination](/components/pagination) component to control the pagination state using the [Pagination APIs](https://tanstack.com/table/latest/docs/api/features/pagination).
+
+There are different pagination approaches as explained in [Pagination Guide](https://tanstack.com/table/latest/docs/guide/pagination#pagination-guide). In this example, we use client-side pagination so we need to manually pass `getPaginationRowModel()`{lang="ts-type"} function.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-pagination-example'
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `pagination` prop to control the pagination state (can be binded with `v-model`).
 ::
 
 ### With fetched data

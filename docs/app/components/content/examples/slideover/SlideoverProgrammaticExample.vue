@@ -3,6 +3,7 @@ import { LazySlideoverExample } from '#components'
 
 const count = ref(0)
 
+const toast = useToast()
 const slideover = useSlideover()
 
 function open() {
@@ -10,7 +11,13 @@ function open() {
 
   slideover.open(LazySlideoverExample, {
     title: 'Slideover',
-    count: count.value
+    count: count.value,
+    onSuccess() {
+      toast.add({
+        title: 'Success !',
+        id: 'modal-success'
+      })
+    }
   })
 }
 </script>

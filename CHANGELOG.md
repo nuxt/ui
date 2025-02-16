@@ -1,5 +1,215 @@
 # Changelog
 
+## [3.0.0-alpha.12](https://github.com/nuxt/ui/compare/v3.0.0-alpha.11...v3.0.0-alpha.12) (2025-01-27)
+
+### ⚠ BREAKING CHANGES
+
+* **ColorPicker:** migrate from `color` to `colortranslator` (#3097)
+* **Form:** include nested state in submit data (#3028)
+
+### Features
+
+* **css:** add `light` variant to reverse colors ([75f7064](https://github.com/nuxt/ui/commit/75f7064b409a47d068007d0b4f3af007fb24c679))
+* **FormField:** set `aria-describedby`  and `aria-invalid`  attributes ([#3123](https://github.com/nuxt/ui/issues/3123)) ([b95b913](https://github.com/nuxt/ui/commit/b95b91391af21ee0fd96c69fb6ccf99b3126bc79))
+* **Form:** form validation properties ([#3137](https://github.com/nuxt/ui/issues/3137)) ([c0b485d](https://github.com/nuxt/ui/commit/c0b485d56376d6655d15d6241daeef19f25db25f))
+* **locale:** add Hebrew language ([#3181](https://github.com/nuxt/ui/issues/3181)) ([f395877](https://github.com/nuxt/ui/commit/f3958773d610d64fe15cf57525044eec22dc1f96))
+* **locale:** add Hindi language ([#3170](https://github.com/nuxt/ui/issues/3170)) ([8e96daa](https://github.com/nuxt/ui/commit/8e96daa5cc57e1a2c7605d54f8640f8e012a645d))
+* **locale:** add Hungarian language ([#3129](https://github.com/nuxt/ui/issues/3129)) ([891ba1f](https://github.com/nuxt/ui/commit/891ba1fec64255ba4db0f4447e044cc9140ced94))
+* **locale:** add Khmer language ([#3119](https://github.com/nuxt/ui/issues/3119)) ([64421a1](https://github.com/nuxt/ui/commit/64421a190ff43563cc73f64b6a9141d69e3f5ca5))
+* **locale:** add Norwegian Bokmål language ([#3095](https://github.com/nuxt/ui/issues/3095)) ([9ccfe8f](https://github.com/nuxt/ui/commit/9ccfe8fbb3284a5bdd0766ba5831135d298b563f))
+* **NavigationMenu:** add `collapsed` prop ([3fc2210](https://github.com/nuxt/ui/commit/3fc2210e0392b63b065e4f4899ff864f1a3717b1))
+* **NavigationMenu:** add `contentOrientation` prop ([ac86ee0](https://github.com/nuxt/ui/commit/ac86ee01b9fc9b5dc882b210d88b8fef73148e42))
+* **NavigationMenu:** handle `label` type in items ([27fdc8e](https://github.com/nuxt/ui/commit/27fdc8e260bb8d2ca815c84cfdc30b6ca3baa038)), closes [#2993](https://github.com/nuxt/ui/issues/2993)
+
+### Bug Fixes
+
+* **Alert:** allow actions wrap ([#3083](https://github.com/nuxt/ui/issues/3083)) ([e7c10bc](https://github.com/nuxt/ui/commit/e7c10bcb0dbbfbbe48bbdea7cbd99d4535be1adb))
+* **Avatar:** handle loading manually to support `@nuxt/image` ([00c5f26](https://github.com/nuxt/ui/commit/00c5f261117fd986c8be70ecdc21762023e7ebc0)), closes [nuxt/ui-pro#727](https://github.com/nuxt/ui-pro/issues/727)
+* **Avatar:** hide fallback when image is loaded ([36d7402](https://github.com/nuxt/ui/commit/36d7402be1f823c753c7cd44cca82bbb5fd4cddd)), closes [nuxt/ui-pro#727](https://github.com/nuxt/ui-pro/issues/727)
+* **Button:** wrong avatar size with `block` prop ([ba1dd13](https://github.com/nuxt/ui/commit/ba1dd13173835c9b72b862eb9f875a8cd79c5604))
+* **colors:** move css variables to `base` layer ([533ccec](https://github.com/nuxt/ui/commit/533ccec11007ec9078fd8daefd88f6b146991939)), closes [#3075](https://github.com/nuxt/ui/issues/3075)
+* **components:** prevent multiple `appConfig` identifier import ([#3186](https://github.com/nuxt/ui/issues/3186)) ([cd16b95](https://github.com/nuxt/ui/commit/cd16b95c98c0ec29bc0586ba890555f79be00290))
+* **ContextMenu/DropdownMenu:** remove unnecessary bindings in html ([9b5a957](https://github.com/nuxt/ui/commit/9b5a957cdd01baafaa981864ad7d03902ad6918d))
+* **Form:** include nested state in submit data ([#3028](https://github.com/nuxt/ui/issues/3028)) ([de9ecb1](https://github.com/nuxt/ui/commit/de9ecb1d767060f88c1dbdf69b9c04d5731b049d))
+* **Form:** standard schema validation no longer wrapped in `value` object ([#3104](https://github.com/nuxt/ui/issues/3104)) ([8f7f579](https://github.com/nuxt/ui/commit/8f7f579da0fc58575184dc445ff0dda0c0ca1298))
+* **locale:** remove emoji fallback for Chinese ([#3134](https://github.com/nuxt/ui/issues/3134)) ([1a95104](https://github.com/nuxt/ui/commit/1a951046319eaf85c2adb44928a0255dedef093d))
+* **locale:** year translation missing `ñ` in `es` ([#3090](https://github.com/nuxt/ui/issues/3090)) ([1bf370e](https://github.com/nuxt/ui/commit/1bf370e6fd27fab644689335b7356bbf4c359663))
+* **NavigationMenu:** handle children recursively in vertical orientation ([2b7ff3e](https://github.com/nuxt/ui/commit/2b7ff3edf6620d7ed4a491d89f0e616b5916984b)), closes [#3128](https://github.com/nuxt/ui/issues/3128)
+* **NavigationMenu:** highlight open items on `horizontal` orientation only ([931211a](https://github.com/nuxt/ui/commit/931211a634183a8122ce0be874cc1f9048768d88))
+* **useToast:** add in queue and improve unique ids ([aafddd8](https://github.com/nuxt/ui/commit/aafddd8eed0f3fc7c7228c2db4718ba54f3fc522)), closes [#2686](https://github.com/nuxt/ui/issues/2686)
+
+### Code Refactoring
+
+* **ColorPicker:** migrate from `color` to `colortranslator` ([#3097](https://github.com/nuxt/ui/issues/3097)) ([51e5e65](https://github.com/nuxt/ui/commit/51e5e65be7f834ec226be28d95a1b547b85b329c))
+
+## [3.0.0-alpha.11](https://github.com/nuxt/ui/compare/v3.0.0-alpha.10...v3.0.0-alpha.11) (2025-01-13)
+
+### ⚠ BREAKING CHANGES
+
+* **Modal/Popover/Slideover:** rename `prevent-close` to `dismissible` + uniformize docs
+
+### Features
+
+* **Badge:** rework sizes ([d9967f5](https://github.com/nuxt/ui/commit/d9967f5e282d41f4000d5451efed7254b4c1608c))
+* **CommandPalette:** add `autofocus` prop ([#2942](https://github.com/nuxt/ui/issues/2942)) ([1b3c919](https://github.com/nuxt/ui/commit/1b3c919222a4002d84dd968f93bcf9d615e412bc))
+* **locale:** add Danish language ([#2952](https://github.com/nuxt/ui/issues/2952)) ([e1d385a](https://github.com/nuxt/ui/commit/e1d385a17545f8091c8d2459842fe4c39b8c9399))
+* **locale:** add Estonian language ([#3036](https://github.com/nuxt/ui/issues/3036)) ([01bf99e](https://github.com/nuxt/ui/commit/01bf99eec8c2fd0e3dbe1271be152844e401287a))
+* **locale:** add Finnish language ([#3013](https://github.com/nuxt/ui/issues/3013)) ([c770ae1](https://github.com/nuxt/ui/commit/c770ae124e626682935475dc6a164aacd1408c01))
+* **locale:** add Greek language ([#2975](https://github.com/nuxt/ui/issues/2975)) ([b326a14](https://github.com/nuxt/ui/commit/b326a14fb0e62edc8e55599c16f934f54f95aa42))
+* **locale:** add Indonesian language ([#3024](https://github.com/nuxt/ui/issues/3024)) ([a18ad84](https://github.com/nuxt/ui/commit/a18ad84edfe6b3f444d379f24defeecb63e5cdb9))
+* **locale:** add Swedish language ([#3012](https://github.com/nuxt/ui/issues/3012)) ([0201a3d](https://github.com/nuxt/ui/commit/0201a3de757db426c877ef2761de8e9d7493983e))
+* **locale:** add Thai language ([#2980](https://github.com/nuxt/ui/issues/2980)) ([c8cd06e](https://github.com/nuxt/ui/commit/c8cd06e92dab208271ab7b7f6806793eea1e8969))
+* **locale:** add Ukrainian language ([#2908](https://github.com/nuxt/ui/issues/2908)) ([5efae59](https://github.com/nuxt/ui/commit/5efae599b642e65ec8ccaf2361b69abe993a0173))
+* **locale:** add Viet language ([#2986](https://github.com/nuxt/ui/issues/2986)) ([ffba108](https://github.com/nuxt/ui/commit/ffba108291f321471650ca9060ea264f41482648))
+* **module:** allow `tv` customization through `app.config` ([#2938](https://github.com/nuxt/ui/issues/2938)) ([30ba53e](https://github.com/nuxt/ui/commit/30ba53e20b3b91909c2c8162f35b13b6ad305d13))
+
+### Bug Fixes
+
+* **Accordion/Collapsible/NavigationMenu/Tabs:** define `unmountOnHide` default ([4344e36](https://github.com/nuxt/ui/commit/4344e366647e9618c21fe800b43d2b4ae2611226))
+* **Avatar:** bind `$attrs` on `AvatarFallback` ([#2933](https://github.com/nuxt/ui/issues/2933)) ([7f64198](https://github.com/nuxt/ui/commit/7f64198a70104436f39f2f9d8527df0508fd84f6))
+* **Badge:** reduce radius on `sm` size ([f97d2e3](https://github.com/nuxt/ui/commit/f97d2e3b88d1ba9be5f7e2916c6502e38ac4d4c1))
+* **CommandPalette/SelectMenu:** missing translations ([#3057](https://github.com/nuxt/ui/issues/3057)) ([d5dba0e](https://github.com/nuxt/ui/commit/d5dba0ebc98594906ef1d9428da11d44317b70fc))
+* **components:** enable pointer events on menus ([#2881](https://github.com/nuxt/ui/issues/2881)) ([f85b098](https://github.com/nuxt/ui/commit/f85b0985bdd6f51aff41acc6f86dd02db9832b24))
+* **defineShortcuts:** handle extract when using `onSelect` or `onClick` ([#2896](https://github.com/nuxt/ui/issues/2896)) ([2e17fb6](https://github.com/nuxt/ui/commit/2e17fb68dee7e7bb27750c816d27b62249a1247b))
+* **DropdownMenu/ContextMenu:** correct bindings of `checkbox` items ([#2921](https://github.com/nuxt/ui/issues/2921)) ([4c5a4fb](https://github.com/nuxt/ui/commit/4c5a4fb5265c36a39e551b8ee43b86e9ebd3d064))
+* **FormField:** restore `eager-validation` prop behavior ([#3031](https://github.com/nuxt/ui/issues/3031)) ([41dc11c](https://github.com/nuxt/ui/commit/41dc11ceefd8f505fbc5214fe61f12483b0da4a2))
+* **InputMenu:** removing `tag` does not change `modelValue` ([#3054](https://github.com/nuxt/ui/issues/3054)) ([5a44394](https://github.com/nuxt/ui/commit/5a443944ae622c8f4a893e0a18a80026ea9c1fe0))
+* **locale:** improve Traditional Chinese translation ([#3051](https://github.com/nuxt/ui/issues/3051)) ([5c2c55f](https://github.com/nuxt/ui/commit/5c2c55ff08fbc16c869ad382e5fe5ac9fcc791de))
+* **Modal/Popover/Slideover:** rename `prevent-close` to `dismissible` + uniformize docs ([6fb426f](https://github.com/nuxt/ui/commit/6fb426fc17d6d524e7d0503c2c8f3610f60b954d))
+* **NavigationMenu:** `arrow` styles after `reka-ui` migration ([9759320](https://github.com/nuxt/ui/commit/97593204384669c479b85932024317a300ce29d8))
+* **NavigationMenu:** highlight border on children only with `vertical` orientation ([e931880](https://github.com/nuxt/ui/commit/e93188067172d357a7724f937aeec70a0dabe611))
+* **NavigationMenu:** remove `w-full` on root slot ([ef7ecd2](https://github.com/nuxt/ui/commit/ef7ecd242f4550838dbe3a45e33855afff89f506)), closes [#3000](https://github.com/nuxt/ui/issues/3000)
+* **NavigationMenu:** unbind link on collapsible trigger with `vertical` orientation ([82d6344](https://github.com/nuxt/ui/commit/82d63446a12445accbca9131a83806994631761b))
+* **SelectMenu:** handle `resetSearchTermOnBlur` manually ([#3082](https://github.com/nuxt/ui/issues/3082)) ([c902a40](https://github.com/nuxt/ui/commit/c902a40f7c0ce5ceb4624bbe2bbdfa09c87f7c75))
+* **Stepper:** correct item `value` type ([4f05b1a](https://github.com/nuxt/ui/commit/4f05b1aac9af096cdc9404395d25d2261522a1db))
+* **Stepper:** wrong `item` in `title` & `description` slots ([473194f](https://github.com/nuxt/ui/commit/473194fbaf2a9d21e2acb67d16715c412528d7d2)), closes [#2888](https://github.com/nuxt/ui/issues/2888)
+* **templates:** allow any string in colors autocomplete ([5183582](https://github.com/nuxt/ui/commit/5183582a90c0d86bd986ef0f280bc58e740c6458)), closes [#2143](https://github.com/nuxt/ui/issues/2143)
+* **templates:** infer variants types in generated theme ([2c99bb8](https://github.com/nuxt/ui/commit/2c99bb80c72fdbde9cd2ff3ad7caae0be632b864))
+* **unplugin:** invalid url schema on windows ([#2899](https://github.com/nuxt/ui/issues/2899)) ([9b4694f](https://github.com/nuxt/ui/commit/9b4694f8d9b0fc244e805a7bfb2795d5131f7d18))
+* **vue:** head injection ([#2929](https://github.com/nuxt/ui/issues/2929)) ([7302a84](https://github.com/nuxt/ui/commit/7302a846a9c394373c47def12dca00274e58f269))
+
+### Reverts
+
+* Revert "chore(deps): update `typescript`" ([3107039](https://github.com/nuxt/ui/commit/3107039b560cef973c117a251e4407ca5e615a72))
+* Revert "chore(deps): update `@nuxt/module-builder`" ([c79acc1](https://github.com/nuxt/ui/commit/c79acc15b00f23b189821ebe2f4430e900cac34f))
+* Revert "build: remove `cjs` support" ([15b411d](https://github.com/nuxt/ui/commit/15b411de4a6a7d322a3dea5703a5a5464c4e709a))
+
+## [3.0.0-alpha.10](https://github.com/nuxt/ui/compare/v3.0.0-alpha.9...v3.0.0-alpha.10) (2024-12-09)
+
+### ⚠ BREAKING CHANGES
+
+* **module:** migrate to `reka-ui` (#2448)
+* **Form:** resolve async validation in yup & issue directly mutate state (#2702)
+
+### Features
+
+* **Avatar:** add `default` slot for fallback ([b741ef3](https://github.com/nuxt/ui/commit/b741ef3313bb894beaed0eaa7323ee3d951bf935))
+* **Calendar:** add `icon` props ([#2778](https://github.com/nuxt/ui/issues/2778)) ([0f64802](https://github.com/nuxt/ui/commit/0f648024e0468d34c1499bb5b5d2ed32e0e7de4f))
+* **Calendar:** implement component ([#2618](https://github.com/nuxt/ui/issues/2618)) ([2e9aeb5](https://github.com/nuxt/ui/commit/2e9aeb5f05e94d63ea453c4f07a3e84ee2a02773))
+* **ColorPicker:** implement component ([#2670](https://github.com/nuxt/ui/issues/2670)) ([e475b64](https://github.com/nuxt/ui/commit/e475b6438d405e4695ffb19155d456534d16b897))
+* **CommandPalette:** add `active` field on items for consistency ([3765537](https://github.com/nuxt/ui/commit/37655377e9675982e2fce422bdd79ea651424548))
+* **css:** use `color-scheme` utilities on body ([a2512f6](https://github.com/nuxt/ui/commit/a2512f680dc0df7add48bc17ef3be30d579be782))
+* **i18n:** add Dutch locale ([#2728](https://github.com/nuxt/ui/issues/2728)) ([3baddfd](https://github.com/nuxt/ui/commit/3baddfd12186a68cc302f31cf0934cb9cf48060d))
+* **i18n:** add Turkish locale ([#2716](https://github.com/nuxt/ui/issues/2716)) ([de8228e](https://github.com/nuxt/ui/commit/de8228e504affd1a57106101f5168a33702d4d53))
+* **locale:** add Brazilian Portuguese language ([#2825](https://github.com/nuxt/ui/issues/2825)) ([b7ff7d8](https://github.com/nuxt/ui/commit/b7ff7d8aa63c41cf7afbecaa31824e098ea291af))
+* **locale:** add Japanese language ([#2794](https://github.com/nuxt/ui/issues/2794)) ([ecc4755](https://github.com/nuxt/ui/commit/ecc4755a17874e59e06e70307a40dfd3fb3f20a0))
+* **locale:** add Portuguese language ([#2855](https://github.com/nuxt/ui/issues/2855)) ([8b5d412](https://github.com/nuxt/ui/commit/8b5d412fd70b14a53cffa9129f5edd8a40e0f2e8))
+* **locale:** add Slovak language ([#2821](https://github.com/nuxt/ui/issues/2821)) ([68a10f0](https://github.com/nuxt/ui/commit/68a10f09d5f164f2f5f07e65297e29fa2d939425))
+* **locale:** translate Korean ([#2703](https://github.com/nuxt/ui/issues/2703)) ([2cbf83e](https://github.com/nuxt/ui/commit/2cbf83eb8484ad9abebd6ca01ad344918570af5b))
+* **module:** migrate to `reka-ui` ([#2448](https://github.com/nuxt/ui/issues/2448)) ([81ac076](https://github.com/nuxt/ui/commit/81ac076219c3d7ef151f641414a0fbeca2da0bdd))
+* **NavigationMenu:** handle `item.trailingIcon` display ([4b653ef](https://github.com/nuxt/ui/commit/4b653ef7735d9d2dfea65260433ade05eb3d3bd7))
+* **Stepper:** new component ([#2733](https://github.com/nuxt/ui/issues/2733)) ([6484d01](https://github.com/nuxt/ui/commit/6484d010a1eee6f5d86968e4701b945953089b17))
+* **Table:** handle `meta.class` on `th` and `td` ([#2790](https://github.com/nuxt/ui/issues/2790)) ([004a577](https://github.com/nuxt/ui/commit/004a5774678da24ccc267e96697c6088c51d5eea))
+
+### Bug Fixes
+
+* **Breadcrumb:** missing `aria-hidden` on presentation items ([a7a1227](https://github.com/nuxt/ui/commit/a7a1227c93110727e24f822fa50b547eb66bb16e)), closes [#2725](https://github.com/nuxt/ui/issues/2725)
+* **Calendar:** handle icons in RTL mode ([#2770](https://github.com/nuxt/ui/issues/2770)) ([e7b69b7](https://github.com/nuxt/ui/commit/e7b69b7d6f0ebb3c578b9f58bcddf8ad36e6c6ce))
+* **Calendar:** omit `as` / `asChild` props ([9478fc0](https://github.com/nuxt/ui/commit/9478fc076846d4a7fef13e63bdc274cd8d161063))
+* **ColorPicker:** handle RTL mode ([#2858](https://github.com/nuxt/ui/issues/2858)) ([f98b91c](https://github.com/nuxt/ui/commit/f98b91c22ae21071a25f69cc8682eb6197a54c5a))
+* **CommandPalette:** keep `ignoreFilter` groups at their place ([#2833](https://github.com/nuxt/ui/issues/2833)) ([3b9ca22](https://github.com/nuxt/ui/commit/3b9ca2263de1b936639b1b20ad0baf1cb059fda5))
+* **components:** apply class on `trigger` instead of `content` when present ([a6ecef0](https://github.com/nuxt/ui/commit/a6ecef0f0d87a8dff4e4cb9ec507058ec94ed82b)), closes [#2132](https://github.com/nuxt/ui/issues/2132)
+* **components:** specify collisionPadding to all menus ([148b024](https://github.com/nuxt/ui/commit/148b02464d47ada421313327585924b17f4e3f2d))
+* **ContextMenu:** remove close animation ([#2798](https://github.com/nuxt/ui/issues/2798)) ([ed27222](https://github.com/nuxt/ui/commit/ed2722257a22c770eda811fbad58980bcef9dad5))
+* **defineShortcuts:** return `useEventListener` to unregister the listener ([80befc1](https://github.com/nuxt/ui/commit/80befc107c6c6e7ab99dbe12376976babf315158)), closes [#2031](https://github.com/nuxt/ui/issues/2031)
+* **devtools:** error with renderer when `colorMode` is disabled ([#2792](https://github.com/nuxt/ui/issues/2792)) ([f06fbaf](https://github.com/nuxt/ui/commit/f06fbafc1e709c7b4e54e2ba40d44c5770685a5d))
+* **Form:** resolve async validation in yup & issue directly mutate state ([#2702](https://github.com/nuxt/ui/issues/2702)) ([c9806da](https://github.com/nuxt/ui/commit/c9806da6d850ea50ff8d2f11a1fbc5a43459b71f))
+* **icons:** make `loading` icon clockwise ([#2797](https://github.com/nuxt/ui/issues/2797)) ([bc2bcb3](https://github.com/nuxt/ui/commit/bc2bcb30d97e2e873c4c7d535f82a4980cd35b02))
+* **Link:** partial query match for Vue ([#2787](https://github.com/nuxt/ui/issues/2787)) ([a6c2205](https://github.com/nuxt/ui/commit/a6c22052e1c70e4ce6b2c7f783667a7f8c6cafa4))
+* **locale:** improve German translation ([#2826](https://github.com/nuxt/ui/issues/2826)) ([c440c91](https://github.com/nuxt/ui/commit/c440c91a29fc1acd281a7f9d9b0cf74f5341553d))
+* **Modal:** prevent from going out of screen ([b7ba2c7](https://github.com/nuxt/ui/commit/b7ba2c7759485ddb0a8bae589e4b6536ac9b1c96)), closes [#2711](https://github.com/nuxt/ui/issues/2711)
+* **NavigationMenu:** wrong badge class ([86f2b48](https://github.com/nuxt/ui/commit/86f2b4856cc6beaf0440795500a5c74f9af04f36)), closes [#2766](https://github.com/nuxt/ui/issues/2766)
+* **Progress:** handle `horizontal` animation in RTL mode ([#2723](https://github.com/nuxt/ui/issues/2723)) ([0baa3a0](https://github.com/nuxt/ui/commit/0baa3a06d449ab97093c451bd16215cf83c39447))
+* **Stepper:** handle RTL mode ([#2844](https://github.com/nuxt/ui/issues/2844)) ([198d04d](https://github.com/nuxt/ui/commit/198d04de51d16ec7fcaa546370e4f67aa73bfee0))
+* **Stepper:** missing import ([816bb69](https://github.com/nuxt/ui/commit/816bb69debdbf83f36c3ed3627985142e62b7dd1))
+* **Table:** handle `loading` animation in RTL mode ([#2771](https://github.com/nuxt/ui/issues/2771)) ([b1550d5](https://github.com/nuxt/ui/commit/b1550d58adfeb09977619ad3ff7e776782a89603))
+* **Tabs:** prevent hover on disabled ([a938d24](https://github.com/nuxt/ui/commit/a938d24f90431494c2da89411c301a228ab8d3f7))
+* **Tabs:** truncate not working ([c1ff978](https://github.com/nuxt/ui/commit/c1ff978370fb343950837b380ccf02a33db53ccb))
+* **types:** handle array of strings in AppConfig ([#2854](https://github.com/nuxt/ui/issues/2854)) ([4b241ba](https://github.com/nuxt/ui/commit/4b241ba3c32f4456252768b664488799a8278f0e))
+* **useLocale:** update locale import to enable tree shaking ([#2735](https://github.com/nuxt/ui/issues/2735)) ([3bccb67](https://github.com/nuxt/ui/commit/3bccb6782a601e686df5d0ee405d738572f182e1))
+
+## [3.0.0-alpha.9](https://github.com/nuxt/ui/compare/v3.0.0-alpha.8...v3.0.0-alpha.9) (2024-11-19)
+
+### Features
+
+* **cli:** add locale command ([#2586](https://github.com/nuxt/ui/issues/2586)) ([824ba56](https://github.com/nuxt/ui/commit/824ba5629183bc4cd59321213558770db211f6e5))
+* **css:** add `--ui-bg-muted` / `--ui-border-muted` variables ([7f6db45](https://github.com/nuxt/ui/commit/7f6db45f1e15ef39cda9b732cb601c552f29570a))
+* **Form:** apply transformations ([#2550](https://github.com/nuxt/ui/issues/2550)) ([75c5e87](https://github.com/nuxt/ui/commit/75c5e87724e7abdf0a6751d7a1dbbafb947f373f))
+* **FormField:** add `error-pattern` prop ([#2601](https://github.com/nuxt/ui/issues/2601)) ([143612e](https://github.com/nuxt/ui/commit/143612ec737d1c7571398601c3222f2eed37996e))
+* **InputMenu/SelectMenu:** add `create-item` prop ([#2472](https://github.com/nuxt/ui/issues/2472)) ([f516d7b](https://github.com/nuxt/ui/commit/f516d7b36da51565f4ab05a4c9cfe5e5b4015124))
+* **InputNumber:** implement component ([#2577](https://github.com/nuxt/ui/issues/2577)) ([bd2f077](https://github.com/nuxt/ui/commit/bd2f077fe8e645d5fce8b1eb5a6eb1068b3e8f7c))
+* **Link:** allow partial query match for its active state ([#2664](https://github.com/nuxt/ui/issues/2664)) ([7329900](https://github.com/nuxt/ui/commit/7329900ae549430b88567a09cbb585d3cf0a6d32))
+* **locale:** add Persian language ([#2682](https://github.com/nuxt/ui/issues/2682)) ([14fb21b](https://github.com/nuxt/ui/commit/14fb21be0034ffc0ba5d213734c00f12e0d6bea8))
+* **locale:** add Polish language ([#2678](https://github.com/nuxt/ui/issues/2678)) ([2fc36c8](https://github.com/nuxt/ui/commit/2fc36c878c67967ec91e4f6999575bad45521d44))
+* **locale:** add support for Arabic ([#2582](https://github.com/nuxt/ui/issues/2582)) ([602a667](https://github.com/nuxt/ui/commit/602a667343be22b72383ab3cf42f36ec9e135082))
+* **locale:** add support for Czech translation ([#2593](https://github.com/nuxt/ui/issues/2593)) ([4889d30](https://github.com/nuxt/ui/commit/4889d30b448296de42e146dc5771738837c31f8c))
+* **locale:** add support for Italian ([#2583](https://github.com/nuxt/ui/issues/2583)) ([4fbbb25](https://github.com/nuxt/ui/commit/4fbbb25f68b0b5ee76e50f2da776a74d54acc041))
+* **locale:** provide `code` ([#2611](https://github.com/nuxt/ui/issues/2611)) ([8a8b1ee](https://github.com/nuxt/ui/commit/8a8b1ee2e1628bc5439ef109d3c68b69bf631f81))
+* **locale:** provide `dir` on `defineLocale` ([#2620](https://github.com/nuxt/ui/issues/2620)) ([937585c](https://github.com/nuxt/ui/commit/937585cb3f8bc902d60a4b5904711598204aee2d))
+* **locale:** translate chinese ([#2580](https://github.com/nuxt/ui/issues/2580)) ([febda5c](https://github.com/nuxt/ui/commit/febda5c2b67374d1358a66694543b77037d239c6))
+* **locale:** translate Spanish ([#2644](https://github.com/nuxt/ui/issues/2644)) ([8ed434c](https://github.com/nuxt/ui/commit/8ed434c105b75ae02aa7493a235cebb64d518d09))
+* **locale:** typing `dir` ([#2643](https://github.com/nuxt/ui/issues/2643)) ([e55c0e2](https://github.com/nuxt/ui/commit/e55c0e25947e7bcef931b26dafaad120f488a627))
+* **module:** support i18n in components ([#2553](https://github.com/nuxt/ui/issues/2553)) ([2636240](https://github.com/nuxt/ui/commit/26362408b161108487b889ff001bec9166059c79))
+* **NavigationMenu:** control items `open` & `defaultOpen` on vertical ([30218f1](https://github.com/nuxt/ui/commit/30218f1b5b0a56207fd4db224ffa0401ac194a04)), closes [#2608](https://github.com/nuxt/ui/issues/2608)
+* **PinInput:** implement component ([#2570](https://github.com/nuxt/ui/issues/2570)) ([95aa6f6](https://github.com/nuxt/ui/commit/95aa6f68b316d02c28d1124d9a826bca55cde81f))
+* **Popover:** add `prevent-close` prop ([ea97759](https://github.com/nuxt/ui/commit/ea97759c2c219bdf5c48b652b47d293ddf513a00)), closes [#2245](https://github.com/nuxt/ui/issues/2245)
+* **SelectMenu:** use `UInput` in search to handle props like icon ([ff1e079](https://github.com/nuxt/ui/commit/ff1e0798d384d40ad82a95fe5faa16acb080efe3)), closes [#2021](https://github.com/nuxt/ui/issues/2021)
+* **Table:** add `caption` prop ([446f9c1](https://github.com/nuxt/ui/commit/446f9c1085e96187afdc5c1d7ce3450f8df1a2e1))
+
+### Bug Fixes
+
+* **App:** missing `vue` imports ([ddb4690](https://github.com/nuxt/ui/commit/ddb46905e7e3480ab578bcd8a478f25dff60081a))
+* **App:** remove `dir` prop ([#2630](https://github.com/nuxt/ui/issues/2630)) ([7cc26d0](https://github.com/nuxt/ui/commit/7cc26d098dff70923bcd9d414d675018951b1967))
+* **Breadcrumb/Carousel/Pagination:** handle icons in RTL mode ([#2633](https://github.com/nuxt/ui/issues/2633)) ([e5119a9](https://github.com/nuxt/ui/commit/e5119a9ca4e217ef769904323c16bd8c0cbc02d9))
+* **Breadcrumb:** render as `nav` ([756f791](https://github.com/nuxt/ui/commit/756f791a1a8dd3a4a88c212b4e4f775584decb55)), closes [#2649](https://github.com/nuxt/ui/issues/2649)
+* **Button:** improve neutral solid variant hover ([8d85498](https://github.com/nuxt/ui/commit/8d85498ee197ec0b26cdd7c4b08f84fec45ddd8f))
+* **Carousel:** use `dir` from locale ([#2647](https://github.com/nuxt/ui/issues/2647)) ([1fbbfe8](https://github.com/nuxt/ui/commit/1fbbfe8df06b3b8b294615ac328d582c5230aa8b))
+* **ContextMenu/DropdownMenu:** relative imports with prefix ([47f58f5](https://github.com/nuxt/ui/commit/47f58f52ef2d03176a184a3ca2154f5cea655edb))
+* **css:** `--font-family-sans` renamed to `--font-sans` ([#2680](https://github.com/nuxt/ui/issues/2680)) ([b2fa657](https://github.com/nuxt/ui/commit/b2fa65734bb59186520c985f7c73fc34a0cb8b37))
+* **css:** remove useless spacing override ([8d00265](https://github.com/nuxt/ui/commit/8d0026558a21efbbca08e9939844f7479a0d6cce))
+* **FormField:** missing conditions to apply container classes ([#2631](https://github.com/nuxt/ui/issues/2631)) ([9241ba1](https://github.com/nuxt/ui/commit/9241ba1230b0fde41595634362d83c92c66b7699))
+* **Form:** match `error-pattern` on input validation ([#2606](https://github.com/nuxt/ui/issues/2606)) ([3584a33](https://github.com/nuxt/ui/commit/3584a3328b8588f024557c9908242bc374853419))
+* **InputMenu/SelectMenu:** init `filter` with `labelKey` ([18931ac](https://github.com/nuxt/ui/commit/18931acdb316bc72a3e5ed6d20985688ad5c8d99))
+* **InputMenu/SelectMenu:** look in `items` only with `value-attribute` ([0ceafe1](https://github.com/nuxt/ui/commit/0ceafe1d54000f3eb49562b00c188d82fa23c4ee)), closes [#2464](https://github.com/nuxt/ui/issues/2464)
+* **InputMenu/SelectMenu:** multiple not working with generic boolean casting ([503f701](https://github.com/nuxt/ui/commit/503f701c7ecdfe27e9057e5ddebfc7e03889d61b)), closes [#2541](https://github.com/nuxt/ui/issues/2541)
+* **InputMenu/SelectMenu:** use `isEqual` from `ohash` ([f943f88](https://github.com/nuxt/ui/commit/f943f88fcc9f4678d8f7bd224799e289a0c57dd8))
+* **Link:** missing relative import ([#2588](https://github.com/nuxt/ui/issues/2588)) ([95a0bbc](https://github.com/nuxt/ui/commit/95a0bbc581a40677f620eed3170f9a423976214b))
+* **locale:** Improve German translation ([#2676](https://github.com/nuxt/ui/issues/2676)) ([992be91](https://github.com/nuxt/ui/commit/992be91823fe1877254ccd092c71c77dd3ff42f7))
+* **locale:** it translation ([#2623](https://github.com/nuxt/ui/issues/2623)) ([73e25ed](https://github.com/nuxt/ui/commit/73e25ed23562f755ea4c66e6c5fb06dd18caac1e))
+* **locale:** Italian translation ([#2584](https://github.com/nuxt/ui/issues/2584)) ([d167c9b](https://github.com/nuxt/ui/commit/d167c9b807a82fdf0fd280ce8417a66f86d7ed72))
+* **Modal/Slideover:** prevent `esc` with `prevent-close` prop ([9e2cc5b](https://github.com/nuxt/ui/commit/9e2cc5b12567472044726924a3896b4b0e7993a1)), closes [#2501](https://github.com/nuxt/ui/issues/2501)
+* **module:** remove `fast-deep-equal` in favor of custom `isEqual` ([37a3597](https://github.com/nuxt/ui/commit/37a359701f4b2ce4a9b0727b64c0e3eea6be00b4))
+* **module:** skip devtools renderer page injection if router integration is disabled ([#2571](https://github.com/nuxt/ui/issues/2571)) ([afe4003](https://github.com/nuxt/ui/commit/afe40033b088d8aedb73fa8387a0284ef78444e4))
+* **PinInput:** missing `useFormField` import ([601f4b2](https://github.com/nuxt/ui/commit/601f4b2cd2027817b935e02a0b4584dc3dce655f))
+* **Textarea:** `autoresize` does not work when initializing `modelValue` ([#2681](https://github.com/nuxt/ui/issues/2681)) ([d3a079a](https://github.com/nuxt/ui/commit/d3a079a644db3dfe2f4e9567973550d74b3ba905))
+* **Toaster:** teleport to `body` ([b0be26d](https://github.com/nuxt/ui/commit/b0be26d67feab467ac5862edd82e52df03a5091c)), closes [#2404](https://github.com/nuxt/ui/issues/2404)
+* **Toast:** unreachable behind overlays ([#2650](https://github.com/nuxt/ui/issues/2650)) ([0daac5b](https://github.com/nuxt/ui/commit/0daac5bafb756c3a2dfaf2bf166c30c0eb476e08))
+* **useLocale:** missing import in various components ([#2603](https://github.com/nuxt/ui/issues/2603)) ([df7a61a](https://github.com/nuxt/ui/commit/df7a61a97a14b3d7943baee6a74686134dfdb10b))
+
+### Reverts
+
+* Revert "docs(ComponentCode/ComponentExample): use relative imports" ([5deadc7](https://github.com/nuxt/ui/commit/5deadc709640bbfd3ec14c1c9363deb55e765d6a))
+
 ## [3.0.0-alpha.8](https://github.com/nuxt/ui/compare/v3.0.0-alpha.7...v3.0.0-alpha.8) (2024-11-07)
 
 ### ⚠ BREAKING CHANGES

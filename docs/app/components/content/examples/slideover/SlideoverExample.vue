@@ -4,6 +4,12 @@ const slideover = useSlideover()
 defineProps<{
   count: number
 }>()
+
+const emit = defineEmits(['success'])
+
+function onSuccess() {
+  emit('success')
+}
 </script>
 
 <template>
@@ -13,7 +19,10 @@ defineProps<{
     </template>
 
     <template #footer>
-      <UButton color="neutral" label="Close" @click="slideover.close()" />
+      <div class="flex gap-2">
+        <UButton color="neutral" label="Close" @click="slideover.close()" />
+        <UButton label="Success" @click="onSuccess" />
+      </div>
     </template>
   </USlideover>
 </template>

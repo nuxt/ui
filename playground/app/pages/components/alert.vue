@@ -6,10 +6,50 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
 const actions = (color: string) => [{
   label: 'Action',
   color: color as any,
-  click() {
+  onClick() {
     console.log('Action clicked')
   }
 }]
+
+const multipleActions = (color: string) => [
+  {
+    label: 'Action',
+    color: color as any,
+    onClick() {
+      console.log('Action clicked')
+    }
+  },
+  {
+    label: 'Another action',
+    color: color as any,
+    onClick() {
+      console.log('Another action clicked')
+    }
+  },
+  {
+    label: 'One more action',
+    color: color as any,
+    onClick() {
+      console.log('One more action clicked')
+    }
+  },
+  {
+    label: 'And one more',
+    color: color as any,
+    icon: 'i-lucide-info',
+    onClick() {
+      console.log('And one more clicked')
+    }
+  },
+  {
+    label: 'Last one',
+    color: color as any,
+    icon: 'i-lucide-info',
+    onClick() {
+      console.log('Last one clicked')
+    }
+  }
+]
 
 const data = {
   title: 'Heads up!',
@@ -25,9 +65,10 @@ const data = {
       <UAlert :title="data.title" />
       <UAlert :title="data.title" :icon="data.icon" />
       <UAlert :title="data.title" :icon="data.icon" :close="data.close" />
-      <UAlert :title="data.title" :icon="data.icon" :close="data.close" :actions="actions('neutral')" />
+      <UAlert :title="data.title" :icon="data.icon" :close="data.close" :actions="actions('neutral')" orientation="horizontal" />
       <UAlert :title="data.title" :icon="data.icon" :close="data.close" :description="data.description" />
       <UAlert :title="data.title" :avatar="{ src: 'https://github.com/benjamincanac.png' }" :close="data.close" :description="data.description" />
+      <UAlert :title="data.title" :icon="data.icon" description="example with multiple actions." :actions="multipleActions('neutral')" />
     </div>
 
     <div class="flex items-center gap-2">

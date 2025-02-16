@@ -12,7 +12,6 @@ describe('Pagination', () => {
   it.each([
     // Props
     ['with total', { props }],
-    ['with as', { props: { ...props, as: 'div' } }],
     ['with defaultPage', { props: { ...props, defaultPage: 2 } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with itemsPerPage', { props: { ...props, itemsPerPage: 5 } }],
@@ -30,6 +29,7 @@ describe('Pagination', () => {
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant, color: 'primary' } }]),
     ...variants.map((activeVariant: string) => [`with primary active variant ${activeVariant}`, { props: { ...props, activeVariant } }]),
     ...variants.map((activeVariant: string) => [`with neutral active variant ${activeVariant}`, { props: { ...props, activeVariant, color: 'neutral' } }]),
+    ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'relative' } }],
     ['with ui', { props: { ...props, ui: { list: 'gap-3' } } }],
     // Slots

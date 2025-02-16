@@ -105,14 +105,14 @@ defineShortcuts(extractShortcuts(items.value))
       <USelect v-model="size" :items="sizes" placeholder="Size" />
     </div>
 
-    <UContextMenu :items="items" class="min-w-48" :size="size">
-      <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+    <UContextMenu :items="items" :ui="{ content: 'w-48' }" :size="size">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
         Right click here
       </div>
     </UContextMenu>
 
-    <UContextMenu :items="itemsWithColor" class="min-w-48" :size="size">
-      <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+    <UContextMenu :items="itemsWithColor" :ui="{ content: 'w-48' }" :size="size">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
         Color right click here
       </div>
     </UContextMenu>

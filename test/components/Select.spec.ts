@@ -42,6 +42,8 @@ describe('Select', () => {
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
     ['with valueKey', { props: { ...props, valueKey: 'label' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
+    ['with multiple', { props: { ...props, multiple: true } }],
+    ['with multiple and modelValue', { props: { ...props, multiple: true, modelValue: [items[0], items[1]] } }],
     ['with id', { props: { ...props, id: 'id' } }],
     ['with name', { props: { ...props, name: 'name' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
@@ -75,7 +77,7 @@ describe('Select', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps<typeof items[number]>, slots?: Partial<SelectSlots<typeof items[number]>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps<typeof items[number]>, slots?: Partial<SelectSlots<typeof items[number], false>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Select)
     expect(html).toMatchSnapshot()
   })

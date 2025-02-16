@@ -10,7 +10,18 @@ export default defineLocale({
       noData: 'لا توجد بيانات',
       create: 'إنشاء "{label}"'
     },
+    calendar: {
+      prevYear: 'السنة السابقة',
+      nextYear: 'السنة المقبلة',
+      prevMonth: 'الشهر السابق',
+      nextMonth: 'الشهر المقبل'
+    },
+    inputNumber: {
+      increment: 'زيادة',
+      decrement: 'تقليل'
+    },
     commandPalette: {
+      placeholder: 'اكتب أمرًا أو ابحث...',
       noMatch: 'لا توجد نتائج مطابقة',
       noData: 'لا توجد بيانات',
       close: 'إغلاق'
@@ -18,7 +29,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'لا توجد نتائج مطابقة',
       noData: 'لا توجد بيانات',
-      create: 'إنشاء "{label}"'
+      create: 'إنشاء "{label}"',
+      search: 'بحث...'
     },
     toast: {
       close: 'إغلاق'

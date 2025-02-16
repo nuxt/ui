@@ -37,8 +37,9 @@ describe('Button', () => {
     ['with disabled and with link', { props: { label: 'Button', disabled: true, to: '/link' } }],
     ['with block', { props: { label: 'Button', block: true } }],
     ['with square', { props: { label: 'Button', square: true } }],
-    ['with class', { props: { class: 'rounded-full font-bold' } }],
-    ['with ui', { props: { ui: { label: 'font-bold' } } }],
+    ['with as', { props: { label: 'Button', as: 'div' } }],
+    ['with class', { props: { label: 'Button', class: 'rounded-full font-bold' } }],
+    ['with ui', { props: { label: 'Button', ui: { label: 'font-bold' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
@@ -71,7 +72,7 @@ describe('Button', () => {
     const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
-    expect(icon?.vm?.name).toBe('i-lucide-refresh-ccw')
+    expect(icon?.vm?.name).toBe('i-lucide-refresh-cw')
 
     resolve?.(null)
   })
@@ -102,7 +103,7 @@ describe('Button', () => {
     const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
-    expect(icon?.vm?.name).toBe('i-lucide-refresh-ccw')
+    expect(icon?.vm?.name).toBe('i-lucide-refresh-cw')
 
     resolve?.(null)
   })

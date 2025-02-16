@@ -5,11 +5,11 @@ export interface IconProps {
 </script>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
+import { Icon as IconifyIcon } from '@iconify/vue'
 
 defineProps<IconProps>()
 </script>
 
 <template>
-  <Icon :icon="name.replace(/^i-/, '')" />
+  <IconifyIcon :icon="name.replace(/^i-/, '')" />
 </template>

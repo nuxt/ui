@@ -1,14 +1,15 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { ToastProviderProps } from 'radix-vue'
+import type { VariantProps } from 'tailwind-variants'
+import type { ToastProviderProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toaster'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { toaster: Partial<typeof theme> } }
+const appConfigToaster = _appConfig as AppConfig & { ui: { toaster: Partial<typeof theme> } }
 
-const toaster = tv({ extend: tv(theme), ...(appConfig.ui?.toaster || {}) })
+const toaster = tv({ extend: tv(theme), ...(appConfigToaster.ui?.toaster || {}) })
 
 type ToasterVariants = VariantProps<typeof toaster>
 
@@ -41,7 +42,7 @@ extendDevtoolsMeta({ example: 'ToasterExample' })
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { ToastProvider, ToastViewport, useForwardProps } from 'radix-vue'
+import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useToast } from '../composables/useToast'
 import { omit } from '../utils'
@@ -120,13 +121,13 @@ function getOffset(index: number) {
         '--transform': 'translateY(var(--translate)) scale(var(--scale))'
       }"
       :class="[ui.base(), {
-        'cursor-pointer': !!toast.click
+        'cursor-pointer': !!toast.onClick
       }]"
       @update:open="onUpdateOpen($event, toast.id)"
-      @click="toast.click && toast.click(toast)"
+      @click="toast.onClick && toast.onClick(toast)"
     />
 
-    <Teleport to="body" :disabled="!portal">
+    <ToastPortal :disabled="!portal">
       <ToastViewport
         :data-expanded="expanded"
         :class="ui.viewport({ class: [props.class, props.ui?.viewport] })"
@@ -140,6 +141,6 @@ function getOffset(index: number) {
         @mouseenter="hovered = true"
         @mouseleave="hovered = false"
       />
-    </Teleport>
+    </ToastPortal>
   </ToastProvider>
 </template>

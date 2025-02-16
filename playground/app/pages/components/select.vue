@@ -10,6 +10,7 @@ const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
 const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]]
+const selectedItems = ref([fruits[0]!, vegetables[0]!])
 
 const statuses = [{
   label: 'Backlog',
@@ -40,7 +41,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   lazy: true
 })
 
-function getStatusIcon(value: string): string {
+function getStatusIcon(value: string) {
   return statuses.find(status => status.value === value)?.icon || 'i-lucide-user'
 }
 
@@ -52,7 +53,7 @@ function getUserAvatar(value: string) {
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-48">
-      <USelect :items="items" placeholder="Search..." />
+      <USelect :items="items" placeholder="Search..." default-value="Apple" />
     </div>
     <div class="flex items-center gap-2">
       <USelect
@@ -90,6 +91,7 @@ function getUserAvatar(value: string) {
     <div class="flex flex-col gap-4 w-48">
       <USelect :items="items" placeholder="Disabled" disabled />
       <USelect :items="items" placeholder="Required" required />
+      <USelect v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
       <USelect :items="items" loading placeholder="Search..." />
     </div>
     <div class="flex items-center gap-4">
@@ -114,7 +116,7 @@ function getUserAvatar(value: string) {
         class="w-48"
       >
         <template #leading="{ modelValue, ui }">
-          <UIcon v-if="modelValue" :name="getStatusIcon(modelValue)" :class="ui.leadingIcon()" />
+          <UIcon v-if="modelValue" :name="getStatusIcon(modelValue as string)" :class="ui.leadingIcon()" />
         </template>
       </USelect>
     </div>
@@ -130,7 +132,7 @@ function getUserAvatar(value: string) {
         class="w-48"
       >
         <template #leading="{ modelValue, ui }">
-          <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue)" />
+          <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue as string)" />
         </template>
       </USelect>
     </div>

@@ -1,14 +1,15 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { ProgressRootProps, ProgressRootEmits } from 'radix-vue'
+import type { VariantProps } from 'tailwind-variants'
+import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/progress'
+import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { progress: Partial<typeof theme> } }
+const appConfigProgress = _appConfig as AppConfig & { ui: { progress: Partial<typeof theme> } }
 
-const progress = tv({ extend: tv(theme), ...(appConfig.ui?.progress || {}) })
+const progress = tv({ extend: tv(theme), ...(appConfigProgress.ui?.progress || {}) })
 
 type ProgressVariants = VariantProps<typeof progress>
 
@@ -48,8 +49,9 @@ export type ProgressSlots = {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ProgressIndicator, ProgressRoot, useForwardPropsEmits } from 'radix-vue'
+import { Primitive, ProgressRoot, ProgressIndicator, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useLocale } from '../composables/useLocale'
 
 const props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
@@ -57,9 +59,11 @@ const props = withDefaults(defineProps<ProgressProps>(), {
   orientation: 'horizontal'
 })
 const emits = defineEmits<ProgressEmits>()
-defineSlots<ProgressSlots>()
+const slots = defineSlots<ProgressSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'getValueLabel', 'modelValue'), emits)
+const { dir } = useLocale()
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'modelValue'), emits)
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)
 const hasSteps = computed(() => Array.isArray(props.max))
@@ -93,8 +97,20 @@ const indicatorStyle = computed(() => {
     return
   }
 
-  return {
-    transform: `translate${props.orientation === 'vertical' ? 'Y' : 'X'}(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+  if (props.orientation === 'vertical') {
+    return {
+      transform: `translateY(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+    }
+  } else {
+    if (dir.value === 'rtl') {
+      return {
+        transform: `translateX(${props.inverted ? '-' : ''}${100 - percent.value}%)`
+      }
+    } else {
+      return {
+        transform: `translateX(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+      }
+    }
   }
 })
 
@@ -144,8 +160,8 @@ const ui = computed(() => progress({
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <div v-if="!isIndeterminate && (status || $slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <div v-if="!isIndeterminate && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
@@ -162,5 +178,5 @@ const ui = computed(() => progress({
         </slot>
       </div>
     </div>
-  </div>
+  </Primitive>
 </template>

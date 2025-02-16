@@ -9,7 +9,8 @@ describe('CommandPalette', () => {
       label: 'Add new file',
       suffix: 'Create a new file in the current directory or workspace.',
       icon: 'i-lucide-file-plus',
-      kbds: ['meta', 'N']
+      kbds: ['meta', 'N'],
+      active: true
     }, {
       label: 'Add new folder',
       suffix: 'Create a new folder in the current directory or workspace.',
@@ -19,7 +20,8 @@ describe('CommandPalette', () => {
       label: 'Add hashtag',
       suffix: 'Add a hashtag to the current item.',
       icon: 'i-lucide-hash',
-      kbds: ['meta', 'H']
+      kbds: ['meta', 'H'],
+      disabled: true
     }, {
       label: 'Add label',
       suffix: 'Add a label to the current item.',
@@ -53,7 +55,9 @@ describe('CommandPalette', () => {
       label: 'benjamincanac',
       avatar: {
         src: 'https://github.com/benjamincanac.png'
-      }
+      },
+      to: 'https://github.com/benjamincanac',
+      target: '_blank'
     }]
   }]
 
@@ -75,7 +79,7 @@ describe('CommandPalette', () => {
     ['with close', { props: { ...props, close: true } }],
     ['with closeIcon', { props: { ...props, close: true, closeIcon: 'i-lucide-trash' } }],
     ['with as', { props: { ...props, as: 'section' } }],
-    ['with class', { props: { ...props, class: 'divide-[var(--ui-border-accented)]' } }],
+    ['with class', { props: { ...props, class: 'divide-(--ui-border-accented)' } }],
     ['with ui', { props: { ...props, ui: { input: '[&>input]:h-10' } } }],
     // Slots
     ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],

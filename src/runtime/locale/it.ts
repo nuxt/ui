@@ -9,7 +9,18 @@ export default defineLocale({
       noData: 'Nessun dato',
       create: 'Crea "{label}"'
     },
+    calendar: {
+      prevYear: 'Anno precedente',
+      nextYear: 'Anno successivo',
+      prevMonth: 'Mese precedente',
+      nextMonth: 'Mese successivo'
+    },
+    inputNumber: {
+      increment: 'Aumenta',
+      decrement: 'Diminuisci'
+    },
     commandPalette: {
+      placeholder: 'Digita un comando o cerca...',
       noMatch: 'Nessun dato corrispondente',
       noData: 'Nessun dato',
       close: 'Chiudi'
@@ -17,7 +28,8 @@ export default defineLocale({
     selectMenu: {
       noMatch: 'Nessun dato corrispondente',
       noData: 'Nessun dato',
-      create: 'Crea "{label}"'
+      create: 'Crea "{label}"',
+      search: 'Cerca...'
     },
     toast: {
       close: 'Chiudi'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const show = ref(false)
-const password = ref('password')
+const password = ref('')
 </script>
 
 <template>
@@ -8,7 +8,7 @@ const password = ref('password')
     v-model="password"
     placeholder="Password"
     :type="show ? 'text' : 'password'"
-    :ui="{ trailing: 'pr-0.5' }"
+    :ui="{ trailing: 'pe-1' }"
   >
     <template #trailing>
       <UButton
@@ -16,7 +16,7 @@ const password = ref('password')
         variant="link"
         size="sm"
         :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
-        aria-label="show ? 'Hide password' : 'Show password'"
+        :aria-label="show ? 'Hide password' : 'Show password'"
         :aria-pressed="show"
         aria-controls="password"
         @click="show = !show"

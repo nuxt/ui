@@ -3,8 +3,8 @@ title: ContextMenu
 description: A menu to display actions when right-clicking on an element.
 links:
   - label: ContextMenu
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/context-menu.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/context-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/ContextMenu.vue
@@ -32,7 +32,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?(e: Event): void`{lang="ts-type"}
 - [`onUpdateChecked?(checked: boolean): void`{lang="ts-type"}](#with-checkbox-items)
 
-You can also pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
 ::component-code
 ---
@@ -40,7 +40,7 @@ prettier: true
 collapse: true
 ignore:
   - items
-  - class
+  - ui.content
 external:
   - items
 props:
@@ -90,20 +90,21 @@ props:
                 - option
                 - meta
                 - j
-  class: 'w-48'
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
-    <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
       Right click here
     </div>
 ---
 
-:div{class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72"}[Right click here]
+:div{class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"}[Right click here]
 ::
 
 ::note
-You can pass an array of arrays to the `items` prop to create separated groups of items.
+You can also pass an array of arrays to the `items` prop to create separated groups of items.
 ::
 
 ::tip
@@ -119,7 +120,7 @@ Use the `size` prop to change the size of the ContextMenu.
 prettier: true
 ignore:
   - items
-  - class
+  - ui.content
 external:
   - items
 props:
@@ -131,16 +132,17 @@ props:
       icon: i-lucide-sun
     - label: Dark
       icon: i-lucide-moon
-  class: 'w-48'
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
-    <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
       Right click here
     </div>
 ---
 
-:div{class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72"}[Right click here]
+:div{class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"}[Right click here]
 ::
 
 ### Disabled
@@ -152,7 +154,7 @@ Use the `disabled` prop to disable the ContextMenu.
 prettier: true
 ignore:
   - items
-  - class
+  - ui.content
 external:
   - items
 props:
@@ -164,16 +166,17 @@ props:
       icon: i-lucide-sun
     - label: Dark
       icon: i-lucide-moon
-  class: 'w-48'
+  ui:
+    content: 'w-48'
 slots:
   default: |
 
-    <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
       Right click here
     </div>
 ---
 
-:div{class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72"}[Right click here]
+:div{class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"}[Right click here]
 ::
 
 ## Examples

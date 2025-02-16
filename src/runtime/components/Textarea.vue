@@ -1,16 +1,23 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/textarea'
+import { tv } from '../utils/tv'
+import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
+const appConfigTextarea = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
 
-const textarea = tv({ extend: tv(theme), ...(appConfig.ui?.textarea || {}) })
+const textarea = tv({ extend: tv(theme), ...(appConfigTextarea.ui?.textarea || {}) })
 
 type TextareaVariants = VariantProps<typeof textarea>
 
 export interface TextareaProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   id?: string
   name?: string
   /** The placeholder text when the textarea is empty. */
@@ -28,7 +35,7 @@ export interface TextareaProps {
   autoresize?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  ui?: Partial<typeof textarea.slots>
+  ui?: PartialString<typeof textarea.slots>
 }
 
 export interface TextareaEmits {
@@ -44,6 +51,7 @@ export interface TextareaSlots {
 
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
+import { Primitive } from 'reka-ui'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 
@@ -59,7 +67,7 @@ const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled } = useFormField<TextareaProps>(props)
+const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps>(props, { deferInputValidation: true })
 
 const ui = computed(() => textarea({
   color: color.value,
@@ -151,7 +159,7 @@ function autoResize() {
   }
 }
 
-watch(() => modelValue, () => {
+watch(modelValue, () => {
   nextTick(autoResize)
 })
 
@@ -167,7 +175,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <textarea
       :id="id"
       ref="textareaRef"
@@ -178,12 +186,13 @@ onMounted(() => {
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="required"
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
+      @focus="emitFormFocus"
     />
 
     <slot />
-  </div>
+  </Primitive>
 </template>

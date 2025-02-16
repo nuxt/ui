@@ -26,7 +26,7 @@ function getUserAvatar(value: string) {
     <template #leading="{ modelValue, ui }">
       <UAvatar
         v-if="modelValue"
-        v-bind="getUserAvatar(modelValue)"
+        v-bind="getUserAvatar(modelValue as string)"
         :size="ui.leadingAvatarSize()"
         :class="ui.leadingAvatar()"
       />

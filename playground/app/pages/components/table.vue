@@ -2,6 +2,7 @@
 import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
 import type { TableColumn } from '@nuxt/ui'
+import { getPaginationRowModel } from '@tanstack/vue-table'
 
 const UButton = resolveComponent('UButton')
 const UCheckbox = resolveComponent('UCheckbox')
@@ -145,14 +146,13 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
-    'modelValue': table.getIsAllPageRowsSelected(),
-    'indeterminate': table.getIsSomePageRowsSelected(),
-    'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value),
+    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
     'ariaLabel': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
-    'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
     'ariaLabel': 'Select row'
   }),
   enableSorting: false,
@@ -164,6 +164,12 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   accessorKey: 'date',
   header: 'Date',
+  meta: {
+    class: {
+      td: 'text-center font-semibold',
+      th: 'text-right text-green-500 w-48'
+    }
+  },
   cell: ({ row }) => {
     return new Date(row.getValue('date')).toLocaleString('en-US', {
       day: 'numeric',
@@ -264,6 +270,11 @@ const columnPinning = ref({
   right: ['actions']
 })
 
+const pagination = ref({
+  pageIndex: 0,
+  pageSize: 10
+})
+
 function randomize() {
   data.value = [...data.value].sort(() => Math.random() - 0.5)
 }
@@ -276,7 +287,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full flex flex-col flex-1 gap-4 w-full -my-8">
+  <div class="h-full flex flex-col flex-1 gap-4 w-full">
     <div class="flex gap-2 items-center">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
@@ -317,8 +328,15 @@ onMounted(() => {
       :columns="columns"
       :column-pinning="columnPinning"
       :loading="loading"
+      :pagination="pagination"
+      :pagination-options="{
+        getPaginationRowModel: getPaginationRowModel()
+      }"
+      :ui="{
+        tr: 'divide-x divide-(--ui-border)'
+      }"
       sticky
-      class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] flex-1"
+      class="border border-(--ui-border-accented) rounded-(--ui-radius)"
     >
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>
@@ -326,12 +344,12 @@ onMounted(() => {
     </UTable>
 
     <div class="flex items-center justify-between gap-3">
-      <div class="text-sm text-[var(--ui-text-muted)]">
+      <div class="text-sm text-(--ui-text-muted)">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>
 
-      <!-- <div class="flex items-center gap-1.5">
+      <div class="flex items-center gap-1.5">
         <UButton
           color="neutral"
           variant="outline"
@@ -348,7 +366,7 @@ onMounted(() => {
         >
           Next
         </UButton>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>

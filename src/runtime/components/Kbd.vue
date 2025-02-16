@@ -1,14 +1,15 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { kbd: Partial<typeof theme> } }
+const appConfigKbd = _appConfig as AppConfig & { ui: { kbd: Partial<typeof theme> } }
 
-const kbd = tv({ extend: tv(theme), ...(appConfig.ui?.kbd || {}) })
+const kbd = tv({ extend: tv(theme), ...(appConfigKbd.ui?.kbd || {}) })
 
 type KbdVariants = VariantProps<typeof kbd>
 
@@ -31,7 +32,7 @@ extendDevtoolsMeta({ defaultProps: { value: 'K' } })
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { useKbd } from '../composables/useKbd'
 
 const props = withDefaults(defineProps<KbdProps>(), {

@@ -9,8 +9,12 @@ describe('NavigationMenu', () => {
 
   const items = [
     [{
+      label: 'Links',
+      type: 'label'
+    }, {
       label: 'Documentation',
       icon: 'i-lucide-book-open',
+      badge: 10,
       children: [{
         label: 'Introduction',
         description: 'Fully styled and customizable components for Nuxt.',
@@ -80,15 +84,22 @@ describe('NavigationMenu', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with modelValue', { props: { ...props, modelValue: '0' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
-    ['with arrow', { props: { ...props, arrow: true } }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with arrow', { props: { ...props, arrow: true, modelValue: '0' } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const, modelValue: '0' } }],
+    ['with orientation vertical and collapsed', { props: { ...props, orientation: 'vertical' as const, modelValue: '0', collapsed: true } }],
+    ['with content orientation vertical', { props: { ...props, contentOrientation: 'vertical' as const, modelValue: '0' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight neutral`, { props: { ...props, variant, color: 'neutral', highlight: true, highlightColor: 'neutral' } }]),
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-plus' } }],
+    ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
+    ['without externalIcon', { props: { ...props, externalIcon: false } }],
+    ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
+    ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots

@@ -84,15 +84,21 @@ slots:
 
 ### With tooltip
 
-You can use a tooltip within a button group.
+You can use a [Tooltip](/components/tooltip) within a button group.
 
 :component-example{name="button-group-tooltip-example"}
 
 ### With dropdown
 
-You can use a dropdown menu within a button group.
+You can use a [DropdownMenu](/components/dropdown-menu) within a button group.
 
 :component-example{name="button-group-dropdown-example"}
+
+### With badge
+
+You can use a [Badge](/components/badge) within a button group.
+
+:component-example{name="button-group-badge-example"}
 
 ## API
 

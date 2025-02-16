@@ -1,30 +1,31 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
-import type { ContextMenuContentProps as RadixContextMenuContentProps, ContextMenuContentEmits as RadixContextMenuContentEmits } from 'radix-vue'
+import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/context-menu'
+import { tv } from '../utils/tv'
 import type { KbdProps, AvatarProps, ContextMenuItem, ContextMenuSlots } from '../types'
 
 const _contextMenu = tv(theme)()
 
-interface ContextMenuContentProps<T> extends Omit<RadixContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+interface ContextMenuContentProps<T> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
   labelKey: string
   checkedIcon?: string
   loadingIcon?: string
+  externalIcon?: boolean | string
   class?: any
   ui: typeof _contextMenu
   uiOverride?: any
 }
 
-interface ContextMenuContentEmits extends RadixContextMenuContentEmits {}
+interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
 </script>
 
 <script setup lang="ts" generic="T extends ContextMenuItem">
 import { computed } from 'vue'
-import { ContextMenu } from 'radix-vue/namespaced'
-import { useForwardPropsEmits } from 'radix-vue'
+import { ContextMenu } from 'reka-ui/namespaced'
+import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { omit, get } from '../utils'
@@ -42,7 +43,7 @@ const emits = defineEmits<ContextMenuContentEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
 const appConfig = useAppConfig()
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'class', 'ui'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem, active?: boolean, index: number }>()
@@ -64,7 +65,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           {{ get(item, props.labelKey as string) }}
         </slot>
 
-        <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, color: item?.color, active })" />
+        <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, color: item?.color, active })" />
       </span>
 
       <span :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
@@ -112,6 +113,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               :label-key="labelKey"
               :checked-icon="checkedIcon"
               :loading-icon="loadingIcon"
+              :external-icon="externalIcon"
               v-bind="item.content"
             >
               <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
@@ -121,11 +123,11 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           </ContextMenu.Sub>
           <ContextMenu.CheckboxItem
             v-else-if="item.type === 'checkbox'"
-            :checked="item.checked"
+            :model-value="item.checked"
             :disabled="item.disabled"
             :text-value="get(item, props.labelKey as string)"
             :class="ui.item({ class: [uiOverride?.item, item.class], color: item?.color })"
-            @update:checked="item.onUpdateChecked"
+            @update:model-value="item.onUpdateChecked"
             @select="item.onSelect"
           >
             <ReuseItemTemplate :item="item" :index="index" />

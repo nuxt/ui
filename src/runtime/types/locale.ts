@@ -4,7 +4,18 @@ export type Messages = {
     noData: string
     create: string
   }
+  calendar: {
+    prevYear: string
+    nextYear: string
+    prevMonth: string
+    nextMonth: string
+  }
+  inputNumber: {
+    increment: string
+    decrement: string
+  }
   commandPalette: {
+    placeholder: string
     noMatch: string
     noData: string
     close: string
@@ -13,6 +24,7 @@ export type Messages = {
     noMatch: string
     noData: string
     create: string
+    search: string
   }
   toast: {
     close: string

@@ -1,5 +1,5 @@
-import type { v1 } from '@standard-schema/spec'
-import type { ComputedRef, Ref } from 'vue'
+import type { StandardSchemaV1 } from '@standard-schema/spec'
+import type { ComputedRef, DeepReadonly, Ref } from 'vue'
 import type { ZodSchema } from 'zod'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
@@ -7,17 +7,22 @@ import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchem
 import type { GetObjectField } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
 
-export interface Form<T> {
-  validate (opts?: { name: string | string[], silent?: false, nested?: boolean }): Promise<T | false>
+export interface Form<T extends object> {
+  validate (opts?: { name?: keyof T | (keyof T)[], silent?: boolean, nested?: boolean, transform?: boolean }): Promise<T | false>
   clear (path?: string): void
   errors: Ref<FormError[]>
-  setErrors (errs: FormError[], path?: string): void
-  getErrors (path?: string): FormError[]
+  setErrors (errs: FormError[], name?: keyof T): void
+  getErrors (name?: keyof T): FormError[]
   submit (): Promise<void>
   disabled: ComputedRef<boolean>
+  dirty: ComputedRef<boolean>
+
+  dirtyFields: DeepReadonly<Set<keyof T>>
+  touchedFields: DeepReadonly<Set<keyof T>>
+  blurredFields: DeepReadonly<Set<keyof T>>
 }
 
-export type FormSchema<T extends Record<string, any>> =
+export type FormSchema<T extends object> =
   | ZodSchema
   | YupObjectSchema<T>
   | ValibotSchema
@@ -26,9 +31,9 @@ export type FormSchema<T extends Record<string, any>> =
   | ValibotSafeParserAsync<any, any>
   | JoiSchema<T>
   | SuperstructSchema<any, any>
-  | v1.StandardSchema
+  | StandardSchemaV1
 
-export type FormInputEvents = 'input' | 'blur' | 'change'
+export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
 
 export interface FormError<P extends string = string> {
   name: P
@@ -43,7 +48,7 @@ export type FormSubmitEvent<T> = SubmitEvent & { data: T }
 
 export type FormValidationError = {
   errors: FormErrorWithId[]
-  childrens: FormValidationError[]
+  children?: FormValidationError[]
 }
 
 export type FormErrorEvent = SubmitEvent & FormValidationError
@@ -61,13 +66,14 @@ export type FormChildDetachEvent = {
   formId: string | number
 }
 
-export type FormInputEvent = {
+export type FormInputEvent<T extends object> = {
   type: FormEventType
-  name?: string
+  name: keyof T
+  eager?: boolean
 }
 
-export type FormEvent =
-  | FormInputEvent
+export type FormEvent<T extends object> =
+  | FormInputEvent<T>
   | FormChildAttachEvent
   | FormChildDetachEvent
 
@@ -83,6 +89,9 @@ export interface FormFieldInjectedOptions<T> {
   eagerValidation?: boolean
   validateOnInputDelay?: number
   errorPattern?: RegExp
+  hint?: string
+  description?: string
+  ariaId: string
 }
 
 export interface ValidateReturnSchema<T> {
@@ -93,13 +102,13 @@ export interface ValidateReturnSchema<T> {
 export class FormValidationException extends Error {
   formId: string | number
   errors: FormErrorWithId[]
-  childrens: FormValidationException[]
+  children?: FormValidationException[]
 
-  constructor(formId: string | number, errors: FormErrorWithId[], childErrors: FormValidationException[]) {
+  constructor(formId: string | number, errors: FormErrorWithId[], childErrors?: FormValidationException[]) {
     super('Form validation exception')
     this.formId = formId
     this.errors = errors
-    this.childrens = childErrors
+    this.children = childErrors
     Object.setPrototypeOf(this, FormValidationException.prototype)
   }
 }

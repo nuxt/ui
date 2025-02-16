@@ -34,7 +34,7 @@ function getChip(value: string) {
     <template #leading="{ modelValue, ui }">
       <UChip
         v-if="modelValue"
-        v-bind="getChip(modelValue)"
+        v-bind="getChip(modelValue as string)"
         inset
         standalone
         :size="ui.itemLeadingChipSize()"

@@ -39,14 +39,13 @@ describe('Table', () => {
   const columns: TableColumn<typeof data[number]>[] = [{
     id: 'select',
     header: ({ table }) => h(UCheckbox, {
-      'modelValue': table.getIsAllPageRowsSelected(),
-      'indeterminate': table.getIsSomePageRowsSelected(),
-      'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value),
+      'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+      'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
       'ariaLabel': 'Select all'
     }),
     cell: ({ row }) => h(UCheckbox, {
       'modelValue': row.getIsSelected(),
-      'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value),
+      'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
       'ariaLabel': 'Select row'
     }),
     enableSorting: false,
@@ -152,6 +151,7 @@ describe('Table', () => {
     ['with loading', { props: { ...props, loading: true } }],
     ...loadingColors.map((loadingColor: string) => [`with loading color ${loadingColor}`, { props: { ...props, loading: true, loadingColor } }]),
     ...loadingAnimations.map((loadingAnimation: string) => [`with loading animation ${loadingAnimation}`, { props: { ...props, loading: true, loadingAnimation } }]),
+    ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }],
     // Slots

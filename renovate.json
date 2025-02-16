@@ -6,7 +6,12 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "happy-dom"
+    "happy-dom",
+    "valibot30",
+    "valibot31",
+    "typescript",
+    "vite",
+    "vue-tsc"
   ],
   "baseBranches": ["dev", "v3"],
   "packageRules": [{
@@ -22,5 +27,6 @@
   }, {
     "matchDepTypes": ["resolutions"],
     "enabled": false
-  }]
+  }],
+  "postUpdateOptions": ["pnpmDedupe"]
 }

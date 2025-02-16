@@ -1,16 +1,17 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'radix-vue'
+import type { VariantProps } from 'tailwind-variants'
+import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
+const appConfigDropdownMenu = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
-const dropdownMenu = tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })
+const dropdownMenu = tv({ extend: tv(theme), ...(appConfigDropdownMenu.ui?.dropdownMenu || {}) })
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
@@ -51,8 +52,14 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    */
   loadingIcon?: string
   /**
+   * The icon displayed when the item is an external link.
+   * Set to `false` to hide the external icon.
+   * @defaultValue appConfig.ui.icons.external
+   */
+  externalIcon?: boolean | string
+  /**
    * The content of the menu.
-   * @defaultValue { side: 'bottom', sideOffset: 8 }
+   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -140,7 +147,7 @@ extendDevtoolsMeta({
 <script setup lang="ts" generic="T extends DropdownMenuItem">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'radix-vue'
+import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
@@ -148,13 +155,14 @@ import UDropdownMenuContent from './DropdownMenuContent.vue'
 const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   portal: true,
   modal: true,
+  externalIcon: true,
   labelKey: 'label'
 })
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8 }) as DropdownMenuContentProps)
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
 const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
 
@@ -165,12 +173,12 @@ const ui = computed(() => dropdownMenu({
 
 <template>
   <DropdownMenuRoot v-slot="{ open }" v-bind="rootProps">
-    <DropdownMenuTrigger v-if="!!slots.default" as-child :disabled="disabled">
+    <DropdownMenuTrigger v-if="!!slots.default" as-child :class="props.class" :disabled="disabled">
       <slot :open="open" />
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
-      :class="ui.content({ class: [props.class, props.ui?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"
@@ -179,6 +187,7 @@ const ui = computed(() => dropdownMenu({
       :label-key="labelKey"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
+      :external-icon="externalIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />

@@ -30,14 +30,14 @@ const component = ({ name, primitive, pro, prose, content }) => {
     contents: primitive
       ? `
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
+import { tv } from '${pro ? '#ui/utils/tv' : '../utils/tv'}'
 
-const appConfig = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
+const appConfig${camelName} = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
 
-const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
+const ${camelName} = tv({ extend: tv(theme), ...(appConfig${camelName}.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
 
 export interface ${upperName}Props {
   /**
@@ -55,9 +55,9 @@ export interface ${upperName}Slots {
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 
-const props = withDefaults(defineProps<${upperName}Props>(), { as: 'div' })
+const props = defineProps<${upperName}Props>()
 defineSlots<${upperName}Slots>()
 
 const ui = ${camelName}()
@@ -71,15 +71,16 @@ const ui = ${camelName}()
 `
       : `
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { ${upperName}RootProps, ${upperName}RootEmits } from 'radix-vue'
+import type { VariantProps } from 'tailwind-variants'
+import type { ${upperName}RootProps, ${upperName}RootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
+import { tv } from '${pro ? '#ui/utils/tv' : '../utils/tv'}'
 
-const appConfig = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
+const appConfig${camelName} = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
 
-const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
+const ${camelName} = tv({ extend: tv(theme), ...(appConfig${camelName}.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
 
 type ${upperName}Variants = VariantProps<typeof ${camelName}>
 
@@ -94,7 +95,7 @@ export interface ${upperName}Slots {}
 </script>
 
 <script setup lang="ts">
-import { ${upperName}Root, useForwardPropsEmits } from 'radix-vue'
+import { ${upperName}Root, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 
 const props = defineProps<${upperName}Props>()
@@ -149,7 +150,7 @@ import ComponentRender from '../${content ? '../' : ''}component-render'
 describe('${upperName}', () => {
   it.each([
     // Props
-    ['with as', { props: { as: 'div' } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: '' } }],
     ['with ui', { props: { ui: {} } }],
     // Slots
@@ -163,19 +164,24 @@ describe('${upperName}', () => {
   }
 }
 
-const doc = ({ name, pro }) => {
+const docs = ({ name, pro, primitive }) => {
   const kebabName = kebabCase(name)
   const upperName = splitByCase(name).map(p => upperFirst(p)).join('')
 
   return {
-    filename: `docs/content/${pro ? 'pro' : '3.components'}/${kebabName}.md`,
+    filename: `docs/content/3.components/${kebabName}.md`,
     contents: `---
-description:
-links: ${pro
+title: ${upperName}
+description: ''${pro
+  ? `
+module: ui-pro`
+  : ''}
+links:${primitive
   ? ''
-  : `- label: ${upperName}
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/${kebabName}.html`}
+  : `
+  - label: ${upperName}
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/${kebabName}`}
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v3/src/runtime/components/${upperName}.vue
@@ -189,19 +195,19 @@ links: ${pro
 
 ### Props
 
-:component-props
+:component-props${pro ? '{pro}' : ''}
 
 ### Slots
 
-:component-slots
+:component-slots${pro ? '{pro}' : ''}
 
 ### Emits
 
-:component-emits
+:component-emits${pro ? '{pro}' : ''}
 
 ## Theme
 
-:component-theme
+:component-theme${pro ? '{pro}' : ''}
 `
   }
 }
@@ -211,5 +217,5 @@ export default {
   component,
   theme,
   test,
-  doc
+  docs
 }

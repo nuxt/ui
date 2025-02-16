@@ -1,15 +1,15 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { RadioGroupRootProps, RadioGroupRootEmits } from 'radix-vue'
+import type { VariantProps } from 'tailwind-variants'
+import type { RadioGroupRootProps, RadioGroupRootEmits, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
-import type { AcceptableValue } from '../types/utils'
+import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
+const appConfigRadioGroup = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
 
-const radioGroup = tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) })
+const radioGroup = tv({ extend: tv(theme), ...(appConfigRadioGroup.ui?.radioGroup || {}) })
 
 type RadioGroupVariants = VariantProps<typeof radioGroup>
 
@@ -58,7 +58,7 @@ export type RadioGroupEmits = RadioGroupRootEmits & {
   change: [payload: Event]
 }
 
-type SlotProps<T> = (props: { item: T, modelValue?: string }) => any
+type SlotProps<T> = (props: { item: T, modelValue?: AcceptableValue }) => any
 
 export interface RadioGroupSlots<T> {
   legend(props?: {}): any
@@ -71,7 +71,7 @@ extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3']
 
 <script setup lang="ts" generic="T extends RadioGroupItem | AcceptableValue">
 import { computed, useId } from 'vue'
-import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'radix-vue'
+import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
@@ -87,7 +87,7 @@ const slots = defineSlots<RadioGroupSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled } = useFormField<RadioGroupProps<T>>(props, { bind: false })
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
 
 const ui = computed(() => radioGroup({
@@ -147,7 +147,7 @@ function onUpdate(value: any) {
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     @update:model-value="onUpdate"
   >
-    <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })">
+    <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
       <legend v-if="legend || !!slots.legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
           {{ legend }}

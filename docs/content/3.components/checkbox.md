@@ -2,8 +2,8 @@
 description: An input element to toggle between checked and unchecked states.
 links:
   - label: Checkbox
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/checkbox.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/checkbox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Checkbox.vue
@@ -37,12 +37,14 @@ props:
 
 ### Indeterminate
 
-Use the `indeterminate` prop to set the Checkbox to an [indeterminate state](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#indeterminate_state_checkboxes).
+Use the `indeterminate` value in the `v-model` directive or `default-value` prop to set the Checkbox to an [indeterminate state](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#indeterminate_state_checkboxes).
 
 ::component-code
 ---
+ignore:
+  - defaultValue
 props:
-  indeterminate: true
+  defaultValue: 'indeterminate'
 ---
 ::
 
@@ -52,14 +54,24 @@ Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults 
 
 ::component-code
 ---
+ignore:
+  - defaultValue
 props:
-  indeterminate: true
+  defaultValue: 'indeterminate'
   indeterminateIcon: 'i-lucide-plus'
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.minus` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.minus` key.
+:::
 ::
 
 ### Label
@@ -115,8 +127,16 @@ props:
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
+:::
 ::
 
 ### Color

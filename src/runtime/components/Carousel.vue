@@ -1,6 +1,7 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
+import type { AcceptableValue } from 'reka-ui'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
 import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll'
@@ -11,16 +12,22 @@ import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/carousel'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
-import type { AcceptableValue, PartialString } from '../types/utils'
+import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { carousel: Partial<typeof theme> } }
+const appConfigCarousel = _appConfig as AppConfig & { ui: { carousel: Partial<typeof theme> } }
 
-const carousel = tv({ extend: tv(theme), ...(appConfig.ui?.carousel || {}) })
+const carousel = tv({ extend: tv(theme), ...(appConfigCarousel.ui?.carousel || {}) })
 
 type CarouselVariants = VariantProps<typeof carousel>
 
 export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   /**
    * Configure the prev button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
@@ -97,7 +104,7 @@ extendDevtoolsMeta({ example: 'CarouselExample' })
 <script setup lang="ts" generic="T extends AcceptableValue">
 import { computed, ref, watch, onMounted } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
-import { useForwardProps } from 'radix-vue'
+import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick, computedAsync } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -149,8 +156,7 @@ const options = computed<EmblaOptionsType>(() => ({
   ...(props.fade ? { align: 'center', containScroll: false } : {}),
   ...rootProps.value,
   axis: props.orientation === 'horizontal' ? 'x' : 'y',
-  // TODO: Get from ConfigProvider
-  direction: 'ltr'
+  direction: dir.value === 'rtl' ? 'rtl' : 'ltr'
 }))
 
 const plugins = computedAsync<EmblaPluginType[]>(async () => {
@@ -255,7 +261,8 @@ defineExpose({
 </script>
 
 <template>
-  <div
+  <Primitive
+    :as="as"
     role="region"
     aria-roledescription="carousel"
     tabindex="0"
@@ -312,5 +319,5 @@ defineExpose({
         </template>
       </div>
     </div>
-  </div>
+  </Primitive>
 </template>

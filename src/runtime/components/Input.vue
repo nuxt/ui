@@ -1,20 +1,26 @@
 <script lang="ts">
 import type { InputHTMLAttributes } from 'vue'
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
+const appConfigInput = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
 
-const input = tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })
+const input = tv({ extend: tv(theme), ...(appConfigInput.ui?.input || {}) })
 
 type InputVariants = VariantProps<typeof input>
 
 export interface InputProps extends UseComponentIconsProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   id?: string
   name?: string
   type?: InputHTMLAttributes['type']
@@ -49,6 +55,7 @@ export interface InputSlots {
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { Primitive } from 'reka-ui'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -68,7 +75,7 @@ const slots = defineSlots<InputSlots>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps>(props, { deferInputValidation: true })
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -147,7 +154,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <input
       :id="id"
       ref="inputRef"
@@ -159,10 +166,11 @@ onMounted(() => {
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
+      @focus="emitFormFocus"
     >
 
     <slot />
@@ -179,5 +187,5 @@ onMounted(() => {
         <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
-  </div>
+  </Primitive>
 </template>

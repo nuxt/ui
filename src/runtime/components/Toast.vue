@@ -1,15 +1,17 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { ToastRootProps, ToastRootEmits } from 'radix-vue'
+import type { VariantProps } from 'tailwind-variants'
+import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps } from '../types'
+import type { StringOrVNode } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { toast: Partial<typeof theme> } }
+const appConfigToast = _appConfig as AppConfig & { ui: { toast: Partial<typeof theme> } }
 
-const toast = tv({ extend: tv(theme), ...(appConfig.ui?.toast || {}) })
+const toast = tv({ extend: tv(theme), ...(appConfigToast.ui?.toast || {}) })
 
 type ToastVariants = VariantProps<typeof toast>
 
@@ -19,15 +21,17 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * @defaultValue 'li'
    */
   as?: any
-  title?: string
-  description?: string
+  title?: StringOrVNode
+  description?: StringOrVNode
   icon?: string
   avatar?: AvatarProps
   color?: ToastVariants['color']
+  orientation?: ToastVariants['orientation']
   /**
    * Display a list of actions:
-   * - under the title and description if multiline
-   * - next to the close button if not multiline
+   * - under the title and description when orientation is `vertical`
+   * - next to the close button when orientation is `horizontal`
+   * `{ size: 'xs' }`{lang="ts-type"}
    */
   actions?: ButtonProps[]
   /**
@@ -60,7 +64,7 @@ extendDevtoolsMeta<ToastProps>({ ignore: true })
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'radix-vue'
+import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -69,19 +73,21 @@ import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<ToastProps>(), {
-  close: true
+  close: true,
+  orientation: 'vertical'
 })
 const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
-const appConfig = useAppConfig()
 const { t } = useLocale()
+const appConfig = useAppConfig()
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
-const multiline = computed(() => !!props.title && !!props.description)
-
 const ui = computed(() => toast({
-  color: props.color
+  color: props.color,
+  orientation: props.orientation,
+  title: !!props.title || !!slots.title
 }))
 
 const el = ref()
@@ -107,7 +113,8 @@ defineExpose({
     ref="el"
     v-slot="{ remaining, duration }"
     v-bind="rootProps"
-    :class="ui.root({ class: [props.class, props.ui?.root], multiline })"
+    :data-orientation="orientation"
+    :class="ui.root({ class: [props.class, props.ui?.root] })"
     :style="{ '--height': height }"
   >
     <slot name="leading">
@@ -118,16 +125,24 @@ defineExpose({
     <div :class="ui.wrapper({ class: props.ui?.wrapper })">
       <ToastTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
         <slot name="title">
-          {{ title }}
+          <component :is="title()" v-if="typeof title === 'function'" />
+          <component :is="title" v-else-if="typeof title === 'object'" />
+          <template v-else>
+            {{ title }}
+          </template>
         </slot>
       </ToastTitle>
       <ToastDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description">
-          {{ description }}
+          <component :is="description()" v-if="typeof description === 'function'" />
+          <component :is="description" v-else-if="typeof description === 'object'" />
+          <template v-else>
+            {{ description }}
+          </template>
         </slot>
       </ToastDescription>
 
-      <div v-if="multiline && actions?.length" :class="ui.actions({ class: props.ui?.actions, multiline: true })">
+      <div v-if="orientation === 'vertical' && actions?.length" :class="ui.actions({ class: props.ui?.actions })">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
             <UButton size="xs" :color="color" v-bind="action" />
@@ -136,8 +151,8 @@ defineExpose({
       </div>
     </div>
 
-    <div v-if="(!multiline && actions?.length) || close !== null" :class="ui.actions({ class: props.ui?.actions, multiline: false })">
-      <template v-if="!multiline">
+    <div v-if="(orientation === 'horizontal' && actions?.length) || close" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
+      <template v-if="orientation === 'horizontal' && actions?.length">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
             <UButton size="xs" :color="color" v-bind="action" />

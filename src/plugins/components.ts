@@ -2,19 +2,34 @@ import { join, normalize } from 'pathe'
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import { globSync } from 'tinyglobby'
 import AutoImportComponents from 'unplugin-vue-components'
+import type { Options as ComponentsOptions } from 'unplugin-vue-components/types'
 
 import { runtimeDir } from '../unplugin'
 import type { NuxtUIOptions } from '../unplugin'
+import { defu } from 'defu'
 
 /**
  * This plugin adds all the Nuxt UI components as auto-imports.
  */
-export default function ComponentImportPlugin(framework: UnpluginContextMeta['framework'], options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']> }) {
+export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']> }, meta: UnpluginContextMeta) {
   const components = globSync('**/*.vue', { cwd: join(runtimeDir, 'components') })
   const componentNames = new Set(components.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
 
   const overrides = globSync('**/*.vue', { cwd: join(runtimeDir, 'vue/components') })
   const overrideNames = new Set(overrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+
+  const pluginOptions = defu(options.components, <ComponentsOptions>{
+    dts: options.dts ?? true,
+    exclude: [/[\\/]node_modules[\\/](?!\.pnpm|@nuxt\/ui)/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
+    resolvers: [
+      (componentName) => {
+        if (overrideNames.has(componentName))
+          return { name: 'default', from: join(runtimeDir, 'vue/components', `${componentName.slice(options.prefix.length)}.vue`) }
+        if (componentNames.has(componentName))
+          return { name: 'default', from: join(runtimeDir, 'components', `${componentName.slice(options.prefix.length)}.vue`) }
+      }
+    ]
+  })
 
   return [
     /**
@@ -41,18 +56,7 @@ export default function ComponentImportPlugin(framework: UnpluginContextMeta['fr
         }
       }
     },
-    AutoImportComponents[framework]({
-      dts: options.dts ?? true,
-      exclude: [/[\\/]node_modules[\\/](?!\.pnpm|@nuxt\/ui)/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
-      resolvers: [
-        (componentName) => {
-          if (overrideNames.has(componentName))
-            return { name: 'default', from: join(runtimeDir, 'vue/components', `${componentName.slice(options.prefix.length)}.vue`) }
-          if (componentNames.has(componentName))
-            return { name: 'default', from: join(runtimeDir, 'components', `${componentName.slice(options.prefix.length)}.vue`) }
-        }
-      ]
-    })
+    AutoImportComponents.raw(pluginOptions, meta) as UnpluginOptions
   ] satisfies UnpluginOptions[]
 }
 

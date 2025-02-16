@@ -1,25 +1,26 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import { tv } from 'tailwind-variants'
-import type { DropdownMenuContentProps as RadixDropdownMenuContentProps, DropdownMenuContentEmits as RadixDropdownMenuContentEmits } from 'radix-vue'
+import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/dropdown-menu'
+import { tv } from '../utils/tv'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
 
 const _dropdownMenu = tv(theme)()
 
-interface DropdownMenuContentProps<T> extends Omit<RadixDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+interface DropdownMenuContentProps<T> extends Omit<RekaDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
   labelKey: string
   checkedIcon?: string
   loadingIcon?: string
+  externalIcon?: boolean | string
   class?: any
   ui: typeof _dropdownMenu
   uiOverride?: any
 }
 
-interface DropdownMenuContentEmits extends RadixDropdownMenuContentEmits {}
+interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
 
 type DropdownMenuContentSlots<T extends { slot?: string }> = Omit<DropdownMenuSlots<T>, 'default'> & {
   default(props?: {}): any
@@ -29,8 +30,8 @@ type DropdownMenuContentSlots<T extends { slot?: string }> = Omit<DropdownMenuSl
 
 <script setup lang="ts" generic="T extends DropdownMenuItem">
 import { computed } from 'vue'
-import { DropdownMenu } from 'radix-vue/namespaced'
-import { useForwardPropsEmits } from 'radix-vue'
+import { DropdownMenu } from 'reka-ui/namespaced'
+import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { omit, get } from '../utils'
@@ -48,7 +49,7 @@ const emits = defineEmits<DropdownMenuContentEmits>()
 const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
 const appConfig = useAppConfig()
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'class', 'ui'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuContentSlots<T>[string]>
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
@@ -70,7 +71,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           {{ get(item, props.labelKey as string) }}
         </slot>
 
-        <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, color: item?.color, active })" />
+        <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, color: item?.color, active })" />
       </span>
 
       <span :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
@@ -121,6 +122,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               :label-key="labelKey"
               :checked-icon="checkedIcon"
               :loading-icon="loadingIcon"
+              :external-icon="externalIcon"
               v-bind="item.content"
             >
               <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
@@ -130,11 +132,11 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           </DropdownMenu.Sub>
           <DropdownMenu.CheckboxItem
             v-else-if="item.type === 'checkbox'"
-            :checked="item.checked"
+            :model-value="item.checked"
             :disabled="item.disabled"
             :text-value="get(item, props.labelKey as string)"
             :class="ui.item({ class: [uiOverride?.item, item.class], color: item?.color })"
-            @update:checked="item.onUpdateChecked"
+            @update:model-value="item.onUpdateChecked"
             @select="item.onSelect"
           >
             <ReuseItemTemplate :item="item" :index="index" />

@@ -6,15 +6,6 @@ body:
     attributes:
       value: |
         Before requesting a feature, please make sure that you have read through our [documentation](https://ui.nuxt.com) and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc).
-  - type: dropdown
-    id: version
-    attributes:
-      label: For what version of Nuxt UI are you suggesting this?
-      options:
-        - v2.x
-        - v3.0.0-alpha.x
-    validations:
-      required: true
   - type: textarea
     id: description
     attributes:
