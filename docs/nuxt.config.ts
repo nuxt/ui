@@ -97,8 +97,7 @@ export default defineNuxtConfig({
         // '/api/pulls.json'
       ],
       crawlLinks: true,
-      autoSubfolderIndex: false,
-      failOnError: false
+      autoSubfolderIndex: false
     },
     cloudflare: {
       pages: {
