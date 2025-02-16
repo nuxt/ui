@@ -6,7 +6,6 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "happy-dom",
     "valibot30",
     "valibot31",
     "typescript",
