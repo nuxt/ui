@@ -20,7 +20,7 @@ defineOgImageComponent('Docs', {
   <div class="relative">
     <UPageHero :links="page.links">
       <template #top>
-        <div class="absolute z-[-1] rounded-full bg-[var(--ui-primary)] blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
         <StarsBg />
       </template>
 
