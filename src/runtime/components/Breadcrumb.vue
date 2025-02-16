@@ -19,7 +19,7 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   slot?: string
 }
 
-export interface BreadcrumbProps<T> {
+export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'
@@ -40,7 +40,7 @@ export interface BreadcrumbProps<T> {
   ui?: PartialString<typeof breadcrumb.slots>
 }
 
-type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
+type SlotProps<T extends BreadcrumbItem = BreadcrumbItem> = (props: { item: T, index: number, active?: boolean }) => any
 
 export type BreadcrumbSlots<T extends { slot?: string }> = {
   'item': SlotProps<T>
