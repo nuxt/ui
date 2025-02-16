@@ -26,6 +26,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - BreadcrumbItem[]
 props:
   items:
     - label: 'Home'
@@ -53,6 +55,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - BreadcrumbItem[]
 props:
   separatorIcon: 'i-lucide-arrow-right'
   items:
