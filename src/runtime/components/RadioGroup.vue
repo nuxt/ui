@@ -13,14 +13,16 @@ const radioGroup = tv({ extend: tv(theme), ...(appConfigRadioGroup.ui?.radioGrou
 
 type RadioGroupVariants = VariantProps<typeof radioGroup>
 
-export interface RadioGroupItem {
+export type RadioGroupValue = AcceptableValue
+interface _RadioGroupItem {
   label?: string
   description?: string
   disabled?: boolean
   value?: string
 }
+export type RadioGroupItem = _RadioGroupItem | AcceptableValue
 
-export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'> {
+export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> extends Pick<RadioGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -58,9 +60,9 @@ export type RadioGroupEmits = RadioGroupRootEmits & {
   change: [payload: Event]
 }
 
-type SlotProps<T> = (props: { item: T, modelValue?: AcceptableValue }) => any
+type SlotProps<T extends _RadioGroupItem | RadioGroupValue> = (props: { item: T & { id: string }, modelValue?: RadioGroupValue }) => any
 
-export interface RadioGroupSlots<T> {
+export interface RadioGroupSlots<T extends _RadioGroupItem | RadioGroupValue> {
   legend(props?: {}): any
   label: SlotProps<T>
   description: SlotProps<T>
@@ -69,14 +71,14 @@ export interface RadioGroupSlots<T> {
 extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
-<script setup lang="ts" generic="T extends RadioGroupItem | AcceptableValue">
+<script setup lang="ts" generic="T extends _RadioGroupItem, V extends T | RadioGroupValue = _RadioGroupItem">
 import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 
-const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
+const props = withDefaults(defineProps<RadioGroupProps<V>>(), {
   valueKey: 'value',
   labelKey: 'label',
   descriptionKey: 'description',
@@ -99,11 +101,19 @@ const ui = computed(() => radioGroup({
 }))
 
 function normalizeItem(item: any) {
-  if (['string', 'number', 'boolean'].includes(typeof item)) {
+  if (item === null) {
+    return {
+      id: `${id}:null`,
+      value: undefined,
+      label: undefined
+    }
+  }
+
+  if (typeof item === 'string' || typeof item === 'number') {
     return {
       id: `${id}:${item}`,
-      value: item,
-      label: item
+      value: String(item),
+      label: String(item)
     }
   }
 
