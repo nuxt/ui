@@ -53,6 +53,8 @@ const props = defineProps<{
   hide?: string[]
   /** List of props to externalize in script setup */
   external?: string[]
+  /** The types of the externalized props */
+  externalTypes?: string[]
   /** List of props to use with `v-model` */
   model?: string[]
   /** List of props to cast from code and selection */
@@ -209,11 +211,18 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `
-    for (const key of props.external) {
+    if (props.externalTypes?.length) {
+      code += `import type { ${props.externalTypes.join(', ')} } from '@nuxt/ui${props.pro ? '-pro' : ''}'
+
+`
+    }
+
+    for (const [i, key] of props.external.entries()) {
       const cast = props.cast?.[key]
       const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2)?.replace(/,([ |\t\n]+[}|\]])/g, '$1')
+      const type = props.externalTypes?.[i] ? `: ${props.externalTypes[i]}` : ''
 
-      code += `const ${key === 'modelValue' ? 'value' : key} = ref(${value})
+      code += `const ${key === 'modelValue' ? 'value' : key}${type} = ref(${value})
 `
     }
     code += `<\/script>
