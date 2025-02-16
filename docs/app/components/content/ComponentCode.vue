@@ -221,9 +221,9 @@ ${props.slots?.default}
     for (const [i, key] of props.external.entries()) {
       const cast = props.cast?.[key]
       const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2)?.replace(/,([ |\t\n]+[}|\]])/g, '$1')
-      const type = props.externalTypes?.[i] ? `: ${props.externalTypes[i]}` : ''
+      const type = props.externalTypes?.[i] ? `<${props.externalTypes[i]}>` : ''
 
-      code += `const ${key === 'modelValue' ? 'value' : key}${type} = ref(${value})
+      code += `const ${key === 'modelValue' ? 'value' : key} = ref${type}(${value})
 `
     }
     code += `<\/script>
