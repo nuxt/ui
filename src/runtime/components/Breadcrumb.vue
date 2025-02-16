@@ -4,7 +4,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
-import type { AvatarProps, LinkProps } from '../types'
+import type { AvatarProps, DropdownMenuItem, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
 const appConfigBreadcrumb = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
@@ -14,6 +14,7 @@ const breadcrumb = tv({ extend: tv(theme), ...(appConfigBreadcrumb.ui?.breadcrum
 export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
   icon?: string
+  children?: DropdownMenuItem[]
   avatar?: AvatarProps
   slot?: string
 }
@@ -75,7 +76,7 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends BreadcrumbItem">
+<script setup lang="ts" generic="T extends BreadcrumbItem = BreadcrumbItem">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
