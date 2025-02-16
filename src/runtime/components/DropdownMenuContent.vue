@@ -7,7 +7,7 @@ import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from 
 
 const _dropdownMenu = tv(theme)()
 
-interface DropdownMenuContentProps<T> extends Omit<RekaDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+interface DropdownMenuContentProps<T extends DropdownMenuItem = DropdownMenuItem> extends Omit<RekaDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
@@ -22,13 +22,13 @@ interface DropdownMenuContentProps<T> extends Omit<RekaDropdownMenuContentProps,
 
 interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
 
-type DropdownMenuContentSlots<T extends { slot?: string }> = Omit<DropdownMenuSlots<T>, 'default'> & {
+type DropdownMenuContentSlots<T extends DropdownMenuItem = DropdownMenuItem> = Omit<DropdownMenuSlots<T>, 'default'> & {
   default(props?: {}): any
 }
 
 </script>
 
-<script setup lang="ts" generic="T extends DropdownMenuItem">
+<script setup lang="ts" generic="T extends DropdownMenuItem = DropdownMenuItem">
 import { computed } from 'vue'
 import { DropdownMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'

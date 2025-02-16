@@ -38,7 +38,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   onUpdateChecked?(checked: boolean): void
 }
 
-export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
+export interface DropdownMenuProps<T extends DropdownMenuItem = DropdownMenuItem> extends Omit<DropdownMenuRootProps, 'dir'> {
   size?: DropdownMenuVariants['size']
   items?: T[] | T[][]
   /**
@@ -84,9 +84,9 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T extends DropdownMenuItem = DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<T extends { slot?: string }> = {
+export type DropdownMenuSlots<T extends DropdownMenuItem = DropdownMenuItem> = {
   'default'(props: { open: boolean }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -144,7 +144,7 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends DropdownMenuItem">
+<script setup lang="ts" generic="T extends DropdownMenuItem = DropdownMenuItem">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
