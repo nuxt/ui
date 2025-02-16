@@ -54,7 +54,7 @@ function openModal() {
       <UButton label="Open fullscreen" color="neutral" variant="outline" />
     </UModal>
 
-    <UModal title="Modal prevent close" description="This modal has `prevent-close: true` prop so it won't close when clicking outside." prevent-close>
+    <UModal title="Modal prevent close" description="This modal has `dismissible: false` prop so it won't close when clicking outside." :dismissible="false">
       <UButton label="Open unclosable" color="neutral" variant="subtle" />
     </UModal>
 

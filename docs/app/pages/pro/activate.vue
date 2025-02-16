@@ -72,7 +72,7 @@ onMounted(() => {
 <template>
   <UPageHero headline="License Activation" :title="title" :description="description">
     <template #top>
-      <div class="absolute z-[-1] rounded-full bg-[var(--ui-primary)] blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+      <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
       <StarsBg />
     </template>
     <div>
@@ -90,7 +90,7 @@ onMounted(() => {
           <UFormField label="GitHub Username" name="username">
             <UInput v-model="state.username" autocomplete="off" :ui="{ root: 'flex' }" />
           </UFormField>
-          <UButton type="submit" :loading="activating" :disabled="state.license.length !== 36 || !state.username">
+          <UButton type="submit" :loading="activating" :disabled="state.license?.length !== 36 || !state.username">
             Activate the license
           </UButton>
           <UAlert v-if="successMessage" color="success" variant="subtle" :title="successMessage">
