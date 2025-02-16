@@ -1,5 +1,6 @@
 import { createResolver } from '@nuxt/kit'
 import pkg from '../package.json'
+import yaml from '@rollup/plugin-yaml'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -96,7 +97,8 @@ export default defineNuxtConfig({
         // '/api/pulls.json'
       ],
       crawlLinks: true,
-      autoSubfolderIndex: false
+      autoSubfolderIndex: false,
+      failOnError: false
     },
     cloudflare: {
       pages: {
@@ -109,6 +111,12 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+
+  vite: {
+    plugins: [
+      yaml()
+    ]
   },
 
   componentMeta: {
@@ -148,6 +156,7 @@ export default defineNuxtConfig({
   image: {
     provider: 'ipx'
   },
+
   llms: {
     domain: 'https://ui3.nuxt.dev',
     title: 'Nuxt UI v3',

@@ -3,6 +3,7 @@
 import type { Ref } from 'vue'
 import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
+import type { RowData } from '@tanstack/table-core'
 import type {
   CellContext,
   ColumnDef,
@@ -25,7 +26,6 @@ import type {
   PaginationOptions,
   PaginationState,
   Row,
-  RowData,
   RowPinningOptions,
   RowPinningState,
   RowSelectionOptions,
@@ -161,7 +161,7 @@ export type TableSlots<T> = {
 
 <script setup lang="ts" generic="T extends TableData">
 import { computed } from 'vue'
-import { Primitive, useForwardProps } from 'reka-ui'
+import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { reactiveOmit } from '@vueuse/core'
@@ -196,10 +196,8 @@ const groupingState = defineModel<GroupingState>('grouping', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 const paginationState = defineModel<PaginationState>('pagination', { default: {} })
 
-const tableProps = useForwardProps(reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'))
-
 const tableApi = useVueTable({
-  ...tableProps,
+  ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
   data,
   columns: columns.value,
   getCoreRowModel: getCoreRowModel(),

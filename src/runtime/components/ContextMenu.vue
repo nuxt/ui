@@ -51,6 +51,12 @@ export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
    * @defaultValue appConfig.ui.icons.loading
    */
   loadingIcon?: string
+  /**
+   * The icon displayed when the item is an external link.
+   * Set to `false` to hide the external icon.
+   * @defaultValue appConfig.ui.icons.external
+   */
+  externalIcon?: boolean | string
   /** The content of the menu. */
   content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -152,6 +158,7 @@ import UContextMenuContent from './ContextMenuContent.vue'
 const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
   portal: true,
   modal: true,
+  externalIcon: true,
   labelKey: 'label'
 })
 const emits = defineEmits<ContextMenuEmits>()
@@ -182,6 +189,7 @@ const ui = computed(() => contextMenu({
       :label-key="labelKey"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
+      :external-icon="externalIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />

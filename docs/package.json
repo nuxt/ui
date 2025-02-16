@@ -6,28 +6,30 @@
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/lucide": "^1.2.26",
     "@iconify-json/simple-icons": "^1.2.24",
-    "@iconify-json/vscode-icons": "^1.2.13",
+    "@iconify-json/vscode-icons": "^1.2.14",
     "@nuxt/content": "^3.1.1",
     "@nuxt/image": "^1.9.0",
     "@nuxt/ui": "latest",
-    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@6f69429",
+    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@703e687",
     "@nuxthub/core": "^0.8.17",
     "@nuxtjs/plausible": "^1.2.0",
     "@octokit/rest": "^21.1.0",
-    "@vueuse/nuxt": "^12.5.0",
+    "@rollup/plugin-yaml": "^4.1.2",
+    "@vueuse/nuxt": "^12.6.1",
     "joi": "^17.13.3",
+    "motion": "^12.4.2",
     "nuxt": "^3.15.4",
     "nuxt-component-meta": "^0.10.0",
     "nuxt-og-image": "^4.1.2",
-    "prettier": "^3.5.0",
+    "prettier": "^3.5.1",
     "shiki-transformer-color-highlight": "^0.2.0",
     "superstruct": "^2.0.2",
     "ufo": "^1.5.4",
     "valibot": "^0.42.1",
     "yup": "^1.6.1",
-    "zod": "^3.24.1"
+    "zod": "^3.24.2"
   },
   "devDependencies": {
-    "wrangler": "^3.108.0"
+    "wrangler": "^3.109.0"
   }
 }

@@ -211,7 +211,7 @@ ${props.slots?.default}
 `
     for (const key of props.external) {
       const cast = props.cast?.[key]
-      const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2).replace(/,([ |\t\n]+[}|\]])/g, '$1')
+      const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2)?.replace(/,([ |\t\n]+[}|\]])/g, '$1')
 
       code += `const ${key === 'modelValue' ? 'value' : key} = ref(${value})
 `
