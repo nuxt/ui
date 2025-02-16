@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const users = [
+import type { CommandPaletteItem } from '@nuxt/ui'
+
+const users: CommandPaletteItem[] = [
   {
     label: 'Benjamin Canac',
     suffix: 'benjamincanac',

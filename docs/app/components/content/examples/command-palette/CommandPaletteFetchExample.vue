@@ -1,14 +1,16 @@
 <script setup lang="ts">
+import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
+
 const searchTerm = ref('')
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
-  transform: (data: { id: number, name: string, email: string }[]) => {
+  transform: (data: { id: number, name: string, email: string }[]): CommandPaletteItem[] => {
     return data?.map(user => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
   },
   lazy: true
 })
 
-const groups = computed(() => [{
+const groups = computed<CommandPaletteGroup[]>(() => [{
   id: 'users',
   label: searchTerm.value ? `Users matching “${searchTerm.value}”...` : 'Users',
   items: users.value || []

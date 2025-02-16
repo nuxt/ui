@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const groups = [{
+import type { CommandPaletteGroup } from '@nuxt/ui'
+
+const groups: CommandPaletteGroup[] = [{
   id: 'settings',
   items: [
     {

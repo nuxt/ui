@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { CommandPaletteItem } from '@nuxt/ui'
+
 const items = [
   {
     id: '/',
@@ -32,7 +34,7 @@ const items = [
   }
 ]
 
-function postFilter(searchTerm: string, items: any[]) {
+function postFilter(searchTerm: string, items: any[]): CommandPaletteItem[] {
   // Filter only first level items if no searchTerm
   if (!searchTerm) {
     return items?.filter(item => item.level === 1)
