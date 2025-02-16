@@ -7,7 +7,7 @@ import theme from '#build/ui/navigation-menu'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
+import type { DynamicSlots, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
 
 const appConfigNavigationMenu = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -42,7 +42,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
 
 type NavigationMenuVariants = VariantProps<typeof navigationMenu>
 
-export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'modelValue' | 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'> {
+export interface NavigationMenuProps<T extends NavigationMenuItem = NavigationMenuItem> extends Pick<NavigationMenuRootProps, 'modelValue' | 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -59,7 +59,7 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'm
    * @defaultValue appConfig.ui.icons.external
    */
   externalIcon?: boolean | string
-  items?: T
+  items?: T[] | T[][]
   color?: NavigationMenuVariants['color']
   variant?: NavigationMenuVariants['variant']
   /**
@@ -100,9 +100,9 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'm
 
 export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
-type SlotProps<T> = (props: { item: T, index: number, active?: boolean }) => any
+type SlotProps<T extends NavigationMenuItem = NavigationMenuItem> = (props: { item: MaybeArrayOfArrayItem<T[] | T[][]>, index: number, active?: boolean }) => any
 
-export type NavigationMenuSlots<T extends { slot?: string }> = {
+export type NavigationMenuSlots<T extends NavigationMenuItem = NavigationMenuItem> = {
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -150,7 +150,7 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<NavigationMenuItem>">
+<script setup lang="ts" generic="T extends NavigationMenuItem = NavigationMenuItem">
 import { computed, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, useForwardPropsEmits } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
@@ -164,7 +164,7 @@ import UIcon from './Icon.vue'
 import UBadge from './Badge.vue'
 import UCollapsible from './Collapsible.vue'
 
-const props = withDefaults(defineProps<NavigationMenuProps<I>>(), {
+const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
   orientation: 'horizontal',
   contentOrientation: 'horizontal',
   externalIcon: true,
