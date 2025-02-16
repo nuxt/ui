@@ -4,6 +4,7 @@ const { overlays, unMount, close } = useOverlay()
 const mountedOverlays = computed(() => overlays.filter(overlay => overlay.isMounted))
 
 const onAfterLeave = (id: symbol) => {
+  close(id)
   unMount(id)
 }
 
