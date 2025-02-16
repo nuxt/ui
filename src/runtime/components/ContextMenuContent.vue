@@ -6,7 +6,7 @@ import type { KbdProps, AvatarProps, ContextMenuItem, ContextMenuSlots } from '.
 
 const _contextMenu = tv(theme)()
 
-interface ContextMenuContentProps<T> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+interface ContextMenuContentProps<T extends ContextMenuItem = ContextMenuItem> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T[] | T[][]
   portal?: boolean
   sub?: boolean
@@ -22,7 +22,7 @@ interface ContextMenuContentProps<T> extends Omit<RekaContextMenuContentProps, '
 interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
 </script>
 
-<script setup lang="ts" generic="T extends ContextMenuItem">
+<script setup lang="ts" generic="T extends ContextMenuItem = ContextMenuItem">
 import { computed } from 'vue'
 import { ContextMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'
