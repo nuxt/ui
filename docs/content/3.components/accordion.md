@@ -29,6 +29,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -57,6 +59,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -86,6 +90,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -114,6 +120,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -148,6 +156,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -181,6 +191,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
