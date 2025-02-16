@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { ContextMenuItem } from '@nuxt/ui'
+
 const showSidebar = ref(true)
 const showToolbar = ref(false)
 
-const items = computed(() => [{
+const items = computed<ContextMenuItem[]>(() => [{
   label: 'View',
   type: 'label' as const
 }, {

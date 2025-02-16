@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const items = [
+import type { ContextMenuItem } from '@nuxt/ui'
+
+const items: ContextMenuItem[][] = [
   [
     {
       label: 'View',
