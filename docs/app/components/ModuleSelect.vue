@@ -22,7 +22,7 @@ watch(module, () => {
       indicator: 'bg-(--ui-bg)',
       trigger: 'px-1 data-[state=active]:text-(--ui-text-highlighted)'
     }"
-    size="sm"
+    size="xs"
     @update:model-value="(module = $event as string)"
   />
 </template>

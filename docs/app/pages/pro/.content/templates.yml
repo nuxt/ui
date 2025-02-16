@@ -29,7 +29,7 @@ templates:
         icon: i-simple-icons-yaml
     links:
       - label: Live preview
-        to: https://v3.landing-template.nuxt.dev
+        to: https://landing-template.nuxt.dev
         target: _blank
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
@@ -53,7 +53,7 @@ templates:
         icon: i-lucide-search
     links:
       - label: Live preview
-        to: https://v3.docs-template.nuxt.dev/
+        to: https://docs-template.nuxt.dev
         target: _blank
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
@@ -74,7 +74,7 @@ templates:
         icon: i-lucide-user-round-check
     links:
       - label: Live preview (soon)
-        to: https://v3.saas-template.nuxt.dev
+        to: https://saas-template.nuxt.dev
         target: _blank
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
@@ -97,7 +97,7 @@ templates:
         icon: i-lucide-columns-3
     links:
       - label: Live preview (soon)
-        to: https://v3.dashboard-template.nuxt.dev
+        to: https://dashboard-template.nuxt.dev
         target: _blank
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
