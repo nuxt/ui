@@ -22,7 +22,7 @@ export interface AccordionItem {
   disabled?: boolean
 }
 
-export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled' | 'unmountOnHide'> {
+export interface AccordionProps<T extends AccordionItem = AccordionItem> extends Pick<AccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -45,7 +45,7 @@ export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible
 
 export interface AccordionEmits extends AccordionRootEmits {}
 
-type SlotProps<T> = (props: { item: T, index: number, open: boolean }) => any
+type SlotProps<T extends AccordionItem = AccordionItem> = (props: { item: T, index: number, open: boolean }) => any
 
 export type AccordionSlots<T extends { slot?: string }> = {
   leading: SlotProps<T>
