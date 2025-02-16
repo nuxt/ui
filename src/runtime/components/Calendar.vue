@@ -20,7 +20,7 @@ type CalendarModelValue<R extends boolean = false, M extends boolean = false> = 
     ? DateValue[]
     : DateValue
 
-export interface CalendarProps<R extends boolean, M extends boolean> extends Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'> {
+export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -49,9 +49,9 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   color?: CalendarVariants['color']
   size?: CalendarVariants['size']
   /** Whether or not a range of dates can be selected */
-  range?: R & boolean
+  range?: R
   /** Whether or not multiple dates can be selected */
-  multiple?: M & boolean
+  multiple?: M
   /** Show month controls */
   monthControls?: boolean
   /** Show year controls */
