@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const items = [
+import type { NavigationMenuItem } from '@nuxt/ui'
+
+const items: NavigationMenuItem[] = [
   {
     label: 'Guide',
     icon: 'i-lucide-book-open'

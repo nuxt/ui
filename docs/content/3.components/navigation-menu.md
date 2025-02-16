@@ -38,6 +38,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   items:
     - label: Guide
@@ -151,6 +153,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[][]
 props:
   orientation: 'vertical'
   items:
@@ -254,6 +258,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[][]
 props:
   highlight: true
   highlightColor: 'primary'
@@ -357,6 +363,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[][]
 props:
   color: neutral
   items:
@@ -390,6 +398,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[][]
 props:
   color: neutral
   variant: link
@@ -434,6 +444,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   trailingIcon: 'i-lucide-arrow-down'
   items:
@@ -534,6 +546,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   arrow: true
   items:
@@ -630,6 +644,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   arrow: true
   contentOrientation: 'vertical'
@@ -705,6 +721,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   unmountOnHide: false
   items:
