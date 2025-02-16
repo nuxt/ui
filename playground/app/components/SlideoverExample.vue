@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const overlayInstance = useOverlayInstance()
-
 defineProps<{
   count: number
 }>()
+
+const emit = defineEmits(['close'])
 </script>
 
 <template>
@@ -13,7 +13,7 @@ defineProps<{
     </template>
 
     <template #footer>
-      <UButton color="neutral" label="Close" @click="overlayInstance.close" />
+      <UButton color="neutral" label="Close" @click="emit('close')" />
     </template>
   </USlideover>
 </template>

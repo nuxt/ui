@@ -16,7 +16,7 @@ type ManagedOverlayOptionsPrivate<T extends Component> = {
   id: symbol
   isMounted: boolean
   modelValue: boolean
-
+  resolvePromise?: (value: unknown) => void
 }
 export type Overlay = ManagedOverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
 
@@ -44,7 +44,7 @@ function _useOverlay() {
     }
   }
 
-  const open = <T extends Component>(id: symbol, attrs?: WithExtendableAttrs<T>) => {
+  const open = <T extends Component>(id: symbol, attrs?: WithExtendableAttrs<T>): Promise<any> => {
     const overlay = getOverlay(id)
 
     // If attrs are provided, update the overlay's attrs
@@ -54,12 +54,23 @@ function _useOverlay() {
 
     overlay.modelValue = true
     overlay.isMounted = true
+
+    // Return a new promise that will be resolved when close is called
+    return new Promise((resolve) => {
+      overlay.resolvePromise = resolve
+    })
   }
 
-  const close = (id: symbol) => {
+  const close = (id: symbol, value?: any) => {
     const overlay = getOverlay(id)
 
     overlay.modelValue = false
+
+    // Resolve the promise if it exists
+    if (overlay.resolvePromise) {
+      overlay.resolvePromise(value)
+      overlay.resolvePromise = undefined
+    }
   }
 
   const unMount = (id: symbol) => {

@@ -2,13 +2,14 @@
 const LazyModalExample = defineAsyncComponent(() => import('./ModalExample2.vue'))
 
 const modalexample2Instance = useOverlay().create(LazyModalExample)
-const instance = useOverlayInstance()
 
 const nestedCount = ref(0)
 
 defineProps<{
   count: number
 }>()
+
+const emit = defineEmits(['close'])
 
 function openModal() {
   modalexample2Instance.open({ count: nestedCount.value })
@@ -24,7 +25,7 @@ function openModal() {
       </UButton>
     </template>
     <template #footer>
-      <UButton color="neutral" label="Close" @click="instance.close" />
+      <UButton color="neutral" label="Close" @click="emit('close')" />
     </template>
   </UModal>
 </template>
