@@ -22,7 +22,9 @@ const carousel = tv({ extend: tv(theme), ...(appConfigCarousel.ui?.carousel || {
 
 type CarouselVariants = VariantProps<typeof carousel>
 
-export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
+export type CarouselItem = AcceptableValue
+
+export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -94,14 +96,14 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
   ui?: PartialString<typeof carousel.slots>
 }
 
-export type CarouselSlots<T> = {
+export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
   default(props: { item: T, index: number }): any
 }
 
 extendDevtoolsMeta({ example: 'CarouselExample' })
 </script>
 
-<script setup lang="ts" generic="T extends AcceptableValue">
+<script setup lang="ts" generic="T extends CarouselItem = CarouselItem">
 import { computed, ref, watch, onMounted } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive, useForwardProps } from 'reka-ui'
