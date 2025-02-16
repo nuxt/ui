@@ -27,7 +27,7 @@ defineOgImageComponent('Docs', {
         <MDC :value="page.hero.description" unwrap="p" />
       </template>
       <template #top>
-        <div class="absolute z-[-1] rounded-full bg-[var(--ui-primary)] blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
         <StarsBg />
       </template>
 
@@ -103,7 +103,7 @@ defineOgImageComponent('Docs', {
       variant="naked"
       class="overflow-hidden"
     >
-      <div class="absolute rounded-full dark:bg-[var(--ui-primary)] blur-[250px] size-40 sm:size-50 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+      <div class="absolute rounded-full dark:bg-(--ui-primary) blur-[250px] size-40 sm:size-50 transform -translate-x-1/2 left-1/2 -translate-y-80" />
 
       <StarsBg />
     </UPageCTA>
