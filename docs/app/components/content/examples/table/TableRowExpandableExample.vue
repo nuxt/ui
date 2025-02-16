@@ -111,7 +111,7 @@ const expanded = ref({ 1: true })
     v-model:expanded="expanded"
     :data="data"
     :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-(--ui-bg-elevated)/50', tbody: 'grid', thead:'grid' }"
+    :ui="{ tr: 'data-[expanded=true]:bg-(--ui-bg-elevated)/50', tbody: 'grid', thead: 'grid' }"
     class="flex-1"
   >
     <template #expanded="{ row }">
