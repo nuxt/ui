@@ -102,7 +102,7 @@ export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
 type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active?: boolean }) => any
 
-export type NavigationMenuSlots<A extends ArrayOrNested<NavigationMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
+export type NavigationMenuSlots<A extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
