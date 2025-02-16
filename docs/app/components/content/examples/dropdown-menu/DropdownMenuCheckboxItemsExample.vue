@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
+
 const showBookmarks = ref(true)
 const showHistory = ref(false)
 const showDownloads = ref(false)
 
-const items = computed(() => [{
+const items = computed<DropdownMenuItem[]>(() => [{
   label: 'Interface',
   icon: 'i-lucide-app-window',
   type: 'label' as const

@@ -43,6 +43,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[][]
 props:
   items:
     - - label: Benjamin
@@ -122,6 +124,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[]
 items:
   content.align:
     - start
@@ -168,6 +172,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[]
 props:
   arrow: true
   items:
@@ -201,6 +207,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[]
 props:
   size: xl
   items:
@@ -243,6 +251,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[]
 props:
   disabled: true
   items:
@@ -333,7 +343,9 @@ Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility 
 
 ```vue
 <script setup lang="ts">
-const items = [{
+import type { DropdownMenuItem } from '@nuxt/ui'
+
+const items: DropdownMenuItem[] = [{
   label: 'Invite users',
   icon: 'i-lucide-user-plus',
   children: [{

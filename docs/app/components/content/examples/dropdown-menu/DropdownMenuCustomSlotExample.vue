@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const items = [{
+import type { DropdownMenuItem } from '@nuxt/ui'
+
+const items: DropdownMenuItem[] = [{
   label: 'Profile',
   icon: 'i-lucide-user',
   slot: 'profile'
