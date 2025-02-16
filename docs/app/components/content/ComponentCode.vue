@@ -212,9 +212,10 @@ ${props.slots?.default}
 <script setup lang="ts">
 `
     if (props.externalTypes?.length) {
-      code += `import type { ${props.externalTypes.join(', ')} } from '@nuxt/ui${props.pro ? '-pro' : ''}'
-
-`
+      const types = props.externalTypes.map(type => type.endsWith('[]') ? type.slice(0, -2) : type)
+      code += `import type { ${types.join(', ')} } from '@nuxt/ui${props.pro ? '-pro' : ''}'
+    
+    `
     }
 
     for (const [i, key] of props.external.entries()) {
