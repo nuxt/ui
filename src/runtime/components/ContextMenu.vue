@@ -38,7 +38,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   onUpdateChecked?(checked: boolean): void
 }
 
-export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
+export interface ContextMenuProps<T extends ContextMenuItem = ContextMenuItem> extends Omit<ContextMenuRootProps, 'dir'> {
   size?: ContextMenuVariants['size']
   items?: T[] | T[][]
   /**
@@ -76,9 +76,9 @@ export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
 
 export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
-type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T extends ContextMenuItem = ContextMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type ContextMenuSlots<T extends { slot?: string }> = {
+export type ContextMenuSlots<T extends ContextMenuItem = ContextMenuItem> = {
   'default'(props?: {}): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -148,7 +148,7 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends ContextMenuItem">
+<script setup lang="ts" generic="T extends ContextMenuItem = ContextMenuItem">
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
