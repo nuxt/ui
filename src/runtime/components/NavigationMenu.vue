@@ -7,7 +7,7 @@ import theme from '#build/ui/navigation-menu'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { DynamicSlots, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, NestedItem, PartialString } from '../types/utils'
 
 const appConfigNavigationMenu = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -42,7 +42,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
 
 type NavigationMenuVariants = VariantProps<typeof navigationMenu>
 
-export interface NavigationMenuProps<T extends NavigationMenuItem = NavigationMenuItem> extends Pick<NavigationMenuRootProps, 'modelValue' | 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'> {
+export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>> extends Pick<NavigationMenuRootProps, 'modelValue' | 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -59,7 +59,7 @@ export interface NavigationMenuProps<T extends NavigationMenuItem = NavigationMe
    * @defaultValue appConfig.ui.icons.external
    */
   externalIcon?: boolean | string
-  items?: T[] | T[][]
+  items?: T
   color?: NavigationMenuVariants['color']
   variant?: NavigationMenuVariants['variant']
   /**
@@ -100,9 +100,9 @@ export interface NavigationMenuProps<T extends NavigationMenuItem = NavigationMe
 
 export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
-type SlotProps<T extends NavigationMenuItem = NavigationMenuItem> = (props: { item: MaybeArrayOfArrayItem<T[] | T[][]>, index: number, active?: boolean }) => any
+type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active?: boolean }) => any
 
-export type NavigationMenuSlots<T extends NavigationMenuItem = NavigationMenuItem> = {
+export type NavigationMenuSlots<A extends ArrayOrNested<NavigationMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -150,12 +150,12 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends NavigationMenuItem = NavigationMenuItem">
+<script setup lang="ts" generic="T extends ArrayOrNested<NavigationMenuItem>">
 import { computed, toRef } from 'vue'
 import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, useForwardPropsEmits } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { get } from '../utils'
+import { get, isArrayOfArray } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
@@ -191,8 +191,14 @@ const rootProps = useForwardPropsEmits(computed(() => ({
 const contentProps = toRef(() => props.content)
 
 const appConfig = useAppConfig()
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>({
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<
+  { item: NavigationMenuItem, index: number, active?: boolean },
+  NavigationMenuSlots<T>
+>()
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<
+  { item: NavigationMenuItem, index: number, level?: number },
+  NavigationMenuSlots<T>
+>({
   props: {
     item: Object,
     index: Number,
@@ -210,13 +216,19 @@ const ui = computed(() => navigationMenu({
   highlightColor: props.highlightColor || props.color
 }))
 
-const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]) ? props.items : [props.items]) as T[][] : [])
+const lists = computed<NavigationMenuItem[][]>(() =>
+  props.items?.length
+    ? isArrayOfArray(props.items)
+      ? props.items
+      : [props.items]
+    : []
+)
 </script>
 
 <template>
   <DefineLinkTemplate v-slot="{ item, active, index }">
-    <slot :name="item.slot || 'item'" :item="(item as T)" :index="index">
-      <slot :name="item.slot ? `${item.slot}-leading` : 'item-leading'" :item="(item as T)" :active="active" :index="index">
+    <slot :name="item.slot || 'item'" :item="(item as NestedItem<T>)" :index="index">
+      <slot :name="item.slot ? `${item.slot}-leading` : 'item-leading'" :item="(item as NestedItem<T>)" :active="active" :index="index">
         <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
         <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active, disabled: !!item.disabled })" />
       </slot>
@@ -225,7 +237,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
         v-if="(!collapsed || orientation !== 'vertical') && (get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label` : 'item-label'])"
         :class="ui.linkLabel({ class: props.ui?.linkLabel })"
       >
-        <slot :name="item.slot ? `${item.slot}-label` : 'item-label'" :item="(item as T)" :active="active" :index="index">
+        <slot :name="item.slot ? `${item.slot}-label` : 'item-label'" :item="(item as NestedItem<T>)" :active="active" :index="index">
           {{ get(item, props.labelKey as string) }}
         </slot>
 
@@ -233,7 +245,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
       </span>
 
       <span v-if="(!collapsed || orientation !== 'vertical') && (item.badge || (orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[item.slot ? `${item.slot}-trailing` : 'item-trailing'])" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
-        <slot :name="item.slot ? `${item.slot}-trailing` : 'item-trailing'" :item="(item as T)" :active="active" :index="index">
+        <slot :name="item.slot ? `${item.slot}-trailing` : 'item-trailing'" :item="(item as NestedItem<T>)" :active="active" :index="index">
           <UBadge
             v-if="item.badge"
             color="neutral"
@@ -260,7 +272,7 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
       :open="item.open"
     >
       <div v-if="orientation === 'vertical' && item.type === 'label'" :class="ui.label({ class: props.ui?.label })">
-        <ReuseLinkTemplate :item="(item as T)" :index="index" />
+        <ReuseLinkTemplate :item="item" :index="index" />
       </div>
       <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(orientation === 'vertical' && item.children?.length && !collapsed) ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
         <component
@@ -271,12 +283,12 @@ const lists = computed(() => props.items?.length ? (Array.isArray(props.items[0]
           @select="item.onSelect"
         >
           <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
-            <ReuseLinkTemplate :item="(item as T)" :active="active || item.active" :index="index" />
+            <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
           </ULinkBase>
         </component>
 
         <NavigationMenuContent v-if="orientation === 'horizontal' && (item.children?.length || !!slots[item.slot ? `${item.slot}-content` : 'item-content'])" v-bind="contentProps" :class="ui.content({ class: props.ui?.content })">
-          <slot :name="item.slot ? `${item.slot}-content` : 'item-content'" :item="(item as T)" :active="active" :index="index">
+          <slot :name="item.slot ? `${item.slot}-content` : 'item-content'" :item="(item as NestedItem<T>)" :active="active" :index="index">
             <ul :class="ui.childList({ class: props.ui?.childList })">
               <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
