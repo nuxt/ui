@@ -157,7 +157,7 @@
     "unimport": "3.14.5",
     "unplugin": "^2.2.0",
     "vite": "6.0.11",
-    "vue-tsc": "^2.2.0"
+    "vue-tsc": "2.2.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": ["better-sqlite3"]
