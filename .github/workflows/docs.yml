@@ -1,12 +1,6 @@
 name: docs
 
-on:
-  push:
-    branches:
-      - v3
-  pull_request:
-    branches:
-      - v3
+on: push
 
 jobs:
   deploy:
