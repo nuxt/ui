@@ -111,7 +111,7 @@ const expanded = ref({ 1: true })
     v-model:expanded="expanded"
     :data="data"
     :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-(--ui-bg-elevated)/50' }"
+    :ui="{ tr: 'data-[expanded=true]:bg-(--ui-bg-elevated)/50', tbody: 'grid', thead:'grid' }"
     class="flex-1"
   >
     <template #expanded="{ row }">
@@ -119,3 +119,22 @@ const expanded = ref({ 1: true })
     </template>
   </UTable>
 </template>
+
+<style>
+.expanded-leave-active,
+.expanded-enter-active {
+  transition: all 500ms ease-out;
+  overflow: hidden;
+}
+
+.expanded-enter-to,
+.expanded-leave-from {
+  max-height: 200px;
+}
+
+.expanded-enter-from,
+.expanded-leave-to {
+  opacity: 0;
+  max-height: 0;
+}
+</style>

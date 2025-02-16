@@ -320,11 +320,13 @@ defineExpose({
                 </slot>
               </td>
             </tr>
-            <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
-              <td :colspan="row.getAllCells().length" :class="ui.td({ class: [props.ui?.td] })">
-                <slot name="expanded" :row="row" />
-              </td>
-            </tr>
+            <transition name="expanded">
+              <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
+                <td :colspan="row.getAllCells().length" :class="ui.td({ class: [props.ui?.td] })">
+                  <slot name="expanded" :row="row" />
+                </td>
+              </tr>
+            </transition>
           </template>
         </template>
 
