@@ -2,7 +2,8 @@
 import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
 import theme from '#build/ui/context-menu'
 import { tv } from '../utils/tv'
-import type { ArrayOrNested, AvatarProps, ContextMenuItem, ContextMenuSlots, KbdProps, NestedItem } from '../types'
+import type { AvatarProps, ContextMenuItem, ContextMenuSlots, KbdProps } from '../types'
+import type { ArrayOrNested, NestedItem } from '../types/utils'
 
 const _contextMenu = tv(theme)()
 
