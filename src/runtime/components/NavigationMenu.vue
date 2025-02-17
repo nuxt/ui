@@ -13,7 +13,7 @@ const appConfigNavigationMenu = _appConfig as AppConfig & { ui: { navigationMenu
 
 const navigationMenu = tv({ extend: tv(theme), ...(appConfigNavigationMenu.ui?.navigationMenu || {}) })
 
-export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'children' | 'type'> {
+export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type'> {
   /** Description is only used when `orientation` is `horizontal`. */
   description?: string
 }
