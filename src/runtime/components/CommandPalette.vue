@@ -112,7 +112,7 @@ export type CommandPaletteEmits<T extends AcceptableValue = AcceptableValue> = L
   'update:open': [value: boolean]
 }
 
-type SlotProps<T extends CommandPaletteItem = CommandPaletteItem> = (props: { item: T, index: number }) => any
+type SlotProps<T extends CommandPaletteItem> = (props: { item: T, index: number }) => any
 
 export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteItem, G extends CommandPaletteGroup<T> = CommandPaletteGroup<T>> = {
   'empty'(props: { searchTerm?: string }): any
@@ -126,7 +126,7 @@ export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteIte
 extendDevtoolsMeta({ example: 'CommandPaletteExample', ignoreProps: ['groups'] })
 </script>
 
-<script setup lang="ts" generic="T extends CommandPaletteItem = CommandPaletteItem, G extends CommandPaletteGroup<T> = CommandPaletteGroup<T>">
+<script setup lang="ts" generic="T extends CommandPaletteItem">
 import { computed } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
@@ -146,13 +146,13 @@ import ULink from './Link.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 
-const props = withDefaults(defineProps<CommandPaletteProps<T, G>>(), {
+const props = withDefaults(defineProps<CommandPaletteProps<T>>(), {
   modelValue: '',
   labelKey: 'label',
   autofocus: true
 })
-const emits = defineEmits<CommandPaletteEmits<T>>()
-const slots = defineSlots<CommandPaletteSlots<T, G>>()
+const emits = defineEmits<CommandPaletteEmits>()
+const slots = defineSlots<CommandPaletteSlots<T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -190,7 +190,7 @@ const items = computed(() => props.groups?.filter((group) => {
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
-function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
+function getGroupWithItems(group: CommandPaletteGroup<T>, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
   if (group?.postFilter && typeof group.postFilter === 'function') {
     items = group.postFilter(searchTerm.value, items)
   }

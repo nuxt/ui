@@ -35,17 +35,17 @@ describe('CommandPalette', () => {
     items: [{
       label: 'bug',
       chip: {
-        color: 'error'
+        color: 'error' as const
       }
     }, {
       label: 'feature',
       chip: {
-        color: 'success'
+        color: 'success' as const
       }
     }, {
       label: 'enhancement',
       chip: {
-        color: 'info'
+        color: 'info' as const
       }
     }]
   }, {
