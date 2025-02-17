@@ -13,11 +13,11 @@
     "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@b09e544",
     "@nuxthub/core": "^0.8.17",
     "@nuxtjs/plausible": "^1.2.0",
-    "@octokit/rest": "^21.1.0",
+    "@octokit/rest": "^21.1.1",
     "@rollup/plugin-yaml": "^4.1.2",
-    "@vueuse/nuxt": "^12.6.1",
+    "@vueuse/nuxt": "^12.7.0",
     "joi": "^17.13.3",
-    "motion": "^12.4.2",
+    "motion": "^12.4.3",
     "nuxt": "^3.15.4",
     "nuxt-component-meta": "^0.10.0",
     "nuxt-og-image": "^4.1.2",
@@ -30,6 +30,6 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "wrangler": "^3.109.0"
+    "wrangler": "^3.109.1"
   }
 }

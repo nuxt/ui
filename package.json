@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "3.0.0-alpha.12",
-  "packageManager": "pnpm@10.4.0",
+  "packageManager": "pnpm@10.4.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -82,7 +82,7 @@
     "@iconify/vue": "^4.3.0",
     "@internationalized/date": "^3.7.0",
     "@internationalized/number": "^3.6.0",
-    "@nuxt/devtools-kit": "^2.0.0",
+    "@nuxt/devtools-kit": "^2.1.0",
     "@nuxt/fonts": "^0.10.3",
     "@nuxt/icon": "^1.10.3",
     "@nuxt/kit": "^3.15.4",
@@ -92,8 +92,8 @@
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/vue-table": "^8.21.2",
     "@unhead/vue": "^1.11.19",
-    "@vueuse/core": "^12.6.1",
-    "@vueuse/integrations": "^12.6.1",
+    "@vueuse/core": "^12.7.0",
+    "@vueuse/integrations": "^12.7.0",
     "colortranslator": "^4.1.0",
     "consola": "^3.4.0",
     "defu": "^6.1.4",
@@ -118,8 +118,8 @@
     "tailwindcss": "^4.0.6",
     "tinyglobby": "^0.2.10",
     "unplugin": "^2.2.0",
-    "unplugin-auto-import": "^19.0.0",
-    "unplugin-vue-components": "^28.0.0",
+    "unplugin-auto-import": "^19.1.0",
+    "unplugin-vue-components": "^28.1.0",
     "vaul-vue": "^0.2.1"
   },
   "devDependencies": {
