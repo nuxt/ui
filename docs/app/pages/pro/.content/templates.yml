@@ -1,7 +1,8 @@
-title: Official Nuxt UI [Pro]{.text-(--ui-primary)} Templates
-description: 'Ready to use templates powered by our premium Vue components and Nuxt Content.<br class="hidden lg:block"> The templates are responsive, accessible and easy to customize so you can get started in no time.'
-head.title: Templates
-head.description: 'Ready to use templates powered by our premium Vue components and Nuxt Content. The templates are responsive, accessible and easy to customize so you can get started in no time.'
+title: Official Nuxt UI Pro Templates
+description: 'Ready to use templates powered by our premium Vue components and Nuxt Content. The templates are responsive, accessible and easy to customize so you can get started in no time.'
+hero:
+  title: Official Nuxt UI [Pro]{.text-(--ui-primary)} Templates
+  description: 'Ready to use templates powered by our premium Vue components and Nuxt Content.<br class="hidden lg:block"> The templates are responsive, accessible and easy to customize so you can get started in no time.'
 navigation: false
 links:
   - label: Get started
