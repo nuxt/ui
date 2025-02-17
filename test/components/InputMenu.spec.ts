@@ -213,9 +213,9 @@ describe('InputMenu', () => {
         multiple: true
       })).toEqualTypeOf<[(string | number | { value: string } | { value: number })[]]>()
 
-      // with groups, multiple and valueKey
+      // with groups, multiple, mixed types and valueKey
       expectEmitPayloadType('update:modelValue', () => InputMenu({
-        items: [[{ value: 1 }], [{ value: 'bar' }]],
+        items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
         multiple: true,
         valueKey: 'value'
       })).toEqualTypeOf<[(string | number)[]]>()

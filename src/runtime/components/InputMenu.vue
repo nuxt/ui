@@ -34,12 +34,24 @@ export type InputMenuItem = _InputMenuItem | AcceptableValue | boolean
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
 // TODO: Move in `types/utils.ts`
-type SelectItemKey<T, _T extends NestedItem<T> = NestedItem<T>> = _T extends AcceptableValue ? _T : keyof _T
+type SelectItemKey<T extends ArrayOrNested<unknown>, _T extends NestedItem<T> = NestedItem<T>> = _T extends AcceptableValue ? never : keyof _T
+type GetValue<I, VK extends SelectItemKey<any> | undefined> =
+I extends object
+  ? VK extends undefined
+    ? I
+    : VK extends keyof I
+      ? I[VK]
+      : never
+  : I
 type SelectModelValue<
   A extends ArrayOrNested<unknown>,
   VK extends SelectItemKey<A> | undefined,
-  M extends boolean, I = NestedItem<A>
-> = (VK extends keyof I ? I[VK] : I) extends infer T ? M extends true ? T[] : T : never
+  M extends boolean
+> = NestedItem<A> extends infer I
+  ? M extends true
+    ? GetValue<I, VK>[]
+    : GetValue<I, VK>
+  : never
 type SelectModelValueEmits<
   A extends ArrayOrNested<unknown>,
   VK extends SelectItemKey<A> | undefined,
