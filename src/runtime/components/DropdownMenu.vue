@@ -7,7 +7,7 @@ import theme from '#build/ui/dropdown-menu'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, NestedItem, PartialString } from '../types/utils'
 
 const appConfigDropdownMenu = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -38,9 +38,9 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   onUpdateChecked?(checked: boolean): void
 }
 
-export interface DropdownMenuProps<T extends DropdownMenuItem = DropdownMenuItem> extends Omit<DropdownMenuRootProps, 'dir'> {
+export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>> extends Omit<DropdownMenuRootProps, 'dir'> {
   size?: DropdownMenuVariants['size']
-  items?: T[] | T[][]
+  items?: T
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
@@ -86,7 +86,7 @@ export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
 type SlotProps<T extends DropdownMenuItem = DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<T extends DropdownMenuItem = DropdownMenuItem> = {
+export type DropdownMenuSlots<A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
   'default'(props: { open: boolean }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -144,7 +144,7 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends DropdownMenuItem = DropdownMenuItem">
+<script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
