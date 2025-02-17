@@ -96,20 +96,20 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 
-    async function registerModule(name: string, options: Record<string, any>) {
+    async function registerModule(name: string, key: string, options: Record<string, any>) {
       if (!hasNuxtModule(name)) {
         await installModule(name, options)
       } else {
-        (nuxt.options as any)[name] = defu((nuxt.options as any)[name], options)
+        (nuxt.options as any)[key] = defu((nuxt.options as any)[key], options)
       }
     }
 
-    await registerModule('@nuxt/icon', { cssLayer: 'components' })
+    await registerModule('@nuxt/icon', 'icon', { cssLayer: 'components' })
     if (options.fonts) {
-      await registerModule('@nuxt/fonts', { experimental: { processCSSVariables: true } })
+      await registerModule('@nuxt/fonts', 'fonts', { experimental: { processCSSVariables: true } })
     }
     if (options.colorMode) {
-      await registerModule('@nuxtjs/color-mode', { classSuffix: '', disableTransition: true })
+      await registerModule('@nuxtjs/color-mode', 'colorMode', { classSuffix: '', disableTransition: true })
     }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
