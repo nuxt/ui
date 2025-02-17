@@ -67,9 +67,6 @@ ignore:
 external:
   - groups
   - modelValue
-externalTypes:
-  - CommandPaletteGroup[]
-  - CommandPaletteItem
 class: '!p-0'
 props:
   modelValue: {}
@@ -127,9 +124,6 @@ ignore:
 external:
   - groups
   - modelValue
-externalTypes:
-  - CommandPaletteGroup[]
-  - CommandPaletteItem
 class: '!p-0'
 props:
   multiple: true
@@ -189,8 +183,6 @@ ignore:
   - groups
 external:
   - groups
-externalTypes:
-  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -222,8 +214,6 @@ ignore:
   - groups
 external:
   - groups
-externalTypes:
-  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -267,8 +257,6 @@ ignore:
   - groups
 external:
   - groups
-externalTypes:
-  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -300,8 +288,6 @@ ignore:
   - groups
 external:
   - groups
-externalTypes:
-  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -346,8 +332,6 @@ ignore:
   - class
 external:
   - groups
-externalTypes:
-  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -384,8 +368,6 @@ ignore:
   - close
 external:
   - groups
-externalTypes:
-  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -418,8 +400,6 @@ ignore:
   - class
 external:
   - groups
-externalTypes:
-  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false
@@ -455,8 +435,6 @@ ignore:
   - close
 external:
   - groups
-externalTypes:
-  - CommandPaletteGroup[]
 class: '!p-0'
 props:
   autofocus: false

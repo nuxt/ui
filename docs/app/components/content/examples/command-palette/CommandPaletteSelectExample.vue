@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
-
 const toast = useToast()
 
-const groups = ref<CommandPaletteGroup[]>([
+const groups = ref([
   {
     id: 'users',
     label: 'Users',
@@ -128,7 +126,7 @@ const groups = ref<CommandPaletteGroup[]>([
   }
 ])
 
-function onSelect(item: CommandPaletteItem) {
+function onSelect(item: any) {
   console.log(item)
 }
 </script>

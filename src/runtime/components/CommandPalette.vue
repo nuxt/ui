@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { AcceptableValue, ListboxRootProps, ListboxRootEmits } from 'reka-ui'
+import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -30,7 +30,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   onSelect?(e?: Event): void
 }
 
-export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPaletteItem> {
+export interface CommandPaletteGroup<T> {
   id: string
   label?: string
   slot?: string
@@ -47,7 +47,7 @@ export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPalet
   highlightedIcon?: string
 }
 
-export interface CommandPaletteProps<T extends CommandPaletteItem = CommandPaletteItem, G extends CommandPaletteGroup<T> = CommandPaletteGroup<T>> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -108,13 +108,13 @@ export interface CommandPaletteProps<T extends CommandPaletteItem = CommandPalet
   ui?: PartialString<typeof commandPalette.slots>
 }
 
-export type CommandPaletteEmits<T extends AcceptableValue = AcceptableValue> = ListboxRootEmits<T> & {
+export type CommandPaletteEmits<T> = ListboxRootEmits<T> & {
   'update:open': [value: boolean]
 }
 
-type SlotProps<T extends CommandPaletteItem> = (props: { item: T, index: number }) => any
+type SlotProps<T> = (props: { item: T, index: number }) => any
 
-export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteItem, G extends CommandPaletteGroup<T> = CommandPaletteGroup<T>> = {
+export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: string }> = {
   'empty'(props: { searchTerm?: string }): any
   'close'(props: { ui: any }): any
   'item': SlotProps<T>
@@ -126,7 +126,7 @@ export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteIte
 extendDevtoolsMeta({ example: 'CommandPaletteExample', ignoreProps: ['groups'] })
 </script>
 
-<script setup lang="ts" generic="T extends CommandPaletteItem">
+<script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
 import { computed } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
@@ -146,13 +146,13 @@ import ULink from './Link.vue'
 import UInput from './Input.vue'
 import UKbd from './Kbd.vue'
 
-const props = withDefaults(defineProps<CommandPaletteProps<T>>(), {
+const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
   labelKey: 'label',
   autofocus: true
 })
-const emits = defineEmits<CommandPaletteEmits>()
-const slots = defineSlots<CommandPaletteSlots<T>>()
+const emits = defineEmits<CommandPaletteEmits<T>>()
+const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -190,7 +190,7 @@ const items = computed(() => props.groups?.filter((group) => {
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
-function getGroupWithItems(group: CommandPaletteGroup<T>, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
+function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matches'] })[]) {
   if (group?.postFilter && typeof group.postFilter === 'function') {
     items = group.postFilter(searchTerm.value, items)
   }

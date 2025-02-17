@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import CommandPalette, { type CommandPaletteProps, type CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
+import CommandPalette, { type CommandPaletteProps } from '../../src/runtime/components/CommandPalette.vue'
 import ComponentRender from '../component-render'
 
 describe('CommandPalette', () => {
@@ -35,17 +35,17 @@ describe('CommandPalette', () => {
     items: [{
       label: 'bug',
       chip: {
-        color: 'error' as const
+        color: 'error'
       }
     }, {
       label: 'feature',
       chip: {
-        color: 'success' as const
+        color: 'success'
       }
     }, {
       label: 'enhancement',
       chip: {
-        color: 'info' as const
+        color: 'info'
       }
     }]
   }, {
@@ -89,7 +89,7 @@ describe('CommandPalette', () => {
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps, slots?: Partial<CommandPaletteSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps<typeof groups[number], typeof groups[number]['items'][number]>, slots?: Partial<any> }) => {
     const html = await ComponentRender(nameOrHtml, options, CommandPalette)
     expect(html).toMatchSnapshot()
   })
