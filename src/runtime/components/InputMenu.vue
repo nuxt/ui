@@ -27,6 +27,7 @@ interface _InputMenuItem {
   type?: 'label' | 'separator' | 'item'
   disabled?: boolean
   onSelect?(e?: Event): void
+  [key: string]: any
 }
 export type InputMenuItem = _InputMenuItem | AcceptableValue | boolean
 
@@ -149,11 +150,12 @@ type SlotProps<T extends InputMenuItem> = (props: { item: T, index: number }) =>
 
 export interface InputMenuSlots<
   A extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>,
+  VK extends SelectItemKey<A> | undefined = undefined,
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: M extends true ? T[] : T, open: boolean, ui: any }): any
-  'trailing'(props: { modelValue?: M extends true ? T[] : T, open: boolean, ui: any }): any
+  'leading'(props: { modelValue?: SelectModelValue<A, VK, M>, open: boolean, ui: any }): any
+  'trailing'(props: { modelValue?: SelectModelValue<A, VK, M>, open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -192,7 +194,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
   labelKey: 'label' as never
 })
 const emits = defineEmits<InputMenuEmits<T, VK, M>>()
-const slots = defineSlots<InputMenuSlots<T, M>>()
+const slots = defineSlots<InputMenuSlots<T, VK, M>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
@@ -427,14 +429,14 @@ defineExpose({
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="(modelValue as M extends true ? NestedItem<T>[] : NestedItem<T>)" :open="open" :ui="ui">
+        <slot name="leading" :model-value="(modelValue as SelectModelValue<T, VK, M> | undefined)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
       <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="(modelValue as M extends true ? NestedItem<T>[] : NestedItem<T>)" :open="open" :ui="ui">
+        <slot name="trailing" :model-value="(modelValue as SelectModelValue<T, VK, M> | undefined)" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </ComboboxTrigger>
