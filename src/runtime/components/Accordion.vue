@@ -45,9 +45,9 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
 
 export interface AccordionEmits extends AccordionRootEmits {}
 
-type SlotProps<T extends AccordionItem = AccordionItem> = (props: { item: T, index: number, open: boolean }) => any
+type SlotProps<T extends AccordionItem> = (props: { item: T, index: number, open: boolean }) => any
 
-export type AccordionSlots<T extends { slot?: string }> = {
+export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
   leading: SlotProps<T>
   default: SlotProps<T>
   trailing: SlotProps<T>
@@ -87,7 +87,7 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends AccordionItem = AccordionItem">
+<script setup lang="ts" generic="T extends AccordionItem">
 import { computed } from 'vue'
 import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
