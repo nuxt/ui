@@ -45,6 +45,8 @@ export default defineNuxtConfig({
     }
   },
 
+  css: ['~/assets/css/main.css'],
+
   site: {
     url: 'https://ui3.nuxt.dev'
   },
