@@ -2,13 +2,11 @@
 // @ts-expect-error yaml is not typed
 import page from '.content/templates.yml'
 
-const title = page.head?.title || page.title
-const description = page.head?.description || page.description
 useSeoMeta({
-  title,
-  description,
-  ogTitle: `${title} - Nuxt UI Pro`,
-  ogDescription: description
+  title: page.title,
+  description: page.description,
+  ogTitle: page.title,
+  ogDescription: page.description
 })
 defineOgImageComponent('Docs', {
   headline: 'Pro'
@@ -25,11 +23,11 @@ defineOgImageComponent('Docs', {
       </template>
 
       <template #title>
-        <MDC :value="page.title" unwrap="p" />
+        <MDC :value="page.hero.title" unwrap="p" />
       </template>
 
       <template #description>
-        <MDC :value="page.description" unwrap="p" />
+        <MDC :value="page.hero.description" unwrap="p" />
       </template>
     </UPageHero>
 
