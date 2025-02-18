@@ -255,7 +255,7 @@ const filteredGroups = computed(() => {
 
     return fields.some(field => contains(get(item, field), searchTerm.value))
   })).filter(group => group.filter(item =>
-    item && typeof item === 'object' && (!item.type || !['label', 'separator'].includes(item.type))
+    isInputItem(item) && (!item.type || !['label', 'separator'].includes(item.type))
   ).length > 0)
 })
 const filteredItems = computed(() => filteredGroups.value.flatMap(group => group))
@@ -421,14 +421,14 @@ defineExpose({
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="(modelValue as SelectModelValue<T, VK, M> | undefined)" :open="open" :ui="ui">
+        <slot name="leading" :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
       <ComboboxTrigger v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="(modelValue as SelectModelValue<T, VK, M> | undefined)" :open="open" :ui="ui">
+        <slot name="trailing" :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </ComboboxTrigger>

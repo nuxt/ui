@@ -217,21 +217,21 @@ function isSelectItem(item: SelectItem): item is _SelectItem {
     v-bind="rootProps"
     :autocomplete="autocomplete"
     :disabled="disabled"
-    :default-value="(defaultValue as (AcceptableValue | AcceptableValue[] | undefined))"
-    :model-value="(modelValue as (AcceptableValue | AcceptableValue[] | undefined))"
+    :default-value="(defaultValue as (AcceptableValue | AcceptableValue[]))"
+    :model-value="(modelValue as (AcceptableValue | AcceptableValue[]))"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
     <SelectTrigger :id="id" :class="ui.base({ class: [props.class, props.ui?.base] })" v-bind="ariaAttrs">
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="(modelValue as SelectModelValue<T, VK, M> | undefined)" :open="open" :ui="ui">
+        <slot name="leading" :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
-      <slot :model-value="(modelValue as SelectModelValue<T, VK, M> | undefined)" :open="open">
-        <template v-for="displayedModelValue in [displayValue(modelValue as SelectModelValue<T, VK, M> | undefined)]" :key="displayedModelValue">
+      <slot :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open">
+        <template v-for="displayedModelValue in [displayValue(modelValue as SelectModelValue<T, VK, M>)]" :key="displayedModelValue">
           <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
             {{ displayedModelValue }}
           </span>
@@ -242,7 +242,7 @@ function isSelectItem(item: SelectItem): item is _SelectItem {
       </slot>
 
       <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="(modelValue as SelectModelValue<T, VK, M> | undefined)" :open="open" :ui="ui">
+        <slot name="trailing" :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </span>
