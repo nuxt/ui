@@ -3,6 +3,7 @@
 import type { Ref } from 'vue'
 import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
+import type { RowData } from '@tanstack/table-core'
 import type {
   CellContext,
   ColumnDef,
@@ -25,7 +26,6 @@ import type {
   PaginationOptions,
   PaginationState,
   Row,
-  RowData,
   RowPinningOptions,
   RowPinningState,
   RowSelectionOptions,

@@ -28,10 +28,12 @@ const components = [
   'button',
   'button-group',
   'card',
+  'calendar',
   'carousel',
   'checkbox',
   'chip',
   'collapsible',
+  'color-picker',
   'context-menu',
   'command-palette',
   'drawer',
@@ -40,6 +42,7 @@ const components = [
   'form-field',
   'input',
   'input-menu',
+  'input-number',
   'kbd',
   'link',
   'modal',
@@ -56,8 +59,10 @@ const components = [
   'skeleton',
   'slideover',
   'slider',
+  'stepper',
   'switch',
   'tabs',
+  'table',
   'textarea',
   'toast',
   'tooltip'
@@ -110,24 +115,3 @@ defineShortcuts({
     </UModal>
   </UApp>
 </template>
-
-<style>
-@import "tailwindcss";
-@import "@nuxt/ui";
-
-@theme {
-  --font-sans: 'Public Sans', sans-serif;
-
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
-}
-</style>

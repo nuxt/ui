@@ -101,11 +101,14 @@ const contentEvents = computed(() => {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
       interactOutside: (e: Event) => e.preventDefault(),
-      escapeKeyDown: (e: Event) => e.preventDefault()
+      escapeKeyDown: (e: Event) => e.preventDefault(),
+      closeAutoFocus: (e: Event) => e.preventDefault()
     }
   }
 
-  return {}
+  return {
+    closeAutoFocus: (e: Event) => e.preventDefault()
+  }
 })
 
 const ui = computed(() => slideover({

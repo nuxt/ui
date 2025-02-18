@@ -12,6 +12,8 @@ export default defineNuxtConfig({
     enabled: true
   },
 
+  css: ['~/assets/css/main.css'],
+
   ui: {
     fonts: !process.env.DEVTOOLS
   },

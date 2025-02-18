@@ -46,7 +46,7 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AvatarProps>(), { as: 'span' })
-const attrs = useAttrs()
+const attrs = useAttrs() as any
 
 const fallbackProps = useForwardProps(reactivePick(props, 'delayMs'))
 
