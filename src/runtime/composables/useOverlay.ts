@@ -20,7 +20,7 @@ export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<C
 interface OverlayInstance<T> {
   open: (props?: ComponentProps<T>) => Promise<any>
   close: (value?: any) => void
-  patch: (props: ComponentProps<T>) => void
+  patch: (props: Partial<ComponentProps<T>>) => void
 }
 
 function _useOverlay() {
@@ -43,7 +43,7 @@ function _useOverlay() {
     return {
       open: <T extends Component>(props?: ComponentProps<T>) => open(options.id, props),
       close: value => close(options.id, value),
-      patch: <T extends Component>(props: ComponentProps<T>) => patch(options.id, props)
+      patch: <T extends Component>(props: Partial<ComponentProps<T>>) => patch(options.id, props)
     }
   }
 
@@ -87,7 +87,7 @@ function _useOverlay() {
     }
   }
 
-  const patch = <T extends Component>(id: symbol, props: ComponentProps<T>): void => {
+  const patch = <T extends Component>(id: symbol, props: Partial<ComponentProps<T>>): void => {
     const overlay = getOverlay(id)
 
     Object.entries(props!).forEach(([key, value]) => {
