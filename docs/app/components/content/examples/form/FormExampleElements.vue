@@ -75,7 +75,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
       </UFormField>
 
       <UFormField name="select" label="Select">
-        <USelect v-model="state.select" :items="items" class="w-full" />
+        <USelect v-model="state.select" :items="items" value-key="value" class="w-full" />
       </UFormField>
 
       <UFormField name="selectMenu" label="Select Menu">

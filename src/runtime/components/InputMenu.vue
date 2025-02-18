@@ -9,7 +9,15 @@ import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrNested, NestedItem, PartialString } from '../types/utils'
+import type {
+  AcceptableValue,
+  ArrayOrNested,
+  NestedItem,
+  PartialString,
+  SelectItemKey,
+  SelectModelValue,
+  SelectModelValueEmits
+} from '../types/utils'
 
 const appConfigInputMenu = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
@@ -32,39 +40,6 @@ interface _InputMenuItem {
 export type InputMenuItem = _InputMenuItem | AcceptableValue | boolean
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
-
-// TODO: Move in `types/utils.ts`
-type SelectItemKey<T extends ArrayOrNested<unknown>, _T extends NestedItem<T> = NestedItem<T>> = _T extends AcceptableValue ? never : keyof _T
-type GetValue<I, VK extends SelectItemKey<any> | undefined> =
-I extends object
-  ? VK extends undefined
-    ? I
-    : VK extends keyof I
-      ? I[VK]
-      : never
-  : I
-type SelectModelValue<
-  A extends ArrayOrNested<unknown>,
-  VK extends SelectItemKey<A> | undefined,
-  M extends boolean
-> = NestedItem<A> extends infer I
-  ? M extends true
-    ? GetValue<I, VK>[]
-    : GetValue<I, VK>
-  : never
-type SelectModelValueEmits<
-  A extends ArrayOrNested<unknown>,
-  VK extends SelectItemKey<A> | undefined,
-  M extends boolean
-> = {
-  /** Event handler called when the value changes. */
-  'update:modelValue': [payload: SelectModelValue<A, VK, M>]
-  /** Event handler when highlighted element changes. */
-  'highlight': [payload: {
-    ref: HTMLElement
-    value: SelectModelValue<A, VK, M>
-  } | undefined]
-}
 
 export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover'>, UseComponentIconsProps {
   /**
@@ -156,6 +131,11 @@ export type InputMenuEmits<A extends ArrayOrNested<unknown>, VK extends SelectIt
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
   create: [item: string]
+  /** Event handler when highlighted element changes. */
+  highlight: [payload: {
+    ref: HTMLElement
+    value: SelectModelValue<A, VK, M>
+  } | undefined]
 } & SelectModelValueEmits<A, VK, M>
 
 type SlotProps<T extends InputMenuItem> = (props: { item: T, index: number }) => any

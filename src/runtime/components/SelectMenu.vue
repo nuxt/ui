@@ -8,7 +8,17 @@ import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
+import type { PartialString } from '../types/utils'
+
+// start TODO: Remove when refactored as `InputMenu` and `Select` components
+type MaybeArrayOfArray<T> = T[] | T[][]
+type MaybeArrayOfArrayItem<I> = I extends Array<infer T> ? T extends Array<infer U> ? U : T : never
+type SelectModelValue<T, V, M extends boolean = false, DV = T> = (T extends Record<string, any> ? V extends keyof T ? T[V] : DV : T) extends infer U ? M extends true ? U[] : U : never
+type SelectItemKey<T> = T extends Record<string, any> ? keyof T : string
+type SelectModelValueEmits<T, V, M extends boolean = false, DV = T> = {
+  'update:modelValue': [payload: SelectModelValue<T, V, M, DV>]
+}
+// end TODO
 
 const appConfigSelectMenu = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
 

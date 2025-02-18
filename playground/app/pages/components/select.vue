@@ -9,7 +9,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
 const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
-const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]]
+const items = [[{ label: 'Fruits', type: 'label' as const }, ...fruits], [{ label: 'Vegetables', type: 'label' as const }, ...vegetables]]
 const selectedItems = ref([fruits[0]!, vegetables[0]!])
 
 const statuses = [{
@@ -114,9 +114,10 @@ function getUserAvatar(value: string) {
         trailing-icon="i-lucide-chevrons-up-down"
         :size="size"
         class="w-48"
+        value-key="value"
       >
         <template #leading="{ modelValue, ui }">
-          <UIcon v-if="modelValue" :name="getStatusIcon(modelValue as string)" :class="ui.leadingIcon()" />
+          <UIcon v-if="modelValue" :name="getStatusIcon(modelValue)" :class="ui.leadingIcon()" />
         </template>
       </USelect>
     </div>
@@ -130,9 +131,10 @@ function getUserAvatar(value: string) {
         placeholder="Search users..."
         :size="size"
         class="w-48"
+        value-key="value"
       >
         <template #leading="{ modelValue, ui }">
-          <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue as string)" />
+          <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue)" />
         </template>
       </USelect>
     </div>

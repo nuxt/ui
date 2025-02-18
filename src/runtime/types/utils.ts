@@ -26,19 +26,38 @@ export type PartialString<T> = {
   [K in keyof T]?: string
 }
 
-export type MaybeArrayOfArray<T> = T[] | T[][]
-export type MaybeArrayOfArrayItem<I> = I extends Array<infer T> ? T extends Array<infer U> ? U : T : never
-
 export type ArrayOrNested<T> = T[] | T[][]
 export type NestedItem<T> = T extends Array<infer I> ? NestedItem<I> : T
 export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>>
 
-export type SelectModelValue<T, V, M extends boolean = false, DV = T> = (T extends Record<string, any> ? V extends keyof T ? T[V] : DV : T) extends infer U ? M extends true ? U[] : U : never
+export type SelectItemKey<T extends ArrayOrNested<unknown>, _T extends NestedItem<T> = NestedItem<T>> = _T extends AcceptableValue ? never : keyof _T
 
-export type SelectItemKey<T> = T extends Record<string, any> ? keyof T : string
+type GetValue<I, VK extends SelectItemKey<any> | undefined> =
+I extends object
+  ? VK extends undefined
+    ? I
+    : VK extends keyof I
+      ? I[VK]
+      : never
+  : I
 
-export type SelectModelValueEmits<T, V, M extends boolean = false, DV = T> = {
-  'update:modelValue': [payload: SelectModelValue<T, V, M, DV>]
+export type SelectModelValue<
+  A extends ArrayOrNested<unknown>,
+  VK extends SelectItemKey<A> | undefined,
+  M extends boolean
+> = NestedItem<A> extends infer I
+  ? M extends true
+    ? GetValue<I, VK>[]
+    : GetValue<I, VK>
+  : never
+
+export type SelectModelValueEmits<
+  A extends ArrayOrNested<unknown>,
+  VK extends SelectItemKey<A> | undefined,
+  M extends boolean
+> = {
+  /** Event handler called when the value changes. */
+  'update:modelValue': [payload: SelectModelValue<A, VK, M>]
 }
 
 export type StringOrVNode =
