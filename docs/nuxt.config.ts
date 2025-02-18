@@ -45,6 +45,8 @@ export default defineNuxtConfig({
     }
   },
 
+  css: ['~/assets/css/main.css'],
+
   site: {
     url: 'https://ui3.nuxt.dev'
   },
@@ -97,8 +99,7 @@ export default defineNuxtConfig({
         // '/api/pulls.json'
       ],
       crawlLinks: true,
-      autoSubfolderIndex: false,
-      failOnError: false
+      autoSubfolderIndex: false
     },
     cloudflare: {
       pages: {
