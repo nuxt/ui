@@ -6,7 +6,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
       email: user.email,
       value: String(user.id),
       avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
-    })) || []
+    }))
   },
   lazy: true
 })
@@ -14,7 +14,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 
 <template>
   <USelectMenu
-    :items="users || []"
+    :items="users"
     :loading="status === 'pending'"
     :filter-fields="['label', 'email']"
     icon="i-lucide-user"
