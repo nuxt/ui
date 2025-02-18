@@ -1,12 +1,15 @@
 <script setup lang="ts">
-const items = [
+import type { TabsItem } from '@nuxt/ui'
+
+const items: TabsItem[] = [
   {
     label: 'Account',
     icon: 'i-lucide-user'
   },
   {
     label: 'Password',
-    icon: 'i-lucide-lock'
+    icon: 'i-lucide-lock',
+    test: 'ciao'
   }
 ]
 </script>
