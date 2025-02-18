@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const LazyModalExample = defineAsyncComponent(() => import('./ModalExample2.vue'))
 
-const modalexample2Instance = useOverlay().create(LazyModalExample)
+const overlay = useOverlay()
+const modalexample2Instance = overlay.create(LazyModalExample)
 
 const nestedCount = ref(0)
 

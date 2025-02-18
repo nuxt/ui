@@ -5,10 +5,10 @@ const LazySlideoverExample = defineAsyncComponent(() => import('../../components
 
 const open = ref(false)
 const count = ref(0)
-
-const slideover = useOverlay().create(LazySlideoverExample, {
-  attrs: {
-    title: 'Slideover'
+const overlay = useOverlay()
+const slideover = overlay.create(LazySlideoverExample, {
+  props: {
+    count: count.value
   }
 })
 

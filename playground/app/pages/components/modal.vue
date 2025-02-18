@@ -5,9 +5,10 @@ const LazyModalExample = defineAsyncComponent(() => import('../../components/Mod
 
 const open = ref(false)
 const count = ref(0)
+const overlay = useOverlay()
 
-const modalexampleInstance = useOverlay().create(LazyModalExample, {
-  attrs: {
+const modalexampleInstance = overlay.create(LazyModalExample, {
+  props: {
     count: count.value
   }
 

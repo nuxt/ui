@@ -2,12 +2,9 @@ import type { Component } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps } from 'vue-component-type-helpers'
 
-// Allows for additional props to be passed to the overlay
-type WithExtendableAttrs<T, Additional = Record<string, any>> = Partial<ComponentProps<T> | Additional>
-
-export type ManagedOverlayOptions<OverlayAttrs = Record<string, any>> = {
+export type OverlayOptions<OverlayAttrs = Record<string, any>> = {
   defaultOpen?: boolean
-  attrs?: OverlayAttrs
+  props?: OverlayAttrs
   destroyOnClose?: boolean
 }
 
@@ -18,13 +15,19 @@ type ManagedOverlayOptionsPrivate<T extends Component> = {
   modelValue: boolean
   resolvePromise?: (value: unknown) => void
 }
-export type Overlay = ManagedOverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
+export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
+
+interface OverlayInstance<T> {
+  open: (props?: ComponentProps<T>) => Promise<any>
+  close: (value?: any) => void
+  patch: (props: ComponentProps<T>) => void
+}
 
 function _useOverlay() {
-  const overlays: Overlay[] = shallowReactive([])
+  const overlays = shallowReactive<Overlay[]>([])
 
-  const create = <T extends Component>(component: T, _options?: ManagedOverlayOptions<WithExtendableAttrs<T>>) => {
-    const { attrs, defaultOpen, destroyOnClose } = _options || {}
+  const create = <T extends Component>(component: T, _options?: OverlayOptions<ComponentProps<T>>): OverlayInstance<T> => {
+    const { props: props, defaultOpen, destroyOnClose } = _options || {}
 
     const options = reactive<Overlay>({
       id: Symbol(import.meta.dev ? 'useOverlay' : ''),
@@ -32,24 +35,24 @@ function _useOverlay() {
       component: markRaw(component!),
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
-      attrs: attrs || {}
+      props: props || {}
     })
 
     overlays.push(options)
 
     return {
-      open: <T extends Component>(attrs?: WithExtendableAttrs<T>) => open(options.id, attrs),
-      close: () => close(options.id),
-      patch: <T extends Component>(attrs: WithExtendableAttrs<T>) => patch(options.id, attrs)
+      open: <T extends Component>(props?: ComponentProps<T>) => open(options.id, props),
+      close: value => close(options.id, value),
+      patch: <T extends Component>(props: ComponentProps<T>) => patch(options.id, props)
     }
   }
 
-  const open = <T extends Component>(id: symbol, attrs?: WithExtendableAttrs<T>): Promise<any> => {
+  const open = <T extends Component>(id: symbol, props?: ComponentProps<T>): Promise<any> => {
     const overlay = getOverlay(id)
 
-    // If attrs are provided, update the overlay's attrs
-    if (attrs) {
-      patch(overlay.id, attrs)
+    // If props are provided, update the overlay's props
+    if (props) {
+      patch(overlay.id, props)
     }
 
     overlay.modelValue = true
@@ -61,7 +64,7 @@ function _useOverlay() {
     })
   }
 
-  const close = (id: symbol, value?: any) => {
+  const close = (id: symbol, value?: any): void => {
     const overlay = getOverlay(id)
 
     overlay.modelValue = false
@@ -73,7 +76,7 @@ function _useOverlay() {
     }
   }
 
-  const unMount = (id: symbol) => {
+  const unMount = (id: symbol): void => {
     const overlay = getOverlay(id)
 
     overlay.isMounted = false
@@ -84,17 +87,15 @@ function _useOverlay() {
     }
   }
 
-  const patch = <T extends Component>(id: symbol, attrs: ManagedOverlayOptions<T>['attrs']) => {
+  const patch = <T extends Component>(id: symbol, props: ComponentProps<T>): void => {
     const overlay = getOverlay(id)
 
-    Object.entries(attrs!).forEach(([key, value]) => {
-      (overlay.attrs as any)[key] = value
+    Object.entries(props!).forEach(([key, value]) => {
+      (overlay.props as any)[key] = value
     })
-
-    return attrs
   }
 
-  const getOverlay = (id: symbol) => {
+  const getOverlay = (id: symbol): Overlay => {
     const overlay = overlays.find(overlay => overlay.id === id)
 
     if (!overlay) {
