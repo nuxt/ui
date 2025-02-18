@@ -175,7 +175,7 @@ const groups = computed<SelectItem[][]>(() =>
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-function displayValue(value?: SelectModelValue<T, VK, M> | undefined): string | undefined {
+function displayValue(value?: SelectModelValue<T, VK, M>): string {
   if (props.multiple && Array.isArray(value)) {
     return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
