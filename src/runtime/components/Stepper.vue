@@ -163,7 +163,7 @@ defineExpose({
 
     <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot]) || (currentStep?.value && !!slots[currentStep.value])" :class="ui.content({ class: props.ui?.description })">
       <slot
-        :name="!!slots[currentStep?.slot ?? currentStep.value] ? currentStep.slot ?? currentStep.value : 'content'"
+        :name="!!slots[currentStep?.slot ?? currentStep.value!] ? currentStep.slot ?? currentStep.value : 'content'"
         :item="currentStep"
       >
         {{ currentStep?.content }}
