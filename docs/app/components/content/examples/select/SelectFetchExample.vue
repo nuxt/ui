@@ -5,7 +5,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
       label: user.name,
       value: String(user.id),
       avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
-    })) || []
+    }))
   },
   lazy: true
 })
@@ -17,16 +17,17 @@ function getUserAvatar(value: string) {
 
 <template>
   <USelect
-    :items="users || []"
+    :items="users"
     :loading="status === 'pending'"
     icon="i-lucide-user"
     placeholder="Select user"
     class="w-48"
+    value-key="value"
   >
     <template #leading="{ modelValue, ui }">
       <UAvatar
         v-if="modelValue"
-        v-bind="getUserAvatar(modelValue as string)"
+        v-bind="getUserAvatar(modelValue)"
         :size="ui.leadingAvatarSize()"
         :class="ui.leadingAvatar()"
       />

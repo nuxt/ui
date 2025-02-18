@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { SelectItem } from '@nuxt/ui'
+
 const items = ref([
   {
     label: 'Backlog',
@@ -20,12 +22,12 @@ const items = ref([
     value: 'done',
     icon: 'i-lucide-circle-check'
   }
-])
+] satisfies SelectItem[])
 const value = ref(items.value[0]?.value)
 
 const icon = computed(() => items.value.find(item => item.value === value.value)?.icon)
 </script>
 
 <template>
-  <USelect v-model="value" :icon="icon" :items="items" class="w-48" />
+  <USelect v-model="value" :items="items" value-key="value" :icon="icon" class="w-48" />
 </template>

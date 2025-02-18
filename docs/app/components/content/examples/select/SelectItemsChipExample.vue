@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { SelectItem } from '@nuxt/ui'
+
 const items = ref([
   {
     label: 'bug',
@@ -21,7 +23,7 @@ const items = ref([
       color: 'info' as const
     }
   }
-])
+] satisfies SelectItem[])
 const value = ref(items.value[0]?.value)
 
 function getChip(value: string) {
@@ -30,11 +32,11 @@ function getChip(value: string) {
 </script>
 
 <template>
-  <USelect v-model="value" :items="items" class="w-48">
+  <USelect v-model="value" :items="items" value-key="value" class="w-48">
     <template #leading="{ modelValue, ui }">
       <UChip
         v-if="modelValue"
-        v-bind="getChip(modelValue as string)"
+        v-bind="getChip(modelValue)"
         inset
         standalone
         :size="ui.itemLeadingChipSize()"
