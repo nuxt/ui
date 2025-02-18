@@ -24,7 +24,7 @@ export interface StepperItem {
   disabled?: boolean
 }
 
-export interface StepperProps<T extends StepperItem> extends Pick<StepperRootProps, 'linear'> {
+export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<StepperRootProps, 'linear'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -50,7 +50,7 @@ export type StepperEmits<T> = Omit<StepperRootEmits, 'update:modelValue'> & {
 
 type SlotProps<T extends StepperItem> = (props: { item: T }) => any
 
-export type StepperSlots<T extends StepperItem> = {
+export type StepperSlots<T extends StepperItem = StepperItem> = {
   indicator: SlotProps<T>
   title: SlotProps<T>
   description: SlotProps<T>
@@ -96,7 +96,7 @@ const currentStepIndex = computed({
   }
 })
 
-const currentStep = computed(() => props.items?.[currentStepIndex.value] as T)
+const currentStep = computed(() => props.items?.[currentStepIndex.value])
 const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1)
 const hasPrev = computed(() => currentStepIndex.value > 0)
 
@@ -163,7 +163,7 @@ defineExpose({
 
     <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot]) || (currentStep?.value && !!slots[currentStep.value])" :class="ui.content({ class: props.ui?.description })">
       <slot
-        :name="!!slots[currentStep?.slot ?? currentStep.value] ? currentStep.slot ?? currentStep.value : 'content'"
+        :name="!!slots[currentStep?.slot ?? currentStep.value!] ? currentStep.slot ?? currentStep.value : 'content'"
         :item="currentStep"
       >
         {{ currentStep?.content }}
