@@ -93,3 +93,7 @@ provide('navigation', mappedNavigation)
     </template>
   </UApp>
 </template>
+
+<style>
+/* Safelist (do not remove): [&>div]:*:my-0 [&>div]:*:w-full h-64 !px-0 !py-0 !pt-0 !pb-0 !p-0 !justify-start !min-h-96 h-136 */
+</style>
