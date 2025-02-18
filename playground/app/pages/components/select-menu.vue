@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { SelectMenuItem } from '@nuxt/ui'
+
 import { upperFirst } from 'scule'
 import { refDebounced } from '@vueuse/core'
 import theme from '#build/ui/select-menu'
@@ -33,7 +35,7 @@ const statuses = [{
   label: 'Canceled',
   value: 'canceled',
   icon: 'i-lucide-circle-x'
-}]
+}] satisfies SelectMenuItem[]
 
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
@@ -41,7 +43,7 @@ const searchTermDebounced = refDebounced(searchTerm, 200)
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   params: { q: searchTermDebounced },
   transform: (data: User[]) => {
-    return data?.map(user => ({ id: user.id, label: user.name, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []
+    return data?.map(user => ({ id: user.id, label: user.name, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } }))
   },
   lazy: true
 })
@@ -122,7 +124,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         v-for="size in sizes"
         :key="size"
         v-model:search-term="searchTerm"
-        :items="users || []"
+        :items="users"
         :loading="status === 'pending'"
         ignore-filter
         icon="i-lucide-user"

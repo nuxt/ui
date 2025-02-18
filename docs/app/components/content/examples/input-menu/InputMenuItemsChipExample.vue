@@ -6,21 +6,21 @@ const items = ref([
     label: 'bug',
     value: 'bug',
     chip: {
-      color: 'error' as const
+      color: 'error'
     }
   },
   {
     label: 'feature',
     value: 'feature',
     chip: {
-      color: 'success' as const
+      color: 'success'
     }
   },
   {
     label: 'enhancement',
     value: 'enhancement',
     chip: {
-      color: 'info' as const
+      color: 'info'
     }
   }
 ] satisfies InputMenuItem[])

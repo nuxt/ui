@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { SelectItem } from '@nuxt/ui'
 import { upperFirst } from 'scule'
 import theme from '#build/ui/select'
 import type { User } from '~/types'
@@ -32,7 +33,7 @@ const statuses = [{
   label: 'Canceled',
   value: 'canceled',
   icon: 'i-lucide-circle-x'
-}]
+}] satisfies SelectItem[]
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   transform: (data: User[]) => {

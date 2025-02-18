@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { InputMenuItem } from '@nuxt/ui'
+
 import { upperFirst } from 'scule'
 import { refDebounced } from '@vueuse/core'
 import type { User } from '~/types'
@@ -28,7 +30,7 @@ const statuses = [{
 }, {
   label: 'Canceled',
   icon: 'i-lucide-circle-x'
-}]
+}] satisfies InputMenuItem[]
 
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
