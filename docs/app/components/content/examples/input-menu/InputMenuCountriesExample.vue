@@ -16,7 +16,7 @@ function onOpen() {
 
 <template>
   <UInputMenu
-    :items="countries || []"
+    :items="countries"
     :loading="status === 'pending'"
     label-key="name"
     :search-input="{ icon: 'i-lucide-search' }"

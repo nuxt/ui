@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { InputMenuItem } from '@nuxt/ui'
+
 const items = ref([
   {
     label: 'bug',
@@ -21,7 +23,8 @@ const items = ref([
       color: 'info' as const
     }
   }
-])
+] satisfies InputMenuItem[])
+
 const value = ref(items.value[0])
 </script>
 
