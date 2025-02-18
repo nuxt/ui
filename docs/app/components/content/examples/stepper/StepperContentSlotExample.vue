@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const items = [
+import type { StepperItem } from '@nuxt/ui'
+
+const items: StepperItem[] = [
   {
     title: 'Address',
     description: 'Add your address here',

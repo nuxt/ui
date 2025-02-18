@@ -30,6 +30,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   items:
     - title: 'Address'
@@ -60,6 +62,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   color: neutral
   items:
@@ -87,6 +91,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   size: xl
   items:
@@ -114,6 +120,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   orientation: vertical
   items:
@@ -141,6 +149,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   disabled: true
   items:
