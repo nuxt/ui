@@ -22,11 +22,12 @@ export interface TabsItem {
   /** A unique value for the tab item. Defaults to the index. */
   value?: string | number
   disabled?: boolean
+  [key: string]: any
 }
 
 type TabsVariants = VariantProps<typeof tabs>
 
-export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'> {
+export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -57,9 +58,9 @@ export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defa
 
 export interface TabsEmits extends TabsRootEmits<string | number> {}
 
-type SlotProps<T> = (props: { item: T, index: number }) => any
+type SlotProps<T extends TabsItem> = (props: { item: T, index: number }) => any
 
-export type TabsSlots<T extends { slot?: string }> = {
+export type TabsSlots<T extends TabsItem = TabsItem> = {
   leading: SlotProps<T>
   default: SlotProps<T>
   trailing: SlotProps<T>
