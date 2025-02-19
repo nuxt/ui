@@ -208,9 +208,9 @@ async function onSubmitWrapper(payload: Event) {
       children: error.children
     }
     emits('error', errorEvent)
+  } finally {
+    loading.value = false
   }
-
-  loading.value = false
 }
 
 const disabled = computed(() => props.disabled || loading.value)
