@@ -8,7 +8,7 @@ exports[`Modal > renders with body slot correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <!--v-if-->
     <!--v-if--><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -31,7 +31,7 @@ exports[`Modal > renders with class correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border) bg-(--ui-bg-elevated)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <!--v-if-->
     <!--v-if--><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -54,7 +54,7 @@ exports[`Modal > renders with close slot correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <!--v-if-->
     <!--v-if-->Close slot
   </div>
@@ -74,7 +74,7 @@ exports[`Modal > renders with closeIcon correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <!--v-if-->
     <!--v-if--><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -111,7 +111,7 @@ exports[`Modal > renders with default slot correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="reka-dialog-content-v-0-0-0" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <!--v-if-->
     <!--v-if--><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -134,7 +134,7 @@ exports[`Modal > renders with description correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
     <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -157,7 +157,7 @@ exports[`Modal > renders with description slot correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <!--v-if-->
     <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description slot</p><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -180,7 +180,7 @@ exports[`Modal > renders with footer slot correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <!--v-if-->
     <!--v-if--><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -203,7 +203,7 @@ exports[`Modal > renders with fullscreen correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] inset-0">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
     <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -226,7 +226,7 @@ exports[`Modal > renders with header slot correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">Header slot</div>
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">Header slot</div>
   <!--v-if-->
   <!--v-if-->
 </div>
@@ -243,7 +243,7 @@ exports[`Modal > renders with open correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)" style="pointer-events: auto;">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <!--v-if-->
     <!--v-if--><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -266,7 +266,7 @@ exports[`Modal > renders with title correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
     <!--v-if--><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -289,7 +289,7 @@ exports[`Modal > renders with title slot correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title slot</h2>
     <!--v-if--><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -312,7 +312,7 @@ exports[`Modal > renders with ui correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <!--v-if-->
     <!--v-if--><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-2"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -335,7 +335,7 @@ exports[`Modal > renders without close correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
     <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p>
   </div>
@@ -355,7 +355,7 @@ exports[`Modal > renders without overlay correctly 1`] = `
 <!--v-if-->
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none data-[state=open]:animate-[scale-in_200ms_ease-out] data-[state=closed]:animate-[scale-out_200ms_ease-in] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
     <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
@@ -378,7 +378,7 @@ exports[`Modal > renders without transition correctly 1`] = `
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75"></div>
 <div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) flex flex-col focus:outline-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] rounded-[calc(var(--ui-radius)*2)] shadow-lg ring ring-(--ui-border)">
   <!--v-if-->
-  <div class="px-4 py-5 sm:px-6">
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
     <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p><button type="button" aria-label="Close" class="rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
