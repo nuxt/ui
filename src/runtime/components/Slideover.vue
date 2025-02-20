@@ -40,7 +40,7 @@ export interface SlideoverProps extends DialogRootProps {
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -146,17 +146,19 @@ const ui = computed(() => slideover({
         <slot name="content">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
             <slot name="header">
-              <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
-                <slot name="title">
-                  {{ title }}
-                </slot>
-              </DialogTitle>
+              <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+                <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+                  <slot name="title">
+                    {{ title }}
+                  </slot>
+                </DialogTitle>
 
-              <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
-                <slot name="description">
-                  {{ description }}
-                </slot>
-              </DialogDescription>
+                <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+                  <slot name="description">
+                    {{ description }}
+                  </slot>
+                </DialogDescription>
+              </div>
 
               <DialogClose as-child>
                 <slot name="close" :ui="ui">
@@ -167,7 +169,7 @@ const ui = computed(() => slideover({
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('slideover.close')"
-                    v-bind="typeof close === 'object' ? close : undefined"
+                    v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
                     :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>

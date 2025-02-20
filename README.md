@@ -106,7 +106,7 @@ Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/inst
 - [nuxt/icon](https://github.com/nuxt/icon)
 - [nuxt/fonts](https://github.com/nuxt/fonts)
 - [nuxt-modules/color-mode](https://github.com/nuxt-modules/color-mode)
-- [unovue/radix-vue](https://github.com/unovue/radix-vue)
+- [unovue/reka-ui](https://github.com/unovue/reka-ui)
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss)
 - [vueuse/vueuse](https://github.com/vueuse/vueuse)
 
