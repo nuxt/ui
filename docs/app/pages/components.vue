@@ -25,46 +25,40 @@ const componentsPerCategory = computed(() => {
   }, {} as Record<string, any[]>)
 })
 
-const categories = [
-  {
-    category: 'layout',
-    title: 'Layout',
-    description: 'Headers, footers, and other layout components.'
-  },
-  {
-    category: 'form',
-    title: 'Form',
-    description: 'Input fields, checkboxes, and other form components.'
-  },
-  {
-    category: 'element',
-    title: 'Element',
-    description: 'Buttons, icons, and other visual elements.'
-  },
-  {
-    category: 'data',
-    title: 'Data',
-    description: 'Tables, lists, and other content related components.'
-  },
-  {
-    category: 'navigation',
-    title: 'Navigation',
-    description: 'Menus, breadcrumbs, and other navigation components.'
-  },
-  {
-    category: 'overlay',
-    title: 'Overlay',
-    description: 'Modals, tooltips, and other overlay components.'
-  }
-]
+const categories = [{
+  category: 'layout',
+  title: 'Layout',
+  description: 'Structural components for organizing content, including containers, grids, dividers, and responsive layout systems.'
+}, {
+  category: 'form',
+  title: 'Form',
+  description: 'Interactive form elements including inputs, selects, checkboxes, radio buttons, and advanced form validation components.'
+}, {
+  category: 'element',
+  title: 'Element',
+  description: 'Core UI building blocks like buttons, badges, icons, avatars, and other fundamental interface elements.'
+}, {
+  category: 'data',
+  title: 'Data',
+  description: 'Components for displaying and managing data, including tables, lists, cards, data grids, and visualization elements.'
+}, {
+  category: 'navigation',
+  title: 'Navigation',
+  description: 'Components for user navigation and wayfinding, including menus, breadcrumbs, pagination, and navigation bars.'
+}, {
+  category: 'overlay',
+  title: 'Overlay',
+  description: 'Floating UI elements like modals, dialogs, tooltips, popovers, and other components that overlay the main content.'
+}]
 </script>
 
 <template>
   <UMain>
     <UPageHero
-      description="Build your Vue or Nuxt application faster with Nuxt UI and Nuxt UI Pro components. Powered by Tailwind CSS and  Reka UI, all the components are responsive & customizable."
+      description="Build your Vue or Nuxt application faster with Nuxt UI and Nuxt UI Pro components. Powered by Tailwind CSS and Reka UI, delivering responsive and customizable components."
       class="relative"
       orientation="vertical"
+      :ui="{ title: 'text-balance' }"
     >
       <template #headline>
         <UButton
@@ -74,10 +68,11 @@ const categories = [
           variant="subtle"
           color="neutral"
           icon="i-logos-tailwindcss-icon"
+          class="rounded-full"
         />
       </template>
       <template #title>
-        Craft your UI with <span class="text-(--ui-primary)">{{ components!.length }} components</span>.
+        Build beautiful UI with <span class="text-(--ui-primary)">{{ components!.length }}+</span> powerful components
       </template>
       <template #links>
         <UButton
@@ -116,13 +111,13 @@ const categories = [
             :ui="{ wrapper: 'order-last' }"
           >
             <template #title>
-              <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
                 <span>{{ component.title }}</span>
                 <UBadge v-if="component.module === 'ui-pro'" label="PRO" size="sm" variant="subtle" />
               </div>
             </template>
             <div class="group rounded-(--ui-radius) border border-(--ui-border) overflow-hidden aspect-[16/9]">
-              <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="inline-block group-hover:scale-105 transition-transform" />
+              <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="group-hover:scale-105 transition-transform" />
             </div>
           </UPageCard>
         </UPageGrid>
