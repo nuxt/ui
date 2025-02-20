@@ -39,7 +39,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -169,7 +169,7 @@ defineExpose({
             color="neutral"
             variant="link"
             :aria-label="t('toast.close')"
-            v-bind="typeof close === 'object' ? close : undefined"
+            v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
             :class="ui.close({ class: props.ui?.close })"
             @click.stop
           />
