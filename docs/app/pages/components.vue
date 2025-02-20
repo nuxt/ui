@@ -97,8 +97,9 @@ const categories = [{
         <StarsBg />
       </template>
     </UPageHero>
+
     <UContainer>
-      <div v-for="category in categories" :key="category.category">
+      <template v-for="category in categories" :key="category.category">
         <UPageHeader :title="category.title" :description="category.description" class="mb-8" />
         <UPageGrid class="xl:grid-cols-4 pb-24">
           <UPageCard
@@ -108,7 +109,7 @@ const categories = [{
             :title="component.title"
             :description="component.description"
             :to="component.path"
-            :ui="{ wrapper: 'order-last' }"
+            :ui="{ wrapper: 'order-last', container: 'lg:flex' }"
           >
             <template #title>
               <div class="flex items-center gap-1.5">
@@ -116,12 +117,13 @@ const categories = [{
                 <UBadge v-if="component.module === 'ui-pro'" label="PRO" size="sm" variant="subtle" />
               </div>
             </template>
-            <div class="group rounded-(--ui-radius) border border-(--ui-border) overflow-hidden aspect-[16/9]">
-              <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="group-hover:scale-105 transition-transform" />
+
+            <div class="group rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border) overflow-hidden aspect-[16/9]">
+              <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="group-hover:scale-105 transition-transform size-full" />
             </div>
           </UPageCard>
         </UPageGrid>
-      </div>
+      </template>
     </UContainer>
   </UMain>
 </template>
