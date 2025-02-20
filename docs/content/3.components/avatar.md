@@ -1,5 +1,6 @@
 ---
 description: An img element with fallback and Nuxt Image support.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github

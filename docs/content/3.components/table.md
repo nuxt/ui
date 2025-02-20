@@ -1,5 +1,6 @@
 ---
 description: A responsive table element to display data in rows and columns.
+category: data
 links:
   - label: TanStack Table
     avatar:
