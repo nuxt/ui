@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // @ts-expect-error yaml is not typed
 import page from '.content/pro.yml'
+// @ts-expect-error yaml is not typed
 import templatesPage from '.content/templates.yml'
 
 useSeoMeta({
