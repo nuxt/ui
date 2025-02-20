@@ -9,8 +9,7 @@ export function useLinks() {
   }, {
     label: 'Components',
     icon: 'i-lucide-square-code',
-    to: '/components',
-    active: route.path.startsWith('/components')
+    to: '/components'
   }, {
     label: 'Pro',
     icon: 'i-lucide-panels-top-left',
