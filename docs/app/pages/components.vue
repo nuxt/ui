@@ -3,6 +3,17 @@ definePageMeta({
   layout: 'docs'
 })
 
+useSeoMeta({
+  titleTemplate: `%s - Nuxt UI`,
+  title: 'Vue Components',
+  ogTitle: 'Vue Components - Nuxt UI',
+  description: 'Discover all the UI components available in both Nuxt UI and Nuxt UI Pro.'
+})
+
+defineOgImageComponent('Docs', {
+  headline: 'Documentation'
+})
+
 const { data: components } = await useAsyncData('components', () => {
   return queryCollection('content')
     .where('path', 'LIKE', '/components/%')
@@ -15,7 +26,7 @@ const { data: components } = await useAsyncData('components', () => {
 <template>
   <UContainer>
     <UPage>
-      <UPageHeader title="Components" description="Discover all the components available in both Nuxt UI and Nuxt UI Pro." />
+      <UPageHeader title="Vue Components" description="Discover all the UI components available in both Nuxt UI and Nuxt UI Pro." />
       <UPageBody>
         <UPageGrid>
           <UPageCard
