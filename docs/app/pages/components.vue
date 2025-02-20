@@ -27,7 +27,14 @@ const { data: components } = await useAsyncData('components', () => {
       class="relative"
     >
       <template #headline>
-        <UBadge label="Made with Tailwind CSS" size="lg" variant="outline" color="neutral" icon="i-logos-tailwindcss-icon" />
+        <UButton
+          to="https://tailwindcss.com"
+          label="Made with Tailwind CSS v4"
+          size="md"
+          variant="subtle"
+          color="neutral"
+          icon="i-logos-tailwindcss-icon"
+        />
       </template>
       <template #links>
         <UButton
@@ -53,7 +60,7 @@ const { data: components } = await useAsyncData('components', () => {
       </template>
     </UPageHero>
     <UContainer>
-      <UPageGrid class="xl:grid-cols-4 mb-12">
+      <UPageGrid class="xl:grid-cols-4 pb-24">
         <UPageCard
           v-for="component in components"
           :key="component.path"
@@ -69,7 +76,7 @@ const { data: components } = await useAsyncData('components', () => {
               <UBadge v-if="component.module === 'ui-pro'" label="PRO" size="sm" variant="subtle" />
             </div>
           </template>
-          <div class="group rounded-(--ui-radius) border border-(--ui-border) overflow-hidden aspect-[16/9] bg-(--ui-bg-muted)">
+          <div class="group rounded-(--ui-radius) border border-(--ui-border) overflow-hidden aspect-[16/9] bg-slate-100 dark:bg-slate-950">
             <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="inline-block group-hover:scale-105 transition-transform" />
           </div>
         </UPageCard>
