@@ -131,9 +131,9 @@ const categories = [{
             :ui="{ wrapper: 'order-last', container: 'lg:flex' }"
           >
             <template #title>
-              <div class="flex items-center gap-1.5">
+              <div class="flex items-center gap-0.5">
                 <span>{{ component.title }}</span>
-                <UBadge v-if="component.module === 'ui-pro'" label="PRO" size="sm" variant="subtle" />
+                <sup v-if="component.module === 'ui-pro'" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
               </div>
             </template>
 
