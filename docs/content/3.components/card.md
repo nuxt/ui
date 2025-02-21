@@ -1,5 +1,6 @@
 ---
 description: Display content in a card with a header, body and footer.
+category: layout
 links:
   - label: GitHub
     icon: i-simple-icons-github

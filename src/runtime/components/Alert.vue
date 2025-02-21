@@ -39,7 +39,7 @@ export interface AlertProps {
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -131,7 +131,7 @@ const ui = computed(() => alert({
           color="neutral"
           variant="link"
           :aria-label="t('alert.close')"
-          v-bind="typeof close === 'object' ? close : undefined"
+          v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"
         />

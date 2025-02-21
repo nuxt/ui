@@ -116,9 +116,13 @@ const communityLinks = computed(() => [{
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title">
+    <UPageHeader>
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
+      </template>
+
+      <template #title>
+        {{ page.title }}<sup v-if="page.module === 'ui-pro'" class="text-xs align-super font-medium text-(--ui-primary)">PRO</sup>
       </template>
 
       <template #description>
