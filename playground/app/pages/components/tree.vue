@@ -41,7 +41,8 @@ const itemsWithMappedId = [
   { id: 'id3', title: 'obiwan kenobi' }
 ]
 
-const value = ref([])
+const modelValue = ref<TreeItem>()
+const modelValues = ref<TreeItem[]>([])
 </script>
 
 <template>
@@ -52,7 +53,7 @@ const value = ref([])
     </div>
 
     <UTree
-      v-model="value"
+      v-model="modelValues"
       :items="items"
       :color="color"
       :size="size"

@@ -25,7 +25,6 @@ export type TreeItem = {
   children?: TreeItem[]
   onToggle?(e: Event): void
   onSelect?(e?: Event): void
-  [key: string]: any
 }
 
 export interface TreeProps<T extends TreeItem, M extends boolean = false, K extends SelectItemKey<T> | undefined = undefined> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled'> {
@@ -63,7 +62,7 @@ export interface TreeProps<T extends TreeItem, M extends boolean = false, K exte
   collapsedIcon?: string
   items?: T[]
   /** The controlled value of the Tree. Can be bind as `v-model`. */
-  modelValue?: Partial<MaybeMultipleModelValue<T, M>>
+  modelValue?: MaybeMultipleModelValue<T, M>
   /** The value of the Tree when initially rendered. Use when you do not need to control the state of the Tree. */
   defaultValue?: MaybeMultipleModelValue<T, M>
   /** Whether multiple options can be selected or not. */
@@ -184,8 +183,8 @@ const defaultExpanded = computed(() => props.defaultExpanded ?? props.items?.fla
         @select="item.onSelect"
       >
         <button :disabled="item.disabled || disabled" :class="ui.link({ class: props.ui?.link, selected: isSelected })">
-          <slot :name="item.slot || 'item'" v-bind="{ item: item as T, index: item.index, level: item.level, expanded: isExpanded, selected: isSelected }">
-            <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" v-bind="{ item: item, index: item.index, level: item.level, expanded: isExpanded, selected: isSelected }">
+          <slot :name="item.slot || 'item'" v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }">
+            <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }">
               <UIcon
                 v-if="item.icon"
                 :name="item.icon"
@@ -199,13 +198,13 @@ const defaultExpanded = computed(() => props.defaultExpanded ?? props.items?.fla
             </slot>
 
             <span v-if="getItemLabel(item) || !!slots[item.slot ? `${item.slot}-label`: 'item-label']" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
-              <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" v-bind="{ item: item, index: item.index, level: item.level, expanded: isExpanded, selected: isSelected }">
+              <slot :name="item.slot ? `${item.slot}-label`: 'item-label'" v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }">
                 {{ getItemLabel(item) }}
               </slot>
             </span>
 
             <span v-if="item.trailingIcon || item.children?.length || !!slots[item.slot ? `${item.slot}-trailing`: 'item-trailing']" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
-              <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" v-bind="{ item: item, index: item.index, level: item.level, expanded: isExpanded, selected: isSelected }">
+              <slot :name="item.slot ? `${item.slot}-trailing`: 'item-trailing'" v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }">
                 <UIcon v-if="item.trailingIcon" :name="item.trailingIcon" :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon })" />
                 <UIcon v-else-if="item.children?.length" :name="trailingIcon ?? appConfig.ui.icons.chevronDown" :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon })" />
               </slot>
