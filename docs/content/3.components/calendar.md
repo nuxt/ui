@@ -1,6 +1,7 @@
 ---
 title: Calendar
 description: A calendar component for selecting single dates, multiple dates or date ranges.
+category: element
 links:
   - label: Calendar
     icon: i-custom-reka-ui

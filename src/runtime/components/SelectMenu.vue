@@ -168,6 +168,8 @@ import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 import UInput from './Input.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   portal: true,
   searchInput: true,
@@ -331,7 +333,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
   <ComboboxRoot
     :id="id"
     v-slot="{ modelValue, open }"
-    v-bind="{ ...rootProps, ...ariaAttrs }"
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     ignore-filter
     as-child
     :name="name"

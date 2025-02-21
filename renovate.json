@@ -9,7 +9,6 @@
     "valibot30",
     "valibot31",
     "typescript",
-    "vite",
     "vue-tsc"
   ],
   "baseBranches": ["dev", "v3"],

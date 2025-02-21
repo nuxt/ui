@@ -25,7 +25,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0' }" mode="drawer" :menu="{ shouldScaleBackground: true }">
+  <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0" aria-label="Nuxt UI">
         <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
@@ -89,7 +89,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
           <span class="inline-flex items-center gap-0.5">
             {{ link.title }}
 
-            <sup v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
+            <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
           </span>
         </template>
       </UContentNavigation>

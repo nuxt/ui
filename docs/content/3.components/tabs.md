@@ -1,5 +1,6 @@
 ---
 description: A set of tab panels that are displayed one at a time.
+category: navigation
 links:
   - label: Tabs
     icon: i-custom-reka-ui

@@ -79,7 +79,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -263,7 +263,7 @@ const groups = computed(() => {
               color="neutral"
               variant="ghost"
               :aria-label="t('commandPalette.close')"
-              v-bind="typeof close === 'object' ? close : undefined"
+              v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
               :class="ui.close({ class: props.ui?.close })"
               @click="emits('update:open', false)"
             />

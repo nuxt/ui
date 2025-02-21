@@ -59,6 +59,8 @@ import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import UIcon from './Icon.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = defineProps<SwitchProps>()
 const slots = defineSlots<SwitchSlots>()
 const emits = defineEmits<SwitchEmits>()
@@ -93,7 +95,7 @@ function onUpdate(value: any) {
     <div :class="ui.container({ class: props.ui?.container })">
       <SwitchRoot
         :id="id"
-        v-bind="{ ...rootProps, ...ariaAttrs }"
+        v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"
