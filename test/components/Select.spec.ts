@@ -68,6 +68,7 @@ describe('Select', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
+    ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with class', { props: { ...props, class: 'rounded-full' } }],
     ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],
     // Slots

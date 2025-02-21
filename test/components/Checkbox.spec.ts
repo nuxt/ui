@@ -25,6 +25,7 @@ describe('Checkbox', () => {
     ['with description', { props: { label: 'Label', description: 'Description' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: true } }],
+    ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'inline-flex' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],

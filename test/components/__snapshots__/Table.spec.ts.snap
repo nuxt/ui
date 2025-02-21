@@ -272,8 +272,8 @@ exports[`Table > renders with columns correctly 1`] = `
     <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
       <tr class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-(--ui-text-highlighted) text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
-          <div class="relative flex items-start" arialabel="Select all">
-            <div class="flex items-center h-5"><button class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+          <div class="relative flex items-start">
+            <div class="flex items-center h-5"><button arialabel="Select all" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!---->
               </button></div>
@@ -297,8 +297,8 @@ exports[`Table > renders with columns correctly 1`] = `
     <tbody class="divide-y divide-(--ui-border)">
       <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
         <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="relative flex items-start" arialabel="Select row">
-            <div class="flex items-center h-5"><button class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+          <div class="relative flex items-start">
+            <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!---->
               </button></div>
@@ -328,8 +328,8 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
         <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="relative flex items-start" arialabel="Select row">
-            <div class="flex items-center h-5"><button class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+          <div class="relative flex items-start">
+            <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!---->
               </button></div>
@@ -359,8 +359,8 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
         <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="relative flex items-start" arialabel="Select row">
-            <div class="flex items-center h-5"><button class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+          <div class="relative flex items-start">
+            <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!---->
               </button></div>
@@ -390,8 +390,8 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
         <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="relative flex items-start" arialabel="Select row">
-            <div class="flex items-center h-5"><button class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+          <div class="relative flex items-start">
+            <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!---->
               </button></div>
@@ -421,8 +421,8 @@ exports[`Table > renders with columns correctly 1`] = `
       <!--v-if-->
       <tr data-selected="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
         <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
-          <div class="relative flex items-start" arialabel="Select row">
-            <div class="flex items-center h-5"><button class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+          <div class="relative flex items-start">
+            <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
                 <!---->
               </button></div>

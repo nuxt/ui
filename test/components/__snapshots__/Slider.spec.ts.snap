@@ -1,5 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Slider > renders with ariaLabel correctly 1`] = `
+"<span data-slider-impl="" dir="ltr" data-orientation="horizontal" style="--reka-slider-thumb-transform: translateX(-50%);" class="relative flex items-center select-none touch-none w-full" aria-label="Aria label" aria-disabled="false"><span data-orientation="horizontal" class="relative bg-(--ui-bg-accented) overflow-hidden rounded-full grow h-[8px]"><span data-orientation="horizontal" style="left: 0%; right: 100%;" class="absolute rounded-full bg-(--ui-primary) h-full"></span></span>
+<div class="rounded-full bg-(--ui-bg) ring-2 focus-visible:outline-2 focus-visible:outline-offset-2 ring-(--ui-primary) focus-visible:outline-(--ui-primary)/50 size-4" role="slider" tabindex="0" data-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-orientation="horizontal" style="transform: var(--reka-slider-thumb-transform); position: absolute; left: calc(0% + 0px);" data-reka-collection-item="" aria-valuenow="0"></div>
+<!----></span>"
+`;
+
 exports[`Slider > renders with as correctly 1`] = `
 "<section data-slider-impl="" dir="ltr" data-orientation="horizontal" style="--reka-slider-thumb-transform: translateX(-50%);" class="relative flex items-center select-none touch-none w-full" aria-disabled="false"><span data-orientation="horizontal" class="relative bg-(--ui-bg-accented) overflow-hidden rounded-full grow h-[8px]"><span data-orientation="horizontal" style="left: 0%; right: 100%;" class="absolute rounded-full bg-(--ui-primary) h-full"></span></span>
   <div class="rounded-full bg-(--ui-bg) ring-2 focus-visible:outline-2 focus-visible:outline-offset-2 ring-(--ui-primary) focus-visible:outline-(--ui-primary)/50 size-4" role="slider" tabindex="0" data-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-orientation="horizontal" style="transform: var(--reka-slider-thumb-transform); position: absolute; left: calc(0% + 0px);" data-reka-collection-item="" aria-valuenow="0"></div>

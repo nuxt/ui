@@ -57,6 +57,8 @@ import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import UIcon from './Icon.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = defineProps<CheckboxProps>()
 const slots = defineSlots<CheckboxSlots>()
 const emits = defineEmits<CheckboxEmits>()
@@ -92,7 +94,7 @@ function onUpdate(value: any) {
     <div :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
-        v-bind="{ ...rootProps, ...ariaAttrs }"
+        v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
         :disabled="disabled"

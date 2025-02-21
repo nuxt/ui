@@ -41,8 +41,6 @@ import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 
-defineOptions({ inheritAttrs: false })
-
 const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
   length: 5
@@ -89,7 +87,6 @@ function onBlur(event: FocusEvent) {
       :key="ids"
       :index="index"
       :class="ui.base({ class: props.ui?.base })"
-      v-bind="$attrs"
       :disabled="disabled"
       @blur="onBlur"
       @focus="emitFormFocus"

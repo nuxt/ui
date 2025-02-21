@@ -1,5 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Input > renders with ariaLabel correctly 1`] = `
+"<div class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-label="Aria label">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Input > renders with as correctly 1`] = `
 "<section class="relative inline-flex items-center"><input type="text" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off">
   <!--v-if-->

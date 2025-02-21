@@ -156,8 +156,8 @@ importers:
         specifier: ^0.8.4
         version: 0.8.4(@nuxt/kit@3.15.4(magicast@0.3.5)(rollup@4.32.1))(nuxi@3.21.1)(typescript@5.6.3)(vue-tsc@2.2.0(typescript@5.6.3))
       '@nuxt/test-utils':
-        specifier: ^3.15.4
-        version: 3.15.4(@types/node@22.13.4)(@vue/test-utils@2.4.6)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(magicast@0.3.5)(playwright-core@1.50.1)(rollup@4.32.1)(terser@5.39.0)(typescript@5.6.3)(vitest@3.0.6(@types/debug@4.1.12)(@types/node@22.13.4)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
+        specifier: ^3.17.0
+        version: 3.17.0(@types/node@22.13.4)(@vue/test-utils@2.4.6)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(magicast@0.3.5)(playwright-core@1.50.1)(rollup@4.32.1)(terser@5.39.0)(typescript@5.6.3)(vitest@3.0.6(@types/debug@4.1.12)(@types/node@22.13.4)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
       '@release-it/conventional-changelog':
         specifier: ^10.0.0
         version: 10.0.0(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.1.0)(release-it@18.1.2(@types/node@22.13.4)(typescript@5.6.3))
@@ -1550,8 +1550,8 @@ packages:
     engines: {node: '>=18.12.0'}
     hasBin: true
 
-  '@nuxt/test-utils@3.15.4':
-    resolution: {integrity: sha512-R5eNXILsB5GCTMgoKdW3rN9rNBQCVBqxw4+tcujNplcivbJp7lQrRMHlbR9ijAJ1jEMkDNXdOQGbM1RnWvDuuQ==}
+  '@nuxt/test-utils@3.17.0':
+    resolution: {integrity: sha512-NfKES2wGXxV8bNec30W0+rjegy7azFxXT7TJZ3SIcg6CxWQiO8Q+Xh743UnoqPw2WF03GNEndovf6AqwIRjNJQ==}
     engines: {node: ^18.20.5 || ^20.9.0 || ^22.0.0 || >=23.0.0}
     peerDependencies:
       '@cucumber/cucumber': ^10.3.1 || ^11.0.0
@@ -1560,10 +1560,10 @@ packages:
       '@testing-library/vue': ^7.0.0 || ^8.0.1
       '@vitest/ui': '*'
       '@vue/test-utils': ^2.4.2
-      happy-dom: ^9.10.9 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+      happy-dom: ^9.10.9 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
       jsdom: ^22.0.0 || ^23.0.0 || ^24.0.0 || ^25.0.0 || ^26.0.0
       playwright-core: ^1.43.1
-      vitest: ^0.34.6 || ^1.0.0 || ^2.0.0 || ^3.0.0-beta.3
+      vitest: ^0.34.6 || ^1.0.0 || ^2.0.0 || ^3.0.0
     peerDependenciesMeta:
       '@cucumber/cucumber':
         optional: true
@@ -8360,7 +8360,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxt/test-utils@3.15.4(@types/node@22.13.4)(@vue/test-utils@2.4.6)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(magicast@0.3.5)(playwright-core@1.50.1)(rollup@4.32.1)(terser@5.39.0)(typescript@5.6.3)(vitest@3.0.6(@types/debug@4.1.12)(@types/node@22.13.4)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)':
+  '@nuxt/test-utils@3.17.0(@types/node@22.13.4)(@vue/test-utils@2.4.6)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(magicast@0.3.5)(playwright-core@1.50.1)(rollup@4.32.1)(terser@5.39.0)(typescript@5.6.3)(vitest@3.0.6(@types/debug@4.1.12)(@types/node@22.13.4)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)':
     dependencies:
       '@nuxt/kit': 3.15.4(magicast@0.3.5)(rollup@4.32.1)
       '@nuxt/schema': 3.15.4
@@ -14704,7 +14704,7 @@ snapshots:
 
   vitest-environment-nuxt@1.0.1(@types/node@22.13.4)(@vue/test-utils@2.4.6)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(magicast@0.3.5)(playwright-core@1.50.1)(rollup@4.32.1)(terser@5.39.0)(typescript@5.6.3)(vitest@3.0.6(@types/debug@4.1.12)(@types/node@22.13.4)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0):
     dependencies:
-      '@nuxt/test-utils': 3.15.4(@types/node@22.13.4)(@vue/test-utils@2.4.6)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(magicast@0.3.5)(playwright-core@1.50.1)(rollup@4.32.1)(terser@5.39.0)(typescript@5.6.3)(vitest@3.0.6(@types/debug@4.1.12)(@types/node@22.13.4)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
+      '@nuxt/test-utils': 3.17.0(@types/node@22.13.4)(@vue/test-utils@2.4.6)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(magicast@0.3.5)(playwright-core@1.50.1)(rollup@4.32.1)(terser@5.39.0)(typescript@5.6.3)(vitest@3.0.6(@types/debug@4.1.12)(@types/node@22.13.4)(happy-dom@17.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
     transitivePeerDependencies:
       - '@cucumber/cucumber'
       - '@jest/globals'
