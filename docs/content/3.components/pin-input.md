@@ -1,6 +1,7 @@
 ---
 title: PinInput
 description: An input element to enter a pin.
+category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github

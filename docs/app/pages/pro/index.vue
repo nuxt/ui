@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // @ts-expect-error yaml is not typed
 import page from '.content/pro.yml'
+// @ts-expect-error yaml is not typed
+import templatesPage from '.content/templates.yml'
 
 useSeoMeta({
   title: page.title,
@@ -72,12 +74,13 @@ defineOgImageComponent('Docs', {
         arrows
         dots
         :autoplay="{ delay: 3000 }"
-        :items="(page.templates.items as any[])"
+        :items="(templatesPage.templates as any[])"
         :ui="{ item: 'basis-1/2', container: 'py-2' }"
       >
         <UPageCard
-          :to="item.to"
-          :description="item.description"
+          :to="item.links[0].to"
+          target="_blank"
+          variant="subtle"
           class="group"
           :ui="{ container: 'p-4 sm:p-4', title: 'flex items-center gap-1' }"
         >
@@ -87,11 +90,12 @@ defineOgImageComponent('Docs', {
               {{ item.title }}
             </span>
           </template>
-          <img
-            :src="item.image"
+          <UColorModeImage
+            :light="item.thumbnail.light"
+            :dark="item.thumbnail.dark"
             :alt="item.title"
-            class="rounded-lg grayscale group-hover:grayscale-0 transition-all duration-200 ease-in-out"
-          >
+            class="rounded-lg w-full border border-(--ui-border)"
+          />
         </UPageCard>
       </UCarousel>
     </UPageSection>

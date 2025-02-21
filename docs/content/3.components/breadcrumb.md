@@ -1,5 +1,6 @@
 ---
 description: A hierarchy of links to navigate through a website.
+category: navigation
 links:
   - label: GitHub
     icon: i-simple-icons-github

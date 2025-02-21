@@ -1,6 +1,7 @@
 ---
 title: NavigationMenu
 description: A list of links that can be displayed horizontally or vertically.
+category: navigation
 links:
   - label: NavigationMenu
     icon: i-custom-reka-ui

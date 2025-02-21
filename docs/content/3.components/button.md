@@ -1,5 +1,6 @@
 ---
 description: A button element that can act as a link or trigger an action.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,5 +1,6 @@
 ---
 description: A dialog that slides in from any side of the screen.
+category: overlay
 links:
   - label: Dialog
     icon: i-custom-reka-ui

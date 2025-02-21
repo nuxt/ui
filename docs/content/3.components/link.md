@@ -1,5 +1,6 @@
 ---
 description: A wrapper around <NuxtLink> with extra props.
+category: navigation
 links:
   - label: GitHub
     icon: i-simple-icons-github

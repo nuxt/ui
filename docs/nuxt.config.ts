@@ -24,7 +24,7 @@ export default defineNuxtConfig({
         dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
       })
     },
-    '~~/modules/llms/module'
+    'nuxt-llms'
   ],
 
   app: {
@@ -79,8 +79,7 @@ export default defineNuxtConfig({
     '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
     '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
     '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
-    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
-    '/components': { redirect: '/components/app', prerender: false }
+    '/composables': { redirect: '/composables/define-shortcuts', prerender: false }
   },
 
   future: {
@@ -162,38 +161,30 @@ export default defineNuxtConfig({
     domain: 'https://ui3.nuxt.dev',
     title: 'Nuxt UI v3',
     description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
+    full: {
+      title: 'Nuxt UI v3 Full Documentation',
+      description: 'This is the full documentation for Nuxt UI v3. It includes all the Markdown files written with the MDC syntax.'
+    },
     sections: [
       {
         title: 'Getting Started',
-        collection: 'content',
-        filters: [
-          {
-            field: 'path',
-            operator: 'LIKE',
-            value: '/getting-started%'
-          }
+        contentCollection: 'content',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
         ]
       },
       {
         title: 'Components',
-        collection: 'content',
-        filters: [
-          {
-            field: 'path',
-            operator: 'LIKE',
-            value: '/components/%'
-          }
+        contentCollection: 'content',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/components/%' }
         ]
       },
       {
         title: 'Composables',
-        collection: 'content',
-        filters: [
-          {
-            field: 'path',
-            operator: 'LIKE',
-            value: '/composables/%'
-          }
+        contentCollection: 'content',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/composables/%' }
         ]
       }
     ],

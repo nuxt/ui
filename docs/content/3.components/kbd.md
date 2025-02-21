@@ -1,6 +1,7 @@
 ---
 title: Keyboard Key
 description: A kbd element to display a keyboard key.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github

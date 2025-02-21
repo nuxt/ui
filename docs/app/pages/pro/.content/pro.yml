@@ -140,27 +140,6 @@ templates:
   headline: Templates
   title: Kickstart with Nuxt UI Pro in seconds
   description: Choose from a variety of templates to get started with Nuxt UI Pro in seconds. Each template is designed to help you build beautiful and responsive Nuxt applications in minutes.
-  items:
-    - title: Landing
-      description: A template for building a landing page with Nuxt UI Pro.
-      icon: i-lucide-layout
-      to: 'https://landing-template.nuxt.dev/'
-      image: '/pro/templates/landing.png'
-    - title: Saas
-      description: A template for building a SaaS application with Nuxt UI Pro.
-      icon: i-lucide-cloud
-      to: 'https://saas-template.nuxt.dev/'
-      image: '/pro/templates/saas.png'
-    - title: Docs
-      description: A template for building a documentation site with Nuxt UI Pro.
-      icon: i-lucide-book
-      to: 'https://docs-template.nuxt.dev/'
-      image: '/pro/templates/docs.png'
-    - title: Dashboard
-      description: A template for building a dashboard with Nuxt UI Pro.
-      icon: i-lucide-chart-bar
-      to: 'https://dashboard-template.nuxt.dev/'
-      image: '/pro/templates/dashboard.png'
 cta:
   title: Start with Nuxt UI Pro today!
   description: Nuxt UI Pro is free in development, but you need a license to use it in production.

@@ -1,5 +1,6 @@
 ---
 description: A component to display any icon from Iconify.
+category: element
 links:
   - label: Icônes
     to: https://icones.js.org/

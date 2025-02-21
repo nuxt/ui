@@ -1,5 +1,6 @@
 ---
 description: A stacked set of collapsible panels.
+category: data
 links:
   - label: Accordion
     icon: i-custom-reka-ui
