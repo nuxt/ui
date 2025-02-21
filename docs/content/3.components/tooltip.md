@@ -1,5 +1,6 @@
 ---
 description: A popup that reveals information when hovering over an element.
+category: overlay
 links:
   - label: Tooltip
     icon: i-custom-reka-ui
