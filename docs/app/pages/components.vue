@@ -1,9 +1,13 @@
 <script setup lang="ts">
+const title = 'Vue Components'
+const description = 'Explore 99+ customizable UI components for Vue and Nuxt built with Tailwind CSS and Reka UI.'
+
 useSeoMeta({
   titleTemplate: `%s - Nuxt UI`,
-  title: 'Vue Components',
-  ogTitle: 'Vue Components - Nuxt UI',
-  description: 'Discover all the UI components available in both Nuxt UI and Nuxt UI Pro.'
+  title,
+  description,
+  ogTitle: `${title} - Nuxt UI`,
+  ogDescription: description
 })
 
 defineOgImageComponent('Docs', {
@@ -119,7 +123,14 @@ const categories = [{
             </template>
 
             <div class="group rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
-              <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="group-hover:scale-105 transition-transform size-full" :loading="index >= 4 ? 'lazy' : 'eager'" />
+              <UColorModeImage
+                :light="`${component.path.replace('/components/', '/components/light/')}.png`"
+                :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+                class="group-hover:scale-105 transition-transform size-full"
+                :loading="index >= 4 ? 'lazy' : 'eager'"
+                width="640"
+                height="360"
+              />
             </div>
           </UPageCard>
         </UPageGrid>
