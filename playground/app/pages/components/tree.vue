@@ -1,54 +1,38 @@
 <script setup lang="ts">
-import theme from '#build/ui/button'
-import type { TreeItem } from '#ui/types'
+import type { TreeItem } from '@nuxt/ui'
+import theme from '#build/ui/tree'
 
+const colors = Object.keys(theme.variants.color) as Array<keyof typeof theme.variants.color>
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
-const items: TreeItem[] = [{
-  label: 'Settings',
-  defaultOpen: true,
-  children: [{
-    label: 'Organization',
-    defaultOpen: true,
-    children: [
-      { label: 'Members' },
-      { label: 'Profile' }
-    ]
-  }]
-}]
+const color = ref(theme.defaultVariants.color)
+const size = ref(theme.defaultVariants.size)
 
-const devItems: TreeItem[] = [
+const items: TreeItem[] = [
   {
     label: 'app',
-    icon: 'i-lucide-folder',
-    defaultOpen: true,
-    disabled: false,
+    defaultExpanded: true,
+    slot: 'app',
     children: [{
       label: 'composables',
-      icon: 'i-lucide-folder',
-      defaultOpen: true,
+      defaultExpanded: true,
       children: [
-        { label: 'useAuth.ts', icon: 'vscode-icons:file-type-typescript' },
-        { label: 'useUser.ts', icon: 'vscode-icons:file-type-typescript' }
+        { label: 'useAuth.ts', icon: 'i-vscode-icons-file-type-typescript' },
+        { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' }
       ]
-    },
-    {
+    }, {
       label: 'components',
-      icon: 'i-lucide-folder',
-      children: [
-        {
-          label: 'Home',
-          icon: 'i-lucide-folder',
-          children: [
-            { label: 'Card.vue', icon: 'vscode-icons:file-type-vue' },
-            { label: 'Button.vue', icon: 'vscode-icons:file-type-vue' }
-          ]
-        }
-      ]
+      children: [{
+        label: 'Home',
+        children: [
+          { label: 'Card.vue', icon: 'i-vscode-icons-file-type-vue' },
+          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' }
+        ]
+      }]
     }]
   },
-  { label: 'app.vue', icon: 'vscode-icons:file-type-vue' },
-  { label: 'nuxt.config.ts', icon: 'vscode-icons:file-type-nuxt' }
+  { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
+  { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
 ]
 
 const itemsWithMappedId = [
@@ -57,36 +41,25 @@ const itemsWithMappedId = [
   { id: 'id3', title: 'obiwan kenobi' }
 ]
 
-const modelValue = ref<TreeItem>()
-const modelValues = ref<TreeItem[]>()
+const value = ref([])
 </script>
 
 <template>
   <div class="flex flex-col gap-4">
-    <div class="flex justify-center gap-4">
-      <UTree :items="items" parent-icon="i-lucide-chevron-right" icon="i-lucide-dot" :ui="{ itemLeadingIcon: 'group-data-[expanded]:rotate-90 transition-transform duration-200' }" />
-      <UTree :items="items" parent-trailing-icon="i-lucide-chevron-left" trailing-icon="i-lucide-dot" :ui="{ itemTrailingIcon: 'group-data-[expanded]:-rotate-90 transition-transform duration-200' }" />
-
-      <UTree :items="items">
-        <template #item-leading="{ hasChildren, expanded }">
-          <UIcon v-if="hasChildren && expanded" name="i-lucide-folder-open" />
-          <UIcon v-else-if="hasChildren" name="i-lucide-folder" />
-        </template>
-      </UTree>
+    <div class="flex items-center gap-2">
+      <USelect v-model="color" :items="colors" placeholder="Color" />
+      <USelect v-model="size" :items="sizes" placeholder="Size" />
     </div>
 
-    <div class="flex gap-4">
-      <UTree v-model="modelValue" :default-value="modelValue" :items="devItems" />
-      <UTree v-model="modelValues" :items="devItems" multiple @update:model-value="(payload: TreeItem[]) => payload" />
-      <UTree :items="devItems" variant="link" />
-      <UTree v-model="modelValue" :items="devItems" variant="link" disabled />
-      <UTree :items="devItems" color="error" />
-      <UTree :items="devItems" color="neutral" />
-    </div>
-
-    <div class="flex gap-4 justify-center w-full">
-      <UTree v-for="size in sizes" :key="size" :items="devItems" :size="size" />
-    </div>
+    <UTree
+      v-model="value"
+      :items="items"
+      :color="color"
+      :size="size"
+      expanded-icon="i-lucide-chevron-up"
+      collapsed-icon="i-lucide-chevron-down"
+      multiple
+    />
 
     <!-- Typescript tests -->
     <template v-if="false">

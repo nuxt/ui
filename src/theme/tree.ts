@@ -2,90 +2,76 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative',
-    item: [
-      'group relative w-full flex items-center select-none rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75 text-(--ui-text) data-disabled:bg-transparent data-disabled:text-(--ui-text-elevated) outline-none',
-      options.theme.transitions && 'transition-colors before:transition-colors'
-    ],
-    itemLeadingIcon: 'shrink-0',
-    itemTrailing: 'ms-auto inline-flex',
-    itemTrailingIcon: 'shrink-0',
-    itemLabel: 'truncate'
+    root: 'relative isolate',
+    item: '',
+    listWithChildren: 'ms-4.5 border-s border-(--ui-border)',
+    itemWithChildren: 'ps-1.5 -ms-px',
+    link: 'relative group w-full flex items-center text-sm before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    linkLeadingIcon: 'shrink-0',
+    linkLabel: 'truncate',
+    linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
+    linkTrailingIcon: 'shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:ring-2 focus-visible:ring-(--ui-${color})`])),
-      neutral: ''
-    },
-    variant: {
-      pill: {
-        item: 'hover:not-data-disabled:not-data-selected:bg-(--ui-bg-elevated) hover:not-data-disabled:not-data-selected:text-(--ui-text-highlighted)'
-      },
-      link: {
-        item: 'hover:not-data-disabled:not-data-selected:text-(--ui-text-highlighted)'
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
+        link: `focus-visible:before:ring-(--ui-${color})`
+      }])),
+      neutral: {
+        link: 'focus-visible:before:ring-(--ui-border-inverted)'
       }
     },
     size: {
       xs: {
-        root: 'text-xs',
-        item: 'p-0.75 gap-1',
-        itemLeadingIcon: 'size-3',
-        itemTrailingIcon: 'size-3'
+        link: 'px-2 py-1 text-xs gap-1',
+        linkLeadingIcon: 'size-4',
+        linkTrailingIcon: 'size-4'
       },
       sm: {
-        root: 'text-xs',
-        item: 'p-0.75 gap-1.5',
-        itemLeadingIcon: 'size-4.5',
-        itemTrailingIcon: 'size-4.5'
+        link: 'px-2.5 py-1.5 text-xs gap-1.5',
+        linkLeadingIcon: 'size-4',
+        linkTrailingIcon: 'size-4'
       },
       md: {
-        root: 'text-sm',
-        item: 'p-1 gap-1.5',
-        itemLeadingIcon: 'size-4',
-        itemTrailingIcon: 'size-4'
+        link: 'px-2.5 py-1.5 text-sm gap-1.5',
+        linkLeadingIcon: 'size-5',
+        linkTrailingIcon: 'size-5'
       },
       lg: {
-        root: 'text-sm',
-        item: 'p-1.25 gap-1.5',
-        itemLeadingIcon: 'size-4.5',
-        itemTrailingIcon: 'size-4.5'
+        link: 'px-3 py-2 text-sm gap-2',
+        linkLeadingIcon: 'size-5',
+        linkTrailingIcon: 'size-5'
       },
       xl: {
-        root: 'text-base',
-        item: 'p-1.25 gap-1.5',
-        itemLeadingIcon: 'size-5',
-        itemTrailingIcon: 'size-5'
+        link: 'px-3 py-2 text-base gap-2',
+        linkLeadingIcon: 'size-6',
+        linkTrailingIcon: 'size-6'
+      }
+    },
+    selected: {
+      true: {
+        link: 'before:bg-(--ui-bg-elevated)'
+      },
+      false: {
+        link: ['hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50', options.theme.transitions && 'transition-colors before:transition-colors']
       }
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
-    variant: 'pill',
+    selected: true,
     class: {
-      item: `data-selected:bg-(--ui-${color})/10 data-selected:text-(--ui-${color})`
+      link: `text-(--ui-${color})`
     }
   })), {
     color: 'neutral',
-    variant: 'pill',
+    selected: true,
     class: {
-      item: 'data-selected:bg-(--ui-bg-elevated)/50 data-selected:text-(--ui-text-highlighted)'
-    }
-  }, ...(options.theme.colors || []).map((color: string) => ({
-    color,
-    variant: 'link',
-    class: {
-      item: `data-selected:text-(--ui-${color})`
-    }
-  })), {
-    color: 'neutral',
-    variant: 'link',
-    class: {
-      item: 'data-selected:text-(--ui-text-highlighted)'
+      link: 'text-(--ui-text-highlighted)'
     }
   }],
   defaultVariants: {
     color: 'primary',
-    variant: 'pill',
     size: 'md'
   }
 })
