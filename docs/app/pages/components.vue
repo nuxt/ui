@@ -103,7 +103,7 @@ const categories = [{
         <UPageHeader :title="category.title" :description="category.description" class="mb-8" />
         <UPageGrid class="xl:grid-cols-4 pb-24">
           <UPageCard
-            v-for="component in componentsPerCategory[category.category]"
+            v-for="(component, index) in componentsPerCategory[category.category]"
             :key="component.path"
             variant="naked"
             :title="component.title"
@@ -119,7 +119,7 @@ const categories = [{
             </template>
 
             <div class="group rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
-              <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="group-hover:scale-105 transition-transform size-full" loading="lazy" />
+              <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="group-hover:scale-105 transition-transform size-full" :loading="index >= 4 ? 'lazy' : 'eager'" />
             </div>
           </UPageCard>
         </UPageGrid>
