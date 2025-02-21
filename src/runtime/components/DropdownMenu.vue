@@ -15,7 +15,7 @@ const dropdownMenu = tv({ extend: tv(theme), ...(appConfigDropdownMenu.ui?.dropd
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
-export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
+interface DropdownMenuItemBase<K extends {}> extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
   icon?: string
   color?: DropdownMenuVariants['color']
@@ -33,14 +33,15 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   checked?: boolean
   open?: boolean
   defaultOpen?: boolean
-  children?: DropdownMenuItem[] | DropdownMenuItem[][]
+  children?: DropdownMenuItem<K>[] | DropdownMenuItem<K>[][]
   onSelect?(e: Event): void
   onUpdateChecked?(checked: boolean): void
 }
+export type DropdownMenuItem<K extends {} = Record<string, any>> = DropdownMenuItemBase<K> & K
 
-export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>> extends Omit<DropdownMenuRootProps, 'dir'> {
+export interface DropdownMenuProps<T extends {} = Record<string, any>, A extends ArrayOrNested<DropdownMenuItem<T>> = ArrayOrNested<DropdownMenuItem<T>>> extends Omit<DropdownMenuRootProps, 'dir'> {
   size?: DropdownMenuVariants['size']
-  items?: T
+  items?: A
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
@@ -84,15 +85,15 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T extends DropdownMenuItem = DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<I extends DropdownMenuItem<T>, T extends {} = Record<string, any>> = (props: { item: I, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
+export type DropdownMenuSlots<T extends {} = Record<string, any>, A extends ArrayOrNested<DropdownMenuItem<T>> = ArrayOrNested<DropdownMenuItem<T>>, I extends NestedItem<A> = NestedItem<A>> = {
   'default'(props: { open: boolean }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-trailing': SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+  'item': SlotProps<I>
+  'item-leading': SlotProps<I>
+  'item-label': SlotProps<I>
+  'item-trailing': SlotProps<I>
+} & DynamicSlots<I, SlotProps<I>>
 
 extendDevtoolsMeta({
   example: 'DropdownMenuExample',
@@ -144,7 +145,7 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
+<script setup lang="ts" generic="T extends Record<string, any>, A extends ArrayOrNested<DropdownMenuItem<T>>">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
@@ -152,19 +153,19 @@ import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
-const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
+const props = withDefaults(defineProps<DropdownMenuProps<T, A>>(), {
   portal: true,
   modal: true,
   externalIcon: true,
   labelKey: 'label'
 })
 const emits = defineEmits<DropdownMenuEmits>()
-const slots = defineSlots<DropdownMenuSlots<T>>()
+const slots = defineSlots<DropdownMenuSlots<T, A>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
-const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T, A>[string]>
 
 const ui = computed(() => dropdownMenu({
   size: props.size
