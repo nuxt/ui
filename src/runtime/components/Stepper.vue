@@ -8,9 +8,9 @@ import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { DynamicSlots } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { stepper: Partial<typeof theme> } }
+const appConfigStepper = _appConfig as AppConfig & { ui: { stepper: Partial<typeof theme> } }
 
-const stepper = tv({ extend: tv(theme), ...(appConfig.ui?.stepper || {}) })
+const stepper = tv({ extend: tv(theme), ...(appConfigStepper.ui?.stepper || {}) })
 
 type StepperVariants = VariantProps<typeof stepper>
 
@@ -163,7 +163,7 @@ defineExpose({
 
     <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot]) || (currentStep?.value && !!slots[currentStep.value])" :class="ui.content({ class: props.ui?.description })">
       <slot
-        :name="!!slots[currentStep?.slot ?? currentStep.value] ? currentStep.slot ?? currentStep.value : 'content'"
+        :name="!!slots[currentStep?.slot ?? currentStep.value!] ? currentStep.slot ?? currentStep.value : 'content'"
         :item="currentStep"
       >
         {{ currentStep?.content }}

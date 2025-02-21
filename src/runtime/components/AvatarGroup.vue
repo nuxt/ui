@@ -6,9 +6,9 @@ import theme from '#build/ui/avatar-group'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { avatarGroup: Partial<typeof theme> } }
+const appConfigAvatarGroup = _appConfig as AppConfig & { ui: { avatarGroup: Partial<typeof theme> } }
 
-const avatarGroup = tv({ extend: tv(theme), ...(appConfig.ui?.avatarGroup || {}) })
+const avatarGroup = tv({ extend: tv(theme), ...(appConfigAvatarGroup.ui?.avatarGroup || {}) })
 
 type AvatarGroupVariants = VariantProps<typeof avatarGroup>
 

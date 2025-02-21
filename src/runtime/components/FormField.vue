@@ -6,9 +6,9 @@ import theme from '#build/ui/form-field'
 import { tv } from '../utils/tv'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
-const appConfig = _appConfig as AppConfig & { ui: { formField: Partial<typeof theme> } }
+const appConfigFormField = _appConfig as AppConfig & { ui: { formField: Partial<typeof theme> } }
 
-const formField = tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })
+const formField = tv({ extend: tv(theme), ...(appConfigFormField.ui?.formField || {}) })
 
 type FormFieldVariants = VariantProps<typeof formField>
 

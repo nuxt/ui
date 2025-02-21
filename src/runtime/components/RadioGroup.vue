@@ -7,9 +7,9 @@ import theme from '#build/ui/radio-group'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
+const appConfigRadioGroup = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
 
-const radioGroup = tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) })
+const radioGroup = tv({ extend: tv(theme), ...(appConfigRadioGroup.ui?.radioGroup || {}) })
 
 type RadioGroupVariants = VariantProps<typeof radioGroup>
 

@@ -5,6 +5,8 @@ const users = [
   {
     label: 'Benjamin Canac',
     suffix: 'benjamincanac',
+    to: 'https://github.com/benjamincanac',
+    target: '_blank',
     avatar: {
       src: 'https://github.com/benjamincanac.png'
     }
@@ -12,6 +14,8 @@ const users = [
   {
     label: 'Sylvain Marroufin',
     suffix: 'smarroufin',
+    to: 'https://github.com/smarroufin',
+    target: '_blank',
     avatar: {
       src: 'https://github.com/smarroufin.png'
     }
@@ -19,6 +23,8 @@ const users = [
   {
     label: 'Sébastien Chopin',
     suffix: 'atinux',
+    to: 'https://github.com/atinux',
+    target: '_blank',
     avatar: {
       src: 'https://github.com/atinux.png'
     }
@@ -26,6 +32,8 @@ const users = [
   {
     label: 'Romain Hamel',
     suffix: 'romhml',
+    to: 'https://github.com/romhml',
+    target: '_blank',
     avatar: {
       src: 'https://github.com/romhml.png'
     }
@@ -33,6 +41,8 @@ const users = [
   {
     label: 'Haytham A. Salama',
     suffix: 'Haythamasalama',
+    to: 'https://github.com/Haythamasalama',
+    target: '_blank',
     avatar: {
       src: 'https://github.com/Haythamasalama.png'
     }
@@ -40,6 +50,8 @@ const users = [
   {
     label: 'Daniel Roe',
     suffix: 'danielroe',
+    to: 'https://github.com/danielroe',
+    target: '_blank',
     avatar: {
       src: 'https://github.com/danielroe.png'
     }
@@ -47,6 +59,8 @@ const users = [
   {
     label: 'Neil Richter',
     suffix: 'noook',
+    to: 'https://github.com/noook',
+    target: '_blank',
     avatar: {
       src: 'https://github.com/noook.png'
     }

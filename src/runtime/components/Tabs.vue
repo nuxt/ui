@@ -9,9 +9,9 @@ import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
+const appConfigTabs = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
 
-const tabs = tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })
+const tabs = tv({ extend: tv(theme), ...(appConfigTabs.ui?.tabs || {}) })
 
 export interface TabsItem {
   label?: string

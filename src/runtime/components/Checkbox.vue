@@ -7,9 +7,9 @@ import theme from '#build/ui/checkbox'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { checkbox: Partial<typeof theme> } }
+const appConfigCheckbox = _appConfig as AppConfig & { ui: { checkbox: Partial<typeof theme> } }
 
-const checkbox = tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || {}) })
+const checkbox = tv({ extend: tv(theme), ...(appConfigCheckbox.ui?.checkbox || {}) })
 
 type CheckboxVariants = VariantProps<typeof checkbox>
 

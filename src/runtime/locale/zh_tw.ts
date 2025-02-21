@@ -2,7 +2,7 @@ import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale({
   name: '繁體中文',
-  code: 'zh-Hant',
+  code: 'zh-TW',
   messages: {
     inputMenu: {
       noMatch: '沒有相符的資料',

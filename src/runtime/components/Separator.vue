@@ -7,9 +7,9 @@ import theme from '#build/ui/separator'
 import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 
-const appConfig = _appConfig as AppConfig & { ui: { separator: Partial<typeof theme> } }
+const appConfigSeparator = _appConfig as AppConfig & { ui: { separator: Partial<typeof theme> } }
 
-const separator = tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })
+const separator = tv({ extend: tv(theme), ...(appConfigSeparator.ui?.separator || {}) })
 
 type SeparatorVariants = VariantProps<typeof separator>
 

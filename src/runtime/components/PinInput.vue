@@ -7,9 +7,9 @@ import theme from '#build/ui/pin-input'
 import { tv } from '../utils/tv'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { pinInput: Partial<typeof theme> } }
+const appConfigPinInput = _appConfig as AppConfig & { ui: { pinInput: Partial<typeof theme> } }
 
-const pinInput = tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || {}) })
+const pinInput = tv({ extend: tv(theme), ...(appConfigPinInput.ui?.pinInput || {}) })
 
 type PinInputVariants = VariantProps<typeof pinInput>
 
@@ -50,7 +50,7 @@ const props = withDefaults(defineProps<PinInputProps>(), {
 const emits = defineEmits<PinInputEmits>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'placeholder', 'required', 'type'), emits)
-const { emitFormInput, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(props)
+const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(props)
 
 const ui = computed(() => pinInput({
   color: color.value,
@@ -92,6 +92,7 @@ function onBlur(event: FocusEvent) {
       v-bind="$attrs"
       :disabled="disabled"
       @blur="onBlur"
+      @focus="emitFormFocus"
     />
   </PinInputRoot>
 </template>

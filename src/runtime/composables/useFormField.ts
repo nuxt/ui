@@ -1,4 +1,4 @@
-import { inject, ref, computed, type InjectionKey, type Ref, type ComputedRef } from 'vue'
+import { inject, computed, type InjectionKey, type Ref, type ComputedRef } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
 import type { FormFieldProps } from '../types'
 import type { FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '../types/form'
@@ -14,7 +14,7 @@ type Props<T> = {
 }
 
 export const formOptionsInjectionKey: InjectionKey<ComputedRef<FormInjectedOptions>> = Symbol('nuxt-ui.form-options')
-export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent, string>> = Symbol('nuxt-ui.form-events')
+export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent<any>, string>> = Symbol('nuxt-ui.form-events')
 export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<FormFieldProps>>> = Symbol('nuxt-ui.form-field')
 export const inputIdInjectionKey: InjectionKey<Ref<string | undefined>> = Symbol('nuxt-ui.input-id')
 export const formInputsInjectionKey: InjectionKey<Ref<Record<string, { id?: string, pattern?: RegExp }>>> = Symbol('nuxt-ui.form-inputs')
@@ -41,29 +41,27 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     }
   }
 
-  const touched = ref(false)
-
-  function emitFormEvent(type: FormInputEvents, name?: string) {
+  function emitFormEvent(type: FormInputEvents, name?: string, eager?: boolean) {
     if (formBus && formField && name) {
-      formBus.emit({ type, name })
+      formBus.emit({ type, name, eager })
     }
   }
 
   function emitFormBlur() {
-    touched.value = true
     emitFormEvent('blur', formField?.value.name)
   }
 
+  function emitFormFocus() {
+    emitFormEvent('focus', formField?.value.name)
+  }
+
   function emitFormChange() {
-    touched.value = true
     emitFormEvent('change', formField?.value.name)
   }
 
   const emitFormInput = useDebounceFn(
     () => {
-      if (!opts?.deferInputValidation || touched.value || formField?.value.eagerValidation) {
-        emitFormEvent('input', formField?.value.name)
-      }
+      emitFormEvent('input', formField?.value.name, !opts?.deferInputValidation || formField?.value.eagerValidation)
     },
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   )
@@ -78,6 +76,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     emitFormBlur,
     emitFormInput,
     emitFormChange,
+    emitFormFocus,
     ariaAttrs: computed(() => {
       if (!formField?.value) return
 

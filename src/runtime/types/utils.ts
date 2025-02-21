@@ -1,3 +1,5 @@
+import type { VNode } from 'vue'
+
 export interface TightMap<O = any> {
   [key: string]: TightMap | O
 }
@@ -32,4 +34,15 @@ export type SelectItemKey<T> = T extends Record<string, any> ? keyof T : string
 
 export type SelectModelValueEmits<T, V, M extends boolean = false, DV = T> = {
   'update:modelValue': [payload: SelectModelValue<T, V, M, DV>]
+}
+
+export type StringOrVNode =
+  | string
+  | VNode
+  | (() => VNode)
+
+export type EmitsToProps<T> = {
+  [K in keyof T as `on${Capitalize<string & K>}`]: T[K] extends [...args: infer Args]
+    ? (...args: Args) => void
+    : never
 }

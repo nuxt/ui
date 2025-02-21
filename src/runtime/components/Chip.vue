@@ -6,9 +6,9 @@ import theme from '#build/ui/chip'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { chip: Partial<typeof theme> } }
+const appConfigChip = _appConfig as AppConfig & { ui: { chip: Partial<typeof theme> } }
 
-const chip = tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })
+const chip = tv({ extend: tv(theme), ...(appConfigChip.ui?.chip || {}) })
 
 type ChipVariants = VariantProps<typeof chip>
 

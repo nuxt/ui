@@ -47,9 +47,9 @@ provide(localeContextInjectionKey, locale)
         <slot />
       </UToaster>
       <slot v-else />
-    </TooltipProvider>
 
-    <UModalProvider />
-    <USlideoverProvider />
+      <UModalProvider />
+      <USlideoverProvider />
+    </TooltipProvider>
   </ConfigProvider>
 </template>

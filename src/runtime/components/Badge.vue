@@ -8,9 +8,9 @@ import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 
-const appConfig = _appConfig as AppConfig & { ui: { badge: Partial<typeof theme> } }
+const appConfigBadge = _appConfig as AppConfig & { ui: { badge: Partial<typeof theme> } }
 
-const badge = tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })
+const badge = tv({ extend: tv(theme), ...(appConfigBadge.ui?.badge || {}) })
 
 type BadgeVariants = VariantProps<typeof badge>
 
@@ -38,20 +38,24 @@ export interface BadgeSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
+import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 const props = withDefaults(defineProps<BadgeProps>(), {
   as: 'span'
 })
 defineSlots<BadgeSlots>()
 
+const { orientation, size: buttonGroupSize } = useButtonGroup<BadgeProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const ui = computed(() => badge({
   color: props.color,
   variant: props.variant,
-  size: props.size
+  size: buttonGroupSize.value || props.size,
+  buttonGroup: orientation.value
 }))
 
 extendDevtoolsMeta({ defaultProps: { label: 'Badge' } })

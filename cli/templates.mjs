@@ -35,9 +35,9 @@ import _appConfig from '#build/app.config'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
 import { tv } from '${pro ? '#ui/utils/tv' : '../utils/tv'}'
 
-const appConfig = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
+const appConfig${camelName} = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
 
-const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
+const ${camelName} = tv({ extend: tv(theme), ...(appConfig${camelName}.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
 
 export interface ${upperName}Props {
   /**
@@ -78,9 +78,9 @@ import _appConfig from '#build/app.config'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
 import { tv } from '${pro ? '#ui/utils/tv' : '../utils/tv'}'
 
-const appConfig = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
+const appConfig${camelName} = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
 
-const ${camelName} = tv({ extend: tv(theme), ...(appConfig.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
+const ${camelName} = tv({ extend: tv(theme), ...(appConfig${camelName}.${key}?.${prose ? 'prose?.' : ''}${camelName} || {}) })
 
 type ${upperName}Variants = VariantProps<typeof ${camelName}>
 
@@ -181,7 +181,7 @@ links:${primitive
   : `
   - label: ${upperName}
     icon: i-custom-reka-ui
-    to: https://www.reka-ui.com/components/${kebabName}.html`}
+    to: https://reka-ui.com/docs/components/${kebabName}`}
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v3/src/runtime/components/${upperName}.vue

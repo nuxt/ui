@@ -51,7 +51,7 @@ const text = computed(() => {
             variant="link"
             size="sm"
             :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
-            aria-label="show ? 'Hide password' : 'Show password'"
+            :aria-label="show ? 'Hide password' : 'Show password'"
             :aria-pressed="show"
             aria-controls="password"
             @click="show = !show"
@@ -77,7 +77,7 @@ const text = computed(() => {
         v-for="(req, index) in strength"
         :key="index"
         class="flex items-center gap-0.5"
-        :class="req.met ? 'text-[var(--ui-success)]' : 'text-[var(--ui-text-muted)]'"
+        :class="req.met ? 'text-(--ui-success)' : 'text-(--ui-text-muted)'"
       >
         <UIcon :name="req.met ? 'i-lucide-circle-check' : 'i-lucide-circle-x'" class="size-4 shrink-0" />
 

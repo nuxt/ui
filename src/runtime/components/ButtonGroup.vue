@@ -6,9 +6,9 @@ import theme from '#build/ui/button-group'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { buttonGroup: Partial<typeof theme> } }
+const appConfigButtonGroup = _appConfig as AppConfig & { ui: { buttonGroup: Partial<typeof theme> } }
 
-const buttonGroup = tv({ extend: tv(theme), ...(appConfig.ui?.buttonGroup) })
+const buttonGroup = tv({ extend: tv(theme), ...(appConfigButtonGroup.ui?.buttonGroup) })
 
 type ButtonGroupVariants = VariantProps<typeof buttonGroup>
 

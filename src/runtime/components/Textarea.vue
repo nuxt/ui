@@ -4,10 +4,11 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/textarea'
 import { tv } from '../utils/tv'
+import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
+const appConfigTextarea = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
 
-const textarea = tv({ extend: tv(theme), ...(appConfig.ui?.textarea || {}) })
+const textarea = tv({ extend: tv(theme), ...(appConfigTextarea.ui?.textarea || {}) })
 
 type TextareaVariants = VariantProps<typeof textarea>
 
@@ -34,7 +35,7 @@ export interface TextareaProps {
   autoresize?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  ui?: Partial<typeof textarea.slots>
+  ui?: PartialString<typeof textarea.slots>
 }
 
 export interface TextareaEmits {
@@ -66,7 +67,7 @@ const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps>(props, { deferInputValidation: true })
+const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps>(props, { deferInputValidation: true })
 
 const ui = computed(() => textarea({
   color: color.value,
@@ -189,6 +190,7 @@ onMounted(() => {
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
+      @focus="emitFormFocus"
     />
 
     <slot />

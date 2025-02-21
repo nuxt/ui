@@ -334,7 +334,7 @@ props:
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
-  class: 'data-[orientation=horizontal]:border-b border-[var(--ui-border)] data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
+  class: 'data-[orientation=horizontal]:border-b border-(--ui-border) data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
 ---
 ::
 
@@ -613,6 +613,85 @@ props:
 The arrow is animated to follow the active item.
 ::
 
+### Content Orientation
+
+Use the `content-orientation` prop to change the orientation of the content.
+
+::warning
+This prop only works when `orientation` is `horizontal`.
+::
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - arrow
+  - class
+external:
+  - items
+props:
+  arrow: true
+  contentOrientation: 'vertical'
+  items:
+    - label: Guide
+      icon: i-lucide-book-open
+      to: /getting-started
+      children:
+        - label: Introduction
+          description: Fully styled and customizable components for Nuxt.
+          icon: i-lucide-house
+        - label: Installation
+          description: Learn how to install and configure Nuxt UI in your application.
+          icon: i-lucide-cloud-download
+        - label: 'Icons'
+          icon: 'i-lucide-smile'
+          description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+    - label: Composables
+      icon: i-lucide-database
+      to: /composables
+      children:
+        - label: defineShortcuts
+          icon: i-lucide-file-text
+          description: Define shortcuts for your application.
+          to: /composables/define-shortcuts
+        - label: useModal
+          icon: i-lucide-file-text
+          description: Display a modal within your application.
+          to: /composables/use-modal
+        - label: useSlideover
+          icon: i-lucide-file-text
+          description: Display a slideover within your application.
+          to: /composables/use-slideover
+        - label: useToast
+          icon: i-lucide-file-text
+          description: Display a toast within your application.
+          to: /composables/use-toast
+    - label: Components
+      icon: i-lucide-box
+      to: /components
+      active: true
+      children:
+        - label: Link
+          icon: i-lucide-file-text
+          description: Use NuxtLink with superpowers.
+          to: /components/link
+        - label: Modal
+          icon: i-lucide-file-text
+          description: Display a modal within your application.
+          to: /components/modal
+        - label: NavigationMenu
+          icon: i-lucide-file-text
+          description: Display a list of links.
+          to: /components/navigation-menu
+        - label: Pagination
+          icon: i-lucide-file-text
+          description: Display a list of pages.
+          to: /components/pagination
+  class: 'w-full justify-center'
+---
+::
+
 ### Unmount
 
 Use the `unmount-on-hide` prop to control the content unmounting behavior. Defaults to `true`.
@@ -759,7 +838,7 @@ name: 'navigation-menu-content-slot-example'
 ::
 
 ::note
-In this example, we add the `sm:w-[var(--reka-navigation-menu-viewport-width)]` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
+In this example, we add the `sm:w-(--reka-navigation-menu-viewport-width)` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
 ::
 
 ## API

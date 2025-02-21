@@ -8,9 +8,9 @@ import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
+const appConfigSwitch = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
 
-const switchTv = tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })
+const switchTv = tv({ extend: tv(theme), ...(appConfigSwitch.ui?.switch || {}) })
 
 type SwitchVariants = VariantProps<typeof switchTv>
 

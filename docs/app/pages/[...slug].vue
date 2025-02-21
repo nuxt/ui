@@ -87,12 +87,12 @@ const communityLinks = computed(() => [{
   to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}`,
   target: '_blank'
 }, {
-  icon: 'i-heroicons-lifebuoy',
+  icon: 'i-lucide-life-buoy',
   label: 'Contribution',
   to: '/getting-started/contribution'
 }, {
   label: 'Roadmap',
-  icon: 'i-heroicons-map',
+  icon: 'i-lucide-map',
   to: '/roadmap'
 }])
 

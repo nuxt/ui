@@ -2,7 +2,7 @@ import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale({
   name: '简体中文',
-  code: 'zh-Hans',
+  code: 'zh-CN',
   messages: {
     inputMenu: {
       noMatch: '没有匹配的数据',

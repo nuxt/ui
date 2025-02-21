@@ -5,10 +5,11 @@ import theme from '#build/ui/form'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
+import type { DeepReadonly } from 'vue'
 
-const appConfig = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
+const appConfigForm = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
 
-const form = tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) })
+const form = tv({ extend: tv(theme), ...(appConfigForm.ui?.form || {}) })
 
 export interface FormProps<T extends object> {
   id?: string | number
@@ -19,6 +20,7 @@ export interface FormProps<T extends object> {
   disabled?: boolean
   validateOnInputDelay?: number
   class?: any
+  transform?: boolean
   onSubmit?: ((event: FormSubmitEvent<T>) => void | Promise<void>) | (() => void | Promise<void>)
 }
 
@@ -45,14 +47,16 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
-  validateOnInputDelay: 300
+  validateOnInputDelay: 300,
+  transform: true
 })
+
 const emits = defineEmits<FormEmits<T>>()
 defineSlots<FormSlots>()
 
 const formId = props.id ?? useId() as string
 
-const bus = useEventBus<FormEvent>(`form-${formId}`)
+const bus = useEventBus<FormEvent<T>>(`form-${formId}`)
 const parentBus = inject(
   formBusInjectionKey,
   undefined
@@ -68,8 +72,24 @@ onMounted(async () => {
       nestedForms.value.set(event.formId, { validate: event.validate })
     } else if (event.type === 'detach') {
       nestedForms.value.delete(event.formId)
-    } else if (props.validateOn?.includes(event.type as FormInputEvents)) {
-      await _validate({ name: event.name, silent: true, nested: false })
+    } else if (props.validateOn?.includes(event.type)) {
+      if (event.type !== 'input') {
+        await _validate({ name: event.name, silent: true, nested: false })
+      } else if (event.eager || blurredFields.has(event.name)) {
+        await _validate({ name: event.name, silent: true, nested: false })
+      }
+    }
+
+    if (event.type === 'blur') {
+      blurredFields.add(event.name)
+    }
+
+    if (event.type === 'change' || event.type === 'input' || event.type === 'blur' || event.type === 'focus') {
+      touchedFields.add(event.name)
+    }
+
+    if (event.type === 'change' || event.type === 'input') {
+      dirtyFields.add(event.name)
     }
   })
 })
@@ -94,8 +114,12 @@ onUnmounted(() => {
 const errors = ref<FormErrorWithId[]>([])
 provide('form-errors', errors)
 
-const inputs = ref<Record<string, { id?: string, pattern?: RegExp }>>({})
-provide(formInputsInjectionKey, inputs)
+const inputs = ref<{ [P in keyof T]?: { id?: string, pattern?: RegExp } }>({})
+provide(formInputsInjectionKey, inputs as any)
+
+const dirtyFields = new Set<keyof T>()
+const touchedFields = new Set<keyof T>()
+const blurredFields = new Set<keyof T>()
 
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
@@ -121,8 +145,8 @@ async function getErrors(): Promise<FormErrorWithId[]> {
   return resolveErrorIds(errs)
 }
 
-async function _validate(opts: { name?: string | string[], silent?: boolean, nested?: boolean, transform?: boolean } = { silent: false, nested: true, transform: false }): Promise<T | false> {
-  const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as string[]
+async function _validate(opts: { name?: keyof T | (keyof T)[], silent?: boolean, nested?: boolean, transform?: boolean } = { silent: false, nested: true, transform: false }): Promise<T | false> {
+  const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof T)[]
 
   const nestedValidatePromises = !names && opts.nested
     ? Array.from(nestedForms.value.values()).map(
@@ -174,7 +198,7 @@ async function onSubmitWrapper(payload: Event) {
   const event = payload as FormSubmitEvent<any>
 
   try {
-    event.data = await _validate({ nested: true, transform: true })
+    event.data = await _validate({ nested: true, transform: props.transform })
     await props.onSubmit?.(event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
@@ -187,9 +211,9 @@ async function onSubmitWrapper(payload: Event) {
       children: error.children
     }
     emits('error', errorEvent)
+  } finally {
+    loading.value = false
   }
-
-  loading.value = false
 }
 
 const disabled = computed(() => props.disabled || loading.value)
@@ -203,7 +227,7 @@ defineExpose<Form<T>>({
   validate: _validate,
   errors,
 
-  setErrors(errs: FormError[], name?: string) {
+  setErrors(errs: FormError[], name?: keyof T) {
     if (name) {
       errors.value = errors.value
         .filter(error => error.name !== name)
@@ -217,7 +241,7 @@ defineExpose<Form<T>>({
     await onSubmitWrapper(new Event('submit'))
   },
 
-  getErrors(name?: string) {
+  getErrors(name?: keyof T) {
     if (name) {
       return errors.value.filter(err => err.name === name)
     }
@@ -232,7 +256,12 @@ defineExpose<Form<T>>({
     }
   },
 
-  disabled
+  disabled,
+  dirty: computed(() => !!dirtyFields.size),
+
+  dirtyFields: readonly(dirtyFields) as DeepReadonly<Set<keyof T>>,
+  blurredFields: readonly(blurredFields) as DeepReadonly<Set<keyof T>>,
+  touchedFields: readonly(touchedFields) as DeepReadonly<Set<keyof T>>
 })
 </script>
 

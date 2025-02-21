@@ -34,7 +34,11 @@ The CommandPalette component filters groups and ranks matching commands by relev
 - [`postFilter?: (searchTerm: string, items: T[]) => T[]`{lang="ts-type"}](#with-post-filtered-items)
 - `highlightedIcon?: string`{lang="ts-type"}
 
-Each group takes some `items` as an array of objects with the following properties:
+::caution
+You must provide an `id` for each group otherwise the group will be ignored.
+::
+
+Each group contains an `items` array of objects that define the commands. Each item can have the following properties:
 
 - `prefix?: string`{lang="ts-type"}
 - `label?: string`{lang="ts-type"}
@@ -49,9 +53,13 @@ Each group takes some `items` as an array of objects with the following properti
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `onSelect?(e?: Event): void`{lang="ts-type"}
 
+You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
+
 ::component-code
 ---
 collapse: true
+hide:
+  - autofocus
 ignore:
   - groups
   - modelValue
@@ -62,6 +70,7 @@ external:
 class: '!p-0'
 props:
   modelValue: {}
+  autofocus: false
   groups:
     - id: 'users'
       label: 'Users'
@@ -98,10 +107,6 @@ props:
 ---
 ::
 
-::caution
-You must provide an `id` for each group otherwise the group will be ignored.
-::
-
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections.
@@ -109,6 +114,8 @@ Use the `multiple` prop to allow multiple selections.
 ::component-code
 ---
 collapse: true
+hide:
+  - autofocus
 ignore:
   - groups
   - modelValue
@@ -120,6 +127,7 @@ external:
 class: '!p-0'
 props:
   multiple: true
+  autofocus: false
   modelValue: []
   groups:
     - id: 'users'
@@ -168,6 +176,8 @@ Use the `placeholder` prop to change the placeholder text.
 ::component-code
 ---
 collapse: true
+hide:
+  - autofocus
 ignore:
   - class
   - groups
@@ -175,6 +185,7 @@ external:
   - groups
 class: '!p-0'
 props:
+  autofocus: false
   placeholder: 'Search an app...'
   groups:
     - id: 'apps'
@@ -196,6 +207,8 @@ Use the `icon` prop to customize the input [Icon](/components/icon). Defaults to
 ::component-code
 ---
 collapse: true
+hide:
+  - autofocus
 ignore:
   - class
   - groups
@@ -203,6 +216,7 @@ external:
   - groups
 class: '!p-0'
 props:
+  autofocus: false
   icon: 'i-lucide-box'
   groups:
     - id: 'apps'
@@ -236,6 +250,8 @@ Use the `loading` prop to show a loading icon on the CommandPalette.
 ::component-code
 ---
 collapse: true
+hide:
+  - autofocus
 ignore:
   - class
   - groups
@@ -243,6 +259,7 @@ external:
   - groups
 class: '!p-0'
 props:
+  autofocus: false
   loading: true
   groups:
     - id: 'apps'
@@ -264,6 +281,8 @@ Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide
 ::component-code
 ---
 collapse: true
+hide:
+  - autofocus
 ignore:
   - class
   - groups
@@ -271,6 +290,7 @@ external:
   - groups
 class: '!p-0'
 props:
+  autofocus: false
   loading: true
   loadingIcon: 'i-lucide-repeat-2'
   groups:
@@ -305,6 +325,8 @@ Use the `disabled` prop to disable the CommandPalette.
 ::component-code
 ---
 collapse: true
+hide:
+  - autofocus
 ignore:
   - groups
   - class
@@ -312,6 +334,7 @@ external:
   - groups
 class: '!p-0'
 props:
+  autofocus: false
   disabled: true
   groups:
     - id: 'apps'
@@ -337,6 +360,8 @@ An `update:open` event will be emitted when the close button is clicked.
 ::component-code
 ---
 collapse: true
+hide:
+  - autofocus
 ignore:
   - class
   - groups
@@ -345,6 +370,7 @@ external:
   - groups
 class: '!p-0'
 props:
+  autofocus: false
   close: true
   groups:
     - id: 'apps'
@@ -365,6 +391,8 @@ You can pass any property from the [Button](/components/button) component to cus
 ---
 collapse: true
 prettier: true
+hide:
+  - autofocus
 ignore:
   - close.color
   - close.variant
@@ -374,6 +402,7 @@ external:
   - groups
 class: '!p-0'
 props:
+  autofocus: false
   close:
     color: primary
     variant: outline
@@ -398,6 +427,8 @@ Use the `close-icon` prop to customize the close button [Icon](/components/icon)
 ::component-code
 ---
 collapse: true
+hide:
+  - autofocus
 ignore:
   - class
   - groups
@@ -406,6 +437,7 @@ external:
   - groups
 class: '!p-0'
 props:
+  autofocus: false
   close: true
   closeIcon: 'i-lucide-arrow-right'
   groups:
@@ -437,18 +469,16 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 ### Control selected item(s)
 
-You can control the selected item by using the `default-value` prop or the `v-model` directive, by using the `select` field on each item or by using the `@update:model-value` event.
+You can control the selected item(s) by using the `default-value` prop or the `v-model` directive, by using the `onSelect` field on each item or by using the `@update:model-value` event.
 
 ::component-example
 ---
 collapse: true
 name: 'command-palette-select-example'
 class: '!p-0'
+props:
+  autofocus: false
 ---
-::
-
-::note
-This example demonstrates how to use the `@update:model-value` event to handle different selection scenarios.
 ::
 
 ### Control search term
@@ -460,6 +490,8 @@ Use the `v-model:search-term` directive to control the search term.
 collapse: true
 name: 'command-palette-search-term-example'
 class: '!p-0'
+props:
+  autofocus: false
 ---
 ::
 
@@ -476,6 +508,8 @@ You can fetch items from an API and use them in the CommandPalette.
 collapse: true
 name: 'command-palette-fetch-example'
 class: '!p-0'
+props:
+  autofocus: false
 ---
 ::
 
@@ -488,6 +522,8 @@ You can set the `ignoreFilter` field to `true` on a group to disable the interna
 collapse: true
 name: 'command-palette-ignore-filter-example'
 class: '!p-0'
+props:
+  autofocus: false
 ---
 ::
 
@@ -504,6 +540,8 @@ You can use the `postFilter` field on a group to filter items after the search h
 collapse: true
 name: 'command-palette-post-filter-example'
 class: '!p-0'
+props:
+  autofocus: false
 ---
 ::
 
@@ -538,6 +576,8 @@ You can for example set `{ fuseOptions: { includeMatches: true } }`{lang="ts-typ
 collapse: true
 name: 'command-palette-fuse-example'
 class: '!p-0'
+props:
+  autofocus: false
 ---
 ::
 
@@ -549,6 +589,8 @@ You can use the CommandPalette component inside a [Popover](/components/popover)
 ---
 collapse: true
 name: 'popover-command-palette-example'
+props:
+  autofocus: false
 ---
 ::
 
@@ -560,6 +602,8 @@ You can use the CommandPalette component inside a [Modal](/components/modal)'s c
 ---
 collapse: true
 name: 'modal-command-palette-example'
+props:
+  autofocus: false
 ---
 ::
 
@@ -571,6 +615,8 @@ You can use the CommandPalette component inside a [Drawer](/components/drawer)'s
 ---
 collapse: true
 name: 'drawer-command-palette-example'
+props:
+  autofocus: false
 ---
 ::
 
@@ -582,6 +628,8 @@ When using the `close` prop, you can listen to the `update:open` event when the 
 ---
 collapse: true
 name: 'command-palette-open-example'
+props:
+  autofocus: false
 ---
 ::
 
@@ -609,6 +657,8 @@ You will have access to the following slots:
 ---
 name: 'command-palette-custom-slot-example'
 class: '!p-0'
+props:
+  autofocus: false
 ---
 ::
 

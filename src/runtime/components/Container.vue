@@ -5,9 +5,9 @@ import theme from '#build/ui/container'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { container: Partial<typeof theme> } }
+const appConfigContainer = _appConfig as AppConfig & { ui: { container: Partial<typeof theme> } }
 
-const container = tv({ extend: tv(theme), ...(appConfig.ui?.container || {}) })
+const container = tv({ extend: tv(theme), ...(appConfigContainer.ui?.container || {}) })
 
 export interface ContainerProps {
   /**

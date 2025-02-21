@@ -10,7 +10,13 @@ export function useSharedData() {
     icon: 'i-simple-icons-vuedotjs',
     value: 'vue',
     disabled: module.value === 'ui-pro',
-    onSelect: () => framework.value = 'vue'
+    onSelect: () => {
+      if (module.value === 'ui-pro') {
+        return
+      }
+
+      framework.value = 'vue'
+    }
   }].map(f => ({ ...f, active: framework.value === f.value })))
 
   const module = useCookie('nuxt-ui-module', { default: () => 'ui' })
@@ -24,7 +30,13 @@ export function useSharedData() {
     icon: 'i-lucide-panels-top-left',
     value: 'ui-pro',
     disabled: framework.value === 'vue',
-    onSelect: () => module.value = 'ui-pro'
+    onSelect: () => {
+      if (framework.value === 'vue') {
+        return
+      }
+
+      module.value = 'ui-pro'
+    }
   }].map(m => ({ ...m, active: module.value === m.value })))
 
   return {

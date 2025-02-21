@@ -7,9 +7,9 @@ import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
 
-const appConfig = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
+const appConfigModal = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
 
-const modal = tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })
+const modal = tv({ extend: tv(theme), ...(appConfigModal.ui?.modal || {}) })
 
 export interface ModalProps extends DialogRootProps {
   title?: string
@@ -41,7 +41,7 @@ export interface ModalProps extends DialogRootProps {
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -74,7 +74,7 @@ extendDevtoolsMeta({ example: 'ModalExample' })
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'reka-ui'
+import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -101,11 +101,14 @@ const contentEvents = computed(() => {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
       interactOutside: (e: Event) => e.preventDefault(),
-      escapeKeyDown: (e: Event) => e.preventDefault()
+      escapeKeyDown: (e: Event) => e.preventDefault(),
+      closeAutoFocus: (e: Event) => e.preventDefault()
     }
   }
 
-  return {}
+  return {
+    closeAutoFocus: (e: Event) => e.preventDefault()
+  }
 })
 
 const ui = computed(() => modal({
@@ -124,20 +127,36 @@ const ui = computed(() => modal({
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
       <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+        <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
+          <DialogTitle v-if="title || !!slots.title">
+            <slot name="title">
+              {{ title }}
+            </slot>
+          </DialogTitle>
+
+          <DialogDescription v-if="description || !!slots.description">
+            <slot name="description">
+              {{ description }}
+            </slot>
+          </DialogDescription>
+        </VisuallyHidden>
+
         <slot name="content">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
             <slot name="header">
-              <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
-                <slot name="title">
-                  {{ title }}
-                </slot>
-              </DialogTitle>
+              <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+                <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+                  <slot name="title">
+                    {{ title }}
+                  </slot>
+                </DialogTitle>
 
-              <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
-                <slot name="description">
-                  {{ description }}
-                </slot>
-              </DialogDescription>
+                <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+                  <slot name="description">
+                    {{ description }}
+                  </slot>
+                </DialogDescription>
+              </div>
 
               <DialogClose as-child>
                 <slot name="close" :ui="ui">
@@ -148,7 +167,7 @@ const ui = computed(() => modal({
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('modal.close')"
-                    v-bind="typeof close === 'object' ? close : undefined"
+                    v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
                     :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>
