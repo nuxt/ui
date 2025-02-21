@@ -30,27 +30,27 @@ const componentsPerCategory = computed(() => {
 })
 
 const categories = [{
-  category: 'layout',
+  id: 'layout',
   title: 'Layout',
   description: 'Structural components for organizing content, including containers, grids, dividers, and responsive layout systems.'
 }, {
-  category: 'form',
+  id: 'form',
   title: 'Form',
   description: 'Interactive form elements including inputs, selects, checkboxes, radio buttons, and advanced form validation components.'
 }, {
-  category: 'element',
+  id: 'element',
   title: 'Element',
   description: 'Core UI building blocks like buttons, badges, icons, avatars, and other fundamental interface elements.'
 }, {
-  category: 'data',
+  id: 'data',
   title: 'Data',
   description: 'Components for displaying and managing data, including tables, lists, cards, data grids, and visualization elements.'
 }, {
-  category: 'navigation',
+  id: 'navigation',
   title: 'Navigation',
   description: 'Components for user navigation and wayfinding, including menus, breadcrumbs, pagination, and navigation bars.'
 }, {
-  category: 'overlay',
+  id: 'overlay',
   title: 'Overlay',
   description: 'Floating UI elements like modals, dialogs, tooltips, popovers, and other components that overlay the main content.'
 }]
@@ -103,11 +103,26 @@ const categories = [{
     </UPageHero>
 
     <UContainer>
-      <template v-for="category in categories" :key="category.category">
-        <UPageHeader :title="category.title" :description="category.description" class="mb-8" />
-        <UPageGrid class="xl:grid-cols-4 pb-24">
+      <div v-for="category in categories" :key="category.id">
+        <div class="mb-4 sm:mb-6 lg:mb-8 sticky top-(--ui-header-height) bg-(--ui-bg)/75 backdrop-blur z-[1] -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <div class="relative border-b border-(--ui-border) py-4 sm:py-6 lg:py-8">
+            <h2 class="relative text-pretty font-bold text-(--ui-text-highlighted) text-base sm:text-xl lg:text-2xl">
+              <a :href="`#${category.id}`" class="group lg:ps-2 lg:-ms-2">
+                <span class="absolute -ms-8 top-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 p-1 bg-(--ui-bg-elevated) hover:text-(--ui-primary) rounded-[calc(var(--ui-radius)*1.5)] hidden lg:flex text-(--ui-text-muted) transition">
+                  <UIcon name="i-lucide-hash" class="size-4 shrink-0" />
+                </span>
+                {{ category.title }}
+              </a>
+            </h2>
+            <p class="text-pretty text-(--ui-text-muted) text-sm sm:text-base lg:text-lg mt-1 sm:mt-2 line-clamp-1">
+              {{ category.description }}
+            </p>
+          </div>
+        </div>
+
+        <UPageGrid :id="category.id" class="xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pb-24 scroll-mt-[calc(97px+var(--ui-header-height))] sm:scroll-mt-[calc(133px+var(--ui-header-height))] lg:scroll-mt-[calc(165px+var(--ui-header-height))]">
           <UPageCard
-            v-for="(component, index) in componentsPerCategory[category.category]"
+            v-for="(component, index) in componentsPerCategory[category.id]"
             :key="component.path"
             variant="naked"
             :title="component.title"
@@ -134,7 +149,7 @@ const categories = [{
             </div>
           </UPageCard>
         </UPageGrid>
-      </template>
+      </div>
     </UContainer>
   </UMain>
 </template>
