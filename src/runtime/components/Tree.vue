@@ -182,7 +182,7 @@ const defaultExpanded = computed(() => props.defaultExpanded ?? props.items?.fla
         @toggle="item.onToggle"
         @select="item.onSelect"
       >
-        <button :disabled="item.disabled || disabled" :class="ui.link({ class: props.ui?.link, selected: isSelected })">
+        <button :disabled="item.disabled || disabled" :class="ui.link({ class: props.ui?.link, selected: isSelected, disabled: item.disabled || disabled })">
           <slot :name="item.slot || 'item'" v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }">
             <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }">
               <UIcon

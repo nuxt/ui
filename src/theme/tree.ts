@@ -55,6 +55,11 @@ export default (options: Required<ModuleOptions>) => ({
       false: {
         link: ['hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50', options.theme.transitions && 'transition-colors before:transition-colors']
       }
+    },
+    disabled: {
+      true: {
+        link: 'cursor-not-allowed opacity-75'
+      }
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
