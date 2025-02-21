@@ -118,8 +118,8 @@ const categories = [{
               </div>
             </template>
 
-            <div class="group rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border) overflow-hidden aspect-[16/9]">
-              <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="group-hover:scale-105 transition-transform size-full" />
+            <div class="group rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
+              <UColorModeImage :light="`${component.path.replace('/components/', '/components/light/')}.png`" :dark="`${component.path.replace('/components/', '/components/dark/')}.png`" class="group-hover:scale-105 transition-transform size-full" loading="lazy" />
             </div>
           </UPageCard>
         </UPageGrid>
