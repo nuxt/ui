@@ -11,7 +11,6 @@ export default {
   close: 'i-lucide-x',
   ellipsis: 'i-lucide-ellipsis',
   external: 'i-lucide-arrow-up-right',
-  file: 'i-lucide-file-text',
   folder: 'i-lucide-folder',
   folderOpen: 'i-lucide-folder-open',
   loading: 'i-lucide-refresh-cw',
