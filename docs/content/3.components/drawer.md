@@ -1,5 +1,6 @@
 ---
 description: A drawer that smoothly slides in & out of the screen.
+category: overlay
 links:
   - label: Drawer
     icon: i-custom-reka-ui
