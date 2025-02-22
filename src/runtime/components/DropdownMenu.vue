@@ -7,7 +7,12 @@ import theme from '#build/ui/dropdown-menu'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, NestedItem, PartialString } from '../types/utils'
+import type {
+  ArrayOrNested,
+  DynamicSlots,
+  NestedItem,
+  PartialString
+} from '../types/utils'
 
 const appConfigDropdownMenu = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -15,7 +20,7 @@ const dropdownMenu = tv({ extend: tv(theme), ...(appConfigDropdownMenu.ui?.dropd
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
-interface DropdownMenuItemBase<K extends {}> extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
+export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
   icon?: string
   color?: DropdownMenuVariants['color']
@@ -33,15 +38,14 @@ interface DropdownMenuItemBase<K extends {}> extends Omit<LinkProps, 'type' | 'r
   checked?: boolean
   open?: boolean
   defaultOpen?: boolean
-  children?: DropdownMenuItem<K>[] | DropdownMenuItem<K>[][]
+  children?: ArrayOrNested<DropdownMenuItem>
   onSelect?(e: Event): void
   onUpdateChecked?(checked: boolean): void
 }
-export type DropdownMenuItem<K extends {} = Record<string, any>> = DropdownMenuItemBase<K> & K
 
-export interface DropdownMenuProps<T extends {} = Record<string, any>, A extends ArrayOrNested<DropdownMenuItem<T>> = ArrayOrNested<DropdownMenuItem<T>>> extends Omit<DropdownMenuRootProps, 'dir'> {
+export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>> extends Omit<DropdownMenuRootProps, 'dir'> {
   size?: DropdownMenuVariants['size']
-  items?: A
+  items?: T
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
@@ -77,7 +81,7 @@ export interface DropdownMenuProps<T extends {} = Record<string, any>, A extends
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: keyof NestedItem<T>
   disabled?: boolean
   class?: any
   ui?: PartialString<typeof dropdownMenu.slots>
@@ -85,15 +89,15 @@ export interface DropdownMenuProps<T extends {} = Record<string, any>, A extends
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<I extends DropdownMenuItem<T>, T extends {} = Record<string, any>> = (props: { item: I, active?: boolean, index: number }) => any
+type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<T extends {} = Record<string, any>, A extends ArrayOrNested<DropdownMenuItem<T>> = ArrayOrNested<DropdownMenuItem<T>>, I extends NestedItem<A> = NestedItem<A>> = {
+export type DropdownMenuSlots<A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
   'default'(props: { open: boolean }): any
-  'item': SlotProps<I>
-  'item-leading': SlotProps<I>
-  'item-label': SlotProps<I>
-  'item-trailing': SlotProps<I>
-} & DynamicSlots<I, SlotProps<I>>
+  'item': SlotProps<T>
+  'item-leading': SlotProps<T>
+  'item-label': SlotProps<T>
+  'item-trailing': SlotProps<T>
+} & DynamicSlots<T, SlotProps<T>>
 
 extendDevtoolsMeta({
   example: 'DropdownMenuExample',
@@ -145,7 +149,7 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends Record<string, any>, A extends ArrayOrNested<DropdownMenuItem<T>>">
+<script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
@@ -153,19 +157,19 @@ import { reactivePick } from '@vueuse/core'
 import { omit } from '../utils'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
-const props = withDefaults(defineProps<DropdownMenuProps<T, A>>(), {
+const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   portal: true,
   modal: true,
   externalIcon: true,
   labelKey: 'label'
 })
 const emits = defineEmits<DropdownMenuEmits>()
-const slots = defineSlots<DropdownMenuSlots<T, A>>()
+const slots = defineSlots<DropdownMenuSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
-const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T, A>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
 
 const ui = computed(() => dropdownMenu({
   size: props.size
@@ -185,7 +189,7 @@ const ui = computed(() => dropdownMenu({
       v-bind="contentProps"
       :items="items"
       :portal="portal"
-      :label-key="labelKey"
+      :label-key="(labelKey as keyof NestedItem<T>)"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"

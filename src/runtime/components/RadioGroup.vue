@@ -1,11 +1,12 @@
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { RadioGroupRootProps, RadioGroupRootEmits, AcceptableValue } from 'reka-ui'
+import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
+import type { AcceptableValue } from '../types/utils'
 
 const appConfigRadioGroup = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
 
@@ -14,13 +15,12 @@ const radioGroup = tv({ extend: tv(theme), ...(appConfigRadioGroup.ui?.radioGrou
 type RadioGroupVariants = VariantProps<typeof radioGroup>
 
 export type RadioGroupValue = AcceptableValue
-interface _RadioGroupItem {
+export type RadioGroupItem = {
   label?: string
   description?: string
   disabled?: boolean
   value?: string
-}
-export type RadioGroupItem = _RadioGroupItem | AcceptableValue
+} | RadioGroupValue
 
 export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> extends Pick<RadioGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'> {
   /**
@@ -60,9 +60,9 @@ export type RadioGroupEmits = RadioGroupRootEmits & {
   change: [payload: Event]
 }
 
-type SlotProps<T extends _RadioGroupItem | RadioGroupValue> = (props: { item: T & { id: string }, modelValue?: RadioGroupValue }) => any
+type SlotProps<T extends RadioGroupItem> = (props: { item: T & { id: string }, modelValue?: RadioGroupValue }) => any
 
-export interface RadioGroupSlots<T extends _RadioGroupItem | RadioGroupValue> {
+export interface RadioGroupSlots<T extends RadioGroupItem = RadioGroupItem> {
   legend(props?: {}): any
   label: SlotProps<T>
   description: SlotProps<T>
@@ -71,14 +71,14 @@ export interface RadioGroupSlots<T extends _RadioGroupItem | RadioGroupValue> {
 extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
-<script setup lang="ts" generic="T extends _RadioGroupItem, V extends T | RadioGroupValue = _RadioGroupItem">
+<script setup lang="ts" generic="T extends RadioGroupItem">
 import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 
-const props = withDefaults(defineProps<RadioGroupProps<V>>(), {
+const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
   valueKey: 'value',
   labelKey: 'label',
   descriptionKey: 'description',
@@ -177,10 +177,10 @@ function onUpdate(value: any) {
 
         <div :class="ui.wrapper({ class: props.ui?.wrapper })">
           <Label :class="ui.label({ class: props.ui?.label })" :for="item.id">
-            <slot name="label" :item="item" :model-value="modelValue">{{ item.label }}</slot>
+            <slot name="label" :item="item" :model-value="(modelValue as RadioGroupValue)">{{ item.label }}</slot>
           </Label>
           <p v-if="item.description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
-            <slot name="description" :item="item" :model-value="modelValue">
+            <slot name="description" :item="item" :model-value="(modelValue as RadioGroupValue)">
               {{ item.description }}
             </slot>
           </p>

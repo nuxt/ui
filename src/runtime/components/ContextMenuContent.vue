@@ -7,11 +7,11 @@ import type { ArrayOrNested, NestedItem } from '../types/utils'
 
 const _contextMenu = tv(theme)()
 
-interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T
   portal?: boolean
   sub?: boolean
-  labelKey: string
+  labelKey: keyof NestedItem<T>
   checkedIcon?: string
   loadingIcon?: string
   externalIcon?: boolean | string
@@ -47,6 +47,7 @@ const appConfig = useAppConfig()
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
 
+// TODO: understand why it is not possible to type `item` as `ContextMenuMenuItem<T>`
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem, active?: boolean, index: number }>()
 
 const groups = computed<ContextMenuItem[][]>(() =>
@@ -115,7 +116,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
               :ui="ui"
               :ui-override="uiOverride"
               :portal="portal"
-              :items="item.children"
+              :items="(item.children as T)"
               :align-offset="-4"
               :label-key="labelKey"
               :checked-icon="checkedIcon"

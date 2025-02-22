@@ -35,14 +35,14 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: keyof T
   class?: any
   ui?: PartialString<typeof breadcrumb.slots>
 }
 
-type SlotProps<T extends BreadcrumbItem = BreadcrumbItem> = (props: { item: T, index: number, active?: boolean }) => any
+type SlotProps<T extends BreadcrumbItem> = (props: { item: T, index: number, active?: boolean }) => any
 
-export type BreadcrumbSlots<T extends { slot?: string }> = {
+export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -76,7 +76,7 @@ extendDevtoolsMeta({
 })
 </script>
 
-<script setup lang="ts" generic="T extends BreadcrumbItem = BreadcrumbItem">
+<script setup lang="ts" generic="T extends BreadcrumbItem">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'

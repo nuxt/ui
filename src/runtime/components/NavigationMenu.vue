@@ -93,7 +93,7 @@ export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem>
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: keyof NestedItem<T>
   class?: any
   ui?: PartialString<typeof navigationMenu.slots>
 }

@@ -8,11 +8,11 @@ import type { ArrayOrNested, NestedItem } from '../types/utils'
 
 const _dropdownMenu = tv(theme)()
 
-interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>> extends Omit<RekaDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> extends Omit<RekaDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T
   portal?: boolean
   sub?: boolean
-  labelKey: string
+  labelKey: keyof NestedItem<T>
   checkedIcon?: string
   loadingIcon?: string
   externalIcon?: boolean | string
@@ -23,7 +23,7 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem> = A
 
 interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
 
-type DropdownMenuContentSlots<T extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>> = Omit<DropdownMenuSlots<T>, 'default'> & {
+type DropdownMenuContentSlots<T extends ArrayOrNested<DropdownMenuItem>> = Omit<DropdownMenuSlots<T>, 'default'> & {
   default(props?: {}): any
 }
 
@@ -121,7 +121,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
               :ui="ui"
               :ui-override="uiOverride"
               :portal="portal"
-              :items="item.children"
+              :items="(item.children as T)"
               side="right"
               align="start"
               :align-offset="-4"

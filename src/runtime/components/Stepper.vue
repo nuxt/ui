@@ -43,7 +43,7 @@ export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<
   class?: any
 }
 
-export type StepperEmits<T> = Omit<StepperRootEmits, 'update:modelValue'> & {
+export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRootEmits, 'update:modelValue'> & {
   next: [payload: T]
   prev: [payload: T]
 }
@@ -104,13 +104,13 @@ defineExpose({
   next() {
     if (hasNext.value) {
       currentStepIndex.value += 1
-      emits('next', currentStep.value)
+      emits('next', currentStep.value as T)
     }
   },
   prev() {
     if (hasPrev.value) {
       currentStepIndex.value -= 1
-      emits('prev', currentStep.value)
+      emits('prev', currentStep.value as T)
     }
   },
   hasNext,
@@ -164,7 +164,7 @@ defineExpose({
     <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot]) || (currentStep?.value && !!slots[currentStep.value])" :class="ui.content({ class: props.ui?.description })">
       <slot
         :name="!!slots[currentStep?.slot ?? currentStep.value!] ? currentStep.slot ?? currentStep.value : 'content'"
-        :item="currentStep"
+        :item="(currentStep as T)"
       >
         {{ currentStep?.content }}
       </slot>

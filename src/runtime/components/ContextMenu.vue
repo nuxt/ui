@@ -6,8 +6,13 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
-import type { ArrayOrNested, AvatarProps, KbdProps, LinkProps, NestedItem } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { AvatarProps, KbdProps, LinkProps } from '../types'
+import type {
+  ArrayOrNested,
+  DynamicSlots,
+  NestedItem,
+  PartialString
+} from '../types/utils'
 
 const appConfigContextMenu = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
 
@@ -33,7 +38,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   checked?: boolean
   open?: boolean
   defaultOpen?: boolean
-  children?: ContextMenuItem[] | ContextMenuItem[][]
+  children?: ArrayOrNested<ContextMenuItem>
   onSelect?(e: Event): void
   onUpdateChecked?(checked: boolean): void
 }
@@ -68,7 +73,7 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: keyof NestedItem<T>
   disabled?: boolean
   class?: any
   ui?: PartialString<typeof contextMenu.slots>
@@ -76,7 +81,7 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
 
 export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
-type SlotProps<T extends ContextMenuItem = ContextMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
 
 export type ContextMenuSlots<A extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
   'default'(props?: {}): any
@@ -186,7 +191,7 @@ const ui = computed(() => contextMenu({
       v-bind="contentProps"
       :items="items"
       :portal="portal"
-      :label-key="labelKey"
+      :label-key="(labelKey as keyof NestedItem<T>)"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
