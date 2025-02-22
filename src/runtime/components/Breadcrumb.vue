@@ -35,7 +35,7 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: keyof T
+  labelKey?: string
   class?: any
   ui?: PartialString<typeof breadcrumb.slots>
 }
