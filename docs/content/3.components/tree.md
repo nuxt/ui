@@ -1,5 +1,6 @@
 ---
 description: A tree view component to display and interact with hierarchical data structures.
+category: data
 links:
   - label: Tree
     icon: i-custom-reka-ui
