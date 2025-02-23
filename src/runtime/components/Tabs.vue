@@ -4,7 +4,6 @@ import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
@@ -65,24 +64,6 @@ export type TabsSlots<T extends { slot?: string }> = {
   trailing: SlotProps<T>
   content: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
-
-extendDevtoolsMeta({
-  defaultProps: {
-    items: [{
-      label: 'Tab1',
-      avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' },
-      content: 'This is the content shown for Tab1'
-    }, {
-      label: 'Tab2',
-      icon: 'i-lucide-user',
-      content: 'And, this is the content for Tab2'
-    }, {
-      label: 'Tab3',
-      icon: 'i-lucide-bell',
-      content: 'Finally, this is the content for Tab3'
-    }]
-  }
-})
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">

@@ -3,7 +3,6 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/skeleton'
 import { tv } from '../utils/tv'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfigSkeleton = _appConfig as AppConfig & { ui: { skeleton: Partial<typeof theme> } }
 
@@ -17,8 +16,6 @@ export interface SkeletonProps {
   as?: any
   class?: any
 }
-
-extendDevtoolsMeta({ example: 'SkeletonExample' })
 </script>
 
 <script setup lang="ts">

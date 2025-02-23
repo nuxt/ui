@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'reka-ui'
 import { localeContextInjectionKey } from '../composables/useLocale'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ToasterProps, Locale } from '../types'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId' | 'dir' | 'locale'> {
@@ -17,8 +16,6 @@ export interface AppSlots {
 export default {
   name: 'App'
 }
-
-extendDevtoolsMeta({ ignore: true })
 </script>
 
 <script setup lang="ts">
