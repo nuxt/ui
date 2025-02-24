@@ -25,7 +25,7 @@ async function openModal() {
 In order to return a value from the overlay, the `overlay.open()` can be awaited. In order for this to work, however, the **overlay component must emit a `close` event**. See example below for details.
 ::
 
-## Overlay API
+## API
 
 ### `create(component: T, options: OverlayOptions): OverlayInstance`
 
