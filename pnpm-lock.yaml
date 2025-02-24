@@ -6,9 +6,12 @@ settings:
 
 overrides:
   '@nuxt/ui': workspace:*
+  '@tailwindcss/postcss': 4.0.7
+  '@tailwindcss/vite': 4.0.7
   chokidar: 3.6.0
   debug: 4.3.7
   rollup: 4.32.1
+  tailwindcss: 4.0.7
   typescript: 5.6.3
   unimport: 3.14.5
   unplugin: ^2.2.0
@@ -47,10 +50,10 @@ importers:
         specifier: ^3.5.2
         version: 3.5.2(magicast@0.3.5)(rollup@4.32.1)
       '@tailwindcss/postcss':
-        specifier: ^4.0.7
+        specifier: 4.0.7
         version: 4.0.7
       '@tailwindcss/vite':
-        specifier: ^4.0.7
+        specifier: 4.0.7
         version: 4.0.7(vite@6.1.1(@types/node@22.13.4)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))
       '@tanstack/vue-table':
         specifier: ^8.21.2
@@ -128,7 +131,7 @@ importers:
         specifier: ^0.3.1
         version: 0.3.1(tailwindcss@4.0.7)
       tailwindcss:
-        specifier: ^4.0.7
+        specifier: 4.0.7
         version: 4.0.7
       tinyglobby:
         specifier: ^0.2.11
@@ -6207,7 +6210,7 @@ packages:
     resolution: {integrity: sha512-krn67M3FpPwElg4FsZrOQd0U26o7UDH/QOkK8RNaiCCrr052f6YJPBUfNKnPo/s/xRzNPtv1Mldlxsg8Tb46BQ==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
-      tailwindcss: '*'
+      tailwindcss: 4.0.7
 
   tailwindcss@4.0.7:
     resolution: {integrity: sha512-yH5bPPyapavo7L+547h3c4jcBXcrKwybQRjwdEIVAd9iXRvy/3T1CC6XSQEgZtRySjKfqvo3Cc0ZF1DTheuIdA==}
