@@ -67,6 +67,46 @@ props:
 ---
 ::
 
+### Multiple
+
+Use the `multiple` prop to allow multiple item selections.
+
+::component-code
+---
+collapse: true
+hide:
+  - class
+ignore:
+  - items
+external:
+  - items
+props:
+  multiple: true
+  items:
+    - label: 'app/'
+      defaultExpanded: true
+      children:
+        - label: 'composables/'
+          children:
+            - label: 'useAuth.ts'
+              icon: 'i-vscode-icons-file-type-typescript'
+            - label: 'useUser.ts'
+              icon: 'i-vscode-icons-file-type-typescript'
+        - label: 'components/'
+          defaultExpanded: true
+          children:
+            - label: 'Card.vue'
+              icon: 'i-vscode-icons-file-type-vue'
+            - label: 'Button.vue'
+              icon: 'i-vscode-icons-file-type-vue'
+    - label: 'app.vue'
+      icon: 'i-vscode-icons-file-type-vue'
+    - label: 'nuxt.config.ts'
+      icon: 'i-vscode-icons-file-type-nuxt'
+  class: 'w-60'
+---
+::
+
 ### Color
 
 Use the `color` prop to change the color of the Tree.
@@ -122,46 +162,6 @@ external:
   - items
 props:
   size: xl
-  items:
-    - label: 'app/'
-      defaultExpanded: true
-      children:
-        - label: 'composables/'
-          children:
-            - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
-            - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
-        - label: 'components/'
-          defaultExpanded: true
-          children:
-            - label: 'Card.vue'
-              icon: 'i-vscode-icons-file-type-vue'
-            - label: 'Button.vue'
-              icon: 'i-vscode-icons-file-type-vue'
-    - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
-    - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
-  class: 'w-60'
----
-::
-
-### Multiple
-
-Use the `multiple` prop to allow multiple item selections.
-
-::component-code
----
-collapse: true
-hide:
-  - class
-ignore:
-  - items
-external:
-  - items
-props:
-  multiple: true
   items:
     - label: 'app/'
       defaultExpanded: true
