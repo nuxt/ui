@@ -130,7 +130,7 @@ function updateModalTitle() {
 
 ## Example
 
-Here's a complete example of how to use the `userOverlay` composable:
+Here's a complete example of how to use the `useOverlay` composable:
 
 ```vue
 <template>
