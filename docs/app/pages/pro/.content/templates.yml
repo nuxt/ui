@@ -1,7 +1,7 @@
 title: Official Nuxt UI Pro Templates
 description: 'Ready to use templates powered by our premium Vue components and Nuxt Content. The templates are responsive, accessible and easy to customize so you can get started in no time.'
 hero:
-  title: Official Nuxt UI [Pro]{.text-(--ui-primary)} Templates
+  title: Ship [in minutes]{.text-(--ui-primary)} with :br Nuxt UI Pro Templates
   description: 'Ready to use templates powered by our premium Vue components and Nuxt Content.<br class="hidden lg:block"> The templates are responsive, accessible and easy to customize so you can get started in no time.'
 navigation: false
 links:
@@ -18,6 +18,7 @@ links:
 templates:
   - title: 'Landing'
     description: "A landing page template you can use as a starting point for your next idea. You can change the content easily in [`content/index.yml`](https://github.com/nuxt-ui-pro/landing/blob/v3/content/index.yml)."
+    icon: i-lucide-layout
     thumbnail:
       dark: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2xhbmRpbmctdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3Mzk0NjMzNzV9.ja2nUDVOoIFvyaMmg9Jn51uNMoYYt4WA1KWUQBWwUPo.jpg?theme=dark
       light: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2xhbmRpbmctdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3Mzk0NjMzNzV9.ja2nUDVOoIFvyaMmg9Jn51uNMoYYt4WA1KWUQBWwUPo.jpg?theme=light
@@ -42,6 +43,7 @@ templates:
         variant: outline
   - title: 'Docs'
     description: "A ready-to-use documentation template integrated with [Nuxt Content](https://content.nuxt.com). You can start writing your docs right away inside the [`content/`](https://github.com/nuxt-ui-pro/docs/tree/v3/content) directory."
+    icon: i-lucide-book
     thumbnail:
       dark: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RvY3MtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3Mzk0NjM0MTd9.ltVAqPgKG38O01X1zl6MXfrJc55nf9OewXNFjpZ_2JY.jpg?theme=dark
       light: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2RvY3MtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3Mzk0NjM0MTd9.ltVAqPgKG38O01X1zl6MXfrJc55nf9OewXNFjpZ_2JY.jpg?theme=light
@@ -66,6 +68,10 @@ templates:
         color: neutral
   - title: 'SaaS'
     description: "A fully built SaaS application to launch your next project. It includes a landing page, a pricing page, a documentation and a blog which can customized easily from the `content/` directory."
+    icon: i-lucide-cloud
+    thumbnail:
+      dark: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3NhYXMtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3Mzk0NjM0NDh9.tgzUQaw6XswUPPVbOXazuWwoTHJODg155CYt1xfzIdM.jpg?theme=dark
+      light: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3NhYXMtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3Mzk0NjM0NDh9.tgzUQaw6XswUPPVbOXazuWwoTHJODg155CYt1xfzIdM.jpg?theme=light
     features:
       - title: Includes Landing & Docs sections
         icon: i-lucide-grid-2x2-plus
@@ -74,21 +80,23 @@ templates:
       - title: Authentication pages (login, register)
         icon: i-lucide-user-round-check
     links:
-      - label: Live preview (soon)
+      - label: Live preview
         to: https://saas-template.nuxt.dev
         target: _blank
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
-        disabled: true
-      - label: Use this template (soon)
+      - label: Use this template
         to: https://github.com/nuxt-ui-pro/saas/tree/v3
         target: _blank
         variant: outline
         icon: i-simple-icons-github
         color: neutral
-        disabled: true
   - title: 'Dashboard'
     description: "A template to illustrate how to build your own dashboard with the 15+ latest Nuxt UI Pro components, designed specifically to create a consistent look and feel."
+    icon: i-lucide-bar-chart-big
+    thumbnail:
+      dark: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2Rhc2hib2FyZC10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTczOTQ2MzU2N30._VElt4uvLjvAMdnTLytCInOajMElzWDKbmvOaMZhZUI.jpg?theme=dark
+      light: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2Rhc2hib2FyZC10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTczOTQ2MzU2N30._VElt4uvLjvAMdnTLytCInOajMElzWDKbmvOaMZhZUI.jpg?theme=light
     features:
       - title: Mix with SaaS template for a complete solution
         icon: i-lucide-puzzle
@@ -97,16 +105,14 @@ templates:
       - title: Resizable multi-column layout
         icon: i-lucide-columns-3
     links:
-      - label: Live preview (soon)
+      - label: Live preview
         to: https://dashboard-template.nuxt.dev
         target: _blank
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
-        disabled: true
-      - label: Use this template (soon)
+      - label: Use this template
         to: https://github.com/nuxt-ui-pro/dashboard/tree/v3
         target: _blank
         icon: i-simple-icons-github
         color: neutral
         variant: outline
-        disabled: true

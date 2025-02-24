@@ -1,5 +1,6 @@
 ---
 description: A dialog window that can be used to display a message or request user input.
+category: overlay
 links:
   - label: Dialog
     icon: i-custom-reka-ui
