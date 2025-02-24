@@ -129,10 +129,9 @@ const ui = computed(() => modal({
       <DialogOverlay
         v-if="overlay"
         :class="ui.overlay({ class: props.ui?.overlay })"
-        @after-leave="emits('after:leave')"
       />
 
-      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-leave="emits('after:leave')" v-on="contentEvents">
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
             <slot name="title">
