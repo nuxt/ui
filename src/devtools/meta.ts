@@ -97,7 +97,7 @@ export function devtoolsMetaPlugin({ resolve, options, templates }: { resolve: R
                     && !tag.text?.includes('appConfig'))?.text
                     ?? template?.defaultVariants?.[prop.name]
 
-                if (typeof defaultValue === 'string') defaultValue = defaultValue?.replaceAll(/["'`]/g, '')
+                if (typeof defaultValue === 'string') defaultValue = defaultValue?.replace(/\s+as\s+\w+$/g, '').replaceAll(/["'`]/g, '')
                 if (defaultValue === 'true') defaultValue = true
                 if (defaultValue === 'false') defaultValue = false
                 if (!Number.isNaN(Number.parseInt(defaultValue))) defaultValue = Number.parseInt(defaultValue)

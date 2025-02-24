@@ -1,0 +1,521 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tree > renders with as correctly 1`] = `
+"<div role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</div>"
+`;
+
+exports[`Tree > renders with class correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="isolate absolute">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with collapsedIcon correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:chevron-down shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Default Collapsed</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with default slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with defaultExpanded correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with defaultValue correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 before:bg-(--ui-bg-elevated) text-(--ui-primary)" role="treeitem" aria-selected="true" aria-expanded="false" aria-level="0" data-indent="0" data-selected="" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with defautExpanded item correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="true" aria-level="0" data-indent="0" data-expanded="" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder-open shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Default Expanded</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <ul class="ms-4.5 border-s border-(--ui-border)">
+      <li class="ps-1.5 -ms-px"><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+        <!--v-if-->
+      </li>
+      <li class="ps-1.5 -ms-px"><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+      <li class="ps-1.5 -ms-px"><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with disabled correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button disabled="" class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors cursor-not-allowed opacity-75" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button disabled="" class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors cursor-not-allowed opacity-75" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button disabled="" class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors cursor-not-allowed opacity-75" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with disabled item correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button disabled="" class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors cursor-not-allowed opacity-75" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Disabled item</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with dynamic slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item="">dynamic slot</button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with expanded correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with expandedIcon correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="true" aria-level="0" data-indent="0" data-expanded="" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:chevron-up shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Default Expanded</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <ul class="ms-4.5 border-s border-(--ui-border)">
+      <li class="ps-1.5 -ms-px"><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+        <!--v-if-->
+      </li>
+      <li class="ps-1.5 -ms-px"><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+      <li class="ps-1.5 -ms-px"><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with item slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item="">item slot</button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item="">item slot</button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with item-leading slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item="">leading slot<span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item="">leading slot<span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with item-trailing slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span><span class="ms-auto inline-flex gap-1.5 items-center">trailing slot</span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span><span class="ms-auto inline-flex gap-1.5 items-center">trailing slot</span></button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with items correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with labelKey correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">root</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app-vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt-config-ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with modelValue correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 before:bg-(--ui-bg-elevated) text-(--ui-primary)" role="treeitem" aria-selected="true" aria-expanded="false" aria-level="0" data-indent="0" data-selected="" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with multiple and defaultValue correctly 1`] = `
+"<ul role="tree" aria-multiselectable="true" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 before:bg-(--ui-bg-elevated) text-(--ui-primary)" role="treeitem" aria-selected="true" aria-expanded="false" aria-level="0" data-indent="0" data-selected="" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 before:bg-(--ui-bg-elevated) text-(--ui-primary)" role="treeitem" aria-selected="true" aria-level="0" data-indent="0" data-selected="" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with multiple and modelValue correctly 1`] = `
+"<ul role="tree" aria-multiselectable="true" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 before:bg-(--ui-bg-elevated) text-(--ui-primary)" role="treeitem" aria-selected="true" aria-expanded="false" aria-level="0" data-indent="0" data-selected="" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 before:bg-(--ui-bg-elevated) text-(--ui-primary)" role="treeitem" aria-selected="true" aria-level="0" data-indent="0" data-selected="" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with multiple correctly 1`] = `
+"<ul role="tree" aria-multiselectable="true" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with neutral color correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-border-inverted) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-border-inverted) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-border-inverted) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with size lg correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-3 py-2 text-sm gap-2 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-3 py-2 text-sm gap-2 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-3 py-2 text-sm gap-2 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with size md correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with size sm correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-xs gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-4" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-4" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-xs gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-4" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-xs gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-4" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with size xl correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-3 py-2 text-base gap-2 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-6" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-6" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-3 py-2 text-base gap-2 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-6" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-3 py-2 text-base gap-2 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-6" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with size xs correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2 py-1 text-xs gap-1 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-4" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-4" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2 py-1 text-xs gap-1 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-4" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2 py-1 text-xs gap-1 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-4" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with trailingIcon correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:arrow-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with ui correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors font-bold" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors font-bold" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors font-bold" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`Tree > renders with valueKey correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="relative isolate">
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-lucide:folder shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app</span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="iconify i-lucide:chevron-down shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180 size-5" aria-hidden="true"></span></span></button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-vue shrink-0 size-5" aria-hidden="true"></span><span class="truncate">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li class=""><button class="relative group w-full flex items-center before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-(--ui-primary) px-2.5 py-1.5 text-sm gap-1.5 hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50 transition-colors before:transition-colors" role="treeitem" aria-selected="false" aria-level="0" data-indent="0" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt shrink-0 size-5" aria-hidden="true"></span><span class="truncate">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
