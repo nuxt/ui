@@ -125,7 +125,7 @@
   "devDependencies": {
     "@nuxt/eslint-config": "^1.1.0",
     "@nuxt/module-builder": "^0.8.4",
-    "@nuxt/test-utils": "^3.15.4",
+    "@nuxt/test-utils": "^3.17.0",
     "@release-it/conventional-changelog": "^10.0.0",
     "@standard-schema/spec": "^1.0.0",
     "@vue/test-utils": "^2.4.6",
@@ -150,9 +150,12 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
+    "@tailwindcss/postcss": "4.0.7",
+    "@tailwindcss/vite": "4.0.7",
     "chokidar": "3.6.0",
     "debug": "4.3.7",
     "rollup": "4.32.1",
+    "tailwindcss": "4.0.7",
     "typescript": "5.6.3",
     "unimport": "3.14.5",
     "unplugin": "^2.2.0",
@@ -161,7 +164,14 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "better-sqlite3"
+      "better-sqlite3",
+      "sharp"
+    ],
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "vue-demi",
+      "workerd"
     ]
   },
   "keywords": [
