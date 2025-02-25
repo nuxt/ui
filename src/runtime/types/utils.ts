@@ -60,6 +60,8 @@ export type SelectModelValueEmits<
   'update:modelValue': [payload: SelectModelValue<A, VK, M>]
 }
 
+export type MaybeMultipleModelValue<T, M extends boolean = false> = (T extends infer U ? M extends true ? U[] : U : never)
+
 export type StringOrVNode =
   | string
   | VNode
