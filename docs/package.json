@@ -7,7 +7,7 @@
     "@iconify-json/lucide": "^1.2.26",
     "@iconify-json/simple-icons": "^1.2.25",
     "@iconify-json/vscode-icons": "^1.2.15",
-    "@nuxt/content": "https://pkg.pr.new/@nuxt/content@f1a9b8e",
+    "@nuxt/content": "^3.2.2",
     "@nuxt/image": "^1.9.0",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@c6577ad",
