@@ -11,11 +11,12 @@ import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type {
   AcceptableValue,
   ArrayOrNested,
+  GetItemKeys,
+  GetItemValue,
+  GetModelValue,
+  GetModelValueEmits,
   NestedItem,
-  PartialString,
-  SelectItemKey,
-  SelectModelValue,
-  SelectModelValueEmits
+  PartialString
 } from '../types/utils'
 
 const appConfigSelectMenu = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
@@ -40,7 +41,7 @@ export type SelectMenuItem = _SelectMenuItem | AcceptableValue | boolean
 
 type SelectMenuVariants = VariantProps<typeof selectMenu>
 
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover'>, UseComponentIconsProps {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -92,9 +93,9 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   labelKey?: keyof NestedItem<T>
   items?: T
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
-  defaultValue?: SelectModelValue<T, VK, M>
+  defaultValue?: GetModelValue<T, VK, M>
   /** The controlled value of the SelectMenu. Can be binded-with with `v-model`. */
-  modelValue?: SelectModelValue<T, VK, M>
+  modelValue?: GetModelValue<T, VK, M>
   /** Whether multiple options can be selected or not. */
   multiple?: M
   /** Highlight the ring color like a focus state. */
@@ -118,7 +119,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   ui?: PartialString<typeof selectMenu.slots>
 }
 
-export type SelectMenuEmits<A extends ArrayOrNested<unknown>, VK extends SelectItemKey<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
+export type SelectMenuEmits<A extends ArrayOrNested<unknown>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
@@ -126,21 +127,21 @@ export type SelectMenuEmits<A extends ArrayOrNested<unknown>, VK extends SelectI
   /** Event handler when highlighted element changes. */
   highlight: [payload: {
     ref: HTMLElement
-    value: SelectModelValue<A, VK, M>
+    value: GetModelValue<A, VK, M>
   } | undefined]
-} & SelectModelValueEmits<A, VK, M>
+} & GetModelValueEmits<A, VK, M>
 
 type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number }) => any
 
 export interface SelectMenuSlots<
   A extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>,
-  VK extends SelectItemKey<A> | undefined = undefined,
+  VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: SelectModelValue<A, VK, M>, open: boolean, ui: any }): any
-  'default'(props: { modelValue?: SelectModelValue<A, VK, M>, open: boolean }): any
-  'trailing'(props: { modelValue?: SelectModelValue<A, VK, M>, open: boolean, ui: any }): any
+  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: any }): any
+  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean }): any
+  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -152,7 +153,7 @@ export interface SelectMenuSlots<
 extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
+<script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { computed, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
@@ -209,7 +210,7 @@ const ui = computed(() => selectMenu({
   buttonGroup: orientation.value
 }))
 
-function displayValue(value: SelectModelValue<T, VK, M>): string {
+function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string {
   if (props.multiple && Array.isArray(value)) {
     return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
@@ -344,14 +345,14 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
     <ComboboxAnchor as-child>
       <ComboboxTrigger :class="ui.base({ class: [props.class, props.ui?.base] })" tabindex="0">
         <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-          <slot name="leading" :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open" :ui="ui">
+          <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
             <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
             <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
           </slot>
         </span>
 
-        <slot :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open">
-          <template v-for="displayedModelValue in [displayValue(modelValue as SelectModelValue<T, VK, M>)]" :key="displayedModelValue">
+        <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
+          <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
             <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
               {{ displayedModelValue }}
             </span>
@@ -362,7 +363,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
         </slot>
 
         <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-          <slot name="trailing" :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open" :ui="ui">
+          <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
             <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
           </slot>
         </span>

@@ -11,11 +11,12 @@ import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type {
   AcceptableValue,
   ArrayOrNested,
+  GetItemKeys,
+  GetItemValue,
+  GetModelValue,
+  GetModelValueEmits,
   NestedItem,
-  PartialString,
-  SelectItemKey,
-  SelectModelValue,
-  SelectModelValueEmits
+  PartialString
 } from '../types/utils'
 
 const appConfigSelect = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
@@ -40,7 +41,7 @@ export type SelectItem = _SelectItem | AcceptableValue | boolean
 
 type SelectVariants = VariantProps<typeof select>
 
-export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends SelectItemKey<T> | undefined = undefined, M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
+export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -84,9 +85,9 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   labelKey?: keyof NestedItem<T>
   items?: T
   /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
-  defaultValue?: SelectModelValue<T, VK, M>
+  defaultValue?: GetModelValue<T, VK, M>
   /** The controlled value of the Select. Can be bind as `v-model`. */
-  modelValue?: SelectModelValue<T, VK, M>
+  modelValue?: GetModelValue<T, VK, M>
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
@@ -95,23 +96,23 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   ui?: PartialString<typeof select.slots>
 }
 
-export type SelectEmits<A extends ArrayOrNested<unknown>, VK extends SelectItemKey<A> | undefined, M extends boolean> = Omit<SelectRootEmits, 'update:modelValue'> & {
+export type SelectEmits<A extends ArrayOrNested<unknown>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<SelectRootEmits, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
-} & SelectModelValueEmits<A, VK, M>
+} & GetModelValueEmits<A, VK, M>
 
 type SlotProps<T extends SelectItem> = (props: { item: T, index: number }) => any
 
 export interface SelectSlots<
   A extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>,
-  VK extends SelectItemKey<A> | undefined = undefined,
+  VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: SelectModelValue<A, VK, M>, open: boolean, ui: any }): any
-  'default'(props: { modelValue?: SelectModelValue<A, VK, M>, open: boolean }): any
-  'trailing'(props: { modelValue?: SelectModelValue<A, VK, M>, open: boolean, ui: any }): any
+  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: any }): any
+  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean }): any
+  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: any }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -121,7 +122,7 @@ export interface SelectSlots<
 extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
+<script setup lang="ts" generic="T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { computed, toRef } from 'vue'
 import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
@@ -177,7 +178,7 @@ const groups = computed<SelectItem[][]>(() =>
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-function displayValue(value?: SelectModelValue<T, VK, M>): string {
+function displayValue(value?: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string {
   if (props.multiple && Array.isArray(value)) {
     return value.map(v => displayValue(v)).filter(Boolean).join(', ')
   }
@@ -226,14 +227,14 @@ function isSelectItem(item: SelectItem): item is _SelectItem {
   >
     <SelectTrigger :id="id" :class="ui.base({ class: [props.class, props.ui?.base] })" v-bind="{ ...$attrs, ...ariaAttrs }">
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open" :ui="ui">
+        <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
-      <slot :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open">
-        <template v-for="displayedModelValue in [displayValue(modelValue as SelectModelValue<T, VK, M>)]" :key="displayedModelValue">
+      <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
+        <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
           <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
             {{ displayedModelValue }}
           </span>
@@ -244,7 +245,7 @@ function isSelectItem(item: SelectItem): item is _SelectItem {
       </slot>
 
       <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="(modelValue as SelectModelValue<T, VK, M>)" :open="open" :ui="ui">
+        <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </span>

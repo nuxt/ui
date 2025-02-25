@@ -30,34 +30,32 @@ export type ArrayOrNested<T> = T[] | T[][]
 export type NestedItem<T> = T extends Array<infer I> ? NestedItem<I> : T
 export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>>
 
-export type SelectItemKey<T extends ArrayOrNested<unknown>, _T extends NestedItem<T> = NestedItem<T>> = _T extends AcceptableValue ? never : keyof _T
+export type GetItemKeys<I, T extends NestedItem<I> = NestedItem<I>> = T extends AcceptableValue ? never : keyof T
 
-type GetValue<I, VK extends SelectItemKey<any> | undefined> =
-I extends object
+export type GetItemValue<I, VK extends GetItemKeys<I> | undefined, T extends NestedItem<I> = NestedItem<I>> =
+T extends object
   ? VK extends undefined
-    ? I
-    : VK extends keyof I
-      ? I[VK]
+    ? T
+    : VK extends keyof T
+      ? T[VK]
       : never
-  : I
+  : T
 
-export type SelectModelValue<
-  A extends ArrayOrNested<unknown>,
-  VK extends SelectItemKey<A> | undefined,
+export type GetModelValue<
+  T,
+  VK extends GetItemKeys<T> | undefined,
   M extends boolean
-> = NestedItem<A> extends infer I
-  ? M extends true
-    ? GetValue<I, VK>[]
-    : GetValue<I, VK>
-  : never
+> = M extends true
+  ? GetItemValue<T, VK>[]
+  : GetItemValue<T, VK>
 
-export type SelectModelValueEmits<
-  A extends ArrayOrNested<unknown>,
-  VK extends SelectItemKey<A> | undefined,
+export type GetModelValueEmits<
+  T,
+  VK extends GetItemKeys<T> | undefined,
   M extends boolean
 > = {
   /** Event handler called when the value changes. */
-  'update:modelValue': [payload: SelectModelValue<A, VK, M>]
+  'update:modelValue': [payload: GetModelValue<T, VK, M>]
 }
 
 export type MaybeMultipleModelValue<T, M extends boolean = false> = (T extends infer U ? M extends true ? U[] : U : never)
