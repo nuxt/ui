@@ -75,7 +75,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     write: true,
     getContents: () => `@source "./ui";
 
-@theme default {
+@theme default static {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
