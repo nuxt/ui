@@ -62,8 +62,9 @@ const categories = [{
       description="Build your Vue or Nuxt application faster with Nuxt UI and Nuxt UI Pro components. Powered by Tailwind CSS and Reka UI, delivering responsive and customizable components."
       class="relative"
       orientation="vertical"
-      :ui="{ title: 'text-balance' }"
+      :ui="{ title: 'text-balance', container: 'relative' }"
     >
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <template #headline>
         <UButton
           to="https://tailwindcss.com"
@@ -102,10 +103,10 @@ const categories = [{
       </template>
     </UPageHero>
 
-    <UContainer>
-      <div v-for="category in categories" :key="category.id">
-        <div class="mb-4 sm:mb-6 lg:mb-8 sticky top-(--ui-header-height) bg-(--ui-bg)/75 backdrop-blur z-[1] -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-          <div class="relative border-b border-(--ui-border) py-4 sm:py-6 lg:py-8">
+    <div v-for="category in categories" :key="category.id">
+      <div class="mb-4 sm:mb-6 lg:mb-8 sticky top-[calc(var(--ui-header-height)-1px)] bg-(--ui-bg)/75 backdrop-blur z-[1] -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+        <div class="relative border-y border-(--ui-border) py-4 sm:py-6 lg:py-8">
+          <UContainer>
             <h2 class="relative text-pretty font-bold text-(--ui-text-highlighted) text-base sm:text-xl lg:text-2xl">
               <a :href="`#${category.id}`" class="group lg:ps-2 lg:-ms-2">
                 <span class="absolute -ms-8 top-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 p-1 bg-(--ui-bg-elevated) hover:text-(--ui-primary) rounded-[calc(var(--ui-radius)*1.5)] hidden lg:flex text-(--ui-text-muted) transition">
@@ -117,9 +118,10 @@ const categories = [{
             <p class="text-pretty text-(--ui-text-muted) text-sm sm:text-base lg:text-lg mt-1 sm:mt-2 line-clamp-1">
               {{ category.description }}
             </p>
-          </div>
+          </UContainer>
         </div>
-
+      </div>
+      <UContainer>
         <UPageGrid :id="category.id" class="xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pb-24 scroll-mt-[calc(97px+var(--ui-header-height))] sm:scroll-mt-[calc(133px+var(--ui-header-height))] lg:scroll-mt-[calc(165px+var(--ui-header-height))]">
           <UPageCard
             v-for="(component, index) in componentsPerCategory[category.id]"
@@ -149,7 +151,7 @@ const categories = [{
             </div>
           </UPageCard>
         </UPageGrid>
-      </div>
-    </UContainer>
+      </UContainer>
+    </div>
   </UMain>
 </template>

@@ -2,18 +2,18 @@ title: Build faster with Nuxt UI Pro.
 description: A collection of premium Vue components, composables and utils built on top of Nuxt UI, oriented on structure and layout and designed to be used as building blocks for your application.
 hero:
   title: Build faster with Nuxt UI [Pro]{class="text-(--ui-primary)"}.
-  description: A collection of premium Vue components, composables and utils built on top of Nuxt UI. :br Focused on structure and layout, these **responsive components** are designed to be the perfect **building blocks for your next idea**.
+  description: A collection of premium Vue components, composables and utils built on top of Nuxt UI. :br Focused on structure and layout, these [responsive components]{class="text-(--ui-text)"} are designed to be the perfect [building blocks for your next idea]{class="text-(--ui-text)"}.
   links:
+    - label: Buy a license
+      size: xl
+      to: /pro/pricing
+      trailing-icon: i-lucide-arrow-right
     - label: Get started
-      icon: i-lucide-arrow-right
       trailing: true
+      color: neutral
+      variant: ghost
       to: /getting-started/installation/pro/nuxt
       size: xl
-    - label: Purchase a license
-      size: xl
-      color: neutral
-      variant: outline
-      to: /pro/pricing
 features:
   title: Create stunning Vue applications faster.
   description: Nuxt UI Pro comes packed with powerful features to help you build modern, performant, accessible and responsive Nuxt applications at record speed. From pre-built UI sections to Figma design kits, every detail is crafted to speed up your development and deliver a polished user experience.
@@ -45,18 +45,30 @@ features:
     - title: Figma Design Kits
       description: Match your development workflow with Nuxt UI & UI Pro Figma UI kits, ensuring a fast transition from design to code.
       icon: i-simple-icons-figma
-authorQuote:
-  quote: Nuxt UI, born from a desire to improve Vue component development, is the go-to library for building modern web interfaces. We aim to provide you with a comprehensive set of tools to create and customize your next UI while maintaining the best developer experience.
+testimonial:
+  quote: Nuxt UI has allowed me to develop my SaaS without any prior mockups. The design quality of their components and the intelligence of the DX meant that I was able to try many different layouts for my application until I found the perfect UX for my users. Nuxt UI is the ui-kit I would have dreamed of building myself, and Nuxt UI Pro makes things even easier when you want to go further with your SaaS. Kudos to the team.
   user:
-    name: Benjamin Canac
-    description: Author of Nuxt UI
-    to: https://github.com/benjamincanac
+    name: Benjamin Code
+    description: YouTuber and Founder
+    to: https://x.com/benjamincode
     avatar:
-      src: https://github.com/benjamincanac.png
+      src: https://pbs.twimg.com/profile_images/1607353032420769793/I8qQSUfQ_400x400.jpg
+# authorQuote:
+#   quote: Nuxt UI, born from a desire to improve Vue component development, is the go-to library for building modern web interfaces. We aim to provide you with a comprehensive set of tools to create and customize your next UI while maintaining the best developer experience.
+#   user:
+#     name: Benjamin Canac
+#     description: Author of Nuxt UI
+#     to: https://github.com/benjamincanac
+#     avatar:
+#       src: https://github.com/benjamincanac.png
+mainSection:
+  title: Meet the [Pro Components]{class="text-(--ui-primary)"}.
+  description: Code with 50+ components and sections of Nuxt UI Pro to build your next application by reducing the amount of code you need to write.
 sections:
   - title: The freedom to build anything
     description: Nuxt UI Pro ships with an extensive set of advanced components that cover a wide range of use-cases. Carefully crafted to reduce boilerplate code without sacrificing flexibility.
     id: features
+    reverse: true
     features:
       - name: Fully customizable
         description: Like Nuxt UI, change the style of any component from your App Config or customize them specifically through the ui prop.
@@ -99,9 +111,8 @@ sections:
         </UApp>
       </template>
       ```
-  - title: The flexibility to control your data
+  - title: The flexibility to display your data
     description: Although you can use any data source you want, Nuxt UI Pro is fully integrated with Nuxt Content and provides additional features when the module is detected.
-    reverse: true
     features:
       - name: 'Write Markdown with ease'
         description: Nuxt UI Pro overrides Nuxt Content prose components to make them awesome but also adds new ones like Callout, CodeGroup, Field, etc.
@@ -110,7 +121,7 @@ sections:
         description: 'Nuxt UI Pro ships with a ready to use command palette component. No need to setup Algolia DocSearch anymore.'
         icon: i-lucide-search
     links:
-      - label: Nuxt Content integration
+      - label: Nuxt Content Integration
         to: /getting-started/content
         icon: i-lucide-arrow-right
         trailing: true
@@ -144,10 +155,10 @@ cta:
   title: Start with Nuxt UI Pro today!
   description: Nuxt UI Pro is free in development, but you need a license to use it in production.
   links:
-    - label: Purchase a license
+    - label: Buy a license
       to: '/pro/pricing'
-      icon: i-lucide-shopping-cart
-    - label: License
+      trailing-icon: i-lucide-arrow-right
+    - label: Get started
       to: '/getting-started/license'
-      trailingIcon: i-lucide-circle-help
-      variant: subtle
+      variant: ghost
+      color: neutral

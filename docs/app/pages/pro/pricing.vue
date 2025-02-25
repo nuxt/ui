@@ -18,23 +18,24 @@ defineOgImageComponent('Docs', {
     <UPageHero
       class="relative"
       :description="page.pricing.description"
+      :ui="{
+        container: 'relative !pb-0'
+      }"
     >
       <template #title>
         <MDC :value="page.pricing.title" unwrap="p" />
       </template>
       <template #top>
-        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
         <StarsBg />
       </template>
-      <UContainer>
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div class="flex flex-col bg-(--ui-bg)">
         <UPricingPlan
           v-bind="page.pricing.freePlan"
-          class="mb-16"
+          variant="naked"
+          class="rounded-none border-x border-(--ui-border) border-t"
         />
-        <UPricingPlans
-          class="mb-16"
-          scale
-        >
+        <UPricingPlans compact>
           <UPricingPlan
             v-for="(plan, index) in page.pricing.plans"
             :key="index"
@@ -43,15 +44,16 @@ defineOgImageComponent('Docs', {
             :price="plan.price"
             :billing-period="plan.billing_period"
             :billing-cycle="plan.billing_cycle"
-            :highlight="plan.highlight"
-            :scale="plan.highlight"
-            variant="soft"
+            :variant="plan.highlight ? 'soft' : 'outline'"
+            :class="['rounded-none', { 'border-y border-(--ui-border)': plan.highlight }]"
             :features="plan.features"
             :button="plan.button"
           />
         </UPricingPlans>
         <UPricingPlan
           v-bind="page.pricing.figma"
+          variant="naked"
+          class="rounded-none border-x border-(--ui-border)"
         >
           <template #features>
             <li v-for="(feature, index) in page.pricing.figma.features" :key="index" class="flex items-center gap-2 min-w-0">
@@ -60,12 +62,13 @@ defineOgImageComponent('Docs', {
             </li>
           </template>
         </UPricingPlan>
-      </UContainer>
+      </div>
     </UPageHero>
 
     <UPageSection
       id="testimonials"
       v-bind="page.testimonials"
+      class="border-y border-(--ui-border)"
     >
       <UPageMarquee pause-on-hover :ui="{ root: '[--duration:40s]' }">
         <img
@@ -99,7 +102,9 @@ defineOgImageComponent('Docs', {
       id="faq"
       v-bind="page.faq"
       class="scroll-mt-(--ui-header-height)"
+      :ui="{ container: 'relative' }"
     >
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <UPageAccordion
         multiple
         :items="(page.faq.items as any[])"
