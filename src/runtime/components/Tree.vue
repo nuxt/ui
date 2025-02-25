@@ -122,6 +122,7 @@ extendDevtoolsMeta({ defaultProps: {
 
 <script setup lang="ts" generic="T extends TreeItem, M extends boolean = false, K extends SelectItemKey<T> | undefined = undefined">
 import { computed } from 'vue'
+import type { PropType } from 'vue'
 import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { get } from '../utils'
