@@ -6,12 +6,9 @@ settings:
 
 overrides:
   '@nuxt/ui': workspace:*
-  '@tailwindcss/postcss': ^4.0.8
-  '@tailwindcss/vite': ^4.0.8
   chokidar: 3.6.0
   debug: 4.3.7
   rollup: 4.32.1
-  tailwindcss: ^4.0.8
   typescript: 5.6.3
   unimport: 3.14.5
   unplugin: ^2.2.0
@@ -6210,7 +6207,7 @@ packages:
     resolution: {integrity: sha512-krn67M3FpPwElg4FsZrOQd0U26o7UDH/QOkK8RNaiCCrr052f6YJPBUfNKnPo/s/xRzNPtv1Mldlxsg8Tb46BQ==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
-      tailwindcss: ^4.0.8
+      tailwindcss: '*'
 
   tailwindcss@4.0.8:
     resolution: {integrity: sha512-Me7N5CKR+D2A1xdWA5t5+kjjT7bwnxZOE6/yDI/ixJdJokszsn2n++mdU5yJwrsTpqFX2B9ZNMBJDwcqk9C9lw==}

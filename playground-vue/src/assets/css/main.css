@@ -1,7 +1,9 @@
-@import "tailwindcss";
+@import "tailwindcss" theme(static);
 @import "@nuxt/ui";
 
-@theme {
+@source "../../../../playground/";
+
+@theme static {
   --font-sans: 'Public Sans', sans-serif;
 
   --color-green-50: #EFFDF5;
