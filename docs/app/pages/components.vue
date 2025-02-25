@@ -54,6 +54,22 @@ const categories = [{
   title: 'Overlay',
   description: 'Floating UI elements like modals, dialogs, tooltips, popovers, and other components that overlay the main content.'
 }]
+
+const { y } = useWindowScroll()
+onMounted(() => {
+  const stickyElements = document.querySelectorAll('[data-track-sticky]') as NodeListOf<HTMLElement>
+  watch(y, () => {
+    stickyElements.forEach((el) => {
+      const rect = el.getBoundingClientRect()
+      const topComputed = Number.parseInt(window.getComputedStyle(el).top || '0', 10)
+      if (rect.top <= topComputed) {
+        el.dataset.stuck = ''
+      } else {
+        delete el.dataset.stuck
+      }
+    })
+  }, { immediate: true })
+})
 </script>
 
 <template>
@@ -104,18 +120,18 @@ const categories = [{
     </UPageHero>
 
     <div v-for="category in categories" :key="category.id">
-      <div class="mb-4 sm:mb-6 lg:mb-8 sticky top-[calc(var(--ui-header-height)-1px)] bg-(--ui-bg)/75 backdrop-blur z-[1] -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="relative border-y border-(--ui-border) py-4 sm:py-6 lg:py-8">
+      <div data-track-sticky class="group mb-4 sm:mb-6 lg:mb-8 sticky top-[calc(var(--ui-header-height)-1px)] bg-(--ui-bg)/75 backdrop-blur z-[1]">
+        <div class="relative border-y border-(--ui-border) py-4 sm:not-group-[[data-stuck]]:py-6 lg:not-group-[[data-stuck]]:py-8 transition-all duration-300">
           <UContainer>
-            <h2 class="relative text-pretty font-bold text-(--ui-text-highlighted) text-base sm:text-xl lg:text-2xl">
-              <a :href="`#${category.id}`" class="group lg:ps-2 lg:-ms-2">
-                <span class="absolute -ms-8 top-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 p-1 bg-(--ui-bg-elevated) hover:text-(--ui-primary) rounded-[calc(var(--ui-radius)*1.5)] hidden lg:flex text-(--ui-text-muted) transition">
+            <h2 class="relative text-pretty font-bold text-(--ui-text-highlighted) text-base sm:not-group-[[data-stuck]]:text-xl lg:not-group-[[data-stuck]]:text-2xl transition-all duration-300 ">
+              <a :href="`#${category.id}`" class="group lg:not-group-[[data-stuck]]:ps-2 lg:not-group-[[data-stuck]]:-ms-2">
+                <span class="absolute -ms-8 top-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 p-1 bg-(--ui-bg-elevated) hover:text-(--ui-primary) rounded-[calc(var(--ui-radius)*1.5)] hidden lg:not-group-[[data-stuck]]:flex text-(--ui-text-muted) transition">
                   <UIcon name="i-lucide-hash" class="size-4 shrink-0" />
                 </span>
                 {{ category.title }}
               </a>
             </h2>
-            <p class="text-pretty text-(--ui-text-muted) text-sm sm:text-base lg:text-lg mt-1 sm:mt-2 line-clamp-1">
+            <p class="text-pretty text-(--ui-text-muted) text-sm sm:not-group-[[data-stuck]]:text-base lg:not-group-[[data-stuck]]:text-lg mt-1 sm:not-group-[[data-stuck]]:mt-2 line-clamp-1 transition-all duration-300">
               {{ category.description }}
             </p>
           </UContainer>

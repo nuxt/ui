@@ -19,7 +19,7 @@ defineOgImageComponent('Docs', {
       class="relative"
       :description="page.pricing.description"
       :ui="{
-        container: 'relative !pb-0'
+        container: 'relative lg:!pb-0'
       }"
     >
       <template #title>
@@ -29,11 +29,11 @@ defineOgImageComponent('Docs', {
         <StarsBg />
       </template>
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      <div class="flex flex-col bg-(--ui-bg)">
+      <div class="flex flex-col bg-(--ui-bg) gap-8 lg:gap-0">
         <UPricingPlan
           v-bind="page.pricing.freePlan"
           variant="naked"
-          class="rounded-none border-x border-(--ui-border) border-t"
+          class="lg:rounded-none border-x border-(--ui-border) border-t border-b lg:border-b-0"
         />
         <UPricingPlans compact>
           <UPricingPlan
@@ -45,7 +45,7 @@ defineOgImageComponent('Docs', {
             :billing-period="plan.billing_period"
             :billing-cycle="plan.billing_cycle"
             :variant="plan.highlight ? 'soft' : 'outline'"
-            :class="['rounded-none', { 'border-y border-(--ui-border)': plan.highlight }]"
+            :class="['lg:rounded-none', { 'border-2 lg:border lg:border-x-0 border-(--ui-primary) lg:border-(--ui-border)': plan.highlight }]"
             :features="plan.features"
             :button="plan.button"
           />
@@ -53,7 +53,7 @@ defineOgImageComponent('Docs', {
         <UPricingPlan
           v-bind="page.pricing.figma"
           variant="naked"
-          class="rounded-none border-x border-(--ui-border)"
+          class="lg:rounded-none border lg:border-y-0 border-(--ui-border)"
         >
           <template #features>
             <li v-for="(feature, index) in page.pricing.figma.features" :key="index" class="flex items-center gap-2 min-w-0">
