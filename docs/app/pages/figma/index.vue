@@ -124,7 +124,9 @@ onMounted(async () => {
           </UButton>
         </div>
       </div>
-      <div aria-hidden="true" class="absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <Motion as-child :initial="{ height: 0 }" :animate="{ height: 'auto' }" :transition="{ delay: 0.2, duration: 1 }">
+        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      </Motion>
     </UPageHero>
     <UPageSection v-bind="page.features1" :ui="{ container: 'py-16 sm:py-16 lg:py-16', features: 'mt-0' }" class="border-y border-(--ui-border)" />
     <UPageCTA

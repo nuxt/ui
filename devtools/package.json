@@ -13,7 +13,7 @@
     "@nuxt/ui": "latest",
     "knitwork": "^1.2.0",
     "nuxt": "^3.15.4",
-    "prettier": "^3.5.1",
+    "prettier": "^3.5.2",
     "zod": "^3.24.2"
   }
 }

@@ -182,7 +182,7 @@ function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
   return false
 }
 
-function resolveLinkClass({ route, isActive, isExactActive }: any) {
+function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
   const active = isLinkActive({ route, isActive, isExactActive })
 
   if (props.raw) {
@@ -191,19 +191,10 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
 
   return ui.value({ class: props.class, active, disabled: props.disabled })
 }
-
-// Handle navigation without vue-router
-const handleNavigation = (href: string) => {
-  if (isExternal.value) {
-    window.location.href = href
-  } else {
-    window.location.pathname = href
-  }
-}
 </script>
 
 <template>
-  <template v-if="hasRouter">
+  <template v-if="hasRouter && !isExternal">
     <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to || '#'" custom>
       <template v-if="custom">
         <slot
@@ -212,7 +203,7 @@ const handleNavigation = (href: string) => {
             as,
             type,
             disabled,
-            href: to ? (isExternal ? to as string : href) : undefined,
+            href: to ? href : undefined,
             navigate,
             active: isLinkActive({ route: linkRoute, isActive, isExactActive })
           }"
@@ -225,7 +216,7 @@ const handleNavigation = (href: string) => {
           as,
           type,
           disabled,
-          href: to ? (isExternal ? to as string : href) : undefined,
+          href: to ? href : undefined,
           navigate
         }"
         :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
@@ -244,7 +235,7 @@ const handleNavigation = (href: string) => {
           type,
           disabled,
           href: to,
-          navigate: () => to && handleNavigation(to as string),
+          target: isExternal ? '_blank' : undefined,
           active: false
         }"
       />
@@ -256,10 +247,11 @@ const handleNavigation = (href: string) => {
         as,
         type,
         disabled,
-        href: (to as string)
+        href: (to as string),
+        target: isExternal ? '_blank' : undefined
       }"
-      :class="ui({ class: props.class, disabled })"
-      @click="to && handleNavigation(to as string)"
+      :is-external="isExternal"
+      :class="resolveLinkClass()"
     >
       <slot :active="false" />
     </ULinkBase>
