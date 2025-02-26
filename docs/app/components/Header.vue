@@ -64,6 +64,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
+          :key="value"
           color="neutral"
           variant="ghost"
           :to="`https://github.com/nuxt/${value}`"
