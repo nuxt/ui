@@ -6,6 +6,7 @@ const props = defineProps<{
   links: NavigationMenuItem[]
 }>()
 
+const route = useRoute()
 const config = useRuntimeConfig().public
 const { module } = useSharedData()
 
@@ -21,7 +22,8 @@ onMounted(() => {
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const items = computed(() => props.links.map(({ icon, ...link }) => link))
+const desktopLinks = computed(() => props.links.map(({ icon, ...link }) => link))
+const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOpen: link.children && route.path.startsWith(link.to as string) })))
 </script>
 
 <template>
@@ -53,7 +55,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
       </UDropdownMenu>
     </template>
 
-    <UNavigationMenu :items="items" variant="link" />
+    <UNavigationMenu :items="desktopLinks" variant="link" />
 
     <template #right>
       <ThemePicker />
@@ -76,7 +78,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
     </template>
 
     <template #body>
-      <UNavigationMenu orientation="vertical" :items="links" class="-mx-2.5" />
+      <UNavigationMenu orientation="vertical" :items="mobileLinks" class="-mx-2.5" default-open />
 
       <USeparator type="dashed" class="mt-4 mb-6" />
 

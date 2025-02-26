@@ -10,6 +10,7 @@ export function useLinks() {
     label: 'Components',
     icon: 'i-lucide-square-code',
     to: '/components',
+    active: route.path === '/components',
     children: [{
       label: 'Layout',
       to: '/components#layout',

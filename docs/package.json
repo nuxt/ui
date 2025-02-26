@@ -18,6 +18,7 @@
     "@vueuse/nuxt": "^12.7.0",
     "joi": "^17.13.3",
     "motion": "^12.4.7",
+    "motion-v": "0.11.0-beta.4",
     "nuxt": "^3.15.4",
     "nuxt-component-meta": "^0.10.0",
     "nuxt-llms": "^0.1.0",

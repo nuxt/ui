@@ -7,17 +7,15 @@ pricing:
   freePlan:
     title: Free in development
     description: Try Nuxt UI Pro for free in development, no credit card required. Upgrade when ready to deploy.
-    variant: soft
     orientation: horizontal
     button:
       label: Get started for Free
       to: '/getting-started/installation/pro/nuxt'
       color: 'neutral'
-      variant: 'outline'
+      variant: 'subtle'
   figma:
     title: Figma Kit Pro
     description: Get all Nuxt UI Pro components in a Figma kit to design your next application before coding. Everything you need, from wire-framing to high-fidelity web integration.
-    variant: soft
     orientation: horizontal
     price: $149 - $349
     terms: Solo & Team licenses available.
