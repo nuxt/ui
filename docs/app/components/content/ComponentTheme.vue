@@ -96,7 +96,7 @@ export default defineAppConfig(${json5.stringify(component.value, null, 2).repla
 
 ::
 
-::code-collapse{class="vue-only"}
+::code-collapse{class="vue-only ui-only"}
 
 \`\`\`ts [vite.config.ts]
 import { defineConfig } from 'vite'
@@ -107,6 +107,26 @@ export default defineConfig({
   plugins: [
     vue(),
     ui(${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')
+      .split('\n')
+      .map((line, i) => i === 0 ? line : `    ${line}`)
+      .join('\n')})
+  ]
+})
+\`\`\`
+
+::
+
+::code-collapse{class="vue-only ui-pro-only"}
+
+\`\`\`ts [vite.config.ts]
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import uiPro from '@nuxt/ui-pro/vite'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    uiPro(${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')
       .split('\n')
       .map((line, i) => i === 0 ? line : `    ${line}`)
       .join('\n')})
