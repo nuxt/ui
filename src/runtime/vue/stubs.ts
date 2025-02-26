@@ -6,6 +6,8 @@ import type { NuxtApp } from '#app'
 
 export { useHead } from '@unhead/vue'
 export { useRoute, useRouter } from 'vue-router'
+export { defineShortcuts } from '../composables/defineShortcuts'
+export { useLocale } from '../composables/useLocale'
 
 export const useAppConfig = () => appConfig
 
