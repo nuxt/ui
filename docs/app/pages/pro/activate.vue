@@ -1,21 +1,20 @@
 <script setup lang="ts">
 import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { joinURL } from 'ufo'
 
 const title = 'Activate your Nuxt UI Pro License'
 const description = 'Enable Nuxt UI Pro in your production projects by activating your license key received by email and get invited to the GitHub private repository.'
 
 const route = useRoute()
+const { url } = useSiteConfig()
 
 useSeoMeta({
   title,
   description,
   ogTitle: `${title} - Nuxt UI Pro`,
-  ogDescription: description
-})
-
-defineOgImageComponent('Docs', {
-  headline: 'Pro'
+  ogDescription: description,
+  ogImage: joinURL(url, '/pro/og-image.png')
 })
 
 const schema = z.object({

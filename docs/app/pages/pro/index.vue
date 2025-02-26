@@ -1,17 +1,18 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
 // @ts-expect-error yaml is not typed
 import page from '.content/pro.yml'
 // @ts-expect-error yaml is not typed
 import templatesPage from '.content/templates.yml'
 
+const { url } = useSiteConfig()
+
 useSeoMeta({
   title: page.title,
   ogTitle: page.title,
+  ogImage: joinURL(url, '/pro/og-image.png'),
   description: page.description,
   ogDescription: page.description
-})
-defineOgImageComponent('Docs', {
-  headline: 'Pro'
 })
 </script>
 
