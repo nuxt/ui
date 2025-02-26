@@ -78,8 +78,8 @@ onMounted(() => {
       </template>
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
-      <div class="border-y border-(--ui-border)">
-        <UCard class="lg:w-1/2 m-auto rounded-none" variant="outline" :ui="{ footer: 'bg-(--ui-bg-muted)' }">
+      <div class="lg:border-y border-(--ui-border)">
+        <UCard class="lg:w-1/2 m-auto lg:rounded-none overflow-hidden" variant="outline" :ui="{ footer: 'bg-(--ui-bg-muted)' }">
           <UForm
             :schema="schema"
             :validate-on="['blur']"
