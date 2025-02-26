@@ -10,7 +10,7 @@ useSeoMeta({
   description: page.description,
   ogTitle: page.title,
   ogDescription: page.description,
-  ogImage: joinURL(url, '/pro/og-image.png')
+  ogImage: joinURL(url, '/pro/templates/og-image.png')
 })
 </script>
 
