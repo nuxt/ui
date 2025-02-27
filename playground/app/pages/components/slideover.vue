@@ -16,9 +16,7 @@ const slideover = overlay.create(LazySlideoverExample, {
 function openSlideover() {
   count.value++
 
-  slideover.open({
-    count: count.value
-  })
+  slideover.open({ count: count.value })
 }
 </script>
 

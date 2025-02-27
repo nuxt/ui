@@ -14,8 +14,9 @@ const modal = overlay.create(LazyModalExample, {
 })
 
 function openModal() {
-  modal.open({ count: count.value })
   count.value++
+
+  modal.open({ count: count.value })
 }
 </script>
 
