@@ -7,15 +7,14 @@ const open = ref(false)
 const count = ref(0)
 const overlay = useOverlay()
 
-const modalexampleInstance = overlay.create(LazyModalExample, {
+const modal = overlay.create(LazyModalExample, {
   props: {
     count: count.value
   }
-
 })
 
 function openModal() {
-  modalexampleInstance.open({ count: count.value })
+  modal.open({ count: count.value })
   count.value++
 }
 </script>

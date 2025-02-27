@@ -26,7 +26,7 @@ import { toRef, useId, provide } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import UToaster from './Toaster.vue'
-import OverlayProvider from './OverlayProvider.vue'
+import UOverlayProvider from './OverlayProvider.vue'
 
 const props = defineProps<AppProps>()
 defineSlots<AppSlots>()
@@ -47,7 +47,7 @@ provide(localeContextInjectionKey, locale)
       </UToaster>
       <slot v-else />
 
-      <OverlayProvider />
+      <UOverlayProvider />
     </TooltipProvider>
   </ConfigProvider>
 </template>
