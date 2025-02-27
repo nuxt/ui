@@ -6,8 +6,26 @@ import type { NuxtApp } from '#app'
 
 export { useHead } from '@unhead/vue'
 export { useRoute, useRouter } from 'vue-router'
+export { defineShortcuts } from '../composables/defineShortcuts'
+export { useLocale } from '../composables/useLocale'
 
 export const useAppConfig = () => appConfig
+
+export const useCookie = <T = string>(
+  _name: string,
+  _options: Record<string, any> = {}
+) => {
+  const value = ref(null) as Ref<T>
+
+  return {
+    value,
+    get: () => value.value,
+    set: () => {},
+    update: () => {},
+    refresh: () => Promise.resolve(value.value),
+    remove: () => {}
+  }
+}
 
 const state: Record<string, any> = {}
 

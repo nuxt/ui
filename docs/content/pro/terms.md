@@ -22,7 +22,9 @@ Le paiement pour l'acquisition d'une licence Nuxt UI Pro est unique et doit êtr
 
 ## 5. Droit de rétractation et remboursement
 
-Le Client dispose d'un droit de rétractation de 14 jours à compter de la date d'achat. Passé ce délai, aucun remboursement ne sera effectué.
+Le Client dispose d'un droit de rétractation de 14 jours concernant la licence Nuxt UI Pro à compter de la date d'achat. Passé ce délai, aucun remboursement ne sera effectué.
+
+Le Figma Pro Kit étant un produit numérique fourni sous forme de fichier ZIP, aucun remboursement ne pourra être effectué après l'achat.
 
 ## 6. Propriété intellectuelle
 

@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-og-image',
+    'motion-v/nuxt',
     (_, nuxt) => {
       nuxt.hook('components:dirs', (dirs) => {
         dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
@@ -26,6 +27,18 @@ export default defineNuxtConfig({
     },
     'nuxt-llms'
   ],
+  $development: {
+    site: {
+      url: 'http://localhost:3000'
+    }
+  },
+  $production: {
+    site: {
+      url: 'https://ui3.nuxt.dev'
+    }
+  },
+
+  devtools: { enabled: true },
 
   app: {
     head: {
@@ -46,10 +59,6 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
-
-  site: {
-    url: 'https://ui3.nuxt.dev'
-  },
 
   content: {
     build: {
