@@ -96,7 +96,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   ui?: PartialString<typeof select.slots>
 }
 
-export type SelectEmits<A extends ArrayOrNested<unknown>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<SelectRootEmits, 'update:modelValue'> & {
+export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<SelectRootEmits, 'update:modelValue'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]

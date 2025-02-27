@@ -119,7 +119,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   ui?: PartialString<typeof selectMenu.slots>
 }
 
-export type SelectMenuEmits<A extends ArrayOrNested<unknown>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
+export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
   change: [payload: Event]
   blur: [payload: FocusEvent]
   focus: [payload: FocusEvent]
