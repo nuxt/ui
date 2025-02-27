@@ -1,20 +1,20 @@
 ---
 title: useOverlay
-description: "A composable to programmatically control overlays"
+description: "A composable to programmatically control overlays."
 ---
 
 ## Usage
 
-Use the auto-imported `useOverlay` composable to programmatically control a [Modals](/components/modal) and [Slideovers](/components/slideover).
+Use the auto-imported `useOverlay` composable to programmatically control [Modal](/components/modal) and [Slideover](/components/slideover) components.
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay();
+const overlay = useOverlay()
 
-const modal = overlay.create(MyModal);
+const modal = overlay.create(MyModal)
 
 async function openModal() {
-  modal.open();
+  modal.open()
 }
 </script>
 ```
@@ -84,14 +84,14 @@ Opens the overlay
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay();
+const overlay = useOverlay()
 
-const myModal = overlay.create(MyModalContent);
+const modal = overlay.create(MyModalContent)
 
 function openModal() {
-  myModal.open({
-    title: "Welcome",
-  });
+  modal.open({
+    title: 'Welcome'
+  })
 }
 </script>
 ```
@@ -112,18 +112,18 @@ Updates the props of the overlay.
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay();
+const overlay = useOverlay()
 
 const modal = overlay.create(MyModal, {
-  title: "Welcome",
-});
+  title: 'Welcome'
+})
 
 function openModal() {
-  modal.open();
+  modal.open()
 }
 
 function updateModalTitle() {
-  modal.patch({ title: "Updated Title" });
+  modal.patch({ title: 'Updated Title' })
 }
 </script>
 ```
@@ -133,34 +133,34 @@ function updateModalTitle() {
 Here's a complete example of how to use the `useOverlay` composable:
 
 ```vue
+<script setup lang="ts">
+const overlay = useOverlay()
+
+// Create with default props
+const modalA = overlay.create(ModalA, { title: 'Welcome' })
+const modalB = overlay.create(modalB)
+
+const slideoverA = overlay.create(SlideoverA)
+
+const openModalA = () => {
+  // Open  Modal A, but override the title prop
+  modalA.open({ title: 'Hello' })
+}
+
+const openModalB = async () => {
+  // Open modalB, and wait for its result
+  const input = await modalB.open()
+
+  // Pass the result from modalB to the slideover, and open it.
+  slideoverA.open({ input })
+}
+</script>
+
 <template>
   <div>
     <button @click="openModal">Open Modal</button>
   </div>
 </template>
-
-<script setup lang="ts">
-const overlay = useOverlay();
-
-// Create with default props
-const modalA = overlay.create(ModalA, { title: "Welcome" });
-const modalB = overlay.create(modalB);
-
-const slideoverA = overlay.create(SlideoverA);
-
-const openModalA = () => {
-  // Open  Modal A, but override the title prop
-  modalA.open({ title: "Hello" });
-};
-
-const openModalB = async () => {
-  // Open modalB, and wait for its result
-  const modal_result = await modalB.open();
-
-  // Pass the result from modalB to the slideover, and open it.
-  slideoverA.open({ input: modal_result });
-};
-</script>
 ```
 
-In this example, we're using the `useOverlay` composable to control a multiple modals and slideovers.
+In this example, we're using the `useOverlay` composable to control multiple modals and slideovers.

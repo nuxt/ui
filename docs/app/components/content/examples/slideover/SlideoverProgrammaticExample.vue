@@ -17,6 +17,7 @@ async function open() {
 
   if (shouldIncrement) {
     count.value++
+
     toast.add({
       title: `Success: ${shouldIncrement}`,
       color: 'success',

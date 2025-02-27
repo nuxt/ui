@@ -10,7 +10,6 @@ const modal = overlay.create(LazyModalExample, {
   props: {
     count: count.value
   }
-
 })
 
 async function open() {
@@ -18,6 +17,7 @@ async function open() {
 
   if (shouldIncrement) {
     count.value++
+
     toast.add({
       title: `Success: ${shouldIncrement}`,
       color: 'success',
