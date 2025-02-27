@@ -196,11 +196,6 @@ const defaultExpanded = computed(() =>
         @toggle="item.onToggle"
         @select="item.onSelect"
       >
-        <button>
-          <slot :name="'item'" v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }">
-            {{ item }}
-          </slot>
-        </button>
         <button :disabled="item.disabled || disabled" :class="ui.link({ class: props.ui?.link, selected: isSelected, disabled: item.disabled || disabled })">
           <slot :name="((item.slot || 'item') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
             <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
