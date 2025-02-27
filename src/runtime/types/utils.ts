@@ -15,8 +15,23 @@ export type DeepPartial<T, O = any> = {
   [key: string]: O | TightMap<O>
 }
 
-export type DynamicSlots<T extends { slot?: string }, SlotProps, Slot = T['slot']> =
-  Record<string, SlotProps> & (Slot extends string ? Record<Slot, SlotProps> : Record<string, never>)
+type ItemWithSlot<T, S extends string> = T extends { slot: S } ? T : never
+export type DynamicSlotKeys<
+  T,
+  TSuffix extends string | undefined = undefined,
+  Slot extends string = T extends { slot: infer S extends string } ? S : never
+> = Slot extends string ? Slot | (TSuffix extends undefined ? never : `${Slot}-${TSuffix}`) : never
+export type DynamicSlots<
+  T,
+  TProps extends { item: any } = { item: any },
+  TSuffix extends string | undefined = undefined
+> = {
+  [K in DynamicSlotKeys<T, TSuffix>]: (
+    props: Omit<TProps, 'item'> & {
+      item: ItemWithSlot<T, K extends `${infer Base}-${string}` ? Base : K>
+    }
+  ) => any
+}
 
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>
   ? MaybeObject[Key]
@@ -57,8 +72,6 @@ export type GetModelValueEmits<
   /** Event handler called when the value changes. */
   'update:modelValue': [payload: GetModelValue<T, VK, M>]
 }
-
-export type MaybeMultipleModelValue<T, M extends boolean = false> = (T extends infer U ? M extends true ? U[] : U : never)
 
 export type StringOrVNode =
   | string

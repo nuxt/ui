@@ -97,7 +97,7 @@ export type DropdownMenuSlots<A extends ArrayOrNested<DropdownMenuItem> = ArrayO
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+} & DynamicSlots<T, { item: T, active?: boolean, index: number }, 'leading' | 'label' | 'trailing'>
 
 extendDevtoolsMeta({
   example: 'DropdownMenuExample',
@@ -169,7 +169,7 @@ const slots = defineSlots<DropdownMenuSlots<T>>()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
-const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
+const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[Exclude<keyof DropdownMenuSlots<T>, 'default'>]>
 
 const ui = computed(() => dropdownMenu({
   size: props.size
@@ -195,7 +195,7 @@ const ui = computed(() => dropdownMenu({
       :external-icon="externalIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
-        <slot :name="name" v-bind="slotData" />
+        <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 
       <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />

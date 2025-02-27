@@ -55,7 +55,7 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
   title: SlotProps<T>
   description: SlotProps<T>
   content: SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+} & DynamicSlots<T>
 
 extendDevtoolsMeta({ example: 'StepperExample' })
 </script>
@@ -161,9 +161,9 @@ defineExpose({
       </StepperItem>
     </div>
 
-    <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot]) || (currentStep?.value && !!slots[currentStep.value])" :class="ui.content({ class: props.ui?.description })">
+    <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot as keyof StepperSlots<T>]) || (currentStep?.value && !!slots[currentStep.value as keyof StepperSlots<T>])" :class="ui.content({ class: props.ui?.description })">
       <slot
-        :name="!!slots[currentStep?.slot ?? currentStep.value!] ? currentStep.slot ?? currentStep.value : 'content'"
+        :name="!!slots[(currentStep?.slot ?? currentStep.value!) as keyof StepperSlots<T>] ? currentStep.slot ?? currentStep.value : 'content'"
         :item="(currentStep as T)"
       >
         {{ currentStep?.content }}

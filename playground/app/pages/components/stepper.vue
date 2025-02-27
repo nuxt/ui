@@ -11,22 +11,22 @@ const size = ref('md' as const)
 
 const items = [
   {
-    slot: 'address',
+    slot: 'address' as const,
     title: 'Address',
     description: 'Add your address here',
     icon: 'i-lucide-house'
   }, {
-    slot: 'shipping',
+    slot: 'shipping' as const,
     title: 'Shipping',
     description: 'Set your preferred shipping method',
     icon: 'i-lucide-truck'
   }, {
-    slot: 'payment',
+    slot: 'payment' as const,
     title: 'Payment',
     description: 'Select your payment method',
     icon: 'i-lucide-credit-card'
   }, {
-    slot: 'checkout',
+    slot: 'checkout' as const,
     title: 'Checkout',
     description: 'Confirm your order'
   }
@@ -50,27 +50,27 @@ const stepper = useTemplateRef('stepper')
       :orientation="orientation"
       :size="size"
     >
-      <template #address>
+      <template #address="{ item }">
         <Placeholder class="size-full min-h-60 min-w-60">
-          Address
+          {{ item.title }}
         </Placeholder>
       </template>
 
-      <template #shipping>
+      <template #shipping="{ item }">
         <Placeholder class="size-full min-h-60 min-w-60">
-          Shipping
+          {{ item.title }}
         </Placeholder>
       </template>
 
-      <template #payment>
+      <template #payment="{ item }">
         <Placeholder class="size-full min-h-60 min-w-60">
-          Payment
+          {{ item.title }}
         </Placeholder>
       </template>
 
-      <template #checkout>
+      <template #checkout="{ item }">
         <Placeholder class="size-full min-h-60 min-w-60">
-          Checkout
+          {{ item.title }}
         </Placeholder>
       </template>
     </UStepper>
