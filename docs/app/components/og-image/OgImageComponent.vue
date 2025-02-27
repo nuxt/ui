@@ -10,7 +10,7 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="w-full h-full flex flex-col">
+  <div class="bg-white w-full h-full flex flex-col">
     <div class="absolute top-0 bottom-0 left-26 w-[2px] bg-slate-200" />
     <div class="absolute top-0 bottom-0 right-26 w-[2px] bg-slate-200" />
     <div class="absolute top-12 inset-x-0 h-[2px] bg-slate-200" />
