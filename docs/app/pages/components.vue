@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
+
+const { url } = useSiteConfig()
+
 const title = 'Vue Components'
 const description = 'Explore 99+ customizable UI components for Vue and Nuxt built with Tailwind CSS and Reka UI.'
 
@@ -7,11 +11,8 @@ useSeoMeta({
   title,
   description,
   ogTitle: `${title} - Nuxt UI`,
-  ogDescription: description
-})
-
-defineOgImageComponent('Docs', {
-  headline: 'Documentation'
+  ogDescription: description,
+  ogImage: joinURL(url, '/og-image.png')
 })
 
 const { data: components } = await useAsyncData('components', () => {

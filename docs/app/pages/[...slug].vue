@@ -72,9 +72,18 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs', {
-  headline: breadcrumb.value.map(item => item.label).join(' > ')
-})
+if (page.value.path.startsWith('/components')) {
+  defineOgImageComponent('OgImageComponent', {
+    title: page.value.title,
+    description: page.value.description,
+    component: (route.params.slug as string[]).pop() as string,
+    module: page.value.module || ''
+  })
+} else {
+  defineOgImageComponent('Docs', {
+    headline: breadcrumb.value.map(item => item.label).join(' > ')
+  })
+}
 
 const communityLinks = computed(() => [{
   icon: 'i-lucide-file-pen',

@@ -41,7 +41,7 @@ useSeoMeta({
     class="lg:border-t border-(--ui-border)"
     :ui="{
       title: 'lg:text-4xl',
-      wrapper: 'lg:py-16 lg:border-r border-(--ui-border) order-last',
+      wrapper: 'lg:py-16 lg:border-r border-(--ui-border) order-last lg:pr-16',
       container: 'lg:py-0'
     }"
   >
