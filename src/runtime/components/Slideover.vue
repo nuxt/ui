@@ -57,6 +57,7 @@ export interface SlideoverProps extends DialogRootProps {
 
 export interface SlideoverEmits extends DialogRootEmits {
   'close-prevented': []
+  'after:leave': []
 }
 
 export interface SlideoverSlots {
@@ -133,7 +134,7 @@ const ui = computed(() => slideover({
     <DialogPortal :disabled="!portal">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :data-side="side" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+      <DialogContent :data-side="side" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-leave="emits('after:leave')" v-on="contentEvents">
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
             <slot name="title">

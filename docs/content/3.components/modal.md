@@ -305,19 +305,24 @@ slots:
 
 ### Programmatic usage
 
-You can use the [`useModal`](/composables/use-modal) composable to open a Modal programatically.
+You can use the [`useOverlay`](/composables/use-overlay) composable to open a Modal programatically.
 
 ::warning
-Make sure to wrap your app with the [`App`](/components/app) component which uses the [`ModalProvider`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/ModalProvider.vue) component.
+Make sure to wrap your app with the [`App`](/components/app) component which uses the [`OverlayProvider`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/OverlayProvider.vue) component.
 ::
 
 First, create a modal component that will be opened programatically:
 
 ::component-example
 ---
+prettier: true
 name: 'modal-example'
 preview: false
 ---
+::
+
+::note
+We are emitting a `close` event when the modal is closed or dismissed here. You can emit any data through the `close` event, however, the event must be emitted in order to capture the return value.
 ::
 
 Then, use it in your app:
