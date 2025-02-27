@@ -41,14 +41,9 @@ const items = [
         description: 'Define shortcuts for your application.'
       },
       {
-        label: 'useModal',
+        label: 'useOverlay',
         icon: 'i-lucide-file-text',
-        description: 'Display a modal within your application.'
-      },
-      {
-        label: 'useSlideover',
-        icon: 'i-lucide-file-text',
-        description: 'Display a slideover within your application.'
+        description: 'Display a modal/slideover within your application.'
       },
       {
         label: 'useToast',
