@@ -23,7 +23,7 @@ const appConfigSelect = _appConfig as AppConfig & { ui: { select: Partial<typeof
 
 const select = tv({ extend: tv(theme), ...(appConfigSelect.ui?.select || {}) })
 
-interface _SelectItem {
+interface SelectItemBase {
   label?: string
   icon?: string
   avatar?: AvatarProps
@@ -37,7 +37,7 @@ interface _SelectItem {
   disabled?: boolean
   [key: string]: any
 }
-export type SelectItem = _SelectItem | AcceptableValue | boolean
+export type SelectItem = SelectItemBase | AcceptableValue | boolean
 
 type SelectVariants = VariantProps<typeof select>
 
@@ -89,7 +89,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   /** The controlled value of the Select. Can be bind as `v-model`. */
   modelValue?: GetModelValue<T, VK, M>
   /** Whether multiple options can be selected or not. */
-  multiple?: M & boolean
+  multiple?: M
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
@@ -207,7 +207,7 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
-function isSelectItem(item: SelectItem): item is _SelectItem {
+function isSelectItem(item: SelectItem): item is SelectItemBase {
   return typeof item === 'object' && item !== null
 }
 </script>

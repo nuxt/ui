@@ -15,7 +15,7 @@ export type DeepPartial<T, O = any> = {
   [key: string]: O | TightMap<O>
 }
 
-type ItemWithSlot<T, S extends string> = T extends { slot: S } ? T : never
+type ItemWithSlot<T, S extends string> = T extends { slot?: S } ? T : never
 export type DynamicSlotKeys<
   T,
   TSuffix extends string | undefined = undefined,
