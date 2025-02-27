@@ -15,7 +15,7 @@ const props = defineProps<{
 const route = useRoute()
 const { framework } = useSharedData()
 
-const name = props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? ''
+const name = props.slug ?? route.path.split('/').pop() ?? ''
 const camelName = camelCase(name)
 
 const strippedCompoundVariants = ref(false)

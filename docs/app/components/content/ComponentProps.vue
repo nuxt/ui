@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 
-const camelName = camelCase(props.name ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
+const camelName = camelCase(props.name ?? route.path.split('/').pop() ?? '')
 const componentName = props.prose ? `Prose${upperFirst(camelName)}` : `U${upperFirst(camelName)}`
 
 const componentTheme = ((props.pro ? props.prose ? themePro.prose : themePro : theme) as any)[camelName]

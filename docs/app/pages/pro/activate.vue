@@ -72,7 +72,6 @@ onMounted(() => {
   <UMain>
     <UPageHero headline="License Activation" :title="title" :description="description" :ui="{ container: 'relative' }">
       <template #top>
-        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
         <StarsBg />
       </template>
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
