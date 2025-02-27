@@ -15,7 +15,7 @@ withDefaults(defineProps<{
     <div class="absolute top-0 bottom-0 right-26 w-[2px] bg-slate-200" />
     <div class="absolute top-12 inset-x-0 h-[2px] bg-slate-200" />
     <svg
-      class="absolute top-5 left-33 bg-white p-1 h-11 w-11"
+      class="absolute top-[24px] left-33 bg-white p-1 h-11 w-11"
       viewBox="0 0 512 512"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -26,9 +26,9 @@ withDefaults(defineProps<{
       <div class="mx-34 mt-12">
         <h1 class="text-4xl font-semibold mb-0 flex gap-1">
           <span>{{ title }}</span>
-          <sup v-if="module === 'ui-pro'" class="text-base font-semibold align-top text-[#00DC82]">PRO</sup>
+          <sup v-if="module === 'ui-pro'" class="text-base font-semibold align-top text-[#00C16A]">PRO</sup>
         </h1>
-        <p class="text-2xl text-slate-500 truncate line-clamp-1">
+        <p class="text-2xl text-slate-500 truncate line-clamp-1 mt-1 mb-[22px]">
           {{ description }}
         </p>
       </div>
