@@ -315,14 +315,15 @@ First, create a modal component that will be opened programatically:
 
 ::component-example
 ---
+prettier: true
 name: 'modal-example'
 preview: false
 ---
 ::
 
-::note 
+::note
 We are emitting a `close` event when the modal is closed or dismissed here. You can emit any data through the `close` event, however, the event must be emitted in order to capture the return value.
-:: 
+::
 
 Then, use it in your app:
 
