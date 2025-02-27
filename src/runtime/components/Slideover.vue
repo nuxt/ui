@@ -126,9 +126,9 @@ const ui = computed(() => slideover({
     </DialogTrigger>
 
     <DialogPortal :disabled="!portal">
-      <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" @after-leave="emits('after:leave')" />
+      <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :data-side="side" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+      <DialogContent :data-side="side" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-leave="emits('after:leave')" v-on="contentEvents">
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
             <slot name="title">
