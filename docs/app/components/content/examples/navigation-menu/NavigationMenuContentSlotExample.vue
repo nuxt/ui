@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
-const items: NavigationMenuItem[] = [
+const items = [
   {
     label: 'Docs',
     icon: 'i-lucide-book-open',
-    slot: 'docs',
+    slot: 'docs' as const,
     children: [
       {
         label: 'Icons',
@@ -24,7 +24,7 @@ const items: NavigationMenuItem[] = [
   {
     label: 'Components',
     icon: 'i-lucide-box',
-    slot: 'components',
+    slot: 'components' as const,
     children: [
       {
         label: 'Link',
@@ -56,7 +56,7 @@ const items: NavigationMenuItem[] = [
     label: 'GitHub',
     icon: 'i-simple-icons-github'
   }
-]
+] satisfies NavigationMenuItem[]
 </script>
 
 <template>

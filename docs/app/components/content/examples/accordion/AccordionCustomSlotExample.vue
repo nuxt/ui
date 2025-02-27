@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AccordionItem } from '@nuxt/ui'
 
-const items: AccordionItem[] = [
+const items = [
   {
     label: 'Icons',
     icon: 'i-lucide-smile',
@@ -10,7 +10,7 @@ const items: AccordionItem[] = [
   {
     label: 'Colors',
     icon: 'i-lucide-swatch-book',
-    slot: 'colors',
+    slot: 'colors' as const,
     content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
   },
   {
@@ -18,7 +18,7 @@ const items: AccordionItem[] = [
     icon: 'i-lucide-box',
     content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
   }
-]
+] satisfies AccordionItem[]
 </script>
 
 <template>

@@ -89,7 +89,7 @@ export type ContextMenuSlots<A extends ArrayOrNested<ContextMenuItem> = ArrayOrN
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-} & DynamicSlots<T, { item: T, active?: boolean, index: number }, 'leading' | 'label' | 'trailing'>
+} & DynamicSlots<T, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 extendDevtoolsMeta({
   example: 'ContextMenuExample',

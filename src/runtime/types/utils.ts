@@ -15,22 +15,12 @@ export type DeepPartial<T, O = any> = {
   [key: string]: O | TightMap<O>
 }
 
-type ItemWithSlot<T, S extends string> = T extends { slot?: S } ? T : never
-export type DynamicSlotKeys<
-  T,
-  TSuffix extends string | undefined = undefined,
-  Slot extends string = T extends { slot: infer S extends string } ? S : never
-> = Slot extends string ? Slot | (TSuffix extends undefined ? never : `${Slot}-${TSuffix}`) : never
 export type DynamicSlots<
-  T,
-  TProps extends { item: any } = { item: any },
-  TSuffix extends string | undefined = undefined
+  T extends { slot?: string },
+  S extends string | undefined = undefined,
+  D extends object = {}
 > = {
-  [K in DynamicSlotKeys<T, TSuffix>]: (
-    props: Omit<TProps, 'item'> & {
-      item: ItemWithSlot<T, K extends `${infer Base}-${string}` ? Base : K>
-    }
-  ) => any
+  [K in string]?: (props: { item: Extract<T, { slot: K extends `${infer Base}-${S}` ? Base : K }> } & D) => any
 }
 
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>

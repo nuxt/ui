@@ -53,7 +53,7 @@ export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
   trailing: SlotProps<T>
   content: SlotProps<T>
   body: SlotProps<T>
-} & DynamicSlots<T, { item: T, index: number, open: boolean }, 'body'>
+} & DynamicSlots<T, 'body', { index: number, open: boolean }>
 
 extendDevtoolsMeta({
   defaultProps: {
@@ -115,7 +115,7 @@ const ui = computed(() => accordion({
 <template>
   <AccordionRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <AccordionItem
-      v-for="(item, index) in items"
+      v-for="(item, index) in props.items"
       v-slot="{ open }"
       :key="index"
       :value="item.value || String(index)"
@@ -139,9 +139,9 @@ const ui = computed(() => accordion({
       </AccordionHeader>
 
       <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof AccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof AccordionSlots<T>])" :class="ui.content({ class: props.ui?.content })">
-        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
+        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
           <div :class="ui.body({ class: props.ui?.body })">
-            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
+            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
               {{ item.content }}
             </slot>
           </div>

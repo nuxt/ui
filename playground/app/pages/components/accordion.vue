@@ -18,6 +18,7 @@ const items = [{
   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
 }, {
   label: 'Components',
+  slot: 'test' as const,
   icon: 'i-lucide-layers-3',
   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
 }, {
@@ -37,6 +38,11 @@ const items = [{
         </p>
       </template>
 
+      <template #custom="{ item }">
+        <p class="text-(--ui-text-muted)">
+          Custom: {{ item.content }}
+        </p>
+      </template>
       <template #custom-body="{ item }">
         <p class="text-(--ui-text-muted)">
           Custom: {{ item.content }}

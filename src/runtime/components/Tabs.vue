@@ -65,7 +65,7 @@ export type TabsSlots<T extends TabsItem = TabsItem> = {
   default: SlotProps<T>
   trailing: SlotProps<T>
   content: SlotProps<T>
-} & DynamicSlots<T, { item: T, index: number }>
+} & DynamicSlots<T, undefined, { index: number }>
 
 extendDevtoolsMeta({
   defaultProps: {
@@ -135,7 +135,7 @@ const ui = computed(() => tabs({
 
     <template v-if="!!content">
       <TabsContent v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :class="ui.content({ class: props.ui?.content })">
-        <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="item" :index="index">
+        <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index">
           {{ item.content }}
         </slot>
       </TabsContent>

@@ -97,7 +97,7 @@ export type DropdownMenuSlots<A extends ArrayOrNested<DropdownMenuItem> = ArrayO
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-} & DynamicSlots<T, { item: T, active?: boolean, index: number }, 'leading' | 'label' | 'trailing'>
+} & DynamicSlots<T, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 extendDevtoolsMeta({
   example: 'DropdownMenuExample',

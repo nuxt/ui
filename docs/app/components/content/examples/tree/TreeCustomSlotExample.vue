@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { TreeItem } from '@nuxt/ui'
 
-const items: TreeItem[] = [
+const items = [
   {
     label: 'app/',
-    slot: 'app',
+    slot: 'app' as const,
     defaultExpanded: true,
     children: [{
       label: 'composables/',
@@ -24,7 +24,7 @@ const items: TreeItem[] = [
   },
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
-]
+] satisfies TreeItem[]
 </script>
 
 <template>

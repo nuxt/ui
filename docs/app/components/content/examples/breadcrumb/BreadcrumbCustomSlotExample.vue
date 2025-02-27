@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { BreadcrumbItem } from '@nuxt/ui'
 
-const items: BreadcrumbItem[] = [{
+const items = [{
   label: 'Home',
   to: '/'
 }, {
-  slot: 'dropdown',
+  slot: 'dropdown' as const,
   icon: 'i-lucide-ellipsis',
   children: [{
     label: 'Documentation'
@@ -20,7 +20,7 @@ const items: BreadcrumbItem[] = [{
 }, {
   label: 'Breadcrumb',
   to: '/components/breadcrumb'
-}]
+}] satisfies BreadcrumbItem[]
 </script>
 
 <template>

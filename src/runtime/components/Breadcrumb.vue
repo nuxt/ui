@@ -48,7 +48,7 @@ export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
   'separator': any
-} & DynamicSlots<T, { item: T, index: number, active?: boolean }, 'leading' | 'label' | 'trailing'>
+} & DynamicSlots<T, 'leading' | 'label' | 'trailing', { index: number, active?: boolean }>
 
 extendDevtoolsMeta({
   defaultProps: {
@@ -109,19 +109,19 @@ const ui = breadcrumb()
         <li :class="ui.item({ class: props.ui?.item })">
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
             <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [props.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
-              <slot :name="((item.slot || 'item') as keyof BreadcrumbSlots<T>)" :item="item" :index="index">
-                <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof BreadcrumbSlots<T>)" :item="item" :active="index === items!.length - 1" :index="index">
+              <slot :name="((item.slot || 'item') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string}>)" :index="index">
+                <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string}>)" :active="index === items!.length - 1" :index="index">
                   <UIcon v-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active: index === items!.length - 1 })" />
                   <UAvatar v-else-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active: index === items!.length - 1 })" />
                 </slot>
 
                 <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>]" :class="ui.linkLabel({ class: props.ui?.linkLabel })">
-                  <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>)" :item="item" :active="index === items!.length - 1" :index="index">
+                  <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string}>)" :active="index === items!.length - 1" :index="index">
                     {{ get(item, props.labelKey as string) }}
                   </slot>
                 </span>
 
-                <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof BreadcrumbSlots<T>)" :item="item" :active="index === items!.length - 1" :index="index" />
+                <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof BreadcrumbSlots<T>)" :item="(item as Extract<T, { slot: string}>)" :active="index === items!.length - 1" :index="index" />
               </slot>
             </ULinkBase>
           </ULink>
