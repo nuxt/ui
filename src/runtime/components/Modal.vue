@@ -56,7 +56,9 @@ export interface ModalProps extends DialogRootProps {
   ui?: Partial<typeof modal.slots>
 }
 
-export interface ModalEmits extends DialogRootEmits {}
+export interface ModalEmits extends DialogRootEmits {
+  'after:leave': []
+}
 
 export interface ModalSlots {
   default(props: { open: boolean }): any
@@ -126,7 +128,7 @@ const ui = computed(() => modal({
     <DialogPortal :disabled="!portal">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-leave="emits('after:leave')" v-on="contentEvents">
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
             <slot name="title">
