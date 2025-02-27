@@ -4,10 +4,6 @@ import { useRouter } from 'vue-router'
 import { reactive, ref } from 'vue'
 import { useColorMode } from '@vueuse/core'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore included for compatibility with Nuxt playground
-import { useAppConfig } from '#imports'
-
 const appConfig = useAppConfig()
 const mode = useColorMode()
 
