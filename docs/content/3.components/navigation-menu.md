@@ -70,14 +70,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -186,14 +182,10 @@ props:
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
-          - label: useModal
+          - label: useOverlay
             icon: i-lucide-file-text
-            description: Display a modal within your application.
-            to: /composables/use-modal
-          - label: useSlideover
-            icon: i-lucide-file-text
-            description: Display a slideover within your application.
-            to: /composables/use-slideover
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
@@ -291,14 +283,10 @@ props:
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
-          - label: useModal
+          - label: useOverlay
             icon: i-lucide-file-text
-            description: Display a modal within your application.
-            to: /composables/use-modal
-          - label: useSlideover
-            icon: i-lucide-file-text
-            description: Display a slideover within your application.
-            to: /composables/use-slideover
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
@@ -477,14 +465,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -579,14 +563,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -672,14 +652,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -754,14 +730,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.

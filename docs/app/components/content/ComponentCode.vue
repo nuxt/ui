@@ -86,7 +86,7 @@ const props = defineProps<{
 const route = useRoute()
 const { $prettier } = useNuxtApp()
 
-const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
+const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
 const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
 const component = defineAsyncComponent(() => {
   if (props.pro) {

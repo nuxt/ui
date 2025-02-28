@@ -5,16 +5,18 @@ const LazyModalExample = defineAsyncComponent(() => import('../../components/Mod
 
 const open = ref(false)
 const count = ref(0)
+const overlay = useOverlay()
 
-const modal = useModal()
+const modal = overlay.create(LazyModalExample, {
+  props: {
+    count: count.value
+  }
+})
 
 function openModal() {
   count.value++
 
-  modal.open(LazyModalExample, {
-    description: 'And you can even provide a description!',
-    count: count.value
-  })
+  modal.open({ count: count.value })
 }
 </script>
 
