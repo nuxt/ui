@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useOverlay } from '../composables/useOverlay'
+import { useOverlay, type Overlay } from '../composables/useOverlay'
 
 const { overlays, unMount, close } = useOverlay()
 
-const mountedOverlays = computed(() => overlays.filter(overlay => overlay.isMounted))
+const mountedOverlays = computed(() => overlays.filter((overlay: Overlay) => overlay.isMounted))
 
 const onAfterLeave = (id: symbol) => {
   close(id)
