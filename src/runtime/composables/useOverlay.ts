@@ -1,4 +1,5 @@
 import type { Component } from 'vue'
+import { reactive, markRaw, shallowReactive } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps } from 'vue-component-type-helpers'
 
