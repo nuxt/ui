@@ -264,13 +264,33 @@ collapse: true
 name: 'table-row-selection-example'
 highlights:
   - 55
-  - 70
+  - 72
 class: '!p-0'
 ---
 ::
 
 ::tip
 You can use the `row-selection` prop to control the selection state of the rows (can be binded with `v-model`).
+::
+
+### With `@select` event
+
+You can add a `@select` listener to make rows clickable. The handler function receives the `TableRow` instance as the first argument and an optional `Event` as the second argument.
+
+::note
+You can use this to navigate to a page, open a modal or even to select the row manually.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-selection-event-example'
+highlights:
+  - 123
+  - 130
+class: '!p-0'
+---
 ::
 
 ### With column sorting
