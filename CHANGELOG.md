@@ -1,5 +1,35 @@
 # Changelog
 
+## [3.0.0-beta.1](https://github.com/nuxt/ui/compare/v3.0.0-alpha.13...v3.0.0-beta.1) (2025-02-28)
+
+### ⚠ BREAKING CHANGES
+
+* **module:** remove devtools in favor of compodium (#3380)
+* **useOverlay:** handle programmatic modals and slideovers (#3279)
+
+### Features
+
+* **Form:** add prop to disable state transformation ([#3356](https://github.com/nuxt/ui/issues/3356)) ([015ceac](https://github.com/nuxt/ui/commit/015ceacb11f94c6ae0829e59b8dfdef6c325b67d))
+* **module:** remove devtools in favor of compodium ([#3380](https://github.com/nuxt/ui/issues/3380)) ([7a8c00c](https://github.com/nuxt/ui/commit/7a8c00c37451f7b9b33630f7a790a12c0fb2caa1))
+* **Table:** add `select` event ([#2822](https://github.com/nuxt/ui/issues/2822)) ([0668a39](https://github.com/nuxt/ui/commit/0668a399dced48d1976de3820118bf2a29fe116e))
+* **Tree:** new component ([#3180](https://github.com/nuxt/ui/issues/3180)) ([71728d3](https://github.com/nuxt/ui/commit/71728d3c3fa95255db03448c8b87fb75bc2d805c))
+* **useOverlay:** handle programmatic modals and slideovers ([#3279](https://github.com/nuxt/ui/issues/3279)) ([108d36f](https://github.com/nuxt/ui/commit/108d36fd8a4c7b325fcf85882f054bb5e784de57))
+
+### Bug Fixes
+
+* **Avatar:** render on SSR ([67e5465](https://github.com/nuxt/ui/commit/67e546504d2eb807c9b707aacc58761b10eb7d37))
+* **CommandPalette:** wrong ellipsis color ([ada04f6](https://github.com/nuxt/ui/commit/ada04f64a529feab43f5b54162daffe9d3313435))
+* **components:** missing `$attrs` bind ([#3152](https://github.com/nuxt/ui/issues/3152)) ([fb36df5](https://github.com/nuxt/ui/commit/fb36df5302e379f58ceb9c3a91348256806c8df5))
+* **Drawer/Modal/Slideover:** disable close autofocus ([ae30f94](https://github.com/nuxt/ui/commit/ae30f9423dfae1f6e27f00176bb3175beeb888e4)), closes [#3227](https://github.com/nuxt/ui/issues/3227)
+* **Form:** ensure loading state resets to false after an error ([#3359](https://github.com/nuxt/ui/issues/3359)) ([19d76c8](https://github.com/nuxt/ui/commit/19d76c8b75b053f1c44b691ca46c9d3b234dbce1))
+* **Link:** improve external links handling in vue ([b53f77b](https://github.com/nuxt/ui/commit/b53f77b304a520e925af9d4a752e0f2933cfb71d))
+* **Modal/Slideover:** add wrapper around title & description ([bc01136](https://github.com/nuxt/ui/commit/bc01136da7e838004088fffbf2acfd6788f3c5fb))
+* **Modal/Slideover:** fixed header height ([d33a83e](https://github.com/nuxt/ui/commit/d33a83e147b009ebe1e52b7d677d364d18f24333)), closes [#3333](https://github.com/nuxt/ui/issues/3333)
+* **Modal:** use `dvh` unit ([aefa09c](https://github.com/nuxt/ui/commit/aefa09c69b8f0dbd38d29883dc79d77fc7025f43))
+* **module:** use key when merging modules options ([9821894](https://github.com/nuxt/ui/commit/98218945328b947e6c2a75f03b89c27e401dc6d5))
+* **Tooltip:** bind `$attrs` on trigger ([637f5d3](https://github.com/nuxt/ui/commit/637f5d342ee1f1b1bf7de99020df9ca9f07e197e)), closes [#3339](https://github.com/nuxt/ui/issues/3339) [#2897](https://github.com/nuxt/ui/issues/2897)
+* **vite:** exclude `@nuxt/ui` from vite pre-optimization ([#3352](https://github.com/nuxt/ui/issues/3352)) ([09492f7](https://github.com/nuxt/ui/commit/09492f79f29c0b5dd7a642f76f55aa3d305c0a69))
+
 ## [3.0.0-alpha.13](https://github.com/nuxt/ui/compare/v3.0.0-alpha.12...v3.0.0-alpha.13) (2025-02-17)
 
 ### ⚠ BREAKING CHANGES
