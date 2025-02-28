@@ -10,7 +10,7 @@ useSeoMeta({
 })
 
 defineOgImageComponent('Docs', {
-  headline: 'Explore'
+  headline: 'Community'
 })
 
 const appConfig = useAppConfig()
