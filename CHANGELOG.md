@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.0-beta.2](https://github.com/nuxt/ui/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2025-02-28)
+
+### Bug Fixes
+
+* **OverlayProvider:** missing import ([c555c16](https://github.com/nuxt/ui/commit/c555c1640eb9e9aca643d71aa02e2a659485672e))
+* **useOverlay:** missing imports ([0e3c63e](https://github.com/nuxt/ui/commit/0e3c63eb543981835c56a3bfebe71c4534d3f973))
+
 ## [3.0.0-beta.1](https://github.com/nuxt/ui/compare/v3.0.0-alpha.13...v3.0.0-beta.1) (2025-02-28)
 
 ### ⚠ BREAKING CHANGES
