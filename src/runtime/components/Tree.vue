@@ -4,7 +4,6 @@ import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tree'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { PartialString, DynamicSlots, MaybeMultipleModelValue, SelectItemKey } from '../types/utils'
 
@@ -83,41 +82,6 @@ export type TreeSlots<T extends { slot?: string }> = {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
-
-extendDevtoolsMeta({ defaultProps: {
-  items: [
-    {
-      label: 'app',
-      icon: 'i-lucide-folder',
-      defaultExpanded: true,
-      children: [{
-        label: 'composables',
-        icon: 'i-lucide-folder',
-        defaultExpanded: true,
-        children: [
-          { label: 'useAuth.ts', icon: 'vscode-icons:file-type-typescript' },
-          { label: 'useUser.ts', icon: 'vscode-icons:file-type-typescript' }
-        ]
-      },
-      {
-        label: 'components',
-        icon: 'i-lucide-folder',
-        children: [
-          {
-            label: 'Home',
-            icon: 'i-lucide-folder',
-            children: [
-              { label: 'Card.vue', icon: 'vscode-icons:file-type-vue' },
-              { label: 'Button.vue', icon: 'vscode-icons:file-type-vue' }
-            ]
-          }
-        ]
-      }]
-    },
-    { label: 'app.vue', icon: 'vscode-icons:file-type-vue' },
-    { label: 'nuxt.config.ts', icon: 'vscode-icons:file-type-nuxt' }
-  ]
-} })
 </script>
 
 <script setup lang="ts" generic="T extends TreeItem, M extends boolean = false, K extends SelectItemKey<T> | undefined = undefined">
