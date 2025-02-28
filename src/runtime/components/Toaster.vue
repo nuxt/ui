@@ -4,7 +4,6 @@ import type { ToastProviderProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toaster'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
 const appConfigToaster = _appConfig as AppConfig & { ui: { toaster: Partial<typeof theme> } }
@@ -36,8 +35,6 @@ export interface ToasterSlots {
 export default {
   name: 'Toaster'
 }
-
-extendDevtoolsMeta({ example: 'ToasterExample' })
 </script>
 
 <script setup lang="ts">

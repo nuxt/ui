@@ -4,7 +4,6 @@ import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProp
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
@@ -85,67 +84,6 @@ export type ContextMenuSlots<T extends { slot?: string }> = {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
-
-extendDevtoolsMeta({
-  example: 'ContextMenuExample',
-  ignoreProps: ['items'],
-  defaultProps: {
-    items: [
-      [{
-        label: 'My account',
-        avatar: {
-          src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-        }
-      }],
-      [{
-        label: 'Appearance',
-        children: [{
-          label: 'System',
-          icon: 'i-lucide-monitor'
-        }, {
-          label: 'Light',
-          icon: 'i-lucide-sun'
-        }, {
-          label: 'Dark',
-          icon: 'i-lucide-moon'
-        }]
-      }],
-      [{
-        label: 'Show Sidebar',
-        kbds: ['meta', 'S']
-      }, {
-        label: 'Show Toolbar',
-        kbds: ['shift', 'meta', 'D']
-      }, {
-        label: 'Collapse Pinned Tabs',
-        disabled: true
-      }], [{
-        label: 'Refresh the Page'
-      }, {
-        label: 'Clear Cookies and Refresh'
-      }, {
-        label: 'Clear Cache and Refresh'
-      }, {
-        type: 'separator'
-      }, {
-        label: 'Developer',
-        children: [[{
-          label: 'View Source',
-          kbds: ['option', 'meta', 'U']
-        }, {
-          label: 'Developer Tools',
-          kbds: ['option', 'meta', 'I']
-        }], [{
-          label: 'Inspect Elements',
-          kbds: ['option', 'meta', 'C']
-        }], [{
-          label: 'JavaScript Console',
-          kbds: ['option', 'meta', 'J']
-        }]]
-      }]
-    ]
-  }
-})
 </script>
 
 <script setup lang="ts" generic="T extends ContextMenuItem">

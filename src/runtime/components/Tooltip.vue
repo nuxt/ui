@@ -3,7 +3,6 @@ import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipAr
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { KbdProps } from '../types'
 
@@ -41,8 +40,6 @@ export interface TooltipSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'TooltipExample', defaultProps: { text: 'Hello world!' } })
 </script>
 
 <script setup lang="ts">

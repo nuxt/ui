@@ -4,7 +4,6 @@ import type { AppConfig } from '@nuxt/schema'
 import type { RouteLocationRaw } from '#vue-router'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pagination'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
 
@@ -98,8 +97,6 @@ export interface PaginationSlots {
     index: number
   }): any
 }
-
-extendDevtoolsMeta({ defaultProps: { total: 50 } })
 </script>
 
 <script setup lang="ts">

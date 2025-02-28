@@ -4,7 +4,6 @@ import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/stepper'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { DynamicSlots } from '../types/utils'
 
@@ -56,8 +55,6 @@ export type StepperSlots<T extends StepperItem> = {
   description: SlotProps<T>
   content: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
-
-extendDevtoolsMeta({ example: 'StepperExample' })
 </script>
 
 <script setup lang="ts" generic="T extends StepperItem">

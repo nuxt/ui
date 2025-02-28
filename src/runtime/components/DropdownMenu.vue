@@ -4,7 +4,6 @@ import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentP
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
@@ -93,55 +92,6 @@ export type DropdownMenuSlots<T extends { slot?: string }> = {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
-
-extendDevtoolsMeta({
-  example: 'DropdownMenuExample',
-  ignoreProps: ['items'],
-  defaultProps: {
-    items: [
-      [{
-        label: 'My account',
-        avatar: {
-          src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-        },
-        type: 'label'
-      }], [{
-        label: 'Profile',
-        icon: 'i-lucide-user',
-        slot: 'custom'
-      }, {
-        label: 'Billing',
-        icon: 'i-lucide-credit-card',
-        kbds: ['meta', 'b']
-      }, {
-        label: 'Settings',
-        icon: 'i-lucide-cog',
-        kbds: ['?']
-      }], [{
-        label: 'Invite users',
-        icon: 'i-lucide-user-plus',
-        children: [[{
-          label: 'Invite by email',
-          icon: 'i-lucide-send-horizontal'
-        }, {
-          label: 'Invite by link',
-          icon: 'i-lucide-link',
-          kbds: ['meta', 'i']
-        }]]
-      }],
-      [{
-        label: 'GitHub',
-        icon: 'i-simple-icons-github',
-        to: 'https://github.com/nuxt/ui',
-        target: '_blank'
-      }, {
-        label: 'Support',
-        icon: 'i-lucide-life-buoy',
-        to: '/components/dropdown-menu'
-      }]
-    ]
-  }
-})
 </script>
 
 <script setup lang="ts" generic="T extends DropdownMenuItem">
