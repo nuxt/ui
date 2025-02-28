@@ -50,7 +50,7 @@ useSeoMeta({
     </template>
 
     <div class="lg:border-x border-(--ui-border) h-full flex items-center lg:bg-(--ui-bg-muted)/20">
-      <Motion :initial="{ opacity: 0, transform: 'translateY(10px)' }" :in-view="{ opacity: 1, transform: 'translateY(0px)' }" :in-view-options="{ once: true }" :transition="{ duration: 0.5, delay: 0.2 }">
+      <Motion class="flex-1" :initial="{ opacity: 0, transform: 'translateY(10px)' }" :in-view="{ opacity: 1, transform: 'translateY(0px)' }" :in-view-options="{ once: true }" :transition="{ duration: 0.5, delay: 0.2 }">
         <UColorModeImage
           v-if="template.thumbnail"
           v-bind="template.thumbnail"
