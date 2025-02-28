@@ -80,7 +80,6 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
    * @defaultValue false
    */
   sticky?: boolean
-  onSelect?: (row: TableRow<T>, e?: Event) => void
   /** Whether the table should be in loading state. */
   loading?: boolean
   loadingColor?: TableVariants['loadingColor']
@@ -145,6 +144,7 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>
+  onSelect?: (row: TableRow<T>, e?: Event) => void
   class?: any
   ui?: Partial<typeof table.slots>
 }
