@@ -278,16 +278,21 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
 }
 
 function handleRowSelect(row: TableRow<T>, e: Event) {
-  if (!props.onSelect)
+  if (!props.onSelect) {
     return
+  }
   const target = e.target as HTMLElement
   const isInteractive = target.closest('button')
-  if (isInteractive)
+  if (isInteractive) {
     return
+  }
+
   e.preventDefault()
   e.stopPropagation()
+
   props.onSelect(row, e)
 }
+
 defineExpose({
   tableApi
 })
@@ -322,7 +327,7 @@ defineExpose({
           <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
             <tr
               :data-selected="row.getIsSelected()"
-              :data-can-select="!!props.onSelect"
+              :data-selectable="!!props.onSelect"
               :data-expanded="row.getIsExpanded()"
               :role="props.onSelect ? 'button' : undefined"
               :tabindex="props.onSelect ? 0 : undefined"

@@ -3,6 +3,7 @@ import { h, resolveComponent } from 'vue'
 import type { TableColumn, TableRow } from '@nuxt/ui'
 
 const UBadge = resolveComponent('UBadge')
+const UCheckbox = resolveComponent('UCheckbox')
 
 type Payment = {
   id: string
@@ -45,6 +46,18 @@ const data = ref<Payment[]>([{
 }])
 
 const columns: TableColumn<Payment>[] = [{
+  id: 'select',
+  header: ({ table }) => h(UCheckbox, {
+    'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
+    'ariaLabel': 'Select all'
+  }),
+  cell: ({ row }) => h(UCheckbox, {
+    'modelValue': row.getIsSelected(),
+    'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
+    'ariaLabel': 'Select row'
+  })
+}, {
   accessorKey: 'date',
   header: 'Date',
   cell: ({ row }) => {
@@ -89,22 +102,12 @@ const columns: TableColumn<Payment>[] = [{
 const table = useTemplateRef('table')
 
 const rowSelection = ref<Record<string, boolean>>({ })
+
 function onSelect(row: TableRow<Payment>, e?: Event) {
   /* If you decide to also select the column you can do this  */
   row.toggleSelected(!row.getIsSelected())
-  console.info(e)
-}
-const selectedRows = computed(() => {
-  if (!rowSelection.value) return []
-  const indexes = Object.entries(rowSelection.value).filter(rs => rs[1])?.map(rs => Number.parseInt(rs[0])) || []
-  if (indexes.length === 0) return []
-  return data.value.filter((_, index) => indexes.includes(index))
-})
-function quitSelect(row: TableRow<Payment>) {
-  const index = data.value.findIndex(r => r.id === row.original.id)
-  if (rowSelection.value[index]) {
-    rowSelection.value = { ...rowSelection.value, [index]: false }
-  }
+
+  console.log(e)
 }
 </script>
 
@@ -122,20 +125,6 @@ function quitSelect(row: TableRow<Payment>) {
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>
-    </div>
-    <div v-if="selectedRows.length>0">
-      <UTable
-
-        :data="selectedRows"
-        :ui="{
-          td: 'truncate ... max-w-28'
-        }"
-        :columns="[
-          { accessorKey: 'email', header: 'Remove' }
-        ]"
-        class="border border-[var(--ui-border-accented)] rounded-[var(--ui-radius)] "
-        @select="quitSelect"
-      />
     </div>
   </div>
 </template>
