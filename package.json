@@ -75,7 +75,7 @@
     "test": "vitest",
     "test:vue": "vitest -c vitest.vue.config.ts",
     "test:vue:build": "vite build playground-vue",
-    "release": "release-it --preRelease=alpha --npm.tag=next"
+    "release": "release-it --preRelease=beta --npm.tag=next"
   },
   "dependencies": {
     "@iconify/vue": "^4.3.0",
