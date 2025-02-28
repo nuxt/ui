@@ -7,9 +7,9 @@ import { tv } from '../utils/tv'
 import type { AvatarProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
+const appConfigBreadcrumb = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 
-const breadcrumb = tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) })
+const breadcrumb = tv({ extend: tv(theme), ...(appConfigBreadcrumb.ui?.breadcrumb || {}) })
 
 export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string

@@ -8,7 +8,7 @@ const props = defineProps<{
 
 const route = useRoute()
 
-const camelName = camelCase(props.slug ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
+const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
 const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
 
 const meta = await fetchComponentMeta(name as any)
@@ -36,7 +36,7 @@ const meta = await fetchComponentMeta(name as any)
         <ProseTd>
           <HighlightInlineType v-if="slot.type" :type="slot.type" />
 
-          <MDC v-if="slot.description" :value="slot.description" class="text-[var(--ui-text-toned)] mt-1" />
+          <MDC v-if="slot.description" :value="slot.description" class="text-(--ui-text-toned) mt-1" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

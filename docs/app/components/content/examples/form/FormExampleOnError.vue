@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormError, FormErrorEvent, FormSubmitEvent } from '#ui/types'
+import type { FormError, FormErrorEvent, FormSubmitEvent } from '@nuxt/ui'
 
 const state = reactive({
   email: undefined,

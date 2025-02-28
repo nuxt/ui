@@ -1,5 +1,6 @@
 ---
 description: A short text to represent a status or a category.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github

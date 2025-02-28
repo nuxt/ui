@@ -16,9 +16,9 @@ import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { carousel: Partial<typeof theme> } }
+const appConfigCarousel = _appConfig as AppConfig & { ui: { carousel: Partial<typeof theme> } }
 
-const carousel = tv({ extend: tv(theme), ...(appConfig.ui?.carousel || {}) })
+const carousel = tv({ extend: tv(theme), ...(appConfigCarousel.ui?.carousel || {}) })
 
 type CarouselVariants = VariantProps<typeof carousel>
 

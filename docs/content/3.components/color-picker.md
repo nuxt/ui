@@ -1,11 +1,11 @@
 ---
 title: ColorPicker
 description: A component to select a color.
+category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/ColorPicker.vue
-navigation.badge: New
 ---
 
 ## Usage

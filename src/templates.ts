@@ -5,6 +5,7 @@ import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
+import colors from 'tailwindcss/colors'
 
 export function buildTemplates(options: ModuleOptions) {
   return Object.entries(theme).reduce((acc, [key, component]) => {
@@ -70,6 +71,28 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   }
 
   templates.push({
+    filename: 'ui.css',
+    write: true,
+    getContents: () => `@source "./ui";
+
+@theme default static {
+  --color-old-neutral-50: ${colors.neutral[50]};
+  --color-old-neutral-100: ${colors.neutral[100]};
+  --color-old-neutral-200: ${colors.neutral[200]};
+  --color-old-neutral-300: ${colors.neutral[300]};
+  --color-old-neutral-400: ${colors.neutral[400]};
+  --color-old-neutral-500: ${colors.neutral[500]};
+  --color-old-neutral-600: ${colors.neutral[600]};
+  --color-old-neutral-700: ${colors.neutral[700]};
+  --color-old-neutral-800: ${colors.neutral[800]};
+  --color-old-neutral-900: ${colors.neutral[900]};
+  --color-old-neutral-950: ${colors.neutral[950]};
+  ${[...(options.theme?.colors || []), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
+}
+`
+  })
+
+  templates.push({
     filename: 'ui/index.ts',
     write: true,
     getContents: () => Object.keys(theme).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
@@ -79,7 +102,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
-import type { DeepPartial } from '#ui/types/utils'
+import type { DeepPartial } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 

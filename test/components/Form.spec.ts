@@ -278,6 +278,39 @@ describe('Form', () => {
         { id: 'passwordInput', name: 'password', message: 'Required' }
       ])
     })
+
+    test('touchedFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('focus')
+      await flushPromises()
+
+      expect(form.value.touchedFields.has('email')).toBe(true)
+      expect(form.value.touchedFields.has('password')).toBe(false)
+    })
+
+    test('touchedFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('change')
+      await flushPromises()
+
+      expect(form.value.dirtyFields.has('email')).toBe(true)
+      expect(form.value.touchedFields.has('email')).toBe(true)
+
+      expect(form.value.dirtyFields.has('password')).toBe(false)
+      expect(form.value.touchedFields.has('password')).toBe(false)
+    })
+
+    test('blurredFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('blur')
+      await flushPromises()
+
+      expect(form.value.blurredFields.has('email')).toBe(true)
+      expect(form.value.blurredFields.has('password')).toBe(false)
+    })
   })
 
   describe('nested', async () => {
@@ -444,6 +477,7 @@ describe('Form', () => {
       }
     )
   })
+
   test('form field errorPattern works', async () => {
     const wrapper = await mountSuspended({
       components: {

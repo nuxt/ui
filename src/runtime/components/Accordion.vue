@@ -7,9 +7,9 @@ import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { DynamicSlots } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
+const appConfigAccordion = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
 
-const accordion = tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })
+const accordion = tv({ extend: tv(theme), ...(appConfigAccordion.ui?.accordion || {}) })
 
 export interface AccordionItem {
   label?: string

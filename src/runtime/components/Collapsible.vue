@@ -6,9 +6,9 @@ import theme from '#build/ui/collapsible'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof theme> } }
+const appConfigCollapsible = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof theme> } }
 
-const collapsible = tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })
+const collapsible = tv({ extend: tv(theme), ...(appConfigCollapsible.ui?.collapsible || {}) })
 
 export interface CollapsibleProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
   /**

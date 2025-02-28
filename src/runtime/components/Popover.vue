@@ -6,9 +6,9 @@ import theme from '#build/ui/popover'
 import { tv } from '../utils/tv'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
-const appConfig = _appConfig as AppConfig & { ui: { popover: Partial<typeof theme> } }
+const appConfigPopover = _appConfig as AppConfig & { ui: { popover: Partial<typeof theme> } }
 
-const popover = tv({ extend: tv(theme), ...(appConfig.ui?.popover || {}) })
+const popover = tv({ extend: tv(theme), ...(appConfigPopover.ui?.popover || {}) })
 
 export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'> {
   /**

@@ -6,9 +6,9 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/slider'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { slider: Partial<typeof theme> } }
+const appConfigSlider = _appConfig as AppConfig & { ui: { slider: Partial<typeof theme> } }
 
-const slider = tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })
+const slider = tv({ extend: tv(theme), ...(appConfigSlider.ui?.slider || {}) })
 
 type SliderVariants = VariantProps<typeof slider>
 

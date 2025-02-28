@@ -10,9 +10,9 @@ import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
+const appConfigButton = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
-const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
+const button = tv({ extend: tv(theme), ...(appConfigButton.ui?.button || {}) })
 
 type ButtonVariants = VariantProps<typeof button>
 

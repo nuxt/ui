@@ -1,6 +1,7 @@
 ---
 title: ContextMenu
 description: A menu to display actions when right-clicking on an element.
+category: overlay
 links:
   - label: ContextMenu
     icon: i-custom-reka-ui
@@ -95,12 +96,12 @@ props:
 slots:
   default: |
 
-    <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
       Right click here
     </div>
 ---
 
-:div{class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72"}[Right click here]
+:div{class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"}[Right click here]
 ::
 
 ::note
@@ -137,12 +138,12 @@ props:
 slots:
   default: |
 
-    <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
       Right click here
     </div>
 ---
 
-:div{class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72"}[Right click here]
+:div{class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"}[Right click here]
 ::
 
 ### Disabled
@@ -171,12 +172,12 @@ props:
 slots:
   default: |
 
-    <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
       Right click here
     </div>
 ---
 
-:div{class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72"}[Right click here]
+:div{class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"}[Right click here]
 ::
 
 ## Examples

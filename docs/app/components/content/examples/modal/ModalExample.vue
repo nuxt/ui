@@ -1,23 +1,17 @@
 <script setup lang="ts">
-const modal = useModal()
-
 defineProps<{
   count: number
 }>()
 
-const emit = defineEmits(['success'])
-
-function onSuccess() {
-  emit('success')
-}
+const emit = defineEmits<{ close: [boolean] }>()
 </script>
 
 <template>
-  <UModal :title="`This modal was opened programmatically ${count} times`">
+  <UModal :close="{ onClick: () => emit('close', false) }" :title="`This modal was opened programmatically ${count} times`">
     <template #footer>
       <div class="flex gap-2">
-        <UButton color="neutral" label="Close" @click="modal.close()" />
-        <UButton label="Success" @click="onSuccess" />
+        <UButton color="neutral" label="Dismiss" @click="emit('close', false)" />
+        <UButton label="Success" @click="emit('close', true)" />
       </div>
     </template>
   </UModal>

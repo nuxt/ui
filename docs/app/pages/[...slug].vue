@@ -72,9 +72,20 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs', {
-  headline: breadcrumb.value.map(item => item.label).join(' > ')
-})
+if (route.path.startsWith('/components')) {
+  defineOgImageComponent('OgImageComponent', {
+    title: page.value.title,
+    description: page.value.description,
+    component: (route.params.slug as string[]).pop() as string,
+    module: page.value.module
+  })
+} else {
+  defineOgImageComponent('Docs', {
+    headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
+    framework: page.value?.framework,
+    module: page.value.module
+  })
+}
 
 const communityLinks = computed(() => [{
   icon: 'i-lucide-file-pen',
@@ -116,9 +127,13 @@ const communityLinks = computed(() => [{
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title">
+    <UPageHeader>
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
+      </template>
+
+      <template #title>
+        {{ page.title }}<sup v-if="page.module === 'ui-pro'" class="ml-1 text-xs align-super font-medium text-(--ui-primary)">PRO</sup>
       </template>
 
       <template #description>

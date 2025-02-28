@@ -7,9 +7,9 @@ import theme from '#build/ui/color-picker'
 import { tv } from '../utils/tv'
 import type { HSLObject } from 'colortranslator'
 
-const appConfig = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
+const appConfigColorPicker = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
 
-const colorPicker = tv({ extend: tv(theme), ...(appConfig.ui?.colorPicker || {}) })
+const colorPicker = tv({ extend: tv(theme), ...(appConfigColorPicker.ui?.colorPicker || {}) })
 
 type ColorPickerVariants = VariantProps<typeof colorPicker>
 

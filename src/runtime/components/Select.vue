@@ -10,9 +10,9 @@ import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
+const appConfigSelect = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
-const select = tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })
+const select = tv({ extend: tv(theme), ...(appConfigSelect.ui?.select || {}) })
 
 export interface SelectItem {
   label?: string
@@ -120,6 +120,8 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<SelectProps<T, I, V, M>>(), {
   valueKey: 'value' as never,
   labelKey: 'label' as never,
@@ -133,7 +135,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen'
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
-const { emitFormChange, emitFormInput, emitFormBlur, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
+const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
@@ -179,6 +181,7 @@ function onUpdateOpen(value: boolean) {
   } else {
     const event = new FocusEvent('focus')
     emits('focus', event)
+    emitFormFocus()
   }
 }
 </script>
@@ -196,7 +199,7 @@ function onUpdateOpen(value: boolean) {
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <SelectTrigger :id="id" :class="ui.base({ class: [props.class, props.ui?.base] })" v-bind="ariaAttrs">
+    <SelectTrigger :id="id" :class="ui.base({ class: [props.class, props.ui?.base] })" v-bind="{ ...$attrs, ...ariaAttrs }">
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as M extends true ? AcceptableValue[] : AcceptableValue)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
