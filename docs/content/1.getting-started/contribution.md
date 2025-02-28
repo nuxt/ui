@@ -37,7 +37,6 @@ The documentation lives in the `docs` folder as a Nuxt app using `@nuxt/content`
 The module code resides in the `src` folder. Here's a breakdown of its structure:
 
 ```bash
-├── devtools/
 ├── plugins/
 ├── runtime/
 │   ├── components/        # Where all the components are located
