@@ -128,7 +128,7 @@ extendDevtoolsMeta({ defaultProps: {
 } })
 </script>
 
-<script setup lang="ts" generic="T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
+<script setup lang="ts" generic="T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'

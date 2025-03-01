@@ -41,7 +41,7 @@ export type ArrayOrNested<T> = T[] | T[][]
 export type NestedItem<T> = T extends Array<infer I> ? NestedItem<I> : T
 export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>>
 
-export type GetItemKeys<I, T extends NestedItem<I> = NestedItem<I>> = T extends AcceptableValue ? never : keyof T
+export type GetItemKeys<I> = keyof Extract<NestedItem<I>, object>
 
 export type GetItemValue<I, VK extends GetItemKeys<I> | undefined, T extends NestedItem<I> = NestedItem<I>> =
 T extends object
