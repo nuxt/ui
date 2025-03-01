@@ -30,13 +30,26 @@ templates:
       - title: Resizable multi-column layout
         icon: i-lucide-columns-3
     links:
-      - label: Live preview
+      - label: Live Preview
         to: https://dashboard-template.nuxt.dev
         target: _blank
+        leadingIcon: i-logos-nuxt-icon
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
-      - label: Use this template
-        to: https://github.com/nuxt-ui-pro/dashboard/tree/v3
+      - label: Nuxt Template
+        to: https://github.com/nuxt-ui-pro/dashboard
+        target: _blank
+        icon: i-simple-icons-github
+        color: neutral
+        variant: outline
+      - label: Live Preview
+        to: https://vue-dashboard-template.nuxt.dev
+        target: _blank
+        leadingIcon: i-logos-vue
+        trailingIcon: i-lucide-arrow-up-right
+        color: neutral
+      - label: Vue Template
+        to: https://github.com/nuxt-ui-pro/dashboard-vue
         target: _blank
         icon: i-simple-icons-github
         color: neutral
@@ -55,13 +68,14 @@ templates:
       - title: Authentication pages (login, register)
         icon: i-lucide-user-round-check
     links:
-      - label: Live preview
+      - label: Live Preview
         to: https://saas-template.nuxt.dev
         target: _blank
+        leadingIcon: i-logos-nuxt-icon
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
-      - label: Use this template
-        to: https://github.com/nuxt-ui-pro/saas/tree/v3
+      - label: Nuxt Template
+        to: https://github.com/nuxt-ui-pro/saas
         target: _blank
         variant: outline
         icon: i-simple-icons-github
@@ -80,13 +94,14 @@ templates:
       - title: Write content in YAML
         icon: i-simple-icons-yaml
     links:
-      - label: Live preview
+      - label: Live Preview
         to: https://landing-template.nuxt.dev
         target: _blank
+        leadingIcon: i-logos-nuxt-icon
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
-      - label: Use this template
-        to: https://github.com/nuxt-ui-pro/landing/tree/v3
+      - label: Nuxt Template
+        to: https://github.com/nuxt-ui-pro/landing
         target: _blank
         icon: i-simple-icons-github
         color: neutral
@@ -105,13 +120,50 @@ templates:
       - title: Full-text search out of the box
         icon: i-lucide-search
     links:
-      - label: Live preview
+      - label: Live Preview
         to: https://docs-template.nuxt.dev
         target: _blank
+        leadingIcon: i-logos-nuxt-icon
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
-      - label: Use this template
+      - label: Nuxt Template
         to: https://github.com/nuxt-ui-pro/docs/tree/v3
+        target: _blank
+        variant: outline
+        icon: i-simple-icons-github
+        color: neutral
+  - title: 'Starter'
+    description: "A minimal starter template to build your own project with Nuxt UI Pro components."
+    icon: i-lucide-flower
+    thumbnail:
+      dark: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3VpLXByby1zdGFydGVyLm51eHQuZGV2IiwiaWF0IjoxNzM5NDYzMzk4fQ.XLzPkSW6nRbPW07QO1RkMwz_RAPA4KfeyrWrK3li9YI.jpg?theme=dark
+      light: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3VpLXByby1zdGFydGVyLm51eHQuZGV2IiwiaWF0IjoxNzM5NDYzMzk4fQ.XLzPkSW6nRbPW07QO1RkMwz_RAPA4KfeyrWrK3li9YI.jpg?theme=light
+    features:
+      - title: ESLint Configured
+        icon: i-simple-icons-eslint
+      - title: Nuxt 4 Compatibility Enabled
+        icon: i-simple-icons-nuxtdotjs
+    links:
+      - label: Live Preview
+        to: https://ui-pro-starter.nuxt.dev
+        target: _blank
+        leadingIcon: i-logos-nuxt-icon
+        trailingIcon: i-lucide-arrow-up-right
+        color: neutral
+      - label: Nuxt Template
+        to: https://github.com/nuxt-ui-pro/starter
+        target: _blank
+        variant: outline
+        icon: i-simple-icons-github
+        color: neutral
+      - label: Live Preview
+        to: https://ui-pro-starter-vue.nuxt.dev
+        target: _blank
+        leadingIcon: i-logos-vue
+        trailingIcon: i-lucide-arrow-up-right
+        color: neutral
+      - label: Vue Template
+        to: https://github.com/nuxt-ui-pro/starter-vue
         target: _blank
         variant: outline
         icon: i-simple-icons-github
