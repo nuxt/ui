@@ -334,7 +334,7 @@ name: 'modal-programmatic-example'
 ::
 
 ::tip
-You can close the modal within the modal component by calling `modal.close()`.
+You can close the modal within the modal component by emitting `"emit('close')`.
 ::
 
 ### Nested modals

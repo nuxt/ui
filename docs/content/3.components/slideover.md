@@ -333,7 +333,7 @@ name: 'slideover-programmatic-example'
 ::
 
 ::tip
-You can close the slideover within the slideover component by calling `slideover.close()`.
+You can close the slideover within the slideover component by emitting `emit('close')`.
 ::
 
 ### Nested slideovers
