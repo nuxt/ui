@@ -41,8 +41,8 @@ const itemsWithMappedId = [
   { id: 'id3', title: 'obiwan kenobi' }
 ]
 
-const modelValue = ref<TreeItem>()
-const modelValues = ref<TreeItem[]>([])
+const modelValue = ref<string>()
+const modelValues = ref<string[]>([])
 </script>
 
 <template>
@@ -66,10 +66,10 @@ const modelValues = ref<TreeItem[]>([])
     <template v-if="false">
       <UTree :model-value="modelValues" :items="items" multiple />
       <UTree :default-value="modelValues" :items="items" multiple />
-      <UTree :items="items" multiple @update:model-value="(payload: TreeItem[]) => payload" />
+      <UTree :items="items" multiple @update:model-value="(payload) => payload" />
       <UTree :model-value="modelValue" :items="items" />
       <UTree :default-value="modelValue" :items="items" />
-      <UTree :items="items" @update:model-value="(payload: TreeItem) => payload" />
+      <UTree :items="items" @update:model-value="(payload) => payload" />
 
       <!-- @vue-expect-error - value key should type v-model.  -->
       <UTree v-model="modelValue" :items="itemsWithMappedId" value-key="id" />

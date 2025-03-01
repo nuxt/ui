@@ -190,7 +190,7 @@ describe('Select', () => {
       // with groups and mixed types
       expectEmitPayloadType('update:modelValue', () => Select({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]]
-      })).toEqualTypeOf<[(string | number)]>()
+      })).toEqualTypeOf<[string | number]>()
 
       // with groups, multiple, mixed types and valueKey
       expectEmitPayloadType('update:modelValue', () => Select({
