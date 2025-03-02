@@ -10,6 +10,7 @@ import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type {
   ArrayOrNested,
   DynamicSlots,
+  MergeTypes,
   NestedItem,
   PartialString
 } from '../types/utils'
@@ -83,13 +84,16 @@ export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
 type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type ContextMenuSlots<A extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
+export type ContextMenuSlots<
+  A extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>,
+  T extends NestedItem<A> = NestedItem<A>
+> = {
   'default'(props?: {}): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-} & DynamicSlots<T, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
+} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 extendDevtoolsMeta({
   example: 'ContextMenuExample',
@@ -171,7 +175,7 @@ const slots = defineSlots<ContextMenuSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content as ContextMenuContentProps)
-const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[Exclude<keyof ContextMenuSlots<T>, 'default'>]>
+const proxySlots = omit(slots, ['default'])
 
 const ui = computed(() => contextMenu({
   size: props.size
@@ -196,7 +200,7 @@ const ui = computed(() => contextMenu({
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
     >
-      <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
+      <template v-for="(_, name) in proxySlots" #[name]="slotData">
         <slot :name="(name as keyof ContextMenuSlots<T>)" v-bind="slotData" />
       </template>
     </UContextMenuContent>

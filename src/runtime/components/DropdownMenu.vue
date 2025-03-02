@@ -10,6 +10,7 @@ import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type {
   ArrayOrNested,
   DynamicSlots,
+  MergeTypes,
   NestedItem,
   PartialString
 } from '../types/utils'
@@ -91,13 +92,16 @@ export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
 type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
+export type DropdownMenuSlots<
+  A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
+  T extends NestedItem<A> = NestedItem<A>
+> = {
   'default'(props: { open: boolean }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-} & DynamicSlots<T, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
+} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 extendDevtoolsMeta({
   example: 'DropdownMenuExample',
@@ -169,7 +173,7 @@ const slots = defineSlots<DropdownMenuSlots<T>>()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
-const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[Exclude<keyof DropdownMenuSlots<T>, 'default'>]>
+const proxySlots = omit(slots, ['default'])
 
 const ui = computed(() => dropdownMenu({
   size: props.size
@@ -194,7 +198,7 @@ const ui = computed(() => dropdownMenu({
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
     >
-      <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
+      <template v-for="(_, name) in proxySlots" #[name]="slotData">
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 

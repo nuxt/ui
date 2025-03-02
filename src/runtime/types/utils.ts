@@ -37,9 +37,21 @@ export type PartialString<T> = {
   [K in keyof T]?: string
 }
 
+export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>>
 export type ArrayOrNested<T> = T[] | T[][]
 export type NestedItem<T> = T extends Array<infer I> ? NestedItem<I> : T
-export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>>
+type AllKeys<T> = T extends any ? keyof T : never
+type NonCommonKeys<T extends object> = Exclude<AllKeys<T>, keyof T>
+type PickTypeOf<T, K extends string | number | symbol> = K extends AllKeys<T>
+  ? T extends { [k in K]?: any }
+    ? T[K]
+    : undefined
+  : never
+export type MergeTypes<T extends object> = {
+  [k in keyof T]: PickTypeOf<T, k>;
+} & {
+  [k in NonCommonKeys<T>]?: PickTypeOf<T, k>;
+}
 
 export type GetItemKeys<I> = keyof Extract<NestedItem<I>, object>
 

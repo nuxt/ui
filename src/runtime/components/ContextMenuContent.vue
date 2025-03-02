@@ -45,7 +45,7 @@ const slots = defineSlots<ContextMenuSlots<T>>()
 
 const appConfig = useAppConfig()
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
-const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[Exclude<keyof ContextMenuSlots<T>, 'default'>]>
+const proxySlots = omit(slots, ['default'])
 
 // TODO: understand why it is not possible to type `item` as `ContextMenuMenuItem<T>`
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem, active?: boolean, index: number }>()

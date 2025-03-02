@@ -7,7 +7,13 @@ import theme from '#build/ui/navigation-menu'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, NestedItem, PartialString } from '../types/utils'
+import type {
+  ArrayOrNested,
+  DynamicSlots,
+  MergeTypes,
+  NestedItem,
+  PartialString
+} from '../types/utils'
 
 const appConfigNavigationMenu = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -102,13 +108,16 @@ export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
 
 type SlotProps<T extends NavigationMenuItem> = (props: { item: T, index: number, active?: boolean }) => any
 
-export type NavigationMenuSlots<A extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>, T extends NestedItem<A> = NestedItem<A>> = {
+export type NavigationMenuSlots<
+  A extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>,
+  T extends NestedItem<A> = NestedItem<A>
+> = {
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
   'item-content': SlotProps<T>
-} & DynamicSlots<T, 'leading' | 'label' | 'trailing' | 'content', { index: number, active?: boolean }>
+} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing' | 'content', { index: number, active?: boolean }>
 
 extendDevtoolsMeta({
   ignoreProps: ['items'],
