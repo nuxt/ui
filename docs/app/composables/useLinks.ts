@@ -98,7 +98,7 @@ export function useLinks() {
       label: 'Raycast Extension',
       description: 'Access Nuxt UI components without leaving your editor.',
       icon: 'i-simple-icons-raycast',
-      to: 'https://github.com/HugoRCD/nuxt-ui-raycast-extension',
+      to: 'https://www.raycast.com/HugoRCD/nuxt-ui',
       target: '_blank'
     }, {
       label: 'Figma to Code',
