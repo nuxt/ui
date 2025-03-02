@@ -4,7 +4,6 @@ import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AcceptableValue } from '../types/utils'
 
@@ -67,8 +66,6 @@ export interface RadioGroupSlots<T extends RadioGroupItem = RadioGroupItem> {
   label: SlotProps<T>
   description: SlotProps<T>
 }
-
-extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends RadioGroupItem">

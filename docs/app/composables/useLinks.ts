@@ -78,12 +78,35 @@ export function useLinks() {
     }]
   }, {
     label: 'Figma',
-    icon: 'i-lucide-figma',
+    icon: 'i-simple-icons-figma',
     to: '/figma'
   }, {
-    label: 'Roadmap',
-    icon: 'i-lucide-map',
-    to: '/roadmap'
+    label: 'Community',
+    icon: 'i-lucide-users',
+    children: [{
+      label: 'Roadmap',
+      description: 'Track our development progress in real-time.',
+      icon: 'i-lucide-map',
+      to: '/roadmap'
+    }, {
+      label: 'Devtools Integration',
+      description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.',
+      icon: 'i-lucide-code',
+      to: 'https://github.com/romhml/compodium',
+      target: '_blank'
+    }, {
+      label: 'Raycast Extension',
+      description: 'Access Nuxt UI components without leaving your editor.',
+      icon: 'i-simple-icons-raycast',
+      to: 'https://www.raycast.com/HugoRCD/nuxt-ui',
+      target: '_blank'
+    }, {
+      label: 'Figma to Code',
+      description: 'Convert Figma designs to Nuxt UI code.',
+      icon: 'i-simple-icons-figma',
+      to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui',
+      target: '_blank'
+    }]
   }, {
     label: 'Releases',
     icon: 'i-lucide-rocket',

@@ -2,6 +2,7 @@
 @import "@nuxt/ui-pro";
 
 @source "../../../content";
+@source "../../../node_modules/.c12";
 
 @theme static {
   --container-8xl: 90rem;

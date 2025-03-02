@@ -4,11 +4,11 @@ category: data
 links:
   - label: Tree
     icon: i-custom-reka-ui
-    to: https://www.reka-ui.com/components/tree.html
+    to: https://reka-ui.com/docs/components/tree
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Tree.vue
-navigation.badge: Soon
+navigation.badge: New
 ---
 
 ## Usage

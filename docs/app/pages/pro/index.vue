@@ -38,9 +38,41 @@ useSeoMeta({
       <Motion as-child :initial="{ height: 0 }" :animate="{ height: 'auto' }" :transition="{ delay: 0.2, duration: 1 }">
         <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       </Motion>
-      <Motion as-child :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 0.6, duration: 0.6 }">
-        <NuxtImg src="/pro/hero.png" width="1374" height="439" alt="Nuxt UI Pro" class="w-full border-t border-x border-(--ui-border) bg-(--ui-bg-muted)" />
-      </Motion>
+      <div class="relative h-[400px] border border-(--ui-border) bg-(--ui-bg-muted) overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">
+        <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+          <img
+            v-for="i in 4"
+            :key="i"
+            :src="`/pro/blocks/image${i}.png`"
+            width="460"
+            height="258"
+            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+          >
+        </UPageMarquee>
+        <UPageMarquee orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+          <img
+            v-for="i in [5, 6, 7, 8]"
+            :key="i"
+            :src="`/pro/blocks/image${i}.png`"
+            width="460"
+            height="258"
+            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+          >
+        </UPageMarquee>
+        <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+          <img
+            v-for="i in [9, 10, 11, 12]"
+            :key="i"
+            :src="`/pro/blocks/image${i}.png`"
+            width="460"
+            height="258"
+            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+          >
+        </UPageMarquee>
+      </div>
     </UPageHero>
     <UPageCTA
       variant="outline"
