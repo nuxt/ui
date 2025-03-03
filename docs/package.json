@@ -10,7 +10,7 @@
     "@nuxt/content": "^3.2.2",
     "@nuxt/image": "^1.9.0",
     "@nuxt/ui": "latest",
-    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@c02527f",
+    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@7cf4b69",
     "@nuxthub/core": "^0.8.17",
     "@nuxtjs/plausible": "^1.2.0",
     "@octokit/rest": "^21.1.1",
