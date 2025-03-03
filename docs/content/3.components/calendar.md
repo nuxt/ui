@@ -1,14 +1,14 @@
 ---
 title: Calendar
 description: A calendar component for selecting single dates, multiple dates or date ranges.
+category: element
 links:
   - label: Calendar
     icon: i-custom-reka-ui
-    to: https://www.reka-ui.com/components/calendar.html
+    to: https://reka-ui.com/docs/components/calendar
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Calendar.vue
-navigation.badge: New
 ---
 
 ::note

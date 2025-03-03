@@ -1,5 +1,6 @@
 ---
 description: A succinct message to provide information or feedback to the user.
+category: overlay
 links:
   - label: Toast
     icon: i-custom-reka-ui
@@ -154,8 +155,21 @@ name: 'toast-actions-example'
 ---
 ::
 
-::note
-Actions renders differently when the description is not set. You can try to remove it.
+### Orientation
+
+Use the `orientation` prop to change the orientation of the Toast.
+
+::component-example
+---
+options:
+  - name: 'orientation'
+    label: 'orientation'
+    default: 'horizontal'
+    items:
+      - horizontal
+      - vertical
+name: 'toast-orientation-example'
+---
 ::
 
 ## Examples

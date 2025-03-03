@@ -3,12 +3,13 @@ import { upperFirst, camelCase } from 'scule'
 
 const props = defineProps<{
   prose?: boolean
+  slug?: string
 }>()
 
 const route = useRoute()
 
-const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
-const name = props.prose ? `Prose${upperFirst(camelName)}` : `U${upperFirst(camelName)}`
+const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
+const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
 
 const meta = await fetchComponentMeta(name as any)
 </script>
@@ -35,7 +36,7 @@ const meta = await fetchComponentMeta(name as any)
         <ProseTd>
           <HighlightInlineType v-if="slot.type" :type="slot.type" />
 
-          <MDC v-if="slot.description" :value="slot.description" class="text-[var(--ui-text-toned)] mt-1" />
+          <MDC v-if="slot.description" :value="slot.description" class="text-(--ui-text-toned) mt-1" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

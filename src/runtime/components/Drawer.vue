@@ -4,12 +4,11 @@ import type { DialogContentProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/drawer'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme> } }
+const appConfigDrawer = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme> } }
 
-const drawer = tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })
+const drawer = tv({ extend: tv(theme), ...(appConfigDrawer.ui?.drawer || {}) })
 
 export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'defaultOpen' | 'direction' | 'fadeFromIndex' | 'fixed' | 'modal' | 'nested' | 'direction' | 'open' | 'scrollLockTimeout' | 'shouldScaleBackground' | 'snapPoints'> {
   /**
@@ -19,6 +18,11 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   as?: any
   title?: string
   description?: string
+  /**
+   * Whether to inset the drawer from the edges.
+   * @defaultValue false
+   */
+  inset?: boolean
   /** The content of the drawer. */
   content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
   /**
@@ -57,8 +61,6 @@ export interface DrawerSlots {
   body(props?: {}): any
   footer(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'DrawerExample' })
 </script>
 
 <script setup lang="ts">
@@ -78,9 +80,13 @@ const slots = defineSlots<DrawerSlots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'defaultOpen', 'dismissible', 'fadeFromIndex', 'fixed', 'modal', 'nested', 'direction', 'open', 'scrollLockTimeout', 'shouldScaleBackground', 'snapPoints'), emits)
 const contentProps = toRef(() => props.content)
+const contentEvents = {
+  closeAutoFocus: (e: Event) => e.preventDefault()
+}
 
 const ui = computed(() => drawer({
-  direction: props.direction
+  direction: props.direction,
+  inset: props.inset
 }))
 </script>
 
@@ -93,7 +99,7 @@ const ui = computed(() => drawer({
     <DrawerPortal :disabled="!portal">
       <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps">
+      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
         <slot name="handle">
           <div v-if="handle" :class="ui.handle({ class: props.ui?.handle })" />
         </slot>

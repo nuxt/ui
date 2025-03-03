@@ -47,6 +47,11 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
           Button
         </UButton>
       </UButtonGroup>
+
+      <UButtonGroup>
+        <UBadge color="neutral" variant="outline" size="lg" label="https://" />
+        <UInput color="neutral" variant="outline" placeholder="www.example.com" />
+      </UButtonGroup>
     </div>
 
     <div class="flex gap-4 items-center justify-center">

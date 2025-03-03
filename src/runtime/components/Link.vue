@@ -5,7 +5,6 @@ import _appConfig from '#build/app.config'
 import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
 import theme from '#build/ui/link'
 import { tv } from '../utils/tv'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
   /**
@@ -53,9 +52,9 @@ interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
   noPrefetch?: boolean
 }
 
-const appConfig = _appConfig as AppConfig & { ui: { link: Partial<typeof theme> } }
+const appConfigLink = _appConfig as AppConfig & { ui: { link: Partial<typeof theme> } }
 
-const link = tv({ extend: tv(theme), ...(appConfig.ui?.link || {}) })
+const link = tv({ extend: tv(theme), ...(appConfigLink.ui?.link || {}) })
 
 export interface LinkProps extends NuxtLinkProps {
   /**
@@ -88,8 +87,6 @@ export interface LinkProps extends NuxtLinkProps {
 export interface LinkSlots {
   default(props: { active: boolean }): any
 }
-
-extendDevtoolsMeta({ example: 'LinkExample' })
 </script>
 
 <script setup lang="ts">

@@ -1,19 +1,17 @@
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { AvatarFallbackProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { avatar: Partial<typeof theme> } }
+const appConfigAvatar = _appConfig as AppConfig & { ui: { avatar: Partial<typeof theme> } }
 
-const avatar = tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })
+const avatar = tv({ extend: tv(theme), ...(appConfigAvatar.ui?.avatar || {}) })
 
 type AvatarVariants = VariantProps<typeof avatar>
 
-export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
+export interface AvatarProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
@@ -31,23 +29,18 @@ export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
 export interface AvatarSlots {
   default(props?: {}): any
 }
-
-extendDevtoolsMeta<AvatarProps>({ defaultProps: { src: 'https://avatars.githubusercontent.com/u/739984?v=4', alt: 'Benjamin Canac' } })
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { AvatarRoot, AvatarImage, AvatarFallback, useForwardProps } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
+import { ref, computed, watch } from 'vue'
+import { Primitive } from 'reka-ui'
+import ImageComponent from '#build/ui-image-component'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import UIcon from './Icon.vue'
-import ImageComponent from '#build/ui-image-component'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AvatarProps>(), { as: 'span' })
-
-const fallbackProps = useForwardProps(reactivePick(props, 'delayMs'))
 
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
@@ -69,26 +62,38 @@ const sizePx = computed(() => ({
   '2xl': 44,
   '3xl': 48
 })[props.size || 'md'])
+
+const error = ref(false)
+
+watch(() => props.src, () => {
+  if (error.value) {
+    error.value = false
+  }
+})
+
+function onError() {
+  error.value = true
+}
 </script>
 
 <template>
-  <AvatarRoot :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <AvatarImage
-      v-if="src"
-      :as="ImageComponent"
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <component
+      :is="ImageComponent"
+      v-if="src && !error"
+      role="img"
       :src="src"
       :alt="alt"
       :width="sizePx"
       :height="sizePx"
       v-bind="$attrs"
       :class="ui.image({ class: props.ui?.image })"
+      @error="onError"
     />
 
-    <AvatarFallback as-child v-bind="{ ...fallbackProps, ...$attrs }">
-      <slot>
-        <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
-      </slot>
-    </AvatarFallback>
-  </AvatarRoot>
+    <slot v-else>
+      <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
+    </slot>
+  </Primitive>
 </template>

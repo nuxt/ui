@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 
-const camelName = camelCase(props.name ?? route.params.slug?.[route.params.slug.length - 1] ?? '')
+const camelName = camelCase(props.name ?? route.path.split('/').pop() ?? '')
 const componentName = props.prose ? `Prose${upperFirst(camelName)}` : `U${upperFirst(camelName)}`
 
 const componentTheme = ((props.pro ? props.prose ? themePro.prose : themePro : theme) as any)[camelName]
@@ -112,7 +112,7 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
         <ProseTd>
           <HighlightInlineType v-if="prop.type" :type="prop.type" />
 
-          <MDC v-if="prop.description" :value="prop.description" class="text-[var(--ui-text-toned)] mt-1" />
+          <MDC v-if="prop.description" :value="prop.description" class="text-(--ui-text-toned) mt-1" />
 
           <ComponentPropsLinks v-if="prop.tags?.length" :prop="prop" />
           <ComponentPropsSchema v-if="prop.schema" :prop="prop" :ignore="ignore" />

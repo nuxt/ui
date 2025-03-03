@@ -1,6 +1,7 @@
 ---
 title: SelectMenu
 description: An advanced searchable select element.
+category: form
 links:
   - label: Combobox
     icon: i-custom-reka-ui

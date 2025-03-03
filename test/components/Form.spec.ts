@@ -278,6 +278,39 @@ describe('Form', () => {
         { id: 'passwordInput', name: 'password', message: 'Required' }
       ])
     })
+
+    test('touchedFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('focus')
+      await flushPromises()
+
+      expect(form.value.touchedFields.has('email')).toBe(true)
+      expect(form.value.touchedFields.has('password')).toBe(false)
+    })
+
+    test('touchedFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('change')
+      await flushPromises()
+
+      expect(form.value.dirtyFields.has('email')).toBe(true)
+      expect(form.value.touchedFields.has('email')).toBe(true)
+
+      expect(form.value.dirtyFields.has('password')).toBe(false)
+      expect(form.value.touchedFields.has('password')).toBe(false)
+    })
+
+    test('blurredFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('blur')
+      await flushPromises()
+
+      expect(form.value.blurredFields.has('email')).toBe(true)
+      expect(form.value.blurredFields.has('password')).toBe(false)
+    })
   })
 
   describe('nested', async () => {
@@ -345,6 +378,15 @@ describe('Form', () => {
 
       const nestedField = wrapper.find('#nestedField')
       expect(nestedField.text()).toBe('Required')
+    })
+
+    test('submit event contains nested attributes', async () => {
+      state.email = 'bob@dylan.com'
+      state.password = 'strongpassword'
+      state.nested.field = 'nested'
+
+      await form.value.submit()
+      expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({ data: { email: 'bob@dylan.com', password: 'strongpassword', nested: { field: 'nested' } } }))
     })
 
     test('submit works when child is disabled', async () => {
@@ -435,6 +477,7 @@ describe('Form', () => {
       }
     )
   })
+
   test('form field errorPattern works', async () => {
     const wrapper = await mountSuspended({
       components: {

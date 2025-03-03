@@ -2,14 +2,13 @@
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
+const appConfigBreadcrumb = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 
-const breadcrumb = tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) })
+const breadcrumb = tv({ extend: tv(theme), ...(appConfigBreadcrumb.ui?.breadcrumb || {}) })
 
 export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
@@ -48,31 +47,6 @@ export type BreadcrumbSlots<T extends { slot?: string }> = {
   'item-trailing': SlotProps<T>
   'separator'(props?: {}): any
 } & DynamicSlots<T, SlotProps<T>>
-
-extendDevtoolsMeta({
-  defaultProps: {
-    items: [
-      { label: 'Home', to: '/' },
-      {
-        slot: 'dropdown',
-        icon: 'i-lucide-ellipsis',
-        children: [{
-          label: 'Documentation'
-        }, {
-          label: 'Themes'
-        }, {
-          label: 'GitHub'
-        }]
-      }, {
-        label: 'Components',
-        disabled: true
-      }, {
-        label: 'Breadcrumb',
-        to: '/components/breadcrumb'
-      }
-    ]
-  }
-})
 </script>
 
 <script setup lang="ts" generic="T extends BreadcrumbItem">

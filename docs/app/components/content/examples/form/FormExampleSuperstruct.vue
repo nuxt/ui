@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { object, string, nonempty, refine, type Infer } from 'superstruct'
-import type { FormSubmitEvent } from '#ui/types'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = object({
   email: nonempty(string()),

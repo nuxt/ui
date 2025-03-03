@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const show = ref(false)
-const password = ref('password')
+const password = ref('')
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const password = ref('password')
         variant="link"
         size="sm"
         :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
-        aria-label="show ? 'Hide password' : 'Show password'"
+        :aria-label="show ? 'Hide password' : 'Show password'"
         :aria-pressed="show"
         aria-controls="password"
         @click="show = !show"

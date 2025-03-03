@@ -9,9 +9,9 @@ import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
+const appConfigInput = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
 
-const input = tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })
+const input = tv({ extend: tv(theme), ...(appConfigInput.ui?.input || {}) })
 
 type InputVariants = VariantProps<typeof input>
 
@@ -75,7 +75,7 @@ const slots = defineSlots<InputSlots>()
 
 const [modelValue, modelModifiers] = defineModel<string | number>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props, { deferInputValidation: true })
+const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps>(props, { deferInputValidation: true })
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -166,10 +166,11 @@ onMounted(() => {
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
+      @focus="emitFormFocus"
     >
 
     <slot />

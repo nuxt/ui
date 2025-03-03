@@ -6,8 +6,7 @@ const users = [
     to: 'https://github.com/benjamincanac',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/benjamincanac.png',
-      alt: 'benjamincanac'
+      src: 'https://github.com/benjamincanac.png'
     }
   },
   {
@@ -16,8 +15,7 @@ const users = [
     to: 'https://github.com/smarroufin',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/smarroufin.png',
-      alt: 'smarroufin'
+      src: 'https://github.com/smarroufin.png'
     }
   },
   {
@@ -26,8 +24,7 @@ const users = [
     to: 'https://github.com/atinux',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/atinux.png',
-      alt: 'atinux'
+      src: 'https://github.com/atinux.png'
     }
   },
   {
@@ -36,8 +33,7 @@ const users = [
     to: 'https://github.com/romhml',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/romhml.png',
-      alt: 'romhml'
+      src: 'https://github.com/romhml.png'
     }
   },
   {
@@ -46,8 +42,7 @@ const users = [
     to: 'https://github.com/Haythamasalama',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/Haythamasalama.png',
-      alt: 'Haythamasalama'
+      src: 'https://github.com/Haythamasalama.png'
     }
   },
   {
@@ -56,8 +51,7 @@ const users = [
     to: 'https://github.com/danielroe',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/danielroe.png',
-      alt: 'danielroe'
+      src: 'https://github.com/danielroe.png'
     }
   },
   {
@@ -66,8 +60,7 @@ const users = [
     to: 'https://github.com/noook',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/noook.png',
-      alt: 'noook'
+      src: 'https://github.com/noook.png'
     }
   }
 ]

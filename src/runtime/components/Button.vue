@@ -5,14 +5,13 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/button'
 import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
+const appConfigButton = _appConfig as AppConfig & { ui: { button: Partial<typeof theme> } }
 
-const button = tv({ extend: tv(theme), ...(appConfig.ui?.button || {}) })
+const button = tv({ extend: tv(theme), ...(appConfigButton.ui?.button || {}) })
 
 type ButtonVariants = VariantProps<typeof button>
 
@@ -31,9 +30,6 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   class?: any
   ui?: PartialString<typeof button.slots>
 }
-
-// Injects props to use as default in the devtools playground.
-extendDevtoolsMeta<ButtonProps>({ defaultProps: { label: 'Click me!' } })
 
 export interface ButtonSlots {
   leading(props?: {}): any

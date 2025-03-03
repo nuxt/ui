@@ -14,6 +14,16 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+// Update the framework/module if the page has different ones
+watch(page, () => {
+  if (page.value?.framework && page.value?.framework !== framework.value) {
+    framework.value = page.value?.framework as string
+  }
+  if (page.value?.module && page.value?.module !== module.value) {
+    module.value = page.value?.module as string
+  }
+}, { immediate: true })
+
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
   return queryCollectionItemSurroundings('content', route.path, {
     fields: ['description']
@@ -53,16 +63,6 @@ if (!import.meta.prerender) {
   })
 }
 
-// Update the framework/module if the page has different ones
-watch(page, () => {
-  if (page.value?.framework && page.value?.framework !== framework.value) {
-    framework.value = page.value?.framework as string
-  }
-  if (page.value?.module && page.value?.module !== module.value) {
-    module.value = page.value?.module as string
-  }
-}, { immediate: true })
-
 const type = page.value?.path.includes('components') ? 'Vue Component ' : page.value?.path.includes('composables') ? 'Vue Composable ' : ''
 useSeoMeta({
   titleTemplate: `%s ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
@@ -72,9 +72,20 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs', {
-  headline: breadcrumb.value.map(item => item.label).join(' > ')
-})
+if (route.path.startsWith('/components')) {
+  defineOgImageComponent('OgImageComponent', {
+    title: page.value.title,
+    description: page.value.description,
+    component: (route.params.slug as string[]).pop() as string,
+    module: page.value.module
+  })
+} else {
+  defineOgImageComponent('Docs', {
+    headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
+    framework: page.value?.framework,
+    module: page.value.module
+  })
+}
 
 const communityLinks = computed(() => [{
   icon: 'i-lucide-file-pen',
@@ -86,6 +97,14 @@ const communityLinks = computed(() => [{
   label: 'Star on GitHub',
   to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}`,
   target: '_blank'
+}, {
+  icon: 'i-lucide-life-buoy',
+  label: 'Contribution',
+  to: '/getting-started/contribution'
+}, {
+  label: 'Roadmap',
+  icon: 'i-lucide-map',
+  to: '/roadmap'
 }])
 
 // const resourcesLinks = [{
@@ -108,9 +127,13 @@ const communityLinks = computed(() => [{
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title">
+    <UPageHeader>
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
+      </template>
+
+      <template #title>
+        {{ page.title }}<sup v-if="page.module === 'ui-pro'" class="ml-1 text-xs align-super font-medium text-(--ui-primary)">PRO</sup>
       </template>
 
       <template #description>
@@ -136,7 +159,7 @@ const communityLinks = computed(() => [{
     <UPageBody>
       <ContentRenderer v-if="page.body" :value="page" />
 
-      <USeparator />
+      <USeparator v-if="surround?.filter(Boolean).length" />
 
       <UContentSurround :surround="(surround as any)" />
     </UPageBody>

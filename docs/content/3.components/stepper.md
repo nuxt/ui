@@ -1,5 +1,6 @@
 ---
 description: A set of steps that are used to indicate progress through a multi-step process.
+category: navigation
 links:
   - label: Stepper
     icon: i-custom-reka-ui
@@ -7,7 +8,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Stepper.vue
-navigation.badge: New
 ---
 
 ## Usage

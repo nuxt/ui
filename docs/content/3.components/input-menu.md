@@ -1,6 +1,7 @@
 ---
 title: InputMenu
 description: An autocomplete input with real-time suggestions.
+category: form
 links:
   - label: Combobox
     icon: i-custom-reka-ui

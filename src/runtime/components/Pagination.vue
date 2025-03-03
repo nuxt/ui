@@ -4,13 +4,12 @@ import type { AppConfig } from '@nuxt/schema'
 import type { RouteLocationRaw } from '#vue-router'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pagination'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
 
-const appConfig = _appConfig as AppConfig & { ui: { pagination: Partial<typeof theme> } }
+const appConfigPagination = _appConfig as AppConfig & { ui: { pagination: Partial<typeof theme> } }
 
-const pagination = tv({ extend: tv(theme), ...(appConfig.ui?.pagination || {}) })
+const pagination = tv({ extend: tv(theme), ...(appConfigPagination.ui?.pagination || {}) })
 
 export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
   /**
@@ -98,8 +97,6 @@ export interface PaginationSlots {
     index: number
   }): any
 }
-
-extendDevtoolsMeta({ defaultProps: { total: 50 } })
 </script>
 
 <script setup lang="ts">

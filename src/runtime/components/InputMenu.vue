@@ -6,14 +6,13 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
+const appConfigInputMenu = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
 
-const inputMenu = tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu || {}) })
+const inputMenu = tv({ extend: tv(theme), ...(appConfigInputMenu.ui?.inputMenu || {}) })
 
 export interface InputMenuItem {
   label?: string
@@ -137,8 +136,6 @@ export interface InputMenuSlots<T, M extends boolean> {
   'tags-item-delete': SlotProps<T>
   'create-item-label'(props: { item: string }): any
 }
-
-extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<InputMenuItem | AcceptableValue | boolean> = MaybeArrayOfArray<InputMenuItem | AcceptableValue | boolean>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
@@ -178,7 +175,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', '
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 
-const { emitFormBlur, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
@@ -279,6 +276,7 @@ function onBlur(event: FocusEvent) {
 
 function onFocus(event: FocusEvent) {
   emits('focus', event)
+  emitFormFocus()
 }
 
 function onUpdateOpen(value: boolean) {
@@ -365,7 +363,7 @@ defineExpose({
         <ComboboxInput v-model="searchTerm" :display-value="displayValue" as-child>
           <TagsInputInput
             ref="inputRef"
-            v-bind="$attrs"
+            v-bind="{ ...$attrs, ...ariaAttrs }"
             :placeholder="placeholder"
             :required="required"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
@@ -379,7 +377,7 @@ defineExpose({
         ref="inputRef"
         v-model="searchTerm"
         :display-value="displayValue"
-        v-bind="$attrs"
+        v-bind="{ ...$attrs, ...ariaAttrs }"
         :type="type"
         :placeholder="placeholder"
         :required="required"
