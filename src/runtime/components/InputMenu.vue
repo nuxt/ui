@@ -355,6 +355,7 @@ defineExpose({
         v-slot="{ modelValue: tags }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"
+        :required="required"
         delimiter=""
         as-child
         @blur="onBlur"
@@ -380,7 +381,6 @@ defineExpose({
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
             :placeholder="placeholder"
-            :required="required"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @keydown.enter.prevent
           />
