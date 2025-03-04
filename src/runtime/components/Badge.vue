@@ -20,8 +20,17 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
    */
   as?: any
   label?: string | number
+  /**
+   * @defaultValue 'primary'
+   */
   color?: BadgeVariants['color']
+  /**
+   * @defaultValue 'solid'
+   */
   variant?: BadgeVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: BadgeVariants['size']
   class?: any
   ui?: Partial<typeof badge.slots>

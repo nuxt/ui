@@ -19,9 +19,22 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'primary'
+   */
   color?: PinInputVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: PinInputVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: PinInputVariants['size']
+  /**
+   * The number of input fields.
+   * @defaultValue 5
+   */
   length?: number | string
   highlight?: boolean
   class?: any

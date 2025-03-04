@@ -82,7 +82,13 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
   sticky?: boolean
   /** Whether the table should be in loading state. */
   loading?: boolean
+  /**
+   * @defaultValue 'primary'
+   */
   loadingColor?: TableVariants['loadingColor']
+  /**
+   * @defaultValue 'carousel'
+   */
   loadingAnimation?: TableVariants['loadingAnimation']
   /**
    * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)

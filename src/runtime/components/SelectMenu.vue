@@ -15,6 +15,9 @@ const selectMenu = tv({ extend: tv(theme), ...(appConfigSelectMenu.ui?.selectMen
 
 export interface SelectMenuItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   chip?: ChipProps
@@ -40,18 +43,29 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
    * @defaultValue true
    */
   searchInput?: boolean | InputProps
+  /**
+   * @defaultValue 'primary'
+   */
   color?: SelectMenuVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: SelectMenuVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: SelectMenuVariants['size']
   required?: boolean
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**
@@ -62,6 +76,7 @@ export interface SelectMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends M
   /**
    * Display an arrow alongside the menu.
    * @defaultValue false
+   * @IconifyIcon
    */
   arrow?: boolean | Omit<ComboboxArrowProps, 'as' | 'asChild'>
   /**

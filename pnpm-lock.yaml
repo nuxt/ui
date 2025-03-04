@@ -238,8 +238,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/@nuxt/ui-pro@c02527f
-        version: https://pkg.pr.new/@nuxt/ui-pro@c02527f(@babel/parser@7.26.9)(magicast@0.3.5)(rollup@4.32.1)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@7cf4b69
+        version: https://pkg.pr.new/@nuxt/ui-pro@7cf4b69(@babel/parser@7.26.9)(magicast@0.3.5)(rollup@4.32.1)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
       '@nuxthub/core':
         specifier: ^0.8.17
         version: 0.8.17(db0@0.2.4(better-sqlite3@11.8.1))(ioredis@5.5.0)(magicast@0.3.5)(rollup@4.32.1)(vite@6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))
@@ -1705,9 +1705,9 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@c02527f':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@c02527f}
-    version: 3.0.0-alpha.13
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@7cf4b69':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@7cf4b69}
+    version: 3.0.0-beta.2
     peerDependencies:
       typescript: 5.6.3
 
@@ -8684,7 +8684,7 @@ snapshots:
       - typescript
       - yaml
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@c02527f(@babel/parser@7.26.9)(magicast@0.3.5)(rollup@4.32.1)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@7cf4b69(@babel/parser@7.26.9)(magicast@0.3.5)(rollup@4.32.1)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       '@nuxt/kit': 3.15.4(magicast@0.3.5)(rollup@4.32.1)
       '@nuxt/schema': 3.15.4

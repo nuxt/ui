@@ -26,6 +26,9 @@ export interface FormFieldProps {
   help?: string
   error?: string | boolean
   hint?: string
+  /**
+   * @defaultValue 'md'
+   */
   size?: FormFieldVariants['size']
   required?: boolean
   eagerValidation?: boolean

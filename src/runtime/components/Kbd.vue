@@ -19,7 +19,13 @@ export interface KbdProps {
    */
   as?: any
   value?: KbdKey | string
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: KbdVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: KbdVariants['size']
   class?: any
 }

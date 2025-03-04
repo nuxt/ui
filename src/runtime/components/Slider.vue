@@ -18,7 +18,13 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'md'
+   */
   size?: SliderVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: SliderVariants['color']
   /**
    * The orientation of the slider.

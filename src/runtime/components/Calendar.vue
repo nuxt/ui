@@ -29,24 +29,34 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   /**
    * The icon to use for the next year control.
    * @defaultValue appConfig.ui.icons.chevronDoubleRight
+   * @IconifyIcon
    */
   nextYearIcon?: string
   /**
    * The icon to use for the next month control.
    * @defaultValue appConfig.ui.icons.chevronRight
+   * @IconifyIcon
    */
   nextMonthIcon?: string
   /**
    * The icon to use for the previous year control.
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
+   * @IconifyIcon
    */
   prevYearIcon?: string
   /**
    * The icon to use for the previous month control.
    * @defaultValue appConfig.ui.icons.chevronLeft
+   * @IconifyIcon
    */
   prevMonthIcon?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: CalendarVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
   size?: CalendarVariants['size']
   /** Whether or not a range of dates can be selected */
   range?: R & boolean

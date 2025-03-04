@@ -12,6 +12,9 @@ const breadcrumb = tv({ extend: tv(theme), ...(appConfigBreadcrumb.ui?.breadcrum
 
 export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   slot?: string
@@ -27,6 +30,7 @@ export interface BreadcrumbProps<T> {
   /**
    * The icon to use as a separator.
    * @defaultValue appConfig.ui.icons.chevronRight
+   * @IconifyIcon
    */
   separatorIcon?: string
   /**

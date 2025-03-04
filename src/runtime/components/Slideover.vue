@@ -28,6 +28,10 @@ export interface SlideoverProps extends DialogRootProps {
    * @defaultValue true
    */
   transition?: boolean
+  /**
+   * The side of the slideover.
+   * @defaultValue 'right'
+   */
   side?: SlideoverVariants['side']
   /**
    * Render the slideover in a portal.
@@ -43,6 +47,7 @@ export interface SlideoverProps extends DialogRootProps {
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   /**

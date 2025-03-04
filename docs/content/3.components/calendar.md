@@ -209,6 +209,20 @@ name: 'calendar-min-max-dates-example'
 ---
 ::
 
+### With other calendar systems
+
+You can use other calenders from `@internationalized/date` to implement a different calendar system. 
+
+::component-example
+---
+name: 'calendar-other-system-example'
+---
+::
+
+::note{to="https://react-spectrum.adobe.com/internationalized/date/Calendar.html#implementations"}
+You can check all the available calendars on `@internationalized/date` docs.
+::
+
 ### As a DatePicker
 
 Use a [Button](/components/button) and a [Popover](/components/popover) component to create a date picker.

@@ -16,6 +16,9 @@ const inputMenu = tv({ extend: tv(theme), ...(appConfigInputMenu.ui?.inputMenu |
 
 export interface InputMenuItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   chip?: ChipProps
@@ -40,8 +43,17 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
   type?: InputHTMLAttributes['type']
   /** The placeholder text when the input is empty. */
   placeholder?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: InputMenuVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: InputMenuVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: InputMenuVariants['size']
   required?: boolean
   autofocus?: boolean
@@ -49,17 +61,20 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**
    * The icon displayed to delete a tag.
    * Works only when `multiple` is `true`.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   deleteIcon?: string
   /**

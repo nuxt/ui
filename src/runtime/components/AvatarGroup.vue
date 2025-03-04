@@ -17,6 +17,9 @@ export interface AvatarGroupProps {
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'md'
+   */
   size?: AvatarGroupVariants['size']
   /**
    * The maximum number of avatars to display.

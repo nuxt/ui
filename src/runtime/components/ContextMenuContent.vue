@@ -11,8 +11,17 @@ interface ContextMenuContentProps<T> extends Omit<RekaContextMenuContentProps, '
   portal?: boolean
   sub?: boolean
   labelKey: string
+  /**
+   * @IconifyIcon
+   */
   checkedIcon?: string
+  /**
+   * @IconifyIcon
+   */
   loadingIcon?: string
+  /**
+   * @IconifyIcon
+   */
   externalIcon?: boolean | string
   class?: any
   ui: typeof _contextMenu

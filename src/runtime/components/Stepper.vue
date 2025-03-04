@@ -18,6 +18,9 @@ export interface StepperItem {
   value?: string | number
   title?: string
   description?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   content?: string
   disabled?: boolean
@@ -30,8 +33,18 @@ export interface StepperProps<T extends StepperItem> extends Pick<StepperRootPro
    */
   as?: any
   items: T[]
+  /**
+   * @defaultValue 'md'
+   */
   size?: StepperVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: StepperVariants['color']
+  /**
+   * The orientation of the stepper.
+   * @defaultValue 'horizontal'
+   */
   orientation?: StepperVariants['orientation']
   /**
    * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.
