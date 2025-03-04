@@ -179,12 +179,12 @@ const ui = pagination()
 
       <PaginationNext v-if="showControls || !!slots.next" as-child>
         <slot name="next">
-          <UButton :color="color" :variant="variant" :size="size" :icon="nextIcon" :to="page < pageCount ? to?.(pageCount) : undefined" />
+          <UButton :color="color" :variant="variant" :size="size" :icon="nextIcon" :to="page < pageCount ? to?.(page + 1) : undefined" />
         </slot>
       </PaginationNext>
       <PaginationLast v-if="showControls || !!slots.last" as-child>
         <slot name="last">
-          <UButton :color="color" :variant="variant" :size="size" :icon="lastIcon" :to=" to?.(pageCount)" />
+          <UButton :color="color" :variant="variant" :size="size" :icon="lastIcon" :to="to?.(pageCount)" />
         </slot>
       </PaginationLast>
     </PaginationList>
