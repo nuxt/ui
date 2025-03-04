@@ -40,7 +40,6 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
   <UMain>
     <UPageHero
       orientation="horizontal"
-      class="border-b border-(--ui-border)"
       :ui="{
         container: 'pb-0 sm:pb-0 lg:py-0',
         title: 'lg:mt-16',
@@ -122,7 +121,8 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
         </UPageMarquee>
       </div>
     </UPageHero>
-    <UPageSection :ui="{ container: 'lg:py-16' }">
+
+    <UPageSection :ui="{ container: 'lg:py-16' }" class="border-y border-(--ui-border)">
       <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
@@ -191,7 +191,7 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
         </NuxtLink>
       </template>
 
-      <div class="p-5 overflow-hidden flex">
+      <div class="p-10 overflow-hidden flex">
         <HomeContributors :contributors="module?.contributors" />
       </div>
     </UPageSection>

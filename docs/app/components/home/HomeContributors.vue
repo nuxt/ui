@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<{
   max: 4
 })
 
-const contributors = computed(() => props.contributors?.slice(0, 5) ?? [])
+const contributors = computed(() => props.contributors?.slice(0, 6) ?? [])
 
 const el = ref(null)
 const { width } = useElementSize(el)
@@ -28,7 +28,7 @@ const { width } = useElementSize(el)
       v-if="(level + 1) < max"
       :max="max"
       :level="level + 1"
-      :contributors="props.contributors?.slice(5) ?? []"
+      :contributors="props.contributors?.slice(6) ?? []"
     />
 
     <div
@@ -45,27 +45,27 @@ const { width } = useElementSize(el)
         :text="contributor.username"
         :delay-duration="0"
       >
-        <span
+        <NuxtLink
+          :to="`https://github.com/${contributor.username}`"
+          :aria-label="contributor.username"
+          target="_blank"
+          class="avatar flex absolute top-1/2 left-1/2"
+          tabindex="-1"
           :style="{
             '--index': index + 1
           }"
-          class="avatar flex absolute top-1/2 left-1/2"
         >
           <UAvatar
             :alt="contributor.username"
             :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
             :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
-            class="ring-2 ring-gray-200 dark:ring-gray-700 lg:hover:ring-gray-900 dark:lg:hover:ring-white transition"
+            class="ring-2 ring-(--ui-border) lg:hover:ring-(--ui-border-inverted) transition"
             width="40"
             height="40"
             size="sm"
             loading="lazy"
-          >
-            <NuxtLink :to="`https://github.com/${contributor.username}`" :aria-label="contributor.username" target="_blank" class="focus:outline-none" tabindex="-1">
-              <span class="absolute inset-0" aria-hidden="true" />
-            </NuxtLink>
-          </UAvatar>
-        </span>
+          />
+        </NuxtLink>
       </UTooltip>
     </div>
   </div>
