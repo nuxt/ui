@@ -48,7 +48,17 @@ const { data: components } = await useAsyncData('ui-components', () => {
           <USeparator class="w-1/2" type="dashed" />
         </div>
         <div class="flex flex-col gap-4">
-          <UPageFeature v-for="feature of page.hero.features" :key="feature.title" v-bind="feature" />
+          <Motion
+            v-for="(feature, index) in page.hero.features"
+            :key="feature.title"
+            as-child
+            :initial="{ opacity: 0, transform: 'translateX(-10px)' }"
+            :in-view="{ opacity: 1, transform: 'translateX(0)' }"
+            :transition="{ delay: 0.2 + 0.4 * index }"
+            :in-view-options="{ once: true }"
+          >
+            <UPageFeature v-bind="feature" />
+          </Motion>
         </div>
       </template>
       <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
@@ -56,21 +66,21 @@ const { data: components } = await useAsyncData('ui-components', () => {
           pause-on-hover
           :overlay="false"
           :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-(--ui-border-muted) absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:flex-col',
+            root: '[--gap:--spacing(4)] [--duration:40s] border-(--ui-border) absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:flex-col',
             content: 'lg:w-auto lg:h-full lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content]'
           }"
         >
           <ULink
             v-for="component of components?.slice(0, 10)"
             :key="component.path"
-            class="relative group aspect-video border-(--ui-border-muted) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
+            class="relative group aspect-video border-(--ui-border) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
           >
             <UColorModeImage
 
               :light="`${component.path.replace('/components/', '/components/light/')}.png`"
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
-              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border-muted) 2xl:border-y-0"
+              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover:opacity-100 opacity-0 transition-opacity duration-300 pointer-events-none" />
           </ULink>
@@ -80,21 +90,21 @@ const { data: components } = await useAsyncData('ui-components', () => {
           reverse
           :overlay="false"
           :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-(--ui-border-muted) absolute w-full mt-[180px] left-0 border-y lg:mt-auto lg:left-auto lg:border-y-0 lg:border-x lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:right-0 lg:flex-col',
+            root: '[--gap:--spacing(4)] [--duration:40s] border-(--ui-border) absolute w-full mt-[180px] left-0 border-y lg:mt-auto lg:left-auto lg:border-y-0 lg:border-x lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:right-0 lg:flex-col',
             content: 'lg:w-auto lg:h-full lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content] lg:[animation-direction:reverse]'
           }"
         >
           <ULink
             v-for="component of components?.slice(10, 20)"
             :key="component.path"
-            class="relative group aspect-video border-(--ui-border-muted) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
+            class="relative group aspect-video border-(--ui-border) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
           >
             <UColorModeImage
 
               :light="`${component.path.replace('/components/', '/components/light/')}.png`"
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
-              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border-muted) 2xl:border-y-0"
+              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover:opacity-100 opacity-0 transition-opacity duration-300 pointer-events-none" />
           </ULink>
@@ -103,9 +113,14 @@ const { data: components } = await useAsyncData('ui-components', () => {
     </UPageHero>
     <UPageSection :ui="{ container: 'lg:py-16' }">
       <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
-        <li
-          v-for="feature in page?.features"
+        <Motion
+          v-for="(feature, index) in page?.features"
           :key="feature.title"
+          as="li"
+          :initial="{ opacity: 0, transform: 'translateY(10px)' }"
+          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :transition="{ delay: 0.1 * index }"
+          :in-view-options="{ once: true }"
           class="flex items-start gap-x-3 relative group"
         >
           <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10" />
@@ -131,7 +146,7 @@ const { data: components } = await useAsyncData('ui-components', () => {
               {{ feature.description }}
             </p>
           </div>
-        </li>
+        </Motion>
       </ul>
     </UPageSection>
   </UMain>

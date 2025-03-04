@@ -31,17 +31,13 @@ const componentsPerCategory = computed(() => {
 })
 
 const categories = [{
-  id: 'layout',
-  title: 'Layout',
-  description: 'Structural components for organizing content, including containers, grids, dividers, and responsive layout systems.'
+  id: 'element',
+  title: 'Element',
+  description: 'Core UI building blocks like buttons, badges, icons, avatars, and other fundamental interface elements.'
 }, {
   id: 'form',
   title: 'Form',
   description: 'Interactive form elements including inputs, selects, checkboxes, radio buttons, and advanced form validation components.'
-}, {
-  id: 'element',
-  title: 'Element',
-  description: 'Core UI building blocks like buttons, badges, icons, avatars, and other fundamental interface elements.'
 }, {
   id: 'data',
   title: 'Data',
@@ -54,6 +50,10 @@ const categories = [{
   id: 'overlay',
   title: 'Overlay',
   description: 'Floating UI elements like modals, dialogs, tooltips, popovers, and other components that overlay the main content.'
+}, {
+  id: 'layout',
+  title: 'Layout',
+  description: 'Structural components for organizing content, including containers, grids, dividers, and responsive layout systems.'
 }]
 
 const { y } = useWindowScroll()
