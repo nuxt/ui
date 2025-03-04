@@ -46,3 +46,13 @@ features:
     description: Dark mode-ready components, seamless integration with @nuxtjs/color-mode.
     icon: i-lucide-sun-moon
     to: /getting-started/color-mode/nuxt
+community:
+  title: Nuxt UI open-source community
+  description: Join our thriving community to contribute code, report issues, suggest features, or help with documentation. Every contribution makes Nuxt UI better for everyone.
+  links:
+    - label: Star on GitHub
+      color: neutral
+      variant: outline
+      to: https://github.com/nuxt/ui
+      target: _blank
+      icon: i-lucide-star

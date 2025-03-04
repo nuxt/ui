@@ -22,6 +22,18 @@ const { data: components } = await useAsyncData('ui-components', () => {
     .select('path', 'title', 'description', 'category', 'module')
     .all()
 })
+
+const { data: module } = await useFetch<{
+  stats: {
+    downloads: number
+    stars: number
+  }
+  contributors: {
+    username: string
+  }[]
+}>('https://api.nuxt.com/modules/ui')
+
+const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 </script>
 
 <template>
@@ -147,6 +159,41 @@ const { data: components } = await useAsyncData('ui-components', () => {
           </div>
         </Motion>
       </ul>
+    </UPageSection>
+
+    <UPageSection
+      :title="page.community.title"
+      :description="page.community.description"
+      :links="page.community.links"
+      orientation="horizontal"
+      :ui="{ features: 'flex items-center gap-8' }"
+    >
+      <template #features>
+        <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank">
+          <p class="text-4xl font-semibold text-(--ui-text-highlighted)">
+            {{ format(module?.stats?.downloads ?? 0) }}+
+          </p>
+          <p class="text-(--ui-text-muted) text-sm">monthly downloads</p>
+        </NuxtLink>
+
+        <NuxtLink to="https://github.com/nuxt/ui" target="_blank">
+          <p class="text-4xl font-semibold text-(--ui-text-highlighted)">
+            {{ format(module?.stats?.stars ?? 0) }}+
+          </p>
+          <p class="text-(--ui-text-muted) text-sm">GitHub stars</p>
+        </NuxtLink>
+
+        <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank">
+          <p class="text-4xl font-semibold text-(--ui-text-highlighted)">
+            175+
+          </p>
+          <p class="text-(--ui-text-muted) text-sm">Contributors</p>
+        </NuxtLink>
+      </template>
+
+      <div class="p-5 overflow-hidden flex">
+        <HomeContributors :contributors="module?.contributors" />
+      </div>
     </UPageSection>
   </UMain>
 </template>
