@@ -37,7 +37,7 @@ const { data: components } = await useAsyncData('ui-components', () => {
       }"
     >
       <template #title>
-        <MDC :value="page.hero.title" unwrap="p" />
+        The Intuitive <br> <span class="text-(--ui-primary)">Vue UI Library</span>
       </template>
       <template #description>
         {{ page.hero.description }}
