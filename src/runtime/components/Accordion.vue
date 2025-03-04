@@ -43,7 +43,6 @@ export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
-   * @IconifyIcon
    */
   labelKey?: string
   class?: any
