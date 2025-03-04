@@ -17,8 +17,17 @@ type ButtonVariants = VariantProps<typeof button>
 
 export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: ButtonVariants['color']
+  /**
+   * @defaultValue 'solid'
+   */
   variant?: ButtonVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: ButtonVariants['size']
   /** Render the button with equal padding on all sides. */
   square?: boolean

@@ -24,6 +24,9 @@ export interface AvatarProps {
    */
   icon?: string
   text?: string
+  /**
+   * @defaultValue 'md'
+   */
   size?: AvatarVariants['size']
   class?: any
   ui?: Partial<typeof avatar.slots>

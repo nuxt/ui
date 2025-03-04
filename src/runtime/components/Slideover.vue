@@ -28,6 +28,10 @@ export interface SlideoverProps extends DialogRootProps {
    * @defaultValue true
    */
   transition?: boolean
+  /**
+   * The side of the slideover.
+   * @defaultValue 'right'
+   */
   side?: SlideoverVariants['side']
   /**
    * Render the slideover in a portal.

@@ -19,6 +19,9 @@ export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'child
 
 export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'>, Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   /**
@@ -64,7 +67,13 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'm
    */
   externalIcon?: boolean | string
   items?: T
+  /**
+   * @defaultValue 'primary'
+   */
   color?: NavigationMenuVariants['color']
+  /**
+   * @defaultValue 'pill'
+   */
   variant?: NavigationMenuVariants['variant']
   /**
    * The orientation of the menu.
@@ -79,6 +88,9 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'm
   collapsed?: boolean
   /** Display a line next to the active item. */
   highlight?: boolean
+  /**
+   * @defaultValue 'primary'
+   */
   highlightColor?: NavigationMenuVariants['highlightColor']
   /** The content of the menu. */
   content?: Omit<NavigationMenuContentProps, 'as' | 'asChild' | 'forceMount'>

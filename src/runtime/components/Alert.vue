@@ -25,8 +25,18 @@ export interface AlertProps {
    */
   icon?: string
   avatar?: AvatarProps
+  /**
+   * @defaultValue 'primary'
+   */
   color?: AlertVariants['color']
+  /**
+   * @defaultValue 'solid'
+   */
   variant?: AlertVariants['variant']
+  /**
+   * The orientation between the content and the actions.
+   * @defaultValue 'vertical'
+   */
   orientation?: AlertVariants['orientation']
   /**
    * Display a list of actions:

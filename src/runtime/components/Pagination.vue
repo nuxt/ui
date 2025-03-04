@@ -44,6 +44,7 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
   /**
    * The icon to use for the ellipsis control.
    * @defaultValue appConfig.ui.icons.ellipsis
+   * @IconifyIcon
    */
   ellipsisIcon?: string
   /**

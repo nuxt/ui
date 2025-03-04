@@ -12,6 +12,9 @@ const breadcrumb = tv({ extend: tv(theme), ...(appConfigBreadcrumb.ui?.breadcrum
 
 export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   slot?: string

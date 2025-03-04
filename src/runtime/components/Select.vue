@@ -15,6 +15,9 @@ const select = tv({ extend: tv(theme), ...(appConfigSelect.ui?.select || {}) })
 
 export interface SelectItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   chip?: ChipProps
@@ -33,8 +36,17 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: SelectVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: SelectVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: SelectVariants['size']
   /**
    * The icon displayed to open the menu.

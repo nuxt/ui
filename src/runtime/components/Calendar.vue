@@ -50,7 +50,13 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
    * @IconifyIcon
    */
   prevMonthIcon?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: CalendarVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
   size?: CalendarVariants['size']
   /** Whether or not a range of dates can be selected */
   range?: R & boolean

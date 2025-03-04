@@ -22,8 +22,17 @@ export interface TextareaProps {
   name?: string
   /** The placeholder text when the textarea is empty. */
   placeholder?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: TextareaVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: TextareaVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: TextareaVariants['size']
   required?: boolean
   autofocus?: boolean

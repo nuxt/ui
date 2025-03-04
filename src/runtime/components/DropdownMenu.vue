@@ -16,6 +16,9 @@ type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
 export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   color?: DropdownMenuVariants['color']
   avatar?: AvatarProps
@@ -38,6 +41,9 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
 }
 
 export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
+  /**
+   * @defaultValue 'md'
+   */
   size?: DropdownMenuVariants['size']
   items?: T[] | T[][]
   /**

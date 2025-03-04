@@ -38,7 +38,13 @@ export interface TreeProps<T extends TreeItem, M extends boolean = false, K exte
    * @defaultValue 'ul'
    */
   as?: any
+  /**
+   * @defaultValue 'primary'
+   */
   color?: TreeVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
   size?: TreeVariants['size']
   /**
    * The key used to get the value from the item.

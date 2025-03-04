@@ -16,6 +16,9 @@ type ContextMenuVariants = VariantProps<typeof contextMenu>
 
 export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   color?: ContextMenuVariants['color']
   avatar?: AvatarProps
@@ -38,6 +41,9 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
 }
 
 export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
+  /**
+   * @defaultValue 'md'
+   */
   size?: ContextMenuVariants['size']
   items?: T[] | T[][]
   /**

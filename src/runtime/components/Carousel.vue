@@ -59,6 +59,10 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
    * @defaultValue false
    */
   dots?: boolean
+  /**
+   * The orientation of the carousel.
+   * @defaultValue 'horizontal'
+   */
   orientation?: CarouselVariants['orientation']
   items?: T[]
   /**

@@ -18,6 +18,9 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   prefix?: string
   label?: string
   suffix?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   chip?: ChipProps
@@ -58,6 +61,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
+   * @IconifyIcon
    */
   icon?: string
   /**
