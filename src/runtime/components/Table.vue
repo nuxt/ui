@@ -161,6 +161,7 @@ type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, un
 export type TableSlots<T> = {
   expanded: (props: { row: Row<T> }) => any
   empty: (props?: {}) => any
+  loading: (props?: {}) => any
   caption: (props?: {}) => any
 } & DynamicHeaderSlots<T> & DynamicCellSlots<T>
 
@@ -175,7 +176,7 @@ import { reactiveOmit } from '@vueuse/core'
 import { useLocale } from '../composables/useLocale'
 
 const props = defineProps<TableProps<T>>()
-defineSlots<TableSlots<T>>()
+const slots = defineSlots<TableSlots<T>>()
 
 const { t } = useLocale()
 
@@ -359,7 +360,13 @@ defineExpose({
           </template>
         </template>
 
-        <tr v-else :class="ui.tr({ class: [props.ui?.tr] })">
+        <tr v-else-if="loading && !!slots['loading']">
+          <td :colspan="columns?.length" :class="ui.loading({ class: props.ui?.loading })">
+            <slot name="loading" />
+          </td>
+        </tr>
+
+        <tr v-else>
           <td :colspan="columns?.length" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
               {{ t('table.noData') }}

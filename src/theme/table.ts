@@ -10,7 +10,8 @@ export default (options: Required<ModuleOptions>) => ({
     tr: 'data-[selected=true]:bg-(--ui-bg-elevated)/50',
     th: 'px-4 py-3.5 text-sm text-(--ui-text-highlighted) text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pe-0',
     td: 'p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&:has([role=checkbox])]:pe-0',
-    empty: 'py-6 text-center text-sm text-(--ui-text-muted)'
+    empty: 'py-6 text-center text-sm text-(--ui-text-muted)',
+    loading: 'py-6 text-center'
   },
   variants: {
     pinned: {
