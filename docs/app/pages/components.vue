@@ -15,7 +15,7 @@ useSeoMeta({
   ogImage: joinURL(url, '/og-image.png')
 })
 
-const { data: components } = await useAsyncData('components', () => {
+const { data: components } = await useAsyncData('all-components', () => {
   return queryCollection('content')
     .where('path', 'LIKE', '/components/%')
     .where('extension', '=', 'md')
