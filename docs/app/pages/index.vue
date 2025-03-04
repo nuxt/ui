@@ -29,7 +29,12 @@ const { data: components } = await useAsyncData('ui-components', () => {
     <UPageHero
       orientation="horizontal"
       class="border-b border-(--ui-border)"
-      :ui="{ container: 'lg:py-0', description: 'text-balance' }"
+      :ui="{
+        container: 'pb-0 sm:pb-0 lg:py-0',
+        title: 'lg:mt-16',
+        links: 'lg:mb-16',
+        description: 'text-balance'
+      }"
     >
       <template #title>
         <MDC :value="page.hero.title" unwrap="p" />
@@ -46,12 +51,12 @@ const { data: components } = await useAsyncData('ui-components', () => {
           <UPageFeature v-for="feature of page.hero.features" :key="feature.title" v-bind="feature" />
         </div>
       </template>
-      <div class="h-[344px] lg:h-auto lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
+      <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
         <UPageMarquee
           pause-on-hover
           :overlay="false"
           :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-(--ui-border-muted) absolute w-full left-0 border-y lg:border-x lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:flex-col',
+            root: '[--gap:--spacing(4)] [--duration:40s] border-(--ui-border-muted) absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:flex-col',
             content: 'lg:w-auto lg:h-full lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content]'
           }"
         >
@@ -96,13 +101,12 @@ const { data: components } = await useAsyncData('ui-components', () => {
         </UPageMarquee>
       </div>
     </UPageHero>
-    <UPageSection :ui="{ container: 'py-6 sm:py-12 lg:py-12' }">
+    <UPageSection :ui="{ container: 'lg:py-16' }">
       <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
         <li
           v-for="feature in page?.features"
           :key="feature.title"
           class="flex items-start gap-x-3 relative group"
-          :class="{ 'opacity-75': feature.soon }"
         >
           <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10" />
           <div class="relative p-3">
@@ -120,9 +124,7 @@ const { data: components } = await useAsyncData('ui-components', () => {
           </div>
           <div class="flex flex-col">
             <h2 class="font-medium text-(--ui-text-highlighted) inline-flex items-center gap-x-1">
-              {{ feature.title }} <UBadge v-if="feature.soon" color="neutral" variant="subtle" size="sm" class="rounded-full">
-                Soon
-              </UBadge>
+              {{ feature.title }}
               <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
             </h2>
             <p class="text-sm text-(--ui-text-muted)">
