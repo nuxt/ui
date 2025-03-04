@@ -144,19 +144,19 @@ const ui = pagination()
 <template>
   <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <PaginationList v-slot="{ items }" :class="ui.list({ class: props.ui?.list })">
-      <PaginationFirst v-if="showControls || !!slots.first" as-child>
+      <PaginationFirst v-if="showControls || !!slots.first" as-child :class="ui.first({ class: props.ui?.first })">
         <slot name="first">
           <UButton :color="color" :variant="variant" :size="size" :icon="firstIcon" :to="to?.(1)" />
         </slot>
       </PaginationFirst>
-      <PaginationPrev v-if="showControls || !!slots.prev" as-child>
+      <PaginationPrev v-if="showControls || !!slots.prev" as-child :class="ui.prev({ class: props.ui?.prev })">
         <slot name="prev">
           <UButton :color="color" :variant="variant" :size="size" :icon="prevIcon" :to="page > 1 ? to?.(page - 1) : undefined" />
         </slot>
       </PaginationPrev>
 
       <template v-for="(item, index) in items">
-        <PaginationListItem v-if="item.type === 'page'" :key="index" as-child :value="item.value">
+        <PaginationListItem v-if="item.type === 'page'" :key="index" as-child :value="item.value" :class="ui.item({ class: props.ui?.item })">
           <slot name="item" v-bind="{ item, index, page, pageCount }">
             <UButton
               :color="page === item.value ? activeColor : color"
@@ -170,19 +170,19 @@ const ui = pagination()
           </slot>
         </PaginationListItem>
 
-        <PaginationEllipsis v-else :key="item.type" :index="index" as-child>
+        <PaginationEllipsis v-else :key="item.type" :index="index" as-child :class="ui.ellipsis({ class: props.ui?.ellipsis })">
           <slot name="ellipsis">
-            <UButton :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" :class="ui.ellipsis({ class: props.ui?.ellipsis })" />
+            <UButton :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
           </slot>
         </PaginationEllipsis>
       </template>
 
-      <PaginationNext v-if="showControls || !!slots.next" as-child>
+      <PaginationNext v-if="showControls || !!slots.next" as-child :class="ui.next({ class: props.ui?.next })">
         <slot name="next">
           <UButton :color="color" :variant="variant" :size="size" :icon="nextIcon" :to="page < pageCount ? to?.(page + 1) : undefined" />
         </slot>
       </PaginationNext>
-      <PaginationLast v-if="showControls || !!slots.last" as-child>
+      <PaginationLast v-if="showControls || !!slots.last" as-child :class="ui.last({ class: props.ui?.last })">
         <slot name="last">
           <UButton :color="color" :variant="variant" :size="size" :icon="lastIcon" :to="to?.(pageCount)" />
         </slot>
