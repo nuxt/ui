@@ -105,8 +105,8 @@ importers:
         specifier: ^1.7.4
         version: 1.7.4
       ohash:
-        specifier: ^1.1.5
-        version: 1.1.5
+        specifier: ^2.0.10
+        version: 2.0.10
       pathe:
         specifier: ^2.0.3
         version: 2.0.3
@@ -5343,8 +5343,8 @@ packages:
   ohash@1.1.5:
     resolution: {integrity: sha512-AtXrG/lMFjPBWj3uhWYFwYVZQqutPYRsv6nnPLTipnC+gJuMFc+WFzf/jx+94Ebray1vxfQfEFDtpIpppOe4xQ==}
 
-  ohash@2.0.9:
-    resolution: {integrity: sha512-ljz2sybhXrRpBW9LleuJPP9uxbMKW8qxFz9lLOHW2QEel78rJ1sUgaX2cBNDt49w+JleNSkhYkVOCx6RgkKn0Q==}
+  ohash@2.0.10:
+    resolution: {integrity: sha512-jf9szh2McTXpXGqejbfHxy4wcs6CXc6MShfzLIdHuCrl2W3qG49qutlOMq1Bdmvpv3s/XJffTu4ElRBPtIOncQ==}
 
   on-finished@2.4.1:
     resolution: {integrity: sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==}
@@ -8264,7 +8264,7 @@ snapshots:
       listhen: 1.9.0
       nypm: 0.6.0
       ofetch: 1.4.1
-      ohash: 2.0.9
+      ohash: 2.0.10
       pathe: 2.0.3
       perfect-debounce: 1.0.0
       pkg-types: 2.0.1
@@ -10240,7 +10240,7 @@ snapshots:
       giget: 1.2.5
       jiti: 2.4.2
       mlly: 1.7.4
-      ohash: 2.0.9
+      ohash: 2.0.10
       pathe: 2.0.3
       perfect-debounce: 1.0.0
       pkg-types: 1.3.1
@@ -10257,7 +10257,7 @@ snapshots:
       exsolve: 1.0.1
       giget: 2.0.0
       jiti: 2.4.2
-      ohash: 2.0.9
+      ohash: 2.0.10
       pathe: 2.0.3
       perfect-debounce: 1.0.0
       pkg-types: 2.0.1
@@ -13022,7 +13022,7 @@ snapshots:
       nuxt-site-config: 3.1.1(magicast@0.3.5)(rollup@4.32.1)(vue@3.5.13(typescript@5.6.3))
       nypm: 0.6.0
       ofetch: 1.4.1
-      ohash: 2.0.9
+      ohash: 2.0.10
       pathe: 2.0.3
       pkg-types: 2.0.1
       playwright-core: 1.50.1
@@ -13228,7 +13228,7 @@ snapshots:
 
   ohash@1.1.5: {}
 
-  ohash@2.0.9: {}
+  ohash@2.0.10: {}
 
   on-finished@2.4.1:
     dependencies:

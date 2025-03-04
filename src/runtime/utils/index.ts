@@ -1,4 +1,4 @@
-import { isEqual } from 'ohash'
+import { isEqual } from 'ohash/utils'
 
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
   const result = {} as Pick<Data, Keys>
