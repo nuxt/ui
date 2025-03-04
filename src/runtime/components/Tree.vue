@@ -14,8 +14,14 @@ const tree = tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) })
 type TreeVariants = VariantProps<typeof tree>
 
 export type TreeItem = {
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   label?: string
+  /**
+   * @IconifyIcon
+   */
   trailingIcon?: string
   defaultExpanded?: boolean
   disabled?: boolean
@@ -32,7 +38,13 @@ export interface TreeProps<T extends TreeItem, M extends boolean = false, K exte
    * @defaultValue 'ul'
    */
   as?: any
+  /**
+   * @defaultValue 'primary'
+   */
   color?: TreeVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
   size?: TreeVariants['size']
   /**
    * The key used to get the value from the item.
@@ -47,16 +59,19 @@ export interface TreeProps<T extends TreeItem, M extends boolean = false, K exte
   /**
    * The icon displayed on the right side of a parent node.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when a parent node is expanded.
    * @defaultValue appConfig.ui.icons.folderOpen
+   * @IconifyIcon
    */
   expandedIcon?: string
   /**
    * The icon displayed when a parent node is collapsed.
    * @defaultValue appConfig.ui.icons.folder
+   * @IconifyIcon
    */
   collapsedIcon?: string
   items?: T[]

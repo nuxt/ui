@@ -124,7 +124,7 @@ testimonials:
       user:
         name: 'Yaz Jallad'
         description:  'Founder Ninjaparade Digital'
-        to: 'https://twitter.com/ninjaparade/'
+        to: 'https://x.com/ninjaparade/'
         target: _blank
         avatar:
           src: 'https://pbs.twimg.com/profile_images/1824690890222485504/lQ7v1AGt_400x400.jpg'
@@ -158,8 +158,8 @@ testimonials:
     - quote: "I jumped at the chance to buy the Nuxt team's new UI kit as soon as I saw it. While I'm already a fan of Nuxt UI, the pro version takes it to a whole new level and lets me paste entire blocks into all my projects, saving me a ton of time."
       user:
         name: 'Thomas Sanlis'
-        description:  'Freelance developer and designer'
-        to: 'https://twitter.com/T_Zahil'
+        description:  'Founder of Uneed'
+        to: 'https://x.com/T_Zahil'
         target: _blank
         avatar:
           src: 'https://pbs.twimg.com/profile_images/1374040164180299791/ACw4G3nZ_400x400.jpg'
@@ -167,7 +167,7 @@ testimonials:
       user:
         name: 'Benjamin Code'
         description:  'YouTuber and SaaS builder'
-        to: 'https://twitter.com/benjamincode'
+        to: 'https://x.com/benjamincode'
         target: _blank
         avatar:
           src: 'https://pbs.twimg.com/profile_images/1607353032420769793/I8qQSUfQ_400x400.jpg'
@@ -175,15 +175,23 @@ testimonials:
       user:
         name: 'Estéban Soubiran'
         description:  'Web developer and UnJS member'
-        to: 'https://twitter.com/soubiran_'
+        to: 'https://x.com/soubiran_'
         target: _blank
         avatar:
           src: 'https://pbs.twimg.com/profile_images/1801649350319218689/aS_X_iTm_400x400.jpg'
+    - quote: "I used to code all my components from scratch, but since I started using Nuxt UI Pro, I just can’t work without it. It has all the components I need: for landing pages, for dashboards and even for blog content! This is a no-brainer investment to ship faster, and I’ve already made my money back 10x in time saved!"
+      user:
+        name: 'Nico Jeannen'
+        description: 'Founder of Ads Template'
+        to: 'https://x.com/nico_jeannen'
+        target: _blank
+        avatar:
+          src: 'https://pbs.twimg.com/profile_images/1754025659180187649/AAG78n19_400x400.jpg'
     - quote: "As someone who builds a lot of projects, Nuxt UI Pro has been a game-changer. It's not just about saving time – it's about having components that are thoughtfully designed and just work. The developer experience is exceptional, and I can focus on building features instead of tweaking UI components."
       user:
         name: 'Hugo Richard'
-        description:  'Frontend Engineer at NuxtLabs'
-        to: 'https://twitter.com/hugorcd__'
+        description:  'Founder of Shelve'
+        to: 'https://x.com/hugorcd__'
         target: _blank
         avatar:
           src: 'https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/hugorcd'

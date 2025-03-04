@@ -16,6 +16,9 @@ const inputMenu = tv({ extend: tv(theme), ...(appConfigInputMenu.ui?.inputMenu |
 
 export interface InputMenuItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   chip?: ChipProps
@@ -40,8 +43,17 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
   type?: InputHTMLAttributes['type']
   /** The placeholder text when the input is empty. */
   placeholder?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: InputMenuVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: InputMenuVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: InputMenuVariants['size']
   required?: boolean
   autofocus?: boolean
@@ -49,17 +61,20 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**
    * The icon displayed to delete a tag.
    * Works only when `multiple` is `true`.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   deleteIcon?: string
   /**
@@ -171,7 +186,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig()
 const { contains } = useFilter({ sensitivity: 'base' })
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 
@@ -340,6 +355,7 @@ defineExpose({
         v-slot="{ modelValue: tags }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"
+        :required="required"
         delimiter=""
         as-child
         @blur="onBlur"
@@ -365,7 +381,6 @@ defineExpose({
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
             :placeholder="placeholder"
-            :required="required"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @keydown.enter.prevent
           />

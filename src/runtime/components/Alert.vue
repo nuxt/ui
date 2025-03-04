@@ -20,10 +20,23 @@ export interface AlertProps {
   as?: any
   title?: string
   description?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
+  /**
+   * @defaultValue 'primary'
+   */
   color?: AlertVariants['color']
+  /**
+   * @defaultValue 'solid'
+   */
   variant?: AlertVariants['variant']
+  /**
+   * The orientation between the content and the actions.
+   * @defaultValue 'vertical'
+   */
   orientation?: AlertVariants['orientation']
   /**
    * Display a list of actions:
@@ -42,6 +55,7 @@ export interface AlertProps {
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   class?: any

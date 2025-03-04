@@ -12,7 +12,13 @@ const accordion = tv({ extend: tv(theme), ...(appConfigAccordion.ui?.accordion |
 
 export interface AccordionItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
+  /**
+   * @IconifyIcon
+   */
   trailingIcon?: string
   slot?: string
   content?: string
@@ -31,6 +37,7 @@ export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible
   /**
    * The icon displayed on the right side of the trigger.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**

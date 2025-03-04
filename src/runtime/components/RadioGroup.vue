@@ -42,7 +42,13 @@ export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultVa
    */
   descriptionKey?: string
   items?: T[]
+  /**
+   * @defaultValue 'md'
+   */
   size?: RadioGroupVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: RadioGroupVariants['color']
   /**
    * The orientation the radio buttons are laid out.
