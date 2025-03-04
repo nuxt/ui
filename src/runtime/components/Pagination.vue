@@ -20,21 +20,25 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
   /**
    * The icon to use for the first page control.
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
+   * @IconifyIcon
    */
   firstIcon?: string
   /**
    * The icon to use for the previous page control.
    * @defaultValue appConfig.ui.icons.chevronLeft
+   * @IconifyIcon
    */
   prevIcon?: string
   /**
    * The icon to use for the next page control.
    * @defaultValue appConfig.ui.icons.chevronRight
+   * @IconifyIcon
    */
   nextIcon?: string
   /**
    * The icon to use for the last page control.
    * @defaultValue appConfig.ui.icons.chevronDoubleRight
+   * @IconifyIcon
    */
   lastIcon?: string
   /**
@@ -45,6 +49,7 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
   /**
    * The color of the pagination controls.
    * @defaultValue 'neutral'
+   * @IconifyIcon
    */
   color?: ButtonProps['color']
   /**

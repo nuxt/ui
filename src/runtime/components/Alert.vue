@@ -20,6 +20,9 @@ export interface AlertProps {
   as?: any
   title?: string
   description?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   color?: AlertVariants['color']
@@ -42,6 +45,7 @@ export interface AlertProps {
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   class?: any

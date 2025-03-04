@@ -42,7 +42,10 @@ export interface CommandPaletteGroup<T> {
   ignoreFilter?: boolean
   /** Filter group items after the search happened. */
   postFilter?: (searchTerm: string, items: T[]) => T[]
-  /** The icon displayed when an item is highlighted. */
+  /**
+   * The icon displayed when an item is highlighted.
+   * @IconifyIcon
+   */
   highlightedIcon?: string
 }
 
@@ -60,6 +63,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**
@@ -82,6 +86,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   groups?: G[]

@@ -30,6 +30,7 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
   /**
    * The icon displayed when the checkbox is indeterminate.
    * @defaultValue appConfig.ui.icons.minus
+   * @IconifyIcon
    */
   indeterminateIcon?: string
   class?: any

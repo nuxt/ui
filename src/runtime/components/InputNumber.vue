@@ -40,6 +40,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.ui.icons.plus
+   * @IconifyIcon
    */
   incrementIcon?: string
   /**
@@ -50,6 +51,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.ui.icons.minus
+   * @IconifyIcon
    */
   decrementIcon?: string
   autofocus?: boolean

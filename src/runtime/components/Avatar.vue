@@ -19,6 +19,9 @@ export interface AvatarProps {
   as?: any
   src?: string
   alt?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   text?: string
   size?: AvatarVariants['size']

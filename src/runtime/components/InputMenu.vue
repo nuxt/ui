@@ -49,17 +49,20 @@ export interface InputMenuProps<T extends MaybeArrayOfArrayItem<I>, I extends Ma
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**
    * The icon displayed to delete a tag.
    * Works only when `multiple` is `true`.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   deleteIcon?: string
   /**
