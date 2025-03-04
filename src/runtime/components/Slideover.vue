@@ -43,6 +43,7 @@ export interface SlideoverProps extends DialogRootProps {
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   /**

@@ -35,6 +35,7 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
   /**
    * The icon displayed in the prev button.
    * @defaultValue appConfig.ui.icons.arrowLeft
+   * @IconifyIcon
    */
   prevIcon?: string
   /**
@@ -45,6 +46,7 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
   /**
    * The icon displayed in the next button.
    * @defaultValue appConfig.ui.icons.arrowRight
+   * @IconifyIcon
    */
   nextIcon?: string
   /**

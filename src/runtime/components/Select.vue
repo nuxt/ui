@@ -39,11 +39,13 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**

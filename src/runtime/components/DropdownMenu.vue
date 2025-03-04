@@ -43,17 +43,20 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   checkedIcon?: string
   /**
    * The icon displayed when an item is loading.
    * @defaultValue appConfig.ui.icons.loading
+   * @IconifyIcon
    */
   loadingIcon?: string
   /**
    * The icon displayed when the item is an external link.
    * Set to `false` to hide the external icon.
    * @defaultValue appConfig.ui.icons.external
+   * @IconifyIcon
    */
   externalIcon?: boolean | string
   /**

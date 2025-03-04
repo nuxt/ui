@@ -27,6 +27,7 @@ export interface BreadcrumbProps<T> {
   /**
    * The icon to use as a separator.
    * @defaultValue appConfig.ui.icons.chevronRight
+   * @IconifyIcon
    */
   separatorIcon?: string
   /**

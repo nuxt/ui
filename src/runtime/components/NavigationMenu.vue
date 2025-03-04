@@ -26,6 +26,9 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    * `{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
    */
   badge?: string | number | BadgeProps
+  /**
+   * @IconifyIcon
+   */
   trailingIcon?: string
   /**
    * The type of the item.
@@ -50,12 +53,14 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'm
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when the item is an external link.
    * Set to `false` to hide the external icon.
    * @defaultValue appConfig.ui.icons.external
+   * @IconifyIcon
    */
   externalIcon?: boolean | string
   items?: T
