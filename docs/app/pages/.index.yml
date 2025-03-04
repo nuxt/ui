@@ -25,7 +25,7 @@ features:
   - title: Build for the modern web
     description: Powered by Tailwind CSS v4 and Reka UI for top performance and accessibility.
     icon: i-lucide-rocket
-    to: /getting-started/introduction
+    to: /getting-started
   - title: Flexible design system
     description: Beautiful by default and easily customizable with design tokens to your brand.
     icon: i-lucide-swatch-book
