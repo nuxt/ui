@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, TableRow } from '@nuxt/ui'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 
 const UButton = resolveComponent('UButton')
@@ -279,6 +279,10 @@ function randomize() {
   data.value = [...data.value].sort(() => Math.random() - 0.5)
 }
 
+function onSelect(row: TableRow<Payment>) {
+  console.log(row)
+}
+
 onMounted(() => {
   setTimeout(() => {
     loading.value = false
@@ -337,6 +341,7 @@ onMounted(() => {
       }"
       sticky
       class="border border-(--ui-border-accented) rounded-(--ui-radius)"
+      @select="onSelect"
     >
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>
