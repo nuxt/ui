@@ -73,7 +73,7 @@ const { data: components } = await useAsyncData('ui-components', () => {
           <ULink
             v-for="component of components?.slice(0, 10)"
             :key="component.path"
-            class="relative group aspect-video border-(--ui-border) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
+            class="relative group/link aspect-video border-(--ui-border) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
           >
             <UColorModeImage
@@ -82,7 +82,7 @@ const { data: components } = await useAsyncData('ui-components', () => {
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
               class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
             />
-            <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover:opacity-100 opacity-0 transition-opacity duration-300 pointer-events-none" />
+            <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
         </UPageMarquee>
         <UPageMarquee
@@ -97,16 +97,15 @@ const { data: components } = await useAsyncData('ui-components', () => {
           <ULink
             v-for="component of components?.slice(10, 20)"
             :key="component.path"
-            class="relative group aspect-video border-(--ui-border) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
+            class="relative group/link aspect-video border-(--ui-border) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
           >
             <UColorModeImage
-
               :light="`${component.path.replace('/components/', '/components/light/')}.png`"
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
               class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
             />
-            <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover:opacity-100 opacity-0 transition-opacity duration-300 pointer-events-none" />
+            <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
         </UPageMarquee>
       </div>
