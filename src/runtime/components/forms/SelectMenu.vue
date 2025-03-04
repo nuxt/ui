@@ -141,7 +141,7 @@ import {
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twJoin } from 'tailwind-merge'
-import { isEqual } from 'ohash'
+import { isEqual } from 'ohash/utils'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
