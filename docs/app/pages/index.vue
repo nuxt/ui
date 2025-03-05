@@ -37,6 +37,7 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 
 const contributorsRef = ref(null)
 const isContributorsInView = ref(false)
+const isContributorsHovered = useElementHover(contributorsRef)
 
 useIntersectionObserver(contributorsRef, ([entry]) => {
   isContributorsInView.value = entry?.isIntersecting || false
@@ -204,7 +205,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       </template>
 
       <div ref="contributorsRef" class="p-4 sm:p-6 md:p-8 lg:p-12 xl:p-14 overflow-hidden flex relative">
-        <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView" />
+        <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
     </UPageSection>
 

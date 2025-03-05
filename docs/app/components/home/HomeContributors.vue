@@ -32,6 +32,7 @@ const { width } = useElementSize(el)
       :max="max"
       :level="level + 1"
       :contributors="props.contributors?.slice(5) ?? []"
+      :paused="paused"
     />
 
     <div
