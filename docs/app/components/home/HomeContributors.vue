@@ -95,7 +95,6 @@ const { width } = useElementSize(el)
   @supports (background: paint(houdini)) {
     background: linear-gradient(var(--angle), var(--border-color), var(--border-color), var(--border-color), var(--border-color), var(--highlight-color));
     animation: var(--duration) rotate linear infinite;
-    animation-direction: alternate;
   }
 }
 
@@ -104,8 +103,7 @@ const { width } = useElementSize(el)
 }
 
 .animation-paused.circle:after,
-.animation-paused .avatars,
-.animation-paused .avatar {
+.animation-paused .avatars {
   animation-play-state: paused;
 }
 
@@ -114,15 +112,13 @@ const { width } = useElementSize(el)
   --end: calc(360deg + (var(--level) * 36deg));
   transform: rotate(var(--angle));
   animation: calc(var(--duration) + 60s) rotate linear infinite;
-  will-change: transform;
 }
 
 .avatar {
   --deg: calc(var(--index) * (360deg / var(--total)));
   --transformX: calc(cos(var(--deg)) * var(--offset));
   --transformY: calc(sin(var(--deg)) * var(--offset));
-  transform: translate3d(calc(-50% + var(--transformX)), calc(-50% + var(--transformY)), 0) rotate(calc(360deg - var(--angle)));
-  will-change: transform;
+  transform: translate(calc(-50% + var(--transformX)), calc(-50% + var(--transformY))) rotate(calc(360deg - var(--angle)));
 }
 
 @keyframes rotate {
