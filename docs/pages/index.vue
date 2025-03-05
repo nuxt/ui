@@ -423,6 +423,7 @@ const { data: module } = await useFetch<{
     username: string
   }[]
 }>('https://api.nuxt.com/modules/ui', {
+  key: 'stats',
   transform: ({ stats, contributors }) => ({ stats, contributors })
 })
 
