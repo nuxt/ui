@@ -21,10 +21,12 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
    * @defaultValue 'primary'
    */
   color?: ButtonVariants['color']
+  activeColor?: ButtonVariants['color']
   /**
    * @defaultValue 'solid'
    */
   variant?: ButtonVariants['variant']
+  activeVariant?: ButtonVariants['variant']
   /**
    * @defaultValue 'md'
    */
@@ -59,7 +61,11 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 
-const props = defineProps<ButtonProps>()
+const props = withDefaults(defineProps<ButtonProps>(), {
+  active: undefined,
+  activeClass: '',
+  inactiveClass: ''
+})
 const slots = defineSlots<ButtonSlots>()
 
 const linkProps = useForwardProps(pickLinkProps(props))
@@ -87,7 +93,19 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
   computed(() => ({ ...props, loading: isLoading.value }))
 )
 
-const ui = computed(() => button({
+const ui = computed(() => tv({
+  extend: button,
+  variants: {
+    active: {
+      true: {
+        base: props.activeClass
+      },
+      false: {
+        base: props.inactiveClass
+      }
+    }
+  }
+})({
   color: props.color,
   variant: props.variant,
   size: buttonSize.value,
@@ -102,26 +120,37 @@ const ui = computed(() => button({
 
 <template>
   <ULink
+    v-slot="{ active, ...slotProps }"
     :type="type"
     :disabled="disabled || isLoading"
     :class="ui.base({ class: [props.class, props.ui?.base] })"
     v-bind="omit(linkProps, ['type', 'disabled'])"
-    raw
-    @click="onClickWrapper"
+    custom
   >
-    <slot name="leading">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-      <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
-    </slot>
+    <ULinkBase
+      v-bind="slotProps"
+      :class="ui.base({
+        class: [props.class, props.ui?.base],
+        active,
+        ...(active && activeVariant ? { variant: activeVariant } : {}),
+        ...(active && activeColor ? { color: activeColor } : {})
+      })"
+      @click="onClickWrapper"
+    >
+      <slot name="leading">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
+        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
+      </slot>
 
-    <slot>
-      <span v-if="label" :class="ui.label({ class: props.ui?.label })">
-        {{ label }}
-      </span>
-    </slot>
+      <slot>
+        <span v-if="label" :class="ui.label({ class: props.ui?.label, active })">
+          {{ label }}
+        </span>
+      </slot>
 
-    <slot name="trailing">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
-    </slot>
+      <slot name="trailing">
+        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
+      </slot>
+    </ULinkBase>
   </ULink>
 </template>
