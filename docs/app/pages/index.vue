@@ -167,6 +167,7 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
       :links="page.community.links"
       orientation="horizontal"
       :ui="{ features: 'flex items-center gap-8' }"
+      class="border-b border-(--ui-border)"
     >
       <template #features>
         <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank">
@@ -193,6 +194,67 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 
       <div class="p-10 overflow-hidden flex">
         <HomeContributors :contributors="module?.contributors" />
+      </div>
+    </UPageSection>
+    <UPageSection
+      :ui="{ container: 'relative !pb-10' }"
+    >
+      <template #title>
+        Build faster with Nuxt UI <span class="text-(--ui-primary)">Pro</span>.
+      </template>
+      <template #description>
+        A collection of premium Vue components, composables and utils built on top of Nuxt UI. <br> Focused on structure and layout, these <span class="text-(--ui-text)">responsive components</span> are designed to be the perfect <span class="text-(--ui-text)">building blocks for your next idea</span>.
+      </template>
+      <template #links>
+        <UButton to="/pro" size="lg">
+          Discover Nuxt UI Pro
+        </UButton>
+        <UButton to="/pro/templates" size="lg" variant="outline" trailing-icon="i-lucide-arrow-right" color="neutral">
+          Explore Templates
+        </UButton>
+      </template>
+      <template #top>
+        <StarsBg />
+      </template>
+
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div class="relative h-[400px] border border-(--ui-border) bg-(--ui-bg-muted) overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">
+        <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+          <img
+            v-for="i in 4"
+            :key="i"
+            :src="`/pro/blocks/image${i}.png`"
+            width="460"
+            height="258"
+            loading="lazy"
+            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+          >
+        </UPageMarquee>
+        <UPageMarquee orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+          <img
+            v-for="i in [5, 6, 7, 8]"
+            :key="i"
+            :src="`/pro/blocks/image${i}.png`"
+            width="460"
+            height="258"
+            loading="lazy"
+            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+          >
+        </UPageMarquee>
+        <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+          <img
+            v-for="i in [9, 10, 11, 12]"
+            :key="i"
+            :src="`/pro/blocks/image${i}.png`"
+            width="460"
+            height="258"
+            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            loading="lazy"
+            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+          >
+        </UPageMarquee>
       </div>
     </UPageSection>
   </UMain>

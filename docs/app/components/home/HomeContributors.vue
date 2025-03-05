@@ -72,11 +72,14 @@ const { width } = useElementSize(el)
 </template>
 
 <style scoped>
+.dark .circle:after {
+  --highlight-color: var(--ui-border-inverted);
+}
 .circle:after {
   --start: 0deg;
   --end: 360deg;
   --border-color: var(--ui-border);
-  --highlight-color: var(--ui-border-inverted);
+  --highlight-color: var(--ui-color-neutral-400);
 
   content: '';
   position: absolute;
