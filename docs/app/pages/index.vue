@@ -68,7 +68,7 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
             :transition="{ delay: 0.2 + 0.4 * index }"
             :in-view-options="{ once: true }"
           >
-            <UPageFeature v-bind="feature" />
+            <UPageFeature v-bind="feature" class="opacity-0" />
           </Motion>
         </div>
       </template>
