@@ -34,6 +34,13 @@ const { data: module } = await useFetch<{
 }>('https://api.nuxt.com/modules/ui')
 
 const { format } = Intl.NumberFormat('en', { notation: 'compact' })
+
+const contributorsRef = ref(null)
+const isContributorsInView = ref(false)
+
+useIntersectionObserver(contributorsRef, ([entry]) => {
+  isContributorsInView.value = entry?.isIntersecting || false
+})
 </script>
 
 <template>
@@ -53,6 +60,7 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
       <template #description>
         {{ page.hero.description }}
       </template>
+
       <template #links>
         <UButton v-for="link of page.hero.links" :key="link.label" v-bind="link" size="xl" />
         <div class="w-full my-6">
@@ -72,6 +80,7 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
           </Motion>
         </div>
       </template>
+
       <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
         <UPageMarquee
           pause-on-hover
@@ -96,6 +105,7 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
         </UPageMarquee>
+
         <UPageMarquee
           pause-on-hover
           reverse
@@ -135,6 +145,7 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
           class="flex items-start gap-x-3 relative group"
         >
           <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10" />
+
           <div class="relative p-3">
             <svg class="absolute inset-0" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
               <line x1="6.5" x2="6.5" y2="44" stroke="var(--ui-border)" />
@@ -166,39 +177,38 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
       :description="page.community.description"
       :links="page.community.links"
       orientation="horizontal"
-      :ui="{ features: 'flex items-center gap-8' }"
+      :ui="{ features: 'flex items-center gap-4 lg:gap-8' }"
       class="border-b border-(--ui-border)"
     >
       <template #features>
-        <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank">
-          <p class="text-4xl font-semibold text-(--ui-text-highlighted)">
+        <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0">
+          <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
             {{ format(module?.stats?.downloads ?? 0) }}+
           </p>
-          <p class="text-(--ui-text-muted) text-sm">monthly downloads</p>
+          <p class="text-(--ui-text-muted) text-sm truncate">monthly downloads</p>
         </NuxtLink>
 
-        <NuxtLink to="https://github.com/nuxt/ui" target="_blank">
-          <p class="text-4xl font-semibold text-(--ui-text-highlighted)">
+        <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0">
+          <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
             {{ format(module?.stats?.stars ?? 0) }}+
           </p>
-          <p class="text-(--ui-text-muted) text-sm">GitHub stars</p>
+          <p class="text-(--ui-text-muted) text-sm truncate">GitHub stars</p>
         </NuxtLink>
 
-        <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank">
-          <p class="text-4xl font-semibold text-(--ui-text-highlighted)">
+        <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0">
+          <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
             175+
           </p>
-          <p class="text-(--ui-text-muted) text-sm">Contributors</p>
+          <p class="text-(--ui-text-muted) text-sm truncate">Contributors</p>
         </NuxtLink>
       </template>
 
-      <div class="p-10 overflow-hidden flex">
-        <HomeContributors :contributors="module?.contributors" />
+      <div ref="contributorsRef" class="p-4 sm:p-6 md:p-8 lg:p-12 xl:p-14 overflow-hidden flex relative">
+        <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView" />
       </div>
     </UPageSection>
-    <UPageSection
-      :ui="{ container: 'relative !pb-10' }"
-    >
+
+    <UPageSection :ui="{ container: 'relative !pb-0 overflow-hidden' }">
       <template #title>
         Build faster with Nuxt UI <span class="text-(--ui-primary)">Pro</span>.
       </template>
@@ -210,12 +220,11 @@ const { format } = Intl.NumberFormat('en', { notation: 'compact' })
           Discover Nuxt UI Pro
         </UButton>
         <UButton to="/pro/templates" size="lg" variant="outline" trailing-icon="i-lucide-arrow-right" color="neutral">
-          Explore Templates
+          Explore templates
         </UButton>
       </template>
-      <template #top>
-        <StarsBg />
-      </template>
+
+      <StarsBg />
 
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <div class="relative h-[400px] border border-(--ui-border) bg-(--ui-bg-muted) overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">

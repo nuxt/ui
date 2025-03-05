@@ -26,9 +26,8 @@ useSeoMeta({
       <template #title>
         <MDC :value="page.pricing.title" unwrap="p" />
       </template>
-      <template #top>
-        <StarsBg />
-      </template>
+
+      <StarsBg />
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <div class="flex flex-col bg-(--ui-bg) gap-8 lg:gap-0">
         <UPricingPlan

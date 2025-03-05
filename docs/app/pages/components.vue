@@ -81,7 +81,10 @@ onMounted(() => {
       orientation="vertical"
       :ui="{ title: 'text-balance', container: 'relative' }"
     >
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <template #top>
+        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+      </template>
+
       <template #headline>
         <UButton
           to="https://tailwindcss.com"
@@ -96,6 +99,7 @@ onMounted(() => {
       <template #title>
         Build beautiful UI with <span class="text-(--ui-primary)">{{ components!.length }}+</span> powerful components
       </template>
+
       <template #links>
         <UButton
           to="/getting-started/installation/vue"
@@ -114,10 +118,11 @@ onMounted(() => {
           size="xl"
         />
       </template>
-      <template #top>
-        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+
+      <div class="absolute inset-y-0 inset-x-4 sm:inset-x-6 lg:inset-x-8">
         <StarsBg />
-      </template>
+      </div>
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
     <div v-for="category in categories" :key="category.id">

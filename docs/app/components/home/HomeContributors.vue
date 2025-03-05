@@ -5,12 +5,14 @@ const props = withDefaults(defineProps<{
   }[]
   level?: number
   max?: number
+  paused?: boolean
 }>(), {
   level: 0,
-  max: 4
+  max: 4,
+  paused: false
 })
 
-const contributors = computed(() => props.contributors?.slice(0, 6) ?? [])
+const contributors = computed(() => props.contributors?.slice(0, 5) ?? [])
 
 const el = ref(null)
 const { width } = useElementSize(el)
@@ -19,8 +21,9 @@ const { width } = useElementSize(el)
 <template>
   <div
     class="isolate rounded-full relative circle w-full aspect-[1/1] p-8 sm:p-12 md:p-14 lg:p-10 xl:p-16 before:absolute before:inset-px before:bg-(--ui-bg) before:rounded-full z-(--level)"
+    :class="{ 'animation-paused': paused }"
     :style="{
-      '--duration': `${((level + 1) * 5)}s`,
+      '--duration': `${((level + 1) * 8)}s`,
       '--level': level + 1
     }"
   >
@@ -28,7 +31,7 @@ const { width } = useElementSize(el)
       v-if="(level + 1) < max"
       :max="max"
       :level="level + 1"
-      :contributors="props.contributors?.slice(6) ?? []"
+      :contributors="props.contributors?.slice(5) ?? []"
     />
 
     <div
@@ -55,16 +58,15 @@ const { width } = useElementSize(el)
             '--index': index + 1
           }"
         >
-          <UAvatar
+          <img
+            width="56"
+            height="56"
+            :src="`https://ipx.nuxt.com/s_56x56/gh_avatar/${contributor.username}`"
+            :srcset="`https://ipx.nuxt.com/s_112x112/gh_avatar/${contributor.username} 2x`"
             :alt="contributor.username"
-            :src="`https://ipx.nuxt.com/s_40x40/gh_avatar/${contributor.username}`"
-            :srcset="`https://ipx.nuxt.com/s_80x80/gh_avatar/${contributor.username} 2x`"
-            class="ring-2 ring-(--ui-border) lg:hover:ring-(--ui-border-inverted) transition"
-            width="40"
-            height="40"
-            size="sm"
+            class="ring-2 ring-(--ui-border) lg:hover:ring-(--ui-border-inverted) transition rounded-full size-7"
             loading="lazy"
-          />
+          >
         </NuxtLink>
       </UTooltip>
     </div>
@@ -72,9 +74,6 @@ const { width } = useElementSize(el)
 </template>
 
 <style scoped>
-.dark .circle:after {
-  --highlight-color: var(--ui-border-inverted);
-}
 .circle:after {
   --start: 0deg;
   --end: 360deg;
@@ -96,7 +95,18 @@ const { width } = useElementSize(el)
   @supports (background: paint(houdini)) {
     background: linear-gradient(var(--angle), var(--border-color), var(--border-color), var(--border-color), var(--border-color), var(--highlight-color));
     animation: var(--duration) rotate linear infinite;
+    animation-direction: alternate;
   }
+}
+
+.dark .circle:after {
+  --highlight-color: var(--color-white);
+}
+
+.animation-paused.circle:after,
+.animation-paused .avatars,
+.animation-paused .avatar {
+  animation-play-state: paused;
 }
 
 .avatars {
@@ -104,17 +114,15 @@ const { width } = useElementSize(el)
   --end: calc(360deg + (var(--level) * 36deg));
   transform: rotate(var(--angle));
   animation: calc(var(--duration) + 60s) rotate linear infinite;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .avatar {
   --deg: calc(var(--index) * (360deg / var(--total)));
   --transformX: calc(cos(var(--deg)) * var(--offset));
   --transformY: calc(sin(var(--deg)) * var(--offset));
-  transform: translate(calc(-50% + var(--transformX)), calc(-50% + var(--transformY))) rotate(calc(360deg - var(--angle)));
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+  transform: translate3d(calc(-50% + var(--transformX)), calc(-50% + var(--transformY)), 0) rotate(calc(360deg - var(--angle)));
+  will-change: transform;
 }
 
 @keyframes rotate {

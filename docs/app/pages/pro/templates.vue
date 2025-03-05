@@ -17,9 +17,7 @@ useSeoMeta({
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <UPageHero :links="page.links" :ui="{ container: 'relative' }">
-    <template #top>
-      <StarsBg />
-    </template>
+    <StarsBg />
     <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
     <template #title>
@@ -42,7 +40,8 @@ useSeoMeta({
     :ui="{
       title: 'lg:text-4xl',
       wrapper: 'lg:py-16 lg:border-r border-(--ui-border) order-last lg:pr-16',
-      container: 'lg:py-0'
+      container: 'lg:py-0',
+      links: 'gap-x-3'
     }"
   >
     <template #description>
