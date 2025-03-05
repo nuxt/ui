@@ -42,8 +42,8 @@ const starLayers = computed(() => {
 </script>
 
 <template>
-  <ClientOnly>
-    <div class="absolute pointer-events-none z-[-1] inset-y-0 inset-x-5 sm:inset-x-7 lg:inset-x-9">
+  <div class="absolute pointer-events-none z-[-1] inset-y-0 inset-x-5 sm:inset-x-7 lg:inset-x-9 overflow-hidden">
+    <ClientOnly>
       <div class="stars size-full absolute inset-x-0 top-0">
         <div
           v-for="(layer, index) in starLayers"
@@ -70,8 +70,8 @@ const starLayers = computed(() => {
           />
         </div>
       </div>
-    </div>
-  </ClientOnly>
+    </ClientOnly>
+  </div>
 </template>
 
 <style scoped>

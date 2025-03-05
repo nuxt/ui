@@ -49,7 +49,12 @@ features:
 design_system:
   title: Flexible design system
   description: Build your next project faster with Nuxt UI's comprehensive design system. Featuring semantic color aliases, comprehensive design tokens, and automatic light/dark mode support for accessible components out of the box.
-  to: /getting-started/theme#design-system
+  links:
+    - label: Learn more
+      to: /getting-started/theme#design-system
+      variant: outline
+      color: neutral
+      trailingIcon: i-lucide-arrow-right
   features:
     - title: Color aliases via AppConfig
       description: Configure 7 semantic color aliases (primary, secondary, success, info, warning, error, neutral) at runtime through AppConfig without rebuilding your application
@@ -91,7 +96,6 @@ design_system:
       --ui-bg: var(--ui-color-neutral-50);
       --ui-text: var(--ui-color-neutral-900);
     }
-
     .dark {
       --ui-bg: var(--ui-color-neutral-950);
       --ui-border: var(--ui-color-neutral-900);
@@ -102,7 +106,12 @@ design_system:
 component_customization:
   title: Powerful component customization
   description: Nuxt UI leverages [Tailwind Variants](https://www.tailwind-variants.org/) to provide a powerful, maintainable system for managing component styles and intelligently merging Tailwind CSS classes without conflicts.
-  to: /getting-started/theme#components-theme
+  links:
+    - label: Learn more
+      to: /getting-started/theme#customize-theme
+      variant: outline
+      color: neutral
+      trailingIcon: i-lucide-arrow-right
   features:
     - title: Powerful slot and variant system
       description: Customize component parts with slots and apply different styles based on props, creating consistent UI patterns with granular control over styling
@@ -133,7 +142,7 @@ component_customization:
     })
     ```
 
-    ```vue [Button.vue]
+    ```vue [Collapsible.vue]
     <template>
       <UCollapsible>
         <UButton

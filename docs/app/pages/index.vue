@@ -82,6 +82,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </div>
       </template>
 
+      <SkyBg />
+
       <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
         <UPageMarquee
           pause-on-hover
@@ -181,6 +183,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :title="page.design_system.title"
       :description="page.design_system.description"
       :features="page.design_system.features"
+      :links="page.design_system.links"
       orientation="horizontal"
     >
       <MDC :value="page.design_system.code" />
@@ -191,6 +194,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
     <UPageSection
       :title="page.component_customization.title"
       :features="page.component_customization.features"
+      :links="page.component_customization.links"
       orientation="horizontal"
     >
       <template #description>
