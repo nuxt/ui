@@ -133,7 +133,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       </div>
     </UPageHero>
 
-    <UPageSection :ui="{ container: 'lg:py-16' }" class="border-y border-(--ui-border)">
+    <USeparator />
+
+    <UPageSection :ui="{ container: 'lg:py-16' }">
       <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
@@ -173,6 +175,33 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       </ul>
     </UPageSection>
 
+    <USeparator />
+
+    <UPageSection
+      :title="page.design_system.title"
+      :description="page.design_system.description"
+      :features="page.design_system.features"
+      orientation="horizontal"
+    >
+      <MDC :value="page.design_system.code" />
+    </UPageSection>
+
+    <USeparator />
+
+    <UPageSection
+      :title="page.component_customization.title"
+      :features="page.component_customization.features"
+      orientation="horizontal"
+    >
+      <template #description>
+        <MDC :value="page.component_customization.description" />
+      </template>
+
+      <MDC :value="page.component_customization.code" />
+    </UPageSection>
+
+    <USeparator />
+
     <UPageSection
       :title="page.community.title"
       :description="page.community.description"
@@ -204,7 +233,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </NuxtLink>
       </template>
 
-      <div ref="contributorsRef" class="p-4 sm:p-6 md:p-8 lg:p-12 xl:p-14 overflow-hidden flex relative">
+      <div ref="contributorsRef" class="p-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 overflow-hidden flex relative">
         <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
     </UPageSection>
