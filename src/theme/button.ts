@@ -73,6 +73,14 @@ export default (options: Required<ModuleOptions>) => ({
     },
     loading: {
       true: ''
+    },
+    active: {
+      true: {
+        base: ''
+      },
+      false: {
+        base: ''
+      }
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
