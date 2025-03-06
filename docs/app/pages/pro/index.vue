@@ -116,7 +116,7 @@ useSeoMeta({
         wrapper: 'grid grid-cols-1 lg:grid-cols-2',
         description: 'lg:mt-0' }"
       orientation="horizontal"
-      class="rounded-none border-t border-(--ui-border) bg-gradient-to-b from-(--ui-bg-muted) to-(--ui-bg)"
+      class="rounded-none border-t border-(--ui-border) bg-gradient-to-b from-(--ui-bg-elevated)/50 to-(--ui-bg)"
     >
       <template #title>
         <MDC :value="page.mainSection.title" tag="span" unwrap="p" cache-key="pro-main-section-title" />

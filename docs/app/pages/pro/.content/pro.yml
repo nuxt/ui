@@ -7,13 +7,13 @@ hero:
     - label: Buy a license
       size: xl
       to: /pro/pricing
-      trailing-icon: i-lucide-arrow-right
-    - label: Get started
+    - label: Try for free
       trailing: true
       color: neutral
-      variant: ghost
+      variant: outline
       to: /getting-started/installation/pro/nuxt
       size: xl
+      trailingIcon: i-lucide-arrow-right
 features:
   title: Create stunning Vue applications faster.
   description: Nuxt UI Pro comes packed with powerful features to help you build modern, performant, accessible and responsive Nuxt applications at record speed. From pre-built UI sections to Figma design kits, every detail is crafted to speed up your development and deliver a polished user experience.
@@ -157,8 +157,8 @@ cta:
   links:
     - label: Buy a license
       to: '/pro/pricing'
-      trailing-icon: i-lucide-arrow-right
-    - label: Get started
-      to: '/getting-started/license'
-      variant: ghost
+    - label: Try for free
+      to: /getting-started/installation/pro/nuxt
+      variant: outline
       color: neutral
+      trailingIcon: i-lucide-arrow-right

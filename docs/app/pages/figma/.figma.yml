@@ -8,7 +8,6 @@ hero:
   links:
     - label: Purchase Pro Kit
       to: 'https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d'
-      trailing-icon: i-lucide-arrow-right
       target: _blank
     - label: Free Figma Kit
       to: 'https://go.nuxt.com/figma'
@@ -121,7 +120,6 @@ section4:
   links:
     - label: Get access now
       to: 'https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d'
-      trailing-icon: i-lucide-arrow-right
     - label: Preview UI Pro Design Kit
       to: 'https://go.nuxt.com/figma-pro'
       icon: i-logos-figma

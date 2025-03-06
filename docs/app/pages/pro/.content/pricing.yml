@@ -29,7 +29,7 @@ pricing:
       - Free [preview available](https://www.figma.com/design/mxXR9binOSLU3rYKZZRPXs/PREVIEW---NuxtUIPro-V3-BETA?m=auto&t=c4598Wr0rZwKPs5M-1)
       - Includes Nuxt UI [Figma Kit](https://www.figma.com/community/file/1288455405058138934)
     button:
-      label: Explore Figma Kit Pricing
+      label: Buy Figma Kit
       to: 'https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d'
       color: 'neutral'
   plans:

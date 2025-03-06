@@ -5,7 +5,17 @@ hero:
   description: Create beautiful, responsive & accessible web apps quickly with Vue or Nuxt. Nuxt UI is an open-source UI library of 50+ customizable components built with Tailwind CSS and Reka UI.
   links:
     - label: Get started
-      to: /getting-started/installation
+      to: /getting-started/installation/nuxt
+      class: 'ui-only nuxt-only'
+    - label: Get started
+      to: /getting-started/installation/vue
+      class: 'ui-only vue-only'
+    - label: Get started
+      to: /getting-started/installation/pro/nuxt
+      class: 'ui-pro-only nuxt-only'
+    - label: Get started
+      to: /getting-started/installation/pro/vue
+      class: 'ui-pro-only vue-only'
     - label: Explore components
       to: /components
       variant: outline
@@ -50,7 +60,7 @@ design_system:
   title: Flexible design system
   description: Build your next project faster with Nuxt UI's comprehensive design system. Featuring semantic color aliases, comprehensive design tokens, and automatic light/dark mode support for accessible components out of the box.
   links:
-    - label: Learn more
+    - label: Customize design system
       to: /getting-started/theme#design-system
       variant: outline
       color: neutral
@@ -107,7 +117,7 @@ component_customization:
   title: Powerful component customization
   description: Nuxt UI leverages [Tailwind Variants](https://www.tailwind-variants.org/) to provide a powerful, maintainable system for managing component styles and intelligently merging Tailwind CSS classes without conflicts.
   links:
-    - label: Learn more
+    - label: Customize components
       to: /getting-started/theme#customize-theme
       variant: outline
       color: neutral

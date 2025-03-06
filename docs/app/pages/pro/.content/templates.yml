@@ -5,16 +5,16 @@ hero:
   description: 'Ready to use templates powered by our premium Vue components and Nuxt Content.<br class="hidden lg:block"> The templates are responsive, accessible and easy to customize so you can get started in no time.'
 navigation: false
 links:
-  - label: Get started
-    to: /getting-started/installation/pro/nuxt#use-an-official-template
-    color: neutral
+  - label: Buy a license
+    color: primary
     size: xl
-    trailingIcon: i-lucide-arrow-right
-  - label: Purchase a license
+    to: /pro/pricing
+  - label: Try for free
+    to: /getting-started/installation/pro/nuxt#use-an-official-template
     size: xl
     color: neutral
     variant: outline
-    to: /pro/pricing
+    trailingIcon: i-lucide-arrow-right
 templates:
   - title: 'Dashboard'
     description: "A template to illustrate how to build your own dashboard with the 15+ latest Nuxt UI Pro components, designed specifically to create a consistent look and feel."
