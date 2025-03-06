@@ -24,7 +24,7 @@
     "nuxt-llms": "^0.1.0",
     "nuxt-og-image": "^4.2.0",
     "prettier": "^3.5.3",
-    "shiki-transformer-color-highlight": "^0.2.0",
+    "shiki-transformer-color-highlight": "^1.0.0",
     "superstruct": "^2.0.2",
     "ufo": "^1.5.4",
     "valibot": "^0.42.1",
