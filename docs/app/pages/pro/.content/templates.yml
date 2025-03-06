@@ -30,7 +30,7 @@ templates:
       - title: Resizable multi-column layout
         icon: i-lucide-columns-3
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://dashboard-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -42,7 +42,7 @@ templates:
         icon: i-simple-icons-github
         color: neutral
         variant: outline
-      - label: Live Preview
+      - label: Preview
         to: https://vue-dashboard-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-vue
@@ -68,7 +68,7 @@ templates:
       - title: Authentication pages (login, register)
         icon: i-lucide-user-round-check
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://saas-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -94,7 +94,7 @@ templates:
       - title: Write content in YAML
         icon: i-simple-icons-yaml
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://landing-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -120,7 +120,7 @@ templates:
       - title: Full-text search out of the box
         icon: i-lucide-search
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://docs-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -144,7 +144,7 @@ templates:
       - title: Nuxt 4 Compatibility Enabled
         icon: i-simple-icons-nuxtdotjs
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://ui-pro-starter.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -156,7 +156,7 @@ templates:
         variant: outline
         icon: i-simple-icons-github
         color: neutral
-      - label: Live Preview
+      - label: Preview
         to: https://ui-pro-starter-vue.nuxt.dev
         target: _blank
         leadingIcon: i-logos-vue

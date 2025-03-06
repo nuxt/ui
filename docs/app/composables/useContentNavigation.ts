@@ -40,7 +40,7 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
         if (child.framework && child.framework !== framework.value) {
           return false
         }
-        if (child.module && child.module !== module.value) {
+        if (child.module && child.module !== module.value && !child.path.startsWith('/components')) {
           return false
         }
         return true
