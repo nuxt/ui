@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
@@ -9,7 +10,7 @@ definePageMeta({
   layout: 'docs'
 })
 
-const { data: page } = await useAsyncData(route.path, () => queryCollection('content').path(route.path).first())
+const { data: page } = await useAsyncData(kebabCase(route.path), () => queryCollection('content').path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
@@ -24,7 +25,7 @@ watch(page, () => {
   }
 }, { immediate: true })
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
+const { data: surround } = await useAsyncData(`${kebabCase(route.path)}-surround`, () => {
   return queryCollectionItemSurroundings('content', route.path, {
     fields: ['description']
   }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
@@ -137,7 +138,7 @@ const communityLinks = computed(() => [{
       </template>
 
       <template #description>
-        <MDC v-if="page.description" :value="page.description" unwrap="p" />
+        <MDC v-if="page.description" :value="page.description" unwrap="p" :cache-key="`${kebabCase(route.path)}-description`" />
       </template>
 
       <template v-if="page.links?.length" #links>

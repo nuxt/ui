@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  key: 'typicode-users',
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
       label: user.name,

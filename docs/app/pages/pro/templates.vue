@@ -22,11 +22,11 @@ useSeoMeta({
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
       <template #title>
-        <MDC :value="page.hero.title" unwrap="p" />
+        <MDC :value="page.hero.title" unwrap="p" cache-key="pro-templates-hero-title" />
       </template>
 
       <template #description>
-        <MDC :value="page.hero.description" unwrap="p" />
+        <MDC :value="page.hero.description" unwrap="p" cache-key="pro-templates-hero-description" />
       </template>
     </UPageHero>
 
@@ -46,7 +46,7 @@ useSeoMeta({
       }"
     >
       <template #description>
-        <MDC :value="template.description" unwrap="p" />
+        <MDC :value="template.description" unwrap="p" :cache-key="`pro-templates-${index}-description`" />
       </template>
 
       <div class="lg:border-x border-(--ui-border) h-full flex items-center lg:bg-(--ui-bg-muted)/20">

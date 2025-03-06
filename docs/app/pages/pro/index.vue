@@ -26,10 +26,10 @@ useSeoMeta({
       }"
     >
       <template #title>
-        <MDC :value="page.hero.title" tag="span" unwrap="p" />
+        <MDC :value="page.hero.title" tag="span" unwrap="p" cache-key="pro-hero-title" />
       </template>
       <template #description>
-        <MDC :value="page.hero.description" tag="span" unwrap="p" />
+        <MDC :value="page.hero.description" tag="span" unwrap="p" cache-key="pro-hero-description" />
       </template>
 
       <StarsBg />
@@ -83,7 +83,7 @@ useSeoMeta({
     >
       <template #description>
         <Motion :initial="{ opacity: 0, transform: 'translateY(10px)' }" :in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }" :transition="{ delay: 0.2 }">
-          <MDC :value="page.testimonial.quote" tag="span" unwrap="p" class="before:content-[open-quote] after:content-[close-quote] " />
+          <MDC :value="page.testimonial.quote" tag="span" unwrap="p" class="before:content-[open-quote] after:content-[close-quote]" cache-key="pro-testimonial-quote" />
         </Motion>
       </template>
       <Motion :initial="{ opacity: 0, transform: 'translateY(10px)' }" :in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }" :transition="{ delay: 0.3 }">
@@ -119,10 +119,10 @@ useSeoMeta({
       class="rounded-none border-t border-(--ui-border) bg-gradient-to-b from-(--ui-bg-muted) to-(--ui-bg)"
     >
       <template #title>
-        <MDC :value="page.mainSection.title" tag="span" unwrap="p" />
+        <MDC :value="page.mainSection.title" tag="span" unwrap="p" cache-key="pro-main-section-title" />
       </template>
       <template #description>
-        <MDC :value="page.mainSection.description" tag="span" unwrap="p" />
+        <MDC :value="page.mainSection.description" tag="span" unwrap="p" cache-key="pro-main-section-description" />
       </template>
     </UPageCTA>
     <UPageSection
@@ -139,7 +139,7 @@ useSeoMeta({
         container: index === 0 ? 'pb-0 sm:pb-0 lg:pb-0 py-16 sm:py-16 lg:py-16' : ''
       }"
     >
-      <MDC :value="section.code" />
+      <MDC :value="section.code" :cache-key="`pro-section-${index}-code`" />
     </UPageSection>
 
     <UPageSection

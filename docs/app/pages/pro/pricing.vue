@@ -24,7 +24,7 @@ useSeoMeta({
       }"
     >
       <template #title>
-        <MDC :value="page.pricing.title" unwrap="p" />
+        <MDC :value="page.pricing.title" unwrap="p" cache-key="pro-pricing-title" />
       </template>
 
       <StarsBg />
@@ -58,7 +58,7 @@ useSeoMeta({
           <template #features>
             <li v-for="(feature, index) in page.pricing.figma.features" :key="index" class="flex items-center gap-2 min-w-0">
               <UIcon name="i-lucide-circle-check" class="size-5 text-(--ui-primary) shrink-0" />
-              <MDC :value="feature" unwrap="p" class="text-sm truncate text-(--ui-text-toned)" />
+              <MDC :value="feature" unwrap="p" class="text-sm truncate text-(--ui-text-toned)" :cache-key="`pro-pricing-figma-feature-${index}`" />
             </li>
           </template>
         </UPricingPlan>
@@ -110,8 +110,8 @@ useSeoMeta({
         :items="(page.faq.items as any[])"
         class="max-w-4xl mx-auto"
       >
-        <template #body="{ item }">
-          <MDC :value="item.content" unwrap="p" />
+        <template #body="{ item, index }">
+          <MDC :value="item.content" unwrap="p" :cache-key="`pro-pricing-faq-${index}-content`" />
         </template>
       </UPageAccordion>
     </UPageSection>
