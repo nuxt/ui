@@ -3,6 +3,7 @@ const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  key: 'typicode-users',
   params: { q: searchTermDebounced },
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({

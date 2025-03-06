@@ -10,8 +10,10 @@ const links = computed(() => props.prop.tags?.filter((tag: any) => tag.name === 
 
 <template>
   <ProseUl v-if="links?.length">
-    <ProseLi v-for="link in links" :key="link.name">
-      <MDC :value="link.text ?? ''" class="my-1" />
+    <ProseLi v-for="(link, index) in links" :key="index">
+      <ProseA :href="link.text" target="_blank" class="my-1">
+        {{ link.text }}
+      </ProseA>
     </ProseLi>
   </ProseUl>
 </template>
