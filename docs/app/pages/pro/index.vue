@@ -26,14 +26,13 @@ useSeoMeta({
       }"
     >
       <template #title>
-        <MDC :value="page.hero.title" unwrap="p" />
+        <MDC :value="page.hero.title" tag="span" unwrap="p" />
       </template>
       <template #description>
-        <MDC :value="page.hero.description" unwrap="p" />
+        <MDC :value="page.hero.description" tag="span" unwrap="p" />
       </template>
-      <template #top>
-        <StarsBg />
-      </template>
+
+      <StarsBg />
 
       <Motion as-child :initial="{ height: 0 }" :animate="{ height: 'auto' }" :transition="{ delay: 0.2, duration: 1 }">
         <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
@@ -84,7 +83,7 @@ useSeoMeta({
     >
       <template #description>
         <Motion :initial="{ opacity: 0, transform: 'translateY(10px)' }" :in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }" :transition="{ delay: 0.2 }">
-          <MDC :value="page.testimonial.quote" unwrap="p" class="before:content-[open-quote] after:content-[close-quote] " />
+          <MDC :value="page.testimonial.quote" tag="span" unwrap="p" class="before:content-[open-quote] after:content-[close-quote] " />
         </Motion>
       </template>
       <Motion :initial="{ opacity: 0, transform: 'translateY(10px)' }" :in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }" :transition="{ delay: 0.3 }">
@@ -120,10 +119,10 @@ useSeoMeta({
       class="rounded-none border-t border-(--ui-border) bg-gradient-to-b from-(--ui-bg-muted) to-(--ui-bg)"
     >
       <template #title>
-        <MDC :value="page.mainSection.title" unwrap="p" />
+        <MDC :value="page.mainSection.title" tag="span" unwrap="p" />
       </template>
       <template #description>
-        <MDC :value="page.mainSection.description" unwrap="p" />
+        <MDC :value="page.mainSection.description" tag="span" unwrap="p" />
       </template>
     </UPageCTA>
     <UPageSection
@@ -198,6 +197,7 @@ useSeoMeta({
       orientation="horizontal"
     >
       <StarsBg />
+
       <video
         class="rounded-[var(--ui-radius)] z-10"
         preload="none"

@@ -15,7 +15,7 @@ useSeoMeta({
   ogImage: joinURL(url, '/og-image.png')
 })
 
-const { data: components } = await useAsyncData('components', () => {
+const { data: components } = await useAsyncData('all-components', () => {
   return queryCollection('content')
     .where('path', 'LIKE', '/components/%')
     .where('extension', '=', 'md')
@@ -31,17 +31,13 @@ const componentsPerCategory = computed(() => {
 })
 
 const categories = [{
-  id: 'layout',
-  title: 'Layout',
-  description: 'Structural components for organizing content, including containers, grids, dividers, and responsive layout systems.'
+  id: 'element',
+  title: 'Element',
+  description: 'Core UI building blocks like buttons, badges, icons, avatars, and other fundamental interface elements.'
 }, {
   id: 'form',
   title: 'Form',
   description: 'Interactive form elements including inputs, selects, checkboxes, radio buttons, and advanced form validation components.'
-}, {
-  id: 'element',
-  title: 'Element',
-  description: 'Core UI building blocks like buttons, badges, icons, avatars, and other fundamental interface elements.'
 }, {
   id: 'data',
   title: 'Data',
@@ -54,6 +50,10 @@ const categories = [{
   id: 'overlay',
   title: 'Overlay',
   description: 'Floating UI elements like modals, dialogs, tooltips, popovers, and other components that overlay the main content.'
+}, {
+  id: 'layout',
+  title: 'Layout',
+  description: 'Structural components for organizing content, including containers, grids, dividers, and responsive layout systems.'
 }]
 
 const { y } = useWindowScroll()
@@ -81,7 +81,10 @@ onMounted(() => {
       orientation="vertical"
       :ui="{ title: 'text-balance', container: 'relative' }"
     >
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <template #top>
+        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+      </template>
+
       <template #headline>
         <UButton
           to="https://tailwindcss.com"
@@ -96,6 +99,7 @@ onMounted(() => {
       <template #title>
         Build beautiful UI with <span class="text-(--ui-primary)">{{ components!.length }}+</span> powerful components
       </template>
+
       <template #links>
         <UButton
           to="/getting-started/installation/vue"
@@ -114,10 +118,11 @@ onMounted(() => {
           size="xl"
         />
       </template>
-      <template #top>
-        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+
+      <div class="absolute inset-y-0 inset-x-4 sm:inset-x-6 lg:inset-x-8">
         <StarsBg />
-      </template>
+      </div>
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
     <div v-for="category in categories" :key="category.id">

@@ -70,14 +70,12 @@ onMounted(() => {
 
 <template>
   <UMain>
-    <UPageHero headline="License Activation" :title="title" :description="description" :ui="{ container: 'relative' }">
-      <template #top>
-        <StarsBg />
-      </template>
+    <UPageHero headline="License Activation" :title="title" :description="description" :ui="{ container: 'relative overflow-hidden', wrapper: 'lg:px-12', description: 'text-pretty' }">
+      <StarsBg />
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
-      <div class="lg:border-y border-(--ui-border)">
-        <UCard class="lg:w-1/2 m-auto lg:rounded-none overflow-hidden" variant="outline" :ui="{ footer: 'bg-(--ui-bg-muted)' }">
+      <div class="px-4 py-10 lg:border border-(--ui-border) bg-(--ui-bg)">
+        <div class="max-w-xl mx-auto">
           <UForm
             :schema="schema"
             :validate-on="['blur']"
@@ -107,12 +105,13 @@ onMounted(() => {
             </UAlert>
             <UAlert v-else-if="errorMessage" color="error" variant="subtle" :title="errorMessage" />
           </UForm>
-          <template #footer>
-            <p class="text-sm text-center text-neutral-500 dark:text-neutral-400">
-              If you purchased a license with multiple seats, activate the license key for each member of your team.
-            </p>
-          </template>
-        </UCard>
+
+          <ProseHr />
+
+          <ProseNote>
+            If you purchased a license with multiple seats, activate the license key for each member of your team.
+          </ProseNote>
+        </div>
       </div>
     </UPageHero>
   </UMain>
