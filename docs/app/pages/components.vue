@@ -119,9 +119,7 @@ onMounted(() => {
         />
       </template>
 
-      <div class="absolute inset-y-0 inset-x-4 sm:inset-x-6 lg:inset-x-8">
-        <StarsBg />
-      </div>
+      <StarsBg />
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
