@@ -30,8 +30,12 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
   <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0" aria-label="Nuxt UI">
-        <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
-        <Logo class="w-auto h-6 shrink-0 ui-only" />
+        <Logo v-if="route.path === '/'" class="w-auto h-6 shrink-0" />
+        <LogoPro v-else-if="route.path.startsWith('/pro')" class="w-auto h-6 shrink-0" />
+        <template v-else>
+          <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
+          <Logo class="w-auto h-6 shrink-0 ui-only" />
+        </template>
       </NuxtLink>
 
       <UDropdownMenu
