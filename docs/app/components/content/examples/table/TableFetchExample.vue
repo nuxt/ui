@@ -13,6 +13,7 @@ type User = {
 }
 
 const { data, status } = await useFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
+  key: 'table-users',
   transform: (data) => {
     return data?.map(user => ({
       ...user,
