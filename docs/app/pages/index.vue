@@ -31,7 +31,10 @@ const { data: module } = await useFetch<{
   contributors: {
     username: string
   }[]
-}>('https://api.nuxt.com/modules/ui')
+}>('https://api.nuxt.com/modules/ui', {
+  key: 'stats',
+  transform: ({ stats, contributors }) => ({ stats, contributors })
+})
 
 const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 
