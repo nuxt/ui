@@ -21,6 +21,7 @@ export interface FormProps<T extends object> {
   class?: any
   transform?: boolean
   onSubmit?: ((event: FormSubmitEvent<T>) => void | Promise<void>) | (() => void | Promise<void>)
+  ui?: Partial<typeof form.slots>
 }
 
 export interface FormEmits<T extends object> {
@@ -30,6 +31,7 @@ export interface FormEmits<T extends object> {
 
 export interface FormSlots {
   default(props?: {}): any
+  error(props?: { errors: FormError[] }): any
 }
 </script>
 
@@ -50,6 +52,8 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
 
 const emits = defineEmits<FormEmits<T>>()
 defineSlots<FormSlots>()
+
+const ui = computed(() => form())
 
 const formId = props.id ?? useId() as string
 
@@ -220,6 +224,8 @@ provide(formOptionsInjectionKey, computed(() => ({
   validateOnInputDelay: props.validateOnInputDelay
 })))
 
+const globalErrors = computed(() => errors.value?.filter(e => !e.name))
+
 defineExpose<Form<T>>({
   validate: _validate,
   errors,
@@ -266,9 +272,15 @@ defineExpose<Form<T>>({
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="form({ class: props.class })"
+    :class="ui.base({ class: [props.class, props.ui?.base] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot />
+
+    <p v-if="globalErrors?.length" :class="ui.error({ class: props.ui?.error })">
+      <slot :errors="globalErrors" name="error">
+        {{ globalErrors?.[0]?.message }}
+      </slot>
+    </p>
   </component>
 </template>
