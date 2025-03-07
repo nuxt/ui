@@ -151,6 +151,7 @@ onMounted(() => {
             :description="component.description"
             :to="component.path"
             :ui="{ wrapper: 'order-last', container: 'lg:flex' }"
+            class="group"
           >
             <template #title>
               <div class="flex items-center gap-0.5">
@@ -159,7 +160,7 @@ onMounted(() => {
               </div>
             </template>
 
-            <div class="group rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
+            <div class="rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
               <UColorModeImage
                 :light="`${component.path.replace('/components/', '/components/light/')}.png`"
                 :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
