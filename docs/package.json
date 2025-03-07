@@ -18,7 +18,7 @@
     "@vueuse/nuxt": "^12.8.2",
     "joi": "^17.13.3",
     "motion": "^12.4.10",
-    "motion-v": "0.11.0",
+    "motion-v": "0.11.1",
     "nuxt": "^3.15.4",
     "nuxt-component-meta": "^0.10.0",
     "nuxt-llms": "^0.1.0",
@@ -32,6 +32,6 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "wrangler": "^3.113.0"
+    "wrangler": "^3.114.0"
   }
 }
