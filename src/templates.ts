@@ -50,7 +50,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         }
 
         // For local development, import directly from theme
-        if (process.env.DEV) {
+        if (process.argv.at(-1) === '--uiDev') {
           const templatePath = fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url))
           return [
             `import template from ${JSON.stringify(templatePath)}`,
