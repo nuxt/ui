@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.0.0-beta.3](https://github.com/nuxt/ui/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2025-03-07)
+
+### Features
+
+* **Button:** handle `active` state ([bd2d484](https://github.com/nuxt/ui/commit/bd2d4848d246a3d5930f8059913f5a1a0abe29fd)), closes [#3417](https://github.com/nuxt/ui/issues/3417)
+* **Table:** add `loading` slot ([99e531d](https://github.com/nuxt/ui/commit/99e531d8dfb7954322b7ab7feda3d8814c6d8d02)), closes [#3444](https://github.com/nuxt/ui/issues/3444)
+
+### Bug Fixes
+
+* **InputMenu/SelectMenu:** proxy `required` in root props ([60b7e2d](https://github.com/nuxt/ui/commit/60b7e2d69e80afa7e221855dcec46479d0ca5c6c))
+* **InputMenu:** wrong `required` in multiple mode ([01fa230](https://github.com/nuxt/ui/commit/01fa230eae4b6623c5fd71cc218d114d9f6f0f25)), closes [#2741](https://github.com/nuxt/ui/issues/2741)
+* **Pagination:** add missing slots ([a47c5ff](https://github.com/nuxt/ui/commit/a47c5ff46616eafee3158cb9801183965f5f9874)), closes [#3441](https://github.com/nuxt/ui/issues/3441)
+* **Pagination:** wrong next link ([e823022](https://github.com/nuxt/ui/commit/e823022b19bb172d2e5fabb9144b4a4286a25a5f)), closes [#3008](https://github.com/nuxt/ui/issues/3008)
+* **templates:** prevent overriding existing colors ([ccbd89c](https://github.com/nuxt/ui/commit/ccbd89c908fe8af54c7d723dd12da5b7f3906c8f)), closes [#3426](https://github.com/nuxt/ui/issues/3426)
+
 ## [3.0.0-beta.2](https://github.com/nuxt/ui/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2025-02-28)
 
 ### Bug Fixes
