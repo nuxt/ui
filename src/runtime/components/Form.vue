@@ -53,6 +53,7 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
 const emits = defineEmits<FormEmits<T>>()
 defineSlots<FormSlots>()
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => form())
 
 const formId = props.id ?? useId() as string
@@ -125,7 +126,7 @@ const blurredFields = new Set<keyof T>()
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
     ...err,
-    id: inputs.value[err.name]?.id
+    id: err?.name ? inputs.value[err.name]?.id : undefined
   }))
 }
 
@@ -163,12 +164,12 @@ async function _validate(opts: { name?: keyof T | (keyof T)[], silent?: boolean,
   if (names) {
     const otherErrors = errors.value.filter(error => !names.some((name) => {
       const pattern = inputs.value?.[name]?.pattern
-      return name === error.name || (pattern && error.name.match(pattern))
+      return name === error.name || (pattern && error.name?.match(pattern))
     }))
 
     const pathErrors = (await getErrors()).filter(error => names.some((name) => {
       const pattern = inputs.value?.[name]?.pattern
-      return name === error.name || (pattern && error.name.match(pattern))
+      return name === error.name || (pattern && error.name?.match(pattern))
     }))
 
     errors.value = otherErrors.concat(pathErrors)
