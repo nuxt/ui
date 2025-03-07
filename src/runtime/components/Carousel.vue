@@ -11,7 +11,6 @@ import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/carousel'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
 import type { PartialString } from '../types/utils'
@@ -36,6 +35,7 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
   /**
    * The icon displayed in the prev button.
    * @defaultValue appConfig.ui.icons.arrowLeft
+   * @IconifyIcon
    */
   prevIcon?: string
   /**
@@ -46,6 +46,7 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
   /**
    * The icon displayed in the next button.
    * @defaultValue appConfig.ui.icons.arrowRight
+   * @IconifyIcon
    */
   nextIcon?: string
   /**
@@ -58,6 +59,10 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
    * @defaultValue false
    */
   dots?: boolean
+  /**
+   * The orientation of the carousel.
+   * @defaultValue 'horizontal'
+   */
   orientation?: CarouselVariants['orientation']
   items?: T[]
   /**
@@ -97,8 +102,6 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
 export type CarouselSlots<T> = {
   default(props: { item: T, index: number }): any
 }
-
-extendDevtoolsMeta({ example: 'CarouselExample' })
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue">

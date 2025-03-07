@@ -6,6 +6,7 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-number'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
+import type { PartialString } from '../types/utils'
 
 const appConfigInputNumber = _appConfig as AppConfig & { ui: { inputNumber: Partial<typeof theme> } }
 
@@ -19,10 +20,8 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @defaultValue 'div'
    */
   as?: any
-  class?: any
   /** The placeholder text when the input is empty. */
   placeholder?: string
-  ui?: Partial<typeof inputNumber.slots>
   color?: InputNumberVariants['color']
   variant?: InputNumberVariants['variant']
   size?: InputNumberVariants['size']
@@ -41,6 +40,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.ui.icons.plus
+   * @IconifyIcon
    */
   incrementIcon?: string
   /**
@@ -51,6 +51,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.ui.icons.minus
+   * @IconifyIcon
    */
   decrementIcon?: string
   autofocus?: boolean
@@ -60,6 +61,8 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @defaultValue UApp.locale.code
    */
   locale?: string
+  class?: any
+  ui?: PartialString<typeof inputNumber.slots>
 }
 
 export interface InputNumberEmits {

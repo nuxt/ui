@@ -1,5 +1,6 @@
 ---
 description: A wrapper around <NuxtLink> with extra props.
+category: navigation
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -66,7 +67,7 @@ props:
   raw: true
   to: /components/link
   activeClass: 'font-bold'
-  inactiveClass: 'text-[var(--ui-text-muted)]'
+  inactiveClass: 'text-(--ui-text-muted)'
 slots:
   default: Link
 ---

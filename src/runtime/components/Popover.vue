@@ -4,7 +4,6 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/popover'
 import { tv } from '../utils/tv'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfigPopover = _appConfig as AppConfig & { ui: { popover: Partial<typeof theme> } }
 
@@ -46,8 +45,6 @@ export interface PopoverSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'PopoverExample' })
 </script>
 
 <script setup lang="ts">

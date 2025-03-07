@@ -4,7 +4,6 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form-field'
 import { tv } from '../utils/tv'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 const appConfigFormField = _appConfig as AppConfig & { ui: { formField: Partial<typeof theme> } }
 
@@ -27,6 +26,9 @@ export interface FormFieldProps {
   help?: string
   error?: string | boolean
   hint?: string
+  /**
+   * @defaultValue 'md'
+   */
   size?: FormFieldVariants['size']
   required?: boolean
   eagerValidation?: boolean
@@ -43,8 +45,6 @@ export interface FormFieldSlots {
   error(props: { error?: string | boolean }): any
   default(props: { error?: string | boolean }): any
 }
-
-extendDevtoolsMeta({ example: 'FormFieldExample', defaultProps: { label: 'Label' } })
 </script>
 
 <script setup lang="ts">

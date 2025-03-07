@@ -90,8 +90,8 @@ export interface LinkSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { isEqual, diff } from 'ohash'
+import { computed, getCurrentInstance } from 'vue'
+import { isEqual, diff } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
@@ -109,7 +109,22 @@ const props = withDefaults(defineProps<LinkProps>(), {
 })
 defineSlots<LinkSlots>()
 
-const route = useRoute()
+// Check if vue-router is available by checking for the injection key
+const hasRouter = computed(() => {
+  const app = getCurrentInstance()?.appContext.app
+  return !!(app?.config?.globalProperties?.$router)
+})
+
+// Only try to get route if router exists
+const route = computed(() => {
+  if (!hasRouter.value) return null
+  try {
+    return useRoute()
+  } catch {
+    return null
+  }
+})
+
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'raw', 'class'))
 
 const ui = computed(() => tv({
@@ -125,31 +140,38 @@ const ui = computed(() => tv({
 function isPartiallyEqual(item1: any, item2: any) {
   const diffedKeys = diff(item1, item2).reduce((filtered, q) => {
     if (q.type === 'added') {
-      filtered.push(q.key)
+      filtered.add(q.key)
     }
     return filtered
-  }, [] as string[])
-  return isEqual(item1, item2, { excludeKeys: key => diffedKeys.includes(key) })
+  }, new Set<string>())
+
+  const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)))
+  const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)))
+
+  return isEqual(item1Filtered, item2Filtered)
 }
 
-const isExternal = computed(() => typeof props.to === 'string' && hasProtocol(props.to, { acceptRelative: true }))
+const isExternal = computed(() => {
+  if (!props.to) return false
+  return typeof props.to === 'string' && hasProtocol(props.to, { acceptRelative: true })
+})
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
   if (props.active !== undefined) {
     return props.active
   }
 
-  if (!props.to) {
+  if (!props.to || !route.value) {
     return false
   }
 
   if (props.exactQuery === 'partial') {
-    if (!isPartiallyEqual(linkRoute.query, route.query)) return false
+    if (!isPartiallyEqual(linkRoute.query, route.value.query)) return false
   } else if (props.exactQuery === true) {
-    if (!isEqual(linkRoute.query, route.query)) return false
+    if (!isEqual(linkRoute.query, route.value.query)) return false
   }
 
-  if (props.exactHash && linkRoute.hash !== route.hash) {
+  if (props.exactHash && linkRoute.hash !== route.value.hash) {
     return false
   }
 
@@ -164,7 +186,7 @@ function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
   return false
 }
 
-function resolveLinkClass({ route, isActive, isExactActive }: any) {
+function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
   const active = isLinkActive({ route, isActive, isExactActive })
 
   if (props.raw) {
@@ -176,7 +198,39 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
 </script>
 
 <template>
-  <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to || '#'" custom>
+  <template v-if="hasRouter && !isExternal">
+    <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to || '#'" custom>
+      <template v-if="custom">
+        <slot
+          v-bind="{
+            ...$attrs,
+            as,
+            type,
+            disabled,
+            href: to ? href : undefined,
+            navigate,
+            active: isLinkActive({ route: linkRoute, isActive, isExactActive })
+          }"
+        />
+      </template>
+      <ULinkBase
+        v-else
+        v-bind="{
+          ...$attrs,
+          as,
+          type,
+          disabled,
+          href: to ? href : undefined,
+          navigate
+        }"
+        :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
+      >
+        <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
+      </ULinkBase>
+    </RouterLink>
+  </template>
+
+  <template v-else>
     <template v-if="custom">
       <slot
         v-bind="{
@@ -184,9 +238,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
           as,
           type,
           disabled,
-          href: to ? (isExternal ? to as string : href) : undefined,
-          navigate,
-          active: isLinkActive({ route: linkRoute, isActive, isExactActive })
+          href: to,
+          target: isExternal ? '_blank' : undefined,
+          active: false
         }"
       />
     </template>
@@ -197,12 +251,13 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
         as,
         type,
         disabled,
-        href: to ? (isExternal ? to as string : href) : undefined,
-        navigate
+        href: (to as string),
+        target: isExternal ? '_blank' : undefined
       }"
-      :class="resolveLinkClass({ route: linkRoute, isActive: isActive, isExactActive: isExactActive })"
+      :is-external="isExternal"
+      :class="resolveLinkClass()"
     >
-      <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
+      <slot :active="false" />
     </ULinkBase>
-  </RouterLink>
+  </template>
 </template>

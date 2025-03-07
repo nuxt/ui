@@ -42,7 +42,8 @@ const radius = computed({
 
 const modes = [
   { label: 'light', icon: appConfig.ui.icons.light },
-  { label: 'dark', icon: appConfig.ui.icons.dark }
+  { label: 'dark', icon: appConfig.ui.icons.dark },
+  { label: 'system', icon: appConfig.ui.icons.system }
 ]
 const mode = computed({
   get() {
@@ -68,7 +69,7 @@ function setBlackAsPrimary(value: boolean) {
         :variant="open ? 'soft' : 'ghost'"
         square
         aria-label="Color picker"
-        :ui="{ leadingIcon: 'text-[var(--ui-primary)]' }"
+        :ui="{ leadingIcon: 'text-(--ui-primary)' }"
       />
     </template>
 
@@ -139,12 +140,12 @@ function setBlackAsPrimary(value: boolean) {
           Theme
         </legend>
 
-        <div class="flex gap-1 -mx-2">
+        <div class="grid grid-cols-3 gap-1 -mx-2">
           <ThemePickerButton
             v-for="m in modes"
             :key="m.label"
             v-bind="m"
-            :selected="mode === m.label"
+            :selected="colorMode.preference === m.label"
             @click="mode = m.label"
           />
         </div>

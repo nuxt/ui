@@ -4,7 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex gap-1.5 [&>div]:min-w-0',
     list: 'isolate min-w-0',
-    label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 text-[var(--ui-text-highlighted)] px-2.5 py-1.5',
+    label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 text-(--ui-text-highlighted) px-2.5 py-1.5',
     item: 'min-w-0',
     link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 size-5',
@@ -15,31 +15,31 @@ export default (options: Required<ModuleOptions>) => ({
     linkTrailingBadgeSize: 'sm',
     linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',
     linkLabel: 'truncate',
-    linkLabelExternalIcon: 'inline-block size-3 align-top text-[var(--ui-text-dimmed)]',
+    linkLabelExternalIcon: 'inline-block size-3 align-top text-(--ui-text-dimmed)',
     childList: '',
     childItem: '',
     childLink: 'group size-full px-3 py-2 rounded-[calc(var(--ui-radius)*1.5)] flex items-start gap-2 text-start',
     childLinkWrapper: 'flex flex-col items-start',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'font-semibold text-sm relative inline-flex',
-    childLinkLabelExternalIcon: 'inline-block size-3 align-top text-[var(--ui-text-dimmed)]',
-    childLinkDescription: 'text-sm text-[var(--ui-text-muted)]',
-    separator: 'px-2 h-px bg-[var(--ui-border)]',
+    childLinkLabelExternalIcon: 'inline-block size-3 align-top text-(--ui-text-dimmed)',
+    childLinkDescription: 'text-sm text-(--ui-text-muted)',
+    separator: 'px-2 h-px bg-(--ui-border)',
     viewportWrapper: 'absolute top-full left-0 flex w-full',
-    viewport: 'relative overflow-hidden bg-[var(--ui-bg)] shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-[var(--ui-border)] h-[var(--reka-navigation-menu-viewport-height)] w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
+    viewport: 'relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
     content: 'absolute top-0 left-0 w-full',
-    indicator: 'absolute data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-[1] w-[var(--reka-navigation-menu-indicator-size)] translate-x-[var(--reka-navigation-menu-indicator-position)] flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200',
-    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-[var(--ui-border)] bg-[var(--ui-bg)] z-[1] rounded-[calc(var(--ui-radius)/2)]'
+    indicator: 'absolute data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-[1] w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200',
+    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-(--ui-border) bg-(--ui-bg) z-[1] rounded-[calc(var(--ui-radius)/2)]'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `focus-visible:before:ring-[var(--ui-${color})]`,
-        childLink: `focus-visible:outline-[var(--ui-${color})]`
+        link: `focus-visible:before:ring-(--ui-${color})`,
+        childLink: `focus-visible:outline-(--ui-${color})`
       }])),
       neutral: {
-        link: 'focus-visible:before:ring-[var(--ui-border-inverted)]',
-        childLink: 'focus-visible:outline-[var(--ui-border-inverted)]'
+        link: 'focus-visible:before:ring-(--ui-border-inverted)',
+        childLink: 'focus-visible:outline-(--ui-border-inverted)'
       }
     },
     highlightColor: {
@@ -70,20 +70,20 @@ export default (options: Required<ModuleOptions>) => ({
         content: 'data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]'
       },
       vertical: {
-        viewport: 'sm:w-[var(--reka-navigation-menu-viewport-width)] left-[var(--reka-navigation-menu-viewport-left)]',
+        viewport: 'sm:w-(--reka-navigation-menu-viewport-width) left-(--reka-navigation-menu-viewport-left)',
         content: ''
       }
     },
     active: {
       true: {
-        childLink: 'bg-[var(--ui-bg-elevated)] text-[var(--ui-text-highlighted)]',
-        childLinkIcon: 'text-[var(--ui-text)]'
+        childLink: 'bg-(--ui-bg-elevated) text-(--ui-text-highlighted)',
+        childLinkIcon: 'text-(--ui-text)'
       },
       false: {
-        link: 'text-[var(--ui-text-muted)]',
-        linkLeadingIcon: 'text-[var(--ui-text-dimmed)]',
-        childLink: ['hover:bg-[var(--ui-bg-elevated)]/50 text-[var(--ui-text)] hover:text-[var(--ui-text-highlighted)]', options.theme.transitions && 'transition-colors'],
-        childLinkIcon: ['text-[var(--ui-text-dimmed)] group-hover:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
+        link: 'text-(--ui-text-muted)',
+        linkLeadingIcon: 'text-(--ui-text-dimmed)',
+        childLink: ['hover:bg-(--ui-bg-elevated)/50 text-(--ui-text) hover:text-(--ui-text-highlighted)', options.theme.transitions && 'transition-colors'],
+        childLinkIcon: ['text-(--ui-text-dimmed) group-hover:text-(--ui-text)', options.theme.transitions && 'transition-colors']
       }
     },
     disabled: {
@@ -132,8 +132,8 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     variant: 'pill',
     class: {
-      link: ['hover:text-[var(--ui-text-highlighted)] hover:before:bg-[var(--ui-bg-elevated)]/50', options.theme.transitions && 'transition-colors before:transition-colors'],
-      linkLeadingIcon: ['group-hover:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
+      link: ['hover:text-(--ui-text-highlighted) hover:before:bg-(--ui-bg-elevated)/50', options.theme.transitions && 'transition-colors before:transition-colors'],
+      linkLeadingIcon: ['group-hover:text-(--ui-text)', options.theme.transitions && 'transition-colors']
     }
   }, {
     disabled: false,
@@ -141,8 +141,8 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:text-[var(--ui-text-highlighted)]',
-      linkLeadingIcon: 'group-data-[state=open]:text-[var(--ui-text)]'
+      link: 'data-[state=open]:text-(--ui-text-highlighted)',
+      linkLeadingIcon: 'group-data-[state=open]:text-(--ui-text)'
     }
   }, {
     disabled: false,
@@ -150,7 +150,7 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50'
+      link: 'data-[state=open]:before:bg-(--ui-bg-elevated)/50'
     }
   }, {
     disabled: false,
@@ -159,45 +159,45 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:before:bg-[var(--ui-bg-elevated)]/50'
+      link: 'data-[state=open]:before:bg-(--ui-bg-elevated)/50'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'pill',
     active: true,
     class: {
-      link: `text-[var(--ui-${color})]`,
-      linkLeadingIcon: `text-[var(--ui-${color})] group-data-[state=open]:text-[var(--ui-${color})]`
+      link: `text-(--ui-${color})`,
+      linkLeadingIcon: `text-(--ui-${color}) group-data-[state=open]:text-(--ui-${color})`
     }
   })), {
     color: 'neutral',
     variant: 'pill',
     active: true,
     class: {
-      link: 'text-[var(--ui-text-highlighted)]',
-      linkLeadingIcon: 'text-[var(--ui-text-highlighted)] group-data-[state=open]:text-[var(--ui-text-highlighted)]'
+      link: 'text-(--ui-text-highlighted)',
+      linkLeadingIcon: 'text-(--ui-text-highlighted) group-data-[state=open]:text-(--ui-text-highlighted)'
     }
   }, {
     variant: 'pill',
     active: true,
     highlight: false,
     class: {
-      link: 'before:bg-[var(--ui-bg-elevated)]'
+      link: 'before:bg-(--ui-bg-elevated)'
     }
   }, {
     variant: 'pill',
     active: true,
     highlight: true,
     class: {
-      link: ['hover:before:bg-[var(--ui-bg-elevated)]/50', options.theme.transitions && 'before:transition-colors']
+      link: ['hover:before:bg-(--ui-bg-elevated)/50', options.theme.transitions && 'before:transition-colors']
     }
   }, {
     disabled: false,
     active: false,
     variant: 'link',
     class: {
-      link: ['hover:text-[var(--ui-text-highlighted)]', options.theme.transitions && 'transition-colors'],
-      linkLeadingIcon: ['group-hover:text-[var(--ui-text)]', options.theme.transitions && 'transition-colors']
+      link: ['hover:text-(--ui-text-highlighted)', options.theme.transitions && 'transition-colors'],
+      linkLeadingIcon: ['group-hover:text-(--ui-text)', options.theme.transitions && 'transition-colors']
     }
   }, {
     disabled: false,
@@ -205,24 +205,24 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'link',
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:text-[var(--ui-text-highlighted)]',
-      linkLeadingIcon: 'group-data-[state=open]:text-[var(--ui-text)]'
+      link: 'data-[state=open]:text-(--ui-text-highlighted)',
+      linkLeadingIcon: 'group-data-[state=open]:text-(--ui-text)'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
     active: true,
     class: {
-      link: `text-[var(--ui-${color})]`,
-      linkLeadingIcon: `text-[var(--ui-${color})] group-data-[state=open]:text-[var(--ui-${color})]`
+      link: `text-(--ui-${color})`,
+      linkLeadingIcon: `text-(--ui-${color}) group-data-[state=open]:text-(--ui-${color})`
     }
   })), {
     color: 'neutral',
     variant: 'link',
     active: true,
     class: {
-      link: 'text-[var(--ui-text-highlighted)]',
-      linkLeadingIcon: 'text-[var(--ui-text-highlighted)] group-data-[state=open]:text-[var(--ui-text-highlighted)]'
+      link: 'text-(--ui-text-highlighted)',
+      linkLeadingIcon: 'text-(--ui-text-highlighted) group-data-[state=open]:text-(--ui-text-highlighted)'
     }
   }, ...(options.theme.colors || []).map((highlightColor: string) => ({
     highlightColor,
@@ -230,7 +230,7 @@ export default (options: Required<ModuleOptions>) => ({
     level: true,
     active: true,
     class: {
-      link: `after:bg-[var(--ui-${highlightColor})]`
+      link: `after:bg-(--ui-${highlightColor})`
     }
   })), {
     highlightColor: 'neutral',
@@ -238,13 +238,13 @@ export default (options: Required<ModuleOptions>) => ({
     level: true,
     active: true,
     class: {
-      link: 'after:bg-[var(--ui-bg-inverted)]'
+      link: 'after:bg-(--ui-bg-inverted)'
     }
   }, {
     orientation: 'vertical',
     collapsed: false,
     class: {
-      childList: 'ms-5 border-s border-[var(--ui-border)]',
+      childList: 'ms-5 border-s border-(--ui-border)',
       childItem: 'ps-1.5 -ms-px'
     }
   }, {

@@ -5,7 +5,6 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
@@ -16,6 +15,9 @@ const select = tv({ extend: tv(theme), ...(appConfigSelect.ui?.select || {}) })
 
 export interface SelectItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   chip?: ChipProps
@@ -34,17 +36,28 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: SelectVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: SelectVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: SelectVariants['size']
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**
@@ -102,8 +115,6 @@ export interface SelectSlots<T, M extends boolean> {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 }
-
-extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue | boolean> = MaybeArrayOfArray<SelectItem | AcceptableValue | boolean>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
@@ -119,6 +130,8 @@ import { get, compare } from '../utils'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<SelectProps<T, I, V, M>>(), {
   valueKey: 'value' as never,
@@ -197,7 +210,7 @@ function onUpdateOpen(value: boolean) {
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <SelectTrigger :id="id" :class="ui.base({ class: [props.class, props.ui?.base] })" v-bind="ariaAttrs">
+    <SelectTrigger :id="id" :class="ui.base({ class: [props.class, props.ui?.base] })" v-bind="{ ...$attrs, ...ariaAttrs }">
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as M extends true ? AcceptableValue[] : AcceptableValue)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />

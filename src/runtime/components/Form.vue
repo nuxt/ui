@@ -2,7 +2,6 @@
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
 import type { DeepReadonly } from 'vue'
@@ -20,6 +19,7 @@ export interface FormProps<T extends object> {
   disabled?: boolean
   validateOnInputDelay?: number
   class?: any
+  transform?: boolean
   onSubmit?: ((event: FormSubmitEvent<T>) => void | Promise<void>) | (() => void | Promise<void>)
 }
 
@@ -31,8 +31,6 @@ export interface FormEmits<T extends object> {
 export interface FormSlots {
   default(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'FormExample' })
 </script>
 
 <script lang="ts" setup generic="T extends object">
@@ -46,8 +44,10 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
-  validateOnInputDelay: 300
+  validateOnInputDelay: 300,
+  transform: true
 })
+
 const emits = defineEmits<FormEmits<T>>()
 defineSlots<FormSlots>()
 
@@ -195,7 +195,7 @@ async function onSubmitWrapper(payload: Event) {
   const event = payload as FormSubmitEvent<any>
 
   try {
-    event.data = await _validate({ nested: true, transform: true })
+    event.data = await _validate({ nested: true, transform: props.transform })
     await props.onSubmit?.(event)
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
@@ -208,9 +208,9 @@ async function onSubmitWrapper(payload: Event) {
       children: error.children
     }
     emits('error', errorEvent)
+  } finally {
+    loading.value = false
   }
-
-  loading.value = false
 }
 
 const disabled = computed(() => props.disabled || loading.value)

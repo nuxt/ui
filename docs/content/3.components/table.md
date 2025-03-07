@@ -1,5 +1,6 @@
 ---
 description: A responsive table element to display data in rows and columns.
+category: data
 links:
   - label: TanStack Table
     avatar:
@@ -74,13 +75,13 @@ props:
 
 Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/latest/docs/api/core/column-def) objects with properties like:
 
-- `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-[var(--ui-text-muted)]"}
-- `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-[var(--ui-text-muted)]"}
-- `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-[var(--ui-text-muted)]"}
-- `meta`: [Extra properties for the column.]{class="text-[var(--ui-text-muted)]"}
+- `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-(--ui-text-muted)"}
+- `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-(--ui-text-muted)"}
+- `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-(--ui-text-muted)"}
+- `meta`: [Extra properties for the column.]{class="text-(--ui-text-muted)"}
   - `class`:
-    - `td`: [The classes to apply to the `td` element.]{class="text-[var(--ui-text-muted)]"}
-    - `th`: [The classes to apply to the `th` element.]{class="text-[var(--ui-text-muted)]"}
+    - `td`: [The classes to apply to the `td` element.]{class="text-(--ui-text-muted)"}
+    - `th`: [The classes to apply to the `th` element.]{class="text-(--ui-text-muted)"}
 
 In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
@@ -263,13 +264,33 @@ collapse: true
 name: 'table-row-selection-example'
 highlights:
   - 55
-  - 70
+  - 72
 class: '!p-0'
 ---
 ::
 
 ::tip
 You can use the `row-selection` prop to control the selection state of the rows (can be binded with `v-model`).
+::
+
+### With `@select` event
+
+You can add a `@select` listener to make rows clickable. The handler function receives the `TableRow` instance as the first argument and an optional `Event` as the second argument.
+
+::note
+You can use this to navigate to a page, open a modal or even to select the row manually.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-selection-event-example'
+highlights:
+  - 123
+  - 130
+class: '!p-0'
+---
 ::
 
 ### With column sorting

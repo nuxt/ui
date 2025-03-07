@@ -1,46 +1,99 @@
 export default {
   slots: {
-    overlay: 'fixed inset-0 bg-[var(--ui-bg-elevated)]/75',
-    content: 'fixed bg-[var(--ui-bg)] ring ring-[var(--ui-border)] flex focus:outline-none',
-    handle: 'shrink-0 rounded-full bg-[var(--ui-bg-accented)]',
+    overlay: 'fixed inset-0 bg-(--ui-bg-elevated)/75',
+    content: 'fixed bg-(--ui-bg) ring ring-(--ui-border) flex focus:outline-none',
+    handle: 'shrink-0 rounded-full bg-(--ui-bg-accented)',
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: '',
-    title: 'text-[var(--ui-text-highlighted)] font-semibold',
-    description: 'mt-1 text-[var(--ui-text-muted)] text-sm',
+    title: 'text-(--ui-text-highlighted) font-semibold',
+    description: 'mt-1 text-(--ui-text-muted) text-sm',
     body: 'flex-1',
     footer: 'flex flex-col gap-1.5'
   },
   variants: {
     direction: {
       top: {
-        content: 'top-0 mb-24 flex-col-reverse rounded-b-[calc(var(--ui-radius)*2)]',
+        content: 'mb-24 flex-col-reverse',
         handle: 'mb-4'
       },
       right: {
-        content: 'right-4 flex-row',
+        content: 'flex-row',
         handle: 'ml-4'
       },
       bottom: {
-        content: 'bottom-0 mt-24 flex-col rounded-t-[calc(var(--ui-radius)*2)]',
+        content: 'mt-24 flex-col',
         handle: 'mt-4'
       },
       left: {
-        content: 'left-4 flex-row-reverse',
+        content: 'flex-row-reverse',
         handle: 'mr-4'
+      }
+    },
+    inset: {
+      true: {
+        content: 'rounded-[calc(var(--ui-radius)*2)] after:hidden'
       }
     }
   },
   compoundVariants: [{
     direction: ['top', 'bottom'],
     class: {
-      content: 'inset-x-0 h-auto max-h-[96%]',
+      content: 'h-auto max-h-[96%]',
       handle: 'w-12 h-1.5 mx-auto'
     }
   }, {
     direction: ['right', 'left'],
     class: {
-      content: 'inset-y-4 w-auto max-w-[calc(100%-2rem)] rounded-[calc(var(--ui-radius)*2)] after:hidden',
+      content: 'w-auto max-w-[calc(100%-2rem)]',
       handle: 'h-12 w-1.5 mt-auto mb-auto'
+    }
+  }, {
+    direction: 'top',
+    inset: true,
+    class: {
+      content: 'inset-x-4 top-4'
+    }
+  }, {
+    direction: 'top',
+    inset: false,
+    class: {
+      content: 'inset-x-0 top-0 rounded-b-[calc(var(--ui-radius)*2)]'
+    }
+  }, {
+    direction: 'bottom',
+    inset: true,
+    class: {
+      content: 'inset-x-4 bottom-4'
+    }
+  }, {
+    direction: 'bottom',
+    inset: false,
+    class: {
+      content: 'inset-x-0 bottom-0 rounded-t-[calc(var(--ui-radius)*2)]'
+    }
+  }, {
+    direction: 'left',
+    inset: true,
+    class: {
+      content: 'inset-y-4 left-4'
+    }
+  }, {
+    direction: 'left',
+    inset: false,
+    class: {
+      content: 'inset-y-0 left-0 rounded-r-[calc(var(--ui-radius)*2)]'
+    }
+  }, {
+    direction: 'right',
+    inset: true,
+    class: {
+      content: 'inset-y-4 right-4'
+    }
+  }, {
+    direction: 'right',
+    inset: false,
+    class: {
+      content: 'inset-y-0 right-0 rounded-l-[calc(var(--ui-radius)*2)]'
     }
   }]
 }

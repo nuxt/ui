@@ -47,10 +47,10 @@ export default defineNuxtPlugin({
               }
             }
             if (localStorage.getItem('nuxt-ui-neutral')) {
-              const neutralColor = localStorage.getItem('nuxt-ui-neutral');
+              let neutralColor = localStorage.getItem('nuxt-ui-neutral');
               html = html.replace(
                 /(--ui-color-neutral-\\d{2,3}:\\s*var\\()--color-${appConfig.ui.colors.neutral}-(\\d{2,3}\\))/g,
-                \`$1--color-\${neutralColor}-$2\`
+                \`$1--color-\${neutralColor === 'neutral' ? 'old-neutral' : neutralColor}-$2\`
               );
             }
 

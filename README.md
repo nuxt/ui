@@ -1,4 +1,8 @@
-[![nuxt-ui.png](https://volta.s3.fr-par.scw.cloud/nuxt_ui_social_card_531d133fa2.png)](https://ui.nuxt.com)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/91ceab67-89ce-4ef4-8678-4402a92baca5">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/51526d6d-e5ec-41b4-aa37-242dec1cdb27">
+  <img alt="Nuxt UI" src="https://github.com/user-attachments/assets/51526d6d-e5ec-41b4-aa37-242dec1cdb27">
+</picture>
 
 # Nuxt UI
 
@@ -47,7 +51,7 @@ export default defineNuxtConfig({
 2. Import Tailwind CSS and Nuxt UI in your CSS:
 
 ```css [assets/css/main.css]
-@import "tailwindcss";
+@import "tailwindcss" theme(static);
 @import "@nuxt/ui";
 ```
 
@@ -94,7 +98,7 @@ app.mount('#app')
 3. Import Tailwind CSS and Nuxt UI in your CSS:
 
 ```css [assets/main.css]
-@import "tailwindcss";
+@import "tailwindcss" theme(static);
 @import "@nuxt/ui";
 ```
 

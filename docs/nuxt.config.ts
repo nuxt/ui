@@ -1,5 +1,6 @@
 import { createResolver } from '@nuxt/kit'
 import pkg from '../package.json'
+import yaml from '@rollup/plugin-yaml'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -18,13 +19,28 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-og-image',
+    'motion-v/nuxt',
     (_, nuxt) => {
       nuxt.hook('components:dirs', (dirs) => {
         dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
       })
     },
-    '~~/modules/llms/module'
+    'nuxt-llms'
   ],
+  $development: {
+    site: {
+      url: 'http://localhost:3000'
+    }
+  },
+  $production: {
+    site: {
+      url: 'https://ui3.nuxt.dev'
+    }
+  },
+
+  devtools: {
+    enabled: true
+  },
 
   app: {
     head: {
@@ -40,13 +56,11 @@ export default defineNuxtConfig({
     },
     rootAttrs: {
       'vaul-drawer-wrapper': '',
-      'class': 'bg-[var(--ui-bg)]'
+      'class': 'bg-(--ui-bg)'
     }
   },
 
-  site: {
-    url: 'https://ui3.nuxt.dev'
-  },
+  css: ['~/assets/css/main.css'],
 
   content: {
     build: {
@@ -71,13 +85,12 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': { redirect: '/getting-started', prerender: false },
     '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
+    '/getting-started/installation/pro': { redirect: '/getting-started/installation/pro/nuxt', prerender: false },
     '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
     '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
     '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
-    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
-    '/components': { redirect: '/components/app', prerender: false }
+    '/composables': { redirect: '/composables/define-shortcuts', prerender: false }
   },
 
   future: {
@@ -109,6 +122,12 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+
+  vite: {
+    plugins: [
+      yaml()
+    ]
   },
 
   componentMeta: {
@@ -148,42 +167,35 @@ export default defineNuxtConfig({
   image: {
     provider: 'ipx'
   },
+
   llms: {
     domain: 'https://ui3.nuxt.dev',
     title: 'Nuxt UI v3',
     description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
+    full: {
+      title: 'Nuxt UI v3 Full Documentation',
+      description: 'This is the full documentation for Nuxt UI v3. It includes all the Markdown files written with the MDC syntax.'
+    },
     sections: [
       {
         title: 'Getting Started',
-        collection: 'content',
-        filters: [
-          {
-            field: 'path',
-            operator: 'LIKE',
-            value: '/getting-started%'
-          }
+        contentCollection: 'content',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
         ]
       },
       {
         title: 'Components',
-        collection: 'content',
-        filters: [
-          {
-            field: 'path',
-            operator: 'LIKE',
-            value: '/components/%'
-          }
+        contentCollection: 'content',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/components/%' }
         ]
       },
       {
         title: 'Composables',
-        collection: 'content',
-        filters: [
-          {
-            field: 'path',
-            operator: 'LIKE',
-            value: '/composables/%'
-          }
+        contentCollection: 'content',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/composables/%' }
         ]
       }
     ],

@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/textarea'
 import { tv } from '../utils/tv'
+import type { PartialString } from '../types/utils'
 
 const appConfigTextarea = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
 
@@ -21,8 +22,17 @@ export interface TextareaProps {
   name?: string
   /** The placeholder text when the textarea is empty. */
   placeholder?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: TextareaVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: TextareaVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: TextareaVariants['size']
   required?: boolean
   autofocus?: boolean
@@ -34,7 +44,7 @@ export interface TextareaProps {
   autoresize?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  ui?: Partial<typeof textarea.slots>
+  ui?: PartialString<typeof textarea.slots>
 }
 
 export interface TextareaEmits {

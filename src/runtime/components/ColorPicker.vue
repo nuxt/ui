@@ -63,6 +63,9 @@ export type ColorPickerProps = {
    * @defaultValue 'hex'
    */
   format?: 'hex' | 'rgb' | 'hsl' | 'cmyk' | 'lab'
+  /**
+   * @defaultValue 'md'
+   */
   size?: ColorPickerVariants['size']
   class?: any
   ui?: Partial<typeof colorPicker.slots>

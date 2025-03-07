@@ -73,7 +73,9 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'ui.css',
     write: true,
-    getContents: () => `@theme default {
+    getContents: () => `@source "./ui";
+
+@theme default static {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
@@ -85,7 +87,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --color-old-neutral-800: ${colors.neutral[800]};
   --color-old-neutral-900: ${colors.neutral[900]};
   --color-old-neutral-950: ${colors.neutral[950]};
-  ${[...(options.theme?.colors || []), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
+  ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
 }
 `
   })

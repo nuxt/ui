@@ -9,7 +9,6 @@ export function useSharedData() {
     label: 'Vue',
     icon: 'i-simple-icons-vuedotjs',
     value: 'vue',
-    disabled: module.value === 'ui-pro',
     onSelect: () => {
       if (module.value === 'ui-pro') {
         return
@@ -29,7 +28,6 @@ export function useSharedData() {
     label: 'UI Pro',
     icon: 'i-lucide-panels-top-left',
     value: 'ui-pro',
-    disabled: framework.value === 'vue',
     onSelect: () => {
       if (framework.value === 'vue') {
         return

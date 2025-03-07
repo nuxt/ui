@@ -4,7 +4,6 @@ import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps } from '../types'
 import type { StringOrVNode } from '../types/utils'
@@ -23,9 +22,19 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
   as?: any
   title?: StringOrVNode
   description?: StringOrVNode
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
+  /**
+   * @defaultValue 'primary'
+   */
   color?: ToastVariants['color']
+  /**
+   * The orientation between the content and the actions.
+   * @defaultValue 'vertical'
+   */
   orientation?: ToastVariants['orientation']
   /**
    * Display a list of actions:
@@ -39,10 +48,11 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   class?: any
@@ -58,8 +68,6 @@ export interface ToastSlots {
   actions(props?: {}): any
   close(props: { ui: any }): any
 }
-
-extendDevtoolsMeta<ToastProps>({ ignore: true })
 </script>
 
 <script setup lang="ts">
@@ -169,7 +177,7 @@ defineExpose({
             color="neutral"
             variant="link"
             :aria-label="t('toast.close')"
-            v-bind="typeof close === 'object' ? close : undefined"
+            v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
             :class="ui.close({ class: props.ui?.close })"
             @click.stop
           />

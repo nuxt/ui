@@ -149,8 +149,8 @@ const urlSearchParams = computed(() => {
 <template>
   <div ref="el" class="my-5">
     <template v-if="preview">
-      <div class="border border-[var(--ui-border-muted)] relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source, 'overflow-hidden': props.overflowHidden }]">
-        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-[var(--ui-border-muted)]">
+      <div class="border border-(--ui-border-muted) relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source, 'overflow-hidden': props.overflowHidden }]">
+        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-(--ui-border-muted)">
           <slot name="options" />
 
           <UFormField
@@ -159,10 +159,10 @@ const urlSearchParams = computed(() => {
             :label="option.label"
             :name="option.name"
             size="sm"
-            class="inline-flex ring ring-[var(--ui-border-accented)] rounded-[var(--ui-radius)]"
+            class="inline-flex ring ring-(--ui-border-accented) rounded-(--ui-radius)"
             :ui="{
-              wrapper: 'bg-[var(--ui-bg-elevated)]/50 rounded-l-[var(--ui-radius)] flex border-r border-[var(--ui-border-accented)]',
-              label: 'text-[var(--ui-text-muted)] px-2 py-1.5',
+              wrapper: 'bg-(--ui-bg-elevated)/50 rounded-l-(--ui-radius) flex border-r border-(--ui-border-accented)',
+              label: 'text-(--ui-text-muted) px-2 py-1.5',
               container: 'mt-0'
             }"
           >
@@ -174,7 +174,7 @@ const urlSearchParams = computed(() => {
               :value-key="option.name.toLowerCase().endsWith('color') ? 'value' : undefined"
               color="neutral"
               variant="soft"
-              class="rounded-[var(--ui-radius)] rounded-l-none min-w-12"
+              class="rounded-(--ui-radius) rounded-l-none min-w-12"
               :multiple="option.multiple"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
@@ -195,7 +195,7 @@ const urlSearchParams = computed(() => {
               :model-value="get(optionsValues, option.name)"
               color="neutral"
               variant="soft"
-              :ui="{ base: 'rounded-[var(--ui-radius)] rounded-l-none min-w-12' }"
+              :ui="{ base: 'rounded-(--ui-radius) rounded-l-none min-w-12' }"
               @update:model-value="set(optionsValues, option.name, $event)"
             />
           </UFormField>

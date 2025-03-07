@@ -4,7 +4,6 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
 const appConfigKbd = _appConfig as AppConfig & { ui: { kbd: Partial<typeof theme> } }
@@ -20,7 +19,13 @@ export interface KbdProps {
    */
   as?: any
   value?: KbdKey | string
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: KbdVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: KbdVariants['size']
   class?: any
 }
@@ -28,7 +33,6 @@ export interface KbdProps {
 export interface KbdSlots {
   default(props?: {}): any
 }
-extendDevtoolsMeta({ defaultProps: { value: 'K' } })
 </script>
 
 <script setup lang="ts">

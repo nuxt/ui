@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  key: 'typicode-users-email',
   transform: (data: { id: number, name: string, email: string }[]) => {
     return data?.map(user => ({
       label: user.name,
@@ -33,7 +34,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     <template #item-label="{ item }">
       {{ item.label }}
 
-      <span class="text-[var(--ui-text-muted)]">
+      <span class="text-(--ui-text-muted)">
         {{ item.email }}
       </span>
     </template>
