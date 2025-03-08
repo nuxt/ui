@@ -128,7 +128,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       yaml()
-    ]
+    ],
+    $server: {
+      build: {
+        target: 'node22'
+      }
+    }
   },
 
   componentMeta: {
