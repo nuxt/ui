@@ -147,7 +147,6 @@
     "chokidar": "3.6.0",
     "debug": "4.3.7",
     "happy-dom": "17.1.2",
-    "nitropack": "2.10.4",
     "rollup": "4.34.9",
     "typescript": "5.6.3",
     "unplugin": "^2.2.0",
