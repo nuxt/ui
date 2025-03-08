@@ -67,7 +67,7 @@
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && nuxi prepare docs && vite build playground-vue",
     "docs": "DEV=true nuxi dev docs",
-    "docs:build": "nuxi build docs",
+    "docs:build": "NODE_OPTIONS='--max-old-space-size=4096' nuxi build docs",
     "docs:prepare": "nuxt-component-meta docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
