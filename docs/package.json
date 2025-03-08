@@ -22,7 +22,7 @@
     "nuxt": "^3.16.0",
     "nuxt-component-meta": "^0.10.0",
     "nuxt-llms": "^0.1.0",
-    "nuxt-og-image": "^4.2.0",
+    "nuxt-og-image": "^5.0.0",
     "prettier": "^3.5.3",
     "shiki-transformer-color-highlight": "^1.0.0",
     "superstruct": "^2.0.2",
