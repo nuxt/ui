@@ -144,8 +144,6 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
-    "@unhead/vue": "^2.0.0-rc.9",
-    "unenv": "2.0.0-rc.12",
     "chokidar": "3.6.0",
     "debug": "4.3.7",
     "happy-dom": "17.1.2",

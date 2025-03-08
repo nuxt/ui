@@ -6,8 +6,6 @@ settings:
 
 overrides:
   '@nuxt/ui': workspace:*
-  '@unhead/vue': ^2.0.0-rc.9
-  unenv: 2.0.0-rc.12
   chokidar: 3.6.0
   debug: 4.3.7
   happy-dom: 17.1.2
@@ -501,7 +499,7 @@ packages:
   '@cloudflare/unenv-preset@2.0.0':
     resolution: {integrity: sha512-Ar4HixFYP8e990JPACno3nqe10QsjS3yVWr48z5Vop5LygdnvPa5cfNHxGoQSPavvg5aaGnF0VAWc3JJ1tBKuQ==}
     peerDependencies:
-      unenv: 2.0.0-rc.12
+      unenv: 2.0.0-rc.8
       workerd: ^1.20250124.0
     peerDependenciesMeta:
       workerd:
@@ -5350,7 +5348,7 @@ packages:
     resolution: {integrity: sha512-f7ajLYUjmhHL4K35CkDgMzlJfjoDklbGo/TeBK6GXGKqBW8iFaCWM0BdK79MvP6eelvbbgYfpIfRgT0GvXX5jw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@unhead/vue': ^2.0.0-rc.9
+      '@unhead/vue': ^2.0.0-rc.1
       unstorage: ^1.0.0
 
   nuxt-site-config-kit@3.1.4:
@@ -6637,6 +6635,9 @@ packages:
   unenv@2.0.0-rc.12:
     resolution: {integrity: sha512-aygmJLhrEnuLKDCISMoOL7ceRJeksnvXJXvtEvFei4zoOXQfvQkUGhZe8u//iK5C++M4pq3CsMbhVjFmWvOlmA==}
 
+  unenv@2.0.0-rc.8:
+    resolution: {integrity: sha512-wj/lN45LvZ4Uz95rti6DC5wg56eocAwA8KYzExk2SN01iuAb9ayzMwN13Kd3EG2eBXu27PzgMIXLTwWfSczKfw==}
+
   unhead@2.0.0-rc.9:
     resolution: {integrity: sha512-N1p9as7Hg9Gs3l5kkxxsi9eTa8xTHUADZgN1U+hCKHWKegGhvJ4wApzBjk4Zng7O92wPlPDGk8oHSWgO6jg6tw==}
 
@@ -7503,9 +7504,9 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@cloudflare/unenv-preset@2.0.0(unenv@2.0.0-rc.12)(workerd@1.20250224.0)':
+  '@cloudflare/unenv-preset@2.0.0(unenv@2.0.0-rc.8)(workerd@1.20250224.0)':
     dependencies:
-      unenv: 2.0.0-rc.12
+      unenv: 2.0.0-rc.8
     optionalDependencies:
       workerd: 1.20250224.0
 
@@ -14691,6 +14692,14 @@ snapshots:
       pathe: 2.0.3
       ufo: 1.5.4
 
+  unenv@2.0.0-rc.8:
+    dependencies:
+      defu: 6.1.4
+      exsolve: 1.0.2
+      ohash: 2.0.11
+      pathe: 2.0.3
+      ufo: 1.5.4
+
   unhead@2.0.0-rc.9:
     dependencies:
       hookable: 5.5.3
@@ -15230,14 +15239,14 @@ snapshots:
   wrangler@3.114.0(@cloudflare/workers-types@4.20250224.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
-      '@cloudflare/unenv-preset': 2.0.0(unenv@2.0.0-rc.12)(workerd@1.20250224.0)
+      '@cloudflare/unenv-preset': 2.0.0(unenv@2.0.0-rc.8)(workerd@1.20250224.0)
       '@esbuild-plugins/node-globals-polyfill': 0.2.3(esbuild@0.17.19)
       '@esbuild-plugins/node-modules-polyfill': 0.2.2(esbuild@0.17.19)
       blake3-wasm: 2.1.5
       esbuild: 0.17.19
       miniflare: 3.20250224.0
       path-to-regexp: 6.3.0
-      unenv: 2.0.0-rc.12
+      unenv: 2.0.0-rc.8
       workerd: 1.20250224.0
     optionalDependencies:
       '@cloudflare/workers-types': 4.20250224.0
