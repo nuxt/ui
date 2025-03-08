@@ -119,9 +119,9 @@
     "vaul-vue": "^0.3.0"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.1.0",
+    "@nuxt/eslint-config": "^1.2.0",
     "@nuxt/module-builder": "^0.8.4",
-    "@nuxt/test-utils": "^3.17.1",
+    "@nuxt/test-utils": "^3.17.2",
     "@release-it/conventional-changelog": "^10.0.0",
     "@standard-schema/spec": "^1.0.0",
     "@vue/test-utils": "^2.4.6",
