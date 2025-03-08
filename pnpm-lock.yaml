@@ -162,7 +162,7 @@ importers:
         specifier: ^8.5.2
         version: 8.5.2
       eslint:
-        specifier: ^9.21.0
+        specifier: ^9.22.0
         version: 9.22.0(jiti@2.4.2)
       happy-dom:
         specifier: 17.1.2
@@ -1180,10 +1180,6 @@ packages:
 
   '@eslint/eslintrc@3.3.0':
     resolution: {integrity: sha512-yaVPAiNAalnCZedKLdR21GOGILMLKPyqSLWaAjQFvYA2i/ciDi8ArYVr69Anohb6cH2Ukhqti4aFnYyPm8wdwQ==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@eslint/js@9.21.0':
-    resolution: {integrity: sha512-BqStZ3HX8Yz6LvsF5ByXYrtigrV5AXADWLAGc7PH/1SxOb7/FIYYMszZZWiUou/GB9P2lXWk2SV4d+Z8h0nknw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/js@9.22.0':
@@ -7925,8 +7921,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/js@9.21.0': {}
-
   '@eslint/js@9.22.0': {}
 
   '@eslint/object-schema@2.1.6': {}
@@ -8485,7 +8479,7 @@ snapshots:
     dependencies:
       '@antfu/install-pkg': 1.0.0
       '@clack/prompts': 0.10.0
-      '@eslint/js': 9.21.0
+      '@eslint/js': 9.22.0
       '@nuxt/eslint-plugin': 1.1.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.6.3)
       '@stylistic/eslint-plugin': 4.2.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.6.3)
       '@typescript-eslint/eslint-plugin': 8.25.0(@typescript-eslint/parser@8.25.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.6.3))(eslint@9.22.0(jiti@2.4.2))(typescript@5.6.3)
