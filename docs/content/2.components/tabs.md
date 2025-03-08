@@ -66,6 +66,20 @@ componentProps:
 
 You can use the `content` prop and set it to `false` to avoid the rendering of the HTML content if you don't need it.
 
+#### Listen to @before-change event
+
+You can execute code before the `@change` event is triggered by using the `@before-change` event. This event emits the index of the previously selected item and provides a second `next()` argument, which you can use to continue handling the `@change` event.
+
+::component-example
+---
+component: 'tabs-example-before-change'
+componentProps:
+  class: 'w-full'
+---
+::
+
+This event is useful when you need to validate data before switching tabs or display a confirmation window with a relevant message to users.
+
 ### Control the selected index
 
 Use a `v-model` to control the selected index.

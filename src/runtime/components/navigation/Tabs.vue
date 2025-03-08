@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { toRef, ref, watch, onMounted, defineComponent, nextTick } from 'vue'
+import { toRef, ref, watch, onMounted, defineComponent, nextTick, getCurrentInstance } from 'vue'
 import type { PropType } from 'vue'
 import { TabGroup as HTabGroup, TabList as HTabList, Tab as HTab, TabPanels as HTabPanels, TabPanel as HTabPanel, provideUseId } from '@headlessui/vue'
 import { useResizeObserver } from '@vueuse/core'
@@ -113,7 +113,7 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  emits: ['update:modelValue', 'change'],
+  emits: ['update:modelValue', 'change', 'beforeChange'],
   setup(props, { emit }) {
     const { ui, attrs } = useUI('tabs', toRef(props, 'ui'), config, toRef(props, 'class'))
 
@@ -122,6 +122,7 @@ export default defineComponent({
     const markerRef = ref<HTMLElement>()
 
     const selectedIndex = ref<number | undefined>(props.modelValue || props.defaultIndex)
+    const beforeChangeEventPassed = ref(!!getCurrentInstance()?.vnode.props?.onBeforeChange)
 
     // Methods
 
@@ -142,7 +143,13 @@ export default defineComponent({
       markerRef.value.style.height = `${tab.offsetHeight}px`
     }
 
-    function onChange(index: number) {
+    async function onChange(index: number) {
+      if (beforeChangeEventPassed.value) {
+        await new Promise((resolve) => {
+          emit('beforeChange', selectedIndex.value, resolve)
+        })
+      }
+
       selectedIndex.value = index
 
       emit('change', index)
@@ -185,6 +192,7 @@ export default defineComponent({
       markerRef,
       selectedIndex,
       onChange
+      // computedSelectedIndex
     }
   }
 })
