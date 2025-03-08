@@ -60,6 +60,7 @@ import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
+import ULinkBase from './LinkBase.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   active: undefined,
