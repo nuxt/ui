@@ -4415,8 +4415,8 @@ packages:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
     engines: {node: '>=6'}
 
-  impound@0.2.0:
-    resolution: {integrity: sha512-gXgeSyp9Hf7qG2/PLKmywHXyQf2xFrw+mJGpoj9DsAB9L7/MIKn+DeEx98UryWXdmbv8wUUPdcQof6qXnZoCGg==}
+  impound@0.2.1:
+    resolution: {integrity: sha512-V+8yPoV8sT3VYNY8A8F/lfox+QShWdb4enaG3ou/k7d5gY20lVwaE6M2O4zI6Z3XGEWSEEh3e+W3G7qfJeYfKA==}
 
   imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
@@ -11844,11 +11844,11 @@ snapshots:
       parent-module: 1.0.1
       resolve-from: 4.0.0
 
-  impound@0.2.0(rollup@4.34.9):
+  impound@0.2.1(rollup@4.34.9):
     dependencies:
       '@rollup/pluginutils': 5.1.4(rollup@4.34.9)
       mlly: 1.7.4
-      pathe: 1.1.2
+      pathe: 2.0.3
       unenv: 2.0.0-rc.12
       unplugin: 2.2.0
     transitivePeerDependencies:
@@ -13094,7 +13094,7 @@ snapshots:
       h3: 1.15.1
       hookable: 5.5.3
       ignore: 7.0.3
-      impound: 0.2.0(rollup@4.34.9)
+      impound: 0.2.1(rollup@4.34.9)
       jiti: 2.4.2
       klona: 2.0.6
       knitwork: 1.2.0
