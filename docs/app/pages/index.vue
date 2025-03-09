@@ -189,7 +189,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.design_system.links"
       orientation="horizontal"
     >
-      <MDC :value="page.design_system.code" />
+      <MDC :value="page.design_system.code" cache-key="index-design-system-code" />
     </UPageSection>
 
     <USeparator />
@@ -201,10 +201,10 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       orientation="horizontal"
     >
       <template #description>
-        <MDC :value="page.component_customization.description" />
+        <MDC :value="page.component_customization.description" cache-key="index-component-customization-description" />
       </template>
 
-      <MDC :value="page.component_customization.code" />
+      <MDC :value="page.component_customization.code" cache-key="index-component-customization-code" />
     </UPageSection>
 
     <USeparator />
