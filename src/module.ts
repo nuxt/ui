@@ -53,7 +53,7 @@ export default defineNuxtModule<ModuleOptions>({
     name: 'ui',
     configKey: 'ui',
     compatibility: {
-      nuxt: '>=3.13.1'
+      nuxt: '>=3.16.0'
     },
     docs: 'https://ui3.nuxt.dev/getting-started/installation/nuxt'
   },
