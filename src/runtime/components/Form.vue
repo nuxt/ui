@@ -69,7 +69,7 @@ onMounted(async () => {
       nestedForms.value.set(event.formId, { validate: event.validate })
     } else if (event.type === 'detach') {
       nestedForms.value.delete(event.formId)
-    } else if (props.validateOn?.includes(event.type)) {
+    } else if (props.validateOn?.includes(event.type) && !loading.value) {
       if (event.type !== 'input') {
         await _validate({ name: event.name, silent: true, nested: false })
       } else if (event.eager || blurredFields.has(event.name)) {
