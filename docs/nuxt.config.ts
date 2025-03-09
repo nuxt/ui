@@ -101,7 +101,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-07-09',
 
   nitro: {
-    sourceMap: false,
     prerender: {
       routes: [
         '/getting-started',
