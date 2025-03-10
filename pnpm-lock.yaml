@@ -105,7 +105,7 @@ importers:
         specifier: ^9.22.0
         version: 9.22.0(jiti@2.4.2)
       happy-dom:
-        specifier: ^17.1.8
+        specifier: ^17.4.3
         version: 17.4.3
       joi:
         specifier: ^17.13.3
