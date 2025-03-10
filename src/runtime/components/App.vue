@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'reka-ui'
-import { localeContextInjectionKey } from '../composables/useLocale'
 import type { ToasterProps, Locale, Messages } from '../types'
 
 export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProviderProps, 'useId' | 'dir' | 'locale'> {
@@ -22,6 +21,7 @@ export default {
 import { toRef, useId, provide } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { localeContextInjectionKey } from '../composables/useLocale'
 import UToaster from './Toaster.vue'
 import UOverlayProvider from './OverlayProvider.vue'
 
