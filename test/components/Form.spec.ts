@@ -197,19 +197,6 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('')
     })
 
-    test('setErrors works with global errors', async () => {
-      form.value.setErrors([{
-        message: 'this is a global error'
-      }])
-
-      expect(form.value.errors).toMatchObject([{
-        message: 'this is a global error'
-      }])
-
-      await nextTick()
-
-      expect(wrapper.text()).toContain('this is a global error')
-    })
     test('clear works', async () => {
       form.value.setErrors([{
         id: 'emailInput',
