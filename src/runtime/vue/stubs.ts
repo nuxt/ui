@@ -9,6 +9,7 @@ export { useHead } from '@unhead/vue'
 export { useRoute, useRouter } from 'vue-router'
 
 export { defineShortcuts } from '../composables/defineShortcuts'
+export { defineLocale } from '../composables/defineLocale'
 export { useLocale } from '../composables/useLocale'
 
 export const useColorMode = () => {
