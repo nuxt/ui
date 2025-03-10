@@ -38,7 +38,7 @@
     "@nuxt/icon": "^1.10.3",
     "@nuxt/kit": "^3.16.0",
     "@nuxtjs/color-mode": "^3.5.2",
-    "@nuxtjs/tailwindcss": "^6.13.1",
+    "@nuxtjs/tailwindcss": "^6.13.2",
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",
