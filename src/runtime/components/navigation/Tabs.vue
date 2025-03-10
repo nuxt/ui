@@ -192,7 +192,6 @@ export default defineComponent({
       markerRef,
       selectedIndex,
       onChange
-      // computedSelectedIndex
     }
   }
 })
