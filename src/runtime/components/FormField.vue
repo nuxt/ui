@@ -4,11 +4,10 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/form-field'
 import { tv } from '../utils/tv'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
-const appConfig = _appConfig as AppConfig & { ui: { formField: Partial<typeof theme> } }
+const appConfigFormField = _appConfig as AppConfig & { ui: { formField: Partial<typeof theme> } }
 
-const formField = tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })
+const formField = tv({ extend: tv(theme), ...(appConfigFormField.ui?.formField || {}) })
 
 type FormFieldVariants = VariantProps<typeof formField>
 
@@ -27,6 +26,9 @@ export interface FormFieldProps {
   help?: string
   error?: string | boolean
   hint?: string
+  /**
+   * @defaultValue 'md'
+   */
   size?: FormFieldVariants['size']
   required?: boolean
   eagerValidation?: boolean
@@ -43,8 +45,6 @@ export interface FormFieldSlots {
   error(props: { error?: string | boolean }): any
   default(props: { error?: string | boolean }): any
 }
-
-extendDevtoolsMeta({ example: 'FormFieldExample', defaultProps: { label: 'Label' } })
 </script>
 
 <script setup lang="ts">
@@ -66,6 +66,9 @@ const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern)))?.message)
 
 const id = ref(useId())
+// Copies id's initial value to bind aria-attributes such as aria-describedby.
+// This is required for the RadioGroup component which unsets the id value.
+const ariaId = id.value
 
 provide(inputIdInjectionKey, id)
 
@@ -75,7 +78,10 @@ provide(formFieldInjectionKey, computed(() => ({
   size: props.size,
   eagerValidation: props.eagerValidation,
   validateOnInputDelay: props.validateOnInputDelay,
-  errorPattern: props.errorPattern
+  errorPattern: props.errorPattern,
+  hint: props.hint,
+  description: props.description,
+  ariaId
 }) as FormFieldInjectedOptions<FormFieldProps>))
 </script>
 
@@ -88,14 +94,14 @@ provide(formFieldInjectionKey, computed(() => ({
             {{ label }}
           </slot>
         </Label>
-        <span v-if="hint || !!slots.hint" :class="ui.hint({ class: props.ui?.hint })">
+        <span v-if="hint || !!slots.hint" :id="`${ariaId}-hint`" :class="ui.hint({ class: props.ui?.hint })">
           <slot name="hint" :hint="hint">
             {{ hint }}
           </slot>
         </span>
       </div>
 
-      <p v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="description || !!slots.description" :id="`${ariaId}-description`" :class="ui.description({ class: props.ui?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>
@@ -105,7 +111,7 @@ provide(formFieldInjectionKey, computed(() => ({
     <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
 
-      <p v-if="(typeof error === 'string' && error) || !!slots.error" :class="ui.error({ class: props.ui?.error })">
+      <p v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" :class="ui.error({ class: props.ui?.error })">
         <slot name="error" :error="error">
           {{ error }}
         </slot>

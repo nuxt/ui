@@ -6,6 +6,10 @@ const value = ref<string | undefined>(undefined)
 onMounted(() => {
   value.value = framework.value
 })
+
+watch(framework, () => {
+  value.value = framework.value
+})
 </script>
 
 <template>
@@ -15,10 +19,10 @@ onMounted(() => {
     :content="false"
     color="neutral"
     :ui="{
-      indicator: 'bg-[var(--ui-bg)]',
-      trigger: 'px-1 data-[state=active]:text-[var(--ui-text-highlighted)]'
+      indicator: 'bg-(--ui-bg)',
+      trigger: 'px-1 data-[state=active]:text-(--ui-text-highlighted)'
     }"
-    size="sm"
+    size="xs"
     @update:model-value="(framework = $event as string)"
   />
 </template>

@@ -9,6 +9,7 @@ const vueComponents = await glob('./src/runtime/vue/components/*.vue', { absolut
 
 export default defineConfig({
   test: {
+    testTimeout: 1000,
     environment: 'happy-dom',
     silent: true,
     include: ['./test/components/**.spec.ts'],

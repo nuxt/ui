@@ -5,7 +5,8 @@ export default defineAppConfig({
     duration: 5000
   },
   theme: {
-    radius: 0.25
+    radius: 0.25,
+    blackAsPrimary: false
   },
   ui: {
     colors: {

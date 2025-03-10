@@ -1,5 +1,6 @@
 ---
 description: A list of buttons or links to navigate through pages.
+category: navigation
 links:
   - label: Pagination
     icon: i-custom-reka-ui

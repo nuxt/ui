@@ -9,9 +9,9 @@ import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
+const appConfigInput = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
 
-const input = tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })
+const input = tv({ extend: tv(theme), ...(appConfigInput.ui?.input || {}) })
 
 type InputVariants = VariantProps<typeof input>
 
@@ -26,8 +26,17 @@ export interface InputProps extends UseComponentIconsProps {
   type?: InputHTMLAttributes['type']
   /** The placeholder text when the input is empty. */
   placeholder?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: InputVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: InputVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: InputVariants['size']
   required?: boolean
   autocomplete?: InputHTMLAttributes['autocomplete']
@@ -73,9 +82,9 @@ const props = withDefaults(defineProps<InputProps>(), {
 const emits = defineEmits<InputEmits>()
 const slots = defineSlots<InputSlots>()
 
-const [modelValue, modelModifiers] = defineModel<string | number>()
+const [modelValue, modelModifiers] = defineModel<string | number | null>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props, { deferInputValidation: true })
+const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps>(props, { deferInputValidation: true })
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -102,13 +111,17 @@ function autoFocus() {
 }
 
 // Custom function to handle the v-model properties
-function updateInput(value: string) {
+function updateInput(value: string | null) {
   if (modelModifiers.trim) {
-    value = value.trim()
+    value = value?.trim() ?? null
   }
 
   if (modelModifiers.number || props.type === 'number') {
     value = looseToNumber(value)
+  }
+
+  if (modelModifiers.nullify) {
+    value ||= null
   }
 
   modelValue.value = value
@@ -166,10 +179,11 @@ onMounted(() => {
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
+      @focus="emitFormFocus"
     >
 
     <slot />

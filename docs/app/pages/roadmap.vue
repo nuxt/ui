@@ -9,7 +9,9 @@ useSeoMeta({
   description
 })
 
-defineOgImageComponent('Docs')
+defineOgImageComponent('Docs', {
+  headline: 'Community'
+})
 
 const appConfig = useAppConfig()
 const colorMode = useColorMode()

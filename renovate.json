@@ -6,10 +6,10 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "happy-dom",
     "valibot30",
     "valibot31",
     "typescript",
+    "vaul-vue",
     "vue-tsc"
   ],
   "baseBranches": ["dev", "v3"],
@@ -26,5 +26,6 @@
   }, {
     "matchDepTypes": ["resolutions"],
     "enabled": false
-  }]
+  }],
+  "postUpdateOptions": ["pnpmDedupe"]
 }

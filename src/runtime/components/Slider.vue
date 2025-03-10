@@ -6,9 +6,9 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/slider'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { slider: Partial<typeof theme> } }
+const appConfigSlider = _appConfig as AppConfig & { ui: { slider: Partial<typeof theme> } }
 
-const slider = tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })
+const slider = tv({ extend: tv(theme), ...(appConfigSlider.ui?.slider || {}) })
 
 type SliderVariants = VariantProps<typeof slider>
 
@@ -18,7 +18,13 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'md'
+   */
   size?: SliderVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: SliderVariants['color']
   /**
    * The orientation of the slider.
@@ -55,7 +61,7 @@ const modelValue = defineModel<number | number[]>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits)
 
-const { id, emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<SliderProps>(props)
+const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SliderProps>(props)
 
 const defaultSliderValue = computed(() => {
   if (typeof props.defaultValue === 'number') {
@@ -95,7 +101,7 @@ function onChange(value: any) {
 
 <template>
   <SliderRoot
-    v-bind="rootProps"
+    v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     v-model="sliderValue"
     :name="name"

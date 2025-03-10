@@ -1,6 +1,7 @@
 ---
 title: Calendar
 description: A calendar component for selecting single dates, multiple dates or date ranges.
+category: element
 links:
   - label: Calendar
     icon: i-custom-reka-ui
@@ -8,7 +9,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Calendar.vue
-navigation.badge: New
 ---
 
 ::note
@@ -207,6 +207,20 @@ Use the `min-value` and `max-value` props to limit the dates.
 ---
 name: 'calendar-min-max-dates-example'
 ---
+::
+
+### With other calendar systems
+
+You can use other calenders from `@internationalized/date` to implement a different calendar system. 
+
+::component-example
+---
+name: 'calendar-other-system-example'
+---
+::
+
+::note{to="https://react-spectrum.adobe.com/internationalized/date/Calendar.html#implementations"}
+You can check all the available calendars on `@internationalized/date` docs.
 ::
 
 ### As a DatePicker

@@ -66,6 +66,7 @@ describe('InputMenu', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
+    ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],

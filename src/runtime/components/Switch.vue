@@ -4,13 +4,12 @@ import type { SwitchRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/switch'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
+const appConfigSwitch = _appConfig as AppConfig & { ui: { switch: Partial<typeof theme> } }
 
-const switchTv = tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })
+const switchTv = tv({ extend: tv(theme), ...(appConfigSwitch.ui?.switch || {}) })
 
 type SwitchVariants = VariantProps<typeof switchTv>
 
@@ -20,18 +19,31 @@ export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | '
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'primary'
+   */
   color?: SwitchVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
   size?: SwitchVariants['size']
   /** When `true`, the loading icon will be displayed. */
   loading?: boolean
   /**
    * The icon when the `loading` prop is `true`.
    * @defaultValue appConfig.ui.icons.loading
+   * @IconifyIcon
    */
   loadingIcon?: string
-  /** Display an icon when the switch is checked. */
+  /**
+   * Display an icon when the switch is checked.
+   * @IconifyIcon
+   */
   checkedIcon?: string
-  /** Display an icon when the switch is unchecked. */
+  /**
+   * Display an icon when the switch is unchecked.
+   * @IconifyIcon
+   */
   uncheckedIcon?: string
   label?: string
   description?: string
@@ -47,8 +59,6 @@ export interface SwitchSlots {
   label(props: { label?: string }): any
   description(props: { description?: string }): any
 }
-
-extendDevtoolsMeta({ defaultProps: { label: 'Switch me!' } })
 </script>
 
 <script setup lang="ts">
@@ -59,6 +69,8 @@ import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import UIcon from './Icon.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = defineProps<SwitchProps>()
 const slots = defineSlots<SwitchSlots>()
 const emits = defineEmits<SwitchEmits>()
@@ -68,7 +80,7 @@ const modelValue = defineModel<boolean>({ default: undefined })
 const appConfig = useAppConfig()
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<SwitchProps>(props)
+const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps>(props)
 const id = _id.value ?? useId()
 
 const ui = computed(() => switchTv({
@@ -93,7 +105,7 @@ function onUpdate(value: any) {
     <div :class="ui.container({ class: props.ui?.container })">
       <SwitchRoot
         :id="id"
-        v-bind="rootProps"
+        v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"

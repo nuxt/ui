@@ -1,6 +1,7 @@
 ---
 title: NavigationMenu
 description: A list of links that can be displayed horizontally or vertically.
+category: navigation
 links:
   - label: NavigationMenu
     icon: i-custom-reka-ui
@@ -21,6 +22,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `badge?: string | number | BadgeProps`{lang="ts-type"}
 - `trailingIcon?: string`{lang="ts-type"}
+- `type?: 'label' | 'link'`{lang="ts-type"}
 - `value?: string`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
@@ -66,14 +68,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -138,7 +136,9 @@ Each item can take a `children` array of objects with the following properties t
 
 Use the `orientation` prop to change the orientation of the NavigationMenu.
 
+::note
 When orientation is `vertical`, a [Collapsible](/components/collapsible) component is used to display children. You can control the open state of each item using the `open` and `defaultOpen` properties.
+::
 
 ::component-code
 ---
@@ -151,7 +151,9 @@ external:
 props:
   orientation: 'vertical'
   items:
-    - - label: Guide
+    - - label: Links
+        type: 'label'
+      - label: Guide
         icon: i-lucide-book-open
         children:
           - label: Introduction
@@ -176,14 +178,10 @@ props:
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
-          - label: useModal
+          - label: useOverlay
             icon: i-lucide-file-text
-            description: Display a modal within your application.
-            to: /composables/use-modal
-          - label: useSlideover
-            icon: i-lucide-file-text
-            description: Display a slideover within your application.
-            to: /composables/use-slideover
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
@@ -279,14 +277,10 @@ props:
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
-          - label: useModal
+          - label: useOverlay
             icon: i-lucide-file-text
-            description: Display a modal within your application.
-            to: /composables/use-modal
-          - label: useSlideover
-            icon: i-lucide-file-text
-            description: Display a slideover within your application.
-            to: /composables/use-slideover
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
@@ -329,7 +323,7 @@ props:
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
-  class: 'data-[orientation=horizontal]:border-b border-[var(--ui-border)] data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
+  class: 'data-[orientation=horizontal]:border-b border-(--ui-border) data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
 ---
 ::
 
@@ -459,14 +453,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -559,14 +549,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -606,6 +592,81 @@ props:
 
 ::note
 The arrow is animated to follow the active item.
+::
+
+### Content Orientation
+
+Use the `content-orientation` prop to change the orientation of the content.
+
+::warning
+This prop only works when `orientation` is `horizontal`.
+::
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - arrow
+  - class
+external:
+  - items
+props:
+  arrow: true
+  contentOrientation: 'vertical'
+  items:
+    - label: Guide
+      icon: i-lucide-book-open
+      to: /getting-started
+      children:
+        - label: Introduction
+          description: Fully styled and customizable components for Nuxt.
+          icon: i-lucide-house
+        - label: Installation
+          description: Learn how to install and configure Nuxt UI in your application.
+          icon: i-lucide-cloud-download
+        - label: 'Icons'
+          icon: 'i-lucide-smile'
+          description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+    - label: Composables
+      icon: i-lucide-database
+      to: /composables
+      children:
+        - label: defineShortcuts
+          icon: i-lucide-file-text
+          description: Define shortcuts for your application.
+          to: /composables/define-shortcuts
+        - label: useOverlay
+          icon: i-lucide-file-text
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
+        - label: useToast
+          icon: i-lucide-file-text
+          description: Display a toast within your application.
+          to: /composables/use-toast
+    - label: Components
+      icon: i-lucide-box
+      to: /components
+      active: true
+      children:
+        - label: Link
+          icon: i-lucide-file-text
+          description: Use NuxtLink with superpowers.
+          to: /components/link
+        - label: Modal
+          icon: i-lucide-file-text
+          description: Display a modal within your application.
+          to: /components/modal
+        - label: NavigationMenu
+          icon: i-lucide-file-text
+          description: Display a list of links.
+          to: /components/navigation-menu
+        - label: Pagination
+          icon: i-lucide-file-text
+          description: Display a list of pages.
+          to: /components/pagination
+  class: 'w-full justify-center'
+---
 ::
 
 ### Unmount
@@ -651,14 +712,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -754,7 +811,7 @@ name: 'navigation-menu-content-slot-example'
 ::
 
 ::note
-In this example, we add the `sm:w-[var(--reka-navigation-menu-viewport-width)]` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
+In this example, we add the `sm:w-(--reka-navigation-menu-viewport-width)` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
 ::
 
 ## API

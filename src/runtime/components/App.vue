@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'reka-ui'
 import { localeContextInjectionKey } from '../composables/useLocale'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { ToasterProps, Locale, Messages } from '../types'
 
 export interface AppProps extends Omit<ConfigProviderProps, 'useId' | 'dir' | 'locale'> {
@@ -17,8 +16,6 @@ export interface AppSlots {
 export default {
   name: 'App'
 }
-
-extendDevtoolsMeta({ ignore: true })
 </script>
 
 <script setup lang="ts">
@@ -26,8 +23,7 @@ import { toRef, useId, provide } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import UToaster from './Toaster.vue'
-import UModalProvider from './ModalProvider.vue'
-import USlideoverProvider from './SlideoverProvider.vue'
+import UOverlayProvider from './OverlayProvider.vue'
 
 const props = defineProps<AppProps>()
 defineSlots<AppSlots>()
@@ -47,9 +43,8 @@ provide(localeContextInjectionKey, locale)
         <slot />
       </UToaster>
       <slot v-else />
-    </TooltipProvider>
 
-    <UModalProvider />
-    <USlideoverProvider />
+      <UOverlayProvider />
+    </TooltipProvider>
   </ConfigProvider>
 </template>
