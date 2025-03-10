@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import type { RouteLocationRaw } from '#vue-router'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/pagination'
 import { tv } from '../utils/tv'
@@ -78,7 +77,7 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
    * A function to render page controls as links.
    * @param page The page number to navigate to.
    */
-  to?: (page: number) => RouteLocationRaw
+  to?: (page: number) => ButtonProps['to']
   class?: any
   ui?: Partial<typeof pagination.slots>
 }
