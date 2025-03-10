@@ -143,7 +143,7 @@ export interface InputMenuSlots<T, M extends boolean> {
   'leading'(props: { modelValue?: M extends true ? T[] : T, open: boolean, ui: any }): any
   'trailing'(props: { modelValue?: M extends true ? T[] : T, open: boolean, ui: any }): any
   'empty'(props: { searchTerm?: string }): any
-  'content'(props: { groups: Array<T>, ui: any, props: InputMenuProps<T>}): any
+  'content'(props: { groups: Array<T>, ui: any, props: InputMenuProps<T> }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>

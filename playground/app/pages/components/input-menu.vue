@@ -3,7 +3,7 @@ import { upperFirst } from 'scule'
 import { refDebounced } from '@vueuse/core'
 import type { User } from '~/types'
 import theme from '#build/ui/input-menu'
-import {ComboboxGroup, ComboboxLabel, ComboboxItem, ComboboxSeparator} from 'reka-ui'
+import { ComboboxGroup, ComboboxLabel, ComboboxItem, ComboboxSeparator } from 'reka-ui'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
@@ -158,26 +158,26 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
           item: 'w-auto'
         }"
       >
-        <template #content="{props, ui, groups}">
-          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({class: props.ui?.group})">
-              <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-                <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({class: props.ui?.label})">
-                  {{ get(item, props.labelKey as string) }}
-                </ComboboxLabel>
+        <template #content="{ props, ui, groups }">
+          <ComboboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
+            <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
+              <ComboboxLabel v-if="item?.type === 'label'" :class="ui.label({ class: props.ui?.label })">
+                {{ get(item, props.labelKey as string) }}
+              </ComboboxLabel>
 
-                <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({class: props.ui?.separator})" />
+              <ComboboxSeparator v-else-if="item?.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
 
-                <ComboboxItem
-                  v-else
-                  :class="ui.item({class: props.ui?.item})"
-                  :disabled="item.disabled"
-                  :value="valueKey && typeof item === 'object' ? get(item, props.valueKey as string) : item"
-                  @select="item.onSelect"
-                >
-                  <UAvatar if="item.avatar" v-bind="item.avatar" :class="ui.itemLeadingAvatar({class: props.ui?.itemLeadingAvatar})" />
-                </ComboboxItem>
-              </template>
-            </ComboboxGroup>
+              <ComboboxItem
+                v-else
+                :class="ui.item({ class: props.ui?.item })"
+                :disabled="item.disabled"
+                :value="valueKey && typeof item === 'object' ? get(item, props.valueKey as string) : item"
+                @select="item.onSelect"
+              >
+                <UAvatar if="item.avatar" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+              </ComboboxItem>
+            </template>
+          </ComboboxGroup>
         </template>
       </UInputMenu>
     </div>
