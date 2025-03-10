@@ -73,6 +73,7 @@ describe('InputMenu', () => {
     // Slots
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],
+    ['with content slot', { slots: { content: () => 'Content slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],

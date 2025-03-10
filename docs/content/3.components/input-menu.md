@@ -655,6 +655,17 @@ name: 'input-menu-items-chip-example'
 In this example, the `#leading` slot is used to display the selected chip.
 ::
 
+### With custom content
+
+You can use the `content` slot to customize how the results are displayed.
+
+::component-example
+---
+collapse: true
+name: 'input-menu-content-slot-example'
+---
+::
+
 ### Control open state
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
