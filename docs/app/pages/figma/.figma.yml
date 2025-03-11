@@ -275,16 +275,14 @@ faq:
       content: As the Figma Pro Kit is a digital product packaged as a zip file, we cannot offer refunds once the purchase is made.
     - label: Do you have a Figma to Code plugin?
       content: >
-        We recommend the open source [TeamPad Dev](https://github.com/ecomfe/tempad-dev) inspect panel with the [TeamPad Dev Nuxt UI Plugin](https://github.com/Justineo/tempad-dev-plugin-nuxt-ui):
+        We recommend the open source [TemPad Dev](https://github.com/ecomfe/tempad-dev) inspect panel with the [TemPad Dev Nuxt UI Plugin](https://github.com/Justineo/tempad-dev-plugin-nuxt-ui):
 
-          1. Install the [TeamPad Dev Chrome Extension](https://chromewebstore.google.com/detail/tempad-dev/lgoeakbaikpkihoiphamaeopmliaimpc)
+          1. Install the [TemPad Dev Chrome Extension](https://chromewebstore.google.com/detail/tempad-dev/lgoeakbaikpkihoiphamaeopmliaimpc)
 
-          2. Open your Figma file with Nuxt UI components (reload the page if you don't see the TeamPad Dev panel)
+          2. Open your Figma file with Nuxt UI components (reload the page if you don't see the TemPad Dev panel)
 
-          3. Install the `@nuxt` in TeamPad Dev's plugins section
+          3. Install the `@nuxt` (or `@nuxt/pro` for Nuxt UI Pro) in TemPad Dev's plugins section
 
           4. Select any Nuxt UI component and inspect the code it generates
 
-        ![TeamPad Dev Nuxt UI Plugin](/pro/figma/teampad-dev-nuxt-ui-plugin.gif){.w-full .rounded .mb-2 .max-w-[636px]}
-
-        *Right now, only Nuxt UI components are supported, but the code of the plugin is [open source](https://github.com/Justineo/tempad-dev-plugin-nuxt-ui) and anyone can contribute to it.*
+        ![TemPad Dev Nuxt UI Plugin](/pro/figma/teampad-dev-nuxt-ui-plugin.gif){.w-full .rounded .mb-2 .max-w-[636px]}
