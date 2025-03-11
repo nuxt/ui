@@ -55,5 +55,7 @@ export default defineNuxtPlugin(() => {
     }]
   }
 
-  useHead(headData)
+  if (!nuxtApp.isVue) {
+    useHead(headData)
+  }
 })
