@@ -36,7 +36,7 @@ export type FormSchema<T extends object> =
 export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
 
 export interface FormError<P extends string = string> {
-  name: P
+  name?: P
   message: string
 }
 

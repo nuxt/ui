@@ -29,7 +29,7 @@ export interface FormEmits<T extends object> {
 }
 
 export interface FormSlots {
-  default(props?: {}): any
+  default(props?: { errors: FormError[] }): any
 }
 </script>
 
@@ -121,7 +121,7 @@ const blurredFields = new Set<keyof T>()
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
     ...err,
-    id: inputs.value[err.name]?.id
+    id: err?.name ? inputs.value[err.name]?.id : undefined
   }))
 }
 
@@ -159,12 +159,12 @@ async function _validate(opts: { name?: keyof T | (keyof T)[], silent?: boolean,
   if (names) {
     const otherErrors = errors.value.filter(error => !names.some((name) => {
       const pattern = inputs.value?.[name]?.pattern
-      return name === error.name || (pattern && error.name.match(pattern))
+      return name === error.name || (pattern && error.name?.match(pattern))
     }))
 
     const pathErrors = (await getErrors()).filter(error => names.some((name) => {
       const pattern = inputs.value?.[name]?.pattern
-      return name === error.name || (pattern && error.name.match(pattern))
+      return name === error.name || (pattern && error.name?.match(pattern))
     }))
 
     errors.value = otherErrors.concat(pathErrors)
@@ -269,6 +269,6 @@ defineExpose<Form<T>>({
     :class="form({ class: props.class })"
     @submit.prevent="onSubmitWrapper"
   >
-    <slot />
+    <slot :errors="errors" />
   </component>
 </template>
