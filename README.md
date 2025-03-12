@@ -11,31 +11,31 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-We're thrilled to introduce Nuxt UI v3, a significant upgrade to our UI library that delivers extensive improvements and robust new capabilities. This major update harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS v4](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
+Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 > [!NOTE]
 > You are on the `v3` development branch, check out the [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
 
 ## Documentation
 
-Visit https://ui3.nuxt.dev to explore the documentation.
+Visit https://ui.nuxt.com to explore the documentation.
 
 ## Installation
 
 ```bash [pnpm]
-pnpm add @nuxt/ui@next
+pnpm add @nuxt/ui
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui@next
+yarn add @nuxt/ui
 ```
 
 ```bash [npm]
-npm install @nuxt/ui@next
+npm install @nuxt/ui
 ```
 
 ```bash [bun]
-bun add @nuxt/ui@next
+bun add @nuxt/ui
 ```
 
 ### Nuxt
@@ -55,7 +55,7 @@ export default defineNuxtConfig({
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation/nuxt).
+Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/nuxt).
 
 ### Vue
 
@@ -102,7 +102,7 @@ app.mount('#app')
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation/vue).
+Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/vue).
 
 ## Credits
 

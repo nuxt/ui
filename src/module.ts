@@ -9,40 +9,40 @@ export interface ModuleOptions {
   /**
    * Prefix for components
    * @defaultValue `U`
-   * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#prefix
+   * @link https://ui.nuxt.com/getting-started/installation/nuxt#prefix
    */
   prefix?: string
 
   /**
    * Enable or disable `@nuxt/fonts` module
    * @defaultValue `true`
-   * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#fonts
+   * @link https://ui.nuxt.com/getting-started/installation/nuxt#fonts
    */
   fonts?: boolean
 
   /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
-   * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#colormode
+   * @link https://ui.nuxt.com/getting-started/installation/nuxt#colormode
    */
   colorMode?: boolean
 
   /**
    * Customize how the theme is generated
-   * @link https://ui3.nuxt.dev/getting-started/theme
+   * @link https://ui.nuxt.com/getting-started/theme
    */
   theme?: {
     /**
      * Define the color aliases available for components
      * @defaultValue `['primary', 'secondary', 'success', 'info', 'warning', 'error']`
-     * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#themecolors
+     * @link https://ui.nuxt.com/getting-started/installation/nuxt#themecolors
      */
     colors?: string[]
 
     /**
      * Enable or disable transitions on components
      * @defaultValue `true`
-     * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#themetransitions
+     * @link https://ui.nuxt.com/getting-started/installation/nuxt#themetransitions
      */
     transitions?: boolean
   }
@@ -55,7 +55,7 @@ export default defineNuxtModule<ModuleOptions>({
     compatibility: {
       nuxt: '>=3.16.0'
     },
-    docs: 'https://ui3.nuxt.dev/getting-started/installation/nuxt'
+    docs: 'https://ui.nuxt.com/getting-started/installation/nuxt'
   },
   defaults: defaultOptions,
   async setup(options, nuxt) {

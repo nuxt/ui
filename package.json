@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
   },
-  "homepage": "https://ui3.nuxt.dev",
+  "homepage": "https://ui.nuxt.com",
   "type": "module",
   "license": "MIT",
   "exports": {
