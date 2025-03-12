@@ -14,7 +14,7 @@
 We're thrilled to introduce Nuxt UI v3, a significant upgrade to our UI library that delivers extensive improvements and robust new capabilities. This major update harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS v4](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 > [!NOTE]
-> You are on the `v3` development branch, check out the [dev branch](https://github.com/nuxt/ui/tree/dev) for Nuxt UI v2.
+> You are on the `v3` development branch, check out the [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
 
 ## Documentation
 
