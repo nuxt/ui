@@ -27,7 +27,7 @@ Read more on [ui2.nuxt.com](https://ui2.nuxt.com)
 ## Installation
 
 ```bash
-npx nuxi@latest module add ui
+npx nuxi@latest module add ui@2
 ```
 
 ## Documentation
