@@ -82,6 +82,8 @@ if (route.path.startsWith('/components')) {
   })
 } else {
   defineOgImageComponent('Docs', {
+    title: page.value.title,
+    description: page.value.description,
     headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
     framework: page.value?.framework,
     module: page.value.module
