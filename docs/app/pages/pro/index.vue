@@ -82,11 +82,11 @@ useSeoMeta({
       }"
     >
       <template #description>
-        <Motion :initial="{ opacity: 0, transform: 'translateY(10px)' }" :in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }" :transition="{ delay: 0.2 }">
+        <Motion :initial="{ opacity: 0, transform: 'translateY(10px)' }" :while-in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }" :transition="{ delay: 0.2 }">
           <MDC :value="page.testimonial.quote" tag="span" unwrap="p" class="before:content-[open-quote] after:content-[close-quote]" cache-key="pro-testimonial-quote" />
         </Motion>
       </template>
-      <Motion :initial="{ opacity: 0, transform: 'translateY(10px)' }" :in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }" :transition="{ delay: 0.3 }">
+      <Motion :initial="{ opacity: 0, transform: 'translateY(10px)' }" :while-in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }" :transition="{ delay: 0.3 }">
         <UUser
           v-bind="page.testimonial.user"
           class="justify-center"
@@ -103,7 +103,7 @@ useSeoMeta({
       }"
       class="border-t border-(--ui-border)"
     >
-      <Motion as-child :initial="{ height: 0 }" :in-view="{ height: 'auto' }" :transition="{ delay: 0.4, duration: 1 }">
+      <Motion as-child :initial="{ height: 0 }" :while-in-view="{ height: 'auto' }" :transition="{ delay: 0.4, duration: 1 }">
         <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       </Motion>
     </UPageSection>

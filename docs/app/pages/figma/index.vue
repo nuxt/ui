@@ -233,6 +233,7 @@ onMounted(async () => {
           :title="plan.title"
           :description="plan.description"
           :price="plan.price"
+          :discount="plan.discount"
           :billing-period="plan.billing_period"
           :billing-cycle="plan.billing_cycle"
           :highlight="plan.highlight"

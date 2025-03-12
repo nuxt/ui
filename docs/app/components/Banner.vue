@@ -1,7 +1,17 @@
 <template>
-  <UBanner id="banner-2" icon="i-lucide-rocket">
+  <UBanner
+    id="ui3-launch"
+    icon="i-lucide-rocket"
+    :actions="[
+      {
+        label: 'Get 20% OFF on UI Pro',
+        to: '/pro/pricing',
+        trailingIcon: 'i-lucide-arrow-right'
+      }
+    ]"
+  >
     <template #title>
-      <span class="font-semibold">Nuxt UI v3</span> is officially released!
+      <span class="font-semibold">Nuxt UI v3</span> is officially released.
     </template>
   </UBanner>
 </template>
