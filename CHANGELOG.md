@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.0-beta.4](https://github.com/nuxt/ui/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2025-03-12)
+
+### Features
+
+* **Form:** global errors ([#3482](https://github.com/nuxt/ui/issues/3482)) ([6e03d9c](https://github.com/nuxt/ui/commit/6e03d9c6efc8f4cfc306813e733d7d3e03706323))
+* **Input/Textarea:** allow `null` value in model ([#3415](https://github.com/nuxt/ui/issues/3415)) ([cfe9b2e](https://github.com/nuxt/ui/commit/cfe9b2ecf34827bc11a5281a069988ab96030047))
+* **useLocale:** handle generic messages ([#3100](https://github.com/nuxt/ui/issues/3100)) ([a9c8eb3](https://github.com/nuxt/ui/commit/a9c8eb3f60a10d1a71632991c9db594716b0fba1))
+
+### Bug Fixes
+
+* **Button:** missing import ([21dbf01](https://github.com/nuxt/ui/commit/21dbf01888a161a9d8ac6eb0d957c1342f6cc30d)), closes [nuxt/ui#3417](https://github.com/nuxt/ui/issues/3417)
+* **Form:** input blur validation on submit ([#3504](https://github.com/nuxt/ui/issues/3504)) ([97c8098](https://github.com/nuxt/ui/commit/97c8098d4a35c392719ae179d36aa008d6f8f78a))
+* **vue:** prevent calling `useHead` in colors ([5ecd227](https://github.com/nuxt/ui/commit/5ecd2271ca86087cb805548397d75c38763ad412))
+
 ## [3.0.0-beta.3](https://github.com/nuxt/ui/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2025-03-07)
 
 ### Features
