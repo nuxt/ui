@@ -1,5 +1,7 @@
 # Changelog
 
+## [3.0.0](https://github.com/nuxt/ui/compare/v3.0.0-beta.4...v3.0.0) (2025-03-12)
+
 ## [3.0.0-beta.4](https://github.com/nuxt/ui/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2025-03-12)
 
 ### Features
