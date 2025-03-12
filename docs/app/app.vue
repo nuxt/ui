@@ -1,7 +1,6 @@
 <script setup lang="ts">
-// import { withoutTrailingSlash } from 'ufo'
+import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
-// import { debounce } from 'perfect-debounce'
 
 const route = useRoute()
 const appConfig = useAppConfig()
@@ -11,16 +10,6 @@ const { data: navigation } = await useAsyncData('navigation', () => queryCollect
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
   server: false
 })
-
-const searchTerm = ref('')
-
-// watch(searchTerm, debounce((query: string) => {
-//   if (!query) {
-//     return
-//   }
-
-//   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
-// }, 500))
 
 const links = useLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
@@ -33,8 +22,8 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
-    // { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
   ],
   style: [
     { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
@@ -61,7 +50,7 @@ provide('navigation', mappedNavigation)
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
     <template v-if="!route.path.startsWith('/examples')">
-      <!-- <Banner /> -->
+      <Banner />
 
       <Header :links="links" />
     </template>
@@ -75,7 +64,6 @@ provide('navigation', mappedNavigation)
 
       <ClientOnly>
         <LazyUContentSearch
-          v-model:search-term="searchTerm"
           :files="files"
           :groups="[{
             id: 'framework',

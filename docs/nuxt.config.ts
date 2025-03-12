@@ -34,7 +34,7 @@ export default defineNuxtConfig({
   },
   $production: {
     site: {
-      url: 'https://ui3.nuxt.dev'
+      url: 'https://ui.nuxt.com'
     }
   },
 
@@ -170,12 +170,12 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://ui3.nuxt.dev',
-    title: 'Nuxt UI v3',
+    domain: 'https://ui.nuxt.com',
+    title: 'Nuxt UI',
     description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
     full: {
-      title: 'Nuxt UI v3 Full Documentation',
-      description: 'This is the full documentation for Nuxt UI v3. It includes all the Markdown files written with the MDC syntax.'
+      title: 'Nuxt UI Full Documentation',
+      description: 'This is the full documentation for Nuxt UI. It includes all the Markdown files written with the MDC syntax.'
     },
     sections: [
       {

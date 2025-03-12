@@ -3,8 +3,8 @@ withDefaults(defineProps<{
   title: string
   description: string
   headline: string
-  framework: string
-  module: string
+  framework?: string
+  module?: string
 }>(), {
   framework: 'nuxt',
   module: ''
