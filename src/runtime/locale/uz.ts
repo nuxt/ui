@@ -2,7 +2,7 @@ import type { Messages } from '../types'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Oʼzbek',
+  name: 'Oʻzbek',
   code: 'uz',
   messages: {
     inputMenu: {
@@ -17,8 +17,8 @@ export default defineLocale<Messages>({
       nextMonth: 'Keyingi oy'
     },
     inputNumber: {
-      increment: 'Koʻpaytirish',
-      decrement: 'Kamaytirish'
+      increment: 'Qoʻshish',
+      decrement: 'Ayirish'
     },
     commandPalette: {
       placeholder: 'Buyruq kiriting yoki qidiring...',
@@ -36,8 +36,8 @@ export default defineLocale<Messages>({
       close: 'Yopish'
     },
     carousel: {
-      prev: 'Oldinga',
-      next: 'Keyingisi',
+      prev: 'Ortga',
+      next: 'Oldinga',
       goto: '{slide}-slaydga o‘tish'
     },
     modal: {
