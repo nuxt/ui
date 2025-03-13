@@ -26,6 +26,9 @@ jobs:
           name: benjamincanac/app-ui3
           ref: refs/heads/main
 
+      - name: Set short SHA
+        run: echo "COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
@@ -36,7 +39,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${git rev-parse --short HEAD}
+        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT }}
 
       - name: Typecheck
         run: pnpm run typecheck
@@ -63,6 +66,9 @@ jobs:
           name: benjamincanac/app-ui3-vue
           ref: refs/heads/main
 
+      - name: Set short SHA
+        run: echo "COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
@@ -73,7 +79,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${git rev-parse --short HEAD}
+        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT }}
 
       - name: Typecheck
         run: pnpm run typecheck
