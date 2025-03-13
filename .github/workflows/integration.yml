@@ -1,0 +1,82 @@
+name: integration
+
+on:
+  workflow_run:
+    workflows: ["module"]
+    types:
+      - completed
+
+jobs:
+  nuxt:
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: read
+      pull-requests: read
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # macos-latest, windows-latest
+        node: [22]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          name: benjamincanac/app-ui3
+          ref: refs/heads/main
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install https://pkg.pr.new/@nuxt/ui@${git rev-parse --short HEAD}
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
+
+  vue:
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: read
+      pull-requests: read
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # macos-latest, windows-latest
+        node: [22]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          name: benjamincanac/app-ui3-vue
+          ref: refs/heads/main
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install https://pkg.pr.new/@nuxt/ui@${git rev-parse --short HEAD}
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
