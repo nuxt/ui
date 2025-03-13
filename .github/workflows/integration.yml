@@ -23,8 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          name: benjamincanac/app-ui3
-          ref: refs/heads/main
+          repository: benjamincanac/app-ui3
 
       - name: Set short SHA
         run: echo "COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
@@ -63,8 +62,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          name: benjamincanac/app-ui3-vue
-          ref: refs/heads/main
+          repository: benjamincanac/app-ui3-vue
 
       - name: Set short SHA
         run: echo "COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
