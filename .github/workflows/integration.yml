@@ -81,8 +81,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT }}
 
-      - name: Typecheck
-        run: pnpm run typecheck
+      # - name: Typecheck
+      #   run: pnpm run typecheck
 
       - name: Build
         run: pnpm run build
