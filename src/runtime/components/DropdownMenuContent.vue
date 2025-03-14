@@ -12,8 +12,18 @@ interface DropdownMenuContentProps<T> extends Omit<RekaDropdownMenuContentProps,
   portal?: boolean
   sub?: boolean
   labelKey: string
+  /**
+   * @IconifyIcon
+   */
   checkedIcon?: string
+  /**
+   * @IconifyIcon
+   */
   loadingIcon?: string
+  /**
+   * @IconifyIcon
+   */
+  externalIcon?: boolean | string
   class?: any
   ui: typeof _dropdownMenu
   uiOverride?: any
@@ -48,7 +58,7 @@ const emits = defineEmits<DropdownMenuContentEmits>()
 const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
 const appConfig = useAppConfig()
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'class', 'ui', 'uiOverride'), emits)
+const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuContentSlots<T>[string]>
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
@@ -70,7 +80,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
           {{ get(item, props.labelKey as string) }}
         </slot>
 
-        <UIcon v-if="item.target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, color: item?.color, active })" />
+        <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" :class="ui.itemLabelExternalIcon({ class: uiOverride?.itemLabelExternalIcon, color: item?.color, active })" />
       </span>
 
       <span :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
@@ -121,6 +131,7 @@ const groups = computed(() => props.items?.length ? (Array.isArray(props.items[0
               :label-key="labelKey"
               :checked-icon="checkedIcon"
               :loading-icon="loadingIcon"
+              :external-icon="externalIcon"
               v-bind="item.content"
             >
               <template v-for="(_, name) in proxySlots" #[name]="slotData: any">

@@ -90,14 +90,12 @@ const columns: TableColumn<Payment>[] = [{
   }
 }]
 
-const table = useTemplateRef('table')
-
 const globalFilter = ref('45')
 </script>
 
 <template>
   <div class="flex flex-col flex-1 w-full">
-    <div class="flex px-4 py-3.5 border-b border-[var(--ui-border-accented)]">
+    <div class="flex px-4 py-3.5 border-b border-(--ui-border-accented)">
       <UInput
         v-model="globalFilter"
         class="max-w-sm"

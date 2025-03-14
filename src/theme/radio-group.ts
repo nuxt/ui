@@ -3,33 +3,33 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
-    fieldset: '',
-    legend: 'mb-1 block font-medium text-[var(--ui-text)]',
-    item: 'flex items-start',
+    fieldset: 'flex',
+    legend: 'mb-1 block font-medium text-(--ui-text)',
+    item: 'flex items-start peer',
+    base: 'rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2',
+    indicator: 'flex items-center justify-center size-full rounded-full after:bg-(--ui-bg) after:rounded-full',
     itemWrapper: 'flex',
-    base: 'rounded-full ring ring-inset ring-[var(--ui-border-accented)] focus-visible:outline-2 focus-visible:outline-offset-2',
-    indicator: 'flex items-center justify-center size-full rounded-full after:bg-[var(--ui-bg)] after:rounded-full',
     container: 'flex items-center',
     wrapper: 'ms-2',
-    label: 'block font-medium text-[var(--ui-text)]',
-    description: 'text-[var(--ui-text-muted)]'
+    label: 'block font-medium text-(--ui-text)',
+    description: 'text-(--ui-text-muted)'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `focus-visible:outline-[var(--ui-${color})]`,
-        indicator: `bg-[var(--ui-${color})]`
+        base: `focus-visible:outline-(--ui-${color})`,
+        indicator: `bg-(--ui-${color})`
       }])),
       neutral: {
-        base: 'focus-visible:outline-[var(--ui-border-inverted)]',
-        indicator: 'bg-[var(--ui-bg-inverted)]'
+        base: 'focus-visible:outline-(--ui-border-inverted)',
+        indicator: 'bg-(--ui-bg-inverted)'
       }
     },
     variant: {
       radio: {},
       card: {
         base: 'ml-4',
-        item: 'flex-row-reverse items-center justify-between border-2 border-[var(--ui-border-muted)] rounded-lg'
+        item: 'flex-row-reverse items-center justify-between border-1 border-[var(--ui-border-muted)] rounded-lg'
       },
       table: {
         item: 'border-[var(--ui-border-muted)]'
@@ -94,7 +94,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-[var(--ui-error)]'
+        legend: 'after:content-[\'*\'] after:ms-0.5 after:text-(--ui-error)'
       }
     }
   },
@@ -111,9 +111,8 @@ export default (options: Required<ModuleOptions>) => ({
     { size: 'lg', variant: 'table', class: { item: 'p-4', itemWrapper: 'gap-0' } },
     { size: 'xl', variant: 'table', class: { item: 'p-4.5', itemWrapper: 'gap-0' } },
 
-    { orientation: 'horizontal', variant: 'table', class: { item: 'first:rounded-l-lg last:rounded-r-lg not-first:not-last:border-x-2 first:border-l-2 border-y-2 last:border-r-2' } },
-    { orientation: 'vertical', variant: 'table', class: { item: 'first:rounded-t-lg last:rounded-b-lg not-first:not-last:border-y-2 first:border-t-2 border-x-2 last:border-b-2' } },
-
+    { orientation: 'horizontal', variant: 'table', class: { item: 'first:rounded-l-lg last:rounded-r-lg not-last:-ml-0.25 border-1' } },
+    { orientation: 'vertical', variant: 'table', class: { item: 'first:rounded-t-lg last:rounded-b-lg not-last:-mb-0.25 border-1' } },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'card',
@@ -134,7 +133,7 @@ export default (options: Required<ModuleOptions>) => ({
       color,
       variant: 'table',
       class: {
-        item: `data-[checked=true]:bg-[var(--ui-${color})]/20 data-[checked=true]:border-[var(--ui-${color})]/20`
+        item: `data-[checked=true]:relative data-[checked=true]:bg-[var(--ui-${color})]/20 data-[checked=true]:border-[var(--ui-${color})]/20`
       }
     }))
   ],

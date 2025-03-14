@@ -6,7 +6,6 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
@@ -19,6 +18,9 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   prefix?: string
   label?: string
   suffix?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   chip?: ChipProps
@@ -43,7 +45,10 @@ export interface CommandPaletteGroup<T> {
   ignoreFilter?: boolean
   /** Filter group items after the search happened. */
   postFilter?: (searchTerm: string, items: T[]) => T[]
-  /** The icon displayed when an item is highlighted. */
+  /**
+   * The icon displayed when an item is highlighted.
+   * @IconifyIcon
+   */
   highlightedIcon?: string
 }
 
@@ -56,11 +61,13 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
+   * @IconifyIcon
    */
   icon?: string
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**
@@ -79,10 +86,11 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   groups?: G[]
@@ -122,8 +130,6 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<G, SlotProps<T>> & DynamicSlots<T, SlotProps<T>>
-
-extendDevtoolsMeta({ example: 'CommandPaletteExample', ignoreProps: ['groups'] })
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
@@ -263,7 +269,7 @@ const groups = computed(() => {
               color="neutral"
               variant="ghost"
               :aria-label="t('commandPalette.close')"
-              v-bind="typeof close === 'object' ? close : undefined"
+              v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
               :class="ui.close({ class: props.ui?.close })"
               @click="emits('update:open', false)"
             />

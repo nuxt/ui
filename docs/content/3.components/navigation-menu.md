@@ -1,6 +1,7 @@
 ---
 title: NavigationMenu
 description: A list of links that can be displayed horizontally or vertically.
+category: navigation
 links:
   - label: NavigationMenu
     icon: i-custom-reka-ui
@@ -67,14 +68,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -181,14 +178,10 @@ props:
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
-          - label: useModal
+          - label: useOverlay
             icon: i-lucide-file-text
-            description: Display a modal within your application.
-            to: /composables/use-modal
-          - label: useSlideover
-            icon: i-lucide-file-text
-            description: Display a slideover within your application.
-            to: /composables/use-slideover
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
@@ -284,14 +277,10 @@ props:
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
-          - label: useModal
+          - label: useOverlay
             icon: i-lucide-file-text
-            description: Display a modal within your application.
-            to: /composables/use-modal
-          - label: useSlideover
-            icon: i-lucide-file-text
-            description: Display a slideover within your application.
-            to: /composables/use-slideover
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
@@ -334,7 +323,7 @@ props:
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
-  class: 'data-[orientation=horizontal]:border-b border-[var(--ui-border)] data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
+  class: 'data-[orientation=horizontal]:border-b border-(--ui-border) data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
 ---
 ::
 
@@ -464,14 +453,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -564,14 +549,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -655,14 +636,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -735,14 +712,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -838,7 +811,7 @@ name: 'navigation-menu-content-slot-example'
 ::
 
 ::note
-In this example, we add the `sm:w-[var(--reka-navigation-menu-viewport-width)]` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
+In this example, we add the `sm:w-(--reka-navigation-menu-viewport-width)` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
 ::
 
 ## API

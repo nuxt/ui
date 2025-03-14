@@ -6,13 +6,13 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "happy-dom",
     "valibot30",
     "valibot31",
     "typescript",
+    "vaul-vue",
     "vue-tsc"
   ],
-  "baseBranches": ["dev", "v3"],
+  "baseBranches": ["v2", "v3"],
   "packageRules": [{
     "matchBaseBranches": ["v3"],
     "labels": ["v3"]

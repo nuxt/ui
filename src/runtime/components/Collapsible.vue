@@ -3,7 +3,6 @@ import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/collapsible'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
 const appConfigCollapsible = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof theme> } }
@@ -26,8 +25,6 @@ export interface CollapsibleSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'CollapsibleExample' })
 </script>
 
 <script setup lang="ts">

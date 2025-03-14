@@ -19,9 +19,22 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'primary'
+   */
   color?: PinInputVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: PinInputVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: PinInputVariants['size']
+  /**
+   * The number of input fields.
+   * @defaultValue 5
+   */
   length?: number | string
   highlight?: boolean
   class?: any
@@ -40,8 +53,6 @@ import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
-
-defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
@@ -89,7 +100,6 @@ function onBlur(event: FocusEvent) {
       :key="ids"
       :index="index"
       :class="ui.base({ class: props.ui?.base })"
-      v-bind="$attrs"
       :disabled="disabled"
       @blur="onBlur"
       @focus="emitFormFocus"

@@ -1,10 +1,11 @@
 import { ref, nextTick } from 'vue'
 import { useState } from '#imports'
-import type { ToastProps } from '../types'
+import type { ToastProps, ToastEmits } from '../types'
+import type { EmitsToProps } from '../types/utils'
 
-export interface Toast extends Omit<ToastProps, 'defaultOpen'> {
+export interface Toast extends Omit<ToastProps, 'defaultOpen'>, EmitsToProps<ToastEmits> {
   id: string | number
-  click?: (toast: Toast) => void
+  onClick?: (toast: Toast) => void
 }
 
 export function useToast() {
@@ -33,16 +34,16 @@ export function useToast() {
     running.value = false
   }
 
-  async function add(toast: Partial<Toast>): Promise<Toast> {
+  function add(toast: Partial<Toast>): Toast {
     const body = {
       id: generateId(),
       open: true,
       ...toast
-    }
+    } as Toast
 
     queue.push(body)
 
-    await processQueue()
+    processQueue()
 
     return body
   }

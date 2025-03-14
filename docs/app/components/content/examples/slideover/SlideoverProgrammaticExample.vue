@@ -4,20 +4,37 @@ import { LazySlideoverExample } from '#components'
 const count = ref(0)
 
 const toast = useToast()
-const slideover = useSlideover()
+const overlay = useOverlay()
 
-function open() {
-  count.value++
+const slideover = overlay.create(LazySlideoverExample, {
+  props: {
+    count: count.value
+  }
+})
 
-  slideover.open(LazySlideoverExample, {
-    title: 'Slideover',
-    count: count.value,
-    onSuccess() {
-      toast.add({
-        title: 'Success !',
-        id: 'modal-success'
-      })
-    }
+async function open() {
+  const shouldIncrement = await slideover.open()
+
+  if (shouldIncrement) {
+    count.value++
+
+    toast.add({
+      title: `Success: ${shouldIncrement}`,
+      color: 'success',
+      id: 'slideover-success'
+    })
+
+    // Update the count
+    slideover.patch({
+      count: count.value
+    })
+    return
+  }
+
+  toast.add({
+    title: `Dismissed: ${shouldIncrement}`,
+    color: 'error',
+    id: 'slideover-dismiss'
   })
 }
 </script>

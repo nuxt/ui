@@ -32,6 +32,7 @@ describe('RadioGroup', () => {
     ['with orientation', { props: { ...props, orientation: 'horizontal' } }],
     ['with variant card', { props: { ...props, variant: 'card' } }],
     ['with variant table', { props: { ...props, variant: 'table' } }],
+    ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { wrapper: 'ms-4' } } }],

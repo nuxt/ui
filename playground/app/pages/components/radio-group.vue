@@ -3,7 +3,7 @@ import theme from '#build/ui/radio-group'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 const variants = Object.keys(theme.variants.variant)
-const variant = ref('radio' as const)
+const variant = ref('table' as const)
 
 const literalOptions = [
   'Option 1',
@@ -13,13 +13,15 @@ const literalOptions = [
 const items = [
   { value: '1', label: 'Option 1' },
   { value: '2', label: 'Option 2' },
-  { value: '3', label: 'Option 3' }
+  { value: '3', label: 'Option 3' },
+  { value: '4', label: 'Option 4' }
 ]
 
 const itemsWithDescription = [
   { value: '1', label: 'Option 1', description: 'Description 1' },
   { value: '2', label: 'Option 2', description: 'Description 2' },
-  { value: '3', label: 'Option 3', description: 'Description 3' }
+  { value: '3', label: 'Option 3', description: 'Description 3' },
+  { value: '4', label: 'Option 4', description: 'Description 4' }
 ]
 </script>
 

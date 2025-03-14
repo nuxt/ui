@@ -5,7 +5,6 @@ import _appConfig from '#build/app.config'
 import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
 import theme from '#build/ui/link'
 import { tv } from '../utils/tv'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 
 interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
   /**
@@ -88,13 +87,11 @@ export interface LinkProps extends NuxtLinkProps {
 export interface LinkSlots {
   default(props: { active: boolean }): any
 }
-
-extendDevtoolsMeta({ example: 'LinkExample' })
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { isEqual, diff } from 'ohash'
+import { isEqual, diff } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute } from '#imports'
@@ -127,11 +124,15 @@ const ui = computed(() => tv({
 function isPartiallyEqual(item1: any, item2: any) {
   const diffedKeys = diff(item1, item2).reduce((filtered, q) => {
     if (q.type === 'added') {
-      filtered.push(q.key)
+      filtered.add(q.key)
     }
     return filtered
-  }, [] as string[])
-  return isEqual(item1, item2, { excludeKeys: key => diffedKeys.includes(key) })
+  }, new Set<string>())
+
+  const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)))
+  const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)))
+
+  return isEqual(item1Filtered, item2Filtered)
 }
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {

@@ -3,7 +3,6 @@ import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/button-group'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
 const appConfigButtonGroup = _appConfig as AppConfig & { ui: { buttonGroup: Partial<typeof theme> } }
@@ -18,6 +17,9 @@ export interface ButtonGroupProps {
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'md'
+   */
   size?: ButtonGroupVariants['size']
   /**
    * The orientation the buttons are laid out.
@@ -30,8 +32,6 @@ export interface ButtonGroupProps {
 export interface ButtonGroupSlots {
   default(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'ButtonGroupExample' })
 </script>
 
 <script setup lang="ts">

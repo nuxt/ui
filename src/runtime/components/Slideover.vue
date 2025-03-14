@@ -4,7 +4,6 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'reka-
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/slideover'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
 
@@ -29,6 +28,10 @@ export interface SlideoverProps extends DialogRootProps {
    * @defaultValue true
    */
   transition?: boolean
+  /**
+   * The side of the slideover.
+   * @defaultValue 'right'
+   */
   side?: SlideoverVariants['side']
   /**
    * Render the slideover in a portal.
@@ -40,10 +43,11 @@ export interface SlideoverProps extends DialogRootProps {
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   /**
@@ -55,7 +59,9 @@ export interface SlideoverProps extends DialogRootProps {
   ui?: Partial<typeof slideover.slots>
 }
 
-export interface SlideoverEmits extends DialogRootEmits {}
+export interface SlideoverEmits extends DialogRootEmits {
+  'after:leave': []
+}
 
 export interface SlideoverSlots {
   default(props: { open: boolean }): any
@@ -67,13 +73,11 @@ export interface SlideoverSlots {
   body(props?: {}): any
   footer(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'SlideoverExample' })
 </script>
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, useForwardPropsEmits } from 'reka-ui'
+import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
@@ -101,11 +105,14 @@ const contentEvents = computed(() => {
     return {
       pointerDownOutside: (e: Event) => e.preventDefault(),
       interactOutside: (e: Event) => e.preventDefault(),
-      escapeKeyDown: (e: Event) => e.preventDefault()
+      escapeKeyDown: (e: Event) => e.preventDefault(),
+      closeAutoFocus: (e: Event) => e.preventDefault()
     }
   }
 
-  return {}
+  return {
+    closeAutoFocus: (e: Event) => e.preventDefault()
+  }
 })
 
 const ui = computed(() => slideover({
@@ -123,21 +130,37 @@ const ui = computed(() => slideover({
     <DialogPortal :disabled="!portal">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :data-side="side" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+      <DialogContent :data-side="side" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-leave="emits('after:leave')" v-on="contentEvents">
+        <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
+          <DialogTitle v-if="title || !!slots.title">
+            <slot name="title">
+              {{ title }}
+            </slot>
+          </DialogTitle>
+
+          <DialogDescription v-if="description || !!slots.description">
+            <slot name="description">
+              {{ description }}
+            </slot>
+          </DialogDescription>
+        </VisuallyHidden>
+
         <slot name="content">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
             <slot name="header">
-              <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
-                <slot name="title">
-                  {{ title }}
-                </slot>
-              </DialogTitle>
+              <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+                <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+                  <slot name="title">
+                    {{ title }}
+                  </slot>
+                </DialogTitle>
 
-              <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
-                <slot name="description">
-                  {{ description }}
-                </slot>
-              </DialogDescription>
+                <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+                  <slot name="description">
+                    {{ description }}
+                  </slot>
+                </DialogDescription>
+              </div>
 
               <DialogClose as-child>
                 <slot name="close" :ui="ui">
@@ -148,7 +171,7 @@ const ui = computed(() => slideover({
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('slideover.close')"
-                    v-bind="typeof close === 'object' ? close : undefined"
+                    v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
                     :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>

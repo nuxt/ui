@@ -1,7 +1,17 @@
 <template>
-  <UBanner icon="i-lucide-construction" :actions="[{ label: 'Go to Nuxt UI v2', to: 'https://ui.nuxt.com', trailingIcon: 'i-lucide-arrow-right' }]" :close="false">
+  <UBanner
+    id="ui3-launch"
+    icon="i-lucide-rocket"
+    :actions="[
+      {
+        label: 'Get 20% OFF on UI Pro',
+        to: '/pro/pricing',
+        trailingIcon: 'i-lucide-arrow-right'
+      }
+    ]"
+  >
     <template #title>
-      You're looking at the documentation for <span class="font-semibold">Nuxt UI v3</span>!
+      <span class="font-semibold">Nuxt UI v3</span> is officially released.
     </template>
   </UBanner>
 </template>
