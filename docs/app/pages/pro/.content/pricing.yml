@@ -18,7 +18,7 @@ pricing:
     description: Get all Nuxt UI Pro components in a Figma kit to design your next application before coding. Everything you need, from wire-framing to high-fidelity web integration.
     orientation: horizontal
     price: $149
-    discount: $119
+    # discount: $119
     billing_period: one-time payment
     billing_cycle: plus local taxes
     terms: Solo & Team licenses available.
@@ -39,7 +39,7 @@ pricing:
     - title: Solo
       description: Tailored for indie hackers, freelancers and solo founders.
       price: $249
-      discount: $199
+      # discount: $199
       billing_period: one-time payment
       billing_cycle: plus local taxes
       features:
@@ -54,7 +54,7 @@ pricing:
     - title: Startup
       description: Best suited for small teams, startups and agencies.
       price: $499
-      discount: $399
+      # discount: $399
       billing_period: one-time payment
       billing_cycle: plus local taxes
       features:
@@ -70,7 +70,7 @@ pricing:
     - title: Organization
       description: Ideal for larger teams and organizations.
       price: $999
-      discount: $799
+      # discount: $799
       billing_period: one-time payment
       billing_cycle: plus local taxes
       features:
