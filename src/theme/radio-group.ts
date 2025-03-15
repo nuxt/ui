@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative',
     fieldset: 'flex',
     legend: 'mb-1 block font-medium text-(--ui-text)',
-    item: 'flex items-start peer',
+    item: 'flex items-start',
     base: 'rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2',
     indicator: 'flex items-center justify-center size-full rounded-full after:bg-(--ui-bg) after:rounded-full',
     itemWrapper: 'flex',

@@ -20,12 +20,25 @@ export interface RadioGroupItem {
 }
 
 export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'> {
-  /**
-   * The element or component this component should render as.
-   * @defaultValue 'div'
-   */
-  as?: any
   legend?: string
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: RadioGroupVariants['color']
+  /**
+   * @defaultValue 'radio'
+   */
+  variant?: RadioGroupVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
+  size?: RadioGroupVariants['size']
+  /**
+   * The orientation the radio buttons are laid out.
+   * @defaultValue 'vertical'
+   */
+  orientation?: RadioGroupRootProps['orientation']
+  items?: T[]
   /**
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
@@ -41,21 +54,11 @@ export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultVa
    * @defaultValue 'description'
    */
   descriptionKey?: string
-  items?: T[]
   /**
-   * @defaultValue 'md'
+   * The element or component this component should render as.
+   * @defaultValue 'div'
    */
-  size?: RadioGroupVariants['size']
-  /**
-   * @defaultValue 'primary'
-   */
-  color?: RadioGroupVariants['color']
-  /**
-   * The orientation the radio buttons are laid out.
-   * @defaultValue 'vertical'
-   */
-  orientation?: RadioGroupRootProps['orientation']
-  variant?: RadioGroupVariants['variant']
+  as?: any
   class?: any
   ui?: Partial<typeof radioGroup.slots>
 }
