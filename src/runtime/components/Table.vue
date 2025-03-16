@@ -289,7 +289,7 @@ function handleRowSelect(row: TableRow<T>, e: Event) {
     return
   }
   const target = e.target as HTMLElement
-  const isInteractive = target.closest('button')
+  const isInteractive = target.closest('button') || target.closest('a')
   if (isInteractive) {
     return
   }
