@@ -180,7 +180,7 @@ testimonials:
     - quote: "Nuxt UI Pro is my preferred choice for everything, from a POC to a web platform. It's ready to use out-of-the-box and assists me in crafting pixel-perfect UIs. It saves me a significant amount of time while remaining highly customizable. Give it a try, and you won't be let down."
       user:
         name: 'Estéban Soubiran'
-        description:  'Web developer and UnJS member'
+        description:  'Software engineer'
         to: 'https://x.com/soubiran_'
         target: _blank
         avatar:
