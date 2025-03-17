@@ -128,7 +128,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       yaml()
-    ]
+    ],
+    server: {
+      fs: {
+        allow: process.env.NUXT_UI_PRO_PATH ? [resolve(process.env.NUXT_UI_PRO_PATH)] : undefined
+      }
+    }
   },
 
   componentMeta: {
