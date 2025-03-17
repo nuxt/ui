@@ -178,7 +178,7 @@ pricing:
     - title: Solo License
       description: Design faster with all Nuxt UI Pro components.
       price: $149
-      discount: $119
+      # discount: $119
       billing_period: one-time payment
       billing_cycle: plus local taxes
       class: bg-(--ui-bg-elevated)/50
@@ -200,7 +200,7 @@ pricing:
     - title: Team License
       description: Everything you need to deliver faster as a team.
       price: $349
-      discount: $279
+      # discount: $279
       billing_period: one-time payment
       billing_cycle: plus local taxes
       class: bg-(--ui-bg-elevated)/50

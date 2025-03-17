@@ -4,7 +4,7 @@
     icon="i-lucide-rocket"
     :actions="[
       {
-        label: 'Get 20% OFF on UI Pro',
+        label: 'Buy Nuxt UI Pro',
         to: '/pro/pricing',
         trailingIcon: 'i-lucide-arrow-right'
       }
