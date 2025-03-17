@@ -69,7 +69,7 @@ export function useNuxtApp() {
 export function defineNuxtPlugin(plugin: (nuxtApp: NuxtApp) => void) {
   return {
     install(app) {
-      plugin({ vueApp: app } as NuxtApp)
+      app.runWithContext(() => plugin({ vueApp: app } as NuxtApp))
     }
   } satisfies VuePlugin
 }

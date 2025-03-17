@@ -2,6 +2,7 @@ import { computed } from 'vue'
 import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
 // FIXME: https://github.com/nuxt/module-builder/issues/141#issuecomment-2078248248
 import type {} from '#app'
+import type { UseHeadInput } from '@unhead/vue/types'
 
 export default defineNuxtPlugin(() => {
   const appConfig = useAppConfig()
@@ -33,12 +34,11 @@ export default defineNuxtPlugin(() => {
   })
 
   // Head
-  const headData: any = {
+  const headData: UseHeadInput = {
     style: [{
       innerHTML: () => root.value,
-      tagPriority: -2,
-      id: 'nuxt-ui-colors',
-      type: 'text/css'
+      tagPriority: 'critical',
+      id: 'nuxt-ui-colors'
     }]
   }
 
@@ -55,7 +55,5 @@ export default defineNuxtPlugin(() => {
     }]
   }
 
-  if (!nuxtApp.isVue) {
-    useHead(headData)
-  }
+  useHead(headData)
 })
