@@ -116,4 +116,4 @@ function _useOverlay() {
   }
 }
 
-export const useOverlay = createSharedComposable(_useOverlay)
+export const useOverlay = /* @__PURE__ */ createSharedComposable(_useOverlay)
