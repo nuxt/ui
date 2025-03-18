@@ -67,4 +67,4 @@ const _useKbd = () => {
   }
 }
 
-export const useKbd = createSharedComposable(_useKbd)
+export const useKbd = /* @__PURE__ */ createSharedComposable(_useKbd)
