@@ -21,7 +21,7 @@ export default {
 import { toRef, useId, provide } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
-import { localeContextInjectionKey } from '../utils/locale'
+import { localeContextInjectionKey } from '../composables/useLocale'
 import UToaster from './Toaster.vue'
 import UOverlayProvider from './OverlayProvider.vue'
 
