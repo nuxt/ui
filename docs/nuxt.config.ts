@@ -105,9 +105,10 @@ export default defineNuxtConfig({
       routes: [
         '/getting-started',
         '/api/countries.json',
-        '/api/locales.json'
+        '/api/locales.json',
         // '/api/releases.json',
         // '/api/pulls.json'
+        '/404.html'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
