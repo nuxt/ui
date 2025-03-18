@@ -73,7 +73,7 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
           :key="value"
           color="neutral"
           variant="ghost"
-          :to="`https://github.com/nuxt/${value}`"
+          to="https://github.com/nuxt/ui"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
