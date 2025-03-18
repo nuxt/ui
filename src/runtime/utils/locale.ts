@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref, InjectionKey } from 'vue'
 import type { Locale, Direction } from '../types/locale'
 import type { MaybeRef } from '@vueuse/core'
 import { computed, isRef, ref, unref } from 'vue'
@@ -41,3 +41,5 @@ export function buildLocaleContext<M>(locale: MaybeRef<Locale<M>>): LocaleContex
     t: buildTranslator(locale)
   }
 }
+
+export const localeContextInjectionKey: InjectionKey<Ref<Locale<unknown> | undefined>> = Symbol('nuxt-ui.locale-context')
