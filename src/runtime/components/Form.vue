@@ -12,14 +12,34 @@ const form = tv({ extend: tv(theme), ...(appConfigForm.ui?.form || {}) })
 
 export interface FormProps<T extends object> {
   id?: string | number
+  /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: FormSchema<T>
+  /** An object representing the current state of the form. */
   state: Partial<T>
+  /**
+   * Custom validation function to validate the form state.
+   * @param state - The current state of the form.
+   * @returns A promise that resolves to an array of FormError objects, or an array of FormError objects directly.
+   */
   validate?: (state: Partial<T>) => Promise<FormError[]> | FormError[]
+  /**
+   * The list of input events that trigger the form validation.
+   * @defaultValue `['blur', 'change', 'input']`
+   */
   validateOn?: FormInputEvents[]
+  /** Disable all inputs inside the form. */
   disabled?: boolean
+  /**
+   * Delay in milliseconds before validating the form on input events.
+   * @defaultValue `300`
+   */
   validateOnInputDelay?: number
-  class?: any
+  /**
+   * If true, schema transformations will be applied to the state on submit.
+   * @defaultValue `true`
+   */
   transform?: boolean
+  class?: any
   onSubmit?: ((event: FormSubmitEvent<T>) => void | Promise<void>) | (() => void | Promise<void>)
 }
 
