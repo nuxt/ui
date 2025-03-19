@@ -19,7 +19,7 @@
     "joi": "^17.13.3",
     "motion": "^12.5.0",
     "motion-v": "0.13.0",
-    "nuxt": "^3.16.0",
+    "nuxt": "^3.16.1",
     "nuxt-component-meta": "^0.10.0",
     "nuxt-llms": "^0.1.0",
     "nuxt-og-image": "^5.0.4",
