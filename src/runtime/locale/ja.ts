@@ -1,6 +1,7 @@
+import type { Messages } from '../types'
 import { defineLocale } from '../composables/defineLocale'
 
-export default defineLocale({
+export default defineLocale<Messages>({
   name: '日本語',
   code: 'ja',
   messages: {

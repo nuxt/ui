@@ -4,12 +4,11 @@ import type { RadioGroupRootProps, RadioGroupRootEmits, AcceptableValue } from '
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
+const appConfigRadioGroup = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
 
-const radioGroup = tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) })
+const radioGroup = tv({ extend: tv(theme), ...(appConfigRadioGroup.ui?.radioGroup || {}) })
 
 type RadioGroupVariants = VariantProps<typeof radioGroup>
 
@@ -43,7 +42,13 @@ export interface RadioGroupProps<T> extends Pick<RadioGroupRootProps, 'defaultVa
    */
   descriptionKey?: string
   items?: T[]
+  /**
+   * @defaultValue 'md'
+   */
   size?: RadioGroupVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: RadioGroupVariants['color']
   /**
    * The orientation the radio buttons are laid out.
@@ -65,8 +70,6 @@ export interface RadioGroupSlots<T> {
   label: SlotProps<T>
   description: SlotProps<T>
 }
-
-extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends RadioGroupItem | AcceptableValue">
@@ -87,7 +90,7 @@ const slots = defineSlots<RadioGroupSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled } = useFormField<RadioGroupProps<T>>(props, { bind: false })
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
 
 const ui = computed(() => radioGroup({
@@ -147,7 +150,7 @@ function onUpdate(value: any) {
     :class="ui.root({ class: [props.class, props.ui?.root] })"
     @update:model-value="onUpdate"
   >
-    <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })">
+    <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
       <legend v-if="legend || !!slots.legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
           {{ legend }}

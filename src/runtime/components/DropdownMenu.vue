@@ -1,22 +1,25 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
+const appConfigDropdownMenu = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
-const dropdownMenu = tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })
+const dropdownMenu = tv({ extend: tv(theme), ...(appConfigDropdownMenu.ui?.dropdownMenu || {}) })
 
 type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
 export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   color?: DropdownMenuVariants['color']
   avatar?: AvatarProps
@@ -39,18 +42,30 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
 }
 
 export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
+  /**
+   * @defaultValue 'md'
+   */
   size?: DropdownMenuVariants['size']
   items?: T[] | T[][]
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   checkedIcon?: string
   /**
    * The icon displayed when an item is loading.
    * @defaultValue appConfig.ui.icons.loading
+   * @IconifyIcon
    */
   loadingIcon?: string
+  /**
+   * The icon displayed when the item is an external link.
+   * Set to `false` to hide the external icon.
+   * @defaultValue appConfig.ui.icons.external
+   * @IconifyIcon
+   */
+  externalIcon?: boolean | string
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
@@ -88,54 +103,6 @@ export type DropdownMenuSlots<T extends { slot?: string }> = {
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
-extendDevtoolsMeta({
-  example: 'DropdownMenuExample',
-  ignoreProps: ['items'],
-  defaultProps: {
-    items: [
-      [{
-        label: 'My account',
-        avatar: {
-          src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-        },
-        type: 'label'
-      }], [{
-        label: 'Profile',
-        icon: 'i-lucide-user',
-        slot: 'custom'
-      }, {
-        label: 'Billing',
-        icon: 'i-lucide-credit-card',
-        kbds: ['meta', 'b']
-      }, {
-        label: 'Settings',
-        icon: 'i-lucide-cog',
-        kbds: ['?']
-      }], [{
-        label: 'Invite users',
-        icon: 'i-lucide-user-plus',
-        children: [[{
-          label: 'Invite by email',
-          icon: 'i-lucide-send-horizontal'
-        }, {
-          label: 'Invite by link',
-          icon: 'i-lucide-link',
-          kbds: ['meta', 'i']
-        }]]
-      }],
-      [{
-        label: 'GitHub',
-        icon: 'i-simple-icons-github',
-        to: 'https://github.com/nuxt/ui',
-        target: '_blank'
-      }, {
-        label: 'Support',
-        icon: 'i-lucide-life-buoy',
-        to: '/components/dropdown-menu'
-      }]
-    ]
-  }
-})
 </script>
 
 <script setup lang="ts" generic="T extends DropdownMenuItem">
@@ -149,6 +116,7 @@ import UDropdownMenuContent from './DropdownMenuContent.vue'
 const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   portal: true,
   modal: true,
+  externalIcon: true,
   labelKey: 'label'
 })
 const emits = defineEmits<DropdownMenuEmits>()
@@ -180,6 +148,7 @@ const ui = computed(() => dropdownMenu({
       :label-key="labelKey"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
+      :external-icon="externalIcon"
     >
       <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
         <slot :name="name" v-bind="slotData" />

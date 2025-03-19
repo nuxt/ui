@@ -5,17 +5,19 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
 import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
+const appConfigSelect = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
-const select = tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })
+const select = tv({ extend: tv(theme), ...(appConfigSelect.ui?.select || {}) })
 
 export interface SelectItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   chip?: ChipProps
@@ -34,17 +36,28 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: SelectVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: SelectVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: SelectVariants['size']
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**
@@ -102,8 +115,6 @@ export interface SelectSlots<T, M extends boolean> {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 }
-
-extendDevtoolsMeta({ defaultProps: { items: ['Option 1', 'Option 2', 'Option 3'] } })
 </script>
 
 <script setup lang="ts" generic="T extends MaybeArrayOfArrayItem<I>, I extends MaybeArrayOfArray<SelectItem | AcceptableValue | boolean> = MaybeArrayOfArray<SelectItem | AcceptableValue | boolean>, V extends SelectItemKey<T> | undefined = undefined, M extends boolean = false">
@@ -120,6 +131,8 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<SelectProps<T, I, V, M>>(), {
   valueKey: 'value' as never,
   labelKey: 'label' as never,
@@ -129,11 +142,11 @@ const emits = defineEmits<SelectEmits<T, V, M>>()
 const slots = defineSlots<SelectSlots<T, M>>()
 
 const appConfig = useAppConfig()
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
-const { emitFormChange, emitFormInput, emitFormBlur, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
+const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
@@ -179,6 +192,7 @@ function onUpdateOpen(value: boolean) {
   } else {
     const event = new FocusEvent('focus')
     emits('focus', event)
+    emitFormFocus()
   }
 }
 </script>
@@ -186,16 +200,17 @@ function onUpdateOpen(value: boolean) {
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <SelectRoot
-    :id="id"
     v-slot="{ modelValue, open }"
-    v-bind="rootProps"
     :name="name"
+    v-bind="rootProps"
     :autocomplete="autocomplete"
     :disabled="disabled"
+    :default-value="(defaultValue as (AcceptableValue | AcceptableValue[] | undefined))"
+    :model-value="(modelValue as (AcceptableValue | AcceptableValue[] | undefined))"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <SelectTrigger :class="ui.base({ class: [props.class, props.ui?.base] })">
+    <SelectTrigger :id="id" :class="ui.base({ class: [props.class, props.ui?.base] })" v-bind="{ ...$attrs, ...ariaAttrs }">
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as M extends true ? AcceptableValue[] : AcceptableValue)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />

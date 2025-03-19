@@ -2,6 +2,7 @@
 const searchTerm = ref('')
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  key: 'command-palette-users',
   params: { q: searchTerm },
   transform: (data: { id: number, name: string, email: string }[]) => {
     return data?.map(user => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` } })) || []

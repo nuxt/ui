@@ -1,6 +1,7 @@
+import type { Messages } from '../types'
 import { defineLocale } from '../composables/defineLocale'
 
-export default defineLocale({
+export default defineLocale<Messages>({
   name: 'Español',
   code: 'es',
   messages: {
@@ -10,8 +11,8 @@ export default defineLocale({
       create: 'Crear "{label}"'
     },
     calendar: {
-      prevYear: 'A o anterior',
-      nextYear: 'A o siguiente',
+      prevYear: 'Año anterior',
+      nextYear: 'Año siguiente',
       prevMonth: 'Mes anterior',
       nextMonth: 'Mes siguiente'
     },

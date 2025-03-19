@@ -43,9 +43,6 @@ jobs:
       - name: Prepare
         run: pnpm run dev:prepare
 
-      - name: Devtools prepare
-        run: pnpm run devtools:prepare
-
       - name: Lint
         run: pnpm run lint
 

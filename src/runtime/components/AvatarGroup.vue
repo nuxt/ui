@@ -3,12 +3,11 @@ import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar-group'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { avatarGroup: Partial<typeof theme> } }
+const appConfigAvatarGroup = _appConfig as AppConfig & { ui: { avatarGroup: Partial<typeof theme> } }
 
-const avatarGroup = tv({ extend: tv(theme), ...(appConfig.ui?.avatarGroup || {}) })
+const avatarGroup = tv({ extend: tv(theme), ...(appConfigAvatarGroup.ui?.avatarGroup || {}) })
 
 type AvatarGroupVariants = VariantProps<typeof avatarGroup>
 
@@ -18,6 +17,9 @@ export interface AvatarGroupProps {
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'md'
+   */
   size?: AvatarGroupVariants['size']
   /**
    * The maximum number of avatars to display.
@@ -30,8 +32,6 @@ export interface AvatarGroupProps {
 export interface AvatarGroupSlots {
   default(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'AvatarGroupExample' })
 </script>
 
 <script setup lang="ts">

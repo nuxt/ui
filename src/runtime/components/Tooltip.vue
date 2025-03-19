@@ -3,13 +3,12 @@ import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipAr
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { KbdProps } from '../types'
 
-const appConfig = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
+const appConfigTooltip = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
 
-const tooltip = tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })
+const tooltip = tv({ extend: tv(theme), ...(appConfigTooltip.ui?.tooltip || {}) })
 
 export interface TooltipProps extends TooltipRootProps {
   /** The text content of the tooltip. */
@@ -41,8 +40,6 @@ export interface TooltipSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'TooltipExample', defaultProps: { text: 'Hello world!' } })
 </script>
 
 <script setup lang="ts">
@@ -70,7 +67,7 @@ const ui = computed(() => tooltip({
 
 <template>
   <TooltipRoot v-slot="{ open }" v-bind="rootProps">
-    <TooltipTrigger v-if="!!slots.default" as-child :class="props.class">
+    <TooltipTrigger v-if="!!slots.default" v-bind="$attrs" as-child :class="props.class">
       <slot :open="open" />
     </TooltipTrigger>
 
