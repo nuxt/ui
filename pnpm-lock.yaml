@@ -241,8 +241,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: ^3.0.0
-        version: 3.0.0(@babel/parser@7.26.9)(magicast@0.3.5)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@d96a086
+        version: https://pkg.pr.new/@nuxt/ui-pro@d96a086(@babel/parser@7.26.9)(magicast@0.3.5)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
       '@nuxthub/core':
         specifier: ^0.8.18
         version: 0.8.18(db0@0.3.1(better-sqlite3@11.8.1))(ioredis@5.6.0)(magicast@0.3.5)(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
@@ -1704,8 +1704,9 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@3.0.0':
-    resolution: {integrity: sha512-aUEN/DvMTXL5dJuigBYxxgTUQOmJh4Fxjn4TkPTegRE/7KKOdeKT4/tBrmSe96QMiFZcZDxYrjkFeniwyLkVIg==}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@d96a086':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@d96a086}
+    version: 3.0.0
     peerDependencies:
       typescript: 5.6.3
 
@@ -3300,6 +3301,10 @@ packages:
 
   consola@3.4.0:
     resolution: {integrity: sha512-EiPU8G6dQG0GFHNR8ljnZFki/8a+cQwEQ+7wpxdChl02Q8HXlwEZWD5lqAF8vC2sEC3Tehr8hy7vErz88LHyUA==}
+    engines: {node: ^14.18.0 || >=16.10.0}
+
+  consola@3.4.2:
+    resolution: {integrity: sha512-5IKcdX0nnYavi6G7TtOhwkYzyjfJlatbjMjuLSfE2kYT5pMDOilZ4OvMhi637CcDICTmz3wARPoyhqyX1Y+XvA==}
     engines: {node: ^14.18.0 || >=16.10.0}
 
   conventional-changelog-angular@8.0.0:
@@ -8684,13 +8689,13 @@ snapshots:
       - typescript
       - yaml
 
-  '@nuxt/ui-pro@3.0.0(@babel/parser@7.26.9)(magicast@0.3.5)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@d96a086(@babel/parser@7.26.9)(magicast@0.3.5)(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       '@nuxt/kit': 3.16.0(magicast@0.3.5)
       '@nuxt/schema': 3.16.0
       '@nuxt/ui': 'link:'
       '@vueuse/core': 13.0.0(vue@3.5.13(typescript@5.6.3))
-      consola: 3.4.0
+      consola: 3.4.2
       defu: 6.1.4
       dotenv: 16.4.7
       git-url-parse: 16.0.1
@@ -10461,6 +10466,8 @@ snapshots:
       xdg-basedir: 5.1.0
 
   consola@3.4.0: {}
+
+  consola@3.4.2: {}
 
   conventional-changelog-angular@8.0.0:
     dependencies:
