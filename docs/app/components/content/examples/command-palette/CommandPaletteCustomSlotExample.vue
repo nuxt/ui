@@ -29,31 +29,45 @@ const groups = [{
   items: [
     {
       label: 'Benjamin Canac',
-      suffix: 'benjamincanac'
+      suffix: 'benjamincanac',
+      to: 'https://github.com/benjamincanac',
+      target: '_blank'
     },
     {
       label: 'Sylvain Marroufin',
-      suffix: 'smarroufin'
+      suffix: 'smarroufin',
+      to: 'https://github.com/smarroufin',
+      target: '_blank'
     },
     {
       label: 'Sébastien Chopin',
-      suffix: 'atinux'
+      suffix: 'atinux',
+      to: 'https://github.com/atinux',
+      target: '_blank'
     },
     {
       label: 'Romain Hamel',
-      suffix: 'romhml'
+      suffix: 'romhml',
+      to: 'https://github.com/romhml',
+      target: '_blank'
     },
     {
       label: 'Haytham A. Salama',
-      suffix: 'Haythamasalama'
+      suffix: 'Haythamasalama',
+      to: 'https://github.com/Haythamasalama',
+      target: '_blank'
     },
     {
       label: 'Daniel Roe',
-      suffix: 'danielroe'
+      suffix: 'danielroe',
+      to: 'https://github.com/danielroe',
+      target: '_blank'
     },
     {
       label: 'Neil Richter',
-      suffix: 'noook'
+      suffix: 'noook',
+      to: 'https://github.com/noook',
+      target: '_blank'
     }
   ]
 }]

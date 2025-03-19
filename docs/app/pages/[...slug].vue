@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
@@ -9,12 +10,22 @@ definePageMeta({
   layout: 'docs'
 })
 
-const { data: page } = await useAsyncData(route.path, () => queryCollection('content').path(route.path).first())
+const { data: page } = await useAsyncData(kebabCase(route.path), () => queryCollection('content').path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
+// Update the framework/module if the page has different ones
+watch(page, () => {
+  if (page.value?.framework && page.value?.framework !== framework.value) {
+    framework.value = page.value?.framework as string
+  }
+  if (page.value?.module && page.value?.module !== module.value) {
+    module.value = page.value?.module as string
+  }
+}, { immediate: true })
+
+const { data: surround } = await useAsyncData(`${kebabCase(route.path)}-surround`, () => {
   return queryCollectionItemSurroundings('content', route.path, {
     fields: ['description']
   }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
@@ -53,16 +64,6 @@ if (!import.meta.prerender) {
   })
 }
 
-// Update the framework/module if the page has different ones
-watch(page, () => {
-  if (page.value?.framework && page.value?.framework !== framework.value) {
-    framework.value = page.value?.framework as string
-  }
-  if (page.value?.module && page.value?.module !== module.value) {
-    module.value = page.value?.module as string
-  }
-}, { immediate: true })
-
 const type = page.value?.path.includes('components') ? 'Vue Component ' : page.value?.path.includes('composables') ? 'Vue Composable ' : ''
 useSeoMeta({
   titleTemplate: `%s ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
@@ -72,9 +73,22 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs', {
-  headline: breadcrumb.value.map(item => item.label).join(' > ')
-})
+if (route.path.startsWith('/components')) {
+  defineOgImageComponent('OgImageComponent', {
+    title: page.value.title,
+    description: page.value.description,
+    component: (route.params.slug as string[]).pop() as string,
+    module: page.value.module
+  })
+} else {
+  defineOgImageComponent('Docs', {
+    title: page.value.title,
+    description: page.value.description,
+    headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
+    framework: page.value?.framework,
+    module: page.value.module
+  })
+}
 
 const communityLinks = computed(() => [{
   icon: 'i-lucide-file-pen',
@@ -86,35 +100,30 @@ const communityLinks = computed(() => [{
   label: 'Star on GitHub',
   to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}`,
   target: '_blank'
+}, {
+  icon: 'i-lucide-life-buoy',
+  label: 'Contribution',
+  to: '/getting-started/contribution'
+}, {
+  label: 'Roadmap',
+  icon: 'i-lucide-map',
+  to: '/roadmap'
 }])
-
-// const resourcesLinks = [{
-//   icon: 'i-simple-icons-figma',
-//   label: 'Figma Kit',
-//   to: 'https://www.figma.com/community/file/1288455405058138934',
-//   target: '_blank'
-// }, {
-//   label: 'Playground',
-//   icon: 'i-simple-icons-stackblitz',
-//   to: 'https://stackblitz.com/edit/nuxt-ui',
-//   target: '_blank'
-// }, {
-//   icon: 'i-simple-icons-nuxtdotjs',
-//   label: 'Nuxt docs',
-//   to: 'https://nuxt.com',
-//   target: '_blank'
-// }]
 </script>
 
 <template>
   <UPage v-if="page">
-    <UPageHeader :title="page.title">
+    <UPageHeader>
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
       </template>
 
+      <template #title>
+        {{ page.title }}<sup v-if="page.module === 'ui-pro'" class="ml-1 text-xs align-super font-medium text-(--ui-primary)">PRO</sup>
+      </template>
+
       <template #description>
-        <MDC v-if="page.description" :value="page.description" unwrap="p" />
+        <MDC v-if="page.description" :value="page.description" unwrap="p" :cache-key="`${kebabCase(route.path)}-description`" />
       </template>
 
       <template v-if="page.links?.length" #links>
@@ -136,7 +145,7 @@ const communityLinks = computed(() => [{
     <UPageBody>
       <ContentRenderer v-if="page.body" :value="page" />
 
-      <USeparator />
+      <USeparator v-if="surround?.filter(Boolean).length" />
 
       <UContentSurround :surround="(surround as any)" />
     </UPageBody>
@@ -148,14 +157,9 @@ const communityLinks = computed(() => [{
 
           <UPageLinks title="Community" :links="communityLinks" />
 
-          <!-- <USeparator type="dashed" />
-
-          <UPageLinks title="Resources" :links="resourcesLinks" />
-
           <USeparator type="dashed" />
 
-          <AdsPro />
-          <AdsCarbon /> -->
+          <AdsCarbon />
         </template>
       </UContentToc>
     </template>

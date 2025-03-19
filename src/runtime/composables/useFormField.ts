@@ -1,4 +1,4 @@
-import { inject, ref, computed, type InjectionKey, type Ref, type ComputedRef } from 'vue'
+import { inject, computed, type InjectionKey, type Ref, type ComputedRef } from 'vue'
 import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
 import type { FormFieldProps } from '../types'
 import type { FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '../types/form'
@@ -9,13 +9,12 @@ type Props<T> = {
   name?: string
   size?: GetObjectField<T, 'size'>
   color?: GetObjectField<T, 'color'>
-  legend?: string
   highlight?: boolean
   disabled?: boolean
 }
 
 export const formOptionsInjectionKey: InjectionKey<ComputedRef<FormInjectedOptions>> = Symbol('nuxt-ui.form-options')
-export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent, string>> = Symbol('nuxt-ui.form-events')
+export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent<any>, string>> = Symbol('nuxt-ui.form-events')
 export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<FormFieldProps>>> = Symbol('nuxt-ui.form-field')
 export const inputIdInjectionKey: InjectionKey<Ref<string | undefined>> = Symbol('nuxt-ui.input-id')
 export const formInputsInjectionKey: InjectionKey<Ref<Record<string, { id?: string, pattern?: RegExp }>>> = Symbol('nuxt-ui.form-inputs')
@@ -29,41 +28,40 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
   const inputId = inject(inputIdInjectionKey, undefined)
 
   if (formField && inputId) {
-    if (opts?.bind === false || props?.legend) {
+    if (opts?.bind === false) {
       // Removes for="..." attribute on label for RadioGroup and alike.
       inputId.value = undefined
     } else if (props?.id) {
       // Updates for="..." attribute on label if props.id is provided.
       inputId.value = props?.id
     }
+
     if (formInputs && formField.value.name && inputId.value) {
       formInputs.value[formField.value.name] = { id: inputId.value, pattern: formField.value.errorPattern }
     }
   }
 
-  const touched = ref(false)
-
-  function emitFormEvent(type: FormInputEvents, name?: string) {
+  function emitFormEvent(type: FormInputEvents, name?: string, eager?: boolean) {
     if (formBus && formField && name) {
-      formBus.emit({ type, name })
+      formBus.emit({ type, name, eager })
     }
   }
 
   function emitFormBlur() {
-    touched.value = true
     emitFormEvent('blur', formField?.value.name)
   }
 
+  function emitFormFocus() {
+    emitFormEvent('focus', formField?.value.name)
+  }
+
   function emitFormChange() {
-    touched.value = true
     emitFormEvent('change', formField?.value.name)
   }
 
   const emitFormInput = useDebounceFn(
     () => {
-      if (!opts?.deferInputValidation || touched.value || formField?.value.eagerValidation) {
-        emitFormEvent('input', formField?.value.name)
-      }
+      emitFormEvent('input', formField?.value.name, !opts?.deferInputValidation || formField?.value.eagerValidation)
     },
     formField?.value.validateOnInputDelay ?? formOptions?.value.validateOnInputDelay ?? 0
   )
@@ -77,6 +75,19 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     disabled: computed(() => formOptions?.value.disabled || props?.disabled),
     emitFormBlur,
     emitFormInput,
-    emitFormChange
+    emitFormChange,
+    emitFormFocus,
+    ariaAttrs: computed(() => {
+      if (!formField?.value) return
+
+      const descriptiveAttrs = ['error' as const, 'hint' as const, 'description' as const]
+        .filter(type => formField?.value?.[type])
+        .map(type => `${formField?.value.ariaId}-${type}`) || []
+
+      return {
+        'aria-describedby': descriptiveAttrs.join(' '),
+        'aria-invalid': !!formField?.value.error
+      }
+    })
   }
 }

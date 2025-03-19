@@ -7,9 +7,9 @@ import theme from '#build/ui/separator'
 import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 
-const appConfig = _appConfig as AppConfig & { ui: { separator: Partial<typeof theme> } }
+const appConfigSeparator = _appConfig as AppConfig & { ui: { separator: Partial<typeof theme> } }
 
-const separator = tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })
+const separator = tv({ extend: tv(theme), ...(appConfigSeparator.ui?.separator || {}) })
 
 type SeparatorVariants = VariantProps<typeof separator>
 
@@ -21,12 +21,24 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
   as?: any
   /** Display a label in the middle. */
   label?: string
-  /** Display an icon in the middle. */
+  /**
+   * Display an icon in the middle.
+   * @IconifyIcon
+   */
   icon?: string
   /** Display an avatar in the middle. */
   avatar?: AvatarProps
+  /**
+   * @defaultValue 'neutral'
+   */
   color?: SeparatorVariants['color']
+  /**
+   * @defaultValue 'xs'
+   */
   size?: SeparatorVariants['size']
+  /**
+   * @defaultValue 'solid'
+   */
   type?: SeparatorVariants['type']
   /**
    * The orientation of the separator.

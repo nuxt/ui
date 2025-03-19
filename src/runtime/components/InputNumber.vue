@@ -6,10 +6,11 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-number'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
+import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { inputNumber: Partial<typeof theme> } }
+const appConfigInputNumber = _appConfig as AppConfig & { ui: { inputNumber: Partial<typeof theme> } }
 
-const inputNumber = tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {}) })
+const inputNumber = tv({ extend: tv(theme), ...(appConfigInputNumber.ui?.inputNumber || {}) })
 
 type InputNumberVariants = VariantProps<typeof inputNumber>
 
@@ -19,10 +20,8 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @defaultValue 'div'
    */
   as?: any
-  class?: any
   /** The placeholder text when the input is empty. */
   placeholder?: string
-  ui?: Partial<typeof inputNumber.slots>
   color?: InputNumberVariants['color']
   variant?: InputNumberVariants['variant']
   size?: InputNumberVariants['size']
@@ -41,6 +40,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.ui.icons.plus
+   * @IconifyIcon
    */
   incrementIcon?: string
   /**
@@ -51,6 +51,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.ui.icons.minus
+   * @IconifyIcon
    */
   decrementIcon?: string
   autofocus?: boolean
@@ -60,6 +61,8 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @defaultValue UApp.locale.code
    */
   locale?: string
+  class?: any
+  ui?: PartialString<typeof inputNumber.slots>
 }
 
 export interface InputNumberEmits {
@@ -78,6 +81,7 @@ export interface InputNumberSlots {
 import { onMounted, ref, computed } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import UButton from './Button.vue'
@@ -92,7 +96,8 @@ defineSlots<InputNumberSlots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'formatOptions'), emits)
 
-const { emitFormBlur, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled } = useFormField<InputNumberProps>(props)
+const appConfig = useAppConfig()
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
 
 const { t, code: codeLocale } = useLocale()
 const locale = computed(() => props.locale || codeLocale.value)
@@ -152,12 +157,13 @@ defineExpose({
     @update:model-value="onUpdate"
   >
     <NumberFieldInput
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...ariaAttrs }"
       ref="inputRef"
       :placeholder="placeholder"
       :required="required"
       :class="ui.base({ class: props.ui?.base })"
       @blur="onBlur"
+      @focus="emitFormFocus"
     />
 
     <div :class="ui.increment({ class: props.ui?.increment })">

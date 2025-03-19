@@ -43,13 +43,11 @@ export function isStandardSchema(schema: any): schema is StandardSchemaV1 {
   return '~standard' in schema
 }
 
-export async function validateStandarSchema(
+export async function validateStandardSchema(
   state: any,
   schema: StandardSchemaV1
 ): Promise<ValidateReturnSchema<typeof state>> {
-  const result = await schema['~standard'].validate({
-    value: state
-  })
+  const result = await schema['~standard'].validate(state)
 
   if (result.issues) {
     return {
@@ -192,19 +190,19 @@ async function validateValibotSchema(
   }
 }
 
-export function parseSchema<T extends object>(state: T, schema: FormSchema<T>): Promise<ValidateReturnSchema<typeof state>> {
+export function validateSchema<T extends object>(state: T, schema: FormSchema<T>): Promise<ValidateReturnSchema<typeof state>> {
   if (isZodSchema(schema)) {
     return validateZodSchema(state, schema)
   } else if (isJoiSchema(schema)) {
     return validateJoiSchema(state, schema)
+  } else if (isStandardSchema(schema)) {
+    return validateStandardSchema(state, schema)
   } else if (isValibotSchema(schema)) {
     return validateValibotSchema(state, schema)
   } else if (isYupSchema(schema)) {
     return validateYupSchema(state, schema)
   } else if (isSuperStructSchema(schema)) {
     return validateSuperstructSchema(state, schema)
-  } else if (isStandardSchema(schema)) {
-    return validateStandarSchema(state, schema)
   } else {
     throw new Error('Form validation failed: Unsupported form schema')
   }

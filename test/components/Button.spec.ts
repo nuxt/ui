@@ -20,6 +20,7 @@ describe('Button', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Button', size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { label: 'Button', variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { label: 'Button', variant, color: 'neutral' } }]),
+    ...variants.map((activeVariant: string) => [`with active variant ${activeVariant}`, { props: { label: 'Button', active: true, activeVariant } }]),
     ['with icon', { props: { icon: 'i-lucide-rocket' } }],
     ['with leading and icon', { props: { leading: true, icon: 'i-lucide-arrow-left' } }],
     ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
@@ -39,6 +40,8 @@ describe('Button', () => {
     ['with square', { props: { label: 'Button', square: true } }],
     ['with as', { props: { label: 'Button', as: 'div' } }],
     ['with class', { props: { label: 'Button', class: 'rounded-full font-bold' } }],
+    ['with activeClass', { props: { label: 'Button', active: true, activeClass: 'font-bold' } }],
+    ['with inactiveClass', { props: { label: 'Button', active: false, inactiveClass: 'font-light' } }],
     ['with ui', { props: { label: 'Button', ui: { label: 'font-bold' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],

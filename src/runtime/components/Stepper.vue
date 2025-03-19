@@ -1,16 +1,16 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/stepper'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { DynamicSlots } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { stepper: Partial<typeof theme> } }
+const appConfigStepper = _appConfig as AppConfig & { ui: { stepper: Partial<typeof theme> } }
 
-const stepper = tv({ extend: tv(theme), ...(appConfig.ui?.stepper || {}) })
+const stepper = tv({ extend: tv(theme), ...(appConfigStepper.ui?.stepper || {}) })
 
 type StepperVariants = VariantProps<typeof stepper>
 
@@ -19,6 +19,9 @@ export interface StepperItem {
   value?: string | number
   title?: string
   description?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   content?: string
   disabled?: boolean
@@ -31,8 +34,18 @@ export interface StepperProps<T extends StepperItem> extends Pick<StepperRootPro
    */
   as?: any
   items: T[]
+  /**
+   * @defaultValue 'md'
+   */
   size?: StepperVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: StepperVariants['color']
+  /**
+   * The orientation of the stepper.
+   * @defaultValue 'horizontal'
+   */
   orientation?: StepperVariants['orientation']
   /**
    * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.
@@ -57,7 +70,6 @@ export type StepperSlots<T extends StepperItem> = {
   content: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
 
-extendDevtoolsMeta({ example: 'StepperExample' })
 </script>
 
 <script setup lang="ts" generic="T extends StepperItem">
@@ -163,7 +175,7 @@ defineExpose({
 
     <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot]) || (currentStep?.value && !!slots[currentStep.value])" :class="ui.content({ class: props.ui?.description })">
       <slot
-        :name="!!slots[currentStep?.slot ?? currentStep.value] ? currentStep.slot ?? currentStep.value : 'content'"
+        :name="!!slots[currentStep?.slot ?? currentStep.value!] ? currentStep.slot ?? currentStep.value : 'content'"
         :item="currentStep"
       >
         {{ currentStep?.content }}

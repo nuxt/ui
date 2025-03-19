@@ -6,32 +6,42 @@ const props = defineProps<{
   links: NavigationMenuItem[]
 }>()
 
+const route = useRoute()
 const config = useRuntimeConfig().public
 const { module } = useSharedData()
 
+const value = ref<string | undefined>(module.value)
+
+watch(module, () => {
+  value.value = module.value
+})
+
+onMounted(() => {
+  value.value = module.value
+})
+
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const items = computed(() => props.links.map(({ icon, ...link }) => link))
-
-defineShortcuts({
-  meta_g: () => {
-    window.open(`https://github.com/nuxt/${module}/tree/v3`, '_blank')
-  }
-})
+const desktopLinks = computed(() => props.links.map(({ icon, ...link }) => link))
+const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOpen: link.children && route.path.startsWith(link.to as string) })))
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0' }" mode="drawer" :menu="{ shouldScaleBackground: true }">
+  <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-[var(--ui-text-highlighted)] min-w-0 focus-visible:outline-[var(--ui-primary)] shrink-0" aria-label="Nuxt UI">
-        <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
-        <Logo class="w-auto h-6 shrink-0 ui-only" />
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0" aria-label="Nuxt UI">
+        <Logo v-if="route.path === '/'" class="w-auto h-6 shrink-0" />
+        <LogoPro v-else-if="route.path.startsWith('/pro')" class="w-auto h-6 shrink-0" />
+        <template v-else>
+          <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
+          <Logo class="w-auto h-6 shrink-0 ui-only" />
+        </template>
       </NuxtLink>
 
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"
-        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.5' : 'v2.19', to: module === 'ui-pro' ? 'https://ui.nuxt.com/pro' : 'https://ui.nuxt.com' }]"
+        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.7.1' : 'v2.21.1', to: module === 'ui-pro' ? 'https://ui2.nuxt.com/pro' : 'https://ui2.nuxt.com' }]"
         :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }"
         size="xs"
       >
@@ -41,7 +51,7 @@ defineShortcuts({
           trailing-icon="i-lucide-chevron-down"
           size="xs"
           class="-mb-[6px] font-semibold rounded-full truncate"
-          :class="[open && 'bg-[var(--ui-primary)]/15 ']"
+          :class="[open && 'bg-(--ui-primary)/15 ']"
           :ui="{
             trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
           }"
@@ -49,7 +59,7 @@ defineShortcuts({
       </UDropdownMenu>
     </template>
 
-    <UNavigationMenu :items="items" variant="link" />
+    <UNavigationMenu :items="desktopLinks" variant="link" />
 
     <template #right>
       <ThemePicker />
@@ -58,11 +68,12 @@ defineShortcuts({
         <UContentSearchButton />
       </UTooltip>
 
-      <UTooltip text="Open on GitHub" :kbds="['meta', 'G']" class="hidden lg:flex">
+      <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
+          :key="value"
           color="neutral"
           variant="ghost"
-          :to="`https://github.com/nuxt/${module}`"
+          :to="`https://github.com/nuxt/${value}`"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
@@ -70,8 +81,8 @@ defineShortcuts({
       </UTooltip>
     </template>
 
-    <template #content>
-      <UNavigationMenu orientation="vertical" :items="links" class="-mx-2.5" />
+    <template #body>
+      <UNavigationMenu orientation="vertical" :items="mobileLinks" class="-mx-2.5" default-open />
 
       <USeparator type="dashed" class="mt-4 mb-6" />
 
@@ -85,7 +96,7 @@ defineShortcuts({
           <span class="inline-flex items-center gap-0.5">
             {{ link.title }}
 
-            <sup v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
+            <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
           </span>
         </template>
       </UContentNavigation>

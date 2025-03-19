@@ -6,10 +6,11 @@ import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
 import { tv } from '../utils/tv'
+import type { PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
+const appConfigCalendar = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
 
-const calendar = tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })
+const calendar = tv({ extend: tv(theme), ...(appConfigCalendar.ui?.calendar || {}) })
 
 type CalendarVariants = VariantProps<typeof calendar>
 
@@ -28,24 +29,34 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   /**
    * The icon to use for the next year control.
    * @defaultValue appConfig.ui.icons.chevronDoubleRight
+   * @IconifyIcon
    */
   nextYearIcon?: string
   /**
    * The icon to use for the next month control.
    * @defaultValue appConfig.ui.icons.chevronRight
+   * @IconifyIcon
    */
   nextMonthIcon?: string
   /**
    * The icon to use for the previous year control.
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
+   * @IconifyIcon
    */
   prevYearIcon?: string
   /**
    * The icon to use for the previous month control.
    * @defaultValue appConfig.ui.icons.chevronLeft
+   * @IconifyIcon
    */
   prevMonthIcon?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: CalendarVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
   size?: CalendarVariants['size']
   /** Whether or not a range of dates can be selected */
   range?: R & boolean
@@ -58,7 +69,7 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   defaultValue?: CalendarModelValue<R, M>
   modelValue?: CalendarModelValue<R, M>
   class?: any
-  ui?: Partial<typeof calendar.slots>
+  ui?: PartialString<typeof calendar.slots>
 }
 
 export interface CalendarEmits<R extends boolean, M extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
@@ -77,6 +88,7 @@ import { computed } from 'vue'
 import { useForwardPropsEmits } from 'reka-ui'
 import { Calendar as SingleCalendar, RangeCalendar } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import UButton from './Button.vue'
 
@@ -88,6 +100,7 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
 const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
+const appConfig = useAppConfig()
 const { code: locale, dir, t } = useLocale()
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)

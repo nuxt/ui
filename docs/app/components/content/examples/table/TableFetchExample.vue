@@ -13,6 +13,7 @@ type User = {
 }
 
 const { data, status } = await useFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
+  key: 'table-users',
   transform: (data) => {
     return data?.map(user => ({
       ...user,
@@ -35,7 +36,7 @@ const columns: TableColumn<User>[] = [{
         size: 'lg'
       }),
       h('div', undefined, [
-        h('p', { class: 'font-medium text-[var(--ui-text-highlighted)]' }, row.original.name),
+        h('p', { class: 'font-medium text-(--ui-text-highlighted)' }, row.original.name),
         h('p', { class: '' }, `@${row.original.username}`)
       ])
     ])

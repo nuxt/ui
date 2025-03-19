@@ -144,7 +144,7 @@ defineShortcuts(extractShortcuts(items.value))
         <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
         <template #custom-trailing>
-          <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-[var(--ui-primary)]" />
+          <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-(--ui-primary)" />
         </template>
       </UDropdownMenu>
 
@@ -152,7 +152,7 @@ defineShortcuts(extractShortcuts(items.value))
         <UButton label="Color" color="neutral" variant="outline" icon="i-lucide-menu" />
 
         <template #custom-trailing>
-          <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-[var(--ui-primary)]" />
+          <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-(--ui-primary)" />
         </template>
       </UDropdownMenu>
     </div>

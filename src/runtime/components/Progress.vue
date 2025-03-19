@@ -7,9 +7,9 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/progress'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { progress: Partial<typeof theme> } }
+const appConfigProgress = _appConfig as AppConfig & { ui: { progress: Partial<typeof theme> } }
 
-const progress = tv({ extend: tv(theme), ...(appConfig.ui?.progress || {}) })
+const progress = tv({ extend: tv(theme), ...(appConfigProgress.ui?.progress || {}) })
 
 type ProgressVariants = VariantProps<typeof progress>
 
@@ -25,13 +25,23 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
   status?: boolean
   /** Whether the progress is visually inverted. */
   inverted?: boolean
+  /**
+   * @defaultValue 'md'
+   */
   size?: ProgressVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: ProgressVariants['color']
   /**
    * The orientation of the progress bar.
    * @defaultValue 'horizontal'
    */
   orientation?: ProgressVariants['orientation']
+  /**
+   * The animation of the progress bar.
+   * @defaultValue 'carousel'
+   */
   animation?: ProgressVariants['animation']
   class?: any
   ui?: Partial<typeof progress.slots>

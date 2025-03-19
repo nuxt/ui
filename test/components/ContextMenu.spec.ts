@@ -34,8 +34,7 @@ describe('ContextMenu', () => {
         label: 'Dark',
         icon: 'i-lucide-moon'
       }]
-    }],
-    [{
+    }], [{
       label: 'Show Sidebar',
       color: 'primary',
       kbds: ['meta', 'S']
@@ -69,6 +68,11 @@ describe('ContextMenu', () => {
         kbds: ['option', 'meta', 'J'],
         slot: 'custom'
       }]]
+    }], [{
+      label: 'GitHub',
+      icon: 'i-simple-icons-github',
+      to: 'https://github.com/nuxt/ui',
+      target: '_blank'
     }]
   ]
 
@@ -80,6 +84,8 @@ describe('ContextMenu', () => {
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
+    ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
+    ['without externalIcon', { props: { ...props, externalIcon: false } }],
     ['with class', { props: { ...props, class: 'min-w-96' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots

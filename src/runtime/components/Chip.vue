@@ -3,12 +3,11 @@ import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/chip'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
-const appConfig = _appConfig as AppConfig & { ui: { chip: Partial<typeof theme> } }
+const appConfigChip = _appConfig as AppConfig & { ui: { chip: Partial<typeof theme> } }
 
-const chip = tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })
+const chip = tv({ extend: tv(theme), ...(appConfigChip.ui?.chip || {}) })
 
 type ChipVariants = VariantProps<typeof chip>
 
@@ -20,8 +19,18 @@ export interface ChipProps {
   as?: any
   /** Display some text inside the chip. */
   text?: string | number
+  /**
+   * @defaultValue 'primary'
+   */
   color?: ChipVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
   size?: ChipVariants['size']
+  /**
+   * The position of the chip.
+   * @defaultValue 'top-right'
+   */
   position?: ChipVariants['position']
   /** When `true`, keep the chip inside the component for rounded elements. */
   inset?: boolean
@@ -39,8 +48,6 @@ export interface ChipSlots {
   default(props?: {}): any
   content(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'ChipExample' })
 </script>
 
 <script setup lang="ts">
