@@ -71,7 +71,8 @@ onMounted(() => {
 <template>
   <UMain>
     <UPageHero headline="License Activation" :title="title" :description="description" :ui="{ container: 'relative overflow-hidden', wrapper: 'lg:px-12', description: 'text-pretty' }">
-      <StarsBg />
+      <LazyStarsBg hydrate-never />
+
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
       <div class="px-4 py-10 lg:border border-(--ui-border) bg-(--ui-bg)">

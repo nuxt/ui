@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { kebabCase } from 'scule'
+
 interface Star {
   x: number
   y: number
@@ -22,6 +24,8 @@ const props = withDefaults(defineProps<{
   speed: 'normal'
 })
 
+const route = useRoute()
+
 // Generate random stars
 const generateStars = (count: number): Star[] => {
   return Array.from({ length: count }, () => {
@@ -35,7 +39,7 @@ const generateStars = (count: number): Star[] => {
 }
 
 // Generate all stars
-const stars = ref<Star[]>(generateStars(props.starCount))
+const stars = useState<Star[]>(`${kebabCase(route.path)}-sky`, () => generateStars(props.starCount))
 
 // Compute twinkle animation duration based on speed
 const twinkleDuration = computed(() => {
@@ -50,22 +54,20 @@ const twinkleDuration = computed(() => {
 
 <template>
   <div class="absolute pointer-events-none z-[-1] inset-y-0 left-4 right-4 lg:right-[50%] overflow-hidden">
-    <ClientOnly>
-      <div
-        v-for="star in stars"
-        :key="star.id"
-        class="star absolute"
-        :style="{
-          'left': `${star.x}%`,
-          'top': `${star.y}%`,
-          'transform': 'translate(-50%, -50%)',
-          '--star-size': `${star.size}px`,
-          '--star-color': color,
-          '--twinkle-delay': `${star.twinkleDelay}s`,
-          '--twinkle-duration': twinkleDuration
-        }"
-      />
-    </ClientOnly>
+    <div
+      v-for="star in stars"
+      :key="star.id"
+      class="star absolute"
+      :style="{
+        'left': `${star.x}%`,
+        'top': `${star.y}%`,
+        'transform': 'translate(-50%, -50%)',
+        '--star-size': `${star.size}px`,
+        '--star-color': color,
+        '--twinkle-delay': `${star.twinkleDelay}s`,
+        '--twinkle-duration': twinkleDuration
+      }"
+    />
   </div>
 </template>
 

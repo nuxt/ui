@@ -119,7 +119,8 @@ onMounted(() => {
         />
       </template>
 
-      <StarsBg />
+      <LazyStarsBg hydrate-never />
+
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
