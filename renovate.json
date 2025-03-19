@@ -6,8 +6,6 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "valibot30",
-    "valibot31",
     "typescript",
     "vaul-vue",
     "vue-tsc"
