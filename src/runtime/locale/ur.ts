@@ -53,4 +53,4 @@ export default defineLocale<Messages>({
       noData: 'کوئی ڈیٹا نہیں'
     }
   }
-});
+})
