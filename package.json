@@ -134,7 +134,7 @@
     "nuxt": "^3.16.0",
     "release-it": "^18.1.2",
     "superstruct": "^2.0.2",
-    "valibot": "^0.42.1",
+    "valibot": "^1.0.0",
     "vitest": "^3.0.9",
     "vitest-environment-nuxt": "^1.0.1",
     "vue-tsc": "^2.2.0",
