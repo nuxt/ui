@@ -50,6 +50,10 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    * Override options for `unplugin-vue-components`
    */
   components?: Partial<ComponentsOptions>
+  /**
+   * Enables compatibility layer for InertiaJS
+   */
+  inertia?: boolean
 }
 
 export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.meta.url)))
