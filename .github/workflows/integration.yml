@@ -3,7 +3,8 @@ name: integration
 on:
   workflow_run:
     workflows: ["module"]
-    types: [completed]
+    types:
+      - completed
 
 jobs:
   nuxt:
@@ -27,7 +28,7 @@ jobs:
           repository: benjamincanac/app-ui3
 
       - name: Set commit SHA from triggering workflow
-        run: echo "COMMIT=${GITHUB_EVENT_WORKFLOW_RUN_HEAD_SHA:0:7}" >> $GITHUB_ENV
+        run: echo "COMMIT=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_ENV
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -39,7 +40,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT }}
+        run: pnpm install https://pkg.pr.new/@nuxt/ui@${COMMIT:0:7}
 
       - name: Typecheck
         run: pnpm run typecheck
@@ -68,7 +69,7 @@ jobs:
           repository: benjamincanac/app-ui3-vue
 
       - name: Set commit SHA from triggering workflow
-        run: echo "COMMIT=${GITHUB_EVENT_WORKFLOW_RUN_HEAD_SHA:0:7}" >> $GITHUB_ENV
+        run: echo "COMMIT=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_ENV
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -80,7 +81,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT }}
+        run: pnpm install https://pkg.pr.new/@nuxt/ui@${COMMIT:0:7}
 
       # - name: Typecheck
       #   run: pnpm run typecheck
