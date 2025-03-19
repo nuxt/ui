@@ -188,6 +188,7 @@ const countries: Country[] = [
   { name: 'United Arab Emirates', code: 'AE', emoji: '🇦🇪' },
   { name: 'United Kingdom', code: 'GB', emoji: '🇬🇧' },
   { name: 'United States', code: 'US', emoji: '🇺🇸' },
+  { name: 'Pakistan', code: 'PK', emoji: '🇵🇰' },
   { name: 'Uruguay', code: 'UY', emoji: '🇺🇾' },
   { name: 'Uzbekistan', code: 'UZ', emoji: '🇺🇿' },
   { name: 'Vanuatu', code: 'VU', emoji: '🇻🇺' },
