@@ -27,7 +27,7 @@ useSeoMeta({
         <MDC :value="page.pricing.title" unwrap="p" cache-key="pro-pricing-title" />
       </template>
 
-      <LazyStarsBg hydrate-never />
+      <LazyStarsBg />
 
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
