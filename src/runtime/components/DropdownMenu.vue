@@ -150,7 +150,7 @@ const ui = computed(() => dropdownMenu({
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
     >
-      <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
+      <template v-for="(_, name) in proxySlots" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />
       </template>
 
