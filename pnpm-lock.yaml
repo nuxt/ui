@@ -123,14 +123,8 @@ importers:
         specifier: 5.6.3
         version: 5.6.3
       valibot:
-        specifier: ^0.42.1
-        version: 0.42.1(typescript@5.6.3)
-      valibot30:
-        specifier: npm:valibot@0.30.0
-        version: valibot@0.30.0
-      valibot31:
-        specifier: npm:valibot@0.31.0
-        version: valibot@0.31.0
+        specifier: ^1.0.0
+        version: 1.0.0(typescript@5.6.3)
       vitest:
         specifier: ^3.0.9
         version: 3.0.9(@types/debug@4.1.12)(@types/node@22.13.10)(happy-dom@17.4.4)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
@@ -213,8 +207,8 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(@popperjs/core@2.11.8)(vue@3.5.13(typescript@5.6.3))
       valibot:
-        specifier: ^0.42.1
-        version: 0.42.1(typescript@5.6.3)
+        specifier: ^1.0.0
+        version: 1.0.0(typescript@5.6.3)
       yup:
         specifier: ^1.6.1
         version: 1.6.1
@@ -6409,14 +6403,8 @@ packages:
       '@popperjs/core': ^2.0.0
       vue: ^3.2.0
 
-  valibot@0.30.0:
-    resolution: {integrity: sha512-5POBdbSkM+3nvJ6ZlyQHsggisfRtyT4tVTo1EIIShs6qCdXJnyWU5TJ68vr8iTg5zpOLjXLRiBqNx+9zwZz/rA==}
-
-  valibot@0.31.0:
-    resolution: {integrity: sha512-bleS8aVFpRGTUgbMoXzsRJhpxJGiZ3MG1nuNSORuDvio+sI1EyT1+lQHg+77Pfnlxz+25Uj5HiwdaklcDcYdiQ==}
-
-  valibot@0.42.1:
-    resolution: {integrity: sha512-3keXV29Ar5b//Hqi4MbSdV7lfVp6zuYLZuA9V1PvQUsXqogr+u5lvLPLk3A4f74VUXDnf/JfWMN6sB+koJ/FFw==}
+  valibot@1.0.0:
+    resolution: {integrity: sha512-1Hc0ihzWxBar6NGeZv7fPLY0QuxFMyxwYR2sF1Blu7Wq7EnremwY2W02tit2ij2VJT8HcSkHAQqmFfl77f73Yw==}
     peerDependencies:
       typescript: 5.6.3
     peerDependenciesMeta:
@@ -14429,11 +14417,7 @@ snapshots:
       vue: 3.5.13(typescript@5.6.3)
       vue-screen-utils: 1.0.0-beta.13(vue@3.5.13(typescript@5.6.3))
 
-  valibot@0.30.0: {}
-
-  valibot@0.31.0: {}
-
-  valibot@0.42.1(typescript@5.6.3):
+  valibot@1.0.0(typescript@5.6.3):
     optionalDependencies:
       typescript: 5.6.3
 

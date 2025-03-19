@@ -14,7 +14,7 @@ It works with the [FormGroup](/components/form-group) component to display error
 
 The form component requires two props:
 - `state` - a reactive object holding the form's state.
-- `schema` - a schema object from a validation library like [Yup](https://github.com/jquense/yup), [Zod](https://github.com/colinhacks/zod), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot) or [Superstruct](https://github.com/ianstormtaylor/superstruct).
+- `schema` - any [Standard Schema](https://standardschema.dev/) or a schema from [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Superstruct](https://github.com/ianstormtaylor/superstruct).
 
 ::callout{icon="i-heroicons-light-bulb"}
 Note that **no validation library is included** by default, so ensure you **install the one you need**.
