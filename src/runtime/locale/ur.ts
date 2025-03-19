@@ -4,6 +4,7 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale<Messages>({
   name: 'Urdu',
   code: 'ur',
+  dir: 'rtl',
   messages: {
     inputMenu: {
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
