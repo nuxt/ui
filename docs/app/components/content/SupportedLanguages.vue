@@ -24,6 +24,7 @@ function getEmojiFlag(locale: string): string {
     nb: 'no', // Norwegian Bokmål -> Norway
     sv: 'se', // Swedish -> Sweden
     uk: 'ua', // Ukrainian -> Ukraine
+    ur: 'pk', // Urdu -> Pakistan
     vi: 'vn' // Vietnamese -> Vietnam
   }
 
