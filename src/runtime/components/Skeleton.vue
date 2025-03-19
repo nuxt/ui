@@ -25,7 +25,14 @@ const props = defineProps<SkeletonProps>()
 </script>
 
 <template>
-  <Primitive :as="as" :class="skeleton({ class: props.class })" aria-busy="true" aria-label="loading" aria-live="polite" role="alert">
+  <Primitive
+    :as="as"
+    :class="skeleton({ class: props.class })"
+    aria-busy="true"
+    aria-label="loading"
+    aria-live="polite"
+    role="alert"
+  >
     <slot />
   </Primitive>
 </template>
