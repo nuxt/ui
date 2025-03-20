@@ -1,13 +1,13 @@
 ---
 title: Contribution Guide
-description: 'A comprehensive guide on contributing to Nuxt UI v3, including project structure, development workflow, and best practices.'
+description: 'A comprehensive guide on contributing to Nuxt UI, including project structure, development workflow, and best practices.'
 navigation: false
 ---
 
 Nuxt UI thrives thanks to its incredible community ❤️. We welcome all contributions through bug reports, pull requests, and feedback to help make this library even better.
 
 ::caution
-Before reporting a bug or requesting a feature, make sure that you have read through our [documentation](https://ui3.nuxt.dev/) and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue%20is%3Aopen%20sort%3Aupdated-desc%20label%3Av3).
+Before reporting a bug or requesting a feature, make sure that you have read through our [documentation](https://ui.nuxt.com/) and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue%20is%3Aopen%20sort%3Aupdated-desc%20label%3Av3).
 ::
 
 ## Project Structure

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { upperFirst, camelCase } from 'scule'
+import { upperFirst, camelCase, kebabCase } from 'scule'
 
 const props = defineProps<{
   prose?: boolean
@@ -36,7 +36,7 @@ const meta = await fetchComponentMeta(name as any)
         <ProseTd>
           <HighlightInlineType v-if="slot.type" :type="slot.type" />
 
-          <MDC v-if="slot.description" :value="slot.description" class="text-(--ui-text-toned) mt-1" />
+          <MDC v-if="slot.description" :value="slot.description" class="text-(--ui-text-toned) mt-1" :cache-key="`${kebabCase(route.path)}-${slot.name}-description`" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

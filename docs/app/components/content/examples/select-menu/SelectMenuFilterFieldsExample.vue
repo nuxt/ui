@@ -2,6 +2,7 @@
 import type { AvatarProps } from '@nuxt/ui'
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  key: 'typicode-users-email',
   transform: (data: { id: number, name: string, email: string }[]) => {
     return data?.map(user => ({
       label: user.name,

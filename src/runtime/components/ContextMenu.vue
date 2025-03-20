@@ -1,6 +1,7 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps } from 'reka-ui'
+import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
@@ -11,7 +12,8 @@ import type {
   DynamicSlots,
   MergeTypes,
   NestedItem,
-  PartialString
+  PartialString,
+  EmitsToProps
 } from '../types/utils'
 
 const appConfigContextMenu = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
@@ -22,10 +24,13 @@ type ContextMenuVariants = VariantProps<typeof contextMenu>
 
 export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   color?: ContextMenuVariants['color']
   avatar?: AvatarProps
-  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ContextMenuContentEmits>>
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
@@ -44,26 +49,32 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
 }
 
 export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>> extends Omit<ContextMenuRootProps, 'dir'> {
+  /**
+   * @defaultValue 'md'
+   */
   size?: ContextMenuVariants['size']
   items?: T
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   checkedIcon?: string
   /**
    * The icon displayed when an item is loading.
    * @defaultValue appConfig.ui.icons.loading
+   * @IconifyIcon
    */
   loadingIcon?: string
   /**
    * The icon displayed when the item is an external link.
    * Set to `false` to hide the external icon.
    * @defaultValue appConfig.ui.icons.external
+   * @IconifyIcon
    */
   externalIcon?: boolean | string
   /** The content of the menu. */
-  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ContextMenuContentEmits>>
   /**
    * Render the menu in a portal.
    * @defaultValue true
@@ -93,6 +104,7 @@ export type ContextMenuSlots<
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
+
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ContextMenuItem>">
@@ -112,7 +124,8 @@ const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
-const contentProps = toRef(() => props.content as ContextMenuContentProps)
+
+const contentProps = toRef(() => props.content)
 const proxySlots = omit(slots, ['default'])
 
 const ui = computed(() => contextMenu({

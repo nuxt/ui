@@ -1,9 +1,7 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { ComputedRef, DeepReadonly, Ref } from 'vue'
-import type { ZodSchema } from 'zod'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
-import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
 import type { GetObjectField } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
 
@@ -23,12 +21,7 @@ export interface Form<T extends object> {
 }
 
 export type FormSchema<T extends object> =
-  | ZodSchema
   | YupObjectSchema<T>
-  | ValibotSchema
-  | ValibotSchemaAsync
-  | ValibotSafeParser<any, any>
-  | ValibotSafeParserAsync<any, any>
   | JoiSchema<T>
   | SuperstructSchema<any, any>
   | StandardSchemaV1
@@ -36,7 +29,7 @@ export type FormSchema<T extends object> =
 export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
 
 export interface FormError<P extends string = string> {
-  name: P
+  name?: P
   message: string
 }
 

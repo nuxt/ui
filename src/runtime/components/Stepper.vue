@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
@@ -18,6 +19,9 @@ export interface StepperItem {
   value?: string | number
   title?: string
   description?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   content?: string
   disabled?: boolean
@@ -30,8 +34,18 @@ export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<
    */
   as?: any
   items: T[]
+  /**
+   * @defaultValue 'md'
+   */
   size?: StepperVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: StepperVariants['color']
+  /**
+   * The orientation of the stepper.
+   * @defaultValue 'horizontal'
+   */
   orientation?: StepperVariants['orientation']
   /**
    * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.
@@ -55,6 +69,7 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
   description: SlotProps<T>
   content: SlotProps<T>
 } & DynamicSlots<T>
+
 </script>
 
 <script setup lang="ts" generic="T extends StepperItem">

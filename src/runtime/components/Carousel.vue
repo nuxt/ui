@@ -37,6 +37,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   /**
    * The icon displayed in the prev button.
    * @defaultValue appConfig.ui.icons.arrowLeft
+   * @IconifyIcon
    */
   prevIcon?: string
   /**
@@ -47,6 +48,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   /**
    * The icon displayed in the next button.
    * @defaultValue appConfig.ui.icons.arrowRight
+   * @IconifyIcon
    */
   nextIcon?: string
   /**
@@ -59,6 +61,10 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * @defaultValue false
    */
   dots?: boolean
+  /**
+   * The orientation of the carousel.
+   * @defaultValue 'horizontal'
+   */
   orientation?: CarouselVariants['orientation']
   items?: T[]
   /**

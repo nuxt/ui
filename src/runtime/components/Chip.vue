@@ -19,8 +19,18 @@ export interface ChipProps {
   as?: any
   /** Display some text inside the chip. */
   text?: string | number
+  /**
+   * @defaultValue 'primary'
+   */
   color?: ChipVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
   size?: ChipVariants['size']
+  /**
+   * The position of the chip.
+   * @defaultValue 'top-right'
+   */
   position?: ChipVariants['position']
   /** When `true`, keep the chip inside the component for rounded elements. */
   inset?: boolean

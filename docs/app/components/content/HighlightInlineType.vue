@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { murmurHash } from 'ohash'
+import { hash } from 'ohash'
 
 const props = defineProps<{
   type: string
@@ -23,7 +23,7 @@ const type = computed(() => {
   return type
 })
 
-const { data: ast } = await useAsyncData(`hightlight-inline-code-${murmurHash(type.value)}`, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
+const { data: ast } = await useAsyncData(`hightlight-inline-code-${hash(type.value).slice(0, 10)}`, () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`))
 </script>
 
 <template>

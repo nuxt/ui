@@ -20,7 +20,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `vaul-drawer-wrapper` directive to your content to make it work." :inset="inset">
+    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work." :inset="inset">
       <UButton color="neutral" variant="outline" label="Open with scale" />
 
       <template #body>

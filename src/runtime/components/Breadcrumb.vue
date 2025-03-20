@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -12,6 +13,9 @@ const breadcrumb = tv({ extend: tv(theme), ...(appConfigBreadcrumb.ui?.breadcrum
 
 export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   children?: DropdownMenuItem[]
   avatar?: AvatarProps
@@ -28,6 +32,7 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
   /**
    * The icon to use as a separator.
    * @defaultValue appConfig.ui.icons.chevronRight
+   * @IconifyIcon
    */
   separatorIcon?: string
   /**
@@ -48,6 +53,7 @@ export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
   'item-trailing': SlotProps<T>
   'separator': any
 } & DynamicSlots<T, 'leading' | 'label' | 'trailing', { index: number, active?: boolean }>
+
 </script>
 
 <script setup lang="ts" generic="T extends BreadcrumbItem">

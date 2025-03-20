@@ -22,9 +22,19 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
   as?: any
   title?: StringOrVNode
   description?: StringOrVNode
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
+  /**
+   * @defaultValue 'primary'
+   */
   color?: ToastVariants['color']
+  /**
+   * The orientation between the content and the actions.
+   * @defaultValue 'vertical'
+   */
   orientation?: ToastVariants['orientation']
   /**
    * Display a list of actions:
@@ -42,6 +52,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   class?: any
@@ -157,7 +168,7 @@ defineExpose({
         </slot>
       </template>
 
-      <ToastClose as-child>
+      <ToastClose v-if="close || !!slots.close" as-child>
         <slot name="close" :ui="ui">
           <UButton
             v-if="close"

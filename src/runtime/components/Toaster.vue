@@ -13,6 +13,10 @@ const toaster = tv({ extend: tv(theme), ...(appConfigToaster.ui?.toaster || {}) 
 type ToasterVariants = VariantProps<typeof toaster>
 
 export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'> {
+  /**
+   * The position on the screen to display the toasts.
+   * @defaultValue 'bottom-right'
+   */
   position?: ToasterVariants['position']
   /**
    * Expand the toasts to show multiple toasts at once.

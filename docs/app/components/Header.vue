@@ -30,14 +30,18 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
   <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0" aria-label="Nuxt UI">
-        <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
-        <Logo class="w-auto h-6 shrink-0 ui-only" />
+        <Logo v-if="route.path === '/'" class="w-auto h-6 shrink-0" />
+        <LogoPro v-else-if="route.path.startsWith('/pro')" class="w-auto h-6 shrink-0" />
+        <template v-else>
+          <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
+          <Logo class="w-auto h-6 shrink-0 ui-only" />
+        </template>
       </NuxtLink>
 
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"
-        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.5' : 'v2.19', to: module === 'ui-pro' ? 'https://ui.nuxt.com/pro' : 'https://ui.nuxt.com' }]"
+        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.7.1' : 'v2.21.1', to: module === 'ui-pro' ? 'https://ui2.nuxt.com/pro' : 'https://ui2.nuxt.com' }]"
         :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }"
         size="xs"
       >
@@ -78,7 +82,7 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
     </template>
 
     <template #body>
-      <UNavigationMenu orientation="vertical" :items="mobileLinks" class="-mx-2.5" default-open />
+      <UNavigationMenu orientation="vertical" :items="mobileLinks" class="-mx-2.5" />
 
       <USeparator type="dashed" class="mt-4 mb-6" />
 

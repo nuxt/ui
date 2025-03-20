@@ -17,6 +17,9 @@ export interface ButtonGroupProps {
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'md'
+   */
   size?: ButtonGroupVariants['size']
   /**
    * The orientation the buttons are laid out.

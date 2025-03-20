@@ -21,12 +21,24 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
   as?: any
   /** Display a label in the middle. */
   label?: string
-  /** Display an icon in the middle. */
+  /**
+   * Display an icon in the middle.
+   * @IconifyIcon
+   */
   icon?: string
   /** Display an avatar in the middle. */
   avatar?: AvatarProps
+  /**
+   * @defaultValue 'neutral'
+   */
   color?: SeparatorVariants['color']
+  /**
+   * @defaultValue 'xs'
+   */
   size?: SeparatorVariants['size']
+  /**
+   * @defaultValue 'solid'
+   */
   type?: SeparatorVariants['type']
   /**
    * The orientation of the separator.

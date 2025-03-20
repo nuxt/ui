@@ -1,4 +1,6 @@
 <script lang="ts">
+import type { LinkProps } from '../types'
+
 export interface LinkBaseProps {
   as?: string
   type?: string
@@ -6,8 +8,8 @@ export interface LinkBaseProps {
   onClick?: ((e: MouseEvent) => void | Promise<void>) | Array<((e: MouseEvent) => void | Promise<void>)>
   href?: string
   navigate?: (e: MouseEvent) => void
-  rel?: string
-  target?: string
+  target?: LinkProps['target']
+  rel?: LinkProps['rel']
   isExternal?: boolean
 }
 </script>

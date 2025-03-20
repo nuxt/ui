@@ -1,6 +1,7 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, CollapsibleRootProps } from 'reka-ui'
+import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, NavigationMenuContentEmits, CollapsibleRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
@@ -11,7 +12,8 @@ import type {
   DynamicSlots,
   MergeTypes,
   NestedItem,
-  PartialString
+  PartialString,
+  EmitsToProps
 } from '../types/utils'
 
 const appConfigNavigationMenu = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
@@ -25,6 +27,9 @@ export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type'
 
 export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'>, Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   /**
@@ -32,6 +37,9 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    * `{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
    */
   badge?: string | number | BadgeProps
+  /**
+   * @IconifyIcon
+   */
   trailingIcon?: string
   /**
    * The type of the item.
@@ -56,16 +64,24 @@ export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem>
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when the item is an external link.
    * Set to `false` to hide the external icon.
    * @defaultValue appConfig.ui.icons.external
+   * @IconifyIcon
    */
   externalIcon?: boolean | string
   items?: T
+  /**
+   * @defaultValue 'primary'
+   */
   color?: NavigationMenuVariants['color']
+  /**
+   * @defaultValue 'pill'
+   */
   variant?: NavigationMenuVariants['variant']
   /**
    * The orientation of the menu.
@@ -80,9 +96,12 @@ export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem>
   collapsed?: boolean
   /** Display a line next to the active item. */
   highlight?: boolean
+  /**
+   * @defaultValue 'primary'
+   */
   highlightColor?: NavigationMenuVariants['highlightColor']
   /** The content of the menu. */
-  content?: Omit<NavigationMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<NavigationMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<NavigationMenuContentEmits>>
   /**
    * The orientation of the content.
    * Only works when `orientation` is `horizontal`.
@@ -117,6 +136,7 @@ export type NavigationMenuSlots<
   'item-trailing': SlotProps<T>
   'item-content': SlotProps<T>
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing' | 'content', { index: number, active?: boolean }>
+
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<NavigationMenuItem>">

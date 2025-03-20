@@ -3,7 +3,7 @@ withDefaults(defineProps<{
   title: string
   description: string
   component: string
-  module: string
+  module?: string
 }>(), {
   module: ''
 })

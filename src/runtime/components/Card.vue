@@ -17,6 +17,9 @@ export interface CardProps {
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: CardVariants['variant']
   class?: any
   ui?: Partial<typeof card.slots>

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
@@ -14,6 +15,9 @@ const tabs = tv({ extend: tv(theme), ...(appConfigTabs.ui?.tabs || {}) })
 
 export interface TabsItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   slot?: string
@@ -33,8 +37,17 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
    */
   as?: any
   items?: T[]
+  /**
+   * @defaultValue 'primary'
+   */
   color?: TabsVariants['color']
+  /**
+   * @defaultValue 'pill'
+   */
   variant?: TabsVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: TabsVariants['size']
   /**
    * The orientation of the tabs.
@@ -65,6 +78,7 @@ export type TabsSlots<T extends TabsItem = TabsItem> = {
   trailing: SlotProps<T>
   content: SlotProps<T>
 } & DynamicSlots<T, undefined, { index: number }>
+
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">

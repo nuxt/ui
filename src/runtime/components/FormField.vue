@@ -26,9 +26,17 @@ export interface FormFieldProps {
   help?: string
   error?: string | boolean
   hint?: string
+  /**
+   * @defaultValue 'md'
+   */
   size?: FormFieldVariants['size']
   required?: boolean
+  /** If true, validation on input will be active immediately instead of waiting for a blur event. */
   eagerValidation?: boolean
+  /**
+   * Delay in milliseconds before validating the form on input events.
+   * @defaultValue `300`
+   */
   validateOnInputDelay?: number
   class?: any
   ui?: Partial<typeof formField.slots>
@@ -60,7 +68,7 @@ const ui = computed(() => formField({
 
 const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern)))?.message)
+const error = computed(() => props.error || formErrors?.value?.find(error => error.name && (error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern))))?.message)
 
 const id = ref(useId())
 // Copies id's initial value to bind aria-attributes such as aria-describedby.

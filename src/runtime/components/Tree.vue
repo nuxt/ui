@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
@@ -21,8 +22,14 @@ const tree = tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) })
 type TreeVariants = VariantProps<typeof tree>
 
 export type TreeItem = {
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   label?: string
+  /**
+   * @IconifyIcon
+   */
   trailingIcon?: string
   defaultExpanded?: boolean
   disabled?: boolean
@@ -39,7 +46,13 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
    * @defaultValue 'ul'
    */
   as?: any
+  /**
+   * @defaultValue 'primary'
+   */
   color?: TreeVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
   size?: TreeVariants['size']
   /**
    * The key used to get the value from the item.
@@ -54,16 +67,19 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
   /**
    * The icon displayed on the right side of a parent node.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when a parent node is expanded.
    * @defaultValue appConfig.ui.icons.folderOpen
+   * @IconifyIcon
    */
   expandedIcon?: string
   /**
    * The icon displayed when a parent node is collapsed.
    * @defaultValue appConfig.ui.icons.folder
+   * @IconifyIcon
    */
   collapsedIcon?: string
   items?: T
@@ -90,6 +106,7 @@ export type TreeSlots<
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, undefined, { index: number, level: number, expanded: boolean, selected: boolean }>
+
 </script>
 
 <script setup lang="ts" generic="T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">

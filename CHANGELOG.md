@@ -1,5 +1,36 @@
 # Changelog
 
+## [3.0.0](https://github.com/nuxt/ui/compare/v3.0.0-beta.4...v3.0.0) (2025-03-12)
+
+## [3.0.0-beta.4](https://github.com/nuxt/ui/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2025-03-12)
+
+### Features
+
+* **Form:** global errors ([#3482](https://github.com/nuxt/ui/issues/3482)) ([6e03d9c](https://github.com/nuxt/ui/commit/6e03d9c6efc8f4cfc306813e733d7d3e03706323))
+* **Input/Textarea:** allow `null` value in model ([#3415](https://github.com/nuxt/ui/issues/3415)) ([cfe9b2e](https://github.com/nuxt/ui/commit/cfe9b2ecf34827bc11a5281a069988ab96030047))
+* **useLocale:** handle generic messages ([#3100](https://github.com/nuxt/ui/issues/3100)) ([a9c8eb3](https://github.com/nuxt/ui/commit/a9c8eb3f60a10d1a71632991c9db594716b0fba1))
+
+### Bug Fixes
+
+* **Button:** missing import ([21dbf01](https://github.com/nuxt/ui/commit/21dbf01888a161a9d8ac6eb0d957c1342f6cc30d)), closes [nuxt/ui#3417](https://github.com/nuxt/ui/issues/3417)
+* **Form:** input blur validation on submit ([#3504](https://github.com/nuxt/ui/issues/3504)) ([97c8098](https://github.com/nuxt/ui/commit/97c8098d4a35c392719ae179d36aa008d6f8f78a))
+* **vue:** prevent calling `useHead` in colors ([5ecd227](https://github.com/nuxt/ui/commit/5ecd2271ca86087cb805548397d75c38763ad412))
+
+## [3.0.0-beta.3](https://github.com/nuxt/ui/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2025-03-07)
+
+### Features
+
+* **Button:** handle `active` state ([bd2d484](https://github.com/nuxt/ui/commit/bd2d4848d246a3d5930f8059913f5a1a0abe29fd)), closes [#3417](https://github.com/nuxt/ui/issues/3417)
+* **Table:** add `loading` slot ([99e531d](https://github.com/nuxt/ui/commit/99e531d8dfb7954322b7ab7feda3d8814c6d8d02)), closes [#3444](https://github.com/nuxt/ui/issues/3444)
+
+### Bug Fixes
+
+* **InputMenu/SelectMenu:** proxy `required` in root props ([60b7e2d](https://github.com/nuxt/ui/commit/60b7e2d69e80afa7e221855dcec46479d0ca5c6c))
+* **InputMenu:** wrong `required` in multiple mode ([01fa230](https://github.com/nuxt/ui/commit/01fa230eae4b6623c5fd71cc218d114d9f6f0f25)), closes [#2741](https://github.com/nuxt/ui/issues/2741)
+* **Pagination:** add missing slots ([a47c5ff](https://github.com/nuxt/ui/commit/a47c5ff46616eafee3158cb9801183965f5f9874)), closes [#3441](https://github.com/nuxt/ui/issues/3441)
+* **Pagination:** wrong next link ([e823022](https://github.com/nuxt/ui/commit/e823022b19bb172d2e5fabb9144b4a4286a25a5f)), closes [#3008](https://github.com/nuxt/ui/issues/3008)
+* **templates:** prevent overriding existing colors ([ccbd89c](https://github.com/nuxt/ui/commit/ccbd89c908fe8af54c7d723dd12da5b7f3906c8f)), closes [#3426](https://github.com/nuxt/ui/issues/3426)
+
 ## [3.0.0-beta.2](https://github.com/nuxt/ui/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2025-02-28)
 
 ### Bug Fixes

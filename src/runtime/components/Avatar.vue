@@ -19,10 +19,17 @@ export interface AvatarProps {
   as?: any
   src?: string
   alt?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   text?: string
+  /**
+   * @defaultValue 'md'
+   */
   size?: AvatarVariants['size']
   class?: any
+  style?: any
   ui?: Partial<typeof avatar.slots>
 }
 
@@ -77,7 +84,7 @@ function onError() {
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })" :style="props.style">
     <component
       :is="ImageComponent"
       v-if="src && !error"

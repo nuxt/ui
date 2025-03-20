@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
@@ -12,7 +13,13 @@ const accordion = tv({ extend: tv(theme), ...(appConfigAccordion.ui?.accordion |
 
 export interface AccordionItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
+  /**
+   * @IconifyIcon
+   */
   trailingIcon?: string
   slot?: string
   content?: string
@@ -31,6 +38,7 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
   /**
    * The icon displayed on the right side of the trigger.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
@@ -53,6 +61,7 @@ export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
   content: SlotProps<T>
   body: SlotProps<T>
 } & DynamicSlots<T, 'body', { index: number, open: boolean }>
+
 </script>
 
 <script setup lang="ts" generic="T extends AccordionItem">

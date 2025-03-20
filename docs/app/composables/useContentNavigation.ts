@@ -37,6 +37,10 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
     return {
       ...item,
       children: item.children?.filter((child: any) => {
+        if (child.path.startsWith('/components')) {
+          return true
+        }
+
         if (child.framework && child.framework !== framework.value) {
           return false
         }

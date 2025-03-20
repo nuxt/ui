@@ -217,12 +217,12 @@ slots:
 ::
 
 ::warning
-Make sure to add the `vaul-drawer-wrapper` directive to a parent element of your app to make this work.
+Make sure to add the `data-vaul-drawer-wrapper` directive to a parent element of your app to make this work.
 
 ```vue [app.vue]
 <template>
   <UApp>
-    <div class="bg-(--ui-bg)" vaul-drawer-wrapper>
+    <div class="bg-(--ui-bg)" data-vaul-drawer-wrapper>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -235,7 +235,7 @@ Make sure to add the `vaul-drawer-wrapper` directive to a parent element of your
 export default defineNuxtConfig({
   app: {
     rootAttrs: {
-      'vaul-drawer-wrapper': '',
+      'data-vaul-drawer-wrapper': '',
       'class': 'bg-(--ui-bg)'
     }
   }

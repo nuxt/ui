@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
 
@@ -9,7 +10,7 @@ definePageMeta({
   layout: 'docs'
 })
 
-const { data: page } = await useAsyncData(route.path, () => queryCollection('content').path(route.path).first())
+const { data: page } = await useAsyncData(kebabCase(route.path), () => queryCollection('content').path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
@@ -24,7 +25,7 @@ watch(page, () => {
   }
 }, { immediate: true })
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
+const { data: surround } = await useAsyncData(`${kebabCase(route.path)}-surround`, () => {
   return queryCollectionItemSurroundings('content', route.path, {
     fields: ['description']
   }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
@@ -81,6 +82,8 @@ if (route.path.startsWith('/components')) {
   })
 } else {
   defineOgImageComponent('Docs', {
+    title: page.value.title,
+    description: page.value.description,
     headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
     framework: page.value?.framework,
     module: page.value.module
@@ -106,23 +109,6 @@ const communityLinks = computed(() => [{
   icon: 'i-lucide-map',
   to: '/roadmap'
 }])
-
-// const resourcesLinks = [{
-//   icon: 'i-simple-icons-figma',
-//   label: 'Figma Kit',
-//   to: 'https://www.figma.com/community/file/1288455405058138934',
-//   target: '_blank'
-// }, {
-//   label: 'Playground',
-//   icon: 'i-simple-icons-stackblitz',
-//   to: 'https://stackblitz.com/edit/nuxt-ui',
-//   target: '_blank'
-// }, {
-//   icon: 'i-simple-icons-nuxtdotjs',
-//   label: 'Nuxt docs',
-//   to: 'https://nuxt.com',
-//   target: '_blank'
-// }]
 </script>
 
 <template>
@@ -137,7 +123,7 @@ const communityLinks = computed(() => [{
       </template>
 
       <template #description>
-        <MDC v-if="page.description" :value="page.description" unwrap="p" />
+        <MDC v-if="page.description" :value="page.description" unwrap="p" :cache-key="`${kebabCase(route.path)}-description`" />
       </template>
 
       <template v-if="page.links?.length" #links>
@@ -171,14 +157,9 @@ const communityLinks = computed(() => [{
 
           <UPageLinks title="Community" :links="communityLinks" />
 
-          <!-- <USeparator type="dashed" />
-
-          <UPageLinks title="Resources" :links="resourcesLinks" />
-
           <USeparator type="dashed" />
 
-          <AdsPro />
-          <AdsCarbon /> -->
+          <AdsCarbon />
         </template>
       </UContentToc>
     </template>

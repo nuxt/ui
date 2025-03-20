@@ -12,8 +12,17 @@ interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> exte
   portal?: boolean
   sub?: boolean
   labelKey: keyof NestedItem<T>
+  /**
+   * @IconifyIcon
+   */
   checkedIcon?: string
+  /**
+   * @IconifyIcon
+   */
   loadingIcon?: string
+  /**
+   * @IconifyIcon
+   */
   externalIcon?: boolean | string
   class?: any
   ui: typeof _contextMenu

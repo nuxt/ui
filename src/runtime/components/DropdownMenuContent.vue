@@ -13,8 +13,17 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
   portal?: boolean
   sub?: boolean
   labelKey: keyof NestedItem<T>
+  /**
+   * @IconifyIcon
+   */
   checkedIcon?: string
+  /**
+   * @IconifyIcon
+   */
   loadingIcon?: string
+  /**
+   * @IconifyIcon
+   */
   externalIcon?: boolean | string
   class?: any
   ui: typeof _dropdownMenu

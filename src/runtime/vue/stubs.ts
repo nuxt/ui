@@ -9,6 +9,7 @@ export { useHead } from '@unhead/vue'
 export { useRoute, useRouter } from 'vue-router'
 
 export { defineShortcuts } from '../composables/defineShortcuts'
+export { defineLocale } from '../composables/defineLocale'
 export { useLocale } from '../composables/useLocale'
 
 export const useColorMode = () => {
@@ -67,7 +68,7 @@ export function useNuxtApp() {
 export function defineNuxtPlugin(plugin: (nuxtApp: NuxtApp) => void) {
   return {
     install(app) {
-      plugin({ vueApp: app } as NuxtApp)
+      app.runWithContext(() => plugin({ vueApp: app } as NuxtApp))
     }
   } satisfies VuePlugin
 }

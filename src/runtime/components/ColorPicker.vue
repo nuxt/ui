@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { MaybeRefOrGetter } from '@vueuse/shared'
@@ -63,10 +64,14 @@ export type ColorPickerProps = {
    * @defaultValue 'hex'
    */
   format?: 'hex' | 'rgb' | 'hsl' | 'cmyk' | 'lab'
+  /**
+   * @defaultValue 'md'
+   */
   size?: ColorPickerVariants['size']
   class?: any
   ui?: Partial<typeof colorPicker.slots>
 }
+
 </script>
 
 <script setup lang="ts">

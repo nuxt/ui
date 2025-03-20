@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
@@ -19,9 +20,22 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'primary'
+   */
   color?: PinInputVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: PinInputVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: PinInputVariants['size']
+  /**
+   * The number of input fields.
+   * @defaultValue 5
+   */
   length?: number | string
   highlight?: boolean
   class?: any
@@ -32,6 +46,7 @@ export type PinInputEmits = PinInputRootEmits & {
   change: [payload: Event]
   blur: [payload: Event]
 }
+
 </script>
 
 <script setup lang="ts">

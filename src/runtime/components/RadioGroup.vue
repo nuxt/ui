@@ -44,7 +44,13 @@ export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> exte
    */
   descriptionKey?: string
   items?: T[]
+  /**
+   * @defaultValue 'md'
+   */
   size?: RadioGroupVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: RadioGroupVariants['color']
   /**
    * The orientation the radio buttons are laid out.
@@ -165,8 +171,8 @@ function onUpdate(value: any) {
           <RadioGroupItem
             :id="item.id"
             :value="item.value"
-            :disabled="disabled"
-            :class="ui.base({ class: props.ui?.base })"
+            :disabled="item.disabled"
+            :class="ui.base({ class: props.ui?.base, disabled: item.disabled })"
           >
             <RadioGroupIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
           </RadioGroupItem>

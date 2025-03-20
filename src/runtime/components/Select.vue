@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps } from 'reka-ui'
+import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
@@ -15,7 +15,8 @@ import type {
   GetModelValue,
   GetModelValueEmits,
   NestedItem,
-  PartialString
+  PartialString,
+  EmitsToProps
 } from '../types/utils'
 
 const appConfigSelect = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
@@ -24,6 +25,9 @@ const select = tv({ extend: tv(theme), ...(appConfigSelect.ui?.select || {}) })
 
 interface SelectItemBase {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
   chip?: ChipProps
@@ -44,24 +48,35 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
+  /**
+   * @defaultValue 'primary'
+   */
   color?: SelectVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: SelectVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: SelectVariants['size']
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   selectedIcon?: string
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
-  content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<SelectContentEmits>>
   /**
    * Display an arrow alongside the menu.
    * @defaultValue false

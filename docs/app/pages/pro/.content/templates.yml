@@ -5,16 +5,16 @@ hero:
   description: 'Ready to use templates powered by our premium Vue components and Nuxt Content.<br class="hidden lg:block"> The templates are responsive, accessible and easy to customize so you can get started in no time.'
 navigation: false
 links:
-  - label: Get started
-    to: /getting-started/installation/pro/nuxt#use-an-official-template
-    color: neutral
+  - label: Buy a license
+    color: primary
     size: xl
-    trailingIcon: i-lucide-arrow-right
-  - label: Purchase a license
+    to: /pro/pricing
+  - label: Try for free
+    to: /getting-started/installation/pro/nuxt#use-an-official-template
     size: xl
     color: neutral
     variant: outline
-    to: /pro/pricing
+    trailingIcon: i-lucide-arrow-right
 templates:
   - title: 'Dashboard'
     description: "A template to illustrate how to build your own dashboard with the 15+ latest Nuxt UI Pro components, designed specifically to create a consistent look and feel."
@@ -30,7 +30,7 @@ templates:
       - title: Resizable multi-column layout
         icon: i-lucide-columns-3
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://dashboard-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -42,7 +42,7 @@ templates:
         icon: i-simple-icons-github
         color: neutral
         variant: outline
-      - label: Live Preview
+      - label: Preview
         to: https://vue-dashboard-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-vue
@@ -68,7 +68,7 @@ templates:
       - title: Authentication pages (login, register)
         icon: i-lucide-user-round-check
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://saas-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -94,7 +94,7 @@ templates:
       - title: Write content in YAML
         icon: i-simple-icons-yaml
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://landing-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -120,7 +120,7 @@ templates:
       - title: Full-text search out of the box
         icon: i-lucide-search
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://docs-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -144,7 +144,7 @@ templates:
       - title: Nuxt 4 Compatibility Enabled
         icon: i-simple-icons-nuxtdotjs
     links:
-      - label: Live Preview
+      - label: Preview
         to: https://ui-pro-starter.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
@@ -156,7 +156,7 @@ templates:
         variant: outline
         icon: i-simple-icons-github
         color: neutral
-      - label: Live Preview
+      - label: Preview
         to: https://ui-pro-starter-vue.nuxt.dev
         target: _blank
         leadingIcon: i-logos-vue
