@@ -1,8 +1,10 @@
-export default {
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     overlay: 'fixed inset-0 bg-(--ui-bg-elevated)/75',
     content: 'fixed bg-(--ui-bg) ring ring-(--ui-border) flex focus:outline-none',
-    handle: 'shrink-0 rounded-full bg-(--ui-bg-accented)',
+    handle: ['!bg-(--ui-bg-accented)', options.theme.transitions && 'transition-opacity'],
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: '',
     title: 'text-(--ui-text-highlighted) font-semibold',
@@ -18,7 +20,7 @@ export default {
       },
       right: {
         content: 'flex-row',
-        handle: 'ml-4'
+        handle: '!ml-4'
       },
       bottom: {
         content: 'mt-24 flex-col',
@@ -26,7 +28,7 @@ export default {
       },
       left: {
         content: 'flex-row-reverse',
-        handle: 'mr-4'
+        handle: '!mr-4'
       }
     },
     inset: {
@@ -39,13 +41,13 @@ export default {
     direction: ['top', 'bottom'],
     class: {
       content: 'h-auto max-h-[96%]',
-      handle: 'w-12 h-1.5 mx-auto'
+      handle: '!w-12 !h-1.5 mx-auto'
     }
   }, {
     direction: ['right', 'left'],
     class: {
       content: 'w-auto max-w-[calc(100%-2rem)]',
-      handle: 'h-12 w-1.5 mt-auto mb-auto'
+      handle: '!h-12 !w-1.5 mt-auto mb-auto'
     }
   }, {
     direction: 'top',
@@ -96,4 +98,4 @@ export default {
       content: 'inset-y-0 right-0 rounded-l-[calc(var(--ui-radius)*2)]'
     }
   }]
-}
+})

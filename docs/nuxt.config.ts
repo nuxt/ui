@@ -55,8 +55,7 @@ export default defineNuxtConfig({
       }]
     },
     rootAttrs: {
-      // @ts-expect-error - vaul-drawer-wrapper is not typed
-      'vaul-drawer-wrapper': '',
+      'data-vaul-drawer-wrapper': '',
       'class': 'bg-(--ui-bg)'
     }
   },
