@@ -261,12 +261,9 @@ importers:
       joi:
         specifier: ^17.13.3
         version: 17.13.3
-      motion:
-        specifier: ^12.5.0
-        version: 12.5.0
       motion-v:
-        specifier: 0.13.0
-        version: 0.13.0(vue@3.5.13(typescript@5.6.3))
+        specifier: 0.13.1
+        version: 0.13.1(vue@3.5.13(typescript@5.6.3))
       nuxt:
         specifier: ^3.16.1
         version: 3.16.1(@parcel/watcher@2.5.1)(@types/node@22.13.10)(better-sqlite3@11.9.1)(db0@0.3.1(better-sqlite3@11.9.1))(eslint@9.22.0(jiti@2.4.2))(ioredis@5.6.0)(lightningcss@1.29.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.34.9)(terser@5.39.0)(typescript@5.6.3)(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(vue-tsc@2.2.0(typescript@5.6.3))(yaml@2.7.0)
@@ -5130,24 +5127,10 @@ packages:
   motion-utils@12.5.0:
     resolution: {integrity: sha512-+hFFzvimn0sBMP9iPxBa9OtRX35ZQ3py0UHnb8U29VD+d8lQ8zH3dTygJWqK7av2v6yhg7scj9iZuvTS0f4+SA==}
 
-  motion-v@0.13.0:
-    resolution: {integrity: sha512-kMIa40LPKEZLNQoTDVaS1jmvh+p3QYhxVjmwr9S4CFu32Dk8XP7SiUxCXf78ESk2r5jJj8JQJ5Ce5lw+Z4qRMQ==}
+  motion-v@0.13.1:
+    resolution: {integrity: sha512-Hs1p0he2Ee6mhLMkTpB08cvjWT/24b+spJ28O+KzHqFgx34BDyFUIhDJvi6i7QF3BjS2ukgbHQdE3Uy5nVngUA==}
     peerDependencies:
       vue: '>=3.0.0'
-
-  motion@12.5.0:
-    resolution: {integrity: sha512-BTAYKszMmTvXSsIyeHNMPSicjWgUA4j7OmZv1xPpthm4sPub3ch66fy9U7BhJ1uXNL3YeprsIegzuvps3FkEMw==}
-    peerDependencies:
-      '@emotion/is-prop-valid': '*'
-      react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
-    peerDependenciesMeta:
-      '@emotion/is-prop-valid':
-        optional: true
-      react:
-        optional: true
-      react-dom:
-        optional: true
 
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
@@ -12597,7 +12580,7 @@ snapshots:
 
   motion-utils@12.5.0: {}
 
-  motion-v@0.13.0(vue@3.5.13(typescript@5.6.3)):
+  motion-v@0.13.1(vue@3.5.13(typescript@5.6.3)):
     dependencies:
       '@vueuse/core': 10.11.1(vue@3.5.13(typescript@5.6.3))
       framer-motion: 12.5.0
@@ -12609,11 +12592,6 @@ snapshots:
       - '@vue/composition-api'
       - react
       - react-dom
-
-  motion@12.5.0:
-    dependencies:
-      framer-motion: 12.5.0
-      tslib: 2.8.1
 
   mrmime@2.0.1: {}
 
