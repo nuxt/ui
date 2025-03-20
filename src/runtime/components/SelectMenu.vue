@@ -138,9 +138,9 @@ export interface SelectMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: any }): any
+  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof selectMenu> }): any
   'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean }): any
-  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: any }): any
+  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof selectMenu> }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>

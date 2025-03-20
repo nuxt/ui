@@ -145,8 +145,8 @@ export interface InputMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: any }): any
-  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: any }): any
+  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof inputMenu> }): any
+  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof inputMenu> }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>

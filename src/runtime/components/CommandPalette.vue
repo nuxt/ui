@@ -115,7 +115,7 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: string }> = {
   'empty'(props: { searchTerm?: string }): any
-  'close'(props: { ui: any }): any
+  'close'(props: { ui: ReturnType<typeof commandPalette> }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
