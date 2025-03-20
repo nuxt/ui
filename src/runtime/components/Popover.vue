@@ -1,9 +1,10 @@
 <script lang="ts">
-import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverArrowProps } from 'reka-ui'
+import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverContentEmits, PopoverArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/popover'
 import { tv } from '../utils/tv'
+import type { EmitsToProps } from '../types/utils'
 
 const appConfigPopover = _appConfig as AppConfig & { ui: { popover: Partial<typeof theme> } }
 
@@ -19,7 +20,7 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
    * The content of the popover.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
-  content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentEmits>>
   /**
    * Display an arrow alongside the popover.
    * @defaultValue false
