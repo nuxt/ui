@@ -1,26 +1,14 @@
 <script setup lang="ts">
-import colors from 'tailwindcss/colors'
-
-const props = defineProps<{
+defineProps<{
   label: string
   icon?: string
   chip?: string
   selected?: boolean
 }>()
 
-const twColor = computed(() => {
-  if (!props.chip) return undefined
-  return colors[props.chip as keyof typeof colors]
-})
-
-function getTWShade<
-  S extends 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950
->(shade: S): string {
-  if (twColor.value && typeof twColor.value === 'object' && shade in twColor.value) {
-    return twColor.value[shade as unknown as keyof typeof twColor.value] as string
-  }
-  return ''
-}
+const slots = defineSlots<{
+  leading: () => any
+}>()
 </script>
 
 <template>
@@ -33,14 +21,14 @@ function getTWShade<
     class="capitalize ring-(--ui-border) rounded-[calc(var(--ui-radius))] text-[11px]"
     :class="[selected ? 'bg-(--ui-bg-elevated)' : 'hover:bg-(--ui-bg-elevated)/50']"
   >
-    <template v-if="twColor" #leading>
+    <template v-if="chip || !!slots.leading" #leading>
       <slot name="leading">
         <span
           class="inline-block size-2 rounded-full"
           :class="`bg-(--color-light) dark:bg-(--color-dark)`"
           :style="{
-            '--color-light': getTWShade(500),
-            '--color-dark': getTWShade(400)
+            '--color-light': `var(--color-${chip}-500)`,
+            '--color-dark': `var(--color-${chip}-400)`
           }"
         />
       </slot>
