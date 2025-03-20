@@ -3,15 +3,16 @@ import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
 // FIXME: https://github.com/nuxt/module-builder/issues/141#issuecomment-2078248248
 import type {} from '#app'
 import type { UseHeadInput } from '@unhead/vue/types'
+import colors from 'tailwindcss/colors'
 
 export default defineNuxtPlugin(() => {
   const appConfig = useAppConfig()
   const nuxtApp = useNuxtApp()
 
-  const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+  const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
   function generateShades(key: string, value: string) {
-    return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--color-${value === 'neutral' ? 'old-neutral' : value}-${shade});`).join('\n  ')}`
+    return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${colors[value as keyof typeof colors][shade]});`).join('\n  ')}`
   }
   function generateColor(key: string, shade: number) {
     return `--ui-${key}: var(--ui-color-${key}-${shade});`
