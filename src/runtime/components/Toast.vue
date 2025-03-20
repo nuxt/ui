@@ -168,7 +168,7 @@ defineExpose({
         </slot>
       </template>
 
-      <ToastClose as-child>
+      <ToastClose v-if="close || !!slots.close" as-child>
         <slot name="close" :ui="ui">
           <UButton
             v-if="close"
