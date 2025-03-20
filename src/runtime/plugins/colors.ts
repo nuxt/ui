@@ -12,7 +12,7 @@ export default defineNuxtPlugin(() => {
   const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
   function generateShades(key: string, value: string) {
-    return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${colors[value as keyof typeof colors][shade] || ''});`).join('\n  ')}`
+    return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${getTWColor(value as keyof typeof colors, shade)});`).join('\n  ')}`
   }
   function generateColor(key: string, shade: number) {
     return `--ui-${key}: var(--ui-color-${key}-${shade});`
@@ -58,3 +58,13 @@ export default defineNuxtPlugin(() => {
 
   useHead(headData)
 })
+
+function getTWColor<
+  T extends keyof typeof colors,
+  S extends 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950
+>(color: T, shade: S): string {
+  if (color in colors && typeof colors[color] === 'object' && shade in colors[color]) {
+    return colors[color][shade as unknown as keyof (typeof colors)[T]] as string
+  }
+  return ''
+}
