@@ -1,5 +1,6 @@
 import type { Messages } from '../types'
 import { defineLocale } from '../composables/defineLocale'
+
 export default defineLocale<Messages>({
   name: 'کوردی',
   code: 'ckb',
