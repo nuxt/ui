@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import Breadcrumb, { type BreadcrumbItem, type BreadcrumbProps, type BreadcrumbSlots } from '../../src/runtime/components/Breadcrumb.vue'
 import ComponentRender from '../component-render'
-import type theme from '~/theme/breadcrumb'
+import type _ from '../../src/theme/breadcrumb' // needed for ui props typecheck to work
 
 describe('Breadcrumb', () => {
   const items = [{
@@ -30,7 +30,7 @@ describe('Breadcrumb', () => {
     ['with separatorIcon', { props: { ...props, separatorIcon: 'i-lucide-minus' } }],
     ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
-    ['with ui', { props: { ...props, ui: { link: 'font-bold' } as theme } }],
+    ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
     // Slots
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
