@@ -81,7 +81,6 @@ function setBlackAsPrimary(value: boolean) {
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
           <ThemePickerButton
-            chip="primary"
             label="Black"
             :selected="appConfig.theme.blackAsPrimary"
             @click="setBlackAsPrimary(true)"
@@ -90,6 +89,7 @@ function setBlackAsPrimary(value: boolean) {
               <span class="inline-block w-2 h-2 rounded-full bg-black dark:bg-white" />
             </template>
           </ThemePickerButton>
+
           <ThemePickerButton
             v-for="color in primaryColors"
             :key="color"

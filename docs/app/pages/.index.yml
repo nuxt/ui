@@ -97,7 +97,7 @@ design_system:
     ```
 
     ```css [main.css]
-    @import "tailwindcss" theme(static);
+    @import "tailwindcss";
     @import "@nuxt/ui";
 
     :root {
