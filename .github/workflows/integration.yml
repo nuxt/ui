@@ -14,6 +14,7 @@ jobs:
 
     permissions:
       contents: read
+      statuses: write
       pull-requests: read
 
     env:
@@ -59,6 +60,7 @@ jobs:
 
     permissions:
       contents: read
+      statuses: write
       pull-requests: read
 
     env:
