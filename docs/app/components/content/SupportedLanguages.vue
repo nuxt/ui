@@ -12,6 +12,7 @@ function getEmojiFlag(locale: string): string {
     ar: 'sa', // Arabic -> Saudi Arabia
     bn: 'bd', // Bengali -> Bangladesh
     cs: 'cz', // Czech -> Czech Republic (note: modern country code is actually 'cz')
+    ckb: 'iq', // Central Kurdish -> Iraq
     da: 'dk', // Danish -> Denmark
     el: 'gr', // Greek -> Greece
     et: 'ee', // Estonian -> Estonia
