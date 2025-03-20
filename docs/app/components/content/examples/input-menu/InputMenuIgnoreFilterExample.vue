@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { AvatarProps } from '@nuxt/ui'
+
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
@@ -28,7 +30,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
       <UAvatar
         v-if="modelValue"
         v-bind="modelValue.avatar"
-        :size="ui.leadingAvatarSize()"
+        :size="(ui.leadingAvatarSize() as AvatarProps['size'])"
         :class="ui.leadingAvatar()"
       />
     </template>

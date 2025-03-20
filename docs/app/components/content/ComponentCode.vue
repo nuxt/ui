@@ -1,5 +1,6 @@
 <!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
+import type { ChipProps } from '@nuxt/ui'
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
@@ -358,7 +359,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
                   inset
                   standalone
                   :color="(modelValue as any)"
-                  :size="ui.itemLeadingChipSize()"
+                  :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
                   class="size-2"
                 />
               </template>

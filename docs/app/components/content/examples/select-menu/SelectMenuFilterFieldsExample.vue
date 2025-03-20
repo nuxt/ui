@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { AvatarProps } from '@nuxt/ui'
+
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   transform: (data: { id: number, name: string, email: string }[]) => {
     return data?.map(user => ({
@@ -25,7 +27,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
       <UAvatar
         v-if="modelValue"
         v-bind="modelValue.avatar"
-        :size="ui.leadingAvatarSize()"
+        :size="(ui.leadingAvatarSize() as AvatarProps['size'])"
         :class="ui.leadingAvatar()"
       />
     </template>
