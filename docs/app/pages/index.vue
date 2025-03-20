@@ -85,7 +85,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </div>
       </template>
 
-      <LazySkyBg hydrate-never />
+      <LazySkyBg />
 
       <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
         <UPageMarquee
@@ -241,7 +241,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       </template>
 
       <div ref="contributorsRef" class="p-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 overflow-hidden flex relative">
-        <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" hydrate-never />
+        <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
     </UPageSection>
 
@@ -261,7 +261,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </UButton>
       </template>
 
-      <LazyStarsBg hydrate-never />
+      <LazyStarsBg />
 
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <div class="relative h-[400px] border border-(--ui-border) bg-(--ui-bg-muted) overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">

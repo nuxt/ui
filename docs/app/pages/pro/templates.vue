@@ -18,7 +18,7 @@ useSeoMeta({
 <template>
   <div class="relative">
     <UPageHero :links="page.links" :ui="{ container: 'relative' }">
-      <LazyStarsBg hydrate-never />
+      <LazyStarsBg />
 
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 

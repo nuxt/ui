@@ -1,10 +1,11 @@
 <script lang="ts">
 import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
-import type { DialogContentProps } from 'reka-ui'
+import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/drawer'
 import { tv } from '../utils/tv'
+import type { EmitsToProps } from '../types/utils'
 
 const appConfigDrawer = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme> } }
 
@@ -24,7 +25,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    */
   inset?: boolean
   /** The content of the drawer. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>
   /**
    * Render an overlay behind the drawer.
    * @defaultValue true
