@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import Breadcrumb, { type BreadcrumbProps, type BreadcrumbSlots } from '../../src/runtime/components/Breadcrumb.vue'
+import Breadcrumb, { type BreadcrumbItem, type BreadcrumbProps, type BreadcrumbSlots } from '../../src/runtime/components/Breadcrumb.vue'
 import ComponentRender from '../component-render'
+import type theme from '~/theme/breadcrumb'
 
 describe('Breadcrumb', () => {
   const items = [{
@@ -18,7 +19,7 @@ describe('Breadcrumb', () => {
     to: '/components/breadcrumb',
     icon: 'i-lucide-link',
     slot: 'custom'
-  }]
+  }] as BreadcrumbItem[]
 
   const props = { items }
 
@@ -29,7 +30,7 @@ describe('Breadcrumb', () => {
     ['with separatorIcon', { props: { ...props, separatorIcon: 'i-lucide-minus' } }],
     ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
-    ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
+    ['with ui', { props: { ...props, ui: { link: 'font-bold' } as theme } }],
     // Slots
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
