@@ -4,7 +4,7 @@
 @source "../../../content";
 @source "../../../node_modules/.c12";
 
-@theme {
+@theme static {
   --container-8xl: 90rem;
 
   --font-sans: 'Public Sans', sans-serif;
