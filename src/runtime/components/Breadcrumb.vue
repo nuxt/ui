@@ -11,7 +11,8 @@ const appConfigBreadcrumb = _appConfig as AppConfig & { ui: { breadcrumb: Partia
 
 const breadcrumb = tv({ extend: tv(theme), ...(appConfigBreadcrumb.ui?.breadcrumb || {}) })
 
-export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
+type ItemBaseType = Omit<LinkProps, 'raw' | 'custom'> & Pick<LinkBaseProps, 'onClick'>
+export interface BreadcrumbItem extends ItemBaseType {
   label?: string
   /**
    * @IconifyIcon
@@ -64,7 +65,7 @@ import { get } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
-import ULinkBase from './LinkBase.vue'
+import ULinkBase, { type LinkBaseProps } from './LinkBase.vue'
 import ULink from './Link.vue'
 
 const props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
@@ -87,7 +88,7 @@ const ui = breadcrumb()
       <template v-for="(item, index) in items" :key="index">
         <li :class="ui.item({ class: props.ui?.item })">
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
-            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [props.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
+            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [props.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })" @click="item.onClick">
               <slot :name="item.slot || 'item'" :item="item" :index="index">
                 <slot :name="item.slot ? `${item.slot}-leading`: 'item-leading'" :item="item" :active="index === items!.length - 1" :index="index">
                   <UIcon v-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active: index === items!.length - 1 })" />
