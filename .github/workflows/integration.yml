@@ -22,6 +22,8 @@ jobs:
         node: [22]
 
     steps:
+      - uses: haya14busa/action-workflow_run-status@v1
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -67,6 +69,8 @@ jobs:
         node: [22]
 
     steps:
+      - uses: haya14busa/action-workflow_run-status@v1
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
