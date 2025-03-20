@@ -75,7 +75,7 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   portal: true,
   overlay: true,
   handle: true
-})
+}) as DrawerProps
 const emits = defineEmits<DrawerEmits>()
 const slots = defineSlots<DrawerSlots>()
 
