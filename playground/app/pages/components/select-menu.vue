@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SelectMenuItem } from '@nuxt/ui'
+import type { SelectMenuItem, AvatarProps } from '@nuxt/ui'
 
 import { upperFirst } from 'scule'
 import { refDebounced } from '@vueuse/core'
@@ -134,7 +134,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         @update:open="searchTerm = ''"
       >
         <template #leading="{ modelValue, ui }">
-          <UAvatar v-if="modelValue?.avatar" :size="ui.itemLeadingAvatarSize()" v-bind="modelValue.avatar" />
+          <UAvatar v-if="modelValue?.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="modelValue.avatar" />
         </template>
       </USelectMenu>
     </div>

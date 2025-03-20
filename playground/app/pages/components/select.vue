@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SelectItem } from '@nuxt/ui'
+import type { SelectItem, AvatarProps } from '@nuxt/ui'
 import { upperFirst } from 'scule'
 import theme from '#build/ui/select'
 import type { User } from '~/types'
@@ -135,7 +135,7 @@ function getUserAvatar(value: string) {
         value-key="value"
       >
         <template #leading="{ modelValue, ui }">
-          <UAvatar v-if="modelValue" :size="ui.itemLeadingAvatarSize()" v-bind="getUserAvatar(modelValue)" />
+          <UAvatar v-if="modelValue" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="getUserAvatar(modelValue)" />
         </template>
       </USelect>
     </div>
