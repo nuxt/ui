@@ -1,10 +1,10 @@
-@import "tailwindcss" theme(static) source("../../../..");
+@import "tailwindcss" source("../../../..");
 @import "@nuxt/ui-pro";
 
 @source "../../../content";
 @source "../../../node_modules/.c12";
 
-@theme static {
+@theme {
   --container-8xl: 90rem;
 
   --font-sans: 'Public Sans', sans-serif;
