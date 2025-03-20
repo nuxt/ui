@@ -16,6 +16,9 @@ jobs:
       contents: read
       pull-requests: read
 
+    env:
+      GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
+
     steps:
       - uses: haya14busa/action-workflow_run-status@v1
 
@@ -57,6 +60,9 @@ jobs:
     permissions:
       contents: read
       pull-requests: read
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
 
     steps:
       - uses: haya14busa/action-workflow_run-status@v1
