@@ -81,7 +81,7 @@ function setBlackAsPrimary(value: boolean) {
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
           <ThemePickerButton
-            chip="primary"
+            chip="green"
             label="Black"
             :selected="appConfig.theme.blackAsPrimary"
             @click="setBlackAsPrimary(true)"
