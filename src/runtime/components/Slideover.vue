@@ -168,7 +168,7 @@ const ui = computed(() => slideover({
                 </DialogDescription>
               </div>
 
-              <DialogClose as-child>
+              <DialogClose v-if="close || !!slots.close" as-child>
                 <slot name="close" :ui="ui">
                   <UButton
                     v-if="close"
