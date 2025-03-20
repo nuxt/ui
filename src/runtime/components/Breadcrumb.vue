@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -51,6 +52,7 @@ export type BreadcrumbSlots<T extends { slot?: string }> = {
   'item-trailing': SlotProps<T>
   'separator'(props?: {}): any
 } & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="T extends BreadcrumbItem">

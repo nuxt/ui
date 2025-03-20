@@ -1,12 +1,13 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps } from 'reka-ui'
+import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
 import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlots, PartialString, EmitsToProps } from '../types/utils'
 
 const appConfigContextMenu = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
 
@@ -22,7 +23,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   icon?: string
   color?: ContextMenuVariants['color']
   avatar?: AvatarProps
-  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ContextMenuContentEmits>>
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
@@ -66,7 +67,7 @@ export interface ContextMenuProps<T> extends Omit<ContextMenuRootProps, 'dir'> {
    */
   externalIcon?: boolean | string
   /** The content of the menu. */
-  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ContextMenuContentEmits>>
   /**
    * Render the menu in a portal.
    * @defaultValue true
@@ -93,6 +94,7 @@ export type ContextMenuSlots<T extends { slot?: string }> = {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="T extends ContextMenuItem">
@@ -112,7 +114,7 @@ const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
-const contentProps = toRef(() => props.content as ContextMenuContentProps)
+const contentProps = toRef(() => props.content)
 const proxySlots = omit(slots, ['default']) as Record<string, ContextMenuSlots<T>[string]>
 
 const ui = computed(() => contextMenu({
@@ -138,7 +140,7 @@ const ui = computed(() => contextMenu({
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
     >
-      <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
+      <template v-for="(_, name) in proxySlots" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />
       </template>
     </UContextMenuContent>

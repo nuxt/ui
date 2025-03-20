@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
@@ -97,6 +98,7 @@ export type TreeSlots<T extends { slot?: string }> = {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="T extends TreeItem, M extends boolean = false, K extends SelectItemKey<T> | undefined = undefined">

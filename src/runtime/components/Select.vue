@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectArrowProps, AcceptableValue } from 'reka-ui'
+import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps, AcceptableValue } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey } from '../types/utils'
+import type { PartialString, MaybeArrayOfArray, MaybeArrayOfArrayItem, SelectModelValue, SelectModelValueEmits, SelectItemKey, EmitsToProps } from '../types/utils'
 
 const appConfigSelect = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
 
@@ -64,7 +64,7 @@ export interface SelectProps<T extends MaybeArrayOfArrayItem<I>, I extends Maybe
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
-  content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<SelectContentEmits>>
   /**
    * Display an arrow alongside the menu.
    * @defaultValue false

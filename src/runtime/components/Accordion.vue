@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
@@ -60,6 +61,7 @@ export type AccordionSlots<T extends { slot?: string }> = {
   content: SlotProps<T>
   body: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="T extends AccordionItem">

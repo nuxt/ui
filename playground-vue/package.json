@@ -15,9 +15,9 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^5.2.3",
     "typescript": "^5.6.3",
-    "vite": "^6.2.1",
+    "vite": "^6.2.2",
     "vue-tsc": "^2.2.0"
   }
 }

@@ -61,7 +61,6 @@ export const useState = <T>(key: string, init: () => T): Ref<T> => {
 export function useNuxtApp() {
   return {
     isHydrating: true,
-    isVue: true,
     payload: { serverRendered: false }
   }
 }
@@ -69,7 +68,7 @@ export function useNuxtApp() {
 export function defineNuxtPlugin(plugin: (nuxtApp: NuxtApp) => void) {
   return {
     install(app) {
-      plugin({ vueApp: app } as NuxtApp)
+      app.runWithContext(() => plugin({ vueApp: app } as NuxtApp))
     }
   } satisfies VuePlugin
 }

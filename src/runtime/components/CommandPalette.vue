@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
 import type { FuseResult } from 'fuse.js'
@@ -130,6 +131,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<G, SlotProps<T>> & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">

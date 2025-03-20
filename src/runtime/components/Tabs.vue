@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
@@ -76,6 +77,7 @@ export type TabsSlots<T extends { slot?: string }> = {
   trailing: SlotProps<T>
   content: SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">

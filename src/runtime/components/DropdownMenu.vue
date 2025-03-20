@@ -1,12 +1,13 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'reka-ui'
+import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuContentEmits, DropdownMenuArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
 import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlots, PartialString, EmitsToProps } from '../types/utils'
 
 const appConfigDropdownMenu = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -22,7 +23,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   icon?: string
   color?: DropdownMenuVariants['color']
   avatar?: AvatarProps
-  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
@@ -69,7 +70,7 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
-  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
   /**
    * Display an arrow alongside the menu.
    * @defaultValue false
@@ -101,6 +102,7 @@ export type DropdownMenuSlots<T extends { slot?: string }> = {
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
 } & DynamicSlots<T, SlotProps<T>>
+
 </script>
 
 <script setup lang="ts" generic="T extends DropdownMenuItem">
@@ -148,7 +150,7 @@ const ui = computed(() => dropdownMenu({
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
     >
-      <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
+      <template v-for="(_, name) in proxySlots" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />
       </template>
 

@@ -109,23 +109,6 @@ const communityLinks = computed(() => [{
   icon: 'i-lucide-map',
   to: '/roadmap'
 }])
-
-// const resourcesLinks = [{
-//   icon: 'i-simple-icons-figma',
-//   label: 'Figma Kit',
-//   to: 'https://www.figma.com/community/file/1288455405058138934',
-//   target: '_blank'
-// }, {
-//   label: 'Playground',
-//   icon: 'i-simple-icons-stackblitz',
-//   to: 'https://stackblitz.com/edit/nuxt-ui',
-//   target: '_blank'
-// }, {
-//   icon: 'i-simple-icons-nuxtdotjs',
-//   label: 'Nuxt docs',
-//   to: 'https://nuxt.com',
-//   target: '_blank'
-// }]
 </script>
 
 <template>
@@ -174,14 +157,9 @@ const communityLinks = computed(() => [{
 
           <UPageLinks title="Community" :links="communityLinks" />
 
-          <!-- <USeparator type="dashed" />
-
-          <UPageLinks title="Resources" :links="resourcesLinks" />
-
           <USeparator type="dashed" />
 
-          <AdsPro />
-          <AdsCarbon /> -->
+          <AdsCarbon />
         </template>
       </UContentToc>
     </template>

@@ -82,7 +82,7 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
     </template>
 
     <template #body>
-      <UNavigationMenu orientation="vertical" :items="mobileLinks" class="-mx-2.5" default-open />
+      <UNavigationMenu orientation="vertical" :items="mobileLinks" class="-mx-2.5" />
 
       <USeparator type="dashed" class="mt-4 mb-6" />
 
