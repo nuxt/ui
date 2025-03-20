@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
+import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
@@ -20,7 +20,10 @@ type CalendarModelValue<R extends boolean = false, M extends boolean = false> = 
     ? DateValue[]
     : DateValue
 
-export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'> {
+type _CalendarRootProps = Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>
+type _RangeCalendarRootProps = Omit<RangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>
+
+export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends _RangeCalendarRootProps, _CalendarRootProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -103,7 +106,7 @@ defineSlots<CalendarSlots>()
 const appConfig = useAppConfig()
 const { code: locale, dir, t } = useLocale()
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
 const nextYearIcon = computed(() => props.nextYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
 const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
@@ -130,8 +133,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
   <Calendar.Root
     v-slot="{ weekDays, grid }"
     v-bind="rootProps"
-    :model-value="(modelValue as CalendarModelValue<true & false>)"
-    :default-value="(defaultValue as CalendarModelValue<true & false>)"
+    :model-value="modelValue"
+    :default-value="defaultValue"
     :locale="locale"
     :dir="dir"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
