@@ -91,7 +91,23 @@ export default defineNuxtConfig({
     '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
     '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
     '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
-    '/composables': { redirect: '/composables/define-shortcuts', prerender: false }
+    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
+    // v2 redirects
+    '/getting-started/theming': { redirect: { to: '/getting-started/theme', statusCode: 301 }, prerender: false },
+    '/pro/getting-started/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
+    '/components/range': { redirect: { to: '/components/slider', statusCode: 301 }, prerender: false },
+    '/playground': { redirect: { to: '/getting-started/installation/nuxt', statusCode: 301 }, prerender: false },
+    '/pro/guide/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
+    '/pro/prose/**': { redirect: { to: '/getting-started/typography#vue-components', statusCode: 301 }, prerender: false },
+    '/components/date-picker': { redirect: { to: '/components/calendar#as-a-datepicker', statusCode: 301 }, prerender: false },
+    '/components/dropdown': { redirect: { to: '/components/dropdown-menu', statusCode: 301 }, prerender: false },
+    '/pro/components': { redirect: { to: '/components', statusCode: 301 }, prerender: false },
+    '/pro/components/docs/docs-search': { redirect: { to: '/components/content-search', statusCode: 301 }, prerender: false },
+    '/pro/components/docs-search': { redirect: { to: '/components/content-search', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-cta': { redirect: { to: '/components/page-cta', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-section': { redirect: { to: '/components/page-section', statusCode: 301 }, prerender: false },
+    '/pro/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false },
+    '/releases': { redirect: 'https://github.com/nuxt/ui/releases', prerender: false }
   },
 
   future: {
