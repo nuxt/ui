@@ -1,13 +1,13 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, CollapsibleRootProps } from 'reka-ui'
+import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, NavigationMenuContentEmits, CollapsibleRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
 import { tv } from '../utils/tv'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString } from '../types/utils'
+import type { DynamicSlots, MaybeArrayOfArray, MaybeArrayOfArrayItem, PartialString, EmitsToProps } from '../types/utils'
 
 const appConfigNavigationMenu = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
 
@@ -94,7 +94,7 @@ export interface NavigationMenuProps<T> extends Pick<NavigationMenuRootProps, 'm
    */
   highlightColor?: NavigationMenuVariants['highlightColor']
   /** The content of the menu. */
-  content?: Omit<NavigationMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<NavigationMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<NavigationMenuContentEmits>>
   /**
    * The orientation of the content.
    * Only works when `orientation` is `horizontal`.
