@@ -36,6 +36,7 @@ interface _SelectMenuItem {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
+  value?: string | number
   disabled?: boolean
   onSelect?(e?: Event): void
 }

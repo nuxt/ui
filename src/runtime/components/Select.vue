@@ -36,7 +36,7 @@ interface SelectItemBase {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
-  value?: string
+  value?: string | number
   disabled?: boolean
 }
 export type SelectItem = SelectItemBase | AcceptableValue | boolean
