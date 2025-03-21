@@ -8,8 +8,7 @@ const items: TabsItem[] = [
   },
   {
     label: 'Password',
-    icon: 'i-lucide-lock',
-    test: 'ciao'
+    icon: 'i-lucide-lock'
   }
 ]
 </script>
