@@ -38,7 +38,6 @@ interface _InputMenuItem {
   type?: 'label' | 'separator' | 'item'
   disabled?: boolean
   onSelect?(e?: Event): void
-  [key: string]: any
 }
 export type InputMenuItem = _InputMenuItem | AcceptableValue | boolean
 

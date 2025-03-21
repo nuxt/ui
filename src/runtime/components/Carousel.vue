@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
@@ -104,9 +105,10 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
 export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
   default(props: { item: T, index: number }): any
 }
+
 </script>
 
-<script setup lang="ts" generic="T extends CarouselItem = CarouselItem">
+<script setup lang="ts" generic="T extends CarouselItem">
 import { computed, ref, watch, onMounted } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive, useForwardProps } from 'reka-ui'

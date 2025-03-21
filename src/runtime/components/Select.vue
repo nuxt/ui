@@ -38,7 +38,6 @@ interface SelectItemBase {
   type?: 'label' | 'separator' | 'item'
   value?: string
   disabled?: boolean
-  [key: string]: any
 }
 export type SelectItem = SelectItemBase | AcceptableValue | boolean
 

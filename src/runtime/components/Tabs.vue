@@ -25,7 +25,6 @@ export interface TabsItem {
   /** A unique value for the tab item. Defaults to the index. */
   value?: string | number
   disabled?: boolean
-  [key: string]: any
 }
 
 type TabsVariants = VariantProps<typeof tabs>
