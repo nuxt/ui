@@ -195,7 +195,7 @@ describe('Select', () => {
       // with groups, multiple, mixed types and valueKey
       expectEmitPayloadType('update:modelValue', () => Select({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
-        valueKey: 'value'
+        valueKey: 'value' // TODO: value is already the default valueKey
       })).toEqualTypeOf<[string | number]>()
     })
   })

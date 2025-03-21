@@ -40,7 +40,7 @@ export type TreeItem = {
   onSelect?(e?: Event): void
 }
 
-export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled'> {
+export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'ul'
@@ -109,7 +109,7 @@ export type TreeSlots<
 
 </script>
 
-<script setup lang="ts" generic="T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">
+<script setup lang="ts" generic="T extends TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'
