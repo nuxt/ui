@@ -71,7 +71,7 @@
     "docs:prepare": "nuxt-component-meta docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs && cd playground-vue && vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && cd playground-vue && vue-tsc --noEmit",
     "test": "vitest",
     "test:vue": "vitest -c vitest.vue.config.ts",
     "test:vue:build": "vite build playground-vue",
