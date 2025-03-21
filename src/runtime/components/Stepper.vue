@@ -108,7 +108,7 @@ const currentStepIndex = computed({
   }
 })
 
-const currentStep = computed(() => props.items![currentStepIndex.value])
+const currentStep = computed(() => props.items?.[currentStepIndex.value])
 const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1)
 const hasPrev = computed(() => currentStepIndex.value > 0)
 
@@ -173,9 +173,9 @@ defineExpose({
       </StepperItem>
     </div>
 
-    <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot as keyof StepperSlots<T>]) || (currentStep?.value && !!slots[currentStep.value as keyof StepperSlots<T>])" :class="ui.content({ class: props.ui?.description })">
+    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot || currentStep?.value" :class="ui.content({ class: props.ui?.description })">
       <slot
-        :name="((!!slots[currentStep?.slot ?? currentStep.value!] ? currentStep.slot ?? currentStep.value : 'content') as keyof StepperSlots<T>)"
+        :name="((currentStep?.slot || currentStep?.value || 'content') as keyof StepperSlots<T>)"
         :item="(currentStep as Extract<T, { slot: string }>)"
       >
         {{ currentStep?.content }}
