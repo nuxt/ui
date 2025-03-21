@@ -19,6 +19,7 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   icon?: string
   avatar?: AvatarProps
   slot?: string
+  [key: string]: any
 }
 
 export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {

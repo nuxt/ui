@@ -23,6 +23,7 @@ const navigationMenu = tv({ extend: tv(theme), ...(appConfigNavigationMenu.ui?.n
 export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type'> {
   /** Description is only used when `orientation` is `horizontal`. */
   description?: string
+  [key: string]: any
 }
 
 export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'>, Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {

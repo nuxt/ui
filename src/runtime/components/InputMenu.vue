@@ -39,6 +39,7 @@ interface _InputMenuItem {
   value?: string | number
   disabled?: boolean
   onSelect?(e?: Event): void
+  [key: string]: any
 }
 export type InputMenuItem = _InputMenuItem | AcceptableValue | boolean
 

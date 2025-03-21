@@ -46,6 +46,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   children?: ArrayOrNested<ContextMenuItem>
   onSelect?(e: Event): void
   onUpdateChecked?(checked: boolean): void
+  [key: string]: any
 }
 
 export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>> extends Omit<ContextMenuRootProps, 'dir'> {

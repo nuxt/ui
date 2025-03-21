@@ -26,6 +26,7 @@ export interface AccordionItem {
   /** A unique value for the accordion item. Defaults to the index. */
   value?: string
   disabled?: boolean
+  [key: string]: any
 }
 
 export interface AccordionProps<T extends AccordionItem = AccordionItem> extends Pick<AccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled' | 'unmountOnHide'> {

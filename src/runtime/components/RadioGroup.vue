@@ -19,6 +19,7 @@ export type RadioGroupItem = {
   description?: string
   disabled?: boolean
   value?: string
+  [key: string]: any
 } | RadioGroupValue
 
 export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> extends Pick<RadioGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'> {

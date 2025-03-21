@@ -31,6 +31,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   disabled?: boolean
   slot?: string
   onSelect?(e?: Event): void
+  [key: string]: any
 }
 
 export interface CommandPaletteGroup<T> {

@@ -46,6 +46,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   children?: ArrayOrNested<DropdownMenuItem>
   onSelect?(e: Event): void
   onUpdateChecked?(checked: boolean): void
+  [key: string]: any
 }
 
 export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>> extends Omit<DropdownMenuRootProps, 'dir'> {

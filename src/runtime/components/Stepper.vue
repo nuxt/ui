@@ -25,6 +25,7 @@ export interface StepperItem {
   icon?: string
   content?: string
   disabled?: boolean
+  [key: string]: any
 }
 
 export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<StepperRootProps, 'linear'> {
