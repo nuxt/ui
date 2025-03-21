@@ -154,54 +154,54 @@ jobs:
       - name: Build
         run: pnpm run build
 
-  # nuxt-ui-pro:
-  #   needs: build
+  nuxt-ui-pro:
+    needs: build
 
-  #   runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
-  #   permissions:
-  #     contents: read
-  #     pull-requests: read
+    permissions:
+      contents: read
+      pull-requests: read
 
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest] # macos-latest, windows-latest
-  #       node: [22]
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # macos-latest, windows-latest
+        node: [22]
 
-  #   env:
-  #     NUXT_UI_PRO_LICENSE: ${{ secrets.NUXT_UI_PRO_LICENSE }}
+    env:
+      NUXT_UI_PRO_LICENSE: ${{ secrets.NUXT_UI_PRO_LICENSE }}
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #       with:
-  #         repository: nuxt/ui-pro
-  #         token: ${{ secrets.NUXT_GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: nuxt/ui-pro
+          token: ${{ secrets.NUXT_GITHUB_TOKEN }}
 
-  #     - name: Store commit SHA
-  #       run: |
-  #         echo "COMMIT_SHA=$(echo ${{ github.workflow_sha }} | cut -c1-7)" >> $GITHUB_ENV
+      - name: Store commit SHA
+        run: |
+          echo "COMMIT_SHA=$(echo ${{ github.workflow_sha }} | cut -c1-7)" >> $GITHUB_ENV
 
-  #     - name: Install pnpm
-  #       uses: pnpm/action-setup@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
 
-  #     - name: Install node
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 22
-  #         cache: pnpm
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
 
-  #     - name: Install latest nuxt/ui
-  #       run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
+      - name: Install latest nuxt/ui
+        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
 
-  #     - name: Install dependencies
-  #       run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
-  #     - name: Prepare
-  #       run: pnpm run dev:prepare
+      - name: Prepare
+        run: pnpm run dev:prepare
 
-  #     - name: Typecheck
-  #       run: pnpm run typecheck
+      - name: Typecheck
+        run: pnpm run typecheck
 
-  #     - name: Build
-  #       run: pnpm run build
+      - name: Build
+        run: pnpm run build
