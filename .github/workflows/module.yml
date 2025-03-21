@@ -86,7 +86,7 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.workflow_sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -134,7 +134,7 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.workflow_sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -179,7 +179,7 @@ jobs:
 
       - name: Store commit SHA
         run: |
-          echo "COMMIT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          echo "COMMIT_SHA=$(echo ${{ github.workflow_sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
