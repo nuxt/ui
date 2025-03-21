@@ -108,7 +108,7 @@ const currentStepIndex = computed({
   }
 })
 
-const currentStep = computed(() => props.items?.[currentStepIndex.value])
+const currentStep = computed(() => props.items![currentStepIndex.value])
 const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1)
 const hasPrev = computed(() => currentStepIndex.value > 0)
 
