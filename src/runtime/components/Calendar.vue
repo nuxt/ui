@@ -69,7 +69,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   /** Whether or not a range of dates can be selected */
   range?: R & boolean
   /** Whether or not multiple dates can be selected */
-  multiple?: M
+  multiple?: M & boolean
   /** Show month controls */
   monthControls?: boolean
   /** Show year controls */
@@ -111,7 +111,7 @@ defineSlots<CalendarSlots>()
 const appConfig = useAppConfig()
 const { code: locale, dir, t } = useLocale()
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
+const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
 const nextYearIcon = computed(() => props.nextYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
 const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
