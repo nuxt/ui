@@ -38,6 +38,7 @@ export type TreeItem = {
   children?: TreeItem[]
   onToggle?(e: Event): void
   onSelect?(e?: Event): void
+  [key: string]: any
 }
 
 export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled'> {
@@ -151,7 +152,7 @@ function getItemValue(item: NestedItem<T>): string {
 
 function getDefaultOpenedItems(item: NestedItem<T>): string[] {
   const currentItem = item.defaultExpanded ? getItemValue(item) : null
-  const childItems = item.children?.flatMap(child => getDefaultOpenedItems(child as NestedItem<T>)) ?? []
+  const childItems = item.children?.flatMap((child: TreeItem) => getDefaultOpenedItems(child as NestedItem<T>)) ?? []
 
   return [currentItem, ...childItems].filter(Boolean) as string[]
 }

@@ -71,9 +71,7 @@ const modelValues = ref<string[]>([])
       <UTree :default-value="modelValue" :items="items" />
       <UTree :items="items" @update:model-value="(payload) => payload" />
 
-      <!-- @vue-expect-error - value key should type v-model.  -->
       <UTree v-model="modelValue" :items="itemsWithMappedId" value-key="id" />
-      <!-- @vue-expect-error - label key should type v-model.  -->
       <UTree v-model="modelValue" :items="itemsWithMappedId" label-key="title" />
     </template>
   </div>

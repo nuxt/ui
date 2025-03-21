@@ -52,6 +52,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   value?: string
   children?: NavigationMenuChildItem[]
   onSelect?(e: Event): void
+  [key: string]: any
 }
 
 type NavigationMenuVariants = VariantProps<typeof navigationMenu>
