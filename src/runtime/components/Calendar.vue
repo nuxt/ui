@@ -14,11 +14,16 @@ const calendar = tv({ extend: tv(theme), ...(appConfigCalendar.ui?.calendar || {
 
 type CalendarVariants = VariantProps<typeof calendar>
 
-type CalendarModelValue<R extends boolean = false, M extends boolean = false> = R extends true
+type CalendarDefaultValue<R extends boolean = false, M extends boolean = false> = R extends true
   ? DateRange
   : M extends true
     ? DateValue[]
     : DateValue
+type CalendarModelValue<R extends boolean = false, M extends boolean = false> = R extends true
+  ? (DateRange | null)
+  : M extends true
+    ? (DateValue[] | undefined)
+    : (DateValue | undefined)
 
 type _CalendarRootProps = Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>
 type _RangeCalendarRootProps = Omit<RangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>
@@ -62,14 +67,14 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    */
   size?: CalendarVariants['size']
   /** Whether or not a range of dates can be selected */
-  range?: R
+  range?: R & boolean
   /** Whether or not multiple dates can be selected */
   multiple?: M
   /** Show month controls */
   monthControls?: boolean
   /** Show year controls */
   yearControls?: boolean
-  defaultValue?: CalendarModelValue<R, M>
+  defaultValue?: CalendarDefaultValue<R, M>
   modelValue?: CalendarModelValue<R, M>
   class?: any
   ui?: PartialString<typeof calendar.slots>
@@ -86,7 +91,7 @@ export interface CalendarSlots {
 }
 </script>
 
-<script setup lang="ts" generic="R extends boolean = false, M extends boolean = false">
+<script setup lang="ts" generic="R extends boolean, M extends boolean">
 import { computed } from 'vue'
 import { useForwardPropsEmits } from 'reka-ui'
 import { Calendar as SingleCalendar, RangeCalendar } from 'reka-ui/namespaced'
