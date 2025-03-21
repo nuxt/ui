@@ -119,7 +119,7 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   /** The controlled value of the InputMenu. Can be binded-with with `v-model`. */
   modelValue?: GetModelValue<T, VK, M>
   /** Whether multiple options can be selected or not. */
-  multiple?: M
+  multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /**

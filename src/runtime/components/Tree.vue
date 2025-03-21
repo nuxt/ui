@@ -88,7 +88,7 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
   /** The value of the Tree when initially rendered. Use when you do not need to control the state of the Tree. */
   defaultValue?: GetModelValue<T, VK, M>
   /** Whether multiple options can be selected or not. */
-  multiple?: M
+  multiple?: M & boolean
   class?: any
   ui?: PartialString<typeof tree.slots>
 }

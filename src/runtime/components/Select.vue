@@ -103,7 +103,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   /** The controlled value of the Select. Can be bind as `v-model`. */
   modelValue?: GetModelValue<T, VK, M>
   /** Whether multiple options can be selected or not. */
-  multiple?: M
+  multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
