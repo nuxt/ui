@@ -1,5 +1,38 @@
 # Changelog
 
+## [3.0.1](https://github.com/nuxt/ui/compare/v3.0.0...v3.0.1) (2025-03-21)
+
+### ⚠ BREAKING CHANGES
+
+* **Form:** drop explicit support for `zod` and `valibot` (#3617)
+
+### Features
+
+* **components:** handle events in `content` prop ([5dec0e1](https://github.com/nuxt/ui/commit/5dec0e16e28549b8833aaab17a87fada63d6598c))
+* **locale:** add Catalan language ([#3550](https://github.com/nuxt/ui/issues/3550)) ([53cf1b4](https://github.com/nuxt/ui/commit/53cf1b4c14a2a0e076e1e77688852e6bd0a28a74))
+* **locale:** add Central Kurdish language ([#3566](https://github.com/nuxt/ui/issues/3566)) ([b2034cc](https://github.com/nuxt/ui/commit/b2034ccc91eec6a2842c6f83d159e5aa6fd5f2fd))
+* **locale:** add Romanian language ([#3587](https://github.com/nuxt/ui/issues/3587)) ([0229b0f](https://github.com/nuxt/ui/commit/0229b0fd4644a97db7eb3154c3c87a26634dcfbb))
+* **locale:** add Urdu language ([#3611](https://github.com/nuxt/ui/issues/3611)) ([126ba23](https://github.com/nuxt/ui/commit/126ba2326f8153e155e1013db92c6ee417117610))
+* **locale:** add Uzbek language ([#3548](https://github.com/nuxt/ui/issues/3548)) ([302e04b](https://github.com/nuxt/ui/commit/302e04bd77ae8b165046b264c8d23626e92f8fb5))
+
+### Bug Fixes
+
+* **Calendar:** grey out days outside of displayed month ([#3639](https://github.com/nuxt/ui/issues/3639)) ([a516866](https://github.com/nuxt/ui/commit/a5168666b7dff08e714d57f497737e7a670f457c))
+* **ContextMenu/DropdownMenu:** remove `any` from `proxySlots` ([#3623](https://github.com/nuxt/ui/issues/3623)) ([764c41a](https://github.com/nuxt/ui/commit/764c41a0c60dd1c12d39a86af9f5f11b9e6cdc8c))
+* **Modal/Slideover/Toast:** prevent unnecessary close instantiation ([f4c417d](https://github.com/nuxt/ui/commit/f4c417d9ef5409b52084bdf9d8cbccee3139709f))
+* **module:** handle tailwindcss import without `theme(static)` ([#3630](https://github.com/nuxt/ui/issues/3630)) ([ecff9ab](https://github.com/nuxt/ui/commit/ecff9abc720bdda3a279d5bcfb7b477ff885f2e4))
+* **module:** mark functions used in exports as pure ([#3604](https://github.com/nuxt/ui/issues/3604)) ([57efc78](https://github.com/nuxt/ui/commit/57efc78a3b3fa4a54bcd13df47d570a18fba2bc4))
+* **RadioGroup:** handle `disabled` on items ([fe0bd83](https://github.com/nuxt/ui/commit/fe0bd83d11b0dfa53b58d423bc917f8e21d73444)), closes [nuxt/ui-pro#911](https://github.com/nuxt/ui-pro/issues/911)
+* **Table:** allow links to be opened when [@select](https://github.com/select) is used ([#3580](https://github.com/nuxt/ui/issues/3580)) ([e80cc15](https://github.com/nuxt/ui/commit/e80cc1592fb244dd7692486a4c1ca5b1c2008112))
+* **types:** add missing export for Icon ([#3568](https://github.com/nuxt/ui/issues/3568)) ([5e62493](https://github.com/nuxt/ui/commit/5e624933216db95cbfd1b8034b2eb0f13846ae55))
+* **unplugin:** include `@compodium/examples` in auto-imports paths ([#3585](https://github.com/nuxt/ui/issues/3585)) ([cc504b8](https://github.com/nuxt/ui/commit/cc504b8a4b69dd76b49659d5c206ef23dcb9e475))
+* **useLocale:** unique symbol to use in `@nuxt/ui-pro` ([#3603](https://github.com/nuxt/ui/issues/3603)) ([dec2730](https://github.com/nuxt/ui/commit/dec2730aaea1327434837cfa022ea04056757cbf))
+* **vue:** missing unhead context ([#3589](https://github.com/nuxt/ui/issues/3589)) ([0897e9e](https://github.com/nuxt/ui/commit/0897e9ef05fbee4f021f317bb7c2d0b7007f1b75))
+
+### Code Refactoring
+
+* **Form:** drop explicit support for `zod` and `valibot` ([#3617](https://github.com/nuxt/ui/issues/3617)) ([9a4bb34](https://github.com/nuxt/ui/commit/9a4bb34d7d14add0a3199103f4b583e8307d1d6d))
+
 ## [3.0.0](https://github.com/nuxt/ui/compare/v3.0.0-beta.4...v3.0.0) (2025-03-12)
 
 ## [3.0.0-beta.4](https://github.com/nuxt/ui/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2025-03-12)
