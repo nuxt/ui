@@ -5,7 +5,7 @@ const showBookmarks = ref(true)
 const showHistory = ref(false)
 const showDownloads = ref(false)
 
-const items = computed<DropdownMenuItem[]>(() => [{
+const items = computed(() => [{
   label: 'Interface',
   icon: 'i-lucide-app-window',
   type: 'label' as const
@@ -38,7 +38,7 @@ const items = computed<DropdownMenuItem[]>(() => [{
   onUpdateChecked(checked: boolean) {
     showDownloads.value = checked
   }
-}])
+}] satisfies DropdownMenuItem[])
 </script>
 
 <template>

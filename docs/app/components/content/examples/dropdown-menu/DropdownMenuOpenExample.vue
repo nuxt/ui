@@ -7,16 +7,18 @@ defineShortcuts({
   o: () => open.value = !open.value
 })
 
-const items: DropdownMenuItem[] = [{
-  label: 'Profile',
-  icon: 'i-lucide-user'
-}, {
-  label: 'Billing',
-  icon: 'i-lucide-credit-card'
-}, {
-  label: 'Settings',
-  icon: 'i-lucide-cog'
-}]
+const items = [
+  {
+    label: 'Profile',
+    icon: 'i-lucide-user'
+  }, {
+    label: 'Billing',
+    icon: 'i-lucide-credit-card'
+  }, {
+    label: 'Settings',
+    icon: 'i-lucide-cog'
+  }
+] satisfies DropdownMenuItem[]
 </script>
 
 <template>
