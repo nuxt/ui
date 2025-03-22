@@ -174,9 +174,9 @@ defineExpose({
       </StepperItem>
     </div>
 
-    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot || currentStep?.value" :class="ui.content({ class: props.ui?.description })">
+    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot" :class="ui.content({ class: props.ui?.description })">
       <slot
-        :name="((currentStep?.slot || currentStep?.value || 'content') as keyof StepperSlots<T>)"
+        :name="((currentStep?.slot || 'content') as keyof StepperSlots<T>)"
         :item="(currentStep as Extract<T, { slot: string }>)"
       >
         {{ currentStep?.content }}
