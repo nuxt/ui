@@ -21,7 +21,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <UMain v-if="page">
+  <UMain v-if="page" class="max-sm:pb-8">
     <LazySkyBg />
     <UPageHero
       :title="page.hero.title"
@@ -38,22 +38,18 @@ useSeoMeta({
         container: 'relative !py-0'
       }"
     >
-      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center border border-(--ui-border) mx-4 sm:mx-6 lg:mx-8">
+      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center border-x border-t border-(--ui-border) mx-4 sm:mx-6 lg:mx-8">
         <li
-          v-for="(item, index) in page.items"
+          v-for="item in page.items"
           :key="item.name"
-          class="relative flex flex-col gap-y-4 justify-start group h-full p-4 hover:bg-(--ui-bg-elevated)"
-          :class="[
-            index % 4 !== 3 ? 'border-r' : '',
-            index < page.items.length - (page.items.length % 4 || 4) ? 'border-b' : '',
-            'border-(--ui-border)'
-          ]"
+          class="relative flex flex-col gap-y-4 justify-start group h-full p-4 hover:bg-(--ui-bg-elevated) border-(--ui-border) border-b border-r max-sm:border-r-0 sm:even:border-r-0 lg:even:border-r lg:border-r lg:[&:nth-child(4n)]:border-r-0"
         >
-          <NuxtLink class="inset-0 absolute" :to="item.url" aria-hidden="true" />
+          <NuxtLink class="inset-0 absolute" :to="item.url" target="_blank">
+            <span class="sr-only">Go to {{ item.name }}</span>
+          </NuxtLink>
           <NuxtImg
-            v-if="item.name"
             :src="`/assets/showcase/${item.name.toLowerCase().replace(/\s/g, '-')}.png`"
-            :alt="item.name"
+            :alt="`Screenshot of ${item.name}`"
             lazy
           />
           <div class="flex items-center gap-1">
@@ -65,14 +61,6 @@ useSeoMeta({
         </li>
       </ul>
     </UPageSection>
-    <USeparator class="hidden sm:block transform -translate-y-[1px]" />
-    <!--    <UPageGrid class="lg:grid-cols-3 z-10">
-      <ShowcaseItem
-        v-for="item in page.items"
-        :key="item.name"
-        :name="item.name"
-        :url="item.url"
-      />
-    </UPageGrid> -->
+    <USeparator class="transform -translate-y-[1px]" />
   </UMain>
 </template>

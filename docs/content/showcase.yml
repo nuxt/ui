@@ -3,12 +3,6 @@ description: Check out some of the amazing projects built with Nuxt UI.
 hero:
   title: Showcase
   description: Discover our selection of projects built with Nuxt UI.
-  links:
-    - label: Submit your project
-      icon: i-lucide-plus
-      color: neutral
-      variant: subtle
-      size: md
 items:
   - name: Shelve
     url: https://shelve.cloud

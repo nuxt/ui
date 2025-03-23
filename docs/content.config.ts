@@ -68,7 +68,11 @@ export const collections = {
       }),
       items: z.array(z.object({
         name: z.string(),
-        url: z.string()
+        url: z.string(),
+        screenshotUrl: z.string().optional(),
+        screenshotOptions: z.object({
+          delay: z.number()
+        })
       }))
     })
   })

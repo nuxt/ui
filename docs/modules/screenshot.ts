@@ -15,9 +15,8 @@ interface ContentFile {
 
 export default defineNuxtModule((options, nuxt) => {
   nuxt.hook('content:file:afterParse', async ({ content: file }: { content: ContentFile }) => {
-    // Handle individual template files
-    if (file.id?.includes('showcase')) {
-      for (const item of file.items!) {
+    if (file.id?.includes('showcase') && file.items) {
+      for (const item of file.items) {
         const template = item
         const url = template.screenshotUrl || template.url
         if (!url) {
