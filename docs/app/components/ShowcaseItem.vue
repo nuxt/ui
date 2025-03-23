@@ -16,7 +16,11 @@ defineProps<{
     class="group"
   >
     <template #header>
-      <NuxtImg width="171" height="90" src="https://ui.nuxt.com/pro/ad.png" alt="Nuxt UI Pro" class="object-cover w-full rounded-(--ui-radius)" />
+      <NuxtImg
+        :src="`/assets/showcase/${name.toLowerCase().replace(/\s/g, '-')}.png`"
+        :alt="name"
+        class="object-cover w-full rounded-(--ui-radius)"
+      />
     </template>
   </UPageCard>
 </template>
