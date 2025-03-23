@@ -42,5 +42,21 @@ export const collections = {
       include: '**/*'
     }, pro!].filter(Boolean),
     schema
+  }),
+  showcase: defineCollection({
+    type: 'page',
+    source: 'showcase.yml',
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      hero: z.object({
+        title: z.string(),
+        description: z.string()
+      }),
+      items: z.array(z.object({
+        name: z.string(),
+        url: z.string()
+      }))
+    })
   })
 }

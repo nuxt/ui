@@ -1,28 +1,33 @@
 <script setup lang="ts">
 import { joinURL } from 'ufo'
-// @ts-expect-error yaml is not typed
-import page from '.showcase.yml'
+
+const { data: page } = await useAsyncData('showcase-landing', () => {
+  return queryCollection('showcase').first()
+})
+
+if (!page.value)
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 
 const { url } = useSiteConfig()
 
 useSeoMeta({
   titleTemplate: `%s - Nuxt UI`,
-  title: page.title,
-  description: page.description,
-  ogTitle: `${page.title} - Nuxt UI`,
-  ogDescription: page.description,
+  title: page.value.title,
+  description: page.value.description,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  ogDescription: page.value.description,
   ogImage: joinURL(url, '/og-image.png')
 })
 </script>
 
 <template>
-  <UMain>
+  <UMain v-if="page">
     <LazySkyBg />
     <UPageHero
       :title="page.hero.title"
       :description="page.hero.description"
       :ui="{
-        container: 'pb-0 sm:pb-0',
+        container: 'sm:pb-0',
         description: 'text-balance'
       }"
     />
