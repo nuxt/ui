@@ -168,7 +168,7 @@ export type TableSlots<T> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
@@ -300,13 +300,16 @@ function handleRowSelect(row: TableRow<T>, e: Event) {
   props.onSelect(row, e)
 }
 
+const wrapperElement = useTemplateRef('wrapperElement')
+
 defineExpose({
-  tableApi
+  tableApi,
+  wrapperElement
 })
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive ref="wrapperElement" :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <table :class="ui.base({ class: [props.ui?.base] })">
       <caption v-if="caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
