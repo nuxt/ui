@@ -8,7 +8,6 @@ interface DefineLocaleOptions<M> {
   messages: M
 }
 
-/* @__NO_SIDE_EFFECTS__ */
 export function defineLocale<M>(options: DefineLocaleOptions<M>): Locale<M> {
   return defu<DefineLocaleOptions<M>, [{ dir: Direction }]>(options, { dir: 'ltr' })
 }
