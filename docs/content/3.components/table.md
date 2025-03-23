@@ -444,6 +444,23 @@ class: '!p-0'
 ---
 ::
 
+### With infinite scroll
+
+If you use server-side pagination, you can implement infinite scroll.
+
+::tip
+Scrolling inside the table will load more products (50 max)
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-infinite-scroll-example'
+class: '!p-0'
+---
+::
+
 ### With slots
 
 You can use slots to customize the header and data cells of the table.
@@ -490,6 +507,7 @@ This will give you access to the following:
 | Name | Type |
 | ---- | ---- |
 | `tableApi`{lang="ts-type"} | [`Ref<Table \| null>`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
+| `wrapperElement`{lang="ts-type"} | TODO |
 
 ## Theme
 
