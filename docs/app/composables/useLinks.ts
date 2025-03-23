@@ -84,6 +84,11 @@ export function useLinks() {
     label: 'Community',
     icon: 'i-lucide-users',
     children: [{
+      icon: 'i-lucide-presentation',
+      label: 'Showcase',
+      description: 'Check out some of the amazing projects built with Nuxt UI.',
+      to: '/showcase'
+    }, {
       label: 'Roadmap',
       description: 'Track our development progress in real-time.',
       icon: 'i-lucide-map',
