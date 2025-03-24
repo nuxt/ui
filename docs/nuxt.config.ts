@@ -139,6 +139,7 @@ export default defineNuxtConfig({
     '/pro/components/pricing-grid': { redirect: { to: '/components/pricing-plans', statusCode: 301 }, prerender: false },
     '/pro/components/pricing-switch': { redirect: { to: '/components/switch', statusCode: 301 }, prerender: false },
     '/pro/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false },
+    '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false },
     '/releases': { redirect: 'https://github.com/nuxt/ui/releases', prerender: false }
   },
 
