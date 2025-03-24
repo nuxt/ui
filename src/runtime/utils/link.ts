@@ -12,6 +12,7 @@ export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
     'exact', 'exactActiveClass', 'exactHash', 'exactQuery', 'external',
     'href', 'inactiveClass', 'noPrefetch', 'noRel', 'prefetch',
     'prefetchedClass', 'rel', 'replace', 'target', 'to', 'type', 'title',
+    'onClick',
     ...ariaKeys,
     ...dataKeys
   ]
