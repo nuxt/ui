@@ -4,7 +4,7 @@ description: A list of links that indicate the current page's location within a 
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/navigation/Breadcrumb.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/navigation/Breadcrumb.vue
 ---
 
 ## Usage

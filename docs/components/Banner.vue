@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const id = 'nuxt-ui-banner-3'
-const to = '/pro/pricing'
+const id = 'nuxt-ui-banner-4'
+const to = 'https://ui.nuxt.com'
 
 const hideBanner = () => {
   localStorage.setItem(id, 'true')
@@ -28,8 +28,8 @@ if (import.meta.server) {
       <NuxtLink
         v-if="to"
         :to="to"
+        target="_blank"
         class="focus:outline-none"
-        aria-label="20% off on all Nuxt UI Pro products for Black Friday week"
         tabindex="-1"
       >
         <span class="absolute inset-0 " aria-hidden="true" />
@@ -39,8 +39,8 @@ if (import.meta.server) {
         <div class="lg:flex-1 hidden lg:flex items-center" />
 
         <p class="text-sm font-medium text-white dark:text-gray-900 truncate">
-          <UIcon name="i-ri-discount-percent-fill" class="size-5 align-top flex-shrink-0 pointer-events-none mr-2" />
-          <span class="font-bold">Black Friday Week</span>: <UBadge label="20% off" color="white" class="ring-0 font-semibold" /> on all Nuxt UI Pro products from <span class="font-semibold">Nov 25</span> to <span class="font-semibold">Dec 2</span>!
+          <UIcon name="i-lucide-rocket" class="size-5 align-top flex-shrink-0 pointer-events-none mr-1.5" />
+          <span class="font-bold">Nuxt UI v3</span> is officially released!
         </p>
 
         <!-- <UButton

@@ -4,7 +4,7 @@ description: Display a set of radio buttons.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/RadioGroup.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/forms/RadioGroup.vue
 ---
 
 ## Usage

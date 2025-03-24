@@ -93,7 +93,7 @@
                 />
               </td>
               <td v-for="(column, subIndex) in columns" :key="subIndex" :class="[ui.td.base, ui.td.padding, ui.td.color, ui.td.font, ui.td.size, column?.rowClass, row[column.key]?.class, column.key === 'select' && ui.checkbox.padding]">
-                <slot v-if="modelValue && column.key === 'select' " name="select-data" :checked="isSelected(row)" :change="(ev: boolean) => onChangeCheckbox(ev, row)">
+                <slot v-if="modelValue && column.key === 'select' " name="select-data" :checked="isSelected(row)" :change="ev => onChangeCheckbox(ev, row)">
                   <UCheckbox
                     :model-value="isSelected(row)"
                     v-bind="ui.default.checkbox"

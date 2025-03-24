@@ -9,7 +9,7 @@ onMounted(() => {
   if (carbonads.value) {
     const script = document.createElement('script')
     script.setAttribute('type', 'text/javascript')
-    script.setAttribute('src', 'https://cdn.carbonads.com/carbon.js?serve=CWYIVK3E&placement=uinuxtcom')
+    script.setAttribute('src', 'https://cdn.carbonads.com/carbon.js?serve=CW7IC53I&placement=ui2nuxtcom')
     script.setAttribute('id', '_carbonads_js')
     carbonads.value.appendChild(script)
   }

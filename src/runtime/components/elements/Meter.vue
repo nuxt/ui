@@ -46,10 +46,6 @@ export default defineComponent({
     UIcon
   },
   inheritAttrs: false,
-  slots: Object as SlotsType<{
-    indicator?: { percent: number, value: number }
-    label?: { percent: number, value: number }
-  }>,
   props: {
     value: {
       type: Number,
@@ -98,6 +94,10 @@ export default defineComponent({
       default: () => ({})
     }
   },
+  slots: Object as SlotsType<{
+    indicator?: { percent: number, value: number }
+    label?: { percent: number, value: number }
+  }>,
   setup(props) {
     const { ui, attrs } = useUI('meter', toRef(props, 'ui'), config, toRef(props, 'class'))
 

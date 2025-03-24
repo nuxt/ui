@@ -6,7 +6,7 @@ links:
     to: 'https://headlessui.com/v1/vue/popover'
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/overlays/Popover.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/overlays/Popover.vue
 ---
 
 ## Usage

@@ -7,12 +7,8 @@
 <script lang="ts">
 import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
-import type { ZodSchema } from 'zod'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'
-import type { BaseSchema as ValibotSchema30, BaseSchemaAsync as ValibotSchemaAsync30 } from 'valibot30'
-import type { GenericSchema as ValibotSchema31, GenericSchemaAsync as ValibotSchemaAsync31, SafeParser as ValibotSafeParser31, SafeParserAsync as ValibotSafeParserAsync31 } from 'valibot31'
-import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
 import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { Struct } from 'superstruct'
 import type { FormError, FormEvent, FormEventType, FormSubmitEvent, FormErrorEvent, Form, ValidateReturnSchema } from '../../types/form'
@@ -26,15 +22,10 @@ class FormException extends Error {
   }
 }
 
-type Schema = PropType<ZodSchema>
+type Schema = PropType<StandardSchemaV1>
   | PropType<YupObjectSchema<any>>
+  | PropType<Struct<any, any>>
   | PropType<JoiSchema>
-  | PropType<ValibotSchema30 | ValibotSchemaAsync30>
-  | PropType<ValibotSchema31 | ValibotSchemaAsync31>
-  | PropType<ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any>>
-  | PropType<ValibotSchema | ValibotSchemaAsync>
-  | PropType<ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>> | PropType<Struct<any, any>>
-  | PropType<StandardSchemaV1>
 
 export default defineComponent({
   props: {
@@ -214,14 +205,6 @@ function isJoiError(error: any): error is JoiError {
   return error.isJoi === true
 }
 
-function isValibotSchema(schema: any): schema is ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any> {
-  return '_parse' in schema || '_run' in schema || (typeof schema === 'function' && 'schema' in schema)
-}
-
-function isZodSchema(schema: any): schema is ZodSchema {
-  return schema.parse !== undefined
-}
-
 export function isStandardSchema(schema: any): schema is StandardSchemaV1 {
   return '~standard' in schema
 }
@@ -242,35 +225,6 @@ export async function validateStandardSchema(
 
   const errors = result.issues.map(issue => ({
     path: issue.path?.map(item => typeof item === 'object' ? item.key : item).join('.') || '',
-    message: issue.message
-  }))
-
-  return {
-    errors,
-    result: null
-  }
-}
-
-async function validateValibotSchema(
-  state: any,
-  schema: ValibotSchema30 | ValibotSchemaAsync30 | ValibotSchema31 | ValibotSchemaAsync31 | ValibotSafeParser31<any, any> | ValibotSafeParserAsync31<any, any> | ValibotSchema | ValibotSchemaAsync | ValibotSafeParser<any, any> | ValibotSafeParserAsync<any, any>
-): Promise<ValidateReturnSchema<typeof state>> {
-  const result = await ('_parse' in schema ? schema._parse(state) : '_run' in schema ? schema._run({ typed: false, value: state }, {}) : schema(state))
-
-  if (!result.issues || result.issues.length === 0) {
-    const output = ('output' in result
-      ? result.output
-      : 'value' in result
-        ? result.value
-        : null)
-    return {
-      errors: null,
-      result: output
-    }
-  }
-
-  const errors = result.issues.map(issue => ({
-    path: issue.path?.map(item => item.key).join('.') || '',
     message: issue.message
   }))
 
@@ -304,28 +258,6 @@ async function validateJoiSchema(
     } else {
       throw error
     }
-  }
-}
-
-async function validateZodSchema(
-  state: any,
-  schema: ZodSchema
-): Promise<ValidateReturnSchema<typeof state>> {
-  const result = await schema.safeParseAsync(state)
-  if (result.success === false) {
-    const errors = result.error.issues.map(issue => ({
-      path: issue.path.join('.'),
-      message: issue.message
-    }))
-
-    return {
-      errors,
-      result: null
-    }
-  }
-  return {
-    result: result.data,
-    errors: null
   }
 }
 
@@ -379,12 +311,8 @@ async function validateYupSchema(
 function parseSchema(state: any, schema: Schema): Promise<ValidateReturnSchema<typeof state>> {
   if (isStandardSchema(schema)) {
     return validateStandardSchema(state, schema)
-  } else if (isZodSchema(schema)) {
-    return validateZodSchema(state, schema)
   } else if (isJoiSchema(schema)) {
     return validateJoiSchema(state, schema)
-  } else if (isValibotSchema(schema)) {
-    return validateValibotSchema(state, schema)
   } else if (isYupSchema(schema)) {
     return validateYupSchema(state, schema)
   } else if (isSuperStructSchema(schema)) {

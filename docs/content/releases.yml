@@ -3,7 +3,7 @@ title: '<span class="text-primary">Nuxt UI</span> Releases'
 head.title: Releases
 description: Follow the latest releases and updates happening on the nuxt/ui repository.
 links:
-  - label: Get Started
+  - label: Get started
     trailingIcon: i-heroicons-arrow-right-20-solid
     to: /getting-started
     size: md

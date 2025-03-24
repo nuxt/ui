@@ -78,7 +78,7 @@ defineOgImageComponent('Docs', {
 const communityLinks = computed(() => [{
   icon: 'i-heroicons-pencil-square',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/dev/docs/content/${page?.value?._file}`,
+  to: `https://github.com/nuxt/ui/edit/v2/docs/content/${page?.value?._file}`,
   target: '_blank'
 }, {
   icon: 'i-heroicons-star',

@@ -7,7 +7,7 @@ links:
     to: 'https://headlessui.com/v1/vue/listbox'
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/SelectMenu.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/forms/SelectMenu.vue
 ---
 
 ## Usage

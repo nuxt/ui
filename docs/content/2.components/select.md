@@ -3,7 +3,7 @@ description: Display a select field.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/Select.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/forms/Select.vue
 ---
 
 ## Usage

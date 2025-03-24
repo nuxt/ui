@@ -1,18 +1,20 @@
-name: ci-main
+name: release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
-  ci:
+  publish:
+    if: ${{ github.ref == 'refs/heads/v2' }}
+
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [20]
+        node: [22]
 
     env:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
@@ -54,8 +56,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Release
-        if: github.event_name == 'push' && steps.check.outputs.changed == 'true'
+      - name: Publish
+        if: steps.check.outputs.changed == 'true'
         run: ./scripts/release.sh
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}

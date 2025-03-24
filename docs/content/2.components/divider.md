@@ -3,7 +3,7 @@ description: Display a separator between content.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/layout/Divider.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/layout/Divider.vue
 ---
 
 ## Usage

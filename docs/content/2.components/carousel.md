@@ -3,7 +3,7 @@ description: Display images or content in a scrollable area.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Carousel.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/elements/Carousel.vue
 ---
 
 ## Usage

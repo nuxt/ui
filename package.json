@@ -2,9 +2,9 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "2.21.1",
-  "packageManager": "pnpm@10.6.1",
+  "packageManager": "pnpm@10.6.5",
   "repository": "nuxt/ui",
-  "homepage": "https://ui.nuxt.com",
+  "homepage": "https://ui2.nuxt.com",
   "type": "module",
   "license": "MIT",
   "exports": {
@@ -35,18 +35,19 @@
     "@headlessui/tailwindcss": "^0.2.2",
     "@headlessui/vue": "^1.7.23",
     "@iconify-json/heroicons": "^1.2.2",
-    "@nuxt/icon": "^1.10.3",
-    "@nuxt/kit": "^3.16.0",
+    "@nuxt/icon": "^1.11.0",
+    "@nuxt/kit": "^3.16.1",
     "@nuxtjs/color-mode": "^3.5.2",
-    "@nuxtjs/tailwindcss": "^6.13.1",
+    "@nuxtjs/tailwindcss": "^6.13.2",
     "@popperjs/core": "^2.11.8",
+    "@standard-schema/spec": "^1.0.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
-    "@vueuse/core": "^12.8.2",
-    "@vueuse/integrations": "^12.8.2",
-    "@vueuse/math": "^12.8.2",
+    "@vueuse/core": "^13.0.0",
+    "@vueuse/integrations": "^13.0.0",
+    "@vueuse/math": "^13.0.0",
     "defu": "^6.1.4",
     "fuse.js": "^7.1.0",
     "ohash": "^2.0.11",
@@ -56,25 +57,25 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.1.0",
+    "@nuxt/eslint-config": "^1.2.0",
     "@nuxt/module-builder": "^0.8.4",
-    "@standard-schema/spec": "^1.0.0",
-    "@nuxt/test-utils": "^3.17.1",
+    "@nuxt/test-utils": "^3.17.2",
     "@release-it/conventional-changelog": "^10.0.0",
     "@vue/test-utils": "^2.4.6",
-    "eslint": "^9.22.0",
-    "happy-dom": "^17.1.8",
-    "nuxt": "^3.16.0",
+    "eslint": "^9.23.0",
+    "happy-dom": "^17.4.4",
+    "nuxt": "^3.16.1",
     "release-it": "^18.1.2",
     "typescript": "^5.6.3",
-    "vitest": "^3.0.8",
+    "vitest": "^3.0.9",
     "vitest-environment-nuxt": "^1.0.1",
     "vue-tsc": "^2.1.10"
   },
   "peerDependencies": {
-    "joi": "^17.13.3",
+    "joi": "^17.13.0",
+    "superstruct": "^2.0.0",
     "valibot": "^1.0.0",
-    "superstruct": "^2.0.2",
+    "yup": "^1.6.0",
     "zod": "^3.24.0"
   },
   "peerDependenciesMeta": {
@@ -85,6 +86,9 @@
       "optional": true
     },
     "superstruct": {
+      "optional": true
+    },
+    "yup": {
       "optional": true
     },
     "zod": {

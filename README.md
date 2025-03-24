@@ -1,4 +1,4 @@
-[![nuxt-ui.png](https://volta.s3.fr-par.scw.cloud/nuxt_ui_social_card_531d133fa2.png)](https://ui.nuxt.com)
+[![nuxt-ui.png](https://volta.s3.fr-par.scw.cloud/nuxt_ui_social_card_531d133fa2.png)](https://ui2.nuxt.com)
 
 # Nuxt UI
 
@@ -22,17 +22,32 @@ Its goal is to provide everything related to UI when building a Nuxt app. This i
 - Fully typed
 - [Figma Kit](https://www.figma.com/community/file/1436401057300493073)
 
-Read more on [ui.nuxt.com](https://ui.nuxt.com)
+Read more on [ui2.nuxt.com](https://ui2.nuxt.com)
 
 ## Installation
 
 ```bash
-npx nuxi@latest module add ui
+# npm
+npm install @nuxt/ui@2
+# yarn
+yarn add @nuxt/ui@2
+# pnpm
+pnpm add @nuxt/ui@2
+# bun
+bun add @nuxt/ui@2
+```
+
+Next, register the `@nuxt/ui` module in your `nuxt.config.ts`:
+
+```ts
+export default defineNuxtConfig({
+  modules: ['@nuxt/ui']
+})
 ```
 
 ## Documentation
 
-Visit https://ui.nuxt.com to explore the documentation.
+Visit https://ui2.nuxt.com to explore the documentation.
 
 ## Credits
 
@@ -49,15 +64,15 @@ Visit https://ui.nuxt.com to explore the documentation.
 Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
 
 - Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
-- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/getting-started/contributing) to share your suggestions.
+- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui2.nuxt.com/getting-started/contributing) to share your suggestions.
 
 ## Local Development
 
-Follow the docs to [Set up your local development environment](https://ui.nuxt.com/getting-started/contributing#_2-local-development-setup) and contribute.
+Follow the docs to [Set up your local development environment](https://ui2.nuxt.com/getting-started/contributing#_2-local-development-setup) and contribute.
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxt/ui/blob/dev/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v2/LICENSE.md).
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D

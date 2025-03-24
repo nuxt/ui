@@ -3,6 +3,8 @@
   <div>
     <NuxtLoadingIndicator />
 
+    <Banner />
+
     <Header :links="links" />
 
     <UContainer>
