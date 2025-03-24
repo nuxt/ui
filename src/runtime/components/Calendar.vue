@@ -3,6 +3,7 @@ import type { VariantProps } from 'tailwind-variants'
 import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
+import type { ButtonProps } from '../types'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
 import { tv } from '../utils/tv'
@@ -33,11 +34,21 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
    */
   nextYearIcon?: string
   /**
+   * Configure the next year button.
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   */
+  nextYear?: ButtonProps
+  /**
    * The icon to use for the next month control.
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
   nextMonthIcon?: string
+  /**
+   * Configure the next month button.
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   */
+  nextMonth?: ButtonProps
   /**
    * The icon to use for the previous year control.
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
@@ -45,11 +56,21 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
    */
   prevYearIcon?: string
   /**
+   * Configure the prev year button.
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   */
+  prevYear?: ButtonProps
+  /**
    * The icon to use for the previous month control.
    * @defaultValue appConfig.ui.icons.chevronLeft
    * @IconifyIcon
    */
   prevMonthIcon?: string
+  /**
+   * Configure the prev month button.
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   */
+  prevMonth?: ButtonProps
   /**
    * @defaultValue 'primary'
    */
@@ -138,10 +159,10 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
-        <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" />
+        <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevYear" />
       </Calendar.Prev>
       <Calendar.Prev v-if="props.monthControls" :aria-label="t('calendar.prevMonth')" as-child>
-        <UButton :icon="prevMonthIcon" :size="props.size" color="neutral" variant="ghost" />
+        <UButton :icon="prevMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevMonth" />
       </Calendar.Prev>
       <Calendar.Heading v-slot="{ headingValue }" :class="ui.heading({ class: props.ui?.heading })">
         <slot name="heading" :value="headingValue">
@@ -149,10 +170,10 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
         </slot>
       </Calendar.Heading>
       <Calendar.Next v-if="props.monthControls" :aria-label="t('calendar.nextMonth')" as-child>
-        <UButton :icon="nextMonthIcon" :size="props.size" color="neutral" variant="ghost" />
+        <UButton :icon="nextMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextMonth" />
       </Calendar.Next>
       <Calendar.Next v-if="props.yearControls" :next-page="(date: DateValue) => paginateYear(date, 1)" :aria-label="t('calendar.nextYear')" as-child>
-        <UButton :icon="nextYearIcon" :size="props.size" color="neutral" variant="ghost" />
+        <UButton :icon="nextYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextYear" />
       </Calendar.Next>
     </Calendar.Header>
     <div :class="ui.body({ class: props.ui?.body })">
