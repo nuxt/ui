@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
 
-const items = [
+const items: DropdownMenuItem[][] = [
   [
     {
       label: 'View',
@@ -19,11 +19,11 @@ const items = [
   [
     {
       label: 'Delete',
-      color: 'error' as const,
+      color: 'error',
       icon: 'i-lucide-trash'
     }
   ]
-] satisfies DropdownMenuItem[][]
+]
 </script>
 
 <template>

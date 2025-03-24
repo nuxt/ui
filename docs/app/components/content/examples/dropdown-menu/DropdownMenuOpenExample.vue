@@ -7,7 +7,7 @@ defineShortcuts({
   o: () => open.value = !open.value
 })
 
-const items = [
+const items: DropdownMenuItem[] = [
   {
     label: 'Profile',
     icon: 'i-lucide-user'
@@ -18,7 +18,7 @@ const items = [
     label: 'Settings',
     icon: 'i-lucide-cog'
   }
-] satisfies DropdownMenuItem[]
+]
 </script>
 
 <template>
