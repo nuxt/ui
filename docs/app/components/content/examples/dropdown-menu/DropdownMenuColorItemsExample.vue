@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const items = [
+import type { DropdownMenuItem } from '@nuxt/ui'
+
+const items: DropdownMenuItem[][] = [
   [
     {
       label: 'View',
@@ -17,7 +19,7 @@ const items = [
   [
     {
       label: 'Delete',
-      color: 'error' as const,
+      color: 'error',
       icon: 'i-lucide-trash'
     }
   ]
@@ -27,9 +29,5 @@ const items = [
 <template>
   <UDropdownMenu :items="items" :ui="{ content: 'w-48' }">
     <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
-
-    <template #profile-trailing>
-      <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-(--ui-primary)" />
-    </template>
   </UDropdownMenu>
 </template>

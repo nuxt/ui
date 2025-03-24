@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<script setup lang="ts" generic="T extends Messages = Messages">
+<script setup lang="ts" generic="T extends Messages">
 import { toRef, useId, provide } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'

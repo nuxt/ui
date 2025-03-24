@@ -25,9 +25,10 @@ export interface StepperItem {
   icon?: string
   content?: string
   disabled?: boolean
+  [key: string]: any
 }
 
-export interface StepperProps<T extends StepperItem> extends Pick<StepperRootProps, 'linear'> {
+export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<StepperRootProps, 'linear'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -56,19 +57,19 @@ export interface StepperProps<T extends StepperItem> extends Pick<StepperRootPro
   class?: any
 }
 
-export type StepperEmits<T> = Omit<StepperRootEmits, 'update:modelValue'> & {
+export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRootEmits, 'update:modelValue'> & {
   next: [payload: T]
   prev: [payload: T]
 }
 
 type SlotProps<T extends StepperItem> = (props: { item: T }) => any
 
-export type StepperSlots<T extends StepperItem> = {
+export type StepperSlots<T extends StepperItem = StepperItem> = {
   indicator: SlotProps<T>
   title: SlotProps<T>
   description: SlotProps<T>
   content: SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+} & DynamicSlots<T>
 
 </script>
 
@@ -108,7 +109,7 @@ const currentStepIndex = computed({
   }
 })
 
-const currentStep = computed(() => props.items?.[currentStepIndex.value] as T)
+const currentStep = computed(() => props.items?.[currentStepIndex.value])
 const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1)
 const hasPrev = computed(() => currentStepIndex.value > 0)
 
@@ -116,13 +117,13 @@ defineExpose({
   next() {
     if (hasNext.value) {
       currentStepIndex.value += 1
-      emits('next', currentStep.value)
+      emits('next', currentStep.value as T)
     }
   },
   prev() {
     if (hasPrev.value) {
       currentStepIndex.value -= 1
-      emits('prev', currentStep.value)
+      emits('prev', currentStep.value as T)
     }
   },
   hasNext,
@@ -173,10 +174,10 @@ defineExpose({
       </StepperItem>
     </div>
 
-    <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot]) || (currentStep?.value && !!slots[currentStep.value])" :class="ui.content({ class: props.ui?.description })">
+    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot" :class="ui.content({ class: props.ui?.description })">
       <slot
-        :name="!!slots[currentStep?.slot ?? currentStep.value!] ? currentStep.slot ?? currentStep.value : 'content'"
-        :item="currentStep"
+        :name="((currentStep?.slot || 'content') as keyof StepperSlots<T>)"
+        :item="(currentStep as Extract<T, { slot: string }>)"
       >
         {{ currentStep?.content }}
       </slot>

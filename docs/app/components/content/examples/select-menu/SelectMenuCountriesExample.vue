@@ -4,8 +4,7 @@ const { data: countries, status, execute } = await useLazyFetch<{
   code: string
   emoji: string
 }[]>('/api/countries.json', {
-  immediate: false,
-  default: () => []
+  immediate: false
 })
 
 function onOpen() {

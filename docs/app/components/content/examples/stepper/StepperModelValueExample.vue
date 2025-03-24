@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type { StepperItem } from '@nuxt/ui'
 import { onMounted, ref } from 'vue'
 
-const items = [
+const items: StepperItem[] = [
   {
     title: 'Address',
     description: 'Add your address here',

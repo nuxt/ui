@@ -1,15 +1,19 @@
 <script setup lang="ts">
-const items = [{
-  label: 'Profile',
-  icon: 'i-lucide-user',
-  slot: 'profile'
-}, {
-  label: 'Billing',
-  icon: 'i-lucide-credit-card'
-}, {
-  label: 'Settings',
-  icon: 'i-lucide-cog'
-}]
+import type { DropdownMenuItem } from '@nuxt/ui'
+
+const items = [
+  {
+    label: 'Profile',
+    icon: 'i-lucide-user',
+    slot: 'profile' as const
+  }, {
+    label: 'Billing',
+    icon: 'i-lucide-credit-card'
+  }, {
+    label: 'Settings',
+    icon: 'i-lucide-cog'
+  }
+] satisfies DropdownMenuItem[]
 </script>
 
 <template>
