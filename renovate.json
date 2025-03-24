@@ -21,6 +21,9 @@
       "@tailwindcss/vite"
     ]
   }, {
+    "matchDepTypes": ["peerDependencies"],
+    "enabled": false
+  }, {
     "matchDepTypes": ["resolutions"],
     "enabled": false
   }],
