@@ -35,7 +35,7 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   nextYearIcon?: string
   /**
    * Configure the next year button.
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
   nextYear?: ButtonProps
   /**
@@ -46,7 +46,7 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   nextMonthIcon?: string
   /**
    * Configure the next month button.
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
   nextMonth?: ButtonProps
   /**
@@ -57,7 +57,7 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   prevYearIcon?: string
   /**
    * Configure the prev year button.
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
   prevYear?: ButtonProps
   /**
@@ -68,7 +68,7 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   prevMonthIcon?: string
   /**
    * Configure the prev month button.
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
   prevMonth?: ButtonProps
   /**
