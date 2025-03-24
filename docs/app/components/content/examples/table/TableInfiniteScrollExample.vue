@@ -1,96 +1,93 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
+import { useInfiniteScroll } from '@vueuse/core'
 
-const UButton = resolveComponent('UButton')
-
-type Product = {
+type User = {
   id: number
-  title: string
-  slug: string
-  price: string
-  images: string[]
+  firstName: string
+  username: string
+  email: string
+  image: string
 }
 
-const offset = ref(0)
-const url = computed(() => `https://api.escuelajs.co/api/v1/products?offset=${offset.value}&limit=10`)
+type UserResponse = {
+  users: User[]
+  total: number
+  skip: number
+  limit: number
+}
 
-const { data, status, execute } = await useFetch<Product[]>(url, {
-  key: 'table-products',
-  transform: (data) => {
-    return data?.map(product => ({
-      id: product.id,
-      title: product.title,
-      slug: `https://api.escuelajs.co/api/v1/products/slug/${product.slug}`,
-      price: `${product.price} €`,
-      images: [product.images[0]!]
-    })) || []
+const skip = ref(0)
+const url = computed(() => `https://dummyjson.com/users?limit=10&skip=${skip.value}&select=firstName,username,email,image`)
+
+const { data, status, execute } = await useFetch(url, {
+  key: 'table-users-infinite-scroll',
+  transform: (data?: UserResponse) => {
+    return data?.users.map(user => ({
+      ...user
+    }))
   },
   lazy: true,
   immediate: false,
-  watch: [offset]
+  watch: [skip]
 })
 
 execute()
 
-const products = ref<Product[]>([])
+const users = ref<User[]>([])
 
 watch(data, () => {
-  products.value = [
-    ...products.value,
+  users.value = [
+    ...users.value,
     ...data.value || []
   ]
 })
 
-const columns: TableColumn<Product>[] = [{
+const columns: TableColumn<User>[] = [{
   accessorKey: 'id',
   header: 'ID'
 }, {
-  accessorKey: 'images',
-  header: 'Image',
-  cell: ({ row }) => h('img', { src: row.original.images[0], class: 'h-12 w-auto' })
+  accessorKey: 'image',
+  header: 'Avatar',
+  cell: ({ row }) => h('img', { src: row.original.image, class: 'h-12 w-auto' })
 }, {
-  accessorKey: 'title',
-  header: 'Name'
+  accessorKey: 'firstName',
+  header: 'First name'
 }, {
-  accessorKey: 'price',
-  header: 'Price'
+  accessorKey: 'email',
+  header: 'Email'
 }, {
-  accessorKey: 'slug',
-  header: 'Link',
-  cell: ({ row }) => h(UButton, {
-    icon: 'i-lucide:arrow-up-right',
-    link: true,
-    to: row.original.slug || '',
-    target: '_blank'
-  })
+  accessorKey: 'username',
+  header: 'Username'
 }]
 
-const table = useTemplateRef('table')
+const table = useTemplateRef<ComponentPublicInstance>('table')
 
-const onScroll = async () => {
-  const wrapperElement = table.value?.wrapperElement?.$el
+onMounted(() => {
+  useInfiniteScroll(
+    table.value?.$el,
+    () => {
+      skip.value += 10
+    },
+    {
+      distance: 200,
+      canLoadMore: () => {
+        if (status.value === 'pending') return false
 
-  if (!wrapperElement) return
-
-  // This products API provides only 50 items, if you know the max amount of items your API provides you can add it here
-  if (offset.value >= 40) return
-
-  if (status.value === 'pending') return
-
-  // In this example we trigger the API call when the container is 2/3 scrolled, you can implement your own logic to trigger the data fetching
-  if (wrapperElement.scrollTop + wrapperElement.clientHeight >= (wrapperElement.scrollHeight * 2) / 3) {
-    offset.value += 10
-  }
-}
+        return true
+      }
+    }
+  )
+})
 </script>
 
 <template>
   <UTable
     ref="table"
-    :data="products"
+    :data="users"
     :columns="columns"
     :loading="status === 'pending'"
+    sticky
     class="flex-1 h-80"
-    @scroll="onScroll"
   />
 </template>

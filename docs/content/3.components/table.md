@@ -448,8 +448,10 @@ class: '!p-0'
 
 If you use server-side pagination, you can implement infinite scroll.
 
+This example uses the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll){:target="_blank"} composable from VueUse.
+
 ::tip
-Scrolling inside the table will load more products (50 max)
+Scrolling inside the table will load more users.
 ::
 
 ::component-example
@@ -507,7 +509,6 @@ This will give you access to the following:
 | Name | Type |
 | ---- | ---- |
 | `tableApi`{lang="ts-type"} | [`Ref<Table \| null>`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
-| `wrapperElement`{lang="ts-type"} | TODO |
 
 ## Theme
 
