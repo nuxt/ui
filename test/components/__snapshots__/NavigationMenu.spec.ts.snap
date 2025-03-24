@@ -33,7 +33,7 @@ exports[`NavigationMenu > renders with arrow correctly 1`] = `
         <!--v-if-->
       </li>
     </ul>
-    <div aria-hidden="true" data-state="visible" data-orientation="horizontal" style="--reka-navigation-menu-indicator-size: 0px; --reka-navigation-menu-indicator-position: 0px;" class="absolute data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-[1] w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200">
+    <div aria-hidden="true" data-state="visible" data-orientation="horizontal" style="--reka-navigation-menu-indicator-size: 0px; --reka-navigation-menu-indicator-position: 0px;" class="absolute data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-[2] w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200">
       <div class="relative top-[50%] size-2.5 rotate-45 border border-(--ui-border) bg-(--ui-bg) z-[1] rounded-[calc(var(--ui-radius)/2)]"></div>
     </div>
   </div>
@@ -41,7 +41,7 @@ exports[`NavigationMenu > renders with arrow correctly 1`] = `
   <div class="absolute top-full left-0 flex w-full justify-center">
     <!--teleport start-->
     <!--teleport end-->
-    <div class="relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" data-state="open" data-orientation="horizontal">
+    <div class="relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1]" data-state="open" data-orientation="horizontal">
       <!---->
       <!---->
     </div>
@@ -174,7 +174,7 @@ exports[`NavigationMenu > renders with content orientation vertical correctly 1`
   <!--v-if-->
   <div class="absolute top-full left-0 flex w-full">
     <!--v-if-->
-    <div class="relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] sm:w-(--reka-navigation-menu-viewport-width) left-(--reka-navigation-menu-viewport-left)" data-state="open" data-orientation="horizontal">
+    <div class="relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1] sm:w-(--reka-navigation-menu-viewport-width) left-(--reka-navigation-menu-viewport-left)" data-state="open" data-orientation="horizontal">
       <!---->
       <!---->
     </div>
@@ -559,7 +559,7 @@ exports[`NavigationMenu > renders with modelValue correctly 1`] = `
   <!--v-if-->
   <div class="absolute top-full left-0 flex w-full justify-center">
     <!--v-if-->
-    <div class="relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" data-state="open" data-orientation="horizontal">
+    <div class="relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1]" data-state="open" data-orientation="horizontal">
       <!---->
       <!---->
     </div>
@@ -1225,7 +1225,7 @@ exports[`NavigationMenu > renders with unmountOnHide correctly 1`] = `
   <!--v-if-->
   <div class="absolute top-full left-0 flex w-full justify-center">
     <!--v-if-->
-    <div class="relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" data-state="closed" data-orientation="horizontal" style="pointer-events: none;" hidden="">
+    <div class="relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*1.5)] ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1]" data-state="closed" data-orientation="horizontal" style="pointer-events: none;" hidden="">
       <div data-dismissable-layer="" style="pointer-events: none;" id="reka-navigation-menu-v-0-0-0-content-1" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-1" data-state="closed" data-orientation="horizontal" class="absolute top-0 left-0 w-full data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]" hidden="">
         <ul class="grid p-2 grid-cols-2 gap-2">
           <li class=""><button type="button" class="group size-full px-3 py-2 rounded-[calc(var(--ui-radius)*1.5)] flex items-start gap-2 text-start focus-visible:outline-(--ui-primary) hover:bg-(--ui-bg-elevated)/50 text-(--ui-text) hover:text-(--ui-text-highlighted) transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:house size-5 shrink-0 text-(--ui-text-dimmed) group-hover:text-(--ui-text) transition-colors" aria-hidden="true"></span>

@@ -27,7 +27,8 @@ function getEmojiFlag(locale: string): string {
     sv: 'se', // Swedish -> Sweden
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan
-    vi: 'vn' // Vietnamese -> Vietnam
+    vi: 'vn', // Vietnamese -> Vietnam
+    hy: 'am' // Armenian -> Armenia
   }
 
   const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale
