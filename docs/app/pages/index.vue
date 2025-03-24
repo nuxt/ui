@@ -103,10 +103,11 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :to="component.path"
           >
             <UColorModeImage
-
               :light="`${component.path.replace('/components/', '/components/light/')}.png`"
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+              :alt="`${component.title} preview`"
               class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
+              loading="lazy"
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
@@ -130,7 +131,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             <UColorModeImage
               :light="`${component.path.replace('/components/', '/components/light/')}.png`"
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+              :alt="`${component.title} preview`"
               class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
+              loading="lazy"
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
