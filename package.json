@@ -137,10 +137,11 @@
     "vue-tsc": "^2.2.0"
   },
   "peerDependencies": {
+    "joi": "^17.13.0",
+    "superstruct": "^2.0.0",
     "typescript": "^5.6.3",
-    "joi": "^17.13.3",
     "valibot": "^1.0.0",
-    "superstruct": "^2.0.2",
+    "yup": "^1.6.0",
     "zod": "^3.24.0"
   },
   "peerDependenciesMeta": {
@@ -151,6 +152,9 @@
       "optional": true
     },
     "superstruct": {
+      "optional": true
+    },
+    "yup": {
       "optional": true
     },
     "zod": {
