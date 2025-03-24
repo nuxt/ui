@@ -155,7 +155,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           :in-view-options="{ once: true }"
           class="flex items-start gap-x-3 relative group"
         >
-          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10" />
+          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10">
+            <span class="sr-only">Go to {{ feature.title }}</span>
+          </NuxtLink>
 
           <div class="relative p-3">
             <svg class="absolute inset-0" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
