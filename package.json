@@ -63,8 +63,9 @@
     "build": "nuxt-module-build build",
     "prepack": "pnpm build",
     "dev": "DEV=true nuxi dev playground",
-    "dev:vue": "DEV=true vite playground-vue",
     "dev:build": "nuxi build playground",
+    "dev:vue": "DEV=true vite playground-vue",
+    "dev:vue:build": "vite build playground-vue",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && nuxi prepare docs && vite build playground-vue",
     "docs": "DEV=true nuxi dev docs",
     "docs:build": "NODE_OPTIONS='--max-old-space-size=8192' nuxi build docs",
@@ -74,7 +75,6 @@
     "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs && cd playground-vue && vue-tsc --noEmit",
     "test": "vitest",
     "test:vue": "vitest -c vitest.vue.config.ts",
-    "test:vue:build": "vite build playground-vue",
     "release": "release-it"
   },
   "dependencies": {

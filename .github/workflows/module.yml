@@ -50,16 +50,19 @@ jobs:
         run: pnpm run typecheck
 
       - name: Test
-        run: pnpm run test
+        run: pnpm run test run
 
       - name: Test (vue)
-        run: pnpm run test:vue
+        run: pnpm run test:vue run
 
       - name: Build
         run: pnpm run build
 
-      - name: Build vue fixture
-        run: pnpm run test:vue:build
+      - name: Build playground
+        run: pnpm run dev:build
+
+      - name: Build playground (vue)
+        run: pnpm run dev:vue:build
 
       - name: Publish
         run: pnpx pkg-pr-new publish --compact --no-template --pnpm
