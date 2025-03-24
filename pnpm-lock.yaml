@@ -240,8 +240,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/@nuxt/ui-pro@d96a086
-        version: https://pkg.pr.new/@nuxt/ui-pro@d96a086(@babel/parser@7.26.10)(magicast@0.3.5)(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@e524f08
+        version: https://pkg.pr.new/@nuxt/ui-pro@e524f08(@babel/parser@7.26.10)(magicast@0.3.5)(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
       '@nuxthub/core':
         specifier: ^0.8.18
         version: 0.8.18(db0@0.3.1(better-sqlite3@11.9.1))(ioredis@5.6.0)(magicast@0.3.5)(vite@6.2.3(@types/node@22.13.12)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
@@ -1555,9 +1555,9 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@d96a086':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@d96a086}
-    version: 3.0.0
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@e524f08':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@e524f08}
+    version: 3.0.1
     peerDependencies:
       typescript: ^5.6.3
 
@@ -4046,10 +4046,6 @@ packages:
     resolution: {integrity: sha512-L5bGsVkxJbJgdnwyuheIunkGatUF/zssUoxxjACCseZYAVbaqdh9Tsmmlkl8vYan09H7sbvKt4pS8GqKLBrEzA==}
     hasBin: true
 
-  git-config-path@2.0.0:
-    resolution: {integrity: sha512-qc8h1KIQbJpp+241id3GuAtkdyJ+IK+LIVtkiFTRKRrmddDzs3SI9CvP1QYmWBFvm1I/PWRwj//of8bgAc0ltA==}
-    engines: {node: '>=4'}
-
   git-raw-commits@5.0.0:
     resolution: {integrity: sha512-I2ZXrXeOc0KrCvC7swqtIFXFN+rbjnC7b2T943tvemIOVNl+XP8YnA9UVwqFhzzLClnSA60KR/qEjLpXzs73Qg==}
     engines: {node: '>=18'}
@@ -5329,10 +5325,6 @@ packages:
 
   parse-entities@4.0.2:
     resolution: {integrity: sha512-GG2AQYWoLgL877gQIKeRPGO1xF9+eG1ujIb5soS5gPvLQ1y2o8FL90w2QWNdf9I361Mpp7726c+lj3U0qK1uGw==}
-
-  parse-git-config@3.0.0:
-    resolution: {integrity: sha512-wXoQGL1D+2COYWCD35/xbiKma1Z15xvZL8cI25wvxzled58V51SJM04Urt/uznS900iQor7QO04SgdfT/XlbuA==}
-    engines: {node: '>=8'}
 
   parse-imports@2.2.1:
     resolution: {integrity: sha512-OL/zLggRp8mFhKL0rNORUTR4yBYujK/uU+xZL+/0Rgm2QE4nLO9v8PzEweSJEbMGKmDRjJE4R3IMJlL2di4JeQ==}
@@ -8415,7 +8407,7 @@ snapshots:
       - typescript
       - yaml
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@d96a086(@babel/parser@7.26.10)(magicast@0.3.5)(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@e524f08(@babel/parser@7.26.10)(magicast@0.3.5)(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))':
     dependencies:
       '@nuxt/kit': 3.16.1(magicast@0.3.5)
       '@nuxt/schema': 3.16.1
@@ -8427,9 +8419,8 @@ snapshots:
       git-url-parse: 16.0.1
       ofetch: 1.4.1
       ohash: 2.0.11
-      parse-git-config: 3.0.0
       pathe: 2.0.3
-      pkg-types: 1.3.1
+      pkg-types: 2.1.0
       scule: 1.3.0
       tinyglobby: 0.2.12
       typescript: 5.8.2
@@ -11147,8 +11138,6 @@ snapshots:
       nypm: 0.6.0
       pathe: 2.0.3
 
-  git-config-path@2.0.0: {}
-
   git-raw-commits@5.0.0(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.1.0):
     dependencies:
       '@conventional-changelog/git-client': 1.0.1(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.1.0)
@@ -12987,11 +12976,6 @@ snapshots:
       is-alphanumerical: 2.0.1
       is-decimal: 2.0.1
       is-hexadecimal: 2.0.1
-
-  parse-git-config@3.0.0:
-    dependencies:
-      git-config-path: 2.0.0
-      ini: 1.3.8
 
   parse-imports@2.2.1:
     dependencies:

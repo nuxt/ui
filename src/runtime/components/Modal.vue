@@ -67,7 +67,7 @@ export interface ModalSlots {
   header(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
-  close(props: { ui: any }): any
+  close(props: { ui: ReturnType<typeof modal> }): any
   body(props?: {}): any
   footer(props?: {}): any
 }

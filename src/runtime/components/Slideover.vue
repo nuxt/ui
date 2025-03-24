@@ -70,7 +70,7 @@ export interface SlideoverSlots {
   header(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
-  close(props: { ui: any }): any
+  close(props: { ui: ReturnType<typeof slideover> }): any
   body(props?: {}): any
   footer(props?: {}): any
 }
