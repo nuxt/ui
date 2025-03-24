@@ -64,19 +64,33 @@
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.22.0",
     "happy-dom": "^17.1.8",
-    "joi": "^17.13.3",
     "nuxt": "^3.16.0",
     "release-it": "^18.1.2",
-    "superstruct": "^2.0.2",
     "typescript": "^5.6.3",
-    "valibot": "^0.42.1",
-    "valibot30": "npm:valibot@0.30.0",
-    "valibot31": "npm:valibot@0.31.0",
     "vitest": "^3.0.8",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^2.1.10",
-    "yup": "^1.6.1",
-    "zod": "^3.24.2"
+    "vue-tsc": "^2.1.10"
+  },
+  "peerDependencies": {
+    "typescript": "^5.6.3",
+    "joi": "^17.13.3",
+    "valibot": "^1.0.0",
+    "superstruct": "^2.0.2",
+    "zod": "^3.24.0"
+  },
+  "peerDependenciesMeta": {
+    "joi": {
+      "optional": true
+    },
+    "valibot": {
+      "optional": true
+    },
+    "superstruct": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
+    }
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
