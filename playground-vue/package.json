@@ -17,7 +17,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
     "typescript": "^5.6.3",
-    "vite": "^6.2.2",
+    "vite": "^6.2.3",
     "vue-tsc": "^2.2.0"
   }
 }
