@@ -135,8 +135,10 @@ const communityLinks = computed(() => [{
           :target="link.to.startsWith('http') ? '_blank' : undefined"
           v-bind="link"
         >
+          <span class="sr-only">Go to {{ link.label }}</span>
+          {{ link.label }}
           <template v-if="link.avatar" #leading>
-            <UAvatar v-bind="link.avatar" size="2xs" />
+            <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
           </template>
         </UButton>
       </template>
