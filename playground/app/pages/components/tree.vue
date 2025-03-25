@@ -41,8 +41,8 @@ const itemsWithMappedId = [
   { id: 'id3', title: 'obiwan kenobi' }
 ]
 
-const modelValue = ref<TreeItem>()
-const modelValues = ref<TreeItem[]>([])
+const modelValue = ref<string>()
+const modelValues = ref<string[]>([])
 </script>
 
 <template>
@@ -64,22 +64,14 @@ const modelValues = ref<TreeItem[]>([])
 
     <!-- Typescript tests -->
     <template v-if="false">
-      <!-- @vue-expect-error - multiple props should type modelValue to array.  -->
-      <UTree :model-value="modelValue" :items="items" multiple />
-      <!-- @vue-expect-error - multiple props should type defaultValue to array.  -->
-      <UTree :default-value="modelValue" :items="items" multiple />
-      <!-- @vue-expect-error - multiple props should type @update:modelValue to array.  -->
-      <UTree :items="items" multiple @update:model-value="(payload: TreeItem) => payload" />
-      <!-- @vue-expect-error - default should type modelValue to single item.  -->
-      <UTree :model-value="modelValues" :items="items" />
-      <!-- @vue-expect-error - default should type defaultValue to single item.  -->
-      <UTree :default-value="modelValues" :items="items" />
-      <!-- @vue-expect-error - default should type @update:modelValue to single item.  -->
-      <UTree :items="items" @update:model-value="(payload: TreeItem[]) => payload" />
+      <UTree :model-value="modelValues" :items="items" multiple />
+      <UTree :default-value="modelValues" :items="items" multiple />
+      <UTree :items="items" multiple @update:model-value="(payload) => payload" />
+      <UTree :model-value="modelValue" :items="items" />
+      <UTree :default-value="modelValue" :items="items" />
+      <UTree :items="items" @update:model-value="(payload) => payload" />
 
-      <!-- @vue-expect-error - value key should type v-model.  -->
       <UTree v-model="modelValue" :items="itemsWithMappedId" value-key="id" />
-      <!-- @vue-expect-error - label key should type v-model.  -->
       <UTree v-model="modelValue" :items="itemsWithMappedId" label-key="title" />
     </template>
   </div>
