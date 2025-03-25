@@ -19,7 +19,7 @@
     "joi": "^17.13.3",
     "nuxt": "^3.16.1",
     "nuxt-cloudflare-analytics": "^1.0.8",
-    "nuxt-component-meta": "^0.10.0",
+    "nuxt-component-meta": "^0.10.1",
     "nuxt-og-image": "^5.0.5",
     "prettier": "^3.5.3",
     "ufo": "^1.5.4",
