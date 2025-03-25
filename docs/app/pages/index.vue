@@ -106,6 +106,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
               :light="`${component.path.replace('/components/', '/components/light/')}.png`"
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
               :alt="`${component.title} preview`"
+              width="290"
+              height="163"
+              format="webp"
               class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
               loading="lazy"
             />
@@ -223,26 +226,32 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       class="border-b border-(--ui-border)"
     >
       <template #features>
-        <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0">
-          <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
-            {{ format(module?.stats?.downloads ?? 0) }}+
-          </p>
-          <p class="text-(--ui-text-muted) text-sm truncate">monthly downloads</p>
-        </NuxtLink>
+        <li>
+          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0">
+            <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
+              {{ format(module?.stats?.downloads ?? 0) }}+
+            </p>
+            <p class="text-(--ui-text-muted) text-sm truncate">monthly downloads</p>
+          </NuxtLink>
+        </li>
 
-        <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0">
-          <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
-            {{ format(module?.stats?.stars ?? 0) }}+
-          </p>
-          <p class="text-(--ui-text-muted) text-sm truncate">GitHub stars</p>
-        </NuxtLink>
+        <li>
+          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0">
+            <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
+              {{ format(module?.stats?.stars ?? 0) }}+
+            </p>
+            <p class="text-(--ui-text-muted) text-sm truncate">GitHub stars</p>
+          </NuxtLink>
+        </li>
 
-        <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0">
-          <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
-            175+
-          </p>
-          <p class="text-(--ui-text-muted) text-sm truncate">Contributors</p>
-        </NuxtLink>
+        <li>
+          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0">
+            <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
+              175+
+            </p>
+            <p class="text-(--ui-text-muted) text-sm truncate">Contributors</p>
+          </NuxtLink>
+        </li>
       </template>
 
       <div ref="contributorsRef" class="p-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 overflow-hidden flex relative">
