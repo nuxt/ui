@@ -136,7 +136,7 @@ const communityLinks = computed(() => [{
           v-bind="link"
         >
           <template v-if="link.avatar" #leading>
-            <UAvatar v-bind="link.avatar" size="2xs" />
+            <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
           </template>
         </UButton>
       </template>

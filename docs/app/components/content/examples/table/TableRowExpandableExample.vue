@@ -48,14 +48,15 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'expand',
   cell: ({ row }) => h(UButton, {
-    color: 'neutral',
-    variant: 'ghost',
-    icon: 'i-lucide-chevron-down',
-    square: true,
-    ui: {
+    'color': 'neutral',
+    'variant': 'ghost',
+    'icon': 'i-lucide-chevron-down',
+    'square': true,
+    'aria-label': 'Expand',
+    'ui': {
       leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
     },
-    onClick: () => row.toggleExpanded()
+    'onClick': () => row.toggleExpanded()
   })
 }, {
   accessorKey: 'id',

@@ -225,6 +225,7 @@ export default defineNuxtConfig({
   },
 
   image: {
+    format: ['webp', 'jpeg', 'jpg', 'png', 'svg'],
     provider: 'ipx'
   },
 

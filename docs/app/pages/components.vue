@@ -169,6 +169,7 @@ onMounted(() => {
                 :loading="index >= 4 ? 'lazy' : 'eager'"
                 width="640"
                 height="360"
+                :alt="`${component.name} preview`"
               />
             </div>
           </UPageCard>
