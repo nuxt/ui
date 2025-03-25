@@ -135,6 +135,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
               :light="`${component.path.replace('/components/', '/components/light/')}.png`"
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
               :alt="`${component.title} preview`"
+              width="290"
+              height="163"
+              format="webp"
               class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
               loading="lazy"
             />
