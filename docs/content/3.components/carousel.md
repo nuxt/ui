@@ -239,6 +239,10 @@ class: 'p-8 px-16'
 
 :component-slots
 
+### Emits
+
+:component-emits
+
 ### Expose
 
 You can access the typed component instance using [`useTemplateRef`](https://vuejs.org/api/composition-api-helpers.html#usetemplateref).
