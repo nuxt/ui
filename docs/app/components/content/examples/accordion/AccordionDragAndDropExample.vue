@@ -21,7 +21,7 @@ const items = shallowRef<AccordionItem[]>([
   }
 ])
 
-const accordion = useTemplateRef('accordion')
+const accordion = useTemplateRef<HTMLElement>('accordion')
 
 useSortable(accordion, items, {
   animation: 150
