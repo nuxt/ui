@@ -155,7 +155,7 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
 })
 defineSlots<CarouselSlots<T>>()
 const emit = defineEmits<{
-  'select': [selectedIndex: number]
+  select: [selectedIndex: number]
 }>()
 
 const appConfig = useAppConfig()
