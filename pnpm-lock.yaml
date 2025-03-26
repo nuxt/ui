@@ -240,8 +240,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/@nuxt/ui-pro@e524f08
-        version: https://pkg.pr.new/@nuxt/ui-pro@e524f08(@babel/parser@7.26.10)(magicast@0.3.5)(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@8c21afa
+        version: https://pkg.pr.new/@nuxt/ui-pro@8c21afa(@babel/parser@7.26.10)(joi@17.13.3)(magicast@0.3.5)(superstruct@2.0.2)(typescript@5.8.2)(valibot@1.0.0(typescript@5.8.2))(vue@3.5.13(typescript@5.8.2))(yup@1.6.1)(zod@3.24.2)
       '@nuxthub/core':
         specifier: ^0.8.21
         version: 0.8.21(db0@0.3.1(better-sqlite3@11.9.1))(ioredis@5.6.0)(magicast@0.3.5)(vite@6.2.3(@types/node@22.13.12)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
@@ -1561,11 +1561,27 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@e524f08':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@e524f08}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@8c21afa':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@8c21afa}
     version: 3.0.1
     peerDependencies:
+      joi: ^17.13.0
+      superstruct: ^2.0.0
       typescript: ^5.6.3
+      valibot: ^1.0.0
+      yup: ^1.6.0
+      zod: ^3.24.0
+    peerDependenciesMeta:
+      joi:
+        optional: true
+      superstruct:
+        optional: true
+      valibot:
+        optional: true
+      yup:
+        optional: true
+      zod:
+        optional: true
 
   '@nuxt/vite-builder@3.16.1':
     resolution: {integrity: sha512-6A/cK743xeGcoMh//Ev1HAybb5VDwovxRsNeubfuqlDxBR7WL695SAfIhEAmxpVDz8LYQBuz/NwGhTaBh7hgaQ==}
@@ -8416,11 +8432,12 @@ snapshots:
       - typescript
       - yaml
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@e524f08(@babel/parser@7.26.10)(magicast@0.3.5)(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@8c21afa(@babel/parser@7.26.10)(joi@17.13.3)(magicast@0.3.5)(superstruct@2.0.2)(typescript@5.8.2)(valibot@1.0.0(typescript@5.8.2))(vue@3.5.13(typescript@5.8.2))(yup@1.6.1)(zod@3.24.2)':
     dependencies:
       '@nuxt/kit': 3.16.1(magicast@0.3.5)
       '@nuxt/schema': 3.16.1
       '@nuxt/ui': 'link:'
+      '@standard-schema/spec': 1.0.0
       '@vueuse/core': 13.0.0(vue@3.5.13(typescript@5.8.2))
       consola: 3.4.2
       defu: 6.1.4
@@ -8436,6 +8453,12 @@ snapshots:
       unplugin: 2.2.2
       unplugin-auto-import: 19.1.2(@nuxt/kit@3.16.1(magicast@0.3.5))(@vueuse/core@13.0.0(vue@3.5.13(typescript@5.8.2)))
       unplugin-vue-components: 28.4.1(@babel/parser@7.26.10)(@nuxt/kit@3.16.1(magicast@0.3.5))(vue@3.5.13(typescript@5.8.2))
+    optionalDependencies:
+      joi: 17.13.3
+      superstruct: 2.0.2
+      valibot: 1.0.0(typescript@5.8.2)
+      yup: 1.6.1
+      zod: 3.24.2
     transitivePeerDependencies:
       - '@babel/parser'
       - magicast
