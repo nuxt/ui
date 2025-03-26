@@ -84,6 +84,7 @@ export interface FormFieldInjectedOptions<T> {
   errorPattern?: RegExp
   hint?: string
   description?: string
+  help?: string
   ariaId: string
 }
 
