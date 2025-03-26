@@ -11,7 +11,7 @@
     "@iconify-json/lucide": "^1.2.32",
     "@iconify-json/simple-icons": "^1.2.29",
     "@nuxt/ui": "latest",
-    "@nuxthub/core": "^0.8.19",
+    "@nuxthub/core": "^0.8.21",
     "nuxt": "^3.16.1",
     "zod": "^3.24.2"
   }
