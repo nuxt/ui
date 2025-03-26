@@ -292,11 +292,11 @@ props:
 ---
 ::
 
-### Drag and drop
+### With drag and drop
 
-Use the [`useSortable`](https://vueuse.org/integrations/useSortable/){target="_blank"} composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html){target="_blank"} to enable drag and drop functionality on the accordion. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/){target="_blank"} to provide a seamless drag and drop experience.
+Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the accordion. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
-The `useSortable` composable accepts various options, see the [Usage](https://vueuse.org/integrations/useSortable/#usage){target="_blank"} for more examples.
+The `useSortable` composable accepts various options, see the [Usage](https://vueuse.org/integrations/useSortable/#usage) for more examples.
 
 ::component-example
 ---

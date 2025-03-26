@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useSortable } from '@vueuse/integrations/useSortable'
 import type { AccordionItem } from '@nuxt/ui'
+import { useSortable } from '@vueuse/integrations/useSortable'
 
 const items = shallowRef<AccordionItem[]>([
   {
