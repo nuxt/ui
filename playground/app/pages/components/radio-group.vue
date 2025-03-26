@@ -14,14 +14,14 @@ const items = [
   { value: '1', label: 'Option 1' },
   { value: '2', label: 'Option 2' },
   { value: '3', label: 'Option 3' },
-  { value: '4', label: 'Opti' }
+  { value: '4', label: 'Opt 4' }
 ]
 
 const itemsWithDescription = [
   { value: '1', label: 'Option 1', description: 'Description 1' },
   { value: '2', label: 'Option 2', description: 'Description 2' },
   { value: '3', label: 'Option 3', description: 'Description 3' },
-  { value: '4', label: 'Option 4', description: 'Description 4' }
+  { value: '4', label: 'Opt 4', description: 'Description 4' }
 ]
 </script>
 
