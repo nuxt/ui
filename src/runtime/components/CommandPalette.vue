@@ -74,7 +74,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
   selectedIcon?: string
   /**
    * The placeholder text for the input.
-   * @defaultValue 'Type a command or search...'
+   * @defaultValue t('commandPalette.placeholder')
    */
   placeholder?: InputProps['placeholder']
   /**
