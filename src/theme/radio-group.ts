@@ -10,7 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
     indicator: 'flex items-center justify-center size-full rounded-full after:bg-(--ui-bg) after:rounded-full',
     container: 'flex items-center',
     group: 'flex',
-    wrapper: '',
+    wrapper: 'w-full',
     label: 'block font-medium text-(--ui-text)',
     description: 'text-(--ui-text-muted)'
   },
@@ -31,7 +31,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       card: {
         group: 'gap-2',
-        item: 'items-center justify-between border-1 border-[var(--ui-border-muted)] rounded-lg'
+        item: 'items-center border-1 border-[var(--ui-border-muted)] rounded-lg'
       },
       table: {
         item: 'border-[var(--ui-border-muted)]'
@@ -55,9 +55,9 @@ export default (options: Required<ModuleOptions>) => ({
         item: 'flex-row-reverse',
         base: 'ms-2'
       },
-
       hidden: {
-        base: 'hidden'
+        base: 'hidden',
+        wrapper: 'text-center'
       }
     },
 

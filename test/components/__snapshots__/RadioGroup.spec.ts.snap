@@ -9,7 +9,7 @@ exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -18,7 +18,7 @@ exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -27,7 +27,7 @@ exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -46,7 +46,7 @@ exports[`RadioGroup > renders with as correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -55,7 +55,7 @@ exports[`RadioGroup > renders with as correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -64,7 +64,7 @@ exports[`RadioGroup > renders with as correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -83,7 +83,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -92,7 +92,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -101,7 +101,7 @@ exports[`RadioGroup > renders with class correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -129,7 +129,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
         <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item="" id="v-0-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full rounded-full after:bg-(--ui-bg) after:rounded-full bg-(--ui-primary) after:size-1.5"></span>
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -138,7 +138,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -147,7 +147,7 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -166,7 +166,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <p class="text-(--ui-text-muted)">Description 0</p>
         </div>
@@ -175,7 +175,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <p class="text-(--ui-text-muted)">Description 1</p>
         </div>
@@ -184,7 +184,7 @@ exports[`RadioGroup > renders with description correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <p class="text-(--ui-text-muted)">Description 2</p>
         </div>
@@ -203,7 +203,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Description slot</p>
           <!--v-if-->
         </div>
@@ -212,7 +212,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Description slot</p>
           <!--v-if-->
         </div>
@@ -221,7 +221,7 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Description slot</p>
           <!--v-if-->
         </div>
@@ -240,7 +240,7 @@ exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <p class="text-(--ui-text-muted)">1</p>
         </div>
@@ -249,7 +249,7 @@ exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <p class="text-(--ui-text-muted)">2</p>
         </div>
@@ -258,7 +258,7 @@ exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <p class="text-(--ui-text-muted)">3</p>
         </div>
@@ -277,7 +277,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text) cursor-not-allowed opacity-75" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -286,7 +286,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text) cursor-not-allowed opacity-75" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -295,7 +295,7 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text) cursor-not-allowed opacity-75" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -314,7 +314,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -323,7 +323,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -332,7 +332,7 @@ exports[`RadioGroup > renders with items correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -351,7 +351,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Label slot</p>
           <!--v-if-->
         </div>
@@ -360,7 +360,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Label slot</p>
           <!--v-if-->
         </div>
@@ -369,7 +369,7 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Label slot</p>
           <!--v-if-->
         </div>
@@ -388,7 +388,7 @@ exports[`RadioGroup > renders with labelKey correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">1</p>
           <!--v-if-->
         </div>
@@ -397,7 +397,7 @@ exports[`RadioGroup > renders with labelKey correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">2</p>
           <!--v-if-->
         </div>
@@ -406,7 +406,7 @@ exports[`RadioGroup > renders with labelKey correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">3</p>
           <!--v-if-->
         </div>
@@ -425,7 +425,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Legend slot</p>
           <!--v-if-->
         </div>
@@ -434,7 +434,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Legend slot</p>
           <!--v-if-->
         </div>
@@ -443,7 +443,7 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Legend slot</p>
           <!--v-if-->
         </div>
@@ -461,7 +461,7 @@ exports[`RadioGroup > renders with modelValue correctly 1`] = `
         <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" tabindex="-1" data-orientation="vertical" data-active="true" data-reka-collection-item="" id="v-0-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full rounded-full after:bg-(--ui-bg) after:rounded-full bg-(--ui-primary) after:size-1.5"></span>
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -470,7 +470,7 @@ exports[`RadioGroup > renders with modelValue correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -479,7 +479,7 @@ exports[`RadioGroup > renders with modelValue correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -498,7 +498,7 @@ exports[`RadioGroup > renders with orientation correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -507,7 +507,7 @@ exports[`RadioGroup > renders with orientation correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -516,7 +516,7 @@ exports[`RadioGroup > renders with orientation correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -535,7 +535,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -544,7 +544,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -553,7 +553,7 @@ exports[`RadioGroup > renders with required correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -572,7 +572,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -581,7 +581,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -590,7 +590,7 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -609,7 +609,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -618,7 +618,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -627,7 +627,7 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -646,7 +646,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -655,7 +655,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -664,7 +664,7 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -683,7 +683,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -692,7 +692,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -701,7 +701,7 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -720,7 +720,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -729,7 +729,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -738,7 +738,7 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -757,7 +757,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="ms-4">
+        <div class="w-full ms-4">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -766,7 +766,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="ms-4">
+        <div class="w-full ms-4">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -775,7 +775,7 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="ms-4">
+        <div class="w-full ms-4">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -794,7 +794,7 @@ exports[`RadioGroup > renders with valueKey correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:Option 1">Option 1</p>
           <!--v-if-->
         </div>
@@ -803,7 +803,7 @@ exports[`RadioGroup > renders with valueKey correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:Option 2">Option 2</p>
           <!--v-if-->
         </div>
@@ -812,7 +812,7 @@ exports[`RadioGroup > renders with valueKey correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:Option 3">Option 3</p>
           <!--v-if-->
         </div>
@@ -826,30 +826,30 @@ exports[`RadioGroup > renders with variant card correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" class="relative">
   <fieldset class="flex gap-1">
     <!--v-if-->
-    <div class="flex gap-2 flex-col"><label class="flex items-center justify-between border-1 border-[var(--ui-border-muted)] rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-[var(--ui-primary)]">
+    <div class="flex gap-2 flex-col"><label class="flex items-center border-1 border-[var(--ui-border-muted)] rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-[var(--ui-primary)]">
         <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-reka-collection-item="" id="v-0-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
-      </label><label class="flex items-center justify-between border-1 border-[var(--ui-border-muted)] rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-[var(--ui-primary)]">
+      </label><label class="flex items-center border-1 border-[var(--ui-border-muted)] rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-[var(--ui-primary)]">
         <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-reka-collection-item="" id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
-      </label><label class="flex items-center justify-between border-1 border-[var(--ui-border-muted)] rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-[var(--ui-primary)]">
+      </label><label class="flex items-center border-1 border-[var(--ui-border-muted)] rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-[var(--ui-primary)]">
         <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" tabindex="-1" data-orientation="vertical" data-active="false" data-reka-collection-item="" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>
@@ -868,7 +868,7 @@ exports[`RadioGroup > renders with variant table correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:1">Option 1</p>
           <!--v-if-->
         </div>
@@ -877,7 +877,7 @@ exports[`RadioGroup > renders with variant table correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:2">Option 2</p>
           <!--v-if-->
         </div>
@@ -886,7 +886,7 @@ exports[`RadioGroup > renders with variant table correctly 1`] = `
             <!---->
             <!---->
           </button></div>
-        <div class="">
+        <div class="w-full">
           <p class="block font-medium text-(--ui-text)" for="v-0-0:3">Option 3</p>
           <!--v-if-->
         </div>

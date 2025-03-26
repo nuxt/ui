@@ -185,6 +185,35 @@ props:
 ---
 ::
 
+### Indicator
+
+Use the `indicator` prop to change the position or hide the indicator. Defaults to `left`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - modelValue
+  - items
+  - variant
+external:
+  - items
+  - modelValue
+  - variant
+externalTypes:
+  - RadioGroupItem[]
+  - RadioGroupValue
+props:
+  indicator: 'left'
+  variant: 'card'
+  modelValue: 'System'
+  items:
+    - 'System'
+    - 'Light'
+    - 'Dark'
+---
+::
+
 ### Color
 
 Use the `color` prop to change the color of the RadioGroup.
