@@ -508,6 +508,22 @@ exports[`Table > renders with data correctly 1`] = `
 </div>"
 `;
 
+exports[`Table > renders with empty correctly 1`] = `
+"<div class="relative overflow-auto">
+  <table class="min-w-full overflow-clip">
+    <!--v-if-->
+    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+      <tr class="data-[selected=true]:bg-(--ui-bg-elevated)/50"></tr>
+    </thead>
+    <tbody class="divide-y divide-(--ui-border) [&amp;>tr]:data-[selectable=true]:hover:bg-(--ui-bg-elevated)/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(--ui-primary)">
+      <tr>
+        <td colspan="0" class="py-6 text-center text-sm text-(--ui-text-muted)">There is no data</td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;
+
 exports[`Table > renders with empty slot correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">

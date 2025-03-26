@@ -76,6 +76,11 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
   columns?: TableColumn<T>[]
   caption?: string
   /**
+   * The text to display when the table is empty.
+   * @defaultValue t('table.noData')
+   */
+  empty?: string
+  /**
    * Whether the table should have a sticky header.
    * @defaultValue false
    */
@@ -369,7 +374,7 @@ defineExpose({
         <tr v-else>
           <td :colspan="columns?.length" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
-              {{ t('table.noData') }}
+              {{ empty || t('table.noData') }}
             </slot>
           </td>
         </tr>
