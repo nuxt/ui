@@ -313,7 +313,7 @@ defineExpose({
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <table :class="ui.base({ class: [props.ui?.base] })">
-      <caption v-if="caption" :class="ui.caption({ class: [props.ui?.caption] })">
+      <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ caption }}
         </slot>
