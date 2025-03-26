@@ -23,25 +23,12 @@ export type RadioGroupItem = {
 } | RadioGroupValue
 
 export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> extends Pick<RadioGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   legend?: string
-  /**
-   * @defaultValue 'primary'
-   */
-  color?: RadioGroupVariants['color']
-  /**
-   * @defaultValue 'radio'
-   */
-  variant?: RadioGroupVariants['variant']
-  /**
-   * @defaultValue 'md'
-   */
-  size?: RadioGroupVariants['size']
-  /**
-   * The orientation the radio buttons are laid out.
-   * @defaultValue 'vertical'
-   */
-  orientation?: RadioGroupRootProps['orientation']
-  items?: T[]
   /**
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
@@ -57,11 +44,29 @@ export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> exte
    * @defaultValue 'description'
    */
   descriptionKey?: string
+  items?: T[]
   /**
-   * The element or component this component should render as.
-   * @defaultValue 'div'
+   * @defaultValue 'md'
    */
-  as?: any
+  size?: RadioGroupVariants['size']
+  /**
+   * @defaultValue 'list'
+   */
+  variant?: RadioGroupVariants['variant']
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: RadioGroupVariants['color']
+  /**
+   * The orientation the radio buttons are laid out.
+   * @defaultValue 'vertical'
+   */
+  orientation?: RadioGroupRootProps['orientation']
+  /**
+   * Position of the indicator.
+   * @defaultValue 'left'
+   */
+  indicator?: RadioGroupVariants['indicator']
   class?: any
   ui?: Partial<typeof radioGroup.slots>
 }
@@ -95,9 +100,7 @@ const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
 const emits = defineEmits<RadioGroupEmits>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 
-const modelValue = defineModel<AcceptableValue>()
-
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'orientation', 'loop', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
 const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
@@ -108,7 +111,8 @@ const ui = computed(() => radioGroup({
   disabled: disabled.value,
   required: props.required,
   orientation: props.orientation,
-  variant: props.variant
+  variant: props.variant,
+  indicator: props.indicator
 }))
 
 function normalizeItem(item: any) {
@@ -161,8 +165,8 @@ function onUpdate(value: any) {
 <template>
   <RadioGroupRoot
     :id="id"
+    v-slot="{ modelValue }"
     v-bind="rootProps"
-    :model-value="modelValue"
     :name="name"
     :disabled="disabled"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
@@ -174,36 +178,32 @@ function onUpdate(value: any) {
           {{ legend }}
         </slot>
       </legend>
-      <div :class="ui.itemWrapper({ class: props.ui?.item })">
-        <div
-          v-for="item in normalizedItems"
-          :key="item.value"
-          :class="ui.item({ class: props.ui?.item })"
-          :data-checked="item.value === modelValue || !modelValue && item.value === defaultValue"
-          @click.prevent="modelValue = disabled ? modelValue : item.value"
-        >
+      <div :class="ui.itemWrapper({ class: props.ui?.itemWrapper })">
+        <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: props.ui?.item })">
           <div :class="ui.container({ class: props.ui?.container })">
             <RadioGroupItem
               :id="item.id"
               :value="item.value"
-              :disabled="disabled"
-              :class="ui.base({ class: props.ui?.base })"
+              :disabled="item.disabled"
+              :class="ui.base({ class: props.ui?.base, disabled: item.disabled })"
             >
               <RadioGroupIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
             </RadioGroupItem>
           </div>
 
           <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-            <Label :class="ui.label({ class: props.ui?.label })" :for="item.id">
-              <slot name="label" :item="item" :model-value="modelValue as RadioGroupValue">{{ item.label }}</slot>
-            </Label>
+            <component :is="variant === 'list' ? Label : 'p'" :class="ui.label({ class: props.ui?.label })" :for="item.id">
+              <slot name="label" :item="item" :model-value="(modelValue as RadioGroupValue)">
+                {{ item.label }}
+              </slot>
+            </component>
             <p v-if="item.description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
-              <slot name="description" :item="item" :model-value="modelValue as RadioGroupValue">
+              <slot name="description" :item="item" :model-value="(modelValue as RadioGroupValue)">
                 {{ item.description }}
               </slot>
             </p>
           </div>
-        </div>
+        </component>
       </div>
     </fieldset>
   </RadioGroupRoot>

@@ -3,7 +3,7 @@ import theme from '#build/ui/radio-group'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 const variants = Object.keys(theme.variants.variant)
-const variant = ref('table' as const)
+const variant = ref('list' as const)
 
 const literalOptions = [
   'Option 1',
@@ -34,7 +34,10 @@ const itemsWithDescription = [
       <URadioGroup :variant="variant" :items="items" color="neutral" default-value="1" />
       <URadioGroup :variant="variant" :items="items" color="error" default-value="2" />
       <URadioGroup :variant="variant" :items="literalOptions" />
-      <URadioGroup :variant="variant" :items="items" label="Disabled" disabled />
+      <URadioGroup :variant="variant" :items="items" disabled />
+      <URadioGroup :variant="variant" :items="items" indicator="left" />
+      <URadioGroup :variant="variant" :items="items" indicator="right" />
+      <URadioGroup :variant="variant" :items="items" indicator="hidden" />
     </div>
 
     <URadioGroup :variant="variant" :items="items" orientation="horizontal" class="ms-[95px]" />

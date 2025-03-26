@@ -8,9 +8,9 @@ export default (options: Required<ModuleOptions>) => ({
     item: 'flex items-start',
     base: 'rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2',
     indicator: 'flex items-center justify-center size-full rounded-full after:bg-(--ui-bg) after:rounded-full',
-    itemWrapper: 'flex',
     container: 'flex items-center',
-    wrapper: 'ms-2',
+    itemWrapper: 'flex',
+    wrapper: '',
     label: 'block font-medium text-(--ui-text)',
     description: 'text-(--ui-text-muted)'
   },
@@ -26,10 +26,11 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     variant: {
-      radio: {},
+      list: {
+      },
       card: {
-        base: 'ml-4',
-        item: 'flex-row-reverse items-center justify-between border-1 border-[var(--ui-border-muted)] rounded-lg'
+        itemWrapper: 'gap-2',
+        item: 'items-center justify-between border-1 border-[var(--ui-border-muted)] rounded-lg'
       },
       table: {
         item: 'border-[var(--ui-border-muted)]'
@@ -37,13 +38,28 @@ export default (options: Required<ModuleOptions>) => ({
     },
     orientation: {
       horizontal: {
-        itemWrapper: 'flex-row',
-        wrapper: 'me-2'
+        itemWrapper: 'flex-row'
       },
       vertical: {
         itemWrapper: 'flex-col'
       }
     },
+
+    indicator: {
+      left: {
+        item: 'flex-row',
+        base: 'me-2'
+      },
+      right: {
+        item: 'flex-row-reverse',
+        base: 'ms-2'
+      },
+
+      hidden: {
+        base: 'hidden'
+      }
+    },
+
     size: {
       xs: {
         fieldset: 'gap-0.5',
@@ -99,25 +115,26 @@ export default (options: Required<ModuleOptions>) => ({
     }
   },
   compoundVariants: [
-    { size: 'xs', variant: 'card', class: { item: 'p-2.5', itemWrapper: 'gap-2' } },
-    { size: 'sm', variant: 'card', class: { item: 'p-3', itemWrapper: 'gap-2.5' } },
-    { size: 'md', variant: 'card', class: { item: 'p-3.5', itemWrapper: 'gap-2.5' } },
-    { size: 'lg', variant: 'card', class: { item: 'p-4', itemWrapper: 'gap-3.5' } },
-    { size: 'xl', variant: 'card', class: { item: 'p-4.5', itemWrapper: 'gap-3.5' } },
+    { size: 'xs', variant: 'card', class: { item: 'p-2.5' } },
+    { size: 'sm', variant: 'card', class: { item: 'p-3' } },
+    { size: 'md', variant: 'card', class: { item: 'p-3.5' } },
+    { size: 'lg', variant: 'card', class: { item: 'p-4' } },
+    { size: 'xl', variant: 'card', class: { item: 'p-4.5' } },
 
-    { size: 'xs', variant: 'table', class: { item: 'p-2.5', itemWrapper: 'gap-0' } },
-    { size: 'sm', variant: 'table', class: { item: 'p-3', itemWrapper: 'gap-0' } },
-    { size: 'md', variant: 'table', class: { item: 'p-3.5', itemWrapper: 'gap-0' } },
-    { size: 'lg', variant: 'table', class: { item: 'p-4', itemWrapper: 'gap-0' } },
-    { size: 'xl', variant: 'table', class: { item: 'p-4.5', itemWrapper: 'gap-0' } },
+    { size: 'xs', variant: 'table', class: { item: 'p-2.5' } },
+    { size: 'sm', variant: 'table', class: { item: 'p-3' } },
+    { size: 'md', variant: 'table', class: { item: 'p-3.5' } },
+    { size: 'lg', variant: 'table', class: { item: 'p-4' } },
+    { size: 'xl', variant: 'table', class: { item: 'p-4.5' } },
 
+    { orientation: 'horizontal', variant: 'list', class: { item: 'me-2' } },
     { orientation: 'horizontal', variant: 'table', class: { item: 'first:rounded-l-lg last:rounded-r-lg not-last:-ml-0.25 border-1' } },
     { orientation: 'vertical', variant: 'table', class: { item: 'first:rounded-t-lg last:rounded-b-lg not-last:-mb-0.25 border-1' } },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'card',
       class: {
-        item: `data-[checked=true]:border-[var(--ui-${color})]`
+        item: `has-data-[state=checked]:border-[var(--ui-${color})]`
       }
     })),
 
@@ -125,7 +142,7 @@ export default (options: Required<ModuleOptions>) => ({
       color: 'neutral',
       variant: 'card',
       class: {
-        item: 'data-[checked=true]:border-[var(--ui-border-elevated)]'
+        item: 'has-data-[state=checked]:border-[var(--ui-border-elevated)]'
       }
     },
 
@@ -133,13 +150,15 @@ export default (options: Required<ModuleOptions>) => ({
       color,
       variant: 'table',
       class: {
-        item: `data-[checked=true]:relative data-[checked=true]:bg-[var(--ui-${color})]/20 data-[checked=true]:border-[var(--ui-${color})]/20`
+        item: `has-data-[state=checked]:relative has-data-[state=checked]:bg-[var(--ui-${color})]/20 has-data-[state=checked]:border-[var(--ui-${color})]/20`
       }
     }))
   ],
   defaultVariants: {
     size: 'md',
     color: 'primary',
-    variant: 'radio'
+    variant: 'list',
+    orientation: 'vertical',
+    indicator: 'left'
   }
 })
