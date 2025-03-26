@@ -9,7 +9,7 @@ export default (options: Required<ModuleOptions>) => ({
     base: 'rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2',
     indicator: 'flex items-center justify-center size-full rounded-full after:bg-(--ui-bg) after:rounded-full',
     container: 'flex items-center',
-    itemWrapper: 'flex',
+    group: 'flex',
     wrapper: '',
     label: 'block font-medium text-(--ui-text)',
     description: 'text-(--ui-text-muted)'
@@ -27,9 +27,10 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       list: {
+        group: 'gap-2'
       },
       card: {
-        itemWrapper: 'gap-2',
+        group: 'gap-2',
         item: 'items-center justify-between border-1 border-[var(--ui-border-muted)] rounded-lg'
       },
       table: {
@@ -38,10 +39,10 @@ export default (options: Required<ModuleOptions>) => ({
     },
     orientation: {
       horizontal: {
-        itemWrapper: 'flex-row'
+        group: 'flex-row'
       },
       vertical: {
-        itemWrapper: 'flex-col'
+        group: 'flex-col'
       }
     },
 
@@ -127,7 +128,6 @@ export default (options: Required<ModuleOptions>) => ({
     { size: 'lg', variant: 'table', class: { item: 'p-4' } },
     { size: 'xl', variant: 'table', class: { item: 'p-4.5' } },
 
-    { orientation: 'horizontal', variant: 'list', class: { item: 'me-2' } },
     { orientation: 'horizontal', variant: 'table', class: { item: 'first:rounded-l-lg last:rounded-r-lg not-last:-ml-0.25 border-1' } },
     { orientation: 'vertical', variant: 'table', class: { item: 'first:rounded-t-lg last:rounded-b-lg not-last:-mb-0.25 border-1' } },
     ...(options.theme.colors || []).map((color: string) => ({
