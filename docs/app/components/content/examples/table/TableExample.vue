@@ -145,12 +145,12 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ table }) => h(UCheckbox, {
     'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
-    'ariaLabel': 'Select all'
+    'aria-label': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
-    'ariaLabel': 'Select row'
+    'aria-label': 'Select row'
   }),
   enableSorting: false,
   enableHiding: false
@@ -242,15 +242,17 @@ const columns: TableColumn<Payment>[] = [{
     }]
 
     return h('div', { class: 'text-right' }, h(UDropdownMenu, {
-      content: {
+      'content': {
         align: 'end'
       },
-      items
+      items,
+      'aria-label': 'Actions dropdown'
     }, () => h(UButton, {
-      icon: 'i-lucide-ellipsis-vertical',
-      color: 'neutral',
-      variant: 'ghost',
-      class: 'ml-auto'
+      'icon': 'i-lucide-ellipsis-vertical',
+      'color': 'neutral',
+      'variant': 'ghost',
+      'class': 'ml-auto',
+      'aria-label': 'Actions dropdown'
     })))
   }
 }]
@@ -294,6 +296,7 @@ function randomize() {
           variant="outline"
           trailing-icon="i-lucide-chevron-down"
           class="ml-auto"
+          aria-label="Columns select dropdown"
         />
       </UDropdownMenu>
     </div>

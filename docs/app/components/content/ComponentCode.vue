@@ -1,5 +1,6 @@
 <!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
+import type { ChipProps } from '@nuxt/ui'
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
@@ -53,6 +54,8 @@ const props = defineProps<{
   hide?: string[]
   /** List of props to externalize in script setup */
   external?: string[]
+  /** The types of the externalized props */
+  externalTypes?: string[]
   /** List of props to use with `v-model` */
   model?: string[]
   /** List of props to cast from code and selection */
@@ -209,11 +212,21 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `
-    for (const key of props.external) {
+    if (props.externalTypes?.length) {
+      const removeArrayBrackets = (type: string): string => type.endsWith('[]') ? removeArrayBrackets(type.slice(0, -2)) : type
+
+      const types = props.externalTypes.map(type => removeArrayBrackets(type))
+      code += `import type { ${types.join(', ')} } from '@nuxt/ui${props.pro ? '-pro' : ''}'
+
+`
+    }
+
+    for (const [i, key] of props.external.entries()) {
       const cast = props.cast?.[key]
       const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2)?.replace(/,([ |\t\n]+[}|\]])/g, '$1')
+      const type = props.externalTypes?.[i] ? `<${props.externalTypes[i]}>` : ''
 
-      code += `const ${key === 'modelValue' ? 'value' : key} = ref(${value})
+      code += `const ${key === 'modelValue' ? 'value' : key} = ref${type}(${value})
 `
     }
     code += `<\/script>
@@ -346,7 +359,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
                   inset
                   standalone
                   :color="(modelValue as any)"
-                  :size="ui.itemLeadingChipSize()"
+                  :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
                   class="size-2"
                 />
               </template>

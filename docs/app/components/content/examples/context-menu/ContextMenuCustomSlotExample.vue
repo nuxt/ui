@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { ContextMenuItem } from '@nuxt/ui'
+
 const loading = ref(true)
 
-const items = [{
+const items: ContextMenuItem[] = [{
   label: 'Refresh the Page',
   slot: 'refresh'
 }, {

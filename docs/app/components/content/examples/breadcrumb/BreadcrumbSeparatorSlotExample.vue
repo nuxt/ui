@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const items = [{
+import type { BreadcrumbItem } from '@nuxt/ui'
+
+const items: BreadcrumbItem[] = [{
   label: 'Home',
   to: '/'
 }, {

@@ -11,7 +11,9 @@ function getEmojiFlag(locale: string): string {
   const languageToCountry: Record<string, string> = {
     ar: 'sa', // Arabic -> Saudi Arabia
     bn: 'bd', // Bengali -> Bangladesh
+    ca: 'es', // Catalan -> Spain
     cs: 'cz', // Czech -> Czech Republic (note: modern country code is actually 'cz')
+    ckb: 'iq', // Central Kurdish -> Iraq
     da: 'dk', // Danish -> Denmark
     el: 'gr', // Greek -> Greece
     et: 'ee', // Estonian -> Estonia
@@ -24,7 +26,9 @@ function getEmojiFlag(locale: string): string {
     nb: 'no', // Norwegian Bokmål -> Norway
     sv: 'se', // Swedish -> Sweden
     uk: 'ua', // Ukrainian -> Ukraine
-    vi: 'vn' // Vietnamese -> Vietnam
+    ur: 'pk', // Urdu -> Pakistan
+    vi: 'vn', // Vietnamese -> Vietnam
+    hy: 'am' // Armenian -> Armenia
   }
 
   const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale

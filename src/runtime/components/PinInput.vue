@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
@@ -45,6 +46,7 @@ export type PinInputEmits = PinInputRootEmits & {
   change: [payload: Event]
   blur: [payload: Event]
 }
+
 </script>
 
 <script setup lang="ts">

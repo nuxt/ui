@@ -1,20 +1,24 @@
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
+
 const open = ref(false)
 
 defineShortcuts({
   o: () => open.value = !open.value
 })
 
-const items = [{
-  label: 'Profile',
-  icon: 'i-lucide-user'
-}, {
-  label: 'Billing',
-  icon: 'i-lucide-credit-card'
-}, {
-  label: 'Settings',
-  icon: 'i-lucide-cog'
-}]
+const items: DropdownMenuItem[] = [
+  {
+    label: 'Profile',
+    icon: 'i-lucide-user'
+  }, {
+    label: 'Billing',
+    icon: 'i-lucide-credit-card'
+  }, {
+    label: 'Settings',
+    icon: 'i-lucide-cog'
+  }
+]
 </script>
 
 <template>

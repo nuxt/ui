@@ -51,7 +51,7 @@ export default defineNuxtConfig({
 2. Import Tailwind CSS and Nuxt UI in your CSS:
 
 ```css [assets/css/main.css]
-@import "tailwindcss" theme(static);
+@import "tailwindcss";
 @import "@nuxt/ui";
 ```
 
@@ -98,7 +98,7 @@ app.mount('#app')
 3. Import Tailwind CSS and Nuxt UI in your CSS:
 
 ```css [assets/main.css]
-@import "tailwindcss" theme(static);
+@import "tailwindcss";
 @import "@nuxt/ui";
 ```
 

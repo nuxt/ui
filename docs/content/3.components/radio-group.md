@@ -28,6 +28,9 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - RadioGroupItem[]
+  - RadioGroupValue
 props:
   modelValue: 'System'
   items:
@@ -52,6 +55,9 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - RadioGroupItem[]
+  - RadioGroupValue
 props:
   modelValue: 'system'
   items:
@@ -84,6 +90,9 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - RadioGroupItem[]
+  - RadioGroupValue
 props:
   modelValue: 'light'
   valueKey: 'id'
@@ -140,6 +149,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   legend: 'Theme'
   defaultValue: 'System'
@@ -162,6 +173,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   orientation: 'horizontal'
   defaultValue: 'System'
@@ -184,6 +197,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   color: neutral
   defaultValue: 'System'
@@ -206,6 +221,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   size: 'xl'
   defaultValue: 'System'
@@ -228,6 +245,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   disabled: true
   defaultValue: 'System'

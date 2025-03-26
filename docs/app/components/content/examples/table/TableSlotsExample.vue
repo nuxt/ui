@@ -95,7 +95,7 @@ function getDropdownActions(user: User): DropdownMenuItem[][] {
   <UTable :data="data" :columns="columns" class="flex-1">
     <template #name-cell="{ row }">
       <div class="flex items-center gap-3">
-        <UAvatar :src="`https://i.pravatar.cc/120?img=${row.original.id}`" size="lg" />
+        <UAvatar :src="`https://i.pravatar.cc/120?img=${row.original.id}`" size="lg" :alt="`${row.original.name} avatar`" />
         <div>
           <p class="font-medium text-(--ui-text-highlighted)">
             {{ row.original.name }}
@@ -108,7 +108,7 @@ function getDropdownActions(user: User): DropdownMenuItem[][] {
     </template>
     <template #action-cell="{ row }">
       <UDropdownMenu :items="getDropdownActions(row.original)">
-        <UButton icon="i-lucide-ellipsis-vertical" color="neutral" variant="ghost" />
+        <UButton icon="i-lucide-ellipsis-vertical" color="neutral" variant="ghost" aria-label="Actions" />
       </UDropdownMenu>
     </template>
   </UTable>
