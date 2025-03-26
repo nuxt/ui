@@ -109,7 +109,7 @@ exports[`Table > renders with caption correctly 1`] = `
 exports[`Table > renders with caption slot correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
-    <!--v-if-->
+    <caption class="sr-only">Caption slot</caption>
     <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
       <tr class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-(--ui-text-highlighted) text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
