@@ -283,14 +283,14 @@ const groups = computed(() => {
 
     <ListboxContent :class="ui.content({ class: props.ui?.content })">
       <div v-if="groups?.length" :class="ui.viewport({ class: props.ui?.viewport })">
-        <ListboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
+        <ListboxGroup v-for="group in groups" :key="`group-${group.id}`" :class="ui.group({ class: props.ui?.group })">
           <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
             {{ get(group, props.labelKey as string) }}
           </ListboxGroupLabel>
 
           <ListboxItem
             v-for="(item, index) in group.items"
-            :key="`group-${groupIndex}-${index}`"
+            :key="`group-${group.id}-${index}`"
             :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml'])"
             :disabled="item.disabled"
             as-child
