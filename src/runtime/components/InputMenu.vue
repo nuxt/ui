@@ -176,7 +176,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, ref, toRef, onMounted, toRaw } from 'vue'
+import { computed, ref, toRef, onMounted, toRaw, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
@@ -333,6 +333,10 @@ function onUpdateOpen(value: boolean) {
     const event = new FocusEvent('focus')
     emits('focus', event)
   }
+
+  nextTick(() => {
+    searchTerm.value = ''
+  })
 }
 
 function onRemoveTag(event: any) {
@@ -410,7 +414,7 @@ defineExpose({
           </TagsInputItemDelete>
         </TagsInputItem>
 
-        <ComboboxInput v-model="searchTerm" :display-value="displayValue" as-child>
+        <ComboboxInput as-child @update:model-value="searchTerm = $event">
           <TagsInputInput
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
@@ -424,7 +428,6 @@ defineExpose({
       <ComboboxInput
         v-else
         ref="inputRef"
-        v-model="searchTerm"
         :display-value="displayValue"
         v-bind="{ ...$attrs, ...ariaAttrs }"
         :type="type"
@@ -432,6 +435,7 @@ defineExpose({
         :required="required"
         @blur="onBlur"
         @focus="onFocus"
+        @update:model-value="searchTerm = $event"
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
