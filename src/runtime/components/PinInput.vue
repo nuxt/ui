@@ -37,6 +37,8 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
    * @defaultValue 5
    */
   length?: number | string
+  autofocus?: boolean
+  autofocusDelay?: number
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof pinInput.slots>
@@ -50,7 +52,8 @@ export type PinInputEmits = PinInputRootEmits & {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
@@ -58,7 +61,8 @@ import { looseToNumber } from '../utils'
 
 const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
-  length: 5
+  length: 5,
+  autofocusDelay: 0
 })
 const emits = defineEmits<PinInputEmits>()
 
@@ -71,6 +75,14 @@ const ui = computed(() => pinInput({
   size: size.value,
   highlight: highlight.value
 }))
+
+const inputsRef = ref<ComponentPublicInstance[]>([])
+
+function autoFocus() {
+  if (props.autofocus) {
+    inputsRef.value[0]?.$el?.focus()
+  }
+}
 
 const completed = ref(false)
 function onComplete(value: string[]) {
@@ -86,6 +98,16 @@ function onBlur(event: FocusEvent) {
     emitFormBlur()
   }
 }
+
+defineExpose({
+  inputsRef
+})
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 </script>
 
 <template>
@@ -100,6 +122,7 @@ function onBlur(event: FocusEvent) {
     <PinInputInput
       v-for="(ids, index) in looseToNumber(props.length)"
       :key="ids"
+      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
       :index="index"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
