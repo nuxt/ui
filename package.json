@@ -1,7 +1,7 @@
 {
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "packageManager": "pnpm@10.7.0",
   "repository": {
     "type": "git",
@@ -90,7 +90,7 @@
     "@tailwindcss/postcss": "^4.0.17",
     "@tailwindcss/vite": "^4.0.17",
     "@tanstack/vue-table": "^8.21.2",
-    "@unhead/vue": "^2.0.1",
+    "@unhead/vue": "^2.0.2",
     "@vueuse/core": "^13.0.0",
     "@vueuse/integrations": "^13.0.0",
     "colortranslator": "^4.1.0",
@@ -104,6 +104,7 @@
     "embla-carousel-vue": "^8.5.2",
     "embla-carousel-wheel-gestures": "^8.0.1",
     "fuse.js": "^7.1.0",
+    "hookable": "^5.5.3",
     "knitwork": "^1.2.0",
     "magic-string": "^0.30.17",
     "mlly": "^1.7.4",

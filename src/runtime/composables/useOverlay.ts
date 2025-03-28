@@ -1,7 +1,10 @@
 import type { Component } from 'vue'
 import { reactive, markRaw, shallowReactive } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
-import type { ComponentProps } from 'vue-component-type-helpers'
+import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
+
+// Extracts the first argument of the close event
+type CloseEventArgType<T> = T extends (event: 'close', args_0: infer R) => void ? R : never
 
 export type OverlayOptions<OverlayAttrs = Record<string, any>> = {
   defaultOpen?: boolean
@@ -19,7 +22,7 @@ type ManagedOverlayOptionsPrivate<T extends Component> = {
 export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
 
 interface OverlayInstance<T> {
-  open: (props?: ComponentProps<T>) => Promise<any>
+  open: (props?: ComponentProps<T>) => Promise<CloseEventArgType<ComponentEmit<T>>>
   close: (value?: any) => void
   patch: (props: Partial<ComponentProps<T>>) => void
 }
