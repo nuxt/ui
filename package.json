@@ -90,7 +90,7 @@
     "@tailwindcss/postcss": "^4.0.17",
     "@tailwindcss/vite": "^4.0.17",
     "@tanstack/vue-table": "^8.21.2",
-    "@unhead/vue": "^2.0.1",
+    "@unhead/vue": "^2.0.2",
     "@vueuse/core": "^13.0.0",
     "@vueuse/integrations": "^13.0.0",
     "colortranslator": "^4.1.0",
