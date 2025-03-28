@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ChipProps } from '@nuxt/ui'
 import { camelCase } from 'scule'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
@@ -185,7 +186,7 @@ const urlSearchParams = computed(() => {
                   inset
                   standalone
                   :color="(modelValue as any)"
-                  :size="ui.itemLeadingChipSize()"
+                  :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
                   class="size-2"
                 />
               </template>

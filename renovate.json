@@ -6,7 +6,6 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "typescript",
     "vue-tsc"
   ],
   "baseBranches": ["v2", "v3"],

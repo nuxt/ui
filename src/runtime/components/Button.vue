@@ -125,7 +125,7 @@ const ui = computed(() => tv({
     :type="type"
     :disabled="disabled || isLoading"
     :class="ui.base({ class: [props.class, props.ui?.base] })"
-    v-bind="omit(linkProps, ['type', 'disabled'])"
+    v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
     custom
   >
     <ULinkBase

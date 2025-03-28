@@ -56,6 +56,7 @@ useSeoMeta({
             v-if="template.thumbnail"
             v-bind="template.thumbnail"
             class="w-full h-auto border lg:border-y lg:border-x-0 border-(--ui-border) rounded-(--ui-radius) lg:rounded-none"
+            :alt="`Template ${index} thumbnail`"
             width="656"
             height="369"
             loading="lazy"

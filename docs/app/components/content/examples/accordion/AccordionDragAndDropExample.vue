@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { AccordionItem } from '@nuxt/ui'
+import { useSortable } from '@vueuse/integrations/useSortable'
 
-const items = [
+const items = shallowRef<AccordionItem[]>([
   {
     label: 'Icons',
     icon: 'i-lucide-smile',
@@ -18,15 +19,15 @@ const items = [
     icon: 'i-lucide-box',
     content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
   }
-] satisfies AccordionItem[]
+])
+
+const accordion = useTemplateRef<HTMLElement>('accordion')
+
+useSortable(accordion, items, {
+  animation: 150
+})
 </script>
 
 <template>
-  <UAccordion :items="items">
-    <template #colors="{ item }">
-      <p class="text-sm pb-3.5 text-(--ui-primary)">
-        {{ item.content }}
-      </p>
-    </template>
-  </UAccordion>
+  <UAccordion ref="accordion" :items="items" />
 </template>

@@ -10,14 +10,16 @@ jobs:
 
     permissions:
       issues: write
-      pull-requests: write
 
     steps:
       - uses: actions/stale@v9
         with:
-          exempt-issue-labels: triage,v3
-          stale-issue-message: 'This issue is stale because it has been open for 30 days with no activity.'
-          stale-issue-label: stale
-          stale-pr-label: stale
-          days-before-stale: 30
-          days-before-close: -1
+          days-before-stale: -1 # Issues and PR will never be flagged stale automatically.
+          stale-issue-label: 'needs reproduction' # Label that flags an issue as stale.
+          only-labels: 'needs reproduction' # Only process these issues
+          days-before-issue-close: 7
+          ignore-updates: true
+          remove-stale-when-updated: false
+          close-issue-message: This issue was closed because it was open for 7 days without a reproduction.
+          close-issue-label: closed-by-bot
+          operations-per-run: 300 #default 30

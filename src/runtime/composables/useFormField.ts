@@ -80,7 +80,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     ariaAttrs: computed(() => {
       if (!formField?.value) return
 
-      const descriptiveAttrs = ['error' as const, 'hint' as const, 'description' as const]
+      const descriptiveAttrs = ['error' as const, 'hint' as const, 'description' as const, 'help' as const]
         .filter(type => formField?.value?.[type])
         .map(type => `${formField?.value.ariaId}-${type}`) || []
 

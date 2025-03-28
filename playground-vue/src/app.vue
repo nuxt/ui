@@ -88,7 +88,7 @@ defineShortcuts({
       <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-e border-(--ui-border) overflow-y-auto w-48 p-4" />
       <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-(--ui-border) [&>div]:min-w-min overflow-x-auto" />
 
-      <div class="fixed top-15 lg:top-3 right-4 flex items-center gap-2">
+      <div class="fixed top-15 lg:top-3 end-4 flex items-center gap-2">
         <UButton
           :icon="mode === 'dark' ? 'i-lucide-moon' : 'i-lucide-sun'"
           color="neutral"

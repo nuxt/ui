@@ -66,7 +66,7 @@ export interface ToastSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: any }): any
+  close(props: { ui: ReturnType<typeof toast> }): any
 }
 </script>
 
