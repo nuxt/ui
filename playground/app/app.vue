@@ -80,6 +80,10 @@ function onSelect(item: any) {
 defineShortcuts({
   meta_k: () => isCommandPaletteOpen.value = true
 })
+
+useHead({
+  title: 'Nuxt UI - Playground'
+})
 </script>
 
 <template>
