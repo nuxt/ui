@@ -55,7 +55,7 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'ms-2'
       },
       hidden: {
-        base: 'hidden',
+        base: 'sr-only',
         wrapper: 'text-center'
       }
     },
