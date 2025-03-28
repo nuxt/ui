@@ -22,7 +22,7 @@ onMounted(() => {
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const githubLink = computed(()=>{
+const githubLink = computed(() => {
   return `https://github.com/nuxt/${value.value}`
 })
 
@@ -34,7 +34,7 @@ const mobileLinks = computed(() => [
     to: githubLink.value,
     icon: 'i-simple-icons-github',
     target: '_blank'
-  },
+  }
 ])
 </script>
 
