@@ -94,6 +94,9 @@ importers:
       fuse.js:
         specifier: ^7.1.0
         version: 7.1.0
+      hookable:
+        specifier: ^5.5.3
+        version: 5.5.3
       joi:
         specifier: ^17.13.0
         version: 17.13.3

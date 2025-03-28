@@ -104,6 +104,7 @@
     "embla-carousel-vue": "^8.5.2",
     "embla-carousel-wheel-gestures": "^8.0.1",
     "fuse.js": "^7.1.0",
+    "hookable": "^5.5.3",
     "knitwork": "^1.2.0",
     "magic-string": "^0.30.17",
     "mlly": "^1.7.4",
