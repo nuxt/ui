@@ -58,12 +58,47 @@ onMounted(() => {
         :max="max"
         status
         inverted
+        color="warning"
         class="w-48 justify-start"
       />
     </div>
 
     <div class="h-48 flex items-center gap-8">
       <UProgress v-for="size in sizes" :key="size" v-model="value1" orientation="vertical" :size="size" />
+    </div>
+
+    <div class="flex items-center gap-4">
+      <!-- Progress circulaire basique -->
+      <UProgress
+        v-model="value2"
+        variant="circular"
+        color="warning"
+        status
+      />
+      <!-- Progress circulaire avec taille personnalisée -->
+      <UProgress
+        v-model="value2"
+        variant="circular"
+        size="lg"
+        status
+        color="neutral"
+      />
+
+      <!-- Progress circulaire avec contenu personnalisé -->
+      <UProgress
+        v-model="value2"
+        color="error"
+        status
+        size="2xs"
+        variant="circular"
+      >
+        <template #status="{ percent }">
+          <div class="flex flex-col items-center">
+            <span class="text-2xl font-bold">{{ percent }}%</span>
+            <span class="text-sm text-gray-500">Chargement...</span>
+          </div>
+        </template>
+      </UProgress>
     </div>
   </div>
 </template>

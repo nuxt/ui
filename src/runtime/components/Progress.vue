@@ -37,6 +37,11 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    * @defaultValue 'carousel'
    */
   animation?: Progress['variants']['animation']
+  /**
+   * The variants of the progress bar.
+   * @defaultValue 'linear'
+   */
+  variant?: Progress['variants']['variant']
   class?: any
   ui?: Progress['slots']
 }
@@ -62,7 +67,8 @@ import { tv } from '../utils/tv'
 const props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
   modelValue: null,
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  variant: 'linear'
 })
 const emits = defineEmits<ProgressEmits>()
 const slots = defineSlots<ProgressSlots>()
@@ -71,6 +77,9 @@ const { dir } = useLocale()
 const appConfig = useAppConfig() as Progress['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'modelValue'), emits)
+
+const RADIUS = 45
+const circumference = 2 * Math.PI * RADIUS
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)
 const hasSteps = computed(() => Array.isArray(props.max))
@@ -99,7 +108,23 @@ const percent = computed(() => {
   }
 })
 
+const dashOffset = computed(() =>
+  ((percent.value || 0) / 100) * circumference
+)
+const trackPath = computed(() => {
+  const r = RADIUS
+  return `
+          M 50 50
+          m 0 -${r}
+          a ${r} ${r} 0 1 1 0 ${r * 2}
+          a ${r} ${r} 0 1 1 0 -${r * 2}
+          `
+})
+
 const indicatorStyle = computed(() => {
+  if (props.variant === 'circular') {
+    return
+  }
   if (percent.value === undefined) {
     return
   }
@@ -162,7 +187,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
   size: props.size,
   color: props.color,
   orientation: props.orientation,
-  inverted: props.inverted
+  inverted: props.inverted,
+  variant: props.variant
 }))
 </script>
 
@@ -175,7 +201,28 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
     </div>
 
     <ProgressRoot v-bind="rootProps" :max="realMax" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
-      <ProgressIndicator :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+      <ProgressIndicator v-if="variant === 'linear'" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+      <svg
+        v-if="variant === 'circular'"
+        :class="ui.base({ class: props.ui?.base })"
+        viewBox="0 0 100 100"
+      >
+        <path
+          :d="trackPath"
+          :class="ui.track({ class: props.ui?.track })"
+        />
+        <ProgressIndicator as-child>
+          <path
+            :d="trackPath"
+            :class="ui.indicator({ class: props.ui?.indicator })"
+            :style="{
+              'stroke-linecap': 'round',
+              'stroke-dasharray': `${dashOffset}px, ${circumference}px`,
+              'stroke-dashoffset': '0px'
+            }"
+          />
+        </ProgressIndicator>
+      </svg>
     </ProgressRoot>
 
     <div v-if="hasSteps" :class="ui.steps({ class: props.ui?.steps })">
