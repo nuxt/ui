@@ -106,6 +106,110 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [{
     variant: 'circular',
     orientation: 'horizontal',
+    animation: 'carousel',
+    class: {
+      indicator: 'data-[state=indeterminate]:animate-[circular-carousel_2s_ease-in-out_infinite]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    animation: 'carousel-inverse',
+    class: {
+      indicator: 'data-[state=indeterminate]:animate-[circular-carousel-inverse_2s_ease-in-out_infinite]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    animation: 'swing',
+    class: {
+      indicator: 'data-[state=indeterminate]:animate-[circular-swing_2s_ease-in-out_infinite]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    animation: 'elastic',
+    class: {
+      indicator: 'data-[state=indeterminate]:animate-[circular-elastic_2s_ease-in-out_infinite]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    size: '2xs',
+    class: {
+      base: 'rounded-full w-8 h-8',
+      indicator: 'stroke-[6px]',
+      track: 'stroke-[6px]',
+      status: 'text-[8px]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    size: 'xs',
+    class: {
+      base: 'rounded-full w-10 h-10',
+      indicator: 'stroke-[6px]',
+      track: 'stroke-[6px]',
+      status: 'text-[9px]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    size: 'sm',
+    class: {
+      base: 'rounded-full w-12 h-12',
+      indicator: 'stroke-[6px]',
+      track: 'stroke-[6px]',
+      status: 'text-[9px]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    size: 'md',
+    class: {
+      base: 'rounded-full w-16 h-16',
+      indicator: 'stroke-[6px]',
+      track: 'stroke-[6px]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    size: 'lg',
+    class: {
+      base: 'rounded-full w-20 h-20',
+      indicator: 'stroke-[8px]',
+      track: 'stroke-[8px]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    size: 'xl',
+    class: {
+      base: 'rounded-full w-24 h-24',
+      indicator: 'stroke-[10px]',
+      track: 'stroke-[8px]'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
+    size: '2xl',
+    class: {
+      base: 'rounded-full w-32 h-32',
+      indicator: 'stroke-[12px]',
+      track: 'stroke-[10px]'
+    }
+  }, {
+    variant: 'circular',
+    orientation: 'horizontal',
     size: '2xs',
     class: {
       base: 'rounded-full w-8 h-8',

@@ -113,12 +113,10 @@ onMounted(() => {
         status
       />
       <UProgress
-        v-model="value2"
         variant="circular"
         color="neutral"
+        animation="swing"
         size="2xl"
-        status-position="inside"
-        status
       />
     </div>
   </div>

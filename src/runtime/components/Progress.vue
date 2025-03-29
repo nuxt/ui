@@ -219,6 +219,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
           />
           <ProgressIndicator as-child>
             <path
+              v-if="percent && percent > 0"
               :d="trackPath"
               :class="ui.indicator({ class: props.ui?.indicator })"
               :style="{
