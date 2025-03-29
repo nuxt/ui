@@ -68,37 +68,58 @@ onMounted(() => {
     </div>
 
     <div class="flex items-center gap-4">
-      <!-- Progress circulaire basique -->
+      <UProgress
+        v-model="value2"
+        variant="circular"
+        size="2xs"
+        status
+      />
+      <UProgress
+        v-model="value2"
+        variant="circular"
+        color="info"
+        size="xs"
+      />
       <UProgress
         v-model="value2"
         variant="circular"
         color="warning"
+        size="sm"
+        status-position="inside"
         status
       />
-      <!-- Progress circulaire avec taille personnalisée -->
       <UProgress
         v-model="value2"
         variant="circular"
-        size="lg"
-        status
-        color="neutral"
-      />
-
-      <!-- Progress circulaire avec contenu personnalisé -->
-      <UProgress
-        v-model="value2"
         color="error"
+        size="md"
+        status-position="inside"
         status
-        size="2xs"
+      />
+      <UProgress
+        v-model="value2"
         variant="circular"
-      >
-        <template #status="{ percent }">
-          <div class="flex flex-col items-center">
-            <span class="text-2xl font-bold">{{ percent }}%</span>
-            <span class="text-sm text-gray-500">Chargement...</span>
-          </div>
-        </template>
-      </UProgress>
+        color="success"
+        size="lg"
+        status-position="inside"
+        status
+      />
+      <UProgress
+        v-model="value2"
+        variant="circular"
+        color="secondary"
+        size="xl"
+        status-position="inside"
+        status
+      />
+      <UProgress
+        v-model="value2"
+        variant="circular"
+        color="neutral"
+        size="2xl"
+        status-position="inside"
+        status
+      />
     </div>
   </div>
 </template>

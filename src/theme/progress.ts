@@ -16,6 +16,7 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'overflow-hidden rounded-full bg-(--ui-bg-accented)'
       },
       circular: {
+        root: 'gap-0 items-center',
         base: 'relative rounded-full',
         track: 'fill-none stroke-(--ui-bg-accented)',
         indicator: 'fill-none transition-[stroke-dasharray,opacity]',
@@ -43,80 +44,31 @@ export default (options: Required<ModuleOptions>) => ({
     size: {
       '2xs': {
         status: 'text-xs',
-        steps: 'text-xs',
-        variant: {
-          circular: {
-            base: 'w-4 h-4',
-            indicator: 'stroke-[3px]',
-            track: 'stroke-[3px]'
-          }
-        }
+        steps: 'text-xs'
       },
       'xs': {
         status: 'text-xs',
-        steps: 'text-xs',
-        variant: {
-          circular: {
-            base: 'w-6 h-6',
-            indicator: 'stroke-[4px]',
-            track: 'stroke-[4px]'
-          }
-        }
+        steps: 'text-xs'
       },
       'sm': {
         status: 'text-sm',
-        steps: 'text-sm',
-        variant: {
-          circular: {
-            base: 'w-8 h-8',
-            indicator: 'stroke-[5px]',
-            track: 'stroke-[5px]'
-          }
-        }
+        steps: 'text-sm'
       },
       'md': {
         status: 'text-sm',
-        steps: 'text-sm',
-        variant: {
-          circular: {
-            base: 'w-10 h-10',
-            indicator: 'stroke-[6px]',
-            track: 'stroke-[6px]'
-          }
-        }
+        steps: 'text-sm'
       },
       'lg': {
         status: 'text-sm',
-        steps: 'text-sm',
-        variant: {
-          circular: {
-            base: 'w-12 h-12',
-            indicator: 'stroke-[7px]',
-            track: 'stroke-[7px]'
-          }
-        }
+        steps: 'text-sm'
       },
       'xl': {
         status: 'text-base',
-        steps: 'text-base',
-        variant: {
-          circular: {
-            base: 'w-14 h-14',
-            indicator: 'stroke-[8px]',
-            track: 'stroke-[8px]'
-          }
-        }
+        steps: 'text-base'
       },
       '2xl': {
         status: 'text-base',
-        steps: 'text-base',
-        variant: {
-          circular: {
-            base: 'w-16 h-16',
-            indicator: 'stroke-[9px]',
-            track: 'stroke-[9px]'
-          }
-        }
+        steps: 'text-base'
       }
     },
     step: {
@@ -154,24 +106,12 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [{
     variant: 'circular',
     orientation: 'horizontal',
-    class: {
-      base: 'rounded-full'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    class: {
-      base: 'rounded-full'
-    }
-  }, {
-    variant: 'circular',
-    orientation: 'horizontal',
     size: '2xs',
     class: {
-      base: 'w-4 h-4',
-      indicator: 'stroke-[3px]',
-      track: 'stroke-[3px]'
+      base: 'rounded-full w-8 h-8',
+      indicator: 'stroke-[6px]',
+      track: 'stroke-[6px]',
+      status: 'text-[8px]'
     }
   },
   {
@@ -179,9 +119,10 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'xs',
     class: {
-      base: 'w-6 h-6',
-      indicator: 'stroke-[4px]',
-      track: 'stroke-[4px]'
+      base: 'rounded-full w-10 h-10',
+      indicator: 'stroke-[6px]',
+      track: 'stroke-[6px]',
+      status: 'text-[9px]'
     }
   },
   {
@@ -189,9 +130,10 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'sm',
     class: {
-      base: 'w-8 h-8',
-      indicator: 'stroke-[5px]',
-      track: 'stroke-[5px]'
+      base: 'rounded-full w-12 h-12',
+      indicator: 'stroke-[6px]',
+      track: 'stroke-[6px]',
+      status: 'text-[9px]'
     }
   },
   {
@@ -199,7 +141,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'md',
     class: {
-      base: 'w-10 h-10',
+      base: 'rounded-full w-16 h-16',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]'
     }
@@ -209,17 +151,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'lg',
     class: {
-      base: 'w-12 h-12',
-      indicator: 'stroke-[7px]',
-      track: 'stroke-[7px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: 'xl',
-    class: {
-      base: 'w-14 h-14',
+      base: 'rounded-full w-20 h-20',
       indicator: 'stroke-[8px]',
       track: 'stroke-[8px]'
     }
@@ -227,11 +159,21 @@ export default (options: Required<ModuleOptions>) => ({
   {
     variant: 'circular',
     orientation: 'horizontal',
+    size: 'xl',
+    class: {
+      base: 'rounded-full w-24 h-24',
+      indicator: 'stroke-[10px]',
+      track: 'stroke-8'
+    }
+  },
+  {
+    variant: 'circular',
+    orientation: 'horizontal',
     size: '2xl',
     class: {
-      base: 'w-16 h-16',
-      indicator: 'stroke-[9px]',
-      track: 'stroke-[9px]'
+      base: 'rounded-full w-32 h-32',
+      indicator: 'stroke-[12px]',
+      track: 'stroke-10'
     }
   }, {
     variant: 'linear',

@@ -17,6 +17,11 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
   max?: number | Array<any>
   /** Display the current progress value. */
   status?: boolean
+  /**
+   * The position of the status text.
+   * @defaultValue 'outside'
+   */
+  statusPosition?: 'inside' | 'outside'
   /** Whether the progress is visually inverted. */
   inverted?: boolean
   /**
@@ -68,7 +73,8 @@ const props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
   modelValue: null,
   orientation: 'horizontal',
-  variant: 'linear'
+  variant: 'linear',
+  statusPosition: 'outside'
 })
 const emits = defineEmits<ProgressEmits>()
 const slots = defineSlots<ProgressSlots>()
@@ -78,7 +84,7 @@ const appConfig = useAppConfig() as Progress['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'modelValue'), emits)
 
-const RADIUS = 45
+const RADIUS = 35
 const circumference = 2 * Math.PI * RADIUS
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)
@@ -148,7 +154,7 @@ const indicatorStyle = computed(() => {
 
 const statusStyle = computed(() => {
   return {
-    [props.orientation === 'vertical' ? 'height' : 'width']: percent.value ? `${percent.value}%` : 'fit-content'
+    [props.orientation === 'vertical' ? 'height' : 'width']: percent.value && (props.variant === 'linear') ? `${percent.value}%` : 'fit-content'
   }
 })
 
@@ -194,7 +200,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!isIndeterminate && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+    <div v-if="!isIndeterminate && (statusPosition === 'outside') && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
@@ -202,27 +208,33 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
 
     <ProgressRoot v-bind="rootProps" :max="realMax" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
       <ProgressIndicator v-if="variant === 'linear'" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
-      <svg
-        v-if="variant === 'circular'"
-        :class="ui.base({ class: props.ui?.base })"
-        viewBox="0 0 100 100"
-      >
-        <path
-          :d="trackPath"
-          :class="ui.track({ class: props.ui?.track })"
-        />
-        <ProgressIndicator as-child>
+      <template v-if="variant === 'circular'">
+        <svg
+          :class="ui.base({ class: props.ui?.base })"
+          viewBox="0 0 100 100"
+        >
           <path
             :d="trackPath"
-            :class="ui.indicator({ class: props.ui?.indicator })"
-            :style="{
-              'stroke-linecap': 'round',
-              'stroke-dasharray': `${dashOffset}px, ${circumference}px`,
-              'stroke-dashoffset': '0px'
-            }"
+            :class="ui.track({ class: props.ui?.track })"
           />
-        </ProgressIndicator>
-      </svg>
+          <ProgressIndicator as-child>
+            <path
+              :d="trackPath"
+              :class="ui.indicator({ class: props.ui?.indicator })"
+              :style="{
+                'stroke-linecap': 'round',
+                'stroke-dasharray': `${dashOffset}px, ${circumference}px`,
+                'stroke-dashoffset': '0px'
+              }"
+            />
+          </ProgressIndicator>
+        </svg>
+        <div v-if="!isIndeterminate && (statusPosition === 'inside') && (status || !!slots.status)" class="absolute inset-0" :class="ui.status({ class: props.ui?.status })">
+          <slot name="status" :percent="percent">
+            {{ percent }}%
+          </slot>
+        </div>
+      </template>
     </ProgressRoot>
 
     <div v-if="hasSteps" :class="ui.steps({ class: props.ui?.steps })">
