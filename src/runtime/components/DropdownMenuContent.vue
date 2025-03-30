@@ -141,7 +141,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
               :external-icon="externalIcon"
               v-bind="item.content"
             >
-              <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
+              <template v-for="(_, name) in proxySlots" #[name]="slotData">
                 <slot :name="(name as keyof DropdownMenuContentSlots<T>)" v-bind="slotData" />
               </template>
             </UDropdownMenuContent>
