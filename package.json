@@ -14,7 +14,8 @@
     ".": {
       "types": "./dist/types.d.mts",
       "style": "./dist/runtime/index.css",
-      "default": "./dist/module.mjs"
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
     },
     "./unplugin": {
       "types": "./dist/unplugin.d.mts",
