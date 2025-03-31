@@ -178,6 +178,12 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       }
       shortcut.chained = chained
 
+      // Convert Meta to Ctrl for non-MacOS
+      if (!macOS.value && shortcut.metaKey && !shortcut.ctrlKey) {
+        shortcut.metaKey = false
+        shortcut.ctrlKey = true
+      }
+
       // Retrieve handler function
       if (typeof shortcutConfig === 'function') {
         shortcut.handler = shortcutConfig
