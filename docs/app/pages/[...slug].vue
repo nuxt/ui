@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
-import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
+import type { PageLink } from '@nuxt/ui-pro'
+import { findPageBreadcrumb, mapContentNavigation } from '@nuxt/ui-pro/utils/content'
 
 const route = useRoute()
 const { framework, module } = useSharedData()
@@ -100,6 +101,16 @@ const communityLinks = computed(() => [{
   label: 'Star on GitHub',
   to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}`,
   target: '_blank'
+}, module.value === 'ui-pro' && {
+  icon: 'i-lucide-credit-card',
+  label: 'Purchase a license',
+  to: 'https://nuxt.lemonsqueezy.com/checkout/buy/057dacb2-87ba-4dc1-9256-59ee5b3bd394',
+  target: '_blank'
+}, module.value === 'ui-pro' && {
+  icon: 'i-lucide-ticket-percent',
+  label: 'Become an affiliate',
+  to: 'https://nuxt.lemonsqueezy.com/affiliates',
+  target: '_blank'
 }, {
   icon: 'i-lucide-life-buoy',
   label: 'Contribution',
@@ -108,7 +119,7 @@ const communityLinks = computed(() => [{
   label: 'Roadmap',
   icon: 'i-lucide-map',
   to: '/roadmap'
-}])
+}].filter(Boolean) as PageLink[])
 </script>
 
 <template>
