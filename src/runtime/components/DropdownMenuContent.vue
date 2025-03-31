@@ -67,7 +67,6 @@ const proxySlots = omit(slots, ['default'])
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
 
 const childrenIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight)
-const side = computed(() => dir.value === 'rtl' ? 'left' : 'right')
 const groups = computed<DropdownMenuItem[][]>(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
@@ -135,7 +134,6 @@ const groups = computed<DropdownMenuItem[][]>(() =>
               :ui-override="uiOverride"
               :portal="portal"
               :items="(item.children as T)"
-              :side="side"
               align="start"
               :align-offset="-4"
               :side-offset="3"
