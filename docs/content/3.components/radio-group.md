@@ -109,34 +109,6 @@ props:
 ---
 ::
 
-### Variant
-
-Use the `variant` prop to change the variant of the RadioGroup.
-
-::component-code
----
-prettier: true
-ignore:
-  - defaultValue
-  - items
-external:
-  - items
-props:
-  variant: 'table'
-  defaultValue: 'pro'
-  items:
-    - label: 'Pro'
-      value: 'pro'
-      description: 'Tailored for indie hackers, freelancers and solo founders.'
-    - label: 'Startup'
-      value: 'startup'
-      description: 'Best suited for small teams, startups and agencies.'
-    - label: 'Enterprise'
-      value: 'enterprise'
-      description: 'Ideal for larger teams and organizations.'
----
-::
-
 ### Legend
 
 Use the `legend` prop to set the legend of the RadioGroup.
@@ -154,59 +126,6 @@ externalTypes:
 props:
   legend: 'Theme'
   defaultValue: 'System'
-  items:
-    - 'System'
-    - 'Light'
-    - 'Dark'
----
-::
-
-### Orientation
-
-Use the `orientation` prop to change the orientation of the RadioGroup. Defaults to `vertical`.
-
-::component-code
----
-prettier: true
-ignore:
-  - defaultValue
-  - items
-external:
-  - items
-externalTypes:
-  - RadioGroupItem[]
-props:
-  orientation: 'horizontal'
-  defaultValue: 'System'
-  items:
-    - 'System'
-    - 'Light'
-    - 'Dark'
----
-::
-
-### Indicator
-
-Use the `indicator` prop to change the position or hide the indicator. Defaults to `left`.
-
-::component-code
----
-prettier: true
-ignore:
-  - modelValue
-  - items
-  - variant
-external:
-  - items
-  - modelValue
-  - variant
-externalTypes:
-  - RadioGroupItem[]
-  - RadioGroupValue
-props:
-  indicator: 'left'
-  variant: 'card'
-  modelValue: 'System'
   items:
     - 'System'
     - 'Light'
@@ -238,6 +157,35 @@ props:
 ---
 ::
 
+### Variant
+
+Use the `variant` prop to change the variant of the RadioGroup.
+
+::component-code
+---
+prettier: true
+ignore:
+  - defaultValue
+  - items
+external:
+  - items
+props:
+  color: 'primary'
+  variant: 'table'
+  defaultValue: 'pro'
+  items:
+    - label: 'Pro'
+      value: 'pro'
+      description: 'Tailored for indie hackers, freelancers and solo founders.'
+    - label: 'Startup'
+      value: 'startup'
+      description: 'Best suited for small teams, startups and agencies.'
+    - label: 'Enterprise'
+      value: 'enterprise'
+      description: 'Ideal for larger teams and organizations.'
+---
+::
+
 ### Size
 
 Use the `size` prop to change the size of the RadioGroup.
@@ -254,6 +202,57 @@ externalTypes:
   - RadioGroupItem[]
 props:
   size: 'xl'
+  variant: 'list'
+  defaultValue: 'System'
+  items:
+    - 'System'
+    - 'Light'
+    - 'Dark'
+---
+::
+
+### Orientation
+
+Use the `orientation` prop to change the orientation of the RadioGroup. Defaults to `vertical`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - defaultValue
+  - items
+external:
+  - items
+externalTypes:
+  - RadioGroupItem[]
+props:
+  orientation: 'horizontal'
+  variant: 'list'
+  defaultValue: 'System'
+  items:
+    - 'System'
+    - 'Light'
+    - 'Dark'
+---
+::
+
+### Indicator
+
+Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - defaultValue
+  - items
+external:
+  - items
+externalTypes:
+  - RadioGroupItem[]
+props:
+  indicator: 'end'
+  variant: 'card'
   defaultValue: 'System'
   items:
     - 'System'
