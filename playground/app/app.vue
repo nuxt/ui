@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { splitByCase, upperFirst } from 'scule'
 import { useColorMode } from '#imports'
+import { ar, en } from '@nuxt/ui/locale'
 
 const router = useRouter()
 const appConfig = useAppConfig()
@@ -80,15 +81,12 @@ function onSelect(item: any) {
 defineShortcuts({
   meta_k: () => isCommandPaletteOpen.value = true
 })
-
-useHead({
-  title: 'Nuxt UI - Playground'
-})
 </script>
 
 <template>
-  <template v-if="!$route.path.startsWith('/__nuxt_ui__')">
-    <UApp :toaster="appConfig.toaster">
+  <Html dir="rtl">
+    <template v-if="!$route.path.startsWith('/__nuxt_ui__')">
+    <UApp :toaster="appConfig.toaster" :locale="ar">
       <div class="h-screen w-screen overflow-hidden flex flex-col lg:flex-row min-h-0 bg-(--ui-bg)" data-vaul-drawer-wrapper>
         <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-e border-(--ui-border) overflow-y-auto w-48 p-4" />
         <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-(--ui-border) [&>div]:min-w-min overflow-x-auto" />
@@ -121,7 +119,8 @@ useHead({
       </div>
     </UApp>
   </template>
-  <template v-else>
-    <NuxtPage />
-  </template>
+    <template v-else>
+      <NuxtPage />
+    </template>
+  </Html>
 </template>
