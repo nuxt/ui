@@ -41,6 +41,8 @@ jobs:
         run: pnpm run dev:prepare
 
       - name: Build application
+        env:
+          NODE_OPTIONS: '--max-old-space-size=8192'
         run: pnpm run docs:build
 
       - name: Deploy to NuxtHub
