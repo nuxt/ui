@@ -28,13 +28,12 @@ export default (options: Required<ModuleOptions>) => ({
       list: {
       },
       card: {
-        item: 'items-center border-1 border-[var(--ui-border-muted)] rounded-lg'
+        item: 'items-center border border-(--ui-border-muted) rounded-lg'
       },
       table: {
-        item: 'border-[var(--ui-border-muted)]'
+        item: 'border border-(--ui-border-muted)'
       }
     },
-
     orientation: {
       horizontal: {
         fieldset: 'flex-row',
@@ -44,13 +43,12 @@ export default (options: Required<ModuleOptions>) => ({
         fieldset: 'flex-col'
       }
     },
-
     indicator: {
-      left: {
+      start: {
         item: 'flex-row',
         base: 'me-2'
       },
-      right: {
+      end: {
         item: 'flex-row-reverse',
         base: 'ms-2'
       },
@@ -59,7 +57,6 @@ export default (options: Required<ModuleOptions>) => ({
         wrapper: 'text-center'
       }
     },
-
     size: {
       xs: {
         fieldset: 'gap-0.5',
@@ -115,50 +112,61 @@ export default (options: Required<ModuleOptions>) => ({
     }
   },
   compoundVariants: [
-    { size: 'xs', variant: 'card', class: { item: 'p-2.5' } },
-    { size: 'sm', variant: 'card', class: { item: 'p-3' } },
-    { size: 'md', variant: 'card', class: { item: 'p-3.5' } },
-    { size: 'lg', variant: 'card', class: { item: 'p-4' } },
-    { size: 'xl', variant: 'card', class: { item: 'p-4.5' } },
-
-    { size: 'xs', variant: 'table', class: { item: 'p-2.5' } },
-    { size: 'sm', variant: 'table', class: { item: 'p-3' } },
-    { size: 'md', variant: 'table', class: { item: 'p-3.5' } },
-    { size: 'lg', variant: 'table', class: { item: 'p-4' } },
-    { size: 'xl', variant: 'table', class: { item: 'p-4.5' } },
-
-    { orientation: 'horizontal', variant: 'table', class: { item: 'first:rounded-l-lg last:rounded-r-lg not-last:-ml-0.25 border-1', fieldset: 'gap-0' } },
-    { orientation: 'vertical', variant: 'table', class: { item: 'first:rounded-t-lg last:rounded-b-lg not-last:-mb-0.25 border-1', fieldset: 'gap-0' } },
-
+    { size: 'xs', variant: ['card', 'table'], class: { item: 'p-2.5' } },
+    { size: 'sm', variant: ['card', 'table'], class: { item: 'p-3' } },
+    { size: 'md', variant: ['card', 'table'], class: { item: 'p-3.5' } },
+    { size: 'lg', variant: ['card', 'table'], class: { item: 'p-4' } },
+    { size: 'xl', variant: ['card', 'table'], class: { item: 'p-4.5' } },
+    {
+      orientation: 'horizontal',
+      variant: 'table',
+      class: {
+        item: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg',
+        fieldset: 'gap-0 -space-x-px'
+      }
+    },
+    {
+      orientation: 'vertical',
+      variant: 'table',
+      class: {
+        item: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg',
+        fieldset: 'gap-0 -space-y-px'
+      }
+    },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'card',
       class: {
-        item: `has-data-[state=checked]:border-[var(--ui-${color})]`
+        item: `has-data-[state=checked]:border-(--ui-${color})`
       }
     })),
-
     {
       color: 'neutral',
       variant: 'card',
       class: {
-        item: 'has-data-[state=checked]:border-[var(--ui-border-elevated)]'
+        item: 'has-data-[state=checked]:border-(--ui-border-elevated)'
       }
     },
-
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'table',
       class: {
-        item: `has-data-[state=checked]:relative has-data-[state=checked]:bg-[var(--ui-${color})]/20 has-data-[state=checked]:border-[var(--ui-${color})]/20`
+        item: `has-data-[state=checked]:bg-(--ui-${color})/10 has-data-[state=checked]:border-(--ui-${color})/50 has-data-[state=checked]:z-[1]`
       }
-    }))
+    })),
+    {
+      color: 'neutral',
+      variant: 'table',
+      class: {
+        item: 'has-data-[state=checked]:bg-(--ui-bg-elevated) has-data-[state=checked]:border-(--ui-border-inverted)/25 has-data-[state=checked]:z-[1]'
+      }
+    }
   ],
   defaultVariants: {
     size: 'md',
     color: 'primary',
     variant: 'list',
     orientation: 'vertical',
-    indicator: 'left'
+    indicator: 'start'
   }
 })

@@ -64,7 +64,7 @@ export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> exte
   orientation?: RadioGroupRootProps['orientation']
   /**
    * Position of the indicator.
-   * @defaultValue 'left'
+   * @defaultValue 'start'
    */
   indicator?: RadioGroupVariants['indicator']
   class?: any

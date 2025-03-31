@@ -13,15 +13,13 @@ const literalOptions = [
 const items = [
   { value: '1', label: 'Option 1' },
   { value: '2', label: 'Option 2' },
-  { value: '3', label: 'Option 3' },
-  { value: '4', label: 'Opt 4' }
+  { value: '3', label: 'Option 3' }
 ]
 
 const itemsWithDescription = [
   { value: '1', label: 'Option 1', description: 'Description 1' },
   { value: '2', label: 'Option 2', description: 'Description 2' },
-  { value: '3', label: 'Option 3', description: 'Description 3' },
-  { value: '4', label: 'Opt 4', description: 'Description 4' }
+  { value: '3', label: 'Option 3', description: 'Description 3' }
 ]
 </script>
 
@@ -35,9 +33,12 @@ const itemsWithDescription = [
       <URadioGroup :variant="variant" :items="items" color="error" default-value="2" />
       <URadioGroup :variant="variant" :items="literalOptions" />
       <URadioGroup :variant="variant" :items="items" disabled />
-      <URadioGroup :variant="variant" :items="items" indicator="left" />
-      <URadioGroup :variant="variant" :items="items" indicator="right" />
-      <URadioGroup :variant="variant" :items="items" indicator="hidden" />
+    </div>
+
+    <div class="flex flex-wrap gap-4 ms-[100px]">
+      <URadioGroup :variant="variant" :items="items" default-value="3" indicator="start" />
+      <URadioGroup :variant="variant" :items="items" default-value="3" indicator="end" />
+      <URadioGroup :variant="variant" :items="items" default-value="3" indicator="hidden" />
     </div>
 
     <URadioGroup :variant="variant" :items="items" orientation="horizontal" class="ms-[95px]" />
