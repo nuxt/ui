@@ -66,7 +66,7 @@ export interface ToastSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: any }): any
+  close(props: { ui: ReturnType<typeof toast> }): any
 }
 </script>
 
@@ -168,7 +168,7 @@ defineExpose({
         </slot>
       </template>
 
-      <ToastClose as-child>
+      <ToastClose v-if="close || !!slots.close" as-child>
         <slot name="close" :ui="ui">
           <UButton
             v-if="close"

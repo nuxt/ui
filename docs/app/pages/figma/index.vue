@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // @ts-expect-error yaml is not typed
 import page from '.figma.yml'
-import { animate } from 'motion'
+import { animate } from 'motion-v'
 import { joinURL } from 'ufo'
 
 const { url } = useSiteConfig()
@@ -233,6 +233,7 @@ onMounted(async () => {
           :title="plan.title"
           :description="plan.description"
           :price="plan.price"
+          :discount="plan.discount"
           :billing-period="plan.billing_period"
           :billing-cycle="plan.billing_cycle"
           :highlight="plan.highlight"

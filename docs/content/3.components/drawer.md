@@ -166,6 +166,31 @@ slots:
 :placeholder{class="h-48 m-4"}
 ::
 
+### Handle Only
+
+Use the `handle-only` prop to only allow the Drawer to be dragged by the handle.
+
+::component-code
+---
+prettier: true
+props:
+  handleOnly: true
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  content: |
+
+    <Placeholder class="h-48 m-4" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#content
+:placeholder{class="h-48 m-4"}
+::
+
 ### Overlay
 
 Use the `overlay` prop to control whether the Drawer has an overlay or not. Defaults to `true`.
@@ -193,13 +218,14 @@ slots:
 
 ### Scale background
 
-Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect.
+Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect. You can set the `set-background-color-on-scale` prop to `false` to prevent changing the background color.
 
 ::component-code
 ---
 prettier: true
 props:
   shouldScaleBackground: true
+  setBackgroundColorOnScale: true
 slots:
   default: |
 
@@ -217,12 +243,12 @@ slots:
 ::
 
 ::warning
-Make sure to add the `vaul-drawer-wrapper` directive to a parent element of your app to make this work.
+Make sure to add the `data-vaul-drawer-wrapper` directive to a parent element of your app to make this work.
 
 ```vue [app.vue]
 <template>
   <UApp>
-    <div class="bg-(--ui-bg)" vaul-drawer-wrapper>
+    <div class="bg-(--ui-bg)" data-vaul-drawer-wrapper>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -235,7 +261,7 @@ Make sure to add the `vaul-drawer-wrapper` directive to a parent element of your
 export default defineNuxtConfig({
   app: {
     rootAttrs: {
-      'vaul-drawer-wrapper': '',
+      'data-vaul-drawer-wrapper': '',
       'class': 'bg-(--ui-bg)'
     }
   }

@@ -18,7 +18,8 @@ useSeoMeta({
 <template>
   <div class="relative">
     <UPageHero :links="page.links" :ui="{ container: 'relative' }">
-      <StarsBg />
+      <LazyStarsBg />
+
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
       <template #title>
@@ -50,11 +51,12 @@ useSeoMeta({
       </template>
 
       <div class="lg:border-x border-(--ui-border) h-full flex items-center lg:bg-(--ui-bg-muted)/20">
-        <Motion class="flex-1" :initial="{ opacity: 0, transform: 'translateY(10px)' }" :in-view="{ opacity: 1, transform: 'translateY(0px)' }" :in-view-options="{ once: true }" :transition="{ duration: 0.5, delay: 0.2 }">
+        <Motion class="flex-1" :initial="{ opacity: 0, transform: 'translateY(10px)' }" :while-in-view="{ opacity: 1, transform: 'translateY(0px)' }" :in-view-options="{ once: true }" :transition="{ duration: 0.5, delay: 0.2 }">
           <UColorModeImage
             v-if="template.thumbnail"
             v-bind="template.thumbnail"
             class="w-full h-auto border lg:border-y lg:border-x-0 border-(--ui-border) rounded-(--ui-radius) lg:rounded-none"
+            :alt="`Template ${index} thumbnail`"
             width="656"
             height="369"
             loading="lazy"

@@ -119,7 +119,8 @@ onMounted(() => {
         />
       </template>
 
-      <StarsBg />
+      <LazyStarsBg />
+
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
@@ -151,6 +152,7 @@ onMounted(() => {
             :description="component.description"
             :to="component.path"
             :ui="{ wrapper: 'order-last', container: 'lg:flex' }"
+            class="group"
           >
             <template #title>
               <div class="flex items-center gap-0.5">
@@ -159,7 +161,7 @@ onMounted(() => {
               </div>
             </template>
 
-            <div class="group rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
+            <div class="rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
               <UColorModeImage
                 :light="`${component.path.replace('/components/', '/components/light/')}.png`"
                 :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
@@ -167,6 +169,7 @@ onMounted(() => {
                 :loading="index >= 4 ? 'lazy' : 'eager'"
                 width="640"
                 height="360"
+                :alt="`${component.name} preview`"
               />
             </div>
           </UPageCard>

@@ -60,6 +60,7 @@ import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
+import ULinkBase from './LinkBase.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   active: undefined,
@@ -124,7 +125,7 @@ const ui = computed(() => tv({
     :type="type"
     :disabled="disabled || isLoading"
     :class="ui.base({ class: [props.class, props.ui?.base] })"
-    v-bind="omit(linkProps, ['type', 'disabled'])"
+    v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
     custom
   >
     <ULinkBase

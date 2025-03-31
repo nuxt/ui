@@ -82,7 +82,7 @@ const props = withDefaults(defineProps<InputProps>(), {
 const emits = defineEmits<InputEmits>()
 const slots = defineSlots<InputSlots>()
 
-const [modelValue, modelModifiers] = defineModel<string | number>()
+const [modelValue, modelModifiers] = defineModel<string | number | null>()
 
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps>(props, { deferInputValidation: true })
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
@@ -111,13 +111,17 @@ function autoFocus() {
 }
 
 // Custom function to handle the v-model properties
-function updateInput(value: string) {
+function updateInput(value: string | null) {
   if (modelModifiers.trim) {
-    value = value.trim()
+    value = value?.trim() ?? null
   }
 
   if (modelModifiers.number || props.type === 'number') {
     value = looseToNumber(value)
+  }
+
+  if (modelModifiers.nullify) {
+    value ||= null
   }
 
   modelValue.value = value

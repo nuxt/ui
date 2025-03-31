@@ -75,7 +75,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     write: true,
     getContents: () => `@source "./ui";
 
-@theme default static {
+@theme default {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
@@ -122,6 +122,10 @@ type AppConfigUI = {
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {
+    /**
+     * Nuxt UI theme configuration
+     * @see https://ui.nuxt.com/getting-started/theme#customize-theme
+     */
     ui?: AppConfigUI
   }
 }

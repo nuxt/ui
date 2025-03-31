@@ -25,7 +25,7 @@ const items: TreeItem[] = [
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
 ]
 
-const value = ref(items[items.length - 1])
+const value = ref()
 </script>
 
 <template>

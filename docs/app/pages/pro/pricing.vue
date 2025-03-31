@@ -27,8 +27,10 @@ useSeoMeta({
         <MDC :value="page.pricing.title" unwrap="p" cache-key="pro-pricing-title" />
       </template>
 
-      <StarsBg />
+      <LazyStarsBg />
+
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+
       <div class="flex flex-col bg-(--ui-bg) gap-8 lg:gap-0">
         <UPricingPlan
           v-bind="page.pricing.freePlan"
@@ -42,6 +44,7 @@ useSeoMeta({
             :title="plan.title"
             :description="plan.description"
             :price="plan.price"
+            :discount="plan.discount"
             :billing-period="plan.billing_period"
             :billing-cycle="plan.billing_cycle"
             :variant="plan.highlight ? 'soft' : 'outline'"
@@ -53,6 +56,8 @@ useSeoMeta({
         <UPricingPlan
           v-bind="page.pricing.figma"
           variant="naked"
+          :billing-period="page.pricing.figma.billing_period"
+          :billing-cycle="page.pricing.figma.billing_cycle"
           class="lg:rounded-none border lg:border-y-0 border-(--ui-border)"
         >
           <template #features>

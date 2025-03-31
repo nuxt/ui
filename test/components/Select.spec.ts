@@ -78,7 +78,7 @@ describe('Select', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps<typeof items[number]>, slots?: Partial<SelectSlots<typeof items[number], false>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps, slots?: Partial<SelectSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Select)
     expect(html).toMatchSnapshot()
   })
@@ -192,10 +192,10 @@ describe('Select', () => {
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]]
       })).toEqualTypeOf<[string | number]>()
 
-      // with groups, mixed types and valueKey = undefined
+      // with groups, multiple, mixed types and valueKey
       expectEmitPayloadType('update:modelValue', () => Select({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
-        valueKey: undefined
+        valueKey: 'value' // TODO: value is already the default valueKey
       })).toEqualTypeOf<[string | number]>()
     })
   })
