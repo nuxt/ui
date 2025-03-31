@@ -17,15 +17,17 @@
       "default": "./dist/module.mjs"
     },
     "./unplugin": {
+      "types": "./dist/unplugin.d.mts",
       "import": "./dist/unplugin.mjs",
       "require": "./dist/unplugin.cjs"
     },
     "./vite": {
+      "types": "./dist/vite.d.mts",
       "import": "./dist/vite.mjs",
       "require": "./dist/vite.cjs"
     },
     "./vue-plugin": {
-      "types": "./vue-plugin.d.ts"
+      "types": "./vue-plugin.d.mts"
     },
     "./runtime/*": "./dist/runtime/*",
     "./components/*": "./dist/runtime/components/*",
@@ -53,7 +55,7 @@
     ".nuxt/ui.css",
     "dist",
     "cli",
-    "vue-plugin.d.ts"
+    "vue-plugin.d.mts"
   ],
   "scripts": {
     "build": "nuxt-module-build build",
