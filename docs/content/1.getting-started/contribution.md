@@ -1,7 +1,6 @@
 ---
 title: Contribution Guide
 description: 'A comprehensive guide on contributing to Nuxt UI, including project structure, development workflow, and best practices.'
-navigation: false
 ---
 
 Nuxt UI thrives thanks to its incredible community ❤️. We welcome all contributions through bug reports, pull requests, and feedback to help make this library even better.
