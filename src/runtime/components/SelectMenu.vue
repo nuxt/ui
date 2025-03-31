@@ -413,7 +413,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
                   :class="ui.item({ class: props.ui?.item })"
                   :disabled="isSelectItem(item) && item.disabled"
                   :value="props.valueKey && isSelectItem(item) ? get(item, props.valueKey as string) : item"
-                  @select="isSelectItem(item) && item.onSelect"
+                  @select="isSelectItem(item) && item.onSelect?.($event)"
                 >
                   <slot name="item" :item="(item as NestedItem<T>)" :index="index">
                     <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">
