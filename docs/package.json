@@ -20,7 +20,7 @@
     "sortablejs": "^1.15.6",
     "joi": "^17.13.3",
     "motion-v": "0.13.1",
-    "nuxt": "^3.16.1",
+    "nuxt": "^3.16.2",
     "nuxt-component-meta": "^0.10.1",
     "nuxt-llms": "^0.1.2",
     "nuxt-og-image": "^5.1.1",
