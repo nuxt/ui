@@ -56,6 +56,7 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
     mappedNavigation: computed(() => mappedNavigation.value?.map(item => ({
       ...item,
       children: item.children?.map((child: any) => ({ ...child, icon: undefined }))
+        .filter((child: any) => child.path !== '/getting-started/contribution')
     }))),
     filteredNavigation
   }
