@@ -22,6 +22,17 @@ props:
 ---
 ::
 
+### Rows
+
+Use the `rows` prop to set the number of rows. Defaults to `3`.
+
+::component-code
+---
+props:
+  rows: 12
+---
+::
+
 ### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
@@ -30,6 +41,37 @@ Use the `placeholder` prop to set a placeholder text.
 ---
 props:
   placeholder: 'Type something...'
+---
+::
+
+### Autoresize
+
+Use the `autoresize` prop to enable autoresizing the height of the Textarea.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+props:
+  modelValue: 'This is a long text that will autoresize the height of the Textarea.'
+  autoresize: true
+---
+::
+
+Use the `maxrows` prop to set the maximum number of rows when autoresizing. If set to `0`, the Textarea will grow indefinitely.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+props:
+  modelValue: 'This is a long text that will autoresize the height of the Textarea with a maximum of 4 rows.'
+  maxrows: 4
+  autoresize: true
 ---
 ::
 
@@ -82,6 +124,102 @@ props:
 ---
 ::
 
+### Icon
+
+Use the `icon` prop to show an [Icon](/components/icon) inside the Textarea.
+
+::component-code
+---
+prettier: true
+ignore:
+  - placeholder
+props:
+  icon: 'i-lucide-search'
+  size: md
+  variant: outline
+  placeholder: 'Search...'
+  rows: 1
+---
+::
+
+Use the `leading` and `trailing` props to set the icon position or the `leading-icon` and `trailing-icon` props to set a different icon for each position.
+
+::component-code
+---
+prettier: true
+ignore:
+  - placeholder
+props:
+  trailingIcon: i-lucide-at-sign
+  placeholder: 'Enter your email'
+  size: md
+  rows: 1
+---
+::
+
+### Avatar
+
+Use the `avatar` prop to show an [Avatar](/components/avatar) inside the Textarea.
+
+::component-code
+---
+prettier: true
+ignore:
+  - placeholder
+props:
+  avatar:
+    src: 'https://github.com/nuxt.png'
+  size: md
+  variant: outline
+  placeholder: 'Search...'
+  rows: 1
+---
+::
+
+### Loading
+
+Use the `loading` prop to show a loading icon on the Textarea.
+
+::component-code
+---
+ignore:
+  - placeholder
+props:
+  loading: true
+  trailing: false
+  placeholder: 'Search...'
+  rows: 1
+---
+::
+
+### Loading Icon
+
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
+
+::component-code
+---
+ignore:
+  - placeholder
+props:
+  loading: true
+  loadingIcon: 'i-lucide-repeat-2'
+  placeholder: 'Search...'
+  rows: 1
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the Textarea.
@@ -93,48 +231,6 @@ ignore:
 props:
   disabled: true
   placeholder: 'Type something...'
----
-::
-
-### Rows
-
-Use the `rows` prop to set the number of rows. Defaults to `3`.
-
-::component-code
----
-props:
-  rows: 12
----
-::
-
-### Autoresize
-
-Use the `autoresize` prop to enable autoresizing the height of the Textarea.
-
-::component-code
----
-ignore:
-  - modelValue
-external:
-  - modelValue
-props:
-  modelValue: 'This is a long text that will autoresize the height of the Textarea.'
-  autoresize: true
----
-::
-
-Use the `maxrows` prop to set the maximum number of rows when autoresizing. If set to `0`, the Textarea will grow indefinitely.
-
-::component-code
----
-ignore:
-  - modelValue
-external:
-  - modelValue
-props:
-  modelValue: 'This is a long text that will autoresize the height of the Textarea with a maximum of 4 rows.'
-  maxrows: 4
-  autoresize: true
 ---
 ::
 

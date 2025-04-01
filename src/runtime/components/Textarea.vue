@@ -3,7 +3,9 @@ import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/textarea'
+import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { tv } from '../utils/tv'
+import type { AvatarProps } from '../types'
 import type { PartialString } from '../types/utils'
 
 const appConfigTextarea = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
@@ -12,7 +14,7 @@ const textarea = tv({ extend: tv(theme), ...(appConfigTextarea.ui?.textarea || {
 
 type TextareaVariants = VariantProps<typeof textarea>
 
-export interface TextareaProps {
+export interface TextareaProps extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -54,13 +56,16 @@ export interface TextareaEmits {
 }
 
 export interface TextareaSlots {
+  leading(props?: {}): any
   default(props?: {}): any
+  trailing(props?: {}): any
 }
 </script>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
+import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 
@@ -71,18 +76,22 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   maxrows: 0,
   autofocusDelay: 0
 })
-defineSlots<TextareaSlots>()
+const slots = defineSlots<TextareaSlots>()
 const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number | null>()
 
 const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps>(props, { deferInputValidation: true })
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const ui = computed(() => textarea({
   color: color.value,
   variant: props.variant,
   size: size?.value,
-  highlight: highlight.value
+  loading: props.loading,
+  highlight: highlight.value,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing
 }))
 
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
@@ -201,5 +210,18 @@ defineExpose({
     />
 
     <slot />
+
+    <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+      <slot name="leading">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+      </slot>
+    </span>
+
+    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <slot name="trailing">
+        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+      </slot>
+    </span>
   </Primitive>
 </template>

@@ -18,6 +18,19 @@ describe('Textarea', () => {
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with rows', { props: { rows: 5 } }],
+    ['with icon', { props: { icon: 'i-lucide-search' } }],
+    ['with leading and icon', { props: { leading: true, icon: 'i-lucide-arrow-left' } }],
+    ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
+    ['with trailing and icon', { props: { trailing: true, icon: 'i-lucide-arrow-right' } }],
+    ['with trailingIcon', { props: { trailingIcon: 'i-lucide-arrow-right' } }],
+    ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
+    ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-lucide-arrow-left' } }],
+    ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-lucide-arrow-right' } }],
+    ['with loading', { props: { loading: true } }],
+    ['with loading and avatar', { props: { loading: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
+    ['with loading trailing', { props: { loading: true, trailing: true } }],
+    ['with loading trailing and avatar', { props: { loading: true, trailing: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-sparkles' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
@@ -26,7 +39,9 @@ describe('Textarea', () => {
     ['with class', { props: { class: 'w-48' } }],
     ['with ui', { props: { ui: { wrapper: 'ms-4' } } }],
     // Slots
-    ['with default slot', { slots: { default: () => 'Default slot' } }]
+    ['with default slot', { slots: { default: () => 'Default slot' } }],
+    ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
+    ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TextareaProps, slots?: Partial<TextareaSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Textarea)
     expect(html).toMatchSnapshot()

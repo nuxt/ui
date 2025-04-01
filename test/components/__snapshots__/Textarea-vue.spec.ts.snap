@@ -1,53 +1,265 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Textarea > renders with ariaLabel correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" aria-label="Aria label"></textarea></div>"`;
+exports[`Textarea > renders with ariaLabel correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" aria-label="Aria label"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with as correctly 1`] = `"<section class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></section>"`;
+exports[`Textarea > renders with as correctly 1`] = `
+"<section class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</section>"
+`;
 
-exports[`Textarea > renders with class correctly 1`] = `"<div class="relative inline-flex items-center w-48"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with avatar and leadingIcon correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with default slot correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>Default slot</div>"`;
+exports[`Textarea > renders with avatar and trailingIcon correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9 pe-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span></span><span class="absolute end-0 flex items-start pe-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span></div>"`;
 
-exports[`Textarea > renders with disabled correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" disabled=""></textarea></div>"`;
+exports[`Textarea > renders with avatar correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span></span>
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with id correctly 1`] = `"<div class="relative inline-flex items-center"><textarea id="id" rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with class correctly 1`] = `
+"<div class="relative inline-flex items-center w-48"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with name correctly 1`] = `"<div class="relative inline-flex items-center"><textarea name="name" rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with default slot correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>Default slot
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with neutral variant ghost correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-transparent hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-transparent dark:disabled:bg-transparent"></textarea></div>"`;
+exports[`Textarea > renders with disabled correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" disabled=""></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with neutral variant none correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-transparent"></textarea></div>"`;
+exports[`Textarea > renders with icon correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with neutral variant outline correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-border-inverted)"></textarea></div>"`;
+exports[`Textarea > renders with id correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea id="id" rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with neutral variant soft correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg-elevated)/50 hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-(--ui-bg-elevated)/50"></textarea></div>"`;
+exports[`Textarea > renders with leading and icon correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with neutral variant subtle correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg-elevated) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-border-inverted)"></textarea></div>"`;
+exports[`Textarea > renders with leading slot correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5">Leading slot</span>
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with placeholder correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" placeholder="Search..." class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with leadingIcon correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with primary variant ghost correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-transparent hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-transparent dark:disabled:bg-transparent"></textarea></div>"`;
+exports[`Textarea > renders with loading and avatar correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5 animate-spin" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with primary variant none correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-transparent"></textarea></div>"`;
+exports[`Textarea > renders with loading correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5 animate-spin" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with primary variant outline correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with loading trailing and avatar correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9 pe-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span></span><span class="absolute end-0 flex items-start pe-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span></div>"`;
 
-exports[`Textarea > renders with primary variant soft correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg-elevated)/50 hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-(--ui-bg-elevated)/50"></textarea></div>"`;
+exports[`Textarea > renders with loading trailing correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) pe-9"></textarea>
+  <!--v-if--><span class="absolute end-0 flex items-start pe-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5 animate-spin" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+</div>"
+`;
 
-exports[`Textarea > renders with primary variant subtle correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg-elevated) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with loadingIcon correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5 animate-spin" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with required correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" required=""></textarea></div>"`;
+exports[`Textarea > renders with name correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea name="name" rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with rows correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="5" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with neutral variant ghost correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-transparent hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-transparent dark:disabled:bg-transparent"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with size lg correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with neutral variant none correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-transparent"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with size md correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with neutral variant outline correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-border-inverted)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with size sm correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with neutral variant soft correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg-elevated)/50 hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-(--ui-bg-elevated)/50"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with size xl correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with neutral variant subtle correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg-elevated) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-border-inverted)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with size xs correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with placeholder correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" placeholder="Search..." class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
 
-exports[`Textarea > renders with ui correctly 1`] = `"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea></div>"`;
+exports[`Textarea > renders with primary variant ghost correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-transparent hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-transparent dark:disabled:bg-transparent"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with primary variant none correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-transparent"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with primary variant outline correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with primary variant soft correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg-elevated)/50 hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-(--ui-bg-elevated)/50"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with primary variant subtle correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg-elevated) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with required correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" required=""></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with rows correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="5" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with size lg correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with size md correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with size sm correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with size xl correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with size xs correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with trailing and icon correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) pe-9"></textarea>
+  <!--v-if--><span class="absolute end-0 flex items-start pe-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+</div>"
+`;
+
+exports[`Textarea > renders with trailing slot correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) pe-9"></textarea>
+  <!--v-if--><span class="absolute end-0 flex items-start pe-2.5 inset-y-1.5">Trailing slot</span>
+</div>"
+`;
+
+exports[`Textarea > renders with trailingIcon correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) pe-9"></textarea>
+  <!--v-if--><span class="absolute end-0 flex items-start pe-2.5 inset-y-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 text-(--ui-text-dimmed) size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
+</div>"
+`;
+
+exports[`Textarea > renders with ui correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
