@@ -39,11 +39,12 @@ export interface TextareaProps extends UseComponentIconsProps {
   required?: boolean
   autofocus?: boolean
   autofocusDelay?: number
+  autoresize?: boolean
+  autoresizeDelay?: number
   disabled?: boolean
   class?: any
   rows?: number
   maxrows?: number
-  autoresize?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   ui?: PartialString<typeof textarea.slots>
@@ -74,7 +75,8 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<TextareaProps>(), {
   rows: 3,
   maxrows: 0,
-  autofocusDelay: 0
+  autofocusDelay: 0,
+  autoresizeDelay: 0
 })
 const slots = defineSlots<TextareaSlots>()
 const emits = defineEmits<TextareaEmits>()
@@ -182,7 +184,7 @@ onMounted(() => {
 
   setTimeout(() => {
     autoResize()
-  }, 100)
+  }, props.autoresizeDelay)
 })
 
 defineExpose({
