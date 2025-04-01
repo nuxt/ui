@@ -87,12 +87,6 @@ const ui = computed(() => textarea({
 
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
 
-function autoFocus() {
-  if (props.autofocus) {
-    textareaRef.value?.focus()
-  }
-}
-
 // Custom function to handle the v-model properties
 function updateInput(value: string | null) {
   if (modelModifiers.trim) {
@@ -140,18 +134,14 @@ function onBlur(event: FocusEvent) {
   emits('blur', event)
 }
 
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
+function autoFocus() {
+  if (props.autofocus) {
+    textareaRef.value?.focus()
+  }
+}
 
 function autoResize() {
-  if (props.autoresize) {
-    if (!textareaRef.value) {
-      return
-    }
-
+  if (props.autoresize && textareaRef.value) {
     textareaRef.value.rows = props.rows
     const overflow = textareaRef.value.style.overflow
     textareaRef.value.style.overflow = 'hidden'
@@ -176,14 +166,18 @@ watch(modelValue, () => {
   nextTick(autoResize)
 })
 
-defineExpose({
-  textareaRef
-})
-
 onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+
   setTimeout(() => {
     autoResize()
   }, 100)
+})
+
+defineExpose({
+  textareaRef
 })
 </script>
 

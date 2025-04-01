@@ -78,12 +78,6 @@ const ui = computed(() => pinInput({
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
 
-function autoFocus() {
-  if (props.autofocus) {
-    inputsRef.value[0]?.$el?.focus()
-  }
-}
-
 const completed = ref(false)
 function onComplete(value: string[]) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -99,14 +93,20 @@ function onBlur(event: FocusEvent) {
   }
 }
 
-defineExpose({
-  inputsRef
-})
+function autoFocus() {
+  if (props.autofocus) {
+    inputsRef.value[0]?.$el?.focus()
+  }
+}
 
 onMounted(() => {
   setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
+})
+
+defineExpose({
+  inputsRef
 })
 </script>
 
