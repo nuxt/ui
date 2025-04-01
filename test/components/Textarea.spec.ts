@@ -18,6 +18,7 @@ describe('Textarea', () => {
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with rows', { props: { rows: 5 } }],
+    ['with autoresize', { props: { autoresize: true } }],
     ['with icon', { props: { icon: 'i-lucide-search' } }],
     ['with leading and icon', { props: { leading: true, icon: 'i-lucide-arrow-left' } }],
     ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],

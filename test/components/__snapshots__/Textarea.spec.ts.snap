@@ -14,6 +14,13 @@ exports[`Textarea > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`Textarea > renders with autoresize correctly 1`] = `
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) resize-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)"></textarea>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Textarea > renders with avatar and leadingIcon correctly 1`] = `
 "<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary) ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><span class="iconify i-lucide:arrow-left shrink-0 text-(--ui-text-dimmed) size-5" aria-hidden="true"></span></span>
   <!--v-if-->

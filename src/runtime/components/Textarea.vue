@@ -92,6 +92,7 @@ const ui = computed(() => textarea({
   size: size?.value,
   loading: props.loading,
   highlight: highlight.value,
+  autoresize: props.autoresize,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing
 }))
