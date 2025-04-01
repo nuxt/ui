@@ -31,9 +31,20 @@ function processNavigationItemIcon(item: ContentNavigationItem) {
 export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
   const { framework, module } = useSharedData()
 
-  const mappedNavigation = computed(() => navigation.value?.map(item => processNavigationItem(item)))
+  const processedNavigation = navigation.value?.map(item => processNavigationItem(item))
 
-  const filteredNavigation = computed(() => mappedNavigation.value?.map((item) => {
+  const mappedNavigation = computed(() => processedNavigation?.map(item => ({
+    ...item,
+    children: item.children?.filter((child: any) => {
+      if (child.path === '/getting-started/contribution') {
+        return false
+      }
+      return true
+    })
+      .map((child: any) => ({ ...child, icon: undefined }))
+  })))
+
+  const filteredNavigation = computed(() => processedNavigation?.map((item) => {
     return {
       ...item,
       children: item.children?.filter((child: any) => {
@@ -53,11 +64,7 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
   }))
 
   return {
-    mappedNavigation: computed(() => mappedNavigation.value?.map(item => ({
-      ...item,
-      children: item.children?.map((child: any) => ({ ...child, icon: undefined }))
-        .filter((child: any) => child.path !== '/getting-started/contribution')
-    }))),
+    mappedNavigation,
     filteredNavigation
   }
 }
