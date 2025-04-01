@@ -344,6 +344,7 @@ function onRemoveTag(event: any) {
     const modelValue = props.modelValue as GetModelValue<T, VK, true>
     const filteredValue = modelValue.filter(value => !isEqual(value, event))
     emits('update:modelValue', filteredValue as GetModelValue<T, VK, M>)
+    onUpdate(filteredValue)
   }
 }
 
@@ -476,7 +477,7 @@ defineExpose({
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="isInputItem(item) && item.disabled"
                 :value="props.valueKey && isInputItem(item) ? get(item, String(props.valueKey)) : item"
-                @select="isInputItem(item) && item.onSelect"
+                @select="isInputItem(item) && item.onSelect?.($event)"
               >
                 <slot name="item" :item="(item as NestedItem<T>)" :index="index">
                   <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">

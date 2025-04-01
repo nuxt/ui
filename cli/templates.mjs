@@ -33,7 +33,7 @@ const component = ({ name, primitive, pro, prose, content }) => {
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
-import { tv } from '${pro ? '#ui/utils/tv' : '../utils/tv'}'
+import { tv } from '../utils/tv'
 
 const appConfig${camelName} = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
 
@@ -76,7 +76,7 @@ import type { ${upperName}RootProps, ${upperName}RootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
-import { tv } from '${pro ? '#ui/utils/tv' : '../utils/tv'}'
+import { tv } from '../utils/tv'
 
 const appConfig${camelName} = _appConfig as AppConfig & { ${key}: { ${prose ? 'prose: { ' : ''}${camelName}: Partial<typeof theme> } }${prose ? ' }' : ''}
 
