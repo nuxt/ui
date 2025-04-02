@@ -1,0 +1,19 @@
+title: Showcase
+description: Check out some of the amazing projects built with Nuxt UI.
+navigation: false
+hero:
+  title: Showcase
+  description: Discover our selection of projects built with Nuxt UI.
+items:
+  - name: Shelve
+    url: https://shelve.cloud
+  - name: Uneed
+    url: https://uneed.best
+  - name: Details
+    url: https://details.team
+  - name: Espace Asso by Benevolt
+    url: https://asso.benevolt.fr
+  - name: Directus Docs
+    url: https://docs.directus.io
+  - name: Super SaaS
+    url: https://supersaas.dev/

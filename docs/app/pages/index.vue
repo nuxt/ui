@@ -74,7 +74,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </div>
       </template>
 
-      <LazySkyBg />
+      <LazySkyBg is-index />
 
       <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
         <UPageMarquee

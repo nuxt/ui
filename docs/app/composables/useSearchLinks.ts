@@ -32,6 +32,11 @@ export function useSearchLinks() {
     icon: 'i-simple-icons-figma',
     to: '/figma'
   }, {
+    icon: 'i-lucide-presentation',
+    label: 'Community > Showcase',
+    description: 'Check out some of the amazing projects built with Nuxt UI.',
+    to: '/showcase'
+  }, {
     label: 'Community > Contribution',
     description: 'A comprehensive guide on contributing to Nuxt UI, including project structure, development workflow, and best practices.',
     icon: 'i-lucide-git-pull-request-arrow',
