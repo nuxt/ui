@@ -89,6 +89,11 @@ export function useLinks() {
       icon: 'i-lucide-map',
       to: '/roadmap'
     }, {
+      label: 'Contribution',
+      description: 'Learn how to contribute to Nuxt UI.',
+      icon: 'i-lucide-git-pull-request-arrow',
+      to: '/getting-started/contribution'
+    }, {
       label: 'Devtools Integration',
       description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.',
       icon: 'i-lucide-code',
@@ -106,11 +111,16 @@ export function useLinks() {
       icon: 'i-simple-icons-figma',
       to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui',
       target: '_blank'
+    }, {
+      label: 'Team',
+      description: 'Meet the team behind Nuxt UI.',
+      icon: 'i-lucide-users',
+      to: '/team'
     }]
   }, {
     label: 'Releases',
     icon: 'i-lucide-rocket',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
-  }].filter(Boolean))
+  }])
 }
