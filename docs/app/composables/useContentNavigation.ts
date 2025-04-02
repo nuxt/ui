@@ -33,16 +33,18 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
 
   const processedNavigation = navigation.value?.map(item => processNavigationItem(item))
 
-  const mappedNavigation = computed(() => processedNavigation?.map(item => ({
-    ...item,
-    children: item.children?.filter((child: any) => {
-      if (child.path === '/getting-started/contribution') {
-        return false
-      }
-      return true
-    })
-      .map((child: any) => ({ ...child, icon: undefined }))
-  })))
+  const mappedNavigation = computed(() => processedNavigation?.map((item) => {
+    return {
+      ...item,
+      children: item.children?.filter((child: any) => {
+        if (child.path === '/getting-started/contribution') {
+          return false
+        }
+        return true
+      })
+        .map((child: any) => ({ ...child, icon: undefined }))
+    }
+  }))
 
   const filteredNavigation = computed(() => processedNavigation?.map((item) => {
     return {
