@@ -302,8 +302,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :src="`/pro/blocks/image${i}.png`"
             width="460"
             height="258"
-            :alt="`Nuxt UI Pro Screenshot ${i}`"
             loading="lazy"
+            :alt="`Nuxt UI Pro Screenshot ${i}`"
             class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
           >
         </UPageMarquee>

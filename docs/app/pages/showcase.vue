@@ -51,8 +51,9 @@ useSeoMeta({
             <NuxtImg
               :src="`/assets/showcase/${item.name.toLowerCase().replace(/\s/g, '-')}.png`"
               :alt="`Screenshot of ${item.name}`"
-              loading="lazy"
-              class="rounded-[calc(var(--ui-radius)*1.5)]"
+              width="311"
+              height="194"
+              class="rounded-[calc(var(--ui-radius)*1.5)] group-hover:scale-103 duration-200 transition-transform pointer-events-none"
             />
 
             <div class="flex items-center gap-1 px-1">
