@@ -1,5 +1,6 @@
 title: Showcase
 description: Check out some of the amazing projects built with Nuxt UI.
+navigation: false
 hero:
   title: Showcase
   description: Discover our selection of projects built with Nuxt UI.

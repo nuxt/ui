@@ -86,18 +86,8 @@ export function useLinks() {
     children: [{
       icon: 'i-lucide-presentation',
       label: 'Showcase',
-      description: 'Check out some of the amazing projects built with Nuxt UI.',
+      description: 'Check out some amazing projects built with Nuxt UI.',
       to: '/showcase'
-    }, {
-      label: 'Roadmap',
-      description: 'Track our development progress in real-time.',
-      icon: 'i-lucide-map',
-      to: '/roadmap'
-    }, {
-      label: 'Contribution',
-      description: 'Learn how to contribute to Nuxt UI.',
-      icon: 'i-lucide-git-pull-request-arrow',
-      to: '/getting-started/contribution'
     }, {
       label: 'Devtools Integration',
       description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.',
@@ -116,11 +106,6 @@ export function useLinks() {
       icon: 'i-simple-icons-figma',
       to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui',
       target: '_blank'
-    }, {
-      label: 'Team',
-      description: 'Meet the team behind Nuxt UI.',
-      icon: 'i-lucide-users',
-      to: '/team'
     }]
   }, {
     label: 'Releases',
