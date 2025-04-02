@@ -306,6 +306,17 @@ name: 'drawer-dismissible-example'
 In this example, the `header` slot is used to add a close button which is not done by default.
 ::
 
+### Responsive drawer
+
+You can render a [Modal](/components/modal) component on desktop and a Drawer on mobile for example.
+
+::component-example
+---
+prettier: true
+name: 'drawer-responsive-example'
+---
+::
+
 ### With footer slot
 
 Use the `#footer` slot to add content after the Drawer's body.

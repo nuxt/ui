@@ -23,18 +23,7 @@ const { data: components } = await useAsyncData('ui-components', () => {
     .all()
 })
 
-const { data: module } = await useFetch<{
-  stats: {
-    downloads: number
-    stars: number
-  }
-  contributors: {
-    username: string
-  }[]
-}>('https://api.nuxt.com/modules/ui', {
-  key: 'stats',
-  transform: ({ stats, contributors }) => ({ stats, contributors })
-})
+const { data: module } = await useFetch('/api/module.json')
 
 const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 
