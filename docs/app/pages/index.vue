@@ -165,12 +165,12 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
               <circle cx="6.53711" cy="37.4551" r="1.5" fill="var(--ui-border-accented)" />
               <circle cx="38.5957" cy="37.4551" r="1.5" fill="var(--ui-border-accented)" />
             </svg>
-            <UIcon :name="feature.icon" class="size-5 flex-shrink-0" />
+            <UIcon :name="feature.icon" class="size-5 shrink-0" />
           </div>
           <div class="flex flex-col">
             <h2 class="font-medium text-(--ui-text-highlighted) inline-flex items-center gap-x-1">
               {{ feature.title }}
-              <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
+              <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
             </h2>
             <p class="text-sm text-(--ui-text-muted)">
               {{ feature.description }}

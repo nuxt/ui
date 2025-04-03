@@ -37,12 +37,12 @@ useSeoMeta({
 
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
-      <div class="border border-(--ui-border) bg-(--ui-bg)">
-        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center">
+      <div class="border-l border-t border-(--ui-border)">
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center divide-y divide-x divide-(--ui-border)">
           <li
             v-for="item in page.items"
             :key="item.name"
-            class="relative flex flex-col gap-y-4 justify-start group h-full p-4 hover:bg-(--ui-bg-elevated)/50 border-(--ui-border) border-b max-sm:last:border-b-0 border-r max-sm:border-r-0 sm:even:border-r-0 lg:even:border-r lg:border-r lg:[&:nth-child(4n)]:border-r-0 lg:[&:nth-child(5n)]:border-b-0 lg:[&:nth-child(6n)]:border-b-0"
+            class="group relative flex items-center justify-center flex-1 size-full p-2 last:border-r last:border-b border-(--ui-border) overflow-hidden"
           >
             <NuxtLink class="inset-0 absolute" :to="item.url" target="_blank">
               <span class="sr-only">Go to {{ item.name }}</span>
@@ -51,19 +51,33 @@ useSeoMeta({
             <NuxtImg
               :src="`/assets/showcase/${item.name.toLowerCase().replace(/\s/g, '-')}.png`"
               :alt="`Screenshot of ${item.name}`"
-              width="311"
-              height="194"
-              class="rounded-[calc(var(--ui-radius)*1.5)] group-hover:scale-103 duration-200 transition-transform pointer-events-none"
+              width="327"
+              height="184"
+              :modifiers="{
+                position: 'top'
+              }"
+              class="aspect-[16/9] size-full opacity-75 group-hover:opacity-100 group-hover:scale-110 duration-200 transition-[scale,opacity] pointer-events-none"
             />
 
-            <div class="flex items-center gap-1 px-1">
-              <span class="font-medium text-(--ui-text-highlighted)">
+            <div class="absolute flex items-center px-2.5 py-0.75 gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-black/90 rounded-full">
+              <span class="text-sm text-(--ui-text-highlighted) font-medium">
                 {{ item.name }}
               </span>
-              <UIcon name="i-lucide-arrow-right" class="size-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0 text-(--ui-text-muted)" />
+              <UIcon name="i-lucide-arrow-up-right" class="size-4 shrink-0" />
             </div>
           </li>
         </ul>
+      </div>
+
+      <div class="flex justify-center -mb-[36px]">
+        <UButton
+          label="Submit your project"
+          trailing-icon="i-lucide-plus"
+          color="neutral"
+          size="lg"
+          to="https://github.com/nuxt/ui/edit/v3/docs/content/showcase.yml"
+          target="_blank"
+        />
       </div>
     </UPageHero>
   </UMain>
