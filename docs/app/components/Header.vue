@@ -22,8 +22,20 @@ onMounted(() => {
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
+const githubLink = computed(() => {
+  return `https://github.com/nuxt/${value.value}`
+})
+
 const desktopLinks = computed(() => props.links.map(({ icon, ...link }) => link))
-const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOpen: link.children && route.path.startsWith(link.to as string) })))
+const mobileLinks = computed(() => [
+  ...props.links.map(link => ({ ...link, defaultOpen: link.children && route.path.startsWith(link.to as string) })),
+  {
+    label: 'Open on GitHub',
+    to: githubLink.value,
+    icon: 'i-simple-icons-github',
+    target: '_blank'
+  }
+])
 </script>
 
 <template>
@@ -73,7 +85,7 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
           :key="value"
           color="neutral"
           variant="ghost"
-          :to="`https://github.com/nuxt/${value}`"
+          :to="githubLink"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
