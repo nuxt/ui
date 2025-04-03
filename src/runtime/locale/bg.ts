@@ -33,7 +33,7 @@ export default defineLocale<Messages>({
       search: 'Потърсете...'
     },
     toast: {
-      close: 'Затворете',
+      close: 'Затворете'
     },
     carousel: {
       prev: 'Назад',
@@ -51,6 +51,6 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Няма данни'
-    },
-  },
+    }
+  }
 })
