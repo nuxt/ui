@@ -1,7 +1,7 @@
 export { default as ar } from './ar'
 export { default as az } from './az'
-export { default as bn } from './bn'
 export { default as bg } from "./bg"
+export { default as bn } from './bn'
 export { default as ca } from './ca'
 export { default as cs } from './cs'
 export { default as ckb } from './ckb'
