@@ -1,5 +1,5 @@
-import type { Messages } from '../types';
-import { defineLocale } from '../composables/defineLocale';
+import type { Messages } from '../types'
+import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
   name: 'Български',
@@ -8,29 +8,29 @@ export default defineLocale<Messages>({
     inputMenu: {
       noMatch: 'Няма съвпадение на данни',
       noData: 'Няма данни',
-      create: 'Създайте "{label}"',
+      create: 'Създайте "{label}"'
     },
     calendar: {
       prevYear: 'Предишна година',
       nextYear: 'Следваща година',
       prevMonth: 'Предишен месец',
-      nextMonth: 'Следващ месец',
+      nextMonth: 'Следващ месец'
     },
     inputNumber: {
       increment: 'Увеличаване',
-      decrement: 'Намаляване',
+      decrement: 'Намаляване'
     },
     commandPalette: {
       placeholder: 'Въведете команда или потърсете...',
       noMatch: 'Няма съвпадение на данни',
       noData: 'Няма данни',
-      close: 'Затворете',
+      close: 'Затворете'
     },
     selectMenu: {
       noMatch: 'Няма съвпадение на данни',
       noData: 'Няма данни',
       create: 'Създайте "{label}"',
-      search: 'Потърсете...',
+      search: 'Потърсете...'
     },
     toast: {
       close: 'Затворете',
@@ -38,19 +38,19 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Назад',
       next: 'Напред',
-      goto: 'Отидете на слайд {slide}',
+      goto: 'Отидете на слайд {slide}'
     },
     modal: {
-      close: 'Затворете',
+      close: 'Затворете'
     },
     slideover: {
-      close: 'Затворете',
+      close: 'Затворете'
     },
     alert: {
-      close: 'Затворете',
+      close: 'Затворете'
     },
     table: {
-      noData: 'Няма данни',
+      noData: 'Няма данни'
     },
   },
-});
+})
