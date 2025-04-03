@@ -5,15 +5,27 @@ hero:
   title: Showcase
   description: Discover our selection of projects built with Nuxt UI.
 items:
+  - name: Ovatu
+    url: https://ovatu.com/
   - name: Shelve
-    url: https://shelve.cloud
+    url: https://shelve.cloud/
   - name: Uneed
-    url: https://uneed.best
+    url: https://uneed.best/
   - name: Details
-    url: https://details.team
+    url: https://details.team/
   - name: Espace Asso by Benevolt
-    url: https://asso.benevolt.fr
+    url: https://asso.benevolt.fr/
   - name: Directus Docs
-    url: https://docs.directus.io
+    url: https://docs.directus.io/
   - name: Super SaaS
     url: https://supersaas.dev/
+  - name: Passionate People
+    url: https://passionatepeople.io/
+  - name: The Companies API
+    url: https://www.thecompaniesapi.com/
+  - name: Thuprai
+    url: https://thuprai.com/
+  - name: Juno.one
+    url: https://www.juno.one/
+  - name: Pallyy
+    url: https://pallyy.com/
