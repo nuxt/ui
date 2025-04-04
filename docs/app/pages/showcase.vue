@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { joinURL } from 'ufo'
-
 const { data: page } = await useAsyncData('showcase', () => queryCollection('showcase').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
-
-const { url } = useSiteConfig()
 
 useSeoMeta({
   titleTemplate: `%s - Nuxt UI`,
   title: page.value.title,
   description: page.value.description,
   ogTitle: `${page.value.title} - Nuxt UI`,
-  ogDescription: page.value.description,
-  ogImage: joinURL(url, '/og-image.png')
+  ogDescription: page.value.description
+})
+
+defineOgImageComponent('Docs', {
+  headline: 'Community'
 })
 </script>
 
