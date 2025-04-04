@@ -2,8 +2,6 @@ import { computed } from 'vue'
 import colors from 'tailwindcss/colors'
 import type { UseHeadInput } from '@unhead/vue/types'
 import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
-// FIXME: https://github.com/nuxt/module-builder/issues/141#issuecomment-2078248248
-import type {} from '#app'
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
