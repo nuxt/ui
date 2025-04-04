@@ -182,14 +182,9 @@ const rootProps = useForwardPropsEmits(computed(() => ({
 const contentProps = toRef(() => props.content)
 
 const appConfig = useAppConfig()
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<
-  { item: NavigationMenuItem, index: number, active?: boolean },
-  NavigationMenuSlots<T>
->()
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<
-  { item: NavigationMenuItem, index: number, level?: number },
-  NavigationMenuSlots<T>
->({
+
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>({
   props: {
     item: Object,
     index: Number,
