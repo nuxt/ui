@@ -11,7 +11,7 @@
     "@nuxt/image": "^1.10.0",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@63da8be",
-    "@nuxthub/core": "^0.8.22",
+    "@nuxthub/core": "^0.8.23",
     "@nuxtjs/plausible": "^1.2.0",
     "@octokit/rest": "^21.1.1",
     "@rollup/plugin-yaml": "^4.1.2",
@@ -34,6 +34,6 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "wrangler": "^4.6.0"
+    "wrangler": "^4.7.1"
   }
 }
