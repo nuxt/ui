@@ -5,27 +5,47 @@ hero:
   title: Showcase
   description: Discover our selection of projects built with Nuxt UI.
 items:
-  - name: Ovatu
-    url: https://ovatu.com/
-  - name: Shelve
-    url: https://shelve.cloud/
-  - name: Uneed
-    url: https://uneed.best/
   - name: Details
     url: https://details.team/
-  - name: Espace Asso by Benevolt
-    url: https://asso.benevolt.fr/
   - name: Directus Docs
     url: https://docs.directus.io/
-  - name: Super SaaS
-    url: https://supersaas.dev/
+  - name: Espace Asso by Benevolt
+    url: https://asso.benevolt.fr/
+  - name: Juno.one
+    url: https://www.juno.one/
+  - name: Kassebil
+    url: https://kassebil.dk/
+  - name: Mawrble
+    url: https://mawrble.com/
+  - name: Meet Sponsors
+    url: https://meetsponsors.com/
+  - name: Ovatu
+    url: https://ovatu.com/
+  - name: Pallyy
+    url: https://pallyy.com/
   - name: Passionate People
     url: https://passionatepeople.io/
+  - name: Postal
+    url: https://postalserver.io/
+  - name: Prismos
+    url: https://prismos.co/
+  - name: Readyy
+    url: https://readyy.app/
+  - name: Sagematt
+    url: https://siedlung-sagematt.ch/
+  - name: Shelve
+    url: https://shelve.cloud/
+  - name: Speaker Bot
+    url: https://speaker.bot/
+  - name: Super SaaS
+    url: https://supersaas.dev/
   - name: The Companies API
     url: https://www.thecompaniesapi.com/
   - name: Thuprai
     url: https://thuprai.com/
-  - name: Juno.one
-    url: https://www.juno.one/
-  - name: Pallyy
-    url: https://pallyy.com/
+  - name: Uneed
+    url: https://uneed.best/
+  - name: Wiredash
+    url: https://wiredash.com/
+  - name: Zielgestalt
+    url: https://zielgestalt.de/
