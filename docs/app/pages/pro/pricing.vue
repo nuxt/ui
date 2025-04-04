@@ -7,8 +7,8 @@ const { url } = useSiteConfig()
 
 useSeoMeta({
   title: page.title,
-  ogTitle: page.title,
   description: page.description,
+  ogTitle: page.title,
   ogDescription: page.description,
   ogImage: joinURL(url, '/pro/og-image.png')
 })

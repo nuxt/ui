@@ -7,7 +7,7 @@ const title = 'Vue Components'
 const description = 'Explore 99+ customizable UI components for Vue and Nuxt built with Tailwind CSS and Reka UI.'
 
 useSeoMeta({
-  titleTemplate: `%s - Nuxt UI`,
+  titleTemplate: '%s - Nuxt UI',
   title,
   description,
   ogTitle: `${title} - Nuxt UI`,

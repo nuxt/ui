@@ -2,6 +2,7 @@ import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
 import { addTemplates } from './templates'
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
+import { version } from '../package.json'
 
 export type * from './runtime/types'
 
@@ -50,12 +51,13 @@ export interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'ui',
+    name: '@nuxt/ui',
     configKey: 'ui',
+    version,
+    docs: 'https://ui.nuxt.com/getting-started/installation/nuxt',
     compatibility: {
       nuxt: '>=3.16.0'
-    },
-    docs: 'https://ui.nuxt.com/getting-started/installation/nuxt'
+    }
   },
   defaults: defaultOptions,
   async setup(options, nuxt) {
