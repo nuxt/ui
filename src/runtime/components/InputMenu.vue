@@ -36,7 +36,6 @@ interface _InputMenuItem {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
-  value?: string | number
   disabled?: boolean
   onSelect?(e?: Event): void
   [key: string]: any
@@ -344,6 +343,7 @@ function onRemoveTag(event: any) {
     const modelValue = props.modelValue as GetModelValue<T, VK, true>
     const filteredValue = modelValue.filter(value => !isEqual(value, event))
     emits('update:modelValue', filteredValue as GetModelValue<T, VK, M>)
+    onUpdate(filteredValue)
   }
 }
 

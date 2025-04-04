@@ -176,7 +176,11 @@ community:
   links:
     - label: Star on GitHub
       color: neutral
-      variant: outline
       to: https://github.com/nuxt/ui
       target: _blank
       icon: i-lucide-star
+    - label: Meet the team
+      color: neutral
+      variant: outline
+      to: /team
+      trailingIcon: i-lucide-arrow-right

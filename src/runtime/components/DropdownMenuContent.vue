@@ -44,6 +44,7 @@ import { DropdownMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { omit, get, isArrayOfArray } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
@@ -59,11 +60,13 @@ const emits = defineEmits<DropdownMenuContentEmits>()
 const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
 const appConfig = useAppConfig()
+const { dir } = useLocale()
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: DropdownMenuItem, active?: boolean, index: number }>()
 
+const childrenIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight)
 const groups = computed<DropdownMenuItem[][]>(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
@@ -92,7 +95,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
 
       <span :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
         <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof DropdownMenuContentSlots<T>)" :item="(item as Extract<NestedItem<T>, { slot: string; }>)" :active="active" :index="index">
-          <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon({ class: uiOverride?.itemTrailingIcon, color: item?.color, active })" />
+          <UIcon v-if="item.children?.length" :name="childrenIcon" :class="ui.itemTrailingIcon({ class: uiOverride?.itemTrailingIcon, color: item?.color, active })" />
           <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: uiOverride?.itemTrailingKbds })">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.uiOverride?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
@@ -131,7 +134,6 @@ const groups = computed<DropdownMenuItem[][]>(() =>
               :ui-override="uiOverride"
               :portal="portal"
               :items="(item.children as T)"
-              side="right"
               align="start"
               :align-offset="-4"
               :side-offset="3"

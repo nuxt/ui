@@ -17,7 +17,7 @@ Use the `v-model` directive to control the value of the RadioGroup or the `defau
 
 ### Items
 
-Use the `items` prop as an array of strings, numbers or booleans:
+Use the `items` prop as an array of strings or numbers:
 
 ::component-code
 ---
@@ -157,7 +157,7 @@ props:
 ---
 ::
 
-### Variant
+### Variant :badge{label="Not released" class="align-text-top"}
 
 Use the `variant` prop to change the variant of the RadioGroup.
 
@@ -236,7 +236,7 @@ props:
 ---
 ::
 
-### Indicator
+### Indicator :badge{label="Not released" class="align-text-top"}
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 

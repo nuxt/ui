@@ -186,6 +186,12 @@ describe('InputMenu', () => {
         valueKey: 'value'
       })).toEqualTypeOf<[number[]]>()
 
+      // with object item and object valueKey
+      expectEmitPayloadType('update:modelValue', () => InputMenu({
+        items: [{ label: 'foo', value: { id: 1, name: 'bar' } }],
+        valueKey: 'value'
+      })).toEqualTypeOf<[{ id: number, name: string }]>()
+
       // with string item
       expectEmitPayloadType('update:modelValue', () => InputMenu({
         items: ['foo']

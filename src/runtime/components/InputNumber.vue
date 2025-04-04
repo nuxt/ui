@@ -115,18 +115,6 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 
 const inputRef = ref<InstanceType<typeof NumberFieldInput> | null>(null)
 
-function autoFocus() {
-  if (props.autofocus) {
-    inputRef.value?.$el?.focus()
-  }
-}
-
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
-
 function onUpdate(value: number) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -140,6 +128,18 @@ function onBlur(event: FocusEvent) {
   emitFormBlur()
   emits('blur', event)
 }
+
+function autoFocus() {
+  if (props.autofocus) {
+    inputRef.value?.$el?.focus()
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 
 defineExpose({
   inputRef

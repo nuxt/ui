@@ -112,7 +112,7 @@ const communityLinks = computed(() => [{
   to: 'https://nuxt.lemonsqueezy.com/affiliates',
   target: '_blank'
 }, {
-  icon: 'i-lucide-life-buoy',
+  icon: 'i-lucide-git-pull-request-arrow',
   label: 'Contribution',
   to: '/getting-started/contribution'
 }, {
