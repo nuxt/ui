@@ -167,6 +167,7 @@
     "debug": "4.3.7",
     "rollup": "4.34.9",
     "unplugin": "^2.2.2",
+    "vue-sfc-transformer": "^0.1.4",
     "vue-tsc": "2.2.0"
   },
   "pnpm": {
