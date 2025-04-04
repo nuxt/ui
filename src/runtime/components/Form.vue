@@ -210,9 +210,10 @@ const loading = ref(false)
 provide(formLoadingInjectionKey, readonly(loading))
 
 async function onSubmitWrapper(payload: Event) {
-  loading.value = true
-
   const event = payload as FormSubmitEvent<any>
+  const activeElement = document.activeElement as HTMLElement
+
+  loading.value = true
 
   try {
     event.data = await _validate({ nested: true, transform: props.transform })
@@ -231,6 +232,7 @@ async function onSubmitWrapper(payload: Event) {
     emits('error', errorEvent)
   } finally {
     loading.value = false
+    setTimeout(() => activeElement?.focus(), 0)
   }
 }
 
