@@ -39,6 +39,37 @@
       "import": "./dist/runtime/locale/index.js"
     }
   },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/module.d.mts"
+      ],
+      "unplugin": [
+        "./dist/unplugin.d.mts"
+      ],
+      "vite": [
+        "./dist/vite.d.mts"
+      ],
+      "vue-plugin": [
+        "./vue-plugin.d.ts"
+      ],
+      "runtime/*": [
+        "./dist/runtime/*"
+      ],
+      "components/*": [
+        "./dist/runtime/components/*"
+      ],
+      "composables/*": [
+        "./dist/runtime/composables/*"
+      ],
+      "utils/*": [
+        "./dist/runtime/utils/*.d.ts"
+      ],
+      "locale": [
+        "./dist/runtime/locale/index.d.ts"
+      ]
+    }
+  },
   "imports": {
     "#build/ui/*": "./.nuxt/ui/*.ts",
     "#build/ui.css": "./.nuxt/ui.css"
