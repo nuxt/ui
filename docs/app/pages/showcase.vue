@@ -60,10 +60,10 @@ useSeoMeta({
             />
 
             <div class="absolute flex items-center px-2.5 py-0.75 gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-black/90 rounded-full">
-              <span class="text-sm text-(--ui-text-highlighted) font-medium">
+              <span class="text-sm text-white font-medium">
                 {{ item.name }}
               </span>
-              <UIcon name="i-lucide-arrow-up-right" class="size-4 shrink-0" />
+              <UIcon name="i-lucide-arrow-up-right" class="size-4 shrink-0 text-white" />
             </div>
           </li>
         </ul>
