@@ -39,6 +39,12 @@ export interface FormProps<T extends object> {
    * @defaultValue `true`
    */
   transform?: boolean
+  /**
+   * When `true`, all form elements will be disabled on `@submit` event.
+   * This will cause any focused input elements to lose their focus state.
+   * @defaultValue `true`
+   */
+  loadingAuto?: boolean
   class?: any
   onSubmit?: ((event: FormSubmitEvent<T>) => void | Promise<void>) | (() => void | Promise<void>)
 }
@@ -65,7 +71,8 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300,
-  transform: true
+  transform: true,
+  loadingAuto: true
 })
 
 const emits = defineEmits<FormEmits<T>>()
@@ -210,10 +217,9 @@ const loading = ref(false)
 provide(formLoadingInjectionKey, readonly(loading))
 
 async function onSubmitWrapper(payload: Event) {
-  const event = payload as FormSubmitEvent<any>
-  const activeElement = document.activeElement as HTMLElement
-
   loading.value = true
+
+  const event = payload as FormSubmitEvent<any>
 
   try {
     event.data = await _validate({ nested: true, transform: props.transform })
@@ -232,11 +238,11 @@ async function onSubmitWrapper(payload: Event) {
     emits('error', errorEvent)
   } finally {
     loading.value = false
-    setTimeout(() => activeElement?.focus(), 0)
   }
 }
 
-const disabled = computed(() => props.disabled || loading.value)
+const isLoading = computed(() => loading.value && props.loadingAuto)
+const disabled = computed(() => props.disabled || isLoading.value)
 
 provide(formOptionsInjectionKey, computed(() => ({
   disabled: disabled.value,
