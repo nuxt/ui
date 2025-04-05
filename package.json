@@ -3,18 +3,27 @@
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "2.21.1",
   "packageManager": "pnpm@10.7.1",
-  "repository": "nuxt/ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nuxt/ui.git"
+  },
   "homepage": "https://ui2.nuxt.com",
   "type": "module",
   "license": "MIT",
   "exports": {
     ".": {
-      "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
+      "types": "./dist/module.d.mts",
+      "import": "./dist/module.mjs"
     }
   },
-  "main": "./dist/module.cjs",
-  "types": "./dist/types.d.ts",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/module.d.mts"
+      ]
+    }
+  },
+  "main": "./dist/module.mjs",
   "files": [
     "dist"
   ],
