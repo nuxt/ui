@@ -44,6 +44,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[][]
 props:
   items:
     - - label: Appearance
@@ -124,6 +126,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[]
 props:
   size: xl
   items:
@@ -158,6 +162,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[]
 props:
   disabled: true
   items:
