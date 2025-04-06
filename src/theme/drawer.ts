@@ -4,7 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     overlay: 'fixed inset-0 bg-(--ui-bg-elevated)/75',
     content: 'fixed bg-(--ui-bg) ring ring-(--ui-border) flex focus:outline-none',
-    handle: ['!bg-(--ui-bg-accented)', options.theme.transitions && 'transition-opacity'],
+    handle: ['shrink-0 !bg-(--ui-bg-accented)', options.theme.transitions && 'transition-opacity'],
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: '',
     title: 'text-(--ui-text-highlighted) font-semibold',

@@ -2,8 +2,8 @@
 const route = useRoute()
 
 const links = [{
-  label: 'Figma',
-  to: '/figma'
+  label: 'Team',
+  to: '/team'
 }, {
   label: 'Roadmap',
   to: '/roadmap'

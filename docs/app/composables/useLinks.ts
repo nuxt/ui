@@ -84,10 +84,10 @@ export function useLinks() {
     label: 'Community',
     icon: 'i-lucide-users',
     children: [{
-      label: 'Roadmap',
-      description: 'Track our development progress in real-time.',
-      icon: 'i-lucide-map',
-      to: '/roadmap'
+      icon: 'i-lucide-presentation',
+      label: 'Showcase',
+      description: 'Check out some amazing projects built with Nuxt UI.',
+      to: '/showcase'
     }, {
       label: 'Devtools Integration',
       description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.',
@@ -112,5 +112,5 @@ export function useLinks() {
     icon: 'i-lucide-rocket',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
-  }].filter(Boolean))
+  }])
 }

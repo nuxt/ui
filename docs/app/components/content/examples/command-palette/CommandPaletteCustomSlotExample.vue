@@ -11,7 +11,7 @@ const groups = [{
       label: 'Billing',
       icon: 'i-lucide-credit-card',
       kbds: ['meta', 'B'],
-      slot: 'billing'
+      slot: 'billing' as const
     },
     {
       label: 'Notifications',
@@ -25,7 +25,7 @@ const groups = [{
 }, {
   id: 'users',
   label: 'Users',
-  slot: 'users',
+  slot: 'users' as const,
   items: [
     {
       label: 'Benjamin Canac',

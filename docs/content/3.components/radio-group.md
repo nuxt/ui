@@ -17,7 +17,7 @@ Use the `v-model` directive to control the value of the RadioGroup or the `defau
 
 ### Items
 
-Use the `items` prop as an array of strings, numbers or booleans:
+Use the `items` prop as an array of strings or numbers:
 
 ::component-code
 ---
@@ -28,6 +28,9 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - RadioGroupItem[]
+  - RadioGroupValue
 props:
   modelValue: 'System'
   items:
@@ -52,6 +55,9 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - RadioGroupItem[]
+  - RadioGroupValue
 props:
   modelValue: 'system'
   items:
@@ -84,6 +90,9 @@ ignore:
 external:
   - items
   - modelValue
+externalTypes:
+  - RadioGroupItem[]
+  - RadioGroupValue
 props:
   modelValue: 'light'
   valueKey: 'id'
@@ -112,30 +121,10 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   legend: 'Theme'
-  defaultValue: 'System'
-  items:
-    - 'System'
-    - 'Light'
-    - 'Dark'
----
-::
-
-### Orientation
-
-Use the `orientation` prop to change the orientation of the RadioGroup. Defaults to `vertical`.
-
-::component-code
----
-prettier: true
-ignore:
-  - defaultValue
-  - items
-external:
-  - items
-props:
-  orientation: 'horizontal'
   defaultValue: 'System'
   items:
     - 'System'
@@ -156,6 +145,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   color: neutral
   defaultValue: 'System'
@@ -163,6 +154,35 @@ props:
     - 'System'
     - 'Light'
     - 'Dark'
+---
+::
+
+### Variant :badge{label="Not released" class="align-text-top"}
+
+Use the `variant` prop to change the variant of the RadioGroup.
+
+::component-code
+---
+prettier: true
+ignore:
+  - defaultValue
+  - items
+external:
+  - items
+props:
+  color: 'primary'
+  variant: 'table'
+  defaultValue: 'pro'
+  items:
+    - label: 'Pro'
+      value: 'pro'
+      description: 'Tailored for indie hackers, freelancers and solo founders.'
+    - label: 'Startup'
+      value: 'startup'
+      description: 'Best suited for small teams, startups and agencies.'
+    - label: 'Enterprise'
+      value: 'enterprise'
+      description: 'Ideal for larger teams and organizations.'
 ---
 ::
 
@@ -178,8 +198,61 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   size: 'xl'
+  variant: 'list'
+  defaultValue: 'System'
+  items:
+    - 'System'
+    - 'Light'
+    - 'Dark'
+---
+::
+
+### Orientation
+
+Use the `orientation` prop to change the orientation of the RadioGroup. Defaults to `vertical`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - defaultValue
+  - items
+external:
+  - items
+externalTypes:
+  - RadioGroupItem[]
+props:
+  orientation: 'horizontal'
+  variant: 'list'
+  defaultValue: 'System'
+  items:
+    - 'System'
+    - 'Light'
+    - 'Dark'
+---
+::
+
+### Indicator :badge{label="Not released" class="align-text-top"}
+
+Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - defaultValue
+  - items
+external:
+  - items
+externalTypes:
+  - RadioGroupItem[]
+props:
+  indicator: 'end'
+  variant: 'card'
   defaultValue: 'System'
   items:
     - 'System'
@@ -200,6 +273,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   disabled: true
   defaultValue: 'System'

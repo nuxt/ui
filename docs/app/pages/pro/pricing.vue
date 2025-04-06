@@ -7,8 +7,8 @@ const { url } = useSiteConfig()
 
 useSeoMeta({
   title: page.title,
-  ogTitle: page.title,
   description: page.description,
+  ogTitle: page.title,
   ogDescription: page.description,
   ogImage: joinURL(url, '/pro/og-image.png')
 })
@@ -81,6 +81,7 @@ useSeoMeta({
           :key="index"
           v-bind="logo"
           class="h-6 shrink-0 max-w-[140px] filter invert dark:invert-0"
+          loading="lazy"
         >
       </UPageMarquee>
       <UContainer>

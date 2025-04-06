@@ -12,6 +12,7 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
 })
 
 const links = useLinks()
+const searchLinks = useSearchLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
@@ -64,6 +65,7 @@ provide('navigation', mappedNavigation)
 
       <ClientOnly>
         <LazyUContentSearch
+          :links="searchLinks"
           :files="files"
           :groups="[{
             id: 'framework',

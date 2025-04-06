@@ -41,10 +41,6 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @defaultValue true
    */
   portal?: boolean
-  /**
-   * Index of a `snapPoint` from which the overlay fade should be applied. Defaults to the last snap point.
-   */
-  fadeFromIndex?: any
   class?: any
   ui?: Partial<typeof drawer.slots>
 }
@@ -79,7 +75,7 @@ const props = withDefaults(defineProps<DrawerProps>(), {
 const emits = defineEmits<DrawerEmits>()
 const slots = defineSlots<DrawerSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints', 'fadeFromIndex'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
 const contentProps = toRef(() => props.content)
 const contentEvents = {
   closeAutoFocus: (e: Event) => e.preventDefault()

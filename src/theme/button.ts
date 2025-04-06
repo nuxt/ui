@@ -3,7 +3,7 @@ import { buttonGroupVariant } from './button-group'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    base: ['rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center focus:outline-hidden disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    base: ['rounded-[calc(var(--ui-radius)*1.5)] font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -90,23 +90,23 @@ export default (options: Required<ModuleOptions>) => ({
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
-    class: `ring ring-inset ring-(--ui-${color})/50 text-(--ui-${color}) hover:bg-(--ui-${color})/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus-visible:ring-2 focus-visible:ring-(--ui-${color})`
+    class: `ring ring-inset ring-(--ui-${color})/50 text-(--ui-${color}) hover:bg-(--ui-${color})/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-(--ui-${color})`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
-    class: `text-(--ui-${color}) bg-(--ui-${color})/10 hover:bg-(--ui-${color})/15 focus-visible:bg-(--ui-${color})/15 disabled:bg-(--ui-${color})/10 aria-disabled:bg-(--ui-${color})/10`
+    class: `text-(--ui-${color}) bg-(--ui-${color})/10 hover:bg-(--ui-${color})/15 focus:outline-none focus-visible:bg-(--ui-${color})/15 disabled:bg-(--ui-${color})/10 aria-disabled:bg-(--ui-${color})/10`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
-    class: `text-(--ui-${color}) ring ring-inset ring-(--ui-${color})/25 bg-(--ui-${color})/10 hover:bg-(--ui-${color})/15 disabled:bg-(--ui-${color})/10 aria-disabled:bg-(--ui-${color})/10 focus-visible:ring-2 focus-visible:ring-(--ui-${color})`
+    class: `text-(--ui-${color}) ring ring-inset ring-(--ui-${color})/25 bg-(--ui-${color})/10 hover:bg-(--ui-${color})/15 disabled:bg-(--ui-${color})/10 aria-disabled:bg-(--ui-${color})/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--ui-${color})`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'ghost',
-    class: `text-(--ui-${color}) hover:bg-(--ui-${color})/10 focus-visible:bg-(--ui-${color})/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`
+    class: `text-(--ui-${color}) hover:bg-(--ui-${color})/10 focus:outline-none focus-visible:bg-(--ui-${color})/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
-    class: `text-(--ui-${color}) hover:text-(--ui-${color})/75 disabled:text-(--ui-${color}) aria-disabled:text-(--ui-${color}) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-${color})`
+    class: `text-(--ui-${color}) hover:text-(--ui-${color})/75 disabled:text-(--ui-${color}) aria-disabled:text-(--ui-${color}) focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-${color})`
   })), {
     color: 'neutral',
     variant: 'solid',
@@ -114,23 +114,23 @@ export default (options: Required<ModuleOptions>) => ({
   }, {
     color: 'neutral',
     variant: 'outline',
-    class: 'ring ring-inset ring-(--ui-border-accented) text-(--ui-text) bg-(--ui-bg) hover:bg-(--ui-bg-elevated) disabled:bg-(--ui-bg) aria-disabled:bg-(--ui-bg) focus-visible:ring-2 focus-visible:ring-(--ui-border-inverted)'
+    class: 'ring ring-inset ring-(--ui-border-accented) text-(--ui-text) bg-(--ui-bg) hover:bg-(--ui-bg-elevated) disabled:bg-(--ui-bg) aria-disabled:bg-(--ui-bg) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--ui-border-inverted)'
   }, {
     color: 'neutral',
     variant: 'soft',
-    class: 'text-(--ui-text) bg-(--ui-bg-elevated) hover:bg-(--ui-bg-accented)/75 focus-visible:bg-(--ui-bg-accented)/75 disabled:bg-(--ui-bg-elevated) aria-disabled:bg-(--ui-bg-elevated)'
+    class: 'text-(--ui-text) bg-(--ui-bg-elevated) hover:bg-(--ui-bg-accented)/75 focus:outline-none focus-visible:bg-(--ui-bg-accented)/75 disabled:bg-(--ui-bg-elevated) aria-disabled:bg-(--ui-bg-elevated)'
   }, {
     color: 'neutral',
     variant: 'subtle',
-    class: 'ring ring-inset ring-(--ui-border-accented) text-(--ui-text) bg-(--ui-bg-elevated) hover:bg-(--ui-bg-accented)/75 disabled:bg-(--ui-bg-elevated) aria-disabled:bg-(--ui-bg-elevated) focus-visible:ring-2 focus-visible:ring-(--ui-border-inverted)'
+    class: 'ring ring-inset ring-(--ui-border-accented) text-(--ui-text) bg-(--ui-bg-elevated) hover:bg-(--ui-bg-accented)/75 disabled:bg-(--ui-bg-elevated) aria-disabled:bg-(--ui-bg-elevated) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--ui-border-inverted)'
   }, {
     color: 'neutral',
     variant: 'ghost',
-    class: 'text-(--ui-text) hover:bg-(--ui-bg-elevated) focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent'
+    class: 'text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent'
   }, {
     color: 'neutral',
     variant: 'link',
-    class: 'text-(--ui-text-muted) hover:text-(--ui-text) disabled:text-(--ui-text-muted) aria-disabled:text-(--ui-text-muted) focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-(--ui-border-inverted)'
+    class: 'text-(--ui-text-muted) hover:text-(--ui-text) disabled:text-(--ui-text-muted) aria-disabled:text-(--ui-text-muted) focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-(--ui-border-inverted)'
   }, {
     size: 'xs',
     square: true,
