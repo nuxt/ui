@@ -5,6 +5,8 @@ hero:
   title: Showcase
   description: Discover our selection of projects built with Nuxt UI.
 items:
+  - name: jobsy.it
+    url: https://jobsy.it/
   - name: Details
     url: https://details.team/
   - name: Directus Docs
