@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex flex-col min-h-0 min-w-0 divide-y divide-(--ui-border)',
-    input: '[&>input]:h-12',
+    input: '[&>input]:h-12 [&>input]:text-base/5',
     close: '',
     content: 'relative overflow-hidden flex flex-col',
     viewport: 'relative divide-y divide-(--ui-border) scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
