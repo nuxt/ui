@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "2.21.1",
-  "packageManager": "pnpm@10.7.1",
+  "packageManager": "pnpm@10.8.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -54,9 +54,9 @@
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
-    "@vueuse/core": "^13.0.0",
-    "@vueuse/integrations": "^13.0.0",
-    "@vueuse/math": "^13.0.0",
+    "@vueuse/core": "^13.1.0",
+    "@vueuse/integrations": "^13.1.0",
+    "@vueuse/math": "^13.1.0",
     "defu": "^6.1.4",
     "fuse.js": "^7.1.0",
     "ohash": "^2.0.11",
