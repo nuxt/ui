@@ -258,7 +258,6 @@ const groups = computed(() => {
         :placeholder="placeholder || t('commandPalette.placeholder')"
         variant="none"
         :autofocus="autofocus"
-        size="lg"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
