@@ -7,7 +7,6 @@ export default defineBuildConfig({
     './src/vite'
   ],
   rollup: {
-    emitCJS: true,
     replace: {
       delimiters: ['', ''],
       values: {
