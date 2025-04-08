@@ -44,7 +44,7 @@ export type InputMenuItem = _InputMenuItem | AcceptableValue | boolean
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
-export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover'>, UseComponentIconsProps {
+export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -175,7 +175,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, ref, toRef, onMounted, toRaw, nextTick } from 'vue'
+import { computed, ref, toRef, onMounted, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
@@ -196,7 +196,9 @@ const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  labelKey: 'label' as never
+  labelKey: 'label' as never,
+  resetSearchTermOnBlur: true,
+  resetSearchTermOnSelect: true
 })
 const emits = defineEmits<InputMenuEmits<T, VK, M>>()
 const slots = defineSlots<InputMenuSlots<T, VK, M>>()
@@ -207,7 +209,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig()
 const { contains } = useFilter({ sensitivity: 'base' })
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover', 'ignoreFilter'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 
@@ -311,6 +313,10 @@ function onUpdate(value: any) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
+
+  if (props.resetSearchTermOnSelect) {
+    searchTerm.value = ''
+  }
 }
 
 function onBlur(event: FocusEvent) {
@@ -324,18 +330,29 @@ function onFocus(event: FocusEvent) {
 }
 
 function onUpdateOpen(value: boolean) {
+  let timeoutId
+
   if (!value) {
     const event = new FocusEvent('blur')
+
     emits('blur', event)
     emitFormBlur()
+
+    // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
+    // https://reka-ui.com/docs/components/combobox#api-reference
+    if (props.resetSearchTermOnBlur) {
+      const STATE_ANIMATION_DELAY_MS = 100
+
+      timeoutId = setTimeout(() => {
+        searchTerm.value = ''
+      }, STATE_ANIMATION_DELAY_MS)
+    }
   } else {
     const event = new FocusEvent('focus')
     emits('focus', event)
+    emitFormFocus()
+    clearTimeout(timeoutId)
   }
-
-  nextTick(() => {
-    searchTerm.value = ''
-  })
 }
 
 function onRemoveTag(event: any) {
@@ -414,7 +431,7 @@ defineExpose({
           </TagsInputItemDelete>
         </TagsInputItem>
 
-        <ComboboxInput as-child @update:model-value="searchTerm = $event">
+        <ComboboxInput v-model="searchTerm" as-child>
           <TagsInputInput
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
