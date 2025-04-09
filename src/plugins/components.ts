@@ -30,9 +30,7 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     ],
     resolvers: [
       (componentName) => {
-        console.log(componentName)
         if (options.inertia && inertiaOverrideNames.has(componentName)) {
-          console.log('inertia override')
           return { name: 'default', from: join(runtimeDir, 'inertia/components', `${componentName.slice(options.prefix.length)}.vue`) }
         }
         if (overrideNames.has(componentName))

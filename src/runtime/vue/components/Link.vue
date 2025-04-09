@@ -95,8 +95,7 @@ import { isEqual, diff } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
-import { useRoute } from '#imports'
-import { RouterLink } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
 
 defineOptions({ inheritAttrs: false })
 
