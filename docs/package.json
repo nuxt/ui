@@ -4,8 +4,8 @@
   "type": "module",
   "dependencies": {
     "@iconify-json/logos": "^1.2.4",
-    "@iconify-json/lucide": "^1.2.34",
-    "@iconify-json/simple-icons": "^1.2.30",
+    "@iconify-json/lucide": "^1.2.35",
+    "@iconify-json/simple-icons": "^1.2.31",
     "@iconify-json/vscode-icons": "^1.2.18",
     "@nuxt/content": "^3.4.0",
     "@nuxt/image": "^1.10.0",
@@ -15,9 +15,9 @@
     "@nuxtjs/plausible": "^1.2.0",
     "@octokit/rest": "^21.1.1",
     "@rollup/plugin-yaml": "^4.1.2",
-    "@vueuse/nuxt": "^13.0.0",
+    "@vueuse/nuxt": "^13.1.0",
     "capture-website": "^4.2.0",
-    "@vueuse/integrations": "^13.0.0",
+    "@vueuse/integrations": "^13.1.0",
     "sortablejs": "^1.15.6",
     "joi": "^17.13.3",
     "motion-v": "0.13.1",
@@ -28,12 +28,12 @@
     "prettier": "^3.5.3",
     "shiki-transformer-color-highlight": "^1.0.0",
     "superstruct": "^2.0.2",
-    "ufo": "^1.5.4",
+    "ufo": "^1.6.1",
     "valibot": "^1.0.0",
     "yup": "^1.6.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "wrangler": "^4.7.2"
+    "wrangler": "^4.8.0"
   }
 }
