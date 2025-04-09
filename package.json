@@ -30,6 +30,10 @@
     "./runtime/*": "./dist/runtime/*",
     "./components/*": "./dist/runtime/components/*",
     "./composables/*": "./dist/runtime/composables/*",
+    "./utils": {
+      "types": "./dist/runtime/utils/index.d.ts",
+      "import": "./dist/runtime/utils/index.js"
+    },
     "./utils/*": {
       "types": "./dist/runtime/utils/*.d.ts",
       "import": "./dist/runtime/utils/*.js"
@@ -61,6 +65,9 @@
       ],
       "composables/*": [
         "./dist/runtime/composables/*"
+      ],
+      "utils": [
+        "./dist/runtime/utils/index.d.ts"
       ],
       "utils/*": [
         "./dist/runtime/utils/*.d.ts"
