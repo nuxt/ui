@@ -77,8 +77,8 @@ export type TabsSlots<T extends TabsItem = TabsItem> = {
   'default': SlotProps<T>
   'trailing': SlotProps<T>
   'content': SlotProps<T>
-  'list-leading': {}
-  'list-trailing': {}
+  'list-leading': (props: {}) => any
+  'list-trailing': (props: {}) => any
 } & DynamicSlots<T, undefined, { index: number }>
 
 </script>
