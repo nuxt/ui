@@ -73,12 +73,12 @@ export interface TabsEmits extends TabsRootEmits<string | number> {}
 type SlotProps<T extends TabsItem> = (props: { item: T, index: number }) => any
 
 export type TabsSlots<T extends TabsItem = TabsItem> = {
-  leading: SlotProps<T>
-  default: SlotProps<T>
-  trailing: SlotProps<T>
-  content: SlotProps<T>
-  'list-leading': {},
-  'list-trailing': {},
+  'leading': SlotProps<T>
+  'default': SlotProps<T>
+  'trailing': SlotProps<T>
+  'content': SlotProps<T>
+  'list-leading': {}
+  'list-trailing': {}
 } & DynamicSlots<T, undefined, { index: number }>
 
 </script>
