@@ -77,6 +77,8 @@ export type TabsSlots<T extends TabsItem = TabsItem> = {
   default: SlotProps<T>
   trailing: SlotProps<T>
   content: SlotProps<T>
+  'list-leading': {},
+  'list-trailing': {},
 } & DynamicSlots<T, undefined, { index: number }>
 
 </script>
