@@ -7,7 +7,6 @@ import type { NuxtApp } from '#app'
 import { useColorMode as useColorModeVueUse } from '@vueuse/core'
 
 export { useHead } from '@unhead/vue'
-export { useRoute, useRouter } from 'vue-router'
 
 export { defineShortcuts } from '../composables/defineShortcuts'
 export { defineLocale } from '../composables/defineLocale'
