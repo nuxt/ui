@@ -112,7 +112,6 @@ export type TreeSlots<
 
 <script setup lang="ts" generic="T extends TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">
 import { computed } from 'vue'
-import type { PropType } from 'vue'
 import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { get } from '../utils'
@@ -127,22 +126,14 @@ const slots = defineSlots<TreeSlots<T>>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect'), emits)
 
-const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<
-  { items?: NestedItem<T>[], level: number },
-  TreeSlots<T>
->({
-  props: {
-    items: Array as PropType<NestedItem<T>[]>,
-    level: Number
-  }
-})
+const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: TreeItem[], level: number }, TreeSlots<T>>()
 
 const ui = computed(() => tree({
   color: props.color,
   size: props.size
 }))
 
-function getItemLabel(item: NestedItem<T>): string {
+function getItemLabel<Item extends TreeItem = NestedItem<T>>(item: Item): string {
   return get(item, props.labelKey as string)
 }
 
@@ -209,7 +200,7 @@ const defaultExpanded = computed(() =>
         </button>
 
         <ul v-if="item.children?.length && isExpanded" :class="ui.listWithChildren({ class: props.ui?.listWithChildren })">
-          <ReuseTreeTemplate :items="(item.children as NestedItem<T>[])" :level="level + 1" />
+          <ReuseTreeTemplate :items="item.children" :level="level + 1" />
         </ul>
       </TreeItem>
     </li>
@@ -222,6 +213,6 @@ const defaultExpanded = computed(() =>
     :default-expanded="defaultExpanded"
     :selection-behavior="selectionBehavior"
   >
-    <ReuseTreeTemplate :items="(items as NestedItem<T>[] | undefined)" :level="0" />
+    <ReuseTreeTemplate :items="items" :level="0" />
   </TreeRoot>
 </template>
