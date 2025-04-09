@@ -200,7 +200,7 @@ const defaultExpanded = computed(() =>
         </button>
 
         <ul v-if="item.children?.length && isExpanded" :class="ui.listWithChildren({ class: props.ui?.listWithChildren })">
-          <ReuseTreeTemplate :items="(item.children as NestedItem<T>[])" :level="level + 1" />
+          <ReuseTreeTemplate :items="item.children" :level="level + 1" />
         </ul>
       </TreeItem>
     </li>
