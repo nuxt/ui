@@ -6,8 +6,14 @@ export default defineBuildConfig({
     './src/unplugin',
     './src/vite'
   ],
-  replace: {
-    'process.env.DEV': 'false'
+  rollup: {
+    replace: {
+      delimiters: ['', ''],
+      values: {
+        // Used in development to import directly from theme
+        'const isUiDev = true': 'const isUiDev = false'
+      }
+    }
   },
   hooks: {
     'mkdist:entry:options'(ctx, entry, options) {
