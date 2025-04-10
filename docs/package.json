@@ -7,12 +7,12 @@
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/lucide": "^1.2.35",
     "@iconify-json/simple-icons": "^1.2.31",
-    "@iconify-json/vscode-icons": "^1.2.18",
+    "@iconify-json/vscode-icons": "^1.2.19",
     "@nuxt/content": "^3.4.0",
     "@nuxt/image": "^1.10.0",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@6b838c4",
-    "@nuxthub/core": "^0.8.23",
+    "@nuxthub/core": "^0.8.24",
     "@nuxtjs/plausible": "^1.2.0",
     "@octokit/rest": "^21.1.1",
     "@rollup/plugin-yaml": "^4.1.2",
@@ -37,6 +37,6 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "wrangler": "^4.8.0"
+    "wrangler": "^4.9.1"
   }
 }
