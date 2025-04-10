@@ -25,5 +25,6 @@ const onClose = (id: symbol, value: any) => {
     v-model:open="overlay.isOpen"
     @close="(value:any) => onClose(overlay.id, value)"
     @after:leave="onAfterLeave(overlay.id)"
+    v-on="overlay.emits"
   />
 </template>

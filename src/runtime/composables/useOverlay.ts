@@ -10,6 +10,7 @@ export type OverlayOptions<OverlayAttrs = Record<string, any>> = {
   defaultOpen?: boolean
   props?: OverlayAttrs
   destroyOnClose?: boolean
+  emits?: Record<string, (...args: any[]) => void>
 }
 
 interface ManagedOverlayOptionsPrivate<T extends Component> {
@@ -24,16 +25,17 @@ export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<C
 interface OverlayInstance<T extends Component> extends Omit<ManagedOverlayOptionsPrivate<T>, 'component'> {
   id: symbol
   result: Promise<CloseEventArgType<ComponentEmit<T>>>
-  open: (props?: ComponentProps<T>) => Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise'>
+  open: (props?: ComponentProps<T>) => Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'on' | 'modelValue' | 'resolvePromise'>
   close: (value?: any) => void
   patch: (props: Partial<ComponentProps<T>>) => void
+  on: <K extends string>(event: K, handler: (...args: any[]) => void) => void
 }
 
 function _useOverlay() {
   const overlays = shallowReactive<Overlay[]>([])
 
   const create = <T extends Component>(component: T, _options?: OverlayOptions<ComponentProps<T>>): OverlayInstance<T> => {
-    const { props: props, defaultOpen, destroyOnClose } = _options || {}
+    const { props: props, defaultOpen, destroyOnClose, emits } = _options || {}
 
     const options = reactive<Overlay>({
       id: Symbol(import.meta.dev ? 'useOverlay' : ''),
@@ -41,7 +43,8 @@ function _useOverlay() {
       component: markRaw(component!),
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
-      props: props || {}
+      props: props || {},
+      emits: emits || {}
     })
 
     overlays.push(options)
@@ -51,16 +54,22 @@ function _useOverlay() {
       result: new Promise(() => {}),
       open: <T extends Component>(props?: ComponentProps<T>) => open(options.id, props),
       close: value => close(options.id, value),
-      patch: <T extends Component>(props: Partial<ComponentProps<T>>) => patch(options.id, props)
+      patch: <T extends Component>(props: Partial<ComponentProps<T>>) => patch(options.id, props),
+      on: <K extends string>(event: K, handler: (...args: any[]) => void) => {
+        if (!options.emits) {
+          options.emits = {}
+        }
+        options.emits[event] = handler
+      }
     }
   }
 
-  const open = <T extends Component>(id: symbol, props?: ComponentProps<T>) => {
+  const open = <T extends Component>(id: symbol, props?: ComponentProps<T>, emits?: Record<string, (...args: any[]) => void>) => {
     const overlay = getOverlay(id)
 
     // If props are provided, update the overlay's props
-    if (props) {
-      patch(overlay.id, props)
+    if (props || emits) {
+      patch(overlay.id, props, emits)
     }
 
     overlay.isOpen = true
@@ -99,12 +108,20 @@ function _useOverlay() {
     }
   }
 
-  const patch = <T extends Component>(id: symbol, props: Partial<ComponentProps<T>>): void => {
+  const patch = <T extends Component>(id: symbol, props?: Partial<ComponentProps<T>>, emits?: Partial<Record<string, (...args: any[]) => void>>): void => {
     const overlay = getOverlay(id)
 
-    Object.entries(props!).forEach(([key, value]) => {
-      (overlay.props as any)[key] = value
-    })
+    if (props) {
+      Object.entries(props).forEach(([key, value]) => {
+        (overlay.props as any)[key] = value
+      })
+    }
+
+    if (emits) {
+      Object.entries(emits).forEach(([key, value]) => {
+        (overlay.emits as any)[key] = value
+      })
+    }
   }
 
   const getOverlay = (id: symbol): Overlay => {
