@@ -56,7 +56,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           return [
             `import template from ${JSON.stringify(templatePath)}`,
             ...generateVariantDeclarations(variants),
-            `const result = typeof template === 'function' ? template(${JSON.stringify(options, null, 2)}) : template`,
+            `const result = typeof template === 'function' ? (template as Function)(${JSON.stringify(options, null, 2)}) : template`,
             `const theme = ${json}`,
             `export default result as typeof theme`
           ].join('\n\n')
