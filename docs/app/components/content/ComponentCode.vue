@@ -328,7 +328,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 
 <template>
   <div class="my-5">
-    <div>
+    <div class="relative">
       <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-(--ui-border-muted) border-b-0 relative rounded-t-[calc(var(--ui-radius)*1.5)] px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
