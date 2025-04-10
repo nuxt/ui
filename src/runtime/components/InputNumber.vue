@@ -1,18 +1,12 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-number'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
-import type { PartialString } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigInputNumber = _appConfig as AppConfig & { ui: { inputNumber: Partial<typeof theme> } }
-
-const inputNumber = tv({ extend: tv(theme), ...(appConfigInputNumber.ui?.inputNumber || {}) })
-
-type InputNumberVariants = VariantProps<typeof inputNumber>
+type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
 
 export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange'> {
   /**
@@ -22,9 +16,9 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   as?: any
   /** The placeholder text when the input is empty. */
   placeholder?: string
-  color?: InputNumberVariants['color']
-  variant?: InputNumberVariants['variant']
-  size?: InputNumberVariants['size']
+  color?: InputNumber['variants']['color']
+  variant?: InputNumber['variants']['variant']
+  size?: InputNumber['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /**
@@ -62,7 +56,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    */
   locale?: string
   class?: any
-  ui?: PartialString<typeof inputNumber.slots>
+  ui?: InputNumber['slots']
 }
 
 export interface InputNumberEmits {
@@ -96,13 +90,13 @@ defineSlots<InputNumberSlots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange'), emits)
 
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as InputNumber['AppConfig']
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
 
 const { t, code: codeLocale } = useLocale()
 const locale = computed(() => props.locale || codeLocale.value)
 
-const ui = computed(() => inputNumber({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {}) })({
   color: color.value,
   variant: props.variant,
   size: size.value,

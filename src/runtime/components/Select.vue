@@ -1,27 +1,13 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { SelectRootProps, SelectRootEmits, SelectContentProps, SelectContentEmits, SelectArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type {
-  AcceptableValue,
-  ArrayOrNested,
-  GetItemKeys,
-  GetItemValue,
-  GetModelValue,
-  GetModelValueEmits,
-  NestedItem,
-  PartialString,
-  EmitsToProps
-} from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigSelect = _appConfig as AppConfig & { ui: { select: Partial<typeof theme> } }
-
-const select = tv({ extend: tv(theme), ...(appConfigSelect.ui?.select || {}) })
+type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
 
 interface SelectItemBase {
   label?: string
@@ -43,8 +29,6 @@ interface SelectItemBase {
 }
 export type SelectItem = SelectItemBase | AcceptableValue | boolean
 
-type SelectVariants = VariantProps<typeof select>
-
 export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
@@ -52,15 +36,15 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   /**
    * @defaultValue 'primary'
    */
-  color?: SelectVariants['color']
+  color?: Select['variants']['color']
   /**
    * @defaultValue 'outline'
    */
-  variant?: SelectVariants['variant']
+  variant?: Select['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: SelectVariants['size']
+  size?: Select['variants']['size']
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
@@ -108,7 +92,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
-  ui?: PartialString<typeof select.slots>
+  ui?: Select['slots']
 }
 
 export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<SelectRootEmits, 'update:modelValue'> & {
@@ -159,7 +143,7 @@ const props = withDefaults(defineProps<SelectProps<T, VK, M>>(), {
 const emits = defineEmits<SelectEmits<T, VK, M>>()
 const slots = defineSlots<SelectSlots<T, VK, M>>()
 
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as Select['AppConfig']
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
@@ -170,7 +154,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
-const ui = computed(() => select({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })({
   color: color.value,
   variant: props.variant,
   size: selectSize?.value,

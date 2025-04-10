@@ -91,3 +91,35 @@ export type EmitsToProps<T> = {
     ? (...args: Args) => void
     : never
 }
+
+/**
+ * Utility type to flatten intersection types for better IDE hover information.
+ * @template T The type to flatten.
+ */
+type Id<T> = {} & { [P in keyof T]: T[P] }
+
+type ComponentVariants<T extends { variants?: Record<string, Record<string, any>> }> = {
+  [K in keyof T['variants']]: keyof T['variants'][K]
+}
+
+type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
+  [K in keyof T['slots']]?: string
+}>
+
+type ComponentAppConfig<A, K extends string, T> = A & { ui: { [k in K]: Partial<T> } }
+
+/**
+ * Defines the configuration shape expected for a component.
+ * @template T The component's theme imported from `#build/ui/*`.
+ * @template A The base AppConfig type from `@nuxt/schema`.
+ * @template K The key identifying the component within `A['ui']`.
+ */
+export type ComponentConfig<
+  T extends Record<string, any>,
+  A extends { ui: Record<string, any> },
+  K extends string
+> = {
+  AppConfig: ComponentAppConfig<A, K, T>
+  variants: ComponentVariants<T & A['ui'][K]>
+  slots: ComponentSlots<T>
+}

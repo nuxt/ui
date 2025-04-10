@@ -1,15 +1,10 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/card'
 import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigCard = _appConfig as AppConfig & { ui: { card: Partial<typeof theme> } }
-
-const card = tv({ extend: tv(theme), ...(appConfigCard.ui?.card || {}) })
-
-type CardVariants = VariantProps<typeof card>
+type Card = ComponentConfig<typeof theme, AppConfig, 'card'>
 
 export interface CardProps {
   /**
@@ -20,9 +15,9 @@ export interface CardProps {
   /**
    * @defaultValue 'outline'
    */
-  variant?: CardVariants['variant']
+  variant?: Card['variants']['variant']
   class?: any
-  ui?: Partial<typeof card.slots>
+  ui?: Card['slots']
 }
 
 export interface CardSlots {
@@ -35,11 +30,16 @@ export interface CardSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
 
 const props = defineProps<CardProps>()
 const slots = defineSlots<CardSlots>()
 
-const ui = computed(() => card({ variant: props.variant }))
+const appConfig = useAppConfig() as Card['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.card || {}) })({
+  variant: props.variant
+}))
 </script>
 
 <template>

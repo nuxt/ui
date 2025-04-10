@@ -5,10 +5,9 @@ import _appConfig from '#build/app.config'
 import theme from '#build/ui/pagination'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigPagination = _appConfig as AppConfig & { ui: { pagination: Partial<typeof theme> } }
-
-const pagination = tv({ extend: tv(theme), ...(appConfigPagination.ui?.pagination || {}) })
+type Pagination = ComponentConfig<typeof theme, AppConfig, 'pagination'>
 
 export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
   /**
@@ -79,7 +78,7 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
    */
   to?: (page: number) => ButtonProps['to']
   class?: any
-  ui?: Partial<typeof pagination.slots>
+  ui?: Pagination['slots']
 }
 
 export interface PaginationEmits extends PaginationRootEmits {}
@@ -127,8 +126,8 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 const emits = defineEmits<PaginationEmits>()
 const slots = defineSlots<PaginationSlots>()
 
-const appConfig = useAppConfig()
 const { dir } = useLocale()
+const appConfig = useAppConfig() as Pagination['AppConfig']
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
 
 const firstIcon = computed(() => props.firstIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
@@ -137,7 +136,7 @@ const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConf
 const lastIcon = computed(() => props.lastIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = pagination()
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination || {}) })())
 </script>
 
 <template>
