@@ -88,9 +88,10 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()
 
+const appConfig = useAppConfig() as InputNumber['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange'), emits)
 
-const appConfig = useAppConfig() as InputNumber['AppConfig']
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
 
 const { t, code: codeLocale } = useLocale()

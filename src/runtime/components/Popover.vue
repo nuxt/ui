@@ -63,6 +63,8 @@ const props = withDefaults(defineProps<PopoverProps>(), {
 const emits = defineEmits<PopoverEmits>()
 const slots = defineSlots<PopoverSlots>()
 
+const appConfig = useAppConfig() as Popover['AppConfig']
+
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardPropsEmits(pick, emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
@@ -78,8 +80,6 @@ const contentEvents = computed(() => {
   return {}
 })
 const arrowProps = toRef(() => props.arrow as PopoverArrowProps)
-
-const appConfig = useAppConfig() as Popover['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.popover || {}) })({

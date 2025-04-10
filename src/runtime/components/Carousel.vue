@@ -142,8 +142,9 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
 })
 defineSlots<CarouselSlots<T>>()
 
-const appConfig = useAppConfig() as Carousel['AppConfig']
 const { dir, t } = useLocale()
+const appConfig = useAppConfig() as Carousel['AppConfig']
+
 const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))
 
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))

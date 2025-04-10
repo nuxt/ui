@@ -53,8 +53,9 @@ const props = defineProps<ContextMenuContentProps<T>>()
 const emits = defineEmits<ContextMenuContentEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
-const appConfig = useAppConfig()
 const { dir } = useLocale()
+const appConfig = useAppConfig()
+
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default'])
 

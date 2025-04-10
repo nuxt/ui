@@ -109,9 +109,20 @@ export interface SelectSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof select> }): any
-  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean }): any
-  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof select> }): any
+  'leading'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+    ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
+  }): any
+  'default'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+  }): any
+  'trailing'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+    ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
+  }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -144,6 +155,7 @@ const emits = defineEmits<SelectEmits<T, VK, M>>()
 const slots = defineSlots<SelectSlots<T, VK, M>>()
 
 const appConfig = useAppConfig() as Select['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)

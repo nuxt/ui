@@ -121,12 +121,12 @@ const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 
+const appConfig = useAppConfig() as DropdownMenu['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
 const proxySlots = omit(slots, ['default'])
-
-const appConfig = useAppConfig() as DropdownMenu['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })({
   size: props.size

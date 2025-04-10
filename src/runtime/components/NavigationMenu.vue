@@ -153,6 +153,8 @@ const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
 
+const appConfig = useAppConfig() as NavigationMenu['AppConfig']
+
 const rootProps = useForwardPropsEmits(computed(() => ({
   as: props.as,
   modelValue: props.modelValue,
@@ -165,10 +167,7 @@ const rootProps = useForwardPropsEmits(computed(() => ({
   disablePointerLeaveClose: props.disablePointerLeaveClose,
   unmountOnHide: props.unmountOnHide
 })), emits)
-
 const contentProps = toRef(() => props.content)
-
-const appConfig = useAppConfig() as NavigationMenu['AppConfig']
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>({

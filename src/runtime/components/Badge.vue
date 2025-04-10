@@ -47,13 +47,12 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
-const appConfig = useAppConfig() as Badge['AppConfig']
-
 const props = withDefaults(defineProps<BadgeProps>(), {
   as: 'span'
 })
 defineSlots<BadgeSlots>()
 
+const appConfig = useAppConfig() as Badge['AppConfig']
 const { orientation, size: buttonGroupSize } = useButtonGroup<BadgeProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 

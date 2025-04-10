@@ -84,6 +84,12 @@ const props = withDefaults(defineProps<ColorPickerProps>(), {
 })
 const modelValue = defineModel<string>(undefined)
 
+const appConfig = useAppConfig() as ColorPicker['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.colorPicker || {}) })({
+  size: props.size
+}))
+
 const pickedColor = computed<HSVColor>({
   get() {
     try {
@@ -253,12 +259,6 @@ const selectorThumbStyle = computed(() => ({
 const trackThumbStyle = computed(() => ({
   backgroundColor: trackThumbColor.value,
   top: `${trackThumbPosition.value.y}%`
-}))
-
-const appConfig = useAppConfig() as ColorPicker['AppConfig']
-
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.colorPicker || {}) })({
-  size: props.size
 }))
 </script>
 

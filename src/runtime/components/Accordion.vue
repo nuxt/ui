@@ -80,6 +80,7 @@ const emits = defineEmits<AccordionEmits>()
 const slots = defineSlots<AccordionSlots<T>>()
 
 const appConfig = useAppConfig() as Accordion['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'type', 'unmountOnHide'), emits)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })({

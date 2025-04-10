@@ -62,7 +62,6 @@ defineSlots<ChipSlots>()
 const show = defineModel<boolean>('show', { default: true })
 
 const { size } = useAvatarGroup(props)
-
 const appConfig = useAppConfig() as Chip['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })({

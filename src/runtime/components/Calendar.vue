@@ -123,8 +123,8 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
 const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
-const appConfig = useAppConfig() as Calendar['AppConfig']
 const { code: locale, dir, t } = useLocale()
+const appConfig = useAppConfig() as Calendar['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 

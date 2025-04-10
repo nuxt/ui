@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/pagination'
 import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
@@ -128,6 +127,7 @@ const slots = defineSlots<PaginationSlots>()
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Pagination['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
 
 const firstIcon = computed(() => props.firstIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))

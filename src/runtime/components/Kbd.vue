@@ -42,7 +42,6 @@ const props = withDefaults(defineProps<KbdProps>(), {
 defineSlots<KbdSlots>()
 
 const { getKbdKey } = useKbd()
-
 const appConfig = useAppConfig() as Kbd['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.kbd || {}) }))

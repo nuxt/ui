@@ -95,9 +95,10 @@ const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
 const emits = defineEmits<RadioGroupEmits>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 
+const appConfig = useAppConfig() as RadioGroup['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
-const appConfig = useAppConfig() as RadioGroup['AppConfig']
 const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
 

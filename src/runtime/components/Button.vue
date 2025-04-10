@@ -65,10 +65,10 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 })
 const slots = defineSlots<ButtonSlots>()
 
-const linkProps = useForwardProps(pickLinkProps(props))
-
 const appConfig = useAppConfig() as Button['AppConfig']
 const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
+
+const linkProps = useForwardProps(pickLinkProps(props))
 
 const loadingAutoState = ref(false)
 const formLoading = inject<Ref<boolean> | undefined>(formLoadingInjectionKey, undefined)

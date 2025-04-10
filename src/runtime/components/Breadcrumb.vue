@@ -70,6 +70,7 @@ const props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
   labelKey: 'label'
 })
 const slots = defineSlots<BreadcrumbSlots<T>>()
+
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Breadcrumb['AppConfig']
 

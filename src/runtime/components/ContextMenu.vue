@@ -112,12 +112,11 @@ const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
 const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
+const appConfig = useAppConfig() as ContextMenu['AppConfig']
 
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const proxySlots = omit(slots, ['default'])
-
-const appConfig = useAppConfig() as ContextMenu['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })({
   size: props.size

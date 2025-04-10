@@ -73,13 +73,13 @@ const props = withDefaults(defineProps<DrawerProps>(), {
 const emits = defineEmits<DrawerEmits>()
 const slots = defineSlots<DrawerSlots>()
 
+const appConfig = useAppConfig() as Drawer['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
 const contentProps = toRef(() => props.content)
 const contentEvents = {
   closeAutoFocus: (e: Event) => e.preventDefault()
 }
-
-const appConfig = useAppConfig() as Drawer['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })({
   direction: props.direction,

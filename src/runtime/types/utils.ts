@@ -106,20 +106,28 @@ type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
   [K in keyof T['slots']]?: string
 }>
 
-type ComponentAppConfig<A, K extends string, T> = A & { ui: { [k in K]: Partial<T> } }
+type GetComponentAppConfig<A, U extends string, K extends string> =
+  A extends Record<U, Record<K, any>> ? A[U][K] : {}
+
+type ComponentAppConfig<
+  A extends Record<U, Record<string, any>>,
+  K extends string, T,
+  U extends string = 'ui'
+> = A & { [key in U]?: { [k in K]?: Partial<T> } }
 
 /**
  * Defines the configuration shape expected for a component.
  * @template T The component's theme imported from `#build/ui/*`.
  * @template A The base AppConfig type from `@nuxt/schema`.
- * @template K The key identifying the component within `A['ui']`.
+ * @template K The key identifying the component (e.g., 'badge').
+ * @template U The top-level key in AppConfig ('ui' or 'uiPro').
  */
 export type ComponentConfig<
   T extends Record<string, any>,
-  A extends { ui: Record<string, any> },
-  K extends string
+  A extends Record<U, Record<string, any>>,
+  K extends string, U extends 'ui' | 'uiPro' = 'ui'
 > = {
-  AppConfig: ComponentAppConfig<A, K, T>
-  variants: ComponentVariants<T & A['ui'][K]>
+  AppConfig: ComponentAppConfig<A, K, T, U>
+  variants: ComponentVariants<T & GetComponentAppConfig<A, U, K>>
   slots: ComponentSlots<T>
 }

@@ -65,9 +65,10 @@ const emits = defineEmits<CheckboxEmits>()
 
 const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined })
 
+const appConfig = useAppConfig() as Checkbox['AppConfig']
+
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
-const appConfig = useAppConfig() as Checkbox['AppConfig']
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps>(props)
 const id = _id.value ?? useId()
 
