@@ -12,7 +12,7 @@ const { url } = useSiteConfig()
 useSeoMeta({
   title,
   description,
-  ogTitle: `${title} - Nuxt UI Pro`,
+  ogTitle: title,
   ogDescription: description,
   ogImage: joinURL(url, '/pro/og-image.png')
 })
@@ -33,7 +33,7 @@ const activating = ref(false)
 const successMessage = ref()
 const errorMessage = ref('')
 
-async function submit(event: FormSubmitEvent<any>) {
+async function submit(event: FormSubmitEvent<Schema>) {
   activating.value = true
   errorMessage.value = ''
   successMessage.value = ''

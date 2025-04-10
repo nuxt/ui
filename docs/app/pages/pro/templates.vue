@@ -67,7 +67,7 @@ useSeoMeta({
             :items="(template.images as any[])"
             dots
           >
-            <NuxtImg v-bind="item" class="w-full h-full object-cover" width="576" height="360" />
+            <NuxtImg v-bind="item" class="w-full h-full object-cover" width="576" height="360" loading="lazy" />
           </UCarousel>
           <Placeholder v-else class="w-full h-full aspect-video" />
         </Motion>

@@ -9,7 +9,7 @@ export default (options: Required<ModuleOptions>) => ({
     base: 'rounded-full ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2',
     indicator: 'flex items-center justify-center size-full rounded-full after:bg-(--ui-bg) after:rounded-full',
     container: 'flex items-center',
-    wrapper: 'ms-2',
+    wrapper: 'w-full',
     label: 'block font-medium text-(--ui-text)',
     description: 'text-(--ui-text-muted)'
   },
@@ -24,6 +24,16 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'bg-(--ui-bg-inverted)'
       }
     },
+    variant: {
+      list: {
+      },
+      card: {
+        item: 'items-center border border-(--ui-border-muted) rounded-lg'
+      },
+      table: {
+        item: 'border border-(--ui-border-muted)'
+      }
+    },
     orientation: {
       horizontal: {
         fieldset: 'flex-row',
@@ -31,6 +41,20 @@ export default (options: Required<ModuleOptions>) => ({
       },
       vertical: {
         fieldset: 'flex-col'
+      }
+    },
+    indicator: {
+      start: {
+        item: 'flex-row',
+        base: 'me-2'
+      },
+      end: {
+        item: 'flex-row-reverse',
+        base: 'ms-2'
+      },
+      hidden: {
+        base: 'sr-only',
+        wrapper: 'text-center'
       }
     },
     size: {
@@ -87,8 +111,62 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
+  compoundVariants: [
+    { size: 'xs', variant: ['card', 'table'], class: { item: 'p-2.5' } },
+    { size: 'sm', variant: ['card', 'table'], class: { item: 'p-3' } },
+    { size: 'md', variant: ['card', 'table'], class: { item: 'p-3.5' } },
+    { size: 'lg', variant: ['card', 'table'], class: { item: 'p-4' } },
+    { size: 'xl', variant: ['card', 'table'], class: { item: 'p-4.5' } },
+    {
+      orientation: 'horizontal',
+      variant: 'table',
+      class: {
+        item: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg',
+        fieldset: 'gap-0 -space-x-px'
+      }
+    },
+    {
+      orientation: 'vertical',
+      variant: 'table',
+      class: {
+        item: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg',
+        fieldset: 'gap-0 -space-y-px'
+      }
+    },
+    ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      variant: 'card',
+      class: {
+        item: `has-data-[state=checked]:border-(--ui-${color})`
+      }
+    })),
+    {
+      color: 'neutral',
+      variant: 'card',
+      class: {
+        item: 'has-data-[state=checked]:border-(--ui-border-elevated)'
+      }
+    },
+    ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      variant: 'table',
+      class: {
+        item: `has-data-[state=checked]:bg-(--ui-${color})/10 has-data-[state=checked]:border-(--ui-${color})/50 has-data-[state=checked]:z-[1]`
+      }
+    })),
+    {
+      color: 'neutral',
+      variant: 'table',
+      class: {
+        item: 'has-data-[state=checked]:bg-(--ui-bg-elevated) has-data-[state=checked]:border-(--ui-border-inverted)/25 has-data-[state=checked]:z-[1]'
+      }
+    }
+  ],
   defaultVariants: {
     size: 'md',
-    color: 'primary'
+    color: 'primary',
+    variant: 'list',
+    orientation: 'vertical',
+    indicator: 'start'
   }
 })

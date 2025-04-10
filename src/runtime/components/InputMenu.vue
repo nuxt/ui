@@ -36,7 +36,6 @@ interface _InputMenuItem {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
-  value?: string | number
   disabled?: boolean
   onSelect?(e?: Event): void
   [key: string]: any
@@ -45,7 +44,7 @@ export type InputMenuItem = _InputMenuItem | AcceptableValue | boolean
 
 type InputMenuVariants = VariantProps<typeof inputMenu>
 
-export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover'>, UseComponentIconsProps {
+export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -197,7 +196,9 @@ const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
-  labelKey: 'label' as never
+  labelKey: 'label' as never,
+  resetSearchTermOnBlur: true,
+  resetSearchTermOnSelect: true
 })
 const emits = defineEmits<InputMenuEmits<T, VK, M>>()
 const slots = defineSlots<InputMenuSlots<T, VK, M>>()
@@ -208,7 +209,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig()
 const { contains } = useFilter({ sensitivity: 'base' })
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover', 'ignoreFilter'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover', 'ignoreFilter'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 
@@ -269,7 +270,7 @@ const filteredGroups = computed(() => {
 
     return fields.some(field => contains(get(item, field), searchTerm.value))
   })).filter(group => group.filter(item =>
-    isInputItem(item) && (!item.type || !['label', 'separator'].includes(item.type))
+    !isInputItem(item) || (!item.type || !['label', 'separator'].includes(item.type))
   ).length > 0)
 })
 const filteredItems = computed(() => filteredGroups.value.flatMap(group => group))
@@ -312,6 +313,10 @@ function onUpdate(value: any) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
+
+  if (props.resetSearchTermOnSelect) {
+    searchTerm.value = ''
+  }
 }
 
 function onBlur(event: FocusEvent) {
@@ -325,13 +330,28 @@ function onFocus(event: FocusEvent) {
 }
 
 function onUpdateOpen(value: boolean) {
+  let timeoutId
+
   if (!value) {
     const event = new FocusEvent('blur')
+
     emits('blur', event)
     emitFormBlur()
+
+    // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
+    // https://reka-ui.com/docs/components/combobox#api-reference
+    if (props.resetSearchTermOnBlur) {
+      const STATE_ANIMATION_DELAY_MS = 100
+
+      timeoutId = setTimeout(() => {
+        searchTerm.value = ''
+      }, STATE_ANIMATION_DELAY_MS)
+    }
   } else {
     const event = new FocusEvent('focus')
     emits('focus', event)
+    emitFormFocus()
+    clearTimeout(timeoutId)
   }
 }
 
@@ -340,13 +360,26 @@ function onRemoveTag(event: any) {
     const modelValue = props.modelValue as GetModelValue<T, VK, true>
     const filteredValue = modelValue.filter(value => !isEqual(value, event))
     emits('update:modelValue', filteredValue as GetModelValue<T, VK, M>)
+    onUpdate(filteredValue)
   }
+}
+
+function onSelect(e: Event, item: InputMenuItem) {
+  if (!isInputItem(item)) {
+    return
+  }
+
+  if (item.disabled) {
+    e.preventDefault()
+    return
+  }
+
+  item.onSelect?.(e)
 }
 
 function isInputItem(item: InputMenuItem): item is _InputMenuItem {
   return typeof item === 'object' && item !== null
 }
-
 defineExpose({
   inputRef
 })
@@ -410,7 +443,7 @@ defineExpose({
           </TagsInputItemDelete>
         </TagsInputItem>
 
-        <ComboboxInput v-model="searchTerm" :display-value="displayValue" as-child>
+        <ComboboxInput v-model="searchTerm" as-child>
           <TagsInputInput
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
@@ -424,7 +457,6 @@ defineExpose({
       <ComboboxInput
         v-else
         ref="inputRef"
-        v-model="searchTerm"
         :display-value="displayValue"
         v-bind="{ ...$attrs, ...ariaAttrs }"
         :type="type"
@@ -432,6 +464,7 @@ defineExpose({
         :required="required"
         @blur="onBlur"
         @focus="onFocus"
+        @update:model-value="searchTerm = $event"
       />
 
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
@@ -472,7 +505,7 @@ defineExpose({
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="isInputItem(item) && item.disabled"
                 :value="props.valueKey && isInputItem(item) ? get(item, String(props.valueKey)) : item"
-                @select="isInputItem(item) && item.onSelect"
+                @select="onSelect($event, item)"
               >
                 <slot name="item" :item="(item as NestedItem<T>)" :index="index">
                   <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">

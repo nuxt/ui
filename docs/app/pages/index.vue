@@ -23,18 +23,7 @@ const { data: components } = await useAsyncData('ui-components', () => {
     .all()
 })
 
-const { data: module } = await useFetch<{
-  stats: {
-    downloads: number
-    stars: number
-  }
-  contributors: {
-    username: string
-  }[]
-}>('https://api.nuxt.com/modules/ui', {
-  key: 'stats',
-  transform: ({ stats, contributors }) => ({ stats, contributors })
-})
+const { data: module } = await useFetch('/api/module.json')
 
 const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 
@@ -85,7 +74,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </div>
       </template>
 
-      <LazySkyBg />
+      <LazySkyBg is-index />
 
       <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
         <UPageMarquee
@@ -176,12 +165,12 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
               <circle cx="6.53711" cy="37.4551" r="1.5" fill="var(--ui-border-accented)" />
               <circle cx="38.5957" cy="37.4551" r="1.5" fill="var(--ui-border-accented)" />
             </svg>
-            <UIcon :name="feature.icon" class="size-5 flex-shrink-0" />
+            <UIcon :name="feature.icon" class="size-5 shrink-0" />
           </div>
           <div class="flex flex-col">
             <h2 class="font-medium text-(--ui-text-highlighted) inline-flex items-center gap-x-1">
               {{ feature.title }}
-              <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
+              <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
             </h2>
             <p class="text-sm text-(--ui-text-muted)">
               {{ feature.description }}
@@ -313,8 +302,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :src="`/pro/blocks/image${i}.png`"
             width="460"
             height="258"
-            :alt="`Nuxt UI Pro Screenshot ${i}`"
             loading="lazy"
+            :alt="`Nuxt UI Pro Screenshot ${i}`"
             class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
           >
         </UPageMarquee>

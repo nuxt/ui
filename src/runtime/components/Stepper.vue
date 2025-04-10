@@ -145,7 +145,7 @@ defineExpose({
           <StepperTrigger :class="ui.trigger({ class: props.ui?.trigger })">
             <StepperIndicator :class="ui.indicator({ class: props.ui?.indicator })">
               <slot name="indicator" :item="item">
-                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: props.ui?.indicator })" />
+                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: props.ui?.icon })" />
                 <template v-else>
                   {{ count + 1 }}
                 </template>
@@ -174,7 +174,7 @@ defineExpose({
       </StepperItem>
     </div>
 
-    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot" :class="ui.content({ class: props.ui?.description })">
+    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot" :class="ui.content({ class: props.ui?.content })">
       <slot
         :name="((currentStep?.slot || 'content') as keyof StepperSlots<T>)"
         :item="(currentStep as Extract<T, { slot: string }>)"

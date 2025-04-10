@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<{
   color?: string
   size?: { min: number, max: number }
   speed?: 'slow' | 'normal' | 'fast'
+  isIndex?: boolean
 }>(), {
   starCount: 50,
   color: 'var(--ui-primary)',
@@ -21,7 +22,8 @@ const props = withDefaults(defineProps<{
     min: 1,
     max: 3
   }),
-  speed: 'normal'
+  speed: 'normal',
+  isIndex: false
 })
 
 const route = useRoute()
@@ -53,7 +55,7 @@ const twinkleDuration = computed(() => {
 </script>
 
 <template>
-  <div class="absolute pointer-events-none z-[-1] inset-y-0 left-4 right-4 lg:right-[50%] overflow-hidden">
+  <div class="absolute pointer-events-none z-[-1] overflow-hidden" :class="isIndex ? 'inset-y-0 left-4 right-4 lg:right-[50%]' : 'inset-0'">
     <div
       v-for="star in stars"
       :key="star.id"

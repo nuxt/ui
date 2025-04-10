@@ -7,10 +7,12 @@ export default defineBuildConfig({
     './src/vite'
   ],
   rollup: {
-    emitCJS: true
-  },
-  replace: {
-    'process.env.DEV': 'false'
+    replace: {
+      delimiters: ['', ''],
+      values: {
+        'process.argv.at(-1) === \'--uiDev\'': 'false'
+      }
+    }
   },
   hooks: {
     'mkdist:entry:options'(ctx, entry, options) {
