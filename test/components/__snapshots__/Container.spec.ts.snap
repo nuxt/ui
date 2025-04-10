@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Container > renders with as correctly 1`] = `"<article class="max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8"></article>"`;
+exports[`Container > renders with as correctly 1`] = `"<article class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8"></article>"`;
 
-exports[`Container > renders with class correctly 1`] = `"<div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl"></div>"`;
+exports[`Container > renders with class correctly 1`] = `"<div class="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl"></div>"`;
 
-exports[`Container > renders with default slot correctly 1`] = `"<div class="max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8">Default slot</div>"`;
+exports[`Container > renders with default slot correctly 1`] = `"<div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8">Default slot</div>"`;

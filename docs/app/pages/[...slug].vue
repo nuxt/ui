@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
-import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
+import type { PageLink } from '@nuxt/ui-pro'
+import { findPageBreadcrumb, mapContentNavigation } from '@nuxt/ui-pro/utils/content'
 
 const route = useRoute()
 const { framework, module } = useSharedData()
@@ -66,9 +67,9 @@ if (!import.meta.prerender) {
 
 const type = page.value?.path.includes('components') ? 'Vue Component ' : page.value?.path.includes('composables') ? 'Vue Composable ' : ''
 useSeoMeta({
-  titleTemplate: `%s ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
+  titleTemplate: `%s ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} ${page.value.framework === 'vue' ? ' for Vue' : ''}`,
   title: page.value.navigation?.title ? page.value.navigation.title : page.value.title,
-  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
+  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} ${page.value.framework === 'vue' ? ' for Vue' : ''}`,
   description: page.value.description,
   ogDescription: page.value.description
 })
@@ -100,32 +101,25 @@ const communityLinks = computed(() => [{
   label: 'Star on GitHub',
   to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}`,
   target: '_blank'
+}, module.value === 'ui-pro' && {
+  icon: 'i-lucide-credit-card',
+  label: 'Purchase a license',
+  to: 'https://nuxt.lemonsqueezy.com/checkout/buy/057dacb2-87ba-4dc1-9256-59ee5b3bd394',
+  target: '_blank'
+}, module.value === 'ui-pro' && {
+  icon: 'i-lucide-ticket-percent',
+  label: 'Become an affiliate',
+  to: 'https://nuxt.lemonsqueezy.com/affiliates',
+  target: '_blank'
 }, {
-  icon: 'i-lucide-life-buoy',
+  icon: 'i-lucide-git-pull-request-arrow',
   label: 'Contribution',
   to: '/getting-started/contribution'
 }, {
   label: 'Roadmap',
   icon: 'i-lucide-map',
   to: '/roadmap'
-}])
-
-// const resourcesLinks = [{
-//   icon: 'i-simple-icons-figma',
-//   label: 'Figma Kit',
-//   to: 'https://www.figma.com/community/file/1288455405058138934',
-//   target: '_blank'
-// }, {
-//   label: 'Playground',
-//   icon: 'i-simple-icons-stackblitz',
-//   to: 'https://stackblitz.com/edit/nuxt-ui',
-//   target: '_blank'
-// }, {
-//   icon: 'i-simple-icons-nuxtdotjs',
-//   label: 'Nuxt docs',
-//   to: 'https://nuxt.com',
-//   target: '_blank'
-// }]
+}].filter(Boolean) as PageLink[])
 </script>
 
 <template>
@@ -153,7 +147,7 @@ const communityLinks = computed(() => [{
           v-bind="link"
         >
           <template v-if="link.avatar" #leading>
-            <UAvatar v-bind="link.avatar" size="2xs" />
+            <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
           </template>
         </UButton>
       </template>
@@ -174,14 +168,9 @@ const communityLinks = computed(() => [{
 
           <UPageLinks title="Community" :links="communityLinks" />
 
-          <!-- <USeparator type="dashed" />
-
-          <UPageLinks title="Resources" :links="resourcesLinks" />
-
           <USeparator type="dashed" />
 
-          <AdsPro />
-          <AdsCarbon /> -->
+          <AdsCarbon />
         </template>
       </UContentToc>
     </template>

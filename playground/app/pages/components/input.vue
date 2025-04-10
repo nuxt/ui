@@ -38,7 +38,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
     <div class="flex flex-col gap-4 w-48">
       <UInput placeholder="Disabled" disabled />
       <UInput placeholder="Required" required />
-      <UInput file="i-lucide-calculator" type="number" :model-value="10" />
+      <UInput icon="i-lucide-calculator" type="number" :model-value="10" />
       <UInput icon="i-lucide-folder" type="file" />
       <UInput icon="i-lucide-calendar" type="date" :model-value="new Date().toISOString().substring(0, 10)" />
       <UInput icon="i-lucide-lock" type="password" model-value="password" />

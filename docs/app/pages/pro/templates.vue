@@ -18,7 +18,8 @@ useSeoMeta({
 <template>
   <div class="relative">
     <UPageHero :links="page.links" :ui="{ container: 'relative' }">
-      <StarsBg />
+      <LazyStarsBg />
+
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
       <template #title>
@@ -55,6 +56,7 @@ useSeoMeta({
             v-if="template.thumbnail"
             v-bind="template.thumbnail"
             class="w-full h-auto border lg:border-y lg:border-x-0 border-(--ui-border) rounded-(--ui-radius) lg:rounded-none"
+            :alt="`Template ${index} thumbnail`"
             width="656"
             height="369"
             loading="lazy"
@@ -65,7 +67,7 @@ useSeoMeta({
             :items="(template.images as any[])"
             dots
           >
-            <NuxtImg v-bind="item" class="w-full h-full object-cover" width="576" height="360" />
+            <NuxtImg v-bind="item" class="w-full h-full object-cover" width="576" height="360" loading="lazy" />
           </UCarousel>
           <Placeholder v-else class="w-full h-full aspect-video" />
         </Motion>

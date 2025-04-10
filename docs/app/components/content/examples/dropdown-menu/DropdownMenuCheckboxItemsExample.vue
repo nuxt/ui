@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
+
 const showBookmarks = ref(true)
 const showHistory = ref(false)
 const showDownloads = ref(false)
@@ -36,7 +38,7 @@ const items = computed(() => [{
   onUpdateChecked(checked: boolean) {
     showDownloads.value = checked
   }
-}])
+}] satisfies DropdownMenuItem[])
 </script>
 
 <template>

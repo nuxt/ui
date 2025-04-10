@@ -177,6 +177,12 @@ props:
 
 :component-emits
 
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `inputsRef`{lang="ts-type"} | `Ref<ComponentPublicInstance[]>`{lang="ts-type"} |
+
 ## Theme
 
 :component-theme

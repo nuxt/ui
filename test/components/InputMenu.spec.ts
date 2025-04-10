@@ -77,9 +77,9 @@ describe('InputMenu', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
-    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }]
-    // ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputMenuProps<typeof items[number]>, slots?: Partial<InputMenuSlots<typeof items[number], false>> }) => {
+    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
+    ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputMenuProps, slots?: Partial<InputMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputMenu)
     expect(html).toMatchSnapshot()
   })
@@ -185,6 +185,12 @@ describe('InputMenu', () => {
         multiple: true,
         valueKey: 'value'
       })).toEqualTypeOf<[number[]]>()
+
+      // with object item and object valueKey
+      expectEmitPayloadType('update:modelValue', () => InputMenu({
+        items: [{ label: 'foo', value: { id: 1, name: 'bar' } }],
+        valueKey: 'value'
+      })).toEqualTypeOf<[{ id: number, name: string }]>()
 
       // with string item
       expectEmitPayloadType('update:modelValue', () => InputMenu({

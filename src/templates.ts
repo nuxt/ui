@@ -50,7 +50,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         }
 
         // For local development, import directly from theme
-        if (process.env.DEV) {
+        if (process.argv.at(-1) === '--uiDev') {
           const templatePath = fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url))
           return [
             `import template from ${JSON.stringify(templatePath)}`,
@@ -75,7 +75,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     write: true,
     getContents: () => `@source "./ui";
 
-@theme default static {
+@theme default {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};

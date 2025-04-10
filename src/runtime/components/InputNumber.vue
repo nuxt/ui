@@ -14,7 +14,7 @@ const inputNumber = tv({ extend: tv(theme), ...(appConfigInputNumber.ui?.inputNu
 
 type InputNumberVariants = VariantProps<typeof inputNumber>
 
-export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions'> {
+export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -94,7 +94,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'formatOptions'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange'), emits)
 
 const appConfig = useAppConfig()
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
@@ -115,18 +115,6 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 
 const inputRef = ref<InstanceType<typeof NumberFieldInput> | null>(null)
 
-function autoFocus() {
-  if (props.autofocus) {
-    inputRef.value?.$el?.focus()
-  }
-}
-
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
-
 function onUpdate(value: number) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -140,6 +128,18 @@ function onBlur(event: FocusEvent) {
   emitFormBlur()
   emits('blur', event)
 }
+
+function autoFocus() {
+  if (props.autofocus) {
+    inputRef.value?.$el?.focus()
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 
 defineExpose({
   inputRef

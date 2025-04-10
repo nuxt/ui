@@ -7,7 +7,7 @@ const title = 'Vue Components'
 const description = 'Explore 99+ customizable UI components for Vue and Nuxt built with Tailwind CSS and Reka UI.'
 
 useSeoMeta({
-  titleTemplate: `%s - Nuxt UI`,
+  titleTemplate: '%s - Nuxt UI',
   title,
   description,
   ogTitle: `${title} - Nuxt UI`,
@@ -119,7 +119,8 @@ onMounted(() => {
         />
       </template>
 
-      <StarsBg />
+      <LazyStarsBg />
+
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
@@ -168,6 +169,7 @@ onMounted(() => {
                 :loading="index >= 4 ? 'lazy' : 'eager'"
                 width="640"
                 height="360"
+                :alt="`${component.name} preview`"
               />
             </div>
           </UPageCard>

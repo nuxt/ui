@@ -23,7 +23,7 @@ class: '!p-0'
 ---
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/tree/v3/docs/app/components/content/examples/table/TableExample.vue"}
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/tree/v3/docs/app/components/content/examples/table/TableExample.vue" aria-label="View source code"}
 This example demonstrates the most common use case of the `Table` component. Check out the source code on GitHub.
 ::
 
@@ -85,7 +85,7 @@ Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/lat
 
 In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
-::tip{to="#with-slots"}
+::tip{to="#with-slots" aria-label="Table columns with slots"}
 You can also use slots to customize the header and data cells of the table.
 ::
 

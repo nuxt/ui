@@ -29,7 +29,7 @@ describe('Accordion', () => {
     icon: 'i-lucide-wrench',
     trailingIcon: 'i-lucide-sun',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.',
-    slot: 'custom'
+    slot: 'custom' as const
   }]
 
   const props = { items }
@@ -57,7 +57,7 @@ describe('Accordion', () => {
     ['with body slot', { props: { ...props, modelValue: '1' }, slots: { body: () => 'Body slot' } }],
     ['with custom slot', { props: { ...props, modelValue: '5' }, slots: { custom: () => 'Custom slot' } }],
     ['with custom body slot', { props: { ...props, modelValue: '5' }, slots: { 'custom-body': () => 'Custom body slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps<typeof items[number]>, slots?: Partial<AccordionSlots<typeof items[number]>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps, slots?: Partial<AccordionSlots & { custom: () => 'Custom slot' } & { 'custom-body': () => 'Custom body slot' }> }) => {
     const html = await ComponentRender(nameOrHtml, options, Accordion)
     expect(html).toMatchSnapshot()
   })

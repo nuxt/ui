@@ -1,10 +1,11 @@
 <script setup lang="ts">
 // @ts-expect-error yaml is not typed
 import page from '.figma.yml'
-import { animate } from 'motion'
+import { animate } from 'motion-v'
 import { joinURL } from 'ufo'
 
 const { url } = useSiteConfig()
+
 useSeoMeta({
   title: page.title,
   description: page.description,
@@ -155,7 +156,7 @@ onMounted(async () => {
             :src="item.src"
             :alt="item.alt"
             class="w-full h-auto rounded-[calc(var(--ui-radius)*2)]"
-            lazy
+            loading="lazy"
           />
         </template>
       </UTabs>
@@ -165,7 +166,7 @@ onMounted(async () => {
         v-if="page.section2.image"
         v-bind="page.section2.image"
         class="w-full h-auto rounded-[calc(var(--ui-radius)*2)]"
-        lazy
+        loading="lazy"
       />
     </UPageSection>
     <UPageSection v-bind="page.section3" orientation="horizontal" :ui="{ container: 'py-16 sm:pt-16 lg:pt-16' }">
@@ -173,7 +174,7 @@ onMounted(async () => {
         v-if="page.section3.image"
         v-bind="page.section3.image"
         class="w-full h-auto rounded-[calc(var(--ui-radius)*2)]"
-        lazy
+        loading="lazy"
       />
     </UPageSection>
     <USeparator />
@@ -198,7 +199,7 @@ onMounted(async () => {
             v-if="step.image"
             v-bind="step.image"
             class="rounded-(--ui-radius)"
-            lazy
+            loading="lazy"
           />
           <div>
             <h2 class="font-semibold inline-flex items-center gap-x-1">
@@ -272,6 +273,7 @@ onMounted(async () => {
           :key="index"
           v-bind="logo"
           class="h-6 shrink-0 max-w-[140px] filter invert dark:invert-0"
+          loading="lazy"
         >
       </UPageMarquee>
     </UPageCTA>

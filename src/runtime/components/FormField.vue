@@ -31,7 +31,12 @@ export interface FormFieldProps {
    */
   size?: FormFieldVariants['size']
   required?: boolean
+  /** If true, validation on input will be active immediately instead of waiting for a blur event. */
   eagerValidation?: boolean
+  /**
+   * Delay in milliseconds before validating the form on input events.
+   * @defaultValue `300`
+   */
   validateOnInputDelay?: number
   class?: any
   ui?: Partial<typeof formField.slots>
@@ -81,6 +86,7 @@ provide(formFieldInjectionKey, computed(() => ({
   errorPattern: props.errorPattern,
   hint: props.hint,
   description: props.description,
+  help: props.help,
   ariaId
 }) as FormFieldInjectedOptions<FormFieldProps>))
 </script>
