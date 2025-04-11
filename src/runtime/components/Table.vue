@@ -3,7 +3,7 @@
 import type { Ref } from 'vue'
 import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import type { RowData } from '@tanstack/table-core'
+import type { Cell, RowData, TableMeta } from '@tanstack/table-core'
 import type {
   CellContext,
   ColumnDef,
@@ -41,13 +41,20 @@ import theme from '#build/ui/table'
 import { tv } from '../utils/tv'
 
 declare module '@tanstack/table-core' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   interface ColumnMeta<TData extends RowData, TValue> {
     class?: {
       th?: string
-      td?: string
+      td?: string | ((cell: Cell<TData, TValue>) => string)
     }
   }
+
+  interface TableMeta<TData> {
+    class?: {
+      tr?: string | ((row: Row<TData>) => string)
+    }
+  }
+
 }
 
 const appConfigTable = _appConfig as AppConfig & { ui: { table: Partial<typeof theme> } }
@@ -75,6 +82,7 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
   data?: T[]
   columns?: TableColumn<T>[]
   caption?: string
+  meta?: TableMeta<T>
   /**
    * The text to display when the table is empty.
    * @defaultValue t('table.noData')
@@ -187,6 +195,7 @@ const { t } = useLocale()
 
 const data = computed(() => props.data ?? [])
 const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
+const meta = computed(() => props.meta ?? {})
 
 const ui = computed(() => table({
   sticky: props.sticky,
@@ -213,6 +222,7 @@ const tableApi = useVueTable({
   ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
   data,
   columns: columns.value,
+  meta: meta.value,
   getCoreRowModel: getCoreRowModel(),
   ...(props.globalFilterOptions || {}),
   onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
@@ -343,14 +353,25 @@ defineExpose({
               :data-expanded="row.getIsExpanded()"
               :role="props.onSelect ? 'button' : undefined"
               :tabindex="props.onSelect ? 0 : undefined"
-              :class="ui.tr({ class: [props.ui?.tr] })"
+              :class="ui.tr({
+                class: [
+                  props.ui?.tr,
+                  typeof tableApi.options.meta?.class?.tr === 'function' ? tableApi.options.meta.class.tr(row) : tableApi.options.meta?.class?.tr
+                ]
+              })"
               @click="handleRowSelect(row, $event)"
             >
               <td
                 v-for="cell in row.getVisibleCells()"
                 :key="cell.id"
                 :data-pinned="cell.column.getIsPinned()"
-                :class="ui.td({ class: [props.ui?.td, cell.column.columnDef.meta?.class?.td], pinned: !!cell.column.getIsPinned() })"
+                :class="ui.td({
+                  class: [
+                    props.ui?.td,
+                    typeof cell.column.columnDef.meta?.class?.td === 'function' ? cell.column.columnDef.meta.class.td(cell) : cell.column.columnDef.meta?.class?.td
+                  ],
+                  pinned: !!cell.column.getIsPinned()
+                })"
               >
                 <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
                   <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />

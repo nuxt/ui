@@ -105,6 +105,13 @@ highlights:
 When rendering components with `h`, you can either use the `resolveComponent` function or import from `#components`.
 ::
 
+### Meta
+
+Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/docs/api/core/table#meta)) to pass properties like:
+
+- `class`:
+  - `tr`: [The classes to apply to the `tr` element.]{class="text-(--ui-text-muted)"}
+
 ### Loading
 
 Use the `loading` prop to display a loading state, the `loading-color` prop to change its color and the `loading-animation` prop to change its animation.
