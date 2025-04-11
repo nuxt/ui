@@ -67,10 +67,12 @@ export interface TabsEmits extends TabsRootEmits<string | number> {}
 type SlotProps<T extends TabsItem> = (props: { item: T, index: number }) => any
 
 export type TabsSlots<T extends TabsItem = TabsItem> = {
-  leading: SlotProps<T>
-  default: SlotProps<T>
-  trailing: SlotProps<T>
-  content: SlotProps<T>
+  'leading': SlotProps<T>
+  'default': SlotProps<T>
+  'trailing': SlotProps<T>
+  'content': SlotProps<T>
+  'list-leading': (props?: {}) => any
+  'list-trailing': (props?: {}) => any
 } & DynamicSlots<T, undefined, { index: number }>
 
 </script>
@@ -111,6 +113,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) 
     <TabsList :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 
+      <slot name="list-leading" />
+
       <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger({ class: props.ui?.trigger })">
         <slot name="leading" :item="item" :index="index">
           <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
@@ -123,6 +127,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) 
 
         <slot name="trailing" :item="item" :index="index" />
       </TabsTrigger>
+
+      <slot name="list-trailing" />
     </TabsList>
 
     <template v-if="!!content">
