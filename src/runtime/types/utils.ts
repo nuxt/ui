@@ -33,10 +33,6 @@ export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extend
   ? MaybeObject[Key]
   : never
 
-export type PartialString<T> = {
-  [K in keyof T]?: string
-}
-
 export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>>
 export type ArrayOrNested<T> = T[] | T[][]
 export type NestedItem<T> = T extends Array<infer I> ? NestedItem<I> : T
