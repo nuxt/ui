@@ -26,13 +26,13 @@ export type DynamicSlots<
       ? K
       : (K | `${K}-${S & string}`)
     : never
-  ]?: (props: { item: Extract<T, {
-    slot: S extends undefined
-      ? K
+  ]: (props: {
+    item: S extends undefined
+      ? Extract<T, { slot: K }>
       : K extends `${infer Base}-${S & string}`
-        ? Base
-        : K
-  }> } & D) => any
+        ? Extract<T, { slot: Base }>
+        : Extract<T, { slot: K }>
+  } & D) => any
 } & {
   [key: string]: (props: { item: T } & D) => any
 }
