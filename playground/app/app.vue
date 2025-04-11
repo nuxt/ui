@@ -27,6 +27,7 @@ const components = [
   'calendar',
   'carousel',
   'checkbox',
+  'checkbox-group',
   'chip',
   'collapsible',
   'color-picker',
