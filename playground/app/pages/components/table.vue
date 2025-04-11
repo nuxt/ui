@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, TableRow } from '@nuxt/ui'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 
 const UButton = resolveComponent('UButton')
@@ -148,12 +148,12 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ table }) => h(UCheckbox, {
     'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
-    'ariaLabel': 'Select all'
+    'aria-label': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
-    'ariaLabel': 'Select row'
+    'aria-label': 'Select row'
   }),
   enableSorting: false,
   enableHiding: false
@@ -251,15 +251,17 @@ const columns: TableColumn<Payment>[] = [{
     }]
 
     return h('div', { class: 'text-right' }, h(UDropdownMenu, {
-      content: {
+      'content': {
         align: 'end'
       },
-      items
+      items,
+      'aria-label': 'Actions dropdown'
     }, () => h(UButton, {
-      icon: 'i-lucide-ellipsis-vertical',
-      color: 'neutral',
-      variant: 'ghost',
-      class: 'ms-auto'
+      'icon': 'i-lucide-ellipsis-vertical',
+      'color': 'neutral',
+      'variant': 'ghost',
+      'class': 'ms-auto',
+      'aria-label': 'Actions dropdown'
     })))
   }
 }]
@@ -277,6 +279,10 @@ const pagination = ref({
 
 function randomize() {
   data.value = [...data.value].sort(() => Math.random() - 0.5)
+}
+
+function onSelect(row: TableRow<Payment>) {
+  console.log(row)
 }
 
 onMounted(() => {
@@ -337,6 +343,7 @@ onMounted(() => {
       }"
       sticky
       class="border border-(--ui-border-accented) rounded-(--ui-radius)"
+      @select="onSelect"
     >
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>

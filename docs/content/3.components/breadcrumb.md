@@ -1,5 +1,6 @@
 ---
 description: A hierarchy of links to navigate through a website.
+category: navigation
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -26,6 +27,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - BreadcrumbItem[]
 props:
   items:
     - label: 'Home'
@@ -53,6 +56,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - BreadcrumbItem[]
 props:
   separatorIcon: 'i-lucide-arrow-right'
   items:

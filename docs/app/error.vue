@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import colors from 'tailwindcss/colors'
-// import { debounce } from 'perfect-debounce'
 import type { NuxtError } from '#app'
 
 const props = defineProps<{
@@ -15,17 +14,8 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
   server: false
 })
 
-const searchTerm = ref('')
-
-// watch(searchTerm, debounce((query: string) => {
-//   if (!query) {
-//     return
-//   }
-
-//   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
-// }, 500))
-
 const links = useLinks()
+const searchLinks = useSearchLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
@@ -48,7 +38,7 @@ useHead({
 })
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt UI v3',
+  titleTemplate: '%s - Nuxt UI',
   title: String(props.error.statusCode)
 })
 
@@ -67,17 +57,17 @@ provide('navigation', mappedNavigation)
   <UApp>
     <NuxtLoadingIndicator color="#FFF" />
 
-    <!-- <Banner /> -->
+    <Banner />
 
     <Header :links="links" />
 
     <UError :error="error" />
 
-    <!-- <Footer /> -->
+    <Footer />
 
     <ClientOnly>
       <LazyUContentSearch
-        v-model:search-term="searchTerm"
+        :links="searchLinks"
         :files="files"
         :groups="[{
           id: 'framework',

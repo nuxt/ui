@@ -3,7 +3,6 @@ import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/badge'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
@@ -21,8 +20,17 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
    */
   as?: any
   label?: string | number
+  /**
+   * @defaultValue 'primary'
+   */
   color?: BadgeVariants['color']
+  /**
+   * @defaultValue 'solid'
+   */
   variant?: BadgeVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: BadgeVariants['size']
   class?: any
   ui?: Partial<typeof badge.slots>
@@ -57,8 +65,6 @@ const ui = computed(() => badge({
   size: buttonGroupSize.value || props.size,
   buttonGroup: orientation.value
 }))
-
-extendDevtoolsMeta({ defaultProps: { label: 'Badge' } })
 </script>
 
 <template>

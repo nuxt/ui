@@ -1,5 +1,6 @@
 ---
 description: A button element that can act as a link or trigger an action.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -25,23 +26,6 @@ You can achieve the same result by using the `label` prop.
 ---
 props:
   label: Button
----
-::
-
-### Link
-
-You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
-
-::component-code
----
-ignore:
-  - label
-  - target
-props:
-  to: https://github.com/nuxt/ui
-  target: _blank
-slots:
-  default: Button
 ---
 ::
 
@@ -157,6 +141,96 @@ props:
   color: neutral
   variant: outline
 ---
+::
+
+### Link
+
+You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
+
+::component-code
+---
+ignore:
+  - target
+props:
+  to: https://github.com/nuxt/ui
+  target: _blank
+slots:
+  default: Button
+---
+::
+
+When the Button is a link or when using the `active` prop, you can use the `active-color` and `active-variant` props to customize the active state.
+
+::component-code
+---
+prettier: true
+ignore:
+  - color
+  - variant
+items:
+  activeColor:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
+  activeVariant:
+    - solid
+    - outline
+    - soft
+    - subtle
+    - ghost
+    - link
+props:
+  active: true
+  color: neutral
+  variant: outline
+  activeColor: primary
+  activeVariant: solid
+slots:
+  default: |
+
+    Button
+---
+
+Button
+::
+
+You can also use the `active-class` and `inactive-class` props to customize the active state.
+
+::component-code
+---
+props:
+  active: true
+  activeClass: 'font-bold'
+  inactiveClass: 'font-light'
+slots:
+  default: Button
+---
+
+Button
+::
+
+::tip
+You can configure these styles globally in your `app.config.ts` file under the `ui.button.variants.active` key.
+
+```ts
+export default defineAppConfig({
+  ui: {
+    button: {
+      variants: {
+        active: {
+          true: {
+            base: 'font-bold'
+          }
+        }
+      }
+    }
+  }
+})
+```
 ::
 
 ### Loading

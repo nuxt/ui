@@ -1,6 +1,7 @@
 ---
 title: InputNumber
 description: Input numerical values with a customizable range.
+category: form
 links:
   - label: Number Field
     icon: i-custom-reka-ui

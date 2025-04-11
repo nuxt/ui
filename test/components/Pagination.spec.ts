@@ -31,7 +31,7 @@ describe('Pagination', () => {
     ...variants.map((activeVariant: string) => [`with neutral active variant ${activeVariant}`, { props: { ...props, activeVariant, color: 'neutral' } }]),
     ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'relative' } }],
-    ['with ui', { props: { ...props, ui: { list: 'gap-3' } } }],
+    ['with ui', { props: { ...props, ui: { list: 'gap-3', first: 'rounded-full', prev: 'rounded-full', item: 'rounded-full', next: 'rounded-full', last: 'rounded-full' } } }],
     // Slots
     ['with first slot', { props, slots: { first: () => 'First slot' } }],
     ['with prev slot', { props, slots: { prev: () => 'Prev slot' } }],

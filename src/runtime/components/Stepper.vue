@@ -1,10 +1,10 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/stepper'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { DynamicSlots } from '../types/utils'
 
@@ -19,20 +19,34 @@ export interface StepperItem {
   value?: string | number
   title?: string
   description?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   content?: string
   disabled?: boolean
+  [key: string]: any
 }
 
-export interface StepperProps<T extends StepperItem> extends Pick<StepperRootProps, 'linear'> {
+export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<StepperRootProps, 'linear'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
   items: T[]
+  /**
+   * @defaultValue 'md'
+   */
   size?: StepperVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: StepperVariants['color']
+  /**
+   * The orientation of the stepper.
+   * @defaultValue 'horizontal'
+   */
   orientation?: StepperVariants['orientation']
   /**
    * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.
@@ -43,21 +57,20 @@ export interface StepperProps<T extends StepperItem> extends Pick<StepperRootPro
   class?: any
 }
 
-export type StepperEmits<T> = Omit<StepperRootEmits, 'update:modelValue'> & {
+export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRootEmits, 'update:modelValue'> & {
   next: [payload: T]
   prev: [payload: T]
 }
 
 type SlotProps<T extends StepperItem> = (props: { item: T }) => any
 
-export type StepperSlots<T extends StepperItem> = {
+export type StepperSlots<T extends StepperItem = StepperItem> = {
   indicator: SlotProps<T>
   title: SlotProps<T>
   description: SlotProps<T>
   content: SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+} & DynamicSlots<T>
 
-extendDevtoolsMeta({ example: 'StepperExample' })
 </script>
 
 <script setup lang="ts" generic="T extends StepperItem">
@@ -96,7 +109,7 @@ const currentStepIndex = computed({
   }
 })
 
-const currentStep = computed(() => props.items?.[currentStepIndex.value] as T)
+const currentStep = computed(() => props.items?.[currentStepIndex.value])
 const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1)
 const hasPrev = computed(() => currentStepIndex.value > 0)
 
@@ -104,13 +117,13 @@ defineExpose({
   next() {
     if (hasNext.value) {
       currentStepIndex.value += 1
-      emits('next', currentStep.value)
+      emits('next', currentStep.value as T)
     }
   },
   prev() {
     if (hasPrev.value) {
       currentStepIndex.value -= 1
-      emits('prev', currentStep.value)
+      emits('prev', currentStep.value as T)
     }
   },
   hasNext,
@@ -132,7 +145,7 @@ defineExpose({
           <StepperTrigger :class="ui.trigger({ class: props.ui?.trigger })">
             <StepperIndicator :class="ui.indicator({ class: props.ui?.indicator })">
               <slot name="indicator" :item="item">
-                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: props.ui?.indicator })" />
+                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: props.ui?.icon })" />
                 <template v-else>
                   {{ count + 1 }}
                 </template>
@@ -161,10 +174,10 @@ defineExpose({
       </StepperItem>
     </div>
 
-    <div v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot]) || (currentStep?.value && !!slots[currentStep.value])" :class="ui.content({ class: props.ui?.description })">
+    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot" :class="ui.content({ class: props.ui?.content })">
       <slot
-        :name="!!slots[currentStep?.slot ?? currentStep.value] ? currentStep.slot ?? currentStep.value : 'content'"
-        :item="currentStep"
+        :name="((currentStep?.slot || 'content') as keyof StepperSlots<T>)"
+        :item="(currentStep as Extract<T, { slot: string }>)"
       >
         {{ currentStep?.content }}
       </slot>

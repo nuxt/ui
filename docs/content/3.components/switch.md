@@ -1,5 +1,6 @@
 ---
 description: A control that toggles between two states.
+category: form
 links:
   - label: Switch
     icon: i-custom-reka-ui

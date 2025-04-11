@@ -4,10 +4,6 @@ import { useRouter } from 'vue-router'
 import { reactive, ref } from 'vue'
 import { useColorMode } from '@vueuse/core'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore included for compatibility with Nuxt playground
-import { useAppConfig } from '#imports'
-
 const appConfig = useAppConfig()
 const mode = useColorMode()
 
@@ -65,7 +61,8 @@ const components = [
   'table',
   'textarea',
   'toast',
-  'tooltip'
+  'tooltip',
+  'tree'
 ]
 
 const items = components.map(component => ({ label: upperName(component), to: `/components/${component}` }))
@@ -87,11 +84,11 @@ defineShortcuts({
 
 <template>
   <UApp :toaster="(appConfig.toaster as any)">
-    <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-(--ui-bg)" vaul-drawer-wrapper>
+    <div class="h-screen w-screen overflow-hidden flex min-h-0 bg-(--ui-bg)" data-vaul-drawer-wrapper>
       <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-e border-(--ui-border) overflow-y-auto w-48 p-4" />
       <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-(--ui-border) [&>div]:min-w-min overflow-x-auto" />
 
-      <div class="fixed top-15 lg:top-3 right-4 flex items-center gap-2">
+      <div class="fixed top-15 lg:top-3 end-4 flex items-center gap-2">
         <UButton
           :icon="mode === 'dark' ? 'i-lucide-moon' : 'i-lucide-sun'"
           color="neutral"
@@ -115,24 +112,3 @@ defineShortcuts({
     </UModal>
   </UApp>
 </template>
-
-<style>
-@import "tailwindcss";
-@import "@nuxt/ui";
-
-@theme {
-  --font-sans: 'Public Sans', sans-serif;
-
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
-}
-</style>

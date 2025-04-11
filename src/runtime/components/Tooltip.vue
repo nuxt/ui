@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipArrowProps } from 'reka-ui'
+import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipContentEmits, TooltipArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/tooltip'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { KbdProps } from '../types'
+import type { EmitsToProps } from '../types/utils'
 
 const appConfigTooltip = _appConfig as AppConfig & { ui: { tooltip: Partial<typeof theme> } }
 
@@ -20,7 +20,7 @@ export interface TooltipProps extends TooltipRootProps {
    * The content of the tooltip.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
-  content?: Omit<TooltipContentProps, 'as' | 'asChild'>
+  content?: Omit<TooltipContentProps, 'as' | 'asChild'> & Partial<EmitsToProps<TooltipContentEmits>>
   /**
    * Display an arrow alongside the tooltip.
    * @defaultValue false
@@ -41,8 +41,6 @@ export interface TooltipSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'TooltipExample', defaultProps: { text: 'Hello world!' } })
 </script>
 
 <script setup lang="ts">
@@ -70,7 +68,7 @@ const ui = computed(() => tooltip({
 
 <template>
   <TooltipRoot v-slot="{ open }" v-bind="rootProps">
-    <TooltipTrigger v-if="!!slots.default" as-child :class="props.class">
+    <TooltipTrigger v-if="!!slots.default" v-bind="$attrs" as-child :class="props.class">
       <slot :open="open" />
     </TooltipTrigger>
 

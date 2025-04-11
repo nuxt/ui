@@ -3,7 +3,6 @@ import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps } from '../types'
 
@@ -21,10 +20,23 @@ export interface AlertProps {
   as?: any
   title?: string
   description?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
+  /**
+   * @defaultValue 'primary'
+   */
   color?: AlertVariants['color']
+  /**
+   * @defaultValue 'solid'
+   */
   variant?: AlertVariants['variant']
+  /**
+   * The orientation between the content and the actions.
+   * @defaultValue 'vertical'
+   */
   orientation?: AlertVariants['orientation']
   /**
    * Display a list of actions:
@@ -39,10 +51,11 @@ export interface AlertProps {
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   class?: any
@@ -58,10 +71,8 @@ export interface AlertSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: any }): any
+  close(props: { ui: ReturnType<typeof alert> }): any
 }
-
-extendDevtoolsMeta<AlertProps>({ defaultProps: { title: 'Heads up!' } })
 </script>
 
 <script setup lang="ts">
@@ -131,7 +142,7 @@ const ui = computed(() => alert({
           color="neutral"
           variant="link"
           :aria-label="t('alert.close')"
-          v-bind="typeof close === 'object' ? close : undefined"
+          v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"
         />

@@ -1,5 +1,6 @@
 ---
 description: An input element to toggle between checked and unchecked states.
+category: form
 links:
   - label: Checkbox
     icon: i-custom-reka-ui

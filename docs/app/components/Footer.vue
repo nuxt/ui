@@ -1,7 +1,9 @@
 <script setup lang="ts">
+const route = useRoute()
+
 const links = [{
-  label: 'Figma',
-  to: '/figma'
+  label: 'Team',
+  to: '/team'
 }, {
   label: 'Roadmap',
   to: '/roadmap'
@@ -16,7 +18,7 @@ const links = [{
 </script>
 
 <template>
-  <USeparator icon="i-simple-icons-nuxtdotjs" class="h-px" />
+  <USeparator :icon="route.path === '/' ? undefined : 'i-simple-icons-nuxtdotjs'" class="h-px" />
 
   <UFooter>
     <template #left>

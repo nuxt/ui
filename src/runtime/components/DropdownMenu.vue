@@ -1,13 +1,20 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuArrowProps } from 'reka-ui'
+import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuContentEmits, DropdownMenuArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type {
+  ArrayOrNested,
+  DynamicSlots,
+  MergeTypes,
+  NestedItem,
+  PartialString,
+  EmitsToProps
+} from '../types/utils'
 
 const appConfigDropdownMenu = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
 
@@ -17,10 +24,13 @@ type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
 
 export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   color?: DropdownMenuVariants['color']
   avatar?: AvatarProps
-  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
   kbds?: KbdProps['value'][] | KbdProps[]
   /**
    * The item type.
@@ -33,35 +43,42 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   checked?: boolean
   open?: boolean
   defaultOpen?: boolean
-  children?: DropdownMenuItem[] | DropdownMenuItem[][]
+  children?: ArrayOrNested<DropdownMenuItem>
   onSelect?(e: Event): void
   onUpdateChecked?(checked: boolean): void
+  [key: string]: any
 }
 
-export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'> {
+export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>> extends Omit<DropdownMenuRootProps, 'dir'> {
+  /**
+   * @defaultValue 'md'
+   */
   size?: DropdownMenuVariants['size']
-  items?: T[] | T[][]
+  items?: T
   /**
    * The icon displayed when an item is checked.
    * @defaultValue appConfig.ui.icons.check
+   * @IconifyIcon
    */
   checkedIcon?: string
   /**
    * The icon displayed when an item is loading.
    * @defaultValue appConfig.ui.icons.loading
+   * @IconifyIcon
    */
   loadingIcon?: string
   /**
    * The icon displayed when the item is an external link.
    * Set to `false` to hide the external icon.
    * @defaultValue appConfig.ui.icons.external
+   * @IconifyIcon
    */
   externalIcon?: boolean | string
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
-  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
   /**
    * Display an arrow alongside the menu.
    * @defaultValue false
@@ -76,7 +93,7 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: keyof NestedItem<T>
   disabled?: boolean
   class?: any
   ui?: PartialString<typeof dropdownMenu.slots>
@@ -84,67 +101,22 @@ export interface DropdownMenuProps<T> extends Omit<DropdownMenuRootProps, 'dir'>
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T> = (props: { item: T, active?: boolean, index: number }) => any
+type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number }) => any
 
-export type DropdownMenuSlots<T extends { slot?: string }> = {
+export type DropdownMenuSlots<
+  A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
+  T extends NestedItem<A> = NestedItem<A>
+> = {
   'default'(props: { open: boolean }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
-extendDevtoolsMeta({
-  example: 'DropdownMenuExample',
-  ignoreProps: ['items'],
-  defaultProps: {
-    items: [
-      [{
-        label: 'My account',
-        avatar: {
-          src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-        },
-        type: 'label'
-      }], [{
-        label: 'Profile',
-        icon: 'i-lucide-user',
-        slot: 'custom'
-      }, {
-        label: 'Billing',
-        icon: 'i-lucide-credit-card',
-        kbds: ['meta', 'b']
-      }, {
-        label: 'Settings',
-        icon: 'i-lucide-cog',
-        kbds: ['?']
-      }], [{
-        label: 'Invite users',
-        icon: 'i-lucide-user-plus',
-        children: [[{
-          label: 'Invite by email',
-          icon: 'i-lucide-send-horizontal'
-        }, {
-          label: 'Invite by link',
-          icon: 'i-lucide-link',
-          kbds: ['meta', 'i']
-        }]]
-      }],
-      [{
-        label: 'GitHub',
-        icon: 'i-simple-icons-github',
-        to: 'https://github.com/nuxt/ui',
-        target: '_blank'
-      }, {
-        label: 'Support',
-        icon: 'i-lucide-life-buoy',
-        to: '/components/dropdown-menu'
-      }]
-    ]
-  }
-})
 </script>
 
-<script setup lang="ts" generic="T extends DropdownMenuItem">
+<script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
@@ -164,7 +136,7 @@ const slots = defineSlots<DropdownMenuSlots<T>>()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
-const proxySlots = omit(slots, ['default']) as Record<string, DropdownMenuSlots<T>[string]>
+const proxySlots = omit(slots, ['default'])
 
 const ui = computed(() => dropdownMenu({
   size: props.size
@@ -184,13 +156,13 @@ const ui = computed(() => dropdownMenu({
       v-bind="contentProps"
       :items="items"
       :portal="portal"
-      :label-key="labelKey"
+      :label-key="(labelKey as keyof NestedItem<T>)"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
     >
-      <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
-        <slot :name="name" v-bind="slotData" />
+      <template v-for="(_, name) in proxySlots" #[name]="slotData">
+        <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 
       <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />

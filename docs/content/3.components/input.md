@@ -1,5 +1,6 @@
 ---
 description: An input element to enter text.
+category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github

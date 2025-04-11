@@ -1,6 +1,7 @@
 ---
 title: PinInput
 description: An input element to enter a pin.
+category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -175,6 +176,12 @@ props:
 ### Emits
 
 :component-emits
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `inputsRef`{lang="ts-type"} | `Ref<ComponentPublicInstance[]>`{lang="ts-type"} |
 
 ## Theme
 

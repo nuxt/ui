@@ -1,5 +1,15 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Checkbox > renders with ariaLabel correctly 1`] = `
+"<div class="relative flex items-start">
+  <div class="flex items-center h-5"><button aria-label="Aria label" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!---->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Checkbox > renders with as correctly 1`] = `
 "<section class="relative flex items-start">
   <div class="flex items-center h-5"><button class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) size-4" id="v-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">

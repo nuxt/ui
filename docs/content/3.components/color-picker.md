@@ -1,6 +1,7 @@
 ---
 title: ColorPicker
 description: A component to select a color.
+category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github

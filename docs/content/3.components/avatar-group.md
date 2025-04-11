@@ -1,6 +1,7 @@
 ---
 title: AvatarGroup
 description: Stack multiple avatars in a group.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github

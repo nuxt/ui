@@ -25,13 +25,23 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
   status?: boolean
   /** Whether the progress is visually inverted. */
   inverted?: boolean
+  /**
+   * @defaultValue 'md'
+   */
   size?: ProgressVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
   color?: ProgressVariants['color']
   /**
    * The orientation of the progress bar.
    * @defaultValue 'horizontal'
    */
   orientation?: ProgressVariants['orientation']
+  /**
+   * The animation of the progress bar.
+   * @defaultValue 'carousel'
+   */
   animation?: ProgressVariants['animation']
   class?: any
   ui?: Partial<typeof progress.slots>

@@ -29,6 +29,7 @@ describe('PinInput', () => {
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { variant, color: 'neutral', highlight: true } }]),
+    ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'span' } }],
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { base: 'rounded-full' } } }]

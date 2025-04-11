@@ -2,6 +2,5 @@ packages:
   - "./"
   - "cli"
   - "docs"
-  - "devtools"
   - "playground"
   - "playground-vue"

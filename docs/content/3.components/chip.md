@@ -1,5 +1,6 @@
 ---
 description: An indicator of a numeric value or a state.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github

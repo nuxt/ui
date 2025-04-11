@@ -1,5 +1,6 @@
 ---
 description: An input to select a numeric value within a range.
+category: form
 links:
   - label: Slider
     icon: i-custom-reka-ui

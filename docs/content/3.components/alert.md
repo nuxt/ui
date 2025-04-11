@@ -1,5 +1,6 @@
 ---
 description: A callout to draw user's attention.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github

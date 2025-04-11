@@ -1,5 +1,6 @@
 ---
 description: A set of steps that are used to indicate progress through a multi-step process.
+category: navigation
 links:
   - label: Stepper
     icon: i-custom-reka-ui
@@ -30,6 +31,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   items:
     - title: 'Address'
@@ -60,6 +63,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   color: neutral
   items:
@@ -87,6 +92,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   size: xl
   items:
@@ -114,6 +121,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   orientation: vertical
   items:
@@ -141,6 +150,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - StepperItem[]
 props:
   disabled: true
   items:

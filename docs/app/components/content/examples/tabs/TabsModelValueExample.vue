@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const items = [
+import type { TabsItem } from '@nuxt/ui'
+
+const items: TabsItem[] = [
   {
     label: 'Account'
   },

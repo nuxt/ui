@@ -1,6 +1,7 @@
 ---
 title: ContextMenu
 description: A menu to display actions when right-clicking on an element.
+category: overlay
 links:
   - label: ContextMenu
     icon: i-custom-reka-ui
@@ -43,6 +44,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[][]
 props:
   items:
     - - label: Appearance
@@ -123,6 +126,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[]
 props:
   size: xl
   items:
@@ -157,6 +162,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[]
 props:
   disabled: true
   items:

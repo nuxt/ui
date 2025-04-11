@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
@@ -19,10 +20,25 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'primary'
+   */
   color?: PinInputVariants['color']
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: PinInputVariants['variant']
+  /**
+   * @defaultValue 'md'
+   */
   size?: PinInputVariants['size']
+  /**
+   * The number of input fields.
+   * @defaultValue 5
+   */
   length?: number | string
+  autofocus?: boolean
+  autofocusDelay?: number
   highlight?: boolean
   class?: any
   ui?: PartialString<typeof pinInput.slots>
@@ -32,20 +48,21 @@ export type PinInputEmits = PinInputRootEmits & {
   change: [payload: Event]
   blur: [payload: Event]
 }
+
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 
-defineOptions({ inheritAttrs: false })
-
 const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
-  length: 5
+  length: 5,
+  autofocusDelay: 0
 })
 const emits = defineEmits<PinInputEmits>()
 
@@ -58,6 +75,8 @@ const ui = computed(() => pinInput({
   size: size.value,
   highlight: highlight.value
 }))
+
+const inputsRef = ref<ComponentPublicInstance[]>([])
 
 const completed = ref(false)
 function onComplete(value: string[]) {
@@ -73,6 +92,22 @@ function onBlur(event: FocusEvent) {
     emitFormBlur()
   }
 }
+
+function autoFocus() {
+  if (props.autofocus) {
+    inputsRef.value[0]?.$el?.focus()
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
+
+defineExpose({
+  inputsRef
+})
 </script>
 
 <template>
@@ -87,9 +122,9 @@ function onBlur(event: FocusEvent) {
     <PinInputInput
       v-for="(ids, index) in looseToNumber(props.length)"
       :key="ids"
+      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
       :index="index"
       :class="ui.base({ class: props.ui?.base })"
-      v-bind="$attrs"
       :disabled="disabled"
       @blur="onBlur"
       @focus="emitFormFocus"

@@ -1,4 +1,4 @@
-import { isEqual } from 'ohash'
+import { isEqual } from 'ohash/utils'
 
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
   const result = {} as Pick<Data, Keys>
@@ -80,4 +80,8 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
   }
 
   return isEqual(value, currentValue)
+}
+
+export function isArrayOfArray<A>(item: A[] | A[][]): item is A[][] {
+  return Array.isArray(item[0])
 }

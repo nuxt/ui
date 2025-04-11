@@ -6,13 +6,9 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "valibot30",
-    "valibot31",
-    "typescript",
-    "vite",
     "vue-tsc"
   ],
-  "baseBranches": ["dev", "v3"],
+  "baseBranches": ["v2", "v3"],
   "packageRules": [{
     "matchBaseBranches": ["v3"],
     "labels": ["v3"]
@@ -23,6 +19,9 @@
       "@tailwindcss/postcss",
       "@tailwindcss/vite"
     ]
+  }, {
+    "matchDepTypes": ["peerDependencies"],
+    "enabled": false
   }, {
     "matchDepTypes": ["resolutions"],
     "enabled": false

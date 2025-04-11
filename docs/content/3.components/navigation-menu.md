@@ -1,6 +1,7 @@
 ---
 title: NavigationMenu
 description: A list of links that can be displayed horizontally or vertically.
+category: navigation
 links:
   - label: NavigationMenu
     icon: i-custom-reka-ui
@@ -38,6 +39,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   items:
     - label: Guide
@@ -67,14 +70,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -151,6 +150,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[][]
 props:
   orientation: 'vertical'
   items:
@@ -181,14 +182,10 @@ props:
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
-          - label: useModal
+          - label: useOverlay
             icon: i-lucide-file-text
-            description: Display a modal within your application.
-            to: /composables/use-modal
-          - label: useSlideover
-            icon: i-lucide-file-text
-            description: Display a slideover within your application.
-            to: /composables/use-slideover
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
@@ -254,6 +251,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[][]
 props:
   highlight: true
   highlightColor: 'primary'
@@ -284,14 +283,10 @@ props:
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
             to: /composables/define-shortcuts
-          - label: useModal
+          - label: useOverlay
             icon: i-lucide-file-text
-            description: Display a modal within your application.
-            to: /composables/use-modal
-          - label: useSlideover
-            icon: i-lucide-file-text
-            description: Display a slideover within your application.
-            to: /composables/use-slideover
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
@@ -357,6 +352,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[][]
 props:
   color: neutral
   items:
@@ -390,6 +387,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[][]
 props:
   color: neutral
   variant: link
@@ -434,6 +433,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   trailingIcon: 'i-lucide-arrow-down'
   items:
@@ -464,14 +465,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -534,6 +531,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   arrow: true
   items:
@@ -564,14 +563,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -630,6 +625,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   arrow: true
   contentOrientation: 'vertical'
@@ -655,14 +652,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
@@ -705,6 +698,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - NavigationMenuItem[]
 props:
   unmountOnHide: false
   items:
@@ -735,14 +730,10 @@ props:
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
           to: /composables/define-shortcuts
-        - label: useModal
+        - label: useOverlay
           icon: i-lucide-file-text
-          description: Display a modal within your application.
-          to: /composables/use-modal
-        - label: useSlideover
-          icon: i-lucide-file-text
-          description: Display a slideover within your application.
-          to: /composables/use-slideover
+          description: Display a modal/slideover within your application.
+          to: /composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.

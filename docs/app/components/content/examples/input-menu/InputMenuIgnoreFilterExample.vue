@@ -1,15 +1,18 @@
 <script setup lang="ts">
+import type { AvatarProps } from '@nuxt/ui'
+
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  key: 'typicode-users',
   params: { q: searchTermDebounced },
   transform: (data: { id: number, name: string }[]) => {
     return data?.map(user => ({
       label: user.name,
       value: String(user.id),
       avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
-    })) || []
+    }))
   },
   lazy: true
 })
@@ -18,7 +21,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 <template>
   <UInputMenu
     v-model:search-term="searchTerm"
-    :items="users || []"
+    :items="users"
     :loading="status === 'pending'"
     ignore-filter
     icon="i-lucide-user"
@@ -28,7 +31,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
       <UAvatar
         v-if="modelValue"
         v-bind="modelValue.avatar"
-        :size="ui.leadingAvatarSize()"
+        :size="(ui.leadingAvatarSize() as AvatarProps['size'])"
         :class="ui.leadingAvatar()"
       />
     </template>

@@ -1,6 +1,7 @@
 ---
 title: ButtonGroup
 description: Group multiple button-like elements together.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github

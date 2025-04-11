@@ -1,9 +1,9 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 import type { DynamicSlots } from '../types/utils'
 
@@ -13,16 +13,23 @@ const accordion = tv({ extend: tv(theme), ...(appConfigAccordion.ui?.accordion |
 
 export interface AccordionItem {
   label?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
+  /**
+   * @IconifyIcon
+   */
   trailingIcon?: string
   slot?: string
   content?: string
   /** A unique value for the accordion item. Defaults to the index. */
   value?: string
   disabled?: boolean
+  [key: string]: any
 }
 
-export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled' | 'unmountOnHide'> {
+export interface AccordionProps<T extends AccordionItem = AccordionItem> extends Pick<AccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -32,6 +39,7 @@ export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible
   /**
    * The icon displayed on the right side of the trigger.
    * @defaultValue appConfig.ui.icons.chevronDown
+   * @IconifyIcon
    */
   trailingIcon?: string
   /**
@@ -45,46 +53,16 @@ export interface AccordionProps<T> extends Pick<AccordionRootProps, 'collapsible
 
 export interface AccordionEmits extends AccordionRootEmits {}
 
-type SlotProps<T> = (props: { item: T, index: number, open: boolean }) => any
+type SlotProps<T extends AccordionItem> = (props: { item: T, index: number, open: boolean }) => any
 
-export type AccordionSlots<T extends { slot?: string }> = {
+export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
   leading: SlotProps<T>
   default: SlotProps<T>
   trailing: SlotProps<T>
   content: SlotProps<T>
   body: SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+} & DynamicSlots<T, 'body', { index: number, open: boolean }>
 
-extendDevtoolsMeta({
-  defaultProps: {
-    items: [{
-      label: 'Getting Started',
-      icon: 'i-lucide-info',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-    }, {
-      label: 'Installation',
-      icon: 'i-lucide-download',
-      disabled: true,
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-    }, {
-      label: 'Theming',
-      icon: 'i-lucide-pipette',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-    }, {
-      label: 'Layouts',
-      icon: 'i-lucide-layout-dashboard',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-    }, {
-      label: 'Components',
-      icon: 'i-lucide-layers-3',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-    }, {
-      label: 'Utilities',
-      icon: 'i-lucide-wrench',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
-    }]
-  }
-})
 </script>
 
 <script setup lang="ts" generic="T extends AccordionItem">
@@ -115,7 +93,7 @@ const ui = computed(() => accordion({
 <template>
   <AccordionRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <AccordionItem
-      v-for="(item, index) in items"
+      v-for="(item, index) in props.items"
       v-slot="{ open }"
       :key="index"
       :value="item.value || String(index)"
@@ -138,10 +116,10 @@ const ui = computed(() => accordion({
         </AccordionTrigger>
       </AccordionHeader>
 
-      <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body`])" :class="ui.content({ class: props.ui?.content })">
-        <slot :name="item.slot || 'content'" :item="item" :index="index" :open="open">
+      <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof AccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof AccordionSlots<T>])" :class="ui.content({ class: props.ui?.content })">
+        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
           <div :class="ui.body({ class: props.ui?.body })">
-            <slot :name="item.slot ? `${item.slot}-body`: 'body'" :item="item" :index="index" :open="open">
+            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
               {{ item.content }}
             </slot>
           </div>

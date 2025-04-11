@@ -1,10 +1,8 @@
 <script lang="ts">
 import type { VariantProps } from 'tailwind-variants'
-import type { AvatarFallbackProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
 const appConfigAvatar = _appConfig as AppConfig & { ui: { avatar: Partial<typeof theme> } }
@@ -13,7 +11,7 @@ const avatar = tv({ extend: tv(theme), ...(appConfigAvatar.ui?.avatar || {}) })
 
 type AvatarVariants = VariantProps<typeof avatar>
 
-export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
+export interface AvatarProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
@@ -21,24 +19,28 @@ export interface AvatarProps extends Pick<AvatarFallbackProps, 'delayMs'> {
   as?: any
   src?: string
   alt?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   text?: string
+  /**
+   * @defaultValue 'md'
+   */
   size?: AvatarVariants['size']
   class?: any
+  style?: any
   ui?: Partial<typeof avatar.slots>
 }
 
 export interface AvatarSlots {
   default(props?: {}): any
 }
-
-extendDevtoolsMeta<AvatarProps>({ defaultProps: { src: 'https://avatars.githubusercontent.com/u/739984?v=4', alt: 'Benjamin Canac' } })
 </script>
 
 <script setup lang="ts">
-import { ref, computed, useAttrs, onMounted } from 'vue'
-import { AvatarRoot, AvatarFallback, useForwardProps } from 'reka-ui'
-import { reactivePick, useImage } from '@vueuse/core'
+import { ref, computed, watch } from 'vue'
+import { Primitive, Slot } from 'reka-ui'
 import ImageComponent from '#build/ui-image-component'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import UIcon from './Icon.vue'
@@ -46,13 +48,8 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AvatarProps>(), { as: 'span' })
-const attrs = useAttrs()
-
-const fallbackProps = useForwardProps(reactivePick(props, 'delayMs'))
 
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
-
-const imageLoaded = ref(false)
 
 const { size } = useAvatarGroup(props)
 
@@ -73,43 +70,39 @@ const sizePx = computed(() => ({
   '3xl': 48
 })[props.size || 'md'])
 
-// Reproduces Reka UI's [AvatarImage](https://reka-ui.com/docs/components/avatar#image) component behavior which cannot be used with NuxtImg component
-onMounted(() => {
-  if (!props.src || (ImageComponent as unknown as string) !== 'img') {
-    return
+const error = ref(false)
+
+watch(() => props.src, () => {
+  if (error.value) {
+    error.value = false
   }
-
-  const { then } = useImage({ ...props, ...attrs, src: props.src! })
-
-  then((img) => {
-    if (img.isReady.value) {
-      imageLoaded.value = true
-    }
-  })
 })
+
+function onError() {
+  error.value = true
+}
 </script>
 
 <template>
-  <AvatarRoot :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })" :style="props.style">
     <component
       :is="ImageComponent"
-      v-if="src"
-      v-show="imageLoaded"
+      v-if="src && !error"
       role="img"
       :src="src"
       :alt="alt"
       :width="sizePx"
       :height="sizePx"
-      v-bind="attrs"
+      v-bind="$attrs"
       :class="ui.image({ class: props.ui?.image })"
-      @load="imageLoaded = true"
+      @error="onError"
     />
 
-    <AvatarFallback v-if="!imageLoaded" as-child v-bind="{ ...fallbackProps, ...$attrs }">
+    <Slot v-else v-bind="$attrs">
       <slot>
         <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
         <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
       </slot>
-    </AvatarFallback>
-  </AvatarRoot>
+    </Slot>
+  </Primitive>
 </template>

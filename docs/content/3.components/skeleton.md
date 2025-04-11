@@ -1,5 +1,6 @@
 ---
 description: A placeholder to show while content is loading.
+category: layout
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import DropdownMenu, { type DropdownMenuProps, type DropdownMenuSlots } from '../../src/runtime/components/DropdownMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/dropdown-menu'
+import { expectSlotProps } from '../utils/types'
 
 describe('DropdownMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -105,8 +106,30 @@ describe('DropdownMenu', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps<typeof items[number][number]>, slots?: Partial<DropdownMenuSlots<any>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps, slots?: Partial<DropdownMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, DropdownMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  test('should have the correct types', () => {
+    // normal
+    expectSlotProps('item', () => DropdownMenu({
+      items: [{ label: 'foo', value: 'bar' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // groups
+    expectSlotProps('item', () => DropdownMenu({
+      items: [[{ label: 'foo', value: 'bar' }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // custom
+    expectSlotProps('item', () => DropdownMenu({
+      items: [{ label: 'foo', value: 'bar', custom: 'nice' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+
+    // custom + groups
+    expectSlotProps('item', () => DropdownMenu({
+      items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
   })
 })

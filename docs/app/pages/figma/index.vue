@@ -1,10 +1,11 @@
 <script setup lang="ts">
 // @ts-expect-error yaml is not typed
 import page from '.figma.yml'
-import { animate } from 'motion'
+import { animate } from 'motion-v'
 import { joinURL } from 'ufo'
 
 const { url } = useSiteConfig()
+
 useSeoMeta({
   title: page.title,
   description: page.description,
@@ -93,10 +94,10 @@ onMounted(async () => {
       }"
     >
       <template #title>
-        <MDC :value="page.hero.title" unwrap="p" />
+        <MDC :value="page.hero.title" unwrap="p" cache-key="figma-hero-title" />
       </template>
       <template #description>
-        <MDC :value="page.hero.description" unwrap="p" />
+        <MDC :value="page.hero.description" unwrap="p" cache-key="figma-hero-description" />
       </template>
       <!-- <img src="/pro/figma/nuxt-ui-figma.png" alt="Screnshot of the Nuxt UI Figma design kit" class="w-full h-auto border border-(--ui-border) border-b-0"> -->
       <div class="relative">
@@ -124,7 +125,9 @@ onMounted(async () => {
           </UButton>
         </div>
       </div>
-      <div aria-hidden="true" class="absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <Motion as-child :initial="{ height: 0 }" :animate="{ height: 'auto' }" :transition="{ delay: 0.2, duration: 1 }">
+        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      </Motion>
     </UPageHero>
     <UPageSection v-bind="page.features1" :ui="{ container: 'py-16 sm:py-16 lg:py-16', features: 'mt-0' }" class="border-y border-(--ui-border)" />
     <UPageCTA
@@ -138,10 +141,10 @@ onMounted(async () => {
       class="rounded-none bg-gradient-to-b from-(--ui-bg-muted) to-(--ui-bg)"
     >
       <template #title>
-        <MDC :value="page.cta1.title" unwrap="p" />
+        <MDC :value="page.cta1.title" unwrap="p" cache-key="figma-cta-1-title" />
       </template>
       <template #description>
-        <MDC :value="page.cta1.description" unwrap="p" />
+        <MDC :value="page.cta1.description" unwrap="p" cache-key="figma-cta-1-description" />
       </template>
     </UPageCTA>
     <UPageSection v-bind="page.section1" orientation="horizontal" :ui="{ container: 'py-16 sm:py-16 lg:py-16' }">
@@ -153,7 +156,7 @@ onMounted(async () => {
             :src="item.src"
             :alt="item.alt"
             class="w-full h-auto rounded-[calc(var(--ui-radius)*2)]"
-            lazy
+            loading="lazy"
           />
         </template>
       </UTabs>
@@ -163,7 +166,7 @@ onMounted(async () => {
         v-if="page.section2.image"
         v-bind="page.section2.image"
         class="w-full h-auto rounded-[calc(var(--ui-radius)*2)]"
-        lazy
+        loading="lazy"
       />
     </UPageSection>
     <UPageSection v-bind="page.section3" orientation="horizontal" :ui="{ container: 'py-16 sm:pt-16 lg:pt-16' }">
@@ -171,7 +174,7 @@ onMounted(async () => {
         v-if="page.section3.image"
         v-bind="page.section3.image"
         class="w-full h-auto rounded-[calc(var(--ui-radius)*2)]"
-        lazy
+        loading="lazy"
       />
     </UPageSection>
     <USeparator />
@@ -187,7 +190,7 @@ onMounted(async () => {
       }"
     >
       <template #description>
-        <MDC :value="page.section4.description" unwrap="p" />
+        <MDC :value="page.section4.description" unwrap="p" cache-key="figma-section-4-description" />
       </template>
       <div aria-hidden="true" class="absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center border border-(--ui-border) border-b-0 sm:divide-x divide-y lg:divide-y-0 divide-(--ui-border)">
@@ -196,7 +199,7 @@ onMounted(async () => {
             v-if="step.image"
             v-bind="step.image"
             class="rounded-(--ui-radius)"
-            lazy
+            loading="lazy"
           />
           <div>
             <h2 class="font-semibold inline-flex items-center gap-x-1">
@@ -231,6 +234,7 @@ onMounted(async () => {
           :title="plan.title"
           :description="plan.description"
           :price="plan.price"
+          :discount="plan.discount"
           :billing-period="plan.billing_period"
           :billing-cycle="plan.billing_cycle"
           :highlight="plan.highlight"
@@ -243,7 +247,7 @@ onMounted(async () => {
           <template #features>
             <li v-for="(feature, i) in plan.features" :key="i" class="flex items-center gap-2 min-w-0">
               <UIcon name="i-lucide-circle-check" class="size-5 shrink-0 text-(--ui-primary)" />
-              <MDC :value="feature" unwrap="p" tag="span" class="text-sm truncate text-(--ui-text-accented)" />
+              <MDC :value="feature" unwrap="p" tag="span" class="text-sm truncate text-(--ui-text-accented)" :cache-key="`figma-pricing-plan-${index}-feature-${i}`" />
             </li>
           </template>
           <template #button>
@@ -269,6 +273,7 @@ onMounted(async () => {
           :key="index"
           v-bind="logo"
           class="h-6 shrink-0 max-w-[140px] filter invert dark:invert-0"
+          loading="lazy"
         >
       </UPageMarquee>
     </UPageCTA>
@@ -279,8 +284,8 @@ onMounted(async () => {
         :items="(page.faq.items as any[])"
         class="max-w-4xl mx-auto"
       >
-        <template #body="{ item }">
-          <MDC :value="item.content" unwrap="p" />
+        <template #body="{ item, index }">
+          <MDC :value="item.content" unwrap="p" :cache-key="`figma-faq-${index}-content`" />
         </template>
       </UPageAccordion>
     </UPageSection>

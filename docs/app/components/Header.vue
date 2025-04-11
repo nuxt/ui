@@ -6,6 +6,7 @@ const props = defineProps<{
   links: NavigationMenuItem[]
 }>()
 
+const route = useRoute()
 const config = useRuntimeConfig().public
 const { module } = useSharedData()
 
@@ -21,21 +22,38 @@ onMounted(() => {
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const items = computed(() => props.links.map(({ icon, ...link }) => link))
+const githubLink = computed(() => {
+  return `https://github.com/nuxt/${value.value}`
+})
+
+const desktopLinks = computed(() => props.links.map(({ icon, ...link }) => link))
+const mobileLinks = computed(() => [
+  ...props.links.map(link => ({ ...link, defaultOpen: link.children && route.path.startsWith(link.to as string) })),
+  {
+    label: 'Open on GitHub',
+    to: githubLink.value,
+    icon: 'i-simple-icons-github',
+    target: '_blank'
+  }
+])
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0' }" mode="drawer" :menu="{ shouldScaleBackground: true }">
+  <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
     <template #left>
       <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0" aria-label="Nuxt UI">
-        <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
-        <Logo class="w-auto h-6 shrink-0 ui-only" />
+        <Logo v-if="route.path === '/'" class="w-auto h-6 shrink-0" />
+        <LogoPro v-else-if="route.path.startsWith('/pro')" class="w-auto h-6 shrink-0" />
+        <template v-else>
+          <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
+          <Logo class="w-auto h-6 shrink-0 ui-only" />
+        </template>
       </NuxtLink>
 
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"
-        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.5' : 'v2.19', to: module === 'ui-pro' ? 'https://ui.nuxt.com/pro' : 'https://ui.nuxt.com' }]"
+        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.7.1' : 'v2.21.1', to: module === 'ui-pro' ? 'https://ui2.nuxt.com/pro' : 'https://ui2.nuxt.com' }]"
         :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }"
         size="xs"
       >
@@ -53,7 +71,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
       </UDropdownMenu>
     </template>
 
-    <UNavigationMenu :items="items" variant="link" />
+    <UNavigationMenu :items="desktopLinks" variant="link" />
 
     <template #right>
       <ThemePicker />
@@ -64,9 +82,10 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
+          :key="value"
           color="neutral"
           variant="ghost"
-          :to="`https://github.com/nuxt/${value}`"
+          :to="githubLink"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
@@ -75,7 +94,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
     </template>
 
     <template #body>
-      <UNavigationMenu orientation="vertical" :items="links" class="-mx-2.5" />
+      <UNavigationMenu orientation="vertical" :items="mobileLinks" class="-mx-2.5" />
 
       <USeparator type="dashed" class="mt-4 mb-6" />
 
@@ -89,7 +108,7 @@ const items = computed(() => props.links.map(({ icon, ...link }) => link))
           <span class="inline-flex items-center gap-0.5">
             {{ link.title }}
 
-            <sup v-if="link.module === 'ui-pro' && link.path.startsWith('/components')" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
+            <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
           </span>
         </template>
       </UContentNavigation>

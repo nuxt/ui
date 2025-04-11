@@ -5,12 +5,49 @@ export function useLinks() {
     label: 'Docs',
     icon: 'i-lucide-square-play',
     to: '/getting-started',
-    active: route.path.startsWith('/getting-started')
+    active: route.path.startsWith('/getting-started') || route.path.startsWith('/composables/') || (route.path.startsWith('/components/') && route.name !== 'components')
   }, {
     label: 'Components',
     icon: 'i-lucide-square-code',
     to: '/components',
-    active: route.path.startsWith('/components')
+    active: route.path === '/components',
+    children: [{
+      label: 'Element',
+      to: '/components#element',
+      description: 'Button, badge, icon, alert, and small UI elements.',
+      icon: 'i-lucide-mouse-pointer',
+      active: route.fullPath === '/components#element'
+    }, {
+      label: 'Form',
+      to: '/components#form',
+      description: 'Input, select, checkbox, radio and form validation.',
+      icon: 'i-lucide-text-cursor-input',
+      active: route.fullPath === '/components#form'
+    }, {
+      label: 'Data',
+      to: '/components#data',
+      description: 'Table, list, card, carousel and visualization elements.',
+      icon: 'i-lucide-table',
+      active: route.fullPath === '/components#data'
+    }, {
+      label: 'Navigation',
+      to: '/components#navigation',
+      description: 'Menu, breadcrumb, pagination and navbar.',
+      icon: 'i-lucide-link',
+      active: route.fullPath === '/components#navigation'
+    }, {
+      label: 'Overlay',
+      to: '/components#overlay',
+      description: 'Modal, tooltip, dialog and popover.',
+      icon: 'i-lucide-layers',
+      active: route.fullPath === '/components#overlay'
+    }, {
+      label: 'Layout',
+      to: '/components#layout',
+      description: 'Container, grid, divider and responsive layout.',
+      icon: 'i-lucide-layout',
+      active: route.fullPath === '/components#layout'
+    }]
   }, {
     label: 'Pro',
     icon: 'i-lucide-panels-top-left',
@@ -41,16 +78,39 @@ export function useLinks() {
     }]
   }, {
     label: 'Figma',
-    icon: 'i-lucide-figma',
+    icon: 'i-simple-icons-figma',
     to: '/figma'
   }, {
-    label: 'Roadmap',
-    icon: 'i-lucide-map',
-    to: '/roadmap'
+    label: 'Community',
+    icon: 'i-lucide-users',
+    children: [{
+      icon: 'i-lucide-presentation',
+      label: 'Showcase',
+      description: 'Check out some amazing projects built with Nuxt UI.',
+      to: '/showcase'
+    }, {
+      label: 'Devtools Integration',
+      description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.',
+      icon: 'i-lucide-code',
+      to: 'https://github.com/romhml/compodium',
+      target: '_blank'
+    }, {
+      label: 'Raycast Extension',
+      description: 'Access Nuxt UI components without leaving your editor.',
+      icon: 'i-simple-icons-raycast',
+      to: 'https://www.raycast.com/HugoRCD/nuxt-ui',
+      target: '_blank'
+    }, {
+      label: 'Figma to Code',
+      description: 'Convert Figma designs to Nuxt UI code.',
+      icon: 'i-simple-icons-figma',
+      to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui',
+      target: '_blank'
+    }]
   }, {
     label: 'Releases',
     icon: 'i-lucide-rocket',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
-  }].filter(Boolean))
+  }])
 }

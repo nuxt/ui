@@ -97,15 +97,17 @@ const columns: TableColumn<Payment>[] = [{
   id: 'actions',
   cell: ({ row }) => {
     return h('div', { class: 'text-right' }, h(UDropdownMenu, {
-      content: {
+      'content': {
         align: 'end'
       },
-      items: getRowItems(row)
+      'items': getRowItems(row),
+      'aria-label': 'Actions dropdown'
     }, () => h(UButton, {
-      icon: 'i-lucide-ellipsis-vertical',
-      color: 'neutral',
-      variant: 'ghost',
-      class: 'ml-auto'
+      'icon': 'i-lucide-ellipsis-vertical',
+      'color': 'neutral',
+      'variant': 'ghost',
+      'class': 'ml-auto',
+      'aria-label': 'Actions dropdown'
     })))
   }
 }]

@@ -3,7 +3,6 @@ import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/card'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
 import { tv } from '../utils/tv'
 
 const appConfigCard = _appConfig as AppConfig & { ui: { card: Partial<typeof theme> } }
@@ -18,6 +17,9 @@ export interface CardProps {
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'outline'
+   */
   variant?: CardVariants['variant']
   class?: any
   ui?: Partial<typeof card.slots>
@@ -28,8 +30,6 @@ export interface CardSlots {
   default(props?: {}): any
   footer(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'CardExample' })
 </script>
 
 <script setup lang="ts">

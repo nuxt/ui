@@ -1,5 +1,6 @@
 ---
 description: A set of tab panels that are displayed one at a time.
+category: navigation
 links:
   - label: Tabs
     icon: i-custom-reka-ui
@@ -30,6 +31,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - TabsItem[]
 props:
   items:
     - label: Account
@@ -54,6 +57,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - TabsItem[]
 props:
   content: false
   items:
@@ -79,6 +84,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - TabsItem[]
 props:
   unmountOnHide: false
   items:
@@ -108,6 +115,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - TabsItem[]
 props:
   color: neutral
   content: false
@@ -130,6 +139,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - TabsItem[]
 props:
   color: neutral
   variant: link
@@ -153,6 +164,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - TabsItem[]
 props:
   size: md
   variant: pill
@@ -176,6 +189,8 @@ ignore:
   - class
 external:
   - items
+externalTypes:
+  - TabsItem[]
 props:
   orientation: vertical
   variant: pill

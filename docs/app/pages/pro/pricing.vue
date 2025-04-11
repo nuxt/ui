@@ -1,15 +1,16 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
 // @ts-expect-error yaml is not typed
 import page from '.content/pricing.yml'
 
+const { url } = useSiteConfig()
+
 useSeoMeta({
   title: page.title,
-  ogTitle: page.title,
   description: page.description,
-  ogDescription: page.description
-})
-defineOgImageComponent('Docs', {
-  headline: 'Pro'
+  ogTitle: page.title,
+  ogDescription: page.description,
+  ogImage: joinURL(url, '/pro/og-image.png')
 })
 </script>
 
@@ -18,54 +19,61 @@ defineOgImageComponent('Docs', {
     <UPageHero
       class="relative"
       :description="page.pricing.description"
+      :ui="{
+        container: 'relative lg:!pb-0'
+      }"
     >
       <template #title>
-        <MDC :value="page.pricing.title" unwrap="p" />
+        <MDC :value="page.pricing.title" unwrap="p" cache-key="pro-pricing-title" />
       </template>
-      <template #top>
-        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
-        <StarsBg />
-      </template>
-      <UContainer>
+
+      <LazyStarsBg />
+
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+
+      <div class="flex flex-col bg-(--ui-bg) gap-8 lg:gap-0">
         <UPricingPlan
           v-bind="page.pricing.freePlan"
-          class="mb-16"
+          variant="naked"
+          class="lg:rounded-none border-x border-(--ui-border) border-t border-b lg:border-b-0"
         />
-        <UPricingPlans
-          class="mb-16"
-          scale
-        >
+        <UPricingPlans compact>
           <UPricingPlan
             v-for="(plan, index) in page.pricing.plans"
             :key="index"
             :title="plan.title"
             :description="plan.description"
             :price="plan.price"
+            :discount="plan.discount"
             :billing-period="plan.billing_period"
             :billing-cycle="plan.billing_cycle"
-            :highlight="plan.highlight"
-            :scale="plan.highlight"
-            variant="soft"
+            :variant="plan.highlight ? 'soft' : 'outline'"
+            :class="['lg:rounded-none', { 'border-2 lg:border lg:border-x-0 border-(--ui-primary) lg:border-(--ui-border)': plan.highlight }]"
             :features="plan.features"
             :button="plan.button"
           />
         </UPricingPlans>
         <UPricingPlan
           v-bind="page.pricing.figma"
+          variant="naked"
+          :billing-period="page.pricing.figma.billing_period"
+          :billing-cycle="page.pricing.figma.billing_cycle"
+          class="lg:rounded-none border lg:border-y-0 border-(--ui-border)"
         >
           <template #features>
             <li v-for="(feature, index) in page.pricing.figma.features" :key="index" class="flex items-center gap-2 min-w-0">
               <UIcon name="i-lucide-circle-check" class="size-5 text-(--ui-primary) shrink-0" />
-              <MDC :value="feature" unwrap="p" class="text-sm truncate text-(--ui-text-toned)" />
+              <MDC :value="feature" unwrap="p" class="text-sm truncate text-(--ui-text-toned)" :cache-key="`pro-pricing-figma-feature-${index}`" />
             </li>
           </template>
         </UPricingPlan>
-      </UContainer>
+      </div>
     </UPageHero>
 
     <UPageSection
       id="testimonials"
       v-bind="page.testimonials"
+      class="border-y border-(--ui-border)"
     >
       <UPageMarquee pause-on-hover :ui="{ root: '[--duration:40s]' }">
         <img
@@ -73,6 +81,7 @@ defineOgImageComponent('Docs', {
           :key="index"
           v-bind="logo"
           class="h-6 shrink-0 max-w-[140px] filter invert dark:invert-0"
+          loading="lazy"
         >
       </UPageMarquee>
       <UContainer>
@@ -99,14 +108,16 @@ defineOgImageComponent('Docs', {
       id="faq"
       v-bind="page.faq"
       class="scroll-mt-(--ui-header-height)"
+      :ui="{ container: 'relative' }"
     >
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <UPageAccordion
         multiple
         :items="(page.faq.items as any[])"
         class="max-w-4xl mx-auto"
       >
-        <template #body="{ item }">
-          <MDC :value="item.content" unwrap="p" />
+        <template #body="{ item, index }">
+          <MDC :value="item.content" unwrap="p" :cache-key="`pro-pricing-faq-${index}-content`" />
         </template>
       </UPageAccordion>
     </UPageSection>

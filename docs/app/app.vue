@@ -1,7 +1,6 @@
 <script setup lang="ts">
-// import { withoutTrailingSlash } from 'ufo'
+import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
-// import { debounce } from 'perfect-debounce'
 
 const route = useRoute()
 const appConfig = useAppConfig()
@@ -12,17 +11,8 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
   server: false
 })
 
-const searchTerm = ref('')
-
-// watch(searchTerm, debounce((query: string) => {
-//   if (!query) {
-//     return
-//   }
-
-//   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
-// }, 500))
-
 const links = useLinks()
+const searchLinks = useSearchLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
 const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
@@ -33,8 +23,8 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
-    // { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
+    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
   ],
   style: [
     { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
@@ -61,7 +51,7 @@ provide('navigation', mappedNavigation)
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
     <template v-if="!route.path.startsWith('/examples')">
-      <!-- <Banner /> -->
+      <Banner />
 
       <Header :links="links" />
     </template>
@@ -75,7 +65,7 @@ provide('navigation', mappedNavigation)
 
       <ClientOnly>
         <LazyUContentSearch
-          v-model:search-term="searchTerm"
+          :links="searchLinks"
           :files="files"
           :groups="[{
             id: 'framework',
@@ -95,39 +85,5 @@ provide('navigation', mappedNavigation)
 </template>
 
 <style>
-@import "tailwindcss";
-@import "@nuxt/ui-pro";
-
-@source "../content";
-
-@theme {
-  --container-8xl: 90rem;
-
-  --font-sans: 'Public Sans', sans-serif;
-
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
-}
-
-:root {
-  --ui-container: var(--container-8xl);
-}
-
-html[data-framework="nuxt"] .vue-only,
-html[data-framework="vue"] .nuxt-only,
-html[data-module="ui-pro"] .ui-only,
-html[data-module="ui"] .ui-pro-only {
-  display: none;
-}
-
-/* Safelist (do not remove): [&>div]:*:my-0 [&>div]:*:w-full h-64 !px-0 !py-0 !pt-0 !pb-0 !p-0 !justify-start !min-h-96 h-136 */
+/* Safelist (do not remove): [&>div]:*:my-0 [&>div]:*:w-full h-64 !px-0 !py-0 !pt-0 !pb-0 !p-0 !justify-start !justify-end !min-h-96 h-136 max-h-[341px] */
 </style>
