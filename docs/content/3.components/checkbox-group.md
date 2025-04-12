@@ -5,7 +5,7 @@ category: form
 links:
   - label: CheckboxGroup
     icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/checkbox-group
+    to: https://reka-ui.com/docs/components/checkbox#group-root
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/CheckboxGroup.vue
