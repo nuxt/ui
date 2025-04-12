@@ -20,21 +20,13 @@ export type DynamicSlots<
   S extends string | undefined = undefined,
   D extends object = {}
 > = {
-  [
-  K in NonNullable<T['slot']> as K extends string
-    ? S extends undefined
-      ? K
-      : (K | `${K}-${S & string}`)
-    : never
-  ]: (props: {
+  [K in (T['slot'] & string | `${T['slot'] & string}-${S & string}`)]: (props: {
     item: Extract<T, { slot: S extends undefined
       ? K
       : K extends `${infer Base}-${S & string}`
         ? Base
         : K }>
   } & D) => any
-} & {
-  [key: string]: (props: { item: T } & D) => any
 }
 
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>

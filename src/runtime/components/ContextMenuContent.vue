@@ -72,15 +72,15 @@ const groups = computed<ContextMenuItem[][]>(() =>
 
 <template>
   <DefineItemTemplate v-slot="{ item, active, index }">
-    <slot :name="((item.slot || 'item') as keyof ContextMenuSlots<T>)" :item="item" :index="index">
-      <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index">
+    <slot :name="((item.slot || 'item') as keyof ContextMenuSlots<T>)" :item="(item as NestedItem<T>)" :index="index">
+      <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof ContextMenuSlots<T>)" :item="(item as NestedItem<T>)" :active="active" :index="index">
         <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, color: item?.color, loading: true })" />
         <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: uiOverride?.itemLeadingIcon, color: item?.color, active })" />
         <UAvatar v-else-if="item.avatar" :size="((props.uiOverride?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: uiOverride?.itemLeadingAvatar, active })" />
       </slot>
 
       <span v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof ContextMenuSlots<T>]" :class="ui.itemLabel({ class: uiOverride?.itemLabel, active })">
-        <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index">
+        <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof ContextMenuSlots<T>)" :item="(item as NestedItem<T>)" :active="active" :index="index">
           {{ get(item, props.labelKey as string) }}
         </slot>
 
@@ -88,7 +88,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
       </span>
 
       <span :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
-        <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index">
+        <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof ContextMenuSlots<T>)" :item="(item as NestedItem<T>)" :active="active" :index="index">
           <UIcon v-if="item.children?.length" :name="childrenIcon" :class="ui.itemTrailingIcon({ class: uiOverride?.itemTrailingIcon, color: item?.color, active })" />
           <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: uiOverride?.itemTrailingKbds })">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.uiOverride?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />

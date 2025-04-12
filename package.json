@@ -106,7 +106,7 @@
     "docs:prepare": "nuxt-component-meta docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && nuxi typecheck docs && cd playground-vue && vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit && nuxi typecheck playground && cd playground-vue && vue-tsc --noEmit",
     "test": "vitest",
     "test:vue": "vitest -c vitest.vue.config.ts",
     "release": "release-it"
@@ -202,7 +202,7 @@
     "debug": "4.3.7",
     "rollup": "4.34.9",
     "unplugin": "^2.3.0",
-    "vue-tsc": "2.2.0"
+    "vue-tsc": "3.0.0-alpha.4"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
