@@ -1,18 +1,11 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/slideover'
-import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
-import type { EmitsToProps } from '../types/utils'
+import type { EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigSlideover = _appConfig as AppConfig & { ui: { slideover: Partial<typeof theme> } }
-
-const slideover = tv({ extend: tv(theme), ...(appConfigSlideover.ui?.slideover || {}) })
-
-type SlideoverVariants = VariantProps<typeof slideover>
+type Slideover = ComponentConfig<typeof theme, AppConfig, 'slideover'>
 
 export interface SlideoverProps extends DialogRootProps {
   title?: string
@@ -33,7 +26,7 @@ export interface SlideoverProps extends DialogRootProps {
    * The side of the slideover.
    * @defaultValue 'right'
    */
-  side?: SlideoverVariants['side']
+  side?: Slideover['variants']['side']
   /**
    * Render the slideover in a portal.
    * @defaultValue true
@@ -57,7 +50,7 @@ export interface SlideoverProps extends DialogRootProps {
    */
   dismissible?: boolean
   class?: any
-  ui?: Partial<typeof slideover.slots>
+  ui?: Slideover['slots']
 }
 
 export interface SlideoverEmits extends DialogRootEmits {
@@ -71,7 +64,7 @@ export interface SlideoverSlots {
   header(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
-  close(props: { ui: ReturnType<typeof slideover> }): any
+  close(props: { ui: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): any
   body(props?: {}): any
   footer(props?: {}): any
 }
@@ -83,6 +76,7 @@ import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, 
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<SlideoverProps>(), {
@@ -98,7 +92,7 @@ const emits = defineEmits<SlideoverEmits>()
 const slots = defineSlots<SlideoverSlots>()
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as Slideover['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
@@ -122,7 +116,7 @@ const contentEvents = computed(() => {
   return defaultEvents
 })
 
-const ui = computed(() => slideover({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover || {}) })({
   transition: props.transition,
   side: props.side
 }))

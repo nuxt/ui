@@ -1,16 +1,10 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { CheckboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/checkbox'
-import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigCheckbox = _appConfig as AppConfig & { ui: { checkbox: Partial<typeof theme> } }
-
-const checkbox = tv({ extend: tv(theme), ...(appConfigCheckbox.ui?.checkbox || {}) })
-
-type CheckboxVariants = VariantProps<typeof checkbox>
+type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>
 
 export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'> {
   /**
@@ -23,11 +17,11 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
   /**
    * @defaultValue 'primary'
    */
-  color?: CheckboxVariants['color']
+  color?: Checkbox['variants']['color']
   /**
    * @defaultValue 'md'
    */
-  size?: CheckboxVariants['size']
+  size?: Checkbox['variants']['size']
   /**
    * The icon displayed when checked.
    * @defaultValue appConfig.ui.icons.check
@@ -41,7 +35,7 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
    */
   indeterminateIcon?: string
   class?: any
-  ui?: Partial<typeof checkbox.slots>
+  ui?: Checkbox['slots']
 }
 
 export type CheckboxEmits = {
@@ -60,6 +54,7 @@ import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } fr
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -70,13 +65,14 @@ const emits = defineEmits<CheckboxEmits>()
 
 const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined })
 
+const appConfig = useAppConfig() as Checkbox['AppConfig']
+
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
 
-const appConfig = useAppConfig()
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps>(props)
 const id = _id.value ?? useId()
 
-const ui = computed(() => checkbox({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || {}) })({
   size: size.value,
   color: color.value,
   required: props.required,
