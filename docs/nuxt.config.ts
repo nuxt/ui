@@ -175,6 +175,16 @@ export default defineNuxtConfig({
     }
   },
 
+  hub: {
+    ai: true,
+    vectorize: {
+      auto_rag_ui3: {
+        dimensions: 1024,
+        metric: 'cosine'
+      }
+    }
+  },
+
   vite: {
     plugins: [
       yaml()

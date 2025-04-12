@@ -42,6 +42,8 @@ jobs:
 
       - name: Build application
         run: pnpm run docs:build
+        env:
+          NODE_OPTIONS: '--max-old-space-size=8192'
 
       - name: Deploy to NuxtHub
         uses: nuxt-hub/action@v1
