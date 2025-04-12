@@ -1,24 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, NavigationMenuContentEmits, CollapsibleRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/navigation-menu'
-import { tv } from '../utils/tv'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
-import type {
-  ArrayOrNested,
-  DynamicSlots,
-  MergeTypes,
-  NestedItem,
-  PartialString,
-  EmitsToProps
-} from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigNavigationMenu = _appConfig as AppConfig & { ui: { navigationMenu: Partial<typeof theme> } }
-
-const navigationMenu = tv({ extend: tv(theme), ...(appConfigNavigationMenu.ui?.navigationMenu || {}) })
+type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
 
 export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type'> {
   /** Description is only used when `orientation` is `horizontal`. */
@@ -55,8 +43,6 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   [key: string]: any
 }
 
-type NavigationMenuVariants = VariantProps<typeof navigationMenu>
-
 export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>> extends Pick<NavigationMenuRootProps, 'modelValue' | 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
@@ -80,11 +66,11 @@ export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem>
   /**
    * @defaultValue 'primary'
    */
-  color?: NavigationMenuVariants['color']
+  color?: NavigationMenu['variants']['color']
   /**
    * @defaultValue 'pill'
    */
-  variant?: NavigationMenuVariants['variant']
+  variant?: NavigationMenu['variants']['variant']
   /**
    * The orientation of the menu.
    * @defaultValue 'horizontal'
@@ -101,7 +87,7 @@ export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem>
   /**
    * @defaultValue 'primary'
    */
-  highlightColor?: NavigationMenuVariants['highlightColor']
+  highlightColor?: NavigationMenu['variants']['highlightColor']
   /** The content of the menu. */
   content?: Omit<NavigationMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<NavigationMenuContentEmits>>
   /**
@@ -109,7 +95,7 @@ export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem>
    * Only works when `orientation` is `horizontal`.
    * @defaultValue 'horizontal'
    */
-  contentOrientation?: NavigationMenuVariants['contentOrientation']
+  contentOrientation?: NavigationMenu['variants']['contentOrientation']
   /**
    * Display an arrow alongside the menu.
    * @defaultValue false
@@ -121,7 +107,7 @@ export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem>
    */
   labelKey?: keyof NestedItem<T>
   class?: any
-  ui?: PartialString<typeof navigationMenu.slots>
+  ui?: NavigationMenu['slots']
 }
 
 export interface NavigationMenuEmits extends NavigationMenuRootEmits {}
@@ -147,6 +133,7 @@ import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationM
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get, isArrayOfArray } from '../utils'
+import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
@@ -166,6 +153,8 @@ const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
 const emits = defineEmits<NavigationMenuEmits>()
 const slots = defineSlots<NavigationMenuSlots<T>>()
 
+const appConfig = useAppConfig() as NavigationMenu['AppConfig']
+
 const rootProps = useForwardPropsEmits(computed(() => ({
   as: props.as,
   modelValue: props.modelValue,
@@ -178,10 +167,7 @@ const rootProps = useForwardPropsEmits(computed(() => ({
   disablePointerLeaveClose: props.disablePointerLeaveClose,
   unmountOnHide: props.unmountOnHide
 })), emits)
-
 const contentProps = toRef(() => props.content)
-
-const appConfig = useAppConfig()
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, active?: boolean }>()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem, index: number, level?: number }>({
@@ -192,7 +178,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: N
   }
 })
 
-const ui = computed(() => navigationMenu({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })({
   orientation: props.orientation,
   contentOrientation: props.contentOrientation,
   collapsed: props.collapsed,

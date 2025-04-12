@@ -1,26 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/context-menu'
-import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type {
-  ArrayOrNested,
-  DynamicSlots,
-  MergeTypes,
-  NestedItem,
-  PartialString,
-  EmitsToProps
-} from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigContextMenu = _appConfig as AppConfig & { ui: { contextMenu: Partial<typeof theme> } }
-
-const contextMenu = tv({ extend: tv(theme), ...(appConfigContextMenu.ui?.contextMenu || {}) })
-
-type ContextMenuVariants = VariantProps<typeof contextMenu>
+type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
 export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
@@ -28,7 +14,7 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
    * @IconifyIcon
    */
   icon?: string
-  color?: ContextMenuVariants['color']
+  color?: ContextMenu['variants']['color']
   avatar?: AvatarProps
   content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ContextMenuContentEmits>>
   kbds?: KbdProps['value'][] | KbdProps[]
@@ -53,7 +39,7 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
   /**
    * @defaultValue 'md'
    */
-  size?: ContextMenuVariants['size']
+  size?: ContextMenu['variants']['size']
   items?: T
   /**
    * The icon displayed when an item is checked.
@@ -88,7 +74,7 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
   labelKey?: keyof NestedItem<T>
   disabled?: boolean
   class?: any
-  ui?: PartialString<typeof contextMenu.slots>
+  ui?: ContextMenu['slots']
 }
 
 export interface ContextMenuEmits extends ContextMenuRootEmits {}
@@ -112,7 +98,9 @@ export type ContextMenuSlots<
 import { computed, toRef } from 'vue'
 import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { omit } from '../utils'
+import { tv } from '../utils/tv'
 import UContextMenuContent from './ContextMenuContent.vue'
 
 const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
@@ -124,12 +112,13 @@ const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
 const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
+const appConfig = useAppConfig() as ContextMenu['AppConfig']
 
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const proxySlots = omit(slots, ['default'])
 
-const ui = computed(() => contextMenu({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })({
   size: props.size
 }))
 </script>

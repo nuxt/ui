@@ -1,27 +1,12 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type {
-  AcceptableValue,
-  ArrayOrNested,
-  GetItemKeys,
-  GetItemValue,
-  GetModelValue,
-  GetModelValueEmits,
-  NestedItem,
-  PartialString,
-  EmitsToProps
-} from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigSelectMenu = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
-
-const selectMenu = tv({ extend: tv(theme), ...(appConfigSelectMenu.ui?.selectMenu || {}) })
+type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>
 
 interface _SelectMenuItem {
   label?: string
@@ -42,8 +27,6 @@ interface _SelectMenuItem {
 }
 export type SelectMenuItem = _SelectMenuItem | AcceptableValue | boolean
 
-type SelectMenuVariants = VariantProps<typeof selectMenu>
-
 export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
@@ -58,15 +41,15 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   /**
    * @defaultValue 'primary'
    */
-  color?: SelectMenuVariants['color']
+  color?: SelectMenu['variants']['color']
   /**
    * @defaultValue 'outline'
    */
-  variant?: SelectMenuVariants['variant']
+  variant?: SelectMenu['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: SelectMenuVariants['size']
+  size?: SelectMenu['variants']['size']
   required?: boolean
   /**
    * The icon displayed to open the menu.
@@ -131,7 +114,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    */
   ignoreFilter?: boolean
   class?: any
-  ui?: PartialString<typeof selectMenu.slots>
+  ui?: SelectMenu['slots']
 }
 
 export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
@@ -154,9 +137,20 @@ export interface SelectMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof selectMenu> }): any
-  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean }): any
-  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof selectMenu> }): any
+  'leading'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+    ui: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string }
+  }): any
+  'default'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+  }): any
+  'trailing'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+    ui: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string }
+  }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -177,6 +171,7 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { compare, get, isArrayOfArray } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
@@ -197,7 +192,7 @@ const slots = defineSlots<SelectMenuSlots<T, VK, M>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as SelectMenu['AppConfig']
 const { contains } = useFilter({ sensitivity: 'base' })
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover'), emits)
@@ -213,7 +208,7 @@ const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 
-const ui = computed(() => selectMenu({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu || {}) })({
   color: color.value,
   variant: props.variant,
   size: selectSize?.value,

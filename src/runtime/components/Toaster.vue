@@ -1,23 +1,17 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { ToastProviderProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/toaster'
-import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigToaster = _appConfig as AppConfig & { ui: { toaster: Partial<typeof theme> } }
-
-const toaster = tv({ extend: tv(theme), ...(appConfigToaster.ui?.toaster || {}) })
-
-type ToasterVariants = VariantProps<typeof toaster>
+type Toaster = ComponentConfig<typeof theme, AppConfig, 'toaster'>
 
 export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'> {
   /**
    * The position on the screen to display the toasts.
    * @defaultValue 'bottom-right'
    */
-  position?: ToasterVariants['position']
+  position?: Toaster['variants']['position']
   /**
    * Expand the toasts to show multiple toasts at once.
    * @defaultValue true
@@ -29,7 +23,7 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
    */
   portal?: boolean
   class?: any
-  ui?: Partial<typeof toaster.slots>
+  ui?: Toaster['slots']
 }
 
 export interface ToasterSlots {
@@ -45,8 +39,10 @@ export default {
 import { ref, computed } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { useToast } from '../composables/useToast'
 import { omit } from '../utils'
+import { tv } from '../utils/tv'
 import UToast from './Toast.vue'
 
 const props = withDefaults(defineProps<ToasterProps>(), {
@@ -56,9 +52,10 @@ const props = withDefaults(defineProps<ToasterProps>(), {
 })
 defineSlots<ToasterSlots>()
 
-const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
-
 const { toasts, remove } = useToast()
+const appConfig = useAppConfig() as Toaster['AppConfig']
+
+const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
 
 const swipeDirection = computed(() => {
   switch (props.position) {
@@ -76,7 +73,7 @@ const swipeDirection = computed(() => {
   return 'right'
 })
 
-const ui = computed(() => toaster({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.toaster || {}) })({
   position: props.position,
   swipeDirection: swipeDirection.value
 }))
