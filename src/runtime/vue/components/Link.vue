@@ -3,7 +3,6 @@ import type { ButtonHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
 import theme from '#build/ui/link'
-import { tv } from '../../utils/tv'
 import type { ComponentConfig } from '../../types/utils'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
@@ -96,6 +95,7 @@ import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
 import { useRoute, useAppConfig } from '#imports'
 import { RouterLink } from 'vue-router'
+import { tv } from '../../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
