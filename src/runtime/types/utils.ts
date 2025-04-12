@@ -1,4 +1,5 @@
 import type { AcceptableValue as _AcceptableValue } from 'reka-ui'
+import type { ClassValue } from 'tailwind-variants'
 import type { VNode } from 'vue'
 
 export interface TightMap<O = any> {
@@ -99,7 +100,7 @@ type ComponentVariants<T extends { variants?: Record<string, Record<string, any>
 }
 
 type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
-  [K in keyof T['slots']]?: string
+  [K in keyof T['slots']]?: ClassValue
 }>
 
 type GetComponentAppConfig<A, U extends string, K extends string> =
