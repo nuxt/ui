@@ -1,6 +1,7 @@
 ---
 title: CheckboxGroup
-description: ''
+description: A set of checklist buttons to select multiple option from a list.
+category: form
 links:
   - label: CheckboxGroup
     icon: i-custom-reka-ui
