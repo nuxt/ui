@@ -106,10 +106,15 @@ type GetComponentAppConfig<A, U extends string, K extends string> =
   A extends Record<U, Record<K, any>> ? A[U][K] : {}
 
 type ComponentAppConfig<
-  A extends Record<U, Record<string, any>>,
-  K extends string, T,
-  U extends string = 'ui'
-> = A & { [key in U]?: { [k in K]?: Partial<T> } }
+  T,
+  A extends Record<string, any>,
+  K extends string,
+  U extends string = 'ui' | 'uiPro' | 'uiPro.prose'
+> = A & (
+  U extends 'uiPro.prose'
+    ? { uiPro?: { prose?: { [k in K]?: Partial<T> } } }
+    : { [key in Exclude<U, 'uiPro.prose'>]?: { [k in K]?: Partial<T> } }
+)
 
 /**
  * Defines the configuration shape expected for a component.
@@ -120,10 +125,11 @@ type ComponentAppConfig<
  */
 export type ComponentConfig<
   T extends Record<string, any>,
-  A extends Record<U, Record<string, any>>,
-  K extends string, U extends 'ui' | 'uiPro' = 'ui'
+  A extends Record<string, any>,
+  K extends string,
+  U extends 'ui' | 'uiPro' | 'uiPro.prose' = 'ui'
 > = {
-  AppConfig: ComponentAppConfig<A, K, T, U>
+  AppConfig: ComponentAppConfig<T, A, K, U>
   variants: ComponentVariants<T & GetComponentAppConfig<A, U, K>>
   slots: ComponentSlots<T>
 }
