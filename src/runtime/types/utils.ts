@@ -20,7 +20,13 @@ export type DynamicSlots<
   S extends string | undefined = undefined,
   D extends object = {}
 > = {
-  [K in (T['slot'] & string | `${T['slot'] & string}-${S & string}`)]: (props: {
+  [
+  K in T['slot'] as K extends string
+    ? S extends undefined
+      ? K
+      : (K | `${K}-${S & string}`)
+    : string
+  ]: (props: {
     item: Extract<T, { slot: S extends undefined
       ? K
       : K extends `${infer Base}-${S & string}`
