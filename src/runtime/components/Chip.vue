@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chip'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Chip = ComponentConfig<typeof theme, AppConfig, 'chip'>
@@ -50,6 +49,7 @@ import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
+import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 

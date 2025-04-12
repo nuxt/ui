@@ -3,7 +3,6 @@
 import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, NavigationMenuContentEmits, CollapsibleRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
-import { tv } from '../utils/tv'
 import type { AvatarProps, BadgeProps, LinkProps } from '../types'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
@@ -134,6 +133,7 @@ import { NavigationMenuRoot, NavigationMenuList, NavigationMenuItem, NavigationM
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get, isArrayOfArray } from '../utils'
+import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'

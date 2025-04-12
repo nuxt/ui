@@ -2,7 +2,6 @@
 import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/radio-group'
-import { tv } from '../utils/tv'
 import type { AcceptableValue, ComponentConfig } from '../types/utils'
 
 type RadioGroup = ComponentConfig<typeof theme, AppConfig, 'radioGroup'>
@@ -85,6 +84,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
   valueKey: 'value',

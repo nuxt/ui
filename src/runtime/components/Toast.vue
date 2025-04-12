@@ -2,7 +2,6 @@
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
-import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps } from '../types'
 import type { StringOrVNode, ComponentConfig } from '../types/utils'
 
@@ -70,6 +69,7 @@ import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useFo
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'

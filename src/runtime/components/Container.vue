@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/container'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Container = ComponentConfig<typeof theme, AppConfig, 'container'>
@@ -24,6 +23,7 @@ export interface ContainerSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = defineProps<ContainerProps>()
 defineSlots<ContainerSlots>()

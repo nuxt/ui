@@ -2,7 +2,6 @@
 import type { SliderRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/slider'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Slider = ComponentConfig<typeof theme, AppConfig, 'slider'>
@@ -44,6 +43,7 @@ import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<SliderProps>(), {
   min: 0,

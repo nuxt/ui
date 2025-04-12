@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar-group'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type AvatarGroup = ComponentConfig<typeof theme, AppConfig, 'avatarGroup'>
@@ -34,6 +33,7 @@ import { computed, provide } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
+import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
 
 const props = defineProps<AvatarGroupProps>()

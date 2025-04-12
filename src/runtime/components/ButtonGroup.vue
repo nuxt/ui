@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button-group'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type ButtonGroup = ComponentConfig<typeof theme, AppConfig, 'buttonGroup'>
@@ -35,6 +34,7 @@ import { provide, computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { buttonGroupInjectionKey } from '../composables/useButtonGroup'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<ButtonGroupProps>(), {
   orientation: 'horizontal'

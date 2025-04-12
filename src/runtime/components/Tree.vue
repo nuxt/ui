@@ -3,7 +3,6 @@
 import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
-import { tv } from '../utils/tv'
 import type { DynamicSlots, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem, ComponentConfig } from '../types/utils'
 
 type Tree = ComponentConfig<typeof theme, AppConfig, 'tree'>
@@ -103,6 +102,7 @@ import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<TreeProps<T, VK, M>>(), {

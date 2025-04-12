@@ -2,7 +2,6 @@
 import type { PopoverRootProps, HoverCardRootProps, PopoverRootEmits, PopoverContentProps, PopoverContentEmits, PopoverArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/popover'
-import { tv } from '../utils/tv'
 import type { EmitsToProps, ComponentConfig } from '../types/utils'
 
 type Popover = ComponentConfig<typeof theme, AppConfig, 'popover'>
@@ -52,6 +51,7 @@ import { useForwardPropsEmits } from 'reka-ui'
 import { Popover, HoverCard } from 'reka-ui/namespaced'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<PopoverProps>(), {
   portal: true,

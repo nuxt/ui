@@ -2,7 +2,6 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Kbd = ComponentConfig<typeof theme, AppConfig, 'kbd'>
@@ -35,6 +34,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useKbd } from '../composables/useKbd'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<KbdProps>(), {
   as: 'kbd'

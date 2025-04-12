@@ -3,7 +3,6 @@
 import type { MaybeRefOrGetter } from '@vueuse/shared'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/color-picker'
-import { tv } from '../utils/tv'
 import type { HSLObject } from 'colortranslator'
 import type { ComponentConfig } from '../types/utils'
 
@@ -76,6 +75,7 @@ import { useEventListener, useElementBounding, watchThrottled, watchPausable } f
 import { isClient } from '@vueuse/shared'
 import { ColorTranslator } from 'colortranslator'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {
   format: 'hex',

@@ -3,7 +3,6 @@ import type { ButtonHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
 import theme from '#build/ui/link'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
@@ -94,6 +93,7 @@ import { isEqual, diff } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute, useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 import ULinkBase from './LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })

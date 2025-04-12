@@ -2,7 +2,6 @@
 import type { CheckboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>
@@ -55,6 +54,7 @@ import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } fr
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })

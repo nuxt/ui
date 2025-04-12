@@ -32,7 +32,6 @@ const component = ({ name, primitive, pro, prose, content }) => {
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type ${upperName} = ComponentConfig<typeof theme, AppConfig, ${upperName}${pro ? `, '${key}'` : ''}>
@@ -56,6 +55,7 @@ export interface ${upperName}Slots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = defineProps<${upperName}Props>()
 defineSlots<${upperName}Slots>()
@@ -76,7 +76,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName}
 import type { ${upperName}RootProps, ${upperName}RootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type ${upperName} = ComponentConfig<typeof theme, AppConfig, ${upperName}${pro ? `, '${key}'` : ''}>
@@ -96,12 +95,14 @@ import { computed } from 'vue'
 import { ${upperName}Root, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = defineProps<${upperName}Props>()
 const emits = defineEmits<${upperName}Emits>()
 const slots = defineSlots<${upperName}Slots>()
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props), emits)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName} || {}) })())

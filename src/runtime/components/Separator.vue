@@ -2,7 +2,6 @@
 import type { SeparatorProps as _SeparatorProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/separator'
-import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { ComponentConfig } from '../types/utils'
 
@@ -54,6 +53,7 @@ import { computed } from 'vue'
 import { Separator, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 

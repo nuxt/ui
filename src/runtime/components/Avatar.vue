@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>
@@ -39,6 +38,7 @@ import { Primitive, Slot } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })

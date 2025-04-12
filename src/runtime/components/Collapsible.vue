@@ -2,7 +2,6 @@
 import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/collapsible'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Collapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible'>
@@ -30,6 +29,7 @@ import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<CollapsibleProps>(), {
   unmountOnHide: true

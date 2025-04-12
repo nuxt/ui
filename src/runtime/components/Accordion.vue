@@ -3,7 +3,6 @@
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/accordion'
-import { tv } from '../utils/tv'
 import type { DynamicSlots, ComponentConfig } from '../types/utils'
 
 type Accordion = ComponentConfig<typeof theme, AppConfig, 'accordion'>
@@ -68,6 +67,7 @@ import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, Accord
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<AccordionProps<T>>(), {

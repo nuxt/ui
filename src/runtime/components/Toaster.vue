@@ -2,7 +2,6 @@
 import type { ToastProviderProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toaster'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Toaster = ComponentConfig<typeof theme, AppConfig, 'toaster'>
@@ -43,6 +42,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useToast } from '../composables/useToast'
 import { omit } from '../utils'
+import { tv } from '../utils/tv'
 import UToast from './Toast.vue'
 
 const props = withDefaults(defineProps<ToasterProps>(), {

@@ -3,7 +3,6 @@ import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
 import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/drawer'
-import { tv } from '../utils/tv'
 import type { EmitsToProps, ComponentConfig } from '../types/utils'
 
 type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
@@ -61,6 +60,7 @@ import { useForwardPropsEmits } from 'reka-ui'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   direction: 'bottom',

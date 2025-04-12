@@ -3,7 +3,6 @@
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
-import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
 import type { DynamicSlots, ComponentConfig } from '../types/utils'
 
@@ -83,6 +82,7 @@ import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForward
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 

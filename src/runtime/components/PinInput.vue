@@ -3,7 +3,6 @@
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pin-input'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>
@@ -53,6 +52,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',

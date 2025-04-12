@@ -3,7 +3,6 @@
 import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/stepper'
-import { tv } from '../utils/tv'
 import type { DynamicSlots, ComponentConfig } from '../types/utils'
 
 type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>
@@ -72,6 +71,7 @@ import { computed } from 'vue'
 import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps<T>>(), {

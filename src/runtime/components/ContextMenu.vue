@@ -3,7 +3,6 @@
 import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/context-menu'
-import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
@@ -101,6 +100,7 @@ import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'reka-
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { omit } from '../utils'
+import { tv } from '../utils/tv'
 import UContextMenuContent from './ContextMenuContent.vue'
 
 const props = withDefaults(defineProps<ContextMenuProps<T>>(), {

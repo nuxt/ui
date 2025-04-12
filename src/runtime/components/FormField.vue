@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>
@@ -52,6 +51,7 @@ import { computed, ref, inject, provide, type Ref, useId } from 'vue'
 import { Primitive, Label } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { formFieldInjectionKey, inputIdInjectionKey } from '../composables/useFormField'
+import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
 const props = defineProps<FormFieldProps>()

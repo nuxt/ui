@@ -36,7 +36,6 @@ import type {
   VisibilityState
 } from '@tanstack/vue-table'
 import theme from '#build/ui/table'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 declare module '@tanstack/table-core' {
@@ -175,6 +174,7 @@ import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, ge
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 
 const props = defineProps<TableProps<T>>()
 const slots = defineSlots<TableSlots<T>>()

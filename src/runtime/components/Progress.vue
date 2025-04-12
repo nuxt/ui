@@ -3,7 +3,6 @@
 import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/progress'
-import { tv } from '../utils/tv'
 import type { ComponentConfig } from '../types/utils'
 
 type Progress = ComponentConfig<typeof theme, AppConfig, 'progress'>
@@ -58,6 +57,7 @@ import { Primitive, ProgressRoot, ProgressIndicator, useForwardPropsEmits } from
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,

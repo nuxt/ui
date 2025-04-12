@@ -2,7 +2,6 @@
 import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipContentEmits, TooltipArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tooltip'
-import { tv } from '../utils/tv'
 import type { KbdProps } from '../types'
 import type { EmitsToProps, ComponentConfig } from '../types/utils'
 
@@ -46,6 +45,7 @@ import { defu } from 'defu'
 import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 import UKbd from './Kbd.vue'
 
 const props = withDefaults(defineProps<TooltipProps>(), {
