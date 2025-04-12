@@ -1,10 +1,11 @@
 <script lang="ts">
 import type { ButtonHTMLAttributes } from 'vue'
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
-import { type InertiaLinkProps, Link as InertiaLink, usePage } from '@inertiajs/vue3'
+import type { InertiaLinkProps } from '@inertiajs/vue3'
 import theme from '#build/ui/link'
+import type { ComponentConfig } from '../../types/utils'
+
+type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
 interface NuxtLinkProps extends Omit<InertiaLinkProps, 'href'> {
   activeClass?: string
@@ -26,10 +27,6 @@ interface NuxtLinkProps extends Omit<InertiaLinkProps, 'href'> {
   target?: '_blank' | '_parent' | '_self' | '_top' | (string & {}) | null
   ariaCurrentValue?: string
 }
-
-const appConfigLink = _appConfig as AppConfig & { ui: { link: Partial<typeof theme> } }
-
-const link = tv({ extend: tv(theme), ...(appConfigLink.ui?.link || {}) })
 
 export interface LinkProps extends NuxtLinkProps {
   /**
@@ -62,9 +59,13 @@ export interface LinkSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
+import { usePage, Link as InertiaLink } from '@inertiajs/vue3'
 import { hasProtocol } from 'ufo'
+import { useAppConfig } from '#imports'
+import { tv } from '../../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
@@ -77,16 +78,20 @@ const props = withDefaults(defineProps<LinkProps>(), {
 })
 defineSlots<LinkSlots>()
 
+const appConfig = useAppConfig() as Link['AppConfig']
+
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'raw', 'class'))
 
 const ui = computed(() => tv({
-  extend: link,
-  variants: {
-    active: {
-      true: props.activeClass,
-      false: props.inactiveClass
+  extend: tv(theme),
+  ...defu({
+    variants: {
+      active: {
+        true: props.activeClass,
+        false: props.inactiveClass
+      }
     }
-  }
+  }, appConfig.ui?.link || {})
 }))
 
 const isExternal = computed(() => {
