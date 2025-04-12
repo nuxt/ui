@@ -4,7 +4,7 @@ import { defineLocale } from '../composables/defineLocale'
 export default defineLocale<Messages>({
   name: 'ئۇيغۇرچە',
   code: 'zh-UG',
-  dir: "rtl",
+  dir: 'rtl',
   messages: {
     inputMenu: {
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
