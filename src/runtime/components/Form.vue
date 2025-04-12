@@ -278,6 +278,7 @@ defineExpose<Form<T>>({
   },
 
   disabled,
+  loading,
   dirty: computed(() => !!dirtyFields.size),
 
   dirtyFields: readonly(dirtyFields) as DeepReadonly<Set<keyof T>>,
