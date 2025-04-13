@@ -6,7 +6,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '~/src/module'
 
-describe('RadioGroup', () => {
+describe('CheckboxGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
   const indicators = Object.keys(theme.variants.indicator) as any
