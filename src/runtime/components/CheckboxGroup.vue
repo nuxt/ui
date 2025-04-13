@@ -1,17 +1,10 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { CheckboxGroupRootProps, CheckboxGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/checkbox-group'
-import type { AcceptableValue } from '../types/utils'
-import { tv } from '../utils/tv'
+import type { AcceptableValue, ComponentConfig } from '../types/utils'
 
-const appConfigCheckboxGroup = _appConfig as AppConfig & { ui: { checkboxGroup: Partial<typeof theme> } }
-
-const checkboxGroup = tv({ extend: tv(theme), ...(appConfigCheckboxGroup.ui?.checkboxGroup || {}) })
-
-type CheckboxGroupVariants = VariantProps<typeof checkboxGroup>
+type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
 
 export type CheckboxGroupValue = AcceptableValue
 
@@ -49,25 +42,25 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
   /**
    * @defaultValue 'primary'
    */
-  color?: CheckboxGroupVariants['color']
+  color?: CheckboxGroup['variants']['color']
   /**
    * Position of the indicator.
    * @defaultValue 'start'
    */
-  indicator?: CheckboxGroupVariants['indicator']
+  indicator?: CheckboxGroup['variants']['indicator']
   /**
-   * The orientation the radio buttons are laid out.
+   * The orientation the checkbox buttons are laid out.
    * @defaultValue 'vertical'
    */
   orientation?: CheckboxGroupRootProps['orientation']
   /**
    * @defaultValue 'md'
    */
-  size?: CheckboxGroupVariants['size']
+  size?: CheckboxGroup['variants']['size']
   /**
    * @defaultValue 'list'
    */
-  variant?: CheckboxGroupVariants['variant']
+  variant?: CheckboxGroup['variants']['variant']
   /**
    * The icon displayed when checked.
    * @defaultValue appConfig.ui.icons.check
@@ -81,7 +74,7 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
    */
   indeterminateIcon?: string
   class?: any
-  ui?: Partial<typeof checkboxGroup.slots>
+  ui?: CheckboxGroup['slots']
 }
 
 export type CheckboxGroupEmits = CheckboxGroupRootEmits & {
@@ -104,6 +97,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<CheckboxGroupProps<T>>(), {
@@ -118,14 +112,14 @@ const slots = defineSlots<CheckboxGroupSlots<T>>()
 
 const modelValue = defineModel<string[]>({ default: undefined })
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
+const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
-const appConfig = useAppConfig()
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
 const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
 
-const ui = computed(() => checkboxGroup({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({
   size: size.value,
   color: color.value,
   disabled: disabled.value,
