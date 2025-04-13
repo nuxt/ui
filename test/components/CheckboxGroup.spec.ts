@@ -1,5 +1,5 @@
 import { describe, it, expect, test } from 'vitest'
-import RadioGroup, { type RadioGroupProps, type RadioGroupSlots } from '../../src/runtime/components/RadioGroup.vue'
+import CheckboxGroup, { type CheckboxGroupProps, type CheckboxGroupSlots } from '../../src/runtime/components/CheckboxGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/radio-group'
 import { flushPromises, mount } from '@vue/test-utils'
