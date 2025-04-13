@@ -16,7 +16,7 @@ export { useLocale } from '../composables/useLocale'
 export const useRoute = () => {
   const page = usePage()
   return {
-    fullRoute: page.url
+    fullPath: page.url
   }
 }
 
