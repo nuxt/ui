@@ -25,6 +25,12 @@ interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
    */
   target?: '_blank' | '_parent' | '_self' | '_top' | (string & {}) | null
   /**
+   * Prompts the user to save the linked URL instead of navigating to it.
+   * If set to a string, it suggests that string as the filename.
+   * If set to `true` or an empty string, the browser suggests a filename.
+   */
+  download?: string | boolean
+  /**
    * A rel attribute value to apply on the link. Defaults to "noopener noreferrer" for external links.
    */
   rel?: 'noopener' | 'noreferrer' | 'nofollow' | 'sponsored' | 'ugc' | (string & {}) | null
