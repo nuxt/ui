@@ -1,18 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/stepper'
-import { tv } from '../utils/tv'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, ComponentConfig } from '../types/utils'
 
-const appConfigStepper = _appConfig as AppConfig & { ui: { stepper: Partial<typeof theme> } }
-
-const stepper = tv({ extend: tv(theme), ...(appConfigStepper.ui?.stepper || {}) })
-
-type StepperVariants = VariantProps<typeof stepper>
+type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>
 
 export interface StepperItem {
   slot?: string
@@ -38,23 +31,23 @@ export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<
   /**
    * @defaultValue 'md'
    */
-  size?: StepperVariants['size']
+  size?: Stepper['variants']['size']
   /**
    * @defaultValue 'primary'
    */
-  color?: StepperVariants['color']
+  color?: Stepper['variants']['color']
   /**
    * The orientation of the stepper.
    * @defaultValue 'horizontal'
    */
-  orientation?: StepperVariants['orientation']
+  orientation?: Stepper['variants']['orientation']
   /**
    * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.
    */
   defaultValue?: string | number
   disabled?: boolean
-  ui?: Partial<typeof stepper.slots>
   class?: any
+  ui?: Stepper['slots']
 }
 
 export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRootEmits, 'update:modelValue'> & {
@@ -77,6 +70,8 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
 import { computed } from 'vue'
 import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps<T>>(), {
@@ -88,9 +83,11 @@ const slots = defineSlots<StepperSlots<T>>()
 
 const modelValue = defineModel<string | number>()
 
+const appConfig = useAppConfig() as Stepper['AppConfig']
+
 const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'linear'))
 
-const ui = computed(() => stepper({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.stepper || {}) })({
   orientation: props.orientation,
   size: props.size,
   color: props.color

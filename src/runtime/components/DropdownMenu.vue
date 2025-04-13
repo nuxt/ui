@@ -1,26 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuContentEmits, DropdownMenuArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/dropdown-menu'
-import { tv } from '../utils/tv'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type {
-  ArrayOrNested,
-  DynamicSlots,
-  MergeTypes,
-  NestedItem,
-  PartialString,
-  EmitsToProps
-} from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigDropdownMenu = _appConfig as AppConfig & { ui: { dropdownMenu: Partial<typeof theme> } }
-
-const dropdownMenu = tv({ extend: tv(theme), ...(appConfigDropdownMenu.ui?.dropdownMenu || {}) })
-
-type DropdownMenuVariants = VariantProps<typeof dropdownMenu>
+type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
 export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   label?: string
@@ -28,7 +14,7 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
    * @IconifyIcon
    */
   icon?: string
-  color?: DropdownMenuVariants['color']
+  color?: DropdownMenu['variants']['color']
   avatar?: AvatarProps
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
   kbds?: KbdProps['value'][] | KbdProps[]
@@ -53,7 +39,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
   /**
    * @defaultValue 'md'
    */
-  size?: DropdownMenuVariants['size']
+  size?: DropdownMenu['variants']['size']
   items?: T
   /**
    * The icon displayed when an item is checked.
@@ -96,7 +82,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
   labelKey?: keyof NestedItem<T>
   disabled?: boolean
   class?: any
-  ui?: PartialString<typeof dropdownMenu.slots>
+  ui?: DropdownMenu['slots']
 }
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
@@ -121,7 +107,9 @@ import { computed, toRef } from 'vue'
 import { defu } from 'defu'
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { omit } from '../utils'
+import { tv } from '../utils/tv'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
 const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
@@ -133,12 +121,14 @@ const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 
+const appConfig = useAppConfig() as DropdownMenu['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
 const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
 const proxySlots = omit(slots, ['default'])
 
-const ui = computed(() => dropdownMenu({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })({
   size: props.size
 }))
 </script>
