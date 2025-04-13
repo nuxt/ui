@@ -5,13 +5,24 @@ import { createHooks } from 'hookable'
 import appConfig from '#build/app.config'
 import type { NuxtApp } from '#app'
 import { useColorMode as useColorModeVueUse } from '@vueuse/core'
+import { usePage } from '@inertiajs/vue3'
 
 export { useHead } from '@unhead/vue'
-export { useRoute, useRouter } from 'vue-router'
 
 export { defineShortcuts } from '../composables/defineShortcuts'
 export { defineLocale } from '../composables/defineLocale'
 export { useLocale } from '../composables/useLocale'
+
+export const useRoute = () => {
+  const page = usePage()
+  return {
+    fullRoute: page.url
+  }
+}
+
+export const useRouter = () => {
+
+}
 
 export const useColorMode = () => {
   if (!appConfig.colorMode) {

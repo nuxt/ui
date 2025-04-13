@@ -67,7 +67,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
   const appConfig = defu({ ui: options.ui, colorMode: options.colorMode }, { ui: getDefaultUiConfig(options.theme.colors) })
 
   return [
-    NuxtEnvironmentPlugin(),
+    NuxtEnvironmentPlugin(options),
     ComponentImportPlugin(options, meta),
     AutoImportPlugin(options, meta),
     tailwind(),
