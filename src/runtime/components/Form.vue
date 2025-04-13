@@ -217,7 +217,7 @@ const loading = ref(false)
 provide(formLoadingInjectionKey, readonly(loading))
 
 async function onSubmitWrapper(payload: Event) {
-  loading.value = true
+  loading.value = props.loadingAuto && true
 
   const event = payload as FormSubmitEvent<any>
 
@@ -241,8 +241,7 @@ async function onSubmitWrapper(payload: Event) {
   }
 }
 
-const isLoading = computed(() => loading.value && props.loadingAuto)
-const disabled = computed(() => props.disabled || isLoading.value)
+const disabled = computed(() => props.disabled || loading.value)
 
 provide(formOptionsInjectionKey, computed(() => ({
   disabled: disabled.value,
