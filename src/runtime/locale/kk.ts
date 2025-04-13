@@ -6,7 +6,7 @@ export default defineLocale<Messages>({
   code: 'kk',
   messages: {
     inputMenu: {
-      noMatch: 'Сәйкес деректер табылмады',
+      noMatch: 'Сәйкес келетін деректер жоқ',
       noData: 'Деректер жоқ',
       create: '"{label}" жасау'
     },
@@ -17,40 +17,40 @@ export default defineLocale<Messages>({
       nextMonth: 'Келесі ай'
     },
     inputNumber: {
-      increment: 'Артыру',
+      increment: 'Арттыру',
       decrement: 'Азайту'
     },
     commandPalette: {
-      placeholder: 'Бұйрық теріңіз немесе іздеңіз...',
-      noMatch: 'Совпадений не найдено',
-      noData: 'Нет данных',
+      placeholder: 'Команда енгізіңіз немесе іздеңіз...',
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      noData: 'Деректер жоқ',
       close: 'Жабу'
     },
     selectMenu: {
-      noMatch: 'Совпадений не найдено',
-      noData: 'Нет данных',
-      create: 'Создать "{label}"',
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      noData: 'Деректер жоқ',
+      create: '"{label}" жасау',
       search: 'Іздеу...'
     },
     toast: {
-      close: 'Закрыть'
+      close: 'Жабу'
     },
     carousel: {
-      prev: 'Артқа',
+      prev: 'Алдыңғы',
       next: 'Келесі',
       goto: '{slide} слайдқа өту'
     },
     modal: {
-      close: 'Закрыть'
+      close: 'Жабу'
     },
     slideover: {
-      close: 'Закрыть'
+      close: 'Жабу'
     },
     alert: {
-      close: 'Закрыть'
+      close: 'Жабу'
     },
     table: {
-      noData: 'Нет данных'
+      noData: 'Деректер жоқ'
     }
   }
 })
