@@ -1,17 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/tabs'
-import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlots, ComponentConfig } from '../types/utils'
 
-const appConfigTabs = _appConfig as AppConfig & { ui: { tabs: Partial<typeof theme> } }
-
-const tabs = tv({ extend: tv(theme), ...(appConfigTabs.ui?.tabs || {}) })
+type Tabs = ComponentConfig<typeof theme, AppConfig, 'tabs'>
 
 export interface TabsItem {
   label?: string
@@ -25,11 +20,10 @@ export interface TabsItem {
   /** A unique value for the tab item. Defaults to the index. */
   value?: string | number
   disabled?: boolean
+  [key: string]: any
 }
 
-type TabsVariants = VariantProps<typeof tabs>
-
-export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'> {
+export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -39,15 +33,15 @@ export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defa
   /**
    * @defaultValue 'primary'
    */
-  color?: TabsVariants['color']
+  color?: Tabs['variants']['color']
   /**
    * @defaultValue 'pill'
    */
-  variant?: TabsVariants['variant']
+  variant?: Tabs['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: TabsVariants['size']
+  size?: Tabs['variants']['size']
   /**
    * The orientation of the tabs.
    * @defaultValue 'horizontal'
@@ -64,19 +58,21 @@ export interface TabsProps<T> extends Pick<TabsRootProps<string | number>, 'defa
    */
   labelKey?: string
   class?: any
-  ui?: PartialString<typeof tabs.slots>
+  ui?: Tabs['slots']
 }
 
 export interface TabsEmits extends TabsRootEmits<string | number> {}
 
-type SlotProps<T> = (props: { item: T, index: number }) => any
+type SlotProps<T extends TabsItem> = (props: { item: T, index: number }) => any
 
-export type TabsSlots<T extends { slot?: string }> = {
-  leading: SlotProps<T>
-  default: SlotProps<T>
-  trailing: SlotProps<T>
-  content: SlotProps<T>
-} & DynamicSlots<T, SlotProps<T>>
+export type TabsSlots<T extends TabsItem = TabsItem> = {
+  'leading': SlotProps<T>
+  'default': SlotProps<T>
+  'trailing': SlotProps<T>
+  'content': SlotProps<T>
+  'list-leading': (props?: {}) => any
+  'list-trailing': (props?: {}) => any
+} & DynamicSlots<T, undefined, { index: number }>
 
 </script>
 
@@ -84,7 +80,9 @@ export type TabsSlots<T extends { slot?: string }> = {
 import { computed } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
@@ -98,9 +96,11 @@ const props = withDefaults(defineProps<TabsProps<T>>(), {
 const emits = defineEmits<TabsEmits>()
 const slots = defineSlots<TabsSlots<T>>()
 
+const appConfig = useAppConfig() as Tabs['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'activationMode', 'unmountOnHide'), emits)
 
-const ui = computed(() => tabs({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })({
   color: props.color,
   variant: props.variant,
   size: props.size,
@@ -112,6 +112,8 @@ const ui = computed(() => tabs({
   <TabsRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <TabsList :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
+
+      <slot name="list-leading" />
 
       <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger({ class: props.ui?.trigger })">
         <slot name="leading" :item="item" :index="index">
@@ -125,11 +127,13 @@ const ui = computed(() => tabs({
 
         <slot name="trailing" :item="item" :index="index" />
       </TabsTrigger>
+
+      <slot name="list-trailing" />
     </TabsList>
 
     <template v-if="!!content">
       <TabsContent v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :class="ui.content({ class: props.ui?.content })">
-        <slot :name="item.slot || 'content'" :item="item" :index="index">
+        <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index">
           {{ item.content }}
         </slot>
       </TabsContent>

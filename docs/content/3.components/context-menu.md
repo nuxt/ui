@@ -32,6 +32,7 @@ Use the `items` prop as an array of objects with the following properties:
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `onSelect?(e: Event): void`{lang="ts-type"}
 - [`onUpdateChecked?(checked: boolean): void`{lang="ts-type"}](#with-checkbox-items)
+- `children?: ContextMenuItem[] | ContextMenuItem[][]`{lang="ts-type"}
 
 You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -44,6 +45,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[][]
 props:
   items:
     - - label: Appearance
@@ -124,6 +127,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[]
 props:
   size: xl
   items:
@@ -158,6 +163,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - ContextMenuItem[]
 props:
   disabled: true
   items:

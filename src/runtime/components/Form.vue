@@ -1,25 +1,42 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
-import theme from '#build/ui/form'
-import { tv } from '../utils/tv'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
 import type { DeepReadonly } from 'vue'
+import type { AppConfig } from '@nuxt/schema'
+import theme from '#build/ui/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigForm = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
-
-const form = tv({ extend: tv(theme), ...(appConfigForm.ui?.form || {}) })
+type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
 
 export interface FormProps<T extends object> {
   id?: string | number
+  /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: FormSchema<T>
+  /** An object representing the current state of the form. */
   state: Partial<T>
+  /**
+   * Custom validation function to validate the form state.
+   * @param state - The current state of the form.
+   * @returns A promise that resolves to an array of FormError objects, or an array of FormError objects directly.
+   */
   validate?: (state: Partial<T>) => Promise<FormError[]> | FormError[]
+  /**
+   * The list of input events that trigger the form validation.
+   * @defaultValue `['blur', 'change', 'input']`
+   */
   validateOn?: FormInputEvents[]
+  /** Disable all inputs inside the form. */
   disabled?: boolean
+  /**
+   * Delay in milliseconds before validating the form on input events.
+   * @defaultValue `300`
+   */
   validateOnInputDelay?: number
-  class?: any
+  /**
+   * If true, schema transformations will be applied to the state on submit.
+   * @defaultValue `true`
+   */
   transform?: boolean
+  class?: any
   onSubmit?: ((event: FormSubmitEvent<T>) => void | Promise<void>) | (() => void | Promise<void>)
 }
 
@@ -36,7 +53,9 @@ export interface FormSlots {
 <script lang="ts" setup generic="T extends object">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
+import { tv } from '../utils/tv'
 import { validateSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
@@ -50,6 +69,10 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
 
 const emits = defineEmits<FormEmits<T>>()
 defineSlots<FormSlots>()
+
+const appConfig = useAppConfig() as FormConfig['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
 
 const formId = props.id ?? useId() as string
 
@@ -197,6 +220,7 @@ async function onSubmitWrapper(payload: Event) {
   try {
     event.data = await _validate({ nested: true, transform: props.transform })
     await props.onSubmit?.(event)
+    dirtyFields.clear()
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
@@ -254,6 +278,7 @@ defineExpose<Form<T>>({
   },
 
   disabled,
+  loading,
   dirty: computed(() => !!dirtyFields.size),
 
   dirtyFields: readonly(dirtyFields) as DeepReadonly<Set<keyof T>>,
@@ -266,7 +291,7 @@ defineExpose<Form<T>>({
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="form({ class: props.class })"
+    :class="ui({ class: props.class })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" />

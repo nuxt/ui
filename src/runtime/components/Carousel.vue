@@ -1,5 +1,5 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type { AcceptableValue } from 'reka-ui'
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
@@ -9,19 +9,15 @@ import type { AutoHeightOptionsType } from 'embla-carousel-auto-height'
 import type { ClassNamesOptionsType } from 'embla-carousel-class-names'
 import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/carousel'
-import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
-import type { PartialString } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigCarousel = _appConfig as AppConfig & { ui: { carousel: Partial<typeof theme> } }
+type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 
-const carousel = tv({ extend: tv(theme), ...(appConfigCarousel.ui?.carousel || {}) })
+export type CarouselItem = AcceptableValue
 
-type CarouselVariants = VariantProps<typeof carousel>
-
-export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
+export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -63,7 +59,7 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
    * The orientation of the carousel.
    * @defaultValue 'horizontal'
    */
-  orientation?: CarouselVariants['orientation']
+  orientation?: Carousel['variants']['orientation']
   items?: T[]
   /**
    * Enable Autoplay plugin
@@ -96,21 +92,23 @@ export interface CarouselProps<T> extends Omit<EmblaOptionsType, 'axis' | 'conta
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
   class?: any
-  ui?: PartialString<typeof carousel.slots>
+  ui?: Carousel['slots']
 }
 
-export type CarouselSlots<T> = {
+export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
   default(props: { item: T, index: number }): any
 }
+
 </script>
 
-<script setup lang="ts" generic="T extends AcceptableValue">
+<script setup lang="ts" generic="T extends CarouselItem">
 import { computed, ref, watch, onMounted } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick, computedAsync } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<CarouselProps<T>>(), {
@@ -144,14 +142,15 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
 })
 defineSlots<CarouselSlots<T>>()
 
-const appConfig = useAppConfig()
 const { dir, t } = useLocale()
+const appConfig = useAppConfig() as Carousel['AppConfig']
+
 const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))
 
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))
 const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowLeft : appConfig.ui.icons.arrowRight))
 
-const ui = computed(() => carousel({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.carousel || {}) })({
   orientation: props.orientation
 }))
 

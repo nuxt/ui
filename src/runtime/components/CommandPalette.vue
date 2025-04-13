@@ -4,16 +4,12 @@ import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigCommandPalette = _appConfig as AppConfig & { ui: { commandPalette: Partial<typeof theme> } }
-
-const commandPalette = tv({ extend: tv(theme), ...(appConfigCommandPalette.ui?.commandPalette || {}) })
+type CommandPalette = ComponentConfig<typeof theme, AppConfig, 'commandPalette'>
 
 export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   prefix?: string
@@ -31,6 +27,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   disabled?: boolean
   slot?: string
   onSelect?(e?: Event): void
+  [key: string]: any
 }
 
 export interface CommandPaletteGroup<T> {
@@ -73,7 +70,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
   selectedIcon?: string
   /**
    * The placeholder text for the input.
-   * @defaultValue 'Type a command or search...'
+   * @defaultValue t('commandPalette.placeholder')
    */
   placeholder?: InputProps['placeholder']
   /**
@@ -114,7 +111,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    */
   labelKey?: string
   class?: any
-  ui?: PartialString<typeof commandPalette.slots>
+  ui?: CommandPalette['slots']
 }
 
 export type CommandPaletteEmits<T> = ListboxRootEmits<T> & {
@@ -125,12 +122,12 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: string }> = {
   'empty'(props: { searchTerm?: string }): any
-  'close'(props: { ui: any }): any
+  'close'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-} & DynamicSlots<G, SlotProps<T>> & DynamicSlots<T, SlotProps<T>>
+} & Record<string, SlotProps<G>> & Record<string, SlotProps<T>>
 
 </script>
 
@@ -143,6 +140,7 @@ import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
+import { tv } from '../utils/tv'
 import { highlight } from '../utils/fuse'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
@@ -165,13 +163,13 @@ const slots = defineSlots<CommandPaletteSlots<G, T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as CommandPalette['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = commandPalette()
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })())
 
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
@@ -257,7 +255,6 @@ const groups = computed(() => {
         :placeholder="placeholder || t('commandPalette.placeholder')"
         variant="none"
         :autofocus="autofocus"
-        size="lg"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
@@ -282,14 +279,14 @@ const groups = computed(() => {
 
     <ListboxContent :class="ui.content({ class: props.ui?.content })">
       <div v-if="groups?.length" :class="ui.viewport({ class: props.ui?.viewport })">
-        <ListboxGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
+        <ListboxGroup v-for="group in groups" :key="`group-${group.id}`" :class="ui.group({ class: props.ui?.group })">
           <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
             {{ get(group, props.labelKey as string) }}
           </ListboxGroupLabel>
 
           <ListboxItem
             v-for="(item, index) in group.items"
-            :key="`group-${groupIndex}-${index}`"
+            :key="`group-${group.id}-${index}`"
             :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml'])"
             :disabled="item.disabled"
             as-child
@@ -297,8 +294,8 @@ const groups = computed(() => {
           >
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ class: props.ui?.item, active: active || item.active })">
-                <slot :name="item.slot || group.slot || 'item'" :item="item" :index="index">
-                  <slot :name="item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`" :item="item" :index="index">
+                <slot :name="((item.slot || group.slot || 'item') as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
+                  <slot :name="((item.slot ? `${item.slot}-leading` : group.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
                     <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, loading: true })" />
                     <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon, active: active || item.active })" />
                     <UAvatar v-else-if="item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar, active: active || item.active })" />
@@ -312,8 +309,8 @@ const groups = computed(() => {
                     />
                   </slot>
 
-                  <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`]" :class="ui.itemLabel({ class: props.ui?.itemLabel, active: active || item.active })">
-                    <slot :name="item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`" :item="item" :index="index">
+                  <span v-if="item.labelHtml || get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]" :class="ui.itemLabel({ class: props.ui?.itemLabel, active: active || item.active })">
+                    <slot :name="((item.slot ? `${item.slot}-label` : group.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
                       <span v-if="item.prefix" :class="ui.itemLabelPrefix({ class: props.ui?.itemLabelPrefix })">{{ item.prefix }}</span>
 
                       <span :class="ui.itemLabelBase({ class: props.ui?.itemLabelBase, active: active || item.active })" v-html="item.labelHtml || get(item, props.labelKey as string)" />
@@ -323,7 +320,7 @@ const groups = computed(() => {
                   </span>
 
                   <span :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
-                    <slot :name="item.slot ? `${item.slot}-trailing` : group.slot ? `${group.slot}-trailing` : `item-trailing`" :item="item" :index="index">
+                    <slot :name="((item.slot ? `${item.slot}-trailing` : group.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
                       <span v-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: props.ui?.itemTrailingKbds })">
                         <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
                       </span>

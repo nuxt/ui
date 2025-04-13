@@ -17,7 +17,7 @@ const { data, status } = await useFetch<User[]>('https://jsonplaceholder.typicod
   transform: (data) => {
     return data?.map(user => ({
       ...user,
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, alt: `${user.name} avatar` }
     })) || []
   },
   lazy: true

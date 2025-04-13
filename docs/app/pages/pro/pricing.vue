@@ -7,8 +7,8 @@ const { url } = useSiteConfig()
 
 useSeoMeta({
   title: page.title,
-  ogTitle: page.title,
   description: page.description,
+  ogTitle: page.title,
   ogDescription: page.description,
   ogImage: joinURL(url, '/pro/og-image.png')
 })
@@ -27,8 +27,10 @@ useSeoMeta({
         <MDC :value="page.pricing.title" unwrap="p" cache-key="pro-pricing-title" />
       </template>
 
-      <StarsBg />
+      <LazyStarsBg />
+
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+
       <div class="flex flex-col bg-(--ui-bg) gap-8 lg:gap-0">
         <UPricingPlan
           v-bind="page.pricing.freePlan"
@@ -79,6 +81,7 @@ useSeoMeta({
           :key="index"
           v-bind="logo"
           class="h-6 shrink-0 max-w-[140px] filter invert dark:invert-0"
+          loading="lazy"
         >
       </UPageMarquee>
       <UContainer>

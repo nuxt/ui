@@ -59,7 +59,6 @@ export function extractShortcuts(items: any[] | any[][]) {
   return shortcuts
 }
 
-/* @__NO_SIDE_EFFECTS__ */
 export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: ShortcutsOptions = {}) {
   const chainedInputs = ref<string[]>([])
   const clearChainedInput = () => {

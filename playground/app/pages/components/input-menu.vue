@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { InputMenuItem, AvatarProps } from '@nuxt/ui'
+
 import { upperFirst } from 'scule'
 import { refDebounced } from '@vueuse/core'
 import type { User } from '~/types'
@@ -10,7 +12,7 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
 const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
-const items = [[{ label: 'Fruits', type: 'label' }, ...fruits], [{ label: 'Vegetables', type: 'label' }, ...vegetables]]
+const items = [[{ label: 'Fruits', type: 'label' as const }, ...fruits], [{ label: 'Vegetables', type: 'label' as const }, ...vegetables]]
 const selectedItems = ref([fruits[0]!, vegetables[0]!])
 
 const statuses = [{
@@ -28,7 +30,7 @@ const statuses = [{
 }, {
   label: 'Canceled',
   icon: 'i-lucide-circle-x'
-}]
+}] satisfies InputMenuItem[]
 
 const searchTerm = ref('')
 const searchTermDebounced = refDebounced(searchTerm, 200)
@@ -126,7 +128,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         class="w-48"
       >
         <template #leading="{ modelValue, ui }">
-          <UAvatar v-if="modelValue?.avatar" :size="ui.itemLeadingAvatarSize()" v-bind="modelValue.avatar" />
+          <UAvatar v-if="modelValue?.avatar" :size="(ui.itemLeadingAvatarSize() as AvatarProps['size'])" v-bind="modelValue.avatar" />
         </template>
       </UInputMenu>
     </div>

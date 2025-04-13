@@ -9,10 +9,10 @@ const { url } = useSiteConfig()
 
 useSeoMeta({
   title: page.title,
-  ogTitle: page.title,
-  ogImage: joinURL(url, '/pro/og-image.png'),
   description: page.description,
-  ogDescription: page.description
+  ogTitle: page.title,
+  ogDescription: page.description,
+  ogImage: joinURL(url, '/pro/og-image.png')
 })
 </script>
 
@@ -32,7 +32,7 @@ useSeoMeta({
         <MDC :value="page.hero.description" tag="span" unwrap="p" cache-key="pro-hero-description" />
       </template>
 
-      <StarsBg />
+      <LazyStarsBg />
 
       <Motion as-child :initial="{ height: 0 }" :animate="{ height: 'auto' }" :transition="{ delay: 0.2, duration: 1 }">
         <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
@@ -196,7 +196,7 @@ useSeoMeta({
       class="overflow-hidden"
       orientation="horizontal"
     >
-      <StarsBg />
+      <LazyStarsBg />
 
       <video
         class="rounded-[var(--ui-radius)] z-10"

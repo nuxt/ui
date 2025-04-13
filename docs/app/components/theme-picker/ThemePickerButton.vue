@@ -5,6 +5,10 @@ defineProps<{
   chip?: string
   selected?: boolean
 }>()
+
+const slots = defineSlots<{
+  leading: () => any
+}>()
 </script>
 
 <template>
@@ -17,7 +21,7 @@ defineProps<{
     class="capitalize ring-(--ui-border) rounded-[calc(var(--ui-radius))] text-[11px]"
     :class="[selected ? 'bg-(--ui-bg-elevated)' : 'hover:bg-(--ui-bg-elevated)/50']"
   >
-    <template v-if="chip" #leading>
+    <template v-if="chip || !!slots.leading" #leading>
       <slot name="leading">
         <span
           class="inline-block size-2 rounded-full"
