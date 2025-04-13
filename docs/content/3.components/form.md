@@ -32,7 +32,7 @@ It requires two props:
     class: 'w-60'
   ---
   ::
-  
+
   ::component-example{label="Zod"}
   ---
   name: 'form-example-zod'
@@ -206,3 +206,7 @@ This will give you access to the following:
 | `dirtyFields`{lang="ts-type"} | `DeepReadonly<Set<keyof T>>`{lang="ts-type"} Tracks fields that have been modified by the user. |
 | `touchedFields`{lang="ts-type"} | `DeepReadonly<Set<keyof T>>`{lang="ts-type"} Tracks fields that the user interacted with. |
 | `blurredFields`{lang="ts-type"} | `DeepReadonly<Set<keyof T>>`{lang="ts-type"} Tracks fields blurred by the user. |
+
+## Theme
+
+:component-theme

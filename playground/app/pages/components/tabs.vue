@@ -59,6 +59,14 @@ const items = [{
         <template #custom="{ item }">
           <span class="text-(--ui-text-muted)">Custom: {{ item.content }}</span>
         </template>
+
+        <template #list-trailing>
+          <UButton
+            icon="lucide:refresh-cw"
+            variant="soft"
+            class="ml-2"
+          />
+        </template>
       </UTabs>
     </div>
   </div>

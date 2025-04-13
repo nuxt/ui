@@ -1,12 +1,9 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/container'
-import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigContainer = _appConfig as AppConfig & { ui: { container: Partial<typeof theme> } }
-
-const container = tv({ extend: tv(theme), ...(appConfigContainer.ui?.container || {}) })
+type Container = ComponentConfig<typeof theme, AppConfig, 'container'>
 
 export interface ContainerProps {
   /**
@@ -23,14 +20,21 @@ export interface ContainerSlots {
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = defineProps<ContainerProps>()
 defineSlots<ContainerSlots>()
+
+const appConfig = useAppConfig() as Container['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.container || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="container({ class: props.class })">
+  <Primitive :as="as" :class="ui({ class: props.class })">
     <slot />
   </Primitive>
 </template>

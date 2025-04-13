@@ -1,27 +1,13 @@
 <script lang="ts">
 import type { InputHTMLAttributes } from 'vue'
-import type { VariantProps } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type {
-  AcceptableValue,
-  ArrayOrNested,
-  GetItemKeys,
-  GetModelValue,
-  GetModelValueEmits,
-  NestedItem,
-  PartialString,
-  EmitsToProps
-} from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigInputMenu = _appConfig as AppConfig & { ui: { inputMenu: Partial<typeof theme> } }
-
-const inputMenu = tv({ extend: tv(theme), ...(appConfigInputMenu.ui?.inputMenu || {}) })
+type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>
 
 interface _InputMenuItem {
   label?: string
@@ -42,8 +28,6 @@ interface _InputMenuItem {
 }
 export type InputMenuItem = _InputMenuItem | AcceptableValue | boolean
 
-type InputMenuVariants = VariantProps<typeof inputMenu>
-
 export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
@@ -57,15 +41,15 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   /**
    * @defaultValue 'primary'
    */
-  color?: InputMenuVariants['color']
+  color?: InputMenu['variants']['color']
   /**
    * @defaultValue 'outline'
    */
-  variant?: InputMenuVariants['variant']
+  variant?: InputMenu['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: InputMenuVariants['size']
+  size?: InputMenu['variants']['size']
   required?: boolean
   autofocus?: boolean
   autofocusDelay?: number
@@ -138,7 +122,7 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    */
   ignoreFilter?: boolean
   class?: any
-  ui?: PartialString<typeof inputMenu.slots>
+  ui?: InputMenu['slots']
 }
 
 export type InputMenuEmits<A extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
@@ -161,8 +145,16 @@ export interface InputMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof inputMenu> }): any
-  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof inputMenu> }): any
+  'leading'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+    ui: { [K in keyof Required<InputMenu['slots']>]: (props?: Record<string, any>) => string }
+  }): any
+  'trailing'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+    ui: { [K in keyof Required<InputMenu['slots']>]: (props?: Record<string, any>) => string }
+  }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -186,6 +178,7 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { compare, get, isArrayOfArray } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
@@ -206,7 +199,7 @@ const slots = defineSlots<InputMenuSlots<T, VK, M>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as InputMenu['AppConfig']
 const { contains } = useFilter({ sensitivity: 'base' })
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover', 'ignoreFilter'), emits)
@@ -221,7 +214,7 @@ const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 
-const ui = computed(() => inputMenu({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu || {}) })({
   color: color.value,
   variant: props.variant,
   size: inputSize?.value,

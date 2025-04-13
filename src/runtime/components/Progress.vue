@@ -1,17 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/progress'
-import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigProgress = _appConfig as AppConfig & { ui: { progress: Partial<typeof theme> } }
-
-const progress = tv({ extend: tv(theme), ...(appConfigProgress.ui?.progress || {}) })
-
-type ProgressVariants = VariantProps<typeof progress>
+type Progress = ComponentConfig<typeof theme, AppConfig, 'progress'>
 
 export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' | 'modelValue'> {
   /**
@@ -28,23 +22,23 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
   /**
    * @defaultValue 'md'
    */
-  size?: ProgressVariants['size']
+  size?: Progress['variants']['size']
   /**
    * @defaultValue 'primary'
    */
-  color?: ProgressVariants['color']
+  color?: Progress['variants']['color']
   /**
    * The orientation of the progress bar.
    * @defaultValue 'horizontal'
    */
-  orientation?: ProgressVariants['orientation']
+  orientation?: Progress['variants']['orientation']
   /**
    * The animation of the progress bar.
    * @defaultValue 'carousel'
    */
-  animation?: ProgressVariants['animation']
+  animation?: Progress['variants']['animation']
   class?: any
-  ui?: Partial<typeof progress.slots>
+  ui?: Progress['slots']
 }
 
 export interface ProgressEmits extends ProgressRootEmits {}
@@ -61,7 +55,9 @@ export type ProgressSlots = {
 import { computed } from 'vue'
 import { Primitive, ProgressRoot, ProgressIndicator, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
@@ -72,6 +68,7 @@ const emits = defineEmits<ProgressEmits>()
 const slots = defineSlots<ProgressSlots>()
 
 const { dir } = useLocale()
+const appConfig = useAppConfig() as Progress['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'modelValue'), emits)
 
@@ -160,7 +157,7 @@ function stepVariant(index: number | string) {
   return 'other'
 }
 
-const ui = computed(() => progress({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || {}) })({
   animation: props.animation,
   size: props.size,
   color: props.color,

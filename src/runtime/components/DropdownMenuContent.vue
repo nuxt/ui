@@ -1,12 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
-import theme from '#build/ui/dropdown-menu'
-import { tv } from '../utils/tv'
+import type { AppConfig } from '@nuxt/schema'
+import type theme from '#build/ui/dropdown-menu'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
-import type { ArrayOrNested, NestedItem } from '../types/utils'
+import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
 
-const _dropdownMenu = tv(theme)()
+type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
 interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> extends Omit<RekaDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T
@@ -26,8 +26,8 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
    */
   externalIcon?: boolean | string
   class?: any
-  ui: typeof _dropdownMenu
-  uiOverride?: any
+  ui: { [K in keyof Required<DropdownMenu['slots']>]: (props?: Record<string, any>) => string }
+  uiOverride?: DropdownMenu['slots']
 }
 
 interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
@@ -59,8 +59,9 @@ const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()
 const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
-const appConfig = useAppConfig()
 const { dir } = useLocale()
+const appConfig = useAppConfig()
+
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default'])
 
