@@ -9,8 +9,8 @@ export default (options: Required<ModuleOptions>) => ({
     viewport: 'relative divide-y divide-(--ui-border) scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
     group: 'p-1 isolate',
     empty: 'py-6 text-center text-sm text-(--ui-text-muted)',
-    label: 'px-2 py-1.5 text-xs font-semibold text-(--ui-text-highlighted)',
-    item: 'group relative w-full flex items-center gap-2 px-2 py-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75',
+    label: 'p-1.5 text-xs font-semibold text-(--ui-text-highlighted)',
+    item: 'group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-[calc(var(--ui-radius)*1.5)] data-disabled:cursor-not-allowed data-disabled:opacity-75',
     itemLeadingIcon: 'shrink-0 size-5',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingAvatarSize: '2xs',
@@ -33,8 +33,8 @@ export default (options: Required<ModuleOptions>) => ({
         itemLeadingIcon: 'text-(--ui-text)'
       },
       false: {
-        item: ['text-(--ui-text) data-highlighted:text-(--ui-text-highlighted) data-highlighted:before:bg-(--ui-bg-elevated)/50', options.theme.transitions && 'transition-colors before:transition-colors'],
-        itemLeadingIcon: ['text-(--ui-text-dimmed) group-data-highlighted:text-(--ui-text)', options.theme.transitions && 'transition-colors']
+        item: ['text-(--ui-text) data-highlighted:not-data-disabled:text-(--ui-text-highlighted) data-highlighted:not-data-disabled:before:bg-(--ui-bg-elevated)/50', options.theme.transitions && 'transition-colors before:transition-colors'],
+        itemLeadingIcon: ['text-(--ui-text-dimmed) group-data-highlighted:not-group-data-disabled:text-(--ui-text)', options.theme.transitions && 'transition-colors']
       }
     },
     loading: {

@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
-import theme from '#build/ui/context-menu'
-import { tv } from '../utils/tv'
+import type { AppConfig } from '@nuxt/schema'
+import type theme from '#build/ui/context-menu'
 import type { AvatarProps, ContextMenuItem, ContextMenuSlots, KbdProps } from '../types'
-import type { ArrayOrNested, NestedItem } from '../types/utils'
+import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
 
-const _contextMenu = tv(theme)()
+type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
 interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T
@@ -25,8 +25,8 @@ interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> exte
    */
   externalIcon?: boolean | string
   class?: any
-  ui: typeof _contextMenu
-  uiOverride?: any
+  ui: { [K in keyof Required<ContextMenu['slots']>]: (props?: Record<string, any>) => string }
+  uiOverride?: ContextMenu['slots']
 }
 
 interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
@@ -53,8 +53,9 @@ const props = defineProps<ContextMenuContentProps<T>>()
 const emits = defineEmits<ContextMenuContentEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
-const appConfig = useAppConfig()
 const { dir } = useLocale()
+const appConfig = useAppConfig()
+
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default'])
 

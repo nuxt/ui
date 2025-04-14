@@ -5,8 +5,9 @@ const description = 'The development of Nuxt UI is led by a community of develop
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title,
-  ogTitle: 'Nuxt UI Team',
-  description
+  description,
+  ogTitle: `${title} - Nuxt UI`,
+  ogDescription: description
 })
 
 defineOgImageComponent('Docs', {

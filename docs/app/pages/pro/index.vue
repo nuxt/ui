@@ -9,10 +9,10 @@ const { url } = useSiteConfig()
 
 useSeoMeta({
   title: page.title,
-  ogTitle: page.title,
-  ogImage: joinURL(url, '/pro/og-image.png'),
   description: page.description,
-  ogDescription: page.description
+  ogTitle: page.title,
+  ogDescription: page.description,
+  ogImage: joinURL(url, '/pro/og-image.png')
 })
 </script>
 

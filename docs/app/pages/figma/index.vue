@@ -5,6 +5,7 @@ import { animate } from 'motion-v'
 import { joinURL } from 'ufo'
 
 const { url } = useSiteConfig()
+
 useSeoMeta({
   title: page.title,
   description: page.description,

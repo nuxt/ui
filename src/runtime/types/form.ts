@@ -14,6 +14,7 @@ export interface Form<T extends object> {
   submit (): Promise<void>
   disabled: ComputedRef<boolean>
   dirty: ComputedRef<boolean>
+  loading: Ref<boolean>
 
   dirtyFields: DeepReadonly<Set<keyof T>>
   touchedFields: DeepReadonly<Set<keyof T>>

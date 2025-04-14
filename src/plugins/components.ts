@@ -18,6 +18,9 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
   const overrides = globSync('**/*.vue', { cwd: join(runtimeDir, 'vue/components') })
   const overrideNames = new Set(overrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
 
+  const inertiaOverrides = globSync('**/*.vue', { cwd: join(runtimeDir, 'inertia/components') })
+  const inertiaOverrideNames = new Set(inertiaOverrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+
   const pluginOptions = defu(options.components, <ComponentsOptions>{
     dts: options.dts ?? true,
     exclude: [
@@ -27,6 +30,9 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     ],
     resolvers: [
       (componentName) => {
+        if (options.inertia && inertiaOverrideNames.has(componentName)) {
+          return { name: 'default', from: join(runtimeDir, 'inertia/components', `${componentName.slice(options.prefix.length)}.vue`) }
+        }
         if (overrideNames.has(componentName))
           return { name: 'default', from: join(runtimeDir, 'vue/components', `${componentName.slice(options.prefix.length)}.vue`) }
         if (componentNames.has(componentName))
@@ -55,6 +61,9 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
         }
 
         const filename = id.match(/([^/]+)\.vue$/)?.[1]
+        if (filename && options.inertia && inertiaOverrideNames.has(`${options.prefix}${filename}`)) {
+          return join(runtimeDir, 'inertia/components', `${filename}.vue`)
+        }
         if (filename && overrideNames.has(`${options.prefix}${filename}`)) {
           return join(runtimeDir, 'vue/components', `${filename}.vue`)
         }
