@@ -116,7 +116,7 @@ const items = [
       class="data-[orientation=vertical]:data-[collapsed=false]:w-48"
     >
       <template #list-leading>
-        <img src="/favicon.ico">
+        Logo
       </template>
 
       <template #list-trailing>
