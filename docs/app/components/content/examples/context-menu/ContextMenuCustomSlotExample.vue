@@ -3,14 +3,18 @@ import type { ContextMenuItem } from '@nuxt/ui'
 
 const loading = ref(true)
 
-const items: ContextMenuItem[] = [{
-  label: 'Refresh the Page',
-  slot: 'refresh'
-}, {
-  label: 'Clear Cookies and Refresh'
-}, {
-  label: 'Clear Cache and Refresh'
-}]
+const items = [
+  {
+    label: 'Refresh the Page',
+    slot: 'refresh' as const
+  },
+  {
+    label: 'Clear Cookies and Refresh'
+  },
+  {
+    label: 'Clear Cache and Refresh'
+  }
+] satisfies ContextMenuItem[]
 </script>
 
 <template>

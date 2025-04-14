@@ -93,8 +93,8 @@ import { isEqual, diff } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
-import { useRoute, useAppConfig } from '#imports'
-import { RouterLink } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
+import { useAppConfig } from '#imports'
 import { tv } from '../../utils/tv'
 
 defineOptions({ inheritAttrs: false })
