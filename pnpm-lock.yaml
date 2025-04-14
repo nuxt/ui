@@ -246,8 +246,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: https://pkg.pr.new/@nuxt/ui-pro@4757a1e
-        version: https://pkg.pr.new/@nuxt/ui-pro@4757a1e(@babel/parser@7.27.0)(joi@17.13.3)(magicast@0.3.5)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.0.0(typescript@5.8.3))(vue@3.5.13(typescript@5.8.3))(yup@1.6.1)(zod@3.24.2)
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@4704ab1
+        version: https://pkg.pr.new/@nuxt/ui-pro@4704ab1(@babel/parser@7.27.0)(joi@17.13.3)(magicast@0.3.5)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.0.0(typescript@5.8.3))(vue@3.5.13(typescript@5.8.3))(yup@1.6.1)(zod@3.24.2)
       '@nuxthub/core':
         specifier: ^0.8.24
         version: 0.8.24(db0@0.3.1(better-sqlite3@11.9.1))(ioredis@5.6.0)(magicast@0.3.5)(vite@6.2.6(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.1))
@@ -1492,8 +1492,8 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@4757a1e':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@4757a1e}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@4704ab1':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@4704ab1}
     version: 3.0.2
     peerDependencies:
       joi: ^17.13.0
@@ -3573,6 +3573,10 @@ packages:
 
   dotenv@16.4.7:
     resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
+    engines: {node: '>=12'}
+
+  dotenv@16.5.0:
+    resolution: {integrity: sha512-m/C+AwOAr9/W1UOIZUo232ejMNnJAJtYQjUbHoNTBNTJSvqzzDh7vnrei3o3r3m9blf6ZoDkvcw0VmozNRFJxg==}
     engines: {node: '>=12'}
 
   dunder-proto@1.0.1:
@@ -8567,7 +8571,7 @@ snapshots:
       - typescript
       - yaml
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@4757a1e(@babel/parser@7.27.0)(joi@17.13.3)(magicast@0.3.5)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.0.0(typescript@5.8.3))(vue@3.5.13(typescript@5.8.3))(yup@1.6.1)(zod@3.24.2)':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@4704ab1(@babel/parser@7.27.0)(joi@17.13.3)(magicast@0.3.5)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.0.0(typescript@5.8.3))(vue@3.5.13(typescript@5.8.3))(yup@1.6.1)(zod@3.24.2)':
     dependencies:
       '@ai-sdk/vue': 1.2.8(vue@3.5.13(typescript@5.8.3))(zod@3.24.2)
       '@nuxt/kit': 3.16.2(magicast@0.3.5)
@@ -8577,7 +8581,7 @@ snapshots:
       '@vueuse/core': 13.1.0(vue@3.5.13(typescript@5.8.3))
       consola: 3.4.2
       defu: 6.1.4
-      dotenv: 16.4.7
+      dotenv: 16.5.0
       git-url-parse: 16.0.1
       ofetch: 1.4.1
       ohash: 2.0.11
@@ -10760,6 +10764,8 @@ snapshots:
       type-fest: 4.38.0
 
   dotenv@16.4.7: {}
+
+  dotenv@16.5.0: {}
 
   dunder-proto@1.0.1:
     dependencies:
