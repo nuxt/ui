@@ -32,10 +32,9 @@ type CodeConfig = {
 
 type Document = {
   title: string
-  body: any // Using any here since we don't have access to MinimalTree type
+  body: any
 }
 
-// Helper functions
 const parseBoolean = (value?: string): boolean => value === 'true'
 
 const generateThemeConfig = ({ pro, prose, componentName }: ThemeConfig) => {
@@ -62,14 +61,18 @@ const generateComponentCode = ({
     Object.entries(props).filter(([key]) => !ignore.includes(key) && !hide.includes(key))
   )
 
-  const imports = external.map((ext, index) => {
-    const type = externalTypes[index]?.replace(/[[\]]/g, '')
-    return `import type { ${type} } from '@nuxt/${pro ? 'ui-pro' : 'ui'}'`
-  }).join('\n')
+  const imports = pro
+    ? ''
+    : external.map((ext, index) => {
+        const type = externalTypes[index]?.replace(/[[\]]/g, '')
+        return `import type { ${type} } from '@nuxt/${pro ? 'ui-pro' : 'ui'}'`
+      }).join('\n')
 
   let itemsCode = ''
   if (props.items) {
-    itemsCode = `\nconst items = ref<${externalTypes[0]}>(${json5.stringify(props.items, null, 2)})`
+    itemsCode = pro
+      ? `const items = ref(${json5.stringify(props.items, null, 2)})`
+      : `const items = ref<${externalTypes[0]}>(${json5.stringify(props.items, null, 2)})`
     delete filteredProps.items
   }
 
@@ -89,12 +92,23 @@ const generateComponentCode = ({
   const allProps = [propsString, itemsProp].filter(Boolean).join(' ')
   const formattedProps = allProps ? ` ${allProps} ` : ' '
 
-  return `<script setup lang="ts">
-${imports}
-${itemsCode}
-</script>
+  let scriptSetup = ''
+  if (imports || itemsCode) {
+    scriptSetup = '<script setup lang="ts">'
 
-<template>
+    if (imports)
+      scriptSetup += `\n${imports}`
+
+    if (imports && itemsCode)
+      scriptSetup += '\n'
+
+    if (itemsCode)
+      scriptSetup += `\n${itemsCode}`
+
+    scriptSetup += '\n</script>\n\n'
+  }
+
+  return `${scriptSetup}<template>
   <U${componentName.charAt(0).toUpperCase() + componentName.slice(1)}${formattedProps}/>
 </template>`
 }
@@ -155,7 +169,7 @@ export default defineNitroPlugin((nitroApp) => {
         node[0] = 'pre'
         node[1] = {
           language: 'vue',
-          filename: `${componentName}.vue`,
+          filename: `${componentName}.vue`, // TODO: remove later
           code
         }
       }
