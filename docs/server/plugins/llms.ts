@@ -1,23 +1,103 @@
 import json5 from 'json5'
 import { camelCase } from 'scule'
 import { visit } from '@nuxt/content/runtime'
-import meta from '#nuxt-component-meta'
-// @ts-expect-error - no types available
-import components from '#component-example/nitro'
 import * as theme from '../../.nuxt/ui'
 import * as themePro from '../../.nuxt/ui-pro'
 
-type ComponentCodeNode = [
-  string,
-  {
-    ':pro'?: string
-    ':props'?: string
-    ':external'?: string
-    ':externalTypes'?: string
-    ':ignore'?: string
-    ':hide'?: string
+type ComponentAttributes = {
+  ':pro'?: string
+  ':prose'?: string
+  ':props'?: string
+  ':external'?: string
+  ':externalTypes'?: string
+  ':ignore'?: string
+  ':hide'?: string
+}
+
+type ThemeConfig = {
+  pro: boolean
+  prose: boolean
+  componentName: string
+}
+
+type CodeConfig = {
+  pro: boolean
+  props: Record<string, unknown>
+  external: string[]
+  externalTypes: string[]
+  ignore: string[]
+  hide: string[]
+  componentName: string
+}
+
+type Document = {
+  title: string
+  body: any // Using any here since we don't have access to MinimalTree type
+}
+
+// Helper functions
+const parseBoolean = (value?: string): boolean => value === 'true'
+
+const generateThemeConfig = ({ pro, prose, componentName }: ThemeConfig) => {
+  const computedTheme = pro ? (prose ? themePro.prose : themePro) : theme
+  const componentTheme = computedTheme[componentName as keyof typeof computedTheme]
+
+  return {
+    [pro ? 'uiPro' : 'ui']: prose
+      ? { prose: { [componentName]: componentTheme } }
+      : { [componentName]: componentTheme }
   }
-]
+}
+
+const generateComponentCode = ({
+  pro,
+  props,
+  external,
+  externalTypes,
+  ignore,
+  hide,
+  componentName
+}: CodeConfig) => {
+  const filteredProps = Object.fromEntries(
+    Object.entries(props).filter(([key]) => !ignore.includes(key) && !hide.includes(key))
+  )
+
+  const imports = external.map((ext, index) => {
+    const type = externalTypes[index]?.replace(/[[\]]/g, '')
+    return `import type { ${type} } from '@nuxt/${pro ? 'ui-pro' : 'ui'}'`
+  }).join('\n')
+
+  let itemsCode = ''
+  if (props.items) {
+    itemsCode = `\nconst items = ref<${externalTypes[0]}>(${json5.stringify(props.items, null, 2)})`
+    delete filteredProps.items
+  }
+
+  const propsString = Object.entries(filteredProps)
+    .map(([key, value]) => {
+      if (typeof value === 'string' || typeof value === 'number') {
+        return `:${key}="${value}"`
+      } else if (typeof value === 'boolean') {
+        return value ? key : ''
+      }
+      return ''
+    })
+    .filter(Boolean)
+    .join(' ')
+
+  const itemsProp = props.items ? ':items="items"' : ''
+  const allProps = [propsString, itemsProp].filter(Boolean).join(' ')
+  const formattedProps = allProps ? ` ${allProps} ` : ' '
+
+  return `<script setup lang="ts">
+${imports}
+${itemsCode}
+</script>
+
+<template>
+  <U${componentName.charAt(0).toUpperCase() + componentName.slice(1)}${formattedProps}/>
+</template>`
+}
 
 /*
  * TODO:
@@ -29,76 +109,57 @@ type ComponentCodeNode = [
  *  [] component-example
  */
 export default defineNitroPlugin((nitroApp) => {
-  // @ts-expect-error - no types available
-  nitroApp.hooks.hook('content:llms:generate:document', async (doc) => {
+  nitroApp.hooks.hook('content:llms:generate:document' as any, async (doc: Document) => {
     const componentName = camelCase(doc.title)
 
-    visit(doc.body, node => node[0] === 'component-theme', (node) => {
-      const pro = node[1][':pro'] === 'true'
-      const prose = node[1][':prose'] === 'true'
+    // Handle component theme
+    visit(doc.body, (node) => {
+      if (Array.isArray(node) && node[0] === 'component-theme') {
+        const attributes = node[1] as ComponentAttributes
+        const pro = parseBoolean(attributes[':pro'])
+        const prose = parseBoolean(attributes[':prose'])
 
-      const computedTheme = pro ? prose ? themePro.prose : themePro : theme
-      const componentTheme = computedTheme[componentName]
+        const appConfig = generateThemeConfig({ pro, prose, componentName })
 
-      const appConfig = {
-        [pro ? 'uiPro' : 'ui']: prose
-          ? { prose: { [componentName]: componentTheme } }
-          : { [componentName]: componentTheme }
+        node[0] = 'pre'
+        node[1] = {
+          language: 'ts',
+          filename: 'app.config.ts',
+          code: `export default defineAppConfig(${json5.stringify(appConfig, null, 2)?.replace(/,([ |\t\n]+[}|\])])/g, '$1')})`
+        }
       }
+      return true
+    }, node => node)
 
-      return ['pre', {
-        language: 'ts',
-        filename: 'app.config.ts',
-        code: `export default defineAppConfig(${json5.stringify(appConfig, null, 2)?.replace(/,([ |\t\n]+[}|\])])/g, '$1')})`
-      }]
-    })
+    // Handle component code
+    visit(doc.body, (node) => {
+      if (Array.isArray(node) && node[0] === 'component-code') {
+        const attributes = node[1] as ComponentAttributes
+        const pro = parseBoolean(attributes[':pro'])
+        const props = attributes[':props'] ? json5.parse(attributes[':props']) : {}
+        const external = attributes[':external'] ? json5.parse(attributes[':external']) : []
+        const externalTypes = attributes[':externalTypes'] ? json5.parse(attributes[':externalTypes']) : []
+        const ignore = attributes[':ignore'] ? json5.parse(attributes[':ignore']) : []
+        const hide = attributes[':hide'] ? json5.parse(attributes[':hide']) : []
 
-    visit(doc.body, node => node[0] === 'component-code', (node: ComponentCodeNode) => {
-      const pro = node[1][':pro'] === 'true'
-      const props = node[1][':props'] ? json5.parse(node[1][':props']) : {}
-      const external = node[1][':external'] ? json5.parse(node[1][':external']) : []
-      const externalTypes = node[1][':externalTypes'] ? json5.parse(node[1][':externalTypes']) : []
-      const ignore = node[1][':ignore'] ? json5.parse(node[1][':ignore']) : []
-      const hide = node[1][':hide'] ? json5.parse(node[1][':hide']) : []
+        const code = generateComponentCode({
+          pro,
+          props,
+          external,
+          externalTypes,
+          ignore,
+          hide,
+          componentName
+        })
 
-      const filteredProps = Object.fromEntries(
-        Object.entries(props).filter(([key]) => !ignore.includes(key) && !hide.includes(key))
-      )
-
-      const imports = external.map((ext: string, index: number) => {
-        const type = externalTypes[index]?.replace(/[[\]]/g, '')
-        return `import type { ${type} } from '@nuxt/${pro ? 'ui-pro' : 'ui'}'`
-      }).join('\n')
-
-      let itemsCode = ''
-      if (props.items) {
-        itemsCode = `\nconst items = ref<${externalTypes[0]}>(${json5.stringify(props.items, null, 2)})`
-        delete filteredProps.items
+        node[0] = 'pre'
+        node[1] = {
+          language: 'vue',
+          filename: `${componentName}.vue`,
+          code
+        }
       }
-
-      const scriptSetup = `<script setup lang="ts">
-${imports}
-${itemsCode}
-</script>
-
-<template>
-  <U${componentName.charAt(0).toUpperCase() + componentName.slice(1)} ${Object.keys(filteredProps).map((key) => {
-    const value = filteredProps[key]
-    if (typeof value === 'string') {
-      return `:${key}="${value}"`
-    } else if (typeof value === 'boolean') {
-      return `${key}`
-    } else if (typeof value === 'number') {
-      return `:${key}="${value}"`
-    }
-  }).join(' ')} ${props.items ? ':items="items"' : ''}/>
-</template>`
-
-      return ['pre', {
-        language: 'vue',
-        filename: `${componentName}.vue`, // TODO: Remove later
-        code: scriptSetup
-      }]
-    })
+      return true
+    }, node => node)
   })
 })
