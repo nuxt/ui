@@ -30,7 +30,7 @@ function getEmojiFlag(locale: string): string {
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan
     vi: 'vn', // Vietnamese -> Vietnam
-    zh: 'cn'  // chinese -> china
+    zh: 'cn' // chinese -> china
   }
 
   const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale
