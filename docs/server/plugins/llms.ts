@@ -20,7 +20,7 @@ export default defineNitroPlugin((nitroApp) => {
   // @ts-expect-error - no types available
   nitroApp.hooks.hook('content:llms:generate:document', async (doc) => {
     const componentName = camelCase(doc.title)
-    console.log('componentName:', componentName)
+
     visit(doc.body, node => node[0] === 'component-theme', (node) => {
       const pro = node[1][':pro'] === 'true'
       const prose = node[1][':prose'] === 'true'
