@@ -11,7 +11,6 @@ const items = shallowRef<AccordionItem[]>([
   {
     label: 'Colors',
     icon: 'i-lucide-swatch-book',
-    slot: 'colors' as const,
     content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
   },
   {
