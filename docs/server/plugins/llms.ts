@@ -3,6 +3,8 @@ import { camelCase } from 'scule'
 import { visit } from '@nuxt/content/runtime'
 import * as theme from '../../.nuxt/ui'
 import * as themePro from '../../.nuxt/ui-pro'
+import meta from '#nuxt-component-meta'
+// import components from '#component-example/nitro'
 
 type ComponentAttributes = {
   ':pro'?: string
@@ -53,12 +55,11 @@ const generateComponentCode = ({
   props,
   external,
   externalTypes,
-  ignore,
   hide,
   componentName
 }: CodeConfig) => {
   const filteredProps = Object.fromEntries(
-    Object.entries(props).filter(([key]) => !ignore.includes(key) && !hide.includes(key))
+    Object.entries(props).filter(([key]) => !hide.includes(key))
   )
 
   const imports = pro
@@ -116,7 +117,7 @@ const generateComponentCode = ({
 /*
  * TODO:
  *  [x] component-theme
- *  [] component-code
+ *  [x] component-code
  *  [] component-props
  *  [] component-slots
  *  [] component-emits
@@ -171,6 +172,69 @@ export default defineNitroPlugin((nitroApp) => {
           language: 'vue',
           filename: `${componentName}.vue`, // TODO: remove later
           code
+        }
+      }
+      return true
+    }, node => node)
+
+    // Handle component props
+    visit(doc.body, (node) => {
+      if (Array.isArray(node) && node[0] === 'component-props') {
+        const metaComponentName = `U${componentName.charAt(0).toUpperCase() + componentName.slice(1)}`
+        const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
+        const componentMeta = meta[metaComponentName]?.meta
+
+        let interfaceCode = `/**\n * Props for the ${pascalCaseName} component\n */\ninterface ${pascalCaseName}Props {\n`
+
+        if (componentMeta && componentMeta.props) {
+          Object.values(componentMeta.props).forEach((propValue: any) => {
+            if (propValue && propValue.name) {
+              const propName = propValue.name
+              const propType = propValue.type
+                ? Array.isArray(propValue.type)
+                  ? propValue.type.map((t: any) => t.name || t).join(' | ')
+                  : propValue.type.name || propValue.type
+                : 'any'
+
+              const isRequired = propValue.required || false
+
+              const hasDescription = propValue.description && propValue.description.trim().length > 0
+              const hasDefault = propValue.default !== undefined
+
+              if (hasDescription || hasDefault) {
+                interfaceCode += `  /**\n`
+
+                if (hasDescription) {
+                  const descLines = propValue.description.split(/\r?\n/)
+                  descLines.forEach((line: string) => {
+                    interfaceCode += `   * ${line}\n`
+                  })
+                }
+
+                if (hasDefault) {
+                  let defaultValue = propValue.default
+                  if (typeof defaultValue === 'string') {
+                    defaultValue = `"${defaultValue.replace(/"/g, '\\"')}"`
+                  } else {
+                    defaultValue = JSON.stringify(defaultValue)
+                  }
+                  interfaceCode += `   * @default ${defaultValue}\n`
+                }
+
+                interfaceCode += `   */\n`
+              }
+
+              interfaceCode += `  ${propName}${isRequired ? '' : '?'}: ${propType};\n`
+            }
+          })
+        }
+
+        interfaceCode += `}`
+
+        node[0] = 'pre'
+        node[1] = {
+          language: 'ts',
+          code: interfaceCode
         }
       }
       return true
