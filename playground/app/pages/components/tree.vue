@@ -60,11 +60,7 @@ const modelValues = ref<string[]>([])
       expanded-icon="i-lucide-chevron-up"
       collapsed-icon="i-lucide-chevron-down"
       multiple
-    >
-      <template #app="{ item }">
-        {{ item }}
-      </template>
-    </UTree>
+    />
 
     <!-- Typescript tests -->
     <template v-if="false">
