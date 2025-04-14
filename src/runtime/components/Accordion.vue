@@ -115,9 +115,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
       </AccordionHeader>
 
       <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof AccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof AccordionSlots<T>])" :class="ui.content({ class: props.ui?.content })">
-        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
+        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
           <div :class="ui.body({ class: props.ui?.body })">
-            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
+            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
               {{ item.content }}
             </slot>
           </div>
