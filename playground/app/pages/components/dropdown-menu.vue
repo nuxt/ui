@@ -151,6 +151,46 @@ defineShortcuts(extractShortcuts(items.value))
       <UDropdownMenu :items="itemsWithColor" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" :ui="{ content: 'w-48' }">
         <UButton label="Color" color="neutral" variant="outline" icon="i-lucide-menu" />
       </UDropdownMenu>
+
+      <UDropdownMenu :items="itemsWithColor" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" :ui="{ content: 'w-48' }">
+        <UButton label="With list slots" color="neutral" variant="outline" icon="i-lucide-menu" />
+
+        <template #list-leading>
+          <div class="p-1">
+            <UButtonGroup
+              size="xs"
+              class="w-full"
+              orientation="horizontal"
+            >
+              <UButton
+                label="OR"
+                color="primary"
+                block
+                size="xs"
+                class="flex-1"
+              />
+              <UButton
+                label="AND"
+                color="neutral"
+                variant="subtle"
+                block
+                size="xs"
+                class="flex-1"
+              />
+            </UButtonGroup>
+          </div>
+        </template>
+
+        <template #list-trailing>
+          <div class="p-1">
+            <UButton
+              block
+              variant="ghost"
+              label="Load more"
+            />
+          </div>
+        </template>
+      </UDropdownMenu>
     </div>
   </div>
 </template>

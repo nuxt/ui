@@ -105,6 +105,8 @@ const groups = computed<ContextMenuItem[][]>(() =>
 
   <ContextMenu.Portal :disabled="!portal">
     <component :is="sub ? ContextMenu.SubContent : ContextMenu.Content" :class="props.class" v-bind="contentProps">
+      <slot name="list-leading" />
+
       <ContextMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
         <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
           <ContextMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: uiOverride?.label })">
@@ -169,6 +171,8 @@ const groups = computed<ContextMenuItem[][]>(() =>
       </ContextMenu.Group>
 
       <slot />
+
+      <slot name="list-trailing" />
     </component>
   </ContextMenu.Portal>
 </template>

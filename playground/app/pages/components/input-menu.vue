@@ -145,5 +145,51 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         class="w-48"
       />
     </div>
+    <div class="flex items-center gap-4">
+      <UInputMenu
+        :items="items"
+        :model-value="[]"
+        multiple
+        icon="i-lucide-search"
+        placeholder="With list slots..."
+        class="w-48"
+      >
+        <template #list-leading>
+          <div class="p-1">
+            <UButtonGroup
+              size="xs"
+              class="w-full"
+              orientation="horizontal"
+            >
+              <UButton
+                label="OR"
+                color="primary"
+                block
+                size="xs"
+                class="flex-1"
+              />
+              <UButton
+                label="AND"
+                color="neutral"
+                variant="subtle"
+                block
+                size="xs"
+                class="flex-1"
+              />
+            </UButtonGroup>
+          </div>
+        </template>
+
+        <template #list-trailing>
+          <div class="p-1">
+            <UButton
+              block
+              variant="ghost"
+              label="Load more"
+            />
+          </div>
+        </template>
+      </UInputMenu>
+    </div>
   </div>
 </template>

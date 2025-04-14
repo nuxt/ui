@@ -123,6 +123,8 @@ export type NavigationMenuSlots<
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
   'item-content': SlotProps<T>
+  'list-leading': (props?: {}) => any
+  'list-trailing': (props?: {}) => any
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing' | 'content', { index: number, active?: boolean }>
 
 </script>
@@ -303,6 +305,8 @@ const lists = computed<NavigationMenuItem[][]>(() =>
   </DefineItemTemplate>
 
   <NavigationMenuRoot v-bind="rootProps" :data-collapsed="collapsed" :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <slot name="list-leading" />
+
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list({ class: props.ui?.list })">
         <ReuseItemTemplate v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :item="item" :index="index" :class="ui.item({ class: props.ui?.item })" />
@@ -318,5 +322,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
 
       <NavigationMenuViewport :class="ui.viewport({ class: props.ui?.viewport })" />
     </div>
+
+    <slot name="list-trailing" />
   </NavigationMenuRoot>
 </template>
