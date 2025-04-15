@@ -296,46 +296,38 @@ export default defineNitroPlugin((nitroApp) => {
     visit(doc.body, (node) => {
       if (Array.isArray(node) && node[0] === 'component-emits') {
         const metaComponentName = `U${componentName.charAt(0).toUpperCase() + componentName.slice(1)}`
-        const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
         const componentMeta = meta[metaComponentName]?.meta
 
-        let interfaceCode = `/**\n * Events emitted by the ${pascalCaseName} component\n */\ninterface ${pascalCaseName}Emits {\n`
+        const hasEvents = componentMeta?.events && Object.keys(componentMeta.events).length > 0
 
-        if (componentMeta && componentMeta.events) {
+        if (hasEvents) {
+          let markdownTable = `| Event | Payload |\n`
+          markdownTable += `| ----- | ------- |\n`
+
           Object.values(componentMeta.events).forEach((eventValue: any) => {
             if (eventValue && eventValue.name) {
               const eventName = eventValue.name
-              const hasDescription = eventValue.description && eventValue.description.trim().length > 0
 
-              // Generate JSDoc comment if there's a description
-              if (hasDescription) {
-                interfaceCode += `  /**\n`
-                const descLines = eventValue.description.split(/\r?\n/)
-                descLines.forEach((line: string) => {
-                  interfaceCode += `   * ${line}\n`
-                })
-                interfaceCode += `   */\n`
-              }
-
-              // Define event with payload type if available
+              let payloadType = 'None'
               if (eventValue.type) {
-                const payloadType = Array.isArray(eventValue.type)
+                payloadType = Array.isArray(eventValue.type)
                   ? eventValue.type.map((t: any) => t.name || t).join(' | ')
-                  : eventValue.type.name || eventValue.type || 'any'
-                interfaceCode += `  (e: '${eventName}', payload: ${payloadType}): void;\n`
-              } else {
-                interfaceCode += `  (e: '${eventName}'): void;\n`
+                  : eventValue.type.name || eventValue.type
               }
+
+              markdownTable += `| \`${eventName}\` | \`${payloadType}\` |\n`
             }
           })
-        }
 
-        interfaceCode += `}`
-
-        node[0] = 'pre'
-        node[1] = {
-          language: 'ts',
-          code: interfaceCode
+          node[0] = 'pre'
+          node[1] = {
+            language: 'mdc',
+            code: markdownTable
+          }
+        } else {
+          node[0] = 'p'
+          node[1] = {}
+          node[2] = 'No events available for this component.'
         }
       }
       return true
