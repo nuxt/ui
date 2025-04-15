@@ -79,6 +79,88 @@ function generateTSInterface(
   return code
 }
 
+function propItemHandler(propValue: any): string {
+  if (!propValue?.name) return ''
+  const propName = propValue.name
+  const propType = propValue.type
+    ? Array.isArray(propValue.type)
+      ? propValue.type.map((t: any) => t.name || t).join(' | ')
+      : propValue.type.name || propValue.type
+    : 'any'
+  const isRequired = propValue.required || false
+  const hasDescription = propValue.description && propValue.description.trim().length > 0
+  const hasDefault = propValue.default !== undefined
+  let result = ''
+  if (hasDescription || hasDefault) {
+    result += `  /**\n`
+    if (hasDescription) {
+      const descLines = propValue.description.split(/\r?\n/)
+      descLines.forEach((line: string) => {
+        result += `   * ${line}\n`
+      })
+    }
+    if (hasDefault) {
+      let defaultValue = propValue.default
+      if (typeof defaultValue === 'string') {
+        defaultValue = `"${defaultValue.replace(/"/g, '\\"')}"`
+      } else {
+        defaultValue = JSON.stringify(defaultValue)
+      }
+      result += `   * @default ${defaultValue}\n`
+    }
+    result += `   */\n`
+  }
+  result += `  ${propName}${isRequired ? '' : '?'}: ${propType};\n`
+  return result
+}
+
+function slotItemHandler(slotValue: any): string {
+  if (!slotValue?.name) return ''
+  const slotName = slotValue.name
+  const hasDescription = slotValue.description && slotValue.description.trim().length > 0
+  let result = ''
+  if (hasDescription) {
+    result += `  /**\n`
+    const descLines = slotValue.description.split(/\r?\n/)
+    descLines.forEach((line: string) => {
+      result += `   * ${line}\n`
+    })
+    result += `   */\n`
+  }
+  if (slotValue.bindings && Object.keys(slotValue.bindings).length > 0) {
+    let bindingsType = '{\n'
+    Object.entries(slotValue.bindings).forEach(([bindingName, bindingValue]: [string, any]) => {
+      const bindingType = bindingValue.type || 'any'
+      bindingsType += `    ${bindingName}: ${bindingType};\n`
+    })
+    bindingsType += '  }'
+    result += `  ${slotName}(bindings: ${bindingsType}): any;\n`
+  } else {
+    result += `  ${slotName}(): any;\n`
+  }
+  return result
+}
+
+function emitItemHandler(event: any): string {
+  if (!event?.name) return ''
+  let payloadType = 'void'
+  if (event.type) {
+    payloadType = Array.isArray(event.type)
+      ? event.type.map((t: any) => t.name || t).join(' | ')
+      : event.type.name || event.type
+  }
+  let result = ''
+  if (event.description && event.description.trim().length > 0) {
+    result += `  /**\n`
+    event.description.split(/\r?\n/).forEach((line: string) => {
+      result += `   * ${line}\n`
+    })
+    result += `   */\n`
+  }
+  result += `  ${event.name}: (payload: ${payloadType}) => void;\n`
+  return result
+}
+
 const generateThemeConfig = ({ pro, prose, componentName }: ThemeConfig) => {
   const computedTheme = pro ? (prose ? themePro.prose : themePro) : theme
   const componentTheme = computedTheme[componentName as keyof typeof computedTheme]
@@ -196,40 +278,7 @@ export default defineNitroPlugin((nitroApp) => {
       const interfaceCode = generateTSInterface(
         `${pascalCaseName}Props`,
         Object.values(componentMeta.props),
-        (propValue: any) => {
-          if (!propValue?.name) return ''
-          const propName = propValue.name
-          const propType = propValue.type
-            ? Array.isArray(propValue.type)
-              ? propValue.type.map((t: any) => t.name || t).join(' | ')
-              : propValue.type.name || propValue.type
-            : 'any'
-          const isRequired = propValue.required || false
-          const hasDescription = propValue.description && propValue.description.trim().length > 0
-          const hasDefault = propValue.default !== undefined
-          let result = ''
-          if (hasDescription || hasDefault) {
-            result += `  /**\n`
-            if (hasDescription) {
-              const descLines = propValue.description.split(/\r?\n/)
-              descLines.forEach((line: string) => {
-                result += `   * ${line}\n`
-              })
-            }
-            if (hasDefault) {
-              let defaultValue = propValue.default
-              if (typeof defaultValue === 'string') {
-                defaultValue = `"${defaultValue.replace(/"/g, '\\"')}"`
-              } else {
-                defaultValue = JSON.stringify(defaultValue)
-              }
-              result += `   * @default ${defaultValue}\n`
-            }
-            result += `   */\n`
-          }
-          result += `  ${propName}${isRequired ? '' : '?'}: ${propType};\n`
-          return result
-        },
+        propItemHandler,
         `Props for the ${pascalCaseName} component`
       )
       replaceNodeWithPre(node, 'ts', interfaceCode)
@@ -242,56 +291,24 @@ export default defineNitroPlugin((nitroApp) => {
       const interfaceCode = generateTSInterface(
         `${pascalCaseName}Slots`,
         Object.values(componentMeta.slots),
-        (slotValue: any) => {
-          if (!slotValue?.name) return ''
-          const slotName = slotValue.name
-          const hasDescription = slotValue.description && slotValue.description.trim().length > 0
-          let result = ''
-          if (hasDescription) {
-            result += `  /**\n`
-            const descLines = slotValue.description.split(/\r?\n/)
-            descLines.forEach((line: string) => {
-              result += `   * ${line}\n`
-            })
-            result += `   */\n`
-          }
-          if (slotValue.bindings && Object.keys(slotValue.bindings).length > 0) {
-            let bindingsType = '{\n'
-            Object.entries(slotValue.bindings).forEach(([bindingName, bindingValue]: [string, any]) => {
-              const bindingType = bindingValue.type || 'any'
-              bindingsType += `    ${bindingName}: ${bindingType};\n`
-            })
-            bindingsType += '  }'
-            result += `  ${slotName}(bindings: ${bindingsType}): any;\n`
-          } else {
-            result += `  ${slotName}(): any;\n`
-          }
-          return result
-        },
+        slotItemHandler,
         `Slots for the ${pascalCaseName} component`
       )
       replaceNodeWithPre(node, 'ts', interfaceCode)
     })
 
     visitAndReplace(doc, 'component-emits', (node) => {
-      const { componentMeta } = getComponentMeta(componentName)
+      const { pascalCaseName, componentMeta } = getComponentMeta(componentName)
       const hasEvents = componentMeta?.events && Object.keys(componentMeta.events).length > 0
 
       if (hasEvents) {
-        let markdownTable = `| Event | Payload |\n| ----- | ------- |\n`
-        Object.values(componentMeta.events).forEach((eventValue: any) => {
-          if (eventValue && eventValue.name) {
-            const eventName = eventValue.name
-            let payloadType = 'None'
-            if (eventValue.type) {
-              payloadType = Array.isArray(eventValue.type)
-                ? eventValue.type.map((t: any) => t.name || t).join(' | ')
-                : eventValue.type.name || eventValue.type
-            }
-            markdownTable += `| \`${eventName}\` | \`${payloadType}\` |\n`
-          }
-        })
-        replaceNodeWithPre(node, 'mdc', markdownTable)
+        const interfaceCode = generateTSInterface(
+          `${pascalCaseName}Emits`,
+          Object.values(componentMeta.events),
+          emitItemHandler,
+          `Emitted events for the ${pascalCaseName} component`
+        )
+        replaceNodeWithPre(node, 'ts', interfaceCode)
       } else {
         node[0] = 'p'
         node[1] = {}
