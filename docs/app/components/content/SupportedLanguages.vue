@@ -29,8 +29,7 @@ function getEmojiFlag(locale: string): string {
     sv: 'se', // Swedish -> Sweden
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan
-    vi: 'vn', // Vietnamese -> Vietnam
-    zh: 'cn' // chinese -> china
+    vi: 'vn' // Vietnamese -> Vietnam
   }
 
   const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale
@@ -63,7 +62,7 @@ function getEmojiFlag(locale: string): string {
         </div>
       </div>
     </div>
-    <ProseNote to="https://bgithub.xyz/nuxt/ui/tree/v3/src/runtime/locale" target="_blank">
+    <ProseNote to="https://github.com/nuxt/ui/tree/v3/src/runtime/locale" target="_blank">
       If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>src/runtime/locale/</ProseCode>.
     </ProseNote>
     <ProseTip>
