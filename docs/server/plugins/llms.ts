@@ -1,5 +1,5 @@
 import json5 from 'json5'
-import { camelCase } from 'scule'
+import { camelCase, kebabCase } from 'scule'
 import { visit } from '@nuxt/content/runtime'
 import * as theme from '../../.nuxt/ui'
 import * as themePro from '../../.nuxt/ui-pro'
@@ -118,10 +118,13 @@ const generateComponentCode = ({
 
   const propsString = Object.entries(filteredProps)
     .map(([key, value]) => {
-      if (typeof value === 'string' || typeof value === 'number') {
-        return `:${key}="${value}"`
+      const formattedKey = kebabCase(key)
+      if (typeof value === 'string') {
+        return `${formattedKey}="${value}"`
+      } else if (typeof value === 'number') {
+        return `:${formattedKey}="${value}"`
       } else if (typeof value === 'boolean') {
-        return value ? key : ''
+        return value ? formattedKey : ''
       }
       return ''
     })
@@ -183,7 +186,7 @@ export default defineNitroPlugin((nitroApp) => {
         componentName
       })
 
-      replaceNodeWithPre(node, 'vue', code, `${componentName}.vue`)
+      replaceNodeWithPre(node, 'vue', code)
     })
 
     visitAndReplace(doc, 'component-props', (node) => {
