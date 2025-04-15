@@ -1,16 +1,10 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
-import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps } from '../types'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigAlert = _appConfig as AppConfig & { ui: { alert: Partial<typeof theme> } }
-
-const alert = tv({ extend: tv(theme), ...(appConfigAlert.ui?.alert || {}) })
-
-type AlertVariants = VariantProps<typeof alert>
+type Alert = ComponentConfig<typeof theme, AppConfig, 'alert'>
 
 export interface AlertProps {
   /**
@@ -28,16 +22,16 @@ export interface AlertProps {
   /**
    * @defaultValue 'primary'
    */
-  color?: AlertVariants['color']
+  color?: Alert['variants']['color']
   /**
    * @defaultValue 'solid'
    */
-  variant?: AlertVariants['variant']
+  variant?: Alert['variants']['variant']
   /**
    * The orientation between the content and the actions.
    * @defaultValue 'vertical'
    */
-  orientation?: AlertVariants['orientation']
+  orientation?: Alert['variants']['orientation']
   /**
    * Display a list of actions:
    * - under the title and description when orientation is `vertical`
@@ -59,7 +53,7 @@ export interface AlertProps {
    */
   closeIcon?: string
   class?: any
-  ui?: Partial<typeof alert.slots>
+  ui?: Alert['slots']
 }
 
 export interface AlertEmits {
@@ -71,7 +65,7 @@ export interface AlertSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: ReturnType<typeof alert> }): any
+  close(props: { ui: { [K in keyof Required<Alert['slots']>]: (props?: Record<string, any>) => string } }): any
 }
 </script>
 
@@ -80,6 +74,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
@@ -91,9 +86,9 @@ const emits = defineEmits<AlertEmits>()
 const slots = defineSlots<AlertSlots>()
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as Alert['AppConfig']
 
-const ui = computed(() => alert({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.alert || {}) })({
   color: props.color,
   variant: props.variant,
   orientation: props.orientation,

@@ -175,6 +175,10 @@ export default defineNuxtConfig({
     }
   },
 
+  hub: {
+    ai: true
+  },
+
   vite: {
     plugins: [
       yaml()

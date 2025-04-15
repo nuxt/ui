@@ -1,14 +1,11 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
-import theme from '#build/ui/form'
-import { tv } from '../utils/tv'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
 import type { DeepReadonly } from 'vue'
+import type { AppConfig } from '@nuxt/schema'
+import theme from '#build/ui/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigForm = _appConfig as AppConfig & { ui: { form: Partial<typeof theme> } }
-
-const form = tv({ extend: tv(theme), ...(appConfigForm.ui?.form || {}) })
+type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
 
 export interface FormProps<T extends object> {
   id?: string | number
@@ -39,6 +36,12 @@ export interface FormProps<T extends object> {
    * @defaultValue `true`
    */
   transform?: boolean
+  /**
+   * When `true`, all form elements will be disabled on `@submit` event.
+   * This will cause any focused input elements to lose their focus state.
+   * @defaultValue `true`
+   */
+  loadingAuto?: boolean
   class?: any
   onSubmit?: ((event: FormSubmitEvent<T>) => void | Promise<void>) | (() => void | Promise<void>)
 }
@@ -56,7 +59,9 @@ export interface FormSlots {
 <script lang="ts" setup generic="T extends object">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
+import { tv } from '../utils/tv'
 import { validateSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
@@ -65,11 +70,16 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300,
-  transform: true
+  transform: true,
+  loadingAuto: true
 })
 
 const emits = defineEmits<FormEmits<T>>()
 defineSlots<FormSlots>()
+
+const appConfig = useAppConfig() as FormConfig['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
 
 const formId = props.id ?? useId() as string
 
@@ -210,7 +220,7 @@ const loading = ref(false)
 provide(formLoadingInjectionKey, readonly(loading))
 
 async function onSubmitWrapper(payload: Event) {
-  loading.value = true
+  loading.value = props.loadingAuto && true
 
   const event = payload as FormSubmitEvent<any>
 
@@ -275,6 +285,7 @@ defineExpose<Form<T>>({
   },
 
   disabled,
+  loading,
   dirty: computed(() => !!dirtyFields.size),
 
   dirtyFields: readonly(dirtyFields) as DeepReadonly<Set<keyof T>>,
@@ -287,7 +298,7 @@ defineExpose<Form<T>>({
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="form({ class: props.class })"
+    :class="ui({ class: props.class })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" />

@@ -2,14 +2,10 @@
 <script lang="ts">
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/accordion'
-import { tv } from '../utils/tv'
-import type { DynamicSlots } from '../types/utils'
+import type { DynamicSlots, ComponentConfig } from '../types/utils'
 
-const appConfigAccordion = _appConfig as AppConfig & { ui: { accordion: Partial<typeof theme> } }
-
-const accordion = tv({ extend: tv(theme), ...(appConfigAccordion.ui?.accordion || {}) })
+type Accordion = ComponentConfig<typeof theme, AppConfig, 'accordion'>
 
 export interface AccordionItem {
   label?: string
@@ -48,7 +44,7 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
    */
   labelKey?: string
   class?: any
-  ui?: Partial<typeof accordion.slots>
+  ui?: Accordion['slots']
 }
 
 export interface AccordionEmits extends AccordionRootEmits {}
@@ -71,6 +67,7 @@ import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, Accord
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<AccordionProps<T>>(), {
@@ -82,10 +79,11 @@ const props = withDefaults(defineProps<AccordionProps<T>>(), {
 const emits = defineEmits<AccordionEmits>()
 const slots = defineSlots<AccordionSlots<T>>()
 
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as Accordion['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'type', 'unmountOnHide'), emits)
 
-const ui = computed(() => accordion({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })({
   disabled: props.disabled
 }))
 </script>
@@ -117,9 +115,9 @@ const ui = computed(() => accordion({
       </AccordionHeader>
 
       <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof AccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof AccordionSlots<T>])" :class="ui.content({ class: props.ui?.content })">
-        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
+        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
           <div :class="ui.body({ class: props.ui?.body })">
-            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
+            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
               {{ item.content }}
             </slot>
           </div>

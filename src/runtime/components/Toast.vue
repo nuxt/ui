@@ -1,18 +1,11 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/toast'
-import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps } from '../types'
-import type { StringOrVNode } from '../types/utils'
+import type { StringOrVNode, ComponentConfig } from '../types/utils'
 
-const appConfigToast = _appConfig as AppConfig & { ui: { toast: Partial<typeof theme> } }
-
-const toast = tv({ extend: tv(theme), ...(appConfigToast.ui?.toast || {}) })
-
-type ToastVariants = VariantProps<typeof toast>
+type Toast = ComponentConfig<typeof theme, AppConfig, 'toast'>
 
 export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' | 'type' | 'duration'> {
   /**
@@ -30,12 +23,12 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
   /**
    * @defaultValue 'primary'
    */
-  color?: ToastVariants['color']
+  color?: Toast['variants']['color']
   /**
    * The orientation between the content and the actions.
    * @defaultValue 'vertical'
    */
-  orientation?: ToastVariants['orientation']
+  orientation?: Toast['variants']['orientation']
   /**
    * Display a list of actions:
    * - under the title and description when orientation is `vertical`
@@ -56,7 +49,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    */
   closeIcon?: string
   class?: any
-  ui?: Partial<typeof toast.slots>
+  ui?: Toast['slots']
 }
 
 export interface ToastEmits extends ToastRootEmits {}
@@ -66,7 +59,7 @@ export interface ToastSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: ReturnType<typeof toast> }): any
+  close(props: { ui: { [K in keyof Required<Toast['slots']>]: (props?: Record<string, any>) => string } }): any
 }
 </script>
 
@@ -76,6 +69,7 @@ import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useFo
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
@@ -88,11 +82,11 @@ const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as Toast['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
-const ui = computed(() => toast({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.toast || {}) })({
   color: props.color,
   orientation: props.orientation,
   title: !!props.title || !!slots.title

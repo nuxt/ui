@@ -50,12 +50,13 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         }
 
         // For local development, import directly from theme
-        if (process.env.DEV) {
+        const isUiDev = true
+        if (isUiDev) {
           const templatePath = fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url))
           return [
             `import template from ${JSON.stringify(templatePath)}`,
             ...generateVariantDeclarations(variants),
-            `const result = typeof template === 'function' ? template(${JSON.stringify(options, null, 2)}) : template`,
+            `const result = typeof template === 'function' ? (template as Function)(${JSON.stringify(options, null, 2)}) : template`,
             `const theme = ${json}`,
             `export default result as typeof theme`
           ].join('\n\n')
@@ -124,7 +125,7 @@ type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' 
 
 type AppConfigUI = {
   colors?: {
-    ${options.theme?.colors?.map(color => `${color}?: Color`).join('\n\t\t')}
+    ${options.theme?.colors?.map(color => `'${color}'?: Color`).join('\n\t\t')}
     neutral?: NeutralColor
   }
   icons?: Partial<typeof icons>
