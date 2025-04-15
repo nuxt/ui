@@ -18,7 +18,7 @@ const slots = defineSlots<{
     variant="outline"
     :icon="icon"
     :label="label"
-    class="capitalize ring-(--ui-border) rounded-[calc(var(--ui-radius))] text-[11px]"
+    class="capitalize ring-(--ui-border) rounded-sm text-[11px]"
     :class="[selected ? 'bg-(--ui-bg-elevated)' : 'hover:bg-(--ui-bg-elevated)/50']"
   >
     <template v-if="chip || !!slots.leading" #leading>
