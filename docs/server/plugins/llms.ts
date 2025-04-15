@@ -118,9 +118,9 @@ const generateComponentCode = ({
  * TODO:
  *  [x] component-theme
  *  [x] component-code
- *  [] component-props
- *  [] component-slots
- *  [] component-emits
+ *  [x] component-props
+ *  [x] component-slots
+ *  [x] component-emits
  *  [] component-example
  */
 export default defineNitroPlugin((nitroApp) => {
@@ -225,6 +225,107 @@ export default defineNitroPlugin((nitroApp) => {
               }
 
               interfaceCode += `  ${propName}${isRequired ? '' : '?'}: ${propType};\n`
+            }
+          })
+        }
+
+        interfaceCode += `}`
+
+        node[0] = 'pre'
+        node[1] = {
+          language: 'ts',
+          code: interfaceCode
+        }
+      }
+      return true
+    }, node => node)
+
+    // Handle component slots
+    visit(doc.body, (node) => {
+      if (Array.isArray(node) && node[0] === 'component-slots') {
+        const metaComponentName = `U${componentName.charAt(0).toUpperCase() + componentName.slice(1)}`
+        const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
+        const componentMeta = meta[metaComponentName]?.meta
+
+        let interfaceCode = `/**\n * Slots for the ${pascalCaseName} component\n */\ninterface ${pascalCaseName}Slots {\n`
+
+        if (componentMeta && componentMeta.slots) {
+          Object.values(componentMeta.slots).forEach((slotValue: any) => {
+            if (slotValue && slotValue.name) {
+              const slotName = slotValue.name
+              const hasDescription = slotValue.description && slotValue.description.trim().length > 0
+
+              // Generate JSDoc comment if there's a description
+              if (hasDescription) {
+                interfaceCode += `  /**\n`
+                const descLines = slotValue.description.split(/\r?\n/)
+                descLines.forEach((line: string) => {
+                  interfaceCode += `   * ${line}\n`
+                })
+                interfaceCode += `   */\n`
+              }
+
+              // Define slot with bindings if available
+              if (slotValue.bindings && Object.keys(slotValue.bindings).length > 0) {
+                let bindingsType = '{\n'
+                Object.entries(slotValue.bindings).forEach(([bindingName, bindingValue]: [string, any]) => {
+                  const bindingType = bindingValue.type || 'any'
+                  bindingsType += `    ${bindingName}: ${bindingType};\n`
+                })
+                bindingsType += '  }'
+                interfaceCode += `  ${slotName}(bindings: ${bindingsType}): any;\n`
+              } else {
+                interfaceCode += `  ${slotName}(): any;\n`
+              }
+            }
+          })
+        }
+
+        interfaceCode += `}`
+
+        node[0] = 'pre'
+        node[1] = {
+          language: 'ts',
+          code: interfaceCode
+        }
+      }
+      return true
+    }, node => node)
+
+    // Handle component emits
+    visit(doc.body, (node) => {
+      if (Array.isArray(node) && node[0] === 'component-emits') {
+        const metaComponentName = `U${componentName.charAt(0).toUpperCase() + componentName.slice(1)}`
+        const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
+        const componentMeta = meta[metaComponentName]?.meta
+
+        let interfaceCode = `/**\n * Events emitted by the ${pascalCaseName} component\n */\ninterface ${pascalCaseName}Emits {\n`
+
+        if (componentMeta && componentMeta.events) {
+          Object.values(componentMeta.events).forEach((eventValue: any) => {
+            if (eventValue && eventValue.name) {
+              const eventName = eventValue.name
+              const hasDescription = eventValue.description && eventValue.description.trim().length > 0
+
+              // Generate JSDoc comment if there's a description
+              if (hasDescription) {
+                interfaceCode += `  /**\n`
+                const descLines = eventValue.description.split(/\r?\n/)
+                descLines.forEach((line: string) => {
+                  interfaceCode += `   * ${line}\n`
+                })
+                interfaceCode += `   */\n`
+              }
+
+              // Define event with payload type if available
+              if (eventValue.type) {
+                const payloadType = Array.isArray(eventValue.type)
+                  ? eventValue.type.map((t: any) => t.name || t).join(' | ')
+                  : eventValue.type.name || eventValue.type || 'any'
+                interfaceCode += `  (e: '${eventName}', payload: ${payloadType}): void;\n`
+              } else {
+                interfaceCode += `  (e: '${eventName}'): void;\n`
+              }
             }
           })
         }
