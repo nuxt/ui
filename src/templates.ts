@@ -114,7 +114,7 @@ type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' 
 
 type AppConfigUI = {
   colors?: {
-    ${options.theme?.colors?.map(color => `${color}?: Color`).join('\n\t\t')}
+    ${options.theme?.colors?.map(color => `'${color}'?: Color`).join('\n\t\t')}
     neutral?: NeutralColor
   }
   icons?: Partial<typeof icons>
