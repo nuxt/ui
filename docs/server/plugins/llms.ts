@@ -4,7 +4,8 @@ import { visit } from '@nuxt/content/runtime'
 import * as theme from '../../.nuxt/ui'
 import * as themePro from '../../.nuxt/ui-pro'
 import meta from '#nuxt-component-meta'
-// import components from '#component-example/nitro'
+// @ts-expect-error - no types available
+import components from '#component-example/nitro'
 
 type ComponentAttributes = {
   ':pro'?: string
@@ -114,15 +115,6 @@ const generateComponentCode = ({
 </template>`
 }
 
-/*
- * TODO:
- *  [x] component-theme
- *  [x] component-code
- *  [x] component-props
- *  [x] component-slots
- *  [x] component-emits
- *  [] component-example
- */
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('content:llms:generate:document' as any, async (doc: Document) => {
     const componentName = camelCase(doc.title)
@@ -328,6 +320,22 @@ export default defineNitroPlugin((nitroApp) => {
           node[0] = 'p'
           node[1] = {}
           node[2] = 'No events available for this component.'
+        }
+      }
+      return true
+    }, node => node)
+
+    // Handle component example
+    visit(doc.body, (node) => {
+      if (Array.isArray(node) && node[0] === 'component-example') {
+        const camelName = camelCase(node[1]['name'])
+        const name = camelName.charAt(0).toUpperCase() + camelName.slice(1)
+        const code = components[name].code
+        node[0] = 'pre'
+        node[1] = {
+          language: 'vue',
+          filename: `${name}.vue`,
+          code
         }
       }
       return true
