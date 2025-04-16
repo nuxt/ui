@@ -342,7 +342,7 @@ onMounted(() => {
         tr: 'divide-x divide-(--ui-border)'
       }"
       sticky
-      class="border border-(--ui-border-accented) rounded-(--ui-radius)"
+      class="border border-(--ui-border-accented) rounded-sm"
       @select="onSelect"
     >
       <template #expanded="{ row }">

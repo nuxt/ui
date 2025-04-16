@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => {
   return {
     slots: {
       root: 'relative inline-flex items-center',
-      base: ['w-full rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      base: ['w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
       increment: 'absolute flex items-center',
       decrement: 'absolute flex items-center'
     },

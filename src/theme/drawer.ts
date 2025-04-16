@@ -33,7 +33,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     inset: {
       true: {
-        content: 'rounded-[calc(var(--ui-radius)*2)] after:hidden'
+        content: 'rounded-lg after:hidden'
       }
     }
   },
@@ -59,7 +59,7 @@ export default (options: Required<ModuleOptions>) => ({
     direction: 'top',
     inset: false,
     class: {
-      content: 'inset-x-0 top-0 rounded-b-[calc(var(--ui-radius)*2)]'
+      content: 'inset-x-0 top-0 rounded-b-lg'
     }
   }, {
     direction: 'bottom',
@@ -71,7 +71,7 @@ export default (options: Required<ModuleOptions>) => ({
     direction: 'bottom',
     inset: false,
     class: {
-      content: 'inset-x-0 bottom-0 rounded-t-[calc(var(--ui-radius)*2)]'
+      content: 'inset-x-0 bottom-0 rounded-t-lg'
     }
   }, {
     direction: 'left',
@@ -83,7 +83,7 @@ export default (options: Required<ModuleOptions>) => ({
     direction: 'left',
     inset: false,
     class: {
-      content: 'inset-y-0 left-0 rounded-r-[calc(var(--ui-radius)*2)]'
+      content: 'inset-y-0 left-0 rounded-r-lg'
     }
   }, {
     direction: 'right',
@@ -95,7 +95,7 @@ export default (options: Required<ModuleOptions>) => ({
     direction: 'right',
     inset: false,
     class: {
-      content: 'inset-y-0 right-0 rounded-l-[calc(var(--ui-radius)*2)]'
+      content: 'inset-y-0 right-0 rounded-l-lg'
     }
   }]
 })

@@ -155,7 +155,7 @@ onMounted(async () => {
             :height="item.height"
             :src="item.src"
             :alt="item.alt"
-            class="w-full h-auto rounded-[calc(var(--ui-radius)*2)]"
+            class="w-full h-auto rounded-lg"
             loading="lazy"
           />
         </template>
@@ -165,7 +165,7 @@ onMounted(async () => {
       <NuxtImg
         v-if="page.section2.image"
         v-bind="page.section2.image"
-        class="w-full h-auto rounded-[calc(var(--ui-radius)*2)]"
+        class="w-full h-auto rounded-lg"
         loading="lazy"
       />
     </UPageSection>
@@ -173,7 +173,7 @@ onMounted(async () => {
       <NuxtImg
         v-if="page.section3.image"
         v-bind="page.section3.image"
-        class="w-full h-auto rounded-[calc(var(--ui-radius)*2)]"
+        class="w-full h-auto rounded-lg"
         loading="lazy"
       />
     </UPageSection>
@@ -198,7 +198,7 @@ onMounted(async () => {
           <NuxtImg
             v-if="step.image"
             v-bind="step.image"
-            class="rounded-(--ui-radius)"
+            class="rounded-sm"
             loading="lazy"
           />
           <div>
