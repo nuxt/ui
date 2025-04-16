@@ -33,7 +33,8 @@ externalTypes:
   - CheckboxGroupItem[]
   - CheckboxGroupValue
 props:
-  modelValue: 'System'
+  modelValue:
+    - 'System'
   items:
     - 'System'
     - 'Light'
@@ -60,7 +61,8 @@ externalTypes:
   - CheckboxGroupItem[]
   - CheckboxGroupValue
 props:
-  modelValue: 'system'
+  modelValue:
+    - 'system'
   items:
     - label: 'System'
       description: 'This is the first option.'
@@ -95,7 +97,8 @@ externalTypes:
   - CheckboxGroupItem[]
   - CheckboxGroupValue
 props:
-  modelValue: 'light'
+  modelValue:
+    - 'light'
   valueKey: 'id'
   items:
     - label: 'System'
