@@ -19,9 +19,18 @@ export interface CheckboxProps extends Pick<CheckboxRootProps, 'disabled' | 'req
    */
   color?: Checkbox['variants']['color']
   /**
+   * Position of the indicator.
+   * @defaultValue 'start'
+   */
+  indicator?: Checkbox['variants']['indicator']
+  /**
    * @defaultValue 'md'
    */
   size?: Checkbox['variants']['size']
+  /**
+   * @defaultValue 'list'
+   */
+  variant?: Checkbox['variants']['variant']
   /**
    * The icon displayed when checked.
    * @defaultValue appConfig.ui.icons.check
@@ -49,8 +58,8 @@ export interface CheckboxSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, useId } from 'vue'
-import { Primitive, CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
+import { computed, useId, inject, watchEffect, ref } from 'vue'
+import { CheckboxRoot, CheckboxIndicator, Label, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
@@ -72,12 +81,22 @@ const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defa
 const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps>(props)
 const id = _id.value ?? useId()
 
+const orientation = ref(undefined)
+const { collectionRef } = inject('CollectionProvider') as { collectionRef: any } || {}
+
+watchEffect(() => {
+  orientation.value = collectionRef?.value?.getAttribute('data-orientation') ?? undefined
+})
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || {}) })({
   size: size.value,
   color: color.value,
   required: props.required,
   disabled: disabled.value,
-  checked: Boolean(modelValue.value ?? props.defaultValue)
+  checked: Boolean(modelValue.value ?? props.defaultValue),
+  variant: props.variant,
+  indicator: props.indicator,
+  orientation: orientation.value
 }))
 
 function onUpdate(value: any) {
@@ -91,7 +110,7 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <component :is="variant === 'list' ? 'div' : Label" :class="ui.item({ class: props.ui?.item })">
     <div :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
@@ -103,25 +122,24 @@ function onUpdate(value: any) {
         @update:model-value="onUpdate"
       >
         <template #default="{ modelValue }">
-          <CheckboxIndicator as-child>
+          <CheckboxIndicator :class="ui.indicator({ class: props.ui?.indicator })">
             <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon({ class: props.ui?.icon })" />
             <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon({ class: props.ui?.icon })" />
           </CheckboxIndicator>
         </template>
       </CheckboxRoot>
     </div>
-
-    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <Label v-if="label || !!slots.label" :for="id" :class="ui.label({ class: props.ui?.label })">
+    <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <component :is="variant === 'list' ? Label : 'p'" :class="ui.label({ class: props.ui?.label })" :for="id">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
-      </Label>
+      </component>
       <p v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description" :description="description">
           {{ description }}
         </slot>
       </p>
     </div>
-  </Primitive>
+  </component>
 </template>
