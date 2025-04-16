@@ -31,7 +31,7 @@ export interface ModalProps extends DialogRootProps {
    * Render the modal in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * Display a close button to dismiss the modal.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -75,6 +75,7 @@ import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, 
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -115,6 +116,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
   transition: props.transition,
   fullscreen: props.fullscreen
 }))
+
+const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <template>
@@ -123,7 +126,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal :disabled="!portal">
+    <DialogPortal v-bind="portalProps">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
       <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-leave="emits('after:leave')" v-on="contentEvents">

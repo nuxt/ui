@@ -36,7 +36,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * Render the drawer in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   class?: any
   ui?: Drawer['slots']
 }
@@ -60,6 +60,7 @@ import { useForwardPropsEmits } from 'reka-ui'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
@@ -85,6 +86,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
   direction: props.direction,
   inset: props.inset
 }))
+
+const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <template>
@@ -93,7 +96,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
       <slot />
     </DrawerTrigger>
 
-    <DrawerPortal :disabled="!portal">
+    <DrawerPortal v-bind="portalProps">
       <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
       <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">

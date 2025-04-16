@@ -70,7 +70,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
@@ -138,6 +138,7 @@ import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { usePortal } from '../composables/usePortal'
 import { compare, get, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -219,6 +220,8 @@ function onUpdateOpen(value: boolean) {
 function isSelectItem(item: SelectItem): item is SelectItemBase {
   return typeof item === 'object' && item !== null
 }
+
+const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -260,7 +263,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
       </span>
     </SelectTrigger>
 
-    <SelectPortal :disabled="!portal">
+    <SelectPortal v-bind="portalProps">
       <SelectContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <SelectViewport :class="ui.viewport({ class: props.ui?.viewport })">
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">

@@ -86,7 +86,7 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
@@ -177,6 +177,7 @@ import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
+import { usePortal } from '../composables/usePortal'
 import { compare, get, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -376,6 +377,8 @@ function isInputItem(item: InputMenuItem): item is _InputMenuItem {
 defineExpose({
   inputRef
 })
+
+const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -474,7 +477,7 @@ defineExpose({
       </ComboboxTrigger>
     </ComboboxAnchor>
 
-    <ComboboxPortal :disabled="!portal">
+    <ComboboxPortal v-bind="portalProps">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">

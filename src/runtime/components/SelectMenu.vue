@@ -78,7 +78,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
@@ -170,6 +170,7 @@ import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
+import { usePortal } from '../composables/usePortal'
 import { compare, get, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -337,6 +338,8 @@ function onSelect(e: Event, item: SelectMenuItem) {
 function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
   return typeof item === 'object' && item !== null
 }
+
+const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -396,7 +399,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
       </ComboboxTrigger>
     </ComboboxAnchor>
 
-    <ComboboxPortal :disabled="!portal">
+    <ComboboxPortal v-bind="portalProps">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <FocusScope trapped :class="ui.focusScope({ class: props.ui?.focusScope })">
           <ComboboxInput v-if="!!searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
