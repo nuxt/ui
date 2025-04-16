@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative group overflow-hidden bg-(--ui-bg) shadow-lg rounded-[calc(var(--ui-radius)*2)] ring ring-(--ui-border) p-4 flex gap-2.5 focus:outline-none',
+    root: 'relative group overflow-hidden bg-(--ui-bg) shadow-lg rounded-lg ring ring-(--ui-border) p-4 flex gap-2.5 focus:outline-none',
     wrapper: 'w-0 flex-1 flex flex-col',
     title: 'text-sm font-medium text-(--ui-text-highlighted)',
     description: 'text-sm text-(--ui-text-muted)',

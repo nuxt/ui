@@ -329,14 +329,14 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 <template>
   <div class="my-5">
     <div class="relative">
-      <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-(--ui-border-muted) border-b-0 relative rounded-t-[calc(var(--ui-radius)*1.5)] px-4 py-2.5 overflow-x-auto">
+      <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-(--ui-border-muted) border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
             :label="option.label"
             size="sm"
-            class="inline-flex ring ring-(--ui-border-accented) rounded-(--ui-radius)"
+            class="inline-flex ring ring-(--ui-border-accented) rounded-sm"
             :ui="{
-              wrapper: 'bg-(--ui-bg-elevated)/50 rounded-l-(--ui-radius) flex border-r border-(--ui-border-accented)',
+              wrapper: 'bg-(--ui-bg-elevated)/50 rounded-l-sm flex border-r border-(--ui-border-accented)',
               label: 'text-(--ui-text-muted) px-2 py-1.5',
               container: 'mt-0'
             }"
@@ -348,7 +348,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               value-key="value"
               color="neutral"
               variant="soft"
-              class="rounded-(--ui-radius) rounded-l-none min-w-12"
+              class="rounded-sm rounded-l-none min-w-12"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
@@ -370,14 +370,14 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               :model-value="getComponentProp(option.name)"
               color="neutral"
               variant="soft"
-              :ui="{ base: 'rounded-(--ui-radius) rounded-l-none min-w-12' }"
+              :ui="{ base: 'rounded-sm rounded-l-none min-w-12' }"
               @update:model-value="setComponentProp(option.name, $event)"
             />
           </UFormField>
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-(--ui-border-muted) relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class, { 'overflow-hidden': props.overflowHidden }]">
+      <div v-if="component" class="flex justify-center border border-b-0 border-(--ui-border-muted) relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">

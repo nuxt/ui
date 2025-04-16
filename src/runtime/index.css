@@ -27,7 +27,7 @@
     --ui-border-accented: var(--ui-color-neutral-300);
     --ui-border-inverted: var(--ui-color-neutral-900);
 
-    --ui-radius: var(--radius-sm);
+    --ui-radius: 0.25rem;
     --ui-container: var(--container-7xl);
   }
 
