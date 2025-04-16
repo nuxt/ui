@@ -92,7 +92,6 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     color !== 'neutral' && `--color-${color}: var(--ui-${color});`,
     ...[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`)
   ].filter(Boolean).join('\n\t')).join('\n\t')}
-
   --radius-xs: calc(var(--ui-radius) * 0.5);
   --radius-sm: var(--ui-radius);
   --radius-md: calc(var(--ui-radius) * 1.5);

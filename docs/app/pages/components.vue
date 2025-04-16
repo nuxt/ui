@@ -130,7 +130,7 @@ onMounted(() => {
           <UContainer>
             <h2 class="relative text-pretty font-bold text-(--ui-text-highlighted) text-base sm:not-group-[[data-stuck]]:text-xl lg:not-group-[[data-stuck]]:text-2xl transition-all duration-300 ">
               <a :href="`#${category.id}`" class="group lg:not-group-[[data-stuck]]:ps-2 lg:not-group-[[data-stuck]]:-ms-2">
-                <span class="absolute -ms-8 top-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 p-1 bg-(--ui-bg-elevated) hover:text-(--ui-primary) rounded-[calc(var(--ui-radius)*1.5)] hidden lg:not-group-[[data-stuck]]:flex text-(--ui-text-muted) transition">
+                <span class="absolute -ms-8 top-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 p-1 bg-(--ui-bg-elevated) hover:text-(--ui-primary) rounded-md hidden lg:not-group-[[data-stuck]]:flex text-(--ui-text-muted) transition">
                   <UIcon name="i-lucide-hash" class="size-4 shrink-0" />
                 </span>
                 {{ category.title }}
@@ -161,7 +161,7 @@ onMounted(() => {
               </div>
             </template>
 
-            <div class="rounded-[calc(var(--ui-radius)*1.5)] border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
+            <div class="rounded-md border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
               <UColorModeImage
                 :light="`${component.path.replace('/components/', '/components/light/')}.png`"
                 :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
