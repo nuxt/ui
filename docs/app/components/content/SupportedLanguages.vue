@@ -22,6 +22,7 @@ function getEmojiFlag(locale: string): string {
     hi: 'in', // Hindi -> India
     hy: 'am', // Armenian -> Armenia
     ja: 'jp', // Japanese -> Japan
+    kk: 'kz', // Kazakh -> Kazakhstan
     km: 'kh', // Khmer -> Cambodia
     ko: 'kr', // Korean -> South Korea
     nb: 'no', // Norwegian Bokmål -> Norway

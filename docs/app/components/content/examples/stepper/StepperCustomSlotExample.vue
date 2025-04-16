@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import type { StepperItem } from '@nuxt/ui'
 
-const items: StepperItem[] = [
+const items = [
   {
-    slot: 'address',
+    slot: 'address' as const,
     title: 'Address',
     description: 'Add your address here',
     icon: 'i-lucide-house'
   }, {
-    slot: 'shipping',
+    slot: 'shipping' as const,
     title: 'Shipping',
     description: 'Set your preferred shipping method',
     icon: 'i-lucide-truck'
   }, {
-    slot: 'checkout',
+    slot: 'checkout' as const,
     title: 'Checkout',
     description: 'Confirm your order'
   }
-]
+] satisfies StepperItem[]
 </script>
 
 <template>
