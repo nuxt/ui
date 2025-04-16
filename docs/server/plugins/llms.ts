@@ -188,10 +188,13 @@ const generateComponentCode = ({
 
   const imports = pro
     ? ''
-    : external.map((ext, index) => {
-        const type = externalTypes[index]?.replace(/[[\]]/g, '')
-        return `import type { ${type} } from '@nuxt/${pro ? 'ui-pro' : 'ui'}'`
-      }).join('\n')
+    : external
+        .filter((_, index) => externalTypes[index] && externalTypes[index] !== 'undefined')
+        .map((ext, index) => {
+          const type = externalTypes[index]?.replace(/[[\]]/g, '')
+          return `import type { ${type} } from '@nuxt/${pro ? 'ui-pro' : 'ui'}'`
+        })
+        .join('\n')
 
   let itemsCode = ''
   if (props.items) {
@@ -199,6 +202,11 @@ const generateComponentCode = ({
       ? `const items = ref(${json5.stringify(props.items, null, 2)})`
       : `const items = ref<${externalTypes[0]}>(${json5.stringify(props.items, null, 2)})`
     delete filteredProps.items
+  }
+
+  let calendarValueCode = ''
+  if (componentName === 'calendar' && props.modelValue && Array.isArray(props.modelValue)) {
+    calendarValueCode = `const value = ref(new CalendarDate(${props.modelValue.join(', ')}))`
   }
 
   const propsString = Object.entries(filteredProps)
@@ -217,14 +225,16 @@ const generateComponentCode = ({
     .join(' ')
 
   const itemsProp = props.items ? ':items="items"' : ''
-  const allProps = [propsString, itemsProp].filter(Boolean).join(' ')
+  const vModelProp = componentName === 'calendar' && props.modelValue ? 'v-model="value"' : ''
+  const allProps = [propsString, itemsProp, vModelProp].filter(Boolean).join(' ')
   const formattedProps = allProps ? ` ${allProps}` : ''
 
   let scriptSetup = ''
-  if (imports || itemsCode) {
+  if (imports || itemsCode || calendarValueCode) {
     scriptSetup = '<script setup lang="ts">'
     if (imports) scriptSetup += `\n${imports}`
-    if (imports && itemsCode) scriptSetup += '\n'
+    if (imports && (itemsCode || calendarValueCode)) scriptSetup += '\n'
+    if (calendarValueCode) scriptSetup += `\n${calendarValueCode}`
     if (itemsCode) scriptSetup += `\n${itemsCode}`
     scriptSetup += '\n</script>\n\n'
   }
