@@ -35,6 +35,11 @@ type CodeConfig = {
   slots?: Record<string, string>
 }
 
+type Document = {
+  title: string
+  body: any
+}
+
 const parseBoolean = (value?: string): boolean => value === 'true'
 
 function getComponentMeta(componentName: string) {
