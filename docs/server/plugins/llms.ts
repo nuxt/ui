@@ -15,6 +15,7 @@ type ComponentAttributes = {
   ':externalTypes'?: string
   ':ignore'?: string
   ':hide'?: string
+  ':slots'?: string
 }
 
 type ThemeConfig = {
@@ -31,11 +32,7 @@ type CodeConfig = {
   ignore: string[]
   hide: string[]
   componentName: string
-}
-
-type Document = {
-  title: string
-  body: any
+  slots?: Record<string, string>
 }
 
 const parseBoolean = (value?: string): boolean => value === 'true'
@@ -177,7 +174,8 @@ const generateComponentCode = ({
   external,
   externalTypes,
   hide,
-  componentName
+  componentName,
+  slots
 }: CodeConfig) => {
   const filteredProps = Object.fromEntries(
     Object.entries(props).filter(([key]) => !hide.includes(key))
@@ -206,7 +204,7 @@ const generateComponentCode = ({
       } else if (typeof value === 'number') {
         return `:${formattedKey}="${value}"`
       } else if (typeof value === 'boolean') {
-        return value ? formattedKey : ''
+        return value ? formattedKey : `:${formattedKey}="false"`
       }
       return ''
     })
@@ -215,7 +213,7 @@ const generateComponentCode = ({
 
   const itemsProp = props.items ? ':items="items"' : ''
   const allProps = [propsString, itemsProp].filter(Boolean).join(' ')
-  const formattedProps = allProps ? ` ${allProps} ` : ' '
+  const formattedProps = allProps ? ` ${allProps}` : ''
 
   let scriptSetup = ''
   if (imports || itemsCode) {
@@ -226,8 +224,41 @@ const generateComponentCode = ({
     scriptSetup += '\n</script>\n\n'
   }
 
+  let componentContent = ''
+  let slotContent = ''
+
+  if (slots && Object.keys(slots).length > 0) {
+    const defaultSlot = slots.default?.trim()
+    if (defaultSlot) {
+      const indentedContent = defaultSlot
+        .split('\n')
+        .map(line => line.trim() ? `    ${line}` : line)
+        .join('\n')
+      componentContent = `\n${indentedContent}\n  `
+    }
+
+    Object.entries(slots).forEach(([slotName, content]) => {
+      if (slotName !== 'default' && content?.trim()) {
+        const indentedSlotContent = content.trim()
+          .split('\n')
+          .map(line => line.trim() ? `      ${line}` : line)
+          .join('\n')
+        slotContent += `\n    <template #${slotName}>\n${indentedSlotContent}\n    </template>`
+      }
+    })
+  }
+
+  const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
+
+  let componentTemplate = ''
+  if (componentContent || slotContent) {
+    componentTemplate = `<U${pascalCaseName}${formattedProps}>${componentContent}${slotContent}</U${pascalCaseName}>` // Removed space before closing tag
+  } else {
+    componentTemplate = `<U${pascalCaseName}${formattedProps} />`
+  }
+
   return `${scriptSetup}<template>
-  <U${componentName.charAt(0).toUpperCase() + componentName.slice(1)}${formattedProps}/>
+  ${componentTemplate}
 </template>`
 }
 
@@ -257,6 +288,7 @@ export default defineNitroPlugin((nitroApp) => {
       const externalTypes = attributes[':externalTypes'] ? json5.parse(attributes[':externalTypes']) : []
       const ignore = attributes[':ignore'] ? json5.parse(attributes[':ignore']) : []
       const hide = attributes[':hide'] ? json5.parse(attributes[':hide']) : []
+      const slots = attributes[':slots'] ? json5.parse(attributes[':slots']) : {}
 
       const code = generateComponentCode({
         pro,
@@ -265,7 +297,8 @@ export default defineNitroPlugin((nitroApp) => {
         externalTypes,
         ignore,
         hide,
-        componentName
+        componentName,
+        slots
       })
 
       replaceNodeWithPre(node, 'vue', code)
