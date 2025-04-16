@@ -92,13 +92,12 @@ export interface CheckboxGroupSlots<T extends CheckboxGroupItem = CheckboxGroupI
 
 <script setup lang="ts" generic="T extends CheckboxGroupItem">
 import { computed, useId } from 'vue'
-import { CheckboxRoot, CheckboxIndicator, Label, CheckboxGroupRoot, useForwardPropsEmits } from 'reka-ui'
+import { CheckboxGroupRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
-import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<CheckboxGroupProps<T>>(), {
   valueKey: 'value',
@@ -192,33 +191,20 @@ function onUpdate(value: any) {
           {{ legend }}
         </slot>
       </legend>
-      <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: props.ui?.item })">
-        <div :class="ui.container({ class: props.ui?.container })">
-          <CheckboxRoot
-            :id="item.id"
-            :value="item.value"
-            :disabled="item.disabled"
-            :class="ui.base({ class: props.ui?.base, disabled: item.disabled })"
-          >
-            <CheckboxIndicator :class="ui.indicator({ class: props.ui?.indicator })">
-              <UIcon v-if="item.value=== 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon({ class: props.ui?.icon })" />
-              <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon({ class: props.ui?.icon })" />
-            </CheckboxIndicator>
-          </CheckboxRoot>
-        </div>
-        <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-          <component :is="variant === 'list' ? Label : 'p'" :class="ui.label({ class: props.ui?.label })" :for="item.id">
-            <slot name="label" :item="item" :model-value="item.value">
-              {{ item.label }}
-            </slot>
-          </component>
-          <p v-if="item.description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
-            <slot name="description" :item="item" :model-value="item.value">
-              {{ item.description }}
-            </slot>
-          </p>
-        </div>
-      </component>
+      <UCheckbox
+        v-for="item in normalizedItems"
+        :key="item.value"
+        v-bind="item"
+        :color="color"
+        :size="size"
+        :variant="variant"
+        :indicator="indicator"
+        :icon="icon"
+        :indeterminate-icon="indeterminateIcon"
+        :name="name"
+        :default-value="defaultValue?.includes(item.value)"
+        :model-value="modelValue?.includes(item.value)"
+      />
     </fieldset>
   </CheckboxGroupRoot>
 </template>
