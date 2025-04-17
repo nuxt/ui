@@ -2,6 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
+    root: 'relative',
     item: 'flex items-start',
     container: 'flex items-center',
     base: 'shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2',
@@ -20,10 +21,10 @@ export default (options: Required<ModuleOptions>) => ({
       list: {
       },
       card: {
-        item: 'items-center border border-(--ui-border-muted) rounded-lg'
+        root: 'items-center border border-(--ui-border-muted) rounded-lg'
       },
       table: {
-        item: 'border border-(--ui-border-muted)'
+        root: 'border border-(--ui-border-muted)'
       }
     },
     orientation: {
@@ -103,46 +104,60 @@ export default (options: Required<ModuleOptions>) => ({
     { size: 'md', variant: ['card', 'table'], class: { item: 'p-3.5' } },
     { size: 'lg', variant: ['card', 'table'], class: { item: 'p-4' } },
     { size: 'xl', variant: ['card', 'table'], class: { item: 'p-4.5' } },
+    // {
+    //   orientation: undefined,
+    //   variant: 'table',
+    //   class: {
+    //     item: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg'
+    //   }
+    // },
+    // {
+    //   orientation: undefined,
+    //   variant: 'card',
+    //   class: {
+    //     item: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg'
+    //   }
+    // },
     {
       orientation: 'horizontal',
       variant: 'table',
       class: {
-        item: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg'
+        root: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg'
       }
     },
     {
       orientation: 'vertical',
       variant: 'table',
       class: {
-        item: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg'
+        root: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'card',
       class: {
-        item: `has-data-[state=checked]:border-(--ui-${color})`
+        root: `has-data-[state=checked]:border-(--ui-${color})`
       }
     })),
     {
       color: 'neutral',
       variant: 'card',
       class: {
-        item: 'has-data-[state=checked]:border-(--ui-border-elevated)'
+        root: 'has-data-[state=checked]:border-(--ui-border-elevated)'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'table',
       class: {
-        item: `has-data-[state=checked]:bg-(--ui-${color})/10 has-data-[state=checked]:border-(--ui-${color})/50 has-data-[state=checked]:z-[1]`
+        root: `has-data-[state=checked]:bg-(--ui-${color})/10 has-data-[state=checked]:border-(--ui-${color})/50 has-data-[state=checked]:z-[1]`
       }
     })),
     {
       color: 'neutral',
       variant: 'table',
       class: {
-        item: 'has-data-[state=checked]:bg-(--ui-bg-elevated) has-data-[state=checked]:border-(--ui-border-inverted)/25 has-data-[state=checked]:z-[1]'
+        root: 'has-data-[state=checked]:bg-(--ui-bg-elevated) has-data-[state=checked]:border-(--ui-border-inverted)/25 has-data-[state=checked]:z-[1]'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({

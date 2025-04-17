@@ -91,11 +91,12 @@ export interface CheckboxGroupSlots<T extends CheckboxGroupItem = CheckboxGroupI
 </script>
 
 <script setup lang="ts" generic="T extends CheckboxGroupItem">
-import { computed, useId } from 'vue'
+import { computed, useId, provide } from 'vue'
 import { CheckboxGroupRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import { checkboxGroupInjectionKey } from '../composables/useCheckboxGroup'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 
@@ -127,6 +128,13 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup ||
   variant: props.variant,
   indicator: props.indicator
 }))
+
+provide(checkboxGroupInjectionKey, computed(() => ({
+  orientation: props.orientation,
+  size: props.size,
+  variant: props.variant,
+  indicator: props.indicator
+})))
 
 function normalizeItem(item: any) {
   if (item === null) {
@@ -182,7 +190,7 @@ function onUpdate(value: any) {
     v-model="modelValue"
     :name="name"
     :disabled="disabled"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.groupRoot({ class: [props.class, props.ui?.groupRoot] })"
     @update:model-value="onUpdate"
   >
     <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
@@ -196,9 +204,6 @@ function onUpdate(value: any) {
         :key="item.value"
         v-bind="item"
         :color="color"
-        :size="size"
-        :variant="variant"
-        :indicator="indicator"
         :icon="icon"
         :indeterminate-icon="indeterminateIcon"
         :name="name"
