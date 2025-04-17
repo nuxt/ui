@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    content: 'min-w-32 bg-(--ui-bg) shadow-lg rounded-md ring ring-(--ui-border) divide-y divide-(--ui-border) overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]',
+    content: 'min-w-32 bg-(--ui-bg) shadow-lg rounded-md ring ring-(--ui-border) divide-y divide-(--ui-border) overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin)',
     arrow: 'fill-(--ui-border)',
     group: 'p-1 isolate',
     label: 'w-full flex items-center font-semibold text-(--ui-text-highlighted)',
