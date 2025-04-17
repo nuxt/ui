@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center gap-1.5',
-    base: ['rounded-[calc(var(--ui-radius)*1.5)] border-0 placeholder:text-(--ui-text-dimmed) text-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors']
+    base: ['rounded-md border-0 placeholder:text-(--ui-text-dimmed) text-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors']
   },
   variants: {
     size: {

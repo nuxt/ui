@@ -3,7 +3,7 @@ import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
   name: 'ئۇيغۇرچە',
-  code: 'zh-UG',
+  code: 'ug-CN',
   dir: 'rtl',
   messages: {
     inputMenu: {

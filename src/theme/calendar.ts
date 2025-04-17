@@ -10,7 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
     gridRow: 'grid grid-cols-7',
     gridWeekDaysRow: 'mb-1 grid w-full grid-cols-7',
     gridBody: 'grid',
-    headCell: 'rounded-[calc(var(--ui-radius)*1.5)]',
+    headCell: 'rounded-md',
     cell: 'relative text-center',
     cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-(--ui-text-muted) data-unavailable:line-through data-unavailable:text-(--ui-text-muted) data-unavailable:pointer-events-none data-[selected]:text-(--ui-bg) data-today:font-semibold data-[outside-view]:text-(--ui-text-muted)', options.theme.transitions && 'transition']
   },

@@ -104,20 +104,6 @@ export default (options: Required<ModuleOptions>) => ({
     { size: 'md', variant: ['card', 'table'], class: { item: 'p-3.5' } },
     { size: 'lg', variant: ['card', 'table'], class: { item: 'p-4' } },
     { size: 'xl', variant: ['card', 'table'], class: { item: 'p-4.5' } },
-    // {
-    //   orientation: undefined,
-    //   variant: 'table',
-    //   class: {
-    //     item: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg'
-    //   }
-    // },
-    // {
-    //   orientation: undefined,
-    //   variant: 'card',
-    //   class: {
-    //     item: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg'
-    //   }
-    // },
     {
       orientation: 'horizontal',
       variant: 'table',

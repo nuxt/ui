@@ -280,7 +280,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             height="258"
             loading="lazy"
             :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+            class="aspect-video border border-(--ui-border) rounded-lg bg-white"
           >
         </UPageMarquee>
         <UPageMarquee orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
@@ -292,7 +292,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             height="258"
             loading="lazy"
             :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+            class="aspect-video border border-(--ui-border) rounded-lg bg-white"
           >
         </UPageMarquee>
         <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
@@ -304,7 +304,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             height="258"
             loading="lazy"
             :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+            class="aspect-video border border-(--ui-border) rounded-lg bg-white"
           >
         </UPageMarquee>
       </div>
