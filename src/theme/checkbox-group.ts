@@ -5,7 +5,7 @@ import checkbox from './checkbox'
 export default (options: Required<ModuleOptions>) => {
   return defu({
     slots: {
-      groupRoot: 'relative',
+      root: 'relative',
       fieldset: 'relative flex',
       legend: 'mb-1 block font-medium text-(--ui-text)',
       wrapper: 'w-full'

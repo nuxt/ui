@@ -190,7 +190,7 @@ function onUpdate(value: any) {
     v-model="modelValue"
     :name="name"
     :disabled="disabled"
-    :class="ui.groupRoot({ class: [props.class, props.ui?.groupRoot] })"
+    :class="ui.root({ class: [props.class, props.ui?.root] })"
     @update:model-value="onUpdate"
   >
     <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">

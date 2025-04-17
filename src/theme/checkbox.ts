@@ -21,10 +21,10 @@ export default (options: Required<ModuleOptions>) => ({
       list: {
       },
       card: {
-        root: 'items-center border border-(--ui-border-muted) rounded-lg'
+        item: 'items-center border border-(--ui-border-muted) rounded-lg'
       },
       table: {
-        root: 'border border-(--ui-border-muted)'
+        item: 'border border-(--ui-border-muted)'
       }
     },
     orientation: {
@@ -122,42 +122,42 @@ export default (options: Required<ModuleOptions>) => ({
       orientation: 'horizontal',
       variant: 'table',
       class: {
-        root: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg'
+        item: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg'
       }
     },
     {
       orientation: 'vertical',
       variant: 'table',
       class: {
-        root: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg'
+        item: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'card',
       class: {
-        root: `has-data-[state=checked]:border-(--ui-${color})`
+        item: `has-data-[state=checked]:border-(--ui-${color})`
       }
     })),
     {
       color: 'neutral',
       variant: 'card',
       class: {
-        root: 'has-data-[state=checked]:border-(--ui-border-elevated)'
+        item: 'has-data-[state=checked]:border-(--ui-border-elevated)'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'table',
       class: {
-        root: `has-data-[state=checked]:bg-(--ui-${color})/10 has-data-[state=checked]:border-(--ui-${color})/50 has-data-[state=checked]:z-[1]`
+        item: `has-data-[state=checked]:bg-(--ui-${color})/10 has-data-[state=checked]:border-(--ui-${color})/50 has-data-[state=checked]:z-[1]`
       }
     })),
     {
       color: 'neutral',
       variant: 'table',
       class: {
-        root: 'has-data-[state=checked]:bg-(--ui-bg-elevated) has-data-[state=checked]:border-(--ui-border-inverted)/25 has-data-[state=checked]:z-[1]'
+        item: 'has-data-[state=checked]:bg-(--ui-bg-elevated) has-data-[state=checked]:border-(--ui-border-inverted)/25 has-data-[state=checked]:z-[1]'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
