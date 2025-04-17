@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => {
     slots: {
       input: 'border-b border-(--ui-border)',
       focusScope: 'flex flex-col min-h-0',
-      content: (content: string) => [content, 'origin-(--reka-combobox-content-transform-origin)']
+      content: (content: string) => [content, 'origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)']
     }
   }, select(options))
 }
