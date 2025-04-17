@@ -16,8 +16,34 @@ links:
     variant: outline
     trailingIcon: i-lucide-arrow-right
 templates:
+  - title: 'Chat'
+    description: "An AI chatbot template designed to help you build your own chatbot with Nuxt UI Pro components and deployed on [NuxtHub](https://hub.nuxt.com)."
+    icon: i-lucide-message-circle
+    thumbnail:
+      dark: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2NoYXQtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3NDI4NDY2ODB9.n4YCsoNz8xatox7UMoYZFNo7iS1mC_DT0h0A9cKRoTw.jpg?theme=dark
+      light: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2NoYXQtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3NDI4NDY2ODB9.n4YCsoNz8xatox7UMoYZFNo7iS1mC_DT0h0A9cKRoTw.jpg?theme=light
+    features:
+      - title: Powered by Cloudflare AI models
+        icon: i-simple-icons-cloudflare
+      - title: GitHub OAuth authentication
+        icon: i-lucide-lock
+      - title: Saved chats and messages
+        icon: i-lucide-database
+    links:
+      - label: Preview
+        to: https://chat-template.nuxt.dev
+        target: _blank
+        leadingIcon: i-logos-nuxt-icon
+        trailingIcon: i-lucide-arrow-up-right
+        color: neutral
+      - label: Nuxt Template
+        to: https://github.com/nuxt-ui-pro/chat
+        target: _blank
+        icon: i-simple-icons-github
+        color: neutral
+        variant: outline
   - title: 'Dashboard'
-    description: "A template to illustrate how to build your own dashboard with the 15+ latest Nuxt UI Pro components, designed specifically to create a consistent look and feel."
+    description: "A template to illustrate how to build your own dashboard with 15+ Nuxt UI Pro components, designed specifically to create a consistent look and feel."
     icon: i-lucide-bar-chart-big
     thumbnail:
       dark: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2Rhc2hib2FyZC10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTczOTQ2MzU2N30._VElt4uvLjvAMdnTLytCInOajMElzWDKbmvOaMZhZUI.jpg?theme=dark
