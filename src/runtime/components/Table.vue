@@ -322,7 +322,7 @@ defineExpose({
             v-for="header in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
-            :colspan="header.colSpan"
+            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :class="ui.th({ class: [props.ui?.th, header.column.columnDef.meta?.class?.th], pinned: !!header.column.getIsPinned() })"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
