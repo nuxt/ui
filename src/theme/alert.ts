@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative overflow-hidden w-full rounded-[calc(var(--ui-radius)*2)] p-4 flex gap-2.5',
+    root: 'relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5',
     wrapper: 'min-w-0 flex-1 flex flex-col',
     title: 'text-sm font-medium',
     description: 'text-sm opacity-90',

@@ -88,7 +88,17 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --color-old-neutral-800: ${colors.neutral[800]};
   --color-old-neutral-900: ${colors.neutral[900]};
   --color-old-neutral-950: ${colors.neutral[950]};
-  ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
+  ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [
+    color !== 'neutral' && `--color-${color}: var(--ui-${color});`,
+    ...[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`)
+  ].filter(Boolean).join('\n\t')).join('\n\t')}
+  --radius-xs: calc(var(--ui-radius) * 0.5);
+  --radius-sm: var(--ui-radius);
+  --radius-md: calc(var(--ui-radius) * 1.5);
+  --radius-lg: calc(var(--ui-radius) * 2);
+  --radius-xl: calc(var(--ui-radius) * 3);
+  --radius-2xl: calc(var(--ui-radius) * 4);
+  --radius-3xl: calc(var(--ui-radius) * 6);
 }
 `
   })
@@ -114,7 +124,7 @@ type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' 
 
 type AppConfigUI = {
   colors?: {
-    ${options.theme?.colors?.map(color => `${color}?: Color`).join('\n\t\t')}
+    ${options.theme?.colors?.map(color => `'${color}'?: Color`).join('\n\t\t')}
     neutral?: NeutralColor
   }
   icons?: Partial<typeof icons>

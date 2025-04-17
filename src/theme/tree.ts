@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     item: '',
     listWithChildren: 'ms-4.5 border-s border-(--ui-border)',
     itemWithChildren: 'ps-1.5 -ms-px',
-    link: 'relative group w-full flex items-center text-sm before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-[calc(var(--ui-radius)*1.5)] focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'relative group w-full flex items-center text-sm before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
