@@ -72,6 +72,11 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
    */
   portal?: boolean
   /**
+   * Whether the select viewport uses virtualization.
+   * @defaultValue false
+   */
+  virtual?: boolean
+  /**
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
    */
@@ -131,9 +136,9 @@ export interface SelectSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
 import { computed, toRef } from 'vue'
-import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
+import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
@@ -153,6 +158,8 @@ const props = withDefaults(defineProps<SelectProps<T, VK, M>>(), {
 })
 const emits = defineEmits<SelectEmits<T, VK, M>>()
 const slots = defineSlots<SelectSlots<T, VK, M>>()
+
+const [DefineSelectGroup, ReuseSelectGroup] = createReusableTemplate()
 
 const appConfig = useAppConfig() as Select['AppConfig']
 
@@ -262,7 +269,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
 
     <SelectPortal :disabled="!portal">
       <SelectContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-        <SelectViewport :class="ui.viewport({ class: props.ui?.viewport })">
+        <DefineSelectGroup>
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: props.ui?.label })">
@@ -309,6 +316,24 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
               </SelectItem>
             </template>
           </SelectGroup>
+        </DefineSelectGroup>
+
+        <ScrollAreaRoot v-if="virtual">
+          <SelectViewport as-child :class="ui.viewport({ class: props.ui?.viewport })">
+            <ScrollAreaViewport class="ScrollAreaViewport">
+              <ReuseSelectGroup />
+            </ScrollAreaViewport>
+          </SelectViewport>
+          <ScrollAreaScrollbar
+            class="ScrollAreaScrollbar"
+            orientation="vertical"
+          >
+            <ScrollAreaThumb class="ScrollAreaThumb" />
+          </ScrollAreaScrollbar>
+        </ScrollAreaRoot>
+
+        <SelectViewport v-else :class="ui.viewport({ class: props.ui?.viewport })">
+          <ReuseSelectGroup />
         </SelectViewport>
 
         <SelectArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
@@ -316,3 +341,25 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
     </SelectPortal>
   </SelectRoot>
 </template>
+
+<style>
+.ScrollAreaRoot {
+  width: 100%;
+  height: 100%;
+}
+
+.ScrollAreaViewport {
+  width: 100%;
+  height: 100%;
+}
+
+.ScrollAreaScrollbar {
+  width: 4px;
+  padding: 5px 2px;
+}
+
+.ScrollAreaThumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+</style>
