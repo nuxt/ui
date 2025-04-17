@@ -58,7 +58,7 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `bg-(--ui-${color}) text-(--ui-bg)`
+    class: `bg-(--ui-${color}) text-(--ui-text-inverted)`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
@@ -74,7 +74,7 @@ export default (options: Required<ModuleOptions>) => ({
   })), {
     color: 'neutral',
     variant: 'solid',
-    class: 'text-(--ui-bg) bg-(--ui-bg-inverted)'
+    class: 'text-(--ui-text-inverted) bg-(--ui-bg-inverted)'
   }, {
     color: 'neutral',
     variant: 'outline',

@@ -86,7 +86,7 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `text-(--ui-bg) bg-(--ui-${color}) hover:bg-(--ui-${color})/75 disabled:bg-(--ui-${color}) aria-disabled:bg-(--ui-${color}) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-${color})`
+    class: `text-(--ui-text-inverted) bg-(--ui-${color}) hover:bg-(--ui-${color})/75 disabled:bg-(--ui-${color}) aria-disabled:bg-(--ui-${color}) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-${color})`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
@@ -110,7 +110,7 @@ export default (options: Required<ModuleOptions>) => ({
   })), {
     color: 'neutral',
     variant: 'solid',
-    class: 'text-(--ui-bg) bg-(--ui-bg-inverted) hover:bg-(--ui-bg-inverted)/90 disabled:bg-(--ui-bg-inverted) aria-disabled:bg-(--ui-bg-inverted) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-border-inverted)'
+    class: 'text-(--ui-text-inverted) bg-(--ui-bg-inverted) hover:bg-(--ui-bg-inverted)/90 disabled:bg-(--ui-bg-inverted) aria-disabled:bg-(--ui-bg-inverted) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-border-inverted)'
   }, {
     color: 'neutral',
     variant: 'outline',

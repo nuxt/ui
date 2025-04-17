@@ -43,7 +43,7 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     variant: 'solid',
     class: {
-      root: `bg-(--ui-${color}) text-(--ui-bg)`
+      root: `bg-(--ui-${color}) text-(--ui-text-inverted)`
     }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
@@ -67,7 +67,7 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'neutral',
     variant: 'solid',
     class: {
-      root: 'text-(--ui-bg) bg-(--ui-bg-inverted)'
+      root: 'text-(--ui-text-inverted) bg-(--ui-bg-inverted)'
     }
   }, {
     color: 'neutral',
