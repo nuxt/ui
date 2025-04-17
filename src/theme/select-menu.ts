@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 import select from './select'
 
 export default (options: Required<ModuleOptions>) => {
-  const selectTheme = select(options);
+  const selectTheme = select(options)
   return defu({
     slots: {
       input: 'border-b border-(--ui-border)',
