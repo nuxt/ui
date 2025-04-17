@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply antialiased text-(--ui-text) bg-(--ui-bg) scheme-light dark:scheme-dark;
+    @apply antialiased text-default bg-default scheme-light dark:scheme-dark;
   }
 
   :root, .light {
@@ -51,85 +51,4 @@
     --ui-border-accented: var(--ui-color-neutral-700);
     --ui-border-inverted: var(--color-white);
   }
-}
-
-@utility text-dimmed {
-  @apply text-(--ui-text-dimmed);
-}
-@utility text-muted {
-  @apply text-(--ui-text-muted);
-}
-@utility text-toned {
-  @apply text-(--ui-text-toned);
-}
-@utility text-default {
-  @apply text-(--ui-text);
-}
-@utility text-highlighted {
-  @apply text-(--ui-text-highlighted);
-}
-@utility text-inverted {
-  @apply text-(--ui-text-inverted);
-}
-
-@utility bg-default {
-  @apply bg-(--ui-bg);
-}
-@utility bg-muted {
-  @apply bg-(--ui-bg-muted);
-}
-@utility bg-elevated {
-  @apply bg-(--ui-bg-elevated);
-}
-@utility bg-accented {
-  @apply bg-(--ui-bg-accented);
-}
-@utility bg-inverted {
-  @apply bg-(--ui-bg-inverted);
-}
-
-@utility border-default {
-  @apply border-(--ui-border);
-}
-@utility border-muted {
-  @apply border-(--ui-border-muted);
-}
-@utility border-accented {
-  @apply border-(--ui-border-accented);
-}
-@utility border-inverted {
-  @apply border-(--ui-border-inverted);
-}
-
-@utility ring-default {
-  @apply ring-(--ui-border);
-}
-@utility ring-muted {
-  @apply ring-(--ui-border-muted);
-}
-@utility ring-accented {
-  @apply ring-(--ui-border-accented);
-}
-@utility ring-inverted {
-  @apply ring-(--ui-border-inverted);
-}
-
-@utility divide-default {
-  @apply divide-(--ui-border);
-}
-@utility divide-muted {
-  @apply divide-(--ui-border-muted);
-}
-@utility divide-accented {
-  @apply divide-(--ui-border-accented);
-}
-@utility divide-inverted {
-  @apply divide-(--ui-border-inverted);
-}
-
-@utility outline-inverted {
-  @apply outline-(--ui-border-inverted);
-}
-@utility stroke-inverted {
-  @apply stroke-(--ui-border-inverted);
 }
