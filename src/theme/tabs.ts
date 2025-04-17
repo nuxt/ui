@@ -100,14 +100,14 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     class: {
       indicator: `bg-(--ui-${color})`,
-      trigger: `data-[state=active]:text-(--ui-bg) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-${color})`
+      trigger: `data-[state=active]:text-(--ui-text-inverted) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-${color})`
     }
   })), {
     color: 'neutral',
     variant: 'pill',
     class: {
       indicator: 'bg-(--ui-bg-inverted)',
-      trigger: 'data-[state=active]:text-(--ui-bg) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-border-inverted)'
+      trigger: 'data-[state=active]:text-(--ui-text-inverted) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-border-inverted)'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,

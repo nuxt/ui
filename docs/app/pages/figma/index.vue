@@ -57,7 +57,7 @@ onMounted(async () => {
 <template>
   <div class="relative">
     <div id="cursor1" class="absolute z-10 pointer-events-none" :style="{ opacity: 0 }">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-white dark:text-(--ui-bg)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-(--ui-text-inverted)">
         <path
           fill="var(--ui-info)"
           stroke="currentColor"
@@ -72,7 +72,7 @@ onMounted(async () => {
       </UBadge>
     </div>
     <div id="cursor2" class="absolute z-10 pointer-events-none" :style="{ opacity: 0 }">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-white dark:text-(--ui-bg)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-(--ui-text-inverted)">
         <path
           fill="var(--ui-success)"
           stroke="currentColor"

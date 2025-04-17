@@ -22,9 +22,9 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',
     itemTrailingKbdsSize: 'md',
     itemLabel: 'truncate space-x-1 rtl:space-x-reverse text-(--ui-text-dimmed)',
-    itemLabelBase: 'text-(--ui-text-highlighted) [&>mark]:text-(--ui-bg) [&>mark]:bg-(--ui-primary)',
+    itemLabelBase: 'text-(--ui-text-highlighted) [&>mark]:text-(--ui-text-inverted) [&>mark]:bg-(--ui-primary)',
     itemLabelPrefix: 'text-(--ui-text)',
-    itemLabelSuffix: 'text-(--ui-text-dimmed) [&>mark]:text-(--ui-bg) [&>mark]:bg-(--ui-primary)'
+    itemLabelSuffix: 'text-(--ui-text-dimmed) [&>mark]:text-(--ui-text-inverted) [&>mark]:bg-(--ui-primary)'
   },
   variants: {
     active: {

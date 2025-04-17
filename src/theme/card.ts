@@ -8,7 +8,7 @@ export default {
   variants: {
     variant: {
       solid: {
-        root: 'bg-(--ui-bg-inverted) text-(--ui-bg)'
+        root: 'bg-(--ui-bg-inverted) text-(--ui-text-inverted)'
       },
       outline: {
         root: 'bg-(--ui-bg) ring ring-(--ui-border) divide-y divide-(--ui-border)'

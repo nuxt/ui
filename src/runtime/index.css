@@ -15,6 +15,7 @@
     --ui-text-toned: var(--ui-color-neutral-600);
     --ui-text: var(--ui-color-neutral-700);
     --ui-text-highlighted: var(--ui-color-neutral-900);
+    --ui-text-inverted: var(--color-white);
 
     --ui-bg: var(--color-white);
     --ui-bg-muted: var(--ui-color-neutral-50);
@@ -37,6 +38,7 @@
     --ui-text-toned: var(--ui-color-neutral-300);
     --ui-text: var(--ui-color-neutral-200);
     --ui-text-highlighted: var(--color-white);
+    --ui-text-inverted: var(--ui-color-neutral-900);
 
     --ui-bg: var(--ui-color-neutral-900);
     --ui-bg-muted: var(--ui-color-neutral-800);
@@ -66,6 +68,9 @@
 @utility text-highlighted {
   @apply text-(--ui-text-highlighted);
 }
+@utility text-inverted {
+  @apply text-(--ui-text-inverted);
+}
 
 @utility bg-default {
   @apply bg-(--ui-bg);
@@ -94,4 +99,37 @@
 }
 @utility border-inverted {
   @apply border-(--ui-border-inverted);
+}
+
+@utility ring-default {
+  @apply ring-(--ui-border);
+}
+@utility ring-muted {
+  @apply ring-(--ui-border-muted);
+}
+@utility ring-accented {
+  @apply ring-(--ui-border-accented);
+}
+@utility ring-inverted {
+  @apply ring-(--ui-border-inverted);
+}
+
+@utility divide-default {
+  @apply divide-(--ui-border);
+}
+@utility divide-muted {
+  @apply divide-(--ui-border-muted);
+}
+@utility divide-accented {
+  @apply divide-(--ui-border-accented);
+}
+@utility divide-inverted {
+  @apply divide-(--ui-border-inverted);
+}
+
+@utility outline-inverted {
+  @apply outline-(--ui-border-inverted);
+}
+@utility stroke-inverted {
+  @apply stroke-(--ui-border-inverted);
 }

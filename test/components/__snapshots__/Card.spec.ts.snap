@@ -65,7 +65,7 @@ exports[`Card > renders with variant soft correctly 1`] = `
 `;
 
 exports[`Card > renders with variant solid correctly 1`] = `
-"<div class="rounded-lg bg-(--ui-bg-inverted) text-(--ui-bg)">
+"<div class="rounded-lg bg-(--ui-bg-inverted) text-(--ui-text-inverted)">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
