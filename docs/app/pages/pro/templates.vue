@@ -20,7 +20,7 @@ useSeoMeta({
     <UPageHero :links="page.links" :ui="{ container: 'relative' }">
       <LazyStarsBg />
 
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
       <template #title>
         <MDC :value="page.hero.title" unwrap="p" cache-key="pro-templates-hero-title" />
@@ -38,10 +38,10 @@ useSeoMeta({
       :links="template.links"
       :features="template.features"
       orientation="horizontal"
-      class="lg:border-t border-(--ui-border)"
+      class="lg:border-t border-default"
       :ui="{
         title: 'lg:text-4xl',
-        wrapper: 'lg:py-16 lg:border-r border-(--ui-border) order-last lg:pr-16',
+        wrapper: 'lg:py-16 lg:border-r border-default order-last lg:pr-16',
         container: 'lg:py-0',
         links: 'gap-x-3'
       }"
@@ -50,12 +50,12 @@ useSeoMeta({
         <MDC :value="template.description" unwrap="p" :cache-key="`pro-templates-${index}-description`" />
       </template>
 
-      <div class="lg:border-x border-(--ui-border) h-full flex items-center lg:bg-(--ui-bg-muted)/20">
+      <div class="lg:border-x border-default h-full flex items-center lg:bg-muted/20">
         <Motion class="flex-1" :initial="{ opacity: 0, transform: 'translateY(10px)' }" :while-in-view="{ opacity: 1, transform: 'translateY(0px)' }" :in-view-options="{ once: true }" :transition="{ duration: 0.5, delay: 0.2 }">
           <UColorModeImage
             v-if="template.thumbnail"
             v-bind="template.thumbnail"
-            class="w-full h-auto border lg:border-y lg:border-x-0 border-(--ui-border) rounded-sm lg:rounded-none"
+            class="w-full h-auto border lg:border-y lg:border-x-0 border-default rounded-sm lg:rounded-none"
             :alt="`Template ${index} thumbnail`"
             width="656"
             height="369"

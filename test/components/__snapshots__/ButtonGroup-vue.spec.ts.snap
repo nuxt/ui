@@ -2,10 +2,10 @@
 
 exports[`ButtonGroup > renders orientation vertical with default slot correctly 1`] = `
 "<div class="relative flex flex-col -space-y-px">
-  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-b-none group-not-only:group-last:rounded-t-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off">
+  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-b-none group-not-only:group-last:rounded-t-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
-  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-bg) bg-(--ui-primary) hover:bg-(--ui-primary)/75 disabled:bg-(--ui-primary) aria-disabled:bg-(--ui-primary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary)">
+  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
     <!--v-if--> Click me!
     <!--v-if-->
   </button>
@@ -18,10 +18,10 @@ exports[`ButtonGroup > renders with class correctly 1`] = `"<div class="inline-f
 
 exports[`ButtonGroup > renders with default slot correctly 1`] = `
 "<div class="relative inline-flex -space-x-px">
-  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off">
+  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
-  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-bg) bg-(--ui-primary) hover:bg-(--ui-primary)/75 disabled:bg-(--ui-primary) aria-disabled:bg-(--ui-primary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary)">
+  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
     <!--v-if--> Click me!
     <!--v-if-->
   </button>
@@ -30,10 +30,10 @@ exports[`ButtonGroup > renders with default slot correctly 1`] = `
 
 exports[`ButtonGroup > renders with size lg correctly 1`] = `
 "<div class="relative inline-flex -space-x-px">
-  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-3 py-2 text-sm gap-2 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off">
+  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-3 py-2 text-sm gap-2 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
-  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-3 py-2 text-sm gap-2 text-(--ui-bg) bg-(--ui-primary) hover:bg-(--ui-primary)/75 disabled:bg-(--ui-primary) aria-disabled:bg-(--ui-primary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary)">
+  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
     <!--v-if--> Click me!
     <!--v-if-->
   </button>
@@ -42,10 +42,10 @@ exports[`ButtonGroup > renders with size lg correctly 1`] = `
 
 exports[`ButtonGroup > renders with size md correctly 1`] = `
 "<div class="relative inline-flex -space-x-px">
-  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off">
+  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
-  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-bg) bg-(--ui-primary) hover:bg-(--ui-primary)/75 disabled:bg-(--ui-primary) aria-disabled:bg-(--ui-primary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary)">
+  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
     <!--v-if--> Click me!
     <!--v-if-->
   </button>
@@ -54,10 +54,10 @@ exports[`ButtonGroup > renders with size md correctly 1`] = `
 
 exports[`ButtonGroup > renders with size sm correctly 1`] = `
 "<div class="relative inline-flex -space-x-px">
-  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-xs gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off">
+  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2.5 py-1.5 text-xs gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
-  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2.5 py-1.5 text-xs gap-1.5 text-(--ui-bg) bg-(--ui-primary) hover:bg-(--ui-primary)/75 disabled:bg-(--ui-primary) aria-disabled:bg-(--ui-primary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary)">
+  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2.5 py-1.5 text-xs gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
     <!--v-if--> Click me!
     <!--v-if-->
   </button>
@@ -66,10 +66,10 @@ exports[`ButtonGroup > renders with size sm correctly 1`] = `
 
 exports[`ButtonGroup > renders with size xl correctly 1`] = `
 "<div class="relative inline-flex -space-x-px">
-  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-3 py-2 text-base gap-2 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off">
+  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-3 py-2 text-base gap-2 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
-  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-3 py-2 text-base gap-2 text-(--ui-bg) bg-(--ui-primary) hover:bg-(--ui-primary)/75 disabled:bg-(--ui-primary) aria-disabled:bg-(--ui-primary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary)">
+  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-3 py-2 text-base gap-2 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
     <!--v-if--> Click me!
     <!--v-if-->
   </button>
@@ -78,10 +78,10 @@ exports[`ButtonGroup > renders with size xl correctly 1`] = `
 
 exports[`ButtonGroup > renders with size xs correctly 1`] = `
 "<div class="relative inline-flex -space-x-px">
-  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2 py-1 text-xs gap-1 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off">
+  <div class="relative inline-flex items-center group"><input type="text" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none px-2 py-1 text-xs gap-1 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off">
     <!--v-if-->
     <!--v-if-->
-  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2 py-1 text-xs gap-1 text-(--ui-bg) bg-(--ui-primary) hover:bg-(--ui-primary)/75 disabled:bg-(--ui-primary) aria-disabled:bg-(--ui-primary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary)">
+  </div> <button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
     <!--v-if--> Click me!
     <!--v-if-->
   </button>

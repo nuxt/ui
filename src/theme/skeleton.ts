@@ -1,3 +1,3 @@
 export default {
-  base: 'animate-pulse rounded-md bg-(--ui-bg-elevated)'
+  base: 'animate-pulse rounded-md bg-elevated'
 }

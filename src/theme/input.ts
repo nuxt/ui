@@ -4,13 +4,13 @@ import { buttonGroupVariantWithRoot } from './button-group'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center',
-    base: ['w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    base: ['w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     leading: 'absolute inset-y-0 start-0 flex items-center',
-    leadingIcon: 'shrink-0 text-(--ui-text-dimmed)',
+    leadingIcon: 'shrink-0 text-dimmed',
     leadingAvatar: 'shrink-0',
     leadingAvatarSize: '',
     trailing: 'absolute inset-y-0 end-0 flex items-center',
-    trailingIcon: 'shrink-0 text-(--ui-text-dimmed)'
+    trailingIcon: 'shrink-0 text-dimmed'
   },
   variants: {
     ...buttonGroupVariantWithRoot,
@@ -57,11 +57,11 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     variant: {
-      outline: 'text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented)',
-      soft: 'text-(--ui-text-highlighted) bg-(--ui-bg-elevated)/50 hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-(--ui-bg-elevated)/50',
-      subtle: 'text-(--ui-text-highlighted) bg-(--ui-bg-elevated) ring ring-inset ring-(--ui-border-accented)',
-      ghost: 'text-(--ui-text-highlighted) bg-transparent hover:bg-(--ui-bg-elevated) focus:bg-(--ui-bg-elevated) disabled:bg-transparent dark:disabled:bg-transparent',
-      none: 'text-(--ui-text-highlighted) bg-transparent'
+      outline: 'text-highlighted bg-default ring ring-inset ring-accented',
+      soft: 'text-highlighted bg-elevated/50 hover:bg-elevated focus:bg-elevated disabled:bg-elevated/50',
+      subtle: 'text-highlighted bg-elevated ring ring-inset ring-accented',
+      ghost: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent',
+      none: 'text-highlighted bg-transparent'
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
@@ -80,25 +80,25 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     },
     type: {
-      file: 'file:me-1.5 file:font-medium file:text-(--ui-text-muted) file:outline-none'
+      file: 'file:me-1.5 file:font-medium file:text-muted file:outline-none'
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['outline', 'subtle'],
-    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-${color})`
+    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
-    class: `ring ring-inset ring-(--ui-${color})`
+    class: `ring ring-inset ring-${color}`
   })), {
     color: 'neutral',
     variant: ['outline', 'subtle'],
-    class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-border-inverted)'
+    class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted'
   }, {
     color: 'neutral',
     highlight: true,
-    class: 'ring ring-inset ring-(--ui-border-inverted)'
+    class: 'ring ring-inset ring-inverted'
   }, {
     leading: true,
     size: 'xs',

@@ -4,7 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex gap-1.5 [&>div]:min-w-0',
     list: 'isolate min-w-0',
-    label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 text-(--ui-text-highlighted) px-2.5 py-1.5',
+    label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 text-highlighted px-2.5 py-1.5',
     item: 'min-w-0',
     link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 size-5',
@@ -15,31 +15,31 @@ export default (options: Required<ModuleOptions>) => ({
     linkTrailingBadgeSize: 'sm',
     linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',
     linkLabel: 'truncate',
-    linkLabelExternalIcon: 'inline-block size-3 align-top text-(--ui-text-dimmed)',
+    linkLabelExternalIcon: 'inline-block size-3 align-top text-dimmed',
     childList: '',
     childItem: '',
     childLink: 'group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start',
     childLinkWrapper: 'flex flex-col items-start',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'font-semibold text-sm relative inline-flex',
-    childLinkLabelExternalIcon: 'inline-block size-3 align-top text-(--ui-text-dimmed)',
-    childLinkDescription: 'text-sm text-(--ui-text-muted)',
-    separator: 'px-2 h-px bg-(--ui-border)',
+    childLinkLabelExternalIcon: 'inline-block size-3 align-top text-dimmed',
+    childLinkDescription: 'text-sm text-muted',
+    separator: 'px-2 h-px bg-border',
     viewportWrapper: 'absolute top-full left-0 flex w-full',
-    viewport: 'relative overflow-hidden bg-(--ui-bg) shadow-lg rounded-md ring ring-(--ui-border) h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1]',
+    viewport: 'relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1]',
     content: 'absolute top-0 left-0 w-full sm:w-auto',
     indicator: 'absolute data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-[2] w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200',
-    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-(--ui-border) bg-(--ui-bg) z-[1] rounded-xs'
+    arrow: 'relative top-[50%] size-2.5 rotate-45 border border-default bg-default z-[1] rounded-xs'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `focus-visible:before:ring-(--ui-${color})`,
-        childLink: `focus-visible:outline-(--ui-${color})`
+        link: `focus-visible:before:ring-${color}`,
+        childLink: `focus-visible:outline-${color}`
       }])),
       neutral: {
-        link: 'focus-visible:before:ring-(--ui-border-inverted)',
-        childLink: 'focus-visible:outline-(--ui-border-inverted)'
+        link: 'focus-visible:before:ring-inverted',
+        childLink: 'focus-visible:outline-inverted'
       }
     },
     highlightColor: {
@@ -74,14 +74,14 @@ export default (options: Required<ModuleOptions>) => ({
     },
     active: {
       true: {
-        childLink: 'bg-(--ui-bg-elevated) text-(--ui-text-highlighted)',
-        childLinkIcon: 'text-(--ui-text)'
+        childLink: 'bg-elevated text-highlighted',
+        childLinkIcon: 'text-default'
       },
       false: {
-        link: 'text-(--ui-text-muted)',
-        linkLeadingIcon: 'text-(--ui-text-dimmed)',
-        childLink: ['hover:bg-(--ui-bg-elevated)/50 text-(--ui-text) hover:text-(--ui-text-highlighted)', options.theme.transitions && 'transition-colors'],
-        childLinkIcon: ['text-(--ui-text-dimmed) group-hover:text-(--ui-text)', options.theme.transitions && 'transition-colors']
+        link: 'text-muted',
+        linkLeadingIcon: 'text-dimmed',
+        childLink: ['hover:bg-elevated/50 text-default hover:text-highlighted', options.theme.transitions && 'transition-colors'],
+        childLinkIcon: ['text-dimmed group-hover:text-default', options.theme.transitions && 'transition-colors']
       }
     },
     disabled: {
@@ -130,8 +130,8 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     variant: 'pill',
     class: {
-      link: ['hover:text-(--ui-text-highlighted) hover:before:bg-(--ui-bg-elevated)/50', options.theme.transitions && 'transition-colors before:transition-colors'],
-      linkLeadingIcon: ['group-hover:text-(--ui-text)', options.theme.transitions && 'transition-colors']
+      link: ['hover:text-highlighted hover:before:bg-elevated/50', options.theme.transitions && 'transition-colors before:transition-colors'],
+      linkLeadingIcon: ['group-hover:text-default', options.theme.transitions && 'transition-colors']
     }
   }, {
     disabled: false,
@@ -139,8 +139,8 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:text-(--ui-text-highlighted)',
-      linkLeadingIcon: 'group-data-[state=open]:text-(--ui-text)'
+      link: 'data-[state=open]:text-highlighted',
+      linkLeadingIcon: 'group-data-[state=open]:text-default'
     }
   }, {
     disabled: false,
@@ -148,7 +148,7 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:before:bg-(--ui-bg-elevated)/50'
+      link: 'data-[state=open]:before:bg-elevated/50'
     }
   }, {
     disabled: false,
@@ -157,45 +157,45 @@ export default (options: Required<ModuleOptions>) => ({
     active: false,
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:before:bg-(--ui-bg-elevated)/50'
+      link: 'data-[state=open]:before:bg-elevated/50'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'pill',
     active: true,
     class: {
-      link: `text-(--ui-${color})`,
-      linkLeadingIcon: `text-(--ui-${color}) group-data-[state=open]:text-(--ui-${color})`
+      link: `text-${color}`,
+      linkLeadingIcon: `text-${color} group-data-[state=open]:text-${color}`
     }
   })), {
     color: 'neutral',
     variant: 'pill',
     active: true,
     class: {
-      link: 'text-(--ui-text-highlighted)',
-      linkLeadingIcon: 'text-(--ui-text-highlighted) group-data-[state=open]:text-(--ui-text-highlighted)'
+      link: 'text-highlighted',
+      linkLeadingIcon: 'text-highlighted group-data-[state=open]:text-highlighted'
     }
   }, {
     variant: 'pill',
     active: true,
     highlight: false,
     class: {
-      link: 'before:bg-(--ui-bg-elevated)'
+      link: 'before:bg-elevated'
     }
   }, {
     variant: 'pill',
     active: true,
     highlight: true,
     class: {
-      link: ['hover:before:bg-(--ui-bg-elevated)/50', options.theme.transitions && 'before:transition-colors']
+      link: ['hover:before:bg-elevated/50', options.theme.transitions && 'before:transition-colors']
     }
   }, {
     disabled: false,
     active: false,
     variant: 'link',
     class: {
-      link: ['hover:text-(--ui-text-highlighted)', options.theme.transitions && 'transition-colors'],
-      linkLeadingIcon: ['group-hover:text-(--ui-text)', options.theme.transitions && 'transition-colors']
+      link: ['hover:text-highlighted', options.theme.transitions && 'transition-colors'],
+      linkLeadingIcon: ['group-hover:text-default', options.theme.transitions && 'transition-colors']
     }
   }, {
     disabled: false,
@@ -203,24 +203,24 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'link',
     orientation: 'horizontal',
     class: {
-      link: 'data-[state=open]:text-(--ui-text-highlighted)',
-      linkLeadingIcon: 'group-data-[state=open]:text-(--ui-text)'
+      link: 'data-[state=open]:text-highlighted',
+      linkLeadingIcon: 'group-data-[state=open]:text-default'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
     active: true,
     class: {
-      link: `text-(--ui-${color})`,
-      linkLeadingIcon: `text-(--ui-${color}) group-data-[state=open]:text-(--ui-${color})`
+      link: `text-${color}`,
+      linkLeadingIcon: `text-${color} group-data-[state=open]:text-${color}`
     }
   })), {
     color: 'neutral',
     variant: 'link',
     active: true,
     class: {
-      link: 'text-(--ui-text-highlighted)',
-      linkLeadingIcon: 'text-(--ui-text-highlighted) group-data-[state=open]:text-(--ui-text-highlighted)'
+      link: 'text-highlighted',
+      linkLeadingIcon: 'text-highlighted group-data-[state=open]:text-highlighted'
     }
   }, ...(options.theme.colors || []).map((highlightColor: string) => ({
     highlightColor,
@@ -228,7 +228,7 @@ export default (options: Required<ModuleOptions>) => ({
     level: true,
     active: true,
     class: {
-      link: `after:bg-(--ui-${highlightColor})`
+      link: `after:bg-${highlightColor}`
     }
   })), {
     highlightColor: 'neutral',
@@ -236,13 +236,13 @@ export default (options: Required<ModuleOptions>) => ({
     level: true,
     active: true,
     class: {
-      link: 'after:bg-(--ui-bg-inverted)'
+      link: 'after:bg-inverted'
     }
   }, {
     orientation: 'vertical',
     collapsed: false,
     class: {
-      childList: 'ms-5 border-s border-(--ui-border)',
+      childList: 'ms-5 border-s border-default',
       childItem: 'ps-1.5 -ms-px'
     }
   }, {

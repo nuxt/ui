@@ -82,7 +82,7 @@ onMounted(() => {
       :ui="{ title: 'text-balance', container: 'relative' }"
     >
       <template #top>
-        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
       </template>
 
       <template #headline>
@@ -97,7 +97,7 @@ onMounted(() => {
         />
       </template>
       <template #title>
-        Build beautiful UI with <span class="text-(--ui-primary)">{{ components!.length }}+</span> powerful components
+        Build beautiful UI with <span class="text-primary">{{ components!.length }}+</span> powerful components
       </template>
 
       <template #links>
@@ -121,22 +121,22 @@ onMounted(() => {
 
       <LazyStarsBg />
 
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
     </UPageHero>
 
     <div v-for="category in categories" :key="category.id">
-      <div data-track-sticky class="group mb-4 sm:mb-6 lg:mb-8 sticky top-[calc(var(--ui-header-height)-1px)] bg-(--ui-bg)/75 backdrop-blur z-[1]">
-        <div class="relative border-y border-(--ui-border) py-4 sm:not-group-[[data-stuck]]:py-6 lg:not-group-[[data-stuck]]:py-8 transition-all duration-300">
+      <div data-track-sticky class="group mb-4 sm:mb-6 lg:mb-8 sticky top-[calc(var(--ui-header-height)-1px)] bg-default/75 backdrop-blur z-[1]">
+        <div class="relative border-y border-default py-4 sm:not-group-[[data-stuck]]:py-6 lg:not-group-[[data-stuck]]:py-8 transition-all duration-300">
           <UContainer>
-            <h2 class="relative text-pretty font-bold text-(--ui-text-highlighted) text-base sm:not-group-[[data-stuck]]:text-xl lg:not-group-[[data-stuck]]:text-2xl transition-all duration-300 ">
+            <h2 class="relative text-pretty font-bold text-highlighted text-base sm:not-group-[[data-stuck]]:text-xl lg:not-group-[[data-stuck]]:text-2xl transition-all duration-300 ">
               <a :href="`#${category.id}`" class="group lg:not-group-[[data-stuck]]:ps-2 lg:not-group-[[data-stuck]]:-ms-2">
-                <span class="absolute -ms-8 top-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 p-1 bg-(--ui-bg-elevated) hover:text-(--ui-primary) rounded-md hidden lg:not-group-[[data-stuck]]:flex text-(--ui-text-muted) transition">
+                <span class="absolute -ms-8 top-1 opacity-0 group-hover:opacity-100 group-focus:opacity-100 p-1 bg-elevated hover:text-primary rounded-md hidden lg:not-group-[[data-stuck]]:flex text-muted transition">
                   <UIcon name="i-lucide-hash" class="size-4 shrink-0" />
                 </span>
                 {{ category.title }}
               </a>
             </h2>
-            <p class="text-pretty text-(--ui-text-muted) text-sm sm:not-group-[[data-stuck]]:text-base lg:not-group-[[data-stuck]]:text-lg mt-1 sm:not-group-[[data-stuck]]:mt-2 line-clamp-1 transition-all duration-300">
+            <p class="text-pretty text-muted text-sm sm:not-group-[[data-stuck]]:text-base lg:not-group-[[data-stuck]]:text-lg mt-1 sm:not-group-[[data-stuck]]:mt-2 line-clamp-1 transition-all duration-300">
               {{ category.description }}
             </p>
           </UContainer>
@@ -157,11 +157,11 @@ onMounted(() => {
             <template #title>
               <div class="flex items-center gap-0.5">
                 <span>{{ component.title }}</span>
-                <sup v-if="component.module === 'ui-pro'" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
+                <sup v-if="component.module === 'ui-pro'" class="text-[8px] font-medium text-primary">PRO</sup>
               </div>
             </template>
 
-            <div class="rounded-md border border-(--ui-border-muted) overflow-hidden aspect-[16/9]">
+            <div class="rounded-md border border-muted overflow-hidden aspect-[16/9]">
               <UColorModeImage
                 :light="`${component.path.replace('/components/', '/components/light/')}.png`"
                 :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"

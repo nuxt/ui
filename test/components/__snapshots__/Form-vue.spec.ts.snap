@@ -8,7 +8,7 @@ exports[`Form > custom validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -21,11 +21,11 @@ exports[`Form > custom validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-error) ring ring-inset ring-(--ui-error)" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-1-error" class="mt-2 text-(--ui-error)">Must be at least 8 characters</p>
+      <p id="v-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -39,7 +39,7 @@ exports[`Form > custom validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -52,7 +52,7 @@ exports[`Form > custom validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -70,7 +70,7 @@ exports[`Form > joi validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -83,11 +83,11 @@ exports[`Form > joi validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-error) ring ring-inset ring-(--ui-error)" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-1-error" class="mt-2 text-(--ui-error)">Must be at least 8 characters</p>
+      <p id="v-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -101,7 +101,7 @@ exports[`Form > joi validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -114,7 +114,7 @@ exports[`Form > joi validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -136,7 +136,7 @@ exports[`Form > superstruct validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -149,11 +149,11 @@ exports[`Form > superstruct validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-error) ring ring-inset ring-(--ui-error)" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-1-error" class="mt-2 text-(--ui-error)">Must be at least 8 characters</p>
+      <p id="v-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -167,7 +167,7 @@ exports[`Form > superstruct validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -180,7 +180,7 @@ exports[`Form > superstruct validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -198,7 +198,7 @@ exports[`Form > valibot validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -211,11 +211,11 @@ exports[`Form > valibot validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-error) ring ring-inset ring-(--ui-error)" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-1-error" class="mt-2 text-(--ui-error)">Must be at least 8 characters</p>
+      <p id="v-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -229,7 +229,7 @@ exports[`Form > valibot validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -242,7 +242,7 @@ exports[`Form > valibot validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -260,7 +260,7 @@ exports[`Form > yup validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -273,11 +273,11 @@ exports[`Form > yup validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-error) ring ring-inset ring-(--ui-error)" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-1-error" class="mt-2 text-(--ui-error)">Must be at least 8 characters</p>
+      <p id="v-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -291,7 +291,7 @@ exports[`Form > yup validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -304,7 +304,7 @@ exports[`Form > yup validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -322,7 +322,7 @@ exports[`Form > zod validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -335,11 +335,11 @@ exports[`Form > zod validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-error) ring ring-inset ring-(--ui-error)" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-1-error" class="mt-2 text-(--ui-error)">Must be at least 8 characters</p>
+      <p id="v-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
     </div>
   </div>
 </form>"
@@ -353,7 +353,7 @@ exports[`Form > zod validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
+      <div class="relative inline-flex items-center"><input id="email" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="bob@dylan.com">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -366,7 +366,7 @@ exports[`Form > zod validation works > without error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-(--ui-text-dimmed) focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--ui-primary)" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-describedby="" aria-invalid="false" value="validpassword">
         <!--v-if-->
         <!--v-if-->
       </div>
