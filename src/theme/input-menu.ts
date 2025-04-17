@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => {
       base: () => ['rounded-md', options.theme.transitions && 'transition-colors'],
       trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75',
       arrow: 'fill-(--ui-border)',
-      content: 'max-h-60 w-(--reka-combobox-trigger-width) bg-(--ui-bg) shadow-lg rounded-md ring ring-(--ui-border) overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-combobox-content-transform-origin) pointer-events-auto',
+      content: 'max-h-60 w-(--reka-combobox-trigger-width) min-w-fit bg-(--ui-bg) shadow-lg rounded-md ring ring-(--ui-border) overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-combobox-content-transform-origin) pointer-events-auto',
       viewport: 'divide-y divide-(--ui-border) scroll-py-1',
       group: 'p-1 isolate',
       empty: 'py-2 text-center text-sm text-(--ui-text-muted)',

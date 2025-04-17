@@ -11,7 +11,7 @@ export default (options: Required<ModuleOptions>) => {
       value: 'truncate pointer-events-none',
       placeholder: 'truncate text-(--ui-text-dimmed)',
       arrow: 'fill-(--ui-border)',
-      content: 'max-h-60 w-(--reka-select-trigger-width) bg-(--ui-bg) shadow-lg rounded-md ring ring-(--ui-border) overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-select-content-transform-origin) pointer-events-auto',
+      content: 'max-h-60 w-(--reka-select-trigger-width) min-w-fit bg-(--ui-bg) shadow-lg rounded-md ring ring-(--ui-border) overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-select-content-transform-origin) pointer-events-auto',
       viewport: 'divide-y divide-(--ui-border) scroll-py-1',
       group: 'p-1 isolate',
       empty: 'py-2 text-center text-sm text-(--ui-text-muted)',
