@@ -144,7 +144,7 @@ export default (options: Required<ModuleOptions>) => ({
       color: 'neutral',
       variant: 'card',
       class: {
-        item: 'has-data-[state=checked]:border-elevated'
+        item: 'has-data-[state=checked]:border-inverted'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
@@ -158,7 +158,7 @@ export default (options: Required<ModuleOptions>) => ({
       color: 'neutral',
       variant: 'table',
       class: {
-        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/25 has-data-[state=checked]:z-[1]'
+        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]'
       }
     }
   ],
