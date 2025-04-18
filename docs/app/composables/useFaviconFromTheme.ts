@@ -1,4 +1,3 @@
-import { useColorMode } from '@vueuse/core'
 import { onMounted, watch } from 'vue'
 import FaviconSvg from 'public/icon.svg?raw'
 
