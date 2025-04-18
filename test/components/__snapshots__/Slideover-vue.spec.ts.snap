@@ -56,7 +56,7 @@ exports[`Slideover > renders with class correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open" data-side="right" tabindex="-1" class="fixed divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out] bg-(--ui-bg-elevated)">
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open" data-side="right" tabindex="-1" class="fixed divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out] bg-elevated">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">

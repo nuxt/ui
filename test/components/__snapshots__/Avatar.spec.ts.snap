@@ -4,7 +4,7 @@ exports[`Avatar > renders with alt correctly 1`] = `"<span class="inline-flex it
 
 exports[`Avatar > renders with as correctly 1`] = `"<section class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-elevated size-8 text-base"><span class="font-medium leading-none text-muted truncate">&nbsp;</span></section>"`;
 
-exports[`Avatar > renders with class correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle size-8 text-base bg-(--ui-bg)"><span class="font-medium leading-none text-muted truncate">&nbsp;</span></span>"`;
+exports[`Avatar > renders with class correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle size-8 text-base bg-default"><span class="font-medium leading-none text-muted truncate">&nbsp;</span></span>"`;
 
 exports[`Avatar > renders with default slot correctly 1`] = `"<span class="inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-elevated size-8 text-base">🇫🇷</span>"`;
 
