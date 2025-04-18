@@ -138,7 +138,7 @@ onMounted(async () => {
         wrapper: 'grid grid-cols-1 lg:grid-cols-2',
         description: 'lg:mt-0' }"
       orientation="horizontal"
-      class="rounded-none bg-gradient-to-b from-(--ui-bg-muted) to-(--ui-bg)"
+      class="rounded-none bg-gradient-to-b from-elevated/50 to-default"
     >
       <template #title>
         <MDC :value="page.cta1.title" unwrap="p" cache-key="figma-cta-1-title" />
