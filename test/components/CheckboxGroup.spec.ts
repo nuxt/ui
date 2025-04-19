@@ -51,14 +51,14 @@ describe('CheckboxGroup', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(CheckboxGroup, { props: { items: ['Option 1', 'Option 2'] } })
       const input = wrapper.findComponent({ name: 'CheckboxGroupRoot' })
-      await input.setValue(['Option 1'])
+      await input.setValue('Option 1')
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] })
     })
 
     test('change event', async () => {
       const wrapper = mount(CheckboxGroup, { props: { items: ['Option 1', 'Option 2'] } })
       const input = wrapper.findComponent({ name: 'CheckboxGroupRoot' })
-      await input.setValue(['Option 1'])
+      await input.setValue('Option 1')
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
   })
@@ -94,11 +94,11 @@ describe('CheckboxGroup', () => {
     test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
 
-      input.setValue(['Option 1'])
+      input.setValue('Option 1')
       await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
-      input.setValue(['Option 2'])
+      input.setValue('Option 2')
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
@@ -106,11 +106,11 @@ describe('CheckboxGroup', () => {
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'])
 
-      input.setValue(['Option 1'])
+      input.setValue('Option 1')
       await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
-      input.setValue(['Option 2'])
+      input.setValue('Option 2')
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
