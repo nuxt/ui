@@ -207,8 +207,9 @@ function onUpdate(value: any) {
         :icon="icon"
         :indeterminate-icon="indeterminateIcon"
         :name="name"
-        :default-value="defaultValue?.includes(item.value)"
-        :model-value="modelValue?.includes(item.value)"
+        :disabled="item.disabled || disabled"
+        :default-value="item.value === 'indeterminate' ? 'indeterminate' : defaultValue?.includes(item.value)"
+        :model-value="item.value === 'indeterminate' ? 'indeterminate' : modelValue?.includes(item.value)"
       />
     </fieldset>
   </CheckboxGroupRoot>
