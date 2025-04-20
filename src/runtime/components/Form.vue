@@ -36,6 +36,13 @@ export interface FormProps<T extends object> {
    * @defaultValue `true`
    */
   transform?: boolean
+
+  /**
+   * If true, this form will attach to its parent Form (if any) and validate at the same time.
+   * @defaultValue `true`
+   */
+  attach?: boolean
+
   /**
    * When `true`, all form elements will be disabled on `@submit` event.
    * This will cause any focused input elements to lose their focus state.
@@ -70,6 +77,7 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300,
+  attach: true,
   transform: true,
   loadingAuto: true
 })
@@ -84,7 +92,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) 
 const formId = props.id ?? useId() as string
 
 const bus = useEventBus<FormEvent<T>>(`form-${formId}`)
-const parentBus = inject(
+const parentBus = props.attach && inject(
   formBusInjectionKey,
   undefined
 )
