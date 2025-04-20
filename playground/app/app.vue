@@ -36,6 +36,7 @@ const components = [
   'dropdown-menu',
   'form',
   'form-field',
+  'file-upload',
   'input',
   'input-menu',
   'input-number',
