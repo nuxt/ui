@@ -21,11 +21,26 @@ export interface Form<T extends object> {
   blurredFields: DeepReadonly<Set<keyof T>>
 }
 
-export type FormSchema<T extends object> =
-  | YupObjectSchema<T>
-  | JoiSchema<T>
+export type FormSchema<I extends object = object, O extends object = I> =
+  | YupObjectSchema<I>
+  | JoiSchema<I>
   | SuperstructSchema<any, any>
-  | StandardSchemaV1
+  | StandardSchemaV1<I, O>
+
+// Define a utility type to infer the input type based on the schema type
+export type InferInput<Schema> = Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
+  : Schema extends YupObjectSchema<infer I> ? I
+    : Schema extends JoiSchema<infer I> ? I
+      : Schema extends SuperstructSchema<infer I, any> ? I
+        : Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
+          : never
+
+// Define a utility type to infer the output type based on the schema type
+export type InferOutput<Schema> = Schema extends StandardSchemaV1 ? StandardSchemaV1.InferOutput<Schema>
+  : Schema extends YupObjectSchema<infer O> ? O
+    : Schema extends JoiSchema<infer O> ? O
+      : Schema extends SuperstructSchema<infer O, any> ? O
+        : never
 
 export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
 
