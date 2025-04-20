@@ -187,7 +187,6 @@ function onUpdate(value: any) {
   <CheckboxGroupRoot
     :id="id"
     v-bind="rootProps"
-    v-model="modelValue"
     :name="name"
     :disabled="disabled"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
