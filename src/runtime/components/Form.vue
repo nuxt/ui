@@ -158,7 +158,7 @@ function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   }))
 }
 
-const transformedState = ref<I | null>(null)
+const transformedState = ref<O | null>(null)
 
 async function getErrors(): Promise<FormErrorWithId[]> {
   let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
