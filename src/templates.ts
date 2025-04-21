@@ -126,10 +126,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --divide-color-inverted: var(--ui-border-inverted);
   --outline-color-default: var(--ui-border);
   --outline-color-inverted: var(--ui-border-inverted);
-  --stroke-color-default: var(--ui-border);
-  --stroke-color-inverted: var(--ui-border-inverted);
-  --fill-color-default: var(--ui-border);
-  --fill-color-inverted: var(--ui-border-inverted);
+  --stroke-default: var(--ui-border);
+  --stroke-inverted: var(--ui-border-inverted);
+  --fill-default: var(--ui-border);
+  --fill-inverted: var(--ui-border-inverted);
 }
 `
   })
