@@ -17,8 +17,8 @@ export function usePortal(portal: Ref<string | HTMLElement | boolean | undefined
 
   provide(portalTargetInjectionKey, computed(() => to.value))
 
-  return {
+  return computed(() => ({
     to: to.value,
     disabled: disabled.value
-  }
+  }))
 }
