@@ -51,7 +51,14 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UInput v-model="state.customer" placeholder="Wonka Industries" />
     </UFormField>
 
-    <UForm v-for="item, count in state.items" :key="count" :state="item" :schema="itemSchema" class="flex gap-2">
+    <UForm
+      v-for="item, count in state.items"
+      :key="count"
+      :state="item"
+      :schema="itemSchema"
+      attach
+      class="flex gap-2"
+    >
       <UFormField :label="!count ? 'Description' : undefined" name="description">
         <UInput v-model="item.description" />
       </UFormField>

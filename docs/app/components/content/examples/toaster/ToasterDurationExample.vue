@@ -7,10 +7,10 @@ const appConfig = useAppConfig()
     <UFormField
       label="toaster.duration"
       size="sm"
-      class="inline-flex ring ring-(--ui-border-accented) rounded-sm"
+      class="inline-flex ring ring-accented rounded-sm"
       :ui="{
-        wrapper: 'bg-(--ui-bg-elevated)/50 rounded-l-sm flex border-r border-(--ui-border-accented)',
-        label: 'text-(--ui-text-muted) px-2 py-1.5',
+        wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-accented',
+        label: 'text-muted px-2 py-1.5',
         container: 'mt-0'
       }"
     >

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Card > renders with as correctly 1`] = `
-"<section class="rounded-lg bg-(--ui-bg) ring ring-(--ui-border) divide-y divide-(--ui-border)">
+"<section class="rounded-lg bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -9,7 +9,7 @@ exports[`Card > renders with as correctly 1`] = `
 `;
 
 exports[`Card > renders with class correctly 1`] = `
-"<div class="bg-(--ui-bg) ring ring-(--ui-border) divide-y divide-(--ui-border) rounded-xl">
+"<div class="bg-default ring ring-default divide-y divide-default rounded-xl">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -17,7 +17,7 @@ exports[`Card > renders with class correctly 1`] = `
 `;
 
 exports[`Card > renders with default slot correctly 1`] = `
-"<div class="rounded-lg bg-(--ui-bg) ring ring-(--ui-border) divide-y divide-(--ui-border)">
+"<div class="rounded-lg bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <div class="p-4 sm:p-6">Default slot</div>
   <!--v-if-->
@@ -25,7 +25,7 @@ exports[`Card > renders with default slot correctly 1`] = `
 `;
 
 exports[`Card > renders with footer slot correctly 1`] = `
-"<div class="rounded-lg bg-(--ui-bg) ring ring-(--ui-border) divide-y divide-(--ui-border)">
+"<div class="rounded-lg bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <div class="p-4 sm:px-6">Footer slot</div>
@@ -33,7 +33,7 @@ exports[`Card > renders with footer slot correctly 1`] = `
 `;
 
 exports[`Card > renders with header slot correctly 1`] = `
-"<div class="rounded-lg bg-(--ui-bg) ring ring-(--ui-border) divide-y divide-(--ui-border)">
+"<div class="rounded-lg bg-default ring ring-default divide-y divide-default">
   <div class="p-4 sm:px-6">Header slot</div>
   <!--v-if-->
   <!--v-if-->
@@ -41,7 +41,7 @@ exports[`Card > renders with header slot correctly 1`] = `
 `;
 
 exports[`Card > renders with ui correctly 1`] = `
-"<div class="rounded-lg bg-(--ui-bg) ring ring-(--ui-border) divide-y divide-(--ui-border)">
+"<div class="rounded-lg bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -49,7 +49,7 @@ exports[`Card > renders with ui correctly 1`] = `
 `;
 
 exports[`Card > renders with variant outline correctly 1`] = `
-"<div class="rounded-lg bg-(--ui-bg) ring ring-(--ui-border) divide-y divide-(--ui-border)">
+"<div class="rounded-lg bg-default ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -57,7 +57,7 @@ exports[`Card > renders with variant outline correctly 1`] = `
 `;
 
 exports[`Card > renders with variant soft correctly 1`] = `
-"<div class="rounded-lg bg-(--ui-bg-elevated)/50 divide-y divide-(--ui-border)">
+"<div class="rounded-lg bg-elevated/50 divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -65,7 +65,7 @@ exports[`Card > renders with variant soft correctly 1`] = `
 `;
 
 exports[`Card > renders with variant solid correctly 1`] = `
-"<div class="rounded-lg bg-(--ui-bg-inverted) text-(--ui-bg)">
+"<div class="rounded-lg bg-inverted text-inverted">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -73,7 +73,7 @@ exports[`Card > renders with variant solid correctly 1`] = `
 `;
 
 exports[`Card > renders with variant subtle correctly 1`] = `
-"<div class="rounded-lg bg-(--ui-bg-elevated)/50 ring ring-(--ui-border) divide-y divide-(--ui-border)">
+"<div class="rounded-lg bg-elevated/50 ring ring-default divide-y divide-default">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->

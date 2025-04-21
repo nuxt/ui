@@ -1,7 +1,7 @@
 title: Official Nuxt UI Pro Templates
 description: 'Ready to use templates powered by our premium Vue components and Nuxt Content. The templates are responsive, accessible and easy to customize so you can get started in no time.'
 hero:
-  title: Ship [in minutes]{.text-(--ui-primary)} with :br Nuxt UI Pro Templates
+  title: Ship [in minutes]{.text-primary} with :br Nuxt UI Pro Templates
   description: 'Ready to use templates powered by our premium Vue components and Nuxt Content.<br class="hidden lg:block"> The templates are responsive, accessible and easy to customize so you can get started in no time.'
 navigation: false
 links:

@@ -4,7 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative isolate',
     item: '',
-    listWithChildren: 'ms-4.5 border-s border-(--ui-border)',
+    listWithChildren: 'ms-4.5 border-s border-default',
     itemWithChildren: 'ps-1.5 -ms-px',
     link: 'relative group w-full flex items-center text-sm before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0',
@@ -15,10 +15,10 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        link: `focus-visible:before:ring-(--ui-${color})`
+        link: `focus-visible:before:ring-${color}`
       }])),
       neutral: {
-        link: 'focus-visible:before:ring-(--ui-border-inverted)'
+        link: 'focus-visible:before:ring-inverted'
       }
     },
     size: {
@@ -50,10 +50,10 @@ export default (options: Required<ModuleOptions>) => ({
     },
     selected: {
       true: {
-        link: 'before:bg-(--ui-bg-elevated)'
+        link: 'before:bg-elevated'
       },
       false: {
-        link: ['hover:not-disabled:text-(--ui-text-highlighted) hover:not-disabled:before:bg-(--ui-bg-elevated)/50', options.theme.transitions && 'transition-colors before:transition-colors']
+        link: ['hover:not-disabled:text-highlighted hover:not-disabled:before:bg-elevated/50', options.theme.transitions && 'transition-colors before:transition-colors']
       }
     },
     disabled: {
@@ -66,13 +66,13 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     selected: true,
     class: {
-      link: `text-(--ui-${color})`
+      link: `text-${color}`
     }
   })), {
     color: 'neutral',
     selected: true,
     class: {
-      link: 'text-(--ui-text-highlighted)'
+      link: 'text-highlighted'
     }
   }],
   defaultVariants: {

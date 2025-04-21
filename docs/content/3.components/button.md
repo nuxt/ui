@@ -330,7 +330,7 @@ props:
   color: neutral
   variant: outline
   ui:
-    leadingIcon: 'text-(--ui-primary)'
+    leadingIcon: 'text-primary'
 slots:
   default: |
 

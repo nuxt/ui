@@ -43,49 +43,49 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     variant: 'solid',
     class: {
-      root: `bg-(--ui-${color}) text-(--ui-bg)`
+      root: `bg-${color} text-inverted`
     }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
     class: {
-      root: `text-(--ui-${color}) ring ring-inset ring-(--ui-${color})/25`
+      root: `text-${color} ring ring-inset ring-${color}/25`
     }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
     class: {
-      root: `bg-(--ui-${color})/10 text-(--ui-${color})`
+      root: `bg-${color}/10 text-${color}`
     }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
     class: {
-      root: `bg-(--ui-${color})/10 text-(--ui-${color}) ring ring-inset ring-(--ui-${color})/25`
+      root: `bg-${color}/10 text-${color} ring ring-inset ring-${color}/25`
     }
   })), {
     color: 'neutral',
     variant: 'solid',
     class: {
-      root: 'text-(--ui-bg) bg-(--ui-bg-inverted)'
+      root: 'text-inverted bg-inverted'
     }
   }, {
     color: 'neutral',
     variant: 'outline',
     class: {
-      root: 'text-(--ui-text-highlighted) bg-(--ui-bg) ring ring-inset ring-(--ui-border)'
+      root: 'text-highlighted bg-default ring ring-inset ring-default'
     }
   }, {
     color: 'neutral',
     variant: 'soft',
     class: {
-      root: 'text-(--ui-text-highlighted) bg-(--ui-bg-elevated)/50'
+      root: 'text-highlighted bg-elevated/50'
     }
   }, {
     color: 'neutral',
     variant: 'subtle',
     class: {
-      root: 'text-(--ui-text-highlighted) bg-(--ui-bg-elevated)/50 ring ring-inset ring-(--ui-border-accented)'
+      root: 'text-highlighted bg-elevated/50 ring ring-inset ring-accented'
     }
   }],
   defaultVariants: {

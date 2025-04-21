@@ -12,17 +12,17 @@ export default (options: Required<ModuleOptions>) => ({
     gridBody: 'grid',
     headCell: 'rounded-md',
     cell: 'relative text-center',
-    cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-(--ui-text-muted) data-unavailable:line-through data-unavailable:text-(--ui-text-muted) data-unavailable:pointer-events-none data-[selected]:text-(--ui-bg) data-today:font-semibold data-[outside-view]:text-(--ui-text-muted)', options.theme.transitions && 'transition']
+    cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-[selected]:text-inverted data-today:font-semibold data-[outside-view]:text-muted', options.theme.transitions && 'transition']
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        headCell: `text-(--ui-${color})`,
-        cellTrigger: `focus-visible:ring-(--ui-${color}) data-[selected]:bg-(--ui-${color}) data-today:not-data-[selected]:text-(--ui-${color}) data-[highlighted]:bg-(--ui-${color})/20 hover:not-data-[selected]:bg-(--ui-${color})/20`
+        headCell: `text-${color}`,
+        cellTrigger: `focus-visible:ring-${color} data-[selected]:bg-${color} data-today:not-data-[selected]:text-${color} data-[highlighted]:bg-${color}/20 hover:not-data-[selected]:bg-${color}/20`
       }])),
       neutral: {
-        headCell: 'text-(--ui-bg-inverted)',
-        cellTrigger: 'focus-visible:ring-(--ui-border-inverted) data-[selected]:bg-(--ui-bg-inverted) data-today:not-data-[selected]:text-(--ui-bg-inverted) data-[highlighted]:bg-(--ui-bg-inverted)/20 hover:not-data-[selected]:bg-(--ui-bg-inverted)/10'
+        headCell: 'text-highlighted',
+        cellTrigger: 'focus-visible:ring-inverted data-[selected]:bg-inverted data-today:not-data-[selected]:text-inverted data-[highlighted]:bg-inverted/20 hover:not-data-[selected]:bg-inverted/10'
       }
     },
     size: {

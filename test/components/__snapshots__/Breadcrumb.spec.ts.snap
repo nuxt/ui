@@ -3,11 +3,11 @@
 exports[`Breadcrumb > renders with as correctly 1`] = `
 "<div aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </div>"
@@ -16,11 +16,11 @@ exports[`Breadcrumb > renders with as correctly 1`] = `
 exports[`Breadcrumb > renders with class correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0 w-48">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -29,11 +29,11 @@ exports[`Breadcrumb > renders with class correctly 1`] = `
 exports[`Breadcrumb > renders with custom slot correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold">Custom slot</a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold">Custom slot</a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -42,11 +42,11 @@ exports[`Breadcrumb > renders with custom slot correctly 1`] = `
 exports[`Breadcrumb > renders with item slot correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors">Item slot</a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75">Item slot</span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors">Item slot</a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75">Item slot</span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -55,11 +55,11 @@ exports[`Breadcrumb > renders with item slot correctly 1`] = `
 exports[`Breadcrumb > renders with item-label slot correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Item label slot</span></a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Item label slot</span></span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Item label slot</span></a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Item label slot</span></span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -68,11 +68,11 @@ exports[`Breadcrumb > renders with item-label slot correctly 1`] = `
 exports[`Breadcrumb > renders with item-leading slot correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors">Item leading slot<span class="truncate">Home</span></a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75">Item leading slot<span class="truncate">Components</span></span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors">Item leading slot<span class="truncate">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75">Item leading slot<span class="truncate">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -81,11 +81,11 @@ exports[`Breadcrumb > renders with item-leading slot correctly 1`] = `
 exports[`Breadcrumb > renders with item-trailing slot correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span>Item trailing slot</a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span>Item trailing slot</span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span>Item trailing slot</a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span>Item trailing slot</span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -94,11 +94,11 @@ exports[`Breadcrumb > renders with item-trailing slot correctly 1`] = `
 exports[`Breadcrumb > renders with items correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -107,13 +107,13 @@ exports[`Breadcrumb > renders with items correctly 1`] = `
 exports[`Breadcrumb > renders with labelKey correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span>
         <!--v-if-->
       </a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">i-lucide-box</span></span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">i-lucide-link</span></a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">i-lucide-box</span></span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">i-lucide-link</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -122,11 +122,11 @@ exports[`Breadcrumb > renders with labelKey correctly 1`] = `
 exports[`Breadcrumb > renders with separator slot correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
     <li role="presentation" aria-hidden="true" class="flex">/</li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
     <li role="presentation" aria-hidden="true" class="flex">/</li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -135,11 +135,11 @@ exports[`Breadcrumb > renders with separator slot correctly 1`] = `
 exports[`Breadcrumb > renders with separatorIcon correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium hover:text-(--ui-text) transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:minus shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:minus shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium hover:text-default transition-colors"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:minus shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted font-medium cursor-not-allowed opacity-75"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:minus shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-semibold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"
@@ -148,11 +148,11 @@ exports[`Breadcrumb > renders with separatorIcon correctly 1`] = `
 exports[`Breadcrumb > renders with ui correctly 1`] = `
 "<nav aria-label="breadcrumb" class="relative min-w-0">
   <ol class="flex items-center gap-1.5">
-    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) hover:text-(--ui-text) transition-colors font-bold"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated) size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-text-muted) cursor-not-allowed opacity-75 font-bold"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
-    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-(--ui-text-muted)" aria-hidden="true"></span></li>
-    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-(--ui-primary) text-(--ui-primary) font-bold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
+    <li class="flex min-w-0"><a href="/" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted hover:text-default transition-colors font-bold"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><span class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-muted cursor-not-allowed opacity-75 font-bold"><span class="iconify i-lucide:box shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="flex"><span class="iconify i-lucide:chevron-right shrink-0 size-5 text-muted" aria-hidden="true"></span></li>
+    <li class="flex min-w-0"><a href="/components/breadcrumb" class="group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary text-primary font-bold"><span class="iconify i-lucide:link shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Breadcrumb</span></a></li>
     <!--v-if-->
   </ol>
 </nav>"

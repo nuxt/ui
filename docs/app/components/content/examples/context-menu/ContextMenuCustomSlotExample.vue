@@ -19,7 +19,7 @@ const items = [
 
 <template>
   <UContextMenu :items="items" :ui="{ content: 'w-48' }">
-    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
       Right click here
     </div>
 
@@ -28,7 +28,7 @@ const items = [
     </template>
 
     <template #refresh-trailing>
-      <UIcon v-if="loading" name="i-lucide-refresh-cw" class="shrink-0 size-5 text-(--ui-primary) animate-spin" />
+      <UIcon v-if="loading" name="i-lucide-refresh-cw" class="shrink-0 size-5 text-primary animate-spin" />
     </template>
   </UContextMenu>
 </template>

@@ -330,7 +330,7 @@ props:
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
-  class: 'data-[orientation=horizontal]:border-b border-(--ui-border) data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
+  class: 'data-[orientation=horizontal]:border-b border-default data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
 ---
 ::
 

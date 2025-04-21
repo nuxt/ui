@@ -162,7 +162,7 @@ const pagination = ref({
       class="flex-1"
     />
 
-    <div class="flex justify-center border-t border-(--ui-border) pt-4">
+    <div class="flex justify-center border-t border-default pt-4">
       <UPagination
         :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
         :items-per-page="table?.tableApi?.getState().pagination.pageSize"

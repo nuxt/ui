@@ -329,15 +329,15 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 <template>
   <div class="my-5">
     <div class="relative">
-      <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-(--ui-border-muted) border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
+      <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-muted border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
             :label="option.label"
             size="sm"
-            class="inline-flex ring ring-(--ui-border-accented) rounded-sm"
+            class="inline-flex ring ring-accented rounded-sm"
             :ui="{
-              wrapper: 'bg-(--ui-bg-elevated)/50 rounded-l-sm flex border-r border-(--ui-border-accented)',
-              label: 'text-(--ui-text-muted) px-2 py-1.5',
+              wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-accented',
+              label: 'text-muted px-2 py-1.5',
               container: 'mt-0'
             }"
           >
@@ -377,7 +377,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-(--ui-border-muted) relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]">
+      <div v-if="component" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">

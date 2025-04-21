@@ -130,7 +130,7 @@ const communityLinks = computed(() => [{
       </template>
 
       <template #title>
-        {{ page.title }}<sup v-if="page.module === 'ui-pro'" class="ml-1 text-xs align-super font-medium text-(--ui-primary)">PRO</sup>
+        {{ page.title }}<sup v-if="page.module === 'ui-pro'" class="ml-1 text-xs align-super font-medium text-primary">PRO</sup>
       </template>
 
       <template #description>
