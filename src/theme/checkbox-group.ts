@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => {
     slots: {
       root: 'relative',
       fieldset: 'relative flex',
-      legend: 'mb-1 block font-medium text-(--ui-text)',
+      legend: 'mb-1 block font-medium text-default',
       wrapper: 'w-full'
     },
     variants: {
@@ -44,7 +44,7 @@ export default (options: Required<ModuleOptions>) => {
       },
       required: {
         true: {
-          legend: 'after:content-[\'*\'] after:ms-0.5 after:text-(--ui-error)'
+          legend: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
         }
       }
     },

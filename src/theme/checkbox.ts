@@ -5,12 +5,12 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative',
     item: 'flex items-start',
     container: 'flex items-center',
-    base: 'shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2',
-    indicator: 'flex items-center justify-center size-full rounded-(--ui-radius) after:bg-(--ui-bg)',
+    base: 'shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2',
+    indicator: 'flex items-center justify-center size-full rounded-sm after:bg-default',
     icon: 'shrink-0 size-full',
     wrapper: 'ms-2 w-full',
-    label: 'block font-medium text-(--ui-text)',
-    description: 'text-(--ui-text-muted)'
+    label: 'block font-medium text-default',
+    description: 'text-muted'
   },
   variants: {
     color: {
@@ -21,10 +21,10 @@ export default (options: Required<ModuleOptions>) => ({
       list: {
       },
       card: {
-        item: 'items-center border border-(--ui-border-muted) rounded-lg'
+        item: 'items-center border border-muted rounded-lg'
       },
       table: {
-        item: 'border border-(--ui-border-muted)'
+        item: 'border border-muted'
       }
     },
     orientation: {
@@ -121,38 +121,38 @@ export default (options: Required<ModuleOptions>) => ({
       color,
       variant: 'card',
       class: {
-        item: `has-data-[state=checked]:border-(--ui-${color})`
+        item: `has-data-[state=checked]:border-${color}`
       }
     })),
     {
       color: 'neutral',
       variant: 'card',
       class: {
-        item: 'has-data-[state=checked]:border-(--ui-border-elevated)'
+        item: 'has-data-[state=checked]:border-elevated'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'table',
       class: {
-        item: `has-data-[state=checked]:bg-(--ui-${color})/10 has-data-[state=checked]:border-(--ui-${color})/50 has-data-[state=checked]:z-[1]`
+        item: `has-data-[state=checked]:bg-${color}/10 has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:z-[1]`
       }
     })),
     {
       color: 'neutral',
       variant: 'table',
       class: {
-        item: 'has-data-[state=checked]:bg-(--ui-bg-elevated) has-data-[state=checked]:border-(--ui-border-inverted)/25 has-data-[state=checked]:z-[1]'
+        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/25 has-data-[state=checked]:z-[1]'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       checked: true,
-      class: `ring-2 ring-(--ui-${color}) bg-(--ui-${color})`
+      class: `ring-2 ring-${color} bg-${color}`
     })), {
       color: 'neutral',
       checked: true,
-      class: 'ring-2 ring-(--ui-border-inverted) bg-(--ui-bg-inverted)'
+      class: 'ring-2 ring-inverted bg-inverted'
     }
   ],
   defaultVariants: {

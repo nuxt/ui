@@ -270,16 +270,16 @@ exports[`Table > renders with columns correctly 1`] = `
   <table class="min-w-full overflow-clip">
     <!--v-if-->
     <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
-      <tr class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
-        <th data-pinned="false" class="px-4 py-3.5 text-sm text-(--ui-text-highlighted) text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+      <tr class="data-[selected=true]:bg-elevated/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
           <div class="relative"><label class="flex items-start flex-row text-sm">
-              <div class="flex items-center h-5"><button arialabel="Select all" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+              <div class="flex items-center h-5"><button arialabel="Select all" class="shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary me-2 size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                   <!---->
                   <!---->
                 </button></div>
               <div class="ms-2 w-full">
-                <p class="block font-medium text-(--ui-text)" for="v-0"></p>
+                <p class="block font-medium text-default" for="v-0"></p>
                 <!--v-if-->
               </div>
             </label></div>
@@ -298,17 +298,17 @@ exports[`Table > renders with columns correctly 1`] = `
         </th>
       </tr>
     </thead>
-    <tbody class="divide-y divide-(--ui-border) [&amp;>tr]:data-[selectable=true]:hover:bg-(--ui-bg-elevated)/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-(--ui-primary)">
-      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
-        <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
+    <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <!---->
           <div class="relative"><label class="flex items-start flex-row text-sm">
-              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" id="v-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary me-2 size-4" id="v-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                   <!---->
                   <!---->
                 </button></div>
               <div class="ms-2 w-full">
-                <p class="block font-medium text-(--ui-text)" for="v-1"></p>
+                <p class="block font-medium text-default" for="v-1"></p>
                 <!--v-if-->
               </div>
             </label></div>
@@ -334,16 +334,16 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
       </tr>
       <!--v-if-->
-      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
-        <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <!---->
           <div class="relative"><label class="flex items-start flex-row text-sm">
-              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" id="v-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary me-2 size-4" id="v-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                   <!---->
                   <!---->
                 </button></div>
               <div class="ms-2 w-full">
-                <p class="block font-medium text-(--ui-text)" for="v-3"></p>
+                <p class="block font-medium text-default" for="v-3"></p>
                 <!--v-if-->
               </div>
             </label></div>
@@ -369,16 +369,16 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
       </tr>
       <!--v-if-->
-      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
-        <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <!---->
           <div class="relative"><label class="flex items-start flex-row text-sm">
-              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" id="v-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary me-2 size-4" id="v-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                   <!---->
                   <!---->
                 </button></div>
               <div class="ms-2 w-full">
-                <p class="block font-medium text-(--ui-text)" for="v-5"></p>
+                <p class="block font-medium text-default" for="v-5"></p>
                 <!--v-if-->
               </div>
             </label></div>
@@ -404,16 +404,16 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
       </tr>
       <!--v-if-->
-      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
-        <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <!---->
           <div class="relative"><label class="flex items-start flex-row text-sm">
-              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" id="v-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary me-2 size-4" id="v-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                   <!---->
                   <!---->
                 </button></div>
               <div class="ms-2 w-full">
-                <p class="block font-medium text-(--ui-text)" for="v-7"></p>
+                <p class="block font-medium text-default" for="v-7"></p>
                 <!--v-if-->
               </div>
             </label></div>
@@ -439,16 +439,16 @@ exports[`Table > renders with columns correctly 1`] = `
         </td>
       </tr>
       <!--v-if-->
-      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
-        <td data-pinned="false" class="p-4 text-sm text-(--ui-text-muted) whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
+        <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <!---->
           <div class="relative"><label class="flex items-start flex-row text-sm">
-              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" id="v-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+              <div class="flex items-center h-5"><button arialabel="Select row" class="shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary me-2 size-4" id="v-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                   <!---->
                   <!---->
                 </button></div>
               <div class="ms-2 w-full">
-                <p class="block font-medium text-(--ui-text)" for="v-9"></p>
+                <p class="block font-medium text-default" for="v-9"></p>
                 <!--v-if-->
               </div>
             </label></div>
@@ -553,16 +553,16 @@ exports[`Table > renders with empty slot correctly 1`] = `
   <table class="min-w-full overflow-clip">
     <!--v-if-->
     <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
-      <tr class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
-        <th data-pinned="false" class="px-4 py-3.5 text-sm text-(--ui-text-highlighted) text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+      <tr class="data-[selected=true]:bg-elevated/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
           <div class="relative"><label class="flex items-start flex-row text-sm">
-              <div class="flex items-center h-5"><button arialabel="Select all" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+              <div class="flex items-center h-5"><button arialabel="Select all" class="shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary me-2 size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                   <!---->
                   <!---->
                 </button></div>
               <div class="ms-2 w-full">
-                <p class="block font-medium text-(--ui-text)" for="v-0"></p>
+                <p class="block font-medium text-default" for="v-0"></p>
                 <!--v-if-->
               </div>
             </label></div>
@@ -1336,17 +1336,17 @@ exports[`Table > renders with loading slot correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-(--ui-primary) after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
-      <tr class="data-[selected=true]:bg-(--ui-bg-elevated)/50">
-        <th data-pinned="false" class="px-4 py-3.5 text-sm text-(--ui-text-highlighted) text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+      <tr class="data-[selected=true]:bg-elevated/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
           <div class="relative"><label class="flex items-start flex-row text-sm">
-              <div class="flex items-center h-5"><button arialabel="Select all" class="shrink-0 flex items-center justify-center rounded-(--ui-radius) text-(--ui-bg) ring ring-inset ring-(--ui-border-accented) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ui-primary) me-2 size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+              <div class="flex items-center h-5"><button arialabel="Select all" class="shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary me-2 size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                   <!---->
                   <!---->
                 </button></div>
               <div class="ms-2 w-full">
-                <p class="block font-medium text-(--ui-text)" for="v-0"></p>
+                <p class="block font-medium text-default" for="v-0"></p>
                 <!--v-if-->
               </div>
             </label></div>
