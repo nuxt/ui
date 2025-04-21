@@ -101,7 +101,7 @@ design_system:
     @import "@nuxt/ui";
 
     :root {
-      --ui-radius: var(--radius-sm);
+      --ui-radius: 0.25rem;
       --ui-container: 90rem;
       --ui-bg: var(--ui-color-neutral-50);
       --ui-text: var(--ui-color-neutral-900);

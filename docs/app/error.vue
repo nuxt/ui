@@ -26,7 +26,7 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
+    // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
   ],
   style: [
     { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
@@ -46,6 +46,8 @@ useServerSeoMeta({
   ogSiteName: 'Nuxt UI',
   twitterCard: 'summary_large_image'
 })
+
+useFaviconFromTheme()
 
 const { frameworks, modules } = useSharedData()
 const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)

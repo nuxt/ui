@@ -10,7 +10,8 @@ export default defineBuildConfig({
     replace: {
       delimiters: ['', ''],
       values: {
-        'process.argv.at(-1) === \'--uiDev\'': 'false'
+        // Used in development to import directly from theme
+        'const isUiDev = true': 'const isUiDev = false'
       }
     }
   },
