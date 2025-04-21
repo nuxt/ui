@@ -58,6 +58,7 @@ const slots = defineSlots<TooltipSlots>()
 const appConfig = useAppConfig() as Tooltip['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'delayDuration', 'disableHoverableContent', 'disableClosingTrigger', 'disabled', 'ignoreNonKeyboardFocus'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as TooltipContentProps)
 const arrowProps = toRef(() => props.arrow as TooltipArrowProps)
 
@@ -65,8 +66,6 @@ const arrowProps = toRef(() => props.arrow as TooltipArrowProps)
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })({
   side: contentProps.value.side
 }))
-
-const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <template>

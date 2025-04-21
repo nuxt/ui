@@ -57,6 +57,7 @@ const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']
 
 const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
+const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {
   switch (props.position) {
@@ -98,8 +99,6 @@ const frontHeight = computed(() => refs.value[refs.value.length - 1]?.height || 
 function getOffset(index: number) {
   return refs.value.slice(index + 1).reduce((acc, { height }) => acc + height + 16, 0)
 }
-
-const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <template>

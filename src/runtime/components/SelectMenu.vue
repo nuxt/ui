@@ -197,6 +197,7 @@ const appConfig = useAppConfig() as SelectMenu['AppConfig']
 const { contains } = useFilter({ sensitivity: 'base' })
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps)
@@ -338,8 +339,6 @@ function onSelect(e: Event, item: SelectMenuItem) {
 function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
   return typeof item === 'object' && item !== null
 }
-
-const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->

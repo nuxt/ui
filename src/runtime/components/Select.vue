@@ -158,6 +158,7 @@ const slots = defineSlots<SelectSlots<T, VK, M>>()
 const appConfig = useAppConfig() as Select['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
@@ -220,8 +221,6 @@ function onUpdateOpen(value: boolean) {
 function isSelectItem(item: SelectItem): item is SelectItemBase {
   return typeof item === 'object' && item !== null
 }
-
-const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->

@@ -63,6 +63,7 @@ const slots = defineSlots<DropdownMenuContentSlots<T>>()
 const { dir } = useLocale()
 const appConfig = useAppConfig()
 
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default'])
 
@@ -76,8 +77,6 @@ const groups = computed<DropdownMenuItem[][]>(() =>
       : [props.items]
     : []
 )
-
-const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <template>

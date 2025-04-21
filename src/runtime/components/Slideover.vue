@@ -95,6 +95,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Slideover['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
   const events = {
@@ -117,8 +118,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
   transition: props.transition,
   side: props.side
 }))
-
-const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <template>

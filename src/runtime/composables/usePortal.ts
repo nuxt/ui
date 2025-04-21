@@ -1,6 +1,6 @@
-import { inject, provide, computed, type ComputedRef, type InjectionKey, type Ref } from 'vue'
+import { inject, provide, computed, type Ref, type InjectionKey } from 'vue'
 
-export const portalTargetInjectionKey: InjectionKey<ComputedRef<string | HTMLElement>> = Symbol('nuxt-ui.portal-target')
+export const portalTargetInjectionKey: InjectionKey<Ref<string | HTMLElement>> = Symbol('nuxt-ui.portal-target')
 
 export function usePortal(portal: Ref<string | HTMLElement | boolean | undefined>) {
   const portalTarget = inject(portalTargetInjectionKey, undefined)
@@ -17,10 +17,8 @@ export function usePortal(portal: Ref<string | HTMLElement | boolean | undefined
 
   provide(portalTargetInjectionKey, computed(() => to.value))
 
-  return computed(() => (
-    {
-      to: to.value,
-      disabled: disabled.value
-    }
-  ))
+  return {
+    to: to.value,
+    disabled: disabled.value
+  }
 }

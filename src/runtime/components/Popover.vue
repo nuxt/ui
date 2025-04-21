@@ -68,6 +68,7 @@ const appConfig = useAppConfig() as Popover['AppConfig']
 
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardPropsEmits(pick, emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {
   if (!props.dismissible) {
@@ -88,8 +89,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.popover || {
 }))
 
 const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
-
-const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <template>

@@ -77,6 +77,7 @@ const slots = defineSlots<DrawerSlots>()
 const appConfig = useAppConfig() as Drawer['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = {
   closeAutoFocus: (e: Event) => e.preventDefault()
@@ -86,8 +87,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
   direction: props.direction,
   inset: props.inset
 }))
-
-const portalProps = usePortal(toRef(() => props.portal))
 </script>
 
 <template>

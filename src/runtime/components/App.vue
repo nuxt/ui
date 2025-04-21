@@ -19,7 +19,7 @@ export default {
 </script>
 
 <script setup lang="ts" generic="T extends Messages">
-import { toRef, useId, provide, computed } from 'vue'
+import { toRef, useId, provide } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { localeContextInjectionKey } from '../composables/useLocale'
@@ -40,7 +40,7 @@ const toasterProps = toRef(() => props.toaster)
 const locale = toRef(() => props.locale)
 provide(localeContextInjectionKey, locale)
 
-const portal = computed(() => props.portal)
+const portal = toRef(() => props.portal)
 provide(portalTargetInjectionKey, portal)
 </script>
 
