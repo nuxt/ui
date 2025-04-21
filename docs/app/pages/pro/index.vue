@@ -35,9 +35,9 @@ useSeoMeta({
       <LazyStarsBg />
 
       <Motion as-child :initial="{ height: 0 }" :animate="{ height: 'auto' }" :transition="{ delay: 0.2, duration: 1 }">
-        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       </Motion>
-      <div class="relative h-[400px] border border-(--ui-border) bg-(--ui-bg-muted) overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">
+      <div class="relative h-[400px] border border-default bg-muted overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">
         <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
           <img
             v-for="i in 4"
@@ -46,7 +46,7 @@ useSeoMeta({
             width="460"
             height="258"
             :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-(--ui-border) rounded-lg bg-white"
+            class="aspect-video border border-default rounded-lg bg-white"
           >
         </UPageMarquee>
         <UPageMarquee orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
@@ -57,7 +57,7 @@ useSeoMeta({
             width="460"
             height="258"
             :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-(--ui-border) rounded-lg bg-white"
+            class="aspect-video border border-default rounded-lg bg-white"
           >
         </UPageMarquee>
         <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
@@ -68,7 +68,7 @@ useSeoMeta({
             width="460"
             height="258"
             :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-(--ui-border) rounded-lg bg-white"
+            class="aspect-video border border-default rounded-lg bg-white"
           >
         </UPageMarquee>
       </div>
@@ -101,10 +101,10 @@ useSeoMeta({
         container: 'relative',
         wrapper: 'sm:px-8'
       }"
-      class="border-t border-(--ui-border)"
+      class="border-t border-default"
     >
       <Motion as-child :initial="{ height: 0 }" :while-in-view="{ height: 'auto' }" :transition="{ delay: 0.4, duration: 1 }">
-        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       </Motion>
     </UPageSection>
 
@@ -116,7 +116,7 @@ useSeoMeta({
         wrapper: 'grid grid-cols-1 lg:grid-cols-2',
         description: 'lg:mt-0' }"
       orientation="horizontal"
-      class="rounded-none border-t border-(--ui-border) bg-gradient-to-b from-(--ui-bg-elevated)/50 to-(--ui-bg)"
+      class="rounded-none border-t border-default bg-gradient-to-b from-elevated/50 to-default"
     >
       <template #title>
         <MDC :value="page.mainSection.title" tag="span" unwrap="p" cache-key="pro-main-section-title" />
@@ -134,7 +134,7 @@ useSeoMeta({
       :reverse="section.reverse"
       :features="section.features"
       orientation="horizontal"
-      :class="{ 'border-b border-(--ui-border)': index === page.sections.length - 1 }"
+      :class="{ 'border-b border-default': index === page.sections.length - 1 }"
       :ui="{
         container: index === 0 ? 'pb-0 sm:pb-0 lg:pb-0 py-16 sm:py-16 lg:py-16' : ''
       }"
@@ -145,10 +145,10 @@ useSeoMeta({
     <UPageSection
       id="templates"
       v-bind="page.templates"
-      class="overflow-hidden border-x border-(--ui-border)"
+      class="overflow-hidden border-x border-default"
       :ui="{ container: 'relative' }"
     >
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <UCarousel
         v-slot="{ item }"
         loop
@@ -160,7 +160,7 @@ useSeoMeta({
         :ui="{
           item: 'basis-1/2',
           container: 'py-2',
-          viewport: 'border-x border-(--ui-border)',
+          viewport: 'border-x border-default',
           arrows: 'hidden 2xl:block'
         }"
       >
@@ -181,7 +181,7 @@ useSeoMeta({
             :light="item.thumbnail.light"
             :dark="item.thumbnail.dark"
             :alt="item.title"
-            class="rounded-lg w-full border border-(--ui-border) aspect-video"
+            class="rounded-lg w-full border border-default aspect-video"
             loading="lazy"
           />
         </UPageCard>

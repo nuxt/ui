@@ -2,23 +2,23 @@
 import type { DeepReadonly } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId } from '../types/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput } from '../types/form'
 import type { ComponentConfig } from '../types/utils'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
 
-export interface FormProps<T extends object> {
+export interface FormProps<S extends FormSchema> {
   id?: string | number
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
-  schema?: FormSchema<T>
+  schema?: S
   /** An object representing the current state of the form. */
-  state: Partial<T>
+  state: Partial<InferInput<S>>
   /**
    * Custom validation function to validate the form state.
    * @param state - The current state of the form.
    * @returns A promise that resolves to an array of FormError objects, or an array of FormError objects directly.
    */
-  validate?: (state: Partial<T>) => Promise<FormError[]> | FormError[]
+  validate?: (state: Partial<InferInput<S>>) => Promise<FormError[]> | FormError[]
   /**
    * The list of input events that trigger the form validation.
    * @defaultValue `['blur', 'change', 'input']`
@@ -50,11 +50,11 @@ export interface FormProps<T extends object> {
    */
   loadingAuto?: boolean
   class?: any
-  onSubmit?: ((event: FormSubmitEvent<T>) => void | Promise<void>) | (() => void | Promise<void>)
+  onSubmit?: ((event: FormSubmitEvent<InferOutput<S>>) => void | Promise<void>) | (() => void | Promise<void>)
 }
 
-export interface FormEmits<T extends object> {
-  (e: 'submit', payload: FormSubmitEvent<T>): void
+export interface FormEmits<S extends FormSchema> {
+  (e: 'submit', payload: FormSubmitEvent<InferOutput<S>>): void
   (e: 'error', payload: FormErrorEvent): void
 }
 
@@ -63,7 +63,7 @@ export interface FormSlots {
 }
 </script>
 
-<script lang="ts" setup generic="T extends object">
+<script lang="ts" setup generic="S extends FormSchema">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -72,7 +72,10 @@ import { tv } from '../utils/tv'
 import { validateSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
-const props = withDefaults(defineProps<FormProps<T>>(), {
+type I = InferInput<S>
+type O = InferOutput<S>
+
+const props = withDefaults(defineProps<FormProps<S>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
@@ -82,7 +85,7 @@ const props = withDefaults(defineProps<FormProps<T>>(), {
   loadingAuto: true
 })
 
-const emits = defineEmits<FormEmits<T>>()
+const emits = defineEmits<FormEmits<S>>()
 defineSlots<FormSlots>()
 
 const appConfig = useAppConfig() as FormConfig['AppConfig']
@@ -91,7 +94,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) 
 
 const formId = props.id ?? useId() as string
 
-const bus = useEventBus<FormEvent<T>>(`form-${formId}`)
+const bus = useEventBus<FormEvent<I>>(`form-${formId}`)
 const parentBus = props.attach && inject(
   formBusInjectionKey,
   undefined
@@ -149,12 +152,12 @@ onUnmounted(() => {
 const errors = ref<FormErrorWithId[]>([])
 provide('form-errors', errors)
 
-const inputs = ref<{ [P in keyof T]?: { id?: string, pattern?: RegExp } }>({})
+const inputs = ref<{ [P in keyof I]?: { id?: string, pattern?: RegExp } }>({})
 provide(formInputsInjectionKey, inputs as any)
 
-const dirtyFields = new Set<keyof T>()
-const touchedFields = new Set<keyof T>()
-const blurredFields = new Set<keyof T>()
+const dirtyFields = new Set<keyof I>()
+const touchedFields = new Set<keyof I>()
+const blurredFields = new Set<keyof I>()
 
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
@@ -163,7 +166,7 @@ function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   }))
 }
 
-const transformedState = ref<T | null>(null)
+const transformedState = ref<O | null>(null)
 
 async function getErrors(): Promise<FormErrorWithId[]> {
   let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
@@ -180,12 +183,15 @@ async function getErrors(): Promise<FormErrorWithId[]> {
   return resolveErrorIds(errs)
 }
 
-async function _validate(opts: { name?: keyof T | (keyof T)[], silent?: boolean, nested?: boolean, transform?: boolean } = { silent: false, nested: true, transform: false }): Promise<T | false> {
-  const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof T)[]
+type ValidateOpts<Silent extends boolean> = { name?: keyof I | (keyof I)[], silent?: Silent, nested?: boolean, transform?: boolean }
+async function _validate(opts: ValidateOpts<false>): Promise<O>
+async function _validate(opts: ValidateOpts<true>): Promise<O | false>
+async function _validate(opts: ValidateOpts<boolean> = { silent: false, nested: true, transform: false }): Promise<O | false> {
+  const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof O)[]
 
   const nestedValidatePromises = !names && opts.nested
     ? Array.from(nestedForms.value.values()).map(
-        ({ validate }) => validate(opts).then(() => undefined).catch((error: Error) => {
+        ({ validate }) => validate(opts as any).then(() => undefined).catch((error: Error) => {
           if (!(error instanceof FormValidationException)) {
             throw error
           }
@@ -221,7 +227,7 @@ async function _validate(opts: { name?: keyof T | (keyof T)[], silent?: boolean,
     Object.assign(props.state, transformedState.value)
   }
 
-  return props.state as T
+  return props.state as O
 }
 
 const loading = ref(false)
@@ -230,7 +236,7 @@ provide(formLoadingInjectionKey, readonly(loading))
 async function onSubmitWrapper(payload: Event) {
   loading.value = props.loadingAuto && true
 
-  const event = payload as FormSubmitEvent<any>
+  const event = payload as FormSubmitEvent<O>
 
   try {
     event.data = await _validate({ nested: true, transform: props.transform })
@@ -259,11 +265,11 @@ provide(formOptionsInjectionKey, computed(() => ({
   validateOnInputDelay: props.validateOnInputDelay
 })))
 
-defineExpose<Form<T>>({
+defineExpose<Form<I>>({
   validate: _validate,
   errors,
 
-  setErrors(errs: FormError[], name?: keyof T) {
+  setErrors(errs: FormError[], name?: keyof I) {
     if (name) {
       errors.value = errors.value
         .filter(error => error.name !== name)
@@ -277,7 +283,7 @@ defineExpose<Form<T>>({
     await onSubmitWrapper(new Event('submit'))
   },
 
-  getErrors(name?: keyof T) {
+  getErrors(name?: keyof I) {
     if (name) {
       return errors.value.filter(err => err.name === name)
     }
@@ -296,9 +302,9 @@ defineExpose<Form<T>>({
   loading,
   dirty: computed(() => !!dirtyFields.size),
 
-  dirtyFields: readonly(dirtyFields) as DeepReadonly<Set<keyof T>>,
-  blurredFields: readonly(blurredFields) as DeepReadonly<Set<keyof T>>,
-  touchedFields: readonly(touchedFields) as DeepReadonly<Set<keyof T>>
+  dirtyFields: readonly(dirtyFields) as DeepReadonly<Set<keyof I>>,
+  blurredFields: readonly(blurredFields) as DeepReadonly<Set<keyof I>>,
+  touchedFields: readonly(touchedFields) as DeepReadonly<Set<keyof I>>
 })
 </script>
 

@@ -13,7 +13,7 @@ const maxLength = 15
     <template #trailing>
       <div
         id="character-count"
-        class="text-xs text-(--ui-text-muted) tabular-nums"
+        class="text-xs text-muted tabular-nums"
         aria-live="polite"
         role="status"
       >

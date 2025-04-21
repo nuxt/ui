@@ -57,7 +57,7 @@ onMounted(async () => {
 <template>
   <div class="relative">
     <div id="cursor1" class="absolute z-10 pointer-events-none" :style="{ opacity: 0 }">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-white dark:text-(--ui-bg)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-inverted">
         <path
           fill="var(--ui-info)"
           stroke="currentColor"
@@ -72,7 +72,7 @@ onMounted(async () => {
       </UBadge>
     </div>
     <div id="cursor2" class="absolute z-10 pointer-events-none" :style="{ opacity: 0 }">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-white dark:text-(--ui-bg)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-inverted">
         <path
           fill="var(--ui-success)"
           stroke="currentColor"
@@ -99,7 +99,7 @@ onMounted(async () => {
       <template #description>
         <MDC :value="page.hero.description" unwrap="p" cache-key="figma-hero-description" />
       </template>
-      <!-- <img src="/pro/figma/nuxt-ui-figma.png" alt="Screnshot of the Nuxt UI Figma design kit" class="w-full h-auto border border-(--ui-border) border-b-0"> -->
+      <!-- <img src="/pro/figma/nuxt-ui-figma.png" alt="Screnshot of the Nuxt UI Figma design kit" class="w-full h-auto border border-default border-b-0"> -->
       <div class="relative">
         <video
           ref="video"
@@ -126,10 +126,10 @@ onMounted(async () => {
         </div>
       </div>
       <Motion as-child :initial="{ height: 0 }" :animate="{ height: 'auto' }" :transition="{ delay: 0.2, duration: 1 }">
-        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       </Motion>
     </UPageHero>
-    <UPageSection v-bind="page.features1" :ui="{ container: 'py-16 sm:py-16 lg:py-16', features: 'mt-0' }" class="border-y border-(--ui-border)" />
+    <UPageSection v-bind="page.features1" :ui="{ container: 'py-16 sm:py-16 lg:py-16', features: 'mt-0' }" class="border-y border-default" />
     <UPageCTA
       v-if="page.cta1"
       variant="naked"
@@ -138,7 +138,7 @@ onMounted(async () => {
         wrapper: 'grid grid-cols-1 lg:grid-cols-2',
         description: 'lg:mt-0' }"
       orientation="horizontal"
-      class="rounded-none bg-gradient-to-b from-(--ui-bg-muted) to-(--ui-bg)"
+      class="rounded-none bg-gradient-to-b from-elevated/50 to-default"
     >
       <template #title>
         <MDC :value="page.cta1.title" unwrap="p" cache-key="figma-cta-1-title" />
@@ -192,8 +192,8 @@ onMounted(async () => {
       <template #description>
         <MDC :value="page.section4.description" unwrap="p" cache-key="figma-section-4-description" />
       </template>
-      <div aria-hidden="true" class="absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center border border-(--ui-border) border-b-0 sm:divide-x divide-y lg:divide-y-0 divide-(--ui-border)">
+      <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center border border-default border-b-0 sm:divide-x divide-y lg:divide-y-0 divide-default">
         <li v-for="(step, index) in page?.section4.steps" :key="step.title" class="flex flex-col gap-y-4 justify-start group h-full p-4">
           <NuxtImg
             v-if="step.image"
@@ -205,14 +205,14 @@ onMounted(async () => {
             <h2 class="font-semibold inline-flex items-center gap-x-1">
               <UBadge :label="index + 1" size="sm" color="neutral" variant="subtle" class="rounded-full tabular-nums" /> {{ step.title }}
             </h2>
-            <p class="text-(--ui-text-muted) text-sm">
+            <p class="text-muted text-sm">
               {{ step.description }}
             </p>
           </div>
         </li>
       </ul>
     </UPageSection>
-    <UPageSection v-bind="page.features2" :ui="{ container: 'py-16 sm:py-16 lg:py-16', features: 'mt-0' }" class="border-y border-(--ui-border)" />
+    <UPageSection v-bind="page.features2" :ui="{ container: 'py-16 sm:py-16 lg:py-16', features: 'mt-0' }" class="border-y border-default" />
     <UPageSection
       v-if="page.pricing"
       :title="page.pricing.title"
@@ -226,7 +226,7 @@ onMounted(async () => {
         wrapper: 'sm:pl-8'
       }"
     >
-      <div aria-hidden="true" class="absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <UPricingPlans compact class="-space-x-px">
         <UPricingPlan
           v-for="(plan, index) in page.pricing.plans"
@@ -246,8 +246,8 @@ onMounted(async () => {
         >
           <template #features>
             <li v-for="(feature, i) in plan.features" :key="i" class="flex items-center gap-2 min-w-0">
-              <UIcon name="i-lucide-circle-check" class="size-5 shrink-0 text-(--ui-primary)" />
-              <MDC :value="feature" unwrap="p" tag="span" class="text-sm truncate text-(--ui-text-accented)" :cache-key="`figma-pricing-plan-${index}-feature-${i}`" />
+              <UIcon name="i-lucide-circle-check" class="size-5 shrink-0 text-primary" />
+              <MDC :value="feature" unwrap="p" tag="span" class="text-sm truncate text-accented" :cache-key="`figma-pricing-plan-${index}-feature-${i}`" />
             </li>
           </template>
           <template #button>
@@ -278,7 +278,7 @@ onMounted(async () => {
       </UPageMarquee>
     </UPageCTA>
     <UPageSection v-bind="page.faq" :ui="{ container: 'relative' }">
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <UPageAccordion
         multiple
         :items="(page.faq.items as any[])"

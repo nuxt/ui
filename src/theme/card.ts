@@ -8,16 +8,16 @@ export default {
   variants: {
     variant: {
       solid: {
-        root: 'bg-(--ui-bg-inverted) text-(--ui-bg)'
+        root: 'bg-inverted text-inverted'
       },
       outline: {
-        root: 'bg-(--ui-bg) ring ring-(--ui-border) divide-y divide-(--ui-border)'
+        root: 'bg-default ring ring-default divide-y divide-default'
       },
       soft: {
-        root: 'bg-(--ui-bg-elevated)/50 divide-y divide-(--ui-border)'
+        root: 'bg-elevated/50 divide-y divide-default'
       },
       subtle: {
-        root: 'bg-(--ui-bg-elevated)/50 ring ring-(--ui-border) divide-y divide-(--ui-border)'
+        root: 'bg-elevated/50 ring ring-default divide-y divide-default'
       }
     }
   },

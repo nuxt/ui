@@ -1,7 +1,7 @@
 export default {
   slots: {
     root: 'inline-flex flex-row-reverse justify-end',
-    base: 'relative rounded-full ring-(--ui-bg) first:me-0'
+    base: 'relative rounded-full ring-bg first:me-0'
   },
   variants: {
     size: {

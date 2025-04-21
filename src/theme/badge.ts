@@ -58,35 +58,35 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `bg-(--ui-${color}) text-(--ui-bg)`
+    class: `bg-${color} text-inverted`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
-    class: `text-(--ui-${color}) ring ring-inset ring-(--ui-${color})/50`
+    class: `text-${color} ring ring-inset ring-${color}/50`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
-    class: `bg-(--ui-${color})/10 text-(--ui-${color})`
+    class: `bg-${color}/10 text-${color}`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
-    class: `bg-(--ui-${color})/10 text-(--ui-${color}) ring ring-inset ring-(--ui-${color})/25`
+    class: `bg-${color}/10 text-${color} ring ring-inset ring-${color}/25`
   })), {
     color: 'neutral',
     variant: 'solid',
-    class: 'text-(--ui-bg) bg-(--ui-bg-inverted)'
+    class: 'text-inverted bg-inverted'
   }, {
     color: 'neutral',
     variant: 'outline',
-    class: 'ring ring-inset ring-(--ui-border-accented) text-(--ui-text) bg-(--ui-bg)'
+    class: 'ring ring-inset ring-accented text-default bg-default'
   }, {
     color: 'neutral',
     variant: 'soft',
-    class: 'text-(--ui-text) bg-(--ui-bg-elevated)'
+    class: 'text-default bg-elevated'
   }, {
     color: 'neutral',
     variant: 'subtle',
-    class: 'ring ring-inset ring-(--ui-border-accented) text-(--ui-text) bg-(--ui-bg-elevated)'
+    class: 'ring ring-inset ring-accented text-default bg-elevated'
   }],
   defaultVariants: {
     color: 'primary',

@@ -5,14 +5,14 @@ exports[`Slideover > renders with body slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -30,14 +30,14 @@ exports[`Slideover > renders with bottom side correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="bottom" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none inset-x-0 bottom-0 max-h-full data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-bottom_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="bottom" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none inset-x-0 bottom-0 max-h-full data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-bottom_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -55,14 +55,14 @@ exports[`Slideover > renders with class correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out] bg-(--ui-bg-elevated)">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out] bg-elevated">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -80,8 +80,8 @@ exports[`Slideover > renders with close slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
@@ -102,14 +102,14 @@ exports[`Slideover > renders with closeIcon correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -127,8 +127,8 @@ exports[`Slideover > renders with content slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->Content slot
 </div>
 
@@ -141,14 +141,14 @@ exports[`Slideover > renders with default slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="reka-dialog-content-v-0-0-0" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="reka-dialog-content-v-0-0-0" role="dialog" aria-describedby="reka-dialog-description-v-0-0-2" aria-labelledby="reka-dialog-title-v-0-0-1" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -166,14 +166,14 @@ exports[`Slideover > renders with description correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -191,14 +191,14 @@ exports[`Slideover > renders with description slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
       <!--v-if-->
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description slot</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description slot</p>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -216,14 +216,14 @@ exports[`Slideover > renders with footer slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -241,8 +241,8 @@ exports[`Slideover > renders with header slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">Header slot</div>
   <div class="flex-1 overflow-y-auto p-4 sm:p-6"></div>
@@ -258,14 +258,14 @@ exports[`Slideover > renders with left side correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="left" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none left-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-left_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-left_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="left" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none left-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-left_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-left_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -283,14 +283,14 @@ exports[`Slideover > renders with open correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]" style="pointer-events: auto;">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]" style="pointer-events: auto;">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -308,14 +308,14 @@ exports[`Slideover > renders with title correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
+      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -333,14 +333,14 @@ exports[`Slideover > renders with title slot correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title slot</h2>
+      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title slot</h2>
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -358,14 +358,14 @@ exports[`Slideover > renders with top side correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="top" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none inset-x-0 top-0 max-h-full data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-top_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="top" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none inset-x-0 top-0 max-h-full data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-top_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -383,14 +383,14 @@ exports[`Slideover > renders with ui correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
       <!--v-if-->
       <!--v-if-->
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-2"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-2"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -408,13 +408,13 @@ exports[`Slideover > renders without close correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p>
+      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
     </div>
     <!--v-if-->
   </div>
@@ -432,13 +432,13 @@ exports[`Slideover > renders without overlay correctly 1`] = `
 
 
 <!--v-if-->
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -456,14 +456,14 @@ exports[`Slideover > renders without transition correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-(--ui-bg-elevated)/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-(--ui-bg) divide-y divide-(--ui-border) sm:ring ring-(--ui-border) sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md">
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open" data-side="right" tabindex="-1" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md">
   <!--v-if-->
   <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
     <div class="">
-      <h2 id="reka-dialog-title-v-0-0-0" class="text-(--ui-text-highlighted) font-semibold">Title</h2>
-      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-(--ui-text-muted) text-sm">Description</p>
-    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-(--ui-text) hover:bg-(--ui-bg-elevated) focus:outline-none focus-visible:bg-(--ui-bg-elevated) hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      <h2 id="reka-dialog-title-v-0-0-0" class="text-highlighted font-semibold">Title</h2>
+      <p id="reka-dialog-description-v-0-0-1" class="mt-1 text-muted text-sm">Description</p>
+    </div><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
       <!--v-if-->
     </button>

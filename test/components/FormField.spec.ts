@@ -72,7 +72,7 @@ describe('FormField', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Username', description: 'Enter your username', size } }]),
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'relative' } }],
-    ['with ui', { props: { ui: { label: 'text-(--ui-text-highlighted)' } } }],
+    ['with ui', { props: { ui: { label: 'text-highlighted' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with label slot', { slots: { label: () => 'Label slot' } }],

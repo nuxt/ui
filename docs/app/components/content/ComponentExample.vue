@@ -150,8 +150,8 @@ const urlSearchParams = computed(() => {
 <template>
   <div ref="el" class="my-5">
     <template v-if="preview">
-      <div class="border border-(--ui-border-muted) relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
-        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-(--ui-border-muted)">
+      <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
+        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">
           <slot name="options" />
 
           <UFormField
@@ -160,10 +160,10 @@ const urlSearchParams = computed(() => {
             :label="option.label"
             :name="option.name"
             size="sm"
-            class="inline-flex ring ring-(--ui-border-accented) rounded-sm"
+            class="inline-flex ring ring-accented rounded-sm"
             :ui="{
-              wrapper: 'bg-(--ui-bg-elevated)/50 rounded-l-sm flex border-r border-(--ui-border-accented)',
-              label: 'text-(--ui-text-muted) px-2 py-1.5',
+              wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-accented',
+              label: 'text-muted px-2 py-1.5',
               container: 'mt-0'
             }"
           >

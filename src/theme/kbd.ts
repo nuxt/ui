@@ -2,9 +2,9 @@ export default {
   base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans',
   variants: {
     variant: {
-      solid: 'bg-(--ui-bg-inverted) text-(--ui-bg)',
-      outline: 'bg-(--ui-bg) text-(--ui-text-highlighted) ring ring-inset ring-(--ui-border-accented)',
-      subtle: 'bg-(--ui-bg-elevated) text-(--ui-text) ring ring-inset ring-(--ui-border-accented)'
+      solid: 'bg-inverted text-inverted',
+      outline: 'bg-default text-highlighted ring ring-inset ring-accented',
+      subtle: 'bg-elevated text-default ring ring-inset ring-accented'
     },
     size: {
       sm: 'h-4 min-w-[16px] text-[10px]',

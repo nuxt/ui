@@ -69,7 +69,7 @@ function setBlackAsPrimary(value: boolean) {
         :variant="open ? 'soft' : 'ghost'"
         square
         aria-label="Color picker"
-        :ui="{ leadingIcon: 'text-(--ui-primary)' }"
+        :ui="{ leadingIcon: 'text-primary' }"
       />
     </template>
 

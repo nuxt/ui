@@ -99,12 +99,12 @@ props:
 slots:
   default: |
 
-    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
       Right click here
     </div>
 ---
 
-:div{class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"}[Right click here]
+:div{class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"}[Right click here]
 ::
 
 ::note
@@ -143,12 +143,12 @@ props:
 slots:
   default: |
 
-    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
       Right click here
     </div>
 ---
 
-:div{class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"}[Right click here]
+:div{class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"}[Right click here]
 ::
 
 ### Disabled
@@ -179,12 +179,12 @@ props:
 slots:
   default: |
 
-    <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
       Right click here
     </div>
 ---
 
-:div{class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"}[Right click here]
+:div{class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"}[Right click here]
 ::
 
 ## Examples

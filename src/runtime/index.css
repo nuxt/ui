@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply antialiased text-(--ui-text) bg-(--ui-bg) scheme-light dark:scheme-dark;
+    @apply antialiased text-default bg-default scheme-light dark:scheme-dark;
   }
 
   :root, .light {
@@ -15,6 +15,7 @@
     --ui-text-toned: var(--ui-color-neutral-600);
     --ui-text: var(--ui-color-neutral-700);
     --ui-text-highlighted: var(--ui-color-neutral-900);
+    --ui-text-inverted: var(--color-white);
 
     --ui-bg: var(--color-white);
     --ui-bg-muted: var(--ui-color-neutral-50);
@@ -37,6 +38,7 @@
     --ui-text-toned: var(--ui-color-neutral-300);
     --ui-text: var(--ui-color-neutral-200);
     --ui-text-highlighted: var(--color-white);
+    --ui-text-inverted: var(--ui-color-neutral-900);
 
     --ui-bg: var(--ui-color-neutral-900);
     --ui-bg-muted: var(--ui-color-neutral-800);

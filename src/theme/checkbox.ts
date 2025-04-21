@@ -14,8 +14,8 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-(--ui-${color})`])),
-      neutral: 'focus-visible:outline-(--ui-border-inverted)'
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `focus-visible:outline-${color}`])),
+      neutral: 'focus-visible:outline-inverted'
     },
     variant: {
       list: {
@@ -83,7 +83,7 @@ export default (options: Required<ModuleOptions>) => ({
 
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-(--ui-error)'
+        label: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
       }
     },
     disabled: {
@@ -97,7 +97,6 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     }
   },
-
   compoundVariants: [
     { size: 'xs', variant: ['card', 'table'], class: { item: 'p-2.5' } },
     { size: 'sm', variant: ['card', 'table'], class: { item: 'p-3' } },

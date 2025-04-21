@@ -2,13 +2,13 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    overlay: 'fixed inset-0 bg-(--ui-bg-elevated)/75',
-    content: 'fixed bg-(--ui-bg) ring ring-(--ui-border) flex focus:outline-none',
-    handle: ['shrink-0 !bg-(--ui-bg-accented)', options.theme.transitions && 'transition-opacity'],
+    overlay: 'fixed inset-0 bg-elevated/75',
+    content: 'fixed bg-default ring ring-default flex focus:outline-none',
+    handle: ['shrink-0 !bg-accented', options.theme.transitions && 'transition-opacity'],
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: '',
-    title: 'text-(--ui-text-highlighted) font-semibold',
-    description: 'mt-1 text-(--ui-text-muted) text-sm',
+    title: 'text-highlighted font-semibold',
+    description: 'mt-1 text-muted text-sm',
     body: 'flex-1',
     footer: 'flex flex-col gap-1.5'
   },
