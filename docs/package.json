@@ -5,7 +5,7 @@
   "dependencies": {
     "@ai-sdk/vue": "^1.2.8",
     "@iconify-json/logos": "^1.2.4",
-    "@iconify-json/lucide": "^1.2.36",
+    "@iconify-json/lucide": "^1.2.37",
     "@iconify-json/simple-icons": "^1.2.32",
     "@iconify-json/vscode-icons": "^1.2.19",
     "@nuxt/content": "https://pkg.pr.new/@nuxt/content@754e480",
@@ -18,14 +18,14 @@
     "@rollup/plugin-yaml": "^4.1.2",
     "@vueuse/integrations": "^13.1.0",
     "@vueuse/nuxt": "^13.1.0",
-    "ai": "^4.3.6",
+    "ai": "^4.3.9",
     "capture-website": "^4.2.0",
     "joi": "^17.13.3",
     "motion-v": "0.13.1",
     "nuxt": "^3.16.2",
     "nuxt-component-meta": "^0.10.1",
     "nuxt-llms": "^0.1.2",
-    "nuxt-og-image": "^5.1.1",
+    "nuxt-og-image": "^5.1.2",
     "prettier": "^3.5.3",
     "shiki-transformer-color-highlight": "^1.0.0",
     "sortablejs": "^1.15.6",
@@ -34,9 +34,9 @@
     "valibot": "^1.0.0",
     "workers-ai-provider": "^0.3.0",
     "yup": "^1.6.1",
-    "zod": "^3.24.2"
+    "zod": "^3.24.3"
   },
   "devDependencies": {
-    "wrangler": "^4.10.0"
+    "wrangler": "^4.12.0"
   }
 }
