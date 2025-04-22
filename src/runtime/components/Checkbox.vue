@@ -121,8 +121,8 @@ function onUpdate(value: any) {
       </CheckboxRoot>
     </div>
 
-    <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <component :is="variant === 'list' ? Label : 'p'" :class="ui.label({ class: props.ui?.label })" :for="id">
+    <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <component :is="variant === 'list' ? Label : 'p'" v-if="label || !!slots.label" :for="id" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="label">
           {{ label }}
         </slot>

@@ -9,7 +9,7 @@ exports[`CheckboxGroup > renders with ariaLabel correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -18,7 +18,7 @@ exports[`CheckboxGroup > renders with ariaLabel correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -27,7 +27,7 @@ exports[`CheckboxGroup > renders with ariaLabel correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -45,7 +45,7 @@ exports[`CheckboxGroup > renders with as correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -54,7 +54,7 @@ exports[`CheckboxGroup > renders with as correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -63,7 +63,7 @@ exports[`CheckboxGroup > renders with as correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -81,7 +81,7 @@ exports[`CheckboxGroup > renders with class correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -90,7 +90,7 @@ exports[`CheckboxGroup > renders with class correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -99,7 +99,7 @@ exports[`CheckboxGroup > renders with class correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -116,7 +116,7 @@ exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -125,7 +125,7 @@ exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -134,7 +134,7 @@ exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -152,7 +152,7 @@ exports[`CheckboxGroup > renders with description correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <p class="text-muted">Description 0</p>
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -161,7 +161,7 @@ exports[`CheckboxGroup > renders with description correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <p class="text-muted">Description 1</p>
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -170,7 +170,7 @@ exports[`CheckboxGroup > renders with description correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <p class="text-muted">Description 2</p>
       </div>
     </label>
@@ -188,7 +188,7 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -197,7 +197,7 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -206,7 +206,7 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -224,7 +224,7 @@ exports[`CheckboxGroup > renders with descriptionKey correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <p class="text-muted">1</p>
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -233,7 +233,7 @@ exports[`CheckboxGroup > renders with descriptionKey correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <p class="text-muted">2</p>
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -242,7 +242,7 @@ exports[`CheckboxGroup > renders with descriptionKey correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <p class="text-muted">3</p>
       </div>
     </label>
@@ -260,7 +260,7 @@ exports[`CheckboxGroup > renders with disabled correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default cursor-not-allowed opacity-75" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default cursor-not-allowed opacity-75">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -269,7 +269,7 @@ exports[`CheckboxGroup > renders with disabled correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default cursor-not-allowed opacity-75" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default cursor-not-allowed opacity-75">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -278,7 +278,7 @@ exports[`CheckboxGroup > renders with disabled correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default cursor-not-allowed opacity-75" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default cursor-not-allowed opacity-75">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -295,7 +295,7 @@ exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
@@ -304,7 +304,7 @@ exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
@@ -313,7 +313,7 @@ exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -365,7 +365,7 @@ exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full me-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row-reverse">
@@ -374,7 +374,7 @@ exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full me-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row-reverse">
@@ -383,7 +383,7 @@ exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full me-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -400,7 +400,7 @@ exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full text-center text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start">
@@ -409,7 +409,7 @@ exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full text-center text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start">
@@ -418,7 +418,7 @@ exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full text-center text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -435,7 +435,7 @@ exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -444,7 +444,7 @@ exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -453,7 +453,7 @@ exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -471,7 +471,7 @@ exports[`CheckboxGroup > renders with items correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -480,7 +480,7 @@ exports[`CheckboxGroup > renders with items correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -489,7 +489,7 @@ exports[`CheckboxGroup > renders with items correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -507,7 +507,7 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -516,7 +516,7 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -525,7 +525,7 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -543,7 +543,7 @@ exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -552,7 +552,7 @@ exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -561,7 +561,7 @@ exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">3</p>
         <!--v-if-->
       </div>
     </label>
@@ -579,7 +579,7 @@ exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -588,7 +588,7 @@ exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -597,7 +597,7 @@ exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -614,7 +614,7 @@ exports[`CheckboxGroup > renders with modelValue correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -623,7 +623,7 @@ exports[`CheckboxGroup > renders with modelValue correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -632,7 +632,7 @@ exports[`CheckboxGroup > renders with modelValue correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -649,7 +649,7 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-inverted">
@@ -658,7 +658,7 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-inverted">
@@ -667,7 +667,7 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -719,7 +719,7 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
@@ -728,7 +728,7 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
@@ -737,7 +737,7 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -790,7 +790,7 @@ exports[`CheckboxGroup > renders with required correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -799,7 +799,7 @@ exports[`CheckboxGroup > renders with required correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -808,7 +808,7 @@ exports[`CheckboxGroup > renders with required correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -825,7 +825,7 @@ exports[`CheckboxGroup > renders with size lg correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -834,7 +834,7 @@ exports[`CheckboxGroup > renders with size lg correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -843,7 +843,7 @@ exports[`CheckboxGroup > renders with size lg correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -860,7 +860,7 @@ exports[`CheckboxGroup > renders with size md correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -869,7 +869,7 @@ exports[`CheckboxGroup > renders with size md correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -878,7 +878,7 @@ exports[`CheckboxGroup > renders with size md correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -895,7 +895,7 @@ exports[`CheckboxGroup > renders with size sm correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-xs">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -904,7 +904,7 @@ exports[`CheckboxGroup > renders with size sm correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-xs">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -913,7 +913,7 @@ exports[`CheckboxGroup > renders with size sm correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-xs">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -930,7 +930,7 @@ exports[`CheckboxGroup > renders with size xl correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-base">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -939,7 +939,7 @@ exports[`CheckboxGroup > renders with size xl correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-base">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -948,7 +948,7 @@ exports[`CheckboxGroup > renders with size xl correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-base">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -965,7 +965,7 @@ exports[`CheckboxGroup > renders with size xs correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-xs">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -974,7 +974,7 @@ exports[`CheckboxGroup > renders with size xs correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-xs">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -983,7 +983,7 @@ exports[`CheckboxGroup > renders with size xs correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-xs">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -1001,7 +1001,7 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:1">Option 1</p>
+        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -1010,7 +1010,7 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:2">Option 2</p>
+        <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -1019,7 +1019,7 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:3">Option 3</p>
+        <p for="v-0-0:3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -1037,7 +1037,7 @@ exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:Option 1">Option 1</p>
+        <p for="v-0-0:Option 1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -1046,7 +1046,7 @@ exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:Option 2">Option 2</p>
+        <p for="v-0-0:Option 2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -1055,7 +1055,7 @@ exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p class="block font-medium text-default" for="v-0-0:Option 3">Option 3</p>
+        <p for="v-0-0:Option 3" class="block font-medium text-default">Option 3</p>
         <!--v-if-->
       </div>
     </label>

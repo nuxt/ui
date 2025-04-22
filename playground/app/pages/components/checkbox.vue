@@ -18,7 +18,7 @@ const checked = ref(true)
     </div>
 
     <div class="flex flex-col gap-4">
-      <UCheckbox v-model="checked" label="Primary" :variant="variant" :indicator="indicator" orientation="horizontal" />
+      <UCheckbox v-model="checked" :variant="variant" :indicator="indicator" orientation="horizontal" />
       <UCheckbox label="Neutral" color="neutral" :variant="variant" :indicator="indicator" :default-value="true" />
       <UCheckbox label="Error" color="error" :variant="variant" :indicator="indicator" :model-value="true" />
       <UCheckbox label="Icon" icon="i-lucide-heart" :variant="variant" :indicator="indicator" :model-value="true" />

@@ -188,8 +188,8 @@ function onUpdate(value: any) {
           </RadioGroupItem>
         </div>
 
-        <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-          <component :is="variant === 'list' ? Label : 'p'" :class="ui.label({ class: props.ui?.label })" :for="item.id">
+        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
+          <component :is="variant === 'list' ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" :class="ui.label({ class: props.ui?.label })">
             <slot name="label" :item="item" :model-value="(modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>

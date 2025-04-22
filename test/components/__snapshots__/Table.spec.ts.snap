@@ -276,10 +276,7 @@ exports[`Table > renders with columns correctly 1`] = `
                 <!---->
                 <!---->
               </button></div>
-            <div class="w-full ms-2 text-sm">
-              <p class="block font-medium text-default" for="v-0-0-0"></p>
-              <!--v-if-->
-            </div>
+            <!--v-if-->
           </label></th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
@@ -302,10 +299,7 @@ exports[`Table > renders with columns correctly 1`] = `
                 <!---->
                 <!---->
               </button></div>
-            <div class="w-full ms-2 text-sm">
-              <p class="block font-medium text-default" for="v-0-0-1"></p>
-              <!--v-if-->
-            </div>
+            <!--v-if-->
           </label></td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">#m5gr84i9</td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">Invalid Date</td>
@@ -334,10 +328,7 @@ exports[`Table > renders with columns correctly 1`] = `
                 <!---->
                 <!---->
               </button></div>
-            <div class="w-full ms-2 text-sm">
-              <p class="block font-medium text-default" for="v-0-0-3"></p>
-              <!--v-if-->
-            </div>
+            <!--v-if-->
           </label></td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">#3u1reuv4</td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">Invalid Date</td>
@@ -366,10 +357,7 @@ exports[`Table > renders with columns correctly 1`] = `
                 <!---->
                 <!---->
               </button></div>
-            <div class="w-full ms-2 text-sm">
-              <p class="block font-medium text-default" for="v-0-0-5"></p>
-              <!--v-if-->
-            </div>
+            <!--v-if-->
           </label></td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">#derv1ws0</td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">Invalid Date</td>
@@ -398,10 +386,7 @@ exports[`Table > renders with columns correctly 1`] = `
                 <!---->
                 <!---->
               </button></div>
-            <div class="w-full ms-2 text-sm">
-              <p class="block font-medium text-default" for="v-0-0-7"></p>
-              <!--v-if-->
-            </div>
+            <!--v-if-->
           </label></td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">#5kma53ae</td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">Invalid Date</td>
@@ -430,10 +415,7 @@ exports[`Table > renders with columns correctly 1`] = `
                 <!---->
                 <!---->
               </button></div>
-            <div class="w-full ms-2 text-sm">
-              <p class="block font-medium text-default" for="v-0-0-9"></p>
-              <!--v-if-->
-            </div>
+            <!--v-if-->
           </label></td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">#bhqecj4p</td>
         <td data-pinned="false" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">Invalid Date</td>
@@ -541,10 +523,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
                 <!---->
                 <!---->
               </button></div>
-            <div class="w-full ms-2 text-sm">
-              <p class="block font-medium text-default" for="v-0-0-0"></p>
-              <!--v-if-->
-            </div>
+            <!--v-if-->
           </label></th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
@@ -1322,10 +1301,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
                 <!---->
                 <!---->
               </button></div>
-            <div class="w-full ms-2 text-sm">
-              <p class="block font-medium text-default" for="v-0-0-0"></p>
-              <!--v-if-->
-            </div>
+            <!--v-if-->
           </label></th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
