@@ -69,7 +69,7 @@ function setBlackAsPrimary(value: boolean) {
         :variant="open ? 'soft' : 'ghost'"
         square
         aria-label="Color picker"
-        :ui="{ leadingIcon: 'text-(--ui-primary)' }"
+        :ui="{ leadingIcon: 'text-primary' }"
       />
     </template>
 
@@ -111,7 +111,7 @@ function setBlackAsPrimary(value: boolean) {
             v-for="color in neutralColors"
             :key="color"
             :label="color"
-            :chip="color"
+            :chip="color === 'neutral' ? 'old-neutral' : color"
             :selected="neutral === color"
             @click="neutral = color"
           />

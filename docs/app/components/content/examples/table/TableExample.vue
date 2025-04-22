@@ -145,12 +145,12 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ table }) => h(UCheckbox, {
     'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
-    'ariaLabel': 'Select all'
+    'aria-label': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
-    'ariaLabel': 'Select row'
+    'aria-label': 'Select row'
   }),
   enableSorting: false,
   enableHiding: false
@@ -242,15 +242,17 @@ const columns: TableColumn<Payment>[] = [{
     }]
 
     return h('div', { class: 'text-right' }, h(UDropdownMenu, {
-      content: {
+      'content': {
         align: 'end'
       },
-      items
+      items,
+      'aria-label': 'Actions dropdown'
     }, () => h(UButton, {
-      icon: 'i-lucide-ellipsis-vertical',
-      color: 'neutral',
-      variant: 'ghost',
-      class: 'ml-auto'
+      'icon': 'i-lucide-ellipsis-vertical',
+      'color': 'neutral',
+      'variant': 'ghost',
+      'class': 'ml-auto',
+      'aria-label': 'Actions dropdown'
     })))
   }
 }]
@@ -263,7 +265,7 @@ function randomize() {
 </script>
 
 <template>
-  <div class="flex-1 divide-y divide-(--ui-border-accented) w-full">
+  <div class="flex-1 divide-y divide-accented w-full">
     <div class="flex items-center gap-2 px-4 py-3.5 overflow-x-auto">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
@@ -294,6 +296,7 @@ function randomize() {
           variant="outline"
           trailing-icon="i-lucide-chevron-down"
           class="ml-auto"
+          aria-label="Columns select dropdown"
         />
       </UDropdownMenu>
     </div>
@@ -310,7 +313,7 @@ function randomize() {
       </template>
     </UTable>
 
-    <div class="px-4 py-3.5 text-sm text-(--ui-text-muted)">
+    <div class="px-4 py-3.5 text-sm text-muted">
       {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
       {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
     </div>

@@ -1,26 +1,28 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
-import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
+import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
-import { tv } from '../utils/tv'
-import type { PartialString } from '../types/utils'
+import type { ButtonProps } from '../types'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigCalendar = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
+type Calendar = ComponentConfig<typeof theme, AppConfig, 'calendar'>
 
-const calendar = tv({ extend: tv(theme), ...(appConfigCalendar.ui?.calendar || {}) })
-
-type CalendarVariants = VariantProps<typeof calendar>
-
-type CalendarModelValue<R extends boolean = false, M extends boolean = false> = R extends true
+type CalendarDefaultValue<R extends boolean = false, M extends boolean = false> = R extends true
   ? DateRange
   : M extends true
     ? DateValue[]
     : DateValue
+type CalendarModelValue<R extends boolean = false, M extends boolean = false> = R extends true
+  ? (DateRange | null)
+  : M extends true
+    ? (DateValue[] | undefined)
+    : (DateValue | undefined)
 
-export interface CalendarProps<R extends boolean, M extends boolean> extends Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'> {
+type _CalendarRootProps = Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>
+type _RangeCalendarRootProps = Omit<RangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>
+
+export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends _RangeCalendarRootProps, _CalendarRootProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -33,11 +35,21 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
    */
   nextYearIcon?: string
   /**
+   * Configure the next year button.
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   */
+  nextYear?: ButtonProps
+  /**
    * The icon to use for the next month control.
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
   nextMonthIcon?: string
+  /**
+   * Configure the next month button.
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   */
+  nextMonth?: ButtonProps
   /**
    * The icon to use for the previous year control.
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
@@ -45,19 +57,29 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
    */
   prevYearIcon?: string
   /**
+   * Configure the prev year button.
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   */
+  prevYear?: ButtonProps
+  /**
    * The icon to use for the previous month control.
    * @defaultValue appConfig.ui.icons.chevronLeft
    * @IconifyIcon
    */
   prevMonthIcon?: string
   /**
+   * Configure the prev month button.
+   * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   */
+  prevMonth?: ButtonProps
+  /**
    * @defaultValue 'primary'
    */
-  color?: CalendarVariants['color']
+  color?: Calendar['variants']['color']
   /**
    * @defaultValue 'md'
    */
-  size?: CalendarVariants['size']
+  size?: Calendar['variants']['size']
   /** Whether or not a range of dates can be selected */
   range?: R & boolean
   /** Whether or not multiple dates can be selected */
@@ -66,10 +88,10 @@ export interface CalendarProps<R extends boolean, M extends boolean> extends Omi
   monthControls?: boolean
   /** Show year controls */
   yearControls?: boolean
-  defaultValue?: CalendarModelValue<R, M>
+  defaultValue?: CalendarDefaultValue<R, M>
   modelValue?: CalendarModelValue<R, M>
   class?: any
-  ui?: PartialString<typeof calendar.slots>
+  ui?: Calendar['slots']
 }
 
 export interface CalendarEmits<R extends boolean, M extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
@@ -83,13 +105,14 @@ export interface CalendarSlots {
 }
 </script>
 
-<script setup lang="ts" generic="R extends boolean = false, M extends boolean = false">
+<script setup lang="ts" generic="R extends boolean, M extends boolean">
 import { computed } from 'vue'
 import { useForwardPropsEmits } from 'reka-ui'
 import { Calendar as SingleCalendar, RangeCalendar } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
@@ -100,8 +123,8 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
 const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
-const appConfig = useAppConfig()
 const { code: locale, dir, t } = useLocale()
+const appConfig = useAppConfig() as Calendar['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
@@ -110,7 +133,7 @@ const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl'
 const prevYearIcon = computed(() => props.prevYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
 const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
 
-const ui = computed(() => calendar({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
   color: props.color,
   size: props.size
 }))
@@ -130,18 +153,18 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
   <Calendar.Root
     v-slot="{ weekDays, grid }"
     v-bind="rootProps"
-    :model-value="(modelValue as CalendarModelValue<true & false>)"
-    :default-value="(defaultValue as CalendarModelValue<true & false>)"
+    :model-value="modelValue"
+    :default-value="defaultValue"
     :locale="locale"
     :dir="dir"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
-        <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" />
+        <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevYear" />
       </Calendar.Prev>
       <Calendar.Prev v-if="props.monthControls" :aria-label="t('calendar.prevMonth')" as-child>
-        <UButton :icon="prevMonthIcon" :size="props.size" color="neutral" variant="ghost" />
+        <UButton :icon="prevMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevMonth" />
       </Calendar.Prev>
       <Calendar.Heading v-slot="{ headingValue }" :class="ui.heading({ class: props.ui?.heading })">
         <slot name="heading" :value="headingValue">
@@ -149,10 +172,10 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
         </slot>
       </Calendar.Heading>
       <Calendar.Next v-if="props.monthControls" :aria-label="t('calendar.nextMonth')" as-child>
-        <UButton :icon="nextMonthIcon" :size="props.size" color="neutral" variant="ghost" />
+        <UButton :icon="nextMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextMonth" />
       </Calendar.Next>
       <Calendar.Next v-if="props.yearControls" :next-page="(date: DateValue) => paginateYear(date, 1)" :aria-label="t('calendar.nextYear')" as-child>
-        <UButton :icon="nextYearIcon" :size="props.size" color="neutral" variant="ghost" />
+        <UButton :icon="nextYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextYear" />
       </Calendar.Next>
     </Calendar.Header>
     <div :class="ui.body({ class: props.ui?.body })">

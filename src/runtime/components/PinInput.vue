@@ -1,18 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/pin-input'
-import { tv } from '../utils/tv'
-import type { PartialString } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigPinInput = _appConfig as AppConfig & { ui: { pinInput: Partial<typeof theme> } }
-
-const pinInput = tv({ extend: tv(theme), ...(appConfigPinInput.ui?.pinInput || {}) })
-
-type PinInputVariants = VariantProps<typeof pinInput>
+type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>
 
 export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
   /**
@@ -23,23 +16,25 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
   /**
    * @defaultValue 'primary'
    */
-  color?: PinInputVariants['color']
+  color?: PinInput['variants']['color']
   /**
    * @defaultValue 'outline'
    */
-  variant?: PinInputVariants['variant']
+  variant?: PinInput['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: PinInputVariants['size']
+  size?: PinInput['variants']['size']
   /**
    * The number of input fields.
    * @defaultValue 5
    */
   length?: number | string
+  autofocus?: boolean
+  autofocusDelay?: number
   highlight?: boolean
   class?: any
-  ui?: PartialString<typeof pinInput.slots>
+  ui?: PinInput['slots']
 }
 
 export type PinInputEmits = PinInputRootEmits & {
@@ -50,27 +45,36 @@ export type PinInputEmits = PinInputRootEmits & {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
-  length: 5
+  length: 5,
+  autofocusDelay: 0
 })
 const emits = defineEmits<PinInputEmits>()
 
+const appConfig = useAppConfig() as PinInput['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'placeholder', 'required', 'type'), emits)
+
 const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(props)
 
-const ui = computed(() => pinInput({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || {}) })({
   color: color.value,
   variant: props.variant,
   size: size.value,
   highlight: highlight.value
 }))
+
+const inputsRef = ref<ComponentPublicInstance[]>([])
 
 const completed = ref(false)
 function onComplete(value: string[]) {
@@ -86,6 +90,22 @@ function onBlur(event: FocusEvent) {
     emitFormBlur()
   }
 }
+
+function autoFocus() {
+  if (props.autofocus) {
+    inputsRef.value[0]?.$el?.focus()
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
+
+defineExpose({
+  inputsRef
+})
 </script>
 
 <template>
@@ -100,6 +120,7 @@ function onBlur(event: FocusEvent) {
     <PinInputInput
       v-for="(ids, index) in looseToNumber(props.length)"
       :key="ids"
+      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
       :index="index"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"

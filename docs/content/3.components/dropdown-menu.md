@@ -32,6 +32,7 @@ Use the `items` prop as an array of objects with the following properties:
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `onSelect?(e: Event): void`{lang="ts-type"}
 - [`onUpdateChecked?(checked: boolean): void`{lang="ts-type"}](#with-checkbox-items)
+- `children?: DropdownMenuItem[] | DropdownMenuItem[][]`{lang="ts-type"}
 
 You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -44,6 +45,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[][]
 props:
   items:
     - - label: Benjamin
@@ -123,6 +126,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[]
 items:
   content.align:
     - start
@@ -169,6 +174,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[]
 props:
   arrow: true
   items:
@@ -202,6 +209,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[]
 props:
   size: xl
   items:
@@ -244,6 +253,8 @@ ignore:
   - ui.content
 external:
   - items
+externalTypes:
+  - DropdownMenuItem[]
 props:
   disabled: true
   items:
@@ -334,7 +345,9 @@ Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility 
 
 ```vue
 <script setup lang="ts">
-const items = [{
+import type { DropdownMenuItem } from '@nuxt/ui'
+
+const items: DropdownMenuItem[] = [{
   label: 'Invite users',
   icon: 'i-lucide-user-plus',
   children: [{

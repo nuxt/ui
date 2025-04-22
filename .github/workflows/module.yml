@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
+        os: ${{ github.event_name == 'pull_request' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest", "windows-latest"]') }} # macos-latest
         node: [22]
 
     env:
@@ -50,18 +50,23 @@ jobs:
         run: pnpm run typecheck
 
       - name: Test
-        run: pnpm run test
+        run: pnpm run test run
 
       - name: Test (vue)
-        run: pnpm run test:vue
+        run: pnpm run test:vue run
 
       - name: Build
         run: pnpm run build
 
-      - name: Build vue fixture
-        run: pnpm run test:vue:build
+      - name: Build playground
+        run: pnpm run dev:build
+
+      - name: Build playground (vue)
+        run: pnpm run dev:vue:build
 
       - name: Publish
+        # Only publish preview package on ubuntu during PRs
+        if: matrix.os == 'ubuntu-latest'
         run: pnpx pkg-pr-new publish --compact --no-template --pnpm
 
   starter-nuxt:
@@ -156,6 +161,9 @@ jobs:
 
   nuxt-ui-pro:
     needs: build
+
+    # Only run this job if not a fork PR (when push event or PR from same repo)
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
 
     runs-on: ${{ matrix.os }}
 

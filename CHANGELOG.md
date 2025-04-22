@@ -1,5 +1,38 @@
 # Changelog
 
+## [3.0.2](https://github.com/nuxt/ui/compare/v3.0.1...v3.0.2) (2025-03-28)
+
+### Features
+
+* **Calendar:** allow year and month buttons styling ([#3672](https://github.com/nuxt/ui/issues/3672)) ([4a2b77d](https://github.com/nuxt/ui/commit/4a2b77d86c28806234002340eda39de4dc78cce0))
+* **locale:** add Armenian language ([#3664](https://github.com/nuxt/ui/issues/3664)) ([c76f590](https://github.com/nuxt/ui/commit/c76f5900970e3f5c451192b1207ccea04771e8b3))
+* **Table:** add `empty` prop ([afff54f](https://github.com/nuxt/ui/commit/afff54fecd31497238461e0a44abd8668ed734c3))
+
+### Bug Fixes
+
+* **Avatar:** proxy `$attrs` to default slot ([#3712](https://github.com/nuxt/ui/issues/3712)) ([88f349d](https://github.com/nuxt/ui/commit/88f349d0d74eb1c2ce5066818731759c25a9e83e))
+* **Button:** use `focus:outline-none` instead of `focus:outline-hidden` ([c231fe5](https://github.com/nuxt/ui/commit/c231fe5f26ca7614df46a7ec8a5ce7f4ec8884e7)), closes [#3658](https://github.com/nuxt/ui/issues/3658)
+* **CommandPalette:** use `group.id` as key ([bc61d29](https://github.com/nuxt/ui/commit/bc61d29cce531715a6279444845f02a002a22af7))
+* **components:** improve generic types ([#3331](https://github.com/nuxt/ui/issues/3331)) ([b998354](https://github.com/nuxt/ui/commit/b9983549a4b743724ea3ef99cc4a243f5ca41e53))
+* **Container:** add `w-full` class ([df00149](https://github.com/nuxt/ui/commit/df001495980647cab1e67fd16154f1bc778de5e2))
+* **defineLocale/defineShortcuts:** remove `@__NO_SIDE_EFFECTS__` ([82e2665](https://github.com/nuxt/ui/commit/82e26655a40782555299516f32a76046fa0dbd3a))
+* **Drawer:** remove `fadeFromIndex` prop proxy ([f7604e5](https://github.com/nuxt/ui/commit/f7604e565f717001a4d4c2974cf23559a3f01c21))
+* **Form:** clear dirty state after submit ([#3692](https://github.com/nuxt/ui/issues/3692)) ([3dd88ba](https://github.com/nuxt/ui/commit/3dd88bacecb2945efba8cc3cb4fe59fcbc056e9a))
+* **FormField:** add `help` to `aria-describedby` attribute ([#3691](https://github.com/nuxt/ui/issues/3691)) ([20c3392](https://github.com/nuxt/ui/commit/20c33920d005332db3c83f33a8c54c7c227ce0a0))
+* **InputMenu/SelectMenu:** empty search results ([94b6e52](https://github.com/nuxt/ui/commit/94b6e520f5ccf011204e953421fcc5b44b637e51))
+* **InputMenu:** reset `searchTerm` on `update:open` ([3074632](https://github.com/nuxt/ui/commit/3074632523e67fa6a0ad3d9a71e5692c285bdc3a)), closes [#3620](https://github.com/nuxt/ui/issues/3620)
+* **Link:** handle `aria-current` like `NuxtLink` / `RouterLink` ([c531d02](https://github.com/nuxt/ui/commit/c531d0248be7863980a1f676643c2dea8301c009))
+* **Link:** prevent `active="true"` binding on html ([d73768b](https://github.com/nuxt/ui/commit/d73768b70453d60dd4186a996c1cf808b0294bf6))
+* **Link:** properly pick all `aria-*` & `data-*` attrs ([ade16b7](https://github.com/nuxt/ui/commit/ade16b76cf535924a8d0f402b4d5d65cb67a55eb))
+* **Link:** proxy `onClick` ([370054b](https://github.com/nuxt/ui/commit/370054b20c0201c9dba84ddfcd1e916594619b93)), closes [#3631](https://github.com/nuxt/ui/issues/3631)
+* **NavigationMenu:** add `z-index` on viewport ([0095d89](https://github.com/nuxt/ui/commit/0095d8916bf361c0c89972e2f86b79850510c6a9)), closes [#3654](https://github.com/nuxt/ui/issues/3654)
+* **Switch:** prevent transition on focus outline ([68787b2](https://github.com/nuxt/ui/commit/68787b26fdf2bd5f9d9e812e5bfddb19abe45d1d))
+* **Table:** wrong condition on `caption` slot ([4ebb94c](https://github.com/nuxt/ui/commit/4ebb94cd7ef909b3547bce0922f75fe3ff74de4c))
+* **Tabs:** remove `focus:outline-hidden` class ([1769d5e](https://github.com/nuxt/ui/commit/1769d5ed6ea46b1f7eafdc48cb6456512229f98b))
+* **types:** add missing export for ButtonGroup ([#3709](https://github.com/nuxt/ui/issues/3709)) ([e7e6745](https://github.com/nuxt/ui/commit/e7e674559981177ad08be42418746060d7737df9))
+* **useOverlay:** refine `open` method type to infer close emit return type ([#3716](https://github.com/nuxt/ui/issues/3716)) ([bd99c2d](https://github.com/nuxt/ui/commit/bd99c2d850d57baccc51e049c0b578a6fc6ab431))
+* **vue:** mock `nuxtApp.hooks` & `useRuntimeHook` ([23bfeb9](https://github.com/nuxt/ui/commit/23bfeb937004d619187a67fb43e4c76b13d00069))
+
 ## [3.0.1](https://github.com/nuxt/ui/compare/v3.0.0...v3.0.1) (2025-03-21)
 
 ### ⚠ BREAKING CHANGES

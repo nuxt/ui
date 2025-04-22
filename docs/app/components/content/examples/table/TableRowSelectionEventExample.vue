@@ -50,12 +50,12 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ table }) => h(UCheckbox, {
     'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
-    'ariaLabel': 'Select all'
+    'aria-label': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
-    'ariaLabel': 'Select row'
+    'aria-label': 'Select row'
   })
 }, {
   accessorKey: 'date',
@@ -122,7 +122,7 @@ function onSelect(row: TableRow<Payment>, e?: Event) {
         @select="onSelect"
       />
 
-      <div class="px-4 py-3.5 border-t border-[var(--ui-border-accented)] text-sm text-[var(--ui-text-muted)]">
+      <div class="px-4 py-3.5 border-t border-accented text-sm text-muted">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>

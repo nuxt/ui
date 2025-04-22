@@ -20,6 +20,19 @@ export default function AppConfigPlugin(options: NuxtUIOptions & { theme: NonNul
       return `
           export default ${JSON.stringify(appConfig!)}
         `
+    },
+    vite: {
+      config() {
+        return {
+          test: {
+            server: {
+              deps: {
+                inline: ['@nuxt/ui']
+              }
+            }
+          }
+        }
+      }
     }
   } satisfies UnpluginOptions
 }

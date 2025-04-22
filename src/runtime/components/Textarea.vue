@@ -1,18 +1,13 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/textarea'
-import { tv } from '../utils/tv'
-import type { PartialString } from '../types/utils'
+import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { AvatarProps } from '../types'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigTextarea = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
+type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
-const textarea = tv({ extend: tv(theme), ...(appConfigTextarea.ui?.textarea || {}) })
-
-type TextareaVariants = VariantProps<typeof textarea>
-
-export interface TextareaProps {
+export interface TextareaProps extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -25,26 +20,27 @@ export interface TextareaProps {
   /**
    * @defaultValue 'primary'
    */
-  color?: TextareaVariants['color']
+  color?: Textarea['variants']['color']
   /**
    * @defaultValue 'outline'
    */
-  variant?: TextareaVariants['variant']
+  variant?: Textarea['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: TextareaVariants['size']
+  size?: Textarea['variants']['size']
   required?: boolean
   autofocus?: boolean
   autofocusDelay?: number
+  autoresize?: boolean
+  autoresizeDelay?: number
   disabled?: boolean
   class?: any
   rows?: number
   maxrows?: number
-  autoresize?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  ui?: PartialString<typeof textarea.slots>
+  ui?: Textarea['slots']
 }
 
 export interface TextareaEmits {
@@ -54,44 +50,50 @@ export interface TextareaEmits {
 }
 
 export interface TextareaSlots {
+  leading(props?: {}): any
   default(props?: {}): any
+  trailing(props?: {}): any
 }
 </script>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
+import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
+import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TextareaProps>(), {
   rows: 3,
   maxrows: 0,
-  autofocusDelay: 0
+  autofocusDelay: 0,
+  autoresizeDelay: 0
 })
-defineSlots<TextareaSlots>()
+const slots = defineSlots<TextareaSlots>()
 const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number | null>()
 
+const appConfig = useAppConfig() as Textarea['AppConfig']
 const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps>(props, { deferInputValidation: true })
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const ui = computed(() => textarea({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.textarea || {}) })({
   color: color.value,
   variant: props.variant,
   size: size?.value,
-  highlight: highlight.value
+  loading: props.loading,
+  highlight: highlight.value,
+  autoresize: props.autoresize,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing
 }))
 
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
-
-function autoFocus() {
-  if (props.autofocus) {
-    textareaRef.value?.focus()
-  }
-}
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null) {
@@ -140,18 +142,14 @@ function onBlur(event: FocusEvent) {
   emits('blur', event)
 }
 
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
+function autoFocus() {
+  if (props.autofocus) {
+    textareaRef.value?.focus()
+  }
+}
 
 function autoResize() {
-  if (props.autoresize) {
-    if (!textareaRef.value) {
-      return
-    }
-
+  if (props.autoresize && textareaRef.value) {
     textareaRef.value.rows = props.rows
     const overflow = textareaRef.value.style.overflow
     textareaRef.value.style.overflow = 'hidden'
@@ -176,14 +174,18 @@ watch(modelValue, () => {
   nextTick(autoResize)
 })
 
-defineExpose({
-  textareaRef
-})
-
 onMounted(() => {
   setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+
+  setTimeout(() => {
     autoResize()
-  }, 100)
+  }, props.autoresizeDelay)
+})
+
+defineExpose({
+  textareaRef
 })
 </script>
 
@@ -207,5 +209,18 @@ onMounted(() => {
     />
 
     <slot />
+
+    <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+      <slot name="leading">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+      </slot>
+    </span>
+
+    <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <slot name="trailing">
+        <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+      </slot>
+    </span>
   </Primitive>
 </template>

@@ -34,7 +34,7 @@ function removeItem() {
 
 const toast = useToast()
 
-async function onSubmit(event: FormSubmitEvent<any>) {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }
@@ -51,7 +51,14 @@ async function onSubmit(event: FormSubmitEvent<any>) {
       <UInput v-model="state.customer" placeholder="Wonka Industries" />
     </UFormField>
 
-    <UForm v-for="item, count in state.items" :key="count" :state="item" :schema="itemSchema" class="flex gap-2">
+    <UForm
+      v-for="item, count in state.items"
+      :key="count"
+      :state="item"
+      :schema="itemSchema"
+      attach
+      class="flex gap-2"
+    >
       <UFormField :label="!count ? 'Description' : undefined" name="description">
         <UInput v-model="item.description" />
       </UFormField>

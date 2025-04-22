@@ -1,5 +1,6 @@
 <!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
+import type { ChipProps } from '@nuxt/ui'
 import json5 from 'json5'
 import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
@@ -53,6 +54,8 @@ const props = defineProps<{
   hide?: string[]
   /** List of props to externalize in script setup */
   external?: string[]
+  /** The types of the externalized props */
+  externalTypes?: string[]
   /** List of props to use with `v-model` */
   model?: string[]
   /** List of props to cast from code and selection */
@@ -209,11 +212,21 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `
-    for (const key of props.external) {
+    if (props.externalTypes?.length) {
+      const removeArrayBrackets = (type: string): string => type.endsWith('[]') ? removeArrayBrackets(type.slice(0, -2)) : type
+
+      const types = props.externalTypes.map(type => removeArrayBrackets(type))
+      code += `import type { ${types.join(', ')} } from '@nuxt/ui${props.pro ? '-pro' : ''}'
+
+`
+    }
+
+    for (const [i, key] of props.external.entries()) {
       const cast = props.cast?.[key]
       const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2)?.replace(/,([ |\t\n]+[}|\]])/g, '$1')
+      const type = props.externalTypes?.[i] ? `<${props.externalTypes[i]}>` : ''
 
-      code += `const ${key === 'modelValue' ? 'value' : key} = ref(${value})
+      code += `const ${key === 'modelValue' ? 'value' : key} = ref${type}(${value})
 `
     }
     code += `<\/script>
@@ -315,16 +328,16 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
 
 <template>
   <div class="my-5">
-    <div>
-      <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-(--ui-border-muted) border-b-0 relative rounded-t-[calc(var(--ui-radius)*1.5)] px-4 py-2.5 overflow-x-auto">
+    <div class="relative">
+      <div v-if="options.length" class="flex flex-wrap items-center gap-2.5 border border-muted border-b-0 relative rounded-t-md px-4 py-2.5 overflow-x-auto">
         <template v-for="option in options" :key="option.name">
           <UFormField
             :label="option.label"
             size="sm"
-            class="inline-flex ring ring-(--ui-border-accented) rounded-(--ui-radius)"
+            class="inline-flex ring ring-accented rounded-sm"
             :ui="{
-              wrapper: 'bg-(--ui-bg-elevated)/50 rounded-l-(--ui-radius) flex border-r border-(--ui-border-accented)',
-              label: 'text-(--ui-text-muted) px-2 py-1.5',
+              wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-accented',
+              label: 'text-muted px-2 py-1.5',
               container: 'mt-0'
             }"
           >
@@ -335,7 +348,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               value-key="value"
               color="neutral"
               variant="soft"
-              class="rounded-(--ui-radius) rounded-l-none min-w-12"
+              class="rounded-sm rounded-l-none min-w-12"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
@@ -346,7 +359,7 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
                   inset
                   standalone
                   :color="(modelValue as any)"
-                  :size="ui.itemLeadingChipSize()"
+                  :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
                   class="size-2"
                 />
               </template>
@@ -357,14 +370,14 @@ const { data: ast } = await useAsyncData(`component-code-${name}-${hash({ props:
               :model-value="getComponentProp(option.name)"
               color="neutral"
               variant="soft"
-              :ui="{ base: 'rounded-(--ui-radius) rounded-l-none min-w-12' }"
+              :ui="{ base: 'rounded-sm rounded-l-none min-w-12' }"
               @update:model-value="setComponentProp(option.name, $event)"
             />
           </UFormField>
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-(--ui-border-muted) relative p-4 z-[1]" :class="[!options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]', props.class, { 'overflow-hidden': props.overflowHidden }]">
+      <div v-if="component" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">

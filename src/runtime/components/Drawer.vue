@@ -2,14 +2,10 @@
 import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
 import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/drawer'
-import { tv } from '../utils/tv'
-import type { EmitsToProps } from '../types/utils'
+import type { EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigDrawer = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme> } }
-
-const drawer = tv({ extend: tv(theme), ...(appConfigDrawer.ui?.drawer || {}) })
+type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
 
 export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'shouldScaleBackground' | 'setBackgroundColorOnScale' | 'scrollLockTimeout' | 'fixed' | 'dismissible' | 'modal' | 'open' | 'defaultOpen' | 'nested' | 'direction' | 'noBodyStyles' | 'handleOnly' | 'preventScrollRestoration' | 'snapPoints'> {
   /**
@@ -40,13 +36,9 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * Render the drawer in a portal.
    * @defaultValue true
    */
-  portal?: boolean
-  /**
-   * Index of a `snapPoint` from which the overlay fade should be applied. Defaults to the last snap point.
-   */
-  fadeFromIndex?: any
+  portal?: boolean | string | HTMLElement
   class?: any
-  ui?: Partial<typeof drawer.slots>
+  ui?: Drawer['slots']
 }
 
 export interface DrawerEmits extends DrawerRootEmits {}
@@ -67,6 +59,9 @@ import { computed, toRef } from 'vue'
 import { useForwardPropsEmits } from 'reka-ui'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
+import { usePortal } from '../composables/usePortal'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   direction: 'bottom',
@@ -79,13 +74,16 @@ const props = withDefaults(defineProps<DrawerProps>(), {
 const emits = defineEmits<DrawerEmits>()
 const slots = defineSlots<DrawerSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints', 'fadeFromIndex'), emits)
+const appConfig = useAppConfig() as Drawer['AppConfig']
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = {
   closeAutoFocus: (e: Event) => e.preventDefault()
 }
 
-const ui = computed(() => drawer({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })({
   direction: props.direction,
   inset: props.inset
 }))
@@ -97,7 +95,7 @@ const ui = computed(() => drawer({
       <slot />
     </DrawerTrigger>
 
-    <DrawerPortal :disabled="!portal">
+    <DrawerPortal v-bind="portalProps">
       <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
       <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">

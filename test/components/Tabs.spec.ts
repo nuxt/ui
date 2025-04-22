@@ -40,14 +40,14 @@ describe('Tabs', () => {
     ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
-    ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-(--ui-border)' } } }],
+    ['with ui', { props: { ...props, ui: { content: 'w-full ring ring-default' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TabsProps<typeof items[number]>, slots?: Partial<TabsSlots<typeof items[number]>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TabsProps, slots?: Partial<TabsSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Tabs)
     expect(html).toMatchSnapshot()
   })
