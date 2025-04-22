@@ -2,14 +2,13 @@
 import type { TableColumn } from '@nuxt/ui'
 import { useSortable } from '@vueuse/integrations/useSortable.mjs'
 
-const table = useTemplateRef('table')
-
 type Payment = {
   id: string
   date: string
   email: string
   amount: number
 }
+
 const data = ref<Payment[]>([{
   id: '4600',
   date: '2024-03-11T15:30:00',
@@ -31,6 +30,7 @@ const data = ref<Payment[]>([{
   email: 'emma.davis@example.com',
   amount: 529
 }])
+
 const columns: TableColumn<Payment>[] = [{
   accessorKey: 'id',
   header: '#',
@@ -69,7 +69,7 @@ useSortable('.my-table-tbody', data, {
 </script>
 
 <template>
-  <div class="w-full space-y-4 pb-4">
+  <div class="w-full">
     <UTable
       ref="table"
       :data="data"
