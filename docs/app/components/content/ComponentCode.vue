@@ -153,7 +153,8 @@ const options = computed(() => {
     const items = propItems.length
       ? propItems.map((item: any) => ({
           value: item,
-          label: String(item)
+          label: String(item),
+          chip: key.toLowerCase().endsWith('color') ? { color: item } : undefined
         }))
       : prop?.type === 'boolean' || prop?.type === 'boolean | undefined'
         ? [{ value: true, label: 'true' }, { value: false, label: 'false' }]

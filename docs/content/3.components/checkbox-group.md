@@ -32,7 +32,7 @@ external:
   - modelValue
 externalTypes:
   - CheckboxGroupItem[]
-  - CheckboxGroupValue
+  - CheckboxGroupValue[]
 props:
   modelValue:
     - 'System'
@@ -60,7 +60,7 @@ external:
   - modelValue
 externalTypes:
   - CheckboxGroupItem[]
-  - CheckboxGroupValue
+  - CheckboxGroupValue[]
 props:
   modelValue:
     - 'system'
@@ -96,7 +96,7 @@ external:
   - modelValue
 externalTypes:
   - CheckboxGroupItem[]
-  - CheckboxGroupValue
+  - CheckboxGroupValue[]
 props:
   modelValue:
     - 'light'
@@ -130,7 +130,8 @@ externalTypes:
   - CheckboxGroupItem[]
 props:
   legend: 'Theme'
-  defaultValue: 'System'
+  defaultValue:
+    - 'System'
   items:
     - 'System'
     - 'Light'
@@ -152,9 +153,19 @@ external:
   - items
 externalTypes:
   - CheckboxGroupItem[]
+items:
+  color:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
 props:
   color: neutral
-  defaultValue: 'System'
+  defaultValue:
+    - 'System'
   items:
     - 'System'
     - 'Light'
@@ -162,7 +173,7 @@ props:
 ---
 ::
 
-### Variant :badge{label="Not released" class="align-text-top"}
+### Variant
 
 Use the `variant` prop to change the variant of the CheckboxGroup.
 
@@ -174,20 +185,29 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - CheckboxGroupItem[]
+items:
+  color:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
+  variant:
+    - list
+    - card
 props:
   color: 'primary'
-  variant: 'table'
-  defaultValue: 'pro'
+  variant: 'card'
+  defaultValue:
+    - 'System'
   items:
-    - label: 'Pro'
-      value: 'pro'
-      description: 'Tailored for indie hackers, freelancers and solo founders.'
-    - label: 'Startup'
-      value: 'startup'
-      description: 'Best suited for small teams, startups and agencies.'
-    - label: 'Enterprise'
-      value: 'enterprise'
-      description: 'Ideal for larger teams and organizations.'
+    - 'System'
+    - 'Light'
+    - 'Dark'
 ---
 ::
 
@@ -205,10 +225,15 @@ external:
   - items
 externalTypes:
   - CheckboxGroupItem[]
+items:
+  variant:
+    - list
+    - card
 props:
   size: 'xl'
   variant: 'list'
-  defaultValue: 'System'
+  defaultValue:
+    - 'System'
   items:
     - 'System'
     - 'Light'
@@ -230,10 +255,15 @@ external:
   - items
 externalTypes:
   - CheckboxGroupItem[]
+items:
+  variant:
+    - list
+    - card
 props:
   orientation: 'horizontal'
   variant: 'list'
-  defaultValue: 'System'
+  defaultValue:
+    - 'System'
   items:
     - 'System'
     - 'Light'
@@ -241,7 +271,7 @@ props:
 ---
 ::
 
-### Indicator :badge{label="Not released" class="align-text-top"}
+### Indicator
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 
@@ -255,10 +285,19 @@ external:
   - items
 externalTypes:
   - CheckboxGroupItem[]
+items:
+  indicator:
+    - start
+    - end
+    - hidden
+  variant:
+    - list
+    - card
 props:
   indicator: 'end'
   variant: 'card'
-  defaultValue: 'System'
+  defaultValue:
+    - 'System'
   items:
     - 'System'
     - 'Light'
@@ -282,7 +321,8 @@ externalTypes:
   - CheckboxGroupItem[]
 props:
   disabled: true
-  defaultValue: 'System'
+  defaultValue:
+    - 'System'
   items:
     - 'System'
     - 'Light'

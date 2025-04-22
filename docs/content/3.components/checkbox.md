@@ -167,23 +167,6 @@ ignore:
   - defaultValue
 props:
   color: 'primary'
-  variant: 'table'
-  defaultValue: true
-  label: Check me
----
-::
-
-### Indicator :badge{label="Not released" class="align-text-top"}
-
-Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
-
-::component-code
----
-ignore:
-  - label
-  - defaultValue
-props:
-  indicator: 'end'
   variant: 'card'
   defaultValue: true
   label: Check me
@@ -201,6 +184,24 @@ ignore:
   - defaultValue
 props:
   size: xl
+  variant: list
+  defaultValue: true
+  label: Check me
+---
+::
+
+### Indicator :badge{label="Not released" class="align-text-top"}
+
+Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
+
+::component-code
+---
+ignore:
+  - label
+  - defaultValue
+props:
+  indicator: 'end'
+  variant: 'card'
   defaultValue: true
   label: Check me
 ---
