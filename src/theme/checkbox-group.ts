@@ -1,7 +1,7 @@
 export default {
   slots: {
     root: 'relative',
-    fieldset: 'flex',
+    fieldset: 'flex gap-2',
     legend: 'mb-1 block font-medium text-default'
   },
   variants: {
@@ -15,23 +15,18 @@ export default {
     },
     size: {
       xs: {
-        fieldset: 'gap-0.5',
         legend: 'text-xs'
       },
       sm: {
-        fieldset: 'gap-0.5',
         legend: 'text-xs'
       },
       md: {
-        fieldset: 'gap-1',
         legend: 'text-sm'
       },
       lg: {
-        fieldset: 'gap-1',
         legend: 'text-sm'
       },
       xl: {
-        fieldset: 'gap-1.5',
         legend: 'text-base'
       }
     },
