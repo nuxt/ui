@@ -97,7 +97,7 @@ function getDropdownActions(user: User): DropdownMenuItem[][] {
       <div class="flex items-center gap-3">
         <UAvatar :src="`https://i.pravatar.cc/120?img=${row.original.id}`" size="lg" :alt="`${row.original.name} avatar`" />
         <div>
-          <p class="font-medium text-(--ui-text-highlighted)">
+          <p class="font-medium text-highlighted">
             {{ row.original.name }}
           </p>
           <p>

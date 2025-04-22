@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest] # macos-latest
+        os: ${{ github.event_name == 'pull_request' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest", "windows-latest"]') }} # macos-latest
         node: [22]
 
     env:
@@ -65,7 +65,8 @@ jobs:
         run: pnpm run dev:vue:build
 
       - name: Publish
-        if: matrix.os != 'windows-latest'
+        # Only publish preview package on ubuntu during PRs
+        if: matrix.os == 'ubuntu-latest'
         run: pnpx pkg-pr-new publish --compact --no-template --pnpm
 
   starter-nuxt:

@@ -4,16 +4,12 @@ import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { tv } from '../utils/tv'
 import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps } from '../types'
-import type { PartialString } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigCommandPalette = _appConfig as AppConfig & { ui: { commandPalette: Partial<typeof theme> } }
-
-const commandPalette = tv({ extend: tv(theme), ...(appConfigCommandPalette.ui?.commandPalette || {}) })
+type CommandPalette = ComponentConfig<typeof theme, AppConfig, 'commandPalette'>
 
 export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
   prefix?: string
@@ -115,7 +111,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    */
   labelKey?: string
   class?: any
-  ui?: PartialString<typeof commandPalette.slots>
+  ui?: CommandPalette['slots']
 }
 
 export type CommandPaletteEmits<T> = ListboxRootEmits<T> & {
@@ -126,7 +122,7 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: string }> = {
   'empty'(props: { searchTerm?: string }): any
-  'close'(props: { ui: ReturnType<typeof commandPalette> }): any
+  'close'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -144,6 +140,7 @@ import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
+import { tv } from '../utils/tv'
 import { highlight } from '../utils/fuse'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
@@ -166,13 +163,13 @@ const slots = defineSlots<CommandPaletteSlots<G, T>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as CommandPalette['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = commandPalette()
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })())
 
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {

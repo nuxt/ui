@@ -100,7 +100,7 @@ const columnFilters = ref([{
 
 <template>
   <div class="flex flex-col flex-1 w-full">
-    <div class="flex px-4 py-3.5 border-b border-(--ui-border-accented)">
+    <div class="flex px-4 py-3.5 border-b border-accented">
       <UInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
         class="max-w-sm"
