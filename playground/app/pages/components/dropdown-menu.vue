@@ -144,16 +144,12 @@ defineShortcuts(extractShortcuts(items.value))
         <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
         <template #custom-trailing>
-          <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-(--ui-primary)" />
+          <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-primary" />
         </template>
       </UDropdownMenu>
 
       <UDropdownMenu :items="itemsWithColor" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" :ui="{ content: 'w-48' }">
         <UButton label="Color" color="neutral" variant="outline" icon="i-lucide-menu" />
-
-        <template #custom-trailing>
-          <UIcon name="i-lucide-badge-check" class="shrink-0 size-5 text-(--ui-primary)" />
-        </template>
       </UDropdownMenu>
     </div>
   </div>

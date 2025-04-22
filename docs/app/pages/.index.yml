@@ -97,11 +97,11 @@ design_system:
     ```
 
     ```css [main.css]
-    @import "tailwindcss" theme(static);
+    @import "tailwindcss";
     @import "@nuxt/ui";
 
     :root {
-      --ui-radius: var(--radius-sm);
+      --ui-radius: 0.25rem;
       --ui-container: 90rem;
       --ui-bg: var(--ui-color-neutral-50);
       --ui-text: var(--ui-color-neutral-900);
@@ -176,7 +176,11 @@ community:
   links:
     - label: Star on GitHub
       color: neutral
-      variant: outline
       to: https://github.com/nuxt/ui
       target: _blank
       icon: i-lucide-star
+    - label: Meet the team
+      color: neutral
+      variant: outline
+      to: /team
+      trailingIcon: i-lucide-arrow-right

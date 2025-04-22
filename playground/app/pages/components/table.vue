@@ -148,12 +148,12 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ table }) => h(UCheckbox, {
     'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
-    'ariaLabel': 'Select all'
+    'aria-label': 'Select all'
   }),
   cell: ({ row }) => h(UCheckbox, {
     'modelValue': row.getIsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
-    'ariaLabel': 'Select row'
+    'aria-label': 'Select row'
   }),
   enableSorting: false,
   enableHiding: false
@@ -251,15 +251,17 @@ const columns: TableColumn<Payment>[] = [{
     }]
 
     return h('div', { class: 'text-right' }, h(UDropdownMenu, {
-      content: {
+      'content': {
         align: 'end'
       },
-      items
+      items,
+      'aria-label': 'Actions dropdown'
     }, () => h(UButton, {
-      icon: 'i-lucide-ellipsis-vertical',
-      color: 'neutral',
-      variant: 'ghost',
-      class: 'ms-auto'
+      'icon': 'i-lucide-ellipsis-vertical',
+      'color': 'neutral',
+      'variant': 'ghost',
+      'class': 'ms-auto',
+      'aria-label': 'Actions dropdown'
     })))
   }
 }]
@@ -337,10 +339,10 @@ onMounted(() => {
         getPaginationRowModel: getPaginationRowModel()
       }"
       :ui="{
-        tr: 'divide-x divide-(--ui-border)'
+        tr: 'divide-x divide-default'
       }"
       sticky
-      class="border border-(--ui-border-accented) rounded-(--ui-radius)"
+      class="border border-accented rounded-sm"
       @select="onSelect"
     >
       <template #expanded="{ row }">
@@ -349,7 +351,7 @@ onMounted(() => {
     </UTable>
 
     <div class="flex items-center justify-between gap-3">
-      <div class="text-sm text-(--ui-text-muted)">
+      <div class="text-sm text-muted">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>

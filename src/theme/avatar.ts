@@ -1,9 +1,9 @@
 export default {
   slots: {
-    root: 'inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-(--ui-bg-elevated)',
+    root: 'inline-flex items-center justify-center shrink-0 select-none overflow-hidden rounded-full align-middle bg-elevated',
     image: 'h-full w-full rounded-[inherit] object-cover',
-    fallback: 'font-medium leading-none text-(--ui-text-muted) truncate',
-    icon: 'text-(--ui-text-muted) shrink-0'
+    fallback: 'font-medium leading-none text-muted truncate',
+    icon: 'text-muted shrink-0'
   },
   variants: {
     size: {

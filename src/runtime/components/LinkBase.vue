@@ -10,6 +10,7 @@ export interface LinkBaseProps {
   navigate?: (e: MouseEvent) => void
   target?: LinkProps['target']
   rel?: LinkProps['rel']
+  active?: boolean
   isExternal?: boolean
 }
 </script>

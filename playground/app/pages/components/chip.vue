@@ -18,7 +18,7 @@ const items = [{
 <template>
   <div class="flex flex-col gap-4">
     <div class="flex items-center gap-2">
-      <UChip v-for="position in positions" :key="position" :position="position">
+      <UChip v-for="position in positions" :key="position" :position="position" color="neutral">
         <UButton icon="i-lucide-inbox" color="neutral" variant="subtle" />
       </UChip>
     </div>

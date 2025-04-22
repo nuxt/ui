@@ -23,18 +23,7 @@ const { data: components } = await useAsyncData('ui-components', () => {
     .all()
 })
 
-const { data: module } = await useFetch<{
-  stats: {
-    downloads: number
-    stars: number
-  }
-  contributors: {
-    username: string
-  }[]
-}>('https://api.nuxt.com/modules/ui', {
-  key: 'stats',
-  transform: ({ stats, contributors }) => ({ stats, contributors })
-})
+const { data: module } = await useFetch('/api/module.json')
 
 const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 
@@ -59,7 +48,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       }"
     >
       <template #title>
-        The Intuitive <br> <span class="text-(--ui-primary)">Vue UI Library</span>
+        The Intuitive <br> <span class="text-primary">Vue UI Library</span>
       </template>
       <template #description>
         {{ page.hero.description }}
@@ -85,28 +74,32 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </div>
       </template>
 
-      <SkyBg />
+      <LazySkyBg is-index />
 
       <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
         <UPageMarquee
           pause-on-hover
           :overlay="false"
           :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-(--ui-border) absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:flex-col',
-            content: 'lg:w-auto lg:h-full lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content]'
+            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:flex-col',
+            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content]'
           }"
         >
           <ULink
             v-for="component of components?.slice(0, 10)"
             :key="component.path"
-            class="relative group/link aspect-video border-(--ui-border) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
+            class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
           >
             <UColorModeImage
-
               :light="`${component.path.replace('/components/', '/components/light/')}.png`"
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
-              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
+              :alt="`${component.title} preview`"
+              width="290"
+              height="163"
+              format="webp"
+              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-default 2xl:border-y-0"
+              loading="lazy"
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
@@ -117,20 +110,25 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           reverse
           :overlay="false"
           :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-(--ui-border) absolute w-full mt-[180px] left-0 border-y lg:mt-auto lg:left-auto lg:border-y-0 lg:border-x lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:right-0 lg:flex-col',
-            content: 'lg:w-auto lg:h-full lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content] lg:[animation-direction:reverse]'
+            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full mt-[180px] left-0 border-y lg:mt-auto lg:left-auto lg:border-y-0 lg:border-x lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:right-0 lg:flex-col',
+            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content] lg:[animation-direction:reverse]'
           }"
         >
           <ULink
             v-for="component of components?.slice(10, 20)"
             :key="component.path"
-            class="relative group/link aspect-video border-(--ui-border) w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
+            class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
           >
             <UColorModeImage
               :light="`${component.path.replace('/components/', '/components/light/')}.png`"
               :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
-              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-(--ui-border) 2xl:border-y-0"
+              :alt="`${component.title} preview`"
+              width="290"
+              height="163"
+              format="webp"
+              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-default 2xl:border-y-0"
+              loading="lazy"
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
@@ -152,7 +150,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           :in-view-options="{ once: true }"
           class="flex items-start gap-x-3 relative group"
         >
-          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10" />
+          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10">
+            <span class="sr-only">Go to {{ feature.title }}</span>
+          </NuxtLink>
 
           <div class="relative p-3">
             <svg class="absolute inset-0" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -165,14 +165,14 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
               <circle cx="6.53711" cy="37.4551" r="1.5" fill="var(--ui-border-accented)" />
               <circle cx="38.5957" cy="37.4551" r="1.5" fill="var(--ui-border-accented)" />
             </svg>
-            <UIcon :name="feature.icon" class="size-5 flex-shrink-0" />
+            <UIcon :name="feature.icon" class="size-5 shrink-0" />
           </div>
           <div class="flex flex-col">
-            <h2 class="font-medium text-(--ui-text-highlighted) inline-flex items-center gap-x-1">
+            <h2 class="font-medium text-highlighted inline-flex items-center gap-x-1">
               {{ feature.title }}
-              <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
+              <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
             </h2>
-            <p class="text-sm text-(--ui-text-muted)">
+            <p class="text-sm text-muted">
               {{ feature.description }}
             </p>
           </div>
@@ -215,29 +215,35 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.community.links"
       orientation="horizontal"
       :ui="{ features: 'flex items-center gap-4 lg:gap-8' }"
-      class="border-b border-(--ui-border)"
+      class="border-b border-default"
     >
       <template #features>
-        <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0">
-          <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
-            {{ format(module?.stats?.downloads ?? 0) }}+
-          </p>
-          <p class="text-(--ui-text-muted) text-sm truncate">monthly downloads</p>
-        </NuxtLink>
+        <li>
+          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0">
+            <p class="text-4xl font-semibold text-highlighted truncate">
+              {{ format(module?.stats?.downloads ?? 0) }}+
+            </p>
+            <p class="text-muted text-sm truncate">monthly downloads</p>
+          </NuxtLink>
+        </li>
 
-        <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0">
-          <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
-            {{ format(module?.stats?.stars ?? 0) }}+
-          </p>
-          <p class="text-(--ui-text-muted) text-sm truncate">GitHub stars</p>
-        </NuxtLink>
+        <li>
+          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0">
+            <p class="text-4xl font-semibold text-highlighted truncate">
+              {{ format(module?.stats?.stars ?? 0) }}+
+            </p>
+            <p class="text-muted text-sm truncate">GitHub stars</p>
+          </NuxtLink>
+        </li>
 
-        <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0">
-          <p class="text-4xl font-semibold text-(--ui-text-highlighted) truncate">
-            175+
-          </p>
-          <p class="text-(--ui-text-muted) text-sm truncate">Contributors</p>
-        </NuxtLink>
+        <li>
+          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0">
+            <p class="text-4xl font-semibold text-highlighted truncate">
+              175+
+            </p>
+            <p class="text-muted text-sm truncate">Contributors</p>
+          </NuxtLink>
+        </li>
       </template>
 
       <div ref="contributorsRef" class="p-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 overflow-hidden flex relative">
@@ -247,10 +253,10 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
     <UPageSection :ui="{ container: 'relative !pb-0 overflow-hidden' }">
       <template #title>
-        Build faster with Nuxt UI <span class="text-(--ui-primary)">Pro</span>.
+        Build faster with Nuxt UI <span class="text-primary">Pro</span>.
       </template>
       <template #description>
-        A collection of premium Vue components, composables and utils built on top of Nuxt UI. <br> Focused on structure and layout, these <span class="text-(--ui-text)">responsive components</span> are designed to be the perfect <span class="text-(--ui-text)">building blocks for your next idea</span>.
+        A collection of premium Vue components, composables and utils built on top of Nuxt UI. <br> Focused on structure and layout, these <span class="text-default">responsive components</span> are designed to be the perfect <span class="text-default">building blocks for your next idea</span>.
       </template>
       <template #links>
         <UButton to="/pro" size="lg">
@@ -261,10 +267,10 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </UButton>
       </template>
 
-      <StarsBg />
+      <LazyStarsBg />
 
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      <div class="relative h-[400px] border border-(--ui-border) bg-(--ui-bg-muted) overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div class="relative h-[400px] border border-default bg-muted overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">
         <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
           <img
             v-for="i in 4"
@@ -274,7 +280,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             height="258"
             loading="lazy"
             :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+            class="aspect-video border border-default rounded-lg bg-white"
           >
         </UPageMarquee>
         <UPageMarquee orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
@@ -286,7 +292,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             height="258"
             loading="lazy"
             :alt="`Nuxt UI Pro Screenshot ${i}`"
-            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+            class="aspect-video border border-default rounded-lg bg-white"
           >
         </UPageMarquee>
         <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
@@ -296,9 +302,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :src="`/pro/blocks/image${i}.png`"
             width="460"
             height="258"
-            :alt="`Nuxt UI Pro Screenshot ${i}`"
             loading="lazy"
-            class="aspect-video border border-(--ui-border) rounded-[calc(var(--ui-radius)*2)] bg-white"
+            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            class="aspect-video border border-default rounded-lg bg-white"
           >
         </UPageMarquee>
       </div>

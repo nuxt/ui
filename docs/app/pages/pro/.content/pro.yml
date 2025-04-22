@@ -1,8 +1,8 @@
 title: Build faster with Nuxt UI Pro.
 description: A collection of premium Vue components, composables and utils built on top of Nuxt UI, oriented on structure and layout and designed to be used as building blocks for your application.
 hero:
-  title: Build faster with Nuxt UI [Pro]{class="text-(--ui-primary)"}.
-  description: A collection of premium Vue components, composables and utils built on top of Nuxt UI. :br Focused on structure and layout, these [responsive components]{class="text-(--ui-text)"} are designed to be the perfect [building blocks for your next idea]{class="text-(--ui-text)"}.
+  title: Build faster with Nuxt UI [Pro]{class="text-primary"}.
+  description: A collection of premium Vue components, composables and utils built on top of Nuxt UI. :br Focused on structure and layout, these [responsive components]{class="text-default"} are designed to be the perfect [building blocks for your next idea]{class="text-default"}.
   links:
     - label: Buy a license
       size: xl
@@ -62,7 +62,7 @@ testimonial:
 #     avatar:
 #       src: https://github.com/benjamincanac.png
 mainSection:
-  title: Meet the [Pro Components]{class="text-(--ui-primary)"}.
+  title: Meet the [Pro Components]{class="text-primary"}.
   description: Code with 50+ components and sections of Nuxt UI Pro to build your next application by reducing the amount of code you need to write.
 sections:
   - title: The freedom to build anything

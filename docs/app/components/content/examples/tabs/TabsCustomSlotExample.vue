@@ -1,18 +1,20 @@
 <script setup lang="ts">
+import type { TabsItem } from '@nuxt/ui'
+
 const items = [
   {
     label: 'Account',
     description: 'Make changes to your account here. Click save when you\'re done.',
     icon: 'i-lucide-user',
-    slot: 'account'
+    slot: 'account' as const
   },
   {
     label: 'Password',
     description: 'Change your password here. After saving, you\'ll be logged out.',
     icon: 'i-lucide-lock',
-    slot: 'password'
+    slot: 'password' as const
   }
-]
+] satisfies TabsItem[]
 
 const state = reactive({
   name: 'Benjamin Canac',
@@ -26,7 +28,7 @@ const state = reactive({
 <template>
   <UTabs :items="items" variant="link" class="gap-4 w-full" :ui="{ trigger: 'flex-1' }">
     <template #account="{ item }">
-      <p class="text-(--ui-text-muted) mb-4">
+      <p class="text-muted mb-4">
         {{ item.description }}
       </p>
 
@@ -43,7 +45,7 @@ const state = reactive({
     </template>
 
     <template #password="{ item }">
-      <p class="text-(--ui-text-muted) mb-4">
+      <p class="text-muted mb-4">
         {{ item.description }}
       </p>
 

@@ -27,7 +27,7 @@ features1:
       description: Start with essential components, or unlock Pro for complete blocks and templates.
       icon: i-lucide-files
 cta1:
-  title: Everything you need in a [single file]{class="text-(--ui-primary)"}.
+  title: Everything you need in a [single file]{class="text-primary"}.
   description: Design and development in perfect sync with our [Free](https://www.figma.com/community/file/1288455405058138934/nuxt-ui-v3-official-design-kit-free) and Pro files. Developers can implement designs faster, while designers work with production-ready components.
 section1:
   title: Customize in a few clicks to fit your needs
@@ -181,7 +181,7 @@ pricing:
       # discount: $119
       billing_period: one-time payment
       billing_cycle: plus local taxes
-      class: bg-(--ui-bg-elevated)/50
+      class: bg-elevated/50
       features:
         - '**1 Designer**'
         - Nuxt UI & Nuxt UI Pro Components
@@ -203,7 +203,7 @@ pricing:
       # discount: $279
       billing_period: one-time payment
       billing_cycle: plus local taxes
-      class: bg-(--ui-bg-elevated)/50
+      class: bg-elevated/50
       features:
         - '**Up to 20 Designers**'
         - Nuxt UI & Nuxt UI Pro Components

@@ -156,6 +156,23 @@ props:
 ---
 ::
 
+### Variant :badge{label="Not released" class="align-text-top"}
+
+Use the `variant` prop to change the variant of the Checkbox.
+
+::component-code
+---
+ignore:
+  - label
+  - defaultValue
+props:
+  color: 'primary'
+  variant: 'card'
+  defaultValue: true
+  label: Check me
+---
+::
+
 ### Size
 
 Use the `size` prop to change the size of the Checkbox.
@@ -167,6 +184,24 @@ ignore:
   - defaultValue
 props:
   size: xl
+  variant: list
+  defaultValue: true
+  label: Check me
+---
+::
+
+### Indicator :badge{label="Not released" class="align-text-top"}
+
+Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
+
+::component-code
+---
+ignore:
+  - label
+  - defaultValue
+props:
+  indicator: 'end'
+  variant: 'card'
   defaultValue: true
   label: Check me
 ---

@@ -22,14 +22,26 @@ onMounted(() => {
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
+const githubLink = computed(() => {
+  return `https://github.com/nuxt/${value.value}`
+})
+
 const desktopLinks = computed(() => props.links.map(({ icon, ...link }) => link))
-const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOpen: link.children && route.path.startsWith(link.to as string) })))
+const mobileLinks = computed(() => [
+  ...props.links.map(link => ({ ...link, defaultOpen: link.children && route.path.startsWith(link.to as string) })),
+  {
+    label: 'Open on GitHub',
+    to: githubLink.value,
+    icon: 'i-simple-icons-github',
+    target: '_blank'
+  }
+])
 </script>
 
 <template>
   <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0" aria-label="Nuxt UI">
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-highlighted min-w-0 focus-visible:outline-primary shrink-0" aria-label="Nuxt UI">
         <Logo v-if="route.path === '/'" class="w-auto h-6 shrink-0" />
         <LogoPro v-else-if="route.path.startsWith('/pro')" class="w-auto h-6 shrink-0" />
         <template v-else>
@@ -51,7 +63,7 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
           trailing-icon="i-lucide-chevron-down"
           size="xs"
           class="-mb-[6px] font-semibold rounded-full truncate"
-          :class="[open && 'bg-(--ui-primary)/15 ']"
+          :class="[open && 'bg-primary/15 ']"
           :ui="{
             trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
           }"
@@ -73,7 +85,7 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
           :key="value"
           color="neutral"
           variant="ghost"
-          :to="`https://github.com/nuxt/${value}`"
+          :to="githubLink"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
@@ -82,7 +94,7 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
     </template>
 
     <template #body>
-      <UNavigationMenu orientation="vertical" :items="mobileLinks" class="-mx-2.5" default-open />
+      <UNavigationMenu orientation="vertical" :items="mobileLinks" class="-mx-2.5" />
 
       <USeparator type="dashed" class="mt-4 mb-6" />
 
@@ -96,7 +108,7 @@ const mobileLinks = computed(() => props.links.map(link => ({ ...link, defaultOp
           <span class="inline-flex items-center gap-0.5">
             {{ link.title }}
 
-            <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
+            <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-primary">PRO</sup>
           </span>
         </template>
       </UContentNavigation>

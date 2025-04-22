@@ -3,13 +3,13 @@ import { normalize } from 'pathe'
 import { resolvePathSync } from 'mlly'
 import MagicString from 'magic-string'
 
-import { runtimeDir } from '../unplugin'
+import { runtimeDir, type NuxtUIOptions } from '../unplugin'
 
 /**
  * This plugin normalises Nuxt environment (#imports) and `import.meta.client` within the Nuxt UI components.
  */
-export default function NuxtEnvironmentPlugin() {
-  const stubPath = resolvePathSync('../runtime/vue/stubs', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
+export default function NuxtEnvironmentPlugin(options: NuxtUIOptions) {
+  const stubPath = resolvePathSync(options.inertia ? '../runtime/inertia/stubs' : '../runtime/vue/stubs', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
 
   return {
     name: 'nuxt:ui',

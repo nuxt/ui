@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import Tree, { type TreeProps, type TreeSlots, type TreeItem } from '../../src/runtime/components/Tree.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/tree'
+import { expectEmitPayloadType } from '../utils/types'
 
 describe('Tree', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -62,8 +63,21 @@ describe('Tree', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'leading slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'trailing slot' } }],
     ['with dynamic slot', { props, slots: { app: () => 'dynamic slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<TreeProps<any>>, slots?: Partial<TreeSlots<any>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<TreeProps>, slots?: Partial<TreeSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Tree)
     expect(html).toMatchSnapshot()
+  })
+
+  test('should have the correct types', () => {
+    // with default `value` key
+    expectEmitPayloadType('update:modelValue', () => Tree({
+      items: [{ label: 'foo', value: 'bar' }, { label: 'baz', value: 'qux' }]
+    })).toEqualTypeOf<[string]>()
+
+    // with custom value key
+    expectEmitPayloadType('update:modelValue', () => Tree({
+      items: [{ label: 'foo', value: 'bar', id: 1 }, { label: 'baz', value: 'qux', id: 2 }],
+      valueKey: 'id'
+    })).toEqualTypeOf<[number]>()
   })
 })

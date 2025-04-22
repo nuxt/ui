@@ -55,9 +55,8 @@ export default defineNuxtConfig({
       }]
     },
     rootAttrs: {
-      // @ts-expect-error - vaul-drawer-wrapper is not typed
-      'vaul-drawer-wrapper': '',
-      'class': 'bg-(--ui-bg)'
+      'data-vaul-drawer-wrapper': '',
+      'class': 'bg-default'
     }
   },
 
@@ -91,7 +90,57 @@ export default defineNuxtConfig({
     '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
     '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
     '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
-    '/composables': { redirect: '/composables/define-shortcuts', prerender: false }
+    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
+    // v2 redirects
+    '/getting-started/theming': { redirect: { to: '/getting-started/theme', statusCode: 301 }, prerender: false },
+    '/pro/getting-started/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
+    '/playground': { redirect: { to: '/getting-started/installation/nuxt', statusCode: 301 }, prerender: false },
+    '/pro/guide/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
+    '/pro/prose/**': { redirect: { to: '/getting-started/typography#vue-components', statusCode: 301 }, prerender: false },
+    '/components/range': { redirect: { to: '/components/slider', statusCode: 301 }, prerender: false },
+    '/components/date-picker': { redirect: { to: '/components/calendar#as-a-datepicker', statusCode: 301 }, prerender: false },
+    '/components/dropdown': { redirect: { to: '/components/dropdown-menu', statusCode: 301 }, prerender: false },
+    '/components/notification': { redirect: { to: '/components/toast', statusCode: 301 }, prerender: false },
+    '/components/vertical-navigation': { redirect: { to: '/components/navigation-menu', statusCode: 301 }, prerender: false },
+    '/components/horizontal-navigation': { redirect: { to: '/components/navigation-menu', statusCode: 301 }, prerender: false },
+    '/components/divider': { redirect: { to: '/components/separator', statusCode: 301 }, prerender: false },
+    '/components/toggle': { redirect: { to: '/components/switch', statusCode: 301 }, prerender: false },
+    '/components/form-group': { redirect: { to: '/components/form-field', statusCode: 301 }, prerender: false },
+    '/pro/components': { redirect: { to: '/components', statusCode: 301 }, prerender: false },
+    '/pro/components/docs/docs-search': { redirect: { to: '/components/content-search', statusCode: 301 }, prerender: false },
+    '/pro/components/docs-search': { redirect: { to: '/components/content-search', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-hero': { redirect: { to: '/components/page-hero', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-cta': { redirect: { to: '/components/page-cta', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-card': { redirect: { to: '/components/page-card', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-section': { redirect: { to: '/components/page-section', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-faq': { redirect: { to: '/components/page-accordion', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-grid': { redirect: { to: '/components/page-grid', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-logos': { redirect: { to: '/components/page-logos', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-testimonial': { redirect: { to: '/components/page-card#as-a-testimonial', statusCode: 301 }, prerender: false },
+    '/pro/components/blog-list': { redirect: { to: '/components/blog-posts', statusCode: 301 }, prerender: false },
+    '/pro/components/color-mode-toggle': { redirect: { to: '/components/color-mode-switch', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-card': { redirect: { to: '/components/page-card', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-layout': { redirect: { to: '/components/dashboard-group', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-modal': { redirect: { to: '/components/modal', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-navbar-toggle': { redirect: { to: '/components/dashboard-sidebar-toggle', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-page': { redirect: { to: '/components/dashboard-panel', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-panel-content': { redirect: { to: '/components/dashboard-panel', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-panel-handle': { redirect: { to: '/components/dashboard-resize-handle', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-section': { redirect: { to: '/components/page-card', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-sidebar-links': { redirect: { to: '/components/navigation-menu', statusCode: 301 }, prerender: false },
+    '/pro/components/dashboard-slideover': { redirect: { to: '/components/slideover', statusCode: 301 }, prerender: false },
+    '/pro/components/navigation-accordion': { redirect: { to: '/components/content-navigation', statusCode: 301 }, prerender: false },
+    '/pro/components/navigation-links': { redirect: { to: '/components/content-navigation', statusCode: 301 }, prerender: false },
+    '/pro/components/navigation-tree': { redirect: { to: '/components/content-navigation', statusCode: 301 }, prerender: false },
+    '/pro/components/page-error': { redirect: { to: '/components/error', statusCode: 301 }, prerender: false },
+    '/pro/components/footer-links': { redirect: { to: '/components/navigation-menu', statusCode: 301 }, prerender: false },
+    '/pro/components/header-links': { redirect: { to: '/components/navigation-menu', statusCode: 301 }, prerender: false },
+    '/pro/components/pricing-card': { redirect: { to: '/components/pricing-plan', statusCode: 301 }, prerender: false },
+    '/pro/components/pricing-grid': { redirect: { to: '/components/pricing-plans', statusCode: 301 }, prerender: false },
+    '/pro/components/pricing-switch': { redirect: { to: '/components/switch', statusCode: 301 }, prerender: false },
+    '/pro/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false },
+    '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false },
+    '/releases': { redirect: 'https://github.com/nuxt/ui/releases', prerender: false }
   },
 
   future: {
@@ -126,6 +175,10 @@ export default defineNuxtConfig({
     }
   },
 
+  hub: {
+    ai: true
+  },
+
   vite: {
     plugins: [
       yaml()
@@ -134,6 +187,10 @@ export default defineNuxtConfig({
       fs: {
         allow: process.env.NUXT_UI_PRO_PATH ? [resolve(process.env.NUXT_UI_PRO_PATH)] : undefined
       }
+    },
+    optimizeDeps: {
+      // prevents reloading page when navigating between components
+      include: ['@internationalized/date', '@vueuse/shared', '@vueuse/integrations/useFuse', '@tanstack/vue-table', 'reka-ui', 'reka-ui/namespaced', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures', 'colortranslator', 'tailwindcss/colors', 'tailwind-variants', 'ufo', 'zod', 'vaul-vue', 'scule', 'motion-v', 'json5', 'ohash', 'shiki-transformer-color-highlight']
     }
   },
 
@@ -172,6 +229,7 @@ export default defineNuxtConfig({
   },
 
   image: {
+    format: ['webp', 'jpeg', 'jpg', 'png', 'svg'],
     provider: 'ipx'
   },
 

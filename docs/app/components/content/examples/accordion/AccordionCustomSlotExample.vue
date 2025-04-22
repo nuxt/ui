@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { AccordionItem } from '@nuxt/ui'
+
 const items = [
   {
     label: 'Icons',
@@ -8,7 +10,7 @@ const items = [
   {
     label: 'Colors',
     icon: 'i-lucide-swatch-book',
-    slot: 'colors',
+    slot: 'colors' as const,
     content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
   },
   {
@@ -16,13 +18,13 @@ const items = [
     icon: 'i-lucide-box',
     content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
   }
-]
+] satisfies AccordionItem[]
 </script>
 
 <template>
   <UAccordion :items="items">
     <template #colors="{ item }">
-      <p class="text-sm pb-3.5 text-(--ui-primary)">
+      <p class="text-sm pb-3.5 text-primary">
         {{ item.content }}
       </p>
     </template>

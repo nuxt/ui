@@ -7,8 +7,8 @@ const { url } = useSiteConfig()
 
 useSeoMeta({
   title: page.title,
-  ogTitle: page.title,
   description: page.description,
+  ogTitle: page.title,
   ogDescription: page.description,
   ogImage: joinURL(url, '/pro/og-image.png')
 })
@@ -27,13 +27,15 @@ useSeoMeta({
         <MDC :value="page.pricing.title" unwrap="p" cache-key="pro-pricing-title" />
       </template>
 
-      <StarsBg />
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      <div class="flex flex-col bg-(--ui-bg) gap-8 lg:gap-0">
+      <LazyStarsBg />
+
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
+
+      <div class="flex flex-col bg-default gap-8 lg:gap-0">
         <UPricingPlan
           v-bind="page.pricing.freePlan"
           variant="naked"
-          class="lg:rounded-none border-x border-(--ui-border) border-t border-b lg:border-b-0"
+          class="lg:rounded-none border-x border-default border-t border-b lg:border-b-0"
         />
         <UPricingPlans compact>
           <UPricingPlan
@@ -46,7 +48,7 @@ useSeoMeta({
             :billing-period="plan.billing_period"
             :billing-cycle="plan.billing_cycle"
             :variant="plan.highlight ? 'soft' : 'outline'"
-            :class="['lg:rounded-none', { 'border-2 lg:border lg:border-x-0 border-(--ui-primary) lg:border-(--ui-border)': plan.highlight }]"
+            :class="['lg:rounded-none', { 'border-2 lg:border lg:border-x-0 border-primary lg:border-default': plan.highlight }]"
             :features="plan.features"
             :button="plan.button"
           />
@@ -56,12 +58,12 @@ useSeoMeta({
           variant="naked"
           :billing-period="page.pricing.figma.billing_period"
           :billing-cycle="page.pricing.figma.billing_cycle"
-          class="lg:rounded-none border lg:border-y-0 border-(--ui-border)"
+          class="lg:rounded-none border lg:border-y-0 border-default"
         >
           <template #features>
             <li v-for="(feature, index) in page.pricing.figma.features" :key="index" class="flex items-center gap-2 min-w-0">
-              <UIcon name="i-lucide-circle-check" class="size-5 text-(--ui-primary) shrink-0" />
-              <MDC :value="feature" unwrap="p" class="text-sm truncate text-(--ui-text-toned)" :cache-key="`pro-pricing-figma-feature-${index}`" />
+              <UIcon name="i-lucide-circle-check" class="size-5 text-primary shrink-0" />
+              <MDC :value="feature" unwrap="p" class="text-sm truncate text-toned" :cache-key="`pro-pricing-figma-feature-${index}`" />
             </li>
           </template>
         </UPricingPlan>
@@ -71,7 +73,7 @@ useSeoMeta({
     <UPageSection
       id="testimonials"
       v-bind="page.testimonials"
-      class="border-y border-(--ui-border)"
+      class="border-y border-default"
     >
       <UPageMarquee pause-on-hover :ui="{ root: '[--duration:40s]' }">
         <img
@@ -79,6 +81,7 @@ useSeoMeta({
           :key="index"
           v-bind="logo"
           class="h-6 shrink-0 max-w-[140px] filter invert dark:invert-0"
+          loading="lazy"
         >
       </UPageMarquee>
       <UContainer>
@@ -107,7 +110,7 @@ useSeoMeta({
       class="scroll-mt-(--ui-header-height)"
       :ui="{ container: 'relative' }"
     >
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <UPageAccordion
         multiple
         :items="(page.faq.items as any[])"

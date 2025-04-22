@@ -23,7 +23,7 @@ class: '!p-0'
 ---
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/tree/v3/docs/app/components/content/examples/table/TableExample.vue"}
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/tree/v3/docs/app/components/content/examples/table/TableExample.vue" aria-label="View source code"}
 This example demonstrates the most common use case of the `Table` component. Check out the source code on GitHub.
 ::
 
@@ -75,17 +75,17 @@ props:
 
 Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/latest/docs/api/core/column-def) objects with properties like:
 
-- `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-(--ui-text-muted)"}
-- `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-(--ui-text-muted)"}
-- `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-(--ui-text-muted)"}
-- `meta`: [Extra properties for the column.]{class="text-(--ui-text-muted)"}
+- `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-muted"}
+- `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-muted"}
+- `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-muted"}
+- `meta`: [Extra properties for the column.]{class="text-muted"}
   - `class`:
-    - `td`: [The classes to apply to the `td` element.]{class="text-(--ui-text-muted)"}
-    - `th`: [The classes to apply to the `th` element.]{class="text-(--ui-text-muted)"}
+    - `td`: [The classes to apply to the `td` element.]{class="text-muted"}
+    - `th`: [The classes to apply to the `th` element.]{class="text-muted"}
 
 In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
-::tip{to="#with-slots"}
+::tip{to="#with-slots" aria-label="Table columns with slots"}
 You can also use slots to customize the header and data cells of the table.
 ::
 
@@ -104,6 +104,13 @@ highlights:
 ::note
 When rendering components with `h`, you can either use the `resolveComponent` function or import from `#components`.
 ::
+
+### Meta
+
+Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/docs/api/core/table#meta)) to pass properties like:
+
+- `class`:
+  - `tr`: [The classes to apply to the `tr` element.]{class="text-muted"}
 
 ### Loading
 
@@ -444,6 +451,37 @@ class: '!p-0'
 ---
 ::
 
+### With infinite scroll
+
+If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data when scrolling.
+
+::component-example
+---
+prettier: true
+collapse: true
+overflowHidden: true
+name: 'table-infinite-scroll-example'
+class: '!p-0'
+---
+::
+
+### With drag and drop
+
+Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Table. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
+
+::note
+Since the table ref doesn't expose the tbody element, add a unique class to it via the `:ui` prop to target it with `useSortable` (e.g. `:ui="{ tbody: 'my-table-tbody' }"`).
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-drag-and-drop-example'
+class: '!p-0'
+---
+::
+
 ### With slots
 
 You can use slots to customize the header and data cells of the table.
@@ -489,6 +527,7 @@ This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |
+| `tableRef`{lang="ts-type"} | `Ref<HTMLTableElement \| null>`{lang="ts-type"} |
 | `tableApi`{lang="ts-type"} | [`Ref<Table \| null>`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
 
 ## Theme

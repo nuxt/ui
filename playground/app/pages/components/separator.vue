@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-4">
     <div>
-      <p class="font-semibold text-(--ui-text-highlighted)">
+      <p class="font-semibold text-highlighted">
         Nuxt UI
       </p>
       <p>An open-source UI component library.</p>
