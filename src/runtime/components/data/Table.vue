@@ -106,7 +106,6 @@
                 </span>
                 <slot
                   v-else
-                  :key="retriggerSlot"
                   :name="`${column.key}-data`"
                   :column="column"
                   :row="row"
@@ -134,12 +133,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, toRaw, toRef, watch } from 'vue'
+import { computed, defineComponent, toRaw, toRef } from 'vue'
 import type { PropType, AriaAttributes } from 'vue'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { useVModel } from '@vueuse/core'
-import { isEqual } from 'ohash'
+import { isEqual } from 'ohash/utils'
 import UIcon from '../elements/Icon.vue'
 import UButton from '../elements/Button.vue'
 import UProgress from '../elements/Progress.vue'
@@ -308,8 +307,6 @@ export default defineComponent({
         row: null
       })
     })
-
-    const retriggerSlot = ref(null)
 
     const savedSort = { column: sort.value.column, direction: null }
 
@@ -485,12 +482,6 @@ export default defineComponent({
       return undefined
     }
 
-    watch(rows, () => {
-      retriggerSlot.value = new Date()
-    }, {
-      deep: true
-    })
-
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
@@ -517,8 +508,7 @@ export default defineComponent({
       getRowData,
       toggleOpened,
       getAriaSort,
-      isExpanded,
-      retriggerSlot
+      isExpanded
     }
   }
 })

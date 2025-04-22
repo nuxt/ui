@@ -4,7 +4,7 @@ description: Show a horizontal bar to indicate task progression.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/elements/Progress.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/elements/Progress.vue
 ---
 
 ## Usage

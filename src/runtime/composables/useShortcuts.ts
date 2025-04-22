@@ -1,6 +1,5 @@
 import { createSharedComposable, useActiveElement } from '@vueuse/core'
 import { ref, computed, onMounted } from 'vue'
-import type {} from '@vueuse/shared'
 
 export const _useShortcuts = () => {
   const macOS = computed(() => import.meta.client && navigator && navigator.userAgent && navigator.userAgent.match(/Macintosh;/))

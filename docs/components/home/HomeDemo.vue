@@ -31,7 +31,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <ULandingGrid ref="section" class="lg:grid-cols-10 lg:gap-8 overflow-hidden p-px">
+  <ULandingGrid ref="section" class="lg:grid-cols-10 lg:gap-8 overflow-hidden p-1">
     <div :ref="(el) => (refs[1] = el)" class="col-span-8 flex items-center animate-top">
       <RangeExample />
     </div>

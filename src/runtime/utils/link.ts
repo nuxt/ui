@@ -127,9 +127,11 @@ export const getNuxtLinkProps = (props) => {
 }
 
 export const getULinkProps = (props) => {
-  const keys = [...Object.keys(nuxtLinkProps), ...Object.keys(uLinkProps), 'ariaLabel', 'title']
+  const keys = Object.keys(props)
+  const ariaKeys = keys.filter(key => key.startsWith('aria-'))
+  const dataKeys = keys.filter(key => key.startsWith('data-'))
 
-  return keys.reduce((acc, key) => {
+  return [...Object.keys(nuxtLinkProps), ...Object.keys(uLinkProps), ...ariaKeys, ...dataKeys].reduce((acc, key) => {
     if (props[key] !== undefined) {
       acc[key] = props[key]
     }

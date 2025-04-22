@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.21.1](https://github.com/nuxt/ui/compare/v2.21.0...v2.21.1) (2025-03-08)
+
+### Features
+
+* **Form:** add standard schema support ([#2880](https://github.com/nuxt/ui/issues/2880)) ([9c36d37](https://github.com/nuxt/ui/commit/9c36d37b847468d1cbd76eea38ac00cbc22549ca))
+* **module:** add `colorMode` option ([d2ceead](https://github.com/nuxt/ui/commit/d2ceeadae796254128697d94a3e317234bc2ecda)), closes [#3143](https://github.com/nuxt/ui/issues/3143)
+* **SelectMenu:** add inputTargetForm prop to handle input validation ([#3107](https://github.com/nuxt/ui/issues/3107)) ([feb716c](https://github.com/nuxt/ui/commit/feb716c941f1e7315009b53861a4dc0c2f233052))
+
+### Bug Fixes
+
+* **Alert/Notification:** allow description ui override ([125a281](https://github.com/nuxt/ui/commit/125a28190b1a83e2456457e7a4ec618384b2446c)), closes [#2554](https://github.com/nuxt/ui/issues/2554)
+* **Table:** revert [#2600](https://github.com/nuxt/ui/issues/2600) to fix excessive column data slot re-renders ([#3375](https://github.com/nuxt/ui/issues/3375)) ([23d9b51](https://github.com/nuxt/ui/commit/23d9b51a5861f5d1f32f68a3141a600655a0598a))
+
 ## [2.21.0](https://github.com/nuxt/ui/compare/v2.20.0...v2.21.0) (2025-01-14)
 
 ### Features

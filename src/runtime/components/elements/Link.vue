@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { isEqual, diff } from 'ohash'
+import { isEqual, diff } from 'ohash/utils'
 import { type PropType, defineComponent } from 'vue'
 import { nuxtLinkProps } from '../../utils'
 
@@ -74,14 +74,18 @@ export default defineComponent({
     }
   },
   setup(props) {
-    function isPartiallyEqual(item1, item2) {
+    function isPartiallyEqual(item1: any, item2: any) {
       const diffedKeys = diff(item1, item2).reduce((filtered, q) => {
         if (q.type === 'added') {
-          filtered.push(q.key)
+          filtered.add(q.key)
         }
         return filtered
-      }, [])
-      return isEqual(item1, item2, { excludeKeys: key => diffedKeys.includes(key) })
+      }, new Set<string>())
+
+      const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)))
+      const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)))
+
+      return isEqual(item1Filtered, item2Filtered)
     }
 
     function resolveLinkClass(route, $route, { isActive, isExactActive }: { isActive: boolean, isExactActive: boolean }) {

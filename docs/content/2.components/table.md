@@ -3,7 +3,7 @@ description: 'Display data in a table.'
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/data/Table.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/data/Table.vue
 ---
 
 ## Usage
@@ -311,9 +311,9 @@ const onUpdateSelection = (selectedRows: any[]) => {
 </script>
 
 <template>
-  <UTable 
-    v-model="selected" 
-    :rows="people" 
+  <UTable
+    v-model="selected"
+    :rows="people"
     @select:all="onHandleSelectAll"
     @update:modelValue="onUpdateSelection"
   />
@@ -598,7 +598,7 @@ This slot allows you to customize the checkbox appearance in the table header fo
 #### Usage
 ```vue
 <template>
-  <UTable v-model="selectable"> 
+  <UTable v-model="selectable">
     <template #select-header="{ checked, change, indeterminate }">
       <!-- Place your custom component here -->
     </template>
@@ -620,7 +620,7 @@ This slot allows you to customize the checkbox appearance in the table header fo
   <UTable>
     <!-- Header checkbox customization -->
     <template #select-header="{ indeterminate, checked, change }">
-      <input 
+      <input
         type="checkbox"
         :indeterminate="indeterminate"
         :checked="checked"
@@ -658,7 +658,7 @@ This slot allows you to customize the checkbox appearance for each row in the ta
   <UTable>
     <!-- Row checkbox customization -->
     <template #select-data="{ checked, change }">
-      <input 
+      <input
         type="checkbox"
         :checked="checked"
         @change="e => change(e.target.checked)"
@@ -769,6 +769,6 @@ hiddenCode: true
 ---
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/dev/docs/components/content/examples/TableExampleAdvanced.vue" target="_blank"}
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v2/docs/components/content/examples/TableExampleAdvanced.vue" target="_blank"}
 Take a look at the component!
 ::

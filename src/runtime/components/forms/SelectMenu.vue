@@ -16,6 +16,7 @@
       :value="modelValue"
       :required="required"
       :class="uiMenu.required"
+      :form="inputTargetForm"
       tabindex="-1"
       aria-hidden="true"
     >
@@ -140,7 +141,7 @@ import {
 import { computedAsync, useDebounceFn } from '@vueuse/core'
 import { defu } from 'defu'
 import { twJoin } from 'tailwind-merge'
-import { isEqual } from 'ohash'
+import { isEqual } from 'ohash/utils'
 import UIcon from '../elements/Icon.vue'
 import UAvatar from '../elements/Avatar.vue'
 import { useUI } from '../../composables/useUI'
@@ -312,6 +313,10 @@ export default defineComponent({
     },
     searchAttributes: {
       type: Array,
+      default: null
+    },
+    inputTargetForm: {
+      type: String,
       default: null
     },
     popper: {

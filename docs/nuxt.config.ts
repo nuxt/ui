@@ -15,7 +15,7 @@ export default defineNuxtConfig({
       ]
     : [
         '@nuxt/ui-pro',
-        process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/.docs#dev', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
+        process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/.docs#v1', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
       ].filter(Boolean),
 
   modules: [
@@ -31,7 +31,7 @@ export default defineNuxtConfig({
   ],
 
   site: {
-    url: 'https://ui.nuxt.com'
+    url: 'https://ui2.nuxt.com'
   },
 
   content: {
@@ -53,7 +53,7 @@ export default defineNuxtConfig({
               prefix: '/pro',
               driver: 'github',
               repo: 'nuxt/ui-pro',
-              branch: 'dev',
+              branch: 'v1',
               dir: '.docs/content/pro',
               token: process.env.NUXT_GITHUB_TOKEN || ''
             }
@@ -94,6 +94,11 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: ['date-fns']
+    },
+    server: {
+      fs: {
+        allow: process.env.NUXT_UI_PRO_PATH ? [resolve(process.env.NUXT_UI_PRO_PATH)] : undefined
+      }
     }
   },
 

@@ -41,8 +41,8 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const { data: releases } = await useFetch('/api/releases.json')
-const { data: pulls } = await useLazyFetch('/api/pulls.json', { default: () => [] })
+const { data: releases } = await useFetch('/api/releases.json', { key: 'releases-list' })
+const { data: pulls } = await useLazyFetch('/api/pulls.json', { default: () => [], key: 'pulls-list' })
 
 const dates = computed(() => {
   const first = releases.value[releases.value.length - 1]

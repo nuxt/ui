@@ -3,7 +3,7 @@ description: Display an input field.
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/dev/src/runtime/components/forms/Input.vue
+    to: https://github.com/nuxt/ui/blob/v2/src/runtime/components/forms/Input.vue
 ---
 
 ## Usage
@@ -172,6 +172,13 @@ baseProps:
   class: 'w-full'
 ---
 ::
+
+### Limit
+
+Use the `maxlength` prop to limit the length of the Input.
+
+:component-example{component="input-example-max-length"}
+
 
 ## Slots
 

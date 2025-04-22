@@ -5,6 +5,7 @@ export default {
   inner: 'w-0 flex-1',
   title: 'text-sm font-medium',
   description: 'mt-1 text-sm leading-4 opacity-90',
+  descriptionOnly: 'mt-0 leading-5',
   actions: 'flex items-center gap-2 mt-3 flex-shrink-0',
   shadow: '',
   rounded: 'rounded-lg',
