@@ -1,64 +1,69 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import NavigationMenu, { type NavigationMenuProps, type NavigationMenuSlots } from '../../src/runtime/components/NavigationMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/navigation-menu'
+import { expectSlotProps } from '../utils/types'
 
 describe('NavigationMenu', () => {
   const variants = Object.keys(theme.variants.variant) as any
 
   const items = [
     [{
+      label: 'Links',
+      type: 'label'
+    }, {
       label: 'Documentation',
-      icon: 'i-heroicons-book-open',
+      icon: 'i-lucide-book-open',
+      badge: 10,
       children: [{
         label: 'Introduction',
         description: 'Fully styled and customizable components for Nuxt.',
-        icon: 'i-heroicons-home'
+        icon: 'i-lucide-house'
       }, {
         label: 'Installation',
         description: 'Learn how to install and configure Nuxt UI in your application.',
-        icon: 'i-heroicons-cloud-arrow-down'
+        icon: 'i-lucide-cloud-download'
       }, {
         label: 'Theming',
         description: 'Learn how to customize the look and feel of the components.',
-        icon: 'i-heroicons-swatch'
+        icon: 'i-lucide-swatch-book'
       }, {
         label: 'Shortcuts',
         description: 'Learn how to display and define keyboard shortcuts in your app.',
-        icon: 'i-heroicons-computer-desktop'
+        icon: 'i-lucide-monitor'
       }]
     }, {
       label: 'Components',
-      icon: 'i-heroicons-cube-transparent',
+      icon: 'i-lucide-box',
       active: true,
       children: [{
         label: 'Link',
-        icon: 'i-heroicons-document',
+        icon: 'i-lucide-file',
         description: 'Use NuxtLink with superpowers.',
         to: '/components/link'
       }, {
         label: 'Modal',
-        icon: 'i-heroicons-document',
+        icon: 'i-lucide-file',
         description: 'Display a modal within your application.',
         to: '/components/modal'
       }, {
         label: 'NavigationMenu',
-        icon: 'i-heroicons-document',
+        icon: 'i-lucide-file',
         description: 'Display a list of links.',
         to: '/components/navigation-menu'
       }, {
         label: 'Pagination',
-        icon: 'i-heroicons-document',
+        icon: 'i-lucide-file',
         description: 'Display a list of pages.',
         to: '/components/pagination'
       }, {
         label: 'Popover',
-        icon: 'i-heroicons-document',
+        icon: 'i-lucide-file',
         description: 'Display a non-modal dialog that floats around a trigger element.',
         to: '/components/popover'
       }, {
         label: 'Progress',
-        icon: 'i-heroicons-document',
+        icon: 'i-lucide-file',
         description: 'Show a horizontal bar to indicate task progression.',
         to: '/components/progress'
       }]
@@ -69,7 +74,7 @@ describe('NavigationMenu', () => {
       target: '_blank'
     }, {
       label: 'Help',
-      icon: 'i-heroicons-question-mark-circle',
+      icon: 'i-lucide-circle-help',
       disabled: true
     }]
   ]
@@ -79,15 +84,22 @@ describe('NavigationMenu', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with modelValue', { props: { ...props, modelValue: '0' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
-    ['with arrow', { props: { ...props, arrow: true } }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with arrow', { props: { ...props, arrow: true, modelValue: '0' } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const, modelValue: '0' } }],
+    ['with orientation vertical and collapsed', { props: { ...props, orientation: 'vertical' as const, modelValue: '0', collapsed: true } }],
+    ['with content orientation vertical', { props: { ...props, contentOrientation: 'vertical' as const, modelValue: '0' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight neutral`, { props: { ...props, variant, color: 'neutral', highlight: true, highlightColor: 'neutral' } }]),
-    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-heroicons-plus' } }],
+    ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-plus' } }],
+    ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
+    ['without externalIcon', { props: { ...props, externalIcon: false } }],
+    ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
+    ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots
@@ -96,8 +108,30 @@ describe('NavigationMenu', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps<typeof items[number][number]>, slots?: Partial<NavigationMenuSlots<any>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps, slots?: Partial<NavigationMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, NavigationMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  test('should have the correct types', () => {
+    // normal
+    expectSlotProps('item', () => NavigationMenu({
+      items: [{ label: 'foo', value: 'bar' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // groups
+    expectSlotProps('item', () => NavigationMenu({
+      items: [[{ label: 'foo', value: 'bar' }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // custom
+    expectSlotProps('item', () => NavigationMenu({
+      items: [{ label: 'foo', value: 'bar', custom: 'nice' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+
+    // custom + groups
+    expectSlotProps('item', () => NavigationMenu({
+      items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
   })
 })

@@ -1,9 +1,7 @@
 ---
-description: An image element with fallback.
+description: An img element with fallback and Nuxt Image support.
+category: element
 links:
-  - label: Avatar
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/avatar.html
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Avatar.vue
@@ -11,9 +9,15 @@ links:
 
 ## Usage
 
+The Avatar uses the `<NuxtImg>` component when [`@nuxt/image`](https://github.com/nuxt/image) is installed, falling back to `img` otherwise.
+
+::note
+You can pass any property from the HTML `<img>` element such as `alt`, `loading`, etc.
+::
+
 ### Src
 
-Use the `src` prop to set the image URL. You can pass any property from HTML `<img>` element such as `alt`, `loading`, etc.
+Use the `src` prop to set the image URL.
 
 ::component-code
 ---
@@ -36,6 +40,10 @@ props:
 ---
 ::
 
+::note
+The `<img>` element's `width` and `height` are automatically set based on the `size` prop.
+::
+
 ### Icon
 
 Use the `icon` prop to display a fallback [Icon](/components/icon).
@@ -43,7 +51,7 @@ Use the `icon` prop to display a fallback [Icon](/components/icon).
 ::component-code
 ---
 props:
-  icon: 'i-heroicons-photo'
+  icon: 'i-lucide-image'
   size: md
 ---
 ::

@@ -1,46 +1,84 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/badge'
+import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { AvatarProps } from '../types'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { badge: Partial<typeof theme> } }
+type Badge = ComponentConfig<typeof theme, AppConfig, 'badge'>
 
-const badge = tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })
-
-type BadgeVariants = VariantProps<typeof badge>
-
-export interface BadgeProps {
+export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
    */
   as?: any
   label?: string | number
-  color?: BadgeVariants['color']
-  variant?: BadgeVariants['variant']
-  size?: BadgeVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: Badge['variants']['color']
+  /**
+   * @defaultValue 'solid'
+   */
+  variant?: Badge['variants']['variant']
+  /**
+   * @defaultValue 'md'
+   */
+  size?: Badge['variants']['size']
   class?: any
+  ui?: Badge['slots']
 }
 
 export interface BadgeSlots {
+  leading(props?: {}): any
   default(props?: {}): any
+  trailing(props?: {}): any
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { computed } from 'vue'
+import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
+import { useButtonGroup } from '../composables/useButtonGroup'
+import { useComponentIcons } from '../composables/useComponentIcons'
+import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 const props = withDefaults(defineProps<BadgeProps>(), {
   as: 'span'
 })
 defineSlots<BadgeSlots>()
+
+const appConfig = useAppConfig() as Badge['AppConfig']
+const { orientation, size: buttonGroupSize } = useButtonGroup<BadgeProps>(props)
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })({
+  color: props.color,
+  variant: props.variant,
+  size: buttonGroupSize.value || props.size,
+  buttonGroup: orientation.value
+}))
 </script>
 
 <template>
-  <Primitive :as="as" :class="badge({ color, variant, size, class: props.class })">
+  <Primitive :as="as" :class="ui.base({ class: [props.class, props.ui?.base] })">
+    <slot name="leading">
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+      <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+    </slot>
+
     <slot>
-      {{ label }}
+      <span v-if="label" :class="ui.label({ class: props.ui?.label })">
+        {{ label }}
+      </span>
+    </slot>
+
+    <slot name="trailing">
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
     </slot>
   </Primitive>
 </template>

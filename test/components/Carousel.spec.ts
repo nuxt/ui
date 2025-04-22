@@ -30,14 +30,14 @@ describe('Carousel', () => {
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
     ['with arrows', { props: { ...props, arrows: true } }],
     ['with prev', { props: { ...props, arrows: true, prev: { color: 'primary' as const } } }],
-    ['with prevIcon', { props: { ...props, arrows: true, prevIcon: 'i-heroicons-arrow-left' } }],
+    ['with prevIcon', { props: { ...props, arrows: true, prevIcon: 'i-lucide-arrow-left' } }],
     ['with next', { props: { ...props, arrows: true, next: { color: 'primary' as const } } }],
-    ['with nextIcon', { props: { ...props, arrows: true, nextIcon: 'i-heroicons-arrow-right' } }],
+    ['with nextIcon', { props: { ...props, arrows: true, nextIcon: 'i-lucide-arrow-right' } }],
     ['with dots', { props: { ...props, dots: true } }],
     ['with as', { props: { ...props, as: 'nav' } }],
     ['with class', { props: { ...props, class: 'w-full max-w-xs' } }],
     ['with ui', { props: { ...props, ui: { viewport: 'h-[320px]' } } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CarouselProps<typeof items[number]>, slots?: Partial<CarouselSlots<typeof items[number]>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CarouselProps, slots?: Partial<CarouselSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, CarouselWrapper)
     expect(html).toMatchSnapshot()
   })

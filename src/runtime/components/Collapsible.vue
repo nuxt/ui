@@ -1,22 +1,19 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
-import type { CollapsibleRootProps, CollapsibleRootEmits } from 'radix-vue'
+import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/collapsible'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { collapsible: Partial<typeof theme> } }
+type Collapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible'>
 
-const collapsible = tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })
-
-export interface CollapsibleProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled'> {
+export interface CollapsibleProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
   class?: any
-  ui?: Partial<typeof collapsible.slots>
+  ui?: Collapsible['slots']
 }
 
 export interface CollapsibleEmits extends CollapsibleRootEmits {}
@@ -28,17 +25,24 @@ export interface CollapsibleSlots {
 </script>
 
 <script setup lang="ts">
-import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'radix-vue'
+import { computed } from 'vue'
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
-const props = defineProps<CollapsibleProps>()
+const props = withDefaults(defineProps<CollapsibleProps>(), {
+  unmountOnHide: true
+})
 const emits = defineEmits<CollapsibleEmits>()
 const slots = defineSlots<CollapsibleSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled'), emits)
+const appConfig = useAppConfig() as Collapsible['AppConfig']
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = collapsible()
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })())
 </script>
 
 <template>

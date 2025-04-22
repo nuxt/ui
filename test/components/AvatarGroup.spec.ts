@@ -22,9 +22,9 @@ describe('AvatarGroup', () => {
 
   it.each([
     // Props
-    ['with as', { props: { as: 'span' } }],
     ['with max', { props: { max: 2 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
+    ['with as', { props: { as: 'span' } }],
     ['with class', { props: { class: 'justify-start' } }],
     ['with ui', { props: { ui: { base: 'rounded-lg' } } }],
     // Slots

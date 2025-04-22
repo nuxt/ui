@@ -11,12 +11,12 @@ describe('Breadcrumb', () => {
     to: '/'
   }, {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent',
+    icon: 'i-lucide-box',
     disabled: true
   }, {
     label: 'Breadcrumb',
     to: '/components/breadcrumb',
-    icon: 'i-heroicons-link',
+    icon: 'i-lucide-link',
     slot: 'custom'
   }]
 
@@ -26,7 +26,8 @@ describe('Breadcrumb', () => {
     // Props
     ['with items', { props }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
-    ['with separatorIcon', { props: { ...props, separatorIcon: 'i-heroicons-minus' } }],
+    ['with separatorIcon', { props: { ...props, separatorIcon: 'i-lucide-minus' } }],
+    ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
     // Slots
@@ -36,7 +37,7 @@ describe('Breadcrumb', () => {
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with separator slot', { props, slots: { separator: () => '/' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps<typeof items[number]>, slots?: Partial<BreadcrumbSlots<typeof items[number]>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps, slots?: Partial<BreadcrumbSlots & { custom: () => 'Custom slot' }> }) => {
     const html = await ComponentRender(nameOrHtml, options, Breadcrumb)
     expect(html).toMatchSnapshot()
   })

@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, test } from 'vitest'
 import DropdownMenu, { type DropdownMenuProps, type DropdownMenuSlots } from '../../src/runtime/components/DropdownMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/dropdown-menu'
+import { expectSlotProps } from '../utils/types'
 
 describe('DropdownMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -16,32 +17,32 @@ describe('DropdownMenu', () => {
     }],
     [{
       label: 'Profile',
-      icon: 'i-heroicons-user',
+      icon: 'i-lucide-user',
       slot: 'custom'
     }, {
       label: 'Billing',
-      icon: 'i-heroicons-credit-card',
+      icon: 'i-lucide-credit-card',
       kbds: ['meta', 'b']
     }, {
       label: 'Settings',
-      icon: 'i-heroicons-cog',
+      icon: 'i-lucide-cog',
       kbds: ['?']
     }], [{
       label: 'Team',
-      icon: 'i-heroicons-users'
+      icon: 'i-lucide-users'
     }, {
       label: 'Invite users',
-      icon: 'i-heroicons-user-plus',
+      icon: 'i-lucide-user-plus',
       children: [[{
         label: 'Invite by email',
-        icon: 'i-heroicons-paper-airplane'
+        icon: 'i-lucide-send-horizontal'
       }, {
         label: 'Invite by link',
-        icon: 'i-heroicons-link',
+        icon: 'i-lucide-link',
         kbds: ['meta', 'i']
       }], [{
         label: 'More',
-        icon: 'i-heroicons-plus-circle',
+        icon: 'i-lucide-circle-plus',
         children: [{
           label: 'Import from Slack',
           icon: 'i-simple-icons-slack',
@@ -57,7 +58,7 @@ describe('DropdownMenu', () => {
       }]]
     }, {
       label: 'New team',
-      icon: 'i-heroicons-plus',
+      icon: 'i-lucide-plus',
       kbds: ['meta', 'n']
     }], [{
       label: 'GitHub',
@@ -66,20 +67,21 @@ describe('DropdownMenu', () => {
       target: '_blank'
     }, {
       label: 'Support',
-      icon: 'i-heroicons-lifebuoy',
+      icon: 'i-lucide-life-buoy',
       to: '/components/dropdown-menu'
     }, {
       type: 'separator'
     }, {
       label: 'Keyboard Shortcuts',
-      icon: 'i-heroicons-key'
+      icon: 'i-lucide-key-round'
     }, {
       label: 'API',
-      icon: 'i-heroicons-cube',
+      icon: 'i-lucide-box',
       disabled: true
     }], [{
       label: 'Logout',
-      icon: 'i-heroicons-arrow-right-start-on-rectangle',
+      color: 'error',
+      icon: 'i-lucide-log-out',
       kbds: ['shift', 'meta', 'q']
     }]
   ]
@@ -93,6 +95,8 @@ describe('DropdownMenu', () => {
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
+    ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
+    ['without externalIcon', { props: { ...props, externalIcon: false } }],
     ['with class', { props: { ...props, class: 'min-w-96' } }],
     ['with ui', { props: { ...props, ui: { itemLeadingIcon: 'size-4' } } }],
     // Slots
@@ -102,8 +106,30 @@ describe('DropdownMenu', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps<typeof items[number][number]>, slots?: Partial<DropdownMenuSlots<any>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps, slots?: Partial<DropdownMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, DropdownMenu)
     expect(html).toMatchSnapshot()
+  })
+
+  test('should have the correct types', () => {
+    // normal
+    expectSlotProps('item', () => DropdownMenu({
+      items: [{ label: 'foo', value: 'bar' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // groups
+    expectSlotProps('item', () => DropdownMenu({
+      items: [[{ label: 'foo', value: 'bar' }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string }, index: number, active?: boolean }>()
+
+    // custom
+    expectSlotProps('item', () => DropdownMenu({
+      items: [{ label: 'foo', value: 'bar', custom: 'nice' }]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
+
+    // custom + groups
+    expectSlotProps('item', () => DropdownMenu({
+      items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]]
+    })).toEqualTypeOf<{ item: { label: string, value: string, custom: string }, index: number, active?: boolean }>()
   })
 })

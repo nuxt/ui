@@ -1,16 +1,18 @@
 <script setup lang="ts">
-const items = [
+import type { AccordionItem } from '@nuxt/ui'
+
+const items: AccordionItem[] = [
   {
     label: 'Icons',
-    icon: 'i-heroicons-face-smile'
+    icon: 'i-lucide-smile'
   },
   {
     label: 'Colors',
-    icon: 'i-heroicons-swatch'
+    icon: 'i-lucide-swatch-book'
   },
   {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent'
+    icon: 'i-lucide-box'
   }
 ]
 </script>

@@ -7,12 +7,12 @@ defineShortcuts({
 </script>
 
 <template>
-  <UCollapsible v-model:open="open" class="w-48">
+  <UCollapsible v-model:open="open" class="flex flex-col gap-2 w-48">
     <UButton
       label="Open"
       color="neutral"
       variant="subtle"
-      trailing-icon="i-heroicons-chevron-down-20-solid"
+      trailing-icon="i-lucide-chevron-down"
       block
     />
 

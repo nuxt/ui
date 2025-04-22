@@ -9,19 +9,19 @@ describe('Chip', () => {
 
   it.each([
     // Props
-    ['with as', { props: { as: 'span' } }],
     ['with text', { props: { text: 'Text' } }],
     ['with inset', { props: { inset: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...positions.map((position: string) => [`with position ${position}`, { props: { position } }]),
     ['with color neutral', { props: { color: 'neutral' } }],
     ['without show', { props: { show: false } }],
+    ['with as', { props: { as: 'span' } }],
     ['with class', { props: { class: 'mx-auto' } }],
-    ['with ui', { props: { ui: { base: 'text-[var(--ui-text-muted)]' } } }],
+    ['with ui', { props: { ui: { base: 'text-muted' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChipProps & { show?: boolean }, slots?: Partial<ChipSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChipProps, slots?: Partial<ChipSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Chip)
     expect(html).toMatchSnapshot()
   })

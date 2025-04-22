@@ -1,10 +1,22 @@
 <script setup lang="ts">
+import type { ChipProps } from '@nuxt/ui'
 import { camelCase } from 'scule'
+import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
 
 const props = withDefaults(defineProps<{
   name: string
   class?: any
+  /**
+   * Whether to render the component in an iframe
+   * @defaultValue false
+   */
+  iframe?: boolean | { [key: string]: any }
+  /**
+   * Whether to display the component in a mobile-sized iframe viewport
+   * @defaultValue false
+   */
+  iframeMobile?: boolean
   props?: { [key: string]: any }
   /**
    * Whether to format the code with Prettier
@@ -22,13 +34,11 @@ const props = withDefaults(defineProps<{
    * @defaultValue true
    */
   preview?: boolean
-
   /**
    * Whether to show the source code
    * @defaultValue true
    */
   source?: boolean
-
   /**
    * A list of variable props to link to the component.
    */
@@ -40,6 +50,14 @@ const props = withDefaults(defineProps<{
     default: any
     multiple?: boolean
   }>
+  /**
+   * A list of line numbers to highlight in the code block
+   */
+  highlights?: number[]
+  /**
+   * Whether to add overflow-hidden to wrapper
+   */
+  overflowHidden?: boolean
 }>(), {
   preview: true,
   source: true
@@ -47,9 +65,13 @@ const props = withDefaults(defineProps<{
 
 const slots = defineSlots<{
   options(props?: {}): any
+  code(props?: {}): any
 }>()
 
+const el = ref<HTMLElement | null>(null)
+
 const { $prettier } = useNuxtApp()
+const { width } = useElementSize(el)
 
 const camelName = camelCase(props.name)
 
@@ -65,7 +87,7 @@ const code = computed(() => {
 `
   }
 
-  code += `\`\`\`vue${props.preview ? '' : ` [${data.pascalName}.vue]`}
+  code += `\`\`\`vue ${props.preview ? '' : ` [${data.pascalName}.vue]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
 ${data?.code ?? ''}
 \`\`\``
 
@@ -87,7 +109,8 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}`, async
     formatted = await $prettier.format(code.value, {
       trailingComma: 'none',
       semi: false,
-      singleQuote: true
+      singleQuote: true,
+      printWidth: 100
     })
   } catch {
     formatted = code.value
@@ -109,13 +132,26 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
   }
   return acc
 }, {} as Record<string, any>) || {})
+
+const urlSearchParams = computed(() => {
+  const params = {
+    ...optionsValues.value,
+    ...componentProps
+  }
+
+  if (!props.iframeMobile) {
+    params.width = Math.round(width.value).toString()
+  }
+
+  return new URLSearchParams(params).toString()
+})
 </script>
 
 <template>
-  <div class="my-5">
-    <div v-if="preview">
-      <div class="border border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)] relative z-[1]" :class="[{ 'border-b-0 rounded-t-[calc(var(--ui-radius)*1.5)]': props.source, 'rounded-[calc(var(--ui-radius)*1.5)]': !props.source }]">
-        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-[var(--ui-color-neutral-200)] dark:border-[var(--ui-color-neutral-700)]">
+  <div ref="el" class="my-5">
+    <template v-if="preview">
+      <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
+        <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">
           <slot name="options" />
 
           <UFormField
@@ -124,10 +160,10 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
             :label="option.label"
             :name="option.name"
             size="sm"
-            class="inline-flex ring ring-[var(--ui-border-accented)] rounded-[var(--ui-radius)]"
+            class="inline-flex ring ring-accented rounded-sm"
             :ui="{
-              wrapper: 'bg-[var(--ui-bg-elevated)]/50 rounded-l-[var(--ui-radius)] flex border-r border-[var(--ui-border-accented)]',
-              label: 'text-[var(--ui-text-muted)] px-2 py-1.5',
+              wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-accented',
+              label: 'text-muted px-2 py-1.5',
               container: 'mt-0'
             }"
           >
@@ -139,7 +175,7 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
               :value-key="option.name.toLowerCase().endsWith('color') ? 'value' : undefined"
               color="neutral"
               variant="soft"
-              class="rounded-[var(--ui-radius)] rounded-l-none min-w-12"
+              class="rounded-sm rounded-l-none min-w-12"
               :multiple="option.multiple"
               :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
               :ui="{ itemLeadingChip: 'size-2' }"
@@ -150,7 +186,7 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
                   inset
                   standalone
                   :color="(modelValue as any)"
-                  :size="ui.itemLeadingChipSize()"
+                  :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
                   class="size-2"
                 />
               </template>
@@ -160,18 +196,30 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
               :model-value="get(optionsValues, option.name)"
               color="neutral"
               variant="soft"
-              :ui="{ base: 'rounded-[var(--ui-radius)] rounded-l-none min-w-12' }"
+              :ui="{ base: 'rounded-sm rounded-l-none min-w-12' }"
               @update:model-value="set(optionsValues, option.name, $event)"
             />
           </UFormField>
         </div>
 
-        <div class="flex justify-center p-4" :class="props.class">
+        <iframe
+          v-if="iframe"
+          v-bind="typeof iframe === 'object' ? iframe : {}"
+          :src="`/examples/${name}?${urlSearchParams}`"
+          class="relative w-full"
+          :class="[props.class, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
+        />
+        <div v-else class="flex justify-center p-4" :class="props.class">
           <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
         </div>
       </div>
-    </div>
+    </template>
 
-    <MDCRenderer v-if="ast && props.source" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    <template v-if="props.source">
+      <div v-if="!!slots.code" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0">
+        <slot name="code" />
+      </div>
+      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    </template>
   </div>
 </template>

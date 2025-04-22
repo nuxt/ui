@@ -10,7 +10,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
       <UAvatar v-for="size in sizes" :key="size" src="https://github.com/benjamincanac.png" alt="Benjamin Canac" :size="size" />
     </div>
     <div class="flex items-center gap-1.5">
-      <UAvatar v-for="size in sizes" :key="size" icon="i-heroicons-photo" :size="size" />
+      <UAvatar v-for="size in sizes" :key="size" icon="i-lucide-image" :size="size" />
     </div>
     <div class="flex items-center gap-1.5">
       <UAvatar v-for="size in sizes" :key="size" alt="Benjamin Canac" :size="size" />

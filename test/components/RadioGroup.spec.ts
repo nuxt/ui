@@ -8,6 +8,8 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('RadioGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const variants = Object.keys(theme.variants.variant) as any
+  const indicators = Object.keys(theme.variants.indicator) as any
 
   const items = [
     { value: '1', label: 'Option 1' },
@@ -19,6 +21,7 @@ describe('RadioGroup', () => {
 
   it.each([
     ['with items', { props }],
+    ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
     ['with valueKey', { props: { ...props, valueKey: 'label' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
@@ -27,15 +30,19 @@ describe('RadioGroup', () => {
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with required', { props: { ...props, legend: 'Legend', required: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-    ['with color neutral', { props: { color: 'neutral', defaultValue: '1' } }],
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant, defaultValue: '1' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral', defaultValue: '1' } }]),
+    ...variants.map((variant: string) => [`with horizontal variant ${variant}`, { props: { ...props, variant, orientation: 'horizontal', defaultValue: '1' } }]),
+    ...indicators.map((indicator: string) => [`with indicator ${indicator}`, { props: { ...props, indicator } }]),
+    ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
+    ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { wrapper: 'ms-4' } } }],
-    ['with orientation', { props: { ...props, orientation: 'horizontal' } }],
     // Slots
     ['with legend slot', { props, slots: { label: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
     ['with description slot', { props, slots: { label: () => 'Description slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: RadioGroupProps<any>, slots?: Partial<RadioGroupSlots<any>> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: RadioGroupProps, slots?: Partial<RadioGroupSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, RadioGroup)
     expect(html).toMatchSnapshot()
   })

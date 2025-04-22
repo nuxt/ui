@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import theme from '#build/ui/kbd'
-import { kbdKeysMap } from '@nuxt/ui/runtime/composables/useKbd.js'
+import { kbdKeysMap } from '@nuxt/ui/composables/useKbd.js'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
@@ -18,10 +18,10 @@ const kbdKeys = Object.keys(kbdKeysMap)
     <div class="flex items-center gap-1">
       <UKbd value="meta" variant="solid" />
     </div>
-    <div class="flex items-center gap-1 ml-[-216px]">
+    <div class="flex items-center gap-1 ms-[-220px]">
       <UKbd v-for="(kdbKey, index) in kbdKeys" :key="index" :value="kdbKey" />
     </div>
-    <div class="flex items-center gap-1 ml-[-22px]">
+    <div class="flex items-center gap-1 ms-[-22px]">
       <UKbd v-for="size in sizes" :key="size" value="meta" :size="size" />
     </div>
   </div>

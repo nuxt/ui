@@ -1,24 +1,25 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { SliderRootProps } from 'radix-vue'
+import type { SliderRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/slider'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { slider: Partial<typeof theme> } }
-
-const slider = tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })
-
-type SliderVariants = VariantProps<typeof slider>
+type Slider = ComponentConfig<typeof theme, AppConfig, 'slider'>
 
 export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' | 'inverted' | 'min' | 'max' | 'step' | 'minStepsBetweenThumbs'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
-  size?: SliderVariants['size']
-  color?: SliderVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
+  size?: Slider['variants']['size']
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: Slider['variants']['color']
   /**
    * The orientation of the slider.
    * @defaultValue 'horizontal'
@@ -27,7 +28,7 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
   /** The value of the slider when initially rendered. Use when you do not need to control the state of the slider. */
   defaultValue?: number | number[]
   class?: any
-  ui?: Partial<typeof slider.slots>
+  ui?: Slider['slots']
 }
 
 export interface SliderEmits {
@@ -38,9 +39,11 @@ export interface SliderEmits {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'radix-vue'
+import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<SliderProps>(), {
   min: 0,
@@ -52,9 +55,11 @@ const emits = defineEmits<SliderEmits>()
 
 const modelValue = defineModel<number | number[]>()
 
+const appConfig = useAppConfig() as Slider['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits)
 
-const { id, emitFormChange, emitFormInput, size, color, name, disabled } = useFormField<SliderProps>(props)
+const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SliderProps>(props)
 
 const defaultSliderValue = computed(() => {
   if (typeof props.defaultValue === 'number') {
@@ -77,7 +82,7 @@ const sliderValue = computed({
 
 const thumbsCount = computed(() => sliderValue.value?.length ?? 1)
 
-const ui = computed(() => slider({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })({
   disabled: disabled.value,
   size: size.value,
   color: color.value,
@@ -94,7 +99,7 @@ function onChange(value: any) {
 
 <template>
   <SliderRoot
-    v-bind="rootProps"
+    v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     v-model="sliderValue"
     :name="name"

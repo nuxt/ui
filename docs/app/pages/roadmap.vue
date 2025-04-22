@@ -5,11 +5,14 @@ const description = 'Discover our Volta board for @nuxt/ui development status.'
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title,
-  ogTitle: 'Nuxt UI Roadmap',
-  description
+  description,
+  ogTitle: `${title} - Nuxt UI`,
+  ogDescription: description
 })
 
-defineOgImageComponent('Docs')
+defineOgImageComponent('Docs', {
+  headline: 'Community'
+})
 
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
@@ -20,7 +23,7 @@ const src = computed(() => `https://volta.net/embed/${token}?theme=${colorMode.v
 </script>
 
 <template>
-  <div class="h-[calc(100vh-var(--ui-header-height)-var(--ui-header-height)-48px-1px)]">
+  <div class="h-[calc(100vh-var(--ui-header-height))]">
     <ClientOnly>
       <iframe :src="src" width="100%" height="100%" />
     </ClientOnly>

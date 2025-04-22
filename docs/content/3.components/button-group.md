@@ -1,6 +1,7 @@
 ---
 title: ButtonGroup
 description: Group multiple button-like elements together.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -18,10 +19,10 @@ slots:
   default: |
 
     <UButton color="neutral" variant="subtle" label="Button" />
-    <UButton color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid" />
+    <UButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
 ---
 :u-button{color="neutral" variant="subtle" label="Button"}
-:u-button{color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid"}
+:u-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
 ::
 
 ### Size
@@ -37,10 +38,10 @@ slots:
   default: |
 
     <UButton color="neutral" variant="subtle" label="Button" />
-    <UButton color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid" />
+    <UButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
 ---
 :u-button{color="neutral" variant="subtle" label="Button"}
-:u-button{color="neutral" variant="outline" icon="i-heroicons-chevron-down-20-solid"}
+:u-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
 ::
 
 ### Orientation
@@ -76,23 +77,29 @@ slots:
 
     <UInput color="neutral" variant="outline" placeholder="Enter token" />
 
-    <UButton color="neutral" variant="subtle" icon="i-heroicons-clipboard-document" />
+    <UButton color="neutral" variant="subtle" icon="i-lucide-clipboard" />
 ---
 :u-input{color="neutral" variant="outline" placeholder="Enter token"}
-:u-button{color="neutral" variant="subtle" icon="i-heroicons-clipboard-document"}
+:u-button{color="neutral" variant="subtle" icon="i-lucide-clipboard"}
 ::
 
 ### With tooltip
 
-You can use a tooltip within a button group.
+You can use a [Tooltip](/components/tooltip) within a button group.
 
 :component-example{name="button-group-tooltip-example"}
 
 ### With dropdown
 
-You can use a dropdown menu within a button group.
+You can use a [DropdownMenu](/components/dropdown-menu) within a button group.
 
 :component-example{name="button-group-dropdown-example"}
+
+### With badge
+
+You can use a [Badge](/components/badge) within a button group.
+
+:component-example{name="button-group-badge-example"}
 
 ## API
 

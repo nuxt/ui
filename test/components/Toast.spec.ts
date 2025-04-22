@@ -12,7 +12,7 @@ const ToastWrapper = defineComponent({
     ClientOnly
   },
   inheritAttrs: false,
-  template: `<UToaster>
+  template: `<UToaster :portal="false">
   <ClientOnly>
     <UToast v-bind="$attrs">
       <template v-for="(_, name) in $slots" #[name]="slotData">
@@ -30,15 +30,17 @@ describe('Toast', () => {
     // Props
     ['with title', { props }],
     ['with description', { props: { ...props, description: 'This is a toast' } }],
-    ['with icon', { props: { ...props, icon: 'i-heroicons-rocket-launch' } }],
+    ['with icon', { props: { ...props, icon: 'i-lucide-rocket' } }],
     ['with avatar', { props: { ...props, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with actions', { props: { ...props, actions: [{ label: 'Action' }] } }],
-    ['with description actions', { props: { ...props, description: 'This is a toast', actions: [{ label: 'Action' }] } }],
+    ['with orientation vertical', { props: { ...props, icon: 'i-lucide-rocket', description: 'This is a toast', actions: [{ label: 'Action' }], orientation: 'vertical' as const } }],
+    ['with orientation horizontal', { props: { ...props, icon: 'i-lucide-rocket', description: 'This is a toast', actions: [{ label: 'Action' }], orientation: 'horizontal' as const } }],
     ['without close', { props: { ...props, close: false } }],
-    ['with closeIcon', { props: { ...props, closeIcon: 'i-heroicons-trash' } }],
+    ['with closeIcon', { props: { ...props, closeIcon: 'i-lucide-trash' } }],
     ['with type', { props: { ...props, type: 'background' as const } }],
     ['with color neutral', { props: { ...props, color: 'neutral' as const } }],
-    ['with class', { props: { ...props, class: 'bg-[var(--ui-bg-elevated)]/50' } }],
+    ['with as', { props: { ...props, as: 'section' } }],
+    ['with class', { props: { ...props, class: 'bg-elevated/50' } }],
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],

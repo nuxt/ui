@@ -1,110 +1,112 @@
 <script setup lang="ts">
-const items = [
+import type { NavigationMenuItem } from '@nuxt/ui'
+
+const items: NavigationMenuItem[] = [
   {
     label: 'Guide',
-    icon: 'i-heroicons-book-open',
+    icon: 'i-lucide-book-open',
     children: [
       {
         label: 'Introduction',
         description: 'Fully styled and customizable components for Nuxt.',
-        icon: 'i-heroicons-home'
+        icon: 'i-lucide-house'
       },
       {
         label: 'Installation',
         description: 'Learn how to install and configure Nuxt UI in your application.',
-        icon: 'i-heroicons-cloud-arrow-down'
+        icon: 'i-lucide-cloud-download'
       },
       {
         label: 'Icons',
-        icon: 'i-heroicons-face-smile',
+        icon: 'i-lucide-smile',
         description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
       },
       {
         label: 'Colors',
-        icon: 'i-heroicons-swatch',
+        icon: 'i-lucide-swatch-book',
         description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
       },
       {
         label: 'Theme',
-        icon: 'i-heroicons-cog',
+        icon: 'i-lucide-cog',
         description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       }
     ]
   },
   {
     label: 'Composables',
-    icon: 'i-heroicons-circle-stack',
+    icon: 'i-lucide-database',
     children: [
       {
         label: 'defineShortcuts',
-        icon: 'i-heroicons-document-text-20-solid',
+        icon: 'i-lucide-file-text',
         description: 'Define shortcuts for your application.'
       },
       {
-        label: 'useModal',
-        icon: 'i-heroicons-document-text-20-solid',
-        description: 'Display a modal within your application.'
-      },
-      {
-        label: 'useSlideover',
-        icon: 'i-heroicons-document-text-20-solid',
-        description: 'Display a slideover within your application.'
+        label: 'useOverlay',
+        icon: 'i-lucide-file-text',
+        description: 'Display a modal/slideover within your application.'
       },
       {
         label: 'useToast',
-        icon: 'i-heroicons-document-text-20-solid',
+        icon: 'i-lucide-file-text',
         description: 'Display a toast within your application.'
       }
     ]
   },
   {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent',
+    icon: 'i-lucide-box',
     children: [
       {
         label: 'Link',
-        icon: 'i-heroicons-document-text-20-solid',
+        icon: 'i-lucide-file-text',
         description: 'Use NuxtLink with superpowers.'
       },
       {
         label: 'Modal',
-        icon: 'i-heroicons-document-text-20-solid',
+        icon: 'i-lucide-file-text',
         description: 'Display a modal within your application.'
       },
       {
         label: 'NavigationMenu',
-        icon: 'i-heroicons-document-text-20-solid',
+        icon: 'i-lucide-file-text',
         description: 'Display a list of links.'
       },
       {
         label: 'Pagination',
-        icon: 'i-heroicons-document-text-20-solid',
+        icon: 'i-lucide-file-text',
         description: 'Display a list of pages.'
       },
       {
         label: 'Popover',
-        icon: 'i-heroicons-document-text-20-solid',
+        icon: 'i-lucide-file-text',
         description: 'Display a non-modal dialog that floats around a trigger element.'
       },
       {
         label: 'Progress',
-        icon: 'i-heroicons-document-text-20-solid',
+        icon: 'i-lucide-file-text',
         description: 'Show a horizontal bar to indicate task progression.'
       }
     ]
   }
 ]
 
-const active = ref('0')
+const active = ref()
 
-// Note: This is for demonstration purposes only. Don't do this at home.
-onMounted(() => {
-  setInterval(() => {
-    active.value = String((Number(active.value) + 1) % items.length)
-  }, 2000)
+defineShortcuts({
+  1: () => {
+    active.value = '0'
+  },
+  2: () => {
+    active.value = '1'
+  },
+  3: () => {
+    active.value = '2'
+  }
 })
 </script>
 
 <template>
-  <UNavigationMenu v-model="active" :items="items" class="justify-center" />
+  <UNavigationMenu v-model="active" :items="items" class="w-full justify-center" />
 </template>

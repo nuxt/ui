@@ -1,9 +1,10 @@
 ---
 description: A succinct message to provide information or feedback to the user.
+category: overlay
 links:
   - label: Toast
-    icon: i-custom-radix-vue
-    to: https://www.radix-vue.com/components/toast.html
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/toast
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Toast.vue
@@ -14,7 +15,7 @@ links:
 Use the [useToast](/composables/use-toast) composable to display a toast in your application.
 
 ::warning
-Make sure to wrap your app with the [App](/components/app) component which uses our [Toaster](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [ToastProvider](https://www.radix-vue.com/components/toast.html#provider) component from Radix Vue.
+Make sure to wrap your app with the [`App`](/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://reka-ui.com/docs/components/toast#provider) component from Reka UI.
 ::
 
 ::tip{to="/components/app#props"}
@@ -61,7 +62,7 @@ Pass an `icon` field to the `toast.add` method to display an [Icon](/components/
 options:
   - name: 'icon'
     label: 'icon'
-    default: 'i-heroicons-wifi'
+    default: 'i-lucide-wifi'
 name: 'toast-icon-example'
 ---
 ::
@@ -116,20 +117,28 @@ name: 'toast-close-example'
 
 ### Close Icon
 
-Pass a `closeIcon` field to customize the close button [Icon](/components/icon). Default to `i-heroicons-x-mark-20-solid`.
+Pass a `closeIcon` field to customize the close button [Icon](/components/icon). Default to `i-lucide-x`.
 
 ::component-example
 ---
 options:
   - name: 'closeIcon'
     label: 'closeIcon'
-    default: 'i-heroicons-arrow-right'
+    default: 'i-lucide-arrow-right'
 name: 'toast-close-icon-example'
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
 ::
 
 ### Actions
@@ -146,8 +155,21 @@ name: 'toast-actions-example'
 ---
 ::
 
-::note
-Actions renders differently when the description is not set. You can try to remove it.
+### Orientation
+
+Use the `orientation` prop to change the orientation of the Toast.
+
+::component-example
+---
+options:
+  - name: 'orientation'
+    label: 'orientation'
+    default: 'horizontal'
+    items:
+      - horizontal
+      - vertical
+name: 'toast-orientation-example'
+---
 ::
 
 ## Examples

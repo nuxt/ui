@@ -1,8 +1,19 @@
 <script setup lang="ts">
 import { splitByCase, upperFirst } from 'scule'
+import { useColorMode } from '#imports'
 
-const appConfig = useAppConfig()
 const router = useRouter()
+const appConfig = useAppConfig()
+const colorMode = useColorMode()
+
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set(_isDark) {
+    colorMode.preference = _isDark ? 'dark' : 'light'
+  }
+})
 
 const components = [
   'accordion',
@@ -13,10 +24,12 @@ const components = [
   'button',
   'button-group',
   'card',
+  'calendar',
   'carousel',
   'checkbox',
   'chip',
   'collapsible',
+  'color-picker',
   'context-menu',
   'command-palette',
   'drawer',
@@ -25,11 +38,13 @@ const components = [
   'form-field',
   'input',
   'input-menu',
+  'input-number',
   'kbd',
   'link',
   'modal',
   'navigation-menu',
   'pagination',
+  'pin-input',
   'popover',
   'progress',
   'radio-group',
@@ -40,11 +55,14 @@ const components = [
   'skeleton',
   'slideover',
   'slider',
+  'stepper',
   'switch',
   'tabs',
+  'table',
   'textarea',
   'toast',
-  'tooltip'
+  'tooltip',
+  'tree'
 ]
 
 const items = components.map(component => ({ label: upperName(component), to: `/components/${component}` }))
@@ -62,44 +80,48 @@ function onSelect(item: any) {
 defineShortcuts({
   meta_k: () => isCommandPaletteOpen.value = true
 })
+
+useHead({
+  title: 'Nuxt UI - Playground'
+})
 </script>
 
 <template>
-  <UApp :toaster="appConfig.toaster">
-    <div class="h-screen w-screen overflow-hidden flex flex-col lg:flex-row min-h-0 bg-[var(--ui-bg)]" vaul-drawer-wrapper>
-      <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-r border-[var(--ui-border)] overflow-y-auto w-48 p-4" />
-      <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-[var(--ui-border)] overflow-x-auto" />
+  <template v-if="!$route.path.startsWith('/__nuxt_ui__')">
+    <UApp :toaster="appConfig.toaster">
+      <div class="h-screen w-screen overflow-hidden flex flex-col lg:flex-row min-h-0 bg-default" data-vaul-drawer-wrapper>
+        <UNavigationMenu :items="items" orientation="vertical" class="hidden lg:flex border-e border-default overflow-y-auto w-48 p-4" />
+        <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-default [&>div]:min-w-min overflow-x-auto" />
 
-      <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-12 px-4">
-        <NuxtPage />
+        <div class="fixed top-15 lg:top-3 end-4 flex items-center gap-2">
+          <ClientOnly v-if="!colorMode?.forced">
+            <UButton
+              :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
+              color="neutral"
+              variant="ghost"
+              :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
+              @click="isDark = !isDark"
+            />
+
+            <template #fallback>
+              <div class="size-8" />
+            </template>
+          </ClientOnly>
+        </div>
+
+        <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-14 px-4">
+          <NuxtPage />
+        </div>
+
+        <UModal v-model:open="isCommandPaletteOpen" class="sm:h-96">
+          <template #content>
+            <UCommandPalette placeholder="Search a component..." :groups="[{ id: 'items', items }]" :fuse="{ resultLimit: 100 }" @update:model-value="onSelect" @update:open="value => isCommandPaletteOpen = value" />
+          </template>
+        </UModal>
       </div>
-    </div>
-
-    <UModal v-model:open="isCommandPaletteOpen" class="sm:h-96">
-      <template #content>
-        <UCommandPalette placeholder="Search a component..." :groups="[{ id: 'items', items }]" :fuse="{ resultLimit: 100 }" @update:model-value="onSelect" @update:open="value => isCommandPaletteOpen = value" />
-      </template>
-    </UModal>
-  </UApp>
+    </UApp>
+  </template>
+  <template v-else>
+    <NuxtPage />
+  </template>
 </template>
-
-<style>
-@import "tailwindcss";
-@import "@nuxt/ui";
-
-@theme {
-  --font-family-sans: 'Public Sans', sans-serif;
-
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
-}
-</style>

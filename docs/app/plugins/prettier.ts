@@ -43,27 +43,25 @@ function createPrettierWorkerApi(worker: Worker): SimplePrettier {
   }
 }
 
-export default defineNuxtPlugin({
-  async setup() {
-    let prettier: SimplePrettier
-    if (import.meta.server) {
-      const prettierModule = await import('prettier')
-      prettier = {
-        format(source, options = {}) {
-          return prettierModule.format(source, defu(options, {
-            parser: 'markdown'
-          }))
-        }
+export default defineNuxtPlugin(async () => {
+  let prettier: SimplePrettier
+  if (import.meta.server) {
+    const prettierModule = await import('prettier')
+    prettier = {
+      format(source, options = {}) {
+        return prettierModule.format(source, defu(options, {
+          parser: 'markdown'
+        }))
       }
-    } else {
-      const worker = new PrettierWorker()
-      prettier = createPrettierWorkerApi(worker)
     }
+  } else {
+    const worker = new PrettierWorker()
+    prettier = createPrettierWorkerApi(worker)
+  }
 
-    return {
-      provide: {
-        prettier
-      }
+  return {
+    provide: {
+      prettier
     }
   }
 })

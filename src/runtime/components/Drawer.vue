@@ -1,16 +1,13 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
-import type { DialogContentProps } from 'radix-vue'
+import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/drawer'
+import type { EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { drawer: Partial<typeof theme> } }
+type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
 
-const drawer = tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })
-
-export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'defaultOpen' | 'direction' | 'dismissible' | 'fadeFromIndex' | 'fixed' | 'modal' | 'nested' | 'direction' | 'open' | 'scrollLockTimeout' | 'shouldScaleBackground' | 'snapPoints'> {
+export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'shouldScaleBackground' | 'setBackgroundColorOnScale' | 'scrollLockTimeout' | 'fixed' | 'dismissible' | 'modal' | 'open' | 'defaultOpen' | 'nested' | 'direction' | 'noBodyStyles' | 'handleOnly' | 'preventScrollRestoration' | 'snapPoints'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -18,8 +15,13 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   as?: any
   title?: string
   description?: string
+  /**
+   * Whether to inset the drawer from the edges.
+   * @defaultValue false
+   */
+  inset?: boolean
   /** The content of the drawer. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>
   /**
    * Render an overlay behind the drawer.
    * @defaultValue true
@@ -34,16 +36,15 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * Render the drawer in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   class?: any
-  ui?: Partial<typeof drawer.slots>
+  ui?: Drawer['slots']
 }
 
 export interface DrawerEmits extends DrawerRootEmits {}
 
 export interface DrawerSlots {
   default(props?: {}): any
-  handle(props?: {}): any
   content(props?: {}): any
   header(props?: {}): any
   title(props?: {}): any
@@ -55,40 +56,50 @@ export interface DrawerSlots {
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { useForwardPropsEmits } from 'radix-vue'
-import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription } from 'vaul-vue'
+import { useForwardPropsEmits } from 'reka-ui'
+import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
+import { usePortal } from '../composables/usePortal'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   direction: 'bottom',
   portal: true,
   overlay: true,
-  handle: true
+  handle: true,
+  modal: true,
+  dismissible: true
 })
 const emits = defineEmits<DrawerEmits>()
 const slots = defineSlots<DrawerSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'defaultOpen', 'dismissible', 'fadeFromIndex', 'fixed', 'modal', 'nested', 'direction', 'open', 'scrollLockTimeout', 'shouldScaleBackground', 'snapPoints'), emits)
-const contentProps = toRef(() => props.content)
+const appConfig = useAppConfig() as Drawer['AppConfig']
 
-const ui = computed(() => drawer({
-  direction: props.direction
+const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
+const contentProps = toRef(() => props.content)
+const contentEvents = {
+  closeAutoFocus: (e: Event) => e.preventDefault()
+}
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })({
+  direction: props.direction,
+  inset: props.inset
 }))
 </script>
 
 <template>
   <DrawerRoot v-bind="rootProps">
-    <DrawerTrigger v-if="!!slots.default" as-child>
+    <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>
 
-    <DrawerPortal :disabled="!portal">
+    <DrawerPortal v-bind="portalProps">
       <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DrawerContent :class="ui.content({ class: [props.class, props.ui?.content] })" v-bind="contentProps">
-        <slot name="handle">
-          <div v-if="handle" :class="ui.handle({ class: props.ui?.handle })" />
-        </slot>
+      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+        <DrawerHandle v-if="handle" :class="ui.handle({ class: props.ui?.handle })" />
 
         <slot name="content">
           <div :class="ui.container({ class: props.ui?.container })">

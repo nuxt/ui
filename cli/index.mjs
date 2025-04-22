@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { defineCommand, runMain } from 'citty'
-import init from './commands/init.mjs'
+import make from './commands/make/index.mjs'
 
 const main = defineCommand({
   meta: {
@@ -8,7 +8,7 @@ const main = defineCommand({
     description: 'Nuxt UI CLI'
   },
   subCommands: {
-    init
+    make
   }
 })
 

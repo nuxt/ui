@@ -20,22 +20,24 @@ describe('Input', () => {
     ['with disabled', { props: { disabled: true } }],
     ['with required', { props: { required: true } }],
     ['with file type', { props: { type: 'file' } }],
-    ['with icon', { props: { icon: 'i-heroicons-magnifying-glass' } }],
-    ['with leading and icon', { props: { leading: true, icon: 'i-heroicons-arrow-left' } }],
-    ['with leadingIcon', { props: { leadingIcon: 'i-heroicons-arrow-left' } }],
-    ['with trailing and icon', { props: { trailing: true, icon: 'i-heroicons-arrow-right' } }],
-    ['with trailingIcon', { props: { trailingIcon: 'i-heroicons-arrow-right' } }],
+    ['with icon', { props: { icon: 'i-lucide-search' } }],
+    ['with leading and icon', { props: { leading: true, icon: 'i-lucide-arrow-left' } }],
+    ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
+    ['with trailing and icon', { props: { trailing: true, icon: 'i-lucide-arrow-right' } }],
+    ['with trailingIcon', { props: { trailingIcon: 'i-lucide-arrow-right' } }],
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
-    ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-heroicons-arrow-left' } }],
-    ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-heroicons-arrow-right' } }],
+    ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-lucide-arrow-left' } }],
+    ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-lucide-arrow-right' } }],
     ['with loading', { props: { loading: true } }],
     ['with loading and avatar', { props: { loading: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with loading trailing', { props: { loading: true, trailing: true } }],
     ['with loading trailing and avatar', { props: { loading: true, trailing: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
-    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-heroicons-sparkles' } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-sparkles' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
+    ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { base: 'rounded-full' } } }],
     // Slots
@@ -50,7 +52,8 @@ describe('Input', () => {
   it.each([
     ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
     ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
-    ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }]
+    ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
+    ['with .nullify modifier', { props: { modelModifiers: { nullify: true } } }, { input: '', expected: null }]
   ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
     const wrapper = mount(Input, {
       ...options
@@ -101,7 +104,7 @@ describe('Input', () => {
   })
 
   describe('form integration', async () => {
-    async function createForm(validateOn?: FormInputEvents[]) {
+    async function createForm(validateOn?: FormInputEvents[], eagerValidation?: boolean) {
       const wrapper = await renderForm({
         props: {
           validateOn,
@@ -113,10 +116,13 @@ describe('Input', () => {
           }
         },
         slotTemplate: `
-        <UFormField name="value">
+        <UFormField name="value" :eager-validation="eagerValidation">
           <UInput id="input" v-model="state.value" />
         </UFormField>
-        `
+        `,
+        slotVars: {
+          eagerValidation
+        }
       })
       const input = wrapper.find('#input')
       return {
@@ -146,7 +152,22 @@ describe('Input', () => {
     })
 
     test('validate on input works', async () => {
+      const { input, wrapper } = await createForm(['input'], true)
+      await input.setValue('value')
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.setValue('valid')
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on input without eager validation works', async () => {
       const { input, wrapper } = await createForm(['input'])
+
+      await input.setValue('value')
+      expect(wrapper.text()).not.toContain('Error message')
+
+      await input.trigger('blur')
+
       await input.setValue('value')
       expect(wrapper.text()).toContain('Error message')
 

@@ -7,10 +7,10 @@ const appConfig = useAppConfig()
     <UFormField
       label="toaster.duration"
       size="sm"
-      class="inline-flex ring ring-[var(--ui-border-accented)] rounded"
+      class="inline-flex ring ring-accented rounded-sm"
       :ui="{
-        wrapper: 'bg-[var(--ui-bg-elevated)]/50 rounded-l flex border-r border-[var(--ui-border-accented)]',
-        label: 'text-[var(--ui-text-muted)] px-2 py-1.5',
+        wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-accented',
+        label: 'text-muted px-2 py-1.5',
         container: 'mt-0'
       }"
     >
@@ -18,8 +18,7 @@ const appConfig = useAppConfig()
         v-model="appConfig.toaster.duration"
         color="neutral"
         variant="soft"
-        class="rounded rounded-l-none min-w-12"
-        :search-input="false"
+        :ui="{ base: 'rounded-sm rounded-l-none min-w-12' }"
       />
     </UFormField>
   </div>

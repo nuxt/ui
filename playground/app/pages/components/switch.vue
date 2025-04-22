@@ -8,7 +8,7 @@ const checked = ref(true)
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ml-[-114px]">
+    <div class="flex flex-col gap-4 ms-[-114px]">
       <USwitch v-model="checked" label="Primary" />
       <USwitch color="neutral" label="Neutral" :default-value="true" />
       <USwitch color="error" label="Error" :default-value="true" />
@@ -16,27 +16,27 @@ const checked = ref(true)
       <USwitch label="Required" required />
       <USwitch label="Disabled" disabled />
     </div>
-    <div class="flex items-center gap-4 ml-[-82px]">
+    <div class="flex items-center gap-4 ms-[-82px]">
       <USwitch v-for="size in sizes" :key="size" :size="size" label="Switch me" />
     </div>
-    <div class="flex items-center gap-4 ml-[-82px]">
+    <div class="flex items-center gap-4 ms-[-82px]">
       <USwitch
         v-for="size in sizes"
         :key="size"
         :size="size"
         label="Switch me"
-        unchecked-icon="i-heroicons-x-mark-20-solid"
-        checked-icon="i-heroicons-check-20-solid"
+        unchecked-icon="i-lucide-x"
+        checked-icon="i-lucide-check"
       />
     </div>
-    <div class="flex items-center gap-4 ml-[-82px]">
+    <div class="flex items-center gap-4 ms-[-82px]">
       <USwitch
         v-for="size in sizes"
         :key="size"
         :size="size"
         label="Switch me"
-        unchecked-icon="i-heroicons-x-mark-20-solid"
-        checked-icon="i-heroicons-check-20-solid"
+        unchecked-icon="i-lucide-x"
+        checked-icon="i-lucide-check"
         loading
       />
     </div>
@@ -56,8 +56,8 @@ const checked = ref(true)
         :size="size"
         label="Switch me"
         description="This is a description"
-        unchecked-icon="i-heroicons-x-mark-20-solid"
-        checked-icon="i-heroicons-check-20-solid"
+        unchecked-icon="i-lucide-x"
+        checked-icon="i-lucide-check"
       />
     </div>
   </div>

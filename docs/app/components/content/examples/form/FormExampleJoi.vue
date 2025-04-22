@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Joi from 'joi'
-import type { FormSubmitEvent } from '#ui/types'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = Joi.object({
   email: Joi.string().required(),
@@ -15,7 +15,7 @@ const state = reactive({
 })
 
 const toast = useToast()
-async function onSubmit(event: FormSubmitEvent<any>) {
+async function onSubmit(event: FormSubmitEvent<typeof state>) {
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }

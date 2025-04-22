@@ -10,9 +10,9 @@ describe('Kbd', () => {
   it.each([
     // Props
     ['with value', { props: { value: 'K' } }],
-    ['with as', { props: { value: 'K', as: 'span' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { value: 'K', size } }]),
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { value: 'K', variant } }]),
+    ['with as', { props: { value: 'K', as: 'span' } }],
     ['with class', { props: { value: 'K', class: 'font-bold' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]

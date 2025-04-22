@@ -3,3 +3,4 @@ packages:
   - "cli"
   - "docs"
   - "playground"
+  - "playground-vue"

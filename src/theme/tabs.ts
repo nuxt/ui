@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute transition-[translate,width] duration-200',
-    trigger: ['relative inline-flex items-center shrink-0 data-[state=inactive]:text-[var(--ui-text-muted)] hover:data-[state=inactive]:text-[var(--ui-text)] font-medium rounded-[calc(var(--ui-radius)*1.5)] disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none', options.theme.transitions && 'transition-colors'],
+    trigger: ['group relative inline-flex items-center shrink-0 min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     content: 'focus:outline-none w-full',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -19,12 +19,12 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       pill: {
-        list: 'bg-[var(--ui-bg-elevated)] rounded-[calc(var(--ui-radius)*2)]',
-        trigger: 'flex-1',
-        indicator: 'rounded-[calc(var(--ui-radius)*1.5)] shadow-sm'
+        list: 'bg-elevated rounded-lg',
+        trigger: 'flex-1 w-full',
+        indicator: 'rounded-md shadow-xs'
       },
       link: {
-        list: 'border-[var(--ui-border)]',
+        list: 'border-default',
         indicator: 'rounded-full'
       }
     },
@@ -32,12 +32,12 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'flex-col',
         list: 'w-full',
-        indicator: 'left-0 w-[var(--radix-tabs-indicator-size)] translate-x-[var(--radix-tabs-indicator-position)]',
+        indicator: 'left-0 w-(--reka-tabs-indicator-size) translate-x-(--reka-tabs-indicator-position)',
         trigger: 'justify-center'
       },
       vertical: {
         list: 'flex-col',
-        indicator: 'top-0 h-[var(--radix-tabs-indicator-size)] translate-y-[var(--radix-tabs-indicator-position)]'
+        indicator: 'top-0 h-(--reka-tabs-indicator-size) translate-y-(--reka-tabs-indicator-position)'
       }
     },
     size: {
@@ -78,7 +78,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     variant: 'link',
     class: {
-      list: 'border-b',
+      list: 'border-b -mb-px',
       indicator: '-bottom-px h-px'
     }
   }, {
@@ -92,36 +92,36 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'vertical',
     variant: 'link',
     class: {
-      list: 'border-l',
-      indicator: '-left-px w-px'
+      list: 'border-s -ms-px',
+      indicator: '-start-px w-px'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'pill',
     class: {
-      indicator: `bg-[var(--ui-${color})]`,
-      trigger: `data-[state=active]:text-[var(--ui-bg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-${color})]`
+      indicator: `bg-${color}`,
+      trigger: `data-[state=active]:text-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}`
     }
   })), {
     color: 'neutral',
     variant: 'pill',
     class: {
-      indicator: 'bg-[var(--ui-bg-inverted)]',
-      trigger: 'data-[state=active]:text-[var(--ui-bg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ui-border-inverted)]'
+      indicator: 'bg-inverted',
+      trigger: 'data-[state=active]:text-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
     class: {
-      indicator: `bg-[var(--ui-${color})]`,
-      trigger: `data-[state=active]:text-[var(--ui-${color})] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-${color})]`
+      indicator: `bg-${color}`,
+      trigger: `data-[state=active]:text-${color} focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`
     }
   })), {
     color: 'neutral',
     variant: 'link',
     class: {
-      indicator: 'bg-[var(--ui-bg-inverted)]',
-      trigger: 'data-[state=active]:text-[var(--ui-text-highlighted)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ui-border-inverted)]'
+      indicator: 'bg-inverted',
+      trigger: 'data-[state=active]:text-highlighted focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted'
     }
   }],
   defaultVariants: {

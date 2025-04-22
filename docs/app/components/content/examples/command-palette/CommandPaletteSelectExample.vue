@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const router = useRouter()
+const toast = useToast()
 
 const groups = ref([
   {
@@ -12,8 +12,7 @@ const groups = ref([
         to: 'https://github.com/benjamincanac',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/benjamincanac.png',
-          alt: 'benjamincanac'
+          src: 'https://github.com/benjamincanac.png'
         }
       },
       {
@@ -22,8 +21,7 @@ const groups = ref([
         to: 'https://github.com/smarroufin',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/smarroufin.png',
-          alt: 'smarroufin'
+          src: 'https://github.com/smarroufin.png'
         }
       },
       {
@@ -32,8 +30,7 @@ const groups = ref([
         to: 'https://github.com/atinux',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/atinux.png',
-          alt: 'atinux'
+          src: 'https://github.com/atinux.png'
         }
       },
       {
@@ -42,8 +39,7 @@ const groups = ref([
         to: 'https://github.com/romhml',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/romhml.png',
-          alt: 'romhml'
+          src: 'https://github.com/romhml.png'
         }
       },
       {
@@ -52,8 +48,7 @@ const groups = ref([
         to: 'https://github.com/Haythamasalama',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/Haythamasalama.png',
-          alt: 'Haythamasalama'
+          src: 'https://github.com/Haythamasalama.png'
         }
       },
       {
@@ -62,8 +57,7 @@ const groups = ref([
         to: 'https://github.com/danielroe',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/danielroe.png',
-          alt: 'danielroe'
+          src: 'https://github.com/danielroe.png'
         }
       },
       {
@@ -72,8 +66,7 @@ const groups = ref([
         to: 'https://github.com/noook',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/noook.png',
-          alt: 'noook'
+          src: 'https://github.com/noook.png'
         }
       }
     ]
@@ -84,49 +77,49 @@ const groups = ref([
       {
         label: 'Add new file',
         suffix: 'Create a new file in the current directory or workspace.',
-        icon: 'i-heroicons-document-plus',
+        icon: 'i-lucide-file-plus',
         kbds: [
           'meta',
           'N'
         ],
         onSelect() {
-          console.log('Add new file')
+          toast.add({ title: 'Add new file' })
         }
       },
       {
         label: 'Add new folder',
         suffix: 'Create a new folder in the current directory or workspace.',
-        icon: 'i-heroicons-folder-plus',
+        icon: 'i-lucide-folder-plus',
         kbds: [
           'meta',
           'F'
         ],
         onSelect() {
-          console.log('Add new folder')
+          toast.add({ title: 'Add new folder' })
         }
       },
       {
         label: 'Add hashtag',
         suffix: 'Add a hashtag to the current item.',
-        icon: 'i-heroicons-hashtag',
+        icon: 'i-lucide-hash',
         kbds: [
           'meta',
           'H'
         ],
         onSelect() {
-          console.log('Add hashtag')
+          toast.add({ title: 'Add hashtag' })
         }
       },
       {
         label: 'Add label',
         suffix: 'Add a label to the current item.',
-        icon: 'i-heroicons-tag',
+        icon: 'i-lucide-tag',
         kbds: [
           'meta',
           'L'
         ],
         onSelect() {
-          console.log('Add label')
+          toast.add({ title: 'Add label' })
         }
       }
     ]
@@ -134,15 +127,7 @@ const groups = ref([
 ])
 
 function onSelect(item: any) {
-  if (item.onSelect) {
-    item.onSelect()
-  } else if (item.to) {
-    if (typeof item.to === 'string' && (item.target === '_blank' || item.to.startsWith('http'))) {
-      window.open(item.to, item.target || '_blank')
-    } else {
-      router.push(item.to)
-    }
-  }
+  console.log(item)
 }
 </script>
 

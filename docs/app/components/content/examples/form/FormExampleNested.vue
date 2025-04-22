@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { z } from 'zod'
+import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
   name: z.string().min(2),
-  news: z.boolean()
+  news: z.boolean().default(false)
 })
 
 type Schema = z.output<typeof schema>
@@ -18,7 +18,7 @@ type NestedSchema = z.output<typeof nestedSchema>
 const state = reactive<Partial<Schema & NestedSchema>>({ })
 
 const toast = useToast()
-async function onSubmit(event: FormSubmitEvent<any>) {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }
@@ -36,10 +36,10 @@ async function onSubmit(event: FormSubmitEvent<any>) {
     </UFormField>
 
     <div>
-      <UCheckbox v-model="state.news" name="news" label="Register to our newsletter" />
+      <UCheckbox v-model="state.news" name="news" label="Register to our newsletter" @update:model-value="state.email = undefined" />
     </div>
 
-    <UForm v-if="state.news" :state="state" :schema="nestedSchema">
+    <UForm v-if="state.news" :state="state" :schema="nestedSchema" attach>
       <UFormField label="Email" name="email">
         <UInput v-model="state.email" placeholder="john@lennon.com" />
       </UFormField>

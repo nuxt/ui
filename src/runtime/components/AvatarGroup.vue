@@ -1,14 +1,9 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar-group'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { avatarGroup: Partial<typeof theme> } }
-
-const avatarGroup = tv({ extend: tv(theme), ...(appConfig.ui?.avatarGroup || {}) })
-
-type AvatarGroupVariants = VariantProps<typeof avatarGroup>
+type AvatarGroup = ComponentConfig<typeof theme, AppConfig, 'avatarGroup'>
 
 export interface AvatarGroupProps {
   /**
@@ -16,13 +11,16 @@ export interface AvatarGroupProps {
    * @defaultValue 'div'
    */
   as?: any
-  size?: AvatarGroupVariants['size']
+  /**
+   * @defaultValue 'md'
+   */
+  size?: AvatarGroup['variants']['size']
   /**
    * The maximum number of avatars to display.
    */
   max?: number | string
   class?: any
-  ui?: Partial<typeof avatarGroup.slots>
+  ui?: AvatarGroup['slots']
 }
 
 export interface AvatarGroupSlots {
@@ -32,14 +30,18 @@ export interface AvatarGroupSlots {
 
 <script setup lang="ts">
 import { computed, provide } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
+import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
 
 const props = defineProps<AvatarGroupProps>()
 const slots = defineSlots<AvatarGroupSlots>()
 
-const ui = computed(() => avatarGroup({
+const appConfig = useAppConfig() as AvatarGroup['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatarGroup || {}) })({
   size: props.size
 }))
 

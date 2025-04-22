@@ -28,7 +28,7 @@ const label = ref([])
 <template>
   <UPopover :content="{ side: 'right', align: 'start' }">
     <UButton
-      icon="i-heroicons-tag"
+      icon="i-lucide-tag"
       label="Select labels"
       color="neutral"
       variant="subtle"
@@ -40,7 +40,7 @@ const label = ref([])
         multiple
         placeholder="Search labels..."
         :groups="[{ id: 'labels', items }]"
-        :ui="{ input: '[&>input]:h-8' }"
+        :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }"
       />
     </template>
   </UPopover>

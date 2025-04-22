@@ -9,6 +9,8 @@ describe('Popover', () => {
     // Props
     ['with open', { props }],
     ['with arrow', { props: { ...props, arrow: true } }],
+    ['with class', { props: { ...props, class: 'shadow-xl' } }],
+    ['with ui', { props: { ...props, ui: { content: 'shadow-xl' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }]

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import theme from '#build/ui/toaster'
+import { useAppConfig } from '#imports'
 
 const positions = Object.keys(theme.variants.position)
 
@@ -19,13 +20,27 @@ const templates = (id: number) => [{
 }, {
   title: 'Toast',
   description: `This is the toast ${id}`,
-  icon: 'i-heroicons-rocket-launch'
+  icon: 'i-lucide-rocket',
+  actions: [{
+    label: 'Action 1',
+    color: 'neutral' as const,
+    onClick() {
+      console.log(`Toast ${id} action 1 clicked`)
+    }
+  }, {
+    label: 'Action 2',
+    color: 'neutral' as const,
+    variant: 'outline' as const,
+    onClick() {
+      console.log(`Toast ${id} action 2 clicked`)
+    }
+  }]
 }, {
   title: `Toast ${id}`,
-  icon: 'i-heroicons-rocket-launch'
+  icon: 'i-lucide-rocket'
 }, {
   description: `This is the toast ${id}`,
-  icon: 'i-heroicons-rocket-launch'
+  icon: 'i-lucide-rocket'
 }, {
   title: 'Toast',
   description: `This is the toast ${id}`,
@@ -40,34 +55,36 @@ const templates = (id: number) => [{
   },
   actions: [{
     label: 'Action',
-    click() {
+    onClick() {
       console.log(`Toast ${id} action clicked`)
     }
   }]
 }, {
   title: `Toast ${id}`,
-  icon: 'i-heroicons-rocket-launch',
+  icon: 'i-lucide-rocket',
+  orientation: 'horizontal' as const,
   actions: [{
     label: 'Action 1',
     color: 'neutral' as const,
-    click() {
+    onClick() {
       console.log(`Toast ${id} action 1 clicked`)
     }
   }, {
     label: 'Action 2',
     color: 'neutral' as const,
     variant: 'outline' as const,
-    click() {
+    onClick() {
       console.log(`Toast ${id} action 2 clicked`)
     }
   }]
 }, {
   description: `This is the toast ${id}`,
-  icon: 'i-heroicons-rocket-launch',
+  icon: 'i-lucide-rocket',
+  orientation: 'horizontal' as const,
   actions: [{
     label: 'Action',
     variant: 'outline' as const,
-    click() {
+    onClick() {
       console.log(`Toast ${id} action clicked`)
     }
   }]
@@ -81,7 +98,7 @@ function addToast() {
   add({
     id,
     ...template,
-    click(toast) {
+    onClick(toast) {
       console.log(`Toast ${toast.id} clicked`)
     }
   })

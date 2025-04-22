@@ -1,58 +1,21 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
-// import { debounce } from 'perfect-debounce'
-import type { ContentSearchFile } from '@nuxt/ui-pro'
 
 const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
-const runtimeConfig = useRuntimeConfig()
-const { integrity, api } = runtimeConfig.public.content
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
-const { data: files } = await useLazyFetch<ContentSearchFile[]>(`${api.baseURL}/search${integrity ? '-' + integrity : ''}`, { default: () => [] })
-
-const searchTerm = ref('')
-
-// watch(searchTerm, debounce((query: string) => {
-//   if (!query) {
-//     return
-//   }
-
-//   useTrackEvent('Search', { props: { query: `${query} - ${searchTerm.value?.commandPaletteRef.results.length} results` } })
-// }, 500))
-
-const links = computed(() => {
-  return [{
-    label: 'Docs',
-    icon: 'i-heroicons-book-open',
-    to: '/getting-started',
-    active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro')
-    ? [{
-        label: 'Pro',
-        icon: 'i-heroicons-square-3-stack-3d',
-        to: '/pro',
-        active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
-      }, {
-        label: 'Pricing',
-        icon: 'i-heroicons-credit-card',
-        to: '/pro/pricing'
-      }, {
-        label: 'Templates',
-        icon: 'i-heroicons-computer-desktop',
-        to: '/pro/templates'
-      }]
-    : []), {
-    label: 'Releases',
-    icon: 'i-heroicons-rocket-launch',
-    to: '/releases'
-  }].filter(Boolean)
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+  server: false
 })
 
+const links = useLinks()
+const searchLinks = useSearchLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
+const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
 
 useHead({
   meta: [
@@ -60,11 +23,12 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+    // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
     { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
   ],
   style: [
-    { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 }
+    { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
+    { innerHTML: blackAsPrimary, id: 'nuxt-ui-black-as-primary', tagPriority: -2 }
   ],
   htmlAttrs: {
     lang: 'en'
@@ -76,12 +40,17 @@ useServerSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-provide('navigation', navigation)
+useFaviconFromTheme()
+
+const { frameworks, modules } = useSharedData()
+const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
+
+provide('navigation', mappedNavigation)
 </script>
 
 <template>
   <UApp :toaster="appConfig.toaster">
-    <NuxtLoadingIndicator color="#FFF" />
+    <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
     <template v-if="!route.path.startsWith('/examples')">
       <Banner />
@@ -97,35 +66,26 @@ provide('navigation', navigation)
       <Footer />
 
       <ClientOnly>
-        <LazyUContentSearch v-model:search-term="searchTerm" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
+        <LazyUContentSearch
+          :links="searchLinks"
+          :files="files"
+          :groups="[{
+            id: 'framework',
+            label: 'Framework',
+            items: frameworks
+          }, {
+            id: 'module',
+            label: 'Module',
+            items: modules
+          }]"
+          :navigation="filteredNavigation"
+          :fuse="{ resultLimit: 100 }"
+        />
       </ClientOnly>
     </template>
   </UApp>
 </template>
 
 <style>
-@import "tailwindcss";
-@import "@nuxt/ui-pro";
-
-@source "../content/**/*.md";
-
-@theme {
-  --font-family-sans: 'Public Sans', sans-serif;
-
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
-}
-
-:root {
-  --ui-container-width: 90rem;
-}
+/* Safelist (do not remove): [&>div]:*:my-0 [&>div]:*:w-full h-64 !px-0 !py-0 !pt-0 !pb-0 !p-0 !justify-start !justify-end !min-h-96 h-136 max-h-[341px] */
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as v from 'valibot'
-import type { FormSubmitEvent } from '#ui/types'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = v.object({
   email: v.pipe(v.string(), v.email('Invalid email')),
@@ -22,7 +22,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UForm :schema="v.safeParser(schema)" :state="state" class="space-y-4" @submit="onSubmit">
+  <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
     <UFormField label="Email" name="email">
       <UInput v-model="state.email" />
     </UFormField>

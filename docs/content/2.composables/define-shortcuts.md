@@ -19,7 +19,6 @@ defineShortcuts({
 </script>
 ```
 
-- Shortcuts are automatically adjusted for non-macOS platforms, converting `meta` to `ctrl`.
 - The composable uses VueUse's [`useEventListener`](https://vueuse.org/core/useEventListener/) to handle keydown events.
 - For a complete list of available shortcut keys, refer to the [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values) API documentation. Note that the key should be written in lowercase.
 
@@ -47,8 +46,8 @@ Shortcuts are defined using the following format:
 
 #### Modifiers
 
-- `meta`: Represents Command (⌘) on macOS and Control on other platforms
-- `ctrl`: Represents Control key
+- `meta`: Represents `⌘ Command` on macOS and `⊞ Windows` on Windows
+- `ctrl`: Represents `Ctrl` on all platforms
 - `shift`: Used for alphabetic keys when Shift is required
 
 #### Special Keys
@@ -121,14 +120,14 @@ The `extractShortcuts` utility can be used to automatically define shortcuts fro
 <script setup lang="ts">
 const items = [{
   label: 'Save',
-  icon: 'i-heroicons-document-arrow-down',
+  icon: 'i-lucide-file-down',
   kbds: ['meta', 'S'],
   onSelect() {
     save()
   }
 }, {
   label: 'Copy',
-  icon: 'i-heroicons-document-duplicate',
+  icon: 'i-lucide-copy',
   kbds: ['meta', 'C'],
   onSelect() {
     copy()

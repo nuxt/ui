@@ -1,18 +1,20 @@
 <script setup lang="ts">
-const items = [
+import type { AccordionItem } from '@nuxt/ui'
+
+const items: AccordionItem[] = [
   {
     label: 'Icons',
-    icon: 'i-heroicons-face-smile',
+    icon: 'i-lucide-smile',
     content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
   },
   {
     label: 'Colors',
-    icon: 'i-heroicons-swatch',
+    icon: 'i-lucide-swatch-book',
     content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
   },
   {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent',
+    icon: 'i-lucide-box',
     content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
   }
 ]

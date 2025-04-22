@@ -1,5 +1,6 @@
 ---
 description: A button element that can act as a link or trigger an action.
+category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -25,23 +26,6 @@ You can achieve the same result by using the `label` prop.
 ---
 props:
   label: Button
----
-::
-
-### Link
-
-You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
-
-::component-code
----
-ignore:
-  - label
-  - target
-props:
-  to: https://github.com/nuxt/ui
-  target: _blank
-slots:
-  default: Button
 ---
 ::
 
@@ -92,7 +76,7 @@ Use the `icon` prop to show an [Icon](/components/icon) inside the Button.
 ::component-code
 ---
 props:
-  icon: i-heroicons-rocket-launch
+  icon: i-lucide-rocket
   size: md
   color: primary
   variant: solid
@@ -106,7 +90,7 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 ::component-code
 ---
 props:
-  trailingIcon: i-heroicons-arrow-right
+  trailingIcon: i-lucide-arrow-right
   size: md
 slots:
   default: Button
@@ -118,7 +102,7 @@ The `label` as prop or slot is optional so you can use the Button as an icon-onl
 ::component-code
 ---
 props:
-  icon: i-heroicons-magnifying-glass
+  icon: i-lucide-search
   size: md
   color: primary
   variant: solid
@@ -159,6 +143,96 @@ props:
 ---
 ::
 
+### Link
+
+You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
+
+::component-code
+---
+ignore:
+  - target
+props:
+  to: https://github.com/nuxt/ui
+  target: _blank
+slots:
+  default: Button
+---
+::
+
+When the Button is a link or when using the `active` prop, you can use the `active-color` and `active-variant` props to customize the active state.
+
+::component-code
+---
+prettier: true
+ignore:
+  - color
+  - variant
+items:
+  activeColor:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - error
+    - neutral
+  activeVariant:
+    - solid
+    - outline
+    - soft
+    - subtle
+    - ghost
+    - link
+props:
+  active: true
+  color: neutral
+  variant: outline
+  activeColor: primary
+  activeVariant: solid
+slots:
+  default: |
+
+    Button
+---
+
+Button
+::
+
+You can also use the `active-class` and `inactive-class` props to customize the active state.
+
+::component-code
+---
+props:
+  active: true
+  activeClass: 'font-bold'
+  inactiveClass: 'font-light'
+slots:
+  default: Button
+---
+
+Button
+::
+
+::tip
+You can configure these styles globally in your `app.config.ts` file under the `ui.button.variants.active` key.
+
+```ts
+export default defineAppConfig({
+  ui: {
+    button: {
+      variants: {
+        active: {
+          true: {
+            base: 'font-bold'
+          }
+        }
+      }
+    }
+  }
+})
+```
+::
+
 ### Loading
 
 Use the `loading` prop to show a loading icon and disable the Button.
@@ -184,21 +258,29 @@ This also works with the [Form](/components/form) component.
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-heroicons-arrow-path-20-solid`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 
 ::component-code
 ---
 props:
   loading: true
-  loadingIcon: 'i-heroicons-arrow-path-rounded-square'
+  loadingIcon: 'i-lucide-repeat-2'
 slots:
   default: Button
 ---
 Button
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+:::
 ::
 
 ### Disabled
@@ -244,11 +326,11 @@ ignore:
   - variant
   - icon
 props:
-  icon: i-heroicons-rocket-launch
+  icon: i-lucide-rocket
   color: neutral
   variant: outline
   ui:
-    leadingIcon: 'text-[var(--ui-primary)]'
+    leadingIcon: 'text-primary'
 slots:
   default: |
 

@@ -1,12 +1,9 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/card'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { card: Partial<typeof theme> } }
-
-const card = tv({ extend: tv(theme), ...(appConfig.ui?.card || {}) })
+type Card = ComponentConfig<typeof theme, AppConfig, 'card'>
 
 export interface CardProps {
   /**
@@ -14,8 +11,12 @@ export interface CardProps {
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'outline'
+   */
+  variant?: Card['variants']['variant']
   class?: any
-  ui?: Partial<typeof card.slots>
+  ui?: Card['slots']
 }
 
 export interface CardSlots {
@@ -26,13 +27,19 @@ export interface CardSlots {
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { computed } from 'vue'
+import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = defineProps<CardProps>()
 const slots = defineSlots<CardSlots>()
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = card()
+const appConfig = useAppConfig() as Card['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.card || {}) })({
+  variant: props.variant
+}))
 </script>
 
 <template>

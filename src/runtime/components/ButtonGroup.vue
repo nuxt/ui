@@ -1,14 +1,9 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/button-group'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { buttonGroup: Partial<typeof theme> } }
-
-const buttonGroup = tv({ extend: tv(theme), ...(appConfig.ui?.buttonGroup) })
-
-type ButtonGroupVariants = VariantProps<typeof buttonGroup>
+type ButtonGroup = ComponentConfig<typeof theme, AppConfig, 'buttonGroup'>
 
 export interface ButtonGroupProps {
   /**
@@ -16,13 +11,17 @@ export interface ButtonGroupProps {
    * @defaultValue 'div'
    */
   as?: any
-  size?: ButtonGroupVariants['size']
+  /**
+   * @defaultValue 'md'
+   */
+  size?: ButtonGroup['variants']['size']
   /**
    * The orientation the buttons are laid out.
    * @defaultValue 'horizontal'
    */
-  orientation?: ButtonGroupVariants['orientation']
+  orientation?: ButtonGroup['variants']['orientation']
   class?: any
+  ui?: ButtonGroup['slots']
 }
 
 export interface ButtonGroupSlots {
@@ -32,13 +31,20 @@ export interface ButtonGroupSlots {
 
 <script setup lang="ts">
 import { provide, computed } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
 import { buttonGroupInjectionKey } from '../composables/useButtonGroup'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<ButtonGroupProps>(), {
   orientation: 'horizontal'
 })
 defineSlots<ButtonGroupSlots>()
+
+const appConfig = useAppConfig() as ButtonGroup['AppConfig']
+
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.buttonGroup || {}) }))
 
 provide(buttonGroupInjectionKey, computed(() => ({
   orientation: props.orientation,
@@ -47,7 +53,7 @@ provide(buttonGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :class="buttonGroup({ orientation })">
+  <Primitive :as="as" :class="ui({ orientation, class: props.class })">
     <slot />
   </Primitive>
 </template>

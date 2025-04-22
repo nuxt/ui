@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { object, string, type InferType } from 'yup'
-import type { FormSubmitEvent } from '#ui/types'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = object({
   email: string().email('Invalid email').required('Required'),

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { ContextMenuItem } from '@nuxt/ui'
+
 const showSidebar = ref(true)
 const showToolbar = ref(false)
 
-const items = computed(() => [{
+const items = computed<ContextMenuItem[]>(() => [{
   label: 'View',
   type: 'label' as const
 }, {
@@ -32,8 +34,8 @@ const items = computed(() => [{
 </script>
 
 <template>
-  <UContextMenu :items="items" class="w-48">
-    <div class="flex items-center justify-center rounded-md border border-dashed border-[var(--ui-border-accented)] text-sm aspect-video w-72">
+  <UContextMenu :items="items" :ui="{ content: 'w-48' }">
+    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
       Right click here
     </div>
   </UContextMenu>

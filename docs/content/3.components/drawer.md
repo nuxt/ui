@@ -1,9 +1,10 @@
 ---
 description: A drawer that smoothly slides in & out of the screen.
+category: overlay
 links:
   - label: Drawer
-    icon: i-custom-radix-vue
-    to: https://github.com/radix-vue/vaul-vue
+    icon: i-custom-reka-ui
+    to: https://github.com/unovue/vaul-vue
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Drawer.vue
@@ -21,14 +22,14 @@ prettier: true
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -48,14 +49,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #body
 :placeholder{class="h-48"}
@@ -76,14 +77,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   body: |
 
     <Placeholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #body
 :placeholder{class="h-48"}
@@ -96,51 +97,48 @@ Use the `direction` prop to control the direction of the Drawer. Defaults to `bo
 ::component-code
 ---
 prettier: true
-items:
-  direction:
-    - top
-    - bottom
-props:
-  direction: 'top'
-slots:
-  default: |
-
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
-
-  content: |
-
-    <Placeholder class="h-96 m-4" />
----
-
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
-
-#content
-:placeholder{class="h-96 m-4"}
-::
-
-::component-code
----
-prettier: true
-items:
-  direction:
-    - right
-    - left
 props:
   direction: 'right'
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
-    <Placeholder class="w-96 m-4" />
+    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="w-96 m-4"}
+:placeholder{class="min-w-96 min-h-96 size-full m-4"}
+::
+
+### Inset
+
+Use the `inset` prop to inset the Drawer from the edges.
+
+::component-code
+---
+prettier: true
+props:
+  direction: 'right'
+  inset: true
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  content: |
+
+    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#content
+:placeholder{class="min-w-96 min-h-96 size-full m-4"}
 ::
 
 ### Handle
@@ -155,14 +153,39 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#content
+:placeholder{class="h-48 m-4"}
+::
+
+### Handle Only
+
+Use the `handle-only` prop to only allow the Drawer to be dragged by the handle.
+
+::component-code
+---
+prettier: true
+props:
+  handleOnly: true
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  content: |
+
+    <Placeholder class="h-48 m-4" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -180,14 +203,14 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="h-48 m-4"}
@@ -195,36 +218,37 @@ slots:
 
 ### Scale background
 
-Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect.
+Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect. You can set the `set-background-color-on-scale` prop to `false` to prevent changing the background color.
 
 ::component-code
 ---
 prettier: true
 props:
   shouldScaleBackground: true
+  setBackgroundColorOnScale: true
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid" />
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
     <Placeholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-heroicons-chevron-up-20-solid"}
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :placeholder{class="h-screen m-4"}
 ::
 
 ::warning
-Make sure to add the `vaul-drawer-wrapper` directive to a parent element of your app to make this work.
+Make sure to add the `data-vaul-drawer-wrapper` directive to a parent element of your app to make this work.
 
 ```vue [app.vue]
 <template>
   <UApp>
-    <div class="bg-[var(--ui-bg)]" vaul-drawer-wrapper>
+    <div class="bg-default" data-vaul-drawer-wrapper>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -237,12 +261,13 @@ Make sure to add the `vaul-drawer-wrapper` directive to a parent element of your
 export default defineNuxtConfig({
   app: {
     rootAttrs: {
-      'vaul-drawer-wrapper': '',
-      'class': 'bg-[var(--ui-bg)]'
+      'data-vaul-drawer-wrapper': '',
+      'class': 'bg-default'
     }
   }
 })
 ```
+
 ::
 
 ## Examples
@@ -259,11 +284,37 @@ name: 'drawer-open-example'
 ::
 
 ::note
-In this example, press :kbd{value="O"} to toggle the Drawer.
+In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Drawer by pressing :kbd{value="O"}.
 ::
 
 ::tip
 This allows you to move the trigger outside of the Drawer or remove it entirely.
+::
+
+### Prevent closing
+
+Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape.
+
+::component-example
+---
+prettier: true
+name: 'drawer-dismissible-example'
+---
+::
+
+::note
+In this example, the `header` slot is used to add a close button which is not done by default.
+::
+
+### Responsive drawer
+
+You can render a [Modal](/components/modal) component on desktop and a Drawer on mobile for example.
+
+::component-example
+---
+prettier: true
+name: 'drawer-responsive-example'
+---
 ::
 
 ### With footer slot

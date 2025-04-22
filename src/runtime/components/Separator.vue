@@ -1,39 +1,46 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { SeparatorProps as _SeparatorProps } from 'radix-vue'
+import type { SeparatorProps as _SeparatorProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/separator'
 import type { AvatarProps } from '../types'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { separator: Partial<typeof theme> } }
-
-const separator = tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })
-
-type SeparatorVariants = VariantProps<typeof separator>
+type Separator = ComponentConfig<typeof theme, AppConfig, 'separator'>
 
 export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
   /** Display a label in the middle. */
   label?: string
-  /** Display an icon in the middle. */
+  /**
+   * Display an icon in the middle.
+   * @IconifyIcon
+   */
   icon?: string
   /** Display an avatar in the middle. */
   avatar?: AvatarProps
-  color?: SeparatorVariants['color']
-  size?: SeparatorVariants['size']
-  type?: SeparatorVariants['type']
+  /**
+   * @defaultValue 'neutral'
+   */
+  color?: Separator['variants']['color']
+  /**
+   * @defaultValue 'xs'
+   */
+  size?: Separator['variants']['size']
+  /**
+   * @defaultValue 'solid'
+   */
+  type?: Separator['variants']['type']
   /**
    * The orientation of the separator.
    * @defaultValue 'horizontal'
    */
   orientation?: _SeparatorProps['orientation']
   class?: any
-  ui?: Partial<typeof separator.slots>
+  ui?: Separator['slots']
 }
 
 export interface SeparatorSlots {
@@ -43,8 +50,10 @@ export interface SeparatorSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Separator, useForwardProps } from 'radix-vue'
+import { Separator, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
@@ -53,9 +62,11 @@ const props = withDefaults(defineProps<SeparatorProps>(), {
 })
 const slots = defineSlots<SeparatorSlots>()
 
+const appConfig = useAppConfig() as Separator['AppConfig']
+
 const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'))
 
-const ui = computed(() => separator({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })({
   color: props.color,
   orientation: props.orientation,
   size: props.size,

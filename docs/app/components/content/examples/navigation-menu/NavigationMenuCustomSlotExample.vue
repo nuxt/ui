@@ -1,25 +1,25 @@
 <script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
+
 const items = [
   {
     label: 'Guide',
-    icon: 'i-heroicons-book-open'
-
+    icon: 'i-lucide-book-open'
   },
   {
     label: 'Composables',
-    icon: 'i-heroicons-circle-stack'
-
+    icon: 'i-lucide-database'
   },
   {
     label: 'Components',
-    icon: 'i-heroicons-cube-transparent',
-    slot: 'components'
+    icon: 'i-lucide-box',
+    slot: 'components' as const
   }
-]
+] satisfies NavigationMenuItem[]
 </script>
 
 <template>
-  <UNavigationMenu :items="items" class="justify-center">
+  <UNavigationMenu :items="items" class="w-full justify-center">
     <template #components-trailing>
       <UBadge label="44" variant="subtle" size="sm" />
     </template>

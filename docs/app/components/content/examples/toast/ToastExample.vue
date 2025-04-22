@@ -8,11 +8,11 @@ function addToCalendar() {
   toast.add({
     title: 'Event added to calendar',
     description: `This event is scheduled for ${formattedDate}.`,
-    icon: 'i-heroicons-calendar-days'
+    icon: 'i-lucide-calendar-days'
   })
 }
 </script>
 
 <template>
-  <UButton label="Add to calendar" color="neutral" variant="outline" icon="i-heroicons-plus" @click="addToCalendar" />
+  <UButton label="Add to calendar" color="neutral" variant="outline" icon="i-lucide-plus" @click="addToCalendar" />
 </template>

@@ -1,19 +1,22 @@
 <script lang="ts">
+import type { LinkProps } from '../types'
+
 export interface LinkBaseProps {
   as?: string
   type?: string
   disabled?: boolean
-  onClick?: (e: MouseEvent) => void | Promise<void>
+  onClick?: ((e: MouseEvent) => void | Promise<void>) | Array<((e: MouseEvent) => void | Promise<void>)>
   href?: string
   navigate?: (e: MouseEvent) => void
-  rel?: string
-  target?: string
+  target?: LinkProps['target']
+  rel?: LinkProps['rel']
+  active?: boolean
   isExternal?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 
 const props = withDefaults(defineProps<LinkBaseProps>(), {
   as: 'button',
@@ -28,7 +31,9 @@ function onClickWrapper(e: MouseEvent) {
   }
 
   if (props.onClick) {
-    props.onClick(e)
+    for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
+      onClick(e)
+    }
   }
 
   if (props.href && props.navigate && !props.isExternal) {

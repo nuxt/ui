@@ -1,7 +1,7 @@
 import { reactive, ref, nextTick } from 'vue'
 import { describe, it, expect, test, beforeEach, vi } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { z } from 'zod'
+import * as z from 'zod'
 import * as yup from 'yup'
 import Joi from 'joi'
 import * as valibot from 'valibot'
@@ -57,13 +57,6 @@ describe('Form', () => {
         email: valibot.string(),
         password: valibot.pipe(valibot.string(), valibot.minLength(8, 'Must be at least 8 characters'))
       })
-    }
-    ],
-    ['valibot safeParser', {
-      schema: valibot.safeParser(valibot.object({
-        email: valibot.string(),
-        password: valibot.pipe(valibot.string(), valibot.minLength(8, 'Must be at least 8 characters'))
-      }))
     }
     ],
     ['superstruct', {
@@ -278,6 +271,39 @@ describe('Form', () => {
         { id: 'passwordInput', name: 'password', message: 'Required' }
       ])
     })
+
+    test('touchedFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('focus')
+      await flushPromises()
+
+      expect(form.value.touchedFields.has('email')).toBe(true)
+      expect(form.value.touchedFields.has('password')).toBe(false)
+    })
+
+    test('touchedFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('change')
+      await flushPromises()
+
+      expect(form.value.dirtyFields.has('email')).toBe(true)
+      expect(form.value.touchedFields.has('email')).toBe(true)
+
+      expect(form.value.dirtyFields.has('password')).toBe(false)
+      expect(form.value.touchedFields.has('password')).toBe(false)
+    })
+
+    test('blurredFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('blur')
+      await flushPromises()
+
+      expect(form.value.blurredFields.has('email')).toBe(true)
+      expect(form.value.blurredFields.has('password')).toBe(false)
+    })
   })
 
   describe('nested', async () => {
@@ -337,7 +363,7 @@ describe('Form', () => {
       expect(wrapper.setupState.onSubmit).not.toHaveBeenCalled()
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
       const onErrorCallArgs = wrapper.setupState.onError.mock.lastCall[0]
-      expect(onErrorCallArgs.childrens[0].errors).toMatchObject([{ id: 'nestedInput', name: 'field', message: 'Required' }])
+      expect(onErrorCallArgs.children[0].errors).toMatchObject([{ id: 'nestedInput', name: 'field', message: 'Required' }])
       expect(onErrorCallArgs.errors).toMatchObject([
         { id: 'emailInput', name: 'email', message: 'Required' },
         { id: 'passwordInput', name: 'password', message: 'Required' }
@@ -345,6 +371,15 @@ describe('Form', () => {
 
       const nestedField = wrapper.find('#nestedField')
       expect(nestedField.text()).toBe('Required')
+    })
+
+    test('submit event contains nested attributes', async () => {
+      state.email = 'bob@dylan.com'
+      state.password = 'strongpassword'
+      state.nested.field = 'nested'
+
+      await form.value.submit()
+      expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({ data: { email: 'bob@dylan.com', password: 'strongpassword', nested: { field: 'nested' } } }))
     })
 
     test('submit works when child is disabled', async () => {
@@ -362,5 +397,107 @@ describe('Form', () => {
       expect(wrapper.setupState.onSubmit).toHaveBeenCalledTimes(1)
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(0)
     })
+  })
+
+  describe('apply transform', async () => {
+    it.each([
+      [
+        'zod',
+        z.object({
+          value: z.string().transform(value => value.toUpperCase())
+        }),
+        { value: 'test' },
+        { value: 'TEST' }
+      ],
+      [
+        'yup',
+        yup.object({
+          value: yup.string().transform(value => value.toUpperCase())
+        }),
+        { value: 'test' },
+        { value: 'TEST' }
+      ],
+      [
+        'joi',
+        Joi.object({
+          value: Joi.string().custom(value => value.toUpperCase())
+        }),
+        { value: 'test' },
+        { value: 'TEST' }
+      ],
+      [
+        'valibot',
+        valibot.object({
+          value: valibot.pipe(valibot.string(), valibot.transform(v => v.toUpperCase()))
+        }),
+        { value: 'test' },
+        { value: 'TEST' }
+      ]
+    ])(
+      '%s schema transform works',
+      async (_name: string, schema: any, input: any, expected: any) => {
+        const wrapper = await mountSuspended({
+          components: {
+            UFormField,
+            UForm,
+            UInput
+          },
+          setup() {
+            const form = ref()
+            const state = reactive({})
+            const onSubmit = vi.fn()
+            return { state, schema, form, onSubmit }
+          },
+          template: `
+          <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit">
+            <UFormField name="value">
+              <UInput id="input" v-model="state.value" />
+            </UFormField>
+          </UForm>
+        `
+        })
+        const form = wrapper.setupState.form
+
+        const inputEl = wrapper.find('#input')
+        inputEl.setValue(input.value)
+
+        form.value.submit()
+        await flushPromises()
+
+        expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+          data: expected
+        }))
+      }
+    )
+  })
+
+  test('form field errorPattern works', async () => {
+    const wrapper = await mountSuspended({
+      components: {
+        UFormField,
+        UForm,
+        UInput
+      },
+      setup() {
+        const form = ref()
+        const state = reactive({})
+        function validate() {
+          return [{ name: 'email.1', message: 'Error message' }]
+        }
+        return { state, validate, form }
+      },
+      template: `
+          <UForm ref="form" :state="state" :validate="validate">
+            <UFormField id="emailField" :error-pattern="/(email)\\..*/">
+              <UInput id="emailInput" v-model="state.email" />
+            </UFormField>
+          </UForm>
+        `
+    })
+
+    const form = wrapper.setupState.form
+    form.value.submit()
+    await flushPromises()
+    expect(wrapper.html()).toContain('Error message')
   })
 })

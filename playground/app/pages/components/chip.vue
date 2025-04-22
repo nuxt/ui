@@ -6,11 +6,11 @@ const positions = Object.keys(theme.variants.position) as Array<keyof typeof the
 
 const items = [{
   name: 'messages',
-  icon: 'i-heroicons-chat-bubble-oval-left',
+  icon: 'i-lucide-message-circle',
   count: 3
 }, {
   name: 'notifications',
-  icon: 'i-heroicons-bell',
+  icon: 'i-lucide-bell',
   count: 0
 }]
 </script>
@@ -18,8 +18,8 @@ const items = [{
 <template>
   <div class="flex flex-col gap-4">
     <div class="flex items-center gap-2">
-      <UChip v-for="position in positions" :key="position" :position="position">
-        <UButton icon="i-heroicons-inbox" color="neutral" variant="subtle" />
+      <UChip v-for="position in positions" :key="position" :position="position" color="neutral">
+        <UButton icon="i-lucide-inbox" color="neutral" variant="subtle" />
       </UChip>
     </div>
 

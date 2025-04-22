@@ -1,5 +1,6 @@
 ---
 description: A carousel with motion and swipe built using Embla.
+category: data
 links:
   - label: Embla
     to: https://www.embla-carousel.com/api/
@@ -67,7 +68,7 @@ class: 'p-8'
 
 ### Prev / Next
 
-Use the `prev` and `next` props to customize the prev and next buttons.
+Use the `prev` and `next` props to customize the prev and next buttons with any [Button](/components/button) props.
 
 ::component-example
 ---
@@ -76,9 +77,9 @@ class: 'p-8'
 ---
 ::
 
-### Prev Icon / Next Icon
+### Prev / Next Icons
 
-Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/components/icon). Defaults to `i-heroicons-arrow-left-20-solid` / `i-heroicons-arrow-right-20-solid`.
+Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/components/icon). Defaults to `i-lucide-arrow-left` / `i-lucide-arrow-right`.
 
 ::component-example
 ---
@@ -87,15 +88,23 @@ class: 'p-8'
 options:
   - name: 'prevIcon'
     label: 'prevIcon'
-    default: 'i-heroicons-chevron-left'
+    default: 'i-lucide-chevron-left'
   - name: 'nextIcon'
     label: 'nextIcon'
-    default: 'i-heroicons-chevron-right'
+    default: 'i-lucide-chevron-right'
 ---
 ::
 
-::tip{to="/getting-started/icons#theme"}
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
 You can customize these icons globally in your `app.config.ts` under `ui.icons.arrowLeft` / `ui.icons.arrowRight` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize these icons globally in your `vite.config.ts` under `ui.icons.arrowLeft` / `ui.icons.arrowRight` key.
+:::
 ::
 
 ### Dots
@@ -264,10 +273,6 @@ This will give you access to the following:
 | ---- | ---- |
 | `emblaRef`{lang="ts-type"} | `Ref<HTMLElement \| null>`{lang="ts-type"} |
 | `emblaApi`{lang="ts-type"} | [`Ref<EmblaCarouselType \| null>`{lang="ts-type"}](https://www.embla-carousel.com/api/methods/#typescript) |
-
-::note{to="https://vuejs.org/api/composition-api-helpers.html#usetemplateref" target="_blank"}
-You can use `useTemplateRef` to get the component instance.
-::
 
 ## Theme
 

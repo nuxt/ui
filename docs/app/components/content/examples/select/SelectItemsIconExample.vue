@@ -1,31 +1,33 @@
 <script setup lang="ts">
+import type { SelectItem } from '@nuxt/ui'
+
 const items = ref([
   {
     label: 'Backlog',
     value: 'backlog',
-    icon: 'i-heroicons-question-mark-circle'
+    icon: 'i-lucide-circle-help'
   },
   {
     label: 'Todo',
     value: 'todo',
-    icon: 'i-heroicons-plus-circle'
+    icon: 'i-lucide-circle-plus'
   },
   {
     label: 'In Progress',
     value: 'in_progress',
-    icon: 'i-heroicons-arrow-up-circle'
+    icon: 'i-lucide-circle-arrow-up'
   },
   {
     label: 'Done',
     value: 'done',
-    icon: 'i-heroicons-check-circle'
+    icon: 'i-lucide-circle-check'
   }
-])
+] satisfies SelectItem[])
 const value = ref(items.value[0]?.value)
 
 const icon = computed(() => items.value.find(item => item.value === value.value)?.icon)
 </script>
 
 <template>
-  <USelect v-model="value" :icon="icon" :items="items" class="w-48" />
+  <USelect v-model="value" :items="items" value-key="value" :icon="icon" class="w-48" />
 </template>

@@ -1,21 +1,16 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
-import type { ProgressRootProps, ProgressRootEmits } from 'radix-vue'
+import type { ProgressRootProps, ProgressRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/progress'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { progress: Partial<typeof theme> } }
-
-const progress = tv({ extend: tv(theme), ...(appConfig.ui?.progress || {}) })
-
-type ProgressVariants = VariantProps<typeof progress>
+type Progress = ComponentConfig<typeof theme, AppConfig, 'progress'>
 
 export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' | 'modelValue'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue `div`
+   * @defaultValue 'div'
    */
   as?: any
   /** The maximum progress value. */
@@ -24,16 +19,26 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
   status?: boolean
   /** Whether the progress is visually inverted. */
   inverted?: boolean
-  size?: ProgressVariants['size']
-  color?: ProgressVariants['color']
+  /**
+   * @defaultValue 'md'
+   */
+  size?: Progress['variants']['size']
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: Progress['variants']['color']
   /**
    * The orientation of the progress bar.
    * @defaultValue 'horizontal'
    */
-  orientation?: ProgressVariants['orientation']
-  animation?: ProgressVariants['animation']
+  orientation?: Progress['variants']['orientation']
+  /**
+   * The animation of the progress bar.
+   * @defaultValue 'carousel'
+   */
+  animation?: Progress['variants']['animation']
   class?: any
-  ui?: Partial<typeof progress.slots>
+  ui?: Progress['slots']
 }
 
 export interface ProgressEmits extends ProgressRootEmits {}
@@ -48,8 +53,11 @@ export type ProgressSlots = {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ProgressIndicator, ProgressRoot, useForwardPropsEmits } from 'radix-vue'
+import { Primitive, ProgressRoot, ProgressIndicator, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
@@ -57,9 +65,12 @@ const props = withDefaults(defineProps<ProgressProps>(), {
   orientation: 'horizontal'
 })
 const emits = defineEmits<ProgressEmits>()
-defineSlots<ProgressSlots>()
+const slots = defineSlots<ProgressSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'getValueLabel', 'modelValue'), emits)
+const { dir } = useLocale()
+const appConfig = useAppConfig() as Progress['AppConfig']
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'modelValue'), emits)
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)
 const hasSteps = computed(() => Array.isArray(props.max))
@@ -93,8 +104,20 @@ const indicatorStyle = computed(() => {
     return
   }
 
-  return {
-    transform: `translate${props.orientation === 'vertical' ? 'Y' : 'X'}(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+  if (props.orientation === 'vertical') {
+    return {
+      transform: `translateY(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+    }
+  } else {
+    if (dir.value === 'rtl') {
+      return {
+        transform: `translateX(${props.inverted ? '-' : ''}${100 - percent.value}%)`
+      }
+    } else {
+      return {
+        transform: `translateX(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+      }
+    }
   }
 })
 
@@ -134,7 +157,7 @@ function stepVariant(index: number | string) {
   return 'other'
 }
 
-const ui = computed(() => progress({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || {}) })({
   animation: props.animation,
   size: props.size,
   color: props.color,
@@ -144,8 +167,8 @@ const ui = computed(() => progress({
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <div v-if="!isIndeterminate && (status || $slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+    <div v-if="!isIndeterminate && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
@@ -162,5 +185,5 @@ const ui = computed(() => progress({
         </slot>
       </div>
     </div>
-  </div>
+  </Primitive>
 </template>

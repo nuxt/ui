@@ -1,11 +1,4 @@
 /* eslint-disable no-undef */
-import('https://unpkg.com/prettier@3.3.3/standalone.js')
-import('https://unpkg.com/prettier@3.3.3/plugins/babel.js')
-import('https://unpkg.com/prettier@3.3.3/plugins/estree.js')
-import('https://unpkg.com/prettier@3.3.3/plugins/html.js')
-import('https://unpkg.com/prettier@3.3.3/plugins/markdown.js')
-import('https://unpkg.com/prettier@3.3.3/plugins/typescript.js')
-
 self.onmessage = async function (event) {
   self.postMessage({
     uid: event.data.uid,
@@ -21,8 +14,18 @@ function handleMessage(message) {
 }
 
 async function handleFormatMessage(message) {
-  const { options, source } = message
+  if (!globalThis.prettier) {
+    await Promise.all([
+      import('https://cdn.jsdelivr.net/npm/prettier@3.5.2/standalone.js'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.5.2/plugins/babel.js'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.5.2/plugins/estree.js'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.5.2/plugins/html.js'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.5.2/plugins/markdown.js'),
+      import('https://cdn.jsdelivr.net/npm/prettier@3.5.2/plugins/typescript.js')
+    ])
+  }
 
+  const { options, source } = message
   const formatted = await prettier.format(source, {
     parser: 'markdown',
     plugins: prettierPlugins,

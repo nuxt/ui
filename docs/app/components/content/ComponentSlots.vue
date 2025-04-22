@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import { upperFirst, camelCase } from 'scule'
+import { upperFirst, camelCase, kebabCase } from 'scule'
+
+const props = defineProps<{
+  prose?: boolean
+  slug?: string
+}>()
 
 const route = useRoute()
 
-const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
-const name = `U${upperFirst(camelName)}`
+const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
+const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
 
 const meta = await fetchComponentMeta(name as any)
 </script>
@@ -24,14 +29,14 @@ const meta = await fetchComponentMeta(name as any)
     <ProseTbody>
       <ProseTr v-for="slot in (meta?.meta?.slots || [])" :key="slot.name">
         <ProseTd>
-          <ProseCodeInline>
+          <ProseCode>
             {{ slot.name }}
-          </ProseCodeInline>
+          </ProseCode>
         </ProseTd>
         <ProseTd>
           <HighlightInlineType v-if="slot.type" :type="slot.type" />
 
-          <MDC v-if="slot.description" :value="slot.description" class="text-[var(--ui-text-toned)] mt-1" />
+          <MDC v-if="slot.description" :value="slot.description" class="text-toned mt-1" :cache-key="`${kebabCase(route.path)}-${slot.name}-description`" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

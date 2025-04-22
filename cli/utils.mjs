@@ -15,3 +15,17 @@ export async function appendFile(path, contents) {
     await fsp.writeFile(path, file.trim() + '\n' + contents + '\n')
   }
 }
+
+export function normalizeLocale(locale) {
+  if (!locale) {
+    return ''
+  }
+
+  if (locale.includes('_')) {
+    return locale.split('_')
+      .map((part, index) => index === 0 ? part.toLowerCase() : part.toUpperCase())
+      .join('-')
+  }
+
+  return locale.toLowerCase()
+}

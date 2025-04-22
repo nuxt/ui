@@ -1,18 +1,22 @@
 <script setup lang="ts">
-import { LazySlideoverExample } from '#components'
+import { defineAsyncComponent } from 'vue'
+
+const LazySlideoverExample = defineAsyncComponent(() => import('../../components/SlideoverExample.vue'))
 
 const open = ref(false)
 const count = ref(0)
+const overlay = useOverlay()
 
-const slideover = useSlideover()
+const slideover = overlay.create(LazySlideoverExample, {
+  props: {
+    count: count.value
+  }
+})
 
 function openSlideover() {
   count.value++
 
-  slideover.open(LazySlideoverExample, {
-    title: 'Slideover',
-    count: count.value
-  })
+  slideover.open({ count: count.value })
 }
 </script>
 
@@ -96,7 +100,7 @@ function openSlideover() {
       </template>
     </USlideover>
 
-    <USlideover title="Slideover prevent close" description="This slideover has `prevent-close: true` prop so it won't close when clicking outside." prevent-close>
+    <USlideover title="Slideover prevent close" description="This slideover has `dismissible: false` prop so it won't close when clicking outside." :dismissible="false">
       <UButton label="Open unclosable" color="neutral" variant="subtle" />
 
       <template #body>

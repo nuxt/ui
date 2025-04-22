@@ -1,28 +1,36 @@
 <script lang="ts">
 import type { InputHTMLAttributes } from 'vue'
-import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
-import type { PartialString } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { input: Partial<typeof theme> } }
-
-const input = tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })
-
-type InputVariants = VariantProps<typeof input>
+type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
 export interface InputProps extends UseComponentIconsProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   id?: string
   name?: string
   type?: InputHTMLAttributes['type']
   /** The placeholder text when the input is empty. */
   placeholder?: string
-  color?: InputVariants['color']
-  variant?: InputVariants['variant']
-  size?: InputVariants['size']
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: Input['variants']['color']
+  /**
+   * @defaultValue 'outline'
+   */
+  variant?: Input['variants']['variant']
+  /**
+   * @defaultValue 'md'
+   */
+  size?: Input['variants']['size']
   required?: boolean
   autocomplete?: InputHTMLAttributes['autocomplete']
   autofocus?: boolean
@@ -31,7 +39,7 @@ export interface InputProps extends UseComponentIconsProps {
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   class?: any
-  ui?: PartialString<typeof input.slots>
+  ui?: Input['slots']
 }
 
 export interface InputEmits {
@@ -49,11 +57,15 @@ export interface InputSlots {
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -65,16 +77,17 @@ const props = withDefaults(defineProps<InputProps>(), {
 const emits = defineEmits<InputEmits>()
 const slots = defineSlots<InputSlots>()
 
-const [modelValue, modelModifiers] = defineModel<string | number>()
+const [modelValue, modelModifiers] = defineModel<string | number | null>()
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled } = useFormField<InputProps>(props)
+const appConfig = useAppConfig() as Input['AppConfig']
+const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps>(props, { deferInputValidation: true })
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
-const ui = computed(() => input({
-  type: props.type as InputVariants['type'],
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })({
+  type: props.type as Input['variants']['type'],
   color: color.value,
   variant: props.variant,
   size: inputSize?.value,
@@ -87,20 +100,18 @@ const ui = computed(() => input({
 
 const inputRef = ref<HTMLInputElement | null>(null)
 
-function autoFocus() {
-  if (props.autofocus) {
-    inputRef.value?.focus()
-  }
-}
-
 // Custom function to handle the v-model properties
-function updateInput(value: string) {
+function updateInput(value: string | null) {
   if (modelModifiers.trim) {
-    value = value.trim()
+    value = value?.trim() ?? null
   }
 
   if (modelModifiers.number || props.type === 'number') {
     value = looseToNumber(value)
+  }
+
+  if (modelModifiers.nullify) {
+    value ||= null
   }
 
   modelValue.value = value
@@ -134,19 +145,25 @@ function onBlur(event: FocusEvent) {
   emits('blur', event)
 }
 
-defineExpose({
-  inputRef
-})
+function autoFocus() {
+  if (props.autofocus) {
+    inputRef.value?.focus()
+  }
+}
 
 onMounted(() => {
   setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+defineExpose({
+  inputRef
+})
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <input
       :id="id"
       ref="inputRef"
@@ -158,10 +175,11 @@ onMounted(() => {
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
+      @focus="emitFormFocus"
     >
 
     <slot />
@@ -178,5 +196,5 @@ onMounted(() => {
         <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
-  </div>
+  </Primitive>
 </template>

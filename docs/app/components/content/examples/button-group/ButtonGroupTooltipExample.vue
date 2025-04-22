@@ -6,7 +6,7 @@
       <UButton
         color="neutral"
         variant="subtle"
-        icon="i-heroicons-clipboard-document"
+        icon="i-lucide-clipboard"
       />
     </UTooltip>
   </UButtonGroup>

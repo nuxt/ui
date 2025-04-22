@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { upperFirst, camelCase } from 'scule'
 
+const props = defineProps<{
+  prose?: boolean
+}>()
+
 const route = useRoute()
 
-const camelName = camelCase(route.params.slug?.[route.params.slug.length - 1] ?? '')
-const name = `U${upperFirst(camelName)}`
+const camelName = camelCase(route.path.split('/').pop() ?? '')
+const name = props.prose ? `Prose${upperFirst(camelName)}` : `U${upperFirst(camelName)}`
 
 const meta = await fetchComponentMeta(name as any)
 </script>
@@ -24,9 +28,9 @@ const meta = await fetchComponentMeta(name as any)
     <ProseTbody>
       <ProseTr v-for="event in (meta?.meta?.events || [])" :key="event.name">
         <ProseTd>
-          <ProseCodeInline>
+          <ProseCode>
             {{ event.name }}
-          </ProseCodeInline>
+          </ProseCode>
         </ProseTd>
         <ProseTd>
           <HighlightInlineType v-if="event.type" :type="event.type" />

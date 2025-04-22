@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { kebabCase } from 'scule'
 import type { PropertyMeta } from 'vue-component-meta'
 
 const props = defineProps<{
   prop: PropertyMeta
   ignore?: string[]
 }>()
+
+const route = useRoute()
 
 function getSchemaProps(schema: PropertyMeta['schema']): any {
   if (!schema || typeof schema === 'string' || !schema.schema) {
@@ -35,13 +38,13 @@ const schemaProps = computed(() => {
 </script>
 
 <template>
-  <Collapsible v-if="schemaProps?.length" class="mt-1">
+  <ProseCollapsible v-if="schemaProps?.length" class="mt-1">
     <ProseUl>
       <ProseLi v-for="schemaProp in schemaProps" :key="schemaProp.name">
         <HighlightInlineType :type="`${schemaProp.name}${schemaProp.required === false ? '?' : ''}: ${schemaProp.type}`" />
 
-        <MDC v-if="schemaProp.description" :value="schemaProp.description" class="text-[var(--ui-text-muted)] my-1" />
+        <MDC v-if="schemaProp.description" :value="schemaProp.description" class="text-muted my-1" :cache-key="`${kebabCase(route.path)}-${prop.name}-${schemaProp.name}-description`" />
       </ProseLi>
     </ProseUl>
-  </Collapsible>
+  </ProseCollapsible>
 </template>

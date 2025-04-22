@@ -1,15 +1,10 @@
 <script lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/alert'
 import type { AvatarProps, ButtonProps } from '../types'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { alert: Partial<typeof theme> } }
-
-const alert = tv({ extend: tv(theme), ...(appConfig.ui?.alert || {}) })
-
-type AlertVariants = VariantProps<typeof alert>
+type Alert = ComponentConfig<typeof theme, AppConfig, 'alert'>
 
 export interface AlertProps {
   /**
@@ -19,30 +14,46 @@ export interface AlertProps {
   as?: any
   title?: string
   description?: string
+  /**
+   * @IconifyIcon
+   */
   icon?: string
   avatar?: AvatarProps
-  color?: AlertVariants['color']
-  variant?: AlertVariants['variant']
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: Alert['variants']['color']
+  /**
+   * @defaultValue 'solid'
+   */
+  variant?: Alert['variants']['variant']
+  /**
+   * The orientation between the content and the actions.
+   * @defaultValue 'vertical'
+   */
+  orientation?: Alert['variants']['orientation']
   /**
    * Display a list of actions:
-   * - under the title and description if multiline
-   * - next to the close button if not multiline
+   * - under the title and description when orientation is `vertical`
+   * - next to the close button when orientation is `horizontal`
+   * `{ size: 'xs' }`{lang="ts-type"}
    */
   actions?: ButtonProps[]
   /**
    * Display a close button to dismiss the alert.
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
-   * @emits `close`
+   * @emits 'update:open'
    * @defaultValue false
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   class?: any
-  ui?: Partial<typeof alert.slots>
+  ui?: Alert['slots']
 }
 
 export interface AlertEmits {
@@ -54,33 +65,39 @@ export interface AlertSlots {
   title(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  close(props: { ui: any }): any
+  close(props: { ui: { [K in keyof Required<Alert['slots']>]: (props?: Record<string, any>) => string } }): any
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Primitive } from 'radix-vue'
+import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import UButton from './Button.vue'
 
-const props = defineProps<AlertProps>()
+const props = withDefaults(defineProps<AlertProps>(), {
+  orientation: 'vertical'
+})
 const emits = defineEmits<AlertEmits>()
 const slots = defineSlots<AlertSlots>()
 
-const appConfig = useAppConfig()
+const { t } = useLocale()
+const appConfig = useAppConfig() as Alert['AppConfig']
 
-const multiline = computed(() => !!props.title && !!props.description)
-
-const ui = computed(() => alert({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.alert || {}) })({
   color: props.color,
-  variant: props.variant
+  variant: props.variant,
+  orientation: props.orientation,
+  title: !!props.title || !!slots.title
 }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root], multiline })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <slot name="leading">
       <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />
@@ -98,15 +115,15 @@ const ui = computed(() => alert({
         </slot>
       </div>
 
-      <div v-if="multiline && actions?.length" :class="ui.actions({ class: props.ui?.actions, multiline: true })">
+      <div v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)" :class="ui.actions({ class: props.ui?.actions })">
         <slot name="actions">
           <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
         </slot>
       </div>
     </div>
 
-    <div v-if="(!multiline && actions?.length) || close" :class="ui.actions({ class: props.ui?.actions, multiline: false })">
-      <template v-if="!multiline">
+    <div v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
+      <template v-if="orientation === 'horizontal' && (actions?.length || !!slots.actions)">
         <slot name="actions">
           <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
         </slot>
@@ -119,8 +136,8 @@ const ui = computed(() => alert({
           size="md"
           color="neutral"
           variant="link"
-          aria-label="Close"
-          v-bind="typeof close === 'object' ? close : undefined"
+          :aria-label="t('alert.close')"
+          v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"
         />

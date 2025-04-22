@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormError, FormErrorEvent, FormSubmitEvent } from '#ui/types'
+import type { FormError, FormErrorEvent, FormSubmitEvent } from '@nuxt/ui'
 
 const state = reactive({
   email: undefined,
@@ -14,7 +14,7 @@ const validate = (state: any): FormError[] => {
 }
 
 const toast = useToast()
-async function onSubmit(event: FormSubmitEvent<any>) {
+async function onSubmit(event: FormSubmitEvent<typeof state>) {
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }

@@ -1,5 +1,6 @@
 ---
 description: A form component with built-in validation and submission handling.
+category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -8,21 +9,30 @@ links:
 
 ## Usage
 
-Use the Form component to validate form data using schema libraries such as [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot), [Superstruct](https://github.com/ianstormtaylor/superstruct) or your own validation logic.
+Use the Form component to validate form data using validation libraries such as [Valibot](https://github.com/fabian-hiller/valibot), [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi), [Superstruct](https://github.com/ianstormtaylor/superstruct) or your own validation logic.
 
 It works with the [FormField](/components/form-field) component to display error messages around form elements automatically.
 
 ### Schema Validation
 
 It requires two props:
+
 - `state` - a reactive object holding the form's state.
-- `schema` - a schema object from a validation library like [Zod](https://github.com/colinhacks/zod), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi), [Valibot](https://github.com/fabian-hiller/valibot) or [Superstruct](https://github.com/ianstormtaylor/superstruct).
+- `schema` - any [Standard Schema](https://standardschema.dev/) or a schema from [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Superstruct](https://github.com/ianstormtaylor/superstruct).
 
 ::warning
 **No validation library is included** by default, ensure you **install the one you need**.
 ::
 
 ::tabs
+  ::component-example{label="Valibot"}
+  ---
+  name: 'form-example-valibot'
+  props:
+    class: 'w-60'
+  ---
+  ::
+
   ::component-example{label="Zod"}
   ---
   name: 'form-example-zod'
@@ -47,14 +57,6 @@ It requires two props:
   ---
   ::
 
-  ::component-example{label="Valibot"}
-  ---
-  name: 'form-example-valibot'
-  props:
-    class: 'w-60'
-  ---
-  ::
-
   ::component-example{label="Superstruct"}
   ---
   name: 'form-example-superstruct'
@@ -64,7 +66,7 @@ It requires two props:
   ::
 ::
 
-Errors are reported directly to the [FormField](/components/form-field) component based on the `name` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
+Errors are reported directly to the [FormField](/components/form-field) component based on the `name` or `error-pattern` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
 
 Nested validation rules are handled using dot notation. For example, a rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
 
@@ -73,6 +75,7 @@ Nested validation rules are handled using dot notation. For example, a rule like
 Use the `validate` prop to apply your own validation logic.
 
 The validation function must return a list of errors with the following attributes:
+
 - `message` - the error message to display.
 - `name` - the `name` of the `FormField` to send the error to.
 
@@ -91,6 +94,7 @@ props:
 ### Input Events
 
 The Form component automatically triggers validation when an input emits an `input`, `change`, or `blur` event.
+
 - Validation on `input` occurs **as you type**.
 - Validation on `change` occurs when you **commit to a value**.
 - Validation on `blur` happens when an input **loses focus**.
@@ -117,7 +121,7 @@ options:
 ::
 
 ::tip
-You can use the [useFormField](/composables/use-form-field) composable to implement this inside your own components.
+You can use the [`useFormField`](/composables/use-form-field) composable to implement this inside your own components.
 ::
 
 ### Error Event
@@ -191,10 +195,18 @@ This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |
-| `submit()`{lang="ts-type"} | `Promise<void>`{lang="ts-type"} <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Triggers form submission.</p> |
-| `validate(path?: string \| string[], opts: { silent?: boolean })`{lang="ts-type"} | `Promise<T>`{lang="ts-type"} <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Triggers form validation. Will raise any errors unless `opts.silent` is set to true.</p> |
-| `clear(path?: string)`{lang="ts-type"} | `void` <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Clears form errors associated with a specific path. If no path is provided, clears all form errors.</p> |
-| `getErrors(path?: string)`{lang="ts-type"} | `FormError[]`{lang="ts-type"} <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Retrieves form errors associated with a specific path. If no path is provided, returns all form errors.</p></div> |
-| `setErrors(errors: FormError[], path?: string)`{lang="ts-type"} | `void` <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>Sets form errors for a given path. If no path is provided, overrides all errors.</p> |
-| `errors`{lang="ts-type"} | `Ref<FormError[]>`{lang="ts-type"} <br> <div class="text-[var(--ui-text-toned)] mt-1"><p>A reference to the array containing validation errors. Use this to access or manipulate the error information.</p> |
+| `submit()`{lang="ts-type"} | `Promise<void>`{lang="ts-type"} <br> <div class="text-toned mt-1"><p>Triggers form submission.</p> |
+| `validate(opts: { name?: keyof T \| (keyof T)[], silent?: boolean, nested?: boolean, transform?: boolean })`{lang="ts-type"} | `Promise<T>`{lang="ts-type"} <br> <div class="text-toned mt-1"><p>Triggers form validation. Will raise any errors unless `opts.silent` is set to true.</p> |
+| `clear(path?: keyof T)`{lang="ts-type"} | `void` <br> <div class="text-toned mt-1"><p>Clears form errors associated with a specific path. If no path is provided, clears all form errors.</p> |
+| `getErrors(path?: keyof T)`{lang="ts-type"} | `FormError[]`{lang="ts-type"} <br> <div class="text-toned mt-1"><p>Retrieves form errors associated with a specific path. If no path is provided, returns all form errors.</p></div> |
+| `setErrors(errors: FormError[], name?: keyof T)`{lang="ts-type"} | `void` <br> <div class="text-toned mt-1"><p>Sets form errors for a given path. If no path is provided, overrides all errors.</p> |
+| `errors`{lang="ts-type"} | `Ref<FormError[]>`{lang="ts-type"} <br> <div class="text-toned mt-1"><p>A reference to the array containing validation errors. Use this to access or manipulate the error information.</p> |
 | `disabled`{lang="ts-type"} | `Ref<boolean>`{lang="ts-type"} |
+| `dirty`{lang="ts-type"} | `Ref<boolean>`{lang="ts-type"} `true` if at least one form field has been updated by the user.|
+| `dirtyFields`{lang="ts-type"} | `DeepReadonly<Set<keyof T>>`{lang="ts-type"} Tracks fields that have been modified by the user. |
+| `touchedFields`{lang="ts-type"} | `DeepReadonly<Set<keyof T>>`{lang="ts-type"} Tracks fields that the user interacted with. |
+| `blurredFields`{lang="ts-type"} | `DeepReadonly<Set<keyof T>>`{lang="ts-type"} Tracks fields blurred by the user. |
+
+## Theme
+
+:component-theme

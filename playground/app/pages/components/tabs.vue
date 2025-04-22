@@ -19,11 +19,11 @@ const items = [{
   content: 'This is the content shown for Tab1'
 }, {
   label: 'Tab2',
-  icon: 'i-heroicons-user',
+  icon: 'i-lucide-user',
   content: 'And, this is the content for Tab2'
 }, {
   label: 'Tab3',
-  icon: 'i-heroicons-bell',
+  icon: 'i-lucide-bell',
   content: 'Finally, this is the content for Tab3',
   slot: 'custom' as const
 }]
@@ -57,7 +57,15 @@ const items = [{
         class="w-96"
       >
         <template #custom="{ item }">
-          <span class="text-[var(--ui-text-muted)]">Custom: {{ item.content }}</span>
+          <span class="text-muted">Custom: {{ item.content }}</span>
+        </template>
+
+        <template #list-trailing>
+          <UButton
+            icon="lucide:refresh-cw"
+            variant="soft"
+            class="ml-2"
+          />
         </template>
       </UTabs>
     </div>

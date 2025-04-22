@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Link, { type LinkProps, type LinkSlots } from '../../src/runtime/components/Link.vue'
+import { ULink as Link } from '#components'
+import type { LinkProps, LinkSlots } from '../../src/runtime/components/Link.vue'
 import ComponentRender from '../component-render'
 
 describe('Link', () => {
@@ -11,8 +12,8 @@ describe('Link', () => {
     ['with disabled', { props: { disabled: true } }],
     ['with raw', { props: { raw: true } }],
     ['with class', { props: { class: 'font-medium' } }],
-    ['with activeClass', { props: { active: true, activeClass: 'text-[var(--ui-text-highlighted)]' } }],
-    ['with inactiveClass', { props: { active: false, inactiveClass: 'hover:text-[var(--ui-primary)]' } }],
+    ['with activeClass', { props: { active: true, activeClass: 'text-highlighted' } }],
+    ['with inactiveClass', { props: { active: false, inactiveClass: 'hover:text-primary' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: LinkProps, slots?: Partial<LinkSlots> }) => {
