@@ -251,8 +251,6 @@ When `type="multiple"`, ensure to pass an array to the `default-value` prop or t
 
 Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Accordion. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
-The `useSortable` composable accepts various options, see the [useSortable](https://vueuse.org/integrations/useSortable/#usage) documentation for more examples.
-
 ::component-example
 ---
 name: 'accordion-drag-and-drop-example'

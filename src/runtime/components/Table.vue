@@ -167,7 +167,7 @@ export type TableSlots<T> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
@@ -205,6 +205,8 @@ const sortingState = defineModel<SortingState>('sorting', { default: [] })
 const groupingState = defineModel<GroupingState>('grouping', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 const paginationState = defineModel<PaginationState>('pagination', { default: {} })
+
+const tableRef = ref<HTMLTableElement>()
 
 const tableApi = useVueTable({
   ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
@@ -303,13 +305,14 @@ function handleRowSelect(row: TableRow<T>, e: Event) {
 }
 
 defineExpose({
+  tableRef,
   tableApi
 })
 </script>
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <table :class="ui.base({ class: [props.ui?.base] })">
+    <table ref="tableRef" :class="ui.base({ class: [props.ui?.base] })">
       <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ caption }}

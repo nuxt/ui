@@ -444,11 +444,23 @@ class: '!p-0'
 ---
 ::
 
+### With infinite scroll
+
+If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data when scrolling.
+
+::component-example
+---
+prettier: true
+collapse: true
+overflowHidden: true
+name: 'table-infinite-scroll-example'
+class: '!p-0'
+---
+::
+
 ### With drag and drop
 
 Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Table. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
-
-The `useSortable` composable accepts various options, see the [useSortable](https://vueuse.org/integrations/useSortable/#usage) documentation for more examples.
 
 ::note
 Since the table ref doesn't expose the tbody element, add a unique class to it via the `:ui` prop to target it with `useSortable` (e.g. `:ui="{ tbody: 'my-table-tbody' }"`).
@@ -459,25 +471,6 @@ Since the table ref doesn't expose the tbody element, add a unique class to it v
 prettier: true
 collapse: true
 name: 'table-drag-and-drop-example'
-class: '!p-0'
----
-::
-
-### With infinite scroll
-
-If you use server-side pagination, you can implement infinite scroll.
-
-This example uses the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll){:target="_blank"} composable from VueUse.
-
-::tip
-Scrolling inside the table will load more users.
-::
-
-::component-example
----
-prettier: true
-collapse: true
-name: 'table-infinite-scroll-example'
 class: '!p-0'
 ---
 ::
@@ -527,6 +520,7 @@ This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |
+| `tableRef`{lang="ts-type"} | `Ref<HTMLTableElement \| null>`{lang="ts-type"} |
 | `tableApi`{lang="ts-type"} | [`Ref<Table \| null>`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
 
 ## Theme

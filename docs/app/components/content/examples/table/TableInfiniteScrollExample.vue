@@ -2,6 +2,8 @@
 import type { TableColumn } from '@nuxt/ui'
 import { useInfiniteScroll } from '@vueuse/core'
 
+const UAvatar = resolveComponent('UAvatar')
+
 type User = {
   id: number
   firstName: string
@@ -18,29 +20,15 @@ type UserResponse = {
 }
 
 const skip = ref(0)
-const url = computed(() => `https://dummyjson.com/users?limit=10&skip=${skip.value}&select=firstName,username,email,image`)
 
-const { data, status, execute } = await useFetch(url, {
+const { data, status, execute } = await useFetch('https://dummyjson.com/users?limit=10&select=firstName,username,email,image', {
   key: 'table-users-infinite-scroll',
+  params: { skip },
   transform: (data?: UserResponse) => {
-    return data?.users.map(user => ({
-      ...user
-    }))
+    return data?.users
   },
   lazy: true,
-  immediate: false,
-  watch: [skip]
-})
-
-execute()
-
-const users = ref<User[]>([])
-
-watch(data, () => {
-  users.value = [
-    ...users.value,
-    ...data.value || []
-  ]
+  immediate: false
 })
 
 const columns: TableColumn<User>[] = [{
@@ -49,7 +37,7 @@ const columns: TableColumn<User>[] = [{
 }, {
   accessorKey: 'image',
   header: 'Avatar',
-  cell: ({ row }) => h('img', { src: row.original.image, class: 'h-12 w-auto' })
+  cell: ({ row }) => h(UAvatar, { src: row.original.image })
 }, {
   accessorKey: 'firstName',
   header: 'First name'
@@ -61,33 +49,40 @@ const columns: TableColumn<User>[] = [{
   header: 'Username'
 }]
 
+const users = ref<User[]>([])
+
+watch(data, () => {
+  users.value = [
+    ...users.value,
+    ...(data.value || [])
+  ]
+})
+
+execute()
+
 const table = useTemplateRef<ComponentPublicInstance>('table')
 
 onMounted(() => {
-  useInfiniteScroll(
-    table.value?.$el,
-    () => {
-      skip.value += 10
-    },
-    {
-      distance: 200,
-      canLoadMore: () => {
-        if (status.value === 'pending') return false
-
-        return true
-      }
+  useInfiniteScroll(table.value?.$el, () => {
+    skip.value += 10
+  }, {
+    distance: 200,
+    canLoadMore: () => {
+      return status.value !== 'pending'
     }
-  )
+  })
 })
 </script>
 
 <template>
-  <UTable
-    ref="table"
-    :data="users"
-    :columns="columns"
-    :loading="status === 'pending'"
-    sticky
-    class="flex-1 h-80"
-  />
+  <div class="w-full">
+    <UTable
+      ref="table"
+      :data="users"
+      :columns="columns"
+      :loading="status === 'pending'"
+      sticky
+      class="flex-1 h-80"
+    />
+  </div>
 </template>
