@@ -26,7 +26,7 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
    * Render the popover in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * When `false`, the popover will not close when clicking outside or pressing escape.
    * @defaultValue true
@@ -51,6 +51,7 @@ import { useForwardPropsEmits } from 'reka-ui'
 import { Popover, HoverCard } from 'reka-ui/namespaced'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { usePortal } from '../composables/usePortal'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<PopoverProps>(), {
@@ -67,6 +68,7 @@ const appConfig = useAppConfig() as Popover['AppConfig']
 
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardPropsEmits(pick, emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {
   if (!props.dismissible) {
@@ -95,7 +97,7 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
       <slot :open="open" />
     </Component.Trigger>
 
-    <Component.Portal :disabled="!portal">
+    <Component.Portal v-bind="portalProps">
       <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
         <slot name="content" />
 

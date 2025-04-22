@@ -105,6 +105,13 @@ highlights:
 When rendering components with `h`, you can either use the `resolveComponent` function or import from `#components`.
 ::
 
+### Meta
+
+Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/docs/api/core/table#meta)) to pass properties like:
+
+- `class`:
+  - `tr`: [The classes to apply to the `tr` element.]{class="text-muted"}
+
 ### Loading
 
 Use the `loading` prop to display a loading state, the `loading-color` prop to change its color and the `loading-animation` prop to change its animation.
@@ -444,6 +451,37 @@ class: '!p-0'
 ---
 ::
 
+### With infinite scroll
+
+If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data when scrolling.
+
+::component-example
+---
+prettier: true
+collapse: true
+overflowHidden: true
+name: 'table-infinite-scroll-example'
+class: '!p-0'
+---
+::
+
+### With drag and drop
+
+Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Table. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
+
+::note
+Since the table ref doesn't expose the tbody element, add a unique class to it via the `:ui` prop to target it with `useSortable` (e.g. `:ui="{ tbody: 'my-table-tbody' }"`).
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-drag-and-drop-example'
+class: '!p-0'
+---
+::
+
 ### With slots
 
 You can use slots to customize the header and data cells of the table.
@@ -489,6 +527,7 @@ This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |
+| `tableRef`{lang="ts-type"} | `Ref<HTMLTableElement \| null>`{lang="ts-type"} |
 | `tableApi`{lang="ts-type"} | [`Ref<Table \| null>`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
 
 ## Theme

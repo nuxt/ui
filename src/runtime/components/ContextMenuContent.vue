@@ -9,7 +9,7 @@ type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
 interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   sub?: boolean
   labelKey: keyof NestedItem<T>
   /**
@@ -33,12 +33,13 @@ interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ContextMenuItem>">
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { ContextMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { usePortal } from '../composables/usePortal'
 import { omit, get, isArrayOfArray } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
@@ -56,6 +57,7 @@ const slots = defineSlots<ContextMenuSlots<T>>()
 const { dir } = useLocale()
 const appConfig = useAppConfig()
 
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default'])
 
@@ -103,7 +105,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
     </slot>
   </DefineItemTemplate>
 
-  <ContextMenu.Portal :disabled="!portal">
+  <ContextMenu.Portal v-bind="portalProps">
     <component :is="sub ? ContextMenu.SubContent : ContextMenu.Content" :class="props.class" v-bind="contentProps">
       <ContextMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
         <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">

@@ -21,7 +21,7 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
    * Render the toaster in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   class?: any
   ui?: Toaster['slots']
 }
@@ -36,11 +36,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, toRef } from 'vue'
 import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useToast } from '../composables/useToast'
+import { usePortal } from '../composables/usePortal'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UToast from './Toast.vue'
@@ -56,6 +57,7 @@ const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']
 
 const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'))
+const portalProps = usePortal(toRef(() => props.portal))
 
 const swipeDirection = computed(() => {
   switch (props.position) {
@@ -126,7 +128,7 @@ function getOffset(index: number) {
       @click="toast.onClick && toast.onClick(toast)"
     />
 
-    <ToastPortal :disabled="!portal">
+    <ToastPortal v-bind="portalProps">
       <ToastViewport
         :data-expanded="expanded"
         :class="ui.viewport({ class: [props.class, props.ui?.viewport] })"
