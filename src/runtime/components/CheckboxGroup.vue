@@ -2,6 +2,7 @@
 import type { CheckboxGroupRootProps, CheckboxGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox-group'
+import type { CheckboxProps } from '../types'
 import type { AcceptableValue, ComponentConfig } from '../types/utils'
 
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
@@ -22,7 +23,7 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
    * @defaultValue 'div'
    */
   as?: any
-  legend?: string // should be legend
+  legend?: string
   /**
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
@@ -42,37 +43,31 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
   /**
    * @defaultValue 'primary'
    */
-  color?: CheckboxGroup['variants']['color']
+  color?: CheckboxProps['color']
+  /**
+   * @defaultValue 'list'
+   */
+  variant?: CheckboxProps['variant']
+  /**
+   * @defaultValue 'md'
+   */
+  size?: CheckboxGroup['variants']['size']
   /**
    * Position of the indicator.
    * @defaultValue 'start'
    */
-  indicator?: CheckboxGroup['variants']['indicator']
+  indicator?: CheckboxProps['indicator']
   /**
    * The orientation the checkbox buttons are laid out.
    * @defaultValue 'vertical'
    */
   orientation?: CheckboxGroupRootProps['orientation']
   /**
-   * @defaultValue 'md'
-   */
-  size?: CheckboxGroup['variants']['size']
-  /**
-   * @defaultValue 'list'
-   */
-  variant?: CheckboxGroup['variants']['variant']
-  /**
    * The icon displayed when checked.
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
    */
   icon?: string
-  /**
-   * The icon displayed when the checkbox is indeterminate.
-   * @defaultValue appConfig.ui.icons.minus
-   * @IconifyIcon
-   */
-  indeterminateIcon?: string
   class?: any
   ui?: CheckboxGroup['slots']
 }
@@ -91,12 +86,11 @@ export interface CheckboxGroupSlots<T extends CheckboxGroupItem = CheckboxGroupI
 </script>
 
 <script setup lang="ts" generic="T extends CheckboxGroupItem">
-import { computed, useId, provide } from 'vue'
+import { computed, useId } from 'vue'
 import { CheckboxGroupRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
-import { checkboxGroupInjectionKey } from '../composables/useCheckboxGroup'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 
@@ -106,11 +100,8 @@ const props = withDefaults(defineProps<CheckboxGroupProps<T>>(), {
   descriptionKey: 'description',
   orientation: 'vertical'
 })
-
 const emits = defineEmits<CheckboxGroupEmits>()
 const slots = defineSlots<CheckboxGroupSlots<T>>()
-
-const modelValue = defineModel<string[]>({ default: undefined })
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
@@ -121,20 +112,9 @@ const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({
   size: size.value,
-  color: color.value,
-  disabled: disabled.value,
   required: props.required,
-  orientation: props.orientation,
-  variant: props.variant,
-  indicator: props.indicator
+  orientation: props.orientation
 }))
-
-provide(checkboxGroupInjectionKey, computed(() => ({
-  orientation: props.orientation,
-  size: props.size,
-  variant: props.variant,
-  indicator: props.indicator
-})))
 
 function normalizeItem(item: any) {
   if (item === null) {
@@ -187,7 +167,6 @@ function onUpdate(value: any) {
   <CheckboxGroupRoot
     :id="id"
     v-bind="rootProps"
-    v-model="modelValue"
     :name="name"
     :disabled="disabled"
     :class="ui.root({ class: [props.class, props.ui?.root] })"
@@ -199,17 +178,18 @@ function onUpdate(value: any) {
           {{ legend }}
         </slot>
       </legend>
+
       <UCheckbox
         v-for="item in normalizedItems"
         :key="item.value"
         v-bind="item"
         :color="color"
+        :variant="variant"
+        :indicator="indicator"
+        :size="size"
         :icon="icon"
-        :indeterminate-icon="indeterminateIcon"
         :name="name"
         :disabled="item.disabled || disabled"
-        :default-value="item.value === 'indeterminate' ? 'indeterminate' : defaultValue?.includes(item.value)"
-        :model-value="item.value === 'indeterminate' ? 'indeterminate' : modelValue?.includes(item.value)"
       />
     </fieldset>
   </CheckboxGroupRoot>

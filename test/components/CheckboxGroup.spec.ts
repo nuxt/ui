@@ -2,14 +2,15 @@ import { describe, it, expect, test } from 'vitest'
 import CheckboxGroup, { type CheckboxGroupProps, type CheckboxGroupSlots } from '../../src/runtime/components/CheckboxGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/checkbox-group'
+import themeCheckbox from '#build/ui/checkbox'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '~/src/module'
 
 describe('CheckboxGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const variants = Object.keys(theme.variants.variant) as any
-  const indicators = Object.keys(theme.variants.indicator) as any
+  const variants = Object.keys(themeCheckbox.variants.variant) as any
+  const indicators = Object.keys(themeCheckbox.variants.indicator) as any
 
   const items = [
     { value: '1', label: 'Option 1' },
@@ -29,11 +30,11 @@ describe('CheckboxGroup', () => {
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with required', { props: { ...props, legend: 'Legend', required: true } }],
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size, defaultValue: ['1'] } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant, defaultValue: ['1'] } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral', defaultValue: ['1'] } }]),
     ...variants.map((variant: string) => [`with horizontal variant ${variant}`, { props: { ...props, variant, orientation: 'horizontal', defaultValue: ['1'] } }]),
-    ...indicators.map((indicator: string) => [`with indicator ${indicator}`, { props: { ...props, indicator } }]),
+    ...indicators.map((indicator: string) => [`with indicator ${indicator}`, { props: { ...props, indicator, defaultValue: ['1'] } }]),
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],

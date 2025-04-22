@@ -175,6 +175,7 @@ function onUpdate(value: any) {
           {{ legend }}
         </slot>
       </legend>
+
       <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: props.ui?.item })">
         <div :class="ui.container({ class: props.ui?.container })">
           <RadioGroupItem

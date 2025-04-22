@@ -26,9 +26,10 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       list: {
+        item: ''
       },
       card: {
-        item: 'items-center border border-muted rounded-lg'
+        item: 'border border-muted rounded-lg'
       },
       table: {
         item: 'border border-muted'
@@ -36,8 +37,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     orientation: {
       horizontal: {
-        fieldset: 'flex-row',
-        wrapper: 'me-2'
+        fieldset: 'flex-row'
       },
       vertical: {
         fieldset: 'flex-col'
@@ -46,11 +46,11 @@ export default (options: Required<ModuleOptions>) => ({
     indicator: {
       start: {
         item: 'flex-row',
-        base: 'me-2'
+        wrapper: 'ms-2'
       },
       end: {
         item: 'flex-row-reverse',
-        base: 'ms-2'
+        wrapper: 'me-2'
       },
       hidden: {
         base: 'sr-only',
