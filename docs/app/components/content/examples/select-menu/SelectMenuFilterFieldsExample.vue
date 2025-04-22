@@ -36,7 +36,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     <template #item-label="{ item }">
       {{ item.label }}
 
-      <span class="text-(--ui-text-muted)">
+      <span class="text-muted">
         {{ item.email }}
       </span>
     </template>

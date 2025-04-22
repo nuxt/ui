@@ -1,15 +1,15 @@
 <script lang="ts">
 import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
-import theme from '#build/ui/context-menu'
-import { tv } from '../utils/tv'
+import type { AppConfig } from '@nuxt/schema'
+import type theme from '#build/ui/context-menu'
 import type { AvatarProps, ContextMenuItem, ContextMenuSlots, KbdProps } from '../types'
-import type { ArrayOrNested, NestedItem } from '../types/utils'
+import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
 
-const _contextMenu = tv(theme)()
+type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
 interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   sub?: boolean
   labelKey: keyof NestedItem<T>
   /**
@@ -25,19 +25,21 @@ interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> exte
    */
   externalIcon?: boolean | string
   class?: any
-  ui: typeof _contextMenu
-  uiOverride?: any
+  ui: { [K in keyof Required<ContextMenu['slots']>]: (props?: Record<string, any>) => string }
+  uiOverride?: ContextMenu['slots']
 }
 
 interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ContextMenuItem>">
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { ContextMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
+import { usePortal } from '../composables/usePortal'
 import { omit, get, isArrayOfArray } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
@@ -52,12 +54,16 @@ const props = defineProps<ContextMenuContentProps<T>>()
 const emits = defineEmits<ContextMenuContentEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
+const { dir } = useLocale()
 const appConfig = useAppConfig()
+
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default'])
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem, active?: boolean, index: number }>()
 
+const childrenIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight)
 const groups = computed<ContextMenuItem[][]>(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
@@ -86,7 +92,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
 
       <span :class="ui.itemTrailing({ class: uiOverride?.itemTrailing })">
         <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof ContextMenuSlots<T>)" :item="item" :active="active" :index="index">
-          <UIcon v-if="item.children?.length" :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon({ class: uiOverride?.itemTrailingIcon, color: item?.color, active })" />
+          <UIcon v-if="item.children?.length" :name="childrenIcon" :class="ui.itemTrailingIcon({ class: uiOverride?.itemTrailingIcon, color: item?.color, active })" />
           <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: uiOverride?.itemTrailingKbds })">
             <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((props.uiOverride?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
           </span>
@@ -99,7 +105,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
     </slot>
   </DefineItemTemplate>
 
-  <ContextMenu.Portal :disabled="!portal">
+  <ContextMenu.Portal v-bind="portalProps">
     <component :is="sub ? ContextMenu.SubContent : ContextMenu.Content" :class="props.class" v-bind="contentProps">
       <ContextMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
         <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
@@ -132,7 +138,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
               :external-icon="externalIcon"
               v-bind="item.content"
             >
-              <template v-for="(_, name) in proxySlots" #[name]="slotData: any">
+              <template v-for="(_, name) in proxySlots" #[name]="slotData">
                 <slot :name="(name as keyof ContextMenuSlots<T>)" v-bind="slotData" />
               </template>
             </UContextMenuContent>

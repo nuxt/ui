@@ -1,20 +1,13 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/input-number'
-import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
-import type { PartialString } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigInputNumber = _appConfig as AppConfig & { ui: { inputNumber: Partial<typeof theme> } }
+type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
 
-const inputNumber = tv({ extend: tv(theme), ...(appConfigInputNumber.ui?.inputNumber || {}) })
-
-type InputNumberVariants = VariantProps<typeof inputNumber>
-
-export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions'> {
+export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -22,9 +15,9 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   as?: any
   /** The placeholder text when the input is empty. */
   placeholder?: string
-  color?: InputNumberVariants['color']
-  variant?: InputNumberVariants['variant']
-  size?: InputNumberVariants['size']
+  color?: InputNumber['variants']['color']
+  variant?: InputNumber['variants']['variant']
+  size?: InputNumber['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /**
@@ -62,7 +55,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    */
   locale?: string
   class?: any
-  ui?: PartialString<typeof inputNumber.slots>
+  ui?: InputNumber['slots']
 }
 
 export interface InputNumberEmits {
@@ -84,6 +77,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -94,15 +88,16 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'formatOptions'), emits)
+const appConfig = useAppConfig() as InputNumber['AppConfig']
 
-const appConfig = useAppConfig()
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange'), emits)
+
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
 
 const { t, code: codeLocale } = useLocale()
 const locale = computed(() => props.locale || codeLocale.value)
 
-const ui = computed(() => inputNumber({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {}) })({
   color: color.value,
   variant: props.variant,
   size: size.value,
@@ -114,18 +109,6 @@ const incrementIcon = computed(() => props.incrementIcon || (props.orientation =
 const decrementIcon = computed(() => props.decrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.minus : appConfig.ui.icons.chevronDown))
 
 const inputRef = ref<InstanceType<typeof NumberFieldInput> | null>(null)
-
-function autoFocus() {
-  if (props.autofocus) {
-    inputRef.value?.$el?.focus()
-  }
-}
-
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
 
 function onUpdate(value: number) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -140,6 +123,18 @@ function onBlur(event: FocusEvent) {
   emitFormBlur()
   emits('blur', event)
 }
+
+function autoFocus() {
+  if (props.autofocus) {
+    inputRef.value?.$el?.focus()
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 
 defineExpose({
   inputRef

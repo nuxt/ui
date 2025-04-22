@@ -67,9 +67,9 @@ if (!import.meta.prerender) {
 
 const type = page.value?.path.includes('components') ? 'Vue Component ' : page.value?.path.includes('composables') ? 'Vue Composable ' : ''
 useSeoMeta({
-  titleTemplate: `%s ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
+  titleTemplate: `%s ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} ${page.value.framework === 'vue' ? ' for Vue' : ''}`,
   title: page.value.navigation?.title ? page.value.navigation.title : page.value.title,
-  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} v3${page.value.framework === 'vue' ? ' for Vue' : ''}`,
+  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} ${page.value.framework === 'vue' ? ' for Vue' : ''}`,
   description: page.value.description,
   ogDescription: page.value.description
 })
@@ -112,7 +112,7 @@ const communityLinks = computed(() => [{
   to: 'https://nuxt.lemonsqueezy.com/affiliates',
   target: '_blank'
 }, {
-  icon: 'i-lucide-life-buoy',
+  icon: 'i-lucide-git-pull-request-arrow',
   label: 'Contribution',
   to: '/getting-started/contribution'
 }, {
@@ -130,7 +130,7 @@ const communityLinks = computed(() => [{
       </template>
 
       <template #title>
-        {{ page.title }}<sup v-if="page.module === 'ui-pro'" class="ml-1 text-xs align-super font-medium text-(--ui-primary)">PRO</sup>
+        {{ page.title }}<sup v-if="page.module === 'ui-pro'" class="ml-1 text-xs align-super font-medium text-primary">PRO</sup>
       </template>
 
       <template #description>

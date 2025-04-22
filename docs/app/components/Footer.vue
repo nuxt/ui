@@ -2,8 +2,8 @@
 const route = useRoute()
 
 const links = [{
-  label: 'Figma',
-  to: '/figma'
+  label: 'Team',
+  to: '/team'
 }, {
   label: 'Roadmap',
   to: '/roadmap'
@@ -22,8 +22,8 @@ const links = [{
 
   <UFooter>
     <template #left>
-      <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="text-sm text-(--ui-text-muted)">
-        Published under <span class="text-(--ui-text-highlighted)">MIT License</span>
+      <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="text-sm text-muted">
+        Published under <span class="text-highlighted">MIT License</span>
       </NuxtLink>
     </template>
 

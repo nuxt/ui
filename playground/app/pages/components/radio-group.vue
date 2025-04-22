@@ -2,6 +2,8 @@
 import theme from '#build/ui/radio-group'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const variants = Object.keys(theme.variants.variant)
+const variant = ref('list' as const)
 
 const literalOptions = [
   'Option 1',
@@ -23,27 +25,36 @@ const itemsWithDescription = [
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ms-[100px]">
-      <URadioGroup :items="items" default-value="1" />
-      <URadioGroup :items="items" color="neutral" default-value="1" />
-      <URadioGroup :items="items" color="error" default-value="2" />
-      <URadioGroup :items="literalOptions" />
-      <URadioGroup :items="items" label="Disabled" disabled />
-      <URadioGroup :items="items" orientation="horizontal" class="ms-[-91px]" />
+    <USelect v-model="variant" :items="variants" />
+
+    <div class="flex flex-wrap gap-4 ms-[100px]">
+      <URadioGroup :variant="variant" :items="items" default-value="1" />
+      <URadioGroup :variant="variant" :items="items" color="neutral" default-value="1" />
+      <URadioGroup :variant="variant" :items="items" color="error" default-value="2" />
+      <URadioGroup :variant="variant" :items="literalOptions" />
+      <URadioGroup :variant="variant" :items="items" disabled />
     </div>
 
+    <div class="flex flex-wrap gap-4 ms-[100px]">
+      <URadioGroup :variant="variant" :items="items" default-value="3" indicator="start" />
+      <URadioGroup :variant="variant" :items="items" default-value="3" indicator="end" />
+      <URadioGroup :variant="variant" :items="items" default-value="3" indicator="hidden" />
+    </div>
+
+    <URadioGroup :variant="variant" :items="items" orientation="horizontal" class="ms-[95px]" />
+
     <div class="flex items-center gap-4 ms-[34px]">
-      <URadioGroup v-for="size in sizes" :key="size" :size="size" :items="items" />
+      <URadioGroup v-for="size in sizes" :key="size" :size="size" :variant="variant" :items="items" />
     </div>
 
     <div class="flex items-center gap-4 ms-[74px]">
-      <URadioGroup v-for="size in sizes" :key="size" :size="size" :items="itemsWithDescription" />
+      <URadioGroup v-for="size in sizes" :key="size" :size="size" :variant="variant" :items="itemsWithDescription" />
     </div>
 
     <div class="flex gap-4">
-      <URadioGroup :items="items" legend="Legend" />
-      <URadioGroup :items="items" legend="Legend" required />
-      <URadioGroup :items="items">
+      <URadioGroup :variant="variant" :items="items" legend="Legend" />
+      <URadioGroup :variant="variant" :items="items" legend="Legend" required />
+      <URadioGroup :variant="variant" :items="items">
         <template #legend>
           <span class="italic font-bold">
             With slots
@@ -56,6 +67,6 @@ const itemsWithDescription = [
         </template>
       </URadioGroup>
     </div>
-    <URadioGroup :items="items" legend="Legend" orientation="horizontal" required />
+    <URadioGroup :variant="variant" :items="items" legend="Legend" orientation="horizontal" required />
   </div>
 </template>

@@ -8,6 +8,8 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('RadioGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const variants = Object.keys(theme.variants.variant) as any
+  const indicators = Object.keys(theme.variants.indicator) as any
 
   const items = [
     { value: '1', label: 'Option 1' },
@@ -28,8 +30,10 @@ describe('RadioGroup', () => {
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with required', { props: { ...props, legend: 'Legend', required: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-    ['with color neutral', { props: { color: 'neutral', defaultValue: '1' } }],
-    ['with orientation', { props: { ...props, orientation: 'horizontal' } }],
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant, defaultValue: '1' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral', defaultValue: '1' } }]),
+    ...variants.map((variant: string) => [`with horizontal variant ${variant}`, { props: { ...props, variant, orientation: 'horizontal', defaultValue: '1' } }]),
+    ...indicators.map((indicator: string) => [`with indicator ${indicator}`, { props: { ...props, indicator } }]),
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],

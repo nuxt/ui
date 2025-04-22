@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { Ref } from 'vue'
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type { RowData } from '@tanstack/table-core'
 import type {
@@ -36,9 +35,8 @@ import type {
   VisibilityOptions,
   VisibilityState
 } from '@tanstack/vue-table'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/table'
-import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
 declare module '@tanstack/table-core' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,11 +48,7 @@ declare module '@tanstack/table-core' {
   }
 }
 
-const appConfigTable = _appConfig as AppConfig & { ui: { table: Partial<typeof theme> } }
-
-const table = tv({ extend: tv(theme), ...(appConfigTable.ui?.table || {}) })
-
-type TableVariants = VariantProps<typeof table>
+type Table = ComponentConfig<typeof theme, AppConfig, 'table'>
 
 export type TableRow<T> = Row<T>
 export type TableData = RowData
@@ -90,11 +84,11 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
   /**
    * @defaultValue 'primary'
    */
-  loadingColor?: TableVariants['loadingColor']
+  loadingColor?: Table['variants']['loadingColor']
   /**
    * @defaultValue 'carousel'
    */
-  loadingAnimation?: TableVariants['loadingAnimation']
+  loadingAnimation?: Table['variants']['loadingAnimation']
   /**
    * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
@@ -157,7 +151,7 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
   facetedOptions?: FacetedOptions<T>
   onSelect?: (row: TableRow<T>, e?: Event) => void
   class?: any
-  ui?: Partial<typeof table.slots>
+  ui?: Table['slots']
 }
 
 type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
@@ -178,17 +172,20 @@ import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
 import { reactiveOmit } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 
 const props = defineProps<TableProps<T>>()
 const slots = defineSlots<TableSlots<T>>()
 
 const { t } = useLocale()
+const appConfig = useAppConfig() as Table['AppConfig']
 
 const data = computed(() => props.data ?? [])
 const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 
-const ui = computed(() => table({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })({
   sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
