@@ -75,13 +75,13 @@ props:
 
 Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/latest/docs/api/core/column-def) objects with properties like:
 
-- `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-(--ui-text-muted)"}
-- `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-(--ui-text-muted)"}
-- `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-(--ui-text-muted)"}
-- `meta`: [Extra properties for the column.]{class="text-(--ui-text-muted)"}
+- `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-muted"}
+- `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-muted"}
+- `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-muted"}
+- `meta`: [Extra properties for the column.]{class="text-muted"}
   - `class`:
-    - `td`: [The classes to apply to the `td` element.]{class="text-(--ui-text-muted)"}
-    - `th`: [The classes to apply to the `th` element.]{class="text-(--ui-text-muted)"}
+    - `td`: [The classes to apply to the `td` element.]{class="text-muted"}
+    - `th`: [The classes to apply to the `th` element.]{class="text-muted"}
 
 In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 

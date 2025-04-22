@@ -3,7 +3,7 @@
     <ULink
       to="https://github.com/benjamincanac"
       target="_blank"
-      class="hover:ring-(--ui-primary) transition"
+      class="hover:ring-primary transition"
       raw
     >
       <UAvatar
@@ -15,7 +15,7 @@
     <ULink
       to="https://github.com/romhml"
       target="_blank"
-      class="hover:ring-(--ui-primary) transition"
+      class="hover:ring-primary transition"
       raw
     >
       <UAvatar
@@ -27,7 +27,7 @@
     <ULink
       to="https://github.com/noook"
       target="_blank"
-      class="hover:ring-(--ui-primary) transition"
+      class="hover:ring-primary transition"
       raw
     >
       <UAvatar

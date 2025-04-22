@@ -2,13 +2,13 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    overlay: 'fixed inset-0 bg-(--ui-bg-elevated)/75',
-    content: 'fixed bg-(--ui-bg) ring ring-(--ui-border) flex focus:outline-none',
-    handle: ['shrink-0 !bg-(--ui-bg-accented)', options.theme.transitions && 'transition-opacity'],
+    overlay: 'fixed inset-0 bg-elevated/75',
+    content: 'fixed bg-default ring ring-default flex focus:outline-none',
+    handle: ['shrink-0 !bg-accented', options.theme.transitions && 'transition-opacity'],
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: '',
-    title: 'text-(--ui-text-highlighted) font-semibold',
-    description: 'mt-1 text-(--ui-text-muted) text-sm',
+    title: 'text-highlighted font-semibold',
+    description: 'mt-1 text-muted text-sm',
     body: 'flex-1',
     footer: 'flex flex-col gap-1.5'
   },
@@ -33,7 +33,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     inset: {
       true: {
-        content: 'rounded-[calc(var(--ui-radius)*2)] after:hidden'
+        content: 'rounded-lg after:hidden'
       }
     }
   },
@@ -59,7 +59,7 @@ export default (options: Required<ModuleOptions>) => ({
     direction: 'top',
     inset: false,
     class: {
-      content: 'inset-x-0 top-0 rounded-b-[calc(var(--ui-radius)*2)]'
+      content: 'inset-x-0 top-0 rounded-b-lg'
     }
   }, {
     direction: 'bottom',
@@ -71,7 +71,7 @@ export default (options: Required<ModuleOptions>) => ({
     direction: 'bottom',
     inset: false,
     class: {
-      content: 'inset-x-0 bottom-0 rounded-t-[calc(var(--ui-radius)*2)]'
+      content: 'inset-x-0 bottom-0 rounded-t-lg'
     }
   }, {
     direction: 'left',
@@ -83,7 +83,7 @@ export default (options: Required<ModuleOptions>) => ({
     direction: 'left',
     inset: false,
     class: {
-      content: 'inset-y-0 left-0 rounded-r-[calc(var(--ui-radius)*2)]'
+      content: 'inset-y-0 left-0 rounded-r-lg'
     }
   }, {
     direction: 'right',
@@ -95,7 +95,7 @@ export default (options: Required<ModuleOptions>) => ({
     direction: 'right',
     inset: false,
     class: {
-      content: 'inset-y-0 right-0 rounded-l-[calc(var(--ui-radius)*2)]'
+      content: 'inset-y-0 right-0 rounded-l-lg'
     }
   }]
 })

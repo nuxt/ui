@@ -1,18 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/pin-input'
-import { tv } from '../utils/tv'
-import type { PartialString } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigPinInput = _appConfig as AppConfig & { ui: { pinInput: Partial<typeof theme> } }
-
-const pinInput = tv({ extend: tv(theme), ...(appConfigPinInput.ui?.pinInput || {}) })
-
-type PinInputVariants = VariantProps<typeof pinInput>
+type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>
 
 export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
   /**
@@ -23,15 +16,15 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
   /**
    * @defaultValue 'primary'
    */
-  color?: PinInputVariants['color']
+  color?: PinInput['variants']['color']
   /**
    * @defaultValue 'outline'
    */
-  variant?: PinInputVariants['variant']
+  variant?: PinInput['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: PinInputVariants['size']
+  size?: PinInput['variants']['size']
   /**
    * The number of input fields.
    * @defaultValue 5
@@ -41,7 +34,7 @@ export interface PinInputProps extends Pick<PinInputRootProps, 'defaultValue' | 
   autofocusDelay?: number
   highlight?: boolean
   class?: any
-  ui?: PartialString<typeof pinInput.slots>
+  ui?: PinInput['slots']
 }
 
 export type PinInputEmits = PinInputRootEmits & {
@@ -56,8 +49,10 @@ import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<PinInputProps>(), {
   type: 'text',
@@ -66,10 +61,13 @@ const props = withDefaults(defineProps<PinInputProps>(), {
 })
 const emits = defineEmits<PinInputEmits>()
 
+const appConfig = useAppConfig() as PinInput['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'placeholder', 'required', 'type'), emits)
+
 const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(props)
 
-const ui = computed(() => pinInput({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || {}) })({
   color: color.value,
   variant: props.variant,
   size: size.value,

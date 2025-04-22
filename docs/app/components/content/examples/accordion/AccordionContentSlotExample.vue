@@ -20,7 +20,7 @@ const items: AccordionItem[] = [
 <template>
   <UAccordion :items="items">
     <template #content="{ item }">
-      <p class="pb-3.5 text-sm text-(--ui-text-muted)">
+      <p class="pb-3.5 text-sm text-muted">
         This is the {{ item.label }} panel.
       </p>
     </template>

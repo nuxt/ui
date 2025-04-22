@@ -22,7 +22,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
                 <span class="inline-flex items-center gap-0.5">
                   {{ link.title }}
 
-                  <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
+                  <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-primary">PRO</sup>
                 </span>
               </template>
             </UContentNavigation>
