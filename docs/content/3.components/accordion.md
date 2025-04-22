@@ -247,6 +247,18 @@ You can also pass the `value` of one of the items if provided.
 When `type="multiple"`, ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::
 
+### With drag and drop
+
+Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Accordion. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
+
+The `useSortable` composable accepts various options, see the [useSortable](https://vueuse.org/integrations/useSortable/#usage) documentation for more examples.
+
+::component-example
+---
+name: 'accordion-drag-and-drop-example'
+---
+::
+
 ### With body slot
 
 Use the `#body` slot to customize the body of each item.
@@ -289,18 +301,6 @@ You will have access to the following slots:
 name: 'accordion-custom-slot-example'
 props:
   class: 'px-4'
----
-::
-
-### With drag and drop
-
-Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the accordion. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
-
-The `useSortable` composable accepts various options, see the [Usage](https://vueuse.org/integrations/useSortable/#usage) for more examples.
-
-::component-example
----
-name: 'accordion-drag-and-drop-example'
 ---
 ::
 

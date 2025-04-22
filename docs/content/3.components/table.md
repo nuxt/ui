@@ -444,6 +444,25 @@ class: '!p-0'
 ---
 ::
 
+### With drag and drop
+
+Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Table. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
+
+The `useSortable` composable accepts various options, see the [useSortable](https://vueuse.org/integrations/useSortable/#usage) documentation for more examples.
+
+::note
+Since the table ref doesn't expose the tbody element, add a unique class to it via the `:ui` prop to target it with `useSortable` (e.g. `:ui="{ tbody: 'my-table-tbody' }"`).
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-drag-and-drop-example'
+class: '!p-0'
+---
+::
+
 ### With infinite scroll
 
 If you use server-side pagination, you can implement infinite scroll.
