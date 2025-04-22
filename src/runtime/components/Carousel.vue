@@ -148,9 +148,7 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
   wheelGestures: false
 })
 defineSlots<CarouselSlots<T>>()
-const emit = defineEmits<{
-  select: [selectedIndex: number]
-}>()
+const emits = defineEmits<CarouselEmits>()
 
 const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Carousel['AppConfig']
@@ -252,7 +250,8 @@ function onSelect(api: EmblaCarouselType) {
   canScrollNext.value = api?.canScrollNext() || false
   canScrollPrev.value = api?.canScrollPrev() || false
   selectedIndex.value = api?.selectedScrollSnap() || 0
-  emit('select', selectedIndex.value)
+
+  emits('select', selectedIndex.value)
 }
 
 onMounted(() => {
