@@ -71,7 +71,7 @@ describe('CheckboxGroup', () => {
           validateOn,
           validateOnInputDelay: 0,
           async validate(state: any) {
-            if (state.value !== 'Option 2')
+            if (!state.value?.includes('Option 2'))
               return [{ name: 'value', message: 'Error message' }]
             return []
           }
@@ -95,11 +95,11 @@ describe('CheckboxGroup', () => {
     test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
 
-      input.setValue('Option 1')
+      input.setValue(['Option 1'])
       await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
-      input.setValue('Option 2')
+      input.setValue(['Option 2'])
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
@@ -107,18 +107,18 @@ describe('CheckboxGroup', () => {
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'])
 
-      input.setValue('Option 1')
+      input.setValue(['Option 1'])
       await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
-      input.setValue('Option 2')
+      input.setValue(['Option 2'])
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })
 
     test('no label for=... on FormField', async () => {
       const { wrapper } = await createForm()
-      const formFieldLabel = wrapper.findAll('label').map(label => label.attributes()).filter(label => !label.for?.includes('Option'))[0]
+      const formFieldLabel = wrapper.findAll('label').map(label => label.attributes()).filter(label => !label.for?.includes(':'))[0]
       expect(formFieldLabel.for).toBeUndefined()
     })
   })
