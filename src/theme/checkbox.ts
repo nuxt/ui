@@ -5,6 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative flex items-start',
     container: 'flex items-center',
     base: 'shrink-0 flex items-center justify-center rounded-sm text-inverted ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2',
+    indicator: 'flex items-center justify-center rounded-sm size-full',
     icon: 'shrink-0 size-full',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
@@ -13,10 +14,12 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `focus-visible:outline-${color} data-[state=checked]:ring-2 data-[state=checked]:ring-${color} data-[state=checked]:bg-${color}`
+        base: `focus-visible:outline-${color}`,
+        indicator: `bg-${color}`
       }])),
       neutral: {
-        base: 'focus-visible:outline-inverted data-[state=checked]:ring-2 data-[state=checked]:ring-inverted data-[state=checked]:bg-inverted'
+        base: 'focus-visible:outline-inverted',
+        indicator: 'bg-inverted'
       }
     },
     variant: {

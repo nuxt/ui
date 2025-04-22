@@ -17,7 +17,7 @@ export type CheckboxGroupItem = {
   [key: string]: any
 } | CheckboxGroupValue
 
-export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupItem> extends Pick<CheckboxGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'> {
+export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupItem> extends Pick<CheckboxGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'variant' | 'indicator' | 'size' | 'icon' | 'indeterminateIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -41,33 +41,14 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
   descriptionKey?: string
   items?: T[]
   /**
-   * @defaultValue 'primary'
-   */
-  color?: CheckboxProps['color']
-  /**
-   * @defaultValue 'list'
-   */
-  variant?: CheckboxProps['variant']
-  /**
    * @defaultValue 'md'
    */
   size?: CheckboxGroup['variants']['size']
-  /**
-   * Position of the indicator.
-   * @defaultValue 'start'
-   */
-  indicator?: CheckboxProps['indicator']
   /**
    * The orientation the checkbox buttons are laid out.
    * @defaultValue 'vertical'
    */
   orientation?: CheckboxGroupRootProps['orientation']
-  /**
-   * The icon displayed when checked.
-   * @defaultValue appConfig.ui.icons.check
-   * @IconifyIcon
-   */
-  icon?: string
   class?: any
   ui?: CheckboxGroup['slots']
 }
@@ -87,7 +68,7 @@ export interface CheckboxGroupSlots<T extends CheckboxGroupItem = CheckboxGroupI
 
 <script setup lang="ts" generic="T extends CheckboxGroupItem">
 import { computed, useId } from 'vue'
-import { CheckboxGroupRoot, useForwardPropsEmits } from 'reka-ui'
+import { CheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
@@ -106,6 +87,7 @@ const slots = defineSlots<CheckboxGroupSlots<T>>()
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
+const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon', 'indeterminateIcon'))
 
 const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
@@ -182,12 +164,9 @@ function onUpdate(value: any) {
       <UCheckbox
         v-for="item in normalizedItems"
         :key="item.value"
-        v-bind="item"
+        v-bind="{ ...item, ...checkboxProps }"
         :color="color"
-        :variant="variant"
-        :indicator="indicator"
         :size="size"
-        :icon="icon"
         :name="name"
         :disabled="item.disabled || disabled"
       />

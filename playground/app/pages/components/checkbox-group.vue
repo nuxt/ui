@@ -28,6 +28,7 @@ const itemsWithDescription = [
   <div>
     <div class="flex flex-col items-center gap-4">
       <USelect v-model="variant" :items="variants" />
+
       <div class="flex flex-wrap gap-4 ms-[100px]">
         <UCheckboxGroup :variant="variant" :items="items" :default-value="['1']" />
         <UCheckboxGroup :variant="variant" :items="items" color="neutral" :default-value="['1']" />

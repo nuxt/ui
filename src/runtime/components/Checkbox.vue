@@ -113,7 +113,7 @@ function onUpdate(value: any) {
         @update:model-value="onUpdate"
       >
         <template #default="{ modelValue }">
-          <CheckboxIndicator as-child>
+          <CheckboxIndicator :class="ui.indicator({ class: props.ui?.indicator })">
             <UIcon v-if="modelValue === 'indeterminate'" :name="indeterminateIcon || appConfig.ui.icons.minus" :class="ui.icon({ class: props.ui?.icon })" />
             <UIcon v-else :name="icon || appConfig.ui.icons.check" :class="ui.icon({ class: props.ui?.icon })" />
           </CheckboxIndicator>

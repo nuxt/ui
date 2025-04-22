@@ -160,6 +160,13 @@ export default (options: Required<ModuleOptions>) => ({
       class: {
         item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]'
       }
+    },
+    {
+      variant: ['card', 'table'],
+      disabled: true,
+      class: {
+        item: 'cursor-not-allowed opacity-75'
+      }
     }
   ],
   defaultVariants: {
