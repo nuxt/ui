@@ -3,12 +3,12 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
-    fieldset: 'flex gap-2',
+    fieldset: 'flex gap-x-2',
     legend: 'mb-1 block font-medium text-default',
     item: 'flex items-start',
-    base: 'rounded-full ring ring-inset ring-accented focus-visible:outline-2 focus-visible:outline-offset-2',
-    indicator: 'flex items-center justify-center size-full rounded-full after:bg-default after:rounded-full',
     container: 'flex items-center',
+    base: 'rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2',
+    indicator: 'flex items-center justify-center size-full after:bg-default after:rounded-full',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
     description: 'text-muted'
@@ -59,6 +59,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     size: {
       xs: {
+        fieldset: 'gap-y-0.5',
         legend: 'text-xs',
         base: 'size-3',
         item: 'text-xs',
@@ -66,6 +67,7 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'after:size-1'
       },
       sm: {
+        fieldset: 'gap-y-0.5',
         legend: 'text-xs',
         base: 'size-3.5',
         item: 'text-xs',
@@ -73,6 +75,7 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'after:size-1'
       },
       md: {
+        fieldset: 'gap-y-1',
         legend: 'text-sm',
         base: 'size-4',
         item: 'text-sm',
@@ -80,6 +83,7 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'after:size-1.5'
       },
       lg: {
+        fieldset: 'gap-y-1',
         legend: 'text-sm',
         base: 'size-4.5',
         item: 'text-sm',
@@ -87,6 +91,7 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'after:size-1.5'
       },
       xl: {
+        fieldset: 'gap-y-1.5',
         legend: 'text-base',
         base: 'size-5',
         item: 'text-base',
