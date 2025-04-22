@@ -237,7 +237,7 @@ You can use the [`emblaApi`](#expose) function [scrollTo](https://www.embla-caro
 
 ::component-example
 ---
-name: 'carousel-embla-api-example'
+name: 'carousel-thumbnails-example'
 class: 'p-8 px-16'
 ---
 ::
