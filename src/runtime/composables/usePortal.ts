@@ -6,11 +6,11 @@ export function usePortal(portal: Ref<string | HTMLElement | boolean | undefined
   const portalTarget = inject(portalTargetInjectionKey, undefined)
 
   const to = computed(() => {
-    if (typeof portal.value === 'string' || portal.value instanceof HTMLElement) {
-      return portal.value
+    if (typeof portal.value === 'boolean' || portal.value === undefined) {
+      return portalTarget?.value ?? 'body'
     }
 
-    return portalTarget?.value ?? 'body'
+    return portal.value
   })
 
   const disabled = computed(() => typeof portal.value === 'boolean' ? !portal.value : false)
