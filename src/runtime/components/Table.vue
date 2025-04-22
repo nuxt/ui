@@ -3,7 +3,7 @@
 import type { Ref } from 'vue'
 import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import type { Cell, RowData, TableMeta } from '@tanstack/table-core'
+import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
   CellContext,
   ColumnDef,
@@ -44,7 +44,7 @@ declare module '@tanstack/table-core' {
 
   interface ColumnMeta<TData extends RowData, TValue> {
     class?: {
-      th?: string
+      th?: string | ((cell: Header<TData, TValue>) => string)
       td?: string | ((cell: Cell<TData, TValue>) => string)
     }
   }
@@ -335,7 +335,13 @@ defineExpose({
             v-for="header in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
-            :class="ui.th({ class: [props.ui?.th, header.column.columnDef.meta?.class?.th], pinned: !!header.column.getIsPinned() })"
+            :class="ui.th({
+              class: [
+                props.ui?.th,
+                typeof header.column.columnDef.meta?.class?.th === 'function' ? header.column.columnDef.meta.class.th(header) : header.column.columnDef.meta?.class?.th
+              ],
+              pinned: !!header.column.getIsPinned()
+            })"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
