@@ -5,17 +5,17 @@ const date = shallowRef(new CalendarDate(2025, 4, 2))
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-8">
-    <div class="flex gap-x-4">
-      <UButton @click="date = date.subtract({ months: 1 })">
-        previous
+  <div class="flex flex-col gap-4">
+    <UCalendar v-model="date" :month-controls="false" :year-controls="false" />
+
+    <div class="flex justify-between gap-4">
+      <UButton color="neutral" variant="outline" @click="date = date.subtract({ months: 1 })">
+        Prev
       </UButton>
 
-      <UButton @click="date = date.add({ months: 1 })">
-        next
+      <UButton color="neutral" variant="outline" @click="date = date.add({ months: 1 })">
+        Next
       </UButton>
     </div>
-
-    <UCalendar v-model="date" :month-controls="false" :year-controls="false" />
   </div>
 </template>
