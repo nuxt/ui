@@ -60,7 +60,7 @@ const items = [{
           <span class="text-muted">Custom: {{ item.content }}</span>
         </template>
 
-        <template #list-trailing>
+        <template #content-bottom>
           <UButton
             icon="lucide:refresh-cw"
             variant="soft"

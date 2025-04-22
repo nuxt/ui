@@ -162,8 +162,8 @@ export interface InputMenuSlots<
   'item-trailing': SlotProps<T>
   'tags-item-text': SlotProps<T>
   'tags-item-delete': SlotProps<T>
-  'list-leading': (props?: {}) => any
-  'list-trailing': (props?: {}) => any
+  'content-top': (props?: {}) => any
+  'content-bottom': (props?: {}) => any
   'create-item-label'(props: { item: string }): any
 }
 </script>
@@ -480,7 +480,7 @@ defineExpose({
 
     <ComboboxPortal v-bind="portalProps">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-        <slot name="list-leading" />
+        <slot name="content-top" />
 
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
@@ -541,7 +541,7 @@ defineExpose({
           <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
         </ComboboxViewport>
 
-        <slot name="list-trailing" />
+        <slot name="content-bottom" />
 
         <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </ComboboxContent>

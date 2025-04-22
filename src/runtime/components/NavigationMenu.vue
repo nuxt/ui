@@ -315,6 +315,8 @@ const lists = computed<NavigationMenuItem[][]>(() =>
       <div v-if="orientation === 'vertical' && listIndex < lists.length - 1" :class="ui.separator({ class: props.ui?.separator })" />
     </template>
 
+    <slot name="list-trailing" />
+
     <div v-if="orientation === 'horizontal'" :class="ui.viewportWrapper({ class: props.ui?.viewportWrapper })">
       <NavigationMenuIndicator v-if="arrow" :class="ui.indicator({ class: props.ui?.indicator })">
         <div :class="ui.arrow({ class: props.ui?.arrow })" />
@@ -322,7 +324,5 @@ const lists = computed<NavigationMenuItem[][]>(() =>
 
       <NavigationMenuViewport :class="ui.viewport({ class: props.ui?.viewport })" />
     </div>
-
-    <slot name="list-trailing" />
   </NavigationMenuRoot>
 </template>

@@ -33,9 +33,7 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
 interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
 
 type DropdownMenuContentSlots<T extends ArrayOrNested<DropdownMenuItem>> = Omit<DropdownMenuSlots<T>, 'default'> & {
-  'default'(props?: {}): any
-  'list-leading': (props?: {}) => any
-  'list-trailing': (props?: {}) => any
+  default(props?: {}): any
 }
 
 </script>
@@ -115,7 +113,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
 
   <DropdownMenu.Portal v-bind="portalProps">
     <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" :class="props.class" v-bind="contentProps">
-      <slot name="list-leading" />
+      <slot name="content-top" />
 
       <DropdownMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
         <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
@@ -184,7 +182,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
 
       <slot />
 
-      <slot name="list-trailing" />
+      <slot name="content-bottom" />
     </component>
   </DropdownMenu.Portal>
 </template>

@@ -90,8 +90,8 @@ export type ContextMenuSlots<
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
-  'list-leading': (props?: {}) => any
-  'list-trailing': (props?: {}) => any
+  'content-top': (props?: {}) => any
+  'content-bottom': (props?: {}) => any
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 </script>
@@ -143,16 +143,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu 
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
     >
-      <template #list-leading>
-        <slot name="list-leading" />
-      </template>
-
       <template v-for="(_, name) in proxySlots" #[name]="slotData">
         <slot :name="(name as keyof ContextMenuSlots<T>)" v-bind="slotData" />
-      </template>
-
-      <template #list-trailing>
-        <slot name="list-trailing" />
       </template>
     </UContextMenuContent>
   </ContextMenuRoot>

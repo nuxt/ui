@@ -116,47 +116,5 @@ defineShortcuts(extractShortcuts(items.value))
         Color right click here
       </div>
     </UContextMenu>
-
-    <UContextMenu :items="itemsWithColor" :ui="{ content: 'w-48' }" :size="size">
-      <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
-        With list slots
-      </div>
-
-      <template #list-leading>
-        <div class="p-1">
-          <UButtonGroup
-            size="xs"
-            class="w-full"
-            orientation="horizontal"
-          >
-            <UButton
-              label="OR"
-              color="primary"
-              block
-              size="xs"
-              class="flex-1"
-            />
-            <UButton
-              label="AND"
-              color="neutral"
-              variant="subtle"
-              block
-              size="xs"
-              class="flex-1"
-            />
-          </UButtonGroup>
-        </div>
-      </template>
-
-      <template #list-trailing>
-        <div class="p-1">
-          <UButton
-            block
-            variant="ghost"
-            label="Load more"
-          />
-        </div>
-      </template>
-    </UContextMenu>
   </div>
 </template>

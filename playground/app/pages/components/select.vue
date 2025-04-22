@@ -139,51 +139,5 @@ function getUserAvatar(value: string) {
         </template>
       </USelect>
     </div>
-    <div class="flex items-center gap-4">
-      <USelect
-        :items="statuses.slice(0, 3)"
-        :loading="status === 'pending'"
-        icon="lucide:list"
-        placeholder="With list slots..."
-        class="w-48"
-        value-key="value"
-      >
-        <template #list-leading>
-          <div class="p-1">
-            <UButtonGroup
-              size="xs"
-              class="w-full"
-              orientation="horizontal"
-            >
-              <UButton
-                label="OR"
-                color="primary"
-                block
-                size="xs"
-                class="flex-1"
-              />
-              <UButton
-                label="AND"
-                color="neutral"
-                variant="subtle"
-                block
-                size="xs"
-                class="flex-1"
-              />
-            </UButtonGroup>
-          </div>
-        </template>
-
-        <template #list-trailing>
-          <div class="p-1">
-            <UButton
-              block
-              variant="ghost"
-              label="Load more"
-            />
-          </div>
-        </template>
-      </USelect>
-    </div>
   </div>
 </template>

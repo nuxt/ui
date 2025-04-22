@@ -114,20 +114,6 @@ const items = [
       :highlight-color="highlightColor"
       :class="highlight && 'data-[orientation=horizontal]:border-b border-default'"
       class="data-[orientation=vertical]:data-[collapsed=false]:w-48"
-    >
-      <template #list-leading>
-        Logo
-      </template>
-
-      <template #list-trailing>
-        <UModal>
-          <UButton label="Login" />
-
-          <template #body>
-            <USkeleton class="h-20" />
-          </template>
-        </UModal>
-      </template>
-    </UNavigationMenu>
+    />
   </div>
 </template>
