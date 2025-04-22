@@ -106,13 +106,13 @@ defineShortcuts(extractShortcuts(items.value))
     </div>
 
     <UContextMenu :items="items" :ui="{ content: 'w-48' }" :size="size">
-      <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
         Right click here
       </div>
     </UContextMenu>
 
     <UContextMenu :items="itemsWithColor" :ui="{ content: 'w-48' }" :size="size">
-      <div class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72">
+      <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
         Color right click here
       </div>
     </UContextMenu>

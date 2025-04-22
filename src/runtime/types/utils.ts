@@ -16,18 +16,21 @@ export type DeepPartial<T, O = any> = {
   [key: string]: O | TightMap<O>
 }
 
+export type DynamicSlotsKeys<Name extends string | undefined, Suffix extends string | undefined = undefined> = (
+  Name extends string
+    ? Suffix extends string
+      ? Name | `${Name}-${Suffix}`
+      : Name
+    : never
+)
 export type DynamicSlots<
   T extends { slot?: string },
-  S extends string | undefined = undefined,
-  D extends object = {}
+  Suffix extends string | undefined = undefined,
+  ExtraProps extends object = {}
 > = {
-  [
-  K in T['slot'] as K extends string
-    ? S extends string
-      ? (K | `${K}-${S}`)
-      : K
-    : never
-  ]?: (props: { item: Extract<T, { slot: K extends `${infer Base}-${S}` ? Base : K }> } & D) => any
+  [K in DynamicSlotsKeys<T['slot'], Suffix>]: (
+    props: { item: Extract<T, { slot: K extends `${infer Base}-${Suffix}` ? Base : K }> } & ExtraProps
+  ) => any
 }
 
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>

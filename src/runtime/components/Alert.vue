@@ -115,15 +115,15 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.alert || {})
         </slot>
       </div>
 
-      <div v-if="orientation === 'vertical' && actions?.length" :class="ui.actions({ class: props.ui?.actions })">
+      <div v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)" :class="ui.actions({ class: props.ui?.actions })">
         <slot name="actions">
           <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
         </slot>
       </div>
     </div>
 
-    <div v-if="(orientation === 'horizontal' && actions?.length) || close" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
-      <template v-if="orientation === 'horizontal' && actions?.length">
+    <div v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
+      <template v-if="orientation === 'horizontal' && (actions?.length || !!slots.actions)">
         <slot name="actions">
           <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
         </slot>

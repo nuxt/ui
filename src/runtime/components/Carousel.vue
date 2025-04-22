@@ -99,6 +99,13 @@ export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
   default(props: { item: T, index: number }): any
 }
 
+export interface CarouselEmits {
+  /**
+   * Emitted when the selected slide changes
+   * @param selectedIndex The index of the selected slide
+   */
+  select: [selectedIndex: number]
+}
 </script>
 
 <script setup lang="ts" generic="T extends CarouselItem">
@@ -141,6 +148,7 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
   wheelGestures: false
 })
 defineSlots<CarouselSlots<T>>()
+const emits = defineEmits<CarouselEmits>()
 
 const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Carousel['AppConfig']
@@ -242,6 +250,8 @@ function onSelect(api: EmblaCarouselType) {
   canScrollNext.value = api?.canScrollNext() || false
   canScrollPrev.value = api?.canScrollPrev() || false
   selectedIndex.value = api?.selectedScrollSnap() || 0
+
+  emits('select', selectedIndex.value)
 }
 
 onMounted(() => {
