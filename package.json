@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "3.0.2",
-  "packageManager": "pnpm@10.8.0",
+  "packageManager": "pnpm@10.9.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -113,18 +113,18 @@
   },
   "dependencies": {
     "@iconify/vue": "^4.3.0",
-    "@internationalized/date": "^3.7.0",
-    "@internationalized/number": "^3.6.0",
+    "@internationalized/date": "^3.8.0",
+    "@internationalized/number": "^3.6.1",
     "@nuxt/fonts": "^0.11.1",
     "@nuxt/icon": "^1.12.0",
     "@nuxt/kit": "^3.16.2",
     "@nuxt/schema": "^3.16.2",
     "@nuxtjs/color-mode": "^3.5.2",
     "@standard-schema/spec": "^1.0.0",
-    "@tailwindcss/postcss": "^4.1.3",
-    "@tailwindcss/vite": "^4.1.3",
-    "@tanstack/vue-table": "^8.21.2",
-    "@unhead/vue": "^2.0.5",
+    "@tailwindcss/postcss": "^4.1.4",
+    "@tailwindcss/vite": "^4.1.4",
+    "@tanstack/vue-table": "^8.21.3",
+    "@unhead/vue": "^2.0.8",
     "@vueuse/core": "^13.1.0",
     "@vueuse/integrations": "^13.1.0",
     "colortranslator": "^4.1.0",
@@ -147,39 +147,42 @@
     "reka-ui": "^2.2.0",
     "scule": "^1.3.0",
     "tailwind-variants": "^1.0.0",
-    "tailwindcss": "^4.1.3",
-    "tinyglobby": "^0.2.12",
-    "unplugin": "^2.3.0",
+    "tailwindcss": "^4.1.4",
+    "tinyglobby": "^0.2.13",
+    "unplugin": "^2.3.2",
     "unplugin-auto-import": "^19.1.2",
-    "unplugin-vue-components": "^28.4.1",
-    "vaul-vue": "^0.4.1",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "unplugin-vue-components": "^28.5.0",
+    "vaul-vue": "^0.4.1"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.3.0",
     "@nuxt/module-builder": "^1.0.1",
     "@nuxt/test-utils": "^3.17.2",
-    "@release-it/conventional-changelog": "^10.0.0",
+    "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.6.0",
-    "eslint": "^9.24.0",
+    "eslint": "^9.25.0",
     "happy-dom": "^17.4.4",
     "nuxt": "^3.16.2",
-    "release-it": "^18.1.2",
+    "release-it": "^19.0.1",
     "vitest": "^3.1.1",
     "vitest-environment-nuxt": "^1.0.1",
     "vue-tsc": "^2.2.0"
   },
   "peerDependencies": {
+    "@inertiajs/vue3": "^2.0.7",
     "joi": "^17.13.0",
     "superstruct": "^2.0.0",
     "typescript": "^5.6.3",
     "valibot": "^1.0.0",
+    "vue-router": "^4.5.0",
     "yup": "^1.6.0",
     "zod": "^3.24.0"
   },
   "peerDependenciesMeta": {
+    "@inertiajs/vue3": {
+      "optional": true
+    },
     "joi": {
       "optional": true
     },
@@ -187,6 +190,9 @@
       "optional": true
     },
     "superstruct": {
+      "optional": true
+    },
+    "vue-router": {
       "optional": true
     },
     "yup": {
@@ -201,12 +207,13 @@
     "chokidar": "3.6.0",
     "debug": "4.3.7",
     "rollup": "4.34.9",
-    "unplugin": "^2.3.0",
+    "unplugin": "^2.3.2",
     "vue-tsc": "2.2.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "better-sqlite3",
+      "puppeteer",
       "sharp"
     ],
     "ignoredBuiltDependencies": [

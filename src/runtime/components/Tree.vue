@@ -1,25 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/tree'
-import { tv } from '../utils/tv'
-import type {
-  DynamicSlots,
-  GetItemKeys,
-  GetModelValue,
-  GetModelValueEmits,
-  NestedItem,
-  PartialString
-} from '../types/utils'
+import type { DynamicSlots, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem, ComponentConfig } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { tree: Partial<typeof theme> } }
-
-const tree = tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) })
-
-type TreeVariants = VariantProps<typeof tree>
+type Tree = ComponentConfig<typeof theme, AppConfig, 'tree'>
 
 export type TreeItem = {
   /**
@@ -50,11 +36,11 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
   /**
    * @defaultValue 'primary'
    */
-  color?: TreeVariants['color']
+  color?: Tree['variants']['color']
   /**
    * @defaultValue 'md'
    */
-  size?: TreeVariants['size']
+  size?: Tree['variants']['size']
   /**
    * The key used to get the value from the item.
    * @defaultValue 'value'
@@ -91,7 +77,7 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   class?: any
-  ui?: PartialString<typeof tree.slots>
+  ui?: Tree['slots']
 }
 
 export type TreeEmits<A extends TreeItem[], VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<TreeRootEmits, 'update:modelValue'> & GetModelValueEmits<A, VK, M>
@@ -114,7 +100,9 @@ export type TreeSlots<
 import { computed } from 'vue'
 import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<TreeProps<T, VK, M>>(), {
@@ -124,11 +112,13 @@ const props = withDefaults(defineProps<TreeProps<T, VK, M>>(), {
 const emits = defineEmits<TreeEmits<T, VK, M>>()
 const slots = defineSlots<TreeSlots<T>>()
 
+const appConfig = useAppConfig() as Tree['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect'), emits)
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: TreeItem[], level: number }, TreeSlots<T>>()
 
-const ui = computed(() => tree({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) })({
   color: props.color,
   size: props.size
 }))

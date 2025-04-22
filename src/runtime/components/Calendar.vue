@@ -1,19 +1,12 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
-import type { ButtonProps } from '../types'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/calendar'
-import { tv } from '../utils/tv'
-import type { PartialString } from '../types/utils'
+import type { ButtonProps } from '../types'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigCalendar = _appConfig as AppConfig & { ui: { calendar: Partial<typeof theme> } }
-
-const calendar = tv({ extend: tv(theme), ...(appConfigCalendar.ui?.calendar || {}) })
-
-type CalendarVariants = VariantProps<typeof calendar>
+type Calendar = ComponentConfig<typeof theme, AppConfig, 'calendar'>
 
 type CalendarDefaultValue<R extends boolean = false, M extends boolean = false> = R extends true
   ? DateRange
@@ -82,11 +75,11 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   /**
    * @defaultValue 'primary'
    */
-  color?: CalendarVariants['color']
+  color?: Calendar['variants']['color']
   /**
    * @defaultValue 'md'
    */
-  size?: CalendarVariants['size']
+  size?: Calendar['variants']['size']
   /** Whether or not a range of dates can be selected */
   range?: R & boolean
   /** Whether or not multiple dates can be selected */
@@ -98,7 +91,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   defaultValue?: CalendarDefaultValue<R, M>
   modelValue?: CalendarModelValue<R, M>
   class?: any
-  ui?: PartialString<typeof calendar.slots>
+  ui?: Calendar['slots']
 }
 
 export interface CalendarEmits<R extends boolean, M extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
@@ -119,6 +112,7 @@ import { Calendar as SingleCalendar, RangeCalendar } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
@@ -129,8 +123,8 @@ const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
 const emits = defineEmits<CalendarEmits<R, M>>()
 defineSlots<CalendarSlots>()
 
-const appConfig = useAppConfig()
 const { code: locale, dir, t } = useLocale()
+const appConfig = useAppConfig() as Calendar['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
@@ -139,7 +133,7 @@ const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl'
 const prevYearIcon = computed(() => props.prevYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
 const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
 
-const ui = computed(() => calendar({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
   color: props.color,
   size: props.size
 }))

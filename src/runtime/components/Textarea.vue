@@ -1,18 +1,11 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/textarea'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { tv } from '../utils/tv'
 import type { AvatarProps } from '../types'
-import type { PartialString } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigTextarea = _appConfig as AppConfig & { ui: { textarea: Partial<typeof theme> } }
-
-const textarea = tv({ extend: tv(theme), ...(appConfigTextarea.ui?.textarea || {}) })
-
-type TextareaVariants = VariantProps<typeof textarea>
+type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
 export interface TextareaProps extends UseComponentIconsProps {
   /**
@@ -27,15 +20,15 @@ export interface TextareaProps extends UseComponentIconsProps {
   /**
    * @defaultValue 'primary'
    */
-  color?: TextareaVariants['color']
+  color?: Textarea['variants']['color']
   /**
    * @defaultValue 'outline'
    */
-  variant?: TextareaVariants['variant']
+  variant?: Textarea['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: TextareaVariants['size']
+  size?: Textarea['variants']['size']
   required?: boolean
   autofocus?: boolean
   autofocusDelay?: number
@@ -47,7 +40,7 @@ export interface TextareaProps extends UseComponentIconsProps {
   maxrows?: number
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  ui?: PartialString<typeof textarea.slots>
+  ui?: Textarea['slots']
 }
 
 export interface TextareaEmits {
@@ -66,9 +59,11 @@ export interface TextareaSlots {
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
+import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
@@ -83,10 +78,11 @@ const emits = defineEmits<TextareaEmits>()
 
 const [modelValue, modelModifiers] = defineModel<string | number | null>()
 
+const appConfig = useAppConfig() as Textarea['AppConfig']
 const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps>(props, { deferInputValidation: true })
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const ui = computed(() => textarea({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.textarea || {}) })({
   color: color.value,
   variant: props.variant,
   size: size?.value,

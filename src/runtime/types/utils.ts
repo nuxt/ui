@@ -1,4 +1,5 @@
 import type { AcceptableValue as _AcceptableValue } from 'reka-ui'
+import type { ClassValue } from 'tailwind-variants'
 import type { VNode } from 'vue'
 
 export interface TightMap<O = any> {
@@ -15,27 +16,26 @@ export type DeepPartial<T, O = any> = {
   [key: string]: O | TightMap<O>
 }
 
+export type DynamicSlotsKeys<Name extends string | undefined, Suffix extends string | undefined = undefined> = (
+  Name extends string
+    ? Suffix extends string
+      ? Name | `${Name}-${Suffix}`
+      : Name
+    : never
+)
 export type DynamicSlots<
   T extends { slot?: string },
-  S extends string | undefined = undefined,
-  D extends object = {}
+  Suffix extends string | undefined = undefined,
+  ExtraProps extends object = {}
 > = {
-  [
-  K in T['slot'] as K extends string
-    ? S extends string
-      ? (K | `${K}-${S}`)
-      : K
-    : never
-  ]?: (props: { item: Extract<T, { slot: K extends `${infer Base}-${S}` ? Base : K }> } & D) => any
+  [K in DynamicSlotsKeys<T['slot'], Suffix>]: (
+    props: { item: Extract<T, { slot: K extends `${infer Base}-${Suffix}` ? Base : K }> } & ExtraProps
+  ) => any
 }
 
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>
   ? MaybeObject[Key]
   : never
-
-export type PartialString<T> = {
-  [K in keyof T]?: string
-}
 
 export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>>
 export type ArrayOrNested<T> = T[] | T[][]
@@ -90,4 +90,50 @@ export type EmitsToProps<T> = {
   [K in keyof T as `on${Capitalize<string & K>}`]: T[K] extends [...args: infer Args]
     ? (...args: Args) => void
     : never
+}
+
+/**
+ * Utility type to flatten intersection types for better IDE hover information.
+ * @template T The type to flatten.
+ */
+type Id<T> = {} & { [P in keyof T]: T[P] }
+
+type ComponentVariants<T extends { variants?: Record<string, Record<string, any>> }> = {
+  [K in keyof T['variants']]: keyof T['variants'][K]
+}
+
+type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
+  [K in keyof T['slots']]?: ClassValue
+}>
+
+type GetComponentAppConfig<A, U extends string, K extends string> =
+  A extends Record<U, Record<K, any>> ? A[U][K] : {}
+
+type ComponentAppConfig<
+  T,
+  A extends Record<string, any>,
+  K extends string,
+  U extends string = 'ui' | 'uiPro' | 'uiPro.prose'
+> = A & (
+  U extends 'uiPro.prose'
+    ? { uiPro?: { prose?: { [k in K]?: Partial<T> } } }
+    : { [key in Exclude<U, 'uiPro.prose'>]?: { [k in K]?: Partial<T> } }
+)
+
+/**
+ * Defines the configuration shape expected for a component.
+ * @template T The component's theme imported from `#build/ui/*`.
+ * @template A The base AppConfig type from `@nuxt/schema`.
+ * @template K The key identifying the component (e.g., 'badge').
+ * @template U The top-level key in AppConfig ('ui' or 'uiPro').
+ */
+export type ComponentConfig<
+  T extends Record<string, any>,
+  A extends Record<string, any>,
+  K extends string,
+  U extends 'ui' | 'uiPro' | 'uiPro.prose' = 'ui'
+> = {
+  AppConfig: ComponentAppConfig<T, A, K, U>
+  variants: ComponentVariants<T & GetComponentAppConfig<A, U, K>>
+  slots: ComponentSlots<T>
 }

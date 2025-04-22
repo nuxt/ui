@@ -1,15 +1,11 @@
 <script lang="ts">
 import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
-import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
-import type { EmitsToProps } from '../types/utils'
+import type { EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigModal = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
-
-const modal = tv({ extend: tv(theme), ...(appConfigModal.ui?.modal || {}) })
+type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
 
 export interface ModalProps extends DialogRootProps {
   title?: string
@@ -35,7 +31,7 @@ export interface ModalProps extends DialogRootProps {
    * Render the modal in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * Display a close button to dismiss the modal.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -54,7 +50,7 @@ export interface ModalProps extends DialogRootProps {
    */
   dismissible?: boolean
   class?: any
-  ui?: Partial<typeof modal.slots>
+  ui?: Modal['slots']
 }
 
 export interface ModalEmits extends DialogRootEmits {
@@ -67,7 +63,7 @@ export interface ModalSlots {
   header(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
-  close(props: { ui: ReturnType<typeof modal> }): any
+  close(props: { ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
   body(props?: {}): any
   footer(props?: {}): any
 }
@@ -79,6 +75,8 @@ import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, 
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { usePortal } from '../composables/usePortal'
+import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<ModalProps>(), {
@@ -93,9 +91,10 @@ const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as Modal['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
   const events = {
@@ -114,7 +113,7 @@ const contentEvents = computed(() => {
   return events
 })
 
-const ui = computed(() => modal({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })({
   transition: props.transition,
   fullscreen: props.fullscreen
 }))
@@ -126,7 +125,7 @@ const ui = computed(() => modal({
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal :disabled="!portal">
+    <DialogPortal v-bind="portalProps">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
       <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-leave="emits('after:leave')" v-on="contentEvents">

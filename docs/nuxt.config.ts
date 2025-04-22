@@ -56,7 +56,7 @@ export default defineNuxtConfig({
     },
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
-      'class': 'bg-(--ui-bg)'
+      'class': 'bg-default'
     }
   },
 
@@ -176,13 +176,7 @@ export default defineNuxtConfig({
   },
 
   hub: {
-    ai: true,
-    vectorize: {
-      auto_rag_ui3: {
-        dimensions: 1024,
-        metric: 'cosine'
-      }
-    }
+    ai: true
   },
 
   vite: {

@@ -41,7 +41,7 @@ const icons = {
       :ui="{ title: 'text-balance', container: 'relative' }"
     >
       <template #top>
-        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
       </template>
 
       <LazyStarsBg />
@@ -58,7 +58,7 @@ const icons = {
             container: 'gap-y-4 lg:p-8',
             leading: 'flex justify-center',
             title: 'text-center',
-            description: 'text-center text-(--ui-text-muted)'
+            description: 'text-center text-muted'
           }"
           variant="subtle"
         >
@@ -126,7 +126,7 @@ const icons = {
             container: 'gap-y-2',
             leading: 'flex justify-center',
             title: 'text-center',
-            description: 'text-center text-(--ui-text-muted)'
+            description: 'text-center text-muted'
           }"
         >
           <template #leading>

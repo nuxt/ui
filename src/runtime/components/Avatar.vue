@@ -1,15 +1,9 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/avatar'
-import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigAvatar = _appConfig as AppConfig & { ui: { avatar: Partial<typeof theme> } }
-
-const avatar = tv({ extend: tv(theme), ...(appConfigAvatar.ui?.avatar || {}) })
-
-type AvatarVariants = VariantProps<typeof avatar>
+type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>
 
 export interface AvatarProps {
   /**
@@ -27,10 +21,10 @@ export interface AvatarProps {
   /**
    * @defaultValue 'md'
    */
-  size?: AvatarVariants['size']
+  size?: Avatar['variants']['size']
   class?: any
   style?: any
-  ui?: Partial<typeof avatar.slots>
+  ui?: Avatar['slots']
 }
 
 export interface AvatarSlots {
@@ -41,8 +35,10 @@ export interface AvatarSlots {
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
+import { useAppConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -51,10 +47,11 @@ const props = withDefaults(defineProps<AvatarProps>(), { as: 'span' })
 
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
+const appConfig = useAppConfig() as Avatar['AppConfig']
 const { size } = useAvatarGroup(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => avatar({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })({
   size: size.value
 }))
 

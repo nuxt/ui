@@ -100,7 +100,7 @@ const columnVisibility = ref({
 
 <template>
   <div class="flex flex-col flex-1 w-full">
-    <div class="flex justify-end px-4 py-3.5 border-b  border-(--ui-border-accented)">
+    <div class="flex justify-end px-4 py-3.5 border-b  border-accented">
       <UDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
           label: upperFirst(column.id),

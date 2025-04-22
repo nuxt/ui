@@ -57,7 +57,7 @@ const items = [{
         class="w-96"
       >
         <template #custom="{ item }">
-          <span class="text-(--ui-text-muted)">Custom: {{ item.content }}</span>
+          <span class="text-muted">Custom: {{ item.content }}</span>
         </template>
 
         <template #list-trailing>

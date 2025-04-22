@@ -7,7 +7,7 @@ const open = ref(false)
     <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
     <template #header>
-      <h2 class="text-(--ui-text-highlighted) font-semibold">
+      <h2 class="text-highlighted font-semibold">
         Drawer non-dismissible
       </h2>
 

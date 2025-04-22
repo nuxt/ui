@@ -1,15 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
-import { tv } from '../utils/tv'
 import type { AvatarProps, LinkProps } from '../types'
-import type { DynamicSlots, PartialString } from '../types/utils'
+import type { DynamicSlots, ComponentConfig } from '../types/utils'
 
-const appConfigBreadcrumb = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
-
-const breadcrumb = tv({ extend: tv(theme), ...(appConfigBreadcrumb.ui?.breadcrumb || {}) })
+type Breadcrumb = ComponentConfig<typeof theme, AppConfig, 'breadcrumb'>
 
 export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
@@ -41,7 +37,7 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
    */
   labelKey?: string
   class?: any
-  ui?: PartialString<typeof breadcrumb.slots>
+  ui?: Breadcrumb['slots']
 }
 
 type SlotProps<T extends BreadcrumbItem> = (props: { item: T, index: number, active?: boolean }) => any
@@ -62,6 +58,7 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -73,13 +70,14 @@ const props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
   labelKey: 'label'
 })
 const slots = defineSlots<BreadcrumbSlots<T>>()
+
 const { dir } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as Breadcrumb['AppConfig']
 
 const separatorIcon = computed(() => props.separatorIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = breadcrumb()
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) })())
 </script>
 
 <template>
