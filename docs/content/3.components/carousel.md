@@ -229,12 +229,11 @@ class: 'p-8 px-16'
 ---
 ::
 
-## EmblaApi
+## Examples
 
-The Carousel component is controllable via the official [Embla Carousel Api](https://www.embla-carousel.com/api/methods/#typescript).
+### With thumbnails
 
-### ScrollTo
-Use the `emblaApi` function [ScrollTo](https://www.embla-carousel.com/api/methods/#scrollto) allows you to control a custom dot navigation system, enabling you to scroll to a specific slide.
+You can use the [`emblaApi`](#expose) function [scrollTo](https://www.embla-carousel.com/api/methods/#scrollto) to display thumbnails under the carousel that allows you to navigate to a specific slide.
 
 ::component-example
 ---

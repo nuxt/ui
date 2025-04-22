@@ -1,28 +1,28 @@
 <script setup lang="ts">
 const items = [
-  "https://picsum.photos/640/640?random=1",
-  "https://picsum.photos/640/640?random=2",
-  "https://picsum.photos/640/640?random=3",
-  "https://picsum.photos/640/640?random=4",
-  "https://picsum.photos/640/640?random=5",
-  "https://picsum.photos/640/640?random=6",
-];
+  'https://picsum.photos/640/640?random=1',
+  'https://picsum.photos/640/640?random=2',
+  'https://picsum.photos/640/640?random=3',
+  'https://picsum.photos/640/640?random=4',
+  'https://picsum.photos/640/640?random=5',
+  'https://picsum.photos/640/640?random=6'
+]
 
-const carousel = useTemplateRef("carousel");
-const activeIndex = ref(0);
+const carousel = useTemplateRef('carousel')
+const activeIndex = ref(0)
 
-const next = (): void => {
-  activeIndex.value++;
-};
+function onClickPrev() {
+  activeIndex.value--
+}
+function onClickNext() {
+  activeIndex.value++
+}
 
-const prev = (): void => {
-  activeIndex.value--;
-};
+function onSelect(index: number) {
+  activeIndex.value = index
 
-const onSelect = (index: number) => {
-  activeIndex.value = index;
-  carousel.value?.emblaApi?.scrollTo(index);
-};
+  carousel.value?.emblaApi?.scrollTo(index)
+}
 </script>
 
 <template>
@@ -32,21 +32,22 @@ const onSelect = (index: number) => {
       v-slot="{ item }"
       arrows
       :items="items"
-      :prev="{ onClick: prev }"
-      :next="{ onClick: next }"
+      :prev="{ onClick: onClickPrev }"
+      :next="{ onClick: onClickNext }"
       class="w-full max-w-xs mx-auto"
     >
-      <img :src="item" width="320" height="320" class="rounded-lg" />
+      <img :src="item" width="320" height="320" class="rounded-lg">
     </UCarousel>
-    <div class="flex gap-2 justify-center pt-4">
+
+    <div class="flex gap-1 justify-between pt-4 max-w-xs mx-auto">
       <div
         v-for="(item, index) in items"
         :key="index"
-        class="w-12 h-12 rounded-lg bg-neutral-200 opacity-25 hover:opacity-100"
+        class="size-11 opacity-25 hover:opacity-100 transition-opacity"
         :class="{ 'opacity-100': activeIndex === index }"
         @click="onSelect(index)"
       >
-        <img :src="item" width="120" height="120" class="rounded-lg" />
+        <img :src="item" width="44" height="44" class="rounded-lg">
       </div>
     </div>
   </div>
