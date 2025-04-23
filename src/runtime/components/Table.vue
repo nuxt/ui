@@ -98,9 +98,12 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
    */
   loadingAnimation?: Table['variants']['loadingAnimation']
   /**
-   * @defaultValue true
+   * Use the `watchOptions` prop to customize reactivity (for ex: disable deep watching for changes in your data or limiting the max traversal depth). This can improve performance by reducing unnecessary re-renders, but it should be used with caution as it may lead to unexpected behavior if not managed properly.
+   * @link [API Docs](https://vuejs.org/api/options-state.html#watch)
+   * @link [Guide](https://vuejs.org/guide/essentials/watchers.html)
+   * @defaultValue { deep: true }
    */
-  watchDeep?: WatchOptions['deep']
+  watchOptions?: WatchOptions
   /**
    * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
@@ -189,7 +192,9 @@ import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<TableProps<T>>(), {
-  watchDeep: true
+  watchOptions: () => ({
+    deep: true
+  })
 })
 const slots = defineSlots<TableSlots<T>>()
 
@@ -323,9 +328,7 @@ function handleRowSelect(row: TableRow<T>, e: Event) {
 watch(
   () => props.data, () => {
     data.value = props.data ? [...props.data] : []
-  }, {
-    deep: props.watchDeep
-  }
+  }, props.watchOptions
 )
 
 defineExpose({

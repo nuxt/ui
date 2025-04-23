@@ -213,9 +213,6 @@ props:
   class: 'flex-1 max-h-[312px]'
 ---
 ::
-### WatchDeep
-
-Use the `watchDeep` prop as a boolean or number ([Vue 3.5+](https://vuejs.org/guide/essentials/watchers.html#deep-watchers)) to disable deep watching for changes in your data or limiting the max traversal depth. This can improve performance by reducing unnecessary re-renders, but it should be used with caution as it may lead to unexpected behavior if not managed properly.
 
 ## Examples
 

@@ -149,7 +149,6 @@ describe('Table', () => {
     ['with caption', { props: { ...props, caption: 'Table caption' } }],
     ['with columns', { props: { ...props, columns } }],
     ['with sticky', { props: { ...props, sticky: true } }],
-    ['with disabled watchDeep', { props: { ...props, watchDeep: false } }],
     ['with loading', { props: { ...props, loading: true } }],
     ...loadingColors.map((loadingColor: string) => [`with loading color ${loadingColor}`, { props: { ...props, loading: true, loadingColor } }]),
     ...loadingAnimations.map((loadingAnimation: string) => [`with loading animation ${loadingAnimation}`, { props: { ...props, loading: true, loadingAnimation } }]),
