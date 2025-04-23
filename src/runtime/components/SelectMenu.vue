@@ -358,7 +358,7 @@ function onSelect(e: Event, item: SelectMenuItem) {
 
 function onClear() {
   const newValue = props.multiple ? [] : null
-  emits('update:modelValue', newValue)
+  emits('update:modelValue', newValue as GetModelValue<T, VK, M>)
 }
 
 function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
