@@ -36,7 +36,9 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
   ui?: Popover['slots']
 }
 
-export interface PopoverEmits extends PopoverRootEmits {}
+export interface PopoverEmits extends PopoverRootEmits {
+  'close:prevent': []
+}
 
 export interface PopoverSlots {
   default(props: { open: boolean }): any
@@ -72,11 +74,15 @@ const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {
   if (!props.dismissible) {
-    return {
-      pointerDownOutside: (e: Event) => e.preventDefault(),
-      interactOutside: (e: Event) => e.preventDefault(),
-      escapeKeyDown: (e: Event) => e.preventDefault()
-    }
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'] as const
+    type EventType = typeof events[number]
+    return events.reduce((acc, curr) => {
+      acc[curr] = (e: Event) => {
+        e.preventDefault()
+        emits('close:prevent')
+      }
+      return acc
+    }, {} as Record<EventType, (e: Event) => void>)
   }
 
   return {}
