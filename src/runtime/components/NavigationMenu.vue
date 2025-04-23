@@ -123,8 +123,8 @@ export type NavigationMenuSlots<
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
   'item-content': SlotProps<T>
-  'list-leading': (props?: {}) => any
-  'list-trailing': (props?: {}) => any
+  'content-top': (props?: {}) => any
+  'content-bottom': (props?: {}) => any
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing' | 'content', { index: number, active?: boolean }>
 
 </script>
@@ -305,7 +305,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
   </DefineItemTemplate>
 
   <NavigationMenuRoot v-bind="rootProps" :data-collapsed="collapsed" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <slot name="list-leading" />
+    <slot name="content-top" />
 
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list({ class: props.ui?.list })">
@@ -315,7 +315,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
       <div v-if="orientation === 'vertical' && listIndex < lists.length - 1" :class="ui.separator({ class: props.ui?.separator })" />
     </template>
 
-    <slot name="list-trailing" />
+    <slot name="content-bottom" />
 
     <div v-if="orientation === 'horizontal'" :class="ui.viewportWrapper({ class: props.ui?.viewportWrapper })">
       <NavigationMenuIndicator v-if="arrow" :class="ui.indicator({ class: props.ui?.indicator })">
