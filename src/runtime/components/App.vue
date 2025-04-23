@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'reka-ui'
-import { localeContextInjectionKey } from '../composables/useLocale'
-import type { ToasterProps, Locale } from '../types'
+import type { ToasterProps, Locale, Messages } from '../types'
 
-export interface AppProps extends Omit<ConfigProviderProps, 'useId' | 'dir' | 'locale'> {
+export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProviderProps, 'useId' | 'dir' | 'locale'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
-  locale?: Locale
+  locale?: Locale<T>
+  portal?: string | HTMLElement
 }
 
 export interface AppSlots {
@@ -18,14 +18,19 @@ export default {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends Messages">
 import { toRef, useId, provide } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { localeContextInjectionKey } from '../composables/useLocale'
+import { portalTargetInjectionKey } from '../composables/usePortal'
 import UToaster from './Toaster.vue'
 import UOverlayProvider from './OverlayProvider.vue'
 
-const props = defineProps<AppProps>()
+const props = withDefaults(defineProps<AppProps<T>>(), {
+  portal: 'body'
+})
+
 defineSlots<AppSlots>()
 
 const configProviderProps = useForwardProps(reactivePick(props, 'scrollBody'))
@@ -34,6 +39,9 @@ const toasterProps = toRef(() => props.toaster)
 
 const locale = toRef(() => props.locale)
 provide(localeContextInjectionKey, locale)
+
+const portal = toRef(() => props.portal)
+provide(portalTargetInjectionKey, portal)
 </script>
 
 <template>

@@ -145,6 +145,7 @@ describe('Table', () => {
     // Props
     ['with data', { props }],
     ['without data', {}],
+    ['with empty', { props: { empty: 'There is no data' } }],
     ['with caption', { props: { ...props, caption: 'Table caption' } }],
     ['with columns', { props: { ...props, columns } }],
     ['with sticky', { props: { ...props, sticky: true } }],
@@ -158,8 +159,8 @@ describe('Table', () => {
     ['with header slot', { props, slots: { 'id-header': () => 'ID Header slot' } }],
     ['with cell slot', { props, slots: { 'id-cell': () => 'ID Cell slot' } }],
     ['with expanded slot', { props, slots: { expanded: () => 'Expanded slot' } }],
-    ['with empty slot', { props: { ...props, data: [], columns }, slots: { empty: () => 'Empty slot' } }],
-    ['with loading slot', { props: { ...props, data: [], columns, loading: true }, slots: { loading: () => 'Loading slot' } }],
+    ['with empty slot', { props: { columns }, slots: { empty: () => 'Empty slot' } }],
+    ['with loading slot', { props: { columns, loading: true }, slots: { loading: () => 'Loading slot' } }],
     ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<typeof data[number]>, slots?: Partial<TableSlots<typeof data[number]>> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)

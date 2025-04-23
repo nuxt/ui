@@ -3,10 +3,11 @@ const title = 'Roadmap'
 const description = 'Discover our Volta board for @nuxt/ui development status.'
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt UI v3',
+  titleTemplate: '%s - Nuxt UI',
   title,
-  ogTitle: 'Nuxt UI Roadmap',
-  description
+  description,
+  ogTitle: `${title} - Nuxt UI`,
+  ogDescription: description
 })
 
 defineOgImageComponent('Docs', {

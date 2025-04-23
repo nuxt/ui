@@ -1,9 +1,7 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { ComputedRef, DeepReadonly, Ref } from 'vue'
-import type { ZodSchema } from 'zod'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
-import type { GenericSchema as ValibotSchema, GenericSchemaAsync as ValibotSchemaAsync, SafeParser as ValibotSafeParser, SafeParserAsync as ValibotSafeParserAsync } from 'valibot'
 import type { GetObjectField } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
 
@@ -16,27 +14,38 @@ export interface Form<T extends object> {
   submit (): Promise<void>
   disabled: ComputedRef<boolean>
   dirty: ComputedRef<boolean>
+  loading: Ref<boolean>
 
   dirtyFields: DeepReadonly<Set<keyof T>>
   touchedFields: DeepReadonly<Set<keyof T>>
   blurredFields: DeepReadonly<Set<keyof T>>
 }
 
-export type FormSchema<T extends object> =
-  | ZodSchema
-  | YupObjectSchema<T>
-  | ValibotSchema
-  | ValibotSchemaAsync
-  | ValibotSafeParser<any, any>
-  | ValibotSafeParserAsync<any, any>
-  | JoiSchema<T>
+export type FormSchema<I extends object = object, O extends object = I> =
+  | YupObjectSchema<I>
+  | JoiSchema<I>
   | SuperstructSchema<any, any>
-  | StandardSchemaV1
+  | StandardSchemaV1<I, O>
+
+// Define a utility type to infer the input type based on the schema type
+export type InferInput<Schema> = Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
+  : Schema extends YupObjectSchema<infer I> ? I
+    : Schema extends JoiSchema<infer I> ? I
+      : Schema extends SuperstructSchema<infer I, any> ? I
+        : Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
+          : never
+
+// Define a utility type to infer the output type based on the schema type
+export type InferOutput<Schema> = Schema extends StandardSchemaV1 ? StandardSchemaV1.InferOutput<Schema>
+  : Schema extends YupObjectSchema<infer O> ? O
+    : Schema extends JoiSchema<infer O> ? O
+      : Schema extends SuperstructSchema<infer O, any> ? O
+        : never
 
 export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
 
 export interface FormError<P extends string = string> {
-  name: P
+  name?: P
   message: string
 }
 
@@ -91,6 +100,7 @@ export interface FormFieldInjectedOptions<T> {
   errorPattern?: RegExp
   hint?: string
   description?: string
+  help?: string
   ariaId: string
 }
 

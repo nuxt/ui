@@ -2,7 +2,7 @@ title: Nuxt UI Pro Pricing
 description: Start for free in development mode, then upgrade to a paid plan to unlock the full features of Nuxt UI Pro when you are ready to launch.
 pricing:
   headline: Pricing
-  title: Upgrade to Nuxt UI [Pro]{class="text-(--ui-primary)"}.
+  title: Upgrade to Nuxt UI [Pro]{class="text-primary"}.
   description: On top of 40+ open source components from Nuxt UI, Pro gives you access to 50+ premium Vue components to create beautiful & responsive Nuxt applications in minutes. It includes all primitives to build landing pages, documentations, blogs, dashboards or entire SaaS products.
   freePlan:
     title: Free in development
@@ -17,7 +17,10 @@ pricing:
     title: Figma Kit Pro
     description: Get all Nuxt UI Pro components in a Figma kit to design your next application before coding. Everything you need, from wire-framing to high-fidelity web integration.
     orientation: horizontal
-    price: $149 - $349
+    price: $149
+    # discount: $119
+    billing_period: one-time payment
+    billing_cycle: plus local taxes
     terms: Solo & Team licenses available.
     features:
       - 1700+ components & variants from Nuxt UI & UI Pro
@@ -36,6 +39,7 @@ pricing:
     - title: Solo
       description: Tailored for indie hackers, freelancers and solo founders.
       price: $249
+      # discount: $199
       billing_period: one-time payment
       billing_cycle: plus local taxes
       features:
@@ -50,6 +54,7 @@ pricing:
     - title: Startup
       description: Best suited for small teams, startups and agencies.
       price: $499
+      # discount: $399
       billing_period: one-time payment
       billing_cycle: plus local taxes
       features:
@@ -65,6 +70,7 @@ pricing:
     - title: Organization
       description: Ideal for larger teams and organizations.
       price: $999
+      # discount: $799
       billing_period: one-time payment
       billing_cycle: plus local taxes
       features:
@@ -174,7 +180,7 @@ testimonials:
     - quote: "Nuxt UI Pro is my preferred choice for everything, from a POC to a web platform. It's ready to use out-of-the-box and assists me in crafting pixel-perfect UIs. It saves me a significant amount of time while remaining highly customizable. Give it a try, and you won't be let down."
       user:
         name: 'Estéban Soubiran'
-        description:  'Web developer and UnJS member'
+        description:  'Software engineer'
         to: 'https://x.com/soubiran_'
         target: _blank
         avatar:

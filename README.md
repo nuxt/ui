@@ -11,31 +11,31 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-We're thrilled to introduce Nuxt UI v3, a significant upgrade to our UI library that delivers extensive improvements and robust new capabilities. This major update harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS v4](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
+Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 > [!NOTE]
-> You are on the `v3` development branch, check out the [dev branch](https://github.com/nuxt/ui/tree/dev) for Nuxt UI v2.
+> You are on the `v3` development branch, check out the [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
 
 ## Documentation
 
-Visit https://ui3.nuxt.dev to explore the documentation.
+Visit https://ui.nuxt.com to explore the documentation.
 
 ## Installation
 
 ```bash [pnpm]
-pnpm add @nuxt/ui@next
+pnpm add @nuxt/ui
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui@next
+yarn add @nuxt/ui
 ```
 
 ```bash [npm]
-npm install @nuxt/ui@next
+npm install @nuxt/ui
 ```
 
 ```bash [bun]
-bun add @nuxt/ui@next
+bun add @nuxt/ui
 ```
 
 ### Nuxt
@@ -51,11 +51,11 @@ export default defineNuxtConfig({
 2. Import Tailwind CSS and Nuxt UI in your CSS:
 
 ```css [assets/css/main.css]
-@import "tailwindcss" theme(static);
+@import "tailwindcss";
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation/nuxt).
+Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/nuxt).
 
 ### Vue
 
@@ -98,11 +98,22 @@ app.mount('#app')
 3. Import Tailwind CSS and Nuxt UI in your CSS:
 
 ```css [assets/main.css]
-@import "tailwindcss" theme(static);
+@import "tailwindcss";
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/installation/vue).
+Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/vue).
+
+## Contribution
+
+Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
+
+- Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
+- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/getting-started/contribution) to share your suggestions.
+
+## Local Development
+
+Follow the docs to [set up your local development environment](https://ui.nuxt.com/getting-started/contribution#local-development) and contribute.
 
 ## Credits
 
@@ -119,7 +130,7 @@ Learn more in the [installation guide](https://ui3.nuxt.dev/getting-started/inst
 Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v3/LICENSE.md).
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/next.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-version-href]: https://npmjs.com/package/@nuxt/ui
 
 [npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D

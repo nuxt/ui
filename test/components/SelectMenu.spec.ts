@@ -50,6 +50,7 @@ describe('SelectMenu', () => {
     ['without searchInput', { props: { ...props, searchInput: false } }],
     ['with searchInput placeholder', { props: { ...props, searchInput: { placeholder: 'Filter items...' } } }],
     ['with searchInput icon', { props: { ...props, searchInput: { icon: 'i-lucide-search' } } }],
+    ['with clearable', { props: { clearable: true } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with required', { props: { ...props, required: true } }],
     ['with icon', { props: { icon: 'i-lucide-search' } }],
@@ -82,9 +83,8 @@ describe('SelectMenu', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
-    ['with clearable', { props: { clearable: true } }]
-    // ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps<typeof items[number]>, slots?: Partial<SelectMenuSlots<typeof items[number], false>> }) => {
+    ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps, slots?: Partial<SelectMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, SelectMenu)
     expect(html).toMatchSnapshot()
   })
@@ -191,6 +191,12 @@ describe('SelectMenu', () => {
         multiple: true,
         valueKey: 'value'
       })).toEqualTypeOf<[number[]]>()
+
+      // with object item and object valueKey
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
+        items: [{ label: 'foo', value: { id: 1, name: 'bar' } }],
+        valueKey: 'value'
+      })).toEqualTypeOf<[{ id: number, name: string }]>()
 
       // with string item
       expectEmitPayloadType('update:modelValue', () => SelectMenu({

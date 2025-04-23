@@ -1,15 +1,9 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/form-field'
-import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigFormField = _appConfig as AppConfig & { ui: { formField: Partial<typeof theme> } }
-
-const formField = tv({ extend: tv(theme), ...(appConfigFormField.ui?.formField || {}) })
-
-type FormFieldVariants = VariantProps<typeof formField>
+type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>
 
 export interface FormFieldProps {
   /**
@@ -29,12 +23,17 @@ export interface FormFieldProps {
   /**
    * @defaultValue 'md'
    */
-  size?: FormFieldVariants['size']
+  size?: FormField['variants']['size']
   required?: boolean
+  /** If true, validation on input will be active immediately instead of waiting for a blur event. */
   eagerValidation?: boolean
+  /**
+   * Delay in milliseconds before validating the form on input events.
+   * @defaultValue `300`
+   */
   validateOnInputDelay?: number
   class?: any
-  ui?: Partial<typeof formField.slots>
+  ui?: FormField['slots']
 }
 
 export interface FormFieldSlots {
@@ -50,20 +49,24 @@ export interface FormFieldSlots {
 <script setup lang="ts">
 import { computed, ref, inject, provide, type Ref, useId } from 'vue'
 import { Primitive, Label } from 'reka-ui'
+import { useAppConfig } from '#imports'
 import { formFieldInjectionKey, inputIdInjectionKey } from '../composables/useFormField'
+import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
 const props = defineProps<FormFieldProps>()
 const slots = defineSlots<FormFieldSlots>()
 
-const ui = computed(() => formField({
+const appConfig = useAppConfig() as FormField['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })({
   size: props.size,
   required: props.required
 }))
 
 const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern)))?.message)
+const error = computed(() => props.error || formErrors?.value?.find(error => error.name && (error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern))))?.message)
 
 const id = ref(useId())
 // Copies id's initial value to bind aria-attributes such as aria-describedby.
@@ -81,6 +84,7 @@ provide(formFieldInjectionKey, computed(() => ({
   errorPattern: props.errorPattern,
   hint: props.hint,
   description: props.description,
+  help: props.help,
   ariaId
 }) as FormFieldInjectedOptions<FormFieldProps>))
 </script>

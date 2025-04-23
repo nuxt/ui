@@ -48,14 +48,15 @@ const data = ref<Payment[]>([{
 const columns: TableColumn<Payment>[] = [{
   id: 'expand',
   cell: ({ row }) => h(UButton, {
-    color: 'neutral',
-    variant: 'ghost',
-    icon: 'i-lucide-chevron-down',
-    square: true,
-    ui: {
+    'color': 'neutral',
+    'variant': 'ghost',
+    'icon': 'i-lucide-chevron-down',
+    'square': true,
+    'aria-label': 'Expand',
+    'ui': {
       leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
     },
-    onClick: () => row.toggleExpanded()
+    'onClick': () => row.toggleExpanded()
   })
 }, {
   accessorKey: 'id',
@@ -111,7 +112,7 @@ const expanded = ref({ 1: true })
     v-model:expanded="expanded"
     :data="data"
     :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-(--ui-bg-elevated)/50' }"
+    :ui="{ tr: 'data-[expanded=true]:bg-elevated/50' }"
     class="flex-1"
   >
     <template #expanded="{ row }">

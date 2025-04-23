@@ -12,7 +12,7 @@ const { url } = useSiteConfig()
 useSeoMeta({
   title,
   description,
-  ogTitle: `${title} - Nuxt UI Pro`,
+  ogTitle: title,
   ogDescription: description,
   ogImage: joinURL(url, '/pro/og-image.png')
 })
@@ -33,7 +33,7 @@ const activating = ref(false)
 const successMessage = ref()
 const errorMessage = ref('')
 
-async function submit(event: FormSubmitEvent<any>) {
+async function submit(event: FormSubmitEvent<Schema>) {
   activating.value = true
   errorMessage.value = ''
   successMessage.value = ''
@@ -71,10 +71,11 @@ onMounted(() => {
 <template>
   <UMain>
     <UPageHero headline="License Activation" :title="title" :description="description" :ui="{ container: 'relative overflow-hidden', wrapper: 'lg:px-12', description: 'text-pretty' }">
-      <StarsBg />
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <LazyStarsBg />
 
-      <div class="px-4 py-10 lg:border border-(--ui-border) bg-(--ui-bg)">
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
+
+      <div class="px-4 py-10 lg:border border-default bg-default">
         <div class="max-w-xl mx-auto">
           <UForm
             :schema="schema"

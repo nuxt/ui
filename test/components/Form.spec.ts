@@ -59,13 +59,6 @@ describe('Form', () => {
       })
     }
     ],
-    ['valibot safeParser', {
-      schema: valibot.safeParser(valibot.object({
-        email: valibot.string(),
-        password: valibot.pipe(valibot.string(), valibot.minLength(8, 'Must be at least 8 characters'))
-      }))
-    }
-    ],
     ['superstruct', {
       schema: object({
         email: nonempty(string()),

@@ -69,7 +69,7 @@ function setBlackAsPrimary(value: boolean) {
         :variant="open ? 'soft' : 'ghost'"
         square
         aria-label="Color picker"
-        :ui="{ leadingIcon: 'text-(--ui-primary)' }"
+        :ui="{ leadingIcon: 'text-primary' }"
       />
     </template>
 
@@ -81,7 +81,6 @@ function setBlackAsPrimary(value: boolean) {
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
           <ThemePickerButton
-            chip="primary"
             label="Black"
             :selected="appConfig.theme.blackAsPrimary"
             @click="setBlackAsPrimary(true)"
@@ -90,6 +89,7 @@ function setBlackAsPrimary(value: boolean) {
               <span class="inline-block w-2 h-2 rounded-full bg-black dark:bg-white" />
             </template>
           </ThemePickerButton>
+
           <ThemePickerButton
             v-for="color in primaryColors"
             :key="color"
@@ -111,7 +111,7 @@ function setBlackAsPrimary(value: boolean) {
             v-for="color in neutralColors"
             :key="color"
             :label="color"
-            :chip="color"
+            :chip="color === 'neutral' ? 'old-neutral' : color"
             :selected="neutral === color"
             @click="neutral = color"
           />

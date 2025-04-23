@@ -15,7 +15,7 @@ const domain = ref(domains[0])
       }"
     >
       <template #leading>
-        <p class="text-sm text-(--ui-text-muted)">
+        <p class="text-sm text-muted">
           https://
         </p>
       </template>

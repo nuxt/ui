@@ -13,7 +13,7 @@ const description = page.value.description
 useSeoMeta({
   title,
   description,
-  ogTitle: `${title} - Nuxt UI Pro`,
+  ogTitle: title,
   ogDescription: description,
   ogImage: joinURL(url, '/pro/og-image.png')
 })

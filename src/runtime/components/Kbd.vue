@@ -1,16 +1,10 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
-import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigKbd = _appConfig as AppConfig & { ui: { kbd: Partial<typeof theme> } }
-
-const kbd = tv({ extend: tv(theme), ...(appConfigKbd.ui?.kbd || {}) })
-
-type KbdVariants = VariantProps<typeof kbd>
+type Kbd = ComponentConfig<typeof theme, AppConfig, 'kbd'>
 
 export interface KbdProps {
   /**
@@ -22,11 +16,11 @@ export interface KbdProps {
   /**
    * @defaultValue 'outline'
    */
-  variant?: KbdVariants['variant']
+  variant?: Kbd['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: KbdVariants['size']
+  size?: Kbd['variants']['size']
   class?: any
 }
 
@@ -36,8 +30,11 @@ export interface KbdSlots {
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
 import { useKbd } from '../composables/useKbd'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<KbdProps>(), {
   as: 'kbd'
@@ -45,10 +42,13 @@ const props = withDefaults(defineProps<KbdProps>(), {
 defineSlots<KbdSlots>()
 
 const { getKbdKey } = useKbd()
+const appConfig = useAppConfig() as Kbd['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.kbd || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="kbd({ variant, size, class: props.class })">
+  <Primitive :as="as" :class="ui({ variant, size, class: props.class })">
     <slot>
       {{ getKbdKey(value) }}
     </slot>

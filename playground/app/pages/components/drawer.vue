@@ -20,7 +20,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `vaul-drawer-wrapper` directive to your content to make it work." :inset="inset">
+    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work." :inset="inset">
       <UButton color="neutral" variant="outline" label="Open with scale" />
 
       <template #body>
@@ -28,7 +28,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with bottom direction" direction="bottom" :handle="false" :inset="inset">
+    <UDrawer title="Drawer with bottom direction" direction="bottom" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on bottom" />
 
       <template #body>
@@ -36,7 +36,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with left direction" direction="left" :handle="false" :inset="inset">
+    <UDrawer title="Drawer with left direction" direction="left" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on left" />
 
       <template #body>
@@ -44,7 +44,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with top direction" direction="top" :handle="false" :inset="inset">
+    <UDrawer title="Drawer with top direction" direction="top" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on top" />
 
       <template #body>
@@ -52,7 +52,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with right direction" direction="right" :handle="false" :inset="inset">
+    <UDrawer title="Drawer with right direction" direction="right" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on right" />
 
       <template #body>

@@ -6,13 +6,13 @@ export default (options: Required<ModuleOptions>) => ({
     header: 'flex',
     item: 'group text-center relative w-full',
     container: 'relative',
-    trigger: 'rounded-full font-medium text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-(--ui-bg) group-data-[state=active]:text-(--ui-bg) text-(--ui-text-muted) bg-(--ui-bg-elevated) focus-visible:outline-2 focus-visible:outline-offset-2',
+    trigger: 'rounded-full font-medium text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2',
     indicator: 'flex items-center justify-center size-full',
     icon: 'shrink-0',
-    separator: 'absolute rounded-full group-data-[disabled]:opacity-75 bg-(--ui-border-accented)',
+    separator: 'absolute rounded-full group-data-[disabled]:opacity-75 bg-accented',
     wrapper: '',
-    title: 'font-medium text-(--ui-text)',
-    description: 'text-(--ui-text-muted) text-wrap',
+    title: 'font-medium text-default',
+    description: 'text-muted text-wrap',
     content: 'size-full'
   },
 
@@ -71,12 +71,12 @@ export default (options: Required<ModuleOptions>) => ({
 
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        trigger: `group-data-[state=completed]:bg-(--ui-${color}) group-data-[state=active]:bg-(--ui-${color}) focus-visible:outline-(--ui-${color})`,
-        separator: `group-data-[state=completed]:bg-(--ui-${color})`
+        trigger: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color} focus-visible:outline-${color}`,
+        separator: `group-data-[state=completed]:bg-${color}`
       }])),
       neutral: {
-        trigger: `group-data-[state=completed]:bg-(--ui-bg-inverted) group-data-[state=active]:bg-(--ui-bg-inverted) focus-visible:outline-(--ui-border-inverted)`,
-        separator: `group-data-[state=completed]:bg-(--ui-bg-inverted)`
+        trigger: `group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted focus-visible:outline-inverted`,
+        separator: `group-data-[state=completed]:bg-inverted`
       }
     }
   },

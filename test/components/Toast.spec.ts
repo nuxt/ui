@@ -40,7 +40,7 @@ describe('Toast', () => {
     ['with type', { props: { ...props, type: 'background' as const } }],
     ['with color neutral', { props: { ...props, color: 'neutral' as const } }],
     ['with as', { props: { ...props, as: 'section' } }],
-    ['with class', { props: { ...props, class: 'bg-(--ui-bg-elevated)/50' } }],
+    ['with class', { props: { ...props, class: 'bg-elevated/50' } }],
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],

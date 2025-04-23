@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { SelectMenuItem } from '@nuxt/ui'
+
 const items = ref([
   {
     label: 'Backlog',
@@ -20,7 +22,7 @@ const items = ref([
     value: 'done',
     icon: 'i-lucide-circle-check'
   }
-])
+] satisfies SelectMenuItem[])
 const value = ref(items.value[0])
 </script>
 

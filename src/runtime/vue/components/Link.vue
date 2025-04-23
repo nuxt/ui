@@ -1,10 +1,11 @@
 <script lang="ts">
 import type { ButtonHTMLAttributes } from 'vue'
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import type { RouterLinkProps, RouteLocationRaw } from 'vue-router'
 import theme from '#build/ui/link'
+import type { ComponentConfig } from '../../types/utils'
+
+type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
 interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
   /**
@@ -52,10 +53,6 @@ interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
   noPrefetch?: boolean
 }
 
-const appConfigLink = _appConfig as AppConfig & { ui: { link: Partial<typeof theme> } }
-
-const link = tv({ extend: tv(theme), ...(appConfigLink.ui?.link || {}) })
-
 export interface LinkProps extends NuxtLinkProps {
   /**
    * The element or component this component should render as when not a link.
@@ -91,18 +88,21 @@ export interface LinkSlots {
 
 <script setup lang="ts">
 import { computed, getCurrentInstance } from 'vue'
+import { defu } from 'defu'
 import { isEqual, diff } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
-import { useRoute } from '#imports'
-import { RouterLink } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
+import { useAppConfig } from '#imports'
+import { tv } from '../../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<LinkProps>(), {
   as: 'button',
   type: 'button',
+  ariaCurrentValue: 'page',
   active: undefined,
   activeClass: '',
   inactiveClass: ''
@@ -125,16 +125,20 @@ const route = computed(() => {
   }
 })
 
+const appConfig = useAppConfig() as Link['AppConfig']
+
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'raw', 'class'))
 
 const ui = computed(() => tv({
-  extend: link,
-  variants: {
-    active: {
-      true: props.activeClass,
-      false: props.inactiveClass
+  extend: tv(theme),
+  ...defu({
+    variants: {
+      active: {
+        true: props.activeClass,
+        false: props.inactiveClass
+      }
     }
-  }
+  }, appConfig.ui?.link || {})
 }))
 
 function isPartiallyEqual(item1: any, item2: any) {
@@ -204,6 +208,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         <slot
           v-bind="{
             ...$attrs,
+            ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
             as,
             type,
             disabled,
@@ -217,6 +222,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         v-else
         v-bind="{
           ...$attrs,
+          ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
           as,
           type,
           disabled,

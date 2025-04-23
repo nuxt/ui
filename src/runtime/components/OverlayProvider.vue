@@ -22,7 +22,7 @@ const onClose = (id: symbol, value: any) => {
     v-for="overlay in mountedOverlays"
     :key="overlay.id"
     v-bind="overlay.props"
-    v-model:open="overlay.modelValue"
+    v-model:open="overlay.isOpen"
     @close="(value:any) => onClose(overlay.id, value)"
     @after:leave="onAfterLeave(overlay.id)"
   />

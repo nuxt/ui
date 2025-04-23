@@ -30,6 +30,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -58,6 +60,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -87,6 +91,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -115,6 +121,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -149,6 +157,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -182,6 +192,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - AccordionItem[]
 hide:
   - class
 props:
@@ -233,6 +245,16 @@ You can also pass the `value` of one of the items if provided.
 
 ::caution
 When `type="multiple"`, ensure to pass an array to the `default-value` prop or the `v-model` directive.
+::
+
+### With drag and drop
+
+Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Accordion. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
+
+::component-example
+---
+name: 'accordion-drag-and-drop-example'
+---
 ::
 
 ### With body slot
