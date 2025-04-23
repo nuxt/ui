@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref } from 'vue'
+import type { Ref, WatchOptions } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
@@ -98,6 +98,10 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
    */
   loadingAnimation?: Table['variants']['loadingAnimation']
   /**
+   * @defaultValue true
+   */
+  watchDeep?: WatchOptions['deep']
+  /**
    * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
    */
@@ -175,7 +179,7 @@ export type TableSlots<T> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
@@ -184,13 +188,15 @@ import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
-const props = defineProps<TableProps<T>>()
+const props = withDefaults(defineProps<TableProps<T>>(), {
+  watchDeep: true
+})
 const slots = defineSlots<TableSlots<T>>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Table['AppConfig']
 
-const data = computed(() => props.data ?? [])
+const data = ref(props.data ?? [])
 const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
 const meta = computed(() => props.meta ?? {})
 
@@ -313,6 +319,14 @@ function handleRowSelect(row: TableRow<T>, e: Event) {
 
   props.onSelect(row, e)
 }
+
+watch(
+  () => props.data, () => {
+    data.value = props.data ? [...props.data] : []
+  }, {
+    deep: props.watchDeep
+  }
+)
 
 defineExpose({
   tableRef,
