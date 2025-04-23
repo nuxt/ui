@@ -457,6 +457,71 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
+### Clear :badge{label="Not released" class="align-text-top"}
+
+Use the `clear` prop to add a clear icon to reset the model value.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  clear: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+### Clear Icon :badge{label="Not released" class="align-text-top"}
+
+Use the `clear-icon` prop to customize the clear icon. Defaults to `i-lucide-x`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  clear: true
+  clearIcon: 'i-lucide-trash'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+:::
+::
+
 ### Selected Icon
 
 Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
@@ -606,33 +671,6 @@ external:
 props:
   disabled: true
   placeholder: 'Select status'
-  items:
-    - Backlog
-    - Todo
-    - In Progress
-    - Done
-  class: 'w-48'
----
-::
-
-### Clearable
-
-Use the `clearable` prop to add a clear icon and enable `modelValue` clearing.
-
-::component-code
----
-prettier: true
-ignore:
-  - items
-  - modelValue
-  - class
-external:
-  - items
-  - modelValue
-props:
-  modelValue: 'Backlog'
-  clearable: true
-  trailing: false
   items:
     - Backlog
     - Todo

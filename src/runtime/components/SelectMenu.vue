@@ -417,7 +417,17 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
 
         <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
-            <UIcon v-if="props.clear && !isEmpty" :name="clearIcon || appConfig.ui.icons.close" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" @click.prevent.stop="onClear()" />
+            <UIcon
+              v-if="props.clear && !isEmpty"
+              :name="clearIcon || appConfig.ui.icons.close"
+              :class="ui.trailingIcon({
+                class: [
+                  props.ui?.trailingIcon,
+                  ui.clearIcon({ class: props.ui?.clearIcon })
+                ]
+              })"
+              @click.prevent.stop="onClear()"
+            />
             <UIcon v-else-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
           </slot>
         </span>
