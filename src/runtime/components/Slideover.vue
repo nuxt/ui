@@ -99,8 +99,12 @@ const appConfig = useAppConfig()
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
+  const defaultEvents = {
+    closeAutoFocus: (e: Event) => e.preventDefault()
+  }
+
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'] as const
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown', 'closeAutoFocus'] as const
     type EventType = typeof events[number]
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
@@ -111,7 +115,7 @@ const contentEvents = computed(() => {
     }, {} as Record<EventType, (e: Event) => void>)
   }
 
-  return {}
+  return defaultEvents
 })
 
 const ui = computed(() => slideover({

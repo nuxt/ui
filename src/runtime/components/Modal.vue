@@ -1,21 +1,17 @@
 <script lang="ts">
-import type { DialogRootProps, DialogRootEmits, DialogContentProps } from 'reka-ui'
+import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/modal'
-import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
-import { tv } from '../utils/tv'
 import type { ButtonProps } from '../types'
+import type { EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigModal = _appConfig as AppConfig & { ui: { modal: Partial<typeof theme> } }
-
-const modal = tv({ extend: tv(theme), ...(appConfigModal.ui?.modal || {}) })
+type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
 
 export interface ModalProps extends DialogRootProps {
   title?: string
   description?: string
   /** The content of the modal. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'>
+  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>
   /**
    * Render an overlay behind the modal.
    * @defaultValue true
@@ -41,10 +37,11 @@ export interface ModalProps extends DialogRootProps {
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: ButtonProps | boolean
+  close?: boolean | Partial<ButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
    */
   closeIcon?: string
   /**
@@ -53,10 +50,11 @@ export interface ModalProps extends DialogRootProps {
    */
   dismissible?: boolean
   class?: any
-  ui?: Partial<typeof modal.slots>
+  ui?: Modal['slots']
 }
 
 export interface ModalEmits extends DialogRootEmits {
+  'after:leave': []
   'close-prevented': []
 }
 
@@ -66,12 +64,10 @@ export interface ModalSlots {
   header(props?: {}): any
   title(props?: {}): any
   description(props?: {}): any
-  close(props: { ui: any }): any
+  close(props: { ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
   body(props?: {}): any
   footer(props?: {}): any
 }
-
-extendDevtoolsMeta({ example: 'ModalExample' })
 </script>
 
 <script setup lang="ts">
@@ -80,6 +76,7 @@ import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, 
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<ModalProps>(), {
@@ -94,13 +91,17 @@ const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as Modal['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
+  const defaultEvents = {
+    closeAutoFocus: (e: Event) => e.preventDefault()
+  }
+
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'] as const
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown', 'closeAutoFocus'] as const
     type EventType = typeof events[number]
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
@@ -111,10 +112,10 @@ const contentEvents = computed(() => {
     }, {} as Record<EventType, (e: Event) => void>)
   }
 
-  return {}
+  return defaultEvents
 })
 
-const ui = computed(() => modal({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })({
   transition: props.transition,
   fullscreen: props.fullscreen
 }))
@@ -129,7 +130,7 @@ const ui = computed(() => modal({
     <DialogPortal :disabled="!portal">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-leave="emits('after:leave')" v-on="contentEvents">
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
             <slot name="title">
@@ -147,19 +148,21 @@ const ui = computed(() => modal({
         <slot name="content">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
             <slot name="header">
-              <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
-                <slot name="title">
-                  {{ title }}
-                </slot>
-              </DialogTitle>
+              <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+                <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+                  <slot name="title">
+                    {{ title }}
+                  </slot>
+                </DialogTitle>
 
-              <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
-                <slot name="description">
-                  {{ description }}
-                </slot>
-              </DialogDescription>
+                <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+                  <slot name="description">
+                    {{ description }}
+                  </slot>
+                </DialogDescription>
+              </div>
 
-              <DialogClose as-child>
+              <DialogClose v-if="close || !!slots.close" as-child>
                 <slot name="close" :ui="ui">
                   <UButton
                     v-if="close"
@@ -168,7 +171,7 @@ const ui = computed(() => modal({
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('modal.close')"
-                    v-bind="typeof close === 'object' ? close : undefined"
+                    v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
                     :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>

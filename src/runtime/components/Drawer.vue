@@ -83,6 +83,9 @@ const slots = defineSlots<DrawerSlots>()
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'defaultOpen', 'dismissible', 'fadeFromIndex', 'fixed', 'modal', 'nested', 'direction', 'open', 'scrollLockTimeout', 'shouldScaleBackground', 'snapPoints'), emits)
 const contentProps = toRef(() => props.content)
+const contentEvents = {
+  closeAutoFocus: (e: Event) => e.preventDefault()
+}
 
 const ui = computed(() => drawer({
   direction: props.direction,
@@ -99,7 +102,7 @@ const ui = computed(() => drawer({
     <DrawerPortal :disabled="!portal">
       <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps">
+      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
         <slot name="handle">
           <div v-if="handle" :class="ui.handle({ class: props.ui?.handle })" />
         </slot>
