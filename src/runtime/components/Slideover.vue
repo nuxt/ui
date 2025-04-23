@@ -55,6 +55,7 @@ export interface SlideoverProps extends DialogRootProps {
 
 export interface SlideoverEmits extends DialogRootEmits {
   'after:leave': []
+  'close:prevent': []
 }
 
 export interface SlideoverSlots {
@@ -98,20 +99,22 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen'
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
-  const events = {
+  const defaultEvents = {
     closeAutoFocus: (e: Event) => e.preventDefault()
   }
-
   if (!props.dismissible) {
-    return {
-      pointerDownOutside: (e: Event) => e.preventDefault(),
-      interactOutside: (e: Event) => e.preventDefault(),
-      escapeKeyDown: (e: Event) => e.preventDefault(),
-      ...events
-    }
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown', 'closeAutoFocus'] as const
+    type EventType = typeof events[number]
+    return events.reduce((acc, curr) => {
+      acc[curr] = (e: Event) => {
+        e.preventDefault()
+        emits('close:prevent')
+      }
+      return acc
+    }, {} as Record<EventType, (e: Event) => void>)
   }
 
-  return events
+  return defaultEvents
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover || {}) })({

@@ -98,7 +98,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
       :disabled="item.disabled"
       :class="ui.item({ class: props.ui?.item })"
     >
-      <AccordionHeader :class="ui.header({ class: props.ui?.header })">
+      <AccordionHeader as="div" :class="ui.header({ class: props.ui?.header })">
         <AccordionTrigger :class="ui.trigger({ class: props.ui?.trigger, disabled: item.disabled })">
           <slot name="leading" :item="item" :index="index" :open="open">
             <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
