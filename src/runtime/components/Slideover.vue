@@ -55,7 +55,7 @@ export interface SlideoverProps extends DialogRootProps {
 
 export interface SlideoverEmits extends DialogRootEmits {
   'after:leave': []
-  'close-prevented': []
+  'close:prevent': []
 }
 
 export interface SlideoverSlots {
@@ -106,7 +106,7 @@ const contentEvents = computed(() => {
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
         e.preventDefault()
-        emits('close-prevented')
+        emits('close:prevent')
       }
       return acc
     }, {} as Record<EventType, (e: Event) => void>)

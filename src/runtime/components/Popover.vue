@@ -37,7 +37,7 @@ export interface PopoverProps extends PopoverRootProps, Pick<HoverCardRootProps,
 }
 
 export interface PopoverEmits extends PopoverRootEmits {
-  'close-prevented': []
+  'close:prevent': []
 }
 
 export interface PopoverSlots {
@@ -77,7 +77,7 @@ const contentEvents = computed(() => {
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
         e.preventDefault()
-        emits('close-prevented')
+        emits('close:prevent')
       }
       return acc
     }, {} as Record<EventType, (e: Event) => void>)
