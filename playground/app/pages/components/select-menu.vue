@@ -92,8 +92,8 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
       <USelectMenu :items="items" placeholder="Disabled" disabled />
       <USelectMenu :items="items" placeholder="Required" required />
       <USelectMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple />
-      <USelectMenu v-model="selectedItem" :items="items" clearable />
-      <USelectMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple clearable />
+      <USelectMenu v-model="selectedItem" :items="items" clear />
+      <USelectMenu v-model="selectedItems" :items="items" placeholder="Multiple" multiple clear />
       <USelectMenu :items="items" loading placeholder="Search..." />
     </div>
     <div class="flex items-center gap-4">
@@ -103,7 +103,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         :items="items"
         placeholder="Search..."
         :size="size"
-        clearable
+        clear
         class="w-48"
       />
     </div>

@@ -55,7 +55,12 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * Determines if user can clear the `modelValue` with icon click
    * @defaultValue false
    */
-  clearable?: boolean
+  clear?: boolean
+  /**
+   * The icon displayed to clear the value.
+   * @defaultValue appConfig.ui.icons.close
+   */
+  clearIcon?: string
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.ui.icons.chevronDown
@@ -68,11 +73,6 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * @IconifyIcon
    */
   selectedIcon?: string
-  /**
-   * The icon displayed to clear the value.
-   * @defaultValue appConfig.ui.icons.close
-   */
-  clearIcon?: string
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
@@ -195,7 +195,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   portal: true,
   searchInput: true,
-  clearable: false,
+  clear: false,
   labelKey: 'label' as never,
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true
@@ -358,7 +358,7 @@ function onSelect(e: Event, item: SelectMenuItem) {
 
 function onClear() {
   const newValue = props.multiple ? [] : null
-  emits('update:modelValue', newValue as SelectModelValue<T, V, M>)
+  emits('update:modelValue', newValue)
 }
 
 function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
@@ -417,7 +417,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
 
         <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
-            <UIcon v-if="props.clearable && !isEmpty" :name="clearIcon || appConfig.ui.icons.close" :class="ui.clearIcon({ class: props.ui?.clearIcon })" @click.prevent.stop="onClear()" />
+            <UIcon v-if="props.clear && !isEmpty" :name="clearIcon || appConfig.ui.icons.close" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" @click.prevent.stop="onClear()" />
             <UIcon v-else-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
           </slot>
         </span>
