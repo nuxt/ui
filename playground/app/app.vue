@@ -62,7 +62,8 @@ const components = [
   'textarea',
   'toast',
   'tooltip',
-  'tree'
+  'tree',
+  'file-upload'
 ]
 
 const items = components.map(component => ({ label: upperName(component), to: `/components/${component}` }))
