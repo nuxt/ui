@@ -1108,7 +1108,7 @@
 * **Form:** handle multiple paths in `validate` ([#1273](https://github.com/nuxt/ui/issues/1273)) ([20ac4b3](https://github.com/nuxt/ui/commit/20ac4b3332267491067f3a5a393ca97e3ec6bab5))
 * **HorizontalNavigation:** new component ([#1279](https://github.com/nuxt/ui/issues/1279)) ([b8007ba](https://github.com/nuxt/ui/commit/b8007bab5efde70a375d6e3b9be91a0b698485b1))
 * **InputMenu:** handle `nullable` prop when clearing input ([5e49fb8](https://github.com/nuxt/ui/commit/5e49fb8736e01889b8f7a60cf0edc420e49fe52c))
-* **Modal/Slideover:** emit `close:prevent` event ([#1207](https://github.com/nuxt/ui/issues/1207)) ([6faf15b](https://github.com/nuxt/ui/commit/6faf15bc7460d7473ec47de48e407d45cf7d2e26))
+* **Modal/Slideover:** emit `close-prevented` event ([#1207](https://github.com/nuxt/ui/issues/1207)) ([6faf15b](https://github.com/nuxt/ui/commit/6faf15bc7460d7473ec47de48e407d45cf7d2e26))
 * **module:** add option to disable global css styles ([#1266](https://github.com/nuxt/ui/issues/1266)) ([f96eb5e](https://github.com/nuxt/ui/commit/f96eb5e8b794af75303a98fa38e5285bcf928614))
 * **Popover:** default delay from config ([7f5711b](https://github.com/nuxt/ui/commit/7f5711bc76cc509079934fd15ebbccb82bced064))
 * **Tooltip:** default delay from config ([3400b56](https://github.com/nuxt/ui/commit/3400b56d82c1713e67838ba246bba687f3056fe6))
