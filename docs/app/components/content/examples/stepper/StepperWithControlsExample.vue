@@ -3,17 +3,14 @@ import type { StepperItem } from '@nuxt/ui'
 
 const items: StepperItem[] = [
   {
-    slot: 'address',
     title: 'Address',
     description: 'Add your address here',
     icon: 'i-lucide-house'
   }, {
-    slot: 'shipping',
     title: 'Shipping',
     description: 'Set your preferred shipping method',
     icon: 'i-lucide-truck'
   }, {
-    slot: 'checkout',
     title: 'Checkout',
     description: 'Confirm your order'
   }

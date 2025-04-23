@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { Ref } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { RowData } from '@tanstack/table-core'
+import type { Cell, Header, RowData, TableMeta } from '@tanstack/table-core'
 import type {
   CellContext,
   ColumnDef,
@@ -39,13 +39,20 @@ import theme from '#build/ui/table'
 import type { ComponentConfig } from '../types/utils'
 
 declare module '@tanstack/table-core' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   interface ColumnMeta<TData extends RowData, TValue> {
     class?: {
-      th?: string
-      td?: string
+      th?: string | ((cell: Header<TData, TValue>) => string)
+      td?: string | ((cell: Cell<TData, TValue>) => string)
     }
   }
+
+  interface TableMeta<TData> {
+    class?: {
+      tr?: string | ((row: Row<TData>) => string)
+    }
+  }
+
 }
 
 type Table = ComponentConfig<typeof theme, AppConfig, 'table'>
@@ -69,6 +76,7 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
   data?: T[]
   columns?: TableColumn<T>[]
   caption?: string
+  meta?: TableMeta<T>
   /**
    * The text to display when the table is empty.
    * @defaultValue t('table.noData')
@@ -167,7 +175,7 @@ export type TableSlots<T> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
@@ -184,6 +192,7 @@ const appConfig = useAppConfig() as Table['AppConfig']
 
 const data = computed(() => props.data ?? [])
 const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })))
+const meta = computed(() => props.meta ?? {})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })({
   sticky: props.sticky,
@@ -206,10 +215,13 @@ const groupingState = defineModel<GroupingState>('grouping', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 const paginationState = defineModel<PaginationState>('pagination', { default: {} })
 
+const tableRef = ref<HTMLTableElement>()
+
 const tableApi = useVueTable({
   ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
   data,
   columns: columns.value,
+  meta: meta.value,
   getCoreRowModel: getCoreRowModel(),
   ...(props.globalFilterOptions || {}),
   onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
@@ -303,13 +315,14 @@ function handleRowSelect(row: TableRow<T>, e: Event) {
 }
 
 defineExpose({
+  tableRef,
   tableApi
 })
 </script>
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <table :class="ui.base({ class: [props.ui?.base] })">
+    <table ref="tableRef" :class="ui.base({ class: [props.ui?.base] })">
       <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ caption }}
@@ -322,7 +335,14 @@ defineExpose({
             v-for="header in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
-            :class="ui.th({ class: [props.ui?.th, header.column.columnDef.meta?.class?.th], pinned: !!header.column.getIsPinned() })"
+            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :class="ui.th({
+              class: [
+                props.ui?.th,
+                typeof header.column.columnDef.meta?.class?.th === 'function' ? header.column.columnDef.meta.class.th(header) : header.column.columnDef.meta?.class?.th
+              ],
+              pinned: !!header.column.getIsPinned()
+            })"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
@@ -340,14 +360,25 @@ defineExpose({
               :data-expanded="row.getIsExpanded()"
               :role="props.onSelect ? 'button' : undefined"
               :tabindex="props.onSelect ? 0 : undefined"
-              :class="ui.tr({ class: [props.ui?.tr] })"
+              :class="ui.tr({
+                class: [
+                  props.ui?.tr,
+                  typeof tableApi.options.meta?.class?.tr === 'function' ? tableApi.options.meta.class.tr(row) : tableApi.options.meta?.class?.tr
+                ]
+              })"
               @click="handleRowSelect(row, $event)"
             >
               <td
                 v-for="cell in row.getVisibleCells()"
                 :key="cell.id"
                 :data-pinned="cell.column.getIsPinned()"
-                :class="ui.td({ class: [props.ui?.td, cell.column.columnDef.meta?.class?.td], pinned: !!cell.column.getIsPinned() })"
+                :class="ui.td({
+                  class: [
+                    props.ui?.td,
+                    typeof cell.column.columnDef.meta?.class?.td === 'function' ? cell.column.columnDef.meta.class.td(cell) : cell.column.columnDef.meta?.class?.td
+                  ],
+                  pinned: !!cell.column.getIsPinned()
+                })"
               >
                 <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
                   <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />

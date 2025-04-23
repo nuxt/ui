@@ -14,7 +14,7 @@ describe('Avatar', () => {
     ['with icon', { props: { icon: 'i-lucide-image' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { src: 'https://github.com/benjamincanac.png', size } }]),
     ['with as', { props: { as: 'section' } }],
-    ['with class', { props: { class: 'bg-(--ui-bg)' } }],
+    ['with class', { props: { class: 'bg-default' } }],
     ['with ui', { props: { ui: { fallback: 'font-bold' } } }],
     // Slots
     ['with default slot', { slots: { default: '🇫🇷' } }]

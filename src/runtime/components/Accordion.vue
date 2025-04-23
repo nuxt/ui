@@ -98,7 +98,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
       :disabled="item.disabled"
       :class="ui.item({ class: props.ui?.item })"
     >
-      <AccordionHeader :class="ui.header({ class: props.ui?.header })">
+      <AccordionHeader as="div" :class="ui.header({ class: props.ui?.header })">
         <AccordionTrigger :class="ui.trigger({ class: props.ui?.trigger, disabled: item.disabled })">
           <slot name="leading" :item="item" :index="index" :open="open">
             <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
@@ -115,9 +115,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
       </AccordionHeader>
 
       <AccordionContent v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof AccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof AccordionSlots<T>])" :class="ui.content({ class: props.ui?.content })">
-        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
+        <slot :name="((item.slot || 'content') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
           <div :class="ui.body({ class: props.ui?.body })">
-            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="item" :index="index" :open="open">
+            <slot :name="((item.slot ? `${item.slot}-body`: 'body') as keyof AccordionSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :open="open">
               {{ item.content }}
             </slot>
           </div>

@@ -86,7 +86,7 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
@@ -162,6 +162,8 @@ export interface InputMenuSlots<
   'item-trailing': SlotProps<T>
   'tags-item-text': SlotProps<T>
   'tags-item-delete': SlotProps<T>
+  'content-top': (props?: {}) => any
+  'content-bottom': (props?: {}) => any
   'create-item-label'(props: { item: string }): any
 }
 </script>
@@ -177,6 +179,7 @@ import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
+import { usePortal } from '../composables/usePortal'
 import { compare, get, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -203,6 +206,7 @@ const appConfig = useAppConfig() as InputMenu['AppConfig']
 const { contains } = useFilter({ sensitivity: 'base' })
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover', 'ignoreFilter'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 
@@ -276,7 +280,7 @@ const createItem = computed(() => {
   const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value
 
   if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
-    return !filteredItems.value.find(item => compare(item, newItem, String(props.valueKey)))
+    return !filteredItems.value.find(item => compare(item, newItem, props.valueKey as string))
   }
 
   return !filteredItems.value.length
@@ -474,8 +478,10 @@ defineExpose({
       </ComboboxTrigger>
     </ComboboxAnchor>
 
-    <ComboboxPortal :disabled="!portal">
+    <ComboboxPortal v-bind="portalProps">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
+        <slot name="content-top" />
+
         <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">
           <slot name="empty" :search-term="searchTerm">
             {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
@@ -497,7 +503,7 @@ defineExpose({
                 v-else
                 :class="ui.item({ class: props.ui?.item })"
                 :disabled="isInputItem(item) && item.disabled"
-                :value="props.valueKey && isInputItem(item) ? get(item, String(props.valueKey)) : item"
+                :value="props.valueKey && isInputItem(item) ? get(item, props.valueKey as string) : item"
                 @select="onSelect($event, item)"
               >
                 <slot name="item" :item="(item as NestedItem<T>)" :index="index">
@@ -534,6 +540,8 @@ defineExpose({
 
           <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
         </ComboboxViewport>
+
+        <slot name="content-bottom" />
 
         <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </ComboboxContent>

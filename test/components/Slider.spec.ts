@@ -25,7 +25,7 @@ describe('Slider', () => {
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { ui: { track: 'bg-(--ui-bg-elevated)' } } }]
+    ['with ui', { props: { ui: { track: 'bg-elevated' } } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SliderProps }) => {
     const html = await ComponentRender(nameOrHtml, options, Slider)
     expect(html).toMatchSnapshot()

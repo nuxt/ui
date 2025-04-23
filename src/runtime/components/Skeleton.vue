@@ -29,7 +29,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.skeleton || 
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: props.class })">
+  <Primitive
+    :as="as"
+    aria-busy="true"
+    aria-label="loading"
+    aria-live="polite"
+    role="alert"
+    :class="ui({ class: props.class })"
+  >
     <slot />
   </Primitive>
 </template>

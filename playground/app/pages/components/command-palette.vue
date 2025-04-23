@@ -138,7 +138,7 @@ defineShortcuts({
         <UButton label="Open drawer" color="neutral" variant="outline" />
 
         <template #content>
-          <ReuseTemplate class="border-t border-(--ui-border) mt-4" />
+          <ReuseTemplate class="border-t border-default mt-4" />
         </template>
       </UDrawer>
 

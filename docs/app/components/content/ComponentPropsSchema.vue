@@ -43,7 +43,7 @@ const schemaProps = computed(() => {
       <ProseLi v-for="schemaProp in schemaProps" :key="schemaProp.name">
         <HighlightInlineType :type="`${schemaProp.name}${schemaProp.required === false ? '?' : ''}: ${schemaProp.type}`" />
 
-        <MDC v-if="schemaProp.description" :value="schemaProp.description" class="text-(--ui-text-muted) my-1" :cache-key="`${kebabCase(route.path)}-${prop.name}-${schemaProp.name}-description`" />
+        <MDC v-if="schemaProp.description" :value="schemaProp.description" class="text-muted my-1" :cache-key="`${kebabCase(route.path)}-${prop.name}-${schemaProp.name}-description`" />
       </ProseLi>
     </ProseUl>
   </ProseCollapsible>

@@ -41,7 +41,7 @@ const mobileLinks = computed(() => [
 <template>
   <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0" aria-label="Nuxt UI">
+      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-highlighted min-w-0 focus-visible:outline-primary shrink-0" aria-label="Nuxt UI">
         <Logo v-if="route.path === '/'" class="w-auto h-6 shrink-0" />
         <LogoPro v-else-if="route.path.startsWith('/pro')" class="w-auto h-6 shrink-0" />
         <template v-else>
@@ -63,7 +63,7 @@ const mobileLinks = computed(() => [
           trailing-icon="i-lucide-chevron-down"
           size="xs"
           class="-mb-[6px] font-semibold rounded-full truncate"
-          :class="[open && 'bg-(--ui-primary)/15 ']"
+          :class="[open && 'bg-primary/15 ']"
           :ui="{
             trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined].filter(Boolean).join(' ')
           }"
@@ -108,7 +108,7 @@ const mobileLinks = computed(() => [
           <span class="inline-flex items-center gap-0.5">
             {{ link.title }}
 
-            <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-(--ui-primary)">PRO</sup>
+            <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-primary">PRO</sup>
           </span>
         </template>
       </UContentNavigation>

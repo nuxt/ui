@@ -248,7 +248,7 @@ Make sure to add the `data-vaul-drawer-wrapper` directive to a parent element of
 ```vue [app.vue]
 <template>
   <UApp>
-    <div class="bg-(--ui-bg)" data-vaul-drawer-wrapper>
+    <div class="bg-default" data-vaul-drawer-wrapper>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -262,7 +262,7 @@ export default defineNuxtConfig({
   app: {
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
-      'class': 'bg-(--ui-bg)'
+      'class': 'bg-default'
     }
   }
 })

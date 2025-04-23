@@ -74,7 +74,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -98,6 +98,8 @@ export type DropdownMenuSlots<
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
+  'content-top': (props?: {}) => any
+  'content-bottom': (props?: {}) => any
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 </script>

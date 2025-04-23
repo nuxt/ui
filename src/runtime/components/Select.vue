@@ -70,7 +70,7 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
@@ -126,6 +126,8 @@ export interface SelectSlots<
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
+  'content-top': (props?: {}) => any
+  'content-bottom': (props?: {}) => any
 }
 </script>
 
@@ -138,6 +140,7 @@ import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { usePortal } from '../composables/usePortal'
 import { compare, get, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -157,6 +160,7 @@ const slots = defineSlots<SelectSlots<T, VK, M>>()
 const appConfig = useAppConfig() as Select['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
@@ -260,8 +264,10 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
       </span>
     </SelectTrigger>
 
-    <SelectPortal :disabled="!portal">
+    <SelectPortal v-bind="portalProps">
       <SelectContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
+        <slot name="content-top" />
+
         <SelectViewport :class="ui.viewport({ class: props.ui?.viewport })">
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
@@ -310,6 +316,8 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
             </template>
           </SelectGroup>
         </SelectViewport>
+
+        <slot name="content-bottom" />
 
         <SelectArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />
       </SelectContent>
