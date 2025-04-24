@@ -189,7 +189,7 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
         </button></div>
       <div class="w-full ms-2 text-sm">
         <p for="v-0:1" class="block font-medium text-default">Option 1</p>
-        <!--v-if-->
+        <p class="text-muted">Description slot</p>
       </div>
     </label><label class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
@@ -198,7 +198,7 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
         </button></div>
       <div class="w-full ms-2 text-sm">
         <p for="v-0:2" class="block font-medium text-default">Option 2</p>
-        <!--v-if-->
+        <p class="text-muted">Description slot</p>
       </div>
     </label><label class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
@@ -207,7 +207,7 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
         </button></div>
       <div class="w-full ms-2 text-sm">
         <p for="v-0:3" class="block font-medium text-default">Option 3</p>
-        <!--v-if-->
+        <p class="text-muted">Description slot</p>
       </div>
     </label>
   </fieldset>
@@ -507,7 +507,7 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+        <p for="v-0:1" class="block font-medium text-default">Label slot</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -516,7 +516,7 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+        <p for="v-0:2" class="block font-medium text-default">Label slot</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -525,7 +525,7 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+        <p for="v-0:3" class="block font-medium text-default">Label slot</p>
         <!--v-if-->
       </div>
     </label>
@@ -573,7 +573,7 @@ exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
 exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <legend class="mb-1 block font-medium text-default text-sm">Legend slot</legend><label class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
@@ -994,14 +994,14 @@ exports[`CheckboxGroup > renders with size xs correctly 1`] = `
 
 exports[`CheckboxGroup > renders with ui correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
-  <fieldset class="flex gap-x-2 flex-col gap-y-1">
+  <fieldset class="flex flex-col gap-y-1 gap-x-4">
     <!--v-if--><label class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+        <p for="v-0:1" class="block font-medium text-red">Option 1</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -1010,7 +1010,7 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+        <p for="v-0:2" class="block font-medium text-red">Option 2</p>
         <!--v-if-->
       </div>
     </label><label class="relative flex items-start flex-row">
@@ -1019,7 +1019,7 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
           <!---->
         </button></div>
       <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+        <p for="v-0:3" class="block font-medium text-red">Option 3</p>
         <!--v-if-->
       </div>
     </label>

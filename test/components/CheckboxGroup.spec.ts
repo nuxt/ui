@@ -38,11 +38,11 @@ describe('CheckboxGroup', () => {
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
-    ['with ui', { props: { ...props, ui: { wrapper: 'ms-4' } } }],
+    ['with ui', { props: { ...props, ui: { fieldset: 'gap-x-4', label: 'text-red' } } }],
     // Slots
-    ['with legend slot', { props, slots: { label: () => 'Legend slot' } }],
+    ['with legend slot', { props, slots: { legend: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
-    ['with description slot', { props, slots: { label: () => 'Description slot' } }]
+    ['with description slot', { props, slots: { description: () => 'Description slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxGroupProps, slots?: Partial<CheckboxGroupSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, CheckboxGroup)
     expect(html).toMatchSnapshot()

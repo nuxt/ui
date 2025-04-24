@@ -2,7 +2,8 @@ export default {
   slots: {
     root: 'relative',
     fieldset: 'flex gap-x-2',
-    legend: 'mb-1 block font-medium text-default'
+    legend: 'mb-1 block font-medium text-default',
+    item: ''
   },
   variants: {
     orientation: {

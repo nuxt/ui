@@ -50,14 +50,14 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
    */
   orientation?: CheckboxGroupRootProps['orientation']
   class?: any
-  ui?: CheckboxGroup['slots']
+  ui?: CheckboxGroup['slots'] & CheckboxProps['ui']
 }
 
 export type CheckboxGroupEmits = CheckboxGroupRootEmits & {
   change: [payload: Event]
 }
 
-type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string }, modelValue?: CheckboxGroupValue }) => any
+type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => any
 
 export interface CheckboxGroupSlots<T extends CheckboxGroupItem = CheckboxGroupItem> {
   legend(props?: {}): any
@@ -72,7 +72,7 @@ import { CheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'reka-u
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
-import { get } from '../utils'
+import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<CheckboxGroupProps<T>>(), {
@@ -88,6 +88,7 @@ const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'))
+const proxySlots = omit(slots, ['legend'])
 
 const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
@@ -169,7 +170,13 @@ function onUpdate(value: any) {
         :size="size"
         :name="name"
         :disabled="item.disabled || disabled"
-      />
+        :ui="props.ui ? omit(props.ui, ['root']) : undefined"
+        :class="ui.item({ class: props.ui?.item })"
+      >
+        <template v-for="(_, name) in proxySlots" #[name]>
+          <slot :name="(name as keyof CheckboxGroupSlots<T>)" :item="item" />
+        </template>
+      </UCheckbox>
     </fieldset>
   </CheckboxGroupRoot>
 </template>
