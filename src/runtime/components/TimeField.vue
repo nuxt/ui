@@ -139,10 +139,11 @@ defineExpose({
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <TimeFieldRoot
-      ref="fieldRef"
       :id="id"
+      ref="fieldRef"
       :name="name"
       :model-value="modelValue"
+      v-slot="{ segments }"
       :default-placeholder="defaultPlaceholder"
       :granularity="granularity"
       :hour-cycle="hourCycle"
@@ -153,7 +154,6 @@ defineExpose({
       :disabled="disabled"
       :readonly="readonly"
       :required="required"
-      v-slot="{ segments }"
       v-bind="{ ...ariaAttrs }"
       class="flex h-full w-full items-center"
       @update:model-value="updateValue"
