@@ -2,8 +2,9 @@
 import { upperFirst } from 'scule'
 import { Time } from '@internationalized/date'
 
-const sizes = ['xs', 'sm', 'md', 'lg', 'xl']
-const variants = ['outline', 'soft', 'subtle', 'ghost', 'none']
+// Define proper types for variants and sizes
+const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
+const variants = ['outline', 'soft', 'subtle', 'ghost', 'none'] as const
 
 // Default time values
 const defaultTime = ref(new Time(10, 30))
