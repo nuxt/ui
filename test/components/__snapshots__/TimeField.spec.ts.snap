@@ -1,0 +1,837 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TimeField > renders with 12 hour cycle correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="1" aria-valuemax="12" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with 24 hour cycle correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with ariaLabel correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with as correctly 1`] = `
+"<section class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</section>"
+`;
+
+exports[`TimeField > renders with class correctly 1`] = `
+"<div class="inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary absolute">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with default slot correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div>Default slot
+    <!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with disabled correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" aria-disabled="true" data-disabled="" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="false" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" aria-disabled="true" data-disabled="" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" aria-disabled="true" data-disabled="" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="false" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" aria-disabled="true" data-disabled="" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" aria-disabled="true" data-disabled="" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="false" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" aria-disabled="true" data-disabled="" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" aria-disabled="true" data-disabled="" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" disabled="" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with granularity hour correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with granularity minute correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with granularity second correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="second, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="second" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with hideTimeZone correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with icon correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot --><span class="flex items-center h-full px-2"><span class="iconify i-lucide:clock shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with id correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" id="id" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with leading and icon correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot --><span class="flex items-center h-full px-2"><span class="iconify i-lucide:clock shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with leading slot correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot --><span class="flex items-center h-full px-2">Leading slot</span><!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with leadingIcon correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot --><span class="flex items-center h-full px-2"><span class="iconify i-lucide:clock shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with loading correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot --><span class="flex items-center h-full px-2"><span class="iconify i-lucide:refresh-cw shrink-0 text-dimmed size-5 animate-spin" aria-hidden="true"></span></span><!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with loading trailing correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot --><span class="flex items-center h-full px-2"><span class="iconify i-lucide:refresh-cw shrink-0 text-dimmed size-5 animate-spin" aria-hidden="true"></span></span><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with loadingIcon correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot --><span class="flex items-center h-full px-2"><span class="iconify i-lucide:loader shrink-0 text-dimmed size-5 animate-spin" aria-hidden="true"></span></span><!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with locale correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with maxValue correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with minValue correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with name correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" name="name" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with neutral variant ghost correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-transparent text-highlighted bg-transparent hover:bg-elevated focus-within:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with neutral variant none correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-transparent text-highlighted bg-transparent">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with neutral variant outline correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-inverted">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with neutral variant soft correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-transparent text-highlighted bg-elevated/50 hover:bg-elevated focus-within:bg-elevated disabled:bg-elevated/50">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with neutral variant subtle correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-elevated data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-inverted">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with placeholder correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with primary variant ghost correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-transparent text-highlighted bg-transparent hover:bg-elevated focus-within:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with primary variant none correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-transparent text-highlighted bg-transparent">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with primary variant outline correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with primary variant soft correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-transparent text-highlighted bg-elevated/50 hover:bg-elevated focus-within:bg-elevated disabled:bg-elevated/50">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with primary variant subtle correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-elevated data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with readonly correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" data-readonly="" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="false" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" aria-readonly="true" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" aria-readonly="true" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="false" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" aria-readonly="true" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" aria-readonly="true" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="false" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" aria-readonly="true" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" aria-readonly="true" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with required correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" required="" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with size lg correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with size md correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with size sm correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-xs border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-xs">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-xs">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-xs">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-xs"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-xs">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-xs"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with size xl correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-base border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-base">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-base">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-base">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-base"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-base">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-2 text-base"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with size xs correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-xs border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1 text-xs">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1 text-xs">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1 text-xs">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1 text-xs"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1 text-xs">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1 text-xs"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with trailing and icon correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot --><span class="flex items-center h-full px-2"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with trailing slot correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot --><span class="flex items-center h-full px-2">Trailing slot</span><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with trailingIcon correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated rounded focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm"> </div>
+    </div><!-- Trailing Icon/Slot --><span class="flex items-center h-full px-2"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
+
+exports[`TimeField > renders with ui correctly 1`] = `
+"<div class="relative inline-flex items-center border rounded-md text-sm border-accented text-highlighted bg-default data-[invalid]:ring data-[invalid]:ring-inset data-[invalid]:ring-red-500 data-[focus-within]:ring-2 data-[focus-within]:ring-inset data-[focus-within]:ring-primary">
+  <div class="flex h-full w-full items-center" role="group" dir="ltr">
+    <!-- Leading Icon/Slot -->
+    <!--v-if-->
+    <!-- Time Field Segments -->
+    <div class="flex flex-1 items-center justify-center">
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="hour, " aria-valuemin="0" aria-valuemax="23" aria-valuenow="12" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="hour" class="mx-0.5 focus:outline-none focus:bg-elevated focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm rounded-full">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm rounded-full">:</div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="numeric" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="minute, " aria-valuemin="0" aria-valuemax="59" aria-valuenow="0" aria-valuetext="Empty" data-placeholder="" data-reka-time-field-segment="minute" class="mx-0.5 focus:outline-none focus:bg-elevated focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm rounded-full">––</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm rounded-full"> </div>
+      <div role="spinbutton" contenteditable="true" tabindex="0" spellcheck="false" inputmode="text" autocorrect="off" enterkeyhint="next" style="caret-color: transparent;" aria-label="AM/PM" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-valuetext="AM" data-reka-time-field-segment="dayPeriod" class="mx-0.5 focus:outline-none focus:bg-elevated focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm rounded-full">AM</div>
+      <div aria-hidden="true" data-segment="literal" contenteditable="false" data-reka-time-field-segment="literal" class="mx-0.5 focus:outline-none focus:bg-elevated focus:shadow-[0_0_0_1px] focus:shadow-black data-[placeholder]:text-dimmed transition-colors py-1.5 text-sm rounded-full"> </div>
+    </div><!-- Trailing Icon/Slot -->
+    <!--v-if--><input aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;" value="">
+  </div>
+</div>"
+`;
