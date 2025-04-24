@@ -63,6 +63,7 @@ const components = [
   'textarea',
   'toast',
   'tooltip',
+  'time-field',
   'tree'
 ]
 

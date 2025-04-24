@@ -61,6 +61,7 @@ const components = [
   'tabs',
   'table',
   'textarea',
+  'time-field',
   'toast',
   'tooltip',
   'tree'
