@@ -280,7 +280,7 @@ const pagination = ref({
 })
 
 function addElement() {
-  data.value.push({
+  data.value.unshift({
     id: currentID.value.toString(),
     date: new Date().toISOString(),
     status: 'paid',
@@ -367,8 +367,7 @@ onMounted(() => {
     <div class="flex items-center justify-between gap-3">
       <div class="text-sm text-muted">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
-        {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected
-        - {{ data.length }} row(s) total.
+        {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>
 
       <div class="flex items-center gap-1.5">
