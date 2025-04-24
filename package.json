@@ -161,11 +161,11 @@
     "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.6.0",
-    "eslint": "^9.25.0",
+    "eslint": "^9.25.1",
     "happy-dom": "^17.4.4",
     "nuxt": "^3.16.2",
     "release-it": "^19.0.1",
-    "vitest": "^3.1.1",
+    "vitest": "^3.1.2",
     "vitest-environment-nuxt": "^1.0.1",
     "vue-tsc": "^2.2.0"
   },
