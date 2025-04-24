@@ -16,6 +16,10 @@ Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Ta
 > [!NOTE]
 > You are on the `v3` development branch, check out the [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
 
+> [!TIP]
+> **Looking for more components ?**
+> Check out [Nuxt UI Pro](https://ui.nuxt.com/pro), a collection of premium Vue components, composables, and utilities built on top of Nuxt UI for faster and more powerful app development.
+
 ## Documentation
 
 Visit https://ui.nuxt.com to explore the documentation.
