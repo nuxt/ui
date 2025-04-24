@@ -5,9 +5,6 @@ import TimeField, { type TimeFieldProps, type TimeFieldSlots } from '../../src/r
 import ComponentRender from '../component-render'
 import theme from '#build/ui/time-field'
 
-import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
-
 describe('TimeField', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
