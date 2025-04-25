@@ -143,6 +143,8 @@ const data = ref<Payment[]>([{
   amount: 567
 }])
 
+const currentID = ref(4601)
+
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
@@ -277,8 +279,19 @@ const pagination = ref({
   pageSize: 10
 })
 
+function addElement() {
+  data.value.unshift({
+    id: currentID.value.toString(),
+    date: new Date().toISOString(),
+    status: 'paid',
+    email: 'new@example.com',
+    amount: Math.random() * 1000
+  })
+  currentID.value++
+}
+
 function randomize() {
-  data.value = [...data.value].sort(() => Math.random() - 0.5)
+  data.value = data.value.sort(() => Math.random() - 0.5)
 }
 
 function onSelect(row: TableRow<Payment>) {
@@ -303,6 +316,7 @@ onMounted(() => {
       />
 
       <UButton color="neutral" label="Randomize" @click="randomize" />
+      <UButton color="neutral" label="Add element" @click="addElement" />
 
       <UDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
@@ -339,10 +353,10 @@ onMounted(() => {
         getPaginationRowModel: getPaginationRowModel()
       }"
       :ui="{
-        tr: 'divide-x divide-(--ui-border)'
+        tr: 'divide-x divide-default'
       }"
       sticky
-      class="border border-(--ui-border-accented) rounded-(--ui-radius)"
+      class="border border-accented rounded-sm"
       @select="onSelect"
     >
       <template #expanded="{ row }">
@@ -351,7 +365,7 @@ onMounted(() => {
     </UTable>
 
     <div class="flex items-center justify-between gap-3">
-      <div class="text-sm text-(--ui-text-muted)">
+      <div class="text-sm text-muted">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>

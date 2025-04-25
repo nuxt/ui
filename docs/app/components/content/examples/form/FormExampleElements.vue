@@ -30,6 +30,9 @@ const schema = z.object({
   radioGroup: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
+  checkboxGroup: z.any().refine(values => !!values?.find((option: any) => option === 'option-2'), {
+    message: 'Include Option 2'
+  }),
   slider: z.number().max(20, { message: 'Must be less than 20' }),
   pin: z.string().regex(/^\d$/).array().length(5)
 })
@@ -47,7 +50,7 @@ const items = [
 ]
 
 const toast = useToast()
-async function onSubmit(event: FormSubmitEvent<any>) {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }
@@ -101,11 +104,14 @@ async function onSubmit(event: FormSubmitEvent<any>) {
       <UFormField label="Textarea" name="textarea">
         <UTextarea v-model="state.textarea" class="w-full" />
       </UFormField>
-
-      <UFormField name="radioGroup">
-        <URadioGroup v-model="state.radioGroup" legend="Radio group" :items="items" />
-      </UFormField>
-
+      <div class="flex gap-4">
+        <UFormField name="radioGroup">
+          <URadioGroup v-model="state.radioGroup" legend="Radio group" :items="items" />
+        </UFormField>
+        <UFormField name="checkboxGroup">
+          <UCheckboxGroup v-model="state.checkboxGroup" legend="Checkbox group" :items="items" />
+        </UFormField>
+      </div>
       <UFormField name="pin" label="Pin Input" :error-pattern="/(pin)\..*/">
         <UPinInput v-model="state.pin" />
       </UFormField>

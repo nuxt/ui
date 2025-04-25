@@ -29,19 +29,19 @@ defineOgImageComponent('Docs', {
       }"
     >
       <template #top>
-        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
       </template>
 
       <LazyStarsBg />
 
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
 
-      <div class="border-l border-t border-(--ui-border)">
-        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center divide-y divide-x divide-(--ui-border)">
+      <div class="border-l border-t border-default">
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center divide-y divide-x divide-default">
           <li
             v-for="item in page.items"
             :key="item.name"
-            class="group relative flex items-center justify-center flex-1 size-full p-2 last:border-r last:border-b border-(--ui-border) overflow-hidden"
+            class="group relative flex items-center justify-center flex-1 size-full p-2 last:border-r last:border-b border-default overflow-hidden"
           >
             <NuxtLink class="inset-0 absolute" :to="item.url" target="_blank">
               <span class="sr-only">Go to {{ item.name }}</span>

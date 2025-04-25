@@ -4,7 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex items-center align-center text-center',
     border: '',
-    container: 'font-medium text-(--ui-text) flex',
+    container: 'font-medium text-default flex',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     avatarSize: '2xs',
@@ -12,8 +12,8 @@ export default (options: Required<ModuleOptions>) => ({
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { border: `border-(--ui-${color})` }])),
-      neutral: { border: 'border-(--ui-border)' }
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { border: `border-${color}` }])),
+      neutral: { border: 'border-default' }
     },
     orientation: {
       horizontal: {

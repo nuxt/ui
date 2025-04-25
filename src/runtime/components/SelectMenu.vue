@@ -1,27 +1,12 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import { tv } from '../utils/tv'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type {
-  AcceptableValue,
-  ArrayOrNested,
-  GetItemKeys,
-  GetItemValue,
-  GetModelValue,
-  GetModelValueEmits,
-  NestedItem,
-  PartialString,
-  EmitsToProps
-} from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
-const appConfigSelectMenu = _appConfig as AppConfig & { ui: { selectMenu: Partial<typeof theme> } }
-
-const selectMenu = tv({ extend: tv(theme), ...(appConfigSelectMenu.ui?.selectMenu || {}) })
+type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>
 
 interface _SelectMenuItem {
   label?: string
@@ -42,9 +27,7 @@ interface _SelectMenuItem {
 }
 export type SelectMenuItem = _SelectMenuItem | AcceptableValue | boolean
 
-type SelectMenuVariants = VariantProps<typeof selectMenu>
-
-export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'highlightOnHover'>, UseComponentIconsProps {
+export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps {
   id?: string
   /** The placeholder text when the select is empty. */
   placeholder?: string
@@ -58,15 +41,15 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   /**
    * @defaultValue 'primary'
    */
-  color?: SelectMenuVariants['color']
+  color?: SelectMenu['variants']['color']
   /**
    * @defaultValue 'outline'
    */
-  variant?: SelectMenuVariants['variant']
+  variant?: SelectMenu['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: SelectMenuVariants['size']
+  size?: SelectMenu['variants']['size']
   required?: boolean
   /**
    * The icon displayed to open the menu.
@@ -95,7 +78,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * Render the menu in a portal.
    * @defaultValue true
    */
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
@@ -131,7 +114,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    */
   ignoreFilter?: boolean
   class?: any
-  ui?: PartialString<typeof selectMenu.slots>
+  ui?: SelectMenu['slots']
 }
 
 export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
@@ -154,14 +137,27 @@ export interface SelectMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof selectMenu> }): any
-  'default'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean }): any
-  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: ReturnType<typeof selectMenu> }): any
+  'leading'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+    ui: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string }
+  }): any
+  'default'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+  }): any
+  'trailing'(props: {
+    modelValue?: GetModelValue<A, VK, M>
+    open: boolean
+    ui: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string }
+  }): any
   'empty'(props: { searchTerm?: string }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
+  'content-top': (props?: {}) => any
+  'content-bottom': (props?: {}) => any
   'create-item-label'(props: { item: string }): any
 }
 </script>
@@ -176,7 +172,9 @@ import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
+import { usePortal } from '../composables/usePortal'
 import { compare, get, isArrayOfArray } from '../utils'
+import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import UChip from './Chip.vue'
@@ -188,7 +186,8 @@ const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   portal: true,
   searchInput: true,
   labelKey: 'label' as never,
-  resetSearchTermOnBlur: true
+  resetSearchTermOnBlur: true,
+  resetSearchTermOnSelect: true
 })
 const emits = defineEmits<SelectMenuEmits<T, VK, M>>()
 const slots = defineSlots<SelectMenuSlots<T, VK, M>>()
@@ -196,10 +195,11 @@ const slots = defineSlots<SelectMenuSlots<T, VK, M>>()
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const appConfig = useAppConfig()
+const appConfig = useAppConfig() as SelectMenu['AppConfig']
 const { contains } = useFilter({ sensitivity: 'base' })
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'highlightOnHover'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover'), emits)
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps)
@@ -212,7 +212,7 @@ const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 
-const ui = computed(() => selectMenu({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu || {}) })({
   color: color.value,
   variant: props.variant,
   size: selectSize?.value,
@@ -277,7 +277,7 @@ const createItem = computed(() => {
   const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value
 
   if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
-    return !filteredItems.value.find(item => compare(item, newItem, String(props.valueKey)))
+    return !filteredItems.value.find(item => compare(item, newItem, props.valueKey as string))
   }
 
   return !filteredItems.value.length
@@ -293,6 +293,10 @@ function onUpdate(value: any) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
+
+  if (props.resetSearchTermOnSelect) {
+    searchTerm.value = ''
+  }
 }
 
 function onUpdateOpen(value: boolean) {
@@ -319,6 +323,19 @@ function onUpdateOpen(value: boolean) {
     emitFormFocus()
     clearTimeout(timeoutId)
   }
+}
+
+function onSelect(e: Event, item: SelectMenuItem) {
+  if (!isSelectItem(item)) {
+    return
+  }
+
+  if (item.disabled) {
+    e.preventDefault()
+    return
+  }
+
+  item.onSelect?.(e)
 }
 
 function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
@@ -383,9 +400,11 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
       </ComboboxTrigger>
     </ComboboxAnchor>
 
-    <ComboboxPortal :disabled="!portal">
+    <ComboboxPortal v-bind="portalProps">
       <ComboboxContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <FocusScope trapped :class="ui.focusScope({ class: props.ui?.focusScope })">
+          <slot name="content-top" />
+
           <ComboboxInput v-if="!!searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
             <UInput autofocus autocomplete="off" v-bind="searchInputProps" :class="ui.input({ class: props.ui?.input })" />
           </ComboboxInput>
@@ -412,7 +431,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
                   :class="ui.item({ class: props.ui?.item })"
                   :disabled="isSelectItem(item) && item.disabled"
                   :value="props.valueKey && isSelectItem(item) ? get(item, props.valueKey as string) : item"
-                  @select="isSelectItem(item) && item.onSelect?.($event)"
+                  @select="onSelect($event, item)"
                 >
                   <slot name="item" :item="(item as NestedItem<T>)" :index="index">
                     <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">
@@ -448,6 +467,8 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
 
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
           </ComboboxViewport>
+
+          <slot name="content-bottom" />
         </FocusScope>
 
         <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" :class="ui.arrow({ class: props.ui?.arrow })" />

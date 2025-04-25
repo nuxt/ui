@@ -50,6 +50,10 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    * Override options for `unplugin-vue-components`
    */
   components?: Partial<ComponentsOptions>
+  /**
+   * Enables compatibility layer for InertiaJS
+   */
+  inertia?: boolean
 }
 
 export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.meta.url)))
@@ -63,7 +67,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
   const appConfig = defu({ ui: options.ui, colorMode: options.colorMode }, { ui: getDefaultUiConfig(options.theme.colors) })
 
   return [
-    NuxtEnvironmentPlugin(),
+    NuxtEnvironmentPlugin(options),
     ComponentImportPlugin(options, meta),
     AutoImportPlugin(options, meta),
     tailwind(),

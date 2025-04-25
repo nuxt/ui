@@ -15,7 +15,8 @@ import {
   UInputNumber,
   USwitch,
   USlider,
-  UPinInput
+  UPinInput,
+  UCheckboxGroup
 } from '#components'
 
 export async function renderForm(options: {
@@ -51,7 +52,8 @@ export async function renderForm(options: {
           UInputNumber,
           USwitch,
           USlider,
-          UPinInput
+          UPinInput,
+          UCheckboxGroup
         },
         template: options.slotTemplate
       }

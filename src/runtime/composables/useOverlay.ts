@@ -12,17 +12,19 @@ export type OverlayOptions<OverlayAttrs = Record<string, any>> = {
   destroyOnClose?: boolean
 }
 
-type ManagedOverlayOptionsPrivate<T extends Component> = {
+interface ManagedOverlayOptionsPrivate<T extends Component> {
   component?: T
   id: symbol
   isMounted: boolean
-  modelValue: boolean
-  resolvePromise?: (value: unknown) => void
+  isOpen: boolean
+  resolvePromise?: (value: any) => void
 }
 export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
 
-interface OverlayInstance<T> {
-  open: (props?: ComponentProps<T>) => Promise<CloseEventArgType<ComponentEmit<T>>>
+interface OverlayInstance<T extends Component> extends Omit<ManagedOverlayOptionsPrivate<T>, 'component'> {
+  id: symbol
+  result: Promise<CloseEventArgType<ComponentEmit<T>>>
+  open: (props?: ComponentProps<T>) => Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise'>
   close: (value?: any) => void
   patch: (props: Partial<ComponentProps<T>>) => void
 }
@@ -35,7 +37,7 @@ function _useOverlay() {
 
     const options = reactive<Overlay>({
       id: Symbol(import.meta.dev ? 'useOverlay' : ''),
-      modelValue: !!defaultOpen,
+      isOpen: !!defaultOpen,
       component: markRaw(component!),
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
@@ -45,13 +47,15 @@ function _useOverlay() {
     overlays.push(options)
 
     return {
+      ...options,
+      result: new Promise(() => {}),
       open: <T extends Component>(props?: ComponentProps<T>) => open(options.id, props),
       close: value => close(options.id, value),
       patch: <T extends Component>(props: Partial<ComponentProps<T>>) => patch(options.id, props)
     }
   }
 
-  const open = <T extends Component>(id: symbol, props?: ComponentProps<T>): Promise<any> => {
+  const open = <T extends Component>(id: symbol, props?: ComponentProps<T>) => {
     const overlay = getOverlay(id)
 
     // If props are provided, update the overlay's props
@@ -59,19 +63,23 @@ function _useOverlay() {
       patch(overlay.id, props)
     }
 
-    overlay.modelValue = true
+    overlay.isOpen = true
     overlay.isMounted = true
 
-    // Return a new promise that will be resolved when close is called
-    return new Promise((resolve) => {
-      overlay.resolvePromise = resolve
-    })
+    return {
+      id,
+      isMounted: overlay.isMounted,
+      isOpen: overlay.isOpen,
+      result: new Promise<any>((resolve) => {
+        overlay.resolvePromise = resolve
+      })
+    }
   }
 
   const close = (id: symbol, value?: any): void => {
     const overlay = getOverlay(id)
 
-    overlay.modelValue = false
+    overlay.isOpen = false
 
     // Resolve the promise if it exists
     if (overlay.resolvePromise) {
