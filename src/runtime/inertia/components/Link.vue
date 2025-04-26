@@ -110,72 +110,53 @@ const linkClass = computed(() => {
 })
 
 const page = usePage()
-const url = computed(() => props.to ?? props.href ?? '#')
+const url = computed(() => props.to ?? props.href ?? '')
 
 const isActive = computed(() => props.active || (props.exact ? url.value === props.href : page?.url.startsWith(url.value)))
 </script>
 
 <template>
-  <template v-if="!isExternal">
-    <InertiaLink v-bind="routerLinkProps" :href="url" custom>
-      <template v-if="custom">
-        <slot
-          v-bind="{
-            ...$attrs,
-            as,
-            type,
-            disabled,
-            href: url,
-            active: isActive
-          }"
-        />
-      </template>
-      <ULinkBase
-        v-else
-        v-bind="{
-          ...$attrs,
-          as,
-          type,
-          disabled,
-          href: url,
-          active: isActive
-        }"
-        :class="linkClass"
-      >
-        <slot :active="isActive" />
-      </ULinkBase>
-    </InertiaLink>
-  </template>
-
-  <template v-else>
-    <template v-if="custom">
-      <slot
-        v-bind="{
-          ...$attrs,
-          as,
-          type,
-          disabled,
-          href: to,
-          target: isExternal ? '_blank' : undefined,
-          active: isActive
-        }"
-      />
-    </template>
-    <ULinkBase
-      v-else
+  <InertiaLink v-if="!isExternal && custom && !!url" v-bind="routerLinkProps" :href="url">
+    <slot
       v-bind="{
         ...$attrs,
         as,
         type,
         disabled,
         href: url,
+        active: isActive
+      }"
+    />
+  </InertiaLink>
+
+  <template v-else-if="custom">
+    <slot
+      v-bind="{
+        ...$attrs,
+        as,
+        type,
+        disabled,
+        href: to,
         target: isExternal ? '_blank' : undefined,
         active: isActive
       }"
-      :is-external="isExternal"
-      :class="linkClass"
-    >
-      <slot :active="isActive" />
-    </ULinkBase>
+    />
   </template>
+
+  <ULinkBase
+    v-else
+    v-bind="{
+      ...$attrs,
+      as,
+      type,
+      disabled,
+      href: url,
+      target: isExternal ? '_blank' : undefined,
+      active: isActive
+    }"
+    :is-external="isExternal"
+    :class="linkClass"
+  >
+    <slot :active="isActive" />
+  </ULinkBase>
 </template>
