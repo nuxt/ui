@@ -185,7 +185,7 @@ export {}
     getContents: ({ app }) => {
       const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !/nuxt(?:-nightly)?\/dist\/app/.test(c.filePath))
 
-      return image ? genExport(image.filePath, { name: image.export, as: 'default' }) : 'export default "img"'
+      return image ? genExport(image.filePath, [{ name: image.export, as: 'default' }]) : 'export default "img"'
     }
   })
 
