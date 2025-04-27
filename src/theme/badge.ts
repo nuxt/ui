@@ -53,6 +53,9 @@ export default (options: Required<ModuleOptions>) => ({
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-6'
       }
+    },
+    square: {
+      true: ''
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
@@ -87,6 +90,26 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'neutral',
     variant: 'subtle',
     class: 'ring ring-inset ring-accented text-default bg-elevated'
+  }, {
+    size: 'xs',
+    square: true,
+    class: 'p-1'
+  }, {
+    size: 'sm',
+    square: true,
+    class: 'p-1.5'
+  }, {
+    size: 'md',
+    square: true,
+    class: 'p-2'
+  }, {
+    size: 'lg',
+    square: true,
+    class: 'p-2'
+  }, {
+    size: 'xl',
+    square: true,
+    class: 'p-2.5'
   }],
   defaultVariants: {
     color: 'primary',

@@ -26,6 +26,8 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
    * @defaultValue 'md'
    */
   size?: Badge['variants']['size']
+  /** Render the badge with equal padding on all sides. */
+  square?: boolean
   class?: any
   ui?: Badge['slots']
 }
@@ -50,7 +52,7 @@ import UAvatar from './Avatar.vue'
 const props = withDefaults(defineProps<BadgeProps>(), {
   as: 'span'
 })
-defineSlots<BadgeSlots>()
+const slots = defineSlots<BadgeSlots>()
 
 const appConfig = useAppConfig() as Badge['AppConfig']
 const { orientation, size: buttonGroupSize } = useButtonGroup<BadgeProps>(props)
@@ -60,6 +62,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {})
   color: props.color,
   variant: props.variant,
   size: buttonGroupSize.value || props.size,
+  square: props.square || (!slots.default && !props.label),
   buttonGroup: orientation.value
 }))
 </script>

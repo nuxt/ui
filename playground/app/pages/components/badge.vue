@@ -42,6 +42,23 @@ const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme
     <div class="flex items-center gap-2 ms-[-86px]">
       <UBadge v-for="size in sizes" :key="size" icon="i-lucide-rocket" label="Badge" :size="size" />
     </div>
+    <div class="flex items-center gap-2">
+      <UBadge
+        v-for="size in sizes"
+        :key="size"
+        icon="i-lucide-rocket"
+        :size="size"
+      />
+    </div>
+    <div class="flex items-center gap-2 ms-[-86px]">
+      <UBadge
+        v-for="size in sizes"
+        :key="size"
+        icon="i-lucide-rocket"
+        label="Badge"
+        :size="size"
+      />
+    </div>
     <div class="flex items-center gap-2 ms-[-86px]">
       <UBadge v-for="size in sizes" :key="size" :avatar="{ src: 'https://github.com/benjamincanac.png' }" label="Badge" :size="size" />
     </div>
