@@ -6,6 +6,7 @@ import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 import colors from 'tailwindcss/colors'
+import { genExport } from 'knitwork'
 
 export function buildTemplates(options: ModuleOptions) {
   return Object.entries(theme).reduce((acc, [key, component]) => {
@@ -182,9 +183,9 @@ export {}
     filename: 'ui-image-component.ts',
     write: true,
     getContents: ({ app }) => {
-      const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !c.filePath.includes('nuxt/dist/app'))
+      const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !/nuxt(?:-nightly)?\/dist\/app/.test(c.filePath))
 
-      return image ? `export { default } from "${image.filePath}"` : 'export default "img"'
+      return image ? genExport(image.filePath, image.export) : 'export default "img"'
     }
   })
 
