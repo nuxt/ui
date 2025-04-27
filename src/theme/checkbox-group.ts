@@ -1,4 +1,6 @@
-export default {
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
     fieldset: 'flex gap-x-2',
@@ -12,6 +14,11 @@ export default {
       },
       vertical: {
         fieldset: 'flex-col'
+      }
+    },
+    variant: {
+      table: {
+        item: 'border border-muted'
       }
     },
     size: {
@@ -42,7 +49,51 @@ export default {
       }
     }
   },
+  compoundVariants: [
+    { size: 'xs', variant: 'table', class: { item: 'p-2.5' } },
+    { size: 'sm', variant: 'table', class: { item: 'p-3' } },
+    { size: 'md', variant: 'table', class: { item: 'p-3.5' } },
+    { size: 'lg', variant: 'table', class: { item: 'p-4' } },
+    { size: 'xl', variant: 'table', class: { item: 'p-4.5' } },
+    {
+      orientation: 'horizontal',
+      variant: 'table',
+      class: {
+        item: 'first-of-type:rounded-l-lg last-of-type:rounded-r-lg',
+        fieldset: 'gap-0 -space-x-px'
+      }
+    },
+    {
+      orientation: 'vertical',
+      variant: 'table',
+      class: {
+        item: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg',
+        fieldset: 'gap-0 -space-y-px'
+      }
+    },
+    ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      variant: 'table',
+      class: {
+        item: `has-data-[state=checked]:bg-${color}/10 has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:z-[1]`
+      }
+    })),
+    {
+      color: 'neutral',
+      variant: 'table',
+      class: {
+        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]'
+      }
+    },
+    {
+      variant: 'table',
+      disabled: true,
+      class: {
+        item: 'cursor-not-allowed opacity-75'
+      }
+    }
+  ],
   defaultVariants: {
     size: 'md'
   }
-}
+})

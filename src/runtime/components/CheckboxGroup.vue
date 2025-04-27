@@ -45,6 +45,10 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
    */
   size?: CheckboxGroup['variants']['size']
   /**
+   * @defaultValue 'list'
+   */
+  variant?: CheckboxGroup['variants']['variant']
+  /**
    * The orientation the checkbox buttons are laid out.
    * @defaultValue 'vertical'
    */
@@ -96,7 +100,8 @@ const id = _id.value ?? useId()
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({
   size: size.value,
   required: props.required,
-  orientation: props.orientation
+  orientation: props.orientation,
+  variant: props.variant
 }))
 
 function normalizeItem(item: any) {
