@@ -21,12 +21,16 @@ interface ManagedOverlayOptionsPrivate<T extends Component> {
 }
 export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
 
-interface OverlayInstance<T extends Component> extends Omit<ManagedOverlayOptionsPrivate<T>, 'component'> {
+type OverlayInstance<T extends Component> = Omit<ManagedOverlayOptionsPrivate<T>, 'component'> & {
   id: symbol
-  result: Promise<CloseEventArgType<ComponentEmit<T>>>
-  open: (props?: ComponentProps<T>) => Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise'>
+  open: (props?: ComponentProps<T>) => OpenedOverlay<T>
   close: (value?: any) => void
   patch: (props: Partial<ComponentProps<T>>) => void
+
+}
+
+type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise'> & {
+  result: Promise<CloseEventArgType<ComponentEmit<T>>>
 }
 
 function _useOverlay() {
@@ -48,14 +52,13 @@ function _useOverlay() {
 
     return {
       ...options,
-      result: new Promise(() => {}),
       open: <T extends Component>(props?: ComponentProps<T>) => open(options.id, props),
       close: value => close(options.id, value),
       patch: <T extends Component>(props: Partial<ComponentProps<T>>) => patch(options.id, props)
     }
   }
 
-  const open = <T extends Component>(id: symbol, props?: ComponentProps<T>) => {
+  const open = <T extends Component>(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T> => {
     const overlay = getOverlay(id)
 
     // If props are provided, update the overlay's props
@@ -70,9 +73,7 @@ function _useOverlay() {
       id,
       isMounted: overlay.isMounted,
       isOpen: overlay.isOpen,
-      result: new Promise<any>((resolve) => {
-        overlay.resolvePromise = resolve
-      })
+      result: new Promise<any>(resolve => overlay.resolvePromise = resolve)
     }
   }
 
