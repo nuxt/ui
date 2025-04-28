@@ -9,12 +9,12 @@ Use the auto-imported `useOverlay` composable to programmatically control [Modal
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay();
+const overlay = useOverlay()
 
-const modal = overlay.create(MyModal);
+const modal = overlay.create(MyModal)
 
 async function openModal() {
-  modal.open();
+  modal.open()
 }
 </script>
 ```
@@ -84,14 +84,14 @@ Opens the overlay
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay();
+const overlay = useOverlay()
 
 const modal = overlay.create(MyModalContent);
 
 function openModal() {
   modal.open({
-    title: "Welcome",
-  });
+    title: 'Welcome',
+  })
 }
 </script>
 ```
@@ -112,10 +112,10 @@ Updates the props of the overlay.
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay();
+const overlay = useOverlay()
 
 const modal = overlay.create(MyModal, {
-  title: "Welcome",
+  title: 'Welcome',
 });
 
 function openModal() {
@@ -123,7 +123,7 @@ function openModal() {
 }
 
 function updateModalTitle() {
-  modal.patch({ title: "Updated Title" });
+  modal.patch({ title: 'Updated Title' });
 }
 </script>
 ```
