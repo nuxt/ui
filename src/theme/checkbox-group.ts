@@ -17,6 +17,8 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     variant: {
+      list: {},
+      card: {},
       table: {
         item: 'border border-muted'
       }
