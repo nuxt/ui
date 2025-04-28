@@ -19,6 +19,7 @@ defineShortcuts({
 </script>
 ```
 
+- Shortcuts are automatically adjusted for non-macOS platforms, converting `meta` to `ctrl`.
 - The composable uses VueUse's [`useEventListener`](https://vueuse.org/core/useEventListener/) to handle keydown events.
 - For a complete list of available shortcut keys, refer to the [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values) API documentation. Note that the key should be written in lowercase.
 
@@ -46,7 +47,7 @@ Shortcuts are defined using the following format:
 
 #### Modifiers
 
-- `meta`: Represents `⌘ Command` on macOS and `⊞ Windows` on Windows
+- `meta`: Represents `⌘ Command` on macOS and `Ctrl` on other platforms
 - `ctrl`: Represents `Ctrl` on all platforms
 - `shift`: Used for alphabetic keys when Shift is required
 
