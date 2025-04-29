@@ -116,10 +116,10 @@ const overlay = useOverlay()
 
 const modal = overlay.create(MyModal, {
   title: 'Welcome'
-});
+})
 
 function openModal() {
-  modal.open();
+  modal.open()
 }
 
 function updateModalTitle() {
@@ -137,15 +137,15 @@ Here's a complete example of how to use the `useOverlay` composable:
 const overlay = useOverlay()
 
 // Create with default props
-const modalA = overlay.create(ModalA, { title: "Welcome" })
-const modalB = overlay.create(modalB)
+const modalA = overlay.create(ModalA, { title: 'Welcome' })
+const modalB = overlay.create(ModalB)
 
 const slideoverA = overlay.create(SlideoverA)
 
 const openModalA = () => {
   // Open  Modal A, but override the title prop
   modalA.open({ title: 'Hello' })
-};
+}
 
 const openModalB = async () => {
   // Open modalB, and wait for its result
@@ -155,7 +155,7 @@ const openModalB = async () => {
 
   // Pass the result from modalB to the slideover, and open it.
   slideoverA.open({ input })
-};
+}
 </script>
 
 <template>
