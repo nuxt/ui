@@ -120,6 +120,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --ring-color-accented: var(--ui-border-accented);
   --ring-color-inverted: var(--ui-border-inverted);
   --ring-color-bg: var(--ui-bg);
+  --ring-offset-color-default: var(--ui-border);
+  --ring-offset-color-muted: var(--ui-border-muted);
+  --ring-offset-color-accented: var(--ui-border-accented);
+  --ring-offset-color-inverted: var(--ui-border-inverted);
+  --ring-offset-color-bg: var(--ui-bg);
   --divide-color-default: var(--ui-border);
   --divide-color-muted: var(--ui-border-muted);
   --divide-color-accented: var(--ui-border-accented);
