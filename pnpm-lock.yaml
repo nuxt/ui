@@ -343,6 +343,13 @@ importers:
       zod:
         specifier: ^3.24.3
         version: 3.24.3
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+      vue-tsc:
+        specifier: 2.2.0
+        version: 2.2.0(typescript@5.8.3)
 
   playground-vue:
     dependencies:
