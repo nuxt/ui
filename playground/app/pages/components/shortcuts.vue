@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { ShortcutsConfig } from '@nuxt/ui/composables/defineShortcuts.js'
-
 const logs = ref<string[]>([])
 const shortcutsState = ref({
   'a': {
