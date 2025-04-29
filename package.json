@@ -167,7 +167,7 @@
     "release-it": "^19.0.1",
     "vitest": "^3.1.2",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^2.2.0"
+    "vue-tsc": "^2.2.10"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",
@@ -207,8 +207,7 @@
     "chokidar": "3.6.0",
     "debug": "4.3.7",
     "rollup": "4.34.9",
-    "unplugin": "^2.3.2",
-    "vue-tsc": "2.2.0"
+    "unplugin": "^2.3.2"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
