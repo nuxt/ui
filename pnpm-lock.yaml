@@ -347,6 +347,9 @@ importers:
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
+      unimport:
+        specifier: 4.1.1
+        version: 4.1.1
       vue-tsc:
         specifier: 2.2.0
         version: 2.2.0(typescript@5.8.3)
