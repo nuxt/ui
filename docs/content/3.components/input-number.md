@@ -3,7 +3,7 @@ title: InputNumber
 description: Input numerical values with a customizable range.
 category: form
 links:
-  - label: Number Field
+  - label: NumberField
     icon: i-custom-reka-ui
     to: https://www.reka-ui.com/docs/components/number-field
   - label: GitHub
