@@ -207,6 +207,7 @@
     "chokidar": "3.6.0",
     "debug": "4.3.7",
     "rollup": "4.34.9",
+    "unimport": "4.1.1",
     "unplugin": "^2.3.2",
     "vue-tsc": "2.2.0"
   },
