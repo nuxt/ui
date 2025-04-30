@@ -25,10 +25,10 @@ templates:
     features:
       - title: Sections for Projects, Blog, Speaking & About
         icon: i-lucide-layout-list
-      - title: Markdown support for content creation
+      - title: Easily editable content via Markdown & YAML
         icon: i-simple-icons-markdown
-      - title: Customizable theme and components
-        icon: i-lucide-palette
+      - title: Fully responsive design
+        icon: i-lucide-smartphone
     links:
       - label: Preview
         to: https://portfolio-template.nuxt.dev
