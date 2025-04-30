@@ -21,7 +21,7 @@
     "ai": "^4.3.10",
     "capture-website": "^4.2.0",
     "joi": "^17.13.3",
-    "motion-v": "^0.13.1",
+    "motion-v": "^1.0.0",
     "nuxt": "^3.16.2",
     "nuxt-component-meta": "^0.11.0",
     "nuxt-llms": "^0.1.2",
