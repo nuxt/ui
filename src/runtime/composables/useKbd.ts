@@ -14,6 +14,7 @@ export const kbdKeysMap = {
   win: '⊞',
   command: '⌘',
   shift: '⇧',
+  control: '⌃',
   option: '⌥',
   enter: '↵',
   delete: '⌦',
@@ -44,9 +45,9 @@ const _useKbd = () => {
   })
 
   onMounted(() => {
-    kbdKeysSpecificMap.meta = macOS.value ? kbdKeysMap.command : kbdKeysMap.win
-    kbdKeysSpecificMap.alt = macOS.value ? kbdKeysMap.option : 'alt'
-    kbdKeysSpecificMap.ctrl = macOS.value ? '⌃' : 'ctrl'
+    kbdKeysSpecificMap.meta = macOS.value ? kbdKeysMap.command : 'Ctrl'
+    kbdKeysSpecificMap.ctrl = macOS.value ? kbdKeysMap.control : 'Ctrl'
+    kbdKeysSpecificMap.alt = macOS.value ? kbdKeysMap.option : 'Alt'
   })
 
   function getKbdKey(value?: KbdKey | string) {

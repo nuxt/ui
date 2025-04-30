@@ -11,7 +11,7 @@ export type RadioGroupItem = {
   label?: string
   description?: string
   disabled?: boolean
-  value?: string
+  value?: RadioGroupValue
   [key: string]: any
 } | RadioGroupValue
 

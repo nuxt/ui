@@ -48,7 +48,7 @@ const icons = {
     </UPageHero>
 
     <UPageSection :ui="{ container: '!pt-0' }">
-      <UPageGrid class="xl:grid-cols-4">
+      <UPageGrid class="xl:grid-cols-5">
         <UPageCard
           v-for="(user, index) in module?.team"
           :key="index"

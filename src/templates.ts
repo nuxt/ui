@@ -6,6 +6,7 @@ import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 import colors from 'tailwindcss/colors'
+import { genExport } from 'knitwork'
 
 export function buildTemplates(options: ModuleOptions) {
   return Object.entries(theme).reduce((acc, [key, component]) => {
@@ -76,7 +77,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     write: true,
     getContents: () => `@source "./ui";
 
-@theme default {
+@theme default inline {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
@@ -88,10 +89,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --color-old-neutral-800: ${colors.neutral[800]};
   --color-old-neutral-900: ${colors.neutral[900]};
   --color-old-neutral-950: ${colors.neutral[950]};
-  ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [
-    color !== 'neutral' && `--color-${color}: var(--ui-${color});`,
-    ...[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`)
-  ].filter(Boolean).join('\n\t')).join('\n\t')}
+  ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
+  ${options.theme?.colors?.map(color => `--color-${color}: var(--ui-${color});`).join('\n\t')}
   --radius-xs: calc(var(--ui-radius) * 0.5);
   --radius-sm: var(--ui-radius);
   --radius-md: calc(var(--ui-radius) * 1.5);
@@ -121,6 +120,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --ring-color-accented: var(--ui-border-accented);
   --ring-color-inverted: var(--ui-border-inverted);
   --ring-color-bg: var(--ui-bg);
+  --ring-offset-color-default: var(--ui-border);
+  --ring-offset-color-muted: var(--ui-border-muted);
+  --ring-offset-color-accented: var(--ui-border-accented);
+  --ring-offset-color-inverted: var(--ui-border-inverted);
+  --ring-offset-color-bg: var(--ui-bg);
   --divide-color-default: var(--ui-border);
   --divide-color-muted: var(--ui-border-muted);
   --divide-color-accented: var(--ui-border-accented);
@@ -182,9 +186,9 @@ export {}
     filename: 'ui-image-component.ts',
     write: true,
     getContents: ({ app }) => {
-      const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !c.filePath.includes('nuxt/dist/app'))
+      const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !/nuxt(?:-nightly)?\/dist\/app/.test(c.filePath))
 
-      return image ? `export { default } from "${image.filePath}"` : 'export default "img"'
+      return image ? genExport(image.filePath, [{ name: image.export, as: 'default' }]) : 'export default "img"'
     }
   })
 
