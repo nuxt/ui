@@ -122,6 +122,12 @@ function _useOverlay() {
     return overlay
   }
 
+  const isOpen = (id: symbol): boolean => {
+    const overlay = getOverlay(id)
+
+    return overlay.isOpen
+  }
+
   return {
     overlays,
     open,
@@ -129,7 +135,8 @@ function _useOverlay() {
     closeAll,
     create,
     patch,
-    unMount
+    unMount,
+    isOpen
   }
 }
 
