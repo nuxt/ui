@@ -69,6 +69,13 @@ Removes the overlay from the DOM using its `id`
 - Parameters:
   - `id`: The identifier of the overlay
 
+### `isOpen(id: symbol): boolean`
+
+Checks if an overlay its open using its `id`
+
+- Parameters:
+  - `id`: The identifier of the overlay
+
 ### `overlays: Overlay[]`
 
 In-memory list of overlays that were created
