@@ -111,6 +111,7 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    * @defaultValue false
    */
   createItem?: boolean | 'always' | { position?: 'top' | 'bottom', when?: 'empty' | 'always' }
+  createItemPreText?: string
   /**
    * Fields to filter items by.
    * @defaultValue [labelKey]
@@ -393,7 +394,7 @@ defineExpose({
       >
         <span :class="ui.itemLabel({ class: props.ui?.itemLabel })">
           <slot name="create-item-label" :item="searchTerm">
-            {{ t('inputMenu.create', { label: searchTerm }) }}
+            {{ createItemPreText ? `${createItemPreText} "${searchTerm}"` : t('inputMenu.create', { label: searchTerm }) }}
           </slot>
         </span>
       </ComboboxItem>
