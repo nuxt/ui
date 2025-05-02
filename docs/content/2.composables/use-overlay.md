@@ -62,7 +62,7 @@ Update an overlay using its `id`
   - `id`: The identifier of the overlay
   - `props`: An object of props to update on the rendered component.
 
-### `unmount(id: symbol): void`
+### `unMount(id: symbol): void`
 
 Removes the overlay from the DOM using its `id`
 
