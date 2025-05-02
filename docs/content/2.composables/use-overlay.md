@@ -9,12 +9,12 @@ Use the auto-imported `useOverlay` composable to programmatically control [Modal
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay()
+const overlay = useOverlay();
 
-const modal = overlay.create(MyModal)
+const modal = overlay.create(MyModal);
 
 async function openModal() {
-  modal.open()
+  modal.open();
 }
 </script>
 ```
@@ -62,7 +62,7 @@ Update an overlay using its `id`
   - `id`: The identifier of the overlay
   - `props`: An object of props to update on the rendered component.
 
-### `unMount(id: symbol): void`
+### `unmount(id: symbol): void`
 
 Removes the overlay from the DOM using its `id`
 
@@ -91,14 +91,14 @@ Opens the overlay
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay()
+const overlay = useOverlay();
 
-const modal = overlay.create(MyModalContent)
+const modal = overlay.create(MyModalContent);
 
 function openModal() {
   modal.open({
-    title: 'Welcome'
-  })
+    title: "Welcome",
+  });
 }
 </script>
 ```
@@ -119,18 +119,18 @@ Updates the props of the overlay.
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay()
+const overlay = useOverlay();
 
 const modal = overlay.create(MyModal, {
-  title: 'Welcome'
-})
+  title: "Welcome",
+});
 
 function openModal() {
-  modal.open()
+  modal.open();
 }
 
 function updateModalTitle() {
-  modal.patch({ title: 'Updated Title' })
+  modal.patch({ title: "Updated Title" });
 }
 </script>
 ```
@@ -141,28 +141,28 @@ Here's a complete example of how to use the `useOverlay` composable:
 
 ```vue
 <script setup lang="ts">
-const overlay = useOverlay()
+const overlay = useOverlay();
 
 // Create with default props
-const modalA = overlay.create(ModalA, { title: 'Welcome' })
-const modalB = overlay.create(ModalB)
+const modalA = overlay.create(ModalA, { title: "Welcome" });
+const modalB = overlay.create(ModalB);
 
-const slideoverA = overlay.create(SlideoverA)
+const slideoverA = overlay.create(SlideoverA);
 
 const openModalA = () => {
   // Open  Modal A, but override the title prop
-  modalA.open({ title: 'Hello' })
-}
+  modalA.open({ title: "Hello" });
+};
 
 const openModalB = async () => {
   // Open modalB, and wait for its result
-  const modalBInstance = modalB.open()
+  const modalBInstance = modalB.open();
 
-  const input = await modalBInstance.result
+  const input = await modalBInstance.result;
 
   // Pass the result from modalB to the slideover, and open it.
-  slideoverA.open({ input })
-}
+  slideoverA.open({ input });
+};
 </script>
 
 <template>
