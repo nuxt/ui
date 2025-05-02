@@ -188,7 +188,7 @@ name: 'toast-example'
 :toaster-position-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v3/docs/app/app.vue#L77"}
+::note{to="https://github.com/nuxt/ui/blob/v3/docs/app/app.config.ts#L3"}
 In this example, we use the `AppConfig` to configure the `position` prop of the `Toaster` component globally.
 ::
 
@@ -206,7 +206,7 @@ name: 'toast-example'
 :toaster-duration-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v3/docs/app/app.vue#L77"}
+::note{to="https://github.com/nuxt/ui/blob/v3/docs/app/app.config.ts#L5"}
 In this example, we use the `AppConfig` to configure the `duration` prop of the `Toaster` component globally.
 ::
 
@@ -228,7 +228,7 @@ name: 'toast-example'
 :toaster-expand-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v3/docs/app/app.vue#L77"}
+::note{to="https://github.com/nuxt/ui/blob/v3/docs/app/app.config.ts#L4"}
 In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
 ::
 
