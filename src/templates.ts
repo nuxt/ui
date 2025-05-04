@@ -51,8 +51,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         }
 
         // For local development, import directly from theme
-        const isUiDev = true
-        if (isUiDev) {
+        if (process.argv.includes('--uiDev')) {
           const templatePath = fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url))
           return [
             `import template from ${JSON.stringify(templatePath)}`,
@@ -150,7 +149,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
-import type { DeepPartial } from '@nuxt/ui'
+import type { TVConfig } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
@@ -166,7 +165,7 @@ type AppConfigUI = {
   }
   icons?: Partial<typeof icons>
   tv?: typeof defaultConfig
-} & DeepPartial<typeof ui>
+} & TVConfig<typeof ui>
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {
