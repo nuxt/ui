@@ -27,6 +27,7 @@ describe('Stepper', () => {
   it.each([
     // Props
     ['with items', { props }],
+    ['with iconClass on items', { props: { ...props, items: items.map(item => ({ ...item, iconClass: 'custom-icon-class' })) } }],
     ['with defaultValue', { props: { ...props, defaultValue: 1 } }],
     ['with modelValue', { props: { ...props, modelValue: 1 } }],
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
