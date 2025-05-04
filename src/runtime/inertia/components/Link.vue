@@ -112,7 +112,7 @@ const linkClass = computed(() => {
 const page = usePage()
 const url = computed(() => props.to ?? props.href ?? '')
 
-const isActive = computed(() => props.active || (props.exact ? url.value === props.href : page?.url.startsWith(url.value)))
+const isActive = computed(() => props.active || (!!url.value && (props.exact ? url.value === props.href : page?.url.startsWith(url.value))))
 </script>
 
 <template>
