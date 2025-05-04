@@ -95,6 +95,7 @@ const ui = computed(() => tv({
 }))
 
 const isExternal = computed(() => {
+  if (props.external) return true
   if (!props.to) return false
   return typeof props.to === 'string' && hasProtocol(props.to, { acceptRelative: true })
 })
@@ -116,47 +117,66 @@ const isActive = computed(() => props.active || (!!url.value && (props.exact ? u
 </script>
 
 <template>
-  <InertiaLink v-if="!isExternal && custom && !!url" v-bind="routerLinkProps" :href="url">
-    <slot
+  <template v-if="!isExternal && !!url">
+    <InertiaLink v-bind="routerLinkProps" :href="url">
+      <template v-if="custom">
+        <slot
+          v-bind="{
+            ...$attrs,
+            as,
+            type,
+            disabled,
+            href: url,
+            active: isActive
+          }"
+        />
+      </template>
+      <ULinkBase
+        v-else
+        v-bind="{
+          ...$attrs,
+          as,
+          type,
+          disabled,
+          href: url,
+          active: isActive
+        }"
+        :class="linkClass"
+      >
+        <slot :active="isActive" />
+      </ULinkBase>
+    </InertiaLink>
+  </template>
+
+  <template v-else>
+    <template v-if="custom">
+      <slot
+        v-bind="{
+          ...$attrs,
+          as,
+          type,
+          disabled,
+          href: to,
+          target: isExternal ? '_blank' : undefined,
+          active: isActive
+        }"
+      />
+    </template>
+    <ULinkBase
+      v-else
       v-bind="{
         ...$attrs,
         as,
         type,
         disabled,
         href: url,
-        active: isActive
-      }"
-    />
-  </InertiaLink>
-
-  <template v-else-if="custom">
-    <slot
-      v-bind="{
-        ...$attrs,
-        as,
-        type,
-        disabled,
-        href: to,
         target: isExternal ? '_blank' : undefined,
         active: isActive
       }"
-    />
+      :is-external="isExternal"
+      :class="linkClass"
+    >
+      <slot :active="isActive" />
+    </ULinkBase>
   </template>
-
-  <ULinkBase
-    v-else
-    v-bind="{
-      ...$attrs,
-      as,
-      type,
-      disabled,
-      href: url,
-      target: isExternal ? '_blank' : undefined,
-      active: isActive
-    }"
-    :is-external="isExternal"
-    :class="linkClass"
-  >
-    <slot :active="isActive" />
-  </ULinkBase>
 </template>
