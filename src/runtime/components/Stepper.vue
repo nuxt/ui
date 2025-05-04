@@ -16,6 +16,7 @@ export interface StepperItem {
    * @IconifyIcon
    */
   icon?: string
+  iconClass?: string
   content?: string
   disabled?: boolean
   [key: string]: any
@@ -142,7 +143,7 @@ defineExpose({
           <StepperTrigger :class="ui.trigger({ class: props.ui?.trigger })">
             <StepperIndicator :class="ui.indicator({ class: props.ui?.indicator })">
               <slot name="indicator" :item="item">
-                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: props.ui?.icon })" />
+                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: [props.ui?.icon, item?.iconClass] })" />
                 <template v-else>
                   {{ count + 1 }}
                 </template>
