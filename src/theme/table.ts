@@ -5,10 +5,10 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative overflow-auto',
     base: 'min-w-full overflow-clip',
     caption: 'sr-only',
-    thead: 'relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-(--ui-border-accented)',
+    thead: '[&>tr]:last:border-b [&>tr]:last:border-b-accented',
     tbody: 'divide-y divide-default [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:focus-visible:outline-primary',
     tr: 'data-[selected=true]:bg-elevated/50',
-    th: 'px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pe-0',
+    th: 'px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pe-0 pb-[calc((var(--spacing)_*_3.5_-_0.5px))]',
     td: 'p-4 text-sm text-muted whitespace-nowrap [&:has([role=checkbox])]:pe-0',
     empty: 'py-6 text-center text-sm text-muted',
     loading: 'py-6 text-center'
