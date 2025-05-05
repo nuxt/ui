@@ -3,9 +3,9 @@
   "name": "@nuxt/ui-docs",
   "type": "module",
   "dependencies": {
-    "@ai-sdk/vue": "^1.2.8",
+    "@ai-sdk/vue": "^1.2.10",
     "@iconify-json/logos": "^1.2.4",
-    "@iconify-json/lucide": "^1.2.39",
+    "@iconify-json/lucide": "^1.2.40",
     "@iconify-json/simple-icons": "^1.2.33",
     "@iconify-json/vscode-icons": "^1.2.20",
     "@nuxt/content": "^3.5.1",
@@ -18,10 +18,10 @@
     "@rollup/plugin-yaml": "^4.1.2",
     "@vueuse/integrations": "^13.1.0",
     "@vueuse/nuxt": "^13.1.0",
-    "ai": "^4.3.10",
+    "ai": "^4.3.13",
     "capture-website": "^4.2.0",
     "joi": "^17.13.3",
-    "motion-v": "^1.0.0",
+    "motion-v": "^1.0.1",
     "nuxt": "^3.17.1",
     "nuxt-component-meta": "^0.11.0",
     "nuxt-llms": "^0.1.2",
@@ -34,9 +34,9 @@
     "valibot": "^1.0.0",
     "workers-ai-provider": "^0.3.0",
     "yup": "^1.6.1",
-    "zod": "^3.24.3"
+    "zod": "^3.24.4"
   },
   "devDependencies": {
-    "wrangler": "^4.13.2"
+    "wrangler": "^4.14.1"
   }
 }
