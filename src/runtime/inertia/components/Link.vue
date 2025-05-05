@@ -95,6 +95,7 @@ const ui = computed(() => tv({
 }))
 
 const isExternal = computed(() => {
+  if (props.external) return true
   if (!props.to) return false
   return typeof props.to === 'string' && hasProtocol(props.to, { acceptRelative: true })
 })
@@ -110,14 +111,14 @@ const linkClass = computed(() => {
 })
 
 const page = usePage()
-const url = computed(() => props.to ?? props.href ?? '#')
+const url = computed(() => props.to ?? props.href ?? '')
 
-const isActive = computed(() => props.active || (props.exact ? url.value === props.href : page?.url.startsWith(url.value)))
+const isActive = computed(() => props.active || (!!url.value && (props.exact ? url.value === props.href : page?.url.startsWith(url.value))))
 </script>
 
 <template>
-  <template v-if="!isExternal">
-    <InertiaLink v-bind="routerLinkProps" :href="url" custom>
+  <template v-if="!isExternal && !!url">
+    <InertiaLink v-bind="routerLinkProps" :href="url">
       <template v-if="custom">
         <slot
           v-bind="{
