@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "@nuxt/ui": "latest",
-    "nuxt": "^3.17.1"
+    "nuxt": "^3.17.2"
   }
 }
