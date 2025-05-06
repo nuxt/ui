@@ -46,7 +46,19 @@ describe('Tabs', () => {
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
+    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with ui prop on items', { props: {
+      items: [{
+        ...items[0],
+        ui: {
+          trigger: 'item-custom-trigger-class',
+          leadingIcon: 'item-custom-leading-icon-class',
+          leadingAvatar: 'item-custom-leading-avatar-class',
+          label: 'item-custom-label-class',
+          content: 'item-custom-content-class'
+        }
+      }, ...items.slice(1)]
+    } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TabsProps, slots?: Partial<TabsSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Tabs)
     expect(html).toMatchSnapshot()
