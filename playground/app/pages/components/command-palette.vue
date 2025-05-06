@@ -138,7 +138,7 @@ defineShortcuts({
         <UButton label="Open drawer" color="neutral" variant="outline" />
 
         <template #content>
-          <ReuseTemplate class="border-t border-(--ui-border) mt-4" />
+          <ReuseTemplate class="border-t border-default mt-4" />
         </template>
       </UDrawer>
 
@@ -146,7 +146,7 @@ defineShortcuts({
         <UButton label="Select label (popover)" color="neutral" variant="outline" />
 
         <template #content>
-          <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-9' }" />
+          <UCommandPalette v-model="label" placeholder="Search labels..." :groups="[{ id: 'labels', items: labels }]" :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }" />
         </template>
       </UPopover>
     </div>

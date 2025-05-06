@@ -157,7 +157,7 @@ props:
 ---
 ::
 
-### Variant :badge{label="Not released" class="align-text-top"}
+### Variant :badge{label="New" class="align-text-top"}
 
 Use the `variant` prop to change the variant of the RadioGroup.
 
@@ -169,6 +169,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   color: 'primary'
   variant: 'table'
@@ -236,7 +238,7 @@ props:
 ---
 ::
 
-### Indicator :badge{label="Not released" class="align-text-top"}
+### Indicator :badge{label="New" class="align-text-top"}
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 

@@ -1,7 +1,7 @@
 @import "tailwindcss" theme(static) source("../../../..");
 @import "@nuxt/ui-pro";
 
-@source "../../../content";
+@source "../../../content/**/*";
 @source "../../../node_modules/.c12";
 
 @theme static {

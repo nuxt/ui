@@ -1,15 +1,9 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/chip'
-import { tv } from '../utils/tv'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigChip = _appConfig as AppConfig & { ui: { chip: Partial<typeof theme> } }
-
-const chip = tv({ extend: tv(theme), ...(appConfigChip.ui?.chip || {}) })
-
-type ChipVariants = VariantProps<typeof chip>
+type Chip = ComponentConfig<typeof theme, AppConfig, 'chip'>
 
 export interface ChipProps {
   /**
@@ -22,22 +16,22 @@ export interface ChipProps {
   /**
    * @defaultValue 'primary'
    */
-  color?: ChipVariants['color']
+  color?: Chip['variants']['color']
   /**
    * @defaultValue 'md'
    */
-  size?: ChipVariants['size']
+  size?: Chip['variants']['size']
   /**
    * The position of the chip.
    * @defaultValue 'top-right'
    */
-  position?: ChipVariants['position']
+  position?: Chip['variants']['position']
   /** When `true`, keep the chip inside the component for rounded elements. */
   inset?: boolean
   /** When `true`, render the chip relatively to the parent. */
   standalone?: boolean
   class?: any
-  ui?: Partial<typeof chip.slots>
+  ui?: Chip['slots']
 }
 
 export interface ChipEmits {
@@ -53,7 +47,9 @@ export interface ChipSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
+import { useAppConfig } from '#imports'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
+import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
@@ -66,8 +62,9 @@ defineSlots<ChipSlots>()
 const show = defineModel<boolean>('show', { default: true })
 
 const { size } = useAvatarGroup(props)
+const appConfig = useAppConfig() as Chip['AppConfig']
 
-const ui = computed(() => chip({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })({
   color: props.color,
   size: size.value,
   position: props.position,

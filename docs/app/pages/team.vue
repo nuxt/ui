@@ -5,8 +5,9 @@ const description = 'The development of Nuxt UI is led by a community of develop
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title,
-  ogTitle: 'Nuxt UI Team',
-  description
+  description,
+  ogTitle: `${title} - Nuxt UI`,
+  ogDescription: description
 })
 
 defineOgImageComponent('Docs', {
@@ -40,24 +41,25 @@ const icons = {
       :ui="{ title: 'text-balance', container: 'relative' }"
     >
       <template #top>
-        <div class="absolute z-[-1] rounded-full bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
       </template>
 
       <LazyStarsBg />
     </UPageHero>
 
     <UPageSection :ui="{ container: '!pt-0' }">
-      <UPageGrid class="xl:grid-cols-4">
+      <UPageGrid class="xl:grid-cols-5">
         <UPageCard
           v-for="(user, index) in module?.team"
           :key="index"
           :title="user.name"
           :description="[user.pronouns, user.location].filter(Boolean).join(' ・ ')"
           :ui="{
+            wrapper: 'items-center',
             container: 'gap-y-4 lg:p-8',
             leading: 'flex justify-center',
             title: 'text-center',
-            description: 'text-center text-(--ui-text-muted)'
+            description: 'text-center text-muted'
           }"
           variant="subtle"
         >
@@ -122,10 +124,11 @@ const icons = {
           :key="contributor.username"
           :title="contributor.username"
           :ui="{
+            wrapper: 'items-center',
             container: 'gap-y-2',
             leading: 'flex justify-center',
             title: 'text-center',
-            description: 'text-center text-(--ui-text-muted)'
+            description: 'text-center text-muted'
           }"
         >
           <template #leading>

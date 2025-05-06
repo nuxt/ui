@@ -22,7 +22,7 @@ describe('Progress', () => {
     ['with color neutral', { props: { color: 'neutral', modelValue: 50 } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { ui: { base: 'bg-(--ui-bg)' } } }],
+    ['with ui', { props: { ui: { base: 'bg-default' } } }],
     // Slots
     ['with status slot', { slots: { status: () => 'Status slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ProgressProps, slots?: Partial<ProgressSlots> }) => {

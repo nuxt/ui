@@ -2,7 +2,7 @@ title: Nuxt UI Pro Pricing
 description: Start for free in development mode, then upgrade to a paid plan to unlock the full features of Nuxt UI Pro when you are ready to launch.
 pricing:
   headline: Pricing
-  title: Upgrade to Nuxt UI [Pro]{class="text-(--ui-primary)"}.
+  title: Upgrade to Nuxt UI [Pro]{class="text-primary"}.
   description: On top of 40+ open source components from Nuxt UI, Pro gives you access to 50+ premium Vue components to create beautiful & responsive Nuxt applications in minutes. It includes all primitives to build landing pages, documentations, blogs, dashboards or entire SaaS products.
   freePlan:
     title: Free in development

@@ -124,7 +124,7 @@ props:
 ---
 ::
 
-### Icon :badge{label="Not released" class="align-text-top"}
+### Icon :badge{label="New" class="align-text-top"}
 
 Use the `icon` prop to show an [Icon](/components/icon) inside the Textarea.
 
@@ -157,7 +157,7 @@ props:
 ---
 ::
 
-### Avatar :badge{label="Not released" class="align-text-top"}
+### Avatar :badge{label="New" class="align-text-top"}
 
 Use the `avatar` prop to show an [Avatar](/components/avatar) inside the Textarea.
 
@@ -176,7 +176,7 @@ props:
 ---
 ::
 
-### Loading :badge{label="Not released" class="align-text-top"}
+### Loading :badge{label="New" class="align-text-top"}
 
 Use the `loading` prop to show a loading icon on the Textarea.
 
@@ -192,7 +192,7 @@ props:
 ---
 ::
 
-### Loading Icon :badge{label="Not released" class="align-text-top"}
+### Loading Icon :badge{label="New" class="align-text-top"}
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
 

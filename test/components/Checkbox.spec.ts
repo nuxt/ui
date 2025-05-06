@@ -8,6 +8,8 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('Checkbox', () => {
   const sizes = Object.keys(theme.variants.size) as any
+  const variants = Object.keys(theme.variants.variant) as any
+  const indicators = Object.keys(theme.variants.indicator) as any
 
   it.each([
     // Props
@@ -23,8 +25,10 @@ describe('Checkbox', () => {
     ['with label', { props: { label: 'Label' } }],
     ['with required', { props: { label: 'Label', required: true } }],
     ['with description', { props: { label: 'Label', description: 'Description' } }],
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
-    ['with color neutral', { props: { color: 'neutral', defaultValue: true } }],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { size, defaultValue: '1' } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant, defaultValue: '1' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral', defaultValue: '1' } }]),
+    ...indicators.map((indicator: string) => [`with indicator ${indicator}`, { props: { indicator, defaultValue: '1' } }]),
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'inline-flex' } }],

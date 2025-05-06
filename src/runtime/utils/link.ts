@@ -10,7 +10,7 @@ export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
   const propsToInclude = [
     'active', 'activeClass', 'ariaCurrentValue', 'as', 'disabled',
     'exact', 'exactActiveClass', 'exactHash', 'exactQuery', 'external',
-    'href', 'inactiveClass', 'noPrefetch', 'noRel', 'prefetch',
+    'href', 'download', 'inactiveClass', 'noPrefetch', 'noRel', 'prefetch',
     'prefetchedClass', 'rel', 'replace', 'target', 'to', 'type', 'title',
     'onClick',
     ...ariaKeys,

@@ -1,16 +1,16 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
-import theme from '#build/ui/dropdown-menu'
-import { tv } from '../utils/tv'
+import type { AppConfig } from '@nuxt/schema'
+import type theme from '#build/ui/dropdown-menu'
 import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
-import type { ArrayOrNested, NestedItem } from '../types/utils'
+import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
 
-const _dropdownMenu = tv(theme)()
+type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
 interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> extends Omit<RekaDropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T
-  portal?: boolean
+  portal?: boolean | string | HTMLElement
   sub?: boolean
   labelKey: keyof NestedItem<T>
   /**
@@ -26,8 +26,8 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
    */
   externalIcon?: boolean | string
   class?: any
-  ui: typeof _dropdownMenu
-  uiOverride?: any
+  ui: { [K in keyof Required<DropdownMenu['slots']>]: (props?: Record<string, any>) => string }
+  uiOverride?: DropdownMenu['slots']
 }
 
 interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
@@ -39,12 +39,13 @@ type DropdownMenuContentSlots<T extends ArrayOrNested<DropdownMenuItem>> = Omit<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { DropdownMenu } from 'reka-ui/namespaced'
 import { useForwardPropsEmits } from 'reka-ui'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
+import { usePortal } from '../composables/usePortal'
 import { omit, get, isArrayOfArray } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
@@ -59,8 +60,10 @@ const props = defineProps<DropdownMenuContentProps<T>>()
 const emits = defineEmits<DropdownMenuContentEmits>()
 const slots = defineSlots<DropdownMenuContentSlots<T>>()
 
-const appConfig = useAppConfig()
 const { dir } = useLocale()
+const appConfig = useAppConfig()
+
+const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits)
 const proxySlots = omit(slots, ['default'])
 
@@ -108,8 +111,10 @@ const groups = computed<DropdownMenuItem[][]>(() =>
     </slot>
   </DefineItemTemplate>
 
-  <DropdownMenu.Portal :disabled="!portal">
+  <DropdownMenu.Portal v-bind="portalProps">
     <component :is="sub ? DropdownMenu.SubContent : DropdownMenu.Content" :class="props.class" v-bind="contentProps">
+      <slot name="content-top" />
+
       <DropdownMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
         <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
           <DropdownMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: uiOverride?.label })">
@@ -176,6 +181,8 @@ const groups = computed<DropdownMenuItem[][]>(() =>
       </DropdownMenu.Group>
 
       <slot />
+
+      <slot name="content-bottom" />
     </component>
   </DropdownMenu.Portal>
 </template>
