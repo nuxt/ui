@@ -3,23 +3,23 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
-    base: ['inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-(--ui-bg-accented)', options.theme.transitions && 'transition-[background] duration-200'],
+    base: ['inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented', options.theme.transitions && 'transition-[background] duration-200'],
     container: 'flex items-center',
-    thumb: 'group pointer-events-none rounded-full bg-(--ui-bg) shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center',
-    icon: ['absolute shrink-0 group-data-[state=unchecked]:text-(--ui-text-dimmed) opacity-0 size-10/12', options.theme.transitions && 'transition-[color,opacity] duration-200'],
+    thumb: 'group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center',
+    icon: ['absolute shrink-0 group-data-[state=unchecked]:text-dimmed opacity-0 size-10/12', options.theme.transitions && 'transition-[color,opacity] duration-200'],
     wrapper: 'ms-2',
-    label: 'block font-medium text-(--ui-text)',
-    description: 'text-(--ui-text-muted)'
+    label: 'block font-medium text-default',
+    description: 'text-muted'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `data-[state=checked]:bg-(--ui-${color}) focus-visible:outline-(--ui-${color})`,
-        icon: `group-data-[state=checked]:text-(--ui-${color})`
+        base: `data-[state=checked]:bg-${color} focus-visible:outline-${color}`,
+        icon: `group-data-[state=checked]:text-${color}`
       }])),
       neutral: {
-        base: 'data-[state=checked]:bg-(--ui-bg-inverted) focus-visible:outline-(--ui-border-inverted)',
-        icon: 'group-data-[state=checked]:text-(--ui-text-highlighted)'
+        base: 'data-[state=checked]:bg-inverted focus-visible:outline-inverted',
+        icon: 'group-data-[state=checked]:text-highlighted'
       }
     },
     size: {
@@ -71,7 +71,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-(--ui-error)'
+        label: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
       }
     },
     disabled: {

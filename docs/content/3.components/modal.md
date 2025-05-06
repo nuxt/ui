@@ -276,7 +276,7 @@ This allows you to move the trigger outside of the Modal or remove it entirely.
 
 ### Prevent closing
 
-Set the `dismissible` prop to `false` to prevent the Modal from being closed when clicking outside of it or pressing escape.
+Set the `dismissible` prop to `false` to prevent the Modal from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
 ::component-code
 ---
@@ -334,7 +334,7 @@ name: 'modal-programmatic-example'
 ::
 
 ::tip
-You can close the modal within the modal component by emitting `"emit('close')`.
+You can close the modal within the modal component by emitting `emit('close')`.
 ::
 
 ### Nested modals

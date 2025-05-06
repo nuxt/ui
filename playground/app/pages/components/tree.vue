@@ -8,11 +8,11 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
 const color = ref(theme.defaultVariants.color)
 const size = ref(theme.defaultVariants.size)
 
-const items: TreeItem[] = [
+const items = [
   {
     label: 'app',
     defaultExpanded: true,
-    slot: 'app',
+    slot: 'app' as const,
     children: [{
       label: 'composables',
       defaultExpanded: true,
@@ -33,7 +33,7 @@ const items: TreeItem[] = [
   },
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
-]
+] satisfies TreeItem[]
 
 const itemsWithMappedId = [
   { id: 'id', title: 'hello' },

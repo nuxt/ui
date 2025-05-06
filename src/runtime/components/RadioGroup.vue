@@ -1,24 +1,17 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/radio-group'
-import { tv } from '../utils/tv'
-import type { AcceptableValue } from '../types/utils'
+import type { AcceptableValue, ComponentConfig } from '../types/utils'
 
-const appConfigRadioGroup = _appConfig as AppConfig & { ui: { radioGroup: Partial<typeof theme> } }
-
-const radioGroup = tv({ extend: tv(theme), ...(appConfigRadioGroup.ui?.radioGroup || {}) })
-
-type RadioGroupVariants = VariantProps<typeof radioGroup>
+type RadioGroup = ComponentConfig<typeof theme, AppConfig, 'radioGroup'>
 
 export type RadioGroupValue = AcceptableValue
 export type RadioGroupItem = {
   label?: string
   description?: string
   disabled?: boolean
-  value?: string
+  value?: RadioGroupValue
   [key: string]: any
 } | RadioGroupValue
 
@@ -48,15 +41,15 @@ export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> exte
   /**
    * @defaultValue 'md'
    */
-  size?: RadioGroupVariants['size']
+  size?: RadioGroup['variants']['size']
   /**
    * @defaultValue 'list'
    */
-  variant?: RadioGroupVariants['variant']
+  variant?: RadioGroup['variants']['variant']
   /**
    * @defaultValue 'primary'
    */
-  color?: RadioGroupVariants['color']
+  color?: RadioGroup['variants']['color']
   /**
    * The orientation the radio buttons are laid out.
    * @defaultValue 'vertical'
@@ -66,9 +59,9 @@ export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> exte
    * Position of the indicator.
    * @defaultValue 'start'
    */
-  indicator?: RadioGroupVariants['indicator']
+  indicator?: RadioGroup['variants']['indicator']
   class?: any
-  ui?: Partial<typeof radioGroup.slots>
+  ui?: RadioGroup['slots']
 }
 
 export type RadioGroupEmits = RadioGroupRootEmits & {
@@ -88,8 +81,10 @@ export interface RadioGroupSlots<T extends RadioGroupItem = RadioGroupItem> {
 import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
   valueKey: 'value',
@@ -100,12 +95,14 @@ const props = withDefaults(defineProps<RadioGroupProps<T>>(), {
 const emits = defineEmits<RadioGroupEmits>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 
+const appConfig = useAppConfig() as RadioGroup['AppConfig']
+
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 
 const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
 
-const ui = computed(() => radioGroup({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) })({
   size: size.value,
   color: color.value,
   disabled: disabled.value,
@@ -178,6 +175,7 @@ function onUpdate(value: any) {
           {{ legend }}
         </slot>
       </legend>
+
       <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: props.ui?.item })">
         <div :class="ui.container({ class: props.ui?.container })">
           <RadioGroupItem
@@ -190,8 +188,8 @@ function onUpdate(value: any) {
           </RadioGroupItem>
         </div>
 
-        <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-          <component :is="variant === 'list' ? Label : 'p'" :class="ui.label({ class: props.ui?.label })" :for="item.id">
+        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
+          <component :is="variant === 'list' ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" :class="ui.label({ class: props.ui?.label })">
             <slot name="label" :item="item" :model-value="(modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>

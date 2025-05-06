@@ -1,18 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { MaybeRefOrGetter } from '@vueuse/shared'
 import type { AppConfig } from '@nuxt/schema'
-import _appConfig from '#build/app.config'
 import theme from '#build/ui/color-picker'
-import { tv } from '../utils/tv'
 import type { HSLObject } from 'colortranslator'
+import type { ComponentConfig } from '../types/utils'
 
-const appConfigColorPicker = _appConfig as AppConfig & { ui: { colorPicker: Partial<typeof theme> } }
-
-const colorPicker = tv({ extend: tv(theme), ...(appConfigColorPicker.ui?.colorPicker || {}) })
-
-type ColorPickerVariants = VariantProps<typeof colorPicker>
+type ColorPicker = ComponentConfig<typeof theme, AppConfig, 'colorPicker'>
 
 type HSVColor = {
   h: number
@@ -67,9 +61,9 @@ export type ColorPickerProps = {
   /**
    * @defaultValue 'md'
    */
-  size?: ColorPickerVariants['size']
+  size?: ColorPicker['variants']['size']
   class?: any
-  ui?: Partial<typeof colorPicker.slots>
+  ui?: ColorPicker['slots']
 }
 
 </script>
@@ -80,6 +74,8 @@ import { Primitive } from 'reka-ui'
 import { useEventListener, useElementBounding, watchThrottled, watchPausable } from '@vueuse/core'
 import { isClient } from '@vueuse/shared'
 import { ColorTranslator } from 'colortranslator'
+import { useAppConfig } from '#imports'
+import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {
   format: 'hex',
@@ -87,6 +83,12 @@ const props = withDefaults(defineProps<ColorPickerProps>(), {
   defaultValue: '#FFFFFF'
 })
 const modelValue = defineModel<string>(undefined)
+
+const appConfig = useAppConfig() as ColorPicker['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.colorPicker || {}) })({
+  size: props.size
+}))
 
 const pickedColor = computed<HSVColor>({
   get() {
@@ -257,10 +259,6 @@ const selectorThumbStyle = computed(() => ({
 const trackThumbStyle = computed(() => ({
   backgroundColor: trackThumbColor.value,
   top: `${trackThumbPosition.value.y}%`
-}))
-
-const ui = computed(() => colorPicker({
-  size: props.size
 }))
 </script>
 
