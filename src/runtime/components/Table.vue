@@ -346,84 +346,90 @@ defineExpose({
         </slot>
       </caption>
 
-      <thead :class="ui.thead({ class: [props.ui?.thead] })">
-        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
-          <th
-            v-for="header in headerGroup.headers"
-            :key="header.id"
-            :data-pinned="header.column.getIsPinned()"
-            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
-            :class="ui.th({
-              class: [
-                props.ui?.th,
-                typeof header.column.columnDef.meta?.class?.th === 'function' ? header.column.columnDef.meta.class.th(header) : header.column.columnDef.meta?.class?.th
-              ],
-              pinned: !!header.column.getIsPinned()
-            })"
-          >
-            <slot :name="`${header.id}-header`" v-bind="header.getContext()">
-              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
-            </slot>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
-        <template v-if="tableApi.getRowModel().rows?.length">
-          <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
-            <tr
-              :data-selected="row.getIsSelected()"
-              :data-selectable="!!props.onSelect"
-              :data-expanded="row.getIsExpanded()"
-              :role="props.onSelect ? 'button' : undefined"
-              :tabindex="props.onSelect ? 0 : undefined"
-              :class="ui.tr({
-                class: [
-                  props.ui?.tr,
-                  typeof tableApi.options.meta?.class?.tr === 'function' ? tableApi.options.meta.class.tr(row) : tableApi.options.meta?.class?.tr
-                ]
-              })"
-              @click="handleRowSelect(row, $event)"
-            >
-              <td
-                v-for="cell in row.getVisibleCells()"
-                :key="cell.id"
-                :data-pinned="cell.column.getIsPinned()"
-                :class="ui.td({
+      <slot v-bind="{ tableApi, tableRef }">
+        <slot name="header" v-bind="{ tableApi, tableRef }">
+          <thead :class="ui.thead({ class: [props.ui?.thead] })">
+            <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
+              <th
+                v-for="header in headerGroup.headers"
+                :key="header.id"
+                :data-pinned="header.column.getIsPinned()"
+                :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+                :class="ui.th({
                   class: [
-                    props.ui?.td,
-                    typeof cell.column.columnDef.meta?.class?.td === 'function' ? cell.column.columnDef.meta.class.td(cell) : cell.column.columnDef.meta?.class?.td
+                    props.ui?.th,
+                    typeof header.column.columnDef.meta?.class?.th === 'function' ? header.column.columnDef.meta.class.th(header) : header.column.columnDef.meta?.class?.th
                   ],
-                  pinned: !!cell.column.getIsPinned()
+                  pinned: !!header.column.getIsPinned()
                 })"
               >
-                <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
-                  <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                <slot :name="`${header.id}-header`" v-bind="header.getContext()">
+                  <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
+                </slot>
+              </th>
+            </tr>
+          </thead>
+        </slot>
+
+        <slot name="body" v-bind="{ tableApi, tableRef }">
+          <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
+            <template v-if="tableApi.getRowModel().rows?.length">
+              <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
+                <tr
+                  :data-selected="row.getIsSelected()"
+                  :data-selectable="!!props.onSelect"
+                  :data-expanded="row.getIsExpanded()"
+                  :role="props.onSelect ? 'button' : undefined"
+                  :tabindex="props.onSelect ? 0 : undefined"
+                  :class="ui.tr({
+                    class: [
+                      props.ui?.tr,
+                      typeof tableApi.options.meta?.class?.tr === 'function' ? tableApi.options.meta.class.tr(row) : tableApi.options.meta?.class?.tr
+                    ]
+                  })"
+                  @click="handleRowSelect(row, $event)"
+                >
+                  <td
+                    v-for="cell in row.getVisibleCells()"
+                    :key="cell.id"
+                    :data-pinned="cell.column.getIsPinned()"
+                    :class="ui.td({
+                      class: [
+                        props.ui?.td,
+                        typeof cell.column.columnDef.meta?.class?.td === 'function' ? cell.column.columnDef.meta.class.td(cell) : cell.column.columnDef.meta?.class?.td
+                      ],
+                      pinned: !!cell.column.getIsPinned()
+                    })"
+                  >
+                    <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
+                      <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                    </slot>
+                  </td>
+                </tr>
+                <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
+                  <td :colspan="row.getAllCells().length" :class="ui.td({ class: [props.ui?.td] })">
+                    <slot name="expanded" :row="row" />
+                  </td>
+                </tr>
+              </template>
+            </template>
+
+            <tr v-else-if="loading && !!slots['loading']">
+              <td :colspan="columns?.length" :class="ui.loading({ class: props.ui?.loading })">
+                <slot name="loading" />
+              </td>
+            </tr>
+
+            <tr v-else>
+              <td :colspan="columns?.length" :class="ui.empty({ class: props.ui?.empty })">
+                <slot name="empty">
+                  {{ empty || t('table.noData') }}
                 </slot>
               </td>
             </tr>
-            <tr v-if="row.getIsExpanded()" :class="ui.tr({ class: [props.ui?.tr] })">
-              <td :colspan="row.getAllCells().length" :class="ui.td({ class: [props.ui?.td] })">
-                <slot name="expanded" :row="row" />
-              </td>
-            </tr>
-          </template>
-        </template>
-
-        <tr v-else-if="loading && !!slots['loading']">
-          <td :colspan="columns?.length" :class="ui.loading({ class: props.ui?.loading })">
-            <slot name="loading" />
-          </td>
-        </tr>
-
-        <tr v-else>
-          <td :colspan="columns?.length" :class="ui.empty({ class: props.ui?.empty })">
-            <slot name="empty">
-              {{ empty || t('table.noData') }}
-            </slot>
-          </td>
-        </tr>
-      </tbody>
+          </tbody>
+        </slot>
+      </slot>
     </table>
   </Primitive>
 </template>
