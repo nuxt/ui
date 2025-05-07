@@ -19,13 +19,7 @@ Use the `v-model` directive to control the value of the CheckboxGroup or the `de
 
 ### Items
 
-Use the `items` prop as an array of strings, numbers or objects:
-
-- `label?: string`{lang="ts-type"}
-- `description?: string`{lang="ts-type"}
-- `disabled?: boolean`{lang="ts-type"}
-- `value?: string`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue }`{lang="ts-type"}
+Use the `items` prop as an array of strings or numbers:
 
 ::component-code
 ---
@@ -55,6 +49,7 @@ You can also pass an array of objects with the following properties:
 - `description?: string`{lang="ts-type"}
 - [`value?: string`{lang="ts-type"}](#value-key)
 - `disabled?: boolean`{lang="ts-type"}
+- `ui?: { item?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---
