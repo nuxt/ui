@@ -27,7 +27,6 @@ describe('Stepper', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with iconClass on items', { props: { ...props, items: items.map(item => ({ ...item, iconClass: 'custom-icon-class' })) } }],
     ['with defaultValue', { props: { ...props, defaultValue: 1 } }],
     ['with modelValue', { props: { ...props, modelValue: 1 } }],
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
@@ -43,7 +42,20 @@ describe('Stepper', () => {
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
+    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with ui field on items', { props: { items: [
+      { ...items[0], ui: {
+        item: 'custom-item-class',
+        container: 'custom-container-class',
+        trigger: 'custom-trigger-class',
+        indicator: 'custom-indicator-class',
+        icon: 'custom-icon-class',
+        separator: 'custom-separator-class',
+        wrapper: 'custom-wrapper-class',
+        title: 'custom-title-class',
+        description: 'custom-description-class'
+      } }, ...items.slice(1)
+    ] } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: StepperProps, slots?: Partial<StepperSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Stepper)
     expect(html).toMatchSnapshot()
