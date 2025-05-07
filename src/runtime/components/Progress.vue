@@ -230,7 +230,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
             />
           </ProgressIndicator>
         </svg>
-        <div v-if="!isIndeterminate && (statusPosition === 'inside') && (status || !!slots.status)" class="absolute inset-0" :class="ui.status({ class: props.ui?.status })">
+        <div v-if="!isIndeterminate && (statusPosition === 'inside') && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })">
           <slot name="status" :percent="percent">
             {{ percent }}%
           </slot>

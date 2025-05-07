@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     base: 'relative',
     track: '',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out',
-    status: 'flex justify-end text-dimmed transition-[width] duration-200',
+    status: 'flex justify-end text-dimmed transition-[width] duration-200 inset-0',
     steps: 'grid items-end',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity'
   },
@@ -140,7 +140,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: '2xs',
     class: {
-      base: 'rounded-full w-8 h-8',
+      base: 'rounded-full size-8',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]',
       status: 'text-[8px]'
@@ -151,7 +151,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'xs',
     class: {
-      base: 'rounded-full w-10 h-10',
+      base: 'rounded-full size-10',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]',
       status: 'text-[9px]'
@@ -162,7 +162,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'sm',
     class: {
-      base: 'rounded-full w-12 h-12',
+      base: 'rounded-full size-12',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]',
       status: 'text-[9px]'
@@ -173,7 +173,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'md',
     class: {
-      base: 'rounded-full w-16 h-16',
+      base: 'rounded-full size-16',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]'
     }
@@ -183,7 +183,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'lg',
     class: {
-      base: 'rounded-full w-20 h-20',
+      base: 'rounded-full size-20',
       indicator: 'stroke-[8px]',
       track: 'stroke-[8px]'
     }
@@ -193,7 +193,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'xl',
     class: {
-      base: 'rounded-full w-24 h-24',
+      base: 'rounded-full size-24',
       indicator: 'stroke-[10px]',
       track: 'stroke-[8px]'
     }
@@ -203,7 +203,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: '2xl',
     class: {
-      base: 'rounded-full w-32 h-32',
+      base: 'rounded-full size-32',
       indicator: 'stroke-[12px]',
       track: 'stroke-[10px]'
     }
@@ -212,7 +212,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: '2xs',
     class: {
-      base: 'rounded-full w-8 h-8',
+      base: 'rounded-full size-8',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]',
       status: 'text-[8px]'
@@ -223,7 +223,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'xs',
     class: {
-      base: 'rounded-full w-10 h-10',
+      base: 'rounded-full size-10',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]',
       status: 'text-[9px]'
@@ -234,7 +234,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'sm',
     class: {
-      base: 'rounded-full w-12 h-12',
+      base: 'rounded-full size-12',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]',
       status: 'text-[9px]'
@@ -245,7 +245,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'md',
     class: {
-      base: 'rounded-full w-16 h-16',
+      base: 'rounded-full size-16',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]'
     }
@@ -255,7 +255,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'lg',
     class: {
-      base: 'rounded-full w-20 h-20',
+      base: 'rounded-full size-20',
       indicator: 'stroke-[8px]',
       track: 'stroke-[8px]'
     }
@@ -265,7 +265,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'xl',
     class: {
-      base: 'rounded-full w-24 h-24',
+      base: 'rounded-full size-24',
       indicator: 'stroke-[10px]',
       track: 'stroke-8'
     }
@@ -275,7 +275,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: '2xl',
     class: {
-      base: 'rounded-full w-32 h-32',
+      base: 'rounded-full size-32',
       indicator: 'stroke-[12px]',
       track: 'stroke-10'
     }

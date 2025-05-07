@@ -109,13 +109,14 @@ onMounted(() => {
         variant="circular"
         color="secondary"
         size="xl"
-        status-position="inside"
+        status-position="outside"
         status
       />
       <UProgress
         variant="circular"
         color="neutral"
         animation="swing"
+        status-position="inside"
         size="2xl"
       />
     </div>
