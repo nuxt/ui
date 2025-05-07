@@ -74,6 +74,7 @@ import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
+import UCheckbox from './Checkbox.vue'
 
 const props = withDefaults(defineProps<CheckboxGroupProps<T>>(), {
   valueKey: 'value',

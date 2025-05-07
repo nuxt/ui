@@ -1,0 +1,17 @@
+name: reproduire
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  issues: write
+
+jobs:
+  reproduire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Hebilicious/reproduire@v1
+        with:
+          label: needs-reproduction # Optional, will default to this value.
