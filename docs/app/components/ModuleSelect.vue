@@ -20,7 +20,7 @@ watch(module, () => {
     color="neutral"
     :ui="{
       indicator: 'bg-default',
-      trigger: 'px-1 data-[state=active]:text-highlighted'
+      trigger: 'px-1 data-[state=active]:text-highlighted w-full'
     }"
     size="xs"
     @update:model-value="(module = $event as string)"
