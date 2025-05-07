@@ -280,6 +280,7 @@ name: 'table-column-grouping-example'
 highlights:
   - 159
   - 169
+class: '!p-0'
 ---
 ::
 
