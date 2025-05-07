@@ -42,7 +42,12 @@ describe('CheckboxGroup', () => {
     // Slots
     ['with legend slot', { props, slots: { legend: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
-    ['with description slot', { props, slots: { description: () => 'Description slot' } }]
+    ['with description slot', { props, slots: { description: () => 'Description slot' } }],
+    ['with ui field on items', { props: { items: [
+      { ...items[0], ui: {
+        item: 'custom-item-class'
+      } },
+      items.slice(1)] } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CheckboxGroupProps, slots?: Partial<CheckboxGroupSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, CheckboxGroup)
     expect(html).toMatchSnapshot()
