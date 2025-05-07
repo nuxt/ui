@@ -21,7 +21,7 @@ type Payment = {
   account: Account
 }
 
-const get_color_by_status = (status: PaymentStatus) => {
+const getColorByStatus = (status: PaymentStatus) => {
   return {
     paid: 'success',
     failed: 'error',
@@ -191,7 +191,7 @@ const grouping_options = ref<GroupingOptions>({
         }}</strong>
         <UBadge
           v-else-if="row.groupingColumnId === 'status'"
-          :color="get_color_by_status(row.original.status)"
+          :color="getColorByStatus(row.original.status)"
           class="capitalize"
           variant="subtle"
         >

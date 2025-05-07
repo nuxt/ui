@@ -262,13 +262,13 @@ You could also add this action to the [`DropdownMenu`](/components/dropdown-menu
 
 ### With grouped rows
 
-You can group rows based on a given column value and show/hide sub rows via some button added to the cell.
+You can group rows based on a given column value and show/hide sub rows via some button added to the cell using the TanStack Table [Grouping APIs](https://tanstack.com/table/latest/docs/api/features/grouping).
 
 #### Important parts:
 
 * Add prop `grouping` to `UTable` component with an array of column ids you want to group by.
 * Add prop `grouping-options` to `UTable`. It must include `getGroupedRowModel`, you can import it from `@tanstack/vue-table` or implement your own.
-* Expand rows via row.toggleExpanded() method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.
+* Expand rows via `row.toggleExpanded()` method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.
 * Use `aggregateFn` on column definition to define how to aggregate the rows.
 * `agregatedCell` renderer on column definition only works if there is no `cell` renderer.
 
@@ -276,7 +276,7 @@ You can group rows based on a given column value and show/hide sub rows via some
 ---
 prettier: true
 collapse: true
-name: 'table-grouped-rows-example' 
+name: 'table-grouped-rows-example'
 highlights:
   - 159
   - 169
