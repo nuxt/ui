@@ -245,10 +245,10 @@ defineExpose({ fileInputRef })
         <li v-for="(f, i) in file" :key="i" :class="ui.file({ class: props.ui?.file })">
           <slot name="file" v-bind="{ file: f }">
             <div class="flex items-center gap-3">
-              <UIcon v-if="!f.type.includes('image')" :name="props.fileIcon || appConfig.ui.icons.file" />
               <UAvatar
-                v-else
-                :src="filePreviews[fileKey(f)]"
+                :src="f.type.includes('image') ? filePreviews[fileKey(f)] : undefined"
+                :icon="f.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
+                :alt="f.name"
                 :size="(ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size']"
                 :class="ui.fileAvatar({ class: props.ui?.fileAvatar })"
               />
