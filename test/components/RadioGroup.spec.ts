@@ -41,7 +41,20 @@ describe('RadioGroup', () => {
     // Slots
     ['with legend slot', { props, slots: { label: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
-    ['with description slot', { props, slots: { label: () => 'Description slot' } }]
+    ['with description slot', { props, slots: { label: () => 'Description slot' } }],
+    ['with description slot', { props: {
+      items: [
+        { ...items[0], ui: {
+          item: 'custom-item-class',
+          container: 'custom-container-class',
+          base: 'custom-base-class',
+          indicator: 'custom-indicator-class',
+          wrapper: 'custom-wrapper-class',
+          label: 'custom-label-class',
+          description: 'custom-description-class'
+        } }, ...items.slice(1)
+      ]
+    } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: RadioGroupProps, slots?: Partial<RadioGroupSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, RadioGroup)
     expect(html).toMatchSnapshot()
