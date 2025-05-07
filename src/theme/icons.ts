@@ -13,6 +13,8 @@ export default {
   external: 'i-lucide-arrow-up-right',
   folder: 'i-lucide-folder',
   folderOpen: 'i-lucide-folder-open',
+  upload: 'i-lucide-upload',
+  file: 'i-lucide-file',
   loading: 'i-lucide-refresh-cw',
   minus: 'i-lucide-minus',
   plus: 'i-lucide-plus',

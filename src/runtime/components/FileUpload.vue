@@ -1,123 +1,272 @@
 <script lang="ts">
+import theme from '#build/ui/file-upload'
+import type { AppConfig } from '@nuxt/schema'
+import type { ComponentConfig } from '../types/utils'
+import type { AvatarProps } from '../types'
+
+type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
+
 export interface FileUploadProps {
+  as?: any
+  id?: string
+  name?: string
+  label?: string
   /**
-   * @default true
+   * @defaultValue 'md'
    */
-  multiple?: boolean
+  size?: FileUpload['variants']['size']
+  required?: boolean
   /**
-   * @default '*'
+   * The icon displayed in the drag and drop area.
+   * @defaultValue appConfig.ui.icons.upload
+   * @IconifyIcon
+   */
+  uploadIcon?: string
+  /**
+   * The icon displayed when the file is not an image
+   * @defaultValue appConfig.ui.icons.file
+   * @IconifyIcon
+   */
+  fileIcon?: string
+  /**
+   * The file types that the input should accept. This is a comma-separated list of MIME types or file extensions.
+   * @defaultValue 'image/*'
    */
   accept?: string
   /**
-   * Select the input source for the capture file.
-   * @see [HTMLInputElement Capture](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/capture)
+   * Whether multiple files can be uploaded or not.
+   * @defaultValue false
    */
-  capture?: 'user' | 'environment'
-  /**
-   * Reset when open file dialog.
-   * @default false
-   */
-  reset?: boolean
-  /**
-   * Select directories instead of files.
-   * @see [HTMLInputElement webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory)
-   * @default false
-   */
-  directory?: boolean
-  /**
-   * @default 0
-   */
-  minFileSize?: number
-  /**
-   * @default Infinity
-   */
-  maxFileSize?: number
-  /**
-   * @default false
-   */
+  multiple?: boolean
   disabled?: boolean
+  loading?: boolean
   /**
-   * Whether to allow drag and drop in the dropzone element
-   * @default true
+   * The icon when the `loading` prop is `true`.
+   * @defaultValue appConfig.ui.icons.loading
+   * @IconifyIcon
    */
-  allowDrop?: boolean
+  loadingIcon?: string
+  class?: any
+  ui?: FileUpload['slots']
 }
 
-export interface FileAcceptDetails extends File {
-
-}
-export interface FileRejectDetails extends File {
-}
-
-export interface FileUplaodEmits {
+export interface FileUploadEmits {
   (e: 'update:modelValue', value: File[]): void
-  (e: 'change' | 'delete', value: File): void
-  (e: 'accept', value: FileAcceptDetails): void
-  (e: 'reject', value: FileRejectDetails): void
+  (e: 'blur', event: FocusEvent): void
+  (e: 'change', event: Event): void
+}
+
+export interface FileUploadSlots {
+  default?(props: {}): any
+  empty?(props: {}): any
+  file?(props: { file: File }): any
 }
 </script>
 
-<script lang="ts" setup generic="T extends FileList">
-import { ref, defineModel } from 'vue'
+<script setup lang="ts">
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
+import { useFormField } from '../composables/useFormField'
+import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
-const emits = defineEmits<FileUplaodEmits>()
+defineOptions({ inheritAttrs: false })
 
-const modelValue = defineModel<FileList>()
+const props = withDefaults(defineProps<FileUploadProps>(), {
+  accept: 'image/*',
+  autofocusDelay: 0,
+  multiple: false
+})
 
-const file = ref<HTMLInputElement>()
+const emits = defineEmits<FileUploadEmits>()
+const appConfig = useAppConfig() as FileUpload['AppConfig']
 
-const open = () => {
-  if (file.value) {
-    file.value.multiple = true
-    file.value.click()
+const {
+  emitFormBlur,
+  emitFormInput,
+  emitFormChange,
+  id,
+  name,
+  disabled,
+  emitFormFocus,
+  ariaAttrs
+} = useFormField<FileUploadProps>(props, { deferInputValidation: true })
+
+const size = computed(() => props.size)
+const fileInputRef = ref<HTMLInputElement | null>(null)
+const file = defineModel<File[]>()
+const dragging = ref(false)
+const filePreviews = ref<Record<string, string>>({})
+
+const ui = computed(() =>
+  tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
+    size: size.value,
+    multiple: props.multiple
+  })
+)
+
+function fileKey(f: File) {
+  // Use name + lastModified for uniqueness
+  return `${f.name}_${f.lastModified}`
+}
+
+function addPreview(f: File) {
+  if (f.type.includes('image') && !filePreviews.value[fileKey(f)]) {
+    filePreviews.value[fileKey(f)] = URL.createObjectURL(f)
   }
 }
 
-const onHandleUpload = (event: Event) => {
-  const result = event.target as HTMLInputElement
-  const files = [...(modelValue.value ?? []), ...result.files!]
-  emits('change', result.files?.[0] as File)
-  emits('update:modelValue', files)
+function removePreview(f: File) {
+  const key = fileKey(f)
+  if (filePreviews.value[key]) {
+    URL.revokeObjectURL(filePreviews.value[key])
+    filePreviews.value = Object.fromEntries(
+      Object.entries(filePreviews.value).filter(([k]) => k !== key)
+    )
+  }
 }
 
-const onHandleDelete = (index: number) => {
-  const f = Array.from(modelValue.value as FileList).filter((_, i) => i !== index)
-  emits('update:modelValue', f)
+function revokeAllPreviews() {
+  Object.values(filePreviews.value).forEach(URL.revokeObjectURL)
+  filePreviews.value = {}
 }
+
+watch(
+  file,
+  (newFiles) => {
+    if (newFiles?.length) {
+      newFiles.forEach(f => addPreview(f))
+    }
+  },
+  { deep: true }
+)
+
+onMounted(() => {
+  if (file.value?.length) {
+    file.value?.forEach(f => addPreview(f))
+  }
+})
+
+onUnmounted(revokeAllPreviews)
+
+function handleUpload(files: FileList) {
+  const filesArray = Array.from(files)
+  const newFiles = props.multiple ? [...(file.value ?? []), ...filesArray] : filesArray
+  file.value = newFiles
+  emitFormInput()
+}
+
+function removeFile(f: File) {
+  file.value = file.value?.filter(existing => existing !== f)
+  removePreview(f)
+  emitFormInput()
+  emits('change', new Event('change'))
+  // Reset input so the same file can be re-added
+  if (fileInputRef.value) {
+    fileInputRef.value.value = ''
+  }
+}
+
+function onFileChange(event: Event) {
+  const target = event.target as HTMLInputElement
+  if (target.files?.length) {
+    handleUpload(target.files)
+    emits('change', event)
+    emitFormChange()
+  }
+}
+
+function onDrop(event: DragEvent) {
+  event.preventDefault()
+  dragging.value = false
+  if (event.dataTransfer?.files?.length) {
+    handleUpload(event.dataTransfer.files)
+  }
+}
+
+function onBlur(event: FocusEvent) {
+  emitFormBlur()
+  emits('blur', event)
+}
+
+defineExpose({ fileInputRef })
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-4" aria-label="root">
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div
-      aria-label="dropzone"
+      :class="ui.base({
+        class: [
+          props.ui?.base,
+          dragging && ui.dragging({ class: props.ui?.dragging }),
+          !file?.length && 'cursor-pointer'
+        ]
+      })
+      "
       tabindex="0"
-      role="button"
-      class="min-h-[20rem] w-full  border-[var(--ui-border)] border rounded-lg flex flex-col gap-3 justify-center items-center px-6 py-4"
-      @click="open"
-      @keyup.prevent.enter="open"
+      @drop="onDrop"
+      @dragover.prevent="dragging = true"
+      @dragleave="dragging = false"
     >
-      <h3 class="font-bold text-lg">
-        Drop your files here
-      </h3>
-      <UButton class="cursor-pointer" @click.capture.stop="open">
-        Open Dialog
-      </UButton>
+      <input
+        :id="id"
+        ref="fileInputRef"
+        type="file"
+        :name="name"
+        :accept="accept"
+        :multiple="multiple"
+        :required="required"
+        :disabled="disabled || loading"
+        class="hidden"
+        v-bind="{ ...$attrs, ...ariaAttrs }"
+        @blur="onBlur"
+        @change="onFileChange"
+        @focus="emitFormFocus"
+      >
+      <!-- Empty state -->
+      <div v-if="!file || file?.length === 0" :class="ui.empty({ class: props.ui?.empty })" @click="!disabled && !loading && fileInputRef?.click()">
+        <slot name="empty">
+          <UIcon
+            :name="props.uploadIcon || appConfig.ui.icons.upload"
+            :class="ui.uploadIcon({ class: props.ui?.uploadIcon })"
+          />
+          <span
+            :class="ui.label({
+              class: props.ui?.label
+            })"
+          > Browse or drop files here </span>
+        </slot>
+      </div>
+
+      <!-- File list -->
+      <ul v-else :class="ui.files({ class: props.ui?.files })">
+        <li v-for="(f, i) in file" :key="i" :class="ui.file({ class: props.ui?.file })">
+          <slot name="file" v-bind="{ file: f }">
+            <div class="flex items-center gap-3">
+              <UIcon v-if="!f.type.includes('image')" :name="props.fileIcon || appConfig.ui.icons.file" />
+              <UAvatar
+                v-else
+                :src="filePreviews[fileKey(f)]"
+                :size="(ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size']"
+                :class="ui.fileAvatar({ class: props.ui?.fileAvatar })"
+              />
+              <div>
+                <p :class="ui.fileLabel({ class: props.ui?.fileLabel })">
+                  {{ f.name }}
+                </p>
+                <p :class="ui.fileSize({ class: props.ui?.fileSize })">
+                  {{ (f.size / 1024 / 1024).toFixed(2) }} MB
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <UIcon :name="appConfig.ui.icons.close" @click.stop="removeFile(f)" />
+            </div>
+          </slot>
+        </li>
+      </ul>
     </div>
-    <input ref="file" type="file" class="sr-only" @change="onHandleUpload">
-    <ul class="flex flex-col gap-3">
-      <li v-for="(asd, index) in modelValue" :key="index" class="">
-        <span>
-
-          {{ asd.name }}
-        </span>
-
-        <UButton
-          variant="ghost"
-          color="error"
-          icon="i-lucide-trash"
-          @click="onHandleDelete(index)"
-        />
-      </li>
-    </ul>
-  </div>
+  </Primitive>
 </template>

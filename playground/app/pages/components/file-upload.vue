@@ -1,9 +1,13 @@
 <script lang="ts" setup>
-const files = ref()
+const files = ref<File[]>([])
 </script>
 
 <template>
-  <div class="w-full max-w-96">
-    <UFileUpload v-model="files" />
+  <div class="flex flex-col gap-4 items-center">
+    <UFileUpload v-model="files" size="xs" />
+    <UFileUpload v-model="files" size="sm" />
+    <UFileUpload v-model="files" size="md" />
+    <UFileUpload v-model="files" size="lg" />
+    <UFileUpload v-model="files" size="xl" :multiple="true" />
   </div>
 </template>
