@@ -36,7 +36,20 @@ describe('Breadcrumb', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
-    ['with separator slot', { props, slots: { separator: () => '/' } }]
+    ['with separator slot', { props, slots: { separator: () => '/' } }],
+    ['with separator slot', { props: {
+      items: [
+        { ...items[0], ui: {
+          item: 'custom-item-class',
+          link: 'custom-link-class',
+          linkLeadingIcon: 'custom-link-leading-icon-class',
+          linkLeadingAvatar: 'custom-link-leading-avatar-class',
+          linkLabel: 'custom-link-label-class',
+          separator: 'custom-separator-class',
+          separatorIcon: 'custom-separator-icon-class'
+        } }, ...items.slice(1)
+      ]
+    } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps, slots?: Partial<BreadcrumbSlots & { custom: () => 'Custom slot' }> }) => {
     const html = await ComponentRender(nameOrHtml, options, Breadcrumb)
     expect(html).toMatchSnapshot()
