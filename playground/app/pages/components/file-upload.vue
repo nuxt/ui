@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import type { FileAcceptDetails } from '#ui/types/file-upload'
-
-const model = ref<FileAcceptDetails>([])
+const model = ref([])
+const fileuploadEl = ref(null)
 </script>
 
 <template>
-  <UFileUpload v-model="model" :accept="['image/*']" />
+  <UFileUpload ref="fileuploadEl" v-model="model" accept="image/*" />
+  {{ model }}
+  {{ fileuploadEl }}
 </template>
