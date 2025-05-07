@@ -109,7 +109,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) 
 </script>
 
 <template>
-  <TabsRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <TabsRoot v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <TabsList :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 

@@ -238,7 +238,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <SelectTrigger :id="id" :class="ui.base({ class: [props.class, props.ui?.base] })" v-bind="{ ...$attrs, ...ariaAttrs }">
+    <SelectTrigger :id="id" :class="ui.base({ class: [props.ui?.base, props.class] })" v-bind="{ ...$attrs, ...ariaAttrs }">
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />

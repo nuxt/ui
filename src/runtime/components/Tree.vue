@@ -198,7 +198,7 @@ const defaultExpanded = computed(() =>
 
   <TreeRoot
     v-bind="(rootProps as unknown as TreeRootProps<NestedItem<T>>)"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemValue"
     :default-expanded="defaultExpanded"
     :selection-behavior="selectionBehavior"

@@ -89,7 +89,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
 </script>
 
 <template>
-  <AccordionRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <AccordionRoot v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <AccordionItem
       v-for="(item, index) in props.items"
       v-slot="{ open }"

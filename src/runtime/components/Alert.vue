@@ -97,7 +97,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.alert || {})
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="leading">
       <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       <UIcon v-else-if="icon" :name="icon" :class="ui.icon({ class: props.ui?.icon })" />

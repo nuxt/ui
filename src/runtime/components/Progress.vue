@@ -167,7 +167,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!isIndeterminate && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
