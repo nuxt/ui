@@ -276,7 +276,7 @@ You can group rows based on a given column value and show/hide sub rows via some
 ---
 prettier: true
 collapse: true
-name: 'table-column-grouping-example' 
+name: 'table-grouped-rows-example' 
 highlights:
   - 159
   - 169
