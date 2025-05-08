@@ -57,7 +57,7 @@ describe('Accordion', () => {
     ['with body slot', { props: { ...props, modelValue: '1' }, slots: { body: () => 'Body slot' } }],
     ['with custom slot', { props: { ...props, modelValue: '5' }, slots: { custom: () => 'Custom slot' } }],
     ['with custom body slot', { props: { ...props, modelValue: '5' }, slots: { 'custom-body': () => 'Custom body slot' } }],
-    ['with ui prop on items', { props: { items: [{ ...items[0], ui: {
+    ['with ui field on items', { props: { items: [{ ...items[0], ui: {
       header: 'item-custom-header-class',
       trigger: 'item-custom-trigger-class',
       leadingIcon: 'item-custom-leading-icon-class',
