@@ -16,6 +16,9 @@ links:
 
 Use the `items` prop as an array and render each item using the default slot:
 
+You can also pass an array of objects with the following properties:
+- `ui?: { item?: ClassNameValue }`{lang="ts-type"}
+
 ::note
 Use your mouse to drag the carousel horizontally on desktop.
 ::
