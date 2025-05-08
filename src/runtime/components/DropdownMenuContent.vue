@@ -120,7 +120,7 @@ const groups = computed<DropdownMenuItem[][]>(() =>
           <DropdownMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: [uiOverride?.label, item.ui?.label] })">
             <ReuseItemTemplate :item="item" :index="index" />
           </DropdownMenu.Label>
-          <DropdownMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator({ class: uiOverride?.separator })" />
+          <DropdownMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator] })" />
           <DropdownMenu.Sub v-else-if="item?.children?.length" :open="item.open" :default-open="item.defaultOpen">
             <DropdownMenu.SubTrigger
               as="button"
