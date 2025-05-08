@@ -105,7 +105,22 @@ describe('DropdownMenu', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
+    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with ui field in items', { props: {
+      ...props,
+      items: items.map(i => ({ ...i, ui: {
+        item: 'custom-item-class',
+        itemLeadingIcon: 'custom-item-leading-icon-class',
+        itemLeadingAvatarSize: 'custom-item-leading-avatar-size-class',
+        itemLeadingAvatar: 'custom-item-leading-avatar-class',
+        itemLabel: 'custom-item-label-class',
+        itemLabelExternalIcon: 'custom-item-label-external-icon-class',
+        itemTrailing: 'custom-item-trailing-class',
+        itemTrailingIcon: 'custom-item-trailing-icon-class',
+        itemTrailingKbds: 'custom-item-trailing-kbds-class',
+        itemTrailingKbdsSize: 'custom-item-trailing-kbds-size-class'
+      } }))
+    } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: DropdownMenuProps, slots?: Partial<DropdownMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, DropdownMenu)
     expect(html).toMatchSnapshot()
