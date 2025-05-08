@@ -65,7 +65,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {})
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.base({ class: [props.class, props.ui?.base] })">
+  <Primitive :as="as" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot name="leading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
       <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />

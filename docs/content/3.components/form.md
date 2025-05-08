@@ -24,7 +24,7 @@ It requires two props:
 **No validation library is included** by default, ensure you **install the one you need**.
 ::
 
-::tabs
+::tabs{class="gap-0"}
   ::component-example{label="Valibot"}
   ---
   name: 'form-example-valibot'

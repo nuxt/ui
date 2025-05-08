@@ -123,7 +123,7 @@ const ui = computed(() => tv({
     v-slot="{ active, ...slotProps }"
     :type="type"
     :disabled="disabled || isLoading"
-    :class="ui.base({ class: [props.class, props.ui?.base] })"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
     v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
     custom
   >

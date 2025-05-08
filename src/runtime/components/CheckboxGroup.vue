@@ -75,6 +75,7 @@ import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
+import UCheckbox from './Checkbox.vue'
 
 const props = withDefaults(defineProps<CheckboxGroupProps<T>>(), {
   valueKey: 'value',
@@ -153,7 +154,7 @@ function onUpdate(value: any) {
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
     <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">

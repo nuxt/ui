@@ -93,7 +93,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     await registerModule('@nuxt/icon', 'icon', { cssLayer: 'components' })
     if (options.fonts) {
-      await registerModule('@nuxt/fonts', 'fonts', { experimental: { processCSSVariables: true } })
+      await registerModule('@nuxt/fonts', 'fonts', {})
     }
     if (options.colorMode) {
       await registerModule('@nuxtjs/color-mode', 'colorMode', { classSuffix: '', disableTransition: true })
