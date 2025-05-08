@@ -164,6 +164,12 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>
+  /**
+   * Enables or disables column resizing for the column.
+   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-sizing#enablecolumnresizing)
+   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-sizing)
+   */
+  enableColumnResizing?: boolean
   onSelect?: (row: TableRow<T>, e?: Event) => void
   class?: any
   ui?: Table['slots']
@@ -209,7 +215,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {})
   sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
-  loadingAnimation: props.loadingAnimation
+  loadingAnimation: props.loadingAnimation,
+  resizable: props.enableColumnResizing
 }))
 
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
@@ -233,6 +240,7 @@ const tableApi = useVueTable({
   data,
   columns: columns.value,
   meta: meta.value,
+  enableColumnResizing: props.enableColumnResizing,
   getCoreRowModel: getCoreRowModel(),
   ...(props.globalFilterOptions || {}),
   onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
@@ -339,7 +347,13 @@ defineExpose({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <table ref="tableRef" :class="ui.base({ class: [props.ui?.base] })">
+    <table
+      ref="tableRef"
+      :class="ui.base({ class: [props.ui?.base] })"
+      :style="enableColumnResizing ? {
+        width: `${tableApi.getCenterTotalSize()}px`
+      } : undefined"
+    >
       <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ caption }}
@@ -360,10 +374,32 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
+            :style="enableColumnResizing && header.column.getCanResize() ? { width: `${header.getSize()}px` } : undefined"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
             </slot>
+            <div
+              v-if="enableColumnResizing && header.column.getCanResize()"
+              :class="ui.resizeHandle({ class: props.ui?.resizeHandle })"
+              :aria-controls="header.id"
+              :style="{
+                transform: columnSizingOptions?.columnResizeMode === 'onEnd'
+                  && header.column.getIsResizing()
+                  ? `translateX(${
+                    (columnSizingOptions.columnResizeDirection
+                      === 'rtl'
+                      ? -1
+                      : 1)
+                    * (tableApi.getState().columnSizingInfo
+                      .deltaOffset ?? 0)
+                  }px)`
+                  : undefined
+              }"
+              @doubleclick="header.column.resetSize"
+              @mousedown="header.getResizeHandler()($event)"
+              @touchstart="header.getResizeHandler()($event)"
+            />
           </th>
         </tr>
       </thead>

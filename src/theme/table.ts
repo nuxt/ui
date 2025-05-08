@@ -11,7 +11,8 @@ export default (options: Required<ModuleOptions>) => ({
     th: 'px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pe-0',
     td: 'p-4 text-sm text-muted whitespace-nowrap [&:has([role=checkbox])]:pe-0',
     empty: 'py-6 text-center text-sm text-muted',
-    loading: 'py-6 text-center'
+    loading: 'py-6 text-center',
+    resizeHandle: 'select-none cursor-ew-resize absolute top-0 bottom-0 bg-primary w-1 right-0'
   },
   variants: {
     pinned: {
@@ -39,6 +40,11 @@ export default (options: Required<ModuleOptions>) => ({
     loadingColor: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
       neutral: ''
+    },
+    resizable: {
+      true: {
+        th: 'relative'
+      }
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((loadingColor: string) => ({
