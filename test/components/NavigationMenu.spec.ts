@@ -107,7 +107,32 @@ describe('NavigationMenu', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }]
+    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with ui field in items', { props: {
+      ...props,
+      items: [{ ...items[0], ui: {
+        linkLeadingAvatarSize: 'custom-link-leading-avatar-size-class',
+        linkLeadingAvatar: 'custom-link-leading-avatar-class',
+        linkLeadingIcon: 'custom-link-leading-icon-class',
+        linkLabel: 'custom-link-label-class',
+        linkLabelExternalIcon: 'custom-link-label-external-icon-class',
+        linkTrailing: 'custom-link-trailing-class',
+        linkTrailingBadgeSize: 'custom-link-trailing-badge-size-class',
+        linkTrailingBadge: 'custom-link-trailing-badge-class',
+        linkTrailingIcon: 'custom-link-trailing-icon-class',
+        label: 'custom-label-class',
+        link: 'custom-link-class',
+        content: 'custom-content-class',
+        childList: 'custom-child-list-class',
+        childItem: 'custom-child-item-class',
+        childLink: 'custom-child-link-class',
+        childLinkIcon: 'custom-child-link-icon-class',
+        childLinkWrapper: 'custom-child-link-wrapper-class',
+        childLinkLabel: 'custom-child-link-label-class',
+        childLinkLabelExternalIcon: 'custom-child-link-label-external-icon-class',
+        childLinkDescription: 'custom-child-link-description-class'
+      } }, ...items.slice(1)]
+    } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps, slots?: Partial<NavigationMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, NavigationMenu)
     expect(html).toMatchSnapshot()
