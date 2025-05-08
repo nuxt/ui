@@ -110,6 +110,7 @@ describe('DropdownMenu', () => {
       ...props,
       items: items.map(i => ({ ...i, ui: {
         item: 'custom-item-class',
+        label: 'custom-label-class',
         itemLeadingIcon: 'custom-item-leading-icon-class',
         itemLeadingAvatarSize: 'custom-item-leading-avatar-size-class',
         itemLeadingAvatar: 'custom-item-leading-avatar-class',
