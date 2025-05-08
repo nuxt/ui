@@ -47,7 +47,7 @@ describe('Tabs', () => {
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
-    ['with ui prop on items', { props: {
+    ['with ui field on items', { props: {
       items: [{
         ...items[0],
         ui: {
