@@ -8,7 +8,7 @@ import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps,
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
 
-export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type'> {
+export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type' | 'ui'> {
   /** Description is only used when `orientation` is `horizontal`. */
   description?: string
   [key: string]: any
@@ -40,6 +40,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   value?: string
   children?: NavigationMenuChildItem[]
   onSelect?(e: Event): void
+  ui?: Pick<NavigationMenu['slots'], 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>
   [key: string]: any
 }
 
@@ -203,34 +204,34 @@ const lists = computed<NavigationMenuItem[][]>(() =>
   <DefineLinkTemplate v-slot="{ item, active, index }">
     <slot :name="((item.slot || 'item') as keyof NavigationMenuSlots<T>)" :item="item" :index="index">
       <slot :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
-        <UAvatar v-if="item.avatar" :size="((props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: props.ui?.linkLeadingAvatar, active, disabled: !!item.disabled })" />
-        <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon, active, disabled: !!item.disabled })" />
+        <UAvatar v-if="item.avatar" :size="((item.ui?.linkLeadingAvatarSize || props.ui?.linkLeadingAvatarSize || ui.linkLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.linkLeadingAvatar({ class: [props.ui?.linkLeadingAvatar, item.ui?.linkLeadingAvatar], active, disabled: !!item.disabled })" />
+        <UIcon v-else-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active, disabled: !!item.disabled })" />
       </slot>
 
       <span
         v-if="(!collapsed || orientation !== 'vertical') && (get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>])"
-        :class="ui.linkLabel({ class: props.ui?.linkLabel })"
+        :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
       >
         <slot :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
           {{ get(item, props.labelKey as string) }}
         </slot>
 
-        <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" :class="ui.linkLabelExternalIcon({ class: props.ui?.linkLabelExternalIcon, active })" />
+        <UIcon v-if="item.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" :class="ui.linkLabelExternalIcon({ class: [props.ui?.linkLabelExternalIcon, item.ui?.linkLabelExternalIcon], active })" />
       </span>
 
-      <span v-if="(!collapsed || orientation !== 'vertical') && (item.badge || (orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>])" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
+      <span v-if="(!collapsed || orientation !== 'vertical') && (item.badge || (orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>])" :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })">
         <slot :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
           <UBadge
             v-if="item.badge"
             color="neutral"
             variant="outline"
-            :size="((props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
+            :size="((item.ui?.linkTrailingBadgeSize || props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
             v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
-            :class="ui.linkTrailingBadge({ class: props.ui?.linkTrailingBadge })"
+            :class="ui.linkTrailingBadge({ class: [props.ui?.linkTrailingBadge, item.ui?.linkTrailingBadge] })"
           />
 
-          <UIcon v-if="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length)" :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon, active })" />
-          <UIcon v-else-if="item.trailingIcon" :name="item.trailingIcon" :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon, active })" />
+          <UIcon v-if="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length)" :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })" />
+          <UIcon v-else-if="item.trailingIcon" :name="item.trailingIcon" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })" />
         </slot>
       </span>
     </slot>
@@ -245,7 +246,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
       :unmount-on-hide="(orientation === 'vertical' && item.children?.length && !collapsed) ? unmountOnHide : undefined"
       :open="item.open"
     >
-      <div v-if="orientation === 'vertical' && item.type === 'label'" :class="ui.label({ class: props.ui?.label })">
+      <div v-if="orientation === 'vertical' && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
         <ReuseLinkTemplate :item="item" :index="index" />
       </div>
       <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(orientation === 'vertical' && item.children?.length && !collapsed) ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
@@ -256,27 +257,27 @@ const lists = computed<NavigationMenuItem[][]>(() =>
           :disabled="item.disabled"
           @select="item.onSelect"
         >
-          <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
+          <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class, item.ui?.link], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
             <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
           </ULinkBase>
         </component>
 
-        <NavigationMenuContent v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])" v-bind="contentProps" :class="ui.content({ class: props.ui?.content })">
+        <NavigationMenuContent v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])" v-bind="contentProps" :class="ui.content({ class: [props.ui?.content, item.ui?.content] })">
           <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
-            <ul :class="ui.childList({ class: props.ui?.childList })">
-              <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: props.ui?.childItem })">
+            <ul :class="ui.childList({ class: [props.ui?.childList, item.ui?.childList] })">
+              <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem] })">
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
                   <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
-                    <ULinkBase v-bind="childSlotProps" :class="ui.childLink({ class: [props.ui?.childLink, childItem.class], active: childActive })">
-                      <UIcon v-if="childItem.icon" :name="childItem.icon" :class="ui.childLinkIcon({ class: props.ui?.childLinkIcon, active: childActive })" />
+                    <ULinkBase v-bind="childSlotProps" :class="ui.childLink({ class: [props.ui?.childLink, childItem.class, item.ui?.childLink], active: childActive })">
+                      <UIcon v-if="childItem.icon" :name="childItem.icon" :class="ui.childLinkIcon({ class: [props.ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })" />
 
-                      <div :class="ui.childLinkWrapper({ class: props.ui?.childLinkWrapper })">
-                        <p :class="ui.childLinkLabel({ class: props.ui?.childLinkLabel, active: childActive })">
+                      <div :class="ui.childLinkWrapper({ class: [props.ui?.childLinkWrapper, item.ui?.childLinkWrapper] })">
+                        <p :class="ui.childLinkLabel({ class: [props.ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })">
                           {{ get(childItem, props.labelKey as string) }}
 
-                          <UIcon v-if="childItem.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ class: props.ui?.childLinkLabelExternalIcon, active: childActive })" />
+                          <UIcon v-if="childItem.target === '_blank' && externalIcon !== false" :name="typeof externalIcon === 'string' ? externalIcon : appConfig.ui.icons.external" :class="ui.childLinkLabelExternalIcon({ class: [props.ui?.childLinkLabelExternalIcon, item.ui?.childLinkLabelExternalIcon], active: childActive })" />
                         </p>
-                        <p v-if="childItem.description" :class="ui.childLinkDescription({ class: props.ui?.childLinkDescription, active: childActive })">
+                        <p v-if="childItem.description" :class="ui.childLinkDescription({ class: [props.ui?.childLinkDescription, item.ui?.childLinkDescription], active: childActive })">
                           {{ childItem.description }}
                         </p>
                       </div>
@@ -297,7 +298,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
             :item="childItem"
             :index="childIndex"
             :level="level + 1"
-            :class="ui.childItem({ class: props.ui?.childItem })"
+            :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem, childItem.ui?.childItem] })"
           />
         </ul>
       </template>
