@@ -9,10 +9,10 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.40",
+    "@iconify-json/lucide": "^1.2.41",
     "@iconify-json/simple-icons": "^1.2.33",
     "@nuxt/ui": "latest",
-    "@nuxthub/core": "^0.8.25",
+    "@nuxthub/core": "^0.8.27",
     "nuxt": "^3.17.2",
     "zod": "^3.24.4"
   },
