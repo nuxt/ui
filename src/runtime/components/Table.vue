@@ -198,6 +198,7 @@ import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<TableProps<T>>(), {
+  columnSizingOptions: () => ({ columnResizeMode: 'onChange' }),
   watchOptions: () => ({
     deep: true
   })
