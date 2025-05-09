@@ -361,7 +361,7 @@ onMounted(() => {
       }"
       :column-sizing-options="{
         enableColumnResizing: true,
-        columnResizeMode: resizeMode
+        columnResizeMode: 'onChange'
       }"
       sticky
       class="border border-accented rounded-sm"

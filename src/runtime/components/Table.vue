@@ -164,12 +164,6 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>
-  /**
-   * Enables or disables column resizing for the column.
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/features/column-sizing#enablecolumnresizing)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-sizing)
-   */
-  enableColumnResizing?: boolean
   onSelect?: (row: TableRow<T>, e?: Event) => void
   class?: any
   ui?: Table['slots']
@@ -217,7 +211,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {})
   loading: props.loading,
   loadingColor: props.loadingColor,
   loadingAnimation: props.loadingAnimation,
-  resizable: props.enableColumnResizing
+  resizable: props.columnSizingOptions.enableColumnResizing
 }))
 
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
@@ -347,6 +341,7 @@ defineExpose({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    {{ columnSizingOptions }}
     <table
       ref="tableRef"
       :class="ui.base({ class: [props.ui?.base] })"
