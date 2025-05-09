@@ -190,6 +190,7 @@ function emitItemHandler(event: any): string {
 const generateThemeConfig = ({ pro, prose, componentName }: ThemeConfig) => {
   const computedTheme = pro ? (prose ? themePro.prose : themePro) : theme
   const componentTheme = computedTheme[componentName as keyof typeof computedTheme]
+
   return {
     [pro ? 'uiPro' : 'ui']: prose
       ? { prose: { [componentName]: componentTheme } }
@@ -306,10 +307,14 @@ export default defineNitroPlugin((nitroApp) => {
     const componentName = camelCase(doc.title)
 
     visitAndReplace(doc, 'component-theme', (node) => {
-      const attributes = node[1] as ComponentAttributes
+      const attributes = node[1] as Record<string, string>
+      const mdcSpecificName = attributes?.slug
+
+      const finalComponentName = mdcSpecificName ? camelCase(mdcSpecificName) : componentName
+
       const pro = parseBoolean(attributes[':pro'])
       const prose = parseBoolean(attributes[':prose'])
-      const appConfig = generateThemeConfig({ pro, prose, componentName })
+      const appConfig = generateThemeConfig({ pro, prose, componentName: finalComponentName })
 
       replaceNodeWithPre(
         node,
