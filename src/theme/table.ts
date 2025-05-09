@@ -12,7 +12,7 @@ export default (options: Required<ModuleOptions>) => ({
     td: 'p-4 text-sm text-muted whitespace-nowrap [&:has([role=checkbox])]:pe-0',
     empty: 'py-6 text-center text-sm text-muted',
     loading: 'py-6 text-center',
-    resizeHandle: 'select-none cursor-ew-resize absolute top-0 bottom-0 bg-primary w-[3px] -right-[1.5px] '
+    resizeHandle: 'select-none cursor-ew-resize absolute top-0 bottom-0 bg-primary w-1 right-0 '
   },
   variants: {
     pinned: {
