@@ -341,7 +341,6 @@ defineExpose({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    {{ columnSizingOptions }}
     <table
       ref="tableRef"
       :class="ui.base({ class: [props.ui?.base] })"
