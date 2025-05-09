@@ -523,6 +523,21 @@ class: '!p-0'
 ---
 ::
 
+### With resizable columns
+
+You can make the columns resizable by setting the `enableColumnResizing` prop.
+
+Use the `enableResizing` field on the column to allow resizing for specific columns.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-resizing-example'
+class: '!p-0'
+---
+::
+
 ## API
 
 ### Props
