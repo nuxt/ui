@@ -20,7 +20,6 @@ Use the `items` prop as an array of objects with the following properties:
 - `description?: AvatarProps`{lang="ts-type"}
 - `content?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
-- `iconClass?: string`{lang="ts-type"}
 - `value?: string | number`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
