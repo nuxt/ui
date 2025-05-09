@@ -241,7 +241,6 @@ const tableApi = useVueTable({
   data,
   columns: columns.value,
   meta: meta.value,
-  enableColumnResizing: props.enableColumnResizing,
   getCoreRowModel: getCoreRowModel(),
   ...(props.globalFilterOptions || {}),
   onGlobalFilterChange: updaterOrValue => valueUpdater(updaterOrValue, globalFilterState),
@@ -351,7 +350,7 @@ defineExpose({
     <table
       ref="tableRef"
       :class="ui.base({ class: [props.ui?.base] })"
-      :style="enableColumnResizing ? {
+      :style="columnSizingOptions.enableColumnResizing ? {
         width: `${tableApi.getCenterTotalSize()}px`
       } : undefined"
     >
@@ -375,13 +374,13 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="enableColumnResizing && header.column.getCanResize() ? { width: `${header.getSize()}px` } : undefined"
+            :style="columnSizingOptions.enableColumnResizing && header.column.getCanResize() ? { width: `${header.getSize()}px` } : undefined"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
             </slot>
             <div
-              v-if="enableColumnResizing && header.column.getCanResize()"
+              v-if="columnSizingOptions.enableColumnResizing && header.column.getCanResize()"
               :class="ui.resizeHandle({ class: props.ui?.resizeHandle })"
               :aria-controls="header.id"
               :style="{

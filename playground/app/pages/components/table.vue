@@ -359,7 +359,10 @@ onMounted(() => {
       :ui="{
         tr: 'divide-x divide-default'
       }"
-      enable-column-resizing
+      :column-sizing-options="{
+        enableColumnResizing: true,
+        columnResizeMode: resizeMode
+      }"
       sticky
       class="border border-accented rounded-sm"
       @select="onSelect"

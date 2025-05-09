@@ -70,5 +70,5 @@ const columns: TableColumn<User>[] = [{
 </script>
 
 <template>
-  <UTable enable-column-resizing :data="data" :columns="columns" class="flex-1" sticky />
+  <UTable :data="data" :columns="columns" :column-sizing-options="{ enableColumnResizing: true }" class="flex-1" sticky />
 </template>
