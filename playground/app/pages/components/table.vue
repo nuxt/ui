@@ -158,11 +158,13 @@ const columns: TableColumn<Payment>[] = [{
     'aria-label': 'Select row'
   }),
   enableSorting: false,
-  enableHiding: false
+  enableHiding: false,
+  enableResizing: false
 }, {
   accessorKey: 'id',
   header: '#',
-  cell: ({ row }) => `#${row.getValue('id')}`
+  cell: ({ row }) => `#${row.getValue('id')}`,
+  enableResizing: false
 }, {
   accessorKey: 'date',
   header: 'Date',
@@ -180,7 +182,8 @@ const columns: TableColumn<Payment>[] = [{
       minute: '2-digit',
       hour12: false
     })
-  }
+  },
+  maxSize: 400
 }, {
   accessorKey: 'status',
   header: 'Status',
@@ -192,7 +195,8 @@ const columns: TableColumn<Payment>[] = [{
     })[row.getValue('status') as string]
 
     return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
-  }
+  },
+  maxSize: 200
 }, {
   accessorKey: 'email',
   header: ({ column }) => {
@@ -354,6 +358,10 @@ onMounted(() => {
       }"
       :ui="{
         tr: 'divide-x divide-default'
+      }"
+      :column-sizing-options="{
+        enableColumnResizing: true,
+        columnResizeMode: 'onChange'
       }"
       sticky
       class="border border-accented rounded-sm"

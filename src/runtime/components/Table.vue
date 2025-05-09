@@ -192,6 +192,7 @@ import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<TableProps<T>>(), {
+  columnSizingOptions: () => ({ columnResizeMode: 'onChange' }),
   watchOptions: () => ({
     deep: true
   })
@@ -209,7 +210,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {})
   sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
-  loadingAnimation: props.loadingAnimation
+  loadingAnimation: props.loadingAnimation,
+  resizable: props.columnSizingOptions.enableColumnResizing
 }))
 
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
@@ -338,8 +340,14 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
-    <table ref="tableRef" :class="ui.base({ class: [props.ui?.base] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <table
+      ref="tableRef"
+      :class="ui.base({ class: [props.ui?.base] })"
+      :style="columnSizingOptions.enableColumnResizing ? {
+        width: `${tableApi.getCenterTotalSize()}px`
+      } : undefined"
+    >
       <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ caption }}
@@ -360,10 +368,32 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
+            :style="columnSizingOptions.enableColumnResizing ? { width: `${header.getSize()}px` } : undefined"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
             </slot>
+            <div
+              v-if="columnSizingOptions.enableColumnResizing && header.column.getCanResize()"
+              :class="ui.resizeHandle({ class: props.ui?.resizeHandle })"
+              :aria-controls="header.id"
+              :style="{
+                transform: columnSizingOptions?.columnResizeMode === 'onEnd'
+                  && header.column.getIsResizing()
+                  ? `translateX(${
+                    (columnSizingOptions.columnResizeDirection
+                      === 'rtl'
+                      ? -1
+                      : 1)
+                    * (tableApi.getState().columnSizingInfo
+                      .deltaOffset ?? 0)
+                  }px)`
+                  : undefined
+              }"
+              @doubleclick="header.column.resetSize"
+              @mousedown="header.getResizeHandler()($event)"
+              @touchstart="header.getResizeHandler()($event)"
+            />
           </th>
         </tr>
       </thead>

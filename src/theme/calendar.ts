@@ -22,7 +22,7 @@ export default (options: Required<ModuleOptions>) => ({
       }])),
       neutral: {
         headCell: 'text-highlighted',
-        cellTrigger: 'focus-visible:ring-inverted data-[selected]:bg-inverted data-today:not-data-[selected]:text-inverted data-[highlighted]:bg-inverted/20 hover:not-data-[selected]:bg-inverted/10'
+        cellTrigger: 'focus-visible:ring-inverted data-[selected]:bg-inverted data-today:not-data-[selected]:text-highlighted data-[highlighted]:bg-inverted/20 hover:not-data-[selected]:bg-inverted/10'
       }
     },
     size: {

@@ -140,7 +140,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
 </script>
 
 <template>
-  <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <PaginationList v-slot="{ items }" :class="ui.list({ class: props.ui?.list })">
       <PaginationFirst v-if="showControls || !!slots.first" as-child :class="ui.first({ class: props.ui?.first })">
         <slot name="first">

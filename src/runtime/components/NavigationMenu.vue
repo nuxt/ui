@@ -304,7 +304,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
     </component>
   </DefineItemTemplate>
 
-  <NavigationMenuRoot v-bind="rootProps" :data-collapsed="collapsed" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <NavigationMenuRoot v-bind="rootProps" :data-collapsed="collapsed" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="list-leading" />
 
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
