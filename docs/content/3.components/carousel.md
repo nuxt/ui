@@ -16,9 +16,6 @@ links:
 
 Use the `items` prop as an array and render each item using the default slot:
 
-You can also pass an array of objects with the following properties:
-- `ui?: { item?: ClassNameValue }`{lang="ts-type"}
-
 ::note
 Use your mouse to drag the carousel horizontally on desktop.
 ::
@@ -29,6 +26,9 @@ name: 'carousel-items-example'
 class: 'p-8'
 ---
 ::
+
+You can also pass an array of objects with the following properties:
+- `ui?: { item?: ClassNameValue }`{lang="ts-type"}
 
 You can control how many items are visible by using the [`basis`](https://tailwindcss.com/docs/flex-basis) / [`width`](https://tailwindcss.com/docs/width) utility classes on the `item`:
 
