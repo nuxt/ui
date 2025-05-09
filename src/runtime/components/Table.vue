@@ -368,7 +368,7 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="columnSizingOptions.enableColumnResizing && header.column.getCanResize() ? { width: `${header.getSize()}px` } : undefined"
+            :style="columnSizingOptions.enableColumnResizing ? { width: `${header.getSize()}px` } : undefined"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
