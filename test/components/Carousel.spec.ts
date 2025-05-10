@@ -37,7 +37,8 @@ describe('Carousel', () => {
     ['with as', { props: { ...props, as: 'nav' } }],
     ['with class', { props: { ...props, class: 'w-full max-w-xs' } }],
     ['with ui', { props: { ...props, ui: { viewport: 'h-[320px]' } } }],
-    ['with ui field in items', { props: { items: items.map(i => ({ ...i, ui: { item: 'custom-item-class' } })) } }]
+    ['with ui field in items', { props: { items: items.map(i => ({ ...i, ui: { item: 'custom-item-class' } })) } }],
+    ['with class in items', { props: { items: items.map(i => ({ ...i, class: 'custom-item-class' })) } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CarouselProps, slots?: Partial<CarouselSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, CarouselWrapper)
     expect(html).toMatchSnapshot()

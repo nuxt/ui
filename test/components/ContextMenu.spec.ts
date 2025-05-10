@@ -112,6 +112,10 @@ describe('ContextMenu', () => {
         itemTrailingKbds: 'custom-item-trailing-kbds-class',
         itemTrailingKbdsSize: 'custom-item-trailing-kbds-size-class'
       } }))
+    } }],
+    ['with class field in items', { props: {
+      ...props,
+      items: items.map(i => ({ ...i, class: 'custom-item-class', children: 'children' in i && Array.isArray(i.children) ? i.children.map(c => ({ ...c, class: 'custom-item-child-class' })) : undefined }))
     } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContextMenuProps, slots?: Partial<ContextMenuSlots> }) => {
     const wrapper = await mountSuspended(ContextMenuWrapper, options as any)

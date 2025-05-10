@@ -29,6 +29,7 @@ class: 'p-8'
 
 You can also pass an array of objects with the following properties:
 - `ui?: { item?: ClassNameValue }`{lang="ts-type"}
+- `class?: any`{lang="ts-type"}
 
 You can control how many items are visible by using the [`basis`](https://tailwindcss.com/docs/flex-basis) / [`width`](https://tailwindcss.com/docs/width) utility classes on the `item`:
 

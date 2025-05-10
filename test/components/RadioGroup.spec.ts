@@ -42,7 +42,7 @@ describe('RadioGroup', () => {
     ['with legend slot', { props, slots: { label: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
     ['with description slot', { props, slots: { label: () => 'Description slot' } }],
-    ['with description slot', { props: {
+    ['with ui field in items', { props: {
       items: [
         { ...items[0], ui: {
           item: 'custom-item-class',
@@ -53,6 +53,11 @@ describe('RadioGroup', () => {
           label: 'custom-label-class',
           description: 'custom-description-class'
         } }, ...items.slice(1)
+      ]
+    } }],
+    ['with class field in items', { props: {
+      items: [
+        { ...items[0], class: 'custom-item-class' }, ...items.slice(1)
       ]
     } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: RadioGroupProps, slots?: Partial<RadioGroupSlots> }) => {

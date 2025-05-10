@@ -63,7 +63,7 @@ describe('Tree', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'leading slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'trailing slot' } }],
     ['with dynamic slot', { props, slots: { app: () => 'dynamic slot' } }],
-    ['with dynamic slot', { props: { items: [
+    ['with ui field in items', { props: { items: [
       { ...items[0], defaultExpanded: true, ui: {
         item: 'custom-item-class',
         itemWithChildren: 'custom-item-with-children-class',
@@ -74,6 +74,9 @@ describe('Tree', () => {
         linkTrailingIcon: 'custom-link-trailing-icon-class',
         listWithChildren: 'custom-list-with-children-class'
       } }, ...items.slice(1)
+    ] } }],
+    ['with class field in items', { props: { items: [
+      { ...items[0], defaultExpanded: true, class: 'custom-item-class' }, ...items.slice(1)
     ] } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<TreeProps>, slots?: Partial<TreeSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Tree)

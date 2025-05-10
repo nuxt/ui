@@ -23,6 +23,7 @@ export interface AccordionItem {
   value?: string
   disabled?: boolean
   ui?: Pick<Accordion['slots'], 'item' | 'header' | 'trigger' | 'leadingIcon' | 'label' | 'trailingIcon' | 'content' | 'body'>
+  class?: any
   [key: string]: any
 }
 
@@ -97,7 +98,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
       :key="index"
       :value="item.value || String(index)"
       :disabled="item.disabled"
-      :class="ui.item({ class: [props.ui?.item, item.ui?.item] })"
+      :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
     >
       <AccordionHeader as="div" :class="ui.header({ class: [props.ui?.header, item.ui?.header] })">
         <AccordionTrigger :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger], disabled: item.disabled })">

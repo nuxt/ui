@@ -51,6 +51,35 @@ exports[`ContextMenu > renders with class correctly 1`] = `
 <!--teleport end-->"
 `;
 
+exports[`ContextMenu > renders with class field in items correctly 1`] = `
+"<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
+<!--teleport start-->
+
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div role="menu" aria-orientation="vertical" data-reka-menu-content="" data-state="open" dir="ltr" tabindex="-1" data-orientation="vertical" style="pointer-events: auto; --reka-context-menu-content-transform-origin: var(--reka-popper-transform-origin); --reka-context-menu-content-available-width: var(--reka-popper-available-width); --reka-context-menu-content-available-height: var(--reka-popper-available-height); --reka-context-menu-trigger-width: var(--reka-popper-anchor-width); --reka-context-menu-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" data-dismissable-layer="" class="min-w-32 bg-default shadow-lg rounded-md ring ring-default divide-y divide-default overflow-y-auto scroll-py-1 data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-context-menu-content-transform-origin)" data-side="right" data-align="start">
+    <div role="group" class="p-1 isolate"><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5 custom-item-class">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5 custom-item-class">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5 custom-item-class">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button><button type="button" role="menuitem" tabindex="-1" data-reka-collection-item="" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:text-highlighted data-[state=open]:text-highlighted data-highlighted:before:bg-elevated/50 data-[state=open]:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5 custom-item-class">
+        <!--v-if-->
+        <!--v-if--><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+      </button></div>
+  </div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
 exports[`ContextMenu > renders with custom slot correctly 1`] = `
 "<span data-state="open" style="pointer-events: auto;" class="">Right Click</span>
 <!--teleport start-->

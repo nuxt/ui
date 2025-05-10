@@ -47,7 +47,7 @@ describe('Tabs', () => {
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
-    ['with ui field on items', { props: {
+    ['with ui field in items', { props: {
       items: [{
         ...items[0],
         ui: {
@@ -57,6 +57,12 @@ describe('Tabs', () => {
           label: 'item-custom-label-class',
           content: 'item-custom-content-class'
         }
+      }, ...items.slice(1)]
+    } }],
+    ['with class field in items', { props: {
+      items: [{
+        ...items[0],
+        class: 'item-custom-class'
       }, ...items.slice(1)]
     } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TabsProps, slots?: Partial<TabsSlots> }) => {

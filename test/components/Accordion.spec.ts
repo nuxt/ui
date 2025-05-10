@@ -57,7 +57,7 @@ describe('Accordion', () => {
     ['with body slot', { props: { ...props, modelValue: '1' }, slots: { body: () => 'Body slot' } }],
     ['with custom slot', { props: { ...props, modelValue: '5' }, slots: { custom: () => 'Custom slot' } }],
     ['with custom body slot', { props: { ...props, modelValue: '5' }, slots: { 'custom-body': () => 'Custom body slot' } }],
-    ['with ui field on items', { props: { items: [{ ...items[0], ui: {
+    ['with ui field in items', { props: { items: [{ ...items[0], ui: {
       header: 'item-custom-header-class',
       trigger: 'item-custom-trigger-class',
       leadingIcon: 'item-custom-leading-icon-class',
@@ -65,7 +65,17 @@ describe('Accordion', () => {
       trailingIcon: 'item-custom-trailing-icon-class',
       content: 'item-custom-content-class',
       body: 'item-custom-body-class'
-    } }, ...items.slice(1)] } }]
+    } }, ...items.slice(1)] } }],
+    ['with ui field in items', { props: { items: [{ ...items[0], ui: {
+      header: 'item-custom-header-class',
+      trigger: 'item-custom-trigger-class',
+      leadingIcon: 'item-custom-leading-icon-class',
+      label: 'item-custom-label-class',
+      trailingIcon: 'item-custom-trailing-icon-class',
+      content: 'item-custom-content-class',
+      body: 'item-custom-body-class'
+    } }, ...items.slice(1)] } }],
+    ['with class field on items', { props: { items: [{ ...items[0], class: 'item-custom-class' }, ...items.slice(1)] } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: AccordionProps, slots?: Partial<AccordionSlots & { custom: () => 'Custom slot' } & { 'custom-body': () => 'Custom body slot' }> }) => {
     const html = await ComponentRender(nameOrHtml, options, Accordion)
     expect(html).toMatchSnapshot()

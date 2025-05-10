@@ -20,6 +20,7 @@ export interface StepperItem {
   content?: string
   disabled?: boolean
   ui?: Pick<Stepper['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>
+  class?: any
   [key: string]: any
 }
 
@@ -138,7 +139,7 @@ defineExpose({
         :key="item.value ?? count"
         :step="count"
         :disabled="item.disabled || props.disabled"
-        :class="ui.item({ class: [props.ui?.item, item.ui?.item] })"
+        :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       >
         <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
           <StepperTrigger :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })">

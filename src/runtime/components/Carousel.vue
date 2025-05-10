@@ -17,6 +17,7 @@ type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 
 interface _CarouselItem {
   ui?: Pick<Carousel['slots'], 'item'>
+  class?: any
   [key: string]: any
 }
 
@@ -297,7 +298,7 @@ defineExpose({
           :key="index"
           role="group"
           aria-roledescription="slide"
-          :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item] })"
+          :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >
           <slot :item="item" :index="index" />
         </div>

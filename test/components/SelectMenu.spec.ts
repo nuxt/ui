@@ -83,7 +83,7 @@ describe('SelectMenu', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }],
-    ['with ui field on items', { props: { ...props, items: [{ ...items[0], ui: {
+    ['with ui field in items', { props: { ...props, items: [{ ...items[0], ui: {
       label: 'custom-label-class',
       separator: 'custom-separator-class',
       item: 'custom-item-class',
@@ -95,7 +95,8 @@ describe('SelectMenu', () => {
       itemLabel: 'custom-item-label-class',
       itemTrailing: 'custom-item-trailing-class',
       itemTrailingIcon: 'custom-item-trailing-icon-class'
-    } }, ...items.slice(1)] } }]
+    } }, ...items.slice(1)] } }],
+    ['with ui class in items', { props: { ...props, items: [{ ...items[0], class: 'item-custom-class' }, ...items.slice(1)] } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps, slots?: Partial<SelectMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, SelectMenu)
     expect(html).toMatchSnapshot()

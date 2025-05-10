@@ -111,6 +111,7 @@ describe('NavigationMenu', () => {
     ['with ui field in items', { props: {
       ...props,
       items: [{ ...items[0], ui: {
+        item: 'custom-item-class',
         linkLeadingAvatarSize: 'custom-link-leading-avatar-size-class',
         linkLeadingAvatar: 'custom-link-leading-avatar-class',
         linkLeadingIcon: 'custom-link-leading-icon-class',
@@ -132,6 +133,10 @@ describe('NavigationMenu', () => {
         childLinkLabelExternalIcon: 'custom-child-link-label-external-icon-class',
         childLinkDescription: 'custom-child-link-description-class'
       } }, ...items.slice(1)]
+    } }],
+    ['with class field in items', { props: {
+      ...props,
+      items: [{ ...items[0], class: 'custom-item-class' }, ...items.slice(1)]
     } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: NavigationMenuProps, slots?: Partial<NavigationMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, NavigationMenu)

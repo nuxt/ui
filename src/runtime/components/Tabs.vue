@@ -21,6 +21,7 @@ export interface TabsItem {
   value?: string | number
   disabled?: boolean
   ui?: Pick<Tabs['slots'], 'trigger' | 'leadingIcon' | 'leadingAvatar' | 'label' | 'content'>
+  class?: any
   [key: string]: any
 }
 
@@ -133,7 +134,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) 
     </TabsList>
 
     <template v-if="!!content">
-      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :class="ui.content({ class: [props.ui?.content, item.ui?.content] })">
+      <TabsContent v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :class="ui.content({ class: [props.ui?.content, item.ui?.content, item.class] })">
         <slot :name="((item.slot || 'content') as keyof TabsSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index">
           {{ item.content }}
         </slot>

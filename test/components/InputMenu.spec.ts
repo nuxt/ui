@@ -79,7 +79,7 @@ describe('InputMenu', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }],
-    ['with create-item-label slot', { props: { ...props, items: [
+    ['with ui field in items', { props: { ...props, items: [
       { ...items[0], avatar: { src: 'https://github.com/benjamincanac.png' }, ui: {
         label: 'custom-label-class',
         separator: 'custom-separator-class',
@@ -93,6 +93,9 @@ describe('InputMenu', () => {
         itemTrailing: 'custom-item-trailing-class',
         itemTrailingIcon: 'custom-item-trailing-icon-class'
       } }, ...items.slice(1)
+    ] } }],
+    ['with class field in items', { props: { ...props, items: [
+      { ...items[0], class: 'item-custom-class' }, ...items.slice(1)
     ] } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputMenuProps, slots?: Partial<InputMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputMenu)

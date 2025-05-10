@@ -137,6 +137,34 @@ exports[`NavigationMenu > renders with class correctly 1`] = `
 </nav>"
 `;
 
+exports[`NavigationMenu > renders with class field in items correctly 1`] = `
+"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="" data-collapsed="false" class="relative flex gap-1.5 [&amp;>div]:min-w-0 items-center justify-between">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
+      <li data-menu-item="" class="min-w-0 py-2 custom-item-class"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors data-[state=open]:text-highlighted data-[state=open]:before:bg-elevated/50 custom-item-class" data-reka-collection-item="">
+          <!--v-if-->
+          <!--v-if-->
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors data-[state=open]:text-highlighted data-[state=open]:before:bg-elevated/50" data-reka-collection-item="">
+          <!--v-if-->
+          <!--v-if-->
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="absolute top-full left-0 flex w-full justify-center">
+    <!--v-if-->
+    <!---->
+  </div>
+</nav>"
+`;
+
 exports[`NavigationMenu > renders with content orientation vertical correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="" data-collapsed="false" class="relative flex gap-1.5 [&amp;>div]:min-w-0 items-center justify-between">
   <div style="position: relative;">
@@ -1192,7 +1220,7 @@ exports[`NavigationMenu > renders with ui field in items correctly 1`] = `
 "<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-reka-navigation-menu="" data-collapsed="false" class="relative flex gap-1.5 [&amp;>div]:min-w-0 items-center justify-between">
   <div style="position: relative;">
     <ul class="isolate min-w-0 flex items-center" data-orientation="horizontal">
-      <li data-menu-item="" class="min-w-0 py-2"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors data-[state=open]:text-highlighted data-[state=open]:before:bg-elevated/50 custom-link-class" data-reka-collection-item="">
+      <li data-menu-item="" class="min-w-0 py-2 custom-item-class"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-2.5 py-1.5 before:inset-x-px before:inset-y-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors data-[state=open]:text-highlighted data-[state=open]:before:bg-elevated/50 custom-link-class" data-reka-collection-item="">
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->

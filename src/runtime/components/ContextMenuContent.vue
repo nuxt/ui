@@ -121,7 +121,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
               type="button"
               :disabled="item.disabled"
               :text-value="get(item, props.labelKey as string)"
-              :class="ui.item({ class: [uiOverride?.item, item.ui?.item], color: item?.color })"
+              :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
             >
               <ReuseItemTemplate :item="item" :index="index" />
             </ContextMenu.SubTrigger>
@@ -150,7 +150,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
             :model-value="item.checked"
             :disabled="item.disabled"
             :text-value="get(item, props.labelKey as string)"
-            :class="ui.item({ class: [uiOverride?.item, item.class, item.ui?.item], color: item?.color })"
+            :class="ui.item({ class: [uiOverride?.item, item.class, item.ui?.item, item.class], color: item?.color })"
             @update:model-value="item.onUpdateChecked"
             @select="item.onSelect"
           >
@@ -164,7 +164,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
             @select="item.onSelect"
           >
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<ContextMenuItem, 'type'>)" custom>
-              <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.class, item.ui?.item], active, color: item?.color })">
+              <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], active, color: item?.color })">
                 <ReuseItemTemplate :item="item" :active="active" :index="index" />
               </ULinkBase>
             </ULink>

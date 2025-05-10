@@ -25,6 +25,7 @@ interface SelectItemBase {
   disabled?: boolean
   onSelect?(e?: Event): void
   ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
+  class?: any
   [key: string]: any
 }
 export type SelectItem = SelectItemBase | AcceptableValue | boolean
@@ -280,7 +281,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
 
               <SelectItem
                 v-else
-                :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item] })"
+                :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
                 :value="isSelectItem(item) ? get(item, props.valueKey as string) : item"
                 @select="isSelectItem(item) && item.onSelect?.($event)"

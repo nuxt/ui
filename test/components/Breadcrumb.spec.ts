@@ -37,7 +37,7 @@ describe('Breadcrumb', () => {
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with separator slot', { props, slots: { separator: () => '/' } }],
-    ['with separator slot', { props: {
+    ['with ui field in items', { props: {
       items: [
         { ...items[0], ui: {
           item: 'custom-item-class',
@@ -48,6 +48,11 @@ describe('Breadcrumb', () => {
           separator: 'custom-separator-class',
           separatorIcon: 'custom-separator-icon-class'
         } }, ...items.slice(1)
+      ]
+    } }],
+    ['with class field in items', { props: {
+      items: [
+        { ...items[0], class: 'custom-item-class' }, ...items.slice(1)
       ]
     } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps, slots?: Partial<BreadcrumbSlots & { custom: () => 'Custom slot' }> }) => {

@@ -24,6 +24,7 @@ interface _SelectMenuItem {
   disabled?: boolean
   onSelect?(e?: Event): void
   ui?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
+  class?: any
   [key: string]: any
 }
 export type SelectMenuItem = _SelectMenuItem | AcceptableValue | boolean
@@ -429,7 +430,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
 
                 <ComboboxItem
                   v-else
-                  :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item] })"
+                  :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
                   :disabled="isSelectItem(item) && item.disabled"
                   :value="props.valueKey && isSelectItem(item) ? get(item, props.valueKey as string) : item"
                   @select="onSelect($event, item)"

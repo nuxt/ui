@@ -43,7 +43,7 @@ describe('Stepper', () => {
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
-    ['with ui field on items', { props: { items: [
+    ['with ui field in items', { props: { items: [
       { ...items[0], ui: {
         item: 'custom-item-class',
         container: 'custom-container-class',
@@ -55,6 +55,9 @@ describe('Stepper', () => {
         title: 'custom-title-class',
         description: 'custom-description-class'
       } }, ...items.slice(1)
+    ] } }],
+    ['with class field in items', { props: { items: [
+      { ...items[0], class: 'custom-item-class' }, ...items.slice(1)
     ] } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: StepperProps, slots?: Partial<StepperSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Stepper)

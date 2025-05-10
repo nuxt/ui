@@ -13,6 +13,7 @@ export type RadioGroupItem = {
   disabled?: boolean
   value?: RadioGroupValue
   ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
+  class?: any
   [key: string]: any
 } | RadioGroupValue
 
@@ -177,7 +178,7 @@ function onUpdate(value: any) {
         </slot>
       </legend>
 
-      <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: [props.ui?.item, item.ui?.item] })">
+      <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
         <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
           <RadioGroupItem
             :id="item.id"

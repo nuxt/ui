@@ -137,6 +137,45 @@ exports[`Select > renders with class correctly 1`] = `
 <!---->"
 `;
 
+exports[`Select > renders with class field in items correctly 1`] = `
+"<button role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9">
+  <!--v-if--><span class="truncate text-dimmed">&nbsp;</span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+</button>
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div style="box-sizing: border-box; --reka-select-content-transform-origin: var(--reka-popper-transform-origin); --reka-select-content-available-width: var(--reka-popper-available-width); --reka-select-content-available-height: var(--reka-popper-available-height); --reka-select-trigger-width: var(--reka-popper-anchor-width); --reka-select-trigger-height: var(--reka-popper-anchor-height); display: flex; flex-direction: column; pointer-events: auto; animation: none; outline-color: none; outline-style: none; outline-width: initial;" position="popper" bodylock="true" id="reka-select-content-v-0-0-0" role="listbox" data-state="open" dir="ltr" data-dismissable-layer="" tabindex="-1" class="max-h-60 w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-select-content-transform-origin) pointer-events-auto" data-side="bottom" data-align="start">
+    <div data-reka-select-viewport="" role="presentation" class="divide-y divide-default scroll-py-1" style="position: relative; overflow: hidden auto; flex-grow: 1; flex-shrink: 1; flex-basis: 0%;">
+      <div role="group" aria-labelledby="reka-select-group-v-0-0-1" class="p-1 isolate">
+        <div role="option" aria-labelledby="reka-select-item-text-v-0-0-2" aria-selected="false" data-state="unchecked" tabindex="-1" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5 item-custom-class" data-reka-collection-item=""><span class="iconify i-lucide:circle-help shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true"></span><span id="reka-select-item-text-v-0-0-2" class="truncate">Backlog</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
+        <div role="option" aria-labelledby="reka-select-item-text-v-0-0-3" aria-selected="false" data-state="unchecked" tabindex="-1" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item=""><span class="iconify i-lucide:circle-plus shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true"></span><span id="reka-select-item-text-v-0-0-3" class="truncate">Todo</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
+        <div role="option" aria-labelledby="reka-select-item-text-v-0-0-4" aria-selected="false" data-state="unchecked" tabindex="-1" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item=""><span class="iconify i-lucide:circle-arrow-up shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true"></span><span id="reka-select-item-text-v-0-0-4" class="truncate">In Progress</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
+        <div role="option" aria-labelledby="reka-select-item-text-v-0-0-5" aria-selected="false" data-state="unchecked" tabindex="-1" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item=""><span class="iconify i-lucide:circle-check shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true"></span><span id="reka-select-item-text-v-0-0-5" class="truncate">Done</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
+        <div role="option" aria-labelledby="reka-select-item-text-v-0-0-6" aria-selected="false" data-state="unchecked" tabindex="-1" class="group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors p-1.5 text-sm gap-1.5" data-reka-collection-item=""><span class="iconify i-lucide:circle-x shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors size-5" aria-hidden="true"></span><span id="reka-select-item-text-v-0-0-6" class="truncate">Canceled</span><span class="ms-auto inline-flex gap-1.5 items-center"><!----></span></div>
+      </div>
+    </div>
+    <style>
+      /* Hide scrollbars cross-browser and enable momentum scroll for touch devices */
+      [data-reka-select-viewport] {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      [data-reka-select-viewport]::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->
+<!---->"
+`;
+
 exports[`Select > renders with defaultValue correctly 1`] = `
 "<button role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" class="relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9">
   <!--v-if--><span class="truncate text-dimmed">&nbsp;</span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
@@ -1576,7 +1615,7 @@ exports[`Select > renders with ui correctly 1`] = `
 <!---->"
 `;
 
-exports[`Select > renders with ui field on items correctly 1`] = `
+exports[`Select > renders with ui field in items correctly 1`] = `
 "<button role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9">
   <!--v-if--><span class="truncate text-dimmed">&nbsp;</span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
 </button>

@@ -40,7 +40,8 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   value?: string
   children?: NavigationMenuChildItem[]
   onSelect?(e: Event): void
-  ui?: Pick<NavigationMenu['slots'], 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>
+  ui?: Pick<NavigationMenu['slots'], 'item' | 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>
+  class?: any
   [key: string]: any
 }
 
@@ -298,7 +299,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
             :item="childItem"
             :index="childIndex"
             :level="level + 1"
-            :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem, childItem.ui?.childItem] })"
+            :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem, childItem.ui?.childItem, childItem.class] })"
           />
         </ul>
       </template>
@@ -310,7 +311,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
 
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list({ class: props.ui?.list })">
-        <ReuseItemTemplate v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :item="item" :index="index" :class="ui.item({ class: props.ui?.item })" />
+        <ReuseItemTemplate v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :item="item" :index="index" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })" />
       </NavigationMenuList>
 
       <div v-if="orientation === 'vertical' && listIndex < lists.length - 1" :class="ui.separator({ class: props.ui?.separator })" />
