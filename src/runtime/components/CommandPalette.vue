@@ -249,7 +249,7 @@ const groups = computed(() => {
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ListboxRoot v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <ListboxRoot v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
         :placeholder="placeholder || t('commandPalette.placeholder')"

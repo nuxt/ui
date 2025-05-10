@@ -116,7 +116,7 @@ defineExpose({
     v-slot="{ remaining, duration }"
     v-bind="rootProps"
     :data-orientation="orientation"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--height': height }"
   >
     <slot name="leading">

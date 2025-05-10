@@ -157,7 +157,7 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
     :default-value="defaultValue"
     :locale="locale"
     :dir="dir"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <Calendar.Header :class="ui.header({ class: props.ui?.header })">
       <Calendar.Prev v-if="props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>

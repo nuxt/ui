@@ -129,7 +129,7 @@ defineExpose({
 </script>
 
 <template>
-  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div :class="ui.header({ class: props.ui?.header })">
       <StepperItem
         v-for="(item, count) in items"
@@ -157,12 +157,12 @@ defineExpose({
         </div>
 
         <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-          <StepperTitle :class="ui.title({ class: props.ui?.title })">
+          <StepperTitle as="div" :class="ui.title({ class: props.ui?.title })">
             <slot name="title" :item="item">
               {{ item.title }}
             </slot>
           </StepperTitle>
-          <StepperDescription :class="ui.description({ class: props.ui?.description })">
+          <StepperDescription as="div" :class="ui.description({ class: props.ui?.description })">
             <slot name="description" :item="item">
               {{ item.description }}
             </slot>
