@@ -5,7 +5,7 @@
     </slot>
 
     <slot>
-      <span v-if="label">
+      <span v-if="label !== undefined && label !== null">
         {{ label }}
       </span>
     </slot>

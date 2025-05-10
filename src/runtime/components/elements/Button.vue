@@ -5,7 +5,7 @@
     </slot>
 
     <slot>
-      <span v-if="label" :class="[truncate ? ui.truncate : '']">
+      <span v-if="label !== undefined && label !== null" :class="[truncate ? ui.truncate : '']">
         {{ label }}
       </span>
     </slot>
