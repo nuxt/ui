@@ -3,7 +3,7 @@
 import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuContentProps, NavigationMenuContentEmits, CollapsibleRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
-import type { AvatarProps, BadgeProps, LinkProps } from '../types'
+import type { AvatarProps, BadgeProps, LinkProps, TooltipProps } from '../types'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
@@ -26,6 +26,12 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    * `{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
    */
   badge?: string | number | BadgeProps
+  /**
+   * Display a tooltip on the item.
+   * Only works when `type` is `link`.
+   * `{ content: { side: 'right' } }`{lang="ts-type"}
+   */
+  tooltip?: TooltipProps
   /**
    * @IconifyIcon
    */
@@ -145,6 +151,7 @@ import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 import UBadge from './Badge.vue'
 import UCollapsible from './Collapsible.vue'
+import UTooltip from './Tooltip.vue'
 
 const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
   orientation: 'horizontal',
@@ -258,7 +265,12 @@ const lists = computed<NavigationMenuItem[][]>(() =>
           :disabled="item.disabled"
           @select="item.onSelect"
         >
-          <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class, item.ui?.link], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
+          <UTooltip v-if="!!item.tooltip" :content="{ side: 'right' }" v-bind="item.tooltip">
+            <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
+              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
+            </ULinkBase>
+          </UTooltip>
+          <ULinkBase v-else v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
             <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
           </ULinkBase>
         </component>
@@ -299,7 +311,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
             :item="childItem"
             :index="childIndex"
             :level="level + 1"
-            :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem, childItem.ui?.childItem, childItem.class] })"
+            :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem, childItem.ui?.childItem] })"
           />
         </ul>
       </template>
@@ -311,7 +323,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
 
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">
       <NavigationMenuList :class="ui.list({ class: props.ui?.list })">
-        <ReuseItemTemplate v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :item="item" :index="index" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })" />
+        <ReuseItemTemplate v-for="(item, index) in list" :key="`list-${listIndex}-${index}`" :item="item" :index="index" :class="ui.item({ class: [props.ui?.item, item.ui?.item] })" />
       </NavigationMenuList>
 
       <div v-if="orientation === 'vertical' && listIndex < lists.length - 1" :class="ui.separator({ class: props.ui?.separator })" />

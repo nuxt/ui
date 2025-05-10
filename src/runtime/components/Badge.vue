@@ -72,7 +72,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {})
     </slot>
 
     <slot>
-      <span v-if="label" :class="ui.label({ class: props.ui?.label })">
+      <span v-if="label !== undefined && label !== null" :class="ui.label({ class: props.ui?.label })">
         {{ label }}
       </span>
     </slot>
