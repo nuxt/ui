@@ -164,6 +164,12 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>
+  /**
+   * Whether the table should fit its container's width or expand it when resizing the columns.
+   *
+   * @defaultValue 'fit'
+   */
+  resizeMode?: 'fit' | 'expand'
   onSelect?: (row: TableRow<T>, e?: Event) => void
   class?: any
   ui?: Table['slots']
@@ -192,7 +198,7 @@ import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 
 const props = withDefaults(defineProps<TableProps<T>>(), {
-  columnSizingOptions: () => ({ columnResizeMode: 'onChange' }),
+  resizeMode: 'expand',
   watchOptions: () => ({
     deep: true
   })
@@ -211,7 +217,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {})
   loading: props.loading,
   loadingColor: props.loadingColor,
   loadingAnimation: props.loadingAnimation,
-  resizable: props.columnSizingOptions.enableColumnResizing
+  resizable: props.columnSizingOptions?.enableColumnResizing
 }))
 
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
@@ -344,7 +350,7 @@ defineExpose({
     <table
       ref="tableRef"
       :class="ui.base({ class: [props.ui?.base] })"
-      :style="columnSizingOptions.enableColumnResizing ? {
+      :style="columnSizingOptions?.enableColumnResizing && resizeMode === 'expand' ? {
         width: `${tableApi.getCenterTotalSize()}px`
       } : undefined"
     >
@@ -368,13 +374,13 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="columnSizingOptions.enableColumnResizing ? { width: `${header.getSize()}px` } : undefined"
+            :style="columnSizingOptions?.enableColumnResizing ? { width: `${header.getSize()}px` } : undefined"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
             </slot>
             <div
-              v-if="columnSizingOptions.enableColumnResizing && header.column.getCanResize()"
+              v-if="columnSizingOptions?.enableColumnResizing && header.column.getCanResize()"
               :class="ui.resizeHandle({ class: props.ui?.resizeHandle })"
               :aria-controls="header.id"
               :style="{

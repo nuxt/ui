@@ -182,8 +182,7 @@ const columns: TableColumn<Payment>[] = [{
       minute: '2-digit',
       hour12: false
     })
-  },
-  maxSize: 400
+  }
 }, {
   accessorKey: 'status',
   header: 'Status',
@@ -283,6 +282,8 @@ const pagination = ref({
   pageSize: 10
 })
 
+const resizeMode = ref<'fit' | 'expand'>('fit')
+
 function addElement() {
   data.value.unshift({
     id: currentID.value.toString(),
@@ -321,6 +322,8 @@ onMounted(() => {
 
       <UButton color="neutral" label="Randomize" @click="randomize" />
       <UButton color="neutral" label="Add element" @click="addElement" />
+
+      <USelect v-model="resizeMode" class="min-w-[100px]" :items="['fit', 'expand']" />
 
       <UDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
@@ -363,6 +366,7 @@ onMounted(() => {
         enableColumnResizing: true,
         columnResizeMode: 'onChange'
       }"
+      :resize-mode="resizeMode"
       sticky
       class="border border-accented rounded-sm"
       @select="onSelect"
