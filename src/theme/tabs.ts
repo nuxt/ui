@@ -25,7 +25,8 @@ export default (options: Required<ModuleOptions>) => ({
       },
       link: {
         list: 'border-default',
-        indicator: 'rounded-full'
+        indicator: 'rounded-full',
+        trigger: 'focus:outline-none'
       }
     },
     orientation: {

@@ -278,7 +278,7 @@ defineExpose({
     role="region"
     aria-roledescription="carousel"
     tabindex="0"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @keydown="onKeyDown"
   >
     <div ref="emblaRef" :class="ui.viewport({ class: props.ui?.viewport })">

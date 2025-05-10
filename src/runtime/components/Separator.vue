@@ -75,7 +75,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator ||
 </script>
 
 <template>
-  <Separator v-bind="rootProps" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Separator v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div :class="ui.border({ class: props.ui?.border })" />
 
     <template v-if="label || icon || avatar || !!slots.default">
