@@ -273,11 +273,11 @@ const lists = computed<NavigationMenuItem[][]>(() =>
           @select="item.onSelect"
         >
           <UTooltip v-if="!!item.tooltip" :content="{ side: 'right' }" v-bind="item.tooltip">
-            <ULinkBase v-bind="slotProps" :class="ui.link({ class: props.ui?.link, active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
+            <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.ui?.link], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>
           </UTooltip>
-          <ULinkBase v-else v-bind="slotProps" :class="ui.link({ class: props.ui?.link, active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
+          <ULinkBase v-else v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.ui?.link], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
             <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
           </ULinkBase>
         </component>
