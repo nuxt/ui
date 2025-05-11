@@ -51,6 +51,22 @@ function send() {
           </div>
         </template>
       </UPopover>
+
+      <div class="mt-8 relative">
+        <UPopover mode="click" arrow>
+          <UButton label="Custom anchor" color="neutral" variant="outline" />
+
+          <template #anchor>
+            <div class="absolute top-1/2 -right-1/2 translate-x-1/2 -translate-y-1/2">
+              Custom anchor
+            </div>
+          </template>
+
+          <template #content>
+            <div class="w-48 h-16" />
+          </template>
+        </UPopover>
+      </div>
     </div>
 
     <div class="mt-24">

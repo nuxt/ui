@@ -2,6 +2,7 @@
 
 exports[`Popover > renders with arrow correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -15,6 +16,7 @@ exports[`Popover > renders with arrow correctly 1`] = `
 
 exports[`Popover > renders with class correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -28,6 +30,7 @@ exports[`Popover > renders with class correctly 1`] = `
 
 exports[`Popover > renders with content slot correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -43,6 +46,7 @@ exports[`Popover > renders with content slot correctly 1`] = `
 
 exports[`Popover > renders with default slot correctly 1`] = `
 "Default slot
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -56,6 +60,7 @@ exports[`Popover > renders with default slot correctly 1`] = `
 
 exports[`Popover > renders with open correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -69,6 +74,7 @@ exports[`Popover > renders with open correctly 1`] = `
 
 exports[`Popover > renders with ui correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 

@@ -202,6 +202,21 @@ name: 'popover-command-palette-example'
 ---
 ::
 
+### With custom anchor
+
+You can use the `#anchor` slot to change the anchor of the Popover.
+
+::warning
+This slot only works when `mode` is `click`.
+::
+
+::component-example
+---
+collapse: true
+name: 'popover-custom-anchor-example'
+---
+::
+
 ## API
 
 ### Props
