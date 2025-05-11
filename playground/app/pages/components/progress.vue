@@ -80,8 +80,6 @@ onMounted(() => {
         v-model="value2"
         variant="circular"
         size="xs"
-        status
-        status-position="inside"
         color="neutral"
       />
 
@@ -113,6 +111,7 @@ onMounted(() => {
         v-model="value2"
         variant="circular"
         color="warning"
+        status-position="inside"
         size="xl"
         status
       />

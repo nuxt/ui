@@ -84,7 +84,7 @@ const appConfig = useAppConfig() as Progress['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'modelValue'), emits)
 
-const RADIUS = 45
+const RADIUS = 40
 const circumference = 2 * Math.PI * RADIUS
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)

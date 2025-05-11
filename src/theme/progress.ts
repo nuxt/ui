@@ -124,61 +124,61 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'circular',
     size: '2xs',
     class: {
-      base: 'size-4',
-      indicator: 'stroke-[1px]',
-      track: 'stroke-[1px]'
+      base: 'size-6',
+      indicator: 'stroke-[6px]',
+      track: 'stroke-[6px]'
     }
   },
   {
     variant: 'circular',
     size: 'xs',
     class: {
-      base: 'size-6',
-      indicator: 'stroke-[2px]',
-      track: 'stroke-[2px]'
-    }
-  },
-  {
-    variant: 'circular',
-    size: 'sm',
-    class: {
       base: 'size-8',
-      indicator: 'stroke-[4px]',
-      track: 'stroke-[4px]'
-    }
-  },
-  {
-    variant: 'circular',
-    size: 'md',
-    class: {
-      base: 'size-10',
       indicator: 'stroke-[8px]',
       track: 'stroke-[8px]'
     }
   },
   {
     variant: 'circular',
-    size: 'lg',
+    size: 'sm',
     class: {
-      base: 'size-12',
-      indicator: 'stroke-[12px]',
-      track: 'stroke-[12px]'
+      base: 'size-10',
+      indicator: 'stroke-[10px]',
+      track: 'stroke-[10px]'
     }
   },
   {
     variant: 'circular',
-    size: 'xl',
+    size: 'md',
     class: {
       base: 'size-14',
+      indicator: 'stroke-[14px]',
+      track: 'stroke-[14px]'
+    }
+  },
+  {
+    variant: 'circular',
+    size: 'lg',
+    class: {
+      base: 'size-16',
       indicator: 'stroke-[16px]',
       track: 'stroke-[16px]'
     }
   },
   {
     variant: 'circular',
+    size: 'xl',
+    class: {
+      base: 'size-18',
+      indicator: 'stroke-[18px]',
+      track: 'stroke-[18px]'
+    }
+  },
+  {
+    variant: 'circular',
     size: '2xl',
     class: {
-      base: 'size-16',
+      base: 'size-20',
       indicator: 'stroke-[20px]',
       track: 'stroke-[20px]'
     }
