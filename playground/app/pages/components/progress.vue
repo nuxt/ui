@@ -72,13 +72,14 @@ onMounted(() => {
         v-model="value2"
         variant="circular"
         color="warning"
+        size="2xs"
         status
       />
 
       <UProgress
         v-model="value2"
         variant="circular"
-        size="lg"
+        size="xs"
         status
         status-position="inside"
         color="neutral"
@@ -86,9 +87,41 @@ onMounted(() => {
 
       <UProgress
         v-model="value2"
+        variant="circular"
+        color="warning"
+        size="sm"
+        status
+      />
+
+      <UProgress
+        v-model="value2"
+        variant="circular"
+        color="warning"
+        size="md"
+        status
+      />
+
+      <UProgress
+        v-model="value2"
+        variant="circular"
+        color="warning"
+        size="lg"
+        status
+      />
+
+      <UProgress
+        v-model="value2"
+        variant="circular"
+        color="warning"
+        size="xl"
+        status
+      />
+
+      <UProgress
+        v-model="value2"
         color="error"
         status
-        size="2xs"
+        size="2xl"
         variant="circular"
       >
         <template #status="{ percent }">

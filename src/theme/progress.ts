@@ -48,80 +48,31 @@ export default (options: Required<ModuleOptions>) => ({
     size: {
       '2xs': {
         status: 'text-xs',
-        steps: 'text-xs',
-        variant: {
-          circular: {
-            base: 'size-4',
-            indicator: 'stroke-[3px]',
-            track: 'stroke-[3px]'
-          }
-        }
+        steps: 'text-xs'
       },
       'xs': {
         status: 'text-xs',
-        steps: 'text-xs',
-        variant: {
-          circular: {
-            base: 'size-6',
-            indicator: 'stroke-[4px]',
-            track: 'stroke-[4px]'
-          }
-        }
+        steps: 'text-xs'
       },
       'sm': {
         status: 'text-sm',
-        steps: 'text-sm',
-        variant: {
-          circular: {
-            base: 'size-8',
-            indicator: 'stroke-[5px]',
-            track: 'stroke-[5px]'
-          }
-        }
+        steps: 'text-sm'
       },
       'md': {
         status: 'text-sm',
-        steps: 'text-sm',
-        variant: {
-          circular: {
-            base: 'size-10',
-            indicator: 'stroke-[6px]',
-            track: 'stroke-[6px]'
-          }
-        }
+        steps: 'text-sm'
       },
       'lg': {
         status: 'text-sm',
-        steps: 'text-sm',
-        variant: {
-          circular: {
-            base: 'size-12',
-            indicator: 'stroke-[7px]',
-            track: 'stroke-[7px]'
-          }
-        }
+        steps: 'text-sm'
       },
       'xl': {
         status: 'text-base',
-        steps: 'text-base',
-        variant: {
-          circular: {
-            base: 'size-14',
-            indicator: 'stroke-[8px]',
-            track: 'stroke-[8px]'
-          }
-        }
+        steps: 'text-base'
       },
       '2xl': {
         status: 'text-base',
-        steps: 'text-base',
-        variant: {
-          circular: {
-            base: 'size-16',
-            indicator: 'stroke-[9px]',
-            track: 'stroke-[9px]'
-          }
-        }
+        steps: 'text-base'
       }
     },
     step: {
@@ -165,85 +116,71 @@ export default (options: Required<ModuleOptions>) => ({
   },
   {
     variant: 'circular',
-    orientation: 'horizontal',
     class: {
       base: 'rounded-full'
     }
   },
   {
     variant: 'circular',
-    orientation: 'horizontal',
-    class: {
-      base: 'rounded-full'
-    }
-  }, {
-    variant: 'circular',
-    orientation: 'horizontal',
     size: '2xs',
     class: {
       base: 'size-4',
-      indicator: 'stroke-[3px]',
-      track: 'stroke-[3px]'
+      indicator: 'stroke-[1px]',
+      track: 'stroke-[1px]'
     }
   },
   {
     variant: 'circular',
-    orientation: 'horizontal',
     size: 'xs',
     class: {
       base: 'size-6',
+      indicator: 'stroke-[2px]',
+      track: 'stroke-[2px]'
+    }
+  },
+  {
+    variant: 'circular',
+    size: 'sm',
+    class: {
+      base: 'size-8',
       indicator: 'stroke-[4px]',
       track: 'stroke-[4px]'
     }
   },
   {
     variant: 'circular',
-    orientation: 'horizontal',
-    size: 'sm',
-    class: {
-      base: 'size-8',
-      indicator: 'stroke-[5px]',
-      track: 'stroke-[5px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
     size: 'md',
     class: {
       base: 'size-10',
-      indicator: 'stroke-[6px]',
-      track: 'stroke-[6px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: 'lg',
-    class: {
-      base: 'size-12',
-      indicator: 'stroke-[7px]',
-      track: 'stroke-[7px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: 'xl',
-    class: {
-      base: 'size-14',
       indicator: 'stroke-[8px]',
       track: 'stroke-[8px]'
     }
   },
   {
     variant: 'circular',
-    orientation: 'horizontal',
+    size: 'lg',
+    class: {
+      base: 'size-12',
+      indicator: 'stroke-[12px]',
+      track: 'stroke-[12px]'
+    }
+  },
+  {
+    variant: 'circular',
+    size: 'xl',
+    class: {
+      base: 'size-14',
+      indicator: 'stroke-[16px]',
+      track: 'stroke-[16px]'
+    }
+  },
+  {
+    variant: 'circular',
     size: '2xl',
     class: {
       base: 'size-16',
-      indicator: 'stroke-[9px]',
-      track: 'stroke-[9px]'
+      indicator: 'stroke-[20px]',
+      track: 'stroke-[20px]'
     }
   }, {
     variant: 'linear',
