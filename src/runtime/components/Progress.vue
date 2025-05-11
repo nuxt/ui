@@ -194,7 +194,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
   color: props.color,
   orientation: props.orientation,
   inverted: props.inverted,
-  variant: props.variant
+  variant: props.variant,
+  statusPosition: props.statusPosition
 }))
 </script>
 

@@ -20,7 +20,15 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'relative rounded-full',
         track: 'fill-none stroke-accented',
         indicator: 'fill-none transition-[stroke-dasharray,opacity]',
-        status: 'flex items-center justify-center inset-0'
+        status: 'flex items-center justify-center'
+      }
+    },
+    statusPosition: {
+      inside: {
+        status: 'absolute inset-0'
+      },
+      outside: {
+        status: ''
       }
     },
     animation: {
@@ -153,6 +161,13 @@ export default (options: Required<ModuleOptions>) => ({
     }
   },
   compoundVariants: [{
+    variant: 'circular',
+    statusPosition: 'inside',
+    class: {
+      status: 'absolute inset-0'
+    }
+  },
+  {
     variant: 'circular',
     orientation: 'horizontal',
     class: {
@@ -381,6 +396,7 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'linear',
     animation: 'carousel',
     color: 'primary',
-    size: 'md'
+    size: 'md',
+    statusPosition: 'outside'
   }
 })
