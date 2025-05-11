@@ -201,7 +201,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!isIndeterminate && (statusPosition === 'outside') && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+    <div v-if="!isIndeterminate && (variant !== 'circular' || statusPosition === 'outside') && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
@@ -231,7 +231,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
             />
           </ProgressIndicator>
         </svg>
-        <div v-if="!isIndeterminate && (statusPosition === 'inside') && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })">
+        <div v-if="!isIndeterminate && variant === 'circular' && statusPosition === 'inside' && (status || !!slots.status)" :class="ui.status({ class: props.ui?.status })">
           <slot name="status" :percent="percent">
             {{ percent }}%
           </slot>

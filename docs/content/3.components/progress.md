@@ -57,6 +57,20 @@ props:
 ---
 ::
 
+### Variant
+
+Use the `variant` prop to change the style of the Progress. Defaults to `linear`.
+
+::component-code
+---
+external:
+  - modelValue
+props:
+  modelValue: 50
+  variant: linear
+---
+::
+
 ### Status
 
 Use the `status` prop to display the current Progress value above the bar.
@@ -78,11 +92,12 @@ Use the `statusPosition` prop to define where the status text is displayed. Defa
 ::component-code
 ---
 external:
-- modelValue
-  props:
+  - modelValue
+props:
   modelValue: 50
+  variant: circular
   status: true
-  statusPosition: inside
+  statusPosition: 'inside'
 ---
 ::
 
@@ -132,11 +147,11 @@ Use the `variant` prop to change the style of the Progress. Defaults to `linear`
 ---
 prettier: true
 ignore:
-- modelValue
-- max
-  external:
-- modelValue
-  props:
+  - modelValue
+  - max
+external:
+  - modelValue
+props:
   variant: circular
   modelValue: 50
   max: 100

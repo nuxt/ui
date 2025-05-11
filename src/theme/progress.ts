@@ -24,12 +24,8 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     statusPosition: {
-      inside: {
-        status: 'absolute inset-0'
-      },
-      outside: {
-        status: ''
-      }
+      inside: {},
+      outside: {}
     },
     animation: {
       'carousel': '',
