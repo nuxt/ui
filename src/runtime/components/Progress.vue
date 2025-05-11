@@ -84,7 +84,7 @@ const appConfig = useAppConfig() as Progress['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'getValueLabel', 'modelValue'), emits)
 
-const RADIUS = 35
+const RADIUS = 45
 const circumference = 2 * Math.PI * RADIUS
 
 const isIndeterminate = computed(() => rootProps.value.modelValue === null)
@@ -194,7 +194,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
   color: props.color,
   orientation: props.orientation,
   inverted: props.inverted,
-  variant: props.variant
+  variant: props.variant,
+  statusPosition: props.statusPosition
 }))
 </script>
 
@@ -208,7 +209,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.progress || 
 
     <ProgressRoot v-bind="rootProps" :max="realMax" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
       <ProgressIndicator v-if="variant === 'linear'" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
-      <template v-if="variant === 'circular'">
+      <template v-else-if="variant === 'circular'">
         <svg
           :class="ui.base({ class: props.ui?.base })"
           viewBox="0 0 100 100"

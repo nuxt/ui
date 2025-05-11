@@ -71,54 +71,33 @@ onMounted(() => {
       <UProgress
         v-model="value2"
         variant="circular"
-        size="2xs"
-        status
-      />
-      <UProgress
-        v-model="value2"
-        variant="circular"
-        color="info"
-        size="xs"
-      />
-      <UProgress
-        v-model="value2"
-        variant="circular"
         color="warning"
-        size="sm"
-        status-position="inside"
         status
       />
+
       <UProgress
         v-model="value2"
         variant="circular"
-        color="error"
-        size="md"
-        status-position="inside"
-        status
-      />
-      <UProgress
-        v-model="value2"
-        variant="circular"
-        color="success"
         size="lg"
-        status-position="inside"
         status
+        status-position="inside"
+        color="neutral"
       />
+
       <UProgress
         v-model="value2"
-        variant="circular"
-        color="secondary"
-        size="xl"
-        status-position="outside"
+        color="error"
         status
-      />
-      <UProgress
+        size="2xs"
         variant="circular"
-        color="neutral"
-        animation="swing"
-        status-position="inside"
-        size="2xl"
-      />
+      >
+        <template #status="{ percent }">
+          <div class="flex flex-col items-center">
+            <span class="font-bold">{{ percent }}%</span>
+            <span class="text-sm text-gray-500">Loading...</span>
+          </div>
+        </template>
+      </UProgress>
     </div>
   </div>
 </template>

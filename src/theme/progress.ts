@@ -6,21 +6,21 @@ export default (options: Required<ModuleOptions>) => ({
     base: 'relative',
     track: '',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out',
-    status: 'flex justify-end text-dimmed transition-[width] duration-200 inset-0',
+    status: 'flex justify-end text-dimmed transition-[width] duration-200',
     steps: 'grid items-end',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity'
   },
   variants: {
     variant: {
       linear: {
-        base: 'overflow-hidden rounded-full bg-(--ui-bg-accented)'
+        base: 'overflow-hidden rounded-full bg-accented'
       },
       circular: {
         root: 'gap-0 items-center',
         base: 'relative rounded-full',
-        track: 'fill-none stroke-(--ui-bg-accented)',
+        track: 'fill-none stroke-accented',
         indicator: 'fill-none transition-[stroke-dasharray,opacity]',
-        status: 'flex items-center justify-center'
+        status: 'flex items-center justify-center inset-0'
       }
     },
     animation: {
@@ -31,12 +31,12 @@ export default (options: Required<ModuleOptions>) => ({
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `bg-${color}`,
+        indicator: `bg-${color} stroke-${color}`,
         steps: `text-${color}`,
         track: 'stroke-accented'
       }])),
       neutral: {
-        indicator: 'bg-inverted',
+        indicator: 'bg-inverted stroke-inverted',
         steps: 'text-inverted',
         track: 'stroke-accented'
       }
@@ -44,31 +44,80 @@ export default (options: Required<ModuleOptions>) => ({
     size: {
       '2xs': {
         status: 'text-xs',
-        steps: 'text-xs'
+        steps: 'text-xs',
+        variant: {
+          circular: {
+            base: 'size-4',
+            indicator: 'stroke-[3px]',
+            track: 'stroke-[3px]'
+          }
+        }
       },
       'xs': {
         status: 'text-xs',
-        steps: 'text-xs'
+        steps: 'text-xs',
+        variant: {
+          circular: {
+            base: 'size-6',
+            indicator: 'stroke-[4px]',
+            track: 'stroke-[4px]'
+          }
+        }
       },
       'sm': {
         status: 'text-sm',
-        steps: 'text-sm'
+        steps: 'text-sm',
+        variant: {
+          circular: {
+            base: 'size-8',
+            indicator: 'stroke-[5px]',
+            track: 'stroke-[5px]'
+          }
+        }
       },
       'md': {
         status: 'text-sm',
-        steps: 'text-sm'
+        steps: 'text-sm',
+        variant: {
+          circular: {
+            base: 'size-10',
+            indicator: 'stroke-[6px]',
+            track: 'stroke-[6px]'
+          }
+        }
       },
       'lg': {
         status: 'text-sm',
-        steps: 'text-sm'
+        steps: 'text-sm',
+        variant: {
+          circular: {
+            base: 'size-12',
+            indicator: 'stroke-[7px]',
+            track: 'stroke-[7px]'
+          }
+        }
       },
       'xl': {
         status: 'text-base',
-        steps: 'text-base'
+        steps: 'text-base',
+        variant: {
+          circular: {
+            base: 'size-14',
+            indicator: 'stroke-[8px]',
+            track: 'stroke-[8px]'
+          }
+        }
       },
       '2xl': {
         status: 'text-base',
-        steps: 'text-base'
+        steps: 'text-base',
+        variant: {
+          circular: {
+            base: 'size-16',
+            indicator: 'stroke-[9px]',
+            track: 'stroke-[9px]'
+          }
+        }
       }
     },
     step: {
@@ -106,116 +155,24 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [{
     variant: 'circular',
     orientation: 'horizontal',
-    animation: 'carousel',
     class: {
-      indicator: 'data-[state=indeterminate]:animate-[circular-carousel_2s_ease-in-out_infinite]'
+      base: 'rounded-full'
     }
   },
   {
     variant: 'circular',
     orientation: 'horizontal',
-    animation: 'carousel-inverse',
     class: {
-      indicator: 'data-[state=indeterminate]:animate-[circular-carousel-inverse_2s_ease-in-out_infinite]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    animation: 'swing',
-    class: {
-      indicator: 'data-[state=indeterminate]:animate-[circular-swing_2s_ease-in-out_infinite]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    animation: 'elastic',
-    class: {
-      indicator: 'data-[state=indeterminate]:animate-[circular-elastic_2s_ease-in-out_infinite]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: '2xs',
-    class: {
-      base: 'rounded-full size-8',
-      indicator: 'stroke-[6px]',
-      track: 'stroke-[6px]',
-      status: 'text-[8px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: 'xs',
-    class: {
-      base: 'rounded-full size-10',
-      indicator: 'stroke-[6px]',
-      track: 'stroke-[6px]',
-      status: 'text-[9px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: 'sm',
-    class: {
-      base: 'rounded-full size-12',
-      indicator: 'stroke-[6px]',
-      track: 'stroke-[6px]',
-      status: 'text-[9px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: 'md',
-    class: {
-      base: 'rounded-full size-16',
-      indicator: 'stroke-[6px]',
-      track: 'stroke-[6px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: 'lg',
-    class: {
-      base: 'rounded-full size-20',
-      indicator: 'stroke-[8px]',
-      track: 'stroke-[8px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: 'xl',
-    class: {
-      base: 'rounded-full size-24',
-      indicator: 'stroke-[10px]',
-      track: 'stroke-[8px]'
-    }
-  },
-  {
-    variant: 'circular',
-    orientation: 'horizontal',
-    size: '2xl',
-    class: {
-      base: 'rounded-full size-32',
-      indicator: 'stroke-[12px]',
-      track: 'stroke-[10px]'
+      base: 'rounded-full'
     }
   }, {
     variant: 'circular',
     orientation: 'horizontal',
     size: '2xs',
     class: {
-      base: 'rounded-full size-8',
-      indicator: 'stroke-[6px]',
-      track: 'stroke-[6px]',
-      status: 'text-[8px]'
+      base: 'size-4',
+      indicator: 'stroke-[3px]',
+      track: 'stroke-[3px]'
     }
   },
   {
@@ -223,10 +180,9 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'xs',
     class: {
-      base: 'rounded-full size-10',
-      indicator: 'stroke-[6px]',
-      track: 'stroke-[6px]',
-      status: 'text-[9px]'
+      base: 'size-6',
+      indicator: 'stroke-[4px]',
+      track: 'stroke-[4px]'
     }
   },
   {
@@ -234,10 +190,9 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'sm',
     class: {
-      base: 'rounded-full size-12',
-      indicator: 'stroke-[6px]',
-      track: 'stroke-[6px]',
-      status: 'text-[9px]'
+      base: 'size-8',
+      indicator: 'stroke-[5px]',
+      track: 'stroke-[5px]'
     }
   },
   {
@@ -245,7 +200,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'md',
     class: {
-      base: 'rounded-full size-16',
+      base: 'size-10',
       indicator: 'stroke-[6px]',
       track: 'stroke-[6px]'
     }
@@ -255,9 +210,9 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'lg',
     class: {
-      base: 'rounded-full size-20',
-      indicator: 'stroke-[8px]',
-      track: 'stroke-[8px]'
+      base: 'size-12',
+      indicator: 'stroke-[7px]',
+      track: 'stroke-[7px]'
     }
   },
   {
@@ -265,9 +220,9 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: 'xl',
     class: {
-      base: 'rounded-full size-24',
-      indicator: 'stroke-[10px]',
-      track: 'stroke-8'
+      base: 'size-14',
+      indicator: 'stroke-[8px]',
+      track: 'stroke-[8px]'
     }
   },
   {
@@ -275,9 +230,9 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     size: '2xl',
     class: {
-      base: 'rounded-full size-32',
-      indicator: 'stroke-[12px]',
-      track: 'stroke-10'
+      base: 'size-16',
+      indicator: 'stroke-[9px]',
+      track: 'stroke-[9px]'
     }
   }, {
     variant: 'linear',
