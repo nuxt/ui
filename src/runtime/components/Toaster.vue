@@ -18,6 +18,11 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
    */
   expand?: boolean
   /**
+   * Whether to show the progress bar on all toasts.
+   * @defaultValue true
+   */
+  progress?: boolean
+  /**
    * Render the toaster in a portal.
    * @defaultValue true
    */
@@ -49,7 +54,8 @@ import UToast from './Toast.vue'
 const props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,
   portal: true,
-  duration: 5000
+  duration: 5000,
+  progress: true
 })
 defineSlots<ToasterSlots>()
 
@@ -111,6 +117,7 @@ function getOffset(index: number) {
       ref="refs"
       v-bind="omit(toast, ['id', 'close'])"
       :close="(toast.close as boolean)"
+      :progress="progress"
       :data-expanded="expanded"
       :data-front="!expanded && index === toasts.length - 1"
       :style="{

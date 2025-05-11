@@ -82,7 +82,7 @@ import UButton from './Button.vue'
 const props = withDefaults(defineProps<ToastProps>(), {
   close: true,
   orientation: 'vertical',
-  progress: false
+  progress: true
 })
 const emits = defineEmits<ToastEmits>()
 const slots = defineSlots<ToastSlots>()
