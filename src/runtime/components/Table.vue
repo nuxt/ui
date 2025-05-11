@@ -333,6 +333,34 @@ function handleRowSelect(row: TableRow<T>, e: Event) {
   props.onSelect(row, e)
 }
 
+const tableStyle = computed(() => {
+  return props.columnSizingOptions?.enableColumnResizing && props.resizeMode === 'expand'
+    ? {
+        width: `${tableApi.getTotalSize()}px`
+      }
+    : undefined
+})
+
+function getHeaderStyle(header: Header<T, unknown>) {
+  return props.columnSizingOptions?.enableColumnResizing ? { width: `${header.getSize()}px` } : undefined
+}
+
+function getResizeHandleStyle(header: Header<T, unknown>) {
+  return {
+    transform: props.columnSizingOptions?.columnResizeMode === 'onEnd'
+      && header.column.getIsResizing()
+      ? `translateX(${
+        (props.columnSizingOptions.columnResizeDirection
+          === 'rtl'
+          ? -1
+          : 1)
+        * (tableApi.getState().columnSizingInfo
+          .deltaOffset ?? 0)
+      }px)`
+      : undefined
+  }
+}
+
 watch(
   () => props.data, () => {
     data.value = props.data ? [...props.data] : []
@@ -350,9 +378,7 @@ defineExpose({
     <table
       ref="tableRef"
       :class="ui.base({ class: [props.ui?.base] })"
-      :style="columnSizingOptions?.enableColumnResizing && resizeMode === 'expand' ? {
-        width: `${tableApi.getCenterTotalSize()}px`
-      } : undefined"
+      :style="tableStyle"
     >
       <caption v-if="caption || !!slots.caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
@@ -374,7 +400,7 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="columnSizingOptions?.enableColumnResizing ? { width: `${header.getSize()}px` } : undefined"
+            :style="getHeaderStyle(header)"
           >
             <slot :name="`${header.id}-header`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
@@ -383,19 +409,7 @@ defineExpose({
               v-if="columnSizingOptions?.enableColumnResizing && header.column.getCanResize()"
               :class="ui.resizeHandle({ class: props.ui?.resizeHandle })"
               :aria-controls="header.id"
-              :style="{
-                transform: columnSizingOptions?.columnResizeMode === 'onEnd'
-                  && header.column.getIsResizing()
-                  ? `translateX(${
-                    (columnSizingOptions.columnResizeDirection
-                      === 'rtl'
-                      ? -1
-                      : 1)
-                    * (tableApi.getState().columnSizingInfo
-                      .deltaOffset ?? 0)
-                  }px)`
-                  : undefined
-              }"
+              :style="getResizeHandleStyle(header)"
               @doubleclick="header.column.resetSize"
               @mousedown="header.getResizeHandler()($event)"
               @touchstart="header.getResizeHandler()($event)"
