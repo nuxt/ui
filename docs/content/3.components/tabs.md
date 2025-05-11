@@ -210,10 +210,6 @@ You can control the active item by using the `default-value` prop or the `v-mode
 
 :component-example{name="tabs-model-value-example"}
 
-::tip
-You can also pass the `value` of one of the items if provided.
-::
-
 ### With content slot
 
 Use the `#content` slot to customize the content of each item.

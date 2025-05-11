@@ -1,22 +1,32 @@
 <script setup lang="ts">
 import type { TabsItem } from '@nuxt/ui'
 
+const route = useRoute()
+const router = useRouter()
+
 const items: TabsItem[] = [
   {
-    label: 'Account'
+    label: 'Account',
+    value: 'account'
   },
   {
-    label: 'Password'
+    label: 'Password',
+    value: 'password'
   }
 ]
 
-const active = ref('0')
-
-// Note: This is for demonstration purposes only. Don't do this at home.
-onMounted(() => {
-  setInterval(() => {
-    active.value = String((Number(active.value) + 1) % items.length)
-  }, 2000)
+const active = computed({
+  get() {
+    return (route.query.tab as string) || 'account'
+  },
+  set(tab) {
+    // Hash is specified here to prevent the page from scrolling to the top
+    router.push({
+      path: '/components/tabs',
+      query: { tab },
+      hash: '#control-active-item'
+    })
+  }
 })
 </script>
 
