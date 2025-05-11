@@ -842,17 +842,23 @@ exports[`NavigationMenu > renders with orientation vertical and collapsed correc
           <!--v-if-->
         </div>
       </li>
-      <li data-menu-item="" class="min-w-0"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors px-1.5" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+      <li data-state="closed" class="min-w-0" value="1"><button type="button" aria-controls="" aria-expanded="false" data-state="closed" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors px-1.5" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" width="1em" height="1em" viewBox="0 0 16 16"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
         <!--v-if-->
+        <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-1" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+          <!---->
+        </div>
       </li>
-      <li data-menu-item="" class="min-w-0"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-primary before:bg-elevated px-1.5" data-active="" aria-current="page" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-primary group-data-[state=open]:text-primary" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+      <li data-state="closed" class="min-w-0" value="2"><button type="button" aria-controls="" aria-expanded="false" data-state="closed" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-primary before:bg-elevated px-1.5" data-active="" aria-current="page" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-primary group-data-[state=open]:text-primary" width="1em" height="1em" viewBox="0 0 16 16"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
         <!--v-if-->
+        <div class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden" id="reka-collapsible-content-v-2" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+          <!---->
+        </div>
       </li>
     </ul>
   </div>

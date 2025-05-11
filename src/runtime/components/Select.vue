@@ -21,7 +21,7 @@ interface SelectItemBase {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item'
-  value?: string | number
+  value?: AcceptableValue | boolean
   disabled?: boolean
   onSelect?(e?: Event): void
   [key: string]: any

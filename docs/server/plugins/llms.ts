@@ -46,11 +46,33 @@ const parseBoolean = (value?: string): boolean => value === 'true'
 
 function getComponentMeta(componentName: string) {
   const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
-  const metaComponentName = `U${pascalCaseName}`
+
+  const strategies = [
+    `U${pascalCaseName}`,
+    `Prose${pascalCaseName}`,
+    pascalCaseName
+  ]
+
+  let componentMeta: any
+  let finalMetaComponentName: string = pascalCaseName
+
+  for (const nameToTry of strategies) {
+    finalMetaComponentName = nameToTry
+    const metaAttempt = (meta as Record<string, any>)[nameToTry]?.meta
+    if (metaAttempt) {
+      componentMeta = metaAttempt
+      break
+    }
+  }
+
+  if (!componentMeta) {
+    console.warn(`[getComponentMeta] Metadata not found for ${pascalCaseName} using strategies: U, Prose, or no prefix. Last tried: ${finalMetaComponentName}`)
+  }
+
   return {
     pascalCaseName,
-    metaComponentName,
-    componentMeta: (meta as Record<string, any>)[metaComponentName]?.meta
+    metaComponentName: finalMetaComponentName,
+    componentMeta
   }
 }
 
@@ -168,6 +190,7 @@ function emitItemHandler(event: any): string {
 const generateThemeConfig = ({ pro, prose, componentName }: ThemeConfig) => {
   const computedTheme = pro ? (prose ? themePro.prose : themePro) : theme
   const componentTheme = computedTheme[componentName as keyof typeof computedTheme]
+
   return {
     [pro ? 'uiPro' : 'ui']: prose
       ? { prose: { [componentName]: componentTheme } }
@@ -284,10 +307,14 @@ export default defineNitroPlugin((nitroApp) => {
     const componentName = camelCase(doc.title)
 
     visitAndReplace(doc, 'component-theme', (node) => {
-      const attributes = node[1] as ComponentAttributes
+      const attributes = node[1] as Record<string, string>
+      const mdcSpecificName = attributes?.slug
+
+      const finalComponentName = mdcSpecificName ? camelCase(mdcSpecificName) : componentName
+
       const pro = parseBoolean(attributes[':pro'])
       const prose = parseBoolean(attributes[':prose'])
-      const appConfig = generateThemeConfig({ pro, prose, componentName })
+      const appConfig = generateThemeConfig({ pro, prose, componentName: finalComponentName })
 
       replaceNodeWithPre(
         node,
@@ -322,7 +349,13 @@ export default defineNitroPlugin((nitroApp) => {
     })
 
     visitAndReplace(doc, 'component-props', (node) => {
-      const { pascalCaseName, componentMeta } = getComponentMeta(componentName)
+      const attributes = node[1] as Record<string, string>
+      const mdcSpecificName = attributes?.name
+
+      const finalComponentName = mdcSpecificName ? camelCase(mdcSpecificName) : componentName
+
+      const { pascalCaseName, componentMeta } = getComponentMeta(finalComponentName)
+
       if (!componentMeta?.props) return
 
       const interfaceCode = generateTSInterface(
