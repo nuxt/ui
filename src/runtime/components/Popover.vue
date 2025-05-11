@@ -104,7 +104,7 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
       <slot :open="open" />
     </Component.Trigger>
 
-    <Component.Anchor v-if="'Anchor' in Component && !!slots.anchor" v-bind="contentProps" as-child>
+    <Component.Anchor v-if="'Anchor' in Component && !!slots.anchor" as-child>
       <slot name="anchor" />
     </Component.Anchor>
 
