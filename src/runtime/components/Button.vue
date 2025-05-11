@@ -143,7 +143,7 @@ const ui = computed(() => tv({
       </slot>
 
       <slot>
-        <span v-if="label" :class="ui.label({ class: props.ui?.label, active })">
+        <span v-if="label !== undefined && label !== null" :class="ui.label({ class: props.ui?.label, active })">
           {{ label }}
         </span>
       </slot>
