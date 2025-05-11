@@ -13,7 +13,8 @@ describe('Popover', () => {
     ['with ui', { props: { ...props, ui: { content: 'shadow-xl' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
-    ['with content slot', { props, slots: { content: () => 'Content slot' } }]
+    ['with content slot', { props, slots: { content: () => 'Content slot' } }],
+    ['with anchor slot', { props, slots: { anchor: () => 'Anchor slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PopoverProps, slots?: Partial<PopoverSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Popover)
     expect(html).toMatchSnapshot()
