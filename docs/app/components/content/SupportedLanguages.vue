@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as locales from '@nuxt/ui/locale'
 
+console.log(locales);
 const props = withDefaults(defineProps<{
   default?: string
 }>(), {
@@ -26,7 +27,7 @@ function getEmojiFlag(locale: string): string {
     km: 'kh', // Khmer -> Cambodia
     ko: 'kr', // Korean -> South Korea
     nb: 'no', // Norwegian Bokmål -> Norway
-    sl: "si", // Slovenian -> Slovenia
+    sl: 'si', // Slovenian -> Slovenia
     sv: 'se', // Swedish -> Sweden
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan
