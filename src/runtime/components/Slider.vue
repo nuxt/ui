@@ -2,6 +2,7 @@
 import type { SliderRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/slider'
+import type { TooltipProps } from '../types'
 import type { ComponentConfig } from '../types/utils'
 
 type Slider = ComponentConfig<typeof theme, AppConfig, 'slider'>
@@ -25,6 +26,12 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
    * @defaultValue 'horizontal'
    */
   orientation?: SliderRootProps['orientation']
+  /**
+   * Display a tooltip around the slider thumbs with the current value.
+   * `{ disableClosingTrigger: true }`{lang="ts-type"}
+   * @defaultValue false
+   */
+  tooltip?: boolean | TooltipProps
   /** The value of the slider when initially rendered. Use when you do not need to control the state of the slider. */
   defaultValue?: number | number[]
   class?: any
@@ -44,6 +51,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
+import UTooltip from './Tooltip.vue'
 
 const props = withDefaults(defineProps<SliderProps>(), {
   min: 0,
@@ -80,7 +88,7 @@ const sliderValue = computed({
   }
 })
 
-const thumbsCount = computed(() => sliderValue.value?.length ?? 1)
+const thumbs = computed(() => sliderValue.value?.length ?? 1)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })({
   disabled: disabled.value,
@@ -113,6 +121,16 @@ function onChange(value: any) {
       <SliderRange :class="ui.range({ class: props.ui?.range })" />
     </SliderTrack>
 
-    <SliderThumb v-for="count in thumbsCount" :key="count" :class="ui.thumb({ class: props.ui?.thumb })" />
+    <template v-for="thumb in thumbs" :key="thumb">
+      <UTooltip
+        v-if="!!tooltip"
+        :text="thumbs > 1 ? String(sliderValue?.[thumb - 1]) : String(sliderValue)"
+        disable-closing-trigger
+        v-bind="(typeof tooltip === 'object' ? tooltip : {})"
+      >
+        <SliderThumb :class="ui.thumb({ class: props.ui?.thumb })" />
+      </UTooltip>
+      <SliderThumb v-else :class="ui.thumb({ class: props.ui?.thumb })" />
+    </template>
   </SliderRoot>
 </template>

@@ -38,7 +38,7 @@ const schemaProps = computed(() => {
 </script>
 
 <template>
-  <ProseCollapsible v-if="schemaProps?.length" class="mt-1">
+  <ProseCollapsible v-if="schemaProps?.length" class="mt-1 mb-0">
     <ProseUl>
       <ProseLi v-for="schemaProp in schemaProps" :key="schemaProp.name">
         <HighlightInlineType :type="`${schemaProp.name}${schemaProp.required === false ? '?' : ''}: ${schemaProp.type}`" />

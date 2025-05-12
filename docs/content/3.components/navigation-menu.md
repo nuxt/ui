@@ -21,10 +21,10 @@ Use the `items` prop as an array of objects with the following properties:
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `badge?: string | number | BadgeProps`{lang="ts-type"}
-- `tooltip?: TooltipProps`{lang="ts-type"}
+- `tooltip?: TooltipProps`{lang="ts-type"} :badge{label="Soon"}
 - `trailingIcon?: string`{lang="ts-type"}
 - `type?: 'label' | 'link'`{lang="ts-type"}
-- `collapsible?: boolean`{lang="ts-type"}
+- `collapsible?: boolean`{lang="ts-type"} :badge{label="Soon"}
 - `defaultOpen?: boolean`{lang="ts-type"}
 - `open?: boolean`{lang="ts-type"}
 - `value?: string`{lang="ts-type"}
@@ -144,7 +144,7 @@ Each item can take a `children` array of objects with the following properties t
 Use the `orientation` prop to change the orientation of the NavigationMenu.
 
 ::note
-When orientation is `vertical`, a [Collapsible](/components/collapsible) component is used to display children. You can control the open state of each item using the `open` and `defaultOpen` properties. You can also use the `collapsible` property to control if the item is collapsible.
+When orientation is `vertical`, a [Collapsible](/components/collapsible) component is used to display children. You can control the open state of each item using the `open` and `defaultOpen` properties.
 ::
 
 ::component-code
@@ -239,6 +239,108 @@ props:
 
 ::note
 Groups will be spaced when orientation is `horizontal` and separated when orientation is `vertical`.
+::
+
+### Collapsed
+
+Use the `collapsed` prop to collapse the NavigationMenu, this can be useful in a sidebar for example.
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - orientation
+  - class
+external:
+  - items
+externalTypes:
+  - NavigationMenuItem[][]
+props:
+  collapsed: true
+  orientation: 'vertical'
+  items:
+    - - label: Links
+        type: 'label'
+      - label: Guide
+        icon: i-lucide-book-open
+        children:
+          - label: Introduction
+            description: Fully styled and customizable components for Nuxt.
+            icon: i-lucide-house
+          - label: Installation
+            description: Learn how to install and configure Nuxt UI in your application.
+            icon: i-lucide-cloud-download
+          - label: 'Icons'
+            icon: 'i-lucide-smile'
+            description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+          - label: 'Colors'
+            icon: 'i-lucide-swatch-book'
+            description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+          - label: 'Theme'
+            icon: 'i-lucide-cog'
+            description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+      - label: Composables
+        icon: i-lucide-database
+        collapsible: false
+        open: false
+        children:
+          - label: defineShortcuts
+            icon: i-lucide-file-text
+            description: Define shortcuts for your application.
+            to: /composables/define-shortcuts
+          - label: useOverlay
+            icon: i-lucide-file-text
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
+          - label: useToast
+            icon: i-lucide-file-text
+            description: Display a toast within your application.
+            to: /composables/use-toast
+      - label: Components
+        icon: i-lucide-box
+        collapsible: false
+        open: false
+        to: /components
+        active: true
+        children:
+          - label: Link
+            icon: i-lucide-file-text
+            description: Use NuxtLink with superpowers.
+            to: /components/link
+          - label: Modal
+            icon: i-lucide-file-text
+            description: Display a modal within your application.
+            to: /components/modal
+          - label: NavigationMenu
+            icon: i-lucide-file-text
+            description: Display a list of links.
+            to: /components/navigation-menu
+          - label: Pagination
+            icon: i-lucide-file-text
+            description: Display a list of pages.
+            to: /components/pagination
+          - label: Popover
+            icon: i-lucide-file-text
+            description: Display a non-modal dialog that floats around a trigger element.
+            to: /components/popover
+          - label: Progress
+            icon: i-lucide-file-text
+            description: Show a horizontal bar to indicate task progression.
+            to: /components/progress
+    - - label: GitHub
+        icon: i-simple-icons-github
+        badge: 3.8k
+        to: https://github.com/nuxt/ui
+        target: _blank
+      - label: Help
+        icon: i-lucide-circle-help
+        disabled: true
+---
+::
+
+::tip
+You can set the `collapsible: false` property on items with children to prevent them from being collapsible. This allows the item to act as a regular link while still displaying its children in a submenu.
 ::
 
 ### Highlight
@@ -781,6 +883,126 @@ You can inspect the DOM to see each item's content being rendered.
 ::
 
 ## Examples
+
+### With tooltips in items :badge{label="Soon" class="align-text-top"}
+
+You can use the `tooltip` property to display a [Tooltip](/components/tooltip) around an item. This can be useful when the menu is collapsed.
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - orientation
+  - class
+external:
+  - items
+externalTypes:
+  - NavigationMenuItem[][]
+props:
+  collapsed: true
+  orientation: 'vertical'
+  items:
+    - - label: Links
+        type: 'label'
+      - label: Guide
+        icon: i-lucide-book-open
+        tooltip:
+          text: 'Guide'
+        children:
+          - label: Introduction
+            description: Fully styled and customizable components for Nuxt.
+            icon: i-lucide-house
+            tooltip:
+              text: 'Introduction'
+          - label: Installation
+            description: Learn how to install and configure Nuxt UI in your application.
+            icon: i-lucide-cloud-download
+            tooltip:
+              text: 'Installation'
+          - label: 'Icons'
+            icon: 'i-lucide-smile'
+            description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+            tooltip:
+              text: 'Icons'
+          - label: 'Colors'
+            icon: 'i-lucide-swatch-book'
+            description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+            tooltip:
+              text: 'Colors'
+          - label: 'Theme'
+            icon: 'i-lucide-cog'
+            description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+            tooltip:
+              text: 'Theme'
+      - label: Composables
+        icon: i-lucide-database
+        tooltip:
+          text: 'Composables'
+        collapsible: false
+        open: false
+        children:
+          - label: defineShortcuts
+            icon: i-lucide-file-text
+            description: Define shortcuts for your application.
+            to: /composables/define-shortcuts
+          - label: useOverlay
+            icon: i-lucide-file-text
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
+          - label: useToast
+            icon: i-lucide-file-text
+            description: Display a toast within your application.
+            to: /composables/use-toast
+      - label: Components
+        icon: i-lucide-box
+        tooltip:
+          text: 'Components'
+        to: /components
+        active: true
+        collapsible: false
+        open: false
+        children:
+          - label: Link
+            icon: i-lucide-file-text
+            description: Use NuxtLink with superpowers.
+            to: /components/link
+          - label: Modal
+            icon: i-lucide-file-text
+            description: Display a modal within your application.
+            to: /components/modal
+          - label: NavigationMenu
+            icon: i-lucide-file-text
+            description: Display a list of links.
+            to: /components/navigation-menu
+          - label: Pagination
+            icon: i-lucide-file-text
+            description: Display a list of pages.
+            to: /components/pagination
+          - label: Popover
+            icon: i-lucide-file-text
+            description: Display a non-modal dialog that floats around a trigger element.
+            to: /components/popover
+          - label: Progress
+            icon: i-lucide-file-text
+            description: Show a horizontal bar to indicate task progression.
+            to: /components/progress
+    - - label: GitHub
+        icon: i-simple-icons-github
+        badge: 3.8k
+        to: https://github.com/nuxt/ui
+        target: _blank
+        tooltip:
+          text: 'GitHub'
+          kbds:
+            - 3.8k
+      - label: Help
+        icon: i-lucide-circle-help
+        disabled: true
+        tooltip:
+          text: 'Help'
+---
+::
 
 ### Control active item
 
