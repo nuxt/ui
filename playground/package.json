@@ -9,8 +9,8 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.41",
-    "@iconify-json/simple-icons": "^1.2.33",
+    "@iconify-json/lucide": "^1.2.42",
+    "@iconify-json/simple-icons": "^1.2.34",
     "@nuxt/ui": "latest",
     "@nuxthub/core": "^0.8.27",
     "nuxt": "^3.17.2",

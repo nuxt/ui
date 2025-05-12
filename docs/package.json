@@ -3,10 +3,10 @@
   "name": "@nuxt/ui-docs",
   "type": "module",
   "dependencies": {
-    "@ai-sdk/vue": "^1.2.11",
+    "@ai-sdk/vue": "^1.2.12",
     "@iconify-json/logos": "^1.2.4",
-    "@iconify-json/lucide": "^1.2.41",
-    "@iconify-json/simple-icons": "^1.2.33",
+    "@iconify-json/lucide": "^1.2.42",
+    "@iconify-json/simple-icons": "^1.2.34",
     "@iconify-json/vscode-icons": "^1.2.20",
     "@nuxt/content": "^3.5.1",
     "@nuxt/image": "^1.10.0",
@@ -32,7 +32,7 @@
     "superstruct": "^2.0.2",
     "ufo": "^1.6.1",
     "valibot": "^1.1.0",
-    "workers-ai-provider": "^0.3.1",
+    "workers-ai-provider": "^0.3.2",
     "yup": "^1.6.1",
     "zod": "^3.24.4"
   },
