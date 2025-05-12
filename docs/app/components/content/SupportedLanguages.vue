@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import * as locales from '@nuxt/ui/locale'
 
-console.log(locales);
 const props = withDefaults(defineProps<{
   default?: string
 }>(), {
