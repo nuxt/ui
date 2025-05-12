@@ -95,8 +95,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.toast || {}) })({
   color: props.color,
   orientation: props.orientation,
-  title: !!props.title || !!slots.title,
-  progress: props.progress
+  title: !!props.title || !!slots.title
 }))
 
 const el = ref()
