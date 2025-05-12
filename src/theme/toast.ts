@@ -40,11 +40,6 @@ export default (options: Required<ModuleOptions>) => ({
       true: {
         description: 'mt-1'
       }
-    },
-    progress: {
-      false: {
-        progress: 'hidden'
-      }
     }
   },
   defaultVariants: {
