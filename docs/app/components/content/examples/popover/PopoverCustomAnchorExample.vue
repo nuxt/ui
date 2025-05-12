@@ -1,12 +1,12 @@
+<script lang="ts" setup>
+const open = ref(false)
+</script>
+
 <template>
   <div class="relative">
-    <UPopover :content="{ side: 'right' }">
-      <UButton label="Open" color="neutral" variant="subtle" />
-
+    <UPopover v-model:open="open" :dismissible="false">
       <template #anchor>
-        <div class="absolute top-1/2 -right-24 translate-x-1/2 -translate-y-1/2">
-          Anchor
-        </div>
+        <UInput placeholder="Focus to open" @focus="open = true" @blur="open = false" />
       </template>
 
       <template #content>
