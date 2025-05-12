@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../../types/utils'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 
-interface NuxtLinkProps extends Omit<InertiaLinkProps, 'href'> {
+interface NuxtLinkProps extends Omit<InertiaLinkProps, 'href' | 'onClick'> {
   activeClass?: string
   /**
    * Route Location the link should navigate to when clicked on.
@@ -78,6 +78,8 @@ const props = withDefaults(defineProps<LinkProps>(), {
 })
 defineSlots<LinkSlots>()
 
+const page = usePage()
+
 const appConfig = useAppConfig() as Link['AppConfig']
 
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'raw', 'class'))
@@ -100,8 +102,28 @@ const isExternal = computed(() => {
   return typeof props.to === 'string' && hasProtocol(props.to, { acceptRelative: true })
 })
 
+const isLinkActive = computed(() => {
+  if (props.active !== undefined) {
+    return props.active
+  }
+
+  if (!props.to) {
+    return false
+  }
+
+  if (props.exact && page.url === props.to) {
+    return true
+  }
+
+  if (!props.exact && page.url.startsWith(props.to)) {
+    return true
+  }
+
+  return false
+})
+
 const linkClass = computed(() => {
-  const active = isActive.value
+  const active = isLinkActive.value
 
   if (props.raw) {
     return [props.class, active ? props.activeClass : props.inactiveClass]
@@ -109,16 +131,11 @@ const linkClass = computed(() => {
 
   return ui.value({ class: props.class, active, disabled: props.disabled })
 })
-
-const page = usePage()
-const url = computed(() => props.to ?? props.href ?? '')
-
-const isActive = computed(() => props.active || (!!url.value && (props.exact ? url.value === props.href : page?.url.startsWith(url.value))))
 </script>
 
 <template>
-  <template v-if="!isExternal && !!url">
-    <InertiaLink v-bind="routerLinkProps" :href="url">
+  <template v-if="!isExternal">
+    <InertiaLink v-bind="routerLinkProps" :href="props.to || ''">
       <template v-if="custom">
         <slot
           v-bind="{
@@ -126,8 +143,8 @@ const isActive = computed(() => props.active || (!!url.value && (props.exact ? u
             as,
             type,
             disabled,
-            href: url,
-            active: isActive
+            href: props.to,
+            active: isLinkActive
           }"
         />
       </template>
@@ -138,12 +155,12 @@ const isActive = computed(() => props.active || (!!url.value && (props.exact ? u
           as,
           type,
           disabled,
-          href: url,
-          active: isActive
+          href: props.to,
+          active: isLinkActive
         }"
         :class="linkClass"
       >
-        <slot :active="isActive" />
+        <slot :active="isLinkActive" />
       </ULinkBase>
     </InertiaLink>
   </template>
@@ -156,9 +173,9 @@ const isActive = computed(() => props.active || (!!url.value && (props.exact ? u
           as,
           type,
           disabled,
-          href: to,
+          href: props.to,
           target: isExternal ? '_blank' : undefined,
-          active: isActive
+          active: isLinkActive
         }"
       />
     </template>
@@ -169,14 +186,14 @@ const isActive = computed(() => props.active || (!!url.value && (props.exact ? u
         as,
         type,
         disabled,
-        href: url,
+        href: props.to,
         target: isExternal ? '_blank' : undefined,
-        active: isActive
+        active: isLinkActive
       }"
       :is-external="isExternal"
       :class="linkClass"
     >
-      <slot :active="isActive" />
+      <slot :active="isLinkActive" />
     </ULinkBase>
   </template>
 </template>
