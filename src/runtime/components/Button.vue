@@ -123,7 +123,7 @@ const ui = computed(() => tv({
     v-slot="{ active, ...slotProps }"
     :type="type"
     :disabled="disabled || isLoading"
-    :class="ui.base({ class: [props.class, props.ui?.base] })"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
     v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
     custom
   >
@@ -143,7 +143,7 @@ const ui = computed(() => tv({
       </slot>
 
       <slot>
-        <span v-if="label" :class="ui.label({ class: props.ui?.label, active })">
+        <span v-if="label !== undefined && label !== null" :class="ui.label({ class: props.ui?.label, active })">
           {{ label }}
         </span>
       </slot>

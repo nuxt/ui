@@ -7,9 +7,9 @@ links:
     icon: i-custom-fuse-js
     to: https://fusejs.io/
     target: _blank
-  - label: Combobox
+  - label: Listbox
     icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/combobox
+    to: https://reka-ui.com/docs/components/listbox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/CommandPalette.vue

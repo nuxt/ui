@@ -81,7 +81,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb |
 </script>
 
 <template>
-  <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ol :class="ui.list({ class: props.ui?.list })">
       <template v-for="(item, index) in items" :key="index">
         <li :class="ui.item({ class: props.ui?.item })">

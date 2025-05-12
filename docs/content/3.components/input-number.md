@@ -3,9 +3,9 @@ title: InputNumber
 description: Input numerical values with a customizable range.
 category: form
 links:
-  - label: Number Field
+  - label: NumberField
     icon: i-custom-reka-ui
-    to: https://www.reka-ui.com/components/input-number
+    to: https://www.reka-ui.com/docs/components/number-field
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/InputNumber.vue

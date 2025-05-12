@@ -44,15 +44,14 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         }
 
         function generateVariantDeclarations(variants: string[]) {
-          return variants.map((variant) => {
+          return variants.filter(variant => json.includes(`as typeof ${variant}`)).map((variant) => {
             const keys = Object.keys(result.variants[variant])
             return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`
           })
         }
 
         // For local development, import directly from theme
-        const isUiDev = true
-        if (isUiDev) {
+        if (process.argv.includes('--uiDev')) {
           const templatePath = fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url))
           return [
             `import template from ${JSON.stringify(templatePath)}`,
@@ -77,7 +76,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     write: true,
     getContents: () => `@source "./ui";
 
-@theme default {
+@theme default inline {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
@@ -120,6 +119,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --ring-color-accented: var(--ui-border-accented);
   --ring-color-inverted: var(--ui-border-inverted);
   --ring-color-bg: var(--ui-bg);
+  --ring-offset-color-default: var(--ui-border);
+  --ring-offset-color-muted: var(--ui-border-muted);
+  --ring-offset-color-accented: var(--ui-border-accented);
+  --ring-offset-color-inverted: var(--ui-border-inverted);
+  --ring-offset-color-bg: var(--ui-bg);
   --divide-color-default: var(--ui-border);
   --divide-color-muted: var(--ui-border-muted);
   --divide-color-accented: var(--ui-border-accented);
@@ -145,7 +149,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
-import type { DeepPartial } from '@nuxt/ui'
+import type { TVConfig } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
@@ -161,7 +165,7 @@ type AppConfigUI = {
   }
   icons?: Partial<typeof icons>
   tv?: typeof defaultConfig
-} & DeepPartial<typeof ui>
+} & TVConfig<typeof ui>
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {

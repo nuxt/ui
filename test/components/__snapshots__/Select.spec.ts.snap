@@ -662,7 +662,7 @@ exports[`Select > renders with multiple and modelValue correctly 1`] = `
 `;
 
 exports[`Select > renders with multiple correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" class="relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9">
+"<button role="combobox" type="button" aria-controls="reka-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9">
   <!--v-if--><span class="truncate text-dimmed">&nbsp;</span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><span class="iconify i-lucide:chevron-down shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
 </button>
 <!--teleport start-->

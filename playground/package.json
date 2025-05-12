@@ -5,14 +5,22 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
-    "generate": "nuxi generate"
+    "generate": "nuxi generate",
+    "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.39",
-    "@iconify-json/simple-icons": "^1.2.33",
+    "@iconify-json/lucide": "^1.2.42",
+    "@iconify-json/simple-icons": "^1.2.34",
     "@nuxt/ui": "latest",
-    "@nuxthub/core": "^0.8.25",
-    "nuxt": "^3.16.2",
-    "zod": "^3.24.3"
+    "@nuxthub/core": "^0.8.27",
+    "nuxt": "^3.17.3",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vue-tsc": "^2.2.10"
+  },
+  "resolutions": {
+    "unimport": "4.1.1"
   }
 }

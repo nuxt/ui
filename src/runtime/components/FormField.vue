@@ -90,7 +90,7 @@ provide(formFieldInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div :class="ui.wrapper({ class: props.ui?.wrapper })">
       <div v-if="label || !!slots.label" :class="ui.labelWrapper({ class: props.ui?.labelWrapper })">
         <Label :for="id" :class="ui.label({ class: props.ui?.label })">

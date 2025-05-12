@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Before requesting a feature, please make sure that you have read through our [v3 documentation](https://ui.nuxt.com/) and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue%20is%3Aopen%20sort%3Aupdated-desc%20label%3Av3).
+        Before requesting a feature, please make sure that you have read through our [documentation](https://ui.nuxt.com/) and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue%20is%3Aopen%20sort%3Aupdated-desc%20label%3Av3).
   - type: textarea
     id: description
     attributes:

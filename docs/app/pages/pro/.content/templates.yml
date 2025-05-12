@@ -16,6 +16,32 @@ links:
     variant: outline
     trailingIcon: i-lucide-arrow-right
 templates:
+  - title: 'Portfolio'
+    description: "A sleek, modern portfolio template to showcase your work, skills, blog posts, speaking engagements, and provide contact information. Which can customized easily from the `content/` directory."
+    icon: i-lucide-user
+    thumbnail:
+      dark: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3BvcnRmb2xpby10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTc0NTkzNDczMX0.XDWnQoyVy3XVtKQD6PLQ8RFUwr4yr1QnVwPxRrjCrro.jpg?theme=dark
+      light: https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3BvcnRmb2xpby10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTc0NTkzNDczMX0.XDWnQoyVy3XVtKQD6PLQ8RFUwr4yr1QnVwPxRrjCrro.jpg?theme=light
+    features:
+      - title: Sections for Projects, Blog, Speaking & About
+        icon: i-lucide-layout-list
+      - title: Easily editable content via Markdown & YAML
+        icon: i-simple-icons-markdown
+      - title: Fully responsive design
+        icon: i-lucide-smartphone
+    links:
+      - label: Preview
+        to: https://portfolio-template.nuxt.dev
+        target: _blank
+        leadingIcon: i-logos-nuxt-icon
+        trailingIcon: i-lucide-arrow-up-right
+        color: neutral
+      - label: Nuxt Template
+        to: https://github.com/nuxt-ui-pro/portfolio
+        target: _blank
+        icon: i-simple-icons-github
+        color: neutral
+        variant: outline
   - title: 'Chat'
     description: "An AI chatbot template designed to help you build your own chatbot with Nuxt UI Pro components and deployed on [NuxtHub](https://hub.nuxt.com)."
     icon: i-lucide-message-circle

@@ -163,7 +163,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <input
       :id="id"
       ref="inputRef"

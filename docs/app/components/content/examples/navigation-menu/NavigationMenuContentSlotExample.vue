@@ -65,6 +65,7 @@ const items = [
     class="w-full justify-center"
     :ui="{
       viewport: 'sm:w-(--reka-navigation-menu-viewport-width)',
+      content: 'sm:w-auto',
       childList: 'sm:w-96',
       childLinkDescription: 'text-balance line-clamp-2'
     }"
