@@ -373,7 +373,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
     @update:open="onUpdateOpen"
   >
     <ComboboxAnchor as-child>
-      <ComboboxTrigger :class="ui.base({ class: [props.class, props.ui?.base] })" tabindex="0">
+      <ComboboxTrigger :class="ui.base({ class: [props.ui?.base, props.class] })" tabindex="0">
         <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
             <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />

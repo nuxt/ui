@@ -55,6 +55,7 @@ const icons = {
           :title="user.name"
           :description="[user.pronouns, user.location].filter(Boolean).join(' ・ ')"
           :ui="{
+            wrapper: 'items-center',
             container: 'gap-y-4 lg:p-8',
             leading: 'flex justify-center',
             title: 'text-center',
@@ -123,6 +124,7 @@ const icons = {
           :key="contributor.username"
           :title="contributor.username"
           :ui="{
+            wrapper: 'items-center',
             container: 'gap-y-2',
             leading: 'flex justify-center',
             title: 'text-center',

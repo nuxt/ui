@@ -9,6 +9,7 @@ import { useColorMode as useColorModeVueUse } from '@vueuse/core'
 export { useHead } from '@unhead/vue'
 export { useRoute, useRouter } from 'vue-router'
 
+export { useAppConfig } from './composables/useAppConfig'
 export { defineShortcuts } from '../composables/defineShortcuts'
 export { defineLocale } from '../composables/defineLocale'
 export { useLocale } from '../composables/useLocale'
@@ -29,8 +30,6 @@ export const useColorMode = () => {
     forced: false
   }
 }
-
-export const useAppConfig = () => appConfig
 
 export const useCookie = <T = string>(
   _name: string,

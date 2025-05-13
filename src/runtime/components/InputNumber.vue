@@ -145,7 +145,7 @@ defineExpose({
   <NumberFieldRoot
     v-bind="rootProps"
     :id="id"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"
     :locale="locale"
