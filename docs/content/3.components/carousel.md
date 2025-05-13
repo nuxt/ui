@@ -28,6 +28,7 @@ class: 'p-8'
 ::
 
 You can also pass an array of objects with the following properties:
+
 - `ui?: { item?: ClassNameValue }`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 
