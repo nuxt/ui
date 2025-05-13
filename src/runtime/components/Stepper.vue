@@ -16,7 +16,6 @@ export interface StepperItem {
    * @IconifyIcon
    */
   icon?: string
-  iconClass?: string
   content?: string
   disabled?: boolean
   class?: any
