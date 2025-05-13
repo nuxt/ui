@@ -93,23 +93,23 @@ export default (options: Required<ModuleOptions>) => ({
   }, {
     size: 'xs',
     square: true,
-    class: 'p-1'
+    class: 'p-0.5'
   }, {
     size: 'sm',
     square: true,
-    class: 'p-1.5'
+    class: 'p-1'
   }, {
     size: 'md',
     square: true,
-    class: 'p-2'
+    class: 'p-1'
   }, {
     size: 'lg',
     square: true,
-    class: 'p-2'
+    class: 'p-1'
   }, {
     size: 'xl',
     square: true,
-    class: 'p-2.5'
+    class: 'p-1'
   }],
   defaultVariants: {
     color: 'primary',

@@ -69,21 +69,6 @@ slots:
 ---
 ::
 
-### Square
-
-Use the `square` prop to make the Badge squared.
-
-::component-code
----
-props:
-  icon: i-lucide-rocket
-  square: true
-  size: md
-  color: primary
-  variant: solid
----
-::
-
 ### Icon
 
 Use the `icon` prop to show an [Icon](/components/icon) inside the Badge.
