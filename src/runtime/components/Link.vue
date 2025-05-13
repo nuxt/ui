@@ -112,7 +112,7 @@ defineSlots<LinkSlots>()
 const route = useRoute()
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'raw', 'class'))
+const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
 
 const ui = computed(() => tv({
   extend: tv(theme),
@@ -125,6 +125,8 @@ const ui = computed(() => tv({
     }
   }, appConfig.ui?.link || {})
 }))
+
+const to = computed(() => props.to ?? props.href)
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
   if (props.active !== undefined) {
@@ -164,7 +166,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
 </script>
 
 <template>
-  <NuxtLink v-slot="{ href, navigate, route: linkRoute, rel, target, isExternal, isActive, isExactActive }" v-bind="nuxtLinkProps" custom>
+  <NuxtLink v-slot="{ href, navigate, route: linkRoute, rel, target, isExternal, isActive, isExactActive }" v-bind="nuxtLinkProps" :to="to" custom>
     <template v-if="custom">
       <slot
         v-bind="{

@@ -62,10 +62,11 @@ import { computed } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
-import { usePage, Link as InertiaLink } from '@inertiajs/vue3'
+import { usePage } from '@inertiajs/vue3'
 import { hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
 import { tv } from '../../utils/tv'
+import ULinkBase from '../../components/LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -82,7 +83,7 @@ const page = usePage()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'raw', 'class'))
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
 
 const ui = computed(() => tv({
   extend: tv(theme),
@@ -96,10 +97,18 @@ const ui = computed(() => tv({
   }, appConfig.ui?.link || {})
 }))
 
+const href = computed(() => props.to ?? props.href)
+
 const isExternal = computed(() => {
-  if (props.external) return true
-  if (!props.to) return false
-  return typeof props.to === 'string' && hasProtocol(props.to, { acceptRelative: true })
+  if (props.external) {
+    return true
+  }
+
+  if (!href.value) {
+    return false
+  }
+
+  return typeof href.value === 'string' && hasProtocol(href.value, { acceptRelative: true })
 })
 
 const isLinkActive = computed(() => {
@@ -107,15 +116,15 @@ const isLinkActive = computed(() => {
     return props.active
   }
 
-  if (!props.to) {
+  if (!href.value) {
     return false
   }
 
-  if (props.exact && page.url === props.to) {
+  if (props.exact && page.url === href.value) {
     return true
   }
 
-  if (!props.exact && page.url.startsWith(props.to)) {
+  if (!props.exact && page.url.startsWith(href.value)) {
     return true
   }
 
@@ -134,66 +143,33 @@ const linkClass = computed(() => {
 </script>
 
 <template>
-  <template v-if="!isExternal">
-    <InertiaLink v-bind="routerLinkProps" :href="props.to || ''">
-      <template v-if="custom">
-        <slot
-          v-bind="{
-            ...$attrs,
-            as,
-            type,
-            disabled,
-            href: props.to,
-            active: isLinkActive
-          }"
-        />
-      </template>
-      <ULinkBase
-        v-else
-        v-bind="{
-          ...$attrs,
-          as,
-          type,
-          disabled,
-          href: props.to,
-          active: isLinkActive
-        }"
-        :class="linkClass"
-      >
-        <slot :active="isLinkActive" />
-      </ULinkBase>
-    </InertiaLink>
-  </template>
-
-  <template v-else>
-    <template v-if="custom">
-      <slot
-        v-bind="{
-          ...$attrs,
-          as,
-          type,
-          disabled,
-          href: props.to,
-          target: isExternal ? '_blank' : undefined,
-          active: isLinkActive
-        }"
-      />
-    </template>
-    <ULinkBase
-      v-else
+  <template v-if="custom">
+    <slot
       v-bind="{
         ...$attrs,
+        ...routerLinkProps,
         as,
         type,
         disabled,
-        href: props.to,
-        target: isExternal ? '_blank' : undefined,
-        active: isLinkActive
+        href,
+        active: isLinkActive,
+        isExternal
       }"
-      :is-external="isExternal"
-      :class="linkClass"
-    >
-      <slot :active="isLinkActive" />
-    </ULinkBase>
+    />
   </template>
+  <ULinkBase
+    v-else
+    v-bind="{
+      ...$attrs,
+      ...routerLinkProps,
+      as,
+      type,
+      disabled,
+      href,
+      isExternal
+    }"
+    :class="linkClass"
+  >
+    <slot :active="isLinkActive" />
+  </ULinkBase>
 </template>

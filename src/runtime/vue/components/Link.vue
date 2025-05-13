@@ -97,6 +97,7 @@ import { useRoute, RouterLink } from 'vue-router'
 import { useAppConfig } from '#imports'
 import { tv } from '../../utils/tv'
 import { isPartiallyEqual } from '../../utils/link'
+import ULinkBase from '../../components/LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -114,7 +115,7 @@ const route = useRoute()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'raw', 'class'))
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
 
 const ui = computed(() => tv({
   extend: tv(theme),
@@ -128,18 +129,27 @@ const ui = computed(() => tv({
   }, appConfig.ui?.link || {})
 }))
 
+const to = computed(() => props.to ?? props.href)
+
 const isExternal = computed(() => {
-  if (props.external) return true
-  if (!props.to) return false
-  return typeof props.to === 'string' && hasProtocol(props.to, { acceptRelative: true })
+  if (props.external) {
+    return true
+  }
+
+  if (!to.value) {
+    return false
+  }
+
+  return typeof to.value === 'string' && hasProtocol(to.value, { acceptRelative: true })
 })
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
+  console.log('props.active', props.active)
   if (props.active !== undefined) {
     return props.active
   }
 
-  if (!props.to) {
+  if (!to.value) {
     return false
   }
 
@@ -165,6 +175,7 @@ function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
 }
 
 function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
+  console.log('ici')
   const active = isLinkActive({ route, isActive, isExactActive })
 
   if (props.raw) {
@@ -176,8 +187,8 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
 </script>
 
 <template>
-  <template v-if="!isExternal">
-    <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to || ''" custom>
+  <template v-if="!isExternal && !!to">
+    <RouterLink v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }" v-bind="routerLinkProps" :to="to" custom>
       <template v-if="custom">
         <slot
           v-bind="{
@@ -186,7 +197,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
             as,
             type,
             disabled,
-            href: to ? href : undefined,
+            href,
             navigate,
             active: isLinkActive({ route: linkRoute, isActive, isExactActive })
           }"
@@ -200,7 +211,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           as,
           type,
           disabled,
-          href: to ? href : undefined,
+          href,
           navigate
         }"
         :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
@@ -220,7 +231,8 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           disabled,
           href: to,
           target: isExternal ? '_blank' : undefined,
-          active: false
+          active,
+          isExternal
         }"
       />
     </template>
@@ -232,12 +244,12 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         type,
         disabled,
         href: (to as string),
-        target: isExternal ? '_blank' : undefined
+        target: isExternal ? '_blank' : undefined,
+        isExternal
       }"
-      :is-external="isExternal"
       :class="resolveLinkClass()"
     >
-      <slot :active="false" />
+      <slot :active="active" />
     </ULinkBase>
   </template>
 </template>
