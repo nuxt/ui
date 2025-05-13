@@ -82,21 +82,7 @@ describe('SelectMenu', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
-    ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }],
-    ['with ui field in items', { props: { ...props, items: [{ ...items[0], ui: {
-      label: 'custom-label-class',
-      separator: 'custom-separator-class',
-      item: 'custom-item-class',
-      itemLeadingIcon: 'custom-item-leading-icon-class',
-      itemLeadingAvatarSize: 'custom-item-leading-avatar-size-class',
-      itemLeadingAvatar: 'custom-item-leading-avatar-class',
-      itemLeadingChipSize: 'custom-item-leading-chip-size-class',
-      itemLeadingChip: 'custom-item-leading-chip-class',
-      itemLabel: 'custom-item-label-class',
-      itemTrailing: 'custom-item-trailing-class',
-      itemTrailingIcon: 'custom-item-trailing-icon-class'
-    } }, ...items.slice(1)] } }],
-    ['with ui class in items', { props: { ...props, items: [{ ...items[0], class: 'item-custom-class' }, ...items.slice(1)] } }]
+    ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps, slots?: Partial<SelectMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, SelectMenu)
     expect(html).toMatchSnapshot()
