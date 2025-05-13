@@ -495,11 +495,11 @@ defineExpose({
 
           <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <ComboboxLabel v-if="isInputItem(item) && item.type === 'label'" :class="ui.label({ class: props.ui?.label })">
+              <ComboboxLabel v-if="isInputItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
                 {{ get(item, props.labelKey as string) }}
               </ComboboxLabel>
 
-              <ComboboxSeparator v-else-if="isInputItem(item) && item.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
+              <ComboboxSeparator v-else-if="isInputItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
               <ComboboxItem
                 v-else
