@@ -20,8 +20,8 @@ export interface TabsItem {
   /** A unique value for the tab item. Defaults to the index. */
   value?: string | number
   disabled?: boolean
-  ui?: Pick<Tabs['slots'], 'trigger' | 'leadingIcon' | 'leadingAvatar' | 'label' | 'content'>
   class?: any
+  ui?: Pick<Tabs['slots'], 'trigger' | 'leadingIcon' | 'leadingAvatar' | 'label' | 'content'>
   [key: string]: any
 }
 

@@ -16,8 +16,8 @@ import type { ComponentConfig } from '../types/utils'
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 
 interface _CarouselItem {
-  ui?: Pick<Carousel['slots'], 'item'>
   class?: any
+  ui?: Pick<Carousel['slots'], 'item'>
   [key: string]: any
 }
 

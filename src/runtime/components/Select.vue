@@ -24,8 +24,8 @@ interface SelectItemBase {
   value?: AcceptableValue | boolean
   disabled?: boolean
   onSelect?(e?: Event): void
-  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   class?: any
+  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
 export type SelectItem = SelectItemBase | AcceptableValue | boolean

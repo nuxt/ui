@@ -19,8 +19,8 @@ export interface StepperItem {
   iconClass?: string
   content?: string
   disabled?: boolean
-  ui?: Pick<Stepper['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>
   class?: any
+  ui?: Pick<Stepper['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>
   [key: string]: any
 }
 

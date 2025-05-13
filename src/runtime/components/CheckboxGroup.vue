@@ -14,8 +14,8 @@ export type CheckboxGroupItem = {
   description?: string
   disabled?: boolean
   value?: string
-  ui?: Pick<CheckboxGroup['slots'], 'item'>
   class?: any
+  ui?: Pick<CheckboxGroup['slots'], 'item'>
   [key: string]: any
 } | CheckboxGroupValue
 

@@ -22,8 +22,8 @@ export interface AccordionItem {
   /** A unique value for the accordion item. Defaults to the index. */
   value?: string
   disabled?: boolean
-  ui?: Pick<Accordion['slots'], 'item' | 'header' | 'trigger' | 'leadingIcon' | 'label' | 'trailingIcon' | 'content' | 'body'>
   class?: any
+  ui?: Pick<Accordion['slots'], 'item' | 'header' | 'trigger' | 'leadingIcon' | 'label' | 'trailingIcon' | 'content' | 'body'>
   [key: string]: any
 }
 

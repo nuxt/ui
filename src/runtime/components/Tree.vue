@@ -24,8 +24,8 @@ export type TreeItem = {
   children?: TreeItem[]
   onToggle?(e: Event): void
   onSelect?(e?: Event): void
-  ui?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>
   class?: any
+  ui?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>
   [key: string]: any
 }
 

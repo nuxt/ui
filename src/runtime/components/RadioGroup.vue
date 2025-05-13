@@ -12,8 +12,8 @@ export type RadioGroupItem = {
   description?: string
   disabled?: boolean
   value?: RadioGroupValue
-  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
   class?: any
+  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
   [key: string]: any
 } | RadioGroupValue
 
