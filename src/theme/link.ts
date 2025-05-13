@@ -5,10 +5,15 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     active: {
       true: 'text-primary',
-      false: ['text-muted hover:text-default', options.theme.transitions && 'transition-colors']
+      false: 'text-muted'
     },
     disabled: {
       true: 'cursor-not-allowed opacity-75'
     }
-  }
+  },
+  compoundVariants: [{
+    active: false,
+    disabled: false,
+    class: ['hover:text-default', options.theme.transitions && 'transition-colors']
+  }]
 })

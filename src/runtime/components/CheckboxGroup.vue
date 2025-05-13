@@ -19,7 +19,7 @@ export type CheckboxGroupItem = {
   [key: string]: any
 } | CheckboxGroupValue
 
-export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupItem> extends Pick<CheckboxGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'variant' | 'indicator' | 'icon'> {
+export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupItem> extends Pick<CheckboxGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -46,6 +46,10 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
    * @defaultValue 'md'
    */
   size?: CheckboxGroup['variants']['size']
+  /**
+   * @defaultValue 'list'
+   */
+  variant?: CheckboxGroup['variants']['variant']
   /**
    * The orientation the checkbox buttons are laid out.
    * @defaultValue 'vertical'
@@ -99,7 +103,9 @@ const id = _id.value ?? useId()
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({
   size: size.value,
   required: props.required,
-  orientation: props.orientation
+  orientation: props.orientation,
+  color: props.color,
+  variant: props.variant
 }))
 
 function normalizeItem(item: any) {

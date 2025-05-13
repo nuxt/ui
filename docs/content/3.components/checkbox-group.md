@@ -201,6 +201,7 @@ items:
   variant:
     - list
     - card
+    - table
 props:
   color: 'primary'
   variant: 'card'
@@ -231,6 +232,7 @@ items:
   variant:
     - list
     - card
+    - table
 props:
   size: 'xl'
   variant: 'list'
@@ -261,6 +263,7 @@ items:
   variant:
     - list
     - card
+    - table
 props:
   orientation: 'horizontal'
   variant: 'list'
@@ -295,6 +298,7 @@ items:
   variant:
     - list
     - card
+    - table
 props:
   indicator: 'end'
   variant: 'card'

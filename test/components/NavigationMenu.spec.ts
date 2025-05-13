@@ -84,12 +84,12 @@ describe('NavigationMenu', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with modelValue', { props: { ...props, modelValue: '0' } }],
+    ['with modelValue', { props: { ...props, modelValue: 'item-0' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
-    ['with arrow', { props: { ...props, arrow: true, modelValue: '0' } }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const, modelValue: '0' } }],
-    ['with orientation vertical and collapsed', { props: { ...props, orientation: 'vertical' as const, modelValue: '0', collapsed: true } }],
-    ['with content orientation vertical', { props: { ...props, contentOrientation: 'vertical' as const, modelValue: '0' } }],
+    ['with arrow', { props: { ...props, arrow: true, modelValue: 'item-0' } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const, modelValue: 'item-0' } }],
+    ['with orientation vertical and collapsed', { props: { ...props, orientation: 'vertical' as const, modelValue: 'item-0', collapsed: true } }],
+    ['with content orientation vertical', { props: { ...props, contentOrientation: 'vertical' as const, modelValue: 'item-0' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
