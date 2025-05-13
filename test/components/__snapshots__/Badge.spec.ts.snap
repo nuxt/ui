@@ -122,8 +122,7 @@ exports[`Badge > renders with size xs correctly 1`] = `
 `;
 
 exports[`Badge > renders with square correctly 1`] = `
-"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><span class="iconify i-lucide:rocket shrink-0 size-4" aria-hidden="true"></span>
-<!--v-if-->
+"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><!--v-if--><span class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
