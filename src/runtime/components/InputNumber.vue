@@ -56,12 +56,17 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   locale?: string
   class?: any
   ui?: InputNumber['slots']
+  /** Disable the increment button. */
+  disabledIncrement?: boolean
+  /** Disable the decrement button. */
+  disabledDecrement?: boolean
 }
 
 export interface InputNumberEmits {
   (e: 'update:modelValue', payload: number): void
   (e: 'blur', event: FocusEvent): void
   (e: 'change', payload: Event): void
+  (e: 'increment' | 'decrement', event: MouseEvent): void
 }
 
 export interface InputNumberSlots {
@@ -83,7 +88,9 @@ import UButton from './Button.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  disabledIncrement: false,
+  disabledDecrement: false
 })
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()
@@ -130,6 +137,14 @@ function autoFocus() {
   }
 }
 
+function onIncrement(event: MouseEvent) {
+  emits('increment', event)
+}
+
+function onDecrement(event: MouseEvent) {
+  emits('decrement', event)
+}
+
 onMounted(() => {
   setTimeout(() => {
     autoFocus()
@@ -161,8 +176,8 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <div :class="ui.increment({ class: props.ui?.increment })">
-      <NumberFieldIncrement as-child :disabled="disabled">
+    <div :class="ui.increment({ class: props.ui?.increment })" @click="onIncrement">
+      <NumberFieldIncrement as-child :disabled="disabled || disabledIncrement">
         <slot name="increment">
           <UButton
             :icon="incrementIcon"
@@ -170,14 +185,15 @@ defineExpose({
             :size="size"
             variant="link"
             :aria-label="t('inputNumber.increment')"
+            :disabled="disabled || disabledIncrement"
             v-bind="typeof increment === 'object' ? increment : undefined"
           />
         </slot>
       </NumberFieldIncrement>
     </div>
 
-    <div :class="ui.decrement({ class: props.ui?.decrement })">
-      <NumberFieldDecrement as-child :disabled="disabled">
+    <div :class="ui.decrement({ class: props.ui?.decrement })" @click="onDecrement">
+      <NumberFieldDecrement as-child :disabled="disabled || disabledDecrement">
         <slot name="decrement">
           <UButton
             :icon="decrementIcon"
@@ -185,6 +201,7 @@ defineExpose({
             :size="size"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
+            :disabled="disabled || disabledDecrement"
             v-bind="typeof decrement === 'object' ? decrement : undefined"
           />
         </slot>
