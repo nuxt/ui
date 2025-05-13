@@ -43,6 +43,10 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    */
   type?: 'label' | 'link'
   slot?: string
+  /**
+   * The value of the item. Avoid using `index` as the value to prevent conflicts in horizontal orientation with Reka UI.
+   * @defaultValue `item-${index}`
+   */
   value?: string
   /**
    * Make the item collapsible.
@@ -253,7 +257,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
     <component
       :is="(orientation === 'vertical' && item.children?.length) ? UCollapsible : NavigationMenuItem"
       as="li"
-      :value="item.value || String(index)"
+      :value="item.value || `item-${index}`"
       :default-open="item.defaultOpen"
       :disabled="(orientation === 'vertical' && item.children?.length) ? item.collapsible === false : undefined"
       :unmount-on-hide="(orientation === 'vertical' && item.children?.length) ? unmountOnHide : undefined"
