@@ -144,7 +144,6 @@ const isExternal = computed(() => {
 })
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
-  console.log('props.active', props.active)
   if (props.active !== undefined) {
     return props.active
   }
@@ -175,7 +174,6 @@ function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
 }
 
 function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
-  console.log('ici')
   const active = isLinkActive({ route, isActive, isExactActive })
 
   if (props.raw) {
