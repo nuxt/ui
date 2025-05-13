@@ -111,10 +111,10 @@ const groups = computed<ContextMenuItem[][]>(() =>
 
       <ContextMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
         <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-          <ContextMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: [uiOverride?.label, item.ui?.label] })">
+          <ContextMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class] })">
             <ReuseItemTemplate :item="item" :index="index" />
           </ContextMenu.Label>
-          <ContextMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator] })" />
+          <ContextMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })" />
           <ContextMenu.Sub v-else-if="item?.children?.length" :open="item.open" :default-open="item.defaultOpen">
             <ContextMenu.SubTrigger
               as="button"
