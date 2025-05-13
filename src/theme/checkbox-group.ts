@@ -16,6 +16,10 @@ export default (options: Required<ModuleOptions>) => ({
         fieldset: 'flex-col'
       }
     },
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {}])),
+      neutral: {}
+    },
     variant: {
       list: {},
       card: {},
@@ -96,6 +100,8 @@ export default (options: Required<ModuleOptions>) => ({
     }
   ],
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    variant: 'list',
+    color: 'primary'
   }
 })
