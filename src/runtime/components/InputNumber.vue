@@ -57,9 +57,9 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   class?: any
   ui?: InputNumber['slots']
   /** Disable the increment button. */
-  disabledIncrement?: boolean
+  incrementDisabled?: boolean
   /** Disable the decrement button. */
-  disabledDecrement?: boolean
+  decrementDisabled?: boolean
 }
 
 export interface InputNumberEmits {
