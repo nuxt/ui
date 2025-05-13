@@ -322,7 +322,7 @@ const lists = computed<NavigationMenuItem[][]>(() =>
             :item="childItem"
             :index="childIndex"
             :level="level + 1"
-            :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem, childItem.ui?.childItem, childItem.class] })"
+            :class="ui.childItem({ class: [props.ui?.childItem, childItem.ui?.childItem, childItem.class] })"
           />
         </ul>
       </template>

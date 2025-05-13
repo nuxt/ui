@@ -150,7 +150,7 @@ const groups = computed<ContextMenuItem[][]>(() =>
             :model-value="item.checked"
             :disabled="item.disabled"
             :text-value="get(item, props.labelKey as string)"
-            :class="ui.item({ class: [uiOverride?.item, item.class, item.ui?.item, item.class], color: item?.color })"
+            :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
             @update:model-value="item.onUpdateChecked"
             @select="item.onSelect"
           >
