@@ -38,13 +38,13 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
   ui?: Slider['slots']
 }
 
-export interface SliderEmits {
-  (e: 'update:modelValue', payload: number | number[]): void
+export interface SliderEmits<T extends number | number[] = number | number[]> {
+  (e: 'update:modelValue', payload: T): void
   (e: 'change', payload: Event): void
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends number | number[]">
 import { computed } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -59,9 +59,9 @@ const props = withDefaults(defineProps<SliderProps>(), {
   step: 1,
   orientation: 'horizontal'
 })
-const emits = defineEmits<SliderEmits>()
+const emits = defineEmits<SliderEmits<T>>()
 
-const modelValue = defineModel<number | number[]>()
+const modelValue = defineModel<T>()
 
 const appConfig = useAppConfig() as Slider['AppConfig']
 
@@ -81,10 +81,10 @@ const sliderValue = computed({
     if (typeof modelValue.value === 'number') {
       return [modelValue.value]
     }
-    return modelValue.value ?? defaultSliderValue.value
+    return (modelValue.value as number[]) ?? defaultSliderValue.value
   },
   set(value) {
-    modelValue.value = value?.length !== 1 ? value : value[0]
+    modelValue.value = (value?.length !== 1 ? value : value[0]) as T
   }
 })
 

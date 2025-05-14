@@ -21,6 +21,7 @@ describe('Badge', () => {
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-lucide-arrow-left' } }],
     ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-lucide-arrow-right' } }],
+    ['with square', { props: { label: 'Badge', square: true } }],
     ['with as', { props: { label: 'Badge', as: 'div' } }],
     ['with class', { props: { label: 'Badge', class: 'rounded-full font-bold' } }],
     ['with ui', { props: { label: 'Badge', ui: { label: 'font-bold' } } }],

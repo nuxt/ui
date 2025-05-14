@@ -59,7 +59,7 @@ provide('navigation', mappedNavigation)
   <UApp>
     <NuxtLoadingIndicator color="#FFF" />
 
-    <Banner />
+    <!-- <Banner /> -->
 
     <Header :links="links" />
 

@@ -18,6 +18,8 @@ export interface StepperItem {
   icon?: string
   content?: string
   disabled?: boolean
+  class?: any
+  ui?: Pick<Stepper['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>
   [key: string]: any
 }
 
@@ -136,13 +138,13 @@ defineExpose({
         :key="item.value ?? count"
         :step="count"
         :disabled="item.disabled || props.disabled"
-        :class="ui.item({ class: props.ui?.item })"
+        :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       >
-        <div :class="ui.container({ class: props.ui?.container })">
-          <StepperTrigger :class="ui.trigger({ class: props.ui?.trigger })">
-            <StepperIndicator :class="ui.indicator({ class: props.ui?.indicator })">
+        <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
+          <StepperTrigger :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })">
+            <StepperIndicator :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })">
               <slot name="indicator" :item="item">
-                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: props.ui?.icon })" />
+                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
                 <template v-else>
                   {{ count + 1 }}
                 </template>
@@ -152,17 +154,17 @@ defineExpose({
 
           <StepperSeparator
             v-if="count < items.length - 1"
-            :class="ui.separator({ class: props.ui?.separator })"
+            :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator] })"
           />
         </div>
 
-        <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-          <StepperTitle as="div" :class="ui.title({ class: props.ui?.title })">
+        <div :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+          <StepperTitle as="div" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
             <slot name="title" :item="item">
               {{ item.title }}
             </slot>
           </StepperTitle>
-          <StepperDescription as="div" :class="ui.description({ class: props.ui?.description })">
+          <StepperDescription as="div" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
             <slot name="description" :item="item">
               {{ item.description }}
             </slot>
