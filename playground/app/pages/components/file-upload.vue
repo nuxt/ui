@@ -6,7 +6,7 @@
     <UFileUpload size="xs" />
     <UFileUpload size="sm" />
     <UFileUpload size="md" />
-    <UFileUpload size="lg" />
+    <UFileUpload size="lg" disabled />
     <UFileUpload size="xl" :multiple="true" />
   </div>
 </template>

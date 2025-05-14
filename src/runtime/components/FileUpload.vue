@@ -39,13 +39,6 @@ export interface FileUploadProps {
    */
   multiple?: boolean
   disabled?: boolean
-  loading?: boolean
-  /**
-   * The icon when the `loading` prop is `true`.
-   * @defaultValue appConfig.ui.icons.loading
-   * @IconifyIcon
-   */
-  loadingIcon?: string
   class?: any
   ui?: FileUpload['slots']
 }
@@ -201,7 +194,8 @@ defineExpose({ fileInputRef })
         class: [
           props.ui?.base,
           dragging && ui.dragging({ class: props.ui?.dragging }),
-          !file?.length && 'cursor-pointer'
+          !file?.length && 'cursor-pointer',
+          disabled && 'cursor-not-allowed'
         ]
       })
       "
@@ -218,7 +212,7 @@ defineExpose({ fileInputRef })
         :accept="accept"
         :multiple="multiple"
         :required="required"
-        :disabled="disabled || loading"
+        :disabled="disabled"
         class="hidden"
         v-bind="{ ...$attrs, ...ariaAttrs }"
         @blur="onBlur"
@@ -226,7 +220,7 @@ defineExpose({ fileInputRef })
         @focus="emitFormFocus"
       >
       <!-- Empty state -->
-      <div v-if="!file || file?.length === 0" :class="ui.empty({ class: props.ui?.empty })" @click="!disabled && !loading && fileInputRef?.click()">
+      <div v-if="!file || file?.length === 0" :class="ui.empty({ class: props.ui?.empty })" @click="!disabled && fileInputRef?.click()">
         <slot name="empty">
           <UIcon
             :name="props.uploadIcon || appConfig.ui.icons.upload"
