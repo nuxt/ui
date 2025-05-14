@@ -47,6 +47,7 @@ export interface FileUploadEmits {
   (e: 'update:modelValue', value: File[]): void
   (e: 'blur', event: FocusEvent): void
   (e: 'change', event: Event): void
+  (e: 'onDrop' | 'onDragOver' | 'onDragLeave', event: DragEvent): void
 }
 
 export interface FileUploadSlots {
@@ -177,11 +178,23 @@ function onDrop(event: DragEvent) {
   if (event.dataTransfer?.files?.length) {
     handleUpload(event.dataTransfer.files)
   }
+  emits('onDrop', event)
 }
 
 function onBlur(event: FocusEvent) {
   emitFormBlur()
   emits('blur', event)
+}
+
+function onDragOver(event: DragEvent) {
+  event.preventDefault()
+  dragging.value = true
+  emits('onDragOver', event)
+}
+function onDragLeave(event: DragEvent) {
+  event.preventDefault()
+  dragging.value = false
+  emits('onDragLeave', event)
 }
 
 defineExpose({ fileInputRef })
@@ -201,8 +214,8 @@ defineExpose({ fileInputRef })
       "
       tabindex="0"
       @drop="onDrop"
-      @dragover.prevent="dragging = true"
-      @dragleave="dragging = false"
+      @dragover.prevent="onDragOver"
+      @dragleave="onDragLeave"
     >
       <input
         :id="id"
