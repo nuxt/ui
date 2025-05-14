@@ -24,32 +24,41 @@ onMounted(async () => {
   const nuxtWordPosition = document.querySelector('#nuxt')?.getBoundingClientRect()
   const initialScrollX = window.scrollX
   const initialScrollY = window.scrollY
-  if (figmaWordPosition && nuxtWordPosition) {
-    animate('#cursor1', { left: Math.round(Math.random() * window.outerWidth), top: Math.round(Math.random() * window.outerHeight) }, { duration: 0.1 })
-      .then(() => animate('#cursor1', { opacity: 1 }, { duration: 0.3 }))
-      .then(() => {
-        return animate('#cursor1', {
-          left: Math.round(figmaWordPosition.left + initialScrollX + figmaWordPosition.width / 2),
-          top: Math.round(figmaWordPosition.top + initialScrollY - figmaWordPosition.height / 4)
-        }, { duration: 1.5, delay: 0.2, ease: 'easeInOut' })
-      })
-      .then(() => animate('#cursor1', { scale: 0.8 }, { duration: 0.1, ease: 'easeOut' }))
-      .then(() => animate('#cursor1', { scale: 1 }, { duration: 0.1, ease: 'easeOut' }))
-      .then(() => animate('#figma', { color: 'var(--ui-info)' }, { duration: 0.3, ease: 'easeOut' }))
-      .then(() => animate('#cursor1', { left: Math.round(figmaWordPosition.left + initialScrollX + figmaWordPosition.width), top: Math.round(figmaWordPosition.top + initialScrollY) }, { duration: 0.6, ease: 'easeInOut' }))
 
-    animate('#cursor2', { left: Math.round(Math.random() * window.outerWidth), top: Math.round(Math.random() * window.outerHeight) }, { duration: 0.1, delay: 0.6 })
-      .then(() => animate('#cursor2', { opacity: 1 }, { duration: 0.3 }))
-      .then(() => {
-        return animate('#cursor2', {
-          left: Math.round(nuxtWordPosition.left + initialScrollX + nuxtWordPosition.width / 2),
-          top: Math.round(nuxtWordPosition.top + initialScrollY - nuxtWordPosition.height / 4)
-        }, { duration: 1.5, delay: 0.2, ease: 'easeInOut' })
-      })
-      .then(() => animate('#cursor2', { scale: 0.8 }, { duration: 0.1, ease: 'easeOut' }))
-      .then(() => animate('#cursor2', { scale: 1 }, { duration: 0.1, ease: 'easeOut' }))
-      .then(() => animate('#nuxt', { color: 'var(--ui-success)' }, { duration: 0.3, ease: 'easeOut' }))
-      .then(() => animate('#cursor2', { left: Math.round(nuxtWordPosition.left + initialScrollX + nuxtWordPosition.width), top: Math.round(nuxtWordPosition.top + initialScrollY) }, { duration: 0.6, ease: 'easeInOut' }))
+  if (figmaWordPosition && nuxtWordPosition) {
+    const cursor1Sequence = async () => {
+      await animate('#cursor1', { left: Math.round(Math.random() * window.outerWidth), top: Math.round(Math.random() * window.outerHeight) }, { duration: 0.1 }).finished
+      await animate('#cursor1', { opacity: 1 }, { duration: 0.3 }).finished
+      await animate('#cursor1', {
+        left: Math.round(figmaWordPosition.left + initialScrollX + figmaWordPosition.width / 2),
+        top: Math.round(figmaWordPosition.top + initialScrollY - figmaWordPosition.height / 4)
+      }, { duration: 1.5, delay: 0.2, ease: 'easeInOut' }).finished
+      await animate('#cursor1', { scale: 0.8 }, { duration: 0.1, ease: 'easeOut' }).finished
+      await animate('#cursor1', { scale: 1 }, { duration: 0.1, ease: 'easeOut' }).finished
+      await animate('#figma', { color: 'var(--ui-info)' }, { duration: 0.3, ease: 'easeOut' }).finished
+      await animate('#cursor1', {
+        left: Math.round(figmaWordPosition.left + initialScrollX + figmaWordPosition.width),
+        top: Math.round(figmaWordPosition.top + initialScrollY)
+      }, { duration: 0.6, ease: 'easeInOut' }).finished
+    }
+
+    const cursor2Sequence = async () => {
+      await animate('#cursor2', { left: Math.round(Math.random() * window.outerWidth), top: Math.round(Math.random() * window.outerHeight) }, { duration: 0.1, delay: 0.6 }).finished
+      await animate('#cursor2', { opacity: 1 }, { duration: 0.3 }).finished
+      await animate('#cursor2', {
+        left: Math.round(nuxtWordPosition.left + initialScrollX + nuxtWordPosition.width / 2),
+        top: Math.round(nuxtWordPosition.top + initialScrollY - nuxtWordPosition.height / 4)
+      }, { duration: 1.5, delay: 0.2, ease: 'easeInOut' }).finished
+      await animate('#cursor2', { scale: 0.8 }, { duration: 0.1, ease: 'easeOut' }).finished
+      await animate('#cursor2', { scale: 1 }, { duration: 0.1, ease: 'easeOut' }).finished
+      await animate('#nuxt', { color: 'var(--ui-success)' }, { duration: 0.3, ease: 'easeOut' }).finished
+      await animate('#cursor2', {
+        left: Math.round(nuxtWordPosition.left + initialScrollX + nuxtWordPosition.width),
+        top: Math.round(nuxtWordPosition.top + initialScrollY)
+      }, { duration: 0.6, ease: 'easeInOut' }).finished
+    }
+
+    await Promise.all([cursor1Sequence(), cursor2Sequence()])
   }
 })
 </script>

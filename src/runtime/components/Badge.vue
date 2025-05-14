@@ -26,6 +26,8 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
    * @defaultValue 'md'
    */
   size?: Badge['variants']['size']
+  /** Render the badge with equal padding on all sides. */
+  square?: boolean
   class?: any
   ui?: Badge['slots']
 }
@@ -50,7 +52,7 @@ import UAvatar from './Avatar.vue'
 const props = withDefaults(defineProps<BadgeProps>(), {
   as: 'span'
 })
-defineSlots<BadgeSlots>()
+const slots = defineSlots<BadgeSlots>()
 
 const appConfig = useAppConfig() as Badge['AppConfig']
 const { orientation, size: buttonGroupSize } = useButtonGroup<BadgeProps>(props)
@@ -60,19 +62,20 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {})
   color: props.color,
   variant: props.variant,
   size: buttonGroupSize.value || props.size,
+  square: props.square || (!slots.default && !props.label),
   buttonGroup: orientation.value
 }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.base({ class: [props.class, props.ui?.base] })">
+  <Primitive :as="as" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot name="leading">
       <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
       <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
     </slot>
 
     <slot>
-      <span v-if="label" :class="ui.label({ class: props.ui?.label })">
+      <span v-if="label !== undefined && label !== null" :class="ui.label({ class: props.ui?.label })">
         {{ label }}
       </span>
     </slot>
