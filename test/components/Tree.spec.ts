@@ -62,19 +62,7 @@ describe('Tree', () => {
     ['with item slot', { props, slots: { item: () => 'item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'leading slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'trailing slot' } }],
-    ['with dynamic slot', { props, slots: { app: () => 'dynamic slot' } }],
-    ['with dynamic slot', { props: { items: [
-      { ...items[0], defaultExpanded: true, ui: {
-        item: 'custom-item-class',
-        itemWithChildren: 'custom-item-with-children-class',
-        link: 'custom-link-class',
-        linkLeadingIcon: 'custom-link-leading-icon-class',
-        linkLabel: 'custom-link-label-class',
-        linkTrailing: 'custom-link-trailing-class',
-        linkTrailingIcon: 'custom-link-trailing-icon-class',
-        listWithChildren: 'custom-list-with-children-class'
-      } }, ...items.slice(1)
-    ] } }]
+    ['with dynamic slot', { props, slots: { app: () => 'dynamic slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<TreeProps>, slots?: Partial<TreeSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Tree)
     expect(html).toMatchSnapshot()

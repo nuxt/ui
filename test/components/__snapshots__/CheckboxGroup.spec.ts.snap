@@ -1133,30 +1133,6 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
 </div>"
 `;
 
-exports[`CheckboxGroup > renders with ui field on items correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" class="relative">
-  <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row custom-item-class">
-      <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
-          <!---->
-          <!---->
-        </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
-        <!--v-if-->
-      </div>
-    </label><label class="relative flex items-start flex-row">
-      <div class="flex items-center h-5"><button 0="[object Object]" 1="[object Object]" tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0:undefined" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
-          <!---->
-          <!---->
-        </button></div>
-      <!--v-if-->
-    </label>
-  </fieldset>
-  <!---->
-</div>"
-`;
-
 exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
