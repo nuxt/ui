@@ -177,7 +177,7 @@ defineExpose({
     />
 
     <div :class="ui.increment({ class: props.ui?.increment })" @click="onIncrement">
-      <NumberFieldIncrement as-child :disabled="disabled || disabledIncrement">
+      <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
             :icon="incrementIcon"
@@ -185,7 +185,7 @@ defineExpose({
             :size="size"
             variant="link"
             :aria-label="t('inputNumber.increment')"
-            :disabled="disabled || disabledIncrement"
+            :disabled="disabled || incrementDisabled"
             v-bind="typeof increment === 'object' ? increment : undefined"
           />
         </slot>
@@ -193,7 +193,7 @@ defineExpose({
     </div>
 
     <div :class="ui.decrement({ class: props.ui?.decrement })" @click="onDecrement">
-      <NumberFieldDecrement as-child :disabled="disabled || disabledDecrement">
+      <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton
             :icon="decrementIcon"
@@ -201,7 +201,7 @@ defineExpose({
             :size="size"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
-            :disabled="disabled || disabledDecrement"
+            :disabled="disabled || decrementDisabled"
             v-bind="typeof decrement === 'object' ? decrement : undefined"
           />
         </slot>
