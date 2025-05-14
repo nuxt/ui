@@ -87,7 +87,7 @@ props:
 
 ### Status Position
 
-Use the `statusPosition` prop to define where the status text is displayed. Defaults to `outside`.
+Use the `status-position` prop to define where the status text is displayed. Defaults to `outside`.
 
 ::component-code
 ---
@@ -136,25 +136,6 @@ ignore:
 props:
   orientation: vertical
   class: 'h-48'
----
-::
-
-### Variant
-
-Use the `variant` prop to change the style of the Progress. Defaults to `linear`.
-
-::component-code
----
-prettier: true
-ignore:
-  - modelValue
-  - max
-external:
-  - modelValue
-props:
-  variant: circular
-  modelValue: 50
-  max: 100
 ---
 ::
 
