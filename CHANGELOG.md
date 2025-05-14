@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.1.1](https://github.com/nuxt/ui/compare/v3.1.0...v3.1.1) (2025-05-02)
+
+### Features
+
+* **useOverlay:** add `closeAll` method ([#3984](https://github.com/nuxt/ui/issues/3984)) ([ac4c194](https://github.com/nuxt/ui/commit/ac4c1946ec399aec59b4bce9d538e3ff67868abf))
+* **useOverlay:** add `isOpen` method to check overlay state ([#4041](https://github.com/nuxt/ui/issues/4041)) ([a4f3f6d](https://github.com/nuxt/ui/commit/a4f3f6d531f9c0281f99085a6688d296f8f13f2f))
+
+### Bug Fixes
+
+* **Calendar:** add `place-items-center` to grid row ([#4034](https://github.com/nuxt/ui/issues/4034)) ([8dfdd63](https://github.com/nuxt/ui/commit/8dfdd63ce3b3a0e904f7c013c774cf9aaf46b240))
+* **defineShortcuts:** bring back `meta` to `ctrl` convert on non macos platforms ([f3b8b17](https://github.com/nuxt/ui/commit/f3b8b17dc5f43936ef7ffb11c1ed7f9a5f94d0bb)), closes [#3869](https://github.com/nuxt/ui/issues/3869) [#3318](https://github.com/nuxt/ui/issues/3318)
+* **module:** support `nuxt-nightly` ([#3996](https://github.com/nuxt/ui/issues/3996)) ([bc0a296](https://github.com/nuxt/ui/commit/bc0a296f9d68ca72cd991b11cd3489b63c7b13db))
+* **NavigationMenu:** remove `sm:w-auto` from content slot ([aebf0b3](https://github.com/nuxt/ui/commit/aebf0b3dca50c51c093cb6abf16c4fd995fc1b39)), closes [#3987](https://github.com/nuxt/ui/issues/3987)
+* **RadioGroup:** improve items `value` field type ([#3995](https://github.com/nuxt/ui/issues/3995)) ([195773e](https://github.com/nuxt/ui/commit/195773ec7dac12ccc3a0a67867751e8ca634cc04))
+* **templates:** put back args to watch in dev ([#4033](https://github.com/nuxt/ui/issues/4033)) ([c5bdec0](https://github.com/nuxt/ui/commit/c5bdec0f64963ef602975270a09a1ee795cdacf9))
+* **theme:** add missing `border-bg` / `divide-bg` utilities ([82b5f32](https://github.com/nuxt/ui/commit/82b5f322ebd8a08e63588122bd4ef567dcb8ba8c))
+* **theme:** add missing `ring-offset-*` utilities ([#3992](https://github.com/nuxt/ui/issues/3992)) ([e5df026](https://github.com/nuxt/ui/commit/e5df0269935be59df759fe0e1378acb2b0d9014a))
+* **theme:** define default shades for named tailwindcss colors ([8acf3c5](https://github.com/nuxt/ui/commit/8acf3c51db6c2f9443d04be6ba7d9f062c5cf8ab)), closes [#3977](https://github.com/nuxt/ui/issues/3977)
+* **theme:** improve app config types for `ui` object ([591d59f](https://github.com/nuxt/ui/commit/591d59fe89f1d9bf016c121bf9160f73fe0a290d)), closes [#3579](https://github.com/nuxt/ui/issues/3579)
+* **theme:** use `[@theme](https://github.com/theme) inline` to properly reference css variables ([6131871](https://github.com/nuxt/ui/commit/6131871a0d124c5942d60dc5dff20981e8542e51)), closes [#4018](https://github.com/nuxt/ui/issues/4018)
+* **useOverlay:** improve types and docs ([#4012](https://github.com/nuxt/ui/issues/4012)) ([39e29fc](https://github.com/nuxt/ui/commit/39e29fccf1840c723a13237d65002501b2829b70))
+
 ## [3.1.0](https://github.com/nuxt/ui/compare/v3.0.2...v3.1.0) (2025-04-24)
 
 ### ⚠ BREAKING CHANGES

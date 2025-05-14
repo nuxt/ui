@@ -10,8 +10,8 @@ exports[`Stepper > renders with as correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -21,8 +21,8 @@ exports[`Stepper > renders with as correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -32,8 +32,8 @@ exports[`Stepper > renders with as correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -52,8 +52,8 @@ exports[`Stepper > renders with class correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -63,8 +63,8 @@ exports[`Stepper > renders with class correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -74,8 +74,8 @@ exports[`Stepper > renders with class correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -94,8 +94,8 @@ exports[`Stepper > renders with content slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -105,8 +105,8 @@ exports[`Stepper > renders with content slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -116,8 +116,8 @@ exports[`Stepper > renders with content slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -136,8 +136,8 @@ exports[`Stepper > renders with custom slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -147,8 +147,8 @@ exports[`Stepper > renders with custom slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -158,8 +158,8 @@ exports[`Stepper > renders with custom slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -178,8 +178,8 @@ exports[`Stepper > renders with default slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -189,8 +189,8 @@ exports[`Stepper > renders with default slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -200,8 +200,8 @@ exports[`Stepper > renders with default slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -220,8 +220,8 @@ exports[`Stepper > renders with defaultValue correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="completed" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
@@ -231,8 +231,8 @@ exports[`Stepper > renders with defaultValue correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -242,8 +242,8 @@ exports[`Stepper > renders with defaultValue correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -262,8 +262,8 @@ exports[`Stepper > renders with description slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Description slot</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Description slot</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -273,8 +273,8 @@ exports[`Stepper > renders with description slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Description slot</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Description slot</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -284,8 +284,8 @@ exports[`Stepper > renders with description slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Description slot</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Description slot</div>
       </div>
     </div>
   </div>
@@ -304,8 +304,8 @@ exports[`Stepper > renders with indicator slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -315,8 +315,8 @@ exports[`Stepper > renders with indicator slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -326,8 +326,8 @@ exports[`Stepper > renders with indicator slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -346,8 +346,8 @@ exports[`Stepper > renders with items correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -357,8 +357,8 @@ exports[`Stepper > renders with items correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -368,8 +368,8 @@ exports[`Stepper > renders with items correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -388,8 +388,8 @@ exports[`Stepper > renders with modelValue correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="completed" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
@@ -399,8 +399,8 @@ exports[`Stepper > renders with modelValue correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -410,8 +410,8 @@ exports[`Stepper > renders with modelValue correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -430,8 +430,8 @@ exports[`Stepper > renders with neutral color correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-inverted start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -441,8 +441,8 @@ exports[`Stepper > renders with neutral color correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-inverted start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -452,8 +452,8 @@ exports[`Stepper > renders with neutral color correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -472,8 +472,8 @@ exports[`Stepper > renders with size lg horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+32px)] end-[calc(-50%+32px)]"></div>
       </div>
       <div class="mt-3">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-base">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-base">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-base">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-base">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -483,8 +483,8 @@ exports[`Stepper > renders with size lg horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+32px)] end-[calc(-50%+32px)]"></div>
       </div>
       <div class="mt-3">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-base">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-base">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-base">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-base">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -494,8 +494,8 @@ exports[`Stepper > renders with size lg horizontal correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-3">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-base">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-base">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-base">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-base">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -514,8 +514,8 @@ exports[`Stepper > renders with size lg vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[54px]"></div>
       </div>
       <div class="mt-3">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-base">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-base">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-base">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-base">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-3">
@@ -525,8 +525,8 @@ exports[`Stepper > renders with size lg vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[54px]"></div>
       </div>
       <div class="mt-3">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-base">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-base">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-base">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-base">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-3">
@@ -536,8 +536,8 @@ exports[`Stepper > renders with size lg vertical correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-3">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-base">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-base">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-base">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-base">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -556,8 +556,8 @@ exports[`Stepper > renders with size md horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -567,8 +567,8 @@ exports[`Stepper > renders with size md horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -578,8 +578,8 @@ exports[`Stepper > renders with size md horizontal correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -598,8 +598,8 @@ exports[`Stepper > renders with size md vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[46px]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-2.5">
@@ -609,8 +609,8 @@ exports[`Stepper > renders with size md vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[46px]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-2.5">
@@ -620,8 +620,8 @@ exports[`Stepper > renders with size md vertical correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -640,8 +640,8 @@ exports[`Stepper > renders with size sm horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+20px)] end-[calc(-50%+20px)]"></div>
       </div>
       <div class="mt-2">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-xs">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-xs">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-xs">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-xs">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -651,8 +651,8 @@ exports[`Stepper > renders with size sm horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+20px)] end-[calc(-50%+20px)]"></div>
       </div>
       <div class="mt-2">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-xs">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-xs">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-xs">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-xs">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -662,8 +662,8 @@ exports[`Stepper > renders with size sm horizontal correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-xs">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-xs">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-xs">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-xs">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -682,8 +682,8 @@ exports[`Stepper > renders with size sm vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[38px]"></div>
       </div>
       <div class="mt-2">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-xs">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-xs">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-xs">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-xs">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-2">
@@ -693,8 +693,8 @@ exports[`Stepper > renders with size sm vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[38px]"></div>
       </div>
       <div class="mt-2">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-xs">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-xs">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-xs">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-xs">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-2">
@@ -704,8 +704,8 @@ exports[`Stepper > renders with size sm vertical correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-xs">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-xs">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-xs">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-xs">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -724,8 +724,8 @@ exports[`Stepper > renders with size xl horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+36px)] end-[calc(-50%+36px)]"></div>
       </div>
       <div class="mt-3.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-lg">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-lg">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-lg">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-lg">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -735,8 +735,8 @@ exports[`Stepper > renders with size xl horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+36px)] end-[calc(-50%+36px)]"></div>
       </div>
       <div class="mt-3.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-lg">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-lg">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-lg">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-lg">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -746,8 +746,8 @@ exports[`Stepper > renders with size xl horizontal correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-3.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-lg">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-lg">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-lg">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-lg">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -766,8 +766,8 @@ exports[`Stepper > renders with size xl vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[62px]"></div>
       </div>
       <div class="mt-3.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-lg">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-lg">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-lg">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-lg">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-3.5">
@@ -777,8 +777,8 @@ exports[`Stepper > renders with size xl vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[62px]"></div>
       </div>
       <div class="mt-3.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-lg">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-lg">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-lg">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-lg">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-3.5">
@@ -788,8 +788,8 @@ exports[`Stepper > renders with size xl vertical correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-3.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-lg">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-lg">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-lg">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-lg">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -808,8 +808,8 @@ exports[`Stepper > renders with size xs horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+16px)] end-[calc(-50%+16px)]"></div>
       </div>
       <div class="mt-1.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-xs">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-xs">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-xs">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-xs">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -819,8 +819,8 @@ exports[`Stepper > renders with size xs horizontal correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+16px)] end-[calc(-50%+16px)]"></div>
       </div>
       <div class="mt-1.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-xs">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-xs">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-xs">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-xs">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -830,8 +830,8 @@ exports[`Stepper > renders with size xs horizontal correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-1.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-xs">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-xs">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-xs">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-xs">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -850,8 +850,8 @@ exports[`Stepper > renders with size xs vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[30px]"></div>
       </div>
       <div class="mt-1.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-xs">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-xs">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-xs">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-xs">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-1.5">
@@ -861,8 +861,8 @@ exports[`Stepper > renders with size xs vertical correctly 1`] = `
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[30px]"></div>
       </div>
       <div class="mt-1.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-xs">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-xs">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-xs">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-xs">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="vertical" class="group relative w-full flex text-start gap-1.5">
@@ -872,8 +872,8 @@ exports[`Stepper > renders with size xs vertical correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-1.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-xs">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-xs">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-xs">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-xs">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -892,8 +892,8 @@ exports[`Stepper > renders with title slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Title slot</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Title slot</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -903,8 +903,8 @@ exports[`Stepper > renders with title slot correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Title slot</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Title slot</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -914,8 +914,8 @@ exports[`Stepper > renders with title slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Title slot</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Title slot</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -934,8 +934,8 @@ exports[`Stepper > renders with ui correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="text-default text-sm font-bold">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="text-default text-sm font-bold">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -945,8 +945,8 @@ exports[`Stepper > renders with ui correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="text-default text-sm font-bold">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="text-default text-sm font-bold">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" disabled="" data-disabled="" data-orientation="horizontal" class="group text-center relative w-full">
@@ -956,8 +956,8 @@ exports[`Stepper > renders with ui correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="text-default text-sm font-bold">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="text-default text-sm font-bold">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>
@@ -976,8 +976,8 @@ exports[`Stepper > renders without linear correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</h4>
-        <p id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</p>
+        <div id="reka-stepper-item-title-v-0-0-0" class="font-medium text-default text-sm">Address</div>
+        <div id="reka-stepper-item-description-v-0-0-1" class="text-muted text-wrap text-sm">Add your address here</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -987,8 +987,8 @@ exports[`Stepper > renders without linear correctly 1`] = `
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</h4>
-        <p id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</p>
+        <div id="reka-stepper-item-title-v-0-0-2" class="font-medium text-default text-sm">Shipping</div>
+        <div id="reka-stepper-item-description-v-0-0-3" class="text-muted text-wrap text-sm">Set your preferred shipping method</div>
       </div>
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
@@ -998,8 +998,8 @@ exports[`Stepper > renders without linear correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="mt-2.5">
-        <h4 id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</h4>
-        <p id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</p>
+        <div id="reka-stepper-item-title-v-0-0-4" class="font-medium text-default text-sm">Checkout</div>
+        <div id="reka-stepper-item-description-v-0-0-5" class="text-muted text-wrap text-sm">Confirm your order</div>
       </div>
     </div>
   </div>

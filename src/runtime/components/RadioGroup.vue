@@ -11,7 +11,9 @@ export type RadioGroupItem = {
   label?: string
   description?: string
   disabled?: boolean
-  value?: string
+  value?: RadioGroupValue
+  class?: any
+  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
   [key: string]: any
 } | RadioGroupValue
 
@@ -166,7 +168,7 @@ function onUpdate(value: any) {
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
     <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
@@ -176,25 +178,25 @@ function onUpdate(value: any) {
         </slot>
       </legend>
 
-      <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: props.ui?.item })">
-        <div :class="ui.container({ class: props.ui?.container })">
+      <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
+        <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
           <RadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled"
-            :class="ui.base({ class: props.ui?.base, disabled: item.disabled })"
+            :class="ui.base({ class: [props.ui?.base, item.ui?.base], disabled: item.disabled })"
           >
-            <RadioGroupIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
+            <RadioGroupIndicator :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" />
           </RadioGroupItem>
         </div>
 
-        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-          <component :is="variant === 'list' ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" :class="ui.label({ class: props.ui?.label })">
+        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+          <component :is="variant === 'list' ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
             <slot name="label" :item="item" :model-value="(modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>
           </component>
-          <p v-if="item.description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+          <p v-if="item.description || !!slots.description" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
             <slot name="description" :item="item" :model-value="(modelValue as RadioGroupValue)">
               {{ item.description }}
             </slot>

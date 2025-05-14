@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     body: 'flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0',
     heading: 'text-center font-medium truncate mx-auto',
     grid: 'w-full border-collapse select-none space-y-1 focus:outline-none',
-    gridRow: 'grid grid-cols-7',
+    gridRow: 'grid grid-cols-7 place-items-center',
     gridWeekDaysRow: 'mb-1 grid w-full grid-cols-7',
     gridBody: 'grid',
     headCell: 'rounded-md',
@@ -22,7 +22,7 @@ export default (options: Required<ModuleOptions>) => ({
       }])),
       neutral: {
         headCell: 'text-highlighted',
-        cellTrigger: 'focus-visible:ring-inverted data-[selected]:bg-inverted data-today:not-data-[selected]:text-inverted data-[highlighted]:bg-inverted/20 hover:not-data-[selected]:bg-inverted/10'
+        cellTrigger: 'focus-visible:ring-inverted data-[selected]:bg-inverted data-today:not-data-[selected]:text-highlighted data-[highlighted]:bg-inverted/20 hover:not-data-[selected]:bg-inverted/10'
       }
     },
     size: {
