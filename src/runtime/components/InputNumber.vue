@@ -36,6 +36,8 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @IconifyIcon
    */
   incrementIcon?: string
+  /** Disable the increment button. */
+  incrementDisabled?: boolean
   /**
    * Configure the decrement button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
@@ -47,6 +49,8 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @IconifyIcon
    */
   decrementIcon?: string
+  /** Disable the decrement button. */
+  decrementDisabled?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   /**
@@ -56,10 +60,6 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   locale?: string
   class?: any
   ui?: InputNumber['slots']
-  /** Disable the increment button. */
-  incrementDisabled?: boolean
-  /** Disable the decrement button. */
-  decrementDisabled?: boolean
 }
 
 export interface InputNumberEmits {
