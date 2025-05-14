@@ -49,7 +49,8 @@ You can also pass an array of objects with the following properties:
 - `description?: string`{lang="ts-type"}
 - [`value?: string`{lang="ts-type"}](#value-key)
 - `disabled?: boolean`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue }`{lang="ts-type"}
+- `class?: any`{lang="ts-type"}
+- `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, icon?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---
@@ -200,6 +201,7 @@ items:
   variant:
     - list
     - card
+    - table
 props:
   color: 'primary'
   variant: 'card'
@@ -230,6 +232,7 @@ items:
   variant:
     - list
     - card
+    - table
 props:
   size: 'xl'
   variant: 'list'
@@ -260,6 +263,7 @@ items:
   variant:
     - list
     - card
+    - table
 props:
   orientation: 'horizontal'
   variant: 'list'
@@ -294,6 +298,7 @@ items:
   variant:
     - list
     - card
+    - table
 props:
   indicator: 'end'
   variant: 'card'

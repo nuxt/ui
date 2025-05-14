@@ -24,6 +24,7 @@ export type TreeItem = {
   children?: TreeItem[]
   onToggle?(e: Event): void
   onSelect?(e?: Event): void
+  class?: any
   ui?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>
   [key: string]: any
 }
@@ -150,7 +151,7 @@ const defaultExpanded = computed(() =>
     <li
       v-for="(item, index) in items"
       :key="`${level}-${index}`"
-      :class="level > 0 ? ui.itemWithChildren({ class: props.ui?.itemWithChildren }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
+      :class="level > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren, item.class] }) : ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
     >
       <TreeItem
         v-slot="{ isExpanded, isSelected }"

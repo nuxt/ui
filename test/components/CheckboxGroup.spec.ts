@@ -9,7 +9,7 @@ import type { FormInputEvents } from '~/src/module'
 
 describe('CheckboxGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
-  const variants = Object.keys(themeCheckbox.variants.variant) as any
+  const variants = Object.keys(theme.variants.variant) as any
   const indicators = Object.keys(themeCheckbox.variants.indicator) as any
 
   const items = [

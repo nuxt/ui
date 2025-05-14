@@ -2,6 +2,7 @@
 import type { SliderRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/slider'
+import type { TooltipProps } from '../types'
 import type { ComponentConfig } from '../types/utils'
 
 type Slider = ComponentConfig<typeof theme, AppConfig, 'slider'>
@@ -25,25 +26,32 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
    * @defaultValue 'horizontal'
    */
   orientation?: SliderRootProps['orientation']
+  /**
+   * Display a tooltip around the slider thumbs with the current value.
+   * `{ disableClosingTrigger: true }`{lang="ts-type"}
+   * @defaultValue false
+   */
+  tooltip?: boolean | TooltipProps
   /** The value of the slider when initially rendered. Use when you do not need to control the state of the slider. */
   defaultValue?: number | number[]
   class?: any
   ui?: Slider['slots']
 }
 
-export interface SliderEmits {
-  (e: 'update:modelValue', payload: number | number[]): void
+export interface SliderEmits<T extends number | number[] = number | number[]> {
+  (e: 'update:modelValue', payload: T): void
   (e: 'change', payload: Event): void
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends number | number[]">
 import { computed } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
+import UTooltip from './Tooltip.vue'
 
 const props = withDefaults(defineProps<SliderProps>(), {
   min: 0,
@@ -51,9 +59,9 @@ const props = withDefaults(defineProps<SliderProps>(), {
   step: 1,
   orientation: 'horizontal'
 })
-const emits = defineEmits<SliderEmits>()
+const emits = defineEmits<SliderEmits<T>>()
 
-const modelValue = defineModel<number | number[]>()
+const modelValue = defineModel<T>()
 
 const appConfig = useAppConfig() as Slider['AppConfig']
 
@@ -73,14 +81,14 @@ const sliderValue = computed({
     if (typeof modelValue.value === 'number') {
       return [modelValue.value]
     }
-    return modelValue.value ?? defaultSliderValue.value
+    return (modelValue.value as number[]) ?? defaultSliderValue.value
   },
   set(value) {
-    modelValue.value = value?.length !== 1 ? value : value[0]
+    modelValue.value = (value?.length !== 1 ? value : value[0]) as T
   }
 })
 
-const thumbsCount = computed(() => sliderValue.value?.length ?? 1)
+const thumbs = computed(() => sliderValue.value?.length ?? 1)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })({
   disabled: disabled.value,
@@ -113,6 +121,16 @@ function onChange(value: any) {
       <SliderRange :class="ui.range({ class: props.ui?.range })" />
     </SliderTrack>
 
-    <SliderThumb v-for="count in thumbsCount" :key="count" :class="ui.thumb({ class: props.ui?.thumb })" />
+    <template v-for="thumb in thumbs" :key="thumb">
+      <UTooltip
+        v-if="!!tooltip"
+        :text="thumbs > 1 ? String(sliderValue?.[thumb - 1]) : String(sliderValue)"
+        disable-closing-trigger
+        v-bind="(typeof tooltip === 'object' ? tooltip : {})"
+      >
+        <SliderThumb :class="ui.thumb({ class: props.ui?.thumb })" />
+      </UTooltip>
+      <SliderThumb v-else :class="ui.thumb({ class: props.ui?.thumb })" />
+    </template>
   </SliderRoot>
 </template>
