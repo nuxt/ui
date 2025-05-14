@@ -136,6 +136,21 @@ props:
 ---
 ::
 
+### Tooltip :badge{label="Soon" class="align-text-top"}
+
+Use the `tooltip` prop to display a [Tooltip](/components/tooltip) around the Slider thumbs with the current value. You can set it to `true` for default behavior or pass an object to customize it with any property from the [Tooltip](/components/tooltip#props) component.
+
+::component-code
+---
+ignore:
+  - defaultValue
+  - tooltip
+props:
+  defaultValue: 50
+  tooltip: true
+---
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the Slider.

@@ -24,6 +24,7 @@ interface _InputMenuItem {
   type?: 'label' | 'separator' | 'item'
   disabled?: boolean
   onSelect?(e?: Event): void
+  class?: any
   ui?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
@@ -494,15 +495,15 @@ defineExpose({
 
           <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <ComboboxLabel v-if="isInputItem(item) && item.type === 'label'" :class="ui.label({ class: props.ui?.label })">
+              <ComboboxLabel v-if="isInputItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
                 {{ get(item, props.labelKey as string) }}
               </ComboboxLabel>
 
-              <ComboboxSeparator v-else-if="isInputItem(item) && item.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
+              <ComboboxSeparator v-else-if="isInputItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
               <ComboboxItem
                 v-else
-                :class="ui.item({ class: [props.ui?.item, isInputItem(item) && item.ui?.item] })"
+                :class="ui.item({ class: [props.ui?.item, isInputItem(item) && item.ui?.item, isInputItem(item) && item.class] })"
                 :disabled="isInputItem(item) && item.disabled"
                 :value="props.valueKey && isInputItem(item) ? get(item, props.valueKey as string) : item"
                 @select="onSelect($event, item)"

@@ -19,6 +19,7 @@ export interface StepperItem {
   iconClass?: string
   content?: string
   disabled?: boolean
+  class?: any
   ui?: Pick<Stepper['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>
   [key: string]: any
 }
@@ -138,7 +139,7 @@ defineExpose({
         :key="item.value ?? count"
         :step="count"
         :disabled="item.disabled || props.disabled"
-        :class="ui.item({ class: [props.ui?.item, item.ui?.item] })"
+        :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       >
         <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
           <StepperTrigger :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })">
@@ -159,12 +160,12 @@ defineExpose({
         </div>
 
         <div :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-          <StepperTitle :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
+          <StepperTitle as="div" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
             <slot name="title" :item="item">
               {{ item.title }}
             </slot>
           </StepperTitle>
-          <StepperDescription :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
+          <StepperDescription as="div" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
             <slot name="description" :item="item">
               {{ item.description }}
             </slot>
