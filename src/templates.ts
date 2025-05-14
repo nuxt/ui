@@ -132,9 +132,12 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --outline-color-default: var(--ui-border);
   --outline-color-inverted: var(--ui-border-inverted);
   --stroke-default: var(--ui-border);
+  --stroke-muted: var(--ui-border-muted);
   --stroke-accented: var(--ui-border-accented);
   --stroke-inverted: var(--ui-border-inverted);
   --fill-default: var(--ui-border);
+  --fill-muted: var(--ui-border-muted);
+  --fill-accented: var(--ui-border-accented);
   --fill-inverted: var(--ui-border-inverted);
 }
 `
