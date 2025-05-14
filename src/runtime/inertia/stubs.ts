@@ -9,6 +9,7 @@ import { usePage } from '@inertiajs/vue3'
 
 export { useHead } from '@unhead/vue'
 
+export { useAppConfig } from '../vue/composables/useAppConfig'
 export { defineShortcuts } from '../composables/defineShortcuts'
 export { defineLocale } from '../composables/defineLocale'
 export { useLocale } from '../composables/useLocale'
@@ -40,8 +41,6 @@ export const useColorMode = () => {
     forced: false
   }
 }
-
-export const useAppConfig = () => appConfig
 
 export const useCookie = <T = string>(
   _name: string,

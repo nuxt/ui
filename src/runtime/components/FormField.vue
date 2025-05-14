@@ -115,16 +115,16 @@ provide(formFieldInjectionKey, computed(() => ({
     <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
 
-      <p v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" :class="ui.error({ class: props.ui?.error })">
+      <div v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" :class="ui.error({ class: props.ui?.error })">
         <slot name="error" :error="error">
           {{ error }}
         </slot>
-      </p>
-      <p v-else-if="help || !!slots.help" :class="ui.help({ class: props.ui?.help })">
+      </div>
+      <div v-else-if="help || !!slots.help" :class="ui.help({ class: props.ui?.help })">
         <slot name="help" :help="help">
           {{ help }}
         </slot>
-      </p>
+      </div>
     </div>
   </Primitive>
 </template>

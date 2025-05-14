@@ -1,9 +1,8 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
-import type { LinkProps } from './Link.vue'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps } from '../types'
+import type { LinkProps, AvatarProps } from '../types'
 import type { ComponentConfig } from '../types/utils'
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>
@@ -123,14 +122,13 @@ const ui = computed(() => tv({
     v-slot="{ active, ...slotProps }"
     :type="type"
     :disabled="disabled || isLoading"
-    :class="ui.base({ class: [props.ui?.base, props.class] })"
     v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
     custom
   >
     <ULinkBase
       v-bind="slotProps"
       :class="ui.base({
-        class: [props.class, props.ui?.base],
+        class: [props.ui?.base, props.class],
         active,
         ...(active && activeVariant ? { variant: activeVariant } : {}),
         ...(active && activeColor ? { color: activeColor } : {})

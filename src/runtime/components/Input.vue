@@ -4,7 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { AcceptableValue, ComponentConfig } from '../types/utils'
 
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
@@ -42,8 +42,8 @@ export interface InputProps extends UseComponentIconsProps {
   ui?: Input['slots']
 }
 
-export interface InputEmits {
-  (e: 'update:modelValue', payload: string | number): void
+export interface InputEmits<T extends AcceptableValue = AcceptableValue> {
+  (e: 'update:modelValue', payload: T): void
   (e: 'blur', event: FocusEvent): void
   (e: 'change', event: Event): void
 }
@@ -55,7 +55,7 @@ export interface InputSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends AcceptableValue">
 import { ref, computed, onMounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
@@ -74,10 +74,10 @@ const props = withDefaults(defineProps<InputProps>(), {
   autocomplete: 'off',
   autofocusDelay: 0
 })
-const emits = defineEmits<InputEmits>()
+const emits = defineEmits<InputEmits<T>>()
 const slots = defineSlots<InputSlots>()
 
-const [modelValue, modelModifiers] = defineModel<string | number | null>()
+const [modelValue, modelModifiers] = defineModel<T>()
 
 const appConfig = useAppConfig() as Input['AppConfig']
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps>(props, { deferInputValidation: true })
@@ -114,7 +114,7 @@ function updateInput(value: string | null) {
     value ||= null
   }
 
-  modelValue.value = value
+  modelValue.value = value as T
   emitFormInput()
 }
 

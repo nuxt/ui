@@ -36,6 +36,8 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @IconifyIcon
    */
   incrementIcon?: string
+  /** Disable the increment button. */
+  incrementDisabled?: boolean
   /**
    * Configure the decrement button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
@@ -47,6 +49,8 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @IconifyIcon
    */
   decrementIcon?: string
+  /** Disable the decrement button. */
+  decrementDisabled?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   /**
@@ -83,7 +87,9 @@ import UButton from './Button.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  disabledIncrement: false,
+  disabledDecrement: false
 })
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()
@@ -162,7 +168,7 @@ defineExpose({
     />
 
     <div :class="ui.increment({ class: props.ui?.increment })">
-      <NumberFieldIncrement as-child :disabled="disabled">
+      <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
             :icon="incrementIcon"
@@ -177,7 +183,7 @@ defineExpose({
     </div>
 
     <div :class="ui.decrement({ class: props.ui?.decrement })">
-      <NumberFieldDecrement as-child :disabled="disabled">
+      <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton
             :icon="decrementIcon"

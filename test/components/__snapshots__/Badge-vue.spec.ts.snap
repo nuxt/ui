@@ -7,15 +7,15 @@ exports[`Badge > renders with as correctly 1`] = `
 </div>"
 `;
 
-exports[`Badge > renders with avatar and leadingIcon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg><!--v-if--><!--v-if--></span>"`;
+exports[`Badge > renders with avatar and leadingIcon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg><!--v-if--><!--v-if--></span>"`;
 
 exports[`Badge > renders with avatar and trailingIcon correctly 1`] = `
-"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover"></span>
+"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover"></span>
 <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>"
 `;
 
 exports[`Badge > renders with avatar correctly 1`] = `
-"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover"></span>
+"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;
@@ -27,18 +27,18 @@ exports[`Badge > renders with class correctly 1`] = `
 
 exports[`Badge > renders with default slot correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><!--v-if-->Default slot<!--v-if--></span>"`;
 
-exports[`Badge > renders with icon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg><!--v-if--><!--v-if--></span>"`;
+exports[`Badge > renders with icon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg><!--v-if--><!--v-if--></span>"`;
 
 exports[`Badge > renders with label correctly 1`] = `
 "<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><!--v-if--><span class="truncate">Badge</span>
 <!--v-if--></span>"
 `;
 
-exports[`Badge > renders with leading and icon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg><!--v-if--><!--v-if--></span>"`;
+exports[`Badge > renders with leading and icon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg><!--v-if--><!--v-if--></span>"`;
 
-exports[`Badge > renders with leading slot correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted">Leading slot<!--v-if--><!--v-if--></span>"`;
+exports[`Badge > renders with leading slot correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1">Leading slot<!--v-if--><!--v-if--></span>"`;
 
-exports[`Badge > renders with leadingIcon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg><!--v-if--><!--v-if--></span>"`;
+exports[`Badge > renders with leadingIcon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg><!--v-if--><!--v-if--></span>"`;
 
 exports[`Badge > renders with neutral variant outline correctly 1`] = `
 "<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-default"><!--v-if--><span class="truncate">Badge</span>
@@ -105,11 +105,16 @@ exports[`Badge > renders with size xs correctly 1`] = `
 <!--v-if--></span>"
 `;
 
-exports[`Badge > renders with trailing and icon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><!--v-if--><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>"`;
+exports[`Badge > renders with square correctly 1`] = `
+"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><!--v-if--><span class="truncate">Badge</span>
+<!--v-if--></span>"
+`;
 
-exports[`Badge > renders with trailing slot correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><!--v-if--><!--v-if-->Trailing slot</span>"`;
+exports[`Badge > renders with trailing and icon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><!--v-if--><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>"`;
 
-exports[`Badge > renders with trailingIcon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><!--v-if--><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>"`;
+exports[`Badge > renders with trailing slot correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><!--v-if--><!--v-if-->Trailing slot</span>"`;
+
+exports[`Badge > renders with trailingIcon correctly 1`] = `"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><!--v-if--><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>"`;
 
 exports[`Badge > renders with ui correctly 1`] = `
 "<span class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-primary text-inverted"><!--v-if--><span class="truncate font-bold">Badge</span>

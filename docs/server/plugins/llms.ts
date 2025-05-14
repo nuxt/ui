@@ -351,6 +351,7 @@ export default defineNitroPlugin((nitroApp) => {
     visitAndReplace(doc, 'component-props', (node) => {
       const attributes = node[1] as Record<string, string>
       const mdcSpecificName = attributes?.name
+      const isProse = parseBoolean(attributes[':prose'])
 
       const finalComponentName = mdcSpecificName ? camelCase(mdcSpecificName) : componentName
 
@@ -358,11 +359,13 @@ export default defineNitroPlugin((nitroApp) => {
 
       if (!componentMeta?.props) return
 
+      const interfaceName = isProse ? `Prose${pascalCaseName}Props` : `${pascalCaseName}Props`
+
       const interfaceCode = generateTSInterface(
-        `${pascalCaseName}Props`,
+        interfaceName,
         Object.values(componentMeta.props),
         propItemHandler,
-        `Props for the ${pascalCaseName} component`
+        `Props for the ${isProse ? 'Prose' : ''}${pascalCaseName} component`
       )
       replaceNodeWithPre(node, 'ts', interfaceCode)
     })

@@ -3,7 +3,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/textarea'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { AcceptableValue, ComponentConfig } from '../types/utils'
 
 type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
@@ -43,8 +43,8 @@ export interface TextareaProps extends UseComponentIconsProps {
   ui?: Textarea['slots']
 }
 
-export interface TextareaEmits {
-  (e: 'update:modelValue', payload: string | number): void
+export interface TextareaEmits<T extends AcceptableValue = AcceptableValue> {
+  (e: 'update:modelValue', payload: T): void
   (e: 'blur', event: FocusEvent): void
   (e: 'change', event: Event): void
 }
@@ -56,7 +56,7 @@ export interface TextareaSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends AcceptableValue">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
@@ -73,10 +73,10 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   autofocusDelay: 0,
   autoresizeDelay: 0
 })
+const emits = defineEmits<TextareaEmits<T>>()
 const slots = defineSlots<TextareaSlots>()
-const emits = defineEmits<TextareaEmits>()
 
-const [modelValue, modelModifiers] = defineModel<string | number | null>()
+const [modelValue, modelModifiers] = defineModel<T>()
 
 const appConfig = useAppConfig() as Textarea['AppConfig']
 const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps>(props, { deferInputValidation: true })
@@ -109,7 +109,7 @@ function updateInput(value: string | null) {
     value ||= null
   }
 
-  modelValue.value = value
+  modelValue.value = value as T
   emitFormInput()
 }
 
