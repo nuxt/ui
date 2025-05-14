@@ -66,7 +66,6 @@ export interface InputNumberEmits {
   (e: 'update:modelValue', payload: number): void
   (e: 'blur', event: FocusEvent): void
   (e: 'change', payload: Event): void
-  (e: 'increment' | 'decrement', event: MouseEvent): void
 }
 
 export interface InputNumberSlots {
@@ -137,14 +136,6 @@ function autoFocus() {
   }
 }
 
-function onIncrement(event: MouseEvent) {
-  emits('increment', event)
-}
-
-function onDecrement(event: MouseEvent) {
-  emits('decrement', event)
-}
-
 onMounted(() => {
   setTimeout(() => {
     autoFocus()
@@ -176,7 +167,7 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <div :class="ui.increment({ class: props.ui?.increment })" @click="onIncrement">
+    <div :class="ui.increment({ class: props.ui?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
@@ -192,7 +183,7 @@ defineExpose({
       </NumberFieldIncrement>
     </div>
 
-    <div :class="ui.decrement({ class: props.ui?.decrement })" @click="onDecrement">
+    <div :class="ui.decrement({ class: props.ui?.decrement })">
       <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton
