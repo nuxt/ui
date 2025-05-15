@@ -10,7 +10,7 @@ function showToast() {
     title: 'Uh oh! Something went wrong.',
     orientation: props.orientation,
     actions: [{
-      icon: 'i-lucide-refresh-cw',
+      icon: 'i-lucide-loader-circle',
       label: 'Retry',
       color: 'neutral',
       variant: 'outline',

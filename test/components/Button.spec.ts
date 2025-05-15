@@ -75,7 +75,7 @@ describe('Button', () => {
     const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
-    expect(icon?.vm?.name).toBe('i-lucide-refresh-cw')
+    expect(icon?.vm?.name).toBe('i-lucide-loader-circle')
 
     resolve?.(null)
   })
@@ -106,7 +106,7 @@ describe('Button', () => {
     const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
-    expect(icon?.vm?.name).toBe('i-lucide-refresh-cw')
+    expect(icon?.vm?.name).toBe('i-lucide-loader-circle')
 
     resolve?.(null)
   })
