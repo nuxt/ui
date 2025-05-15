@@ -269,7 +269,7 @@ defineExpose({ fileInputRef })
               </div>
             </div>
             <div class="flex items-start">
-              <UIcon :name="appConfig.ui.icons.close" @click.stop="removeFile(f)" />
+              <UIcon id="remove-file" :name="appConfig.ui.icons.close" @click.stop="removeFile(f)" />
             </div>
           </slot>
         </li>
