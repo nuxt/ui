@@ -178,7 +178,7 @@ function onUpdate(value: any) {
         </slot>
       </legend>
 
-      <component :is="variant === 'list' ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
+      <component :is="(!variant || variant === 'list') ? 'div' : Label" v-for="item in normalizedItems" :key="item.value" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
         <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
           <RadioGroupItem
             :id="item.id"
@@ -191,7 +191,7 @@ function onUpdate(value: any) {
         </div>
 
         <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-          <component :is="variant === 'list' ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
+          <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
             <slot name="label" :item="item" :model-value="(modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>

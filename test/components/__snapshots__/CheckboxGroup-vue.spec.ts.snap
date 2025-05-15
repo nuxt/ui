@@ -3,34 +3,34 @@
 exports[`CheckboxGroup > renders with ariaLabel correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" aria-label="Aria label">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -39,34 +39,34 @@ exports[`CheckboxGroup > renders with ariaLabel correctly 1`] = `
 exports[`CheckboxGroup > renders with as correctly 1`] = `
 "<section tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </section>"
@@ -75,34 +75,34 @@ exports[`CheckboxGroup > renders with as correctly 1`] = `
 exports[`CheckboxGroup > renders with class correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="absolute">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -111,33 +111,33 @@ exports[`CheckboxGroup > renders with class correctly 1`] = `
 exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -146,34 +146,34 @@ exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
 exports[`CheckboxGroup > renders with description correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <p class="text-muted">Description 0</p>
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <p class="text-muted">Description 1</p>
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <p class="text-muted">Description 2</p>
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -182,34 +182,34 @@ exports[`CheckboxGroup > renders with description correctly 1`] = `
 exports[`CheckboxGroup > renders with description slot correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <p class="text-muted">Description slot</p>
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <p class="text-muted">Description slot</p>
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <p class="text-muted">Description slot</p>
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -218,34 +218,34 @@ exports[`CheckboxGroup > renders with description slot correctly 1`] = `
 exports[`CheckboxGroup > renders with descriptionKey correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <p class="text-muted">1</p>
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <p class="text-muted">2</p>
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <p class="text-muted">3</p>
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -254,34 +254,34 @@ exports[`CheckboxGroup > renders with descriptionKey correctly 1`] = `
 exports[`CheckboxGroup > renders with disabled correctly 1`] = `
 "<div tabindex="-1" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" data-disabled="" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default cursor-not-allowed opacity-75">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default cursor-not-allowed opacity-75">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" data-disabled="" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default cursor-not-allowed opacity-75">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default cursor-not-allowed opacity-75">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" data-disabled="" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default cursor-not-allowed opacity-75">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default cursor-not-allowed opacity-75">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -395,33 +395,33 @@ exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
 exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row-reverse">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row-reverse">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full me-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full me-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row-reverse">
+    </div>
+    <div class="relative flex items-start flex-row-reverse">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full me-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full me-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row-reverse">
+    </div>
+    <div class="relative flex items-start flex-row-reverse">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full me-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full me-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -430,33 +430,33 @@ exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
 exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start">
+    <!--v-if-->
+    <div class="relative flex items-start">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sr-only size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full text-center text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full text-center text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start">
+    </div>
+    <div class="relative flex items-start">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sr-only size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full text-center text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full text-center text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start">
+    </div>
+    <div class="relative flex items-start">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sr-only size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full text-center text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full text-center text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -465,33 +465,33 @@ exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
 exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -500,34 +500,34 @@ exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
 exports[`CheckboxGroup > renders with items correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -536,34 +536,34 @@ exports[`CheckboxGroup > renders with items correctly 1`] = `
 exports[`CheckboxGroup > renders with label slot correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Label slot</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Label slot</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Label slot</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -572,34 +572,34 @@ exports[`CheckboxGroup > renders with label slot correctly 1`] = `
 exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -608,34 +608,34 @@ exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
 exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <legend class="mb-1 block font-medium text-default text-sm">Legend slot</legend><label class="relative flex items-start flex-row">
+    <legend class="mb-1 block font-medium text-default text-sm">Legend slot</legend>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -644,33 +644,33 @@ exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
 exports[`CheckboxGroup > renders with modelValue correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -889,34 +889,34 @@ exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
 exports[`CheckboxGroup > renders with required correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <legend class="mb-1 block font-medium text-default text-sm after:content-['*'] after:ms-0.5 after:text-error">Legend</legend><label class="relative flex items-start flex-row">
+    <legend class="mb-1 block font-medium text-default text-sm after:content-['*'] after:ms-0.5 after:text-error">Legend</legend>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -925,33 +925,33 @@ exports[`CheckboxGroup > renders with required correctly 1`] = `
 exports[`CheckboxGroup > renders with size lg correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4.5" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4.5" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4.5" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -960,33 +960,33 @@ exports[`CheckboxGroup > renders with size lg correctly 1`] = `
 exports[`CheckboxGroup > renders with size md correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -995,33 +995,33 @@ exports[`CheckboxGroup > renders with size md correctly 1`] = `
 exports[`CheckboxGroup > renders with size sm correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-0.5">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-4"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3.5" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-xs">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-xs"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-4"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3.5" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-xs">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-xs"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-4"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3.5" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-xs">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-xs"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -1030,33 +1030,33 @@ exports[`CheckboxGroup > renders with size sm correctly 1`] = `
 exports[`CheckboxGroup > renders with size xl correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1.5">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-6"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-5" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-base">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-base"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-6"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-5" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-base">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-base"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-6"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-5" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-base">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-base"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -1065,33 +1065,33 @@ exports[`CheckboxGroup > renders with size xl correctly 1`] = `
 exports[`CheckboxGroup > renders with size xs correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-0.5">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-4"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item=""><span data-state="checked" style="pointer-events: none;" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-full" width="1em" height="1em" viewBox="0 0 16 16"></svg></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-xs">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-xs"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-4"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-xs">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-xs"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-4"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-xs">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-xs"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -1100,34 +1100,34 @@ exports[`CheckboxGroup > renders with size xs correctly 1`] = `
 exports[`CheckboxGroup > renders with ui correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex flex-col gap-y-1 gap-x-4">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:1" class="block font-medium text-red">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:1" class="block font-medium text-red">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:2" class="block font-medium text-red">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:2" class="block font-medium text-red">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:3" class="block font-medium text-red">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:3" class="block font-medium text-red">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -1136,34 +1136,34 @@ exports[`CheckboxGroup > renders with ui correctly 1`] = `
 exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="relative flex items-start flex-row">
+    <!--v-if-->
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:Option 1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:Option 1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:Option 1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:Option 2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:Option 2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:Option 2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="relative flex items-start flex-row">
+    </div>
+    <div class="relative flex items-start flex-row">
       <div class="flex items-center h-5"><button tabindex="-1" data-orientation="vertical" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:Option 3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2 text-sm">
-        <p for="v-0:Option 3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2 text-sm"><label for="v-0:Option 3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
