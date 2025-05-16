@@ -65,6 +65,7 @@ Each shortcut can be defined as a function or an object with the following prope
 interface ShortcutConfig {
   handler: () => void
   usingInput?: boolean | string
+  cursorTarget?: MaybeRefOrGetter<MaybeElement>
 }
 ```
 
@@ -73,6 +74,7 @@ interface ShortcutConfig {
   - `false` (default): Shortcut only triggers when no input is focused
   - `true`: Shortcut triggers even when any input is focused
   - `string`: Shortcut only triggers when the specified input (by name) is focused
+- `cursorTarget`: Element which needs to be hovered for the shortcut to trigger
 
 ## Examples
 
