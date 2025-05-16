@@ -1,15 +1,18 @@
 /* eslint-disable regexp/no-useless-quantifier */
 /* eslint-disable regexp/no-super-linear-backtracking */
-import { ref, computed, toValue } from 'vue'
-import type { MaybeRef } from 'vue'
-import { useEventListener, useActiveElement, useDebounceFn } from '@vueuse/core'
+import { ref, computed, toValue, watchEffect } from 'vue'
+import type { MaybeRef, MaybeRefOrGetter } from 'vue'
+import { useEventListener, useActiveElement, useDebounceFn, unrefElement, type MaybeElement } from '@vueuse/core'
 import { useKbd } from './useKbd'
+
+const CURSOR_DATASET_ATTR = 'data-define-shortcuts-cursor'
 
 type Handler = (e?: any) => void
 
 export interface ShortcutConfig {
   handler: Handler
   usingInput?: string | boolean
+  cursorTarget?: MaybeRefOrGetter<MaybeElement>
 }
 
 export interface ShortcutsConfig {
@@ -32,10 +35,32 @@ interface Shortcut {
   altKey: boolean
   // code?: string
   // keyCode?: number
+  cursorTarget: MaybeElement
 }
 
 const chainedShortcutRegex = /^[^-]+.*-.*[^-]+$/
 const combinedShortcutRegex = /^[^_]+.*_.*[^_]+$/
+
+/**
+ * Get the elements under the cursor.
+ */
+const getHoveredElements
+  = (() => {
+    let elements: readonly Element[] | null = null
+
+    return () => {
+      if (elements == null) {
+        elements
+          = [...document.querySelectorAll(`[${CURSOR_DATASET_ATTR}]:hover`)]
+
+        setTimeout((): void => {
+          elements = null
+        }, 50)
+      }
+
+      return elements
+    }
+  })()
 
 export function extractShortcuts(items: any[] | any[][]) {
   const shortcuts: Record<string, Handler> = {}
@@ -117,6 +142,10 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       // alt modifier changes the combined key anyways
       // if (e.altKey !== shortcut.altKey) { continue }
 
+      if (shortcut.cursorTarget && !getHoveredElements().includes(shortcut.cursorTarget as Element)) {
+        continue
+      }
+
       if (shortcut.enabled) {
         e.preventDefault()
         shortcut.handler()
@@ -166,16 +195,18 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
           metaKey: false,
           ctrlKey: false,
           shiftKey: false,
-          altKey: false
+          altKey: false,
+          cursorTarget: null
         }
       } else {
         const keySplit = key.toLowerCase().split('_').map(k => k)
         shortcut = {
-          key: keySplit.filter(k => !['meta', 'command', 'ctrl', 'shift', 'alt', 'option'].includes(k)).join('_'),
+          key: keySplit.filter(k => !['meta', 'command', 'ctrl', 'shift', 'alt', 'option', 'cursor'].includes(k)).join('_'),
           metaKey: keySplit.includes('meta') || keySplit.includes('command'),
           ctrlKey: keySplit.includes('ctrl'),
           shiftKey: keySplit.includes('shift'),
-          altKey: keySplit.includes('alt') || keySplit.includes('option')
+          altKey: keySplit.includes('alt') || keySplit.includes('option'),
+          cursorTarget: 'cursorTarget' in shortcutConfig ? unrefElement(shortcutConfig.cursorTarget) : null
         }
       }
       shortcut.chained = chained
@@ -208,6 +239,37 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
 
       return shortcut
     }).filter(Boolean) as Shortcut[]
+  })
+
+  watchEffect((onCleanup) => {
+    const cursorTargets = shortcuts.value.map(shortcut => unrefElement(shortcut.cursorTarget)).filter((cursorTarget) => {
+      // Ignore fragments.
+      if (cursorTarget?.nodeName === '#comment') {
+        console.trace(`[Shortcut] Invalid cursorTarget: "${cursorTarget}"`)
+        return false
+      }
+
+      return !!cursorTarget
+    })
+
+    if (cursorTargets.length < 1) {
+      return
+    }
+
+    cursorTargets.forEach((cursorTarget) => {
+      if (cursorTarget) {
+        cursorTarget.setAttribute(CURSOR_DATASET_ATTR, 'true')
+      }
+    })
+
+    onCleanup(() => {
+      cursorTargets.forEach((cursorTarget) => {
+        if (cursorTarget) {
+          cursorTarget.removeAttribute(CURSOR_DATASET_ATTR)
+        }
+      })
+    }
+    )
   })
 
   return useEventListener('keydown', onKeyDown)

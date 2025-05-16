@@ -138,3 +138,35 @@ const items = [{
 defineShortcuts(extractShortcuts(items))
 </script>
 ```
+
+### Scoping shortcuts to specific elements
+
+The `cursorTarget` field can be used to scope the shortcut to a specific element:
+
+```vue
+<script setup lang="ts">
+import { ref, useTemplateRef } from "vue"
+
+const cursorTarget = useTemplateRef('cursorTarget')
+const open = ref(false)
+
+defineShortcuts({
+  i: {
+    handler: () => {
+      open.value = !open.value
+    },
+    cursorTarget
+  }
+})
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <UTooltip v-model:open="open" text="Open on GitHub">
+      <Placeholder ref="cursorTarget" class="px-4 py-3">
+        Cursor Target
+      </Placeholder>
+    </UTooltip>
+  </div>
+</template>
+```
