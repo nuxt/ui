@@ -5,7 +5,7 @@
   "dependencies": {
     "@ai-sdk/vue": "^1.2.12",
     "@iconify-json/logos": "^1.2.4",
-    "@iconify-json/lucide": "^1.2.43",
+    "@iconify-json/lucide": "^1.2.44",
     "@iconify-json/simple-icons": "^1.2.34",
     "@iconify-json/vscode-icons": "^1.2.21",
     "@nuxt/content": "^3.5.1",
@@ -18,7 +18,7 @@
     "@rollup/plugin-yaml": "^4.1.2",
     "@vueuse/integrations": "^13.2.0",
     "@vueuse/nuxt": "^13.2.0",
-    "ai": "^4.3.15",
+    "ai": "^4.3.16",
     "capture-website": "^4.2.0",
     "joi": "^17.13.3",
     "motion-v": "^1.0.2",
