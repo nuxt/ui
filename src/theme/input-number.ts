@@ -1,5 +1,6 @@
 import type { ModuleOptions } from '../module'
 import inputTheme from './input'
+import { buttonGroupVariantWithRoot } from './button-group'
 
 export default (options: Required<ModuleOptions>) => {
   const input = inputTheme(options)
@@ -12,6 +13,7 @@ export default (options: Required<ModuleOptions>) => {
       decrement: 'absolute flex items-center'
     },
     variants: {
+      ...buttonGroupVariantWithRoot,
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
         neutral: ''

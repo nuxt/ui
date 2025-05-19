@@ -21,10 +21,10 @@ Use the `items` prop as an array of objects with the following properties:
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `badge?: string | number | BadgeProps`{lang="ts-type"}
-- `tooltip?: TooltipProps`{lang="ts-type"} :badge{label="Soon"}
+- `tooltip?: TooltipProps`{lang="ts-type"}
 - `trailingIcon?: string`{lang="ts-type"}
 - `type?: 'label' | 'link'`{lang="ts-type"}
-- `collapsible?: boolean`{lang="ts-type"} :badge{label="Soon"}
+- `collapsible?: boolean`{lang="ts-type"}
 - `defaultOpen?: boolean`{lang="ts-type"}
 - `open?: boolean`{lang="ts-type"}
 - `value?: string`{lang="ts-type"}
@@ -885,7 +885,7 @@ You can inspect the DOM to see each item's content being rendered.
 
 ## Examples
 
-### With tooltips in items :badge{label="Soon" class="align-text-top"}
+### With tooltips in items :badge{label="New" class="align-text-top"}
 
 You can use the `tooltip` property to display a [Tooltip](/components/tooltip) around an item. This can be useful when the menu is collapsed.
 

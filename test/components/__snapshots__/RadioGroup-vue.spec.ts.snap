@@ -3,34 +3,34 @@
 exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative" aria-label="Aria label">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -39,34 +39,34 @@ exports[`RadioGroup > renders with ariaLabel correctly 1`] = `
 exports[`RadioGroup > renders with as correctly 1`] = `
 "<section role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </section>"
@@ -75,34 +75,34 @@ exports[`RadioGroup > renders with as correctly 1`] = `
 exports[`RadioGroup > renders with class correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="absolute">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -111,33 +111,33 @@ exports[`RadioGroup > renders with class correctly 1`] = `
 exports[`RadioGroup > renders with defaultValue correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -146,34 +146,34 @@ exports[`RadioGroup > renders with defaultValue correctly 1`] = `
 exports[`RadioGroup > renders with description correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <p class="text-muted">Description 0</p>
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <p class="text-muted">Description 1</p>
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <p class="text-muted">Description 2</p>
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -182,34 +182,34 @@ exports[`RadioGroup > renders with description correctly 1`] = `
 exports[`RadioGroup > renders with description slot correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Description slot</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Description slot</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Description slot</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Description slot</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Description slot</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Description slot</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -218,34 +218,34 @@ exports[`RadioGroup > renders with description slot correctly 1`] = `
 exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <p class="text-muted">1</p>
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <p class="text-muted">2</p>
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <p class="text-muted">3</p>
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -254,34 +254,34 @@ exports[`RadioGroup > renders with descriptionKey correctly 1`] = `
 exports[`RadioGroup > renders with disabled correctly 1`] = `
 "<div role="radiogroup" data-disabled="" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="-1" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" tabindex="-1" data-orientation="vertical" data-disabled="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default cursor-not-allowed opacity-75">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default cursor-not-allowed opacity-75">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" tabindex="-1" data-orientation="vertical" data-disabled="" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default cursor-not-allowed opacity-75">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default cursor-not-allowed opacity-75">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 cursor-not-allowed opacity-75" tabindex="-1" data-orientation="vertical" data-disabled="" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" disabled="" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default cursor-not-allowed opacity-75">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default cursor-not-allowed opacity-75">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -395,33 +395,33 @@ exports[`RadioGroup > renders with horizontal variant table correctly 1`] = `
 exports[`RadioGroup > renders with indicator end correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row-reverse text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row-reverse text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!---->
         </button></div>
-      <div class="w-full me-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full me-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row-reverse text-sm">
+    </div>
+    <div class="flex items-start flex-row-reverse text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full me-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full me-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row-reverse text-sm">
+    </div>
+    <div class="flex items-start flex-row-reverse text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full me-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full me-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -430,33 +430,33 @@ exports[`RadioGroup > renders with indicator end correctly 1`] = `
 exports[`RadioGroup > renders with indicator hidden correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start text-sm">
+    <!--v-if-->
+    <div class="flex items-start text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sr-only size-4" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!---->
         </button></div>
-      <div class="w-full text-center">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full text-center"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start text-sm">
+    </div>
+    <div class="flex items-start text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sr-only size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full text-center">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full text-center"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start text-sm">
+    </div>
+    <div class="flex items-start text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sr-only size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full text-center">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full text-center"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -465,33 +465,33 @@ exports[`RadioGroup > renders with indicator hidden correctly 1`] = `
 exports[`RadioGroup > renders with indicator start correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -500,34 +500,34 @@ exports[`RadioGroup > renders with indicator start correctly 1`] = `
 exports[`RadioGroup > renders with items correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -536,34 +536,34 @@ exports[`RadioGroup > renders with items correctly 1`] = `
 exports[`RadioGroup > renders with label slot correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Label slot</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Label slot</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Label slot</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Label slot</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -572,34 +572,34 @@ exports[`RadioGroup > renders with label slot correctly 1`] = `
 exports[`RadioGroup > renders with labelKey correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -608,34 +608,34 @@ exports[`RadioGroup > renders with labelKey correctly 1`] = `
 exports[`RadioGroup > renders with legend slot correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Legend slot</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Legend slot</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Legend slot</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Legend slot</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Legend slot</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Legend slot</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -644,33 +644,33 @@ exports[`RadioGroup > renders with legend slot correctly 1`] = `
 exports[`RadioGroup > renders with modelValue correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -889,34 +889,34 @@ exports[`RadioGroup > renders with primary variant table correctly 1`] = `
 exports[`RadioGroup > renders with required correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="true" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <legend class="mb-1 block font-medium text-default text-sm after:content-['*'] after:ms-0.5 after:text-error">Legend</legend><label class="flex items-start flex-row text-sm">
+    <legend class="mb-1 block font-medium text-default text-sm after:content-['*'] after:ms-0.5 after:text-error">Legend</legend>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="true" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -925,33 +925,33 @@ exports[`RadioGroup > renders with required correctly 1`] = `
 exports[`RadioGroup > renders with size lg correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4.5" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4.5" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4.5" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -960,33 +960,33 @@ exports[`RadioGroup > renders with size lg correctly 1`] = `
 exports[`RadioGroup > renders with size md correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -995,33 +995,33 @@ exports[`RadioGroup > renders with size md correctly 1`] = `
 exports[`RadioGroup > renders with size sm correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-0.5">
-    <!--v-if--><label class="flex items-start flex-row text-xs">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-xs">
       <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3.5" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1"></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-xs">
+    </div>
+    <div class="flex items-start flex-row text-xs">
       <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3.5" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-xs">
+    </div>
+    <div class="flex items-start flex-row text-xs">
       <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3.5" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -1030,33 +1030,33 @@ exports[`RadioGroup > renders with size sm correctly 1`] = `
 exports[`RadioGroup > renders with size xl correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1.5">
-    <!--v-if--><label class="flex items-start flex-row text-base">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-base">
       <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-5" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-2"></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-base">
+    </div>
+    <div class="flex items-start flex-row text-base">
       <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-5" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-base">
+    </div>
+    <div class="flex items-start flex-row text-base">
       <div class="flex items-center h-6"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-5" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -1065,33 +1065,33 @@ exports[`RadioGroup > renders with size xl correctly 1`] = `
 exports[`RadioGroup > renders with size xs correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-0.5">
-    <!--v-if--><label class="flex items-start flex-row text-xs">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-xs">
       <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3" tabindex="-1" data-orientation="vertical" data-active="" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1"></span>
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-xs">
+    </div>
+    <div class="flex items-start flex-row text-xs">
       <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-xs">
+    </div>
+    <div class="flex items-start flex-row text-xs">
       <div class="flex items-center h-4"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-3" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -1100,34 +1100,34 @@ exports[`RadioGroup > renders with size xs correctly 1`] = `
 exports[`RadioGroup > renders with ui correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="1" aria-label="1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-4">
-        <p for="v-0:1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-4"><label for="v-0:1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-4">
-        <p for="v-0:2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-4"><label for="v-0:2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-4">
-        <p for="v-0:3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-4"><label for="v-0:3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
@@ -1136,34 +1136,34 @@ exports[`RadioGroup > renders with ui correctly 1`] = `
 exports[`RadioGroup > renders with valueKey correctly 1`] = `
 "<div role="radiogroup" aria-orientation="vertical" aria-required="false" dir="ltr" tabindex="0" data-orientation="vertical" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" class="relative">
   <fieldset class="flex gap-x-2 flex-col gap-y-1">
-    <!--v-if--><label class="flex items-start flex-row text-sm">
+    <!--v-if-->
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:Option 1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="Option 1" aria-label="Option 1">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:Option 1" class="block font-medium text-default">Option 1</p>
+      <div class="w-full ms-2"><label for="v-0:Option 1" class="block font-medium text-default">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:Option 2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="Option 2" aria-label="Option 2">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:Option 2" class="block font-medium text-default">Option 2</p>
+      <div class="w-full ms-2"><label for="v-0:Option 2" class="block font-medium text-default">Option 2</label>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start flex-row text-sm">
+    </div>
+    <div class="flex items-start flex-row text-sm">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="vertical" data-reka-collection-item="" id="v-0:Option 3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="Option 3" aria-label="Option 3">
           <!---->
           <!---->
         </button></div>
-      <div class="w-full ms-2">
-        <p for="v-0:Option 3" class="block font-medium text-default">Option 3</p>
+      <div class="w-full ms-2"><label for="v-0:Option 3" class="block font-medium text-default">Option 3</label>
         <!--v-if-->
       </div>
-    </label>
+    </div>
   </fieldset>
   <!---->
 </div>"
