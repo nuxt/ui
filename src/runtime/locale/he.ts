@@ -21,6 +21,10 @@ export default defineLocale<Messages>({
       increment: 'הוסף',
       decrement: 'הפחת'
     },
+    inputFile: {
+      empty: 'בחר קובץ',
+      files: 'קבצים שנבחרו'
+    },
     commandPalette: {
       placeholder: 'הקלד פקודה...',
       noMatch: 'לא נמצאה התאמה',

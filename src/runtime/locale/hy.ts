@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Ավելացնել',
       decrement: 'Պակասեցնել'
     },
+    inputFile: {
+      empty: 'Ընտրել ֆայլ',
+      files: 'Ընտրված ֆայլեր'
+    },
     commandPalette: {
       placeholder: 'Մուտքագրեք հրաման կամ որոնեք...',
       noMatch: 'Համընկնումներ չեն գտնվել',

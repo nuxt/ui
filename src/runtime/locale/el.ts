@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Αύξηση',
       decrement: 'Μείωση'
     },
+    inputFile: {
+      empty: 'Επιλέξτε αρχείο',
+      files: 'Επιλεγμένα αρχεία'
+    },
     commandPalette: {
       placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',
       noMatch: 'Δεν βρέθηκαν δεδομένα',

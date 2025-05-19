@@ -38,6 +38,7 @@ const components = [
   'form',
   'form-field',
   'input',
+  'input-file',
   'input-menu',
   'input-number',
   'kbd',

@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Crește',
       decrement: 'Scade'
     },
+    inputFile: {
+      empty: 'Selectează un fișier',
+      files: 'Fișiere selectate'
+    },
     commandPalette: {
       placeholder: 'Tastează o comandă sau caută...',
       noMatch: 'Nu există date corespunzătoare',

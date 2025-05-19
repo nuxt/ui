@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: '增加',
       decrement: '减少'
     },
+    inputFile: {
+      empty: '选择文件',
+      files: '已选择的文件'
+    },
     commandPalette: {
       placeholder: '输入命令或搜索...',
       noMatch: '没有匹配的数据',

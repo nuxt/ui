@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Arttır',
       decrement: 'Azalt'
     },
+    inputFile: {
+      empty: 'Dosya seçin',
+      files: 'Seçilen dosyalar'
+    },
     commandPalette: {
       placeholder: 'Bir komut yazın veya arama yapın...',
       noMatch: 'Eşleşen veri yok',

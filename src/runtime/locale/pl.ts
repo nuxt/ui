@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Zwiększ',
       decrement: 'Zmniejsz'
     },
+    inputFile: {
+      empty: 'Wybierz plik',
+      files: 'Wybrane pliki'
+    },
     commandPalette: {
       placeholder: 'Wpisz polecenie lub wyszukaj...',
       noMatch: 'Brak pasujących danych',

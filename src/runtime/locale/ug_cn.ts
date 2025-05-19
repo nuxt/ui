@@ -21,6 +21,10 @@ export default defineLocale<Messages>({
       increment: 'كۆپەيتىش',
       decrement: 'ئازايتىش'
     },
+    inputFile: {
+      empty: 'فايىل تاللاڭ',
+      files: 'تاللانغان فايىللار'
+    },
     commandPalette: {
       placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ...',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',

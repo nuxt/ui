@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Зиёд кардан',
       decrement: 'Кам кардан'
     },
+    inputFile: {
+      empty: 'Файли интихобшударо интихоб кунед',
+      files: 'Файлҳои интихобшуда'
+    },
     commandPalette: {
       placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',

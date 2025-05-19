@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Öka',
       decrement: 'Minska'
     },
+    inputFile: {
+      empty: 'Välj en fil',
+      files: 'Valda filer'
+    },
     commandPalette: {
       placeholder: 'Skriv ett kommando eller sök...',
       noMatch: 'Inga matchande data',

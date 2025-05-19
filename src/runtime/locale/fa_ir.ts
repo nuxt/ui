@@ -21,6 +21,10 @@ export default defineLocale<Messages>({
       increment: 'افزایش',
       decrement: 'کاهش'
     },
+    inputFile: {
+      empty: 'فایلی انتخاب کنید',
+      files: 'فایل‌های انتخاب شده'
+    },
     commandPalette: {
       placeholder: 'یک دستور وارد کنید یا جستجو کنید...',
       noMatch: 'داده‌ای یافت نشد',

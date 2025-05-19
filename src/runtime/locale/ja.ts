@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: '増やす',
       decrement: '減らす'
     },
+    inputFile: {
+      empty: 'ファイルを選択',
+      files: '選択したファイル'
+    },
     commandPalette: {
       placeholder: 'コマンドを入力するか検索...',
       noMatch: '一致するデータがありません',

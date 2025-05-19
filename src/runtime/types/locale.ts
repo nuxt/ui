@@ -14,6 +14,10 @@ export type Messages = {
     increment: string
     decrement: string
   }
+  inputFile: {
+    empty: string
+    files: string
+  }
   commandPalette: {
     placeholder: string
     noMatch: string

@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'বৃদ্ধি করুন',
       decrement: 'হ্রাস করুন'
     },
+    inputFile: {
+      empty: 'ফাইল নির্বাচন করুন',
+      files: 'নির্বাচিত ফাইল'
+    },
     commandPalette: {
       placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন...',
       noMatch: 'কোন মিল পাওয়া যায়নি',

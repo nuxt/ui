@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'बढ़ाना',
       decrement: 'घटाना'
     },
+    inputFile: {
+      empty: 'फाइल चुनें',
+      files: 'चुनी गई फ़ाइलें'
+    },
     commandPalette: {
       placeholder: 'एक आदेश या खोज टाइप करें...',
       noMatch: 'कोई मेल खाता डेटा नहीं',

@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Увеличить',
       decrement: 'Уменьшить'
     },
+    inputFile: {
+      empty: 'Выберите файл',
+      files: 'Выбранные файлы'
+    },
     commandPalette: {
       placeholder: 'Введите команду или выполните поиск...',
       noMatch: 'Совпадений не найдено',

@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Øk',
       decrement: 'Reduser'
     },
+    inputFile: {
+      empty: 'Velg fil',
+      files: 'Valgte filer'
+    },
     commandPalette: {
       placeholder: 'Skriv inn en kommando eller søk...',
       noMatch: 'Ingen samsvarende data',

@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'เพิ่ม',
       decrement: 'ลด'
     },
+    inputFile: {
+      empty: 'เลือกไฟล์',
+      files: 'ไฟล์ที่เลือก'
+    },
     commandPalette: {
       placeholder: 'พิมพ์คำสั่งหรือค้นหา...',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',

@@ -21,6 +21,10 @@ export default defineLocale<Messages>({
       increment: 'زيادة',
       decrement: 'تقليل'
     },
+    inputFile: {
+      empty: 'اختر ملف',
+      files: 'الملفات المحددة'
+    },
     commandPalette: {
       placeholder: 'اكتب أمرًا أو ابحث...',
       noMatch: 'لا توجد نتائج مطابقة',

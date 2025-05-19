@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Növel',
       decrement: 'Csökkent'
     },
+    inputFile: {
+      empty: 'Fájl kiválasztása',
+      files: 'Kiválasztott fájlok'
+    },
     commandPalette: {
       placeholder: 'Írjon be egy parancsot vagy keressen...',
       noMatch: 'Nincs találat',

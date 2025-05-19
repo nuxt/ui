@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Naikkan',
       decrement: 'Kurangkan'
     },
+    inputFile: {
+      empty: 'Pilih fail',
+      files: 'Fail yang dipilih'
+    },
     commandPalette: {
       placeholder: 'Taip arahan atau carian...',
       noMatch: 'Tiada data yang sepadan',

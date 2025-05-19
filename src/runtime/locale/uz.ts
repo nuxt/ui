@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Qoʻshish',
       decrement: 'Ayirish'
     },
+    inputFile: {
+      empty: 'Faylni tanlang',
+      files: 'Tanlangan fayllar'
+    },
     commandPalette: {
       placeholder: 'Buyruq kiriting yoki qidiring...',
       noMatch: 'Mos keluvchi natija topilmadi',

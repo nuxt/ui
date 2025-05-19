@@ -21,6 +21,10 @@ export default defineLocale<Messages>({
       increment: 'اضافہ',
       decrement: 'کمی'
     },
+    inputFile: {
+      empty: 'فائل منتخب کریں',
+      files: 'منتخب کردہ فائلیں'
+    },
     commandPalette: {
       placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',

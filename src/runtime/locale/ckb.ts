@@ -21,6 +21,10 @@ export default defineLocale<Messages>({
       increment: 'زیادکردن',
       decrement: 'کەمکردنەوە'
     },
+    inputFile: {
+      empty: 'فایلێک هەڵبژێرە',
+      files: 'فایلە هەڵبژێردراوەکان'
+    },
     commandPalette: {
       placeholder: 'فەرمانێک بنووسە یان بگەڕێ...',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',

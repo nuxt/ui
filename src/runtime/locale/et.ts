@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Suurenda',
       decrement: 'Vähenda'
     },
+    inputFile: {
+      empty: 'Vali fail',
+      files: 'Valitud failid'
+    },
     commandPalette: {
       placeholder: 'Sisesta käsk või otsi...',
       noMatch: 'Pole vastavaid andmeid',

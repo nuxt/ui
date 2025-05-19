@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Kasvata',
       decrement: 'Vähennä'
     },
+    inputFile: {
+      empty: 'Valitse tiedosto',
+      files: 'Valitut tiedostot'
+    },
     commandPalette: {
       placeholder: 'Kirjoita komento tai hae...',
       noMatch: 'Ei vastaavia tietoja',

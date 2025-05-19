@@ -20,6 +20,10 @@ export default defineLocale<Messages>({
       increment: 'Artır',
       decrement: 'Azalt'
     },
+    inputFile: {
+      empty: 'Fayl seçin',
+      files: 'Seçilmiş fayllar'
+    },
     commandPalette: {
       placeholder: 'Əmr daxil edin və ya axtarın...',
       noMatch: 'Uyğun məlumat tapılmadı',
