@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative overflow-auto',
     base: 'min-w-full overflow-clip',
     caption: 'sr-only',
-    thead: 'after:border-b after:border-b-accented after:end-full after:left-0 after:absolute after:w-full',
+    thead: 'relative after:absolute after:end-full after:left-0 after:w-full after:h-px after:bg-(--ui-border-accented)',
     tbody: 'divide-y divide-default [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:focus-visible:outline-primary',
     tr: 'data-[selected=true]:bg-elevated/50',
     th: 'px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pe-0',
