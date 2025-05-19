@@ -44,7 +44,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         }
 
         function generateVariantDeclarations(variants: string[]) {
-          return variants.map((variant) => {
+          return variants.filter(variant => json.includes(`as typeof ${variant}`)).map((variant) => {
             const keys = Object.keys(result.variants[variant])
             return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`
           })

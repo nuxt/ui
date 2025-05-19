@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import themeCheckbox from '#build/ui/checkbox'
 import theme from '#build/ui/checkbox-group'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
-const variants = Object.keys(themeCheckbox.variants.variant)
+const variants = Object.keys(theme.variants.variant)
 const variant = ref('list' as const)
 
 const literalOptions = [

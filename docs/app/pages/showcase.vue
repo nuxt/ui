@@ -67,17 +67,6 @@ defineOgImageComponent('Docs', {
           </li>
         </ul>
       </div>
-
-      <div class="flex justify-center -mb-[36px]">
-        <UButton
-          label="Submit your project"
-          trailing-icon="i-lucide-plus"
-          color="neutral"
-          size="lg"
-          to="https://github.com/nuxt/ui/edit/v3/docs/content/showcase.yml"
-          target="_blank"
-        />
-      </div>
     </UPageHero>
   </UMain>
 </template>

@@ -113,7 +113,7 @@ defineExpose({
     v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     :name="name"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
   >

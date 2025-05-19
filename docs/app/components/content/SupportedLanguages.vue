@@ -25,7 +25,9 @@ function getEmojiFlag(locale: string): string {
     kk: 'kz', // Kazakh -> Kazakhstan
     km: 'kh', // Khmer -> Cambodia
     ko: 'kr', // Korean -> South Korea
+    ms: 'my', // Malay -> Malaysia
     nb: 'no', // Norwegian Bokmål -> Norway
+    sl: 'si', // Slovenian -> Slovenia
     sv: 'se', // Swedish -> Sweden
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan

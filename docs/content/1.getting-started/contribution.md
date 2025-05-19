@@ -16,7 +16,7 @@ Here's an overview of the key directories and files in the Nuxt UI project struc
 
 ### Documentation
 
-The documentation lives in the `docs` folder as a Nuxt app using `@nuxt/content` v3 to generate pages from Markdown files. See the [Content v3 Docs](https://content3.nuxt.dev/docs/getting-started) for details on how it works. Here's a breakdown of its structure:
+The documentation lives in the `docs` folder as a Nuxt app using `@nuxt/content` v3 to generate pages from Markdown files. See the [Nuxt Content documentation](https://content.nuxt.com/docs/getting-started) for details on how it works. Here's a breakdown of its structure:
 
 ```bash
 ├── app/

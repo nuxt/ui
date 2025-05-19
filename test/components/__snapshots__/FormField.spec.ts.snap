@@ -55,7 +55,7 @@ exports[`FormField > renders with error correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <p id="v-0-0-error" class="mt-2 text-error">Username is already taken</p>
+    <div id="v-0-0-error" class="mt-2 text-error">Username is already taken</div>
   </div>
 </div>"
 `;
@@ -67,7 +67,7 @@ exports[`FormField > renders with error slot correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <p id="v-0-0-error" class="mt-2 text-error">Error slot</p>
+    <div id="v-0-0-error" class="mt-2 text-error">Error slot</div>
   </div>
 </div>"
 `;
@@ -79,7 +79,7 @@ exports[`FormField > renders with help correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <p class="mt-2 text-muted">Username must be unique</p>
+    <div class="mt-2 text-muted">Username must be unique</div>
   </div>
 </div>"
 `;
@@ -91,7 +91,7 @@ exports[`FormField > renders with help slot correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <p class="mt-2 text-muted">Help slot</p>
+    <div class="mt-2 text-muted">Help slot</div>
   </div>
 </div>"
 `;

@@ -14,10 +14,12 @@ export type CheckboxGroupItem = {
   description?: string
   disabled?: boolean
   value?: string
+  class?: any
+  ui?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<CheckboxProps>['ui'], 'root'>
   [key: string]: any
 } | CheckboxGroupValue
 
-export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupItem> extends Pick<CheckboxGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'variant' | 'indicator' | 'icon'> {
+export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupItem> extends Pick<CheckboxGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -44,6 +46,10 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
    * @defaultValue 'md'
    */
   size?: CheckboxGroup['variants']['size']
+  /**
+   * @defaultValue 'list'
+   */
+  variant?: CheckboxGroup['variants']['variant']
   /**
    * The orientation the checkbox buttons are laid out.
    * @defaultValue 'vertical'
@@ -74,6 +80,7 @@ import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
+import UCheckbox from './Checkbox.vue'
 
 const props = withDefaults(defineProps<CheckboxGroupProps<T>>(), {
   valueKey: 'value',
@@ -96,7 +103,9 @@ const id = _id.value ?? useId()
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({
   size: size.value,
   required: props.required,
-  orientation: props.orientation
+  orientation: props.orientation,
+  color: props.color,
+  variant: props.variant
 }))
 
 function normalizeItem(item: any) {
@@ -152,7 +161,7 @@ function onUpdate(value: any) {
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
     <fieldset :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
@@ -170,8 +179,8 @@ function onUpdate(value: any) {
         :size="size"
         :name="name"
         :disabled="item.disabled || disabled"
-        :ui="props.ui ? omit(props.ui, ['root']) : undefined"
-        :class="ui.item({ class: props.ui?.item })"
+        :ui="{ ...(props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"
+        :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       >
         <template v-for="(_, name) in proxySlots" #[name]>
           <slot :name="(name as keyof CheckboxGroupSlots<T>)" :item="item" />
