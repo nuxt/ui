@@ -43,6 +43,7 @@ export interface TextareaProps extends UseComponentIconsProps {
   modelModifiers?: {
     string?: boolean
     trim?: boolean
+    lazy?: boolean
     nullify?: boolean
   }
   ui?: Textarea['slots']

@@ -43,6 +43,7 @@ export interface InputProps extends UseComponentIconsProps {
     string?: boolean
     number?: boolean
     trim?: boolean
+    lazy?: boolean
     nullify?: boolean
   }
   ui?: Input['slots']
