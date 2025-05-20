@@ -87,6 +87,11 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
    * @defaultValue false
    */
   sticky?: boolean
+  /**
+   * Whether the table should have a sticky footer.
+   * @defaultValue false
+   */
+  stickyFooter?: boolean
   /** Whether the table should be in loading state. */
   loading?: boolean
   /**
@@ -207,6 +212,7 @@ const meta = computed(() => props.meta ?? {})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })({
   sticky: props.sticky,
+  stickyFooter: props.stickyFooter,
   loading: props.loading,
   loadingColor: props.loadingColor,
   loadingAnimation: props.loadingAnimation
@@ -229,7 +235,7 @@ const paginationState = defineModel<PaginationState>('pagination', { default: {}
 const tableRef = ref<HTMLTableElement>()
 
 const tableApi = useVueTable({
-  ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
+  ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'stickyFooter', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
   data,
   columns: columns.value,
   meta: meta.value,
@@ -335,6 +341,8 @@ defineExpose({
   tableRef,
   tableApi
 })
+
+console.log(tableApi.getFooterGroups())
 </script>
 
 <template>
@@ -424,6 +432,28 @@ defineExpose({
           </td>
         </tr>
       </tbody>
+
+      <tfoot :class="ui.tfoot({ class: [props.ui?.tfoot] })">
+        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
+          <th
+            v-for="header in footerGroup.headers"
+            :key="header.id"
+            :data-pinned="header.column.getIsPinned()"
+            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :class="ui.th({
+              class: [
+                props.ui?.th,
+                typeof header.column.columnDef.meta?.class?.th === 'function' ? header.column.columnDef.meta.class.th(header) : header.column.columnDef.meta?.class?.th
+              ],
+              pinned: !!header.column.getIsPinned()
+            })"
+          >
+            <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
+              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />
+            </slot>
+          </th>
+        </tr>
+      </tfoot>
     </table>
   </Primitive>
 </template>
