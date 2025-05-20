@@ -10,7 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
-    linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
+    linkTrailing: 'group ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
     linkTrailingBadgeSize: 'sm',
     linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',
@@ -27,7 +27,7 @@ export default (options: Required<ModuleOptions>) => ({
     separator: 'px-2 h-px bg-border',
     viewportWrapper: 'absolute top-full left-0 flex w-full',
     viewport: 'relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1]',
-    content: 'absolute top-0 left-0 w-full',
+    content: '',
     indicator: 'absolute data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-[2] w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200',
     arrow: 'relative top-[50%] size-2.5 rotate-45 border border-default bg-default z-[1] rounded-xs'
   },
@@ -56,11 +56,13 @@ export default (options: Required<ModuleOptions>) => ({
         list: 'flex items-center',
         item: 'py-2',
         link: 'px-2.5 py-1.5 before:inset-x-px before:inset-y-0',
-        childList: 'grid p-2'
+        childList: 'grid p-2',
+        content: 'absolute top-0 left-0 w-full'
       },
       vertical: {
         root: 'flex-col',
-        link: 'flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0'
+        link: 'flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0',
+        content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden'
       }
     },
     contentOrientation: {
@@ -186,6 +188,7 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     active: true,
     highlight: true,
+    disabled: false,
     class: {
       link: ['hover:before:bg-elevated/50', options.theme.transitions && 'before:transition-colors']
     }

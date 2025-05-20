@@ -24,7 +24,6 @@ Use the `items` prop as an array of objects with the following properties:
 - `tooltip?: TooltipProps`{lang="ts-type"}
 - `trailingIcon?: string`{lang="ts-type"}
 - `type?: 'label' | 'link'`{lang="ts-type"}
-- `collapsible?: boolean`{lang="ts-type"}
 - `defaultOpen?: boolean`{lang="ts-type"}
 - `open?: boolean`{lang="ts-type"}
 - `value?: string`{lang="ts-type"}
@@ -283,7 +282,6 @@ props:
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       - label: Composables
         icon: i-lucide-database
-        collapsible: false
         open: false
         children:
           - label: defineShortcuts
@@ -300,7 +298,6 @@ props:
             to: /composables/use-toast
       - label: Components
         icon: i-lucide-box
-        collapsible: false
         open: false
         to: /components
         active: true
@@ -338,10 +335,6 @@ props:
         icon: i-lucide-circle-help
         disabled: true
 ---
-::
-
-::tip
-You can set the `collapsible: false` property on items with children to prevent them from being collapsible. This allows the item to act as a regular link while still displaying its children in a submenu.
 ::
 
 ### Highlight
@@ -940,7 +933,6 @@ props:
         icon: i-lucide-database
         tooltip:
           text: 'Composables'
-        collapsible: false
         open: false
         children:
           - label: defineShortcuts
@@ -961,7 +953,6 @@ props:
           text: 'Components'
         to: /components
         active: true
-        collapsible: false
         open: false
         children:
           - label: Link
