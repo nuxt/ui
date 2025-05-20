@@ -218,6 +218,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {})
   loadingAnimation: props.loadingAnimation
 }))
 
+const hasFooter = computed(() => {
+  const queue: TableColumn<T>[] = [...columns.value]
+  while (queue.length) {
+    const column = queue.shift()!
+    if ('footer' in column) return true
+    if ('columns' in column) queue.push(...column.columns!)
+  }
+  return false
+})
+
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
 const columnOrderState = defineModel<ColumnOrderState>('columnOrder', { default: [] })
@@ -433,7 +443,7 @@ console.log(tableApi.getFooterGroups())
         </tr>
       </tbody>
 
-      <tfoot :class="ui.tfoot({ class: [props.ui?.tfoot] })">
+      <tfoot v-if="hasFooter" :class="ui.tfoot({ class: [props.ui?.tfoot] })">
         <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="header in footerGroup.headers"
