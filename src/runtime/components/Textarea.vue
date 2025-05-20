@@ -42,7 +42,6 @@ export interface TextareaProps extends UseComponentIconsProps {
   highlight?: boolean
   modelModifiers?: {
     string?: boolean
-    number?: boolean
     trim?: boolean
     nullify?: boolean
   }
