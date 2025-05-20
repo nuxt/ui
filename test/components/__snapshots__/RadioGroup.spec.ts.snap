@@ -360,7 +360,7 @@ exports[`RadioGroup > renders with horizontal variant list correctly 1`] = `
 exports[`RadioGroup > renders with horizontal variant table correctly 1`] = `
 "<div role="radiogroup" aria-orientation="horizontal" aria-required="false" dir="ltr" tabindex="0" data-orientation="horizontal" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" class="relative">
   <fieldset class="flex flex-row gap-0 -space-x-px">
-    <!--v-if--><label class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-l-lg last-of-type:rounded-r-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+    <!--v-if--><label class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-s-lg last-of-type:rounded-e-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="horizontal" data-active="" data-reka-collection-item="" id="v-0-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!---->
         </button></div>
@@ -368,7 +368,7 @@ exports[`RadioGroup > renders with horizontal variant table correctly 1`] = `
         <p for="v-0-0:1" class="block font-medium text-default">Option 1</p>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-l-lg last-of-type:rounded-r-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+    </label><label class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-s-lg last-of-type:rounded-e-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="horizontal" data-reka-collection-item="" id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
           <!---->
           <!---->
@@ -377,7 +377,7 @@ exports[`RadioGroup > renders with horizontal variant table correctly 1`] = `
         <p for="v-0-0:2" class="block font-medium text-default">Option 2</p>
         <!--v-if-->
       </div>
-    </label><label class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-l-lg last-of-type:rounded-r-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+    </label><label class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-s-lg last-of-type:rounded-e-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
       <div class="flex items-center h-5"><button class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" tabindex="-1" data-orientation="horizontal" data-reka-collection-item="" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!---->
