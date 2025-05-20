@@ -49,6 +49,7 @@ exports[`Table > renders with as correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </section>"
 `;
@@ -102,6 +103,7 @@ exports[`Table > renders with caption correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -155,6 +157,7 @@ exports[`Table > renders with caption slot correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -208,6 +211,7 @@ exports[`Table > renders with cell slot correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -261,6 +265,7 @@ exports[`Table > renders with class correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -451,6 +456,7 @@ exports[`Table > renders with columns correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -504,6 +510,7 @@ exports[`Table > renders with data correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -520,6 +527,7 @@ exports[`Table > renders with empty correctly 1`] = `
         <td colspan="0" class="py-6 text-center text-sm text-muted">There is no data</td>
       </tr>
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -558,6 +566,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
         <td colspan="7" class="py-6 text-center text-sm text-muted">Empty slot</td>
       </tr>
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -611,6 +620,7 @@ exports[`Table > renders with expanded slot correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -664,6 +674,7 @@ exports[`Table > renders with header slot correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -717,6 +728,7 @@ exports[`Table > renders with loading animation carousel correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -770,6 +782,7 @@ exports[`Table > renders with loading animation carousel-inverse correctly 1`] =
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -823,6 +836,7 @@ exports[`Table > renders with loading animation elastic correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -876,6 +890,7 @@ exports[`Table > renders with loading animation swing correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -929,6 +944,7 @@ exports[`Table > renders with loading color error correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -982,6 +998,7 @@ exports[`Table > renders with loading color info correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1035,6 +1052,7 @@ exports[`Table > renders with loading color neutral correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1088,6 +1106,7 @@ exports[`Table > renders with loading color primary correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1141,6 +1160,7 @@ exports[`Table > renders with loading color secondary correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1194,6 +1214,7 @@ exports[`Table > renders with loading color success correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1247,6 +1268,7 @@ exports[`Table > renders with loading color warning correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1300,6 +1322,7 @@ exports[`Table > renders with loading correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1338,6 +1361,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
         <td colspan="7" class="py-6 text-center">Loading slot</td>
       </tr>
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1391,6 +1415,7 @@ exports[`Table > renders with sticky correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1444,6 +1469,7 @@ exports[`Table > renders with ui correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -1460,6 +1486,7 @@ exports[`Table > renders without data correctly 1`] = `
         <td colspan="0" class="py-6 text-center text-sm text-muted">No data</td>
       </tr>
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
