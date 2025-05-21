@@ -22,6 +22,9 @@ const items = [
     label: 'Documentation',
     icon: 'i-lucide-book-open',
     badge: 10,
+    tooltip: {
+      text: 'Documentation'
+    },
     children: [{
       label: 'Introduction',
       description: 'Fully styled and customizable components for Nuxt.',
@@ -42,9 +45,12 @@ const items = [
   }, {
     label: 'Components',
     icon: 'i-lucide-box',
-    to: '/components',
+    to: '/components/navigation-menu',
     active: true,
     defaultOpen: true,
+    tooltip: {
+      text: 'Components'
+    },
     children: [{
       label: 'Link',
       icon: 'i-lucide-link',
@@ -81,11 +87,17 @@ const items = [
     label: 'GitHub',
     icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui',
-    target: '_blank'
+    target: '_blank',
+    tooltip: {
+      text: 'GitHub'
+    }
   }, {
     label: 'Help',
     icon: 'i-lucide-circle-help',
-    disabled: true
+    disabled: true,
+    tooltip: {
+      text: 'Help'
+    }
   }]
 ]
 </script>
