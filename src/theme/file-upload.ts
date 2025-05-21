@@ -5,7 +5,7 @@ export default {
     dragging: 'bg-accented/20',
     empty: 'flex flex-col items-center justify-center gap-2',
     label: 'font-semibold text-highlighted text-center px-2 line-clamp-1',
-    uploadIcon: 'shrink-0',
+    uploadIcon: 'shrink-0 pointer-events-none',
     files: 'divide-y divide-default',
     file: 'text-default flex justify-between items-center gap-2 p-2',
     fileLabel: 'text-default font-semibold line-clamp-1',
