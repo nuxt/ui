@@ -80,6 +80,7 @@ const slots = defineSlots<InputSlots>()
 const [modelValue, modelModifiers] = defineModel<T>()
 
 const appConfig = useAppConfig() as Input['AppConfig']
+
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps>(props, { deferInputValidation: true })
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)

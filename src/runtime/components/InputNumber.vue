@@ -79,6 +79,7 @@ import { onMounted, ref, computed } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useButtonGroup } from '../composables/useButtonGroup'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -94,21 +95,24 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()
 
+const { t, code: codeLocale } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
+const { orientation, size: buttonGroupSize } = useButtonGroup<InputNumberProps>(props)
 
-const { t, code: codeLocale } = useLocale()
 const locale = computed(() => props.locale || codeLocale.value)
+const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {}) })({
   color: color.value,
   variant: props.variant,
-  size: size.value,
+  size: inputSize.value,
   highlight: highlight.value,
-  orientation: props.orientation
+  orientation: props.orientation,
+  buttonGroup: orientation.value
 }))
 
 const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.plus : appConfig.ui.icons.chevronUp))
