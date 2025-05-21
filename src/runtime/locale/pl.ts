@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Zwiększ',
       decrement: 'Zmniejsz'
     },
+    fileUpload: {
+      empty: 'Przeglądaj pliki lub przeciągnij je tutaj'
+    },
     commandPalette: {
       placeholder: 'Wpisz polecenie lub wyszukaj...',
       noMatch: 'Brak pasujących danych',

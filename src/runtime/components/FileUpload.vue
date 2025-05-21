@@ -61,10 +61,13 @@ export interface FileUploadSlots {
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+
+const { t } = useLocale()
 
 defineOptions({ inheritAttrs: false })
 
@@ -249,7 +252,7 @@ defineExpose({ fileInputRef })
               :class="ui.label({
                 class: props.ui?.label
               })"
-            > Browse or drop files here </span>
+            > {{ label || t('fileUpload.empty') }} </span>
           </slot>
         </div>
 

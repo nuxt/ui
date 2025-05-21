@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'বৃদ্ধি করুন',
       decrement: 'হ্রাস করুন'
     },
+    fileUpload: {
+      empty: 'ফাইল ব্রাউজ করুন বা এখানে ড্রপ করুন'
+    },
     commandPalette: {
       placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন...',
       noMatch: 'কোন মিল পাওয়া যায়নি',

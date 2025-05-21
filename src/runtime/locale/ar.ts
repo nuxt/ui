@@ -21,6 +21,9 @@ export default defineLocale<Messages>({
       increment: 'زيادة',
       decrement: 'تقليل'
     },
+    fileUpload: {
+      empty: 'استعرض أو اسحب الملفات هنا'
+    },
     commandPalette: {
       placeholder: 'اكتب أمرًا أو ابحث...',
       noMatch: 'لا توجد نتائج مطابقة',

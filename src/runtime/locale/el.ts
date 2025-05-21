@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Αύξηση',
       decrement: 'Μείωση'
     },
+    fileUpload: {
+      empty: 'Αναζητήστε ή σύρετε αρχεία εδώ'
+    },
     commandPalette: {
       placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',
       noMatch: 'Δεν βρέθηκαν δεδομένα',

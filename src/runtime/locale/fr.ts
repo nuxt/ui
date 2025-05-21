@@ -16,6 +16,9 @@ export default defineLocale<Messages>({
       prevMonth: 'Mois précédent',
       nextMonth: 'Mois suivant'
     },
+    fileUpload: {
+      empty: 'Parcourir ou déposer des fichiers ici'
+    },
     inputNumber: {
       increment: 'Augmenter',
       decrement: 'Diminuer'

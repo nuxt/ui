@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Naikkan',
       decrement: 'Kurangkan'
     },
+    fileUpload: {
+      empty: 'Semak fail atau seret ke sini'
+    },
     commandPalette: {
       placeholder: 'Taip arahan atau carian...',
       noMatch: 'Tiada data yang sepadan',

@@ -21,6 +21,9 @@ export default defineLocale<Messages>({
       increment: 'زیادکردن',
       decrement: 'کەمکردنەوە'
     },
+    fileUpload: {
+      empty: 'فایلەکان بگەڕێنەوە یان لێرەوە بەرز بکەوە'
+    },
     commandPalette: {
       placeholder: 'فەرمانێک بنووسە یان بگەڕێ...',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',

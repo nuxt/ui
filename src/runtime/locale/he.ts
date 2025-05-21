@@ -21,6 +21,9 @@ export default defineLocale<Messages>({
       increment: 'הוסף',
       decrement: 'הפחת'
     },
+    fileUpload: {
+      empty: 'עיין בקבצים או גרור ושחרר כאן'
+    },
     commandPalette: {
       placeholder: 'הקלד פקודה...',
       noMatch: 'לא נמצאה התאמה',

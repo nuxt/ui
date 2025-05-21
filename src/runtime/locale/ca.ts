@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Incrementar',
       decrement: 'Decrementar'
     },
+    fileUpload: {
+      empty: 'Explora o arrossega fitxers aquí'
+    },
     commandPalette: {
       placeholder: 'Escriu una ordre o cerca...',
       noMatch: 'No hi ha dades coincidents',

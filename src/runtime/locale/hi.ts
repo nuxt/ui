@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'बढ़ाना',
       decrement: 'घटाना'
     },
+    fileUpload: {
+      empty: 'फाइल ब्राउज़ करें या यहाँ ड्रॉप करें'
+    },
     commandPalette: {
       placeholder: 'एक आदेश या खोज टाइप करें...',
       noMatch: 'कोई मेल खाता डेटा नहीं',

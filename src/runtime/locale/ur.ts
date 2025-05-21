@@ -21,6 +21,9 @@ export default defineLocale<Messages>({
       increment: 'اضافہ',
       decrement: 'کمی'
     },
+    fileUpload: {
+      empty: 'فائلوں کو براؤز کریں یا یہاں چھوڑیں'
+    },
     commandPalette: {
       placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',

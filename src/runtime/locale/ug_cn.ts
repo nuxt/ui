@@ -21,6 +21,9 @@ export default defineLocale<Messages>({
       increment: 'كۆپەيتىش',
       decrement: 'ئازايتىش'
     },
+    fileUpload: {
+      empty: 'فايىلنى كۆرۈش ياكى بۇ يەرگە تارتىش'
+    },
     commandPalette: {
       placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ...',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',

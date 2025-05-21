@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: '增加',
       decrement: '減少'
     },
+    fileUpload: {
+      empty: '選擇檔案或拖放到這裡'
+    },
     commandPalette: {
       placeholder: '輸入命令或搜尋...',
       noMatch: '沒有相符的資料',

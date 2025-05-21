@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Kasvata',
       decrement: 'Vähennä'
     },
+    fileUpload: {
+      empty: 'Selaa tai vedä tiedostoja tähän'
+    },
     commandPalette: {
       placeholder: 'Kirjoita komento tai hae...',
       noMatch: 'Ei vastaavia tietoja',

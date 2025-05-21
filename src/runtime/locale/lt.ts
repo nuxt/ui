@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Padidinti',
       decrement: 'Sumažinti'
     },
+    fileUpload: {
+      empty: 'Naršyti failus arba vilkti čia'
+    },
     commandPalette: {
       placeholder: 'Įveskite komandą arba ieškokite...',
       noMatch: 'Nėra atitinkančių duomenų',

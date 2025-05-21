@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: '증가',
       decrement: '감소'
     },
+    fileUpload: {
+      empty: '파일을 선택하거나 여기에 드롭하세요'
+    },
     commandPalette: {
       placeholder: '명령을 입력하거나 검색...',
       noMatch: '일치하는 데이터가 없습니다.',

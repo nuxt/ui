@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Öka',
       decrement: 'Minska'
     },
+    fileUpload: {
+      empty: 'Bläddra eller släpp filer här'
+    },
     commandPalette: {
       placeholder: 'Skriv ett kommando eller sök...',
       noMatch: 'Inga matchande data',

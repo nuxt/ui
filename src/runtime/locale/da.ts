@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Øg',
       decrement: 'Reducer'
     },
+    fileUpload: {
+      empty: 'Gennemse eller træk filer her'
+    },
     commandPalette: {
       placeholder: 'Skriv en kommando eller søg...',
       noMatch: 'Ingen matchende data',

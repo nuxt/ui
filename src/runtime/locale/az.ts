@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Artır',
       decrement: 'Azalt'
     },
+    fileUpload: {
+      empty: 'Faylları buraya sürükləyin və ya seçin'
+    },
     commandPalette: {
       placeholder: 'Əmr daxil edin və ya axtarın...',
       noMatch: 'Uyğun məlumat tapılmadı',

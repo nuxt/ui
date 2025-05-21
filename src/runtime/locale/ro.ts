@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Crește',
       decrement: 'Scade'
     },
+    fileUpload: {
+      empty: 'Răsfoiește sau trage fișiere aici'
+    },
     commandPalette: {
       placeholder: 'Tastează o comandă sau caută...',
       noMatch: 'Nu există date corespunzătoare',

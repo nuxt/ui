@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Verhogen',
       decrement: 'Verlagen'
     },
+    fileUpload: {
+      empty: 'Blader door bestanden of sleep ze hierheen'
+    },
     commandPalette: {
       placeholder: 'Typ een commando of zoek...',
       noMatch: 'Geen overeenkomende gegevens',

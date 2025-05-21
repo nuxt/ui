@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Suurenda',
       decrement: 'Vähenda'
     },
+    fileUpload: {
+      empty: 'Sirvi või lohista failid siia'
+    },
     commandPalette: {
       placeholder: 'Sisesta käsk või otsi...',
       noMatch: 'Pole vastavaid andmeid',

@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Ավելացնել',
       decrement: 'Պակասեցնել'
     },
+    fileUpload: {
+      empty: 'Փնտրել ֆայլեր կամ քաշել այստեղ'
+    },
     commandPalette: {
       placeholder: 'Մուտքագրեք հրաման կամ որոնեք...',
       noMatch: 'Համընկնումներ չեն գտնվել',

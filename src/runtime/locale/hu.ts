@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Növel',
       decrement: 'Csökkent'
     },
+    fileUpload: {
+      empty: 'Fájlok böngészése vagy ide húzása'
+    },
     commandPalette: {
       placeholder: 'Írjon be egy parancsot vagy keressen...',
       noMatch: 'Nincs találat',

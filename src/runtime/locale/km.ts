@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'បង្កើន',
       decrement: 'បន្ថយ'
     },
+    fileUpload: {
+      empty: 'ស្វែងរកឯកសារឬទាញយកទីនេះ'
+    },
     commandPalette: {
       placeholder: 'វាយពាក្យបញ្ជា ឬស្វែងរក...',
       noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',

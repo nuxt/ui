@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Збільшити',
       decrement: 'Зменшити'
     },
+    fileUpload: {
+      empty: 'Виберіть файл або перетягніть його сюди'
+    },
     commandPalette: {
       placeholder: 'Введіть команду або шукайте...',
       noMatch: 'Збігів не знайдено',

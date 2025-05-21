@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Зиёд кардан',
       decrement: 'Кам кардан'
     },
+    fileUpload: {
+      empty: 'Файлро интихоб кунед ё ин ҷо гузоред'
+    },
     commandPalette: {
       placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',

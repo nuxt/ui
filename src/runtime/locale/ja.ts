@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: '増やす',
       decrement: '減らす'
     },
+    fileUpload: {
+      empty: 'ファイルを参照するか、ここにドロップしてください'
+    },
     commandPalette: {
       placeholder: 'コマンドを入力するか検索...',
       noMatch: '一致するデータがありません',

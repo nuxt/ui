@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Qoʻshish',
       decrement: 'Ayirish'
     },
+    fileUpload: {
+      empty: 'Faylni tanlang yoki bu yerga joylashtiring'
+    },
     commandPalette: {
       placeholder: 'Buyruq kiriting yoki qidiring...',
       noMatch: 'Mos keluvchi natija topilmadi',

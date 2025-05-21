@@ -21,6 +21,9 @@ export default defineLocale<Messages>({
       increment: 'افزایش',
       decrement: 'کاهش'
     },
+    fileUpload: {
+      empty: 'فایل‌ها را مرور کنید یا اینجا بکشید و رها کنید'
+    },
     commandPalette: {
       placeholder: 'یک دستور وارد کنید یا جستجو کنید...',
       noMatch: 'داده‌ای یافت نشد',

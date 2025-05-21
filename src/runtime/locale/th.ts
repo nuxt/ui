@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'เพิ่ม',
       decrement: 'ลด'
     },
+    fileUpload: {
+      empty: 'เลือกไฟล์หรือวางที่นี่'
+    },
     commandPalette: {
       placeholder: 'พิมพ์คำสั่งหรือค้นหา...',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',

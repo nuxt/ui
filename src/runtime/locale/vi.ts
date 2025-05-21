@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Tăng',
       decrement: 'Giảm'
     },
+    fileUpload: {
+      empty: 'Chọn tệp hoặc kéo và thả vào đây'
+    },
     commandPalette: {
       placeholder: 'Nhập lệnh hoặc tìm kiếm...',
       noMatch: 'Không có kết quả phù hợp',
