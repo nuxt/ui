@@ -15,7 +15,13 @@ import type { ComponentConfig } from '../types/utils'
 
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 
-export type CarouselItem = AcceptableValue
+interface _CarouselItem {
+  class?: any
+  ui?: Pick<Carousel['slots'], 'item'>
+  [key: string]: any
+}
+
+export type CarouselItem = _CarouselItem | AcceptableValue
 
 export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
@@ -254,6 +260,10 @@ function onSelect(api: EmblaCarouselType) {
   emits('select', selectedIndex.value)
 }
 
+function isCarouselItem(item: CarouselItem): item is _CarouselItem {
+  return typeof item === 'object' && item !== null
+}
+
 onMounted(() => {
   if (!emblaApi.value) {
     return
@@ -288,7 +298,7 @@ defineExpose({
           :key="index"
           role="group"
           aria-roledescription="slide"
-          :class="ui.item({ class: props.ui?.item })"
+          :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >
           <slot :item="item" :index="index" />
         </div>

@@ -21,18 +21,18 @@ Use the `items` prop as an array of objects with the following properties:
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `badge?: string | number | BadgeProps`{lang="ts-type"}
-- `tooltip?: TooltipProps`{lang="ts-type"} :badge{label="Soon"}
+- `tooltip?: TooltipProps`{lang="ts-type"}
 - `trailingIcon?: string`{lang="ts-type"}
 - `type?: 'label' | 'link'`{lang="ts-type"}
-- `collapsible?: boolean`{lang="ts-type"} :badge{label="Soon"}
 - `defaultOpen?: boolean`{lang="ts-type"}
 - `open?: boolean`{lang="ts-type"}
 - `value?: string`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
-- `class?: any`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `onSelect?(e: Event): void`{lang="ts-type"}
 - `children?: NavigationMenuChildItem[]`{lang="ts-type"}
+- `class?: any`{lang="ts-type"}
+- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -134,8 +134,8 @@ Each item can take a `children` array of objects with the following properties t
 - `label: string`
 - `description?: string`
 - `icon?: string`
-- `class?: any`
 - `onSelect?(e: Event): void`
+- `class?: any`
 
 ::
 
@@ -282,7 +282,6 @@ props:
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       - label: Composables
         icon: i-lucide-database
-        collapsible: false
         open: false
         children:
           - label: defineShortcuts
@@ -299,7 +298,6 @@ props:
             to: /composables/use-toast
       - label: Components
         icon: i-lucide-box
-        collapsible: false
         open: false
         to: /components
         active: true
@@ -337,10 +335,6 @@ props:
         icon: i-lucide-circle-help
         disabled: true
 ---
-::
-
-::tip
-You can set the `collapsible: false` property on items with children to prevent them from being collapsible. This allows the item to act as a regular link while still displaying its children in a submenu.
 ::
 
 ### Highlight
@@ -884,7 +878,7 @@ You can inspect the DOM to see each item's content being rendered.
 
 ## Examples
 
-### With tooltips in items :badge{label="Soon" class="align-text-top"}
+### With tooltips in items :badge{label="New" class="align-text-top"}
 
 You can use the `tooltip` property to display a [Tooltip](/components/tooltip) around an item. This can be useful when the menu is collapsed.
 
@@ -939,7 +933,6 @@ props:
         icon: i-lucide-database
         tooltip:
           text: 'Composables'
-        collapsible: false
         open: false
         children:
           - label: defineShortcuts
@@ -960,7 +953,6 @@ props:
           text: 'Components'
         to: /components
         active: true
-        collapsible: false
         open: false
         children:
           - label: Link

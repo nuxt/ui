@@ -24,6 +24,8 @@ interface SelectItemBase {
   value?: AcceptableValue | boolean
   disabled?: boolean
   onSelect?(e?: Event): void
+  class?: any
+  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
 export type SelectItem = SelectItemBase | AcceptableValue | boolean
@@ -271,44 +273,44 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
         <SelectViewport :class="ui.viewport({ class: props.ui?.viewport })">
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: props.ui?.label })">
+              <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
                 {{ get(item, props.labelKey as string) }}
               </SelectLabel>
 
-              <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: props.ui?.separator })" />
+              <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
               <SelectItem
                 v-else
-                :class="ui.item({ class: props.ui?.item })"
+                :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
                 :value="isSelectItem(item) ? get(item, props.valueKey as string) : item"
                 @select="isSelectItem(item) && item.onSelect?.($event)"
               >
                 <slot name="item" :item="(item as NestedItem<T>)" :index="index">
                   <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">
-                    <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: props.ui?.itemLeadingIcon })" />
-                    <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+                    <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
+                    <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
                     <UChip
                       v-else-if="isSelectItem(item) && item.chip"
-                      :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+                      :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
-                      :class="ui.itemLeadingChip({ class: props.ui?.itemLeadingChip })"
+                      :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
                     />
                   </slot>
 
-                  <SelectItemText :class="ui.itemLabel({ class: props.ui?.itemLabel })">
+                  <SelectItemText :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
                     <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
                       {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
                     </slot>
                   </SelectItemText>
 
-                  <span :class="ui.itemTrailing({ class: props.ui?.itemTrailing })">
+                  <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
                     <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" />
 
                     <SelectItemIndicator as-child>
-                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: props.ui?.itemTrailingIcon })" />
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
                     </SelectItemIndicator>
                   </span>
                 </slot>

@@ -101,7 +101,7 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="variant === 'list' ? as : Label" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="(!variant || variant === 'list') ? as : Label" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
@@ -122,7 +122,7 @@ function onUpdate(value: any) {
     </div>
 
     <div v-if="(label || !!slots.label) || (description || !!slots.description)" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <component :is="variant === 'list' ? Label : 'p'" v-if="label || !!slots.label" :for="id" :class="ui.label({ class: props.ui?.label })">
+      <component :is="(!variant || variant === 'list') ? Label : 'p'" v-if="label || !!slots.label" :for="id" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="label">
           {{ label }}
         </slot>
