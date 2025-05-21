@@ -206,7 +206,7 @@ defineExpose({ fileInputRef })
       :class="ui.base({
         class: [
           props.ui?.base,
-          dragging && ui.dragging({ class: props.ui?.dragging }),
+          dragging && !disabled && ui.dragging({ class: props.ui?.dragging }),
           !file?.length && 'cursor-pointer',
           disabled && 'cursor-not-allowed'
         ]
