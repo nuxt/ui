@@ -351,8 +351,6 @@ defineExpose({
   tableRef,
   tableApi
 })
-
-console.log(tableApi.getFooterGroups())
 </script>
 
 <template>
