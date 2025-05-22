@@ -70,6 +70,8 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 

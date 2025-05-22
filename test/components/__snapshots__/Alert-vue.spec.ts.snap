@@ -59,7 +59,7 @@ exports[`Alert > renders with close correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="flex flex-wrap gap-1.5 shrink-0 items-center">
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -88,7 +88,7 @@ exports[`Alert > renders with closeIcon correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="flex flex-wrap gap-1.5 shrink-0 items-center">
-    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+    <!--v-if--><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -121,7 +121,7 @@ exports[`Alert > renders with description slot correctly 1`] = `
 `;
 
 exports[`Alert > renders with icon correctly 1`] = `
-"<div data-orientation="vertical" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+"<div data-orientation="vertical" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
   <div class="min-w-0 flex-1 flex flex-col">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->
@@ -192,7 +192,7 @@ exports[`Alert > renders with neutral variant subtle correctly 1`] = `
 `;
 
 exports[`Alert > renders with orientation horizontal correctly 1`] = `
-"<div data-orientation="horizontal" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+"<div data-orientation="horizontal" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-center bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
   <div class="min-w-0 flex-1 flex flex-col">
     <div class="text-sm font-medium">Alert</div>
     <div class="text-sm opacity-90 mt-1">This is a description</div>
@@ -208,7 +208,7 @@ exports[`Alert > renders with orientation horizontal correctly 1`] = `
 `;
 
 exports[`Alert > renders with orientation vertical correctly 1`] = `
-"<div data-orientation="vertical" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+"<div data-orientation="vertical" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start bg-primary text-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
   <div class="min-w-0 flex-1 flex flex-col">
     <div class="text-sm font-medium">Alert</div>
     <div class="text-sm opacity-90 mt-1">This is a description</div>
