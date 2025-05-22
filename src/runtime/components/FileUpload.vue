@@ -57,7 +57,7 @@ export interface FileUploadEmits<T extends FileUploadItem = FileUploadItem> {
 export interface FileUploadSlots {
   default?(props: {}): any
   empty?(props: {}): any
-  file?(props: { file: File }): any
+  item?(props: { item: FileUploadItem }): any
 }
 </script>
 
@@ -269,27 +269,27 @@ defineExpose({ fileInputRef })
           v-else
           :class="ui.files({ class: props.ui?.files })"
         >
-          <li v-for="(f, i) in files" :key="i" :class="ui.file({ class: props.ui?.file })">
-            <slot name="file" v-bind="{ file: (f as FileUploadItem).file }">
+          <li v-for="(fileItem, i) in files" :key="i" :class="ui.file({ class: props.ui?.file })">
+            <slot name="item" v-bind="{ item: fileItem as FileUploadItem }">
               <div class="flex items-center gap-3">
                 <UAvatar
-                  :src="(f as FileUploadItem).file.type.includes('image') ? filePreviews[fileKey((f as FileUploadItem).file)] : undefined"
-                  :icon="(f as FileUploadItem).file.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
-                  :alt="(f as FileUploadItem).file.name"
+                  :src="fileItem.file.type.includes('image') ? filePreviews[fileKey(fileItem.file)] : undefined"
+                  :icon="fileItem.file.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
+                  :alt="fileItem.file.name"
                   :size="(ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size']"
                   :class="ui.fileAvatar({ class: props.ui?.fileAvatar })"
                 />
                 <div>
                   <p :class="ui.fileLabel({ class: props.ui?.fileLabel })">
-                    {{ (f as FileUploadItem).file.name }}
+                    {{ fileItem.file.name }}
                   </p>
                   <p :class="ui.fileSize({ class: props.ui?.fileSize })">
-                    {{ ((f as FileUploadItem).file.size / 1024 / 1024).toFixed(2) }} MB
+                    {{ (fileItem.file.size / 1024 / 1024).toFixed(2) }} MB
                   </p>
                 </div>
               </div>
               <div class="flex items-start">
-                <UIcon id="remove-file" :name="appConfig.ui.icons.close" @click.stop="removeFile(f as T)" />
+                <UIcon id="remove-file" :name="appConfig.ui.icons.close" @click.stop="removeFile(fileItem as T)" />
               </div>
             </slot>
           </li>
