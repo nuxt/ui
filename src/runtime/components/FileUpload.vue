@@ -6,6 +6,10 @@ import type { AvatarProps } from '../types'
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
 
+export type FileUploadItem<Meta = Record<string, any>> = {
+  file: File
+} & Meta
+
 export interface FileUploadProps {
   as?: any
   id?: string
@@ -43,8 +47,8 @@ export interface FileUploadProps {
   ui?: FileUpload['slots']
 }
 
-export interface FileUploadEmits {
-  (e: 'update:modelValue', value: File[]): void
+export interface FileUploadEmits<T extends FileUploadItem = FileUploadItem> {
+  (e: 'update:modelValue', value: T[]): void
   (e: 'blur', event: FocusEvent): void
   (e: 'change', event: Event): void
   (e: 'onDrop' | 'onDragOver' | 'onDragLeave', event: DragEvent): void
@@ -57,7 +61,7 @@ export interface FileUploadSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends FileUploadItem">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
@@ -77,7 +81,7 @@ const props = withDefaults(defineProps<FileUploadProps>(), {
   multiple: false
 })
 
-const emits = defineEmits<FileUploadEmits>()
+const emits = defineEmits<FileUploadEmits<T>>()
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 
 const {
@@ -93,7 +97,7 @@ const {
 
 const size = computed(() => props.size)
 const fileInputRef = ref<HTMLInputElement | null>(null)
-const file = defineModel<File[]>()
+const files = defineModel<T[]>()
 const dragging = ref(false)
 const filePreviews = ref<Record<string, string>>({})
 
@@ -131,33 +135,36 @@ function revokeAllPreviews() {
 }
 
 watch(
-  file,
+  files,
   (newFiles) => {
     if (newFiles?.length) {
-      newFiles.forEach(f => addPreview(f))
+      newFiles.forEach(f => addPreview((f as FileUploadItem).file))
     }
   },
   { deep: true }
 )
 
 onMounted(() => {
-  if (file.value?.length) {
-    file.value?.forEach(f => addPreview(f))
+  if (files.value?.length) {
+    files.value?.forEach(f => addPreview((f as FileUploadItem).file))
   }
 })
 
 onUnmounted(revokeAllPreviews)
 
-function handleUpload(files: FileList) {
-  const filesArray = Array.from(files)
-  const newFiles = props.multiple ? [...(file.value ?? []), ...filesArray] : filesArray
-  file.value = newFiles
+function handleUpload(filelist: FileList) {
+  const filesArray = Array.from(filelist)
+  // If T is not just FileUploadItem, you may want to map files to T here
+  const newFiles = props.multiple
+    ? [...(files.value ?? []), ...filesArray.map(f => ({ file: f } as T))]
+    : filesArray.map(f => ({ file: f } as T))
+  files.value = newFiles
   emitFormInput()
 }
 
-function removeFile(f: File) {
-  file.value = file.value?.filter(existing => existing !== f)
-  removePreview(f)
+function removeFile(f: T) {
+  files.value = files.value?.filter(existing => existing !== f)
+  removePreview(f.file)
   emitFormInput()
   emits('change', new Event('change'))
   // Reset input so the same file can be re-added
@@ -200,6 +207,8 @@ function onDragLeave(event: DragEvent) {
   emits('onDragLeave', event)
 }
 
+const isEmpty = computed(() => !files.value || files.value?.length === 0)
+
 defineExpose({ fileInputRef })
 </script>
 
@@ -210,15 +219,14 @@ defineExpose({ fileInputRef })
         class: [
           props.ui?.base,
           dragging && !disabled && ui.dragging({ class: props.ui?.dragging }),
-          !file?.length && 'cursor-pointer',
+          !files?.length && 'cursor-pointer',
           disabled && 'cursor-not-allowed'
         ]
-      })
-      "
+      })"
       tabindex="0"
       @drop="onDrop"
       @dragover="onDragOver"
-      @click="!disabled && fileInputRef?.click()"
+      @click="!disabled && isEmpty && fileInputRef?.click()"
     >
       <!-- Absolute div to avoid to firing dragleave event because of nested elements -->
       <div :class="ui.base({ class: ['absolute inset-0 bg-transparent z-[-1]', props.ui?.base] })" @dragleave="onDragLeave" />
@@ -240,7 +248,7 @@ defineExpose({ fileInputRef })
         >
         <!-- Empty state -->
         <div
-          v-if="!file || file?.length === 0"
+          v-if="isEmpty"
           :class="ui.empty({ class: props.ui?.empty })"
         >
           <slot name="empty">
@@ -261,27 +269,27 @@ defineExpose({ fileInputRef })
           v-else
           :class="ui.files({ class: props.ui?.files })"
         >
-          <li v-for="(f, i) in file" :key="i" :class="ui.file({ class: props.ui?.file })">
-            <slot name="file" v-bind="{ file: f }">
+          <li v-for="(f, i) in files" :key="i" :class="ui.file({ class: props.ui?.file })">
+            <slot name="file" v-bind="{ file: (f as FileUploadItem).file }">
               <div class="flex items-center gap-3">
                 <UAvatar
-                  :src="f.type.includes('image') ? filePreviews[fileKey(f)] : undefined"
-                  :icon="f.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
-                  :alt="f.name"
+                  :src="(f as FileUploadItem).file.type.includes('image') ? filePreviews[fileKey((f as FileUploadItem).file)] : undefined"
+                  :icon="(f as FileUploadItem).file.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
+                  :alt="(f as FileUploadItem).file.name"
                   :size="(ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size']"
                   :class="ui.fileAvatar({ class: props.ui?.fileAvatar })"
                 />
                 <div>
                   <p :class="ui.fileLabel({ class: props.ui?.fileLabel })">
-                    {{ f.name }}
+                    {{ (f as FileUploadItem).file.name }}
                   </p>
                   <p :class="ui.fileSize({ class: props.ui?.fileSize })">
-                    {{ (f.size / 1024 / 1024).toFixed(2) }} MB
+                    {{ ((f as FileUploadItem).file.size / 1024 / 1024).toFixed(2) }} MB
                   </p>
                 </div>
               </div>
               <div class="flex items-start">
-                <UIcon id="remove-file" :name="appConfig.ui.icons.close" @click.stop="removeFile(f)" />
+                <UIcon id="remove-file" :name="appConfig.ui.icons.close" @click.stop="removeFile(f as T)" />
               </div>
             </slot>
           </li>
