@@ -202,9 +202,9 @@ name: 'popover-command-palette-example'
 ---
 ::
 
-### With custom anchor
+### With anchor slot
 
-You can use the `#anchor` slot to change the anchor of the Popover.
+You can use the `#anchor` slot to position the Popover against a custom element.
 
 ::warning
 This slot only works when `mode` is `click`.
@@ -213,7 +213,7 @@ This slot only works when `mode` is `click`.
 ::component-example
 ---
 collapse: true
-name: 'popover-custom-anchor-example'
+name: 'popover-anchor-slot-example'
 ---
 ::
 
