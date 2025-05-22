@@ -240,16 +240,32 @@ describe('FileUpload', () => {
       expect(wrapper.html()).toContain('Custom Empty')
     })
 
-    test('renders custom file slot', async () => {
+    test('renders custom item slot', async () => {
       const file = new File(['foo'], 'foo.png', { type: 'image/png', lastModified: 1 })
       const wrapper = mount(FileUpload<FileUploadItem>, {
         props: { modelValue: [{ file }] },
         slots: {
-          file: '<div class="custom-file">{{file.name}}</div>'
+          item: '<div class="custom-item">{{item.file.name}}</div>'
         }
       })
-      expect(wrapper.html()).toContain('custom-file')
+      expect(wrapper.html()).toContain('custom-item')
       expect(wrapper.html()).toContain('foo.png')
+    })
+
+    test('renders custom item slots with correct type', async () => {
+      const file = new File(['foo'], 'foo.png', { type: 'image/png', lastModified: 1 })
+      type UploadWithStatus = FileUploadItem<{ status: 'pending' | 'uploading' | 'done', progress?: number }>
+      const wrapper = mount(FileUpload<UploadWithStatus>, {
+        props: {
+          modelValue: [{ file, status: 'pending' }]
+        },
+        slots: {
+          item: '<div class="custom-item">{{item.file.name}} - {{item.status}}</div>'
+        }
+
+      })
+      expect(wrapper.html()).toContain('custom-item')
+      expect(wrapper.html()).toContain('foo.png - pending')
     })
   })
 })
