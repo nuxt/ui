@@ -522,7 +522,7 @@ external:
 props:
   modelValue: 'Backlog'
   loading: true
-  loadingIcon: 'i-lucide-refresh-cw'
+  loadingIcon: 'i-lucide-loader'
   items:
     - Backlog
     - Todo
