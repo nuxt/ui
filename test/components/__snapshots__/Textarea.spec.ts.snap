@@ -108,7 +108,7 @@ exports[`Textarea > renders with loading trailing correctly 1`] = `
 `;
 
 exports[`Textarea > renders with loadingIcon correctly 1`] = `
-"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><span class="iconify i-lucide:sparkles shrink-0 text-dimmed size-5 animate-spin" aria-hidden="true"></span></span>
+"<div class="relative inline-flex items-center"><textarea rows="3" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary ps-9"></textarea><span class="absolute start-0 flex items-start ps-2.5 inset-y-1.5"><span class="iconify i-lucide:loader shrink-0 text-dimmed size-5 animate-spin" aria-hidden="true"></span></span>
   <!--v-if-->
 </div>"
 `;
