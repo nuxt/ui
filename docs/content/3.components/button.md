@@ -264,7 +264,7 @@ Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide
 ---
 props:
   loading: true
-  loadingIcon: 'i-lucide-loader-circle'
+  loadingIcon: 'i-lucide-refresh-cw'
 slots:
   default: Button
 ---

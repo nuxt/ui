@@ -180,7 +180,7 @@ ignore:
   - placeholder
 props:
   loading: true
-  loadingIcon: 'i-lucide-loader-circle'
+  loadingIcon: 'i-lucide-refresh-cw'
   placeholder: 'Search...'
 ---
 ::

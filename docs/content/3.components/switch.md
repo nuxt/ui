@@ -118,7 +118,7 @@ ignore:
   - defaultValue
 props:
   loading: true
-  loadingIcon: 'i-lucide-loader-circle'
+  loadingIcon: 'i-lucide-refresh-cw'
   defaultValue: true
   label: Check me
 ---

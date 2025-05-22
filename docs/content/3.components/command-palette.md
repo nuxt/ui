@@ -295,7 +295,7 @@ class: '!p-0'
 props:
   autofocus: false
   loading: true
-  loadingIcon: 'i-lucide-loader-circle'
+  loadingIcon: 'i-lucide-refresh-cw'
   groups:
     - id: 'apps'
       items:
