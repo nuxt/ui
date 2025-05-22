@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
 import theme from '#build/ui/navigation-menu'
 
 const colors = Object.keys(theme.variants.color)
@@ -13,6 +14,9 @@ const orientation = ref('horizontal' as const)
 const contentOrientation = ref('horizontal' as const)
 const highlight = ref(true)
 const collapsed = ref(false)
+const tooltip = ref(false)
+const popover = ref(false)
+const arrow = ref(false)
 
 const items = [
   [{
@@ -42,7 +46,8 @@ const items = [
   }, {
     label: 'Components',
     icon: 'i-lucide-box',
-    to: '/components',
+    to: '/components/navigation-menu',
+    type: 'trigger',
     active: true,
     defaultOpen: true,
     children: [{
@@ -87,7 +92,7 @@ const items = [
     icon: 'i-lucide-circle-help',
     disabled: true
   }]
-]
+] satisfies NavigationMenuItem[][]
 </script>
 
 <template>
@@ -100,10 +105,15 @@ const items = [
       <USwitch v-model="collapsed" label="Collapsed" />
       <USwitch v-model="highlight" label="Highlight" />
       <USelect v-model="highlightColor" :items="colors" placeholder="Highlight color" />
+      <USwitch v-model="tooltip" label="Tooltip" />
+      <USwitch v-model="popover" label="Popover" />
+      <USwitch v-model="arrow" label="Arrow" />
     </div>
 
     <UNavigationMenu
-      arrow
+      :arrow="arrow"
+      :tooltip="tooltip"
+      :popover="popover"
       :collapsed="collapsed"
       :items="items"
       :color="color"

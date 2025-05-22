@@ -20,7 +20,7 @@ describe('Switch', () => {
     ['with checkedIcon', { props: { checkedIcon: 'i-lucide-check', defaultValue: true } }],
     ['with uncheckedIcon', { props: { uncheckedIcon: 'i-lucide-x' } }],
     ['with loading', { props: { loading: true } }],
-    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-sparkles' } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with label', { props: { label: 'Label' } }],
     ['with required', { props: { label: 'Label', required: true } }],
     ['with description', { props: { label: 'Label', description: 'Description' } }],

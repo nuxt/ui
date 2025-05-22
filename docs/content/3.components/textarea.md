@@ -194,7 +194,7 @@ props:
 
 ### Loading Icon :badge{label="New" class="align-text-top"}
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
 ::component-code
 ---
@@ -202,7 +202,7 @@ ignore:
   - placeholder
 props:
   loading: true
-  loadingIcon: 'i-lucide-repeat-2'
+  loadingIcon: 'i-lucide-loader'
   placeholder: 'Search...'
   rows: 1
 ---
