@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Кошуу',
       decrement: 'Азайтуу'
     },
+    fileUpload: {
+      empty: 'Файлды тандаңыз же бул жерге таштаңыз'
+    },
     commandPalette: {
       placeholder: 'Буйрук киргизиңиз же издөө…',
       noMatch: 'Эч нерсе табылган жок',
