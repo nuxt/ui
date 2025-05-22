@@ -1,6 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
-import FileUpload, { type FileUploadProps, type FileUploadSlots } from '../../src/runtime/components/FileUpload.vue'
+import FileUpload, { type FileUploadProps, type FileUploadSlots, type FileUploadItem } from '../../src/runtime/components/FileUpload.vue'
 import theme from '#build/ui/file-upload'
 
 import { renderForm } from '../utils/form'
@@ -35,7 +35,7 @@ describe('FileUpload', () => {
     ['with placeholder', { props: { placeholder: 'Placeholder' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }])
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FileUploadProps, slots?: Partial<FileUploadSlots> }) => {
-    const wrapper = mount(FileUpload, {
+    const wrapper = mount(FileUpload<FileUploadItem>, {
       ...options
     })
     expect(wrapper.html()).toMatchSnapshot()
@@ -43,7 +43,7 @@ describe('FileUpload', () => {
 
   describe('emits', () => {
     test('update:modelValue event', async () => {
-      const wrapper = mount(FileUpload, {
+      const wrapper = mount(FileUpload<FileUploadItem>, {
         props: {
           modelValue: []
         }
@@ -55,7 +55,7 @@ describe('FileUpload', () => {
       expect(wrapper.emitted('update:modelValue')).toBeTruthy()
     })
     test('change event', async () => {
-      const wrapper = mount(FileUpload, {
+      const wrapper = mount(FileUpload<FileUploadItem>, {
         props: {
           modelValue: []
         }
@@ -67,7 +67,7 @@ describe('FileUpload', () => {
       expect(wrapper.emitted('change')).toBeTruthy()
     })
     test('dragover event', async () => {
-      const wrapper = mount(FileUpload, {
+      const wrapper = mount(FileUpload<FileUploadItem>, {
         props: {
           modelValue: []
         }
@@ -78,7 +78,7 @@ describe('FileUpload', () => {
     }
     )
     test('dragleave event', async () => {
-      const wrapper = mount(FileUpload, {
+      const wrapper = mount(FileUpload<FileUploadItem>, {
         props: {
           modelValue: []
         }
@@ -89,7 +89,7 @@ describe('FileUpload', () => {
     }
     )
     test('drop event', async () => {
-      const wrapper = mount(FileUpload, {
+      const wrapper = mount(FileUpload<FileUploadItem>, {
         props: {
           modelValue: []
         }
@@ -108,9 +108,9 @@ describe('FileUpload', () => {
           validateOn,
           validateOnInputDelay: 0,
           async validate(state: any) {
-            // state.value is expected to be an array of File(s)
-            const files: File[] = Array.isArray(state.value) ? state.value : []
-            if (!files.length || files.some(f => f.name !== 'valid')) {
+            // state.value is expected to be an array of FileUploadItem(s)
+            const files: FileUploadItem[] = Array.isArray(state.value) ? state.value : []
+            if (!files.length || files.some(f => f.file.name !== 'valid')) {
               return [{ name: 'value', message: 'Error message' }]
             }
             return []
@@ -182,8 +182,8 @@ describe('FileUpload', () => {
   describe('FileUpload advanced behaviors', () => {
     test('shows image preview and removes it when file is removed', async () => {
       const file = new File(['dummy'], 'test.png', { type: 'image/png', lastModified: 1 })
-      const wrapper = mount(FileUpload, {
-        props: { modelValue: [file] }
+      const wrapper = mount(FileUpload<FileUploadItem>, {
+        props: { modelValue: [{ file }] }
       })
       await wrapper.vm.$nextTick()
 
@@ -199,7 +199,7 @@ describe('FileUpload', () => {
     })
 
     test('does not allow interaction when disabled', async () => {
-      const wrapper = mount(FileUpload, {
+      const wrapper = mount(FileUpload<FileUploadItem>, {
         props: { disabled: true }
       })
       const input = wrapper.find('input[type="file"]')
@@ -211,7 +211,7 @@ describe('FileUpload', () => {
     test('handles multiple file uploads', async () => {
       const file1 = new File(['foo'], 'foo.png', { type: 'image/png', lastModified: 1 })
       const file2 = new File(['bar'], 'bar.jpg', { type: 'image/jpeg', lastModified: 2 })
-      const wrapper = mount(FileUpload, {
+      const wrapper = mount(FileUpload<FileUploadItem>, {
         props: { multiple: true, modelValue: [] }
       })
       const input = wrapper.find('input[type="file"]')
@@ -223,7 +223,7 @@ describe('FileUpload', () => {
 
     test('accept prop restricts file types', async () => {
       const file = new File(['foo'], 'foo.txt', { type: 'text/plain' })
-      const wrapper = mount(FileUpload, {
+      const wrapper = mount(FileUpload<FileUploadItem>, {
         props: { accept: 'image/*', modelValue: [] }
       })
       const input = wrapper.find('input[type="file"]')
@@ -232,7 +232,7 @@ describe('FileUpload', () => {
     })
 
     test('renders custom empty slot', () => {
-      const wrapper = mount(FileUpload, {
+      const wrapper = mount(FileUpload<FileUploadItem>, {
         slots: {
           empty: '<div class="custom-empty">Custom Empty</div>'
         }
@@ -242,8 +242,8 @@ describe('FileUpload', () => {
 
     test('renders custom file slot', async () => {
       const file = new File(['foo'], 'foo.png', { type: 'image/png', lastModified: 1 })
-      const wrapper = mount(FileUpload, {
-        props: { modelValue: [file] },
+      const wrapper = mount(FileUpload<FileUploadItem>, {
+        props: { modelValue: [{ file }] },
         slots: {
           file: '<div class="custom-file">{{file.name}}</div>'
         }
