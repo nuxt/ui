@@ -607,7 +607,7 @@ props:
 ---
 ::
 
-### With icons in items
+### With icon in items
 
 You can use the `icon` property to display an [Icon](/components/icon) inside the items.
 
