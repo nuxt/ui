@@ -22,7 +22,7 @@ export default (options: Required<ModuleOptions>) => ({
     childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-5 shrink-0',
-    childLinkLabel: 'truncate font-medium',
+    childLinkLabel: 'truncate',
     childLinkLabelExternalIcon: 'inline-block size-3 align-top text-dimmed',
     childLinkDescription: 'text-muted',
     separator: 'px-2 h-px bg-border',
@@ -59,6 +59,7 @@ export default (options: Required<ModuleOptions>) => ({
         link: 'px-2.5 py-1.5 before:inset-x-px before:inset-y-0',
         childList: 'grid p-2',
         childLink: 'px-3 py-2 gap-2 before:inset-x-px before:inset-y-0',
+        childLinkLabel: 'font-medium',
         content: 'absolute top-0 left-0 w-full'
       },
       vertical: {

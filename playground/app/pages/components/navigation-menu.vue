@@ -47,6 +47,7 @@ const items = [
     label: 'Components',
     icon: 'i-lucide-box',
     to: '/components/navigation-menu',
+    type: 'trigger',
     active: true,
     defaultOpen: true,
     children: [{

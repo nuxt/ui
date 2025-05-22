@@ -42,10 +42,11 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   trailingIcon?: string
   /**
    * The type of the item.
-   * The `label` type only works on `vertical` orientation.
+   * The `label` type is only displayed in `vertical` orientation.
+   * The `trigger` type is used to force the item to be collapsible when its a link in `vertical` orientation.
    * @defaultValue 'link'
    */
-  type?: 'label' | 'link'
+  type?: 'label' | 'trigger' | 'link'
   slot?: string
   /**
    * The value of the item. Avoid using `index` as the value to prevent conflicts in horizontal orientation with Reka UI.
@@ -300,21 +301,21 @@ function getAccordionDefaultValue(list: NavigationMenuItem[]) {
       <div v-if="orientation === 'vertical' && item.type === 'label' && !collapsed" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
         <ReuseLinkTemplate :item="item" :index="index" />
       </div>
-      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
+      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(orientation === 'vertical' && item.children?.length && !collapsed && item.type === 'trigger') ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
         <component
           :is="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? NavigationMenuTrigger : ((orientation === 'vertical' && item.children?.length && !collapsed && !(slotProps as any).href) ? AccordionTrigger : NavigationMenuLink)"
           as-child
-          :active="active"
+          :active="active || item.active"
           :disabled="item.disabled"
           @select="item.onSelect"
         >
           <UPopover v-if="orientation === 'vertical' && collapsed && item.children?.length && (!!props.popover || !!item.popover)" v-bind="{ ...popoverProps, ...(typeof item.popover === 'boolean' ? {} : item.popover || {}) }" :ui="{ content: ui.content({ class: [props.ui?.content, item.ui?.content] }) }">
-            <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active, disabled: !!item.disabled, level: level > 0 })">
-              <ReuseLinkTemplate :item="item" :active="active" :index="index" />
+            <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
+              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>
 
             <template #content>
-              <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
+              <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active || item.active" :index="index">
                 <ul :class="ui.childList({ class: [props.ui?.childList, item.ui?.childList] })">
                   <li :class="ui.childLabel({ class: [props.ui?.childLabel, item.ui?.childLabel] })">
                     {{ get(item, props.labelKey as string) }}
@@ -339,17 +340,17 @@ function getAccordionDefaultValue(list: NavigationMenuItem[]) {
             </template>
           </UPopover>
           <UTooltip v-else-if="orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
-            <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active, disabled: !!item.disabled, level: level > 0 })">
-              <ReuseLinkTemplate :item="item" :active="active" :index="index" />
+            <ULinkBase v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
+              <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>
           </UTooltip>
-          <ULinkBase v-else v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
-            <ReuseLinkTemplate :item="item" :active="active" :index="index" />
+          <ULinkBase v-else v-bind="slotProps" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })">
+            <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
           </ULinkBase>
         </component>
 
         <NavigationMenuContent v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])" v-bind="contentProps" :class="ui.content({ class: [props.ui?.content, item.ui?.content] })">
-          <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
+          <slot :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)" :item="item" :active="active || item.active" :index="index">
             <ul :class="ui.childList({ class: [props.ui?.childList, item.ui?.childList] })">
               <li v-for="(childItem, childIndex) in item.children" :key="childIndex" :class="ui.childItem({ class: [props.ui?.childItem, item.ui?.childItem] })">
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
