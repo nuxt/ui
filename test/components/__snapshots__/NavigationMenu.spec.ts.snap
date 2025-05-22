@@ -909,47 +909,44 @@ exports[`NavigationMenu > renders with neutral variant pill highlight neutral co
 
 exports[`NavigationMenu > renders with orientation vertical and collapsed correctly 1`] = `
 "<nav aria-label="Main" data-orientation="vertical" dir="ltr" data-reka-navigation-menu="" data-collapsed="true" class="relative flex gap-1.5 [&amp;>div]:min-w-0 flex-col">
-  <ul class="isolate min-w-0">
-    <li data-menu-item="" class="min-w-0">
-      <div class="w-full flex items-center gap-1.5 font-semibold text-xs/5 text-highlighted px-2.5 py-1.5">
+  <div style="position: relative;">
+    <ul class="isolate min-w-0" data-orientation="vertical">
+      <li data-menu-item="" class="min-w-0"></li>
+      <li data-menu-item="" class="min-w-0"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted px-1.5 hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:book-open shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button>
         <!--v-if-->
         <!--v-if-->
-        <!--v-if-->
-      </div>
-      <!--v-if-->
-    </li>
-    <li data-state="closed" data-orientation="vertical" class="min-w-0"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors px-1.5" aria-controls="" aria-expanded="false" data-state="closed" id="reka-accordion-trigger-v-0-0-1" data-reka-collection-item="" data-orientation="vertical"><span class="iconify i-lucide:book-open shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-        <!--v-if-->
-        <!--v-if-->
-      </button>
-      <!--v-if-->
-      <!--v-if-->
-    </li>
-    <li data-state="closed" data-orientation="vertical" class="min-w-0"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-primary before:bg-elevated px-1.5" aria-controls="" aria-expanded="false" data-state="closed" id="reka-accordion-trigger-v-0-0-2" data-reka-collection-item="" data-orientation="vertical"><span class="iconify i-lucide:box shrink-0 size-5 text-primary group-data-[state=open]:text-primary" aria-hidden="true"></span>
+      </li>
+      <li data-menu-item="" class="min-w-0"><button type="button" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 px-1.5 text-primary before:bg-elevated" data-active="" aria-current="page" data-reka-collection-item=""><span class="iconify i-lucide:box shrink-0 size-5 text-primary group-data-[state=open]:text-primary" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button>
         <!--v-if-->
         <!--v-if-->
-      </button>
-      <!--v-if-->
-      <!--v-if-->
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
   <div class="px-2 h-px bg-border"></div>
-  <ul class="isolate min-w-0">
-    <li data-menu-item="" class="min-w-0"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors px-1.5" data-reka-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+  <div style="position: relative;">
+    <ul class="isolate min-w-0" data-orientation="vertical">
+      <li data-menu-item="" class="min-w-0"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted px-1.5 hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </a>
         <!--v-if-->
         <!--v-if-->
-      </a>
-      <!--v-if-->
-      <!--v-if-->
-    </li>
-    <li data-menu-item="" class="min-w-0"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted cursor-not-allowed opacity-75 px-1.5" data-reka-collection-item=""><span class="iconify i-lucide:circle-help shrink-0 size-5 text-dimmed" aria-hidden="true"></span>
+      </li>
+      <li data-menu-item="" class="min-w-0"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row py-1.5 before:inset-y-px before:inset-x-0 text-muted cursor-not-allowed opacity-75 px-1.5" data-reka-collection-item=""><span class="iconify i-lucide:circle-help shrink-0 size-5 text-dimmed" aria-hidden="true"></span>
+          <!--v-if-->
+          <!--v-if-->
+        </button>
         <!--v-if-->
         <!--v-if-->
-      </button>
-      <!--v-if-->
-      <!--v-if-->
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
   <!--v-if-->
   <!--v-if-->
 </nav>"
@@ -958,7 +955,7 @@ exports[`NavigationMenu > renders with orientation vertical and collapsed correc
 exports[`NavigationMenu > renders with orientation vertical correctly 1`] = `
 "<nav aria-label="Main" data-orientation="vertical" dir="ltr" data-reka-navigation-menu="" data-collapsed="false" class="relative flex gap-1.5 [&amp;>div]:min-w-0 flex-col">
   <ul class="isolate min-w-0">
-    <li data-menu-item="" class="min-w-0">
+    <li data-state="closed" data-orientation="vertical" class="min-w-0">
       <div class="w-full flex items-center gap-1.5 font-semibold text-xs/5 text-highlighted px-2.5 py-1.5">
         <!--v-if--><span class="truncate">Links<!--v-if--></span>
         <!--v-if-->
@@ -982,13 +979,13 @@ exports[`NavigationMenu > renders with orientation vertical correctly 1`] = `
   </ul>
   <div class="px-2 h-px bg-border"></div>
   <ul class="isolate min-w-0">
-    <li data-menu-item="" class="min-w-0"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-dimmed" aria-hidden="true"></span></span>
+    <li data-state="closed" data-orientation="vertical" class="min-w-0"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0 text-muted hover:text-highlighted hover:before:bg-elevated/50 transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-simple-icons:github shrink-0 size-5 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span><span class="truncate">GitHub<span class="iconify i-lucide:arrow-up-right inline-block size-3 align-top text-dimmed" aria-hidden="true"></span></span>
         <!--v-if-->
       </a>
       <!--v-if-->
       <!--v-if-->
     </li>
-    <li data-menu-item="" class="min-w-0"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0 text-muted cursor-not-allowed opacity-75" data-reka-collection-item=""><span class="iconify i-lucide:circle-help shrink-0 size-5 text-dimmed" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
+    <li data-state="closed" data-orientation="vertical" class="min-w-0"><button type="button" disabled="" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0 text-muted cursor-not-allowed opacity-75" data-reka-collection-item=""><span class="iconify i-lucide:circle-help shrink-0 size-5 text-dimmed" aria-hidden="true"></span><span class="truncate">Help<!--v-if--></span>
         <!--v-if-->
       </button>
       <!--v-if-->
@@ -1331,89 +1328,89 @@ exports[`NavigationMenu > renders with unmountOnHide correctly 1`] = `
     <!--v-if-->
     <div class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-[1]" data-state="closed" data-orientation="horizontal" style="pointer-events: none;" hidden="">
       <div data-dismissable-layer="" style="pointer-events: none;" id="reka-navigation-menu-v-0-0-0-content-item-1" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-item-1" data-state="closed" data-orientation="horizontal" class="absolute top-0 left-0 w-full data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]" hidden="">
-        <ul class="grid p-2 grid-cols-2 gap-2">
-          <li class=""><button type="button" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:house size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">Introduction
+        <ul class="isolate grid p-2 grid-cols-2 gap-2">
+          <li class=""><button type="button" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:house size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">Introduction
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Fully styled and customizable components for Nuxt.</p>
+                <p class="text-muted">Fully styled and customizable components for Nuxt.</p>
               </div>
             </button></li>
-          <li class=""><button type="button" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:cloud-download size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">Installation
+          <li class=""><button type="button" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:cloud-download size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">Installation
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Learn how to install and configure Nuxt UI in your application.</p>
+                <p class="text-muted">Learn how to install and configure Nuxt UI in your application.</p>
               </div>
             </button></li>
-          <li class=""><button type="button" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:swatch-book size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">Theming
+          <li class=""><button type="button" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:swatch-book size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">Theming
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Learn how to customize the look and feel of the components.</p>
+                <p class="text-muted">Learn how to customize the look and feel of the components.</p>
               </div>
             </button></li>
-          <li class=""><button type="button" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:monitor size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">Shortcuts
+          <li class=""><button type="button" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:monitor size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">Shortcuts
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Learn how to display and define keyboard shortcuts in your app.</p>
+                <p class="text-muted">Learn how to display and define keyboard shortcuts in your app.</p>
               </div>
             </button></li>
         </ul>
       </div>
       <div data-dismissable-layer="" style="pointer-events: none;" id="reka-navigation-menu-v-0-0-0-content-item-2" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-item-2" data-state="closed" data-orientation="horizontal" class="absolute top-0 left-0 w-full data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]" hidden="">
-        <ul class="grid p-2 grid-cols-2 gap-2">
-          <li class=""><a href="/components/link" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">Link
+        <ul class="isolate grid p-2 grid-cols-2 gap-2">
+          <li class=""><a href="/components/link" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">Link
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Use NuxtLink with superpowers.</p>
+                <p class="text-muted">Use NuxtLink with superpowers.</p>
               </div>
             </a></li>
-          <li class=""><a href="/components/modal" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">Modal
+          <li class=""><a href="/components/modal" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">Modal
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Display a modal within your application.</p>
+                <p class="text-muted">Display a modal within your application.</p>
               </div>
             </a></li>
-          <li class=""><a href="/components/navigation-menu" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">NavigationMenu
+          <li class=""><a href="/components/navigation-menu" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">NavigationMenu
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Display a list of links.</p>
+                <p class="text-muted">Display a list of links.</p>
               </div>
             </a></li>
-          <li class=""><a href="/components/pagination" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">Pagination
+          <li class=""><a href="/components/pagination" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">Pagination
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Display a list of pages.</p>
+                <p class="text-muted">Display a list of pages.</p>
               </div>
             </a></li>
-          <li class=""><a href="/components/popover" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">Popover
+          <li class=""><a href="/components/popover" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">Popover
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Display a non-modal dialog that floats around a trigger element.</p>
+                <p class="text-muted">Display a non-modal dialog that floats around a trigger element.</p>
               </div>
             </a></li>
-          <li class=""><a href="/components/progress" class="group size-full px-3 py-2 rounded-md flex items-start gap-2 text-start focus-visible:outline-primary hover:bg-elevated/50 text-default hover:text-highlighted transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
-              <div class="flex flex-col items-start">
-                <p class="font-semibold text-sm relative inline-flex">Progress
+          <li class=""><a href="/components/progress" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 focus-visible:before:ring-primary px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors" data-reka-collection-item=""><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <p class="truncate font-medium">Progress
                   <!--v-if-->
                 </p>
-                <p class="text-sm text-muted">Show a horizontal bar to indicate task progression.</p>
+                <p class="text-muted">Show a horizontal bar to indicate task progression.</p>
               </div>
             </a></li>
         </ul>

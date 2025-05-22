@@ -32,7 +32,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?(e: Event): void`{lang="ts-type"}
 - `children?: NavigationMenuChildItem[]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
+- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -144,7 +144,7 @@ Each item can take a `children` array of objects with the following properties t
 Use the `orientation` prop to change the orientation of the NavigationMenu.
 
 ::note
-When orientation is `vertical`, a [Collapsible](/components/collapsible) component is used to display children. You can control the open state of each item using the `open` and `defaultOpen` properties.
+When orientation is `vertical`, an [Accordion](/components/accordion) component is used to display each group. You can control the open state of each item using the `open` and `defaultOpen` properties and change the behavior using the [`collapsible`](/components/accordion#collapsible) and [`type`](/components/accordion#multiple) props.
 ::
 
 ::component-code
@@ -243,7 +243,11 @@ Groups will be spaced when orientation is `horizontal` and separated when orient
 
 ### Collapsed
 
-Use the `collapsed` prop to collapse the NavigationMenu, this can be useful in a sidebar for example.
+In `vertical` orientation, use the `collapsed` prop to collapse the NavigationMenu, this can be useful in a sidebar for example.
+
+::note
+You can use the [`tooltip`](#with-tooltip-in-items) and [`popover`](#with-popover-in-items) props to display more information on the collapsed items.
+::
 
 ::component-code
 ---
@@ -256,8 +260,17 @@ external:
   - items
 externalTypes:
   - NavigationMenuItem[][]
+items:
+  tooltip:
+    - true
+    - false
+  popover:
+    - true
+    - false
 props:
   collapsed: true
+  tooltip: false
+  popover: false
   orientation: 'vertical'
   items:
     - - label: Links
@@ -282,7 +295,6 @@ props:
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       - label: Composables
         icon: i-lucide-database
-        open: false
         children:
           - label: defineShortcuts
             icon: i-lucide-file-text
@@ -298,7 +310,6 @@ props:
             to: /composables/use-toast
       - label: Components
         icon: i-lucide-box
-        open: false
         to: /components
         active: true
         children:
@@ -878,9 +889,11 @@ You can inspect the DOM to see each item's content being rendered.
 
 ## Examples
 
-### With tooltips in items :badge{label="New" class="align-text-top"}
+### With tooltip in items :badge{label="New" class="align-text-top"}
 
-You can use the `tooltip` property to display a [Tooltip](/components/tooltip) around an item. This can be useful when the menu is collapsed.
+When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip.
+
+You can pass any property from the [Tooltip](/components/tooltip) component globally or on each item.
 
 ::component-code
 ---
@@ -893,7 +906,12 @@ external:
   - items
 externalTypes:
   - NavigationMenuItem[][]
+items:
+  tooltip:
+    - true
+    - false
 props:
+  tooltip: true
   collapsed: true
   orientation: 'vertical'
   items:
@@ -901,39 +919,24 @@ props:
         type: 'label'
       - label: Guide
         icon: i-lucide-book-open
-        tooltip:
-          text: 'Guide'
         children:
           - label: Introduction
             description: Fully styled and customizable components for Nuxt.
             icon: i-lucide-house
-            tooltip:
-              text: 'Introduction'
           - label: Installation
             description: Learn how to install and configure Nuxt UI in your application.
             icon: i-lucide-cloud-download
-            tooltip:
-              text: 'Installation'
           - label: 'Icons'
             icon: 'i-lucide-smile'
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-            tooltip:
-              text: 'Icons'
           - label: 'Colors'
             icon: 'i-lucide-swatch-book'
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
-            tooltip:
-              text: 'Colors'
           - label: 'Theme'
             icon: 'i-lucide-cog'
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
-            tooltip:
-              text: 'Theme'
       - label: Composables
         icon: i-lucide-database
-        tooltip:
-          text: 'Composables'
-        open: false
         children:
           - label: defineShortcuts
             icon: i-lucide-file-text
@@ -949,11 +952,8 @@ props:
             to: /composables/use-toast
       - label: Components
         icon: i-lucide-box
-        tooltip:
-          text: 'Components'
         to: /components
         active: true
-        open: false
         children:
           - label: Link
             icon: i-lucide-file-text
@@ -985,15 +985,124 @@ props:
         to: https://github.com/nuxt/ui
         target: _blank
         tooltip:
-          text: 'GitHub'
+          text: 'Open on GitHub'
           kbds:
             - 3.8k
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
-        tooltip:
-          text: 'Help'
 ---
+::
+
+### With popover in items :badge{label="Soon" class="align-text-top"}
+
+When orientation is `vertical` and the menu is `collapsed`, you can set the `popover` prop to `true` to display a [Popover](/components/popover) around items with their children but you can also use the `popover` property on each item to override the default popover.
+
+You can pass any property from the [Popover](/components/popover) component globally or on each item.
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - orientation
+  - class
+external:
+  - items
+externalTypes:
+  - NavigationMenuItem[][]
+items:
+  popover:
+    - true
+    - false
+props:
+  popover: true
+  collapsed: true
+  orientation: 'vertical'
+  items:
+    - - label: Links
+        type: 'label'
+      - label: Guide
+        icon: i-lucide-book-open
+        children:
+          - label: Introduction
+            description: Fully styled and customizable components for Nuxt.
+            icon: i-lucide-house
+          - label: Installation
+            description: Learn how to install and configure Nuxt UI in your application.
+            icon: i-lucide-cloud-download
+          - label: 'Icons'
+            icon: 'i-lucide-smile'
+            description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+          - label: 'Colors'
+            icon: 'i-lucide-swatch-book'
+            description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+          - label: 'Theme'
+            icon: 'i-lucide-cog'
+            description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+      - label: Composables
+        icon: i-lucide-database
+        popover:
+          mode: 'click'
+        children:
+          - label: defineShortcuts
+            icon: i-lucide-file-text
+            description: Define shortcuts for your application.
+            to: /composables/define-shortcuts
+          - label: useOverlay
+            icon: i-lucide-file-text
+            description: Display a modal/slideover within your application.
+            to: /composables/use-overlay
+          - label: useToast
+            icon: i-lucide-file-text
+            description: Display a toast within your application.
+            to: /composables/use-toast
+      - label: Components
+        icon: i-lucide-box
+        to: /components
+        active: true
+        children:
+          - label: Link
+            icon: i-lucide-file-text
+            description: Use NuxtLink with superpowers.
+            to: /components/link
+          - label: Modal
+            icon: i-lucide-file-text
+            description: Display a modal within your application.
+            to: /components/modal
+          - label: NavigationMenu
+            icon: i-lucide-file-text
+            description: Display a list of links.
+            to: /components/navigation-menu
+          - label: Pagination
+            icon: i-lucide-file-text
+            description: Display a list of pages.
+            to: /components/pagination
+          - label: Popover
+            icon: i-lucide-file-text
+            description: Display a non-modal dialog that floats around a trigger element.
+            to: /components/popover
+          - label: Progress
+            icon: i-lucide-file-text
+            description: Show a horizontal bar to indicate task progression.
+            to: /components/progress
+    - - label: GitHub
+        icon: i-simple-icons-github
+        badge: 3.8k
+        to: https://github.com/nuxt/ui
+        target: _blank
+        tooltip:
+          text: 'Open on GitHub'
+          kbds:
+            - 3.8k
+      - label: Help
+        icon: i-lucide-circle-help
+        disabled: true
+---
+::
+
+::tip{to="#with-content-slot"}
+You can use the `#content` slot to customize the content of the popover in the `vertical` orientation.
 ::
 
 ### Control active item
@@ -1043,6 +1152,7 @@ Use the `#item-content` slot or the `slot` property (`#{{ item.slot }}-content`)
 
 ::component-example
 ---
+collapse: true
 name: 'navigation-menu-content-slot-example'
 ---
 ::

@@ -38,6 +38,13 @@ export interface InputProps extends UseComponentIconsProps {
   disabled?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  modelModifiers?: {
+    string?: boolean
+    number?: boolean
+    trim?: boolean
+    lazy?: boolean
+    nullify?: boolean
+  }
   class?: any
   ui?: Input['slots']
 }
@@ -77,6 +84,7 @@ const props = withDefaults(defineProps<InputProps>(), {
 const emits = defineEmits<InputEmits<T>>()
 const slots = defineSlots<InputSlots>()
 
+// eslint-disable-next-line vue/no-dupe-keys
 const [modelValue, modelModifiers] = defineModel<T>()
 
 const appConfig = useAppConfig() as Input['AppConfig']
