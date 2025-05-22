@@ -35,7 +35,6 @@ export interface TextareaProps extends UseComponentIconsProps {
   autoresize?: boolean
   autoresizeDelay?: number
   disabled?: boolean
-  class?: any
   rows?: number
   maxrows?: number
   /** Highlight the ring color like a focus state. */
@@ -46,6 +45,7 @@ export interface TextareaProps extends UseComponentIconsProps {
     lazy?: boolean
     nullify?: boolean
   }
+  class?: any
   ui?: Textarea['slots']
 }
 

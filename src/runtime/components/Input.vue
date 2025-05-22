@@ -38,7 +38,6 @@ export interface InputProps extends UseComponentIconsProps {
   disabled?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
-  class?: any
   modelModifiers?: {
     string?: boolean
     number?: boolean
@@ -46,6 +45,7 @@ export interface InputProps extends UseComponentIconsProps {
     lazy?: boolean
     nullify?: boolean
   }
+  class?: any
   ui?: Input['slots']
 }
 
