@@ -37,6 +37,7 @@ describe('Toast', () => {
     ['with orientation horizontal', { props: { ...props, icon: 'i-lucide-rocket', description: 'This is a toast', actions: [{ label: 'Action' }], orientation: 'horizontal' as const } }],
     ['without close', { props: { ...props, close: false } }],
     ['with closeIcon', { props: { ...props, closeIcon: 'i-lucide-trash' } }],
+    ['with callback', { props: { ...props, callback: () => console.log('Toast clicked') } }],
     ['with type', { props: { ...props, type: 'background' as const } }],
     ['with color neutral', { props: { ...props, color: 'neutral' as const } }],
     ['with as', { props: { ...props, as: 'section' } }],
