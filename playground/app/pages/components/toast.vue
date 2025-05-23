@@ -100,6 +100,9 @@ function addToast() {
     ...template,
     onClick(toast) {
       console.log(`Toast ${toast.id} clicked`)
+    },
+    callback() {
+      console.log(`Toast ${id} callback`)
     }
   })
 }

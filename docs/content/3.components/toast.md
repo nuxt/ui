@@ -141,6 +141,16 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 :::
 ::
 
+### Callback
+
+Use the `callback` field to execute a function when the Toast expires.
+
+::component-example
+---
+name: 'toast-callback-example'
+---
+::
+
 ### Actions
 
 Pass an `actions` field to add some [Button](/components/button) actions to the Alert.
