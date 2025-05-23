@@ -202,6 +202,21 @@ name: 'popover-command-palette-example'
 ---
 ::
 
+### With anchor slot
+
+You can use the `#anchor` slot to position the Popover against a custom element.
+
+::warning
+This slot only works when `mode` is `click`.
+::
+
+::component-example
+---
+collapse: true
+name: 'popover-anchor-slot-example'
+---
+::
+
 ## API
 
 ### Props
