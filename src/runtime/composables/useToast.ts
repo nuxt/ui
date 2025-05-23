@@ -61,10 +61,15 @@ export function useToast() {
   function remove(id: string | number) {
     const index = toasts.value.findIndex((t: Toast) => t.id === id)
     if (index !== -1) {
+      const toast = toasts.value[index] as Toast
       toasts.value[index] = {
-        ...toasts.value[index] as Toast,
+        ...toast,
         open: false
       }
+      nextTick(() => {
+        if (toast.callback)
+          toast.callback()
+      })
     }
 
     setTimeout(() => {

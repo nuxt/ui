@@ -55,6 +55,10 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
   closeIcon?: string
   class?: any
   ui?: Toast['slots']
+  /**
+   * Optional callback function that is called when the toast is closed/dismissed.
+   */
+  callback?: (...args: unknown[]) => unknown
 }
 
 export interface ToastEmits extends ToastRootEmits {}
