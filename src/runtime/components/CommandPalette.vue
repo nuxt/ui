@@ -280,7 +280,7 @@ const groups = computed(() => {
     </ListboxFilter>
 
     <ListboxContent :class="ui.content({ class: props.ui?.content })">
-      <div v-if="groups?.length" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div v-if="groups?.length" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
         <ListboxGroup v-for="group in groups" :key="`group-${group.id}`" :class="ui.group({ class: props.ui?.group })">
           <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
             {{ get(group, props.labelKey as string) }}
