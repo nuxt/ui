@@ -80,6 +80,18 @@ props:
 ---
 ::
 
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.upload` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.upload` key.
+:::
+::
+
 ### Size 
 
 Use the `size` prop to set the size of the component.
@@ -141,6 +153,18 @@ props:
 ---
 ::
 
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.file` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.file` key.
+:::
+::
+
 ### Disabled 
 
 Use the `disabled` prop to disable the component.
@@ -158,6 +182,45 @@ props:
   disabled: true
 ---
 ::
+
+## Examples
+
+### With custom type
+
+You can extend the type to include additional properties.
+
+::component-example
+---
+name: 'file-upload-extend-type-example'
+---
+::
+
+### Within a FormField
+
+You can use the FileUpload within a [FormField](/components/form-field) component to display a label, help text, required indicator, etc.
+
+::component-example
+---
+name: 'file-upload-form-field-example'
+---
+::
+
+::tip{to="/components/form"}
+It also provides validation and error handling when used within a **Form** component.
+::
+
+### With file validation
+
+You can build a custom validation function to check the file type and size.
+
+::component-example
+---
+collapse: true
+name: 'file-upload-file-validation-example'
+---
+::
+
+
 ## API
 
 ### Props
