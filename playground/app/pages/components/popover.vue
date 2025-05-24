@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const open = ref(false)
+const openCustomAnchor = ref(false)
 const loading = ref(false)
 
 function send() {
@@ -53,17 +54,16 @@ function send() {
       </UPopover>
 
       <div class="mt-8 relative">
-        <UPopover mode="click" arrow>
-          <UButton label="Custom anchor" color="neutral" variant="outline" />
-
+        <UPopover
+          v-model:open="openCustomAnchor"
+          :dismissible="false"
+        >
           <template #anchor>
-            <div class="absolute top-1/2 -right-1/2 translate-x-1/2 -translate-y-1/2">
-              Custom anchor
-            </div>
+            <UInput placeholder="Search" class="w-56" @focus="openCustomAnchor = true" />
           </template>
 
           <template #content>
-            <div class="w-48 h-16" />
+            <Placeholder class="size-48 m-4 inline-flex" />
           </template>
         </UPopover>
       </div>

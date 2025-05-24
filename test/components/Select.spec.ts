@@ -61,7 +61,7 @@ describe('Select', () => {
     ['with loading and avatar', { props: { loading: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with loading trailing', { props: { loading: true, trailing: true } }],
     ['with loading trailing and avatar', { props: { loading: true, trailing: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
-    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-sparkles' } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-chevron-down' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
     ['with arrow', { props: { ...props, arrow: true } }],

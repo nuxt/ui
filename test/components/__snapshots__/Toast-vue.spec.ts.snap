@@ -20,7 +20,7 @@ exports[`Toast > renders with actions correctly 1`] = `
           </button></div>
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -51,7 +51,7 @@ exports[`Toast > renders with as correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -81,7 +81,7 @@ exports[`Toast > renders with avatar correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -112,7 +112,7 @@ exports[`Toast > renders with class correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -171,7 +171,7 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -202,7 +202,7 @@ exports[`Toast > renders with color neutral correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -233,7 +233,7 @@ exports[`Toast > renders with description correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -264,7 +264,7 @@ exports[`Toast > renders with description slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -287,14 +287,14 @@ exports[`Toast > renders with icon correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-primary" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+    <li role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5 text-primary"></svg>
       <div class="w-0 flex-1 flex flex-col">
         <div class="text-sm font-medium text-highlighted">Toast</div>
         <!--v-if-->
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -323,7 +323,7 @@ exports[`Toast > renders with leading slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -346,7 +346,7 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="horizontal" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-primary" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+    <li role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="horizontal" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-center" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5 text-primary"></svg>
       <div class="w-0 flex-1 flex flex-col">
         <div class="text-sm font-medium text-highlighted">Toast</div>
         <div class="text-sm text-muted mt-1">This is a toast</div>
@@ -355,7 +355,7 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
       <div class="flex gap-1.5 shrink-0 items-center"><button type="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           <!--v-if--><span class="truncate">Action</span>
           <!--v-if-->
-        </button><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        </button><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button></div>
@@ -377,7 +377,7 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
 
 <div role="region" aria-label="Notifications (F8)" tabindex="-1"><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
   <ol tabindex="-1" data-expanded="true" class="fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none right-4 bottom-4" style="--scale-factor: 0.05; --translate-factor: -1px; --gap: -16px; --front-height: 0px; --height: 0px;">
-    <li role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5 text-primary" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+    <li role="alert" aria-live="off" aria-atomic="true" tabindex="0" data-orientation="vertical" class="relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary items-start" style="--height: 0; user-select: none; touch-action: none;" data-state="open" data-swipe-direction="right" data-reka-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5 text-primary"></svg>
       <div class="w-0 flex-1 flex flex-col">
         <div class="text-sm font-medium text-highlighted">Toast</div>
         <div class="text-sm text-muted mt-1">This is a toast</div>
@@ -387,7 +387,7 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
           </button></div>
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -418,7 +418,7 @@ exports[`Toast > renders with title correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -449,7 +449,7 @@ exports[`Toast > renders with title slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -480,7 +480,7 @@ exports[`Toast > renders with type correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
@@ -511,7 +511,7 @@ exports[`Toast > renders with ui correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg>
+        <!--v-if--><button type="button" aria-label="Close" data-reka-toast-announce-exclude="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
           <!--v-if-->
           <!--v-if-->
         </button>
