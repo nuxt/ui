@@ -19,12 +19,145 @@ ignore:
   - modelValue
 external:
   - modelValue
+externalTypes:
+  - FileUploadItem[]
 props:
-  modelValue: ''
+  modelValue: []
 ---
 ::
 
+### Accept 
 
+Use the `accept` prop to specify the types of files that can be uploaded.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+externalTypes:
+  - FileUploadItem[]
+props:
+  modelValue: []
+  accept: 'image/*'
+---
+::
+
+### Label
+
+Use the `label` prop to set the label of the component.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+externalTypes:
+  - FileUploadItem[]
+props:
+  modelValue: []
+  label: 'Upload your image'
+---
+::
+
+### Upload Icon
+
+Use the `uploadIcon` prop to set a custom upload icon.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+externalTypes:
+  - FileUploadItem[]
+props:
+  modelValue: []
+  uploadIcon: 'i-heroicons-cloud-arrow-up-solid'
+---
+::
+
+### Size 
+
+Use the `size` prop to set the size of the component.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+externalTypes:
+  - FileUploadItem[]
+props:
+  modelValue: []
+  size: xl
+---
+::
+
+### Multiple
+
+Use the `multiple` prop to allow multiple file uploads.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - multiple
+external:
+  - modelValue
+externalTypes:
+  - FileUploadItem[]
+props:
+  modelValue: []
+  multiple: true
+---
+::
+
+### File Icon
+
+Use the `fileIcon` prop to set a custom file icon.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - accept
+external:
+  - modelValue
+externalTypes:
+  - FileUploadItem[]
+props:
+  modelValue: 
+    - file:
+        name: 'example.txt'
+        size: 3145728
+        type: 'text/plain'
+  fileIcon: 'i-heroicons-document-text-solid'
+  accept: 'text/plain'
+---
+::
+
+### Disabled 
+
+Use the `disabled` prop to disable the component.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+externalTypes:
+  - FileUploadItem[]
+props:
+  modelValue: []
+  disabled: true
+---
+::
 ## API
 
 ### Props
