@@ -109,68 +109,70 @@ const groups = computed<ContextMenuItem[][]>(() =>
     <component :is="sub ? ContextMenu.SubContent : ContextMenu.Content" :class="props.class" v-bind="contentProps">
       <slot name="content-top" />
 
-      <ContextMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
-        <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-          <ContextMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class] })">
-            <ReuseItemTemplate :item="item" :index="index" />
-          </ContextMenu.Label>
-          <ContextMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })" />
-          <ContextMenu.Sub v-else-if="item?.children?.length" :open="item.open" :default-open="item.defaultOpen">
-            <ContextMenu.SubTrigger
-              as="button"
-              type="button"
+      <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
+        <ContextMenu.Group v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: uiOverride?.group })">
+          <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
+            <ContextMenu.Label v-if="item.type === 'label'" :class="ui.label({ class: [uiOverride?.label, item.ui?.label, item.class] })">
+              <ReuseItemTemplate :item="item" :index="index" />
+            </ContextMenu.Label>
+            <ContextMenu.Separator v-else-if="item.type === 'separator'" :class="ui.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })" />
+            <ContextMenu.Sub v-else-if="item?.children?.length" :open="item.open" :default-open="item.defaultOpen">
+              <ContextMenu.SubTrigger
+                as="button"
+                type="button"
+                :disabled="item.disabled"
+                :text-value="get(item, props.labelKey as string)"
+                :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+              >
+                <ReuseItemTemplate :item="item" :index="index" />
+              </ContextMenu.SubTrigger>
+
+              <UContextMenuContent
+                sub
+                :class="props.class"
+                :ui="ui"
+                :ui-override="uiOverride"
+                :portal="portal"
+                :items="(item.children as T)"
+                :align-offset="-4"
+                :label-key="labelKey"
+                :checked-icon="checkedIcon"
+                :loading-icon="loadingIcon"
+                :external-icon="externalIcon"
+                v-bind="item.content"
+              >
+                <template v-for="(_, name) in proxySlots" #[name]="slotData">
+                  <slot :name="(name as keyof ContextMenuSlots<T>)" v-bind="slotData" />
+                </template>
+              </UContextMenuContent>
+            </ContextMenu.Sub>
+            <ContextMenu.CheckboxItem
+              v-else-if="item.type === 'checkbox'"
+              :model-value="item.checked"
               :disabled="item.disabled"
               :text-value="get(item, props.labelKey as string)"
               :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+              @update:model-value="item.onUpdateChecked"
+              @select="item.onSelect"
             >
               <ReuseItemTemplate :item="item" :index="index" />
-            </ContextMenu.SubTrigger>
-
-            <UContextMenuContent
-              sub
-              :class="props.class"
-              :ui="ui"
-              :ui-override="uiOverride"
-              :portal="portal"
-              :items="(item.children as T)"
-              :align-offset="-4"
-              :label-key="labelKey"
-              :checked-icon="checkedIcon"
-              :loading-icon="loadingIcon"
-              :external-icon="externalIcon"
-              v-bind="item.content"
+            </ContextMenu.CheckboxItem>
+            <ContextMenu.Item
+              v-else
+              as-child
+              :disabled="item.disabled"
+              :text-value="get(item, props.labelKey as string)"
+              @select="item.onSelect"
             >
-              <template v-for="(_, name) in proxySlots" #[name]="slotData">
-                <slot :name="(name as keyof ContextMenuSlots<T>)" v-bind="slotData" />
-              </template>
-            </UContextMenuContent>
-          </ContextMenu.Sub>
-          <ContextMenu.CheckboxItem
-            v-else-if="item.type === 'checkbox'"
-            :model-value="item.checked"
-            :disabled="item.disabled"
-            :text-value="get(item, props.labelKey as string)"
-            :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
-            @update:model-value="item.onUpdateChecked"
-            @select="item.onSelect"
-          >
-            <ReuseItemTemplate :item="item" :index="index" />
-          </ContextMenu.CheckboxItem>
-          <ContextMenu.Item
-            v-else
-            as-child
-            :disabled="item.disabled"
-            :text-value="get(item, props.labelKey as string)"
-            @select="item.onSelect"
-          >
-            <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<ContextMenuItem, 'type'>)" custom>
-              <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], active, color: item?.color })">
-                <ReuseItemTemplate :item="item" :active="active" :index="index" />
-              </ULinkBase>
-            </ULink>
-          </ContextMenu.Item>
-        </template>
-      </ContextMenu.Group>
+              <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item as Omit<ContextMenuItem, 'type'>)" custom>
+                <ULinkBase v-bind="slotProps" :class="ui.item({ class: [uiOverride?.item, item.ui?.item, item.class], active, color: item?.color })">
+                  <ReuseItemTemplate :item="item" :active="active" :index="index" />
+                </ULinkBase>
+              </ULink>
+            </ContextMenu.Item>
+          </template>
+        </ContextMenu.Group>
+      </div>
 
       <slot />
 
