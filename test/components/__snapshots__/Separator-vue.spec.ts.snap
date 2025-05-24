@@ -34,7 +34,7 @@ exports[`Separator > renders with decorative correctly 1`] = `
 exports[`Separator > renders with icon correctly 1`] = `
 "<div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
   <div class="border-default w-full border-solid border-t"></div>
-  <div class="font-medium text-default flex mx-3 whitespace-nowrap"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+  <div class="font-medium text-default flex mx-3 whitespace-nowrap"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
   <div class="border-default w-full border-solid border-t"></div>
 </div>"
 `;
