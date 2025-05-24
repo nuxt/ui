@@ -2,25 +2,26 @@
 const items = [
   {
     title: 'Backlog',
-    content: 'This is the backlog panel.'
+    description: 'This is the backlog panel.',
+    icon: 'i-lucide-smile'
   },
   {
     title: 'Todo',
-    content: 'This is the todo panel.'
+    description: 'This is the todo panel.'
   },
   {
     title: 'In Progress',
-    content: 'This is the in progress panel.'
+    description: 'This is the in progress panel.'
   },
   {
     title: 'Done',
-    content: 'This is the done panel.'
+    description: 'This is the done panel.'
   }
 ]
 </script>
 
 <template>
   <div>
-    <UTimeline :items="items" />
+    <UTimeline :model-value="2" :items="items" />
   </div>
 </template>
