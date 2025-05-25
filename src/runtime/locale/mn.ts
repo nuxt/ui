@@ -1,56 +1,56 @@
-import type { Messages } from "../types";
-import { defineLocale } from "../composables/defineLocale";
+import type { Messages } from '../types'
+import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: "Монгол",
-  code: "mn",
+  name: 'Монгол',
+  code: 'mn',
   messages: {
     inputMenu: {
-      noMatch: "Тохирох мэдээлэл олдсонгүй",
-      noData: "Мэдээлэл байхгүй",
-      create: '"{label}" үүсгэх',
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      noData: 'Мэдээлэл байхгүй',
+      create: '"{label}" үүсгэх'
     },
     calendar: {
-      prevYear: "Өмнөх жил",
-      nextYear: "Дараа жил",
-      prevMonth: "Өмнөх сар",
-      nextMonth: "Дараа сар",
+      prevYear: 'Өмнөх жил',
+      nextYear: 'Дараа жил',
+      prevMonth: 'Өмнөх сар',
+      nextMonth: 'Дараа сар'
     },
     inputNumber: {
-      increment: "Нэмэх",
-      decrement: "Хасах",
+      increment: 'Нэмэх',
+      decrement: 'Хасах'
     },
     commandPalette: {
-      placeholder: "Комманд бичих эсвэл хайлт хийх...",
-      noMatch: "Тохирох мэдээлэл олдсонгүй",
-      noData: "Мэдээлэл байхгүй",
-      close: "Хаах",
+      placeholder: 'Комманд бичих эсвэл хайлт хийх...',
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      noData: 'Мэдээлэл байхгүй',
+      close: 'Хаах'
     },
     selectMenu: {
-      noMatch: "Тохирох мэдээлэл олдсонгүй",
-      noData: "Мэдээлэл байхгүй",
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      noData: 'Мэдээлэл байхгүй',
       create: '"{label}" үүсгэх',
-      search: "Хайх...",
+      search: 'Хайх...'
     },
     toast: {
-      close: "Хаах",
+      close: 'Хаах'
     },
     carousel: {
-      prev: "Өмнөх",
-      next: "Дараах",
-      goto: "{slide}-р хуудсанд шилжих",
+      prev: 'Өмнөх',
+      next: 'Дараах',
+      goto: '{slide}-р хуудсанд шилжих'
     },
     modal: {
-      close: "Хаах",
+      close: 'Хаах'
     },
     slideover: {
-      close: "Хаах",
+      close: 'Хаах'
     },
     alert: {
-      close: "Хаах",
+      close: 'Хаах'
     },
     table: {
-      noData: "Мэдээлэл алга",
-    },
-  },
-});
+      noData: 'Мэдээлэл байхгүй'
+    }
+  }
+})
