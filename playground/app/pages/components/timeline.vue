@@ -13,9 +13,11 @@ const activeValue = ref('none' as const)
 const items = [
   {
     title: 'John Doe',
-    description: 'added label "backlog"',
+    description: 'added label',
     icon: 'i-lucide-tag',
-    value: 'backlog'
+    value: 'backlog',
+    badge: 'backlog',
+    slot: 'badge' as const
   },
   {
     title: 'Benjamin Canac',
@@ -51,6 +53,12 @@ const values = ['none', ...items.map(item => item.value)]
       <USelect v-model="activeValue" :items="values" placeholder="Active value" />
     </div>
 
-    <UTimeline :size="size" :color="color" :orientation="orientation" :active-value="activeValue" :items="items" />
+    <UTimeline :size="size" :color="color" :orientation="orientation" :active-value="activeValue" :items="items">
+      <template #badge-description="{ item }">
+        <div class="flex gap-2">
+          <span>{{ item.description }}</span><UBadge size="sm" :label="item.badge" />
+        </div>
+      </template>
+    </UTimeline>
   </div>
 </template>

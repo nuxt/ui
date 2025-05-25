@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/timeline'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig, DynamicSlots } from '../types/utils'
 import type { AvatarProps } from './Avatar.vue'
 
 type Timeline = ComponentConfig<typeof theme, AppConfig, 'timeline'>
@@ -12,6 +12,7 @@ export interface TimelineItem {
   description?: string
   icon?: string
   avatar?: AvatarProps
+  slot?: string
   class?: any
   ui?: Pick<Timeline['slots'], 'item' | 'itemContainer' | 'itemIndicatorWrapper' | 'itemIndicator' | 'itemIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemSeparator' | 'itemWrapper' | 'itemTitle' | 'itemDescription'>
   [key: string]: any
@@ -48,7 +49,7 @@ export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
   indicator: SlotProps<T>
   title: SlotProps<T>
   description: SlotProps<T>
-}
+} & DynamicSlots<T, 'indicator' | 'title' | 'description', { item: T }>
 </script>
 
 <script setup lang="ts" generic="T extends TimelineItem">
@@ -90,7 +91,7 @@ const currentStepIndex = computed(
         <div :class="ui.itemContainer({ class: [props.ui?.itemContainer, item.ui?.itemContainer] })">
           <div :class="ui.itemIndicatorWrapper({ class: [props.ui?.itemIndicatorWrapper, item.ui?.itemIndicatorWrapper] })">
             <div :class="ui.itemIndicator({ class: [props.ui?.itemIndicator, item.ui?.itemIndicator] })">
-              <slot name="indicator" :item="item">
+              <slot :name="item.slot ? `${item.slot}-indicator` : 'indicator'" :item="item">
                 <UIcon v-if="item.icon" :name="item.icon" :class="ui.itemIcon({ class: [props.ui?.itemIcon, item.ui?.itemIcon] })" />
                 <UAvatar v-else-if="item.avatar" :size="(item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size']" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" v-bind="item.avatar" />
                 <template v-else>
@@ -109,12 +110,12 @@ const currentStepIndex = computed(
 
         <div :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, item.ui?.itemWrapper] })">
           <div :class="ui.itemTitle({ class: [props.ui?.itemTitle, item.ui?.itemTitle] })">
-            <slot name="title" :item="item">
+            <slot :name="item.slot ? `${item.slot}-title` : 'title'" :item="item">
               {{ item.title }}
             </slot>
           </div>
           <div :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
-            <slot name="description" :item="item">
+            <slot :name="item.slot ? `${item.slot}-description` : 'description'" :item="item">
               {{ item.description }}
             </slot>
           </div>
