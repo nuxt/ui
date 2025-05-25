@@ -110,23 +110,23 @@ export default (options: Required<ModuleOptions>) => ({
   }, {
     orientation: 'vertical',
     size: 'xs',
-    class: { separator: 'top-[30px]', item: 'gap-1.5' }
+    class: { itemSeparator: 'top-[30px]', item: 'gap-1.5' }
   }, {
     orientation: 'vertical',
     size: 'sm',
-    class: { separator: 'top-[38px]', item: 'gap-2' }
+    class: { itemSeparator: 'top-[38px]', item: 'gap-2' }
   }, {
     orientation: 'vertical',
     size: 'md',
-    class: { separator: 'top-[46px]', item: 'gap-2.5' }
+    class: { itemSeparator: 'top-[46px]', item: 'gap-2.5' }
   }, {
     orientation: 'vertical',
     size: 'lg',
-    class: { separator: 'top-[54px]', item: 'gap-3' }
+    class: { itemSeparator: 'top-[54px]', item: 'gap-3' }
   }, {
     orientation: 'vertical',
     size: 'xl',
-    class: { separator: 'top-[62px]', item: 'gap-3.5' }
+    class: { itemSeparator: 'top-[62px]', item: 'gap-3.5' }
   }],
 
   defaultVariants: {
