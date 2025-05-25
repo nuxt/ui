@@ -1,7 +1,22 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Popover > renders with anchor slot correctly 1`] = `
+"<!--v-if-->
+Anchor slot
+<!--teleport start-->
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div id="reka-popover-content-v-0" data-state="open" aria-labelledby="" style="--reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" role="dialog" data-dismissable-layer="" tabindex="-1" class="bg-default shadow-lg rounded-md ring ring-default data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) focus:outline-none pointer-events-auto" data-side="bottom" data-align="center"></div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
 exports[`Popover > renders with arrow correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -15,6 +30,7 @@ exports[`Popover > renders with arrow correctly 1`] = `
 
 exports[`Popover > renders with class correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -28,6 +44,7 @@ exports[`Popover > renders with class correctly 1`] = `
 
 exports[`Popover > renders with content slot correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -43,6 +60,7 @@ exports[`Popover > renders with content slot correctly 1`] = `
 
 exports[`Popover > renders with default slot correctly 1`] = `
 "Default slot
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -56,6 +74,7 @@ exports[`Popover > renders with default slot correctly 1`] = `
 
 exports[`Popover > renders with open correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 
@@ -69,6 +88,7 @@ exports[`Popover > renders with open correctly 1`] = `
 
 exports[`Popover > renders with ui correctly 1`] = `
 "<!--v-if-->
+<!--v-if-->
 <!--teleport start-->
 
 

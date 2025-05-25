@@ -35,11 +35,17 @@ export interface TextareaProps extends UseComponentIconsProps {
   autoresize?: boolean
   autoresizeDelay?: number
   disabled?: boolean
-  class?: any
   rows?: number
   maxrows?: number
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  modelModifiers?: {
+    string?: boolean
+    trim?: boolean
+    lazy?: boolean
+    nullify?: boolean
+  }
+  class?: any
   ui?: Textarea['slots']
 }
 
@@ -64,6 +70,8 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -76,6 +84,7 @@ const props = withDefaults(defineProps<TextareaProps>(), {
 const emits = defineEmits<TextareaEmits<T>>()
 const slots = defineSlots<TextareaSlots>()
 
+// eslint-disable-next-line vue/no-dupe-keys
 const [modelValue, modelModifiers] = defineModel<T>()
 
 const appConfig = useAppConfig() as Textarea['AppConfig']

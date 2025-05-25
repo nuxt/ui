@@ -518,7 +518,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
 ::component-code
 ---
@@ -532,7 +532,7 @@ external:
 props:
   modelValue: 'Backlog'
   loading: true
-  loadingIcon: 'i-lucide-repeat-2'
+  loadingIcon: 'i-lucide-loader'
   items:
     - Backlog
     - Todo
