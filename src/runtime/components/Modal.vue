@@ -61,13 +61,13 @@ export interface ModalEmits extends DialogRootEmits {
 
 export interface ModalSlots {
   default(props: { open: boolean }): any
-  content(props?: {}): any
-  header(props?: {}): any
+  content(props: { close: () => void }): any
+  header(props: { close: () => void }): any
   title(props?: {}): any
   description(props?: {}): any
   close(props: { ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
-  body(props?: {}): any
-  footer(props?: {}): any
+  body(props: { close: () => void }): any
+  footer(props: { close: () => void }): any
 }
 </script>
 
@@ -125,7 +125,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
 </script>
 
 <template>
-  <DialogRoot v-slot="{ open }" v-bind="rootProps">
+  <DialogRoot v-slot="{ open, close: closeDialog }" v-bind="rootProps">
     <DialogTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot :open="open" />
     </DialogTrigger>
@@ -148,9 +148,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
           </DialogDescription>
         </VisuallyHidden>
 
-        <slot name="content">
+        <slot name="content" :close="closeDialog">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
-            <slot name="header">
+            <slot name="header" :close="closeDialog">
               <div :class="ui.wrapper({ class: props.ui?.wrapper })">
                 <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
                   <slot name="title">
@@ -183,11 +183,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
           </div>
 
           <div v-if="!!slots.body" :class="ui.body({ class: props.ui?.body })">
-            <slot name="body" />
+            <slot name="body" :close="closeDialog" />
           </div>
 
           <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
-            <slot name="footer" />
+            <slot name="footer" :close="closeDialog" />
           </div>
         </slot>
       </DialogContent>
