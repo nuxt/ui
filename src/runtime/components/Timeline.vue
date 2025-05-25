@@ -1,23 +1,19 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/timeline'
-import type { DynamicSlots, ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/utils'
+import type { AvatarProps } from './Avatar.vue'
 
 type Timeline = ComponentConfig<typeof theme, AppConfig, 'timeline'>
 
 export interface TimelineItem {
-  slot?: string
   value?: string | number
   title?: string
   description?: string
-  /**
-   * @IconifyIcon
-   */
   icon?: string
-  content?: string
-  disabled?: boolean
+  avatar?: AvatarProps
   class?: any
-  ui?: Pick<Timeline['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>
+  ui?: Pick<Timeline['slots'], 'item' | 'itemContainer' | 'itemIndicatorWrapper' | 'itemIndicator' | 'itemIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemSeparator' | 'itemWrapper' | 'itemTitle' | 'itemDescription'>
   [key: string]: any
 }
 
@@ -41,7 +37,7 @@ export interface TimelineProps<T extends TimelineItem = TimelineItem> {
    * @defaultValue 'horizontal'
    */
   orientation?: Timeline['variants']['orientation']
-  disabled?: boolean
+  activeValue?: string | number
   class?: any
   ui?: Timeline['slots']
 }
@@ -52,7 +48,7 @@ export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
   indicator: SlotProps<T>
   title: SlotProps<T>
   description: SlotProps<T>
-} & DynamicSlots<T>
+}
 </script>
 
 <script setup lang="ts" generic="T extends TimelineItem">
@@ -60,13 +56,11 @@ import { computed } from 'vue'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
+import { Primitive, Separator } from 'reka-ui'
 
 const props = withDefaults(defineProps<TimelineProps<T>>(), {
-  orientation: 'vertical',
-  linear: true
+  orientation: 'vertical'
 })
-
-const modelValue = defineModel<string | number>()
 
 const appConfig = useAppConfig() as Timeline['AppConfig']
 
@@ -76,18 +70,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.timeline || 
   color: props.color
 }))
 
-const currentStepIndex = computed({
-  get() {
-    const value = modelValue.value
-
-    return ((typeof value === 'string')
-      ? props.items.findIndex(item => item.value === value)
-      : value) ?? 0
-  },
-  set(value: number) {
-    modelValue.value = props.items?.[value]?.value ?? value
-  }
-})
+const currentStepIndex = computed(
+  () => ((typeof props.activeValue === 'string')
+    ? props.items.findIndex(item => item.value === props.activeValue)
+    : props.activeValue) ?? -1
+)
 </script>
 
 <template>
@@ -97,15 +84,15 @@ const currentStepIndex = computed({
         v-for="(item, count) in items"
         :key="item.value ?? count"
         :step="count"
-        :disabled="item.disabled || props.disabled"
         :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
-        :data-state="count < currentStepIndex ? 'completed' : count  === currentStepIndex ? 'active' : undefined"
+        :data-state="count < currentStepIndex ? 'completed' : count === currentStepIndex ? 'active' : undefined"
       >
-        <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
-          <div :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })">
-            <div :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })">
+        <div :class="ui.itemContainer({ class: [props.ui?.itemContainer, item.ui?.itemContainer] })">
+          <div :class="ui.itemIndicatorWrapper({ class: [props.ui?.itemIndicatorWrapper, item.ui?.itemIndicatorWrapper] })">
+            <div :class="ui.itemIndicator({ class: [props.ui?.itemIndicator, item.ui?.itemIndicator] })">
               <slot name="indicator" :item="item">
-                <UIcon v-if="item.icon" :name="item.icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
+                <UIcon v-if="item.icon" :name="item.icon" :class="ui.itemIcon({ class: [props.ui?.itemIcon, item.ui?.itemIcon] })" />
+                <UAvatar v-else-if="item.avatar" :size="(item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size']" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" v-bind="item.avatar" />
                 <template v-else>
                   {{ count + 1 }}
                 </template>
@@ -113,20 +100,20 @@ const currentStepIndex = computed({
             </div>
           </div>
 
-          <USeparator
+          <Separator
             v-if="count < items.length - 1"
-            :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator] })"
+            :class="ui.itemSeparator({ class: [props.ui?.itemSeparator, item.ui?.itemSeparator] })"
             :orientation="props.orientation"
           />
         </div>
 
-        <div :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-          <h3 as="div" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
+        <div :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, item.ui?.itemWrapper] })">
+          <div :class="ui.itemTitle({ class: [props.ui?.itemTitle, item.ui?.itemTitle] })">
             <slot name="title" :item="item">
               {{ item.title }}
             </slot>
-          </h3>
-          <div :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
+          </div>
+          <div :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
             <slot name="description" :item="item">
               {{ item.description }}
             </slot>
