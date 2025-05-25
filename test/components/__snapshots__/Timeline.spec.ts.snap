@@ -1,0 +1,1046 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Timeline > renders with activeValue correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5" data-state="completed">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5" data-state="active">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with as correctly 1`] = `
+"<section class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</section>"
+`;
+
+exports[`Timeline > renders with class correctly 1`] = `
+"<div class="flex gap-8">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with description slot correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Description slot</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Description slot</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Description slot</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Description slot</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with indicator slot correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">Indicator slot</div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">Indicator slot</div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">Indicator slot</div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">Indicator slot</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with items correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with neutral color correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted focus-visible:outline-inverted">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-inverted"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted focus-visible:outline-inverted">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-inverted"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted focus-visible:outline-inverted">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-inverted"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted focus-visible:outline-inverted">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size lg horizontal correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-3">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3">
+        <div class="font-medium text-default text-base">John Doe</div>
+        <div class="text-muted text-wrap text-base">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-3">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3">
+        <div class="font-medium text-default text-base">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-base">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-3">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3">
+        <div class="font-medium text-default text-base">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-base">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-3">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-3">
+        <div class="font-medium text-default text-base">John Doe</div>
+        <div class="text-muted text-wrap text-base">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size lg vertical correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-3">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3">
+        <div class="font-medium text-default text-base">John Doe</div>
+        <div class="text-muted text-wrap text-base">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-3">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3">
+        <div class="font-medium text-default text-base">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-base">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-3">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3">
+        <div class="font-medium text-default text-base">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-base">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-3">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-3">
+        <div class="font-medium text-default text-base">John Doe</div>
+        <div class="text-muted text-wrap text-base">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size md horizontal correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size md vertical correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size sm horizontal correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2">
+        <div class="font-medium text-default text-xs">John Doe</div>
+        <div class="text-muted text-wrap text-xs">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2">
+        <div class="font-medium text-default text-xs">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-xs">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2">
+        <div class="font-medium text-default text-xs">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-xs">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2">
+        <div class="font-medium text-default text-xs">John Doe</div>
+        <div class="text-muted text-wrap text-xs">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size sm vertical correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2">
+        <div class="font-medium text-default text-xs">John Doe</div>
+        <div class="text-muted text-wrap text-xs">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2">
+        <div class="font-medium text-default text-xs">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-xs">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2">
+        <div class="font-medium text-default text-xs">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-xs">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2">
+        <div class="font-medium text-default text-xs">John Doe</div>
+        <div class="text-muted text-wrap text-xs">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size xl horizontal correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3.5">
+        <div class="font-medium text-default text-lg">John Doe</div>
+        <div class="text-muted text-wrap text-lg">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3.5">
+        <div class="font-medium text-default text-lg">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-lg">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3.5">
+        <div class="font-medium text-default text-lg">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-lg">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-3.5">
+        <div class="font-medium text-default text-lg">John Doe</div>
+        <div class="text-muted text-wrap text-lg">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size xl vertical correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3.5">
+        <div class="font-medium text-default text-lg">John Doe</div>
+        <div class="text-muted text-wrap text-lg">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3.5">
+        <div class="font-medium text-default text-lg">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-lg">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-3.5">
+        <div class="font-medium text-default text-lg">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-lg">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-3.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-3.5">
+        <div class="font-medium text-default text-lg">John Doe</div>
+        <div class="text-muted text-wrap text-lg">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size xs horizontal correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-1.5">
+        <div class="font-medium text-default text-xs">John Doe</div>
+        <div class="text-muted text-wrap text-xs">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-1.5">
+        <div class="font-medium text-default text-xs">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-xs">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-1.5">
+        <div class="font-medium text-default text-xs">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-xs">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-1.5">
+        <div class="font-medium text-default text-xs">John Doe</div>
+        <div class="text-muted text-wrap text-xs">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with size xs vertical correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-1.5">
+        <div class="font-medium text-default text-xs">John Doe</div>
+        <div class="text-muted text-wrap text-xs">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-1.5">
+        <div class="font-medium text-default text-xs">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-xs">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-1.5">
+        <div class="font-medium text-default text-xs">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-xs">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-1.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-1.5">
+        <div class="font-medium text-default text-xs">John Doe</div>
+        <div class="text-muted text-wrap text-xs">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with title slot correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Title slot</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Title slot</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Title slot</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="font-medium text-default text-sm">Title slot</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with ui correctly 1`] = `
+"<div class="flex gap-4">
+  <div class="flex flex-col gap-4">
+    <div step="0" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:tag shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="text-default text-sm font-bold">John Doe</div>
+        <div class="text-muted text-wrap text-sm">added label "backlog"</div>
+      </div>
+    </div>
+    <div step="1" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:user-check shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="text-default text-sm font-bold">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Assigned to Benjamin Canac</div>
+      </div>
+    </div>
+    <div step="2" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full"><span class="iconify i-lucide:loader shrink-0" aria-hidden="true"></span></div>
+        </div>
+        <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary"></div>
+      </div>
+      <div class="mt-2.5">
+        <div class="text-default text-sm font-bold">Benjamin Canac</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "in progress"</div>
+      </div>
+    </div>
+    <div step="3" class="group relative w-full flex text-start gap-2.5">
+      <div class="relative">
+        <div class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
+          <div class="flex items-center justify-center size-full">4</div>
+        </div>
+        <!--v-if-->
+      </div>
+      <div class="mt-2.5">
+        <div class="text-default text-sm font-bold">John Doe</div>
+        <div class="text-muted text-wrap text-sm">Moved this to "done"</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
