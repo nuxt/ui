@@ -8,7 +8,7 @@ const orientations = Object.keys(theme.variants.orientation)
 const orientation = ref('vertical' as const)
 const color = ref('primary' as const)
 const size = ref('md' as const)
-const activeValue = ref('none' as const)
+const activeValue = ref(null as const)
 
 const items = [
   {
@@ -55,8 +55,8 @@ const values = ['none', ...items.map(item => item.value)]
 
     <UTimeline :size="size" :color="color" :orientation="orientation" :active-value="activeValue" :items="items">
       <template #badge-description="{ item }">
-        <div class="flex gap-2">
-          <span>{{ item.description }}</span><UBadge size="sm" :label="item.badge" />
+        <div class="flex items-center gap-2">
+          <span>{{ item.description }}</span><UBadge :size="size" :label="item.badge" />
         </div>
       </template>
     </UTimeline>
