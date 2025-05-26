@@ -74,6 +74,27 @@ const groups = computed(() => [{
       toast.add({ title: 'Label added!' })
     },
     kbds: ['meta', 'L']
+  }, {
+    label: 'More actions',
+    children: [{
+      label: 'Create new file',
+      suffix: 'Create a new file in the current directory or workspace.',
+      icon: 'i-lucide-file-plus',
+      onSelect(e: Event) {
+        e.preventDefault()
+
+        toast.add({ title: 'New file added!' })
+      }
+    }, {
+      label: 'Create new folder',
+      suffix: 'Create a new folder in the current directory or workspace.',
+      icon: 'i-lucide-folder-plus',
+      onSelect(e: Event) {
+        e.preventDefault()
+
+        toast.add({ title: 'New folder added!' })
+      }
+    }]
   }]
 }])
 

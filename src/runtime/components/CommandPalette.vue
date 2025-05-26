@@ -386,7 +386,7 @@ const groups = computed(() => {
 
                       <UIcon
                         v-else-if="item.children && item.children.length > 0"
-                        :name="appConfig.ui.icons.chevronRight || 'i-heroicons-chevron-right'"
+                        :name="appConfig.ui.icons.chevronRight || 'i-lucide-chevron-right'"
                         :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
                       />
 
