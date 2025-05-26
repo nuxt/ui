@@ -8,7 +8,7 @@ const orientations = Object.keys(theme.variants.orientation)
 const orientation = ref('vertical' as const)
 const color = ref('primary' as const)
 const size = ref('md' as const)
-const activeValue = ref(null as const)
+const activeValue = ref('none' as const)
 
 const items = [
   {
