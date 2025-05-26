@@ -96,6 +96,7 @@ const {
 } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
 
 const size = computed(() => props.size)
+const base = ref<HTMLElement | null>(null)
 const fileInputRef = ref<HTMLInputElement | null>(null)
 const files = defineModel<T[]>()
 const dragging = ref(false)
@@ -201,8 +202,13 @@ function onDragOver(event: DragEvent) {
   dragging.value = true
   emits('onDragOver', event)
 }
+
 function onDragLeave(event: DragEvent) {
   event.preventDefault()
+
+  // Early return if the drag leave is within the base element
+  if (base.value && base.value.contains(event.relatedTarget as Node)) return
+
   dragging.value = false
   emits('onDragLeave', event)
 }
@@ -215,6 +221,7 @@ defineExpose({ fileInputRef })
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div
+      ref="base"
       :class="ui.base({
         class: [
           props.ui?.base,
@@ -229,73 +236,69 @@ defineExpose({ fileInputRef })
       @click="!disabled && isEmpty && fileInputRef?.click()"
       @dragleave="onDragLeave"
     >
-      <!-- Absolute div to avoid to firing dragleave event because of nested elements -->
-      <div :class="ui.base({ class: ['absolute inset-0 bg-transparent z-[-1]', props.ui?.base] })" />
-      <div>
-        <input
-          :id="id"
-          ref="fileInputRef"
-          type="file"
-          :name="name"
-          :accept="accept"
-          :multiple="multiple"
-          :required="required"
-          :disabled="disabled"
-          class="hidden"
-          v-bind="{ ...$attrs, ...ariaAttrs }"
-          @blur="onBlur"
-          @change="onFileChange"
-          @focus="emitFormFocus"
-        >
-        <!-- Empty state -->
-        <div
-          v-if="isEmpty"
-          :class="ui.empty({ class: props.ui?.empty })"
-        >
-          <slot name="empty">
-            <UIcon
-              :name="props.uploadIcon || appConfig.ui.icons.upload"
-              :class="ui.uploadIcon({ class: props.ui?.uploadIcon })"
-            />
-            <span
-              :class="ui.label({
-                class: props.ui?.label
-              })"
-            > {{ label || t('fileUpload.empty') }} </span>
-          </slot>
-        </div>
-
-        <!-- File list -->
-        <ul
-          v-else
-          :class="ui.files({ class: props.ui?.files })"
-        >
-          <li v-for="(fileItem, i) in files" :key="i" :class="ui.file({ class: props.ui?.file })">
-            <slot name="item" v-bind="{ item: fileItem as FileUploadItem }">
-              <div class="flex items-center gap-3">
-                <UAvatar
-                  :src="fileItem.file.type.includes('image') ? filePreviews[fileKey(fileItem.file)] : undefined"
-                  :icon="fileItem.file.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
-                  :alt="fileItem.file.name"
-                  :size="(ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size']"
-                  :class="ui.fileAvatar({ class: props.ui?.fileAvatar })"
-                />
-                <div>
-                  <p :class="ui.fileLabel({ class: props.ui?.fileLabel })">
-                    {{ fileItem.file.name }}
-                  </p>
-                  <p :class="ui.fileSize({ class: props.ui?.fileSize })">
-                    {{ (fileItem.file.size / 1024 / 1024).toFixed(2) }} MB
-                  </p>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <UIcon id="remove-file" :name="appConfig.ui.icons.close" @click.stop="removeFile(fileItem as T)" />
-              </div>
-            </slot>
-          </li>
-        </ul>
+      <input
+        :id="id"
+        ref="fileInputRef"
+        type="file"
+        :name="name"
+        :accept="accept"
+        :multiple="multiple"
+        :required="required"
+        :disabled="disabled"
+        class="hidden"
+        v-bind="{ ...$attrs, ...ariaAttrs }"
+        @blur="onBlur"
+        @change="onFileChange"
+        @focus="emitFormFocus"
+      >
+      <!-- Empty state -->
+      <div
+        v-if="isEmpty"
+        :class="ui.empty({ class: props.ui?.empty })"
+      >
+        <slot name="empty">
+          <UIcon
+            :name="props.uploadIcon || appConfig.ui.icons.upload"
+            :class="ui.uploadIcon({ class: props.ui?.uploadIcon })"
+          />
+          <span
+            :class="ui.label({
+              class: props.ui?.label
+            })"
+          > {{ label || t('fileUpload.empty') }} </span>
+        </slot>
       </div>
+
+      <!-- File list -->
+      <ul
+        v-else
+        :class="ui.files({ class: props.ui?.files })"
+      >
+        <li v-for="(fileItem, i) in files" :key="i" :class="ui.file({ class: props.ui?.file })">
+          <slot name="item" v-bind="{ item: fileItem as FileUploadItem }">
+            <div class="flex items-center gap-3">
+              <UAvatar
+                :src="fileItem.file.type.includes('image') ? filePreviews[fileKey(fileItem.file)] : undefined"
+                :icon="fileItem.file.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
+                :alt="fileItem.file.name"
+                :size="(ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size']"
+                :class="ui.fileAvatar({ class: props.ui?.fileAvatar })"
+              />
+              <div>
+                <p :class="ui.fileLabel({ class: props.ui?.fileLabel })">
+                  {{ fileItem.file.name }}
+                </p>
+                <p :class="ui.fileSize({ class: props.ui?.fileSize })">
+                  {{ (fileItem.file.size / 1024 / 1024).toFixed(2) }} MB
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <UIcon id="remove-file" :name="appConfig.ui.icons.close" @click.stop="removeFile(fileItem as T)" />
+            </div>
+          </slot>
+        </li>
+      </ul>
     </div>
   </Primitive>
 </template>
