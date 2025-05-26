@@ -29,6 +29,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   onSelect?(e?: Event): void
   class?: any
   ui?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>
+  children?: CommandPaletteItem[]
   [key: string]: any
 }
 
@@ -134,7 +135,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
-import { computed } from 'vue'
+import { computed, ref, type UnwrapRef } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -163,6 +164,8 @@ const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
+const navigationStack = ref<{ group: G, parentItem?: T }[]>([])
+const currentLevel = computed(() => navigationStack.value[navigationStack.value.length - 1] || null)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
@@ -183,18 +186,43 @@ const fuse = computed(() => defu({}, props.fuse, {
   matchAllWhenSearchEmpty: true
 }))
 
-const items = computed(() => props.groups?.filter((group) => {
-  if (!group.id) {
-    console.warn(`[@nuxt/ui] CommandPalette group is missing an \`id\` property`)
-    return false
+function navigateToSubmenu(item: T, group: G) {
+  if (item.children && item.children.length > 0) {
+    const childrenGroup: G = {
+      ...group,
+      id: `${group.id}-${item.label || 'submenu'}`,
+      label: item.label,
+      items: item.children
+    } as G
+
+    navigationStack.value.push({ group: childrenGroup as UnwrapRef<G>, parentItem: item as UnwrapRef<T> })
+    searchTerm.value = ''
+  }
+}
+
+function navigateBack() {
+  if (navigationStack.value.length > 0) {
+    navigationStack.value.pop()
+    searchTerm.value = ''
+  }
+}
+
+const items = computed(() => {
+  if (currentLevel.value) {
+    return currentLevel.value.group.items?.map(item => ({ ...(item as T), group: currentLevel.value!.group.id })) || []
   }
 
-  if (group.ignoreFilter) {
-    return false
-  }
-
-  return true
-}).flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
+  return props.groups?.filter((group) => {
+    if (!group.id) {
+      console.warn(`[@nuxt/ui] CommandPalette group is missing an \`id\` property`)
+      return false
+    }
+    if (group.ignoreFilter) {
+      return false
+    }
+    return true
+  }).flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || []
+})
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
@@ -216,6 +244,10 @@ function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matc
 }
 
 const groups = computed(() => {
+  if (currentLevel.value) {
+    return [getGroupWithItems(currentLevel.value.group as G, (currentLevel.value.group.items || []) as T[])]
+  }
+
   const groupsById = fuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
     if (!item.group) {
@@ -261,6 +293,18 @@ const groups = computed(() => {
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
       >
+        <template #leading>
+          <UButton
+            v-if="currentLevel"
+            :icon="appConfig.ui.icons.arrowLeft || 'i-heroicons-arrow-left'"
+            size="sm"
+            color="neutral"
+            variant="ghost"
+            :aria-label="t('commandPalette.back')"
+            @click="navigateBack"
+          />
+        </template>
+
         <template v-if="close || !!slots.close" #trailing>
           <slot name="close" :ui="ui">
             <UButton
@@ -289,10 +333,17 @@ const groups = computed(() => {
           <ListboxItem
             v-for="(item, index) in group.items"
             :key="`group-${group.id}-${index}`"
-            :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml'])"
+            :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
             :disabled="item.disabled"
             as-child
-            @select="item.onSelect"
+            @select="(e) => {
+              if (item.children && item.children.length > 0) {
+                navigateToSubmenu(item, group)
+              }
+              else {
+                item.onSelect?.(e)
+              }
+            }"
           >
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], active: active || item.active })">
@@ -326,10 +377,17 @@ const groups = computed(() => {
                       <span v-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: [props.ui?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
                         <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
                       </span>
+
+                      <UIcon
+                        v-else-if="item.children && item.children.length > 0"
+                        :name="appConfig.ui.icons.chevronRight || 'i-heroicons-chevron-right'"
+                        :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
+                      />
+
                       <UIcon v-else-if="group.highlightedIcon" :name="group.highlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: [props.ui?.itemTrailingHighlightedIcon, item.ui?.itemTrailingHighlightedIcon] })" />
                     </slot>
 
-                    <ListboxItemIndicator as-child>
+                    <ListboxItemIndicator v-if="!item.children || !item.children.length" as-child>
                       <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
                     </ListboxItemIndicator>
                   </span>
