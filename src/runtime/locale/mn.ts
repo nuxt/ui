@@ -20,6 +20,9 @@ export default defineLocale<Messages>({
       increment: 'Нэмэх',
       decrement: 'Хасах'
     },
+    fileUpload: {
+      empty: 'Файлуудыг хайх эсвэл энд чирэх'
+    },
     commandPalette: {
       placeholder: 'Комманд бичих эсвэл хайлт хийх...',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
