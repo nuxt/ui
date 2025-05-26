@@ -12,6 +12,7 @@ describe('Avatar', () => {
     ['with alt', { props: { alt: 'Benjamin Canac' } }],
     ['with text', { props: { text: '+1' } }],
     ['with icon', { props: { icon: 'i-lucide-image' } }],
+    ['with chip', { props: { chip: { text: '1' } } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { src: 'https://github.com/benjamincanac.png', size } }]),
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'bg-default' } }],
