@@ -227,9 +227,10 @@ defineExpose({ fileInputRef })
       @drop="onDrop"
       @dragover="onDragOver"
       @click="!disabled && isEmpty && fileInputRef?.click()"
+      @dragleave="onDragLeave"
     >
       <!-- Absolute div to avoid to firing dragleave event because of nested elements -->
-      <div :class="ui.base({ class: ['absolute inset-0 bg-transparent z-[-1]', props.ui?.base] })" @dragleave="onDragLeave" />
+      <div :class="ui.base({ class: ['absolute inset-0 bg-transparent z-[-1]', props.ui?.base] })" />
       <div>
         <input
           :id="id"
