@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const open = ref(false)
+const openCustomAnchor = ref(false)
 const loading = ref(false)
 
 function send() {
@@ -51,6 +52,21 @@ function send() {
           </div>
         </template>
       </UPopover>
+
+      <div class="mt-8 relative">
+        <UPopover
+          v-model:open="openCustomAnchor"
+          :dismissible="false"
+        >
+          <template #anchor>
+            <UInput placeholder="Search" class="w-56" @focus="openCustomAnchor = true" />
+          </template>
+
+          <template #content>
+            <Placeholder class="size-48 m-4 inline-flex" />
+          </template>
+        </UPopover>
+      </div>
     </div>
 
     <div class="mt-24">

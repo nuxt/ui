@@ -33,7 +33,7 @@ describe('Button', () => {
     ['with loading and avatar', { props: { loading: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with loading trailing', { props: { loading: true, trailing: true } }],
     ['with loading trailing and avatar', { props: { loading: true, trailing: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
-    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-sparkles' } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with disabled', { props: { label: 'Button', disabled: true } }],
     ['with disabled and with link', { props: { label: 'Button', disabled: true, to: '/link' } }],
     ['with block', { props: { label: 'Button', block: true } }],
@@ -75,7 +75,7 @@ describe('Button', () => {
     const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
-    expect(icon?.vm?.name).toBe('i-lucide-refresh-cw')
+    expect(icon?.vm?.name).toBe('i-lucide-loader-circle')
 
     resolve?.(null)
   })
@@ -106,7 +106,7 @@ describe('Button', () => {
     const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
-    expect(icon?.vm?.name).toBe('i-lucide-refresh-cw')
+    expect(icon?.vm?.name).toBe('i-lucide-loader-circle')
 
     resolve?.(null)
   })
