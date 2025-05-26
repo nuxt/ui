@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Sisesta käsk või otsi...',
       noMatch: 'Pole vastavaid andmeid',
       noData: 'Pole andmeid',
-      close: 'Sulge'
+      close: 'Sulge',
+      back: 'Tagasi'
     },
     selectMenu: {
       noMatch: 'Pole vastavaid andmeid',

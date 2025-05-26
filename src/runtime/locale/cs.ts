@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Zadejte příkaz nebo hledejte...',
       noMatch: 'Žádná shoda',
       noData: 'Žádná data',
-      close: 'Zavřít'
+      close: 'Zavřít',
+      back: 'Zpět'
     },
     selectMenu: {
       noMatch: 'Žádná shoda',

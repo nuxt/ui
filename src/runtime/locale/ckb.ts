@@ -25,7 +25,8 @@ export default defineLocale<Messages>({
       placeholder: 'فەرمانێک بنووسە یان بگەڕێ...',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
       noData: 'هیچ داتایەک نییە',
-      close: 'داخستن'
+      close: 'داخستن',
+      back: 'گەڕانەوە'
     },
     selectMenu: {
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',

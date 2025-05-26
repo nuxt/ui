@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: '명령을 입력하거나 검색...',
       noMatch: '일치하는 데이터가 없습니다.',
       noData: '데이터가 없습니다.',
-      close: '닫기'
+      close: '닫기',
+      back: '뒤로'
     },
     selectMenu: {
       noMatch: '일치하는 데이터가 없습니다.',

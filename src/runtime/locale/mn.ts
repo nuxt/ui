@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Комманд бичих эсвэл хайлт хийх...',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
       noData: 'Мэдээлэл байхгүй',
-      close: 'Хаах'
+      close: 'Хаах',
+      back: 'Буцах'
     },
     selectMenu: {
       noMatch: 'Тохирох мэдээлэл олдсонгүй',

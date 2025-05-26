@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Tastează o comandă sau caută...',
       noMatch: 'Nu există date corespunzătoare',
       noData: 'Nu există date',
-      close: 'Închide'
+      close: 'Închide',
+      back: 'Înapoi'
     },
     selectMenu: {
       noMatch: 'Nu există date corespunzătoare',

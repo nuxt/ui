@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Введите команду или выполните поиск...',
       noMatch: 'Совпадений не найдено',
       noData: 'Нет данных',
-      close: 'Закрыть'
+      close: 'Закрыть',
+      back: 'Назад'
     },
     selectMenu: {
       noMatch: 'Совпадений не найдено',

@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Kirjoita komento tai hae...',
       noMatch: 'Ei vastaavia tietoja',
       noData: 'Ei tietoja',
-      close: 'Sulje'
+      close: 'Sulje',
+      back: 'Takaisin'
     },
     selectMenu: {
       noMatch: 'Ei vastaavia tietoja',

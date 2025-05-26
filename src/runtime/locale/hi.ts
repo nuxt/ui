@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'एक आदेश या खोज टाइप करें...',
       noMatch: 'कोई मेल खाता डेटा नहीं',
       noData: 'कोई डेटा नहीं',
-      close: 'बंद करें'
+      close: 'बंद करें',
+      back: 'वापस'
     },
     selectMenu: {
       noMatch: 'कोई मेल खाता डेटा नहीं',
