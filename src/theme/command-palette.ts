@@ -41,6 +41,11 @@ export default (options: Required<ModuleOptions>) => ({
       true: {
         itemLeadingIcon: 'animate-spin'
       }
+    },
+    submenu: {
+      true: {
+        input: 'pl-2'
+      }
     }
   }
 })

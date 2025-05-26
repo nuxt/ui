@@ -72,6 +72,11 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    */
   selectedIcon?: string
   /**
+   * The button displayed when navigating back to the parent menu.
+   * @defaultValue { size: 'sm', color: 'neutral', variant: 'ghost', icon: 'i-lucide-arrow-left' }
+   */
+  backButton?: ButtonProps
+  /**
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
    */
@@ -291,16 +296,17 @@ const groups = computed(() => {
         :autofocus="autofocus"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
-        :class="ui.input({ class: props.ui?.input })"
+        :class="ui.input({ class: props.ui?.input, submenu: true })"
       >
         <template #leading>
           <UButton
             v-if="currentLevel"
-            :icon="appConfig.ui.icons.arrowLeft || 'i-heroicons-arrow-left'"
             size="sm"
             color="neutral"
             variant="ghost"
+            icon="i-lucide-arrow-left"
             :aria-label="t('commandPalette.back')"
+            v-bind="backButton"
             @click="navigateBack"
           />
         </template>
