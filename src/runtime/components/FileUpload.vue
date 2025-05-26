@@ -1,6 +1,6 @@
 <script lang="ts">
-import theme from '#build/ui/file-upload'
 import type { AppConfig } from '@nuxt/schema'
+import theme from '#build/ui/file-upload'
 import type { ComponentConfig } from '../types/utils'
 import type { AvatarProps } from '../types'
 
@@ -82,6 +82,7 @@ const props = withDefaults(defineProps<FileUploadProps>(), {
 })
 
 const emits = defineEmits<FileUploadEmits<T>>()
+
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 
 const {
@@ -102,12 +103,10 @@ const files = defineModel<T[]>()
 const dragging = ref(false)
 const filePreviews = ref<Record<string, string>>({})
 
-const ui = computed(() =>
-  tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
-    size: size.value,
-    multiple: props.multiple
-  })
-)
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
+  size: size.value,
+  multiple: props.multiple
+}))
 
 function fileKey(f: File) {
   // Use name + lastModified for uniqueness
@@ -281,7 +280,7 @@ defineExpose({ fileInputRef })
                 :src="fileItem.file.type.includes('image') ? filePreviews[fileKey(fileItem.file)] : undefined"
                 :icon="fileItem.file.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
                 :alt="fileItem.file.name"
-                :size="(ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size']"
+                :size="((ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size'])"
                 :class="ui.fileAvatar({ class: props.ui?.fileAvatar })"
               />
               <div>
