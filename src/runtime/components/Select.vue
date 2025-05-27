@@ -250,7 +250,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
 
       <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
         <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
-          <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+          <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
             {{ displayedModelValue }}
           </span>
           <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">

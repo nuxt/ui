@@ -202,7 +202,7 @@ name: 'popover-command-palette-example'
 ---
 ::
 
-### With anchor slot
+### With anchor slot :badge{label="New" class="align-text-top"}
 
 You can use the `#anchor` slot to position the Popover against a custom element.
 

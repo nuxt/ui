@@ -23,7 +23,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `badge?: string | number | BadgeProps`{lang="ts-type"}
 - `tooltip?: TooltipProps`{lang="ts-type"}
 - `trailingIcon?: string`{lang="ts-type"}
-- `type?: 'label' | 'link'`{lang="ts-type"}
+- `type?: 'label' | 'trigger' | 'link'`{lang="ts-type"}
 - `defaultOpen?: boolean`{lang="ts-type"}
 - `open?: boolean`{lang="ts-type"}
 - `value?: string`{lang="ts-type"}
@@ -994,7 +994,7 @@ props:
 ---
 ::
 
-### With popover in items :badge{label="Soon" class="align-text-top"}
+### With popover in items :badge{label="New" class="align-text-top"}
 
 When orientation is `vertical` and the menu is `collapsed`, you can set the `popover` prop to `true` to display a [Popover](/components/popover) around items with their children but you can also use the `popover` property on each item to override the default popover.
 
