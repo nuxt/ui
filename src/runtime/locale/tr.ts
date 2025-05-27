@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Bir komut yazın veya arama yapın...',
       noMatch: 'Eşleşen veri yok',
       noData: 'Veri yok',
-      root: 'Ana Sayfa',
       close: 'Kapat',
       back: 'Geri'
     },

@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Kirjoita komento tai hae...',
       noMatch: 'Ei vastaavia tietoja',
       noData: 'Ei tietoja',
-      root: 'Koti',
       close: 'Sulje',
       back: 'Takaisin'
     },

@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Zadejte příkaz nebo hledejte...',
       noMatch: 'Žádná shoda',
       noData: 'Žádná data',
-      root: 'Domů',
       close: 'Zavřít',
       back: 'Zpět'
     },

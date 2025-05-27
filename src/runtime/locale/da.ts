@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Skriv en kommando eller søg...',
       noMatch: 'Ingen matchende data',
       noData: 'Ingen data',
-      root: 'Hjem',
       close: 'Luk',
       back: 'Tilbage'
     },

@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Əmr daxil edin və ya axtarın...',
       noMatch: 'Uyğun məlumat tapılmadı',
       noData: 'Məlumat yoxdur',
-      root: 'Ana səhifə',
       close: 'Bağla',
       back: 'Geri'
     },

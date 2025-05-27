@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'एक आदेश या खोज टाइप करें...',
       noMatch: 'कोई मेल खाता डेटा नहीं',
       noData: 'कोई डेटा नहीं',
-      root: 'होम',
       close: 'बंद करें',
       back: 'वापस'
     },

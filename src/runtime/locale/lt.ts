@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Įveskite komandą arba ieškokite...',
       noMatch: 'Nėra atitinkančių duomenų',
       noData: 'Nėra duomenų',
-      root: 'Pradžia',
       close: 'Uždaryti',
       back: 'Atgal'
     },

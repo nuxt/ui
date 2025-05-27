@@ -25,7 +25,6 @@ export default defineLocale<Messages>({
       placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ...',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
       noData: 'سانلىق مەلۇمات يوق',
-      root: 'باش بەت',
       close: 'تاقاش',
       back: 'قايتىش'
     },

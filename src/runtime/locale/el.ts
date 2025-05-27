@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
       noData: 'Δεν υπάρχουν δεδομένα',
-      root: 'Αρχική',
       close: 'Κλείσιμο',
       back: 'Πίσω'
     },

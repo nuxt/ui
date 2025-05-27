@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
       noData: 'Маълумот нест',
-      root: 'Асосӣ',
       close: 'Бастан',
       back: 'Бозгашт'
     },

@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Մուտքագրեք հրաման կամ որոնեք...',
       noMatch: 'Համընկնումներ չեն գտնվել',
       noData: 'Տվյալներ չկան',
-      root: 'Գլխավոր',
       close: 'Փակել',
       back: 'Հետ'
     },

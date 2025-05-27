@@ -25,7 +25,6 @@ export default defineLocale<Messages>({
       placeholder: 'یک دستور وارد کنید یا جستجو کنید...',
       noMatch: 'داده‌ای یافت نشد',
       noData: 'داده‌ای موجود نیست',
-      root: 'خانه',
       close: 'بستن',
       back: 'بازگشت'
     },

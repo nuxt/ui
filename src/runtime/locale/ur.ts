@@ -25,7 +25,6 @@ export default defineLocale<Messages>({
       placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
       noData: 'کوئی ڈیٹا نہیں',
-      root: 'ہوم',
       close: 'بند کریں',
       back: 'واپس'
     },

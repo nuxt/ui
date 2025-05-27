@@ -24,7 +24,6 @@ export default defineLocale<Messages>({
       placeholder: 'Wpisz polecenie lub wyszukaj...',
       noMatch: 'Brak pasujących danych',
       noData: 'Brak danych',
-      root: 'Strona główna',
       close: 'Zamknij',
       back: 'Wstecz'
     },
