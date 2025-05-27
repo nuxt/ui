@@ -185,8 +185,9 @@ const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
-const navigationStack = ref<{ group: G, parentItem?: T }[]>([])
-const currentLevel = computed(() => navigationStack.value[navigationStack.value.length - 1] || null)
+
+const menuStack = ref<{ group: G, parentItem?: T }[]>([])
+const activeSubmenu = computed(() => menuStack.value[menuStack.value.length - 1] || null)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
@@ -223,26 +224,29 @@ function navigateToSubmenu(item: T, group: G) {
       items: item.children
     } as G
 
-    navigationStack.value.push({ group: childrenGroup as UnwrapRef<G>, parentItem: item as UnwrapRef<T> })
+    menuStack.value.push({
+      group: childrenGroup as UnwrapRef<G>,
+      parentItem: item as UnwrapRef<T>
+    })
     searchTerm.value = ''
   }
 }
 
 function navigateBack() {
-  if (navigationStack.value.length > 0) {
-    navigationStack.value.pop()
+  if (menuStack.value.length > 0) {
+    menuStack.value.pop()
     searchTerm.value = ''
   }
 }
 
 const currentPlaceholder = computed(() => {
-  const parentItem = currentLevel.value?.parentItem as T | undefined
+  const parentItem = activeSubmenu.value?.parentItem as T | undefined
   return parentItem?.placeholder || props.placeholder || t('commandPalette.placeholder')
 })
 
 const items = computed(() => {
-  if (currentLevel.value) {
-    return currentLevel.value.group.items?.map(item => ({ ...(item as T), group: currentLevel.value!.group.id })) || []
+  if (activeSubmenu.value) {
+    return activeSubmenu.value.group.items?.map(item => ({ ...(item as T), group: activeSubmenu.value!.group.id })) || []
   }
 
   return props.groups?.filter((group) => {
@@ -276,8 +280,8 @@ function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matc
 }
 
 const groups = computed(() => {
-  if (currentLevel.value) {
-    const group = currentLevel.value.group as G
+  if (activeSubmenu.value) {
+    const group = activeSubmenu.value.group as G
     const items = fuseResults.value.map(result => ({ ...result.item, matches: result.matches }))
     return [getGroupWithItems(group, items)]
   }
@@ -312,7 +316,7 @@ const groups = computed(() => {
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
         @keydown.esc="(e: KeyboardEvent) => {
-          if (!!currentLevel) {
+          if (!!activeSubmenu) {
             e.preventDefault()
             navigateBack()
           }
@@ -320,7 +324,7 @@ const groups = computed(() => {
       >
         <template #leading>
           <UButton
-            v-if="currentLevel"
+            v-if="activeSubmenu"
             :icon="backIcon || appConfig.ui.icons.arrowLeft"
             size="md"
             color="neutral"
