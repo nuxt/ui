@@ -95,6 +95,29 @@ const groups = computed(() => [{
 
         toast.add({ title: 'New folder added!' })
       }
+    }, {
+      label: 'Share',
+      placeholder: 'Search share options...',
+      icon: 'i-lucide-share',
+      children: [{
+        label: 'Share with everyone',
+        suffix: 'Share with everyone in the current directory or workspace.',
+        icon: 'i-lucide-share',
+        onSelect(e: Event) {
+          e.preventDefault()
+
+          toast.add({ title: 'Shared with everyone!' })
+        }
+      }, {
+        label: 'Share with team',
+        suffix: 'Share with the team in the current directory or workspace.',
+        icon: 'i-lucide-users',
+        onSelect(e: Event) {
+          e.preventDefault()
+
+          toast.add({ title: 'Shared with team!' })
+        }
+      }]
     }]
   }]
 }])

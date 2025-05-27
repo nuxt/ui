@@ -224,7 +224,6 @@ function navigateToSubmenu(item: T, group: G) {
     } as G
 
     navigationStack.value.push({ group: childrenGroup as UnwrapRef<G>, parentItem: item as UnwrapRef<T> })
-
     searchTerm.value = ''
   }
 }
@@ -236,11 +235,13 @@ function navigateBack() {
   }
 }
 
+const currentPlaceholder = computed(() => {
+  const parentItem = currentLevel.value?.parentItem as T | undefined
+  return parentItem?.placeholder || props.placeholder || t('commandPalette.placeholder')
+})
+
 const items = computed(() => {
   if (currentLevel.value) {
-    if (currentLevel.value.group.ignoreFilter) {
-      return []
-    }
     return currentLevel.value.group.items?.map(item => ({ ...(item as T), group: currentLevel.value!.group.id })) || []
   }
 
@@ -249,11 +250,10 @@ const items = computed(() => {
       console.warn(`[@nuxt/ui] CommandPalette group is missing an \`id\` property`)
       return false
     }
-    if (group.ignoreFilter) {
-      return false
-    }
     return true
-  }).flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || []
+  }).flatMap(group =>
+    group.items?.map(item => ({ ...item, group: group.id })) || []
+  ) || []
 })
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
@@ -275,62 +275,28 @@ function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matc
   }
 }
 
-const currentPlaceholder = computed(() => {
-  const parentItem = currentLevel.value?.parentItem as T | undefined
-  if (parentItem?.placeholder) {
-    return parentItem.placeholder
-  }
-
-  return props.placeholder || t('commandPalette.placeholder')
-})
-
 const groups = computed(() => {
   if (currentLevel.value) {
-    const currentGroup = currentLevel.value.group as G
-    let itemsForSubmenu: (T & { matches?: FuseResult<T>['matches'] })[]
-
-    if (currentGroup.ignoreFilter) {
-      itemsForSubmenu = (currentGroup.items || []) as T[]
-    } else {
-      itemsForSubmenu = fuseResults.value.map(result => ({
-        ...result.item,
-        matches: result.matches
-      })) as (T & { matches?: FuseResult<T>['matches'] })[]
-    }
-
-    return [getGroupWithItems(currentGroup, itemsForSubmenu)]
+    const group = currentLevel.value.group as G
+    const items = fuseResults.value.map(result => ({ ...result.item, matches: result.matches }))
+    return [getGroupWithItems(group, items)]
   }
 
   const groupsById = fuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
-    if (!item.group) {
-      return acc
-    }
+    if (!item.group) return acc
 
     acc[item.group] ||= []
     acc[item.group]?.push({ ...item, matches })
-
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
 
-  const fuseGroups = Object.entries(groupsById).map(([id, items]) => {
-    const group = props.groups?.find(group => group.id === id)
-    if (!group) {
-      return
-    }
-
-    return getGroupWithItems(group, items)
-  }).filter(group => !!group)
-
-  const nonFuseGroups = props.groups
-    ?.map((group, index) => ({ ...group, index }))
-    ?.filter(group => group.ignoreFilter && group.items?.length)
-    ?.map(group => ({ ...getGroupWithItems(group, group.items || []), index: group.index })) || []
-
-  return nonFuseGroups.reduce((acc, group) => {
-    acc.splice(group.index, 0, group)
-    return acc
-  }, [...fuseGroups])
+  return Object.entries(groupsById)
+    .map(([id, items]) => {
+      const group = props.groups?.find(group => group.id === id)
+      return group ? getGroupWithItems(group, items) : undefined
+    })
+    .filter((group): group is NonNullable<typeof group> => !!group)
 })
 </script>
 
