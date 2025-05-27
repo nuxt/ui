@@ -36,7 +36,7 @@ export interface TimelineProps<T extends TimelineItem = TimelineItem> {
   color?: Timeline['variants']['color']
   /**
    * The orientation of the Timeline.
-   * @defaultValue 'horizontal'
+   * @defaultValue 'vertical'
    */
   orientation?: Timeline['variants']['orientation']
   defaultValue?: string | number
@@ -94,7 +94,7 @@ const currentStepIndex = computed(() => {
       :data-state="index < currentStepIndex ? 'completed' : index === currentStepIndex ? 'active' : undefined"
     >
       <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
-        <UAvatar :size="size" :icon="item.icon" v-bind="typeof item.avatar === 'object' ? item.avatar : {}" :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" :ui="{ icon: 'text-inherit' }">
+        <UAvatar :size="size" :icon="item.icon" v-bind="typeof item.avatar === 'object' ? item.avatar : {}" :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" :ui="{ icon: 'text-inherit', fallback: 'text-inherit' }">
           <slot :name="((item.slot ? `${item.slot}-indicator` : 'indicator') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" />
         </UAvatar>
 

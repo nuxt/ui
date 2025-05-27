@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex gap-1.5',
-    item: 'group relative flex flex-1',
+    item: 'group relative flex flex-1 gap-3',
     container: 'relative flex items-center gap-1.5',
     indicator: 'group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted',
     separator: 'flex-1 rounded-full bg-elevated',
@@ -38,25 +38,31 @@ export default (options: Required<ModuleOptions>) => ({
     },
 
     size: {
-      xs: {
-        item: 'gap-3'
-      },
-      sm: {
-        item: 'gap-2'
-      },
-      md: {
-        item: 'gap-2.5'
-      },
-      lg: {
-        item: 'gap-3'
-      },
-      xl: {
-        item: 'gap-3.5'
-      }
+      '3xs': '',
+      '2xs': '',
+      'xs': '',
+      'sm': '',
+      'md': '',
+      'lg': '',
+      'xl': '',
+      '2xl': '',
+      '3xl': ''
     }
   },
 
   compoundVariants: [{
+    orientation: 'horizontal',
+    size: '3xs',
+    class: {
+      wrapper: 'pe-4.5'
+    }
+  }, {
+    orientation: 'horizontal',
+    size: '2xs',
+    class: {
+      wrapper: 'pe-5'
+    }
+  }, {
     orientation: 'horizontal',
     size: 'xs',
     class: {
@@ -87,6 +93,30 @@ export default (options: Required<ModuleOptions>) => ({
       wrapper: 'pe-7.5'
     }
   }, {
+    orientation: 'horizontal',
+    size: '2xl',
+    class: {
+      wrapper: 'pe-8'
+    }
+  }, {
+    orientation: 'horizontal',
+    size: '3xl',
+    class: {
+      wrapper: 'pe-8.5'
+    }
+  }, {
+    orientation: 'vertical',
+    size: '3xs',
+    class: {
+      wrapper: '-mt-0.5 pb-4.5'
+    }
+  }, {
+    orientation: 'vertical',
+    size: '2xs',
+    class: {
+      wrapper: 'pb-5'
+    }
+  }, {
     orientation: 'vertical',
     size: 'xs',
     class: {
@@ -115,6 +145,18 @@ export default (options: Required<ModuleOptions>) => ({
     size: 'xl',
     class: {
       wrapper: 'mt-2.5 pb-7.5'
+    }
+  }, {
+    orientation: 'vertical',
+    size: '2xl',
+    class: {
+      wrapper: 'mt-3 pb-8'
+    }
+  }, {
+    orientation: 'vertical',
+    size: '3xl',
+    class: {
+      wrapper: 'mt-3.5 pb-8.5'
     }
   }],
 
