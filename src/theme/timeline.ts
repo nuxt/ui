@@ -8,6 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     indicator: 'group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted',
     separator: 'flex-1 rounded-full bg-elevated',
     wrapper: 'w-full',
+    date: 'text-dimmed text-xs/5',
     title: 'font-medium text-highlighted text-sm',
     description: 'text-muted text-wrap text-sm'
   },

@@ -8,14 +8,15 @@ import type { DynamicSlots, ComponentConfig } from '../types/utils'
 type Timeline = ComponentConfig<typeof theme, AppConfig, 'timeline'>
 
 export interface TimelineItem {
-  value?: string | number
+  date?: string
   title?: string
   description?: string
   icon?: string
   avatar?: AvatarProps
+  value?: string | number
   slot?: string
   class?: any
-  ui?: Pick<Timeline['slots'], 'item' | 'container' | 'indicator' | 'separator' | 'wrapper' | 'title' | 'description'>
+  ui?: Pick<Timeline['slots'], 'item' | 'container' | 'indicator' | 'separator' | 'wrapper' | 'date' | 'title' | 'description'>
   [key: string]: any
 }
 
@@ -50,7 +51,7 @@ export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
   indicator: SlotProps<T>
   title: SlotProps<T>
   description: SlotProps<T>
-} & DynamicSlots<T, 'indicator' | 'title' | 'description', { item: T }>
+} & DynamicSlots<T, 'indicator' | 'date' | 'title' | 'description', { item: T }>
 
 </script>
 
@@ -106,6 +107,11 @@ const currentStepIndex = computed(() => {
       </div>
 
       <div :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+        <div v-if="item.date" :class="ui.date({ class: [props.ui?.date, item.ui?.date] })">
+          <slot :name="((item.slot ? `${item.slot}-date` : 'date') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
+            {{ item.date }}
+          </slot>
+        </div>
         <div v-if="item.title || !!slots.title" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
           <slot :name="((item.slot ? `${item.slot}-title` : 'title') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
             {{ item.title }}
