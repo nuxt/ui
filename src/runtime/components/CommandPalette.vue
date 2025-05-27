@@ -162,7 +162,7 @@ import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupL
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { useAppConfig } from '#imports'
+import { defineShortcuts, useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { tv } from '../utils/tv'
@@ -197,6 +197,13 @@ const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon')
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })())
+
+defineShortcuts({
+  meta_backspace: {
+    usingInput: true,
+    handler: () => navigateBack()
+  }
+})
 
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
@@ -278,6 +285,15 @@ function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matc
   }
 }
 
+const currentPlaceholder = computed(() => {
+  const parentItem = currentLevel.value?.parentItem as T | undefined
+  if (parentItem?.placeholder) {
+    return parentItem.placeholder
+  }
+
+  return props.placeholder || t('commandPalette.placeholder')
+})
+
 const groups = computed(() => {
   if (currentLevel.value) {
     const currentGroup = currentLevel.value.group as G
@@ -333,7 +349,7 @@ const groups = computed(() => {
   <ListboxRoot v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
-        :placeholder="placeholder || t('commandPalette.placeholder')"
+        :placeholder="currentPlaceholder"
         variant="none"
         :autofocus="autofocus"
         v-bind="inputProps"
