@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { TimelineItem } from '@nuxt/ui'
 import theme from '#build/ui/timeline'
 
 const sizes = Object.keys(theme.variants.size)
@@ -8,57 +9,48 @@ const orientations = Object.keys(theme.variants.orientation)
 const orientation = ref('vertical' as const)
 const color = ref('primary' as const)
 const size = ref('md' as const)
-const activeValue = ref('none' as const)
 
-const items = [
-  {
-    title: 'John Doe',
-    description: 'added label',
-    icon: 'i-lucide-tag',
-    value: 'backlog',
-    badge: 'backlog',
-    slot: 'badge' as const
-  },
-  {
-    title: 'Benjamin Canac',
-    description: 'Assigned to Benjamin Canac',
-    avatar: {
-      src: 'https://github.com/benjamincanac.png'
-    },
-    value: 'assigned'
-  },
-  {
-    title: 'Benjamin Canac',
-    description: 'Moved this to "in progress"',
-    icon: 'i-lucide-loader',
-    value: 'in-progress'
-  },
-  {
-    title: 'John Doe',
-    description: 'Moved this to "done"',
-    icon: 'i-lucide-check-circle',
-    value: 'done'
-  }
-]
+const items = [{
+  title: 'Project Kickoff',
+  description: 'Kicked off the project with team alignment. Set up project milestones and allocated resources.',
+  icon: 'i-lucide-rocket',
+  value: 'kickoff'
+}, {
+  title: 'Design Phase',
+  description: 'User research and design workshops. Created wireframes and prototypes for user testing',
+  icon: 'i-lucide-palette',
+  value: 'design'
+}, {
+  title: 'Development Sprint',
+  description: 'Frontend and backend development. Implemented core features and integrated with APIs.',
+  icon: 'i-lucide-code',
+  value: 'development'
+}, {
+  title: 'Testing & Deployment',
+  description: 'QA testing and performance optimization. Deployed the application to production.',
+  icon: 'i-lucide-check-circle',
+  value: 'deployment'
+}] satisfies TimelineItem[]
 
-const values = ['none', ...items.map(item => item.value)]
+const value = ref('kickoff')
 </script>
 
 <template>
   <div class="flex flex-col gap-10">
-    <div class="flex items-center justify-center gap-2 ">
+    <div class="flex items-center justify-center gap-2">
       <USelect v-model="color" :items="colors" placeholder="Color" />
       <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
       <USelect v-model="size" :items="sizes" placeholder="Size" />
-      <USelect v-model="activeValue" :items="values" placeholder="Active value" />
+      <USelect v-model="value" :items="items.map(item => item.value)" placeholder="Value" />
     </div>
 
-    <UTimeline :size="size" :color="color" :orientation="orientation" :active-value="activeValue" :items="items">
-      <template #badge-description="{ item }">
-        <div class="flex items-center gap-2">
-          <span>{{ item.description }}</span><UBadge :size="size" :label="item.badge" />
-        </div>
-      </template>
-    </UTimeline>
+    <UTimeline
+      v-model="value"
+      :color="color"
+      :orientation="orientation"
+      :size="size"
+      :items="items"
+      class="data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-96"
+    />
   </div>
 </template>

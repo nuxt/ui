@@ -1,8 +1,9 @@
+<!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/timeline'
-import type { ComponentConfig, DynamicSlots } from '../types/utils'
-import type { AvatarProps } from './Avatar.vue'
+import type { AvatarProps } from '../types'
+import type { DynamicSlots, ComponentConfig } from '../types/utils'
 
 type Timeline = ComponentConfig<typeof theme, AppConfig, 'timeline'>
 
@@ -14,7 +15,7 @@ export interface TimelineItem {
   avatar?: AvatarProps
   slot?: string
   class?: any
-  ui?: Pick<Timeline['slots'], 'item' | 'itemContainer' | 'itemIndicatorWrapper' | 'itemIndicator' | 'itemIcon' | 'itemLeadingAvatar' | 'itemLeadingAvatarSize' | 'itemSeparator' | 'itemWrapper' | 'itemTitle' | 'itemDescription'>
+  ui?: Pick<Timeline['slots'], 'item' | 'container' | 'indicator' | 'icon' | 'avatar' | 'avatarSize' | 'separator' | 'wrapper' | 'title' | 'description'>
   [key: string]: any
 }
 
@@ -38,7 +39,7 @@ export interface TimelineProps<T extends TimelineItem = TimelineItem> {
    * @defaultValue 'horizontal'
    */
   orientation?: Timeline['variants']['orientation']
-  activeValue?: string | number
+  defaultValue?: string | number
   class?: any
   ui?: Timeline['slots']
 }
@@ -50,18 +51,22 @@ export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
   title: SlotProps<T>
   description: SlotProps<T>
 } & DynamicSlots<T, 'indicator' | 'title' | 'description', { item: T }>
+
 </script>
 
 <script setup lang="ts" generic="T extends TimelineItem">
 import { computed } from 'vue'
+import { Primitive, Separator } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import UIcon from './Icon.vue'
-import { Primitive, Separator } from 'reka-ui'
+import UAvatar from './Avatar.vue'
 
 const props = withDefaults(defineProps<TimelineProps<T>>(), {
   orientation: 'vertical'
 })
+const slots = defineSlots<TimelineSlots<T>>()
+
+const modelValue = defineModel<string | number>()
 
 const appConfig = useAppConfig() as Timeline['AppConfig']
 
@@ -71,54 +76,45 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.timeline || 
   color: props.color
 }))
 
-const currentStepIndex = computed(
-  () => ((typeof props.activeValue === 'string')
-    ? props.items.findIndex(item => item.value === props.activeValue)
-    : props.activeValue) ?? -1
-)
+const currentStepIndex = computed(() => {
+  const value = modelValue.value ?? props.defaultValue
+
+  return ((typeof value === 'string')
+    ? props.items.findIndex(item => item.value === value)
+    : value) ?? -1
+})
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.header({ class: props.ui?.header })">
-      <div
-        v-for="(item, count) in items"
-        :key="item.value ?? count"
-        :step="count"
-        :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
-        :data-state="count < currentStepIndex ? 'completed' : count === currentStepIndex ? 'active' : undefined"
-      >
-        <div :class="ui.itemContainer({ class: [props.ui?.itemContainer, item.ui?.itemContainer] })">
-          <div :class="ui.itemIndicatorWrapper({ class: [props.ui?.itemIndicatorWrapper, item.ui?.itemIndicatorWrapper] })">
-            <div :class="ui.itemIndicator({ class: [props.ui?.itemIndicator, item.ui?.itemIndicator] })">
-              <slot :name="item.slot ? `${item.slot}-indicator` : 'indicator'" :item="item">
-                <UIcon v-if="item.icon" :name="item.icon" :class="ui.itemIcon({ class: [props.ui?.itemIcon, item.ui?.itemIcon] })" />
-                <UAvatar v-else-if="item.avatar" :size="(item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size']" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" v-bind="item.avatar" />
-                <template v-else>
-                  {{ count + 1 }}
-                </template>
-              </slot>
-            </div>
-          </div>
+  <Primitive :as="as" :data-orientation="orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div
+      v-for="(item, index) in items"
+      :key="item.value ?? index"
+      :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
+      :data-state="index < currentStepIndex ? 'completed' : index === currentStepIndex ? 'active' : undefined"
+    >
+      <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
+        <UAvatar :size="size" :icon="item.icon" v-bind="typeof item.avatar === 'object' ? item.avatar : {}" :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" :ui="{ icon: 'text-inherit' }">
+          <slot :name="((item.slot ? `${item.slot}-indicator` : 'indicator') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" />
+        </UAvatar>
 
-          <Separator
-            v-if="count < items.length - 1"
-            :class="ui.itemSeparator({ class: [props.ui?.itemSeparator, item.ui?.itemSeparator] })"
-            :orientation="props.orientation"
-          />
+        <Separator
+          v-if="index < items.length - 1"
+          :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator] })"
+          :orientation="props.orientation"
+        />
+      </div>
+
+      <div :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+        <div v-if="item.title || !!slots.title" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
+          <slot :name="((item.slot ? `${item.slot}-title` : 'title') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
+            {{ item.title }}
+          </slot>
         </div>
-
-        <div :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, item.ui?.itemWrapper] })">
-          <div :class="ui.itemTitle({ class: [props.ui?.itemTitle, item.ui?.itemTitle] })">
-            <slot :name="item.slot ? `${item.slot}-title` : 'title'" :item="item">
-              {{ item.title }}
-            </slot>
-          </div>
-          <div :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
-            <slot :name="item.slot ? `${item.slot}-description` : 'description'" :item="item">
-              {{ item.description }}
-            </slot>
-          </div>
+        <div v-if="item.description || !!slots.description" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
+          <slot :name="((item.slot ? `${item.slot}-description` : 'description') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
+            {{ item.description }}
+          </slot>
         </div>
       </div>
     </div>

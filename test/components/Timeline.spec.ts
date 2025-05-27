@@ -37,13 +37,14 @@ describe('Timeline', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with activeValue', { props: { ...props, activeValue: 'assigned' } }],
-    ['with as', { props: { ...props, as: 'section' } }],
-    ['with class', { props: { ...props, class: 'gap-8' } }],
-    ['with ui', { props: { ...props, ui: { itemTitle: 'font-bold' } } }],
+    ['with modelValue', { props: { ...props, modelValue: 'assigned' } }],
+    ['with defaultValue', { props: { ...props, defaultValue: 'assigned' } }],
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
     ...sizes.map((size: string) => [`with size ${size} horizontal`, { props: { ...props, size } }]),
     ...sizes.map((size: string) => [`with size ${size} vertical`, { props: { ...props, size, orientation: 'vertical' } }]),
+    ['with as', { props: { ...props, as: 'section' } }],
+    ['with class', { props: { ...props, class: 'gap-8' } }],
+    ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
     // Slots
     ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }],
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
