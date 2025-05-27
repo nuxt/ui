@@ -15,7 +15,7 @@ export interface TimelineItem {
   avatar?: AvatarProps
   slot?: string
   class?: any
-  ui?: Pick<Timeline['slots'], 'item' | 'container' | 'indicator' | 'icon' | 'avatar' | 'avatarSize' | 'separator' | 'wrapper' | 'title' | 'description'>
+  ui?: Pick<Timeline['slots'], 'item' | 'container' | 'indicator' | 'separator' | 'wrapper' | 'title' | 'description'>
   [key: string]: any
 }
 
