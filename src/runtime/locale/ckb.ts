@@ -25,6 +25,7 @@ export default defineLocale<Messages>({
       placeholder: 'فەرمانێک بنووسە یان بگەڕێ...',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
       noData: 'هیچ داتایەک نییە',
+      root: 'سەرەتا',
       close: 'داخستن',
       back: 'گەڕانەوە'
     },

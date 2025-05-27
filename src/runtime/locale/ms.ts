@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Taip arahan atau carian...',
       noMatch: 'Tiada data yang sepadan',
       noData: 'Tiada data',
+      root: 'Laman Utama',
       close: 'Tutup',
       back: 'Kembali'
     },

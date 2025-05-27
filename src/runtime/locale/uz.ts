@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Buyruq kiriting yoki qidiring...',
       noMatch: 'Mos keluvchi natija topilmadi',
       noData: 'Maʼlumot yoʻq',
+      root: 'Bosh sahifa',
       close: 'Yopish',
       back: 'Orqaga'
     },

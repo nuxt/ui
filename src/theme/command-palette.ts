@@ -24,7 +24,11 @@ export default (options: Required<ModuleOptions>) => ({
     itemLabel: 'truncate space-x-1 rtl:space-x-reverse text-dimmed',
     itemLabelBase: 'text-highlighted [&>mark]:text-inverted [&>mark]:bg-primary',
     itemLabelPrefix: 'text-default',
-    itemLabelSuffix: 'text-dimmed [&>mark]:text-inverted [&>mark]:bg-primary'
+    itemLabelSuffix: 'text-dimmed [&>mark]:text-inverted [&>mark]:bg-primary',
+    breadcrumb: 'flex items-center gap-1 px-2.5 py-2 text-xs border-b border-default',
+    breadcrumbLink: 'text-muted hover:text-default focus:outline-none hover:underline',
+    breadcrumbSeparator: 'text-muted',
+    breadcrumbCurrent: 'font-semibold text-default'
   },
   variants: {
     active: {

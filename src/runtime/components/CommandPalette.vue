@@ -131,6 +131,7 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: string }> = {
   'empty'(props: { searchTerm?: string }): any
   'close'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
+  'breadcrumb'(props: { navigationStack: { group: UnwrapRef<G>, parentItem?: UnwrapRef<T> }[], navigate: (index: number) => void, ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -145,7 +146,7 @@ import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupL
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { useAppConfig } from '#imports'
+import { defineShortcuts, useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { tv } from '../utils/tv'
@@ -191,6 +192,13 @@ const fuse = computed(() => defu({}, props.fuse, {
   matchAllWhenSearchEmpty: true
 }))
 
+defineShortcuts({
+  meta_backspace: {
+    usingInput: true,
+    handler: () => navigateBack()
+  }
+})
+
 function navigateToSubmenu(item: T, group: G) {
   if (item.children && item.children.length > 0) {
     const childrenGroup: G = {
@@ -212,8 +220,20 @@ function navigateBack() {
   }
 }
 
+function navigateToBreadcrumb(index: number) {
+  if (index === -1) { // Root
+    navigationStack.value.splice(0, navigationStack.value.length)
+  } else {
+    navigationStack.value.splice(index + 1, navigationStack.value.length - index - 1)
+  }
+  searchTerm.value = ''
+}
+
 const items = computed(() => {
   if (currentLevel.value) {
+    if (currentLevel.value.group.ignoreFilter) {
+      return []
+    }
     return currentLevel.value.group.items?.map(item => ({ ...(item as T), group: currentLevel.value!.group.id })) || []
   }
 
@@ -250,7 +270,19 @@ function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matc
 
 const groups = computed(() => {
   if (currentLevel.value) {
-    return [getGroupWithItems(currentLevel.value.group as G, (currentLevel.value.group.items || []) as T[])]
+    const currentGroup = currentLevel.value.group as G
+    let itemsForSubmenu: (T & { matches?: FuseResult<T>['matches'] })[]
+
+    if (currentGroup.ignoreFilter) {
+      itemsForSubmenu = (currentGroup.items || []) as T[]
+    } else {
+      itemsForSubmenu = fuseResults.value.map(result => ({
+        ...result.item,
+        matches: result.matches
+      })) as (T & { matches?: FuseResult<T>['matches'] })[]
+    }
+
+    return [getGroupWithItems(currentGroup, itemsForSubmenu)]
   }
 
   const groupsById = fuseResults.value.reduce((acc, result) => {
@@ -329,8 +361,40 @@ const groups = computed(() => {
       </UInput>
     </ListboxFilter>
 
+    <slot
+      name="breadcrumb"
+      :navigation-stack="navigationStack"
+      :navigate="navigateToBreadcrumb"
+      :ui="ui"
+    >
+      <div
+        v-if="navigationStack.length"
+        :class="ui.breadcrumb({ class: props.ui?.breadcrumb })"
+      >
+        <button
+          :class="ui.breadcrumbLink({ class: props.ui?.breadcrumbLink })"
+          type="button"
+          @click="navigateToBreadcrumb(-1)"
+        >
+          {{ t('commandPalette.root') }}
+        </button>
+        <span v-for="(navItem, idx) in navigationStack" :key="idx" class="flex items-center gap-1">
+          <span :class="ui.breadcrumbSeparator({ class: props.ui?.breadcrumbSeparator })">/</span>
+          <button
+            v-if="idx < navigationStack.length - 1"
+            :class="ui.breadcrumbLink({ class: props.ui?.breadcrumbLink })"
+            type="button"
+            @click="navigateToBreadcrumb(idx)"
+          >
+            {{ navItem.group.label }}
+          </button>
+          <span v-else :class="ui.breadcrumbCurrent({ class: props.ui?.breadcrumbCurrent })">{{ navItem.group.label }}</span>
+        </span>
+      </div>
+    </slot>
+
     <ListboxContent :class="ui.content({ class: props.ui?.content })">
-      <div v-if="groups?.length" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div v-if="groups?.some(group => group.items && group.items.length)" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
         <ListboxGroup v-for="group in groups" :key="`group-${group.id}`" :class="ui.group({ class: props.ui?.group })">
           <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
             {{ get(group, props.labelKey as string) }}

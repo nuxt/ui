@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Въведете команда или потърсете...',
       noMatch: 'Няма съвпадение на данни',
       noData: 'Няма данни',
+      root: 'Начало',
       close: 'Затворете',
       back: 'Назад'
     },

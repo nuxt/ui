@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Комманд бичих эсвэл хайлт хийх...',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
       noData: 'Мэдээлэл байхгүй',
+      root: 'Нүүр',
       close: 'Хаах',
       back: 'Буцах'
     },

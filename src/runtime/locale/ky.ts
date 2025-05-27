@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Буйрук киргизиңиз же издөө…',
       noMatch: 'Эч нерсе табылган жок',
       noData: 'Маалымат жок',
+      root: 'Башкы бет',
       close: 'Жабуу',
       back: 'Артка'
     },

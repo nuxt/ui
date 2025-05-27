@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'コマンドを入力するか検索...',
       noMatch: '一致するデータがありません',
       noData: 'データがありません',
+      root: 'ホーム',
       close: '閉じる',
       back: '戻る'
     },

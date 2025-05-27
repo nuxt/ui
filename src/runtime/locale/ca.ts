@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Escriu una ordre o cerca...',
       noMatch: 'No hi ha dades coincidents',
       noData: 'Sense dades',
+      root: 'Inici',
       close: 'Tancar',
       back: 'Enrere'
     },

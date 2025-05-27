@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Írjon be egy parancsot vagy keressen...',
       noMatch: 'Nincs találat',
       noData: 'Nincs adat',
+      root: 'Kezdőlap',
       close: 'Bezárás',
       back: 'Vissza'
     },

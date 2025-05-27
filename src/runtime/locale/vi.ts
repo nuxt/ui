@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Nhập lệnh hoặc tìm kiếm...',
       noMatch: 'Không có kết quả phù hợp',
       noData: 'Không có dữ liệu',
+      root: 'Trang chủ',
       close: 'Đóng',
       back: 'Quay lại'
     },

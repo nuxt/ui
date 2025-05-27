@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Sisesta käsk või otsi...',
       noMatch: 'Pole vastavaid andmeid',
       noData: 'Pole andmeid',
+      root: 'Avaleht',
       close: 'Sulge',
       back: 'Tagasi'
     },

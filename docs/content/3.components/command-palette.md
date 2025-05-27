@@ -669,6 +669,27 @@ props:
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
+### With submenus
+
+You can create nested menus by using the `children` property on items. When an item has children, it will display a chevron icon and allow navigation into a submenu.
+
+::component-example
+---
+collapse: true
+name: 'command-palette-submenu-example'
+class: '!p-0'
+props:
+  autofocus: false
+---
+::
+
+::note
+When navigating into a submenu:
+- The search term is reset
+- A back button appears in the input
+- You can go back to the previous group using the keyboard shortcut :kbd{value="meta"} + :kbd{value="backspace"}
+::
+
 ## API
 
 ### Props

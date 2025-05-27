@@ -25,6 +25,7 @@ export default defineLocale<Messages>({
       placeholder: 'הקלד פקודה...',
       noMatch: 'לא נמצאה התאמה',
       noData: 'אין נתונים זמינים',
+      root: 'דף הבית',
       close: 'סגור',
       back: 'חזור'
     },

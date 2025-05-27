@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'พิมพ์คำสั่งหรือค้นหา...',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       noData: 'ไม่มีข้อมูล',
+      root: 'หน้าแรก',
       close: 'ปิด',
       back: 'ย้อนกลับ'
     },

@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Tastează o comandă sau caută...',
       noMatch: 'Nu există date corespunzătoare',
       noData: 'Nu există date',
+      root: 'Acasă',
       close: 'Închide',
       back: 'Înapoi'
     },

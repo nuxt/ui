@@ -25,6 +25,7 @@ export default defineLocale<Messages>({
       placeholder: 'اكتب أمرًا أو ابحث...',
       noMatch: 'لا توجد نتائج مطابقة',
       noData: 'لا توجد بيانات',
+      root: 'الرئيسية',
       close: 'إغلاق',
       back: 'رجوع'
     },

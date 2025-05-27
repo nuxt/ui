@@ -20,6 +20,7 @@ export type Messages = {
     noData: string
     close: string
     back: string
+    root: string
   }
   selectMenu: {
     noMatch: string

@@ -24,6 +24,7 @@ export default defineLocale<Messages>({
       placeholder: 'Vpiši ukaz ali išči...',
       noMatch: 'Ni ujemanj',
       noData: 'Ni podatkov',
+      root: 'Domov',
       close: 'Zapri',
       back: 'Nazaj'
     },
