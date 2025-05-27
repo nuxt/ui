@@ -47,6 +47,7 @@ describe('Timeline', () => {
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
     // Slots
     ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }],
+    ['with date slot', { props, slots: { date: () => 'Date slot' } }],
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TimelineProps, slots?: Partial<TimelineSlots> }) => {
