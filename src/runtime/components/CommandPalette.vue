@@ -26,10 +26,14 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   loading?: boolean
   disabled?: boolean
   slot?: string
+  /**
+   * The placeholder to display when the item has children.
+   */
+  placeholder?: string
+  children?: CommandPaletteItem[]
   onSelect?(e?: Event): void
   class?: any
   ui?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>
-  children?: CommandPaletteItem[]
   [key: string]: any
 }
 
@@ -72,10 +76,11 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    */
   selectedIcon?: string
   /**
-   * The button displayed when navigating back to the parent menu.
-   * @defaultValue { size: 'sm', color: 'neutral', variant: 'ghost', icon: 'i-lucide-arrow-left' }
+   * The icon displayed when an item has children.
+   * @defaultValue appConfig.ui.icons.chevronRight
+   * @IconifyIcon
    */
-  backButton?: ButtonProps
+  trailingIcon?: string
   /**
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
@@ -99,6 +104,17 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    * @IconifyIcon
    */
   closeIcon?: string
+  /**
+   * The button displayed when navigating back to the parent menu.
+   * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
+   */
+  back?: ButtonProps
+  /**
+   * The icon displayed in the back button.
+   * @defaultValue appConfig.ui.icons.arrowLeft
+   * @IconifyIcon
+   */
+  backIcon?: string
   groups?: G[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
@@ -202,6 +218,7 @@ function navigateToSubmenu(item: T, group: G) {
     } as G
 
     navigationStack.value.push({ group: childrenGroup as UnwrapRef<G>, parentItem: item as UnwrapRef<T> })
+
     searchTerm.value = ''
   }
 }
@@ -213,14 +230,14 @@ function navigateBack() {
   }
 }
 
-function navigateToBreadcrumb(index: number) {
-  if (index === -1) { // Root
-    navigationStack.value.splice(0, navigationStack.value.length)
-  } else {
-    navigationStack.value.splice(index + 1, navigationStack.value.length - index - 1)
-  }
-  searchTerm.value = ''
-}
+// function navigateToBreadcrumb(index: number) {
+//   if (index === -1) { // Root
+//     navigationStack.value.splice(0, navigationStack.value.length)
+//   } else {
+//     navigationStack.value.splice(index + 1, navigationStack.value.length - index - 1)
+//   }
+//   searchTerm.value = ''
+// }
 
 const items = computed(() => {
   if (currentLevel.value) {
@@ -321,7 +338,7 @@ const groups = computed(() => {
         :autofocus="autofocus"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
-        :class="ui.input({ class: props.ui?.input, submenu: !!currentLevel })"
+        :class="ui.input({ class: props.ui?.input })"
         @keydown.esc="(e: KeyboardEvent) => {
           if (!!currentLevel) {
             e.preventDefault()
@@ -332,12 +349,13 @@ const groups = computed(() => {
         <template #leading>
           <UButton
             v-if="currentLevel"
-            size="sm"
+            :icon="backIcon || appConfig.ui.icons.arrowLeft"
+            size="md"
             color="neutral"
-            variant="ghost"
-            icon="i-lucide-arrow-left"
+            variant="link"
             :aria-label="t('commandPalette.back')"
-            v-bind="backButton"
+            v-bind="(typeof back === 'object' ? back as Partial<ButtonProps> : {})"
+            :class="ui.back({ class: props.ui?.back })"
             @click="navigateBack"
           />
         </template>
@@ -360,7 +378,7 @@ const groups = computed(() => {
       </UInput>
     </ListboxFilter>
 
-    <slot
+    <!-- <slot
       name="breadcrumb"
       :navigation-stack="navigationStack"
       :navigate="navigateToBreadcrumb"
@@ -390,7 +408,7 @@ const groups = computed(() => {
           <span v-else :class="ui.breadcrumbCurrent({ class: props.ui?.breadcrumbCurrent })">{{ navItem.group.label }}</span>
         </span>
       </div>
-    </slot>
+    </slot> -->
 
     <ListboxContent :class="ui.content({ class: props.ui?.content })">
       <div v-if="groups?.some(group => group.items && group.items.length)" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
@@ -443,20 +461,20 @@ const groups = computed(() => {
 
                   <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
                     <slot :name="((item.slot ? `${item.slot}-trailing` : group.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index">
-                      <span v-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: [props.ui?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
-                        <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
-                      </span>
-
                       <UIcon
-                        v-else-if="item.children && item.children.length > 0"
-                        :name="appConfig.ui.icons.chevronRight || 'i-lucide-chevron-right'"
+                        v-if="item.children && item.children.length > 0"
+                        :name="trailingIcon || appConfig.ui.icons.chevronRight"
                         :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
                       />
+
+                      <span v-else-if="item.kbds?.length" :class="ui.itemTrailingKbds({ class: [props.ui?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
+                        <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+                      </span>
 
                       <UIcon v-else-if="group.highlightedIcon" :name="group.highlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: [props.ui?.itemTrailingHighlightedIcon, item.ui?.itemTrailingHighlightedIcon] })" />
                     </slot>
 
-                    <ListboxItemIndicator v-if="!item.children || !item.children.length" as-child>
+                    <ListboxItemIndicator v-if="!item.children?.length" as-child>
                       <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
                     </ListboxItemIndicator>
                   </span>

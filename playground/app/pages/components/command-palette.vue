@@ -76,6 +76,7 @@ const groups = computed(() => [{
     kbds: ['meta', 'L']
   }, {
     label: 'More actions',
+    placeholder: 'Search actions...',
     children: [{
       label: 'Create new file',
       suffix: 'Create a new file in the current directory or workspace.',
