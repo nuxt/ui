@@ -1,5 +1,40 @@
 # Changelog
 
+## [3.1.3](https://github.com/nuxt/ui/compare/v3.1.2...v3.1.3) (2025-05-26)
+
+### ⚠ BREAKING CHANGES
+
+* **NavigationMenu:** revert new `collapsible` field
+
+### Features
+
+* **locale:** add Kyrgyz language ([#4189](https://github.com/nuxt/ui/issues/4189)) ([4053047](https://github.com/nuxt/ui/commit/405304775e4b2b4e8b37a2364f3e5ee34b46036e))
+* **locale:** add Lithuanian language ([#4171](https://github.com/nuxt/ui/issues/4171)) ([d86956e](https://github.com/nuxt/ui/commit/d86956e1d57482b3e98eef2d34bff13544284b0b))
+* **locale:** add Malay language ([#4160](https://github.com/nuxt/ui/issues/4160)) ([c00f6e8](https://github.com/nuxt/ui/commit/c00f6e8cdfd88eeba58812b78d94a2326c13f164))
+* **locale:** add Mongolian language ([#4214](https://github.com/nuxt/ui/issues/4214)) ([44ea02c](https://github.com/nuxt/ui/commit/44ea02c0d64322ef0cfda63b234369c00d3d0180))
+* **Modal/Slideover:** add `after:enter` event ([#4187](https://github.com/nuxt/ui/issues/4187)) ([d9e9fea](https://github.com/nuxt/ui/commit/d9e9fea35e4b22d68324c9e85b3aa221a7987d0f))
+* **NavigationMenu:** add `tooltip` and `popover` props ([f2682fd](https://github.com/nuxt/ui/commit/f2682fd2ae8abb7807977727fc22ef34cb5752e5)), closes [#4186](https://github.com/nuxt/ui/issues/4186)
+* **NavigationMenu:** add `trigger` type in items ([9cf9f25](https://github.com/nuxt/ui/commit/9cf9f25f4424447691e03e9034155d1541badd43))
+* **NavigationMenu:** handle `vertical` orientation with Accordion instead of Collapsible ([1e2a10b](https://github.com/nuxt/ui/commit/1e2a10b4bdebaef12316ac60f98a956dad21c1ec)), closes [#4072](https://github.com/nuxt/ui/issues/4072) [#3911](https://github.com/nuxt/ui/issues/3911)
+* **Popover:** add `anchor` slot ([#4119](https://github.com/nuxt/ui/issues/4119)) ([473513c](https://github.com/nuxt/ui/commit/473513c2460d4329d7d2e0a0ea69bf1310a072d1))
+
+### Bug Fixes
+
+* **CheckboxGroup/RadioGroup:** variant `table` borders in RTL mode ([#4192](https://github.com/nuxt/ui/issues/4192)) ([43d281f](https://github.com/nuxt/ui/commit/43d281f6d1d8b0017ed61d929c5e311fb5b03447))
+* **CommandPalette:** add `presentation` role to viewport ([2ba94db](https://github.com/nuxt/ui/commit/2ba94db09e1ba86020d5d289f1ca1e24ef706299))
+* **ContextMenu/DropdownMenu:** wrap groups in a viewport ([dcf34a7](https://github.com/nuxt/ui/commit/dcf34a7ac236b96b1302ec2eae155b8f2d3784ef)), closes [#3315](https://github.com/nuxt/ui/issues/3315)
+* **Drawer:** improve title & description accessibility ([41087d4](https://github.com/nuxt/ui/commit/41087d4c9569eb00c04bd748e055cd151c2f762c)), closes [#4199](https://github.com/nuxt/ui/issues/4199)
+* **icons:** update `loading` icon ([#4163](https://github.com/nuxt/ui/issues/4163)) ([fe4e1f8](https://github.com/nuxt/ui/commit/fe4e1f859d42aa3c32bb7b75302e84a280abe525))
+* **Input/Textarea:** define model modifiers types ([#4195](https://github.com/nuxt/ui/issues/4195)) ([3243fb8](https://github.com/nuxt/ui/commit/3243fb88f71c5475824bfdc4d7c4f303b2d6790b))
+* **InputMenu/Select/SelectMenu:** manual viewport to display scrollbars ([f95abf8](https://github.com/nuxt/ui/commit/f95abf8d1d7b9149e400d7dc6f96f93f5154da7a)), closes [#4069](https://github.com/nuxt/ui/issues/4069)
+* **NavigationMenu:** incorrect hover when disabled and active ([d0be599](https://github.com/nuxt/ui/commit/d0be59946bfe30c79a6f75476385ab8538aa51b8))
+* **NavigationMenu:** only display `tooltip` when collapsed ([44f536f](https://github.com/nuxt/ui/commit/44f536fd0034facb3550d910fae71d4f9442ed19))
+* **NavigationMenu:** remove `font-medium` in popover children ([0236399](https://github.com/nuxt/ui/commit/02363994d66d3c2d11b9913f31167fa25f5c5de2))
+* **NavigationMenu:** revert new `collapsible` field ([3c78e2f](https://github.com/nuxt/ui/commit/3c78e2fd983f19b5cec65b4a94a8a8b14e548e5e))
+* **Textarea:** missing imports ([#4207](https://github.com/nuxt/ui/issues/4207)) ([6aab62e](https://github.com/nuxt/ui/commit/6aab62ec30e266c5f0da0cd24aefbb7c53f447ac))
+* **theme:** define `old-neutral` color as static ([#4193](https://github.com/nuxt/ui/issues/4193)) ([dae9f0b](https://github.com/nuxt/ui/commit/dae9f0b8631b3b9fb60ef47753f7aded0c36c4a2))
+* **Tooltip:** increase padding for consistency ([0634a75](https://github.com/nuxt/ui/commit/0634a756a496f5131841abafd218ae7e4aaa61e5))
+
 ## [3.1.2](https://github.com/nuxt/ui/compare/v3.1.1...v3.1.2) (2025-05-15)
 
 ### Features
