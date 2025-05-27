@@ -147,7 +147,6 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: string }> = {
   'empty'(props: { searchTerm?: string }): any
   'close'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
-  'breadcrumb'(props: { navigationStack: { group: UnwrapRef<G>, parentItem?: UnwrapRef<T> }[], navigate: (index: number) => void, ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -236,15 +235,6 @@ function navigateBack() {
     searchTerm.value = ''
   }
 }
-
-// function navigateToBreadcrumb(index: number) {
-//   if (index === -1) { // Root
-//     navigationStack.value.splice(0, navigationStack.value.length)
-//   } else {
-//     navigationStack.value.splice(index + 1, navigationStack.value.length - index - 1)
-//   }
-//   searchTerm.value = ''
-// }
 
 const items = computed(() => {
   if (currentLevel.value) {
@@ -393,38 +383,6 @@ const groups = computed(() => {
         </template>
       </UInput>
     </ListboxFilter>
-
-    <!-- <slot
-      name="breadcrumb"
-      :navigation-stack="navigationStack"
-      :navigate="navigateToBreadcrumb"
-      :ui="ui"
-    >
-      <div
-        v-if="navigationStack.length"
-        :class="ui.breadcrumb({ class: props.ui?.breadcrumb })"
-      >
-        <button
-          :class="ui.breadcrumbLink({ class: props.ui?.breadcrumbLink })"
-          type="button"
-          @click="navigateToBreadcrumb(-1)"
-        >
-          {{ t('commandPalette.root') }}
-        </button>
-        <span v-for="(navItem, idx) in navigationStack" :key="idx" class="flex items-center gap-1">
-          <span :class="ui.breadcrumbSeparator({ class: props.ui?.breadcrumbSeparator })">/</span>
-          <button
-            v-if="idx < navigationStack.length - 1"
-            :class="ui.breadcrumbLink({ class: props.ui?.breadcrumbLink })"
-            type="button"
-            @click="navigateToBreadcrumb(idx)"
-          >
-            {{ navItem.group.label }}
-          </button>
-          <span v-else :class="ui.breadcrumbCurrent({ class: props.ui?.breadcrumbCurrent })">{{ navItem.group.label }}</span>
-        </span>
-      </div>
-    </slot> -->
 
     <ListboxContent :class="ui.content({ class: props.ui?.content })">
       <div v-if="groups?.some(group => group.items && group.items.length)" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
