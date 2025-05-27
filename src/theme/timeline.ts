@@ -2,11 +2,11 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'flex',
+    root: 'flex gap-1.5',
     item: 'group relative flex flex-1',
-    container: 'relative flex',
+    container: 'relative flex items-center gap-1.5',
     indicator: 'group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted',
-    separator: 'absolute rounded-full bg-elevated',
+    separator: 'flex-1 rounded-full bg-elevated',
     wrapper: 'w-full',
     title: 'font-medium text-highlighted text-sm',
     description: 'text-muted text-wrap text-sm'
@@ -17,11 +17,12 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'flex-row w-full',
         item: 'flex-col',
-        separator: 'top-[calc(50%-2px)] end-[2px] h-0.5'
+        separator: 'h-0.5'
       },
       vertical: {
         root: 'flex-col',
-        separator: 'start-[calc(50%-1px)] bottom-[2px] w-0.5'
+        container: 'flex-col',
+        separator: 'w-0.5'
       }
     },
 
@@ -38,7 +39,7 @@ export default (options: Required<ModuleOptions>) => ({
 
     size: {
       xs: {
-        item: 'gap-1.5'
+        item: 'gap-3'
       },
       sm: {
         item: 'gap-2'
@@ -58,43 +59,63 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [{
     orientation: 'horizontal',
     size: 'xs',
-    class: { separator: 'start-[26px]', wrapper: 'pe-6' }
+    class: {
+      wrapper: 'pe-5.5'
+    }
   }, {
     orientation: 'horizontal',
     size: 'sm',
-    class: { separator: 'start-[30px]', wrapper: 'pe-7' }
+    class: {
+      wrapper: 'pe-6'
+    }
   }, {
     orientation: 'horizontal',
     size: 'md',
-    class: { separator: 'start-[34px]', wrapper: 'pe-8' }
+    class: {
+      wrapper: 'pe-6.5'
+    }
   }, {
     orientation: 'horizontal',
     size: 'lg',
-    class: { separator: 'start-[38px]', wrapper: 'pe-9' }
+    class: {
+      wrapper: 'pe-7'
+    }
   }, {
     orientation: 'horizontal',
     size: 'xl',
-    class: { separator: 'start-[42px]', wrapper: 'pe-10' }
+    class: {
+      wrapper: 'pe-7.5'
+    }
   }, {
     orientation: 'vertical',
     size: 'xs',
-    class: { separator: 'top-[26px]', wrapper: 'mt-0.5 pb-6' }
+    class: {
+      wrapper: 'mt-0.5 pb-5.5'
+    }
   }, {
     orientation: 'vertical',
     size: 'sm',
-    class: { separator: 'top-[30px]', wrapper: 'mt-1 pb-7' }
+    class: {
+      wrapper: 'mt-1 pb-6'
+    }
   }, {
     orientation: 'vertical',
     size: 'md',
-    class: { separator: 'top-[34px]', wrapper: 'mt-1.5 pb-8' }
+    class: {
+      wrapper: 'mt-1.5 pb-6.5'
+    }
   }, {
     orientation: 'vertical',
     size: 'lg',
-    class: { separator: 'top-[38px]', wrapper: 'mt-2 pb-9' }
+    class: {
+      wrapper: 'mt-2 pb-7'
+    }
   }, {
     orientation: 'vertical',
     size: 'xl',
-    class: { separator: 'top-[42px]', wrapper: 'mt-2.5 pb-10' }
+    class: {
+      wrapper: 'mt-2.5 pb-7.5'
+    }
   }],
 
   defaultVariants: {
