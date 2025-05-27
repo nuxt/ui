@@ -146,7 +146,7 @@ import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupL
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { defineShortcuts, useAppConfig } from '#imports'
+import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { tv } from '../utils/tv'
@@ -191,13 +191,6 @@ const fuse = computed(() => defu({}, props.fuse, {
   resultLimit: 12,
   matchAllWhenSearchEmpty: true
 }))
-
-defineShortcuts({
-  meta_backspace: {
-    usingInput: true,
-    handler: () => navigateBack()
-  }
-})
 
 function navigateToSubmenu(item: T, group: G) {
   if (item.children && item.children.length > 0) {
@@ -328,7 +321,13 @@ const groups = computed(() => {
         :autofocus="autofocus"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
-        :class="ui.input({ class: props.ui?.input, submenu: true })"
+        :class="ui.input({ class: props.ui?.input, submenu: !!currentLevel })"
+        @keydown.esc="(e: KeyboardEvent) => {
+          if (!!currentLevel) {
+            e.preventDefault()
+            navigateBack()
+          }
+        }"
       >
         <template #leading>
           <UButton
