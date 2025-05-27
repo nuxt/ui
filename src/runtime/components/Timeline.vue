@@ -49,6 +49,7 @@ type SlotProps<T extends TimelineItem> = (props: { item: T }) => any
 
 export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
   indicator: SlotProps<T>
+  date: SlotProps<T>
   title: SlotProps<T>
   description: SlotProps<T>
 } & DynamicSlots<T, 'indicator' | 'date' | 'title' | 'description', { item: T }>
