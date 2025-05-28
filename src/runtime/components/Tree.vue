@@ -29,7 +29,7 @@ export type TreeItem = {
   [key: string]: any
 }
 
-export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled'> {
+export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'ul'
@@ -116,7 +116,7 @@ const slots = defineSlots<TreeSlots<T>>()
 
 const appConfig = useAppConfig() as Tree['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: TreeItem[], level: number }, TreeSlots<T>>()
 
