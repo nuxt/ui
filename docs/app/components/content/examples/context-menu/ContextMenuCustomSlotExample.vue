@@ -28,7 +28,7 @@ const items = [
     </template>
 
     <template #refresh-trailing>
-      <UIcon v-if="loading" name="i-lucide-refresh-cw" class="shrink-0 size-5 text-primary animate-spin" />
+      <UIcon v-if="loading" name="i-lucide-loader-circle" class="shrink-0 size-5 text-primary animate-spin" />
     </template>
   </UContextMenu>
 </template>

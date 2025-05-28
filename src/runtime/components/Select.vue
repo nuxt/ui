@@ -135,7 +135,7 @@ export interface SelectSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
 import { computed, toRef } from 'vue'
-import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
+import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -250,7 +250,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
 
       <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
         <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
-          <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+          <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
             {{ displayedModelValue }}
           </span>
           <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
@@ -270,7 +270,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
       <SelectContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <slot name="content-top" />
 
-        <SelectViewport :class="ui.viewport({ class: props.ui?.viewport })">
+        <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
@@ -317,7 +317,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
               </SelectItem>
             </template>
           </SelectGroup>
-        </SelectViewport>
+        </div>
 
         <slot name="content-bottom" />
 

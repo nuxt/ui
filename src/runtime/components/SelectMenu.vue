@@ -166,7 +166,7 @@ export interface SelectMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { computed, toRef, toRaw } from 'vue'
-import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
+import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -385,7 +385,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
 
         <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
           <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
-            <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+            <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
               {{ displayedModelValue }}
             </span>
             <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
@@ -417,7 +417,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
             </slot>
           </ComboboxEmpty>
 
-          <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
+          <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
             <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
@@ -468,7 +468,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
             </ComboboxGroup>
 
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
-          </ComboboxViewport>
+          </div>
 
           <slot name="content-bottom" />
         </FocusScope>
