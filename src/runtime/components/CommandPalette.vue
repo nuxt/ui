@@ -303,7 +303,7 @@ const groups = computed(() => {
       const group = props.groups?.find(group => group.id === id)
       return group ? getGroupWithItems(group, items) : undefined
     })
-    .filter((group): group is NonNullable<typeof group> => !!group)
+    .filter(group => !!group)
 
   const nonFuseGroups = props.groups?.filter(group => group.ignoreFilter && group.id)
     .map((group) => {
