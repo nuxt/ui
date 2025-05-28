@@ -59,7 +59,7 @@ export interface FormEmits<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface FormSlots {
-  default(props?: { errors: FormError[] }): any
+  default(props?: { errors: FormError[], loading: boolean }): any
 }
 </script>
 
@@ -240,7 +240,7 @@ async function onSubmitWrapper(payload: Event) {
 
   try {
     event.data = await _validate({ nested: true, transform: props.transform })
-    await props.onSubmit?.(event)
+    const result = await props.onSubmit?.(event)
     dirtyFields.clear()
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
@@ -315,6 +315,6 @@ defineExpose<Form<S>>({
     :class="ui({ class: props.class })"
     @submit.prevent="onSubmitWrapper"
   >
-    <slot :errors="errors" />
+    <slot :errors="errors" :loading />
   </component>
 </template>
