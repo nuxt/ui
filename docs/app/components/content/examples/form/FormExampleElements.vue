@@ -15,6 +15,9 @@ const schema = z.object({
   select: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
   }),
+  selectMultiple: z.array(z.string()).refine(values => values.includes('option-2'), {
+    message: 'Include Option 2'
+  }),
   selectMenu: z.any().refine(option => option?.value === 'option-2', {
     message: 'Select Option 2'
   }),
@@ -79,6 +82,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
       <UFormField name="select" label="Select">
         <USelect v-model="state.select" :items="items" class="w-full" />
+      </UFormField>
+
+      <UFormField name="selectMultiple" label="Select (Multiple)">
+        <USelect v-model="state.selectMultiple" multiple :items="items" class="w-full" />
       </UFormField>
 
       <UFormField name="selectMenu" label="Select Menu">

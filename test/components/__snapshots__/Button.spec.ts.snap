@@ -64,13 +64,13 @@ exports[`Button > renders with avatar and leadingIcon correctly 1`] = `
 `;
 
 exports[`Button > renders with avatar and trailingIcon correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-1.5"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span>
+"<button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-1.5"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span>
   <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true"></span>
 </button>"
 `;
 
 exports[`Button > renders with avatar correctly 1`] = `
-"<button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-1.5"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span>
+"<button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-1.5"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span>
   <!--v-if-->
   <!--v-if-->
 </button>"
@@ -168,7 +168,7 @@ exports[`Button > renders with loading correctly 1`] = `
 `;
 
 exports[`Button > renders with loading trailing and avatar correctly 1`] = `
-"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-1.5"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span>
+"<button type="button" disabled="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-1.5"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span>
   <!--v-if--><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true"></span>
 </button>"
 `;
