@@ -255,9 +255,12 @@ const items = computed(() => {
       return false
     }
     return true
-  }).flatMap(group =>
-    group.items?.map(item => ({ ...item, group: group.id })) || []
-  ) || []
+  }).flatMap((group) => {
+    if (group.ignoreFilter) {
+      return []
+    }
+    return group.items?.map(item => ({ ...item, group: group.id })) || []
+  }) || []
 })
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
@@ -295,12 +298,20 @@ const groups = computed(() => {
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
 
-  return Object.entries(groupsById)
+  const fuseGroups = Object.entries(groupsById)
     .map(([id, items]) => {
       const group = props.groups?.find(group => group.id === id)
       return group ? getGroupWithItems(group, items) : undefined
     })
     .filter((group): group is NonNullable<typeof group> => !!group)
+
+  const nonFuseGroups = props.groups?.filter(group => group.ignoreFilter && group.id)
+    .map((group) => {
+      const groupItems = group.items?.map(item => ({ ...item, group: group.id })) || []
+      return getGroupWithItems(group, groupItems as (T & { matches?: FuseResult<T>['matches'] })[])
+    }) || []
+
+  return [...fuseGroups, ...nonFuseGroups]
 })
 </script>
 
