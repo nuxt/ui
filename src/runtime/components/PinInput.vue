@@ -9,7 +9,7 @@ type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>
 
 type PinInputType = 'text' | 'number'
 
-export interface PinInputProps<T extends PinInputType = PinInputType> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
+export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -39,14 +39,14 @@ export interface PinInputProps<T extends PinInputType = PinInputType> extends Pi
   ui?: PinInput['slots']
 }
 
-export type PinInputEmits<T extends PinInputType = PinInputType> = PinInputRootEmits<T> & {
+export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T> & {
   change: [payload: Event]
   blur: [payload: Event]
 }
 
 </script>
 
-<script setup lang="ts" generic="T extends PinInputType">
+<script setup lang="ts" generic="T extends PinInputType = 'text'">
 import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
