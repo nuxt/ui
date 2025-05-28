@@ -347,22 +347,6 @@ name: 'modal-nested-example'
 ---
 ::
 
-### Using the close method
-
-All slots in the Modal component receive a `close` method that can be used to programmatically close the modal from within the content.
-
-::component-example
----
-name: 'modal-programmatic-close'
-props:
-  class: 'px-4'
----
-::
-
-::tip
-The `close` method is available in all slots: `content`, `header`, `body`, and `footer`.
-::
-
 ### With footer slot
 
 Use the `#footer` slot to add content after the Modal's body.
