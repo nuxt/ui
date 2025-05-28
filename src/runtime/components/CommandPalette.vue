@@ -161,7 +161,7 @@ import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupL
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
-import { defineShortcuts, useAppConfig } from '#imports'
+import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { tv } from '../utils/tv'
@@ -197,13 +197,6 @@ const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon')
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })())
-
-defineShortcuts({
-  meta_backspace: {
-    usingInput: true,
-    handler: () => navigateBack()
-  }
-})
 
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {

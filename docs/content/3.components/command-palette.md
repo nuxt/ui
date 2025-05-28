@@ -687,7 +687,7 @@ props:
 When navigating into a submenu:
 - The search term is reset
 - A back button appears in the input
-- You can go back to the previous group using the :kbd{value="esc"} key or using the :kbd{value="meta"} + :kbd{value="backspace"} shortcut.
+- You can go back to the previous group using the :kbd{value="esc"} key
 ::
 
 ## API
