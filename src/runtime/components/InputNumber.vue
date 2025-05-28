@@ -89,7 +89,8 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<InputNumberProps>(), {
   orientation: 'horizontal',
   disabledIncrement: false,
-  disabledDecrement: false
+  disabledDecrement: false,
+  autofocusDelay: 0
 })
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()

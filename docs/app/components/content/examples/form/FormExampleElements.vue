@@ -11,6 +11,7 @@ const schema = z.object({
   inputMenuMultiple: z.any().refine(values => !!values?.find((option: any) => option.value === 'option-2'), {
     message: 'Include Option 2'
   }),
+  inputTime: z.string().min(10),
   textarea: z.string().min(10),
   select: z.string().refine(value => value === 'option-2', {
     message: 'Select Option 2'
@@ -99,6 +100,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
       <UFormField name="inputNumber" label="Input Number">
         <UInputNumber v-model="state.inputNumber" class="w-full" />
+      </UFormField>
+
+      <UFormField name="inputTime" label="Input Time">
+        <UInputTime v-model="state.inputTime" class="w-full" />
       </UFormField>
 
       <UFormField label="Textarea" name="textarea">

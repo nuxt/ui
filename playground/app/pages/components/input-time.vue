@@ -15,7 +15,7 @@ const cycle24Time = ref(new Time(16, 30))
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-48">
-      <UInputTime v-model="defaultTime" />
+      <UInputTime v-model="defaultTime" autofocus />
     </div>
 
     <div class="flex items-center gap-2 flex-wrap justify-center">

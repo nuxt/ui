@@ -14,14 +14,14 @@ import {
   USelectMenu,
   UInputMenu,
   UInputNumber,
+  UInputTime,
   USwitch,
   USlider,
   UPinInput,
   UFormField
-
 } from '#components'
 
-const inputComponents = [UInput, URadioGroup, UTextarea, UCheckbox, USelect, USelectMenu, UInputMenu, UInputNumber, USwitch, USlider, UPinInput]
+const inputComponents = [UInput, URadioGroup, UTextarea, UCheckbox, USelect, USelectMenu, UInputMenu, UInputNumber, UInputTime, USwitch, USlider, UPinInput]
 
 async function renderFormField(options: {
   props: Partial<FormFieldProps>

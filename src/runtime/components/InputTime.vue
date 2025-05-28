@@ -65,8 +65,7 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<InputTimeProps>(), {
-  granularity: 'minute',
-  hideTimeZone: false
+  autofocusDelay: 0
 })
 const emits = defineEmits<InputTimeEmits>()
 const slots = defineSlots<InputTimeSlots>()
@@ -148,37 +147,23 @@ defineExpose({
       @blur="onBlur"
       @focus="emitFormFocus"
     >
-      <!-- Leading Icon/Slot -->
+      <TimeFieldInput
+        v-for="segment in segments"
+        :key="segment.part"
+        :part="segment.part"
+        :class="ui.segment({ class: props.ui?.segment })"
+      >
+        {{ segment.value }}
+      </TimeFieldInput>
+
       <span v-if="isLeading || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         </slot>
       </span>
 
-      <!-- Time Field Segments -->
-      <div class="flex flex-1 items-center justify-center">
-        <template v-for="segment in segments" :key="segment.part">
-          <TimeFieldInput
-            v-if="segment.part === 'literal'"
-            :part="segment.part"
-            :class="ui.segment({ class: props.ui?.segment })"
-          >
-            {{ segment.value }}
-          </TimeFieldInput>
-
-          <TimeFieldInput
-            v-else
-            :part="segment.part"
-            :class="ui.segment({ class: props.ui?.segment })"
-          >
-            {{ segment.value }}
-          </TimeFieldInput>
-        </template>
-      </div>
-
       <slot />
 
-      <!-- Trailing Icon/Slot -->
       <span v-if="isTrailing || !!slots.trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing">
           <UIcon v-if="trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
