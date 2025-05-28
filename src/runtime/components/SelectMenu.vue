@@ -132,6 +132,7 @@ export type SelectMenuEmits<A extends ArrayOrNested<SelectMenuItem>, VK extends 
 } & GetModelValueEmits<A, VK, M>
 
 type SlotProps<T extends SelectMenuItem> = (props: { item: T, index: number }) => any
+type SlotGroupLabelProps<T extends SelectMenuItem> = (props: { item: T, index: number, groupIndex: number }) => any
 
 export interface SelectMenuSlots<
   A extends ArrayOrNested<SelectMenuItem> = ArrayOrNested<SelectMenuItem>,
@@ -154,7 +155,7 @@ export interface SelectMenuSlots<
     ui: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string }
   }): any
   'empty'(props: { searchTerm?: string }): any
-  'group-label': SlotProps<T>
+  'group-label': SlotGroupLabelProps<T>
   'separator': SlotProps<T>
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -425,7 +426,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
 
             <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
               <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-                <slot v-if="isSelectItem(item) && item.type === 'label'" name="group-label" :item="(item as NestedItem<T>)" :index="index">
+                <slot v-if="isSelectItem(item) && item.type === 'label'" name="group-label" :item="(item as NestedItem<T>)" :index="index" :group-index="groupIndex">
                   <ComboboxLabel :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
                     {{ get(item, props.labelKey as string) }}
                   </ComboboxLabel>

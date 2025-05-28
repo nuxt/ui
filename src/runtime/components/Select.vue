@@ -103,6 +103,7 @@ export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemK
 } & GetModelValueEmits<A, VK, M>
 
 type SlotProps<T extends SelectItem> = (props: { item: T, index: number }) => any
+type SlotGroupLabelProps<T extends SelectItem> = (props: { item: T, index: number, groupIndex: number }) => any
 
 export interface SelectSlots<
   A extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>,
@@ -124,7 +125,7 @@ export interface SelectSlots<
     open: boolean
     ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
   }): any
-  'group-label': SlotProps<T>
+  'group-label': SlotGroupLabelProps<T>
   'separator': SlotProps<T>
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -276,7 +277,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
         <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <slot v-if="isSelectItem(item) && item.type === 'label'" name="group-label" :item="(item as NestedItem<T>)" :index="index">
+              <slot v-if="isSelectItem(item) && item.type === 'label'" name="group-label" :item="(item as NestedItem<T>)" :index="index" :group-index="groupIndex">
                 <SelectLabel :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
                   {{ get(item, props.labelKey as string) }}
                 </SelectLabel>
