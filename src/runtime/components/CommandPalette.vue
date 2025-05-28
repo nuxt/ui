@@ -232,6 +232,13 @@ function navigateBack() {
   }
 }
 
+function handleNavigateBackKeydown(e: KeyboardEvent) {
+  if (activeSubmenu.value) {
+    e.preventDefault()
+    navigateBack()
+  }
+}
+
 const currentPlaceholder = computed(() => {
   const parentItem = activeSubmenu.value?.parentItem as T | undefined
   return parentItem?.placeholder || props.placeholder || t('commandPalette.placeholder')
@@ -319,12 +326,8 @@ const groups = computed(() => {
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
-        @keydown.esc="(e: KeyboardEvent) => {
-          if (!!activeSubmenu) {
-            e.preventDefault()
-            navigateBack()
-          }
-        }"
+        @keydown.esc="handleNavigateBackKeydown"
+        @keydown.meta.backspace="handleNavigateBackKeydown"
       >
         <template #leading>
           <UButton
