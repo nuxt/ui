@@ -82,7 +82,9 @@ describe('SelectMenu', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
-    ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
+    ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }],
+    ['with label slot', { props, slots: { 'group-label': () => 'Group label slot' } }],
+    ['with separator slot', { props, slots: { separator: () => 'Separator slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps, slots?: Partial<SelectMenuSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, SelectMenu)
     expect(html).toMatchSnapshot()

@@ -124,6 +124,8 @@ export interface SelectSlots<
     open: boolean
     ui: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string }
   }): any
+  'group-label': SlotProps<T>
+  'separator': SlotProps<T>
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -193,7 +195,7 @@ const groups = computed<SelectItem[][]>(() =>
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
+function displayValue(value?: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const values = value.map(v => displayValue(v)).filter(Boolean)
     return values?.length ? values.join(', ') : undefined
@@ -274,11 +276,14 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
         <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-              <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
-                {{ get(item, props.labelKey as string) }}
-              </SelectLabel>
-
-              <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+              <slot v-if="isSelectItem(item) && item.type === 'label'" name="group-label" :item="(item as NestedItem<T>)" :index="index">
+                <SelectLabel :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
+                  {{ get(item, props.labelKey as string) }}
+                </SelectLabel>
+              </slot>
+              <slot v-else-if="isSelectItem(item) && item.type === 'separator'" name="separator" :item="(item as NestedItem<T>)" :index="index">
+                <SelectSeparator :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+              </slot>
 
               <SelectItem
                 v-else

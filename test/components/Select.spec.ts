@@ -12,6 +12,9 @@ describe('Select', () => {
   const variants = Object.keys(theme.variants.variant) as any
 
   const items = [{
+    type: 'label',
+    label: 'Status'
+  }, {
     label: 'Backlog',
     value: 'backlog',
     icon: 'i-lucide-circle-help'
@@ -27,6 +30,8 @@ describe('Select', () => {
     label: 'Done',
     value: 'done',
     icon: 'i-lucide-circle-check'
+  }, {
+    type: 'separator'
   }, {
     label: 'Canceled',
     value: 'canceled',
@@ -77,7 +82,9 @@ describe('Select', () => {
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
-    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }]
+    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
+    ['with label slot', { props, slots: { 'group-label': () => 'Group label slot' } }],
+    ['with separator slot', { props, slots: { separator: () => 'Separator slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps, slots?: Partial<SelectSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Select)
     expect(html).toMatchSnapshot()

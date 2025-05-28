@@ -154,6 +154,8 @@ export interface SelectMenuSlots<
     ui: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string }
   }): any
   'empty'(props: { searchTerm?: string }): any
+  'group-label': SlotProps<T>
+  'separator': SlotProps<T>
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
@@ -423,12 +425,15 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
 
             <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
               <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-                <ComboboxLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
-                  {{ get(item, props.labelKey as string) }}
-                </ComboboxLabel>
+                <slot v-if="isSelectItem(item) && item.type === 'label'" name="group-label" :item="(item as NestedItem<T>)" :index="index">
+                  <ComboboxLabel :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
+                    {{ get(item, props.labelKey as string) }}
+                  </ComboboxLabel>
+                </slot>
 
-                <ComboboxSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
-
+                <slot v-else-if="isSelectItem(item) && item.type === 'separator'" name="separator" :item="(item as NestedItem<T>)" :index="index">
+                  <ComboboxSeparator :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+                </slot>
                 <ComboboxItem
                   v-else
                   :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
