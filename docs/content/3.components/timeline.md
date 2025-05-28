@@ -191,9 +191,21 @@ You can also pass the `value` of one of the items if provided.
 
 ### With custom slot
 
-Use the `slot` property to customize a specific item.
+Use the `slot` prop to customize a specific item.
 
 :component-example{name="timeline-custom-slot-example"}
+
+### Alternate
+
+Use the `ui` prop to create a Timeline with alternating sides.
+
+:component-example{name="timeline-alternate-example"}
+
+### With slots
+
+Create a more complex timeline using slots.
+
+:component-example{name="timeline-slots-example"}
 
 ## API
 
