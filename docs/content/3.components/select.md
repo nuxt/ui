@@ -48,6 +48,8 @@ You can also pass an array of objects with the following properties:
 - [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
 - [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
 - `disabled?: boolean`{lang="ts-type"}
+- `class?: any`{lang="ts-type"}
+- `ui?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---
@@ -505,7 +507,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
 ::component-code
 ---
@@ -520,7 +522,7 @@ external:
 props:
   modelValue: 'Backlog'
   loading: true
-  loadingIcon: 'i-lucide-repeat-2'
+  loadingIcon: 'i-lucide-loader'
   items:
     - Backlog
     - Todo
@@ -605,7 +607,7 @@ props:
 ---
 ::
 
-### With icons in items
+### With icon in items
 
 You can use the `icon` property to display an [Icon](/components/icon) inside the items.
 

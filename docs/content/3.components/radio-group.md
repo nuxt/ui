@@ -46,6 +46,8 @@ You can also pass an array of objects with the following properties:
 - `description?: string`{lang="ts-type"}
 - [`value?: string`{lang="ts-type"}](#value-key)
 - `disabled?: boolean`{lang="ts-type"}
+- `class?: any`{lang="ts-type"}
+- `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---
@@ -157,7 +159,7 @@ props:
 ---
 ::
 
-### Variant :badge{label="Not released" class="align-text-top"}
+### Variant :badge{label="New" class="align-text-top"}
 
 Use the `variant` prop to change the variant of the RadioGroup.
 
@@ -169,6 +171,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
 props:
   color: 'primary'
   variant: 'table'
@@ -236,7 +240,7 @@ props:
 ---
 ::
 
-### Indicator :badge{label="Not released" class="align-text-top"}
+### Indicator :badge{label="New" class="align-text-top"}
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 

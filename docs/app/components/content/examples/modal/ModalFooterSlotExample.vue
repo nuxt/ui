@@ -10,8 +10,8 @@ const open = ref(false)
       <Placeholder class="h-48" />
     </template>
 
-    <template #footer>
-      <UButton label="Cancel" color="neutral" variant="outline" @click="open = false" />
+    <template #footer="{ close }">
+      <UButton label="Cancel" color="neutral" variant="outline" @click="close" />
       <UButton label="Submit" color="neutral" />
     </template>
   </UModal>

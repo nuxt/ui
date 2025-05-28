@@ -7,6 +7,8 @@ import type { ComponentConfig } from '../types/utils'
 
 type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
+type TextareaValue = string | number | null
+
 export interface TextareaProps extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
@@ -35,16 +37,22 @@ export interface TextareaProps extends UseComponentIconsProps {
   autoresize?: boolean
   autoresizeDelay?: number
   disabled?: boolean
-  class?: any
   rows?: number
   maxrows?: number
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  modelModifiers?: {
+    string?: boolean
+    trim?: boolean
+    lazy?: boolean
+    nullify?: boolean
+  }
+  class?: any
   ui?: Textarea['slots']
 }
 
-export interface TextareaEmits {
-  (e: 'update:modelValue', payload: string | number): void
+export interface TextareaEmits<T extends TextareaValue = TextareaValue> {
+  (e: 'update:modelValue', payload: T): void
   (e: 'blur', event: FocusEvent): void
   (e: 'change', event: Event): void
 }
@@ -56,7 +64,7 @@ export interface TextareaSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends TextareaValue">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
@@ -64,6 +72,8 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -73,12 +83,14 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   autofocusDelay: 0,
   autoresizeDelay: 0
 })
+const emits = defineEmits<TextareaEmits<T>>()
 const slots = defineSlots<TextareaSlots>()
-const emits = defineEmits<TextareaEmits>()
 
-const [modelValue, modelModifiers] = defineModel<string | number | null>()
+// eslint-disable-next-line vue/no-dupe-keys
+const [modelValue, modelModifiers] = defineModel<T>()
 
 const appConfig = useAppConfig() as Textarea['AppConfig']
+
 const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps>(props, { deferInputValidation: true })
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
@@ -109,7 +121,7 @@ function updateInput(value: string | null) {
     value ||= null
   }
 
-  modelValue.value = value
+  modelValue.value = value as T
   emitFormInput()
 }
 
@@ -190,7 +202,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <textarea
       :id="id"
       ref="textareaRef"

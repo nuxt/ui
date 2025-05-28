@@ -25,7 +25,7 @@ exports[`Form > custom validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
+      <div id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
@@ -87,7 +87,7 @@ exports[`Form > joi validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
+      <div id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
@@ -153,7 +153,7 @@ exports[`Form > superstruct validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
+      <div id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
@@ -215,7 +215,7 @@ exports[`Form > valibot validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
+      <div id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
@@ -277,7 +277,7 @@ exports[`Form > yup validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
+      <div id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"
@@ -339,7 +339,7 @@ exports[`Form > zod validation works > with error 1`] = `
         <!--v-if-->
         <!--v-if-->
       </div>
-      <p id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</p>
+      <div id="v-0-0-1-error" class="mt-2 text-error">Must be at least 8 characters</div>
     </div>
   </div>
 </form>"

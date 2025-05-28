@@ -1,3 +1,40 @@
+<script setup lang="ts">
+import type { ShortcutsConfig } from '@nuxt/ui/composables/defineShortcuts.js'
+
+const logs = ref<string[]>([])
+const shortcutsState = ref({
+  'a': {
+    label: 'A',
+    disabled: false,
+    usingInput: false
+  },
+  'shift_i': {
+    label: 'Shift+I',
+    disabled: false,
+    usingInput: false
+  },
+  'g-i': {
+    label: 'G->I',
+    disabled: false,
+    usingInput: false
+  }
+})
+
+const shortcuts = computed(() => {
+  return Object.entries(shortcutsState.value).reduce<ShortcutsConfig>((acc, [key, { label, disabled, usingInput }]) => {
+    if (disabled) {
+      return acc
+    }
+    acc[key] = {
+      handler: () => { logs.value.unshift(`"${label}" triggered`) },
+      usingInput
+    }
+    return acc
+  }, {})
+})
+defineShortcuts(shortcuts)
+</script>
+
 <template>
   <div class="w-full flex flex-col gap-4">
     <UCard class="flex-1">
@@ -43,38 +80,3 @@
     </UCard>
   </div>
 </template>
-
-<script setup lang="ts">
-const logs = ref<string[]>([])
-const shortcutsState = ref({
-  'a': {
-    label: 'A',
-    disabled: false,
-    usingInput: false
-  },
-  'shift_i': {
-    label: 'Shift+I',
-    disabled: false,
-    usingInput: false
-  },
-  'g-i': {
-    label: 'G->I',
-    disabled: false,
-    usingInput: false
-  }
-})
-
-const shortcuts = computed(() => {
-  return Object.entries(shortcutsState.value).reduce<ShortcutsConfig>((acc, [key, { label, disabled, usingInput }]) => {
-    if (disabled) {
-      return acc
-    }
-    acc[key] = {
-      handler: () => { logs.value.unshift(`"${label}" triggered`) },
-      usingInput
-    }
-    return acc
-  }, {})
-})
-defineShortcuts(shortcuts)
-</script>

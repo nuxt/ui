@@ -69,5 +69,13 @@ function openModal() {
     </UModal>
 
     <UButton label="Open programmatically" color="neutral" variant="outline" @click="openModal" />
+
+    <UModal title="First modal">
+      <UButton color="neutral" variant="outline" label="Close with scoped slot close" />
+
+      <template #footer="{ close }">
+        <UButton label="Close with scoped slot close" @click="close" />
+      </template>
+    </UModal>
   </div>
 </template>

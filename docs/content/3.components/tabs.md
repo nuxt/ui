@@ -23,6 +23,8 @@ Use the `items` prop as an array of objects with the following properties:
 - `value?: string | number`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
+- `class?: any`{lang="ts-type"}
+- `ui?: { trigger?: ClassNameValue, leadingIcon?: ClassNameValue, leadingAvatar?: ClassNameValue, label?: ClassNameValue, content?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---
@@ -209,10 +211,6 @@ props:
 You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
 
 :component-example{name="tabs-model-value-example"}
-
-::tip
-You can also pass the `value` of one of the items if provided.
-::
 
 ### With content slot
 

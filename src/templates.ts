@@ -6,6 +6,7 @@ import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import * as theme from './theme'
 import colors from 'tailwindcss/colors'
+import { genExport } from 'knitwork'
 
 export function buildTemplates(options: ModuleOptions) {
   return Object.entries(theme).reduce((acc, [key, component]) => {
@@ -43,15 +44,14 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         }
 
         function generateVariantDeclarations(variants: string[]) {
-          return variants.map((variant) => {
+          return variants.filter(variant => json.includes(`as typeof ${variant}`)).map((variant) => {
             const keys = Object.keys(result.variants[variant])
             return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`
           })
         }
 
         // For local development, import directly from theme
-        const isUiDev = true
-        if (isUiDev) {
+        if (process.argv.includes('--uiDev')) {
           const templatePath = fileURLToPath(new URL(`./theme/${kebabCase(component)}`, import.meta.url))
           return [
             `import template from ${JSON.stringify(templatePath)}`,
@@ -76,7 +76,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     write: true,
     getContents: () => `@source "./ui";
 
-@theme default {
+@theme static {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
@@ -88,10 +88,11 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --color-old-neutral-800: ${colors.neutral[800]};
   --color-old-neutral-900: ${colors.neutral[900]};
   --color-old-neutral-950: ${colors.neutral[950]};
-  ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [
-    color !== 'neutral' && `--color-${color}: var(--ui-${color});`,
-    ...[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`)
-  ].filter(Boolean).join('\n\t')).join('\n\t')}
+}
+
+@theme default inline {
+  ${[...(options.theme?.colors || []).filter(color => !colors[color as keyof typeof colors]), 'neutral'].map(color => [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(shade => `--color-${color}-${shade}: var(--ui-color-${color}-${shade});`).join('\n\t')).join('\n\t')}
+  ${options.theme?.colors?.map(color => `--color-${color}: var(--ui-${color});`).join('\n\t')}
   --radius-xs: calc(var(--ui-radius) * 0.5);
   --radius-sm: var(--ui-radius);
   --radius-md: calc(var(--ui-radius) * 1.5);
@@ -115,15 +116,22 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --border-color-muted: var(--ui-border-muted);
   --border-color-accented: var(--ui-border-accented);
   --border-color-inverted: var(--ui-border-inverted);
+  --border-color-bg: var(--ui-bg);
   --ring-color-default: var(--ui-border);
   --ring-color-muted: var(--ui-border-muted);
   --ring-color-accented: var(--ui-border-accented);
   --ring-color-inverted: var(--ui-border-inverted);
   --ring-color-bg: var(--ui-bg);
+  --ring-offset-color-default: var(--ui-border);
+  --ring-offset-color-muted: var(--ui-border-muted);
+  --ring-offset-color-accented: var(--ui-border-accented);
+  --ring-offset-color-inverted: var(--ui-border-inverted);
+  --ring-offset-color-bg: var(--ui-bg);
   --divide-color-default: var(--ui-border);
   --divide-color-muted: var(--ui-border-muted);
   --divide-color-accented: var(--ui-border-accented);
   --divide-color-inverted: var(--ui-border-inverted);
+  --divide-color-bg: var(--ui-bg);
   --outline-color-default: var(--ui-border);
   --outline-color-inverted: var(--ui-border-inverted);
   --stroke-default: var(--ui-border);
@@ -144,7 +152,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   templates.push({
     filename: 'types/ui.d.ts',
     getContents: () => `import * as ui from '#build/ui'
-import type { DeepPartial } from '@nuxt/ui'
+import type { TVConfig } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
@@ -160,7 +168,7 @@ type AppConfigUI = {
   }
   icons?: Partial<typeof icons>
   tv?: typeof defaultConfig
-} & DeepPartial<typeof ui>
+} & TVConfig<typeof ui>
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {
@@ -180,9 +188,9 @@ export {}
     filename: 'ui-image-component.ts',
     write: true,
     getContents: ({ app }) => {
-      const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !c.filePath.includes('nuxt/dist/app'))
+      const image = app?.components?.find(c => c.pascalName === 'NuxtImg' && !/nuxt(?:-nightly)?\/dist\/app/.test(c.filePath))
 
-      return image ? `export { default } from "${image.filePath}"` : 'export default "img"'
+      return image ? genExport(image.filePath, [{ name: image.export, as: 'default' }]) : 'export default "img"'
     }
   })
 

@@ -4,7 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { AcceptableValue, ComponentConfig } from '../types/utils'
 
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
@@ -38,12 +38,19 @@ export interface InputProps extends UseComponentIconsProps {
   disabled?: boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  modelModifiers?: {
+    string?: boolean
+    number?: boolean
+    trim?: boolean
+    lazy?: boolean
+    nullify?: boolean
+  }
   class?: any
   ui?: Input['slots']
 }
 
-export interface InputEmits {
-  (e: 'update:modelValue', payload: string | number): void
+export interface InputEmits<T extends AcceptableValue = AcceptableValue> {
+  (e: 'update:modelValue', payload: T): void
   (e: 'blur', event: FocusEvent): void
   (e: 'change', event: Event): void
 }
@@ -55,7 +62,7 @@ export interface InputSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends AcceptableValue">
 import { ref, computed, onMounted } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
@@ -74,12 +81,14 @@ const props = withDefaults(defineProps<InputProps>(), {
   autocomplete: 'off',
   autofocusDelay: 0
 })
-const emits = defineEmits<InputEmits>()
+const emits = defineEmits<InputEmits<T>>()
 const slots = defineSlots<InputSlots>()
 
-const [modelValue, modelModifiers] = defineModel<string | number | null>()
+// eslint-disable-next-line vue/no-dupe-keys
+const [modelValue, modelModifiers] = defineModel<T>()
 
 const appConfig = useAppConfig() as Input['AppConfig']
+
 const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps>(props, { deferInputValidation: true })
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
@@ -114,7 +123,7 @@ function updateInput(value: string | null) {
     value ||= null
   }
 
-  modelValue.value = value
+  modelValue.value = value as T
   emitFormInput()
 }
 
@@ -163,7 +172,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <input
       :id="id"
       ref="inputRef"

@@ -1,6 +1,8 @@
 import json5 from 'json5'
 import { camelCase, kebabCase } from 'scule'
 import { visit } from '@nuxt/content/runtime'
+import type { H3Event } from 'h3'
+import type { PageCollectionItemBase } from '@nuxt/content'
 import * as theme from '../../.nuxt/ui'
 import * as themePro from '../../.nuxt/ui-pro'
 import meta from '#nuxt-component-meta'
@@ -44,11 +46,33 @@ const parseBoolean = (value?: string): boolean => value === 'true'
 
 function getComponentMeta(componentName: string) {
   const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
-  const metaComponentName = `U${pascalCaseName}`
+
+  const strategies = [
+    `U${pascalCaseName}`,
+    `Prose${pascalCaseName}`,
+    pascalCaseName
+  ]
+
+  let componentMeta: any
+  let finalMetaComponentName: string = pascalCaseName
+
+  for (const nameToTry of strategies) {
+    finalMetaComponentName = nameToTry
+    const metaAttempt = (meta as Record<string, any>)[nameToTry]?.meta
+    if (metaAttempt) {
+      componentMeta = metaAttempt
+      break
+    }
+  }
+
+  if (!componentMeta) {
+    console.warn(`[getComponentMeta] Metadata not found for ${pascalCaseName} using strategies: U, Prose, or no prefix. Last tried: ${finalMetaComponentName}`)
+  }
+
   return {
     pascalCaseName,
-    metaComponentName,
-    componentMeta: (meta as Record<string, any>)[metaComponentName]?.meta
+    metaComponentName: finalMetaComponentName,
+    componentMeta
   }
 }
 
@@ -166,6 +190,7 @@ function emitItemHandler(event: any): string {
 const generateThemeConfig = ({ pro, prose, componentName }: ThemeConfig) => {
   const computedTheme = pro ? (prose ? themePro.prose : themePro) : theme
   const componentTheme = computedTheme[componentName as keyof typeof computedTheme]
+
   return {
     [pro ? 'uiPro' : 'ui']: prose
       ? { prose: { [componentName]: componentTheme } }
@@ -278,14 +303,18 @@ const generateComponentCode = ({
 }
 
 export default defineNitroPlugin((nitroApp) => {
-  nitroApp.hooks.hook('content:llms:generate:document' as any, async (doc: Document) => {
+  nitroApp.hooks.hook('content:llms:generate:document', async (_: H3Event, doc: PageCollectionItemBase) => {
     const componentName = camelCase(doc.title)
 
     visitAndReplace(doc, 'component-theme', (node) => {
-      const attributes = node[1] as ComponentAttributes
+      const attributes = node[1] as Record<string, string>
+      const mdcSpecificName = attributes?.slug
+
+      const finalComponentName = mdcSpecificName ? camelCase(mdcSpecificName) : componentName
+
       const pro = parseBoolean(attributes[':pro'])
       const prose = parseBoolean(attributes[':prose'])
-      const appConfig = generateThemeConfig({ pro, prose, componentName })
+      const appConfig = generateThemeConfig({ pro, prose, componentName: finalComponentName })
 
       replaceNodeWithPre(
         node,
@@ -320,14 +349,23 @@ export default defineNitroPlugin((nitroApp) => {
     })
 
     visitAndReplace(doc, 'component-props', (node) => {
-      const { pascalCaseName, componentMeta } = getComponentMeta(componentName)
+      const attributes = node[1] as Record<string, string>
+      const mdcSpecificName = attributes?.name
+      const isProse = parseBoolean(attributes[':prose'])
+
+      const finalComponentName = mdcSpecificName ? camelCase(mdcSpecificName) : componentName
+
+      const { pascalCaseName, componentMeta } = getComponentMeta(finalComponentName)
+
       if (!componentMeta?.props) return
 
+      const interfaceName = isProse ? `Prose${pascalCaseName}Props` : `${pascalCaseName}Props`
+
       const interfaceCode = generateTSInterface(
-        `${pascalCaseName}Props`,
+        interfaceName,
         Object.values(componentMeta.props),
         propItemHandler,
-        `Props for the ${pascalCaseName} component`
+        `Props for the ${isProse ? 'Prose' : ''}${pascalCaseName} component`
       )
       replaceNodeWithPre(node, 'ts', interfaceCode)
     })

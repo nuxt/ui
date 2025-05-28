@@ -28,7 +28,7 @@ exports[`Alert > renders with as correctly 1`] = `
 `;
 
 exports[`Alert > renders with avatar correctly 1`] = `
-"<div data-orientation="vertical" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start bg-primary text-inverted"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-11 text-[22px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="44" height="44" class="h-full w-full rounded-[inherit] object-cover"></span>
+"<div data-orientation="vertical" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start bg-primary text-inverted"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-11 text-[22px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="44" height="44" class="h-full w-full rounded-[inherit] object-cover"></span>
   <div class="min-w-0 flex-1 flex flex-col">
     <div class="text-sm font-medium">Alert</div>
     <!--v-if-->

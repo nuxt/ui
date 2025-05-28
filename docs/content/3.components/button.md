@@ -258,13 +258,13 @@ This also works with the [Form](/components/form) component.
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-refresh-cw`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
 ::component-code
 ---
 props:
   loading: true
-  loadingIcon: 'i-lucide-repeat-2'
+  loadingIcon: 'i-lucide-loader'
 slots:
   default: Button
 ---
