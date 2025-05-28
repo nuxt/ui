@@ -1,11 +1,11 @@
 import { describe, it, expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { Time } from '@internationalized/date'
-import TimeField, { type TimeFieldProps, type TimeFieldSlots } from '../../src/runtime/components/TimeField.vue'
+import InputTime, { type InputTimeProps, type InputTimeSlots } from '../../src/runtime/components/InputTime.vue'
 import ComponentRender from '../component-render'
-import theme from '#build/ui/time-field'
+import theme from '#build/ui/input-time'
 
-describe('TimeField', () => {
+describe('InputTime', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
   const defaultTime = new Time(10, 30)
@@ -46,45 +46,45 @@ describe('TimeField', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TimeFieldProps, slots?: Partial<TimeFieldSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, TimeField)
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputTimeProps, slots?: Partial<InputTimeSlots> }) => {
+    const html = await ComponentRender(nameOrHtml, options, InputTime)
     expect(html).toMatchSnapshot()
   })
 
   describe('emits', () => {
     test('update:modelValue event', async () => {
-      const wrapper = mount(TimeField, {
+      const wrapper = mount(InputTime, {
         props: {
           modelValue: defaultTime
         }
       })
 
-      // Find the TimeFieldRoot component and trigger update:model-value event
-      const timeFieldRoot = wrapper.findComponent({ name: 'TimeFieldRoot' })
+      // Find the InputTimeRoot component and trigger update:model-value event
+      const InputTimeRoot = wrapper.findComponent({ name: 'InputTimeRoot' })
       const newTime = new Time(14, 45)
 
-      await timeFieldRoot.vm.$emit('update:model-value', newTime)
+      await InputTimeRoot.vm.$emit('update:model-value', newTime)
 
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
       expect(wrapper.emitted()['update:modelValue'][0]).toEqual([newTime])
     })
 
     test('blur event', async () => {
-      const wrapper = mount(TimeField)
-      const timeFieldRoot = wrapper.findComponent({ name: 'TimeFieldRoot' })
+      const wrapper = mount(InputTime)
+      const InputTimeRoot = wrapper.findComponent({ name: 'InputTimeRoot' })
 
-      await timeFieldRoot.vm.$emit('blur', { type: 'blur' })
+      await InputTimeRoot.vm.$emit('blur', { type: 'blur' })
 
       expect(wrapper.emitted()).toHaveProperty('blur')
       expect(wrapper.emitted().blur[0]).toEqual([{ type: 'blur' }])
     })
 
     test('update:placeholder event', async () => {
-      const wrapper = mount(TimeField)
-      const timeFieldRoot = wrapper.findComponent({ name: 'TimeFieldRoot' })
+      const wrapper = mount(InputTime)
+      const InputTimeRoot = wrapper.findComponent({ name: 'InputTimeRoot' })
       const placeholder = new Time(12, 0)
 
-      await timeFieldRoot.vm.$emit('update:placeholder', placeholder)
+      await InputTimeRoot.vm.$emit('update:placeholder', placeholder)
 
       expect(wrapper.emitted()).toHaveProperty('update:placeholder')
       expect(wrapper.emitted()['update:placeholder'][0]).toEqual([placeholder])

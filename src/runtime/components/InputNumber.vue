@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { NumberFieldRootProps } from 'reka-ui'
+import type { NumberFieldRootProps, NumberFieldRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
 import type { ButtonProps } from '../types'
@@ -62,10 +62,9 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   ui?: InputNumber['slots']
 }
 
-export interface InputNumberEmits {
-  (e: 'update:modelValue', payload: number): void
-  (e: 'blur', event: FocusEvent): void
-  (e: 'change', payload: Event): void
+export interface InputNumberEmits extends NumberFieldRootEmits {
+  blur: [event: FocusEvent]
+  change: [event: Event]
 }
 
 export interface InputNumberSlots {

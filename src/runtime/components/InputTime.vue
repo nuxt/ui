@@ -1,74 +1,49 @@
 <script lang="ts">
+import type { TimeFieldRootProps, TimeFieldRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/time-field'
+import theme from '#build/ui/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { ComponentConfig } from '../types/utils'
 
-type TimeField = ComponentConfig<typeof theme, AppConfig, 'timeField'>
+type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>
 
-export interface TimeFieldProps extends UseComponentIconsProps {
+export interface InputTimeProps extends Pick<TimeFieldRootProps, 'defaultValue' | 'defaultPlaceholder' | 'placeholder' | 'modelValue' | 'hourCycle' | 'step' | 'granularity' | 'hideTimeZone' | 'minValue' | 'maxValue' | 'disabled' | 'readonly' | 'required' | 'id' | 'name' | 'required'>, UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
-  id?: string
-  name?: string
-  /** The placeholder text when the input is empty. */
-  placeholder?: string
   /**
    * @defaultValue 'primary'
    */
-  color?: TimeField['variants']['color']
+  color?: InputTime['variants']['color']
   /**
    * @defaultValue 'outline'
    */
-  variant?: TimeField['variants']['variant']
+  variant?: InputTime['variants']['variant']
   /**
    * @defaultValue 'md'
    */
-  size?: TimeField['variants']['size']
-  required?: boolean
-  disabled?: boolean
-  readonly?: boolean
+  size?: InputTime['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  autofocus?: boolean
+  autofocusDelay?: number
   /**
-   * The granularity to use for formatting times.
-   * @defaultValue 'minute'
-   */
-  granularity?: 'hour' | 'minute' | 'second'
-  /**
-   * The hour cycle used for formatting times.
-   */
-  hourCycle?: 12 | 24
-  /**
-   * Whether to hide the time zone segment of the field
-   */
-  hideTimeZone?: boolean
-  /**
-   * The locale to use for formatting dates
+   * The locale to use for formatting and parsing numbers.
+   * @defaultValue UApp.locale.code
    */
   locale?: string
-  /**
-   * The minimum time that can be selected
-   */
-  minValue?: any
-  /**
-   * The maximum time that can be selected
-   */
-  maxValue?: any
   class?: any
-  ui?: TimeField['slots']
+  ui?: InputTime['slots']
 }
 
-export interface TimeFieldEmits {
-  (e: 'update:modelValue' | 'update:placeholder', payload: any): void
-  (e: 'blur', event: FocusEvent): void
-  (e: 'change', event: Event): void
+export interface InputTimeEmits extends TimeFieldRootEmits {
+  blur: [event: FocusEvent]
+  change: [event: Event]
 }
 
-export interface TimeFieldSlots {
+export interface InputTimeSlots {
   leading(props?: {}): any
   default(props?: {}): any
   trailing(props?: {}): any
@@ -76,41 +51,42 @@ export interface TimeFieldSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Primitive, TimeFieldRoot, TimeFieldInput } from 'reka-ui'
-import { Time } from '@internationalized/date'
+import { ref, computed, onMounted } from 'vue'
+import { Primitive, TimeFieldRoot, TimeFieldInput, useForwardPropsEmits } from 'reka-ui'
+import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<TimeFieldProps>(), {
+const props = withDefaults(defineProps<InputTimeProps>(), {
   granularity: 'minute',
   hideTimeZone: false
 })
-const emits = defineEmits<TimeFieldEmits>()
-const slots = defineSlots<TimeFieldSlots>()
+const emits = defineEmits<InputTimeEmits>()
+const slots = defineSlots<InputTimeSlots>()
 
-const [modelValue] = defineModel<any>()
+const { code: codeLocale } = useLocale()
+const appConfig = useAppConfig() as InputTime['AppConfig']
 
-// Default placeholder - when needed, use a Time object of 12:00
-const defaultPlaceholder = new Time(12, 0, 0)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'hourCycle', 'step', 'granularity', 'hideTimeZone', 'readonly', 'required'), emits)
 
-const appConfig = useAppConfig() as TimeField['AppConfig']
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<TimeFieldProps>(props, { deferInputValidation: true })
-const { orientation, size: buttonGroupSize } = useButtonGroup<TimeFieldProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps>(props)
+const { orientation, size: buttonGroupSize } = useButtonGroup<InputTimeProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const fieldSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+const locale = computed(() => props.locale || codeLocale.value)
+const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.timeField || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime || {}) })({
   color: color.value,
   variant: props.variant,
-  size: fieldSize?.value,
+  size: inputSize?.value,
   loading: props.loading,
   highlight: highlight.value,
   leading: isLeading.value || !!slots.leading,
@@ -118,12 +94,15 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.timeField ||
   buttonGroup: orientation.value
 }))
 
-const fieldRef = ref<HTMLElement | null>(null)
+const inputRef = ref<InstanceType<typeof TimeFieldInput> | null>(null)
 
-function updateValue(value: any) {
-  modelValue.value = value
-  emitFormInput()
+function onUpdate(value: any) {
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
+  const event = new Event('change', { target: { value } })
+  emits('change', event)
+
   emitFormChange()
+  emitFormInput()
 }
 
 function onBlur(event: FocusEvent) {
@@ -131,33 +110,41 @@ function onBlur(event: FocusEvent) {
   emits('blur', event)
 }
 
+function autoFocus() {
+  if (props.autofocus) {
+    inputRef.value?.$el?.focus()
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
+
 defineExpose({
-  fieldRef
+  inputRef
 })
 </script>
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <TimeFieldRoot
+      v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
       :id="id"
-      ref="fieldRef"
-      :name="name"
-      :model-value="modelValue"
+      ref="inputRef"
       v-slot="{ segments }"
+      :name="name"
+      :default-value="defaultValue"
+      :model-value="modelValue"
       :default-placeholder="defaultPlaceholder"
-      :granularity="granularity"
-      :hour-cycle="hourCycle"
-      :hide-time-zone="hideTimeZone"
-      :locale="locale"
-      :min-value="minValue"
+      :placeholder="placeholder"
       :max-value="maxValue"
+      :min-value="minValue"
+      :locale="locale"
       :disabled="disabled"
-      :readonly="readonly"
-      :required="required"
-      v-bind="{ ...ariaAttrs }"
-      class="flex h-full w-full items-center"
-      @update:model-value="updateValue"
-      @update:placeholder="$emit('update:placeholder', $event)"
+      :class="ui.base({ class: props.ui?.base })"
+      @update:model-value="onUpdate"
       @blur="onBlur"
       @focus="emitFormFocus"
     >
@@ -174,14 +161,15 @@ defineExpose({
           <TimeFieldInput
             v-if="segment.part === 'literal'"
             :part="segment.part"
-            :class="ui.base({ class: props.ui?.base })"
+            :class="ui.segment({ class: props.ui?.segment })"
           >
             {{ segment.value }}
           </TimeFieldInput>
+
           <TimeFieldInput
             v-else
             :part="segment.part"
-            :class="ui.base({ class: props.ui?.base })"
+            :class="ui.segment({ class: props.ui?.segment })"
           >
             {{ segment.value }}
           </TimeFieldInput>
