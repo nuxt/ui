@@ -5,11 +5,11 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center',
     base: ['w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
-    leading: 'absolute inset-y-0 start-0 flex items-center',
+    leading: 'pointer-events-none absolute inset-y-0 start-0 flex items-center',
     leadingIcon: 'shrink-0 text-dimmed',
     leadingAvatar: 'shrink-0',
     leadingAvatarSize: '',
-    trailing: 'absolute inset-y-0 end-0 flex items-center',
+    trailing: 'pointer-events-none absolute inset-y-0 end-0 flex items-center',
     trailingIcon: 'shrink-0 text-dimmed'
   },
   variants: {
