@@ -10,7 +10,7 @@ const domain = ref(domains[0])
       v-model="value"
       placeholder="nuxt"
       :ui="{
-        base: 'pl-[57px]',
+        base: 'pl-14.5',
         leading: 'pointer-events-none'
       }"
     >
