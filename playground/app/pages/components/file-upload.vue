@@ -2,6 +2,7 @@
 import type { FileUploadItem } from '@nuxt/ui'
 
 type UploadWithStatus = FileUploadItem<{ status: 'pending' | 'uploading' | 'done', progress?: number }>
+
 const files = ref<UploadWithStatus[]>()
 const testFile = ref<UploadWithStatus[]>([{
   file: new File([''], 'test.txt'),

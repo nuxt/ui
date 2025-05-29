@@ -1,6 +1,6 @@
 <script lang="ts">
-import theme from '#build/ui/file-upload'
 import type { AppConfig } from '@nuxt/schema'
+import theme from '#build/ui/file-upload'
 import type { ComponentConfig } from '../types/utils'
 import type { AvatarProps } from '../types'
 
@@ -121,12 +121,10 @@ const files = defineModel<T[]>()
 const dragging = ref(false)
 const filePreviews = ref<Record<string, string>>({})
 
-const ui = computed(() =>
-  tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
-    size: size.value,
-    multiple: props.multiple
-  })
-)
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
+  size: size.value,
+  multiple: props.multiple
+}))
 
 function fileKey(f: File) {
   // Use name + lastModified for uniqueness
