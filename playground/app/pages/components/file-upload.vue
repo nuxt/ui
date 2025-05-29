@@ -13,8 +13,8 @@ const testFile = ref<UploadWithStatus[]>([{
   <div class="flex flex-col gap-4 items-center">
     <UFileUpload v-model="files" size="xs" />
     <UFileUpload v-model="testFile" size="sm" />
-    <UFileUpload size="md" />
+    <UFileUpload size="md" preview-placement="outside" />
     <UFileUpload size="lg" disabled />
-    <UFileUpload size="xl" :multiple="true" />
+    <UFileUpload size="xl" :multiple="true" preview-placement="outside" />
   </div>
 </template>

@@ -21,6 +21,16 @@ export interface FileUploadProps {
   size?: FileUpload['variants']['size']
   required?: boolean
   /**
+   * Layout mode for file previews
+   * @defaultValue 'list'
+   */
+  layout?: 'list' | 'grid'
+  /**
+   * Where to show file previews
+   * @defaultValue 'inside'
+   */
+  previewPlacement?: 'inside' | 'outside'
+  /**
    * The icon displayed in the drag and drop area.
    * @defaultValue appConfig.ui.icons.upload
    * @IconifyIcon
@@ -64,6 +74,7 @@ export interface FileUploadSlots {
 <script setup lang="ts" generic="T extends FileUploadItem">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { Primitive } from 'reka-ui'
+import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useFormField } from '../composables/useFormField'
@@ -77,11 +88,13 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FileUploadProps>(), {
   accept: 'image/*',
+  previewPlacement: 'inside',
   autofocusDelay: 0,
   multiple: false
 })
 
 const emits = defineEmits<FileUploadEmits<T>>()
+const slots = defineSlots<FileUploadSlots>()
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 
 const {
@@ -94,6 +107,12 @@ const {
   emitFormFocus,
   ariaAttrs
 } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
+
+const [DefineFilesPreviewTemplate, ReuseFilesPreviewTemplate] = createReusableTemplate<{ files: T[] | undefined }>({
+  props: {
+    files: Object
+  }
+})
 
 const size = computed(() => props.size)
 const base = ref<HTMLElement | null>(null)
@@ -219,6 +238,37 @@ defineExpose({ fileInputRef })
 </script>
 
 <template>
+  <DefineFilesPreviewTemplate v-slot="{ files: filesList }">
+    <div
+      :class="ui.files({ class: props.ui?.files })"
+    >
+      <div v-for="(item, i) in filesList" :key="`file-${i}-${item.file.name}`" :class="ui.file({ class: props.ui?.file })">
+        <slot name="item" v-bind="{ item }">
+          <div class="flex items-center gap-3">
+            <UAvatar
+              :src="item.file.type.includes('image') ? filePreviews[fileKey(item.file)] : undefined"
+              :icon="item.file.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
+              :alt="item.file.name"
+              :size="(ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size']"
+              :class="ui.fileAvatar({ class: props.ui?.fileAvatar })"
+            />
+            <div>
+              <p :class="ui.fileLabel({ class: props.ui?.fileLabel })">
+                {{ item.file.name }}
+              </p>
+              <p :class="ui.fileSize({ class: props.ui?.fileSize })">
+                {{ (item.file.size / 1024 / 1024).toFixed(2) }} MB
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <UButton id="remove-file" :icon="appConfig.ui.icons.close" variant="link" color="neutral" @click.stop="removeFile(item)" />
+          </div>
+        </slot>
+      </div>
+    </div>
+  </DefineFilesPreviewTemplate>
+
   <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div
       ref="base"
@@ -226,14 +276,15 @@ defineExpose({ fileInputRef })
         class: [
           props.ui?.base,
           dragging && !disabled && ui.dragging({ class: props.ui?.dragging }),
-          !files?.length && 'cursor-pointer',
-          disabled && 'cursor-not-allowed'
+          (isEmpty || previewPlacement === 'outside') && 'cursor-pointer',
+          disabled && 'cursor-not-allowed',
+          !slots.default && !disabled && (isEmpty || previewPlacement === 'outside') && ui.hover({ class: props.ui?.hover })
         ]
       })"
       tabindex="0"
       @drop="onDrop"
       @dragover="onDragOver"
-      @click="!disabled && isEmpty && fileInputRef?.click()"
+      @click="!disabled && (isEmpty || previewPlacement === 'outside') && !slots.default && fileInputRef?.click()"
       @dragleave="onDragLeave"
     >
       <input
@@ -253,7 +304,7 @@ defineExpose({ fileInputRef })
       >
       <!-- Empty state -->
       <div
-        v-if="isEmpty"
+        v-if="isEmpty || previewPlacement === 'outside'"
         :class="ui.empty({ class: props.ui?.empty })"
       >
         <slot name="empty">
@@ -270,35 +321,14 @@ defineExpose({ fileInputRef })
       </div>
 
       <!-- File list -->
-      <ul
-        v-else
-        :class="ui.files({ class: props.ui?.files })"
-      >
-        <li v-for="(fileItem, i) in files" :key="i" :class="ui.file({ class: props.ui?.file })">
-          <slot name="item" v-bind="{ item: fileItem as FileUploadItem }">
-            <div class="flex items-center gap-3">
-              <UAvatar
-                :src="fileItem.file.type.includes('image') ? filePreviews[fileKey(fileItem.file)] : undefined"
-                :icon="fileItem.file.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
-                :alt="fileItem.file.name"
-                :size="(ui.fileAvatarSize() || props.ui?.fileAvatarSize) as AvatarProps['size']"
-                :class="ui.fileAvatar({ class: props.ui?.fileAvatar })"
-              />
-              <div>
-                <p :class="ui.fileLabel({ class: props.ui?.fileLabel })">
-                  {{ fileItem.file.name }}
-                </p>
-                <p :class="ui.fileSize({ class: props.ui?.fileSize })">
-                  {{ (fileItem.file.size / 1024 / 1024).toFixed(2) }} MB
-                </p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <UIcon id="remove-file" :name="appConfig.ui.icons.close" @click.stop="removeFile(fileItem as T)" />
-            </div>
-          </slot>
-        </li>
-      </ul>
+      <ReuseFilesPreviewTemplate
+        v-else-if="previewPlacement === 'inside'"
+        :files="files"
+      />
     </div>
+    <ReuseFilesPreviewTemplate
+      v-if="previewPlacement === 'outside' && !isEmpty"
+      :files="files"
+    />
   </Primitive>
 </template>

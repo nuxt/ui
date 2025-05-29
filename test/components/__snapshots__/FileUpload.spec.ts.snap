@@ -1,105 +1,118 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FileUpload > renders with accept correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer" tabindex="0"><input type="file" accept="png,jpg" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="png,jpg" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with disabled correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-not-allowed" tabindex="0"><input type="file" accept="image/*" disabled="" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-not-allowed" tabindex="0"><input type="file" accept="image/*" disabled="" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with id correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer" tabindex="0"><input id="id" type="file" accept="image/*" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer hover:bg-accented/20" tabindex="0"><input id="id" type="file" accept="image/*" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with label correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Label</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Label</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with multiple correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer" tabindex="0"><input type="file" accept="image/*" multiple="" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" multiple="" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with name correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer" tabindex="0"><input type="file" name="name" accept="image/*" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" name="name" accept="image/*" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with placeholder correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer" tabindex="0"><input type="file" accept="image/*" class="hidden" placeholder="Placeholder"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden" placeholder="Placeholder"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with required correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer" tabindex="0"><input type="file" accept="image/*" required="" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" required="" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with size lg correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-72 cursor-pointer" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-26"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-72 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-26"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with size md correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-24"><span class="iconify i-lucide:upload pointer-events-none size-5" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with size sm correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-60 cursor-pointer" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-20"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-4" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-xs">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-60 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-20"><span class="iconify i-lucide:upload pointer-events-none size-4" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-xs">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with size xl correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-82 cursor-pointer" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-32"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-6" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-base">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-82 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-32"><span class="iconify i-lucide:upload pointer-events-none size-6" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-base">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`FileUpload > renders with size xs correctly 1`] = `
-"<div class="relative inline-flex items-center">
-  <div class="bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-56 cursor-pointer" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
-    <div class="flex flex-col items-center justify-center gap-2 h-16"><span class="iconify i-lucide:upload shrink-0 pointer-events-none size-4" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-xs">Browse or drop files here</span></div>
+"<div class="group/item relative flex flex-col gap-2 items-center">
+  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-56 cursor-pointer hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty state -->
+    <div class="flex flex-col items-center justify-center gap-2 h-16"><span class="iconify i-lucide:upload pointer-events-none size-4" aria-hidden="true"></span><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-xs">Browse or drop files here</span></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
