@@ -61,13 +61,13 @@ export interface SlideoverEmits extends DialogRootEmits {
 
 export interface SlideoverSlots {
   default(props: { open: boolean }): any
-  content(props?: {}): any
-  header(props?: {}): any
+  content(props: { close: () => void }): any
+  header(props: { close: () => void }): any
   title(props?: {}): any
   description(props?: {}): any
-  close(props: { ui: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): any
-  body(props?: {}): any
-  footer(props?: {}): any
+  close(props: { close: () => void, ui: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): any
+  body(props: { close: () => void }): any
+  footer(props: { close: () => void }): any
 }
 </script>
 
@@ -124,8 +124,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
 }))
 </script>
 
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DialogRoot v-slot="{ open }" v-bind="rootProps">
+  <DialogRoot v-slot="{ open, close }" v-bind="rootProps">
     <DialogTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot :open="open" />
     </DialogTrigger>
@@ -155,9 +156,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
           </DialogDescription>
         </VisuallyHidden>
 
-        <slot name="content">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
-            <slot name="header">
+        <slot name="content" :close="close">
+          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
+            <slot name="header" :close="close">
               <div :class="ui.wrapper({ class: props.ui?.wrapper })">
                 <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
                   <slot name="title">
@@ -172,16 +173,16 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
                 </DialogDescription>
               </div>
 
-              <DialogClose v-if="close || !!slots.close" as-child>
-                <slot name="close" :ui="ui">
+              <DialogClose v-if="props.close || !!slots.close" as-child>
+                <slot name="close" :close="close" :ui="ui">
                   <UButton
-                    v-if="close"
+                    v-if="props.close"
                     :icon="closeIcon || appConfig.ui.icons.close"
                     size="md"
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('slideover.close')"
-                    v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
+                    v-bind="(typeof props.close === 'object' ? props.close as Partial<ButtonProps> : {})"
                     :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>
@@ -190,11 +191,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
           </div>
 
           <div :class="ui.body({ class: props.ui?.body })">
-            <slot name="body" />
+            <slot name="body" :close="close" />
           </div>
 
           <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
-            <slot name="footer" />
+            <slot name="footer" :close="close" />
           </div>
         </slot>
       </DialogContent>
