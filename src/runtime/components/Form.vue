@@ -315,6 +315,6 @@ defineExpose<Form<S>>({
     :class="ui({ class: props.class })"
     @submit.prevent="onSubmitWrapper"
   >
-    <slot :errors="errors" :loading />
+    <slot :errors="errors" :loading="loading" />
   </component>
 </template>
