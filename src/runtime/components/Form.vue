@@ -240,7 +240,7 @@ async function onSubmitWrapper(payload: Event) {
 
   try {
     event.data = await _validate({ nested: true, transform: props.transform })
-    const result = await props.onSubmit?.(event)
+    await props.onSubmit?.(event)
     dirtyFields.clear()
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
