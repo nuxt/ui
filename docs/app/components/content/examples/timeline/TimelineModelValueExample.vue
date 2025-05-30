@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { TimelineItem } from '@nuxt/ui'
-import { onMounted, ref } from 'vue'
 
 const items: TimelineItem[] = [{
   date: 'Mar 15, 2025',

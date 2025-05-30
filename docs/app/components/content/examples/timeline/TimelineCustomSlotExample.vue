@@ -38,12 +38,13 @@ const items = [{
 </script>
 
 <template>
-  <UTimeline :items="items" class="w-full">
+  <UTimeline :items="items" :default-value="2" class="w-96">
     <template #development-title="{ item }">
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-1">
         <span>{{ item.title }}</span>
-        <UAvatarGroup size="xs">
-          <UAvatar v-for="developer of item.developers" :key="developer.src" v-bind="developer" />
+
+        <UAvatarGroup size="2xs">
+          <UAvatar v-for="(developer, index) of item.developers" :key="index" v-bind="developer" />
         </UAvatarGroup>
       </div>
     </template>

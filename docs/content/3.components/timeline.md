@@ -36,7 +36,7 @@ external:
 externalTypes:
   - TimelineItem[]
 props:
-  defaultValue: 1
+  defaultValue: 2
   items:
     - date: 'Mar 15, 2025'
       title: 'Project Kickoff'
@@ -74,7 +74,7 @@ externalTypes:
   - TimelineItem[]
 props:
   color: neutral
-  defaultValue: 1
+  defaultValue: 2
   items:
     - date: 'Mar 15, 2025'
       title: 'Project Kickoff'
@@ -112,7 +112,7 @@ externalTypes:
   - TimelineItem[]
 props:
   size: xs
-  defaultValue: 1
+  defaultValue: 2
   items:
     - date: 'Mar 15, 2025'
       title: 'Project Kickoff'
@@ -150,7 +150,7 @@ externalTypes:
   - TimelineItem[]
 props:
   orientation: 'horizontal'
-  defaultValue: 1
+  defaultValue: 2
   items:
     - date: 'Mar 15, 2025'
       title: 'Project Kickoff'
@@ -178,7 +178,7 @@ props:
 
 You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
 
-:component-example{name="timeline-model-value-example"}
+:component-example{name="timeline-model-value-example" prettier}
 
 ::tip
 You can also pass the `value` of one of the items if provided.
@@ -188,7 +188,7 @@ You can also pass the `value` of one of the items if provided.
 
 Use the `ui` prop to create a Timeline with alternating layout.
 
-:component-example{name="timeline-alternating-layout-example"}
+:component-example{name="timeline-alternating-layout-example" prettier}
 
 ### With custom slot
 
@@ -201,13 +201,13 @@ You will have access to the following slots:
 - `#{{ item.slot }}-title`{lang="ts-type"}
 - `#{{ item.slot }}-description`{lang="ts-type"}
 
-:component-example{name="timeline-custom-slot-example"}
+:component-example{name="timeline-custom-slot-example" prettier}
 
 ### With slots
 
 Use the available slots to create a more complex Timeline.
 
-:component-example{name="timeline-slots-example"}
+:component-example{name="timeline-slots-example" prettier}
 
 ## API
 
