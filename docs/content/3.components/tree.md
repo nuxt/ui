@@ -407,7 +407,14 @@ This lets you select a parent item without expanding or collapsing its children.
 
 ### With custom slot
 
-Use the `item.slot` property to customize a specific item.
+Use the `slot` property to customize a specific item.
+
+You will have access to the following slots:
+
+- `#{{ item.slot }}`{lang="ts-type"}
+- `#{{ item.slot }}-leading`{lang="ts-type"}
+- `#{{ item.slot }}-label`{lang="ts-type"}
+- `#{{ item.slot }}-trailing`{lang="ts-type"}
 
 ::component-example
 ---
