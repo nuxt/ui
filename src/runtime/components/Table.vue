@@ -83,15 +83,10 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
    */
   empty?: string
   /**
-   * Whether the table should have a sticky header.
+   * Whether the table should have a sticky header or footer. True for both, 'header' for header only, 'footer' for footer only.
    * @defaultValue false
    */
-  sticky?: boolean
-  /**
-   * Whether the table should have a sticky footer.
-   * @defaultValue false
-   */
-  stickyFooter?: boolean
+  sticky?: boolean | 'header' | 'footer'
   /** Whether the table should be in loading state. */
   loading?: boolean
   /**
@@ -211,8 +206,8 @@ const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(da
 const meta = computed(() => props.meta ?? {})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })({
-  sticky: props.sticky,
-  stickyFooter: props.stickyFooter,
+  sticky: props.sticky === true || props.sticky === 'header',
+  stickyFooter: props.sticky === true || props.sticky === 'footer',
   loading: props.loading,
   loadingColor: props.loadingColor,
   loadingAnimation: props.loadingAnimation
@@ -245,7 +240,7 @@ const paginationState = defineModel<PaginationState>('pagination', { default: {}
 const tableRef = ref<HTMLTableElement>()
 
 const tableApi = useVueTable({
-  ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'stickyFooter', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
+  ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
   data,
   columns: columns.value,
   meta: meta.value,

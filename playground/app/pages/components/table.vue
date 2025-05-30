@@ -366,7 +366,6 @@ onMounted(() => {
         tr: 'divide-x divide-default'
       }"
       sticky
-      sticky-footer
       class="border border-accented rounded-sm"
       @select="onSelect"
     >
