@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
 import theme from '#build/ui/navigation-menu'
 
 const colors = Object.keys(theme.variants.color)
@@ -13,6 +14,9 @@ const orientation = ref('horizontal' as const)
 const contentOrientation = ref('horizontal' as const)
 const highlight = ref(true)
 const collapsed = ref(false)
+const tooltip = ref(false)
+const popover = ref(false)
+const arrow = ref(false)
 
 const items = [
   [{
@@ -22,9 +26,6 @@ const items = [
     label: 'Documentation',
     icon: 'i-lucide-book-open',
     badge: 10,
-    tooltip: {
-      text: 'Documentation'
-    },
     children: [{
       label: 'Introduction',
       description: 'Fully styled and customizable components for Nuxt.',
@@ -46,11 +47,9 @@ const items = [
     label: 'Components',
     icon: 'i-lucide-box',
     to: '/components/navigation-menu',
+    type: 'trigger',
     active: true,
     defaultOpen: true,
-    tooltip: {
-      text: 'Components'
-    },
     children: [{
       label: 'Link',
       icon: 'i-lucide-link',
@@ -87,19 +86,13 @@ const items = [
     label: 'GitHub',
     icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui',
-    target: '_blank',
-    tooltip: {
-      text: 'GitHub'
-    }
+    target: '_blank'
   }, {
     label: 'Help',
     icon: 'i-lucide-circle-help',
-    disabled: true,
-    tooltip: {
-      text: 'Help'
-    }
+    disabled: true
   }]
-]
+] satisfies NavigationMenuItem[][]
 </script>
 
 <template>
@@ -112,10 +105,15 @@ const items = [
       <USwitch v-model="collapsed" label="Collapsed" />
       <USwitch v-model="highlight" label="Highlight" />
       <USelect v-model="highlightColor" :items="colors" placeholder="Highlight color" />
+      <USwitch v-model="tooltip" label="Tooltip" />
+      <USwitch v-model="popover" label="Popover" />
+      <USwitch v-model="arrow" label="Arrow" />
     </div>
 
     <UNavigationMenu
-      arrow
+      :arrow="arrow"
+      :tooltip="tooltip"
+      :popover="popover"
       :collapsed="collapsed"
       :items="items"
       :color="color"

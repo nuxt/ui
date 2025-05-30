@@ -43,6 +43,7 @@ export interface PopoverEmits extends PopoverRootEmits {
 export interface PopoverSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
+  anchor(props?: {}): any
 }
 </script>
 
@@ -102,6 +103,10 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
     <Component.Trigger v-if="!!slots.default" as-child :class="props.class">
       <slot :open="open" />
     </Component.Trigger>
+
+    <Component.Anchor v-if="'Anchor' in Component && !!slots.anchor" as-child>
+      <slot name="anchor" />
+    </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
       <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
