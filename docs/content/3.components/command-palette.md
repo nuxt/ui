@@ -52,6 +52,8 @@ Each group contains an `items` array of objects that define the commands. Each i
 - `loading?: boolean`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
+- `placeholder?: string`{lang="ts-type"}
+- `children?: CommandPaletteItem[]`{lang="ts-type"}
 - `onSelect?(e?: Event): void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue,}`{lang="ts-type"}
@@ -502,6 +504,28 @@ props:
 This example uses the `@update:model-value` event to reset the search term when an item is selected.
 ::
 
+### With submenus
+
+You can create hierarchical menus by using the `children` property in items. When an item has children, it will automatically display a chevron icon and enable navigation into a submenu.
+
+::component-example
+---
+collapse: true
+prettier: true
+name: 'command-palette-submenu-example'
+class: '!p-0'
+props:
+  autofocus: false
+---
+::
+
+::note
+When navigating into a submenu:
+- The search term is reset
+- A back button appears in the input
+- You can go back to the previous group using the :kbd{value="esc"} key
+::
+
 ### With fetched items
 
 You can fetch items from an API and use them in the CommandPalette.
@@ -667,27 +691,6 @@ props:
 
 ::tip{to="#slots"}
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
-::
-
-### With submenus
-
-You can create nested menus by using the `children` property on items. When an item has children, it will display a chevron icon and allow navigation into a submenu.
-
-::component-example
----
-collapse: true
-name: 'command-palette-submenu-example'
-class: '!p-0'
-props:
-  autofocus: false
----
-::
-
-::note
-When navigating into a submenu:
-- The search term is reset
-- A back button appears in the input
-- You can go back to the previous group using the :kbd{value="esc"} key
 ::
 
 ## API

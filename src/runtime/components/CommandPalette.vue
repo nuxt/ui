@@ -57,7 +57,7 @@ export interface CommandPaletteGroup<T> {
   highlightedIcon?: string
 }
 
-export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -156,7 +156,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
-import { computed, ref, type UnwrapRef } from 'vue'
+import { computed, ref, useTemplateRef, type UnwrapRef } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -186,13 +186,10 @@ const slots = defineSlots<CommandPaletteSlots<G, T>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
-const menuStack = ref<{ group: G, parentItem?: T }[]>([])
-const activeSubmenu = computed(() => menuStack.value[menuStack.value.length - 1] || null)
-
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'selectionBehavior'), emits)
 const inputProps = useForwardProps(reactivePick(props, 'loading', 'loadingIcon'))
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -208,38 +205,12 @@ const fuse = computed(() => defu({}, props.fuse, {
   matchAllWhenSearchEmpty: true
 }))
 
-function navigateToSubmenu(item: T, group: G) {
-  if (item.children && item.children.length > 0) {
-    const childrenGroup: G = {
-      ...group,
-      id: `${group.id}-${item.label || 'submenu'}`,
-      label: item.label,
-      items: item.children
-    } as G
+const listboxRootRef = useTemplateRef('listboxRootRef')
 
-    menuStack.value.push({
-      group: childrenGroup as UnwrapRef<G>,
-      parentItem: item as UnwrapRef<T>
-    })
-    searchTerm.value = ''
-  }
-}
+const submenuHistory = ref<{ group: G, parentItem?: T }[]>([])
+const activeSubmenu = computed(() => submenuHistory.value[submenuHistory.value.length - 1] || null)
 
-function navigateBack() {
-  if (menuStack.value.length > 0) {
-    menuStack.value.pop()
-    searchTerm.value = ''
-  }
-}
-
-function handleNavigateBackKeydown(e: KeyboardEvent) {
-  if (activeSubmenu.value) {
-    e.preventDefault()
-    navigateBack()
-  }
-}
-
-const currentPlaceholder = computed(() => {
+const placeholder = computed(() => {
   const parentItem = activeSubmenu.value?.parentItem as T | undefined
   return parentItem?.placeholder || props.placeholder || t('commandPalette.placeholder')
 })
@@ -313,21 +284,63 @@ const groups = computed(() => {
 
   return [...fuseGroups, ...nonFuseGroups]
 })
+
+function navigateToSubmenu(item: T, group: G) {
+  if (!item.children?.length) {
+    return
+  }
+
+  const childrenGroup: G = {
+    ...group,
+    id: `${group.id}-${item.label || 'submenu'}`,
+    label: item.label,
+    items: item.children
+  } as G
+
+  submenuHistory.value.push({
+    group: childrenGroup as UnwrapRef<G>,
+    parentItem: item as UnwrapRef<T>
+  })
+
+  searchTerm.value = ''
+
+  listboxRootRef.value?.highlightFirstItem()
+}
+
+function navigateBack() {
+  if (!submenuHistory.value.length) {
+    return
+  }
+
+  submenuHistory.value.pop()
+
+  searchTerm.value = ''
+
+  listboxRootRef.value?.highlightFirstItem()
+}
+
+function onKeydownEsc(e: KeyboardEvent) {
+  if (activeSubmenu.value) {
+    e.preventDefault()
+
+    navigateBack()
+  }
+}
 </script>
 
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <ListboxRoot v-bind="rootProps" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="rootProps" ref="listboxRootRef" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-model="searchTerm" as-child>
       <UInput
-        :placeholder="currentPlaceholder"
+        :placeholder="placeholder"
         variant="none"
         :autofocus="autofocus"
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
-        @keydown.esc="handleNavigateBackKeydown"
-        @keydown.meta.backspace="handleNavigateBackKeydown"
+        @keydown.esc="onKeydownEsc"
+        @keydown.meta.backspace="onKeydownEsc"
       >
         <template #leading>
           <UButton
