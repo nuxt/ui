@@ -14,12 +14,12 @@ exports[`Badge > renders with avatar and leadingIcon correctly 1`] = `
 `;
 
 exports[`Badge > renders with avatar and trailingIcon correctly 1`] = `
-"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover"></span>
+"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover"></span>
 <!--v-if--><span class="iconify i-lucide:arrow-right shrink-0 size-4" aria-hidden="true"></span></span>"
 `;
 
 exports[`Badge > renders with avatar correctly 1`] = `
-"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><span class="inline-flex items-center justify-center select-none overflow-hidden rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover"></span>
+"<span class="font-medium inline-flex items-center text-xs gap-1 rounded-md bg-primary text-inverted p-1"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-4 text-[8px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="16" height="16" class="h-full w-full rounded-[inherit] object-cover"></span>
 <!--v-if-->
 <!--v-if--></span>"
 `;

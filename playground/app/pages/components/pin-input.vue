@@ -5,7 +5,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
 const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
 
 const onComplete = (e: string[]) => {
-  alert(e.join(''))
+  console.log(e)
 }
 </script>
 

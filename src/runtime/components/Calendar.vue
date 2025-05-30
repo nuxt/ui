@@ -153,8 +153,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
   <Calendar.Root
     v-slot="{ weekDays, grid }"
     v-bind="rootProps"
-    :model-value="modelValue"
-    :default-value="defaultValue"
+    :model-value="(modelValue as DateValue | DateValue[])"
+    :default-value="(defaultValue as DateValue)"
     :locale="locale"
     :dir="dir"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
