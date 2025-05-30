@@ -11,7 +11,7 @@ const items = [{
 }, {
   date: 'Mar 22, 2025',
   title: 'Design Phase',
-  description: 'User research and design workshops. Created wireframes and prototypes for user testing',
+  description: 'User research and design workshops. Created wireframes and prototypes for user testing.',
   icon: 'i-lucide-palette',
   value: 'design'
 }, {

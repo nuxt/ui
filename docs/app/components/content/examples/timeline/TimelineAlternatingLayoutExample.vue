@@ -25,5 +25,9 @@ const items: TimelineItem[] = [{
 </script>
 
 <template>
-  <UTimeline :items="items" :ui="{ item: 'even:flex-row-reverse even:-translate-x-[calc(100%-2rem)] even:text-right' }" class="w-full translate-x-[calc(50%-2rem)]" />
+  <UTimeline
+    :items="items"
+    :ui="{ item: 'even:flex-row-reverse even:-translate-x-[calc(100%-2rem)] even:text-right' }"
+    class="w-full translate-x-[calc(50%-2rem)]"
+  />
 </template>
