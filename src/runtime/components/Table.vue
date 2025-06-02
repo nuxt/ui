@@ -366,6 +366,7 @@ defineExpose({
             </slot>
           </th>
         </tr>
+        <tr :class="ui.theadLine({ class: [props.ui?.theadLine] })" />
       </thead>
 
       <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
