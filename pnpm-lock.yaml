@@ -101,7 +101,7 @@ importers:
         version: 1.6.1
       zod:
         specifier: ^3.24.0
-        version: 3.25.47
+        version: 3.25.48
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^1.4.1
@@ -216,7 +216,7 @@ importers:
         version: 1.6.1
       zod:
         specifier: ^3.25.47
-        version: 3.25.47
+        version: 3.25.48
 
   playground:
     dependencies:
@@ -6938,8 +6938,8 @@ packages:
     resolution: {integrity: sha512-zK7YHHz4ZXpW89AHXUPbQVGKI7uvkd3hzusTdotCg1UxyaVtg0zFJSTfW/Dq5f7OBBVnq6cZIaC8Ti4hb6dtCA==}
     engines: {node: '>= 14'}
 
-  zod@3.25.47:
-    resolution: {integrity: sha512-+f8+agSYoT9niC0VUL60IuXnr81FJeJ27Lf5YPrmcxTWmygcpGBeEuAAovDDEjkyQ36KyqNswwbhISZ1Z7yY+A==}
+  zod@3.25.48:
+    resolution: {integrity: sha512-0X1mz8FtgEIvaxGjdIImYpZEaZMrund9pGXm3M6vM7Reba0e2eI71KPjSCGXBfwKDPwPoywf6waUKc3/tFvX2Q==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -7701,7 +7701,7 @@ snapshots:
       unixify: 1.0.0
       urlpattern-polyfill: 8.0.2
       yargs: 17.7.2
-      zod: 3.25.47
+      zod: 3.25.48
     transitivePeerDependencies:
       - encoding
       - rollup
@@ -15001,6 +15001,6 @@ snapshots:
       compress-commons: 6.0.2
       readable-stream: 4.7.0
 
-  zod@3.25.47: {}
+  zod@3.25.48: {}
 
   zwitch@2.0.4: {}
