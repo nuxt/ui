@@ -111,7 +111,7 @@ jobs:
         run: pnpm install --ignore-workspace
 
       - name: Prepare
-        run: pnpm nuxi prepare
+        run: pnpm nuxt prepare
 
       - name: Typecheck
         run: pnpm run typecheck

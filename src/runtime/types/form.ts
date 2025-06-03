@@ -5,20 +5,20 @@ import type { ObjectSchema as YupObjectSchema } from 'yup'
 import type { GetObjectField } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
 
-export interface Form<T extends object> {
-  validate (opts?: { name?: keyof T | (keyof T)[], silent?: boolean, nested?: boolean, transform?: boolean }): Promise<T | false>
+export interface Form<S extends FormSchema> {
+  validate<T extends boolean>(opts?: { name?: keyof FormData<S, false> | (keyof FormData<S, false>)[], silent?: boolean, nested?: boolean, transform?: T }): Promise<FormData<S, T> | false>
   clear (path?: string): void
   errors: Ref<FormError[]>
-  setErrors (errs: FormError[], name?: keyof T): void
-  getErrors (name?: keyof T): FormError[]
+  setErrors (errs: FormError[], name?: keyof FormData<S, false>): void
+  getErrors (name?: keyof FormData<S, false>): FormError[]
   submit (): Promise<void>
   disabled: ComputedRef<boolean>
   dirty: ComputedRef<boolean>
   loading: Ref<boolean>
 
-  dirtyFields: DeepReadonly<Set<keyof T>>
-  touchedFields: DeepReadonly<Set<keyof T>>
-  blurredFields: DeepReadonly<Set<keyof T>>
+  dirtyFields: DeepReadonly<Set<keyof FormData<S, false>>>
+  touchedFields: DeepReadonly<Set<keyof FormData<S, false>>>
+  blurredFields: DeepReadonly<Set<keyof FormData<S, false>>>
 }
 
 export type FormSchema<I extends object = object, O extends object = I> =
@@ -41,6 +41,8 @@ export type InferOutput<Schema> = Schema extends StandardSchemaV1 ? StandardSche
     : Schema extends JoiSchema<infer O> ? O
       : Schema extends SuperstructSchema<infer O, any> ? O
         : never
+
+export type FormData<S extends FormSchema, T extends boolean = true> = T extends true ? InferOutput<S> : InferInput<S>
 
 export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
 
