@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const value = ref('npx nuxi module add ui')
+const value = ref('npx nuxt module add ui')
 const copied = ref(false)
 
 function copy() {

@@ -59,7 +59,7 @@ export interface FormEmits<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface FormSlots {
-  default(props?: { errors: FormError[] }): any
+  default(props?: { errors: FormError[], loading: boolean }): any
 }
 </script>
 
@@ -315,6 +315,6 @@ defineExpose<Form<S>>({
     :class="ui({ class: props.class })"
     @submit.prevent="onSubmitWrapper"
   >
-    <slot :errors="errors" />
+    <slot :errors="errors" :loading="loading" />
   </component>
 </template>

@@ -169,6 +169,7 @@ props:
       description: 'QA testing and performance optimization.'
       icon: 'i-lucide-check-circle'
   class: 'w-full'
+class: 'overflow-x-auto'
 ---
 ::
 
