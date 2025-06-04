@@ -25,6 +25,25 @@ async function openModal() {
 In order to return a value from the overlay, the `overlay.open().instance.result` can be awaited. In order for this to work, however, the **overlay component must emit a `close` event**. See example below for details.
 ::
 
+## Caveats
+### Provide/Inject
+When opening overlays programmatically (e.g. modals, slideovers, etc), the overlay component can only access injected values from the component containing `UApp` (typically app.vue or layout components). This is because overlays are mounted outside of the page context by the `UApp` component.
+
+As such, using `provide()` in pages or parent components isn't supported directly. To pass provided values to overlays, the recommended approach is to use props instead:
+
+```vue
+<script setup lang="ts">
+const providedValue = inject("valueProvidedInPage")
+
+const modal = overlay.create(LazyModalExample, {
+  props: {
+    providedValue,
+    otherData: someValue
+  }
+})
+</script>
+```
+
 ## API
 
 ### `create(component: T, options: OverlayOptions): OverlayInstance`
