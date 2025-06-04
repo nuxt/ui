@@ -1,6 +1,6 @@
 ---
 title: useOverlay
-description: "A composable to programmatically control overlays."
+description: 'A composable to programmatically control overlays.'
 ---
 
 ## Usage
@@ -9,11 +9,13 @@ Use the auto-imported `useOverlay` composable to programmatically control [Modal
 
 ```vue
 <script setup lang="ts">
+import { LazyModalExample } from '#components'
+
 const overlay = useOverlay()
 
-const modal = overlay.create(MyModal)
+const modal = overlay.create(LazyModalExample)
 
-async function openModal() {
+async function open() {
   modal.open()
 }
 </script>
@@ -24,25 +26,6 @@ async function openModal() {
 ::note
 In order to return a value from the overlay, the `overlay.open().instance.result` can be awaited. In order for this to work, however, the **overlay component must emit a `close` event**. See example below for details.
 ::
-
-## Caveats
-### Provide/Inject
-When opening overlays programmatically (e.g. modals, slideovers, etc), the overlay component can only access injected values from the component containing `UApp` (typically app.vue or layout components). This is because overlays are mounted outside of the page context by the `UApp` component.
-
-As such, using `provide()` in pages or parent components isn't supported directly. To pass provided values to overlays, the recommended approach is to use props instead:
-
-```vue
-<script setup lang="ts">
-const providedValue = inject("valueProvidedInPage")
-
-const modal = overlay.create(LazyModalExample, {
-  props: {
-    providedValue,
-    otherData: someValue
-  }
-})
-</script>
-```
 
 ## API
 
@@ -110,9 +93,11 @@ Opens the overlay
 
 ```vue
 <script setup lang="ts">
+import { LazyModalExample } from '#components'
+
 const overlay = useOverlay()
 
-const modal = overlay.create(MyModalContent)
+const modal = overlay.create(LazyModalExample)
 
 function openModal() {
   modal.open({
@@ -138,9 +123,11 @@ Updates the props of the overlay.
 
 ```vue
 <script setup lang="ts">
+import { LazyModalExample } from '#components'
+
 const overlay = useOverlay()
 
-const modal = overlay.create(MyModal, {
+const modal = overlay.create(LazyModalExample, {
   title: 'Welcome'
 })
 
@@ -160,6 +147,8 @@ Here's a complete example of how to use the `useOverlay` composable:
 
 ```vue
 <script setup lang="ts">
+import { ModalA, ModalB, SlideoverA } from '#components'
+
 const overlay = useOverlay()
 
 // Create with default props
@@ -186,9 +175,32 @@ const openModalB = async () => {
 
 <template>
   <div>
-    <button @click="openModal">Open Modal</button>
+    <button @click="openModalA">Open Modal</button>
   </div>
 </template>
 ```
 
 In this example, we're using the `useOverlay` composable to control multiple modals and slideovers.
+
+## Caveats
+
+### Provide / Inject
+
+When opening overlays programmatically (e.g. modals, slideovers, etc), the overlay component can only access injected values from the component containing `UApp` (typically app.vue or layout components). This is because overlays are mounted outside of the page context by the `UApp` component.
+
+As such, using `provide()` in pages or parent components isn't supported directly. To pass provided values to overlays, the recommended approach is to use props instead:
+
+```vue
+<script setup lang="ts">
+import { LazyModalExample } from '#components'
+
+const providedValue = inject('valueProvidedInPage')
+
+const modal = overlay.create(LazyModalExample, {
+  props: {
+    providedValue,
+    otherData: someValue
+  }
+})
+</script>
+```
