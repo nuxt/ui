@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Reduser'
     },
     fileUpload: {
-      empty: 'Bla gjennom filer eller slipp dem her'
+      empty: 'Bla gjennom eller dra filer hit',
+      removeAll: 'Fjern alle',
+      addFiles: 'Legg til fil(er)',
+      actions: 'Filer'
     },
     commandPalette: {
       placeholder: 'Skriv inn en kommando eller søk...',

@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Азайтуу'
     },
     fileUpload: {
-      empty: 'Файлды тандаңыз же бул жерге таштаңыз'
+      empty: 'Файлдарды көрүңүз же бул жерге таштаңыз',
+      removeAll: 'Баарын өчүрүү',
+      addFiles: 'Файл(дар) кошуу',
+      actions: 'Файлдар'
     },
     commandPalette: {
       placeholder: 'Буйрук киргизиңиз же издөө…',

@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Хасах'
     },
     fileUpload: {
-      empty: 'Файлуудыг хайх эсвэл энд чирэх'
+      empty: 'Файлуудыг хайх эсвэл энд тавина уу',
+      removeAll: 'Бүгдийг устгах',
+      addFiles: 'Файл нэмэх',
+      actions: 'Файлууд'
     },
     commandPalette: {
       placeholder: 'Комманд бичих эсвэл хайлт хийх...',

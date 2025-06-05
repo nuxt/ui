@@ -14,6 +14,7 @@ export default {
   folder: 'i-lucide-folder',
   folderOpen: 'i-lucide-folder-open',
   upload: 'i-lucide-upload',
+  trash: 'i-lucide-trash',
   file: 'i-lucide-file',
   loading: 'i-lucide-loader-circle',
   minus: 'i-lucide-minus',

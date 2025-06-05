@@ -17,7 +17,10 @@ export default defineLocale<Messages>({
       nextMonth: 'Nächste Mount'
     },
     fileUpload: {
-      empty: 'Wielt eng Datei oder zitt se hei eraus'
+      empty: 'Fir duerch Fichieren oder drop se hei',
+      removeAll: 'All läschen',
+      addFiles: 'Fichier(en) dobäisetzen',
+      actions: 'Fichieren'
     },
     inputNumber: {
       increment: 'Inkrementéieren',

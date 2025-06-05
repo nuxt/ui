@@ -12,13 +12,13 @@ const testFile = ref<UploadWithStatus[]>([{
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 items-center">
-    <UFileUpload v-model="files" size="xs" upload-icon="i-lucide-image">
+  <div class="grid grid-cols-12 *:px-1 *:py-8 *:not-first:-ms-px *:not-first:-mt-px sm:*:px-8 xl:*:px-12">
+    <UFileUpload v-model="files" size="xs" upload-icon="i-lucide-image" class="col-span-12 sm:col-span-6 lg:col-span-6">
       <UButton variant="outline" color="neutral" icon="i-lucide-upload" size="xs" label="Select image" />
     </UFileUpload>
-    <UFileUpload v-model="testFile" size="sm" layout="grid" />
-    <UFileUpload size="md" preview-placement="outside" />
-    <UFileUpload size="lg" disabled />
-    <UFileUpload size="xl" :multiple="true" layout="grid" preview-placement="outside" />
+    <UFileUpload v-model="testFile" size="sm" layout="grid" class="col-span-12 sm:col-span-6 lg:col-span-6" />
+    <UFileUpload size="md" preview-placement="outside" class="col-span-12 sm:col-span-6 lg:col-span-6" />
+    <UFileUpload size="lg" disabled class="col-span-12 sm:col-span-6 lg:col-span-6" />
+    <UFileUpload size="xl" :multiple="true" layout="grid" preview-placement="outside" class="col-span-12 sm:col-span-6 lg:col-span-6" />
   </div>
 </template>

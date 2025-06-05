@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'হ্রাস করুন'
     },
     fileUpload: {
-      empty: 'ফাইল ব্রাউজ করুন বা এখানে ড্রপ করুন'
+      empty: 'ব্রাউজ করুন বা ফাইলগুলি এখানে ড্রপ করুন',
+      removeAll: 'সব সরান',
+      addFiles: 'ফাইল যোগ করুন',
+      actions: 'ফাইলসমূহ'
     },
     commandPalette: {
       placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন...',

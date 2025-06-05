@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Ayirish'
     },
     fileUpload: {
-      empty: 'Faylni tanlang yoki bu yerga joylashtiring'
+      empty: 'Fayllarni ko\'rib chiqish yoki shu yerga tashlash',
+      removeAll: 'Barchasini o\'chirish',
+      addFiles: 'Fayl(lar) qo\'shish',
+      actions: 'Fayllar'
     },
     commandPalette: {
       placeholder: 'Buyruq kiriting yoki qidiring...',

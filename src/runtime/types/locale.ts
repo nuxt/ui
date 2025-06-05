@@ -16,6 +16,9 @@ export type Messages = {
   }
   fileUpload: {
     empty: string
+    removeAll: string
+    addFiles: string
+    actions: string
   }
   commandPalette: {
     placeholder: string

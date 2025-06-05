@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Zmanjšaj'
     },
     fileUpload: {
-      empty: 'Izberi datoteko ali jo povleci sem'
+      empty: 'Prebrskajte ali povlecite datoteke sem',
+      removeAll: 'Odstrani vse',
+      addFiles: 'Dodaj datoteko(e)',
+      actions: 'Datoteke'
     },
     commandPalette: {
       placeholder: 'Vpiši ukaz ali išči...',

@@ -22,7 +22,10 @@ export default defineLocale<Messages>({
       decrement: 'הפחת'
     },
     fileUpload: {
-      empty: 'עיין בקבצים או גרור ושחרר כאן'
+      empty: 'עיון או גרירת קבצים כאן',
+      removeAll: 'הסר הכל',
+      addFiles: 'הוסף קובץ/קבצים',
+      actions: 'קבצים'
     },
     commandPalette: {
       placeholder: 'הקלד פקודה...',

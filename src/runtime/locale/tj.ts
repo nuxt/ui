@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Кам кардан'
     },
     fileUpload: {
-      empty: 'Файлро интихоб кунед ё ин ҷо гузоред'
+      empty: 'Файлҳоро кушед ё ба ин ҷо кашед',
+      removeAll: 'Ҳамаро нест кардан',
+      addFiles: 'Файл(ҳо) илова кардан',
+      actions: 'Файлҳо'
     },
     commandPalette: {
       placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...',

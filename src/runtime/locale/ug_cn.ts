@@ -22,7 +22,10 @@ export default defineLocale<Messages>({
       decrement: 'ئازايتىش'
     },
     fileUpload: {
-      empty: 'فايىلنى كۆرۈش ياكى بۇ يەرگە تارتىش'
+      empty: 'ھۆججەتلەرنى كۆرۈڭ ياكى بۇ يەرگە سۆرەڭ',
+      removeAll: 'ھەممىنى چىقىرىۋەت',
+      addFiles: 'ھۆججەت قوش',
+      actions: 'ھۆججەتلەر'
     },
     commandPalette: {
       placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ...',

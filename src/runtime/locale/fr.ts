@@ -17,7 +17,10 @@ export default defineLocale<Messages>({
       nextMonth: 'Mois suivant'
     },
     fileUpload: {
-      empty: 'Parcourir ou déposer des fichiers ici'
+      empty: 'Parcourir ou déposer des fichiers ici',
+      removeAll: 'Supprimer tout',
+      addFiles: 'Ajouter fichier(s)',
+      actions: 'Fichiers'
     },
     inputNumber: {
       increment: 'Augmenter',

@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Snížit'
     },
     fileUpload: {
-      empty: 'Procházet nebo přetáhnout soubory sem'
+      empty: 'Procházet nebo přetáhnout soubory zde',
+      removeAll: 'Odstranit vše',
+      addFiles: 'Přidat soubor(y)',
+      actions: 'Soubory'
     },
     commandPalette: {
       placeholder: 'Zadejte příkaz nebo hledejte...',

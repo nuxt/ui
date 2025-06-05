@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Csökkent'
     },
     fileUpload: {
-      empty: 'Fájlok böngészése vagy ide húzása'
+      empty: 'Böngésszen vagy húzza ide a fájlokat',
+      removeAll: 'Összes eltávolítása',
+      addFiles: 'Fájl(ok) hozzáadása',
+      actions: 'Fájlok'
     },
     commandPalette: {
       placeholder: 'Írjon be egy parancsot vagy keressen...',

@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Azalt'
     },
     fileUpload: {
-      empty: 'Dosya seçin veya buraya bırakın'
+      empty: 'Dosyalara göz atın veya buraya sürükleyin',
+      removeAll: 'Tümünü kaldır',
+      addFiles: 'Dosya(lar) ekle',
+      actions: 'Dosyalar'
     },
     commandPalette: {
       placeholder: 'Bir komut yazın veya arama yapın...',

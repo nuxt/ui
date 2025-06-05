@@ -1,12 +1,13 @@
 export default {
   slots: {
     root: 'group/item relative flex flex-col gap-2 items-center',
-    base: 'relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented',
+    base: 'w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented',
     dragging: 'bg-accented/20',
     empty: 'flex flex-col items-center justify-center gap-2',
     label: 'font-semibold text-highlighted text-center px-2 line-clamp-1',
     uploadIcon: 'pointer-events-none',
     files: 'space-y-2 w-full',
+    filesActions: 'flex items-center justify-between w-full px-1 py-2',
     file: 'text-default rounded-md relative',
     fileContent: 'flex items-center gap-3',
     fileLeadingAvatar: 'shrink-0',
@@ -21,47 +22,42 @@ export default {
   variants: {
     size: {
       xs: {
-        base: 'w-56',
         empty: 'min-h-16',
         label: 'text-xs',
         uploadIcon: 'size-4',
-        files: 'max-w-56',
+        files: 'w-full',
         file: 'p-1 text-xs gap-1',
         fileLeadingAvatarSize: 'xs'
       },
       sm: {
-        base: 'w-60',
         empty: 'h-20',
         label: 'text-xs',
         uploadIcon: 'size-4',
-        files: 'max-w-60',
+        files: 'w-full',
         file: 'p-1.5 text-xs gap-1.5',
         fileLeadingAvatarSize: 'sm'
       },
       md: {
-        base: 'w-64',
         empty: 'h-24',
         label: 'text-sm',
         uploadIcon: 'size-5',
-        files: 'max-w-64',
+        files: 'w-full',
         file: 'p-1.5 text-sm gap-1.5',
         fileLeadingAvatarSize: 'md'
       },
       lg: {
-        base: 'w-72',
         empty: 'h-26',
         label: 'text-sm',
         uploadIcon: 'size-5',
-        files: 'max-w-72',
+        files: 'w-full',
         file: 'p-2 text-sm gap-2',
         fileLeadingAvatarSize: 'lg'
       },
       xl: {
-        base: 'w-82',
         empty: 'h-32',
         label: 'text-base',
         uploadIcon: 'size-6',
-        files: 'max-w-82',
+        files: 'w-full',
         file: 'p-2 text-base gap-2',
         fileLeadingAvatarSize: 'xl'
       }

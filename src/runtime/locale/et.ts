@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Vähenda'
     },
     fileUpload: {
-      empty: 'Sirvi või lohista failid siia'
+      empty: 'Sirvige või lohistage failid siia',
+      removeAll: 'Eemalda kõik',
+      addFiles: 'Lisa fail(id)',
+      actions: 'Failid'
     },
     commandPalette: {
       placeholder: 'Sisesta käsk või otsi...',

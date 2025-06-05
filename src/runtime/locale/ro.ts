@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Scade'
     },
     fileUpload: {
-      empty: 'Răsfoiește sau trage fișiere aici'
+      empty: 'Răsfoiți sau trageți fișierele aici',
+      removeAll: 'Eliminați toate',
+      addFiles: 'Adăugați fișier(e)',
+      actions: 'Fișiere'
     },
     commandPalette: {
       placeholder: 'Tastează o comandă sau caută...',

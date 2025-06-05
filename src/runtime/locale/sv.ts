@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Minska'
     },
     fileUpload: {
-      empty: 'Bläddra eller släpp filer här'
+      empty: 'Bläddra eller dra filer hit',
+      removeAll: 'Ta bort alla',
+      addFiles: 'Lägg till fil(er)',
+      actions: 'Filer'
     },
     commandPalette: {
       placeholder: 'Skriv ett kommando eller sök...',

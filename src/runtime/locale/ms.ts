@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Kurangkan'
     },
     fileUpload: {
-      empty: 'Semak fail atau seret ke sini'
+      empty: 'Layari atau seret fail ke sini',
+      removeAll: 'Buang semua',
+      addFiles: 'Tambah fail',
+      actions: 'Fail'
     },
     commandPalette: {
       placeholder: 'Taip arahan atau carian...',

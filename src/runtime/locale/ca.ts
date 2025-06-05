@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Decrementar'
     },
     fileUpload: {
-      empty: 'Explora o arrossega fitxers aquí'
+      empty: 'Navegueu o arrossegueu fitxers aquí',
+      removeAll: 'Eliminar tot',
+      addFiles: 'Afegir fitxer(s)',
+      actions: 'Fitxers'
     },
     commandPalette: {
       placeholder: 'Escriu una ordre o cerca...',

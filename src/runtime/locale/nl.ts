@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Verlagen'
     },
     fileUpload: {
-      empty: 'Blader door bestanden of sleep ze hierheen'
+      empty: 'Bladeren of bestanden hier neerzetten',
+      removeAll: 'Alles verwijderen',
+      addFiles: 'Bestand(en) toevoegen',
+      actions: 'Bestanden'
     },
     commandPalette: {
       placeholder: 'Typ een commando of zoek...',

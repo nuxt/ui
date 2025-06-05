@@ -22,7 +22,10 @@ export default defineLocale<Messages>({
       decrement: 'کمی'
     },
     fileUpload: {
-      empty: 'فائلوں کو براؤز کریں یا یہاں چھوڑیں'
+      empty: 'فائلیں براؤز کریں یا یہاں ڈراپ کریں',
+      removeAll: 'سب ہٹائیں',
+      addFiles: 'فائل(یں) شامل کریں',
+      actions: 'فائلیں'
     },
     commandPalette: {
       placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...',

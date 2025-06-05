@@ -22,7 +22,10 @@ export default defineLocale<Messages>({
       decrement: 'تقليل'
     },
     fileUpload: {
-      empty: 'استعرض أو اسحب الملفات هنا'
+      empty: 'استعرض أو اسحب الملفات هنا',
+      removeAll: 'إزالة الكل',
+      addFiles: 'إضافة ملف(ات)',
+      actions: 'الملفات'
     },
     commandPalette: {
       placeholder: 'اكتب أمرًا أو ابحث...',

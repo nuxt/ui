@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: 'Reducer'
     },
     fileUpload: {
-      empty: 'Gennemse eller træk filer her'
+      empty: 'Gennemse eller træk filer hertil',
+      removeAll: 'Fjern alle',
+      addFiles: 'Tilføj fil(er)',
+      actions: 'Filer'
     },
     commandPalette: {
       placeholder: 'Skriv en kommando eller søg...',

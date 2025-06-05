@@ -21,7 +21,10 @@ export default defineLocale<Messages>({
       decrement: '減少'
     },
     fileUpload: {
-      empty: '選擇檔案或拖放到這裡'
+      empty: '瀏覽或拖拽檔案到此處',
+      removeAll: '移除全部',
+      addFiles: '新增檔案',
+      actions: '檔案'
     },
     commandPalette: {
       placeholder: '輸入命令或搜尋...',

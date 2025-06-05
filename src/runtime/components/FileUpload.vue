@@ -68,6 +68,7 @@ export interface FileUploadSlots {
   default?(props: {}): any
   empty?(props: {}): any
   item?(props: { item: FileUploadItem }): any
+  actions?(props: {}): any
 }
 </script>
 
@@ -243,11 +244,48 @@ function onDragLeave(event: DragEvent) {
   emits('onDragLeave', event)
 }
 
+const removeAll = () => {
+  files.value = []
+  revokeAllPreviews()
+  if (fileInputRef.value) fileInputRef.value.value = ''
+  emits('change', new Event('change'))
+}
+
 defineExpose({ fileInputRef })
 </script>
 
 <template>
   <DefineFilesPreviewTemplate v-slot="{ files: filesList }">
+    <div :class="ui.filesActions({ class: props.ui?.filesActions })">
+      <slot name="actions">
+        <div class="flex items-center justify-between w-full gap-3">
+          <span :class="`text-${props.size || 'md'} font-semibold`">
+            {{ `${t('fileUpload.actions')}  (${files?.length || 0})` }}
+          </span>
+          <div class="flex items-center gap-1">
+            <UButton
+              id="add-files"
+              :icon="appConfig.ui.icons.upload"
+              :label="t('fileUpload.addFiles')"
+              variant="outline"
+              color="neutral"
+              :size="props.size || 'md'"
+              @click="fileInputRef?.click()"
+            />
+            <UButton
+              id="remove-all"
+              :icon="appConfig.ui.icons.trash"
+              :label="t('fileUpload.removeAll')"
+              :disabled="isEmpty"
+              variant="outline"
+              color="neutral"
+              :size="props.size || 'md'"
+              @click.stop="removeAll()"
+            />
+          </div>
+        </div>
+      </slot>
+    </div>
     <div :class="ui.files({ class: props.ui?.files })">
       <div
         v-for="(item, i) in filesList"

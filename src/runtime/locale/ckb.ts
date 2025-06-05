@@ -22,7 +22,10 @@ export default defineLocale<Messages>({
       decrement: 'کەمکردنەوە'
     },
     fileUpload: {
-      empty: 'فایلەکان بگەڕێنەوە یان لێرەوە بەرز بکەوە'
+      empty: 'گۆڕانکاری یان فایلەکان بخەرە ئێرە',
+      removeAll: 'هەموویان لابدە',
+      addFiles: 'فایل زیاد بکە',
+      actions: 'فایلەکان'
     },
     commandPalette: {
       placeholder: 'فەرمانێک بنووسە یان بگەڕێ...',
