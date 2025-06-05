@@ -65,13 +65,17 @@ if (!import.meta.prerender) {
   })
 }
 
-const type = page.value?.path.includes('components') ? 'Vue Component ' : page.value?.path.includes('composables') ? 'Vue Composable ' : ''
+const title = page.value?.navigation?.title ? page.value.navigation.title : page.value?.title
+const prefix = page.value?.path.includes('components') || page.value?.path.includes('composables') ? 'Vue ' : ''
+const suffix = page.value?.path.includes('components') ? 'Component ' : page.value?.path.includes('composables') ? 'Composable ' : ''
+const description = page.value?.description
+
 useSeoMeta({
-  titleTemplate: `%s ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} ${page.value.framework === 'vue' ? ' for Vue' : ''}`,
-  title: page.value.navigation?.title ? page.value.navigation.title : page.value.title,
-  ogTitle: `${page.value.navigation?.title ? page.value.navigation.title : page.value.title} ${type}- Nuxt UI ${page.value.module === 'ui-pro' ? 'Pro' : ''} ${page.value.framework === 'vue' ? ' for Vue' : ''}`,
-  description: page.value.description,
-  ogDescription: page.value.description
+  titleTemplate: `${prefix}%s ${suffix}- Nuxt UI ${page.value?.module === 'ui-pro' ? 'Pro' : ''} ${page.value?.framework === 'vue' ? ' for Vue' : ''}`,
+  title,
+  ogTitle: `${prefix}${title} ${suffix}- Nuxt UI ${page.value?.module === 'ui-pro' ? 'Pro' : ''} ${page.value?.framework === 'vue' ? ' for Vue' : ''}`,
+  description,
+  ogDescription: description
 })
 
 if (route.path.startsWith('/components')) {

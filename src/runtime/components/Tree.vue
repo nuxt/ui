@@ -29,7 +29,7 @@ export type TreeItem = {
   [key: string]: any
 }
 
-export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled'> {
+export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<TreeRootProps<T>, 'expanded' | 'defaultExpanded' | 'selectionBehavior' | 'propagateSelect' | 'disabled' | 'bubbleSelect'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'ul'
@@ -116,7 +116,7 @@ const slots = defineSlots<TreeSlots<T>>()
 
 const appConfig = useAppConfig() as Tree['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: TreeItem[], level: number }, TreeSlots<T>>()
 
@@ -151,7 +151,7 @@ const defaultExpanded = computed(() =>
     <li
       v-for="(item, index) in items"
       :key="`${level}-${index}`"
-      :class="level > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren, item.class] }) : ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
+      :class="level > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
     >
       <TreeItem
         v-slot="{ isExpanded, isSelected }"
@@ -161,7 +161,7 @@ const defaultExpanded = computed(() =>
         @toggle="item.onToggle"
         @select="item.onSelect"
       >
-        <button :disabled="item.disabled || disabled" :class="ui.link({ class: [props.ui?.link, item.ui?.link], selected: isSelected, disabled: item.disabled || disabled })">
+        <button :disabled="item.disabled || disabled" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })">
           <slot :name="((item.slot || 'item') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
             <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
               <UIcon

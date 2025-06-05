@@ -86,9 +86,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb |
   <Primitive :as="as" aria-label="breadcrumb" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ol :class="ui.list({ class: props.ui?.list })">
       <template v-for="(item, index) in items" :key="index">
-        <li :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
+        <li :class="ui.item({ class: [props.ui?.item, item.ui?.item] })">
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
-            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [props.ui?.link, item.ui?.link], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
+            <ULinkBase v-bind="slotProps" as="span" :aria-current="active && (index === items!.length - 1) ? 'page' : undefined" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: index === items!.length - 1, disabled: !!item.disabled, to: !!item.to })">
               <slot :name="((item.slot || 'item') as keyof BreadcrumbSlots<T>)" :item="item" :index="index">
                 <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof BreadcrumbSlots<T>)" :item="item" :active="index === items!.length - 1" :index="index">
                   <UIcon v-if="item.icon" :name="item.icon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon], active: index === items!.length - 1 })" />

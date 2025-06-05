@@ -291,7 +291,7 @@ In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), 
 This allows you to move the trigger outside of the Drawer or remove it entirely.
 ::
 
-### Prevent closing
+### Disable dismissal
 
 Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape.
 
@@ -304,6 +304,17 @@ name: 'drawer-dismissible-example'
 
 ::note
 In this example, the `header` slot is used to add a close button which is not done by default.
+::
+
+### With interactive background
+
+Set the `overlay` and `modal` props to `false` alongside the `dismissible` prop to make the Drawer's background interactive without closing the Drawer.
+
+::component-example
+---
+prettier: true
+name: 'drawer-modal-example'
+---
 ::
 
 ### Responsive drawer

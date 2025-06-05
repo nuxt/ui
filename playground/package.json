@@ -3,18 +3,18 @@
   "name": "@nuxt/ui-playground",
   "type": "module",
   "scripts": {
-    "dev": "nuxi dev",
-    "build": "nuxi build",
-    "generate": "nuxi generate",
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.42",
-    "@iconify-json/simple-icons": "^1.2.34",
+    "@iconify-json/lucide": "^1.2.45",
+    "@iconify-json/simple-icons": "^1.2.37",
     "@nuxt/ui": "latest",
     "@nuxthub/core": "^0.8.27",
-    "nuxt": "^3.17.3",
-    "zod": "^3.24.4"
+    "nuxt": "^3.17.5",
+    "zod": "^3.25.47"
   },
   "devDependencies": {
     "typescript": "^5.8.3",

@@ -5,7 +5,7 @@ exports[`Stepper > renders with as correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -16,7 +16,7 @@ exports[`Stepper > renders with as correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -47,7 +47,7 @@ exports[`Stepper > renders with class correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -58,7 +58,7 @@ exports[`Stepper > renders with class correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -89,7 +89,7 @@ exports[`Stepper > renders with content slot correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -100,7 +100,7 @@ exports[`Stepper > renders with content slot correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -131,7 +131,7 @@ exports[`Stepper > renders with custom slot correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -142,7 +142,7 @@ exports[`Stepper > renders with custom slot correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -173,7 +173,7 @@ exports[`Stepper > renders with default slot correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -184,7 +184,7 @@ exports[`Stepper > renders with default slot correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -215,7 +215,7 @@ exports[`Stepper > renders with defaultValue correctly 1`] = `
   <div class="flex">
     <div data-state="completed" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="completed" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="completed" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -226,7 +226,7 @@ exports[`Stepper > renders with defaultValue correctly 1`] = `
     </div>
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -257,7 +257,7 @@ exports[`Stepper > renders with description slot correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -268,7 +268,7 @@ exports[`Stepper > renders with description slot correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -341,7 +341,7 @@ exports[`Stepper > renders with items correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -352,7 +352,7 @@ exports[`Stepper > renders with items correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -383,7 +383,7 @@ exports[`Stepper > renders with modelValue correctly 1`] = `
   <div class="flex">
     <div data-state="completed" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="completed" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="completed" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -394,7 +394,7 @@ exports[`Stepper > renders with modelValue correctly 1`] = `
     </div>
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -425,7 +425,7 @@ exports[`Stepper > renders with neutral color correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted focus-visible:outline-inverted">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-inverted start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -436,7 +436,7 @@ exports[`Stepper > renders with neutral color correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted focus-visible:outline-inverted">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-inverted start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -467,7 +467,7 @@ exports[`Stepper > renders with size lg horizontal correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-6" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-6"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+32px)] end-[calc(-50%+32px)]"></div>
       </div>
@@ -478,7 +478,7 @@ exports[`Stepper > renders with size lg horizontal correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-6" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-6"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+32px)] end-[calc(-50%+32px)]"></div>
       </div>
@@ -509,7 +509,7 @@ exports[`Stepper > renders with size lg vertical correctly 1`] = `
   <div class="flex flex-col gap-4">
     <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-3">
       <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-6" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-6"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[54px]"></div>
       </div>
@@ -520,7 +520,7 @@ exports[`Stepper > renders with size lg vertical correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-3">
       <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-12 text-lg group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-6" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-6"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[54px]"></div>
       </div>
@@ -551,7 +551,7 @@ exports[`Stepper > renders with size md horizontal correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -562,7 +562,7 @@ exports[`Stepper > renders with size md horizontal correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -593,7 +593,7 @@ exports[`Stepper > renders with size md vertical correctly 1`] = `
   <div class="flex flex-col gap-4">
     <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-2.5">
       <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[46px]"></div>
       </div>
@@ -604,7 +604,7 @@ exports[`Stepper > renders with size md vertical correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-2.5">
       <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[46px]"></div>
       </div>
@@ -635,7 +635,7 @@ exports[`Stepper > renders with size sm horizontal correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+20px)] end-[calc(-50%+20px)]"></div>
       </div>
@@ -646,7 +646,7 @@ exports[`Stepper > renders with size sm horizontal correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+20px)] end-[calc(-50%+20px)]"></div>
       </div>
@@ -677,7 +677,7 @@ exports[`Stepper > renders with size sm vertical correctly 1`] = `
   <div class="flex flex-col gap-4">
     <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-2">
       <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[38px]"></div>
       </div>
@@ -688,7 +688,7 @@ exports[`Stepper > renders with size sm vertical correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-2">
       <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-8 text-sm group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-4" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[38px]"></div>
       </div>
@@ -719,7 +719,7 @@ exports[`Stepper > renders with size xl horizontal correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-7" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-7"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+36px)] end-[calc(-50%+36px)]"></div>
       </div>
@@ -730,7 +730,7 @@ exports[`Stepper > renders with size xl horizontal correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-7" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-7"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+36px)] end-[calc(-50%+36px)]"></div>
       </div>
@@ -761,7 +761,7 @@ exports[`Stepper > renders with size xl vertical correctly 1`] = `
   <div class="flex flex-col gap-4">
     <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-3.5">
       <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-7" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-7"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[62px]"></div>
       </div>
@@ -772,7 +772,7 @@ exports[`Stepper > renders with size xl vertical correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-3.5">
       <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-14 text-xl group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-7" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-7"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[62px]"></div>
       </div>
@@ -803,7 +803,7 @@ exports[`Stepper > renders with size xs horizontal correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-3" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-3"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+16px)] end-[calc(-50%+16px)]"></div>
       </div>
@@ -814,7 +814,7 @@ exports[`Stepper > renders with size xs horizontal correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-3" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-3"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+16px)] end-[calc(-50%+16px)]"></div>
       </div>
@@ -845,7 +845,7 @@ exports[`Stepper > renders with size xs vertical correctly 1`] = `
   <div class="flex flex-col gap-4">
     <div aria-current="true" data-state="active" data-orientation="vertical" class="group relative w-full flex text-start gap-1.5">
       <div class="relative"><button type="button" data-state="active" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-3" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-3"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[30px]"></div>
       </div>
@@ -856,7 +856,7 @@ exports[`Stepper > renders with size xs vertical correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="vertical" class="group relative w-full flex text-start gap-1.5">
       <div class="relative"><button type="button" data-state="inactive" data-orientation="vertical" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-6 text-xs group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-3" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-3"></svg></div>
         </button>
         <div data-orientation="vertical" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented start-[calc(50%-1px)] -bottom-[10px] w-0.5 group-data-[state=completed]:bg-primary top-[30px]"></div>
       </div>
@@ -887,7 +887,7 @@ exports[`Stepper > renders with title slot correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -898,7 +898,7 @@ exports[`Stepper > renders with title slot correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -929,7 +929,7 @@ exports[`Stepper > renders with ui correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -940,7 +940,7 @@ exports[`Stepper > renders with ui correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -971,7 +971,7 @@ exports[`Stepper > renders without linear correctly 1`] = `
   <div class="flex">
     <div aria-current="true" data-state="active" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="active" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-1" aria-labelledby="reka-stepper-item-title-v-0" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="active" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>
@@ -982,7 +982,7 @@ exports[`Stepper > renders without linear correctly 1`] = `
     </div>
     <div data-state="inactive" data-orientation="horizontal" class="group text-center relative w-full">
       <div class="relative flex justify-center"><button type="button" data-state="inactive" data-orientation="horizontal" tabindex="0" aria-describedby="reka-stepper-item-description-v-3" aria-labelledby="reka-stepper-item-title-v-2" class="rounded-full text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 size-10 text-base group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary focus-visible:outline-primary">
-          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="shrink-0 size-5" width="1em" height="1em" viewBox="0 0 16 16"></svg></div>
+          <div class="flex items-center justify-center size-full"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg></div>
         </button>
         <div data-orientation="horizontal" role="none" data-state="inactive" class="absolute rounded-full group-data-[disabled]:opacity-75 bg-accented top-[calc(50%-2px)] h-0.5 group-data-[state=completed]:bg-primary start-[calc(50%+28px)] end-[calc(-50%+28px)]"></div>
       </div>

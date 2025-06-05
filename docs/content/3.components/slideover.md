@@ -273,7 +273,7 @@ In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), 
 This allows you to move the trigger outside of the Slideover or remove it entirely.
 ::
 
-### Prevent closing
+### Disable dismissal
 
 Set the `dismissible` prop to `false` to prevent the Slideover from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
@@ -304,13 +304,13 @@ slots:
 
 ### Programmatic usage
 
-You can use the [`useOverlay`](/composables/use-overlay) composable to open a Slideover programatically.
+You can use the [`useOverlay`](/composables/use-overlay) composable to open a Slideover programmatically.
 
 ::warning
 Make sure to wrap your app with the [`App`](/components/app) component which uses the [`OverlayProvider`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/OverlayProvider.vue) component.
 ::
 
-First, create a slideover component that will be opened programatically:
+First, create a slideover component that will be opened programmatically:
 
 ::component-example
 ---

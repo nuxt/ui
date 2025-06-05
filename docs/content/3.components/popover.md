@@ -181,7 +181,7 @@ name: 'popover-open-example'
 In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Popover by pressing :kbd{value="O"}.
 ::
 
-### Prevent closing
+### Disable dismissal
 
 Set the `dismissible` prop to `false` to prevent the Popover from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
@@ -199,6 +199,21 @@ You can use a [CommandPalette](/components/command-palette) component inside the
 ---
 collapse: true
 name: 'popover-command-palette-example'
+---
+::
+
+### With anchor slot :badge{label="New" class="align-text-top"}
+
+You can use the `#anchor` slot to position the Popover against a custom element.
+
+::warning
+This slot only works when `mode` is `click`.
+::
+
+::component-example
+---
+collapse: true
+name: 'popover-anchor-slot-example'
 ---
 ::
 
