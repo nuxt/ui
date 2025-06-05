@@ -100,6 +100,7 @@ export type DropdownMenuSlots<
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
   'item-trailing': SlotProps<T>
+  'body': (prop?: {}) => any
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
 } & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>

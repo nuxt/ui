@@ -151,6 +151,16 @@ defineShortcuts(extractShortcuts(items.value))
       <UDropdownMenu :items="itemsWithColor" :size="size" arrow :content="{ side: 'bottom', align: 'start' }" :ui="{ content: 'w-48' }">
         <UButton label="Color" color="neutral" variant="outline" icon="i-lucide-menu" />
       </UDropdownMenu>
+
+      <UDropdownMenu>
+        <UButton label="Custom body slot" color="neutral" variant="outline" icon="i-lucide-menu" />
+
+        <template #body>
+          <div class="p-2">
+            <Placeholder class="w-full h-40" />
+          </div>
+        </template>
+      </UDropdownMenu>
     </div>
   </div>
 </template>

@@ -338,6 +338,14 @@ name: 'dropdown-menu-custom-slot-example'
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
+You can also override the whole body of dropdown menu for complex usecases:
+
+::component-example
+---
+name: 'dropdown-menu-body-slot-example'
+---
+::
+
 ### Extract shortcuts
 
 When you have some items with `kbds` property (displaying some [Kbd](/components/kbd)), you can easily make them work with the [defineShortcuts](/composables/define-shortcuts) composable.
