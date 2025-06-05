@@ -3,7 +3,6 @@ export default {
     root: 'group/item relative flex flex-col gap-2 items-center',
     base: 'relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented',
     dragging: 'bg-accented/20',
-    hover: 'hover:bg-accented/20',
     empty: 'flex flex-col items-center justify-center gap-2',
     label: 'font-semibold text-highlighted text-center px-2 line-clamp-1',
     uploadIcon: 'pointer-events-none',
@@ -17,13 +16,13 @@ export default {
     fileSize: 'text-muted',
     fileImage: 'rounded-[inherit]',
     fileTrailing: 'flex items-start',
-    removeButton: 'p-0.5'
+    fileRemoveButton: ''
   },
   variants: {
     size: {
       xs: {
         base: 'w-56',
-        empty: 'h-16',
+        empty: 'min-h-16',
         label: 'text-xs',
         uploadIcon: 'size-4',
         files: 'max-w-56',
@@ -96,6 +95,10 @@ export default {
       true: '',
       false: ''
     },
+    hasDefaultSlot: {
+      true: '',
+      false: ''
+    },
     previewPlacement: {
       inside: '',
       outside: ''
@@ -134,12 +137,13 @@ export default {
     {
       layout: 'grid',
       class: {
-        removeButton: 'rounded-full'
+        fileRemoveButton: 'rounded-full'
       }
     },
     {
       disabled: false,
       isEmpty: true,
+      hasDefaultSlot: false,
       class: {
         base: 'hover:bg-accented/20'
       }

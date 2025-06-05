@@ -134,7 +134,8 @@ const ui = computed(() =>
     dragging: dragging.value,
     disabled: disabled.value,
     isEmpty: isEmpty.value,
-    previewPlacement: props.previewPlacement
+    previewPlacement: props.previewPlacement,
+    hasDefaultSlot: !!slots.default
   })
 )
 
@@ -256,15 +257,39 @@ defineExpose({ fileInputRef })
         <slot name="item" v-bind="{ item }">
           <div :class="ui.fileContent({ class: props.ui?.fileContent })">
             <component
-              :is="item.file.type.includes('image') ? props.layout === 'list' ? UAvatar : ImageComponent : UAvatar"
-              :src="item.file.type.includes('image') ? filePreviews[fileKey(item.file)] : undefined"
-              :class="item.file.type.includes('image') && props.layout === 'grid' ? ui.fileImage({ class: props.ui?.fileImage }) : ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })"
-              :icon="item.file.type.includes('image') ? undefined : props.fileIcon || appConfig.ui.icons.file"
+              :is="
+                item.file.type.includes('image')
+                  ? props.layout === 'list'
+                    ? UAvatar
+                    : ImageComponent
+                  : UAvatar
+              "
+              :src="
+                item.file.type.includes('image')
+                  ? filePreviews[fileKey(item.file)]
+                  : undefined
+              "
+              :class="
+                item.file.type.includes('image') && props.layout === 'grid'
+                  ? ui.fileImage({ class: props.ui?.fileImage })
+                  : ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })
+              "
+              :icon="
+                item.file.type.includes('image')
+                  ? undefined
+                  : props.fileIcon || appConfig.ui.icons.file
+              "
               :alt="item.file.name"
-              :size="(ui.fileLeadingAvatarSize() || props.ui?.fileLeadingAvatarSize) as AvatarProps['size']"
+              :size="
+                (ui.fileLeadingAvatarSize()
+                  || props.ui?.fileLeadingAvatarSize) as AvatarProps['size']
+              "
             />
 
-            <div v-if="props.layout === 'list'" :class="ui.fileDetails({ class: props.ui?.fileDetails })">
+            <div
+              v-if="props.layout === 'list'"
+              :class="ui.fileDetails({ class: props.ui?.fileDetails })"
+            >
               <p :class="ui.fileLabel({ class: props.ui?.fileLabel })">
                 {{ item.file.name }}
               </p>
@@ -283,7 +308,7 @@ defineExpose({ fileInputRef })
               :variant="props.layout === 'list' ? 'link' : 'solid'"
               size="xs"
               color="neutral"
-              :class="ui.removeButton({ class: props.ui?.removeButton })"
+              :class="ui.fileRemoveButton({ class: props.ui?.fileRemoveButton })"
               @click.stop="removeFile(item)"
             />
           </div>
@@ -292,18 +317,22 @@ defineExpose({ fileInputRef })
     </div>
   </DefineFilesPreviewTemplate>
 
-  <!-- Rest of the component remains the same -->
-  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
+  <Primitive
+    :as="as"
+    :class="ui.root({ class: [props.class, props.ui?.root] })"
+  >
     <div
       ref="base"
       :class="ui.base({ class: props.ui?.base })"
       tabindex="0"
       @drop="onDrop"
       @dragover="onDragOver"
-      @click="!disabled
-        && (isEmpty || previewPlacement === 'outside')
-        && !slots.default
-        && fileInputRef?.click()"
+      @click="
+        !disabled
+          && (isEmpty || previewPlacement === 'outside')
+          && !slots.default
+          && fileInputRef?.click()
+      "
       @dragleave="onDragLeave"
     >
       <input
@@ -323,26 +352,32 @@ defineExpose({ fileInputRef })
       >
 
       <!-- Empty State -->
-      <div v-if="isEmpty || previewPlacement === 'outside'" :class="ui.empty({ class: props.ui?.empty })">
+      <div
+        v-if="isEmpty || previewPlacement === 'outside'"
+        :class="ui.empty({ class: props.ui?.empty })"
+      >
         <slot name="empty">
           <UIcon
             :name="props.uploadIcon || appConfig.ui.icons.upload"
             :class="ui.uploadIcon({ class: props.ui?.uploadIcon })"
           />
+          <div v-if="!!slots.default" @click.stop="fileInputRef?.click()">
+            <slot />
+          </div>
           <span :class="ui.label({ class: props.ui?.label })">
             {{ label || t("fileUpload.empty") }}
           </span>
         </slot>
       </div>
 
-      <!-- File List (Inside) -->
+      <!-- File Layout (Inside) -->
       <ReuseFilesPreviewTemplate
         v-else-if="previewPlacement === 'inside'"
         :files="files"
       />
     </div>
 
-    <!-- File List (Outside) -->
+    <!-- File Layout (Outside) -->
     <ReuseFilesPreviewTemplate
       v-if="previewPlacement === 'outside' && !isEmpty"
       :files="files"
