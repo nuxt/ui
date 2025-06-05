@@ -2,7 +2,7 @@
 
 exports[`FileUpload > renders with accept correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 hover:bg-accented/20" tabindex="0"><input type="file" accept="png,jpg" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="png,jpg" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-24"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span>
     </div>
@@ -13,7 +13,7 @@ exports[`FileUpload > renders with accept correctly 1`] = `
 
 exports[`FileUpload > renders with disabled correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center cursor-not-allowed">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64" tabindex="0"><input type="file" accept="image/*" disabled="" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented" tabindex="0"><input type="file" accept="image/*" disabled="" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-24"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span>
     </div>
@@ -24,7 +24,7 @@ exports[`FileUpload > renders with disabled correctly 1`] = `
 
 exports[`FileUpload > renders with id correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 hover:bg-accented/20" tabindex="0"><input id="id" type="file" accept="image/*" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input id="id" type="file" accept="image/*" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-24"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span>
     </div>
@@ -35,7 +35,7 @@ exports[`FileUpload > renders with id correctly 1`] = `
 
 exports[`FileUpload > renders with label correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-24"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Label</span>
     </div>
@@ -46,7 +46,7 @@ exports[`FileUpload > renders with label correctly 1`] = `
 
 exports[`FileUpload > renders with multiple correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" multiple="" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" multiple="" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-24"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span>
     </div>
@@ -57,7 +57,7 @@ exports[`FileUpload > renders with multiple correctly 1`] = `
 
 exports[`FileUpload > renders with name correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 hover:bg-accented/20" tabindex="0"><input type="file" name="name" accept="image/*" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" name="name" accept="image/*" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-24"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span>
     </div>
@@ -68,7 +68,7 @@ exports[`FileUpload > renders with name correctly 1`] = `
 
 exports[`FileUpload > renders with placeholder correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden" placeholder="Placeholder"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden" placeholder="Placeholder"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-24"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span>
     </div>
@@ -79,7 +79,7 @@ exports[`FileUpload > renders with placeholder correctly 1`] = `
 
 exports[`FileUpload > renders with required correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" required="" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" required="" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-24"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span>
     </div>
@@ -90,7 +90,7 @@ exports[`FileUpload > renders with required correctly 1`] = `
 
 exports[`FileUpload > renders with size lg correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-72 hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-26"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span>
     </div>
@@ -101,7 +101,7 @@ exports[`FileUpload > renders with size lg correctly 1`] = `
 
 exports[`FileUpload > renders with size md correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-64 hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-24"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-5"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-sm">Browse or drop files here</span>
     </div>
@@ -112,7 +112,7 @@ exports[`FileUpload > renders with size md correctly 1`] = `
 
 exports[`FileUpload > renders with size sm correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-60 hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-20"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-4"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-xs">Browse or drop files here</span>
     </div>
@@ -123,7 +123,7 @@ exports[`FileUpload > renders with size sm correctly 1`] = `
 
 exports[`FileUpload > renders with size xl correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-82 hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 h-32"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-6"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-base">Browse or drop files here</span>
     </div>
@@ -134,7 +134,7 @@ exports[`FileUpload > renders with size xl correctly 1`] = `
 
 exports[`FileUpload > renders with size xs correctly 1`] = `
 "<div class="group/item relative flex flex-col gap-2 items-center">
-  <div class="relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented w-56 hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
+  <div class="w-full relative flex flex-col items-center overflow-hidden p-4 transition-colors bg-default shadow-sm rounded-md divide-y divide-default overflow-y-auto border border-dashed border-accented hover:bg-accented/20" tabindex="0"><input type="file" accept="image/*" class="hidden"><!-- Empty State -->
     <div class="flex flex-col items-center justify-center gap-2 min-h-16"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="pointer-events-none size-4"></svg>
       <!--v-if--><span class="font-semibold text-highlighted text-center px-2 line-clamp-1 text-xs">Browse or drop files here</span>
     </div>
