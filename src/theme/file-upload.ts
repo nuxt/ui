@@ -8,11 +8,16 @@ export default {
     label: 'font-semibold text-highlighted text-center px-2 line-clamp-1',
     uploadIcon: 'pointer-events-none',
     files: 'space-y-2 w-full',
-    file: 'text-default flex justify-between items-center gap-2 p-2 border border-accented pe-3 rounded-md',
+    file: 'text-default rounded-md relative',
+    fileContent: 'flex items-center gap-3',
+    fileLeadingAvatar: 'shrink-0',
+    fileLeadingAvatarSize: '',
+    fileDetails: 'flex-1',
     fileLabel: 'text-default font-semibold line-clamp-1',
-    fileAvatar: 'shrink-0',
-    fileAvatarSize: '',
-    fileSize: 'text-muted'
+    fileSize: 'text-muted',
+    fileImage: 'rounded-[inherit]',
+    fileTrailing: 'flex items-start',
+    removeButton: 'p-0.5'
   },
   variants: {
     size: {
@@ -23,7 +28,7 @@ export default {
         uploadIcon: 'size-4',
         files: 'max-w-56',
         file: 'p-1 text-xs gap-1',
-        fileAvatarSize: 'xs'
+        fileLeadingAvatarSize: 'xs'
       },
       sm: {
         base: 'w-60',
@@ -32,7 +37,7 @@ export default {
         uploadIcon: 'size-4',
         files: 'max-w-60',
         file: 'p-1.5 text-xs gap-1.5',
-        fileAvatarSize: 'sm'
+        fileLeadingAvatarSize: 'sm'
       },
       md: {
         base: 'w-64',
@@ -41,7 +46,7 @@ export default {
         uploadIcon: 'size-5',
         files: 'max-w-64',
         file: 'p-1.5 text-sm gap-1.5',
-        fileAvatarSize: 'md'
+        fileLeadingAvatarSize: 'md'
       },
       lg: {
         base: 'w-72',
@@ -50,7 +55,7 @@ export default {
         uploadIcon: 'size-5',
         files: 'max-w-72',
         file: 'p-2 text-sm gap-2',
-        fileAvatarSize: 'lg'
+        fileLeadingAvatarSize: 'lg'
       },
       xl: {
         base: 'w-82',
@@ -59,15 +64,93 @@ export default {
         uploadIcon: 'size-6',
         files: 'max-w-82',
         file: 'p-2 text-base gap-2',
-        fileAvatarSize: 'xl'
+        fileLeadingAvatarSize: 'xl'
       }
     },
     multiple: {
       true: '',
       false: ''
+    },
+    layout: {
+      list: {
+        files: 'space-y-2',
+        file: 'flex justify-between items-center gap-2 p-2 border border-accented pe-3',
+        fileContent: 'flex items-center gap-3',
+        fileTrailing: 'flex items-start'
+      },
+      grid: ''
+    },
+    disabled: {
+      true: {
+        root: 'cursor-not-allowed'
+      },
+      false: ''
+    },
+    dragging: {
+      true: {
+        base: 'bg-accented/20'
+      },
+      false: ''
+    },
+    isEmpty: {
+      true: '',
+      false: ''
+    },
+    previewPlacement: {
+      inside: '',
+      outside: ''
     }
   },
+  compoundVariants: [
+    {
+      dragging: true,
+      disabled: true,
+      class: {
+        base: 'cursor-not-allowed bg-accented/5'
+      }
+    },
+    {
+      multiple: true,
+      layout: 'grid',
+      class: {
+        files: 'grid grid-cols-3 gap-3',
+        file: 'text-default relative',
+        fileContent: 'relative rounded-md aspect-square flex items-center justify-center bg-elevated',
+        fileTrailing: 'absolute -top-1 -right-1',
+        fileImage: 'size-full object-cover'
+      }
+    },
+    {
+      multiple: false,
+      layout: 'grid',
+      class: {
+        files: 'grid grid-cols-1',
+        file: 'text-default rounded-md min-h-26 relative bg-elevated',
+        fileContent: 'absolute inset-0 flex items-center justify-center',
+        fileTrailing: 'absolute -top-2 -right-2',
+        fileImage: 'mx-auto max-h-full object-contain'
+      }
+    },
+    {
+      layout: 'grid',
+      class: {
+        removeButton: 'rounded-full'
+      }
+    },
+    {
+      disabled: false,
+      isEmpty: true,
+      class: {
+        base: 'hover:bg-accented/20'
+      }
+    }
+  ],
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    layout: 'list',
+    disabled: false,
+    dragging: false,
+    isEmpty: true,
+    previewPlacement: 'inside'
   }
 }
