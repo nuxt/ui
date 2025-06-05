@@ -16,6 +16,9 @@ export default defineLocale<Messages>({
       prevMonth: 'Virege Mount',
       nextMonth: 'Nächste Mount'
     },
+    fileUpload: {
+      empty: 'Wielt eng Datei oder zitt se hei eraus'
+    },
     inputNumber: {
       increment: 'Inkrementéieren',
       decrement: 'Dekrementéieren'
