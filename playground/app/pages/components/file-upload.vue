@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { UButton } from '#components'
 import type { FileUploadItem } from '@nuxt/ui'
 
 type UploadWithStatus = FileUploadItem<{ status: 'pending' | 'uploading' | 'done', progress?: number }>
