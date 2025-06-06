@@ -61,7 +61,7 @@ export interface FileUploadEmits<T extends FileUploadItem = FileUploadItem> {
   (e: 'update:modelValue', value: T[]): void
   (e: 'blur', event: FocusEvent): void
   (e: 'change', event: Event): void
-  (e: 'onDrop' | 'onDragOver' | 'onDragLeave', event: DragEvent): void
+  (e: 'drop' | 'dragover' | 'dragleave', event: DragEvent): void
 }
 
 export interface FileUploadSlots {
@@ -220,7 +220,7 @@ function onDrop(event: DragEvent) {
   if (event.dataTransfer?.files?.length) {
     handleUpload(event.dataTransfer.files)
   }
-  emits('onDrop', event)
+  emits('drop', event)
 }
 
 function onBlur(event: FocusEvent) {
@@ -228,20 +228,33 @@ function onBlur(event: FocusEvent) {
   emits('blur', event)
 }
 
-function onDragOver(event: DragEvent) {
+function onDragover(event: DragEvent) {
   event.preventDefault()
   dragging.value = true
-  emits('onDragOver', event)
+  emits('dragover', event)
 }
 
-function onDragLeave(event: DragEvent) {
+function onDragleave(event: DragEvent) {
   event.preventDefault()
 
   // Early return if the drag leave is within the base element
   if (base.value && base.value.contains(event.relatedTarget as Node)) return
 
   dragging.value = false
-  emits('onDragLeave', event)
+  emits('dragleave', event)
+}
+
+function formatFileSize(bytes: number): string {
+  if (bytes === 0) return '0 B'
+
+  const k = 1024
+  const sizes = ['B', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+  const size = bytes / Math.pow(k, i)
+  const formattedSize = i === 0 ? size.toString() : size.toFixed(2)
+
+  return `${formattedSize} ${sizes[i]}`
 }
 
 const removeAll = () => {
@@ -332,8 +345,7 @@ defineExpose({ fileInputRef })
                 {{ item.file.name }}
               </p>
               <p :class="ui.fileSize({ class: props.ui?.fileSize })">
-                <!-- TODO: display not only MB but also KB and B if file is small -->
-                {{ (item.file.size / 1024 / 1024).toFixed(2) }} MB
+                {{ formatFileSize(item.file.size) }}
               </p>
             </div>
           </div>
@@ -364,14 +376,14 @@ defineExpose({ fileInputRef })
       :class="ui.base({ class: props.ui?.base })"
       tabindex="0"
       @drop="onDrop"
-      @dragover="onDragOver"
+      @dragover="onDragover"
       @click="
         !disabled
           && (isEmpty || previewPlacement === 'outside')
           && !slots.default
           && fileInputRef?.click()
       "
-      @dragleave="onDragLeave"
+      @dragleave="onDragleave"
     >
       <input
         :id="id"
