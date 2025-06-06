@@ -46,7 +46,7 @@ function _useOverlay() {
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
       originalProps: props || {},
-      props: {}
+      props: { ...(props || {}) }
     })
 
     overlays.push(options)
