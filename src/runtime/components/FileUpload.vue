@@ -51,6 +51,8 @@ export interface FileUploadProps {
    * Whether multiple files can be uploaded or not.
    * @defaultValue false
    */
+  autofocus?: boolean
+  autofocusDelay?: number
   multiple?: boolean
   disabled?: boolean
   class?: any
@@ -263,6 +265,18 @@ const removeAll = () => {
   if (fileInputRef.value) fileInputRef.value.value = ''
   emits('change', new Event('change'))
 }
+
+function autoFocus() {
+  if (props.autofocus) {
+    fileInputRef.value?.focus()
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 
 defineExpose({ fileInputRef })
 </script>
