@@ -9,6 +9,7 @@ const password = ref('')
     placeholder="Password"
     :type="show ? 'text' : 'password'"
     :ui="{ trailing: 'pe-1' }"
+    id="password"
   >
     <template #trailing>
       <UButton

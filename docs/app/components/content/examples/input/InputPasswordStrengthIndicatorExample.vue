@@ -44,6 +44,7 @@ const text = computed(() => {
         :aria-invalid="score < 4"
         aria-describedby="password-strength"
         class="w-full"
+        id="password"
       >
         <template #trailing>
           <UButton
