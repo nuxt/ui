@@ -29,7 +29,7 @@ describe('Timeline', () => {
     title: 'Testing & Deployment',
     description: 'QA testing and performance optimization. Deployed the application to production.',
     icon: 'i-lucide-check-circle',
-    value: 'deployment'
+    value: 'testing-and-deployment'
   }]
 
   const props = { items }
@@ -37,14 +37,17 @@ describe('Timeline', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with modelValue', { props: { ...props, modelValue: 'assigned' } }],
-    ['with defaultValue', { props: { ...props, defaultValue: 'assigned' } }],
+    ['with modelValue', { props: { ...props, modelValue: 'design' } }],
+    ['with defaultValue', { props: { ...props, defaultValue: 'design' } }],
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
     ...sizes.map((size: string) => [`with size ${size} horizontal`, { props: { ...props, size } }]),
     ...sizes.map((size: string) => [`with size ${size} vertical`, { props: { ...props, size, orientation: 'vertical' } }]),
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'gap-8' } }],
     ['with ui', { props: { ...props, ui: { title: 'font-bold' } } }],
+    ['with reverse', { props: { ...props, reverse: true } }],
+    ['with reverse and modelValue', { props: { ...props, reverse: true, modelValue: 'design' } }],
+    ['with reverse and defaultValue', { props: { ...props, reverse: true, defaultValue: 'design' } }],
     // Slots
     ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }],
     ['with date slot', { props, slots: { date: () => 'Date slot' } }],

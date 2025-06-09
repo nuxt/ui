@@ -48,10 +48,46 @@ export default (options: Required<ModuleOptions>) => ({
       'xl': '',
       '2xl': '',
       '3xl': ''
+    },
+
+    reverse: {
+      true: ''
     }
   },
 
-  compoundVariants: [{
+  compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
+    color,
+    reverse: false,
+    class: {
+      indicator: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color}`,
+      separator: `group-data-[state=completed]:bg-${color}`
+    }
+  })),
+  ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    reverse: true,
+    class: {
+      indicator: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color}`,
+      separator: `group-data-[state=active]:bg-${color}`
+    }
+  })),
+  {
+    color: 'neutral',
+    reverse: false,
+    class: {
+      indicator: 'group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted',
+      separator: 'group-data-[state=completed]:bg-inverted'
+    }
+  },
+  {
+    color: 'neutral',
+    reverse: true,
+    class: {
+      indicator: 'group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted',
+      separator: 'group-data-[state=active]:bg-inverted'
+    }
+  },
+  {
     orientation: 'horizontal',
     size: '3xs',
     class: {
