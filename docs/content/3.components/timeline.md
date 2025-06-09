@@ -173,6 +173,46 @@ class: 'overflow-x-auto'
 ---
 ::
 
+### Reverse
+
+Use the reverse prop to reverse the direction of the Timeline.
+
+::component-code
+---
+ignore:
+  - items
+  - class
+  - defaultValue
+external:
+  - items
+externalTypes:
+  - TimelineItem[]
+props:
+  reverse: true
+  modelValue: 2
+  orientation: 'vertical'
+  items:
+    - date: 'Mar 15, 2025'
+      title: 'Project Kickoff'
+      description: 'Kicked off the project with team alignment.'
+      icon: 'i-lucide-rocket'
+    - date: 'Mar 22 2025'
+      title: 'Design Phase'
+      description: 'User research and design workshops.'
+      icon: 'i-lucide-palette'
+    - date: 'Mar 29 2025'
+      title: 'Development Sprint'
+      description: 'Frontend and backend development.'
+      icon: 'i-lucide-code'
+    - date: 'Apr 5 2025'
+      title: 'Testing & Deployment'
+      description: 'QA testing and performance optimization.'
+      icon: 'i-lucide-check-circle'
+  class: 'w-full'
+class: 'overflow-x-auto'
+---
+::
+
 ## Examples
 
 ### Control active item
