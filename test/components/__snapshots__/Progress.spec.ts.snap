@@ -3,7 +3,7 @@
 exports[`Progress > renders with animation carousel correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -13,7 +13,7 @@ exports[`Progress > renders with animation carousel correctly 1`] = `
 exports[`Progress > renders with animation carousel-inverse correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -23,7 +23,7 @@ exports[`Progress > renders with animation carousel-inverse correctly 1`] = `
 exports[`Progress > renders with animation elastic correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[elastic_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -33,7 +33,7 @@ exports[`Progress > renders with animation elastic correctly 1`] = `
 exports[`Progress > renders with animation swing correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[swing_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -43,7 +43,7 @@ exports[`Progress > renders with animation swing correctly 1`] = `
 exports[`Progress > renders with as correctly 1`] = `
 "<section class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -53,7 +53,7 @@ exports[`Progress > renders with as correctly 1`] = `
 exports[`Progress > renders with class correctly 1`] = `
 "<div class="gap-2 flex flex-col w-48">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -63,7 +63,7 @@ exports[`Progress > renders with class correctly 1`] = `
 exports[`Progress > renders with color neutral correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-inverted data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
   </div>
   <!--v-if-->
@@ -73,7 +73,7 @@ exports[`Progress > renders with color neutral correctly 1`] = `
 exports[`Progress > renders with max correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <div class="flex justify-end text-dimmed transition-[width] duration-200 text-sm flex-row" style="width: 50%;">50% </div>
-  <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
   </div>
   <div class="grid items-end text-primary text-sm">
@@ -89,7 +89,7 @@ exports[`Progress > renders with max correctly 1`] = `
 exports[`Progress > renders with max inverted correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <div class="flex justify-end text-dimmed transition-[width] duration-200 text-sm self-end flex-row-reverse" style="width: 50%;">50% </div>
-  <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(50%);"></div>
   </div>
   <div class="grid items-end text-primary text-sm">
@@ -105,7 +105,7 @@ exports[`Progress > renders with max inverted correctly 1`] = `
 exports[`Progress > renders with modelValue correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
   </div>
   <!--v-if-->
@@ -115,7 +115,7 @@ exports[`Progress > renders with modelValue correctly 1`] = `
 exports[`Progress > renders with orientation horizontal correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -125,7 +125,7 @@ exports[`Progress > renders with orientation horizontal correctly 1`] = `
 exports[`Progress > renders with orientation vertical correctly 1`] = `
 "<div class="gap-2 h-full flex flex-row-reverse">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented h-full w-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented h-full w-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel-vertical_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -135,7 +135,7 @@ exports[`Progress > renders with orientation vertical correctly 1`] = `
 exports[`Progress > renders with size 2xl correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-5" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-5" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -145,7 +145,7 @@ exports[`Progress > renders with size 2xl correctly 1`] = `
 exports[`Progress > renders with size 2xs correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-px" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-px" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -155,7 +155,7 @@ exports[`Progress > renders with size 2xs correctly 1`] = `
 exports[`Progress > renders with size lg correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-3" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-3" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -165,7 +165,7 @@ exports[`Progress > renders with size lg correctly 1`] = `
 exports[`Progress > renders with size md correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -175,7 +175,7 @@ exports[`Progress > renders with size md correctly 1`] = `
 exports[`Progress > renders with size sm correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -185,7 +185,7 @@ exports[`Progress > renders with size sm correctly 1`] = `
 exports[`Progress > renders with size xl correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-4" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-4" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -195,7 +195,7 @@ exports[`Progress > renders with size xl correctly 1`] = `
 exports[`Progress > renders with size xs correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-0.5" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-0.5" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -205,7 +205,7 @@ exports[`Progress > renders with size xs correctly 1`] = `
 exports[`Progress > renders with status correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <div class="flex justify-end text-dimmed transition-[width] duration-200 text-sm flex-row" style="width: 50%;">50% </div>
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
   </div>
   <!--v-if-->
@@ -215,7 +215,7 @@ exports[`Progress > renders with status correctly 1`] = `
 exports[`Progress > renders with status inverted correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <div class="flex justify-end text-dimmed transition-[width] duration-200 text-sm self-end flex-row-reverse" style="width: 50%;">50% </div>
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-valuetext="50%" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(50%);"></div>
   </div>
   <!--v-if-->
@@ -225,7 +225,7 @@ exports[`Progress > renders with status inverted correctly 1`] = `
 exports[`Progress > renders with status slot correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->
@@ -235,7 +235,7 @@ exports[`Progress > renders with status slot correctly 1`] = `
 exports[`Progress > renders with ui correctly 1`] = `
 "<div class="gap-2 w-full flex flex-col">
   <!--v-if-->
-  <div aria-valuemax="100" aria-valuemin="0" aria-valuetext="0%" aria-label="0%" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full w-full h-2 bg-default" style="transform: translateZ(0);">
+  <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" class="relative overflow-hidden rounded-full w-full h-2 bg-default" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]"></div>
   </div>
   <!--v-if-->

@@ -125,5 +125,21 @@ function openSlideover() {
     </USlideover>
 
     <UButton label="Open programmatically" color="neutral" variant="outline" @click="openSlideover" />
+
+    <USlideover title="Slideover with scoped slot close" description="This slideover has a scoped slot close that can be used to close the slideover from within the content.">
+      <UButton color="neutral" variant="subtle" label="Open with scoped slot close" />
+
+      <template #header="{ close }">
+        <UButton label="Close with scoped slot close" @click="close" />
+      </template>
+
+      <template #body="{ close }">
+        <UButton label="Close with scoped slot close" @click="close" />
+      </template>
+
+      <template #footer="{ close }">
+        <UButton label="Close with scoped slot close" @click="close" />
+      </template>
+    </USlideover>
   </div>
 </template>

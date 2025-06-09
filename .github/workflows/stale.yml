@@ -14,12 +14,22 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          days-before-stale: -1 # Issues and PR will never be flagged stale automatically.
-          stale-issue-label: 'needs reproduction' # Label that flags an issue as stale.
-          only-labels: 'needs reproduction' # Only process these issues
-          days-before-issue-close: 7
-          ignore-updates: true
-          remove-stale-when-updated: false
-          close-issue-message: This issue was closed because it was open for 7 days without a reproduction.
-          close-issue-label: closed-by-bot
-          operations-per-run: 300 #default 30
+          days-before-pr-stale: -1
+          days-before-stale: 60
+          days-before-close: 7
+          stale-issue-label: 'stale'
+          close-issue-label: 'closed-by-bot'
+          close-issue-message: |
+            Hi! 👋
+
+            This issue has been automatically **closed** due to prolonged inactivity.
+
+            We're a small team and can't address every report, but we appreciate your feedback and contributions.
+
+            If this issue is still relevant with the latest version of Nuxt UI, please feel free to reopen or create a new issue with updated details.
+
+            Thank you for your understanding and support!
+
+            — Nuxt UI Team
+          exempt-issue-labels: 'feature,announcement'
+          operations-per-run: 300

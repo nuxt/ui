@@ -19,7 +19,8 @@
   }, {
     "groupName": "reka-ui",
     "matchPackageNames": [
-      "reka-ui"
+      "reka-ui",
+      "vaul-vue"
     ]
   }, {
     "matchDepTypes": ["peerDependencies"],

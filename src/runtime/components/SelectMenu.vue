@@ -225,9 +225,10 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu |
   buttonGroup: orientation.value
 }))
 
-function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string {
+function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
-    return value.map(v => displayValue(v)).filter(Boolean).join(', ')
+    const values = value.map(v => displayValue(v)).filter(Boolean)
+    return values?.length ? values.join(', ') : undefined
   }
 
   if (!props.valueKey) {
@@ -385,7 +386,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
 
         <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
           <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
-            <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+            <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
               {{ displayedModelValue }}
             </span>
             <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">

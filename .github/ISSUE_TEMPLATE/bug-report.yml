@@ -10,7 +10,7 @@ body:
     id: env
     attributes:
       label: Environment
-      description: You can use `npx nuxi info` to fill this section
+      description: You can use `npx nuxt info` to fill this section
       placeholder: |
         - Operating System: `Darwin`
         - Node Version:     `v18.16.0`
