@@ -46,7 +46,7 @@ jobs:
           NITRO_PRESET: cloudflare-pages
 
       - name: Deploy to NuxtHub
-        uses: nuxt-hub/action@v1
+        uses: nuxt-hub/action@v2
         id: deploy
         with:
           project-key: ui3-playground-pb9b

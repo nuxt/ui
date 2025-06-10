@@ -46,7 +46,7 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=8192'
 
       - name: Deploy to NuxtHub
-        uses: nuxt-hub/action@v1
+        uses: nuxt-hub/action@v2
         id: deploy
         with:
           project-key: ui-7eg3
