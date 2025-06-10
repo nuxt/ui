@@ -65,8 +65,8 @@ importers:
         specifier: ^13.3.0
         version: 13.3.0(axios@1.9.0)(fuse.js@7.1.0)(jwt-decode@4.0.0)(sortablejs@1.15.6)(vue@3.5.16(typescript@5.8.3))
       colortranslator:
-        specifier: ^4.1.0
-        version: 4.1.0
+        specifier: ^5.0.0
+        version: 5.0.0
       consola:
         specifier: ^3.4.2
         version: 3.4.2
@@ -3309,8 +3309,8 @@ packages:
   colorspace@1.1.4:
     resolution: {integrity: sha512-BgvKJiuVu1igBUF2kEjRCZXol6wiiGbY5ipL/oVPwm0BL9sIpMIzM8IK7vwuxIIzOXMV3Ey5w+vxhm0rR/TN8w==}
 
-  colortranslator@4.1.0:
-    resolution: {integrity: sha512-bwa5awaMnQ6dpm9D3nbsFwUr6x6FrTKmxPdolNtSYfxCNR7ZM93GG1OF5Y3Sy1LvYdalb3riKC9uTn0X5NB36g==}
+  colortranslator@5.0.0:
+    resolution: {integrity: sha512-Z3UPUKasUVDFCDYAjP2fmlVRf1jFHJv1izAmPjiOa0OCIw1W7iC8PZ2GsoDa8uZv+mKyWopxxStT9q05+27h7w==}
 
   combined-stream@1.0.8:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
@@ -10966,7 +10966,7 @@ snapshots:
       color: 3.2.1
       text-hex: 1.0.0
 
-  colortranslator@4.1.0: {}
+  colortranslator@5.0.0: {}
 
   combined-stream@1.0.8:
     dependencies:
