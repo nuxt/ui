@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+      actions: write
       issues: write
 
     steps:
