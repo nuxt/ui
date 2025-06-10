@@ -2,6 +2,12 @@
   "private": true,
   "name": "@nuxt/ui-docs",
   "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "typecheck": "nuxt typecheck"
+  },
   "dependencies": {
     "@ai-sdk/vue": "^1.2.12",
     "@iconify-json/logos": "^1.2.4",

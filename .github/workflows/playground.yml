@@ -43,4 +43,3 @@ jobs:
         with:
           project-key: ui3-playground-pb9b
           directory: playground
-          build-command: pnpm run dev:build

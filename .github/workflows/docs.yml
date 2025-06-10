@@ -43,4 +43,3 @@ jobs:
         with:
           project-key: ui-7eg3
           directory: docs
-          build-command: pnpm run docs:build
