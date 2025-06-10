@@ -13,7 +13,7 @@
     "@nuxt/ui": "workspace:*",
     "vue": "^3.5.16",
     "vue-router": "^4.5.1",
-    "zod": "^3.25.47"
+    "zod": "^3.25.57"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.4",
