@@ -336,6 +336,9 @@ importers:
       '@iconify-json/simple-icons':
         specifier: ^1.2.37
         version: 1.2.37
+      '@internationalized/date':
+        specifier: ^3.8.1
+        version: 3.8.1
       '@nuxt/ui':
         specifier: workspace:*
         version: link:..
