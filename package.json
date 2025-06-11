@@ -126,7 +126,7 @@
     "@unhead/vue": "^2.0.10",
     "@vueuse/core": "^13.3.0",
     "@vueuse/integrations": "^13.3.0",
-    "colortranslator": "^4.1.0",
+    "colortranslator": "^5.0.0",
     "consola": "^3.4.2",
     "defu": "^6.1.4",
     "embla-carousel-auto-height": "^8.6.0",
