@@ -23,7 +23,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `value?: string | number`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, container?: ClassNameValue, indicator?: ClassNameValue, separator?: ClassNameValue, wrapper?: ClassNameValue, separator?: ClassNameValue, date?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
+- `ui?: { item?: ClassNameValue, container?: ClassNameValue, indicator?: ClassNameValue, separator?: ClassNameValue, wrapper?: ClassNameValue, date?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---

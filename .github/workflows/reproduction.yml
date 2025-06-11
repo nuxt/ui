@@ -1,6 +1,7 @@
 name: reproduction
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '30 1 * * *'
 
