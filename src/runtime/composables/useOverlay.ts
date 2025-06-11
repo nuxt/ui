@@ -17,6 +17,7 @@ interface ManagedOverlayOptionsPrivate<T extends Component> {
   id: symbol
   isMounted: boolean
   isOpen: boolean
+  originalProps?: ComponentProps<T>
   resolvePromise?: (value: any) => void
 }
 export type Overlay = OverlayOptions<Component> & ManagedOverlayOptionsPrivate<Component>
@@ -26,7 +27,6 @@ type OverlayInstance<T extends Component> = Omit<ManagedOverlayOptionsPrivate<T>
   open: (props?: ComponentProps<T>) => OpenedOverlay<T>
   close: (value?: any) => void
   patch: (props: Partial<ComponentProps<T>>) => void
-
 }
 
 type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise'> & {
@@ -37,7 +37,7 @@ function _useOverlay() {
   const overlays = shallowReactive<Overlay[]>([])
 
   const create = <T extends Component>(component: T, _options?: OverlayOptions<ComponentProps<T>>): OverlayInstance<T> => {
-    const { props: props, defaultOpen, destroyOnClose } = _options || {}
+    const { props, defaultOpen, destroyOnClose } = _options || {}
 
     const options = reactive<Overlay>({
       id: Symbol(import.meta.dev ? 'useOverlay' : ''),
@@ -45,7 +45,8 @@ function _useOverlay() {
       component: markRaw(component!),
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
-      props: props || {}
+      originalProps: props || {},
+      props: {}
     })
 
     overlays.push(options)
@@ -64,6 +65,8 @@ function _useOverlay() {
     // If props are provided, update the overlay's props
     if (props) {
       patch(overlay.id, props)
+    } else {
+      patch(overlay.id, overlay.originalProps)
     }
 
     overlay.isOpen = true

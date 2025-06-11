@@ -53,7 +53,7 @@ const mobileLinks = computed(() => [
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"
-        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.7.1' : 'v2.21.1', to: module === 'ui-pro' ? 'https://ui2.nuxt.com/pro' : 'https://ui2.nuxt.com' }]"
+        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.8.0' : 'v2.22.0', to: module === 'ui-pro' ? 'https://ui2.nuxt.com/pro' : 'https://ui2.nuxt.com' }]"
         :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }"
         size="xs"
       >
