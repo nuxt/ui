@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Tippt e Befeel oder sicht...',
       noMatch: 'Keng entspriechend Donnéeën',
       noData: 'Keng Donnéeën',
-      close: 'Zoumaachen'
+      close: 'Zoumaachen',
+      back: 'Zréck'
     },
     selectMenu: {
       noMatch: 'Keng entspriechend Donnéeën',
