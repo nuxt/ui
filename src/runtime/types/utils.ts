@@ -1,6 +1,10 @@
 import type { VNode } from 'vue'
 import type { AcceptableValue as _AcceptableValue } from 'reka-ui'
 
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] | undefined
+}
+
 export type DynamicSlotsKeys<Name extends string | undefined, Suffix extends string | undefined = undefined> = (
   Name extends string
     ? Suffix extends string

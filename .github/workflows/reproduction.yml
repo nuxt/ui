@@ -1,6 +1,7 @@
 name: reproduction
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '30 1 * * *'
 
@@ -9,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+      actions: write
       issues: write
 
     steps:
