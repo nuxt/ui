@@ -22,9 +22,7 @@ onMounted(() => {
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const githubLink = computed(() => {
-  return `https://github.com/nuxt/${value.value}`
-})
+const githubLink = computed(() => `https://github.com/nuxt/${value.value}`)
 
 const desktopLinks = computed(() => props.links.map(({ icon, ...link }) => link))
 const mobileLinks = computed(() => [
@@ -36,6 +34,16 @@ const mobileLinks = computed(() => [
     target: '_blank'
   }
 ])
+
+const items = computed(() => {
+  const ui2 = { label: 'v2.22.0', to: 'https://ui2.nuxt.com' }
+  const uiPro1 = { label: 'v1.8.0', to: 'https://ui2.nuxt.com/pro' }
+
+  return [
+    { label: `v${config.version}`, active: true, color: 'primary' as const, checked: true, type: 'checkbox' as const },
+    route.path === '/' ? ui2 : route.path.startsWith('/pro') ? uiPro1 : module.value === 'ui-pro' ? uiPro1 : ui2
+  ]
+})
 </script>
 
 <template>
@@ -53,7 +61,7 @@ const mobileLinks = computed(() => [
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"
-        :items="[{ label: `v${config.version}`, active: true, color: 'primary', checked: true, type: 'checkbox' }, { label: module === 'ui-pro' ? 'v1.8.0' : 'v2.22.0', to: module === 'ui-pro' ? 'https://ui2.nuxt.com/pro' : 'https://ui2.nuxt.com' }]"
+        :items="items"
         :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }"
         size="xs"
       >

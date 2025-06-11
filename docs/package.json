@@ -17,7 +17,7 @@
     "@nuxt/content": "^3.5.1",
     "@nuxt/image": "^1.10.0",
     "@nuxt/ui": "workspace:*",
-    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@f06b49c",
+    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@beebbd4",
     "@nuxthub/core": "^0.9.0",
     "@nuxtjs/plausible": "^1.2.0",
     "@octokit/rest": "^22.0.0",
