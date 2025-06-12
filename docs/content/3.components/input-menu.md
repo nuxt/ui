@@ -135,7 +135,7 @@ props:
 
 ### Multiple
 
-Use the `multiple` prop to allow multiple selections, the selected items will be displayed as badges.
+Use the `multiple` prop to allow multiple selections, the selected items will be displayed as tags.
 
 ::component-code
 ---
@@ -166,7 +166,7 @@ Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 
 ### Delete Icon
 
-With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/components/icon) in the badges. Defaults to `i-lucide-x`.
+With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/components/icon) in the tags. Defaults to `i-lucide-x`.
 
 ::component-code
 ---
