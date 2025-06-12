@@ -1,8 +1,19 @@
+<script setup lang="ts">
+import { upperFirst } from 'scule'
+import theme from '#build/ui/input-tags'
+
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
+
+const tags = ref(['Vue', 'Nuxt'])
+</script>
+
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-4 w-48">
       <UInputTags
         v-model="tags"
+        placeholder="Enter tags..."
         autofocus
       />
     </div>
@@ -10,7 +21,6 @@
       <UInputTags
         v-for="variant in variants"
         :key="variant"
-        :model-value="['test', 'Pneumonoultramicroscopicsilicovolcanoconiosis']"
         :placeholder="upperFirst(variant)"
         :variant="variant"
         class="w-48"
@@ -75,13 +85,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { upperFirst } from 'scule'
-import theme from '#build/ui/input-tags'
-
-const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
-const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
-
-const tags = ref(['test', '1234'])
-</script>
