@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const tags = ref(['Apple'])
+const tags = ref(['Vue'])
 </script>
 
 <template>
-  <UFormField label="Tags" help="Tags of products" required>
-    <UInputTags v-model="tags" placeholder="Enter tags" />
+  <UFormField label="Tags" required>
+    <UInputTags v-model="tags" placeholder="Enter tags..." />
   </UFormField>
 </template>
