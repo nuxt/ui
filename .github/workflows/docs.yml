@@ -6,10 +6,6 @@ jobs:
   deploy:
     runs-on: ${{ matrix.os }}
 
-    environment:
-      name: ${{ github.ref == 'refs/heads/v3' && 'production' || 'preview' }}
-      url: ${{ steps.deploy.outputs.deployment-url }}
-
     permissions:
       contents: read
       id-token: write
@@ -40,14 +36,10 @@ jobs:
       - name: Prepare build
         run: pnpm run dev:prepare
 
-      - name: Build application
-        run: pnpm run docs:build
+      - name: Deploy to NuxtHub
+        uses: nuxt-hub/action@v2
         env:
           NODE_OPTIONS: '--max-old-space-size=8192'
-
-      - name: Deploy to NuxtHub
-        uses: nuxt-hub/action@v1
-        id: deploy
         with:
           project-key: ui-7eg3
-          directory: docs/dist
+          directory: docs

@@ -62,6 +62,7 @@ const components = [
   'tabs',
   'table',
   'textarea',
+  'timeline',
   'toast',
   'tooltip',
   'tree'

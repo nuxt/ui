@@ -115,6 +115,8 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * @defaultValue false
    */
   ignoreFilter?: boolean
+  autofocus?: boolean
+  autofocusDelay?: number
   class?: any
   ui?: SelectMenu['slots']
 }
@@ -165,7 +167,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, toRef, toRaw } from 'vue'
+import { ref, computed, onMounted, toRef, toRaw } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
@@ -189,7 +191,8 @@ const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   searchInput: true,
   labelKey: 'label' as never,
   resetSearchTermOnBlur: true,
-  resetSearchTermOnSelect: true
+  resetSearchTermOnSelect: true,
+  autofocusDelay: 0
 })
 const emits = defineEmits<SelectMenuEmits<T, VK, M>>()
 const slots = defineSlots<SelectMenuSlots<T, VK, M>>()
@@ -287,6 +290,22 @@ const createItem = computed(() => {
 })
 const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom')
 
+const triggerRef = ref<InstanceType<typeof ComboboxTrigger> | null>(null)
+
+function autoFocus() {
+  if (props.autofocus) {
+    triggerRef.value?.$el?.focus({
+      focusVisible: true
+    })
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
+
 function onUpdate(value: any) {
   if (toRaw(props.modelValue) === value) {
     return
@@ -376,7 +395,7 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
     @update:open="onUpdateOpen"
   >
     <ComboboxAnchor as-child>
-      <ComboboxTrigger :class="ui.base({ class: [props.ui?.base, props.class] })" tabindex="0">
+      <ComboboxTrigger ref="triggerRef" :class="ui.base({ class: [props.ui?.base, props.class] })" tabindex="0">
         <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
             <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
