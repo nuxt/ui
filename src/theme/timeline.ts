@@ -60,29 +60,25 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       separator: `group-data-[state=completed]:bg-${color}`
     }
-  })),
-  ...(options.theme.colors || []).map((color: string) => ({
+  })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     reverse: true,
     class: {
       separator: `group-data-[state=active]:bg-${color} group-data-[state=completed]:bg-${color}`
     }
-  })),
-  {
+  })), {
     color: 'neutral',
     reverse: false,
     class: {
       separator: 'group-data-[state=completed]:bg-inverted'
     }
-  },
-  {
+  }, {
     color: 'neutral',
     reverse: true,
     class: {
       separator: 'group-data-[state=active]:bg-inverted group-data-[state=completed]:bg-inverted'
     }
-  },
-  {
+  }, {
     orientation: 'horizontal',
     size: '3xs',
     class: {
