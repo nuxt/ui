@@ -29,12 +29,11 @@ export default (options: Required<ModuleOptions>) => ({
 
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color}`,
-        separator: `group-data-[state=completed]:bg-${color}`
+        indicator: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color}`
+
       }])),
       neutral: {
-        indicator: 'group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted',
-        separator: 'group-data-[state=completed]:bg-inverted'
+        indicator: 'group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted'
       }
     },
 
@@ -59,7 +58,6 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     reverse: false,
     class: {
-      indicator: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color}`,
       separator: `group-data-[state=completed]:bg-${color}`
     }
   })),
@@ -67,15 +65,13 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     reverse: true,
     class: {
-      indicator: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color}`,
-      separator: `group-data-[state=active]:bg-${color}`
+      separator: `group-data-[state=active]:bg-${color} group-data-[state=completed]:bg-${color}`
     }
   })),
   {
     color: 'neutral',
     reverse: false,
     class: {
-      indicator: 'group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted',
       separator: 'group-data-[state=completed]:bg-inverted'
     }
   },
@@ -83,8 +79,7 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'neutral',
     reverse: true,
     class: {
-      indicator: 'group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted',
-      separator: 'group-data-[state=active]:bg-inverted'
+      separator: 'group-data-[state=active]:bg-inverted group-data-[state=completed]:bg-inverted'
     }
   },
   {
