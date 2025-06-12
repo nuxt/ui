@@ -24,6 +24,14 @@ exports[`InputTags > renders with class correctly 1`] = `
 </div>"
 `;
 
+exports[`InputTags > renders with default slot correctly 1`] = `
+"<div class="relative inline-flex items-center flex-wrap rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">Default slot
+  <!--v-if-->
+  <!--v-if-->
+  <!---->
+</div>"
+`;
+
 exports[`InputTags > renders with defaultValue correctly 1`] = `
 "<div class="relative inline-flex items-center flex-wrap rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary" dir="ltr">
   <div class="px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-accented bg-elevated text-default data-disabled:cursor-not-allowed data-disabled:opacity-75 wrap-anywhere data-[state=&quot;active&quot;]:bg-accented text-xs" data-reka-collection-item="" aria-labelledby="reka-tags-input-item-text-v-0-0-0" aria-current="false" data-state="inactive"><span id="reka-tags-input-item-text-v-0-0-0" class="">test</span><button tabindex="-1" aria-labelledby="reka-tags-input-item-text-v-0-0-0" aria-current="false" data-state="inactive" type="button" class="inline-flex items-center rounded-xs text-dimmed hover:text-default hover:bg-accented/75 disabled:pointer-events-none transition-colors"><span class="iconify i-lucide:x size-3.5" aria-hidden="true"></span></button></div><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
@@ -50,6 +58,22 @@ exports[`InputTags > renders with icon correctly 1`] = `
 
 exports[`InputTags > renders with id correctly 1`] = `
 "<div class="relative inline-flex items-center flex-wrap rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary" dir="ltr"><input id="id" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!---->
+</div>"
+`;
+
+exports[`InputTags > renders with item-delete slot correctly 1`] = `
+"<div class="relative inline-flex items-center flex-wrap rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!---->
+</div>"
+`;
+
+exports[`InputTags > renders with item-text slot correctly 1`] = `
+"<div class="relative inline-flex items-center flex-wrap rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
   <!--v-if-->
   <!--v-if-->
   <!---->
@@ -231,22 +255,6 @@ exports[`InputTags > renders with size xl correctly 1`] = `
 
 exports[`InputTags > renders with size xs correctly 1`] = `
 "<div class="relative inline-flex items-center flex-wrap rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-highlighted bg-default ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
-  <!--v-if-->
-  <!--v-if-->
-  <!---->
-</div>"
-`;
-
-exports[`InputTags > renders with tags-item-delete slot correctly 1`] = `
-"<div class="relative inline-flex items-center flex-wrap rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
-  <!--v-if-->
-  <!--v-if-->
-  <!---->
-</div>"
-`;
-
-exports[`InputTags > renders with tags-item-text slot correctly 1`] = `
-"<div class="relative inline-flex items-center flex-wrap rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
   <!--v-if-->
   <!--v-if-->
   <!---->

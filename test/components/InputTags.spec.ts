@@ -31,9 +31,10 @@ describe('InputTags', () => {
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
     // Slots
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
+    ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
-    ['with tags-item-text slot', { slots: { ['tags-item-text']: () => 'Tags Item Text slot' } }],
-    ['with tags-item-delete slot', { slots: { ['tags-item-delete']: () => 'Tags Item Delete slot' } }]
+    ['with item-text slot', { slots: { ['item-text']: () => 'Item Text slot' } }],
+    ['with item-delete slot', { slots: { ['item-delete']: () => 'Item Delete slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputTagsProps, slots?: Partial<InputTagsSlots>, attrs?: Record<string, unknown> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputTags)
     expect(html).toMatchSnapshot()
