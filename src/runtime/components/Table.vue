@@ -226,7 +226,7 @@ const groupingState = defineModel<GroupingState>('grouping', { default: [] })
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} })
 const paginationState = defineModel<PaginationState>('pagination', { default: {} })
 
-const tableRef = ref<HTMLTableElement>()
+const tableRef = ref<HTMLTableElement | null>(null)
 
 const tableApi = useVueTable({
   ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),

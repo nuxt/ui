@@ -363,6 +363,10 @@ function onSelect(e: Event, item: SelectMenuItem) {
 function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
   return typeof item === 'object' && item !== null
 }
+
+defineExpose({
+  triggerRef
+})
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->

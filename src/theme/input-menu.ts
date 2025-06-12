@@ -26,14 +26,13 @@ export default (options: Required<ModuleOptions>) => {
       tagsItem: 'px-1.5 py-0.5 rounded-sm font-medium inline-flex items-center gap-0.5 ring ring-inset ring-accented bg-elevated text-default data-disabled:cursor-not-allowed data-disabled:opacity-75',
       tagsItemText: 'truncate',
       tagsItemDelete: ['inline-flex items-center rounded-xs text-dimmed hover:text-default hover:bg-accented/75 disabled:pointer-events-none', options.theme.transitions && 'transition-colors'],
-      tagsItemDeleteIcon: '',
-      tagsInput: ''
+      tagsItemDeleteIcon: 'shrink-0',
+      tagsInput: 'flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
     },
     variants: {
       multiple: {
         true: {
-          root: 'flex-wrap',
-          tagsInput: 'border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+          root: 'flex-wrap'
         },
         false: {
           base: 'w-full border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
@@ -97,7 +96,15 @@ export default (options: Required<ModuleOptions>) => {
         }
       }
     },
-    compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
+    compoundVariants: [{
+      variant: 'soft',
+      multiple: true,
+      class: 'has-focus:bg-elevated'
+    }, {
+      variant: 'ghost',
+      multiple: true,
+      class: 'has-focus:bg-elevated'
+    }, ...(options.theme.colors || []).map((color: string) => ({
       color,
       multiple: true,
       variant: ['outline', 'subtle'],
