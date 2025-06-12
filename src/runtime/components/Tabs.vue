@@ -79,7 +79,8 @@ export type TabsSlots<T extends TabsItem = TabsItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends TabsItem">
-import { computed } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+import { ref, computed } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -108,6 +109,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) 
   size: props.size,
   orientation: props.orientation
 }))
+
+const triggersRef = ref<ComponentPublicInstance[]>([])
+
+defineExpose({
+  triggersRef
+})
 </script>
 
 <template>
@@ -117,7 +124,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) 
 
       <slot name="list-leading" />
 
-      <TabsTrigger v-for="(item, index) of items" :key="index" :value="item.value || String(index)" :disabled="item.disabled" :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })">
+      <TabsTrigger
+        v-for="(item, index) of items"
+        :key="index"
+        :ref="el => (triggersRef[index] = el as ComponentPublicInstance)"
+        :value="item.value || String(index)"
+        :disabled="item.disabled"
+        :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger] })"
+      >
         <slot name="leading" :item="item" :index="index">
           <UIcon v-if="item.icon" :name="item.icon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] })" />
           <UAvatar v-else-if="item.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.leadingAvatar({ class: [props.ui?.leadingAvatar, item.ui?.leadingAvatar] })" />
