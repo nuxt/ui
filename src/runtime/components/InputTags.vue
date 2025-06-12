@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { TagsInputRootProps, AcceptableInputValue } from 'reka-ui'
+import type { TagsInputRootProps, TagsInputRootEmits, AcceptableInputValue } from 'reka-ui'
 import theme from '#build/ui/input-tags'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
@@ -44,11 +44,10 @@ export interface InputTagsProps<T extends InputTagItem = InputTagItem> extends P
   ui?: InputTags['slots']
 }
 
-export type InputTagsEmits<T extends InputTagItem> = {
-  'update:modelValue': [payload: T[]]
-  'change': [payload: Event]
-  'blur': [payload: FocusEvent]
-  'focus': [payload: FocusEvent]
+export interface InputTagsEmits<T extends InputTagItem> extends TagsInputRootEmits<T> {
+  change: [event: Event]
+  blur: [event: FocusEvent]
+  focus: [event: FocusEvent]
 }
 
 type SlotProps<T extends InputTagItem> = (props: { item: T, index: number }) => any
@@ -72,6 +71,7 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
+import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 

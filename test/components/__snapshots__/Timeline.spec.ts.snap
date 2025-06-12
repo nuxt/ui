@@ -137,7 +137,7 @@ exports[`Timeline > renders with date slot correctly 1`] = `
 
 exports[`Timeline > renders with defaultValue correctly 1`] = `
 "<div data-orientation="vertical" class="flex gap-1.5 flex-col">
-  <div class="group relative flex flex-1 gap-3">
+  <div class="group relative flex flex-1 gap-3" data-state="completed">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:rocket shrink-0 text-inherit" aria-hidden="true"></span></span>
       <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary"></div>
     </div>
@@ -147,7 +147,7 @@ exports[`Timeline > renders with defaultValue correctly 1`] = `
       <div class="text-muted text-wrap text-sm">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
     </div>
   </div>
-  <div class="group relative flex flex-1 gap-3">
+  <div class="group relative flex flex-1 gap-3" data-state="active">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:palette shrink-0 text-inherit" aria-hidden="true"></span></span>
       <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary"></div>
     </div>
@@ -317,7 +317,7 @@ exports[`Timeline > renders with items correctly 1`] = `
 
 exports[`Timeline > renders with modelValue correctly 1`] = `
 "<div data-orientation="vertical" class="flex gap-1.5 flex-col">
-  <div class="group relative flex flex-1 gap-3">
+  <div class="group relative flex flex-1 gap-3" data-state="completed">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:rocket shrink-0 text-inherit" aria-hidden="true"></span></span>
       <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary"></div>
     </div>
@@ -327,7 +327,7 @@ exports[`Timeline > renders with modelValue correctly 1`] = `
       <div class="text-muted text-wrap text-sm">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
     </div>
   </div>
-  <div class="group relative flex flex-1 gap-3">
+  <div class="group relative flex flex-1 gap-3" data-state="active">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:palette shrink-0 text-inherit" aria-hidden="true"></span></span>
       <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary"></div>
     </div>
@@ -394,6 +394,141 @@ exports[`Timeline > renders with neutral color correctly 1`] = `
   </div>
   <div class="group relative flex flex-1 gap-3">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted"><span class="iconify i-lucide:check-circle shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <!--v-if-->
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Apr 5, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Testing &amp; Deployment</div>
+      <div class="text-muted text-wrap text-sm">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with reverse and defaultValue correctly 1`] = `
+"<div data-orientation="vertical" class="flex gap-1.5 flex-col">
+  <div class="group relative flex flex-1 gap-3">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:rocket shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Mar 15, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Project Kickoff</div>
+      <div class="text-muted text-wrap text-sm">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="group relative flex flex-1 gap-3" data-state="active">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:palette shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Mar 22, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Design Phase</div>
+      <div class="text-muted text-wrap text-sm">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="group relative flex flex-1 gap-3" data-state="completed">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:code shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Mar 29, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Development Sprint</div>
+      <div class="text-muted text-wrap text-sm">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="group relative flex flex-1 gap-3" data-state="completed">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:check-circle shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <!--v-if-->
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Apr 5, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Testing &amp; Deployment</div>
+      <div class="text-muted text-wrap text-sm">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with reverse and modelValue correctly 1`] = `
+"<div data-orientation="vertical" class="flex gap-1.5 flex-col">
+  <div class="group relative flex flex-1 gap-3">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:rocket shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Mar 15, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Project Kickoff</div>
+      <div class="text-muted text-wrap text-sm">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="group relative flex flex-1 gap-3" data-state="active">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:palette shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Mar 22, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Design Phase</div>
+      <div class="text-muted text-wrap text-sm">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="group relative flex flex-1 gap-3" data-state="completed">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:code shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Mar 29, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Development Sprint</div>
+      <div class="text-muted text-wrap text-sm">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="group relative flex flex-1 gap-3" data-state="completed">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:check-circle shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <!--v-if-->
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Apr 5, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Testing &amp; Deployment</div>
+      <div class="text-muted text-wrap text-sm">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`Timeline > renders with reverse correctly 1`] = `
+"<div data-orientation="vertical" class="flex gap-1.5 flex-col">
+  <div class="group relative flex flex-1 gap-3">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:rocket shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Mar 15, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Project Kickoff</div>
+      <div class="text-muted text-wrap text-sm">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="group relative flex flex-1 gap-3">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:palette shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Mar 22, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Design Phase</div>
+      <div class="text-muted text-wrap text-sm">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="group relative flex flex-1 gap-3">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:code shrink-0 text-inherit" aria-hidden="true"></span></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
+    </div>
+    <div class="w-full mt-1.5 pb-6.5">
+      <div class="text-dimmed text-xs/5">Mar 29, 2025</div>
+      <div class="font-medium text-highlighted text-sm">Development Sprint</div>
+      <div class="text-muted text-wrap text-sm">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="group relative flex flex-1 gap-3">
+    <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:check-circle shrink-0 text-inherit" aria-hidden="true"></span></span>
       <!--v-if-->
     </div>
     <div class="w-full mt-1.5 pb-6.5">

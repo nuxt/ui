@@ -1,6 +1,7 @@
 ---
 title: InputTags
 description: An input element that displays interactive tags.
+category: form
 links:
   - label: InputTags
     icon: i-custom-reka-ui
@@ -276,8 +277,8 @@ name: 'input-tags-form-field-example'
 When accessing the component via a template ref, you can use the following:
 
 | Name                       | Type                                            |
-|----------------------------|-------------------------------------------------|
-| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
+| -------------------------- | ----------------------------------------------- |
+| `inputRef`{lang="ts-type"} | `Ref<InstanceType<typeof TagsInputInput> \| null>`{lang="ts-type"} |
 
 ## Theme
 
