@@ -150,7 +150,7 @@ function onFocus(event: FocusEvent) {
     v-slot="{ modelValue: tags }"
     :model-value="modelValue"
     :default-value="defaultValue"
-    :class="[ui.root({ class: [props.ui?.root, props.class] }), ui.base({ class: props.ui?.base })]"
+    :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
