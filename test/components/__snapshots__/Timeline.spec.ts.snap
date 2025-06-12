@@ -409,7 +409,7 @@ exports[`Timeline > renders with reverse and defaultValue correctly 1`] = `
 "<div data-orientation="vertical" class="flex gap-1.5 flex-col">
   <div class="group relative flex flex-1 gap-3">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:rocket shrink-0 text-inherit" aria-hidden="true"></span></span>
-      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"></div>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
     </div>
     <div class="w-full mt-1.5 pb-6.5">
       <div class="text-dimmed text-xs/5">Mar 15, 2025</div>
@@ -419,7 +419,7 @@ exports[`Timeline > renders with reverse and defaultValue correctly 1`] = `
   </div>
   <div class="group relative flex flex-1 gap-3" data-state="active">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:palette shrink-0 text-inherit" aria-hidden="true"></span></span>
-      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"></div>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
     </div>
     <div class="w-full mt-1.5 pb-6.5">
       <div class="text-dimmed text-xs/5">Mar 22, 2025</div>
@@ -429,7 +429,7 @@ exports[`Timeline > renders with reverse and defaultValue correctly 1`] = `
   </div>
   <div class="group relative flex flex-1 gap-3" data-state="completed">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:code shrink-0 text-inherit" aria-hidden="true"></span></span>
-      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"></div>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
     </div>
     <div class="w-full mt-1.5 pb-6.5">
       <div class="text-dimmed text-xs/5">Mar 29, 2025</div>
@@ -454,7 +454,7 @@ exports[`Timeline > renders with reverse and modelValue correctly 1`] = `
 "<div data-orientation="vertical" class="flex gap-1.5 flex-col">
   <div class="group relative flex flex-1 gap-3">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:rocket shrink-0 text-inherit" aria-hidden="true"></span></span>
-      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"></div>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
     </div>
     <div class="w-full mt-1.5 pb-6.5">
       <div class="text-dimmed text-xs/5">Mar 15, 2025</div>
@@ -464,7 +464,7 @@ exports[`Timeline > renders with reverse and modelValue correctly 1`] = `
   </div>
   <div class="group relative flex flex-1 gap-3" data-state="active">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:palette shrink-0 text-inherit" aria-hidden="true"></span></span>
-      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"></div>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
     </div>
     <div class="w-full mt-1.5 pb-6.5">
       <div class="text-dimmed text-xs/5">Mar 22, 2025</div>
@@ -474,7 +474,7 @@ exports[`Timeline > renders with reverse and modelValue correctly 1`] = `
   </div>
   <div class="group relative flex flex-1 gap-3" data-state="completed">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:code shrink-0 text-inherit" aria-hidden="true"></span></span>
-      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"></div>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
     </div>
     <div class="w-full mt-1.5 pb-6.5">
       <div class="text-dimmed text-xs/5">Mar 29, 2025</div>
@@ -499,7 +499,7 @@ exports[`Timeline > renders with reverse correctly 1`] = `
 "<div data-orientation="vertical" class="flex gap-1.5 flex-col">
   <div class="group relative flex flex-1 gap-3">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:rocket shrink-0 text-inherit" aria-hidden="true"></span></span>
-      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"></div>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
     </div>
     <div class="w-full mt-1.5 pb-6.5">
       <div class="text-dimmed text-xs/5">Mar 15, 2025</div>
@@ -509,7 +509,7 @@ exports[`Timeline > renders with reverse correctly 1`] = `
   </div>
   <div class="group relative flex flex-1 gap-3">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:palette shrink-0 text-inherit" aria-hidden="true"></span></span>
-      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"></div>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
     </div>
     <div class="w-full mt-1.5 pb-6.5">
       <div class="text-dimmed text-xs/5">Mar 22, 2025</div>
@@ -519,7 +519,7 @@ exports[`Timeline > renders with reverse correctly 1`] = `
   </div>
   <div class="group relative flex flex-1 gap-3">
     <div class="relative flex items-center gap-1.5 flex-col"><span class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"><span class="iconify i-lucide:code shrink-0 text-inherit" aria-hidden="true"></span></span>
-      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=completed]:bg-primary group-data-[state=active]:bg-primary"></div>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="flex-1 rounded-full bg-elevated w-0.5 group-data-[state=active]:bg-primary group-data-[state=completed]:bg-primary"></div>
     </div>
     <div class="w-full mt-1.5 pb-6.5">
       <div class="text-dimmed text-xs/5">Mar 29, 2025</div>
