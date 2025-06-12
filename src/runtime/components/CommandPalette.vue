@@ -262,10 +262,13 @@ const groups = computed(() => {
 
   const groupsById = fuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
-    if (!item.group) return acc
+    if (!item.group) {
+      return acc
+    }
 
     acc[item.group] ||= []
     acc[item.group]?.push({ ...item, matches })
+
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
 
