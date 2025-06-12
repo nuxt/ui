@@ -111,10 +111,6 @@ onMounted(() => {
   }, props.autofocusDelay)
 })
 
-defineExpose({
-  inputRef
-})
-
 function autoFocus() {
   if (props.autofocus) {
     inputRef.value?.$el?.focus()
@@ -141,6 +137,10 @@ function onFocus(event: FocusEvent) {
   emits('focus', event)
   emitFormFocus()
 }
+
+defineExpose({
+  inputRef
+})
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
