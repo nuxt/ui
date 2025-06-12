@@ -272,20 +272,24 @@ const groups = computed(() => {
     return acc
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
 
-  const fuseGroups = Object.entries(groupsById)
-    .map(([id, items]) => {
-      const group = props.groups?.find(group => group.id === id)
-      return group ? getGroupWithItems(group, items) : undefined
-    })
-    .filter(group => !!group)
+  const fuseGroups = Object.entries(groupsById).map(([id, items]) => {
+    const group = props.groups?.find(group => group.id === id)
+    if (!group) {
+      return
+    }
 
-  const nonFuseGroups = props.groups?.filter(group => group.ignoreFilter && group.id)
-    .map((group) => {
-      const groupItems = group.items?.map(item => ({ ...item, group: group.id })) || []
-      return getGroupWithItems(group, groupItems as (T & { matches?: FuseResult<T>['matches'] })[])
-    }) || []
+    return getGroupWithItems(group, items)
+  }).filter(group => !!group)
 
-  return [...fuseGroups, ...nonFuseGroups]
+  const nonFuseGroups = props.groups
+    ?.map((group, index) => ({ ...group, index }))
+    ?.filter(group => group.ignoreFilter && group.items?.length)
+    ?.map(group => ({ ...getGroupWithItems(group, group.items || []), index: group.index })) || []
+
+  return nonFuseGroups.reduce((acc, group) => {
+    acc.splice(group.index, 0, group)
+    return acc
+  }, [...fuseGroups])
 })
 
 function navigateToSubmenu(item: T, group: G) {
@@ -378,7 +382,7 @@ function onKeydownEsc(e: KeyboardEvent) {
     </ListboxFilter>
 
     <ListboxContent :class="ui.content({ class: props.ui?.content })">
-      <div v-if="groups?.some(group => group.items && group.items.length)" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div v-if="groups" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
         <ListboxGroup v-for="group in groups" :key="`group-${group.id}`" :class="ui.group({ class: props.ui?.group })">
           <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
             {{ get(group, props.labelKey as string) }}
