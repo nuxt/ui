@@ -280,7 +280,7 @@ This example uses the `defineShortcuts` composable to focus the Input when the :
 
 ### With mask
 
-There's no built-in support for masks, but you can use librairies like [maska](https://github.com/beholdr/maska) to mask the Input.
+There's no built-in support for masks, but you can use libraries like [maska](https://github.com/beholdr/maska) to mask the Input.
 
 ::component-example
 ---
