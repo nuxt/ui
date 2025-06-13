@@ -105,10 +105,11 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    */
   closeIcon?: string
   /**
-   * The button displayed when navigating back in history.
-   * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
+   * Display a button to navigate back in history.
+   * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
+   * @defaultValue true
    */
-  back?: ButtonProps
+  back?: boolean | ButtonProps
   /**
    * The icon displayed in the back button.
    * @defaultValue appConfig.ui.icons.arrowLeft
@@ -179,7 +180,8 @@ import UKbd from './Kbd.vue'
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
   modelValue: '',
   labelKey: 'label',
-  autofocus: true
+  autofocus: true,
+  back: true
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
 const slots = defineSlots<CommandPaletteSlots<G, T>>()
@@ -205,11 +207,11 @@ const fuse = computed(() => defu({}, props.fuse, {
   matchAllWhenSearchEmpty: true
 }))
 
-const history = ref<(G & { placeholder?: string, items?: T[] })[]>([])
+const history = ref<(CommandPaletteGroup & { placeholder?: string })[]>([])
 
 const placeholder = computed(() => history.value[history.value.length - 1]?.placeholder || props.placeholder || t('commandPalette.placeholder'))
 
-const groups = computed(() => history.value?.length ? [history.value[history.value.length - 1]] : props.groups)
+const groups = computed(() => history.value?.length ? [history.value[history.value.length - 1] as G] : props.groups)
 
 const items = computed(() => groups.value?.filter((group) => {
   if (!group.id) {
@@ -282,10 +284,12 @@ function navigate(item: T) {
   }
 
   history.value.push({
-    id: `history-${history.value?.length + 1}`,
+    id: `history-${history.value.length}`,
     label: item.label,
+    slot: item.slot,
+    placeholder: item.placeholder,
     items: item.children
-  })
+  } as any)
 
   searchTerm.value = ''
 
@@ -308,6 +312,8 @@ function navigateBack(e?: Event) {
 
 function onSelect(e: Event, item: T) {
   if (item.children?.length) {
+    e.preventDefault()
+
     navigate(item)
   } else {
     item.onSelect?.(e)
@@ -331,7 +337,7 @@ function onSelect(e: Event, item: T) {
       >
         <template #leading>
           <UButton
-            v-if="history?.length"
+            v-if="history?.length && back"
             :icon="backIcon || appConfig.ui.icons.arrowLeft"
             size="md"
             color="neutral"
@@ -374,7 +380,7 @@ function onSelect(e: Event, item: T) {
             :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
             :disabled="item.disabled"
             as-child
-            @select="(e) => onSelect(e, item)"
+            @select="onSelect($event, item)"
           >
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], active: active || item.active })">
