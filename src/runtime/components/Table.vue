@@ -61,13 +61,13 @@ export type TableRow<T> = Row<T>
 export type TableData = RowData
 export type TableColumn<T extends TableData, D = unknown> = ColumnDef<T, D>
 
-export interface TableOptions<T extends TableData> extends Omit<CoreOptions<T>, 'data' | 'columns' | 'getCoreRowModel' | 'state' | 'onStateChange' | 'renderFallbackValue'> {
+export interface TableOptions<T extends TableData = TableData> extends Omit<CoreOptions<T>, 'data' | 'columns' | 'getCoreRowModel' | 'state' | 'onStateChange' | 'renderFallbackValue'> {
   state?: CoreOptions<T>['state']
   onStateChange?: CoreOptions<T>['onStateChange']
   renderFallbackValue?: CoreOptions<T>['renderFallbackValue']
 }
 
-export interface TableProps<T extends TableData> extends TableOptions<T> {
+export interface TableProps<T extends TableData = TableData> extends TableOptions<T> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -172,7 +172,7 @@ export interface TableProps<T extends TableData> extends TableOptions<T> {
 type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
 type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
 
-export type TableSlots<T> = {
+export type TableSlots<T extends TableData = TableData> = {
   expanded: (props: { row: Row<T> }) => any
   empty: (props?: {}) => any
   loading: (props?: {}) => any
