@@ -147,6 +147,7 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> = {
   'empty'(props: { searchTerm?: string }): any
+  'back'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'close'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
@@ -338,18 +339,19 @@ function onSelect(e: Event, item: T) {
         :class="ui.input({ class: props.ui?.input })"
         @keydown.backspace="onBackspace"
       >
-        <template #leading>
-          <UButton
-            v-if="history?.length && back"
-            :icon="backIcon || appConfig.ui.icons.arrowLeft"
-            size="md"
-            color="neutral"
-            variant="link"
-            :aria-label="t('commandPalette.back')"
-            v-bind="(typeof back === 'object' ? back as Partial<ButtonProps> : {})"
-            :class="ui.back({ class: props.ui?.back })"
-            @click="navigateBack"
-          />
+        <template v-if="history?.length && (back || !!slots.back)" #leading>
+          <slot name="back" :ui="ui">
+            <UButton
+              :icon="backIcon || appConfig.ui.icons.arrowLeft"
+              size="md"
+              color="neutral"
+              variant="link"
+              :aria-label="t('commandPalette.back')"
+              v-bind="(typeof back === 'object' ? back as Partial<ButtonProps> : {})"
+              :class="ui.back({ class: props.ui?.back })"
+              @click="navigateBack"
+            />
+          </slot>
         </template>
 
         <template v-if="close || !!slots.close" #trailing>
