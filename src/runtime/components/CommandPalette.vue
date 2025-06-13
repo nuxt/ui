@@ -296,18 +296,22 @@ function navigate(item: T) {
   listboxRootRef.value?.highlightFirstItem()
 }
 
-function navigateBack(e?: Event) {
+function navigateBack() {
   if (!history.value.length) {
     return
   }
-
-  e?.preventDefault()
 
   history.value.pop()
 
   searchTerm.value = ''
 
   listboxRootRef.value?.highlightFirstItem()
+}
+
+function onBackspace() {
+  if (!searchTerm.value) {
+    navigateBack()
+  }
 }
 
 function onSelect(e: Event, item: T) {
@@ -332,8 +336,7 @@ function onSelect(e: Event, item: T) {
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
-        @keydown.esc="navigateBack"
-        @keydown.meta.backspace="navigateBack"
+        @keydown.backspace="onBackspace"
       >
         <template #leading>
           <UButton
