@@ -37,7 +37,7 @@ export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   [key: string]: any
 }
 
-export interface CommandPaletteGroup<T> {
+export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPaletteItem> {
   id: string
   label?: string
   slot?: string
@@ -105,7 +105,7 @@ export interface CommandPaletteProps<G, T> extends Pick<ListboxRootProps, 'multi
    */
   closeIcon?: string
   /**
-   * The button displayed when navigating back to the parent menu.
+   * The button displayed when navigating back in history.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
   back?: ButtonProps
@@ -156,7 +156,7 @@ export type CommandPaletteSlots<G extends { slot?: string }, T extends { slot?: 
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
-import { computed, ref, useTemplateRef, type UnwrapRef } from 'vue'
+import { computed, ref, useTemplateRef } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
@@ -205,34 +205,22 @@ const fuse = computed(() => defu({}, props.fuse, {
   matchAllWhenSearchEmpty: true
 }))
 
-const listboxRootRef = useTemplateRef('listboxRootRef')
+const history = ref<(G & { placeholder?: string, items?: T[] })[]>([])
 
-const submenuHistory = ref<{ group: G, parentItem?: T }[]>([])
-const activeSubmenu = computed(() => submenuHistory.value[submenuHistory.value.length - 1] || null)
+const placeholder = computed(() => history.value[history.value.length - 1]?.placeholder || props.placeholder || t('commandPalette.placeholder'))
 
-const placeholder = computed(() => {
-  const parentItem = activeSubmenu.value?.parentItem as T | undefined
-  return parentItem?.placeholder || props.placeholder || t('commandPalette.placeholder')
-})
+const groups = computed(() => history.value?.length ? [history.value[history.value.length - 1]] : props.groups)
 
-const items = computed(() => {
-  if (activeSubmenu.value) {
-    return activeSubmenu.value.group.items?.map(item => ({ ...(item as T), group: activeSubmenu.value!.group.id })) || []
+const items = computed(() => groups.value?.filter((group) => {
+  if (!group.id) {
+    console.warn(`[@nuxt/ui] CommandPalette group is missing an \`id\` property`)
+    return false
   }
-
-  return props.groups?.filter((group) => {
-    if (!group.id) {
-      console.warn(`[@nuxt/ui] CommandPalette group is missing an \`id\` property`)
-      return false
-    }
-    return true
-  }).flatMap((group) => {
-    if (group.ignoreFilter) {
-      return []
-    }
-    return group.items?.map(item => ({ ...item, group: group.id })) || []
-  }) || []
-})
+  if (group.ignoreFilter) {
+    return false
+  }
+  return true
+})?.flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
 
@@ -253,13 +241,7 @@ function getGroupWithItems(group: G, items: (T & { matches?: FuseResult<T>['matc
   }
 }
 
-const groups = computed(() => {
-  if (activeSubmenu.value) {
-    const group = activeSubmenu.value.group as G
-    const items = fuseResults.value.map(result => ({ ...result.item, matches: result.matches }))
-    return [getGroupWithItems(group, items)]
-  }
-
+const filteredGroups = computed(() => {
   const groupsById = fuseResults.value.reduce((acc, result) => {
     const { item, matches } = result
     if (!item.group) {
@@ -273,7 +255,7 @@ const groups = computed(() => {
   }, {} as Record<string, (T & { matches?: FuseResult<T>['matches'] })[]>)
 
   const fuseGroups = Object.entries(groupsById).map(([id, items]) => {
-    const group = props.groups?.find(group => group.id === id)
+    const group = groups.value?.find(group => group.id === id)
     if (!group) {
       return
     }
@@ -281,7 +263,7 @@ const groups = computed(() => {
     return getGroupWithItems(group, items)
   }).filter(group => !!group)
 
-  const nonFuseGroups = props.groups
+  const nonFuseGroups = groups.value
     ?.map((group, index) => ({ ...group, index }))
     ?.filter(group => group.ignoreFilter && group.items?.length)
     ?.map(group => ({ ...getGroupWithItems(group, group.items || []), index: group.index })) || []
@@ -292,21 +274,17 @@ const groups = computed(() => {
   }, [...fuseGroups])
 })
 
-function navigateToSubmenu(item: T, group: G) {
+const listboxRootRef = useTemplateRef('listboxRootRef')
+
+function navigate(item: T) {
   if (!item.children?.length) {
     return
   }
 
-  const childrenGroup: G = {
-    ...group,
-    id: `${group.id}-${item.label || 'submenu'}`,
+  history.value.push({
+    id: `history-${history.value?.length + 1}`,
     label: item.label,
     items: item.children
-  } as G
-
-  submenuHistory.value.push({
-    group: childrenGroup as UnwrapRef<G>,
-    parentItem: item as UnwrapRef<T>
   })
 
   searchTerm.value = ''
@@ -314,23 +292,25 @@ function navigateToSubmenu(item: T, group: G) {
   listboxRootRef.value?.highlightFirstItem()
 }
 
-function navigateBack() {
-  if (!submenuHistory.value.length) {
+function navigateBack(e?: Event) {
+  if (!history.value.length) {
     return
   }
 
-  submenuHistory.value.pop()
+  e?.preventDefault()
+
+  history.value.pop()
 
   searchTerm.value = ''
 
   listboxRootRef.value?.highlightFirstItem()
 }
 
-function onKeydownEsc(e: KeyboardEvent) {
-  if (activeSubmenu.value) {
-    e.preventDefault()
-
-    navigateBack()
+function onSelect(e: Event, item: T) {
+  if (item.children?.length) {
+    navigate(item)
+  } else {
+    item.onSelect?.(e)
   }
 }
 </script>
@@ -346,12 +326,12 @@ function onKeydownEsc(e: KeyboardEvent) {
         v-bind="inputProps"
         :icon="icon || appConfig.ui.icons.search"
         :class="ui.input({ class: props.ui?.input })"
-        @keydown.esc="onKeydownEsc"
-        @keydown.meta.backspace="onKeydownEsc"
+        @keydown.esc="navigateBack"
+        @keydown.meta.backspace="navigateBack"
       >
         <template #leading>
           <UButton
-            v-if="activeSubmenu"
+            v-if="history?.length"
             :icon="backIcon || appConfig.ui.icons.arrowLeft"
             size="md"
             color="neutral"
@@ -382,8 +362,8 @@ function onKeydownEsc(e: KeyboardEvent) {
     </ListboxFilter>
 
     <ListboxContent :class="ui.content({ class: props.ui?.content })">
-      <div v-if="groups" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
-        <ListboxGroup v-for="group in groups" :key="`group-${group.id}`" :class="ui.group({ class: props.ui?.group })">
+      <div v-if="filteredGroups?.length" role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
+        <ListboxGroup v-for="group in filteredGroups" :key="`group-${group.id}`" :class="ui.group({ class: props.ui?.group })">
           <ListboxGroupLabel v-if="get(group, props.labelKey as string)" :class="ui.label({ class: props.ui?.label })">
             {{ get(group, props.labelKey as string) }}
           </ListboxGroupLabel>
@@ -394,14 +374,7 @@ function onKeydownEsc(e: KeyboardEvent) {
             :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
             :disabled="item.disabled"
             as-child
-            @select="(e) => {
-              if (item.children && item.children.length > 0) {
-                navigateToSubmenu(item, group)
-              }
-              else {
-                item.onSelect?.(e)
-              }
-            }"
+            @select="(e) => onSelect(e, item)"
           >
             <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
               <ULinkBase v-bind="slotProps" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], active: active || item.active })">

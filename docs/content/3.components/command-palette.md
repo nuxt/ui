@@ -112,6 +112,10 @@ props:
 ---
 ::
 
+::tip{to="#with-children-in-items"}
+Each item can take a `children` array of objects with the following properties to create submenus:
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections.
@@ -504,7 +508,7 @@ props:
 This example uses the `@update:model-value` event to reset the search term when an item is selected.
 ::
 
-### With submenus :badge{label="Soon" class="align-text-top"}
+### With children in items :badge{label="Soon" class="align-text-top"}
 
 You can create hierarchical menus by using the `children` property in items. When an item has children, it will automatically display a chevron icon and enable navigation into a submenu.
 
@@ -512,7 +516,7 @@ You can create hierarchical menus by using the `children` property in items. Whe
 ---
 collapse: true
 prettier: true
-name: 'command-palette-submenu-example'
+name: 'command-palette-items-children-example'
 class: '!p-0'
 props:
   autofocus: false
