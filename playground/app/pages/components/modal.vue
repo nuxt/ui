@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
+import FirstModal from '~/components/FirstModal.vue'
 
 const LazyModalExample = defineAsyncComponent(() => import('../../components/ModalExample.vue'))
 
@@ -17,6 +18,12 @@ function openModal() {
   count.value++
 
   modal.open({ count: count.value })
+}
+
+function openFirstModal() {
+  overlay.create(FirstModal, {
+    destroyOnClose: true
+  }).open()
 }
 </script>
 
@@ -69,6 +76,8 @@ function openModal() {
     </UModal>
 
     <UButton label="Open programmatically" color="neutral" variant="outline" @click="openModal" />
+
+    <UButton label="Stacked modal" color="neutral" variant="subtle" @click="openFirstModal" />
 
     <UModal title="First modal">
       <UButton color="neutral" variant="outline" label="Close with scoped slot close" />

@@ -5,6 +5,7 @@ import type { ToasterProps, Locale, Messages } from '../types'
 export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProviderProps, 'useId' | 'dir' | 'locale'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
+  overlay?: Record<string, any>
   locale?: Locale<T>
   portal?: string | HTMLElement
 }
@@ -36,6 +37,7 @@ defineSlots<AppSlots>()
 const configProviderProps = useForwardProps(reactivePick(props, 'scrollBody'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
+const overlayProps = toRef(() => props.overlay)
 
 const locale = toRef(() => props.locale)
 provide(localeContextInjectionKey, locale)
@@ -52,7 +54,7 @@ provide(portalTargetInjectionKey, portal)
       </UToaster>
       <slot v-else />
 
-      <UOverlayProvider />
+      <UOverlayProvider v-bind="overlayProps" />
     </TooltipProvider>
   </ConfigProvider>
 </template>
