@@ -70,7 +70,6 @@ export default {
     },
     layout: {
       list: {
-        base: 'divide-y divide-default',
         files: 'space-y-2',
         file: 'flex justify-between items-center gap-2 p-2 border border-accented pe-3',
         fileContent: 'flex items-center gap-3',
