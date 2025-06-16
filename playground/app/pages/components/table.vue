@@ -362,6 +362,18 @@ onMounted(() => {
       <template #expanded="{ row }">
         <pre>{{ row.original }}</pre>
       </template>
+
+      <template #body-top>
+        <tr>
+          body top
+        </tr>
+      </template>
+
+      <template #body-bottom>
+        <tr>
+          body bottom
+        </tr>
+      </template>
     </UTable>
 
     <div class="flex items-center justify-between gap-3">
