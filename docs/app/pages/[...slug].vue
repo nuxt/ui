@@ -38,7 +38,7 @@ const { data: surround } = await useAsyncData(`${kebabCase(route.path)}-surround
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value.path, { indexAsChild: true })).map(({ icon, ...link }) => link))
+const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value?.path, { indexAsChild: true })).map(({ icon, ...link }) => link))
 
 if (!import.meta.prerender) {
   // Redirect to the correct framework version if the page is not the current framework
