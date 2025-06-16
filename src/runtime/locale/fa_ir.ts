@@ -25,7 +25,7 @@ export default defineLocale<Messages>({
       empty: 'فایل‌ها را مرور کنید یا اینجا بکشید',
       removeAll: 'حذف همه',
       addFiles: 'افزودن فایل',
-      actions: 'فایل‌ها'
+      files: 'فایل‌ها'
     },
     commandPalette: {
       placeholder: 'یک دستور وارد کنید یا جستجو کنید...',

@@ -7,7 +7,7 @@ export default {
     label: 'font-semibold text-highlighted text-center px-2 line-clamp-1',
     uploadIcon: 'pointer-events-none',
     files: 'space-y-2 w-full',
-    filesActions: 'w-full flex items-center justify-between px-1 py-2',
+    filesActions: 'w-full flex items-center justify-between px-1 py-2 gap-3',
     file: 'text-default rounded-md relative',
     fileContent: 'flex items-center gap-3',
     fileLeadingAvatar: 'shrink-0',

@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Răsfoiți sau trageți fișierele aici',
       removeAll: 'Eliminați toate',
       addFiles: 'Adăugați fișier(e)',
-      actions: 'Fișiere'
+      files: 'Fișiere'
     },
     commandPalette: {
       placeholder: 'Tastează o comandă sau caută...',

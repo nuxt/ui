@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Bladeren of bestanden hier neerzetten',
       removeAll: 'Alles verwijderen',
       addFiles: 'Bestand(en) toevoegen',
-      actions: 'Bestanden'
+      files: 'Bestanden'
     },
     commandPalette: {
       placeholder: 'Typ een commando of zoek...',

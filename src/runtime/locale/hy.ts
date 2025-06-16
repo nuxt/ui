@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Հայտնաբերել կամ քաշել ֆայլերը այստեղ',
       removeAll: 'Հեռացնել բոլորը',
       addFiles: 'Ավելացնել ֆայլ(եր)',
-      actions: 'Ֆայլեր'
+      files: 'Ֆայլեր'
     },
     commandPalette: {
       placeholder: 'Մուտքագրեք հրաման կամ որոնեք...',

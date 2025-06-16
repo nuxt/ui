@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Telusuri atau seret file ke sini',
       removeAll: 'Hapus semua',
       addFiles: 'Tambah file',
-      actions: 'File'
+      files: 'File'
     },
     commandPalette: {
       placeholder: 'Ketik perintah atau cari...',

@@ -285,31 +285,29 @@ defineExpose({ fileInputRef })
   <DefineFilesPreviewTemplate v-slot="{ files: filesList }">
     <div :class="ui.filesActions({ class: props.ui?.filesActions })">
       <slot name="actions">
-        <div class="flex items-center justify-between w-full gap-3">
-          <span :class="`text-${props.size || 'md'} font-semibold`">
-            {{ `${t('fileUpload.actions')}  (${files?.length || 0})` }}
-          </span>
-          <div class="flex items-center gap-1">
-            <UButton
-              id="add-files"
-              :icon="appConfig.ui.icons.upload"
-              :label="t('fileUpload.addFiles')"
-              variant="outline"
-              color="neutral"
-              :size="props.size || 'md'"
-              @click="fileInputRef?.click()"
-            />
-            <UButton
-              id="remove-all"
-              :icon="appConfig.ui.icons.trash"
-              :label="t('fileUpload.removeAll')"
-              :disabled="isEmpty"
-              variant="outline"
-              color="neutral"
-              :size="props.size || 'md'"
-              @click.stop="removeAll()"
-            />
-          </div>
+        <span :class="`text-${props.size || 'md'} font-semibold`">
+          {{ `${t('fileUpload.files')}  (${files?.length || 0})` }}
+        </span>
+        <div class="flex items-center gap-1">
+          <UButton
+            id="add-files"
+            :icon="appConfig.ui.icons.upload"
+            :label="t('fileUpload.addFiles')"
+            variant="outline"
+            color="neutral"
+            :size="props.size || 'md'"
+            @click="fileInputRef?.click()"
+          />
+          <UButton
+            id="remove-all"
+            :icon="appConfig.ui.icons.trash"
+            :label="t('fileUpload.removeAll')"
+            :disabled="isEmpty"
+            variant="outline"
+            color="neutral"
+            :size="props.size || 'md'"
+            @click.stop="removeAll()"
+          />
         </div>
       </slot>
     </div>

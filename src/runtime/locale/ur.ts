@@ -25,7 +25,7 @@ export default defineLocale<Messages>({
       empty: 'فائلیں براؤز کریں یا یہاں ڈراپ کریں',
       removeAll: 'سب ہٹائیں',
       addFiles: 'فائل(یں) شامل کریں',
-      actions: 'فائلیں'
+      files: 'فائلیں'
     },
     commandPalette: {
       placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...',

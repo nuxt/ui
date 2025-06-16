@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Browse or drop files here',
       removeAll: 'Remove all',
       addFiles: 'Add file(s)',
-      actions: 'Files'
+      files: 'Files'
     },
     commandPalette: {
       placeholder: 'Type a command or search...',

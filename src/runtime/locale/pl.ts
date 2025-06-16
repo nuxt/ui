@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Przeglądaj lub przeciągnij pliki tutaj',
       removeAll: 'Usuń wszystkie',
       addFiles: 'Dodaj plik(i)',
-      actions: 'Pliki'
+      files: 'Pliki'
     },
     commandPalette: {
       placeholder: 'Wpisz polecenie lub wyszukaj...',

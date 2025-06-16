@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Prehliadať alebo presunúť súbory sem',
       removeAll: 'Odstrániť všetko',
       addFiles: 'Pridať súbor(y)',
-      actions: 'Súbory'
+      files: 'Súbory'
     },
     commandPalette: {
       placeholder: 'Zadajte príkaz alebo vyhľadajte...',

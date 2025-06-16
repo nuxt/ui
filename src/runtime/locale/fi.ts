@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Selaa tai pudota tiedostoja tähän',
       removeAll: 'Poista kaikki',
       addFiles: 'Lisää tiedosto(ja)',
-      actions: 'Tiedostot'
+      files: 'Tiedostot'
     },
     commandPalette: {
       placeholder: 'Kirjoita komento tai hae...',

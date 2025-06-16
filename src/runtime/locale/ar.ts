@@ -25,7 +25,7 @@ export default defineLocale<Messages>({
       empty: 'استعرض أو اسحب الملفات هنا',
       removeAll: 'إزالة الكل',
       addFiles: 'إضافة ملف(ات)',
-      actions: 'الملفات'
+      files: 'الملفات'
     },
     commandPalette: {
       placeholder: 'اكتب أمرًا أو ابحث...',

@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Naršykite arba nuvilkite failus čia',
       removeAll: 'Pašalinti visus',
       addFiles: 'Pridėti failą(us)',
-      actions: 'Failai'
+      files: 'Failai'
     },
     commandPalette: {
       placeholder: 'Įveskite komandą arba ieškokite...',

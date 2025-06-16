@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Böngésszen vagy húzza ide a fájlokat',
       removeAll: 'Összes eltávolítása',
       addFiles: 'Fájl(ok) hozzáadása',
-      actions: 'Fájlok'
+      files: 'Fájlok'
     },
     commandPalette: {
       placeholder: 'Írjon be egy parancsot vagy keressen...',

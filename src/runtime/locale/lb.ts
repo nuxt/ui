@@ -20,7 +20,7 @@ export default defineLocale<Messages>({
       empty: 'Fir duerch Fichieren oder drop se hei',
       removeAll: 'All läschen',
       addFiles: 'Fichier(en) dobäisetzen',
-      actions: 'Fichieren'
+      files: 'Fichieren'
     },
     inputNumber: {
       increment: 'Inkrementéieren',

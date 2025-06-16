@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Переглядати або перетягнути файли сюди',
       removeAll: 'Видалити все',
       addFiles: 'Додати файл(и)',
-      actions: 'Файли'
+      files: 'Файли'
     },
     commandPalette: {
       placeholder: 'Введіть команду або шукайте...',

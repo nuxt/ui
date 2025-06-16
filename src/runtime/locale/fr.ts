@@ -20,7 +20,7 @@ export default defineLocale<Messages>({
       empty: 'Parcourir ou déposer des fichiers ici',
       removeAll: 'Supprimer tout',
       addFiles: 'Ajouter fichier(s)',
-      actions: 'Fichiers'
+      files: 'Fichiers'
     },
     inputNumber: {
       increment: 'Augmenter',

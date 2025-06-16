@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Duyệt hoặc kéo file vào đây',
       removeAll: 'Xóa tất cả',
       addFiles: 'Thêm file',
-      actions: 'File'
+      files: 'File'
     },
     commandPalette: {
       placeholder: 'Nhập lệnh hoặc tìm kiếm...',

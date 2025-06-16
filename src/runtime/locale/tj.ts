@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Файлҳоро кушед ё ба ин ҷо кашед',
       removeAll: 'Ҳамаро нест кардан',
       addFiles: 'Файл(ҳо) илова кардан',
-      actions: 'Файлҳо'
+      files: 'Файлҳо'
     },
     commandPalette: {
       placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...',

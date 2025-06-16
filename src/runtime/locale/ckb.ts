@@ -25,7 +25,7 @@ export default defineLocale<Messages>({
       empty: 'گۆڕانکاری یان فایلەکان بخەرە ئێرە',
       removeAll: 'هەموویان لابدە',
       addFiles: 'فایل زیاد بکە',
-      actions: 'فایلەکان'
+      files: 'فایلەکان'
     },
     commandPalette: {
       placeholder: 'فەرمانێک بنووسە یان بگەڕێ...',

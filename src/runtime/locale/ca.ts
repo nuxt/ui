@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Navegueu o arrossegueu fitxers aquí',
       removeAll: 'Eliminar tot',
       addFiles: 'Afegir fitxer(s)',
-      actions: 'Fitxers'
+      files: 'Fitxers'
     },
     commandPalette: {
       placeholder: 'Escriu una ordre o cerca...',

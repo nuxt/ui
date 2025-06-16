@@ -25,7 +25,7 @@ export default defineLocale<Messages>({
       empty: 'ھۆججەتلەرنى كۆرۈڭ ياكى بۇ يەرگە سۆرەڭ',
       removeAll: 'ھەممىنى چىقىرىۋەت',
       addFiles: 'ھۆججەت قوش',
-      actions: 'ھۆججەتلەر'
+      files: 'ھۆججەتلەر'
     },
     commandPalette: {
       placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ...',

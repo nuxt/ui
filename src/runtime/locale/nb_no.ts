@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Bla gjennom eller dra filer hit',
       removeAll: 'Fjern alle',
       addFiles: 'Legg til fil(er)',
-      actions: 'Filer'
+      files: 'Filer'
     },
     commandPalette: {
       placeholder: 'Skriv inn en kommando eller søk...',

@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Dosyalara göz atın veya buraya sürükleyin',
       removeAll: 'Tümünü kaldır',
       addFiles: 'Dosya(lar) ekle',
-      actions: 'Dosyalar'
+      files: 'Dosyalar'
     },
     commandPalette: {
       placeholder: 'Bir komut yazın veya arama yapın...',

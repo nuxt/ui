@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Fayllarni ko\'rib chiqish yoki shu yerga tashlash',
       removeAll: 'Barchasini o\'chirish',
       addFiles: 'Fayl(lar) qo\'shish',
-      actions: 'Fayllar'
+      files: 'Fayllar'
     },
     commandPalette: {
       placeholder: 'Buyruq kiriting yoki qidiring...',

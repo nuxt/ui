@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Prebrskajte ali povlecite datoteke sem',
       removeAll: 'Odstrani vse',
       addFiles: 'Dodaj datoteko(e)',
-      actions: 'Datoteke'
+      files: 'Datoteke'
     },
     commandPalette: {
       placeholder: 'Vpiši ukaz ali išči...',

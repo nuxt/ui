@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'ファイルを参照またはここにドロップ',
       removeAll: 'すべて削除',
       addFiles: 'ファイルを追加',
-      actions: 'ファイル'
+      files: 'ファイル'
     },
     commandPalette: {
       placeholder: 'コマンドを入力するか検索...',

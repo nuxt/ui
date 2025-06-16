@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Περιηγηθείτε ή σύρετε αρχεία εδώ',
       removeAll: 'Αφαίρεση όλων',
       addFiles: 'Προσθήκη αρχείου(ων)',
-      actions: 'Αρχεία'
+      files: 'Αρχεία'
     },
     commandPalette: {
       placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',

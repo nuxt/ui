@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Layari atau seret fail ke sini',
       removeAll: 'Buang semua',
       addFiles: 'Tambah fail',
-      actions: 'Fail'
+      files: 'Fail'
     },
     commandPalette: {
       placeholder: 'Taip arahan atau carian...',

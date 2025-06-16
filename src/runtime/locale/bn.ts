@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'ব্রাউজ করুন বা ফাইলগুলি এখানে ড্রপ করুন',
       removeAll: 'সব সরান',
       addFiles: 'ফাইল যোগ করুন',
-      actions: 'ফাইলসমূহ'
+      files: 'ফাইলসমূহ'
     },
     commandPalette: {
       placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন...',

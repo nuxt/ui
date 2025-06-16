@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Sirvige või lohistage failid siia',
       removeAll: 'Eemalda kõik',
       addFiles: 'Lisa fail(id)',
-      actions: 'Failid'
+      files: 'Failid'
     },
     commandPalette: {
       placeholder: 'Sisesta käsk või otsi...',

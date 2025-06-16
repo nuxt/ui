@@ -24,7 +24,7 @@ export default defineLocale<Messages>({
       empty: 'Пераглядаць або перацягнуць файлы сюды',
       removeAll: 'Выдаліць усё',
       addFiles: 'Дадаць файл(ы)',
-      actions: 'Файлы'
+      files: 'Файлы'
     },
     commandPalette: {
       placeholder: 'Въведете команда или потърсете...',

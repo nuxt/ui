@@ -25,7 +25,7 @@ export default defineLocale<Messages>({
       empty: 'עיון או גרירת קבצים כאן',
       removeAll: 'הסר הכל',
       addFiles: 'הוסף קובץ/קבצים',
-      actions: 'קבצים'
+      files: 'קבצים'
     },
     commandPalette: {
       placeholder: 'הקלד פקודה...',
