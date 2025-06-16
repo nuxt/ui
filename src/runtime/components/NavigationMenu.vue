@@ -378,7 +378,14 @@ function getAccordionDefaultValue(list: NavigationMenuItem[]) {
       </ULink>
 
       <AccordionContent v-if="orientation === 'vertical' && item.children?.length && !collapsed" :class="ui.content({ class: [props.ui?.content, item.ui?.content] })">
-        <ul :class="ui.childList({ class: props.ui?.childList })">
+        <AccordionRoot
+          v-bind="{
+            ...accordionProps,
+            defaultValue: getAccordionDefaultValue(item.children)
+          } as AccordionRootProps"
+          as="ul"
+          :class="ui.childList({ class: props.ui?.childList })"
+        >
           <ReuseItemTemplate
             v-for="(childItem, childIndex) in item.children"
             :key="childIndex"
@@ -387,7 +394,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[]) {
             :level="level + 1"
             :class="ui.childItem({ class: [props.ui?.childItem, childItem.ui?.childItem] })"
           />
-        </ul>
+        </AccordionRoot>
       </AccordionContent>
     </component>
   </DefineItemTemplate>
