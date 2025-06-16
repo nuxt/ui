@@ -46,7 +46,7 @@ export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T
 
 </script>
 
-<script setup lang="ts" generic="T extends PinInputType = 'text'">
+<script setup lang="ts" generic="T extends PinInputType">
 import type { ComponentPublicInstance } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'reka-ui'
