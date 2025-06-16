@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
-import FirstModal from '~/components/FirstModal.vue'
+import FirstModal from '../../components/FirstModal.vue'
 
 const LazyModalExample = defineAsyncComponent(() => import('../../components/ModalExample.vue'))
 

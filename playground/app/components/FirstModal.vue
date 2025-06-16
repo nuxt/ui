@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import SecondModal from '~/components/SecondModal.vue'
+import SecondModal from './SecondModal.vue'
 
 const emit = defineEmits(['close'])
 
