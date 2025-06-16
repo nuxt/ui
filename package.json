@@ -162,7 +162,7 @@
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.6.0",
     "eslint": "^9.29.0",
-    "happy-dom": "^17.6.3",
+    "happy-dom": "^18.0.1",
     "nuxt": "^3.17.5",
     "release-it": "^19.0.3",
     "vitest": "^3.2.3",
