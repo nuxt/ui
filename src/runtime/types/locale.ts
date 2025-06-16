@@ -18,7 +18,7 @@ export type Messages = {
     empty: string
     removeAll: string
     addFiles: string
-    actions: string
+    files: string
   }
   commandPalette: {
     placeholder: string
