@@ -179,7 +179,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
                   <UButton
                     v-if="props.close"
                     :icon="closeIcon || appConfig.ui.icons.close"
-                    size="md"
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('slideover.close')"
