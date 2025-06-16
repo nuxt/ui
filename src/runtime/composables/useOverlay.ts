@@ -46,7 +46,7 @@ function _useOverlay() {
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
       originalProps: props || {},
-      props: {}
+      props: { ...(props || {}) }
     })
 
     overlays.push(options)
@@ -110,9 +110,7 @@ function _useOverlay() {
   const patch = <T extends Component>(id: symbol, props: Partial<ComponentProps<T>>): void => {
     const overlay = getOverlay(id)
 
-    Object.entries(props!).forEach(([key, value]) => {
-      (overlay.props as any)[key] = value
-    })
+    overlay.props = { ...props }
   }
 
   const getOverlay = (id: symbol): Overlay => {

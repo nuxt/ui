@@ -151,7 +151,7 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       // Parse key and modifiers
       let shortcut: Partial<Shortcut>
 
-      if (key.includes('-') && key !== '-' && !key.match(chainedShortcutRegex)?.length) {
+      if (key.includes('-') && key !== '-' && !key.includes('_') && !key.match(chainedShortcutRegex)?.length) {
         console.trace(`[Shortcut] Invalid key: "${key}"`)
       }
 
@@ -159,7 +159,7 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
         console.trace(`[Shortcut] Invalid key: "${key}"`)
       }
 
-      const chained = key.includes('-') && key !== '-'
+      const chained = key.includes('-') && key !== '-' && !key.includes('_')
       if (chained) {
         shortcut = {
           key: key.toLowerCase(),

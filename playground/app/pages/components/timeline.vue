@@ -9,6 +9,7 @@ const orientations = Object.keys(theme.variants.orientation)
 const orientation = ref('vertical' as const)
 const color = ref('primary' as const)
 const size = ref('md' as const)
+const reverse = ref(false)
 
 const items = [{
   date: 'Mar 15, 2025',
@@ -46,6 +47,7 @@ const value = ref('kickoff')
       <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
       <USelect v-model="size" :items="sizes" placeholder="Size" />
       <USelect v-model="value" :items="items.map(item => item.value)" placeholder="Value" />
+      <USelect v-model="reverse" :items="[true, false]" placeholder="Reverse" />
     </div>
 
     <UTimeline
@@ -54,6 +56,7 @@ const value = ref('kickoff')
       :orientation="orientation"
       :size="size"
       :items="items"
+      :reverse="reverse"
       class="data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-96"
     />
   </div>

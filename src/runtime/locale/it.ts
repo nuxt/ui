@@ -30,7 +30,8 @@ export default defineLocale<Messages>({
       placeholder: 'Digita un comando o cerca...',
       noMatch: 'Nessun dato corrispondente',
       noData: 'Nessun dato',
-      close: 'Chiudi'
+      close: 'Chiudi',
+      back: 'Indietro'
     },
     selectMenu: {
       noMatch: 'Nessun dato corrispondente',

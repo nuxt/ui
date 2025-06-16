@@ -5,6 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'flex flex-col min-h-0 min-w-0 divide-y divide-default',
     input: '[&>input]:h-12',
     close: '',
+    back: 'p-0',
     content: 'relative overflow-hidden flex flex-col',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
     group: 'p-1 isolate',

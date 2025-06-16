@@ -31,7 +31,8 @@ export default defineLocale<Messages>({
       placeholder: 'اكتب أمرًا أو ابحث...',
       noMatch: 'لا توجد نتائج مطابقة',
       noData: 'لا توجد بيانات',
-      close: 'إغلاق'
+      close: 'إغلاق',
+      back: 'رجوع'
     },
     selectMenu: {
       noMatch: 'لا توجد نتائج مطابقة',
