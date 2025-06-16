@@ -8,6 +8,8 @@ export default {
     uploadIcon: 'pointer-events-none',
     files: 'space-y-2 w-full',
     filesActions: 'w-full flex items-center justify-between px-1 py-2 gap-3',
+    filesActionsLabel: 'font-semibold',
+    filesActionsButtons: 'flex items-center gap-2',
     file: 'text-default rounded-md relative',
     fileContent: 'flex items-center gap-3',
     fileLeadingAvatar: 'shrink-0',
@@ -25,6 +27,7 @@ export default {
         empty: 'min-h-16',
         label: 'text-xs',
         uploadIcon: 'size-4',
+        filesActionsLabel: 'text-xs',
         file: 'p-1 text-xs gap-1',
         fileLeadingAvatarSize: 'xs'
       },
@@ -32,6 +35,7 @@ export default {
         empty: 'h-20',
         label: 'text-xs',
         uploadIcon: 'size-4',
+        filesActionsLabel: 'text-xs',
         file: 'p-1.5 text-xs gap-1.5',
         fileLeadingAvatarSize: 'sm'
       },
@@ -39,6 +43,7 @@ export default {
         empty: 'h-24',
         label: 'text-sm',
         uploadIcon: 'size-5',
+        filesActionsLabel: 'text-sm',
         file: 'p-1.5 text-sm gap-1.5',
         fileLeadingAvatarSize: 'md'
       },
@@ -46,6 +51,7 @@ export default {
         empty: 'h-26',
         label: 'text-sm',
         uploadIcon: 'size-5',
+        filesActionsLabel: 'text-sm',
         file: 'p-2 text-sm gap-2',
         fileLeadingAvatarSize: 'lg'
       },
@@ -53,6 +59,7 @@ export default {
         empty: 'h-32',
         label: 'text-base',
         uploadIcon: 'size-6',
+        filesActionsLabel: 'text-base',
         file: 'p-2 text-base gap-2',
         fileLeadingAvatarSize: 'xl'
       }

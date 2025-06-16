@@ -285,10 +285,10 @@ defineExpose({ fileInputRef })
   <DefineFilesPreviewTemplate v-slot="{ files: filesList }">
     <div :class="ui.filesActions({ class: props.ui?.filesActions })">
       <slot name="actions">
-        <span :class="`text-${props.size || 'md'} font-semibold`">
+        <span :class="ui.filesActionsLabel({ class: props.ui?.filesActionsLabel })">
           {{ `${t('fileUpload.files')}  (${files?.length || 0})` }}
         </span>
-        <div class="flex items-center gap-1">
+        <div :class="ui.filesActionsButtons({ class: props.ui?.filesActionsButtons })">
           <UButton
             id="add-files"
             :icon="appConfig.ui.icons.upload"
