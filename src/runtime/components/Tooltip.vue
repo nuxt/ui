@@ -70,7 +70,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
 
 <template>
   <TooltipRoot v-slot="{ open }" v-bind="rootProps">
-    <TooltipTrigger v-if="!!slots.default" v-bind="$attrs" as-child :class="props.class">
+    <TooltipTrigger v-if="!!slots.default" v-bind="$attrs" :class="props.class">
       <slot :open="open" />
     </TooltipTrigger>
 

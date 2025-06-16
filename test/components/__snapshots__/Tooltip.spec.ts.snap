@@ -47,7 +47,7 @@ exports[`Tooltip > renders with content slot correctly 1`] = `
 `;
 
 exports[`Tooltip > renders with default slot correctly 1`] = `
-"Default slot
+"<button aria-describedby="reka-tooltip-content-v-0-0" data-state="instant-open" data-grace-area-trigger="">Default slot</button>
 <!--teleport start-->
 
 
