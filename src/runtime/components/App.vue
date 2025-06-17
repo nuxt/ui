@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { ConfigProviderProps, TooltipProviderProps } from 'reka-ui'
-import type { ToasterProps, Locale, Messages } from '../types'
+import type { ToasterProps, Locale, Messages, OverlayProviderProps } from '../types'
 
 export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProviderProps, 'useId' | 'dir' | 'locale'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
-  overlay?: Record<string, any>
+  overlay?: OverlayProviderProps
   locale?: Locale<T>
   portal?: string | HTMLElement
 }

@@ -36,7 +36,7 @@ html[data-module="ui"] .ui-pro-only {
 /* For better modals stacking visual experience */
 @keyframes light-slide-in-from-bottom {
   from {
-    transform: translateY(60%);
+    transform: translateY(20%);
     opacity: 0;
   }
 
@@ -53,7 +53,7 @@ html[data-module="ui"] .ui-pro-only {
   }
 
   to {
-    transform: translateY(60%);
+    transform: translateY(20%);
     opacity: 0;
   }
 }

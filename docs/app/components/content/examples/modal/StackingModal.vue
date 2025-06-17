@@ -15,7 +15,7 @@ function onClick() {
 <template>
   <UModal
     title="A Modal"
-    :ui="{ footer: 'justify-end', content: 'data-[state=open]:animate-[light-slide-in-from-bottom_600ms_ease-out] data-[state=closed]:animate-[light-slide-out-to-bottom_600ms_ease-in]' }"
+    :ui="{ footer: 'justify-end', content: 'data-[state=open]:animate-[light-slide-in-from-bottom_200ms_ease-out] data-[state=closed]:animate-[light-slide-out-to-bottom_200ms_ease-in]' }"
   >
     <template #footer>
       <UButton label="Another Modal" variant="subtle" color="neutral" @click="onClick" />
