@@ -63,6 +63,7 @@ export interface ModalSlots {
   default(props: { open: boolean }): any
   content(props: { close: () => void }): any
   header(props: { close: () => void }): any
+  actions(props: {}): any
   title(props?: {}): any
   description(props?: {}): any
   close(props: { close: () => void, ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
@@ -165,6 +166,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
                   </slot>
                 </DialogDescription>
               </div>
+
+              <slot name="actions" />
 
               <DialogClose v-if="props.close || !!slots.close" as-child>
                 <slot name="close" :close="close" :ui="ui">
