@@ -42,6 +42,10 @@ export interface SliderEmits<T extends number | number[] = number | number[]> {
   (e: 'update:modelValue', payload: T): void
   (e: 'change', payload: Event): void
 }
+
+export interface SliderSlots {
+  default(props?: {text: string | number}): any
+}
 </script>
 
 <script setup lang="ts" generic="T extends number | number[]">
@@ -129,6 +133,9 @@ function onChange(value: any) {
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
         <SliderThumb :class="ui.thumb({ class: props.ui?.thumb })" />
+        <template name="content" v-if="$slots.tooltip">
+          <slot :text="thumbs > 1 ? String(sliderValue?.[thumb - 1]) : String(sliderValue)" />
+        </template>
       </UTooltip>
       <SliderThumb v-else :class="ui.thumb({ class: props.ui?.thumb })" />
     </template>
