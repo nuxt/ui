@@ -27,10 +27,11 @@ const onClose = (id: symbol, value: any) => {
     :key="overlay.id"
     v-bind="overlay.props"
     v-model:open="overlay.isOpen"
+    :overlay="index === 0 ? true : false"
     :content="{
       ...$attrs,
       style: {
-        '--overlay-count': overlays.length,
+        '--overlay-count': mountedOverlays.length,
         '--overlay-index': index,
         ...($attrs as any).style
       }

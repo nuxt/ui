@@ -49,7 +49,7 @@ provide('navigation', mappedNavigation)
 </script>
 
 <template>
-  <UApp :toaster="appConfig.toaster">
+  <UApp :toaster="appConfig.toaster" :overlay="appConfig.overlay">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
     <template v-if="!route.path.startsWith('/examples')">

@@ -32,3 +32,28 @@ html[data-module="ui-pro"] .ui-only,
 html[data-module="ui"] .ui-pro-only {
   display: none;
 }
+
+/* For better modals stacking visual experience */
+@keyframes light-slide-in-from-bottom {
+  from {
+    transform: translateY(60%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes light-slide-out-to-bottom {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(60%);
+    opacity: 0;
+  }
+}

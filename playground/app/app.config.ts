@@ -9,7 +9,7 @@ export default defineAppConfig({
     style: {
       '--overlay-value': 'calc(var(--overlay-count) - var(--overlay-index) - 1)',
       'scale': 'calc(100% - 5% * var(--overlay-value))',
-      'translate': 'var(--tw-translate-x) calc(-1.25rem * var(--overlay-value))'
+      'transform': 'translateY(calc(-1.25rem * var(--overlay-value)))'
     }
   },
   ui: {

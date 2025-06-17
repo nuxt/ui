@@ -347,6 +347,43 @@ name: 'modal-nested-example'
 ---
 ::
 
+### Stacking modals
+
+You can nicely stack modals on top of each other thanks to two CSS variables: `--overlay-count` and `--overlay-index`.
+
+::component-example
+---
+name: 'modal-stacking-example'
+---
+::
+
+The demo above is slow intentionally to demonstrate the stacking effect.
+
+To achieve this visual effect, a custom configuration for the overlay is required:
+
+```ts
+{
+  overlay: {
+    class: 'origin-top transition-transform duration-600',
+    style: {
+      '--overlay-value': 'calc(var(--overlay-count) - var(--overlay-index) - 1)',
+      'scale': 'calc(100% - 5% * var(--overlay-value))',
+      'transform': 'translateY(calc(-1.25rem * var(--overlay-value)))'
+    }
+  }
+}
+```
+
+::note
+This configuration is the one used in the demo above but you can customize it to your needs. Nuxt UI only provides the CSS variables by default.
+::
+
+Then, you'll have to provide this configuration to the `App` component:
+
+```vue-html
+<UApp :overlay="appConfig.overlay">
+```
+
 ### With footer slot
 
 Use the `#footer` slot to add content after the Modal's body.
