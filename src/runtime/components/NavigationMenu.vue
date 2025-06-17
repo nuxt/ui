@@ -236,20 +236,13 @@ const lists = computed<NavigationMenuItem[][]>(() =>
     : []
 )
 
-function getAccordionDefaultValue(list: NavigationMenuItem[]) {
-  function findItemsWithDefaultOpen(items: NavigationMenuItem[], level = 0): string[] {
-    return items.reduce((acc: string[], item, index) => {
-      if (item.defaultOpen || item.open) {
-        acc.push(item.value || (level > 0 ? `item-${level}-${index}` : `item-${index}`))
-      }
-      if (item.children?.length) {
-        acc.push(...findItemsWithDefaultOpen(item.children, level + 1))
-      }
-      return acc
-    }, [])
-  }
-
-  const indexes = findItemsWithDefaultOpen(list)
+function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
+  const indexes = list.reduce((acc: string[], item, index) => {
+    if (item.defaultOpen || item.open) {
+      acc.push(item.value || (level > 0 ? `item-${level}-${index}` : `item-${index}`))
+    }
+    return acc
+  }, [])
 
   return props.type === 'single' ? indexes[0] : indexes
 }
@@ -379,10 +372,10 @@ function getAccordionDefaultValue(list: NavigationMenuItem[]) {
 
       <AccordionContent v-if="orientation === 'vertical' && item.children?.length && !collapsed" :class="ui.content({ class: [props.ui?.content, item.ui?.content] })">
         <AccordionRoot
-          v-bind="{
+          v-bind="({
             ...accordionProps,
-            defaultValue: getAccordionDefaultValue(item.children)
-          } as AccordionRootProps"
+            defaultValue: getAccordionDefaultValue(item.children, level + 1)
+          } as AccordionRootProps)"
           as="ul"
           :class="ui.childList({ class: props.ui?.childList })"
         >
