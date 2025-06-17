@@ -60,15 +60,15 @@ export interface SlideoverEmits extends DialogRootEmits {
 }
 
 export interface SlideoverSlots {
-  'default'(props: { open: boolean }): any
-  'content'(props: { close: () => void }): any
-  'header'(props: { close: () => void }): any
-  'header-actions'(props: {}): any
-  'title'(props?: {}): any
-  'description'(props?: {}): any
-  'close'(props: { close: () => void, ui: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): any
-  'body'(props: { close: () => void }): any
-  'footer'(props: { close: () => void }): any
+  default(props: { open: boolean }): any
+  content(props: { close: () => void }): any
+  header(props: { close: () => void }): any
+  actions(props: {}): any
+  title(props?: {}): any
+  description(props?: {}): any
+  close(props: { close: () => void, ui: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): any
+  body(props: { close: () => void }): any
+  footer(props: { close: () => void }): any
 }
 </script>
 
@@ -175,7 +175,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
                 </DialogDescription>
               </div>
 
-              <slot name="header-actions" />
+              <slot name="actions" />
 
               <DialogClose v-if="props.close || !!slots.close" as-child>
                 <slot name="close" :close="close" :ui="ui">
