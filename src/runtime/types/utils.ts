@@ -1,4 +1,4 @@
-import type { VNode } from 'vue'
+import type { Ref, VNode } from 'vue'
 import type { AcceptableValue as _AcceptableValue } from 'reka-ui'
 
 export type DeepPartial<T> = {
@@ -80,5 +80,7 @@ export type EmitsToProps<T> = {
     ? (...args: Args) => void
     : never
 }
+
+export type RefOrGetter<T> = Ref<T> | (() => T)
 
 export * from './tv'

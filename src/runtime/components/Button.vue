@@ -56,6 +56,7 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
+import { useComponentUiTheme } from '../components/Theme.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   active: undefined,
@@ -65,6 +66,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 const slots = defineSlots<ButtonSlots>()
 
 const appConfig = useAppConfig() as Button['AppConfig']
+const uiTheme = useComponentUiTheme('button', () => ({ slots: props.ui }))
 const { orientation, size: buttonSize } = useButtonGroup<ButtonProps>(props)
 
 const linkProps = useForwardProps(pickLinkProps(props))
@@ -128,7 +130,7 @@ const ui = computed(() => tv({
     <ULinkBase
       v-bind="slotProps"
       :class="ui.base({
-        class: [props.ui?.base, props.class],
+        class: [uiTheme?.slots?.base, props.class],
         active,
         ...(active && activeVariant ? { variant: activeVariant } : {}),
         ...(active && activeColor ? { color: activeColor } : {})
@@ -136,18 +138,18 @@ const ui = computed(() => tv({
       @click="onClickWrapper"
     >
       <slot name="leading">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
-        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: uiTheme?.slots?.leadingIcon, active })" />
+        <UAvatar v-else-if="!!avatar" :size="((uiTheme?.slots?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: uiTheme?.slots?.leadingAvatar, active })" />
       </slot>
 
       <slot>
-        <span v-if="label !== undefined && label !== null" :class="ui.label({ class: props.ui?.label, active })">
+        <span v-if="label !== undefined && label !== null" :class="ui.label({ class: uiTheme?.slots?.label, active })">
           {{ label }}
         </span>
       </slot>
 
       <slot name="trailing">
-        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
+        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" :class="ui.trailingIcon({ class: uiTheme?.slots?.trailingIcon, active })" />
       </slot>
     </ULinkBase>
   </ULink>
