@@ -11,7 +11,7 @@ const items = [
     label: 'Copy Markdown link',
     icon: 'i-lucide-link',
     onSelect() {
-      navigator.clipboard.writeText(mdPath.value)
+      copy(mdPath.value)
       toast.add({
         title: 'Copied to clipboard',
         icon: 'i-lucide-check-circle'
@@ -22,7 +22,7 @@ const items = [
     label: 'View as Markdown',
     icon: 'i-simple-icons:markdown',
     target: '_blank',
-    to: mdPath.value
+    to: `/raw${route.path}.md`
   },
   {
     label: 'Open in ChatGPT',
@@ -39,7 +39,7 @@ const items = [
 ]
 
 async function copyPage() {
-  copy(await $fetch<string>(mdPath.value))
+  copy(await $fetch<string>(`/raw${route.path}.md`))
 }
 </script>
 
