@@ -358,6 +358,7 @@ describe('Form', () => {
       expect(form.value.dirtyFields.size).toBe(0)
     })
   })
+  
 
   describe('nested', async () => {
     let wrapper: any
