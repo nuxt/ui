@@ -63,7 +63,7 @@ export interface FormSlots {
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, type Ref } from 'vue'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
@@ -112,21 +112,21 @@ onMounted(async () => {
     } else if (props.validateOn?.includes(event.type) && !loading.value) {
       if (event.type !== 'input') {
         await _validate({ name: event.name, silent: true, nested: false })
-      } else if (event.eager || blurredFields.value.has(event.name)) {
+      } else if (event.eager || blurredFields.has(event.name)) {
         await _validate({ name: event.name, silent: true, nested: false })
       }
     }
 
     if (event.type === 'blur') {
-      blurredFields.value.add(event.name)
+      blurredFields.add(event.name)
     }
 
     if (event.type === 'change' || event.type === 'input' || event.type === 'blur' || event.type === 'focus') {
-      touchedFields.value.add(event.name)
+      touchedFields.add(event.name)
     }
 
     if (event.type === 'change' || event.type === 'input') {
-      dirtyFields.value.add(event.name)
+      dirtyFields.add(event.name)
     }
   })
 })
@@ -154,9 +154,9 @@ provide('form-errors', errors)
 const inputs = ref<{ [P in keyof I]?: { id?: string, pattern?: RegExp } }>({})
 provide(formInputsInjectionKey, inputs as any)
 
-const dirtyFields: Ref<Set<keyof I>> = ref(new Set<keyof I>())
-const touchedFields: Ref<Set<keyof I>> = ref(new Set<keyof I>())
-const blurredFields: Ref<Set<keyof I>> = ref(new Set<keyof I>())
+const dirtyFields: Set<keyof I> = reactive(new Set<keyof I>())
+const touchedFields: Set<keyof I> = reactive(new Set<keyof I>())
+const blurredFields: Set<keyof I> = reactive(new Set<keyof I>())
 
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
@@ -240,7 +240,7 @@ async function onSubmitWrapper(payload: Event) {
   try {
     event.data = await _validate({ nested: true, transform: props.transform })
     await props.onSubmit?.(event)
-    dirtyFields.value.clear()
+    dirtyFields.clear()
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
@@ -299,11 +299,11 @@ defineExpose<Form<S>>({
 
   disabled,
   loading,
-  dirty: computed(() => !!dirtyFields.value.size),
+  dirty: computed(() => !!dirtyFields.size),
 
-  dirtyFields: computed(() => dirtyFields.value),
-  blurredFields: computed(() => blurredFields.value),
-  touchedFields: computed(() => touchedFields.value)
+  dirtyFields: readonly(dirtyFields),
+  blurredFields: readonly(blurredFields),
+  touchedFields: readonly(touchedFields)
 })
 </script>
 
