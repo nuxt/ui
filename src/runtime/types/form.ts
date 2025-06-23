@@ -16,7 +16,6 @@ export interface Form<S extends FormSchema> {
   dirty: ComputedRef<boolean>
   loading: Ref<boolean>
 
-  // ReadonlySet<DeepReadonly<UnwrapRefSimple<keyof InferInput<S>>>>
   dirtyFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   touchedFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   blurredFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
