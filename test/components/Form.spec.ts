@@ -1,4 +1,4 @@
-import { reactive, ref, nextTick } from 'vue'
+import { reactive, ref, nextTick, watch } from 'vue'
 import { describe, it, expect, test, beforeEach, vi } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import * as z from 'zod'
@@ -16,7 +16,6 @@ import {
   UFormField
 } from '#components'
 import { flushPromises } from '@vue/test-utils'
-import { watch } from 'vue'
 
 describe('Form', () => {
   it.each([
@@ -313,8 +312,7 @@ describe('Form', () => {
     })
 
     test('dirtyFields works', async () => {
-       const emailInput = wrapper.find('#emailInput')
-
+      const emailInput = wrapper.find('#emailInput')
       const mockWatchCallback = vi.fn()
       watch(() => form.value.dirtyFields, mockWatchCallback, { deep: true })
 
