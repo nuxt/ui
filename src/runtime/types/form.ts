@@ -1,24 +1,29 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec'
-import type { ComputedRef, DeepReadonly, Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
 import type { GetObjectField } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
 
 export interface Form<S extends FormSchema> {
-  validate<T extends boolean>(opts?: { name?: keyof FormData<S, false> | (keyof FormData<S, false>)[], silent?: boolean, nested?: boolean, transform?: T }): Promise<FormData<S, T> | false>
-  clear (path?: string): void
+  validate<T extends boolean>(opts?: {
+    name?: keyof FormData<S, false> | (keyof FormData<S, false>)[]
+    silent?: boolean
+    nested?: boolean
+    transform?: T
+  }): Promise<FormData<S, T> | false>
+  clear(path?: string): void
   errors: Ref<FormError[]>
-  setErrors (errs: FormError[], name?: keyof FormData<S, false>): void
-  getErrors (name?: keyof FormData<S, false>): FormError[]
-  submit (): Promise<void>
+  setErrors(errs: FormError[], name?: keyof FormData<S, false>): void
+  getErrors(name?: keyof FormData<S, false>): FormError[]
+  submit(): Promise<void>
   disabled: ComputedRef<boolean>
   dirty: ComputedRef<boolean>
   loading: Ref<boolean>
 
-  dirtyFields: DeepReadonly<Set<keyof FormData<S, false>>>
-  touchedFields: DeepReadonly<Set<keyof FormData<S, false>>>
-  blurredFields: DeepReadonly<Set<keyof FormData<S, false>>>
+  dirtyFields: ComputedRef<Set<keyof FormData<S, false>>>
+  touchedFields: ComputedRef<Set<keyof FormData<S, false>>>
+  blurredFields: ComputedRef<Set<keyof FormData<S, false>>>
 }
 
 export type FormSchema<I extends object = object, O extends object = I> =
@@ -28,21 +33,33 @@ export type FormSchema<I extends object = object, O extends object = I> =
   | StandardSchemaV1<I, O>
 
 // Define a utility type to infer the input type based on the schema type
-export type InferInput<Schema> = Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
-  : Schema extends YupObjectSchema<infer I> ? I
-    : Schema extends JoiSchema<infer I> ? I
-      : Schema extends SuperstructSchema<infer I, any> ? I
-        : Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
+export type InferInput<Schema> = Schema extends StandardSchemaV1
+  ? StandardSchemaV1.InferInput<Schema>
+  : Schema extends YupObjectSchema<infer I>
+    ? I
+    : Schema extends JoiSchema<infer I>
+      ? I
+      : Schema extends SuperstructSchema<infer I, any>
+        ? I
+        : Schema extends StandardSchemaV1
+          ? StandardSchemaV1.InferInput<Schema>
           : never
 
 // Define a utility type to infer the output type based on the schema type
-export type InferOutput<Schema> = Schema extends StandardSchemaV1 ? StandardSchemaV1.InferOutput<Schema>
-  : Schema extends YupObjectSchema<infer O> ? O
-    : Schema extends JoiSchema<infer O> ? O
-      : Schema extends SuperstructSchema<infer O, any> ? O
+export type InferOutput<Schema> = Schema extends StandardSchemaV1
+  ? StandardSchemaV1.InferOutput<Schema>
+  : Schema extends YupObjectSchema<infer O>
+    ? O
+    : Schema extends JoiSchema<infer O>
+      ? O
+      : Schema extends SuperstructSchema<infer O, any>
+        ? O
         : never
 
-export type FormData<S extends FormSchema, T extends boolean = true> = T extends true ? InferOutput<S> : InferInput<S>
+export type FormData<
+  S extends FormSchema,
+  T extends boolean = true
+> = T extends true ? InferOutput<S> : InferInput<S>
 
 export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
 
@@ -116,7 +133,11 @@ export class FormValidationException extends Error {
   errors: FormErrorWithId[]
   children?: FormValidationException[]
 
-  constructor(formId: string | number, errors: FormErrorWithId[], childErrors?: FormValidationException[]) {
+  constructor(
+    formId: string | number,
+    errors: FormErrorWithId[],
+    childErrors?: FormValidationException[]
+  ) {
     super('Form validation exception')
     this.formId = formId
     this.errors = errors
