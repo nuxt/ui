@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { DeepReadonly } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
@@ -64,7 +63,7 @@ export interface FormSlots {
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, type Ref } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
@@ -113,21 +112,21 @@ onMounted(async () => {
     } else if (props.validateOn?.includes(event.type) && !loading.value) {
       if (event.type !== 'input') {
         await _validate({ name: event.name, silent: true, nested: false })
-      } else if (event.eager || blurredFields.has(event.name)) {
+      } else if (event.eager || blurredFields.value.has(event.name)) {
         await _validate({ name: event.name, silent: true, nested: false })
       }
     }
 
     if (event.type === 'blur') {
-      blurredFields.add(event.name)
+      blurredFields.value.add(event.name)
     }
 
     if (event.type === 'change' || event.type === 'input' || event.type === 'blur' || event.type === 'focus') {
-      touchedFields.add(event.name)
+      touchedFields.value.add(event.name)
     }
 
     if (event.type === 'change' || event.type === 'input') {
-      dirtyFields.add(event.name)
+      dirtyFields.value.add(event.name)
     }
   })
 })
@@ -155,9 +154,9 @@ provide('form-errors', errors)
 const inputs = ref<{ [P in keyof I]?: { id?: string, pattern?: RegExp } }>({})
 provide(formInputsInjectionKey, inputs as any)
 
-const dirtyFields = new Set<keyof I>()
-const touchedFields = new Set<keyof I>()
-const blurredFields = new Set<keyof I>()
+const dirtyFields: Ref<Set<keyof I>> = ref(new Set<keyof I>())
+const touchedFields: Ref<Set<keyof I>> = ref(new Set<keyof I>())
+const blurredFields: Ref<Set<keyof I>> = ref(new Set<keyof I>())
 
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
@@ -241,7 +240,7 @@ async function onSubmitWrapper(payload: Event) {
   try {
     event.data = await _validate({ nested: true, transform: props.transform })
     await props.onSubmit?.(event)
-    dirtyFields.clear()
+    dirtyFields.value.clear()
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
@@ -300,11 +299,11 @@ defineExpose<Form<S>>({
 
   disabled,
   loading,
-  dirty: computed(() => !!dirtyFields.size),
+  dirty: computed(() => !!dirtyFields.value.size),
 
-  dirtyFields: readonly(dirtyFields) as DeepReadonly<Set<keyof I>>,
-  blurredFields: readonly(blurredFields) as DeepReadonly<Set<keyof I>>,
-  touchedFields: readonly(touchedFields) as DeepReadonly<Set<keyof I>>
+  dirtyFields: computed(() => dirtyFields.value),
+  blurredFields: computed(() => blurredFields.value),
+  touchedFields: computed(() => touchedFields.value)
 })
 </script>
 

@@ -1,5 +1,5 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec'
-import type { ComputedRef, DeepReadonly, Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
 import type { GetObjectField } from './utils'
@@ -16,9 +16,9 @@ export interface Form<S extends FormSchema> {
   dirty: ComputedRef<boolean>
   loading: Ref<boolean>
 
-  dirtyFields: DeepReadonly<Set<keyof FormData<S, false>>>
-  touchedFields: DeepReadonly<Set<keyof FormData<S, false>>>
-  blurredFields: DeepReadonly<Set<keyof FormData<S, false>>>
+  dirtyFields: ComputedRef<Set<keyof FormData<S, false>>>
+  touchedFields: ComputedRef<Set<keyof FormData<S, false>>>
+  blurredFields: ComputedRef<Set<keyof FormData<S, false>>>
 }
 
 export type FormSchema<I extends object = object, O extends object = I> =
