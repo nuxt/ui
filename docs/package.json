@@ -25,7 +25,7 @@
     "@vueuse/integrations": "^13.4.0",
     "@vueuse/nuxt": "^13.4.0",
     "ai": "^4.3.16",
-    "better-sqlite3": "^11.10.0",
+    "better-sqlite3": "^12.0.0",
     "capture-website": "^4.2.0",
     "joi": "^17.13.3",
     "maska": "^3.1.1",
