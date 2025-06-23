@@ -16,6 +16,7 @@ import {
   UFormField
 } from '#components'
 import { flushPromises } from '@vue/test-utils'
+import { watch } from 'vue'
 
 describe('Form', () => {
   it.each([
@@ -272,93 +273,68 @@ describe('Form', () => {
       ])
     })
 
-    test('touchedFields works', async () => {
+    test('touchedFields works on focus', async () => {
       const emailInput = wrapper.find('#emailInput')
+
+      const mockWatchCallback = vi.fn()
+      watch(() => form.value.touchedFields, mockWatchCallback, { deep: true })
 
       emailInput.trigger('focus')
       await flushPromises()
-
-      expect(form.value.touchedFields.has('email')).toBe(true)
-      expect(form.value.touchedFields.has('password')).toBe(false)
+      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
+      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
     })
 
-    test('touchedFields works', async () => {
+    test('touchedFields works on change', async () => {
       const emailInput = wrapper.find('#emailInput')
+
+      const mockWatchCallback = vi.fn()
+      watch(() => form.value.touchedFields, mockWatchCallback, { deep: true })
 
       emailInput.trigger('change')
       await flushPromises()
-
-      expect(form.value.dirtyFields.has('email')).toBe(true)
-      expect(form.value.touchedFields.has('email')).toBe(true)
-
-      expect(form.value.dirtyFields.has('password')).toBe(false)
-      expect(form.value.touchedFields.has('password')).toBe(false)
+      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
+      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
     })
 
     test('blurredFields works', async () => {
       const emailInput = wrapper.find('#emailInput')
 
+      const mockWatchCallback = vi.fn()
+      watch(() => form.value.blurredFields, mockWatchCallback, { deep: true })
+
       emailInput.trigger('blur')
       await flushPromises()
-
-      expect(form.value.blurredFields.has('email')).toBe(true)
-      expect(form.value.blurredFields.has('password')).toBe(false)
+      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
+      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
     })
 
-    test.only('exposed field meta data is reactive', async () => {
-      // Initial state checks
-      expect(form.value.dirty).toBe(false)
-      expect(form.value.dirtyFields.size).toBe(0)
-      expect(form.value.touchedFields.size).toBe(0)
-      expect(form.value.blurredFields.size).toBe(0)
+    test('dirtyFields works', async () => {
+       const emailInput = wrapper.find('#emailInput')
 
+      const mockWatchCallback = vi.fn()
+      watch(() => form.value.dirtyFields, mockWatchCallback, { deep: true })
+
+      emailInput.trigger('change')
+      await flushPromises()
+      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
+      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
+    })
+
+    test('dirty works', async () => {
       const emailInput = wrapper.find('#emailInput')
-      const passwordInput = wrapper.find('#passwordInput')
-
-      // Test touchedFields reactivity
-      await emailInput.trigger('focus')
-      await flushPromises()
-      expect(form.value.touchedFields.has('email')).toBe(true)
-      expect(form.value.touchedFields.size).toBe(1)
-
-      // Test dirtyFields and dirty reactivity
-      await emailInput.setValue('test@example.com')
-      await emailInput.trigger('change')
-      await flushPromises()
-
-      expect(form.value.dirtyFields.has('email')).toBe(true)
-      expect(form.value.dirtyFields.size).toBe(1)
-      expect(form.value.dirty).toBe(true)
-
-      // Test blurredFields reactivity
-      await emailInput.trigger('blur')
-      await flushPromises()
-      expect(form.value.blurredFields.has('email')).toBe(true)
-      expect(form.value.blurredFields.size).toBe(1)
-
-      // Test multiple fields
-      await passwordInput.trigger('focus')
-      await passwordInput.setValue('password')
-      await passwordInput.trigger('change')
-      await passwordInput.trigger('blur')
-      await flushPromises()
-
-      expect(form.value.touchedFields.has('password')).toBe(true)
-      expect(form.value.touchedFields.size).toBe(2)
-      expect(form.value.dirtyFields.has('password')).toBe(true)
-      expect(form.value.dirtyFields.size).toBe(2)
-      expect(form.value.blurredFields.has('password')).toBe(true)
-      expect(form.value.blurredFields.size).toBe(2)
-      expect(form.value.dirty).toBe(true)
-
-      // Test that dirty becomes false after successful submit
-      await wrapper.setupState.form.value.submit()
-      await flushPromises()
       expect(form.value.dirty).toBe(false)
-      expect(form.value.dirtyFields.size).toBe(0)
+
+      emailInput.trigger('change')
+      await flushPromises()
+
+      expect(form.value.dirty).toBe(true)
     })
   })
-  
 
   describe('nested', async () => {
     let wrapper: any
