@@ -1,3 +1,5 @@
 {
-  "i18n-ally.localesPaths": ["src/runtime/locale"]
+    "i18n-ally.localesPaths": [
+        "src/runtime/locale"
+    ]
 }
