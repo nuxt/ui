@@ -173,7 +173,6 @@ defineExpose({
           <UButton
             v-if="close"
             :icon="closeIcon || appConfig.ui.icons.close"
-            size="md"
             color="neutral"
             variant="link"
             :aria-label="t('toast.close')"
