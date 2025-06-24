@@ -2,7 +2,8 @@
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { PageLink } from '@nuxt/ui-pro'
-import { findPageBreadcrumb, mapContentNavigation } from '@nuxt/ui-pro/utils/content'
+import { mapContentNavigation } from '@nuxt/ui-pro/utils/content'
+import { findPageBreadcrumb } from '@nuxt/content/utils'
 
 const route = useRoute()
 const { framework, module } = useSharedData()
@@ -37,7 +38,7 @@ const { data: surround } = await useAsyncData(`${kebabCase(route.path)}-surround
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value)).map(({ icon, ...link }) => link))
+const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation?.value, page.value?.path, { indexAsChild: true })).map(({ icon, ...link }) => link))
 
 if (!import.meta.prerender) {
   // Redirect to the correct framework version if the page is not the current framework
