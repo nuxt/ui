@@ -141,17 +141,5 @@ function openSlideover() {
         <UButton label="Close with scoped slot close" @click="close" />
       </template>
     </USlideover>
-
-    <USlideover title="Slideover with header-actions slot" description="This slideover has a header-actions slot that can be used to add actions to the header.">
-      <UButton label="Open with header-actions slot" color="neutral" variant="outline" />
-
-      <template #header-actions>
-        <UButton color="neutral" variant="ghost" class="absolute top-4 end-12" icon="i-lucide:expand" />
-      </template>
-
-      <template #body>
-        <Placeholder class="h-full w-full" />
-      </template>
-    </USlideover>
   </div>
 </template>
