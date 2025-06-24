@@ -43,6 +43,7 @@ export interface PopoverEmits extends PopoverRootEmits {
 export interface PopoverSlots {
   default(props: { open: boolean }): any
   content(props?: {}): any
+  anchor(props?: {}): any
 }
 </script>
 
@@ -74,15 +75,15 @@ const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
 const contentEvents = computed(() => {
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'] as const
-    type EventType = typeof events[number]
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
         e.preventDefault()
         emits('close:prevent')
       }
       return acc
-    }, {} as Record<EventType, (e: Event) => void>)
+    }, {} as Record<typeof events[number], (e: Event) => void>)
   }
 
   return {}
@@ -102,6 +103,10 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
     <Component.Trigger v-if="!!slots.default" as-child :class="props.class">
       <slot :open="open" />
     </Component.Trigger>
+
+    <Component.Anchor v-if="'Anchor' in Component && !!slots.anchor" as-child>
+      <slot name="anchor" />
+    </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
       <Component.Content v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">

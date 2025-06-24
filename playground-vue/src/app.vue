@@ -40,6 +40,7 @@ const components = [
   'input',
   'input-menu',
   'input-number',
+  'input-tags',
   'kbd',
   'link',
   'modal',
@@ -61,6 +62,7 @@ const components = [
   'tabs',
   'table',
   'textarea',
+  'timeline',
   'toast',
   'tooltip',
   'tree'

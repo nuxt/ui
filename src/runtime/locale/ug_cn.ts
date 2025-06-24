@@ -25,7 +25,8 @@ export default defineLocale<Messages>({
       placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ...',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
       noData: 'سانلىق مەلۇمات يوق',
-      close: 'تاقاش'
+      close: 'تاقاش',
+      back: 'قايتىش'
     },
     selectMenu: {
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',

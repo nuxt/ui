@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Įveskite komandą arba ieškokite...',
       noMatch: 'Nėra atitinkančių duomenų',
       noData: 'Nėra duomenų',
-      close: 'Uždaryti'
+      close: 'Uždaryti',
+      back: 'Atgal'
     },
     selectMenu: {
       noMatch: 'Nėra atitinkančių duomenų',

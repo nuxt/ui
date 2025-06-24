@@ -60,7 +60,7 @@ export default (options: Required<ModuleOptions>) => ({
         childList: 'grid p-2',
         childLink: 'px-3 py-2 gap-2 before:inset-x-px before:inset-y-0',
         childLinkLabel: 'font-medium',
-        content: 'absolute top-0 left-0 w-full'
+        content: 'absolute top-0 left-0 w-full max-h-[70vh] overflow-y-auto'
       },
       vertical: {
         root: 'flex-col',

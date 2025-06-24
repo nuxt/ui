@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Skriv ett kommando eller sök...',
       noMatch: 'Inga matchande data',
       noData: 'Inga data',
-      close: 'Stäng'
+      close: 'Stäng',
+      back: 'Tillbaka'
     },
     selectMenu: {
       noMatch: 'Inga matchande data',

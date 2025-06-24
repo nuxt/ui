@@ -52,9 +52,11 @@ Each group contains an `items` array of objects that define the commands. Each i
 - `loading?: boolean`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
+- `placeholder?: string`{lang="ts-type"} :badge{label="Soon"}
+- `children?: CommandPaletteItem[]`{lang="ts-type"} :badge{label="Soon"}
 - `onSelect?(e?: Event): void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue,}`{lang="ts-type"}
+- `ui?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/components/link#props) component such as `to`, `target`, etc.
 
@@ -108,6 +110,10 @@ props:
             src: 'https://github.com/noook.png'
   class: 'flex-1'
 ---
+::
+
+::tip{to="#with-children-in-items"}
+Each item can take a `children` array of objects with the following properties to create submenus:
 ::
 
 ### Multiple
@@ -246,6 +252,128 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.se
 :::
 ::
 
+### Selected Icon
+
+Use the `selected-icon` prop to customize the selected item [Icon](/components/icon). Defaults to `i-lucide-check`.
+
+::component-code
+---
+collapse: true
+hide:
+  - autofocus
+ignore:
+  - groups
+  - modelValue
+  - multiple
+  - class
+external:
+  - groups
+  - modelValue
+class: '!p-0'
+props:
+  multiple: true
+  autofocus: false
+  modelValue:
+    - label: 'Benjamin Canac'
+      suffix: 'benjamincanac'
+      avatar:
+        src: 'https://github.com/benjamincanac.png'
+  selectedIcon: 'i-lucide-circle-check'
+  groups:
+    - id: 'users'
+      label: 'Users'
+      items:
+        - label: 'Benjamin Canac'
+          suffix: 'benjamincanac'
+          avatar:
+            src: 'https://github.com/benjamincanac.png'
+        - label: 'Sylvain Marroufin'
+          suffix: 'smarroufin'
+          avatar:
+            src: 'https://github.com/smarroufin.png'
+        - label: 'Sébastien Chopin'
+          suffix: 'atinux'
+          avatar:
+            src: 'https://github.com/atinux.png'
+        - label: 'Romain Hamel'
+          suffix: 'romhml'
+          avatar:
+            src: 'https://github.com/romhml.png'
+        - label: 'Haytham A. Salama'
+          suffix: 'Haythamasalama'
+          avatar:
+            src: 'https://github.com/Haythamasalama.png'
+        - label: 'Daniel Roe'
+          suffix: 'danielroe'
+          avatar:
+            src: 'https://github.com/danielroe.png'
+        - label: 'Neil Richter'
+          suffix: 'noook'
+          avatar:
+            src: 'https://github.com/noook.png'
+  class: 'flex-1'
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
+:::
+::
+
+### Trailing Icon :badge{label="Soon" class="align-text-top"}
+
+Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) when an item has children. Defaults to `i-lucide-chevron-right`.
+
+::component-code
+---
+collapse: true
+prettier: true
+hide:
+  - autofocus
+ignore:
+  - groups
+  - class
+external:
+  - groups
+class: '!p-0'
+props:
+  autofocus: false
+  trailingIcon: 'i-lucide-arrow-right'
+  groups:
+    - id: 'actions'
+      items:
+        - label: 'Share'
+          icon: 'i-lucide-share'
+          children:
+            - label: 'Email'
+              icon: 'i-lucide-mail'
+            - label: 'Copy'
+              icon: 'i-lucide-copy'
+            - label: 'Link'
+              icon: 'i-lucide-link'
+  class: 'flex-1'
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronRight` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronRight` key.
+:::
+::
+
 ### Loading
 
 Use the `loading` prop to show a loading icon on the CommandPalette.
@@ -319,37 +447,6 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.loa
 :::tip{to="/getting-started/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
 :::
-::
-
-### Disabled
-
-Use the `disabled` prop to disable the CommandPalette.
-
-::component-code
----
-collapse: true
-hide:
-  - autofocus
-ignore:
-  - groups
-  - class
-external:
-  - groups
-class: '!p-0'
-props:
-  autofocus: false
-  disabled: true
-  groups:
-    - id: 'apps'
-      items:
-        - label: 'Calendar'
-          icon: 'i-lucide-calendar'
-        - label: 'Music'
-          icon: 'i-lucide-music'
-        - label: 'Maps'
-          icon: 'i-lucide-map'
-  class: 'flex-1'
----
 ::
 
 ### Close
@@ -468,6 +565,124 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 :::
 ::
 
+### Back :badge{label="Soon" class="align-text-top"}
+
+Use the `back` prop to customize or hide the back button (with `false` value) displayed when navigating into a submenu.
+
+You can pass any property from the [Button](/components/button) component to customize it.
+
+::component-code
+---
+collapse: true
+prettier: true
+hide:
+  - autofocus
+ignore:
+  - back.color
+  - groups
+  - class
+external:
+  - groups
+class: '!p-0'
+props:
+  autofocus: false
+  back:
+    color: primary
+  groups:
+    - id: 'actions'
+      items:
+        - label: 'Share'
+          icon: 'i-lucide-share'
+          children:
+            - label: 'Email'
+              icon: 'i-lucide-mail'
+            - label: 'Copy'
+              icon: 'i-lucide-copy'
+            - label: 'Link'
+              icon: 'i-lucide-link'
+  class: 'flex-1'
+---
+::
+
+### Back Icon :badge{label="Soon" class="align-text-top"}
+
+Use the `back-icon` prop to customize the back button [Icon](/components/icon). Defaults to `i-lucide-arrow-left`.
+
+::component-code
+---
+collapse: true
+hide:
+  - autofocus
+ignore:
+  - class
+  - groups
+  - back
+external:
+  - groups
+class: '!p-0'
+props:
+  autofocus: false
+  back: true
+  backIcon: 'i-lucide-house'
+  groups:
+    - id: 'actions'
+      items:
+        - label: 'Share'
+          icon: 'i-lucide-share'
+          children:
+            - label: 'Email'
+              icon: 'i-lucide-mail'
+            - label: 'Copy'
+              icon: 'i-lucide-copy'
+            - label: 'Link'
+              icon: 'i-lucide-link'
+  class: 'flex-1'
+---
+::
+
+::framework-only
+#nuxt
+:::tip{to="/getting-started/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `ui.icons.arrowLeft` key.
+:::
+
+#vue
+:::tip{to="/getting-started/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `ui.icons.arrowLeft` key.
+:::
+::
+
+### Disabled
+
+Use the `disabled` prop to disable the CommandPalette.
+
+::component-code
+---
+collapse: true
+hide:
+  - autofocus
+ignore:
+  - groups
+  - class
+external:
+  - groups
+class: '!p-0'
+props:
+  autofocus: false
+  disabled: true
+  groups:
+    - id: 'apps'
+      items:
+        - label: 'Calendar'
+          icon: 'i-lucide-calendar'
+        - label: 'Music'
+          icon: 'i-lucide-music'
+        - label: 'Maps'
+          icon: 'i-lucide-map'
+  class: 'flex-1'
+---
+::
+
 ## Examples
 
 ### Control selected item(s)
@@ -500,6 +715,28 @@ props:
 
 ::note
 This example uses the `@update:model-value` event to reset the search term when an item is selected.
+::
+
+### With children in items :badge{label="Soon" class="align-text-top"}
+
+You can create hierarchical menus by using the `children` property in items. When an item has children, it will automatically display a chevron icon and enable navigation into a submenu.
+
+::component-example
+---
+collapse: true
+prettier: true
+name: 'command-palette-items-children-example'
+class: '!p-0'
+props:
+  autofocus: false
+---
+::
+
+::note
+When navigating into a submenu:
+- The search term is reset
+- A back button appears in the input
+- You can go back to the previous group by pressing the :kbd{value="backspace"} key
 ::
 
 ### With fetched items
@@ -658,6 +895,7 @@ You will have access to the following slots:
 
 ::component-example
 ---
+collapse: true
 name: 'command-palette-custom-slot-example'
 class: '!p-0'
 props:

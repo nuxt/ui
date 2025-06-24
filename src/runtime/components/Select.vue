@@ -92,6 +92,8 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  autofocus?: boolean
+  autofocusDelay?: number
   class?: any
   ui?: Select['slots']
 }
@@ -134,8 +136,8 @@ export interface SelectSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
-import { computed, toRef } from 'vue'
-import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
+import { ref, computed, onMounted, toRef } from 'vue'
+import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectLabel, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -154,7 +156,8 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<SelectProps<T, VK, M>>(), {
   valueKey: 'value' as never,
   labelKey: 'label' as never,
-  portal: true
+  portal: true,
+  autofocusDelay: 0
 })
 const emits = defineEmits<SelectEmits<T, VK, M>>()
 const slots = defineSlots<SelectSlots<T, VK, M>>()
@@ -193,14 +196,31 @@ const groups = computed<SelectItem[][]>(() =>
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-function displayValue(value?: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string {
+function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
-    return value.map(v => displayValue(v)).filter(Boolean).join(', ')
+    const values = value.map(v => displayValue(v)).filter(Boolean)
+    return values?.length ? values.join(', ') : undefined
   }
 
   const item = items.value.find(item => compare(typeof item === 'object' ? get(item as Record<string, any>, props.valueKey as string) : item, value))
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
+
+const triggerRef = ref<InstanceType<typeof SelectTrigger> | null>(null)
+
+function autoFocus() {
+  if (props.autofocus) {
+    triggerRef.value?.$el?.focus({
+      focusVisible: true
+    })
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus()
+  }, props.autofocusDelay)
+})
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -225,6 +245,10 @@ function onUpdateOpen(value: boolean) {
 function isSelectItem(item: SelectItem): item is SelectItemBase {
   return typeof item === 'object' && item !== null
 }
+
+defineExpose({
+  triggerRef
+})
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -240,7 +264,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <SelectTrigger :id="id" :class="ui.base({ class: [props.ui?.base, props.class] })" v-bind="{ ...$attrs, ...ariaAttrs }">
+    <SelectTrigger :id="id" ref="triggerRef" :class="ui.base({ class: [props.ui?.base, props.class] })" v-bind="{ ...$attrs, ...ariaAttrs }">
       <span v-if="isLeading || !!avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
@@ -250,7 +274,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
 
       <slot :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open">
         <template v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]" :key="displayedModelValue">
-          <span v-if="displayedModelValue" :class="ui.value({ class: props.ui?.value })">
+          <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" :class="ui.value({ class: props.ui?.value })">
             {{ displayedModelValue }}
           </span>
           <span v-else :class="ui.placeholder({ class: props.ui?.placeholder })">
@@ -270,7 +294,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
       <SelectContent :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
         <slot name="content-top" />
 
-        <SelectViewport :class="ui.viewport({ class: props.ui?.viewport })">
+        <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
           <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
             <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
               <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
@@ -317,7 +341,7 @@ function isSelectItem(item: SelectItem): item is SelectItemBase {
               </SelectItem>
             </template>
           </SelectGroup>
-        </SelectViewport>
+        </div>
 
         <slot name="content-bottom" />
 

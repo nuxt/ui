@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Escriu una ordre o cerca...',
       noMatch: 'No hi ha dades coincidents',
       noData: 'Sense dades',
-      close: 'Tancar'
+      close: 'Tancar',
+      back: 'Enrere'
     },
     selectMenu: {
       noMatch: 'No hi ha dades coincidents',

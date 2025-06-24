@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: '輸入命令或搜尋...',
       noMatch: '沒有相符的資料',
       noData: '沒有資料',
-      close: '關閉'
+      close: '關閉',
+      back: '返回'
     },
     selectMenu: {
       noMatch: '沒有相符的資料',

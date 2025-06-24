@@ -172,7 +172,7 @@ export interface InputMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { computed, ref, toRef, onMounted, toRaw } from 'vue'
-import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
+import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
@@ -379,6 +379,7 @@ function onSelect(e: Event, item: InputMenuItem) {
 function isInputItem(item: InputMenuItem): item is _InputMenuItem {
   return typeof item === 'object' && item !== null
 }
+
 defineExpose({
   inputRef
 })
@@ -490,7 +491,7 @@ defineExpose({
           </slot>
         </ComboboxEmpty>
 
-        <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
+        <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
           <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
           <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
@@ -541,7 +542,7 @@ defineExpose({
           </ComboboxGroup>
 
           <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
-        </ComboboxViewport>
+        </div>
 
         <slot name="content-bottom" />
 

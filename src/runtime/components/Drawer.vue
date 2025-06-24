@@ -56,7 +56,7 @@ export interface DrawerSlots {
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { useForwardPropsEmits } from 'reka-ui'
+import { VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -100,6 +100,20 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
 
       <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
         <DrawerHandle v-if="handle" :class="ui.handle({ class: props.ui?.handle })" />
+
+        <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
+          <DrawerTitle v-if="title || !!slots.title">
+            <slot name="title">
+              {{ title }}
+            </slot>
+          </DrawerTitle>
+
+          <DrawerDescription v-if="description || !!slots.description">
+            <slot name="description">
+              {{ description }}
+            </slot>
+          </DrawerDescription>
+        </VisuallyHidden>
 
         <slot name="content">
           <div :class="ui.container({ class: props.ui?.container })">

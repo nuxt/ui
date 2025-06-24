@@ -1,15 +1,9 @@
 <script setup lang="ts">
-const value = ref('npx nuxi module add ui')
-const copied = ref(false)
+import { useClipboard } from '@vueuse/core'
 
-function copy() {
-  navigator.clipboard.writeText(value.value)
-  copied.value = true
+const value = ref('npx nuxt module add ui')
 
-  setTimeout(() => {
-    copied.value = false
-  }, 2000)
-}
+const { copy, copied } = useClipboard()
 </script>
 
 <template>
@@ -25,7 +19,7 @@ function copy() {
           size="sm"
           :icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
           aria-label="Copy to clipboard"
-          @click="copy"
+          @click="copy(value)"
         />
       </UTooltip>
     </template>

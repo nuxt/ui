@@ -310,7 +310,6 @@ defineExpose({
         <UButton
           :disabled="!canScrollPrev"
           :icon="prevIcon"
-          size="md"
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.prev')"
@@ -321,7 +320,6 @@ defineExpose({
         <UButton
           :disabled="!canScrollNext"
           :icon="nextIcon"
-          size="md"
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.next')"
@@ -336,6 +334,7 @@ defineExpose({
           <button
             :aria-label="t('carousel.goto', { slide: index + 1 })"
             :class="ui.dot({ class: props.ui?.dot, active: selectedIndex === index })"
+            :data-state="selectedIndex === index ? 'active' : undefined"
             @click="scrollTo(index)"
           />
         </template>

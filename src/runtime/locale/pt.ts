@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Digite um comando ou pesquise...',
       noMatch: 'Nenhum dado correspondente',
       noData: 'Sem dados',
-      close: 'Fechar'
+      close: 'Fechar',
+      back: 'Voltar'
     },
     selectMenu: {
       noMatch: 'Nenhum dado correspondente',

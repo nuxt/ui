@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: '输入命令或搜索...',
       noMatch: '没有匹配的数据',
       noData: '没有数据',
-      close: '关闭'
+      close: '关闭',
+      back: '返回'
     },
     selectMenu: {
       noMatch: '没有匹配的数据',

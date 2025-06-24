@@ -222,6 +222,10 @@ Use the `#content` slot to customize the content of each item.
 
 Use the `slot` property to customize a specific item.
 
+You will have access to the following slots:
+
+- `#{{ item.slot }}`{lang="ts-type"}
+
 :component-example{name="tabs-custom-slot-example"}
 
 ## API
@@ -237,6 +241,14 @@ Use the `slot` property to customize a specific item.
 ### Emits
 
 :component-emits
+
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `triggersRef`{lang="ts-type"} | `Ref<ComponentPublicInstance[]>`{lang="ts-type"} |
 
 ## Theme
 

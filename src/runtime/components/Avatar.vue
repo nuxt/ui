@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
+import type { ChipProps } from '../types'
 import type { ComponentConfig } from '../types/utils'
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>
@@ -22,6 +23,7 @@ export interface AvatarProps {
    * @defaultValue 'md'
    */
   size?: Avatar['variants']['size']
+  chip?: boolean | ChipProps
   class?: any
   style?: any
   ui?: Avatar['slots']
@@ -40,6 +42,7 @@ import ImageComponent from '#build/ui-image-component'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
+import UChip from './Chip.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -81,7 +84,13 @@ function onError() {
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="props.style">
+  <component
+    :is="props.chip ? UChip : Primitive"
+    :as="as"
+    v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :style="props.style"
+  >
     <component
       :is="ImageComponent"
       v-if="src && !error"
@@ -101,5 +110,5 @@ function onError() {
         <span v-else :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
       </slot>
     </Slot>
-  </Primitive>
+  </component>
 </template>

@@ -25,7 +25,8 @@ export default defineLocale<Messages>({
       placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
       noData: 'کوئی ڈیٹا نہیں',
-      close: 'بند کریں'
+      close: 'بند کریں',
+      back: 'واپس'
     },
     selectMenu: {
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',

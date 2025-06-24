@@ -815,6 +815,14 @@ name: 'select-menu-countries-example'
 
 :component-emits
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `triggerRef`{lang="ts-type"} | `Ref<InstanceType<typeof ComboboxTrigger> \| null>`{lang="ts-type"} |
+
 ## Theme
 
 :component-theme

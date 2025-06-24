@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Буйрук киргизиңиз же издөө…',
       noMatch: 'Эч нерсе табылган жок',
       noData: 'Маалымат жок',
-      close: 'Жабуу'
+      close: 'Жабуу',
+      back: 'Артка'
     },
     selectMenu: {
       noMatch: 'Сүйлөшкөн маалыматтар жок',
