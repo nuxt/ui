@@ -213,16 +213,6 @@ const loadPlugins = async () => {
   plugins.value = pluginList
 }
 
-// Load plugins on mount
-onMounted(() => {
-  loadPlugins()
-})
-
-// Watch for plugin prop changes and reload plugins
-watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], () => {
-  loadPlugins()
-}, { deep: true })
-
 const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value)
 
 watch([options, plugins], () => {
@@ -277,6 +267,8 @@ function isCarouselItem(item: CarouselItem): item is _CarouselItem {
 }
 
 onMounted(() => {
+  loadPlugins()
+
   if (!emblaApi.value) {
     return
   }
