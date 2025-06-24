@@ -141,7 +141,7 @@ const communityLinks = computed(() => [{
         <MDC v-if="page.description" :value="page.description" unwrap="p" :cache-key="`${kebabCase(route.path)}-description`" />
       </template>
 
-      <template v-if="page.links?.length" #links>
+      <template #links>
         <UButton
           v-for="link in page.links"
           :key="link.label"
@@ -154,6 +154,7 @@ const communityLinks = computed(() => [{
             <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
           </template>
         </UButton>
+        <PageHeaderLinks />
       </template>
     </UPageHeader>
 
