@@ -63,9 +63,9 @@ export interface ModalSlots {
   default(props: { open: boolean }): any
   content(props: { close: () => void }): any
   header(props: { close: () => void }): any
-  actions(props: {}): any
   title(props?: {}): any
   description(props?: {}): any
+  actions(props?: {}): any
   close(props: { close: () => void, ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
   body(props: { close: () => void }): any
   footer(props: { close: () => void }): any
