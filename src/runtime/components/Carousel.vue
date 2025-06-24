@@ -310,7 +310,6 @@ defineExpose({
         <UButton
           :disabled="!canScrollPrev"
           :icon="prevIcon"
-          size="md"
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.prev')"
@@ -321,7 +320,6 @@ defineExpose({
         <UButton
           :disabled="!canScrollNext"
           :icon="nextIcon"
-          size="md"
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.next')"
