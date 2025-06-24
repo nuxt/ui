@@ -176,55 +176,41 @@ const options = computed<EmblaOptionsType>(() => ({
 }))
 
 const plugins = ref<EmblaPluginType[]>([])
-const pluginsLoaded = ref(false)
 
-const loadPlugins = async (retryCount = 0) => {
+const loadPlugins = async () => {
   const pluginList = []
 
-  try {
-    if (props.autoplay) {
-      const AutoplayPlugin = await import('embla-carousel-autoplay').then(r => r.default)
-      pluginList.push(AutoplayPlugin(typeof props.autoplay === 'boolean' ? {} : props.autoplay))
-    }
-
-    if (props.autoScroll) {
-      const AutoScrollPlugin = await import('embla-carousel-auto-scroll').then(r => r.default)
-      pluginList.push(AutoScrollPlugin(typeof props.autoScroll === 'boolean' ? {} : props.autoScroll))
-    }
-
-    if (props.autoHeight) {
-      const AutoHeightPlugin = await import('embla-carousel-auto-height').then(r => r.default)
-      pluginList.push(AutoHeightPlugin(typeof props.autoHeight === 'boolean' ? {} : props.autoHeight))
-    }
-
-    if (props.classNames) {
-      const ClassNamesPlugin = await import('embla-carousel-class-names').then(r => r.default)
-      pluginList.push(ClassNamesPlugin(typeof props.classNames === 'boolean' ? {} : props.classNames))
-    }
-
-    if (props.fade) {
-      const FadePlugin = await import('embla-carousel-fade').then(r => r.default)
-      pluginList.push(FadePlugin(typeof props.fade === 'boolean' ? {} : props.fade))
-    }
-
-    if (props.wheelGestures) {
-      const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures')
-      pluginList.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
-    }
-
-    plugins.value = pluginList
-    pluginsLoaded.value = true
-  } catch (error) {
-    console.warn('Failed to load carousel plugins (attempt ' + (retryCount + 1) + '):', error)
-
-    // Retry up to 3 times with exponential backoff
-    if (retryCount < 3) {
-      setTimeout(() => loadPlugins(retryCount + 1), Math.pow(2, retryCount) * 100)
-    } else {
-      plugins.value = []
-      pluginsLoaded.value = true
-    }
+  if (props.autoplay) {
+    const AutoplayPlugin = await import('embla-carousel-autoplay').then(r => r.default)
+    pluginList.push(AutoplayPlugin(typeof props.autoplay === 'boolean' ? {} : props.autoplay))
   }
+
+  if (props.autoScroll) {
+    const AutoScrollPlugin = await import('embla-carousel-auto-scroll').then(r => r.default)
+    pluginList.push(AutoScrollPlugin(typeof props.autoScroll === 'boolean' ? {} : props.autoScroll))
+  }
+
+  if (props.autoHeight) {
+    const AutoHeightPlugin = await import('embla-carousel-auto-height').then(r => r.default)
+    pluginList.push(AutoHeightPlugin(typeof props.autoHeight === 'boolean' ? {} : props.autoHeight))
+  }
+
+  if (props.classNames) {
+    const ClassNamesPlugin = await import('embla-carousel-class-names').then(r => r.default)
+    pluginList.push(ClassNamesPlugin(typeof props.classNames === 'boolean' ? {} : props.classNames))
+  }
+
+  if (props.fade) {
+    const FadePlugin = await import('embla-carousel-fade').then(r => r.default)
+    pluginList.push(FadePlugin(typeof props.fade === 'boolean' ? {} : props.fade))
+  }
+
+  if (props.wheelGestures) {
+    const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures')
+    pluginList.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
+  }
+
+  plugins.value = pluginList
 }
 
 // Load plugins on mount
@@ -234,7 +220,6 @@ onMounted(() => {
 
 // Watch for plugin prop changes and reload plugins
 watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], () => {
-  pluginsLoaded.value = false
   loadPlugins()
 }, { deep: true })
 
