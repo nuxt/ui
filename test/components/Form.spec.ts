@@ -272,7 +272,40 @@ describe('Form', () => {
       ])
     })
 
-    test('touchedFields works on focus', async () => {
+    test('touchedFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('focus')
+      await flushPromises()
+
+      expect(form.value.touchedFields.has('email')).toBe(true)
+      expect(form.value.touchedFields.has('password')).toBe(false)
+    })
+
+    test('touchedFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('change')
+      await flushPromises()
+
+      expect(form.value.dirtyFields.has('email')).toBe(true)
+      expect(form.value.touchedFields.has('email')).toBe(true)
+
+      expect(form.value.dirtyFields.has('password')).toBe(false)
+      expect(form.value.touchedFields.has('password')).toBe(false)
+    })
+
+    test('blurredFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      emailInput.trigger('blur')
+      await flushPromises()
+
+      expect(form.value.blurredFields.has('email')).toBe(true)
+      expect(form.value.blurredFields.has('password')).toBe(false)
+    })
+
+    test('reactivity: touchedFields works on focus', async () => {
       const emailInput = wrapper.find('#emailInput')
 
       const mockWatchCallback = vi.fn()
@@ -285,7 +318,7 @@ describe('Form', () => {
       expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
     })
 
-    test('touchedFields works on change', async () => {
+    test('reactivity: touchedFields works on change', async () => {
       const emailInput = wrapper.find('#emailInput')
 
       const mockWatchCallback = vi.fn()
@@ -298,7 +331,7 @@ describe('Form', () => {
       expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
     })
 
-    test('blurredFields works', async () => {
+    test('reactivity: blurredFields works', async () => {
       const emailInput = wrapper.find('#emailInput')
 
       const mockWatchCallback = vi.fn()
@@ -311,7 +344,7 @@ describe('Form', () => {
       expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
     })
 
-    test('dirtyFields works', async () => {
+    test('reactivity: dirtyFields works', async () => {
       const emailInput = wrapper.find('#emailInput')
       const mockWatchCallback = vi.fn()
       watch(() => form.value.dirtyFields, mockWatchCallback, { deep: true })
@@ -323,7 +356,7 @@ describe('Form', () => {
       expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
     })
 
-    test('dirty works', async () => {
+    test('reactivity: dirty works', async () => {
       const emailInput = wrapper.find('#emailInput')
       expect(form.value.dirty).toBe(false)
 
