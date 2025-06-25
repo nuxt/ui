@@ -213,6 +213,11 @@ const loadPlugins = async () => {
   plugins.value = pluginList
 }
 
+// Watch plugin props and reload plugins when they change
+watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], () => {
+  loadPlugins()
+}, { immediate: true })
+
 const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value)
 
 watch([options, plugins], () => {
