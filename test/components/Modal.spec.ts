@@ -23,6 +23,7 @@ describe('Modal', () => {
     ['with header slot', { props, slots: { header: () => 'Header slot' } }],
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
+    ['with actions slot', { props, slots: { actions: () => 'Actions slot' } }],
     ['with close slot', { props, slots: { close: () => 'Close slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]

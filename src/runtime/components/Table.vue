@@ -366,6 +366,8 @@ defineExpose({
             </slot>
           </th>
         </tr>
+
+        <tr :class="ui.separator({ class: [props.ui?.separator] })" />
       </thead>
 
       <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
