@@ -16,9 +16,9 @@ export interface Form<S extends FormSchema> {
   dirty: ComputedRef<boolean>
   loading: Ref<boolean>
 
-  dirtyFields: DeepReadonly<Set<keyof FormData<S, false>>>
-  touchedFields: DeepReadonly<Set<keyof FormData<S, false>>>
-  blurredFields: DeepReadonly<Set<keyof FormData<S, false>>>
+  dirtyFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
+  touchedFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
+  blurredFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
 }
 
 export type FormSchema<I extends object = object, O extends object = I> =

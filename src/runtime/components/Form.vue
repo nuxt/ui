@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { DeepReadonly } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
@@ -64,7 +63,7 @@ export interface FormSlots {
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
@@ -155,9 +154,9 @@ provide('form-errors', errors)
 const inputs = ref<{ [P in keyof I]?: { id?: string, pattern?: RegExp } }>({})
 provide(formInputsInjectionKey, inputs as any)
 
-const dirtyFields = new Set<keyof I>()
-const touchedFields = new Set<keyof I>()
-const blurredFields = new Set<keyof I>()
+const dirtyFields: Set<keyof I> = reactive(new Set<keyof I>())
+const touchedFields: Set<keyof I> = reactive(new Set<keyof I>())
+const blurredFields: Set<keyof I> = reactive(new Set<keyof I>())
 
 function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
   return errs.map(err => ({
@@ -302,9 +301,9 @@ defineExpose<Form<S>>({
   loading,
   dirty: computed(() => !!dirtyFields.size),
 
-  dirtyFields: readonly(dirtyFields) as DeepReadonly<Set<keyof I>>,
-  blurredFields: readonly(blurredFields) as DeepReadonly<Set<keyof I>>,
-  touchedFields: readonly(touchedFields) as DeepReadonly<Set<keyof I>>
+  dirtyFields: readonly(dirtyFields),
+  blurredFields: readonly(blurredFields),
+  touchedFields: readonly(touchedFields)
 })
 </script>
 
