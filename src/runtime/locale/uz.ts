@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Buyruq kiriting yoki qidiring...',
       noMatch: 'Mos keluvchi natija topilmadi',
       noData: 'Maʼlumot yoʻq',
-      close: 'Yopish'
+      close: 'Yopish',
+      back: 'Orqaga'
     },
     selectMenu: {
       noMatch: 'Mos keluvchi natija topilmadi',

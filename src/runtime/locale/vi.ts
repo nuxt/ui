@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Nhập lệnh hoặc tìm kiếm...',
       noMatch: 'Không có kết quả phù hợp',
       noData: 'Không có dữ liệu',
-      close: 'Đóng'
+      close: 'Đóng',
+      back: 'Quay lại'
     },
     selectMenu: {
       noMatch: 'Không có kết quả phù hợp',

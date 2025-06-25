@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
       noData: 'Маълумот нест',
-      close: 'Бастан'
+      close: 'Бастан',
+      back: 'Бозгашт'
     },
     selectMenu: {
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',

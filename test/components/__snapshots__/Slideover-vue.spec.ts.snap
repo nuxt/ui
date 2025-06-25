@@ -1,5 +1,30 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Slideover > renders with actions slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="fixed inset-0 bg-elevated/75 data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open">
+  <!--v-if-->
+  <div class="flex items-center gap-1.5 p-4 sm:px-6 min-h-16">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div>Actions slot<button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 absolute top-4 end-4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="flex-1 overflow-y-auto p-4 sm:p-6"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
 exports[`Slideover > renders with body slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->

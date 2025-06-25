@@ -41,6 +41,7 @@ export interface TimelineProps<T extends TimelineItem = TimelineItem> {
    */
   orientation?: Timeline['variants']['orientation']
   defaultValue?: string | number
+  reverse?: boolean
   class?: any
   ui?: Timeline['slots']
 }
@@ -75,16 +76,34 @@ const appConfig = useAppConfig() as Timeline['AppConfig']
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.timeline || {}) })({
   orientation: props.orientation,
   size: props.size,
-  color: props.color
+  color: props.color,
+  reverse: props.reverse
 }))
 
 const currentStepIndex = computed(() => {
   const value = modelValue.value ?? props.defaultValue
 
-  return ((typeof value === 'string')
-    ? props.items.findIndex(item => item.value === value)
-    : value) ?? -1
+  if (typeof value === 'string') {
+    return props.items.findIndex(item => item.value === value) ?? -1
+  }
+
+  if (props.reverse) {
+    return value != null ? props.items.length - 1 - value : -1
+  } else {
+    return value ?? -1
+  }
 })
+
+function getItemState(index: number): 'active' | 'completed' | undefined {
+  if (currentStepIndex.value === -1) return undefined
+  if (index === currentStepIndex.value) return 'active'
+
+  if (props.reverse) {
+    return index > currentStepIndex.value ? 'completed' : undefined
+  } else {
+    return index < currentStepIndex.value ? 'completed' : undefined
+  }
+}
 </script>
 
 <template>
@@ -93,7 +112,7 @@ const currentStepIndex = computed(() => {
       v-for="(item, index) in items"
       :key="item.value ?? index"
       :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
-      :data-state="index < currentStepIndex ? 'completed' : index === currentStepIndex ? 'active' : undefined"
+      :data-state="getItemState(index)"
     >
       <div :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
         <UAvatar :size="size" :icon="item.icon" v-bind="typeof item.avatar === 'object' ? item.avatar : {}" :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" :ui="{ icon: 'text-inherit', fallback: 'text-inherit' }">

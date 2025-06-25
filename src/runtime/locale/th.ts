@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'พิมพ์คำสั่งหรือค้นหา...',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       noData: 'ไม่มีข้อมูล',
-      close: 'ปิด'
+      close: 'ปิด',
+      back: 'ย้อนกลับ'
     },
     selectMenu: {
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',

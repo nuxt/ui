@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Skriv inn en kommando eller søk...',
       noMatch: 'Ingen samsvarende data',
       noData: 'Ingen data',
-      close: 'Lukk'
+      close: 'Lukk',
+      back: 'Tilbake'
     },
     selectMenu: {
       noMatch: 'Ingen samsvarende data',

@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন...',
       noMatch: 'কোন মিল পাওয়া যায়নি',
       noData: 'কোন তথ্য নেই',
-      close: 'বন্ধ করুন'
+      close: 'বন্ধ করুন',
+      back: 'পেছনে'
     },
     selectMenu: {
       noMatch: 'কোন মিল পাওয়া যায়নি',

@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Wpisz polecenie lub wyszukaj...',
       noMatch: 'Brak pasujących danych',
       noData: 'Brak danych',
-      close: 'Zamknij'
+      close: 'Zamknij',
+      back: 'Wstecz'
     },
     selectMenu: {
       noMatch: 'Brak pasujących danych',

@@ -159,7 +159,7 @@ props:
 ---
 ::
 
-### Variant :badge{label="New" class="align-text-top"}
+### Variant
 
 Use the `variant` prop to change the variant of the RadioGroup.
 
@@ -240,7 +240,7 @@ props:
 ---
 ::
 
-### Indicator :badge{label="New" class="align-text-top"}
+### Indicator
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 

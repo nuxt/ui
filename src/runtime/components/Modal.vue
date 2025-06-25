@@ -65,6 +65,7 @@ export interface ModalSlots {
   header(props: { close: () => void }): any
   title(props?: {}): any
   description(props?: {}): any
+  actions(props?: {}): any
   close(props: { close: () => void, ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
   body(props: { close: () => void }): any
   footer(props: { close: () => void }): any
@@ -104,15 +105,15 @@ const contentEvents = computed(() => {
   }
 
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown', 'closeAutoFocus'] as const
-    type EventType = typeof events[number]
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+
     return events.reduce((acc, curr) => {
       acc[curr] = (e: Event) => {
         e.preventDefault()
         emits('close:prevent')
       }
       return acc
-    }, {} as Record<EventType, (e: Event) => void>)
+    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
   }
 
   return defaultEvents
@@ -166,12 +167,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
                 </DialogDescription>
               </div>
 
+              <slot name="actions" />
+
               <DialogClose v-if="props.close || !!slots.close" as-child>
                 <slot name="close" :close="close" :ui="ui">
                   <UButton
                     v-if="props.close"
                     :icon="closeIcon || appConfig.ui.icons.close"
-                    size="md"
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('modal.close')"

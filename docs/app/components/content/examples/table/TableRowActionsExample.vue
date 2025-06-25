@@ -2,12 +2,14 @@
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 import type { Row } from '@tanstack/vue-table'
+import { useClipboard } from '@vueuse/core'
 
 const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 const toast = useToast()
+const { copy } = useClipboard()
 
 type Payment = {
   id: string
@@ -119,7 +121,7 @@ function getRowItems(row: Row<Payment>) {
   }, {
     label: 'Copy payment ID',
     onSelect() {
-      navigator.clipboard.writeText(row.original.id)
+      copy(row.original.id)
 
       toast.add({
         title: 'Payment ID copied to clipboard!',

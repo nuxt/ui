@@ -161,8 +161,10 @@ describe('Table', () => {
     ['with expanded slot', { props, slots: { expanded: () => 'Expanded slot' } }],
     ['with empty slot', { props: { columns }, slots: { empty: () => 'Empty slot' } }],
     ['with loading slot', { props: { columns, loading: true }, slots: { loading: () => 'Loading slot' } }],
-    ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps<typeof data[number]>, slots?: Partial<TableSlots<typeof data[number]>> }) => {
+    ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }],
+    ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
+    ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps, slots?: Partial<TableSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()
   })

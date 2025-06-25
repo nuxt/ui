@@ -29,6 +29,6 @@ const items: TimelineItem[] = [{
     :items="items"
     :ui="{ item: 'even:flex-row-reverse even:-translate-x-[calc(100%-2rem)] even:text-right' }"
     :default-value="2"
-    class="w-full translate-x-[calc(50%-2rem)]"
+    class="translate-x-[calc(50%-1rem)]"
   />
 </template>

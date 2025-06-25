@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Typ een commando of zoek...',
       noMatch: 'Geen overeenkomende gegevens',
       noData: 'Geen gegevens',
-      close: 'Sluiten'
+      close: 'Sluiten',
+      back: 'Terug'
     },
     selectMenu: {
       noMatch: 'Geen overeenkomende gegevens',
