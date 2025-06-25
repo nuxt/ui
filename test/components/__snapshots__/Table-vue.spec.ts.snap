@@ -4,13 +4,14 @@ exports[`Table > renders with as correctly 1`] = `
 "<section class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -57,13 +58,14 @@ exports[`Table > renders with caption correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <caption class="sr-only">Table caption</caption>
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -110,13 +112,14 @@ exports[`Table > renders with caption slot correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <caption class="sr-only">Caption slot</caption>
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -163,13 +166,14 @@ exports[`Table > renders with cell slot correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -216,13 +220,14 @@ exports[`Table > renders with class correctly 1`] = `
 "<div class="overflow-auto absolute">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -269,7 +274,7 @@ exports[`Table > renders with columns correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
@@ -293,6 +298,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <!---->
         </th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -459,13 +465,14 @@ exports[`Table > renders with data correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -512,8 +519,9 @@ exports[`Table > renders with empty correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50"></tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr>
@@ -528,7 +536,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
@@ -552,6 +560,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
           <!---->
         </th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr>
@@ -566,13 +575,14 @@ exports[`Table > renders with expanded slot correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -619,13 +629,14 @@ exports[`Table > renders with header slot correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">ID Header slot</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -672,13 +683,14 @@ exports[`Table > renders with loading animation carousel correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -725,13 +737,14 @@ exports[`Table > renders with loading animation carousel-inverse correctly 1`] =
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-primary after:animate-[carousel-inverse_2s_ease-in-out_infinite] rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel-inverse_2s_ease-in-out_infinite] rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -778,13 +791,14 @@ exports[`Table > renders with loading animation elastic correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-primary after:animate-[elastic_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[elastic_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -831,13 +845,14 @@ exports[`Table > renders with loading animation swing correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-primary after:animate-[swing_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[swing_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -884,13 +899,14 @@ exports[`Table > renders with loading color error correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-error after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-error after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -937,13 +953,14 @@ exports[`Table > renders with loading color info correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-info after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-info after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -990,13 +1007,14 @@ exports[`Table > renders with loading color neutral correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-inverted after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-inverted after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -1043,13 +1061,14 @@ exports[`Table > renders with loading color primary correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -1096,13 +1115,14 @@ exports[`Table > renders with loading color secondary correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-secondary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-secondary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -1149,13 +1169,14 @@ exports[`Table > renders with loading color success correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-success after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-success after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -1202,13 +1223,14 @@ exports[`Table > renders with loading color warning correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-warning after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-warning after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -1255,13 +1277,14 @@ exports[`Table > renders with loading correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -1308,7 +1331,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
+    <thead class="relative after:absolute after:z-[1] after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div class="relative flex items-start flex-row">
@@ -1332,6 +1355,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
           <!---->
         </th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr>
@@ -1346,13 +1370,14 @@ exports[`Table > renders with sticky correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="[&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented) sticky top-0 inset-x-0 bg-default/75 z-[1] backdrop-blur">
+    <thead class="sticky top-0 inset-x-0 bg-default/75 z-[1] backdrop-blur">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -1399,13 +1424,14 @@ exports[`Table > renders with ui correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip table-auto">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
         <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr data-selected="false" data-selectable="false" data-expanded="false" class="data-[selected=true]:bg-elevated/50">
@@ -1452,8 +1478,9 @@ exports[`Table > renders without data correctly 1`] = `
 "<div class="relative overflow-auto">
   <table class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead class="relative [&amp;>tr]:after:absolute [&amp;>tr]:after:inset-x-0 [&amp;>tr]:after:bottom-0 [&amp;>tr]:after:h-px [&amp;>tr]:after:bg-(--ui-border-accented)">
+    <thead class="relative">
       <tr class="data-[selected=true]:bg-elevated/50"></tr>
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
     <tbody class="divide-y divide-default [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-primary">
       <tr>

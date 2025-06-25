@@ -2,6 +2,7 @@
 import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
 import type { TableColumn } from '@nuxt/ui'
+import { useClipboard } from '@vueuse/core'
 
 const UButton = resolveComponent('UButton')
 const UCheckbox = resolveComponent('UCheckbox')
@@ -9,6 +10,7 @@ const UBadge = resolveComponent('UBadge')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 const toast = useToast()
+const { copy } = useClipboard()
 
 type Payment = {
   id: string
@@ -220,7 +222,7 @@ const columns: TableColumn<Payment>[] = [{
     }, {
       label: 'Copy payment ID',
       onSelect() {
-        navigator.clipboard.writeText(row.original.id)
+        copy(row.original.id)
 
         toast.add({
           title: 'Payment ID copied to clipboard!',

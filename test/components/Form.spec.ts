@@ -1,4 +1,4 @@
-import { reactive, ref, nextTick } from 'vue'
+import { reactive, ref, nextTick, watch } from 'vue'
 import { describe, it, expect, test, beforeEach, vi } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import * as z from 'zod'
@@ -303,6 +303,67 @@ describe('Form', () => {
 
       expect(form.value.blurredFields.has('email')).toBe(true)
       expect(form.value.blurredFields.has('password')).toBe(false)
+    })
+
+    test('reactivity: touchedFields works on focus', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      const mockWatchCallback = vi.fn()
+      watch(() => form.value.touchedFields, mockWatchCallback, { deep: true })
+
+      emailInput.trigger('focus')
+      await flushPromises()
+      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
+      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
+    })
+
+    test('reactivity: touchedFields works on change', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      const mockWatchCallback = vi.fn()
+      watch(() => form.value.touchedFields, mockWatchCallback, { deep: true })
+
+      emailInput.trigger('change')
+      await flushPromises()
+      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
+      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
+    })
+
+    test('reactivity: blurredFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+
+      const mockWatchCallback = vi.fn()
+      watch(() => form.value.blurredFields, mockWatchCallback, { deep: true })
+
+      emailInput.trigger('blur')
+      await flushPromises()
+      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
+      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
+    })
+
+    test('reactivity: dirtyFields works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+      const mockWatchCallback = vi.fn()
+      watch(() => form.value.dirtyFields, mockWatchCallback, { deep: true })
+
+      emailInput.trigger('change')
+      await flushPromises()
+      expect(mockWatchCallback).toHaveBeenCalledTimes(1)
+      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
+      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
+    })
+
+    test('reactivity: dirty works', async () => {
+      const emailInput = wrapper.find('#emailInput')
+      expect(form.value.dirty).toBe(false)
+
+      emailInput.trigger('change')
+      await flushPromises()
+
+      expect(form.value.dirty).toBe(true)
     })
   })
 
