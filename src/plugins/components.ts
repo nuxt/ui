@@ -11,7 +11,7 @@ import { defu } from 'defu'
 /**
  * This plugin adds all the Nuxt UI components as auto-imports.
  */
-export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']> }, meta: UnpluginContextMeta) {
+export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']>, extraRuntimeDir?: string }, meta: UnpluginContextMeta) {
   const components = globSync('**/*.vue', { cwd: join(runtimeDir, 'components') })
   const componentNames = new Set(components.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
 
@@ -50,13 +50,15 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
       name: 'nuxt:ui:components',
       enforce: 'pre',
       resolveId(id, importer) {
-        // only apply to runtime nuxt ui components
-        if (!importer || !normalize(importer).includes(runtimeDir)) {
+        if (!importer) {
+          return
+        }
+        if (!normalize(importer).includes(runtimeDir) && (!options.extraRuntimeDir || !normalize(importer).includes(options.extraRuntimeDir))) {
           return
         }
 
-        // only apply to relative imports
-        if (!RELATIVE_IMPORT_RE.test(id)) {
+        // only apply to relative imports or nuxt ui runtime components
+        if (!RELATIVE_IMPORT_RE.test(id) && !id.startsWith('@nuxt/ui/components/')) {
           return
         }
 
