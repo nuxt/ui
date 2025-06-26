@@ -6,6 +6,9 @@ import { name, version } from '../package.json'
 
 export type * from './runtime/types'
 
+type Color = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | (string & {})
+type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {})
+
 export interface ModuleOptions {
   /**
    * Prefix for components
@@ -38,7 +41,7 @@ export interface ModuleOptions {
      * @defaultValue `['primary', 'secondary', 'success', 'info', 'warning', 'error']`
      * @link https://ui.nuxt.com/getting-started/installation/nuxt#themecolors
      */
-    colors?: string[]
+    colors?: Color[]
 
     /**
      * Enable or disable transitions on components
@@ -46,6 +49,20 @@ export interface ModuleOptions {
      * @link https://ui.nuxt.com/getting-started/installation/nuxt#themetransitions
      */
     transitions?: boolean
+
+    defaultVariants?: {
+      /**
+       * The default color variant to use for components
+       * @defaultValue `'primary'`
+       */
+      color?: Color
+
+      /**
+       * The default size variant to use for components
+       * @defaultValue `'md'`
+       */
+      size?: Size
+    }
   }
 }
 
