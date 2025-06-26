@@ -100,7 +100,7 @@
     "dev:build": "nuxt build playground",
     "dev:vue": "pnpm --filter playground-vue dev -- --uiDev",
     "dev:vue:build": "pnpm --filter playground-vue build",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground && nuxt prepare docs && vite build playground-vue",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground && nuxt prepare docs && pnpm dev:vue:build",
     "docs": "nuxt dev docs --uiDev",
     "docs:build": "nuxt build docs",
     "lint": "eslint .",
