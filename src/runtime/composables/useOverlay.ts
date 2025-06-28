@@ -3,8 +3,28 @@ import { reactive, markRaw, shallowReactive } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
 
-// Extracts the first argument of the close event
-type CloseEventArgType<T> = T extends (event: 'close', args_0: infer R) => void ? R : never
+// Extracts the first argument of the close event from emit function overloads
+type CloseEventArgType<T> = T extends {
+  (event: 'close', arg_0: infer Arg, ...args: any[]): void
+
+  // so that we can support up to 16 overloads
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+  (...args: any[]): void
+} ? Arg : never
 
 export type OverlayOptions<OverlayAttrs = Record<string, any>> = {
   defaultOpen?: boolean
