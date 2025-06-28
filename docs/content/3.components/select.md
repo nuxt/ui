@@ -695,6 +695,32 @@ collapse: true
 ---
 ::
 
+### With full item width
+
+You can expand the select to the full width of its items using `ui.content` key.
+
+::tip
+You can also change the content width globally using your app.config.ts:
+```
+export default defineAppConfig({
+  ui: {
+    select: {
+      slots: {
+        content: 'min-w-fit'
+      }
+    }
+  }
+})
+```
+::
+
+::component-example
+---
+name: 'select-item-full-width-example'
+collapse: true
+---
+::
+
 ## API
 
 ### Props
