@@ -177,46 +177,43 @@ const options = computed<EmblaOptionsType>(() => ({
 
 const plugins = ref<EmblaPluginType[]>([])
 
-const loadPlugins = async () => {
-  const pluginList = []
+async function loadPlugins() {
+  const emblaPlugins: EmblaPluginType[] = []
 
   if (props.autoplay) {
     const AutoplayPlugin = await import('embla-carousel-autoplay').then(r => r.default)
-    pluginList.push(AutoplayPlugin(typeof props.autoplay === 'boolean' ? {} : props.autoplay))
+    emblaPlugins.push(AutoplayPlugin(typeof props.autoplay === 'boolean' ? {} : props.autoplay))
   }
 
   if (props.autoScroll) {
     const AutoScrollPlugin = await import('embla-carousel-auto-scroll').then(r => r.default)
-    pluginList.push(AutoScrollPlugin(typeof props.autoScroll === 'boolean' ? {} : props.autoScroll))
+    emblaPlugins.push(AutoScrollPlugin(typeof props.autoScroll === 'boolean' ? {} : props.autoScroll))
   }
 
   if (props.autoHeight) {
     const AutoHeightPlugin = await import('embla-carousel-auto-height').then(r => r.default)
-    pluginList.push(AutoHeightPlugin(typeof props.autoHeight === 'boolean' ? {} : props.autoHeight))
+    emblaPlugins.push(AutoHeightPlugin(typeof props.autoHeight === 'boolean' ? {} : props.autoHeight))
   }
 
   if (props.classNames) {
     const ClassNamesPlugin = await import('embla-carousel-class-names').then(r => r.default)
-    pluginList.push(ClassNamesPlugin(typeof props.classNames === 'boolean' ? {} : props.classNames))
+    emblaPlugins.push(ClassNamesPlugin(typeof props.classNames === 'boolean' ? {} : props.classNames))
   }
 
   if (props.fade) {
     const FadePlugin = await import('embla-carousel-fade').then(r => r.default)
-    pluginList.push(FadePlugin(typeof props.fade === 'boolean' ? {} : props.fade))
+    emblaPlugins.push(FadePlugin(typeof props.fade === 'boolean' ? {} : props.fade))
   }
 
   if (props.wheelGestures) {
     const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures')
-    pluginList.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
+    emblaPlugins.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
   }
 
-  plugins.value = pluginList
+  plugins.value = emblaPlugins
 }
 
-// Watch plugin props and reload plugins when they change
-watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], () => {
-  loadPlugins()
-}, { immediate: true })
+watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true })
 
 const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value)
 
@@ -272,8 +269,6 @@ function isCarouselItem(item: CarouselItem): item is _CarouselItem {
 }
 
 onMounted(() => {
-  loadPlugins()
-
   if (!emblaApi.value) {
     return
   }
