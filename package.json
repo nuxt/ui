@@ -1,7 +1,7 @@
 {
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
-  "version": "3.1.3",
+  "version": "3.2.0",
   "packageManager": "pnpm@10.12.2",
   "repository": {
     "type": "git",
@@ -98,9 +98,9 @@
     "prepack": "pnpm build",
     "dev": "nuxt dev playground --uiDev",
     "dev:build": "nuxt build playground",
-    "dev:vue": "vite playground-vue -- --uiDev",
-    "dev:vue:build": "vite build playground-vue",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground && nuxt prepare docs && vite build playground-vue",
+    "dev:vue": "pnpm --filter playground-vue dev -- --uiDev",
+    "dev:vue:build": "pnpm --filter playground-vue build",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground && nuxt prepare docs && pnpm dev:vue:build",
     "docs": "nuxt dev docs --uiDev",
     "docs:build": "nuxt build docs",
     "lint": "eslint .",

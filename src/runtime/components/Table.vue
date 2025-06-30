@@ -173,10 +173,12 @@ type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T
 type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
 
 export type TableSlots<T extends TableData = TableData> = {
-  expanded: (props: { row: Row<T> }) => any
-  empty: (props?: {}) => any
-  loading: (props?: {}) => any
-  caption: (props?: {}) => any
+  'expanded': (props: { row: Row<T> }) => any
+  'empty': (props?: {}) => any
+  'loading': (props?: {}) => any
+  'caption': (props?: {}) => any
+  'body-top': (props?: {}) => any
+  'body-bottom': (props?: {}) => any
 } & DynamicHeaderSlots<T> & DynamicCellSlots<T>
 
 </script>
@@ -371,6 +373,8 @@ defineExpose({
       </thead>
 
       <tbody :class="ui.tbody({ class: [props.ui?.tbody] })">
+        <slot name="body-top" />
+
         <template v-if="tableApi.getRowModel().rows?.length">
           <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
             <tr
@@ -425,6 +429,8 @@ defineExpose({
             </slot>
           </td>
         </tr>
+
+        <slot name="body-bottom" />
       </tbody>
     </table>
   </Primitive>

@@ -124,7 +124,7 @@ props:
 ---
 ::
 
-### Icon :badge{label="New" class="align-text-top"}
+### Icon
 
 Use the `icon` prop to show an [Icon](/components/icon) inside the Textarea.
 
@@ -157,7 +157,7 @@ props:
 ---
 ::
 
-### Avatar :badge{label="New" class="align-text-top"}
+### Avatar
 
 Use the `avatar` prop to show an [Avatar](/components/avatar) inside the Textarea.
 
@@ -176,7 +176,7 @@ props:
 ---
 ::
 
-### Loading :badge{label="New" class="align-text-top"}
+### Loading
 
 Use the `loading` prop to show a loading icon on the Textarea.
 
@@ -192,7 +192,7 @@ props:
 ---
 ::
 
-### Loading Icon :badge{label="New" class="align-text-top"}
+### Loading Icon
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
