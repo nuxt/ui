@@ -354,6 +354,7 @@ defineExpose({
             v-for="header in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
+            :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :class="ui.th({
               class: [
