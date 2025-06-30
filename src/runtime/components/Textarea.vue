@@ -9,7 +9,7 @@ type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
 type TextareaValue = string | number | null
 
-export interface TextareaProps<T extends AcceptableValue = AcceptableValue> extends UseComponentIconsProps {
+export interface TextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -69,7 +69,7 @@ export interface TextareaSlots {
 
 <script setup lang="ts" generic="T extends TextareaValue">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
-import { Primitive, type AcceptableValue } from 'reka-ui'
+import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentIcons } from '../composables/useComponentIcons'
