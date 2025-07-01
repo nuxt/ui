@@ -202,6 +202,16 @@ name: 'popover-command-palette-example'
 ---
 ::
 
+### With following cursor :badge{label="Soon" class="align-text-top"}
+
+You can make the Popover follow the cursor when hovering over an element using the [`reference`](https://reka-ui.com/docs/components/tooltip#trigger) prop:
+
+::component-example
+---
+name: 'popover-cursor-example'
+---
+::
+
 ### With anchor slot
 
 You can use the `#anchor` slot to position the Popover against a custom element.

@@ -266,8 +266,8 @@ You can group rows based on a given column value and show/hide sub rows via some
 
 #### Important parts:
 
-* Add prop `grouping` to `UTable` component with an array of column ids you want to group by.
-* Add prop `grouping-options` to `UTable`. It must include `getGroupedRowModel`, you can import it from `@tanstack/vue-table` or implement your own.
+* Add `grouping` prop with an array of column ids you want to group by.
+* Add `grouping-options` prop. It must include `getGroupedRowModel`, you can import it from `@tanstack/vue-table` or implement your own.
 * Expand rows via `row.toggleExpanded()` method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.
 * Use `aggregateFn` on column definition to define how to aggregate the rows.
 * `agregatedCell` renderer on column definition only works if there is no `cell` renderer.
@@ -304,24 +304,72 @@ class: '!p-0'
 You can use the `row-selection` prop to control the selection state of the rows (can be binded with `v-model`).
 ::
 
-### With `@select` event
+### With row select event
 
-You can add a `@select` listener to make rows clickable. The handler function receives the `TableRow` instance as the first argument and an optional `Event` as the second argument.
+You can add a `@select` listener to make rows clickable with or without a checkbox column.
 
 ::note
-You can use this to navigate to a page, open a modal or even to select the row manually.
+The handler function receives the `TableRow` instance as the first argument and an optional `Event` as the second argument.
 ::
 
 ::component-example
 ---
 prettier: true
 collapse: true
-name: 'table-row-selection-event-example'
+name: 'table-row-select-event-example'
 highlights:
   - 123
   - 130
 class: '!p-0'
 ---
+::
+
+::tip
+You can use this to navigate to a page, open a modal or even to select the row manually.
+::
+
+### With row context menu event :badge{label="Soon" class="align-text-top"}
+
+You can add a `@contextmenu` listener to make rows right clickable and wrap the Table in a [ContextMenu](/components/context-menu) component to display row actions for example.
+
+::note
+The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-context-menu-event-example'
+highlights:
+  - 130
+  - 170
+class: '!p-0'
+---
+::
+
+### With row hover event :badge{label="Soon" class="align-text-top"}
+
+You can add a `@hover` listener to make rows hoverable and use a [Popover](/components/popover) or a [Tooltip](/components/tooltip) component to display row details for example.
+
+::note
+The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-hover-event-example'
+highlights:
+  - 126
+  - 149
+class: '!p-0'
+---
+::
+
+::note
+This example is similar as the Popover [with following cursor example](/components/popover#with-following-cursor) and uses a [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to prevent the Popover from opening and closing too quickly when moving the cursor from one row to another.
 ::
 
 ### With column sorting

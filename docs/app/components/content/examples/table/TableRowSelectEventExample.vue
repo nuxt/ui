@@ -112,7 +112,7 @@ function onSelect(row: TableRow<Payment>, e?: Event) {
 </script>
 
 <template>
-  <div class=" flex w-full flex-1 gap-1">
+  <div class="flex w-full flex-1 gap-1">
     <div class="flex-1">
       <UTable
         ref="table"
