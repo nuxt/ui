@@ -432,7 +432,7 @@ defineExpose({
           <slot name="content-top" />
 
           <ComboboxInput v-if="!!searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>
-            <UInput autofocus autocomplete="off" v-bind="searchInputProps" :class="ui.input({ class: props.ui?.input })" />
+            <UInput autofocus autocomplete="off" :size="size" v-bind="searchInputProps" :class="ui.input({ class: props.ui?.input })" />
           </ComboboxInput>
 
           <ComboboxEmpty :class="ui.empty({ class: props.ui?.empty })">

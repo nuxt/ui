@@ -1,5 +1,7 @@
-import { h } from 'vue'
+import { h, ref, computed } from 'vue'
 import { describe, it, expect } from 'vitest'
+import { flushPromises } from '@vue/test-utils'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table, { type TableProps, type TableSlots, type TableColumn } from '../../src/runtime/components/Table.vue'
 import ComponentRender from '../component-render'
@@ -161,9 +163,53 @@ describe('Table', () => {
     ['with expanded slot', { props, slots: { expanded: () => 'Expanded slot' } }],
     ['with empty slot', { props: { columns }, slots: { empty: () => 'Empty slot' } }],
     ['with loading slot', { props: { columns, loading: true }, slots: { loading: () => 'Loading slot' } }],
-    ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }]
+    ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }],
+    ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
+    ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps, slots?: Partial<TableSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()
+  })
+
+  it('reactive columns', async () => {
+    const wrapper = await mountSuspended({
+      components: { Table },
+      setup() {
+        const filter = ref<1 | 2>(1)
+
+        const columns = computed<TableColumn<typeof data[number]>[]>(() => [
+          {
+            accessorKey: 'id'
+          },
+          ...(filter.value === 2
+            ? [
+                {
+                  accessorKey: 'amount',
+                  header: () => h('div', { ['data-test-th']: 'amount' }, 'Amount')
+                } satisfies TableColumn<typeof data[number]>
+              ]
+            : [])
+        ])
+
+        function onClick() {
+          filter.value = 2
+        }
+
+        return { data, columns, onClick }
+      },
+      template: `
+            <div>
+              <button @click="onClick">Change filter</button>
+              <Table :data :columns />
+            </div>
+          `
+    })
+
+    expect(wrapper.find('[data-test-th="amount"]').exists()).toBeFalsy()
+
+    wrapper.find('button').trigger('click')
+    await flushPromises()
+
+    expect(wrapper.find('[data-test-th="amount"]').exists()).toBeTruthy()
   })
 })
