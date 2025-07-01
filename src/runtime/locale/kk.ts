@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Команда енгізіңіз немесе іздеңіз...',
       noMatch: 'Сәйкес келетін деректер жоқ',
       noData: 'Деректер жоқ',
-      close: 'Жабу'
+      close: 'Жабу',
+      back: 'Артқа'
     },
     selectMenu: {
       noMatch: 'Сәйкес келетін деректер жоқ',

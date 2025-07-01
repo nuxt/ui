@@ -136,7 +136,7 @@ props:
 ---
 ::
 
-### Tooltip :badge{label="New" class="align-text-top"}
+### Tooltip
 
 Use the `tooltip` prop to display a [Tooltip](/components/tooltip) around the Slider thumbs with the current value. You can set it to `true` for default behavior or pass an object to customize it with any property from the [Tooltip](/components/tooltip#props) component.
 

@@ -145,5 +145,18 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         class="w-48"
       />
     </div>
+    <div class="flex items-center gap-4">
+      <UInputMenu
+        v-for="variant in variants"
+        :key="variant"
+        :items="items"
+        :model-value="[fruits[0]!]"
+        multiple
+        icon="i-lucide-search"
+        placeholder="Search..."
+        :variant="variant"
+        class="w-48"
+      />
+    </div>
   </div>
 </template>

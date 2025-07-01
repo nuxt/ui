@@ -25,7 +25,8 @@ export default defineLocale<Messages>({
       placeholder: 'הקלד פקודה...',
       noMatch: 'לא נמצאה התאמה',
       noData: 'אין נתונים זמינים',
-      close: 'סגור'
+      close: 'סגור',
+      back: 'חזור'
     },
     selectMenu: {
       noMatch: 'לא נמצאה התאמה',

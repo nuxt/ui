@@ -25,7 +25,8 @@ export default defineLocale<Messages>({
       placeholder: 'یک دستور وارد کنید یا جستجو کنید...',
       noMatch: 'داده‌ای یافت نشد',
       noData: 'داده‌ای موجود نیست',
-      close: 'بستن'
+      close: 'بستن',
+      back: 'بازگشت'
     },
     selectMenu: {
       noMatch: 'داده‌ای یافت نشد',

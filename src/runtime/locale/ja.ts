@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'コマンドを入力するか検索...',
       noMatch: '一致するデータがありません',
       noData: 'データがありません',
-      close: '閉じる'
+      close: '閉じる',
+      back: '戻る'
     },
     selectMenu: {
       noMatch: '一致するデータがありません',

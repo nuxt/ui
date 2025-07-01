@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Əmr daxil edin və ya axtarın...',
       noMatch: 'Uyğun məlumat tapılmadı',
       noData: 'Məlumat yoxdur',
-      close: 'Bağla'
+      close: 'Bağla',
+      back: 'Geri'
     },
     selectMenu: {
       noMatch: 'Uyğun məlumat tapılmadı',

@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Vpiši ukaz ali išči...',
       noMatch: 'Ni ujemanj',
       noData: 'Ni podatkov',
-      close: 'Zapri'
+      close: 'Zapri',
+      back: 'Nazaj'
     },
     selectMenu: {
       noMatch: 'Ni ujemanj',

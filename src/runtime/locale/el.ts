@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
       noData: 'Δεν υπάρχουν δεδομένα',
-      close: 'Κλείσιμο'
+      close: 'Κλείσιμο',
+      back: 'Πίσω'
     },
     selectMenu: {
       noMatch: 'Δεν βρέθηκαν δεδομένα',

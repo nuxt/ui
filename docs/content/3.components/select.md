@@ -709,6 +709,14 @@ collapse: true
 
 :component-emits
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `triggerRef`{lang="ts-type"} | `Ref<InstanceType<typeof SelectTrigger> \| null>`{lang="ts-type"} |
+
 ## Theme
 
 :component-theme

@@ -24,7 +24,8 @@ export default defineLocale<Messages>({
       placeholder: 'Bir komut yazın veya arama yapın...',
       noMatch: 'Eşleşen veri yok',
       noData: 'Veri yok',
-      close: 'Kapat'
+      close: 'Kapat',
+      back: 'Geri'
     },
     selectMenu: {
       noMatch: 'Eşleşen veri yok',

@@ -33,7 +33,7 @@ export default defineNuxtModule((_, nuxt) => {
       }
 
       const name = template.name.toLowerCase().replace(/\s/g, '-')
-      const filename = join(process.cwd(), 'docs/public/assets/showcase', `${name}.png`)
+      const filename = join(nuxt.options.rootDir, 'public/assets/showcase', `${name}.png`)
 
       if (existsSync(filename)) {
         continue

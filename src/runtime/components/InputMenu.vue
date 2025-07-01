@@ -379,6 +379,7 @@ function onSelect(e: Event, item: InputMenuItem) {
 function isInputItem(item: InputMenuItem): item is _InputMenuItem {
   return typeof item === 'object' && item !== null
 }
+
 defineExpose({
   inputRef
 })
