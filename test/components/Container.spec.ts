@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Container, { type ContainerProps, type ContainerSlots } from '../../src/runtime/components/Container.vue'
+import Container from '../../src/runtime/components/Container.vue'
+import type { ContainerProps, ContainerSlots } from '../../src/runtime/components/Container.vue'
 import ComponentRender from '../component-render'
 
 describe('Container', () => {

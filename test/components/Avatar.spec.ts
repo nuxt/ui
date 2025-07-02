@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Avatar, { type AvatarProps, type AvatarSlots } from '../../src/runtime/components/Avatar.vue'
+import Avatar from '../../src/runtime/components/Avatar.vue'
+import type { AvatarProps, AvatarSlots } from '../../src/runtime/components/Avatar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar'
 

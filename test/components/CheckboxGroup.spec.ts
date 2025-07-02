@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import CheckboxGroup, { type CheckboxGroupProps, type CheckboxGroupSlots } from '../../src/runtime/components/CheckboxGroup.vue'
+import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
+import type { CheckboxGroupProps, CheckboxGroupSlots } from '../../src/runtime/components/CheckboxGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/checkbox-group'
 import themeCheckbox from '#build/ui/checkbox'

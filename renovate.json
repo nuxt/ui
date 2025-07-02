@@ -23,6 +23,12 @@
       "vaul-vue"
     ]
   }, {
+    "groupName": "vue-tsc",
+    "matchPackageNames": [
+      "vue-tsc",
+      "vue-component-type-helpers"
+    ]
+  }, {
     "matchDepTypes": ["peerDependencies"],
     "enabled": false
   }, {

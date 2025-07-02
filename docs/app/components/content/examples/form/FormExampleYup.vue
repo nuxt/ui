@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { object, string, type InferType } from 'yup'
+import { object, string } from 'yup'
+import type { InferType } from 'yup'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = object({

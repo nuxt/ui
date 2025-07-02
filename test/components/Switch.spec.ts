@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import Switch, { type SwitchProps, type SwitchSlots } from '../../src/runtime/components/Switch.vue'
+import Switch from '../../src/runtime/components/Switch.vue'
+import type { SwitchProps, SwitchSlots } from '../../src/runtime/components/Switch.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/switch'
 import { flushPromises, mount } from '@vue/test-utils'

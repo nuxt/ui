@@ -147,7 +147,8 @@ const test = ({ name, prose, content }) => {
       ? undefined
       : `
 import { describe, it, expect } from 'vitest'
-import ${upperName}, { type ${upperName}Props, type ${upperName}Slots } from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
+import ${upperName} from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
+import type { ${upperName}Props, ${upperName}Slots } from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
 import ComponentRender from '../${content ? '../' : ''}component-render'
 
 describe('${upperName}', () => {
