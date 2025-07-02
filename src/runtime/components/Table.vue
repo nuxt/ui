@@ -172,6 +172,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
 }
 
 type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
+type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => any>
 type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
 
 export type TableSlots<T extends TableData = TableData> = {
@@ -181,7 +182,7 @@ export type TableSlots<T extends TableData = TableData> = {
   'caption': (props?: {}) => any
   'body-top': (props?: {}) => any
   'body-bottom': (props?: {}) => any
-} & DynamicHeaderSlots<T> & DynamicCellSlots<T>
+} & DynamicHeaderSlots<T> & DynamicFooterSlots<T> & DynamicCellSlots<T>
 
 </script>
 
