@@ -30,8 +30,8 @@ type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
   [K in keyof T['slots']]?: ClassValue
 }>
 
-type GetComponentAppConfig<A, U extends string, K extends string> =
-  A extends Record<U, Record<K, any>> ? A[U][K] : {}
+type GetComponentAppConfig<A, U extends string, K extends string>
+  = A extends Record<U, Record<K, any>> ? A[U][K] : {}
 
 type ComponentAppConfig<
   T,

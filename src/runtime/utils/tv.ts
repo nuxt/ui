@@ -1,4 +1,5 @@
-import { createTV, type defaultConfig } from 'tailwind-variants'
+import { createTV } from 'tailwind-variants'
+import type { defaultConfig } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import appConfig from '#build/app.config'
 

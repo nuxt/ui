@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { object, string, nonempty, refine, type Infer } from 'superstruct'
+import { object, string, nonempty, refine } from 'superstruct'
+import type { Infer } from 'superstruct'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = object({

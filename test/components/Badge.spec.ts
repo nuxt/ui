@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Badge, { type BadgeProps, type BadgeSlots } from '../../src/runtime/components/Badge.vue'
+import Badge from '../../src/runtime/components/Badge.vue'
+import type { BadgeProps, BadgeSlots } from '../../src/runtime/components/Badge.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/badge'
 

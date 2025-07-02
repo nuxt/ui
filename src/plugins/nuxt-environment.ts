@@ -3,7 +3,8 @@ import { normalize } from 'pathe'
 import { resolvePathSync } from 'mlly'
 import MagicString from 'magic-string'
 
-import { runtimeDir, type NuxtUIOptions } from '../unplugin'
+import { runtimeDir } from '../unplugin'
+import type { NuxtUIOptions } from '../unplugin'
 
 /**
  * This plugin normalises Nuxt environment (#imports) and `import.meta.client` within the Nuxt UI components.

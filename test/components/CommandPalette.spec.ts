@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import CommandPalette, { type CommandPaletteProps, type CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
+import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
+import type { CommandPaletteProps, CommandPaletteSlots } from '../../src/runtime/components/CommandPalette.vue'
 import ComponentRender from '../component-render'
 
 describe('CommandPalette', () => {

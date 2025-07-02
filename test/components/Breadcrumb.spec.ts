@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Breadcrumb, { type BreadcrumbProps, type BreadcrumbSlots } from '../../src/runtime/components/Breadcrumb.vue'
+import Breadcrumb from '../../src/runtime/components/Breadcrumb.vue'
+import type { BreadcrumbProps, BreadcrumbSlots } from '../../src/runtime/components/Breadcrumb.vue'
 import ComponentRender from '../component-render'
 
 describe('Breadcrumb', () => {

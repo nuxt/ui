@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Slideover, { type SlideoverProps, type SlideoverSlots } from '../../src/runtime/components/Slideover.vue'
+import Slideover from '../../src/runtime/components/Slideover.vue'
+import type { SlideoverProps, SlideoverSlots } from '../../src/runtime/components/Slideover.vue'
 import ComponentRender from '../component-render'
 
 describe('Slideover', () => {
