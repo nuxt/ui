@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { object, string, nonempty, type Infer } from 'superstruct'
+import { object, string, nonempty } from 'superstruct'
+import type { Infer } from 'superstruct'
 import type { FormSubmitEvent } from '#ui/types'
 
 const schema = object({
