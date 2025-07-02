@@ -88,7 +88,6 @@ export interface LinkSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
@@ -115,8 +114,8 @@ const appConfig = useAppConfig() as Link['AppConfig']
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
 
 const ui = computed(() => {
-  const appConfigLink = appConfig.ui?.link || {};
-  const appConfigVariants = appConfigLink.variants?.active || {};
+  const appConfigLink = appConfig.ui?.link || {}
+  const appConfigVariants = appConfigLink.variants?.active || {}
   
   return tv({
     extend: tv(theme),
@@ -134,8 +133,8 @@ const ui = computed(() => {
         ].filter(Boolean).join(' ')
       }
     }
-  });
-});
+  })
+})
 
 const to = computed(() => props.to ?? props.href)
 
