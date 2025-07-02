@@ -114,17 +114,28 @@ const appConfig = useAppConfig() as Link['AppConfig']
 
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
 
-const ui = computed(() => tv({
-  extend: tv(theme),
-  ...defu({
+const ui = computed(() => {
+  const appConfigLink = appConfig.ui?.link || {};
+  const appConfigVariants = appConfigLink.variants?.active || {};
+  
+  return tv({
+    extend: tv(theme),
+    ...appConfigLink,
     variants: {
+      ...appConfigLink.variants,
       active: {
-        true: props.activeClass,
-        false: props.inactiveClass
+        true: [
+          appConfigVariants.true || '',
+          props.activeClass || ''
+        ].filter(Boolean).join(' '),
+        false: [
+          appConfigVariants.false || '',
+          props.inactiveClass || ''
+        ].filter(Boolean).join(' ')
       }
     }
-  }, appConfig.ui?.link || {})
-}))
+  });
+});
 
 const to = computed(() => props.to ?? props.href)
 
