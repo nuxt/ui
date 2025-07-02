@@ -162,7 +162,7 @@ props:
 
 ### Sticky
 
-Use the `sticky` prop to make the header sticky.
+Use the `sticky` prop to make the header or footer sticky.
 
 ::component-code
 ---
@@ -173,6 +173,10 @@ ignore:
   - class
 external:
   - data
+items:
+  sticky:
+    - true
+    - false
 props:
   sticky: true
   data:
@@ -371,6 +375,22 @@ class: '!p-0'
 
 ::note
 This example is similar as the Popover [with following cursor example](/components/popover#with-following-cursor) and uses a [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to prevent the Popover from opening and closing too quickly when moving the cursor from one row to another.
+::
+
+### With column footer :badge{label="Soon" class="align-text-top"}
+
+You can add a `footer` property to the column definition to render a footer for the column.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-footer-example'
+highlights:
+  - 94
+  - 108
+class: '!p-0'
+---
 ::
 
 ### With column sorting
