@@ -208,8 +208,7 @@
     "debug": "4.3.7",
     "rollup": "4.34.9",
     "unimport": "4.1.1",
-    "unplugin": "^2.3.5",
-    "nuxt-component-meta": "https://pkg.pr.new/nuxt-component-meta@a844f93"
+    "unplugin": "^2.3.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
