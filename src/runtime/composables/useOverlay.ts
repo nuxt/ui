@@ -3,11 +3,17 @@ import { reactive, markRaw, shallowReactive } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
 
-// Extracts the first argument of the close event from emit function overloads
+/**
+ * This is a workaround for a design limitation in TypeScript.
+ *
+ * Conditional types only match the last function overload. Not a union of all possible
+ * parameter types. This workaround forces TypeScript to properly extract the 'close'
+ * event argument type from component emit with multiple event signatures.
+ *
+ * @see https://github.com/microsoft/TypeScript/issues/32164
+ */
 type CloseEventArgType<T> = T extends {
   (event: 'close', arg_0: infer Arg, ...args: any[]): void
-
-  // so that we can support up to 16 overloads
   (...args: any[]): void
   (...args: any[]): void
   (...args: any[]): void
@@ -25,7 +31,6 @@ type CloseEventArgType<T> = T extends {
   (...args: any[]): void
   (...args: any[]): void
 } ? Arg : never
-
 export type OverlayOptions<OverlayAttrs = Record<string, any>> = {
   defaultOpen?: boolean
   props?: OverlayAttrs
