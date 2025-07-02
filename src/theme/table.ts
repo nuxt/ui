@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     caption: 'sr-only',
     thead: 'relative',
     tbody: 'divide-y divide-default [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:focus-visible:outline-primary',
-    tfoot: 'relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:top-0 [&>tr]:after:h-px [&>tr]:after:bg-(--ui-border-accented) [&>tr>th]:empty:p-0 [&>tr>th]:empty:border-none',
+    tfoot: 'relative',
     tr: 'data-[selected=true]:bg-elevated/50',
     th: 'px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pe-0',
     td: 'p-4 text-sm text-muted whitespace-nowrap [&:has([role=checkbox])]:pe-0',

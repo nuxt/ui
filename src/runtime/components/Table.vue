@@ -217,13 +217,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {})
 }))
 
 const hasFooter = computed(() => {
-  const queue: TableColumn<T>[] = [...columns.value]
-  while (queue.length) {
-    const column = queue.shift()!
-    if ('footer' in column) return true
-    if ('columns' in column) queue.push(...column.columns!)
+  function hasFooterRecursive(columns: TableColumn<T>[]): boolean {
+    for (const column of columns) {
+      if ('footer' in column) {
+        return true
+      }
+      if ('columns' in column && hasFooterRecursive(column.columns as TableColumn<T>[])) {
+        return true
+      }
+    }
+    return false
   }
-  return false
+
+  return hasFooterRecursive(columns.value)
 })
 
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
@@ -473,6 +479,8 @@ defineExpose({
       </tbody>
 
       <tfoot v-if="hasFooter" :class="ui.tfoot({ class: [props.ui?.tfoot] })">
+        <tr :class="ui.separator({ class: [props.ui?.separator] })" />
+
         <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="header in footerGroup.headers"

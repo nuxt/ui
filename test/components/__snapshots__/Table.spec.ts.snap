@@ -571,7 +571,32 @@ exports[`Table > renders with columns correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
-    <!--v-if-->
+    <tfoot class="relative">
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr class="data-[selected=true]:bg-elevated/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <div class="text-right font-medium">Total: €2,990.00</div>
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+      </tr>
+    </tfoot>
   </table>
 </div>"
 `;
@@ -684,7 +709,32 @@ exports[`Table > renders with empty slot correctly 1`] = `
         <td colspan="7" class="py-6 text-center text-sm text-muted">Empty slot</td>
       </tr>
     </tbody>
-    <!--v-if-->
+    <tfoot class="relative">
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr class="data-[selected=true]:bg-elevated/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <div class="text-right font-medium">Total: €0.00</div>
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+      </tr>
+    </tfoot>
   </table>
 </div>"
 `;
@@ -1494,7 +1544,32 @@ exports[`Table > renders with loading slot correctly 1`] = `
         <td colspan="7" class="py-6 text-center">Loading slot</td>
       </tr>
     </tbody>
-    <!--v-if-->
+    <tfoot class="relative">
+      <tr class="absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+      <tr class="data-[selected=true]:bg-elevated/50">
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <div class="text-right font-medium">Total: €0.00</div>
+        </th>
+        <th data-pinned="false" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">
+          <!---->
+        </th>
+      </tr>
+    </tfoot>
   </table>
 </div>"
 `;

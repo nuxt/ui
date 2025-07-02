@@ -4,7 +4,7 @@ import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
-import type { TableProps, TableSlots, TableColumn } from '../../src/runtime/components/Table.vue'
+import type { TableProps, TableSlots, TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/table'
 
@@ -99,6 +99,16 @@ describe('Table', () => {
   }, {
     accessorKey: 'amount',
     header: () => h('div', { class: 'text-right' }, 'Amount'),
+    footer: ({ column }) => {
+      const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0)
+
+      const formatted = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'EUR'
+      }).format(total)
+
+      return h('div', { class: 'text-right font-medium' }, `Total: ${formatted}`)
+    },
     cell: ({ row }) => {
       const amount = Number.parseFloat(row.getValue('amount'))
 
