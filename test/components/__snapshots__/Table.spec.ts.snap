@@ -105,6 +105,7 @@ exports[`Table > renders with body-bottom slot correctly 1`] = `
       </tr>
       <!--v-if-->Body bottom slot
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -158,6 +159,7 @@ exports[`Table > renders with body-top slot correctly 1`] = `
       </tr>
       <!--v-if-->
     </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;

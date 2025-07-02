@@ -24,11 +24,13 @@ export default (options: Required<ModuleOptions>) => ({
     },
     sticky: {
       true: {
+        thead: 'sticky top-0 inset-x-0 bg-default/75 z-[1] backdrop-blur',
+        tfoot: 'sticky bottom-0 inset-x-0 bg-default/75 z-[1] backdrop-blur'
+      },
+      header: {
         thead: 'sticky top-0 inset-x-0 bg-default/75 z-[1] backdrop-blur'
-      }
-    },
-    stickyFooter: {
-      true: {
+      },
+      footer: {
         tfoot: 'sticky bottom-0 inset-x-0 bg-default/75 z-[1] backdrop-blur'
       }
     },

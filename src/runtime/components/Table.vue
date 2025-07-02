@@ -210,8 +210,7 @@ const columns = computed<TableColumn<T>[]>(() => props.columns ?? Object.keys(da
 const meta = computed(() => props.meta ?? {})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })({
-  sticky: props.sticky === true || props.sticky === 'header',
-  stickyFooter: props.sticky === true || props.sticky === 'footer',
+  sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
   loadingAnimation: props.loadingAnimation
