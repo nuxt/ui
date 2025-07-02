@@ -116,7 +116,7 @@ const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disable
 const ui = computed(() => {
   const appConfigLink = appConfig.ui?.link || {}
   const appConfigVariants = appConfigLink.variants?.active || {}
-  
+
   return tv({
     extend: tv(theme),
     ...appConfigLink,
