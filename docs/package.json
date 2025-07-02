@@ -14,7 +14,7 @@
     "@nuxt/ui-pro": "^1.8.0",
     "@nuxtjs/plausible": "^1.2.0",
     "@octokit/rest": "^21.1.1",
-    "@vueuse/nuxt": "^13.4.0",
+    "@vueuse/nuxt": "^13.5.0",
     "date-fns": "^4.1.0",
     "joi": "^17.13.3",
     "nuxt": "^3.17.6",
