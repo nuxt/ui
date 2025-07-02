@@ -6,7 +6,7 @@ import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
 /**
  * This is a workaround for a design limitation in TypeScript.
  *
- * Conditional types only match the last function overload. Not a union of all possible
+ * Conditional types only match the last function overload, not a union of all possible
  * parameter types. This workaround forces TypeScript to properly extract the 'close'
  * event argument type from component emit with multiple event signatures.
  *
