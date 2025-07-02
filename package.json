@@ -152,7 +152,7 @@
     "unplugin-auto-import": "^19.3.0",
     "unplugin-vue-components": "^28.8.0",
     "vaul-vue": "0.4.1",
-    "vue-component-type-helpers": "^2.2.10"
+    "vue-component-type-helpers": "^3.0.0"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.4.1",
