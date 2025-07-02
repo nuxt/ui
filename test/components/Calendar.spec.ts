@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, afterAll, test } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import Calendar, { type CalendarProps, type CalendarSlots } from '../../src/runtime/components/Calendar.vue'
+import Calendar from '../../src/runtime/components/Calendar.vue'
+import type { CalendarProps, CalendarSlots } from '../../src/runtime/components/Calendar.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/calendar'
 import { CalendarDate } from '@internationalized/date'

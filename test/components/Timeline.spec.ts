@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Timeline, { type TimelineProps, type TimelineSlots } from '../../src/runtime/components/Timeline.vue'
+import Timeline from '../../src/runtime/components/Timeline.vue'
+import type { TimelineProps, TimelineSlots } from '../../src/runtime/components/Timeline.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/timeline'
 

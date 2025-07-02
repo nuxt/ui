@@ -1,4 +1,5 @@
-import { computed, toValue, type MaybeRefOrGetter } from 'vue'
+import { computed, toValue } from 'vue'
+import type { MaybeRefOrGetter } from 'vue'
 import { useAppConfig } from '#imports'
 import type { AvatarProps } from '../types'
 

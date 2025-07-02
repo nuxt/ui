@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import theme from '#build/ui/input'
-import InputTags, { type InputTagsProps, type InputTagsSlots } from '../../src/runtime/components/InputTags.vue'
+import InputTags from '../../src/runtime/components/InputTags.vue'
+import type { InputTagsProps, InputTagsSlots } from '../../src/runtime/components/InputTags.vue'
 import ComponentRender from '../component-render'
 
 describe('InputTags', () => {

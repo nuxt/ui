@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Pagination, { type PaginationProps, type PaginationSlots } from '../../src/runtime/components/Pagination.vue'
+import Pagination from '../../src/runtime/components/Pagination.vue'
+import type { PaginationProps, PaginationSlots } from '../../src/runtime/components/Pagination.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
 

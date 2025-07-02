@@ -42,7 +42,8 @@ export interface ButtonSlots {
 </script>
 
 <script setup lang="ts">
-import { type Ref, computed, ref, inject } from 'vue'
+import { computed, ref, inject } from 'vue'
+import type { Ref } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
