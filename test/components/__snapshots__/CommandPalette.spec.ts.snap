@@ -32,6 +32,7 @@ exports[`CommandPalette > renders with as correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </section>"
 `;
@@ -68,6 +69,7 @@ exports[`CommandPalette > renders with class correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -105,6 +107,7 @@ exports[`CommandPalette > renders with close correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -139,6 +142,7 @@ exports[`CommandPalette > renders with close slot correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -176,6 +180,7 @@ exports[`CommandPalette > renders with closeIcon correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -210,6 +215,7 @@ exports[`CommandPalette > renders with custom slot correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -246,6 +252,7 @@ exports[`CommandPalette > renders with defaultValue correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -282,6 +289,7 @@ exports[`CommandPalette > renders with disabled correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -318,6 +326,44 @@ exports[`CommandPalette > renders with empty slot correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
+  <!---->
+</div>"
+`;
+
+exports[`CommandPalette > renders with footer slot correctly 1`] = `
+"<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+    <!--v-if-->
+  </div>
+  <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
+    <div role="presentation" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1 focus:outline-none">
+      <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" class="p-1 isolate">
+        <!--v-if--><button type="button" data-reka-collection-item="" id="reka-listbox-item-v-0-0-1" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-highlighted before:bg-elevated" data-highlighted=""><span class="iconify i-lucide:file-plus shrink-0 size-5 text-default" aria-hidden="true"></span><span class="truncate space-x-1 rtl:space-x-reverse text-dimmed"><!--v-if--><span class="text-highlighted [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">Add new file</span><span class="text-dimmed [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">Create a new file in the current directory or workspace.</span></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">N</kbd></span>
+          <!----></span>
+        </button><button type="button" data-reka-collection-item="" id="reka-listbox-item-v-0-0-2" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors"><span class="iconify i-lucide:folder-plus shrink-0 size-5 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors" aria-hidden="true"></span><span class="truncate space-x-1 rtl:space-x-reverse text-dimmed"><!--v-if--><span class="text-highlighted [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">Add new folder</span><span class="text-dimmed [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">Create a new folder in the current directory or workspace.</span></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">F</kbd></span>
+          <!----></span>
+        </button><button type="button" disabled="" data-reka-collection-item="" id="reka-listbox-item-v-0-0-3" role="option" tabindex="-1" aria-selected="false" data-disabled="" data-state="unchecked" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors"><span class="iconify i-lucide:hash shrink-0 size-5 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors" aria-hidden="true"></span><span class="truncate space-x-1 rtl:space-x-reverse text-dimmed"><!--v-if--><span class="text-highlighted [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">Add hashtag</span><span class="text-dimmed [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">Add a hashtag to the current item.</span></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">H</kbd></span>
+          <!----></span>
+        </button><button type="button" data-reka-collection-item="" id="reka-listbox-item-v-0-0-4" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors"><span class="iconify i-lucide:tag shrink-0 size-5 text-dimmed group-data-highlighted:not-group-data-disabled:text-default transition-colors" aria-hidden="true"></span><span class="truncate space-x-1 rtl:space-x-reverse text-dimmed"><!--v-if--><span class="text-highlighted [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">Add label</span><span class="text-dimmed [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">Add a label to the current item.</span></span><span class="ms-auto inline-flex gap-1.5 items-center"><span class="hidden lg:inline-flex items-center shrink-0 gap-0.5"><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">Ctrl</kbd><kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">L</kbd></span>
+          <!----></span>
+        </button>
+      </div>
+      <div role="group" aria-labelledby="reka-listbox-group-v-0-0-5" class="p-1 isolate">
+        <div id="reka-listbox-group-v-0-0-5" class="p-1.5 text-xs font-semibold text-highlighted">Labels</div><button type="button" data-reka-collection-item="" id="reka-listbox-item-v-0-0-6" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors">
+          <div class="relative inline-flex items-center justify-center shrink-0 size-5"><span class="rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap bg-error h-[8px] min-w-[8px] text-[8px] top-0 right-0"></span></div><span class="truncate space-x-1 rtl:space-x-reverse text-dimmed"><!--v-if--><span class="text-highlighted [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">bug</span><span class="text-dimmed [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary"></span></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button><button type="button" data-reka-collection-item="" id="reka-listbox-item-v-0-0-7" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors">
+          <div class="relative inline-flex items-center justify-center shrink-0 size-5"><span class="rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap bg-success h-[8px] min-w-[8px] text-[8px] top-0 right-0"></span></div><span class="truncate space-x-1 rtl:space-x-reverse text-dimmed"><!--v-if--><span class="text-highlighted [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">feature</span><span class="text-dimmed [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary"></span></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button><button type="button" data-reka-collection-item="" id="reka-listbox-item-v-0-0-8" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors">
+          <div class="relative inline-flex items-center justify-center shrink-0 size-5"><span class="rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap bg-info h-[8px] min-w-[8px] text-[8px] top-0 right-0"></span></div><span class="truncate space-x-1 rtl:space-x-reverse text-dimmed"><!--v-if--><span class="text-highlighted [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">enhancement</span><span class="text-dimmed [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary"></span></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span>
+        </button>
+      </div>
+      <div role="group" aria-labelledby="reka-listbox-group-v-0-0-9" class="p-1 isolate">
+        <div id="reka-listbox-group-v-0-0-9" class="p-1.5 text-xs font-semibold text-highlighted">Users</div><a href="https://github.com/benjamincanac" role="option" tabindex="-1" rel="noopener noreferrer" target="_blank" data-reka-collection-item="" id="reka-listbox-item-v-0-0-10" aria-selected="false" data-state="unchecked" class="group relative w-full flex items-center gap-1.5 p-1.5 text-sm select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50 transition-colors before:transition-colors"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-5 text-[10px] shrink-0"><img role="img" src="https://github.com/benjamincanac.png" width="20" height="20" class="h-full w-full rounded-[inherit] object-cover"></span><span class="truncate space-x-1 rtl:space-x-reverse text-dimmed"><!--v-if--><span class="text-highlighted [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary">benjamincanac</span><span class="text-dimmed [&amp;>mark]:text-inverted [&amp;>mark]:bg-primary"></span></span><span class="ms-auto inline-flex gap-1.5 items-center"><!--v-if--><!----></span></a>
+      </div>
+    </div>
+  </div>
+  <div class="p-1">Footer slot</div>
   <!---->
 </div>"
 `;
@@ -354,6 +400,7 @@ exports[`CommandPalette > renders with groups correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -390,6 +437,7 @@ exports[`CommandPalette > renders with icon correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -414,6 +462,7 @@ exports[`CommandPalette > renders with item slot correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -450,6 +499,7 @@ exports[`CommandPalette > renders with item-label slot correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -480,6 +530,7 @@ exports[`CommandPalette > renders with item-leading slot correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -510,6 +561,7 @@ exports[`CommandPalette > renders with item-trailing slot correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -551,6 +603,7 @@ exports[`CommandPalette > renders with labelKey correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -587,6 +640,7 @@ exports[`CommandPalette > renders with loading correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -623,6 +677,7 @@ exports[`CommandPalette > renders with loadingIcon correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -659,6 +714,7 @@ exports[`CommandPalette > renders with modelValue correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -695,6 +751,7 @@ exports[`CommandPalette > renders with placeholder correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -731,6 +788,7 @@ exports[`CommandPalette > renders with selectedIcon correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -767,6 +825,7 @@ exports[`CommandPalette > renders with ui correctly 1`] = `
       </div>
     </div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;
@@ -779,6 +838,7 @@ exports[`CommandPalette > renders without data correctly 1`] = `
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div class="py-6 text-center text-sm text-muted">No data</div>
   </div>
+  <!--v-if-->
   <!---->
 </div>"
 `;

@@ -907,6 +907,20 @@ props:
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
+### With footer slot
+
+Use the `#footer` slot to add custom content at the bottom of the CommandPalette, such as keyboard shortcuts help or additional actions.
+
+::component-example
+---
+collapse: true
+name: 'command-palette-footer-example'
+class: '!p-0'
+props:
+  autofocus: false
+---
+::
+
 ## API
 
 ### Props
