@@ -914,7 +914,7 @@ Use the `#footer` slot to add custom content at the bottom of the CommandPalette
 ::component-example
 ---
 collapse: true
-name: 'command-palette-footer-example'
+name: 'command-palette-footer-slot-example'
 class: '!p-0'
 props:
   autofocus: false
