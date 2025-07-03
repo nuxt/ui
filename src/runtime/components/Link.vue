@@ -103,7 +103,8 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<LinkProps>(), {
   as: 'button',
   type: 'button',
-  ariaCurrentValue: 'page'
+  ariaCurrentValue: 'page',
+  active: undefined
 })
 defineSlots<LinkSlots>()
 
