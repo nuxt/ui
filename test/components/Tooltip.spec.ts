@@ -1,7 +1,8 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
 import { TooltipProvider } from 'reka-ui'
-import Tooltip, { type TooltipProps, type TooltipSlots } from '../../src/runtime/components/Tooltip.vue'
+import Tooltip from '../../src/runtime/components/Tooltip.vue'
+import type { TooltipProps, TooltipSlots } from '../../src/runtime/components/Tooltip.vue'
 import ComponentRender from '../component-render'
 
 const TooltipWrapper = defineComponent({

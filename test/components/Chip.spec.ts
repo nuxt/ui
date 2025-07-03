@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Chip, { type ChipProps, type ChipSlots } from '../../src/runtime/components/Chip.vue'
+import Chip from '../../src/runtime/components/Chip.vue'
+import type { ChipProps, ChipSlots } from '../../src/runtime/components/Chip.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/chip'
 

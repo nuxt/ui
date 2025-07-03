@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useOverlay, type Overlay } from '../composables/useOverlay'
+import { useOverlay } from '../composables/useOverlay'
+import type { Overlay } from '../composables/useOverlay'
 
 const { overlays, unmount, close } = useOverlay()
 

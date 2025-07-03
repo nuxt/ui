@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Progress, { type ProgressProps, type ProgressSlots } from '../../src/runtime/components/Progress.vue'
+import Progress from '../../src/runtime/components/Progress.vue'
+import type { ProgressProps, ProgressSlots } from '../../src/runtime/components/Progress.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/progress'
 

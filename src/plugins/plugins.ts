@@ -4,7 +4,8 @@ import { genSafeVariableName } from 'knitwork'
 import MagicString from 'magic-string'
 import { resolvePathSync } from 'mlly'
 
-import { runtimeDir, type NuxtUIOptions } from '../unplugin'
+import { runtimeDir } from '../unplugin'
+import type { NuxtUIOptions } from '../unplugin'
 
 import type { UnpluginOptions } from 'unplugin'
 

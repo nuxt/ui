@@ -77,6 +77,7 @@ Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/lat
 
 - `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-muted"}
 - `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-muted"}
+- `footer`: [The footer to display for the column. Works exactly like header, but is displayed under the table.]{class="text-muted"}
 - `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-muted"}
 - `meta`: [Extra properties for the column.]{class="text-muted"}
   - `class`:
@@ -161,7 +162,7 @@ props:
 
 ### Sticky
 
-Use the `sticky` prop to make the header sticky.
+Use the `sticky` prop to make the header or footer sticky.
 
 ::component-code
 ---
@@ -172,6 +173,10 @@ ignore:
   - class
 external:
   - data
+items:
+  sticky:
+    - true
+    - false
 props:
   sticky: true
   data:
@@ -370,6 +375,22 @@ class: '!p-0'
 
 ::note
 This example is similar as the Popover [with following cursor example](/components/popover#with-following-cursor) and uses a [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to prevent the Popover from opening and closing too quickly when moving the cursor from one row to another.
+::
+
+### With column footer :badge{label="Soon" class="align-text-top"}
+
+You can add a `footer` property to the column definition to render a footer for the column.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-footer-example'
+highlights:
+  - 94
+  - 108
+class: '!p-0'
+---
 ::
 
 ### With column sorting
