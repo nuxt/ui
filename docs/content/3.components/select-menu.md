@@ -764,6 +764,32 @@ name: 'select-menu-fetch-example'
 ---
 ::
 
+### With full item width
+
+You can expand the select menu to the full width of its items using `ui.content` key.
+
+::tip
+You can also change the content width globally using your app.config.ts:
+```
+export default defineAppConfig({
+  ui: {
+    selectMenu: {
+      slots: {
+        content: 'min-w-fit'
+      }
+    }
+  }
+})
+```
+::
+
+::component-example
+---
+name: 'select-menu-item-full-width-example'
+collapse: true
+---
+::
+
 ### With ignore filter
 
 Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
@@ -800,6 +826,8 @@ collapse: true
 name: 'select-menu-countries-example'
 ---
 ::
+
+
 
 ## API
 
