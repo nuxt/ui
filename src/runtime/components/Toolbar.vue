@@ -16,6 +16,7 @@ export interface ToolbarProps {
    */
   title?: string
   variant?: Toolbar['variants']['variant']
+  size?: Toolbar['variants']['size']
   class?: any
   ui?: Toolbar['slots']
 }
@@ -40,7 +41,8 @@ const slots = defineSlots<ToolbarSlots>()
 const appConfig = useAppConfig() as Toolbar['AppConfig']
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.toolbar || {}) })({
-  variant: props.variant
+  variant: props.variant,
+  size: props.size
 }))
 </script>
 

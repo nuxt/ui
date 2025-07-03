@@ -5,11 +5,13 @@ import theme from '#build/ui/toolbar'
 
 describe('Toolbar', () => {
   const variants = Object.keys(theme.variants.variant) as any
+  const sizes = Object.keys(theme.variants.size) as any
 
   it.each([
     // Props
     ['with as', { props: { as: 'section' } }],
     ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
+    ...sizes.map((size: string) => [`with variant ${size}`, { props: { size } }]),
     ['with class', { props: { class: 'border-0 border-b' } }],
     ['with ui', { props: { ui: { root: 'border-x-0' } } }],
     // Slots

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Toolbar > renders with as correctly 1`] = `
-"<section class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-default border border-default">
+"<section class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">
     <!--v-if-->
   </div>
@@ -11,7 +11,7 @@ exports[`Toolbar > renders with as correctly 1`] = `
 `;
 
 exports[`Toolbar > renders with center slot correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-default border border-default">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">
     <!--v-if-->
   </div>
@@ -21,7 +21,7 @@ exports[`Toolbar > renders with center slot correctly 1`] = `
 `;
 
 exports[`Toolbar > renders with class correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-default border-default border-0 border-b">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border-default gap-1.5 min-h-[49px] border-0 border-b">
   <div class="flex items-center gap-1.5">
     <!--v-if-->
   </div>
@@ -31,7 +31,7 @@ exports[`Toolbar > renders with class correctly 1`] = `
 `;
 
 exports[`Toolbar > renders with left slot correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-default border border-default">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">Left slot</div>
   <div class="flex items-center gap-1.5"></div>
   <div class="flex items-center gap-1.5"></div>
@@ -39,7 +39,7 @@ exports[`Toolbar > renders with left slot correctly 1`] = `
 `;
 
 exports[`Toolbar > renders with right slot correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-default border border-default">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">
     <!--v-if-->
   </div>
@@ -49,9 +49,9 @@ exports[`Toolbar > renders with right slot correctly 1`] = `
 `;
 
 exports[`Toolbar > renders with title slot correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-default border border-default">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">
-    <div class="text-base text-pretty truncate font-semibold text-highlighted px-3">Title slot</div>
+    <div class="text-pretty pr-3 truncate font-semibold text-highlighted text-base">Title slot</div>
   </div>
   <div class="flex items-center gap-1.5"></div>
   <div class="flex items-center gap-1.5"></div>
@@ -59,7 +59,27 @@ exports[`Toolbar > renders with title slot correctly 1`] = `
 `;
 
 exports[`Toolbar > renders with ui correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-default border border-default border-x-0">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-1.5 min-h-[49px] border-x-0">
+  <div class="flex items-center gap-1.5">
+    <!--v-if-->
+  </div>
+  <div class="flex items-center gap-1.5"></div>
+  <div class="flex items-center gap-1.5"></div>
+</div>"
+`;
+
+exports[`Toolbar > renders with variant lg correctly 1`] = `
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-2 min-h-14">
+  <div class="flex items-center gap-2">
+    <!--v-if-->
+  </div>
+  <div class="flex items-center gap-2"></div>
+  <div class="flex items-center gap-2"></div>
+</div>"
+`;
+
+exports[`Toolbar > renders with variant md correctly 1`] = `
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">
     <!--v-if-->
   </div>
@@ -69,7 +89,7 @@ exports[`Toolbar > renders with ui correctly 1`] = `
 `;
 
 exports[`Toolbar > renders with variant outline correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-default border border-default">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">
     <!--v-if-->
   </div>
@@ -78,8 +98,18 @@ exports[`Toolbar > renders with variant outline correctly 1`] = `
 </div>"
 `;
 
+exports[`Toolbar > renders with variant sm correctly 1`] = `
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-1 min-h-[40px]">
+  <div class="flex items-center gap-1">
+    <!--v-if-->
+  </div>
+  <div class="flex items-center gap-1"></div>
+  <div class="flex items-center gap-1"></div>
+</div>"
+`;
+
 exports[`Toolbar > renders with variant soft correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-elevated/50">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-elevated/50 gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">
     <!--v-if-->
   </div>
@@ -89,7 +119,7 @@ exports[`Toolbar > renders with variant soft correctly 1`] = `
 `;
 
 exports[`Toolbar > renders with variant solid correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-inverted text-inverted">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-inverted text-inverted gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">
     <!--v-if-->
   </div>
@@ -99,11 +129,21 @@ exports[`Toolbar > renders with variant solid correctly 1`] = `
 `;
 
 exports[`Toolbar > renders with variant subtle correctly 1`] = `
-"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 gap-1.5 overflow-x-auto min-h-[49px] bg-elevated/50 border border-default">
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-elevated/50 border border-default gap-1.5 min-h-[49px]">
   <div class="flex items-center gap-1.5">
     <!--v-if-->
   </div>
   <div class="flex items-center gap-1.5"></div>
   <div class="flex items-center gap-1.5"></div>
+</div>"
+`;
+
+exports[`Toolbar > renders with variant xl correctly 1`] = `
+"<div class="flex justify-between items-center shrink-0 no-wrap relative w-full px-3 overflow-x-auto bg-default border border-default gap-3 min-h-16">
+  <div class="flex items-center gap-3">
+    <!--v-if-->
+  </div>
+  <div class="flex items-center gap-3"></div>
+  <div class="flex items-center gap-3"></div>
 </div>"
 `;
