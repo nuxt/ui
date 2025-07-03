@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
-import { getGroupedRowModel, type GroupingOptions } from '@tanstack/vue-table'
+import { getGroupedRowModel } from '@tanstack/vue-table'
+import type { GroupingOptions } from '@tanstack/vue-table'
 
 const UBadge = resolveComponent('UBadge')
 

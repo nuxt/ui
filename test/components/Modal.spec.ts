@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Modal, { type ModalProps, type ModalSlots } from '../../src/runtime/components/Modal.vue'
+import Modal from '../../src/runtime/components/Modal.vue'
+import type { ModalProps, ModalSlots } from '../../src/runtime/components/Modal.vue'
 import ComponentRender from '../component-render'
 
 describe('Modal', () => {
@@ -23,6 +24,7 @@ describe('Modal', () => {
     ['with header slot', { props, slots: { header: () => 'Header slot' } }],
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
+    ['with actions slot', { props, slots: { actions: () => 'Actions slot' } }],
     ['with close slot', { props, slots: { close: () => 'Close slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]

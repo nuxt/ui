@@ -5,11 +5,13 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative overflow-auto',
     base: 'min-w-full overflow-clip',
     caption: 'sr-only',
-    thead: 'relative [&>tr]:after:absolute [&>tr]:after:inset-x-0 [&>tr]:after:bottom-0 [&>tr]:after:h-px [&>tr]:after:bg-(--ui-border-accented)',
+    thead: 'relative',
     tbody: 'divide-y divide-default [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:focus-visible:outline-primary',
+    tfoot: 'relative',
     tr: 'data-[selected=true]:bg-elevated/50',
     th: 'px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pe-0',
     td: 'p-4 text-sm text-muted whitespace-nowrap [&:has([role=checkbox])]:pe-0',
+    separator: 'absolute z-[1] left-0 w-full h-px bg-(--ui-border-accented)',
     empty: 'py-6 text-center text-sm text-muted',
     loading: 'py-6 text-center'
   },
@@ -22,12 +24,19 @@ export default (options: Required<ModuleOptions>) => ({
     },
     sticky: {
       true: {
+        thead: 'sticky top-0 inset-x-0 bg-default/75 z-[1] backdrop-blur',
+        tfoot: 'sticky bottom-0 inset-x-0 bg-default/75 z-[1] backdrop-blur'
+      },
+      header: {
         thead: 'sticky top-0 inset-x-0 bg-default/75 z-[1] backdrop-blur'
+      },
+      footer: {
+        tfoot: 'sticky bottom-0 inset-x-0 bg-default/75 z-[1] backdrop-blur'
       }
     },
     loading: {
       true: {
-        thead: 'after:absolute after:bottom-0 after:inset-x-0 after:h-px'
+        thead: 'after:absolute after:z-[1] after:h-px'
       }
     },
     loadingAnimation: {

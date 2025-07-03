@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TableColumn, DropdownMenuItem } from '@nuxt/ui'
+import { useClipboard } from '@vueuse/core'
 
 interface User {
   id: number
@@ -10,6 +11,7 @@ interface User {
 }
 
 const toast = useToast()
+const { copy } = useClipboard()
 
 const data = ref<User[]>([{
   id: 1,
@@ -71,7 +73,8 @@ function getDropdownActions(user: User): DropdownMenuItem[][] {
       label: 'Copy user Id',
       icon: 'i-lucide-copy',
       onSelect: () => {
-        navigator.clipboard.writeText(user.id.toString())
+        copy(user.id.toString())
+
         toast.add({
           title: 'User ID copied to clipboard!',
           color: 'success',

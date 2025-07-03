@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Kbd, { type KbdProps, type KbdSlots } from '../../src/runtime/components/Kbd.vue'
+import Kbd from '../../src/runtime/components/Kbd.vue'
+import type { KbdProps, KbdSlots } from '../../src/runtime/components/Kbd.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/kbd'
 

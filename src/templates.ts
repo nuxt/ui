@@ -158,13 +158,13 @@ import colors from 'tailwindcss/colors'
 
 const icons = ${JSON.stringify(uiConfig.icons)};
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | (string & {})
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {
   colors?: {
     ${options.theme?.colors?.map(color => `'${color}'?: Color`).join('\n\t\t')}
-    neutral?: NeutralColor
+    neutral?: NeutralColor | (string & {})
   }
   icons?: Partial<typeof icons>
   tv?: typeof defaultConfig

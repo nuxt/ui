@@ -9,7 +9,7 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/InputTags.vue
-navigation.badge: Soon
+navigation.badge: New
 ---
 
 ## Usage
@@ -48,6 +48,17 @@ Use the `placeholder` prop to set a placeholder text.
 ---
 props:
   placeholder: 'Enter tags...'
+---
+::
+
+### Max Length :badge{label="Soon" class="align-text-top"}
+
+Use the `max-length` prop to set the maximum number of characters allowed in a tag.
+
+::component-code
+---
+props:
+  maxLength: 4
 ---
 ::
 

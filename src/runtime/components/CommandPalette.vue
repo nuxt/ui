@@ -343,7 +343,6 @@ function onSelect(e: Event, item: T) {
           <slot name="back" :ui="ui">
             <UButton
               :icon="backIcon || appConfig.ui.icons.arrowLeft"
-              size="md"
               color="neutral"
               variant="link"
               :aria-label="t('commandPalette.back')"
@@ -359,7 +358,6 @@ function onSelect(e: Event, item: T) {
             <UButton
               v-if="close"
               :icon="closeIcon || appConfig.ui.icons.close"
-              size="md"
               color="neutral"
               variant="ghost"
               :aria-label="t('commandPalette.close')"

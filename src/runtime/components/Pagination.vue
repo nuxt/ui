@@ -111,7 +111,6 @@ import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 const props = withDefaults(defineProps<PaginationProps>(), {
-  size: 'md',
   color: 'neutral',
   variant: 'outline',
   activeColor: 'primary',

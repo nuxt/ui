@@ -31,8 +31,9 @@ const component = ({ name, primitive, pro, prose, content }) => {
       ? `
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
+${pro ? `import type { ComponentConfig } from '@nuxt/ui'` : ''}
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
-import type { ComponentConfig } from '../types/utils'
+${!pro ? `import type { ComponentConfig } from '../types/utils'` : ''}
 
 type ${upperName} = ComponentConfig<typeof theme, AppConfig, ${upperName}${pro ? `, '${key}'` : ''}>
 
@@ -62,7 +63,7 @@ defineSlots<${upperName}Slots>()
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName} || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.${pro ? 'uiPro' : 'ui'}?.${camelName} || {}) })())
 </script>
 
 <template>
@@ -75,8 +76,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName}
 <script lang="ts">
 import type { ${upperName}RootProps, ${upperName}RootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
+${pro ? `import type { ComponentConfig } from '@nuxt/ui'` : ''}
 import theme from '#build/${path}/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
-import type { ComponentConfig } from '../types/utils'
+${!pro ? `import type { ComponentConfig } from '../types/utils'` : ''}
 
 type ${upperName} = ComponentConfig<typeof theme, AppConfig, ${upperName}${pro ? `, '${key}'` : ''}>
 
@@ -105,7 +107,7 @@ const appConfig = useAppConfig() as ${upperName}['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props), emits)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName} || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.${pro ? 'uiPro' : 'ui'}?.${camelName} || {}) })())
 </script>
 
 <template>
@@ -145,7 +147,8 @@ const test = ({ name, prose, content }) => {
       ? undefined
       : `
 import { describe, it, expect } from 'vitest'
-import ${upperName}, { type ${upperName}Props, type ${upperName}Slots } from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
+import ${upperName} from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
+import type { ${upperName}Props, ${upperName}Slots } from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
 import ComponentRender from '../${content ? '../' : ''}component-render'
 
 describe('${upperName}', () => {
@@ -186,6 +189,7 @@ links:${primitive
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v3/src/runtime/components/${upperName}.vue
+navigation.badge: Soon
 ---
 
 ## Usage

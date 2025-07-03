@@ -52,8 +52,8 @@ Each group contains an `items` array of objects that define the commands. Each i
 - `loading?: boolean`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `placeholder?: string`{lang="ts-type"} :badge{label="Soon"}
-- `children?: CommandPaletteItem[]`{lang="ts-type"} :badge{label="Soon"}
+- `placeholder?: string`{lang="ts-type"}
+- `children?: CommandPaletteItem[]`{lang="ts-type"}
 - `onSelect?(e?: Event): void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
@@ -327,7 +327,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Trailing Icon :badge{label="Soon" class="align-text-top"}
+### Trailing Icon :badge{label="New" class="align-text-top"}
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) when an item has children. Defaults to `i-lucide-chevron-right`.
 
@@ -565,7 +565,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 :::
 ::
 
-### Back :badge{label="Soon" class="align-text-top"}
+### Back :badge{label="New" class="align-text-top"}
 
 Use the `back` prop to customize or hide the back button (with `false` value) displayed when navigating into a submenu.
 
@@ -604,7 +604,7 @@ props:
 ---
 ::
 
-### Back Icon :badge{label="Soon" class="align-text-top"}
+### Back Icon :badge{label="New" class="align-text-top"}
 
 Use the `back-icon` prop to customize the back button [Icon](/components/icon). Defaults to `i-lucide-arrow-left`.
 
@@ -717,7 +717,7 @@ props:
 This example uses the `@update:model-value` event to reset the search term when an item is selected.
 ::
 
-### With children in items :badge{label="Soon" class="align-text-top"}
+### With children in items :badge{label="New" class="align-text-top"}
 
 You can create hierarchical menus by using the `children` property in items. When an item has children, it will automatically display a chevron icon and enable navigation into a submenu.
 

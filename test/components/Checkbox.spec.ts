@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import Checkbox, { type CheckboxProps, type CheckboxSlots } from '../../src/runtime/components/Checkbox.vue'
+import Checkbox from '../../src/runtime/components/Checkbox.vue'
+import type { CheckboxProps, CheckboxSlots } from '../../src/runtime/components/Checkbox.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/checkbox'
 import { renderForm } from '../utils/form'

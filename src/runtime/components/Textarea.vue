@@ -9,7 +9,7 @@ type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>
 
 type TextareaValue = string | number | null
 
-export interface TextareaProps extends UseComponentIconsProps {
+export interface TextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -41,8 +41,11 @@ export interface TextareaProps extends UseComponentIconsProps {
   maxrows?: number
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  modelValue?: T
+  defaultValue?: T
   modelModifiers?: {
     string?: boolean
+    number?: boolean
     trim?: boolean
     lazy?: boolean
     nullify?: boolean
@@ -67,6 +70,7 @@ export interface TextareaSlots {
 <script setup lang="ts" generic="T extends TextareaValue">
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
+import { useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -77,7 +81,7 @@ import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<TextareaProps>(), {
+const props = withDefaults(defineProps<TextareaProps<T>>(), {
   rows: 3,
   maxrows: 0,
   autofocusDelay: 0,
@@ -86,12 +90,11 @@ const props = withDefaults(defineProps<TextareaProps>(), {
 const emits = defineEmits<TextareaEmits<T>>()
 const slots = defineSlots<TextareaSlots>()
 
-// eslint-disable-next-line vue/no-dupe-keys
-const [modelValue, modelModifiers] = defineModel<T>()
+const modelValue = useVModel<TextareaProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
 const appConfig = useAppConfig() as Textarea['AppConfig']
 
-const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps>(props, { deferInputValidation: true })
+const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps<T>>(props, { deferInputValidation: true })
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.textarea || {}) })({
@@ -109,15 +112,15 @@ const textareaRef = ref<HTMLTextAreaElement | null>(null)
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null) {
-  if (modelModifiers.trim) {
+  if (props.modelModifiers?.trim) {
     value = value?.trim() ?? null
   }
 
-  if (modelModifiers.number) {
+  if (props.modelModifiers?.number) {
     value = looseToNumber(value)
   }
 
-  if (modelModifiers.nullify) {
+  if (props.modelModifiers?.nullify) {
     value ||= null
   }
 
@@ -128,7 +131,7 @@ function updateInput(value: string | null) {
 function onInput(event: Event) {
   autoResize()
 
-  if (!modelModifiers.lazy) {
+  if (!props.modelModifiers?.lazy) {
     updateInput((event.target as HTMLInputElement).value)
   }
 }
@@ -136,12 +139,12 @@ function onInput(event: Event) {
 function onChange(event: Event) {
   const value = (event.target as HTMLInputElement).value
 
-  if (modelModifiers.lazy) {
+  if (props.modelModifiers?.lazy) {
     updateInput(value)
   }
 
   // Update trimmed textarea so that it has same behavior as native textarea https://github.com/vuejs/core/blob/5ea8a8a4fab4e19a71e123e4d27d051f5e927172/packages/runtime-dom/src/directives/vModel.ts#L63
-  if (modelModifiers.trim) {
+  if (props.modelModifiers?.trim) {
     (event.target as HTMLInputElement).value = value.trim()
   }
 
