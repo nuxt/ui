@@ -50,7 +50,7 @@ import { useAppConfig } from '#imports'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useButtonGroup } from '../composables/useButtonGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
-import { omit } from '../utils'
+import { omit, mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
@@ -58,11 +58,7 @@ import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 
-const props = withDefaults(defineProps<ButtonProps>(), {
-  active: undefined,
-  activeClass: '',
-  inactiveClass: ''
-})
+const props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
 const appConfig = useAppConfig() as Button['AppConfig']
@@ -97,10 +93,10 @@ const ui = computed(() => tv({
     variants: {
       active: {
         true: {
-          base: props.activeClass
+          base: mergeClasses(appConfig.ui?.button?.variants?.active?.true?.base, props.activeClass)
         },
         false: {
-          base: props.inactiveClass
+          base: mergeClasses(appConfig.ui?.button?.variants?.active?.false?.base, props.inactiveClass)
         }
       }
     }

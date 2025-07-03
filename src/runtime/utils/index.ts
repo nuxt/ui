@@ -85,3 +85,14 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
 export function isArrayOfArray<A>(item: A[] | A[][]): item is A[][] {
   return Array.isArray(item[0])
 }
+
+export function mergeClasses(appConfigClass?: string | string[], propClass?: string) {
+  if (!appConfigClass && !propClass) {
+    return ''
+  }
+
+  return [
+    ...(Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass]),
+    propClass
+  ].filter(Boolean)
+}

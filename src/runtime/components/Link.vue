@@ -90,8 +90,10 @@ export interface LinkSlots {
 import { computed } from 'vue'
 import { isEqual } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
+import { defu } from 'defu'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute, useAppConfig } from '#imports'
+import { mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
@@ -101,10 +103,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<LinkProps>(), {
   as: 'button',
   type: 'button',
-  ariaCurrentValue: 'page',
-  active: undefined,
-  activeClass: '',
-  inactiveClass: ''
+  ariaCurrentValue: 'page'
 })
 defineSlots<LinkSlots>()
 
@@ -113,28 +112,17 @@ const appConfig = useAppConfig() as Link['AppConfig']
 
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
 
-const ui = computed(() => {
-  const appConfigLink = appConfig.ui?.link || {}
-  const appConfigVariants = (appConfigLink.variants?.active || {}) as { true?: string, false?: string }
-
-  return tv({
-    extend: tv(theme),
-    ...appConfigLink,
+const ui = computed(() => tv({
+  extend: tv(theme),
+  ...defu({
     variants: {
-      ...appConfigLink.variants,
       active: {
-        true: [
-          appConfigVariants.true || '',
-          props.activeClass || ''
-        ].filter(Boolean).join(' '),
-        false: [
-          appConfigVariants.false || '',
-          props.inactiveClass || ''
-        ].filter(Boolean).join(' ')
+        true: mergeClasses(appConfig.ui?.link?.variants?.active?.true, props.activeClass),
+        false: mergeClasses(appConfig.ui?.link?.variants?.active?.false, props.inactiveClass)
       }
     }
-  })
-})
+  }, appConfig.ui?.link || {})
+}))
 
 const to = computed(() => props.to ?? props.href)
 
