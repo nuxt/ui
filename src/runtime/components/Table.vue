@@ -83,10 +83,10 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    */
   empty?: string
   /**
-   * Whether the table should have a sticky header.
+   * Whether the table should have a sticky header or footer. True for both, 'header' for header only, 'footer' for footer only.
    * @defaultValue false
    */
-  sticky?: boolean
+  sticky?: boolean | 'header' | 'footer'
   /** Whether the table should be in loading state. */
   loading?: boolean
   /**
@@ -165,11 +165,14 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    */
   facetedOptions?: FacetedOptions<T>
   onSelect?: (row: TableRow<T>, e?: Event) => void
+  onHover?: (e: Event, row: TableRow<T> | null) => void
+  onContextmenu?: ((e: Event, row: TableRow<T>) => void) | Array<((e: Event, row: TableRow<T>) => void)>
   class?: any
   ui?: Table['slots']
 }
 
 type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
+type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => any>
 type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
 
 export type TableSlots<T extends TableData = TableData> = {
@@ -179,7 +182,7 @@ export type TableSlots<T extends TableData = TableData> = {
   'caption': (props?: {}) => any
   'body-top': (props?: {}) => any
   'body-bottom': (props?: {}) => any
-} & DynamicHeaderSlots<T> & DynamicCellSlots<T>
+} & DynamicHeaderSlots<T> & DynamicFooterSlots<T> & DynamicCellSlots<T>
 
 </script>
 
@@ -214,6 +217,22 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {})
   loadingAnimation: props.loadingAnimation
 }))
 
+const hasFooter = computed(() => {
+  function hasFooterRecursive(columns: TableColumn<T>[]): boolean {
+    for (const column of columns) {
+      if ('footer' in column) {
+        return true
+      }
+      if ('columns' in column && hasFooterRecursive(column.columns as TableColumn<T>[])) {
+        return true
+      }
+    }
+    return false
+  }
+
+  return hasFooterRecursive(columns.value)
+})
+
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
 const columnOrderState = defineModel<ColumnOrderState>('columnOrder', { default: [] })
@@ -233,7 +252,9 @@ const tableRef = ref<HTMLTableElement | null>(null)
 const tableApi = useVueTable({
   ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
   data,
-  columns: columns.value,
+  get columns() {
+    return columns.value
+  },
   meta: meta.value,
   getCoreRowModel: getCoreRowModel(),
   ...(props.globalFilterOptions || {}),
@@ -311,7 +332,7 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
 }
 
-function handleRowSelect(row: TableRow<T>, e: Event) {
+function onRowSelect(e: Event, row: TableRow<T>) {
   if (!props.onSelect) {
     return
   }
@@ -324,7 +345,28 @@ function handleRowSelect(row: TableRow<T>, e: Event) {
   e.preventDefault()
   e.stopPropagation()
 
+  // FIXME: `e` should be the first argument for consistency
   props.onSelect(row, e)
+}
+
+function onRowHover(e: Event, row: TableRow<T> | null) {
+  if (!props.onHover) {
+    return
+  }
+
+  props.onHover(e, row)
+}
+
+function onRowContextmenu(e: Event, row: TableRow<T>) {
+  if (!props.onContextmenu) {
+    return
+  }
+
+  if (Array.isArray(props.onContextmenu)) {
+    props.onContextmenu.forEach(fn => fn(e, row))
+  } else {
+    props.onContextmenu(e, row)
+  }
 }
 
 watch(
@@ -354,6 +396,7 @@ defineExpose({
             v-for="header in headerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
+            :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :class="ui.th({
               class: [
@@ -379,7 +422,7 @@ defineExpose({
           <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
             <tr
               :data-selected="row.getIsSelected()"
-              :data-selectable="!!props.onSelect"
+              :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
               :data-expanded="row.getIsExpanded()"
               :role="props.onSelect ? 'button' : undefined"
               :tabindex="props.onSelect ? 0 : undefined"
@@ -389,7 +432,10 @@ defineExpose({
                   typeof tableApi.options.meta?.class?.tr === 'function' ? tableApi.options.meta.class.tr(row) : tableApi.options.meta?.class?.tr
                 ]
               })"
-              @click="handleRowSelect(row, $event)"
+              @click="onRowSelect($event, row)"
+              @pointerenter="onRowHover($event, row)"
+              @pointerleave="onRowHover($event, null)"
+              @contextmenu="onRowContextmenu($event, row)"
             >
               <td
                 v-for="cell in row.getVisibleCells()"
@@ -432,6 +478,30 @@ defineExpose({
 
         <slot name="body-bottom" />
       </tbody>
+
+      <tfoot v-if="hasFooter" :class="ui.tfoot({ class: [props.ui?.tfoot] })">
+        <tr :class="ui.separator({ class: [props.ui?.separator] })" />
+
+        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
+          <th
+            v-for="header in footerGroup.headers"
+            :key="header.id"
+            :data-pinned="header.column.getIsPinned()"
+            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :class="ui.th({
+              class: [
+                props.ui?.th,
+                typeof header.column.columnDef.meta?.class?.th === 'function' ? header.column.columnDef.meta.class.th(header) : header.column.columnDef.meta?.class?.th
+              ],
+              pinned: !!header.column.getIsPinned()
+            })"
+          >
+            <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
+              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />
+            </slot>
+          </th>
+        </tr>
+      </tfoot>
     </table>
   </Primitive>
 </template>

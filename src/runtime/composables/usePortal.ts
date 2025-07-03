@@ -1,4 +1,5 @@
-import { inject, provide, computed, type Ref, type InjectionKey } from 'vue'
+import { inject, provide, computed } from 'vue'
+import type { Ref, InjectionKey } from 'vue'
 
 export const portalTargetInjectionKey: InjectionKey<Ref<string | HTMLElement>> = Symbol('nuxt-ui.portal-target')
 

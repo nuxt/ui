@@ -118,7 +118,7 @@ export interface CarouselEmits {
 import { computed, ref, watch, onMounted } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive, useForwardProps } from 'reka-ui'
-import { reactivePick, computedAsync } from '@vueuse/core'
+import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
@@ -175,41 +175,45 @@ const options = computed<EmblaOptionsType>(() => ({
   direction: dir.value === 'rtl' ? 'rtl' : 'ltr'
 }))
 
-const plugins = computedAsync<EmblaPluginType[]>(async () => {
-  const plugins = []
+const plugins = ref<EmblaPluginType[]>([])
+
+async function loadPlugins() {
+  const emblaPlugins: EmblaPluginType[] = []
 
   if (props.autoplay) {
     const AutoplayPlugin = await import('embla-carousel-autoplay').then(r => r.default)
-    plugins.push(AutoplayPlugin(typeof props.autoplay === 'boolean' ? {} : props.autoplay))
+    emblaPlugins.push(AutoplayPlugin(typeof props.autoplay === 'boolean' ? {} : props.autoplay))
   }
 
   if (props.autoScroll) {
     const AutoScrollPlugin = await import('embla-carousel-auto-scroll').then(r => r.default)
-    plugins.push(AutoScrollPlugin(typeof props.autoScroll === 'boolean' ? {} : props.autoScroll))
+    emblaPlugins.push(AutoScrollPlugin(typeof props.autoScroll === 'boolean' ? {} : props.autoScroll))
   }
 
   if (props.autoHeight) {
     const AutoHeightPlugin = await import('embla-carousel-auto-height').then(r => r.default)
-    plugins.push(AutoHeightPlugin(typeof props.autoHeight === 'boolean' ? {} : props.autoHeight))
+    emblaPlugins.push(AutoHeightPlugin(typeof props.autoHeight === 'boolean' ? {} : props.autoHeight))
   }
 
   if (props.classNames) {
     const ClassNamesPlugin = await import('embla-carousel-class-names').then(r => r.default)
-    plugins.push(ClassNamesPlugin(typeof props.classNames === 'boolean' ? {} : props.classNames))
+    emblaPlugins.push(ClassNamesPlugin(typeof props.classNames === 'boolean' ? {} : props.classNames))
   }
 
   if (props.fade) {
     const FadePlugin = await import('embla-carousel-fade').then(r => r.default)
-    plugins.push(FadePlugin(typeof props.fade === 'boolean' ? {} : props.fade))
+    emblaPlugins.push(FadePlugin(typeof props.fade === 'boolean' ? {} : props.fade))
   }
 
   if (props.wheelGestures) {
     const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures')
-    plugins.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
+    emblaPlugins.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
   }
 
-  return plugins
-})
+  plugins.value = emblaPlugins
+}
+
+watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true })
 
 const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value)
 

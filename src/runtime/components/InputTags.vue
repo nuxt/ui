@@ -18,6 +18,8 @@ export interface InputTagsProps<T extends InputTagItem = InputTagItem> extends P
   as?: any
   /** The placeholder text when the input is empty. */
   placeholder?: string
+  /** The maximum number of character allowed. */
+  maxLength?: number
   /**
    * @defaultValue 'primary'
    */
@@ -182,6 +184,7 @@ defineExpose({
       ref="inputRef"
       v-bind="{ ...$attrs, ...ariaAttrs }"
       :placeholder="placeholder"
+      :max-length="maxLength"
       :class="ui.input({ class: props.ui?.input })"
     />
 

@@ -21,11 +21,11 @@ export interface Form<S extends FormSchema> {
   blurredFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
 }
 
-export type FormSchema<I extends object = object, O extends object = I> =
-  | YupObjectSchema<I>
-  | JoiSchema<I>
-  | SuperstructSchema<any, any>
-  | StandardSchemaV1<I, O>
+export type FormSchema<I extends object = object, O extends object = I>
+  = | YupObjectSchema<I>
+    | JoiSchema<I>
+    | SuperstructSchema<any, any>
+    | StandardSchemaV1<I, O>
 
 // Define a utility type to infer the input type based on the schema type
 export type InferInput<Schema> = Schema extends StandardSchemaV1 ? StandardSchemaV1.InferInput<Schema>
@@ -83,10 +83,10 @@ export type FormInputEvent<T extends object> = {
   eager?: boolean
 }
 
-export type FormEvent<T extends object> =
-  | FormInputEvent<T>
-  | FormChildAttachEvent
-  | FormChildDetachEvent
+export type FormEvent<T extends object>
+  = | FormInputEvent<T>
+    | FormChildAttachEvent
+    | FormChildDetachEvent
 
 export interface FormInjectedOptions {
   disabled?: boolean

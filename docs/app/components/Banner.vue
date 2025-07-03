@@ -1,6 +1,7 @@
 <template>
   <UBanner
     id="ui3-launch"
+    title="Nuxt UI v3 is officially released!"
     icon="i-lucide-rocket"
     :actions="[
       {
@@ -10,9 +11,5 @@
       }
     ]"
     close
-  >
-    <template #title>
-      <span class="font-semibold">Nuxt UI v3</span> is officially released.
-    </template>
-  </UBanner>
+  />
 </template>
