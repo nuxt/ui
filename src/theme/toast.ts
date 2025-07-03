@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative group overflow-hidden bg-default shadow-lg rounded-lg ring ring-default p-4 flex gap-2.5 focus:outline-none',
     wrapper: 'w-0 flex-1 flex flex-col',
     title: 'text-sm font-medium text-highlighted',
-    description: 'text-sm text-muted',
+    description: 'text-sm text-muted select-text',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     avatarSize: '2xl',
