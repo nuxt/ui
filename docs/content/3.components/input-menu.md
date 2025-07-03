@@ -731,6 +731,32 @@ name: 'input-menu-fetch-example'
 ---
 ::
 
+### With full item width
+
+You can expand the input menu to the full width of its items using `ui.content` key.
+
+::tip
+You can also change the content width globally using your app.config.ts:
+```
+export default defineAppConfig({
+  ui: {
+    inputMenu: {
+      slots: {
+        content: 'min-w-fit'
+      }
+    }
+  }
+})
+```
+::
+
+::component-example
+---
+name: 'input-menu-item-full-width-example'
+collapse: true
+---
+::
+
 ### With ignore filter
 
 Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
