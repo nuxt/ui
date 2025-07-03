@@ -4,7 +4,7 @@ import theme from '#build/ui/pin-input'
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
 
-const onComplete = (e: string[] | number[]) => {
+const onComplete = (e: string[]) => {
   console.log(e)
 }
 </script>
