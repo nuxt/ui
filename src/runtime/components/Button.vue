@@ -56,7 +56,7 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
-import { useComponentUiTheme } from '../components/Theme.vue'
+import { useComponentUiTheme } from '../composables/useComponentUiTheme'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   active: undefined,
