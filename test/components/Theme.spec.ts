@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Theme, { type ThemeProps, type ThemeSlots } from '../../src/runtime/components/Theme.vue'
+import type { ThemeProps, ThemeSlots } from '../../src/runtime/components/Theme.vue'
+import Theme from '../../src/runtime/components/Theme.vue'
 import ComponentRender from '../component-render'
 import { h } from 'vue'
 import Button from '../../src/runtime/components/Button.vue'

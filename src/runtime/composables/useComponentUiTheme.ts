@@ -1,7 +1,8 @@
 import { createContext } from 'reka-ui'
 import type * as ui from '#build/ui'
 import type { TVConfig } from '../types/tv'
-import { type ComputedRef, computed, toValue } from 'vue'
+import type { ComputedRef } from 'vue'
+import { computed, toValue } from 'vue'
 import defu from 'defu'
 import type { RefOrGetter } from '../types/utils'
 
