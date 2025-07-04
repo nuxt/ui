@@ -7,6 +7,13 @@ exports[`Theme > renders with nested theme (most recent theme wins) correctly 1`
 </button>"
 `;
 
+exports[`Theme > renders with theme but not for this component correctly 1`] = `
+"<button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+  <!--v-if--><span class="truncate">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
 exports[`Theme > renders with theme correctly 1`] = `
 "<button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary px-[1.234rem]">
   <!--v-if--><span class="truncate text-[#ff0]">Button</span>
