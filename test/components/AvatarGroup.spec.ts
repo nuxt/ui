@@ -1,7 +1,8 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
 import Avatar from '../../src/runtime/components/Avatar.vue'
-import AvatarGroup, { type AvatarGroupProps, type AvatarGroupSlots } from '../../src/runtime/components/AvatarGroup.vue'
+import AvatarGroup from '../../src/runtime/components/AvatarGroup.vue'
+import type { AvatarGroupProps, AvatarGroupSlots } from '../../src/runtime/components/AvatarGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/avatar-group'
 

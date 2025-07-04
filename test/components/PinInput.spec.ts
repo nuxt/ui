@@ -1,6 +1,7 @@
 import { describe, it, expect, test } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
-import PinInput, { type PinInputProps } from '../../src/runtime/components/PinInput.vue'
+import PinInput from '../../src/runtime/components/PinInput.vue'
+import type { PinInputProps } from '../../src/runtime/components/PinInput.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/pin-input'
 

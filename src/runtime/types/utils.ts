@@ -44,8 +44,8 @@ export type MergeTypes<T extends object> = {
 
 export type GetItemKeys<I> = keyof Extract<NestedItem<I>, object>
 
-export type GetItemValue<I, VK extends GetItemKeys<I> | undefined, T extends NestedItem<I> = NestedItem<I>> =
-  T extends object
+export type GetItemValue<I, VK extends GetItemKeys<I> | undefined, T extends NestedItem<I> = NestedItem<I>>
+  = T extends object
     ? VK extends undefined
       ? T
       : VK extends keyof T
@@ -70,10 +70,10 @@ export type GetModelValueEmits<
   'update:modelValue': [payload: GetModelValue<T, VK, M>]
 }
 
-export type StringOrVNode =
-  | string
-  | VNode
-  | (() => VNode)
+export type StringOrVNode
+  = | string
+    | VNode
+    | (() => VNode)
 
 export type EmitsToProps<T> = {
   [K in keyof T as `on${Capitalize<string & K>}`]: T[K] extends [...args: infer Args]

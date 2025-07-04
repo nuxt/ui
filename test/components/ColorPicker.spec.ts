@@ -1,6 +1,7 @@
 import { describe, it, expect, test } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import ColorPicker, { type ColorPickerProps } from '../../src/runtime/components/ColorPicker.vue'
+import ColorPicker from '../../src/runtime/components/ColorPicker.vue'
+import type { ColorPickerProps } from '../../src/runtime/components/ColorPicker.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/color-picker'
 

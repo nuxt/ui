@@ -51,6 +51,17 @@ props:
 ---
 ::
 
+### Max Length :badge{label="Soon" class="align-text-top"}
+
+Use the `max-length` prop to set the maximum number of characters allowed in a tag.
+
+::component-code
+---
+props:
+  maxLength: 4
+---
+::
+
 ### Color
 
 Use the `color` prop to change the ring color when the InputTags is focused.

@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import RadioGroup, { type RadioGroupProps, type RadioGroupSlots } from '../../src/runtime/components/RadioGroup.vue'
+import RadioGroup from '../../src/runtime/components/RadioGroup.vue'
+import type { RadioGroupProps, RadioGroupSlots } from '../../src/runtime/components/RadioGroup.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/radio-group'
 import { flushPromises, mount } from '@vue/test-utils'

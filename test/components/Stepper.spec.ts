@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Stepper, { type StepperProps, type StepperSlots } from '../../src/runtime/components/Stepper.vue'
+import Stepper from '../../src/runtime/components/Stepper.vue'
+import type { StepperProps, StepperSlots } from '../../src/runtime/components/Stepper.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/stepper'
 

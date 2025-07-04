@@ -3,7 +3,7 @@ import { h, resolveComponent } from 'vue'
 import { upperFirst } from 'scule'
 import type { TableColumn, TableRow } from '@nuxt/ui'
 import { getPaginationRowModel } from '@tanstack/vue-table'
-import { useClipboard } from '@vueuse/core'
+import { useClipboard, refDebounced } from '@vueuse/core'
 
 const UButton = resolveComponent('UButton')
 const UCheckbox = resolveComponent('UCheckbox')
@@ -147,6 +147,35 @@ const data = ref<Payment[]>([{
 
 const currentID = ref(4601)
 
+function getRowItems(row: TableRow<Payment>) {
+  return [{
+    type: 'label' as const,
+    label: 'Actions'
+  }, {
+    label: 'Copy payment ID',
+    onSelect() {
+      copy(row.original.id)
+
+      toast.add({
+        title: 'Payment ID copied to clipboard!',
+        color: 'success',
+        icon: 'i-lucide-circle-check'
+      })
+    }
+  }, {
+    label: row.getIsExpanded() ? 'Collapse' : 'Expand',
+    onSelect() {
+      row.toggleExpanded()
+    }
+  }, {
+    type: 'separator' as const
+  }, {
+    label: 'View customer'
+  }, {
+    label: 'View payment details'
+  }]
+}
+
 const columns: TableColumn<Payment>[] = [{
   id: 'select',
   header: ({ table }) => h(UCheckbox, {
@@ -213,6 +242,16 @@ const columns: TableColumn<Payment>[] = [{
 }, {
   accessorKey: 'amount',
   header: () => h('div', { class: 'text-right' }, 'Amount'),
+  footer: ({ column }) => {
+    const total = column.getFacetedRowModel().rows.reduce((acc: number, row: TableRow<Payment>) => acc + Number.parseFloat(row.getValue('amount')), 0)
+
+    const formatted = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(total)
+
+    return h('div', { class: 'text-right font-medium' }, `Total: ${formatted}`)
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
 
@@ -227,38 +266,11 @@ const columns: TableColumn<Payment>[] = [{
   id: 'actions',
   enableHiding: false,
   cell: ({ row }) => {
-    const items = [{
-      type: 'label',
-      label: 'Actions'
-    }, {
-      label: 'Copy payment ID',
-      onSelect() {
-        copy(row.original.id)
-
-        toast.add({
-          title: 'Payment ID copied to clipboard!',
-          color: 'success',
-          icon: 'i-lucide-circle-check'
-        })
-      }
-    }, {
-      label: row.getIsExpanded() ? 'Collapse' : 'Expand',
-      onSelect() {
-        row.toggleExpanded()
-      }
-    }, {
-      type: 'separator'
-    }, {
-      label: 'View customer'
-    }, {
-      label: 'View payment details'
-    }]
-
     return h('div', { class: 'text-right' }, h(UDropdownMenu, {
       'content': {
         align: 'end'
       },
-      items,
+      'items': getRowItems(row),
       'aria-label': 'Actions dropdown'
     }, () => h(UButton, {
       'icon': 'i-lucide-ellipsis-vertical',
@@ -296,8 +308,41 @@ function randomize() {
   data.value = data.value.sort(() => Math.random() - 0.5)
 }
 
+const rowSelection = ref<Record<string, boolean>>({})
+
 function onSelect(row: TableRow<Payment>) {
-  console.log(row)
+  row.toggleSelected(!row.getIsSelected())
+}
+
+const contextmenuRow = ref<TableRow<Payment> | null>(null)
+const contextmenuItems = computed(() => contextmenuRow.value ? getRowItems(contextmenuRow.value) : [])
+
+function onContextmenu(e: Event, row: TableRow<Payment>) {
+  contextmenuRow.value = row
+}
+
+const popoverOpen = ref(false)
+const popoverOpenDebounced = refDebounced(popoverOpen, 1)
+const popoverAnchor = ref({ x: 0, y: 0 })
+const popoverRow = ref<TableRow<Payment> | null>(null)
+
+const reference = computed(() => ({
+  getBoundingClientRect: () =>
+    ({
+      width: 0,
+      height: 0,
+      left: popoverAnchor.value.x,
+      right: popoverAnchor.value.x,
+      top: popoverAnchor.value.y,
+      bottom: popoverAnchor.value.y,
+      ...popoverAnchor.value
+    } as DOMRect)
+}))
+
+function onHover(_e: Event, row: TableRow<Payment> | null) {
+  popoverRow.value = row
+
+  popoverOpen.value = !!row
 }
 
 onMounted(() => {
@@ -344,27 +389,44 @@ onMounted(() => {
       </UDropdownMenu>
     </div>
 
-    <UTable
-      ref="table"
-      :data="data"
-      :columns="columns"
-      :column-pinning="columnPinning"
-      :loading="loading"
-      :pagination="pagination"
-      :pagination-options="{
-        getPaginationRowModel: getPaginationRowModel()
-      }"
-      :ui="{
-        tr: 'divide-x divide-default'
-      }"
-      sticky
-      class="border border-accented rounded-sm"
-      @select="onSelect"
-    >
-      <template #expanded="{ row }">
-        <pre>{{ row.original }}</pre>
+    <UContextMenu :items="contextmenuItems">
+      <UTable
+        ref="table"
+        :data="data"
+        :columns="columns"
+        :column-pinning="columnPinning"
+        :row-selection="rowSelection"
+        :loading="loading"
+        :pagination="pagination"
+        :pagination-options="{
+          getPaginationRowModel: getPaginationRowModel()
+        }"
+        :ui="{
+          tr: 'divide-x divide-default'
+        }"
+        sticky
+        class="border border-accented rounded-sm"
+        @select="onSelect"
+        @contextmenu="onContextmenu"
+        @pointermove="(ev: PointerEvent) => {
+          popoverAnchor.x = ev.clientX
+          popoverAnchor.y = ev.clientY
+        }"
+        @hover="onHover"
+      >
+        <template #expanded="{ row }">
+          <pre>{{ row.original }}</pre>
+        </template>
+      </UTable>
+    </UContextMenu>
+
+    <UPopover :content="{ side: 'top', sideOffset: 16, updatePositionStrategy: 'always' }" :open="popoverOpenDebounced" :reference="reference">
+      <template #content>
+        <div class="p-4">
+          {{ popoverRow?.original?.id }}
+        </div>
       </template>
-    </UTable>
+    </UPopover>
 
     <div class="flex items-center justify-between gap-3">
       <div class="text-sm text-muted">
