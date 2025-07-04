@@ -10,6 +10,14 @@ describe('Theme', () => {
   it.each([
     // Props
     [
+      'with theme but not for this component',
+      {
+        props: { theme: { } },
+        slots: { default: () => h(Button, { label: 'Button' }) }
+      } satisfies CaseOptions,
+      []
+    ],
+    [
       'with theme',
         {
           props: { theme: { button: { slots: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } } },
