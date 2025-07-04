@@ -45,6 +45,12 @@ declare module '@tanstack/table-core' {
       th?: string | ((cell: Header<TData, TValue>) => string)
       td?: string | ((cell: Cell<TData, TValue>) => string)
     }
+    colspan?: {
+      td?: string | ((cell: Cell<TData, TValue>) => string)
+    }
+    rowspan?: {
+      td?: string | ((cell: Cell<TData, TValue>) => string)
+    }
   }
 
   interface TableMeta<TData> {
@@ -441,6 +447,8 @@ defineExpose({
                 v-for="cell in row.getVisibleCells()"
                 :key="cell.id"
                 :data-pinned="cell.column.getIsPinned()"
+                :colspan="typeof cell.column.columnDef.meta?.colspan?.td === 'function' ? cell.column.columnDef.meta.colspan.td(cell) : cell.column.columnDef.meta?.colspan?.td"
+                :rowspan="typeof cell.column.columnDef.meta?.rowspan?.td === 'function' ? cell.column.columnDef.meta.rowspan.td(cell) : cell.column.columnDef.meta?.rowspan?.td"
                 :class="ui.td({
                   class: [
                     props.ui?.td,
