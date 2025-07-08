@@ -790,13 +790,13 @@ name: 'select-menu-filter-fields-example'
 ---
 ::
 
-### With full item width
+### With full content width
 
-You can expand the content to the full width of its items using `ui.content` key.
+You can expand the content to the full width of its items by using the `ui.content` key.
 
 ::component-example
 ---
-name: 'select-menu-item-full-width-example'
+name: 'select-menu-content-width-example'
 collapse: true
 ---
 ::
