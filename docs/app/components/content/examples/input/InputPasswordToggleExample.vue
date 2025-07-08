@@ -24,3 +24,10 @@ const password = ref('')
     </template>
   </UInput>
 </template>
+
+<style>
+/* Hide the password reveal button in Edge */
+::-ms-reveal {
+    display: none;
+}
+</style>

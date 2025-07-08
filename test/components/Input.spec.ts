@@ -1,6 +1,7 @@
 import { describe, it, expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Input, { type InputProps, type InputSlots } from '../../src/runtime/components/Input.vue'
+import Input from '../../src/runtime/components/Input.vue'
+import type { InputProps, InputSlots } from '../../src/runtime/components/Input.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 

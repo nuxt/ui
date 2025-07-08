@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { describe, it, expect, test } from 'vitest'
-import Button, { type ButtonProps, type ButtonSlots } from '../../src/runtime/components/Button.vue'
+import Button from '../../src/runtime/components/Button.vue'
+import type { ButtonProps, ButtonSlots } from '../../src/runtime/components/Button.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/button'
 import { mountSuspended } from '@nuxt/test-utils/runtime'

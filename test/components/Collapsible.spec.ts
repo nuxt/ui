@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Collapsible, { type CollapsibleProps, type CollapsibleSlots } from '../../src/runtime/components/Collapsible.vue'
+import Collapsible from '../../src/runtime/components/Collapsible.vue'
+import type { CollapsibleProps, CollapsibleSlots } from '../../src/runtime/components/Collapsible.vue'
 import ComponentRender from '../component-render'
 
 describe('Collapsible', () => {

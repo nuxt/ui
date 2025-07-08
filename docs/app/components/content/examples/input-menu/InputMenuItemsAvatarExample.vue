@@ -35,6 +35,7 @@ const items = ref([
     }
   }
 ] satisfies InputMenuItem[])
+
 const value = ref(items.value[0])
 </script>
 

@@ -147,6 +147,7 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 
 export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> = {
   'empty'(props: { searchTerm?: string }): any
+  'footer'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'back'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'close'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'item': SlotProps<T>
@@ -444,5 +445,9 @@ function onSelect(e: Event, item: T) {
         </slot>
       </div>
     </ListboxContent>
+
+    <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
+      <slot name="footer" :ui="ui" />
+    </div>
   </ListboxRoot>
 </template>

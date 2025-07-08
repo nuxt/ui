@@ -1,6 +1,7 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
-import Carousel, { type CarouselProps, type CarouselSlots } from '../../src/runtime/components/Carousel.vue'
+import Carousel from '../../src/runtime/components/Carousel.vue'
+import type { CarouselProps, CarouselSlots } from '../../src/runtime/components/Carousel.vue'
 import ComponentRender from '../component-render'
 
 const CarouselWrapper = defineComponent({

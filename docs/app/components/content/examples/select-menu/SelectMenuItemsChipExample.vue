@@ -24,6 +24,7 @@ const items = ref([
     }
   }
 ] satisfies SelectMenuItem[])
+
 const value = ref(items.value[0])
 </script>
 

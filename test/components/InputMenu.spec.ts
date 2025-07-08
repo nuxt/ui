@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import InputMenu, { type InputMenuProps, type InputMenuSlots } from '../../src/runtime/components/InputMenu.vue'
+import InputMenu from '../../src/runtime/components/InputMenu.vue'
+import type { InputMenuProps, InputMenuSlots } from '../../src/runtime/components/InputMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'

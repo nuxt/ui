@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Card, { type CardProps, type CardSlots } from '../../src/runtime/components/Card.vue'
+import Card from '../../src/runtime/components/Card.vue'
+import type { CardProps, CardSlots } from '../../src/runtime/components/Card.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/card'
 

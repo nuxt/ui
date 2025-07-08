@@ -36,6 +36,8 @@ interface Shortcut {
 
 const chainedShortcutRegex = /^[^-]+.*-.*[^-]+$/
 const combinedShortcutRegex = /^[^_]+.*_.*[^_]+$/
+// keyboard keys which can be combined with Shift modifier (in addition to alphabet keys)
+const shiftableKeys = ['arrowleft', 'arrowright', 'arrowup', 'arrowright', 'tab', 'escape', 'enter', 'backspace']
 
 export function extractShortcuts(items: any[] | any[][]) {
   const shortcuts: Record<string, Handler> = {}
@@ -76,7 +78,8 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       return
     }
 
-    const alphabeticalKey = /^[a-z]{1}$/i.test(e.key)
+    const alphabetKey = /^[a-z]{1}$/i.test(e.key)
+    const shiftableKey = shiftableKeys.includes(e.key.toLowerCase())
 
     let chainedKey
     chainedInputs.value.push(e.key)
@@ -109,9 +112,9 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       if (e.ctrlKey !== shortcut.ctrlKey) {
         continue
       }
-      // shift modifier is only checked in combination with alphabetical keys
-      // (shift with non-alphabetical keys would change the key)
-      if (alphabeticalKey && e.shiftKey !== shortcut.shiftKey) {
+      // shift modifier is only checked in combination with alphabet keys and some extra keys
+      // (shift with special characters would change the key)
+      if ((alphabetKey || shiftableKey) && e.shiftKey !== shortcut.shiftKey) {
         continue
       }
       // alt modifier changes the combined key anyways

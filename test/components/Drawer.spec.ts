@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Drawer, { type DrawerProps, type DrawerSlots } from '../../src/runtime/components/Drawer.vue'
+import Drawer from '../../src/runtime/components/Drawer.vue'
+import type { DrawerProps, DrawerSlots } from '../../src/runtime/components/Drawer.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/drawer'
 

@@ -757,6 +757,33 @@ name: 'input-menu-filter-fields-example'
 ---
 ::
 
+### With full content width
+
+You can expand the content to the full width of its items by using the `ui.content` key.
+
+::component-example
+---
+name: 'input-menu-content-width-example'
+collapse: true
+---
+::
+
+::tip
+You can also change the content width globally in your `app.config.ts`:
+
+```
+export default defineAppConfig({
+  ui: {
+    inputMenu: {
+      slots: {
+        content: 'min-w-fit'
+      }
+    }
+  }
+})
+```
+::
+
 ### As a CountryPicker
 
 This example demonstrates using the InputMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.

@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import DropdownMenu, { type DropdownMenuProps, type DropdownMenuSlots } from '../../src/runtime/components/DropdownMenu.vue'
+import DropdownMenu from '../../src/runtime/components/DropdownMenu.vue'
+import type { DropdownMenuProps, DropdownMenuSlots } from '../../src/runtime/components/DropdownMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/dropdown-menu'
 import { expectSlotProps } from '../utils/types'

@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import SelectMenu, { type SelectMenuProps, type SelectMenuSlots } from '../../src/runtime/components/SelectMenu.vue'
+import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
+import type { SelectMenuProps, SelectMenuSlots } from '../../src/runtime/components/SelectMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
