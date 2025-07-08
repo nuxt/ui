@@ -18,10 +18,10 @@ const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/use
 <template>
   <USelect
     v-model="value"
-    :ui="{ content: 'min-w-fit' }"
     :items="users"
     placeholder="Select user"
     value-key="value"
+    :ui="{ content: 'min-w-fit' }"
     class="w-48"
   >
     <template #item-label="{ item }">

@@ -62,13 +62,13 @@ const items = [
 <template>
   <UNavigationMenu
     :items="items"
-    class="w-full justify-center"
     :ui="{
       viewport: 'sm:w-(--reka-navigation-menu-viewport-width)',
       content: 'sm:w-auto',
       childList: 'sm:w-96',
       childLinkDescription: 'text-balance line-clamp-2'
     }"
+    class="w-full justify-center"
   >
     <template #docs-content="{ item }">
       <ul class="grid gap-2 p-4 lg:w-[500px] lg:grid-cols-[minmax(0,.75fr)_minmax(0,1fr)]">

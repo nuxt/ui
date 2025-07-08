@@ -697,10 +697,18 @@ collapse: true
 
 ### With full item width
 
-You can expand the select to the full width of its items using `ui.content` key.
+You can expand the content to the full width of its items using `ui.content` key.
+
+::component-example
+---
+name: 'select-item-full-width-example'
+collapse: true
+---
+::
 
 ::tip
-You can also change the content width globally using your app.config.ts:
+You can also change the content width globally in your `app.config.ts`:
+
 ```
 export default defineAppConfig({
   ui: {
@@ -712,13 +720,6 @@ export default defineAppConfig({
   }
 })
 ```
-::
-
-::component-example
----
-name: 'select-item-full-width-example'
-collapse: true
----
 ::
 
 ## API

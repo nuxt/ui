@@ -731,32 +731,6 @@ name: 'input-menu-fetch-example'
 ---
 ::
 
-### With full item width
-
-You can expand the input menu to the full width of its items using `ui.content` key.
-
-::tip
-You can also change the content width globally using your app.config.ts:
-```
-export default defineAppConfig({
-  ui: {
-    inputMenu: {
-      slots: {
-        content: 'min-w-fit'
-      }
-    }
-  }
-})
-```
-::
-
-::component-example
----
-name: 'input-menu-item-full-width-example'
-collapse: true
----
-::
-
 ### With ignore filter
 
 Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
@@ -781,6 +755,33 @@ Use the `filter-fields` prop with an array of fields to filter on. Defaults to `
 collapse: true
 name: 'input-menu-filter-fields-example'
 ---
+::
+
+### With full item width
+
+You can expand the content to the full width of its items using `ui.content` key.
+
+::component-example
+---
+name: 'input-menu-item-full-width-example'
+collapse: true
+---
+::
+
+::tip
+You can also change the content width globally in your `app.config.ts`:
+
+```
+export default defineAppConfig({
+  ui: {
+    inputMenu: {
+      slots: {
+        content: 'min-w-fit'
+      }
+    }
+  }
+})
+```
 ::
 
 ### As a CountryPicker

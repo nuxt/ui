@@ -16,9 +16,9 @@ const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/use
 <template>
   <USelectMenu
     :items="users"
-    :ui="{ content: 'min-w-fit' }"
     icon="i-lucide-user"
     placeholder="Select user"
+    :ui="{ content: 'min-w-fit' }"
     class="w-48"
   >
     <template #item-label="{ item }">
