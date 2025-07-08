@@ -6,7 +6,7 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/FileUpload.vue
-navigation.badge: New
+navigation.badge: Soon
 ---
 
 ## Usage
@@ -26,7 +26,7 @@ props:
 ---
 ::
 
-### Accept 
+### Accept
 
 Use the `accept` prop to specify the types of files that can be uploaded.
 
@@ -92,7 +92,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.up
 :::
 ::
 
-### Size 
+### Size
 
 Use the `size` prop to set the size of the component.
 
@@ -143,7 +143,7 @@ external:
 externalTypes:
   - FileUploadItem[]
 props:
-  modelValue: 
+  modelValue:
     - file:
         name: 'example.txt'
         size: 3145728
@@ -165,7 +165,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.fi
 :::
 ::
 
-### Disabled 
+### Disabled
 
 Use the `disabled` prop to disable the component.
 

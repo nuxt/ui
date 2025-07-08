@@ -104,51 +104,45 @@ export default {
       outside: ''
     }
   },
-  compoundVariants: [
-    {
-      dragging: true,
-      disabled: true,
-      class: {
-        base: 'cursor-not-allowed bg-accented/5'
-      }
-    },
-    {
-      multiple: true,
-      layout: 'grid',
-      class: {
-        files: 'grid grid-cols-3 gap-3',
-        file: 'text-default relative',
-        fileContent: 'relative rounded-md aspect-square flex items-center justify-center bg-elevated',
-        fileTrailing: 'absolute -top-1 -right-1',
-        fileImage: 'object-cover absolute inset-0 w-full h-full rounded-[inherit]'
-      }
-    },
-    {
-      multiple: false,
-      layout: 'grid',
-      class: {
-        files: 'grid grid-cols-1',
-        file: 'text-default rounded-md min-h-26 relative bg-elevated',
-        fileContent: 'absolute inset-0 flex items-center justify-center',
-        fileTrailing: 'absolute -top-2 -right-2',
-        fileImage: 'mx-auto max-w-full max-h-full object-contain'
-      }
-    },
-    {
-      layout: 'grid',
-      class: {
-        fileRemoveButton: 'rounded-full shadow-sm'
-      }
-    },
-    {
-      disabled: false,
-      isEmpty: true,
-      hasDefaultSlot: false,
-      class: {
-        base: 'hover:bg-accented/20'
-      }
+  compoundVariants: [{
+    dragging: true,
+    disabled: true,
+    class: {
+      base: 'cursor-not-allowed bg-accented/5'
     }
-  ],
+  }, {
+    multiple: true,
+    layout: 'grid',
+    class: {
+      files: 'grid grid-cols-3 gap-3',
+      file: 'text-default relative',
+      fileContent: 'relative rounded-md aspect-square flex items-center justify-center bg-elevated',
+      fileTrailing: 'absolute -top-1 -right-1',
+      fileImage: 'object-cover absolute inset-0 w-full h-full rounded-[inherit]'
+    }
+  }, {
+    multiple: false,
+    layout: 'grid',
+    class: {
+      files: 'grid grid-cols-1',
+      file: 'text-default rounded-md min-h-26 relative bg-elevated',
+      fileContent: 'absolute inset-0 flex items-center justify-center',
+      fileTrailing: 'absolute -top-2 -right-2',
+      fileImage: 'mx-auto max-w-full max-h-full object-contain'
+    }
+  }, {
+    layout: 'grid',
+    class: {
+      fileRemoveButton: 'rounded-full shadow-sm'
+    }
+  }, {
+    disabled: false,
+    isEmpty: true,
+    hasDefaultSlot: false,
+    class: {
+      base: 'hover:bg-accented/20'
+    }
+  }],
   defaultVariants: {
     size: 'md',
     layout: 'list',

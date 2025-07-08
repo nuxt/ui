@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/file-upload'
-import type { ComponentConfig } from '../types/utils'
 import type { AvatarProps } from '../types'
+import type { ComponentConfig } from '../types/utils'
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
 
@@ -86,8 +86,6 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
-const { t } = useLocale()
-
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FileUploadProps>(), {
@@ -97,50 +95,39 @@ const props = withDefaults(defineProps<FileUploadProps>(), {
   autofocusDelay: 0,
   multiple: false
 })
-
 const emits = defineEmits<FileUploadEmits<T>>()
 const slots = defineSlots<FileUploadSlots>()
+
+const files = defineModel<T[]>()
+
+const { t } = useLocale()
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 
-const {
-  emitFormBlur,
-  emitFormInput,
-  emitFormChange,
-  id,
-  name,
-  disabled,
-  emitFormFocus,
-  ariaAttrs
-} = useFormField<FileUploadProps>(props, { deferInputValidation: true })
+const { emitFormBlur, emitFormInput, emitFormChange, id, name, disabled, emitFormFocus, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
 
-const [DefineFilesPreviewTemplate, ReuseFilesPreviewTemplate]
-  = createReusableTemplate<{ files: T[] | undefined }>({
-    props: {
-      files: Object
-    }
-  })
+const [DefineFilesPreviewTemplate, ReuseFilesPreviewTemplate] = createReusableTemplate<{ files: T[] | undefined }>({
+  props: {
+    files: Object
+  }
+})
 
-const size = computed(() => props.size)
-const base = ref<HTMLElement | null>(null)
-const fileInputRef = ref<HTMLInputElement | null>(null)
-const files = defineModel<T[]>()
+const baseRef = ref<HTMLElement | null>(null)
+const inputRef = ref<HTMLInputElement | null>(null)
 const dragging = ref(false)
 const filePreviews = ref<Record<string, string>>({})
 
 const isEmpty = computed(() => !files.value || files.value?.length === 0)
 
-const ui = computed(() =>
-  tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
-    size: size.value,
-    multiple: props.multiple,
-    layout: props.layout,
-    dragging: dragging.value,
-    disabled: disabled.value,
-    isEmpty: isEmpty.value,
-    previewPlacement: props.previewPlacement,
-    hasDefaultSlot: !!slots.default
-  })
-)
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
+  size: props.size,
+  multiple: props.multiple,
+  layout: props.layout,
+  dragging: dragging.value,
+  disabled: disabled.value,
+  isEmpty: isEmpty.value,
+  previewPlacement: props.previewPlacement,
+  hasDefaultSlot: !!slots.default
+}))
 
 function fileKey(f: File) {
   // Use name + lastModified for uniqueness
@@ -202,8 +189,8 @@ function removeFile(f: T) {
   emitFormInput()
   emits('change', new Event('change'))
   // Reset input so the same file can be re-added
-  if (fileInputRef.value) {
-    fileInputRef.value.value = ''
+  if (inputRef.value) {
+    inputRef.value.value = ''
   }
 }
 
@@ -240,7 +227,7 @@ function onDragleave(event: DragEvent) {
   event.preventDefault()
 
   // Early return if the drag leave is within the base element
-  if (base.value && base.value.contains(event.relatedTarget as Node)) return
+  if (baseRef.value && baseRef.value.contains(event.relatedTarget as Node)) return
 
   dragging.value = false
   emits('dragleave', event)
@@ -259,16 +246,16 @@ function formatFileSize(bytes: number): string {
   return `${formattedSize} ${sizes[i]}`
 }
 
-const removeAll = () => {
+function removeAll() {
   files.value = []
   revokeAllPreviews()
-  if (fileInputRef.value) fileInputRef.value.value = ''
+  if (inputRef.value) inputRef.value.value = ''
   emits('change', new Event('change'))
 }
 
 function autoFocus() {
   if (props.autofocus) {
-    fileInputRef.value?.focus()
+    inputRef.value?.focus()
   }
 }
 
@@ -278,7 +265,7 @@ onMounted(() => {
   }, props.autofocusDelay)
 })
 
-defineExpose({ fileInputRef })
+defineExpose({ inputRef })
 </script>
 
 <template>
@@ -296,7 +283,7 @@ defineExpose({ fileInputRef })
             variant="outline"
             color="neutral"
             :size="props.size || 'md'"
-            @click="fileInputRef?.click()"
+            @click="inputRef?.click()"
           />
           <UButton
             id="remove-all"
@@ -379,27 +366,24 @@ defineExpose({ fileInputRef })
     </div>
   </DefineFilesPreviewTemplate>
 
-  <Primitive
-    :as="as"
-    :class="ui.root({ class: [props.class, props.ui?.root] })"
-  >
+  <Primitive :as="as" :class="ui.root({ class: [props.class, props.ui?.root] })">
     <div
-      ref="base"
-      :class="ui.base({ class: props.ui?.base })"
+      ref="baseRef"
       tabindex="0"
+      :class="ui.base({ class: props.ui?.base })"
       @drop="onDrop"
       @dragover="onDragover"
       @click="
         !disabled
           && (isEmpty || previewPlacement === 'outside')
           && !slots.default
-          && fileInputRef?.click()
+          && inputRef?.click()
       "
       @dragleave="onDragleave"
     >
       <input
         :id="id"
-        ref="fileInputRef"
+        ref="inputRef"
         type="file"
         :name="name"
         :accept="accept"
@@ -414,35 +398,25 @@ defineExpose({ fileInputRef })
       >
 
       <!-- Empty State -->
-      <div
-        v-if="isEmpty || previewPlacement === 'outside'"
-        :class="ui.empty({ class: props.ui?.empty })"
-      >
+      <div v-if="isEmpty || previewPlacement === 'outside'" :class="ui.empty({ class: props.ui?.empty })">
         <slot name="empty">
-          <UIcon
-            :name="props.uploadIcon || appConfig.ui.icons.upload"
-            :class="ui.uploadIcon({ class: props.ui?.uploadIcon })"
-          />
-          <div v-if="!!slots.default" @click.stop="fileInputRef?.click()">
+          <UIcon :name="props.uploadIcon || appConfig.ui.icons.upload" :class="ui.uploadIcon({ class: props.ui?.uploadIcon })" />
+
+          <div v-if="!!slots.default" @click.stop="inputRef?.click()">
             <slot />
           </div>
+
           <span :class="ui.label({ class: props.ui?.label })">
-            {{ label || t("fileUpload.empty") }}
+            {{ label || t('fileUpload.empty') }}
           </span>
         </slot>
       </div>
 
       <!-- File Layout (Inside) -->
-      <ReuseFilesPreviewTemplate
-        v-else-if="previewPlacement === 'inside'"
-        :files="files"
-      />
+      <ReuseFilesPreviewTemplate v-else-if="previewPlacement === 'inside'" :files="files" />
     </div>
 
     <!-- File Layout (Outside) -->
-    <ReuseFilesPreviewTemplate
-      v-if="previewPlacement === 'outside' && !isEmpty"
-      :files="files"
-    />
+    <ReuseFilesPreviewTemplate v-if="previewPlacement === 'outside' && !isEmpty" :files="files" />
   </Primitive>
 </template>
