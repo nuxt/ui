@@ -336,6 +336,7 @@ defineExpose({
       <div v-if="dots" :class="ui.dots({ class: props.ui?.dots })">
         <template v-for="(_, index) in scrollSnaps" :key="index">
           <button
+            type="button"
             :aria-label="t('carousel.goto', { slide: index + 1 })"
             :class="ui.dot({ class: props.ui?.dot, active: selectedIndex === index })"
             :data-state="selectedIndex === index ? 'active' : undefined"
