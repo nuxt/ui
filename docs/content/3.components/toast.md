@@ -107,7 +107,7 @@ name: 'toast-color-example'
 
 ### Close
 
-Pass a `close` field to customize or hide the close button (with `false` value).
+Pass a `close` field to customize or hide the close [Button](/components/button) (with `false` value).
 
 ::component-example
 ---
@@ -143,7 +143,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 ### Actions
 
-Pass an `actions` field to add some [Button](/components/button) actions to the Alert.
+Pass an `actions` field to add some [Button](/components/button) actions to the Toast.
 
 ::component-example
 ---
@@ -155,9 +155,23 @@ name: 'toast-actions-example'
 ---
 ::
 
+### Progress :badge{label="Soon" class="align-text-top"}
+
+Pass a `progress` field to customize or hide the [Progress](/components/progress) bar (with `false` value).
+
+::tip
+The Progress bar inherits the Toast color by default, but you can override it using the `progress.color` field.
+::
+
+::component-example
+---
+name: 'toast-progress-example'
+---
+::
+
 ### Orientation
 
-Use the `orientation` prop to change the orientation of the Toast.
+Pass an `orientation` field to the `toast.add` method to change the orientation of the Toast.
 
 ::component-example
 ---

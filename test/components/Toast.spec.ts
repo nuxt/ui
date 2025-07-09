@@ -1,7 +1,8 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
 import Toaster from '../../src/runtime/components/Toaster.vue'
-import Toast, { type ToastProps, type ToastSlots } from '../../src/runtime/components/Toast.vue'
+import Toast from '../../src/runtime/components/Toast.vue'
+import type { ToastProps, ToastSlots } from '../../src/runtime/components/Toast.vue'
 import ComponentRender from '../component-render'
 import { ClientOnly } from '#components'
 

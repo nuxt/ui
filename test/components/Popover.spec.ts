@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Popover, { type PopoverProps, type PopoverSlots } from '../../src/runtime/components/Popover.vue'
+import Popover from '../../src/runtime/components/Popover.vue'
+import type { PopoverProps, PopoverSlots } from '../../src/runtime/components/Popover.vue'
 import ComponentRender from '../component-render'
 
 describe('Popover', () => {

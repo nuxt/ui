@@ -102,7 +102,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     async function registerModule(name: string, key: string, options: Record<string, any>) {
       if (!hasNuxtModule(name)) {
-        await installModule(name, options)
+        await installModule(name, defu((nuxt.options as any)[key], options))
       } else {
         (nuxt.options as any)[key] = defu((nuxt.options as any)[key], options)
       }

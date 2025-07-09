@@ -14,8 +14,8 @@ const items = [
     v-slot="{ item }"
     orientation="vertical"
     :items="items"
-    class="w-full max-w-xs mx-auto"
     :ui="{ container: 'h-[336px]' }"
+    class="w-full max-w-xs mx-auto"
   >
     <img :src="item" width="320" height="320" class="rounded-lg">
   </UCarousel>

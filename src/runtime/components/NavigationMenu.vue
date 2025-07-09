@@ -177,6 +177,8 @@ import UBadge from './Badge.vue'
 import UPopover from './Popover.vue'
 import UTooltip from './Tooltip.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
   orientation: 'horizontal',
   contentOrientation: 'horizontal',
@@ -392,7 +394,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
     </component>
   </DefineItemTemplate>
 
-  <NavigationMenuRoot v-bind="rootProps" :data-collapsed="collapsed" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <NavigationMenuRoot v-bind="{ ...rootProps, ...$attrs }" :data-collapsed="collapsed" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="list-leading" />
 
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">

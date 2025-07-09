@@ -107,6 +107,8 @@ import { get } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<TreeProps<T, VK, M>>(), {
   labelKey: 'label' as never,
   valueKey: 'value' as never
@@ -199,7 +201,7 @@ const defaultExpanded = computed(() =>
   </DefineTreeTemplate>
 
   <TreeRoot
-    v-bind="(rootProps as unknown as TreeRootProps<NestedItem<T>>)"
+    v-bind="{ ...(rootProps as unknown as TreeRootProps<NestedItem<T>>), ...$attrs }"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemValue"
     :default-expanded="defaultExpanded"

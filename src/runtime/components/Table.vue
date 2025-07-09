@@ -83,10 +83,10 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    */
   empty?: string
   /**
-   * Whether the table should have a sticky header.
+   * Whether the table should have a sticky header or footer. True for both, 'header' for header only, 'footer' for footer only.
    * @defaultValue false
    */
-  sticky?: boolean
+  sticky?: boolean | 'header' | 'footer'
   /** Whether the table should be in loading state. */
   loading?: boolean
   /**
@@ -172,6 +172,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
 }
 
 type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-header`, (props: HeaderContext<T, unknown>) => any>
+type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => any>
 type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>
 
 export type TableSlots<T extends TableData = TableData> = {
@@ -181,7 +182,7 @@ export type TableSlots<T extends TableData = TableData> = {
   'caption': (props?: {}) => any
   'body-top': (props?: {}) => any
   'body-bottom': (props?: {}) => any
-} & DynamicHeaderSlots<T> & DynamicCellSlots<T>
+} & DynamicHeaderSlots<T> & DynamicFooterSlots<T> & DynamicCellSlots<T>
 
 </script>
 
@@ -215,6 +216,22 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {})
   loadingColor: props.loadingColor,
   loadingAnimation: props.loadingAnimation
 }))
+
+const hasFooter = computed(() => {
+  function hasFooterRecursive(columns: TableColumn<T>[]): boolean {
+    for (const column of columns) {
+      if ('footer' in column) {
+        return true
+      }
+      if ('columns' in column && hasFooterRecursive(column.columns as TableColumn<T>[])) {
+        return true
+      }
+    }
+    return false
+  }
+
+  return hasFooterRecursive(columns.value)
+})
 
 const globalFilterState = defineModel<string>('globalFilter', { default: undefined })
 const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters', { default: [] })
@@ -461,6 +478,30 @@ defineExpose({
 
         <slot name="body-bottom" />
       </tbody>
+
+      <tfoot v-if="hasFooter" :class="ui.tfoot({ class: [props.ui?.tfoot] })">
+        <tr :class="ui.separator({ class: [props.ui?.separator] })" />
+
+        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" :class="ui.tr({ class: [props.ui?.tr] })">
+          <th
+            v-for="header in footerGroup.headers"
+            :key="header.id"
+            :data-pinned="header.column.getIsPinned()"
+            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :class="ui.th({
+              class: [
+                props.ui?.th,
+                typeof header.column.columnDef.meta?.class?.th === 'function' ? header.column.columnDef.meta.class.th(header) : header.column.columnDef.meta?.class?.th
+              ],
+              pinned: !!header.column.getIsPinned()
+            })"
+          >
+            <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
+              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />
+            </slot>
+          </th>
+        </tr>
+      </tfoot>
     </table>
   </Primitive>
 </template>
