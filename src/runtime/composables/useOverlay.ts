@@ -87,11 +87,11 @@ function _useOverlay() {
   const open = <T extends Component>(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T> => {
     const overlay = getOverlay(id)
 
-    // If props are provided, update the overlay's props
+    // If props are provided, merge them with the original props, otherwise use the original props
     if (props) {
-      patch(overlay.id, props)
+      overlay.props = { ...overlay.originalProps, ...props }
     } else {
-      patch(overlay.id, overlay.originalProps)
+      overlay.props = { ...overlay.originalProps }
     }
 
     overlay.isOpen = true
