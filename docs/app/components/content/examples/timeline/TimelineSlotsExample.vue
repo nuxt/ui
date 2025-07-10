@@ -42,11 +42,11 @@ const items = [{
   <UTimeline
     :items="items"
     size="xs"
-    class="w-96"
     :ui="{
       date: 'float-end ms-1',
       description: 'px-3 py-2 ring ring-default mt-2 rounded-md text-default'
     }"
+    class="w-96"
   >
     <template #title="{ item }">
       <span>{{ item.username }}</span>

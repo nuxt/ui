@@ -88,11 +88,12 @@ export interface LinkSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { useForwardProps } from 'reka-ui'
+import { defu } from 'defu'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute, useAppConfig } from '#imports'
+import { mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
 import ULinkBase from './LinkBase.vue'
@@ -103,9 +104,7 @@ const props = withDefaults(defineProps<LinkProps>(), {
   as: 'button',
   type: 'button',
   ariaCurrentValue: 'page',
-  active: undefined,
-  activeClass: '',
-  inactiveClass: ''
+  active: undefined
 })
 defineSlots<LinkSlots>()
 
@@ -119,8 +118,8 @@ const ui = computed(() => tv({
   ...defu({
     variants: {
       active: {
-        true: props.activeClass,
-        false: props.inactiveClass
+        true: mergeClasses(appConfig.ui?.link?.variants?.active?.true, props.activeClass),
+        false: mergeClasses(appConfig.ui?.link?.variants?.active?.false, props.inactiveClass)
       }
     }
   }, appConfig.ui?.link || {})

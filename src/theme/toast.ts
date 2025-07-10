@@ -10,20 +10,18 @@ export default (options: Required<ModuleOptions>) => ({
     avatar: 'shrink-0',
     avatarSize: '2xl',
     actions: 'flex gap-1.5 shrink-0',
-    progress: 'absolute inset-x-0 bottom-0 h-1 z-[-1]',
+    progress: 'absolute inset-x-0 bottom-0',
     close: 'p-0'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         root: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`,
-        icon: `text-${color}`,
-        progress: `bg-${color}`
+        icon: `text-${color}`
       }])),
       neutral: {
         root: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted',
-        icon: 'text-highlighted',
-        progress: 'bg-inverted'
+        icon: 'text-highlighted'
       }
     },
     orientation: {

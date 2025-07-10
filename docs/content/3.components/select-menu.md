@@ -790,6 +790,33 @@ name: 'select-menu-filter-fields-example'
 ---
 ::
 
+### With full content width
+
+You can expand the content to the full width of its items by using the `ui.content` key.
+
+::component-example
+---
+name: 'select-menu-content-width-example'
+collapse: true
+---
+::
+
+::tip
+You can also change the content width globally in your `app.config.ts`:
+
+```
+export default defineAppConfig({
+  ui: {
+    selectMenu: {
+      slots: {
+        content: 'min-w-fit'
+      }
+    }
+  }
+})
+```
+::
+
 ### As a CountryPicker
 
 This example demonstrates using the SelectMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
@@ -800,6 +827,8 @@ collapse: true
 name: 'select-menu-countries-example'
 ---
 ::
+
+
 
 ## API
 

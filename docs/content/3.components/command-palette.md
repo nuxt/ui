@@ -877,6 +877,20 @@ props:
 This can be useful when using the CommandPalette inside a [`Modal`](/components/modal) for example.
 ::
 
+### With footer slot :badge{label="Soon" class="align-text-top"}
+
+Use the `#footer` slot to add custom content at the bottom of the CommandPalette, such as keyboard shortcuts help or additional actions.
+
+::component-example
+---
+collapse: true
+name: 'command-palette-footer-slot-example'
+class: '!p-0'
+props:
+  autofocus: false
+---
+::
+
 ### With custom slot
 
 Use the `slot` property to customize a specific item or group.
