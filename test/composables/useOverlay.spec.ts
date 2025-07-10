@@ -101,57 +101,57 @@ describe('useOverlay', () => {
     expect(props?.description).toBe('Original Description')
   })
 
-  describe('OverlayInstance methods', () => {
-    let modal: ReturnType<typeof overlay.create>
+  it('should open an overlay with default props', async () => {
+    const modal = overlay.create(MockModal, { props: { title: 'Deafult' } })
+    const instance = modal.open()
 
-    beforeEach(() => {
-      modal = overlay.create(MockModal)
-    })
+    const createdModal = getModalById(overlay.overlays, instance.id)
 
-    it('should open an overlay with default props', async () => {
-      const modal = overlay.create(MockModal, { props: { title: 'Deafult' } })
-      const instance = modal.open()
+    expect(createdModal.props).toEqual({ title: 'Deafult' })
+  })
 
-      const createdModal = getModalById(overlay.overlays, instance.id)
+  it('should open an overlay and override default props', async () => {
+    const modal = overlay.create(MockModal, { props: { title: 'default' } })
+    const instance = modal.open({ title: 'custom', description: 'custom description' })
 
-      expect(createdModal.props).toEqual({ title: 'Deafult' })
-    })
+    const createdModal = getModalById(overlay.overlays, instance.id)
 
-    it('should open an overlay and override default props', async () => {
-      const modal = overlay.create(MockModal, { props: { title: 'default' } })
-      const instance = modal.open({ title: 'custom' })
+    expect(createdModal).toBeDefined()
+    expect(createdModal.isOpen).toBe(true)
+    expect(createdModal.isMounted).toBe(true)
 
-      const createdModal = getModalById(overlay.overlays, instance.id)
+    // Opening the overlay again override the default props, but not the props that are already set
+    expect(createdModal.props).toEqual({ title: 'custom', description: 'custom description' })
 
-      expect(createdModal).toBeDefined()
-      expect(createdModal.isOpen).toBe(true)
-      expect(createdModal.isMounted).toBe(true)
+    const instance2 = modal.open({ title: 'custom2' })
 
-      expect(createdModal.props).toEqual({ title: 'custom' })
-    })
+    const createdModal2 = getModalById(overlay.overlays, instance2.id)
 
-    it('should return a promise that resolves when closed', async () => {
-      const instance = modal.open()
+    expect(createdModal2.props).toEqual({ title: 'custom2' })
+  })
 
-      // Simulate closing the modal
-      setTimeout(() => {
-        modal.close('test-result')
-      }, 0)
+  it('should return a promise that resolves when closed', async () => {
+    const modal = overlay.create(MockModal)
+    const instance = modal.open()
 
-      const result = await instance.result
-      expect(result).toBe('test-result')
-    })
+    // Simulate closing the modal
+    setTimeout(() => {
+      modal.close('test-result')
+    }, 0)
 
-    it('should close an overlay', () => {
-      const modal = overlay.create(MockModal)
+    const result = await instance.result
+    expect(result).toBe('test-result')
+  })
 
-      modal.open()
+  it('should close an overlay', () => {
+    const modal = overlay.create(MockModal)
 
-      expect(getModalById(overlay.overlays, modal.id).isOpen).toBe(true)
+    modal.open()
 
-      modal.close()
+    expect(getModalById(overlay.overlays, modal.id).isOpen).toBe(true)
 
-      expect(getModalById(overlay.overlays, modal.id).isOpen).toBe(false)
-    })
+    modal.close()
+
+    expect(getModalById(overlay.overlays, modal.id).isOpen).toBe(false)
   })
 })
