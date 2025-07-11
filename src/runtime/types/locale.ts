@@ -39,6 +39,7 @@ export type Messages = {
   carousel: {
     prev: string
     next: string
+    dots: string
     goto: string
   }
   modal: {

@@ -45,6 +45,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Հետ',
       next: 'Առաջ',
+      dots: 'Ընտրեք ցուցադրելու սլայդը',
       goto: 'Անցնել {slide}-ին'
     },
     modal: {

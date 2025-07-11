@@ -45,6 +45,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Föregående',
       next: 'Nästa',
+      dots: 'Välj bild att visa',
       goto: 'Gå till {slide}'
     },
     modal: {

@@ -45,6 +45,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Eel',
       next: 'Järg',
+      dots: 'Valige kuvatav slaid',
       goto: 'Mine slaidile {slide}'
     },
     modal: {

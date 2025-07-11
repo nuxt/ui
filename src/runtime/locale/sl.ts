@@ -45,6 +45,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Nazaj',
       next: 'Naprej',
+      dots: 'Izberite diapozitiv za prikaz',
       goto: 'Pojdi na {slide}'
     },
     modal: {

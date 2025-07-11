@@ -46,7 +46,8 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'السابق',
       next: 'التالي',
-      goto: 'الذهاب إلي شريحة {slide}'
+      dots: 'اختر الشريحة المراد عرضها',
+      goto: 'الذهاب إلى شريحة {slide}'
     },
     modal: {
       close: 'إغلاق'

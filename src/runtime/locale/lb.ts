@@ -45,6 +45,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Präz.',
       next: 'Näch.',
+      dots: 'Wielt Dia fir ze weisen',
       goto: 'Gitt op d\'Slide {Slide}'
     },
     modal: {

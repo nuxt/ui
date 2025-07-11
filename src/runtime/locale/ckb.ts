@@ -44,8 +44,9 @@ export default defineLocale<Messages>({
       close: 'داخستن'
     },
     carousel: {
-      prev: 'پێشوو',
+      prev: 'پێشووی',
       next: 'داهاتوو',
+      dots: 'سلایدێک هەڵبژێرە بۆ پیشاندان',
       goto: 'بڕۆ بۆ سلایدی {slide}'
     },
     modal: {

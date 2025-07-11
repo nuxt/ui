@@ -45,6 +45,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Predchádzajúci',
       next: 'Nasledujúci',
+      dots: 'Vyberte snímku na zobrazenie',
       goto: 'Prejsť na {slide}'
     },
     modal: {
