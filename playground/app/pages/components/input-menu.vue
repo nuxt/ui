@@ -20,6 +20,7 @@ const statuses = [{
   icon: 'i-lucide-circle-help'
 }, {
   label: 'Todo',
+  alias: 'To-do',
   icon: 'i-lucide-circle-plus'
 }, {
   label: 'In Progress',
@@ -103,6 +104,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
         v-for="size in sizes"
         :key="size"
         :items="statuses"
+        :filter-fields="['label', 'alias']"
         placeholder="Search status..."
         icon="i-lucide-search"
         trailing-icon="i-lucide-chevrons-up-down"
