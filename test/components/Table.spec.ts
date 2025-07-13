@@ -200,7 +200,7 @@ describe('Table', () => {
                 accessorKey: 'amount',
                 header: () => h('div', { ['data-test-th']: 'amount' }, 'Amount')
               } satisfies TableColumn<typeof data[number]>
-            ]
+              ]
             : [])
         ])
 
