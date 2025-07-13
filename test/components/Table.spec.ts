@@ -176,7 +176,9 @@ describe('Table', () => {
     ['with loading slot', { props: { columns, loading: true }, slots: { loading: () => 'Loading slot' } }],
     ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }],
     ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
-    ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
+    ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }],
+    ['with meta prop', { props: { ...props, meta: { class: { tr: 'custom-row-class' }, style: { tr: { backgroundColor: 'lightgray' } } } } }],
+    ['with meta field on columns', { props: { ...props, columns: columns.map(c => ({ ...c, meta: { class: { th: 'custom-heading-class', td: 'custom-cell-class' }, style: { th: { backgroundColor: 'black' }, td: { backgroundColor: 'lightgray' } } } })) } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps, slots?: Partial<TableSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()
@@ -194,11 +196,11 @@ describe('Table', () => {
           },
           ...(filter.value === 2
             ? [
-                {
-                  accessorKey: 'amount',
-                  header: () => h('div', { ['data-test-th']: 'amount' }, 'Amount')
-                } satisfies TableColumn<typeof data[number]>
-              ]
+              {
+                accessorKey: 'amount',
+                header: () => h('div', { ['data-test-th']: 'amount' }, 'Amount')
+              } satisfies TableColumn<typeof data[number]>
+            ]
             : [])
         ])
 
