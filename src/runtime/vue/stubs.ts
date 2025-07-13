@@ -1,10 +1,9 @@
 import { ref, onScopeDispose } from 'vue'
 import type { Ref, Plugin as VuePlugin } from 'vue'
 import { createHooks } from 'hookable'
-
+import { useColorMode as useColorModeVueUse } from '@vueuse/core'
 import appConfig from '#build/app.config'
 import type { NuxtApp } from '#app'
-import { useColorMode as useColorModeVueUse } from '@vueuse/core'
 
 export { useHead } from '@unhead/vue'
 export { useRoute, useRouter } from 'vue-router'
@@ -13,6 +12,10 @@ export { useAppConfig } from './composables/useAppConfig'
 export { defineShortcuts } from '../composables/defineShortcuts'
 export { defineLocale } from '../composables/defineLocale'
 export { useLocale } from '../composables/useLocale'
+
+export const clearError = () => {
+
+}
 
 export const useColorMode = () => {
   if (!appConfig.colorMode) {

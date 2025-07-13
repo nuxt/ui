@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Accordion, { type AccordionProps, type AccordionSlots } from '../../src/runtime/components/Accordion.vue'
+import Accordion from '../../src/runtime/components/Accordion.vue'
+import type { AccordionProps, AccordionSlots } from '../../src/runtime/components/Accordion.vue'
 import ComponentRender from '../component-render'
 
 describe('Accordion', () => {

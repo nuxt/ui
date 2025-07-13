@@ -18,7 +18,7 @@ export interface FormFieldProps {
   label?: string
   description?: string
   help?: string
-  error?: string | boolean
+  error?: boolean | string
   hint?: string
   /**
    * @defaultValue 'md'
@@ -41,13 +41,14 @@ export interface FormFieldSlots {
   hint(props: { hint?: string }): any
   description(props: { description?: string }): any
   help(props: { help?: string }): any
-  error(props: { error?: string | boolean }): any
-  default(props: { error?: string | boolean }): any
+  error(props: { error?: boolean | string }): any
+  default(props: { error?: boolean | string }): any
 }
 </script>
 
 <script setup lang="ts">
-import { computed, ref, inject, provide, type Ref, useId } from 'vue'
+import { computed, ref, inject, provide, useId } from 'vue'
+import type { Ref } from 'vue'
 import { Primitive, Label } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { formFieldInjectionKey, inputIdInjectionKey } from '../composables/useFormField'

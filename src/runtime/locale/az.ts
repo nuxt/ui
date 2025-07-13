@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Əvvəlki',
       next: 'Növbəti',
+      dots: 'Göstərmək üçün slayd seçin',
       goto: 'Slayd {slide} keç'
     },
     modal: {

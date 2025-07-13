@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Алдыңкы',
       next: 'Кийинки',
+      dots: 'Көрсөтүү үчүн слайдды тандаңыз',
       goto: '{slide} слайдга өтүү'
     },
     modal: {

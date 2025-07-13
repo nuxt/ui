@@ -26,6 +26,14 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         const template = (theme as any)[component]
         const result = typeof template === 'function' ? template(options) : template
 
+        // Override default variants from nuxt.config.ts
+        if (result?.defaultVariants?.color && options.theme?.defaultVariants?.color) {
+          result.defaultVariants.color = options.theme.defaultVariants.color
+        }
+        if (result?.defaultVariants?.size && options.theme?.defaultVariants?.size) {
+          result.defaultVariants.size = options.theme.defaultVariants.size
+        }
+
         const variants = Object.entries(result.variants || {})
           .filter(([_, values]) => {
             const keys = Object.keys(values as Record<string, unknown>)
@@ -56,7 +64,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           return [
             `import template from ${JSON.stringify(templatePath)}`,
             ...generateVariantDeclarations(variants),
-            `const result = typeof template === 'function' ? (template as Function)(${JSON.stringify(options, null, 2)}) : template`,
+            `const options = ${JSON.stringify(options, null, 2)}`,
+            `const result = typeof template === 'function' ? (template as Function)(options) : template`,
+            `if (result?.defaultVariants?.color && options.theme?.defaultVariants?.color) result.defaultVariants.color = options.theme.defaultVariants.color`,
+            `if (result?.defaultVariants?.size && options.theme?.defaultVariants?.size) result.defaultVariants.size = options.theme.defaultVariants.size`,
             `const theme = ${json}`,
             `export default result as typeof theme`
           ].join('\n\n')
@@ -158,13 +169,13 @@ import colors from 'tailwindcss/colors'
 
 const icons = ${JSON.stringify(uiConfig.icons)};
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | (string & {})
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {
   colors?: {
     ${options.theme?.colors?.map(color => `'${color}'?: Color`).join('\n\t\t')}
-    neutral?: NeutralColor
+    neutral?: NeutralColor | (string & {})
   }
   icons?: Partial<typeof icons>
   tv?: typeof defaultConfig

@@ -166,7 +166,27 @@ defineShortcuts({
       multiple
       class="sm:max-h-80"
       @update:model-value="onSelect"
-    />
+    >
+      <template #footer>
+        <div class="flex items-center justify-between gap-2">
+          <UIcon name="i-simple-icons-nuxtdotjs" class="size-5 text-dimmed ml-1" />
+          <div class="flex items-center gap-1">
+            <UButton color="neutral" variant="ghost" label="Open Command" class="text-dimmed" size="xs">
+              <template #trailing>
+                <UKbd value="enter" />
+              </template>
+            </UButton>
+            <USeparator orientation="vertical" class="h-4" />
+            <UButton color="neutral" variant="ghost" label="Actions" class="text-dimmed" size="xs">
+              <template #trailing>
+                <UKbd value="meta" />
+                <UKbd value="k" />
+              </template>
+            </UButton>
+          </div>
+        </div>
+      </template>
+    </UCommandPalette>
   </DefineTemplate>
 
   <div class="flex-1 flex flex-col gap-12 w-full max-w-lg">

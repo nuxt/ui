@@ -1,18 +1,19 @@
 <template>
   <UBanner
-    id="ui3-launch"
-    icon="i-lucide-rocket"
-    :actions="[
-      {
-        label: 'Discover Nuxt UI Pro',
-        to: '/pro/pricing',
-        trailingIcon: 'i-lucide-arrow-right'
-      }
-    ]"
+    id="nuxtlabs-join-vercel"
+    title="NuxtLabs is joining Vercel"
+    icon="i-simple-icons-vercel"
+    to="https://nuxtlabs.com/?utm_source=nuxt-ui&utm_medium=banner&utm_campaign=nuxtlabs-vercel"
+    target="_blank"
     close
-  >
-    <template #title>
-      <span class="font-semibold">Nuxt UI v3</span> is officially released.
-    </template>
-  </UBanner>
+    :actions="[{
+      label: 'Read the announcement',
+      color: 'neutral',
+      variant: 'outline',
+      trailingIcon: 'i-lucide-arrow-right',
+      to: 'https://nuxtlabs.com/?utm_source=nuxt-ui&utm_medium=banner&utm_campaign=nuxtlabs-vercel',
+      target: '_blank',
+      class: 'ring-0'
+    }]"
+  />
 </template>

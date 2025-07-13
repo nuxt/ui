@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import Tree, { type TreeProps, type TreeSlots, type TreeItem } from '../../src/runtime/components/Tree.vue'
+import Tree from '../../src/runtime/components/Tree.vue'
+import type { TreeProps, TreeSlots, TreeItem } from '../../src/runtime/components/Tree.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/tree'
 import { expectEmitPayloadType } from '../utils/types'

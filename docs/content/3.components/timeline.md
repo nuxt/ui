@@ -6,7 +6,7 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Timeline.vue
-navigation.badge: Soon
+navigation.badge: New
 ---
 
 ## Usage

@@ -33,5 +33,5 @@ jobs:
             Thank you for your understanding and support!
 
             — Nuxt UI Team
-          exempt-issue-labels: 'feature,announcement'
+          exempt-issue-labels: 'feature,announcement,release,reka-ui,upstream'
           operations-per-run: 300

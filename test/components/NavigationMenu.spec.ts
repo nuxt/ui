@@ -1,5 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
-import NavigationMenu, { type NavigationMenuProps, type NavigationMenuSlots } from '../../src/runtime/components/NavigationMenu.vue'
+import NavigationMenu from '../../src/runtime/components/NavigationMenu.vue'
+import type { NavigationMenuProps, NavigationMenuSlots } from '../../src/runtime/components/NavigationMenu.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/navigation-menu'
 import { expectSlotProps } from '../utils/types'

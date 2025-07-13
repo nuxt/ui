@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'পূর্ববর্তী',
       next: 'পরবর্তী',
+      dots: 'প্রদর্শনের জন্য স্লাইড নির্বাচন করুন',
       goto: 'স্লাইড {slide} এ যান'
     },
     modal: {

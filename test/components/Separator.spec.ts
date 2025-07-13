@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import Separator, { type SeparatorProps, type SeparatorSlots } from '../../src/runtime/components/Separator.vue'
+import Separator from '../../src/runtime/components/Separator.vue'
+import type { SeparatorProps, SeparatorSlots } from '../../src/runtime/components/Separator.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/separator'
 

@@ -14,18 +14,24 @@ exports[`Toast > renders with actions correctly 1`] = `
       <div class="w-0 flex-1 flex flex-col">
         <div class="text-sm font-medium text-highlighted">Toast</div>
         <!--v-if-->
-        <div class="flex gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <div class="flex gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <!--v-if--><span class="truncate">Action</span>
             <!--v-if-->
           </button></div>
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -51,12 +57,18 @@ exports[`Toast > renders with as correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </section>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -81,12 +93,18 @@ exports[`Toast > renders with avatar correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -112,12 +130,18 @@ exports[`Toast > renders with class correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -145,7 +169,13 @@ exports[`Toast > renders with close slot correctly 1`] = `
       <div class="flex gap-1.5 shrink-0 items-center">
         <!--v-if-->Close slot
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -171,12 +201,18 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -202,12 +238,18 @@ exports[`Toast > renders with color neutral correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-inverted" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-inverted data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -233,12 +275,18 @@ exports[`Toast > renders with description correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -264,12 +312,18 @@ exports[`Toast > renders with description slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -294,12 +348,18 @@ exports[`Toast > renders with icon correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -323,12 +383,18 @@ exports[`Toast > renders with leading slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -352,14 +418,20 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
         <div class="text-sm text-muted mt-1">This is a toast</div>
         <!--v-if-->
       </div>
-      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <div class="flex gap-1.5 shrink-0 items-center"><button type="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           <!--v-if--><span class="truncate">Action</span>
           <!--v-if-->
-        </button><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        </button><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button></div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -381,18 +453,24 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
       <div class="w-0 flex-1 flex flex-col">
         <div class="text-sm font-medium text-highlighted">Toast</div>
         <div class="text-sm text-muted mt-1">This is a toast</div>
-        <div class="flex gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <div class="flex gap-1.5 shrink-0 items-start mt-2.5"><button type="button" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <!--v-if--><span class="truncate">Action</span>
             <!--v-if-->
           </button></div>
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -418,12 +496,18 @@ exports[`Toast > renders with title correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -449,12 +533,18 @@ exports[`Toast > renders with title slot correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -480,12 +570,18 @@ exports[`Toast > renders with type correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -511,12 +607,18 @@ exports[`Toast > renders with ui correctly 1`] = `
         <!--v-if-->
       </div>
       <div class="flex gap-1.5 shrink-0 items-center">
-        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        <!--v-if--><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
           <!--v-if-->
           <!--v-if-->
         </button>
       </div>
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>
@@ -542,7 +644,13 @@ exports[`Toast > renders without close correctly 1`] = `
         <!--v-if-->
       </div>
       <!--v-if-->
-      <div class="absolute inset-x-0 bottom-0 h-1 z-[-1] bg-primary" style="width: 100%;"></div>
+      <div class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
+        <!--v-if-->
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
+          <div data-state="complete" data-value="100" data-max="100" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-0%);"></div>
+        </div>
+        <!--v-if-->
+      </div>
     </li>
   </ol><span aria-hidden="true" tabindex="0" style="position: fixed; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"></span>
 </div>

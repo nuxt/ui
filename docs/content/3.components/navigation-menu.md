@@ -889,7 +889,7 @@ You can inspect the DOM to see each item's content being rendered.
 
 ## Examples
 
-### With tooltip in items :badge{label="New" class="align-text-top"}
+### With tooltip in items
 
 When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip.
 
@@ -994,7 +994,7 @@ props:
 ---
 ::
 
-### With popover in items :badge{label="New" class="align-text-top"}
+### With popover in items
 
 When orientation is `vertical` and the menu is `collapsed`, you can set the `popover` prop to `true` to display a [Popover](/components/popover) around items with their children but you can also use the `popover` property on each item to override the default popover.
 
