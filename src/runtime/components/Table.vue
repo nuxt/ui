@@ -383,6 +383,14 @@ function onRowContextmenu(e: Event, row: TableRow<T>) {
   }
 }
 
+function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T | undefined {
+  if (typeof prop === 'function') {
+    // @ts-expect-error: TS can't know if prop is a function here
+    return prop(arg)
+  }
+  return prop
+}
+
 watch(
   () => props.data, () => {
     data.value = props.data ? [...props.data] : []
@@ -416,7 +424,7 @@ defineExpose({
             :class="ui.th({
               class: [
                 props.ui?.th,
-                typeof header.column.columnDef.meta?.class?.th === 'function' ? header.column.columnDef.meta.class.th(header) : header.column.columnDef.meta?.class?.th
+                resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
               pinned: !!header.column.getIsPinned()
             })"
@@ -444,10 +452,10 @@ defineExpose({
               :class="ui.tr({
                 class: [
                   props.ui?.tr,
-                  typeof tableApi.options.meta?.class?.tr === 'function' ? tableApi.options.meta.class.tr(row) : tableApi.options.meta?.class?.tr
+                  resolveValue(tableApi.options.meta?.class?.tr, row)
                 ]
               })"
-              :style="typeof tableApi.options.meta?.style?.tr === 'function' ? tableApi.options.meta?.style?.tr(row) : tableApi.options.meta?.style?.tr"
+              :style="resolveValue(tableApi.options.meta?.style?.tr, row)"
               @click="onRowSelect($event, row)"
               @pointerenter="onRowHover($event, row)"
               @pointerleave="onRowHover($event, null)"
@@ -457,16 +465,16 @@ defineExpose({
                 v-for="cell in row.getVisibleCells()"
                 :key="cell.id"
                 :data-pinned="cell.column.getIsPinned()"
-                :colspan="typeof cell.column.columnDef.meta?.colspan?.td === 'function' ? cell.column.columnDef.meta.colspan.td(cell) : cell.column.columnDef.meta?.colspan?.td"
-                :rowspan="typeof cell.column.columnDef.meta?.rowspan?.td === 'function' ? cell.column.columnDef.meta.rowspan.td(cell) : cell.column.columnDef.meta?.rowspan?.td"
+                :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
+                :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
                 :class="ui.td({
                   class: [
                     props.ui?.td,
-                    typeof cell.column.columnDef.meta?.class?.td === 'function' ? cell.column.columnDef.meta.class.td(cell) : cell.column.columnDef.meta?.class?.td
+                    resolveValue(cell.column.columnDef.meta?.class?.td, cell)
                   ],
                   pinned: !!cell.column.getIsPinned()
                 })"
-                :style="typeof cell.column.columnDef.meta?.style?.td === 'function' ? cell.column.columnDef.meta.style.td(cell) : cell.column.columnDef.meta?.style?.td"
+                :style="resolveValue(cell.column.columnDef.meta?.style?.td, cell)"
               >
                 <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
                   <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
@@ -511,11 +519,11 @@ defineExpose({
             :class="ui.th({
               class: [
                 props.ui?.th,
-                typeof header.column.columnDef.meta?.class?.th === 'function' ? header.column.columnDef.meta.class.th(header) : header.column.columnDef.meta?.class?.th
+                resolveValue(header.column.columnDef.meta?.class?.th, header)
               ],
               pinned: !!header.column.getIsPinned()
             })"
-            :style="typeof header.column.columnDef.meta?.style?.th === 'function' ? header.column.columnDef.meta.style.th(header) : header.column.columnDef.meta?.style?.th"
+            :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
           >
             <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />
