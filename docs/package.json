@@ -42,7 +42,7 @@
     "valibot": "^1.1.0",
     "workers-ai-provider": "^0.7.2",
     "yup": "^1.6.1",
-    "zod": "^3.25.76"
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "wrangler": "^4.24.3"
