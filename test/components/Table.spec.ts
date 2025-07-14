@@ -165,6 +165,8 @@ describe('Table', () => {
     ['with loading', { props: { ...props, loading: true } }],
     ...loadingColors.map((loadingColor: string) => [`with loading color ${loadingColor}`, { props: { ...props, loading: true, loadingColor } }]),
     ...loadingAnimations.map((loadingAnimation: string) => [`with loading animation ${loadingAnimation}`, { props: { ...props, loading: true, loadingAnimation } }]),
+    ['with meta prop', { props: { ...props, meta: { class: { tr: 'custom-row-class' }, style: { tr: { backgroundColor: 'lightgray' } } } } }],
+    ['with meta field on columns', { props: { ...props, columns: columns.map(c => ({ ...c, meta: { class: { th: 'custom-heading-class', td: 'custom-cell-class' }, style: { th: { backgroundColor: 'black' }, td: { backgroundColor: 'lightgray' } } } })) } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { base: 'table-auto' } } }],
@@ -176,9 +178,7 @@ describe('Table', () => {
     ['with loading slot', { props: { columns, loading: true }, slots: { loading: () => 'Loading slot' } }],
     ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }],
     ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
-    ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }],
-    ['with meta prop', { props: { ...props, meta: { class: { tr: 'custom-row-class' }, style: { tr: { backgroundColor: 'lightgray' } } } } }],
-    ['with meta field on columns', { props: { ...props, columns: columns.map(c => ({ ...c, meta: { class: { th: 'custom-heading-class', td: 'custom-cell-class' }, style: { th: { backgroundColor: 'black' }, td: { backgroundColor: 'lightgray' } } } })) } }]
+    ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TableProps, slots?: Partial<TableSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Table)
     expect(html).toMatchSnapshot()
