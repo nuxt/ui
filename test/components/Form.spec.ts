@@ -212,24 +212,24 @@ describe('Form', () => {
       await form.value.submit()
 
       expect(form.value.errors).toMatchObject([
-        { id: 'emailInput', name: 'email', message: 'Required' },
-        { id: 'passwordInput', name: 'password', message: 'Required' }
+        { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
+        { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
       ])
 
       expect(wrapper.setupState.onSubmit).not.toHaveBeenCalled()
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
       expect(wrapper.setupState.onError).toHaveBeenCalledWith(expect.objectContaining({
         errors: [
-          { id: 'emailInput', name: 'email', message: 'Required' },
-          { id: 'passwordInput', name: 'password', message: 'Required' }
+          { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
+          { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
         ]
       }))
 
       const emailField = wrapper.find('#emailField')
-      expect(emailField.text()).toBe('Required')
+      expect(emailField.text()).toBe('Invalid input: expected string, received undefined')
 
       const passwordField = wrapper.find('#passwordField')
-      expect(passwordField.text()).toBe('Required')
+      expect(passwordField.text()).toBe('Invalid input: expected string, received undefined')
     })
 
     test('validate on submit works', async () => {
@@ -267,8 +267,8 @@ describe('Form', () => {
       const errors = form.value.getErrors()
 
       expect(errors).toMatchObject([
-        { id: 'emailInput', name: 'email', message: 'Required' },
-        { id: 'passwordInput', name: 'password', message: 'Required' }
+        { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
+        { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
       ])
     })
 
@@ -424,14 +424,14 @@ describe('Form', () => {
       expect(wrapper.setupState.onSubmit).not.toHaveBeenCalled()
       expect(wrapper.setupState.onError).toHaveBeenCalledTimes(1)
       const onErrorCallArgs = wrapper.setupState.onError.mock.lastCall[0]
-      expect(onErrorCallArgs.children[0].errors).toMatchObject([{ id: 'nestedInput', name: 'field', message: 'Required' }])
+      expect(onErrorCallArgs.children[0].errors).toMatchObject([{ id: 'nestedInput', name: 'field', message: 'Invalid input: expected string, received undefined' }])
       expect(onErrorCallArgs.errors).toMatchObject([
-        { id: 'emailInput', name: 'email', message: 'Required' },
-        { id: 'passwordInput', name: 'password', message: 'Required' }
+        { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
+        { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
       ])
 
       const nestedField = wrapper.find('#nestedField')
-      expect(nestedField.text()).toBe('Required')
+      expect(nestedField.text()).toBe('Invalid input: expected string, received undefined')
     })
 
     test('submit event contains nested attributes', async () => {
