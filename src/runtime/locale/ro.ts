@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Anterior',
       next: 'Următor',
+      dots: 'Alegeți diapozitivul de afișat',
       goto: 'Mergi la diapozitivul {slide}'
     },
     modal: {

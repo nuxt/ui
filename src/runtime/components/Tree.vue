@@ -107,6 +107,8 @@ import { get } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<TreeProps<T, VK, M>>(), {
   labelKey: 'label' as never,
   valueKey: 'value' as never
@@ -161,7 +163,7 @@ const defaultExpanded = computed(() =>
         @toggle="item.onToggle"
         @select="item.onSelect"
       >
-        <button :disabled="item.disabled || disabled" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })">
+        <button type="button" :disabled="item.disabled || disabled" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })">
           <slot :name="((item.slot || 'item') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
             <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
               <UIcon
@@ -199,7 +201,7 @@ const defaultExpanded = computed(() =>
   </DefineTreeTemplate>
 
   <TreeRoot
-    v-bind="(rootProps as unknown as TreeRootProps<NestedItem<T>>)"
+    v-bind="{ ...(rootProps as unknown as TreeRootProps<NestedItem<T>>), ...$attrs }"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemValue"
     :default-expanded="defaultExpanded"

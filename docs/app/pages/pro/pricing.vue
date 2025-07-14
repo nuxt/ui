@@ -34,10 +34,19 @@ useSeoMeta({
       <div class="flex flex-col bg-default gap-8 lg:gap-0">
         <UPricingPlan
           v-bind="page.pricing.freePlan"
-          variant="naked"
-          class="lg:rounded-none border-x border-default border-t border-b lg:border-b-0"
+          class="lg:rounded-none ring-primary/15 ring-inset -mb-px bg-primary/5 z-[1]"
+          :ui="{ description: 'mt-0 text-primary' }"
+        >
+          <template #description>
+            <MDC :value="page.pricing.freePlan.description" unwrap="p" />
+          </template>
+        </UPricingPlan>
+
+        <UPricingPlan
+          v-bind="page.pricing.devPlan"
+          class="lg:rounded-none ring-inset -mb-px"
         />
-        <UPricingPlans compact>
+        <UPricingPlans compact class="-space-x-px">
           <UPricingPlan
             v-for="(plan, index) in page.pricing.plans"
             :key="index"
@@ -47,18 +56,17 @@ useSeoMeta({
             :discount="plan.discount"
             :billing-period="plan.billing_period"
             :billing-cycle="plan.billing_cycle"
-            :variant="plan.highlight ? 'soft' : 'outline'"
-            :class="['lg:rounded-none', { 'border-2 lg:border lg:border-x-0 border-primary lg:border-default': plan.highlight }]"
+            :variant="plan.highlight ? 'subtle' : 'outline'"
+            class="lg:rounded-none ring-inset -mb-px"
             :features="plan.features"
             :button="plan.button"
           />
         </UPricingPlans>
         <UPricingPlan
           v-bind="page.pricing.figma"
-          variant="naked"
           :billing-period="page.pricing.figma.billing_period"
           :billing-cycle="page.pricing.figma.billing_cycle"
-          class="lg:rounded-none border lg:border-y-0 border-default"
+          class="lg:rounded-none ring-inset -mb-px"
         >
           <template #features>
             <li v-for="(feature, index) in page.pricing.figma.features" :key="index" class="flex items-center gap-2 min-w-0">

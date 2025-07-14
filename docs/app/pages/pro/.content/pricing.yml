@@ -5,6 +5,17 @@ pricing:
   title: Upgrade to Nuxt UI [Pro]{class="text-primary"}.
   description: On top of 40+ open source components from Nuxt UI, Pro gives you access to 50+ premium Vue components to create beautiful & responsive Nuxt applications in minutes. It includes all primitives to build landing pages, documentations, blogs, dashboards or entire SaaS products.
   freePlan:
+    description: "**NuxtLabs is joining Vercel** :tada: As part of this transition, Nuxt UI is becoming even more accessible.<br><br> **In September, we're launching Nuxt UI v4**: a free, open-source library that unifies Nuxt UI and Nuxt UI Pro, offering 100+ components and a complete free Figma Kit for everyone."
+    orientation: horizontal
+    button:
+      label: Read the announcement
+      to: 'https://nuxtlabs.com/?utm_source=nuxt-ui&utm_medium=banner&utm_campaign=nuxtlabs-vercel'
+      target: _blank
+      color: 'neutral'
+      trailingIcon: 'i-lucide-arrow-right'
+      ui:
+        trailingIcon: 'ms-0'
+  devPlan:
     title: Free in development
     description: Try Nuxt UI Pro for free in development, no credit card required. Upgrade when ready to deploy.
     orientation: horizontal
@@ -13,6 +24,9 @@ pricing:
       to: '/getting-started/installation/pro/nuxt'
       color: 'neutral'
       variant: 'subtle'
+      trailingIcon: 'i-lucide-arrow-right'
+      ui:
+        trailingIcon: 'ms-0'
   figma:
     title: Figma Kit Pro
     description: Get all Nuxt UI Pro components in a Figma kit to design your next application before coding. Everything you need, from wire-framing to high-fidelity web integration.

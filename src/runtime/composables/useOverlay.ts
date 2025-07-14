@@ -71,7 +71,7 @@ function _useOverlay() {
       isMounted: !!defaultOpen,
       destroyOnClose: !!destroyOnClose,
       originalProps: props || {},
-      props: { ...(props || {}) }
+      props: { ...props }
     })
 
     overlays.push(options)
@@ -87,11 +87,11 @@ function _useOverlay() {
   const open = <T extends Component>(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T> => {
     const overlay = getOverlay(id)
 
-    // If props are provided, update the overlay's props
+    // If props are provided, merge them with the original props, otherwise use the original props
     if (props) {
-      patch(overlay.id, props)
+      overlay.props = { ...overlay.originalProps, ...props }
     } else {
-      patch(overlay.id, overlay.originalProps)
+      overlay.props = { ...overlay.originalProps }
     }
 
     overlay.isOpen = true
@@ -135,7 +135,7 @@ function _useOverlay() {
   const patch = <T extends Component>(id: symbol, props: Partial<ComponentProps<T>>): void => {
     const overlay = getOverlay(id)
 
-    overlay.props = { ...props }
+    overlay.props = { ...overlay.props, ...props }
   }
 
   const getOverlay = (id: symbol): Overlay => {

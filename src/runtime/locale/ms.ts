@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Sebelum',
       next: 'Seterusnya',
+      dots: 'Pilih slaid untuk dipaparkan',
       goto: 'Pergi ke slaid {slide}'
     },
     modal: {

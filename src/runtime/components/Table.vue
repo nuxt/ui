@@ -45,17 +45,25 @@ declare module '@tanstack/table-core' {
       th?: string | ((cell: Header<TData, TValue>) => string)
       td?: string | ((cell: Cell<TData, TValue>) => string)
     }
+    style?: {
+      th?: string | Record<string, string> | ((cell: Header<TData, TValue>) => string | Record<string, string>)
+      td?: string | Record<string, string> | ((cell: Cell<TData, TValue>) => string | Record<string, string>)
+    }
     colspan?: {
       td?: string | ((cell: Cell<TData, TValue>) => string)
     }
     rowspan?: {
       td?: string | ((cell: Cell<TData, TValue>) => string)
     }
+
   }
 
   interface TableMeta<TData> {
     class?: {
       tr?: string | ((row: Row<TData>) => string)
+    }
+    style?: {
+      tr?: string | Record<string, string> | ((row: Row<TData>) => string | Record<string, string>)
     }
   }
 
@@ -438,6 +446,7 @@ defineExpose({
                   typeof tableApi.options.meta?.class?.tr === 'function' ? tableApi.options.meta.class.tr(row) : tableApi.options.meta?.class?.tr
                 ]
               })"
+              :style="typeof tableApi.options.meta?.style?.tr === 'function' ? tableApi.options.meta?.style?.tr(row) : tableApi.options.meta?.style?.tr"
               @click="onRowSelect($event, row)"
               @pointerenter="onRowHover($event, row)"
               @pointerleave="onRowHover($event, null)"
@@ -456,6 +465,7 @@ defineExpose({
                   ],
                   pinned: !!cell.column.getIsPinned()
                 })"
+                :style="typeof cell.column.columnDef.meta?.style?.td === 'function' ? cell.column.columnDef.meta.style.td(cell) : cell.column.columnDef.meta?.style?.td"
               >
                 <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
                   <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
@@ -503,6 +513,7 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned()
             })"
+            :style="typeof header.column.columnDef.meta?.style?.th === 'function' ? header.column.columnDef.meta.style.th(header) : header.column.columnDef.meta?.style?.th"
           >
             <slot :name="`${header.id}-footer`" v-bind="header.getContext()">
               <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.footer" :props="header.getContext()" />

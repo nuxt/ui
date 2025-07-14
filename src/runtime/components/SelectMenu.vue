@@ -260,7 +260,11 @@ const filteredGroups = computed(() => {
   const fields = Array.isArray(props.filterFields) ? props.filterFields : [props.labelKey] as string[]
 
   return groups.value.map(items => items.filter((item) => {
-    if (typeof item !== 'object' || item === null) {
+    if (item === undefined || item === null) {
+      return false
+    }
+
+    if (typeof item !== 'object') {
       return contains(String(item), searchTerm.value)
     }
 
@@ -268,7 +272,10 @@ const filteredGroups = computed(() => {
       return true
     }
 
-    return fields.some(field => contains(get(item, field), searchTerm.value))
+    return fields.some((field) => {
+      const value = get(item, field)
+      return value !== undefined && value !== null && contains(String(value), searchTerm.value)
+    })
   })).filter(group => group.filter(item =>
     !isSelectItem(item) || (!item.type || !['label', 'separator'].includes(item.type))
   ).length > 0)
