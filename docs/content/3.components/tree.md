@@ -411,6 +411,7 @@ Use the `slot` property to customize a specific item.
 
 You will have access to the following slots:
 
+- `#{{ item.slot }}-wrapper`{lang="ts-type"}
 - `#{{ item.slot }}`{lang="ts-type"}
 - `#{{ item.slot }}-leading`{lang="ts-type"}
 - `#{{ item.slot }}-label`{lang="ts-type"}
