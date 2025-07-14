@@ -164,8 +164,8 @@ importers:
         specifier: ^1.6.0
         version: 1.6.1
       zod:
-        specifier: ^3.24.0
-        version: 3.25.76
+        specifier: ^3.24.0 || ^4.0.0
+        version: 4.0.5
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^1.5.2
