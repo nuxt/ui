@@ -412,6 +412,7 @@ defineExpose({
             :data-pinned="header.column.getIsPinned()"
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
             :class="ui.th({
               class: [
                 props.ui?.th,
@@ -506,6 +507,7 @@ defineExpose({
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
             :class="ui.th({
               class: [
                 props.ui?.th,
