@@ -73,9 +73,9 @@ const modelValue = defineModel<boolean>({ default: undefined })
 
 const appConfig = useAppConfig() as Switch['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'))
+const rootProps = useForwardProps(reactivePick(props, 'value', 'defaultValue'))
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps>(props)
+const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs, required: formFieldRequired } = useFormField<SwitchProps>(props)
 const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })({
@@ -85,6 +85,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}
   loading: props.loading,
   disabled: disabled.value || props.loading
 }))
+const decideRequired = computed(() => props.required || formFieldRequired.value)
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -102,6 +103,7 @@ function onUpdate(value: any) {
         :id="id"
         v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
         v-model="modelValue"
+        :required="decideRequired"
         :name="name"
         :disabled="disabled || loading"
         :class="ui.base({ class: props.ui?.base })"

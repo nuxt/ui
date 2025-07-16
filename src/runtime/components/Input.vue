@@ -91,11 +91,13 @@ const modelValue = useVModel<InputProps<T>, 'modelValue', 'update:modelValue'>(p
 
 const appConfig = useAppConfig() as Input['AppConfig']
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(props, { deferInputValidation: true })
+const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs, required: formFieldRequired } = useFormField<InputProps<T>>(props, { deferInputValidation: true })
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps<T>>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+
+const decideRequired = computed(() => props.required || formFieldRequired.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })({
   type: props.type as Input['variants']['type'],
@@ -184,7 +186,7 @@ defineExpose({
       :placeholder="placeholder"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
-      :required="required"
+      :required="decideRequired"
       :autocomplete="autocomplete"
       v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"

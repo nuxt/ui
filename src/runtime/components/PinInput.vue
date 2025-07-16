@@ -65,9 +65,11 @@ const emits = defineEmits<PinInputEmits<T>>()
 
 const appConfig = useAppConfig() as PinInput['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'required', 'type'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultValue', 'disabled', 'id', 'mask', 'modelValue', 'name', 'otp', 'type'), emits)
 
-const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(props)
+const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs, required: formFieldRequired } = useFormField<PinInputProps>(props)
+
+const decideRequired = computed(() => props.required || formFieldRequired.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || {}) })({
   color: color.value,
@@ -115,6 +117,7 @@ defineExpose({
     v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     :name="name"
+    :required="decideRequired"
     :placeholder="placeholder"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="emitFormInput()"

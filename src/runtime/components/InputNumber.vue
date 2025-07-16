@@ -100,11 +100,12 @@ const appConfig = useAppConfig() as InputNumber['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs, required: formFieldRequired } = useFormField<InputNumberProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputNumberProps>(props)
 
 const locale = computed(() => props.locale || codeLocale.value)
 const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+const decideRequired = computed(() => props.required || formFieldRequired.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {}) })({
   color: color.value,
@@ -157,6 +158,7 @@ defineExpose({
     :id="id"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
+    :required="decideRequired"
     :disabled="disabled"
     :locale="locale"
     @update:model-value="onUpdate"

@@ -81,6 +81,7 @@ provide(formFieldInjectionKey, computed(() => ({
   name: props.name,
   size: props.size,
   eagerValidation: props.eagerValidation,
+  required: props.required,
   validateOnInputDelay: props.validateOnInputDelay,
   errorPattern: props.errorPattern,
   hint: props.hint,

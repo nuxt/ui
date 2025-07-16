@@ -94,7 +94,7 @@ const modelValue = useVModel<TextareaProps<T>, 'modelValue', 'update:modelValue'
 
 const appConfig = useAppConfig() as Textarea['AppConfig']
 
-const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps<T>>(props, { deferInputValidation: true })
+const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs, required: formFieldRequired } = useFormField<TextareaProps<T>>(props, { deferInputValidation: true })
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.textarea || {}) })({
@@ -107,6 +107,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.textarea || 
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing
 }))
+const decideRequired = computed(() => props.required || formFieldRequired.value)
 
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
 
@@ -215,7 +216,7 @@ defineExpose({
       :placeholder="placeholder"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
-      :required="required"
+      :required="decideRequired"
       v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"
       @blur="onBlur"

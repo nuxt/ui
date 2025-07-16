@@ -32,15 +32,15 @@ const disabled = ref(false)
         class="gap-4 flex flex-col w-60"
         @submit="onSubmit"
       >
-        <UFormField label="Email" name="email">
+        <UFormField required label="Email" name="email">
           <UInput v-model="state.email" placeholder="john@lennon.com" />
         </UFormField>
 
-        <UFormField label="Password" name="password">
+        <UFormField required label="Password" name="password">
           <UInput v-model="state.password" type="password" />
         </UFormField>
 
-        <UFormField name="tos">
+        <UFormField required name="tos">
           <UCheckbox v-model="state.tos" label="I accept the terms and conditions" />
         </UFormField>
 
@@ -56,7 +56,7 @@ const disabled = ref(false)
 
     <div class="border border-default rounded-lg">
       <div class="py-2 px-4 flex gap-4 items-center">
-        <UFormField label="Validate on" class="flex items-center gap-2">
+        <UFormField required label="Validate on" class="flex items-center gap-2">
           <USelectMenu v-model="validateOn" :items="['input', 'change', 'blur']" multiple class="w-48" />
         </UFormField>
         <UCheckbox v-model="disabled" label="Disabled" />

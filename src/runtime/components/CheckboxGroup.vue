@@ -93,11 +93,14 @@ const slots = defineSlots<CheckboxGroupSlots<T>>()
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop'), emits)
 const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'))
 const proxySlots = omit(slots, ['legend'])
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs, required: formFieldRequired } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
+
+const decideRequired = computed(() => props.required || formFieldRequired.value)
+
 const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({
@@ -159,6 +162,7 @@ function onUpdate(value: any) {
   <CheckboxGroupRoot
     :id="id"
     v-bind="rootProps"
+    :required="decideRequired"
     :name="name"
     :disabled="disabled"
     :class="ui.root({ class: [props.ui?.root, props.class] })"

@@ -34,6 +34,7 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
   tooltip?: boolean | TooltipProps
   /** The value of the slider when initially rendered. Use when you do not need to control the state of the slider. */
   defaultValue?: number | number[]
+  required?: boolean
   class?: any
   ui?: Slider['slots']
 }
@@ -67,8 +68,9 @@ const appConfig = useAppConfig() as Slider['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits)
 
-const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SliderProps>(props)
+const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs, required: formFieldRequired } = useFormField<SliderProps>(props)
 
+const decideRequired = computed(() => props.required || formFieldRequired.value)
 const defaultSliderValue = computed(() => {
   if (typeof props.defaultValue === 'number') {
     return [props.defaultValue]
@@ -112,6 +114,7 @@ function onChange(value: any) {
     v-model="sliderValue"
     :name="name"
     :disabled="disabled"
+    :required="decideRequired"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :default-value="defaultSliderValue"
     @update:model-value="emitFormInput()"
