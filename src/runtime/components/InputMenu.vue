@@ -171,7 +171,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, ref, toRef, onMounted, toRaw } from 'vue'
+import { computed, ref, toRef, onMounted, toRaw, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
@@ -233,11 +233,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
 }))
 
 function displayValue(value: T): string {
-  if (!props.valueKey) {
-    return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
-  }
-
-  const item = items.value.find(item => compare(typeof item === 'object' ? get(item as Record<string, any>, props.valueKey as string) : item, value))
+  const item = items.value.find(item => compare(typeof item === 'object' && props.valueKey ? get(item as Record<string, any>, props.valueKey as string) : item, value))
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
@@ -305,6 +301,10 @@ function autoFocus() {
 }
 
 onMounted(() => {
+  nextTick(() => {
+    searchTerm.value = ''
+  })
+
   setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
@@ -440,7 +440,7 @@ defineExpose({
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
           <TagsInputItemText :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
             <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
-              {{ displayValue(item as T) }}
+              {{ displayValue(item as T) ?? item }}
             </slot>
           </TagsInputItemText>
 
