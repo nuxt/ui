@@ -70,9 +70,9 @@ export type RadioGroupEmits = RadioGroupRootEmits & {
   change: [payload: Event]
 }
 
-type SlotProps<T extends RadioGroupItem> = (props: { item: Exclude<T & { id: string }, RadioGroupValue | null>, modelValue?: RadioGroupValue }) => any
-
 type ReturnNormalizeGroupItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue | null>
+
+type SlotProps<T extends RadioGroupItem> = (props: { item: ReturnNormalizeGroupItem<T>, modelValue?: RadioGroupValue }) => any
 
 export interface RadioGroupSlots<T extends RadioGroupItem = RadioGroupItem> {
   legend(props?: {}): any
