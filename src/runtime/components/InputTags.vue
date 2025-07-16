@@ -88,7 +88,7 @@ const appConfig = useAppConfig() as InputTags['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs, required } = useFormField<InputTagsProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, required, ariaAttrs } = useFormField<InputTagsProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputTagsProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 

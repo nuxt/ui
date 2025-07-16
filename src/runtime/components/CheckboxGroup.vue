@@ -97,8 +97,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', '
 const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'))
 const proxySlots = omit(slots, ['legend'])
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs, required } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
-
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, required, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({

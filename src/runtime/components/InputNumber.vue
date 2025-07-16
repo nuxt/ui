@@ -100,7 +100,7 @@ const appConfig = useAppConfig() as InputNumber['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs, required } = useFormField<InputNumberProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, required, ariaAttrs } = useFormField<InputNumberProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputNumberProps>(props)
 
 const locale = computed(() => props.locale || codeLocale.value)

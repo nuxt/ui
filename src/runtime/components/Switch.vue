@@ -75,7 +75,7 @@ const appConfig = useAppConfig() as Switch['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'value', 'defaultValue'))
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs, required } = useFormField<SwitchProps>(props)
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, required, ariaAttrs } = useFormField<SwitchProps>(props)
 const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })({
