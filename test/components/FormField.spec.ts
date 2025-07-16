@@ -157,5 +157,25 @@ describe('FormField', () => {
       const attr = wrapper.find('[aria-invalid=true]')
       expect(attr.exists()).toBe(true)
     })
+
+    test('renders id for aria describedby when help prop is provided', async () => {
+      const wrapper = await renderFormField({
+        props: { help: 'somehelp' },
+        inputComponent
+      })
+
+      const attr = wrapper.find('[id=v-0-0-help]')
+      expect(attr.exists()).toBe(true)
+    })
+
+    test('renders no id for aria describedby when no help prop is provided', async () => {
+      const wrapper = await renderFormField({
+        props: { label: 'Username', description: 'Enter your username' },
+        inputComponent
+      })
+
+      const attr = wrapper.find('[id=v-0-0-help]')
+      expect(attr.exists()).toBe(false)
+    })
   })
 })
