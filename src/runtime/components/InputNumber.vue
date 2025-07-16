@@ -63,9 +63,9 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
 }
 
 export interface InputNumberEmits {
-  (e: 'update:modelValue', payload: number): void
-  (e: 'blur', event: FocusEvent): void
-  (e: 'change', payload: Event): void
+  'update:modelValue': [payload: number]
+  'blur': [event: FocusEvent]
+  'change': [payload: Event]
 }
 
 export interface InputNumberSlots {
