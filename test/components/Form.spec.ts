@@ -314,8 +314,8 @@ describe('Form', () => {
       emailInput.trigger('focus')
       await flushPromises()
       expect(mockWatchCallback).toHaveBeenCalledTimes(1)
-      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
-      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
+      expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
+      expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
 
     test('reactivity: touchedFields works on change', async () => {
@@ -327,8 +327,8 @@ describe('Form', () => {
       emailInput.trigger('change')
       await flushPromises()
       expect(mockWatchCallback).toHaveBeenCalledTimes(1)
-      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
-      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
+      expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
+      expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
 
     test('reactivity: blurredFields works', async () => {
@@ -340,8 +340,8 @@ describe('Form', () => {
       emailInput.trigger('blur')
       await flushPromises()
       expect(mockWatchCallback).toHaveBeenCalledTimes(1)
-      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
-      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
+      expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
+      expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
 
     test('reactivity: dirtyFields works', async () => {
@@ -352,8 +352,8 @@ describe('Form', () => {
       emailInput.trigger('change')
       await flushPromises()
       expect(mockWatchCallback).toHaveBeenCalledTimes(1)
-      expect(mockWatchCallback.mock.calls[0][0].has('email')).toBe(true)
-      expect(mockWatchCallback.mock.calls[0][0].has('password')).toBe(false)
+      expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('email')).toBe(true)
+      expect(mockWatchCallback.mock?.calls[0]?.[0]?.has('password')).toBe(false)
     })
 
     test('reactivity: dirty works', async () => {

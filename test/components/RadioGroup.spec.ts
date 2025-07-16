@@ -122,7 +122,7 @@ describe('RadioGroup', () => {
     test('no label for=... on FormField', async () => {
       const { wrapper } = await createForm()
       const formFieldLabel = wrapper.findAll('label').map(label => label.attributes()).filter(label => !label.for?.includes('Option'))[0]
-      expect(formFieldLabel.for).toBeUndefined()
+      expect(formFieldLabel?.for).toBeUndefined()
     })
   })
 })
