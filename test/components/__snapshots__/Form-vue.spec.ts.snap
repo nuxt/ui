@@ -21,7 +21,7 @@ exports[`Form > custom validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" value="short" aria-describedby="v-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -83,7 +83,7 @@ exports[`Form > joi validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" value="short" aria-describedby="v-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -149,7 +149,7 @@ exports[`Form > superstruct validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" value="short" aria-describedby="v-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -211,7 +211,7 @@ exports[`Form > valibot validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" value="short" aria-describedby="v-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -273,7 +273,7 @@ exports[`Form > yup validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" value="short" aria-describedby="v-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -335,7 +335,7 @@ exports[`Form > zod validation works > with error 1`] = `
       <!--v-if-->
     </div>
     <div class="">
-      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-describedby="v-1-error" aria-invalid="true" value="short">
+      <div class="relative inline-flex items-center"><input id="password" type="text" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" value="short" aria-describedby="v-1-error">
         <!--v-if-->
         <!--v-if-->
       </div>
