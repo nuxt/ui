@@ -169,10 +169,9 @@ const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
-const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs, required: formFieldRequired } = useFormField<InputProps>(props)
+const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs, required } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
-const decideRequired = computed(() => props.required || formFieldRequired.value)
 
 const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
 
@@ -258,7 +257,7 @@ defineExpose({
     v-slot="{ modelValue, open }"
     :name="name"
     v-bind="rootProps"
-    :required="decideRequired"
+    :required="required"
     :autocomplete="autocomplete"
     :disabled="disabled"
     :default-value="(defaultValue as (AcceptableValue | AcceptableValue[]))"

@@ -88,12 +88,11 @@ const appConfig = useAppConfig() as InputTags['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs, required: formFieldRequired } = useFormField<InputTagsProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs, required } = useFormField<InputTagsProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputTagsProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
-const decideRequired = computed(() => props.required || formFieldRequired.value)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTags || {}) })({
   color: color.value,
@@ -155,7 +154,7 @@ defineExpose({
     :default-value="defaultValue"
     :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     v-bind="rootProps"
-    :required="decideRequired"
+    :required="required"
     :name="name"
     :disabled="disabled"
     @update:model-value="onUpdate"

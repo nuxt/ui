@@ -97,9 +97,7 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', '
 const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'))
 const proxySlots = omit(slots, ['legend'])
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs, required: formFieldRequired } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
-
-const decideRequired = computed(() => props.required || formFieldRequired.value)
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs, required } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
 
 const id = _id.value ?? useId()
 
@@ -162,7 +160,7 @@ function onUpdate(value: any) {
   <CheckboxGroupRoot
     :id="id"
     v-bind="rootProps"
-    :required="decideRequired"
+    :required="required"
     :name="name"
     :disabled="disabled"
     :class="ui.root({ class: [props.ui?.root, props.class] })"

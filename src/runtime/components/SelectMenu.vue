@@ -209,12 +209,11 @@ const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffse
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as InputProps)
 
-const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs, required: formFieldRequired } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs, required } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
 const selectSize = computed(() => buttonGroupSize.value || formGroupSize.value)
-const decideRequired = computed(() => props.required || formFieldRequired.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 
@@ -400,7 +399,7 @@ defineExpose({
     v-slot="{ modelValue, open }"
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     ignore-filter
-    :required="decideRequired"
+    :required="required"
     as-child
     :name="name"
     :disabled="disabled"

@@ -101,7 +101,7 @@ const appConfig = useAppConfig() as RadioGroup['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop'), emits)
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs, required: formFieldRequired } = useFormField<RadioGroupProps<T>>(props, { bind: false })
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs, required } = useFormField<RadioGroupProps<T>>(props, { bind: false })
 const id = _id.value ?? useId()
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) })({
@@ -113,7 +113,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup |
   variant: props.variant,
   indicator: props.indicator
 }))
-const decideRequired = computed(() => props.required || formFieldRequired.value)
 
 function normalizeItem(item: any) {
   if (item === null) {
@@ -167,7 +166,7 @@ function onUpdate(value: any) {
     :id="id"
     v-slot="{ modelValue }"
     v-bind="rootProps"
-    :required="decideRequired"
+    :required="required"
 
     :name="name"
     :disabled="disabled"
