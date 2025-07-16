@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: '이전',
       next: '다음',
+      dots: '표시할 슬라이드 선택',
       goto: '{slide} 페이지로 이동'
     },
     modal: {

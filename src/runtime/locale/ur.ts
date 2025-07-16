@@ -40,6 +40,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'پچھلا',
       next: 'اگلا',
+      dots: 'دکھانے کے لیے سلائیڈ منتخب کریں',
       goto: 'سلائیڈ {slide} پر جائیں'
     },
     modal: {

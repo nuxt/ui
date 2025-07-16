@@ -256,6 +256,7 @@ const scrollSnaps = ref<number[]>([])
 function onInit(api: EmblaCarouselType) {
   scrollSnaps.value = api?.scrollSnapList() || []
 }
+
 function onSelect(api: EmblaCarouselType) {
   canScrollNext.value = api?.canScrollNext() || false
   canScrollPrev.value = api?.canScrollPrev() || false
@@ -300,8 +301,7 @@ defineExpose({
         <div
           v-for="(item, index) in items"
           :key="index"
-          role="group"
-          aria-roledescription="slide"
+          v-bind="dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
           :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >
           <slot :item="item" :index="index" />
@@ -333,14 +333,15 @@ defineExpose({
         />
       </div>
 
-      <div v-if="dots" :class="ui.dots({ class: props.ui?.dots })">
+      <div v-if="dots" role="tablist" :aria-label="t('carousel.dots')" :class="ui.dots({ class: props.ui?.dots })">
         <template v-for="(_, index) in scrollSnaps" :key="index">
           <button
             type="button"
+            role="tab"
             :aria-label="t('carousel.goto', { slide: index + 1 })"
+            :aria-selected="selectedIndex === index"
             :class="ui.dot({ class: props.ui?.dot, active: selectedIndex === index })"
             :data-state="selectedIndex === index ? 'active' : undefined"
-            :aria-current="selectedIndex === index ? true : undefined"
             @click="scrollTo(index)"
           />
         </template>

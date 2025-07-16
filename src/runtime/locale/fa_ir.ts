@@ -40,6 +40,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'قبلی',
       next: 'بعدی',
+      dots: 'اسلاید مورد نظر برای نمایش را انتخاب کنید',
       goto: 'رفتن به اسلاید {slide}'
     },
     modal: {

@@ -18,7 +18,7 @@ export interface FormFieldProps {
   label?: string
   description?: string
   help?: string
-  error?: string | boolean
+  error?: boolean | string
   hint?: string
   /**
    * @defaultValue 'md'
@@ -41,8 +41,8 @@ export interface FormFieldSlots {
   hint(props: { hint?: string }): any
   description(props: { description?: string }): any
   help(props: { help?: string }): any
-  error(props: { error?: string | boolean }): any
-  default(props: { error?: string | boolean }): any
+  error(props: { error?: boolean | string }): any
+  default(props: { error?: boolean | string }): any
 }
 </script>
 
