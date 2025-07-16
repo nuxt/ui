@@ -70,7 +70,9 @@ export type RadioGroupEmits = RadioGroupRootEmits & {
   change: [payload: Event]
 }
 
-type SlotProps<T extends RadioGroupItem> = (props: { item: T & { id: string }, modelValue?: RadioGroupValue }) => any
+type SlotProps<T extends RadioGroupItem> = (props: { item: Exclude<T & { id: string }, RadioGroupValue | null>, modelValue?: RadioGroupValue }) => any
+
+type ReturnNormalizeGroupItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue | null>
 
 export interface RadioGroupSlots<T extends RadioGroupItem = RadioGroupItem> {
   legend(props?: {}): any
@@ -114,21 +116,21 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup |
   indicator: props.indicator
 }))
 
-function normalizeItem(item: any) {
+function normalizeItem(item: T): ReturnNormalizeGroupItem<T> {
   if (item === null) {
     return {
       id: `${id}:null`,
       value: undefined,
       label: undefined
-    }
+    } as ReturnNormalizeGroupItem<T>
   }
 
-  if (typeof item === 'string' || typeof item === 'number') {
+  if (typeof item === 'string' || typeof item === 'number' || typeof item === 'bigint') {
     return {
       id: `${id}:${item}`,
       value: String(item),
       label: String(item)
-    }
+    } as ReturnNormalizeGroupItem<T>
   }
 
   const value = get(item, props.valueKey as string)
@@ -136,7 +138,7 @@ function normalizeItem(item: any) {
   const description = get(item, props.descriptionKey as string)
 
   return {
-    ...item,
+    ...(item as ReturnNormalizeGroupItem<T>),
     value,
     label,
     description,
