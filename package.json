@@ -112,6 +112,7 @@
     "@vueuse/integrations": "^13.5.0",
     "@vueuse/math": "^13.5.0",
     "@vueuse/nuxt": "13.1.0",
+    "unimport": "4.1.1",
     "chokidar": "3.6.0"
   }
 }

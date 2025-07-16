@@ -12,6 +12,7 @@ overrides:
   '@vueuse/integrations': ^13.5.0
   '@vueuse/math': ^13.5.0
   '@vueuse/nuxt': 13.1.0
+  unimport: 4.1.1
   chokidar: 3.6.0
 
 importers:
@@ -170,8 +171,8 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxt/ui-pro':
-        specifier: ^1.8.0
-        version: 1.8.0(vue@3.5.17(typescript@5.8.3))
+        specifier: https://pkg.pr.new/@nuxt/ui-pro@fdb0248
+        version: https://pkg.pr.new/@nuxt/ui-pro@fdb0248(vue@3.5.17(typescript@5.8.3))
       '@nuxtjs/plausible':
         specifier: ^1.2.0
         version: 1.2.0(magicast@0.3.5)
@@ -1210,8 +1211,9 @@ packages:
       vitest:
         optional: true
 
-  '@nuxt/ui-pro@1.8.0':
-    resolution: {integrity: sha512-J62jE/h4nISMAn13nz2Ije8YbX1lKtSOLIjSF7ssxItJHAm/3WtTvQl4pDXa4P1ApoP+VLOBfRqB1bL52Mh8ww==}
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@fdb0248':
+    resolution: {tarball: https://pkg.pr.new/@nuxt/ui-pro@fdb0248}
+    version: 1.8.0
 
   '@nuxt/vite-builder@4.0.0':
     resolution: {integrity: sha512-bg+t5CsHoVlyezx1L/3H/0DVi04HOnD80hwlQK8+AeFO6HpyqC9lg1+HCFgNWpgiA9k8j5T6y1Pt1rmIoB4L8A==}
@@ -6484,8 +6486,8 @@ packages:
   unifont@0.4.1:
     resolution: {integrity: sha512-zKSY9qO8svWYns+FGKjyVdLvpGPwqmsCjeJLN1xndMiqxHWBAhoWDMYMG960MxeV48clBmG+fDP59dHY1VoZvg==}
 
-  unimport@5.1.0:
-    resolution: {integrity: sha512-wMmuG+wkzeHh2KCE6yiDlHmKelN8iE/maxkUYMbmrS6iV8+n6eP1TH3yKKlepuF4hrkepinEGmBXdfo9XZUvAw==}
+  unimport@4.1.1:
+    resolution: {integrity: sha512-j9+fijH6aDd05yv1fXlyt7HSxtOWtGtrZeYTVBsSUg57Iuf+Ps2itIZjeyu7bEQ4k0WOgYhHrdW8m/pJgOpl5g==}
     engines: {node: '>=18.12.0'}
 
   unist-builder@4.0.0:
@@ -8218,7 +8220,7 @@ snapshots:
       tinyglobby: 0.2.14
       ufo: 1.6.1
       unctx: 2.4.1
-      unimport: 5.1.0
+      unimport: 4.1.1
       untyped: 2.0.0
     transitivePeerDependencies:
       - magicast
@@ -8244,7 +8246,7 @@ snapshots:
       tinyglobby: 0.2.14
       ufo: 1.6.1
       unctx: 2.4.1
-      unimport: 5.1.0
+      unimport: 4.1.1
       untyped: 2.0.0
     transitivePeerDependencies:
       - magicast
@@ -8332,7 +8334,7 @@ snapshots:
       - magicast
       - typescript
 
-  '@nuxt/ui-pro@1.8.0(vue@3.5.17(typescript@5.8.3))':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@fdb0248(vue@3.5.17(typescript@5.8.3))':
     dependencies:
       '@iconify-json/vscode-icons': 1.2.23
       '@nuxt/ui': 'link:'
@@ -12518,7 +12520,7 @@ snapshots:
       uncrypto: 0.1.3
       unctx: 2.4.1
       unenv: 2.0.0-rc.18
-      unimport: 5.1.0
+      unimport: 4.1.1
       unplugin-utils: 0.2.4
       unstorage: 1.16.1(@netlify/blobs@9.1.2)(db0@0.3.2)(ioredis@5.6.1)
       untyped: 2.0.0
@@ -12771,7 +12773,7 @@ snapshots:
       ultrahtml: 1.6.0
       uncrypto: 0.1.3
       unctx: 2.4.1
-      unimport: 5.1.0
+      unimport: 4.1.1
       unplugin: 2.3.5
       unplugin-vue-router: 0.14.0(@vue/compiler-sfc@3.5.17)(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
       unstorage: 1.16.1(@netlify/blobs@9.1.2)(db0@0.3.2)(ioredis@5.6.1)
@@ -14521,20 +14523,20 @@ snapshots:
       css-tree: 3.1.0
       ohash: 2.0.11
 
-  unimport@5.1.0:
+  unimport@4.1.1:
     dependencies:
       acorn: 8.15.0
       escape-string-regexp: 5.0.0
       estree-walker: 3.0.3
+      fast-glob: 3.3.3
       local-pkg: 1.1.1
       magic-string: 0.30.17
       mlly: 1.7.4
       pathe: 2.0.3
       picomatch: 4.0.2
-      pkg-types: 2.2.0
+      pkg-types: 1.3.1
       scule: 1.3.0
       strip-literal: 3.0.0
-      tinyglobby: 0.2.14
       unplugin: 2.3.5
       unplugin-utils: 0.2.4
 

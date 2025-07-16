@@ -11,7 +11,7 @@
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/image": "^1.10.0",
     "@nuxt/ui": "latest",
-    "@nuxt/ui-pro": "^1.8.0",
+    "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@fdb0248",
     "@nuxtjs/plausible": "^1.2.0",
     "@octokit/rest": "^21.1.1",
     "@vueuse/nuxt": "^13.5.0",
