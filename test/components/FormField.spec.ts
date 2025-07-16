@@ -94,7 +94,7 @@ describe('FormField', () => {
       }
     })
 
-    if (name === 'URadioGroup') {
+    if (name === 'RadioGroup') {
       test('unbinds label for', async () => {
         const wrapper = await renderFormField({
           props: { label: 'Label' },

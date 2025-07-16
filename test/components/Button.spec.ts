@@ -73,7 +73,7 @@ describe('Button', () => {
     button.trigger('click')
     await flushPromises()
 
-    const icon = wrapper.findComponent({ name: 'UIcon' })
+    const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
     expect(icon?.vm?.name).toBe('i-lucide-loader-circle')
@@ -104,7 +104,7 @@ describe('Button', () => {
     form.value.submit()
     await flushPromises()
 
-    const icon = wrapper.findComponent({ name: 'UIcon' })
+    const icon = wrapper.findComponent({ name: 'Icon' })
 
     expect(icon.classes()).toContain('animate-spin')
     expect(icon?.vm?.name).toBe('i-lucide-loader-circle')
