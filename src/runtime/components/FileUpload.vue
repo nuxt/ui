@@ -33,6 +33,7 @@ export interface FileUploadProps<M extends boolean = false> {
    * @defaultValue false
    */
   dropzone?: boolean
+  defaultValue?: File[]
   class?: any
   ui?: FileUpload['slots']
 }
@@ -46,6 +47,7 @@ export interface FileUploadSlots {
     open: UseFileDialogReturn['open']
     reset: UseFileDialogReturn['reset']
     previewUrls: string[]
+    files: FileList[]
   }): any
 }
 </script>
@@ -73,9 +75,8 @@ const appConfig = useAppConfig() as FileUpload['AppConfig']
 
 const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
 
-// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
-
+  dropzone: props.dropzone
 }))
 
 const inputRef = ref<HTMLInputElement>()
@@ -84,14 +85,14 @@ const { files, open, reset, onCancel, onChange } = useFileDialog({
   multiple: props.multiple,
   accept: props.accept,
   reset: props.reset,
-  input: inputRef.value
+  input: inputRef.value,
+  initialFiles: props.defaultValue
 })
 
 const previewUrls = computed(() => Array.from(files.value || []).map(file => URL.createObjectURL(file)))
 
 onChange((files) => {
-  console.log('files:', typeof files?.[0])
-  modelValue.value = props.multiple ? files : files?.[0]
+  modelValue.value = (props.multiple ? files : files?.[0]) as (M extends true ? File[] : File) | null
 })
 
 onCancel(() => {
@@ -101,7 +102,7 @@ onCancel(() => {
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot :open="open" :reset="reset" :preview-urls="previewUrls" />
+    <slot :open="open" :files="files" :reset="reset" :preview-urls="previewUrls" />
 
     <input
       :id="id"
@@ -113,6 +114,7 @@ onCancel(() => {
       :required="required"
       :disabled="disabled"
       hidden
+      tabindex="-1"
       v-bind="{ ...$attrs, ...ariaAttrs }"
     >
   </Primitive>

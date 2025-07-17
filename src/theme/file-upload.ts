@@ -1,5 +1,11 @@
 export default {
   slots: {
-    root: ''
+    root: '',
+    base: ''
+  },
+  variants: {
+    dropzone: {
+      base: 'border-dashed'
+    }
   }
 }
