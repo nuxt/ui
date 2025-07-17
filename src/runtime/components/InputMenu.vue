@@ -128,15 +128,16 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
 }
 
 export type InputMenuEmits<A extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
-  change: [payload: Event]
-  blur: [payload: FocusEvent]
-  focus: [payload: FocusEvent]
-  create: [item: string]
+  'change': [payload: Event]
+  'blur': [payload: FocusEvent]
+  'focus': [payload: FocusEvent]
+  'create': [item: string]
   /** Event handler when highlighted element changes. */
-  highlight: [payload: {
+  'highlight': [payload: {
     ref: HTMLElement
     value: GetModelValue<A, VK, M>
   } | undefined]
+  'remove-tag': [item: GetModelValue<A, VK, M>]
 } & GetModelValueEmits<A, VK, M>
 
 type SlotProps<T extends InputMenuItem> = (props: { item: T, index: number }) => any
@@ -171,7 +172,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, ref, toRef, onMounted, toRaw } from 'vue'
+import { computed, ref, toRef, onMounted, toRaw, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
@@ -233,11 +234,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
 }))
 
 function displayValue(value: T): string {
-  if (!props.valueKey) {
-    return value && (typeof value === 'object' ? get(value, props.labelKey as string) : value)
-  }
-
-  const item = items.value.find(item => compare(typeof item === 'object' ? get(item as Record<string, any>, props.valueKey as string) : item, value))
+  const item = items.value.find(item => compare(typeof item === 'object' && props.valueKey ? get(item as Record<string, any>, props.valueKey as string) : item, value))
   return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
 }
 
@@ -258,8 +255,12 @@ const filteredGroups = computed(() => {
 
   const fields = Array.isArray(props.filterFields) ? props.filterFields : [props.labelKey] as string[]
 
-  return groups.value.map(group => group.filter((item) => {
-    if (typeof item !== 'object' || item === null) {
+  return groups.value.map(items => items.filter((item) => {
+    if (item === undefined || item === null) {
+      return false
+    }
+
+    if (typeof item !== 'object') {
       return contains(String(item), searchTerm.value)
     }
 
@@ -267,7 +268,10 @@ const filteredGroups = computed(() => {
       return true
     }
 
-    return fields.some(field => contains(get(item, field), searchTerm.value))
+    return fields.some((field) => {
+      const value = get(item, field)
+      return value !== undefined && value !== null && contains(String(value), searchTerm.value)
+    })
   })).filter(group => group.filter(item =>
     !isInputItem(item) || (!item.type || !['label', 'separator'].includes(item.type))
   ).length > 0)
@@ -298,6 +302,10 @@ function autoFocus() {
 }
 
 onMounted(() => {
+  nextTick(() => {
+    searchTerm.value = ''
+  })
+
   setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
@@ -359,6 +367,7 @@ function onRemoveTag(event: any) {
     const modelValue = props.modelValue as GetModelValue<T, VK, true>
     const filteredValue = modelValue.filter(value => !isEqual(value, event))
     emits('update:modelValue', filteredValue as GetModelValue<T, VK, M>)
+    emits('remove-tag', event)
     onUpdate(filteredValue)
   }
 }
@@ -432,7 +441,7 @@ defineExpose({
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
           <TagsInputItemText :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
             <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
-              {{ displayValue(item as T) }}
+              {{ displayValue(item as T) ?? item }}
             </slot>
           </TagsInputItemText>
 

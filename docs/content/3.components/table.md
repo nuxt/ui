@@ -83,6 +83,9 @@ Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/lat
   - `class`:
     - `td`: [The classes to apply to the `td` element.]{class="text-muted"}
     - `th`: [The classes to apply to the `th` element.]{class="text-muted"}
+  - `style`:
+    - `td`: [The style to apply to the `td` element.]{class="text-muted"}
+    - `th`: [The style to apply to the `th` element.]{class="text-muted"}
 
 In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
@@ -112,6 +115,8 @@ Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/
 
 - `class`:
   - `tr`: [The classes to apply to the `tr` element.]{class="text-muted"}
+- `style`:
+  - `tr`: [The style to apply to the `tr` element.]{class="text-muted"}
 
 ### Loading
 
