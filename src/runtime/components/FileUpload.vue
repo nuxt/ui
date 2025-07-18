@@ -2,7 +2,6 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
-import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { ButtonProps } from '../types'
 import type { ComponentConfig } from '../types/utils'
 
@@ -58,16 +57,12 @@ export interface FileUploadEmits<M extends boolean = false> {
 }
 
 export interface FileUploadSlots {
-  default(props: {
-    open: UseFileDialogReturn['open']
-    reset: UseFileDialogReturn['reset']
-    previewUrls: string[]
-  }): any
+  default(props: { open: UseFileDialogReturn['open'], reset: UseFileDialogReturn['reset'] }): any
   leading(props?: {}): any
   label(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  preview(props?: {}): any
+  files(props: { files: FileList }): any
 }
 </script>
 
@@ -96,7 +91,7 @@ const appConfig = useAppConfig() as FileUpload['AppConfig']
 const inputRef = ref<HTMLInputElement>()
 const dropZoneRef = ref<HTMLDivElement>()
 
-const { files, open, reset, onCancel, onChange } = useFileDialog({
+const { files, open, reset, onChange } = useFileDialog({
   multiple: props.multiple,
   accept: props.accept,
   reset: props.reset,
@@ -105,10 +100,10 @@ const { files, open, reset, onCancel, onChange } = useFileDialog({
 })
 const { isOverDropZone } = useDropZone(dropZoneRef, {
   onDrop,
-  dataTypes: props.accept.split(','),
+  // dataTypes: props.accept.split(','),
   multiple: props.multiple
 })
-const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
+const { emitFormInput, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
   dropzone: props.dropzone,
@@ -116,24 +111,24 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload |
   size: props.size
 }))
 
-const previewUrls = computed(() => Array.from(files.value || []).map(file => URL.createObjectURL(file)))
-
 onChange((files) => {
   modelValue.value = (props.multiple ? files : files?.[0]) as (M extends true ? File[] : File) | null
-})
 
-onCancel(() => {
-  /** do something on cancel */
+  emitFormInput()
 })
 
 function onDrop(files: File[] | null) {
   modelValue.value = (props.multiple ? files : files?.[0]) as (M extends true ? File[] : File) | null
 }
+
+defineExpose({
+  inputRef
+})
 </script>
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot :open="open" :reset="reset" :preview-urls="previewUrls">
+    <slot :open="open" :reset="reset">
       <div
         ref="dropZoneRef"
         role="button"
@@ -165,6 +160,12 @@ function onDrop(files: File[] | null) {
             </slot>
           </div>
         </div>
+      </div>
+
+      <div v-if="files && files.length > 0" :class="ui.files({ class: props.ui?.files })">
+        <slot name="files" :files="files">
+          {{ files }}
+        </slot>
       </div>
     </slot>
 
