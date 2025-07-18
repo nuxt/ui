@@ -328,6 +328,17 @@ name: 'drawer-responsive-example'
 ---
 ::
 
+### Nested drawers :badge{label="Soon" class="align-text-top"}
+
+You can nest drawers within each other by using the `nested` prop.
+
+::component-example
+---
+prettier: true
+name: 'drawer-nested-example'
+---
+::
+
 ### With footer slot
 
 Use the `#footer` slot to add content after the Drawer's body.

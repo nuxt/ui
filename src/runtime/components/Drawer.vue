@@ -37,6 +37,11 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement
+  /**
+   * Whether the drawer is nested in another drawer.
+   * @defaultValue false
+   */
+  nested?: boolean
   class?: any
   ui?: Drawer['slots']
 }
@@ -57,7 +62,7 @@ export interface DrawerSlots {
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
 import { VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
-import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle } from 'vaul-vue'
+import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { usePortal } from '../composables/usePortal'
@@ -90,7 +95,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
 </script>
 
 <template>
-  <DrawerRoot v-bind="rootProps">
+  <component :is="nested ? DrawerRootNested : DrawerRoot" v-bind="rootProps">
     <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>
@@ -144,5 +149,5 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
         </slot>
       </DrawerContent>
     </DrawerPortal>
-  </DrawerRoot>
+  </component>
 </template>
