@@ -2,6 +2,8 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
+import type { UseComponentIconsProps } from '../composables/useComponentIcons'
+import type { ButtonProps } from '../types'
 import type { ComponentConfig } from '../types/utils'
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
@@ -14,6 +16,19 @@ export interface FileUploadProps<M extends boolean = false> {
   as?: any
   id?: string
   name?: string
+  /**
+   * The icon to display.
+   * @defaultValue appConfig.ui.icons.upload
+   * @IconifyIcon
+   */
+  icon?: string
+  label?: string
+  description?: string
+  actions?: ButtonProps[]
+  /**
+   * @defaultValue 'md'
+   */
+  size?: FileUpload['variants']['size']
   required?: boolean
   disabled?: boolean
   multiple?: M & boolean
@@ -30,7 +45,7 @@ export interface FileUploadProps<M extends boolean = false> {
   reset?: boolean
   /**
    * Create a zone that allows the user to drop files onto it.
-   * @defaultValue false
+   * @defaultValue true
    */
   dropzone?: boolean
   defaultValue?: File[]
@@ -47,8 +62,12 @@ export interface FileUploadSlots {
     open: UseFileDialogReturn['open']
     reset: UseFileDialogReturn['reset']
     previewUrls: string[]
-    files: FileList[]
   }): any
+  leading(props?: {}): any
+  label(props?: {}): any
+  description(props?: {}): any
+  actions(props?: {}): any
+  preview(props?: {}): any
 }
 </script>
 
@@ -58,28 +77,24 @@ import { Primitive } from 'reka-ui'
 import { useFileDialog, useDropZone } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
-
 import { tv } from '../utils/tv'
+import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FileUploadProps<M>>(), {
-  accept: '*'
+  accept: '*',
+  dropzone: true
 })
 defineEmits<FileUploadEmits<M>>()
-defineSlots<FileUploadSlots>()
+const slots = defineSlots<FileUploadSlots>()
 
 const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 
-const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
-
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
-  dropzone: props.dropzone
-}))
-
 const inputRef = ref<HTMLInputElement>()
+const dropZoneRef = ref<HTMLDivElement>()
 
 const { files, open, reset, onCancel, onChange } = useFileDialog({
   multiple: props.multiple,
@@ -88,6 +103,18 @@ const { files, open, reset, onCancel, onChange } = useFileDialog({
   input: inputRef.value,
   initialFiles: props.defaultValue
 })
+const { isOverDropZone } = useDropZone(dropZoneRef, {
+  onDrop,
+  dataTypes: props.accept.split(','),
+  multiple: props.multiple
+})
+const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
+  dropzone: props.dropzone,
+  multiple: props.multiple,
+  size: props.size
+}))
 
 const previewUrls = computed(() => Array.from(files.value || []).map(file => URL.createObjectURL(file)))
 
@@ -98,11 +125,48 @@ onChange((files) => {
 onCancel(() => {
   /** do something on cancel */
 })
+
+function onDrop(files: File[] | null) {
+  modelValue.value = (props.multiple ? files : files?.[0]) as (M extends true ? File[] : File) | null
+}
 </script>
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot :open="open" :files="files" :reset="reset" :preview-urls="previewUrls" />
+    <slot :open="open" :reset="reset" :preview-urls="previewUrls">
+      <div
+        ref="dropZoneRef"
+        role="button"
+        :data-dragging="isOverDropZone"
+        :class="ui.base({ class: props.ui?.base })"
+        @click="open()"
+      >
+        <div :class="ui.wrapper({ class: props.ui?.wrapper })">
+          <div :class="ui.leading({ class: props.ui?.leading })">
+            <slot name="leading">
+              <UIcon :name="icon || appConfig.ui.icons.upload" :class="ui.leadingIcon({ class: props.ui?.icon })" />
+            </slot>
+          </div>
+
+          <div v-if="label || !!slots.label" :class="ui.label({ class: props.ui?.label })">
+            <slot name="label">
+              {{ label }}
+            </slot>
+          </div>
+          <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
+            <slot name="description">
+              {{ description }}
+            </slot>
+          </div>
+
+          <div v-if="actions?.length || !!slots.actions" :class="ui.actions({ class: props.ui?.actions })">
+            <slot name="actions">
+              <UButton v-for="(action, index) in actions" :key="index" size="xs" v-bind="action" />
+            </slot>
+          </div>
+        </div>
+      </div>
+    </slot>
 
     <input
       :id="id"
@@ -113,9 +177,8 @@ onCancel(() => {
       :multiple="multiple"
       :required="required"
       :disabled="disabled"
-      hidden
-      tabindex="-1"
       v-bind="{ ...$attrs, ...ariaAttrs }"
+      hidden
     >
   </Primitive>
 </template>

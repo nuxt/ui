@@ -16,5 +16,6 @@ export default {
   loading: 'i-lucide-loader-circle',
   minus: 'i-lucide-minus',
   plus: 'i-lucide-plus',
-  search: 'i-lucide-search'
+  search: 'i-lucide-search',
+  upload: 'i-lucide-upload'
 }

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import theme from '#build/ui/file-upload'
+
+const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
 const MIN_DIMENSIONS = { width: 200, height: 200 }
@@ -64,41 +67,10 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
 
   console.log(res)
 }
-
-const files = ref<File[]>([
-  {
-    name: 'image-01.jpg',
-    size: 1528737,
-    type: 'image/jpeg',
-    url: 'https://picsum.photos/1000/800?grayscale&random=1',
-    id: 'image-01-123456789'
-  },
-  {
-    name: 'image-02.jpg',
-    size: 1528737,
-    type: 'image/jpeg',
-    url: 'https://picsum.photos/1000/800?grayscale&random=2',
-    id: 'image-02-123456789'
-  },
-  {
-    name: 'image-03.jpg',
-    size: 1528737,
-    type: 'image/jpeg',
-    url: 'https://picsum.photos/1000/800?grayscale&random=3',
-    id: 'image-03-123456789'
-  },
-  {
-    name: 'image-04.jpg',
-    size: 1528737,
-    type: 'image/jpeg',
-    url: 'https://picsum.photos/1000/800?grayscale&random=4',
-    id: 'image-04-123456789'
-  }
-])
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col items-center gap-8">
     <UForm :schema="schema" :state="state" class="space-y-4 w-80" @submit="onSubmit">
       <UFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max.">
         <UFileUpload v-slot="{ open, reset, previewUrls }" v-model="state.avatar" accept="image/*">
@@ -126,10 +98,14 @@ const files = ref<File[]>([
       <UButton label="Submit" type="submit" />
     </UForm>
 
-    <UFileUpload v-slot="{ files, open }" multiple>
-      {{ files?.[0]?.name }}
-
-      <UButton label="Upload" color="neutral" @click="open()" />
-    </UFileUpload>
+    <div class="flex items-center overflow-x-auto gap-4">
+      <UFileUpload
+        v-for="size in sizes"
+        :key="size"
+        :size="size"
+        label="Drop your image here"
+        description="SVG, PNG, JPG or GIF (max. 2MB)"
+      />
+    </div>
   </div>
 </template>
