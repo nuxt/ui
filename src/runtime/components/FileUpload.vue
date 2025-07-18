@@ -25,9 +25,15 @@ export interface FileUploadProps<M extends boolean = false> {
   description?: string
   actions?: ButtonProps[]
   /**
+   * @defaultValue 'primary'
+   */
+  color?: FileUpload['variants']['color']
+  /**
    * @defaultValue 'md'
    */
   size?: FileUpload['variants']['size']
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean
   required?: boolean
   disabled?: boolean
   multiple?: M & boolean
@@ -57,7 +63,11 @@ export interface FileUploadEmits<M extends boolean = false> {
 }
 
 export interface FileUploadSlots {
-  default(props: { open: UseFileDialogReturn['open'], reset: UseFileDialogReturn['reset'] }): any
+  default(props: {
+    open: UseFileDialogReturn['open']
+    reset: UseFileDialogReturn['reset']
+    urls: string[]
+  }): any
   leading(props?: {}): any
   label(props?: {}): any
   description(props?: {}): any
@@ -105,10 +115,14 @@ const { isOverDropZone } = useDropZone(dropZoneRef, {
 })
 const { emitFormInput, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
 
+const urls = computed(() => Array.from(files.value || []).map(file => URL.createObjectURL(file)))
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
   dropzone: props.dropzone,
   multiple: props.multiple,
-  size: props.size
+  color: props.color,
+  size: props.size,
+  highlight: props.highlight
 }))
 
 onChange((files) => {
@@ -121,6 +135,17 @@ function onDrop(files: File[] | null) {
   modelValue.value = (props.multiple ? files : files?.[0]) as (M extends true ? File[] : File) | null
 }
 
+function removeFile(index: number) {
+  const file = files.value?.[index]
+
+  if (file) {
+    URL.revokeObjectURL(URL.createObjectURL(file))
+  }
+
+  const fileListArr = Array.from(files.value!)
+  fileListArr.splice(index, 1)
+}
+
 defineExpose({
   inputRef
 })
@@ -128,12 +153,13 @@ defineExpose({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot :open="open" :reset="reset">
+    <slot :open="open" :reset="reset" :urls="urls">
       <div
         ref="dropZoneRef"
         role="button"
         :data-dragging="isOverDropZone"
         :class="ui.base({ class: props.ui?.base })"
+        tabindex="0"
         @click="open()"
       >
         <div :class="ui.wrapper({ class: props.ui?.wrapper })">
@@ -164,7 +190,11 @@ defineExpose({
 
       <div v-if="files && files.length > 0" :class="ui.files({ class: props.ui?.files })">
         <slot name="files" :files="files">
-          {{ files }}
+          <div v-for="(file, index) in files" :key="file.name" class="flex items-center gap-2 border border-default rounded-md p-2">
+            <UAvatar :src="urls[index]" :icon="appConfig.ui.icons.file" />
+            <span class="text-sm">{{ file.name }}</span>
+            <UButton size="xs" color="neutral" variant="link" :trailing-icon="appConfig.ui.icons.close" @click="removeFile(index)" />
+          </div>
         </slot>
       </div>
     </slot>
