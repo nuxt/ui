@@ -1,4 +1,4 @@
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
 import { describe, it, expect, test, vi } from 'vitest'
 import type { FormFieldProps, FormFieldSlots } from '../../src/runtime/components/FormField.vue'
 import ComponentRender from '../component-render'
