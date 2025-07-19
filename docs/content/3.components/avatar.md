@@ -94,7 +94,6 @@ prettier: true
 ignore:
   - src
   - chip.inset
-  - chip.color
 props:
   src: 'https://github.com/benjamincanac.png'
   chip:
