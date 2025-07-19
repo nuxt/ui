@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import { describe, it, expect, test, vi } from 'vitest'
 import type { FormFieldProps, FormFieldSlots } from '../../src/runtime/components/FormField.vue'
 import ComponentRender from '../component-render'
@@ -17,27 +17,34 @@ import {
   USwitch,
   USlider,
   UPinInput,
-  UFormField
+  UFormField,
+  UForm
 } from '#components'
 
-const inputComponents = [UInput, URadioGroup, UTextarea, UCheckbox, USelect, USelectMenu, UInputMenu, UInputNumber, USwitch, USlider, UPinInput]
+const inputComponents = [UInput, URadioGroup, UTextarea, UCheckbox, USelect, USelectMenu, UInputMenu, UInputNumber, USwitch, UPinInput, USlider]
 
 async function renderFormField(options: {
   props: Partial<FormFieldProps>
   inputComponent: typeof inputComponents[number]
 }) {
-  return await mountSuspended(UFormField, {
-    props: options.props,
+  return await mountSuspended(UForm, {
     slots: {
       default: {
         // @ts-expect-error - Object literal may only specify known properties, and setup does not exist in type
-        setup: () => ({ inputComponent: options.inputComponent }),
+        setup: () => ({
+          formFieldProps: options.props,
+          inputComponent: options.inputComponent
+        }),
         components: {
           UFormField,
+          USelectMenu,
+          UForm,
           ...inputComponents
         },
         template: `
-          <component :is="inputComponent" />
+          <UFormField v-bind="formFieldProps">
+            <component :is="inputComponent" :model-value="'0'" />
+          </UFormField>
         `
       }
     }
@@ -51,11 +58,12 @@ const FormFieldWrapper = defineComponent({
     UFormField
   },
   template: `
-<UFormField>
-  <template v-for="(_, name) in $slots" #[name]="slotData">
-    <slot :name="name" v-bind="slotData" />
-  </template>
-</UFormField>`
+    <UFormField>
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+      <slot :name="name" v-bind="slotData" />
+      </template>
+    </UFormField>
+  `
 })
 
 describe('FormField', () => {
@@ -117,6 +125,18 @@ describe('FormField', () => {
         expect(input.exists()).toBe(true)
       })
     }
+    test('binds required', async () => {
+      const wrapper = await renderFormField({
+        props: {
+          required: true,
+          name
+        },
+        inputComponent
+      })
+
+      const requiredInput = wrapper.find('[required], [aria-required=true]')
+      expect(requiredInput.exists()).toBe(true)
+    })
 
     test('binds hints with aria-describedby', async () => {
       const wrapper = await renderFormField({
