@@ -15,23 +15,29 @@ type HSVColor = {
 }
 
 function HSLtoHSV(hsl: HSLObject): HSVColor {
-  const x = hsl.S * (hsl.L < 50 ? hsl.L : 100 - hsl.L)
-  const v = hsl.L + (x / 100)
+  const s = hsl.S / 100
+  const l = hsl.L / 100
+  const v = l + s * Math.min(l, 1 - l)
+  const sv = v === 0 ? 0 : 2 * (1 - l / v)
 
   return {
     h: hsl.H,
-    s: hsl.L === 0 ? hsl.S : 2 * x / v,
-    v
+    s: Math.round(sv * 100),
+    v: Math.round(v * 100)
   }
 }
 
 function HSVtoHSL(hsv: HSVColor): HSLObject {
-  const x = (200 - hsv.s) * hsv.v / 100
+  const s = hsv.s / 100
+  const v = hsv.v / 100
+
+  const l = v * (1 - s / 2)
+  const sl = l === 0 || l === 1 ? 0 : (v - l) / Math.min(l, 1 - l)
 
   return {
     H: hsv.h,
-    S: x === 0 || x === 200 ? 0 : Math.round(hsv.s * hsv.v / (x <= 100 ? x : 200 - x)),
-    L: Math.round(x / 2)
+    S: Math.round(sl * 100),
+    L: Math.round(l * 100)
   }
 }
 

@@ -6,7 +6,7 @@ const colorHex = ref('#9C27B0')
   <div class="flex flex-col gap-5">
     <div class="flex items-center gap-2">
       <span :style="{ backgroundColor: colorHex }" class="inline-flex w-5 h-5 rounded" />
-      <code class="font-mono">{{ colorHex }}</code>
+      <UInput v-model="colorHex" />
     </div>
     <USeparator />
     <div class="flex justify-between gap-2">
