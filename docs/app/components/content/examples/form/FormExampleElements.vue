@@ -67,7 +67,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       </UFormField>
 
       <div class="flex flex-col gap-4">
-        <UFormField name="switch">
+        <UFormField>
           <USwitch v-model="state.switch" label="Switch me" />
         </UFormField>
 
