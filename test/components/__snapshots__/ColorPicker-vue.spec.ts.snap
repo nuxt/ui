@@ -50,7 +50,7 @@ exports[`ColorPicker > renders with format cmyk correctly 1`] = `
   <div data-v-c9a043d6="" class="flex gap-4">
     <div data-v-c9a043d6="" class="rounded-md touch-none w-42 h-42" style="background-color: #00FF8C;">
       <div data-v-c9a043d6="" class="w-full h-full relative rounded-md" data-color-picker-background="">
-        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24%;"></div>
+        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.310000000000002%;"></div>
       </div>
     </div>
     <div data-v-c9a043d6="" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
@@ -65,7 +65,7 @@ exports[`ColorPicker > renders with format hex correctly 1`] = `
   <div data-v-c9a043d6="" class="flex gap-4">
     <div data-v-c9a043d6="" class="rounded-md touch-none w-42 h-42" style="background-color: #00FF8C;">
       <div data-v-c9a043d6="" class="w-full h-full relative rounded-md" data-color-picker-background="">
-        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24%;"></div>
+        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313726000000003%;"></div>
       </div>
     </div>
     <div data-v-c9a043d6="" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
@@ -80,7 +80,7 @@ exports[`ColorPicker > renders with format hsl correctly 1`] = `
   <div data-v-c9a043d6="" class="flex gap-4">
     <div data-v-c9a043d6="" class="rounded-md touch-none w-42 h-42" style="background-color: #00FF8C;">
       <div data-v-c9a043d6="" class="w-full h-full relative rounded-md" data-color-picker-background="">
-        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24%;"></div>
+        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.400000000000006%;"></div>
       </div>
     </div>
     <div data-v-c9a043d6="" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
@@ -95,7 +95,7 @@ exports[`ColorPicker > renders with format lab correctly 1`] = `
   <div data-v-c9a043d6="" class="flex gap-4">
     <div data-v-c9a043d6="" class="rounded-md touch-none w-42 h-42" style="background-color: #00FF6F;">
       <div data-v-c9a043d6="" class="w-full h-full relative rounded-md" data-color-picker-background="">
-        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C757; left: 100%; top: 22%;"></div>
+        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C757; left: 100%; top: 22.031043999999994%;"></div>
       </div>
     </div>
     <div data-v-c9a043d6="" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">
@@ -110,7 +110,7 @@ exports[`ColorPicker > renders with format rgb correctly 1`] = `
   <div data-v-c9a043d6="" class="flex gap-4">
     <div data-v-c9a043d6="" class="rounded-md touch-none w-42 h-42" style="background-color: #00FF8C;">
       <div data-v-c9a043d6="" class="w-full h-full relative rounded-md" data-color-picker-background="">
-        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24%;"></div>
+        <div data-v-c9a043d6="" class="-translate-y-1/2 -translate-x-1/2 absolute size-4 ring-2 ring-(--color-white) rounded-full cursor-pointer data-[disabled]:cursor-not-allowed" style="background-color: #00C16A; left: 100%; top: 24.313726000000003%;"></div>
       </div>
     </div>
     <div data-v-c9a043d6="" class="w-[8px] relative rounded-md touch-none h-42" data-color-picker-track="">

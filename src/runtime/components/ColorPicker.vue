@@ -102,7 +102,6 @@ const pickedColor = computed<HSVColor>({
   },
   set(value) {
     const color = new ColorTranslator(HSVtoHSL(value), {
-      decimals: 2,
       labUnit: 'percent',
       cmykUnit: 'percent',
       cmykFunction: 'cmyk'
