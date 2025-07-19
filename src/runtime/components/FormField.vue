@@ -5,14 +5,12 @@ import type { ComponentConfig } from '../types/utils'
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>
 
-export interface FormFieldProps {
+interface FormFieldBaseProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
-  /** The name of the FormField. Also used to match form errors. */
-  name?: string
   /** A regular expression to match form error names. */
   errorPattern?: RegExp
   label?: string
@@ -24,7 +22,6 @@ export interface FormFieldProps {
    * @defaultValue 'md'
    */
   size?: FormField['variants']['size']
-  required?: boolean
   /** If true, validation on input will be active immediately instead of waiting for a blur event. */
   eagerValidation?: boolean
   /**
@@ -35,6 +32,25 @@ export interface FormFieldProps {
   class?: any
   ui?: FormField['slots']
 }
+
+/**
+ * A discriminated union that makes the `name` prop conditional
+ * based on the `required` prop.
+ */
+export type FormFieldProps = FormFieldBaseProps & (
+  | {
+    /** If true, the `name` prop is also required. */
+    required: true
+    /** The name of the FormField. Required when the field is required. */
+    name: string
+  }
+  | {
+    /** If false or undefined, the `name` prop is optional. */
+    required?: false
+    /** The name of the FormField. */
+    name?: string
+  }
+)
 
 export interface FormFieldSlots {
   label(props: { label?: string }): any
