@@ -37,7 +37,6 @@ async function renderFormField(options: {
         }),
         components: {
           UFormField,
-          USelectMenu,
           UForm,
           ...inputComponents
         },
