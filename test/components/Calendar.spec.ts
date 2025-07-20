@@ -36,6 +36,7 @@ describe('Calendar', () => {
     ['without fixedWeeks', { props: { fixedWeeks: false } }],
     ['without monthControls', { props: { monthControls: false } }],
     ['without yearControls', { props: { yearControls: false } }],
+    ['without weekNumbers', { props: { weekNumbers: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral' } }],
     ['with as', { props: { as: 'section' } }],

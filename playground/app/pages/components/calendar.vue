@@ -12,13 +12,13 @@ const rangeValue = shallowRef({
 <template>
   <div class="flex gap-4">
     <div class="flex justify-center gap-2">
-      <UCalendar v-model="singleValue" />
+      <UCalendar v-model="singleValue" week-numbers />
     </div>
     <div class="flex justify-center gap-2">
-      <UCalendar v-model="multipleValue" multiple />
+      <UCalendar v-model="multipleValue" multiple week-numbers />
     </div>
     <div class="flex justify-center gap-2">
-      <UCalendar v-model="rangeValue" range />
+      <UCalendar v-model="rangeValue" range week-numbers />
     </div>
   </div>
 </template>
