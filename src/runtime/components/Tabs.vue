@@ -3,7 +3,7 @@
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
-import type { AvatarProps } from '../types'
+import type { AvatarProps, BadgeProps } from '../types'
 import type { DynamicSlots, ComponentConfig } from '../types/utils'
 
 type Tabs = ComponentConfig<typeof theme, AppConfig, 'tabs'>
@@ -15,13 +15,18 @@ export interface TabsItem {
    */
   icon?: string
   avatar?: AvatarProps
+  /**
+   * Display a badge on the item.
+   * `{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
+   */
+  badge?: string | number | BadgeProps
   slot?: string
   content?: string
   /** A unique value for the tab item. Defaults to the index. */
   value?: string | number
   disabled?: boolean
   class?: any
-  ui?: Pick<Tabs['slots'], 'trigger' | 'leadingIcon' | 'leadingAvatar' | 'label' | 'content'>
+  ui?: Pick<Tabs['slots'], 'trigger' | 'leadingIcon' | 'leadingAvatar' | 'label' | 'content' | 'trailingBadge' | 'trailingBadgeSize'>
   [key: string]: any
 }
 
@@ -141,7 +146,16 @@ defineExpose({
           <slot :item="item" :index="index">{{ get(item, props.labelKey as string) }}</slot>
         </span>
 
-        <slot name="trailing" :item="item" :index="index" />
+        <slot name="trailing" :item="item" :index="index">
+          <UBadge
+            v-if="item.badge"
+            color="neutral"
+            variant="outline"
+            :size="((item.ui?.trailingBadgeSize || props.ui?.trailingBadgeSize || ui.trailingBadgeSize()) as BadgeProps['size'])"
+            v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+            :class="ui.trailingBadge({ class: [props.ui?.trailingBadge, item.ui?.trailingBadge] })"
+          />
+        </slot>
       </TabsTrigger>
 
       <slot name="list-trailing" />
