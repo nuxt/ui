@@ -25,7 +25,7 @@ export type TreeItem = {
   onToggle?(e: Event): void
   onSelect?(e?: Event): void
   class?: any
-  ui?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>
+  ui?: Pick<Tree['slots'], 'item' | 'itemChild' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon'>
   [key: string]: any
 }
 
@@ -101,7 +101,7 @@ export type TreeSlots<
 <script setup lang="ts" generic="T extends TreeItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">
 import { computed } from 'vue'
 import { TreeRoot, TreeItem, useForwardPropsEmits } from 'reka-ui'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
@@ -119,8 +119,6 @@ const slots = defineSlots<TreeSlots<T>>()
 const appConfig = useAppConfig() as Tree['AppConfig']
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'items', 'multiple', 'expanded', 'disabled', 'propagateSelect', 'bubbleSelect'), emits)
-
-const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: TreeItem[], level: number }, TreeSlots<T>>()
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) })({
   color: props.color,
@@ -149,64 +147,57 @@ const defaultExpanded = computed(() =>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DefineTreeTemplate v-slot="{ items, level }">
-    <li
-      v-for="(item, index) in items"
-      :key="`${level}-${index}`"
-      :class="level > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
-    >
-      <TreeItem
-        v-slot="{ isExpanded, isSelected }"
-        as-child
-        :level="level"
-        :value="item"
-        @toggle="item.onToggle"
-        @select="item.onSelect"
-      >
-        <button type="button" :disabled="item.disabled || disabled" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })">
-          <slot :name="((item.slot || 'item') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
-            <slot :name="((item.slot ? `${item.slot}-leading`: 'item-leading') as keyof TreeSlots<T>)" v-bind="{ index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
-              <UIcon
-                v-if="item.icon"
-                :name="item.icon"
-                :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
-              />
-              <UIcon
-                v-else-if="item.children?.length"
-                :name="isExpanded ? (expandedIcon ?? appConfig.ui.icons.folderOpen) : (collapsedIcon ?? appConfig.ui.icons.folder)"
-                :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
-              />
-            </slot>
-
-            <span v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>]" :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })">
-              <slot :name="((item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>)" v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
-                {{ getItemLabel(item) }}
-              </slot>
-            </span>
-
-            <span v-if="item.trailingIcon || item.children?.length || !!slots[(item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>]" :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })">
-              <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>)" v-bind="{ item, index, level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
-                <UIcon v-if="item.trailingIcon" :name="item.trailingIcon" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })" />
-                <UIcon v-else-if="item.children?.length" :name="trailingIcon ?? appConfig.ui.icons.chevronDown" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })" />
-              </slot>
-            </span>
-          </slot>
-        </button>
-
-        <ul v-if="item.children?.length && isExpanded" :class="ui.listWithChildren({ class: [props.ui?.listWithChildren, item.ui?.listWithChildren] })">
-          <ReuseTreeTemplate :items="item.children" :level="level + 1" />
-        </ul>
-      </TreeItem>
-    </li>
-  </DefineTreeTemplate>
-
   <TreeRoot
+    v-slot="{ flattenItems }"
     v-bind="{ ...(rootProps as unknown as TreeRootProps<NestedItem<T>>), ...$attrs }"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemValue"
     :default-expanded="defaultExpanded"
     :selection-behavior="selectionBehavior"
   >
-    <ReuseTreeTemplate :items="items" :level="0" />
+    <li
+      v-for="(item, index) in flattenItems"
+      :key="`${item.level}-${index}`"
+      :style="{ '--item-level': item.level - 1 }"
+      :class="item.level > 1 ? ui.itemChild({ class: [props.ui?.itemChild, item.value.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.value.ui?.item] })"
+    >
+      <TreeItem
+        v-slot="{ isExpanded, isSelected }"
+        as-child
+        v-bind="item.bind"
+        @toggle="item.value.onToggle"
+        @select="item.value.onSelect"
+      >
+        <button type="button" :disabled="item.value.disabled || disabled" :class="ui.link({ class: [props.ui?.link, item.value.ui?.link, item.value.class], selected: isSelected, disabled: item.value.disabled || disabled })">
+          <slot :name="((item.value.slot || 'item') as keyof TreeSlots<T>)" v-bind="{ index, level: item.level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
+            <slot :name="((item.value.slot ? `${item.value.slot}-leading`: 'item-leading') as keyof TreeSlots<T>)" v-bind="{ index, level: item.level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
+              <UIcon
+                v-if="item.value.icon"
+                :name="item.value.icon"
+                :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.value.ui?.linkLeadingIcon] })"
+              />
+              <UIcon
+                v-else-if="item.value.children?.length"
+                :name="isExpanded ? (expandedIcon ?? appConfig.ui.icons.folderOpen) : (collapsedIcon ?? appConfig.ui.icons.folder)"
+                :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.value.ui?.linkLeadingIcon] })"
+              />
+            </slot>
+
+            <span v-if="getItemLabel(item.value) || !!slots[(item.value.slot ? `${item.value.slot}-label`: 'item-label') as keyof TreeSlots<T>]" :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.value.ui?.linkLabel] })">
+              <slot :name="((item.value.slot ? `${item.value.slot}-label`: 'item-label') as keyof TreeSlots<T>)" v-bind="{ item, index, level: item.level, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
+                {{ getItemLabel(item.value) }}
+              </slot>
+            </span>
+
+            <span v-if="item.value.trailingIcon || item.value.children?.length || !!slots[(item.value.slot ? `${item.value.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>]" :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.value.ui?.linkTrailing] })">
+              <slot :name="((item.value.slot ? `${item.value.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>)" v-bind="{ item, index, level: item.value, expanded: isExpanded, selected: isSelected }" :item="(item as Extract<NestedItem<T>, { slot: string; }>)">
+                <UIcon v-if="item.value.trailingIcon" :name="item.value.trailingIcon" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.value.ui?.linkTrailingIcon] })" />
+                <UIcon v-else-if="item.value.children?.length" :name="trailingIcon ?? appConfig.ui.icons.chevronDown" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.value.ui?.linkTrailingIcon] })" />
+              </slot>
+            </span>
+          </slot>
+        </button>
+      </TreeItem>
+    </li>
   </TreeRoot>
 </template>

@@ -4,8 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative isolate',
     item: '',
-    listWithChildren: 'ms-4.5 border-s border-default',
-    itemWithChildren: 'ps-1.5 -ms-px',
+    itemChild: '[margin-inline-start:calc(var(--item-level)*1rem)] ps-1.5',
     link: 'relative group w-full flex items-center text-sm before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0',
     linkLabel: 'truncate',
