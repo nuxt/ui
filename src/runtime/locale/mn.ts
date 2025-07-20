@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Өмнөх жил',
       nextYear: 'Дараа жил',
       prevMonth: 'Өмнөх сар',
-      nextMonth: 'Дараа сар'
+      nextMonth: 'Дараа сар',
+      week: '7 хоног',
+      weekShort: '7х'
     },
     inputNumber: {
       increment: 'Нэмэх',

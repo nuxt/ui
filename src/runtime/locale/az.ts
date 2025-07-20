@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Əvvəlki il',
       nextYear: 'Növbəti il',
       prevMonth: 'Əvvəlki ay',
-      nextMonth: 'Növbəti ay'
+      nextMonth: 'Növbəti ay',
+      week: 'həftə',
+      weekShort: 'həf.'
     },
     inputNumber: {
       increment: 'Artır',

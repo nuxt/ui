@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'पिछला वर्ष',
       nextYear: 'अगला वर्ष',
       prevMonth: 'पिछला महीना',
-      nextMonth: 'अगला महीना'
+      nextMonth: 'अगला महीना',
+      week: 'सप्ताह',
+      weekShort: 'सप्.'
     },
     inputNumber: {
       increment: 'बढ़ाना',

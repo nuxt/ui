@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Predchádzajúci rok',
       nextYear: 'Nasledujúci rok',
       prevMonth: 'Predchádzajúci mesiac',
-      nextMonth: 'Nasledujúci mesiac'
+      nextMonth: 'Nasledujúci mesiac',
+      week: 'týždeň',
+      weekShort: 'týž.'
     },
     inputNumber: {
       increment: 'Zvýšiť',

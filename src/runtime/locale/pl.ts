@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Poprzedni rok',
       nextYear: 'Przyszły rok',
       prevMonth: 'Poprzedni miesiąc',
-      nextMonth: 'Przyszły miesiąc'
+      nextMonth: 'Przyszły miesiąc',
+      week: 'tydzień',
+      weekShort: 'tydz.'
     },
     inputNumber: {
       increment: 'Zwiększ',

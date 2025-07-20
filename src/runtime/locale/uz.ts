@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Oldingi yil',
       nextYear: 'Keyingi yil',
       prevMonth: 'Oldingi oy',
-      nextMonth: 'Keyingi oy'
+      nextMonth: 'Keyingi oy',
+      week: 'Hafta',
+      weekShort: 'Haf.'
     },
     inputNumber: {
       increment: 'Qoʻshish',

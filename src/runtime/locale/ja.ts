@@ -12,9 +12,11 @@ export default defineLocale<Messages>({
     },
     calendar: {
       prevYear: '前年',
-      nextYear: '翌年',
+      nextYear: '来年',
       prevMonth: '前月',
-      nextMonth: '翌月'
+      nextMonth: '来月',
+      week: '週',
+      weekShort: '週'
     },
     inputNumber: {
       increment: '増やす',

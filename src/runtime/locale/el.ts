@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Προηγούμενο έτος',
       nextYear: 'Επόμενο έτος',
       prevMonth: 'Προηγούμενος μήνας',
-      nextMonth: 'Επόμενος μήνας'
+      nextMonth: 'Επόμενος μήνας',
+      week: 'εβδομάδα',
+      weekShort: 'εβδ.'
     },
     inputNumber: {
       increment: 'Αύξηση',

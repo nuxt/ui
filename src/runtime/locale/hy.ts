@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Նախորդ տարի',
       nextYear: 'Հաջորդ տարի',
       prevMonth: 'Նախորդ ամիս',
-      nextMonth: 'Հաջորդ ամիս'
+      nextMonth: 'Հաջորդ ամիս',
+      week: 'շաբաթ',
+      weekShort: 'շաբ.'
     },
     inputNumber: {
       increment: 'Ավելացնել',

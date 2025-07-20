@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: '去年',
       nextYear: '明年',
       prevMonth: '上个月',
-      nextMonth: '下个月'
+      nextMonth: '下个月',
+      week: '周',
+      weekShort: '周'
     },
     inputNumber: {
       increment: '增加',

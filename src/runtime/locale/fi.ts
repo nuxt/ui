@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Edellinen vuosi',
       nextYear: 'Seuraava vuosi',
       prevMonth: 'Edellinen kuukausi',
-      nextMonth: 'Seuraava kuukausi'
+      nextMonth: 'Seuraava kuukausi',
+      week: 'viikko',
+      weekShort: 'vk'
     },
     inputNumber: {
       increment: 'Kasvata',

@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'পূর্ববর্তী বছর',
       nextYear: 'পরবর্তী বছর',
       prevMonth: 'পূর্ববর্তী মাস',
-      nextMonth: 'পরবর্তী মাস'
+      nextMonth: 'পরবর্তী মাস',
+      week: 'সপ্তাহ',
+      weekShort: 'সপ্.'
     },
     inputNumber: {
       increment: 'বৃদ্ধি করুন',

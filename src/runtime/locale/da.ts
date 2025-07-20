@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Forrige år',
       nextYear: 'Næste år',
       prevMonth: 'Forrige måned',
-      nextMonth: 'Næste måned'
+      nextMonth: 'Næste måned',
+      week: 'uge',
+      weekShort: 'u.'
     },
     inputNumber: {
       increment: 'Øg',

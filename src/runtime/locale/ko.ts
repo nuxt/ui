@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: '이전 해',
       nextYear: '다음 해',
       prevMonth: '이전 달',
-      nextMonth: '다음 달'
+      nextMonth: '다음 달',
+      week: '주',
+      weekShort: '주'
     },
     inputNumber: {
       increment: '증가',

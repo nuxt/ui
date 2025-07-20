@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Ankstesni metai',
       nextYear: 'Kiti metai',
       prevMonth: 'Ankstesnis mėnuo',
-      nextMonth: 'Kitas mėnuo'
+      nextMonth: 'Kitas mėnuo',
+      week: 'savaitė',
+      weekShort: 'sav.'
     },
     inputNumber: {
       increment: 'Padidinti',

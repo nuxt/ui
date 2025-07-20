@@ -15,7 +15,9 @@ export default defineLocale<Messages>({
       prevYear: 'ئالدىنقى يىل',
       nextYear: 'كېلەر يىل',
       prevMonth: 'ئالدىنقى ئاي',
-      nextMonth: 'كېلەر ئاي'
+      nextMonth: 'كېلەر ئاي',
+      week: 'ھەپتە',
+      weekShort: 'ھەپ.'
     },
     inputNumber: {
       increment: 'كۆپەيتىش',

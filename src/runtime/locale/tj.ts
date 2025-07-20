@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Соли гузашта',
       nextYear: 'Соли оянда',
       prevMonth: 'Моҳи гузашта',
-      nextMonth: 'Моҳи оянда'
+      nextMonth: 'Моҳи оянда',
+      week: 'ҳафта',
+      weekShort: 'ҳаф.'
     },
     inputNumber: {
       increment: 'Зиёд кардан',

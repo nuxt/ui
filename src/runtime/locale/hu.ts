@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Előző év',
       nextYear: 'Következő év',
       prevMonth: 'Előző hónap',
-      nextMonth: 'Következő hónap'
+      nextMonth: 'Következő hónap',
+      week: 'hét',
+      weekShort: 'hét'
     },
     inputNumber: {
       increment: 'Növel',

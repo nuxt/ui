@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Eelmine aasta',
       nextYear: 'Järgmine aasta',
       prevMonth: 'Eelmine kuu',
-      nextMonth: 'Järgmine kuu'
+      nextMonth: 'Järgmine kuu',
+      week: 'nädal',
+      weekShort: 'näd'
     },
     inputNumber: {
       increment: 'Suurenda',

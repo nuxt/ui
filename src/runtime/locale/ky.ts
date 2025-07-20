@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Алдыңкы жыл',
       nextYear: 'Кийинки жыл',
       prevMonth: 'Алдыңкы ай',
-      nextMonth: 'Кийинки ай'
+      nextMonth: 'Кийинки ай',
+      week: 'жума',
+      weekShort: 'жум.'
     },
     inputNumber: {
       increment: 'Кошуу',

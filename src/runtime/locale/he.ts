@@ -15,7 +15,9 @@ export default defineLocale<Messages>({
       prevYear: 'שנה קודמת',
       nextYear: 'שנה הבאה',
       prevMonth: 'חודש קודם',
-      nextMonth: 'חודש הבא'
+      nextMonth: 'חודש הבא',
+      week: 'שבוע',
+      weekShort: 'שב.'
     },
     inputNumber: {
       increment: 'הוסף',

@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Попередній рік',
       nextYear: 'Наступний рік',
       prevMonth: 'Попередній місяць',
-      nextMonth: 'Наступний місяць'
+      nextMonth: 'Наступний місяць',
+      week: 'тиждень',
+      weekShort: 'тиж.'
     },
     inputNumber: {
       increment: 'Збільшити',

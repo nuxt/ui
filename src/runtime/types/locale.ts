@@ -9,6 +9,8 @@ export type Messages = {
     nextYear: string
     prevMonth: string
     nextMonth: string
+    week: string
+    weekShort: string
   }
   inputNumber: {
     increment: string

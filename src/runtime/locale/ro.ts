@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Anul precedent',
       nextYear: 'Anul următor',
       prevMonth: 'Luna precedentă',
-      nextMonth: 'Luna următoare'
+      nextMonth: 'Luna următoare',
+      week: 'săptămână',
+      weekShort: 'săpt.'
     },
     inputNumber: {
       increment: 'Crește',

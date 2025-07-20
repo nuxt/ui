@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Алдыңғы жыл',
       nextYear: 'Келесі жыл',
       prevMonth: 'Алдыңғы ай',
-      nextMonth: 'Келесі ай'
+      nextMonth: 'Келесі ай',
+      week: 'апта',
+      weekShort: 'ап.'
     },
     inputNumber: {
       increment: 'Арттыру',

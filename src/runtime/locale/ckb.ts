@@ -15,7 +15,9 @@ export default defineLocale<Messages>({
       prevYear: 'ساڵی پێشوو',
       nextYear: 'ساڵی داهاتوو',
       prevMonth: 'مانگی پێشوو',
-      nextMonth: 'مانگی داهاتوو'
+      nextMonth: 'مانگی داهاتوو',
+      week: 'هەفتە',
+      weekShort: 'هەف.'
     },
     inputNumber: {
       increment: 'زیادکردن',

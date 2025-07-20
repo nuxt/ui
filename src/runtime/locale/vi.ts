@@ -14,7 +14,9 @@ export default defineLocale<Messages>({
       prevYear: 'Năm trước',
       nextYear: 'Năm sau',
       prevMonth: 'Tháng trước',
-      nextMonth: 'Tháng sau'
+      nextMonth: 'Tháng sau',
+      week: 'tuần',
+      weekShort: 'tuần'
     },
     inputNumber: {
       increment: 'Tăng',
