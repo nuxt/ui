@@ -12,7 +12,7 @@
     "@ai-sdk/vue": "^1.2.12",
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/lucide": "^1.2.57",
-    "@iconify-json/simple-icons": "^1.2.43",
+    "@iconify-json/simple-icons": "^1.2.44",
     "@iconify-json/vscode-icons": "^1.2.23",
     "@nuxt/content": "^3.6.3",
     "@nuxt/image": "^1.10.0",
@@ -24,7 +24,7 @@
     "@rollup/plugin-yaml": "^4.1.2",
     "@vueuse/integrations": "^13.5.0",
     "@vueuse/nuxt": "^13.5.0",
-    "ai": "^4.3.17",
+    "ai": "^4.3.19",
     "better-sqlite3": "^12.2.0",
     "capture-website": "^4.2.0",
     "joi": "^17.13.3",
@@ -45,6 +45,6 @@
     "zod": "^4.0.5"
   },
   "devDependencies": {
-    "wrangler": "^4.24.3"
+    "wrangler": "^4.25.0"
   }
 }
