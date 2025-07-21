@@ -17,7 +17,7 @@
     "@vueuse/nuxt": "^13.5.0",
     "date-fns": "^4.1.0",
     "joi": "^17.13.3",
-    "nuxt": "^4.0.0",
+    "nuxt": "^4.0.1",
     "nuxt-component-meta": "^0.12.1",
     "nuxt-og-image": "^5.1.9",
     "prettier": "^3.6.2",
