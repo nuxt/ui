@@ -62,6 +62,8 @@ const state = reactive<Partial<schema>>({
   avatar: undefined
 })
 
+const value = ref<File[]>([new File(['foo'], 'file1.txt', { type: 'text/plain' })])
+
 const upload = useUpload('/api/blob', { method: 'PUT' })
 
 function createObjectUrl(file: File): string {
@@ -109,9 +111,11 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
     </UForm>
 
     <UFileUpload
+      v-model="value"
       label="Drop your image here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
       class="w-full"
+      multiple
       :size="size"
     />
   </div>

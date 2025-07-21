@@ -10,7 +10,13 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'font-medium text-default mt-2',
     description: 'text-muted mt-1',
     actions: 'flex flex-wrap gap-1.5 shrink-0',
-    files: 'flex flex-col gap-2'
+    files: 'flex flex-col gap-2',
+    file: 'min-w-0 flex items-center gap-2 border border-default rounded-md',
+    fileLeadingAvatar: 'shrink-0',
+    fileTrailing: 'ms-auto inline-flex gap-1.5 items-center',
+    fileWrapper: 'flex flex-col min-w-0',
+    fileName: 'text-default truncate',
+    fileSize: 'text-muted truncate'
   },
   variants: {
     color: {
@@ -21,27 +27,35 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         base: 'text-xs',
         leading: 'p-1',
-        leadingIcon: 'size-4'
+        leadingIcon: 'size-4',
+        file: 'text-xs px-2 py-1',
+        fileWrapper: 'flex-row gap-1'
       },
       sm: {
         base: 'text-xs',
         leading: 'p-1.5',
-        leadingIcon: 'size-4'
+        leadingIcon: 'size-4',
+        file: 'text-xs px-2.5 py-1.5',
+        fileWrapper: 'flex-row gap-1'
       },
       md: {
         base: 'text-sm',
         leading: 'p-1.5',
-        leadingIcon: 'size-5'
+        leadingIcon: 'size-5',
+        file: 'text-xs px-2.5 py-1.5'
       },
       lg: {
         base: 'text-sm',
         leading: 'p-2',
-        leadingIcon: 'size-5'
+        leadingIcon: 'size-5',
+        file: 'text-sm px-3 py-2',
+        fileSize: 'text-xs'
       },
       xl: {
         base: 'text-base',
         leading: 'p-2',
-        leadingIcon: 'size-6'
+        leadingIcon: 'size-6',
+        file: 'text-sm px-3 py-2'
       }
     },
     dropzone: {

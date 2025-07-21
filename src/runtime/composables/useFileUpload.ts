@@ -1,3 +1,4 @@
+import type { Ref } from 'vue'
 import { computed, unref } from 'vue'
 import { useFileDialog, useDropZone } from '@vueuse/core'
 import type { MaybeRef, MaybeRefOrGetter } from '@vueuse/core'
@@ -9,9 +10,11 @@ export interface UseFileUploadOptions {
    * @defaultValue '*'
    */
   accept?: MaybeRef<string>
+  reset?: boolean
+  multiple?: boolean
   dropzone?: boolean
   dropzoneRef: MaybeRefOrGetter<HTMLElement | null | undefined>
-  multiple?: boolean
+  inputRef: Ref<HTMLInputElement | undefined>
   onUpdate: (files: File[]) => void
 }
 
@@ -31,12 +34,17 @@ function parseAcceptToDataTypes(accept: string): string[] | undefined {
 }
 
 export function useFileUpload(options: UseFileUploadOptions) {
-  const { dropzone = true, dropzoneRef, multiple = false, accept = '*', onUpdate } = options
+  const {
+    accept = '*',
+    reset = false,
+    multiple = false,
+    dropzone = true,
+    dropzoneRef,
+    inputRef,
+    onUpdate
+  } = options
 
-  const dataTypes = computed(() => {
-    const acceptValue = unref(accept)
-    return parseAcceptToDataTypes(acceptValue)
-  })
+  const dataTypes = computed(() => parseAcceptToDataTypes(unref(accept)))
 
   const onDrop = (files: FileList | File[] | null) => {
     if (!files || files.length === 0) {
@@ -54,16 +62,17 @@ export function useFileUpload(options: UseFileUploadOptions) {
   const { isOverDropZone: isDragging } = dropzone
     ? useDropZone(dropzoneRef, { dataTypes: dataTypes.value, onDrop })
     : { isOverDropZone: false }
-  const { onChange, open, reset } = useFileDialog({
+  const { onChange, open } = useFileDialog({
     accept: unref(accept),
-    multiple
+    multiple,
+    input: unref(inputRef),
+    reset
   })
 
   onChange(fileList => onDrop(fileList))
 
   return {
     isDragging,
-    open,
-    reset
+    open
   }
 }

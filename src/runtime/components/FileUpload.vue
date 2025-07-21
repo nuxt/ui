@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
-import type { ButtonProps } from '../types'
+import type { AvatarProps, ButtonProps } from '../types'
 import type { ComponentConfig } from '../types/utils'
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
@@ -59,18 +59,23 @@ export interface FileUploadProps<M extends boolean = false> {
 
 export interface FileUploadEmits<M extends boolean = false> {
   (e: 'update:modelValue', value: M extends true ? File[] : File | null): void
+  (e: 'change', event: Event): void
 }
 
-export interface FileUploadSlots {
-  default(props: {
+export interface FileUploadSlots<M extends boolean = false> {
+  'default'(props: {
     open: UseFileDialogReturn['open']
-    reset: UseFileDialogReturn['reset']
   }): any
-  leading(props?: {}): any
-  label(props?: {}): any
-  description(props?: {}): any
-  actions(props?: {}): any
-  files(props?: {}): any
+  'leading'(props?: {}): any
+  'label'(props?: {}): any
+  'description'(props?: {}): any
+  'actions'(props?: {}): any
+  'files'(props: { files: M extends true ? File[] : File | null }): any
+  'file'(props: { file: File, index: number }): any
+  'file-leading'(props: { file: File, index: number }): any
+  'file-name'(props: { file: File, index: number }): any
+  'file-size'(props: { file: File, index: number }): any
+  'file-trailing'(props: { file: File, index: number }): any
 }
 </script>
 
@@ -90,10 +95,11 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   accept: '*',
   multiple: false as never,
+  reset: false,
   dropzone: true
 })
-defineEmits<FileUploadEmits<M>>()
-const slots = defineSlots<FileUploadSlots>()
+const emits = defineEmits<FileUploadEmits<M>>()
+const slots = defineSlots<FileUploadSlots<M>>()
 
 const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 
@@ -102,14 +108,16 @@ const appConfig = useAppConfig() as FileUpload['AppConfig']
 const inputRef = ref<HTMLInputElement>()
 const dropzoneRef = ref<HTMLDivElement>()
 
-const { isDragging, open, reset } = useFileUpload({
+const { isDragging, open } = useFileUpload({
   accept: props.accept,
+  reset: props.reset,
   multiple: props.multiple,
   dropzone: props.dropzone,
   dropzoneRef,
+  inputRef,
   onUpdate
 })
-const { emitFormInput, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
+const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
   dropzone: props.dropzone,
@@ -130,11 +138,30 @@ function onUpdate(files: File[]) {
     modelValue.value = files?.[0] as (M extends true ? File[] : File) | null
   }
 
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
+  const event = new Event('change', { target: { value: modelValue.value } })
+  emits('change', event)
+  emitFormChange()
   emitFormInput()
 }
 
+function formatFileSize(bytes: number): string {
+  if (bytes === 0) {
+    return '0B'
+  }
+
+  const k = 1024
+  const sizes = ['B', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+  const size = bytes / Math.pow(k, i)
+  const formattedSize = i === 0 ? size.toString() : size.toFixed(2)
+
+  return `${formattedSize}${sizes[i]}`
+}
+
 function removeFile(index: number) {
-  if (!props.multiple || !modelValue.value) {
+  if (!modelValue.value) {
     return
   }
 
@@ -154,7 +181,7 @@ defineExpose({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot :open="open" :reset="reset">
+    <slot :open="open" :remove="removeFile">
       <div
         ref="dropzoneRef"
         role="button"
@@ -191,19 +218,37 @@ defineExpose({
 
       <div v-if="modelValue" :class="ui.files({ class: props.ui?.files })">
         <slot name="files">
-          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="(file as File).name" class="min-w-0 flex items-center gap-2 border border-default rounded-md p-2">
-            <UAvatar :src="createObjectUrl(file)" :icon="appConfig.ui.icons.file" />
+          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="(file as File).name" :class="ui.file({ class: props.ui?.file })">
+            <slot name="file" :file="file" :index="index">
+              <slot name="file-leading" :file="file" :index="index">
+                <UAvatar :src="createObjectUrl(file)" :icon="appConfig.ui.icons.file" :size="props.size" :class="ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })" />
+              </slot>
 
-            <span class="text-sm truncate">{{ (file as File).name }}</span>
+              <div :class="ui.fileWrapper({ class: props.ui?.fileWrapper })">
+                <span :class="ui.fileName({ class: props.ui?.fileName })">
+                  <slot name="file-name" :file="file" :index="index">
+                    {{ (file as File).name }}
+                  </slot>
+                </span>
 
-            <UButton
-              size="xs"
-              color="neutral"
-              variant="link"
-              :trailing-icon="appConfig.ui.icons.close"
-              class="ms-auto"
-              @click="removeFile(index)"
-            />
+                <span :class="ui.fileSize({ class: props.ui?.fileSize })">
+                  <slot name="file-size" :file="file" :index="index">
+                    {{ formatFileSize((file as File).size) }}
+                  </slot>
+                </span>
+              </div>
+
+              <slot name="file-trailing" :file="file" :index="index">
+                <UButton
+                  color="neutral"
+                  variant="link"
+                  :size="size"
+                  :trailing-icon="appConfig.ui.icons.close"
+                  :class="ui.fileTrailing({ class: props.ui?.fileTrailing })"
+                  @click="removeFile(index)"
+                />
+              </slot>
+            </slot>
           </div>
         </slot>
       </div>
