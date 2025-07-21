@@ -85,7 +85,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
 
     <UForm :schema="schema" :state="state" class="space-y-4 w-80" @submit="onSubmit">
       <UFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max." :size="size">
-        <UFileUpload v-slot="{ open, reset }" v-model="state.avatar" accept="image/*">
+        <UFileUpload v-slot="{ open, remove }" v-model="state.avatar" accept="image/*">
           <div class="flex flex-wrap items-center gap-3">
             <UAvatar size="lg" :src="state.avatar ? createObjectUrl(state.avatar) : undefined" icon="i-lucide-image" />
 
@@ -101,7 +101,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
               variant="link"
               size="xs"
               class="p-0"
-              @click="reset()"
+              @click="remove()"
             />
           </p>
         </UFileUpload>
@@ -117,6 +117,10 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
       class="w-full"
       multiple
       :size="size"
-    />
+    >
+      <template #files-bottom="{ remove }">
+        <UButton label="Remove all" @click="remove()" />
+      </template>
+    </UFileUpload>
   </div>
 </template>

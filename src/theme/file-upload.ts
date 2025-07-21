@@ -10,10 +10,10 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'font-medium text-default mt-2',
     description: 'text-muted mt-1',
     actions: 'flex flex-wrap gap-1.5 shrink-0',
-    files: 'flex flex-col gap-2',
-    file: 'min-w-0 flex items-center gap-2 border border-default rounded-md',
+    files: 'flex flex-col items-start gap-2',
+    file: 'min-w-0 flex items-center gap-2 border border-default rounded-md w-full',
     fileLeadingAvatar: 'shrink-0',
-    fileTrailing: 'ms-auto inline-flex gap-1.5 items-center',
+    fileTrailing: 'ms-auto p-0',
     fileWrapper: 'flex flex-col min-w-0',
     fileName: 'text-default truncate',
     fileSize: 'text-muted truncate'

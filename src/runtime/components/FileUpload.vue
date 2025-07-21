@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
-import type { AvatarProps, ButtonProps } from '../types'
+import type { ButtonProps } from '../types'
 import type { ComponentConfig } from '../types/utils'
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
@@ -53,6 +53,12 @@ export interface FileUploadProps<M extends boolean = false> {
    * @defaultValue true
    */
   dropzone?: boolean
+  /**
+   * The icon to display for the file.
+   * @defaultValue appConfig.ui.icons.file
+   * @IconifyIcon
+   */
+  fileIcon?: string
   class?: any
   ui?: FileUpload['slots']
 }
@@ -65,12 +71,15 @@ export interface FileUploadEmits<M extends boolean = false> {
 export interface FileUploadSlots<M extends boolean = false> {
   'default'(props: {
     open: UseFileDialogReturn['open']
+    remove: (index?: number) => void
   }): any
   'leading'(props?: {}): any
   'label'(props?: {}): any
   'description'(props?: {}): any
   'actions'(props?: {}): any
   'files'(props: { files: M extends true ? File[] : File | null }): any
+  'files-top'(props: { remove: (index?: number) => void }): any
+  'files-bottom'(props: { remove: (index?: number) => void }): any
   'file'(props: { file: File, index: number }): any
   'file-leading'(props: { file: File, index: number }): any
   'file-name'(props: { file: File, index: number }): any
@@ -130,21 +139,6 @@ function createObjectUrl(file: File): string {
   return URL.createObjectURL(file)
 }
 
-function onUpdate(files: File[]) {
-  if (props.multiple) {
-    const existingFiles = (modelValue.value as File[]) || []
-    modelValue.value = [...existingFiles, ...(files || [])] as (M extends true ? File[] : File) | null
-  } else {
-    modelValue.value = files?.[0] as (M extends true ? File[] : File) | null
-  }
-
-  // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const event = new Event('change', { target: { value: modelValue.value } })
-  emits('change', event)
-  emitFormChange()
-  emitFormInput()
-}
-
 function formatFileSize(bytes: number): string {
   if (bytes === 0) {
     return '0B'
@@ -160,18 +154,40 @@ function formatFileSize(bytes: number): string {
   return `${formattedSize}${sizes[i]}`
 }
 
-function removeFile(index: number) {
+function onUpdate(files: File[], reset = false) {
+  console.log('onUpdate', files)
+  if (props.multiple) {
+    if (reset) {
+      modelValue.value = files as (M extends true ? File[] : File) | null
+    } else {
+      const existingFiles = (modelValue.value as File[]) || []
+      modelValue.value = [...existingFiles, ...(files || [])] as (M extends true ? File[] : File) | null
+    }
+  } else {
+    modelValue.value = files?.[0] as (M extends true ? File[] : File) | null
+  }
+
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
+  const event = new Event('change', { target: { value: modelValue.value } })
+  emits('change', event)
+  emitFormChange()
+  emitFormInput()
+}
+
+function remove(index?: number) {
   if (!modelValue.value) {
     return
   }
 
-  const fileList = Array.from(modelValue.value as File[])
+  if (!props.multiple || !index) {
+    onUpdate([], true)
+    return
+  }
 
-  fileList.splice(index, 1)
+  const files = Array.from(modelValue.value as File[])
+  files.splice(index, 1)
 
-  modelValue.value = fileList as (M extends true ? File[] : File) | null
-
-  emitFormInput()
+  onUpdate(files, true)
 }
 
 defineExpose({
@@ -181,7 +197,7 @@ defineExpose({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot :open="open" :remove="removeFile">
+    <slot :open="open" :remove="remove">
       <div
         ref="dropzoneRef"
         role="button"
@@ -217,11 +233,13 @@ defineExpose({
       </div>
 
       <div v-if="modelValue" :class="ui.files({ class: props.ui?.files })">
-        <slot name="files">
+        <slot name="files-top" :remove="remove" />
+
+        <slot name="files" :files="modelValue">
           <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="(file as File).name" :class="ui.file({ class: props.ui?.file })">
             <slot name="file" :file="file" :index="index">
               <slot name="file-leading" :file="file" :index="index">
-                <UAvatar :src="createObjectUrl(file)" :icon="appConfig.ui.icons.file" :size="props.size" :class="ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })" />
+                <UAvatar :src="createObjectUrl(file)" :icon="fileIcon || appConfig.ui.icons.file" :size="props.size" :class="ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })" />
               </slot>
 
               <div :class="ui.fileWrapper({ class: props.ui?.fileWrapper })">
@@ -245,12 +263,14 @@ defineExpose({
                   :size="size"
                   :trailing-icon="appConfig.ui.icons.close"
                   :class="ui.fileTrailing({ class: props.ui?.fileTrailing })"
-                  @click="removeFile(index)"
+                  @click="remove(index)"
                 />
               </slot>
             </slot>
           </div>
         </slot>
+
+        <slot name="files-bottom" :remove="remove" />
       </div>
     </slot>
 
