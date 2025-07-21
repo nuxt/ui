@@ -18,6 +18,10 @@ async function open() {
   if (shouldIncrement) {
     count.value++
 
+    modal.patch({
+      count: count.value
+    })
+
     toast.add({
       title: `Success: ${shouldIncrement}`,
       color: 'success',
