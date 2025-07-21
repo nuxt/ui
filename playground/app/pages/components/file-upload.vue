@@ -64,6 +64,10 @@ const state = reactive<Partial<schema>>({
 
 const upload = useUpload('/api/blob', { method: 'PUT' })
 
+function createObjectUrl(file: File): string {
+  return URL.createObjectURL(file)
+}
+
 async function onSubmit(event: FormSubmitEvent<schema>) {
   const res = await upload(event.data.avatar)
 
@@ -79,9 +83,9 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
 
     <UForm :schema="schema" :state="state" class="space-y-4 w-80" @submit="onSubmit">
       <UFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max." :size="size">
-        <UFileUpload v-slot="{ open, reset, urls }" v-model="state.avatar" accept="image/*">
+        <UFileUpload v-slot="{ open, reset }" v-model="state.avatar" accept="image/*">
           <div class="flex flex-wrap items-center gap-3">
-            <UAvatar size="lg" :src="urls?.[0]" icon="i-lucide-image" />
+            <UAvatar size="lg" :src="state.avatar ? createObjectUrl(state.avatar) : undefined" icon="i-lucide-image" />
 
             <UButton :label="state.avatar ? 'Change image' : 'Upload image'" color="neutral" @click="open()" />
           </div>
@@ -107,11 +111,8 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
     <UFileUpload
       label="Drop your image here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
-      multiple
       class="w-full"
       :size="size"
     />
-
-    <UFileUpload multiple />
   </div>
 </template>

@@ -81,7 +81,9 @@ import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
+import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
+import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -164,7 +166,7 @@ defineExpose({
         <div :class="ui.wrapper({ class: props.ui?.wrapper })">
           <div :class="ui.leading({ class: props.ui?.leading })">
             <slot name="leading">
-              <UIcon :name="icon || appConfig.ui.icons.upload" :class="ui.leadingIcon({ class: props.ui?.icon })" />
+              <UIcon :name="icon || appConfig.ui.icons.upload" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
             </slot>
           </div>
 
@@ -187,11 +189,13 @@ defineExpose({
         </div>
       </div>
 
-      <div v-if="modelValue && (modelValue as File[]).length > 0" :class="ui.files({ class: props.ui?.files })">
+      <div v-if="modelValue" :class="ui.files({ class: props.ui?.files })">
         <slot name="files">
-          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="file.name" class="min-w-0 flex items-center gap-2 border border-default rounded-md p-2">
+          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="(file as File).name" class="min-w-0 flex items-center gap-2 border border-default rounded-md p-2">
             <UAvatar :src="createObjectUrl(file)" :icon="appConfig.ui.icons.file" />
-            <span class="text-sm truncate">{{ file.name }}</span>
+
+            <span class="text-sm truncate">{{ (file as File).name }}</span>
+
             <UButton
               size="xs"
               color="neutral"
