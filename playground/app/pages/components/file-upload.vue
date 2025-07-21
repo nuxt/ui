@@ -72,12 +72,12 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-8">
+  <div class="flex flex-col items-center gap-8">
     <div class="flex flex-wrap items-center gap-3">
       <USelect v-model="size" :items="sizes" />
     </div>
 
-    <UForm :schema="schema" :state="state" class="space-y-4 w-80 flex flex-col items-center" @submit="onSubmit">
+    <UForm :schema="schema" :state="state" class="space-y-4 w-80" @submit="onSubmit">
       <UFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max." :size="size">
         <UFileUpload v-slot="{ open, reset, urls }" v-model="state.avatar" accept="image/*">
           <div class="flex flex-wrap items-center gap-3">
@@ -108,7 +108,10 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
       label="Drop your image here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
       multiple
+      class="w-full"
       :size="size"
     />
+
+    <UFileUpload multiple />
   </div>
 </template>

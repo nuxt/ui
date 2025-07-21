@@ -53,7 +53,6 @@ export interface FileUploadProps<M extends boolean = false> {
    * @defaultValue true
    */
   dropzone?: boolean
-  defaultValue?: File[]
   class?: any
   ui?: FileUpload['slots']
 }
@@ -66,22 +65,21 @@ export interface FileUploadSlots {
   default(props: {
     open: UseFileDialogReturn['open']
     reset: UseFileDialogReturn['reset']
-    urls: string[]
   }): any
   leading(props?: {}): any
   label(props?: {}): any
   description(props?: {}): any
   actions(props?: {}): any
-  files(props: { files: FileList }): any
+  files(props?: {}): any
 }
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
 import { ref, computed } from 'vue'
 import { Primitive } from 'reka-ui'
-import { useFileDialog, useDropZone } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
+import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -89,6 +87,7 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   accept: '*',
+  multiple: false as never,
   dropzone: true
 })
 defineEmits<FileUploadEmits<M>>()
@@ -99,51 +98,51 @@ const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 
 const inputRef = ref<HTMLInputElement>()
-const dropZoneRef = ref<HTMLDivElement>()
+const dropzoneRef = ref<HTMLDivElement>()
 
-const { files, open, reset, onChange } = useFileDialog({
-  multiple: props.multiple,
+const { isDragging, open, reset } = useFileUpload({
   accept: props.accept,
-  reset: props.reset,
-  input: inputRef.value,
-  initialFiles: props.defaultValue
-})
-const { isOverDropZone } = useDropZone(dropZoneRef, {
-  onDrop,
-  // dataTypes: props.accept.split(','),
-  multiple: props.multiple
+  multiple: props.multiple,
+  dropzone: props.dropzone,
+  dropzoneRef,
+  onUpdate
 })
 const { emitFormInput, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
 
-const urls = computed(() => Array.from(files.value || []).map(file => URL.createObjectURL(file)))
-
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
   dropzone: props.dropzone,
-  multiple: props.multiple,
   color: props.color,
   size: props.size,
   highlight: props.highlight
 }))
 
-onChange((files) => {
-  modelValue.value = (props.multiple ? files : files?.[0]) as (M extends true ? File[] : File) | null
+function createObjectUrl(file: File): string {
+  return URL.createObjectURL(file)
+}
+
+function onUpdate(files: File[]) {
+  if (props.multiple) {
+    const existingFiles = (modelValue.value as File[]) || []
+    modelValue.value = [...existingFiles, ...(files || [])] as (M extends true ? File[] : File) | null
+  } else {
+    modelValue.value = files?.[0] as (M extends true ? File[] : File) | null
+  }
 
   emitFormInput()
-})
-
-function onDrop(files: File[] | null) {
-  modelValue.value = (props.multiple ? files : files?.[0]) as (M extends true ? File[] : File) | null
 }
 
 function removeFile(index: number) {
-  const file = files.value?.[index]
-
-  if (file) {
-    URL.revokeObjectURL(URL.createObjectURL(file))
+  if (!props.multiple || !modelValue.value) {
+    return
   }
 
-  const fileListArr = Array.from(files.value!)
-  fileListArr.splice(index, 1)
+  const fileList = Array.from(modelValue.value as File[])
+
+  fileList.splice(index, 1)
+
+  modelValue.value = fileList as (M extends true ? File[] : File) | null
+
+  emitFormInput()
 }
 
 defineExpose({
@@ -153,11 +152,11 @@ defineExpose({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <slot :open="open" :reset="reset" :urls="urls">
+    <slot :open="open" :reset="reset">
       <div
-        ref="dropZoneRef"
+        ref="dropzoneRef"
         role="button"
-        :data-dragging="isOverDropZone"
+        :data-dragging="isDragging"
         :class="ui.base({ class: props.ui?.base })"
         tabindex="0"
         @click="open()"
@@ -188,12 +187,19 @@ defineExpose({
         </div>
       </div>
 
-      <div v-if="files && files.length > 0" :class="ui.files({ class: props.ui?.files })">
-        <slot name="files" :files="files">
-          <div v-for="(file, index) in files" :key="file.name" class="flex items-center gap-2 border border-default rounded-md p-2">
-            <UAvatar :src="urls[index]" :icon="appConfig.ui.icons.file" />
-            <span class="text-sm">{{ file.name }}</span>
-            <UButton size="xs" color="neutral" variant="link" :trailing-icon="appConfig.ui.icons.close" @click="removeFile(index)" />
+      <div v-if="modelValue && (modelValue as File[]).length > 0" :class="ui.files({ class: props.ui?.files })">
+        <slot name="files">
+          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="file.name" class="min-w-0 flex items-center gap-2 border border-default rounded-md p-2">
+            <UAvatar :src="createObjectUrl(file)" :icon="appConfig.ui.icons.file" />
+            <span class="text-sm truncate">{{ file.name }}</span>
+            <UButton
+              size="xs"
+              color="neutral"
+              variant="link"
+              :trailing-icon="appConfig.ui.icons.close"
+              class="ms-auto"
+              @click="removeFile(index)"
+            />
           </div>
         </slot>
       </div>
@@ -205,7 +211,7 @@ defineExpose({
       type="file"
       :name="name"
       :accept="accept"
-      :multiple="multiple"
+      :multiple="(multiple as boolean)"
       :required="required"
       :disabled="disabled"
       v-bind="{ ...$attrs, ...ariaAttrs }"
