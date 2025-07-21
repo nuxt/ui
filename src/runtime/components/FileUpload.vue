@@ -155,7 +155,6 @@ function formatFileSize(bytes: number): string {
 }
 
 function onUpdate(files: File[], reset = false) {
-  console.log('onUpdate', files)
   if (props.multiple) {
     if (reset) {
       modelValue.value = files as (M extends true ? File[] : File) | null
@@ -179,12 +178,12 @@ function remove(index?: number) {
     return
   }
 
-  if (!props.multiple || !index) {
+  if (!props.multiple || index === undefined) {
     onUpdate([], true)
     return
   }
 
-  const files = Array.from(modelValue.value as File[])
+  const files = [...modelValue.value as File[]]
   files.splice(index, 1)
 
   onUpdate(files, true)
