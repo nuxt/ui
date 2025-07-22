@@ -29,6 +29,7 @@ describe('FileUpload', () => {
     ...positions.map((position: string) => [`with position ${position}`, { props: { ...props, position } }]),
     ...positions.map((position: string) => [`with position ${position} multiple`, { props: { ...props, position, multiple: true } }]),
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
+    ...sizes.map((size: string) => [`with size ${size} variant button`, { props: { ...props, size, variant: 'button' } }]),
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with accept', { props: { accept: 'image/*' } }],

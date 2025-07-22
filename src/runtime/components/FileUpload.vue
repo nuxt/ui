@@ -191,7 +191,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload |
   layout: layout.value,
   position: position.value,
   multiple: props.multiple,
-  highlight: props.highlight
+  highlight: props.highlight,
+  disabled: props.disabled
 }))
 
 function createObjectUrl(file: File): string {
@@ -312,8 +313,8 @@ defineExpose({
         role="button"
         :data-dragging="isDragging"
         :class="ui.base({ class: props.ui?.base })"
-        tabindex="0"
-        @click="interactive && open()"
+        :tabindex="interactive && !disabled ? 0 : -1"
+        @click="interactive && !disabled && open()"
       >
         <ReuseFilesTemplate v-if="position === 'inside'" />
 

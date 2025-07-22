@@ -82,7 +82,7 @@ export default (options: Required<ModuleOptions>) => ({
       true: 'border-dashed data-[dragging=true]:bg-elevated/25'
     },
     interactive: {
-      true: 'hover:bg-elevated/25'
+      true: ''
     },
     highlight: {
       true: ''
@@ -154,11 +154,17 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'button',
     size: 'md',
     class: {
-      base: 'p-2'
+      base: 'p-1.5'
     }
   }, {
     variant: 'button',
     size: 'lg',
+    class: {
+      base: 'p-2'
+    }
+  }, {
+    variant: 'button',
+    size: 'xl',
     class: {
       base: 'p-2'
     }
@@ -175,6 +181,10 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       file: 'absolute inset-0 p-0'
     }
+  }, {
+    interactive: true,
+    disabled: false,
+    class: 'hover:bg-elevated/25'
   }],
   defaultVariants: {
     color: 'primary',
