@@ -25,7 +25,8 @@ const items = [{
   label: 'Tab3',
   icon: 'i-lucide-bell',
   content: 'Finally, this is the content for Tab3',
-  slot: 'custom' as const
+  slot: 'custom' as const,
+  badge: '300'
 }]
 </script>
 
