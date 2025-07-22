@@ -81,7 +81,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
     </TooltipTrigger>
 
     <TooltipPortal v-bind="portalProps">
-      <TooltipContent v-if="text || (kbds?.length)" v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
+      <TooltipContent v-if="text || kbds?.length || !!slots.content" v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
         <slot name="content">
           <span v-if="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
 
