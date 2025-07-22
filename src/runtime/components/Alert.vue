@@ -57,7 +57,7 @@ export interface AlertProps {
 }
 
 export interface AlertEmits {
-  (e: 'update:open', value: boolean): void
+  'update:open': [value: boolean]
 }
 
 export interface AlertSlots {

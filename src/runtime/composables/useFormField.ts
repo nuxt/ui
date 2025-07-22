@@ -89,10 +89,15 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
         .filter(type => formField?.value?.[type])
         .map(type => `${formField?.value.ariaId}-${type}`) || []
 
-      return {
-        'aria-describedby': descriptiveAttrs.join(' '),
+      const attrs: Record<string, any> = {
         'aria-invalid': !!formField?.value.error
       }
+
+      if (descriptiveAttrs.length > 0) {
+        attrs['aria-describedby'] = descriptiveAttrs.join(' ')
+      }
+
+      return attrs
     })
   }
 }
