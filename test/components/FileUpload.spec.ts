@@ -1,8 +1,16 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import type { FileUploadProps, FileUploadSlots } from '../../src/runtime/components/FileUpload.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/file-upload'
+
+// Mock URL.createObjectURL to return deterministic blob URLs
+URL.createObjectURL = vi.fn((file: File | Blob) => {
+  if (file instanceof File) {
+    return `blob:mock-url-${file.name}`
+  }
+  return 'blob:mock-url-blob'
+})
 
 describe('FileUpload', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -10,7 +18,7 @@ describe('FileUpload', () => {
   const layouts = Object.keys(theme.variants.layout) as any
   const positions = Object.keys(theme.variants.position) as any
 
-  const modelValue = [new File(['foo'], 'file1.txt', { type: 'text/plain' })]
+  const modelValue = [new File([], 'file.txt', { type: 'text/plain' })]
 
   const props = { modelValue }
 
