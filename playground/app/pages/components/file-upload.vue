@@ -4,8 +4,12 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 import theme from '#build/ui/file-upload'
 
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
+const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
+const layouts = Object.keys(theme.variants.layout) as Array<keyof typeof theme.variants.layout>
 
 const size = ref<keyof typeof theme.variants.size>('md')
+const variant = ref<keyof typeof theme.variants.variant>('area')
+const layout = ref<keyof typeof theme.variants.layout>('grid')
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
 const MIN_DIMENSIONS = { width: 200, height: 200 }
@@ -62,7 +66,8 @@ const state = reactive<Partial<schema>>({
   avatar: undefined
 })
 
-const value = ref<File[]>([new File(['foo'], 'file1.txt', { type: 'text/plain' })])
+const value = ref<File | null>(null)
+const valueMultiple = ref<File[]>([new File([], 'image.png', { type: 'image/png', lastModified: Date.now() })])
 
 const upload = useUpload('/api/blob', { method: 'PUT' })
 
@@ -78,14 +83,10 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-8">
-    <div class="flex flex-wrap items-center gap-3">
-      <USelect v-model="size" :items="sizes" />
-    </div>
-
-    <UForm :schema="schema" :state="state" class="space-y-4 w-80" @submit="onSubmit">
+  <div class="flex flex-col items-center gap-8 w-96">
+    <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
       <UFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max." :size="size">
-        <UFileUpload v-slot="{ open, remove }" v-model="state.avatar" accept="image/*">
+        <UFileUpload v-slot="{ open, removeFile }" v-model="state.avatar" accept="image/*">
           <div class="flex flex-wrap items-center gap-3">
             <UAvatar size="lg" :src="state.avatar ? createObjectUrl(state.avatar) : undefined" icon="i-lucide-image" />
 
@@ -101,7 +102,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
               variant="link"
               size="xs"
               class="p-0"
-              @click="remove()"
+              @click="removeFile()"
             />
           </p>
         </UFileUpload>
@@ -110,16 +111,79 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
       <UButton label="Submit" type="submit" />
     </UForm>
 
+    <USeparator />
+
+    <div class="flex flex-wrap items-center gap-3">
+      <USelect v-model="size" :items="sizes" />
+      <USelect v-model="variant" :items="variants" />
+      <USelect v-model="layout" :items="layouts" />
+    </div>
+
+    <USeparator />
+
     <UFileUpload
       v-model="value"
+      :size="size"
+      :variant="variant"
+      :layout="layout"
       label="Drop your image here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
-      class="w-full"
-      multiple
+      :class="variant === 'area' ? 'w-full' : ''"
+      :ui="variant === 'area' ? { base: 'min-h-44' } : {}"
+    />
+
+    <USeparator />
+
+    <UFileUpload
+      v-model="valueMultiple"
       :size="size"
+      :variant="variant"
+      :layout="layout"
+      icon="i-lucide-image"
+      label="Drop your images here"
+      description="SVG, PNG, JPG or GIF (max. 2MB)"
+      multiple
+      :interactive="false"
+      class="w-full"
+      :ui="{ base: 'min-h-44' }"
     >
-      <template #files-bottom="{ remove }">
-        <UButton label="Remove all" @click="remove()" />
+      <template #actions="{ open }">
+        <UButton
+          label="Select images"
+          icon="i-lucide-upload"
+          color="neutral"
+          variant="outline"
+          :size="size"
+          @click="open()"
+        />
+      </template>
+
+      <template v-if="layout === 'grid'" #files-top="{ open, files }">
+        <div class="mb-4 flex items-center justify-between">
+          <p class="font-bold">
+            Files ({{ files?.length }})
+          </p>
+
+          <UButton
+            label="Add files"
+            color="neutral"
+            variant="outline"
+            :size="size"
+            class="-my-2"
+            @click="open()"
+          />
+        </div>
+      </template>
+
+      <template v-if="layout === 'list'" #files-bottom="{ removeFile, files }">
+        <UButton
+          v-if="files?.length > 0"
+          label="Remove files"
+          color="neutral"
+          variant="outline"
+          :size="size"
+          @click="removeFile(0)"
+        />
       </template>
     </UFileUpload>
   </div>
