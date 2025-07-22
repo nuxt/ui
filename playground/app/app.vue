@@ -52,6 +52,7 @@ const components = [
   'radio-group',
   'select',
   'select-menu',
+  'select-menu-virtualized',
   'separator',
   'shortcuts',
   'skeleton',
