@@ -93,17 +93,16 @@ props:
 
 ### Input Events
 
-The Form component automatically triggers validation when an input emits an `input`, `change`, `blur` or `submit` event.
+The Form component automatically triggers validation when an input emits an `input`, `change`, or `blur` event.
 
 - Validation on `input` occurs **as you type**.
 - Validation on `change` occurs when you **commit to a value**.
 - Validation on `blur` happens when an input **loses focus**.
-- Validation on `submit` occurs when you **submit the form**.
 
 You can control when validation happens this using the `validate-on` prop.
 
 ::tip
-Set the `validate-on` prop to an empty array to only validate on `submit`.
+The form always validates on submit.
 ::
 
 ::component-example{label="Default"}
