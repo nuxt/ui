@@ -6,10 +6,12 @@ import theme from '#build/ui/file-upload'
 const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.variants.size>
 const variants = Object.keys(theme.variants.variant) as Array<keyof typeof theme.variants.variant>
 const layouts = Object.keys(theme.variants.layout) as Array<keyof typeof theme.variants.layout>
+const positions = Object.keys(theme.variants.position) as Array<keyof typeof theme.variants.position>
 
 const size = ref<keyof typeof theme.variants.size>('md')
 const variant = ref<keyof typeof theme.variants.variant>('area')
-const layout = ref<keyof typeof theme.variants.layout>('grid')
+const layout = ref<keyof typeof theme.variants.layout>('list')
+const position = ref<keyof typeof theme.variants.position>('outside')
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
 const MIN_DIMENSIONS = { width: 200, height: 200 }
@@ -117,6 +119,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
       <USelect v-model="size" :items="sizes" />
       <USelect v-model="variant" :items="variants" />
       <USelect v-model="layout" :items="layouts" />
+      <USelect v-model="position" :items="positions" />
     </div>
 
     <USeparator />
@@ -126,6 +129,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
       :size="size"
       :variant="variant"
       :layout="layout"
+      :position="position"
       label="Drop your image here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
       :class="variant === 'area' ? 'w-full' : ''"
@@ -139,6 +143,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
       :size="size"
       :variant="variant"
       :layout="layout"
+      :position="position"
       icon="i-lucide-image"
       label="Drop your images here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
@@ -158,8 +163,8 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
         />
       </template>
 
-      <template v-if="layout === 'grid'" #files-top="{ open, files }">
-        <div class="mb-4 flex items-center justify-between">
+      <template v-if="layout === 'grid' || position === 'inside'" #files-top="{ open, files }">
+        <div class="mb-2 flex items-center justify-between">
           <p class="font-bold">
             Files ({{ files?.length }})
           </p>
@@ -177,10 +182,11 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
 
       <template v-if="layout === 'list'" #files-bottom="{ removeFile, files }">
         <UButton
-          v-if="files?.length > 0"
+          v-if="files?.length"
           label="Remove files"
           color="neutral"
           variant="outline"
+          class="self-start"
           :size="size"
           @click="removeFile(0)"
         />

@@ -2,7 +2,7 @@
 
 exports[`FileUpload > renders with accept correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -16,7 +16,7 @@ exports[`FileUpload > renders with accept correctly 1`] = `
 
 exports[`FileUpload > renders with actions slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -24,13 +24,20 @@ exports[`FileUpload > renders with actions slot correctly 1`] = `
       <div class="flex flex-wrap gap-1.5 shrink-0 mt-4">Actions slot</div>
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:5b925384-d43a-4b22-8cea-0ee785e1f59c" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with as correctly 1`] = `
 "<section class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -44,7 +51,7 @@ exports[`FileUpload > renders with as correctly 1`] = `
 
 exports[`FileUpload > renders with class correctly 1`] = `
 "<div class="relative flex flex-col items-start w-full gap-4">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -60,7 +67,7 @@ exports[`FileUpload > renders with default slot correctly 1`] = `"<div class="re
 
 exports[`FileUpload > renders with description correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -74,7 +81,7 @@ exports[`FileUpload > renders with description correctly 1`] = `
 
 exports[`FileUpload > renders with description slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -82,13 +89,20 @@ exports[`FileUpload > renders with description slot correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:0a89ec76-6681-4bf8-aa93-954049661f4d" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with disabled correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -102,7 +116,7 @@ exports[`FileUpload > renders with disabled correctly 1`] = `
 
 exports[`FileUpload > renders with disabled correctly 2`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -116,7 +130,7 @@ exports[`FileUpload > renders with disabled correctly 2`] = `
 
 exports[`FileUpload > renders with file slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -132,7 +146,7 @@ exports[`FileUpload > renders with file slot correctly 1`] = `
 
 exports[`FileUpload > renders with file-leading slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -151,7 +165,7 @@ exports[`FileUpload > renders with file-leading slot correctly 1`] = `
 
 exports[`FileUpload > renders with file-name slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -160,7 +174,7 @@ exports[`FileUpload > renders with file-name slot correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:ed9bca5c-6da5-4c5f-862a-5bce960d022d" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:422b3479-1f3a-4718-b7a8-18391f60446c" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">File name slot</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
@@ -172,7 +186,7 @@ exports[`FileUpload > renders with file-name slot correctly 1`] = `
 
 exports[`FileUpload > renders with file-size slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -181,7 +195,7 @@ exports[`FileUpload > renders with file-size slot correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:870d6e65-250f-490f-a65a-e2dcd66dfa73" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:acbdf418-6539-433f-b23c-4be7abc6e4b0" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">File size slot</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
@@ -193,7 +207,7 @@ exports[`FileUpload > renders with file-size slot correctly 1`] = `
 
 exports[`FileUpload > renders with file-trailing slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -202,7 +216,7 @@ exports[`FileUpload > renders with file-trailing slot correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:3ca8c94d-13d6-4964-9823-b6b27fdd36e0" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:47629a9d-9e33-41b9-8a80-0b9d69d69ffa" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div>File trailing slot
     </div>
   </div><input type="file" accept="*" hidden="">
@@ -211,7 +225,7 @@ exports[`FileUpload > renders with file-trailing slot correctly 1`] = `
 
 exports[`FileUpload > renders with fileDelete correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -220,7 +234,7 @@ exports[`FileUpload > renders with fileDelete correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:987ec1ba-6aa3-448e-98b1-747e7db7280b" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:0731843a-d3c6-4bc9-8f07-2be308b98f61" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
@@ -232,7 +246,7 @@ exports[`FileUpload > renders with fileDelete correctly 1`] = `
 
 exports[`FileUpload > renders with fileDeleteIcon correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -241,7 +255,7 @@ exports[`FileUpload > renders with fileDeleteIcon correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:7c8b3198-5fee-48f4-b7c1-3251a9319ae1" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:0222739d-dea6-428c-885a-fa45dc1ae5c4" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
@@ -253,7 +267,7 @@ exports[`FileUpload > renders with fileDeleteIcon correctly 1`] = `
 
 exports[`FileUpload > renders with fileIcon correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -262,7 +276,7 @@ exports[`FileUpload > renders with fileIcon correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:7dd39e5a-8d17-4468-88ae-79d9cea79fd5" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:aac34d72-743c-4edf-b52c-4d1071605ee2" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
@@ -274,7 +288,7 @@ exports[`FileUpload > renders with fileIcon correctly 1`] = `
 
 exports[`FileUpload > renders with files slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -288,7 +302,7 @@ exports[`FileUpload > renders with files slot correctly 1`] = `
 
 exports[`FileUpload > renders with files-bottom slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -297,7 +311,7 @@ exports[`FileUpload > renders with files-bottom slot correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:0f6b96e9-7a1f-4340-bdd8-3ce3540a1161" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:0823237b-3c92-4c20-a22c-2559fa2855aa" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
@@ -309,7 +323,7 @@ exports[`FileUpload > renders with files-bottom slot correctly 1`] = `
 
 exports[`FileUpload > renders with files-top slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -317,7 +331,7 @@ exports[`FileUpload > renders with files-top slot correctly 1`] = `
       <!--v-if-->
     </div>
   </div>Files top slot<div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:55289e9c-3993-403e-bac5-69b174ca64e3" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:7520d61a-1e5d-48db-a1f1-8e5a9952a639" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
@@ -329,7 +343,7 @@ exports[`FileUpload > renders with files-top slot correctly 1`] = `
 
 exports[`FileUpload > renders with icon correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:image text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -343,7 +357,7 @@ exports[`FileUpload > renders with icon correctly 1`] = `
 
 exports[`FileUpload > renders with id correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -357,7 +371,7 @@ exports[`FileUpload > renders with id correctly 1`] = `
 
 exports[`FileUpload > renders with label correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <div class="font-medium text-default mt-2">Drop your image here</div>
@@ -371,7 +385,7 @@ exports[`FileUpload > renders with label correctly 1`] = `
 
 exports[`FileUpload > renders with label slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <div class="font-medium text-default mt-2">Label slot</div>
@@ -379,13 +393,20 @@ exports[`FileUpload > renders with label slot correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:4f575cdc-3ff8-43a3-9a43-bf1dfce170bc" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with layout grid correctly 1`] = `
 "<div class="relative">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -393,13 +414,37 @@ exports[`FileUpload > renders with layout grid correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="">
+    <div class="text-xs gap-1.5 absolute inset-0 p-0"><span class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img role="img" src="blob:nodedata:5499bdc3-3fe0-4a56-86cb-c07da62393ac" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex-col min-w-0 hidden"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -right-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with layout grid multiple correctly 1`] = `
+"<div class="relative">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
+      <div class="relative text-xs gap-1.5 p-0 aspect-square"><span class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img role="img" src="blob:nodedata:2bcce3c8-4903-4656-b2a6-255521e6e14d" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div class="flex-col min-w-0 hidden"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -right-1.5 p-0 rounded-full border-2 border-bg">
+          <!--v-if-->
+          <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" multiple="" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with layout list correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -407,13 +452,41 @@ exports[`FileUpload > renders with layout list correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:05229c5e-b9de-4ca6-81c6-9a74f63b5d82" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with layout list multiple correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <!--v-if-->
+    <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:8834827b-125d-4e5e-ab1c-73d7e8d82308" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" multiple="" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with leading slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3">Leading slot
       <!--v-if-->
@@ -421,13 +494,20 @@ exports[`FileUpload > renders with leading slot correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:fbe85422-d98b-4906-ac28-24f1c5673ab0" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
-exports[`FileUpload > renders with multiple correctly 1`] = `
+exports[`FileUpload > renders with modelValue correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -435,13 +515,41 @@ exports[`FileUpload > renders with multiple correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" multiple="" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:7fa005be-eb88-41b6-9230-2f4f40fba181" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with multiple correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <!--v-if-->
+    <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:fec5dd67-36b4-4ede-85d7-d6fa947b3d81" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" multiple="" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with name correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -455,7 +563,7 @@ exports[`FileUpload > renders with name correctly 1`] = `
 
 exports[`FileUpload > renders with neutral color correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-inverted" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-inverted" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -467,9 +575,85 @@ exports[`FileUpload > renders with neutral color correctly 1`] = `
 </div>"
 `;
 
+exports[`FileUpload > renders with position inside correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <div class="flex flex-col w-full gap-2">
+      <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:ba7d092c-8ad7-4e8d-bd69-4309803ea337" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+          <!--v-if-->
+          <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with position inside multiple correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <div class="flex flex-col w-full gap-2">
+      <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:7418332b-db5b-48bd-a921-859f27f8b83a" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+          <!--v-if-->
+          <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" multiple="" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with position outside correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <!--v-if-->
+    <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:e3cc1dab-99a3-4c41-8a4d-d95c2ec50e3c" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with position outside multiple correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <!--v-if-->
+    <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:dfeae3eb-8fc5-417f-9f32-54489df83657" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" multiple="" hidden="">
+</div>"
+`;
+
 exports[`FileUpload > renders with required correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -483,7 +667,7 @@ exports[`FileUpload > renders with required correctly 1`] = `
 
 exports[`FileUpload > renders with required correctly 2`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -497,7 +681,7 @@ exports[`FileUpload > renders with required correctly 2`] = `
 
 exports[`FileUpload > renders with size lg correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-2 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-9 text-lg shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -505,13 +689,20 @@ exports[`FileUpload > renders with size lg correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-sm px-3 py-2 gap-2 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-9 text-lg shrink-0"><img role="img" src="blob:nodedata:c6c1fb48-1876-4c0a-8b8f-5b1a34ee28a2" width="36" height="36" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate text-xs">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-2 ms-auto -mr-2">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with size md correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -519,13 +710,20 @@ exports[`FileUpload > renders with size md correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:4554470d-976e-4ca4-80fe-bad37a403b05" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with size sm correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-xs p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-xs border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-7 text-sm shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -533,13 +731,20 @@ exports[`FileUpload > renders with size sm correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-7 text-sm shrink-0"><img role="img" src="blob:nodedata:296a4e04-9966-4088-ae04-2ab131d4e860" width="28" height="28" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex min-w-0 flex-row gap-1"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with size xl correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-base p-2 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-base border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-10 text-xl shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -547,13 +752,20 @@ exports[`FileUpload > renders with size xl correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-sm px-3 py-2 gap-2 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-10 text-xl shrink-0"><img role="img" src="blob:nodedata:d5ed84b2-6908-44d0-ac9b-ca625d914f11" width="40" height="40" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-2 ms-auto -mr-2">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-6" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with size xs correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-xs p-1 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-xs border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-6 text-xs shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -561,13 +773,20 @@ exports[`FileUpload > renders with size xs correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2 py-1 gap-1 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-6 text-xs shrink-0"><img role="img" src="blob:nodedata:9237565c-e705-469f-b3a0-3f5cd67af892" width="24" height="24" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex min-w-0 flex-row gap-1"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1 ms-auto -mr-1">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with ui correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary rounded-xl" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary rounded-xl" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -581,7 +800,7 @@ exports[`FileUpload > renders with ui correctly 1`] = `
 
 exports[`FileUpload > renders with variant area correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -589,25 +808,39 @@ exports[`FileUpload > renders with variant area correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:e2cef3e9-9e85-4ccf-85f7-a1f54a908e33" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with variant button correctly 1`] = `
 "<div class="relative">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary p-2" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center"><span class="iconify i-lucide:upload shrink-0 size-5" aria-hidden="true"></span>
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="">
+    <div class="text-xs gap-1.5 absolute inset-0 p-0"><span class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img role="img" src="blob:nodedata:dbecdcb7-c5c4-4a8c-af83-a95769ade0f5" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex-col min-w-0 hidden"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -right-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x shrink-0 size-4" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders without dropzone correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->
@@ -621,7 +854,7 @@ exports[`FileUpload > renders without dropzone correctly 1`] = `
 
 exports[`FileUpload > renders without interactive correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:upload text-muted shrink-0" aria-hidden="true"></span></span>
       <!--v-if-->

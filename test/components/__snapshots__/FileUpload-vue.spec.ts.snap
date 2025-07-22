@@ -2,7 +2,7 @@
 
 exports[`FileUpload > renders with accept correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -16,7 +16,7 @@ exports[`FileUpload > renders with accept correctly 1`] = `
 
 exports[`FileUpload > renders with actions slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -24,13 +24,20 @@ exports[`FileUpload > renders with actions slot correctly 1`] = `
       <div class="flex flex-wrap gap-1.5 shrink-0 mt-4">Actions slot</div>
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:773a950d-7852-43e8-b93e-f506c8f697bd" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with as correctly 1`] = `
 "<section class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -44,7 +51,7 @@ exports[`FileUpload > renders with as correctly 1`] = `
 
 exports[`FileUpload > renders with class correctly 1`] = `
 "<div class="relative flex flex-col items-start w-full gap-4">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -60,7 +67,7 @@ exports[`FileUpload > renders with default slot correctly 1`] = `"<div class="re
 
 exports[`FileUpload > renders with description correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -74,7 +81,7 @@ exports[`FileUpload > renders with description correctly 1`] = `
 
 exports[`FileUpload > renders with description slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -82,13 +89,20 @@ exports[`FileUpload > renders with description slot correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:6e915b64-f3e9-4179-8792-6211afb6f5b4" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with disabled correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -102,7 +116,7 @@ exports[`FileUpload > renders with disabled correctly 1`] = `
 
 exports[`FileUpload > renders with disabled correctly 2`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -116,7 +130,7 @@ exports[`FileUpload > renders with disabled correctly 2`] = `
 
 exports[`FileUpload > renders with file slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -132,7 +146,7 @@ exports[`FileUpload > renders with file slot correctly 1`] = `
 
 exports[`FileUpload > renders with file-leading slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -151,7 +165,7 @@ exports[`FileUpload > renders with file-leading slot correctly 1`] = `
 
 exports[`FileUpload > renders with file-name slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -160,7 +174,7 @@ exports[`FileUpload > renders with file-name slot correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:934ce95c-c8c5-4710-803b-e7a490fb32c0" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:46216c78-f55c-460d-9a53-33eb0e0e7a24" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">File name slot</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -172,7 +186,7 @@ exports[`FileUpload > renders with file-name slot correctly 1`] = `
 
 exports[`FileUpload > renders with file-size slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -181,7 +195,7 @@ exports[`FileUpload > renders with file-size slot correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:58616459-6a68-44f7-b9bb-42979d275cfb" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:aaa6e5d7-960a-451c-9a60-979f8f241e4d" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">File size slot</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -193,7 +207,7 @@ exports[`FileUpload > renders with file-size slot correctly 1`] = `
 
 exports[`FileUpload > renders with file-trailing slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -202,7 +216,7 @@ exports[`FileUpload > renders with file-trailing slot correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:6fcf1e5f-a585-4a3a-b7e9-2cc48c9975dd" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:c3256aa1-d270-4fae-9a60-6c399ed3e0cd" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div>File trailing slot
     </div>
   </div><input type="file" accept="*" hidden="">
@@ -211,7 +225,7 @@ exports[`FileUpload > renders with file-trailing slot correctly 1`] = `
 
 exports[`FileUpload > renders with fileDelete correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -220,7 +234,7 @@ exports[`FileUpload > renders with fileDelete correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:823b9a36-82c6-49ca-8a35-b98eb2df504a" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:c64e0359-bc7a-4344-bc3d-337f9a58de36" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -232,7 +246,7 @@ exports[`FileUpload > renders with fileDelete correctly 1`] = `
 
 exports[`FileUpload > renders with fileDeleteIcon correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -241,7 +255,7 @@ exports[`FileUpload > renders with fileDeleteIcon correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:b52d4f7c-e315-42db-8ef3-0a30b0468ae4" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:45f7fa3a-5e05-4178-8711-409f08b8eaa5" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -253,7 +267,7 @@ exports[`FileUpload > renders with fileDeleteIcon correctly 1`] = `
 
 exports[`FileUpload > renders with fileIcon correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -262,7 +276,7 @@ exports[`FileUpload > renders with fileIcon correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:66b17060-ea7f-4c34-b17b-f0bd8499bf80" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:2523af1d-685b-45ee-94ca-dd6e48434ae7" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -274,7 +288,7 @@ exports[`FileUpload > renders with fileIcon correctly 1`] = `
 
 exports[`FileUpload > renders with files slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -288,7 +302,7 @@ exports[`FileUpload > renders with files slot correctly 1`] = `
 
 exports[`FileUpload > renders with files-bottom slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -297,7 +311,7 @@ exports[`FileUpload > renders with files-bottom slot correctly 1`] = `
     </div>
   </div>
   <div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:c8898c3d-eb22-4632-a469-6784d8427189" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:e7e9167e-6450-4cce-8f72-6ff865daf842" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -309,7 +323,7 @@ exports[`FileUpload > renders with files-bottom slot correctly 1`] = `
 
 exports[`FileUpload > renders with files-top slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -317,7 +331,7 @@ exports[`FileUpload > renders with files-top slot correctly 1`] = `
       <!--v-if-->
     </div>
   </div>Files top slot<div class="flex flex-col w-full gap-2">
-    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:45aae1de-9c84-4271-b2d2-da67e75556ba" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:93d4ae19-1685-4412-af80-d3ee1f7df53f" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -329,7 +343,7 @@ exports[`FileUpload > renders with files-top slot correctly 1`] = `
 
 exports[`FileUpload > renders with icon correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -343,7 +357,7 @@ exports[`FileUpload > renders with icon correctly 1`] = `
 
 exports[`FileUpload > renders with id correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -357,7 +371,7 @@ exports[`FileUpload > renders with id correctly 1`] = `
 
 exports[`FileUpload > renders with label correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <div class="font-medium text-default mt-2">Drop your image here</div>
@@ -371,7 +385,7 @@ exports[`FileUpload > renders with label correctly 1`] = `
 
 exports[`FileUpload > renders with label slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <div class="font-medium text-default mt-2">Label slot</div>
@@ -379,13 +393,20 @@ exports[`FileUpload > renders with label slot correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:304362bc-3346-4d54-ac3a-610947a93ae2" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with layout grid correctly 1`] = `
 "<div class="relative">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -393,13 +414,37 @@ exports[`FileUpload > renders with layout grid correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="">
+    <div class="text-xs gap-1.5 absolute inset-0 p-0"><span class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img role="img" src="blob:nodedata:df22c2be-1bb8-4537-900a-9cf6939d377d" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex-col min-w-0 hidden"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -right-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with layout grid multiple correctly 1`] = `
+"<div class="relative">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
+      <div class="relative text-xs gap-1.5 p-0 aspect-square"><span class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img role="img" src="blob:nodedata:46cd2210-8bf7-403d-abc9-d871ce0e4e8b" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div class="flex-col min-w-0 hidden"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -right-1.5 p-0 rounded-full border-2 border-bg">
+          <!--v-if-->
+          <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" multiple="" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with layout list correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -407,13 +452,41 @@ exports[`FileUpload > renders with layout list correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:1fda5cd3-ebce-4af5-935b-cc810705e90f" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with layout list multiple correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <!--v-if-->
+    <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:33ddaf9b-49e8-4b43-9c39-5b2cc0048339" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" multiple="" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with leading slot correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3">Leading slot
       <!--v-if-->
@@ -421,13 +494,20 @@ exports[`FileUpload > renders with leading slot correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:05b43d89-c44f-4aaf-b21b-04aeeea08ea7" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
-exports[`FileUpload > renders with multiple correctly 1`] = `
+exports[`FileUpload > renders with modelValue correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -435,13 +515,41 @@ exports[`FileUpload > renders with multiple correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" multiple="" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:124957b3-468d-4801-93e6-4d2d17d93326" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with multiple correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <!--v-if-->
+    <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:b91d2f2c-3428-4880-a5e4-b1d886648455" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" multiple="" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with name correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -455,7 +563,7 @@ exports[`FileUpload > renders with name correctly 1`] = `
 
 exports[`FileUpload > renders with neutral color correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-inverted" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-inverted" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -467,9 +575,85 @@ exports[`FileUpload > renders with neutral color correctly 1`] = `
 </div>"
 `;
 
+exports[`FileUpload > renders with position inside correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <div class="flex flex-col w-full gap-2">
+      <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:ac4c6e2c-db5b-4e5e-9833-1b1f89fab2ed" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+          <!--v-if-->
+          <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with position inside multiple correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <div class="flex flex-col w-full gap-2">
+      <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:195f78fb-525b-4e5a-a39b-e7e4caf41db3" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+        <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+          <!--v-if-->
+          <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" multiple="" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with position outside correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <!--v-if-->
+    <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:589e3e39-e35d-4a53-979d-50291c9e94f6" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
+</div>"
+`;
+
+exports[`FileUpload > renders with position outside multiple correctly 1`] = `
+"<div class="relative flex flex-col gap-2 items-start">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+    <!--v-if-->
+    <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:9c088a85-8e47-4fe8-b67d-d2b8f06ec6eb" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" multiple="" hidden="">
+</div>"
+`;
+
 exports[`FileUpload > renders with required correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -483,7 +667,7 @@ exports[`FileUpload > renders with required correctly 1`] = `
 
 exports[`FileUpload > renders with required correctly 2`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -497,7 +681,7 @@ exports[`FileUpload > renders with required correctly 2`] = `
 
 exports[`FileUpload > renders with size lg correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-2 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-9 text-lg shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -505,13 +689,20 @@ exports[`FileUpload > renders with size lg correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-sm px-3 py-2 gap-2 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-9 text-lg shrink-0"><img role="img" src="blob:nodedata:12f0da71-da2b-4e52-aab5-efb01ab26c9f" width="36" height="36" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate text-xs">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-2 ms-auto -mr-2">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with size md correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -519,13 +710,20 @@ exports[`FileUpload > renders with size md correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:473be12e-99bd-4a55-9133-0a570e543380" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with size sm correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-xs p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-xs border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-7 text-sm shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -533,13 +731,20 @@ exports[`FileUpload > renders with size sm correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-7 text-sm shrink-0"><img role="img" src="blob:nodedata:57bd5149-9c09-4315-a0e0-a0bf4056d474" width="28" height="28" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex min-w-0 flex-row gap-1"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with size xl correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-base p-2 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-base border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-10 text-xl shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -547,13 +752,20 @@ exports[`FileUpload > renders with size xl correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-sm px-3 py-2 gap-2 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-10 text-xl shrink-0"><img role="img" src="blob:nodedata:275823e2-64ba-45c7-ac9f-169217e1d09a" width="40" height="40" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-2 ms-auto -mr-2">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-6"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with size xs correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-xs p-1 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-xs border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-6 text-xs shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -561,13 +773,20 @@ exports[`FileUpload > renders with size xs correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2 py-1 gap-1 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-6 text-xs shrink-0"><img role="img" src="blob:nodedata:20a04e0c-a97a-4bd2-908f-de8d2aae8502" width="24" height="24" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex min-w-0 flex-row gap-1"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1 ms-auto -mr-1">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with ui correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary rounded-xl" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary rounded-xl" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -581,7 +800,7 @@ exports[`FileUpload > renders with ui correctly 1`] = `
 
 exports[`FileUpload > renders with variant area correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -589,25 +808,39 @@ exports[`FileUpload > renders with variant area correctly 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="flex flex-col w-full gap-2">
+    <div class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img role="img" src="blob:nodedata:25f8549f-0570-49b5-95f9-af12bc3eec5b" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex flex-col min-w-0"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5 ms-auto -mr-1.5">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders with variant button correctly 1`] = `
 "<div class="relative">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 hover:bg-elevated/25 focus-visible:outline-primary p-2" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
       <!--v-if-->
     </div>
   </div>
-  <!--v-if--><input type="file" accept="*" hidden="">
+  <div class="">
+    <div class="text-xs gap-1.5 absolute inset-0 p-0"><span class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img role="img" src="blob:nodedata:a1329c64-2c14-423b-be7e-f633e29e244d" width="32" height="32" class="h-full w-full rounded-[inherit] object-cover"></span>
+      <div class="flex-col min-w-0 hidden"><span class="text-default truncate">file1.txt</span><span class="text-muted truncate">3B</span></div><button type="button" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted absolute -top-1.5 -right-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
+        <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-4"></svg>
+      </button>
+    </div>
+  </div><input type="file" accept="*" hidden="">
 </div>"
 `;
 
 exports[`FileUpload > renders without dropzone correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm hover:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->
@@ -621,7 +854,7 @@ exports[`FileUpload > renders without dropzone correctly 1`] = `
 
 exports[`FileUpload > renders without interactive correctly 1`] = `
 "<div class="relative flex flex-col gap-2 items-start">
-  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm p-1.5 border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
+  <div role="button" data-dragging="false" class="w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary" tabindex="0">
     <!--v-if-->
     <div class="flex flex-col items-center justify-center text-center px-4 py-3"><span class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="text-muted shrink-0"></svg></span>
       <!--v-if-->

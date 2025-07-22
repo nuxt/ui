@@ -28,7 +28,6 @@ export interface FileUploadProps<M extends boolean = false> {
    */
   color?: FileUpload['variants']['color']
   /**
-   * The variant of the file upload.
    * The `button` variant is only available when `multiple` is `false`.
    * @defaultValue 'area'
    */
@@ -39,10 +38,17 @@ export interface FileUploadProps<M extends boolean = false> {
   size?: FileUpload['variants']['size']
   /**
    * The layout of how files are displayed.
-   * The `grid` layout has no effect when `variant` is `button`.
+   * Only works when `variant` is `area`.
    * @defaultValue 'list'
    */
   layout?: FileUpload['variants']['layout']
+  /**
+   * The position of the files.
+   * Only works when `variant` is `area`.
+   * Only works when `layout` is `list`.
+   * @defaultValue 'outside'
+   */
+  position?: FileUpload['variants']['position']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /**
@@ -77,7 +83,8 @@ export interface FileUploadProps<M extends boolean = false> {
   fileIcon?: string
   /**
    * Configure the delete button for the file.
-   * @defaultValue { color: 'neutral', variant: 'link' }
+   * When `layout` is `grid`, the default is `{ color: 'neutral', variant: 'solid', size: 'xs' }`{lang="ts-type"}
+   * When `layout` is `list`, the default is `{ color: 'neutral', variant: 'link' }`{lang="ts-type"}
    */
   fileDelete?: boolean | Partial<ButtonProps>
   /**
@@ -135,7 +142,9 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   multiple: false as never,
   reset: false,
   dropzone: true,
-  interactive: true
+  interactive: true,
+  layout: 'list',
+  position: 'outside'
 })
 const emits = defineEmits<FileUploadEmits<M>>()
 const slots = defineSlots<FileUploadSlots<M>>()
@@ -162,6 +171,16 @@ const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useForm
 
 const variant = computed(() => props.multiple ? 'area' : props.variant)
 const layout = computed(() => props.variant === 'button' && !props.multiple ? 'grid' : props.layout)
+const position = computed(() => {
+  if (layout.value === 'grid' && props.multiple) {
+    return 'inside'
+  }
+  if (variant.value === 'button') {
+    return 'outside'
+  }
+
+  return props.position
+})
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
   dropzone: props.dropzone,
@@ -170,6 +189,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload |
   size: props.size,
   variant: variant.value,
   layout: layout.value,
+  position: position.value,
   multiple: props.multiple,
   highlight: props.highlight
 }))
@@ -262,10 +282,17 @@ defineExpose({
             <slot name="file-trailing" :file="file" :index="index">
               <UButton
                 color="neutral"
-                :variant="layout === 'grid' || variant === 'button' ? 'solid' : 'link'"
-                :size="layout === 'grid' || variant === 'button' ? 'xs' : size"
+                v-bind="{
+                  ...(layout === 'grid' ? {
+                    variant: 'solid',
+                    size: 'xs'
+                  } : {
+                    variant: 'link',
+                    size
+                  }),
+                  ...typeof fileDelete === 'object' ? fileDelete : undefined
+                }"
                 :trailing-icon="fileDeleteIcon || appConfig.ui.icons.close"
-                v-bind="typeof fileDelete === 'object' ? fileDelete : undefined"
                 :class="ui.fileTrailingButton({ class: props.ui?.fileTrailingButton })"
                 @click="removeFile(index)"
               />
@@ -288,9 +315,9 @@ defineExpose({
         tabindex="0"
         @click="interactive && open()"
       >
-        <ReuseFilesTemplate v-if="(layout === 'grid' && multiple)" />
+        <ReuseFilesTemplate v-if="position === 'inside'" />
 
-        <div v-if="(layout === 'grid' && multiple) ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <div v-if="position === 'inside' ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true" :class="ui.wrapper({ class: props.ui?.wrapper })">
           <slot name="leading">
             <UIcon v-if="variant === 'button'" :name="icon || appConfig.ui.icons.upload" :class="ui.icon({ class: props.ui?.icon })" />
             <UAvatar v-else :icon="icon || appConfig.ui.icons.upload" :size="props.size" :class="ui.avatar({ class: props.ui?.avatar })" />
@@ -315,7 +342,7 @@ defineExpose({
         </div>
       </div>
 
-      <ReuseFilesTemplate v-if="!(layout === 'grid' && multiple)" />
+      <ReuseFilesTemplate v-if="position === 'outside'" />
     </slot>
 
     <input

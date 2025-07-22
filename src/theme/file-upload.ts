@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative',
-    base: ['w-full bg-default border border-default flex flex-col justify-center rounded-lg focus-visible:outline-2', options.theme.transitions && 'transition-[background]'],
+    base: ['w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2', options.theme.transitions && 'transition-[background]'],
     wrapper: 'flex flex-col items-center justify-center text-center',
     icon: 'shrink-0',
     avatar: 'shrink-0',
@@ -25,37 +25,38 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       area: {
-        wrapper: 'px-4 py-3'
+        wrapper: 'px-4 py-3',
+        base: 'p-4'
       },
       button: {
       }
     },
     size: {
       xs: {
-        base: 'text-xs p-1',
+        base: 'text-xs',
         icon: 'size-4',
         file: 'text-xs px-2 py-1 gap-1',
         fileWrapper: 'flex-row gap-1'
       },
       sm: {
-        base: 'text-xs p-1.5',
+        base: 'text-xs',
         icon: 'size-4',
         file: 'text-xs px-2.5 py-1.5 gap-1.5',
         fileWrapper: 'flex-row gap-1'
       },
       md: {
-        base: 'text-sm p-1.5',
+        base: 'text-sm',
         icon: 'size-5',
         file: 'text-xs px-2.5 py-1.5 gap-1.5'
       },
       lg: {
-        base: 'text-sm p-2',
+        base: 'text-sm',
         icon: 'size-5',
         file: 'text-sm px-3 py-2 gap-2',
         fileSize: 'text-xs'
       },
       xl: {
-        base: 'text-base p-2',
+        base: 'text-base',
         icon: 'size-6',
         file: 'text-sm px-3 py-2 gap-2'
       }
@@ -72,6 +73,10 @@ export default (options: Required<ModuleOptions>) => ({
         fileLeadingAvatar: 'size-full rounded-lg',
         fileTrailingButton: 'absolute -top-1.5 -right-1.5 p-0 rounded-full border-2 border-bg'
       }
+    },
+    position: {
+      inside: '',
+      outside: ''
     },
     dropzone: {
       true: 'border-dashed data-[dragging=true]:bg-elevated/25'
@@ -134,10 +139,33 @@ export default (options: Required<ModuleOptions>) => ({
       fileTrailingButton: '-mr-2'
     }
   }, {
+    variant: 'button',
+    size: 'xs',
+    class: {
+      base: 'p-1'
+    }
+  }, {
+    variant: 'button',
+    size: 'sm',
+    class: {
+      base: 'p-1.5'
+    }
+  }, {
+    variant: 'button',
+    size: 'md',
+    class: {
+      base: 'p-2'
+    }
+  }, {
+    variant: 'button',
+    size: 'lg',
+    class: {
+      base: 'p-2'
+    }
+  }, {
     layout: 'grid',
     multiple: true,
     class: {
-      base: 'p-4',
       files: 'grid grid-cols-2 md:grid-cols-3 gap-4 w-full',
       file: 'p-0 aspect-square'
     }
@@ -151,7 +179,6 @@ export default (options: Required<ModuleOptions>) => ({
   defaultVariants: {
     color: 'primary',
     variant: 'area',
-    size: 'md',
-    layout: 'list'
+    size: 'md'
   }
 })
