@@ -69,7 +69,7 @@ const state = reactive<Partial<schema>>({
 })
 
 const value = ref<File | null>(null)
-const valueMultiple = ref<File[]>([new File([], 'image.png', { type: 'image/png', lastModified: Date.now() })])
+const valueMultiple = ref<File[]>([])
 
 const upload = useUpload('/api/blob', { method: 'PUT' })
 

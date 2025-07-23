@@ -49,6 +49,7 @@ describe('FileUpload', () => {
     ['with fileIcon', { props: { ...props, fileIcon: 'i-lucide-house' } }],
     ['with fileDelete', { props: { ...props, fileDelete: { color: 'primary' } } }],
     ['with fileDeleteIcon', { props: { ...props, fileDeleteIcon: 'i-lucide-trash' } }],
+    ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-full gap-4' } }],
     ['with ui', { props: { ui: { base: 'rounded-xl' } } }],

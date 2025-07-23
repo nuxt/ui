@@ -44,8 +44,7 @@ export interface FileUploadProps<M extends boolean = false> {
   layout?: FileUpload['variants']['layout']
   /**
    * The position of the files.
-   * Only works when `variant` is `area`.
-   * Only works when `layout` is `list`.
+   * Only works when `variant` is `area` and when `layout` is `list`.
    * @defaultValue 'outside'
    */
   position?: FileUpload['variants']['position']
@@ -98,8 +97,8 @@ export interface FileUploadProps<M extends boolean = false> {
 }
 
 export interface FileUploadEmits<M extends boolean = false> {
-  (e: 'update:modelValue', value: M extends true ? File[] : File | null): void
-  (e: 'change', event: Event): void
+  'update:modelValue': [payload: M extends true ? File[] : File | null]
+  'change': [event: Event]
 }
 
 type FileUploadFiles<M> = (M extends true ? File[] : File) | null
@@ -231,6 +230,10 @@ function onUpdate(files: File[], reset = false) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
+
+  if (inputRef.value) {
+    inputRef.value.value = ''
+  }
 }
 
 function removeFile(index?: number) {
@@ -250,7 +253,8 @@ function removeFile(index?: number) {
 }
 
 defineExpose({
-  inputRef
+  inputRef,
+  dropzoneRef
 })
 </script>
 
@@ -308,9 +312,10 @@ defineExpose({
 
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot :open="open" :remove-file="removeFile">
-      <div
+      <component
+        :is="variant === 'button' ? 'button' : 'div'"
         ref="dropzoneRef"
-        role="button"
+        :role="variant === 'button' ? undefined : 'button'"
         :data-dragging="isDragging"
         :class="ui.base({ class: props.ui?.base })"
         :tabindex="interactive && !disabled ? 0 : -1"
@@ -341,7 +346,7 @@ defineExpose({
             </div>
           </template>
         </div>
-      </div>
+      </component>
 
       <ReuseFilesTemplate v-if="position === 'outside'" />
     </slot>
@@ -356,7 +361,8 @@ defineExpose({
       :required="required"
       :disabled="disabled"
       v-bind="{ ...$attrs, ...ariaAttrs }"
-      hidden
+      class="sr-only"
+      tabindex="-1"
     >
   </Primitive>
 </template>

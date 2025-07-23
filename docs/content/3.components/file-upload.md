@@ -26,6 +26,15 @@ navigation.badge: Soon
 
 :component-emits
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
+| `dropzoneRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
+
 ## Theme
 
 :component-theme
