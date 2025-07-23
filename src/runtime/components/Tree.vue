@@ -140,21 +140,6 @@ function getDefaultOpenedItems(item: T): string[] {
   return [currentItem, ...childItems].filter(Boolean) as string[]
 }
 
-const indent = computed(() => {
-  switch (props.size) {
-    case 'xl':
-    case 'lg':
-      return '24px'
-    case 'md':
-    case 'sm':
-      return '20px'
-    case 'xs':
-      return '16px'
-    default:
-      return '20px'
-  }
-})
-
 const defaultExpanded = computed(() =>
   props.defaultExpanded ?? props.items?.flatMap(item => getDefaultOpenedItems(item as NestedItem<T>))
 )
@@ -179,7 +164,7 @@ const defaultExpanded = computed(() =>
       :style="{
         '--level': item.level - 1,
         '--line-offset': ui.lineOffset(),
-        '--indent': indent
+        '--indent': ui.indent()
       }"
     >
       <TreeItemReka
