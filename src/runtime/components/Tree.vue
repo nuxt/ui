@@ -159,8 +159,8 @@ const defaultExpanded = computed(() =>
     <li
       v-for="(item, index) in flattenItems"
       :key="item._id"
-      class="tree-item"
-      :class="item.level > 0 ? [ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.value.ui?.itemWithChildren] }), 'tree--indent'] : ui.item({ class: [props.ui?.item, item.value.ui?.item] })"
+      class="tree--item"
+      :class="item.level > 0 ? [ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.value.ui?.itemWithChildren] })] : ui.item({ class: [props.ui?.item, item.value.ui?.item] })"
       :style="{
         '--level': item.level - 1,
         '--line-offset': ui.lineOffset(),
@@ -209,11 +209,7 @@ const defaultExpanded = computed(() =>
 </template>
 
 <style lang="css" scoped>
-.tree-item {
-  position: relative;
-}
-
-.tree-item::before {
+.tree--item::before {
   content: '';
   position: absolute;
   top: 0;
