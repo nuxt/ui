@@ -124,7 +124,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -154,16 +154,11 @@ const appConfig = useAppConfig() as FileUpload['AppConfig']
 
 const [DefineFilesTemplate, ReuseFilesTemplate] = createReusableTemplate()
 
-const inputRef = ref<HTMLInputElement>()
-const dropzoneRef = ref<HTMLDivElement>()
-
-const { isDragging, open } = useFileUpload({
+const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   accept: props.accept,
   reset: props.reset,
   multiple: props.multiple,
   dropzone: props.dropzone,
-  dropzoneRef,
-  inputRef,
   onUpdate
 })
 const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
@@ -231,7 +226,7 @@ function onUpdate(files: File[], reset = false) {
   emitFormChange()
   emitFormInput()
 
-  if (inputRef.value) {
+  if (reset && inputRef.value) {
     inputRef.value.value = ''
   }
 }

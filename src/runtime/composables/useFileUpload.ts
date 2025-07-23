@@ -1,7 +1,6 @@
-import type { Ref } from 'vue'
-import { computed, unref } from 'vue'
+import { ref, computed, unref, onMounted, watch, reactive } from 'vue'
 import { useFileDialog, useDropZone } from '@vueuse/core'
-import type { MaybeRef, MaybeRefOrGetter } from '@vueuse/core'
+import type { MaybeRef } from '@vueuse/core'
 
 export interface UseFileUploadOptions {
   /**
@@ -13,8 +12,6 @@ export interface UseFileUploadOptions {
   reset?: boolean
   multiple?: boolean
   dropzone?: boolean
-  dropzoneRef: MaybeRefOrGetter<HTMLElement | null | undefined>
-  inputRef: Ref<HTMLInputElement | undefined>
   onUpdate: (files: File[]) => void
 }
 
@@ -39,10 +36,10 @@ export function useFileUpload(options: UseFileUploadOptions) {
     reset = false,
     multiple = false,
     dropzone = true,
-    dropzoneRef,
-    inputRef,
     onUpdate
   } = options
+  const inputRef = ref<HTMLInputElement>()
+  const dropzoneRef = ref<HTMLDivElement>()
 
   const dataTypes = computed(() => parseAcceptToDataTypes(unref(accept)))
 
@@ -59,20 +56,41 @@ export function useFileUpload(options: UseFileUploadOptions) {
     onUpdate(files)
   }
 
-  const { isOverDropZone: isDragging } = dropzone
-    ? useDropZone(dropzoneRef, { dataTypes: dataTypes.value, onDrop })
-    : { isOverDropZone: false }
-  const { onChange, open } = useFileDialog({
-    accept: unref(accept),
-    multiple,
-    input: unref(inputRef),
-    reset
+  const isDragging = ref(false)
+  const fileDialog = reactive({
+    open: () => {
+    }
   })
 
-  onChange(fileList => onDrop(fileList))
+  function open() {
+    fileDialog.open()
+  }
+
+  onMounted(() => {
+    const { isOverDropZone } = dropzone
+      ? useDropZone(dropzoneRef, { dataTypes: dataTypes.value, onDrop })
+      : { isOverDropZone: ref(false) }
+
+    watch(isOverDropZone, (value) => {
+      isDragging.value = value
+    })
+
+    const { onChange, open } = useFileDialog({
+      accept: unref(accept),
+      multiple,
+      input: unref(inputRef),
+      reset
+    })
+
+    fileDialog.open = open
+
+    onChange(fileList => onDrop(fileList))
+  })
 
   return {
     isDragging,
-    open
+    open,
+    inputRef,
+    dropzoneRef
   }
 }
