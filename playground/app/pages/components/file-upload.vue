@@ -10,7 +10,7 @@ const positions = Object.keys(theme.variants.position) as Array<keyof typeof the
 
 const size = ref<keyof typeof theme.variants.size>('md')
 const variant = ref<keyof typeof theme.variants.variant>('area')
-const layout = ref<keyof typeof theme.variants.layout>('list')
+const layout = ref<keyof typeof theme.variants.layout>('grid')
 const position = ref<keyof typeof theme.variants.position>('outside')
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
@@ -132,8 +132,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
       :position="position"
       label="Drop your image here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
-      :class="variant === 'area' ? 'w-full' : ''"
-      :ui="variant === 'area' ? { base: 'min-h-44' } : {}"
+      :class="variant === 'area' ? 'w-full min-h-44' : ''"
     />
 
     <USeparator />
@@ -149,8 +148,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
       description="SVG, PNG, JPG or GIF (max. 2MB)"
       multiple
       :interactive="false"
-      class="w-full"
-      :ui="{ base: 'min-h-44' }"
+      class="w-full min-h-44"
     >
       <template #actions="{ open }">
         <UButton
@@ -164,7 +162,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
       </template>
 
       <template v-if="layout === 'grid' || position === 'inside'" #files-top="{ open, files }">
-        <div class="mb-2 flex items-center justify-between">
+        <div v-if="files?.length" class="mb-2 flex items-center justify-between">
           <p class="font-bold">
             Files ({{ files?.length }})
           </p>

@@ -2,8 +2,8 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative',
-    base: ['w-full bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2', options.theme.transitions && 'transition-[background]'],
+    root: 'relative flex flex-col',
+    base: ['w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2', options.theme.transitions && 'transition-[background]'],
     wrapper: 'flex flex-col items-center justify-center text-center',
     icon: 'shrink-0',
     avatar: 'shrink-0',
@@ -63,7 +63,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     layout: {
       list: {
-        root: 'flex flex-col gap-2 items-start',
+        root: 'gap-2 items-start',
         files: 'flex flex-col w-full gap-2',
         file: 'min-w-0 flex items-center border border-default rounded-md w-full',
         fileTrailingButton: 'ms-auto'
@@ -100,14 +100,14 @@ export default (options: Required<ModuleOptions>) => ({
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
-    class: `ring ring-inset ring-${color}`
+    class: `border-${color}`
   })), {
     color: 'neutral',
     class: 'focus-visible:outline-inverted'
   }, {
     color: 'neutral',
     highlight: true,
-    class: 'ring ring-inset ring-inverted'
+    class: 'border-inverted'
   }, {
     size: 'xs',
     layout: 'list',
