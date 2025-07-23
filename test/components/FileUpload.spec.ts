@@ -1,7 +1,10 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, test } from 'vitest'
+import { mount } from '@vue/test-utils'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import type { FileUploadProps, FileUploadSlots } from '../../src/runtime/components/FileUpload.vue'
 import ComponentRender from '../component-render'
+import { renderForm } from '../utils/form'
+import type { FormInputEvents } from '../../src/module'
 import theme from '#build/ui/file-upload'
 
 // Mock URL.createObjectURL to return deterministic blob URLs
@@ -11,6 +14,20 @@ URL.createObjectURL = vi.fn((file: File | Blob) => {
   }
   return 'blob:mock-url-blob'
 })
+
+async function setFilesOnInput(input: any, files: File[]) {
+  // Create a DataTransfer and add files
+  const data = new DataTransfer()
+  files.forEach(file => data.items.add(file))
+  // Set files property via Object.defineProperty
+  Object.defineProperty(input.element, 'files', {
+    value: data.files,
+    writable: false,
+    configurable: true
+  })
+  // Trigger change event
+  await input.trigger('change')
+}
 
 describe('FileUpload', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -70,5 +87,73 @@ describe('FileUpload', () => {
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FileUploadProps, slots?: Partial<FileUploadSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, FileUpload)
     expect(html).toMatchSnapshot()
+  })
+
+  describe('emits', () => {
+    test('update:modelValue event', async () => {
+      const wrapper = mount(FileUpload)
+      const input = wrapper.find('input')
+      const file1 = new File(['foo'], 'file1.txt', { type: 'text/plain' })
+      const file2 = new File(['bar'], 'file2.txt', { type: 'text/plain' })
+      await setFilesOnInput(input, [file1, file2])
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+    })
+
+    test('change event', async () => {
+      const wrapper = mount(FileUpload)
+      const input = wrapper.find('input')
+      const file1 = new File(['foo'], 'file1.txt', { type: 'text/plain' })
+      const file2 = new File(['bar'], 'file2.txt', { type: 'text/plain' })
+      await setFilesOnInput(input, [file1, file2])
+      expect(wrapper.emitted('change')).toBeTruthy()
+    })
+  })
+
+  describe.skip('form integration', async () => {
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            const files = Array.isArray(state.value) ? state.value : []
+            if (!files.length || files.some((f: any) => f.file.name !== 'valid')) {
+              return [{ name: 'value', message: 'Error message' }]
+            }
+            return []
+          }
+        },
+        slotTemplate: `
+        <UFormField name="value">
+          <UFileUpload v-model="state.value" id="input" />
+        </UFormField>
+        `
+      })
+      const input = wrapper.find('#input')
+      return {
+        wrapper,
+        input
+      }
+    }
+
+    test('validate on change works', async () => {
+      const { input, wrapper } = await createForm(['change'])
+      await setFilesOnInput(input, [new File(['foo'], 'invalid.txt', { type: 'text/plain' })])
+      await input.trigger('change')
+      expect(wrapper.text()).toContain('Error message')
+
+      await setFilesOnInput(input, [new File(['foo'], 'valid', { type: 'text/plain' })])
+      await input.trigger('change')
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on input works', async () => {
+      const { input, wrapper } = await createForm(['input'])
+      await setFilesOnInput(input, [new File(['foo'], 'invalid.txt', { type: 'text/plain' })])
+      expect(wrapper.text()).toContain('Error message')
+
+      await setFilesOnInput(input, [new File(['foo'], 'valid', { type: 'text/plain' })])
+      expect(wrapper.text()).not.toContain('Error message')
+    })
   })
 })

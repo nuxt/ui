@@ -161,7 +161,7 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   dropzone: props.dropzone,
   onUpdate
 })
-const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props, { deferInputValidation: true })
+const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props)
 
 const variant = computed(() => props.multiple ? 'area' : props.variant)
 const layout = computed(() => props.variant === 'button' && !props.multiple ? 'grid' : props.layout)
