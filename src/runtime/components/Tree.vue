@@ -155,8 +155,6 @@ const indent = computed(() => {
   }
 })
 
-const lineOffset = computed(() => ui.value.lineOffset || '8px')
-
 const defaultExpanded = computed(() =>
   props.defaultExpanded ?? props.items?.flatMap(item => getDefaultOpenedItems(item as NestedItem<T>))
 )
@@ -180,8 +178,8 @@ const defaultExpanded = computed(() =>
       :class="item.level > 0 ? [ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.value.ui?.itemWithChildren] }), 'tree--indent'] : ui.item({ class: [props.ui?.item, item.value.ui?.item] })"
       :style="{
         '--level': item.level - 1,
-        '--indent': indent,
-        '--line-offset': lineOffset
+        '--line-offset': ui.lineOffset(),
+        '--indent': indent
       }"
     >
       <TreeItemReka
