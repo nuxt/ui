@@ -4,8 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative isolate',
     item: '',
-    listWithChildren: 'ms-4.5 border-s border-default',
-    itemWithChildren: 'ps-1.5 -ms-px',
+    itemWithChildren: 'ps-[calc(var(--level)*calc(var(--indent)+0.25em))]',
     link: 'relative group w-full flex items-center text-sm before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0',
     linkLabel: 'truncate',
@@ -25,27 +24,32 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         link: 'px-2 py-1 text-xs gap-1',
         linkLeadingIcon: 'size-4',
-        linkTrailingIcon: 'size-4'
+        linkTrailingIcon: 'size-4',
+        lineOffset: '6px'
       },
       sm: {
         link: 'px-2.5 py-1.5 text-xs gap-1.5',
         linkLeadingIcon: 'size-4',
-        linkTrailingIcon: 'size-4'
+        linkTrailingIcon: 'size-4',
+        lineOffset: '6px'
       },
       md: {
         link: 'px-2.5 py-1.5 text-sm gap-1.5',
         linkLeadingIcon: 'size-5',
-        linkTrailingIcon: 'size-5'
+        linkTrailingIcon: 'size-5',
+        lineOffset: '8px'
       },
       lg: {
         link: 'px-3 py-2 text-sm gap-2',
         linkLeadingIcon: 'size-5',
-        linkTrailingIcon: 'size-5'
+        linkTrailingIcon: 'size-5',
+        lineOffset: '8px'
       },
       xl: {
         link: 'px-3 py-2 text-base gap-2',
         linkLeadingIcon: 'size-6',
-        linkTrailingIcon: 'size-6'
+        linkTrailingIcon: 'size-6',
+        lineOffset: '10px'
       }
     },
     selected: {
