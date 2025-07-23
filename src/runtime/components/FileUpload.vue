@@ -133,6 +133,7 @@ import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
 import UButton from './Button.vue'
+import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
