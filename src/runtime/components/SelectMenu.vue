@@ -118,6 +118,11 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   autofocus?: boolean
   autofocusDelay?: number
   /**
+   * When `true` the items in the SelectMenu are virtualized. Keep in mind that this only works with a single group due to a limitation of RekaUI (https://github.com/unovue/reka-ui/issues/1885).
+   * @defaultValue false
+   */
+  virtualize?: boolean
+  /**
    * The height of items to be used by the virtualizer to determine the amount of items to render.
    * Keep in mind that virtualization only works when you have no groups due to a limitation of RekaUI (https://github.com/unovue/reka-ui/issues/1885).
    * @defaultValue 20
@@ -454,9 +459,8 @@ defineExpose({
           <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
-            <!-- Make sure to set a height for Virtualizer's parent element -->
             <ComboboxVirtualizer
-              v-if="filteredGroups.length == 1"
+              v-if="virtualize"
               v-slot="{ option: item, virtualItem: { index } }"
               :options="filteredGroups[0]!.map(item => item as AcceptableValue)"
               :estimate-size="virtualItemEstimateSize"
