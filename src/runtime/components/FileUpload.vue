@@ -124,7 +124,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -225,10 +225,6 @@ function onUpdate(files: File[], reset = false) {
   emits('change', event)
   emitFormChange()
   emitFormInput()
-
-  if (reset && inputRef.value) {
-    inputRef.value.value = ''
-  }
 }
 
 function removeFile(index?: number) {
@@ -246,6 +242,14 @@ function removeFile(index?: number) {
 
   onUpdate(files, true)
 }
+
+watch(modelValue, (newValue) => {
+  const hasModelReset = !Array.isArray(newValue) || !newValue.length
+
+  if (hasModelReset && inputRef.value) {
+    inputRef.value.value = ''
+  }
+})
 
 defineExpose({
   inputRef,
