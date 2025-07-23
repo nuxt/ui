@@ -5,7 +5,7 @@ import type { SelectProps, SelectSlots } from '../../src/runtime/components/Sele
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 import { expectEmitPayloadType } from '../utils/types'
 
 describe('Select', () => {

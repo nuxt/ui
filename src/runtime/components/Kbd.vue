@@ -14,6 +14,10 @@ export interface KbdProps {
   as?: any
   value?: KbdKey | string
   /**
+   * @defaultValue 'neutral'
+   */
+  color?: Kbd['variants']['color']
+  /**
    * @defaultValue 'outline'
    */
   variant?: Kbd['variants']['variant']
@@ -48,7 +52,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.kbd || {}) }
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ variant, size, class: props.class })">
+  <Primitive :as="as" :class="ui({ class: props.class, color: props.color, variant: props.variant, size: props.size })">
     <slot>
       {{ getKbdKey(value) }}
     </slot>

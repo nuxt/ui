@@ -116,8 +116,8 @@
     "@internationalized/number": "^3.6.3",
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/icon": "^1.15.0",
-    "@nuxt/kit": "^4.0.0",
-    "@nuxt/schema": "^4.0.0",
+    "@nuxt/kit": "^4.0.1",
+    "@nuxt/schema": "^4.0.1",
     "@nuxtjs/color-mode": "^3.5.2",
     "@standard-schema/spec": "^1.0.0",
     "@tailwindcss/postcss": "^4.1.11",
@@ -152,10 +152,10 @@
     "unplugin-auto-import": "^19.3.0",
     "unplugin-vue-components": "^28.8.0",
     "vaul-vue": "0.4.1",
-    "vue-component-type-helpers": "^3.0.1"
+    "vue-component-type-helpers": "^3.0.3"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.5.2",
+    "@nuxt/eslint-config": "^1.6.0",
     "@nuxt/module-builder": "^1.0.1",
     "@nuxt/test-utils": "^3.19.2",
     "@release-it/conventional-changelog": "^10.0.1",
@@ -163,11 +163,11 @@
     "embla-carousel": "^8.6.0",
     "eslint": "^9.31.0",
     "happy-dom": "^18.0.1",
-    "nuxt": "^4.0.0",
-    "release-it": "^19.0.3",
+    "nuxt": "^4.0.1",
+    "release-it": "^19.0.4",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^3.0.1"
+    "vue-tsc": "^3.0.3"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",

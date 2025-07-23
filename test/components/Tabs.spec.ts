@@ -22,7 +22,8 @@ describe('Tabs', () => {
     label: 'Tab3',
     icon: 'i-lucide-bell',
     content: 'Finally, this is the content for Tab3',
-    slot: 'custom'
+    slot: 'custom',
+    badge: 'badge'
   }]
 
   const props = { items }

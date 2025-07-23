@@ -28,6 +28,20 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
+    <UDrawer title="Drawer with nested" :inset="inset" :ui="{ content: 'h-full' }" should-scale-background>
+      <UButton color="neutral" variant="outline" label="Open nested" />
+
+      <template #footer>
+        <UDrawer :inset="inset" nested :ui="{ content: 'h-full' }">
+          <UButton color="neutral" variant="outline" label="Open nested" />
+
+          <template #content>
+            <Placeholder class="flex-1 m-4" />
+          </template>
+        </UDrawer>
+      </template>
+    </UDrawer>
+
     <UDrawer title="Drawer with bottom direction" direction="bottom" :inset="inset">
       <UButton color="neutral" variant="outline" label="Open on bottom" />
 
