@@ -225,8 +225,8 @@ const defaultExpanded = computed(() =>
     to right,
     transparent,
     transparent calc(50% - 0.5px),
-    #e2e8f0 calc(50% - 0.5px),
-    #e2e8f0 calc(50% + 0.5px),
+    var(--ui-border) calc(50% - 0.5px),
+    var(--ui-border) calc(50% + 0.5px),
     transparent calc(50% + 0.5px)
   );
 
