@@ -223,7 +223,7 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
   }
 
   if (opts.transform) {
-    Object.assign(props.state, transformedState.value)
+    return transformedState.value
   }
 
   return props.state as FormData<S, T>
