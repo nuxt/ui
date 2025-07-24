@@ -5,35 +5,55 @@
   "lockFileMaintenance": {
     "enabled": true
   },
-  "baseBranches": ["v2", "v3"],
-  "packageRules": [{
-    "matchBaseBranches": ["v3"],
-    "labels": ["v3"]
-  }, {
-    "groupName": "tailwindcss",
-    "matchPackageNames": [
-      "tailwindcss",
-      "@tailwindcss/postcss",
-      "@tailwindcss/vite"
-    ]
-  }, {
-    "groupName": "reka-ui",
-    "matchPackageNames": [
-      "reka-ui",
-      "vaul-vue"
-    ]
-  }, {
-    "groupName": "vue-tsc",
-    "matchPackageNames": [
-      "vue-tsc",
-      "vue-component-type-helpers"
-    ]
-  }, {
-    "matchDepTypes": ["peerDependencies"],
-    "enabled": false
-  }, {
-    "matchDepTypes": ["resolutions"],
-    "enabled": false
-  }],
-  "postUpdateOptions": ["pnpmDedupe"]
+  "baseBranchPatterns": [
+    "v2",
+    "v3"
+  ],
+  "packageRules": [
+    {
+      "matchBaseBranches": [
+        "v3"
+      ],
+      "labels": [
+        "v3"
+      ]
+    },
+    {
+      "groupName": "tailwindcss",
+      "matchPackageNames": [
+        "tailwindcss",
+        "@tailwindcss/postcss",
+        "@tailwindcss/vite"
+      ]
+    },
+    {
+      "groupName": "reka-ui",
+      "matchPackageNames": [
+        "reka-ui",
+        "vaul-vue"
+      ]
+    },
+    {
+      "groupName": "vue-tsc",
+      "matchPackageNames": [
+        "vue-tsc",
+        "vue-component-type-helpers"
+      ]
+    },
+    {
+      "matchDepTypes": [
+        "peerDependencies"
+      ],
+      "enabled": false
+    },
+    {
+      "matchDepTypes": [
+        "resolutions"
+      ],
+      "enabled": false
+    }
+  ],
+  "postUpdateOptions": [
+    "pnpmDedupe"
+  ]
 }

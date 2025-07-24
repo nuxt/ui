@@ -71,7 +71,7 @@ export default (options: Required<ModuleOptions>) => ({
       grid: {
         fileWrapper: 'hidden',
         fileLeadingAvatar: 'size-full rounded-lg',
-        fileTrailingButton: 'absolute -top-1.5 -right-1.5 p-0 rounded-full border-2 border-bg'
+        fileTrailingButton: 'absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg'
       }
     },
     position: {
@@ -112,31 +112,31 @@ export default (options: Required<ModuleOptions>) => ({
     size: 'xs',
     layout: 'list',
     class: {
-      fileTrailingButton: '-mr-1'
+      fileTrailingButton: '-me-1'
     }
   }, {
     size: 'sm',
     layout: 'list',
     class: {
-      fileTrailingButton: '-mr-1.5'
+      fileTrailingButton: '-me-1.5'
     }
   }, {
     size: 'md',
     layout: 'list',
     class: {
-      fileTrailingButton: '-mr-1.5'
+      fileTrailingButton: '-me-1.5'
     }
   }, {
     size: 'lg',
     layout: 'list',
     class: {
-      fileTrailingButton: '-mr-2'
+      fileTrailingButton: '-me-2'
     }
   }, {
     size: 'xl',
     layout: 'list',
     class: {
-      fileTrailingButton: '-mr-2'
+      fileTrailingButton: '-me-2'
     }
   }, {
     variant: 'button',
