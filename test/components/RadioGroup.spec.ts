@@ -5,7 +5,7 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/radio-group'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 
 describe('RadioGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any

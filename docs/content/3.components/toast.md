@@ -155,7 +155,7 @@ name: 'toast-actions-example'
 ---
 ::
 
-### Progress :badge{label="Soon" class="align-text-top"}
+### Progress :badge{label="New" class="align-text-top"}
 
 Pass a `progress` field to customize or hide the [Progress](/components/progress) bar (with `false` value).
 

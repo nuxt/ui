@@ -12,6 +12,10 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-07-09',
 
+  hub: {
+    blob: true
+  },
+
   vite: {
     optimizeDeps: {
       // prevents reloading page when navigating between components

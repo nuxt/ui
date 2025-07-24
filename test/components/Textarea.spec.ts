@@ -5,7 +5,7 @@ import type { TextareaProps, TextareaSlots } from '../../src/runtime/components/
 import ComponentRender from '../component-render'
 import theme from '#build/ui/textarea'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 
 describe('Textarea', () => {
   const sizes = Object.keys(theme.variants.size) as any

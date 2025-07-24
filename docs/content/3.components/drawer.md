@@ -328,7 +328,7 @@ name: 'drawer-responsive-example'
 ---
 ::
 
-### Nested drawers :badge{label="Soon" class="align-text-top"}
+### Nested drawers :badge{label="New" class="align-text-top"}
 
 You can nest drawers within each other by using the `nested` prop.
 
