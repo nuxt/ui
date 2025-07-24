@@ -75,13 +75,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {
 </script>
 
 <template>
-  <TooltipRoot v-slot="{ open }" v-bind="rootProps">
+  <TooltipRoot v-slot="{ open }" v-bind="rootProps" :disabled="!(text || kbds?.length || !!slots.content) || disabled">
     <TooltipTrigger v-if="!!slots.default || !!reference" v-bind="$attrs" as-child :reference="reference" :class="props.class">
       <slot :open="open" />
     </TooltipTrigger>
 
     <TooltipPortal v-bind="portalProps">
-      <TooltipContent v-if="text || kbds?.length || !!slots.content" v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
+      <TooltipContent v-bind="contentProps" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
         <slot name="content">
           <span v-if="text" :class="ui.text({ class: props.ui?.text })">{{ text }}</span>
 
