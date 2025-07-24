@@ -272,6 +272,8 @@ You can use the FileUpload within a [Form](/components/form) and [FormField](/co
 
 ::component-example
 ---
+prettier: true
+collapse: true
 name: 'file-upload-form-validation-example'
 ---
 ::
@@ -282,6 +284,8 @@ You can use the default slot to make your own FileUpload component.
 
 ::component-example
 ---
+prettier: true
+collapse: true
 name: 'file-upload-default-slot-example'
 ---
 ::
@@ -292,6 +296,8 @@ You can use the `files-bottom` slot to add a [Button](/components/button) under 
 
 ::component-example
 ---
+prettier: true
+collapse: true
 name: 'file-upload-files-bottom-slot-example'
 ---
 ::
@@ -306,6 +312,8 @@ You can use the `files-top` slot to add a [Button](/components/button) above the
 
 ::component-example
 ---
+prettier: true
+collapse: true
 name: 'file-upload-files-top-slot-example'
 ---
 ::
