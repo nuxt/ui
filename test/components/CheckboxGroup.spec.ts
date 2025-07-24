@@ -6,7 +6,7 @@ import theme from '#build/ui/checkbox-group'
 import themeCheckbox from '#build/ui/checkbox'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 
 describe('CheckboxGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any

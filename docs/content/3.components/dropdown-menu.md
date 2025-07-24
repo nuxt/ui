@@ -21,7 +21,6 @@ Use the `items` prop as an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
-- `color?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
 - `kbds?: string[] | KbdProps[]`{lang="ts-type"}
 - [`type?: "link" | "label" | "separator" | "checkbox"`{lang="ts-type"}](#with-checkbox-items)

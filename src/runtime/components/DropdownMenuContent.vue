@@ -3,7 +3,7 @@
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/dropdown-menu'
-import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
+import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, DynamicSlots, MergeTypes } from '../types'
 import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
@@ -32,9 +32,12 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
 
 interface DropdownMenuContentEmits extends RekaDropdownMenuContentEmits {}
 
-type DropdownMenuContentSlots<T extends ArrayOrNested<DropdownMenuItem>> = Omit<DropdownMenuSlots<T>, 'default'> & {
+type DropdownMenuContentSlots<
+  A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
+  T extends NestedItem<A> = NestedItem<A>
+> = Pick<DropdownMenuSlots<A>, 'item' | 'item-leading' | 'item-label' | 'item-trailing' | 'content-top' | 'content-bottom'> & {
   default(props?: {}): any
-}
+} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean, index: number }>
 
 </script>
 

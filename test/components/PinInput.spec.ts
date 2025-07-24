@@ -6,7 +6,7 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/pin-input'
 
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 
 describe('PinInput', () => {
   const sizes = Object.keys(theme.variants.size) as any
