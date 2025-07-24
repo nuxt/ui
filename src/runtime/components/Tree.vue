@@ -159,8 +159,7 @@ const defaultExpanded = computed(() =>
     <li
       v-for="(item, index) in flattenItems"
       :key="item._id"
-      class="tree--item"
-      :class="item.level > 0 ? [ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.value.ui?.itemWithChildren] })] : ui.item({ class: [props.ui?.item, item.value.ui?.item] })"
+      :class="[ui.connector(), item.level > 0 ? [ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.value.ui?.itemWithChildren] })] : ui.item({ class: [props.ui?.item, item.value.ui?.item] })]"
       :style="{
         '--level': item.level - 1,
         '--line-offset': ui.lineOffset(),
@@ -207,26 +206,3 @@ const defaultExpanded = computed(() =>
     </li>
   </TreeRoot>
 </template>
-
-<style lang="css" scoped>
-.tree--item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: var(--line-offset);
-  pointer-events: none;
-  width: calc(var(--level) * (var(--indent) + 0.25em));
-  background-image: repeating-linear-gradient(
-    to right,
-    transparent,
-    transparent calc(50% - 0.5px),
-    var(--ui-border) calc(50% - 0.5px),
-    var(--ui-border) calc(50% + 0.5px),
-    transparent calc(50% + 0.5px)
-  );
-
-  background-size: calc(var(--indent) + 0.25em) 100%;
-
-}
-</style>

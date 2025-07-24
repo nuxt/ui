@@ -7,6 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemWithChildren: 'relative ps-[calc(var(--level)*calc(var(--indent)+0.25em))]',
     link: 'relative group w-full flex items-center text-sm before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0',
+    connector: 'relative before:absolute before:content-[\'\'] before:top-0 before:bottom-0 before:left-[var(--line-offset)] before:pointer-events-none before:w-[calc(var(--level)*(var(--indent)+0.25em))] before:bg-[repeating-linear-gradient(to_right,transparent,transparent_calc(50%-0.5px),var(--ui-border)_calc(50%-0.5px),var(--ui-border)_calc(50%+0.5px),transparent_calc(50%+0.5px))] before:bg-[size:calc(var(--indent)+0.25em)_100%]',
     lineOffset: '',
     indent: '',
     linkLabel: 'truncate',
