@@ -6,14 +6,12 @@ const count = ref(0)
 const toast = useToast()
 const overlay = useOverlay()
 
-const modal = overlay.create(LazyModalExample, {
-  props: {
-    count: count.value
-  }
-})
+const modal = overlay.create(LazyModalExample)
 
 async function open() {
-  const instance = modal.open()
+  const instance = modal.open({
+    count: count.value
+  })
 
   const shouldIncrement = await instance.result
 

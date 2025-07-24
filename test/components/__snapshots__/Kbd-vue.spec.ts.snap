@@ -1,21 +1,31 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Kbd > renders with as correctly 1`] = `"<span class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">K</span>"`;
+exports[`Kbd > renders with as correctly 1`] = `"<span class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">K</span>"`;
 
-exports[`Kbd > renders with class correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px] font-bold">K</kbd>"`;
+exports[`Kbd > renders with class correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-sans h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default font-bold">K</kbd>"`;
 
-exports[`Kbd > renders with default slot correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">Default slot</kbd>"`;
+exports[`Kbd > renders with default slot correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">Default slot</kbd>"`;
 
-exports[`Kbd > renders with size lg correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-6 min-w-[24px] text-[12px]">K</kbd>"`;
+exports[`Kbd > renders with neutral variant outline correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">K</kbd>"`;
 
-exports[`Kbd > renders with size md correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+exports[`Kbd > renders with neutral variant soft correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] text-default bg-elevated">K</kbd>"`;
 
-exports[`Kbd > renders with size sm correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-4 min-w-[16px] text-[10px]">K</kbd>"`;
+exports[`Kbd > renders with neutral variant solid correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] text-inverted bg-inverted">K</kbd>"`;
 
-exports[`Kbd > renders with value correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+exports[`Kbd > renders with neutral variant subtle correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-elevated">K</kbd>"`;
 
-exports[`Kbd > renders with variant outline correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-default text-highlighted ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+exports[`Kbd > renders with primary variant outline correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">K</kbd>"`;
 
-exports[`Kbd > renders with variant solid correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-inverted text-inverted h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+exports[`Kbd > renders with primary variant soft correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] text-default bg-elevated">K</kbd>"`;
 
-exports[`Kbd > renders with variant subtle correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans bg-elevated text-default ring ring-inset ring-accented h-5 min-w-[20px] text-[11px]">K</kbd>"`;
+exports[`Kbd > renders with primary variant solid correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] text-inverted bg-inverted">K</kbd>"`;
+
+exports[`Kbd > renders with primary variant subtle correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-elevated">K</kbd>"`;
+
+exports[`Kbd > renders with size lg correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-6 min-w-[24px] text-[12px] ring ring-inset ring-accented text-default bg-default">K</kbd>"`;
+
+exports[`Kbd > renders with size md correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">K</kbd>"`;
+
+exports[`Kbd > renders with size sm correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-4 min-w-[16px] text-[10px] ring ring-inset ring-accented text-default bg-default">K</kbd>"`;
+
+exports[`Kbd > renders with value correctly 1`] = `"<kbd class="inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans h-5 min-w-[20px] text-[11px] ring ring-inset ring-accented text-default bg-default">K</kbd>"`;
