@@ -8,11 +8,9 @@ export default defineNitroPlugin((nitroApp) => {
 
   nitroApp.hooks.hook('llms:generate', (_, { sections }) => {
     // Transform links except for "Documentation Sets"
-    sections.map((section) => {
-      if (section.title === 'Documentation Sets') return section
-      return {
-        ...section,
-        links: section.links.map(link => ({
+    sections.forEach((section) => {
+      if (section.title !== 'Documentation Sets') {
+        section.links = section.links.map(link => ({
           ...link,
           href: transformRawLink(link.href)
         }))
