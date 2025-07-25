@@ -24,3 +24,7 @@ links:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

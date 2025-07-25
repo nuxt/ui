@@ -244,3 +244,7 @@ name: 'popover-anchor-slot-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

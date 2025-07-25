@@ -36,6 +36,7 @@
     "nuxt-og-image": "^5.1.9",
     "prettier": "^3.6.2",
     "shiki-transformer-color-highlight": "^1.0.0",
+    "simple-git": "^3.28.0",
     "sortablejs": "^1.15.6",
     "superstruct": "^2.0.2",
     "ufo": "^1.6.1",

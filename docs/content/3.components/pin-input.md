@@ -191,3 +191,7 @@ When accessing the component via a template ref, you can use the following:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

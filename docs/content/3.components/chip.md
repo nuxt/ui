@@ -149,3 +149,7 @@ In this example, the Chip has a color per status and is displayed when the statu
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

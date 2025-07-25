@@ -213,3 +213,7 @@ name: 'tooltip-cursor-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

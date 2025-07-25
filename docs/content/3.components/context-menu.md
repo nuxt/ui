@@ -322,3 +322,7 @@ In this example, :kbd{value="meta"} :kbd{value="S"}, :kbd{value="shift"} :kbd{va
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

@@ -373,3 +373,7 @@ name: 'slideover-footer-slot-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

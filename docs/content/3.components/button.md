@@ -355,3 +355,7 @@ The `Button` component extends the `Link` component. Check out the source code o
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

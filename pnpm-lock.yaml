@@ -305,6 +305,9 @@ importers:
       shiki-transformer-color-highlight:
         specifier: ^1.0.0
         version: 1.0.0
+      simple-git:
+        specifier: ^3.28.0
+        version: 3.28.0
       sortablejs:
         specifier: ^1.15.6
         version: 1.15.6
