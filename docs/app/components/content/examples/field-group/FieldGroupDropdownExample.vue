@@ -28,7 +28,7 @@ const items: DropdownMenuItem[] = [
 </script>
 
 <template>
-  <UButtonGroup>
+  <UFieldGroup>
     <UButton color="neutral" variant="subtle" label="Settings" />
 
     <UDropdownMenu :items="items">
@@ -38,5 +38,5 @@ const items: DropdownMenuItem[] = [
         icon="i-lucide-chevron-down"
       />
     </UDropdownMenu>
-  </UButtonGroup>
+  </UFieldGroup>
 </template>
