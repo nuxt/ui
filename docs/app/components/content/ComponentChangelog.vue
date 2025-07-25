@@ -22,9 +22,11 @@ function normalizeCommitMessage(commit: CommitInfo) {
 </script>
 
 <template>
-  <em v-if="!commits.length" opacity="70">No recent changes</em>
+  <div v-if="!commits.length">
+    No recent changes
+  </div>
 
-  <div class="flex flex-col gap-1.5">
+  <div v-else class="flex flex-col gap-1.5">
     <template v-for="(commit, idx) of commits" :key="commit.hash">
       <div v-if="idx === 0 && !commit.version" class="flex gap-1.5 items-center">
         <UAvatar icon="lucide:git-pull-request-draft" size="sm" class="shrink-0" />
