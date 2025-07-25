@@ -18,7 +18,7 @@ export default defineNuxtModule({
     name: 'changelog'
   },
   async setup() {
-    const count = process.env.CI ? 1000 : 1000
+    const count = 1000
     const git = Git({ maxConcurrentProcesses: 200 })
 
     const logs = (await git.log({ maxCount: count })).all.filter((i) => {
