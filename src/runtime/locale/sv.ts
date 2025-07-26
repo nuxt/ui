@@ -53,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Inga data'
+    },
+    fileUpload: {
+      removeFile: 'Ta bort {filename}'
     }
   }
 })
