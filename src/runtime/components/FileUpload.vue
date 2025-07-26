@@ -237,6 +237,8 @@ function removeFile(index?: number) {
 
   if (!props.multiple || index === undefined) {
     onUpdate([], true)
+
+    dropzoneRef.value?.focus()
     return
   }
 
@@ -244,6 +246,8 @@ function removeFile(index?: number) {
   files.splice(index, 1)
 
   onUpdate(files, true)
+
+  dropzoneRef.value?.focus()
 }
 
 watch(modelValue, (newValue) => {
