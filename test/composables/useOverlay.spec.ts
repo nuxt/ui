@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { useOverlay } from '../../src/runtime/composables/useOverlay'
 import MockModal from '../mocks/MockModal.vue'
 

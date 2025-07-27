@@ -1,7 +1,7 @@
-import { createSharedComposable } from '@vueuse/core'
 import type { Component } from 'vue'
-import { markRaw, reactive, shallowReactive } from 'vue'
-import type { ComponentEmit, ComponentProps } from 'vue-component-type-helpers'
+import { reactive, markRaw, shallowReactive } from 'vue'
+import { createSharedComposable } from '@vueuse/core'
+import type { ComponentProps, ComponentEmit } from 'vue-component-type-helpers'
 
 /**
  * This is a workaround for a design limitation in TypeScript.
