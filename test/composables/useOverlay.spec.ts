@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { useOverlay } from '../../src/runtime/composables/useOverlay'
 import MockModal from '../mocks/MockModal.vue'
 
@@ -140,6 +140,19 @@ describe('useOverlay', () => {
     }, 0)
 
     const result = await instance.result
+    expect(result).toBe('test-result')
+  })
+
+  it('should directly return promise that resolves when closed', async () => {
+    const modal = overlay.create(MockModal)
+    const instance = modal.open()
+
+    // Simulate closing the modal
+    setTimeout(() => {
+      modal.close('test-result')
+    }, 0)
+
+    const result = await instance
     expect(result).toBe('test-result')
   })
 
