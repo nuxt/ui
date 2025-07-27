@@ -99,10 +99,10 @@ function _useOverlay() {
     const result = new Promise<any>(resolve => overlay.resolvePromise = resolve)
 
     return Object.assign(result, {
-        id,
-        isMounted: overlay.isMounted,
-        isOpen: overlay.isOpen,
-        result
+      id,
+      isMounted: overlay.isMounted,
+      isOpen: overlay.isOpen,
+      result
     })
   }
 
