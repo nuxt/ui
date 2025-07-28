@@ -21,7 +21,7 @@ import {
   UForm
 } from '#components'
 
-const inputComponents = [UInput, URadioGroup, UTextarea, UCheckbox, USelect, USelectMenu, UInputMenu, UInputNumber, USwitch, UPinInput, USlider]
+const inputComponents = [UInput, URadioGroup, UTextarea, UCheckbox, USelect, USelectMenu, UInputMenu, UInputNumber, USwitch, USlider, UPinInput, UFileUpload]
 
 async function renderFormField(options: {
   props: Partial<FormFieldProps>

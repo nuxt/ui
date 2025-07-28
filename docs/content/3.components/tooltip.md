@@ -186,7 +186,7 @@ name: 'tooltip-open-example'
 In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), you can toggle the Tooltip by pressing :kbd{value="O"}.
 ::
 
-### With following cursor :badge{label="Soon" class="align-text-top"}
+### With following cursor :badge{label="New" class="align-text-top"}
 
 You can make the Tooltip follow the cursor when hovering over an element using the [`reference`](https://reka-ui.com/docs/components/tooltip#trigger) prop:
 

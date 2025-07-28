@@ -53,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Tiada data'
+    },
+    fileUpload: {
+      removeFile: 'Buang {filename}'
     }
   }
 })

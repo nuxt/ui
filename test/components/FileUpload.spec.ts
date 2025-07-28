@@ -109,17 +109,19 @@ describe('FileUpload', () => {
     })
   })
 
-  describe.skip('form integration', async () => {
+  describe('form integration', async () => {
     async function createForm(validateOn?: FormInputEvents[]) {
       const wrapper = await renderForm({
         props: {
           validateOn,
           validateOnInputDelay: 0,
           async validate(state: any) {
-            const files = Array.isArray(state.value) ? state.value : []
-            if (!files.length || files.some((f: any) => f.file.name !== 'valid')) {
+            const files = Array.isArray(state.value) ? state.value : state.value ? [state.value] : []
+            if (!files.length || files.some((f: any) => f.name !== 'valid')) {
               return [{ name: 'value', message: 'Error message' }]
             }
+
+            console.log('valid')
             return []
           }
         },
@@ -139,11 +141,9 @@ describe('FileUpload', () => {
     test('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change'])
       await setFilesOnInput(input, [new File(['foo'], 'invalid.txt', { type: 'text/plain' })])
-      await input.trigger('change')
       expect(wrapper.text()).toContain('Error message')
 
       await setFilesOnInput(input, [new File(['foo'], 'valid', { type: 'text/plain' })])
-      await input.trigger('change')
       expect(wrapper.text()).not.toContain('Error message')
     })
 
