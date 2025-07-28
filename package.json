@@ -145,7 +145,7 @@
     "pathe": "^2.0.3",
     "reka-ui": "2.3.2",
     "scule": "^1.3.0",
-    "tailwind-variants": "^1.0.0",
+    "tailwind-variants": "^2.0.0",
     "tailwindcss": "^4.1.11",
     "tinyglobby": "^0.2.14",
     "unplugin": "^2.3.5",
