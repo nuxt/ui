@@ -190,6 +190,24 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('')
     })
 
+    test('setErrors with regex works', async () => {
+      form.value.setErrors([{ id: 'emailInput', name: 'email', message: 'this is an error' }])
+
+      expect(form.value.errors).toMatchObject([{ id: 'emailInput', name: 'email', message: 'this is an error' }])
+
+      form.value.setErrors([{ id: 'passwordInput', name: 'password', message: 'this is another error' }], /email/)
+
+      expect(form.value.errors).toMatchObject([{ id: 'passwordInput', name: 'password', message: 'this is another error' }])
+
+      await nextTick()
+
+      const emailField = wrapper.find('#emailField')
+      expect(emailField.text()).toBe('')
+
+      const passwordField = wrapper.find('#passwordField')
+      expect(passwordField.text()).toBe('this is another error')
+    })
+
     test('clear works', async () => {
       form.value.setErrors([{
         id: 'emailInput',
@@ -222,7 +240,7 @@ describe('Form', () => {
         { id: 'passwordInput', name: 'password', message: 'this is another error' }
       ])
 
-      await flushPromises()
+      await nextTick()
 
       const emailField = wrapper.find('#emailField')
       expect(emailField.text()).toBe('')
@@ -243,7 +261,7 @@ describe('Form', () => {
         { id: 'passwordInput', name: 'password', message: 'this is another error' }
       ])
 
-      await flushPromises()
+      await nextTick()
 
       const emailField = wrapper.find('#emailField')
       expect(emailField.text()).toBe('')
@@ -313,6 +331,15 @@ describe('Form', () => {
       expect(errors).toMatchObject([
         { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' },
         { id: 'passwordInput', name: 'password', message: 'Invalid input: expected string, received undefined' }
+      ])
+    })
+
+    test('getErrors with regex works', async () => {
+      await form.value.submit()
+      const errors = form.value.getErrors(/email/)
+
+      expect(errors).toMatchObject([
+        { id: 'emailInput', name: 'email', message: 'Invalid input: expected string, received undefined' }
       ])
     })
 
