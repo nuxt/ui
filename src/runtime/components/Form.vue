@@ -290,7 +290,7 @@ defineExpose<Form<S>>({
     return errors.value
   },
 
-  clear(name?: string | RegExp) {
+  clear(name?: keyof I | RegExp) {
     if (name) {
       errors.value = errors.value.filter(err => name instanceof RegExp ? !(err.name && name.test(err.name)) : err.name !== name)
     } else {
