@@ -11,5 +11,6 @@ const value = ref(1500)
       currencyDisplay: 'code',
       currencySign: 'accounting'
     }"
+    :step="0.01"
   />
 </template>
