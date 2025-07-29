@@ -143,6 +143,19 @@ describe('useOverlay', () => {
     expect(result).toBe('test-result')
   })
 
+  it('should directly return promise that resolves when closed', async () => {
+    const modal = overlay.create(MockModal)
+    const instance = modal.open()
+
+    // Simulate closing the modal
+    setTimeout(() => {
+      modal.close('test-result')
+    }, 0)
+
+    const result = await instance
+    expect(result).toBe('test-result')
+  })
+
   it('should close an overlay', () => {
     const modal = overlay.create(MockModal)
 
