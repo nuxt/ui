@@ -329,6 +329,8 @@ defineExpose({
         :class="ui.base({ class: props.ui?.base })"
         :tabindex="interactive && !disabled ? 0 : -1"
         @click="interactive && !disabled && open()"
+        @keyup.enter="interactive && !disabled && open()"
+        @keyup.space="interactive && !disabled && open()"
       >
         <ReuseFilesTemplate v-if="position === 'inside'" />
 
