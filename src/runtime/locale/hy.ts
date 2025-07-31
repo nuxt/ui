@@ -53,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Տվյալներ չկան'
+    },
+    fileUpload: {
+      removeFile: 'Ջնջել {filename}'
     }
   }
 })

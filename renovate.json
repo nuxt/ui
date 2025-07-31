@@ -34,6 +34,13 @@
       ]
     },
     {
+      "groupName": "vite",
+      "matchPackageNames": [
+        "vite",
+        "@vitejs/plugin-vue"
+      ]
+    },
+    {
       "groupName": "vue-tsc",
       "matchPackageNames": [
         "vue-tsc",
