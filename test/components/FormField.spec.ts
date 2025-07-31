@@ -18,7 +18,8 @@ import {
   USlider,
   UPinInput,
   UFormField,
-  UForm
+  UForm,
+  UFileUpload
 } from '#components'
 
 const inputComponents = [UInput, URadioGroup, UTextarea, UCheckbox, USelect, USelectMenu, UInputMenu, UInputNumber, USwitch, USlider, UPinInput, UFileUpload]
