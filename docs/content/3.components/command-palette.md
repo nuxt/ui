@@ -327,7 +327,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
-### Trailing Icon :badge{label="New" class="align-text-top"}
+### Trailing Icon
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/components/icon) when an item has children. Defaults to `i-lucide-chevron-right`.
 
@@ -565,7 +565,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 :::
 ::
 
-### Back :badge{label="New" class="align-text-top"}
+### Back
 
 Use the `back` prop to customize or hide the back button (with `false` value) displayed when navigating into a submenu.
 
@@ -604,7 +604,7 @@ props:
 ---
 ::
 
-### Back Icon :badge{label="New" class="align-text-top"}
+### Back Icon
 
 Use the `back-icon` prop to customize the back button [Icon](/components/icon). Defaults to `i-lucide-arrow-left`.
 
@@ -717,7 +717,7 @@ props:
 This example uses the `@update:model-value` event to reset the search term when an item is selected.
 ::
 
-### With children in items :badge{label="New" class="align-text-top"}
+### With children in items
 
 You can create hierarchical menus by using the `children` property in items. When an item has children, it will automatically display a chevron icon and enable navigation into a submenu.
 
@@ -877,7 +877,7 @@ props:
 This can be useful when using the CommandPalette inside a [`Modal`](/components/modal) for example.
 ::
 
-### With footer slot :badge{label="Soon" class="align-text-top"}
+### With footer slot :badge{label="New" class="align-text-top"}
 
 Use the `#footer` slot to add custom content at the bottom of the CommandPalette, such as keyboard shortcuts help or additional actions.
 

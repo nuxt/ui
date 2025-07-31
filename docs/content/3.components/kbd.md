@@ -62,7 +62,7 @@ items:
 ---
 ::
 
-### Color :badge{label="Soon" class="align-text-top"}
+### Color :badge{label="New" class="align-text-top"}
 
 Use the `color` prop to change the color of the Kbd.
 
