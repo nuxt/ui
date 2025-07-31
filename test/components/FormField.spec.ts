@@ -28,13 +28,19 @@ async function renderFormField(options: {
   props: Partial<FormFieldProps>
   inputComponent: typeof inputComponents[number]
 }) {
+  let modelValue: any = '0'
+  if ((options.inputComponent as any).__name === 'FileUpload') {
+    modelValue = new File([''], 'test-file.txt', { type: 'text/plain' })
+  }
+
   return await mountSuspended(UForm, {
     slots: {
       default: {
         // @ts-expect-error - Object literal may only specify known properties, and setup does not exist in type
         setup: () => ({
           formFieldProps: options.props,
-          inputComponent: options.inputComponent
+          inputComponent: options.inputComponent,
+          modelValue
         }),
         components: {
           UFormField,
@@ -43,7 +49,7 @@ async function renderFormField(options: {
         },
         template: `
           <UFormField v-bind="formFieldProps">
-            <component :is="inputComponent" :model-value="'0'" />
+            <component :is="inputComponent" :model-value="modelValue" />
           </UFormField>
         `
       }
