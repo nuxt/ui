@@ -67,9 +67,31 @@ export function useFileUpload(options: UseFileUploadOptions) {
   }
 
   onMounted(() => {
-    const { isOverDropZone } = dropzone
-      ? useDropZone(dropzoneRef, { dataTypes: dataTypes.value, onDrop })
-      : { isOverDropZone: ref(false) }
+    const { isOverDropZone } = useDropZone(dropzoneRef, {
+      dataTypes: (types) => {
+        if (dataTypes.value === undefined || accept === '*') {
+          return true
+        }
+
+        return types.some((type) => {
+          return dataTypes.value?.some((accepted) => {
+            if (accepted.endsWith('/*')) {
+              const base = accepted.slice(0, accepted.indexOf('/'))
+              return type.startsWith(base + '/')
+            } else {
+              return type === accepted
+            }
+          })
+        })
+      }, onDrop: (files, event) => {
+        if (!dropzone) {
+          event.preventDefault()
+          return
+        }
+
+        onDrop(files)
+      }
+    })
 
     watch(isOverDropZone, (value) => {
       isDragging.value = value
