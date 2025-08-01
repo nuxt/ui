@@ -1,4 +1,4 @@
-import { ref, computed, unref, onMounted, watch, reactive } from 'vue'
+import { ref, computed, unref, onMounted, reactive, readonly } from 'vue'
 import { useFileDialog, useDropZone } from '@vueuse/core'
 import type { MaybeRef } from '@vueuse/core'
 import { defu } from 'defu'
@@ -57,7 +57,6 @@ export function useFileUpload(options: UseFileUploadOptions) {
     optionsComputed.value.onUpdate(files)
   }
 
-  const isDragging = ref(false)
   const fileDialog = reactive({
     open: () => {
     }
@@ -67,37 +66,33 @@ export function useFileUpload(options: UseFileUploadOptions) {
     fileDialog.open()
   }
 
-  onMounted(() => {
-    const { isOverDropZone } = useDropZone(dropzoneRef, {
-      dataTypes: (types) => {
-        if (dataTypes.value === undefined || optionsComputed.value.accept === '*') {
-          return true
-        }
-
-        return types.some((type) => {
-          return dataTypes.value?.some((accepted) => {
-            if (accepted.endsWith('/*')) {
-              const base = accepted.slice(0, accepted.indexOf('/'))
-              return type.startsWith(base + '/')
-            } else {
-              return type === accepted
-            }
-          })
-        })
-      }, onDrop: (files, event) => {
-        if (!optionsComputed.value.dropzone) {
-          event.preventDefault()
-          return
-        }
-
-        onDrop(files)
+  const { isOverDropZone: isDragging } = useDropZone(dropzoneRef, {
+    dataTypes: (types) => {
+      if (dataTypes.value === undefined || optionsComputed.value.accept === '*') {
+        return true
       }
-    })
 
-    watch(isOverDropZone, (value) => {
-      isDragging.value = value
-    })
+      return types.some((type) => {
+        return dataTypes.value?.some((accepted) => {
+          if (accepted.endsWith('/*')) {
+            const base = accepted.slice(0, accepted.indexOf('/'))
+            return type.startsWith(base + '/')
+          } else {
+            return type === accepted
+          }
+        })
+      })
+    }, onDrop: (files, event) => {
+      if (!optionsComputed.value.dropzone) {
+        event.preventDefault()
+        return
+      }
 
+      onDrop(files)
+    }
+  })
+
+  onMounted(() => {
     const { onChange, open } = useFileDialog({
       accept: unref(optionsComputed.value.accept),
       multiple: optionsComputed.value.multiple,
@@ -111,7 +106,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
   })
 
   return {
-    isDragging,
+    isDragging: readonly(isDragging),
     open,
     inputRef,
     dropzoneRef
