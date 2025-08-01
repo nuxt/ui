@@ -126,7 +126,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 <script setup lang="ts" generic="M extends boolean = false">
 import { computed, watch } from 'vue'
 import { Primitive } from 'reka-ui'
-import { createReusableTemplate } from '@vueuse/core'
+import { createReusableTemplate, reactiveComputed } from '@vueuse/core'
 import { useAppConfig, useLocale } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
@@ -157,13 +157,13 @@ const { t } = useLocale()
 
 const [DefineFilesTemplate, ReuseFilesTemplate] = createReusableTemplate()
 
-const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
+const { isDragging, open, inputRef, dropzoneRef } = useFileUpload(reactiveComputed(() => ({
   accept: props.accept,
   reset: props.reset,
   multiple: props.multiple,
   dropzone: props.dropzone,
   onUpdate
-})
+})))
 const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props)
 
 const variant = computed(() => props.multiple ? 'area' : props.variant)

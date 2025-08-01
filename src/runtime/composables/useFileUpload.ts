@@ -1,6 +1,7 @@
 import { ref, computed, unref, onMounted, watch, reactive } from 'vue'
 import { useFileDialog, useDropZone } from '@vueuse/core'
 import type { MaybeRef } from '@vueuse/core'
+import { defu } from 'defu'
 
 export interface UseFileUploadOptions {
   /**
@@ -31,17 +32,17 @@ function parseAcceptToDataTypes(accept: string): string[] | undefined {
 }
 
 export function useFileUpload(options: UseFileUploadOptions) {
-  const {
-    accept = '*',
-    reset = false,
-    multiple = false,
-    dropzone = true,
-    onUpdate
-  } = options
+  const optionsComputed = computed(() => defu({
+    accept: '*',
+    reset: false,
+    multiple: false,
+    dropzone: true
+  }, options))
+
   const inputRef = ref<HTMLInputElement>()
   const dropzoneRef = ref<HTMLDivElement>()
 
-  const dataTypes = computed(() => parseAcceptToDataTypes(unref(accept)))
+  const dataTypes = computed(() => parseAcceptToDataTypes(unref(optionsComputed.value.accept)))
 
   const onDrop = (files: FileList | File[] | null) => {
     if (!files || files.length === 0) {
@@ -50,10 +51,10 @@ export function useFileUpload(options: UseFileUploadOptions) {
     if (files instanceof FileList) {
       files = Array.from(files)
     }
-    if (files.length > 1 && !multiple) {
+    if (files.length > 1 && !optionsComputed.value.multiple) {
       files = [files[0]!]
     }
-    onUpdate(files)
+    optionsComputed.value.onUpdate(files)
   }
 
   const isDragging = ref(false)
@@ -69,7 +70,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
   onMounted(() => {
     const { isOverDropZone } = useDropZone(dropzoneRef, {
       dataTypes: (types) => {
-        if (dataTypes.value === undefined || accept === '*') {
+        if (dataTypes.value === undefined || optionsComputed.value.accept === '*') {
           return true
         }
 
@@ -84,7 +85,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
           })
         })
       }, onDrop: (files, event) => {
-        if (!dropzone) {
+        if (!optionsComputed.value.dropzone) {
           event.preventDefault()
           return
         }
@@ -98,10 +99,10 @@ export function useFileUpload(options: UseFileUploadOptions) {
     })
 
     const { onChange, open } = useFileDialog({
-      accept: unref(accept),
-      multiple,
+      accept: unref(optionsComputed.value.accept),
+      multiple: optionsComputed.value.multiple,
       input: unref(inputRef),
-      reset
+      reset: optionsComputed.value.reset
     })
 
     fileDialog.open = open
