@@ -269,10 +269,10 @@ defineExpose<Form<S>>({
   validate: _validate,
   errors,
 
-  setErrors(errs: FormError[], name?: keyof I) {
+  setErrors(errs: FormError[], name?: keyof I | RegExp) {
     if (name) {
       errors.value = errors.value
-        .filter(error => error.name !== name)
+        .filter(err => name instanceof RegExp ? !(err.name && name.test(err.name)) : err.name !== name)
         .concat(resolveErrorIds(errs))
     } else {
       errors.value = resolveErrorIds(errs)
@@ -283,16 +283,16 @@ defineExpose<Form<S>>({
     await onSubmitWrapper(new Event('submit'))
   },
 
-  getErrors(name?: keyof I) {
+  getErrors(name?: keyof I | RegExp) {
     if (name) {
-      return errors.value.filter(err => err.name === name)
+      return errors.value.filter(err => name instanceof RegExp ? err.name && name.test(err.name) : err.name === name)
     }
     return errors.value
   },
 
-  clear(name?: string) {
+  clear(name?: keyof I | RegExp) {
     if (name) {
-      errors.value = errors.value.filter(err => err.name !== name)
+      errors.value = errors.value.filter(err => name instanceof RegExp ? !(err.name && name.test(err.name)) : err.name !== name)
     } else {
       errors.value = []
     }

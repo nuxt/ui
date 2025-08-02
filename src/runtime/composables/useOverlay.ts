@@ -56,7 +56,7 @@ type OverlayInstance<T extends Component> = Omit<ManagedOverlayOptionsPrivate<T>
 
 type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'close' | 'patch' | 'modelValue' | 'resolvePromise'> & {
   result: Promise<CloseEventArgType<ComponentEmit<T>>>
-}
+} & Promise<CloseEventArgType<ComponentEmit<T>>>
 
 function _useOverlay() {
   const overlays = shallowReactive<Overlay[]>([])
@@ -96,13 +96,14 @@ function _useOverlay() {
 
     overlay.isOpen = true
     overlay.isMounted = true
+    const result = new Promise<any>(resolve => overlay.resolvePromise = resolve)
 
-    return {
+    return Object.assign(result, {
       id,
       isMounted: overlay.isMounted,
       isOpen: overlay.isOpen,
-      result: new Promise<any>(resolve => overlay.resolvePromise = resolve)
-    }
+      result
+    })
   }
 
   const close = (id: symbol, value?: any): void => {

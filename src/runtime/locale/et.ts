@@ -53,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Pole andmeid'
+    },
+    fileUpload: {
+      removeFile: 'Eemalda {filename}'
     }
   }
 })
