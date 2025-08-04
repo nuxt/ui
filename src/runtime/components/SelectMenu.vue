@@ -229,13 +229,36 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu |
 }))
 
 function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
-  if (props.multiple && Array.isArray(value)) {
-    const values = value.map(v => displayValue(v)).filter(Boolean)
-    return values?.length ? values.join(', ') : undefined
+  const getDisplayForSingleValue = (val: GetItemValue<T, VK>): string | undefined => {
+    const foundItem = items.value.find((item) => {
+      const itemValue = (typeof item === 'object' && item !== null && props.valueKey)
+        ? get(item as Record<string, any>, props.valueKey as string)
+        : item
+      return compare(itemValue, val)
+    })
+
+    const source = foundItem ?? val
+
+    if (source === null || source === undefined) {
+      return undefined
+    }
+
+    if (typeof source === 'object') {
+      return props.labelKey ? get(source as Record<string, any>, props.labelKey as string) : undefined
+    }
+
+    return String(source)
   }
 
-  const item = items.value.find(item => compare(typeof item === 'object' && props.valueKey ? get(item as Record<string, any>, props.valueKey as string) : item, value))
-  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
+  if (props.multiple && Array.isArray(value)) {
+    const displayedValues = value
+      .map(getDisplayForSingleValue)
+      .filter((v): v is string => v != null && v !== '')
+
+    return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
+  }
+
+  return getDisplayForSingleValue(value as GetItemValue<T, VK>)
 }
 
 const groups = computed<SelectMenuItem[][]>(() =>
