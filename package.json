@@ -153,7 +153,7 @@
     "unplugin-auto-import": "^19.3.0",
     "unplugin-vue-components": "^28.8.0",
     "vaul-vue": "0.4.1",
-    "vue-component-type-helpers": "^3.0.4"
+    "vue-component-type-helpers": "^3.0.5"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.7.1",
@@ -168,7 +168,7 @@
     "release-it": "^19.0.4",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue-tsc": "^3.0.4"
+    "vue-tsc": "^3.0.5"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",
