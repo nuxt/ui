@@ -46,7 +46,7 @@ export default defineNuxtModule({
     addTemplate({
       filename: 'changelog.ts',
       getContents: () => `export interface CommitInfo {
-  components: string[]
+  components?: string[]
   version?: string
   hash: string
   date: string
