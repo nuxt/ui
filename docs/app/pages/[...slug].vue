@@ -99,7 +99,7 @@ if (route.path.startsWith('/components')) {
 const communityLinks = computed(() => [{
   icon: 'i-lucide-file-pen',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}/edit/v3/docs/content/${page?.value?.stem}.md`,
+  to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
   icon: 'i-lucide-star',

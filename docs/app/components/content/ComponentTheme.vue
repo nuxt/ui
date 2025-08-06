@@ -83,7 +83,7 @@ const themeLink = computed(() => {
   const repo = props.pro ? 'ui-pro' : 'ui'
   const slug = name.startsWith('content') ? `content/${name}` : name
 
-  return `https://github.com/nuxt/${repo}/blob/v3/src/theme/${slug}.ts`
+  return `https://github.com/nuxt/${repo}/blob/v4/src/theme/${slug}.ts`
 })
 
 const { data: ast } = await useAsyncData(`component-theme-${camelName}-${hash({ props })}`, async () => {

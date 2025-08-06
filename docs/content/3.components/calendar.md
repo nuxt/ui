@@ -8,7 +8,7 @@ links:
     to: https://reka-ui.com/docs/components/calendar
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Calendar.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Calendar.vue
 ---
 
 ::note
@@ -211,7 +211,7 @@ name: 'calendar-min-max-dates-example'
 
 ### With other calendar systems
 
-You can use other calenders from `@internationalized/date` to implement a different calendar system. 
+You can use other calenders from `@internationalized/date` to implement a different calendar system.
 
 ::component-example
 ---

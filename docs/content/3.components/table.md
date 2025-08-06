@@ -8,7 +8,7 @@ links:
     to: https://tanstack.com/table/latest
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Table.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Table.vue
 ---
 
 ## Usage
@@ -23,7 +23,7 @@ class: '!p-0'
 ---
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/tree/v3/docs/app/components/content/examples/table/TableExample.vue" aria-label="View source code"}
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/tree/v4/docs/app/components/content/examples/table/TableExample.vue" aria-label="View source code"}
 This example demonstrates the most common use case of the `Table` component. Check out the source code on GitHub.
 ::
 

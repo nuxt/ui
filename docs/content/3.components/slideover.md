@@ -7,7 +7,7 @@ links:
     to: https://reka-ui.com/docs/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Slideover.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Slideover.vue
 ---
 
 ## Usage
@@ -307,7 +307,7 @@ slots:
 You can use the [`useOverlay`](/composables/use-overlay) composable to open a Slideover programmatically.
 
 ::warning
-Make sure to wrap your app with the [`App`](/components/app) component which uses the [`OverlayProvider`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/OverlayProvider.vue) component.
+Make sure to wrap your app with the [`App`](/components/app) component which uses the [`OverlayProvider`](https://github.com/nuxt/ui/blob/v4/src/runtime/components/OverlayProvider.vue) component.
 ::
 
 First, create a slideover component that will be opened programmatically:

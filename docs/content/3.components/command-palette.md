@@ -12,7 +12,7 @@ links:
     to: https://reka-ui.com/docs/components/listbox
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/CommandPalette.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/CommandPalette.vue
 ---
 
 ## Usage
