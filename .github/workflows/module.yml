@@ -58,10 +58,10 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Build playground
+      - name: Build Nuxt playground
         run: pnpm run dev:build
 
-      - name: Build playground (vue)
+      - name: Build Vue playground
         run: pnpm run dev:vue:build
 
       - name: Publish
@@ -69,14 +69,14 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: pnpx pkg-pr-new publish --compact --no-template --pnpm
 
-  playground:
+  playground-nuxt:
     needs: build
 
     runs-on: ${{ matrix.os }}
 
     defaults:
       run:
-        working-directory: ./playground
+        working-directory: ./playgrounds/nuxt
 
     permissions:
       contents: read

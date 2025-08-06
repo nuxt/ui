@@ -17,7 +17,7 @@ export default defineConfig({
         imports: ['vue']
       },
       components: {
-        dirs: ['../playground/app/components']
+        dirs: ['../nuxt/app/components']
       }
     })
   ],

@@ -5,7 +5,7 @@ const playground = ({ name, pro }) => {
   const kebabName = kebabCase(name)
 
   return {
-    filename: `playground/app/pages/components/${kebabName}.vue`,
+    filename: `playgrounds/nuxt/app/pages/components/${kebabName}.vue`,
     contents: pro
       ? undefined
       : `
