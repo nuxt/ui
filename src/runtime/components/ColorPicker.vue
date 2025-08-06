@@ -4,7 +4,7 @@ import type { MaybeRefOrGetter } from '@vueuse/shared'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/color-picker'
 import type { HSLObject } from 'colortranslator'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type ColorPicker = ComponentConfig<typeof theme, AppConfig, 'colorPicker'>
 

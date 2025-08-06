@@ -5,13 +5,8 @@ import yaml from '@rollup/plugin-yaml'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  extends: [
-    process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs') : process.env.NUXT_GITHUB_TOKEN && ['github:nuxt/ui-pro/docs#v3', { giget: { auth: process.env.NUXT_GITHUB_TOKEN } }]
-  ],
-
   modules: [
     '../src/module',
-    '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/image',
     '@nuxthub/core',

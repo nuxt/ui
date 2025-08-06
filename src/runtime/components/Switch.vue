@@ -2,7 +2,7 @@
 import type { SwitchRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/switch'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>
 

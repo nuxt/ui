@@ -6,7 +6,7 @@ import { mapContentNavigation } from '@nuxt/ui-pro/utils/content'
 import { findPageBreadcrumb } from '@nuxt/content/utils'
 
 const route = useRoute()
-const { framework, module } = useSharedData()
+const { framework } = useSharedData()
 
 definePageMeta({
   layout: 'docs'
@@ -22,16 +22,12 @@ watch(page, () => {
   if (page.value?.framework && page.value?.framework !== framework.value) {
     framework.value = page.value?.framework as string
   }
-  if (page.value?.module && page.value?.module !== module.value) {
-    module.value = page.value?.module as string
-  }
 }, { immediate: true })
 
 const { data: surround } = await useAsyncData(`${kebabCase(route.path)}-surround`, () => {
   return queryCollectionItemSurroundings('content', route.path, {
     fields: ['description']
   }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
-    .orWhere(group => group.where('module', '=', module.value).where('module', 'IS NULL'))
 }, {
   watch: [framework, module]
 })
@@ -51,19 +47,6 @@ if (!import.meta.prerender) {
       }
     }
   })
-
-  // Redirect to the correct module version if the page is not the current module
-  watch(module, () => {
-    if (page.value?.module && page.value?.module !== module.value) {
-      if (page.value?.module === 'ui-pro' && route.path.includes('/pro')) {
-        navigateTo(`${route.path.replace('/pro', '')}`)
-      } else if (page.value?.module === 'ui' && !route.path.includes('/pro')) {
-        navigateTo(`${route.path.replace(`/${framework.value}`, '')}/pro/${framework.value}`)
-      } else {
-        navigateTo(`/getting-started`)
-      }
-    }
-  })
 }
 
 const title = page.value?.navigation?.title ? page.value.navigation.title : page.value?.title
@@ -72,9 +55,9 @@ const suffix = page.value?.path.includes('components') ? 'Component ' : page.val
 const description = page.value?.description
 
 useSeoMeta({
-  titleTemplate: `${prefix}%s ${suffix}- Nuxt UI ${page.value?.module === 'ui-pro' ? 'Pro' : ''} ${page.value?.framework === 'vue' ? ' for Vue' : ''}`,
+  titleTemplate: `${prefix}%s ${suffix}- Nuxt UI ${page.value?.framework === 'vue' ? ' for Vue' : ''}`,
   title,
-  ogTitle: `${prefix}${title} ${suffix}- Nuxt UI ${page.value?.module === 'ui-pro' ? 'Pro' : ''} ${page.value?.framework === 'vue' ? ' for Vue' : ''}`,
+  ogTitle: `${prefix}${title} ${suffix}- Nuxt UI ${page.value?.framework === 'vue' ? ' for Vue' : ''}`,
   description,
   ogDescription: description
 })
@@ -99,22 +82,12 @@ if (route.path.startsWith('/components')) {
 const communityLinks = computed(() => [{
   icon: 'i-lucide-file-pen',
   label: 'Edit this page',
-  to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}/edit/v4/docs/content/${page?.value?.stem}.md`,
+  to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
   icon: 'i-lucide-star',
   label: 'Star on GitHub',
-  to: `https://github.com/nuxt/${page.value?.module === 'ui-pro' ? 'ui-pro' : 'ui'}`,
-  target: '_blank'
-}, module.value === 'ui-pro' && {
-  icon: 'i-lucide-credit-card',
-  label: 'Purchase a license',
-  to: 'https://nuxt.lemonsqueezy.com/checkout/buy/057dacb2-87ba-4dc1-9256-59ee5b3bd394',
-  target: '_blank'
-}, module.value === 'ui-pro' && {
-  icon: 'i-lucide-ticket-percent',
-  label: 'Become an affiliate',
-  to: 'https://nuxt.lemonsqueezy.com/affiliates',
+  to: `https://github.com/nuxt/ui`,
   target: '_blank'
 }, {
   icon: 'i-lucide-git-pull-request-arrow',
@@ -132,10 +105,6 @@ const communityLinks = computed(() => [{
     <UPageHeader>
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
-      </template>
-
-      <template #title>
-        {{ page.title }}<sup v-if="page.module === 'ui-pro'" class="ml-1 text-xs align-super font-medium text-primary">PRO</sup>
       </template>
 
       <template #description>

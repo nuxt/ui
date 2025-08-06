@@ -80,5 +80,3 @@ export type EmitsToProps<T> = {
     ? (...args: Args) => void
     : never
 }
-
-export * from './tv'

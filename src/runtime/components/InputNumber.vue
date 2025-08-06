@@ -3,7 +3,7 @@ import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
 import type { ButtonProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
 

@@ -157,7 +157,6 @@ onMounted(() => {
             <template #title>
               <div class="flex items-center gap-0.5">
                 <span>{{ component.title }}</span>
-                <sup v-if="component.module === 'ui-pro'" class="text-[8px] font-medium text-primary">PRO</sup>
               </div>
             </template>
 

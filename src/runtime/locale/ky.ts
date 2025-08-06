@@ -5,57 +5,127 @@ export default defineLocale<Messages>({
   name: 'Кыргызча',
   code: 'ky',
   messages: {
-    inputMenu: {
-      noMatch: 'Эч нерсе табылган жок',
-      noData: 'Маалымат жок',
-      create: '"{label}" жасоо'
-    },
-    calendar: {
-      prevYear: 'Алдыңкы жыл',
-      nextYear: 'Кийинки жыл',
-      prevMonth: 'Алдыңкы ай',
-      nextMonth: 'Кийинки ай'
-    },
-    inputNumber: {
-      increment: 'Кошуу',
-      decrement: 'Азайтуу'
-    },
-    commandPalette: {
-      placeholder: 'Буйрук киргизиңиз же издөө…',
-      noMatch: 'Эч нерсе табылган жок',
-      noData: 'Маалымат жок',
-      close: 'Жабуу',
-      back: 'Артка'
-    },
-    selectMenu: {
-      noMatch: 'Сүйлөшкөн маалыматтар жок',
-      noData: 'Маалымат жок',
-      create: '"{label}" жасоо',
-      search: 'Издөө...'
-    },
-    toast: {
+    alert: {
       close: 'Жабуу'
     },
+    authForm: {
+      hidePassword: 'Сырсөздү жашыруу',
+      showPassword: 'Сырсөздү көрсөтүү',
+      submit: 'Улантуу'
+    },
+    banner: {
+      close: 'Жабуу'
+    },
+    calendar: {
+      nextMonth: 'Кийинки ай',
+      nextYear: 'Кийинки жыл',
+      prevMonth: 'Алдыңкы ай',
+      prevYear: 'Алдыңкы жыл'
+    },
     carousel: {
-      prev: 'Алдыңкы',
-      next: 'Кийинки',
       dots: 'Көрсөтүү үчүн слайдды тандаңыз',
-      goto: '{slide} слайдга өтүү'
+      goto: '{slide} слайдга өтүү',
+      next: 'Кийинки',
+      prev: 'Алдыңкы'
+    },
+    chatPrompt: {
+      placeholder: 'Бул жерге билдирүүңүздү жазыңыз...'
+    },
+    chatPromptSubmit: {
+      label: 'Билдирүү жөнөтүү'
+    },
+    colorMode: {
+      dark: 'Караңгы',
+      light: 'Жарык',
+      switchToDark: 'Караңгы режимге өтүү',
+      switchToLight: 'Жарык режимге өтүү',
+      system: 'Система'
+    },
+    commandPalette: {
+      back: 'Артка',
+      close: 'Жабуу',
+      noData: 'Маалымат жок',
+      noMatch: 'Эч нерсе табылган жок',
+      placeholder: 'Буйрук киргизиңиз же издөө…'
+    },
+    contentSearch: {
+      links: 'Шилтемелер',
+      theme: 'Тема'
+    },
+    contentSearchButton: {
+      label: 'Издөө...'
+    },
+    contentToc: {
+      title: 'Бул бетте'
+    },
+    dashboardSearch: {
+      theme: 'Тема'
+    },
+    dashboardSearchButton: {
+      label: 'Издөө...'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Каптал тилкесин жыйноо',
+      expand: 'Каптал тилкесин кеңейтүү'
+    },
+    dashboardSidebarToggle: {
+      close: 'Каптал тилкесин жабуу',
+      open: 'Каптал тилкесин ачуу'
+    },
+    error: {
+      clear: 'Башкы бетке кайтуу'
+    },
+    fileUpload: {
+      removeFile: '{filename} өчүрүү'
+    },
+    header: {
+      close: 'Менюну жабуу',
+      open: 'Менюну ачуу'
+    },
+    inputMenu: {
+      create: '"{label}" жасоо',
+      noData: 'Маалымат жок',
+      noMatch: 'Эч нерсе табылган жок'
+    },
+    inputNumber: {
+      decrement: 'Азайтуу',
+      increment: 'Кошуу'
     },
     modal: {
       close: 'Жабуу'
     },
-    slideover: {
-      close: 'Жабуу'
+    pricingTable: {
+      caption: 'Баалардын салыштыруу таблицасы'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Жыйноо',
+        name: 'код',
+        openText: 'Кеңейтүү'
+      },
+      collapsible: {
+        closeText: 'Жашыруу',
+        name: 'касиеттер',
+        openText: 'Көрсөтүү'
+      },
+      pre: {
+        copy: 'Кодду алмашуу буферине көчүрүү'
+      }
+    },
+    selectMenu: {
+      create: '"{label}" жасоо',
+      noData: 'Маалымат жок',
+      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      search: 'Издөө...'
+    },
+    slideover: {
       close: 'Жабуу'
     },
     table: {
       noData: 'Маалымат жок'
     },
-    fileUpload: {
-      removeFile: '{filename} өчүрүү'
+    toast: {
+      close: 'Жабуу'
     }
   }
 })

@@ -54,7 +54,6 @@ withDefaults(defineProps<{
     <div class="mx-34 mt-12 h-[240px] flex flex-col justify-center">
       <h1 class="text-5xl font-semibold mb-0 flex gap-1">
         <span>{{ title }}</span>
-        <sup v-if="module === 'ui-pro'" class="text-base font-semibold align-top text-[#00C16A]">PRO</sup>
       </h1>
       <p class="text-3xl text-slate-500 line-clamp-2">
         {{ description }}

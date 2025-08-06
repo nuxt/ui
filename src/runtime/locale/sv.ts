@@ -5,57 +5,127 @@ export default defineLocale<Messages>({
   name: 'Svenska',
   code: 'sv',
   messages: {
-    inputMenu: {
-      noMatch: 'Inga matchande data',
-      noData: 'Inga data',
-      create: 'Skapa "{label}"'
-    },
-    calendar: {
-      prevYear: 'Föregående år',
-      nextYear: 'Nästa år',
-      prevMonth: 'Föregående månad',
-      nextMonth: 'Nästa månad'
-    },
-    inputNumber: {
-      increment: 'Öka',
-      decrement: 'Minska'
-    },
-    commandPalette: {
-      placeholder: 'Skriv ett kommando eller sök...',
-      noMatch: 'Inga matchande data',
-      noData: 'Inga data',
-      close: 'Stäng',
-      back: 'Tillbaka'
-    },
-    selectMenu: {
-      noMatch: 'Inga matchande data',
-      noData: 'Inga data',
-      create: 'Skapa "{label}"',
-      search: 'Sök...'
-    },
-    toast: {
+    alert: {
       close: 'Stäng'
     },
+    authForm: {
+      hidePassword: 'Dölj lösenord',
+      showPassword: 'Visa lösenord',
+      submit: 'Fortsätt'
+    },
+    banner: {
+      close: 'Stäng'
+    },
+    calendar: {
+      nextMonth: 'Nästa månad',
+      nextYear: 'Nästa år',
+      prevMonth: 'Föregående månad',
+      prevYear: 'Föregående år'
+    },
     carousel: {
-      prev: 'Föregående',
-      next: 'Nästa',
       dots: 'Välj bild att visa',
-      goto: 'Gå till {slide}'
+      goto: 'Gå till {slide}',
+      next: 'Nästa',
+      prev: 'Föregående'
+    },
+    chatPrompt: {
+      placeholder: 'Skriv ditt meddelande här...'
+    },
+    chatPromptSubmit: {
+      label: 'Skicka'
+    },
+    colorMode: {
+      dark: 'Mörkt',
+      light: 'Ljust',
+      switchToDark: 'Byt till mörkt läge',
+      switchToLight: 'Byt till ljust läge',
+      system: 'System'
+    },
+    commandPalette: {
+      back: 'Tillbaka',
+      close: 'Stäng',
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data',
+      placeholder: 'Skriv ett kommando eller sök...'
+    },
+    contentSearch: {
+      links: 'Länkar',
+      theme: 'Tema'
+    },
+    contentSearchButton: {
+      label: 'Sök...'
+    },
+    contentToc: {
+      title: 'På denna sida'
+    },
+    dashboardSearch: {
+      theme: 'Tema'
+    },
+    dashboardSearchButton: {
+      label: 'Sök...'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Minimera sidofältet',
+      expand: 'Expandera sidofältet'
+    },
+    dashboardSidebarToggle: {
+      close: 'Stäng sidofältet',
+      open: 'Öppna sidofältet'
+    },
+    error: {
+      clear: 'Tillbaka till startsidan'
+    },
+    fileUpload: {
+      removeFile: 'Ta bort {filename}'
+    },
+    header: {
+      close: 'Stäng menyn',
+      open: 'Öppna menyn'
+    },
+    inputMenu: {
+      create: 'Skapa "{label}"',
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data'
+    },
+    inputNumber: {
+      decrement: 'Minska',
+      increment: 'Öka'
     },
     modal: {
       close: 'Stäng'
     },
-    slideover: {
-      close: 'Stäng'
+    pricingTable: {
+      caption: 'Prisplanering'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Minimera',
+        name: 'kod',
+        openText: 'Expandera'
+      },
+      collapsible: {
+        closeText: 'Dölj',
+        name: 'egenskaper',
+        openText: 'Visa'
+      },
+      pre: {
+        copy: 'Kopiera kod till urklipp'
+      }
+    },
+    selectMenu: {
+      create: 'Skapa "{label}"',
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data',
+      search: 'Sök...'
+    },
+    slideover: {
       close: 'Stäng'
     },
     table: {
       noData: 'Inga data'
     },
-    fileUpload: {
-      removeFile: 'Ta bort {filename}'
+    toast: {
+      close: 'Stäng'
     }
   }
 })

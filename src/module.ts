@@ -1,5 +1,6 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
+import type { HookResult } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 import { name, version } from '../package.json'
@@ -63,6 +64,31 @@ export interface ModuleOptions {
        */
       size?: Size
     }
+  }
+
+  /**
+   * Customize which components are imported
+   * @link https://ui.nuxt.com/getting-started/installation/nuxt#components
+   */
+  components?: {
+    /**
+     * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
+     * @defaultValue false
+     */
+    mdc?: boolean
+    /**
+     * Force the import of content & prose components even if `@nuxt/content` is not installed
+     * @defaultValue false
+     */
+    content?: boolean
+  }
+}
+
+declare module '#app' {
+  interface RuntimeNuxtHooks {
+    'dashboard:search:toggle': () => HookResult
+    'dashboard:sidebar:toggle': () => HookResult
+    'dashboard:sidebar:collapse': (value: boolean) => HookResult
   }
 }
 
@@ -130,8 +156,75 @@ export default defineNuxtModule<ModuleOptions>({
     addComponentsDir({
       path: resolve('./runtime/components'),
       prefix: options.prefix,
-      pathPrefix: false
+      pathPrefix: false,
+      ignore: ['color-mode/**', 'content/**', 'prose/**']
     })
+
+    if ((hasNuxtModule('@nuxtjs/mdc') || options.components?.mdc) || (hasNuxtModule('@nuxt/content') || options.components?.content)) {
+      // @ts-expect-error - `@nuxtjs/mdc` is not installed
+      nuxt.options.mdc = defu(nuxt.options.mdc, {
+        highlight: {
+          theme: {
+            light: 'material-theme-lighter',
+            default: 'material-theme',
+            dark: 'material-theme-palenight'
+          }
+        },
+        components: {
+          map: {
+            'accordion': 'ProseAccordion',
+            'accordion-item': 'ProseAccordionItem',
+            'badge': 'ProseBadge',
+            'callout': 'ProseCallout',
+            'card': 'ProseCard',
+            'card-group': 'ProseCardGroup',
+            'caution': 'ProseCaution',
+            'code-collapse': 'ProseCodeCollapse',
+            'code-group': 'ProseCodeGroup',
+            'code-icon': 'ProseCodeIcon',
+            'code-preview': 'ProseCodePreview',
+            'code-tree': 'ProseCodeTree',
+            'collapsible': 'ProseCollapsible',
+            'field': 'ProseField',
+            'field-group': 'ProseFieldGroup',
+            'icon': 'ProseIcon',
+            'kbd': 'ProseKbd',
+            'note': 'ProseNote',
+            'steps': 'ProseSteps',
+            'tabs': 'ProseTabs',
+            'tabs-item': 'ProseTabsItem',
+            'tip': 'ProseTip',
+            'warning': 'ProseWarning'
+          }
+        }
+      })
+
+      addComponentsDir({
+        path: resolve('./runtime/components/prose'),
+        prefix: 'Prose',
+        pathPrefix: false,
+        global: true
+      })
+    }
+
+    if ((hasNuxtModule('@nuxt/content') || options.components?.content)) {
+      addComponentsDir({
+        path: resolve('./runtime/components/content'),
+        pathPrefix: false,
+        prefix: nuxt.options.ui?.prefix || 'U'
+      })
+    }
+
+    if (hasNuxtModule('@nuxtjs/color-mode')) {
+      addComponentsDir({
+        path: resolve('./runtime/components/color-mode'),
+        pathPrefix: false,
+        prefix: nuxt.options.ui?.prefix || 'U'
+      })
+    } else {
+      // Stub `useColorMode` composable used in `DashboardSearch` and `ContentSearch` components
+      addImportsDir(resolve('./runtime/composables/color-mode'))
+    }
 
     addImportsDir(resolve('./runtime/composables'))
 

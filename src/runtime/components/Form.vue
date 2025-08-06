@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
 

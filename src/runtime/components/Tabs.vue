@@ -4,7 +4,8 @@ import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
 import type { AvatarProps, BadgeProps } from '../types'
-import type { DynamicSlots, ComponentConfig } from '../types/utils'
+import type { DynamicSlots } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Tabs = ComponentConfig<typeof theme, AppConfig, 'tabs'>
 

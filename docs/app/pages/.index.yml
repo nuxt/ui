@@ -6,16 +6,10 @@ hero:
   links:
     - label: Get started
       to: /getting-started/installation/nuxt
-      class: 'ui-only nuxt-only'
+      class: 'nuxt-only'
     - label: Get started
       to: /getting-started/installation/vue
-      class: 'ui-only vue-only'
-    - label: Get started
-      to: /getting-started/installation/pro/nuxt
-      class: 'ui-pro-only nuxt-only'
-    - label: Get started
-      to: /getting-started/installation/pro/vue
-      class: 'ui-pro-only vue-only'
+      class: 'vue-only'
     - label: Explore components
       to: /components
       variant: outline

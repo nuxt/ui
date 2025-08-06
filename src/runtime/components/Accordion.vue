@@ -3,7 +3,8 @@
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/accordion'
-import type { DynamicSlots, ComponentConfig } from '../types/utils'
+import type { DynamicSlots } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Accordion = ComponentConfig<typeof theme, AppConfig, 'accordion'>
 

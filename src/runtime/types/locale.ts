@@ -1,8 +1,14 @@
 export type Messages = {
-  inputMenu: {
-    noMatch: string
-    noData: string
-    create: string
+  alert: {
+    close: string
+  }
+  authForm: {
+    submit: string
+    hidePassword: string
+    showPassword: string
+  }
+  banner: {
+    close: string
   }
   calendar: {
     prevYear: string
@@ -10,9 +16,24 @@ export type Messages = {
     prevMonth: string
     nextMonth: string
   }
-  inputNumber: {
-    increment: string
-    decrement: string
+  carousel: {
+    prev: string
+    next: string
+    dots: string
+    goto: string
+  }
+  chatPrompt: {
+    placeholder: string
+  }
+  chatPromptSubmit: {
+    label: string
+  }
+  colorMode: {
+    system: string
+    light: string
+    dark: string
+    switchToLight: string
+    switchToDark: string
   }
   commandPalette: {
     placeholder: string
@@ -21,35 +42,94 @@ export type Messages = {
     close: string
     back: string
   }
+  contentSearch: {
+    title?: string
+    description?: string
+    links: string
+    theme: string
+  }
+  contentSearchButton: {
+    label: string
+  }
+  contentToc: {
+    title: string
+  }
+  dashboardSearch: {
+    title?: string
+    description?: string
+    theme: string
+  }
+  dashboardSearchButton: {
+    label: string
+  }
+  dashboardSidebar?: {
+    title?: string
+    description?: string
+  }
+  dashboardSidebarCollapse: {
+    expand: string
+    collapse: string
+  }
+  dashboardSidebarToggle: {
+    close: string
+    open: string
+  }
+  error: {
+    clear: string
+  }
+  fileUpload: {
+    removeFile: string
+  }
+  header: {
+    title?: string
+    description?: string
+    close: string
+    open: string
+  }
+  inputMenu: {
+    noMatch: string
+    noData: string
+    create: string
+  }
+  inputNumber: {
+    increment: string
+    decrement: string
+  }
+  modal: {
+    close: string
+  }
+  pricingTable: {
+    caption: string
+  }
+  prose: {
+    codeCollapse: {
+      name: string
+      openText: string
+      closeText: string
+    }
+    collapsible: {
+      name: string
+      openText: string
+      closeText: string
+    }
+    pre: {
+      copy: string
+    }
+  }
   selectMenu: {
     noMatch: string
     noData: string
     create: string
     search: string
   }
-  toast: {
-    close: string
-  }
-  carousel: {
-    prev: string
-    next: string
-    dots: string
-    goto: string
-  }
-  modal: {
-    close: string
-  }
   slideover: {
-    close: string
-  }
-  alert: {
     close: string
   }
   table: {
     noData: string
   }
-  fileUpload: {
-    removeFile: string
+  toast: {
+    close: string
   }
 }
 

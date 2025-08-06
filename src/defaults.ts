@@ -22,6 +22,10 @@ export const defaultOptions = {
   theme: {
     colors: undefined,
     transitions: true
+  },
+  components: {
+    mdc: false,
+    content: false
   }
 }
 

@@ -1,24 +1,37 @@
+import { defu } from 'defu'
 import { join, normalize } from 'pathe'
-import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import { globSync } from 'tinyglobby'
+import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import AutoImportComponents from 'unplugin-vue-components'
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types'
-
-import { runtimeDir } from '../unplugin'
 import type { NuxtUIOptions } from '../unplugin'
-import { defu } from 'defu'
+import { runtimeDir } from '../unplugin'
 
 /**
  * This plugin adds all the Nuxt UI components as auto-imports.
  */
 export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']>, extraRuntimeDir?: string }, meta: UnpluginContextMeta) {
-  const components = globSync('**/*.vue', { cwd: join(runtimeDir, 'components') })
-  const componentNames = new Set(components.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+  const components = globSync('**/*.vue', {
+    cwd: join(runtimeDir, 'components'),
+    ignore: [
+      !options.colorMode && 'color-mode/**/*.vue',
+      'content/*.vue',
+      'prose/**/*.vue'
+    ].filter(Boolean) as string[]
+  })
+  const componentNames = new Set(components.map(c => `${options.prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`))
 
-  const overrides = globSync('**/*.vue', { cwd: join(runtimeDir, 'vue/components') })
-  const overrideNames = new Set(overrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
+  const overrides = globSync('**/*.vue', {
+    cwd: join(runtimeDir, 'vue/components'),
+    ignore: [
+      !options.colorMode && 'color-mode/**/*.vue'
+    ].filter(Boolean) as string[]
+  })
+  const overrideNames = new Set(overrides.map(c => `${options.prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`))
 
-  const inertiaOverrides = globSync('**/*.vue', { cwd: join(runtimeDir, 'inertia/components') })
+  const inertiaOverrides = globSync('**/*.vue', {
+    cwd: join(runtimeDir, 'inertia/components')
+  })
   const inertiaOverrideNames = new Set(inertiaOverrides.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
 
   const pluginOptions = defu(options.components, <ComponentsOptions>{

@@ -9,7 +9,7 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
     ...item,
     title: parent?.title && parent.title !== 'Pro' ? parent.title : item.title,
     badge: parent?.badge || item.badge,
-    class: [item.framework && `${item.framework}-only`, item.module && `${item.module}-only`].filter(Boolean),
+    class: [item.framework && `${item.framework}-only`].filter(Boolean),
     children: item.children?.length ? item.children?.flatMap(child => processNavigationItem(child)) : undefined
   }
 }
@@ -17,7 +17,7 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
 function processNavigationItemIcon(item: ContentNavigationItem) {
   let icon = item.icon
   if (item.path.startsWith('/components')) {
-    icon = item.module === 'ui-pro' ? 'i-lucide-panels-top-left' : 'i-lucide-box'
+    icon = 'i-lucide-square-code'
   }
   if (item.path.startsWith('/composables')) {
     icon = 'i-lucide-square-function'
@@ -29,7 +29,7 @@ function processNavigationItemIcon(item: ContentNavigationItem) {
 }
 
 export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
-  const { framework, module } = useSharedData()
+  const { framework } = useSharedData()
 
   const mappedNavigation = computed(() => navigation.value?.map(item => processNavigationItem(item)))
 
@@ -42,9 +42,6 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
         }
 
         if (child.framework && child.framework !== framework.value) {
-          return false
-        }
-        if (child.module && child.module !== module.value) {
           return false
         }
         return true

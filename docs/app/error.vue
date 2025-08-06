@@ -49,7 +49,7 @@ useServerSeoMeta({
 
 useFaviconFromTheme()
 
-const { frameworks, modules } = useSharedData()
+const { frameworks } = useSharedData()
 const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
 
 provide('navigation', mappedNavigation)
@@ -75,10 +75,6 @@ provide('navigation', mappedNavigation)
           id: 'framework',
           label: 'Framework',
           items: frameworks
-        }, {
-          id: 'module',
-          label: 'Module',
-          items: modules
         }]"
         :navigation="filteredNavigation"
         :fuse="{ resultLimit: 100 }"

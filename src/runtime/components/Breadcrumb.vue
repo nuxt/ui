@@ -3,7 +3,8 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/breadcrumb'
 import type { AvatarProps, LinkProps } from '../types'
-import type { DynamicSlots, ComponentConfig } from '../types/utils'
+import type { DynamicSlots } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Breadcrumb = ComponentConfig<typeof theme, AppConfig, 'breadcrumb'>
 
