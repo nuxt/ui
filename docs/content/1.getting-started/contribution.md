@@ -237,7 +237,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/) for commit m
 
 ### Making a Pull Request
 
-- Follow along the [instructions](https://github.com/nuxt/ui/blob/v3/.github/PULL_REQUEST_TEMPLATE.md?plain=1) provided when creating a PR
+- Follow along the [instructions](https://github.com/nuxt/ui/blob/v4/.github/PULL_REQUEST_TEMPLATE.md?plain=1) provided when creating a PR
 
 - Ensure your PR's title adheres to the [Conventional Commits](https://www.conventionalcommits.org/) since it will be used once the code is merged.
 

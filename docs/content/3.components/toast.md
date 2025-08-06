@@ -7,7 +7,7 @@ links:
     to: https://reka-ui.com/docs/components/toast
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Toast.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Toast.vue
 ---
 
 ## Usage
@@ -15,7 +15,7 @@ links:
 Use the [useToast](/composables/use-toast) composable to display a toast in your application.
 
 ::warning
-Make sure to wrap your app with the [`App`](/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v3/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://reka-ui.com/docs/components/toast#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v4/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://reka-ui.com/docs/components/toast#provider) component from Reka UI.
 ::
 
 ::tip{to="/components/app#props"}
@@ -202,7 +202,7 @@ name: 'toast-example'
 :toaster-position-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v3/docs/app/app.config.ts#L3"}
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L3"}
 In this example, we use the `AppConfig` to configure the `position` prop of the `Toaster` component globally.
 ::
 
@@ -220,7 +220,7 @@ name: 'toast-example'
 :toaster-duration-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v3/docs/app/app.config.ts#L5"}
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L5"}
 In this example, we use the `AppConfig` to configure the `duration` prop of the `Toaster` component globally.
 ::
 
@@ -242,7 +242,7 @@ name: 'toast-example'
 :toaster-expand-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v3/docs/app/app.config.ts#L4"}
+::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L4"}
 In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
 ::
 

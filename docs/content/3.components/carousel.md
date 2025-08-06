@@ -7,7 +7,7 @@ links:
     icon: i-custom-embla-carousel
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Carousel.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Carousel.vue
 ---
 
 ## Usage

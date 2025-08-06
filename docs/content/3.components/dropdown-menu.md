@@ -8,7 +8,7 @@ links:
     to: https://reka-ui.com/docs/components/dropdown-menu
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/DropdownMenu.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/DropdownMenu.vue
 ---
 
 ## Usage

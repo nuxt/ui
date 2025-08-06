@@ -188,7 +188,7 @@ links:${primitive
     to: https://reka-ui.com/docs/components/${kebabName}`}
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v3/src/runtime/components/${upperName}.vue
+    to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v4/src/runtime/components/${upperName}.vue
 navigation.badge: Soon
 ---
 
