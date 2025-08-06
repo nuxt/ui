@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
-import FormExampleElements from '../../../../docs/app/components/content/examples/form/FormExampleElements.vue'
-import FormExampleNestedList from '../../../../docs/app/components/content/examples/form/FormExampleNestedList.vue'
-import FormExampleNested from '../../../../docs/app/components/content/examples/form/FormExampleNested.vue'
+import FormExampleElements from '../../../../../docs/app/components/content/examples/form/FormExampleElements.vue'
+import FormExampleNestedList from '../../../../../docs/app/components/content/examples/form/FormExampleNestedList.vue'
+import FormExampleNested from '../../../../../docs/app/components/content/examples/form/FormExampleNested.vue'
 
 const schema = z.object({
   email: z.string().email(),
