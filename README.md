@@ -14,7 +14,7 @@
 Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 > [!NOTE]
-> You are on the `v3` development branch, check out the [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
+> You are on the `v4` development branch, check out the [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
 
 > [!TIP]
 > **Looking for more components ?**
@@ -131,7 +131,7 @@ Follow the docs to [set up your local development environment](https://ui.nuxt.c
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v3/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
@@ -141,7 +141,7 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v3/LICENSE.md).
 [npm-downloads-href]: https://npm.chart.dev/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxt/ui/blob/v3/LICENSE.md
+[license-href]: https://github.com/nuxt/ui/blob/v4/LICENSE.md
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
