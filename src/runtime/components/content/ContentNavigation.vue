@@ -2,7 +2,7 @@
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { ContentNavigationItem } from '@nuxt/content'
-import theme from '#build/ui/content-navigation'
+import theme from '#build/ui/content/content-navigation'
 import type { BadgeProps, LinkProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 

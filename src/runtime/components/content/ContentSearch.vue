@@ -3,7 +3,7 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
-import theme from '#build/ui/content-search'
+import theme from '#build/ui/content/content-search'
 import type { ButtonProps, InputProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/content-search-button'
+import theme from '#build/ui/content/content-search-button'
 import type { ButtonProps, ButtonSlots, KbdProps, TooltipProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
