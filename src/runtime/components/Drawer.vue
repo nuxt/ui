@@ -103,7 +103,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
     <DrawerPortal v-bind="portalProps">
       <DrawerOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" v-on="contentEvents">
+      <DrawerContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" :data-inset="inset" v-bind="contentProps" v-on="contentEvents">
         <DrawerHandle v-if="handle" :class="ui.handle({ class: props.ui?.handle })" />
 
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
@@ -151,3 +151,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
     </DrawerPortal>
   </component>
 </template>
+
+<style>
+[data-inset="true"] {
+  --initial-transform: calc(100% + 1.5rem);
+}
+</style>
