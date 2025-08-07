@@ -151,9 +151,3 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
     </DrawerPortal>
   </component>
 </template>
-
-<style>
-[data-inset="true"] {
-  --initial-transform: calc(100% + 1.5rem);
-}
-</style>
