@@ -23,6 +23,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   let hasProse = false
   let hasContent = false
 
+  const isDev = process.argv.includes('--uiDev')
+
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
     for (const component in theme) {
       templates.push({
@@ -65,7 +67,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           }
 
           // For local development, import directly from theme
-          if (process.argv.includes('--uiDev')) {
+          if (isDev) {
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
             return [
               `import template from ${JSON.stringify(templatePath)}`,
@@ -246,7 +248,7 @@ export {}
 }
 
 export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolver['resolve']) {
-  const templates = getTemplates(options, nuxt.options.appConfig.ui)
+  const templates = getTemplates(options, nuxt.options.appConfig.ui, nuxt)
   for (const template of templates) {
     if (template.filename!.endsWith('.d.ts')) {
       addTypeTemplate(template as NuxtTypeTemplate)
