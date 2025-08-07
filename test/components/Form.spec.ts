@@ -589,16 +589,17 @@ describe('Form', () => {
         `
         })
         const form = wrapper.setupState.form
-
         const inputEl = wrapper.find('#input')
-        inputEl.setValue(input.value)
 
-        form.value.submit()
-        await flushPromises()
+        await inputEl.setValue(input.value)
+        await form.value.submit()
 
-        expect(wrapper.setupState.onSubmit).toHaveBeenCalledWith(expect.objectContaining({
-          data: expected
-        }))
+        const onSubmitMock = wrapper.setupState.onSubmit
+        expect(onSubmitMock).toHaveBeenCalledTimes(1)
+
+        const submitEvent = onSubmitMock.mock.calls[0][0]
+
+        expect(submitEvent.data).toEqual(expected)
       }
     )
   })
