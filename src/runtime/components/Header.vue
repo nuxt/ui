@@ -77,7 +77,7 @@ const props = withDefaults(defineProps<HeaderProps<T>>(), {
   toggle: true,
   toggleSide: 'right',
   to: '/',
-  title: 'Nuxt UI Pro'
+  title: 'Nuxt UI'
 })
 const slots = defineSlots<HeaderSlots>()
 
@@ -93,7 +93,7 @@ const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
 
 const ariaLabel = computed(() => {
   const slotText = slots.title && getSlotChildrenText(slots.title())
-  return (slotText || props.title || 'Nuxt UI Pro').trim()
+  return (slotText || props.title || 'Nuxt UI').trim()
 })
 
 watch(() => route.fullPath, () => {
