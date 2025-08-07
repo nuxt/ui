@@ -80,6 +80,14 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    // v4 redirects
+    '/getting-started/installation/pro/nuxt': { redirect: '/getting-started/installation/nuxt', prerender: false },
+    '/getting-started/installation/pro/vue': { redirect: '/getting-started/installation/vue', prerender: false },
+    '/getting-started/license': { redirect: '/getting-started', prerender: false },
+    '/pro': { redirect: '/pro/activate', prerender: false },
+    '/pro/pricing': { redirect: '/pro/activate', prerender: false },
+    '/pro/templates': { redirect: '/templates', prerender: false },
+    // v3 redirects
     '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
     '/getting-started/installation/pro': { redirect: '/getting-started/installation/pro/nuxt', prerender: false },
     '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
@@ -231,29 +239,25 @@ export default defineNuxtConfig({
       title: 'Nuxt UI Full Documentation',
       description: 'This is the full documentation for Nuxt UI. It includes all the Markdown files written with the MDC syntax.'
     },
-    sections: [
-      {
-        title: 'Getting Started',
-        contentCollection: 'content',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
-        ]
-      },
-      {
-        title: 'Components',
-        contentCollection: 'content',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/components/%' }
-        ]
-      },
-      {
-        title: 'Composables',
-        contentCollection: 'content',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/composables/%' }
-        ]
-      }
-    ],
+    sections: [{
+      title: 'Getting Started',
+      contentCollection: 'content',
+      contentFilters: [
+        { field: 'path', operator: 'LIKE', value: '/getting-started%' }
+      ]
+    }, {
+      title: 'Components',
+      contentCollection: 'content',
+      contentFilters: [
+        { field: 'path', operator: 'LIKE', value: '/components/%' }
+      ]
+    }, {
+      title: 'Composables',
+      contentCollection: 'content',
+      contentFilters: [
+        { field: 'path', operator: 'LIKE', value: '/composables/%' }
+      ]
+    }],
     notes: [
       'The documentation excludes Nuxt UI v2 content.',
       'The content is automatically generated from the same source as the official documentation.'
