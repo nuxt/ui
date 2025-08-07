@@ -32,27 +32,12 @@ const schema = z.object({
   }))
 })
 
-const pro = process.env.NUXT_UI_PRO_PATH
-  ? {
-      cwd: resolve(__dirname, process.env.NUXT_UI_PRO_PATH, 'docs'),
-      include: 'content/**',
-      prefix: '/'
-    }
-  : process.env.NUXT_GITHUB_TOKEN
-    ? {
-        repository: 'https://github.com/nuxt/ui-pro/tree/v3',
-        include: 'docs/content/**',
-        prefix: '/',
-        authToken: process.env.NUXT_GITHUB_TOKEN
-      }
-    : undefined
-
 export const collections = {
   content: defineCollection({
     type: 'page',
     source: [{
       include: '**/*'
-    }, pro!].filter(Boolean),
+    }],
     schema
   }),
   showcase: defineCollection({

@@ -195,8 +195,7 @@ export default defineNuxtConfig({
       '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
-      resolve('./app/components'),
-      process.env.NUXT_UI_PRO_PATH ? resolve(process.env.NUXT_UI_PRO_PATH, 'docs', 'app', 'components') : '.c12'
+      resolve('./app/components')
     ],
     metaFields: {
       type: false,
@@ -259,9 +258,5 @@ export default defineNuxtConfig({
       'The documentation excludes Nuxt UI v2 content.',
       'The content is automatically generated from the same source as the official documentation.'
     ]
-  },
-
-  uiPro: {
-    license: 'oss'
   }
 })
