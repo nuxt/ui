@@ -91,6 +91,8 @@ export default defineNuxtConfig({
     '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
     '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
     '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
+    // v3 redirects
+    '/components/button-group': { redirect: { to: '/components/field-group', statusCode: 301 }, prerender: false },
     // v2 redirects
     '/getting-started/theming': { redirect: { to: '/getting-started/theme', statusCode: 301 }, prerender: false },
     '/pro/getting-started/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
