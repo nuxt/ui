@@ -1,5 +1,4 @@
 import { defineCollection, z } from '@nuxt/content'
-import { resolve } from 'node:path'
 
 const Button = z.object({
   label: z.string(),
