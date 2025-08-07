@@ -97,7 +97,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     writeThemeTemplate(themeProse, path)
 
     templates.push({
-      filename: `ui-pro/${path}/index.ts`,
+      filename: `ui/${path}/index.ts`,
       write: true,
       getContents: () => Object.keys(themeProse).map(component => `export { default as ${component} } from './${kebabCase(component)}'`).join('\n')
     })
