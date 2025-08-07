@@ -10,7 +10,7 @@ import { runtimeDir } from '../unplugin'
 /**
  * This plugin adds all the Nuxt UI components as auto-imports.
  */
-export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']>, extraRuntimeDir?: string }, meta: UnpluginContextMeta) {
+export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']> }, meta: UnpluginContextMeta) {
   const components = globSync('**/*.vue', {
     cwd: join(runtimeDir, 'components'),
     ignore: [
@@ -63,15 +63,13 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
       name: 'nuxt:ui:components',
       enforce: 'pre',
       resolveId(id, importer) {
-        if (!importer) {
-          return
-        }
-        if (!normalize(importer).includes(runtimeDir) && (!options.extraRuntimeDir || !normalize(importer).includes(options.extraRuntimeDir))) {
+        // only apply to runtime nuxt ui components
+        if (!importer || !normalize(importer).includes(runtimeDir)) {
           return
         }
 
-        // only apply to relative imports or nuxt ui runtime components
-        if (!RELATIVE_IMPORT_RE.test(id) && !id.startsWith('@nuxt/ui/components/')) {
+        // only apply to relative imports
+        if (!RELATIVE_IMPORT_RE.test(id)) {
           return
         }
 
