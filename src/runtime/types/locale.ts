@@ -3,24 +3,24 @@ export type Messages = {
     close: string
   }
   authForm: {
-    submit: string
     hidePassword: string
     showPassword: string
+    submit: string
   }
   banner: {
     close: string
   }
   calendar: {
-    prevYear: string
+    nextMonth: string
     nextYear: string
     prevMonth: string
-    nextMonth: string
+    prevYear: string
   }
   carousel: {
-    prev: string
-    next: string
     dots: string
     goto: string
+    next: string
+    prev: string
   }
   chatPrompt: {
     placeholder: string
@@ -29,24 +29,24 @@ export type Messages = {
     label: string
   }
   colorMode: {
-    system: string
-    light: string
     dark: string
-    switchToLight: string
+    light: string
     switchToDark: string
+    switchToLight: string
+    system: string
   }
   commandPalette: {
-    placeholder: string
-    noMatch: string
-    noData: string
-    close: string
     back: string
+    close: string
+    noData: string
+    noMatch: string
+    placeholder: string
   }
   contentSearch: {
-    title?: string
     description?: string
     links: string
     theme: string
+    title?: string
   }
   contentSearchButton: {
     label: string
@@ -55,20 +55,20 @@ export type Messages = {
     title: string
   }
   dashboardSearch: {
-    title?: string
     description?: string
     theme: string
+    title?: string
   }
   dashboardSearchButton: {
     label: string
   }
   dashboardSidebar?: {
-    title?: string
     description?: string
+    title?: string
   }
   dashboardSidebarCollapse: {
-    expand: string
     collapse: string
+    expand: string
   }
   dashboardSidebarToggle: {
     close: string
@@ -81,19 +81,19 @@ export type Messages = {
     removeFile: string
   }
   header: {
-    title?: string
-    description?: string
     close: string
+    description?: string
     open: string
+    title?: string
   }
   inputMenu: {
-    noMatch: string
-    noData: string
     create: string
+    noData: string
+    noMatch: string
   }
   inputNumber: {
-    increment: string
     decrement: string
+    increment: string
   }
   modal: {
     close: string
@@ -103,23 +103,23 @@ export type Messages = {
   }
   prose: {
     codeCollapse: {
+      closeText: string
       name: string
       openText: string
-      closeText: string
     }
     collapsible: {
+      closeText: string
       name: string
       openText: string
-      closeText: string
     }
     pre: {
       copy: string
     }
   }
   selectMenu: {
-    noMatch: string
-    noData: string
     create: string
+    noData: string
+    noMatch: string
     search: string
   }
   slideover: {

@@ -88,8 +88,8 @@ export default defineLocale<Messages>({
       noMatch: 'No hay datos coincidentes'
     },
     inputNumber: {
-      decrement: 'Decremento',
-      increment: 'Incremento'
+      decrement: 'Decrementar',
+      increment: 'Incrementar'
     },
     modal: {
       close: 'Cerrar'
