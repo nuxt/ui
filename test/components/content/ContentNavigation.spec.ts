@@ -9,40 +9,40 @@ describe('ContentNavigation', () => {
 
   const navigation = [{
     title: 'Getting Started',
-    path: '/pro/getting-started',
+    path: '/getting-started',
     badge: 'New',
     children: [{
       title: 'Introduction',
-      path: '/pro/getting-started',
+      path: '/getting-started',
       active: true
     }, {
       title: 'Installation',
-      path: '/pro/getting-started/installation'
+      path: '/getting-started/installation'
     }, {
       title: 'Theming',
-      path: '/pro/getting-started/theming'
+      path: '/getting-started/theming'
     }, {
       title: 'Structure',
-      path: '/pro/getting-started/structure'
+      path: '/getting-started/structure'
     }, {
       title: 'Content',
-      path: '/pro/getting-started/content'
+      path: '/getting-started/content'
     }]
   }, {
     title: 'Components',
-    path: '/pro/components',
+    path: '/components',
     children: [{
       title: 'ContentNavigation',
-      path: '/pro/components/content-navigation'
+      path: '/components/content-navigation'
     }, {
       title: 'ContentSearch',
-      path: '/pro/components/content-search'
+      path: '/components/content-search'
     }, {
       title: 'ContentSurround',
-      path: '/pro/components/content-surround'
+      path: '/components/content-surround'
     }, {
       title: 'ContentToc',
-      path: '/pro/components/content-toc'
+      path: '/components/content-toc'
     }]
   }]
 

@@ -5,13 +5,13 @@ import ComponentRender from '../../component-render'
 
 describe('ContentSurround', () => {
   const surround = [{
-    path: '/pro/getting-started',
-    title: 'Nuxt UI Pro',
+    path: '/getting-started',
+    title: 'Nuxt UI',
     description: 'A collection of premium Vue components to create beautiful & responsive Nuxt applications in minutes.'
   }, {
-    path: '/pro/getting-started/theming',
+    path: '/getting-started/theming',
     title: 'Theming',
-    description: 'Learn how to customize Nuxt UI Pro components.'
+    description: 'Learn how to customize Nuxt UI components.'
   }]
 
   const props = { surround }

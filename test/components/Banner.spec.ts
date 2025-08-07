@@ -13,7 +13,7 @@ describe('Banner', () => {
     ['with icon', { props: { ...props, title: 'Title', icon: 'i-lucide-rocket' } }],
     ['with close', { props: { ...props, close: true } }],
     ['with actions', { props: { ...props, title: 'Title', icon: 'i-lucide-rocket', actions: [{ label: 'Learn more', trailingIcon: 'i-lucide-arrow-right' }] } }],
-    ['with to', { props: { ...props, to: '/pro/getting-started' } }],
+    ['with to', { props: { ...props, to: '/getting-started' } }],
     ['with target', { props: { ...props, to: 'https://nuxt.com', target: '_blank' } }],
     ['with neutral color', { props: { ...props, title: 'Title', icon: 'i-lucide-rocket', color: 'neutral' as const } }],
     ['with closeIcon', { props: { ...props, closeIcon: 'i-lucide-trash' } }],

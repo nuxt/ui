@@ -18,10 +18,6 @@ describe('PageAnchors', () => {
     to: '/roadmap',
     active: true
   }, {
-    label: 'Pro',
-    icon: 'i-lucide-credit-card',
-    to: '/pro'
-  }, {
     label: 'Releases',
     icon: 'i-lucide-rocket',
     to: 'https://github.com/nuxt/ui/releases',

@@ -4,7 +4,7 @@ exports[`Header > renders with as correctly 1`] = `
 "<section class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -22,7 +22,7 @@ exports[`Header > renders with body slot correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -40,7 +40,7 @@ exports[`Header > renders with bottom slot correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -58,7 +58,7 @@ exports[`Header > renders with class correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-default h-(--ui-header-height) sticky top-0 z-50 border-b-0">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -76,7 +76,7 @@ exports[`Header > renders with content slot correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -94,7 +94,7 @@ exports[`Header > renders with default slot correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex">Default slot</div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -130,7 +130,7 @@ exports[`Header > renders with mode drawer correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -158,7 +158,7 @@ exports[`Header > renders with mode modal correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -175,7 +175,7 @@ exports[`Header > renders with mode modal correctly 1`] = `
 <div data-dismissable-layer="" tabindex="-1" class="fixed bg-default divide-y divide-default flex flex-col focus:outline-none inset-0 lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open" style="pointer-events: auto;"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"><h2 id="reka-dialog-title-v-0">header.title</h2><p id="reka-dialog-description-v-1">header.description</p></span>
   <div class="px-4 sm:px-6 h-(--ui-header-height) shrink-0 flex items-center justify-between gap-3">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
         <!--v-if-->
@@ -193,7 +193,7 @@ exports[`Header > renders with mode slideover correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -210,7 +210,7 @@ exports[`Header > renders with mode slideover correctly 1`] = `
 <div data-dismissable-layer="" style="pointer-events: auto;" tabindex="-1" data-side="right" class="fixed bg-default divide-y divide-default sm:ring ring-default sm:shadow-lg flex flex-col focus:outline-none right-0 inset-y-0 w-full max-w-md data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out] lg:hidden" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal;"><h2 id="reka-dialog-title-v-0">header.title</h2><p id="reka-dialog-description-v-1">header.description</p></span>
   <div class="px-4 sm:px-6 h-(--ui-header-height) shrink-0 flex items-center justify-between gap-3">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Close menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
         <!--v-if-->
@@ -228,7 +228,7 @@ exports[`Header > renders with right slot correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5">Right slot<button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -282,7 +282,7 @@ exports[`Header > renders with to correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/docs" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/docs" aria-label="Nuxt UI" class="focus-visible:outline-primary hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -300,7 +300,7 @@ exports[`Header > renders with toggle correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -318,7 +318,7 @@ exports[`Header > renders with toggle slot correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5">Toggle slot</div>
@@ -335,7 +335,7 @@ exports[`Header > renders with toggleSide correctly 1`] = `
     <div class="lg:flex-1 flex items-center gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -ms-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
         <!--v-if-->
         <!--v-if-->
-      </button><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a></div>
+      </button><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a></div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5">
       <!--v-if-->
@@ -350,7 +350,7 @@ exports[`Header > renders with toggleSide correctly 1`] = `
 exports[`Header > renders with top slot correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">Top slot<div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -368,7 +368,7 @@ exports[`Header > renders with ui correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full gap-1.5">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="shrink-0 size-5"></svg>
@@ -386,7 +386,7 @@ exports[`Header > renders without toggle correctly 1`] = `
 "<header class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full">
     <div class="lg:flex-1 flex items-center gap-1.5">
-      <!--v-if--><a href="/" aria-label="Nuxt UI Pro" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI Pro</a>
+      <!--v-if--><a href="/" aria-label="Nuxt UI" class="focus-visible:outline-primary shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div class="hidden lg:flex"></div>
     <div class="flex items-center justify-end lg:flex-1 gap-1.5">
