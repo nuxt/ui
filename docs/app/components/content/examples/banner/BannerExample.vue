@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BannerProps } from '@nuxt/ui-pro'
+import type { BannerProps } from '@nuxt/ui'
 
 const { id = 'example' } = defineProps<{
   id?: string

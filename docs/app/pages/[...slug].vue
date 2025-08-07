@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
-import type { PageLink } from '@nuxt/ui-pro'
-import { mapContentNavigation } from '@nuxt/ui-pro/utils/content'
+import type { PageLink } from '@nuxt/ui'
+import { mapContentNavigation } from '@nuxt/ui/utils/content'
 import { findPageBreadcrumb } from '@nuxt/content/utils'
 
 const route = useRoute()

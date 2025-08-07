@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as locales from '@nuxt/ui-pro/locale'
+import * as locales from '@nuxt/ui/locale'
 
 const locale = ref('en')
 </script>
