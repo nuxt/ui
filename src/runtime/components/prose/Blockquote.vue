@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../types/tv'
+import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/blockquote'
 
 type ProseBlockquote = ComponentConfig<typeof theme, AppConfig, 'blockquote', 'ui.prose'>
