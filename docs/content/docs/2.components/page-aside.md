@@ -1,7 +1,7 @@
 ---
 title: PageAside
 description: 'A sticky aside to display your page navigation.'
-category: layout
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

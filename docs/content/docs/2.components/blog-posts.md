@@ -1,7 +1,7 @@
 ---
 title: BlogPosts
 description: 'Display a list of blog posts in a responsive grid layout.'
-category: layout
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

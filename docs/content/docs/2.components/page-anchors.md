@@ -1,7 +1,7 @@
 ---
 title: PageAnchors
 description: 'A list of anchors to be displayed in the page.'
-category: navigation
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,7 +1,7 @@
 ---
 title: DashboardSidebarCollapse
 description: 'A Button to collapse the sidebar on desktop.'
-category: element
+category: dashboard
 links:
   - label: Button
     to: /components/button

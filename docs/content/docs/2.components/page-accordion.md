@@ -1,7 +1,7 @@
 ---
 title: PageAccordion
 description: 'A pre-styled Accordion to display in your pages.'
-category: data
+category: page
 links:
   - label: Accordion
     icon: i-simple-icons-nuxtdotjs

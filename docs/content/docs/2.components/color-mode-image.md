@@ -1,7 +1,7 @@
 ---
 title: ColorModeImage
 description: 'An image element with a different source for light and dark mode.'
-category: element
+category: color-mode
 links:
   - label: GitHub
     icon: i-simple-icons-github

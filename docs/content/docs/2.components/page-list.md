@@ -1,7 +1,7 @@
 ---
 title: PageList
 description: 'A vertical list layout for displaying content in a stacked format.'
-category: layout
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

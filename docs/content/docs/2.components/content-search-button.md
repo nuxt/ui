@@ -1,7 +1,7 @@
 ---
 title: ContentSearchButton
 description: 'A pre-styled Button to open the ContentSearch modal.'
-category: element
+category: content
 framework: nuxt
 links:
   - label: Button

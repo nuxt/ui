@@ -1,7 +1,7 @@
 ---
 title: BlogPost
 description: 'A customizable article to display in a blog page.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

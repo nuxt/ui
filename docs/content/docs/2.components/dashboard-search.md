@@ -1,7 +1,7 @@
 ---
 title: DashboardSearch
 description: 'A ready to use CommandPalette to add to your dashboard.'
-category: overlay
+category: dashboard
 links:
   - label: CommandPalette
     to: /components/command-palette

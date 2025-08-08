@@ -1,7 +1,7 @@
 ---
 title: DashboardPanel
 description: 'A resizable panel to display in a dashboard.'
-category: layout
+category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github

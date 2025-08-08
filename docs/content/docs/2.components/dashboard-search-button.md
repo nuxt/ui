@@ -1,7 +1,7 @@
 ---
 title: DashboardSearchButton
 description: 'A pre-styled Button to open the DashboardSearch modal.'
-category: element
+category: dashboard
 links:
   - label: Button
     to: /components/button

@@ -1,7 +1,7 @@
 ---
 title: DashboardToolbar
 description: 'A toolbar to display under the navbar in a dashboard.'
-category: layout
+category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,7 +1,7 @@
 ---
 title: ColorModeAvatar
 description: 'An Avatar with a different source for light and dark mode.'
-category: element
+category: color-mode
 links:
   - label: Avatar
     to: /components/avatar

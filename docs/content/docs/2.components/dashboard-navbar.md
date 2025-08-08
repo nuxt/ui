@@ -1,7 +1,7 @@
 ---
 title: DashboardNavbar
 description: 'A responsive navbar to display in a dashboard.'
-category: layout
+category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github

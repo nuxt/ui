@@ -1,7 +1,7 @@
 ---
 title: PageCTA
 description: 'A call to action section to display in your pages.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

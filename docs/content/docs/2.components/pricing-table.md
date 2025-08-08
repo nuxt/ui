@@ -1,7 +1,7 @@
 ---
 title: PricingTable
 description: 'A responsive pricing table component that displays tiered pricing plans with feature comparisons.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,7 +1,7 @@
 ---
 title: ChatMessage
 description: 'Display a chat message with icon, avatar, and actions.'
-category: data
+category: ai
 links:
   - label: GitHub
     icon: i-simple-icons-github

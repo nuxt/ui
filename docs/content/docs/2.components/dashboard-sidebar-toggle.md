@@ -1,7 +1,7 @@
 ---
 title: DashboardSidebarToggle
 description: 'A Button to toggle the sidebar on mobile.'
-category: element
+category: dashboard
 links:
   - label: Button
     to: /components/button

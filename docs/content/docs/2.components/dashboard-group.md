@@ -1,7 +1,7 @@
 ---
 title: DashboardGroup
 description: 'A fixed layout component that provides context for dashboard components with sidebar state management and persistence.'
-category: layout
+category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github

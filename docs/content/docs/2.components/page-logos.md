@@ -1,7 +1,7 @@
 ---
 title: PageLogos
 description: 'A list of logos or images to display on your pages.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

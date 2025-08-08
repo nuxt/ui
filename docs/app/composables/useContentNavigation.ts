@@ -1,4 +1,4 @@
-import { upperFirst } from 'scule'
+import { upperFirst, camelCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 
 function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavigationItem): any {
@@ -38,7 +38,7 @@ function groupChildrenByCategory(item: ContentNavigationItem): ContentNavigation
 
   const childrenGroupedByCategories = processedChildren.reduce((acc, child) => {
     if (child.category) {
-      acc[child.category] = [...(acc[child.category] || []), child]
+      acc[child.category as string] = [...(acc[child.category as string] || []), child]
     } else {
       acc.overview = [...(acc.overview || []), child]
     }
@@ -48,9 +48,9 @@ function groupChildrenByCategory(item: ContentNavigationItem): ContentNavigation
   return {
     ...item,
     children: Object.entries(childrenGroupedByCategories).map(([key, children]) => ({
-      title: upperFirst(key),
+      title: upperFirst(camelCase(key)),
       path: `/docs/${key}`,
-      children
+      children: children?.map((child: any) => ({ ...child, icon: undefined }))
     }))
   }
 }

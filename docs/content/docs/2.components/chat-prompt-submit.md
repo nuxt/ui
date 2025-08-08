@@ -1,7 +1,7 @@
 ---
 title: ChatPromptSubmit
 description: 'A Button for submitting chat prompts with automatic status handling.'
-category: element
+category: ai
 links:
   - label: Button
     to: /components/button

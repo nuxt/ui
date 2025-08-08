@@ -1,7 +1,7 @@
 ---
 title: ContentNavigation
 description: 'An accordion-style navigation component for organizing page links.'
-category: navigation
+category: content
 framework: nuxt
 links:
   - label: GitHub

@@ -1,7 +1,7 @@
 ---
 title: PageBody
 description: 'The main content of your page.'
-category: layout
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

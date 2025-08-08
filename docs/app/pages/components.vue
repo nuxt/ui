@@ -17,7 +17,7 @@ useSeoMeta({
 
 const { data: components } = await useAsyncData('all-components', () => {
   return queryCollection('docs')
-    .where('path', 'LIKE', '/docs/components/%')
+    .where('path', 'LIKE', '/components/%')
     .where('extension', '=', 'md')
     .select('path', 'title', 'description', 'category', 'module')
     .all()
@@ -162,8 +162,8 @@ onMounted(() => {
 
             <div class="rounded-md border border-muted overflow-hidden aspect-[16/9]">
               <UColorModeImage
-                :light="`${component.path.replace('/docs/components/', '/docs/components/light/')}.png`"
-                :dark="`${component.path.replace('/docs/components/', '/docs/components/dark/')}.png`"
+                :light="`${component.path.replace('/components/', '/components/light/')}.png`"
+                :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
                 class="group-hover:scale-105 transition-transform size-full"
                 :loading="index >= 4 ? 'lazy' : 'eager'"
                 width="640"

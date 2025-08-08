@@ -1,6 +1,6 @@
 ---
 description: 'A grid layout for your pages with left and right columns.'
-category: layout
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

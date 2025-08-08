@@ -1,7 +1,7 @@
 ---
 title: PageFeature
 description: 'A component to showcase key features of your application.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,7 +1,7 @@
 ---
 title: PageMarquee
 description: 'A component to create infinite scrolling content.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

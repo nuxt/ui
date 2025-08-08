@@ -1,7 +1,7 @@
 ---
 title: PageHeader
 description: 'A responsive header for your pages.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

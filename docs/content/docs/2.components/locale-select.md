@@ -1,7 +1,7 @@
 ---
 title: LocaleSelect
 description: 'A Select to switch between locales.'
-category: element
+category: i18n
 links:
   - label: SelectMenu
     to: /components/select-menu

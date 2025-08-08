@@ -1,7 +1,7 @@
 ---
 title: ColorModeSwitch
 description: 'A switch to toggle between light and dark mode.'
-category: element
+category: color-mode
 links:
   - label: Switch
     to: /components/switch

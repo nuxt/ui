@@ -1,7 +1,7 @@
 ---
 title: ColorModeSelect
 description: 'A Select to switch between system, dark & light mode.'
-category: element
+category: color-mode
 links:
   - label: SelectMenu
     to: /components/select-menu

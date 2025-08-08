@@ -1,7 +1,7 @@
 ---
 title: ContentSurround
 description: 'A pair of prev and next links to navigate between pages.'
-category: navigation
+category: content
 framework: nuxt
 links:
   - label: GitHub

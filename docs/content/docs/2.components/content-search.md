@@ -1,7 +1,7 @@
 ---
 title: ContentSearch
 description: 'A ready to use CommandPalette to add to your documentation.'
-category: overlay
+category: content
 framework: nuxt
 links:
   - label: CommandPalette

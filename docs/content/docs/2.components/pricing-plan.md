@@ -1,7 +1,7 @@
 ---
 title: PricingPlan
 description: 'A customizable pricing plan to display in a pricing page.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

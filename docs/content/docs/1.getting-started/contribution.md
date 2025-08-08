@@ -1,6 +1,7 @@
 ---
-title: Contribution
+title: Contribution Guide
 description: 'A comprehensive guide on contributing to Nuxt UI, including project structure, development workflow, and best practices.'
+navigation.title: Contribution
 navigation.icon: 'i-lucide-git-pull-request'
 ---
 

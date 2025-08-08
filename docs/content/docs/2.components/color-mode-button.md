@@ -1,7 +1,7 @@
 ---
 title: ColorModeButton
 description: 'A Button to switch between light and dark mode.'
-category: element
+category: color-mode
 links:
   - label: Button
     to: /components/button

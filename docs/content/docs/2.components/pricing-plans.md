@@ -1,7 +1,7 @@
 ---
 title: PricingPlans
 description: 'Display a list of pricing plans in a responsive grid layout.'
-category: layout
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

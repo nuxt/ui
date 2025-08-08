@@ -1,7 +1,7 @@
 ---
 title: ChangelogVersions
 description: 'Display a list of changelog versions in a timeline.'
-category: layout
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

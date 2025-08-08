@@ -1,7 +1,7 @@
 ---
 title: PageHero
 description: 'A responsive hero for your pages.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

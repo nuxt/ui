@@ -1,7 +1,7 @@
 ---
 title: ChangelogVersion
 description: 'A customizable article to display in a changelog.'
-category: data
+category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github

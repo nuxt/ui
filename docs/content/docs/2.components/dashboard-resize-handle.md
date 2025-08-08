@@ -1,7 +1,7 @@
 ---
 title: DashboardResizeHandle
 description: 'A handle to resize a sidebar or panel.'
-category: layout
+category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github
