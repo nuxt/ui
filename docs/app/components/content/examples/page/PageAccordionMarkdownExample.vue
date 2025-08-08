@@ -8,7 +8,7 @@ const items = [
   {
     label: 'Is Nuxt UI v3 compatible with standalone Vue projects?',
     icon: 'i-lucide-circle-help',
-    content: 'Nuxt UI is now compatible with Vue! You can follow the [installation guide](/getting-started/installation/vue) to get started.'
+    content: 'Nuxt UI is now compatible with Vue! You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.'
   },
   {
     label: 'What about Nuxt UI Pro?',

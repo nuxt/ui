@@ -1,22 +1,25 @@
 <script setup lang="ts">
 import { joinURL } from 'ufo'
-// @ts-expect-error yaml is not typed
-import page from '.index.yml'
+
+const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
 
 const { url } = useSiteConfig()
 
 useSeoMeta({
   titleTemplate: `%s - Nuxt UI`,
-  title: page.title,
-  description: page.description,
-  ogTitle: `${page.title} - Nuxt UI`,
-  ogDescription: page.description,
+  title: page.value.title,
+  description: page.value.description,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  ogDescription: page.value.description,
   ogImage: joinURL(url, '/og-image.png')
 })
 
 const { data: components } = await useAsyncData('ui-components', () => {
-  return queryCollection('content')
-    .where('path', 'LIKE', '/components/%')
+  return queryCollection('docs')
+    .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
     .where('module', 'IS NULL')
     .select('path', 'title', 'description', 'category', 'module')
@@ -92,8 +95,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :to="component.path"
           >
             <UColorModeImage
-              :light="`${component.path.replace('/components/', '/components/light/')}.png`"
-              :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+              :light="`${component.path.replace('/docs/components/', '/docs/components/light/')}.png`"
+              :dark="`${component.path.replace('/docs/components/', '/docs/components/dark/')}.png`"
               :alt="`${component.title} preview`"
               width="290"
               height="163"
@@ -121,8 +124,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :to="component.path"
           >
             <UColorModeImage
-              :light="`${component.path.replace('/components/', '/components/light/')}.png`"
-              :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+              :light="`${component.path.replace('/docs/components/', '/docs/components/light/')}.png`"
+              :dark="`${component.path.replace('/docs/components/', '/docs/components/dark/')}.png`"
               :alt="`${component.title} preview`"
               width="290"
               height="163"

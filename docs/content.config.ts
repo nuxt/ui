@@ -12,32 +12,48 @@ const Button = z.object({
   target: z.enum(['_blank', '_self']).optional()
 })
 
-const schema = z.object({
-  category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay']).optional(),
-  framework: z.string().optional(),
-  module: z.string().optional(),
-  navigation: z.object({
-    title: z.string().optional()
-  }),
-  links: z.array(z.object({
-    label: z.string(),
-    icon: z.string(),
-    avatar: z.object({
-      src: z.string(),
-      alt: z.string()
-    }).optional(),
-    to: z.string(),
-    target: z.string().optional()
-  }))
-})
-
 export const collections = {
-  content: defineCollection({
+  docs: defineCollection({
     type: 'page',
     source: [{
-      include: '**/*'
+      include: 'docs/**/*'
     }],
-    schema
+    schema: z.object({
+      category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay']).optional(),
+      framework: z.string().optional(),
+      module: z.string().optional(),
+      navigation: z.object({
+        title: z.string().optional()
+      }),
+      links: z.array(z.object({
+        label: z.string(),
+        icon: z.string(),
+        avatar: z.object({
+          src: z.string(),
+          alt: z.string()
+        }).optional(),
+        to: z.string(),
+        target: z.string().optional()
+      }))
+    })
+  }),
+  index: defineCollection({
+    type: 'page',
+    source: 'index.yml',
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      links: z.array(Button)
+    })
+  }),
+  figma: defineCollection({
+    type: 'page',
+    source: 'figma.yml',
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      links: z.array(Button)
+    })
   }),
   showcase: defineCollection({
     type: 'page',
@@ -58,6 +74,19 @@ export const collections = {
           delay: z.number()
         })
       }))
+    })
+  }),
+  templates: defineCollection({
+    type: 'page',
+    source: 'templates.yml',
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      links: z.array(Button),
+      hero: z.object({
+        title: z.string(),
+        description: z.string()
+      })
     })
   })
 }

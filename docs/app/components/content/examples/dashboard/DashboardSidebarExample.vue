@@ -31,7 +31,7 @@ const items: NavigationMenuItem[][] = [[{
 }, {
   label: 'Help & Support',
   icon: 'i-lucide-info',
-  to: 'https://github.com/nuxt/ui-pro',
+  to: 'https://github.com/nuxt/ui',
   target: '_blank'
 }]]
 </script>

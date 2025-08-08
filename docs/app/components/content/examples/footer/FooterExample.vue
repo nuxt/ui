@@ -10,9 +10,6 @@ const items: NavigationMenuItem[] = [{
   to: 'https://stackblitz.com/edit/nuxt-ui',
   target: '_blank'
 }, {
-  label: 'Roadmap',
-  to: '/roadmap'
-}, {
   label: 'Releases',
   to: 'https://github.com/nuxt/ui/releases',
   target: '_blank'

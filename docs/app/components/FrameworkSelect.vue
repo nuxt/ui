@@ -1,28 +1,16 @@
 <script setup lang="ts">
 const { framework, frameworks } = useSharedData()
 
-const value = ref<string | undefined>(undefined)
-
-onMounted(() => {
-  value.value = framework.value
-})
-
-watch(framework, () => {
-  value.value = framework.value
-})
+const frameworkIcon = computed(() => frameworks.value.find(f => f.value === framework.value)?.icon)
 </script>
 
 <template>
-  <UTabs
-    v-model="value"
+  <USelect
+    v-model="framework"
     :items="frameworks"
-    :content="false"
+    :icon="frameworkIcon"
     color="neutral"
-    :ui="{
-      indicator: 'bg-default',
-      trigger: 'px-1 data-[state=active]:text-highlighted w-full'
-    }"
-    size="xs"
-    @update:model-value="(framework = $event as string)"
+    variant="subtle"
+    class="w-26"
   />
 </template>

@@ -5,18 +5,14 @@ const route = useRoute()
 
 const items = computed<NavigationMenuItem[]>(() => [{
   label: 'Docs',
-  to: '/getting-started',
+  to: '/docs/getting-started',
   icon: 'i-lucide-book-open',
-  active: route.path.startsWith('/getting-started')
+  active: route.path.startsWith('/docs/getting-started')
 }, {
   label: 'Components',
-  to: '/components',
+  to: '/docs/components',
   icon: 'i-lucide-box',
-  active: route.path.startsWith('/components')
-}, {
-  label: 'Roadmap',
-  icon: 'i-lucide-map',
-  to: '/roadmap'
+  active: route.path.startsWith('/docs/components')
 }, {
   label: 'Figma',
   icon: 'i-simple-icons-figma',

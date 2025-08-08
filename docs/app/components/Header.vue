@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
+import { mapContentNavigation } from '@nuxt/ui/utils/content'
 
 const props = defineProps<{
   links: NavigationMenuItem[]
@@ -28,6 +29,11 @@ const items = computed(() => {
     { label: 'v2.22.0', to: 'https://ui2.nuxt.com' }
   ]
 })
+
+const docsNavigation = computed(() => mapContentNavigation(navigation?.value.map(item => ({ ...item, children: undefined })) ?? [])?.map(item => ({
+  ...item,
+  active: route.path.startsWith(item.to as string)
+})))
 
 const logoElement = ref()
 const { copy } = useClipboard()
@@ -63,7 +69,7 @@ const logoContextMenuItems = [
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
+  <UHeader :ui="{ left: 'min-w-0' }" class="flex flex-col">
     <template #left>
       <UContextMenu :items="logoContextMenuItems">
         <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-highlighted min-w-0 focus-visible:outline-primary shrink-0" aria-label="Nuxt UI">
@@ -123,6 +129,16 @@ const logoContextMenuItems = [
       </div>
 
       <UContentNavigation :navigation="navigation" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }" />
+    </template>
+
+    <template v-if="route.path.startsWith('/docs/')" #bottom>
+      <USeparator class="hidden lg:flex" />
+
+      <UContainer class="hidden lg:flex items-center justify-between">
+        <UNavigationMenu :items="docsNavigation" variant="pill" class="-mx-2.5" />
+
+        <FrameworkSelect />
+      </UContainer>
     </template>
   </UHeader>
 </template>

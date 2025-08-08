@@ -23,11 +23,11 @@ const items = [
   },
   {
     label: 'Components',
-    to: '/components'
+    to: '/docs/components'
   },
   {
     label: 'Breadcrumb',
-    to: '/components/breadcrumb'
+    to: '/docs/components/breadcrumb'
   }
 ] satisfies BreadcrumbItem[]
 </script>

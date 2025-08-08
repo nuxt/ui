@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
+import { findPageChildren } from '@nuxt/content/utils'
+
+const route = useRoute()
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+
+const children = computed(() => findPageChildren(navigation?.value, `/docs/${route.params.slug?.[0]}`, { indexAsChild: true }))
 </script>
 
 <template>
@@ -10,13 +15,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
       <UPage>
         <template #left>
           <UPageAside>
-            <template #top>
-              <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] -mx-2.5">
-                <FrameworkSelect />
-              </div>
-            </template>
-
-            <UContentNavigation :navigation="navigation" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }" />
+            <UContentNavigation :navigation="children" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }" />
           </UPageAside>
         </template>
 

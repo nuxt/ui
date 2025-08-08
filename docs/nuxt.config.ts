@@ -1,6 +1,5 @@
 import { createResolver } from '@nuxt/kit'
 import pkg from '../package.json'
-import yaml from '@rollup/plugin-yaml'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -9,7 +8,6 @@ export default defineNuxtConfig({
     '../src/module',
     '@nuxt/content',
     '@nuxt/image',
-    '@nuxthub/core',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
@@ -38,17 +36,6 @@ export default defineNuxtConfig({
   },
 
   app: {
-    head: {
-      // LemonSqueezy affiliate
-      script: [{
-        key: 'lmsqueezy-config',
-        innerHTML: 'window.lemonSqueezyAffiliateConfig = { store: "nuxt" };'
-      }, {
-        key: 'lmsqueezy',
-        src: 'https://lmsqueezy.com/affiliate.js',
-        defer: true
-      }]
-    },
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
       'class': 'bg-default'
@@ -81,19 +68,23 @@ export default defineNuxtConfig({
 
   routeRules: {
     // v4 redirects
-    '/getting-started/installation/pro/nuxt': { redirect: '/getting-started/installation/nuxt', prerender: false },
-    '/getting-started/installation/pro/vue': { redirect: '/getting-started/installation/vue', prerender: false },
-    '/getting-started/license': { redirect: '/getting-started', prerender: false },
+    '/docs': { redirect: '/docs/getting-started', prerender: false },
+    '/docs/components': { redirect: '/docs/components/app', prerender: false },
+    '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
+    '/getting-started/**': { redirect: '/docs/getting-started/**', prerender: false },
+    '/components/**': { redirect: '/docs/components/**', prerender: false },
+    '/composables/**': { redirect: '/docs/composables/**', prerender: false },
+    '/docs/getting-started/installation': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
+    '/docs/getting-started/installation/pro': { redirect: '/docs/getting-started/installation/pro/nuxt', prerender: false },
+    '/docs/getting-started/icons': { redirect: '/docs/getting-started/icons/nuxt', prerender: false },
+    '/docs/getting-started/color-mode': { redirect: '/docs/getting-started/color-mode/nuxt', prerender: false },
+    '/docs/getting-started/i18n': { redirect: '/docs/getting-started/i18n/nuxt', prerender: false },
+    '/docs/getting-started/installation/pro/nuxt': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
+    '/docs/getting-started/installation/pro/vue': { redirect: '/docs/getting-started/installation/vue', prerender: false },
+    '/docs/getting-started/license': { redirect: '/docs/getting-started', prerender: false },
     '/pro': { redirect: '/pro/activate', prerender: false },
     '/pro/pricing': { redirect: '/pro/activate', prerender: false },
     '/pro/templates': { redirect: '/templates', prerender: false },
-    // v3 redirects
-    '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
-    '/getting-started/installation/pro': { redirect: '/getting-started/installation/pro/nuxt', prerender: false },
-    '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
-    '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
-    '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
-    '/composables': { redirect: '/composables/define-shortcuts', prerender: false },
     // v2 redirects
     '/getting-started/theming': { redirect: { to: '/getting-started/theme', statusCode: 301 }, prerender: false },
     '/pro/getting-started/**': { redirect: { to: '/getting-started/installation/pro/nuxt', statusCode: 301 }, prerender: false },
@@ -151,7 +142,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/getting-started',
+        '/docs/getting-started',
         '/api/countries.json',
         '/api/locales.json',
         // '/api/releases.json',
@@ -160,33 +151,10 @@ export default defineNuxtConfig({
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
-    },
-    cloudflare: {
-      pages: {
-        routes: {
-          exclude: [
-            '/components/*',
-            '/getting-started/*',
-            '/composables/*'
-          ]
-        }
-      }
     }
   },
 
-  hub: {
-    ai: true
-  },
-
   vite: {
-    plugins: [
-      yaml()
-    ],
-    server: {
-      fs: {
-        allow: process.env.NUXT_UI_PRO_PATH ? [resolve(process.env.NUXT_UI_PRO_PATH)] : undefined
-      }
-    },
     optimizeDeps: {
       // prevents reloading page when navigating between components
       include: ['@internationalized/date', '@vueuse/shared', '@vueuse/integrations/useFuse', '@tanstack/vue-table', 'reka-ui', 'reka-ui/namespaced', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures', 'colortranslator', 'tailwindcss/colors', 'tailwind-variants', 'ufo', 'zod', 'vaul-vue', 'scule', 'motion-v', 'json5', 'ohash', 'shiki-transformer-color-highlight']
@@ -241,21 +209,21 @@ export default defineNuxtConfig({
     },
     sections: [{
       title: 'Getting Started',
-      contentCollection: 'content',
+      contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/getting-started%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/getting-started%' }
       ]
     }, {
       title: 'Components',
-      contentCollection: 'content',
+      contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/components/%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/components/%' }
       ]
     }, {
       title: 'Composables',
-      contentCollection: 'content',
+      contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/composables/%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/composables/%' }
       ]
     }],
     notes: [

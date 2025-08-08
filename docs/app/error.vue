@@ -9,12 +9,12 @@ const props = defineProps<{
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework']))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
 })
 
-const links = useLinks()
+const links = useHeaderLinks()
 const searchLinks = useSearchLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
@@ -77,7 +77,7 @@ provide('navigation', mappedNavigation)
           items: frameworks
         }]"
         :navigation="filteredNavigation"
-        :fuse="{ resultLimit: 100 }"
+        :fuse="{ resultLimit: 120 }"
       />
     </ClientOnly>
   </UApp>

@@ -5,15 +5,12 @@ const route = useRoute()
 
 const items = computed<NavigationMenuItem[]>(() => [{
   label: 'Docs',
-  to: '/getting-started',
-  active: route.path.startsWith('/getting-started')
+  to: '/docs/getting-started',
+  active: route.path.startsWith('/docs/getting-started')
 }, {
   label: 'Components',
-  to: '/components',
-  active: route.path.startsWith('/components')
-}, {
-  label: 'Roadmap',
-  to: '/roadmap'
+  to: '/docs/components',
+  active: route.path.startsWith('/docs/components')
 }, {
   label: 'Figma',
   to: 'https://www.figma.com/community/file/1288455405058138934',
