@@ -1,15 +1,54 @@
 import { defineCollection, z } from '@nuxt/content'
 
+const Image = z.object({
+  src: z.string(),
+  alt: z.string().optional(),
+  width: z.number().optional(),
+  height: z.number().optional()
+})
+
+const DualModeImage = z.object({
+  light: z.string(),
+  dark: z.string(),
+  width: z.number().optional(),
+  height: z.number().optional(),
+  alt: z.string().optional()
+})
+
 const Button = z.object({
   label: z.string(),
   icon: z.string().optional(),
+  leadingIcon: z.string().optional(),
   trailingIcon: z.string().optional(),
   to: z.string().optional(),
   color: z.enum(['primary', 'neutral', 'success', 'warning', 'error', 'info']).optional(),
   size: z.enum(['xs', 'sm', 'md', 'lg', 'xl']).optional(),
   variant: z.enum(['solid', 'outline', 'subtle', 'soft', 'ghost', 'link']).optional(),
   id: z.string().optional(),
-  target: z.enum(['_blank', '_self']).optional()
+  target: z.enum(['_blank', '_self']).optional(),
+  class: z.string().optional()
+})
+
+const BaseSection = z.object({
+  title: z.string(),
+  description: z.string()
+})
+
+const Feature = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  icon: z.string(),
+  to: z.string().optional()
+})
+
+const TitleIconFeature = z.object({
+  title: z.string(),
+  icon: z.string()
+})
+
+const PageSection = BaseSection.extend({
+  links: z.array(Button).optional(),
+  features: z.array(Feature).optional()
 })
 
 export const collections = {
@@ -43,7 +82,18 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       description: z.string(),
-      links: z.array(Button)
+      hero: BaseSection.extend({
+        links: z.array(Button),
+        features: z.array(Feature)
+      }),
+      features: z.array(Feature),
+      design_system: PageSection.extend({
+        code: z.string()
+      }),
+      component_customization: PageSection.extend({
+        code: z.string()
+      }),
+      community: PageSection
     })
   }),
   figma: defineCollection({
@@ -52,7 +102,83 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       description: z.string(),
-      links: z.array(Button)
+      headline: z.string().optional(),
+      hero: BaseSection.extend({
+        image: z.string(),
+        links: z.array(Button).optional()
+      }),
+      features1: z.object({
+        features: z.array(Feature)
+      }),
+      cta1: BaseSection.optional(),
+      section1: BaseSection.extend({
+        reverse: z.boolean().optional(),
+        features: z.array(TitleIconFeature).optional(),
+        tabs: z.array(z.object({
+          label: z.string(),
+          src: z.string(),
+          width: z.number().optional(),
+          height: z.number().optional(),
+          alt: z.string().optional()
+        })).optional(),
+        links: z.array(Button).optional()
+      }),
+      section2: BaseSection.extend({
+        features: z.array(TitleIconFeature).optional(),
+        image: Image,
+        links: z.array(Button).optional()
+      }),
+      section3: BaseSection.extend({
+        reverse: z.boolean().optional(),
+        features: z.array(TitleIconFeature).optional(),
+        image: Image,
+        links: z.array(Button).optional()
+      }),
+      features2: z.object({
+        features: z.array(Feature)
+      }),
+      section4: BaseSection.extend({
+        links: z.array(Button).optional(),
+        steps: z.array(z.object({
+          title: z.string(),
+          description: z.string(),
+          image: Image
+        }))
+      }),
+      pricing: z.object({
+        title: z.string(),
+        description: z.string(),
+        plans: z.array(z.object({
+          title: z.string(),
+          description: z.string(),
+          price: z.string(),
+          discount: z.string().optional(),
+          billing_period: z.string().optional(),
+          billing_cycle: z.string().optional(),
+          highlight: z.boolean().optional(),
+          class: z.string().optional(),
+          features: z.array(z.string()),
+          terms: z.string().optional(),
+          button: Button.optional(),
+          extraButton: Button.optional()
+        }))
+      }),
+      customers: z.object({
+        title: z.string(),
+        items: z.array(z.object({
+          src: z.string(),
+          alt: z.string()
+        }))
+      }),
+      faq: z.object({
+        title: z.string(),
+        description: z.string(),
+        items: z.array(z.object({
+          label: z.string(),
+          content: z.string(),
+          defaultOpen: z.boolean().optional()
+        }))
+      })
     })
   }),
   showcase: defineCollection({
@@ -61,10 +187,9 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       description: z.string(),
-      hero: z.object({
-        title: z.string(),
-        description: z.string(),
-        links: z.array(Button)
+      navigation: z.boolean().optional(),
+      hero: BaseSection.extend({
+        links: z.array(Button).optional()
       }),
       items: z.array(z.object({
         name: z.string(),
@@ -72,7 +197,7 @@ export const collections = {
         screenshotUrl: z.string().optional(),
         screenshotOptions: z.object({
           delay: z.number()
-        })
+        }).optional()
       }))
     })
   }),
@@ -82,11 +207,18 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       description: z.string(),
+      navigation: z.boolean().optional(),
       links: z.array(Button),
-      hero: z.object({
+      hero: BaseSection,
+      templates: z.array(z.object({
         title: z.string(),
-        description: z.string()
-      })
+        description: z.string(),
+        icon: z.string(),
+        thumbnail: DualModeImage,
+        images: z.array(Image).optional(),
+        features: z.array(TitleIconFeature).optional(),
+        links: z.array(Button).optional()
+      }))
     })
   })
 }

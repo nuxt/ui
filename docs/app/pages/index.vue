@@ -40,7 +40,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 </script>
 
 <template>
-  <UMain>
+  <UMain v-if="page">
     <UPageHero
       orientation="horizontal"
       :ui="{
