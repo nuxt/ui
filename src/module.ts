@@ -153,15 +153,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
-    addComponentsDir({
-      path: resolve('./runtime/components'),
-      prefix: options.prefix,
-      pathPrefix: false,
-      ignore: ['color-mode/**', 'content/**', 'prose/**']
-    })
-
     if ((hasNuxtModule('@nuxtjs/mdc') || options.components?.mdc) || (hasNuxtModule('@nuxt/content') || options.components?.content)) {
-      // @ts-expect-error - `@nuxtjs/mdc` is not installed
       nuxt.options.mdc = defu(nuxt.options.mdc, {
         highlight: {
           theme: {
@@ -201,8 +193,8 @@ export default defineNuxtModule<ModuleOptions>({
 
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
-        prefix: 'Prose',
         pathPrefix: false,
+        prefix: 'Prose',
         global: true
       })
     }
@@ -211,7 +203,7 @@ export default defineNuxtModule<ModuleOptions>({
       addComponentsDir({
         path: resolve('./runtime/components/content'),
         pathPrefix: false,
-        prefix: nuxt.options.ui?.prefix || 'U'
+        prefix: options.prefix
       })
     }
 
@@ -219,12 +211,19 @@ export default defineNuxtModule<ModuleOptions>({
       addComponentsDir({
         path: resolve('./runtime/components/color-mode'),
         pathPrefix: false,
-        prefix: nuxt.options.ui?.prefix || 'U'
+        prefix: options.prefix
       })
     } else {
       // Stub `useColorMode` composable used in `DashboardSearch` and `ContentSearch` components
       addImportsDir(resolve('./runtime/composables/color-mode'))
     }
+
+    addComponentsDir({
+      path: resolve('./runtime/components'),
+      pathPrefix: false,
+      prefix: options.prefix,
+      ignore: ['color-mode/**', 'content/**', 'prose/**']
+    })
 
     addImportsDir(resolve('./runtime/composables'))
 
