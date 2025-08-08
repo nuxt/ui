@@ -1,14 +1,13 @@
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
 import { getTemplates } from '../templates'
-import { omit } from '../runtime/utils'
 
 /**
  * This plugin is responsible for getting the generated virtual templates and
  * making them available to the Vue build.
  */
 export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record<string, any>) {
-  const templates = getTemplates(omit(options, ['components']), appConfig.ui)
+  const templates = getTemplates(options, appConfig.ui)
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
   return {
