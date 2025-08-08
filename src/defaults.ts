@@ -23,10 +23,8 @@ export const defaultOptions = {
     colors: undefined,
     transitions: true
   },
-  componentImports: {
-    mdc: false,
-    content: false
-  }
+  mdc: false,
+  content: false
 }
 
 export const resolveColors = (colors?: string[]) => {

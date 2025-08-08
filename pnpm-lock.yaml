@@ -266,9 +266,6 @@ importers:
       '@octokit/rest':
         specifier: ^22.0.0
         version: 22.0.0
-      '@rollup/plugin-yaml':
-        specifier: ^4.1.2
-        version: 4.1.2(rollup@4.34.9)
       '@vueuse/integrations':
         specifier: ^13.6.0
         version: 13.6.0(axios@1.10.0)(change-case@5.4.4)(fuse.js@7.1.0)(jwt-decode@4.0.0)(sortablejs@1.15.6)(vue@3.5.18(typescript@5.8.3))
@@ -2456,15 +2453,6 @@ packages:
 
   '@rollup/plugin-terser@0.4.4':
     resolution: {integrity: sha512-XHeJC5Bgvs8LfukDwWZp7yeqin6ns8RTl2B9avbejt6tZqsqvVoWI7ZTQrcNsfKEDWBTnTxM8nMDkO2IFFbd0A==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: 4.34.9
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-
-  '@rollup/plugin-yaml@4.1.2':
-    resolution: {integrity: sha512-RpupciIeZMUqhgFE97ba0s98mOFS7CWzN3EJNhJkqSv9XLlWYtwVdtE6cDw6ASOF/sZVFS7kRJXftaqM2Vakdw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: 4.34.9
@@ -7340,10 +7328,6 @@ packages:
   toposort@2.0.2:
     resolution: {integrity: sha512-0a5EOkAUp8D4moMi2W8ZF8jcga7BgZd91O/yabJCFY8az+XSzeGyTKs0Aoo897iV1Nj6guFq8orWDS96z91oGg==}
 
-  tosource@2.0.0-alpha.3:
-    resolution: {integrity: sha512-KAB2lrSS48y91MzFPFuDg4hLbvDiyTjOVgaK7Erw+5AmZXNq4sFRVn8r6yxSLuNs15PaokrDRpS61ERY9uZOug==}
-    engines: {node: '>=10'}
-
   totalist@3.0.1:
     resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
     engines: {node: '>=6'}
@@ -10359,14 +10343,6 @@ snapshots:
       serialize-javascript: 6.0.2
       smob: 1.5.0
       terser: 5.43.1
-    optionalDependencies:
-      rollup: 4.34.9
-
-  '@rollup/plugin-yaml@4.1.2(rollup@4.34.9)':
-    dependencies:
-      '@rollup/pluginutils': 5.2.0(rollup@4.34.9)
-      js-yaml: 4.1.0
-      tosource: 2.0.0-alpha.3
     optionalDependencies:
       rollup: 4.34.9
 
@@ -16163,8 +16139,6 @@ snapshots:
   toml@3.0.0: {}
 
   toposort@2.0.2: {}
-
-  tosource@2.0.0-alpha.3: {}
 
   totalist@3.0.1: {}
 

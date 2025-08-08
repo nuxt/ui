@@ -67,21 +67,15 @@ export interface ModuleOptions {
   }
 
   /**
-   * Customize which groups of components are imported
-   * @link https://ui.nuxt.com/getting-started/installation/nuxt#components
+   * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
+   * @defaultValue false
    */
-  componentImports?: {
-    /**
-     * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
-     * @defaultValue false
-     */
-    mdc?: boolean
-    /**
-     * Force the import of content & prose components even if `@nuxt/content` is not installed
-     * @defaultValue false
-     */
-    content?: boolean
-  }
+  mdc?: boolean
+  /**
+   * Force the import of content & prose components even if `@nuxt/content` is not installed
+   * @defaultValue false
+   */
+  content?: boolean
 }
 
 declare module '#app' {
@@ -153,7 +147,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
-    if ((hasNuxtModule('@nuxtjs/mdc') || options.componentImports?.mdc) || (hasNuxtModule('@nuxt/content') || options.componentImports?.content)) {
+    if ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content)) {
       nuxt.options.mdc = defu(nuxt.options.mdc, {
         highlight: {
           theme: {
@@ -199,7 +193,7 @@ export default defineNuxtModule<ModuleOptions>({
       })
     }
 
-    if ((hasNuxtModule('@nuxt/content') || options.componentImports?.content)) {
+    if ((hasNuxtModule('@nuxt/content') || options.content)) {
       addComponentsDir({
         path: resolve('./runtime/components/content'),
         pathPrefix: false,

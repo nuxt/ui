@@ -33,7 +33,7 @@ type AppConfigUI = {
   icons?: Partial<typeof icons>
 } & TVConfig<typeof ui>
 
-export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'componentImports'> {
+export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
   /** Whether to generate declaration files for auto-imported components. */
   dts?: boolean
   ui?: AppConfigUI
