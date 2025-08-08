@@ -123,7 +123,7 @@ function setComponentProp(name: string, value: any) {
   set(componentProps, name, value)
 }
 
-const componentTheme = (props.prose ? theme.prose : theme)[camelName]
+const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName]
 const meta = await fetchComponentMeta(name as any)
 
 function mapKeys(obj: object, parentKey = ''): any {
