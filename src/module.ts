@@ -67,10 +67,10 @@ export interface ModuleOptions {
   }
 
   /**
-   * Customize which components are imported
+   * Customize which groups of components are imported
    * @link https://ui.nuxt.com/getting-started/installation/nuxt#components
    */
-  components?: {
+  componentImports?: {
     /**
      * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
      * @defaultValue false
@@ -153,7 +153,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
-    if ((hasNuxtModule('@nuxtjs/mdc') || options.components?.mdc) || (hasNuxtModule('@nuxt/content') || options.components?.content)) {
+    if ((hasNuxtModule('@nuxtjs/mdc') || options.componentImports?.mdc) || (hasNuxtModule('@nuxt/content') || options.componentImports?.content)) {
       nuxt.options.mdc = defu(nuxt.options.mdc, {
         highlight: {
           theme: {
@@ -199,7 +199,7 @@ export default defineNuxtModule<ModuleOptions>({
       })
     }
 
-    if ((hasNuxtModule('@nuxt/content') || options.components?.content)) {
+    if ((hasNuxtModule('@nuxt/content') || options.componentImports?.content)) {
       addComponentsDir({
         path: resolve('./runtime/components/content'),
         pathPrefix: false,

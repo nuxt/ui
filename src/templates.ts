@@ -91,7 +91,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     }
   }
 
-  if (!!nuxt && ((hasNuxtModule('@nuxtjs/mdc') || options.components?.mdc) || (hasNuxtModule('@nuxt/content') || options.components?.content))) {
+  if (!!nuxt && ((hasNuxtModule('@nuxtjs/mdc') || options.componentImports?.mdc) || (hasNuxtModule('@nuxt/content') || options.componentImports?.content))) {
     hasProse = true
 
     const path = 'prose'
@@ -105,7 +105,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     })
   }
 
-  if (!!nuxt && (hasNuxtModule('@nuxt/content') || options.components?.content)) {
+  if (!!nuxt && (hasNuxtModule('@nuxt/content') || options.componentImports?.content)) {
     hasContent = true
 
     writeThemeTemplate(themeContent, 'content')

@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   modules: ['../../src/module'],
   ui: {
-    components: {
+    componentImports: {
       content: true
     }
   }

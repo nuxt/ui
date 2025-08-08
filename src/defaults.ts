@@ -23,7 +23,7 @@ export const defaultOptions = {
     colors: undefined,
     transitions: true
   },
-  components: {
+  componentImports: {
     mdc: false,
     content: false
   }
