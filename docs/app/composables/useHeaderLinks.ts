@@ -51,6 +51,7 @@ export function useHeaderLinks() {
   }, {
     label: 'Figma',
     icon: 'i-simple-icons-figma',
+    description: 'The official Nuxt UI design kit for Figma mirrors the development library for perfect consistency.',
     to: '/figma'
   }, {
     icon: 'i-lucide-panels-top-left',
@@ -87,6 +88,7 @@ export function useHeaderLinks() {
   }, {
     label: 'Releases',
     icon: 'i-lucide-rocket',
+    description: 'Stay up to date with the latest releases of Nuxt UI.',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
   }])

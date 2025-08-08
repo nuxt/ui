@@ -95,8 +95,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :to="component.path"
           >
             <UColorModeImage
-              :light="`${component.path.replace('/docs/components/', '/docs/components/light/')}.png`"
-              :dark="`${component.path.replace('/docs/components/', '/docs/components/dark/')}.png`"
+              :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
+              :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
               :alt="`${component.title} preview`"
               width="290"
               height="163"
@@ -124,8 +124,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :to="component.path"
           >
             <UColorModeImage
-              :light="`${component.path.replace('/docs/components/', '/docs/components/light/')}.png`"
-              :dark="`${component.path.replace('/docs/components/', '/docs/components/dark/')}.png`"
+              :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
+              :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
               :alt="`${component.title} preview`"
               width="290"
               height="163"

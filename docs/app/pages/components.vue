@@ -162,8 +162,8 @@ onMounted(() => {
 
             <div class="rounded-md border border-muted overflow-hidden aspect-[16/9]">
               <UColorModeImage
-                :light="`${component.path.replace('/components/', '/components/light/')}.png`"
-                :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+                :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
+                :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
                 class="group-hover:scale-105 transition-transform size-full"
                 :loading="index >= 4 ? 'lazy' : 'eager'"
                 width="640"
