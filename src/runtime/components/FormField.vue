@@ -35,7 +35,6 @@ export interface FormFieldProps {
   class?: any
   ui?: FormField['slots']
 }
-
 export interface FormFieldSlots {
   label(props: { label?: string }): any
   hint(props: { hint?: string }): any
@@ -81,6 +80,7 @@ provide(formFieldInjectionKey, computed(() => ({
   name: props.name,
   size: props.size,
   eagerValidation: props.eagerValidation,
+  required: props.required,
   validateOnInputDelay: props.validateOnInputDelay,
   errorPattern: props.errorPattern,
   hint: props.hint,

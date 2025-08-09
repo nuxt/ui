@@ -164,12 +164,12 @@ const slots = defineSlots<SelectSlots<T, VK, M>>()
 
 const appConfig = useAppConfig() as Select['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'multiple'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps)
 const arrowProps = toRef(() => props.arrow as SelectArrowProps)
 
-const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
+const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formGroupSize, color, id, name, highlight, disabled, required, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
@@ -257,6 +257,7 @@ defineExpose({
     v-slot="{ modelValue, open }"
     :name="name"
     v-bind="rootProps"
+    :required="required"
     :autocomplete="autocomplete"
     :disabled="disabled"
     :default-value="(defaultValue as (AcceptableValue | AcceptableValue[]))"

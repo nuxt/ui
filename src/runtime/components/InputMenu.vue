@@ -208,12 +208,12 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as InputMenu['AppConfig']
 const { contains } = useFilter({ sensitivity: 'base' })
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover', 'openOnClick', 'openOnFocus'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover', 'openOnClick', 'openOnFocus'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, required, ariaAttrs } = useFormField<InputProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
@@ -417,6 +417,7 @@ defineExpose({
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
     :name="name"
+    :required="required"
     :disabled="disabled"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :as-child="!!multiple"

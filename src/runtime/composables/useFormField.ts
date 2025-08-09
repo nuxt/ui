@@ -12,6 +12,7 @@ type Props<T> = {
   size?: GetObjectField<T, 'size'>
   color?: GetObjectField<T, 'color'>
   highlight?: boolean
+  required?: boolean
   disabled?: boolean
 }
 
@@ -77,6 +78,7 @@ export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, defer
     size: computed(() => props?.size ?? formField?.value.size),
     color: computed(() => formField?.value.error ? 'error' : props?.color),
     highlight: computed(() => formField?.value.error ? true : props?.highlight),
+    required: computed(() => props?.required || formField?.value.required),
     disabled: computed(() => formOptions?.value.disabled || props?.disabled),
     emitFormBlur,
     emitFormInput,
