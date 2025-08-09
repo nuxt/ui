@@ -102,3 +102,7 @@ Wrap each avatar with a [Link](/components/link) to make them clickable.
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

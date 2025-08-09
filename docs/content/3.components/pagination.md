@@ -327,3 +327,7 @@ In this example we're adding the `#with-links` hash to avoid going to the top of
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

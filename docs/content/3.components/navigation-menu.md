@@ -1178,3 +1178,7 @@ In this example, we add the `sm:w-(--reka-navigation-menu-viewport-width)` class
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog
