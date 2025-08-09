@@ -66,7 +66,6 @@ const emits = defineEmits<PinInputEmits<T>>()
 
 const appConfig = useAppConfig() as PinInput['AppConfig']
 
-
 const rootProps = useForwardPropsEmits(reactivePick(props, 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
 
 const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, required, ariaAttrs } = useFormField<PinInputProps>(props)
