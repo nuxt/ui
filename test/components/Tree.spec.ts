@@ -60,6 +60,7 @@ describe('Tree', () => {
     ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'default slot' } }],
+    ['with item-wrapper slot', { props, slots: { 'item-wrapper': () => 'wrapper slot' } }],
     ['with item slot', { props, slots: { item: () => 'item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'leading slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'trailing slot' } }],

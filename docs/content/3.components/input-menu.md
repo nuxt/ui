@@ -673,7 +673,7 @@ In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), 
 
 ### Control open state on focus
 
-You can also use the `@focus` directive to control the open state.
+You can use the `open-on-focus` or `open-on-click` props to open the menu when the input is focused or clicked.
 
 ::component-example
 ---
@@ -820,3 +820,7 @@ When accessing the component via a template ref, you can use the following:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

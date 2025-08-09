@@ -54,6 +54,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'سانلىق مەلۇمات يوق'
+    },
+    fileUpload: {
+      removeFile: '{filename} ئۆچۈرۈش'
     }
   }
 })

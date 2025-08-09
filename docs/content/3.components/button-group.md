@@ -114,3 +114,7 @@ You can use a [Badge](/components/badge) within a button group.
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

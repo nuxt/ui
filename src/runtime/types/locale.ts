@@ -48,6 +48,9 @@ export type Messages = {
   table: {
     noData: string
   }
+  fileUpload: {
+    removeFile: string
+  }
 }
 
 export type Direction = 'ltr' | 'rtl'

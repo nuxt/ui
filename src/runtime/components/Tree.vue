@@ -90,6 +90,7 @@ export type TreeSlots<
   A extends TreeItem = TreeItem,
   T extends NestedItem<A[]> = NestedItem<A[]>
 > = {
+  'item-wrapper': SlotProps<T>
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
