@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Қаблӣ',
       next: 'Баъдӣ',
+      dots: 'Слайдро барои намоиш интихоб кунед',
       goto: 'Ба слайди {slide} гузаред'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Маълумот нест'
+    },
+    fileUpload: {
+      removeFile: '{filename}-ро хориҷ кунед'
     }
   }
 })

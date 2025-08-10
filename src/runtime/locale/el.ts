@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Προηγούμενο',
       next: 'Επόμενο',
+      dots: 'Επιλέξτε διαφάνεια για εμφάνιση',
       goto: 'Μετάβαση στη διαφάνεια {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Δεν υπάρχουν δεδομένα'
+    },
+    fileUpload: {
+      removeFile: 'Αφαίρεση {filename}'
     }
   }
 })

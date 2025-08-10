@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Eel',
       next: 'Järg',
+      dots: 'Valige kuvatav slaid',
       goto: 'Mine slaidile {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Pole andmeid'
+    },
+    fileUpload: {
+      removeFile: 'Eemalda {filename}'
     }
   }
 })

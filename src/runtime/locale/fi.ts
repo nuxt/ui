@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Edellinen',
       next: 'Seuraava',
+      dots: 'Valitse näytettävä dia',
       goto: 'Siirry sivulle {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Ei tietoja'
+    },
+    fileUpload: {
+      removeFile: 'Poista {filename}'
     }
   }
 })

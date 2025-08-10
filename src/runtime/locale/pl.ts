@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Poprzedni',
       next: 'Następny',
+      dots: 'Wybierz slajd do wyświetlenia',
       goto: 'Idź do {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Brak danych'
+    },
+    fileUpload: {
+      removeFile: 'Usuń {filename}'
     }
   }
 })

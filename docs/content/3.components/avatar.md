@@ -107,3 +107,7 @@ You can use a [Chip](/components/chip) component to display a chip around the Av
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

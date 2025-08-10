@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Назад',
       next: 'Напред',
+      dots: 'Изберете слайд за показване',
       goto: 'Отидете на слайд {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Няма данни'
+    },
+    fileUpload: {
+      removeFile: 'Премахни {filename}'
     }
   }
 })

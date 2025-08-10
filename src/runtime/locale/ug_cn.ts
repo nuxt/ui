@@ -40,6 +40,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'ئالدىنقى بەت',
       next: 'كېيىنكى بەت',
+      dots: 'كۆرسىتىدىغان سلايدنى تاللاڭ',
       goto: '{slide}-بەتكە ئاتلاش'
     },
     modal: {
@@ -53,6 +54,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'سانلىق مەلۇمات يوق'
+    },
+    fileUpload: {
+      removeFile: '{filename} ئۆچۈرۈش'
     }
   }
 })

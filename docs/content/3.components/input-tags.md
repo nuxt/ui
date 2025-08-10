@@ -9,7 +9,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/InputTags.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -51,7 +50,7 @@ props:
 ---
 ::
 
-### Max Length :badge{label="Soon" class="align-text-top"}
+### Max Length :badge{label="New" class="align-text-top"}
 
 Use the `max-length` prop to set the maximum number of characters allowed in a tag.
 
@@ -294,3 +293,7 @@ When accessing the component via a template ref, you can use the following:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

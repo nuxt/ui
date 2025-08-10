@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'ย้อนกลับ',
       next: 'ถัดไป',
+      dots: 'เลือกสไลด์ที่จะแสดง',
       goto: 'ไปที่ {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'ไม่มีข้อมูล'
+    },
+    fileUpload: {
+      removeFile: 'ลบ {filename}'
     }
   }
 })

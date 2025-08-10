@@ -19,12 +19,13 @@ Use the `items` prop as an array of objects with the following properties:
 - `label?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 - `avatar?: AvatarProps`{lang="ts-type"}
+- `badge?: string | number | BadgeProps`{lang="ts-type"}
 - `content?: string`{lang="ts-type"}
 - `value?: string | number`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `class?: any`{lang="ts-type"}
-- `ui?: { trigger?: ClassNameValue, leadingIcon?: ClassNameValue, leadingAvatar?: ClassNameValue, label?: ClassNameValue, content?: ClassNameValue }`{lang="ts-type"}
+- `ui?: { trigger?: ClassNameValue, leadingIcon?: ClassNameValue, leadingAvatar?: ClassNameValue, leadingAvatarSize?: ClassNameValue, label?: ClassNameValue, trailingBadge?: ClassNameValue, trailingBadgeSize?: ClassNameValue, content?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---
@@ -253,3 +254,7 @@ When accessing the component via a template ref, you can use the following:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

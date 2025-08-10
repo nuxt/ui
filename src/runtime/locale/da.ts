@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Forrige',
       next: 'Næste',
+      dots: 'Vælg dias til visning',
       goto: 'Gå til slide {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Ingen data'
+    },
+    fileUpload: {
+      removeFile: 'Fjern {filename}'
     }
   }
 })

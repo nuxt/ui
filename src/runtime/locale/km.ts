@@ -39,7 +39,8 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'មុន',
       next: 'បន្ទាប់',
-      goto: 'លោតទៅកាន់ស្លាយ {slide}'
+      dots: 'ជ្រើសរើស​ស្លាយ​ដើម្បី​បង្ហាញ',
+      goto: 'ឡើងទៅស្លាយ {slide}'
     },
     modal: {
       close: 'បិទ'
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'មិនមានទិន្នន័យ'
+    },
+    fileUpload: {
+      removeFile: 'លុប {filename}'
     }
   }
 })

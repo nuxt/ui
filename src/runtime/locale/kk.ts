@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Алдыңғы',
       next: 'Келесі',
+      dots: 'Көрсету үшін слайдты таңдаңыз',
       goto: '{slide} слайдқа өту'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Деректер жоқ'
+    },
+    fileUpload: {
+      removeFile: '{filename} жою'
     }
   }
 })

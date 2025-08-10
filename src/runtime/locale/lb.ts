@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Präz.',
       next: 'Näch.',
+      dots: 'Wielt Dia fir ze weisen',
       goto: 'Gitt op d\'Slide {Slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Keng Donnéeën'
+    },
+    fileUpload: {
+      removeFile: '{filename} ewechhuelen'
     }
   }
 })

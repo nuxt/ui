@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Հետ',
       next: 'Առաջ',
+      dots: 'Ընտրեք ցուցադրելու սլայդը',
       goto: 'Անցնել {slide}-ին'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Տվյալներ չկան'
+    },
+    fileUpload: {
+      removeFile: 'Ջնջել {filename}'
     }
   }
 })

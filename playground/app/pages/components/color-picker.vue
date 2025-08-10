@@ -1,12 +1,16 @@
 <script setup lang="ts">
 const colorHex = ref('#9C27B0')
+
+function handleColorChange(event: Event) {
+  colorHex.value = (event.target as HTMLInputElement).value
+}
 </script>
 
 <template>
   <div class="flex flex-col gap-5">
     <div class="flex items-center gap-2">
       <span :style="{ backgroundColor: colorHex }" class="inline-flex w-5 h-5 rounded" />
-      <code class="font-mono">{{ colorHex }}</code>
+      <UInput :model-value="colorHex" @change="handleColorChange" />
     </div>
     <USeparator />
     <div class="flex justify-between gap-2">
@@ -21,6 +25,6 @@ const colorHex = ref('#9C27B0')
       </UButton>
     </div>
     <USeparator />
-    <UColorPicker v-model="colorHex" @update:model-value="() => console.log('model update')" />
+    <UColorPicker v-model="colorHex" />
   </div>
 </template>

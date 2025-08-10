@@ -146,3 +146,7 @@ name: 'collapsible-icon-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

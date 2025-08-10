@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Önceki',
       next: 'Sonraki',
+      dots: 'Görüntülenecek slaydı seçin',
       goto: '{slide}. slayda git'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Veri yok'
+    },
+    fileUpload: {
+      removeFile: '{filename} kaldır'
     }
   }
 })

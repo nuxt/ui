@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Sebelumnya',
       next: 'Berikutnya',
+      dots: 'Pilih slide untuk ditampilkan',
       goto: 'Pergi ke slide {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Tidak ada data'
+    },
+    fileUpload: {
+      removeFile: 'Hapus {filename}'
     }
   }
 })

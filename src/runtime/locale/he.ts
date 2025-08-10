@@ -38,6 +38,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'הקודם',
       next: 'הבא',
+      dots: 'בחר שקופית להצגה',
       goto: 'מעבר ל {slide}'
     },
     modal: {
@@ -51,6 +52,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'אין נתונים להצגה'
+    },
+    fileUpload: {
+      removeFile: 'הסר {filename}'
     }
   }
 })

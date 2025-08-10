@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Föregående',
       next: 'Nästa',
+      dots: 'Välj bild att visa',
       goto: 'Gå till {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Inga data'
+    },
+    fileUpload: {
+      removeFile: 'Ta bort {filename}'
     }
   }
 })

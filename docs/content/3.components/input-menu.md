@@ -673,7 +673,7 @@ In this example, leveraging [`defineShortcuts`](/composables/define-shortcuts), 
 
 ### Control open state on focus
 
-You can also use the `@focus` directive to control the open state.
+You can use the `open-on-focus` or `open-on-click` props to open the menu when the input is focused or clicked.
 
 ::component-example
 ---
@@ -757,6 +757,33 @@ name: 'input-menu-filter-fields-example'
 ---
 ::
 
+### With full content width
+
+You can expand the content to the full width of its items by using the `ui.content` key.
+
+::component-example
+---
+name: 'input-menu-content-width-example'
+collapse: true
+---
+::
+
+::tip
+You can also change the content width globally in your `app.config.ts`:
+
+```
+export default defineAppConfig({
+  ui: {
+    inputMenu: {
+      slots: {
+        content: 'min-w-fit'
+      }
+    }
+  }
+})
+```
+::
+
 ### As a CountryPicker
 
 This example demonstrates using the InputMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
@@ -793,3 +820,7 @@ When accessing the component via a template ref, you can use the following:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

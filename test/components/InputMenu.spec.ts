@@ -5,7 +5,7 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 import { expectEmitPayloadType } from '../utils/types'
 
 describe('InputMenu', () => {
@@ -107,6 +107,13 @@ describe('InputMenu', () => {
       const input = wrapper.findComponent({ name: 'ComboboxRoot' })
       await input.vm.$emit('update:open', false)
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+
+    test('remove-tag event', async () => {
+      const wrapper = mount(InputMenu, { props: { modelValue: ['Option 1'], items: ['Option 1', 'Option 2'], multiple: true } })
+      const input = wrapper.findComponent({ name: 'TagsInputRoot' })
+      await input.vm.$emit('remove-tag', 'Option 1')
+      expect(wrapper.emitted()).toMatchObject({ 'remove-tag': [['Option 1']] })
     })
   })
 

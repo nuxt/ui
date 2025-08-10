@@ -40,6 +40,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'قبلی',
       next: 'بعدی',
+      dots: 'اسلاید مورد نظر برای نمایش را انتخاب کنید',
       goto: 'رفتن به اسلاید {slide}'
     },
     modal: {
@@ -53,6 +54,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'داده‌ای موجود نیست'
+    },
+    fileUpload: {
+      removeFile: 'حذف {filename}'
     }
   }
 })

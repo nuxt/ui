@@ -5,7 +5,7 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/radio-group'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 
 describe('RadioGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -122,7 +122,7 @@ describe('RadioGroup', () => {
     test('no label for=... on FormField', async () => {
       const { wrapper } = await createForm()
       const formFieldLabel = wrapper.findAll('label').map(label => label.attributes()).filter(label => !label.for?.includes('Option'))[0]
-      expect(formFieldLabel.for).toBeUndefined()
+      expect(formFieldLabel?.for).toBeUndefined()
     })
   })
 })

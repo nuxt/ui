@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Předchozí',
       next: 'Další',
+      dots: 'Vyberte snímek k zobrazení',
       goto: 'Přejít na {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Žádná data'
+    },
+    fileUpload: {
+      removeFile: 'Odebrat {filename}'
     }
   }
 })

@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Anterior',
       next: 'Următor',
+      dots: 'Alegeți diapozitivul de afișat',
       goto: 'Mergi la diapozitivul {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Nu există date'
+    },
+    fileUpload: {
+      removeFile: 'Elimină {filename}'
     }
   }
 })

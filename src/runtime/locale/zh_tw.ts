@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: '上一頁',
       next: '下一頁',
+      dots: '選擇要顯示的投影片',
       goto: '跳轉到第 {slide} 頁'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: '沒有資料'
+    },
+    fileUpload: {
+      removeFile: '移除 {filename}'
     }
   }
 })

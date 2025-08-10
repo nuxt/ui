@@ -177,6 +177,8 @@ import UBadge from './Badge.vue'
 import UPopover from './Popover.vue'
 import UTooltip from './Tooltip.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(defineProps<NavigationMenuProps<T>>(), {
   orientation: 'horizontal',
   contentOrientation: 'horizontal',
@@ -270,7 +272,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
       <component :is="orientation === 'vertical' && item.children?.length && !collapsed ? AccordionTrigger : 'span'" v-if="(!collapsed || orientation !== 'vertical') && (item.badge || (orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>])" as="span" :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })" @click.stop.prevent>
         <slot :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)" :item="item" :active="active" :index="index">
           <UBadge
-            v-if="item.badge"
+            v-if="item.badge !== undefined"
             color="neutral"
             variant="outline"
             :size="((item.ui?.linkTrailingBadgeSize || props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
@@ -392,7 +394,7 @@ function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0) {
     </component>
   </DefineItemTemplate>
 
-  <NavigationMenuRoot v-bind="rootProps" :data-collapsed="collapsed" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <NavigationMenuRoot v-bind="{ ...rootProps, ...$attrs }" :data-collapsed="collapsed" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="list-leading" />
 
     <template v-for="(list, listIndex) in lists" :key="`list-${listIndex}`">

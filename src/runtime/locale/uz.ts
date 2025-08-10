@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Ortga',
       next: 'Oldinga',
+      dots: 'Koʻrsatish uchun slaydni tanlang',
       goto: '{slide}-slaydga o‘tish'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Maʼlumot yoʻq'
+    },
+    fileUpload: {
+      removeFile: '{filename}ni oʻchirish'
     }
   }
 })

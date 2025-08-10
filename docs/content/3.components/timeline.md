@@ -6,7 +6,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Timeline.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -267,3 +266,7 @@ Use the available slots to create a more complex Timeline.
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

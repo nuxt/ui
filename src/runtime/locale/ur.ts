@@ -40,6 +40,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'پچھلا',
       next: 'اگلا',
+      dots: 'دکھانے کے لیے سلائیڈ منتخب کریں',
       goto: 'سلائیڈ {slide} پر جائیں'
     },
     modal: {
@@ -53,6 +54,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'کوئی ڈیٹا نہیں'
+    },
+    fileUpload: {
+      removeFile: '{filename} ہٹائیں'
     }
   }
 })

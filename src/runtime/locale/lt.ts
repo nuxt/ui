@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Atgal',
       next: 'Pirmyn',
+      dots: 'Pasirinkite skaidrę rodymui',
       goto: 'Eiti į skaidrę {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Nėra duomenų'
+    },
+    fileUpload: {
+      removeFile: 'Pašalinti {filename}'
     }
   }
 })

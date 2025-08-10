@@ -7,6 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     close: '',
     back: 'p-0',
     content: 'relative overflow-hidden flex flex-col',
+    footer: 'p-1',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
     group: 'p-1 isolate',
     empty: 'py-6 text-center text-sm text-muted',
@@ -22,7 +23,7 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailingHighlightedIcon: 'shrink-0 size-5 text-dimmed hidden group-data-highlighted:inline-flex',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0 gap-0.5',
     itemTrailingKbdsSize: 'md',
-    itemLabel: 'truncate space-x-1 rtl:space-x-reverse text-dimmed',
+    itemLabel: 'truncate space-x-1 text-dimmed',
     itemLabelBase: 'text-highlighted [&>mark]:text-inverted [&>mark]:bg-primary',
     itemLabelPrefix: 'text-default',
     itemLabelSuffix: 'text-dimmed [&>mark]:text-inverted [&>mark]:bg-primary'

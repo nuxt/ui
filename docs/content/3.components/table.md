@@ -83,6 +83,9 @@ Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/lat
   - `class`:
     - `td`: [The classes to apply to the `td` element.]{class="text-muted"}
     - `th`: [The classes to apply to the `th` element.]{class="text-muted"}
+  - `style`:
+    - `td`: [The style to apply to the `td` element.]{class="text-muted"}
+    - `th`: [The style to apply to the `th` element.]{class="text-muted"}
 
 In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
@@ -112,6 +115,8 @@ Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/
 
 - `class`:
   - `tr`: [The classes to apply to the `tr` element.]{class="text-muted"}
+- `style`:
+  - `tr`: [The style to apply to the `tr` element.]{class="text-muted"}
 
 ### Loading
 
@@ -333,7 +338,7 @@ class: '!p-0'
 You can use this to navigate to a page, open a modal or even to select the row manually.
 ::
 
-### With row context menu event :badge{label="Soon" class="align-text-top"}
+### With row context menu event :badge{label="New" class="align-text-top"}
 
 You can add a `@contextmenu` listener to make rows right clickable and wrap the Table in a [ContextMenu](/components/context-menu) component to display row actions for example.
 
@@ -353,7 +358,7 @@ class: '!p-0'
 ---
 ::
 
-### With row hover event :badge{label="Soon" class="align-text-top"}
+### With row hover event :badge{label="New" class="align-text-top"}
 
 You can add a `@hover` listener to make rows hoverable and use a [Popover](/components/popover) or a [Tooltip](/components/tooltip) component to display row details for example.
 
@@ -377,7 +382,7 @@ class: '!p-0'
 This example is similar as the Popover [with following cursor example](/components/popover#with-following-cursor) and uses a [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to prevent the Popover from opening and closing too quickly when moving the cursor from one row to another.
 ::
 
-### With column footer :badge{label="Soon" class="align-text-top"}
+### With column footer :badge{label="New" class="align-text-top"}
 
 You can add a `footer` property to the column definition to render a footer for the column.
 
@@ -626,3 +631,7 @@ This will give you access to the following:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

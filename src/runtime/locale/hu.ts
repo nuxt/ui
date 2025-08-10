@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Előző',
       next: 'Következő',
+      dots: 'Válassza ki a megjelenítendő diát',
       goto: 'Ugrás ide {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Nincs adat'
+    },
+    fileUpload: {
+      removeFile: '{filename} eltávolítása'
     }
   }
 })

@@ -39,6 +39,7 @@ export default defineLocale<Messages>({
     carousel: {
       prev: 'Trước',
       next: 'Sau',
+      dots: 'Chọn slide để hiển thị',
       goto: 'Đi tới ô {slide}'
     },
     modal: {
@@ -52,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Không có dữ liệu'
+    },
+    fileUpload: {
+      removeFile: 'Xóa {filename}'
     }
   }
 })

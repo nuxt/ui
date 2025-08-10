@@ -122,7 +122,7 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
 
       if (shortcut.enabled) {
         e.preventDefault()
-        shortcut.handler()
+        shortcut.handler(e)
       }
       clearChainedInput()
       return
