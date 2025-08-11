@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { animate } from 'motion-v'
+import { joinURL } from 'ufo'
 
 const { data: page } = await useAsyncData('figma', () => queryCollection('figma').first())
 if (!page.value) {
@@ -14,10 +15,6 @@ useSeoMeta({
   ogTitle: page.value.title,
   ogDescription: page.value.description,
   ogImage: joinURL(url, '/figma/og-image.png')
-})
-
-defineOgImageComponent('Docs', {
-  headline: 'Community'
 })
 
 const video = ref<HTMLVideoElement | null>(null)
