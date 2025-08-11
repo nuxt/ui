@@ -22,7 +22,9 @@ export const defaultOptions = {
   theme: {
     colors: undefined,
     transitions: true
-  }
+  },
+  mdc: false,
+  content: false
 }
 
 export const resolveColors = (colors?: string[]) => {

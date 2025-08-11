@@ -5,57 +5,127 @@ export default defineLocale<Messages>({
   name: 'Тоҷикӣ',
   code: 'tj',
   messages: {
-    inputMenu: {
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      noData: 'Маълумот нест',
-      create: '"{label}" созед'
-    },
-    calendar: {
-      prevYear: 'Соли гузашта',
-      nextYear: 'Соли оянда',
-      prevMonth: 'Моҳи гузашта',
-      nextMonth: 'Моҳи оянда'
-    },
-    inputNumber: {
-      increment: 'Зиёд кардан',
-      decrement: 'Кам кардан'
-    },
-    commandPalette: {
-      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      noData: 'Маълумот нест',
-      close: 'Бастан',
-      back: 'Бозгашт'
-    },
-    selectMenu: {
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      noData: 'Маълумот нест',
-      create: '"{label}" созед',
-      search: 'Ҷустуҷӯ...'
-    },
-    toast: {
+    alert: {
       close: 'Бастан'
     },
+    authForm: {
+      hidePassword: 'Пинҳон кардани парол',
+      showPassword: 'Намоиши парол',
+      submit: 'Идома додан'
+    },
+    banner: {
+      close: 'Пӯшидан'
+    },
+    calendar: {
+      nextMonth: 'Моҳи оянда',
+      nextYear: 'Соли оянда',
+      prevMonth: 'Моҳи гузашта',
+      prevYear: 'Соли гузашта'
+    },
     carousel: {
-      prev: 'Қаблӣ',
-      next: 'Баъдӣ',
       dots: 'Слайдро барои намоиш интихоб кунед',
-      goto: 'Ба слайди {slide} гузаред'
+      goto: 'Ба слайди {slide} гузаред',
+      next: 'Баъдӣ',
+      prev: 'Қаблӣ'
+    },
+    chatPrompt: {
+      placeholder: 'Пайём ворид кунед...'
+    },
+    chatPromptSubmit: {
+      label: 'Фиристодан'
+    },
+    colorMode: {
+      dark: 'Торик',
+      light: 'Рӯшно',
+      switchToDark: 'Гузариш ба ҳолати торик',
+      switchToLight: 'Гузариш ба ҳолати рӯшно',
+      system: 'Система'
+    },
+    commandPalette: {
+      back: 'Бозгашт',
+      close: 'Бастан',
+      noData: 'Маълумот нест',
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...'
+    },
+    contentSearch: {
+      links: 'Пайвандҳо',
+      theme: 'Мавзӯъ'
+    },
+    contentSearchButton: {
+      label: 'Ҷустуҷӯ'
+    },
+    contentToc: {
+      title: 'Мундариҷа'
+    },
+    dashboardSearch: {
+      theme: 'Мавзӯъ'
+    },
+    dashboardSearchButton: {
+      label: 'Ҷустуҷӯ'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Кам кардан',
+      expand: 'Васеъ кардан'
+    },
+    dashboardSidebarToggle: {
+      close: 'Пӯшидан',
+      open: 'Кушодан'
+    },
+    error: {
+      clear: 'Тоза кардан'
+    },
+    fileUpload: {
+      removeFile: '{filename}-ро хориҷ кунед'
+    },
+    header: {
+      close: 'Пӯшидан',
+      open: 'Кушодан'
+    },
+    inputMenu: {
+      create: '"{label}" созед',
+      noData: 'Маълумот нест',
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
+    },
+    inputNumber: {
+      decrement: 'Кам кардан',
+      increment: 'Зиёд кардан'
     },
     modal: {
       close: 'Бастан'
     },
-    slideover: {
-      close: 'Бастан'
+    pricingTable: {
+      caption: 'Ҷадвали нархҳо'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Кам кардан',
+        name: 'код',
+        openText: 'Васеъ кардан'
+      },
+      collapsible: {
+        closeText: 'Пинҳон кардан',
+        name: 'хусусиятҳо',
+        openText: 'Намоиш додан'
+      },
+      pre: {
+        copy: 'Нусха бардоштан'
+      }
+    },
+    selectMenu: {
+      create: '"{label}" созед',
+      noData: 'Маълумот нест',
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      search: 'Ҷустуҷӯ...'
+    },
+    slideover: {
       close: 'Бастан'
     },
     table: {
       noData: 'Маълумот нест'
     },
-    fileUpload: {
-      removeFile: '{filename}-ро хориҷ кунед'
+    toast: {
+      close: 'Бастан'
     }
   }
 })

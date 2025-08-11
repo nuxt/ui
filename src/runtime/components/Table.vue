@@ -36,7 +36,7 @@ import type {
   VisibilityState
 } from '@tanstack/vue-table'
 import theme from '#build/ui/table'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 declare module '@tanstack/table-core' {
 

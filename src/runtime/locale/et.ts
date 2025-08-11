@@ -5,57 +5,127 @@ export default defineLocale<Messages>({
   name: 'Eesti',
   code: 'et',
   messages: {
-    inputMenu: {
-      noMatch: 'Pole vastavaid andmeid',
-      noData: 'Pole andmeid',
-      create: 'Loo "{label}"'
-    },
-    calendar: {
-      prevYear: 'Eelmine aasta',
-      nextYear: 'Järgmine aasta',
-      prevMonth: 'Eelmine kuu',
-      nextMonth: 'Järgmine kuu'
-    },
-    inputNumber: {
-      increment: 'Suurenda',
-      decrement: 'Vähenda'
-    },
-    commandPalette: {
-      placeholder: 'Sisesta käsk või otsi...',
-      noMatch: 'Pole vastavaid andmeid',
-      noData: 'Pole andmeid',
-      close: 'Sulge',
-      back: 'Tagasi'
-    },
-    selectMenu: {
-      noMatch: 'Pole vastavaid andmeid',
-      noData: 'Pole andmeid',
-      create: 'Loo "{label}"',
-      search: 'Otsi...'
-    },
-    toast: {
+    alert: {
       close: 'Sulge'
     },
+    authForm: {
+      hidePassword: 'Peida parool',
+      showPassword: 'Näita parooli',
+      submit: 'Jätka'
+    },
+    banner: {
+      close: 'Sulge'
+    },
+    calendar: {
+      nextMonth: 'Järgmine kuu',
+      nextYear: 'Järgmine aasta',
+      prevMonth: 'Eelmine kuu',
+      prevYear: 'Eelmine aasta'
+    },
     carousel: {
-      prev: 'Eel',
-      next: 'Järg',
       dots: 'Valige kuvatav slaid',
-      goto: 'Mine slaidile {slide}'
+      goto: 'Mine slaidile {slide}',
+      next: 'Järg',
+      prev: 'Eel'
+    },
+    chatPrompt: {
+      placeholder: 'Siia kirjutage oma sõnum...'
+    },
+    chatPromptSubmit: {
+      label: 'Saada'
+    },
+    colorMode: {
+      dark: 'Tume',
+      light: 'Hele',
+      switchToDark: 'Lülitu tumedasse režiimi',
+      switchToLight: 'Lülitu heledasse režiimi',
+      system: 'Süsteem'
+    },
+    commandPalette: {
+      back: 'Tagasi',
+      close: 'Sulge',
+      noData: 'Pole andmeid',
+      noMatch: 'Pole vastavaid andmeid',
+      placeholder: 'Sisesta käsk või otsi...'
+    },
+    contentSearch: {
+      links: 'Lingid',
+      theme: 'Teema'
+    },
+    contentSearchButton: {
+      label: 'Otsi...'
+    },
+    contentToc: {
+      title: 'Sellel lehel'
+    },
+    dashboardSearch: {
+      theme: 'Teema'
+    },
+    dashboardSearchButton: {
+      label: 'Otsi...'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Ahenda külgriba',
+      expand: 'Laienda külgriba'
+    },
+    dashboardSidebarToggle: {
+      close: 'Sulge külgriba',
+      open: 'Ava külgriba'
+    },
+    error: {
+      clear: 'Tagasi avalehele'
+    },
+    fileUpload: {
+      removeFile: 'Eemalda {filename}'
+    },
+    header: {
+      close: 'Sulge menüü',
+      open: 'Ava menüü'
+    },
+    inputMenu: {
+      create: 'Loo "{label}"',
+      noData: 'Pole andmeid',
+      noMatch: 'Pole vastavaid andmeid'
+    },
+    inputNumber: {
+      decrement: 'Vähenda',
+      increment: 'Suurenda'
     },
     modal: {
       close: 'Sulge'
     },
-    slideover: {
-      close: 'Sulge'
+    pricingTable: {
+      caption: 'Hinna plaanide võrdlus'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Ahenda',
+        name: 'kood',
+        openText: 'Laienda'
+      },
+      collapsible: {
+        closeText: 'Peida',
+        name: 'omadused',
+        openText: 'Näita'
+      },
+      pre: {
+        copy: 'Kopeeri kood lõikelauale'
+      }
+    },
+    selectMenu: {
+      create: 'Loo "{label}"',
+      noData: 'Pole andmeid',
+      noMatch: 'Pole vastavaid andmeid',
+      search: 'Otsi...'
+    },
+    slideover: {
       close: 'Sulge'
     },
     table: {
       noData: 'Pole andmeid'
     },
-    fileUpload: {
-      removeFile: 'Eemalda {filename}'
+    toast: {
+      close: 'Sulge'
     }
   }
 })

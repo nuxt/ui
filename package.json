@@ -111,6 +111,7 @@
     "release": "release-it"
   },
   "dependencies": {
+    "@ai-sdk/vue": "^1.2.12",
     "@iconify/vue": "^5.0.0",
     "@internationalized/date": "^3.8.2",
     "@internationalized/number": "^3.6.4",
@@ -141,6 +142,7 @@
     "knitwork": "^1.2.0",
     "magic-string": "^0.30.17",
     "mlly": "^1.7.4",
+    "motion-v": "^1.7.0",
     "ohash": "^2.0.11",
     "pathe": "^2.0.3",
     "reka-ui": "2.4.1",
@@ -156,6 +158,7 @@
     "vue-component-type-helpers": "^3.0.5"
   },
   "devDependencies": {
+    "@nuxt/content": "^3.6.3",
     "@nuxt/eslint-config": "^1.8.0",
     "@nuxt/module-builder": "^1.0.1",
     "@nuxt/test-utils": "^3.19.2",

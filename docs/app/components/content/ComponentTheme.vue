@@ -3,10 +3,8 @@ import json5 from 'json5'
 import { camelCase } from 'scule'
 import { hash } from 'ohash'
 import * as theme from '#build/ui'
-import * as themePro from '#build/ui-pro'
 
 const props = defineProps<{
-  pro?: boolean
   prose?: boolean
   slug?: string
   extra?: string[]
@@ -20,7 +18,7 @@ const camelName = camelCase(name)
 
 const strippedCompoundVariants = ref(false)
 
-const computedTheme = computed(() => props.pro ? props.prose ? themePro.prose : themePro : theme)
+const computedTheme = computed(() => props.prose ? theme.prose : theme)
 
 const strippedTheme = computed(() => {
   const strippedTheme = {
@@ -61,8 +59,6 @@ const strippedTheme = computed(() => {
 })
 
 const component = computed(() => {
-  const baseKey = props.pro ? 'uiPro' : 'ui'
-
   const content = props.prose
     ? { prose: { [camelName]: strippedTheme.value } }
     : { [camelName]: strippedTheme.value }
@@ -75,15 +71,14 @@ const component = computed(() => {
   }
 
   return {
-    [baseKey]: content
+    ui: content
   }
 })
 
 const themeLink = computed(() => {
-  const repo = props.pro ? 'ui-pro' : 'ui'
   const slug = name.startsWith('content') ? `content/${name}` : name
 
-  return `https://github.com/nuxt/${repo}/blob/v4/src/theme/${slug}.ts`
+  return `https://github.com/nuxt/ui/blob/v4/src/theme/${slug}.ts`
 })
 
 const { data: ast } = await useAsyncData(`component-theme-${camelName}-${hash({ props })}`, async () => {
@@ -96,7 +91,7 @@ export default defineAppConfig(${json5.stringify(component.value, null, 2).repla
 
 ::
 
-::code-collapse{class="vue-only ui-only"}
+::code-collapse{class="vue-only"}
 
 \`\`\`ts [vite.config.ts]
 import { defineConfig } from 'vite'
@@ -107,26 +102,6 @@ export default defineConfig({
   plugins: [
     vue(),
     ui(${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')
-      .split('\n')
-      .map((line, i) => i === 0 ? line : `    ${line}`)
-      .join('\n')})
-  ]
-})
-\`\`\`
-
-::
-
-::code-collapse{class="vue-only ui-pro-only"}
-
-\`\`\`ts [vite.config.ts]
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import uiPro from '@nuxt/ui-pro/vite'
-
-export default defineConfig({
-  plugins: [
-    vue(),
-    uiPro(${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')
       .split('\n')
       .map((line, i) => i === 0 ? line : `    ${line}`)
       .join('\n')})

@@ -1,5 +1,6 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImportsDir, addVitePlugin, addPlugin, installModule, hasNuxtModule } from '@nuxt/kit'
+import type { HookResult } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { defaultOptions, getDefaultUiConfig, resolveColors } from './defaults'
 import { name, version } from '../package.json'
@@ -13,40 +14,40 @@ export interface ModuleOptions {
   /**
    * Prefix for components
    * @defaultValue `U`
-   * @link https://ui.nuxt.com/getting-started/installation/nuxt#prefix
+   * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#prefix
    */
   prefix?: string
 
   /**
    * Enable or disable `@nuxt/fonts` module
    * @defaultValue `true`
-   * @link https://ui.nuxt.com/getting-started/installation/nuxt#fonts
+   * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#fonts
    */
   fonts?: boolean
 
   /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
-   * @link https://ui.nuxt.com/getting-started/installation/nuxt#colormode
+   * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#colormode
    */
   colorMode?: boolean
 
   /**
    * Customize how the theme is generated
-   * @link https://ui.nuxt.com/getting-started/theme
+   * @link https://ui.nuxt.com/docs/getting-started/theme
    */
   theme?: {
     /**
      * Define the color aliases available for components
      * @defaultValue `['primary', 'secondary', 'success', 'info', 'warning', 'error']`
-     * @link https://ui.nuxt.com/getting-started/installation/nuxt#themecolors
+     * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#themecolors
      */
     colors?: Color[]
 
     /**
      * Enable or disable transitions on components
      * @defaultValue `true`
-     * @link https://ui.nuxt.com/getting-started/installation/nuxt#themetransitions
+     * @link https://ui.nuxt.com/docs/getting-started/installation/nuxt#themetransitions
      */
     transitions?: boolean
 
@@ -64,13 +65,32 @@ export interface ModuleOptions {
       size?: Size
     }
   }
+
+  /**
+   * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
+   * @defaultValue false
+   */
+  mdc?: boolean
+  /**
+   * Force the import of content & prose components even if `@nuxt/content` is not installed
+   * @defaultValue false
+   */
+  content?: boolean
+}
+
+declare module '#app' {
+  interface RuntimeNuxtHooks {
+    'dashboard:search:toggle': () => HookResult
+    'dashboard:sidebar:toggle': () => HookResult
+    'dashboard:sidebar:collapse': (value: boolean) => HookResult
+  }
 }
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name,
     version,
-    docs: 'https://ui.nuxt.com/getting-started/installation/nuxt',
+    docs: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
     configKey: 'ui',
     compatibility: {
       nuxt: '>=3.16.0'
@@ -127,10 +147,76 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
+    if ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content)) {
+      nuxt.options.mdc = defu(nuxt.options.mdc, {
+        highlight: {
+          theme: {
+            light: 'material-theme-lighter',
+            default: 'material-theme',
+            dark: 'material-theme-palenight'
+          }
+        },
+        components: {
+          map: {
+            'accordion': 'ProseAccordion',
+            'accordion-item': 'ProseAccordionItem',
+            'badge': 'ProseBadge',
+            'callout': 'ProseCallout',
+            'card': 'ProseCard',
+            'card-group': 'ProseCardGroup',
+            'caution': 'ProseCaution',
+            'code-collapse': 'ProseCodeCollapse',
+            'code-group': 'ProseCodeGroup',
+            'code-icon': 'ProseCodeIcon',
+            'code-preview': 'ProseCodePreview',
+            'code-tree': 'ProseCodeTree',
+            'collapsible': 'ProseCollapsible',
+            'field': 'ProseField',
+            'field-group': 'ProseFieldGroup',
+            'icon': 'ProseIcon',
+            'kbd': 'ProseKbd',
+            'note': 'ProseNote',
+            'steps': 'ProseSteps',
+            'tabs': 'ProseTabs',
+            'tabs-item': 'ProseTabsItem',
+            'tip': 'ProseTip',
+            'warning': 'ProseWarning'
+          }
+        }
+      })
+
+      addComponentsDir({
+        path: resolve('./runtime/components/prose'),
+        pathPrefix: false,
+        prefix: 'Prose',
+        global: true
+      })
+    }
+
+    if ((hasNuxtModule('@nuxt/content') || options.content)) {
+      addComponentsDir({
+        path: resolve('./runtime/components/content'),
+        pathPrefix: false,
+        prefix: options.prefix
+      })
+    }
+
+    if (hasNuxtModule('@nuxtjs/color-mode')) {
+      addComponentsDir({
+        path: resolve('./runtime/components/color-mode'),
+        pathPrefix: false,
+        prefix: options.prefix
+      })
+    } else {
+      // Stub `useColorMode` composable used in `DashboardSearch` and `ContentSearch` components
+      addImportsDir(resolve('./runtime/composables/color-mode'))
+    }
+
     addComponentsDir({
       path: resolve('./runtime/components'),
+      pathPrefix: false,
       prefix: options.prefix,
-      pathPrefix: false
+      ignore: ['color-mode/**', 'content/**', 'prose/**']
     })
 
     addImportsDir(resolve('./runtime/composables'))

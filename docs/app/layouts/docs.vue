@@ -1,7 +1,66 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
+import { findPageChildren } from '@nuxt/content/utils'
+
+const route = useRoute()
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+
+const categories = [{
+  id: 'layout',
+  title: 'Layout'
+}, {
+  id: 'element',
+  title: 'Element'
+}, {
+  id: 'form',
+  title: 'Form'
+}, {
+  id: 'data',
+  title: 'Data'
+}, {
+  id: 'navigation',
+  title: 'Navigation'
+}, {
+  id: 'overlay',
+  title: 'Overlay'
+}, {
+  id: 'page',
+  title: 'Page'
+}, {
+  id: 'dashboard',
+  title: 'Dashboard'
+}, {
+  id: 'ai',
+  title: 'AI'
+}, {
+  id: 'color-mode',
+  title: 'Color Mode'
+}, {
+  id: 'i18n',
+  title: 'Internationalization (i18n)'
+}]
+
+function groupChildrenByCategory(items: ContentNavigationItem[]): ContentNavigationItem[] {
+  const childrenGroupedByCategory = items.reduce((acc, child) => {
+    if (child.category) {
+      acc[child.category as string] = [...(acc[child.category as string] || []), child]
+    }
+    return acc
+  }, {} as Record<string, ContentNavigationItem[]>)
+
+  return categories.map(category => ({
+    ...category,
+    path: `/docs/components`,
+    children: childrenGroupedByCategory[category.id]
+  }))
+}
+
+const children = computed(() => {
+  const children = findPageChildren(navigation?.value, `/docs/${route.params.slug?.[0]}`, { indexAsChild: true })
+
+  return route.params.slug?.[0] === 'components' ? groupChildrenByCategory(children) : children
+})
 </script>
 
 <template>
@@ -10,22 +69,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
       <UPage>
         <template #left>
           <UPageAside>
-            <template #top>
-              <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] -mx-2.5">
-                <FrameworkSelect />
-                <ModuleSelect />
-              </div>
-            </template>
-
-            <UContentNavigation :navigation="navigation" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }">
-              <template #link-title="{ link }">
-                <span class="inline-flex items-center gap-0.5">
-                  {{ link.title }}
-
-                  <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-primary">PRO</sup>
-                </span>
-              </template>
-            </UContentNavigation>
+            <UContentNavigation :navigation="children" :ui="{ linkTrailingBadge: 'font-semibold uppercase' }" />
           </UPageAside>
         </template>
 

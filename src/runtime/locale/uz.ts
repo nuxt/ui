@@ -5,57 +5,127 @@ export default defineLocale<Messages>({
   name: 'Oʻzbek',
   code: 'uz',
   messages: {
-    inputMenu: {
-      noMatch: 'Mos keluvchi natija topilmadi',
-      noData: 'Maʼlumot yoʻq',
-      create: '"{label}" yaratish'
-    },
-    calendar: {
-      prevYear: 'Oldingi yil',
-      nextYear: 'Keyingi yil',
-      prevMonth: 'Oldingi oy',
-      nextMonth: 'Keyingi oy'
-    },
-    inputNumber: {
-      increment: 'Qoʻshish',
-      decrement: 'Ayirish'
-    },
-    commandPalette: {
-      placeholder: 'Buyruq kiriting yoki qidiring...',
-      noMatch: 'Mos keluvchi natija topilmadi',
-      noData: 'Maʼlumot yoʻq',
-      close: 'Yopish',
-      back: 'Orqaga'
-    },
-    selectMenu: {
-      noMatch: 'Mos keluvchi natija topilmadi',
-      noData: 'Maʼlumot yoʻq',
-      create: '"{label}" yaratish',
-      search: 'Qidirish...'
-    },
-    toast: {
+    alert: {
       close: 'Yopish'
     },
+    authForm: {
+      hidePassword: 'Parolni yashirish',
+      showPassword: 'Parolni ko\'rsatish',
+      submit: 'Davom etish'
+    },
+    banner: {
+      close: 'Yopish'
+    },
+    calendar: {
+      nextMonth: 'Keyingi oy',
+      nextYear: 'Keyingi yil',
+      prevMonth: 'Oldingi oy',
+      prevYear: 'Oldingi yil'
+    },
     carousel: {
-      prev: 'Ortga',
-      next: 'Oldinga',
       dots: 'Koʻrsatish uchun slaydni tanlang',
-      goto: '{slide}-slaydga o‘tish'
+      goto: '{slide}-slaydga o\'tish',
+      next: 'Oldinga',
+      prev: 'Ortga'
+    },
+    chatPrompt: {
+      placeholder: 'Bu yerda savolingizni yozing...'
+    },
+    chatPromptSubmit: {
+      label: 'Jo\'natish'
+    },
+    colorMode: {
+      dark: 'Qorong\'i',
+      light: 'Yorug\'',
+      switchToDark: 'Qorong\'i rejimga o\'tish',
+      switchToLight: 'Yorug\' rejimga o\'tish',
+      system: 'Tizim'
+    },
+    commandPalette: {
+      back: 'Orqaga',
+      close: 'Yopish',
+      noData: 'Maʼlumot yoʻq',
+      noMatch: 'Mos keluvchi natija topilmadi',
+      placeholder: 'Buyruq kiriting yoki qidiring...'
+    },
+    contentSearch: {
+      links: 'Havolalar',
+      theme: 'Mavzu'
+    },
+    contentSearchButton: {
+      label: 'Qidirish...'
+    },
+    contentToc: {
+      title: 'Ushbu sahifada'
+    },
+    dashboardSearch: {
+      theme: 'Mavzu'
+    },
+    dashboardSearchButton: {
+      label: 'Qidirish...'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Yon panelni yig\'ish',
+      expand: 'Yon panelni kengaytirish'
+    },
+    dashboardSidebarToggle: {
+      close: 'Yon panelni yopish',
+      open: 'Yon panelni ochish'
+    },
+    error: {
+      clear: 'Bosh sahifaga qaytish'
+    },
+    fileUpload: {
+      removeFile: '{filename}ni oʻchirish'
+    },
+    header: {
+      close: 'Menyuni yopish',
+      open: 'Menyuni ochish'
+    },
+    inputMenu: {
+      create: '"{label}" yaratish',
+      noData: 'Maʼlumot yoʻq',
+      noMatch: 'Mos keluvchi natija topilmadi'
+    },
+    inputNumber: {
+      decrement: 'Ayirish',
+      increment: 'Qoʻshish'
     },
     modal: {
       close: 'Yopish'
     },
-    slideover: {
-      close: 'Yopish'
+    pricingTable: {
+      caption: 'Narx planlarini taqqoslash'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Yig\'ish',
+        name: 'kod',
+        openText: 'Kengaytirish'
+      },
+      collapsible: {
+        closeText: 'Yashirish',
+        name: 'xususiyatlar',
+        openText: 'Ko\'rsatish'
+      },
+      pre: {
+        copy: 'Koddan buferga nusxa olish'
+      }
+    },
+    selectMenu: {
+      create: '"{label}" yaratish',
+      noData: 'Maʼlumot yoʻq',
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish...'
+    },
+    slideover: {
       close: 'Yopish'
     },
     table: {
       noData: 'Maʼlumot yoʻq'
     },
-    fileUpload: {
-      removeFile: '{filename}ni oʻchirish'
+    toast: {
+      close: 'Yopish'
     }
   }
 })

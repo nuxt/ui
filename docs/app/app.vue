@@ -6,12 +6,12 @@ const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content', ['framework', 'module']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category']))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
 })
 
-const links = useLinks()
+const links = useHeaderLinks()
 const searchLinks = useSearchLinks()
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
@@ -42,7 +42,7 @@ useServerSeoMeta({
 
 useFaviconFromTheme()
 
-const { frameworks, modules } = useSharedData()
+const { frameworks } = useSharedData()
 const { mappedNavigation, filteredNavigation } = useContentNavigation(navigation)
 
 provide('navigation', mappedNavigation)
@@ -52,40 +52,44 @@ provide('navigation', mappedNavigation)
   <UApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
-    <template v-if="!route.path.startsWith('/examples')">
-      <Banner />
+    <div :class="[route.path.startsWith('/docs/') && 'root']">
+      <template v-if="!route.path.startsWith('/examples')">
+        <Banner />
 
-      <Header :links="links" />
-    </template>
+        <Header :links="links" />
+      </template>
 
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
 
-    <template v-if="!route.path.startsWith('/examples')">
-      <Footer />
+      <template v-if="!route.path.startsWith('/examples')">
+        <Footer />
 
-      <ClientOnly>
-        <LazyUContentSearch
-          :links="searchLinks"
-          :files="files"
-          :groups="[{
-            id: 'framework',
-            label: 'Framework',
-            items: frameworks
-          }, {
-            id: 'module',
-            label: 'Module',
-            items: modules
-          }]"
-          :navigation="filteredNavigation"
-          :fuse="{ resultLimit: 100 }"
-        />
-      </ClientOnly>
-    </template>
+        <ClientOnly>
+          <LazyUContentSearch
+            :links="searchLinks"
+            :files="files"
+            :groups="[{
+              id: 'framework',
+              label: 'Framework',
+              items: frameworks
+            }]"
+            :navigation="filteredNavigation"
+            :fuse="{ resultLimit: 120 }"
+          />
+        </ClientOnly>
+      </template>
+    </div>
   </UApp>
 </template>
 
 <style>
 /* Safelist (do not remove): [&>div]:*:my-0 [&>div]:*:w-full h-64 !px-0 !py-0 !pt-0 !pb-0 !p-0 !justify-start !justify-end !min-h-96 h-136 max-h-[341px] */
+
+@media (min-width: 1024px) {
+  .root {
+    --ui-header-height: 113px;
+  }
+}
 </style>

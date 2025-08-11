@@ -3,7 +3,8 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogConten
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
 import type { ButtonProps } from '../types'
-import type { EmitsToProps, ComponentConfig } from '../types/utils'
+import type { EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
 

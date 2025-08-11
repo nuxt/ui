@@ -3,8 +3,9 @@
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/dropdown-menu'
-import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, DynamicSlots, MergeTypes } from '../types'
-import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
+import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
+import type { ArrayOrNested, NestedItem, DynamicSlots, MergeTypes } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 

@@ -1,0 +1,982 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AuthForm > renders with as correctly 1`] = `
+"<section class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`AuthForm > renders with class correctly 1`] = `
+"<div class="w-full space-y-6 max-w-sm">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with description correctly 1`] = `
+"<div class="w-full space-y-6">
+  <div class="flex flex-col text-center">
+    <!--v-if-->
+    <!--v-if-->
+    <div class="mt-1 text-base text-pretty text-muted">Description</div>
+  </div>
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with description slot correctly 1`] = `
+"<div class="w-full space-y-6">
+  <div class="flex flex-col text-center">
+    <!--v-if-->
+    <!--v-if-->
+    <div class="mt-1 text-base text-pretty text-muted">Description</div>
+  </div>
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with disabled correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" disabled="" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" disabled="" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with fields correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with footer slot correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <div class="text-sm text-center text-muted mt-2">Footer</div>
+</div>"
+`;
+
+exports[`AuthForm > renders with header slot correctly 1`] = `
+"<div class="w-full space-y-6">
+  <div class="flex flex-col text-center">Header</div>
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with icon correctly 1`] = `
+"<div class="w-full space-y-6">
+  <div class="flex flex-col text-center">
+    <div class="mb-2"><span class="iconify i-lucide:user size-8 shrink-0 inline-block" aria-hidden="true"></span></div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with leading slot correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with loading correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" disabled="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true"></span><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with providers correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <div class="space-y-3"><button type="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"><span class="iconify i-simple-icons:google shrink-0 size-5" aria-hidden="true"></span><span class="truncate">Google</span>
+        <!--v-if-->
+      </button></div>
+    <div data-orientation="horizontal" role="separator" class="flex items-center align-center text-center w-full flex-row">
+      <div class="border-default w-full border-solid border-t"></div>
+      <div class="font-medium text-default flex mx-3 whitespace-nowrap"><span class="text-sm">or</span></div>
+      <div class="border-default w-full border-solid border-t"></div>
+    </div>
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with providers slot correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <div class="space-y-3">Providers</div>
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with separator correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with submit correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Submit</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with submit slot correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if-->Submit
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with title correctly 1`] = `
+"<div class="w-full space-y-6">
+  <div class="flex flex-col text-center">
+    <!--v-if-->
+    <div class="text-xl text-pretty font-semibold text-highlighted">Title</div>
+    <!--v-if-->
+  </div>
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with title slot correctly 1`] = `
+"<div class="w-full space-y-6">
+  <div class="flex flex-col text-center">
+    <!--v-if-->
+    <div class="text-xl text-pretty font-semibold text-highlighted">Title</div>
+    <!--v-if-->
+  </div>
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with ui correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <!--v-if--><button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`AuthForm > renders with validation slot correctly 1`] = `
+"<div class="w-full space-y-6">
+  <!--v-if-->
+  <div class="gap-y-6 flex flex-col">
+    <!--v-if-->
+    <!--v-if-->
+    <form id="v-0-0-0" class="space-y-5">
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-1" class="block font-medium text-default">Email</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" autocomplete="off" aria-invalid="false">
+            <!--v-if-->
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+      </div>
+      <div class="text-sm">
+        <div class="">
+          <div class="flex content-center items-center justify-between"><label for="v-0-0-2" class="block font-medium text-default">Password</label>
+            <!--v-if-->
+          </div>
+          <!--v-if-->
+        </div>
+        <div class="mt-1 relative">
+          <div class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+            <!--v-if--><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" aria-controls="password" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true"></span>
+            <!--v-if-->
+            <!--v-if--></button></span>
+          </div>
+          <!--v-if-->
+        </div>
+      </div>Validation<button type="submit" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <!--v-if--><span class="truncate">Continue</span>
+        <!--v-if-->
+      </button>
+    </form>
+  </div>
+  <!--v-if-->
+</div>"
+`;

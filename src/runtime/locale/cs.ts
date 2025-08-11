@@ -5,57 +5,127 @@ export default defineLocale<Messages>({
   name: 'Čeština',
   code: 'cs',
   messages: {
-    inputMenu: {
-      noMatch: 'Žádná shoda',
-      noData: 'Žádná data',
-      create: 'Vytvořit "{label}"'
-    },
-    calendar: {
-      prevYear: 'Předchozí rok',
-      nextYear: 'Další rok',
-      prevMonth: 'Předchozí měsíc',
-      nextMonth: 'Další měsíc'
-    },
-    inputNumber: {
-      increment: 'Zvýšit',
-      decrement: 'Snížit'
-    },
-    commandPalette: {
-      placeholder: 'Zadejte příkaz nebo hledejte...',
-      noMatch: 'Žádná shoda',
-      noData: 'Žádná data',
-      close: 'Zavřít',
-      back: 'Zpět'
-    },
-    selectMenu: {
-      noMatch: 'Žádná shoda',
-      noData: 'Žádná data',
-      create: 'Vytvořit "{label}"',
-      search: 'Hledat...'
-    },
-    toast: {
+    alert: {
       close: 'Zavřít'
     },
+    authForm: {
+      hidePassword: 'Skrýt heslo',
+      showPassword: 'Zobrazit heslo',
+      submit: 'Pokračovat'
+    },
+    banner: {
+      close: 'Zavřít'
+    },
+    calendar: {
+      nextMonth: 'Další měsíc',
+      nextYear: 'Další rok',
+      prevMonth: 'Předchozí měsíc',
+      prevYear: 'Předchozí rok'
+    },
     carousel: {
-      prev: 'Předchozí',
-      next: 'Další',
       dots: 'Vyberte snímek k zobrazení',
-      goto: 'Přejít na {slide}'
+      goto: 'Přejít na {slide}',
+      next: 'Další',
+      prev: 'Předchozí'
+    },
+    chatPrompt: {
+      placeholder: 'Zde napište svůj text...'
+    },
+    chatPromptSubmit: {
+      label: 'Odeslat'
+    },
+    colorMode: {
+      dark: 'Tmavý',
+      light: 'Světlý',
+      switchToDark: 'Přepnout na tmavý režim',
+      switchToLight: 'Přepnout na světlý režim',
+      system: 'Systémový'
+    },
+    commandPalette: {
+      back: 'Zpět',
+      close: 'Zavřít',
+      noData: 'Žádná data',
+      noMatch: 'Žádná shoda',
+      placeholder: 'Zadejte příkaz nebo hledejte...'
+    },
+    contentSearch: {
+      links: 'Odkazy',
+      theme: 'Téma'
+    },
+    contentSearchButton: {
+      label: 'Hledat...'
+    },
+    contentToc: {
+      title: 'Na této stránce'
+    },
+    dashboardSearch: {
+      theme: 'Téma'
+    },
+    dashboardSearchButton: {
+      label: 'Hledat...'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Sbalit postranní panel',
+      expand: 'Rozbalit postranní panel'
+    },
+    dashboardSidebarToggle: {
+      close: 'Zavřít postranní panel',
+      open: 'Otevřít postranní panel'
+    },
+    error: {
+      clear: 'Zpět na úvod'
+    },
+    fileUpload: {
+      removeFile: 'Odebrat {filename}'
+    },
+    header: {
+      close: 'Zavřít menu',
+      open: 'Otevřít menu'
+    },
+    inputMenu: {
+      create: 'Vytvořit "{label}"',
+      noData: 'Žádná data',
+      noMatch: 'Žádná shoda'
+    },
+    inputNumber: {
+      decrement: 'Snížit',
+      increment: 'Zvýšit'
     },
     modal: {
       close: 'Zavřít'
     },
-    slideover: {
-      close: 'Zavřít'
+    pricingTable: {
+      caption: 'Porovnání cenových plánů'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Sbalit',
+        name: 'kód',
+        openText: 'Rozbalit'
+      },
+      collapsible: {
+        closeText: 'Skrýt',
+        name: 'vlastnosti',
+        openText: 'Zobrazit'
+      },
+      pre: {
+        copy: 'Kopírovat kód do schránky'
+      }
+    },
+    selectMenu: {
+      create: 'Vytvořit "{label}"',
+      noData: 'Žádná data',
+      noMatch: 'Žádná shoda',
+      search: 'Hledat...'
+    },
+    slideover: {
       close: 'Zavřít'
     },
     table: {
       noData: 'Žádná data'
     },
-    fileUpload: {
-      removeFile: 'Odebrat {filename}'
+    toast: {
+      close: 'Zavřít'
     }
   }
 })
