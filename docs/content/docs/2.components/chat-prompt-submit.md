@@ -252,7 +252,7 @@ Pass the `status` prop and listen to the `stop` and `reload` events to control t
 ```vue [pages/\[id\\].vue] {2-4,7,11-15,19,24}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
-import { getTextFromMessage } from '@nuxt/ui/utils'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
 

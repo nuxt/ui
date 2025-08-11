@@ -387,7 +387,7 @@ Pass the `messages` prop alongside the `status` prop that will be used for the a
 ```vue [pages/\[id\\].vue] {2-5,8,12-16,20}
 <script setup lang="ts">
 import { Chat } from '@ai-sdk/vue'
-import { getTextFromMessage } from '@nuxt/ui/utils'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const input = ref('')
 
@@ -445,6 +445,10 @@ In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
 
 ```vue{3-5}
+<script setup lang="ts">
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
+</script>
+
 <template>
   <UChatMessages :messages="messages" :status="status">
     <template #content="{ message }">

@@ -1,5 +1,4 @@
 import { isEqual } from 'ohash/utils'
-import type { UIMessage } from 'ai'
 
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
   const result = {} as Pick<Data, Keys>
@@ -111,13 +110,6 @@ export function transformUI(ui: any, uiProp?: any) {
     acc[key] = typeof value === 'function' ? value({ class: uiProp?.[key] }) : value
     return acc
   }, uiProp || {})
-}
-
-export function getTextFromMessage(message: UIMessage) {
-  return message.parts
-    .filter(part => part.type === 'text')
-    .map(part => part.text)
-    .join('')
 }
 
 export * from './content'
