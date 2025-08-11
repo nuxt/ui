@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
+import type { TextareaProps, TextareaSlots } from '@nuxt/ui'
 import theme from '#build/ui/chat-prompt'
-import type { TextareaProps, TextareaSlots } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPrompt = ComponentConfig<typeof theme, AppConfig, 'chatPrompt'>
