@@ -1,9 +1,9 @@
 <script lang="ts">
+import type { ChatStatus } from 'ai'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt-submit'
 import type { ButtonProps, ButtonSlots } from '../types'
 import type { ComponentConfig } from '../types/tv'
-import type { ChatStatus } from 'ai'
 
 type ChatPromptSubmit = ComponentConfig<typeof theme, AppConfig, 'chatPromptSubmit'>
 
