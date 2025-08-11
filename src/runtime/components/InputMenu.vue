@@ -413,7 +413,6 @@ defineExpose({
   </DefineCreateItemTemplate>
 
   <ComboboxRoot
-    :id="id"
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
     :name="name"
@@ -425,7 +424,11 @@ defineExpose({
     @update:open="onUpdateOpen"
     @keydown.enter="$event.preventDefault()"
   >
-    <ComboboxAnchor :as-child="!multiple" :class="ui.base({ class: props.ui?.base })">
+    <ComboboxAnchor
+      :id="id"
+      :as-child="!multiple"
+      :class="ui.base({ class: props.ui?.base })"
+    >
       <TagsInputRoot
         v-if="multiple"
         v-slot="{ modelValue: tags }"
