@@ -29,6 +29,10 @@ function processNavigationItemIcon(item: ContentNavigationItem) {
   }
 }
 
+const categories = {
+  ai: 'AI'
+}
+
 function groupChildrenByCategory(item: ContentNavigationItem): ContentNavigationItem {
   if (!item.children?.length) {
     return item
@@ -48,7 +52,7 @@ function groupChildrenByCategory(item: ContentNavigationItem): ContentNavigation
   return {
     ...item,
     children: Object.entries(childrenGroupedByCategories).map(([key, children]) => ({
-      title: upperFirst(camelCase(key)),
+      title: categories[key as keyof typeof categories] || upperFirst(camelCase(key)),
       path: `/docs/${key}`,
       children: children?.map((child: any) => ({ ...child, icon: undefined }))
     }))

@@ -1,6 +1,6 @@
 ---
 description: Separates content horizontally or vertically.
-category: layout
+category: element
 links:
   - label: Separator
     icon: i-custom-reka-ui

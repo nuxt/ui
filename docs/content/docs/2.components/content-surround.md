@@ -29,7 +29,7 @@ props:
 
 Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/docs/components/icon).
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 collapse: true

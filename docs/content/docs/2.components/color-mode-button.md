@@ -15,7 +15,7 @@ links:
 
 The ColorModeButton component extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
-:component-code{pro prefix="color-mode"}
+::component-code{prefix="color-mode"}
 
 ::note
 The button defaults to `color="neutral"` and `variant="ghost"`.
@@ -76,7 +76,7 @@ export default defineConfig({
 
 As the button is wrapped in a [ClientOnly](https://nuxt.com/docs/api/components/client-only) component, you can pass a `fallback` slot to display a placeholder while the component is loading.
 
-::component-code{pro prefix="color-mode"}
+::component-code{prefix="color-mode"}
 ---
 prettier: true
 slots:

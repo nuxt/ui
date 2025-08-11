@@ -17,7 +17,7 @@ useSeoMeta({
 
 const { data: components } = await useAsyncData('all-components', () => {
   return queryCollection('docs')
-    .where('path', 'LIKE', '/components/%')
+    .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
     .select('path', 'title', 'description', 'category', 'module')
     .all()

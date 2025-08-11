@@ -4,14 +4,14 @@ export function useSearchLinks() {
     icon: 'i-lucide-square-play',
     to: '/docs/getting-started'
   }, {
+    label: 'Figma',
+    icon: 'i-simple-icons-figma',
+    to: '/figma'
+  }, {
     icon: 'i-lucide-panels-top-left',
     label: 'Templates',
     description: 'Official templates made with Nuxt UI.',
     to: '/templates'
-  }, {
-    label: 'Figma',
-    icon: 'i-simple-icons-figma',
-    to: '/figma'
   }, {
     icon: 'i-lucide-presentation',
     label: 'Showcase',

@@ -31,7 +31,7 @@ props:
 
 Set the `type` prop to `single` to only allow one item to be open at a time. Defaults to `multiple`.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 collapse: true
@@ -72,7 +72,7 @@ props:
 
 Use the `color` prop to change the color of the navigation links.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 collapse: true
@@ -109,7 +109,7 @@ props:
 
 Use the `variant` prop to change the variant of the navigation links.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 collapse: true
@@ -152,7 +152,7 @@ Use the `highlight` prop to display a highlighted border for the active link.
 
 Use the `highlight-color` prop to change the color of the border. It defaults to the `color` prop.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 collapse: true
@@ -190,7 +190,7 @@ props:
 
 ### Trailing Icon
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 collapse: true

@@ -59,7 +59,7 @@ Use `px-0` and `rounded-none` classes to make the CTA fill the edge of the page 
 
 Use the `title` prop to set the title of the CTA.
 
-::component-code{pro slug="page-CTA"}
+::component-code{slug="page-CTA"}
 ---
 props:
   title: 'Trusted and supported by our amazing community'
@@ -70,7 +70,7 @@ props:
 
 Use the `description` prop to set the description of the CTA.
 
-::component-code{pro slug="page-CTA"}
+::component-code{slug="page-CTA"}
 ---
 prettier: true
 ignore:
@@ -85,7 +85,7 @@ props:
 
 Use the `links` prop to display a list of [Button](/docs/components/button) under the description.
 
-::component-code{pro slug="page-CTA"}
+::component-code{slug="page-CTA"}
 ---
 prettier: true
 external:
@@ -111,7 +111,7 @@ props:
 
 Use the `variant` prop to change the style of the CTA.
 
-::component-code{pro slug="page-CTA"}
+::component-code{slug="page-CTA"}
 ---
 prettier: true
 external:
@@ -142,7 +142,7 @@ You can apply the `light` or `dark` class to the `links` slot when using the `so
 
 Use the `orientation` prop to change the orientation with the default slot. Defaults to `vertical`.
 
-::component-code{pro slug="page-CTA"}
+::component-code{slug="page-CTA"}
 ---
 prettier: true
 external:
@@ -175,7 +175,7 @@ slots:
 
 Use the `reverse` prop to reverse the orientation of the default slot.
 
-::component-code{pro slug="page-CTA"}
+::component-code{slug="page-CTA"}
 ---
 prettier: true
 external:
@@ -209,12 +209,12 @@ slots:
 
 ### Props
 
-:component-props{pro name="page-CTA"}
+:component-props{name="page-CTA"}
 
 ### Slots
 
-:component-slots{pro slug="page-CTA"}
+:component-slots{slug="page-CTA"}
 
 ## Theme
 
-:component-theme{pro slug="page-CTA"}
+:component-theme{slug="page-CTA"}

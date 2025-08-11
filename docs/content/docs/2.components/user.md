@@ -165,11 +165,11 @@ ignore:
   - avatar.src
   - target
 props:
-  to: 'https://github.com/nuxt/ui-pro'
+  to: 'https://github.com/benjamincanac'
   target: '_blank'
-  name: 'Nuxt UI Pro'
-  description: 'Premium components for Vue'
-  avatar.src: 'https://github.com/nuxt-ui-pro.png'
+  name: 'Benjamin Canac'
+  description: 'Software Engineer'
+  avatar.src: 'https://github.com/benjamincanac.png'
 ---
 ::
 

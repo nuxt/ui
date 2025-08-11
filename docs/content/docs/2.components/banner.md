@@ -167,9 +167,9 @@ ignore:
   - title
   - target
 props:
-  to: 'https://github.com/nuxt/ui-pro'
+  to: 'https://nuxtlabs.com/'
   target: '_blank'
-  title: 'Purchase Nuxt UI Pro and get access to all components.'
+  title: 'NuxtLabs is joining Vercel!'
   color: 'primary'
 ---
 ::

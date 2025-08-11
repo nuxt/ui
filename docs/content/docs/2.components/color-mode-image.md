@@ -12,7 +12,7 @@ links:
 
 The ColorModeImage component uses the `<NuxtImg>` component when [`@nuxt/image`](https://github.com/nuxt/image) is installed, falling back to `img` otherwise.
 
-::component-code{pro prefix="color-mode"}
+::component-code{prefix="color-mode"}
 ---
 prettier: true
 ignore:
