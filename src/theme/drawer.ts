@@ -33,7 +33,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     inset: {
       true: {
-        content: 'rounded-lg after:hidden overflow-hidden'
+        content: 'rounded-lg after:hidden overflow-hidden [--initial-transform:calc(100%+1.5rem)]'
       }
     }
   },

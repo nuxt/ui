@@ -13,10 +13,10 @@ exports[`Tabs > renders with as correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </section>"
 `;
@@ -34,10 +34,10 @@ exports[`Tabs > renders with class correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -55,10 +55,10 @@ exports[`Tabs > renders with content slot correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">Content slot</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -76,10 +76,10 @@ exports[`Tabs > renders with custom slot correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -97,10 +97,10 @@ exports[`Tabs > renders with default slot correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -117,11 +117,11 @@ exports[`Tabs > renders with defaultValue correctly 1`] = `
     </button>
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">And, this is the content for Tab2</div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -139,10 +139,10 @@ exports[`Tabs > renders with items correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -161,10 +161,10 @@ exports[`Tabs > renders with labelKey correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -182,10 +182,10 @@ exports[`Tabs > renders with leading slot correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -202,11 +202,11 @@ exports[`Tabs > renders with modelValue correctly 1`] = `
     </button>
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">And, this is the content for Tab2</div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -224,10 +224,10 @@ exports[`Tabs > renders with neutral variant link correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -245,10 +245,10 @@ exports[`Tabs > renders with neutral variant pill correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -266,10 +266,10 @@ exports[`Tabs > renders with orientation vertical correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="vertical" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="vertical" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="vertical" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -287,10 +287,10 @@ exports[`Tabs > renders with primary variant link correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -308,10 +308,10 @@ exports[`Tabs > renders with primary variant pill correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -329,10 +329,10 @@ exports[`Tabs > renders with size lg correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -350,10 +350,10 @@ exports[`Tabs > renders with size md correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -371,10 +371,10 @@ exports[`Tabs > renders with size sm correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -392,10 +392,10 @@ exports[`Tabs > renders with size xl correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -413,10 +413,10 @@ exports[`Tabs > renders with size xs correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -428,10 +428,10 @@ exports[`Tabs > renders with trailing slot correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;
@@ -449,10 +449,10 @@ exports[`Tabs > renders with ui correctly 1`] = `
   </div>
   <div id="reka-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="focus:outline-none w-full ring ring-default">This is the content shown for Tab1</div>
   <div id="reka-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-1" hidden="" tabindex="0" class="focus:outline-none w-full ring ring-default">
-    <!---->
+    <!--v-if-->
   </div>
   <div id="reka-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="reka-tabs-v-0-trigger-2" hidden="" tabindex="0" class="focus:outline-none w-full ring ring-default">
-    <!---->
+    <!--v-if-->
   </div>
 </div>"
 `;

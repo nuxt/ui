@@ -263,3 +263,7 @@ In this example, we use the `AppConfig` to configure the `expand` prop of the `T
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

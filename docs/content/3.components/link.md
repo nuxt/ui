@@ -106,3 +106,7 @@ ignore:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

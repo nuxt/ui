@@ -165,3 +165,7 @@ name: 'color-picker-chooser-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

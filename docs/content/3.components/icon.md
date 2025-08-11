@@ -32,3 +32,7 @@ It's highly recommended to install the icons collections you need, read more abo
 ### Props
 
 :component-props
+
+## Changelog
+
+:component-changelog

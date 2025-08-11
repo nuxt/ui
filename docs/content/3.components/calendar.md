@@ -270,3 +270,7 @@ name: 'calendar-date-range-picker-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

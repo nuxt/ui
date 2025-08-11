@@ -48,6 +48,18 @@
       ]
     },
     {
+      "groupName": "typescript",
+      "matchPackageNames": [
+        "typescript"
+      ]
+    },
+    {
+      "groupName": "@nuxt/module-builder",
+      "matchPackageNames": [
+        "@nuxt/module-builder"
+      ]
+    },
+    {
       "matchDepTypes": [
         "peerDependencies"
       ],
