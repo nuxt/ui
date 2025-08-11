@@ -113,11 +113,11 @@ export function transformUI(ui: any, uiProp?: any) {
   }, uiProp || {})
 }
 
-export * from './content'
-
 export function getTextFromMessage(message: UIMessage) {
   return message.parts
     .filter(part => part.type === 'text')
     .map(part => part.text)
     .join('')
 }
+
+export * from './content'
