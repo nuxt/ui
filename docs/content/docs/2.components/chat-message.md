@@ -16,7 +16,7 @@ The ChatMessage component renders an `<article>` element for a `user` or `assist
 
 ::u-chat-message
 ---
-content: 'Hello! Tell me more about building AI chatbots with Nuxt UI Pro.'
+content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 side: 'right'
 variant: 'soft'
 avatar:
@@ -38,7 +38,7 @@ Use the `content` prop to display the message content.
 ---
 prettier: true
 props:
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI Pro.'
+  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
 ::
 
@@ -53,7 +53,7 @@ ignore:
   - content
 props:
   side: 'right'
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI Pro.'
+  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
 ::
 
@@ -72,7 +72,7 @@ ignore:
   - content
 props:
   variant: 'soft'
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI Pro.'
+  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
 ::
 
@@ -95,7 +95,7 @@ props:
   icon: i-lucide-user
   variant: 'soft'
   side: 'right'
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI Pro.'
+  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
 ::
 
@@ -115,7 +115,7 @@ props:
     src: 'https://github.com/benjamincanac.png'
   variant: 'soft'
   side: 'right'
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI Pro.'
+  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
 ::
 
@@ -129,7 +129,7 @@ ignore:
 props:
   avatar:
     icon: i-lucide-bot
-  content: 'Nuxt UI Pro offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the useChat composable from Vercel AI SDK, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
+  content: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the useChat composable from Vercel AI SDK, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
 ---
 ::
 
@@ -149,7 +149,7 @@ props:
   actions:
     - label: 'Copy to clipboard'
       icon: i-lucide-copy
-  content: 'Nuxt UI Pro offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the useChat composable from Vercel AI SDK, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
+  content: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the useChat composable from Vercel AI SDK, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
 ---
 ::
 

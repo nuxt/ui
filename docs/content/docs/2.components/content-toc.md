@@ -29,7 +29,7 @@ props:
 
 Use the `title` prop to change the title of the Table of Contents.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 collapse: true
@@ -76,7 +76,7 @@ props:
 
 Use the `color` prop to change the color of the links.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 collapse: true
@@ -112,7 +112,7 @@ Use the `highlight` prop to display a highlighted border for the active item.
 
 Use the `highlight-color` prop to change the color of the border. It defaults to the `color` prop.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 collapse: true

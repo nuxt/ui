@@ -11,11 +11,6 @@ const items = [
     content: 'Nuxt UI is now compatible with Vue! You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.'
   },
   {
-    label: 'What about Nuxt UI Pro?',
-    icon: 'i-lucide-circle-help',
-    content: 'We\'ve also rebuilt Nuxt UI Pro from scratch and released a `v3.0.0-alpha.x` package but it only contains the components to build this documentation yet. This will be a free update, so the license you buy now will be valid for v3. We\'re actively working to finish the rewrite of all Nuxt UI Pro components..'
-  },
-  {
     label: 'Will Nuxt UI v3 work with other CSS frameworks like UnoCSS?',
     icon: 'i-lucide-circle-help',
     content: 'Nuxt UI v3 is currently designed to work exclusively with Tailwind CSS. While there\'s interest in UnoCSS support, implementing it would require significant changes to the theme structure due to differences in class naming conventions. As a result, we don\'t have plans to add UnoCSS support in v3.'

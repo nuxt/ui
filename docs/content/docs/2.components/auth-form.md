@@ -1,7 +1,7 @@
 ---
 title: AuthForm
 description: 'A customizable Form to create login, register or password reset forms.'
-category: auth
+category: page
 links:
   - label: Form
     to: /components/form

@@ -362,7 +362,7 @@ const { messages, input, handleSubmit, reload, stop, status, error } = useChat()
 ```
 
 ::note
-In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render the content of the message. As Nuxt UI Pro provides pre-styled prose components, your content will be automatically styled.
+In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render the content of the message. As Nuxt UI provides pre-styled prose components, your content will be automatically styled.
 ::
 
 ## API

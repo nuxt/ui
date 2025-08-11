@@ -38,14 +38,14 @@ In this example, we use the [NavigationMenu](/docs/components/navigation-menu) c
 
 ### Title
 
-Use the `title` prop to change the title of the header. Defaults to `Nuxt UI Pro`.
+Use the `title` prop to change the title of the header. Defaults to `Nuxt UI`.
 
 ::component-code
 ---
 hide:
   - class
 props:
-  title: 'Nuxt UI Pro'
+  title: 'Nuxt UI'
   class: 'w-full'
 class: '!px-0 !pt-0'
 ---

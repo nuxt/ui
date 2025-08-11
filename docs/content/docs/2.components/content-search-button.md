@@ -20,11 +20,11 @@ This component is only available when the `@nuxt/content` module is installed.
 
 The ContentSearchButton component is used to open the [ContentSearch](/docs/components/content-search) modal.
 
-:component-code{pro prefix="content"}
+::component-code{prefix="content"}
 
 It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 ignore:
   - variant
@@ -41,7 +41,7 @@ The button defaults to `color="neutral"` and `variant="outline"` when not collap
 
 Use the `collapsed` prop to show the button's label and [kbds](#kbds). Defaults to `true`.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 props:
@@ -53,7 +53,7 @@ props:
 
 Use the `kbds` prop to display keyboard keys in the button. Defaults to `['meta', 'K']`{lang="ts-type"} to match the default shortcut of the [ContentSearch](/docs/components/content-search#shortcut) component.
 
-::component-code{pro prefix="content"}
+::component-code{prefix="content"}
 ---
 prettier: true
 ignore:
