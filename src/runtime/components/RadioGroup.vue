@@ -2,7 +2,8 @@
 import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/radio-group'
-import type { AcceptableValue, ComponentConfig } from '../types/utils'
+import type { AcceptableValue } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type RadioGroup = ComponentConfig<typeof theme, AppConfig, 'radioGroup'>
 

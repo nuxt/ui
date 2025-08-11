@@ -4,7 +4,8 @@ import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProp
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, KbdProps, LinkProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 

@@ -5,57 +5,127 @@ export default defineLocale<Messages>({
   name: 'Português (Brasil)',
   code: 'pt-BR',
   messages: {
-    inputMenu: {
-      noMatch: 'Nenhum dado correspondente',
-      noData: 'Nenhum dado',
-      create: 'Criar "{label}"'
-    },
-    calendar: {
-      prevYear: 'Ano anterior',
-      nextYear: 'Próximo ano',
-      prevMonth: 'Mês anterior',
-      nextMonth: 'Próximo mês'
-    },
-    inputNumber: {
-      increment: 'Incrementar',
-      decrement: 'Decrementar'
-    },
-    commandPalette: {
-      placeholder: 'Digite um comando ou pesquise...',
-      noMatch: 'Nenhum dado correspondente',
-      noData: 'Nenhum dado',
-      close: 'Fechar',
-      back: 'Voltar'
-    },
-    selectMenu: {
-      noMatch: 'Nenhum dado correspondente',
-      noData: 'Nenhum dado',
-      create: 'Criar "{label}"',
-      search: 'Pesquisar...'
-    },
-    toast: {
+    alert: {
       close: 'Fechar'
     },
+    authForm: {
+      hidePassword: 'Ocultar senha',
+      showPassword: 'Mostrar senha',
+      submit: 'Continuar'
+    },
+    banner: {
+      close: 'Fechar'
+    },
+    calendar: {
+      nextMonth: 'Próximo mês',
+      nextYear: 'Próximo ano',
+      prevMonth: 'Mês anterior',
+      prevYear: 'Ano anterior'
+    },
     carousel: {
-      prev: 'Anterior',
-      next: 'Próximo',
       dots: 'Escolher slide para exibir',
-      goto: 'Ir para a slide {slide}'
+      goto: 'Ir para a slide {slide}',
+      next: 'Próximo',
+      prev: 'Anterior'
+    },
+    chatPrompt: {
+      placeholder: 'Escreva sua mensagem aqui...'
+    },
+    chatPromptSubmit: {
+      label: 'Enviar'
+    },
+    colorMode: {
+      dark: 'Escuro',
+      light: 'Claro',
+      switchToDark: 'Mudar para modo escuro',
+      switchToLight: 'Mudar para modo claro',
+      system: 'Sistema'
+    },
+    commandPalette: {
+      back: 'Voltar',
+      close: 'Fechar',
+      noData: 'Nenhum dado',
+      noMatch: 'Nenhum dado correspondente',
+      placeholder: 'Digite um comando ou pesquise...'
+    },
+    contentSearch: {
+      links: 'Links',
+      theme: 'Tema'
+    },
+    contentSearchButton: {
+      label: 'Pesquisar...'
+    },
+    contentToc: {
+      title: 'Nesta página'
+    },
+    dashboardSearch: {
+      theme: 'Tema'
+    },
+    dashboardSearchButton: {
+      label: 'Pesquisar...'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Recolher barra lateral',
+      expand: 'Expandir barra lateral'
+    },
+    dashboardSidebarToggle: {
+      close: 'Fechar barra lateral',
+      open: 'Abrir barra lateral'
+    },
+    error: {
+      clear: 'Voltar para a página inicial'
+    },
+    fileUpload: {
+      removeFile: 'Remover {filename}'
+    },
+    header: {
+      close: 'Fechar menu',
+      open: 'Abrir menu'
+    },
+    inputMenu: {
+      create: 'Criar "{label}"',
+      noData: 'Nenhum dado',
+      noMatch: 'Nenhum dado correspondente'
+    },
+    inputNumber: {
+      decrement: 'Decrementar',
+      increment: 'Incrementar'
     },
     modal: {
       close: 'Fechar'
     },
-    slideover: {
-      close: 'Fechar'
+    pricingTable: {
+      caption: 'Comparação de planos de preços'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Recolher',
+        name: 'código',
+        openText: 'Expandir'
+      },
+      collapsible: {
+        closeText: 'Ocultar',
+        name: 'propriedades',
+        openText: 'Mostrar'
+      },
+      pre: {
+        copy: 'Copiar código para a área de transferência'
+      }
+    },
+    selectMenu: {
+      create: 'Criar "{label}"',
+      noData: 'Nenhum dado',
+      noMatch: 'Nenhum dado correspondente',
+      search: 'Pesquisar...'
+    },
+    slideover: {
       close: 'Fechar'
     },
     table: {
       noData: 'Nenhum dado'
     },
-    fileUpload: {
-      removeFile: 'Remover {filename}'
+    toast: {
+      close: 'Fechar'
     }
   }
 })

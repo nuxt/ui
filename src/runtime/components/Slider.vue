@@ -3,7 +3,7 @@ import type { SliderRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/slider'
 import type { TooltipProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Slider = ComponentConfig<typeof theme, AppConfig, 'slider'>
 

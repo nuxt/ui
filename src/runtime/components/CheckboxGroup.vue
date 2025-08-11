@@ -3,7 +3,8 @@ import type { CheckboxGroupRootProps, CheckboxGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox-group'
 import type { CheckboxProps } from '../types'
-import type { AcceptableValue, ComponentConfig } from '../types/utils'
+import type { AcceptableValue } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
 

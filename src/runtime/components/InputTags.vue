@@ -4,7 +4,7 @@ import type { TagsInputRootProps, TagsInputRootEmits, AcceptableInputValue } fro
 import theme from '#build/ui/input-tags'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type InputTags = ComponentConfig<typeof theme, AppConfig, 'inputTags'>
 

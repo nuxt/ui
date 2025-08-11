@@ -4,7 +4,8 @@ import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuCo
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, LinkProps, PopoverProps, TooltipProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
 

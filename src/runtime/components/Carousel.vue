@@ -11,7 +11,7 @@ import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
 import type { ButtonProps } from '../types'
-import type { ComponentConfig } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 

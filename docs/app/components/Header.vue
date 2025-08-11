@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
+import { mapContentNavigation } from '@nuxt/ui/utils/content'
 
 const props = defineProps<{
   links: NavigationMenuItem[]
@@ -8,42 +9,31 @@ const props = defineProps<{
 
 const route = useRoute()
 const config = useRuntimeConfig().public
-const { module } = useSharedData()
-
-const value = ref<string | undefined>(module.value)
-
-watch(module, () => {
-  value.value = module.value
-})
-
-onMounted(() => {
-  value.value = module.value
-})
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
-
-const githubLink = computed(() => `https://github.com/nuxt/${value.value}`)
 
 const desktopLinks = computed(() => props.links.map(({ icon, ...link }) => link))
 const mobileLinks = computed(() => [
   ...props.links.map(link => ({ ...link, defaultOpen: link.children && route.path.startsWith(link.to as string) })),
   {
     label: 'Open on GitHub',
-    to: githubLink.value,
+    to: 'https://github.com/nuxt/ui',
     icon: 'i-simple-icons-github',
     target: '_blank'
   }
 ])
 
 const items = computed(() => {
-  const ui2 = { label: 'v2.22.0', to: 'https://ui2.nuxt.com' }
-  const uiPro1 = { label: 'v1.8.0', to: 'https://ui2.nuxt.com/pro' }
-
   return [
     { label: `v${config.version}`, active: true, color: 'primary' as const, checked: true, type: 'checkbox' as const },
-    route.path === '/' ? ui2 : route.path.startsWith('/pro') ? uiPro1 : module.value === 'ui-pro' ? uiPro1 : ui2
+    { label: 'v2.22.0', to: 'https://ui2.nuxt.com' }
   ]
 })
+
+const docsNavigation = computed(() => mapContentNavigation(navigation?.value.map(item => ({ ...item, children: undefined })) ?? [])?.map(item => ({
+  ...item,
+  active: route.path.startsWith(item.to as string)
+})))
 
 const logoElement = ref()
 const { copy } = useClipboard()
@@ -79,16 +69,11 @@ const logoContextMenuItems = [
 </script>
 
 <template>
-  <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
+  <UHeader :ui="{ left: 'min-w-0' }" class="flex flex-col">
     <template #left>
       <UContextMenu :items="logoContextMenuItems">
         <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-highlighted min-w-0 focus-visible:outline-primary shrink-0" aria-label="Nuxt UI">
-          <Logo v-if="route.path === '/'" ref="logoElement" class="w-auto h-6 shrink-0" />
-          <LogoPro v-else-if="route.path.startsWith('/pro')" ref="logoElement" class="w-auto h-6 shrink-0" />
-          <template v-else>
-            <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
-            <Logo ref="logoElement" class="w-auto h-6 shrink-0 ui-only" />
-          </template>
+          <Logo ref="logoElement" class="w-auto h-6 shrink-0" />
         </NuxtLink>
       </UContextMenu>
 
@@ -124,10 +109,9 @@ const logoContextMenuItems = [
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
-          :key="value"
           color="neutral"
           variant="ghost"
-          :to="githubLink"
+          to="https://github.com/nuxt/ui"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
@@ -142,18 +126,19 @@ const logoContextMenuItems = [
 
       <div class="flex flex-col gap-2 w-[calc(100%+1.25rem)] mb-5.5 -mx-2.5">
         <FrameworkSelect />
-        <ModuleSelect />
       </div>
 
-      <UContentNavigation :navigation="navigation" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }">
-        <template #link-title="{ link }">
-          <span class="inline-flex items-center gap-0.5">
-            {{ link.title }}
+      <UContentNavigation :navigation="navigation" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }" />
+    </template>
 
-            <sup v-if="link.module === 'ui-pro'" class="text-[8px] font-medium text-primary">PRO</sup>
-          </span>
-        </template>
-      </UContentNavigation>
+    <template v-if="route.path.startsWith('/docs/')" #bottom>
+      <USeparator class="hidden lg:flex" />
+
+      <UContainer class="hidden lg:flex items-center justify-between">
+        <UNavigationMenu :items="docsNavigation" variant="pill" highlight class="-mx-2.5 -mb-px" />
+
+        <FrameworkSelect class="w-40" />
+      </UContainer>
     </template>
   </UHeader>
 </template>

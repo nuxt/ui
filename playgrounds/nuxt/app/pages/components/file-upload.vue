@@ -71,16 +71,12 @@ const state = reactive<Partial<schema>>({
 const value = ref<File | null>(null)
 const valueMultiple = ref<File[]>([])
 
-const upload = useUpload('/api/blob', { method: 'PUT' })
-
 function createObjectUrl(file: File): string {
   return URL.createObjectURL(file)
 }
 
 async function onSubmit(event: FormSubmitEvent<schema>) {
-  const res = await upload(event.data.avatar)
-
-  console.log(res)
+  console.log(event.data)
 }
 </script>
 

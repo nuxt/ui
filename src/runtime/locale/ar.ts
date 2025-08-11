@@ -6,57 +6,127 @@ export default defineLocale<Messages>({
   code: 'ar',
   dir: 'rtl',
   messages: {
-    inputMenu: {
-      noMatch: 'لا توجد نتائج مطابقة',
-      noData: 'لا توجد بيانات',
-      create: 'إنشاء "{label}"'
-    },
-    calendar: {
-      prevYear: 'السنة السابقة',
-      nextYear: 'السنة المقبلة',
-      prevMonth: 'الشهر السابق',
-      nextMonth: 'الشهر المقبل'
-    },
-    inputNumber: {
-      increment: 'زيادة',
-      decrement: 'تقليل'
-    },
-    commandPalette: {
-      placeholder: 'اكتب أمرًا أو ابحث...',
-      noMatch: 'لا توجد نتائج مطابقة',
-      noData: 'لا توجد بيانات',
-      close: 'إغلاق',
-      back: 'رجوع'
-    },
-    selectMenu: {
-      noMatch: 'لا توجد نتائج مطابقة',
-      noData: 'لا توجد بيانات',
-      create: 'إنشاء "{label}"',
-      search: 'بحث...'
-    },
-    toast: {
+    alert: {
       close: 'إغلاق'
     },
+    authForm: {
+      hidePassword: 'إخفاء كلمة المرور',
+      showPassword: 'إظهار كلمة المرور',
+      submit: 'متابعة'
+    },
+    banner: {
+      close: 'إغلاق'
+    },
+    calendar: {
+      nextMonth: 'الشهر المقبل',
+      nextYear: 'السنة المقبلة',
+      prevMonth: 'الشهر السابق',
+      prevYear: 'السنة السابقة'
+    },
     carousel: {
-      prev: 'السابق',
-      next: 'التالي',
       dots: 'اختر الشريحة المراد عرضها',
-      goto: 'الذهاب إلى شريحة {slide}'
+      goto: 'الذهاب إلى شريحة {slide}',
+      next: 'التالي',
+      prev: 'السابق'
+    },
+    chatPrompt: {
+      placeholder: 'اكتب رسالتك هنا...'
+    },
+    chatPromptSubmit: {
+      label: 'إرسال'
+    },
+    colorMode: {
+      dark: 'داكن',
+      light: 'فاتح',
+      switchToDark: 'التبديل إلى الوضع الداكن',
+      switchToLight: 'التبديل إلى الوضع الفاتح',
+      system: 'النظام'
+    },
+    commandPalette: {
+      back: 'رجوع',
+      close: 'إغلاق',
+      noData: 'لا توجد بيانات',
+      noMatch: 'لا توجد نتائج مطابقة',
+      placeholder: 'اكتب أمرًا أو ابحث...'
+    },
+    contentSearch: {
+      links: 'الروابط',
+      theme: 'السمة'
+    },
+    contentSearchButton: {
+      label: 'بحث...'
+    },
+    contentToc: {
+      title: 'في هذه الصفحة'
+    },
+    dashboardSearch: {
+      theme: 'السمة'
+    },
+    dashboardSearchButton: {
+      label: 'بحث...'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'طي الشريط الجانبي',
+      expand: 'توسيع الشريط الجانبي'
+    },
+    dashboardSidebarToggle: {
+      close: 'إغلاق الشريط الجانبي',
+      open: 'فتح الشريط الجانبي'
+    },
+    error: {
+      clear: 'العودة إلى الصفحة الرئيسية'
+    },
+    fileUpload: {
+      removeFile: 'إزالة {filename}'
+    },
+    header: {
+      close: 'إغلاق القائمة',
+      open: 'فتح القائمة'
+    },
+    inputMenu: {
+      create: 'إنشاء "{label}"',
+      noData: 'لا توجد بيانات',
+      noMatch: 'لا توجد نتائج مطابقة'
+    },
+    inputNumber: {
+      decrement: 'تقليل',
+      increment: 'زيادة'
     },
     modal: {
       close: 'إغلاق'
     },
-    slideover: {
-      close: 'إغلاق'
+    pricingTable: {
+      caption: 'مقارنة الخطط السعرية'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'طي',
+        name: 'كود',
+        openText: 'توسيع'
+      },
+      collapsible: {
+        closeText: 'إخفاء',
+        name: 'خصائص',
+        openText: 'إظهار'
+      },
+      pre: {
+        copy: 'نسخ الكود إلى الحافظة'
+      }
+    },
+    selectMenu: {
+      create: 'إنشاء "{label}"',
+      noData: 'لا توجد بيانات',
+      noMatch: 'لا توجد نتائج مطابقة',
+      search: 'بحث...'
+    },
+    slideover: {
       close: 'إغلاق'
     },
     table: {
       noData: 'لا توجد بيانات'
     },
-    fileUpload: {
-      removeFile: 'إزالة {filename}'
+    toast: {
+      close: 'إغلاق'
     }
   }
 })

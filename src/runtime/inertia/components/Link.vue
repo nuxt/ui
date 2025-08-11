@@ -3,7 +3,7 @@ import type { ButtonHTMLAttributes } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { InertiaLinkProps } from '@inertiajs/vue3'
 import theme from '#build/ui/link'
-import type { ComponentConfig } from '../../types/utils'
+import type { ComponentConfig } from '../../types/tv'
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>
 

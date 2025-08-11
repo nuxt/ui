@@ -3,7 +3,8 @@ import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
 import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/drawer'
-import type { EmitsToProps, ComponentConfig } from '../types/utils'
+import type { EmitsToProps } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
 

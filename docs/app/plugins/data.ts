@@ -1,13 +1,12 @@
 export default defineNuxtPlugin({
   enforce: 'post',
   setup() {
-    const { framework, module } = useSharedData()
+    const { framework } = useSharedData()
 
     if (import.meta.client) {
       useHead({
         htmlAttrs: {
-          'data-framework': framework,
-          'data-module': module
+          'data-framework': framework
         }
       })
     }
@@ -26,8 +25,6 @@ export default defineNuxtPlugin({
 
           var f = getCookie('nuxt-ui-framework');
           document.documentElement.setAttribute('data-framework', f || 'nuxt');
-          var m = getCookie('nuxt-ui-module');
-          document.documentElement.setAttribute('data-module', m || 'ui');
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
           tagPriority: -1

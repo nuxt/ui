@@ -5,57 +5,127 @@ export default defineLocale<Messages>({
   name: 'Български',
   code: 'bg',
   messages: {
-    inputMenu: {
-      noMatch: 'Няма съвпадение на данни',
-      noData: 'Няма данни',
-      create: 'Създайте "{label}"'
-    },
-    calendar: {
-      prevYear: 'Предишна година',
-      nextYear: 'Следваща година',
-      prevMonth: 'Предишен месец',
-      nextMonth: 'Следващ месец'
-    },
-    inputNumber: {
-      increment: 'Увеличаване',
-      decrement: 'Намаляване'
-    },
-    commandPalette: {
-      placeholder: 'Въведете команда или потърсете...',
-      noMatch: 'Няма съвпадение на данни',
-      noData: 'Няма данни',
-      close: 'Затворете',
-      back: 'Назад'
-    },
-    selectMenu: {
-      noMatch: 'Няма съвпадение на данни',
-      noData: 'Няма данни',
-      create: 'Създайте "{label}"',
-      search: 'Потърсете...'
-    },
-    toast: {
+    alert: {
       close: 'Затворете'
     },
+    authForm: {
+      hidePassword: 'Скрий паролата',
+      showPassword: 'Покажи паролата',
+      submit: 'Продължи'
+    },
+    banner: {
+      close: 'Затвори'
+    },
+    calendar: {
+      nextMonth: 'Следващ месец',
+      nextYear: 'Следваща година',
+      prevMonth: 'Предишен месец',
+      prevYear: 'Предишна година'
+    },
     carousel: {
-      prev: 'Назад',
-      next: 'Напред',
       dots: 'Изберете слайд за показване',
-      goto: 'Отидете на слайд {slide}'
+      goto: 'Отидете на слайд {slide}',
+      next: 'Напред',
+      prev: 'Назад'
+    },
+    chatPrompt: {
+      placeholder: 'Въведете съобщение...'
+    },
+    chatPromptSubmit: {
+      label: 'Изпрати'
+    },
+    colorMode: {
+      dark: 'Тъмно',
+      light: 'Светло',
+      switchToDark: 'Превключи към тъмен режим',
+      switchToLight: 'Превключи към светъл режим',
+      system: 'Система'
+    },
+    commandPalette: {
+      back: 'Назад',
+      close: 'Затворете',
+      noData: 'Няма данни',
+      noMatch: 'Няма съвпадение на данни',
+      placeholder: 'Въведете команда или потърсете...'
+    },
+    contentSearch: {
+      links: 'Връзки',
+      theme: 'Тема'
+    },
+    contentSearchButton: {
+      label: 'Търсене'
+    },
+    contentToc: {
+      title: 'Съдържание'
+    },
+    dashboardSearch: {
+      theme: 'Тема'
+    },
+    dashboardSearchButton: {
+      label: 'Търсене'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'Свий',
+      expand: 'Разшири'
+    },
+    dashboardSidebarToggle: {
+      close: 'Затвори',
+      open: 'Отвори'
+    },
+    error: {
+      clear: 'Изчисти'
+    },
+    fileUpload: {
+      removeFile: 'Премахни {filename}'
+    },
+    header: {
+      close: 'Затвори',
+      open: 'Отвори'
+    },
+    inputMenu: {
+      create: 'Създайте "{label}"',
+      noData: 'Няма данни',
+      noMatch: 'Няма съвпадение на данни'
+    },
+    inputNumber: {
+      decrement: 'Намаляване',
+      increment: 'Увеличаване'
     },
     modal: {
       close: 'Затворете'
     },
-    slideover: {
-      close: 'Затворете'
+    pricingTable: {
+      caption: 'Ценова таблица'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'Сгъни',
+        name: 'код',
+        openText: 'Разгъни'
+      },
+      collapsible: {
+        closeText: 'Скрий',
+        name: 'свойства',
+        openText: 'Покажи'
+      },
+      pre: {
+        copy: 'Копирай кода в клипборда'
+      }
+    },
+    selectMenu: {
+      create: 'Създайте "{label}"',
+      noData: 'Няма данни',
+      noMatch: 'Няма съвпадение на данни',
+      search: 'Потърсете...'
+    },
+    slideover: {
       close: 'Затворете'
     },
     table: {
       noData: 'Няма данни'
     },
-    fileUpload: {
-      removeFile: 'Премахни {filename}'
+    toast: {
+      close: 'Затворете'
     }
   }
 })

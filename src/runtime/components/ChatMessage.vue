@@ -1,0 +1,119 @@
+<script lang="ts">
+import type { AppConfig } from '@nuxt/schema'
+import type { Message } from '@ai-sdk/vue'
+import theme from '#build/ui/chat-message'
+import type { AvatarProps, ButtonProps } from '../types'
+import type { ComponentConfig } from '../types/tv'
+
+type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>
+
+export interface ChatMessageProps extends Message {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'article'
+   */
+  as?: any
+  /**
+   * @IconifyIcon
+   */
+  icon?: string
+  avatar?: AvatarProps & { [key: string]: any }
+  /**
+   * @defaultValue 'naked'
+   */
+  variant?: ChatMessage['variants']['variant']
+  /**
+   * @defaultValue 'left'
+   */
+  side?: ChatMessage['variants']['side']
+  /**
+   * Display a list of actions under the message.
+   * The `label` will be used in a tooltip.
+   * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   */
+  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: Message) => void })[]
+  /**
+   * Render the message in a compact style.
+   * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
+   * @defaultValue false
+   */
+  compact?: boolean
+  class?: any
+  ui?: ChatMessage['slots']
+}
+
+export interface ChatMessageSlots {
+  leading(props: { avatar: ChatMessageProps['avatar'] }): any
+  content(props: Pick<ChatMessageProps, 'content' | 'reasoning' | 'experimental_attachments' | 'annotations' | 'toolInvocations' | 'parts'>): any
+  actions(props: { actions: ChatMessageProps['actions'] }): any
+}
+</script>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import { Primitive } from 'reka-ui'
+import { useAppConfig } from '#imports'
+import { omit } from '../utils'
+import { tv } from '../utils/tv'
+import UButton from './Button.vue'
+import UTooltip from './Tooltip.vue'
+import UAvatar from './Avatar.vue'
+import UIcon from './Icon.vue'
+
+const props = withDefaults(defineProps<ChatMessageProps>(), {
+  as: 'article'
+})
+const slots = defineSlots<ChatMessageSlots>()
+
+const appConfig = useAppConfig() as ChatMessage['AppConfig']
+
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage || {}) })({
+  variant: props.variant,
+  side: props.side,
+  leading: !!props.icon || !!props.avatar || !!slots.leading,
+  actions: !!props.actions || !!slots.actions,
+  compact: props.compact
+}))
+</script>
+
+<template>
+  <Primitive :as="as" :data-role="role" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div :class="ui.container({ class: props.ui?.container })">
+      <div v-if="icon || avatar || !!slots.leading" :class="ui.leading({ class: props.ui?.leading })">
+        <slot name="leading" :avatar="avatar">
+          <UIcon v-if="icon" :name="icon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+        </slot>
+      </div>
+
+      <div v-if="content || !!slots.content" :class="ui.content({ class: props.ui?.content })">
+        <slot
+          name="content"
+          :content="content"
+          :reasoning="reasoning"
+          :experimental_attachments="experimental_attachments"
+          :annotations="annotations"
+          :tool-invocations="toolInvocations"
+          :parts="parts"
+        >
+          {{ content }}
+        </slot>
+      </div>
+
+      <div v-if="actions || !!slots.actions" :class="ui.actions({ class: props.ui?.actions })">
+        <slot name="actions" :actions="actions">
+          <UTooltip v-for="(action, index) in actions" :key="index" :text="action.label">
+            <UButton
+              size="sm"
+              color="neutral"
+              variant="ghost"
+              v-bind="omit(action, ['onClick'])"
+              :label="undefined"
+              @click="typeof action.onClick === 'function' ? action.onClick($event, props) : undefined"
+            />
+          </UTooltip>
+        </slot>
+      </div>
+    </div>
+  </Primitive>
+</template>
