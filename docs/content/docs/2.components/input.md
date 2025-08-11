@@ -187,12 +187,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 :::
 
 #vue
-:::tip{to="/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
 :::
 ::
@@ -308,7 +308,7 @@ name: 'input-form-field-example'
 ---
 ::
 
-::tip{to="/components/form"}
+::tip{to="/docs/components/form"}
 It also provides validation and error handling when used within a **Form** component.
 ::
 

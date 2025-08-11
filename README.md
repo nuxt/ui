@@ -55,7 +55,7 @@ export default defineNuxtConfig({
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/nuxt).
+Learn more in the [installation guide](https://ui.nuxt.com/docs/getting-started/installation/nuxt).
 
 ### Vue
 
@@ -102,18 +102,18 @@ app.mount('#app')
 @import "@nuxt/ui";
 ```
 
-Learn more in the [installation guide](https://ui.nuxt.com/getting-started/installation/vue).
+Learn more in the [installation guide](https://ui.nuxt.com/docs/getting-started/installation/vue).
 
 ## Contribution
 
 Thank you for considering contributing to Nuxt UI. Here are a few ways you can get involved:
 
 - Reporting Bugs: If you come across any bugs or issues, please check out the reporting bugs guide to learn how to submit a bug report.
-- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/getting-started/contribution) to share your suggestions.
+- Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/docs/getting-started/contribution) to share your suggestions.
 
 ## Local Development
 
-Follow the docs to [set up your local development environment](https://ui.nuxt.com/getting-started/contribution#local-development) and contribute.
+Follow the docs to [set up your local development environment](https://ui.nuxt.com/docs/getting-started/contribution#local-development) and contribute.
 
 ## Credits
 

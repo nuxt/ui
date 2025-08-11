@@ -1,8 +1,7 @@
 ---
 title: Contribution Guide
 description: 'A comprehensive guide on contributing to Nuxt UI, including project structure, development workflow, and best practices.'
-navigation.title: Contribution
-navigation.icon: 'i-lucide-git-pull-request'
+navigation: false
 ---
 
 Nuxt UI thrives thanks to its incredible community ❤️. We welcome all contributions through bug reports, pull requests, and feedback to help make this library even better.
@@ -112,7 +111,7 @@ You can create new locales using the following command:
 nuxt-ui make locale --code <code> --name <name>
 ```
 
-::note{to="/getting-started/i18n/nuxt#supported-languages"}
+::note{to="/docs/getting-started/i18n/nuxt#supported-languages"}
 Learn more about **i18n** in the documentation.
 ::
 

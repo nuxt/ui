@@ -6,12 +6,12 @@ import ComponentRender from '../../component-render'
 describe('ContentSurround', () => {
   const surround = [{
     path: '/getting-started',
-    title: 'Nuxt UI',
-    description: 'A collection of premium Vue components to create beautiful & responsive Nuxt applications in minutes.'
+    title: 'Introduction',
+    description: 'Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.'
   }, {
-    path: '/getting-started/theming',
-    title: 'Theming',
-    description: 'Learn how to customize Nuxt UI components.'
+    path: '/getting-started/theme',
+    title: 'Theme',
+    description: 'Learn how to customize Nuxt UI components using Tailwind CSS v4, CSS variables and the Tailwind Variants API for powerful and flexible theming.'
   }]
 
   const props = { surround }

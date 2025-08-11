@@ -1,4 +1,3 @@
-import { upperFirst, camelCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 
 function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavigationItem): any {
@@ -29,36 +28,6 @@ function processNavigationItemIcon(item: ContentNavigationItem) {
   }
 }
 
-const categories = {
-  ai: 'AI'
-}
-
-function groupChildrenByCategory(item: ContentNavigationItem): ContentNavigationItem {
-  if (!item.children?.length) {
-    return item
-  }
-
-  const processedChildren = item.children.map(child => groupChildrenByCategory(child))
-
-  const childrenGroupedByCategories = processedChildren.reduce((acc, child) => {
-    if (child.category) {
-      acc[child.category as string] = [...(acc[child.category as string] || []), child]
-    } else {
-      acc.overview = [...(acc.overview || []), child]
-    }
-    return acc
-  }, {} as Record<string, ContentNavigationItem[]>)
-
-  return {
-    ...item,
-    children: Object.entries(childrenGroupedByCategories).map(([key, children]) => ({
-      title: categories[key as keyof typeof categories] || upperFirst(camelCase(key)),
-      path: `/docs/${key}`,
-      children: children?.map((child: any) => ({ ...child, icon: undefined }))
-    }))
-  }
-}
-
 export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
   const { framework } = useSharedData()
 
@@ -81,7 +50,7 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
   }))
 
   return {
-    mappedNavigation: computed(() => mappedNavigation.value?.map(item => groupChildrenByCategory(item))),
+    mappedNavigation,
     filteredNavigation
   }
 }

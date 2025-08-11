@@ -7,7 +7,7 @@ describe('PageLinks', () => {
   const links = [{
     label: 'Documentation',
     icon: 'i-lucide-book-open',
-    to: '/getting-started'
+    to: '/docs'
   }, {
     label: 'Playground',
     icon: 'i-simple-icons-stackblitz',

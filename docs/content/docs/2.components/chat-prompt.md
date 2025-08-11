@@ -4,7 +4,7 @@ description: 'An enhanced Textarea for submitting prompts in AI chat interfaces.
 category: ai
 links:
   - label: Textarea
-    to: /components/textarea
+    to: /docs/components/textarea
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github

@@ -4,7 +4,7 @@ description: 'A ready to use CommandPalette to add to your dashboard.'
 category: dashboard
 links:
   - label: CommandPalette
-    to: /components/command-palette
+    to: /docs/components/command-palette
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github

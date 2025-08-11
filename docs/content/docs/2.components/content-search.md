@@ -5,14 +5,14 @@ category: content
 framework: nuxt
 links:
   - label: CommandPalette
-    to: /components/command-palette
+    to: /docs/components/command-palette
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/content/ContentSearch.vue
 ---
 
-::warning{to="/getting-started/content"}
+::warning{to="/docs/getting-started/content"}
 This component is only available when the `@nuxt/content` module is installed.
 ::
 

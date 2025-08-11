@@ -48,7 +48,7 @@ ui.container: 'max-w-lg'
 
 ::
 
-::tip{to="/components/changelog-versions"}
+::tip{to="/docs/components/changelog-versions"}
 Use the [`ChangelogVersions`](/docs/components/changelog-versions) component to display multiple changelog versions in a timeline with an indicator bar on the left.
 ::
 

@@ -18,7 +18,7 @@ Use a [Button](/docs/components/button) or any other component in the default sl
 Make sure to wrap your app with the [`App`](/docs/components/app) component which uses the [`TooltipProvider`](https://reka-ui.com/docs/components/tooltip#provider) component from Reka UI.
 ::
 
-::tip{to="/components/app#props"}
+::tip{to="/docs/components/app#props"}
 You can check the `App` component `tooltip` prop to see how to configure the Tooltip globally.
 ::
 

@@ -5,7 +5,7 @@ category: page
 links:
   - label: Accordion
     icon: i-simple-icons-nuxtdotjs
-    to: /components/accordion
+    to: /docs/components/accordion
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/PageAccordion.vue

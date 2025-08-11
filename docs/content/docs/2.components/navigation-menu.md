@@ -50,7 +50,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide-book-open
-      to: /getting-started
+      to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -69,49 +69,49 @@ props:
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide-database
-      to: /composables
+      to: /docs/composables
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
-          to: /composables/define-shortcuts
+          to: /docs/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide-file-text
           description: Display a modal/slideover within your application.
-          to: /composables/use-overlay
+          to: /docs/composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
-          to: /composables/use-toast
+          to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /components
+      to: /docs/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /components/link
+          to: /docs/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /components/modal
+          to: /docs/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /components/navigation-menu
+          to: /docs/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /components/pagination
+          to: /docs/components/pagination
         - label: Popover
           icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
-          to: /components/popover
+          to: /docs/components/popover
         - label: Progress
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
-          to: /components/progress
+          to: /docs/components/progress
     - label: GitHub
       icon: i-simple-icons-github
       badge: 3.8k
@@ -186,45 +186,45 @@ props:
           - label: defineShortcuts
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
-            to: /composables/define-shortcuts
+            to: /docs/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide-file-text
             description: Display a modal/slideover within your application.
-            to: /composables/use-overlay
+            to: /docs/composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
-            to: /composables/use-toast
+            to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /components
+        to: /docs/components
         active: true
         defaultOpen: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /components/link
+            to: /docs/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /components/modal
+            to: /docs/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /components/navigation-menu
+            to: /docs/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /components/pagination
+            to: /docs/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /components/popover
+            to: /docs/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /components/progress
+            to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k
@@ -299,44 +299,44 @@ props:
           - label: defineShortcuts
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
-            to: /composables/define-shortcuts
+            to: /docs/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide-file-text
             description: Display a modal/slideover within your application.
-            to: /composables/use-overlay
+            to: /docs/composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
-            to: /composables/use-toast
+            to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /components
+        to: /docs/components
         active: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /components/link
+            to: /docs/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /components/modal
+            to: /docs/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /components/navigation-menu
+            to: /docs/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /components/pagination
+            to: /docs/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /components/popover
+            to: /docs/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /components/progress
+            to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k
@@ -394,45 +394,45 @@ props:
           - label: defineShortcuts
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
-            to: /composables/define-shortcuts
+            to: /docs/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide-file-text
             description: Display a modal/slideover within your application.
-            to: /composables/use-overlay
+            to: /docs/composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
-            to: /composables/use-toast
+            to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /components
+        to: /docs/components
         active: true
         defaultOpen: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /components/link
+            to: /docs/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /components/modal
+            to: /docs/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /components/navigation-menu
+            to: /docs/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /components/pagination
+            to: /docs/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /components/popover
+            to: /docs/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /components/progress
+            to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k
@@ -471,13 +471,13 @@ props:
   items:
     - - label: Guide
         icon: i-lucide-book-open
-        to: /getting-started
+        to: /docs/getting-started
       - label: Composables
         icon: i-lucide-database
-        to: /composables
+        to: /docs/composables
       - label: Components
         icon: i-lucide-box
-        to: /components
+        to: /docs/components
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
@@ -508,13 +508,13 @@ props:
   items:
     - - label: Guide
         icon: i-lucide-book-open
-        to: /getting-started
+        to: /docs/getting-started
       - label: Composables
         icon: i-lucide-database
-        to: /composables
+        to: /docs/composables
       - label: Components
         icon: i-lucide-box
-        to: /components
+        to: /docs/components
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
@@ -552,7 +552,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide-book-open
-      to: /getting-started
+      to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -571,61 +571,61 @@ props:
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide-database
-      to: /composables
+      to: /docs/composables
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
-          to: /composables/define-shortcuts
+          to: /docs/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide-file-text
           description: Display a modal/slideover within your application.
-          to: /composables/use-overlay
+          to: /docs/composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
-          to: /composables/use-toast
+          to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /components
+      to: /docs/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /components/link
+          to: /docs/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /components/modal
+          to: /docs/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /components/navigation-menu
+          to: /docs/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /components/pagination
+          to: /docs/components/pagination
         - label: Popover
           icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
-          to: /components/popover
+          to: /docs/components/popover
         - label: Progress
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
-          to: /components/progress
+          to: /docs/components/progress
   class: 'w-full justify-center'
 ---
 ::
 
 ::framework-only
 #nuxt
-:::tip{to="/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 :::
 
 #vue
-:::tip{to="/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
 :::
 ::
@@ -650,7 +650,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide-book-open
-      to: /getting-started
+      to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -669,49 +669,49 @@ props:
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide-database
-      to: /composables
+      to: /docs/composables
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
-          to: /composables/define-shortcuts
+          to: /docs/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide-file-text
           description: Display a modal/slideover within your application.
-          to: /composables/use-overlay
+          to: /docs/composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
-          to: /composables/use-toast
+          to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /components
+      to: /docs/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /components/link
+          to: /docs/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /components/modal
+          to: /docs/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /components/navigation-menu
+          to: /docs/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /components/pagination
+          to: /docs/components/pagination
         - label: Popover
           icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
-          to: /components/popover
+          to: /docs/components/popover
         - label: Progress
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
-          to: /components/progress
+          to: /docs/components/progress
   class: 'w-full justify-center'
 ---
 ::
@@ -745,7 +745,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide-book-open
-      to: /getting-started
+      to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -758,41 +758,41 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: Composables
       icon: i-lucide-database
-      to: /composables
+      to: /docs/composables
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
-          to: /composables/define-shortcuts
+          to: /docs/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide-file-text
           description: Display a modal/slideover within your application.
-          to: /composables/use-overlay
+          to: /docs/composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
-          to: /composables/use-toast
+          to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /components
+      to: /docs/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /components/link
+          to: /docs/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /components/modal
+          to: /docs/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /components/navigation-menu
+          to: /docs/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /components/pagination
+          to: /docs/components/pagination
   class: 'w-full justify-center'
 ---
 ::
@@ -817,7 +817,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide-book-open
-      to: /getting-started
+      to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -836,49 +836,49 @@ props:
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide-database
-      to: /composables
+      to: /docs/composables
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
           description: Define shortcuts for your application.
-          to: /composables/define-shortcuts
+          to: /docs/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide-file-text
           description: Display a modal/slideover within your application.
-          to: /composables/use-overlay
+          to: /docs/composables/use-overlay
         - label: useToast
           icon: i-lucide-file-text
           description: Display a toast within your application.
-          to: /composables/use-toast
+          to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /components
+      to: /docs/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /components/link
+          to: /docs/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /components/modal
+          to: /docs/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /components/navigation-menu
+          to: /docs/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /components/pagination
+          to: /docs/components/pagination
         - label: Popover
           icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
-          to: /components/popover
+          to: /docs/components/popover
         - label: Progress
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
-          to: /components/progress
+          to: /docs/components/progress
   class: 'w-full justify-center'
 ---
 ::
@@ -941,44 +941,44 @@ props:
           - label: defineShortcuts
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
-            to: /composables/define-shortcuts
+            to: /docs/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide-file-text
             description: Display a modal/slideover within your application.
-            to: /composables/use-overlay
+            to: /docs/composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
-            to: /composables/use-toast
+            to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /components
+        to: /docs/components
         active: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /components/link
+            to: /docs/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /components/modal
+            to: /docs/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /components/navigation-menu
+            to: /docs/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /components/pagination
+            to: /docs/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /components/popover
+            to: /docs/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /components/progress
+            to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k
@@ -1048,44 +1048,44 @@ props:
           - label: defineShortcuts
             icon: i-lucide-file-text
             description: Define shortcuts for your application.
-            to: /composables/define-shortcuts
+            to: /docs/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide-file-text
             description: Display a modal/slideover within your application.
-            to: /composables/use-overlay
+            to: /docs/composables/use-overlay
           - label: useToast
             icon: i-lucide-file-text
             description: Display a toast within your application.
-            to: /composables/use-toast
+            to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /components
+        to: /docs/components
         active: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /components/link
+            to: /docs/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /components/modal
+            to: /docs/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /components/navigation-menu
+            to: /docs/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /components/pagination
+            to: /docs/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /components/popover
+            to: /docs/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /components/progress
+            to: /docs/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k

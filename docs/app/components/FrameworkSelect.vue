@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const { framework, frameworks } = useSharedData()
+
 const value = ref<string | undefined>(undefined)
+
 onMounted(() => {
   value.value = framework.value
 })

@@ -74,7 +74,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   closeIcon?: string
   /**
-   * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/composables/define-shortcuts))
+   * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
    */
   shortcut?: string
@@ -85,7 +85,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   groups?: CommandPaletteGroup<ContentSearchItem>[]
   files?: ContentSearchFile[]
   /**
-   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/components/command-palette).
+   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
    * @defaultValue { fuseOptions: { includeMatches: true } }
    */
   fuse?: UseFuseOptions<T>

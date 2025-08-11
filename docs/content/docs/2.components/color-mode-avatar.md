@@ -4,7 +4,7 @@ description: 'An Avatar with a different source for light and dark mode.'
 category: color-mode
 links:
   - label: Avatar
-    to: /components/avatar
+    to: /docs/components/avatar
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github

@@ -4,7 +4,7 @@ description: 'A Button to switch between light and dark mode.'
 category: color-mode
 links:
   - label: Button
-    to: /components/button
+    to: /docs/components/button
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github

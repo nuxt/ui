@@ -26,7 +26,7 @@ avatar:
 
 ::
 
-::tip{to="/components/chat-messages"}
+::tip{to="/docs/components/chat-messages"}
 Use the [`ChatMessages`](/docs/components/chat-messages) component to display a list of chat messages.
 ::
 

@@ -4,17 +4,6 @@ hero:
   title: Ship [in minutes]{.text-primary} with :br Nuxt UI Templates
   description: 'Ready to use templates powered by our premium Vue components and Nuxt Content.<br class="hidden lg:block"> The templates are responsive, accessible and easy to customize so you can get started in no time.'
 navigation: false
-links:
-  - label: Buy a license
-    color: primary
-    size: xl
-    to: /pro/pricing
-  - label: Try for free
-    to: /getting-started/installation/pro/nuxt#use-an-official-template
-    size: xl
-    color: neutral
-    variant: outline
-    trailingIcon: i-lucide-arrow-right
 templates:
   - title: 'Portfolio'
     description: "A sleek, modern portfolio template to showcase your work, skills, blog posts, speaking engagements, and provide contact information. Which can customized easily from the `content/` directory."

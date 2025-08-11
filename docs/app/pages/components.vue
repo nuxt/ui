@@ -102,7 +102,7 @@ onMounted(() => {
 
       <template #links>
         <UButton
-          to="/getting-started/installation/vue"
+          to="/docs/getting-started/installation/vue"
           label="Start with Vue"
           icon="i-logos-vue"
           color="neutral"
@@ -110,7 +110,7 @@ onMounted(() => {
           size="xl"
         />
         <UButton
-          to="/getting-started/installation/nuxt"
+          to="/docs/getting-started/installation/nuxt"
           label="Start with Nuxt"
           icon="i-logos-nuxt-icon"
           color="neutral"

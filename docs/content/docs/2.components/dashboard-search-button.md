@@ -4,7 +4,7 @@ description: 'A pre-styled Button to open the DashboardSearch modal.'
 category: dashboard
 links:
   - label: Button
-    to: /components/button
+    to: /docs/components/button
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -44,7 +44,7 @@ props:
 ---
 ::
 
-::tip{to="/components/dashboard-sidebar#slots"}
+::tip{to="/docs/components/dashboard-sidebar#slots"}
 When using the button in the **DashboardSidebar** component, use the `collapsed` slot prop directly.
 ::
 

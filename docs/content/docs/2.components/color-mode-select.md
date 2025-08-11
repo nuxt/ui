@@ -4,7 +4,7 @@ description: 'A Select to switch between system, dark & light mode.'
 category: color-mode
 links:
   - label: SelectMenu
-    to: /components/select-menu
+    to: /docs/components/select-menu
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github

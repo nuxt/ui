@@ -139,7 +139,7 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
-::tip{to="/getting-started/theme#colors"}
+::tip{to="/docs/getting-started/theme#colors"}
 This sets the `color` to `error` on the form control. You can change it globally in your `app.config.ts`.
 ::
 
