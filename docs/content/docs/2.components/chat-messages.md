@@ -49,6 +49,7 @@ external:
   - messages
 ignore:
   - messages
+collapse: true
 props:
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
@@ -121,6 +122,7 @@ external:
 ignore:
   - messages
   - avatar.src
+collapse: true
 items:
   user.variant:
     - solid
@@ -177,6 +179,7 @@ ignore:
   - messages
   - avatar.icon
   - assistant.actions
+collapse: true
 items:
   assistant.variant:
     - solid

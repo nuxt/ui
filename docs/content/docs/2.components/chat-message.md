@@ -39,6 +39,8 @@ Use the `parts` prop to display the message content using the AI SDK v5 format.
 ::component-code
 ---
 prettier: true
+ignore:
+  - parts
 props:
   parts:
     - type: 'text'

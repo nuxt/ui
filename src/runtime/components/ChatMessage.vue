@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>
 
-export interface ChatMessageProps extends UIMessage {
+export interface ChatMessageProps extends Omit<UIMessage, 'content'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
@@ -31,7 +31,7 @@ export interface ChatMessageProps extends UIMessage {
    * The `label` will be used in a tooltip.
    * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: UIMessage) => void })[]
+  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: Omit<UIMessage, 'content'>) => void })[]
   /**
    * Render the message in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
