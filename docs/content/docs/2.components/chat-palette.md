@@ -26,8 +26,8 @@ The ChatPalette component is a structured layout wrapper that organizes [ChatMes
 
 ## Examples
 
-::note{to="https://sdk.vercel.ai/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the `useChat` composable from **Vercel AI SDK**.
+::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
+These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
 ::
 
 ### Within a Modal

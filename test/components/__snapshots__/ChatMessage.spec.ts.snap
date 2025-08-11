@@ -70,6 +70,16 @@ exports[`ChatMessage > renders with icon correctly 1`] = `
 </article>"
 `;
 
+exports[`ChatMessage > renders with parts correctly 1`] = `
+"<article data-role="user" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
+  <div class="relative flex items-start group-data-[role=user]/message:max-w-[75%] gap-3 pb-8">
+    <!--v-if-->
+    <div class="relative text-pretty min-w-0">Hello, how are you?</div>
+    <!--v-if-->
+  </div>
+</article>"
+`;
+
 exports[`ChatMessage > renders with role assistant correctly 1`] = `
 "<article data-role="assistant" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
   <div class="relative flex items-start group-data-[role=user]/message:max-w-[75%] gap-3 pb-8">

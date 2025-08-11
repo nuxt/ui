@@ -9,12 +9,13 @@ describe('ChatMessage', () => {
   const props = {
     id: '6045235a-a435-46b8-989d-2df38ca2eb47',
     role: 'user' as const,
-    content: 'Hello, how are you?'
+    parts: [{ type: 'text', text: 'Hello, how are you?' }]
   }
 
   it.each([
     // Props
-    ['with content', { props }],
+    ['with parts', { props }],
+    ['with content', { props: { ...props, content: 'Hello, how are you?' } }],
     ['with icon', { props: { ...props, icon: 'i-lucide-user' } }],
     ['with avatar', { props: { ...props, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with role assistant', { props: { ...props, role: 'assistant' as const } }],

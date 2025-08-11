@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { Message } from '@ai-sdk/vue'
+import type { UIMessage } from 'ai'
 import theme from '#build/ui/chat-message'
 import type { AvatarProps, ButtonProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>
 
-export interface ChatMessageProps extends Message {
+export interface ChatMessageProps extends UIMessage {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
@@ -31,20 +31,25 @@ export interface ChatMessageProps extends Message {
    * The `label` will be used in a tooltip.
    * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: Message) => void })[]
+  actions?: (Omit<ButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: UIMessage) => void })[]
   /**
    * Render the message in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
    * @defaultValue false
    */
   compact?: boolean
+  /**
+   * @deprecated Use `parts` instead. (https://ai-sdk.dev/docs/migration-guides/migration-guide-5-0#content--parts-array)
+   * Use to display the content of the message.
+   */
+  content?: string
   class?: any
   ui?: ChatMessage['slots']
 }
 
 export interface ChatMessageSlots {
   leading(props: { avatar: ChatMessageProps['avatar'] }): any
-  content(props: Pick<ChatMessageProps, 'content' | 'reasoning' | 'experimental_attachments' | 'annotations' | 'toolInvocations' | 'parts'>): any
+  content(props: ChatMessageProps): any
   actions(props: { actions: ChatMessageProps['actions'] }): any
 }
 </script>
@@ -86,17 +91,24 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
         </slot>
       </div>
 
-      <div v-if="content || !!slots.content" :class="ui.content({ class: props.ui?.content })">
+      <div v-if="content || parts.length || !!slots.content" :class="ui.content({ class: props.ui?.content })">
         <slot
+          :id="id"
           name="content"
+          :role="role"
           :content="content"
-          :reasoning="reasoning"
-          :experimental_attachments="experimental_attachments"
-          :annotations="annotations"
-          :tool-invocations="toolInvocations"
           :parts="parts"
         >
-          {{ content }}
+          <template v-if="content">
+            {{ content }}
+          </template>
+          <template v-else>
+            <template v-for="(part, index) in parts" :key="`${id}-${part.type}-${index}`">
+              <template v-if="part.type === 'text'">
+                {{ part.text }}
+              </template>
+            </template>
+          </template>
         </slot>
       </div>
 

@@ -49,20 +49,29 @@ external:
   - messages
 ignore:
   - messages
+collapse: true
 props:
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
       role: user
-      content: 'Hello, how are you?'
+      parts:
+        - type: 'text'
+          text: 'Hello, how are you?'
     - id: '7a92b3c1-d5f8-4e76-b8a9-3c1e5fb2e0d8'
       role: assistant
-      content: 'I am doing well, thank you for asking! How can I assist you today?'
+      parts:
+        - type: 'text'
+          text: 'I am doing well, thank you for asking! How can I assist you today?'
     - id: '9c84d6a7-8b23-4f12-a1d5-e7f3b9c05e2a'
       role: user
-      content: 'What is the current weather in Tokyo?'
+      parts:
+        - type: 'text'
+          text: 'What is the current weather in Tokyo?'
     - id: 'b2e5f8c3-a1d9-4e67-b3f2-c9d8e7a6b5f4'
       role: assistant
-      content: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies."
+      parts:
+        - type: 'text'
+          text: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies."
 ---
 ::
 
@@ -83,12 +92,14 @@ props:
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
       role: user
-      content: 'Hello, how are you?'
+      parts:
+        - type: 'text'
+          text: 'Hello, how are you?'
 ---
 ::
 
 ::note
-Here's the detail of the different statuses sent by the `useChat` composable:
+Here's the detail of the different statuses from the AI SDK v5 Chat class:
 
 - `submitted`: The message has been sent to the API and we're awaiting the start of the response stream.
 - `streaming`: The response is actively streaming in from the API, receiving chunks of data.
@@ -111,6 +122,7 @@ external:
 ignore:
   - messages
   - avatar.src
+collapse: true
 items:
   user.variant:
     - solid
@@ -130,16 +142,24 @@ props:
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
       role: user
-      content: 'Hello, how are you?'
+      parts:
+        - type: 'text'
+          text: 'Hello, how are you?'
     - id: '7a92b3c1-d5f8-4e76-b8a9-3c1e5fb2e0d8'
       role: assistant
-      content: 'I am doing well, thank you for asking! How can I assist you today?'
+      parts:
+        - type: 'text'
+          text: 'I am doing well, thank you for asking! How can I assist you today?'
     - id: '9c84d6a7-8b23-4f12-a1d5-e7f3b9c05e2a'
       role: user
-      content: 'What is the current weather in Tokyo?'
+      parts:
+        - type: 'text'
+          text: 'What is the current weather in Tokyo?'
     - id: 'b2e5f8c3-a1d9-4e67-b3f2-c9d8e7a6b5f4'
       role: assistant
-      content: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies."
+      parts:
+        - type: 'text'
+          text: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies."
 ---
 ::
 
@@ -159,6 +179,7 @@ ignore:
   - messages
   - avatar.icon
   - assistant.actions
+collapse: true
 items:
   assistant.variant:
     - solid
@@ -181,16 +202,24 @@ props:
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
       role: user
-      content: 'Hello, how are you?'
+      parts:
+        - type: 'text'
+          text: 'Hello, how are you?'
     - id: '7a92b3c1-d5f8-4e76-b8a9-3c1e5fb2e0d8'
       role: assistant
-      content: 'I am doing well, thank you for asking! How can I assist you today?'
+      parts:
+        - type: 'text'
+          text: 'I am doing well, thank you for asking! How can I assist you today?'
     - id: '9c84d6a7-8b23-4f12-a1d5-e7f3b9c05e2a'
       role: user
-      content: 'What is the current weather in Tokyo?'
+      parts:
+        - type: 'text'
+          text: 'What is the current weather in Tokyo?'
     - id: 'b2e5f8c3-a1d9-4e67-b3f2-c9d8e7a6b5f4'
       role: assistant
-      content: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies."
+      parts:
+        - type: 'text'
+          text: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies."
 ---
 ::
 
@@ -223,22 +252,34 @@ props:
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
       role: user
-      content: 'Hello, how are you?'
+      parts:
+        - type: 'text'
+          text: 'Hello, how are you?'
     - id: '7a92b3c1-d5f8-4e76-b8a9-3c1e5fb2e0d8'
       role: assistant
-      content: 'I am doing well, thank you for asking! How can I assist you today?'
+      parts:
+        - type: 'text'
+          text: 'I am doing well, thank you for asking! How can I assist you today?'
     - id: '9c84d6a7-8b23-4f12-a1d5-e7f3b9c05e2a'
       role: user
-      content: 'What is the current weather in Tokyo?'
+      parts:
+        - type: 'text'
+          text: 'What is the current weather in Tokyo?'
     - id: 'b2e5f8c3-a1d9-4e67-b3f2-c9d8e7a6b5f4'
       role: assistant
-      content: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies. The forecast for the rest of the week shows a slight chance of rain on Thursday, with temperatures gradually rising to 28°C by the weekend. Humidity levels are moderate at around 65%, and wind speeds are light at 8 km/h from the southeast. Air quality is good with an index of 42. The UV index is high at 7, so it's recommended to wear sunscreen if you're planning to spend time outdoors. Sunrise was at 5:24 AM and sunset will be at 6:48 PM, giving Tokyo approximately 13 hours and 24 minutes of daylight today. The moon is currently in its waxing gibbous phase."
+      parts:
+        - type: 'text'
+          text: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies. The forecast for the rest of the week shows a slight chance of rain on Thursday, with temperatures gradually rising to 28°C by the weekend. Humidity levels are moderate at around 65%, and wind speeds are light at 8 km/h from the southeast. Air quality is good with an index of 42. The UV index is high at 7, so it's recommended to wear sunscreen if you're planning to spend time outdoors. Sunrise was at 5:24 AM and sunset will be at 6:48 PM, giving Tokyo approximately 13 hours and 24 minutes of daylight today. The moon is currently in its waxing gibbous phase."
     - id: 'c3e5f8c3-a1d9-4e67-b3f2-c9d8e7a6b5f4'
       role: user
-      content: 'Can you recommend some popular tourist attractions in Kyoto?'
+      parts:
+        - type: 'text'
+          text: 'Can you recommend some popular tourist attractions in Kyoto?'
     - id: 'd4f5g8c3-a1d9-4e67-b3f2-c9d8e7a6b5f4'
       role: assistant
-      content: 'Kyoto is known for its beautiful temples, traditional tea houses, and gardens. Some popular attractions include Kinkaku-ji (Golden Pavilion) with its stunning gold leaf exterior reflecting in the mirror pond, Fushimi Inari Shrine with its thousands of vermilion torii gates winding up the mountainside, Arashiyama Bamboo Grove where towering stalks create an otherworldly atmosphere, Kiyomizu-dera Temple perched on a hillside offering panoramic views of the city, and the historic Gion district where you might spot geisha hurrying to evening appointments through narrow stone-paved streets lined with traditional wooden machiya houses.'
+      parts:
+        - type: 'text'
+          text: 'Kyoto is known for its beautiful temples, traditional tea houses, and gardens. Some popular attractions include Kinkaku-ji (Golden Pavilion) with its stunning gold leaf exterior reflecting in the mirror pond, Fushimi Inari Shrine with its thousands of vermilion torii gates winding up the mountainside, Arashiyama Bamboo Grove where towering stalks create an otherworldly atmosphere, Kiyomizu-dera Temple perched on a hillside offering panoramic views of the city, and the historic Gion district where you might spot geisha hurrying to evening appointments through narrow stone-paved streets lined with traditional wooden machiya houses.'
 ---
 ::
 
@@ -264,22 +305,34 @@ props:
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
       role: user
-      content: 'Hello, how are you?'
+      parts:
+        - type: 'text'
+          text: 'Hello, how are you?'
     - id: '7a92b3c1-d5f8-4e76-b8a9-3c1e5fb2e0d8'
       role: assistant
-      content: 'I am doing well, thank you for asking! How can I assist you today?'
+      parts:
+        - type: 'text'
+          text: 'I am doing well, thank you for asking! How can I assist you today?'
     - id: '9c84d6a7-8b23-4f12-a1d5-e7f3b9c05e2a'
       role: user
-      content: 'What is the current weather in Tokyo?'
+      parts:
+        - type: 'text'
+          text: 'What is the current weather in Tokyo?'
     - id: 'b2e5f8c3-a1d9-4e67-b3f2-c9d8e7a6b5f4'
       role: assistant
-      content: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies. The forecast for the rest of the week shows a slight chance of rain on Thursday, with temperatures gradually rising to 28°C by the weekend. Humidity levels are moderate at around 65%, and wind speeds are light at 8 km/h from the southeast. Air quality is good with an index of 42. The UV index is high at 7, so it's recommended to wear sunscreen if you're planning to spend time outdoors. Sunrise was at 5:24 AM and sunset will be at 6:48 PM, giving Tokyo approximately 13 hours and 24 minutes of daylight today. The moon is currently in its waxing gibbous phase."
+      parts:
+        - type: 'text'
+          text: "Based on the latest data, Tokyo is currently experiencing sunny weather with temperatures around 24°C (75°F). It's a beautiful day with clear skies. The forecast for the rest of the week shows a slight chance of rain on Thursday, with temperatures gradually rising to 28°C by the weekend. Humidity levels are moderate at around 65%, and wind speeds are light at 8 km/h from the southeast. Air quality is good with an index of 42. The UV index is high at 7, so it's recommended to wear sunscreen if you're planning to spend time outdoors. Sunrise was at 5:24 AM and sunset will be at 6:48 PM, giving Tokyo approximately 13 hours and 24 minutes of daylight today. The moon is currently in its waxing gibbous phase."
     - id: 'c3e5f8c3-a1d9-4e67-b3f2-c9d8e7a6b5f4'
       role: user
-      content: 'Can you recommend some popular tourist attractions in Kyoto?'
+      parts:
+        - type: 'text'
+          text: 'Can you recommend some popular tourist attractions in Kyoto?'
     - id: 'd4f5g8c3-a1d9-4e67-b3f2-c9d8e7a6b5f4'
       role: assistant
-      content: 'Kyoto is known for its beautiful temples, traditional tea houses, and gardens. Some popular attractions include Kinkaku-ji (Golden Pavilion) with its stunning gold leaf exterior reflecting in the mirror pond, Fushimi Inari Shrine with its thousands of vermilion torii gates winding up the mountainside, Arashiyama Bamboo Grove where towering stalks create an otherworldly atmosphere, Kiyomizu-dera Temple perched on a hillside offering panoramic views of the city, and the historic Gion district where you might spot geisha hurrying to evening appointments through narrow stone-paved streets lined with traditional wooden machiya houses.'
+      parts:
+        - type: 'text'
+          text: 'Kyoto is known for its beautiful temples, traditional tea houses, and gardens. Some popular attractions include Kinkaku-ji (Golden Pavilion) with its stunning gold leaf exterior reflecting in the mirror pond, Fushimi Inari Shrine with its thousands of vermilion torii gates winding up the mountainside, Arashiyama Bamboo Grove where towering stalks create an otherworldly atmosphere, Kiyomizu-dera Temple perched on a hillside offering panoramic views of the city, and the historic Gion district where you might spot geisha hurrying to evening appointments through narrow stone-paved streets lined with traditional wooden machiya houses.'
 ---
 ::
 
@@ -317,8 +370,8 @@ Use the `should-scroll-to-bottom` prop to enable/disable bottom auto scroll when
 
 ## Examples
 
-::note{to="https://sdk.vercel.ai/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the `useChat` composable from **Vercel AI SDK**.
+::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
+These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
 ::
 
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-pro/chat" target="_blank"}
@@ -327,24 +380,37 @@ Check out the source code of our **AI Chat template** on GitHub for a real-life 
 
 ### Within a page
 
-Use the ChatMessages component with the `useChat` composable to display a list of chat messages within a page.
+Use the ChatMessages component with the `Chat` class from AI SDK v5 to display a list of chat messages within a page.
 
 Pass the `messages` prop alongside the `status` prop that will be used for the auto scroll and the indicator display.
 
-```vue [pages/\[id\\].vue] {4,11-15}
+```vue [pages/\[id\\].vue] {2-5,8,12-16,20}
 <script setup lang="ts">
-import { useChat } from '@ai-sdk/vue'
+import { Chat } from '@ai-sdk/vue'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
-const { messages, input, handleSubmit, reload, stop, status, error } = useChat()
+const input = ref('')
+
+const chat = new Chat({
+  onError(error) {
+    console.error('Chat error:', error)
+  }
+})
+
+const handleSubmit = (e: Event) => {
+  e.preventDefault()
+  chat.sendMessage({ text: input.value })
+  input.value = ''
+}
 </script>
 
 <template>
   <UDashboardPanel>
     <template #body>
       <UContainer>
-        <UChatMessages :messages="messages" :status="status">
+        <UChatMessages :messages="chat.messages" :status="chat.status">
           <template #content="{ message }">
-            <MDC :value="message.content" :cache-key="message.id" unwrap="p" />
+            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
           </template>
         </UChatMessages>
       </UContainer>
@@ -352,8 +418,8 @@ const { messages, input, handleSubmit, reload, stop, status, error } = useChat()
 
     <template #footer>
       <UContainer>
-        <UChatPrompt v-model="input" :error="error" @submit="handleSubmit">
-          <UChatPromptSubmit :status="status" @stop="stop" @reload="reload" />
+        <UChatPrompt v-model="input" :error="chat.error" @submit="handleSubmit">
+          <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
         </UChatPrompt>
       </UContainer>
     </template>
@@ -362,7 +428,7 @@ const { messages, input, handleSubmit, reload, stop, status, error } = useChat()
 ```
 
 ::note
-In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render the content of the message. As Nuxt UI provides pre-styled prose components, your content will be automatically styled.
+In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) to render the content of the message. The `getTextFromMessage` utility extracts the text content from the AI SDK V5 message parts. As Nuxt UI provides pre-styled prose components, your content will be automatically styled.
 ::
 
 ## API
@@ -379,10 +445,14 @@ In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
 
 ```vue{3-5}
+<script setup lang="ts">
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
+</script>
+
 <template>
   <UChatMessages :messages="messages" :status="status">
     <template #content="{ message }">
-      <MDC :value="message.content" :cache-key="message.id" unwrap="p" />
+      <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
     </template>
   </UChatMessages>
 </template>
