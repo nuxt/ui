@@ -6,6 +6,7 @@ const props = defineProps<{
   error: NuxtError
 }>()
 
+const route = useRoute()
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
 
@@ -59,26 +60,28 @@ provide('navigation', mappedNavigation)
   <UApp>
     <NuxtLoadingIndicator color="#FFF" />
 
-    <Banner />
+    <div :class="[route.path.startsWith('/docs/') && 'root']">
+      <Banner />
 
-    <Header :links="links" />
+      <Header :links="links" />
 
-    <UError :error="error" />
+      <UError :error="error" />
 
-    <Footer />
+      <Footer />
 
-    <ClientOnly>
-      <LazyUContentSearch
-        :links="searchLinks"
-        :files="files"
-        :groups="[{
-          id: 'framework',
-          label: 'Framework',
-          items: frameworks
-        }]"
-        :navigation="filteredNavigation"
-        :fuse="{ resultLimit: 120 }"
-      />
-    </ClientOnly>
+      <ClientOnly>
+        <LazyUContentSearch
+          :links="searchLinks"
+          :files="files"
+          :groups="[{
+            id: 'framework',
+            label: 'Framework',
+            items: frameworks
+          }]"
+          :navigation="filteredNavigation"
+          :fuse="{ resultLimit: 120 }"
+        />
+      </ClientOnly>
+    </div>
   </UApp>
 </template>

@@ -135,7 +135,7 @@ const logoContextMenuItems = [
       <USeparator class="hidden lg:flex" />
 
       <UContainer class="hidden lg:flex items-center justify-between">
-        <UNavigationMenu :items="docsNavigation" variant="pill" class="-mx-2.5" />
+        <UNavigationMenu :items="docsNavigation" variant="pill" highlight class="-mx-2.5 -mb-px" />
 
         <FrameworkSelect class="w-40" />
       </UContainer>
