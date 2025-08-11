@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { UIMessage } from 'ai'
+import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
 import type { ButtonProps, ChatMessageProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
@@ -9,7 +9,7 @@ type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
 
 export interface ChatMessagesProps {
   messages?: UIMessage[]
-  status?: 'ready' | 'submitted' | 'streaming' | 'error'
+  status?: ChatStatus
   /**
    * Whether to automatically scroll to the bottom when a message is streaming.
    * @defaultValue false

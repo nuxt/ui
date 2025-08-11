@@ -40,6 +40,7 @@ export interface ChatMessageProps extends Omit<UIMessage, 'content'> {
   compact?: boolean
   /**
    * @deprecated Use `parts` instead. (https://ai-sdk.dev/docs/migration-guides/migration-guide-5-0#content--parts-array)
+   * Use to display the content of the message.
    */
   content?: string
   class?: any
@@ -102,7 +103,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
             {{ content }}
           </template>
           <template v-else>
-            <template v-for="part in parts" :key="part.type">
+            <template v-for="(part, index) in parts" :key="`${id}-${part.type}-${index}`">
               <template v-if="part.type === 'text'">
                 {{ part.text }}
               </template>

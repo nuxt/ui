@@ -3,11 +3,12 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt-submit'
 import type { ButtonProps, ButtonSlots } from '../types'
 import type { ComponentConfig } from '../types/tv'
+import type { ChatStatus } from 'ai'
 
 type ChatPromptSubmit = ComponentConfig<typeof theme, AppConfig, 'chatPromptSubmit'>
 
 export interface ChatPromptSubmitProps extends /** @vue-ignore */ Pick<ButtonProps, 'size' | 'label'> {
-  status?: 'ready' | 'submitted' | 'streaming' | 'error'
+  status?: ChatStatus
   /**
    * The icon displayed in the button when the status is `ready`.
    * @defaultValue appConfig.ui.icons.arrowUp
