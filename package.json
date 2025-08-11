@@ -75,7 +75,7 @@
     "happy-dom": "^18.0.1",
     "nuxt": "^4.0.3",
     "release-it": "^19.0.4",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4",
     "vitest-environment-nuxt": "^1.0.1",
     "vue-tsc": "^3.0.5"
@@ -114,6 +114,6 @@
     "@vueuse/nuxt": "13.1.0",
     "unimport": "4.1.1",
     "chokidar": "3.6.0",
-    "typescript": "5.8.3"
+    "typescript": "^5.9.2"
   }
 }
