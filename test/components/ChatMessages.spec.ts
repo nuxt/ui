@@ -10,11 +10,11 @@ describe('ChatMessages', () => {
     messages: [{
       id: '6045235a-a435-46b8-989d-2df38ca2eb47',
       role: 'user' as const,
-      content: 'Hello, how are you?'
+      parts: [{ type: 'text', text: 'Hello, how are you?' }]
     }, {
       id: '6045235a-a435-46b8-989d-2df38ca2eb47',
       role: 'assistant' as const,
-      content: 'I am fine, thank you!'
+      parts: [{ type: 'text', text: 'I am fine, thank you!' }]
     }]
   }
 

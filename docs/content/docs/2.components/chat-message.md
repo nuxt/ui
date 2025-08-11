@@ -16,7 +16,9 @@ The ChatMessage component renders an `<article>` element for a `user` or `assist
 
 ::u-chat-message
 ---
-content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+parts:
+  - type: 'text'
+    text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 side: 'right'
 variant: 'soft'
 avatar:
@@ -30,16 +32,24 @@ avatar:
 Use the [`ChatMessages`](/docs/components/chat-messages) component to display a list of chat messages.
 ::
 
-### Content
+### Parts
 
-Use the `content` prop to display the message content.
+Use the `parts` prop to display the message content using the AI SDK v5 format.
 
 ::component-code
 ---
 prettier: true
+ignore:
+  - parts
 props:
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  parts:
+    - type: 'text'
+      text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
+::
+
+::note
+The `parts` prop is the recommended format for AI SDK v5. Each part has a `type` (e.g., 'text') and corresponding content. The ChatMessage component also supports the deprecated `content` prop for backward compatibility.
 ::
 
 ### Side
@@ -50,10 +60,12 @@ Use the `side` prop to display the message on the left or right.
 ---
 prettier: true
 ignore:
-  - content
+  - parts
 props:
   side: 'right'
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  parts:
+    - type: 'text'
+      text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
 ::
 
@@ -69,10 +81,12 @@ Use the `variant` prop to change style of the message.
 ---
 prettier: true
 ignore:
-  - content
+  - parts
 props:
   variant: 'soft'
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  parts:
+    - type: 'text'
+      text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
 ::
 
@@ -88,14 +102,16 @@ Use the `icon` prop to display an [Icon](/docs/components/icon) component next t
 ---
 prettier: true
 ignore:
-  - content
+  - parts
   - side
   - variant
 props:
   icon: i-lucide-user
   variant: 'soft'
   side: 'right'
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  parts:
+    - type: 'text'
+      text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
 ::
 
@@ -107,7 +123,7 @@ Use the `avatar` prop to display an [Avatar](/docs/components/avatar) component 
 ---
 prettier: true
 ignore:
-  - content
+  - parts
   - side
   - variant
 props:
@@ -115,7 +131,9 @@ props:
     src: 'https://github.com/benjamincanac.png'
   variant: 'soft'
   side: 'right'
-  content: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  parts:
+    - type: 'text'
+      text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
 ---
 ::
 
@@ -125,11 +143,13 @@ You can also use the `avatar.icon` prop to display an icon as the avatar.
 ---
 prettier: true
 ignore:
-  - content
+  - parts
 props:
   avatar:
     icon: i-lucide-bot
-  content: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the useChat composable from Vercel AI SDK, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
+  parts:
+    - type: 'text'
+      text: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the Chat class from AI SDK v5, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
 ---
 ::
 
@@ -143,13 +163,15 @@ prettier: true
 external:
   - actions
 ignore:
-  - content
+  - parts
   - actions
 props:
   actions:
     - label: 'Copy to clipboard'
       icon: i-lucide-copy
-  content: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the useChat composable from Vercel AI SDK, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
+  parts:
+    - type: 'text'
+      text: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the Chat class from AI SDK v5, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
 ---
 ::
 

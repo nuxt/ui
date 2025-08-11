@@ -235,8 +235,8 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.re
 
 ## Examples
 
-::note{to="https://sdk.vercel.ai/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the `useChat` composable from **Vercel AI SDK**.
+::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
+These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
 ::
 
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-pro/chat" target="_blank"}
@@ -245,24 +245,37 @@ Check out the source code of our **AI Chat template** on GitHub for a real-life 
 
 ### Within a page
 
-Use the ChatPromptSubmit component with the `useChat` composable to display a chat prompt within a page.
+Use the ChatPromptSubmit component with the `Chat` class from AI SDK v5 to display a chat prompt within a page.
 
 Pass the `status` prop and listen to the `stop` and `reload` events to control the chat.
 
-```vue [pages/\[id\\].vue] {4,22}
+```vue [pages/\[id\\].vue] {2-4,7,11-15,19,24}
 <script setup lang="ts">
-import { useChat } from '@ai-sdk/vue'
+import { Chat } from '@ai-sdk/vue'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
-const { messages, input, handleSubmit, reload, stop, status, error } = useChat()
+const input = ref('')
+
+const chat = new Chat({
+  onError(error) {
+    console.error('Chat error:', error)
+  }
+})
+
+const handleSubmit = (e: Event) => {
+  e.preventDefault()
+  chat.sendMessage({ text: input.value })
+  input.value = ''
+}
 </script>
 
 <template>
   <UDashboardPanel>
     <template #body>
       <UContainer>
-        <UChatMessages :messages="messages" :status="status">
+        <UChatMessages :messages="chat.messages" :status="chat.status">
           <template #content="{ message }">
-            <MDC :value="message.content" :cache-key="message.id" unwrap="p" />
+            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
           </template>
         </UChatMessages>
       </UContainer>
@@ -270,8 +283,8 @@ const { messages, input, handleSubmit, reload, stop, status, error } = useChat()
 
     <template #footer>
       <UContainer>
-        <UChatPrompt v-model="input" :error="error" @submit="handleSubmit">
-          <UChatPromptSubmit :status="status" @stop="stop" @reload="reload" />
+        <UChatPrompt v-model="input" :error="chat.error" @submit="handleSubmit">
+          <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
         </UChatPrompt>
       </UContainer>
     </template>

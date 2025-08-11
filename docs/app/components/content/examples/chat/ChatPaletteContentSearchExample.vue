@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { useChat } from '@ai-sdk/vue'
+import { Chat } from '@ai-sdk/vue'
+import type { UIMessage } from 'ai'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
+
+const messages: UIMessage[] = []
+const input = ref('')
 
 const groups = computed(() => [{
   id: 'ai',
@@ -13,13 +18,13 @@ const groups = computed(() => [{
       ai.value = true
 
       if (searchTerm.value) {
-        setMessages([{
+        messages.push({
           id: '1',
           role: 'user',
-          content: searchTerm.value
-        }])
+          parts: [{ type: 'text', text: searchTerm.value }]
+        })
 
-        reload()
+        chat.regenerate()
       }
     }
   }]
@@ -28,7 +33,15 @@ const groups = computed(() => [{
 const ai = ref(false)
 const searchTerm = ref('')
 
-const { messages, input, handleSubmit, status, error, reload, setMessages } = useChat()
+const chat = new Chat({
+  messages
+})
+
+function handleSubmit(e: Event) {
+  e.preventDefault()
+  chat.sendMessage({ text: input.value })
+  input.value = ''
+}
 
 function onClose(e: Event) {
   e.preventDefault()
@@ -43,13 +56,13 @@ function onClose(e: Event) {
       <template v-if="ai" #content>
         <UChatPalette>
           <UChatMessages
-            :messages="messages"
-            :status="status"
+            :messages="chat.messages"
+            :status="chat.status"
             :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png' } }"
             :assistant="{ icon: 'i-lucide-bot' }"
           >
             <template #content="{ message }">
-              <MDC :value="message.content" :cache-key="message.id" unwrap="p" />
+              <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
             </template>
           </UChatMessages>
 
@@ -58,7 +71,7 @@ function onClose(e: Event) {
               v-model="input"
               icon="i-lucide-search"
               variant="naked"
-              :error="error"
+              :error="chat.error"
               @submit="handleSubmit"
               @close="onClose"
             />

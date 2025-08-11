@@ -1,7 +1,20 @@
 <script setup lang="ts">
-import { useChat } from '@ai-sdk/vue'
+import { Chat } from '@ai-sdk/vue'
+import type { UIMessage } from 'ai'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
-const { messages, input, handleSubmit, status, error } = useChat()
+const messages: UIMessage[] = []
+const input = ref('')
+
+const chat = new Chat({
+  messages
+})
+
+function handleSubmit(e: Event) {
+  e.preventDefault()
+  chat.sendMessage({ text: input.value })
+  input.value = ''
+}
 </script>
 
 <template>
@@ -9,13 +22,13 @@ const { messages, input, handleSubmit, status, error } = useChat()
     <template #content>
       <UChatPalette>
         <UChatMessages
-          :messages="messages"
-          :status="status"
+          :messages="chat.messages"
+          :status="chat.status"
           :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png' } }"
           :assistant="{ icon: 'i-lucide-bot' }"
         >
           <template #content="{ message }">
-            <MDC :value="message.content" :cache-key="message.id" unwrap="p" />
+            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
           </template>
         </UChatMessages>
 
@@ -24,7 +37,7 @@ const { messages, input, handleSubmit, status, error } = useChat()
             v-model="input"
             icon="i-lucide-search"
             variant="naked"
-            :error="error"
+            :error="chat.error"
             @submit="handleSubmit"
           />
         </template>

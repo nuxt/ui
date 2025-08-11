@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { Message, UseChatHelpers } from '@ai-sdk/vue'
+import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
 import type { ButtonProps, ChatMessageProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
@@ -8,8 +8,8 @@ import type { ComponentConfig } from '../types/tv'
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
 
 export interface ChatMessagesProps {
-  messages?: Message[]
-  status?: UseChatHelpers['status']['value']
+  messages?: UIMessage[]
+  status?: ChatStatus
   /**
    * Whether to automatically scroll to the bottom when a message is streaming.
    * @defaultValue false
@@ -61,9 +61,9 @@ export interface ChatMessagesSlots {
   default(props?: {}): any
   indicator(props?: {}): any
   viewport(props: { onClick: () => void }): any
-  content(props: { message: Message }): any
-  leading(props: { message: Message }): any
-  actions(props: { message: Message }): any
+  content(props: { message: UIMessage }): any
+  leading(props: { message: UIMessage }): any
+  actions(props: { message: UIMessage }): any
 }
 </script>
 
@@ -277,9 +277,8 @@ onMounted(() => {
     <UChatMessage
       v-if="status === 'submitted'"
       id="indicator"
-      content=""
       role="assistant"
-      v-bind="{ ...assistantProps, actions: undefined }"
+      v-bind="{ ...assistantProps, actions: undefined, parts: [] }"
       :compact="compact"
     >
       <template #content>
