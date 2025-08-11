@@ -47,7 +47,7 @@ By default, the link has default active and inactive styles, check out the [#the
 ::component-code
 ---
 props:
-  to: /components/link
+  to: /docs/components/link
 slots:
   default: Link
 ---
@@ -65,7 +65,7 @@ ignore:
   - raw
 props:
   raw: true
-  to: /components/link
+  to: /docs/components/link
   activeClass: 'font-bold'
   inactiveClass: 'text-muted'
 slots:

@@ -23,7 +23,7 @@ description: 'A Nuxt/Vue-integrated UI library providing a rich set of fully-sty
 ::::u-page-card{variant="subtle" class="rounded-lg"}
 
 #default{unwrap="p"}
-![App screenshot](https://ui.nuxt.com/templates/dashboard1.png){width="4804" height="3000" class="rounded-sm shadow-2xl ring ring-default"}
+![App screenshot](/blocks/image4.png){width="4804" height="3000" class="rounded-sm shadow-2xl ring ring-default"}
 
 ::::
 
@@ -133,10 +133,10 @@ props:
 slots:
   default: |
 
-    <img src="https://ui.nuxt.com/templates/dashboard1.png" alt="App screenshot" class="rounded-lg shadow-2xl ring ring-default" />
+    <img src="/blocks/image4.png" alt="App screenshot" class="rounded-lg shadow-2xl ring ring-default" />
 ---
 
-![App screenshot](https://ui.nuxt.com/templates/dashboard1.png){class="rounded-lg shadow-2xl ring ring-default"}
+![App screenshot](/blocks/image4.png){class="rounded-lg shadow-2xl ring ring-default"}
 ::
 
 ### Reverse
@@ -171,10 +171,10 @@ props:
 slots:
   default: |
 
-    <img src="https://ui.nuxt.com/templates/dashboard1.png" alt="App screenshot" class="rounded-lg shadow-2xl ring ring-default" />
+    <img src="/blocks/image4.png" alt="App screenshot" class="rounded-lg shadow-2xl ring ring-default" />
 ---
 
-![App screenshot](https://ui.nuxt.com/templates/dashboard1.png){class="rounded-lg shadow-2xl ring ring-default"}
+![App screenshot](/blocks/image4.png){class="rounded-lg shadow-2xl ring ring-default"}
 ::
 
 ## API

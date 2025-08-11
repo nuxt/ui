@@ -4,7 +4,7 @@ description: 'A customizable Form to create login, register or password reset fo
 category: page
 links:
   - label: Form
-    to: /components/form
+    to: /docs/components/form
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github

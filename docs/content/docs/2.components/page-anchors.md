@@ -34,10 +34,10 @@ props:
   links:
     - label: 'Documentation'
       icon: i-lucide-book-open
-      to: /getting-started
+      to: /docs/getting-started
     - label: 'Components'
       icon: i-lucide-box
-      to: /components/app
+      to: /docs/components
     - label: 'Figma Kit'
       icon: i-simple-icons-figma
       to: https://www.figma.com/community/file/1288455405058138934
@@ -73,7 +73,7 @@ const links: PageAnchor[] = [{
 }, {
   label: 'Components',
   icon: 'i-lucide-box',
-  to: '/docs/components/app'
+  to: '/docs/components'
 }, {
   label: 'Figma Kit',
   icon: 'i-simple-icons-figma',

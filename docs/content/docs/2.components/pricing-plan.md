@@ -36,7 +36,7 @@ class: 'w-96'
 
 ::
 
-::tip{to="/components/pricing-plans"}
+::tip{to="/docs/components/pricing-plans"}
 Use the [`PricingPlans`](/docs/components/pricing-plans) component to display multiple pricing plans in a responsive grid layout.
 ::
 
@@ -208,12 +208,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.success` key.
 :::
 
 #vue
-:::tip{to="/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.success` key.
 :::
 ::
@@ -456,7 +456,7 @@ props:
 
 Use the `scale` prop to make a PricingPlan bigger than the others.
 
-::note{to="/components/pricing-plans#scale"}
+::note{to="/docs/components/pricing-plans#scale"}
 Check out the PricingPlans's `scale` example to see how it works as it's hard to demonstrate by itself.
 ::
 

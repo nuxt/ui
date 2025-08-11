@@ -9,7 +9,7 @@ links:
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/content/ContentToc.vue
 ---
 
-::warning{to="/getting-started/content"}
+::warning{to="/docs/getting-started/content"}
 This component is only available when the `@nuxt/content` module is installed.
 ::
 

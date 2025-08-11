@@ -4,10 +4,10 @@
       <img
         v-for="i in 4"
         :key="i"
-        :src="`/pro/blocks/image${i}.png`"
+        :src="`/blocks/image${i}.png`"
         width="460"
         height="258"
-        :alt="`Nuxt UI Pro Screenshot ${i}`"
+        :alt="`Nuxt UI Screenshot ${i}`"
         class="aspect-video border border-default rounded-lg bg-white"
       >
     </UPageMarquee>
@@ -15,10 +15,10 @@
       <img
         v-for="i in [5, 6, 7, 8]"
         :key="i"
-        :src="`/pro/blocks/image${i}.png`"
+        :src="`/blocks/image${i}.png`"
         width="460"
         height="258"
-        :alt="`Nuxt UI Pro Screenshot ${i}`"
+        :alt="`Nuxt UI Screenshot ${i}`"
         class="aspect-video border border-default rounded-lg bg-white"
       >
     </UPageMarquee>
@@ -26,10 +26,10 @@
       <img
         v-for="i in [9, 10, 11, 12]"
         :key="i"
-        :src="`/pro/blocks/image${i}.png`"
+        :src="`/blocks/image${i}.png`"
         width="460"
         height="258"
-        :alt="`Nuxt UI Pro Screenshot ${i}`"
+        :alt="`Nuxt UI Screenshot ${i}`"
         class="aspect-video border border-default rounded-lg bg-white"
       >
     </UPageMarquee>

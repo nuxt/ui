@@ -21,7 +21,7 @@ const toast = useToast()
 Make sure to wrap your app with the [`App`](/docs/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v4/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://reka-ui.com/docs/components/toast#provider) component from Reka UI.
 ::
 
-::tip{to="/components/toast"}
+::tip{to="/docs/components/toast"}
 Learn how to customize the appearance and behavior of toasts in the **Toast** component documentation.
 ::
 

@@ -42,7 +42,7 @@ if (!import.meta.prerender) {
       if (route.path.endsWith(`/${page.value?.framework}`)) {
         navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`)
       } else {
-        navigateTo(`/getting-started`)
+        navigateTo(`/docs/getting-started`)
       }
     }
   })

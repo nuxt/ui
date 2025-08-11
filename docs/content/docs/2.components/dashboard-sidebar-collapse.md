@@ -4,7 +4,7 @@ description: 'A Button to collapse the sidebar on desktop.'
 category: dashboard
 links:
   - label: Button
-    to: /components/button
+    to: /docs/components/button
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github

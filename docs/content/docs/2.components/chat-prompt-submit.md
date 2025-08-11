@@ -4,7 +4,7 @@ description: 'A Button for submitting chat prompts with automatic status handlin
 category: ai
 links:
   - label: Button
-    to: /components/button
+    to: /docs/components/button
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -70,12 +70,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.arrowUp` key.
 :::
 
 #vue
-:::tip{to="/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.arrowUp` key.
 :::
 ::
@@ -121,12 +121,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.stop` key.
 :::
 
 #vue
-:::tip{to="/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.stop` key.
 :::
 ::
@@ -172,12 +172,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.stop` key.
 :::
 
 #vue
-:::tip{to="/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.stop` key.
 :::
 ::
@@ -223,12 +223,12 @@ props:
 
 ::framework-only
 #nuxt
-:::tip{to="/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.reload` key.
 :::
 
 #vue
-:::tip{to="/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.reload` key.
 :::
 ::

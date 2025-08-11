@@ -18,7 +18,7 @@ Use the [useToast](/docs/composables/use-toast) composable to display a toast in
 Make sure to wrap your app with the [`App`](/docs/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v4/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://reka-ui.com/docs/components/toast#provider) component from Reka UI.
 ::
 
-::tip{to="/components/app#props"}
+::tip{to="/docs/components/app#props"}
 You can check the `App` component `toaster` prop to see how to configure the Toaster globally.
 ::
 
@@ -131,12 +131,12 @@ name: 'toast-close-icon-example'
 
 ::framework-only
 #nuxt
-:::tip{to="/getting-started/icons/nuxt#theme"}
+:::tip{to="/docs/getting-started/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
 #vue
-:::tip{to="/getting-started/icons/vue#theme"}
+:::tip{to="/docs/getting-started/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
 ::
