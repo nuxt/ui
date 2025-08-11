@@ -6,11 +6,13 @@ settings:
 
 overrides:
   '@nuxt/ui': workspace:*
+  '@nuxt/module-builder': 1.0.1
   chokidar: 3.6.0
   debug: 4.3.7
   rollup: 4.34.9
   unimport: 4.1.1
   unplugin: ^2.3.5
+  tailwind-variants: 2.0.1
   typescript: 5.8.3
 
 importers:
@@ -138,7 +140,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       tailwind-variants:
-        specifier: ^2.0.1
+        specifier: 2.0.1
         version: 2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.11)
       tailwindcss:
         specifier: ^4.1.11
@@ -184,7 +186,7 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0(@typescript-eslint/utils@8.39.0(eslint@9.33.0(jiti@2.5.1))(typescript@5.8.3))(@vue/compiler-sfc@3.5.18)(eslint@9.33.0(jiti@2.5.1))(typescript@5.8.3)
       '@nuxt/module-builder':
-        specifier: ^1.0.1
+        specifier: 1.0.1
         version: 1.0.1(@nuxt/cli@3.27.0(magicast@0.3.5))(@vue/compiler-core@3.5.18)(esbuild@0.25.8)(typescript@5.8.3)(vue-tsc@3.0.5(typescript@5.8.3))(vue@3.5.18(typescript@5.8.3))
       '@nuxt/test-utils':
         specifier: ^3.19.2
