@@ -233,9 +233,25 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
   buttonGroup: orientation.value
 }))
 
-function displayValue(value: T): string {
-  const item = items.value.find(item => compare(typeof item === 'object' && props.valueKey ? get(item as Record<string, any>, props.valueKey as string) : item, value))
-  return item && (typeof item === 'object' ? get(item, props.labelKey as string) : item)
+function displayValue(value: T): string | undefined {
+  const foundItem = items.value.find((item) => {
+    const itemValue = (typeof item === 'object' && item !== null && props.valueKey)
+      ? get(item as Record<string, any>, props.valueKey as string)
+      : item
+    return compare(itemValue, value)
+  })
+
+  const source = foundItem ?? value
+
+  if (source === null || source === undefined) {
+    return undefined
+  }
+
+  if (typeof source === 'object') {
+    return props.labelKey ? get(source as Record<string, any>, props.labelKey as string) : undefined
+  }
+
+  return String(source)
 }
 
 const groups = computed<InputMenuItem[][]>(() =>
