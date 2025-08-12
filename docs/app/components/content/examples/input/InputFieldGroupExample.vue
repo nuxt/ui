@@ -5,7 +5,7 @@ const domain = ref(domains[0])
 </script>
 
 <template>
-  <UButtonGroup>
+  <UFieldGroup>
     <UInput
       v-model="value"
       placeholder="nuxt"
@@ -22,5 +22,5 @@ const domain = ref(domains[0])
     </UInput>
 
     <USelectMenu v-model="domain" :items="domains" />
-  </UButtonGroup>
+  </UFieldGroup>
 </template>

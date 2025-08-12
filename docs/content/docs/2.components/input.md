@@ -312,13 +312,13 @@ name: 'input-form-field-example'
 It also provides validation and error handling when used within a **Form** component.
 ::
 
-### Within a ButtonGroup
+### Within a FieldGroup
 
-You can use the Input within a [ButtonGroup](/docs/components/button-group) component to group multiple elements together.
+You can use the Input within a [FieldGroup](/components/field-group) component to group multiple elements together.
 
 ::component-example
 ---
-name: 'input-button-group-example'
+name: 'input-field-group-example'
 ---
 ::
 

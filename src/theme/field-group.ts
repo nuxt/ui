@@ -1,12 +1,12 @@
-export const buttonGroupVariant = {
-  buttonGroup: {
+export const fieldGroupVariant = {
+  fieldGroup: {
     horizontal: 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]',
     vertical: 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]'
   }
 }
 
-export const buttonGroupVariantWithRoot = {
-  buttonGroup: {
+export const fieldGroupVariantWithRoot = {
+  fieldGroup: {
     horizontal: {
       root: 'group has-focus-visible:z-[1]',
       base: 'group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none'
