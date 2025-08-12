@@ -9,6 +9,11 @@
     "v2",
     "v3"
   ],
+  "ignoreDeps": [
+    "@nuxt/module-builder",
+    "tailwind-variants",
+    "typescript"
+  ],
   "packageRules": [
     {
       "matchBaseBranches": [

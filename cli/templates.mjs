@@ -213,6 +213,10 @@ navigation.badge: Soon
 ## Theme
 
 :component-theme${pro ? '{pro}' : ''}
+
+## Changelog
+
+:component-changelog
 `
   }
 }

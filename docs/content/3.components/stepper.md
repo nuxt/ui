@@ -246,3 +246,7 @@ This will give you access to the following:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog
