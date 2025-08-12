@@ -233,7 +233,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
   buttonGroup: orientation.value
 }))
 
-function displayValue(value: T): string | undefined {
+function displayValue(value: T): string {
   const foundItem = items.value.find((item) => {
     const itemValue = (typeof item === 'object' && item !== null && props.valueKey)
       ? get(item as Record<string, any>, props.valueKey as string)
@@ -244,11 +244,11 @@ function displayValue(value: T): string | undefined {
   const source = foundItem ?? value
 
   if (source === null || source === undefined) {
-    return undefined
+    return ''
   }
 
   if (typeof source === 'object') {
-    return props.labelKey ? get(source as Record<string, any>, props.labelKey as string) : undefined
+    return props.labelKey ? get(source as Record<string, any>, props.labelKey as string) : ''
   }
 
   return String(source)
