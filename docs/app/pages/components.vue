@@ -16,8 +16,8 @@ useSeoMeta({
 })
 
 const { data: components } = await useAsyncData('all-components', () => {
-  return queryCollection('content')
-    .where('path', 'LIKE', '/components/%')
+  return queryCollection('docs')
+    .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
     .select('path', 'title', 'description', 'category', 'module')
     .all()
@@ -102,7 +102,7 @@ onMounted(() => {
 
       <template #links>
         <UButton
-          to="/getting-started/installation/vue"
+          to="/docs/getting-started/installation/vue"
           label="Start with Vue"
           icon="i-logos-vue"
           color="neutral"
@@ -110,7 +110,7 @@ onMounted(() => {
           size="xl"
         />
         <UButton
-          to="/getting-started/installation/nuxt"
+          to="/docs/getting-started/installation/nuxt"
           label="Start with Nuxt"
           icon="i-logos-nuxt-icon"
           color="neutral"
@@ -157,14 +157,13 @@ onMounted(() => {
             <template #title>
               <div class="flex items-center gap-0.5">
                 <span>{{ component.title }}</span>
-                <sup v-if="component.module === 'ui-pro'" class="text-[8px] font-medium text-primary">PRO</sup>
               </div>
             </template>
 
             <div class="rounded-md border border-muted overflow-hidden aspect-[16/9]">
               <UColorModeImage
-                :light="`${component.path.replace('/components/', '/components/light/')}.png`"
-                :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+                :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
+                :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
                 class="group-hover:scale-105 transition-transform size-full"
                 :loading="index >= 4 ? 'lazy' : 'eager'"
                 width="640"

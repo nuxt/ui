@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "3.3.0",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.14.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -96,21 +96,22 @@
   "scripts": {
     "build": "nuxt-module-build build",
     "prepack": "pnpm build",
-    "dev": "nuxt dev playground --uiDev",
-    "dev:build": "nuxt build playground",
-    "dev:vue": "pnpm --filter playground-vue dev -- --uiDev",
-    "dev:vue:build": "pnpm --filter playground-vue build",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playground && nuxt prepare docs && pnpm dev:vue:build",
+    "dev": "nuxt dev playgrounds/nuxt --uiDev",
+    "dev:build": "nuxt build playgrounds/nuxt",
+    "dev:vue": "pnpm --filter './playgrounds/vue' dev -- --uiDev",
+    "dev:vue:build": "pnpm --filter './playgrounds/vue' build",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare docs && pnpm dev:vue:build",
     "docs": "nuxt dev docs --uiDev",
     "docs:build": "nuxt build docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxt typecheck playground && nuxt typecheck docs && cd playground-vue && vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit",
     "test": "vitest",
     "test:vue": "vitest -c vitest.vue.config.ts",
     "release": "release-it"
   },
   "dependencies": {
+    "@ai-sdk/vue": "^2.0.9",
     "@iconify/vue": "^5.0.0",
     "@internationalized/date": "^3.8.2",
     "@internationalized/number": "^3.6.4",
@@ -123,7 +124,7 @@
     "@tailwindcss/postcss": "^4.1.11",
     "@tailwindcss/vite": "^4.1.11",
     "@tanstack/vue-table": "^8.21.3",
-    "@unhead/vue": "^2.0.12",
+    "@unhead/vue": "^2.0.14",
     "@vueuse/core": "^13.6.0",
     "@vueuse/integrations": "^13.6.0",
     "colortranslator": "^5.0.0",
@@ -141,6 +142,7 @@
     "knitwork": "^1.2.0",
     "magic-string": "^0.30.17",
     "mlly": "^1.7.4",
+    "motion-v": "^1.7.0",
     "ohash": "^2.0.11",
     "pathe": "^2.0.3",
     "reka-ui": "2.4.1",
@@ -156,13 +158,14 @@
     "vue-component-type-helpers": "^3.0.5"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.7.1",
-    "@nuxt/module-builder": "^1.0.2",
+    "@nuxt/content": "^3.6.3",
+    "@nuxt/eslint-config": "^1.8.0",
+    "@nuxt/module-builder": "^1.0.1",
     "@nuxt/test-utils": "^3.19.2",
     "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.6.0",
-    "eslint": "^9.32.0",
+    "eslint": "^9.33.0",
     "happy-dom": "^18.0.1",
     "nuxt": "^4.0.3",
     "release-it": "^19.0.4",
@@ -205,11 +208,14 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
+    "@nuxt/module-builder": "1.0.1",
     "chokidar": "3.6.0",
     "debug": "4.3.7",
     "rollup": "4.34.9",
     "unimport": "4.1.1",
-    "unplugin": "^2.3.5"
+    "unplugin": "^2.3.5",
+    "tailwind-variants": "2.0.1",
+    "typescript": "5.8.3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

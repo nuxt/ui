@@ -6,57 +6,127 @@ export default defineLocale<Messages>({
   code: 'ur',
   dir: 'rtl',
   messages: {
-    inputMenu: {
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      noData: 'کوئی ڈیٹا نہیں',
-      create: '"{label}" بنائیں'
-    },
-    calendar: {
-      prevYear: 'پچھلا سال',
-      nextYear: 'اگلا سال',
-      prevMonth: 'پچھلا مہینہ',
-      nextMonth: 'اگلا مہینہ'
-    },
-    inputNumber: {
-      increment: 'اضافہ',
-      decrement: 'کمی'
-    },
-    commandPalette: {
-      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...',
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      noData: 'کوئی ڈیٹا نہیں',
-      close: 'بند کریں',
-      back: 'واپس'
-    },
-    selectMenu: {
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      noData: 'کوئی ڈیٹا نہیں',
-      create: '"{label}" بنائیں',
-      search: 'تلاش کریں...'
-    },
-    toast: {
+    alert: {
       close: 'بند کریں'
     },
+    authForm: {
+      hidePassword: 'پاس ورڈ چھپائیں',
+      showPassword: 'پاس ورڈ دکھائیں',
+      submit: 'جاری رکھیں'
+    },
+    banner: {
+      close: 'بند کریں'
+    },
+    calendar: {
+      nextMonth: 'اگلا مہینہ',
+      nextYear: 'اگلا سال',
+      prevMonth: 'پچھلا مہینہ',
+      prevYear: 'پچھلا سال'
+    },
     carousel: {
-      prev: 'پچھلا',
-      next: 'اگلا',
       dots: 'دکھانے کے لیے سلائیڈ منتخب کریں',
-      goto: 'سلائیڈ {slide} پر جائیں'
+      goto: 'سلائیڈ {slide} پر جائیں',
+      next: 'اگلا',
+      prev: 'پچھلا'
+    },
+    chatPrompt: {
+      placeholder: 'یہاں اپنا پیغام لکھیں'
+    },
+    chatPromptSubmit: {
+      label: 'پیغام بھیجیں'
+    },
+    colorMode: {
+      dark: 'تاریک',
+      light: 'روشن',
+      switchToDark: 'تاریک موڈ میں تبدیل کریں',
+      switchToLight: 'روشن موڈ میں تبدیل کریں',
+      system: 'سسٹم'
+    },
+    commandPalette: {
+      back: 'واپس',
+      close: 'بند کریں',
+      noData: 'کوئی ڈیٹا نہیں',
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...'
+    },
+    contentSearch: {
+      links: 'لنکس',
+      theme: 'تھیم'
+    },
+    contentSearchButton: {
+      label: 'تلاش کریں...'
+    },
+    contentToc: {
+      title: 'اس صفحے پر'
+    },
+    dashboardSearch: {
+      theme: 'تھیم'
+    },
+    dashboardSearchButton: {
+      label: 'تلاش کریں...'
+    },
+    dashboardSidebarCollapse: {
+      collapse: 'سائیڈ بار کو سکیڑیں',
+      expand: 'سائیڈ بار کو پھیلائیں'
+    },
+    dashboardSidebarToggle: {
+      close: 'سائیڈ بار بند کریں',
+      open: 'سائیڈ بار کھولیں'
+    },
+    error: {
+      clear: 'ہوم پیج پر واپس جائیں'
+    },
+    fileUpload: {
+      removeFile: '{filename} ہٹائیں'
+    },
+    header: {
+      close: 'مینو بند کریں',
+      open: 'مینو کھولیں'
+    },
+    inputMenu: {
+      create: '"{label}" بنائیں',
+      noData: 'کوئی ڈیٹا نہیں',
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا'
+    },
+    inputNumber: {
+      decrement: 'کمی',
+      increment: 'اضافہ'
     },
     modal: {
       close: 'بند کریں'
     },
-    slideover: {
-      close: 'بند کریں'
+    pricingTable: {
+      caption: 'قیمت پلنز کی مقایسہ'
     },
-    alert: {
+    prose: {
+      codeCollapse: {
+        closeText: 'سکیڑیں',
+        name: 'کوڈ',
+        openText: 'پھیلائیں'
+      },
+      collapsible: {
+        closeText: 'چھپائیں',
+        name: 'خصوصیات',
+        openText: 'دکھائیں'
+      },
+      pre: {
+        copy: 'کوڈ کاپی کریں'
+      }
+    },
+    selectMenu: {
+      create: '"{label}" بنائیں',
+      noData: 'کوئی ڈیٹا نہیں',
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      search: 'تلاش کریں...'
+    },
+    slideover: {
       close: 'بند کریں'
     },
     table: {
       noData: 'کوئی ڈیٹا نہیں'
     },
-    fileUpload: {
-      removeFile: '{filename} ہٹائیں'
+    toast: {
+      close: 'بند کریں'
     }
   }
 })

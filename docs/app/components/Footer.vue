@@ -2,14 +2,14 @@
 const route = useRoute()
 
 const links = [{
+  label: 'Templates',
+  to: '/templates'
+}, {
+  label: 'Showcase',
+  to: '/showcase'
+}, {
   label: 'Team',
   to: '/team'
-}, {
-  label: 'Roadmap',
-  to: '/roadmap'
-}, {
-  label: 'Terms',
-  to: '/pro/terms'
 }, {
   label: 'Releases',
   to: 'https://github.com/nuxt/ui/releases',

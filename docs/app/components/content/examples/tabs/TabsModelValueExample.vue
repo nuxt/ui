@@ -22,7 +22,7 @@ const active = computed({
   set(tab) {
     // Hash is specified here to prevent the page from scrolling to the top
     router.push({
-      path: '/components/tabs',
+      path: '/docs/components/tabs',
       query: { tab },
       hash: '#control-active-item'
     })

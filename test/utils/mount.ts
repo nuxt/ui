@@ -1,8 +1,10 @@
-import { mount } from '@vue/test-utils'
+import type { SetupContext } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { defu } from 'defu'
-import type { SetupContext } from 'vue'
+import { createHead } from '@unhead/vue/client'
+import { mount } from '@vue/test-utils'
 
+const head = createHead()
 const router = createRouter({
   history: createWebHistory(),
   routes: [{ path: '/', component: { template: '<div>Home</div>' } }]
@@ -23,7 +25,7 @@ export function mountSuspended(...args: Parameters<typeof mount>) {
       stubs: {
         ClientOnly: { template: '<slot />' }
       },
-      plugins: [router]
+      plugins: [head, router]
     }
   }))
 

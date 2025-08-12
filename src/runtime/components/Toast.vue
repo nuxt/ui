@@ -3,7 +3,8 @@ import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
 import type { AvatarProps, ButtonProps, ProgressProps } from '../types'
-import type { StringOrVNode, ComponentConfig } from '../types/utils'
+import type { StringOrVNode } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type Toast = ComponentConfig<typeof theme, AppConfig, 'toast'>
 
@@ -53,7 +54,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * `{ size: 'sm' }`{lang="ts-type"}
    * @defaultValue true
    */
-  progress?: boolean | Pick<ProgressProps, 'color'>
+  progress?: boolean | Pick<ProgressProps, 'color' | 'ui'>
   class?: any
   ui?: Toast['slots']
 }

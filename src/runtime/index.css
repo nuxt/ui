@@ -9,6 +9,10 @@
     @apply antialiased text-default bg-default scheme-light dark:scheme-dark;
   }
 
+  :root {
+    --ui-header-height: --spacing(16);
+  }
+
   :root, .light {
     --ui-text-dimmed: var(--ui-color-neutral-400);
     --ui-text-muted: var(--ui-color-neutral-500);

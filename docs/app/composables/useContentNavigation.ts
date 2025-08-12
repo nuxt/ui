@@ -7,19 +7,19 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
 
   return {
     ...item,
-    title: parent?.title && parent.title !== 'Pro' ? parent.title : item.title,
+    title: parent?.title ? parent.title : item.title,
     badge: parent?.badge || item.badge,
-    class: [item.framework && `${item.framework}-only`, item.module && `${item.module}-only`].filter(Boolean),
+    class: [item.framework && `${item.framework}-only`].filter(Boolean),
     children: item.children?.length ? item.children?.flatMap(child => processNavigationItem(child)) : undefined
   }
 }
 
 function processNavigationItemIcon(item: ContentNavigationItem) {
   let icon = item.icon
-  if (item.path.startsWith('/components')) {
-    icon = item.module === 'ui-pro' ? 'i-lucide-panels-top-left' : 'i-lucide-box'
+  if (item.path.startsWith('/docs/components')) {
+    icon = 'i-lucide-square-code'
   }
-  if (item.path.startsWith('/composables')) {
+  if (item.path.startsWith('/docs/composables')) {
     icon = 'i-lucide-square-function'
   }
   return {
@@ -29,22 +29,19 @@ function processNavigationItemIcon(item: ContentNavigationItem) {
 }
 
 export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
-  const { framework, module } = useSharedData()
+  const { framework } = useSharedData()
 
-  const mappedNavigation = computed(() => navigation.value?.map(item => processNavigationItem(item)))
+  const mappedNavigation = computed(() => navigation.value?.[0]?.children?.map(item => processNavigationItem(item)))
 
   const filteredNavigation = computed(() => mappedNavigation.value?.map((item) => {
     return {
       ...item,
       children: item.children?.filter((child: any) => {
-        if (child.path.startsWith('/components')) {
+        if (child.path.startsWith('/docs/components')) {
           return true
         }
 
         if (child.framework && child.framework !== framework.value) {
-          return false
-        }
-        if (child.module && child.module !== module.value) {
           return false
         }
         return true
@@ -53,10 +50,7 @@ export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | u
   }))
 
   return {
-    mappedNavigation: computed(() => mappedNavigation.value?.map(item => ({
-      ...item,
-      children: item.children?.map((child: any) => ({ ...child, icon: undefined }))
-    }))),
+    mappedNavigation,
     filteredNavigation
   }
 }

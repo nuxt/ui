@@ -1,22 +1,25 @@
 <script setup lang="ts">
 import { joinURL } from 'ufo'
-// @ts-expect-error yaml is not typed
-import page from '.index.yml'
+
+const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
 
 const { url } = useSiteConfig()
 
 useSeoMeta({
   titleTemplate: `%s - Nuxt UI`,
-  title: page.title,
-  description: page.description,
-  ogTitle: `${page.title} - Nuxt UI`,
-  ogDescription: page.description,
+  title: page.value.title,
+  description: page.value.description,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  ogDescription: page.value.description,
   ogImage: joinURL(url, '/og-image.png')
 })
 
 const { data: components } = await useAsyncData('ui-components', () => {
-  return queryCollection('content')
-    .where('path', 'LIKE', '/components/%')
+  return queryCollection('docs')
+    .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
     .where('module', 'IS NULL')
     .select('path', 'title', 'description', 'category', 'module')
@@ -37,7 +40,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 </script>
 
 <template>
-  <UMain>
+  <UMain v-if="page">
     <UPageHero
       orientation="horizontal"
       :ui="{
@@ -92,8 +95,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :to="component.path"
           >
             <UColorModeImage
-              :light="`${component.path.replace('/components/', '/components/light/')}.png`"
-              :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+              :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
+              :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
               :alt="`${component.title} preview`"
               width="290"
               height="163"
@@ -121,8 +124,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :to="component.path"
           >
             <UColorModeImage
-              :light="`${component.path.replace('/components/', '/components/light/')}.png`"
-              :dark="`${component.path.replace('/components/', '/components/dark/')}.png`"
+              :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
+              :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
               :alt="`${component.title} preview`"
               width="290"
               height="163"
@@ -253,16 +256,13 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
     <UPageSection :ui="{ container: 'relative !pb-0 overflow-hidden' }">
       <template #title>
-        Build faster with Nuxt UI <span class="text-primary">Pro</span>.
+        Build faster with Nuxt UI <span class="text-primary">Templates</span>.
       </template>
       <template #description>
         A collection of premium Vue components, composables and utils built on top of Nuxt UI. <br> Focused on structure and layout, these <span class="text-default">responsive components</span> are designed to be the perfect <span class="text-default">building blocks for your next idea</span>.
       </template>
       <template #links>
-        <UButton to="/pro" size="lg">
-          Discover Nuxt UI Pro
-        </UButton>
-        <UButton to="/pro/templates" size="lg" variant="outline" trailing-icon="i-lucide-arrow-right" color="neutral">
+        <UButton to="/templates" size="lg" variant="outline" trailing-icon="i-lucide-arrow-right" color="neutral">
           Explore templates
         </UButton>
       </template>
@@ -275,11 +275,11 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           <img
             v-for="i in 4"
             :key="i"
-            :src="`/pro/blocks/image${i}.png`"
+            :src="`/blocks/image${i}.png`"
             width="460"
             height="258"
             loading="lazy"
-            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            :alt="`Nuxt UI Screenshot ${i}`"
             class="aspect-video border border-default rounded-lg bg-white"
           >
         </UPageMarquee>
@@ -287,11 +287,11 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           <img
             v-for="i in [5, 6, 7, 8]"
             :key="i"
-            :src="`/pro/blocks/image${i}.png`"
+            :src="`/blocks/image${i}.png`"
             width="460"
             height="258"
             loading="lazy"
-            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            :alt="`Nuxt UI Screenshot ${i}`"
             class="aspect-video border border-default rounded-lg bg-white"
           >
         </UPageMarquee>
@@ -299,11 +299,11 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           <img
             v-for="i in [9, 10, 11, 12]"
             :key="i"
-            :src="`/pro/blocks/image${i}.png`"
+            :src="`/blocks/image${i}.png`"
             width="460"
             height="258"
             loading="lazy"
-            :alt="`Nuxt UI Pro Screenshot ${i}`"
+            :alt="`Nuxt UI Screenshot ${i}`"
             class="aspect-video border border-default rounded-lg bg-white"
           >
         </UPageMarquee>

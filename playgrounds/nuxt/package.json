@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "@nuxt/ui-playground",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@iconify-json/lucide": "^1.2.62",
+    "@iconify-json/simple-icons": "^1.2.47",
+    "@internationalized/date": "^3.8.2",
+    "@nuxt/ui": "workspace:*",
+    "nuxt": "^4.0.3",
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vue-tsc": "^3.0.5"
+  },
+  "resolutions": {
+    "unimport": "4.1.1"
+  }
+}

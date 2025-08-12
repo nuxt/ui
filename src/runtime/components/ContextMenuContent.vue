@@ -3,7 +3,8 @@ import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMen
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/context-menu'
 import type { AvatarProps, ContextMenuItem, ContextMenuSlots, KbdProps } from '../types'
-import type { ArrayOrNested, NestedItem, ComponentConfig } from '../types/utils'
+import type { ArrayOrNested, NestedItem } from '../types/utils'
+import type { ComponentConfig } from '../types/tv'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
