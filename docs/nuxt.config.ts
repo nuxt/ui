@@ -71,6 +71,7 @@ export default defineNuxtConfig({
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
     '/composables/**': { redirect: { to: '/docs/composables/**', statusCode: 301 }, prerender: false },
+    '/components/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
     // v4 redirects - default root pages
     '/docs': { redirect: '/docs/getting-started', prerender: false },
     '/docs/components': { redirect: '/docs/components/app', prerender: false },

@@ -7,15 +7,15 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
 <template>
   <div class="flex flex-col gap-4 items-center">
     <div class="flex flex-col gap-4 -ms-[110px]">
-      <UButtonGroup>
+      <UFieldGroup>
         <UButton>Button</UButton>
-      </UButtonGroup>
+      </UFieldGroup>
 
-      <UButtonGroup>
+      <UFieldGroup>
         <UInput placeholder="Search..." />
-      </UButtonGroup>
+      </UFieldGroup>
 
-      <UButtonGroup>
+      <UFieldGroup>
         <UButton color="neutral" variant="outline">
           Button
         </UButton>
@@ -25,42 +25,42 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
         <UButton color="neutral" variant="outline">
           Button
         </UButton>
-      </UButtonGroup>
+      </UFieldGroup>
 
-      <UButtonGroup orientation="vertical">
+      <UFieldGroup orientation="vertical">
         <UButton color="neutral" variant="outline">
           Button
         </UButton>
         <UInput placeholder="Search..." />
-      </UButtonGroup>
+      </UFieldGroup>
 
-      <UButtonGroup>
+      <UFieldGroup>
         <UButton color="neutral" variant="outline">
           Button
         </UButton>
         <UInput placeholder="Search..." />
-      </UButtonGroup>
+      </UFieldGroup>
 
-      <UButtonGroup>
+      <UFieldGroup>
         <UInput placeholder="Search..." />
         <UButton color="neutral" variant="outline">
           Button
         </UButton>
-      </UButtonGroup>
+      </UFieldGroup>
 
-      <UButtonGroup>
+      <UFieldGroup>
         <UBadge color="neutral" variant="outline" size="lg" label="https://" />
         <UInput color="neutral" variant="outline" placeholder="www.example.com" />
-      </UButtonGroup>
+      </UFieldGroup>
     </div>
 
     <div class="flex gap-4 items-center justify-center">
-      <UButtonGroup v-for="size in sizes" :key="size" :size="size">
+      <UFieldGroup v-for="size in sizes" :key="size" :size="size">
         <UInput placeholder="Search..." />
         <UButton color="neutral" variant="outline">
           Button
         </UButton>
-      </UButtonGroup>
+      </UFieldGroup>
     </div>
   </div>
 </template>

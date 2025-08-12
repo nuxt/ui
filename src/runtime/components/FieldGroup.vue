@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/button-group'
+import theme from '#build/ui/field-group'
 import type { ComponentConfig } from '../types/tv'
 
-type ButtonGroup = ComponentConfig<typeof theme, AppConfig, 'buttonGroup'>
+type FieldGroup = ComponentConfig<typeof theme, AppConfig, 'fieldGroup'>
 
-export interface ButtonGroupProps {
+export interface FieldGroupProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -14,17 +14,17 @@ export interface ButtonGroupProps {
   /**
    * @defaultValue 'md'
    */
-  size?: ButtonGroup['variants']['size']
+  size?: FieldGroup['variants']['size']
   /**
    * The orientation the buttons are laid out.
    * @defaultValue 'horizontal'
    */
-  orientation?: ButtonGroup['variants']['orientation']
+  orientation?: FieldGroup['variants']['orientation']
   class?: any
-  ui?: ButtonGroup['slots']
+  ui?: FieldGroup['slots']
 }
 
-export interface ButtonGroupSlots {
+export interface FieldGroupSlots {
   default(props?: {}): any
 }
 </script>
@@ -33,20 +33,20 @@ export interface ButtonGroupSlots {
 import { provide, computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { buttonGroupInjectionKey } from '../composables/useButtonGroup'
+import { fieldGroupInjectionKey } from '../composables/useFieldGroup'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<ButtonGroupProps>(), {
+const props = withDefaults(defineProps<FieldGroupProps>(), {
   orientation: 'horizontal'
 })
-defineSlots<ButtonGroupSlots>()
+defineSlots<FieldGroupSlots>()
 
-const appConfig = useAppConfig() as ButtonGroup['AppConfig']
+const appConfig = useAppConfig() as FieldGroup['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.buttonGroup || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fieldGroup || {}) }))
 
-provide(buttonGroupInjectionKey, computed(() => ({
+provide(fieldGroupInjectionKey, computed(() => ({
   orientation: props.orientation,
   size: props.size
 })))
