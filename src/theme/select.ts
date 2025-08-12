@@ -81,6 +81,15 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-2 text-base'
         }
       }
-    }
+    },
+    compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
+      color,
+      variant: ['outline', 'subtle'],
+      class: `focus:ring-2 focus:ring-inset focus:ring-${color}`
+    })), {
+      color: 'neutral',
+      variant: ['outline', 'subtle'],
+      class: 'focus:ring-2 focus:ring-inset focus:ring-inverted'
+    }]
   }, input(options))
 }
