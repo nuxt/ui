@@ -938,3 +938,7 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

@@ -3,7 +3,7 @@
 exports[`Switch > renders with ariaLabel correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button aria-label="Aria label" class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -12,7 +12,7 @@ exports[`Switch > renders with ariaLabel correctly 1`] = `
 exports[`Switch > renders with as correctly 1`] = `
 "<section class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </section>"
@@ -21,7 +21,7 @@ exports[`Switch > renders with as correctly 1`] = `
 exports[`Switch > renders with checkedIcon correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="absolute shrink-0 group-data-[state=unchecked]:text-dimmed opacity-0 size-10/12 transition-[color,opacity] duration-200 group-data-[state=checked]:text-primary group-data-[state=checked]:opacity-100"></svg><!--v-if--></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -30,7 +30,7 @@ exports[`Switch > renders with checkedIcon correctly 1`] = `
 exports[`Switch > renders with class correctly 1`] = `
 "<div class="relative items-start inline-flex">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -39,7 +39,7 @@ exports[`Switch > renders with class correctly 1`] = `
 exports[`Switch > renders with color neutral correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-inverted focus-visible:outline-inverted w-9" id="v-0" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -48,7 +48,7 @@ exports[`Switch > renders with color neutral correctly 1`] = `
 exports[`Switch > renders with defaultValue correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -57,7 +57,7 @@ exports[`Switch > renders with defaultValue correctly 1`] = `
 exports[`Switch > renders with description correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <div class="ms-2 text-sm"><label for="v-0" class="block font-medium text-default">Label</label>
     <p class="text-muted">Description</p>
@@ -68,7 +68,7 @@ exports[`Switch > renders with description correctly 1`] = `
 exports[`Switch > renders with description slot correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <div class="ms-2 text-sm"><label for="v-0" class="block font-medium text-default">Description slot</label>
     <!--v-if-->
@@ -79,7 +79,7 @@ exports[`Switch > renders with description slot correctly 1`] = `
 exports[`Switch > renders with disabled correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9 cursor-not-allowed opacity-75" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -88,7 +88,7 @@ exports[`Switch > renders with disabled correctly 1`] = `
 exports[`Switch > renders with id correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="id" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -97,7 +97,7 @@ exports[`Switch > renders with id correctly 1`] = `
 exports[`Switch > renders with label correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <div class="ms-2 text-sm"><label for="v-0" class="block font-medium text-default">Label</label>
     <!--v-if-->
@@ -108,7 +108,7 @@ exports[`Switch > renders with label correctly 1`] = `
 exports[`Switch > renders with label slot correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <div class="ms-2 text-sm"><label for="v-0" class="block font-medium text-default">Label slot</label>
     <!--v-if-->
@@ -119,7 +119,7 @@ exports[`Switch > renders with label slot correctly 1`] = `
 exports[`Switch > renders with loading correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9 cursor-not-allowed opacity-75" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="absolute shrink-0 group-data-[state=unchecked]:text-dimmed opacity-0 size-10/12 transition-[color,opacity] duration-200 group-data-[state=checked]:text-primary group-data-[state=checked]:opacity-100 group-data-[state=unchecked]:opacity-100 animate-spin"></svg></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -128,7 +128,7 @@ exports[`Switch > renders with loading correctly 1`] = `
 exports[`Switch > renders with loadingIcon correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9 cursor-not-allowed opacity-75" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="absolute shrink-0 group-data-[state=unchecked]:text-dimmed opacity-0 size-10/12 transition-[color,opacity] duration-200 group-data-[state=checked]:text-primary group-data-[state=checked]:opacity-100 group-data-[state=unchecked]:opacity-100 animate-spin"></svg></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -137,7 +137,7 @@ exports[`Switch > renders with loadingIcon correctly 1`] = `
 exports[`Switch > renders with modelValue correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -146,7 +146,7 @@ exports[`Switch > renders with modelValue correctly 1`] = `
 exports[`Switch > renders with name correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -155,7 +155,7 @@ exports[`Switch > renders with name correctly 1`] = `
 exports[`Switch > renders with required correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="true" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <div class="ms-2 text-sm"><label for="v-0" class="block font-medium text-default after:content-['*'] after:ms-0.5 after:text-error">Label</label>
     <!--v-if-->
@@ -166,7 +166,7 @@ exports[`Switch > renders with required correctly 1`] = `
 exports[`Switch > renders with size lg correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-10" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4.5 data-[state=checked]:translate-x-4.5 data-[state=checked]:rtl:-translate-x-4.5"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -175,7 +175,7 @@ exports[`Switch > renders with size lg correctly 1`] = `
 exports[`Switch > renders with size md correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -184,7 +184,7 @@ exports[`Switch > renders with size md correctly 1`] = `
 exports[`Switch > renders with size sm correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-4"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-8" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-3.5 data-[state=checked]:translate-x-3.5 data-[state=checked]:rtl:-translate-x-3.5"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -193,7 +193,7 @@ exports[`Switch > renders with size sm correctly 1`] = `
 exports[`Switch > renders with size xl correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-6"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-11" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-5 data-[state=checked]:translate-x-5 data-[state=checked]:rtl:-translate-x-5"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -202,7 +202,7 @@ exports[`Switch > renders with size xl correctly 1`] = `
 exports[`Switch > renders with size xs correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-4"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-7" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-3 data-[state=checked]:translate-x-3 data-[state=checked]:rtl:-translate-x-3"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -211,7 +211,7 @@ exports[`Switch > renders with size xs correctly 1`] = `
 exports[`Switch > renders with ui correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -220,7 +220,7 @@ exports[`Switch > renders with ui correctly 1`] = `
 exports[`Switch > renders with uncheckedIcon correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="absolute shrink-0 group-data-[state=unchecked]:text-dimmed opacity-0 size-10/12 transition-[color,opacity] duration-200 group-data-[state=checked]:text-primary group-data-[state=unchecked]:opacity-100"></svg></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -229,7 +229,7 @@ exports[`Switch > renders with uncheckedIcon correctly 1`] = `
 exports[`Switch > renders with value correctly 1`] = `
 "<div class="relative flex items-start">
   <div class="flex items-center h-5"><button class="inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-accented transition-[background] duration-200 data-[state=checked]:bg-primary focus-visible:outline-primary w-9" id="v-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="value"><span data-state="unchecked" class="group pointer-events-none rounded-full bg-default shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center size-4 data-[state=checked]:translate-x-4 data-[state=checked]:rtl:-translate-x-4"></span>
-      <!---->
+      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"

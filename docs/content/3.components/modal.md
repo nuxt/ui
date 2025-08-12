@@ -385,3 +385,7 @@ name: 'modal-command-palette-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

@@ -379,3 +379,7 @@ name: 'drawer-command-palette-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

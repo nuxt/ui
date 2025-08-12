@@ -53,7 +53,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * `{ size: 'sm' }`{lang="ts-type"}
    * @defaultValue true
    */
-  progress?: boolean | Pick<ProgressProps, 'color'>
+  progress?: boolean | Pick<ProgressProps, 'color' | 'ui'>
   class?: any
   ui?: Toast['slots']
 }
