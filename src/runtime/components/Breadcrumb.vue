@@ -103,7 +103,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb |
 
                 <slot :name="((item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof BreadcrumbSlots<T>)" :item="item" :active="active ?? (index === items!.length - 1)" :index="index" />
               </slot>
-            </ULinkBase>``
+            </ULinkBase>
           </ULink>
         </li>
 
