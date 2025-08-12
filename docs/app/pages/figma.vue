@@ -14,7 +14,7 @@ useSeoMeta({
   description: page.value.description,
   ogTitle: page.value.title,
   ogDescription: page.value.description,
-  ogImage: joinURL(url, '/figma/og.png')
+  ogImage: joinURL(url, '/figma/og-image.png')
 })
 
 const video = ref<HTMLVideoElement | null>(null)
