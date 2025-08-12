@@ -167,7 +167,8 @@ onMounted(async () => {
       :ui="{
         container: 'lg:grid-cols-0 !gap-0 px-4 sm:px-6 lg:px-8',
         wrapper: 'grid grid-cols-1 lg:grid-cols-2',
-        description: 'lg:mt-0' }"
+        description: 'mt-2'
+      }"
       orientation="horizontal"
       class="rounded-none bg-gradient-to-b from-elevated/50 to-default"
     >
@@ -193,20 +194,10 @@ onMounted(async () => {
       </UTabs>
     </UPageSection>
     <UPageSection v-bind="page.section2" orientation="horizontal" :ui="{ container: 'py-16 sm:py-16 lg:py-16' }">
-      <NuxtImg
-        v-if="page.section2.image"
-        v-bind="page.section2.image"
-        class="w-full h-auto rounded-lg"
-        loading="lazy"
-      />
+      <NuxtImg v-if="page.section2.image" v-bind="page.section2.image" class="w-full h-auto rounded-lg" loading="lazy" />
     </UPageSection>
     <UPageSection v-bind="page.section3" orientation="horizontal" :ui="{ container: 'py-16 sm:pt-16 lg:pt-16' }">
-      <NuxtImg
-        v-if="page.section3.image"
-        v-bind="page.section3.image"
-        class="w-full h-auto rounded-lg"
-        loading="lazy"
-      />
+      <NuxtImg v-if="page.section3.image" v-bind="page.section3.image" class="w-full h-auto rounded-lg" loading="lazy" />
     </UPageSection>
     <USeparator />
     <UPageSection
@@ -226,12 +217,7 @@ onMounted(async () => {
       <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center border border-default border-b-0 sm:divide-x divide-y lg:divide-y-0 divide-default">
         <li v-for="(step, index) in page?.section4.steps" :key="step.title" class="flex flex-col gap-y-4 justify-start group h-full p-4">
-          <NuxtImg
-            v-if="step.image"
-            v-bind="step.image"
-            class="rounded-sm"
-            loading="lazy"
-          />
+          <NuxtImg v-if="step.image" v-bind="step.image" class="rounded-sm" loading="lazy" />
           <div>
             <h2 class="font-semibold inline-flex items-center gap-x-1">
               <UBadge :label="index + 1" size="sm" color="neutral" variant="subtle" class="rounded-full tabular-nums" /> {{ step.title }}
@@ -247,22 +233,12 @@ onMounted(async () => {
 
     <UPageCTA v-if="page.customers" :title="page.customers.title" :ui="{ title: '!text-base font-medium', container: 'sm:py-12 sm:gap-8' }" variant="outline" class="rounded-none">
       <UPageMarquee pause-on-hover :ui="{ root: '[--duration:40s]' }">
-        <img
-          v-for="(logo, index) in page.customers.items"
-          :key="index"
-          v-bind="logo"
-          class="h-6 shrink-0 max-w-[140px] filter invert dark:invert-0"
-          loading="lazy"
-        >
+        <img v-for="(logo, index) in page.customers.items" :key="index" v-bind="logo" class="h-6 shrink-0 max-w-[140px] filter invert dark:invert-0" loading="lazy">
       </UPageMarquee>
     </UPageCTA>
     <UPageSection v-bind="page.faq" :ui="{ container: 'relative' }">
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      <UPageAccordion
-        multiple
-        :items="(page.faq.items as any[])"
-        class="max-w-4xl mx-auto"
-      >
+      <UPageAccordion multiple :items="(page.faq.items as any[])" class="max-w-4xl mx-auto">
         <template #body="{ item, index }">
           <MDC :value="item.content" unwrap="p" :cache-key="`figma-faq-${index}-content`" />
         </template>

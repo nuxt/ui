@@ -27,7 +27,7 @@ cta1:
   title: Everything you need in a [single file]{class="text-primary"}.
   description: Design and development in perfect sync with our comprehensive [Nuxt UI design kit](https://go.nuxt.com/figma). Developers can implement designs faster, while designers work with production-ready components.
 section1:
-  title: Customize in a few clicks to fit your needs
+  title: Customize in a few clicks to fit your needs
   description: Control your entire design system with Figma Variables. Update primitive tokens once and watch your changes spread across the entire system.
   reverse: true
   features:
