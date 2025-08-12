@@ -1,7 +1,7 @@
 <template>
-  <UButtonGroup>
+  <UFieldGroup>
     <UBadge color="neutral" variant="outline" size="lg" label="https://" />
 
     <UInput color="neutral" variant="outline" placeholder="www.example.com" />
-  </UButtonGroup>
+  </UFieldGroup>
 </template>

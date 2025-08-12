@@ -1,5 +1,5 @@
 <template>
-  <UButtonGroup>
+  <UFieldGroup>
     <UInput color="neutral" variant="outline" placeholder="Enter token" />
 
     <UTooltip text="Copy to clipboard">
@@ -9,5 +9,5 @@
         icon="i-lucide-clipboard"
       />
     </UTooltip>
-  </UButtonGroup>
+  </UFieldGroup>
 </template>

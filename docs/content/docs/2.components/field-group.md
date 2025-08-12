@@ -1,16 +1,16 @@
 ---
-title: ButtonGroup
+title: FieldGroup
 description: Group multiple button-like elements together.
 category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ButtonGroup.vue
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/FieldGroup.vue
 ---
 
 ## Usage
 
-Wrap multiple [Button](/docs/components/button) within a ButtonGroup to group them together.
+Wrap multiple [Button](/components/button) within a FieldGroup to group them together.
 
 ::component-code
 ---
@@ -67,7 +67,7 @@ slots:
 
 ### With input
 
-You can use components like [Input](/docs/components/input), [InputMenu](/docs/components/input-menu), [Select](/docs/components/select) [SelectMenu](/docs/components/select-menu), etc. within a button group.
+You can use components like [Input](/components/input), [InputMenu](/components/input-menu), [Select](/components/select) [SelectMenu](/components/select-menu), etc. within a field group.
 
 ::component-code
 ---
@@ -85,21 +85,21 @@ slots:
 
 ### With tooltip
 
-You can use a [Tooltip](/docs/components/tooltip) within a button group.
+You can use a [Tooltip](/components/tooltip) within a field group.
 
-:component-example{name="button-group-tooltip-example"}
+:component-example{name="field-group-tooltip-example"}
 
 ### With dropdown
 
-You can use a [DropdownMenu](/docs/components/dropdown-menu) within a button group.
+You can use a [DropdownMenu](/components/dropdown-menu) within a field group.
 
-:component-example{name="button-group-dropdown-example"}
+:component-example{name="field-group-dropdown-example"}
 
 ### With badge
 
-You can use a [Badge](/docs/components/badge) within a button group.
+You can use a [Badge](/components/badge) within a field group.
 
-:component-example{name="button-group-badge-example"}
+:component-example{name="field-group-badge-example"}
 
 ## API
 

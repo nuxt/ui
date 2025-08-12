@@ -179,7 +179,7 @@ import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useButtonGroup } from '../composables/useButtonGroup'
+import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -215,10 +215,10 @@ const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffse
 const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
-const { orientation, size: buttonGroupSize } = useButtonGroup<InputProps>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
-const inputSize = computed(() => buttonGroupSize.value || formGroupSize.value)
+const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 
@@ -231,7 +231,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   multiple: props.multiple,
-  buttonGroup: orientation.value
+  fieldGroup: orientation.value
 }))
 
 function displayValue(value: T): string {

@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest'
-import ButtonGroup from '../../src/runtime/components/ButtonGroup.vue'
-import type { ButtonGroupProps, ButtonGroupSlots } from '../../src/runtime/components/ButtonGroup.vue'
+import FieldGroup from '../../src/runtime/components/FieldGroup.vue'
+import type { FieldGroupProps, FieldGroupSlots } from '../../src/runtime/components/FieldGroup.vue'
 import ComponentRender from '../component-render'
 import { UInput, UButton } from '#components'
 import buttonTheme from '#build/ui/button'
 
-describe('ButtonGroup', () => {
+describe('FieldGroup', () => {
   const sizes = Object.keys(buttonTheme.variants.size) as any
 
   it.each([
@@ -31,7 +31,8 @@ describe('ButtonGroup', () => {
       }
     }],
     ...sizes.map((size: string) =>
-      [`with size ${size}`, { props: { size },
+      [`with size ${size}`, {
+        props: { size },
         slots: {
           default: {
             components: { UInput, UButton },
@@ -40,8 +41,8 @@ describe('ButtonGroup', () => {
         }
       }]
     )
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ButtonGroupProps, slots?: Partial<ButtonGroupSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ButtonGroup)
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FieldGroupProps, slots?: Partial<FieldGroupSlots> }) => {
+    const html = await ComponentRender(nameOrHtml, options, FieldGroup)
     expect(html).toMatchSnapshot()
   })
 })
