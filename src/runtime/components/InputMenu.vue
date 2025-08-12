@@ -183,7 +183,7 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
-import { compare, get, isArrayOfArray } from '../utils'
+import { compare, get, getDisplayValue, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -234,24 +234,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
 }))
 
 function displayValue(value: T): string {
-  const foundItem = items.value.find((item) => {
-    const itemValue = (typeof item === 'object' && item !== null && props.valueKey)
-      ? get(item as Record<string, any>, props.valueKey as string)
-      : item
-    return compare(itemValue, value)
+  const displayedValue = getDisplayValue(items.value, value, {
+    labelKey: props.labelKey,
+    valueKey: props.valueKey
   })
-
-  const source = foundItem ?? value
-
-  if (source === null || source === undefined) {
-    return ''
-  }
-
-  if (typeof source === 'object') {
-    return props.labelKey ? get(source as Record<string, any>, props.labelKey as string) : ''
-  }
-
-  return String(source)
+  return displayedValue ? displayedValue : ''
 }
 
 const groups = computed<InputMenuItem[][]>(() =>

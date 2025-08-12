@@ -177,7 +177,7 @@ import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
-import { compare, get, isArrayOfArray } from '../utils'
+import { compare, get, getDisplayValue, isArrayOfArray } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -228,37 +228,22 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu |
   buttonGroup: orientation.value
 }))
 
-function getDisplayForSingleValue(val: GetItemValue<T, VK>): string | undefined {
-  const foundItem = items.value.find((item) => {
-    const itemValue = (typeof item === 'object' && item !== null && props.valueKey)
-      ? get(item as Record<string, any>, props.valueKey as string)
-      : item
-    return compare(itemValue, val)
-  })
-
-  const source = foundItem ?? val
-
-  if (source === null || source === undefined) {
-    return undefined
-  }
-
-  if (typeof source === 'object') {
-    return props.labelKey ? get(source as Record<string, any>, props.labelKey as string) : undefined
-  }
-
-  return String(source)
-}
-
 function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map(getDisplayForSingleValue)
+      .map(item => getDisplayValue(item, value, {
+        labelKey: props.labelKey,
+        valueKey: props.valueKey
+      }))
       .filter((v): v is string => v != null && v !== '')
 
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
   }
 
-  return getDisplayForSingleValue(value as GetItemValue<T, VK>)
+  return getDisplayValue(items.value, value, {
+    labelKey: props.labelKey,
+    valueKey: props.valueKey
+  })
 }
 
 const groups = computed<SelectMenuItem[][]>(() =>
