@@ -269,7 +269,7 @@ defineExpose({
     v-model:open="open"
     :title="t('contentSearch.title')"
     :description="t('contentSearch.description')"
-    :class="ui.modal({ class: props.class })"
+    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content>
       <slot name="content">
