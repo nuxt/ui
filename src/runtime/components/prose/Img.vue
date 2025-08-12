@@ -21,7 +21,7 @@ export interface ProseImgProps {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, useId } from 'vue'
 import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
 import { DialogRoot, DialogPortal, DialogTrigger } from 'reka-ui'
 import { AnimatePresence, Motion } from 'motion-v'
@@ -57,6 +57,8 @@ const refinedSrc = computed(() => {
   return props.src
 })
 
+const layoutId = computed(() => `${refinedSrc.value}::${useId()}`)
+
 if (props.zoom) {
   useEventListener(window, 'scroll', () => {
     open.value = false
@@ -79,7 +81,7 @@ if (props.zoom) {
 
   <DialogRoot v-if="zoom" v-slot="{ close }" v-model:open="open" :modal="false">
     <DialogTrigger as-child>
-      <Motion :layout-id="refinedSrc" as-child :transition="{ type: 'spring', bounce: 0.2, duration: 0.4 }">
+      <Motion :layout-id="layoutId" as-child :transition="{ type: 'spring', bounce: 0.2, duration: 0.4 }">
         <ReuseImageTemplate />
       </Motion>
     </DialogTrigger>
@@ -89,7 +91,7 @@ if (props.zoom) {
         <Motion v-if="open" :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :exit="{ opacity: 0 }" :class="ui.overlay({ class: [props.ui?.overlay] })" />
 
         <div v-if="open" :class="ui.content({ class: [props.ui?.content] })" @click="close">
-          <Motion as-child :layout-id="refinedSrc" :transition="{ type: 'spring', bounce: 0.2, duration: 0.4 }">
+          <Motion as-child :layout-id="layoutId" :transition="{ type: 'spring', bounce: 0.2, duration: 0.4 }">
             <ReuseImageTemplate />
           </Motion>
         </div>
