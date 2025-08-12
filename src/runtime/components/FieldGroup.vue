@@ -43,6 +43,7 @@ defineSlots<FieldGroupSlots>()
 
 const appConfig = useAppConfig() as FieldGroup['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fieldGroup || {}) }))
 
 provide(fieldGroupInjectionKey, computed(() => ({
