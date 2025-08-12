@@ -205,11 +205,13 @@
   },
   "resolutions": {
     "@nuxt/ui": "workspace:*",
+    "@nuxt/module-builder": "1.0.1",
     "chokidar": "3.6.0",
     "debug": "4.3.7",
     "rollup": "4.34.9",
     "unimport": "4.1.1",
     "unplugin": "^2.3.5",
+    "tailwind-variants": "2.0.1",
     "typescript": "5.8.3"
   },
   "pnpm": {

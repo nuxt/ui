@@ -9,6 +9,11 @@
     "v2",
     "v3"
   ],
+  "ignoreDeps": [
+    "@nuxt/module-builder",
+    "tailwind-variants",
+    "typescript"
+  ],
   "packageRules": [
     {
       "matchBaseBranches": [
@@ -45,18 +50,6 @@
       "matchPackageNames": [
         "vue-tsc",
         "vue-component-type-helpers"
-      ]
-    },
-    {
-      "groupName": "typescript",
-      "matchPackageNames": [
-        "typescript"
-      ]
-    },
-    {
-      "groupName": "@nuxt/module-builder",
-      "matchPackageNames": [
-        "@nuxt/module-builder"
       ]
     },
     {
