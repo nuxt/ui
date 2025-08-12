@@ -145,24 +145,6 @@ export const collections = {
           image: Image
         }))
       }),
-      pricing: z.object({
-        title: z.string(),
-        description: z.string(),
-        plans: z.array(z.object({
-          title: z.string(),
-          description: z.string(),
-          price: z.string(),
-          discount: z.string().optional(),
-          billing_period: z.string().optional(),
-          billing_cycle: z.string().optional(),
-          highlight: z.boolean().optional(),
-          class: z.string().optional(),
-          features: z.array(z.string()),
-          terms: z.string().optional(),
-          button: Button.optional(),
-          extraButton: Button.optional()
-        }))
-      }),
       customers: z.object({
         title: z.string(),
         items: z.array(z.object({
