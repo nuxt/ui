@@ -14,7 +14,7 @@
 Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 > [!NOTE]
-> You are on the `v4` development branch, check out the [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
+> You are on the `v4` development branch, check out the [v3 branch](https://github.com/nuxt/ui/tree/v3) for Nuxt UI v3.
 
 ## Documentation
 
