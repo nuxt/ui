@@ -5,7 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, ChipProps, InputProps } from '../types'
-import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps, ComponentConfig } from '../types/utils'
 
 type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>
 
@@ -233,7 +233,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
   buttonGroup: orientation.value
 }))
 
-function displayValue(value: T): string {
+function displayValue(value: GetItemValue<T, VK>): string {
   const displayedValue = getDisplayValue(items.value, value, {
     labelKey: props.labelKey,
     valueKey: props.valueKey
@@ -249,7 +249,7 @@ const groups = computed<InputMenuItem[][]>(() =>
     : []
 )
 // eslint-disable-next-line vue/no-dupe-keys
-const items = computed(() => groups.value.flatMap(group => group))
+const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 const filteredGroups = computed(() => {
   if (props.ignoreFilter || !searchTerm.value) {
@@ -444,7 +444,7 @@ defineExpose({
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
           <TagsInputItemText :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
             <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
-              {{ displayValue(item as T) ?? item }}
+              {{ displayValue(item as GetItemValue<T, VK>) ?? item }}
             </slot>
           </TagsInputItemText>
 
