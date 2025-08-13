@@ -7,7 +7,8 @@ describe('AuthForm', () => {
   const fields = [{
     name: 'email',
     label: 'Email',
-    type: 'text' as const
+    type: 'text' as const,
+    error: 'Invalid email format'
   }, {
     name: 'password',
     label: 'Password',
