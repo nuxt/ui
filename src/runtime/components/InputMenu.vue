@@ -234,11 +234,10 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
 }))
 
 function displayValue(value: GetItemValue<T, VK>): string {
-  const displayedValue = getDisplayValue(items.value, value, {
+  return getDisplayValue(items.value, value, {
     labelKey: props.labelKey,
     valueKey: props.valueKey
-  })
-  return displayedValue ? displayedValue : ''
+  }) ?? ''
 }
 
 const groups = computed<InputMenuItem[][]>(() =>
@@ -444,7 +443,7 @@ defineExpose({
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
           <TagsInputItemText :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
             <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
-              {{ displayValue(item as GetItemValue<T, VK>) ?? item }}
+              {{ displayValue(item as GetItemValue<T, VK>) }}
             </slot>
           </TagsInputItemText>
 

@@ -197,6 +197,17 @@ const groups = computed<SelectItem[][]>(() =>
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
 function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
+  if (props.multiple && Array.isArray(value)) {
+    const displayedValues = value
+      .map(item => getDisplayValue(items.value, item, {
+        labelKey: props.labelKey,
+        valueKey: props.valueKey
+      }))
+      .filter((v): v is string => v != null && v !== '')
+
+    return displayedValues.length > 0 ? displayedValues.join(', ') : undefined
+  }
+
   return getDisplayValue(items.value, value, {
     labelKey: props.labelKey,
     valueKey: props.valueKey
