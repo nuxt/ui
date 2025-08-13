@@ -65,6 +65,7 @@ const components = [
   'textarea',
   'timeline',
   'toast',
+  'toggle',
   'tooltip',
   'tree'
 ]
