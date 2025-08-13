@@ -231,7 +231,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu |
 function displayValue(value: GetItemValue<T, VK> | GetItemValue<T, VK>[]): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map(item => getDisplayValue(item, value, {
+      .map(item => getDisplayValue(items.value, item, {
         labelKey: props.labelKey,
         valueKey: props.valueKey
       }))
