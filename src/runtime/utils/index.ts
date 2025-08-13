@@ -84,7 +84,7 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
 }
 
 export function getDisplayValue<T, V>(
-  items: T[],
+  items: any,
   value: V | undefined | null,
   options: {
     valueKey?: GetItemKeys<T>
@@ -97,7 +97,7 @@ export function getDisplayValue<T, V>(
     return undefined
   }
 
-  const foundItem = items.find((item) => {
+  const foundItem = (items as unknown as T[]).find((item) => {
     const itemValue = (typeof item === 'object' && item !== null && valueKey)
       ? get(item, valueKey as string)
       : item
