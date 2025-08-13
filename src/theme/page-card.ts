@@ -144,6 +144,11 @@ export default (options: Required<NuxtOptions['ui']>) => ({
     class: {
       root: '[--spotlight-color:var(--ui-bg-inverted)]'
     }
+  }, {
+    to: true,
+    class: {
+      root: 'has-focus-visible:ring-2 has-focus-visible:ring-primary'
+    }
   }],
   defaultVariants: {
     variant: 'outline',
