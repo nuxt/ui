@@ -79,6 +79,8 @@ export interface TreeProps<T extends TreeItem = TreeItem, VK extends GetItemKeys
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   class?: any
+  lineOffset?: Partial<Record<Tree['variants']['size'], `${string}px`>>
+  indent?: Partial<Record<Tree['variants']['size'], `${string}px`>>
   ui?: Tree['slots']
 }
 
@@ -126,6 +128,39 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) 
   size: props.size
 }))
 
+const lineOffset = computed(() => {
+  switch (props.size) {
+    case 'xs':
+      return props.lineOffset?.xs || '6px'
+    case 'sm':
+      return props.lineOffset?.sm || '6px'
+    case 'md':
+      return props.lineOffset?.md || '8px'
+    case 'lg':
+      return props.lineOffset?.lg || '8px'
+    case 'xl':
+      return props.lineOffset?.xl || '10px'
+    default:
+      return props.lineOffset?.md || '8px'
+  }
+})
+const indent = computed(() => {
+  switch (props.size) {
+    case 'xs':
+      return props.indent?.xs || '16px'
+    case 'sm':
+      return props.indent?.sm || '20px'
+    case 'md':
+      return props.indent?.md || '20px'
+    case 'lg':
+      return props.indent?.lg || '24px'
+    case 'xl':
+      return props.indent?.xl || '24px'
+    default:
+      return props.indent?.md || '20px'
+  }
+})
+
 function getItemLabel(item: T): string {
   return get(item, props.labelKey as string)
 }
@@ -163,8 +198,8 @@ const defaultExpanded = computed(() =>
       :class="[ui.connector(), item.level > 0 ? [ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.value.ui?.itemWithChildren] })] : ui.item({ class: [props.ui?.item, item.value.ui?.item] })]"
       :style="{
         '--level': item.level - 1,
-        '--line-offset': ui.lineOffset(),
-        '--indent': ui.indent()
+        '--line-offset': lineOffset,
+        '--indent': indent
       }"
     >
       <TreeItemReka

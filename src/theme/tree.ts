@@ -8,8 +8,6 @@ export default (options: Required<ModuleOptions>) => ({
     link: 'relative group w-full flex items-center text-sm before:absolute before:inset-y-px before:inset-x-0 before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0',
     connector: 'relative before:absolute before:content-[\'\'] before:top-0 before:bottom-0 before:left-[var(--line-offset)] before:pointer-events-none before:w-[calc(var(--level)*(var(--indent)+0.25em))] before:bg-[repeating-linear-gradient(to_right,transparent,transparent_calc(50%-0.5px),var(--ui-border)_calc(50%-0.5px),var(--ui-border)_calc(50%+0.5px),transparent_calc(50%+0.5px))] before:bg-[size:calc(var(--indent)+0.25em)_100%]',
-    lineOffset: '',
-    indent: '',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     linkTrailingIcon: 'shrink-0 transform transition-transform duration-200 group-data-expanded:rotate-180'
@@ -27,37 +25,30 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         link: 'px-2 py-1 text-xs gap-1',
         linkLeadingIcon: 'size-4',
-        linkTrailingIcon: 'size-4',
-        lineOffset: '6px',
-        indent: '16px'
+        linkTrailingIcon: 'size-4'
       },
       sm: {
         link: 'px-2.5 py-1.5 text-xs gap-1.5',
         linkLeadingIcon: 'size-4',
-        linkTrailingIcon: 'size-4',
-        lineOffset: '6px',
-        indent: '20px'
+        linkTrailingIcon: 'size-4'
       },
       md: {
         link: 'px-2.5 py-1.5 text-sm gap-1.5',
         linkLeadingIcon: 'size-5',
-        linkTrailingIcon: 'size-5',
-        lineOffset: '8px',
-        indent: '20px'
+        linkTrailingIcon: 'size-5'
+
       },
       lg: {
         link: 'px-3 py-2 text-sm gap-2',
         linkLeadingIcon: 'size-5',
-        linkTrailingIcon: 'size-5',
-        lineOffset: '8px',
-        indent: '24px'
+        linkTrailingIcon: 'size-5'
+
       },
       xl: {
         link: 'px-3 py-2 text-base gap-2',
         linkLeadingIcon: 'size-6',
-        linkTrailingIcon: 'size-6',
-        lineOffset: '10px',
-        indent: '24px'
+        linkTrailingIcon: 'size-6'
+
       }
     },
     selected: {
