@@ -309,3 +309,7 @@ const handleSubmit = (e: Event) => {
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

@@ -88,10 +88,6 @@ const communityLinks = computed(() => [{
   label: 'Star on GitHub',
   to: `https://github.com/nuxt/ui`,
   target: '_blank'
-}, {
-  icon: 'i-lucide-git-pull-request-arrow',
-  label: 'Contribution',
-  to: '/docs/getting-started/contribution'
 }])
 </script>
 

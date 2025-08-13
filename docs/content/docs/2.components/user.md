@@ -190,3 +190,7 @@ The `NuxtLink` component will inherit all other attributes you pass to the `User
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

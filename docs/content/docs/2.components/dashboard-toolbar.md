@@ -61,3 +61,7 @@ In this example, we use the [NavigationMenu](/docs/components/navigation-menu) c
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

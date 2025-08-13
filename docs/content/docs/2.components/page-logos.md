@@ -98,3 +98,7 @@ When you use `marquee` mode, you can customize its behavior by passing props. Fo
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

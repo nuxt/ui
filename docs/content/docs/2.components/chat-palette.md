@@ -73,3 +73,7 @@ name: 'chat-palette-content-search-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

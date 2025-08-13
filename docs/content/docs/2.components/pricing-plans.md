@@ -249,3 +249,7 @@ In this example, the `plans` are fetched using `queryCollection` from the `@nuxt
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

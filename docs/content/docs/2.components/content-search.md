@@ -154,3 +154,7 @@ It is recommended to wrap the `ContentSearch` component in a [ClientOnly](https:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

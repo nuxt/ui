@@ -302,3 +302,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

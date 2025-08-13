@@ -356,3 +356,7 @@ This gives you access to the following (exposed) properties:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

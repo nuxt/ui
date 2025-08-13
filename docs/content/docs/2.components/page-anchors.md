@@ -117,3 +117,7 @@ const links: PageAnchor[] = [{
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

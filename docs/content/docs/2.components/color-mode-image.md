@@ -35,3 +35,7 @@ Switch between light and dark mode to see the different images: :u-color-mode-se
 ### Props
 
 :component-props
+
+## Changelog
+
+:component-changelog

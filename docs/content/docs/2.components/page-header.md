@@ -169,3 +169,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

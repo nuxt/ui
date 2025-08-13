@@ -81,3 +81,7 @@ In this example, we add an `after` pseudo-element to display a vertical line on 
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

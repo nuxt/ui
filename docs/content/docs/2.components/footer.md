@@ -122,3 +122,7 @@ In this example, we use the [Separator](/docs/components/separator) component to
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

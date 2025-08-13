@@ -218,3 +218,7 @@ slots:
 ## Theme
 
 :component-theme{slug="page-CTA"}
+
+## Changelog
+
+:component-changelog

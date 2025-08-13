@@ -260,3 +260,7 @@ When no `id` is provided, the slot name is auto-generated from the title (e.g., 
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

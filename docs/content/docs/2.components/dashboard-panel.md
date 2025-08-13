@@ -121,3 +121,7 @@ class: '!p-0 !justify-start'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

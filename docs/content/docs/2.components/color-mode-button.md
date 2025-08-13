@@ -98,3 +98,7 @@ slots:
 ### Slots
 
 :component-slots
+
+## Changelog
+
+:component-changelog

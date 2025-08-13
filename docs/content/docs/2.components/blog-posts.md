@@ -141,3 +141,7 @@ The `to` prop is overridden here since `@nuxt/content` uses the `path` property.
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

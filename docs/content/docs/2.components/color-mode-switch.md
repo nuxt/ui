@@ -73,3 +73,7 @@ export default defineConfig({
 ### Props
 
 :component-props
+
+## Changelog
+
+:component-changelog

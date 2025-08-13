@@ -212,3 +212,7 @@ class: '!p-0'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

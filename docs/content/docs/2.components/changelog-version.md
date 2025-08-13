@@ -348,3 +348,7 @@ collapse: true
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

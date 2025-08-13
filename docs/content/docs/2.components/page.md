@@ -116,3 +116,7 @@ In this example, we use the `ContentToc` component to display the table of conte
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

@@ -92,3 +92,7 @@ You can disable this behavior by setting the `color-mode` prop to `false`:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

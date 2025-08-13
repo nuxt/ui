@@ -265,3 +265,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

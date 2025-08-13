@@ -286,3 +286,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

@@ -37,3 +37,7 @@ Use it in a layout or in your `app.vue`:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

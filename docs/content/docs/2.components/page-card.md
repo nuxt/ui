@@ -291,3 +291,7 @@ You can use the [`PageColumns`](/docs/components/page-columns) component to disp
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

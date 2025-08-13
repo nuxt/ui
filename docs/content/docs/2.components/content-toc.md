@@ -196,3 +196,7 @@ if (!page.value) {
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

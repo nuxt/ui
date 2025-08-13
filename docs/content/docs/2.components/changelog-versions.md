@@ -233,3 +233,7 @@ You can use all the slots of the [`ChangelogVersion`](/docs/components/changelog
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

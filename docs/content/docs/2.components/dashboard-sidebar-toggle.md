@@ -101,3 +101,7 @@ When using the `toggle-side` prop of the `DashboardSidebar` and `DashboardNavbar
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

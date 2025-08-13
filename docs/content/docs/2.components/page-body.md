@@ -87,3 +87,7 @@ In this example, we use the [`ContentRenderer`](https://content.nuxt.com/docs/co
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

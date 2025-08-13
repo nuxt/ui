@@ -188,3 +188,7 @@ props:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

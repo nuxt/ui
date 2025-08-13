@@ -462,3 +462,7 @@ import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

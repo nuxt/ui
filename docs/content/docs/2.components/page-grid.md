@@ -42,3 +42,7 @@ class: 'p-8'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

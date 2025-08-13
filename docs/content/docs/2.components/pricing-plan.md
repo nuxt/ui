@@ -473,3 +473,7 @@ Check out the PricingPlans's `scale` example to see how it works as it's hard to
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

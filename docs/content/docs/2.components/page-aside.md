@@ -82,3 +82,7 @@ In this example, we use the `ContentNavigation` component to display the navigat
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

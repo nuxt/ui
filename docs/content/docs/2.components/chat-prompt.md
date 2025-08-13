@@ -191,3 +191,7 @@ async function onSubmit() {
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

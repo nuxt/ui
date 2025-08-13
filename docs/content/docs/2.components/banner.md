@@ -219,3 +219,7 @@ Use the Banner component in your `app.vue` or in a layout:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog
