@@ -81,6 +81,7 @@ export default defineNuxtConfig({
     '/docs/getting-started/i18n': { redirect: '/docs/getting-started/i18n/nuxt', prerender: false },
     // v4 redirects - renamed components
     '/components/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
+    '/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },
     // v4 redirects - removed pro pages
     '/pro': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },
     '/pro/pricing': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },
@@ -112,7 +113,7 @@ export default defineNuxtConfig({
     '/pro/components/landing-cta': { redirect: { to: '/components/page-cta', statusCode: 301 }, prerender: false },
     '/pro/components/landing-card': { redirect: { to: '/components/page-card', statusCode: 301 }, prerender: false },
     '/pro/components/landing-section': { redirect: { to: '/components/page-section', statusCode: 301 }, prerender: false },
-    '/pro/components/landing-faq': { redirect: { to: '/components/page-accordion', statusCode: 301 }, prerender: false },
+    '/pro/components/landing-faq': { redirect: { to: '/components/accordion', statusCode: 301 }, prerender: false },
     '/pro/components/landing-grid': { redirect: { to: '/components/page-grid', statusCode: 301 }, prerender: false },
     '/pro/components/landing-logos': { redirect: { to: '/components/page-logos', statusCode: 301 }, prerender: false },
     '/pro/components/landing-testimonial': { redirect: { to: '/components/page-card#as-a-testimonial', statusCode: 301 }, prerender: false },

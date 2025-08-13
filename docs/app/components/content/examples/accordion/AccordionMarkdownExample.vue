@@ -34,9 +34,9 @@ const items = [
 </script>
 
 <template>
-  <UPageAccordion :items="items" default-value="1">
+  <UAccordion :items="items" :unmount-on-hide="false" default-value="1" :ui="{ trigger: 'text-base', body: 'text-base' }">
     <template #body="{ item }">
       <MDC :value="item.content" unwrap="p" />
     </template>
-  </UPageAccordion>
+  </UAccordion>
 </template>

@@ -304,6 +304,18 @@ props:
 ---
 ::
 
+### With markdown content
+
+You can use the [MDC](https://github.com/nuxt-modules/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to render markdown in the accordion items.
+
+::component-example
+---
+collapse: true
+name: 'accordion-markdown-example'
+class: 'px-8'
+---
+::
+
 ## API
 
 ### Props
