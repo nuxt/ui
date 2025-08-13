@@ -477,7 +477,12 @@ defineExpose({
                 :style="resolveValue(cell.column.columnDef.meta?.style?.td, cell)"
               >
                 <slot :name="`${cell.column.id}-cell`" v-bind="cell.getContext()">
-                  <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                  <template v-if="cell.getValue?.() === ''">
+                    &#8203;
+                  </template>
+                  <template v-else>
+                    <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                  </template>
                 </slot>
               </td>
             </tr>
