@@ -80,7 +80,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       <LazySkyBg is-index />
 
       <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
-        <UPageMarquee
+        <UMarquee
           pause-on-hover
           :overlay="false"
           :ui="{
@@ -106,9 +106,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
-        </UPageMarquee>
+        </UMarquee>
 
-        <UPageMarquee
+        <UMarquee
           pause-on-hover
           reverse
           :overlay="false"
@@ -135,7 +135,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             />
             <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
           </ULink>
-        </UPageMarquee>
+        </UMarquee>
       </div>
     </UPageHero>
 
@@ -271,7 +271,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <div class="relative h-[400px] border border-default bg-muted overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">
-        <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+        <UMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
           <img
             v-for="i in 4"
             :key="i"
@@ -282,8 +282,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :alt="`Nuxt UI Screenshot ${i}`"
             class="aspect-video border border-default rounded-lg bg-white"
           >
-        </UPageMarquee>
-        <UPageMarquee orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+        </UMarquee>
+        <UMarquee orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
           <img
             v-for="i in [5, 6, 7, 8]"
             :key="i"
@@ -294,8 +294,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :alt="`Nuxt UI Screenshot ${i}`"
             class="aspect-video border border-default rounded-lg bg-white"
           >
-        </UPageMarquee>
-        <UPageMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+        </UMarquee>
+        <UMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
           <img
             v-for="i in [9, 10, 11, 12]"
             :key="i"
@@ -306,7 +306,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :alt="`Nuxt UI Screenshot ${i}`"
             class="aspect-video border border-default rounded-lg bg-white"
           >
-        </UPageMarquee>
+        </UMarquee>
       </div>
     </UPageSection>
   </UMain>
