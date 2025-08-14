@@ -1,7 +1,7 @@
 ---
 title: Marquee
 description: 'A component to create infinite scrolling content.'
-category: element
+category: data
 links:
   - label: GitHub
     icon: i-simple-icons-github
