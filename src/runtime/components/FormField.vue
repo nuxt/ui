@@ -35,6 +35,7 @@ export interface FormFieldProps {
   class?: any
   ui?: FormField['slots']
 }
+
 export interface FormFieldSlots {
   label(props: { label?: string }): any
   hint(props: { hint?: string }): any
