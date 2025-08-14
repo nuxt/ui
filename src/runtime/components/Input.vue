@@ -183,7 +183,6 @@ defineExpose({
       :name="name"
       :placeholder="placeholder"
       :class="ui.base({ class: props.ui?.base })"
-      :style="(type === 'date' || type === 'time') ? { appearance: 'none', WebkitAppearance: 'none' } : undefined"
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
