@@ -238,7 +238,7 @@ onMounted(async () => {
     </UPageCTA>
     <UPageSection v-bind="page.faq" :ui="{ container: 'relative' }">
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      <UAccordion multiple :items="(page.faq.items as any[])" class="max-w-4xl mx-auto">
+      <UAccordion multiple :items="(page.faq.items as any[])" :unmount-on-hide="false" class="max-w-4xl mx-auto">
         <template #body="{ item, index }">
           <MDC :value="item.content" unwrap="p" :cache-key="`figma-faq-${index}-content`" />
         </template>
