@@ -92,7 +92,7 @@ const children = computed(() => {
       <UPage>
         <template #left>
           <UPageAside>
-            <UContentNavigation :navigation="children" variant="link" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }" />
+            <UContentNavigation :key="route.path" :navigation="children" variant="link" highlight :ui="{ linkTrailingBadge: 'font-semibold uppercase' }" />
           </UPageAside>
         </template>
 

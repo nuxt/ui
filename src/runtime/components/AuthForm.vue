@@ -200,6 +200,7 @@ defineExpose({
           :name="field.name"
           :size="field.size"
           :required="field.required"
+          :error="field.error"
         >
           <slot :name="`${field.name}-field`" v-bind="{ state, field }">
             <UCheckbox
