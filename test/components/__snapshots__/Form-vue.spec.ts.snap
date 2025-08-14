@@ -361,7 +361,7 @@ exports[`Form > zod validation works > without error 1`] = `
     </div>
   </div>
   <div class="text-sm">
-  <div class="">
+    <div class="">
       <!--v-if-->
       <!--v-if-->
     </div>
