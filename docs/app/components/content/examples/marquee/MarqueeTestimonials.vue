@@ -87,7 +87,7 @@ const testimonials = [{
 
 <template>
   <div class="flex flex-col gap-4 w-full">
-    <UPageMarquee pause-on-hover :overlay="false" :ui="{ root: '[--gap:--spacing(4)]', content: 'w-auto py-1' }">
+    <UMarquee pause-on-hover :overlay="false" :ui="{ root: '[--gap:--spacing(4)]', content: 'w-auto py-1' }">
       <UPageCard
         v-for="(testimonial, index) in testimonials"
         :key="index"
@@ -102,8 +102,8 @@ const testimonials = [{
           <UUser v-bind="testimonial.user" size="xl" :ui="{ description: 'line-clamp-1' }" />
         </template>
       </UPageCard>
-    </UPageMarquee>
-    <UPageMarquee pause-on-hover reverse :overlay="false" :ui="{ root: '[--gap:--spacing(4)]', content: 'w-auto py-1' }">
+    </UMarquee>
+    <UMarquee pause-on-hover reverse :overlay="false" :ui="{ root: '[--gap:--spacing(4)]', content: 'w-auto py-1' }">
       <UPageCard
         v-for="(testimonial, index) in testimonials"
         :key="index"
@@ -118,6 +118,6 @@ const testimonials = [{
           <UUser v-bind="testimonial.user" size="xl" :ui="{ description: 'line-clamp-1' }" />
         </template>
       </UPageCard>
-    </UPageMarquee>
+    </UMarquee>
   </div>
 </template>

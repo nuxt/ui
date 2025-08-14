@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import PageMarquee from '../../src/runtime/components/PageMarquee.vue'
-import type { PageMarqueeProps, PageMarqueeSlots } from '../../src/runtime/components/PageMarquee.vue'
+import Marquee from '../../src/runtime/components/Marquee.vue'
+import type { MarqueeProps, MarqueeSlots } from '../../src/runtime/components/Marquee.vue'
 import ComponentRender from '../component-render'
 
-describe('PageMarquee', () => {
+describe('Marquee', () => {
   it.each([
     // Props
     ['with as', { props: { as: 'section' } }],
@@ -16,8 +16,8 @@ describe('PageMarquee', () => {
     ['with ui', { props: { ui: { content: 'gap-4' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PageMarqueeProps, slots?: Partial<PageMarqueeSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PageMarquee)
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: MarqueeProps, slots?: Partial<MarqueeSlots> }) => {
+    const html = await ComponentRender(nameOrHtml, options, Marquee)
     expect(html).toMatchSnapshot()
   })
 })

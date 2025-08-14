@@ -232,9 +232,9 @@ onMounted(async () => {
     <UPageSection v-bind="page.features2" :ui="{ container: 'py-16 sm:py-16 lg:py-16', features: 'mt-0' }" class="border-y border-default" />
 
     <UPageCTA v-if="page.customers" :title="page.customers.title" :ui="{ title: '!text-base font-medium', container: 'sm:py-12 sm:gap-8' }" variant="outline" class="rounded-none">
-      <UPageMarquee pause-on-hover :ui="{ root: '[--duration:40s]' }">
+      <UMarquee pause-on-hover :ui="{ root: '[--duration:40s]' }">
         <img v-for="(logo, index) in page.customers.items" :key="index" v-bind="logo" class="h-6 shrink-0 max-w-[140px] filter invert dark:invert-0" loading="lazy">
-      </UPageMarquee>
+      </UMarquee>
     </UPageCTA>
     <UPageSection v-bind="page.faq" :ui="{ container: 'relative' }">
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
