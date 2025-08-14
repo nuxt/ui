@@ -83,6 +83,7 @@ export default defineNuxtConfig({
     // v4 redirects - renamed components
     '/components/button-group': { redirect: { to: '/docs/components/field-group', statusCode: 301 }, prerender: false },
     '/components/page-accordion': { redirect: { to: '/docs/components/accordion', statusCode: 301 }, prerender: false },
+    '/components/page-marquee': { redirect: { to: '/docs/components/marquee', statusCode: 301 }, prerender: false },
     // v4 redirects - removed pro pages
     '/pro': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },
     '/pro/pricing': { redirect: { to: '/pro/activate', statusCode: 301 }, prerender: false },

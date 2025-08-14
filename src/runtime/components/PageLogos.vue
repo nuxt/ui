@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-logos'
-import type { PageMarqueeProps } from '../types'
+import type { MarqueeProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type PageLogos = ComponentConfig<typeof theme, AppConfig, 'pageLogos'>
@@ -19,7 +19,7 @@ export interface PageLogosProps {
   as?: any
   title?: string
   items?: PageLogosItem[]
-  marquee?: boolean | PageMarqueeProps
+  marquee?: boolean | MarqueeProps
   class?: any
   ui?: PageLogos['slots']
 }
@@ -35,7 +35,7 @@ import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import UPageMarquee from './PageMarquee.vue'
+import UMarquee from './Marquee.vue'
 import UAvatar from './Avatar.vue'
 import UIcon from './Icon.vue'
 
@@ -79,13 +79,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLogos ||
       {{ title }}
     </h2>
 
-    <UPageMarquee
+    <UMarquee
       v-if="marquee"
       v-bind="typeof marquee === 'object' ? marquee : {}"
       :class="ui.logos({ class: props.ui?.logos, marquee: true })"
     >
       <ReuseCreateItemTemplate :items="items" />
-    </UPageMarquee>
+    </UMarquee>
     <div v-else :class="ui.logos({ class: props.ui?.logos })">
       <ReuseCreateItemTemplate :items="items" />
     </div>

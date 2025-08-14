@@ -81,8 +81,8 @@ props:
 ---
 ::
 
-::note{to="/docs/components/page-marquee"}
-When you use `marquee` mode, you can customize its behavior by passing props. For more info, check out the [PageMarquee](/docs/components/page-marquee) component.
+::note{to="/docs/components/marquee"}
+When you use `marquee` mode, you can customize its behavior by passing props. For more info, check out the [Marquee](/docs/components/marquee) component.
 ::
 
 ## API

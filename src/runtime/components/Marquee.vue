@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/page-marquee'
+import theme from '#build/ui/marquee'
 import type { ComponentConfig } from '../types/tv'
 
-type PageMarquee = ComponentConfig<typeof theme, AppConfig, 'pageMarquee'>
+type Marquee = ComponentConfig<typeof theme, AppConfig, 'marquee'>
 
-export interface PageMarqueeProps {
+export interface MarqueeProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -13,14 +13,14 @@ export interface PageMarqueeProps {
   as?: any
   pauseOnHover?: boolean
   reverse?: boolean
-  orientation?: PageMarquee['variants']['orientation']
+  orientation?: Marquee['variants']['orientation']
   repeat?: number
   overlay?: boolean
   class?: any
-  ui?: PageMarquee['slots']
+  ui?: Marquee['slots']
 }
 
-export interface PageMarqueeSlots {
+export interface MarqueeSlots {
   default(props?: {}): any
 }
 </script>
@@ -31,16 +31,16 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<PageMarqueeProps>(), {
+const props = withDefaults(defineProps<MarqueeProps>(), {
   orientation: 'horizontal',
   repeat: 4,
   overlay: true
 })
-defineSlots<PageMarqueeSlots>()
+defineSlots<MarqueeSlots>()
 
-const appConfig = useAppConfig() as PageMarquee['AppConfig']
+const appConfig = useAppConfig() as Marquee['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageMarquee || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {}) })({
   pauseOnHover: props.pauseOnHover,
   orientation: props.orientation,
   reverse: props.reverse,

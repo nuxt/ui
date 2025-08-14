@@ -1,16 +1,16 @@
 ---
-title: PageMarquee
+title: Marquee
 description: 'A component to create infinite scrolling content.'
-category: page
+category: data
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/PageMarquee.vue
+    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Marquee.vue
 ---
 
 ## Usage
 
-The `PageMarquee` component allows you to create an infinite scrolling animation with your content. Perfect for showcasing logos, testimonials, or any repeating content in an engaging way.
+The `Marquee` component allows you to create an infinite scrolling animation with your content. Perfect for showcasing logos, testimonials, or any repeating content in an engaging way.
 
 ::component-code
 ---
@@ -173,12 +173,12 @@ slots:
 
 ### Testimonials
 
-Use the `PageMarquee` component to create an infinite scrolling animation for your testimonials.
+Use the `Marquee` component to create an infinite scrolling animation for your testimonials.
 
 ::component-example{label="With Items"}
 ---
 prettier: true
-name: 'page-marquee-testimonials'
+name: 'marquee-testimonials'
 collapse: true
 overflowHidden: true
 class: 'px-0'
@@ -187,12 +187,12 @@ class: 'px-0'
 
 ### Screenshots
 
-Use the `PageMarquee` component to create an infinite scrolling animation for your screenshots.
+Use the `Marquee` component to create an infinite scrolling animation for your screenshots.
 
 ::component-example{label="With Screenshots"}
 ---
 prettier: true
-name: 'page-marquee-screenshots'
+name: 'marquee-screenshots'
 collapse: true
 overflowHidden: true
 class: '!p-0'
