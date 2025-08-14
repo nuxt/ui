@@ -426,11 +426,7 @@ defineExpose({
     @update:open="onUpdateOpen"
     @keydown.enter="$event.preventDefault()"
   >
-    <ComboboxAnchor
-      :id="id"
-      :as-child="!multiple"
-      :class="ui.base({ class: props.ui?.base })"
-    >
+    <ComboboxAnchor :as-child="!multiple" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
         v-if="multiple"
         v-slot="{ modelValue: tags }"
@@ -459,6 +455,7 @@ defineExpose({
 
         <ComboboxInput v-model="searchTerm" as-child>
           <TagsInputInput
+            :id="id"
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
             :placeholder="placeholder"
@@ -470,6 +467,7 @@ defineExpose({
 
       <ComboboxInput
         v-else
+        :id="id"
         ref="inputRef"
         :display-value="displayValue"
         v-bind="{ ...$attrs, ...ariaAttrs }"
