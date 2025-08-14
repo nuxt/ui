@@ -9,13 +9,13 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.58",
-    "@iconify-json/simple-icons": "^1.2.44",
+    "@iconify-json/lucide": "^1.2.62",
+    "@iconify-json/simple-icons": "^1.2.47",
     "@internationalized/date": "^3.8.2",
     "@nuxt/ui": "workspace:*",
     "@nuxthub/core": "^0.9.0",
     "nuxt": "^4.0.3",
-    "zod": "^4.0.13"
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "typescript": "^5.8.3",

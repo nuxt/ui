@@ -188,9 +188,25 @@ name: 'toast-orientation-example'
 
 ## Examples
 
+::note{to="/components/app"}
+Nuxt UI provides an **App** component that wraps your app to provide global configurations.
+::
+
 ### Change global position
 
 Change the `toaster.position` prop on the [App](/components/app#props) component to change the position of the toasts.
+
+```vue [app.vue]
+<script setup lang="ts">
+const toaster = { position: 'bottom-right' }
+</script>
+
+<template>
+  <UApp :toaster="toaster">
+    <NuxtPage />
+  </UApp>
+</template>
+```
 
 ::component-example
 ---
@@ -209,6 +225,18 @@ In this example, we use the `AppConfig` to configure the `position` prop of the 
 ### Change global duration
 
 Change the `toaster.duration` prop on the [App](/components/app#props) component to change the duration of the toasts.
+
+```vue [app.vue]
+<script setup lang="ts">
+const toaster = { duration: 5000 }
+</script>
+
+<template>
+  <UApp :toaster="toaster">
+    <NuxtPage />
+  </UApp>
+</template>
+```
 
 ::component-example
 ---
@@ -231,6 +259,18 @@ Set the `toaster.expand` prop to `false` on the [App](/components/app#props) com
 ::tip
 You can hover over the toasts to expand them. This will also pause the timer of the toasts.
 ::
+
+```vue [app.vue]
+<script setup lang="ts">
+const toaster = { expand: true }
+</script>
+
+<template>
+  <UApp :toaster="toaster">
+    <NuxtPage />
+  </UApp>
+</template>
+```
 
 ::component-example
 ---
