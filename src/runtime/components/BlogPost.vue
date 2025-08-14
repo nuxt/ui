@@ -144,7 +144,7 @@ const ariaLabel = computed(() => {
             <UBadge v-if="badge" color="neutral" variant="subtle" v-bind="typeof badge === 'string' ? { label: badge } : badge" :class="ui.badge({ class: props.ui?.badge })" />
           </slot>
 
-          <time v-if="date" :datetime="datetime" :class="ui.date({ class: props.ui?.date })">
+          <time v-if="date || !!slots.date" :datetime="datetime" :class="ui.date({ class: props.ui?.date })">
             <slot name="date">
               {{ date }}
             </slot>
