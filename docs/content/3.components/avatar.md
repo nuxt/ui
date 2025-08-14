@@ -84,6 +84,23 @@ props:
 The `alt` prop is passed to the `img` element as the `alt` attribute.
 ::
 
+### Chip
+
+Use the `chip` prop to display a chip around the Avatar.
+
+::component-code
+---
+prettier: true
+ignore:
+  - src
+  - chip.inset
+props:
+  src: 'https://github.com/benjamincanac.png'
+  chip:
+    inset: true
+---
+::
+
 ## Examples
 
 ### With tooltip
@@ -91,12 +108,6 @@ The `alt` prop is passed to the `img` element as the `alt` attribute.
 You can use a [Tooltip](/components/tooltip) component to display a tooltip when hovering the Avatar.
 
 :component-example{name="avatar-tooltip-example"}
-
-### With chip
-
-You can use a [Chip](/components/chip) component to display a chip around the Avatar.
-
-:component-example{name="avatar-chip-example"}
 
 ## API
 

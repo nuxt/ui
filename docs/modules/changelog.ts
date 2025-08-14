@@ -1,5 +1,6 @@
 import { defineNuxtModule, addTemplate } from '@nuxt/kit'
 import Git from 'simple-git'
+import { kebabCase } from 'scule'
 
 interface CommitInfo {
   components?: string[]
@@ -38,7 +39,7 @@ export default defineNuxtModule({
       delete log.body
       const files = raw.replace(/\\/g, '/').trim().split('\n')
 
-      log.components = [...new Set(files.map(i => i.match(/^src\/runtime\/components\/(\w+)\.vue$/)?.[1]?.toLowerCase()).filter(Boolean) as string[])]
+      log.components = [...new Set(files.map(i => kebabCase(i.match(/^src\/runtime\/components\/(\w+)\.vue$/)?.[1] ?? '')).filter(Boolean) as string[])]
     }
 
     const result = logs.filter(i => i.components?.length || i.version)
