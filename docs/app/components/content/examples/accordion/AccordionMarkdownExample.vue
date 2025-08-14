@@ -34,7 +34,16 @@ const items = [
 </script>
 
 <template>
-  <UAccordion :items="items" :unmount-on-hide="false" default-value="1" :ui="{ trigger: 'text-base', body: 'text-base' }">
+  <UAccordion
+    type="multiple"
+    :items="items"
+    :unmount-on-hide="false"
+    :default-value="['0']"
+    :ui="{
+      trigger: 'text-base',
+      body: 'text-base text-muted'
+    }"
+  >
     <template #body="{ item }">
       <MDC :value="item.content" unwrap="p" />
     </template>
