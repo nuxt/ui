@@ -2,15 +2,15 @@ import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { ComputedRef, DeepReadonly, Ref } from 'vue'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
-import type { GetObjectField } from './utils'
+import type { GetObjectField, Paths } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
 
 export interface Form<S extends FormSchema> {
   validate<T extends boolean>(opts?: { name?: keyof FormData<S, false> | (keyof FormData<S, false>)[], silent?: boolean, nested?: boolean, transform?: T }): Promise<FormData<S, T> | false>
-  clear (path?: string): void
+  clear (path?: Paths<FormData<S, false>>): void
   errors: Ref<FormError[]>
-  setErrors (errs: FormError[], name?: keyof FormData<S, false>): void
-  getErrors (name?: keyof FormData<S, false>): FormError[]
+  setErrors (errs: FormError[], name?: Paths<FormData<S, false>>): void
+  getErrors (name?: Paths<FormData<S, false>>): FormError[]
   submit (): Promise<void>
   disabled: ComputedRef<boolean>
   dirty: ComputedRef<boolean>

@@ -2,8 +2,9 @@ import { ref, reactive, shallowReactive, computed, readonly, isRef, watch as vue
 import { type FormSchema, type FormError, type FormInputEvents, type FormErrorWithId, type InferInput, type InferOutput, type FormData, FormValidationException } from '../types/form'
 import { validateSchema } from '../utils/form'
 import { useDebounceFn } from '@vueuse/core'
-import { cloneObject } from '../utils'
+import { cloneObject, get, set } from '../utils'
 import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from './useFormField'
+import type { Paths } from '../types'
 
 export interface UseFormOptions<S extends FormSchema, T extends boolean = true> {
   id?: string | number
@@ -28,6 +29,15 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
 
   const errors = ref<FormErrorWithId[]>([])
   provide('form-errors', errors)
+
+  const errorBag = computed(() => {
+    return errors.value.reduce((bag, error) => {
+      if (error.name) {
+        set(bag, error.name, error.message)
+      }
+      return bag
+    }, {} as Record<keyof InferInput<S>, string>)
+  })
 
   const inputs = ref<{ [P in keyof InferInput<S>]?: { id?: string, pattern?: RegExp } }>({})
   provide(formInputsInjectionKey, inputs as any)
@@ -167,44 +177,42 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     blurredFields.clear()
   }
 
-  function _updateFieldAndTrack(name: keyof InferInput<S>, value: InferInput<S>[keyof InferInput<S>]) {
-    setFieldValue(name, value)
-    dirtyFields.add(name)
+  function _updateFieldState<K extends Paths<InferInput<S>>>(name: K, value: InferInput<S>[K], type: FormInputEvents) {
     touchedFields.add(name)
-  }
 
-  function _handleInputLogic(name: keyof InferInput<S>, value: InferInput<S>[keyof InferInput<S>]) {
-    _updateFieldAndTrack(name, value)
-    if (validateOn.includes('input')) {
-      debouncedValidate({ name })
+    if (type === 'blur') {
+      blurredFields.add(name)
+    } else {
+      setFieldValue(name, value)
+      dirtyFields.add(name)
+    }
+
+    if (validateOn.includes(type)) {
+      if (type === 'input') {
+        debouncedValidate({ name })
+      } else {
+        validate({ name })
+      }
     }
   }
 
-  function _handleChangeLogic(name: keyof InferInput<S>, value: InferInput<S>[keyof InferInput<S>]) {
-    _updateFieldAndTrack(name, value)
-    if (validateOn.includes('change')) {
-      validate({ name })
-    }
-  }
+  const _handleInputLogic = <K extends Paths<InferInput<S>>>(name: K, value: InferInput<S>[K]) => _updateFieldState(name,
+    value, 'input')
+  const _handleChangeLogic = <K extends Paths<InferInput<S>>>(name: K, value: InferInput<S>[K]) => _updateFieldState(name,
+    value, 'change')
+  const _handleBlurLogic = (name: Paths<InferInput<S>>) => _updateFieldState(name, undefined,
+    'blur')
 
-  function _handleBlurLogic(name: keyof InferInput<S>) {
-    blurredFields.add(name)
-    touchedFields.add(name)
-    if (validateOn.includes('blur')) {
-      validate({ name })
-    }
-  }
-
-  function register<K extends keyof InferInput<S>>(name: K, metadata: { id?: string, pattern?: RegExp } = {}) {
-    inputs.value[name as string] = { ...inputs.value[name as string], ...metadata }
+  function register<K extends Paths<InferInput<S>>>(name: K, metadata: { id?: string, pattern?: RegExp } = {}) {
+    inputs.value[name as string] = { ...metadata }
 
     const fieldProps = {
       'name': name as string,
-      'modelValue': state[name],
+      'modelValue': get(state, name),
       'onUpdate:modelValue': (val: InferInput<S>[K]) => {
         _handleInputLogic(name, val)
       },
-      'value': state[name],
+      'value': get(state, name),
       'onInput': (event: Event | CustomEvent) => {
         const isCustomEvent = event instanceof CustomEvent
         const target = (isCustomEvent ? event.detail : event.target) as HTMLInputElement
@@ -226,34 +234,43 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     return fieldProps
   }
 
-  function unregister(name: keyof InferInput<S>) {
+  function unregister(name: InferInput<S>) {
     /* eslint-disable @typescript-eslint/no-dynamic-delete */
     delete inputs.value[name as string]
   }
 
   function handleBlur(event: FocusEvent) {
-    const name = (event.target as HTMLInputElement).name as keyof InferInput<S>
+    const name = (event.target as HTMLInputElement).name as Paths<InferInput<S>>
     if (!name) return
     _handleBlurLogic(name)
   }
 
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement
-    const name = target.name as keyof InferInput<S>
+    const name = target.name as Paths<InferInput<S>>
     if (!name) return
     const value = target.type === 'checkbox' ? target.checked : target.value
-    _handleInputLogic(name, value as InferInput<S>[keyof InferInput<S>])
+    _handleInputLogic(name, value as InferInput<S>[Paths<InferInput<S>>])
   }
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement
-    const name = target.name as keyof InferInput<S>
+    const name = target.name as Paths<InferInput<S>>
     if (!name) return
     const value = target.type === 'checkbox' ? target.checked : target.value
-    _handleChangeLogic(name, value as InferInput<S>[keyof InferInput<S>])
+    _handleChangeLogic(name, value as InferInput<S>[Paths<InferInput<S>>])
   }
 
-  function setErrors(errs: FormError[], name?: keyof InferInput<S> | RegExp) {
+  function setError<K extends Paths<InferInput<S>>>(name: K, error: Omit<FormErrorWithId, 'name'>) {
+    if (name) {
+      errors.value.push({
+        ...error,
+        name
+      })
+    }
+  }
+
+  function setErrors(errs: FormError[], name?: Paths<InferInput<S>> | RegExp) {
     if (name) {
       errors.value = errors.value
         .filter(err => name instanceof RegExp ? !(err.name && name.test(err.name)) : err.name !== name)
@@ -263,14 +280,14 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     }
   }
 
-  function getErrors(name?: keyof InferInput<S> | RegExp) {
+  function getErrors(name?: Paths<InferInput<S>> | RegExp) {
     if (name) {
       return errors.value.filter(err => name instanceof RegExp ? err.name && name.test(err.name) : err.name === name)
     }
     return errors.value
   }
 
-  function clear(name?: keyof InferInput<S> | RegExp) {
+  function clear(name?: Paths<InferInput<S>> | RegExp) {
     if (name) {
       errors.value = errors.value.filter(err => name instanceof RegExp ? !(err.name && name.test(err.name)) : err.name !== name)
     } else {
@@ -278,19 +295,19 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     }
   }
 
-  function setFieldValue<K extends keyof InferInput<S>>(name: K, value: InferInput<S>[K]) {
+  function setFieldValue<K extends Paths<InferInput<S>>>(name: K, value: InferInput<S>[K]) {
     if (!name) return
 
-    state[name] = value === '' ? initialState[name] : value
+    set(state, name, value === '' ? get(initialState, name) : value)
   }
 
   function setValues(values: Partial<InferInput<S>>) {
     for (const key in values) {
-      setFieldValue(key as keyof InferInput<S>, values[key] as InferInput<S>[keyof InferInput<S>])
+      setFieldValue(key as Paths<InferInput<S>>, values[key] as InferInput<S>[keyof InferInput<S>])
     }
   }
 
-  function watch<K extends keyof InferInput<S>>(
+  function watch<K extends Paths<InferInput<S>>>(
     key: K,
     cb: (newValue: InferInput<S>[K], oldValue: InferInput<S>[K]) => void,
     options?: WatchOptions
@@ -305,7 +322,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     arg3?: WatchOptions
   ) {
     if (typeof arg1 === 'string' || typeof arg1 === 'symbol' || typeof arg1 === 'number') {
-      vueWatch(() => state[arg1 as K], arg2 as (newValue: InferInput<S>[K], oldValue: InferInput<S>[K]) => void, arg3)
+      vueWatch(() => get(state, arg1 as string), arg2 as (newValue: InferInput<S>[K], oldValue: InferInput<S>[K]) => void, arg3)
     } else if (typeof arg1 === 'function') {
       vueWatch(state, arg1 as InferInput<S>, arg2 as WatchOptions)
     }
@@ -313,8 +330,8 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
 
   return {
     state,
-    errors: errors,
-    loading: loading,
+    errors,
+    loading,
     disabled,
     dirty: computed(() => !!dirtyFields.size),
     dirtyFields,
@@ -329,11 +346,13 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     handleInput,
     handleChange,
     setErrors,
+    setError,
     getErrors,
     clear,
     setFieldValue,
     setValues,
     watch,
+    errorBag,
 
     // Internal
     registerNestedForm,
