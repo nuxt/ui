@@ -72,7 +72,7 @@ const props = defineProps<CheckboxProps>()
 const slots = defineSlots<CheckboxSlots>()
 const emits = defineEmits<CheckboxEmits>()
 
-const modelValue = defineModel<boolean>({ default: undefined })
+const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined })
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
 
