@@ -11,15 +11,12 @@ import type { NuxtUIOptions } from '../unplugin'
  */
 export default function NuxtEnvironmentPlugin(options: NuxtUIOptions) {
   let stubPath: string
-  
+
   if (options.router === false) {
-    // Router disabled - use minimal stubs
     stubPath = resolvePathSync('../runtime/minimal/stubs', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
   } else if (options.inertia) {
-    // Inertia mode
     stubPath = resolvePathSync('../runtime/inertia/stubs', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
   } else {
-    // Default Vue mode
     stubPath = resolvePathSync('../runtime/vue/stubs', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
   }
 
