@@ -3,7 +3,7 @@ import { type FormSchema, type FormError, type FormInputEvents, type FormErrorWi
 import { validateSchema } from '../utils/form'
 import { useDebounceFn } from '@vueuse/core'
 import { cloneObject } from '../utils'
-import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from '#imports'
+import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from './useFormField'
 
 export interface UseFormOptions<S extends FormSchema, T extends boolean = true> {
   id?: string | number
