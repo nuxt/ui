@@ -8,7 +8,7 @@ import type { AcceptableValue, ComponentConfig } from '../types/utils'
 
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>
 
-export interface InputProps<T> extends UseComponentIconsProps {
+export interface InputProps<T extends AcceptableValue = AcceptableValue> extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
