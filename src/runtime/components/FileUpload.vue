@@ -223,8 +223,11 @@ function onUpdate(files: File[], reset = false) {
     modelValue.value = files?.[0] as (M extends true ? File[] : File) | null
   }
 
-  // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const event = new Event('change', { target: { value: modelValue.value } })
+  const event = new CustomEvent('change', {
+    detail: {
+      value: modelValue.value
+    }
+  })
   emits('change', event)
   emitFormChange()
   emitFormInput()

@@ -87,8 +87,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}
 }))
 
 function onUpdate(value: any) {
-  // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const event = new Event('change', { target: { value } })
+  const event = new CustomEvent('change', {
+    detail: {
+      value
+    }
+  })
   emits('change', event)
   emitFormChange()
   emitFormInput()

@@ -121,6 +121,61 @@ export function isArrayOfArray<A>(item: A[] | A[][]): item is A[][] {
   return Array.isArray(item[0])
 }
 
+export function isDateObject(value: unknown): value is Date {
+  return value instanceof Date
+}
+
+export function isNullOrUndefined(value: unknown): value is null | undefined {
+  return value == null
+}
+
+export function isObject<T extends object>(value: unknown): value is T {
+  return !isNullOrUndefined(value) && !Array.isArray(value) && typeof value === 'object' && !isDateObject(value)
+}
+
+export function isPlainObject(tempObject: object) {
+  const prototypeCopy
+    = tempObject.constructor && tempObject.constructor.prototype
+
+  return (
+    isObject(prototypeCopy) && Object.prototype.hasOwnProperty.call(prototypeCopy, 'isPrototypeOf')
+  )
+};
+
+export const isWeb = typeof window !== 'undefined'
+  && typeof window.HTMLElement !== 'undefined'
+  && typeof document !== 'undefined'
+
+export function cloneObject<T>(data: T): T {
+  let copy: any
+  const isArray = Array.isArray(data)
+  const isFileListInstance
+    = typeof FileList !== 'undefined' ? data instanceof FileList : false
+
+  if (data instanceof Date) {
+    copy = new Date(data)
+  } else if (
+    !(isWeb && (data instanceof Blob || isFileListInstance))
+    && (isArray || isObject(data))
+  ) {
+    copy = isArray ? [] : Object.create(Object.getPrototypeOf(data))
+
+    if (!isArray && !isPlainObject(data)) {
+      copy = data
+    } else {
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          copy[key] = cloneObject(data[key])
+        }
+      }
+    }
+  } else {
+    return data
+  }
+
+  return copy
+}
+
 export function mergeClasses(appConfigClass?: string | string[], propClass?: string) {
   if (!appConfigClass && !propClass) {
     return ''

@@ -72,7 +72,7 @@ const props = defineProps<CheckboxProps>()
 const slots = defineSlots<CheckboxSlots>()
 const emits = defineEmits<CheckboxEmits>()
 
-const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined })
+const modelValue = defineModel<boolean>({ default: undefined })
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
 
@@ -91,8 +91,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || 
 }))
 
 function onUpdate(value: any) {
-  // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const event = new Event('change', { target: { value } })
+  const event = new CustomEvent('change', {
+    detail: {
+      value
+    }
+  })
+
   emits('change', event)
   emitFormChange()
   emitFormInput()

@@ -81,8 +81,11 @@ const inputsRef = ref<ComponentPublicInstance[]>([])
 
 const completed = ref(false)
 function onComplete(value: string[] | number[]) {
-  // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const event = new Event('change', { target: { value } })
+  const event = new CustomEvent('change', {
+    detail: {
+      value
+    }
+  })
   emits('change', event)
   emitFormChange()
 }

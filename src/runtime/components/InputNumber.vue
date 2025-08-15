@@ -121,8 +121,11 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 const inputRef = ref<InstanceType<typeof NumberFieldInput> | null>(null)
 
 function onUpdate(value: number) {
-  // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const event = new Event('change', { target: { value } })
+  const event = new CustomEvent('change', {
+    detail: {
+      value
+    }
+  })
   emits('change', event)
 
   emitFormChange()
