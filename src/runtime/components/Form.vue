@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, InferInput, FormData } from '../types/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, InferInput, FormData, FormValidationException } from '../types/form'
 import type { ComponentConfig } from '../types/utils'
 import { useForm } from '../composables/useForm'
 
@@ -65,12 +65,11 @@ export interface FormSlots {
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
+import { provide, inject, nextTick, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formBusInjectionKey, formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
-import { FormValidationException } from '../types/form'
 
 type I = InferInput<S>
 
@@ -98,13 +97,16 @@ const {
   errors,
   loading,
   validate: formValidate,
+  handleSubmit,
   setErrors,
   getErrors,
   clear,
   disabled: formDisabled,
   dirtyFields,
   touchedFields,
-  blurredFields
+  blurredFields,
+  registerNestedForm,
+  unregisterNestedForm
 } = useForm({
   id: formId,
   schema: props.schema,
@@ -129,19 +131,17 @@ const parentBus = props.attach && inject(
 
 provide(formBusInjectionKey, bus)
 
-const nestedForms = ref<Map<string | number, { validate: typeof _validate }>>(new Map())
-
 onMounted(async () => {
   bus.on(async (event) => {
     if (event.type === 'attach') {
-      nestedForms.value.set(event.formId, { validate: event.validate })
+      registerNestedForm(event.formId, { validate: event.validate })
     } else if (event.type === 'detach') {
-      nestedForms.value.delete(event.formId)
+      unregisterNestedForm(event.formId)
     } else if (props.validateOn?.includes(event.type) && !loading.value) {
       if (event.type !== 'input') {
-        await _validate({ name: event.name, silent: true, nested: false })
+        await formValidate({ name: event.name, silent: true, nested: false })
       } else if (event.eager || blurredFields.has(event.name)) {
-        await _validate({ name: event.name, silent: true, nested: false })
+        await formValidate({ name: event.name, silent: true, nested: false })
       }
     }
 
@@ -166,7 +166,7 @@ onUnmounted(() => {
 onMounted(async () => {
   if (parentBus) {
     await nextTick()
-    parentBus.emit({ type: 'attach', validate: _validate, formId })
+    parentBus.emit({ type: 'attach', validate: formValidate, formId })
   }
 })
 
@@ -176,65 +176,27 @@ onUnmounted(() => {
   }
 })
 
-type ValidateOpts<Silent extends boolean, Transform extends boolean> = { name?: keyof I | (keyof I)[], silent?: Silent, nested?: boolean, transform?: Transform }
-
-async function _validate<TValidate extends boolean>(opts: ValidateOpts<false, TValidate>): Promise<FormData<S, TValidate>>
-async function _validate<TValidate extends boolean>(opts: ValidateOpts<true, TValidate>): Promise<FormData<S, TValidate> | false>
-async function _validate<TValidate extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: true, transform: false }): Promise<FormData<S, TValidate> | false> {
-  const { nested, ...formValidateOpts } = opts
-  const ownValidationPromise = formValidate(formValidateOpts).catch(error => error)
-
-  const nestedValidatePromises = !opts.name && nested
-    ? Array.from(nestedForms.value.values()).map(({ validate }) =>
-        validate(opts as any).catch((error: Error) => {
-          if (!(error instanceof FormValidationException)) {
-            throw error
-          }
-          return error
-        })
-      )
-    : []
-
-  const [ownResult, ...childResults] = await Promise.all([ownValidationPromise, ...nestedValidatePromises])
-
-  const ownErrors = ownResult instanceof FormValidationException ? ownResult.errors : []
-  const childErrors = childResults.filter((r): r is FormValidationException => r instanceof FormValidationException)
-
-  if (ownErrors.length > 0 || childErrors.length > 0) {
-    if (opts.silent) return false
-    throw new FormValidationException(formId, ownErrors, childErrors)
-  }
-
-  return ownResult as FormData<S, TValidate>
+const onSuccess = async (data: FormData<S, T>, payload?: Event) => {
+  const event = payload as FormSubmitEvent<FormData<S, T>>
+  event.data = data
+  await props.onSubmit?.(event)
 }
 
-async function onSubmitWrapper(payload: Event) {
-  loading.value = props.loadingAuto && true
-
+const onError = (error: FormValidationException, payload?: Event) => {
   const event = payload as FormSubmitEvent<FormData<S, T>>
 
-  try {
-    event.data = await _validate({ nested: true, transform: props.transform })
-    await props.onSubmit?.(event)
-    dirtyFields.clear()
-  } catch (error) {
-    if (!(error instanceof FormValidationException)) {
-      throw error
-    }
-
-    const errorEvent: FormErrorEvent = {
-      ...event,
-      errors: error.errors,
-      children: error.children
-    }
-    emits('error', errorEvent)
-  } finally {
-    loading.value = false
+  const errorEvent: FormErrorEvent = {
+    ...event,
+    errors: error.errors,
+    children: error.children
   }
+  emits('error', errorEvent)
 }
 
+const onSubmitWrapper = handleSubmit(onSuccess, onError)
+
 defineExpose<Form<S>>({
-  validate: _validate,
+  validate: formValidate,
   errors,
   setErrors,
   getErrors,

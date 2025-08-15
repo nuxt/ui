@@ -74,44 +74,81 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     return resolveErrorIds(errs)
   }
 
-  type ValidateOpts<Silent extends boolean, Transform extends boolean> = { name?: keyof InferInput<S> | (keyof InferInput<S>)[], silent?: Silent, transform?: Transform }
-  async function validate<T extends boolean>(opts: ValidateOpts<false, T>): Promise<FormData<S, T>>
-  async function validate<T extends boolean>(opts: ValidateOpts<true, T>): Promise<FormData<S, T> | false>
-  async function validate<TValidate extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, transform: false }): Promise<FormData<S, TValidate> | false> {
-    const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof InferOutput<S>)[]
+  const nestedForms = ref<Map<string | number, { validate: any }>>(new Map())
 
-    if (names) {
-      const otherErrors = errors.value.filter(error => !names.some((name) => {
-        const pattern = inputs.value?.[name]?.pattern
-        return name === error.name || (pattern && error.name?.match(pattern))
-      }))
+  function registerNestedForm(formId: string | number, form: { validate: any }) {
+    nestedForms.value.set(formId, form)
+  }
 
-      const pathErrors = (await fetchAllErrors()).filter(error => names.some((name) => {
-        const pattern = inputs.value?.[name]?.pattern
-        return name === error.name || (pattern && error.name?.match(pattern))
-      }))
+  function unregisterNestedForm(formId: string | number) {
+    nestedForms.value.delete(formId)
+  }
 
-      errors.value = otherErrors.concat(pathErrors)
-    } else {
-      errors.value = await fetchAllErrors()
+  type ValidateOpts<Silent extends boolean, Transform extends boolean> = { name?: keyof InferInput<S> | (keyof InferInput<S>)[], silent?: Silent, nested?: boolean, transform?: Transform }
+  async function validate<TValidate extends boolean>(opts: ValidateOpts<false, TValidate>): Promise<FormData<S, TValidate>>
+  async function validate<TValidate extends boolean>(opts: ValidateOpts<true, TValidate>): Promise<FormData<S, TValidate> | false>
+  async function validate<TValidate extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: true, transform: false }): Promise<FormData<S, TValidate> | false> {
+    const { nested, ...formValidateOpts } = opts
+
+    const ownValidation = async () => {
+      const names = formValidateOpts.name && !Array.isArray(formValidateOpts.name) ? [formValidateOpts.name] : formValidateOpts.name as (keyof InferOutput<S>)[]
+
+      if (names) {
+        const otherErrors = errors.value.filter(error => !names.some((name) => {
+          const pattern = inputs.value?.[name]?.pattern
+          return name === error.name || (pattern && error.name?.match(pattern))
+        }))
+
+        const pathErrors = (await fetchAllErrors()).filter(error => names.some((name) => {
+          const pattern = inputs.value?.[name]?.pattern
+          return name === error.name || (pattern && error.name?.match(pattern))
+        }))
+
+        errors.value = otherErrors.concat(pathErrors)
+      } else {
+        errors.value = await fetchAllErrors()
+      }
+
+      if (errors.value.length > 0) {
+        throw new FormValidationException(formId, errors.value, [])
+      }
+
+      if (formValidateOpts.transform) {
+        Object.assign(state, transformedState.value)
+      }
+
+      return state as FormData<S, TValidate>
     }
 
-    if (errors.value.length > 0) {
+    const ownValidationPromise = ownValidation().catch(error => error)
+
+    const nestedValidatePromises = !opts.name && nested
+      ? Array.from(nestedForms.value.values()).map(({ validate }) =>
+          validate(opts as any).catch((error: Error) => {
+            if (!(error instanceof FormValidationException)) {
+              throw error
+            }
+            return error
+          })
+        )
+      : []
+
+    const [ownResult, ...childResults] = await Promise.all([ownValidationPromise, ...nestedValidatePromises])
+
+    const ownErrors = ownResult instanceof FormValidationException ? ownResult.errors : []
+    const childErrors = childResults.filter((r): r is FormValidationException => r instanceof FormValidationException)
+
+    if (ownErrors.length > 0 || childErrors.length > 0) {
       if (opts.silent) return false
-
-      throw new FormValidationException(formId, errors.value, [])
+      throw new FormValidationException(formId, ownErrors, childErrors)
     }
 
-    if (opts.transform) {
-      Object.assign(state, transformedState.value)
-    }
-
-    return state as FormData<S, TValidate>
+    return ownResult as FormData<S, TValidate>
   }
 
   const debouncedValidate = useDebounceFn(validate, options.validateOnInputDelay || 300)
 
-  function handleSubmit(onSuccess: (data: FormData<S, T>) => any, onError?: (error: FormValidationException) => any) {
+  function handleSubmit(onSuccess: (data: FormData<S, T>, event?: Event) => any, onError?: (error: FormValidationException, event?: Event) => any) {
     return async (event?: Event) => {
       event?.preventDefault()
       if (disabled.value) return
@@ -119,9 +156,9 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
       loading.value = loadingAuto && true
 
       try {
-        const data = await validate({ transform })
+        const data = await validate({ transform, nested: true })
 
-        const result = await onSuccess(data)
+        const result = await onSuccess(data, event)
         dirtyFields.clear()
         return result
       } catch (error) {
@@ -311,7 +348,11 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     clear,
     setFieldValue,
     setValues,
-    watch
+    watch,
+
+    // Internal
+    registerNestedForm,
+    unregisterNestedForm
 
   }
 }
