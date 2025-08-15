@@ -60,15 +60,15 @@ export interface ModalEmits extends DialogRootEmits {
 }
 
 export interface ModalSlots {
-  default(props: { open: boolean, animating: boolean }): any
-  content(props: { close: () => void, animating: boolean }): any
-  header(props: { close: () => void, animating: boolean }): any
-  title(props: { animating: boolean }): any
-  description(props: { animating: boolean }): any
-  actions(props: { animating: boolean }): any
-  close(props: { close: () => void, ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string }, animating: boolean }): any
-  body(props: { close: () => void, animating: boolean }): any
-  footer(props: { close: () => void, animating: boolean }): any
+  default(props: { open: boolean, transitioning: boolean }): any
+  content(props: { close: () => void, transitioning: boolean }): any
+  header(props: { close: () => void, transitioning: boolean }): any
+  title(props: { transitioning: boolean }): any
+  description(props: { transitioning: boolean }): any
+  actions(props: { transitioning: boolean }): any
+  close(props: { close: () => void, ui: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string }, transitioning: boolean }): any
+  body(props: { close: () => void, transitioning: boolean }): any
+  footer(props: { close: () => void, transitioning: boolean }): any
 }
 </script>
 
@@ -96,7 +96,7 @@ const slots = defineSlots<ModalSlots>()
 const { t } = useLocale()
 const appConfig = useAppConfig() as Modal['AppConfig']
 
-const animating = ref(false)
+const transitioning = ref(false)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
@@ -128,17 +128,17 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
 
 watch(() => props.open, () => {
   if (props.transition) {
-    animating.value = true
+    transitioning.value = true
   }
 })
 
 function handleAfterEnter() {
-  animating.value = false
+  transitioning.value = false
   emits('after:enter')
 }
 
 function handleAfterLeave() {
-  animating.value = false
+  transitioning.value = false
   emits('after:leave')
 }
 </script>
@@ -147,7 +147,7 @@ function handleAfterLeave() {
 <template>
   <DialogRoot v-slot="{ open, close }" v-bind="rootProps">
     <DialogTrigger v-if="!!slots.default" as-child :class="props.class">
-      <slot :open="open" :animating="animating" />
+      <slot :open="open" :transitioning="transitioning" />
     </DialogTrigger>
 
     <DialogPortal v-bind="portalProps">
@@ -156,39 +156,39 @@ function handleAfterLeave() {
       <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave" v-on="contentEvents">
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
-            <slot name="title" :animating="animating">
+            <slot name="title" :transitioning="transitioning">
               {{ title }}
             </slot>
           </DialogTitle>
 
           <DialogDescription v-if="description || !!slots.description">
-            <slot name="description" :animating="animating">
+            <slot name="description" :transitioning="transitioning">
               {{ description }}
             </slot>
           </DialogDescription>
         </VisuallyHidden>
 
-        <slot name="content" :close="close" :animating="animating">
+        <slot name="content" :close="close" :transitioning="transitioning">
           <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" :class="ui.header({ class: props.ui?.header })">
-            <slot name="header" :close="close" :animating="animating">
+            <slot name="header" :close="close" :transitioning="transitioning">
               <div :class="ui.wrapper({ class: props.ui?.wrapper })">
                 <DialogTitle v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
-                  <slot name="title" :animating="animating">
+                  <slot name="title" :transitioning="transitioning">
                     {{ title }}
                   </slot>
                 </DialogTitle>
 
                 <DialogDescription v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
-                  <slot name="description" :animating="animating">
+                  <slot name="description" :transitioning="transitioning">
                     {{ description }}
                   </slot>
                 </DialogDescription>
               </div>
 
-              <slot name="actions" :animating="animating" />
+              <slot name="actions" :transitioning="transitioning" />
 
               <DialogClose v-if="props.close || !!slots.close" as-child>
-                <slot name="close" :close="close" :ui="ui" :animating="animating">
+                <slot name="close" :close="close" :ui="ui" :transitioning="transitioning">
                   <UButton
                     v-if="props.close"
                     :icon="closeIcon || appConfig.ui.icons.close"
@@ -204,11 +204,11 @@ function handleAfterLeave() {
           </div>
 
           <div v-if="!!slots.body" :class="ui.body({ class: props.ui?.body })">
-            <slot name="body" :close="close" :animating="animating" />
+            <slot name="body" :close="close" :transitioning="transitioning" />
           </div>
 
           <div v-if="!!slots.footer" :class="ui.footer({ class: props.ui?.footer })">
-            <slot name="footer" :close="close" :animating="animating" />
+            <slot name="footer" :close="close" :transitioning="transitioning" />
           </div>
         </slot>
       </DialogContent>
