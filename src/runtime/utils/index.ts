@@ -1,5 +1,5 @@
 import { isEqual } from 'ohash/utils'
-import type { GetItemKeys, NestedItem } from '../types'
+import type { GetItemKeys, NestedItem } from '../types/utils'
 
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
   const result = {} as Pick<Data, Keys>
