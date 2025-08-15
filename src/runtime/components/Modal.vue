@@ -54,8 +54,10 @@ export interface ModalProps extends DialogRootProps {
 }
 
 export interface ModalEmits extends DialogRootEmits {
-  'after:leave': []
+  'enter': []
+  'leave': []
   'after:enter': []
+  'after:leave': []
   'close:prevent': []
 }
 
@@ -126,12 +128,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
   fullscreen: props.fullscreen
 }))
 
-watch(() => props.open, () => {
-  if (props.transition) {
-    transitioning.value = true
-  }
-}, { immediate: true })
-
 function handleAfterEnter() {
   transitioning.value = false
   emits('after:enter')
@@ -140,6 +136,16 @@ function handleAfterEnter() {
 function handleAfterLeave() {
   transitioning.value = false
   emits('after:leave')
+}
+
+function handleEnter() {
+  transitioning.value = true
+  emits('enter')
+}
+
+function handleLeave() {
+  transitioning.value = true
+  emits('leave')
 }
 </script>
 
@@ -153,7 +159,7 @@ function handleAfterLeave() {
     <DialogPortal v-bind="portalProps">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave" v-on="contentEvents">
+      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave" @enter="handleEnter" @leave="handleLeave" v-on="contentEvents">
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
             <slot name="title" :transitioning="transitioning">
