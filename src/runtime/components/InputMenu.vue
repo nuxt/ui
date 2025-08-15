@@ -418,7 +418,6 @@ defineExpose({
   </DefineCreateItemTemplate>
 
   <ComboboxRoot
-    :id="id"
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
     :name="name"
@@ -459,6 +458,7 @@ defineExpose({
 
         <ComboboxInput v-model="searchTerm" as-child>
           <TagsInputInput
+            :id="id"
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
             :placeholder="placeholder"
@@ -470,6 +470,7 @@ defineExpose({
 
       <ComboboxInput
         v-else
+        :id="id"
         ref="inputRef"
         :display-value="displayValue"
         v-bind="{ ...$attrs, ...ariaAttrs }"
