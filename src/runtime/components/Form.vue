@@ -88,8 +88,8 @@ const emits = defineEmits<FormEmits<S, T>>()
 defineSlots<FormSlots>()
 const formId = props.id ?? useId() as string
 
-provide('form-errors', undefined)
 // block duplicate provide
+provide('form-errors', undefined)
 provide(formInputsInjectionKey, undefined as any)
 provide(formLoadingInjectionKey, undefined as any)
 provide(formOptionsInjectionKey, undefined as any)
