@@ -1,5 +1,7 @@
 # Changelog
 
+## [3.3.2](https://github.com/nuxt/ui/compare/v3.3.1...v3.3.2) (2025-08-14)
+
 ## [3.3.1](https://github.com/nuxt/ui/compare/v3.3.0...v3.3.1) (2025-08-14)
 
 ### Features
