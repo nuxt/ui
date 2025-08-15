@@ -130,7 +130,7 @@ watch(() => props.open, () => {
   if (props.transition) {
     transitioning.value = true
   }
-})
+}, { immediate: true })
 
 function handleAfterEnter() {
   transitioning.value = false
