@@ -196,7 +196,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
   }
 
   function register<K extends keyof InferInput<S>>(name: K, metadata: { id?: string, pattern?: RegExp } = {}) {
-    inputs.value[name as string] = { ...metadata }
+    inputs.value[name as string] = { ...inputs.value[name as string], ...metadata }
 
     const fieldProps = {
       'name': name as string,
