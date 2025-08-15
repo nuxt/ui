@@ -54,12 +54,22 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    * Enables compatibility layer for InertiaJS
    */
   inertia?: boolean
+  /**
+   * Enable or disable router integration
+   * @defaultValue `true`
+   */
+  router?: boolean
 }
 
 export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.meta.url)))
 
 export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options = {}, meta) => {
   const options = defu(_options, { fonts: false }, defaultOptions)
+
+  // Validation: router and inertia options
+  if (options.router === false && options.inertia === true) {
+    throw new Error('[Nuxt UI] Cannot enable Inertia integration when router is disabled. Inertia requires router functionality.')
+  }
 
   options.theme = options.theme || {}
   options.theme.colors = resolveColors(options.theme.colors)

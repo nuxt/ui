@@ -19,6 +19,7 @@ export const defaultOptions = {
   prefix: 'U',
   fonts: true,
   colorMode: true,
+  router: true,
   theme: {
     colors: undefined,
     transitions: true

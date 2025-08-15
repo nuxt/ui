@@ -32,6 +32,12 @@ export interface ModuleOptions {
   colorMode?: boolean
 
   /**
+   * Enable or disable router integration
+   * @defaultValue `true`
+   */
+  router?: boolean
+
+  /**
    * Customize how the theme is generated
    * @link https://ui3.nuxt.com/getting-started/theme
    */
