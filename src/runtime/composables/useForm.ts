@@ -204,7 +204,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     'blur')
 
   function register<K extends Paths<InferInput<S>>>(name: K, metadata: { id?: string, pattern?: RegExp } = {}) {
-    inputs.value[name as string] = { ...metadata }
+    set(inputs.value, name, metadata)
 
     const fieldProps = {
       'name': name as string,
