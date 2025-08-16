@@ -20,6 +20,7 @@ export interface Form<S extends FormSchema> {
   blurredFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   handleReset: VoidFunction
   setFieldError (name: Paths<FormData<S, false>>, error: Omit<FormErrorWithId, 'name'>): void
+  errorBag: ComputedRef<Record<keyof FormData<S, false>, any>>
 }
 
 export type FormSchema<I extends object = object, O extends object = I>

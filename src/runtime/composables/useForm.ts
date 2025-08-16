@@ -36,7 +36,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
         set(bag, error.name, error.message)
       }
       return bag
-    }, {} as Record<keyof InferInput<S>, string>)
+    }, {} as Record<keyof InferInput<S>, any>)
   })
 
   const inputs = ref<{ [P in keyof InferInput<S>]?: { id?: string, pattern?: RegExp } }>({})
