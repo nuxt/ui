@@ -6,42 +6,54 @@ import FormExampleNestedList from '../../../../docs/app/components/content/examp
 import FormExampleNested from '../../../../docs/app/components/content/examples/form/FormExampleNested.vue'
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-  tos: z.literal(true)
+  testing: z.object({
+    k: z.email(),
+    l: z.array(z.object({
+      m: z.email()
+    }))
+  })
 })
 
 type Schema = z.input<typeof schema>
-
-const state = reactive<Partial<Schema>>({})
 
 function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
 
+const { formRef, state } = useFormControl({
+  schema,
+  defaultValues: {
+    testing: {
+      k: '',
+      l: [
+        {
+          m: 'asd'
+        }
+      ]
+    }
+  }
+})
+
 const validateOn = ref(['input', 'change', 'blur'])
 const disabled = ref(false)
+
+onMounted(async () => {
+  formRef.value?.setFieldValue('testing.l.0.m', '123')
+})
 </script>
 
 <template>
   <div class="flex flex-col gap-8">
     <div class="flex gap-4">
       <UForm
+        ref="formRef"
         :state="state"
         :schema="schema"
         class="gap-4 flex flex-col w-60"
         @submit="onSubmit"
       >
-        <UFormField label="Email" name="email">
-          <UInput v-model="state.email" placeholder="john@lennon.com" />
-        </UFormField>
-
-        <UFormField label="Password" name="password">
-          <UInput v-model="state.password" type="password" />
-        </UFormField>
-
-        <UFormField name="tos">
-          <UCheckbox v-model="state.tos" label="I accept the terms and conditions" />
+        <UFormField label="Email" name="testing.l.0.m">
+          <UInput v-bind="formRef?.bind('testing.l.0.m')" placeholder="john@lennon.com" />
         </UFormField>
 
         <div>
