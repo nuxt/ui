@@ -11,7 +11,7 @@ type PathConcat<S1 extends string, S2> = S2 extends string
       : `${S1}.${S2}`
   : never
 
-export type Paths<T, D extends number = 1>
+export type Paths<T, D extends number = 4>
   = [D] extends [never] ? never
     : T extends ReadonlyArray<infer U>
       ? `[${number}]` | PathConcat<`[${number}]`, Paths<U, Prev[D]>>
@@ -22,6 +22,14 @@ export type Paths<T, D extends number = 1>
               ? `${K}` | PathConcat<`${K}`, Paths<T[K], Prev[D]>>
               : never;
           }[keyof T] : never
+
+export type PathValue<T, P extends string> = P extends `${infer K}.${infer R}`
+  ? K extends keyof T
+    ? PathValue<T[K], R>
+    : never
+  : P extends keyof T
+    ? T[P]
+    : never
 
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] | undefined

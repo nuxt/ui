@@ -261,7 +261,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     _handleChangeLogic(name, value as InferInput<S>[Paths<InferInput<S>>])
   }
 
-  function setError<K extends Paths<InferInput<S>>>(name: K, error: Omit<FormErrorWithId, 'name'>) {
+  function setFieldError<K extends Paths<InferInput<S>>>(name: K, error: Omit<FormErrorWithId, 'name'>) {
     if (name) {
       errors.value.push({
         ...error,
@@ -346,7 +346,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     handleInput,
     handleChange,
     setErrors,
-    setError,
+    setFieldError,
     getErrors,
     clear,
     setFieldValue,
