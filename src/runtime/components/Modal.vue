@@ -75,7 +75,7 @@ export interface ModalSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, toRef, ref, watch } from 'vue'
+import { computed, toRef, ref } from 'vue'
 import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -159,7 +159,15 @@ function handleLeave() {
     <DialogPortal v-bind="portalProps">
       <DialogOverlay v-if="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
-      <DialogContent :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-bind="contentProps" @after-enter="handleAfterEnter" @after-leave="handleAfterLeave" @enter="handleEnter" @leave="handleLeave" v-on="contentEvents">
+      <DialogContent
+        :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
+        v-bind="contentProps"
+        @after-enter="handleAfterEnter"
+        @after-leave="handleAfterLeave"
+        @enter="handleEnter"
+        @leave="handleLeave"
+        v-on="contentEvents"
+      >
         <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
           <DialogTitle v-if="title || !!slots.title">
             <slot name="title" :transitioning="transitioning">
