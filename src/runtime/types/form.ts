@@ -21,7 +21,7 @@ export interface Form<S extends FormSchema> {
   handleReset: VoidFunction
   setFieldError (name: Paths<FormData<S, false>>, error: Omit<FormErrorWithId, 'name'>): void
   errorBag: ComputedRef<Record<keyof FormData<S, false>, any>>
-  register (name: Paths<FormData<S, false>>, metadata: { id?: string, pattern?: RegExp }): void
+  register (name: Paths<FormData<S, false>>, metadata?: { id?: string, pattern?: RegExp }): void
 }
 
 export type FormSchema<I extends object = object, O extends object = I>
