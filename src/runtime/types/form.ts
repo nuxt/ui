@@ -20,12 +20,18 @@ export interface Form<S extends FormSchema> {
   blurredFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   handleReset: VoidFunction
   setFieldError (name: Paths<FormData<S, false>>, error: Omit<FormErrorWithId, 'name'>): void
-  errorBag: ComputedRef<Record<keyof FormData<S, false>, any>>
+  errorBag: ComputedRef<ErrorBagTree<FormData<S, false>>>
   bind (name: Paths<FormData<S, false>>, metadata?: { id?: string, pattern?: RegExp, modifier?: (val: any) => any }): any
   watch<K extends Paths<FormData<S, false>>>(key: K, cb: (newValue: PathValue<FormData<S, false>, K>, oldValue: PathValue<FormData<S, false>, K>) => void, options?: WatchOptions): void
   watch(cb: (newValue: Partial<FormData<S, false>>, oldValue: Partial<FormData<S, false>>) => void, options?: WatchOptions): void
   setFieldValue<K extends Paths<FormData<S, false>>>(name: K, value: PathValue<FormData<S, false>, K>): void
 }
+
+export type ErrorBagTree<T> = T extends (infer E)[]
+  ? ErrorBagTree<E>[] | { id?: string, message?: string }
+  : T extends object
+    ? { [P in keyof T]?: ErrorBagTree<T[P]> }
+    : { id?: string, message?: string }
 
 export type FormSchema<I extends object = object, O extends object = I>
   = | YupObjectSchema<I>

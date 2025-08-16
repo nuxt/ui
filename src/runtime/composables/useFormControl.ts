@@ -1,4 +1,4 @@
-import { shallowReactive, reactive, useTemplateRef } from 'vue'
+import { shallowReactive, reactive, useTemplateRef, type ShallowUnwrapRef } from 'vue'
 import type { Form, FormSchema, InferInput } from '../types/form'
 import { cloneObject } from '../utils'
 
@@ -12,7 +12,7 @@ export interface UseFormControlOptions<S extends FormSchema> {
 }
 
 export function useFormControl<S extends FormSchema>(options: UseFormControlOptions<S>) {
-  const formRef = useTemplateRef<Form<S>>(options.formRefName || 'formRef')
+  const formRef = useTemplateRef<ShallowUnwrapRef<Form<S>>>(options.formRefName || 'formRef')
 
   const initialState: Partial<InferInput<S>> = cloneObject(options.defaultValues) ?? {} as InferInput<S>
 

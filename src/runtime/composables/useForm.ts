@@ -4,7 +4,7 @@ import { validateSchema } from '../utils/form'
 import { useDebounceFn } from '@vueuse/core'
 import { cloneObject, get, set } from '../utils'
 import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from './useFormField'
-import type { Paths, PathValue } from '../types'
+import type { ErrorBagTree, Paths, PathValue } from '../types'
 
 export interface UseFormOptions<S extends FormSchema, T extends boolean = true> {
   id?: string | number
@@ -23,7 +23,7 @@ export interface UseFormOptions<S extends FormSchema, T extends boolean = true> 
 export function useForm<S extends FormSchema, T extends boolean = true>(options: UseFormOptions<S, T>) {
   const initialState: Partial<InferInput<S>> = cloneObject(options.defaultValues) ?? {} as InferInput<S>
 
-  const state = (options.shallow ? shallowReactive : reactive)(options.values ?? initialState) as (Partial<InferInput<S>>)
+  const state = (options.shallow ? shallowReactive : reactive)(options.values ?? initialState) as InferInput<S>
 
   const formId = options.id ?? useId() as string
 
@@ -39,10 +39,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
         })
       }
       return bag
-    }, {} as Record<keyof InferInput<S>, {
-      id?: string
-      message?: string
-    }>)
+    }, {} as ErrorBagTree<InferInput<S>>)
   })
 
   const inputs = ref<{ [P in keyof InferInput<S>]?: { id?: string, pattern?: RegExp } }>({})
@@ -266,7 +263,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     if (name) {
       errors.value.push({
         ...error,
-        name
+        name: name as string
       })
     }
   }
@@ -299,7 +296,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
   function setFieldValue<K extends Paths<InferInput<S>>>(name: K, value: PathValue<InferInput<S>, K>) {
     if (!name) return
 
-    set(state, name, value === '' ? get(initialState, name) : value)
+    set(state, name, value === '' ? get(initialState, name) as PathValue<InferInput<S>, K> : value)
   }
 
   function watch<K extends Paths<InferInput<S>>>(

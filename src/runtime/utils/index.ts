@@ -46,9 +46,11 @@ export function get(object: Record<string, any> | undefined, path: string | (str
   return result !== undefined ? result : defaultValue
 }
 
-export function set(object: Record<string, any>, path: (string | number)[] | string, value: any): void {
+export function set<T extends Record<string, any>, P extends Paths<T>>(object: T, path: P, value: PathValue<T, P>): void
+export function set(object: Record<string, any>, path: (string | number)[] | string, value: any): void
+export function set(object: Record<string, any>, path: string | (string | number)[], value: any) {
   if (typeof path === 'string') {
-    path = path.split('.').map((key) => {
+    path = path.replace(/\[(\d+)\]/g, '.$1').split('.').filter(Boolean).map((key) => {
       const numKey = Number(key)
       return Number.isNaN(numKey) ? key : numKey
     })
