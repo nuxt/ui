@@ -97,12 +97,15 @@ const {
   handleReset,
   setFieldError,
   clear,
+  watch,
+  setFieldValue,
+  setValues,
   disabled: formDisabled,
   dirtyFields,
   touchedFields,
   blurredFields,
   errorBag,
-  register,
+  bind,
   registerNestedForm,
   unregisterNestedForm
 } = useForm({
@@ -211,7 +214,11 @@ defineExpose<Form<S>>({
   handleReset,
   setFieldError,
   errorBag,
-  register
+  bind,
+  watch,
+  setFieldValue,
+  setValues
+
 })
 </script>
 

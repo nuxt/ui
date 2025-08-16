@@ -21,7 +21,7 @@ export type Paths<T, D extends number = 4>
               : never;
           }[keyof T] : never
 
-export type PathValue<T, P extends string> = P extends `${infer K}.${infer R}`
+export type PathValue<T, P> = P extends `${infer K}.${infer R}`
   ? K extends keyof T
     ? PathValue<T[K], R>
     : never

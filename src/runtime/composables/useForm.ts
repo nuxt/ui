@@ -1,10 +1,10 @@
-import { ref, reactive, shallowReactive, computed, readonly, isRef, watch as vueWatch, type Ref, type WatchOptions, provide, useId } from 'vue'
+import { ref, reactive, shallowReactive, computed, readonly, isRef, watch as vueWatch, type Ref, type WatchOptions, provide, useId, type WatchCallback } from 'vue'
 import { type FormSchema, type FormError, type FormInputEvents, type FormErrorWithId, type InferInput, type InferOutput, type FormData, FormValidationException } from '../types/form'
 import { validateSchema } from '../utils/form'
 import { useDebounceFn } from '@vueuse/core'
 import { cloneObject, get, set } from '../utils'
 import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from './useFormField'
-import type { Paths } from '../types'
+import type { Paths, PathValue } from '../types'
 
 export interface UseFormOptions<S extends FormSchema, T extends boolean = true> {
   id?: string | number
@@ -209,17 +209,16 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
   const _handleBlurLogic = (name: Paths<InferInput<S>>) => _updateFieldState(name, undefined,
     'blur')
 
-  function register<K extends Paths<InferInput<S>>>(name: K, metadata: { id?: string, pattern?: RegExp } = {}) {
-    set(inputs.value, name, metadata)
-
+  function bind<K extends Paths<InferInput<S>>>(name: K) {
+    const getValue = get(state, name)
     const fieldProps = {
       'name': name as string,
-      'modelValue': get(state, name),
+      'modelValue': getValue,
       'onUpdate:modelValue': (val: InferInput<S>[K]) => {
         _handleInputLogic(name, val)
       },
       // For native component
-      'value': get(state, name),
+      'value': getValue,
       'onInput': (event: Event | CustomEvent) => {
         const isCustomEvent = event instanceof CustomEvent
         const target = (isCustomEvent ? event.detail : event.target) as HTMLInputElement
@@ -233,17 +232,12 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
       'onChange': (event: Event | CustomEvent) => {
         const isCustomEvent = event instanceof CustomEvent
         const target = (isCustomEvent ? event.detail : event.target) as HTMLInputElement
-        const value = isCustomEvent || target.type !== 'checkbox' ? target.value : target.checked
+        const value = isCustomEvent || target.type !== 'checkbox' ? typeof getValue === 'number' ? target.valueAsNumber : target.value : target.checked
         _handleChangeLogic(name, value as InferInput<S>[K])
       }
     }
 
     return fieldProps
-  }
-
-  function unregister(name: InferInput<S>) {
-    /* eslint-disable @typescript-eslint/no-dynamic-delete */
-    delete inputs.value[name as string]
   }
 
   function handleBlur(event: FocusEvent) {
@@ -257,7 +251,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     const name = target.name as Paths<InferInput<S>>
     if (!name) return
     const value = target.type === 'checkbox' ? target.checked : target.value
-    _handleInputLogic(name, value as InferInput<S>[Paths<InferInput<S>>])
+    _handleInputLogic(name, value as any)
   }
 
   function handleChange(event: Event) {
@@ -265,7 +259,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     const name = target.name as Paths<InferInput<S>>
     if (!name) return
     const value = target.type === 'checkbox' ? target.checked : target.value
-    _handleChangeLogic(name, value as InferInput<S>[Paths<InferInput<S>>])
+    _handleChangeLogic(name, value as any)
   }
 
   function setFieldError<K extends Paths<InferInput<S>>>(name: K, error: Omit<FormErrorWithId, 'name'>) {
@@ -302,7 +296,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     }
   }
 
-  function setFieldValue<K extends Paths<InferInput<S>>>(name: K, value: InferInput<S>[K]) {
+  function setFieldValue<K extends Paths<InferInput<S>>>(name: K, value: PathValue<InferInput<S>, K>) {
     if (!name) return
 
     set(state, name, value === '' ? get(initialState, name) : value)
@@ -316,22 +310,22 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
 
   function watch<K extends Paths<InferInput<S>>>(
     key: K,
-    cb: (newValue: InferInput<S>[K], oldValue: InferInput<S>[K]) => void,
+    cb: WatchCallback<PathValue<InferInput<S>, K>, PathValue<InferInput<S>, K>>,
     options?: WatchOptions
   ): void
   function watch(
-    cb: (newValue: Partial<InferInput<S>>, oldValue: Partial<InferInput<S>>) => void,
+    cb: WatchCallback<Partial<InferInput<S>>, Partial<InferInput<S>>>,
     options?: WatchOptions
   ): void
   function watch<K extends keyof InferInput<S>>(
-    arg1: K | ((newValue: Partial<InferInput<S>>, oldValue: Partial<InferInput<S>>) => void),
-    arg2?: ((newValue: InferInput<S>[K], oldValue: InferInput<S>[K]) => void) | WatchOptions,
+    arg1: K | WatchCallback<Partial<InferInput<S>>, Partial<InferInput<S>> | undefined>,
+    arg2?: WatchCallback<PathValue<InferInput<S>, K>, PathValue<InferInput<S>, K>> | WatchOptions,
     arg3?: WatchOptions
   ) {
-    if (typeof arg1 === 'string' || typeof arg1 === 'symbol' || typeof arg1 === 'number') {
-      vueWatch(() => get(state, arg1 as string), arg2 as (newValue: InferInput<S>[K], oldValue: InferInput<S>[K]) => void, arg3)
+    if (typeof arg1 === 'string') {
+      vueWatch(() => get(state, arg1), arg2 as WatchCallback<PathValue<InferInput<S>, K>, PathValue<InferInput<S>, K> | undefined>, arg3)
     } else if (typeof arg1 === 'function') {
-      vueWatch(state, arg1 as InferInput<S>, arg2 as WatchOptions)
+      vueWatch(state, arg1, arg2 as WatchOptions)
     }
   }
 
@@ -347,8 +341,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     validate,
     handleSubmit,
     handleReset,
-    register,
-    unregister,
+    bind,
     handleBlur,
     handleInput,
     handleChange,

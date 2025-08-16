@@ -1,8 +1,8 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec'
-import type { ComputedRef, DeepReadonly, Ref } from 'vue'
+import type { ComputedRef, DeepReadonly, Ref, WatchOptions } from 'vue'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
-import type { GetObjectField, Paths } from './utils'
+import type { GetObjectField, Paths, PathValue } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
 
 export interface Form<S extends FormSchema> {
@@ -21,7 +21,11 @@ export interface Form<S extends FormSchema> {
   handleReset: VoidFunction
   setFieldError (name: Paths<FormData<S, false>>, error: Omit<FormErrorWithId, 'name'>): void
   errorBag: ComputedRef<Record<keyof FormData<S, false>, any>>
-  register (name: Paths<FormData<S, false>>, metadata?: { id?: string, pattern?: RegExp }): void
+  bind (name: Paths<FormData<S, false>>, metadata?: { id?: string, pattern?: RegExp, modifier?: (val: any) => any }): any
+  watch<K extends Paths<FormData<S, false>>>(key: K, cb: (newValue: PathValue<FormData<S, false>, K>, oldValue: PathValue<FormData<S, false>, K>) => void, options?: WatchOptions): void
+  watch(cb: (newValue: Partial<FormData<S, false>>, oldValue: Partial<FormData<S, false>>) => void, options?: WatchOptions): void
+  setFieldValue<K extends Paths<FormData<S, false>>>(name: K, value: PathValue<FormData<S, false>, K>): void
+  setValues(values: Partial<FormData<S, false>>): void
 }
 
 export type FormSchema<I extends object = object, O extends object = I>
