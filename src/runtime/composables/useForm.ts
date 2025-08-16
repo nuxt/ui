@@ -2,7 +2,7 @@ import { ref, reactive, shallowReactive, computed, readonly, isRef, watch as vue
 import { type FormSchema, type FormError, type FormInputEvents, type FormErrorWithId, type InferInput, type InferOutput, type FormData, FormValidationException } from '../types/form'
 import { validateSchema } from '../utils/form'
 import { useDebounceFn } from '@vueuse/core'
-import { cloneObject, get, set } from '../utils'
+import { cloneObject, get, omit, set } from '../utils'
 import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from './useFormField'
 import type { Paths } from '../types'
 
@@ -33,10 +33,13 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
   const errorBag = computed(() => {
     return errors.value.reduce((bag, error) => {
       if (error.name) {
-        set(bag, error.name, error.message)
+        set(bag, error.name, omit(bag, 'name'))
       }
       return bag
-    }, {} as Record<keyof InferInput<S>, any>)
+    }, {} as Record<keyof InferInput<S>, {
+      id?: string
+      message?: string
+    }>)
   })
 
   const inputs = ref<{ [P in keyof InferInput<S>]?: { id?: string, pattern?: RegExp } }>({})
