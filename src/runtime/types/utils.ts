@@ -6,14 +6,12 @@ type Prev = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 type PathConcat<S1 extends string, S2> = S2 extends string
   ? S2 extends `[${number}]`
     ? `${S1}${S2}`
-    : S2 extends ''
-      ? S1
-      : `${S1}.${S2}`
+    : `${S1}.${S2}`
   : never
 
 export type Paths<T, D extends number = 4>
   = [D] extends [never] ? never
-    : T extends ReadonlyArray<infer U>
+    : T extends readonly (infer U)[]
       ? `[${number}]` | PathConcat<`[${number}]`, Paths<U, Prev[D]>>
 
       : T extends object

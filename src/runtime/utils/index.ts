@@ -27,7 +27,7 @@ export function get<T extends Record<string, any>, P extends Paths<T>, D>(object
 export function get(object: Record<string, any> | undefined, path: string | (string | number)[], defaultValue?: any): any
 export function get(object: Record<string, any> | undefined, path: string | (string | number)[], defaultValue?: any) {
   if (typeof path === 'string') {
-    path = path.split('.').map((key) => {
+    path = path.replace(/\[(\d+)\]/g, '.$1').split('.').filter(Boolean).map((key) => {
       const numKey = Number(key)
       return Number.isNaN(numKey) ? key : numKey
     })

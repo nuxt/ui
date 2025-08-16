@@ -102,6 +102,7 @@ const {
   touchedFields,
   blurredFields,
   errorBag,
+  register,
   registerNestedForm,
   unregisterNestedForm
 } = useForm({
@@ -209,7 +210,8 @@ defineExpose<Form<S>>({
   touchedFields: readonly(touchedFields),
   handleReset,
   setFieldError,
-  errorBag
+  errorBag,
+  register
 })
 </script>
 
