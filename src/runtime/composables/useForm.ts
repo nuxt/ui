@@ -115,15 +115,22 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
       : []
 
     if (names) {
-      const otherErrors = errors.value.filter(error => !names.some((name) => {
-        const pattern = inputs.value?.[name]?.pattern
-        return name === error.name || (pattern && error.name?.match(pattern))
-      }))
+      // Create a Set for O(1) lookups. More performant than names.some().
+      const namesSet = new Set(names)
+      const patterns = names
+        .map(name => inputs.value?.[name]?.pattern)
+        .filter(Boolean) as RegExp[]
 
-      const pathErrors = (await fetchAllErrors()).filter(error => names.some((name) => {
-        const pattern = inputs.value?.[name]?.pattern
-        return name === error.name || (pattern && error.name?.match(pattern))
-      }))
+      const isErrorForPath = (error: FormErrorWithId): boolean => {
+        if (!error.name) return false
+        if (namesSet.has(error.name as keyof InferInput<S>)) return true
+        return patterns.some(pattern => pattern.test(error.name!))
+      }
+
+      const allNewErrors = await fetchAllErrors()
+
+      const otherErrors = errors.value.filter(error => !isErrorForPath(error))
+      const pathErrors = allNewErrors.filter(isErrorForPath)
 
       errors.value = otherErrors.concat(pathErrors)
     } else {
@@ -206,6 +213,19 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
   const _handleBlurLogic = (name: Paths<InferInput<S>>) => _updateFieldState(name, undefined,
     'blur')
 
+  function getEventValue(event: Event | CustomEvent, currentValue: any) {
+    const isCustomEvent = event instanceof CustomEvent
+    const target = (isCustomEvent ? event.detail : event.target) as HTMLInputElement
+
+    if (target.type === 'checkbox') {
+      return target.checked
+    }
+    if (typeof currentValue === 'number') {
+      return target.valueAsNumber
+    }
+    return target.value
+  }
+
   function bind<K extends Paths<InferInput<S>>>(name: K) {
     const getValue = get(state, name)
     const fieldProps = {
@@ -217,19 +237,15 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
       // For native component
       'value': getValue,
       'onInput': (event: Event | CustomEvent) => {
-        const isCustomEvent = event instanceof CustomEvent
-        const target = (isCustomEvent ? event.detail : event.target) as HTMLInputElement
-        if (target.type === 'checkbox') {
+        const value = getEventValue(event, getValue)
+        if (event.target && (event.target as HTMLInputElement).type === 'checkbox') {
           return
         }
-        const value = isCustomEvent || target.type !== 'checkbox' ? target.value : target.checked
         _handleInputLogic(name, value as InferInput<S>[K])
       },
       'onBlur': () => _handleBlurLogic(name),
       'onChange': (event: Event | CustomEvent) => {
-        const isCustomEvent = event instanceof CustomEvent
-        const target = (isCustomEvent ? event.detail : event.target) as HTMLInputElement
-        const value = isCustomEvent || target.type !== 'checkbox' ? typeof getValue === 'number' ? target.valueAsNumber : target.value : target.checked
+        const value = getEventValue(event, getValue)
         _handleChangeLogic(name, value as InferInput<S>[K])
       }
     }
