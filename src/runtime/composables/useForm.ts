@@ -215,15 +215,24 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
 
   function getEventValue(event: Event | CustomEvent, currentValue: any) {
     const isCustomEvent = event instanceof CustomEvent
-    const target = (isCustomEvent ? event.detail : event.target) as HTMLInputElement
+    const payload = isCustomEvent ? event.detail : event.target
 
-    if (target.type === 'checkbox') {
-      return target.checked
+    if (payload && typeof payload === 'object' && 'type' in payload) {
+      const target = payload as HTMLInputElement
+      if (target.type === 'checkbox' && 'checked' in target) {
+        return target.checked
+      }
+      if (typeof currentValue === 'number' && 'valueAsNumber' in target) {
+        return !Number.isNaN(target.valueAsNumber) ? target.valueAsNumber : target.value
+      }
+      return target.value
     }
-    if (typeof currentValue === 'number') {
-      return target.valueAsNumber
+
+    if (payload && typeof payload === 'object' && 'value' in payload) {
+      return (payload as { value: any }).value
     }
-    return target.value
+
+    return payload
   }
 
   function bind<K extends Paths<InferInput<S>>>(name: K) {
