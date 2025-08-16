@@ -68,7 +68,7 @@ export interface FormSlots {
 import { provide, inject, nextTick, onUnmounted, onMounted, computed, useId, readonly } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { formBusInjectionKey, formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from '../composables/useFormField'
+import { formBusInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 
 type I = InferInput<S>
@@ -87,12 +87,6 @@ const emits = defineEmits<FormEmits<S, T>>()
 defineSlots<FormSlots>()
 const formId = props.id ?? useId() as string
 
-// block duplicate provide
-provide('form-errors', undefined)
-provide(formInputsInjectionKey, undefined as any)
-provide(formLoadingInjectionKey, undefined as any)
-provide(formOptionsInjectionKey, undefined as any)
-
 const {
   errors,
   loading,
@@ -100,6 +94,8 @@ const {
   handleSubmit,
   setErrors,
   getErrors,
+  handleReset,
+  setFieldError,
   clear,
   disabled: formDisabled,
   dirtyFields,
@@ -209,7 +205,9 @@ defineExpose<Form<S>>({
   dirty: computed(() => !!dirtyFields.size),
   dirtyFields: readonly(dirtyFields),
   blurredFields: readonly(blurredFields),
-  touchedFields: readonly(touchedFields)
+  touchedFields: readonly(touchedFields),
+  handleReset,
+  setFieldError
 })
 </script>
 

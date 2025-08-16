@@ -15,10 +15,11 @@ export interface Form<S extends FormSchema> {
   disabled: ComputedRef<boolean>
   dirty: ComputedRef<boolean>
   loading: Ref<boolean>
-
   dirtyFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   touchedFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   blurredFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
+  handleReset: VoidFunction
+  setFieldError (name: Paths<FormData<S, false>>, error: Omit<FormErrorWithId, 'name'>): void
 }
 
 export type FormSchema<I extends object = object, O extends object = I>
