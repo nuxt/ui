@@ -212,6 +212,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
       'onUpdate:modelValue': (val: InferInput<S>[K]) => {
         _handleInputLogic(name, val)
       },
+      // For native component
       'value': get(state, name),
       'onInput': (event: Event | CustomEvent) => {
         const isCustomEvent = event instanceof CustomEvent
