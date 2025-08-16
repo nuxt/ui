@@ -25,7 +25,6 @@ export interface Form<S extends FormSchema> {
   watch<K extends Paths<FormData<S, false>>>(key: K, cb: (newValue: PathValue<FormData<S, false>, K>, oldValue: PathValue<FormData<S, false>, K>) => void, options?: WatchOptions): void
   watch(cb: (newValue: Partial<FormData<S, false>>, oldValue: Partial<FormData<S, false>>) => void, options?: WatchOptions): void
   setFieldValue<K extends Paths<FormData<S, false>>>(name: K, value: PathValue<FormData<S, false>, K>): void
-  setValues(values: Partial<FormData<S, false>>): void
 }
 
 export type FormSchema<I extends object = object, O extends object = I>

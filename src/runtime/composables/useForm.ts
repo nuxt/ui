@@ -302,12 +302,6 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     set(state, name, value === '' ? get(initialState, name) : value)
   }
 
-  function setValues(values: Partial<InferInput<S>>) {
-    for (const key in values) {
-      setFieldValue(key as Paths<InferInput<S>>, values[key] as InferInput<S>[keyof InferInput<S>])
-    }
-  }
-
   function watch<K extends Paths<InferInput<S>>>(
     key: K,
     cb: WatchCallback<PathValue<InferInput<S>, K>, PathValue<InferInput<S>, K>>,
@@ -350,7 +344,6 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     getErrors,
     clear,
     setFieldValue,
-    setValues,
     watch,
     errorBag,
 

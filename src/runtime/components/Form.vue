@@ -99,7 +99,6 @@ const {
   clear,
   watch,
   setFieldValue,
-  setValues,
   disabled: formDisabled,
   dirtyFields,
   touchedFields,
@@ -216,8 +215,7 @@ defineExpose<Form<S>>({
   errorBag,
   bind,
   watch,
-  setFieldValue,
-  setValues
+  setFieldValue
 
 })
 </script>
