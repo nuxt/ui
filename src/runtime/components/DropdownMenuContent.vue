@@ -3,7 +3,7 @@
 import type { DropdownMenuContentProps as RekaDropdownMenuContentProps, DropdownMenuContentEmits as RekaDropdownMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/dropdown-menu'
-import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots } from '../types'
+import type { KbdProps, AvatarProps, DropdownMenuItem, DropdownMenuSlots, IconProps } from '../types'
 import type { ArrayOrNested, NestedItem, DynamicSlots, MergeTypes } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -17,15 +17,15 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<DropdownMenuItem>> ex
   /**
    * @IconifyIcon
    */
-  checkedIcon?: string
+  checkedIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  loadingIcon?: string
+  loadingIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  externalIcon?: boolean | string
+  externalIcon?: boolean | IconProps['name']
   class?: any
   ui: { [K in keyof Required<DropdownMenu['slots']>]: (props?: Record<string, any>) => string }
   uiOverride?: DropdownMenu['slots']

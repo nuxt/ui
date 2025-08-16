@@ -3,7 +3,7 @@ import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { ContentNavigationItem } from '@nuxt/content'
 import theme from '#build/ui/content/content-navigation'
-import type { BadgeProps, LinkProps } from '../../types'
+import type { BadgeProps, IconProps, LinkProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentNavigation = ComponentConfig<typeof theme, AppConfig, 'contentNavigation'>
@@ -12,7 +12,7 @@ export interface ContentNavigationLink extends ContentNavigationItem {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   /**
    * Display a badge on the link.
    * `{ color: 'neutral', variant: 'outline', size: 'sm' }`{lang="ts-type"}
@@ -22,7 +22,7 @@ export interface ContentNavigationLink extends ContentNavigationItem {
   /**
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   disabled?: boolean
   children?: ContentNavigationLink[]
   defaultOpen?: boolean
@@ -48,7 +48,7 @@ export interface ContentNavigationProps<T extends ContentNavigationLink = Conten
    * @defaultValue appConfig.ui.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /**
    * @defaultValue 'primary'
    */

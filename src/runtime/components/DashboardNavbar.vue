@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-navbar'
 import type { DashboardContext } from '../utils/dashboard'
-import type { ButtonProps } from '../types'
+import type { ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardNavbar = ComponentConfig<typeof theme, AppConfig, 'dashboardNavbar'>
@@ -17,7 +17,7 @@ export interface DashboardNavbarProps {
    * The icon displayed next to the title.
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   title?: string
   /**
    * Customize the toggle button to open the sidebar.

@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
-import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, PinInputProps } from '../types'
+import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, PinInputProps, IconProps } from '../types'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { ComponentConfig } from '../types/tv'
 
@@ -29,7 +29,7 @@ export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F exte
    * The icon displayed above the title.
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   title?: string
   description?: string
   fields?: F[]

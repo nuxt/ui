@@ -2,7 +2,7 @@
 import type { ContextMenuContentProps as RekaContextMenuContentProps, ContextMenuContentEmits as RekaContextMenuContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type theme from '#build/ui/context-menu'
-import type { AvatarProps, ContextMenuItem, ContextMenuSlots, KbdProps } from '../types'
+import type { AvatarProps, ContextMenuItem, ContextMenuSlots, IconProps, KbdProps } from '../types'
 import type { ArrayOrNested, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -16,15 +16,15 @@ interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> exte
   /**
    * @IconifyIcon
    */
-  checkedIcon?: string
+  checkedIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  loadingIcon?: string
+  loadingIcon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  externalIcon?: boolean | string
+  externalIcon?: boolean | IconProps['name']
   class?: any
   ui: { [K in keyof Required<ContextMenu['slots']>]: (props?: Record<string, any>) => string }
   uiOverride?: ContextMenu['slots']

@@ -10,7 +10,7 @@ import type { ClassNamesOptionsType } from 'embla-carousel-class-names'
 import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
-import type { ButtonProps } from '../types'
+import type { ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
@@ -39,7 +39,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * @defaultValue appConfig.ui.icons.arrowLeft
    * @IconifyIcon
    */
-  prevIcon?: string
+  prevIcon?: IconProps['name']
   /**
    * Configure the next button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
@@ -50,7 +50,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * @defaultValue appConfig.ui.icons.arrowRight
    * @IconifyIcon
    */
-  nextIcon?: string
+  nextIcon?: IconProps['name']
   /**
    * Display prev and next buttons to scroll the carousel.
    * @defaultValue false

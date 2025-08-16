@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plan'
-import type { BadgeProps, ButtonProps } from '../types'
+import type { BadgeProps, ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type PricingPlan = ComponentConfig<typeof theme, AppConfig, 'pricingPlan'>
@@ -12,7 +12,7 @@ type PricingPlanFeature = {
    * @defaultValue appConfig.ui.icons.success
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
 }
 
 export interface PricingPlanProps {

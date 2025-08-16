@@ -21,6 +21,7 @@ import { useAppConfig } from '#imports'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
 import UAccordion from '../Accordion.vue'
+import type { IconProps } from '../../types'
 
 const props = withDefaults(defineProps<ProseAccordionProps>(), {
   type: 'multiple'
@@ -36,7 +37,7 @@ const rerenderCount = ref(1)
 const items = computed<{
   index: number
   label: string
-  icon: string
+  icon: IconProps['name']
   component: any
 }[]>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions

@@ -27,17 +27,17 @@ export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | '
    * @defaultValue appConfig.ui.icons.loading
    * @IconifyIcon
    */
-  loadingIcon?: string
+  loadingIcon?: IconProps['name']
   /**
    * Display an icon when the switch is checked.
    * @IconifyIcon
    */
-  checkedIcon?: string
+  checkedIcon?: IconProps['name']
   /**
    * Display an icon when the switch is unchecked.
    * @IconifyIcon
    */
-  uncheckedIcon?: string
+  uncheckedIcon?: IconProps['name']
   label?: string
   description?: string
   class?: any
@@ -61,7 +61,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
-import UIcon from './Icon.vue'
+import UIcon, { type IconProps } from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 

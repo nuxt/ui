@@ -4,7 +4,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/content/content-search'
-import type { ButtonProps, InputProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem } from '../../types'
+import type { ButtonProps, InputProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>
@@ -15,7 +15,7 @@ export interface ContentSearchLink extends Omit<LinkProps, 'custom'> {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   children?: ContentSearchLink[]
 }
 
@@ -32,7 +32,7 @@ export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPal
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
 }
 
 export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends /* @vue-ignore */ Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
@@ -41,7 +41,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    * @defaultValue appConfig.ui.icons.search
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   /**
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
@@ -59,7 +59,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    * @defaultValue appConfig.ui.icons.loading
    * @IconifyIcon
    */
-  loadingIcon?: string
+  loadingIcon?: IconProps['name']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -72,7 +72,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    * @defaultValue appConfig.ui.icons.close
    * @IconifyIcon
    */
-  closeIcon?: string
+  closeIcon?: IconProps['name']
   /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'

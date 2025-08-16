@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/timeline'
-import type { AvatarProps } from '../types'
+import type { AvatarProps, IconProps } from '../types'
 import type { DynamicSlots } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -12,7 +12,7 @@ export interface TimelineItem {
   date?: string
   title?: string
   description?: string
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   value?: string | number
   slot?: string

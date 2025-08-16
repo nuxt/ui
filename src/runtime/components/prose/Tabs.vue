@@ -32,6 +32,7 @@ import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
 import { useState, useAppConfig } from '#imports'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
+import type { IconProps } from '../../types'
 import UTabs from '../Tabs.vue'
 
 const props = withDefaults(defineProps<ProseTabsProps>(), {
@@ -50,7 +51,7 @@ const rerenderCount = ref(1)
 const items = computed<{
   index: number
   label: string
-  icon: string
+  icon: IconProps['name']
   component: any
 }[]>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions

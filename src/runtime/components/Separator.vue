@@ -2,7 +2,7 @@
 import type { SeparatorProps as _SeparatorProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/separator'
-import type { AvatarProps } from '../types'
+import type { AvatarProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type Separator = ComponentConfig<typeof theme, AppConfig, 'separator'>
@@ -19,7 +19,7 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
    * Display an icon in the middle.
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   /** Display an avatar in the middle. */
   avatar?: AvatarProps
   /**

@@ -12,12 +12,12 @@ export type TreeItem = {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   label?: string
   /**
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   defaultExpanded?: boolean
   disabled?: boolean
   value?: string
@@ -59,19 +59,19 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
    * @defaultValue appConfig.ui.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /**
    * The icon displayed when a parent node is expanded.
    * @defaultValue appConfig.ui.icons.folderOpen
    * @IconifyIcon
    */
-  expandedIcon?: string
+  expandedIcon?: IconProps['name']
   /**
    * The icon displayed when a parent node is collapsed.
    * @defaultValue appConfig.ui.icons.folder
    * @IconifyIcon
    */
-  collapsedIcon?: string
+  collapsedIcon?: IconProps['name']
   items?: T
   /** The controlled value of the Tree. Can be bind as `v-model`. */
   modelValue?: GetModelValue<T, VK, M>
@@ -107,7 +107,7 @@ import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
-import UIcon from './Icon.vue'
+import UIcon, { type IconProps } from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 

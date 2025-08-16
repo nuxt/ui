@@ -3,7 +3,7 @@ import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, Rang
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/calendar'
-import type { ButtonProps } from '../types'
+import type { ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type Calendar = ComponentConfig<typeof theme, AppConfig, 'calendar'>
@@ -33,7 +33,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * @defaultValue appConfig.ui.icons.chevronDoubleRight
    * @IconifyIcon
    */
-  nextYearIcon?: string
+  nextYearIcon?: IconProps['name']
   /**
    * Configure the next year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -44,7 +44,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
-  nextMonthIcon?: string
+  nextMonthIcon?: IconProps['name']
   /**
    * Configure the next month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -55,7 +55,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
    * @IconifyIcon
    */
-  prevYearIcon?: string
+  prevYearIcon?: IconProps['name']
   /**
    * Configure the prev year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -66,7 +66,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * @defaultValue appConfig.ui.icons.chevronLeft
    * @IconifyIcon
    */
-  prevMonthIcon?: string
+  prevMonthIcon?: IconProps['name']
   /**
    * Configure the prev month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}

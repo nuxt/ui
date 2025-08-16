@@ -37,6 +37,7 @@ import { TreeRoot, TreeItem } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../../utils/tv'
+import type { IconProps } from '../../types'
 import UCodeIcon from './CodeIcon.vue'
 import UIcon from '../Icon.vue'
 
@@ -59,7 +60,7 @@ const rerenderCount = ref(1)
 const flatItems = computed<{
   index: number
   label: string
-  icon: string
+  icon: IconProps['name']
   component: any
 }[]>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions

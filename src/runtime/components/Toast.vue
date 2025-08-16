@@ -2,7 +2,7 @@
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
-import type { AvatarProps, ButtonProps, ProgressProps } from '../types'
+import type { AvatarProps, ButtonProps, IconProps, ProgressProps } from '../types'
 import type { StringOrVNode } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -19,7 +19,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   /**
    * @defaultValue 'primary'
@@ -41,7 +41,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * @defaultValue appConfig.ui.icons.close
    * @IconifyIcon
    */
-  closeIcon?: string
+  closeIcon?: IconProps['name']
   /**
    * Display a list of actions:
    * - under the title and description when orientation is `vertical`

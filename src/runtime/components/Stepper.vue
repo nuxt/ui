@@ -16,7 +16,7 @@ export interface StepperItem {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   content?: string
   disabled?: boolean
   class?: any
@@ -75,7 +75,7 @@ import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSepa
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import UIcon from './Icon.vue'
+import UIcon, { type IconProps } from './Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps<T>>(), {
   orientation: 'horizontal',
