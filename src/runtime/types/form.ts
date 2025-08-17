@@ -34,12 +34,12 @@ export interface Form<S extends FormSchema> {
   handleChange: (event: Event) => void
   handleBlur: (event: FocusEvent) => void
   handleFocus: (event: FocusEvent) => void
-  reset(values: FormData<S, false>, options?: {
+  reset(values?: FormData<S, false>, options?: {
     keepErrors?: boolean
     keepDirty?: boolean
     keepDefaultValues?: boolean
   }): void
-  reset(values: (value: FormData<S, false>) => FormData<S, false>, options?: {
+  reset(values?: (value: FormData<S, false>) => FormData<S, false>, options?: {
     keepErrors?: boolean
     keepDirty?: boolean
   }): void

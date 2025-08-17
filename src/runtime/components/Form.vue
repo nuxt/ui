@@ -121,6 +121,7 @@ const {
   transform: props.transform,
   loadingAuto: props.loadingAuto,
   values: props.state,
+  defaultValues: props.state,
   disabled: computed(() => props.disabled)
 })
 

@@ -139,7 +139,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         Submit
       </UButton>
 
-      <UButton variant="outline" @click="form?.clear()">
+      <UButton variant="outline" @click="form?.clearErrors()">
         Clear
       </UButton>
     </div>
