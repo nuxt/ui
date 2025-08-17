@@ -215,7 +215,7 @@ describe('Form', () => {
         message: 'this is an error'
       }])
 
-      form.value.clear()
+      form.value.clearErrors()
 
       expect(form.value.errors).toMatchObject([])
 
@@ -234,7 +234,7 @@ describe('Form', () => {
         { id: 'passwordInput', name: 'password', message: 'this is another error' }
       ])
 
-      form.value.clear('email')
+      form.value.clearErrors('email')
 
       expect(form.value.errors).toMatchObject([
         { id: 'passwordInput', name: 'password', message: 'this is another error' }
@@ -255,7 +255,7 @@ describe('Form', () => {
         { id: 'passwordInput', name: 'password', message: 'this is another error' }
       ])
 
-      form.value.clear(/email/)
+      form.value.clearErrors(/email/)
 
       expect(form.value.errors).toMatchObject([
         { id: 'passwordInput', name: 'password', message: 'this is another error' }

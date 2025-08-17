@@ -7,7 +7,7 @@ import type { Struct as SuperstructSchema } from 'superstruct'
 
 export interface Form<S extends FormSchema> {
   validate<T extends boolean>(opts?: { name?: keyof FormData<S, false> | (keyof FormData<S, false>)[], silent?: boolean, nested?: boolean, transform?: T }): Promise<FormData<S, T> | false>
-  clear (path?: Paths<FormData<S, false>>): void
+  clearErrors (path?: Paths<FormData<S, false>>): void
   errors: Ref<FormError[]>
   setErrors (errs: FormError[], name?: Paths<FormData<S, false>>): void
   getErrors (name?: Paths<FormData<S, false>>): FormError[]
@@ -18,13 +18,31 @@ export interface Form<S extends FormSchema> {
   dirtyFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   touchedFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   blurredFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
-  handleReset: VoidFunction
   setFieldError (name: Paths<FormData<S, false>>, error: Omit<FormErrorWithId, 'name'>): void
   errorBag: ComputedRef<ErrorBagTree<FormData<S, false>>>
   bind (name: Paths<FormData<S, false>>, metadata?: { id?: string, pattern?: RegExp, modifier?: (val: any) => any }): any
   watch<K extends Paths<FormData<S, false>>>(key: K, cb: (newValue: PathValue<FormData<S, false>, K>, oldValue: PathValue<FormData<S, false>, K>) => void, options?: WatchOptions): void
   watch(cb: (newValue: Partial<FormData<S, false>>, oldValue: Partial<FormData<S, false>>) => void, options?: WatchOptions): void
   setFieldValue<K extends Paths<FormData<S, false>>>(name: K, value: PathValue<FormData<S, false>, K>): void
+  resetField(name: Paths<FormData<S, false>>, options?: {
+    defaultValue?: any
+    keepDirty?: boolean
+    keepTouched?: boolean
+    keepError?: boolean
+  }): void
+  handleInput: (event: Event) => void
+  handleChange: (event: Event) => void
+  handleBlur: (event: FocusEvent) => void
+  handleFocus: (event: FocusEvent) => void
+  reset(values: FormData<S, false>, options?: {
+    keepErrors?: boolean
+    keepDirty?: boolean
+    keepDefaultValues?: boolean
+  }): void
+  reset(values: (value: FormData<S, false>) => FormData<S, false>, options?: {
+    keepErrors?: boolean
+    keepDirty?: boolean
+  }): void
 }
 
 export type ErrorBagTree<T> = T extends (infer E)[]

@@ -2,7 +2,7 @@ import { ref, reactive, shallowReactive, computed, readonly, isRef, watch as vue
 import { type FormSchema, type FormError, type FormInputEvents, type FormErrorWithId, type InferInput, type InferOutput, type FormData, FormValidationException } from '../types/form'
 import { validateSchema } from '../utils/form'
 import { useDebounceFn } from '@vueuse/core'
-import { cloneObject, get, set } from '../utils'
+import { cloneObject, get, isEmpty, set } from '../utils'
 import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from './useFormField'
 import type { ErrorBagTree, Paths, PathValue } from '../types'
 
@@ -178,7 +178,30 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     }
   }
 
-  function handleReset() {
+  function resetField<K extends Paths<InferInput<S>>>(name: K, options: {
+    defaultValue?: PathValue<InferInput<S>, K>
+    keepDirty?: boolean
+    keepTouched?: boolean
+    keepError?: boolean
+  } = {}) {
+    if (!name) return
+    setFieldValue(name, options.defaultValue!)
+
+    if (!options.keepDirty) {
+      dirtyFields.delete(name)
+    }
+
+    if (!options.keepTouched) {
+      touchedFields.delete(name)
+      blurredFields.delete(name)
+    }
+
+    if (!options.keepError) {
+      clearErrors(name)
+    }
+  }
+
+  function clear() {
     const newInitialState = cloneObject(initialState)
     Object.assign(state, newInitialState)
     errors.value = []
@@ -187,12 +210,57 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     blurredFields.clear()
   }
 
+  function reset(): void
+  function reset<T extends InferInput<S>>(values: T, options?: {
+    keepErrors?: boolean
+    keepDirty?: boolean
+    keepDefaultValues?: boolean
+  }): void
+  function reset<T extends InferInput<S>>(values: (value: T) => T, options?: {
+    keepErrors?: boolean
+    keepDirty?: boolean
+  }): void
+  function reset<T extends InferInput<S>>(
+    values?: T | ((currentValues: T) => T),
+    options: {
+      keepErrors?: boolean
+      keepDirty?: boolean
+      keepDefaultValues?: boolean
+    } = {}
+  ) {
+    if (!values) {
+      clear()
+      return
+    }
+
+    const newValues = typeof values === 'function'
+      ? (values as (currentValues: T) => T)(state as T)
+      : values
+
+    if (newValues && !options.keepDefaultValues) {
+      Object.assign(initialState, cloneObject(newValues))
+    }
+
+    const newClonedValues = cloneObject(newValues)
+    Object.assign(state, newClonedValues)
+
+    if (!options.keepDirty) {
+      dirtyFields.clear()
+      touchedFields.clear()
+      blurredFields.clear()
+    }
+
+    if (!options.keepErrors) {
+      errors.value = []
+    }
+  }
+
   function _updateFieldState<K extends Paths<InferInput<S>>>(name: K, value: InferInput<S>[K], type: FormInputEvents) {
     touchedFields.add(name)
 
     if (type === 'blur') {
       blurredFields.add(name)
-    } else {
+    } else if (type !== 'focus') {
       setFieldValue(name, value)
       dirtyFields.add(name)
     }
@@ -212,6 +280,8 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     value, 'change')
   const _handleBlurLogic = (name: Paths<InferInput<S>>) => _updateFieldState(name, undefined,
     'blur')
+  const _handleFocusLogic = (name: Paths<InferInput<S>>) => _updateFieldState(name, undefined,
+    'focus')
 
   function getEventValue(event: Event | CustomEvent, currentValue: any) {
     const isCustomEvent = event instanceof CustomEvent
@@ -243,20 +313,13 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
       'onUpdate:modelValue': (val: InferInput<S>[K]) => {
         _handleInputLogic(name, val)
       },
-      // For native component
-      'value': getValue,
-      'onInput': (event: Event | CustomEvent) => {
-        const value = getEventValue(event, getValue)
-        if (event.target && (event.target as HTMLInputElement).type === 'checkbox') {
-          return
-        }
-        _handleInputLogic(name, value as InferInput<S>[K])
-      },
-      'onBlur': () => _handleBlurLogic(name),
+      // For native components
       'onChange': (event: Event | CustomEvent) => {
         const value = getEventValue(event, getValue)
         _handleChangeLogic(name, value as InferInput<S>[K])
-      }
+      },
+      'onBlur': () => _handleBlurLogic(name),
+      'onFocus': () => _handleFocusLogic(name)
     }
 
     return fieldProps
@@ -266,6 +329,11 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     const name = (event.target as HTMLInputElement).name as Paths<InferInput<S>>
     if (!name) return
     _handleBlurLogic(name)
+  }
+  function handleFocus(event: FocusEvent) {
+    const name = (event.target as HTMLInputElement).name as Paths<InferInput<S>>
+    if (!name) return
+    _handleFocusLogic(name)
   }
 
   function handleInput(event: Event) {
@@ -310,7 +378,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     return errors.value
   }
 
-  function clear(name?: Paths<InferInput<S>> | RegExp) {
+  function clearErrors(name?: Paths<InferInput<S>> | RegExp) {
     if (name) {
       errors.value = errors.value.filter(err => name instanceof RegExp ? !(err.name && name.test(err.name)) : err.name !== name)
     } else {
@@ -321,7 +389,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
   function setFieldValue<K extends Paths<InferInput<S>>>(name: K, value: PathValue<InferInput<S>, K>) {
     if (!name) return
 
-    set(state, name, value === '' ? get(initialState, name) as PathValue<InferInput<S>, K> : value)
+    set(state, name, isEmpty(value) ? get(initialState, name) as PathValue<InferInput<S>, K> : value)
   }
 
   function watch<K extends Paths<InferInput<S>>>(
@@ -356,18 +424,20 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     blurredFields,
     validate,
     handleSubmit,
-    handleReset,
     bind,
     handleBlur,
     handleInput,
     handleChange,
+    handleFocus,
     setErrors,
     setFieldError,
     getErrors,
-    clear,
+    clearErrors,
     setFieldValue,
     watch,
     errorBag,
+    resetField,
+    reset,
 
     // Internal
     registerNestedForm,

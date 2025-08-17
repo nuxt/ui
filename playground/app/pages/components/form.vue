@@ -27,7 +27,7 @@ const { formRef, state } = useFormControl({
       k: '',
       l: [
         {
-          m: 'asd'
+          m: '123'
         }
       ]
     }
@@ -36,10 +36,6 @@ const { formRef, state } = useFormControl({
 
 const validateOn = ref(['input', 'change', 'blur'])
 const disabled = ref(false)
-
-onMounted(async () => {
-  formRef.value?.setFieldValue('testing.l.0.m', '123')
-})
 </script>
 
 <template>

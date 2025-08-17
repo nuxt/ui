@@ -94,9 +94,8 @@ const {
   handleSubmit,
   setErrors,
   getErrors,
-  handleReset,
   setFieldError,
-  clear,
+  clearErrors,
   watch,
   setFieldValue,
   disabled: formDisabled,
@@ -106,7 +105,13 @@ const {
   errorBag,
   bind,
   registerNestedForm,
-  unregisterNestedForm
+  unregisterNestedForm,
+  reset,
+  resetField,
+  handleBlur,
+  handleFocus,
+  handleChange,
+  handleInput
 } = useForm({
   id: formId,
   schema: props.schema,
@@ -200,7 +205,7 @@ defineExpose<Form<S>>({
   errors,
   setErrors,
   getErrors,
-  clear,
+  clearErrors,
   async submit() {
     await onSubmitWrapper(new Event('submit'))
   },
@@ -210,13 +215,17 @@ defineExpose<Form<S>>({
   dirtyFields: readonly(dirtyFields),
   blurredFields: readonly(blurredFields),
   touchedFields: readonly(touchedFields),
-  handleReset,
   setFieldError,
   errorBag,
   bind,
   watch,
-  setFieldValue
-
+  setFieldValue,
+  resetField,
+  handleInput,
+  handleChange,
+  handleBlur,
+  handleFocus,
+  reset
 })
 </script>
 
