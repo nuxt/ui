@@ -2,14 +2,14 @@
 
 exports[`ChangelogVersions > renders with as correctly 1`] = `
 "<section class="relative">
-  <div class="absolute hidden lg:block overflow-hidden inset-y-3 left-32 h-full w-px bg-border -ml-[8.5px]">
-    <div class="absolute left-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+  <div class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px bg-border -ms-[8.5px]">
+    <div class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
   </div>
   <div class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
     <!---->
     <article class="relative">
-      <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
+      <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
         <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div class="size-2 rounded-full bg-primary"></div>
         </div>
@@ -46,14 +46,14 @@ exports[`ChangelogVersions > renders with as correctly 1`] = `
 
 exports[`ChangelogVersions > renders with class correctly 1`] = `
 "<div class="absolute">
-  <div class="absolute hidden lg:block overflow-hidden inset-y-3 left-32 h-full w-px bg-border -ml-[8.5px]">
-    <div class="absolute left-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+  <div class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px bg-border -ms-[8.5px]">
+    <div class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
   </div>
   <div class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
     <!---->
     <article class="relative">
-      <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
+      <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
         <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div class="size-2 rounded-full bg-primary"></div>
         </div>
@@ -90,8 +90,8 @@ exports[`ChangelogVersions > renders with class correctly 1`] = `
 
 exports[`ChangelogVersions > renders with default slot correctly 1`] = `
 "<div class="relative">
-  <div class="absolute hidden lg:block overflow-hidden inset-y-3 left-32 h-full w-px bg-border -ml-[8.5px]">
-    <div class="absolute left-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+  <div class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px bg-border -ms-[8.5px]">
+    <div class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
   </div>
   <div class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">Default slot</div>
 </div>"
@@ -99,12 +99,12 @@ exports[`ChangelogVersions > renders with default slot correctly 1`] = `
 
 exports[`ChangelogVersions > renders with indicator slot correctly 1`] = `
 "<div class="relative">
-  <div class="absolute hidden lg:block overflow-hidden inset-y-3 left-32 h-full w-px bg-border -ml-[8.5px]">Indicator slot</div>
+  <div class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px bg-border -ms-[8.5px]">Indicator slot</div>
   <div class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
     <!---->
     <article class="relative">
-      <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
+      <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
         <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div class="size-2 rounded-full bg-primary"></div>
         </div>
@@ -141,14 +141,14 @@ exports[`ChangelogVersions > renders with indicator slot correctly 1`] = `
 
 exports[`ChangelogVersions > renders with ui correctly 1`] = `
 "<div class="relative">
-  <div class="absolute hidden lg:block overflow-hidden inset-y-3 left-32 h-full w-px -ml-[8.5px] bg-primary">
-    <div class="absolute left-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+  <div class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px -ms-[8.5px] bg-primary">
+    <div class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
   </div>
   <div class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
     <!---->
     <article class="relative">
-      <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
+      <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
         <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div class="size-2 rounded-full bg-primary"></div>
         </div>
@@ -185,14 +185,14 @@ exports[`ChangelogVersions > renders with ui correctly 1`] = `
 
 exports[`ChangelogVersions > renders with versions correctly 1`] = `
 "<div class="relative">
-  <div class="absolute hidden lg:block overflow-hidden inset-y-3 left-32 h-full w-px bg-border -ml-[8.5px]">
-    <div class="absolute left-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
+  <div class="absolute hidden lg:block overflow-hidden inset-y-3 start-32 h-full w-px bg-border -ms-[8.5px]">
+    <div class="absolute start-0 top-0 w-full bg-primary will-change-[height]" style="height: 0%;"></div>
   </div>
   <div class="flex flex-col gap-y-8 sm:gap-y-12 lg:gap-y-16">
     <!---->
     <!---->
     <article class="relative">
-      <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
+      <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2024-12-13T09:32:32.598Z" class="text-sm/6 text-toned truncate">Dec 13, 2024</time>
         <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
           <div class="size-2 rounded-full bg-primary"></div>
         </div>
