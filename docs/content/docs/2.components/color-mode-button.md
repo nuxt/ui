@@ -15,7 +15,7 @@ links:
 
 The ColorModeButton component extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
-::component-code{prefix="color-mode"}
+:component-code{prefix="color-mode"}
 
 ::note
 The button defaults to `color="neutral"` and `variant="ghost"`.
