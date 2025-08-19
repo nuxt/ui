@@ -389,7 +389,7 @@ export default defineComponent({
 
     const selected = computed(() => {
       function compareValues(value1: any, value2: any) {
-        if (by.value && typeof by.value !== 'function' && typeof value1 === 'object' && typeof value2 === 'object') {
+        if (by.value && typeof by.value !== 'function' && isObject(value1) && isObject(value2)) {
           return isEqual(value1[by.value], value2[by.value])
         }
         return isEqual(value1, value2)
@@ -525,6 +525,10 @@ export default defineComponent({
 
     function accessor<T extends Record<string, any>>(obj: T, key: string) {
       return get(obj, key)
+    }
+
+    function isObject(object: any): object is boolean {
+      return !Array.isArray(object) && object !== null && typeof object === 'object'
     }
 
     const filteredOptions = computed(() => {
