@@ -580,6 +580,19 @@ class: '!p-0'
 ---
 ::
 
+### With tree data
+
+You can use `getSubRows` props to display tree data
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-tree-data-example'
+class: '!p-0'
+---
+::
+
 ### With slots
 
 You can use slots to customize the header and data cells of the table.
