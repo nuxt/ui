@@ -3,6 +3,7 @@ import * as z from 'zod'
 import FormExampleElements from '../../../../docs/app/components/content/examples/form/FormExampleElements.vue'
 import FormExampleNestedList from '../../../../docs/app/components/content/examples/form/FormExampleNestedList.vue'
 import FormExampleNested from '../../../../docs/app/components/content/examples/form/FormExampleNested.vue'
+import { useForm } from '#ui/composables/useForm'
 
 const schema = z.object({
   email: z.string()
