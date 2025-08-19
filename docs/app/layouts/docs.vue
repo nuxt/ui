@@ -3,6 +3,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageChildren } from '@nuxt/content/utils'
 
 const route = useRoute()
+const { framework } = useSharedData()
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
@@ -50,8 +51,20 @@ const categories = {
   }]
 }
 
+function filterChildrenByFramework(items: ContentNavigationItem[]): ContentNavigationItem[] {
+  return items.filter((child) => {
+    if (!child.framework) {
+      return true
+    }
+
+    return child.framework === framework.value
+  })
+}
+
 function groupChildrenByCategory(items: ContentNavigationItem[], slug: string): ContentNavigationItem[] {
-  const childrenGroupedByCategory = items.reduce((acc, child) => {
+  const filteredItems = filterChildrenByFramework(items)
+
+  const childrenGroupedByCategory = filteredItems.reduce((acc, child) => {
     if (child.category) {
       acc[child.category as string] = [...(acc[child.category as string] || []), child]
     } else {
