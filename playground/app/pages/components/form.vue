@@ -8,17 +8,15 @@ const schema = z.object({
   email: z.string()
 })
 
-const { state, bind, watch } = useForm({
+const { state } = useForm({
   schema,
   defaultValues: {
-    email: undefined
+    email: '123'
   }
 })
 
 const validateOn = ref(['input', 'change', 'blur'])
 const disabled = ref(false)
-
-watch('email', v => console.log(v))
 </script>
 
 <template>
@@ -26,7 +24,7 @@ watch('email', v => console.log(v))
     <div class="flex gap-4">
       {{ state }}
       <UFormField label="Email" name="testing.l.0.m">
-        <UInput v-bind="bind('email')" placeholder="john@lennon.com" />
+        <UInput v-model="state.email" placeholder="john@lennon.com" />
       </UFormField>
 
       <div>

@@ -2,7 +2,7 @@ import { ref, reactive, shallowReactive, computed, readonly, isRef, watch as vue
 import { type FormSchema, type FormError, type FormInputEvents, type FormErrorWithId, type InferInput, type InferOutput, type FormData, FormValidationException } from '../types/form'
 import { validateSchema } from '../utils/form'
 import { useDebounceFn } from '@vueuse/core'
-import { cloneObject, get, isEmpty, set } from '../utils'
+import { cloneObject, get, set } from '../utils'
 import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from './useFormField'
 import type { ErrorBagTree, Paths, PathValue } from '../types'
 
@@ -389,7 +389,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
   function setFieldValue<K extends Paths<InferInput<S>>>(name: K, value: PathValue<InferInput<S>, K>) {
     if (!name) return
 
-    set(state, name, isEmpty(value) ? get(initialState, name) as PathValue<InferInput<S>, K> : value)
+    set(state, name, value)
   }
 
   function watch<K extends Paths<InferInput<S>>>(
