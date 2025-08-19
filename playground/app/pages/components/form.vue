@@ -1,63 +1,39 @@
 <script setup lang="ts">
 import * as z from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui'
 import FormExampleElements from '../../../../docs/app/components/content/examples/form/FormExampleElements.vue'
 import FormExampleNestedList from '../../../../docs/app/components/content/examples/form/FormExampleNestedList.vue'
 import FormExampleNested from '../../../../docs/app/components/content/examples/form/FormExampleNested.vue'
 
 const schema = z.object({
-  testing: z.object({
-    k: z.email(),
-    l: z.array(z.object({
-      m: z.email()
-    }))
-  })
+  email: z.string()
 })
 
-type Schema = z.input<typeof schema>
-
-function onSubmit(event: FormSubmitEvent<Schema>) {
-  console.log(event.data)
-}
-
-const { formRef, state } = useFormControl({
+const { state, bind, watch } = useForm({
   schema,
   defaultValues: {
-    testing: {
-      k: '',
-      l: [
-        {
-          m: '123'
-        }
-      ]
-    }
+    email: undefined
   }
 })
 
 const validateOn = ref(['input', 'change', 'blur'])
 const disabled = ref(false)
+
+watch('email', v => console.log(v))
 </script>
 
 <template>
   <div class="flex flex-col gap-8">
     <div class="flex gap-4">
-      <UForm
-        ref="formRef"
-        :state="state"
-        :schema="schema"
-        class="gap-4 flex flex-col w-60"
-        @submit="onSubmit"
-      >
-        <UFormField label="Email" name="testing.l.0.m">
-          <UInput v-bind="formRef?.bind('testing.l.0.m')" placeholder="john@lennon.com" />
-        </UFormField>
+      {{ state }}
+      <UFormField label="Email" name="testing.l.0.m">
+        <UInput v-bind="bind('email')" placeholder="john@lennon.com" />
+      </UFormField>
 
-        <div>
-          <UButton type="submit">
-            Submit
-          </UButton>
-        </div>
-      </UForm>
+      <div>
+        <UButton type="submit">
+          Submit
+        </UButton>
+      </div>
       <FormExampleNested />
       <FormExampleNestedList />
     </div>

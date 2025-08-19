@@ -23,7 +23,7 @@ export interface UseFormOptions<S extends FormSchema, T extends boolean = true> 
 export function useForm<S extends FormSchema, T extends boolean = true>(options: UseFormOptions<S, T>) {
   const initialState: Partial<InferInput<S>> = cloneObject(options.defaultValues) ?? {} as InferInput<S>
 
-  const state = (options.shallow ? shallowReactive : reactive)(options.values ?? initialState) as InferInput<S>
+  const state = (options.shallow ? shallowReactive : reactive)(options.values ?? { ...initialState }) as InferInput<S>
 
   const formId = options.id ?? useId() as string
 
