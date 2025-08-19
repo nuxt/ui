@@ -205,6 +205,16 @@ export function cloneObject<T>(data: T): T {
   return copy
 }
 
+export function getObjectPaths(obj: object, prefix = ''): string[] {
+  return Object.entries(obj).flatMap(([key, value]) => {
+    const newKey = prefix ? `${prefix}.${key}` : key
+    if (isObject(value) && Object.keys(value).length > 0) {
+      return getObjectPaths(value, newKey)
+    }
+    return newKey
+  })
+}
+
 export function mergeClasses(appConfigClass?: string | string[], propClass?: string) {
   if (!appConfigClass && !propClass) {
     return ''

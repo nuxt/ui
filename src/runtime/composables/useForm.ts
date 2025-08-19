@@ -2,7 +2,7 @@ import { ref, reactive, shallowReactive, computed, readonly, isRef, watch as vue
 import { type FormSchema, type FormError, type FormInputEvents, type FormErrorWithId, type InferInput, type InferOutput, type FormData, FormValidationException } from '../types/form'
 import { createState, validateSchema } from '../utils/form'
 import { useDebounceFn } from '@vueuse/core'
-import { cloneObject, get, set } from '../utils'
+import { cloneObject, get, getObjectPaths, set } from '../utils'
 import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from './useFormField'
 import type { ErrorBagTree, Paths, PathValue } from '../types'
 
@@ -241,17 +241,22 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
       Object.assign(initialState, cloneObject(newValues))
     }
 
-    const newClonedValues = cloneObject(newValues)
-    Object.assign(state, newClonedValues)
+    const keysToReset = getObjectPaths(newValues)
 
-    if (!options.keepDirty) {
-      dirtyFields.clear()
-      touchedFields.clear()
-      blurredFields.clear()
+    for (const key of keysToReset) {
+      const value = get(newValues, key)
+      resetField(key as Paths<InferInput<S>>, {
+        defaultValue: value,
+        keepDirty: options.keepDirty,
+        keepTouched: options.keepDirty,
+        keepError: true
+      })
     }
 
     if (!options.keepErrors) {
-      errors.value = []
+      for (const key of keysToReset) {
+        clearErrors(key as Paths<InferInput<S>> | RegExp)
+      }
     }
   }
 
