@@ -1,20 +1,23 @@
 <script setup lang="ts">
 import * as z from 'zod'
+import type { FormSubmitEvent } from '@nuxt/ui'
 import FormExampleElements from '../../../../docs/app/components/content/examples/form/FormExampleElements.vue'
 import FormExampleNestedList from '../../../../docs/app/components/content/examples/form/FormExampleNestedList.vue'
 import FormExampleNested from '../../../../docs/app/components/content/examples/form/FormExampleNested.vue'
-import { useForm } from '#ui/composables/useForm'
 
 const schema = z.object({
-  email: z.string()
+  email: z.string().email(),
+  password: z.string().min(8),
+  tos: z.literal(true)
 })
 
-const { state } = useForm({
-  schema,
-  defaultValues: {
-    email: '123'
-  }
-})
+type Schema = z.input<typeof schema>
+
+const state = reactive<Partial<Schema>>({})
+
+function onSubmit(event: FormSubmitEvent<Schema>) {
+  console.log(event.data)
+}
 
 const validateOn = ref(['input', 'change', 'blur'])
 const disabled = ref(false)
@@ -23,16 +26,30 @@ const disabled = ref(false)
 <template>
   <div class="flex flex-col gap-8">
     <div class="flex gap-4">
-      {{ state }}
-      <UFormField label="Email" name="testing.l.0.m">
-        <UInput v-model="state.email" placeholder="john@lennon.com" />
-      </UFormField>
+      <UForm
+        :state="state"
+        :schema="schema"
+        class="gap-4 flex flex-col w-60"
+        @submit="onSubmit"
+      >
+        <UFormField label="Email" name="email">
+          <UInput v-model="state.email" placeholder="john@lennon.com" />
+        </UFormField>
 
-      <div>
-        <UButton type="submit">
-          Submit
-        </UButton>
-      </div>
+        <UFormField label="Password" name="password">
+          <UInput v-model="state.password" type="password" />
+        </UFormField>
+
+        <UFormField name="tos">
+          <UCheckbox v-model="state.tos" label="I accept the terms and conditions" />
+        </UFormField>
+
+        <div>
+          <UButton type="submit">
+            Submit
+          </UButton>
+        </div>
+      </UForm>
       <FormExampleNested />
       <FormExampleNestedList />
     </div>
