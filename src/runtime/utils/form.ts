@@ -15,7 +15,22 @@ export function isYupError(error: any): error is YupError {
 }
 
 export function isZodSchema(schema: any): schema is z.ZodType<any, any, any> {
-  return schema._def !== undefined
+  // Zod's fingerprint is the `_def` property
+  return (
+    typeof schema === 'object'
+    && schema !== null
+    && typeof schema._def === 'object'
+  )
+}
+
+export function isValibotSchema(schema: any): boolean {
+  return (
+    typeof schema === 'object'
+    && schema !== null
+    && typeof schema._parse === 'function'
+    && typeof schema.async === 'boolean'
+    && Array.isArray(schema.pipe)
+  )
 }
 interface ZodDefWithShape {
   typeName?: string
@@ -305,6 +320,8 @@ export function createState(schema: any): unknown {
     return createStateFromZodSchema(schema)
   } else if (isYupSchema(schema)) {
     return schema.getDefault()
+  } else if (isValibotSchema(schema)) {
+    return schema.getDefaults()
   }
 
   return {}
