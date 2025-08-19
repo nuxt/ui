@@ -15,7 +15,7 @@ links:
 
 The ColorModeSwitch component extends the [Switch](/docs/components/switch) component, so you can pass any property such as `color`, `size`, etc.
 
-::component-code{prefix="color-mode"}
+:component-code{prefix="color-mode"}
 
 ## Examples
 
