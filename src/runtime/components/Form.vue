@@ -59,7 +59,7 @@ export interface FormEmits<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface FormSlots {
-  default(props?: { errors: FormError[], loading: boolean }): any
+  default(props: { errors: FormError[], loading: boolean }): any
 }
 </script>
 

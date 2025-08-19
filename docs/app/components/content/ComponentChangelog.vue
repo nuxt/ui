@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import type { CommitInfo } from '#build/changelog'
-import { camelCase } from 'scule'
 import { changelog } from '#build/changelog'
 
 const route = useRoute()
-const camelName = camelCase((route.path.split('/').pop() ?? '').replace(/-/g, ''))
+const name = route.path.split('/').pop()
 
 const commits = computed(() => {
-  const related = changelog.filter(c => c.version || c.components?.some(i => i.includes(camelName)))
+  const related = changelog.filter(c => c.version || c.components?.some(i => i === name))
   return related.filter((i, idx) => !(i.version && (!related[idx + 1] || related[idx + 1]?.version)))
 })
 
