@@ -15,7 +15,6 @@ export function isYupError(error: any): error is YupError {
 }
 
 export function isZodSchema(schema: any): schema is z.ZodType<any, any, any> {
-  // Zod's fingerprint is the `_def` property
   return (
     typeof schema === 'object'
     && schema !== null
