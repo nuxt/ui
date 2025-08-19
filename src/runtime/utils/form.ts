@@ -22,15 +22,6 @@ export function isZodSchema(schema: any): schema is z.ZodType<any, any, any> {
   )
 }
 
-export function isValibotSchema(schema: any): boolean {
-  return (
-    typeof schema === 'object'
-    && schema !== null
-    && typeof schema._parse === 'function'
-    && typeof schema.async === 'boolean'
-    && Array.isArray(schema.pipe)
-  )
-}
 interface ZodDefWithShape {
   typeName?: string
   type?: string
@@ -319,8 +310,6 @@ export function createState(schema: any): unknown {
     return createStateFromZodSchema(schema)
   } else if (isYupSchema(schema)) {
     return schema.getDefault()
-  } else if (isValibotSchema(schema)) {
-    return schema.getDefaults()
   }
 
   return {}
