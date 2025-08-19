@@ -311,7 +311,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
   }
 
   function bind<K extends Paths<InferInput<S>>>(name: K) {
-    const getValue = get(state, name)
+    const getValue = getFieldValue(name)
     const fieldProps = {
       'name': name as string,
       'modelValue': getValue,
@@ -390,6 +390,10 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     }
   }
 
+  function getFieldValue<K extends Paths<InferInput<S>>>(name: K): PathValue<InferInput<S>, K> | undefined {
+    return get(state, name)
+  }
+
   function setFieldValue<K extends Paths<InferInput<S>>>(name: K, value: PathValue<InferInput<S>, K>) {
     if (!name) return
 
@@ -411,7 +415,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     arg3?: WatchOptions
   ) {
     if (typeof arg1 === 'string') {
-      vueWatch(() => get(state, arg1), arg2 as WatchCallback<PathValue<InferInput<S>, K>, PathValue<InferInput<S>, K> | undefined>, arg3)
+      vueWatch(() => getFieldValue(arg1 as unknown as Paths<InferInput<S>>)!, arg2 as WatchCallback<PathValue<InferInput<S>, K>, PathValue<InferInput<S>, K> | undefined>, arg3)
     } else if (typeof arg1 === 'function') {
       vueWatch(state, arg1, arg2 as WatchOptions)
     }
@@ -438,6 +442,7 @@ export function useForm<S extends FormSchema, T extends boolean = true>(options:
     getErrors,
     clearErrors,
     setFieldValue,
+    getFieldValue,
     watch,
     errorBag,
     resetField,

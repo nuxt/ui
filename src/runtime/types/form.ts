@@ -24,6 +24,7 @@ export interface Form<S extends FormSchema> {
   watch<K extends Paths<FormData<S, false>>>(key: K, cb: (newValue: PathValue<FormData<S, false>, K>, oldValue: PathValue<FormData<S, false>, K>) => void, options?: WatchOptions): void
   watch(cb: (newValue: Partial<FormData<S, false>>, oldValue: Partial<FormData<S, false>>) => void, options?: WatchOptions): void
   setFieldValue<K extends Paths<FormData<S, false>>>(name: K, value: PathValue<FormData<S, false>, K>): void
+  getFieldValue<K extends Paths<FormData<S, false>>>(name: K,): PathValue<FormData<S, false>, K> | undefined
   resetField(name: Paths<FormData<S, false>>, options?: {
     defaultValue?: any
     keepDirty?: boolean

@@ -324,4 +324,18 @@ describe('useForm', () => {
     setErrors([{ name: 'name', message: 'Error' }])
     expect(errorBag.value).toEqual({ name: { message: 'Error', id: undefined } })
   })
+
+  it('accesing value with getFieldValue', () => {
+    const { getFieldValue } = useForm({
+      defaultValues: {
+        user: {
+          name: 'John Doe'
+        }
+      }
+    })
+
+    const getUserName = getFieldValue('user.name')
+
+    expect(getUserName).toBe('John Doe')
+  })
 })

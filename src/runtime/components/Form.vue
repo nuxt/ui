@@ -106,6 +106,7 @@ const {
   bind,
   registerNestedForm,
   unregisterNestedForm,
+  getFieldValue,
   reset,
   resetField,
   handleBlur,
@@ -202,6 +203,7 @@ const onError = (error: FormValidationException, payload?: Event) => {
 const onSubmitWrapper = handleSubmit(onSuccess, onError)
 
 defineExpose<Form<S>>({
+  getFieldValue,
   validate: formValidate,
   errors,
   setErrors,
