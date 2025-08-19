@@ -1,6 +1,7 @@
 import { shallowReactive, reactive, useTemplateRef, type ShallowUnwrapRef } from 'vue'
 import type { Form, FormSchema, InferInput } from '../types/form'
 import { cloneObject } from '../utils'
+import { createState } from '../utils/form'
 
 export interface UseFormControlOptions<S extends FormSchema> {
   id?: string | number
@@ -14,9 +15,9 @@ export interface UseFormControlOptions<S extends FormSchema> {
 export function useFormControl<S extends FormSchema>(options: UseFormControlOptions<S>) {
   const formRef = useTemplateRef<ShallowUnwrapRef<Form<S>>>(options.formRefName || 'formRef')
 
-  const initialState: Partial<InferInput<S>> = cloneObject(options.defaultValues) ?? {} as InferInput<S>
+  const initialState: Partial<InferInput<S>> = options.defaultValues ? (cloneObject(options.defaultValues) ?? {} as InferInput<S>) : createState(options.schema) as Partial<InferInput<S>>
 
-  const state = (options.shallow ? shallowReactive : reactive)(options.values ?? initialState) as (Partial<InferInput<S>>)
+  const state = (options.shallow ? shallowReactive : reactive)(options.values ?? { ...initialState }) as (Partial<InferInput<S>>)
 
   return {
     formRef,

@@ -1,6 +1,6 @@
 import { ref, reactive, shallowReactive, computed, readonly, isRef, watch as vueWatch, type Ref, type WatchOptions, provide, useId, type WatchCallback } from 'vue'
 import { type FormSchema, type FormError, type FormInputEvents, type FormErrorWithId, type InferInput, type InferOutput, type FormData, FormValidationException } from '../types/form'
-import { validateSchema } from '../utils/form'
+import { createState, validateSchema } from '../utils/form'
 import { useDebounceFn } from '@vueuse/core'
 import { cloneObject, get, set } from '../utils'
 import { formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey } from './useFormField'
@@ -21,7 +21,7 @@ export interface UseFormOptions<S extends FormSchema, T extends boolean = true> 
 }
 
 export function useForm<S extends FormSchema, T extends boolean = true>(options: UseFormOptions<S, T>) {
-  const initialState: Partial<InferInput<S>> = cloneObject(options.defaultValues) ?? {} as InferInput<S>
+  const initialState: Partial<InferInput<S>> = options.defaultValues ? (cloneObject(options.defaultValues) ?? {} as InferInput<S>) : createState(options.schema) as Partial<InferInput<S>>
 
   const state = (options.shallow ? shallowReactive : reactive)(options.values ?? { ...initialState }) as InferInput<S>
 
