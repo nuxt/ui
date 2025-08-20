@@ -14,8 +14,22 @@ These files are optimized for AI consumption and contain structured information 
 
 We provide LLMs.txt routes to help AI tools access our documentation:
 
-- **`/llms.txt`** - Contains a structured overview of all components and their documentation links
-- **`/llms-full.txt`** - Provides comprehensive documentation including implementation details, examples, theming, composables, and migration guidance
+- **`/llms.txt`** - Contains a structured overview of all components and their documentation links (~5K tokens)
+- **`/llms-full.txt`** - Provides comprehensive documentation including implementation details, examples, theming, composables, and migration guidance (~1M+ tokens)
+
+## Choosing the Right File
+
+::note{icon="i-lucide-info"}
+**Most users should start with `/llms.txt`** - it contains all essential information and works with standard LLM context windows.
+
+Use `/llms-full.txt` only if you need comprehensive implementation examples and your AI tool supports large contexts (200K+ tokens).
+::
+
+## Important Usage Notes
+
+::warning{icon="i-lucide-alert-triangle"}
+**@-symbol must be typed manually** - When using tools like Cursor or Windsurf, the `@` symbol must be typed by hand in the chat interface. Copy-pasting breaks the tool's ability to recognize it as a context reference.
+::
 
 ## Usage with AI Tools
 
@@ -23,21 +37,12 @@ We provide LLMs.txt routes to help AI tools access our documentation:
 
 Nuxt UI provides specialized LLMs.txt files that you can reference in Cursor for better AI assistance with component development.
 
-#### Available LLMs.txt files:
-
-- `https://ui.nuxt.com/llms.txt` - Component overview and links
-- `https://ui.nuxt.com/llms-full.txt` - Comprehensive documentation with examples
-
 #### How to use:
 
 1. **Direct reference**: Mention the LLMs.txt URLs when asking questions
-2. **@Docs**: Add these specific URLs to your project context using @Docs
+2. Add these specific URLs to your project context using `@docs`
 
-#### Example:
-
-```
-Using Nuxt UI documentation from @https://ui.nuxt.com/llms-full.txt, how do I create a modal component?
-```
+[Read more about Cursor Web and Docs Search](https://docs.cursor.com/en/context/@-symbols/@-docs)
 
 ### Windsurf
 
@@ -45,26 +50,14 @@ Windsurf can directly access the Nuxt UI LLMs.txt files to understand component 
 
 #### Using LLMs.txt with Windsurf:
 
-- Use `@docs` to reference specific LLMs.txt URLs:
-  - `@https://ui.nuxt.com/llms.txt` for component overview
-  - `@https://ui.nuxt.com/llms-full.txt` for comprehensive documentation
+- Use `@docs` to reference specific LLMs.txt URLs
 - Create persistent rules referencing these URLs in your workspace
-
-#### Example usage:
-
-```
-@https://ui.nuxt.com/llms-full.txt
-How do I create a modal with Nuxt UI v4?
-```
 
 [Read more about Windsurf Web and Docs Search](https://docs.windsurf.com/windsurf/cascade/web-search)
 
 ### Other AI Tools
 
-Any AI tool that supports LLMs.txt can use these routes to better understand Nuxt UI. Simply point your tool to any of the routes above based on your needs:
-
-- `https://ui.nuxt.com/llms.txt` for component overview
-- `https://ui.nuxt.com/llms-full.txt` for comprehensive documentation
+Any AI tool that supports LLMs.txt can use these routes to better understand Nuxt UI.
 
 #### Examples for ChatGPT, Claude, or other LLMs:
 
