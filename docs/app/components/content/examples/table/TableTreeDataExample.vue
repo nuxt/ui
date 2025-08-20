@@ -137,18 +137,21 @@ const columns: TableColumn<Payment>[] = [{
     return h('div', { class: 'text-right font-medium' }, formatted)
   }
 }]
+
+const expanded = ref({ 0: true })
 </script>
 
 <template>
   <UTable
+    v-model:expanded="expanded"
     :data="data"
     :columns="columns"
     :get-sub-rows="row => row.children"
-    expanded
     sticky
-    class="flex-1 h-96"
+    class="flex-1"
     :ui="{
       base: 'border-separate border-spacing-0',
+      tbody: '[&>tr]:last:[&>td]:border-b-0',
       tr: 'group',
       td: 'empty:p-0 group-has-[td:not(:empty)]:border-b border-default'
     }"
