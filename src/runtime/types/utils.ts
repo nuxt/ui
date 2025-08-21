@@ -1,22 +1,6 @@
 import type { VNode } from 'vue'
 import type { AcceptableValue as _AcceptableValue } from 'reka-ui'
 
-export type PathValue<T, P> = P extends `${infer K}.${infer R}`
-  ? K extends keyof T
-    ? PathValue<T[K], R>
-    : K extends `${number}`
-      ? T extends readonly (infer U)[]
-        ? PathValue<U, R>
-        : never
-      : never
-  : P extends keyof T
-    ? T[P]
-    : P extends `${number}`
-      ? T extends readonly (infer U)[]
-        ? U
-        : never
-      : never
-
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] | undefined
 }
