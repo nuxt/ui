@@ -144,7 +144,7 @@ describe('useForm', () => {
       })
 
       state.user.name = 'Jane'
-      dirtyFields.add('user')
+      dirtyFields.add('user.name')
       touchedFields.add('user.name')
       blurredFields.add('user.name')
 
@@ -195,7 +195,7 @@ describe('useForm', () => {
 
       state.user.name = 'Jane'
       dirtyFields.add('user.name')
-      expect(dirtyFields.has('user')).toBe(true)
+      expect(dirtyFields.has('user.name')).toBe(true)
 
       reset({ user: { name: 'Peter' } }, { keepDirty: true })
 
