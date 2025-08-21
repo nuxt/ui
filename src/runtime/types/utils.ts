@@ -1,26 +1,6 @@
 import type { VNode } from 'vue'
 import type { AcceptableValue as _AcceptableValue } from 'reka-ui'
 
-type Prev = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-type PathConcat<S1 extends string | number, S2> = S2 extends string
-  ? S2 extends number
-    ? `${S1}${S2}`
-    : `${S1}.${S2}`
-  : never
-
-export type Paths<T, D extends number = 5>
-  = [D] extends [never] ? never
-    : T extends readonly (infer U)[]
-      ? number | PathConcat<number, Paths<U, Prev[D]>>
-
-      : T extends object
-        ? {
-            [K in keyof T]-?: K extends string | number
-              ? `${K}` | PathConcat<`${K}`, Paths<T[K], Prev[D]>>
-              : never;
-          }[keyof T] : never
-
 export type PathValue<T, P> = P extends `${infer K}.${infer R}`
   ? K extends keyof T
     ? PathValue<T[K], R>

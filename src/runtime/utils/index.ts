@@ -1,5 +1,6 @@
 import { isEqual } from 'ohash/utils'
-import type { GetItemKeys, NestedItem, Paths, PathValue } from '../types/utils'
+import type { GetItemKeys, NestedItem, PathValue } from '../types/utils'
+import type { Path } from '../types'
 
 export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
   const result = {} as Pick<Data, Keys>
@@ -22,8 +23,8 @@ export function omit<Data extends object, Keys extends keyof Data>(data: Data, k
   return result as Omit<Data, Keys>
 }
 
-export function get<T extends Record<string, any>, P extends Paths<T>>(object: T | undefined, path: P): PathValue<Required<T>, P> | undefined
-export function get<T extends Record<string, any>, P extends Paths<T>, D>(object: T | undefined, path: P, defaultValue: D): Exclude<PathValue<Required<T>, P>, undefined> | D
+export function get<T extends Record<string, any>, P extends Path<T>>(object: T | undefined, path: P): PathValue<Required<T>, P> | undefined
+export function get<T extends Record<string, any>, P extends Path<T>, D>(object: T | undefined, path: P, defaultValue: D): Exclude<PathValue<Required<T>, P>, undefined> | D
 export function get(object: Record<string, any> | undefined, path: string | (string | number)[], defaultValue?: any): any
 export function get(object: Record<string, any> | undefined, path: string | (string | number)[], defaultValue?: any) {
   if (typeof path === 'string') {
@@ -46,7 +47,7 @@ export function get(object: Record<string, any> | undefined, path: string | (str
   return result !== undefined ? result : defaultValue
 }
 
-export function set<T extends Record<string, any>, P extends Paths<T>>(object: T, path: P, value: PathValue<T, P>): void
+export function set<T extends Record<string, any>, P extends Path<T>>(object: T, path: P, value: PathValue<T, P>): void
 export function set(object: Record<string, any>, path: (string | number)[] | string, value: any): void
 export function set(object: Record<string, any>, path: string | (string | number)[], value: any) {
   if (typeof path === 'string') {

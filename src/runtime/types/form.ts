@@ -2,15 +2,16 @@ import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { ComputedRef, DeepReadonly, Ref, WatchOptions } from 'vue'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
-import type { GetObjectField, Paths, PathValue } from './utils'
+import type { DeepPartial, GetObjectField, PathValue } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
+import type { Path } from './path'
 
 export interface Form<S extends FormSchema> {
   validate<T extends boolean>(opts?: { name?: keyof FormData<S, false> | (keyof FormData<S, false>)[], silent?: boolean, nested?: boolean, transform?: T }): Promise<FormData<S, T> | false>
-  clearErrors (path?: Paths<FormData<S, false>>): void
+  clearErrors (path?: Path<FormData<S, false>>): void
   errors: Ref<FormError[]>
-  setErrors (errs: FormError[], name?: Paths<FormData<S, false>>): void
-  getErrors (name?: Paths<FormData<S, false>>): FormError[]
+  setErrors (errs: FormError[], name?: Path<FormData<S, false>>): void
+  getErrors (name?: Path<FormData<S, false>>): FormError[]
   submit (): Promise<void>
   disabled: ComputedRef<boolean>
   dirty: ComputedRef<boolean>
@@ -18,14 +19,14 @@ export interface Form<S extends FormSchema> {
   dirtyFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   touchedFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
   blurredFields: ReadonlySet<DeepReadonly<keyof FormData<S, false>>>
-  setFieldError (name: Paths<FormData<S, false>>, error: Omit<FormErrorWithId, 'name'>): void
+  setFieldError (name: Path<FormData<S, false>>, error: Omit<FormErrorWithId, 'name'>): void
   errorBag: ComputedRef<ErrorBagTree<FormData<S, false>>>
-  bind (name: Paths<FormData<S, false>>, metadata?: { id?: string, pattern?: RegExp, modifier?: (val: any) => any }): any
-  watch<K extends Paths<FormData<S, false>>>(key: K, cb: (newValue: PathValue<FormData<S, false>, K>, oldValue: PathValue<FormData<S, false>, K>) => void, options?: WatchOptions): void
+  bind (name: Path<FormData<S, false>>, metadata?: { id?: string, pattern?: RegExp, modifier?: (val: any) => any }): any
+  watch<K extends Path<FormData<S, false>>>(key: K, cb: (newValue: PathValue<FormData<S, false>, K>, oldValue: PathValue<FormData<S, false>, K>) => void, options?: WatchOptions): void
   watch(cb: (newValue: Partial<FormData<S, false>>, oldValue: Partial<FormData<S, false>>) => void, options?: WatchOptions): void
-  setFieldValue<K extends Paths<FormData<S, false>>>(name: K, value: PathValue<FormData<S, false>, K>): void
-  getFieldValue<K extends Paths<FormData<S, false>>>(name: K,): PathValue<FormData<S, false>, K> | undefined
-  resetField(name: Paths<FormData<S, false>>, options?: {
+  setFieldValue<K extends Path<FormData<S, false>>>(name: K, value: PathValue<FormData<S, false>, K>): void
+  getFieldValue<K extends Path<FormData<S, false>>>(name: K,): PathValue<FormData<S, false>, K> | undefined
+  resetField(name: Path<FormData<S, false>>, options?: {
     defaultValue?: any
     keepDirty?: boolean
     keepTouched?: boolean
@@ -35,12 +36,12 @@ export interface Form<S extends FormSchema> {
   handleChange: (event: Event) => void
   handleBlur: (event: FocusEvent) => void
   handleFocus: (event: FocusEvent) => void
-  reset(values?: FormData<S, false>, options?: {
+  reset(values?: DeepPartial<FormData<S, false>>, options?: {
     keepErrors?: boolean
     keepDirty?: boolean
     keepDefaultValues?: boolean
   }): void
-  reset(values?: (value: FormData<S, false>) => FormData<S, false>, options?: {
+  reset(values?: (value: DeepPartial<FormData<S, false>>) => FormData<S, false>, options?: {
     keepErrors?: boolean
     keepDirty?: boolean
   }): void
@@ -110,7 +111,7 @@ export type FormChildDetachEvent = {
 
 export type FormInputEvent<T extends object> = {
   type: FormEventType
-  name: keyof T
+  name: Path<T>
   eager?: boolean
 }
 
