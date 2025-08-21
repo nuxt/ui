@@ -2,9 +2,9 @@ import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { ComputedRef, DeepReadonly, Ref, WatchOptions } from 'vue'
 import type { Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema } from 'yup'
-import type { DeepPartial, GetObjectField, PathValue } from './utils'
+import type { DeepPartial, GetObjectField } from './utils'
 import type { Struct as SuperstructSchema } from 'superstruct'
-import type { Path } from './path'
+import type { Path, PathValue } from './path'
 
 export interface Form<S extends FormSchema> {
   validate<T extends boolean>(opts?: { name?: keyof FormData<S, false> | (keyof FormData<S, false>)[], silent?: boolean, nested?: boolean, transform?: T }): Promise<FormData<S, T> | false>
