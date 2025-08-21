@@ -409,7 +409,7 @@ export function useForm<S extends FormSchema, T extends boolean = true, State ex
     cb: WatchCallback<Partial<State>, Partial<State>>,
     options?: WatchOptions
   ): void
-  function watch<K extends keyof State>(
+  function watch<K extends Path<State>>(
     arg1: K | WatchCallback<Partial<State>, Partial<State> | undefined>,
     arg2?: WatchCallback<PathValue<State, K>, PathValue<State, K>> | WatchOptions,
     arg3?: WatchOptions
