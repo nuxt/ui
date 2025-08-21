@@ -78,10 +78,10 @@ type TupleKeys<T extends ReadonlyArray<any>> = Exclude<keyof T, keyof any[]>
  */
 type PathImpl<K extends string | number, V, TraversedTypes> = V extends Primitive | BrowserNativeObject
   ? `${K}`
-  : // Check so that we don't recurse into the same type
+  // Check so that we don't recurse into the same type
 // by ensuring that the types are mutually assignable
 // mutually required to avoid false positives of subtypes
-  true extends AnyIsEqual<TraversedTypes, V>
+  : true extends AnyIsEqual<TraversedTypes, V>
     ? `${K}`
     : `${K}` | `${K}.${PathInternal<V, TraversedTypes | V>}`
 
@@ -118,10 +118,10 @@ type ArrayPathImpl<K extends string | number, V, TraversedTypes> = V extends Pri
       ? IsAny<V> extends true
         ? string
         : never
-      : // Check so that we don't recurse into the same type
-    // by ensuring that the types are mutually assignable
-    // mutually required to avoid false positives of subtypes
-      true extends AnyIsEqual<TraversedTypes, V>
+        // Check so that we don't recurse into the same type
+        // by ensuring that the types are mutually assignable
+        // mutually required to avoid false positives of subtypes
+      : true extends AnyIsEqual<TraversedTypes, V>
         ? never
         : `${K}` | `${K}.${ArrayPathInternal<V, TraversedTypes | V>}`
     : true extends AnyIsEqual<TraversedTypes, V>
