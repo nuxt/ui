@@ -47,6 +47,9 @@ export default (options: Required<ModuleOptions>) => {
       },
       highlight: {
         true: ''
+      },
+      showButtons: {
+        false: ''
       }
     },
     compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
@@ -105,7 +108,17 @@ export default (options: Required<ModuleOptions>) => {
       orientation: 'vertical',
       size: 'xl',
       class: 'pe-11'
-    }],
+    }, {
+      orientation: 'vertical',
+      showButtons: false,
+      class: 'pe-2.5'
+    },
+    {
+      orientation: 'horizontal',
+      showButtons: false,
+      class: 'px-2.5 text-start '
+    }
+    ],
     defaultVariants: {
       size: 'md',
       color: 'primary',

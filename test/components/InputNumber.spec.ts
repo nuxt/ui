@@ -30,6 +30,7 @@ describe('InputNumber', () => {
     ['with class', { props: { class: 'absolute' } }],
     ['with ui', { props: { ui: { base: 'rounded-full' } } }],
     ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }],
+    ['without buttons', { props: { showButtons: false } }],
     // Slots
     ['with increment slot', { slots: { increment: () => '+' } }],
     ['with decrement slot', { slots: { decrement: () => '-' } }]
