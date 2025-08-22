@@ -56,6 +56,19 @@
         orientation="vertical"
       />
     </div>
+    <div class="flex items-center gap-4">
+      <UInputNumber
+        class="w-48"
+        placeholder="No buttons horizontal"
+        :show-buttons="false"
+      />
+      <UInputNumber
+        class="w-48"
+        placeholder="No buttons vertical"
+        orientation="vertical"
+        :show-buttons="false"
+      />
+    </div>
   </div>
 </template>
 

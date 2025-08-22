@@ -51,6 +51,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
   decrementIcon?: string
   /** Disable the decrement button. */
   decrementDisabled?: boolean
+  showButtons?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   /**
@@ -90,7 +91,8 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<InputNumberProps>(), {
   orientation: 'horizontal',
   disabledIncrement: false,
-  disabledDecrement: false
+  disabledDecrement: false,
+  showButtons: true
 })
 const emits = defineEmits<InputNumberEmits>()
 defineSlots<InputNumberSlots>()
@@ -112,7 +114,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber 
   size: inputSize.value,
   highlight: highlight.value,
   orientation: props.orientation,
-  buttonGroup: orientation.value
+  buttonGroup: orientation.value,
+  showButtons: props.showButtons
 }))
 
 const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.plus : appConfig.ui.icons.chevronUp))
@@ -171,7 +174,7 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <div :class="ui.increment({ class: props.ui?.increment })">
+    <div v-if="showButtons" :class="ui.increment({ class: props.ui?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
         <slot name="increment">
           <UButton
@@ -186,7 +189,7 @@ defineExpose({
       </NumberFieldIncrement>
     </div>
 
-    <div :class="ui.decrement({ class: props.ui?.decrement })">
+    <div v-if="showButtons" :class="ui.decrement({ class: props.ui?.decrement })">
       <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
         <slot name="decrement">
           <UButton

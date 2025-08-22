@@ -216,6 +216,23 @@ props:
 ---
 ::
 
+### Buttons
+
+Use the `showButtons` prop to configure the visibility of increment and decrement buttons.
+
+::component-code
+---
+ignore:
+  - modelValue
+external:
+  - modelValue
+props:
+  modelValue: 0
+  showButtons: false
+  orientation: 'horizontal'
+---
+::
+
 ## Examples
 
 ### With decimal format
