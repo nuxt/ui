@@ -2,7 +2,7 @@
 
 exports[`CommandPalette > renders with as correctly 1`] = `
 "<section dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -39,7 +39,7 @@ exports[`CommandPalette > renders with as correctly 1`] = `
 
 exports[`CommandPalette > renders with class correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-accented">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -76,7 +76,7 @@ exports[`CommandPalette > renders with class correctly 1`] = `
 
 exports[`CommandPalette > renders with close correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9 pe-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9 pe-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true"></span>
     <!--v-if-->
     <!--v-if--></button></span>
   </div>
@@ -114,7 +114,7 @@ exports[`CommandPalette > renders with close correctly 1`] = `
 
 exports[`CommandPalette > renders with close slot correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9 pe-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5">Close slot</span></div>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9 pe-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5">Close slot</span></div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="presentation" class="relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1 focus:outline-none">
       <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" class="p-1 isolate">
@@ -149,7 +149,7 @@ exports[`CommandPalette > renders with close slot correctly 1`] = `
 
 exports[`CommandPalette > renders with closeIcon correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9 pe-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9 pe-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span><span class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true"></span>
     <!--v-if-->
     <!--v-if--></button></span>
   </div>
@@ -187,7 +187,7 @@ exports[`CommandPalette > renders with closeIcon correctly 1`] = `
 
 exports[`CommandPalette > renders with custom slot correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -222,7 +222,7 @@ exports[`CommandPalette > renders with custom slot correctly 1`] = `
 
 exports[`CommandPalette > renders with defaultValue correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -259,7 +259,7 @@ exports[`CommandPalette > renders with defaultValue correctly 1`] = `
 
 exports[`CommandPalette > renders with disabled correctly 1`] = `
 "<div dir="ltr" data-disabled="" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" disabled="" autocomplete="off" data-disabled="" aria-disabled="true" value=""><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" disabled="" autocomplete="off" data-disabled="" aria-disabled="true" value=""><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -296,7 +296,7 @@ exports[`CommandPalette > renders with disabled correctly 1`] = `
 
 exports[`CommandPalette > renders with empty slot correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -333,7 +333,7 @@ exports[`CommandPalette > renders with empty slot correctly 1`] = `
 
 exports[`CommandPalette > renders with footer slot correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -370,7 +370,7 @@ exports[`CommandPalette > renders with footer slot correctly 1`] = `
 
 exports[`CommandPalette > renders with groups correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -407,7 +407,7 @@ exports[`CommandPalette > renders with groups correctly 1`] = `
 
 exports[`CommandPalette > renders with icon correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:terminal shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:terminal shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -444,7 +444,7 @@ exports[`CommandPalette > renders with icon correctly 1`] = `
 
 exports[`CommandPalette > renders with item slot correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -469,7 +469,7 @@ exports[`CommandPalette > renders with item slot correctly 1`] = `
 
 exports[`CommandPalette > renders with item-label slot correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -506,7 +506,7 @@ exports[`CommandPalette > renders with item-label slot correctly 1`] = `
 
 exports[`CommandPalette > renders with item-leading slot correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -537,7 +537,7 @@ exports[`CommandPalette > renders with item-leading slot correctly 1`] = `
 
 exports[`CommandPalette > renders with item-trailing slot correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -568,7 +568,7 @@ exports[`CommandPalette > renders with item-trailing slot correctly 1`] = `
 
 exports[`CommandPalette > renders with labelKey correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -610,7 +610,7 @@ exports[`CommandPalette > renders with labelKey correctly 1`] = `
 
 exports[`CommandPalette > renders with loading correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:loader-circle shrink-0 text-dimmed size-5 animate-spin" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:loader-circle shrink-0 text-dimmed size-5 animate-spin" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -647,7 +647,7 @@ exports[`CommandPalette > renders with loading correctly 1`] = `
 
 exports[`CommandPalette > renders with loadingIcon correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:loader shrink-0 text-dimmed size-5 animate-spin" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:loader shrink-0 text-dimmed size-5 animate-spin" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -684,7 +684,7 @@ exports[`CommandPalette > renders with loadingIcon correctly 1`] = `
 
 exports[`CommandPalette > renders with modelValue correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-10"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-10"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -721,7 +721,7 @@ exports[`CommandPalette > renders with modelValue correctly 1`] = `
 
 exports[`CommandPalette > renders with placeholder correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -758,7 +758,7 @@ exports[`CommandPalette > renders with placeholder correctly 1`] = `
 
 exports[`CommandPalette > renders with selectedIcon correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-10"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-10"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -795,7 +795,7 @@ exports[`CommandPalette > renders with selectedIcon correctly 1`] = `
 
 exports[`CommandPalette > renders with ui correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-10"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-10"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1"><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
@@ -832,7 +832,7 @@ exports[`CommandPalette > renders with ui correctly 1`] = `
 
 exports[`CommandPalette > renders without data correctly 1`] = `
 "<div dir="ltr" class="flex flex-col min-h-0 min-w-0 divide-y divide-default">
-  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value=""><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
+  <div class="relative inline-flex items-center [&amp;>input]:h-12"><input type="text" placeholder="Type a command or search..." class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-transparent ps-9" autocomplete="off" aria-disabled="false" value=""><span class="absolute inset-y-0 start-0 flex items-center ps-2.5"><span class="iconify i-lucide:search shrink-0 text-dimmed size-5" aria-hidden="true"></span></span>
     <!--v-if-->
   </div>
   <div class="relative overflow-hidden flex flex-col" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
