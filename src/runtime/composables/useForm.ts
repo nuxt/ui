@@ -211,17 +211,17 @@ export function useForm<S extends FormSchema, T extends boolean = true, State ex
   }
 
   function reset(): void
+  function reset<U extends DeepPartial<State>>(values: (value: State) => U, options?: {
+    keepErrors?: boolean
+    keepDirty?: boolean
+  }): void
   function reset<U extends DeepPartial<State>>(values: U, options?: {
     keepErrors?: boolean
     keepDirty?: boolean
     keepDefaultValues?: boolean
   }): void
-  function reset<U extends DeepPartial<State>>(values: (value: U) => U, options?: {
-    keepErrors?: boolean
-    keepDirty?: boolean
-  }): void
   function reset<U extends DeepPartial<State>>(
-    values?: U | ((currentValues: U) => U),
+    values?: U | ((currentValues: State) => U),
     options: {
       keepErrors?: boolean
       keepDirty?: boolean
@@ -234,7 +234,7 @@ export function useForm<S extends FormSchema, T extends boolean = true, State ex
     }
 
     const newValues = typeof values === 'function'
-      ? (values as (currentValues: U) => U)(state as State)
+      ? values(state)
       : values
 
     if (newValues && !options.keepDefaultValues) {

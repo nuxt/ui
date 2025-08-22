@@ -127,7 +127,7 @@ describe('useForm', () => {
         }
       })
 
-      reset((values: any) => ({ ...values, name: 'Jane' }))
+      reset(values => ({ ...values, name: 'Jane' }))
 
       expect(state.name).toBe('Jane')
     })
