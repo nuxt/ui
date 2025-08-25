@@ -2,7 +2,7 @@
 
 exports[`ChangelogVersion > renders with actions slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -19,7 +19,7 @@ exports[`ChangelogVersion > renders with actions slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with as correctly 1`] = `
 "<section class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -34,7 +34,7 @@ exports[`ChangelogVersion > renders with as correctly 1`] = `
 
 exports[`ChangelogVersion > renders with authors correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -59,7 +59,7 @@ exports[`ChangelogVersion > renders with authors correctly 1`] = `
 
 exports[`ChangelogVersion > renders with authors slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -76,7 +76,7 @@ exports[`ChangelogVersion > renders with authors slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with badge correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -99,7 +99,7 @@ exports[`ChangelogVersion > renders with badge correctly 1`] = `
 
 exports[`ChangelogVersion > renders with badge object correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -122,7 +122,7 @@ exports[`ChangelogVersion > renders with badge object correctly 1`] = `
 
 exports[`ChangelogVersion > renders with badge slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -144,7 +144,7 @@ exports[`ChangelogVersion > renders with badge slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with body slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -159,7 +159,7 @@ exports[`ChangelogVersion > renders with body slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with class correctly 1`] = `
 "<article class="absolute">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -174,7 +174,7 @@ exports[`ChangelogVersion > renders with class correctly 1`] = `
 
 exports[`ChangelogVersion > renders with date correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2025-01-01T00:00:00.000Z" class="text-sm/6 text-toned truncate">Jan 1, 2025</time>
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0"><time datetime="2025-01-01T00:00:00.000Z" class="text-sm/6 text-toned truncate">Jan 1, 2025</time>
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
     </div>
@@ -195,7 +195,7 @@ exports[`ChangelogVersion > renders with date correctly 1`] = `
 
 exports[`ChangelogVersion > renders with date slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -218,7 +218,7 @@ exports[`ChangelogVersion > renders with date slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with description correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -238,7 +238,7 @@ exports[`ChangelogVersion > renders with description correctly 1`] = `
 
 exports[`ChangelogVersion > renders with description slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -258,7 +258,7 @@ exports[`ChangelogVersion > renders with description slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with description slot correctly 2`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -278,7 +278,7 @@ exports[`ChangelogVersion > renders with description slot correctly 2`] = `
 
 exports[`ChangelogVersion > renders with footer slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -293,7 +293,7 @@ exports[`ChangelogVersion > renders with footer slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with header slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -308,7 +308,7 @@ exports[`ChangelogVersion > renders with header slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with image correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -330,7 +330,7 @@ exports[`ChangelogVersion > renders with image correctly 1`] = `
 
 exports[`ChangelogVersion > renders with image slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -352,7 +352,7 @@ exports[`ChangelogVersion > renders with image slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with indicator slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">Indicator slot</div>
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">Indicator slot</div>
   <div class="flex flex-col mx-auto max-w-2xl">
     <!--v-if-->
     <!--v-if-->
@@ -362,7 +362,7 @@ exports[`ChangelogVersion > renders with indicator slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with title correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -384,7 +384,7 @@ exports[`ChangelogVersion > renders with title correctly 1`] = `
 
 exports[`ChangelogVersion > renders with title slot correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -406,7 +406,7 @@ exports[`ChangelogVersion > renders with title slot correctly 1`] = `
 
 exports[`ChangelogVersion > renders with title slot correctly 2`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -428,7 +428,7 @@ exports[`ChangelogVersion > renders with title slot correctly 2`] = `
 
 exports[`ChangelogVersion > renders with to & image correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -448,7 +448,7 @@ exports[`ChangelogVersion > renders with to & image correctly 1`] = `
 
 exports[`ChangelogVersion > renders with to correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>
@@ -463,7 +463,7 @@ exports[`ChangelogVersion > renders with to correctly 1`] = `
 
 exports[`ChangelogVersion > renders with ui correctly 1`] = `
 "<article class="relative">
-  <div class="absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
+  <div class="absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0">
     <!--v-if-->
     <div class="size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1">
       <div class="size-2 rounded-full bg-primary"></div>

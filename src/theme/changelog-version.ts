@@ -12,7 +12,7 @@ export default {
     image: 'object-cover object-top w-full h-full',
     authors: 'flex flex-wrap gap-x-4 gap-y-1.5',
     footer: 'border-t border-default pt-5 flex items-center justify-between',
-    indicator: 'absolute left-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0',
+    indicator: 'absolute start-0 top-0 w-32 hidden lg:flex items-center justify-end gap-3 min-w-0',
     dot: 'size-4 rounded-full bg-default ring ring-default flex items-center justify-center my-1',
     dotInner: 'size-2 rounded-full bg-primary'
   },
