@@ -149,8 +149,8 @@ importers:
         specifier: ^2.3.8
         version: 2.3.8
       unplugin-auto-import:
-        specifier: ^19.3.0
-        version: 19.3.0(@nuxt/kit@4.0.3(magicast@0.3.5))(@vueuse/core@13.7.0(vue@3.5.19(typescript@5.8.3)))
+        specifier: ^20.0.0
+        version: 20.0.0(@nuxt/kit@4.0.3(magicast@0.3.5))(@vueuse/core@13.7.0(vue@3.5.19(typescript@5.8.3)))
       unplugin-vue-components:
         specifier: ^28.8.0
         version: 28.8.0(@babel/parser@7.28.3)(@nuxt/kit@4.0.3(magicast@0.3.5))(vue@3.5.19(typescript@5.8.3))
@@ -7546,6 +7546,18 @@ packages:
     engines: {node: '>=14'}
     peerDependencies:
       '@nuxt/kit': ^3.2.2
+      '@vueuse/core': '*'
+    peerDependenciesMeta:
+      '@nuxt/kit':
+        optional: true
+      '@vueuse/core':
+        optional: true
+
+  unplugin-auto-import@20.0.0:
+    resolution: {integrity: sha512-YAqD07gQa5PpGlhLFQ9rWDtGa42nBR2oNMudnX7G5P8XmkQx3EPL7sKNQroTdt5ehwks55NHy0dzxwwA3xtqQg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@nuxt/kit': ^4.0.0
       '@vueuse/core': '*'
     peerDependenciesMeta:
       '@nuxt/kit':
@@ -16449,6 +16461,18 @@ snapshots:
       normalize-path: 2.1.1
 
   unplugin-auto-import@19.3.0(@nuxt/kit@4.0.3(magicast@0.3.5))(@vueuse/core@13.7.0(vue@3.5.19(typescript@5.8.3))):
+    dependencies:
+      local-pkg: 1.1.1
+      magic-string: 0.30.18
+      picomatch: 4.0.3
+      unimport: 4.1.1
+      unplugin: 2.3.8
+      unplugin-utils: 0.2.4
+    optionalDependencies:
+      '@nuxt/kit': 4.0.3(magicast@0.3.5)
+      '@vueuse/core': 13.7.0(vue@3.5.19(typescript@5.8.3))
+
+  unplugin-auto-import@20.0.0(@nuxt/kit@4.0.3(magicast@0.3.5))(@vueuse/core@13.7.0(vue@3.5.19(typescript@5.8.3))):
     dependencies:
       local-pkg: 1.1.1
       magic-string: 0.30.18
