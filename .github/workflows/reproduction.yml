@@ -22,6 +22,7 @@ jobs:
           days-before-issue-close: 7
           ignore-updates: true
           remove-stale-when-updated: false
-          close-issue-message: This issue was closed because it was open for 7 days without a reproduction.
-          close-issue-label: closed-by-bot
+          close-issue-message: |
+            Hi! 👋 This issue was closed because it was open for 7 days without a reproduction.
+          close-issue-label: 'closed-by-bot'
           operations-per-run: 300 #default 30
