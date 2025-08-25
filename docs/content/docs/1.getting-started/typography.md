@@ -11,7 +11,7 @@ When using Nuxt UI with [Nuxt Content](https://content.nuxt.com/), you get acces
 
 When using the [`<ContentRenderer>`](https://content.nuxt.com/docs/components/content-renderer) component, your markdown content will be automatically styled with beautiful typography and consistent spacing. This includes headings, paragraphs, lists, tables, code blocks and more - no additional configuration required.
 
-::note{to="https://content.nuxt.com/docs/getting-started/installation" target="_blank"}
+::note{to="/docs/getting-started/content"}
 You can follow `@nuxt/content` installation guide to get started.
 ::
 
