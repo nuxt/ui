@@ -152,8 +152,8 @@ importers:
         specifier: ^19.3.0
         version: 19.3.0(@nuxt/kit@4.0.3(magicast@0.3.5))(@vueuse/core@13.7.0(vue@3.5.19(typescript@5.8.3)))
       unplugin-vue-components:
-        specifier: ^28.8.0
-        version: 28.8.0(@babel/parser@7.28.3)(@nuxt/kit@4.0.3(magicast@0.3.5))(vue@3.5.19(typescript@5.8.3))
+        specifier: ^29.0.0
+        version: 29.0.0(@babel/parser@7.28.3)(@nuxt/kit@4.0.3(magicast@0.3.5))(vue@3.5.19(typescript@5.8.3))
       valibot:
         specifier: ^1.0.0
         version: 1.1.0(typescript@5.8.3)
@@ -7559,6 +7559,19 @@ packages:
 
   unplugin-vue-components@28.8.0:
     resolution: {integrity: sha512-2Q6ZongpoQzuXDK0ZsVzMoshH0MWZQ1pzVL538G7oIDKRTVzHjppBDS8aB99SADGHN3lpGU7frraCG6yWNoL5Q==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@babel/parser': ^7.15.8
+      '@nuxt/kit': ^3.2.2 || ^4.0.0
+      vue: 2 || 3
+    peerDependenciesMeta:
+      '@babel/parser':
+        optional: true
+      '@nuxt/kit':
+        optional: true
+
+  unplugin-vue-components@29.0.0:
+    resolution: {integrity: sha512-M2DX44g4/jvBkB0V6uwqTbkTd5DMRHpeGoi/cIKwGG4HPuNxLbe8zoTStB2n12hoDiWc9I1PIRQruRWExNXHlQ==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -16466,6 +16479,23 @@ snapshots:
       picomatch: 4.0.3
 
   unplugin-vue-components@28.8.0(@babel/parser@7.28.3)(@nuxt/kit@4.0.3(magicast@0.3.5))(vue@3.5.19(typescript@5.8.3)):
+    dependencies:
+      chokidar: 3.6.0
+      debug: 4.3.7
+      local-pkg: 1.1.1
+      magic-string: 0.30.18
+      mlly: 1.8.0
+      tinyglobby: 0.2.14
+      unplugin: 2.3.8
+      unplugin-utils: 0.2.4
+      vue: 3.5.19(typescript@5.8.3)
+    optionalDependencies:
+      '@babel/parser': 7.28.3
+      '@nuxt/kit': 4.0.3(magicast@0.3.5)
+    transitivePeerDependencies:
+      - supports-color
+
+  unplugin-vue-components@29.0.0(@babel/parser@7.28.3)(@nuxt/kit@4.0.3(magicast@0.3.5))(vue@3.5.19(typescript@5.8.3)):
     dependencies:
       chokidar: 3.6.0
       debug: 4.3.7
