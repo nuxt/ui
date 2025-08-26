@@ -288,7 +288,7 @@ export function useForm<S extends FormSchema, T extends boolean = true, State ex
   const _handleFocusLogic = (name: Path<State>) => _updateFieldState(name,
     'focus', undefined!)
 
-  function getEventValue(event: Event | CustomEvent, currentValue: any) {
+  function getEventValue(event: Event | CustomEvent, currentValue?: any) {
     const isCustomEvent = event instanceof CustomEvent
     const payload = isCustomEvent ? event.detail : event.target
 
@@ -297,8 +297,10 @@ export function useForm<S extends FormSchema, T extends boolean = true, State ex
       if (target.type === 'checkbox' && 'checked' in target) {
         return target.checked
       }
-      if (typeof currentValue === 'number' && 'valueAsNumber' in target) {
-        return !Number.isNaN(target.valueAsNumber) ? target.valueAsNumber : target.value
+      if (currentValue) {
+        if (typeof currentValue === 'number' && 'valueAsNumber' in target) {
+          return !Number.isNaN(target.valueAsNumber) ? target.valueAsNumber : target.value
+        }
       }
       return target.value
     }
@@ -344,16 +346,16 @@ export function useForm<S extends FormSchema, T extends boolean = true, State ex
     const target = event.target as HTMLInputElement
     const name = target.name as Path<State>
     if (!name) return
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    _handleInputLogic(name, value as any)
+    const value = getEventValue(event)
+    _handleInputLogic(name, value)
   }
 
   function handleChange(event: Event) {
     const target = event.target as HTMLInputElement
     const name = target.name as Path<State>
     if (!name) return
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    _handleChangeLogic(name, value as any)
+    const value = getEventValue(event)
+    _handleChangeLogic(name, value)
   }
 
   function setFieldError<K extends Path<State>>(name: K, error: Omit<FormErrorWithId, 'name'>) {
