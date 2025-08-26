@@ -83,6 +83,42 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
   return isEqual(value, currentValue)
 }
 
+export function isDateObject(value: unknown): value is Date {
+  return value instanceof Date
+}
+
+export function isNullOrUndefined(value: unknown): value is null | undefined {
+  return value == null
+}
+
+export function isObject<T extends object>(value: unknown): value is T {
+  return !isNullOrUndefined(value) && !Array.isArray(value) && typeof value === 'object' && !isDateObject(value)
+}
+
+export function isEmpty(value: unknown): boolean {
+  if (isNullOrUndefined(value)) {
+    return true
+  }
+
+  if (typeof value === 'string') {
+    return value.length === 0
+  }
+
+  if (Array.isArray(value)) {
+    return value.length === 0
+  }
+
+  if (value instanceof Map || value instanceof Set) {
+    return value.size === 0
+  }
+
+  if (isObject(value)) {
+    return Object.keys(value).length === 0
+  }
+
+  return false
+};
+
 export function getDisplayValue<T, V>(
   items: T[],
   value: V | undefined | null,
@@ -93,7 +129,7 @@ export function getDisplayValue<T, V>(
 ): string | undefined {
   const { valueKey, labelKey } = options
 
-  if (value === null || value === undefined) {
+  if (isEmpty(value)) {
     return undefined
   }
 
