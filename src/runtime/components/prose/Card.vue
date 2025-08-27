@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { Component } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/card'
 import type { IconProps, LinkProps } from '../../types'
@@ -10,7 +9,7 @@ type ProseCard = ComponentConfig<typeof theme, AppConfig, 'card', 'ui.prose'>
 export interface ProseCardProps {
   to?: LinkProps['to']
   target?: LinkProps['target']
-  icon?: Exclude<IconProps['name'], Component>
+  icon?: IconProps['name']
   title?: string
   description?: string
   /**

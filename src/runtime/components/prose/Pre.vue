@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { Component } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/pre'
 import type { IconProps } from '../../types'
@@ -8,7 +7,7 @@ import type { ComponentConfig } from '../../types/tv'
 type ProsePre = ComponentConfig<typeof theme, AppConfig, 'pre', 'ui.prose'>
 
 export interface ProsePreProps {
-  icon?: Exclude<IconProps['name'], Component>
+  icon?: IconProps['name']
   code?: string
   language?: string
   filename?: string

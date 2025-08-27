@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { Component } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/code-group'
@@ -50,7 +49,7 @@ const rerenderCount = ref(1)
 const items = computed<{
   index: number
   label: string
-  icon: Exclude<IconProps['name'], Component>
+  icon: IconProps['name']
   component: any
 }[]>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
