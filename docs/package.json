@@ -14,7 +14,7 @@
     "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@fdb0248",
     "@nuxtjs/plausible": "^1.2.0",
     "@octokit/rest": "^21.1.1",
-    "@vueuse/nuxt": "^13.7.0",
+    "@vueuse/nuxt": "^13.8.0",
     "date-fns": "^4.1.0",
     "joi": "^18.0.1",
     "nuxt": "^4.0.3",
@@ -25,6 +25,6 @@
     "v-calendar": "^3.1.2",
     "valibot": "^1.1.0",
     "yup": "^1.7.0",
-    "zod": "^4.1.1"
+    "zod": "^4.1.3"
   }
 }
