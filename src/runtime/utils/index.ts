@@ -83,25 +83,17 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
   return isEqual(value, currentValue)
 }
 
-export function isDateObject(value: unknown): value is Date {
-  return value instanceof Date
-}
-
-export function isNullOrUndefined(value: unknown): value is null | undefined {
-  return value == null
-}
-
-export function isObject<T extends object>(value: unknown): value is T {
-  return !isNullOrUndefined(value) && !Array.isArray(value) && typeof value === 'object' && !isDateObject(value)
-}
-
 export function isEmpty(value: unknown): boolean {
-  if (isNullOrUndefined(value)) {
+  if (value == null) {
     return true
   }
 
+  if (typeof value === 'boolean' || typeof value === 'number') {
+    return false
+  }
+
   if (typeof value === 'string') {
-    return value.length === 0
+    return value.trim().length === 0
   }
 
   if (Array.isArray(value)) {
@@ -112,12 +104,21 @@ export function isEmpty(value: unknown): boolean {
     return value.size === 0
   }
 
-  if (isObject(value)) {
-    return Object.keys(value).length === 0
+  if (value instanceof Date || value instanceof RegExp || typeof value === 'function') {
+    return false
+  }
+
+  if (typeof value === 'object') {
+    for (const _ in value as object) {
+      if (Object.prototype.hasOwnProperty.call(value, _)) {
+        return false
+      }
+    }
+    return true
   }
 
   return false
-};
+}
 
 export function getDisplayValue<T, V>(
   items: T[],
