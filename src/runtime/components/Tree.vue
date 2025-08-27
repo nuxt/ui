@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
 import type { DynamicSlots, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { IconProps } from './Icon.vue'
 
 type Tree = ComponentConfig<typeof theme, AppConfig, 'tree'>
 
@@ -107,7 +108,7 @@ import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
-import UIcon, { type IconProps } from './Icon.vue'
+import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 

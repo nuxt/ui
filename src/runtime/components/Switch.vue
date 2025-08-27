@@ -3,6 +3,7 @@ import type { SwitchRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/switch'
 import type { ComponentConfig } from '../types/tv'
+import type { IconProps } from './Icon.vue'
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>
 
@@ -61,7 +62,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
-import UIcon, { type IconProps } from './Icon.vue'
+import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 

@@ -5,6 +5,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/stepper'
 import type { DynamicSlots } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
+import type { IconProps } from './Icon.vue'
 
 type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>
 
@@ -75,7 +76,7 @@ import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSepa
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import UIcon, { type IconProps } from './Icon.vue'
+import UIcon from './Icon.vue'
 
 const props = withDefaults(defineProps<StepperProps<T>>(), {
   orientation: 'horizontal',
