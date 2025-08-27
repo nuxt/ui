@@ -2,8 +2,8 @@
 import type { SwitchRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/switch'
+import type { IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
-import type { IconProps } from './Icon.vue'
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>
 

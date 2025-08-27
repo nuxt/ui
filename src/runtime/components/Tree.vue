@@ -3,9 +3,9 @@
 import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
+import type { IconProps } from '../types'
 import type { DynamicSlots, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
-import type { IconProps } from './Icon.vue'
 
 type Tree = ComponentConfig<typeof theme, AppConfig, 'tree'>
 
