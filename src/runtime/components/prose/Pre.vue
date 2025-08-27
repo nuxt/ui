@@ -32,7 +32,6 @@ import UCodeIcon from './CodeIcon.vue'
 import UButton from '../Button.vue'
 
 const props = defineProps<ProsePreProps>()
-console.log('props', props)
 defineSlots<ProsePreSlots>()
 
 const { t } = useLocale()

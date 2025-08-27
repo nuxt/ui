@@ -62,7 +62,7 @@ const versions = [{
       :badge="undefined"
       class="flex items-start"
       :ui="{
-        container: 'max-w-lg mr-0',
+        container: 'max-w-lg me-0',
         indicator: 'sticky top-(--ui-header-height) pt-4 -mt-4 flex flex-col items-end'
       }"
     >

@@ -1,8 +1,8 @@
 title: The Intuitive Vue UI Library
-description: Create beautiful, responsive & accessible web apps quickly with Vue or Nuxt. Nuxt UI is an open-source UI library of 50+ customizable components built with Tailwind CSS and Reka UI.
+description: Create beautiful, responsive & accessible web apps quickly with Vue or Nuxt. Nuxt UI is an open-source UI library of 100+ customizable components built with Tailwind CSS and Reka UI.
 hero:
   title: The Intuitive Vue UI Library
-  description: Create beautiful, responsive & accessible web apps quickly with Vue or Nuxt. Nuxt UI is an open-source UI library of 50+ customizable components built with Tailwind CSS and Reka UI.
+  description: Create beautiful, responsive & accessible web apps quickly with Vue or Nuxt. Nuxt UI is an open-source UI library of 100+ customizable components built with Tailwind CSS and Reka UI.
   links:
     - label: Get started
       to: /docs/getting-started/installation/nuxt
@@ -17,7 +17,7 @@ hero:
       trailingIcon: i-lucide-arrow-right
   features:
     - icon: i-logos-tailwindcss-icon
-      title: Styled with Tailwind CSS v4
+      title: Styled with Tailwind CSS
       description: Beautifully styled by default, overwrite any style you want.
     - icon: i-custom-reka-ui
       title: Accessible with Reka UI
@@ -27,7 +27,7 @@ hero:
       description: Auto-complete and type safety for all components.
 features:
   - title: Build for the modern web
-    description: Powered by Tailwind CSS v4 and Reka UI for top performance and accessibility.
+    description: Powered by Tailwind CSS and Reka UI for top performance and accessibility.
     icon: i-lucide-rocket
     to: /docs/getting-started
   - title: Flexible design system
@@ -35,7 +35,7 @@ features:
     icon: i-lucide-swatch-book
     to: /docs/getting-started/theme#design-system
   - title: Internationalization (i18n)
-    description: Nuxt UI is translated into 30+ languages, works well with i18n and multi-directional support (LTR/RTL).
+    description: Nuxt UI is translated into 50+ languages, works well with i18n and multi-directional support (LTR/RTL).
     icon: i-lucide-globe
     to: /docs/getting-started/i18n/nuxt
   - title: Easy font customization
@@ -61,13 +61,13 @@ design_system:
       trailingIcon: i-lucide-arrow-right
   features:
     - title: Color aliases via AppConfig
-      description: Configure 7 semantic color aliases (primary, secondary, success, info, warning, error, neutral) at runtime through AppConfig without rebuilding your application
+      description: Configure 7 semantic color aliases (primary, secondary, success, info, warning, error, neutral) at runtime through AppConfig without rebuilding your application.
       icon: i-lucide-palette
     - title: Comprehensive design tokens
-      description: Extensive set of neutral palette tokens for text, backgrounds, and borders with automatic light/dark mode support via CSS variables like --ui-text, --ui-bg, --ui-border
+      description: Extensive set of neutral palette tokens for text, backgrounds, and borders with automatic light/dark mode support via CSS variables like --ui-text, --ui-bg, --ui-border.
       icon: i-lucide-component
     - title: Global style variables
-      description: Customize global styling with --ui-radius for consistent border rounding and --ui-container for layout widths across your entire application
+      description: Customize global styling with --ui-radius for consistent border rounding and --ui-container for layout widths across your entire application.
       icon: i-lucide-ruler
   code: |
     ::code-group
@@ -118,13 +118,13 @@ component_customization:
       trailingIcon: i-lucide-arrow-right
   features:
     - title: Powerful slot and variant system
-      description: Customize component parts with slots and apply different styles based on props, creating consistent UI patterns with granular control over styling
+      description: Customize component parts with slots and apply different styles based on props, creating consistent UI patterns with granular control over styling.
       icon: i-lucide-layout-grid
     - title: Global theme with AppConfig
-      description: Configure component styles project-wide with a centralized AppConfig that maintains consistency across your application without rebuilding
+      description: Configure component styles project-wide with a centralized AppConfig that maintains consistency across your application without rebuilding.
       icon: i-lucide-settings-2
     - title: Per-component customization
-      description: Fine-tune individual components with the ui prop for slot-specific styling and class prop for root element overrides, providing maximum flexibility
+      description: Fine-tune individual components with the ui prop for slot-specific styling and class prop for root element overrides, providing maximum flexibility.
       icon: i-lucide-component
   code: |
     ::code-group
@@ -164,6 +164,25 @@ component_customization:
     ```
 
     ::
+templates:
+  title: Build faster with official templates
+  description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
+  links:
+    - label: Explore templates
+      to: /templates
+      variant: outline
+      color: neutral
+      trailingIcon: i-lucide-arrow-right
+  features:
+    - title: Production-ready templates
+      description: All templates are built with best practices, SEO optimized, and ready to deploy to production immediately.
+      icon: i-lucide-rocket
+    - title: Nuxt & Vue support
+      description: Templates available for both Nuxt and Vue applications, choose the framework that best fits your needs.
+      icon: i-simple-icons-vuedotjs
+    - title: Customizable & extensible
+      description: Built on top of Nuxt UI components, easily customize colors, fonts, and layouts to match your brand.
+      icon: i-lucide-palette
 community:
   title: Nuxt UI open-source community
   description: Join our thriving community to contribute code, report issues, suggest features, or help with documentation. Every contribution makes Nuxt UI better for everyone.

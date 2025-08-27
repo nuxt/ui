@@ -28,6 +28,11 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
     ].filter(Boolean) as string[]
   })
   const overrideNames = new Set(overrides.map(c => `${options.prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`))
+  const overridePaths = new Map(overrides.map((c) => {
+    const name = c.replace(/\.vue$/, '')
+    const componentName = `${options.prefix}${name.split('/').pop()}`
+    return [componentName, c]
+  }))
 
   const inertiaOverrides = globSync('**/*.vue', {
     cwd: join(runtimeDir, 'inertia/components')
@@ -46,8 +51,10 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
         if (options.inertia && inertiaOverrideNames.has(componentName)) {
           return { name: 'default', from: join(runtimeDir, 'inertia/components', `${componentName.slice(options.prefix.length)}.vue`) }
         }
-        if (overrideNames.has(componentName))
-          return { name: 'default', from: join(runtimeDir, 'vue/components', `${componentName.slice(options.prefix.length)}.vue`) }
+        if (overrideNames.has(componentName)) {
+          const relativePath = overridePaths.get(componentName)
+          return { name: 'default', from: join(runtimeDir, 'vue/components', relativePath as string) }
+        }
         if (componentNames.has(componentName))
           return { name: 'default', from: join(runtimeDir, 'components', `${componentName.slice(options.prefix.length)}.vue`) }
       }
@@ -78,7 +85,8 @@ export default function ComponentImportPlugin(options: NuxtUIOptions & { prefix:
           return join(runtimeDir, 'inertia/components', `${filename}.vue`)
         }
         if (filename && overrideNames.has(`${options.prefix}${filename}`)) {
-          return join(runtimeDir, 'vue/components', `${filename}.vue`)
+          const relativePath = overridePaths.get(`${options.prefix}${filename}`)
+          return join(runtimeDir, 'vue/components', relativePath as string)
         }
       }
     },

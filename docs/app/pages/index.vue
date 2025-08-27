@@ -17,12 +17,16 @@ useSeoMeta({
   ogImage: joinURL(url, '/og-image.png')
 })
 
-const { data: components } = await useAsyncData('ui-components', () => {
+const { data: components } = await useAsyncData('index-components', () => {
   return queryCollection('docs')
     .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
     .select('path', 'title', 'description', 'category')
     .all()
+})
+
+const { data: templates } = await useAsyncData('index-templates', () => queryCollection('templates').first(), {
+  transform: data => data?.templates?.filter(template => template.framework === 'nuxt') || []
 })
 
 const { data: module } = await useFetch('/api/module.json')
@@ -212,6 +216,54 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
     <USeparator />
 
     <UPageSection
+      :title="page.templates.title"
+      :description="page.templates.description"
+      :links="page.templates.links"
+      :features="page.templates.features"
+      orientation="horizontal"
+    >
+      <UCarousel
+        v-slot="{ item }"
+        loop
+        dots
+        fade
+        wheel-gestures
+        :contain-scroll="false"
+        :autoplay="{ delay: 3000 }"
+        :items="templates"
+        :ui="{
+          container: 'py-px',
+          viewport: 'px-px'
+        }"
+      >
+        <UPageCard
+          :to="item.links?.[0]?.to"
+          :icon="item.icon"
+          :title="item.title"
+          target="_blank"
+          variant="subtle"
+          class="group rounded-md"
+          :ui="{
+            container: 'p-4 sm:p-4',
+            wrapper: 'flex-row items-center gap-1.5',
+            leading: 'mb-0',
+            leadingIcon: 'text-highlighted'
+          }"
+        >
+          <UColorModeImage
+            :light="item.thumbnail.light"
+            :dark="item.thumbnail.dark"
+            :alt="item.title"
+            class="rounded-lg w-full border border-default aspect-video"
+            loading="lazy"
+          />
+        </UPageCard>
+      </UCarousel>
+    </UPageSection>
+
+    <USeparator />
+
+    <UPageSection
       :title="page.community.title"
       :description="page.community.description"
       :links="page.community.links"
@@ -221,8 +273,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
     >
       <template #features>
         <li>
-          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0">
-            <p class="text-4xl font-semibold text-highlighted truncate">
+          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0 group">
+            <p class="text-4xl font-semibold truncate text-highlighted group-hover:text-primary transition-colors">
               {{ format(module?.stats?.downloads ?? 0) }}+
             </p>
             <p class="text-muted text-sm truncate">monthly downloads</p>
@@ -230,8 +282,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </li>
 
         <li>
-          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0">
-            <p class="text-4xl font-semibold text-highlighted truncate">
+          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0 group">
+            <p class="text-4xl font-semibold text-highlighted truncate group-hover:text-primary transition-colors">
               {{ format(module?.stats?.stars ?? 0) }}+
             </p>
             <p class="text-muted text-sm truncate">GitHub stars</p>
@@ -239,8 +291,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </li>
 
         <li>
-          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0">
-            <p class="text-4xl font-semibold text-highlighted truncate">
+          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0 group">
+            <p class="text-4xl font-semibold text-highlighted truncate group-hover:text-primary transition-colors">
               250+
             </p>
             <p class="text-muted text-sm truncate">Contributors</p>
@@ -250,62 +302,6 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
       <div ref="contributorsRef" class="p-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 overflow-hidden flex relative">
         <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
-      </div>
-    </UPageSection>
-
-    <UPageSection :ui="{ container: 'relative !pb-0 overflow-hidden' }">
-      <template #title>
-        Build faster with Nuxt UI <span class="text-primary">Templates</span>.
-      </template>
-      <template #description>
-        A collection of premium Vue components, composables and utils built on top of Nuxt UI. <br> Focused on structure and layout, these <span class="text-default">responsive components</span> are designed to be the perfect <span class="text-default">building blocks for your next idea</span>.
-      </template>
-      <template #links>
-        <UButton to="/templates" size="lg" variant="outline" trailing-icon="i-lucide-arrow-right" color="neutral">
-          Explore templates
-        </UButton>
-      </template>
-
-      <LazyStarsBg />
-
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      <div class="relative h-[400px] border border-default bg-muted overflow-hidden border-x-0 -mx-4 sm:-mx-6 lg:mx-0 lg:border-x w-screen lg:w-full">
-        <UMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
-          <img
-            v-for="i in 4"
-            :key="i"
-            :src="`/blocks/image${i}.png`"
-            width="460"
-            height="258"
-            loading="lazy"
-            :alt="`Nuxt UI Screenshot ${i}`"
-            class="aspect-video border border-default rounded-lg bg-white"
-          >
-        </UMarquee>
-        <UMarquee orientation="vertical" :overlay="false" :ui="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
-          <img
-            v-for="i in [5, 6, 7, 8]"
-            :key="i"
-            :src="`/blocks/image${i}.png`"
-            width="460"
-            height="258"
-            loading="lazy"
-            :alt="`Nuxt UI Screenshot ${i}`"
-            class="aspect-video border border-default rounded-lg bg-white"
-          >
-        </UMarquee>
-        <UMarquee reverse orientation="vertical" :overlay="false" :ui="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
-          <img
-            v-for="i in [9, 10, 11, 12]"
-            :key="i"
-            :src="`/blocks/image${i}.png`"
-            width="460"
-            height="258"
-            loading="lazy"
-            :alt="`Nuxt UI Screenshot ${i}`"
-            class="aspect-video border border-default rounded-lg bg-white"
-          >
-        </UMarquee>
       </div>
     </UPageSection>
   </UMain>
