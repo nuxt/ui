@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Component } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/callout'
 import type { IconProps, LinkProps } from '../../types'
@@ -9,7 +10,7 @@ type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'ui.pros
 export interface ProseCalloutProps {
   to?: LinkProps['to']
   target?: LinkProps['target']
-  icon?: IconProps['name']
+  icon?: Exclude<IconProps['name'], Component>
   /**
    * @defaultValue 'neutral'
    */
