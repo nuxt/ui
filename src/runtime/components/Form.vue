@@ -59,7 +59,7 @@ export interface FormEmits<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface FormSlots {
-  default(props?: { errors: FormError[], loading: boolean }): any
+  default(props: { errors: FormError[], loading: boolean }): any
 }
 </script>
 
@@ -67,7 +67,7 @@ export interface FormSlots {
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey } from '../composables/useFormField'
+import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import { validateSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
@@ -150,7 +150,7 @@ onUnmounted(() => {
 })
 
 const errors = ref<FormErrorWithId[]>([])
-provide('form-errors', errors)
+provide(formErrorsInjectionKey, errors)
 
 const inputs = ref<{ [P in keyof I]?: { id?: string, pattern?: RegExp } }>({})
 provide(formInputsInjectionKey, inputs as any)

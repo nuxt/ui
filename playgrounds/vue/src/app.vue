@@ -2,10 +2,8 @@
 import { splitByCase, upperFirst } from 'scule'
 import { useRouter } from 'vue-router'
 import { reactive, ref } from 'vue'
-import { useColorMode } from '@vueuse/core'
 
 const appConfig = useAppConfig()
-const mode = useColorMode()
 
 appConfig.toaster = reactive({
   position: 'bottom-right' as const,
@@ -93,13 +91,7 @@ defineShortcuts({
       <UNavigationMenu :items="items" orientation="horizontal" class="lg:hidden border-b border-default [&>div]:min-w-min overflow-x-auto" />
 
       <div class="fixed top-15 lg:top-3 end-4 flex items-center gap-2">
-        <UButton
-          :icon="mode === 'dark' ? 'i-lucide-moon' : 'i-lucide-sun'"
-          color="neutral"
-          variant="ghost"
-          :aria-label="`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`"
-          @click="mode = mode === 'dark' ? 'light' : 'dark'"
-        />
+        <UColorModeButton />
       </div>
 
       <div class="flex-1 flex flex-col items-center justify-around overflow-y-auto w-full py-14 px-4">
