@@ -30,7 +30,6 @@ import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'rek
 import { useState, useAppConfig } from '#imports'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
-import type { IconProps } from '../../types'
 
 const props = withDefaults(defineProps<ProseCodeGroupProps>(), {
   defaultValue: '0'
@@ -49,7 +48,7 @@ const rerenderCount = ref(1)
 const items = computed<{
   index: number
   label: string
-  icon: IconProps['name']
+  icon: string
   component: any
 }[]>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
