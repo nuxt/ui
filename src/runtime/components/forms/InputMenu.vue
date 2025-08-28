@@ -322,6 +322,10 @@ export default defineComponent({
       }
     })
 
+    function isObject(object: any): object is boolean {
+      return !Array.isArray(object) && object !== null && typeof object === 'object'
+    }
+
     const label = computed(() => {
       if (!props.modelValue) return null
 
@@ -334,7 +338,7 @@ export default defineComponent({
       }
 
       function compareValues(value1: any, value2: any) {
-        if (by.value && typeof by.value !== 'function' && typeof value1 === 'object' && typeof value2 === 'object') {
+        if (by.value && typeof by.value !== 'function' && isObject(value1) && isObject(value2)) {
           return isEqual(value1[props.by], value2[props.by])
         }
         return isEqual(value1, value2)
