@@ -1,4 +1,5 @@
-import { ref, type Ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import type { Ref } from 'vue'
 
 export const useCarouselScroll = (el: Ref<HTMLElement>) => {
   const x = ref<number>(0)

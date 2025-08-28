@@ -26,8 +26,7 @@ export default defineNuxtConfig({
     module,
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
-    'nuxt-component-meta',
-    'nuxt-cloudflare-analytics'
+    'nuxt-component-meta'
   ],
 
   site: {
@@ -117,11 +116,6 @@ export default defineNuxtConfig({
         }
       })
     }
-  },
-
-  cloudflareAnalytics: {
-    token: '1e2b0c5e9a214f0390b9b94e043d8d4c',
-    scriptPath: false
   },
 
   componentMeta: {

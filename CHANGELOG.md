@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.22.1](https://github.com/nuxt/ui/compare/v2.22.0...v2.22.1) (2025-07-16)
+
+### Bug Fixes
+
+* **Badge/Button:** support numeric zero as visible label ([#4116](https://github.com/nuxt/ui/issues/4116)) ([2971a31](https://github.com/nuxt/ui/commit/2971a3124299e927ddb506bb0fc61b906aa0cfeb))
+
 ## [2.22.0](https://github.com/nuxt/ui/compare/v2.21.1...v2.22.0) (2025-04-22)
 
 ### ⚠ BREAKING CHANGES

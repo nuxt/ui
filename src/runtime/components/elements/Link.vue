@@ -33,7 +33,8 @@
 
 <script lang="ts">
 import { isEqual, diff } from 'ohash/utils'
-import { type PropType, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { nuxtLinkProps } from '../../utils'
 
 export default defineComponent({

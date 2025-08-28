@@ -16,7 +16,7 @@
       </NuxtLink>
 
       <UDropdown
-        :items="[[{ label: $route.path.startsWith('/pro') ? `v${pkg.version.split('-')[0]}` : `v${config.version}`, class: 'text-primary-500 dark:text-primary-400' }, { label: 'v3.x', to: 'https://ui.nuxt.com' }]]"
+        :items="[[{ label: 'v4.0.0-alpha.x', to: 'https://ui4.nuxt.com' }, { label: 'v3.x', to: 'https://ui.nuxt.com' }, { label: $route.path.startsWith('/pro') ? `v${pkg.version.split('-')[0]}` : `v${config.version}`, class: 'text-primary-500 dark:text-primary-400' }]]"
         :popper="{ strategy: 'absolute', offsetDistance: 11, placement: 'bottom-start' }"
         :ui="{
           background: 'dark:bg-gray-900',

@@ -1,5 +1,6 @@
 import { inject, ref, computed } from 'vue'
-import { type UseEventBusReturn, useDebounceFn } from '@vueuse/core'
+import { useDebounceFn } from '@vueuse/core'
+import type { UseEventBusReturn } from '@vueuse/core'
 import type { FormEvent, FormEventType, InjectedFormGroupValue } from '../types/form'
 
 type InputProps = {

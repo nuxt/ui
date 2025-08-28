@@ -5,7 +5,8 @@
 </template>
 
 <script lang="ts">
-import { provide, ref, type PropType, defineComponent, onUnmounted, onMounted, readonly } from 'vue'
+import { provide, ref, defineComponent, onUnmounted, onMounted, readonly } from 'vue'
+import type { PropType } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi'
 import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup'

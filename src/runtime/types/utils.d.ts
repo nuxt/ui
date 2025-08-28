@@ -18,8 +18,8 @@ export type NestedKeyOf<ObjectType extends Record<string, any>> = {
     : Key
 }[keyof ObjectType]
 
-type DeepKey<T, Keys extends string[]> =
-  Keys extends [infer First, ...infer Rest]
+type DeepKey<T, Keys extends string[]>
+  = Keys extends [infer First, ...infer Rest]
     ? First extends keyof T
       ? Rest extends string[]
         ? DeepKey<T[First], Rest>
