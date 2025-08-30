@@ -13,6 +13,11 @@ Use the Form component to validate form data using validation libraries such as 
 
 It works with the [FormField](/components/form-field) component to display error messages around form elements automatically.
 
+::tip
+Nuxt UI currently doesn’t provide a component similar to [`AutoForm`](https://www.shadcn-vue.com/docs/components/auto-form) from shadcn-vue.
+For this functionality, you can use the community-maintained module [@norbiros/nuxt-auto-form](https://github.com/Norbiros/nuxt-auto-form)
+::
+
 ### Schema Validation
 
 It requires two props:
