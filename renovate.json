@@ -9,6 +9,10 @@
     "v2",
     "v3"
   ],
+  "ignoreDeps": [
+    "@nuxt/module-builder",
+    "typescript"
+  ],
   "packageRules": [
     {
       "matchBaseBranches": [

@@ -39,8 +39,8 @@ describe('Select', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with modelValue', { props: { ...props, modelValue: items[0] } }],
-    ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
+    ['with modelValue', { props: { ...props, modelValue: items[0]?.value } }],
+    ['with defaultValue', { props: { ...props, defaultValue: items[0]?.value } }],
     ['with valueKey', { props: { ...props, valueKey: 'label' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
