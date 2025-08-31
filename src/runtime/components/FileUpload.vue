@@ -146,7 +146,7 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   layout: 'grid',
   position: 'outside'
 })
-const emits = defineEmits<FileUploadEmits<M>>()
+const emits = defineEmits<Omit<FileUploadEmits<M>, 'update:modelValue'>>()
 const slots = defineSlots<FileUploadSlots<M>>()
 
 const modelValue = defineModel<(M extends true ? File[] : File) | null>()
