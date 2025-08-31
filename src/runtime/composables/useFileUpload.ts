@@ -22,7 +22,14 @@ function parseAcceptToDataTypes(accept: string): string[] | undefined {
 
   const types = accept
     .split(',')
-    .map(type => type.trim())
+    .map((type) => {
+      const trimmedType = type.trim()
+
+      if (trimmedType.includes('/') && trimmedType.endsWith('/*')) {
+        return trimmedType.split('/')[0] || trimmedType
+      }
+      return trimmedType
+    })
     .filter((type) => {
       return !type.startsWith('.')
     })
@@ -67,31 +74,9 @@ export function useFileUpload(options: UseFileUploadOptions) {
   }
 
   onMounted(() => {
-    const { isOverDropZone } = useDropZone(dropzoneRef, {
-      dataTypes: (types) => {
-        if (dataTypes.value === undefined || accept === '*') {
-          return true
-        }
-
-        return types.some((type) => {
-          return dataTypes.value?.some((acceptedType) => {
-            if (acceptedType.endsWith('/*')) {
-              const base = acceptedType.slice(0, acceptedType.indexOf('/'))
-              return type.startsWith(base + '/')
-            } else {
-              return type === acceptedType
-            }
-          })
-        })
-      }, onDrop: (files, event) => {
-        if (!dropzone) {
-          event.preventDefault()
-          return
-        }
-
-        onDrop(files)
-      }
-    })
+    const { isOverDropZone } = dropzone
+      ? useDropZone(dropzoneRef, { dataTypes: dataTypes.value, onDrop })
+      : { isOverDropZone: ref(false) }
 
     watch(isOverDropZone, (value) => {
       isDragging.value = value
