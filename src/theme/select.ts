@@ -81,6 +81,15 @@ export default (options: Required<ModuleOptions>) => {
           empty: 'p-2 text-base'
         }
       }
-    }
+    },
+    compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
+      ...item,
+      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
+    }))
   }, input(options))
+}
+
+function replaceFocus(str: string): string {
+  return str
+    .replace(/focus-visible:/g, 'focus:')
 }

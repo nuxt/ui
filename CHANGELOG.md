@@ -1,5 +1,29 @@
 # Changelog
 
+## [3.3.2](https://github.com/nuxt/ui/compare/v3.3.1...v3.3.2) (2025-08-14)
+
+## [3.3.1](https://github.com/nuxt/ui/compare/v3.3.0...v3.3.1) (2025-08-14)
+
+### Features
+
+* **Form:** support error RegExp in exposed methods ([#4608](https://github.com/nuxt/ui/issues/4608)) ([b8b74a0](https://github.com/nuxt/ui/commit/b8b74a0c333f1cad12781aecd3f20e94b8617763))
+* **Tree:** add `item-wrapper` slot ([#4521](https://github.com/nuxt/ui/issues/4521)) ([411d937](https://github.com/nuxt/ui/commit/411d93710a13a364340609c3219419dab36332cc))
+* **useOverlay:** return promise on `open` method ([#4592](https://github.com/nuxt/ui/issues/4592)) ([58aac86](https://github.com/nuxt/ui/commit/58aac862dd0df26fcce6649c3ea5bd5e95f41405))
+
+### Bug Fixes
+
+* **Drawer:** improve closing animation with `inset` prop ([#4676](https://github.com/nuxt/ui/issues/4676)) ([9da1527](https://github.com/nuxt/ui/commit/9da1527f628a206a9697b32b1ec9f82df5f7c9c7))
+* **FileUpload:** handle wildcard in dropzone `dataTypes` ([#4671](https://github.com/nuxt/ui/issues/4671)) ([729bed4](https://github.com/nuxt/ui/commit/729bed47f589f3f158fa3748ff21376abe19e296))
+* **FileUpload:** improve file removal a11y ([#4607](https://github.com/nuxt/ui/issues/4607)) ([f90bba0](https://github.com/nuxt/ui/commit/f90bba00c140394e9f1c71979a9072503f2377e1))
+* **FileUpload:** open dialog on keyup ([#4629](https://github.com/nuxt/ui/issues/4629)) ([8e9265e](https://github.com/nuxt/ui/commit/8e9265e91f3e43a39a4867565f415faabf6315bc))
+* **FileUpload:** prevent default on keydown ([#4633](https://github.com/nuxt/ui/issues/4633)) ([68d8a98](https://github.com/nuxt/ui/commit/68d8a983ed2665941f7c2ad53bd67b66e8d13f37))
+* **Input:** incorrect rendering of type `date` / `time` on iOS ([#4715](https://github.com/nuxt/ui/issues/4715)) ([93cc83c](https://github.com/nuxt/ui/commit/93cc83cbc74644b9a5a337e1cb8aa963baa5a172))
+* **InputMenu/Select/SelectMenu:** add display value fallback when no items found ([#4689](https://github.com/nuxt/ui/issues/4689)) ([34ca811](https://github.com/nuxt/ui/commit/34ca811ff095ac4cfecc3fc7128cc4703e3b3dbb))
+* **Select/InputMenu:** handle focus via label inside a FormField ([#4696](https://github.com/nuxt/ui/issues/4696)) ([55dbcd2](https://github.com/nuxt/ui/commit/55dbcd20a882e8c72bba975d0633a744284faa19))
+* **Tabs:** add missing Badge import ([#4594](https://github.com/nuxt/ui/issues/4594)) ([fbec29c](https://github.com/nuxt/ui/commit/fbec29c1b7b874ca7c93652abe8bb40b4b9d8ef6))
+* **Toast:** add type for progress `ui` prop ([#4677](https://github.com/nuxt/ui/issues/4677)) ([a8af85c](https://github.com/nuxt/ui/commit/a8af85c14bc24b0065b74c506873e4381495d8d9))
+* **Tooltip:** render only if `text` or `kbds` are present ([#4568](https://github.com/nuxt/ui/issues/4568)) ([5e39cbb](https://github.com/nuxt/ui/commit/5e39cbb3b284f382d910de96d8f19faf4044108e))
+
 ## [3.3.0](https://github.com/nuxt/ui/compare/v3.2.0...v3.3.0) (2025-07-24)
 
 ### Features

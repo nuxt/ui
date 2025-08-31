@@ -22,7 +22,14 @@ function parseAcceptToDataTypes(accept: string): string[] | undefined {
 
   const types = accept
     .split(',')
-    .map(type => type.trim())
+    .map((type) => {
+      const trimmedType = type.trim()
+
+      if (trimmedType.includes('/') && trimmedType.endsWith('/*')) {
+        return trimmedType.split('/')[0] || trimmedType
+      }
+      return trimmedType
+    })
     .filter((type) => {
       return !type.startsWith('.')
     })
