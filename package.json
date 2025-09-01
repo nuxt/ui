@@ -111,7 +111,7 @@
     "release": "release-it --preRelease=alpha"
   },
   "dependencies": {
-    "@ai-sdk/vue": "^2.0.9",
+    "@ai-sdk/vue": "^2.0.29",
     "@iconify/vue": "^5.0.0",
     "@internationalized/date": "^3.9.0",
     "@internationalized/number": "^3.6.5",

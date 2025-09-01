@@ -9,8 +9,8 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/gateway": "^1.0.4",
-    "@ai-sdk/vue": "^2.0.9",
+    "@ai-sdk/gateway": "^1.0.15",
+    "@ai-sdk/vue": "^2.0.29",
     "@iconify-json/logos": "^1.2.9",
     "@iconify-json/lucide": "^1.2.66",
     "@iconify-json/simple-icons": "^1.2.50",
@@ -22,7 +22,7 @@
     "@octokit/rest": "^22.0.0",
     "@vueuse/integrations": "^13.8.0",
     "@vueuse/nuxt": "^13.8.0",
-    "ai": "^5.0.9",
+    "ai": "^5.0.29",
     "better-sqlite3": "^12.2.0",
     "capture-website": "^4.2.0",
     "joi": "^18.0.1",
