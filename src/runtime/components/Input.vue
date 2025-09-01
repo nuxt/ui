@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from '../types'
+import type { ModelModifiers } from '../types/input'
 import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -41,13 +42,7 @@ export interface InputProps<T extends AcceptableValue = AcceptableValue> extends
   highlight?: boolean
   modelValue?: T
   defaultValue?: T
-  modelModifiers?: {
-    string?: boolean
-    number?: boolean
-    trim?: boolean
-    lazy?: boolean
-    nullify?: boolean
-  }
+  modelModifiers?: ModelModifiers
   class?: any
   ui?: Input['slots']
 }
@@ -113,7 +108,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {})
 const inputRef = ref<HTMLInputElement | null>(null)
 
 // Custom function to handle the v-model properties
-function updateInput(value: string | null) {
+function updateInput(value: string | null | undefined) {
   if (props.modelModifiers?.trim) {
     value = value?.trim() ?? null
   }
@@ -122,8 +117,12 @@ function updateInput(value: string | null) {
     value = looseToNumber(value)
   }
 
-  if (props.modelModifiers?.nullify) {
+  if (props.modelModifiers?.nullable) {
     value ||= null
+  }
+
+  if (props.modelModifiers?.optional) {
+    value ||= undefined
   }
 
   modelValue.value = value as T
