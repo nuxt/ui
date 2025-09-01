@@ -29,7 +29,7 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
       </UAvatarGroup>
     </div>
     <div class="flex items-center gap-1.5">
-      <UAvatarGroup v-for="size in sizes" :key="size" :size="size" :max="4">
+      <UAvatarGroup v-for="size in sizes" :key="size" :size="size" :max="2" :more-tooltip="(count) => `${count} more attendees`">
         <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
         <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
         <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />

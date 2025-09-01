@@ -69,9 +69,34 @@ slots:
 :u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
 ::
 
+### More tooltip
+
+Wrap the overflow avatar with a [Tooltip](/components/tooltip) to display a tooltip on hover.
+You can either use a static string or a function that receives the hidden count and returns a string.
+
+::component-code
+---
+prettier: true
+hide:
+  max
+props:
+  max: 2
+  more-tooltip: "Neil Richter"
+slots:
+  default: |
+
+    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
+    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+---
+:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
+:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
+:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
+::
+
 ## Examples
 
-### With tooltip
+### With avatar tooltip
 
 Wrap each avatar with a [Tooltip](/components/tooltip) to display a tooltip on hover.
 
