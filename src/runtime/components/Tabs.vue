@@ -3,7 +3,7 @@
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
-import type { AvatarProps, BadgeProps } from '../types'
+import type { AvatarProps, BadgeProps, IconProps } from '../types'
 import type { DynamicSlots } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -14,7 +14,7 @@ export interface TabsItem {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   /**
    * Display a badge on the item.

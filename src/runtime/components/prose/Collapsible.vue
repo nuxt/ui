@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/collapsible'
+import type { IconProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseCollapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible', 'ui.prose'>
@@ -10,7 +11,7 @@ export interface ProseCollapsibleProps {
    * The icon displayed to toggle the collapsible.
    * @defaultValue appConfig.ui.icons.chevronDown
    */
-  icon?: string
+  icon?: IconProps['name']
   /**
    * The name displayed in the trigger label.
    * @defaultValue t('prose.collapsible.name')

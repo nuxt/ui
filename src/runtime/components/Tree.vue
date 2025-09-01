@@ -3,6 +3,7 @@
 import type { TreeRootProps, TreeRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
+import type { IconProps } from '../types'
 import type { DynamicSlots, GetItemKeys, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -12,12 +13,12 @@ export type TreeItem = {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   label?: string
   /**
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   defaultExpanded?: boolean
   disabled?: boolean
   value?: string
@@ -59,19 +60,19 @@ export interface TreeProps<T extends TreeItem[] = TreeItem[], VK extends GetItem
    * @defaultValue appConfig.ui.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /**
    * The icon displayed when a parent node is expanded.
    * @defaultValue appConfig.ui.icons.folderOpen
    * @IconifyIcon
    */
-  expandedIcon?: string
+  expandedIcon?: IconProps['name']
   /**
    * The icon displayed when a parent node is collapsed.
    * @defaultValue appConfig.ui.icons.folder
    * @IconifyIcon
    */
-  collapsedIcon?: string
+  collapsedIcon?: IconProps['name']
   items?: T
   /** The controlled value of the Tree. Can be bind as `v-model`. */
   modelValue?: GetModelValue<T, VK, M>

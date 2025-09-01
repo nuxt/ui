@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/breadcrumb'
-import type { AvatarProps, LinkProps } from '../types'
+import type { AvatarProps, IconProps, LinkProps } from '../types'
 import type { DynamicSlots } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -13,7 +13,7 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps
   slot?: string
   class?: any
@@ -33,7 +33,7 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
-  separatorIcon?: string
+  separatorIcon?: IconProps['name']
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'

@@ -1,6 +1,6 @@
 <script lang="ts">
 export interface IconProps {
-  name: string
+  name: string | object
   mode?: 'svg' | 'css'
   size?: string | number
   customize?: (
@@ -22,5 +22,6 @@ const iconProps = useForwardProps(reactivePick(props, 'name', 'mode', 'size', 'c
 </script>
 
 <template>
-  <Icon v-bind="iconProps" />
+  <Icon v-if="typeof name === 'string'" v-bind="iconProps" />
+  <component :is="name" v-else />
 </template>

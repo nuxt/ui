@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-links'
-import type { LinkProps } from '../types'
+import type { IconProps, LinkProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type PageLinks = ComponentConfig<typeof theme, AppConfig, 'pageLinks'>
@@ -11,7 +11,7 @@ export interface PageLink extends Omit<LinkProps, 'custom'> {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   class?: any
   ui?: Pick<PageLinks['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>
 }

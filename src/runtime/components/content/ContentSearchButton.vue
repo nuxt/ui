@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-search-button'
-import type { ButtonProps, ButtonSlots, KbdProps, TooltipProps } from '../../types'
+import type { ButtonProps, ButtonSlots, IconProps, KbdProps, TooltipProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSearchButton'>
@@ -12,7 +12,7 @@ export interface ContentSearchButtonProps {
    * @defaultValue appConfig.ui.icons.search
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   /**
    * The label displayed in the button.
    * @defaultValue t('contentSearchButton.label')

@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
-import type { ButtonProps, ChatMessageProps } from '../types'
+import type { ButtonProps, ChatMessageProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
@@ -31,7 +31,7 @@ export interface ChatMessagesProps {
    * @defaultValue appConfig.ui.icons.arrowDown
    * @IconifyIcon
    */
-  autoScrollIcon?: string
+  autoScrollIcon?: IconProps['name']
   /**
    * The `user` messages props.
    * `{ side: 'right', variant: 'soft' }`{lang="ts-type"}

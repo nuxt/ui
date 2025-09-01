@@ -2,6 +2,7 @@
 import type { SwitchRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/switch'
+import type { IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>
@@ -27,17 +28,17 @@ export interface SwitchProps extends Pick<SwitchRootProps, 'disabled' | 'id' | '
    * @defaultValue appConfig.ui.icons.loading
    * @IconifyIcon
    */
-  loadingIcon?: string
+  loadingIcon?: IconProps['name']
   /**
    * Display an icon when the switch is checked.
    * @IconifyIcon
    */
-  checkedIcon?: string
+  checkedIcon?: IconProps['name']
   /**
    * Display an icon when the switch is unchecked.
    * @IconifyIcon
    */
-  uncheckedIcon?: string
+  uncheckedIcon?: IconProps['name']
   label?: string
   description?: string
   class?: any

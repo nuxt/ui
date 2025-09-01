@@ -2,7 +2,7 @@
 import type { NumberFieldRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
-import type { ButtonProps } from '../types'
+import type { ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
@@ -35,7 +35,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @defaultValue appConfig.ui.icons.plus
    * @IconifyIcon
    */
-  incrementIcon?: string
+  incrementIcon?: IconProps['name']
   /** Disable the increment button. */
   incrementDisabled?: boolean
   /**
@@ -48,7 +48,7 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
    * @defaultValue appConfig.ui.icons.minus
    * @IconifyIcon
    */
-  decrementIcon?: string
+  decrementIcon?: IconProps['name']
   /** Disable the decrement button. */
   decrementDisabled?: boolean
   autofocus?: boolean
