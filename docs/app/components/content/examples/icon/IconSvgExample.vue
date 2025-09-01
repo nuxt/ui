@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { h, resolveComponent } from 'vue'
-
-const UIcon = resolveComponent('UIcon')
+import { h } from 'vue'
 
 const IconLightbulb = () => h(
   'svg',
