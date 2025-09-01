@@ -1,5 +1,6 @@
 @import '#build/ui.css';
 @import './keyframes.css';
+@source './components';
 
 @variant light (&:where(.light, .light *));
 @variant dark (&:where(.dark, .dark *));

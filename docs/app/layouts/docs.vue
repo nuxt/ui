@@ -3,7 +3,6 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageChildren } from '@nuxt/content/utils'
 
 const route = useRoute()
-const { framework } = useSharedData()
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
@@ -35,7 +34,8 @@ const categories = {
     title: 'Page'
   }, {
     id: 'content',
-    title: 'Content'
+    title: 'Content',
+    framework: 'nuxt'
   }, {
     id: 'dashboard',
     title: 'Dashboard'
@@ -51,20 +51,8 @@ const categories = {
   }]
 }
 
-function filterChildrenByFramework(items: ContentNavigationItem[]): ContentNavigationItem[] {
-  return items.filter((child) => {
-    if (!child.framework) {
-      return true
-    }
-
-    return child.framework === framework.value
-  })
-}
-
 function groupChildrenByCategory(items: ContentNavigationItem[], slug: string): ContentNavigationItem[] {
-  const filteredItems = filterChildrenByFramework(items)
-
-  const childrenGroupedByCategory = filteredItems.reduce((acc, child) => {
+  const childrenGroupedByCategory = items.reduce((acc, child) => {
     if (child.category) {
       acc[child.category as string] = [...(acc[child.category as string] || []), child]
     } else {
@@ -73,22 +61,22 @@ function groupChildrenByCategory(items: ContentNavigationItem[], slug: string): 
     return acc
   }, {} as Record<string, ContentNavigationItem[]>)
 
-  const grouped = categories[slug as keyof typeof categories]?.map(category => ({
-    ...category,
+  const groups: ContentNavigationItem[] = categories[slug as keyof typeof categories]?.map(category => ({
+    title: category.title,
     path: `/docs/${slug}`,
+    class: 'framework' in category ? [`${category.framework}-only`] : undefined,
     children: childrenGroupedByCategory[category.id]
-  }))?.filter(category => category.children?.length) || []
+  }))?.filter(group => group.children?.length) || []
 
   if (childrenGroupedByCategory.__overview && childrenGroupedByCategory.__overview.length > 0) {
-    grouped.unshift({
-      id: 'overview',
+    groups.unshift({
       title: 'Overview',
       path: `/docs/${slug}`,
       children: childrenGroupedByCategory.__overview
     })
   }
 
-  return grouped
+  return groups
 }
 
 const children = computed(() => {

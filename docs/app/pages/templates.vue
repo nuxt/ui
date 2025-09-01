@@ -31,6 +31,10 @@ defineOgImageComponent('Docs', {
       <template #description>
         <MDC :value="page.hero.description" unwrap="p" cache-key="pro-templates-hero-description" />
       </template>
+
+      <template #links>
+        <FrameworkSelect size="md" class="w-48" />
+      </template>
     </UPageHero>
 
     <UPageSection
@@ -41,6 +45,7 @@ defineOgImageComponent('Docs', {
       :features="template.features"
       orientation="horizontal"
       class="lg:border-t border-default"
+      :class="`${template.framework}-only`"
       :ui="{
         title: 'lg:text-4xl',
         wrapper: 'lg:py-16 lg:border-r border-default order-last lg:pr-16',
