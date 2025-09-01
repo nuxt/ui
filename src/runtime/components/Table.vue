@@ -490,13 +490,13 @@ defineExpose({
         </template>
 
         <tr v-else-if="loading && !!slots['loading']">
-          <td :colspan="columns?.length" :class="ui.loading({ class: props.ui?.loading })">
+          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>
         </tr>
 
         <tr v-else>
-          <td :colspan="columns?.length" :class="ui.empty({ class: props.ui?.empty })">
+          <td :colspan="tableApi.getAllLeafColumns().length" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
               {{ empty || t('table.noData') }}
             </slot>

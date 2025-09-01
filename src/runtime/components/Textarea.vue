@@ -55,7 +55,7 @@ export interface TextareaProps<T extends TextareaValue = TextareaValue> extends 
 }
 
 export interface TextareaEmits<T extends TextareaValue = TextareaValue> {
-  'update:modelValue': [payload: T]
+  'update:modelValue': [value: T]
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }

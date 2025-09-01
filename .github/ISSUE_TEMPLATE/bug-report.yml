@@ -13,11 +13,11 @@ body:
       description: You can use `npx nuxt info` to fill this section
       placeholder: |
         - Operating System: `Darwin`
-        - Node Version:     `v24.3.0`
+        - Node Version:     `v24.6.0`
         - Nuxt Version:     `4.0.3`
         - CLI Version:      `3.27.0`
         - Nitro Version:    `2.12.4`
-        - Package Manager:  `pnpm@10.13.1`
+        - Package Manager:  `pnpm@10.15.0`
         - Builder:          `-`
         - User Config:      `-`
         - Runtime Modules:  `-`
@@ -25,7 +25,7 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: package
+    id: framework
     attributes:
       label: Is this bug related to Nuxt or Vue?
       options:
@@ -33,11 +33,22 @@ body:
         - Vue
     validations:
       required: true
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      options:
+        - v4.0.0-alpha.x
+        - v3.x
+        - v2.x
+      default: 1
+    validations:
+      required: true
   - type: input
     id: version
     attributes:
-      label: Version (@nuxt/ui)
-      placeholder: v4.0.0
+      label: Version
+      placeholder: v3.3.2
     validations:
       required: true
   - type: textarea

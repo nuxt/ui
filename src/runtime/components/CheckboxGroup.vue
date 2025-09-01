@@ -61,7 +61,7 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
 }
 
 export type CheckboxGroupEmits = CheckboxGroupRootEmits & {
-  change: [payload: Event]
+  change: [event: Event]
 }
 
 type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => any

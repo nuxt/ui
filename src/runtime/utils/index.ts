@@ -83,6 +83,43 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
   return isEqual(value, currentValue)
 }
 
+export function isEmpty(value: unknown): boolean {
+  if (value == null) {
+    return true
+  }
+
+  if (typeof value === 'boolean' || typeof value === 'number') {
+    return false
+  }
+
+  if (typeof value === 'string') {
+    return value.trim().length === 0
+  }
+
+  if (Array.isArray(value)) {
+    return value.length === 0
+  }
+
+  if (value instanceof Map || value instanceof Set) {
+    return value.size === 0
+  }
+
+  if (value instanceof Date || value instanceof RegExp || typeof value === 'function') {
+    return false
+  }
+
+  if (typeof value === 'object') {
+    for (const _ in value as object) {
+      if (Object.prototype.hasOwnProperty.call(value, _)) {
+        return false
+      }
+    }
+    return true
+  }
+
+  return false
+}
+
 export function getDisplayValue<T, V>(
   items: T[],
   value: V | undefined | null,
@@ -93,7 +130,7 @@ export function getDisplayValue<T, V>(
 ): string | undefined {
   const { valueKey, labelKey } = options
 
-  if (value === null || value === undefined) {
+  if (isEmpty(value)) {
     return undefined
   }
 

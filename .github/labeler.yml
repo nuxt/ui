@@ -1,0 +1,14 @@
+v2:
+  - base-branch: 'v2'
+
+v3:
+  - base-branch: 'v3'
+
+v4:
+  - base-branch: 'v4'
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'docs/**/*'
+      - '**/*.md'

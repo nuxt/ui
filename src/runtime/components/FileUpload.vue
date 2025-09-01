@@ -96,9 +96,8 @@ export interface FileUploadProps<M extends boolean = false> {
   ui?: FileUpload['slots']
 }
 
-export interface FileUploadEmits<M extends boolean = false> {
-  'update:modelValue': [payload: M extends true ? File[] : File | null]
-  'change': [event: Event]
+export interface FileUploadEmits {
+  change: [event: Event]
 }
 
 type FileUploadFiles<M> = (M extends true ? File[] : File) | null
@@ -146,7 +145,7 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   layout: 'grid',
   position: 'outside'
 })
-const emits = defineEmits<FileUploadEmits<M>>()
+const emits = defineEmits<FileUploadEmits>()
 const slots = defineSlots<FileUploadSlots<M>>()
 
 const modelValue = defineModel<(M extends true ? File[] : File) | null>()

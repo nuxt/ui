@@ -6,6 +6,17 @@ body:
     attributes:
       value: |
         Before requesting a feature, please make sure that you have read through our [documentation](https://ui.nuxt.com/) and existing [issues](https://github.com/nuxt/ui/issues?q=is%3Aissue%20is%3Aopen%20sort%3Aupdated-desc).
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      options:
+        - v4.0.0-alpha.x
+        - v3.x
+        - v2.x
+      default: 1
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:

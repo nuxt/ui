@@ -54,8 +54,8 @@ export interface FormProps<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface FormEmits<S extends FormSchema, T extends boolean = true> {
-  submit: [payload: FormSubmitEvent<FormData<S, T>>]
-  error: [payload: FormErrorEvent]
+  submit: [event: FormSubmitEvent<FormData<S, T>>]
+  error: [event: FormErrorEvent]
 }
 
 export interface FormSlots {

@@ -38,9 +38,8 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
   ui?: Slider['slots']
 }
 
-export interface SliderEmits<T extends number | number[] = number | number[]> {
-  'update:modelValue': [payload: T]
-  'change': [payload: Event]
+export interface SliderEmits {
+  change: [event: Event]
 }
 </script>
 
@@ -59,7 +58,7 @@ const props = withDefaults(defineProps<SliderProps>(), {
   step: 1,
   orientation: 'horizontal'
 })
-const emits = defineEmits<SliderEmits<T>>()
+const emits = defineEmits<SliderEmits>()
 
 const modelValue = defineModel<T>()
 
