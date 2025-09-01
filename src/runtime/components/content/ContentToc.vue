@@ -3,6 +3,7 @@ import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
 import type { TocLink } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-toc'
+import type { IconProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>
@@ -23,7 +24,7 @@ export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> exte
    * @defaultValue appConfig.ui.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /**
    * The title of the table of contents.
    * @defaultValue t('contentToc.title')

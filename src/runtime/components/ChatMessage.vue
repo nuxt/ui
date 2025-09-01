@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { UIMessage } from 'ai'
 import theme from '#build/ui/chat-message'
-import type { AvatarProps, ButtonProps } from '../types'
+import type { AvatarProps, ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>
@@ -16,7 +16,7 @@ export interface ChatMessageProps extends UIMessage {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   avatar?: AvatarProps & { [key: string]: any }
   /**
    * @defaultValue 'naked'

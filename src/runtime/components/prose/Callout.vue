@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/callout'
-import type { LinkProps } from '../../types'
+import type { IconProps, LinkProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'ui.prose'>
@@ -9,7 +9,7 @@ type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'ui.pros
 export interface ProseCalloutProps {
   to?: LinkProps['to']
   target?: LinkProps['target']
-  icon?: string
+  icon?: IconProps['name']
   /**
    * @defaultValue 'neutral'
    */

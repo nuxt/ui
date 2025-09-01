@@ -3,6 +3,7 @@
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/accordion'
+import type { IconProps } from '../types'
 import type { DynamicSlots } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -13,11 +14,11 @@ export interface AccordionItem {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   /**
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   slot?: string
   content?: string
   /** A unique value for the accordion item. Defaults to the index. */
@@ -40,7 +41,7 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
    * @defaultValue appConfig.ui.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: string
+  trailingIcon?: IconProps['name']
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'

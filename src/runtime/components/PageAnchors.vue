@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-anchors'
-import type { LinkProps } from '../types'
+import type { IconProps, LinkProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type PageAnchors = ComponentConfig<typeof theme, AppConfig, 'pageAnchors'>
@@ -11,7 +11,7 @@ export interface PageAnchor extends Omit<LinkProps, 'custom'> {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   class?: any
   ui?: Pick<PageAnchors['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeading' | 'linkLeadingIcon'>
 }

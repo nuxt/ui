@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-section'
-import type { ButtonProps, PageFeatureProps } from '../types'
+import type { ButtonProps, IconProps, PageFeatureProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type PageSection = ComponentConfig<typeof theme, AppConfig, 'pageSection'>
@@ -20,7 +20,7 @@ export interface PageSectionProps {
    * The icon displayed above the title.
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   title?: string
   description?: string
   /**

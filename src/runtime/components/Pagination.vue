@@ -2,7 +2,7 @@
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pagination'
-import type { ButtonProps } from '../types'
+import type { ButtonProps, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type Pagination = ComponentConfig<typeof theme, AppConfig, 'pagination'>
@@ -18,31 +18,31 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
    * @IconifyIcon
    */
-  firstIcon?: string
+  firstIcon?: IconProps['name']
   /**
    * The icon to use for the previous page control.
    * @defaultValue appConfig.ui.icons.chevronLeft
    * @IconifyIcon
    */
-  prevIcon?: string
+  prevIcon?: IconProps['name']
   /**
    * The icon to use for the next page control.
    * @defaultValue appConfig.ui.icons.chevronRight
    * @IconifyIcon
    */
-  nextIcon?: string
+  nextIcon?: IconProps['name']
   /**
    * The icon to use for the last page control.
    * @defaultValue appConfig.ui.icons.chevronDoubleRight
    * @IconifyIcon
    */
-  lastIcon?: string
+  lastIcon?: IconProps['name']
   /**
    * The icon to use for the ellipsis control.
    * @defaultValue appConfig.ui.icons.ellipsis
    * @IconifyIcon
    */
-  ellipsisIcon?: string
+  ellipsisIcon?: IconProps['name']
   /**
    * The color of the pagination controls.
    * @defaultValue 'neutral'

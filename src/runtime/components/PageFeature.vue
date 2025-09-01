@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-feature'
-import type { LinkProps } from '../types'
+import type { IconProps, LinkProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type PageFeature = ComponentConfig<typeof theme, AppConfig, 'pageFeature'>
@@ -16,7 +16,7 @@ export interface PageFeatureProps {
    * The icon displayed next to the title when `orientation` is `horizontal` and above the title when `orientation` is `vertical`.
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   title?: string
   description?: string
   /**

@@ -2,6 +2,7 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
+import type { IconProps } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSurround = ComponentConfig<typeof theme, AppConfig, 'contentSurround'>
@@ -11,7 +12,7 @@ export interface ContentSurroundLink extends ContentNavigationItem {
   /**
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   class?: any
   ui?: Pick<ContentSurround['slots'], 'link' | 'linkLeading' | 'linkLeadingIcon' | 'linkTitle' | 'linkDescription'>
 }
@@ -27,13 +28,13 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
    * @defaultValue appConfig.ui.icons.arrowLeft
    * @IconifyIcon
    */
-  prevIcon?: string
+  prevIcon?: IconProps['name']
   /**
    * The icon displayed in the next link.
    * @defaultValue appConfig.ui.icons.arrowRight
    * @IconifyIcon
    */
-  nextIcon?: string
+  nextIcon?: IconProps['name']
   surround?: T[]
   class?: any
   ui?: ContentSurround['slots']
@@ -66,7 +67,7 @@ defineSlots<ContentSurroundSlots<T>>()
 
 const appConfig = useAppConfig() as ContentSurround['AppConfig']
 
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: ContentSurroundLink, icon: string, direction: 'left' | 'right' }>({
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: ContentSurroundLink, icon: IconProps['name'], direction: 'left' | 'right' }>({
   props: {
     link: Object,
     icon: String,

@@ -2,7 +2,7 @@
 import type { ChatStatus } from 'ai'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt-submit'
-import type { ButtonProps, ButtonSlots } from '../types'
+import type { ButtonProps, ButtonSlots, IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPromptSubmit = ComponentConfig<typeof theme, AppConfig, 'chatPromptSubmit'>
@@ -14,7 +14,7 @@ export interface ChatPromptSubmitProps extends /** @vue-ignore */ Pick<ButtonPro
    * @defaultValue appConfig.ui.icons.arrowUp
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   /**
    * The color of the button when the status is `ready`.
    * @defaultValue 'primary'
@@ -30,7 +30,7 @@ export interface ChatPromptSubmitProps extends /** @vue-ignore */ Pick<ButtonPro
    * @defaultValue appConfig.ui.icons.stop
    * @IconifyIcon
    */
-  streamingIcon?: string
+  streamingIcon?: IconProps['name']
   /**
    * The color of the button when the status is `streaming`.
    * @defaultValue 'neutral'
@@ -46,7 +46,7 @@ export interface ChatPromptSubmitProps extends /** @vue-ignore */ Pick<ButtonPro
    * @defaultValue appConfig.ui.icons.stop
    * @IconifyIcon
    */
-  submittedIcon?: string
+  submittedIcon?: IconProps['name']
   /**
    * The color of the button when the status is `submitted`.
    * @defaultValue 'neutral'
@@ -62,7 +62,7 @@ export interface ChatPromptSubmitProps extends /** @vue-ignore */ Pick<ButtonPro
    * @defaultValue appConfig.ui.icons.reload
    * @IconifyIcon
    */
-  errorIcon?: string
+  errorIcon?: IconProps['name']
   /**
    * The color of the button when the status is `error`.
    * @defaultValue 'error'
