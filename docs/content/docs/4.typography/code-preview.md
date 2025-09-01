@@ -5,7 +5,7 @@ framework: nuxt
 category: vue-components
 ---
 
-Wrap a code-block with the `code-preview` component to display a preview of an MDC component and its code using the `code` slot.
+Wrap any content with the `code-preview` component to display a live preview alongside its source code using the `code` slot.
 
 ::code-preview{class="[&>div]:*:my-0 [&>div]:*:w-full" label="Preview"}
 
