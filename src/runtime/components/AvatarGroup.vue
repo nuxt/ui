@@ -19,6 +19,14 @@ export interface AvatarGroupProps {
    * The maximum number of avatars to display.
    */
   max?: number | string
+  /**
+   * Tooltip text for the overflow "+N" avatar.
+   * Can be a static string or a function receiving the hidden count and returning a string.
+   * Example:
+   * - "3 more attendees"
+   * - (n) => `${n} more attendees`
+   */
+  moreTooltip?: string | ((count: number) => string)
   class?: any
   ui?: AvatarGroup['slots']
 }
@@ -35,6 +43,7 @@ import { useAppConfig } from '#imports'
 import { avatarGroupInjectionKey } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UAvatar from './Avatar.vue'
+import UTooltip from './Tooltip.vue'
 
 const props = defineProps<AvatarGroupProps>()
 const slots = defineSlots<AvatarGroupSlots>()
@@ -87,6 +96,17 @@ const hiddenCount = computed(() => {
   return children.value.length - visibleAvatars.value.length
 })
 
+const moreTooltipText = computed<string | undefined>(() => {
+  if (!hiddenCount.value) {
+    return undefined
+  }
+  const t = props.moreTooltip
+  if (!t) {
+    return undefined
+  }
+  return typeof t === 'function' ? t(hiddenCount.value) : t
+})
+
 provide(avatarGroupInjectionKey, computed(() => ({
   size: props.size
 })))
@@ -94,7 +114,17 @@ provide(avatarGroupInjectionKey, computed(() => ({
 
 <template>
   <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" :class="ui.base({ class: props.ui?.base })" />
+    <template v-if="hiddenCount > 0">
+      <UTooltip v-if="moreTooltipText" :text="moreTooltipText">
+        <UAvatar :text="`+${hiddenCount}`" :class="ui.base({ class: props.ui?.base })" />
+      </UTooltip>
+      <UAvatar
+        v-else
+        :text="`+${hiddenCount}`"
+        :class="ui.base({ class: props.ui?.base })"
+      />
+    </template>
+
     <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" :class="ui.base({ class: props.ui?.base })" />
   </Primitive>
 </template>
