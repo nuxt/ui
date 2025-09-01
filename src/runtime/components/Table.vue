@@ -180,6 +180,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   facetedOptions?: FacetedOptions<T>
   onSelect?: (row: TableRow<T>, e?: Event) => void
   onHover?: (e: Event, row: TableRow<T> | null) => void
+  onDblclick?: ((e: Event, row: TableRow<T>) => void) | Array<((e: Event, row: TableRow<T>) => void)>
   onContextmenu?: ((e: Event, row: TableRow<T>) => void) | Array<((e: Event, row: TableRow<T>) => void)>
   class?: any
   ui?: Table['slots']
@@ -371,6 +372,18 @@ function onRowHover(e: Event, row: TableRow<T> | null) {
   props.onHover(e, row)
 }
 
+function onRowDblclick(e: Event, row: TableRow<T>) {
+  if (!props.onDblclick) {
+    return
+  }
+
+  if (Array.isArray(props.onDblclick)) {
+    props.onDblclick.forEach(fn => fn(e, row))
+  } else {
+    props.onDblclick(e, row)
+  }
+}
+
 function onRowContextmenu(e: Event, row: TableRow<T>) {
   if (!props.onContextmenu) {
     return
@@ -445,7 +458,7 @@ defineExpose({
           <template v-for="row in tableApi.getRowModel().rows" :key="row.id">
             <tr
               :data-selected="row.getIsSelected()"
-              :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
+              :data-selectable="!!props.onSelect || !!props.onHover || !!props.onDblclick || !!props.onContextmenu"
               :data-expanded="row.getIsExpanded()"
               :role="props.onSelect ? 'button' : undefined"
               :tabindex="props.onSelect ? 0 : undefined"
@@ -459,6 +472,7 @@ defineExpose({
               @click="onRowSelect($event, row)"
               @pointerenter="onRowHover($event, row)"
               @pointerleave="onRowHover($event, null)"
+              @dblclick="onRowDblclick($event, row)"
               @contextmenu="onRowContextmenu($event, row)"
             >
               <td
