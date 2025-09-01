@@ -1,5 +1,19 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`InputNumber > renders with .optional modifier correctly 1`] = `
+"<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary px-9" value="">
+  <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" tabindex="-1" aria-label="Increment" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <div class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary p-1.5"><span class="iconify i-lucide:minus shrink-0 size-5" aria-hidden="true"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`InputNumber > renders with ariaLabel correctly 1`] = `
 "<div class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" aria-label="Aria label" class="w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented text-center focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary px-9" value="">
   <div class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" tabindex="-1" aria-label="Increment" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary p-1.5"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true"></span>
