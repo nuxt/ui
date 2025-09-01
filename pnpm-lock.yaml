@@ -176,8 +176,8 @@ importers:
         specifier: https://pkg.pr.new/@nuxt/ui-pro@fdb0248
         version: https://pkg.pr.new/@nuxt/ui-pro@fdb0248(vue@3.5.20(typescript@5.8.3))
       '@nuxtjs/plausible':
-        specifier: ^1.2.0
-        version: 1.2.0(magicast@0.3.5)
+        specifier: ^2.0.0
+        version: 2.0.0(magicast@0.3.5)
       '@octokit/rest':
         specifier: ^21.1.1
         version: 21.1.1
@@ -1250,8 +1250,8 @@ packages:
   '@nuxtjs/mdc@0.9.0':
     resolution: {integrity: sha512-dkdfWK0C0gKjDI7Y2W23A9uWwky9pIlH/N1no2l9y+2DHBz4/7JDdXmxGivDXYvyaTb6xAi+53E6Xphlmai8+A==}
 
-  '@nuxtjs/plausible@1.2.0':
-    resolution: {integrity: sha512-pjfps32fFN77BhjqHmq2Jx4XCNso9TcYnB+S4IR2qH/c26WDfYB5mQxN5pOEiWRlMkiKq+Y45mBBFtSOVKClCA==}
+  '@nuxtjs/plausible@2.0.0':
+    resolution: {integrity: sha512-C7P5LH4GmZNiRRDxToBVoaTL6Km+Gb+wsaaLN3NOiO6+TP8a6Wx5n1/W3p0WiVHGVN9rCwbNLdaTzjzBL7D5gA==}
 
   '@nuxtjs/tailwindcss@6.14.0':
     resolution: {integrity: sha512-30RyDK++LrUVRgc2A85MktGWIZoRQgeQKjE4CjjD64OXNozyl+4ScHnnYgqVToMM6Ch2ZG2W4wV2J0EN6F0zkQ==}
@@ -8647,10 +8647,10 @@ snapshots:
       - magicast
       - supports-color
 
-  '@nuxtjs/plausible@1.2.0(magicast@0.3.5)':
+  '@nuxtjs/plausible@2.0.0(magicast@0.3.5)':
     dependencies:
       '@barbapapazes/plausible-tracker': 0.5.6
-      '@nuxt/kit': 3.18.1(magicast@0.3.5)
+      '@nuxt/kit': 4.0.3(magicast@0.3.5)
       defu: 6.1.4
       ufo: 1.6.1
     transitivePeerDependencies:

@@ -12,7 +12,7 @@
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "latest",
     "@nuxt/ui-pro": "https://pkg.pr.new/@nuxt/ui-pro@fdb0248",
-    "@nuxtjs/plausible": "^1.2.0",
+    "@nuxtjs/plausible": "^2.0.0",
     "@octokit/rest": "^21.1.1",
     "@vueuse/nuxt": "^13.8.0",
     "date-fns": "^4.1.0",
