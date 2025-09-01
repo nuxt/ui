@@ -1,6 +1,6 @@
 ---
 title: FieldGroup
-description: 'Learn how to use the ProseFieldGroup component in your Nuxt app.'
+description: 'Group related fields together for comprehensive API documentation.'
 framework: nuxt
 category: vue-components
 ---

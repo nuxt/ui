@@ -1,6 +1,6 @@
 ---
 title: CodeTree
-description: 'Learn how to use the ProseCodeTree component in your Nuxt app.'
+description: 'Visualize file and folder structures with syntax-highlighted code.'
 framework: nuxt
 category: vue-components
 ---

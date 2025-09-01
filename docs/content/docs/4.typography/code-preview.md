@@ -1,6 +1,6 @@
 ---
 title: CodePreview
-description: 'Learn how to use the ProseCodePreview component in your Nuxt app.'
+description: 'Show live previews alongside source code for interactive documentation.'
 framework: nuxt
 category: vue-components
 ---

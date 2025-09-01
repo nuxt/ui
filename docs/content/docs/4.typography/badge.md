@@ -1,6 +1,6 @@
 ---
 title: Badge
-description: 'Learn how to use the ProseBadge component in your Nuxt app.'
+description: 'Display version numbers, status labels, and tags within your content.'
 framework: nuxt
 category: vue-components
 ---

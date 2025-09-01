@@ -1,6 +1,6 @@
 ---
 title: Field
-description: 'Learn how to use the ProseField component in your Nuxt app.'
+description: 'Document API parameters, props, and configuration options clearly.'
 framework: nuxt
 category: vue-components
 ---

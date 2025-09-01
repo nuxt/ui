@@ -1,6 +1,6 @@
 ---
 title: CardGroup
-description: 'Learn how to use the ProseCardGroup component in your Nuxt app.'
+description: 'Organize multiple cards in responsive grid layouts for better content presentation.'
 framework: nuxt
 category: vue-components
 ---

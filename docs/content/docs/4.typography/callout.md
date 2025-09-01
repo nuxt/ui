@@ -1,6 +1,6 @@
 ---
 title: Callout
-description: 'Learn how to use the ProseCallout component in your Nuxt app.'
+description: 'Highlight important information with eye-catching colored boxes and icons.'
 framework: nuxt
 category: vue-components
 ---

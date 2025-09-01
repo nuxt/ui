@@ -1,6 +1,6 @@
 ---
 title: Accordion
-description: 'Learn how to use the ProseAccordion component in your Nuxt app.'
+description: 'Create expandable content sections for better information organization.'
 framework: nuxt
 category: vue-components
 ---

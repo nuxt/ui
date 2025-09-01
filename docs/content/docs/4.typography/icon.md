@@ -1,6 +1,6 @@
 ---
 title: Icon
-description: 'Learn how to use the ProseIcon component in your Nuxt app.'
+description: 'Add icons from popular icon libraries to enhance content.'
 framework: nuxt
 category: vue-components
 ---

@@ -1,6 +1,6 @@
 ---
 title: Card
-description: 'Learn how to use the ProseCard component in your Nuxt app.'
+description: 'Create highlighted content blocks with optional links and navigation.'
 framework: nuxt
 category: vue-components
 ---

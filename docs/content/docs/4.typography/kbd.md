@@ -1,6 +1,6 @@
 ---
 title: Kbd
-description: 'Learn how to use the ProseKbd component in your Nuxt app.'
+description: 'Display keyboard shortcuts and key combinations with proper styling.'
 framework: nuxt
 category: vue-components
 ---

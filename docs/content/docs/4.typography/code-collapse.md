@@ -1,6 +1,6 @@
 ---
 title: CodeCollapse
-description: 'Learn how to use the ProseCodeCollapse component in your Nuxt app.'
+description: 'Make long code blocks collapsible to save space and improve readability.'
 framework: nuxt
 category: vue-components
 ---

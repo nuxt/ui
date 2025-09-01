@@ -1,6 +1,6 @@
 ---
 title: Tabs
-description: 'Learn how to use the ProseTabs component in your Nuxt app.'
+description: 'Organize related content in interactive tabbed interfaces.'
 framework: nuxt
 category: vue-components
 ---

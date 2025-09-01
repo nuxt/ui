@@ -1,6 +1,6 @@
 ---
 title: CodeGroup
-description: 'Learn how to use the ProseCodeGroup component in your Nuxt app.'
+description: 'Group multiple code examples in tabbed interfaces for easy comparison.'
 framework: nuxt
 category: vue-components
 ---

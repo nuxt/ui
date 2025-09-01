@@ -1,6 +1,6 @@
 ---
 title: Steps
-description: 'Learn how to use the ProseSteps component in your Nuxt app.'
+description: 'Transform headings into numbered step-by-step guides and tutorials.'
 framework: nuxt
 category: vue-components
 ---

@@ -1,6 +1,6 @@
 ---
 title: Collapsible
-description: 'Learn how to use the ProseCollapsible component in your Nuxt app.'
+description: 'Toggle content visibility with smooth expand and collapse animations.'
 framework: nuxt
 category: vue-components
 ---
