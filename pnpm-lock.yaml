@@ -10,7 +10,7 @@ overrides:
   chokidar: 3.6.0
   debug: 4.3.7
   unimport: 4.1.1
-  unplugin: ^2.3.8
+  unplugin: ^2.3.10
   typescript: 5.8.3
 
 importers:
@@ -144,8 +144,8 @@ importers:
         specifier: 5.8.3
         version: 5.8.3
       unplugin:
-        specifier: ^2.3.8
-        version: 2.3.8
+        specifier: ^2.3.10
+        version: 2.3.10
       unplugin-auto-import:
         specifier: ^19.3.0
         version: 19.3.0(@nuxt/kit@4.0.3(magicast@0.3.5))(@vueuse/core@13.8.0(vue@3.5.20(typescript@5.8.3)))
@@ -169,7 +169,7 @@ importers:
         version: 1.7.0
       zod:
         specifier: ^3.24.0 || ^4.0.0
-        version: 4.1.3
+        version: 4.1.5
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^1.9.0
@@ -230,16 +230,16 @@ importers:
     dependencies:
       '@ai-sdk/vue':
         specifier: ^1.2.12
-        version: 1.2.12(vue@3.5.20(typescript@5.8.3))(zod@4.1.3)
+        version: 1.2.12(vue@3.5.20(typescript@5.8.3))(zod@4.1.5)
       '@iconify-json/logos':
         specifier: ^1.2.9
         version: 1.2.9
       '@iconify-json/lucide':
-        specifier: ^1.2.64
-        version: 1.2.64
+        specifier: ^1.2.66
+        version: 1.2.66
       '@iconify-json/simple-icons':
-        specifier: ^1.2.49
-        version: 1.2.49
+        specifier: ^1.2.50
+        version: 1.2.50
       '@iconify-json/vscode-icons':
         specifier: ^1.2.30
         version: 1.2.30
@@ -254,7 +254,7 @@ importers:
         version: link:..
       '@nuxt/ui-pro':
         specifier: https://pkg.pr.new/@nuxt/ui-pro@72b817f
-        version: https://pkg.pr.new/@nuxt/ui-pro@72b817f(@babel/parser@7.28.3)(joi@18.0.1)(magicast@0.3.5)(react@19.1.0)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(vue@3.5.20(typescript@5.8.3))(yup@1.7.0)(zod@4.1.3)
+        version: https://pkg.pr.new/@nuxt/ui-pro@72b817f(@babel/parser@7.28.3)(joi@18.0.1)(magicast@0.3.5)(react@19.1.0)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(vue@3.5.20(typescript@5.8.3))(yup@1.7.0)(zod@4.1.5)
       '@nuxthub/core':
         specifier: ^0.9.0
         version: 0.9.0(@netlify/blobs@9.1.2)(db0@0.3.2(better-sqlite3@12.2.0))(ioredis@5.6.1)(magicast@0.3.5)(vite@7.0.6(@types/node@24.0.7)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))
@@ -275,7 +275,7 @@ importers:
         version: 13.8.0(magicast@0.3.5)(nuxt@4.0.3(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.0.7)(@vue/compiler-sfc@3.5.20)(better-sqlite3@12.2.0)(db0@0.3.2(better-sqlite3@12.2.0))(eslint@9.34.0(jiti@2.5.1))(ioredis@5.6.1)(lightningcss@1.30.1)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.49.0)(terser@5.43.1)(typescript@5.8.3)(vite@7.0.6(@types/node@24.0.7)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))(vue-tsc@3.0.6(typescript@5.8.3))(yaml@2.8.0))(vue@3.5.20(typescript@5.8.3))
       ai:
         specifier: ^4.3.19
-        version: 4.3.19(react@19.1.0)(zod@4.1.3)
+        version: 4.3.19(react@19.1.0)(zod@4.1.5)
       better-sqlite3:
         specifier: ^12.2.0
         version: 12.2.0
@@ -289,8 +289,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       motion-v:
-        specifier: ^1.7.0
-        version: 1.7.0(@vueuse/core@13.8.0(vue@3.5.20(typescript@5.8.3)))(react@19.1.0)(vue@3.5.20(typescript@5.8.3))
+        specifier: ^1.7.1
+        version: 1.7.1(@vueuse/core@13.8.0(vue@3.5.20(typescript@5.8.3)))(react@19.1.0)(vue@3.5.20(typescript@5.8.3))
       nuxt:
         specifier: ^4.0.3
         version: 4.0.3(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.0.7)(@vue/compiler-sfc@3.5.20)(better-sqlite3@12.2.0)(db0@0.3.2(better-sqlite3@12.2.0))(eslint@9.34.0(jiti@2.5.1))(ioredis@5.6.1)(lightningcss@1.30.1)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.49.0)(terser@5.43.1)(typescript@5.8.3)(vite@7.0.6(@types/node@24.0.7)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))(vue-tsc@3.0.6(typescript@5.8.3))(yaml@2.8.0)
@@ -326,26 +326,26 @@ importers:
         version: 1.1.0(typescript@5.8.3)
       workers-ai-provider:
         specifier: ^0.7.5
-        version: 0.7.5(zod@4.1.3)
+        version: 0.7.5(zod@4.1.5)
       yup:
         specifier: ^1.7.0
         version: 1.7.0
       zod:
-        specifier: ^4.1.3
-        version: 4.1.3
+        specifier: ^4.1.5
+        version: 4.1.5
     devDependencies:
       wrangler:
-        specifier: ^4.33.0
-        version: 4.33.0
+        specifier: ^4.33.1
+        version: 4.33.1
 
   playground:
     dependencies:
       '@iconify-json/lucide':
-        specifier: ^1.2.64
-        version: 1.2.64
+        specifier: ^1.2.66
+        version: 1.2.66
       '@iconify-json/simple-icons':
-        specifier: ^1.2.49
-        version: 1.2.49
+        specifier: ^1.2.50
+        version: 1.2.50
       '@internationalized/date':
         specifier: ^3.9.0
         version: 3.9.0
@@ -359,8 +359,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.0.7)(@vue/compiler-sfc@3.5.20)(better-sqlite3@12.2.0)(db0@0.3.2(better-sqlite3@12.2.0))(eslint@9.34.0(jiti@2.5.1))(ioredis@5.6.1)(lightningcss@1.30.1)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.49.0)(terser@5.43.1)(typescript@5.8.3)(vite@7.0.6(@types/node@24.0.7)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))(vue-tsc@3.0.6(typescript@5.8.3))(yaml@2.8.0)
       zod:
-        specifier: ^4.1.3
-        version: 4.1.3
+        specifier: ^4.1.5
+        version: 4.1.5
     devDependencies:
       typescript:
         specifier: 5.8.3
@@ -381,8 +381,8 @@ importers:
         specifier: ^4.5.1
         version: 4.5.1(vue@3.5.20(typescript@5.8.3))
       zod:
-        specifier: ^4.1.3
-        version: 4.1.3
+        specifier: ^4.1.5
+        version: 4.1.5
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^6.0.1
@@ -588,11 +588,11 @@ packages:
     resolution: {integrity: sha512-+tv3z+SPp+gqTIcImN9o0hqE9xyfQjI1XD9pL6NuKjua9B1y7mNYv0S9cP+QEbA4ppVgGZEmKOvHX5G5Ei1CVA==}
     engines: {node: '>=18.0.0'}
 
-  '@cloudflare/unenv-preset@2.6.3':
-    resolution: {integrity: sha512-Bj3i0kHAKFh/fViM8RT5ToV7w5Q8bGUR6yw4R0pkNktn559rmBMNf0+hkRmX8BmVH4WTo1Ye79zjkCxnmNt4+g==}
+  '@cloudflare/unenv-preset@2.7.0':
+    resolution: {integrity: sha512-0JbEj+KTCQ4nTIWg2q8Bou+fPxzG6/zwU5O/w6Cld6WEjLl+716foT+2bjg48h09hMtjTKkJdAh1m4LybBKGCg==}
     peerDependencies:
       unenv: 2.0.0-rc.19
-      workerd: ^1.20250802.0
+      workerd: ^1.20250816.0
     peerDependenciesMeta:
       workerd:
         optional: true
@@ -1262,11 +1262,11 @@ packages:
   '@iconify-json/logos@1.2.9':
     resolution: {integrity: sha512-G6VCdFnwZcrT6Eveq3m43oJfLw/CX8plwFcE+2jgv3fiGB64pTmnU7Yd1MNZ/eA+/Re2iEDhuCfSNOWTHwwK8w==}
 
-  '@iconify-json/lucide@1.2.64':
-    resolution: {integrity: sha512-QpeOqBwKztm/KD9L7sjc9ttLLfktMrsLKRMgqJRH6A2Z0s4BB/0XnhKEHPhrQugA9d1ES5aMy33ztbAHXZhqjQ==}
+  '@iconify-json/lucide@1.2.66':
+    resolution: {integrity: sha512-TrhmfThWY2FHJIckjz7g34gUx3+cmja61DcHNdmu0rVDBQHIjPMYO1O8mMjoDSqIXEllz9wDZxCqT3lFuI+f/A==}
 
-  '@iconify-json/simple-icons@1.2.49':
-    resolution: {integrity: sha512-nRLwrHzz+cTAQYBNQrcr4eWOmQIcHObTj/QSi7nj0SFwVh5MvBsgx8OhoDC/R8iGklNmMpmoE/NKU0cPXMlOZw==}
+  '@iconify-json/simple-icons@1.2.50':
+    resolution: {integrity: sha512-Z2ggRwKYEBB9eYAEi4NqEgIzyLhu0Buh4+KGzMPD6+xG7mk52wZJwLT/glDPtfslV503VtJbqzWqBUGkCMKOFA==}
 
   '@iconify-json/vscode-icons@1.2.30':
     resolution: {integrity: sha512-dlTOc8w4a8/QNumZzMve+APJa6xQVXPZwo8qBk/MaYfY42NPrQT83QXkbTWKDkuEu/xgHPXvKZZBL7Yy12vYQw==}
@@ -5844,8 +5844,8 @@ packages:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
 
-  miniflare@4.20250823.0:
-    resolution: {integrity: sha512-ofQRQ6rb/5P4nsz/J+xptdrN4zvYUm0wuezbKfaxbAGiIVTsM1vd+Pta5MtZwdQ6BKLM9tKMtU0rnbTzy3wntQ==}
+  miniflare@4.20250823.1:
+    resolution: {integrity: sha512-qjbF69XXyHXk4R//q0a9MLraKE9MLKZ/94k6jKcfouJ0g+se7VyMzCBryeWA534+ZAlNM4Ay5gqYr1v3Wk6ctQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -5931,8 +5931,8 @@ packages:
   motion-utils@12.23.6:
     resolution: {integrity: sha512-eAWoPgr4eFEOFfg2WjIsMoqJTW6Z8MTUCgn/GZ3VRpClWBdnbjryiA3ZSNLyxCTmCQx4RmYX6jX1iWHbenUPNQ==}
 
-  motion-v@1.7.0:
-    resolution: {integrity: sha512-5oPDF5GBpcRnIZuce7Wap09S8afH4JeBWD3VbMRg4hZKk0olQnTFuHjgQUGMpX3V1WXrZgyveoF02W51XMxx9w==}
+  motion-v@1.7.1:
+    resolution: {integrity: sha512-B22fYcHGx05moUtoIH0ZP/JzeacGOHzLkLmMTKU9tRB+uVMSfgqiXVzZb602qiG1ap8W7TZ+5RD5R3MmODu9oA==}
     peerDependencies:
       '@vueuse/core': '>=10.0.0'
       vue: '>=3.0.0'
@@ -7596,8 +7596,8 @@ packages:
       vue-router:
         optional: true
 
-  unplugin@2.3.8:
-    resolution: {integrity: sha512-lkaSIlxceytPyt9yfb1h7L9jDFqwMqvUZeGsKB7Z8QrvAO3xZv2S+xMQQYzxk0AGJHcQhbcvhKEstrMy99jnuQ==}
+  unplugin@2.3.10:
+    resolution: {integrity: sha512-6NCPkv1ClwH+/BGE9QeoTIl09nuiAt0gS28nn1PvYXsGKRwM2TCbFA2QiilmehPDTXIe684k4rZI1yl3A1PCUw==}
     engines: {node: '>=18.12.0'}
 
   unrs-resolver@1.11.1:
@@ -8003,8 +8003,8 @@ packages:
   workers-ai-provider@0.7.5:
     resolution: {integrity: sha512-dhCwgc3D65oDDTpH3k8Gf0Ek7KItzvaQidn2N5L5cqLo3WG8GM/4+Nr4rU56o8O3oZRsloB1gUCHYaRv2j7Y0A==}
 
-  wrangler@4.33.0:
-    resolution: {integrity: sha512-LIVnW/VePLMca8Y4pKz4ycXc8yPfXwJJnOnpq65fRTh9lR4UAuqHvSNW4Vx4JJI3ZniRZXIM8pb+tSntd5161w==}
+  wrangler@4.33.1:
+    resolution: {integrity: sha512-8x/3Tbt+/raBMm0+vRyAHSGu2kF1QjeiSrx47apgPk/AzSBcXI9YuUUdGrKnozMYZlEbOxdBQOMyuRRDTyNmOg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -8162,46 +8162,46 @@ packages:
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
-  zod@4.1.3:
-    resolution: {integrity: sha512-1neef4bMce1hNTrxvHVKxWjKfGDn0oAli3Wy1Uwb7TRO1+wEwoZUZNP1NXIEESybOBiFnBOhI6a4m6tCLE8dog==}
+  zod@4.1.5:
+    resolution: {integrity: sha512-rcUUZqlLJgBC33IT3PNMgsCq6TzLQEG/Ei/KTCU0PedSWRMAXoOUN+4t/0H+Q8bdnLPdqUYnvboJT0bn/229qg==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
 
-  '@ai-sdk/provider-utils@2.2.8(zod@4.1.3)':
+  '@ai-sdk/provider-utils@2.2.8(zod@4.1.5)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
       nanoid: 3.3.11
       secure-json-parse: 2.7.0
-      zod: 4.1.3
+      zod: 4.1.5
 
   '@ai-sdk/provider@1.1.3':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@1.2.12(react@19.1.0)(zod@4.1.3)':
+  '@ai-sdk/react@1.2.12(react@19.1.0)(zod@4.1.5)':
     dependencies:
-      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.3)
-      '@ai-sdk/ui-utils': 1.2.11(zod@4.1.3)
+      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.5)
+      '@ai-sdk/ui-utils': 1.2.11(zod@4.1.5)
       react: 19.1.0
       swr: 2.3.3(react@19.1.0)
       throttleit: 2.1.0
     optionalDependencies:
-      zod: 4.1.3
+      zod: 4.1.5
 
-  '@ai-sdk/ui-utils@1.2.11(zod@4.1.3)':
+  '@ai-sdk/ui-utils@1.2.11(zod@4.1.5)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.3)
-      zod: 4.1.3
-      zod-to-json-schema: 3.24.6(zod@4.1.3)
+      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.5)
+      zod: 4.1.5
+      zod-to-json-schema: 3.24.6(zod@4.1.5)
 
-  '@ai-sdk/vue@1.2.12(vue@3.5.20(typescript@5.8.3))(zod@4.1.3)':
+  '@ai-sdk/vue@1.2.12(vue@3.5.20(typescript@5.8.3))(zod@4.1.5)':
     dependencies:
-      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.3)
-      '@ai-sdk/ui-utils': 1.2.11(zod@4.1.3)
+      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.5)
+      '@ai-sdk/ui-utils': 1.2.11(zod@4.1.5)
       swrv: 1.1.0(vue@3.5.20(typescript@5.8.3))
     optionalDependencies:
       vue: 3.5.20(typescript@5.8.3)
@@ -8425,7 +8425,7 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@cloudflare/unenv-preset@2.6.3(unenv@2.0.0-rc.19)(workerd@1.20250823.0)':
+  '@cloudflare/unenv-preset@2.7.0(unenv@2.0.0-rc.19)(workerd@1.20250823.0)':
     dependencies:
       unenv: 2.0.0-rc.19
     optionalDependencies:
@@ -8866,11 +8866,11 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/lucide@1.2.64':
+  '@iconify-json/lucide@1.2.66':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.49':
+  '@iconify-json/simple-icons@1.2.50':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -9519,7 +9519,7 @@ snapshots:
       tinyglobby: 0.2.14
       ufo: 1.6.1
       unifont: 0.4.1
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       unstorage: 1.16.1(@netlify/blobs@9.1.2)(db0@0.3.2(better-sqlite3@12.2.0))(ioredis@5.6.1)
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -9727,7 +9727,7 @@ snapshots:
       std-env: 3.9.0
       tinyexec: 1.0.1
       ufo: 1.6.1
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       vitest-environment-nuxt: 1.0.1(@vue/test-utils@2.4.6)(happy-dom@18.0.1)(magicast@0.3.5)(playwright-core@1.53.2)(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.0.7)(happy-dom@18.0.1)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.0))
       vue: 3.5.20(typescript@5.8.3)
     optionalDependencies:
@@ -9739,9 +9739,9 @@ snapshots:
       - magicast
       - typescript
 
-  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@72b817f(@babel/parser@7.28.3)(joi@18.0.1)(magicast@0.3.5)(react@19.1.0)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(vue@3.5.20(typescript@5.8.3))(yup@1.7.0)(zod@4.1.3)':
+  '@nuxt/ui-pro@https://pkg.pr.new/@nuxt/ui-pro@72b817f(@babel/parser@7.28.3)(joi@18.0.1)(magicast@0.3.5)(react@19.1.0)(superstruct@2.0.2)(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(vue@3.5.20(typescript@5.8.3))(yup@1.7.0)(zod@4.1.5)':
     dependencies:
-      '@ai-sdk/vue': 1.2.12(vue@3.5.20(typescript@5.8.3))(zod@4.1.3)
+      '@ai-sdk/vue': 1.2.12(vue@3.5.20(typescript@5.8.3))(zod@4.1.5)
       '@nuxt/kit': 4.0.3(magicast@0.3.5)
       '@nuxt/schema': 4.0.3
       '@nuxt/ui': 'link:'
@@ -9751,7 +9751,7 @@ snapshots:
       defu: 6.1.4
       dotenv: 16.6.1
       git-url-parse: 16.1.0
-      motion-v: 1.7.0(@vueuse/core@13.8.0(vue@3.5.20(typescript@5.8.3)))(react@19.1.0)(vue@3.5.20(typescript@5.8.3))
+      motion-v: 1.7.1(@vueuse/core@13.8.0(vue@3.5.20(typescript@5.8.3)))(react@19.1.0)(vue@3.5.20(typescript@5.8.3))
       ofetch: 1.4.1
       ohash: 2.0.11
       pathe: 2.0.3
@@ -9759,7 +9759,7 @@ snapshots:
       scule: 1.3.0
       tinyglobby: 0.2.14
       typescript: 5.8.3
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       unplugin-auto-import: 19.3.0(@nuxt/kit@4.0.3(magicast@0.3.5))(@vueuse/core@13.8.0(vue@3.5.20(typescript@5.8.3)))
       unplugin-vue-components: 28.8.0(@babel/parser@7.28.3)(@nuxt/kit@4.0.3(magicast@0.3.5))(vue@3.5.20(typescript@5.8.3))
     optionalDependencies:
@@ -9767,7 +9767,7 @@ snapshots:
       superstruct: 2.0.2
       valibot: 1.1.0(typescript@5.8.3)
       yup: 1.7.0
-      zod: 4.1.3
+      zod: 4.1.5
     transitivePeerDependencies:
       - '@babel/parser'
       - '@emotion/is-prop-valid'
@@ -11372,15 +11372,15 @@ snapshots:
 
   agent-base@7.1.3: {}
 
-  ai@4.3.19(react@19.1.0)(zod@4.1.3):
+  ai@4.3.19(react@19.1.0)(zod@4.1.5):
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.3)
-      '@ai-sdk/react': 1.2.12(react@19.1.0)(zod@4.1.3)
-      '@ai-sdk/ui-utils': 1.2.11(zod@4.1.3)
+      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.5)
+      '@ai-sdk/react': 1.2.12(react@19.1.0)(zod@4.1.5)
+      '@ai-sdk/ui-utils': 1.2.11(zod@4.1.5)
       '@opentelemetry/api': 1.9.0
       jsondiffpatch: 0.6.0
-      zod: 4.1.3
+      zod: 4.1.5
     optionalDependencies:
       react: 19.1.0
 
@@ -12868,7 +12868,7 @@ snapshots:
       magic-string: 0.30.18
       pathe: 2.0.3
       ufo: 1.6.1
-      unplugin: 2.3.8
+      unplugin: 2.3.10
     transitivePeerDependencies:
       - encoding
 
@@ -13319,7 +13319,7 @@ snapshots:
       exsolve: 1.0.7
       mocked-exports: 0.1.1
       pathe: 2.0.3
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       unplugin-utils: 0.2.4
 
   imurmurhash@0.1.4: {}
@@ -13811,7 +13811,7 @@ snapshots:
       regexp-tree: 0.1.27
       type-level-regexp: 0.1.17
       ufo: 1.6.1
-      unplugin: 2.3.8
+      unplugin: 2.3.10
 
   magic-regexp@0.8.0:
     dependencies:
@@ -13821,7 +13821,7 @@ snapshots:
       regexp-tree: 0.1.27
       type-level-regexp: 0.1.17
       ufo: 1.6.1
-      unplugin: 2.3.8
+      unplugin: 2.3.10
 
   magic-string-ast@1.0.0:
     dependencies:
@@ -14198,7 +14198,7 @@ snapshots:
 
   min-indent@1.0.1: {}
 
-  miniflare@4.20250823.0:
+  miniflare@4.20250823.1:
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       acorn: 8.14.0
@@ -14293,7 +14293,7 @@ snapshots:
 
   motion-utils@12.23.6: {}
 
-  motion-v@1.7.0(@vueuse/core@13.8.0(vue@3.5.20(typescript@5.8.3)))(react@19.1.0)(vue@3.5.20(typescript@5.8.3)):
+  motion-v@1.7.1(@vueuse/core@13.8.0(vue@3.5.20(typescript@5.8.3)))(react@19.1.0)(vue@3.5.20(typescript@5.8.3)):
     dependencies:
       '@vueuse/core': 13.8.0(vue@3.5.20(typescript@5.8.3))
       framer-motion: 12.23.12(react@19.1.0)
@@ -14590,7 +14590,7 @@ snapshots:
       std-env: 3.9.0
       strip-literal: 3.0.0
       ufo: 1.6.1
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       unstorage: 1.16.1(@netlify/blobs@9.1.2)(db0@0.3.2(better-sqlite3@12.2.0))(ioredis@5.6.1)
       unwasm: 0.3.9
       yoga-wasm-web: 0.3.3
@@ -14682,7 +14682,7 @@ snapshots:
       uncrypto: 0.1.3
       unctx: 2.4.1
       unimport: 4.1.1
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       unplugin-vue-router: 0.15.0(@vue/compiler-sfc@3.5.20)(typescript@5.8.3)(vue-router@4.5.1(vue@3.5.20(typescript@5.8.3)))(vue@3.5.20(typescript@5.8.3))
       unstorage: 1.16.1(@netlify/blobs@9.1.2)(db0@0.3.2(better-sqlite3@12.2.0))(ioredis@5.6.1)
       untyped: 2.0.0
@@ -16384,7 +16384,7 @@ snapshots:
       acorn: 8.15.0
       estree-walker: 3.0.3
       magic-string: 0.30.18
-      unplugin: 2.3.8
+      unplugin: 2.3.10
 
   undici-types@6.21.0: {}
 
@@ -16451,7 +16451,7 @@ snapshots:
       pkg-types: 1.3.1
       scule: 1.3.0
       strip-literal: 3.0.0
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       unplugin-utils: 0.2.4
 
   unist-builder@4.0.0:
@@ -16498,7 +16498,7 @@ snapshots:
       magic-string: 0.30.18
       picomatch: 4.0.3
       unimport: 4.1.1
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       unplugin-utils: 0.2.4
     optionalDependencies:
       '@nuxt/kit': 4.0.3(magicast@0.3.5)
@@ -16517,7 +16517,7 @@ snapshots:
       magic-string: 0.30.18
       mlly: 1.8.0
       tinyglobby: 0.2.14
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       unplugin-utils: 0.2.4
       vue: 3.5.20(typescript@5.8.3)
     optionalDependencies:
@@ -16542,7 +16542,7 @@ snapshots:
       picomatch: 4.0.3
       scule: 1.3.0
       tinyglobby: 0.2.14
-      unplugin: 2.3.8
+      unplugin: 2.3.10
       unplugin-utils: 0.2.4
       yaml: 2.8.0
     optionalDependencies:
@@ -16551,7 +16551,7 @@ snapshots:
       - typescript
       - vue
 
-  unplugin@2.3.8:
+  unplugin@2.3.10:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       acorn: 8.15.0
@@ -16618,7 +16618,7 @@ snapshots:
       mlly: 1.8.0
       pathe: 1.1.2
       pkg-types: 1.3.1
-      unplugin: 2.3.8
+      unplugin: 2.3.10
 
   update-browserslist-db@1.1.3(browserslist@4.25.1):
     dependencies:
@@ -16963,20 +16963,20 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20250823.0
       '@cloudflare/workerd-windows-64': 1.20250823.0
 
-  workers-ai-provider@0.7.5(zod@4.1.3):
+  workers-ai-provider@0.7.5(zod@4.1.5):
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.3)
+      '@ai-sdk/provider-utils': 2.2.8(zod@4.1.5)
     transitivePeerDependencies:
       - zod
 
-  wrangler@4.33.0:
+  wrangler@4.33.1:
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.0
-      '@cloudflare/unenv-preset': 2.6.3(unenv@2.0.0-rc.19)(workerd@1.20250823.0)
+      '@cloudflare/unenv-preset': 2.7.0(unenv@2.0.0-rc.19)(workerd@1.20250823.0)
       blake3-wasm: 2.1.5
       esbuild: 0.25.4
-      miniflare: 4.20250823.0
+      miniflare: 4.20250823.1
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.19
       workerd: 1.20250823.0
@@ -17104,9 +17104,9 @@ snapshots:
     dependencies:
       zod: 3.25.76
 
-  zod-to-json-schema@3.24.6(zod@4.1.3):
+  zod-to-json-schema@3.24.6(zod@4.1.5):
     dependencies:
-      zod: 4.1.3
+      zod: 4.1.5
 
   zod@3.22.3: {}
 
@@ -17114,6 +17114,6 @@ snapshots:
 
   zod@3.25.76: {}
 
-  zod@4.1.3: {}
+  zod@4.1.5: {}
 
   zwitch@2.0.4: {}

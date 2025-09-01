@@ -149,7 +149,7 @@
     "tailwind-variants": "^3.1.0",
     "tailwindcss": "^4.1.12",
     "tinyglobby": "^0.2.14",
-    "unplugin": "^2.3.8",
+    "unplugin": "^2.3.10",
     "unplugin-auto-import": "^19.3.0",
     "unplugin-vue-components": "^28.8.0",
     "vaul-vue": "0.4.1",
@@ -209,7 +209,7 @@
     "chokidar": "3.6.0",
     "debug": "4.3.7",
     "unimport": "4.1.1",
-    "unplugin": "^2.3.8",
+    "unplugin": "^2.3.10",
     "typescript": "5.8.3"
   },
   "pnpm": {
