@@ -39,6 +39,7 @@ export default defineNuxtModule({
       if (!component?.filePath || !component?.pascalName) {
         return
       }
+
       const code = await fsp.readFile(component.filePath, 'utf-8')
       components[component.pascalName] = {
         code,
