@@ -347,6 +347,26 @@ class: '!p-0'
 You can use this to navigate to a page, open a modal or even to select the row manually.
 ::
 
+### With row double-click event :badge{label="New" class="align-text-top"}
+
+You can add a `@dblclick` listener to make rows double-clickable.
+
+::note
+The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-dblclick-event-example'
+highlights:
+  - 106
+  - 108
+class: '!p-0'
+---
+::
+
 ### With row context menu event :badge{label="New" class="align-text-top"}
 
 You can add a `@contextmenu` listener to make rows right clickable and wrap the Table in a [ContextMenu](/docs/components/context-menu) component to display row actions for example.
