@@ -14,7 +14,7 @@
 Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 > [!NOTE]
-> You are on the `v4` development branch, check out the [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
+> You are on the `v4` branch, check out the [v3 branch](https://github.com/nuxt/ui/tree/v3) for Nuxt UI v3 or [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
 
 ## Documentation
 
@@ -130,7 +130,7 @@ Follow the docs to [set up your local development environment](https://ui4.nuxt.
 Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/alpha.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-version-href]: https://npmjs.com/package/@nuxt/ui
 
 [npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D

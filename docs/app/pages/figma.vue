@@ -52,8 +52,8 @@ onMounted(async () => {
         ? Math.round(targetWord.left + initialScrollX + targetWord.width * 0.5)
         : Math.round(targetWord.left + initialScrollX + targetWord.width / 2)
       const clickPositionY = isMobile.value
-        ? Math.round(targetWord.top + initialScrollY - targetWord.height / 0.7)
-        : Math.round(targetWord.top + initialScrollY - targetWord.height / 1.2)
+        ? Math.round(targetWord.top + initialScrollY - targetWord.height / 1.5)
+        : Math.round(targetWord.top + initialScrollY - targetWord.height / 4)
 
       await animate(cursorId, {
         left: clickPositionX,
@@ -68,8 +68,8 @@ onMounted(async () => {
         ? Math.round(targetWord.left + initialScrollX + targetWord.width * 1)
         : Math.round(targetWord.left + initialScrollX + targetWord.width)
       const finalPositionY = isMobile.value
-        ? Math.round(targetWord.top + initialScrollY + targetWord.height * -1.2)
-        : Math.round(targetWord.top + initialScrollY - targetWord.height / 2)
+        ? Math.round(targetWord.top + initialScrollY + targetWord.height * -0.5)
+        : Math.round(targetWord.top + initialScrollY - targetWord.height / 6)
 
       await animate(cursorId, {
         left: finalPositionX,

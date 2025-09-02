@@ -53,7 +53,8 @@ describe('Textarea', () => {
     ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
     ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
     ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
-    ['with .nullify modifier', { props: { modelModifiers: { nullify: true } } }, { input: '', expected: null }]
+    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: '', expected: null }],
+    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }]
   ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
     const wrapper = mount(Textarea, {
       ...options
