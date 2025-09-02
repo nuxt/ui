@@ -57,7 +57,7 @@ bun add @nuxt/ui
 
 ::
 
-::note{to="/docs/typography/markdown-and-prose#code-blocks-pre"}
+::note{to="/docs/typography/code#code-blocks"}
 Like the `ProsePre` component, the `CodeGroup` handles filenames, icons and copy button.
 ::
 
