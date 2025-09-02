@@ -7,7 +7,7 @@ hero:
   image: /figma/hero.png
   links:
     - label: Open Figma Kit
-      to: 'https://go.nuxt.com/figma'
+      to: 'https://go.nuxt.com/figma-ui'
       icon: i-logos-figma
       color: neutral
       variant: outline
@@ -25,7 +25,7 @@ features1:
       icon: i-lucide-files
 cta1:
   title: Everything you need in a [single file]{class="text-primary"}.
-  description: Design and development in perfect sync with our comprehensive [Nuxt UI design kit](https://go.nuxt.com/figma). Developers can implement designs faster, while designers work with production-ready components.
+  description: Design and development in perfect sync with our comprehensive [Nuxt UI design kit](https://go.nuxt.com/figma-ui). Developers can implement designs faster, while designers work with production-ready components.
 section1:
   title: Customize in a few clicks to fit your needs
   description: Control your entire design system with Figma Variables. Update primitive tokens once and watch your changes spread across the entire system.
@@ -50,7 +50,7 @@ section1:
       alt: Use color variables in the Nuxt UI Figma design kit
   links:
     - label: Open Figma Kit
-      to: 'https://go.nuxt.com/figma'
+      to: 'https://go.nuxt.com/figma-ui'
       target: _blank
       icon: i-logos-figma
       color: neutral
@@ -72,7 +72,7 @@ section2:
     alt: A component in the Nuxt UI Figma design kit
   links:
     - label: Open Figma Kit
-      to: 'https://go.nuxt.com/figma'
+      to: 'https://go.nuxt.com/figma-ui'
       target: _blank
       icon: i-logos-figma
       color: neutral
@@ -95,7 +95,7 @@ section3:
     alt: A screenshot of Nuxt UI Code & Figma Kit
   links:
     - label: Open Figma Kit
-      to: 'https://go.nuxt.com/figma'
+      to: 'https://go.nuxt.com/figma-ui'
       icon: i-logos-figma
       color: neutral
       variant: outline
@@ -116,7 +116,7 @@ section4:
   description: '**From download to deployment in simple steps.** :br Get instant access to production-ready components and start creating.'
   links:
     - label: Open Figma Kit
-      to: 'https://go.nuxt.com/figma'
+      to: 'https://go.nuxt.com/figma-ui'
       icon: i-logos-figma
       color: neutral
       variant: outline
@@ -192,7 +192,7 @@ faq:
       content: Yes. You don't need Figma's paid plan to use our UI kit.
       defaultOpen: true
     - label: How do I access the files?
-      content: Just visit the [Figma community page](https://go.nuxt.com/figma) and duplicate the file to your account.
+      content: Just visit the [Figma community page](https://go.nuxt.com/figma-ui) and duplicate the file to your account.
     - label: Can I use the UI Kit for commercial projects?
       content: Yes, you can use the UI Kit for commercial projects and sell your designs that utilize the components.
     - label: Can I create multiple projects for multiple clients?
