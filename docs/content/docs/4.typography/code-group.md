@@ -2,8 +2,10 @@
 title: CodeGroup
 description: 'Group multiple code examples in tabbed interfaces for easy comparison.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Wrap your code-blocks around a `code-group` component to group them together in tabs.
 
@@ -64,6 +66,10 @@ Like the `ProsePre` component, the `CodeGroup` handles filenames, icons and copy
 ### Props
 
 :component-props{name="code-group" prose}
+
+### Slots
+
+:component-slots{name="code-group" prose}
 
 ## Theme
 

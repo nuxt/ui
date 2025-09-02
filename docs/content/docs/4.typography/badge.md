@@ -2,8 +2,10 @@
 title: Badge
 description: 'Display version numbers, status labels, and tags within your content.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Use markdown in the default slot of the `badge` component to display a [Badge](/docs/components/badge) in your content.
 
@@ -22,6 +24,12 @@ Use markdown in the default slot of the `badge` component to display a [Badge](/
 ```
 
 ::
+
+## API
+
+### Slots
+
+:component-slots{name="badge" prose}
 
 ## Theme
 

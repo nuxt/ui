@@ -2,8 +2,10 @@
 title: Kbd
 description: 'Display keyboard shortcuts and key combinations with proper styling.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Use the `kbd` component to display a [Kbd](/docs/components/kbd) in your content.
 
@@ -23,6 +25,10 @@ Use the `kbd` component to display a [Kbd](/docs/components/kbd) in your content
 ### Props
 
 :component-props{name="kbd" prose}
+
+### Slots
+
+:component-slots{name="kbd" prose}
 
 ## Theme
 

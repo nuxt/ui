@@ -2,8 +2,10 @@
 title: Collapsible
 description: 'Toggle content visibility with smooth expand and collapse animations.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Wrap your content with the `collapsible` component to display a [Collapsible](/docs/components/collapsible) in your content.
 
@@ -40,6 +42,10 @@ Wrap your content with the `collapsible` component to display a [Collapsible](/d
 ### Props
 
 :component-props{name="collapsible" prose}
+
+### Slots
+
+:component-slots{name="collapsible" prose}
 
 ## Theme
 

@@ -2,8 +2,10 @@
 title: Icon
 description: 'Add icons from popular icon libraries to enhance content.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Use the `icon` component to display an [Icon](/docs/components/icon) in your content.
 

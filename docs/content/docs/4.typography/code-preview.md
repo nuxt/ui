@@ -2,8 +2,10 @@
 title: CodePreview
 description: 'Show live previews alongside source code for interactive documentation.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Wrap any content with the `code-preview` component to display a live preview alongside its source code using the `code` slot.
 
@@ -34,6 +36,16 @@ Wrap any content with the `code-preview` component to display a live preview alo
 ````
 
 ::
+
+## API
+
+### Props
+
+:component-props{name="code-preview" prose}
+
+### Slots
+
+:component-slots{name="code-preview" prose}
 
 ## Theme
 

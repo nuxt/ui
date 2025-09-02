@@ -2,8 +2,10 @@
 title: Card
 description: 'Create highlighted content blocks with optional links and navigation.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Use markdown in the default slot of the `card` component to highlight your content.
 
@@ -34,6 +36,10 @@ Best suited for small teams, startups and agencies with up to 5 developers.
 ### Props
 
 :component-props{name="card" prose}
+
+### Slots
+
+:component-slots{name="card" prose}
 
 ## Theme
 

@@ -2,8 +2,10 @@
 title: Field
 description: 'Document API parameters, props, and configuration options clearly.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 A field, prop or parameter to display in your content.
 
@@ -27,6 +29,10 @@ The `description` can be set as prop or in the default slot with full **markdown
 ### Props
 
 :component-props{name="field" prose}
+
+### Slots
+
+:component-slots{name="field" prose}
 
 ## Theme
 

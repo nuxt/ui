@@ -2,8 +2,10 @@
 title: Steps
 description: 'Transform headings into numbered step-by-step guides and tutorials.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Wrap your headings with the Steps component to display a list of steps.
 
@@ -64,11 +66,13 @@ npm run dev
 
 :::
 
-## Props
+## API
+
+### Props
 
 :component-props{name="steps" prose}
 
-## Slots
+### Slots
 
 :component-slots{name="steps" prose}
 

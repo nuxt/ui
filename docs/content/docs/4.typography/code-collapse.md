@@ -2,8 +2,10 @@
 title: CodeCollapse
 description: 'Make long code blocks collapsible to save space and improve readability.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Wrap your code-block with a `code-collapse` component to display a collapsible code block.
 
@@ -74,6 +76,10 @@ Wrap your code-block with a `code-collapse` component to display a collapsible c
 ### Props
 
 :component-props{name="code-collapse" prose}
+
+### Slots
+
+:component-slots{name="code-collapse" prose}
 
 ## Theme
 

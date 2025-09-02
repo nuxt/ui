@@ -2,8 +2,10 @@
 title: Tabs
 description: 'Organize related content in interactive tabbed interfaces.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Use the `tabs` and `tabs-item` components to display [Tabs](/docs/components/tabs) in your content.
 
@@ -64,6 +66,10 @@ Lorem velit voluptate ex reprehenderit ullamco et culpa.
 ### Props
 
 :component-props{name="tabs" prose}
+
+### Slots
+
+:component-slots{name="tabs" prose}
 
 ## Theme
 

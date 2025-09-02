@@ -2,8 +2,10 @@
 title: Accordion
 description: 'Create expandable content sections for better information organization.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Use the `accordion` and `accordion-item` components to display an [Accordion](/docs/components/accordion) in your content.
 
@@ -52,6 +54,10 @@ Yes! Nuxt UI provides a comprehensive theming system that allows you to customiz
 ### Props
 
 :component-props{name="accordion" prose}
+
+### Slots
+
+:component-slots{name="accordion" prose}
 
 ## Theme
 

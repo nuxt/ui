@@ -2,8 +2,10 @@
 title: CodeTree
 description: 'Visualize file and folder structures with syntax-highlighted code.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Wrap your code-blocks with a `code-tree` component in any particular order to display a tree view of your files.
 
@@ -320,6 +322,10 @@ Like the `ProsePre` component, the `CodeTree` handles filenames, icons and copy 
 ### Props
 
 :component-props{name="code-tree" prose}
+
+### Slots
+
+:component-slots{name="code-tree" prose}
 
 ## Theme
 

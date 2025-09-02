@@ -2,8 +2,10 @@
 title: CardGroup
 description: 'Organize multiple cards in responsive grid layouts for better content presentation.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Wrap your `card` components with the `card-group` component to group them together in a grid layout.
 
@@ -102,6 +104,12 @@ A landing page you can use as starting point.
 ```
 
 ::
+
+## API
+
+### Slots
+
+:component-slots{name="card-group" prose}
 
 ## Theme
 

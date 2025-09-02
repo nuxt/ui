@@ -2,8 +2,10 @@
 title: FieldGroup
 description: 'Group related fields together for comprehensive API documentation.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Group fields together in a list.
 
@@ -52,6 +54,16 @@ Group fields together in a list.
 ```
 
 ::
+
+## API
+
+### Props
+
+:component-props{name="field-group" prose}
+
+### Slots
+
+:component-slots{name="field-group" prose}
 
 ## Theme
 

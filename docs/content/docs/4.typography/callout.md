@@ -2,8 +2,10 @@
 title: Callout
 description: 'Highlight important information with eye-catching colored boxes and icons.'
 framework: nuxt
-category: vue-components
+category: components
 ---
+
+## Usage
 
 Use markdown in the default slot of the `callout` component to add eye-catching context to your content.
 
@@ -79,6 +81,10 @@ This action cannot be undone.
 ### Props
 
 :component-props{name="callout" prose}
+
+### Slots
+
+:component-slots{name="callout" prose}
 
 ## Theme
 

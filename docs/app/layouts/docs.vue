@@ -50,8 +50,8 @@ const categories = {
     title: 'i18n'
   }],
   'typography': [{
-    id: 'vue-components',
-    title: 'Vue Components'
+    id: 'components',
+    title: 'Components'
   }]
 }
 
