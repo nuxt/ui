@@ -87,7 +87,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          repository: nuxt-ui-pro/starter
+          repository: nuxt-ui-templates/starter
 
       - name: Store commit SHA
         run: |
@@ -132,7 +132,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          repository: nuxt-ui-pro/starter-vue
+          repository: nuxt-ui-templates/starter-vue
 
       - name: Store commit SHA
         run: |
@@ -177,7 +177,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          repository: nuxt-ui-pro/landing
+          repository: nuxt-ui-templates/landing
 
       - name: Store commit SHA
         run: |
@@ -222,7 +222,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          repository: nuxt-ui-pro/docs
+          repository: nuxt-ui-templates/docs
 
       - name: Store commit SHA
         run: |
@@ -267,7 +267,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          repository: nuxt-ui-pro/saas
+          repository: nuxt-ui-templates/saas
 
       - name: Store commit SHA
         run: |
@@ -312,7 +312,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          repository: nuxt-ui-pro/dashboard
+          repository: nuxt-ui-templates/dashboard
 
       - name: Store commit SHA
         run: |
@@ -357,7 +357,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          repository: nuxt-ui-pro/dashboard-vue
+          repository: nuxt-ui-templates/dashboard-vue
 
       - name: Store commit SHA
         run: |
@@ -402,7 +402,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          repository: nuxt-ui-pro/chat
+          repository: nuxt-ui-templates/chat
 
       - name: Store commit SHA
         run: |
@@ -447,7 +447,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          repository: nuxt-ui-pro/portfolio
+          repository: nuxt-ui-templates/portfolio
 
       - name: Store commit SHA
         run: |
