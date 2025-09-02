@@ -20,6 +20,18 @@ Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Ta
 
 Visit https://ui4.nuxt.com to explore the documentation.
 
+## Templates
+
+Kickstart your project with one of our ready-to-use Nuxt UI templates or follow the [Installation Guide](https://ui4.nuxt.com/getting-started/installation/nuxt). Explore all available templates on the [official templates page](https://ui4.nuxt.com/templates).
+
+- [Starter](https://github.com/nuxt-ui-templates/starter) — A minimal template to get started with Nuxt UI.
+- [Landing](https://github.com/nuxt-ui-templates/landing) — A modern landing page template powered by Nuxt Content.
+- [Docs](https://github.com/nuxt-ui-templates/docs) — A documentation template powered by Nuxt Content.
+- [SaaS](https://github.com/nuxt-ui-templates/saas) — A SaaS template with landing, pricing, docs and blog powered by Nuxt Content.
+- [Dashboard](https://github.com/nuxt-ui-templates/dashboard) — A dashboard template with multi-column layout.
+- [Chat](https://github.com/nuxt-ui-templates/chat) — An AI chatbot template with GitHub authentication and persistent chat history powered by Vercel AI SDK.
+- [Portfolio](https://github.com/nuxt-ui-templates/portfolio) — A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content.
+
 ## Installation
 
 ```bash [pnpm]
@@ -130,7 +142,7 @@ Follow the docs to [set up your local development environment](https://ui4.nuxt.
 Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui/alpha.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-version-href]: https://npmjs.com/package/@nuxt/ui
 
 [npm-downloads-src]: https://img.shields.io/npm/dm/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D

@@ -26,7 +26,7 @@ const items: NavigationMenuItem[][] = [[{
 }], [{
   label: 'Feedback',
   icon: 'i-lucide-message-circle',
-  to: 'https://github.com/nuxt-ui-pro/dashboard',
+  to: 'https://github.com/nuxt-ui-templates/dashboard',
   target: '_blank'
 }, {
   label: 'Help & Support',

@@ -58,7 +58,7 @@ Components for organizing and displaying content on individual pages, including 
 
 Components for creating dashboards with dynamic sidebars and content.
 
-::note{to="https://github.com/nuxt-ui-pro/dashboard" target="_blank"}
+::note{to="https://github.com/nuxt-ui-templates/dashboard" target="_blank"}
 Check out our **Dashboard template** on GitHub for a real-life example.
 ::
 
@@ -68,7 +68,7 @@ Check out our **Dashboard template** on GitHub for a real-life example.
 
 Components to build your own chatbot, powered by the **[Vercel AI SDK](https://sdk.vercel.ai)**.
 
-::note{to="https://github.com/nuxt-ui-pro/chat" target="_blank"}
+::note{to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
 Check out our **AI Chat template** on GitHub for a real-life example.
 ::
 

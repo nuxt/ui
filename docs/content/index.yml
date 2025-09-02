@@ -165,7 +165,7 @@ component_customization:
 
     ::
 templates:
-  title: Build faster with official templates
+  title: Ship faster with official templates
   description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
   links:
     - label: Explore templates
