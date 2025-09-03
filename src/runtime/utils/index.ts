@@ -147,8 +147,6 @@ export function getDisplayValue<T, V>(
 
   const source = foundItem ?? value
 
-  console.log(source)
-
   if (source === null || source === undefined) {
     return undefined
   }
