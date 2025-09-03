@@ -62,7 +62,7 @@ export default defineAppConfig({
   "dependencies": {
     "@iconify-json/lucide": "^1.2.18",
     "@nuxt/ui": "^4.0.0",
-    "nuxt": "^3.16.0"
+    "nuxt": "^4.0.0"
   },
   "devDependencies": {
     "typescript": "^5.8.2",
@@ -78,9 +78,9 @@ export default defineAppConfig({
 ```
 
 ````md [README.md]
-# Nuxt 3 Minimal Starter
+# Nuxt 4 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Look at the [Nuxt 4 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
 
@@ -213,7 +213,7 @@ export default defineAppConfig({
   "dependencies": {
     "@iconify-json/lucide": "^1.2.18",
     "@nuxt/ui": "^4.0.0",
-    "nuxt": "^3.16.0"
+    "nuxt": "^4.0.0"
   },
   "devDependencies": {
     "typescript": "^5.8.2",
@@ -229,9 +229,9 @@ export default defineAppConfig({
 ```
 
 ````md [README.md]
-# Nuxt 3 Minimal Starter
+# Nuxt 4 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Look at the [Nuxt 4 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
 
