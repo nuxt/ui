@@ -55,6 +55,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Maʼlumot yoʻq'
+    },
+    fileUpload: {
+      removeFile: '{filename}ni oʻchirish'
     }
   }
 })

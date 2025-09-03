@@ -394,7 +394,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select all" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -420,7 +420,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -451,7 +451,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -482,7 +482,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -513,7 +513,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -544,7 +544,7 @@ exports[`Table > renders with columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -684,7 +684,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select all" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -1519,7 +1519,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select all" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -1584,7 +1584,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select all" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -1610,7 +1610,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -1641,7 +1641,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -1672,7 +1672,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -1703,7 +1703,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>
@@ -1734,7 +1734,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
           <div class="relative flex items-start flex-row">
             <div class="flex items-center h-5"><button arialabel="Select row" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
-                <!---->
+                <!--v-if-->
               </button></div>
             <!--v-if-->
           </div>

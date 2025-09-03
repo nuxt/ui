@@ -10,6 +10,6 @@ Use the auto-imported `useFormField` composable to integrate custom inputs with 
 
 ```vue
 <script setup lang="ts">
-const { inputId, emitFormBlur, emitFormInput, emitFormChange } = useFormField()
+const { id, emitFormBlur, emitFormInput, emitFormChange } = useFormField()
 </script>
 ```

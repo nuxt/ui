@@ -55,6 +55,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Veri yok'
+    },
+    fileUpload: {
+      removeFile: '{filename} kaldır'
     }
   }
 })

@@ -93,6 +93,7 @@ import { get } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import UBadge from './Badge.vue'
 
 const props = withDefaults(defineProps<TabsProps<T>>(), {
   content: true,

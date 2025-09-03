@@ -55,6 +55,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Маълумот нест'
+    },
+    fileUpload: {
+      removeFile: '{filename}-ро хориҷ кунед'
     }
   }
 })

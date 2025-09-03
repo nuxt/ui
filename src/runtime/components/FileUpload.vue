@@ -96,9 +96,8 @@ export interface FileUploadProps<M extends boolean = false> {
   ui?: FileUpload['slots']
 }
 
-export interface FileUploadEmits<M extends boolean = false> {
-  'update:modelValue': [payload: M extends true ? File[] : File | null]
-  'change': [event: Event]
+export interface FileUploadEmits {
+  change: [event: Event]
 }
 
 type FileUploadFiles<M> = (M extends true ? File[] : File) | null
@@ -127,7 +126,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 import { computed, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
+import { useAppConfig, useLocale } from '#imports'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
@@ -146,12 +145,14 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   layout: 'grid',
   position: 'outside'
 })
-const emits = defineEmits<FileUploadEmits<M>>()
+const emits = defineEmits<FileUploadEmits>()
 const slots = defineSlots<FileUploadSlots<M>>()
 
 const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 
 const appConfig = useAppConfig() as FileUpload['AppConfig']
+
+const { t } = useLocale()
 
 const [DefineFilesTemplate, ReuseFilesTemplate] = createReusableTemplate()
 
@@ -235,6 +236,8 @@ function removeFile(index?: number) {
 
   if (!props.multiple || index === undefined) {
     onUpdate([], true)
+
+    dropzoneRef.value?.focus()
     return
   }
 
@@ -242,6 +245,8 @@ function removeFile(index?: number) {
   files.splice(index, 1)
 
   onUpdate(files, true)
+
+  dropzoneRef.value?.focus()
 }
 
 watch(modelValue, (newValue) => {
@@ -298,6 +303,7 @@ defineExpose({
                     }),
                     ...typeof fileDelete === 'object' ? fileDelete : undefined
                   }"
+                  :aria-label="t('fileUpload.removeFile', { filename: (file as File).name })"
                   :trailing-icon="fileDeleteIcon || appConfig.ui.icons.close"
                   :class="ui.fileTrailingButton({ class: props.ui?.fileTrailingButton })"
                   @click.stop.prevent="removeFile(index)"
@@ -322,6 +328,8 @@ defineExpose({
         :class="ui.base({ class: props.ui?.base })"
         :tabindex="interactive && !disabled ? 0 : -1"
         @click="interactive && !disabled && open()"
+        @keydown.prevent
+        @keyup.enter.space="interactive && !disabled && open()"
       >
         <ReuseFilesTemplate v-if="position === 'inside'" />
 

@@ -9,6 +9,10 @@
     "v2",
     "v3"
   ],
+  "ignoreDeps": [
+    "@nuxt/module-builder",
+    "typescript"
+  ],
   "packageRules": [
     {
       "matchBaseBranches": [
@@ -31,6 +35,13 @@
       "matchPackageNames": [
         "reka-ui",
         "vaul-vue"
+      ]
+    },
+    {
+      "groupName": "vite",
+      "matchPackageNames": [
+        "vite",
+        "@vitejs/plugin-vue"
       ]
     },
     {

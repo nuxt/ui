@@ -67,7 +67,7 @@ export interface RadioGroupProps<T extends RadioGroupItem = RadioGroupItem> exte
 }
 
 export type RadioGroupEmits = RadioGroupRootEmits & {
-  change: [payload: Event]
+  change: [event: Event]
 }
 
 type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue>

@@ -266,3 +266,7 @@ Use the available slots to create a more complex Timeline.
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog
