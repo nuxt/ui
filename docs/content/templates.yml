@@ -6,15 +6,15 @@ hero:
 navigation: false
 templates:
   - title: 'Portfolio'
-    description: "A sleek, modern portfolio template to showcase your work, skills, blog posts, speaking engagements, and provide contact information. Which can customized easily from the `content/` directory."
+    description: "A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content."
     icon: i-lucide-user
     framework: nuxt
     features:
-      - title: Sections for Projects, Blog, Speaking & About
+      - title: Projects, blog, speaking & about sections
         icon: i-lucide-layout-list
-      - title: Easily editable content via Markdown & YAML
+      - title: Markdown & YAML content
         icon: i-simple-icons-markdown
-      - title: Fully responsive design
+      - title: Fully responsive
         icon: i-lucide-smartphone
     links:
       - label: Preview
@@ -30,16 +30,16 @@ templates:
         color: neutral
         variant: outline
   - title: 'Chat'
-    description: "An AI chatbot template designed to help you build your own chatbot with Nuxt UI components."
+    description: "An AI chatbot template to build your own chatbot powered by Nuxt MDC and Vercel AI SDK."
     icon: i-lucide-message-circle
     framework: nuxt
     features:
-      - title: Powered by Vercel AI SDK
-        icon: i-simple-icons-vercel
-      - title: GitHub OAuth authentication
+      - title: GitHub authentication
         icon: i-lucide-lock
-      - title: Saved chats and messages
+      - title: Persistent chat history
         icon: i-lucide-database
+      - title: Markdown syntax highlight
+        icon: i-lucide-palette
     links:
       - label: Preview
         to: https://chat-template.nuxt.dev
@@ -54,15 +54,15 @@ templates:
         color: neutral
         variant: outline
   - title: 'Dashboard'
-    description: "A template to illustrate how to build your own dashboard with 15+ Nuxt UI components, designed specifically to create a consistent look and feel."
+    description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
     icon: i-lucide-bar-chart-big
     framework: nuxt
     features:
-      - title: Mix with SaaS template for a complete solution
+      - title: Works with SaaS template
         icon: i-lucide-puzzle
-      - title: Includes custom components for charts, date pickers, etc.
+      - title: Charts and date pickers
         icon: i-lucide-bar-chart-big
-      - title: Resizable multi-column layout
+      - title: Multi-column layout
         icon: i-lucide-columns-3
     links:
       - label: Preview
@@ -78,13 +78,13 @@ templates:
         color: neutral
         variant: outline
   - title: 'Dashboard'
-    description: "A template to illustrate how to build your own dashboard with 15+ Nuxt UI components, designed specifically to create a consistent look and feel."
+    description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
     icon: i-lucide-bar-chart-big
     framework: vue
     features:
-      - title: Includes custom components for charts, date pickers, etc.
+      - title: Charts and date pickers
         icon: i-lucide-bar-chart-big
-      - title: Resizable multi-column layout
+      - title: Multi-column layout
         icon: i-lucide-columns-3
     links:
       - label: Preview
@@ -100,16 +100,16 @@ templates:
         color: neutral
         variant: outline
   - title: 'SaaS'
-    description: "A fully built SaaS application to launch your next project. It includes a landing page, a pricing page, a documentation and a blog which can customized easily from the `content/` directory."
+    description: "A SaaS template with landing, pricing, docs and blog powered by Nuxt Content."
     icon: i-lucide-cloud
     framework: nuxt
     features:
-      - title: Includes Landing & Docs sections
+      - title: Landing, pricing, docs & blog sections
         icon: i-lucide-grid-2x2-plus
-      - title: Customizable command palette
-        icon: i-lucide-command
-      - title: Authentication pages (login, register)
+      - title: Authentication pages
         icon: i-lucide-user-round-check
+      - title: YAML content
+        icon: i-simple-icons-yaml
     links:
       - label: Preview
         to: https://saas-template.nuxt.dev
@@ -124,16 +124,16 @@ templates:
         icon: i-simple-icons-github
         color: neutral
   - title: 'Landing'
-    description: "A landing page template you can use as a starting point for your next idea. You can change the content easily in [`content/index.yml`](https://github.com/nuxt-ui-templates/landing/blob/v3/content/index.yml)."
+    description: "A modern landing page template powered by Nuxt Content."
     icon: i-lucide-layout
     framework: nuxt
     features:
-      - title: Full responsive
-        icon: i-lucide-smartphone
-      - title: Features, Pricing, Testimonials and FAQ sections
+      - title: Features, pricing, testimonials & FAQ
         icon: i-lucide-rows-3
-      - title: Write content in YAML
+      - title: YAML content
         icon: i-simple-icons-yaml
+      - title: Fully responsive
+        icon: i-lucide-smartphone
     links:
       - label: Preview
         to: https://landing-template.nuxt.dev
@@ -148,15 +148,15 @@ templates:
         color: neutral
         variant: outline
   - title: 'Docs'
-    description: "A ready-to-use documentation template integrated with [Nuxt Content](https://content.nuxt.com). You can start writing your docs right away inside the [`content/`](https://github.com/nuxt-ui-templates/docs/tree/v3/content) directory."
+    description: "A documentation template powered by Nuxt Content."
     icon: i-lucide-book
     framework: nuxt
     features:
-      - title: Write pages in Markdown
+      - title: Markdown pages
         icon: i-simple-icons-markdown
-      - title: Generated navigation & table of contents
+      - title: Auto-generated navigation
         icon: i-lucide-text
-      - title: Full-text search out of the box
+      - title: Full-text search
         icon: i-lucide-search
     links:
       - label: Preview
@@ -166,17 +166,19 @@ templates:
         trailingIcon: i-lucide-arrow-up-right
         color: neutral
       - label: GitHub
-        to: https://github.com/nuxt-ui-templates/docs/tree/v3
+        to: https://github.com/nuxt-ui-templates/docs
         target: _blank
         variant: outline
         icon: i-simple-icons-github
         color: neutral
   - title: 'Starter'
-    description: "A minimal template to get started with Nuxt UI in your Nuxt project."
+    description: "A minimal template to get started with Nuxt UI."
     icon: i-lucide-flower
     framework: nuxt
     features:
-      - title: ESLint Configured
+      - title: Nuxt configured
+        icon: i-simple-icons-nuxt
+      - title: ESLint configured
         icon: i-simple-icons-eslint
     links:
       - label: Preview
@@ -192,11 +194,13 @@ templates:
         icon: i-simple-icons-github
         color: neutral
   - title: 'Starter'
-    description: "A minimal template to get started with Nuxt UI in your Vue project."
+    description: "A minimal template to get started with Nuxt UI."
     icon: i-lucide-flower
     framework: vue
     features:
-      - title: ESLint Configured
+      - title: Vite configured
+        icon: i-simple-icons-vite
+      - title: ESLint configured
         icon: i-simple-icons-eslint
     links:
       - label: Preview

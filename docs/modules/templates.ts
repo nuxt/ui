@@ -24,8 +24,8 @@ async function captureTemplate(nuxt: Nuxt, url: string, filename: string, darkMo
 
   await captureWebsite.file(url, filename, {
     darkMode,
-    width: 1200,
-    height: 675,
+    width: 1280,
+    height: 720,
     launchOptions: { headless: true }
   })
 }
@@ -46,15 +46,15 @@ export default defineNuxtModule((_, nuxt) => {
       }
 
       const name = template.title.toLowerCase()
-      console.log(`Generating screenshot for Template ${template.title} hitting ${url}...`)
+      console.log(`Generating screenshots for Template ${template.title} hitting ${url}...`)
       try {
         await Promise.all([
           captureTemplate(nuxt, url, join(nuxt.options.rootDir, `public/assets/templates/${template.framework}`, `${name}-dark.png`), true),
           captureTemplate(nuxt, url, join(nuxt.options.rootDir, `public/assets/templates/${template.framework}`, `${name}-light.png`), false)
         ])
-        console.log(`Screenshot for ${template.title} generated successfully`)
+        console.log(`Screenshots for ${template.title} generated successfully`)
       } catch (error) {
-        console.error(`Error generating screenshot for ${template.title}:`, error)
+        console.error(`Error generating screenshots for ${template.title}:`, error)
       }
     }
   })
