@@ -6,9 +6,3 @@ v3:
 
 v4:
   - base-branch: 'v4'
-
-documentation:
-  - changed-files:
-    - any-glob-to-any-file:
-      - 'docs/**/*'
-      - '**/*.md'

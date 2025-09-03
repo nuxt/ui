@@ -43,8 +43,8 @@ pricing:
       - 'Templates: Starter, Landing, Docs, SaaS and Dashboard'
       - Auto-layout & responsive ready
       - Tailwind CSS assets & icons included
-      - Free [preview available](https://www.figma.com/design/mxXR9binOSLU3rYKZZRPXs/PREVIEW---NuxtUIPro-V3-BETA?m=auto&t=c4598Wr0rZwKPs5M-1)
-      - Includes Nuxt UI [Figma Kit](https://www.figma.com/community/file/1288455405058138934)
+      - Free [preview available](https://go.nuxt.com/figma-ui-pro3)
+      - Includes Nuxt UI [Figma Kit](https://go.nuxt.com/figma-ui3)
     button:
       label: Buy Figma Kit
       to: 'https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d'

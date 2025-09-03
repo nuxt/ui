@@ -14,7 +14,6 @@ export default defineNuxtConfig({
     '@nuxt/ui-pro',
     '@nuxt/content',
     '@nuxt/image',
-    '@nuxthub/core',
     '@nuxtjs/plausible',
     '@vueuse/nuxt',
     'nuxt-component-meta',
@@ -169,10 +168,6 @@ export default defineNuxtConfig({
         }
       }
     }
-  },
-
-  hub: {
-    ai: true
   },
 
   vite: {

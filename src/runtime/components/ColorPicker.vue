@@ -82,6 +82,7 @@ const props = withDefaults(defineProps<ColorPickerProps>(), {
   throttle: 50,
   defaultValue: '#FFFFFF'
 })
+
 const modelValue = defineModel<string>(undefined)
 
 const appConfig = useAppConfig() as ColorPicker['AppConfig']
