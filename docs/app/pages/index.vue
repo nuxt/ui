@@ -251,11 +251,13 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           }"
         >
           <UColorModeImage
-            :light="item.thumbnail.light"
-            :dark="item.thumbnail.dark"
-            :alt="item.title"
-            class="rounded-lg w-full border border-default aspect-video"
+            :light="`/assets/templates/${item.framework}/${item.title.toLowerCase()}-light.png`"
+            :dark="`/assets/templates/${item.framework}/${item.title.toLowerCase()}-dark.png`"
+            :alt="`Template ${item.title} screenshot`"
+            width="620"
+            height="348"
             loading="lazy"
+            class="rounded-lg w-full border border-default aspect-video"
           />
         </UPageCard>
       </UCarousel>

@@ -113,7 +113,7 @@ features2:
       icon: i-lucide-smile
 section4:
   title: Start designing now.
-  description: '**From download to deployment in simple steps.** :br Get instant access to production-ready components and start creating.'
+  description: '**From Figma to deployment in simple steps.** :br Get instant access to production-ready components and start creating.'
   links:
     - label: Open Figma Kit
       to: 'https://go.nuxt.com/figma-ui'
@@ -122,11 +122,13 @@ section4:
       variant: outline
       target: _blank
   steps:
-    - title: Download & Import
-      description: Just download the file and drag & drop it directly into Figma.
+    - title: Open & Duplicate
+      description: Visit the Figma Community page and duplicate the file directly to your projects.
+      to: 'https://go.nuxt.com/figma-ui'
+      target: _blank
       image:
         src: /figma/step-1.png
-        alt: Import the Nuxt UI Figma design kit
+        alt: Open and duplicate the Nuxt UI Figma design kit
         width: 314
         height: 230
     - title: Customize to your brand
