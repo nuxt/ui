@@ -47,6 +47,8 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   },
   lazy: true
 })
+
+const testing = ref(0)
 </script>
 
 <template>
@@ -55,6 +57,20 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
       <USelectMenu :items="items" placeholder="Search..." default-value="Apple" />
     </div>
     <div class="flex items-center gap-2">
+      <USelectMenu
+        :model-value="testing"
+        value-key="value"
+        :items="[
+          {
+            label: 'John Doe',
+            value: null
+          },
+          {
+            label: 'John Lennon',
+            value: 1
+          }
+        ]"
+      />
       <USelectMenu
         v-for="variant in variants"
         :key="variant"
