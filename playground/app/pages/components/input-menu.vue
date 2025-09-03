@@ -42,8 +42,6 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   },
   lazy: true
 })
-
-const testing = ref([])
 </script>
 
 <template>
@@ -52,12 +50,6 @@ const testing = ref([])
       <UInputMenu :items="items" autofocus placeholder="Search..." default-value="Apple" />
     </div>
     <div class="flex items-center gap-2">
-      <UInputMenu
-        v-model="testing"
-        :items="statuses"
-        multiple
-        placeholder="Placeholder"
-      />
       <UInputMenu
         v-for="variant in variants"
         :key="variant"
