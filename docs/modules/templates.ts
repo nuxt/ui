@@ -2,7 +2,6 @@ import { defineNuxtModule } from '@nuxt/kit'
 import { existsSync } from 'node:fs'
 import { join } from 'pathe'
 import captureWebsite from 'capture-website'
-import type { Nuxt } from '@nuxt/schema'
 
 interface ContentFile {
   id?: string
@@ -17,12 +16,12 @@ interface TemplateItem {
   links: { to: string }[]
 }
 
-async function captureTemplate(nuxt: Nuxt, url: string, filename: string, darkMode: boolean) {
-  if (existsSync(filename)) {
+async function captureTemplate(url: string, path: string, darkMode: boolean) {
+  if (existsSync(path)) {
     return
   }
 
-  await captureWebsite.file(url, filename, {
+  await captureWebsite.file(url, path, {
     darkMode,
     width: 1280,
     height: 720,
@@ -45,12 +44,18 @@ export default defineNuxtModule((_, nuxt) => {
         continue
       }
 
-      const name = template.title.toLowerCase()
+      const darkPath = join(nuxt.options.rootDir, `public/assets/templates/${template.framework}`, `${template.title.toLowerCase()}-dark.png`)
+      const lightPath = join(nuxt.options.rootDir, `public/assets/templates/${template.framework}`, `${template.title.toLowerCase()}-light.png`)
+
+      if (existsSync(darkPath) && existsSync(lightPath)) {
+        continue
+      }
+
       console.log(`Generating screenshots for Template ${template.title} hitting ${url}...`)
       try {
         await Promise.all([
-          captureTemplate(nuxt, url, join(nuxt.options.rootDir, `public/assets/templates/${template.framework}`, `${name}-dark.png`), true),
-          captureTemplate(nuxt, url, join(nuxt.options.rootDir, `public/assets/templates/${template.framework}`, `${name}-light.png`), false)
+          captureTemplate(url, darkPath, true),
+          captureTemplate(url, lightPath, false)
         ])
         console.log(`Screenshots for ${template.title} generated successfully`)
       } catch (error) {

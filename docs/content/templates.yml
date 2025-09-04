@@ -5,6 +5,30 @@ hero:
   description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
 navigation: false
 templates:
+  - title: 'Changelog'
+    description: "A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC."
+    icon: i-lucide-newspaper
+    framework: nuxt
+    features:
+      - title: GitHub API integration
+        icon: i-lucide-github
+      - title: Beautiful typography
+        icon: i-lucide-type
+      - title: Dark mode ready
+        icon: i-lucide-moon
+    links:
+      - label: Preview
+        to: https://changelog-template.nuxt.dev
+        target: _blank
+        leadingIcon: i-logos-nuxt-icon
+        trailingIcon: i-lucide-arrow-up-right
+        color: neutral
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/changelog
+        target: _blank
+        icon: i-simple-icons-github
+        color: neutral
+        variant: outline
   - title: 'Portfolio'
     description: "A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content."
     icon: i-lucide-user
@@ -88,7 +112,7 @@ templates:
         icon: i-lucide-columns-3
     links:
       - label: Preview
-        to: https://vue-dashboard-template.nuxt.dev
+        to: https://dashboard-vue-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-vue
         trailingIcon: i-lucide-arrow-up-right
@@ -182,7 +206,7 @@ templates:
         icon: i-simple-icons-eslint
     links:
       - label: Preview
-        to: https://ui-pro-starter.nuxt.dev
+        to: https://starter-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-nuxt-icon
         trailingIcon: i-lucide-arrow-up-right
@@ -204,7 +228,7 @@ templates:
         icon: i-simple-icons-eslint
     links:
       - label: Preview
-        to: https://ui-pro-starter-vue.nuxt.dev
+        to: https://starter-vue-template.nuxt.dev
         target: _blank
         leadingIcon: i-logos-vue
         trailingIcon: i-lucide-arrow-up-right
