@@ -137,7 +137,7 @@ export function getDisplayValue<T, V>(
     return compare(itemValue, value)
   })
 
-  if (value == null && foundItem) {
+  if (isEmpty(value) && foundItem) {
     return labelKey ? get(foundItem as Record<string, any>, labelKey as string) : undefined
   }
 
