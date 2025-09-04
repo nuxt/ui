@@ -1,5 +1,10 @@
 import { createMcpHandler } from 'mcp-handler'
-import { z } from 'zod/v3'
+
+/***
+ Workaround for using zod 3 for the mcp validation
+ Read here: https://github.com/modelcontextprotocol/typescript-sdk/issues/906
+ */
+import { z } from 'mcp-zod'
 
 // Create MCP handler using Vercel adapter
 const handler = createMcpHandler(

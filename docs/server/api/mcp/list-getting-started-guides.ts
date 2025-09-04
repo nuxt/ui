@@ -1,4 +1,5 @@
 export default defineCachedEventHandler(async (event) => {
+  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   const pages = await queryCollection(event, 'docs')
     .where('path', 'LIKE', '/docs/getting-started/%')
     .where('extension', '=', 'md')

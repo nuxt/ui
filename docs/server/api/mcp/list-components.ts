@@ -1,13 +1,16 @@
 export default defineCachedEventHandler(async (event) => {
   // Use the same approach as /pages/components.vue
+  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   const components = await queryCollection(event, 'docs')
     .where('path', 'LIKE', '%/components/%')
     .where('extension', '=', 'md')
+    // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     .select('path', 'title', 'description', 'category')
     .all()
 
   // Group components by category
   const componentsPerCategory = components.reduce((acc, component) => {
+    // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     const category = component.category || 'uncategorized'
     acc[category] = [...(acc[category] || []), component]
     return acc

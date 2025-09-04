@@ -5,5 +5,7 @@ import components from '#component-example/nitro'
 export default defineEventHandler((event) => {
   appendHeader(event, 'Access-Control-Allow-Origin', '*')
 
-  return Object.entries(components).map(([_key, value]) => value.pascalName)
+  return Object.entries<{ pascalName: string }>(components).map(([_key, value]) => {
+    return value.pascalName
+  })
 })

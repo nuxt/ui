@@ -8,6 +8,7 @@ export default defineCachedEventHandler(async (event) => {
   const rawQuery = getQuery(event)
   const { version } = querySchema.parse(rawQuery)
 
+  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   const page = await queryCollection(event, 'docs')
     .where('path', 'LIKE', `%/migration/${version}`)
     .where('extension', '=', 'md')

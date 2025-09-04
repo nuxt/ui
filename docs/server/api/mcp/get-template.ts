@@ -9,6 +9,7 @@ export default defineCachedEventHandler(async (event) => {
   const { templateName } = querySchema.parse(rawQuery)
 
   const { templates } = await $fetch('/api/mcp/list-templates')
+  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   const template = templates.find((t: any) => t.title.toLowerCase() === templateName.toLowerCase())
 
   if (!template) {

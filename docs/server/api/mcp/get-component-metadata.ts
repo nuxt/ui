@@ -17,9 +17,11 @@ export default defineCachedEventHandler(async (event) => {
   const kebabName = kebabCase(normalizedName)
 
   // Get basic component info without documentation content
+  // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   const page = await queryCollection(event, 'docs')
     .where('path', 'LIKE', `%/components/${kebabName}`)
     .where('extension', '=', 'md')
+    // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     .select('id', 'title', 'description', 'path', 'category', 'links')
     .first()
 
@@ -40,6 +42,7 @@ export default defineCachedEventHandler(async (event) => {
     name: normalizedName,
     title: page.title,
     description: page.description,
+    // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
     category: page.category,
     documentation_url: `https://ui4.nuxt.com${page.path}`,
     metadata: {
