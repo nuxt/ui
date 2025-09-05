@@ -142,6 +142,8 @@ export const collections = {
         steps: z.array(z.object({
           title: z.string(),
           description: z.string(),
+          to: z.string().optional(),
+          target: z.string().optional(),
           image: Image
         }))
       }),
