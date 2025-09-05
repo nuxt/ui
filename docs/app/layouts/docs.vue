@@ -8,6 +8,9 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const categories = {
   'getting-started': [{
+    id: 'ai',
+    title: 'AI for Agents'
+  }, {
     id: 'integrations',
     title: 'Integrations'
   }],

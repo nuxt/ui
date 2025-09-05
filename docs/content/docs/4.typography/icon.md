@@ -1,6 +1,6 @@
 ---
 title: Icon
-description: 'Add icons from popular icon libraries to enhance content.'
+description: 'Display icons from popular icon libraries to enhance your content.'
 framework: nuxt
 category: components
 ---

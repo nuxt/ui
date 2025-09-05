@@ -156,35 +156,35 @@ section4:
 customers:
   title: Used by 2,000+ developers & designers around the world.
   items:
-    - src: /logos/springfieldclinic.svg
+    - src: /figma/logos/springfieldclinic.svg
       alt: Springfield Clinic
-    - src: /logos/churnkey.svg
+    - src: /figma/logos/churnkey.svg
       alt: Churnkey
-    - src: /logos/bosch.svg
+    - src: /figma/logos/bosch.svg
       alt: BOSCH
-    - src: /logos/blizzard.svg
+    - src: /figma/logos/blizzard.svg
       alt: Blizzard
-    - src: /logos/bodet.svg
+    - src: /figma/logos/bodet.svg
       alt: Bodet
-    - src: /logos/win.svg
+    - src: /figma/logos/win.svg
       alt: WinReality
-    - src: /logos/tower.svg
+    - src: /figma/logos/tower.svg
       alt: Tower Research
-    - src: /logos/liegeairport.svg
+    - src: /figma/logos/liegeairport.svg
       alt: Liege Airport
-    - src: /logos/wuniversity.svg
+    - src: /figma/logos/wuniversity.svg
       alt: University of Washington
-    - src: /logos/funda.svg
+    - src: /figma/logos/funda.svg
       alt: Funda
-    - src: /logos/exxonmobil.svg
+    - src: /figma/logos/exxonmobil.svg
       alt: ExxonMobil
-    - src: /logos/mainpost.svg
+    - src: /figma/logos/mainpost.svg
       alt: Main Post
-    - src: /logos/insep.svg
+    - src: /figma/logos/insep.svg
       alt: INSEP
-    - src: /logos/applause.svg
+    - src: /figma/logos/applause.svg
       alt: Applause
-    - src: /logos/instadapp.svg
+    - src: /figma/logos/instadapp.svg
       alt: Instadapp
 faq:
   title: Frequently Asked Questions

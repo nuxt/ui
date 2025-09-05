@@ -1,6 +1,6 @@
 ---
 title: CodePreview
-description: 'Show live previews alongside source code for interactive documentation.'
+description: 'Display code examples with a preview and their source for clearer documentation.'
 framework: nuxt
 category: components
 ---
