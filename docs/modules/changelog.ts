@@ -4,7 +4,6 @@ import { kebabCase } from 'scule'
 
 interface CommitInfo {
   components?: string[]
-  proseComponents?: string[]
   version?: string
   hash: string
   date: string
@@ -40,23 +39,35 @@ export default defineNuxtModule({
       delete log.body
       const files = raw.replace(/\\/g, '/').trim().split('\n')
 
-      const regularComponents = files.map(i => kebabCase(i.match(/^src\/runtime\/components\/(\w+)\.vue$/)?.[1] ?? '')).filter(Boolean)
-      const proseComponents = files.map((i) => {
-        const match = i.match(/^src\/runtime\/components\/prose\/(\w+)\.vue$/)
-        return match?.[1] ? kebabCase(match[1]) : ''
-      }).filter(Boolean)
+      log.components = [...new Set(files.map((i) => {
+        const match = i.match(/^src\/runtime\/components\/(.+)\.vue$/)
+        if (!match) return ''
 
-      log.components = regularComponents
-      log.proseComponents = proseComponents
+        const fullPath = match[1]!
+
+        const parts = fullPath.split('/')
+
+        if (parts.length > 1) {
+          const subdir = parts[0]
+          const componentName = parts[parts.length - 1]!
+
+          if (subdir === 'prose') {
+            return `prose-${kebabCase(componentName)}`
+          }
+
+          return kebabCase(componentName)
+        }
+
+        return kebabCase(fullPath)
+      }).filter(Boolean) as string[])]
     }
 
-    const result = logs.filter(i => i.components?.length || i.proseComponents?.length || i.version)
+    const result = logs.filter(i => i.components?.length || i.version)
 
     addTemplate({
       filename: 'changelog.ts',
       getContents: () => `export interface CommitInfo {
   components?: string[]
-  proseComponents?: string[]
   version?: string
   hash: string
   date: string

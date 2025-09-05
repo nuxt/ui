@@ -7,18 +7,11 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
-const routeName = route.path.split('/').pop()
+const name = route.path.split('/').pop()
 
 const commits = computed(() => {
-  const related = changelog.filter((c) => {
-    if (c.version) return true
-
-    if (props.prose) {
-      return (c as any).proseComponents?.some((i: string) => i === routeName)
-    } else {
-      return c.components?.some((i: string) => i === routeName)
-    }
-  })
+  const componentName = props.prose ? `prose-${name}` : name
+  const related = changelog.filter(c => c.version || c.components?.some(i => i === componentName))
 
   return related.filter((i, idx) => !(i.version && (!related[idx + 1] || related[idx + 1]?.version)))
 })
