@@ -217,9 +217,12 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "@vercel/speed-insights",
       "better-sqlite3",
       "puppeteer",
-      "sharp"
+      "sharp",
+      "unrs-resolver"
     ],
     "ignoredBuiltDependencies": [
       "@parcel/watcher",

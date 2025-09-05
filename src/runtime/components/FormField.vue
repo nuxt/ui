@@ -32,6 +32,11 @@ export interface FormFieldProps {
    * @defaultValue `300`
    */
   validateOnInputDelay?: number
+  /**
+   * Position of the label. Overrides the Form's labelPosition.
+   * @defaultValue undefined (inherited from Form)
+   */
+  labelPosition?: 'top' | 'left' | 'right'
   class?: any
   ui?: FormField['slots']
 }
@@ -51,7 +56,7 @@ import { computed, ref, inject, provide, useId } from 'vue'
 import type { Ref } from 'vue'
 import { Primitive, Label } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey } from '../composables/useFormField'
+import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formLabelPositionInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
@@ -60,9 +65,13 @@ const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
 
+const labelPosition = inject(formLabelPositionInjectionKey, computed(() => 'top'))
+const effectiveLabelPosition = computed(() => props.labelPosition || labelPosition.value)
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })({
   size: props.size,
-  required: props.required
+  required: props.required,
+  labelPosition: effectiveLabelPosition.value
 }))
 
 const formErrors = inject<Ref<FormError[]> | null>(formErrorsInjectionKey, null)

@@ -22,9 +22,30 @@ export default {
       true: {
         label: `after:content-['*'] after:ms-0.5 after:text-error`
       }
+    },
+    labelPosition: {
+      top: {
+        root: '',
+        wrapper: '',
+        labelWrapper: 'flex content-center items-center justify-between',
+        container: 'mt-1 relative'
+      },
+      left: {
+        root: 'flex items-start gap-4',
+        wrapper: 'min-w-0 flex-shrink-0',
+        labelWrapper: 'flex content-center items-center justify-between',
+        container: 'relative flex-1'
+      },
+      right: {
+        root: 'flex items-start gap-4 flex-row-reverse',
+        wrapper: 'min-w-0 flex-shrink-0',
+        labelWrapper: 'flex content-center items-center justify-between',
+        container: 'relative flex-1'
+      }
     }
   },
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    labelPosition: 'top'
   }
 }

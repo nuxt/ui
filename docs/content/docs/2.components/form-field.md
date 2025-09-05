@@ -170,6 +170,44 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
+### Label Position
+
+Use the `label-position` prop to control where the label appears relative to the form control. This overrides the position set by the parent Form component.
+
+::component-code
+---
+prettier: true
+ignore:
+  - label
+props:
+  label: Email
+  labelPosition: left
+slots:
+  default: |
+
+    <UInput placeholder="Enter your email" />
+---
+
+:u-input{placeholder="Enter your email"}
+::
+
+::component-code
+---
+prettier: true
+ignore:
+  - label
+props:
+  label: Email
+  labelPosition: right
+slots:
+  default: |
+
+    <UInput placeholder="Enter your email" />
+---
+
+:u-input{placeholder="Enter your email"}
+::
+
 ## API
 
 ### Props

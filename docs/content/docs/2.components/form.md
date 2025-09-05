@@ -167,6 +167,32 @@ name: 'form-example-nested-list'
 ---
 ::
 
+### Horizontal Forms
+
+Use the `label-position` prop to control the position of labels in form fields. You can set it to `left` for horizontal layouts with labels on the left, or `right` for labels on the right side.
+
+::component-example
+---
+name: 'form-example-horizontal'
+props:
+  class: 'w-80'
+---
+::
+
+You can also use `right` positioned labels:
+
+::component-example
+---
+name: 'form-example-right-label'
+props:
+  class: 'w-80'
+---
+::
+
+::tip
+Individual FormField components can override the form's `label-position` by setting their own `label-position` prop.
+::
+
 ## API
 
 ### Props

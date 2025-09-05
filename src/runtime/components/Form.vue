@@ -49,6 +49,11 @@ export interface FormProps<S extends FormSchema, T extends boolean = true> {
    * @defaultValue `true`
    */
   loadingAuto?: boolean
+  /**
+   * Position of the labels in form fields.
+   * @defaultValue 'top'
+   */
+  labelPosition?: 'top' | 'left' | 'right'
   class?: any
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
 }
@@ -67,7 +72,7 @@ export interface FormSlots {
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey } from '../composables/useFormField'
+import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formLabelPositionInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import { validateSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
@@ -82,7 +87,8 @@ const props = withDefaults(defineProps<FormProps<S, T>>(), {
   validateOnInputDelay: 300,
   attach: true,
   transform: () => true as T,
-  loadingAuto: true
+  loadingAuto: true,
+  labelPosition: 'top'
 })
 
 const emits = defineEmits<FormEmits<S, T>>()
@@ -264,6 +270,8 @@ provide(formOptionsInjectionKey, computed(() => ({
   disabled: disabled.value,
   validateOnInputDelay: props.validateOnInputDelay
 })))
+
+provide(formLabelPositionInjectionKey, computed(() => props.labelPosition))
 
 defineExpose<Form<S>>({
   validate: _validate,

@@ -2,7 +2,6 @@ import { inject, computed, provide } from 'vue'
 import type { InjectionKey, Ref, ComputedRef } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import type { UseEventBusReturn } from '@vueuse/core'
-import type { FormFieldProps } from '../types'
 import type { FormErrorWithId, FormEvent, FormInputEvents, FormFieldInjectedOptions, FormInjectedOptions } from '../types/form'
 import type { GetObjectField } from '../types/utils'
 
@@ -17,11 +16,12 @@ type Props<T> = {
 
 export const formOptionsInjectionKey: InjectionKey<ComputedRef<FormInjectedOptions>> = Symbol('nuxt-ui.form-options')
 export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent<any>, string>> = Symbol('nuxt-ui.form-events')
-export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<FormFieldProps>> | undefined> = Symbol('nuxt-ui.form-field')
+export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<any>> | undefined> = Symbol('nuxt-ui.form-field')
 export const inputIdInjectionKey: InjectionKey<Ref<string | undefined>> = Symbol('nuxt-ui.input-id')
 export const formInputsInjectionKey: InjectionKey<Ref<Record<string, { id?: string, pattern?: RegExp }>>> = Symbol('nuxt-ui.form-inputs')
 export const formLoadingInjectionKey: InjectionKey<Readonly<Ref<boolean>>> = Symbol('nuxt-ui.form-loading')
 export const formErrorsInjectionKey: InjectionKey<Readonly<Ref<FormErrorWithId[]>>> = Symbol('nuxt-ui.form-errors')
+export const formLabelPositionInjectionKey: InjectionKey<ComputedRef<'top' | 'left' | 'right'>> = Symbol('nuxt-ui.form-label-position')
 
 export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, deferInputValidation?: boolean }) {
   const formOptions = inject(formOptionsInjectionKey, undefined)
