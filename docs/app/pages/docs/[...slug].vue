@@ -24,9 +24,13 @@ watch(page, () => {
 }, { immediate: true })
 
 const { data: surround } = await useAsyncData(`${kebabCase(route.path)}-surround`, () => {
-  return queryCollectionItemSurroundings('docs', route.path, {
-    fields: ['description']
-  }).orWhere(group => group.where('framework', '=', framework.value).where('framework', 'IS NULL'))
+  return queryCollectionItemSurroundings('docs', route.path, { fields: ['description'] })
+    .order('category', 'ASC')
+    .orWhere((group) => {
+      return group
+        .where('framework', '=', framework.value)
+        .where('framework', 'IS NULL')
+    })
 }, {
   watch: [framework]
 })

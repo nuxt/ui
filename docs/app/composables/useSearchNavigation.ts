@@ -22,32 +22,39 @@ function processNavigationItemIcon(item: ContentNavigationItem) {
   if (item.path.startsWith('/docs/composables')) {
     icon = 'i-lucide-square-function'
   }
+  if (item.path.startsWith('/docs/typography')) {
+    icon = 'i-lucide-square-pilcrow'
+  }
   return {
     ...item,
     icon
   }
 }
 
-export const useContentNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
+export const useSearchNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
   const { framework } = useSharedData()
 
   const mappedNavigation = computed(() => navigation.value?.[0]?.children?.map(item => processNavigationItem(item)))
 
-  const filteredNavigation = computed(() => mappedNavigation.value?.map((item) => {
+  const filterNavigationByFramework = (item: any): any => {
+    const filteredChildren = item.children?.filter((child: any) => {
+      if (child.path.startsWith('/docs/components')) {
+        return true
+      }
+
+      if (child.framework && child.framework !== framework.value) {
+        return false
+      }
+      return true
+    })?.map((child: any) => filterNavigationByFramework(processNavigationItemIcon(child)))
+
     return {
       ...item,
-      children: item.children?.filter((child: any) => {
-        if (child.path.startsWith('/docs/components')) {
-          return true
-        }
-
-        if (child.framework && child.framework !== framework.value) {
-          return false
-        }
-        return true
-      })?.map(processNavigationItemIcon)
+      children: filteredChildren?.length ? filteredChildren : undefined
     }
-  }))
+  }
+
+  const filteredNavigation = computed(() => mappedNavigation.value?.map(filterNavigationByFramework))
 
   return {
     mappedNavigation,
