@@ -12,17 +12,21 @@ Use the `accordion` and `accordion-item` components to display an [Accordion](/d
 ::code-preview{class="[&>div]:*:my-0"}
 
 :::accordion
+---
+defaultValue:
+  - '1'
+---
 
-::accordion-item{label="What are the main considerations when upgrading to Nuxt UI v3?" icon="i-lucide-circle-help"}
-The transition to v3 involves significant changes, including new component structures, updated theming approaches, and revised TypeScript definitions. We recommend a careful, incremental upgrade process, starting with thorough testing in a development environment.
+::accordion-item{label="Is Nuxt UI free to use?" icon="i-lucide-circle-help"}
+Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.
 ::
 
-::accordion-item{label="Is Nuxt UI v3 compatible with standalone Vue projects?" icon="i-lucide-circle-help"}
-Nuxt UI is now compatible with Vue! You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
+::accordion-item{label="Can I use Nuxt UI with Vue without Nuxt?" icon="i-lucide-circle-help"}
+Yes! While optimized for Nuxt, Nuxt UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
 ::
 
-::accordion-item{label="Can I customize the default styling?" icon="i-lucide-circle-help"}
-Yes! Nuxt UI provides a comprehensive theming system that allows you to customize colors, spacing, typography, and component variants. You can override defaults through your app configuration or create entirely custom themes while maintaining accessibility and consistency.
+::accordion-item{label="Is Nuxt UI production-ready?" icon="i-lucide-circle-help"}
+Yes! Nuxt UI is used in production by thousands of applications with extensive tests, regular updates, and active maintenance.
 ::
 
 :::
@@ -31,17 +35,21 @@ Yes! Nuxt UI provides a comprehensive theming system that allows you to customiz
 
 ```mdc
 ::accordion
+---
+defaultValue:
+  - '1'
+---
 
-::accordion-item{label="What are the main considerations when upgrading to Nuxt UI v3?" icon="i-lucide-circle-help"}
-The transition to v3 involves significant changes, including new component structures, updated theming approaches, and revised TypeScript definitions. We recommend a careful, incremental upgrade process, starting with thorough testing in a development environment.
+::accordion-item{label="Is Nuxt UI free to use?" icon="i-lucide-circle-help"}
+Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.
 ::
 
-::accordion-item{label="Is Nuxt UI v3 compatible with standalone Vue projects?" icon="i-lucide-circle-help"}
-Nuxt UI is now compatible with Vue! You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
+::accordion-item{label="Can I use Nuxt UI with Vue without Nuxt?" icon="i-lucide-circle-help"}
+Yes! While optimized for Nuxt, Nuxt UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
 ::
 
-::accordion-item{label="Can I customize the default styling?" icon="i-lucide-circle-help"}
-Yes! Nuxt UI provides a comprehensive theming system that allows you to customize colors, spacing, typography, and component variants. You can override defaults through your app configuration or create entirely custom themes while maintaining accessibility and consistency.
+::accordion-item{label="Is Nuxt UI production-ready?" icon="i-lucide-circle-help"}
+Yes! Nuxt UI is used in production by thousands of applications with extensive tests, regular updates, and active maintenance.
 ::
 
 ::
