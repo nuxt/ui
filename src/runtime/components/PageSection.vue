@@ -126,7 +126,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageSection 
         <div v-if="!!slots.body || (features?.length || !!slots.features)" :class="ui.body({ class: props.ui?.body })">
           <slot name="body">
             <ul v-if="features?.length || !!slots.features" :class="ui.features({ class: props.ui?.features })">
-              <slot name="features">
+              <slot name="features" :features="features">
                 <UPageFeature
                   v-for="(feature, index) in features"
                   :key="index"
@@ -141,7 +141,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageSection 
         <div v-if="!!slots.footer || (links?.length || !!slots.links)" :class="ui.footer({ class: props.ui?.footer })">
           <slot name="footer">
             <div v-if="links?.length || !!slots.links" :class="ui.links({ class: props.ui?.links })">
-              <slot name="links">
+              <slot name="links" :links="links">
                 <UButton v-for="(link, index) in links" :key="index" size="lg" v-bind="link" />
               </slot>
             </div>
