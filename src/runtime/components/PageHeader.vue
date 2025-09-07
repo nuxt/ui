@@ -26,6 +26,7 @@ export interface PageHeaderProps {
 
 export interface PageHeaderSlots {
   headline(props?: {}): any
+  wrapper(props?: { ui: PageHeader['slots'] }): any
   title(props?: {}): any
   description(props?: {}): any
   links(props?: {}): any
@@ -60,17 +61,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageHeader |
 
     <div :class="ui.container({ class: props.ui?.container })">
       <div :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <h1 v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
-          <slot name="title">
-            {{ title }}
-          </slot>
-        </h1>
+        <slot name="wrapper" :ui="ui">
+          <h1 v-if="title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
+            <slot name="title">
+              {{ title }}
+            </slot>
+          </h1>
 
-        <div v-if="links?.length || !!slots.links" :class="ui.links({ class: props.ui?.links })">
-          <slot name="links">
-            <UButton v-for="(link, index) in links" :key="index" color="neutral" variant="outline" v-bind="link" />
-          </slot>
-        </div>
+          <div v-if="links?.length || !!slots.links" :class="ui.links({ class: props.ui?.links })">
+            <slot name="links">
+              <UButton v-for="(link, index) in links" :key="index" color="neutral" variant="outline" v-bind="link" />
+            </slot>
+          </div>
+        </slot>
       </div>
 
       <div v-if="description || !!slots.description" :class="ui.description({ class: props.ui?.description })">
