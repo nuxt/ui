@@ -477,7 +477,7 @@ describe('Form', () => {
               <UInput id="passwordInput" v-model="state.password" />
             </UFormField>
 
-            <UForm v-if="showNested" ref="nestedForm" :state="state.nested" :schema="nestedSchema">
+            <UForm v-if="showNested" ref="nestedForm" name="nested" :state="state.nested" :schema="nestedSchema">
               <UFormField id="nestedField" name="field">
                 <UInput id="nestedInput" v-model="state.nested.field" />
               </UFormField>

@@ -70,6 +70,7 @@ export type FormChildAttachEvent = {
   type: 'attach'
   formId: string | number
   validate: Form<any>['validate']
+  name?: string
 }
 
 export type FormChildDetachEvent = {

@@ -26,13 +26,19 @@ export interface FormProps<S extends FormSchema, T extends boolean = true> {
   validateOn?: FormInputEvents[]
   /** Disable all inputs inside the form. */
   disabled?: boolean
+
+  /**
+   * TODO: Allow state to be undefined if name is provided
+   */
+  name?: string
+
   /**
    * Delay in milliseconds before validating the form on input events.
    * @defaultValue `300`
    */
   validateOnInputDelay?: number
   /**
-   * If true, schema transformations will be applied to the state on submit.
+   * If true, applies schema transformations on submit.
    * @defaultValue `true`
    */
   transform?: T
@@ -65,9 +71,9 @@ export interface FormSlots {
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true">
 import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
-import { useEventBus } from '@vueuse/core'
+import { useEventBus, set, get } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey } from '../composables/useFormField'
+import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import { validateSchema } from '../utils/form'
 import { FormValidationException } from '../types/form'
@@ -101,13 +107,17 @@ const parentBus = props.attach && inject(
 )
 
 provide(formBusInjectionKey, bus)
+provide(formStateInjectionKey, props.state)
 
-const nestedForms = ref<Map<string | number, { validate: typeof _validate }>>(new Map())
+const parentState = inject('ui.formState', undefined)
+const formState = props.name && parentState ? get(parentState, props.name) ?? {} : props.state
+
+const nestedForms = ref<Map<string | number, { validate: typeof _validate, name?: string }>>(new Map())
 
 onMounted(async () => {
   bus.on(async (event) => {
     if (event.type === 'attach') {
-      nestedForms.value.set(event.formId, { validate: event.validate })
+      nestedForms.value.set(event.formId, { validate: event.validate, name: event.name })
     } else if (event.type === 'detach') {
       nestedForms.value.delete(event.formId)
     } else if (props.validateOn?.includes(event.type) && !loading.value) {
@@ -139,7 +149,7 @@ onUnmounted(() => {
 onMounted(async () => {
   if (parentBus) {
     await nextTick()
-    parentBus.emit({ type: 'attach', validate: _validate, formId })
+    parentBus.emit({ type: 'attach', validate: _validate, formId, name: props.name })
   }
 })
 
@@ -168,11 +178,13 @@ function resolveErrorIds(errs: FormError[]): FormErrorWithId[] {
 
 const transformedState = ref<O | null>(null)
 
+// TODO: This should be responsible for aggregating nested form errors, not the validate function.
+// In this state, calling the function won't return nested form errors.
 async function getErrors(): Promise<FormErrorWithId[]> {
-  let errs = props.validate ? (await props.validate(props.state)) ?? [] : []
+  let errs = props.validate ? (await props.validate(formState)) ?? [] : []
 
   if (props.schema) {
-    const { errors, result } = await validateSchema(props.state, props.schema as FormSchema<typeof props.state>)
+    const { errors, result } = await validateSchema(formState, props.schema as FormSchema<typeof formState>)
     if (errors) {
       errs = errs.concat(errors)
     } else {
@@ -189,15 +201,19 @@ async function _validate<T extends boolean>(opts: ValidateOpts<true, T>): Promis
 async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: true, transform: false }): Promise<FormData<S, T> | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof O)[]
 
+  async function validateNestedForms({ validate, name }: { validate: typeof _validate, name?: string }) {
+    try {
+      return { name, output: await validate(opts as any) }
+    } catch (error: unknown) {
+      if (!(error instanceof FormValidationException)) {
+        throw error
+      }
+      return { name, error }
+    }
+  }
+
   const nestedValidatePromises = !names && opts.nested
-    ? Array.from(nestedForms.value.values()).map(
-        ({ validate }) => validate(opts as any).then(() => undefined).catch((error: Error) => {
-          if (!(error instanceof FormValidationException)) {
-            throw error
-          }
-          return error
-        })
-      )
+    ? Array.from(nestedForms.value.values()).map(validateNestedForms)
     : []
 
   if (names) {
@@ -216,7 +232,9 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
     errors.value = await getErrors()
   }
 
-  const childErrors = (await Promise.all(nestedValidatePromises)).filter(val => val !== undefined)
+  const nestedResults = await Promise.all(nestedValidatePromises)
+  const childErrors = nestedResults.filter(c => c.error !== undefined).map(c => c.error)
+  const childOutputs = nestedResults.filter(c => c.output !== undefined)
 
   if (errors.value.length + childErrors.length > 0) {
     if (opts.silent) return false
@@ -224,10 +242,15 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
   }
 
   if (opts.transform) {
-    Object.assign(props.state, transformedState.value)
+    childOutputs.forEach((o) => {
+      if (o.name) set(transformedState.value, o.name, o.output)
+      else Object.assign(transformedState.value, o.output)
+      console.log(transformedState.value)
+    })
+    return transformedState.value ?? formState
   }
 
-  return props.state as FormData<S, T>
+  return formState as FormData<S, T>
 }
 
 const loading = ref(false)

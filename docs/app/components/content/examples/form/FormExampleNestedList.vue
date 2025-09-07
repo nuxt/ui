@@ -54,7 +54,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     <UForm
       v-for="item, count in state.items"
       :key="count"
-      :state="item"
+      :name="`name.${count}`"
       :schema="itemSchema"
       attach
       class="flex gap-2"
