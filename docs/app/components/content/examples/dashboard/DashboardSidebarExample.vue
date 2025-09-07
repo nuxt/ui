@@ -39,7 +39,7 @@ const items: NavigationMenuItem[][] = [[{
 <template>
   <UDashboardSidebar collapsible resizable :ui="{ footer: 'border-t border-default' }">
     <template #header="{ collapsed }">
-      <LogoPro :collapsed="collapsed" class="h-5 w-auto shrink-0" />
+      <Logo :collapsed="collapsed" class="h-5 w-auto shrink-0" />
     </template>
 
     <template #default="{ collapsed }">
