@@ -22,7 +22,7 @@ const items: NavigationMenuItem[] = [{
   <UDashboardGroup>
     <UDashboardSidebar :mode="mode">
       <template #header>
-        <LogoPro class="h-5 w-auto" />
+        <Logo class="h-5 w-auto" />
       </template>
 
       <UNavigationMenu

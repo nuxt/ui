@@ -23,7 +23,7 @@ defineShortcuts({
 <template>
   <UDashboardSidebar v-model:collapsed="collapsed" collapsible>
     <template #header>
-      <LogoPro class="h-5 w-auto" :collapsed="collapsed" />
+      <Logo class="h-5 w-auto" :collapsed="collapsed" />
     </template>
 
     <UNavigationMenu
