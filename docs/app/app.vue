@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
+import { Analytics } from '@vercel/analytics/nuxt'
 
 const route = useRoute()
 const appConfig = useAppConfig()
@@ -51,9 +52,10 @@ provide('navigation', mappedNavigation)
 <template>
   <UApp :toaster="appConfig.toaster" :overlay="{ stacked: true }">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
+    <Analytics />
 
     <template v-if="!route.path.startsWith('/examples')">
-      <Banner />
+      <!-- <Banner /> -->
 
       <Header :links="links" />
     </template>

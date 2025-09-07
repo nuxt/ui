@@ -399,3 +399,7 @@ In this example, :kbd{value="meta"} :kbd{value="E"}, :kbd{value="meta"} :kbd{val
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

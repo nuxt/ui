@@ -36,33 +36,69 @@ const mobileLinks = computed(() => [
 ])
 
 const items = computed(() => {
-  const ui2 = { label: 'v2.22.0', to: 'https://ui2.nuxt.com' }
-  const uiPro1 = { label: 'v1.8.0', to: 'https://ui2.nuxt.com/pro' }
+  const ui2 = { label: 'v2.x', to: 'https://ui2.nuxt.com' }
+  const uiPro1 = { label: 'v1.x', to: 'https://ui2.nuxt.com/pro' }
 
   return [
+    { label: 'v4.0.0-alpha.x', to: 'https://ui4.nuxt.com' },
     { label: `v${config.version}`, active: true, color: 'primary' as const, checked: true, type: 'checkbox' as const },
     route.path === '/' ? ui2 : route.path.startsWith('/pro') ? uiPro1 : module.value === 'ui-pro' ? uiPro1 : ui2
   ]
 })
+
+const logoElement = ref()
+const { copy } = useClipboard()
+const toast = useToast()
+
+const copyLogo = () => {
+  if (logoElement.value) {
+    copy(logoElement.value.$el.outerHTML)
+    toast.add({
+      title: 'Nuxt logo copied as SVG',
+      description: 'You can now paste it into your project',
+      icon: 'i-lucide-circle-check',
+      color: 'success'
+    })
+  }
+}
+
+const logoContextMenuItems = [
+  [{
+    label: 'Copy logo as SVG',
+    icon: 'i-simple-icons-nuxtdotjs',
+    onSelect() {
+      copyLogo()
+    }
+  }],
+  [{
+    label: 'Browse design kit',
+    icon: 'i-lucide-shapes',
+    to: 'https://nuxt.com/design-kit',
+    target: '_blank'
+  }]
+]
 </script>
 
 <template>
   <UHeader :ui="{ left: 'min-w-0' }" :menu="{ shouldScaleBackground: true }">
     <template #left>
-      <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-highlighted min-w-0 focus-visible:outline-primary shrink-0" aria-label="Nuxt UI">
-        <Logo v-if="route.path === '/'" class="w-auto h-6 shrink-0" />
-        <LogoPro v-else-if="route.path.startsWith('/pro')" class="w-auto h-6 shrink-0" />
-        <template v-else>
-          <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
-          <Logo class="w-auto h-6 shrink-0 ui-only" />
-        </template>
-      </NuxtLink>
+      <UContextMenu :items="logoContextMenuItems">
+        <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-highlighted min-w-0 focus-visible:outline-primary shrink-0" aria-label="Nuxt UI">
+          <Logo v-if="route.path === '/'" ref="logoElement" class="w-auto h-6 shrink-0" />
+          <LogoPro v-else-if="route.path.startsWith('/pro')" ref="logoElement" class="w-auto h-6 shrink-0" />
+          <template v-else>
+            <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
+            <Logo ref="logoElement" class="w-auto h-6 shrink-0 ui-only" />
+          </template>
+        </NuxtLink>
+      </UContextMenu>
 
       <UDropdownMenu
         v-slot="{ open }"
         :modal="false"
         :items="items"
-        :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }"
+        :content="{ align: 'start' }"
+        :ui="{ content: 'min-w-fit' }"
         size="xs"
       >
         <UButton

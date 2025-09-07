@@ -239,7 +239,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         <li>
           <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0">
             <p class="text-4xl font-semibold text-highlighted truncate">
-              200+
+              250+
             </p>
             <p class="text-muted text-sm truncate">Contributors</p>
           </NuxtLink>

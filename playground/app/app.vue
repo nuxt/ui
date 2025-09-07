@@ -35,6 +35,7 @@ const components = [
   'command-palette',
   'drawer',
   'dropdown-menu',
+  'file-upload',
   'form',
   'form-field',
   'input',

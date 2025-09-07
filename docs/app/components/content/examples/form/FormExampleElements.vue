@@ -37,7 +37,8 @@ const schema = z.object({
     message: 'Include Option 2'
   }),
   slider: z.number().max(20, { message: 'Must be less than 20' }),
-  pin: z.string().regex(/^\d$/).array().length(5)
+  pin: z.string().regex(/^\d$/).array().length(5),
+  file: z.file().min(1).max(1024 * 1024).mime('image/png')
 })
 
 type Schema = z.input<typeof schema>
@@ -121,6 +122,15 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       </div>
       <UFormField name="pin" label="Pin Input" :error-pattern="/(pin)\..*/">
         <UPinInput v-model="state.pin" />
+      </UFormField>
+
+      <UFormField name="file" label="File Input">
+        <UFileUpload
+          v-model="state.file"
+          label="Drop your image here"
+          description="PNG (max. 1MB)"
+          class="w-full min-h-44"
+        />
       </UFormField>
     </div>
 

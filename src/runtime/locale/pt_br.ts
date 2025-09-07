@@ -53,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Nenhum dado'
+    },
+    fileUpload: {
+      removeFile: 'Remover {filename}'
     }
   }
 })

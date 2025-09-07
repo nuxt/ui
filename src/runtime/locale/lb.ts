@@ -53,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Keng Donnéeën'
+    },
+    fileUpload: {
+      removeFile: '{filename} ewechhuelen'
     }
   }
 })

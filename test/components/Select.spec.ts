@@ -5,7 +5,7 @@ import type { SelectProps, SelectSlots } from '../../src/runtime/components/Sele
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormInputEvents } from '../../src/module'
 import { expectEmitPayloadType } from '../utils/types'
 
 describe('Select', () => {
@@ -39,8 +39,8 @@ describe('Select', () => {
   it.each([
     // Props
     ['with items', { props }],
-    ['with modelValue', { props: { ...props, modelValue: items[0] } }],
-    ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
+    ['with modelValue', { props: { ...props, modelValue: items[0]?.value } }],
+    ['with defaultValue', { props: { ...props, defaultValue: items[0]?.value } }],
     ['with valueKey', { props: { ...props, valueKey: 'label' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with multiple', { props: { ...props, multiple: true } }],

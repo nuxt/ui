@@ -53,6 +53,9 @@ export default defineLocale<Messages>({
     },
     table: {
       noData: 'Məlumat yoxdur'
+    },
+    fileUpload: {
+      removeFile: '{filename} sil'
     }
   }
 })

@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../types/utils'
 
 type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
 
-export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange'> {
+export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -63,9 +63,9 @@ export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue
 }
 
 export interface InputNumberEmits {
-  'update:modelValue': [payload: number]
+  'update:modelValue': [value: number]
   'blur': [event: FocusEvent]
-  'change': [payload: Event]
+  'change': [event: Event]
 }
 
 export interface InputNumberSlots {
@@ -98,7 +98,7 @@ defineSlots<InputNumberSlots>()
 const { t, code: codeLocale } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly'), emits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
 const { orientation, size: buttonGroupSize } = useButtonGroup<InputNumberProps>(props)

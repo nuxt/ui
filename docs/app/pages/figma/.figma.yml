@@ -10,7 +10,7 @@ hero:
       to: 'https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d'
       target: _blank
     - label: Free Figma Kit
-      to: 'https://go.nuxt.com/figma'
+      to: 'https://go.nuxt.com/figma-ui3'
       icon: i-logos-figma
       color: neutral
       variant: outline
@@ -28,9 +28,9 @@ features1:
       icon: i-lucide-files
 cta1:
   title: Everything you need in a [single file]{class="text-primary"}.
-  description: Design and development in perfect sync with our [Free](https://www.figma.com/community/file/1288455405058138934/nuxt-ui-v3-official-design-kit-free) and Pro files. Developers can implement designs faster, while designers work with production-ready components.
+  description: Design and development in perfect sync with our [Free](https://go.nuxt.com/figma-ui3) and Pro files. Developers can implement designs faster, while designers work with production-ready components.
 section1:
-  title: Customize in a few clicks to fit your needs
+  title: Customize in a few clicks to fit your needs
   description: Control your entire design system with Figma Variables. Update primitive tokens once and watch your changes spread across the entire system.
   reverse: true
   features:
@@ -53,7 +53,7 @@ section1:
       alt: Use color variables in the Nuxt UI Figma design kit
   links:
     - label: Preview UI Pro Design Kit
-      to: 'https://go.nuxt.com/figma-pro'
+      to: 'https://go.nuxt.com/figma-ui-pro3'
       target: _blank
       icon: i-logos-figma
       color: neutral
@@ -75,7 +75,7 @@ section2:
     alt: A component in the Nuxt UI Figma design kit
   links:
     - label: Preview UI Pro Design Kit
-      to: 'https://go.nuxt.com/figma-pro'
+      to: 'https://go.nuxt.com/figma-ui-pro3'
       target: _blank
       icon: i-logos-figma
       color: neutral
@@ -98,7 +98,7 @@ section3:
     alt: A screenshot of Nuxt UI Code & Figma Kit
   links:
     - label: Preview UI Pro Design Kit
-      to: 'https://go.nuxt.com/figma-pro'
+      to: 'https://go.nuxt.com/figma-ui-pro3'
       icon: i-logos-figma
       color: neutral
       variant: outline
@@ -121,7 +121,7 @@ section4:
     - label: Get access now
       to: 'https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d'
     - label: Preview UI Pro Design Kit
-      to: 'https://go.nuxt.com/figma-pro'
+      to: 'https://go.nuxt.com/figma-ui-pro3'
       icon: i-logos-figma
       color: neutral
       variant: outline
@@ -172,7 +172,7 @@ pricing:
       button:
         label: Open in Figma
         icon: i-logos-figma
-        to: https://go.nuxt.com/figma
+        to: https://go.nuxt.com/figma-ui3
         color: neutral
       terms: Used by 17,000+ designers.
     - title: Solo License
@@ -194,7 +194,7 @@ pricing:
         to: https://nuxt.lemonsqueezy.com/buy/17213c49-621b-4c2c-9478-3a50a099003d
       extraButton:
         label: Preview in Figma
-        to: 'https://go.nuxt.com/figma-pro'
+        to: 'https://go.nuxt.com/figma-ui-pro3'
         target: _blank
         icon: i-logos-figma
     - title: Team License
@@ -216,7 +216,7 @@ pricing:
         to: https://nuxt.lemonsqueezy.com/buy/2979099c-b7a0-4ba1-90e0-a0d60509b92d
       extraButton:
         label: Preview in Figma
-        to: 'https://go.nuxt.com/figma-pro'
+        to: 'https://go.nuxt.com/figma-ui-pro3'
         target: _blank
         icon: i-logos-figma
 customers:
@@ -260,7 +260,7 @@ faq:
       content: Yes. You don't need Figma's paid plan to use our UI kits.
       defaultOpen: true
     - label: Do you have a free trial?
-      content: We don't offer a free trial for the Pro Figma Kit, you can [preview it](https://go.nuxt.com/figma-pro).
+      content: We don't offer a free trial for the Pro Figma Kit, you can [preview it](https://go.nuxt.com/figma-ui-pro3).
     - label: How do I access the files after purchasing?
       content: After purchasing, just extract the ZIP file and drag & drop it directly into Figma.
     - label: Can I upgrade my Solo license to the Team license?
