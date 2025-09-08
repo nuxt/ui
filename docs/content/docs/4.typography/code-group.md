@@ -7,7 +7,7 @@ category: components
 
 ## Usage
 
-Wrap your code-blocks around a `code-group` component to group them together in tabs.
+Wrap your code blocks around a `code-group` component to group them together in tabs.
 
 ::code-preview{class="[&>div]:*:my-0 [&>div]:*:w-full"}
 

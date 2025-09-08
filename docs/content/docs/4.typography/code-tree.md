@@ -7,7 +7,7 @@ category: components
 
 ## Usage
 
-Wrap your code-blocks with a `code-tree` component in any particular order to display a tree view of your files.
+Wrap your code blocks with a `code-tree` component in any particular order to display a tree view of your files.
 
 ::code-preview{class="[&>div]:*:my-0 [&>div]:*:w-full"}
 
