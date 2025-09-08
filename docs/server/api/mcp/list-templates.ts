@@ -5,8 +5,7 @@ const querySchema = z.object({
 })
 
 export default defineCachedEventHandler(async (event) => {
-  const rawQuery = getQuery(event)
-  const { framework } = querySchema.parse(rawQuery)
+  const { framework } = await getValidatedQuery(event, querySchema.parse)
 
   // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
   const templatesCollectionItems = await queryCollection(event, 'templates')

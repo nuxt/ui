@@ -7,8 +7,7 @@ const querySchema = z.object({
 })
 
 export default defineCachedEventHandler(async (event) => {
-  const rawQuery = getQuery(event)
-  const { componentName } = querySchema.parse(rawQuery)
+  const { componentName } = await getValidatedQuery(event, querySchema.parse)
 
   // Normalize component name by removing "U" or "u-" prefix if present
   const normalizedName = normalizeComponentName(componentName)

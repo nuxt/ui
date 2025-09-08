@@ -5,8 +5,7 @@ const querySchema = z.object({
 })
 
 export default defineCachedEventHandler(async (event) => {
-  const rawQuery = getQuery(event)
-  const { templateName } = querySchema.parse(rawQuery)
+  const { templateName } = await getValidatedQuery(event, querySchema.parse)
 
   const { templates } = await $fetch('/api/mcp/list-templates')
   // @ts-expect-error TODO: This will be fixed when the tsconfig is setup correctly
