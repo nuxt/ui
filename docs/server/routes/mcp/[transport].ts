@@ -308,10 +308,10 @@ export default defineEventHandler(async (event) => {
   })
 
   event.node.res.on('close', () => {
-    console.log('Request closed')
     transport.close()
     server.close()
   })
+
   await server.connect(transport)
 
   const body = await readBody(event)
