@@ -73,8 +73,10 @@ export default defineNuxtConfig({
     '/composables/**': { redirect: { to: '/docs/composables/**', statusCode: 301 }, prerender: false },
     // v4 redirects - default root pages
     '/docs': { redirect: '/docs/getting-started', prerender: false },
-    '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
     '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
+    '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
+    '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/llms-txt', prerender: false },
+    '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
     // v4 redirects - default shadow pages
     '/docs/getting-started/installation': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
     '/docs/getting-started/integrations/icons': { redirect: '/docs/getting-started/integrations/icons/nuxt', prerender: false },
