@@ -89,7 +89,7 @@ Wrap each avatar with a [Link](/components/link) to make them clickable.
 
 :component-example{name="avatar-group-link-example"}
 
-### With mark
+### With mask
 
 Wrap an avatar with a CSS mask to display it with a custom shape.
 
