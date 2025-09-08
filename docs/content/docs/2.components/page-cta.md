@@ -17,7 +17,7 @@ The PageCTA component provides a flexible way to display a call to action in you
 ::u-page-c-t-a
 ---
 title: 'Trusted and supported by our amazing community'
-description: 'Preview the latest Tailwind CSS v4 and get started with Nuxt UI v3.'
+description: 'Preview the latest Tailwind CSS v4 and get started with Nuxt UI.'
 orientation: horizontal
 links:
   - label: 'Get started'
