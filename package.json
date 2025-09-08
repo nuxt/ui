@@ -2,7 +2,7 @@
   "name": "@nuxt/ui",
   "description": "A UI Library for Modern Web Apps, powered by Vue & Tailwind CSS.",
   "version": "4.0.0-alpha.1",
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.15.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nuxt/ui.git"
@@ -111,7 +111,7 @@
     "release": "release-it --preRelease=alpha"
   },
   "dependencies": {
-    "@ai-sdk/vue": "^2.0.29",
+    "@ai-sdk/vue": "^2.0.35",
     "@iconify/vue": "^5.0.0",
     "@internationalized/date": "^3.9.0",
     "@internationalized/number": "^3.6.5",
@@ -125,8 +125,8 @@
     "@tailwindcss/vite": "^4.1.13",
     "@tanstack/vue-table": "^8.21.3",
     "@unhead/vue": "^2.0.14",
-    "@vueuse/core": "^13.8.0",
-    "@vueuse/integrations": "^13.8.0",
+    "@vueuse/core": "^13.9.0",
+    "@vueuse/integrations": "^13.9.0",
     "colortranslator": "^5.0.0",
     "consola": "^3.4.2",
     "defu": "^6.1.4",
@@ -142,7 +142,7 @@
     "knitwork": "^1.2.0",
     "magic-string": "^0.30.18",
     "mlly": "^1.8.0",
-    "motion-v": "^1.7.0",
+    "motion-v": "^1.7.1",
     "ohash": "^2.0.11",
     "pathe": "^2.0.3",
     "reka-ui": "2.5.0",
@@ -150,9 +150,9 @@
     "tailwind-merge": "^3.3.1",
     "tailwind-variants": "^3.1.0",
     "tailwindcss": "^4.1.13",
-    "tinyglobby": "^0.2.14",
+    "tinyglobby": "^0.2.15",
     "unplugin": "^2.3.10",
-    "unplugin-auto-import": "^20.0.0",
+    "unplugin-auto-import": "^20.1.0",
     "unplugin-vue-components": "^29.0.0",
     "vaul-vue": "0.4.1",
     "vue-component-type-helpers": "^3.0.6"
@@ -165,7 +165,7 @@
     "@release-it/conventional-changelog": "^10.0.1",
     "@vue/test-utils": "^2.4.6",
     "embla-carousel": "^8.6.0",
-    "eslint": "^9.34.0",
+    "eslint": "^9.35.0",
     "happy-dom": "^18.0.1",
     "nuxt": "^4.0.3",
     "release-it": "^19.0.4",
