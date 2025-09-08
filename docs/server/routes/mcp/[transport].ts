@@ -40,7 +40,7 @@ function createServer() {
       description: 'Complete list of available Nuxt UI example code and demonstrations'
     },
     async (uri) => {
-      const result = await $fetch('/api/list-examples')
+      const result = await $fetch('/api/mcp/list-examples')
       return {
         contents: [{
           uri: uri.href,
@@ -266,7 +266,7 @@ function createServer() {
     'Lists all available UI examples and code demonstrations. Returns: A JSON object containing examples array, categories array, and total count.',
     {},
     async () => {
-      const result = await $fetch('/api/list-examples')
+      const result = await $fetch('/api/mcp/list-examples')
       return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
     }
   )
