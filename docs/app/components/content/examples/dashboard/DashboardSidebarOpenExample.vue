@@ -23,7 +23,7 @@ defineShortcuts({
 <template>
   <UDashboardSidebar v-model:open="open">
     <template #header>
-      <LogoPro class="h-5 w-auto" />
+      <Logo class="h-5 w-auto" />
     </template>
 
     <UNavigationMenu
