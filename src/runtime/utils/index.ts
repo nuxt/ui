@@ -130,16 +130,20 @@ export function getDisplayValue<T, V>(
 ): string | undefined {
   const { valueKey, labelKey } = options
 
-  if (isEmpty(value)) {
-    return undefined
-  }
-
   const foundItem = items.find((item) => {
     const itemValue = (typeof item === 'object' && item !== null && valueKey)
       ? get(item, valueKey as string)
       : item
     return compare(itemValue, value)
   })
+
+  if (isEmpty(value) && foundItem) {
+    return labelKey ? get(foundItem as Record<string, any>, labelKey as string) : undefined
+  }
+
+  if (isEmpty(value)) {
+    return undefined
+  }
 
   const source = foundItem ?? value
 

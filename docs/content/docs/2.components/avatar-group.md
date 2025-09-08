@@ -89,6 +89,16 @@ Wrap each avatar with a [Link](/docs/components/link) to make them clickable.
 
 :component-example{name="avatar-group-link-example"}
 
+### With mask
+
+Wrap an avatar with a CSS mask to display it with a custom shape.
+
+:component-example{name="avatar-group-mask-example"}
+
+::warning
+The `chip` prop does not work correctly when using a mask. Chips may be cut depending on the mask shape.
+::
+
 ## API
 
 ### Props
