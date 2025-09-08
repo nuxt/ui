@@ -30,7 +30,6 @@
     "capture-website": "^4.2.0",
     "joi": "^18.0.1",
     "maska": "^3.2.0",
-    "mcp-zod": "npm:zod@3.25.76",
     "motion-v": "^1.7.1",
     "nuxt": "^4.0.3",
     "nuxt-component-meta": "^0.13.1",
