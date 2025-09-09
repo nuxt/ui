@@ -4,7 +4,7 @@ import type { NavigationMenuRootProps, NavigationMenuRootEmits, NavigationMenuCo
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
 import type { AvatarProps, BadgeProps, IconProps, LinkProps, PopoverProps, TooltipProps } from '../types'
-import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
+import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>
@@ -137,7 +137,7 @@ export interface NavigationMenuProps<T extends ArrayOrNested<NavigationMenuItem>
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
-  labelKey?: keyof NestedItem<T>
+  labelKey?: GetItemKeys<T>
   class?: any
   ui?: NavigationMenu['slots']
 }
