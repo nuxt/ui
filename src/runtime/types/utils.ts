@@ -42,14 +42,16 @@ export type MergeTypes<T extends object> = {
   [k in NonCommonKeys<T>]?: PickTypeOf<T, k>;
 }
 
-type DotPathKeys<T> = T extends object
-  ? {
-      [K in keyof T & string]:
-      T[K] extends Record<string, any>
-        ? K | `${K}.${DotPathKeys<T[K]>}`
-        : K
-    }[keyof T & string]
-  : never
+type DotPathKeys<T> = T extends Array<any>
+  ? never
+  : T extends object
+    ? {
+        [K in keyof T & string]:
+        T[K] extends Record<string, any>
+          ? K | `${K}.${DotPathKeys<T[K]>}`
+          : K
+      }[keyof T & string]
+    : never
 
 type DotPathValue<T, P extends DotPathKeys<T> | (string & {})>
   = P extends `${infer K}.${infer Rest}`
