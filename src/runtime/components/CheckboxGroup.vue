@@ -3,7 +3,7 @@ import type { CheckboxGroupRootProps, CheckboxGroupRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox-group'
 import type { CheckboxProps } from '../types'
-import type { AcceptableValue } from '../types/utils'
+import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
@@ -20,7 +20,7 @@ export type CheckboxGroupItem = {
   [key: string]: any
 } | CheckboxGroupValue
 
-export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupItem> extends Pick<CheckboxGroupRootProps, 'defaultValue' | 'disabled' | 'loop' | 'modelValue' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
+export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -31,18 +31,22 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem = CheckboxGroupI
    * When `items` is an array of objects, select the field to use as the value.
    * @defaultValue 'value'
    */
-  valueKey?: string
+  valueKey?: VK
   /**
    * When `items` is an array of objects, select the field to use as the label.
    * @defaultValue 'label'
    */
-  labelKey?: string
+  labelKey?: GetItemKeys<T>
   /**
    * When `items` is an array of objects, select the field to use as the description.
    * @defaultValue 'description'
    */
-  descriptionKey?: string
-  items?: T[]
+  descriptionKey?: GetItemKeys<T>
+  items?: T
+  /** The controlled value of the Tree. Can be bind as `v-model`. */
+  modelValue?: GetModelValue<T, VK, M>
+  /** The value of the Tree when initially rendered. Use when you do not need to control the state of the Tree. */
+  defaultValue?: GetModelValue<T, VK, M>
   /**
    * @defaultValue 'md'
    */
@@ -73,7 +77,7 @@ export interface CheckboxGroupSlots<T extends CheckboxGroupItem = CheckboxGroupI
 }
 </script>
 
-<script setup lang="ts" generic="T extends CheckboxGroupItem">
+<script setup lang="ts" generic="T extends CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value', M extends boolean = false">
 import { computed, useId } from 'vue'
 import { CheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
@@ -83,10 +87,10 @@ import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UCheckbox from './Checkbox.vue'
 
-const props = withDefaults(defineProps<CheckboxGroupProps<T>>(), {
-  valueKey: 'value',
+const props = withDefaults(defineProps<CheckboxGroupProps<T, VK, M>>(), {
   labelKey: 'label',
   descriptionKey: 'description',
+  valueKey: 'value' as never,
   orientation: 'vertical'
 })
 const emits = defineEmits<CheckboxGroupEmits>()
